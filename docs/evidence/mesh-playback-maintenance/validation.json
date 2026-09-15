@@ -1,0 +1,2538 @@
+{
+  "date": "2026-09-13",
+  "status": "reviewed and accepted",
+  "baseline_simscope_commit": "808ff5a1bd88679c948a05bae258e72d2fffbf8b",
+  "accepted_benchmark": {
+    "id": "04B",
+    "package_version": "1.0.0",
+    "suite_tag": "v1.2.0",
+    "tag_commit": "a5b61d2",
+    "publication_audit_commit": "2e2c4b2",
+    "scope": "Deforming exterior-surface mesh backed by retained full volumetric tetrahedral topology; no native interactive full-volume tetrahedral visualization"
+  },
+  "candidate_code_sha256": {
+    "viewer/layers/field_playback.gd": "99f69f5524a459507b0e7dbefb58a9d4e43befcd6a6f971a7212b3af38f232f5",
+    "viewer/layers/particle_playback.gd": "e22f8610b820fac53dc830a64630e5af1c8719e88befe04bc77cdccf416c2e35",
+    "viewer/layers/scene_layers.gd": "6e683d12cc80fa6b1f04d375a5e787f8cde73c65cc229ff151238214862b6799",
+    "viewer/layers/mesh_view.gd": "7a9beaf61f993bfb5e68b8c533450a0d128b240cb5cf7407c16bc0d82df66976",
+    "viewer/layers/mesh_prepare.gd": "a2ae3a12cfe53a9b914746019c18b688cb75d5654400482e4b5521b7b459e21c",
+    "viewer/layers/mesh_buffer.gd": "a6764b90ac6f16a24a01d805748aa27b473c3a58023383093622dac117a3e9b8",
+    "viewer/layers/mesh_playback.gd": "a58c11d1c0a38bae6957a0799a97858a4f7228b1c2f70bb8e91346b995982667",
+    "viewer/layers/test_mesh_playback.gd": "39733b20c53a026568f052a11330acc26b7826bb90343f63f6babfb71be08264",
+    "viewer/layers/profile_mesh_playback.gd": "1658872508ee72671cd580ab9149ba1a94a2a15a11aebb1e753c67f6dc76a531",
+    "tools/validate_mesh_playback.py": "8c7473417f7dc6571684d58882e5caf97c98f74ea2767475211fb9638f3b415c",
+    "tools/profile_mesh_playback.py": "fa1857af72101caaf935006511752023d798ec0a16bbbb6a01e321c996c83f80"
+  },
+  "source_sha256": "631660193ee215f059a9f731ee120ec24d473ed9e30c8bc45fce1b2defcaa409",
+  "source_unchanged": true,
+  "scientific_generators_run": 0,
+  "python_tests": {
+    "run": 225,
+    "passed": 225,
+    "skipped": 0,
+    "log": "python-tests-complete.log"
+  },
+  "validation": {
+    "mesh_native": {
+      "gl": {
+        "checks": 3933,
+        "failures": [],
+        "render_comparisons": [
+          {
+            "different_components": 0,
+            "max_component_error": 0,
+            "name": "synthetic-false-0.0",
+            "total_components": 4096000,
+            "visible_pixels": 12659
+          },
+          {
+            "different_components": 0,
+            "max_component_error": 0,
+            "name": "synthetic-false-1.113",
+            "total_components": 4096000,
+            "visible_pixels": 17387
+          },
+          {
+            "different_components": 0,
+            "max_component_error": 0,
+            "name": "synthetic-false-3.0",
+            "total_components": 4096000,
+            "visible_pixels": 26863
+          },
+          {
+            "different_components": 0,
+            "max_component_error": 0,
+            "name": "synthetic-true-0.0",
+            "total_components": 4096000,
+            "visible_pixels": 700
+          },
+          {
+            "different_components": 0,
+            "max_component_error": 0,
+            "name": "synthetic-true-1.113",
+            "total_components": 4096000,
+            "visible_pixels": 738
+          },
+          {
+            "different_components": 0,
+            "max_component_error": 0,
+            "name": "synthetic-true-3.0",
+            "total_components": 4096000,
+            "visible_pixels": 1133
+          },
+          {
+            "different_components": 0,
+            "max_component_error": 0,
+            "name": "04B-false-0.0",
+            "total_components": 4096000,
+            "visible_pixels": 79480
+          },
+          {
+            "different_components": 0,
+            "max_component_error": 0,
+            "name": "04B-false-0.371",
+            "total_components": 4096000,
+            "visible_pixels": 79549
+          },
+          {
+            "different_components": 0,
+            "max_component_error": 0,
+            "name": "04B-false-1.0",
+            "total_components": 4096000,
+            "visible_pixels": 79672
+          },
+          {
+            "different_components": 0,
+            "max_component_error": 0,
+            "name": "04B-true-0.0",
+            "total_components": 4096000,
+            "visible_pixels": 50973
+          },
+          {
+            "different_components": 0,
+            "max_component_error": 0,
+            "name": "04B-true-0.371",
+            "total_components": 4096000,
+            "visible_pixels": 50555
+          },
+          {
+            "different_components": 0,
+            "max_component_error": 0,
+            "name": "04B-true-1.0",
+            "total_components": 4096000,
+            "visible_pixels": 50673
+          }
+        ]
+      },
+      "forward": {
+        "checks": 3933,
+        "failures": [],
+        "render_comparisons": [
+          {
+            "different_components": 0,
+            "max_component_error": 0,
+            "name": "synthetic-false-0.0",
+            "total_components": 3072000,
+            "visible_pixels": 12659
+          },
+          {
+            "different_components": 0,
+            "max_component_error": 0,
+            "name": "synthetic-false-1.113",
+            "total_components": 3072000,
+            "visible_pixels": 17387
+          },
+          {
+            "different_components": 0,
+            "max_component_error": 0,
+            "name": "synthetic-false-3.0",
+            "total_components": 3072000,
+            "visible_pixels": 26863
+          },
+          {
+            "different_components": 0,
+            "max_component_error": 0,
+            "name": "synthetic-true-0.0",
+            "total_components": 3072000,
+            "visible_pixels": 763
+          },
+          {
+            "different_components": 0,
+            "max_component_error": 0,
+            "name": "synthetic-true-1.113",
+            "total_components": 3072000,
+            "visible_pixels": 908
+          },
+          {
+            "different_components": 0,
+            "max_component_error": 0,
+            "name": "synthetic-true-3.0",
+            "total_components": 3072000,
+            "visible_pixels": 1331
+          },
+          {
+            "different_components": 0,
+            "max_component_error": 0,
+            "name": "04B-false-0.0",
+            "total_components": 3072000,
+            "visible_pixels": 79480
+          },
+          {
+            "different_components": 0,
+            "max_component_error": 0,
+            "name": "04B-false-0.371",
+            "total_components": 3072000,
+            "visible_pixels": 79549
+          },
+          {
+            "different_components": 0,
+            "max_component_error": 0,
+            "name": "04B-false-1.0",
+            "total_components": 3072000,
+            "visible_pixels": 79672
+          },
+          {
+            "different_components": 0,
+            "max_component_error": 0,
+            "name": "04B-true-0.0",
+            "total_components": 3072000,
+            "visible_pixels": 53425
+          },
+          {
+            "different_components": 0,
+            "max_component_error": 0,
+            "name": "04B-true-0.371",
+            "total_components": 3072000,
+            "visible_pixels": 52958
+          },
+          {
+            "different_components": 0,
+            "max_component_error": 0,
+            "name": "04B-true-1.0",
+            "total_components": 3072000,
+            "visible_pixels": 53046
+          }
+        ]
+      }
+    },
+    "mesh_headless": {
+      "checks": 3551,
+      "failures": [],
+      "render_comparisons": []
+    },
+    "maintenance": {
+      "checks": 66,
+      "failures": []
+    },
+    "particle_lifecycle": {
+      "checks": 38,
+      "failures": []
+    },
+    "particle_playback": {
+      "checks": 2457,
+      "failures": [],
+      "scope": "CPU worker versus synchronous semantic and buffer equivalence; headless is not image acceptance."
+    },
+    "g3_native": {
+      "gl_compatibility": {
+        "checks": 36,
+        "failures": 0,
+        "renderer": "gl_compatibility",
+        "slab": {
+          "center_rgb": [
+            0.6313725709915161,
+            0.6313725709915161,
+            0.6313725709915161
+          ],
+          "expected_rgb": 0.6321205588285577,
+          "steps": [
+            0.05,
+            0.2,
+            0.7
+          ]
+        },
+        "slices": {
+          "XY": {
+            "max_color_error": 0.0027142672215477726,
+            "samples": 27
+          },
+          "XZ": {
+            "max_color_error": 0.0028796638809355235,
+            "samples": 135
+          },
+          "YZ": {
+            "max_color_error": 0.002899888545106366,
+            "samples": 45
+          },
+          "oblique": {
+            "max_color_error": 0.0028248626296804025,
+            "samples": 67
+          }
+        }
+      },
+      "forward_plus": {
+        "checks": 36,
+        "failures": 0,
+        "renderer": "forward_plus",
+        "slab": {
+          "center_rgb": [
+            0.8156862854957581,
+            0.8156862854957581,
+            0.8156862854957581
+          ],
+          "expected_rgb": 0.8164699673652649,
+          "steps": [
+            0.05,
+            0.2,
+            0.7
+          ]
+        },
+        "slices": {
+          "XY": {
+            "max_color_error": 0.002159750225853796,
+            "samples": 27
+          },
+          "XZ": {
+            "max_color_error": 0.0026919430932083044,
+            "samples": 135
+          },
+          "YZ": {
+            "max_color_error": 0.0023141279395690884,
+            "samples": 45
+          },
+          "oblique": {
+            "max_color_error": 0.002368575435573672,
+            "samples": 67
+          }
+        }
+      }
+    },
+    "benchmark_04B_native": {
+      "passed": true,
+      "native_assertions": 174666,
+      "g4_trace_rows": 42,
+      "normal_max_error": 5.960464477539063e-08,
+      "native_open_ms": 35.774,
+      "viewer_open_ms": 39.544,
+      "decode_ms": {
+        "count": 21,
+        "median": 13.373,
+        "p95": 13.695,
+        "maximum": 13.741
+      },
+      "mesh_update_ms": {
+        "count": 21,
+        "median": 20.667,
+        "p95": 21.594,
+        "maximum": 23.006
+      },
+      "performance": [
+        {
+          "wireframe": false,
+          "callbacks_ms": {
+            "count": 24071,
+            "median": 0.124,
+            "p95": 0.182,
+            "maximum": 4.817
+          },
+          "callback_intervals_ms": {
+            "count": 24071,
+            "median": 0.41800000000000004,
+            "p95": 1.1098888888891787,
+            "maximum": 135.508
+          },
+          "measured_wall_seconds": 11.815007,
+          "callbacks_per_wall_second": 2037.324226722845,
+          "callbacks_ge_50ms": 0,
+          "observed_indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ],
+          "decoded_cache_bytes": 919448,
+          "viewer_open_ms": 136.314,
+          "buffering_flags": 0
+        },
+        {
+          "wireframe": true,
+          "callbacks_ms": {
+            "count": 24315,
+            "median": 0.123,
+            "p95": 0.175,
+            "maximum": 5.13
+          },
+          "callback_intervals_ms": {
+            "count": 24315,
+            "median": 0.42000000000000004,
+            "p95": 0.9499444444451225,
+            "maximum": 143.78466666666668
+          },
+          "measured_wall_seconds": 11.836063,
+          "callbacks_per_wall_second": 2054.314851146027,
+          "callbacks_ge_50ms": 0,
+          "observed_indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ],
+          "decoded_cache_bytes": 919448,
+          "viewer_open_ms": 126.897,
+          "buffering_flags": 0
+        }
+      ],
+      "peak_observed_process_rss_bytes": 531488768,
+      "renderer": "gl_compatibility",
+      "adapter": "NVIDIA GeForce RTX 3070 Ti",
+      "resolution": [
+        1280,
+        800
+      ],
+      "limitations": [
+        "Exterior surface only; no interior-cell rendering or clipping",
+        "No native deformation exaggeration",
+        "Unshaded material: normals validated numerically; no lighting claim",
+        "No combined surface-plus-wireframe control",
+        "Callbacks/s is not monitor FPS; RSS samples are not whole-application peak memory; no VRAM attribution"
+      ]
+    }
+  },
+  "timing": {
+    "runs": [
+      {
+        "config": {
+          "cache_mib": 256.0,
+          "capture": "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope-Benchmarks/benchmarks/04_FEniCSx_DeformingMesh/frozen/04B/simscope/mesh.ssc",
+          "output": "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope-Benchmarks-validation/perf003/profile-completed-gl/before-cache256-wire0-rate0.2.json",
+          "rate": 0.2,
+          "seconds": 12.0,
+          "wireframe": false
+        },
+        "decoded_cache_bytes": 19308408,
+        "device": "NVIDIA GeForce RTX 3070 Ti",
+        "duration_seconds": 12.008636,
+        "main_thread": 1,
+        "memory": {
+          "VmHWM": 289570816,
+          "VmRSS": 289570816,
+          "VmSwap": 0
+        },
+        "mesh_gpu_bytes": 684288,
+        "open_ms": 142.401,
+        "prebuffer_ms": 19.613,
+        "profile": {
+          "counters": {
+            "g3_display_samples": 355,
+            "g3_sample_cache_misses": 20,
+            "g3_tail_polls": 11
+          },
+          "stages": {
+            "g3_cache_lookup": {
+              "count": 710,
+              "max_ms": 0.115,
+              "mean_ms": 0.02101830985915494,
+              "p50_ms": 0.02,
+              "p95_ms": 0.029,
+              "samples_collected": 710,
+              "total_ms": 14.923000000000007
+            },
+            "g3_cache_publish": {
+              "count": 20,
+              "max_ms": 0.038,
+              "mean_ms": 0.027400000000000008,
+              "p50_ms": 0.025,
+              "p95_ms": 0.036,
+              "samples_collected": 20,
+              "total_ms": 0.5480000000000002
+            },
+            "g3_channel_decode": {
+              "count": 20,
+              "max_ms": 5.842,
+              "mean_ms": 5.45515,
+              "p50_ms": 5.398,
+              "p95_ms": 5.798,
+              "samples_collected": 20,
+              "total_ms": 109.103
+            },
+            "g3_layer_refresh": {
+              "count": 366,
+              "max_ms": 4.067,
+              "mean_ms": 2.3040792349726793,
+              "p50_ms": 2.29,
+              "p95_ms": 2.526,
+              "samples_collected": 366,
+              "total_ms": 843.2930000000007
+            },
+            "g3_read_sample": {
+              "count": 710,
+              "max_ms": 12.922,
+              "mean_ms": 2.388112676056341,
+              "p50_ms": 2.095,
+              "p95_ms": 2.377,
+              "samples_collected": 710,
+              "total_ms": 1695.5600000000022
+            },
+            "g3_reader_refresh": {
+              "count": 1076,
+              "max_ms": 4.051,
+              "mean_ms": 2.1441765799256522,
+              "p50_ms": 2.143,
+              "p95_ms": 2.413,
+              "samples_collected": 1076,
+              "total_ms": 2307.134000000002
+            },
+            "g3_sample": {
+              "count": 355,
+              "max_ms": 35.038,
+              "mean_ms": 23.721847887323946,
+              "p50_ms": 23.093,
+              "p95_ms": 33.242,
+              "samples_collected": 355,
+              "total_ms": 8421.256000000001
+            },
+            "g3_source_stamp": {
+              "count": 1096,
+              "max_ms": 4.027,
+              "mean_ms": 2.1359397810218974,
+              "p50_ms": 2.135,
+              "p95_ms": 2.402,
+              "samples_collected": 1096,
+              "total_ms": 2340.9899999999993
+            },
+            "g3_tail_poll": {
+              "count": 11,
+              "max_ms": 2.635,
+              "mean_ms": 2.276636363636364,
+              "p50_ms": 2.287,
+              "p95_ms": 2.635,
+              "samples_collected": 11,
+              "total_ms": 25.043000000000003
+            },
+            "g3_tick": {
+              "count": 8362,
+              "max_ms": 35.055,
+              "mean_ms": 1.0188757474287267,
+              "p50_ms": 0.008,
+              "p95_ms": 0.033,
+              "samples_collected": 8192,
+              "total_ms": 8519.838999999012
+            },
+            "hud_cpu": {
+              "count": 355,
+              "max_ms": 0.075,
+              "mean_ms": 0.024332394366197153,
+              "p50_ms": 0.024,
+              "p95_ms": 0.03,
+              "samples_collected": 355,
+              "total_ms": 8.63799999999999
+            },
+            "interpolation_submission_inclusive": {
+              "count": 355,
+              "max_ms": 0.114,
+              "mean_ms": 0.026487323943661937,
+              "p50_ms": 0.025,
+              "p95_ms": 0.034,
+              "samples_collected": 355,
+              "total_ms": 9.402999999999988
+            },
+            "process_inclusive": {
+              "count": 8362,
+              "max_ms": 35.06,
+              "mean_ms": 1.02325831140882,
+              "p50_ms": 0.012,
+              "p95_ms": 0.039,
+              "samples_collected": 8192,
+              "total_ms": 8556.486000000554
+            }
+          }
+        },
+        "renderer": "gl_compatibility",
+        "callbacks_summary": {
+          "count": 8362,
+          "p95_ms": 0.042,
+          "p99_ms": 23.44117,
+          "max_ms": 35.065,
+          "over_50ms": 0,
+          "interval_p95_ms": 8.333333333333334,
+          "interval_max_ms": 37.099,
+          "buffering_callbacks": 0,
+          "buffering_seconds": 0.0,
+          "distinct_indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ],
+          "transitions": 47,
+          "load_factor_progress": 2.396653400000018,
+          "expected_progress": 2.4017272,
+          "progress_fraction": 0.997887437007841
+        },
+        "mode": "before"
+      },
+      {
+        "config": {
+          "cache_mib": 256.0,
+          "capture": "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope-Benchmarks/benchmarks/04_FEniCSx_DeformingMesh/frozen/04B/simscope/mesh.ssc",
+          "output": "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope-Benchmarks-validation/perf003/profile-completed-gl/after-cache256-wire0-rate0.2.json",
+          "rate": 0.2,
+          "seconds": 12.0,
+          "wireframe": false
+        },
+        "decoded_cache_bytes": 919448,
+        "device": "NVIDIA GeForce RTX 3070 Ti",
+        "duration_seconds": 11.999954,
+        "main_thread": 1,
+        "memory": {
+          "VmHWM": 311107584,
+          "VmRSS": 311107584,
+          "VmSwap": 0
+        },
+        "mesh": {
+          "buffering": false,
+          "cache": {
+            "active": false,
+            "bytes": 30203800,
+            "cancelled": 1,
+            "completed": 54,
+            "error": "",
+            "evictions": 0,
+            "frames": 5,
+            "limit": 134217728,
+            "test_barrier_waiting": false,
+            "worker_ms": 2519.925,
+            "worker_thread": 45
+          },
+          "enabled": true,
+          "error": "",
+          "gpu_uploads": 51,
+          "staged_meshes": 1
+        },
+        "mesh_gpu_bytes": 2674944,
+        "open_ms": 144.729,
+        "prebuffer_ms": 52.547,
+        "profile": {
+          "counters": {
+            "g3_display_samples": 357,
+            "g3_tail_polls": 11
+          },
+          "stages": {
+            "g3_layer_refresh": {
+              "count": 368,
+              "max_ms": 3.04,
+              "mean_ms": 2.2765625000000007,
+              "p50_ms": 2.276,
+              "p95_ms": 2.52,
+              "samples_collected": 368,
+              "total_ms": 837.7750000000002
+            },
+            "g3_mesh_gpu_stage": {
+              "count": 49,
+              "max_ms": 2.351,
+              "mean_ms": 1.398326530612245,
+              "p50_ms": 1.374,
+              "p95_ms": 1.678,
+              "samples_collected": 49,
+              "total_ms": 68.518
+            },
+            "g3_reader_refresh": {
+              "count": 368,
+              "max_ms": 3.033,
+              "mean_ms": 2.269543478260868,
+              "p50_ms": 2.269,
+              "p95_ms": 2.514,
+              "samples_collected": 368,
+              "total_ms": 835.1919999999994
+            },
+            "g3_sample": {
+              "count": 357,
+              "max_ms": 5.418,
+              "mean_ms": 3.0001932773109243,
+              "p50_ms": 2.733,
+              "p95_ms": 5.0,
+              "samples_collected": 357,
+              "total_ms": 1071.069
+            },
+            "g3_source_stamp": {
+              "count": 368,
+              "max_ms": 3.023,
+              "mean_ms": 2.2595923913043467,
+              "p50_ms": 2.257,
+              "p95_ms": 2.504,
+              "samples_collected": 368,
+              "total_ms": 831.5299999999996
+            },
+            "g3_tail_poll": {
+              "count": 11,
+              "max_ms": 2.486,
+              "mean_ms": 2.1594545454545457,
+              "p50_ms": 2.128,
+              "p95_ms": 2.486,
+              "samples_collected": 11,
+              "total_ms": 23.754000000000005
+            },
+            "g3_tick": {
+              "count": 24467,
+              "max_ms": 7.074,
+              "mean_ms": 0.171984060162668,
+              "p50_ms": 0.121,
+              "p95_ms": 0.166,
+              "samples_collected": 8192,
+              "total_ms": 4207.933999999998
+            },
+            "hud_cpu": {
+              "count": 357,
+              "max_ms": 0.054,
+              "mean_ms": 0.02292717086834731,
+              "p50_ms": 0.022,
+              "p95_ms": 0.028,
+              "samples_collected": 357,
+              "total_ms": 8.18499999999999
+            },
+            "interpolation_submission_inclusive": {
+              "count": 357,
+              "max_ms": 0.104,
+              "mean_ms": 0.022137254901960744,
+              "p50_ms": 0.021,
+              "p95_ms": 0.027,
+              "samples_collected": 357,
+              "total_ms": 7.902999999999986
+            },
+            "process_inclusive": {
+              "count": 24467,
+              "max_ms": 7.079,
+              "mean_ms": 0.17560444680589868,
+              "p50_ms": 0.124,
+              "p95_ms": 0.171,
+              "samples_collected": 8192,
+              "total_ms": 4296.513999999923
+            }
+          }
+        },
+        "renderer": "gl_compatibility",
+        "callbacks_summary": {
+          "count": 24467,
+          "p95_ms": 0.177,
+          "p99_ms": 2.80534,
+          "max_ms": 7.083,
+          "over_50ms": 0,
+          "interval_p95_ms": 0.8640000000002818,
+          "interval_max_ms": 7.479666666666406,
+          "buffering_callbacks": 0,
+          "buffering_seconds": 0.0,
+          "distinct_indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ],
+          "transitions": 47,
+          "load_factor_progress": 2.3965406000000105,
+          "expected_progress": 2.3999908000000003,
+          "progress_fraction": 0.9985624111559137
+        },
+        "mode": "after"
+      },
+      {
+        "config": {
+          "cache_mib": 256.0,
+          "capture": "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope-Benchmarks/benchmarks/04_FEniCSx_DeformingMesh/frozen/04B/simscope/mesh.ssc",
+          "output": "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope-Benchmarks-validation/perf003/profile-completed-gl/before-cache256-wire1-rate0.2.json",
+          "rate": 0.2,
+          "seconds": 12.0,
+          "wireframe": true
+        },
+        "decoded_cache_bytes": 19308408,
+        "device": "NVIDIA GeForce RTX 3070 Ti",
+        "duration_seconds": 12.027669,
+        "main_thread": 1,
+        "memory": {
+          "VmHWM": 288149504,
+          "VmRSS": 288149504,
+          "VmSwap": 0
+        },
+        "mesh_gpu_bytes": 746496,
+        "open_ms": 146.602,
+        "prebuffer_ms": 22.263,
+        "profile": {
+          "counters": {
+            "g3_display_samples": 354,
+            "g3_sample_cache_misses": 20,
+            "g3_tail_polls": 11
+          },
+          "stages": {
+            "g3_cache_lookup": {
+              "count": 708,
+              "max_ms": 0.068,
+              "mean_ms": 0.022209039548022592,
+              "p50_ms": 0.022,
+              "p95_ms": 0.031,
+              "samples_collected": 708,
+              "total_ms": 15.723999999999997
+            },
+            "g3_cache_publish": {
+              "count": 20,
+              "max_ms": 0.038,
+              "mean_ms": 0.027100000000000013,
+              "p50_ms": 0.027,
+              "p95_ms": 0.034,
+              "samples_collected": 20,
+              "total_ms": 0.5420000000000003
+            },
+            "g3_channel_decode": {
+              "count": 20,
+              "max_ms": 5.922,
+              "mean_ms": 5.48335,
+              "p50_ms": 5.407,
+              "p95_ms": 5.888,
+              "samples_collected": 20,
+              "total_ms": 109.66699999999999
+            },
+            "g3_layer_refresh": {
+              "count": 365,
+              "max_ms": 3.749,
+              "mean_ms": 2.3016794520547963,
+              "p50_ms": 2.287,
+              "p95_ms": 2.57,
+              "samples_collected": 365,
+              "total_ms": 840.1130000000006
+            },
+            "g3_read_sample": {
+              "count": 708,
+              "max_ms": 13.528,
+              "mean_ms": 2.4044689265536734,
+              "p50_ms": 2.099,
+              "p95_ms": 2.46,
+              "samples_collected": 708,
+              "total_ms": 1702.3640000000007
+            },
+            "g3_reader_refresh": {
+              "count": 1073,
+              "max_ms": 3.738,
+              "mean_ms": 2.149735321528426,
+              "p50_ms": 2.14,
+              "p95_ms": 2.439,
+              "samples_collected": 1073,
+              "total_ms": 2306.666000000001
+            },
+            "g3_sample": {
+              "count": 354,
+              "max_ms": 36.267,
+              "mean_ms": 24.900723163841786,
+              "p50_ms": 24.2,
+              "p95_ms": 34.239,
+              "samples_collected": 354,
+              "total_ms": 8814.855999999992
+            },
+            "g3_source_stamp": {
+              "count": 1093,
+              "max_ms": 3.72,
+              "mean_ms": 2.1412616651418106,
+              "p50_ms": 2.131,
+              "p95_ms": 2.436,
+              "samples_collected": 1093,
+              "total_ms": 2340.398999999999
+            },
+            "g3_tail_poll": {
+              "count": 11,
+              "max_ms": 2.645,
+              "mean_ms": 2.2636363636363637,
+              "p50_ms": 2.24,
+              "p95_ms": 2.645,
+              "samples_collected": 11,
+              "total_ms": 24.9
+            },
+            "g3_tick": {
+              "count": 7173,
+              "max_ms": 36.285,
+              "mean_ms": 1.2416569078487907,
+              "p50_ms": 0.008,
+              "p95_ms": 2.261,
+              "samples_collected": 7173,
+              "total_ms": 8906.404999999375
+            },
+            "hud_cpu": {
+              "count": 354,
+              "max_ms": 0.066,
+              "mean_ms": 0.024960451977401106,
+              "p50_ms": 0.024,
+              "p95_ms": 0.033,
+              "samples_collected": 354,
+              "total_ms": 8.835999999999991
+            },
+            "interpolation_submission_inclusive": {
+              "count": 354,
+              "max_ms": 0.075,
+              "mean_ms": 0.026629943502824792,
+              "p50_ms": 0.026,
+              "p95_ms": 0.031,
+              "samples_collected": 354,
+              "total_ms": 9.426999999999977
+            },
+            "process_inclusive": {
+              "count": 7173,
+              "max_ms": 36.29,
+              "mean_ms": 1.2462880245364922,
+              "p50_ms": 0.012,
+              "p95_ms": 2.268,
+              "samples_collected": 7173,
+              "total_ms": 8939.624000000258
+            }
+          }
+        },
+        "renderer": "gl_compatibility",
+        "callbacks_summary": {
+          "count": 7173,
+          "p95_ms": 2.2723999999999998,
+          "p99_ms": 24.741079999999997,
+          "max_ms": 36.294,
+          "over_50ms": 0,
+          "interval_p95_ms": 9.617133333333323,
+          "interval_max_ms": 41.22792857294682,
+          "buffering_callbacks": 0,
+          "buffering_seconds": 0.0,
+          "distinct_indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ],
+          "transitions": 47,
+          "load_factor_progress": 2.39987723888918,
+          "expected_progress": 2.4055338,
+          "progress_fraction": 0.9976485214588047
+        },
+        "mode": "before"
+      },
+      {
+        "config": {
+          "cache_mib": 256.0,
+          "capture": "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope-Benchmarks/benchmarks/04_FEniCSx_DeformingMesh/frozen/04B/simscope/mesh.ssc",
+          "output": "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope-Benchmarks-validation/perf003/profile-completed-gl/after-cache256-wire1-rate0.2.json",
+          "rate": 0.2,
+          "seconds": 12.0,
+          "wireframe": true
+        },
+        "decoded_cache_bytes": 919448,
+        "device": "NVIDIA GeForce RTX 3070 Ti",
+        "duration_seconds": 12.000081,
+        "main_thread": 1,
+        "memory": {
+          "VmHWM": 311709696,
+          "VmRSS": 311709696,
+          "VmSwap": 0
+        },
+        "mesh": {
+          "buffering": false,
+          "cache": {
+            "active": false,
+            "bytes": 30203800,
+            "cancelled": 1,
+            "completed": 54,
+            "error": "",
+            "evictions": 0,
+            "frames": 5,
+            "limit": 134217728,
+            "test_barrier_waiting": false,
+            "worker_ms": 2602.9000000000005,
+            "worker_thread": 45
+          },
+          "enabled": true,
+          "error": "",
+          "gpu_uploads": 51,
+          "staged_meshes": 1
+        },
+        "mesh_gpu_bytes": 2737152,
+        "open_ms": 143.909,
+        "prebuffer_ms": 54.616,
+        "profile": {
+          "counters": {
+            "g3_display_samples": 357,
+            "g3_tail_polls": 11
+          },
+          "stages": {
+            "g3_layer_refresh": {
+              "count": 368,
+              "max_ms": 2.968,
+              "mean_ms": 2.28750543478261,
+              "p50_ms": 2.267,
+              "p95_ms": 2.541,
+              "samples_collected": 368,
+              "total_ms": 841.8020000000004
+            },
+            "g3_mesh_gpu_stage": {
+              "count": 49,
+              "max_ms": 2.431,
+              "mean_ms": 1.4191836734693877,
+              "p50_ms": 1.367,
+              "p95_ms": 1.799,
+              "samples_collected": 49,
+              "total_ms": 69.53999999999999
+            },
+            "g3_reader_refresh": {
+              "count": 368,
+              "max_ms": 2.962,
+              "mean_ms": 2.2806875000000004,
+              "p50_ms": 2.261,
+              "p95_ms": 2.534,
+              "samples_collected": 368,
+              "total_ms": 839.2930000000001
+            },
+            "g3_sample": {
+              "count": 357,
+              "max_ms": 5.778,
+              "mean_ms": 3.004938375350139,
+              "p50_ms": 2.731,
+              "p95_ms": 4.95,
+              "samples_collected": 357,
+              "total_ms": 1072.7629999999997
+            },
+            "g3_source_stamp": {
+              "count": 368,
+              "max_ms": 2.952,
+              "mean_ms": 2.2707065217391307,
+              "p50_ms": 2.251,
+              "p95_ms": 2.525,
+              "samples_collected": 368,
+              "total_ms": 835.6200000000001
+            },
+            "g3_tail_poll": {
+              "count": 11,
+              "max_ms": 2.415,
+              "mean_ms": 2.1476363636363636,
+              "p50_ms": 2.132,
+              "p95_ms": 2.415,
+              "samples_collected": 11,
+              "total_ms": 23.624
+            },
+            "g3_tick": {
+              "count": 24467,
+              "max_ms": 7.558,
+              "mean_ms": 0.17196440102995877,
+              "p50_ms": 0.121,
+              "p95_ms": 0.165,
+              "samples_collected": 8192,
+              "total_ms": 4207.453000000001
+            },
+            "hud_cpu": {
+              "count": 357,
+              "max_ms": 0.036,
+              "mean_ms": 0.022299719887955156,
+              "p50_ms": 0.022,
+              "p95_ms": 0.027,
+              "samples_collected": 357,
+              "total_ms": 7.9609999999999905
+            },
+            "interpolation_submission_inclusive": {
+              "count": 357,
+              "max_ms": 0.05,
+              "mean_ms": 0.022008403361344492,
+              "p50_ms": 0.022,
+              "p95_ms": 0.027,
+              "samples_collected": 357,
+              "total_ms": 7.856999999999983
+            },
+            "process_inclusive": {
+              "count": 24467,
+              "max_ms": 7.562,
+              "mean_ms": 0.1756872930886487,
+              "p50_ms": 0.124,
+              "p95_ms": 0.17,
+              "samples_collected": 8192,
+              "total_ms": 4298.540999999967
+            }
+          }
+        },
+        "renderer": "gl_compatibility",
+        "callbacks_summary": {
+          "count": 24467,
+          "p95_ms": 0.174,
+          "p99_ms": 2.78534,
+          "max_ms": 7.564,
+          "over_50ms": 0,
+          "interval_p95_ms": 0.9022444444444525,
+          "interval_max_ms": 6.87166666666647,
+          "buffering_callbacks": 0,
+          "buffering_seconds": 0.0,
+          "distinct_indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ],
+          "transitions": 47,
+          "load_factor_progress": 2.3963300000000123,
+          "expected_progress": 2.4000162,
+          "progress_fraction": 0.998464093700706
+        },
+        "mode": "after"
+      },
+      {
+        "config": {
+          "cache_mib": 0.0,
+          "capture": "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope-Benchmarks/benchmarks/04_FEniCSx_DeformingMesh/frozen/04B/simscope/mesh.ssc",
+          "output": "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope-Benchmarks-validation/perf003/profile-completed-gl/before-cache0-wire0-rate0.2.json",
+          "rate": 0.2,
+          "seconds": 12.0,
+          "wireframe": false
+        },
+        "decoded_cache_bytes": 0,
+        "device": "NVIDIA GeForce RTX 3070 Ti",
+        "duration_seconds": 12.087989,
+        "main_thread": 1,
+        "memory": {
+          "VmHWM": 265633792,
+          "VmRSS": 265633792,
+          "VmSwap": 0
+        },
+        "mesh_gpu_bytes": 684288,
+        "open_ms": 144.646,
+        "prebuffer_ms": 29.525,
+        "profile": {
+          "counters": {
+            "g3_display_samples": 261,
+            "g3_sample_cache_misses": 522,
+            "g3_tail_polls": 11
+          },
+          "stages": {
+            "g3_cache_lookup": {
+              "count": 522,
+              "max_ms": 0.042,
+              "mean_ms": 0.003940613026819908,
+              "p50_ms": 0.004,
+              "p95_ms": 0.005,
+              "samples_collected": 522,
+              "total_ms": 2.056999999999992
+            },
+            "g3_cache_publish": {
+              "count": 522,
+              "max_ms": 0.082,
+              "mean_ms": 0.0179904214559387,
+              "p50_ms": 0.017,
+              "p95_ms": 0.022,
+              "samples_collected": 522,
+              "total_ms": 9.391000000000002
+            },
+            "g3_channel_decode": {
+              "count": 522,
+              "max_ms": 6.735,
+              "mean_ms": 5.3808697318007646,
+              "p50_ms": 5.36,
+              "p95_ms": 5.79,
+              "samples_collected": 522,
+              "total_ms": 2808.813999999999
+            },
+            "g3_layer_refresh": {
+              "count": 272,
+              "max_ms": 3.137,
+              "mean_ms": 2.303577205882354,
+              "p50_ms": 2.296,
+              "p95_ms": 2.609,
+              "samples_collected": 272,
+              "total_ms": 626.5730000000003
+            },
+            "g3_read_sample": {
+              "count": 522,
+              "max_ms": 15.383,
+              "mean_ms": 12.41117624521073,
+              "p50_ms": 12.398,
+              "p95_ms": 13.091,
+              "samples_collected": 522,
+              "total_ms": 6478.634000000001
+            },
+            "g3_reader_refresh": {
+              "count": 794,
+              "max_ms": 3.129,
+              "mean_ms": 2.139710327455918,
+              "p50_ms": 2.124,
+              "p95_ms": 2.442,
+              "samples_collected": 794,
+              "total_ms": 1698.9299999999987
+            },
+            "g3_sample": {
+              "count": 261,
+              "max_ms": 56.051,
+              "mean_ms": 43.856973180076565,
+              "p50_ms": 43.744,
+              "p95_ms": 45.515,
+              "samples_collected": 261,
+              "total_ms": 11446.669999999984
+            },
+            "g3_source_stamp": {
+              "count": 1316,
+              "max_ms": 3.117,
+              "mean_ms": 2.135917173252279,
+              "p50_ms": 2.125,
+              "p95_ms": 2.395,
+              "samples_collected": 1316,
+              "total_ms": 2810.866999999999
+            },
+            "g3_tail_poll": {
+              "count": 11,
+              "max_ms": 2.401,
+              "mean_ms": 2.240181818181818,
+              "p50_ms": 2.207,
+              "p95_ms": 2.401,
+              "samples_collected": 11,
+              "total_ms": 24.642
+            },
+            "g3_tick": {
+              "count": 369,
+              "max_ms": 58.288,
+              "mean_ms": 31.10968563685636,
+              "p50_ms": 43.309,
+              "p95_ms": 45.593,
+              "samples_collected": 369,
+              "total_ms": 11479.473999999997
+            },
+            "hud_cpu": {
+              "count": 261,
+              "max_ms": 0.076,
+              "mean_ms": 0.024540229885057458,
+              "p50_ms": 0.024,
+              "p95_ms": 0.029,
+              "samples_collected": 261,
+              "total_ms": 6.404999999999997
+            },
+            "interpolation_submission_inclusive": {
+              "count": 261,
+              "max_ms": 0.076,
+              "mean_ms": 0.02967049808429115,
+              "p50_ms": 0.029,
+              "p95_ms": 0.035,
+              "samples_collected": 261,
+              "total_ms": 7.74399999999999
+            },
+            "process_inclusive": {
+              "count": 369,
+              "max_ms": 58.294,
+              "mean_ms": 31.11528997289974,
+              "p50_ms": 43.314,
+              "p95_ms": 45.6,
+              "samples_collected": 369,
+              "total_ms": 11481.542000000003
+            }
+          }
+        },
+        "renderer": "gl_compatibility",
+        "callbacks_summary": {
+          "count": 369,
+          "p95_ms": 45.584199999999996,
+          "p99_ms": 46.90272,
+          "max_ms": 58.299,
+          "over_50ms": 1,
+          "interval_p95_ms": 47.6746,
+          "interval_max_ms": 56.449703703703726,
+          "buffering_callbacks": 0,
+          "buffering_seconds": 0.0,
+          "distinct_indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ],
+          "transitions": 48,
+          "load_factor_progress": 2.4074063333333333,
+          "expected_progress": 2.4175978000000002,
+          "progress_fraction": 0.9957844656101743
+        },
+        "mode": "before"
+      },
+      {
+        "config": {
+          "cache_mib": 0.0,
+          "capture": "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope-Benchmarks/benchmarks/04_FEniCSx_DeformingMesh/frozen/04B/simscope/mesh.ssc",
+          "output": "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope-Benchmarks-validation/perf003/profile-completed-gl/after-cache0-wire0-rate0.2.json",
+          "rate": 0.2,
+          "seconds": 12.0,
+          "wireframe": false
+        },
+        "decoded_cache_bytes": 0,
+        "device": "NVIDIA GeForce RTX 3070 Ti",
+        "duration_seconds": 12.000093,
+        "main_thread": 1,
+        "memory": {
+          "VmHWM": 310108160,
+          "VmRSS": 310108160,
+          "VmSwap": 0
+        },
+        "mesh": {
+          "buffering": false,
+          "cache": {
+            "active": false,
+            "bytes": 30203800,
+            "cancelled": 1,
+            "completed": 54,
+            "error": "",
+            "evictions": 0,
+            "frames": 5,
+            "limit": 134217728,
+            "test_barrier_waiting": false,
+            "worker_ms": 2545.91,
+            "worker_thread": 45
+          },
+          "enabled": true,
+          "error": "",
+          "gpu_uploads": 51,
+          "staged_meshes": 1
+        },
+        "mesh_gpu_bytes": 2674944,
+        "open_ms": 145.623,
+        "prebuffer_ms": 54.273,
+        "profile": {
+          "counters": {
+            "g3_display_samples": 357,
+            "g3_tail_polls": 11
+          },
+          "stages": {
+            "g3_layer_refresh": {
+              "count": 368,
+              "max_ms": 2.875,
+              "mean_ms": 2.2920923913043465,
+              "p50_ms": 2.288,
+              "p95_ms": 2.589,
+              "samples_collected": 368,
+              "total_ms": 843.4899999999996
+            },
+            "g3_mesh_gpu_stage": {
+              "count": 49,
+              "max_ms": 2.635,
+              "mean_ms": 1.414142857142857,
+              "p50_ms": 1.365,
+              "p95_ms": 1.867,
+              "samples_collected": 49,
+              "total_ms": 69.29299999999999
+            },
+            "g3_reader_refresh": {
+              "count": 368,
+              "max_ms": 2.863,
+              "mean_ms": 2.284763586956522,
+              "p50_ms": 2.28,
+              "p95_ms": 2.582,
+              "samples_collected": 368,
+              "total_ms": 840.793
+            },
+            "g3_sample": {
+              "count": 357,
+              "max_ms": 5.714,
+              "mean_ms": 3.018725490196078,
+              "p50_ms": 2.747,
+              "p95_ms": 4.986,
+              "samples_collected": 357,
+              "total_ms": 1077.6849999999997
+            },
+            "g3_source_stamp": {
+              "count": 368,
+              "max_ms": 2.844,
+              "mean_ms": 2.274798913043478,
+              "p50_ms": 2.269,
+              "p95_ms": 2.571,
+              "samples_collected": 368,
+              "total_ms": 837.1259999999999
+            },
+            "g3_tail_poll": {
+              "count": 11,
+              "max_ms": 2.341,
+              "mean_ms": 2.078,
+              "p50_ms": 2.055,
+              "p95_ms": 2.341,
+              "samples_collected": 11,
+              "total_ms": 22.858
+            },
+            "g3_tick": {
+              "count": 24600,
+              "max_ms": 5.845,
+              "mean_ms": 0.17219235772357655,
+              "p50_ms": 0.121,
+              "p95_ms": 0.173,
+              "samples_collected": 8192,
+              "total_ms": 4235.931999999983
+            },
+            "hud_cpu": {
+              "count": 357,
+              "max_ms": 0.076,
+              "mean_ms": 0.02318487394957981,
+              "p50_ms": 0.022,
+              "p95_ms": 0.029,
+              "samples_collected": 357,
+              "total_ms": 8.276999999999992
+            },
+            "interpolation_submission_inclusive": {
+              "count": 357,
+              "max_ms": 0.034,
+              "mean_ms": 0.021798319327731044,
+              "p50_ms": 0.021,
+              "p95_ms": 0.026,
+              "samples_collected": 357,
+              "total_ms": 7.781999999999982
+            },
+            "process_inclusive": {
+              "count": 24600,
+              "max_ms": 5.849,
+              "mean_ms": 0.17585947154471168,
+              "p50_ms": 0.124,
+              "p95_ms": 0.178,
+              "samples_collected": 8192,
+              "total_ms": 4326.142999999907
+            }
+          }
+        },
+        "renderer": "gl_compatibility",
+        "callbacks_summary": {
+          "count": 24600,
+          "p95_ms": 0.175,
+          "p99_ms": 2.8,
+          "max_ms": 5.851,
+          "over_50ms": 0,
+          "interval_p95_ms": 0.8923388888889048,
+          "interval_max_ms": 7.46066666666662,
+          "buffering_callbacks": 0,
+          "buffering_seconds": 0.0,
+          "distinct_indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ],
+          "transitions": 47,
+          "load_factor_progress": 2.396723200000007,
+          "expected_progress": 2.4000186,
+          "progress_fraction": 0.9986269273079829
+        },
+        "mode": "after"
+      },
+      {
+        "config": {
+          "cache_mib": 256.0,
+          "capture": "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope-Benchmarks/benchmarks/04_FEniCSx_DeformingMesh/frozen/04B/simscope/mesh.ssc",
+          "output": "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope-Benchmarks-validation/perf003/profile-completed-gl/before-cache256-wire0-rate0.4.json",
+          "rate": 0.4,
+          "seconds": 12.0,
+          "wireframe": false
+        },
+        "decoded_cache_bytes": 19308408,
+        "device": "NVIDIA GeForce RTX 3070 Ti",
+        "duration_seconds": 12.0227,
+        "main_thread": 1,
+        "memory": {
+          "VmHWM": 289660928,
+          "VmRSS": 289660928,
+          "VmSwap": 0
+        },
+        "mesh_gpu_bytes": 684288,
+        "open_ms": 146.522,
+        "prebuffer_ms": 19.774,
+        "profile": {
+          "counters": {
+            "g3_display_samples": 355,
+            "g3_sample_cache_misses": 20,
+            "g3_tail_polls": 11
+          },
+          "stages": {
+            "g3_cache_lookup": {
+              "count": 710,
+              "max_ms": 0.105,
+              "mean_ms": 0.022442253521126748,
+              "p50_ms": 0.022,
+              "p95_ms": 0.031,
+              "samples_collected": 710,
+              "total_ms": 15.933999999999992
+            },
+            "g3_cache_publish": {
+              "count": 20,
+              "max_ms": 0.046,
+              "mean_ms": 0.02920000000000001,
+              "p50_ms": 0.027,
+              "p95_ms": 0.043,
+              "samples_collected": 20,
+              "total_ms": 0.5840000000000002
+            },
+            "g3_channel_decode": {
+              "count": 20,
+              "max_ms": 8.637,
+              "mean_ms": 5.5798000000000005,
+              "p50_ms": 5.414,
+              "p95_ms": 5.819,
+              "samples_collected": 20,
+              "total_ms": 111.596
+            },
+            "g3_layer_refresh": {
+              "count": 366,
+              "max_ms": 3.208,
+              "mean_ms": 2.3214043715847006,
+              "p50_ms": 2.306,
+              "p95_ms": 2.596,
+              "samples_collected": 366,
+              "total_ms": 849.6340000000004
+            },
+            "g3_read_sample": {
+              "count": 710,
+              "max_ms": 19.051,
+              "mean_ms": 2.390781690140846,
+              "p50_ms": 2.081,
+              "p95_ms": 2.386,
+              "samples_collected": 710,
+              "total_ms": 1697.4550000000006
+            },
+            "g3_reader_refresh": {
+              "count": 1076,
+              "max_ms": 3.197,
+              "mean_ms": 2.1454925650557626,
+              "p50_ms": 2.124,
+              "p95_ms": 2.465,
+              "samples_collected": 1076,
+              "total_ms": 2308.5500000000006
+            },
+            "g3_sample": {
+              "count": 355,
+              "max_ms": 48.241,
+              "mean_ms": 23.686633802816893,
+              "p50_ms": 23.025,
+              "p95_ms": 32.8,
+              "samples_collected": 355,
+              "total_ms": 8408.754999999997
+            },
+            "g3_source_stamp": {
+              "count": 1096,
+              "max_ms": 3.26,
+              "mean_ms": 2.138604014598539,
+              "p50_ms": 2.118,
+              "p95_ms": 2.456,
+              "samples_collected": 1096,
+              "total_ms": 2343.909999999999
+            },
+            "g3_tail_poll": {
+              "count": 11,
+              "max_ms": 2.576,
+              "mean_ms": 2.3518181818181816,
+              "p50_ms": 2.362,
+              "p95_ms": 2.576,
+              "samples_collected": 11,
+              "total_ms": 25.869999999999997
+            },
+            "g3_tick": {
+              "count": 8583,
+              "max_ms": 48.263,
+              "mean_ms": 0.9915450308748733,
+              "p50_ms": 0.008,
+              "p95_ms": 0.033,
+              "samples_collected": 8192,
+              "total_ms": 8510.430999999038
+            },
+            "hud_cpu": {
+              "count": 355,
+              "max_ms": 0.077,
+              "mean_ms": 0.02450985915492955,
+              "p50_ms": 0.023,
+              "p95_ms": 0.031,
+              "samples_collected": 355,
+              "total_ms": 8.70099999999999
+            },
+            "interpolation_submission_inclusive": {
+              "count": 355,
+              "max_ms": 0.06,
+              "mean_ms": 0.026171830985915464,
+              "p50_ms": 0.025,
+              "p95_ms": 0.031,
+              "samples_collected": 355,
+              "total_ms": 9.29099999999999
+            },
+            "process_inclusive": {
+              "count": 8583,
+              "max_ms": 48.269,
+              "mean_ms": 0.995999067925044,
+              "p50_ms": 0.012,
+              "p95_ms": 0.039,
+              "samples_collected": 8192,
+              "total_ms": 8548.660000000653
+            }
+          }
+        },
+        "renderer": "gl_compatibility",
+        "callbacks_summary": {
+          "count": 8583,
+          "p95_ms": 0.042,
+          "p99_ms": 23.417080000000002,
+          "max_ms": 48.273,
+          "over_50ms": 0,
+          "interval_p95_ms": 5.5555555555555545,
+          "interval_max_ms": 50.94,
+          "buffering_callbacks": 0,
+          "buffering_seconds": 0.0,
+          "distinct_indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ],
+          "transitions": 95,
+          "load_factor_progress": 4.798961999999969,
+          "expected_progress": 4.809080000000001,
+          "progress_fraction": 0.9978960632802882
+        },
+        "mode": "before"
+      },
+      {
+        "config": {
+          "cache_mib": 256.0,
+          "capture": "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope-Benchmarks/benchmarks/04_FEniCSx_DeformingMesh/frozen/04B/simscope/mesh.ssc",
+          "output": "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope-Benchmarks-validation/perf003/profile-completed-gl/after-cache256-wire0-rate0.4.json",
+          "rate": 0.4,
+          "seconds": 12.0,
+          "wireframe": false
+        },
+        "decoded_cache_bytes": 919448,
+        "device": "NVIDIA GeForce RTX 3070 Ti",
+        "duration_seconds": 11.999986,
+        "main_thread": 1,
+        "memory": {
+          "VmHWM": 310652928,
+          "VmRSS": 310652928,
+          "VmSwap": 0
+        },
+        "mesh": {
+          "buffering": false,
+          "cache": {
+            "active": false,
+            "bytes": 30203800,
+            "cancelled": 1,
+            "completed": 104,
+            "error": "",
+            "evictions": 0,
+            "frames": 5,
+            "limit": 134217728,
+            "test_barrier_waiting": false,
+            "worker_ms": 4866.214000000001,
+            "worker_thread": 45
+          },
+          "enabled": true,
+          "error": "",
+          "gpu_uploads": 101,
+          "staged_meshes": 1
+        },
+        "mesh_gpu_bytes": 2674944,
+        "open_ms": 148.824,
+        "prebuffer_ms": 52.142,
+        "profile": {
+          "counters": {
+            "g3_display_samples": 357,
+            "g3_tail_polls": 11
+          },
+          "stages": {
+            "g3_layer_refresh": {
+              "count": 368,
+              "max_ms": 2.94,
+              "mean_ms": 2.29841304347826,
+              "p50_ms": 2.299,
+              "p95_ms": 2.571,
+              "samples_collected": 368,
+              "total_ms": 845.8159999999998
+            },
+            "g3_mesh_gpu_stage": {
+              "count": 99,
+              "max_ms": 2.33,
+              "mean_ms": 1.362818181818182,
+              "p50_ms": 1.343,
+              "p95_ms": 1.558,
+              "samples_collected": 99,
+              "total_ms": 134.919
+            },
+            "g3_reader_refresh": {
+              "count": 368,
+              "max_ms": 2.933,
+              "mean_ms": 2.290826086956524,
+              "p50_ms": 2.291,
+              "p95_ms": 2.563,
+              "samples_collected": 368,
+              "total_ms": 843.0240000000007
+            },
+            "g3_sample": {
+              "count": 357,
+              "max_ms": 6.113,
+              "mean_ms": 3.305644257703079,
+              "p50_ms": 2.804,
+              "p95_ms": 5.046,
+              "samples_collected": 357,
+              "total_ms": 1180.114999999999
+            },
+            "g3_source_stamp": {
+              "count": 368,
+              "max_ms": 2.923,
+              "mean_ms": 2.2809673913043484,
+              "p50_ms": 2.282,
+              "p95_ms": 2.551,
+              "samples_collected": 368,
+              "total_ms": 839.3960000000002
+            },
+            "g3_tail_poll": {
+              "count": 11,
+              "max_ms": 2.422,
+              "mean_ms": 2.186181818181818,
+              "p50_ms": 2.134,
+              "p95_ms": 2.422,
+              "samples_collected": 11,
+              "total_ms": 24.047999999999995
+            },
+            "g3_tick": {
+              "count": 24337,
+              "max_ms": 6.917,
+              "mean_ms": 0.17607063319225894,
+              "p50_ms": 0.12,
+              "p95_ms": 0.165,
+              "samples_collected": 8192,
+              "total_ms": 4285.031000000005
+            },
+            "hud_cpu": {
+              "count": 357,
+              "max_ms": 0.056,
+              "mean_ms": 0.02279551820728289,
+              "p50_ms": 0.022,
+              "p95_ms": 0.027,
+              "samples_collected": 357,
+              "total_ms": 8.137999999999991
+            },
+            "interpolation_submission_inclusive": {
+              "count": 357,
+              "max_ms": 0.068,
+              "mean_ms": 0.02294677871148455,
+              "p50_ms": 0.022,
+              "p95_ms": 0.027,
+              "samples_collected": 357,
+              "total_ms": 8.191999999999984
+            },
+            "process_inclusive": {
+              "count": 24337,
+              "max_ms": 6.921,
+              "mean_ms": 0.17967374779142553,
+              "p50_ms": 0.124,
+              "p95_ms": 0.169,
+              "samples_collected": 8192,
+              "total_ms": 4372.719999999923
+            }
+          }
+        },
+        "renderer": "gl_compatibility",
+        "callbacks_summary": {
+          "count": 24337,
+          "p95_ms": 0.173,
+          "p99_ms": 2.8596399999999993,
+          "max_ms": 6.924,
+          "over_50ms": 0,
+          "interval_p95_ms": 1.335422222222223,
+          "interval_max_ms": 7.447999999999766,
+          "buffering_callbacks": 0,
+          "buffering_seconds": 0.0,
+          "distinct_indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ],
+          "transitions": 95,
+          "load_factor_progress": 4.791680399999974,
+          "expected_progress": 4.7999944,
+          "progress_fraction": 0.9982679146458949
+        },
+        "mode": "after"
+      },
+      {
+        "config": {
+          "cache_mib": 256.0,
+          "capture": "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope-Benchmarks/benchmarks/04_FEniCSx_DeformingMesh/frozen/04B/simscope/mesh.ssc",
+          "output": "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope-Benchmarks-validation/perf003/profile-completed-gl/before-cache256-wire1-rate-0.2.json",
+          "rate": -0.2,
+          "seconds": 12.0,
+          "wireframe": true
+        },
+        "decoded_cache_bytes": 19308408,
+        "device": "NVIDIA GeForce RTX 3070 Ti",
+        "duration_seconds": 12.025552,
+        "main_thread": 1,
+        "memory": {
+          "VmHWM": 288899072,
+          "VmRSS": 288899072,
+          "VmSwap": 0
+        },
+        "mesh_gpu_bytes": 746496,
+        "open_ms": 147.228,
+        "prebuffer_ms": 44.888,
+        "profile": {
+          "counters": {
+            "g3_display_samples": 354,
+            "g3_sample_cache_misses": 18,
+            "g3_tail_polls": 11
+          },
+          "stages": {
+            "g3_cache_lookup": {
+              "count": 708,
+              "max_ms": 0.064,
+              "mean_ms": 0.020988700564971745,
+              "p50_ms": 0.021,
+              "p95_ms": 0.029,
+              "samples_collected": 708,
+              "total_ms": 14.859999999999996
+            },
+            "g3_cache_publish": {
+              "count": 18,
+              "max_ms": 0.039,
+              "mean_ms": 0.027500000000000007,
+              "p50_ms": 0.027,
+              "p95_ms": 0.039,
+              "samples_collected": 18,
+              "total_ms": 0.4950000000000001
+            },
+            "g3_channel_decode": {
+              "count": 18,
+              "max_ms": 5.85,
+              "mean_ms": 5.388888888888888,
+              "p50_ms": 5.379,
+              "p95_ms": 5.85,
+              "samples_collected": 18,
+              "total_ms": 96.99999999999999
+            },
+            "g3_layer_refresh": {
+              "count": 365,
+              "max_ms": 2.943,
+              "mean_ms": 2.306282191780822,
+              "p50_ms": 2.303,
+              "p95_ms": 2.559,
+              "samples_collected": 365,
+              "total_ms": 841.793
+            },
+            "g3_read_sample": {
+              "count": 708,
+              "max_ms": 13.138,
+              "mean_ms": 2.367362994350283,
+              "p50_ms": 2.087,
+              "p95_ms": 2.414,
+              "samples_collected": 708,
+              "total_ms": 1676.0930000000003
+            },
+            "g3_reader_refresh": {
+              "count": 1073,
+              "max_ms": 2.935,
+              "mean_ms": 2.1503019571295456,
+              "p50_ms": 2.139,
+              "p95_ms": 2.455,
+              "samples_collected": 1073,
+              "total_ms": 2307.2740000000026
+            },
+            "g3_sample": {
+              "count": 354,
+              "max_ms": 37.144,
+              "mean_ms": 24.835048022598865,
+              "p50_ms": 24.298,
+              "p95_ms": 34.047,
+              "samples_collected": 354,
+              "total_ms": 8791.606999999998
+            },
+            "g3_source_stamp": {
+              "count": 1091,
+              "max_ms": 2.923,
+              "mean_ms": 2.1430155820348356,
+              "p50_ms": 2.132,
+              "p95_ms": 2.449,
+              "samples_collected": 1091,
+              "total_ms": 2338.0300000000057
+            },
+            "g3_tail_poll": {
+              "count": 11,
+              "max_ms": 2.638,
+              "mean_ms": 2.324727272727273,
+              "p50_ms": 2.324,
+              "p95_ms": 2.638,
+              "samples_collected": 11,
+              "total_ms": 25.572000000000003
+            },
+            "g3_tick": {
+              "count": 7316,
+              "max_ms": 37.162,
+              "mean_ms": 1.2140693001639231,
+              "p50_ms": 0.008,
+              "p95_ms": 0.073,
+              "samples_collected": 7316,
+              "total_ms": 8882.13099999926
+            },
+            "hud_cpu": {
+              "count": 354,
+              "max_ms": 0.072,
+              "mean_ms": 0.02445480225988697,
+              "p50_ms": 0.024,
+              "p95_ms": 0.03,
+              "samples_collected": 354,
+              "total_ms": 8.656999999999988
+            },
+            "interpolation_submission_inclusive": {
+              "count": 354,
+              "max_ms": 0.073,
+              "mean_ms": 0.026288135593220338,
+              "p50_ms": 0.025,
+              "p95_ms": 0.033,
+              "samples_collected": 354,
+              "total_ms": 9.306
+            },
+            "process_inclusive": {
+              "count": 7316,
+              "max_ms": 37.167,
+              "mean_ms": 1.218492482230794,
+              "p50_ms": 0.012,
+              "p95_ms": 0.08,
+              "samples_collected": 7316,
+              "total_ms": 8914.49100000049
+            }
+          }
+        },
+        "renderer": "gl_compatibility",
+        "callbacks_summary": {
+          "count": 7316,
+          "p95_ms": 0.08025,
+          "p99_ms": 24.840900000000005,
+          "max_ms": 37.169,
+          "over_50ms": 0,
+          "interval_p95_ms": 9.074197916332379,
+          "interval_max_ms": 39.259,
+          "buffering_callbacks": 0,
+          "buffering_seconds": 0.0,
+          "distinct_indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ],
+          "transitions": 48,
+          "load_factor_progress": -2.3997496000000327,
+          "expected_progress": -2.4051104,
+          "progress_fraction": 0.9977710794481753
+        },
+        "mode": "before"
+      },
+      {
+        "config": {
+          "cache_mib": 256.0,
+          "capture": "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope-Benchmarks/benchmarks/04_FEniCSx_DeformingMesh/frozen/04B/simscope/mesh.ssc",
+          "output": "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope-Benchmarks-validation/perf003/profile-completed-gl/after-cache256-wire1-rate-0.2.json",
+          "rate": -0.2,
+          "seconds": 12.0,
+          "wireframe": true
+        },
+        "decoded_cache_bytes": 919448,
+        "device": "NVIDIA GeForce RTX 3070 Ti",
+        "duration_seconds": 12.000062,
+        "main_thread": 1,
+        "memory": {
+          "VmHWM": 312078336,
+          "VmRSS": 312078336,
+          "VmSwap": 0
+        },
+        "mesh": {
+          "buffering": false,
+          "cache": {
+            "active": false,
+            "bytes": 30203800,
+            "cancelled": 1,
+            "completed": 55,
+            "error": "",
+            "evictions": 0,
+            "frames": 5,
+            "limit": 134217728,
+            "test_barrier_waiting": false,
+            "worker_ms": 2654.4629999999993,
+            "worker_thread": 45
+          },
+          "enabled": true,
+          "error": "",
+          "gpu_uploads": 52,
+          "staged_meshes": 1
+        },
+        "mesh_gpu_bytes": 2737152,
+        "open_ms": 147.291,
+        "prebuffer_ms": 55.931,
+        "profile": {
+          "counters": {
+            "g3_display_samples": 357,
+            "g3_tail_polls": 11
+          },
+          "stages": {
+            "g3_layer_refresh": {
+              "count": 368,
+              "max_ms": 3.251,
+              "mean_ms": 2.2855679347826086,
+              "p50_ms": 2.271,
+              "p95_ms": 2.511,
+              "samples_collected": 368,
+              "total_ms": 841.0889999999999
+            },
+            "g3_mesh_gpu_stage": {
+              "count": 50,
+              "max_ms": 2.387,
+              "mean_ms": 1.4095199999999999,
+              "p50_ms": 1.361,
+              "p95_ms": 1.723,
+              "samples_collected": 50,
+              "total_ms": 70.476
+            },
+            "g3_reader_refresh": {
+              "count": 368,
+              "max_ms": 3.241,
+              "mean_ms": 2.2791141304347837,
+              "p50_ms": 2.263,
+              "p95_ms": 2.506,
+              "samples_collected": 368,
+              "total_ms": 838.7140000000004
+            },
+            "g3_sample": {
+              "count": 357,
+              "max_ms": 5.962,
+              "mean_ms": 3.009439775910363,
+              "p50_ms": 2.73,
+              "p95_ms": 4.986,
+              "samples_collected": 357,
+              "total_ms": 1074.3699999999997
+            },
+            "g3_source_stamp": {
+              "count": 368,
+              "max_ms": 3.224,
+              "mean_ms": 2.2695298913043476,
+              "p50_ms": 2.253,
+              "p95_ms": 2.495,
+              "samples_collected": 368,
+              "total_ms": 835.1869999999999
+            },
+            "g3_tail_poll": {
+              "count": 11,
+              "max_ms": 2.368,
+              "mean_ms": 2.172181818181818,
+              "p50_ms": 2.184,
+              "p95_ms": 2.368,
+              "samples_collected": 11,
+              "total_ms": 23.894
+            },
+            "g3_tick": {
+              "count": 24447,
+              "max_ms": 6.137,
+              "mean_ms": 0.17207141980611007,
+              "p50_ms": 0.121,
+              "p95_ms": 0.164,
+              "samples_collected": 8192,
+              "total_ms": 4206.629999999973
+            },
+            "hud_cpu": {
+              "count": 357,
+              "max_ms": 0.075,
+              "mean_ms": 0.02209803921568625,
+              "p50_ms": 0.022,
+              "p95_ms": 0.029,
+              "samples_collected": 357,
+              "total_ms": 7.888999999999991
+            },
+            "interpolation_submission_inclusive": {
+              "count": 357,
+              "max_ms": 0.037,
+              "mean_ms": 0.021829131652661034,
+              "p50_ms": 0.022,
+              "p95_ms": 0.025,
+              "samples_collected": 357,
+              "total_ms": 7.7929999999999895
+            },
+            "process_inclusive": {
+              "count": 24447,
+              "max_ms": 6.141,
+              "mean_ms": 0.1757394772364686,
+              "p50_ms": 0.124,
+              "p95_ms": 0.169,
+              "samples_collected": 8192,
+              "total_ms": 4296.302999999948
+            }
+          }
+        },
+        "renderer": "gl_compatibility",
+        "callbacks_summary": {
+          "count": 24447,
+          "p95_ms": 0.174,
+          "p99_ms": 2.793,
+          "max_ms": 6.144,
+          "over_50ms": 0,
+          "interval_p95_ms": 0.9609777777777807,
+          "interval_max_ms": 7.3026666666665765,
+          "buffering_callbacks": 0,
+          "buffering_seconds": 0.0,
+          "distinct_indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ],
+          "transitions": 48,
+          "load_factor_progress": -2.396520200000025,
+          "expected_progress": -2.4000124,
+          "progress_fraction": 0.9985449241845689
+        },
+        "mode": "after"
+      }
+    ],
+    "checks": [
+      {
+        "case": "cache256.0/wireFalse/rate0.2",
+        "name": "no underflow",
+        "passed": true
+      },
+      {
+        "case": "cache256.0/wireFalse/rate0.2",
+        "name": "no callbacks >=50 ms",
+        "passed": true
+      },
+      {
+        "case": "cache256.0/wireFalse/rate0.2",
+        "name": "lower callback p99",
+        "passed": true
+      },
+      {
+        "case": "cache256.0/wireFalse/rate0.2",
+        "name": "wall-time progress within 5 percent",
+        "passed": true
+      },
+      {
+        "case": "cache256.0/wireFalse/rate0.2",
+        "name": "all 20 retained intervals visited",
+        "passed": true
+      },
+      {
+        "case": "cache256.0/wireFalse/rate0.2",
+        "name": "bounded CPU cache",
+        "passed": true
+      },
+      {
+        "case": "cache256.0/wireFalse/rate0.2",
+        "name": "one future GPU mesh",
+        "passed": true
+      },
+      {
+        "case": "cache256.0/wireFalse/rate0.2",
+        "name": "worker separate from main",
+        "passed": true
+      },
+      {
+        "case": "cache256.0/wireFalse/rate0.2",
+        "name": "no preparation errors",
+        "passed": true
+      },
+      {
+        "case": "cache256.0/wireTrue/rate0.2",
+        "name": "no underflow",
+        "passed": true
+      },
+      {
+        "case": "cache256.0/wireTrue/rate0.2",
+        "name": "no callbacks >=50 ms",
+        "passed": true
+      },
+      {
+        "case": "cache256.0/wireTrue/rate0.2",
+        "name": "lower callback p99",
+        "passed": true
+      },
+      {
+        "case": "cache256.0/wireTrue/rate0.2",
+        "name": "wall-time progress within 5 percent",
+        "passed": true
+      },
+      {
+        "case": "cache256.0/wireTrue/rate0.2",
+        "name": "all 20 retained intervals visited",
+        "passed": true
+      },
+      {
+        "case": "cache256.0/wireTrue/rate0.2",
+        "name": "bounded CPU cache",
+        "passed": true
+      },
+      {
+        "case": "cache256.0/wireTrue/rate0.2",
+        "name": "one future GPU mesh",
+        "passed": true
+      },
+      {
+        "case": "cache256.0/wireTrue/rate0.2",
+        "name": "worker separate from main",
+        "passed": true
+      },
+      {
+        "case": "cache256.0/wireTrue/rate0.2",
+        "name": "no preparation errors",
+        "passed": true
+      },
+      {
+        "case": "cache0.0/wireFalse/rate0.2",
+        "name": "no underflow",
+        "passed": true
+      },
+      {
+        "case": "cache0.0/wireFalse/rate0.2",
+        "name": "no callbacks >=50 ms",
+        "passed": true
+      },
+      {
+        "case": "cache0.0/wireFalse/rate0.2",
+        "name": "lower callback p99",
+        "passed": true
+      },
+      {
+        "case": "cache0.0/wireFalse/rate0.2",
+        "name": "wall-time progress within 5 percent",
+        "passed": true
+      },
+      {
+        "case": "cache0.0/wireFalse/rate0.2",
+        "name": "all 20 retained intervals visited",
+        "passed": true
+      },
+      {
+        "case": "cache0.0/wireFalse/rate0.2",
+        "name": "bounded CPU cache",
+        "passed": true
+      },
+      {
+        "case": "cache0.0/wireFalse/rate0.2",
+        "name": "one future GPU mesh",
+        "passed": true
+      },
+      {
+        "case": "cache0.0/wireFalse/rate0.2",
+        "name": "worker separate from main",
+        "passed": true
+      },
+      {
+        "case": "cache0.0/wireFalse/rate0.2",
+        "name": "no preparation errors",
+        "passed": true
+      },
+      {
+        "case": "cache256.0/wireFalse/rate0.4",
+        "name": "no underflow",
+        "passed": true
+      },
+      {
+        "case": "cache256.0/wireFalse/rate0.4",
+        "name": "no callbacks >=50 ms",
+        "passed": true
+      },
+      {
+        "case": "cache256.0/wireFalse/rate0.4",
+        "name": "lower callback p99",
+        "passed": true
+      },
+      {
+        "case": "cache256.0/wireFalse/rate0.4",
+        "name": "wall-time progress within 5 percent",
+        "passed": true
+      },
+      {
+        "case": "cache256.0/wireFalse/rate0.4",
+        "name": "all 20 retained intervals visited",
+        "passed": true
+      },
+      {
+        "case": "cache256.0/wireFalse/rate0.4",
+        "name": "bounded CPU cache",
+        "passed": true
+      },
+      {
+        "case": "cache256.0/wireFalse/rate0.4",
+        "name": "one future GPU mesh",
+        "passed": true
+      },
+      {
+        "case": "cache256.0/wireFalse/rate0.4",
+        "name": "worker separate from main",
+        "passed": true
+      },
+      {
+        "case": "cache256.0/wireFalse/rate0.4",
+        "name": "no preparation errors",
+        "passed": true
+      },
+      {
+        "case": "cache256.0/wireTrue/rate-0.2",
+        "name": "no underflow",
+        "passed": true
+      },
+      {
+        "case": "cache256.0/wireTrue/rate-0.2",
+        "name": "no callbacks >=50 ms",
+        "passed": true
+      },
+      {
+        "case": "cache256.0/wireTrue/rate-0.2",
+        "name": "lower callback p99",
+        "passed": true
+      },
+      {
+        "case": "cache256.0/wireTrue/rate-0.2",
+        "name": "wall-time progress within 5 percent",
+        "passed": true
+      },
+      {
+        "case": "cache256.0/wireTrue/rate-0.2",
+        "name": "all 20 retained intervals visited",
+        "passed": true
+      },
+      {
+        "case": "cache256.0/wireTrue/rate-0.2",
+        "name": "bounded CPU cache",
+        "passed": true
+      },
+      {
+        "case": "cache256.0/wireTrue/rate-0.2",
+        "name": "one future GPU mesh",
+        "passed": true
+      },
+      {
+        "case": "cache256.0/wireTrue/rate-0.2",
+        "name": "worker separate from main",
+        "passed": true
+      },
+      {
+        "case": "cache256.0/wireTrue/rate-0.2",
+        "name": "no preparation errors",
+        "passed": true
+      }
+    ],
+    "source_sha256": "631660193ee215f059a9f731ee120ec24d473ed9e30c8bc45fce1b2defcaa409",
+    "source_unchanged": true,
+    "scientific_solvers_run": 0,
+    "harness_sha256": "1658872508ee72671cd580ab9149ba1a94a2a15a11aebb1e753c67f6dc76a531",
+    "scope": "Application callbacks, source-clock progress and process RSS; not monitor FPS or isolated GPU timing. Fixed 0.5 s warmup; OS page cache not flushed."
+  },
+  "analysis_runtime": {
+    "python": "3.14.7",
+    "numpy": "2.4.3",
+    "scipy": "1.17.1",
+    "scikit_image": "0.26.0",
+    "isolation": "temporary venv with system site packages; no global install"
+  },
+  "harness_notes": [
+    "Focused multi-view mesh tests use a plain background and skip unused sky filtering; the unchanged full benchmark native harness covers application inspection/source traces.",
+    "Native 04B source checks preceded cancellation-only and conservative GPU-quota hardening. Subsequent all-sample native mesh equivalence and G3 checks verify the same source/display behavior.",
+    "An earlier G3 run lacked the optional scikit-image runtime and full synthetic scene fixture; both were supplied in fresh local test data. Successful logs are retained; earlier exploratory outputs remain in the sibling run tree.",
+    "Raw timing callbacks use the aggregate mesh/field/particle underflow flag; the historical benchmark harness exposes only its original particle flag, so its incidental timing is not the PERF-003 underflow oracle."
+  ],
+  "benchmark_repository_integrity": {
+    "passed": true,
+    "counts": {
+      "git": 1190,
+      "external": 828,
+      "external_not_downloaded": 0,
+      "operational_changes": 13,
+      "originals": 0
+    },
+    "scientific_evidence": "Migrated files match pre-migration SHA-256 or declared operational replacements; newer packages match their registered retained inventory. Undownloaded external files are not validated.",
+    "simscope_unchanged": null,
+    "solvers_run": 0
+  },
+  "acceptance": {
+    "date": "2026-09-13",
+    "reviewer": "user",
+    "items": [
+      "PERF-003"
+    ],
+    "implementation_commit": "7974c78553042260b6fa920389de61e8389f5567",
+    "basis": "Delivered mesh playback maintenance report and retained regression evidence using accepted Benchmark 04B",
+    "scope": "Move interactive deforming-mesh preparation off the playback-critical path while preserving topology, identity, vertex/cell associations, source values, units, load-factor semantics and renderer equivalence",
+    "remaining_synchronous_work": "GPU submission, explicit scientific inspection and some renderer/event-loop costs remain synchronous and outside PERF-003 scope",
+    "scientific_generators_rerun_for_acceptance": false,
+    "regression_and_performance_workloads_rerun_for_acceptance": false
+  }
+}

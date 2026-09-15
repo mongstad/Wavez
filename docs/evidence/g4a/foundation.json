@@ -1,0 +1,80 @@
+{
+  "command": [
+    "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+    "--headless",
+    "--path",
+    "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+    "--audio-driver",
+    "Dummy",
+    "--log-file",
+    "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/foundation-5/godot.log",
+    "--script",
+    "analysis/test_foundation.gd",
+    "--",
+    "--foundation=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/foundation-5"
+  ],
+  "exit_code": 0,
+  "timed_out": false,
+  "seconds": 0.525059580000061,
+  "source_sha256": "9c47800f777505db96b89bccc7c495b38915864f6a9153fc8335592f0f619c0b",
+  "source_unchanged": true,
+  "code_revision": "4d9e99bba2fe069977e89b02ff31c6c76990f46e",
+  "source_files": {
+    "simscope_export/analysis/__init__.py": "48dca038ee2510dfd2cc743e6048a747f3ae656f0a0e8733d90d08ea066b4778",
+    "simscope_export/analysis/contracts.py": "5b3d17387403f12d2b1fbcf122f02f1e60dccd92c4eb0315c11323e10536b026",
+    "simscope_export/analysis/source.py": "1fbf6916d2699934eaf3b3801015f9ced3a2f427d055f7dc5bc07a1c10f23dbd",
+    "simscope_export/analysis/sampling.py": "5fdb2229ca3791b75e8084fd9b35202bab8aae9fc935a1bf7833a0bb129102eb",
+    "simscope_export/analysis/jobs.py": "a22afa41146506e66d3a67e1202ee19514e04cab1c00bd801743dd2f4728ce64",
+    "viewer/analysis/analysis_jobs.gd": "10d41d44b6133f7ff6d48a479149e586d7b2129b89a25c4f95674201e7d9afcd",
+    "viewer/analysis/test_foundation.gd": "2d63200a9b7e39053207a866d7544d5a75ee2824fdd51ab2d8a4b038a214370e"
+  },
+  "result": {
+    "category": "headless source/protocol; not rendered acceptance",
+    "checks": 157,
+    "failures": [],
+    "request_callback_ms": 0.199,
+    "worker": {
+      "guard": {
+        "baseline": {
+          "VmHWM": 37400576.0,
+          "VmPeak": 382689280.0,
+          "VmRSS": 37400576.0,
+          "VmSize": 382689280.0
+        },
+        "ceiling_bytes": 2147483648.0,
+        "enabled": true,
+        "reason": "runtime plus 1 GiB workspace and 256 MiB overhead fit"
+      },
+      "memory": {
+        "VmHWM": 37650432.0,
+        "VmPeak": 383741952.0,
+        "VmRSS": 37650432.0,
+        "VmSize": 382689280.0
+      },
+      "metrics": {
+        "charged_bytes": 0.0,
+        "cpu_seconds": 0.00177269399999999,
+        "decoded_bytes": 0.0,
+        "peak_charged_bytes": 1185592.0,
+        "read_bytes": 35094.0,
+        "seconds": 0.00178306300017538
+      }
+    }
+  },
+  "evidence_scope": "G4a source/protocol only; full A01-A23 and rendered acceptance pending",
+  "test_runs": {
+    "python": {
+      "tests": 53,
+      "status": "PASS"
+    },
+    "g3_scene": {
+      "tests": 23,
+      "status": "PASS",
+      "runtime": "/tmp/simscope-g4-validation/bin/python; scikit-image 0.26.0"
+    },
+    "g3_playback_headless": {
+      "checks": 2457,
+      "status": "PASS"
+    }
+  }
+}

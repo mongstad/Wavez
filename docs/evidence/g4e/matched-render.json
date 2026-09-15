@@ -1,0 +1,173 @@
+{
+  "status": "PASS for G4e matched-run preparation and sequential rendering; full G4f gate pending",
+  "python": {
+    "tests": 222,
+    "skips": 0,
+    "status": "PASS",
+    "command": "/tmp/simscope-g4-validation/bin/python -m unittest discover -s tests -q"
+  },
+  "native_job_validation": {
+    "checks": 7,
+    "status": "PASS",
+    "command": "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64 --headless --path viewer --log-file /tmp/g4-matched-job.log --script analysis/test_matched_job.gd -- --matched-job=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/matched-vk-1/pair/left/job.json",
+    "note": "Use an absolute job path. Final validation-only changes ran after the GPU captures."
+  },
+  "renders": [
+    {
+      "directory": "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/matched-gl-2",
+      "status": "PASS",
+      "renderer": "gl_compatibility",
+      "checks": 44,
+      "commands": [
+        {
+          "command": [
+            "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+            "--headless",
+            "--path",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+            "--log-file",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/matched-gl-2/left-input/godot.log",
+            "--script",
+            "analysis/test_render_state.gd",
+            "--",
+            "--g4-render-fixture=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/matched-gl-2/left-input",
+            "--g4-render-visible"
+          ],
+          "exit_code": 0,
+          "seconds": 1.1256936649988347
+        },
+        {
+          "command": [
+            "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+            "--headless",
+            "--path",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+            "--log-file",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/matched-gl-2/right-input/godot.log",
+            "--script",
+            "analysis/test_render_state.gd",
+            "--",
+            "--g4-render-fixture=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/matched-gl-2/right-input",
+            "--g4-render-visible"
+          ],
+          "exit_code": 0,
+          "seconds": 1.0973014510018402
+        },
+        {
+          "command": [
+            "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+            "--path",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+            "--rendering-method",
+            "gl_compatibility",
+            "--resolution",
+            "640x360",
+            "--audio-driver",
+            "Dummy",
+            "--log-file",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/matched-gl-2/native.log",
+            "--script",
+            "analysis/test_matched_render.gd",
+            "--",
+            "--matched-fixture=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/matched-gl-2",
+            "--render-pair"
+          ],
+          "exit_code": 0,
+          "seconds": 5.095154786999046
+        }
+      ],
+      "images": [
+        {
+          "path": "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/matched-gl-2/pair/left/frames/frame00000001.png",
+          "sha256": "de7e053262a824c77395867c14e686263f5c22b2fd2fe27f243e107dfff90fe6"
+        },
+        {
+          "path": "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/matched-gl-2/pair/right/frames/frame00000001.png",
+          "sha256": "de7e053262a824c77395867c14e686263f5c22b2fd2fe27f243e107dfff90fe6"
+        }
+      ]
+    },
+    {
+      "directory": "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/matched-vk-1",
+      "status": "PASS",
+      "renderer": "forward_plus",
+      "checks": 44,
+      "commands": [
+        {
+          "command": [
+            "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+            "--headless",
+            "--path",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+            "--log-file",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/matched-vk-1/left-input/godot.log",
+            "--script",
+            "analysis/test_render_state.gd",
+            "--",
+            "--g4-render-fixture=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/matched-vk-1/left-input",
+            "--g4-render-visible"
+          ],
+          "exit_code": 0,
+          "seconds": 1.0972526990008191
+        },
+        {
+          "command": [
+            "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+            "--headless",
+            "--path",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+            "--log-file",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/matched-vk-1/right-input/godot.log",
+            "--script",
+            "analysis/test_render_state.gd",
+            "--",
+            "--g4-render-fixture=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/matched-vk-1/right-input",
+            "--g4-render-visible"
+          ],
+          "exit_code": 0,
+          "seconds": 1.121593595999002
+        },
+        {
+          "command": [
+            "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+            "--path",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+            "--rendering-method",
+            "forward_plus",
+            "--resolution",
+            "640x360",
+            "--audio-driver",
+            "Dummy",
+            "--log-file",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/matched-vk-1/native.log",
+            "--script",
+            "analysis/test_matched_render.gd",
+            "--",
+            "--matched-fixture=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/matched-vk-1",
+            "--render-pair"
+          ],
+          "exit_code": 0,
+          "seconds": 6.353975997000816
+        }
+      ],
+      "images": [
+        {
+          "path": "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/matched-vk-1/pair/left/frames/frame00000001.png",
+          "sha256": "b95e86f26a6dbe4b03694971c351e2948a4bc8d6ff887b280bb93d025beca1ef"
+        },
+        {
+          "path": "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/matched-vk-1/pair/right/frames/frame00000001.png",
+          "sha256": "b95e86f26a6dbe4b03694971c351e2948a4bc8d6ff887b280bb93d025beca1ef"
+        }
+      ]
+    }
+  ],
+  "visual_inspection": "OpenGL left and Vulkan right frame 1 inspected: two endpoint markers and source scalar-colored particle line on black; paired pixels match within each renderer.",
+  "qualifications": [
+    "Initial editor parse found an unavailable token helper; fixed before successful native/GPU runs. Editor sandbox listener/settings warnings were not acceptance results.",
+    "Initial OpenGL 44-check pair used hidden particles; final OpenGL/Vulkan runs include visible source scalar colors.",
+    "OpenGL captures preceded the additional known-coordinate-unit guard; targeted tests and final Vulkan run include it.",
+    "No automatic coordinate registration or cross-source ID mapping. Positive value scales only for scenes; numerical negative-scale comparisons remain supported.",
+    "4000 frames/input maximum; total pair quota <=64 GiB. Recipes and input captures remain explicitly selected. Full G4f performance/lifecycle acceptance pending."
+  ]
+}

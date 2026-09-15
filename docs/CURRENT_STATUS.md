@@ -1,0 +1,93 @@
+# Current status
+
+As of **2026-09-13**, including G4 and PERF-001/002 maintenance reviewed and accepted by the user. Scientific simulations were not rerun. Historical results identify their recorded checkpoints. PERF-003 mesh maintenance was also reviewed and accepted by the owner on 2026-09-13; implementation checkpoint `7974c78`.
+
+| Area | Current state |
+|---|---|
+| Authoritative viewer/exporter | `SimScope/` |
+| Repository boundary | SimScope product code/docs/tests only; scientific simulations and research data are external |
+| Preferred new capture workflow | Explicit `SceneCapture` / `SceneReader`, **SIMSCP3**, normally `.ssc` |
+| Capture contract | SIMSCP3 / `.ssc` only; package 2.0.0 removes older capture APIs |
+| G0–G3 | Implemented: inspection, bounded storage/cache, typed identities, independent particle/mesh/volume layers, rendering and export |
+| Latest maintenance | PERF-003: bounded mesh preparation/prefetch and GPU position interpolation complete; reviewed and accepted by the owner (2026-09-13). [Mesh maintenance report](MESH_PLAYBACK_MAINTENANCE_REPORT.md). PERF-001/002 remain accepted: [report](PERFORMANCE_MAINTENANCE_REPORT.md). |
+| G4 | Implemented through G4f; A01–A23 PASS for declared fixtures and measured workloads. Accepted by the user. [Report](../G4_REPORT.md), [acceptance ledger](G4_ACCEPTANCE.md), [guide](G4_GUIDE.md). |
+| G5 | Local control/optional MCP: **NOT IMPLEMENTED / NOT STARTED** |
+| G6 | Events, broader adapters and release work: **NOT IMPLEMENTED / NOT STARTED** |
+
+The slider bug was reproduced on independent particle/volume cadences and a retained external layered capture: the union clock grew while the slider maximum stayed stale. The fix updates the range. The slider continues to represent **union sample index**, including in Physical-time mode. It does not represent a continuous percentage of physical elapsed time. The new regression passed 28 checks on each renderer and 25 on the actual capture; relevant G1–G3 regressions passed.
+
+The prior investigation associated all **113 callbacks above 50 ms** with particle source-pair changes, while the nominal one-second tail poll stayed below 3.1 ms. The focused optimization now skips unneeded hidden-particle work and prepares visible particle pairs on a CPU worker. On the exact retained `complete.ssc`, median visible transitions fell from **177–181 ms to about 20 ms**, and hidden transitions to about 2.6 ms. Both renderers had zero ≥50 ms callbacks in the final matrix and longer replenishment, 2× speed and loop controls. Cold startup and uncached seeks explicitly buffer; they do not synchronously rebuild the pair on the UI callback. All **3,168 regression checks and 122 performance assertions passed**, including deterministic visible/hidden video equality. These are retained historical measurements; current maintenance reports supersede the old investigation files.
+
+Automatic particle buffering estimates the full decoded/prepared capture, adds a 25% margin and transient working space, and selects full preload only within conservative physical-RAM headroom. Automatic full mode waits for all pairs before Play. Larger captures use an at-most-2-GiB rolling cache with a four-pair startup and up to eight pairs ahead; manual budgets and explicit safe full preload remain available. Fields use a separate bounded CPU preparation queue and one staged future texture per visible field, with at most one main-thread upload per process frame. Source values and independent physical clocks are preserved. Retained 02B/03B before/after measurements, memory limits and validation are in the [maintenance report](PERFORMANCE_MAINTENANCE_REPORT.md).
+
+Representative external captures informed G3 timeline/playback validation. Scientific interpretation remains outside SimScope and is not a product result or dependency.
+
+## Capture contract cleanup — accepted
+
+Older capture writers/readers and public API entry points were retired before the UX milestones. The active product contract is SIMSCP3 / `.ssc` only; replacement coverage uses repository-owned native scenes and synthetic fixtures.
+
+## UX1 and UX2 — accepted; UX3 on hold
+
+The [UX1 report](UX1_REPORT.md) records the current UI inventory, observed layout
+problems, technical coupling, proposed information hierarchy, concrete design
+tokens and reusable component contracts. The [design specification](UX1_DESIGN_SYSTEM.md)
+and [regression workflow matrix](UX1_REGRESSION_WORKFLOWS.md) use the accepted
+SIMSCP3 implementation as their baseline. Product UI, rendering, storage and
+scientific code are unchanged. Native audit evidence includes combined layers,
+exact-ID selection, population analysis, dialogs and scaled layouts.
+
+The owner accepted UX1 on 2026-09-13 at `229d4ea91b0b55e6c151b1a58ae15b59fdcdcbd5`.
+The implementation report and evidence retain their original review-time state.
+The owner subsequently authorized UX2. The [UX2 report](UX2_REPORT.md) records the
+completed opt-in theme, primitive component library, bundled numeric font and UI
+Laboratory, with native state/scaling/numeric/contrast validation and production
+snapshot/pixel/source isolation evidence. [Theme documentation](UX2_THEME_LIBRARY.md)
+records the measured widget metrics and proposed adjustments for review.
+The owner reviewed and accepted UX2 on 2026-09-13 at
+`5fae711aa042d16a72ce4e6283e030aa69a32097`. Its milestone report and retained
+evidence preserve their original review-time state.
+**UX3 has not started and is on hold until further notice.** UX2 acceptance does
+not authorize a production shell or panel migration; wait for an explicit owner
+instruction under the [UX plan](../UX_IMPLEMENTATION_PLAN.md).
+
+## Current limits
+
+G3 permits at most one particle object per capture and supports one translucent volume and one derived isosurface at a time; multiple meshes and slices are supported. Interactive particle, field and mesh CPU preparation is asynchronous in the accepted maintenance implementation; field textures and mesh surfaces are staged on the main thread. Stable mesh positions interpolate on the GPU, while scalar colors hold the earlier source sample. Initial opening and explicit scientific inspection/export retain synchronous work. Mesh inspection positions and deformed normals are materialized on demand; rendering remains unshaded. Source arrays and probes retain scientific precision, while GPU previews use float32 and may reduce resolution; isosurfaces are explicitly approximate. Budgets are separate allocation limits, not a whole-process memory guarantee. The earlier full G3 demo completed about 19.2 samples/s; neither that result nor the new particle controls establish universal 30 FPS performance. Concurrent CuPy simulation/viewer performance has not been validated. Detailed contracts and measurements are in the [handbook](SIMSCOPE_HANDBOOK.md) and [format/API guide](CAPTURE_FORMAT_AND_API.md).
+
+No AMR, general vector-basis transformation, reconstruction of exact fields from tracers, arbitrary transparent-volume compositing, background archive queue, writer resume, or per-record fsync is implemented. Existing inspection recipes and deterministic export are implemented; do not confuse these with the future G5 control service.
+
+## Completed authorized milestone
+
+Documentation consolidation was committed separately as `4d9e99b`, followed by
+G4a–G4f under the approved [design](../G4_DESIGN.md). All A01–A23 have specific
+PASS evidence in the [ledger](G4_ACCEPTANCE.md); no acceptance ID was removed or
+weakened. The synthetic demo supplies both a source-grid mass oracle and a
+tracer-only refusal example. The user reviewed and accepted G4; further milestones require
+new authorization. No external scientific simulation was rerun.
+
+G4 numerical work runs on a bounded private worker, preserves native clocks and
+source values, and exports full results with source/units/identity provenance.
+Selections, recipes, PNGs and matched clips retain exact sampling state. Analysis
+pauses during playback underflow. Worker memory, disposable cache, exact member
+assets, viewer previews and GPU overlays have separate finite budgets; oversized
+requests refuse. The 100k-particle idle comparison stayed below the 10% regression
+target on both renderers. See the final report for workload-specific measurements
+and limits; this does not establish universal frame rates or whole-machine limits.
+
+Further playback work should be driven by measured remaining costs: particle position packing, large mesh/volume GPU upload cost, or large trail histories. The hidden-particle and proactive preparation work is complete. External scientific research is managed separately from the SimScope roadmap.
+
+
+## Licensing baseline
+
+PolyForm Noncommercial 1.0.0 is the intended license for original SimScope material in this fresh source snapshot. Branding is separately reserved. Separately licensed bundled material and external dependency notes are tracked in [THIRD_PARTY_LICENSES.md](../THIRD_PARTY_LICENSES.md); repository-reset scope is recorded in [PROVENANCE.md](../PROVENANCE.md).
+
+## Release checklist
+
+- [ ] Before first public release: review project license, contributor policy/CLA requirements, third-party licensing, copyright ownership, branding/trademark policy, and repository contents.
+- [ ] Before any public binary distribution: audit the exact bundled engine/runtime/encoder/dependency artifacts and preserve all required third-party notices/source obligations.
+
+Track third-party licensing in [THIRD_PARTY_LICENSES.md](../THIRD_PARTY_LICENSES.md).
+
+## Repository baseline
+
+The current repository is a fresh source snapshot with prior development Git history intentionally archived outside this repository. Scientific simulations, raw captures and research projects remain external. SIMSCP3 is the only supported capture format for new work. See [repository boundaries](REPOSITORY_BOUNDARY.md), [capture policy](CAPTURE_FORMAT_POLICY.md), [evidence](EVIDENCE_INDEX.md), and [provenance](../PROVENANCE.md).

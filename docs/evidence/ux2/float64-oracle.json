@@ -1,0 +1,1202 @@
+[
+  {
+    "text": "-0.0",
+    "little_endian_hex": "0000000000000080"
+  },
+  {
+    "text": "0.0",
+    "little_endian_hex": "0000000000000000"
+  },
+  {
+    "text": "1.2345678901234567e-19",
+    "little_endian_hex": "fcdf7acc1038023c"
+  },
+  {
+    "text": "2.2250738585072014e-308",
+    "little_endian_hex": "0000000000001000"
+  },
+  {
+    "text": "4.9406564584124654e-324",
+    "little_endian_hex": "0100000000000000"
+  },
+  {
+    "text": "1.7976931348623157e308",
+    "little_endian_hex": "ffffffffffffef7f"
+  },
+  {
+    "text": "1.00000000000000011102230246251565404236316680908203125",
+    "little_endian_hex": "000000000000f03f"
+  },
+  {
+    "text": "1.00000000000000033306690738754696212708950042724609375",
+    "little_endian_hex": "020000000000f03f"
+  },
+  {
+    "text": "2.5e-324",
+    "little_endian_hex": "0100000000000000"
+  },
+  {
+    "text": "2.225073858507201e-308",
+    "little_endian_hex": "ffffffffffff0f00"
+  },
+  {
+    "text": "1e-300",
+    "little_endian_hex": "59f3f8c21f6ea501"
+  },
+  {
+    "text": "0.1",
+    "little_endian_hex": "9a9999999999b93f"
+  },
+  {
+    "text": "+.125",
+    "little_endian_hex": "000000000000c03f"
+  },
+  {
+    "text": "12.",
+    "little_endian_hex": "0000000000002840"
+  },
+  {
+    "text": "00001.25",
+    "little_endian_hex": "000000000000f43f"
+  },
+  {
+    "text": "-3.141592653589793238462643383279502884",
+    "little_endian_hex": "182d4454fb2109c0"
+  },
+  {
+    "text": "1.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001",
+    "little_endian_hex": "000000000000f03f"
+  },
+  {
+    "text": "0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000022250738585072014",
+    "little_endian_hex": "0000000000001000"
+  },
+  {
+    "text": "-4.1490573823987296e-158",
+    "little_endian_hex": "92017218903a429f"
+  },
+  {
+    "text": "-1.1341546461499373e+43",
+    "little_endian_hex": "1ec152e73946e0c8"
+  },
+  {
+    "text": "-6.0731719090735555e+193",
+    "little_endian_hex": "56aa95305a9f2ae8"
+  },
+  {
+    "text": "-9.3476544561419539e+78",
+    "little_endian_hex": "590e943b962e54d0"
+  },
+  {
+    "text": "-1.3514255965667817e+104",
+    "little_endian_hex": "5986d8e44f2b8ed5"
+  },
+  {
+    "text": "-3.0968750310262766e+67",
+    "little_endian_hex": "d5741bca0d61f2cd"
+  },
+  {
+    "text": "1.5542195395795194e+155",
+    "little_endian_hex": "44a74c5f0d2f2760"
+  },
+  {
+    "text": "5.4883290319564707e+101",
+    "little_endian_hex": "13e8a26b8e5d0f55"
+  },
+  {
+    "text": "2.6872551221955796e+141",
+    "little_endian_hex": "ba54000d0f354c5d"
+  },
+  {
+    "text": "-1.4382736684068051e+126",
+    "little_endian_hex": "852e5b6571ff20da"
+  },
+  {
+    "text": "-1.6015267835997075e+212",
+    "little_endian_hex": "c3467d354d72feeb"
+  },
+  {
+    "text": "-2.1176066013752742e-75",
+    "little_endian_hex": "c5d5ce8a77a66eb0"
+  },
+  {
+    "text": "-2.067576888402513e-76",
+    "little_endian_hex": "33a45622dff037b0"
+  },
+  {
+    "text": "1.2250511467604339e-106",
+    "little_endian_hex": "3de378ed55fbf129"
+  },
+  {
+    "text": "1.2776770205195341e-238",
+    "little_endian_hex": "d73167b1a79f8a0e"
+  },
+  {
+    "text": "8.7059832885515457e+306",
+    "little_endian_hex": "eeef487ea3cba87f"
+  },
+  {
+    "text": "-1.6626732956480473e+208",
+    "little_endian_hex": "45a41d24e0e429eb"
+  },
+  {
+    "text": "2.1094141077991659e+297",
+    "little_endian_hex": "3a63bb67a8cda97d"
+  },
+  {
+    "text": "5.7837389327552972e-157",
+    "little_endian_hex": "7ff9f26d6bc37f1f"
+  },
+  {
+    "text": "6768008023.5927067",
+    "little_endian_hex": "ba7b79b57936f941"
+  },
+  {
+    "text": "-3.0265474325903836e+90",
+    "little_endian_hex": "e59e7cb8acc5b7d2"
+  },
+  {
+    "text": "-4.0480678519018682e-101",
+    "little_endian_hex": "cc3f2015a6aa16ab"
+  },
+  {
+    "text": "2.6424825917033049e+150",
+    "little_endian_hex": "f2a8f74f16d5295f"
+  },
+  {
+    "text": "-1.5856608814475208e+275",
+    "little_endian_hex": "c96aba86cc5112f9"
+  },
+  {
+    "text": "2.3332999542077495e+257",
+    "little_endian_hex": "9b4b8f365b145f75"
+  },
+  {
+    "text": "4.0884251689823268e-50",
+    "little_endian_hex": "b4df76dedd97ae35"
+  },
+  {
+    "text": "-3.3718585376170762e-271",
+    "little_endian_hex": "d17ef89e13cdc687"
+  },
+  {
+    "text": "-3.6282819636029679e-204",
+    "little_endian_hex": "d5a67b837c33b295"
+  },
+  {
+    "text": "-3.4231125889049049e-37",
+    "little_endian_hex": "4950700ae11e5db8"
+  },
+  {
+    "text": "-4.1347705566262497e+138",
+    "little_endian_hex": "52f33a4bb438b6dc"
+  },
+  {
+    "text": "7.9363593776078948e+251",
+    "little_endian_hex": "f04a555939b63b74"
+  },
+  {
+    "text": "-1.3142704729588527e+154",
+    "little_endian_hex": "e626487b065eefdf"
+  },
+  {
+    "text": "-5.1551911301253334e+306",
+    "little_endian_hex": "cabf67ee6c5d9dff"
+  },
+  {
+    "text": "4.2183795976205959e+298",
+    "little_endian_hex": "b11e71dd1820f07d"
+  },
+  {
+    "text": "7.6448310610553144e-252",
+    "little_endian_hex": "7572bd543606cc0b"
+  },
+  {
+    "text": "-1.0778048340828752e+260",
+    "little_endian_hex": "df222dd92b0aecf5"
+  },
+  {
+    "text": "-583747006525467.75",
+    "little_endian_hex": "de80b387519700c3"
+  },
+  {
+    "text": "7.2220009847035541e-87",
+    "little_endian_hex": "f3e0e5e7bcbb0c2e"
+  },
+  {
+    "text": "-4.8028959736950641e+153",
+    "little_endian_hex": "b06c794104edd6df"
+  },
+  {
+    "text": "-6.2410926508517649e-20",
+    "little_endian_hex": "835241e3a26bf2bb"
+  },
+  {
+    "text": "-5.5696989081162114e+265",
+    "little_endian_hex": "75a666ba25a31bf7"
+  },
+  {
+    "text": "4.6152784808732884e-293",
+    "little_endian_hex": "c985aef5f1793d03"
+  },
+  {
+    "text": "-3.0960152002071219e+27",
+    "little_endian_hex": "3a7c9c70ed01a4c5"
+  },
+  {
+    "text": "3.4089350413292044e-135",
+    "little_endian_hex": "6c203b7e6cd20324"
+  },
+  {
+    "text": "4.9806943569766929e-244",
+    "little_endian_hex": "1a6cd656ec346b0d"
+  },
+  {
+    "text": "-1.3699593794337537e-124",
+    "little_endian_hex": "6e7100f1112f37a6"
+  },
+  {
+    "text": "1.2212973129943344e-38",
+    "little_endian_hex": "b15c889b999f1038"
+  },
+  {
+    "text": "2.0643818730182084e-208",
+    "little_endian_hex": "6fd8be5992f7d014"
+  },
+  {
+    "text": "-1.1553751424885663e+117",
+    "little_endian_hex": "c39dafaf9f523dd8"
+  },
+  {
+    "text": "-4.1967581653770581e-228",
+    "little_endian_hex": "9a78c9008b73b990"
+  },
+  {
+    "text": "2.2119870569181211e+61",
+    "little_endian_hex": "a13ad220cc87ab4c"
+  },
+  {
+    "text": "-3.7816055254253715e+132",
+    "little_endian_hex": "e2327b518b4f75db"
+  },
+  {
+    "text": "-2.8895054597173944e-43",
+    "little_endian_hex": "1a1dc0c876c619b7"
+  },
+  {
+    "text": "-6.4588465116297509e+75",
+    "little_endian_hex": "104a25b8278faccf"
+  },
+  {
+    "text": "-1.1268333513431917e-291",
+    "little_endian_hex": "5b4de227637d8683"
+  },
+  {
+    "text": "2.2822302904723657e+176",
+    "little_endian_hex": "c1198ae6f6d58c64"
+  },
+  {
+    "text": "-21260992.973581091",
+    "little_endian_hex": "c4c9930fac4674c1"
+  },
+  {
+    "text": "-4.3719826609081053e+149",
+    "little_endian_hex": "c6073b4a891801df"
+  },
+  {
+    "text": "-9.8065108617107237e-50",
+    "little_endian_hex": "219cbdbb6258c2b5"
+  },
+  {
+    "text": "-6.1244309987702394e-52",
+    "little_endian_hex": "397291d287544db5"
+  },
+  {
+    "text": "-2.5848017270717936e-195",
+    "little_endian_hex": "abf75841ee268897"
+  },
+  {
+    "text": "-1.4006575998866082e-275",
+    "little_endian_hex": "243c81df4109df86"
+  },
+  {
+    "text": "-6.6990278528692763e-35",
+    "little_endian_hex": "6dce0f13e742d6b8"
+  },
+  {
+    "text": "-4.8543989266205738e-223",
+    "little_endian_hex": "b78a0ae4ec75c691"
+  },
+  {
+    "text": "-4.6833162461922886e-235",
+    "little_endian_hex": "618e23044dd3478f"
+  },
+  {
+    "text": "2.1124213407972765e-184",
+    "little_endian_hex": "81da56360eb9cc19"
+  },
+  {
+    "text": "-1.9656019280362432e-148",
+    "little_endian_hex": "6585e8a7581b44a1"
+  },
+  {
+    "text": "2.8529971508482503e-288",
+    "little_endian_hex": "fac5a08ca8cd3b04"
+  },
+  {
+    "text": "1.9972650667021161e+269",
+    "little_endian_hex": "55056f691e32d877"
+  },
+  {
+    "text": "-2.0464523331420557e-228",
+    "little_endian_hex": "c22fc5fc4ed2a890"
+  },
+  {
+    "text": "-2.4798033699881938e+141",
+    "little_endian_hex": "81eb35cf9a074add"
+  },
+  {
+    "text": "-1.2078054269722311e+238",
+    "little_endian_hex": "4795269c51ad5df1"
+  },
+  {
+    "text": "2.1257711603935413e-165",
+    "little_endian_hex": "ce428a9a9456bf1d"
+  },
+  {
+    "text": "7.7641312862934319e-146",
+    "little_endian_hex": "2bbc25c13206cf21"
+  },
+  {
+    "text": "3.989726982104014e-289",
+    "little_endian_hex": "ef7d9fa1db1a0f04"
+  },
+  {
+    "text": "2.9032198224589848e+180",
+    "little_endian_hex": "470bbb158e636665"
+  },
+  {
+    "text": "5.3158679970109622e+156",
+    "little_endian_hex": "ad6742d89bc77860"
+  },
+  {
+    "text": "7.1967271259666721e-161",
+    "little_endian_hex": "30098d715030b01e"
+  },
+  {
+    "text": "8.1047602626691294e-19",
+    "little_endian_hex": "f5fae5c9bae62d3c"
+  },
+  {
+    "text": "2.3531460490139752e+289",
+    "little_endian_hex": "dda630af3051037c"
+  },
+  {
+    "text": "2.2991494666435822e+75",
+    "little_endian_hex": "0b91b8051755944f"
+  },
+  {
+    "text": "2.6345063412760209e-257",
+    "little_endian_hex": "0cefad470d51a90a"
+  },
+  {
+    "text": "1.5363624199226536e-303",
+    "little_endian_hex": "138d1d457bdb1001"
+  },
+  {
+    "text": "-9.4052490070403274e-305",
+    "little_endian_hex": "a7e1bf19f082d080"
+  },
+  {
+    "text": "-2.213872267292803e-196",
+    "little_endian_hex": "140cb230868c5097"
+  },
+  {
+    "text": "-7.3456479689144211e-30",
+    "little_endian_hex": "10c4ad1d999fe2b9"
+  },
+  {
+    "text": "-1.8094591150975927e+192",
+    "little_endian_hex": "1e21c885e061d9e7"
+  },
+  {
+    "text": "5.5519487071822241e-82",
+    "little_endian_hex": "93e1613d3dda102f"
+  },
+  {
+    "text": "4.2972525574930273e-182",
+    "little_endian_hex": "6b6fae0208d3461a"
+  },
+  {
+    "text": "9.9404382153296946e-249",
+    "little_endian_hex": "9ac6bf9ceeca710c"
+  },
+  {
+    "text": "-3.1505939985313945e+45",
+    "little_endian_hex": "a6bac273e1a861c9"
+  },
+  {
+    "text": "-2.8228286292410761e+255",
+    "little_endian_hex": "d56601976310f8f4"
+  },
+  {
+    "text": "3.3379958228280439e+162",
+    "little_endian_hex": "f6961efca0adad61"
+  },
+  {
+    "text": "1.9518737425391288e-65",
+    "little_endian_hex": "36056dffca718032"
+  },
+  {
+    "text": "-2.5950850446236608e+214",
+    "little_endian_hex": "b036ee897e4573ec"
+  },
+  {
+    "text": "-7.8366577865001719e-300",
+    "little_endian_hex": "0d90930f1cfed481"
+  },
+  {
+    "text": "-1.6522214135381797e-46",
+    "little_endian_hex": "560bc1251e2f6eb6"
+  },
+  {
+    "text": "-1.1219401827388612e+260",
+    "little_endian_hex": "3c3f4bc21c30edf5"
+  },
+  {
+    "text": "-5.6853582485989669e-207",
+    "little_endian_hex": "c6b8497370341d95"
+  },
+  {
+    "text": "1.9578641334188677e+54",
+    "little_endian_hex": "27877000e970344b"
+  },
+  {
+    "text": "-2.6317850272577196e-244",
+    "little_endian_hex": "b51597f67dc05c8d"
+  },
+  {
+    "text": "-3.4493497836802478e-33",
+    "little_endian_hex": "be75a2e8f8e831b9"
+  },
+  {
+    "text": "-4.4838710944187174e+306",
+    "little_endian_hex": "7f2247817d8a99ff"
+  },
+  {
+    "text": "-1.0701620186805403e-244",
+    "little_endian_hex": "a7e58b5cfd61478d"
+  },
+  {
+    "text": "-5.8122290222743211e+139",
+    "little_endian_hex": "00457de7dd85f3dc"
+  },
+  {
+    "text": "-7.2242476710679252e-153",
+    "little_endian_hex": "7834c8f31f3758a0"
+  },
+  {
+    "text": "-6.306968970023095e-106",
+    "little_endian_hex": "55ed8ec3df2417aa"
+  },
+  {
+    "text": "-17389.727495385567",
+    "little_endian_hex": "40ce488f6efbd0c0"
+  },
+  {
+    "text": "1.7641667285307902e+226",
+    "little_endian_hex": "f087659c9ad4e76e"
+  },
+  {
+    "text": "-1.003317675022782e-70",
+    "little_endian_hex": "86133b1fab2866b1"
+  },
+  {
+    "text": "-3.0460273300772279e+298",
+    "little_endian_hex": "3e8050e6ab49e7fd"
+  },
+  {
+    "text": "-5.7329727652576402e-262",
+    "little_endian_hex": "e54de7376d0db289"
+  },
+  {
+    "text": "2.2767311221452366e-50",
+    "little_endian_hex": "0d798eb15909a135"
+  },
+  {
+    "text": "-4.8133091813804762e-175",
+    "little_endian_hex": "10227b23ea79be9b"
+  },
+  {
+    "text": "-8.1528677444651188e+96",
+    "little_endian_hex": "6918077d07890ed4"
+  },
+  {
+    "text": "-8.0238298163188449e+250",
+    "little_endian_hex": "6f315628ee6906f4"
+  },
+  {
+    "text": "-5.919714965090743e+69",
+    "little_endian_hex": "87b25abe61726bce"
+  },
+  {
+    "text": "-1.0396393184170274e-255",
+    "little_endian_hex": "e152f2ab6e38ff8a"
+  },
+  {
+    "text": "-5.3764107462586427e+108",
+    "little_endian_hex": "b399aa74645082d6"
+  },
+  {
+    "text": "2.9329137725497591e+223",
+    "little_endian_hex": "1285ec71cf48546e"
+  },
+  {
+    "text": "4.448096795414693e+23",
+    "little_endian_hex": "f2113e964b8cd744"
+  },
+  {
+    "text": "5.8306880172659901e-272",
+    "little_endian_hex": "4f953328e08a9f07"
+  },
+  {
+    "text": "7.0740278172705243e+145",
+    "little_endian_hex": "f2caa95314a9365e"
+  },
+  {
+    "text": "-1.9805609966057552e-145",
+    "little_endian_hex": "3848f3f3f5c8e3a1"
+  },
+  {
+    "text": "9.5914257804953659e+191",
+    "little_endian_hex": "eb60ef8cade8ca67"
+  },
+  {
+    "text": "-5.6719944490034196e+214",
+    "little_endian_hex": "d39d378b7d0f85ec"
+  },
+  {
+    "text": "4.0465272276420378e-119",
+    "little_endian_hex": "902d39d3731f5a27"
+  },
+  {
+    "text": "-1.7658928396487159e+257",
+    "little_endian_hex": "a720dfbb8b8557f5"
+  },
+  {
+    "text": "1.4222983305464603e-81",
+    "little_endian_hex": "71ea8c041c96252f"
+  },
+  {
+    "text": "2.0189548618504921e-286",
+    "little_endian_hex": "4e708abf23be9e04"
+  },
+  {
+    "text": "1.0658952251954045e+222",
+    "little_endian_hex": "c6a9665d0997076e"
+  },
+  {
+    "text": "1.4324338710372252e-212",
+    "little_endian_hex": "fd24bd23014af313"
+  },
+  {
+    "text": "-8.2960782491723711e+270",
+    "little_endian_hex": "7394886932682ff8"
+  },
+  {
+    "text": "-6.923766386798195e-236",
+    "little_endian_hex": "4223c7f7b62d1c8f"
+  },
+  {
+    "text": "-1.056514579372126e-162",
+    "little_endian_hex": "e6257329976b4e9e"
+  },
+  {
+    "text": "3.5119798980727895e-278",
+    "little_endian_hex": "181c675ff9eb5306"
+  },
+  {
+    "text": "9284918.9886821993",
+    "little_endian_hex": "da48a3dfa6b56141"
+  },
+  {
+    "text": "4.6823036099182575e+305",
+    "little_endian_hex": "ebf81f8e4756657f"
+  },
+  {
+    "text": "3.8693383344441461e-120",
+    "little_endian_hex": "9fb481cab2fb2327"
+  },
+  {
+    "text": "-2.0981151473708984e-66",
+    "little_endian_hex": "98447b4b54484cb2"
+  },
+  {
+    "text": "1.0122810881004903e+58",
+    "little_endian_hex": "70f5083b71cdf94b"
+  },
+  {
+    "text": "-3.4465863972054978e-14",
+    "little_endian_hex": "2849a6f10d6723bd"
+  },
+  {
+    "text": "2.1458249570817127e+139",
+    "little_endian_hex": "510a5880add4dc5c"
+  },
+  {
+    "text": "-4.7892779711865207e+189",
+    "little_endian_hex": "1e7a0e93d63251e7"
+  },
+  {
+    "text": "1.2237792718005113e+145",
+    "little_endian_hex": "8c52fb61835c0f5e"
+  },
+  {
+    "text": "1.7608843781201736e-267",
+    "little_endian_hex": "2e6809ec1f128d08"
+  },
+  {
+    "text": "-5.4850726044814246e+185",
+    "little_endian_hex": "0adba0d5ce2280e6"
+  },
+  {
+    "text": "1.3720819784560888e-21",
+    "little_endian_hex": "3457e337fbea993b"
+  },
+  {
+    "text": "1.1306704855040952e+254",
+    "little_endian_hex": "5b56c6b90bd8ae74"
+  },
+  {
+    "text": "1.1657294832059914e+222",
+    "little_endian_hex": "ed39e7beaacc096e"
+  },
+  {
+    "text": "3.572455659075613e+145",
+    "little_endian_hex": "6676472835e3265e"
+  },
+  {
+    "text": "2.517574499481743e-22",
+    "little_endian_hex": "50ea8982b205733b"
+  },
+  {
+    "text": "-1.5924197800856432e-174",
+    "little_endian_hex": "33b3dbaae634d99b"
+  },
+  {
+    "text": "-1.5459360050314325e-268",
+    "little_endian_hex": "2ea0c3e7f06a5488"
+  },
+  {
+    "text": "-5.1359957172832832e-108",
+    "little_endian_hex": "4973272ecc1fa8a9"
+  },
+  {
+    "text": "-6.2624632437523777e+79",
+    "little_endian_hex": "2d50e4eeb1e680d0"
+  },
+  {
+    "text": "-2.4465622458584746e-185",
+    "little_endian_hex": "ebd38f96ec9c9a99"
+  },
+  {
+    "text": "-5.6184530017877607e+273",
+    "little_endian_hex": "68652cda89c5c4f8"
+  },
+  {
+    "text": "-1.7668468549971646e-48",
+    "little_endian_hex": "55529d7672a804b6"
+  },
+  {
+    "text": "-5.7308523296023632e+54",
+    "little_endian_hex": "cde78b249cea4dcb"
+  },
+  {
+    "text": "-7.8495744946218524e-227",
+    "little_endian_hex": "1017f406a1c0fd90"
+  },
+  {
+    "text": "-1.6648687654440957e+152",
+    "little_endian_hex": "040d35ce2a6e89df"
+  },
+  {
+    "text": "4.9771933342739475e+21",
+    "little_endian_hex": "0b8c73ed06dd7044"
+  },
+  {
+    "text": "6.3844097038133927e+241",
+    "little_endian_hex": "ada4c84f3c262372"
+  },
+  {
+    "text": "9.9831509698305141e+306",
+    "little_endian_hex": "c381d351d66eac7f"
+  },
+  {
+    "text": "-5.3985609286860603e-292",
+    "little_endian_hex": "0b1b58f5a08c7583"
+  },
+  {
+    "text": "2.1200651883732701e+161",
+    "little_endian_hex": "d9058311c9286e61"
+  },
+  {
+    "text": "4.4208366898910624e+266",
+    "little_endian_hex": "60acdafab16b4b77"
+  },
+  {
+    "text": "-8.3247966916606987e+210",
+    "little_endian_hex": "c44d5b6e6952b9eb"
+  },
+  {
+    "text": "-1.5108280509686992e+227",
+    "little_endian_hex": "36417a83ad8219ef"
+  },
+  {
+    "text": "-6.7770053568786523e+284",
+    "little_endian_hex": "15d6e232d43a12fb"
+  },
+  {
+    "text": "4.6105976408593929e-259",
+    "little_endian_hex": "9fa62a751c5b4c0a"
+  },
+  {
+    "text": "1.8358124682120726e-137",
+    "little_endian_hex": "2a48e748c8538b23"
+  },
+  {
+    "text": "-30993540459890.414",
+    "little_endian_hex": "6a722df83e30bcc2"
+  },
+  {
+    "text": "1.6654614711863476e+255",
+    "little_endian_hex": "320b70063a65ec74"
+  },
+  {
+    "text": "-8.8856220263909835e-256",
+    "little_endian_hex": "07109a47ffaefa8a"
+  },
+  {
+    "text": "-3.0255766147462865e-120",
+    "little_endian_hex": "af29af4a4d401fa7"
+  },
+  {
+    "text": "-6.8179941259507895e-106",
+    "little_endian_hex": "e2139f97f00419aa"
+  },
+  {
+    "text": "-2.376671708032993e-159",
+    "little_endian_hex": "0a06d2f8f9b4009f"
+  },
+  {
+    "text": "1.8591905743065635e+51",
+    "little_endian_hex": "19dac57270e0934a"
+  },
+  {
+    "text": "3.3130759100961526e+183",
+    "little_endian_hex": "925eb9e065f30866"
+  },
+  {
+    "text": "-2.5331688529390976e+231",
+    "little_endian_hex": "cb0ef1db3e1bfaef"
+  },
+  {
+    "text": "-2.2742283630113447e+198",
+    "little_endian_hex": "62edc0fe8d6c1ee9"
+  },
+  {
+    "text": "-1.3752625992949905e-161",
+    "little_endian_hex": "068eeb2daebf889e"
+  },
+  {
+    "text": "2.8275167920612969e+286",
+    "little_endian_hex": "2ed93589b3c4677b"
+  },
+  {
+    "text": "-2.375784726334054e+19",
+    "little_endian_hex": "637662434d9bf4c3"
+  },
+  {
+    "text": "6.5480308595325911e-267",
+    "little_endian_hex": "65c4c1e99306ab08"
+  },
+  {
+    "text": "2.3122969932277975e+197",
+    "little_endian_hex": "21c4988824bfe868"
+  },
+  {
+    "text": "-1.9576477325239269e+260",
+    "little_endian_hex": "cfed8b77f576f9f5"
+  },
+  {
+    "text": "-8.8878340942236578e-273",
+    "little_endian_hex": "7199c1447a3b7387"
+  },
+  {
+    "text": "1.3190878781314625e+123",
+    "little_endian_hex": "55b7143243ed7f59"
+  },
+  {
+    "text": "-5.7228169601502729e-129",
+    "little_endian_hex": "fcce457d26bc4fa5"
+  },
+  {
+    "text": "1.2439775368436057e+183",
+    "little_endian_hex": "d7e0ac2d9ebcf265"
+  },
+  {
+    "text": "1.7336392779369395e-192",
+    "little_endian_hex": "442ad61075a31f18"
+  },
+  {
+    "text": "-2.7994490471635232e-10",
+    "little_endian_hex": "38aac0c4d73cf3bd"
+  },
+  {
+    "text": "5.9137003608740235e+106",
+    "little_endian_hex": "5df4b03cddc81956"
+  },
+  {
+    "text": "-1.0798286419250097e+241",
+    "little_endian_hex": "f0f9044e20e9f9f1"
+  },
+  {
+    "text": "-1.5607640836981866e-56",
+    "little_endian_hex": "b44405c2207e58b4"
+  },
+  {
+    "text": "-1.7019611008793708e+36",
+    "little_endian_hex": "2ced1e93927c74c7"
+  },
+  {
+    "text": "-5.1974614610581959e-10",
+    "little_endian_hex": "56166446bcdb01be"
+  },
+  {
+    "text": "-3.6259542597873417e-15",
+    "little_endian_hex": "8960d6cd7054f0bc"
+  },
+  {
+    "text": "2.0686279159301938e-48",
+    "little_endian_hex": "55a34787b92f0836"
+  },
+  {
+    "text": "-4.6818678496655401e-212",
+    "little_endian_hex": "834b6966dc850f94"
+  },
+  {
+    "text": "1.9357180641399734e+52",
+    "little_endian_hex": "ea6c1a385cdec94a"
+  },
+  {
+    "text": "-7.9600582019540329e+78",
+    "little_endian_hex": "5d4b1a52a42f51d0"
+  },
+  {
+    "text": "2.0526475110087949e+230",
+    "little_endian_hex": "949b9e1664ecc06f"
+  },
+  {
+    "text": "-3.5265266042212896e+247",
+    "little_endian_hex": "ef16992dc42c54f3"
+  },
+  {
+    "text": "8.4288626933388634e-204",
+    "little_endian_hex": "3581191a3a24c515"
+  },
+  {
+    "text": "124898783.78258972",
+    "little_endian_hex": "335f217f37c79d41"
+  },
+  {
+    "text": "-1.4071947660064316e-102",
+    "little_endian_hex": "a6bb446acc36c9aa"
+  },
+  {
+    "text": "6.7292181840714865e-62",
+    "little_endian_hex": "e4cc2fa2b1ae3b33"
+  },
+  {
+    "text": "-5.1306527542278029e+277",
+    "little_endian_hex": "6d40457d912797f9"
+  },
+  {
+    "text": "5.5324776337301025e-196",
+    "little_endian_hex": "dde5081e8cad6417"
+  },
+  {
+    "text": "4.4599116248282894e+119",
+    "little_endian_hex": "9385de867f1bc658"
+  },
+  {
+    "text": "-1.7634115481155976e+242",
+    "little_endian_hex": "af6192b421723af2"
+  },
+  {
+    "text": "1.6910719388869821e+17",
+    "little_endian_hex": "7b9765c650c68243"
+  },
+  {
+    "text": "1.803803852301197e+301",
+    "little_endian_hex": "2d380e8a4eef7a7e"
+  },
+  {
+    "text": "-1.042938896232117e+120",
+    "little_endian_hex": "357879af4bd9d9d8"
+  },
+  {
+    "text": "2.2694780698635031e+174",
+    "little_endian_hex": "6e26360e0f5a2264"
+  },
+  {
+    "text": "3.363147869021045e-152",
+    "little_endian_hex": "fb37a85eca2e7c20"
+  },
+  {
+    "text": "-2.6537799891718355e-77",
+    "little_endian_hex": "dcc18a723b9508b0"
+  },
+  {
+    "text": "9.1489845535154983e+232",
+    "little_endian_hex": "ab7dd04609774d70"
+  },
+  {
+    "text": "1.064370468094985e-115",
+    "little_endian_hex": "f11360347cc61028"
+  },
+  {
+    "text": "-4.8334306492393084e+31",
+    "little_endian_hex": "1f7d038a841083c6"
+  },
+  {
+    "text": "-1.001708670827751e+281",
+    "little_endian_hex": "b1ff4916df1246fa"
+  },
+  {
+    "text": "5.7359136873216496e+293",
+    "little_endian_hex": "7718688145bdec7c"
+  },
+  {
+    "text": "9.0255531547410635e-286",
+    "little_endian_hex": "5552d5acd72dc104"
+  },
+  {
+    "text": "2.6033890238914504e+257",
+    "little_endian_hex": "513bef2bab566175"
+  },
+  {
+    "text": "-1.2264261238692645e-256",
+    "little_endian_hex": "38e629d4b676cd8a"
+  },
+  {
+    "text": "-3.0535169256670722e-286",
+    "little_endian_hex": "0344a10a7f3fa784"
+  },
+  {
+    "text": "1.956301342888773e+286",
+    "little_endian_hex": "b097318ce171607b"
+  },
+  {
+    "text": "-5.6773935916725076e+114",
+    "little_endian_hex": "f4dd09b28171c2d7"
+  },
+  {
+    "text": "-9.4185788671366898e+67",
+    "little_endian_hex": "c3c97cc1c7f20bce"
+  },
+  {
+    "text": "9.3338936825861602e-192",
+    "little_endian_hex": "87246247ec4a4518"
+  },
+  {
+    "text": "9.7796806441844199e-185",
+    "little_endian_hex": "d0e7fbf95998ba19"
+  },
+  {
+    "text": "2.1317600880547459e-268",
+    "little_endian_hex": "41807c7ca9275c08"
+  },
+  {
+    "text": "-1.5119062812953334e+263",
+    "little_endian_hex": "f9219b6aa43493f6"
+  },
+  {
+    "text": "1.0497034651132722e+142",
+    "little_endian_hex": "1ea6c11fc78b6b5d"
+  },
+  {
+    "text": "-1.1153344138419782e-222",
+    "little_endian_hex": "44231d0671cdd991"
+  },
+  {
+    "text": "-4.6715595640913723e-172",
+    "little_endian_hex": "edc58d00aee25c9c"
+  },
+  {
+    "text": "0.0045125085087430582",
+    "little_endian_hex": "6ed17c47b57b723f"
+  },
+  {
+    "text": "-4744.723471360413",
+    "little_endian_hex": "91486b35b988b2c0"
+  },
+  {
+    "text": "-6.7883930549391735e+43",
+    "little_endian_hex": "bb389689275a08c9"
+  },
+  {
+    "text": "9.5311014207226432e+122",
+    "little_endian_hex": "0755d2509c117759"
+  },
+  {
+    "text": "1.391096948430341e+233",
+    "little_endian_hex": "1707296491665670"
+  },
+  {
+    "text": "-1.6606035036112481e+18",
+    "little_endian_hex": "7e849916a60bb7c3"
+  },
+  {
+    "text": "-1.0449619357022602e-159",
+    "little_endian_hex": "0fb116ede861ed9e"
+  },
+  {
+    "text": "1.3484738979423743e+51",
+    "little_endian_hex": "6ba301674ed58c4a"
+  },
+  {
+    "text": "4.0954732037496138e-301",
+    "little_endian_hex": "2de87ea2a78d9101"
+  },
+  {
+    "text": "-4.3655525464035319e+165",
+    "little_endian_hex": "3297a7f9c8f352e2"
+  },
+  {
+    "text": "3.1656238605321395e-242",
+    "little_endian_hex": "6d47eb13cf04cb0d"
+  },
+  {
+    "text": "2.1201165308854095e-137",
+    "little_endian_hex": "401c8b18308f8f23"
+  },
+  {
+    "text": "-1.4702517328007206e-16",
+    "little_endian_hex": "d92239804530a5bc"
+  },
+  {
+    "text": "-7.7836993289759393e+152",
+    "little_endian_hex": "6765069b2fb9addf"
+  },
+  {
+    "text": "-1.582433023187707e-116",
+    "little_endian_hex": "aee275fecbf3e3a7"
+  },
+  {
+    "text": "3.0948883419420041e-255",
+    "little_endian_hex": "7e247421243c170b"
+  },
+  {
+    "text": "1.093812987206997e-262",
+    "little_endian_hex": "b79c612fe68d8b09"
+  },
+  {
+    "text": "2.0684274048180963e+152",
+    "little_endian_hex": "38ed38c535988f5f"
+  },
+  {
+    "text": "1.7787393927871042e-66",
+    "little_endian_hex": "5ac4d13c34fa4732"
+  },
+  {
+    "text": "1.5688921445406543e+146",
+    "little_endian_hex": "0e5a201ae020495e"
+  },
+  {
+    "text": "3.9540649675253932e-145",
+    "little_endian_hex": "305aabe9efbff321"
+  },
+  {
+    "text": "-6.286927216907006e+81",
+    "little_endian_hex": "868008d2de82ead0"
+  },
+  {
+    "text": "9.0366780074024383e+38",
+    "little_endian_hex": "d2cfa7b3c03e0548"
+  },
+  {
+    "text": "1.6931959292278373e+218",
+    "little_endian_hex": "4fb52e50b1b23e6d"
+  },
+  {
+    "text": "-2.0733314157296602e+233",
+    "little_endian_hex": "825c02ca7bb160f0"
+  },
+  {
+    "text": "-1.988252321108792e-227",
+    "little_endian_hex": "bd584387fe24de90"
+  },
+  {
+    "text": "-2.012256475320412e+299",
+    "little_endian_hex": "3009ce7cf93a13fe"
+  },
+  {
+    "text": "3.7760221411871739e-180",
+    "little_endian_hex": "30d2ddf35a56af1a"
+  },
+  {
+    "text": "2.790873637712061e-58",
+    "little_endian_hex": "4bf5ab1d9e07fc33"
+  },
+  {
+    "text": "-1.2687484201259724e-125",
+    "little_endian_hex": "0eea7a7e462d01a6"
+  },
+  {
+    "text": "-2.9549419228722413e-269",
+    "little_endian_hex": "d8763354ba382f88"
+  },
+  {
+    "text": "2.2277219152247543e-141",
+    "little_endian_hex": "5fd1a43d632abb22"
+  },
+  {
+    "text": "1.0644608550274005e+48",
+    "little_endian_hex": "637e0c6b824ee749"
+  },
+  {
+    "text": "1.2509379732390118e-179",
+    "little_endian_hex": "455ea0f334f4c91a"
+  },
+  {
+    "text": "2.1738568288460922e-277",
+    "little_endian_hex": "3ad2c629ffd37e06"
+  },
+  {
+    "text": "1.4814424791233779e+196",
+    "little_endian_hex": "4abb2a36145ea968"
+  },
+  {
+    "text": "-3.7705500435320551e+122",
+    "little_endian_hex": "98c59096934062d9"
+  },
+  {
+    "text": "-8.8981142127160214e+226",
+    "little_endian_hex": "aa1168b4900c0eef"
+  },
+  {
+    "text": "4.9898368478364872e+36",
+    "little_endian_hex": "6f68399b0f088e47"
+  },
+  {
+    "text": "-4.8647153692085247e-137",
+    "little_endian_hex": "ffd007eb861aa2a3"
+  },
+  {
+    "text": "-6.0654924744759237e+208",
+    "little_endian_hex": "bd227e37989d47eb"
+  },
+  {
+    "text": "1.6885293495371837e-298",
+    "little_endian_hex": "a30f134d18451c02"
+  }
+]

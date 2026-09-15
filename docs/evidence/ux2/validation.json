@@ -1,0 +1,7033 @@
+{
+	"checks": [
+		{
+			"description": "Oracle accepted: -0.0",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -0.0",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -0.0",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 0.0",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 0.0",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 0.0",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 1.2345678901234567e-19",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 1.2345678901234567e-19",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 1.2345678901234567e-19",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 2.2250738585072014e-308",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 2.2250738585072014e-308",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 2.2250738585072014e-308",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 4.9406564584124654e-324",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 4.9406564584124654e-324",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 4.9406564584124654e-324",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 1.7976931348623157e308",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 1.7976931348623157e308",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 1.7976931348623157e308",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 1.00000000000000011102230246251565404236316680908203125",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 1.00000000000000011102230246251565404236316680908203125",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 1.00000000000000011102230246251565404236316680908203125",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 1.00000000000000033306690738754696212708950042724609375",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 1.00000000000000033306690738754696212708950042724609375",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 1.00000000000000033306690738754696212708950042724609375",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 2.5e-324",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 2.5e-324",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 2.5e-324",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 2.225073858507201e-308",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 2.225073858507201e-308",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 2.225073858507201e-308",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 1e-300",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 1e-300",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 1e-300",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 0.1",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 0.1",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 0.1",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: +.125",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: +.125",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: +.125",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 12.",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 12.",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 12.",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 00001.25",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 00001.25",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 00001.25",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -3.141592653589793238462643383279502884",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -3.141592653589793238462643383279502884",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -3.141592653589793238462643383279502884",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 1.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 1.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 1.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000022250738585072014",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000022250738585072014",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000022250738585072014",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -4.1490573823987296e-158",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -4.1490573823987296e-158",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -4.1490573823987296e-158",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -1.1341546461499373e+43",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -1.1341546461499373e+43",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -1.1341546461499373e+43",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -6.0731719090735555e+193",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -6.0731719090735555e+193",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -6.0731719090735555e+193",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -9.3476544561419539e+78",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -9.3476544561419539e+78",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -9.3476544561419539e+78",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -1.3514255965667817e+104",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -1.3514255965667817e+104",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -1.3514255965667817e+104",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -3.0968750310262766e+67",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -3.0968750310262766e+67",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -3.0968750310262766e+67",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 1.5542195395795194e+155",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 1.5542195395795194e+155",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 1.5542195395795194e+155",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 5.4883290319564707e+101",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 5.4883290319564707e+101",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 5.4883290319564707e+101",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 2.6872551221955796e+141",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 2.6872551221955796e+141",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 2.6872551221955796e+141",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -1.4382736684068051e+126",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -1.4382736684068051e+126",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -1.4382736684068051e+126",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -1.6015267835997075e+212",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -1.6015267835997075e+212",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -1.6015267835997075e+212",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -2.1176066013752742e-75",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -2.1176066013752742e-75",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -2.1176066013752742e-75",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -2.067576888402513e-76",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -2.067576888402513e-76",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -2.067576888402513e-76",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 1.2250511467604339e-106",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 1.2250511467604339e-106",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 1.2250511467604339e-106",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 1.2776770205195341e-238",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 1.2776770205195341e-238",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 1.2776770205195341e-238",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 8.7059832885515457e+306",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 8.7059832885515457e+306",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 8.7059832885515457e+306",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -1.6626732956480473e+208",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -1.6626732956480473e+208",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -1.6626732956480473e+208",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 2.1094141077991659e+297",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 2.1094141077991659e+297",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 2.1094141077991659e+297",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 5.7837389327552972e-157",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 5.7837389327552972e-157",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 5.7837389327552972e-157",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 6768008023.5927067",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 6768008023.5927067",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 6768008023.5927067",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -3.0265474325903836e+90",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -3.0265474325903836e+90",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -3.0265474325903836e+90",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -4.0480678519018682e-101",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -4.0480678519018682e-101",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -4.0480678519018682e-101",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 2.6424825917033049e+150",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 2.6424825917033049e+150",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 2.6424825917033049e+150",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -1.5856608814475208e+275",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -1.5856608814475208e+275",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -1.5856608814475208e+275",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 2.3332999542077495e+257",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 2.3332999542077495e+257",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 2.3332999542077495e+257",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 4.0884251689823268e-50",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 4.0884251689823268e-50",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 4.0884251689823268e-50",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -3.3718585376170762e-271",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -3.3718585376170762e-271",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -3.3718585376170762e-271",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -3.6282819636029679e-204",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -3.6282819636029679e-204",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -3.6282819636029679e-204",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -3.4231125889049049e-37",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -3.4231125889049049e-37",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -3.4231125889049049e-37",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -4.1347705566262497e+138",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -4.1347705566262497e+138",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -4.1347705566262497e+138",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 7.9363593776078948e+251",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 7.9363593776078948e+251",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 7.9363593776078948e+251",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -1.3142704729588527e+154",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -1.3142704729588527e+154",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -1.3142704729588527e+154",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -5.1551911301253334e+306",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -5.1551911301253334e+306",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -5.1551911301253334e+306",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 4.2183795976205959e+298",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 4.2183795976205959e+298",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 4.2183795976205959e+298",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 7.6448310610553144e-252",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 7.6448310610553144e-252",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 7.6448310610553144e-252",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -1.0778048340828752e+260",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -1.0778048340828752e+260",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -1.0778048340828752e+260",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -583747006525467.75",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -583747006525467.75",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -583747006525467.75",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 7.2220009847035541e-87",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 7.2220009847035541e-87",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 7.2220009847035541e-87",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -4.8028959736950641e+153",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -4.8028959736950641e+153",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -4.8028959736950641e+153",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -6.2410926508517649e-20",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -6.2410926508517649e-20",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -6.2410926508517649e-20",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -5.5696989081162114e+265",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -5.5696989081162114e+265",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -5.5696989081162114e+265",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 4.6152784808732884e-293",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 4.6152784808732884e-293",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 4.6152784808732884e-293",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -3.0960152002071219e+27",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -3.0960152002071219e+27",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -3.0960152002071219e+27",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 3.4089350413292044e-135",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 3.4089350413292044e-135",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 3.4089350413292044e-135",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 4.9806943569766929e-244",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 4.9806943569766929e-244",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 4.9806943569766929e-244",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -1.3699593794337537e-124",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -1.3699593794337537e-124",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -1.3699593794337537e-124",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 1.2212973129943344e-38",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 1.2212973129943344e-38",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 1.2212973129943344e-38",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 2.0643818730182084e-208",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 2.0643818730182084e-208",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 2.0643818730182084e-208",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -1.1553751424885663e+117",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -1.1553751424885663e+117",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -1.1553751424885663e+117",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -4.1967581653770581e-228",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -4.1967581653770581e-228",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -4.1967581653770581e-228",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 2.2119870569181211e+61",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 2.2119870569181211e+61",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 2.2119870569181211e+61",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -3.7816055254253715e+132",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -3.7816055254253715e+132",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -3.7816055254253715e+132",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -2.8895054597173944e-43",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -2.8895054597173944e-43",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -2.8895054597173944e-43",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -6.4588465116297509e+75",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -6.4588465116297509e+75",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -6.4588465116297509e+75",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -1.1268333513431917e-291",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -1.1268333513431917e-291",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -1.1268333513431917e-291",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 2.2822302904723657e+176",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 2.2822302904723657e+176",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 2.2822302904723657e+176",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -21260992.973581091",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -21260992.973581091",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -21260992.973581091",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -4.3719826609081053e+149",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -4.3719826609081053e+149",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -4.3719826609081053e+149",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -9.8065108617107237e-50",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -9.8065108617107237e-50",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -9.8065108617107237e-50",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -6.1244309987702394e-52",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -6.1244309987702394e-52",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -6.1244309987702394e-52",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -2.5848017270717936e-195",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -2.5848017270717936e-195",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -2.5848017270717936e-195",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -1.4006575998866082e-275",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -1.4006575998866082e-275",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -1.4006575998866082e-275",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -6.6990278528692763e-35",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -6.6990278528692763e-35",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -6.6990278528692763e-35",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -4.8543989266205738e-223",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -4.8543989266205738e-223",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -4.8543989266205738e-223",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -4.6833162461922886e-235",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -4.6833162461922886e-235",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -4.6833162461922886e-235",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 2.1124213407972765e-184",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 2.1124213407972765e-184",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 2.1124213407972765e-184",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -1.9656019280362432e-148",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -1.9656019280362432e-148",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -1.9656019280362432e-148",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 2.8529971508482503e-288",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 2.8529971508482503e-288",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 2.8529971508482503e-288",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 1.9972650667021161e+269",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 1.9972650667021161e+269",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 1.9972650667021161e+269",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -2.0464523331420557e-228",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -2.0464523331420557e-228",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -2.0464523331420557e-228",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -2.4798033699881938e+141",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -2.4798033699881938e+141",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -2.4798033699881938e+141",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -1.2078054269722311e+238",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -1.2078054269722311e+238",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -1.2078054269722311e+238",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 2.1257711603935413e-165",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 2.1257711603935413e-165",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 2.1257711603935413e-165",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 7.7641312862934319e-146",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 7.7641312862934319e-146",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 7.7641312862934319e-146",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 3.989726982104014e-289",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 3.989726982104014e-289",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 3.989726982104014e-289",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 2.9032198224589848e+180",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 2.9032198224589848e+180",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 2.9032198224589848e+180",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 5.3158679970109622e+156",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 5.3158679970109622e+156",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 5.3158679970109622e+156",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 7.1967271259666721e-161",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 7.1967271259666721e-161",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 7.1967271259666721e-161",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 8.1047602626691294e-19",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 8.1047602626691294e-19",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 8.1047602626691294e-19",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 2.3531460490139752e+289",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 2.3531460490139752e+289",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 2.3531460490139752e+289",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 2.2991494666435822e+75",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 2.2991494666435822e+75",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 2.2991494666435822e+75",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 2.6345063412760209e-257",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 2.6345063412760209e-257",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 2.6345063412760209e-257",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 1.5363624199226536e-303",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 1.5363624199226536e-303",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 1.5363624199226536e-303",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -9.4052490070403274e-305",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -9.4052490070403274e-305",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -9.4052490070403274e-305",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -2.213872267292803e-196",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -2.213872267292803e-196",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -2.213872267292803e-196",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -7.3456479689144211e-30",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -7.3456479689144211e-30",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -7.3456479689144211e-30",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -1.8094591150975927e+192",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -1.8094591150975927e+192",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -1.8094591150975927e+192",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 5.5519487071822241e-82",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 5.5519487071822241e-82",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 5.5519487071822241e-82",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 4.2972525574930273e-182",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 4.2972525574930273e-182",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 4.2972525574930273e-182",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 9.9404382153296946e-249",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 9.9404382153296946e-249",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 9.9404382153296946e-249",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -3.1505939985313945e+45",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -3.1505939985313945e+45",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -3.1505939985313945e+45",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -2.8228286292410761e+255",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -2.8228286292410761e+255",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -2.8228286292410761e+255",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 3.3379958228280439e+162",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 3.3379958228280439e+162",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 3.3379958228280439e+162",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 1.9518737425391288e-65",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 1.9518737425391288e-65",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 1.9518737425391288e-65",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -2.5950850446236608e+214",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -2.5950850446236608e+214",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -2.5950850446236608e+214",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -7.8366577865001719e-300",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -7.8366577865001719e-300",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -7.8366577865001719e-300",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -1.6522214135381797e-46",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -1.6522214135381797e-46",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -1.6522214135381797e-46",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -1.1219401827388612e+260",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -1.1219401827388612e+260",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -1.1219401827388612e+260",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -5.6853582485989669e-207",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -5.6853582485989669e-207",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -5.6853582485989669e-207",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 1.9578641334188677e+54",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 1.9578641334188677e+54",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 1.9578641334188677e+54",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -2.6317850272577196e-244",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -2.6317850272577196e-244",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -2.6317850272577196e-244",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -3.4493497836802478e-33",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -3.4493497836802478e-33",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -3.4493497836802478e-33",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -4.4838710944187174e+306",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -4.4838710944187174e+306",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -4.4838710944187174e+306",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -1.0701620186805403e-244",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -1.0701620186805403e-244",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -1.0701620186805403e-244",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -5.8122290222743211e+139",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -5.8122290222743211e+139",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -5.8122290222743211e+139",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -7.2242476710679252e-153",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -7.2242476710679252e-153",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -7.2242476710679252e-153",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -6.306968970023095e-106",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -6.306968970023095e-106",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -6.306968970023095e-106",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -17389.727495385567",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -17389.727495385567",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -17389.727495385567",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 1.7641667285307902e+226",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 1.7641667285307902e+226",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 1.7641667285307902e+226",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -1.003317675022782e-70",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -1.003317675022782e-70",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -1.003317675022782e-70",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -3.0460273300772279e+298",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -3.0460273300772279e+298",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -3.0460273300772279e+298",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -5.7329727652576402e-262",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -5.7329727652576402e-262",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -5.7329727652576402e-262",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 2.2767311221452366e-50",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 2.2767311221452366e-50",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 2.2767311221452366e-50",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -4.8133091813804762e-175",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -4.8133091813804762e-175",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -4.8133091813804762e-175",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -8.1528677444651188e+96",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -8.1528677444651188e+96",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -8.1528677444651188e+96",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -8.0238298163188449e+250",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -8.0238298163188449e+250",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -8.0238298163188449e+250",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -5.919714965090743e+69",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -5.919714965090743e+69",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -5.919714965090743e+69",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -1.0396393184170274e-255",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -1.0396393184170274e-255",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -1.0396393184170274e-255",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -5.3764107462586427e+108",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -5.3764107462586427e+108",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -5.3764107462586427e+108",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 2.9329137725497591e+223",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 2.9329137725497591e+223",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 2.9329137725497591e+223",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 4.448096795414693e+23",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 4.448096795414693e+23",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 4.448096795414693e+23",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 5.8306880172659901e-272",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 5.8306880172659901e-272",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 5.8306880172659901e-272",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 7.0740278172705243e+145",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 7.0740278172705243e+145",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 7.0740278172705243e+145",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -1.9805609966057552e-145",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -1.9805609966057552e-145",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -1.9805609966057552e-145",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 9.5914257804953659e+191",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 9.5914257804953659e+191",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 9.5914257804953659e+191",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -5.6719944490034196e+214",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -5.6719944490034196e+214",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -5.6719944490034196e+214",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 4.0465272276420378e-119",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 4.0465272276420378e-119",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 4.0465272276420378e-119",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -1.7658928396487159e+257",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -1.7658928396487159e+257",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -1.7658928396487159e+257",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 1.4222983305464603e-81",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 1.4222983305464603e-81",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 1.4222983305464603e-81",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 2.0189548618504921e-286",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 2.0189548618504921e-286",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 2.0189548618504921e-286",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 1.0658952251954045e+222",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 1.0658952251954045e+222",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 1.0658952251954045e+222",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 1.4324338710372252e-212",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 1.4324338710372252e-212",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 1.4324338710372252e-212",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -8.2960782491723711e+270",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -8.2960782491723711e+270",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -8.2960782491723711e+270",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -6.923766386798195e-236",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -6.923766386798195e-236",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -6.923766386798195e-236",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -1.056514579372126e-162",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -1.056514579372126e-162",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -1.056514579372126e-162",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 3.5119798980727895e-278",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 3.5119798980727895e-278",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 3.5119798980727895e-278",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 9284918.9886821993",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 9284918.9886821993",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 9284918.9886821993",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 4.6823036099182575e+305",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 4.6823036099182575e+305",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 4.6823036099182575e+305",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 3.8693383344441461e-120",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 3.8693383344441461e-120",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 3.8693383344441461e-120",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -2.0981151473708984e-66",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -2.0981151473708984e-66",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -2.0981151473708984e-66",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 1.0122810881004903e+58",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 1.0122810881004903e+58",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 1.0122810881004903e+58",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -3.4465863972054978e-14",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -3.4465863972054978e-14",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -3.4465863972054978e-14",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 2.1458249570817127e+139",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 2.1458249570817127e+139",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 2.1458249570817127e+139",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -4.7892779711865207e+189",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -4.7892779711865207e+189",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -4.7892779711865207e+189",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 1.2237792718005113e+145",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 1.2237792718005113e+145",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 1.2237792718005113e+145",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 1.7608843781201736e-267",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 1.7608843781201736e-267",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 1.7608843781201736e-267",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -5.4850726044814246e+185",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -5.4850726044814246e+185",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -5.4850726044814246e+185",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 1.3720819784560888e-21",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 1.3720819784560888e-21",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 1.3720819784560888e-21",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 1.1306704855040952e+254",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 1.1306704855040952e+254",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 1.1306704855040952e+254",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 1.1657294832059914e+222",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 1.1657294832059914e+222",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 1.1657294832059914e+222",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 3.572455659075613e+145",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 3.572455659075613e+145",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 3.572455659075613e+145",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 2.517574499481743e-22",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 2.517574499481743e-22",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 2.517574499481743e-22",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -1.5924197800856432e-174",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -1.5924197800856432e-174",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -1.5924197800856432e-174",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -1.5459360050314325e-268",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -1.5459360050314325e-268",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -1.5459360050314325e-268",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -5.1359957172832832e-108",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -5.1359957172832832e-108",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -5.1359957172832832e-108",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -6.2624632437523777e+79",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -6.2624632437523777e+79",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -6.2624632437523777e+79",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -2.4465622458584746e-185",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -2.4465622458584746e-185",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -2.4465622458584746e-185",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -5.6184530017877607e+273",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -5.6184530017877607e+273",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -5.6184530017877607e+273",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -1.7668468549971646e-48",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -1.7668468549971646e-48",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -1.7668468549971646e-48",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -5.7308523296023632e+54",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -5.7308523296023632e+54",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -5.7308523296023632e+54",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -7.8495744946218524e-227",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -7.8495744946218524e-227",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -7.8495744946218524e-227",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -1.6648687654440957e+152",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -1.6648687654440957e+152",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -1.6648687654440957e+152",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 4.9771933342739475e+21",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 4.9771933342739475e+21",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 4.9771933342739475e+21",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 6.3844097038133927e+241",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 6.3844097038133927e+241",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 6.3844097038133927e+241",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 9.9831509698305141e+306",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 9.9831509698305141e+306",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 9.9831509698305141e+306",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -5.3985609286860603e-292",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -5.3985609286860603e-292",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -5.3985609286860603e-292",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 2.1200651883732701e+161",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 2.1200651883732701e+161",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 2.1200651883732701e+161",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 4.4208366898910624e+266",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 4.4208366898910624e+266",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 4.4208366898910624e+266",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -8.3247966916606987e+210",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -8.3247966916606987e+210",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -8.3247966916606987e+210",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -1.5108280509686992e+227",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -1.5108280509686992e+227",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -1.5108280509686992e+227",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -6.7770053568786523e+284",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -6.7770053568786523e+284",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -6.7770053568786523e+284",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 4.6105976408593929e-259",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 4.6105976408593929e-259",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 4.6105976408593929e-259",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 1.8358124682120726e-137",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 1.8358124682120726e-137",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 1.8358124682120726e-137",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -30993540459890.414",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -30993540459890.414",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -30993540459890.414",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 1.6654614711863476e+255",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 1.6654614711863476e+255",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 1.6654614711863476e+255",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -8.8856220263909835e-256",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -8.8856220263909835e-256",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -8.8856220263909835e-256",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -3.0255766147462865e-120",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -3.0255766147462865e-120",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -3.0255766147462865e-120",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -6.8179941259507895e-106",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -6.8179941259507895e-106",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -6.8179941259507895e-106",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -2.376671708032993e-159",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -2.376671708032993e-159",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -2.376671708032993e-159",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 1.8591905743065635e+51",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 1.8591905743065635e+51",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 1.8591905743065635e+51",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 3.3130759100961526e+183",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 3.3130759100961526e+183",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 3.3130759100961526e+183",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -2.5331688529390976e+231",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -2.5331688529390976e+231",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -2.5331688529390976e+231",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -2.2742283630113447e+198",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -2.2742283630113447e+198",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -2.2742283630113447e+198",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -1.3752625992949905e-161",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -1.3752625992949905e-161",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -1.3752625992949905e-161",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 2.8275167920612969e+286",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 2.8275167920612969e+286",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 2.8275167920612969e+286",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -2.375784726334054e+19",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -2.375784726334054e+19",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -2.375784726334054e+19",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 6.5480308595325911e-267",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 6.5480308595325911e-267",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 6.5480308595325911e-267",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 2.3122969932277975e+197",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 2.3122969932277975e+197",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 2.3122969932277975e+197",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -1.9576477325239269e+260",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -1.9576477325239269e+260",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -1.9576477325239269e+260",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -8.8878340942236578e-273",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -8.8878340942236578e-273",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -8.8878340942236578e-273",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 1.3190878781314625e+123",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 1.3190878781314625e+123",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 1.3190878781314625e+123",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -5.7228169601502729e-129",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -5.7228169601502729e-129",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -5.7228169601502729e-129",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 1.2439775368436057e+183",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 1.2439775368436057e+183",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 1.2439775368436057e+183",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 1.7336392779369395e-192",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 1.7336392779369395e-192",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 1.7336392779369395e-192",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -2.7994490471635232e-10",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -2.7994490471635232e-10",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -2.7994490471635232e-10",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 5.9137003608740235e+106",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 5.9137003608740235e+106",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 5.9137003608740235e+106",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -1.0798286419250097e+241",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -1.0798286419250097e+241",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -1.0798286419250097e+241",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -1.5607640836981866e-56",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -1.5607640836981866e-56",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -1.5607640836981866e-56",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -1.7019611008793708e+36",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -1.7019611008793708e+36",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -1.7019611008793708e+36",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -5.1974614610581959e-10",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -5.1974614610581959e-10",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -5.1974614610581959e-10",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -3.6259542597873417e-15",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -3.6259542597873417e-15",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -3.6259542597873417e-15",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 2.0686279159301938e-48",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 2.0686279159301938e-48",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 2.0686279159301938e-48",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -4.6818678496655401e-212",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -4.6818678496655401e-212",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -4.6818678496655401e-212",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 1.9357180641399734e+52",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 1.9357180641399734e+52",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 1.9357180641399734e+52",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -7.9600582019540329e+78",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -7.9600582019540329e+78",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -7.9600582019540329e+78",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 2.0526475110087949e+230",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 2.0526475110087949e+230",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 2.0526475110087949e+230",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -3.5265266042212896e+247",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -3.5265266042212896e+247",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -3.5265266042212896e+247",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 8.4288626933388634e-204",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 8.4288626933388634e-204",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 8.4288626933388634e-204",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 124898783.78258972",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 124898783.78258972",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 124898783.78258972",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -1.4071947660064316e-102",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -1.4071947660064316e-102",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -1.4071947660064316e-102",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 6.7292181840714865e-62",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 6.7292181840714865e-62",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 6.7292181840714865e-62",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -5.1306527542278029e+277",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -5.1306527542278029e+277",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -5.1306527542278029e+277",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 5.5324776337301025e-196",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 5.5324776337301025e-196",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 5.5324776337301025e-196",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 4.4599116248282894e+119",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 4.4599116248282894e+119",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 4.4599116248282894e+119",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -1.7634115481155976e+242",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -1.7634115481155976e+242",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -1.7634115481155976e+242",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 1.6910719388869821e+17",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 1.6910719388869821e+17",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 1.6910719388869821e+17",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 1.803803852301197e+301",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 1.803803852301197e+301",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 1.803803852301197e+301",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -1.042938896232117e+120",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -1.042938896232117e+120",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -1.042938896232117e+120",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 2.2694780698635031e+174",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 2.2694780698635031e+174",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 2.2694780698635031e+174",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 3.363147869021045e-152",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 3.363147869021045e-152",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 3.363147869021045e-152",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -2.6537799891718355e-77",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -2.6537799891718355e-77",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -2.6537799891718355e-77",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 9.1489845535154983e+232",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 9.1489845535154983e+232",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 9.1489845535154983e+232",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 1.064370468094985e-115",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 1.064370468094985e-115",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 1.064370468094985e-115",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -4.8334306492393084e+31",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -4.8334306492393084e+31",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -4.8334306492393084e+31",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -1.001708670827751e+281",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -1.001708670827751e+281",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -1.001708670827751e+281",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 5.7359136873216496e+293",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 5.7359136873216496e+293",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 5.7359136873216496e+293",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 9.0255531547410635e-286",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 9.0255531547410635e-286",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 9.0255531547410635e-286",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 2.6033890238914504e+257",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 2.6033890238914504e+257",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 2.6033890238914504e+257",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -1.2264261238692645e-256",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -1.2264261238692645e-256",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -1.2264261238692645e-256",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -3.0535169256670722e-286",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -3.0535169256670722e-286",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -3.0535169256670722e-286",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 1.956301342888773e+286",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 1.956301342888773e+286",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 1.956301342888773e+286",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -5.6773935916725076e+114",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -5.6773935916725076e+114",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -5.6773935916725076e+114",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -9.4185788671366898e+67",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -9.4185788671366898e+67",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -9.4185788671366898e+67",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 9.3338936825861602e-192",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 9.3338936825861602e-192",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 9.3338936825861602e-192",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 9.7796806441844199e-185",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 9.7796806441844199e-185",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 9.7796806441844199e-185",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 2.1317600880547459e-268",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 2.1317600880547459e-268",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 2.1317600880547459e-268",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -1.5119062812953334e+263",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -1.5119062812953334e+263",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -1.5119062812953334e+263",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 1.0497034651132722e+142",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 1.0497034651132722e+142",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 1.0497034651132722e+142",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -1.1153344138419782e-222",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -1.1153344138419782e-222",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -1.1153344138419782e-222",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -4.6715595640913723e-172",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -4.6715595640913723e-172",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -4.6715595640913723e-172",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 0.0045125085087430582",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 0.0045125085087430582",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 0.0045125085087430582",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -4744.723471360413",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -4744.723471360413",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -4744.723471360413",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -6.7883930549391735e+43",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -6.7883930549391735e+43",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -6.7883930549391735e+43",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 9.5311014207226432e+122",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 9.5311014207226432e+122",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 9.5311014207226432e+122",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 1.391096948430341e+233",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 1.391096948430341e+233",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 1.391096948430341e+233",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -1.6606035036112481e+18",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -1.6606035036112481e+18",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -1.6606035036112481e+18",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -1.0449619357022602e-159",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -1.0449619357022602e-159",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -1.0449619357022602e-159",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 1.3484738979423743e+51",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 1.3484738979423743e+51",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 1.3484738979423743e+51",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 4.0954732037496138e-301",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 4.0954732037496138e-301",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 4.0954732037496138e-301",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -4.3655525464035319e+165",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -4.3655525464035319e+165",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -4.3655525464035319e+165",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 3.1656238605321395e-242",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 3.1656238605321395e-242",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 3.1656238605321395e-242",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 2.1201165308854095e-137",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 2.1201165308854095e-137",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 2.1201165308854095e-137",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -1.4702517328007206e-16",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -1.4702517328007206e-16",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -1.4702517328007206e-16",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -7.7836993289759393e+152",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -7.7836993289759393e+152",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -7.7836993289759393e+152",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -1.582433023187707e-116",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -1.582433023187707e-116",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -1.582433023187707e-116",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 3.0948883419420041e-255",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 3.0948883419420041e-255",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 3.0948883419420041e-255",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 1.093812987206997e-262",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 1.093812987206997e-262",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 1.093812987206997e-262",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 2.0684274048180963e+152",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 2.0684274048180963e+152",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 2.0684274048180963e+152",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 1.7787393927871042e-66",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 1.7787393927871042e-66",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 1.7787393927871042e-66",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 1.5688921445406543e+146",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 1.5688921445406543e+146",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 1.5688921445406543e+146",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 3.9540649675253932e-145",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 3.9540649675253932e-145",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 3.9540649675253932e-145",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -6.286927216907006e+81",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -6.286927216907006e+81",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -6.286927216907006e+81",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 9.0366780074024383e+38",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 9.0366780074024383e+38",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 9.0366780074024383e+38",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 1.6931959292278373e+218",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 1.6931959292278373e+218",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 1.6931959292278373e+218",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -2.0733314157296602e+233",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -2.0733314157296602e+233",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -2.0733314157296602e+233",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -1.988252321108792e-227",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -1.988252321108792e-227",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -1.988252321108792e-227",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -2.012256475320412e+299",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -2.012256475320412e+299",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -2.012256475320412e+299",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 3.7760221411871739e-180",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 3.7760221411871739e-180",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 3.7760221411871739e-180",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 2.790873637712061e-58",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 2.790873637712061e-58",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 2.790873637712061e-58",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -1.2687484201259724e-125",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -1.2687484201259724e-125",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -1.2687484201259724e-125",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -2.9549419228722413e-269",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -2.9549419228722413e-269",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -2.9549419228722413e-269",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 2.2277219152247543e-141",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 2.2277219152247543e-141",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 2.2277219152247543e-141",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 1.0644608550274005e+48",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 1.0644608550274005e+48",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 1.0644608550274005e+48",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 1.2509379732390118e-179",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 1.2509379732390118e-179",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 1.2509379732390118e-179",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 2.1738568288460922e-277",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 2.1738568288460922e-277",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 2.1738568288460922e-277",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 1.4814424791233779e+196",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 1.4814424791233779e+196",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 1.4814424791233779e+196",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -3.7705500435320551e+122",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -3.7705500435320551e+122",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -3.7705500435320551e+122",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -8.8981142127160214e+226",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -8.8981142127160214e+226",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -8.8981142127160214e+226",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 4.9898368478364872e+36",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 4.9898368478364872e+36",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 4.9898368478364872e+36",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -4.8647153692085247e-137",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -4.8647153692085247e-137",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -4.8647153692085247e-137",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: -6.0654924744759237e+208",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: -6.0654924744759237e+208",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: -6.0654924744759237e+208",
+			"passed": true
+		},
+		{
+			"description": "Oracle accepted: 1.6885293495371837e-298",
+			"passed": true
+		},
+		{
+			"description": "Independent binary64 reference: 1.6885293495371837e-298",
+			"passed": true
+		},
+		{
+			"description": "Full-precision text round trip: 1.6885293495371837e-298",
+			"passed": true
+		},
+		{
+			"description": "Unchanged float commit accepted: 0.0",
+			"passed": true
+		},
+		{
+			"description": "Unchanged float64 bits preserved",
+			"passed": true
+		},
+		{
+			"description": "Displayed float64 round trip",
+			"passed": true
+		},
+		{
+			"description": "Unchanged float commit accepted: 0.0",
+			"passed": true
+		},
+		{
+			"description": "Unchanged float64 bits preserved",
+			"passed": true
+		},
+		{
+			"description": "Displayed float64 round trip",
+			"passed": true
+		},
+		{
+			"description": "Unchanged float commit accepted: 0.1",
+			"passed": true
+		},
+		{
+			"description": "Unchanged float64 bits preserved",
+			"passed": true
+		},
+		{
+			"description": "Displayed float64 round trip",
+			"passed": true
+		},
+		{
+			"description": "Unchanged float commit accepted: 1.2345678901234567",
+			"passed": true
+		},
+		{
+			"description": "Unchanged float64 bits preserved",
+			"passed": true
+		},
+		{
+			"description": "Displayed float64 round trip",
+			"passed": true
+		},
+		{
+			"description": "Unchanged float commit accepted: 1.2345678901234568e-19",
+			"passed": true
+		},
+		{
+			"description": "Unchanged float64 bits preserved",
+			"passed": true
+		},
+		{
+			"description": "Displayed float64 round trip",
+			"passed": true
+		},
+		{
+			"description": "Unchanged float commit accepted: 0.0",
+			"passed": true
+		},
+		{
+			"description": "Unchanged float64 bits preserved",
+			"passed": true
+		},
+		{
+			"description": "Displayed float64 round trip",
+			"passed": true
+		},
+		{
+			"description": "Unchanged float commit accepted: 0.0",
+			"passed": true
+		},
+		{
+			"description": "Unchanged float64 bits preserved",
+			"passed": true
+		},
+		{
+			"description": "Displayed float64 round trip",
+			"passed": true
+		},
+		{
+			"description": "Unchanged float commit accepted: 1.7976931348623157e+308",
+			"passed": true
+		},
+		{
+			"description": "Unchanged float64 bits preserved",
+			"passed": true
+		},
+		{
+			"description": "Displayed float64 round trip",
+			"passed": true
+		},
+		{
+			"description": "Refresh/unchanged commit emits no numeric intent",
+			"passed": true
+		},
+		{
+			"description": "Reject and retain invalid draft: ",
+			"passed": true
+		},
+		{
+			"description": "Reject and retain invalid draft: abc",
+			"passed": true
+		},
+		{
+			"description": "Reject and retain invalid draft: nan",
+			"passed": true
+		},
+		{
+			"description": "Reject and retain invalid draft: inf",
+			"passed": true
+		},
+		{
+			"description": "Reject and retain invalid draft: 1e999",
+			"passed": true
+		},
+		{
+			"description": "Reject and retain invalid draft: 1e-999",
+			"passed": true
+		},
+		{
+			"description": "Reject and retain invalid draft: 1.2.3",
+			"passed": true
+		},
+		{
+			"description": "Scientific range refusal",
+			"passed": true
+		},
+		{
+			"description": "Scientific notation commit",
+			"passed": true
+		},
+		{
+			"description": "Changed numeric commit emits one intent",
+			"passed": true
+		},
+		{
+			"description": "Cancel silently restores last valid text",
+			"passed": true
+		},
+		{
+			"description": "Caller-provided validation",
+			"passed": true
+		},
+		{
+			"description": "Exact int64 round trip: -9223372036854775808",
+			"passed": true
+		},
+		{
+			"description": "Exact int64 round trip: -9007199254740993",
+			"passed": true
+		},
+		{
+			"description": "Exact int64 round trip: 0",
+			"passed": true
+		},
+		{
+			"description": "Exact int64 round trip: 9007199254740993",
+			"passed": true
+		},
+		{
+			"description": "Exact int64 round trip: 9223372036854775807",
+			"passed": true
+		},
+		{
+			"description": "Exact integer refuses 9223372036854775808",
+			"passed": true
+		},
+		{
+			"description": "Exact integer refuses -9223372036854775809",
+			"passed": true
+		},
+		{
+			"description": "Exact integer refuses 9007199254740993.0",
+			"passed": true
+		},
+		{
+			"description": "Exact integer refuses 9e15",
+			"passed": true
+		},
+		{
+			"description": "Exact integer refuses --1",
+			"passed": true
+		},
+		{
+			"description": "Exact integer refuses ",
+			"passed": true
+		},
+		{
+			"description": "Exact integer refuses +",
+			"passed": true
+		},
+		{
+			"description": "Exact integer refuses １２",
+			"passed": true
+		},
+		{
+			"description": "Exact decimal normalization",
+			"passed": true
+		},
+		{
+			"description": "Contrast text.primary/surface.0",
+			"passed": true
+		},
+		{
+			"description": "Contrast text.secondary/surface.0",
+			"passed": true
+		},
+		{
+			"description": "Contrast text.muted/surface.0",
+			"passed": true
+		},
+		{
+			"description": "Contrast focus.ring/surface.0",
+			"passed": true
+		},
+		{
+			"description": "Contrast state.success/surface.0",
+			"passed": true
+		},
+		{
+			"description": "Contrast state.warning/surface.0",
+			"passed": true
+		},
+		{
+			"description": "Contrast state.error/surface.0",
+			"passed": true
+		},
+		{
+			"description": "Contrast state.info/surface.0",
+			"passed": true
+		},
+		{
+			"description": "Contrast text.primary/surface.1",
+			"passed": true
+		},
+		{
+			"description": "Contrast text.secondary/surface.1",
+			"passed": true
+		},
+		{
+			"description": "Contrast text.muted/surface.1",
+			"passed": true
+		},
+		{
+			"description": "Contrast focus.ring/surface.1",
+			"passed": true
+		},
+		{
+			"description": "Contrast state.success/surface.1",
+			"passed": true
+		},
+		{
+			"description": "Contrast state.warning/surface.1",
+			"passed": true
+		},
+		{
+			"description": "Contrast state.error/surface.1",
+			"passed": true
+		},
+		{
+			"description": "Contrast state.info/surface.1",
+			"passed": true
+		},
+		{
+			"description": "Contrast text.primary/surface.2",
+			"passed": true
+		},
+		{
+			"description": "Contrast text.secondary/surface.2",
+			"passed": true
+		},
+		{
+			"description": "Contrast text.muted/surface.2",
+			"passed": true
+		},
+		{
+			"description": "Contrast focus.ring/surface.2",
+			"passed": true
+		},
+		{
+			"description": "Contrast state.success/surface.2",
+			"passed": true
+		},
+		{
+			"description": "Contrast state.warning/surface.2",
+			"passed": true
+		},
+		{
+			"description": "Contrast state.error/surface.2",
+			"passed": true
+		},
+		{
+			"description": "Contrast state.info/surface.2",
+			"passed": true
+		},
+		{
+			"description": "Contrast text.primary/surface.3",
+			"passed": true
+		},
+		{
+			"description": "Contrast text.secondary/surface.3",
+			"passed": true
+		},
+		{
+			"description": "Contrast text.muted/surface.3",
+			"passed": true
+		},
+		{
+			"description": "Contrast focus.ring/surface.3",
+			"passed": true
+		},
+		{
+			"description": "Contrast state.success/surface.3",
+			"passed": true
+		},
+		{
+			"description": "Contrast state.warning/surface.3",
+			"passed": true
+		},
+		{
+			"description": "Contrast state.error/surface.3",
+			"passed": true
+		},
+		{
+			"description": "Contrast state.info/surface.3",
+			"passed": true
+		},
+		{
+			"description": "Contrast Button/normal/text",
+			"passed": true
+		},
+		{
+			"description": "Contrast Button/normal/boundary",
+			"passed": true
+		},
+		{
+			"description": "Contrast Button/hover/text",
+			"passed": true
+		},
+		{
+			"description": "Contrast Button/hover/boundary",
+			"passed": true
+		},
+		{
+			"description": "Contrast Button/pressed/text",
+			"passed": true
+		},
+		{
+			"description": "Contrast Button/pressed/boundary",
+			"passed": true
+		},
+		{
+			"description": "Contrast PrimaryButton/normal/text",
+			"passed": true
+		},
+		{
+			"description": "Contrast PrimaryButton/hover/text",
+			"passed": true
+		},
+		{
+			"description": "Contrast PrimaryButton/pressed/text",
+			"passed": true
+		},
+		{
+			"description": "Contrast DestructiveButton/normal/text",
+			"passed": true
+		},
+		{
+			"description": "Contrast DestructiveButton/normal/boundary",
+			"passed": true
+		},
+		{
+			"description": "Contrast DestructiveButton/hover/text",
+			"passed": true
+		},
+		{
+			"description": "Contrast DestructiveButton/hover/boundary",
+			"passed": true
+		},
+		{
+			"description": "Contrast DestructiveButton/pressed/text",
+			"passed": true
+		},
+		{
+			"description": "Contrast DestructiveButton/pressed/boundary",
+			"passed": true
+		},
+		{
+			"description": "Contrast SelectedButton/normal/text",
+			"passed": true
+		},
+		{
+			"description": "Contrast SelectedButton/normal/boundary",
+			"passed": true
+		},
+		{
+			"description": "Contrast SelectedButton/hover/text",
+			"passed": true
+		},
+		{
+			"description": "Contrast SelectedButton/hover/boundary",
+			"passed": true
+		},
+		{
+			"description": "Contrast SelectedButton/pressed/text",
+			"passed": true
+		},
+		{
+			"description": "Contrast SelectedButton/pressed/boundary",
+			"passed": true
+		},
+		{
+			"description": "Contrast CompactButton/normal/text",
+			"passed": true
+		},
+		{
+			"description": "Contrast CompactButton/normal/boundary",
+			"passed": true
+		},
+		{
+			"description": "Contrast CompactButton/hover/text",
+			"passed": true
+		},
+		{
+			"description": "Contrast CompactButton/hover/boundary",
+			"passed": true
+		},
+		{
+			"description": "Contrast CompactButton/pressed/text",
+			"passed": true
+		},
+		{
+			"description": "Contrast CompactButton/pressed/boundary",
+			"passed": true
+		},
+		{
+			"description": "Contrast OptionButton/normal/text",
+			"passed": true
+		},
+		{
+			"description": "Contrast OptionButton/normal/boundary",
+			"passed": true
+		},
+		{
+			"description": "Contrast OptionButton/hover/text",
+			"passed": true
+		},
+		{
+			"description": "Contrast OptionButton/hover/boundary",
+			"passed": true
+		},
+		{
+			"description": "Contrast OptionButton/pressed/text",
+			"passed": true
+		},
+		{
+			"description": "Contrast OptionButton/pressed/boundary",
+			"passed": true
+		},
+		{
+			"description": "Contrast LineEdit/normal/text",
+			"passed": true
+		},
+		{
+			"description": "Contrast LineEdit/normal/boundary",
+			"passed": true
+		},
+		{
+			"description": "Contrast read-only value remains legible",
+			"passed": true
+		},
+		{
+			"description": "Contrast embedded dialog title text",
+			"passed": true
+		},
+		{
+			"description": "Contrast primary filled boundary",
+			"passed": true
+		},
+		{
+			"description": "Contrast selected rows/menu text",
+			"passed": true
+		},
+		{
+			"description": "SVG icons use exportable per-viewport DPITexture resources",
+			"passed": true
+		},
+		{
+			"description": "Numeric font has identical digit advances",
+			"passed": true
+		},
+		{
+			"description": "Numeric font resolves bundled DejaVu Sans Mono",
+			"passed": true
+		},
+		{
+			"description": "Numeric glyph coverage U+00B5",
+			"passed": true
+		},
+		{
+			"description": "Numeric glyph coverage U+0394",
+			"passed": true
+		},
+		{
+			"description": "Numeric glyph coverage U+00D7",
+			"passed": true
+		},
+		{
+			"description": "Numeric glyph coverage U+2212",
+			"passed": true
+		},
+		{
+			"description": "Numeric glyph coverage U+00B3",
+			"passed": true
+		},
+		{
+			"description": "Native button receives keyboard focus",
+			"passed": true
+		},
+		{
+			"description": "Icon action has a 32 by 32 logical target",
+			"passed": true
+		},
+		{
+			"description": "Header leaves more than 600 logical pixels for specimens at default size",
+			"passed": true
+		},
+		{
+			"description": "Space invokes focused action exactly once",
+			"passed": true
+		},
+		{
+			"description": "Tab traverses to the next action",
+			"passed": true
+		},
+		{
+			"description": "Shift-Tab returns to previous action",
+			"passed": true
+		},
+		{
+			"description": "Native pointer hover state",
+			"passed": true
+		},
+		{
+			"description": "Screenshot 01-controls-focus-hover",
+			"passed": true
+		},
+		{
+			"description": "Native pointer press state",
+			"passed": true
+		},
+		{
+			"description": "Pointer release invokes action exactly once",
+			"passed": true
+		},
+		{
+			"description": "Focus persists after pointer leaves",
+			"passed": true
+		},
+		{
+			"description": "Disabled action has a durable visible explanation",
+			"passed": true
+		},
+		{
+			"description": "Selected native toggle has a pressed state",
+			"passed": true
+		},
+		{
+			"description": "Enum refresh preserves ID across reorder/rename without intent",
+			"passed": true
+		},
+		{
+			"description": "Enter refuses invalid native editor draft",
+			"passed": true
+		},
+		{
+			"description": "Escape restores draft through native key input",
+			"passed": true
+		},
+		{
+			"description": "Focus loss retains draft without committing",
+			"passed": true
+		},
+		{
+			"description": "Screenshot 02-numbers",
+			"passed": true
+		},
+		{
+			"description": "Screenshot 03-feedback",
+			"passed": true
+		},
+		{
+			"description": "Screenshot 04-tokens",
+			"passed": true
+		},
+		{
+			"description": "Slider retains native keyboard focus plus shared ring",
+			"passed": true
+		},
+		{
+			"description": "Screenshot 05-slider-focus",
+			"passed": true
+		},
+		{
+			"description": "Screenshot 06-menu",
+			"passed": true
+		},
+		{
+			"description": "Dialog action row stays fixed while body scrolls",
+			"passed": true
+		},
+		{
+			"description": "Independent dialog receives explicit shared theme",
+			"passed": true
+		},
+		{
+			"description": "Dialog actions fit below scrollable body",
+			"passed": true
+		},
+		{
+			"description": "Screenshot 07-dialog",
+			"passed": true
+		},
+		{
+			"description": "Dialog close restores invoking focus",
+			"passed": true
+		},
+		{
+			"description": "32 px native action height at (1024, 640)/1.0",
+			"passed": true
+		},
+		{
+			"description": "28 px compact action height at (1024, 640)/1.0",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (1024, 640)/1.0/page0",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (1024, 640)/1.0/page1",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (1024, 640)/1.0/page2",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (1024, 640)/1.0/page3",
+			"passed": true
+		},
+		{
+			"description": "32 px native action height at (1024, 640)/1.25",
+			"passed": true
+		},
+		{
+			"description": "28 px compact action height at (1024, 640)/1.25",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (1024, 640)/1.25/page0",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (1024, 640)/1.25/page1",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (1024, 640)/1.25/page2",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (1024, 640)/1.25/page3",
+			"passed": true
+		},
+		{
+			"description": "32 px native action height at (1024, 640)/1.5",
+			"passed": true
+		},
+		{
+			"description": "28 px compact action height at (1024, 640)/1.5",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (1024, 640)/1.5/page0",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (1024, 640)/1.5/page1",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (1024, 640)/1.5/page2",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (1024, 640)/1.5/page3",
+			"passed": true
+		},
+		{
+			"description": "32 px native action height at (1024, 640)/2.0",
+			"passed": true
+		},
+		{
+			"description": "28 px compact action height at (1024, 640)/2.0",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (1024, 640)/2.0/page0",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (1024, 640)/2.0/page1",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (1024, 640)/2.0/page2",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (1024, 640)/2.0/page3",
+			"passed": true
+		},
+		{
+			"description": "Screenshot scale-1024x640-200",
+			"passed": true
+		},
+		{
+			"description": "32 px native action height at (1440, 900)/1.0",
+			"passed": true
+		},
+		{
+			"description": "28 px compact action height at (1440, 900)/1.0",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (1440, 900)/1.0/page0",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (1440, 900)/1.0/page1",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (1440, 900)/1.0/page2",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (1440, 900)/1.0/page3",
+			"passed": true
+		},
+		{
+			"description": "Screenshot scale-1440x900-100",
+			"passed": true
+		},
+		{
+			"description": "32 px native action height at (1440, 900)/1.25",
+			"passed": true
+		},
+		{
+			"description": "28 px compact action height at (1440, 900)/1.25",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (1440, 900)/1.25/page0",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (1440, 900)/1.25/page1",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (1440, 900)/1.25/page2",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (1440, 900)/1.25/page3",
+			"passed": true
+		},
+		{
+			"description": "Screenshot scale-1440x900-125",
+			"passed": true
+		},
+		{
+			"description": "32 px native action height at (1440, 900)/1.5",
+			"passed": true
+		},
+		{
+			"description": "28 px compact action height at (1440, 900)/1.5",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (1440, 900)/1.5/page0",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (1440, 900)/1.5/page1",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (1440, 900)/1.5/page2",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (1440, 900)/1.5/page3",
+			"passed": true
+		},
+		{
+			"description": "Screenshot scale-1440x900-150",
+			"passed": true
+		},
+		{
+			"description": "32 px native action height at (1440, 900)/2.0",
+			"passed": true
+		},
+		{
+			"description": "28 px compact action height at (1440, 900)/2.0",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (1440, 900)/2.0/page0",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (1440, 900)/2.0/page1",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (1440, 900)/2.0/page2",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (1440, 900)/2.0/page3",
+			"passed": true
+		},
+		{
+			"description": "Screenshot scale-1440x900-200",
+			"passed": true
+		},
+		{
+			"description": "32 px native action height at (2560, 1440)/1.0",
+			"passed": true
+		},
+		{
+			"description": "28 px compact action height at (2560, 1440)/1.0",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (2560, 1440)/1.0/page0",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (2560, 1440)/1.0/page1",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (2560, 1440)/1.0/page2",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (2560, 1440)/1.0/page3",
+			"passed": true
+		},
+		{
+			"description": "32 px native action height at (2560, 1440)/1.25",
+			"passed": true
+		},
+		{
+			"description": "28 px compact action height at (2560, 1440)/1.25",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (2560, 1440)/1.25/page0",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (2560, 1440)/1.25/page1",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (2560, 1440)/1.25/page2",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (2560, 1440)/1.25/page3",
+			"passed": true
+		},
+		{
+			"description": "32 px native action height at (2560, 1440)/1.5",
+			"passed": true
+		},
+		{
+			"description": "28 px compact action height at (2560, 1440)/1.5",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (2560, 1440)/1.5/page0",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (2560, 1440)/1.5/page1",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (2560, 1440)/1.5/page2",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (2560, 1440)/1.5/page3",
+			"passed": true
+		},
+		{
+			"description": "32 px native action height at (2560, 1440)/2.0",
+			"passed": true
+		},
+		{
+			"description": "28 px compact action height at (2560, 1440)/2.0",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (2560, 1440)/2.0/page0",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (2560, 1440)/2.0/page1",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (2560, 1440)/2.0/page2",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (2560, 1440)/2.0/page3",
+			"passed": true
+		},
+		{
+			"description": "32 px native action height at (3840, 2160)/1.0",
+			"passed": true
+		},
+		{
+			"description": "28 px compact action height at (3840, 2160)/1.0",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (3840, 2160)/1.0/page0",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (3840, 2160)/1.0/page1",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (3840, 2160)/1.0/page2",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (3840, 2160)/1.0/page3",
+			"passed": true
+		},
+		{
+			"description": "32 px native action height at (3840, 2160)/1.25",
+			"passed": true
+		},
+		{
+			"description": "28 px compact action height at (3840, 2160)/1.25",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (3840, 2160)/1.25/page0",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (3840, 2160)/1.25/page1",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (3840, 2160)/1.25/page2",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (3840, 2160)/1.25/page3",
+			"passed": true
+		},
+		{
+			"description": "32 px native action height at (3840, 2160)/1.5",
+			"passed": true
+		},
+		{
+			"description": "28 px compact action height at (3840, 2160)/1.5",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (3840, 2160)/1.5/page0",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (3840, 2160)/1.5/page1",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (3840, 2160)/1.5/page2",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (3840, 2160)/1.5/page3",
+			"passed": true
+		},
+		{
+			"description": "32 px native action height at (3840, 2160)/2.0",
+			"passed": true
+		},
+		{
+			"description": "28 px compact action height at (3840, 2160)/2.0",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (3840, 2160)/2.0/page0",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (3840, 2160)/2.0/page1",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (3840, 2160)/2.0/page2",
+			"passed": true
+		},
+		{
+			"description": "No horizontal page overflow (3840, 2160)/2.0/page3",
+			"passed": true
+		},
+		{
+			"description": "Screenshot scale-3840x2160-200",
+			"passed": true
+		},
+		{
+			"description": "Root window scales logical metrics exactly once: 1.0",
+			"passed": true
+		},
+		{
+			"description": "Dialog inherits scale exactly once: 1.0",
+			"passed": true
+		},
+		{
+			"description": "Dialog respects 90 percent physical bounds: 1.0",
+			"passed": true
+		},
+		{
+			"description": "Root window scales logical metrics exactly once: 1.25",
+			"passed": true
+		},
+		{
+			"description": "Dialog inherits scale exactly once: 1.25",
+			"passed": true
+		},
+		{
+			"description": "Dialog respects 90 percent physical bounds: 1.25",
+			"passed": true
+		},
+		{
+			"description": "Root window scales logical metrics exactly once: 1.5",
+			"passed": true
+		},
+		{
+			"description": "Dialog inherits scale exactly once: 1.5",
+			"passed": true
+		},
+		{
+			"description": "Dialog respects 90 percent physical bounds: 1.5",
+			"passed": true
+		},
+		{
+			"description": "Root window scales logical metrics exactly once: 2.0",
+			"passed": true
+		},
+		{
+			"description": "Dialog inherits scale exactly once: 2.0",
+			"passed": true
+		},
+		{
+			"description": "Dialog respects 90 percent physical bounds: 2.0",
+			"passed": true
+		},
+		{
+			"description": "All native validation stages completed",
+			"passed": true
+		},
+		{
+			"description": "All numeric validation stages completed",
+			"passed": true
+		}
+	],
+	"contrast": [
+		{
+			"background": "15171bff",
+			"foreground": "e6eaf0ff",
+			"name": "text.primary/surface.0",
+			"ratio": 14.8615016698563,
+			"target": 4.5
+		},
+		{
+			"background": "15171bff",
+			"foreground": "b9c1ccff",
+			"name": "text.secondary/surface.0",
+			"ratio": 9.88042372797011,
+			"target": 4.5
+		},
+		{
+			"background": "15171bff",
+			"foreground": "9aa5b3ff",
+			"name": "text.muted/surface.0",
+			"ratio": 7.18380209175655,
+			"target": 4.5
+		},
+		{
+			"background": "15171bff",
+			"foreground": "a8c9ffff",
+			"name": "focus.ring/surface.0",
+			"ratio": 10.650205902974,
+			"target": 3.0
+		},
+		{
+			"background": "15171bff",
+			"foreground": "7fd1a7ff",
+			"name": "state.success/surface.0",
+			"ratio": 9.89565432061243,
+			"target": 3.0
+		},
+		{
+			"background": "15171bff",
+			"foreground": "e8bf72ff",
+			"name": "state.warning/surface.0",
+			"ratio": 10.3621009262779,
+			"target": 3.0
+		},
+		{
+			"background": "15171bff",
+			"foreground": "f08c91ff",
+			"name": "state.error/surface.0",
+			"ratio": 7.57530164086556,
+			"target": 3.0
+		},
+		{
+			"background": "15171bff",
+			"foreground": "9cbee8ff",
+			"name": "state.info/surface.0",
+			"ratio": 9.35185801224224,
+			"target": 3.0
+		},
+		{
+			"background": "1c1f24ff",
+			"foreground": "e6eaf0ff",
+			"name": "text.primary/surface.1",
+			"ratio": 13.6853690328104,
+			"target": 4.5
+		},
+		{
+			"background": "1c1f24ff",
+			"foreground": "b9c1ccff",
+			"name": "text.secondary/surface.1",
+			"ratio": 9.09849138543447,
+			"target": 4.5
+		},
+		{
+			"background": "1c1f24ff",
+			"foreground": "9aa5b3ff",
+			"name": "text.muted/surface.1",
+			"ratio": 6.61527918701331,
+			"target": 4.5
+		},
+		{
+			"background": "1c1f24ff",
+			"foreground": "a8c9ffff",
+			"name": "focus.ring/surface.1",
+			"ratio": 9.8073533412337,
+			"target": 3.0
+		},
+		{
+			"background": "1c1f24ff",
+			"foreground": "7fd1a7ff",
+			"name": "state.success/surface.1",
+			"ratio": 9.11251663574423,
+			"target": 3.0
+		},
+		{
+			"background": "1c1f24ff",
+			"foreground": "e8bf72ff",
+			"name": "state.warning/surface.1",
+			"ratio": 9.54204886434676,
+			"target": 3.0
+		},
+		{
+			"background": "1c1f24ff",
+			"foreground": "f08c91ff",
+			"name": "state.error/surface.1",
+			"ratio": 6.97579563580549,
+			"target": 3.0
+		},
+		{
+			"background": "1c1f24ff",
+			"foreground": "9cbee8ff",
+			"name": "state.info/surface.1",
+			"ratio": 8.6117561255314,
+			"target": 3.0
+		},
+		{
+			"background": "252930ff",
+			"foreground": "e6eaf0ff",
+			"name": "text.primary/surface.2",
+			"ratio": 12.0902049507182,
+			"target": 4.5
+		},
+		{
+			"background": "252930ff",
+			"foreground": "b9c1ccff",
+			"name": "text.secondary/surface.2",
+			"ratio": 8.03797291315401,
+			"target": 4.5
+		},
+		{
+			"background": "252930ff",
+			"foreground": "9aa5b3ff",
+			"name": "text.muted/surface.2",
+			"ratio": 5.84420346908152,
+			"target": 4.5
+		},
+		{
+			"background": "252930ff",
+			"foreground": "a8c9ffff",
+			"name": "focus.ring/surface.2",
+			"ratio": 8.66421005055473,
+			"target": 3.0
+		},
+		{
+			"background": "252930ff",
+			"foreground": "7fd1a7ff",
+			"name": "state.success/surface.2",
+			"ratio": 8.05036338288293,
+			"target": 3.0
+		},
+		{
+			"background": "252930ff",
+			"foreground": "e8bf72ff",
+			"name": "state.warning/surface.2",
+			"ratio": 8.42982941440118,
+			"target": 3.0
+		},
+		{
+			"background": "252930ff",
+			"foreground": "f08c91ff",
+			"name": "state.error/surface.2",
+			"ratio": 6.16269818731328,
+			"target": 3.0
+		},
+		{
+			"background": "252930ff",
+			"foreground": "9cbee8ff",
+			"name": "state.info/surface.2",
+			"ratio": 7.60797142507863,
+			"target": 3.0
+		},
+		{
+			"background": "2d323aff",
+			"foreground": "e6eaf0ff",
+			"name": "text.primary/surface.3",
+			"ratio": 10.677026139275,
+			"target": 4.5
+		},
+		{
+			"background": "2d323aff",
+			"foreground": "b9c1ccff",
+			"name": "text.secondary/surface.3",
+			"ratio": 7.0984443398895,
+			"target": 4.5
+		},
+		{
+			"background": "2d323aff",
+			"foreground": "9aa5b3ff",
+			"name": "text.muted/surface.3",
+			"ratio": 5.16109639637814,
+			"target": 4.5
+		},
+		{
+			"background": "2d323aff",
+			"foreground": "a8c9ffff",
+			"name": "focus.ring/surface.3",
+			"ratio": 7.65148296187043,
+			"target": 3.0
+		},
+		{
+			"background": "2d323aff",
+			"foreground": "7fd1a7ff",
+			"name": "state.success/surface.3",
+			"ratio": 7.10938653398073,
+			"target": 3.0
+		},
+		{
+			"background": "2d323aff",
+			"foreground": "e8bf72ff",
+			"name": "state.warning/surface.3",
+			"ratio": 7.44449820115281,
+			"target": 3.0
+		},
+		{
+			"background": "2d323aff",
+			"foreground": "f08c91ff",
+			"name": "state.error/surface.3",
+			"ratio": 5.44236345890048,
+			"target": 3.0
+		},
+		{
+			"background": "2d323aff",
+			"foreground": "9cbee8ff",
+			"name": "state.info/surface.3",
+			"ratio": 6.71870411655811,
+			"target": 3.0
+		},
+		{
+			"background": "252930ff",
+			"foreground": "e6eaf0ff",
+			"name": "Button/normal/text",
+			"ratio": 12.0902049507182,
+			"target": 4.5
+		},
+		{
+			"background": "252930ff",
+			"foreground": "707d8eff",
+			"name": "Button/normal/boundary",
+			"ratio": 3.48483143191752,
+			"target": 3.0
+		},
+		{
+			"background": "323943ff",
+			"foreground": "e6eaf0ff",
+			"name": "Button/hover/text",
+			"ratio": 9.65190348598279,
+			"target": 4.5
+		},
+		{
+			"background": "323943ff",
+			"foreground": "b9c1ccff",
+			"name": "Button/hover/boundary",
+			"ratio": 6.41690848889188,
+			"target": 3.0
+		},
+		{
+			"background": "3a4350ff",
+			"foreground": "e6eaf0ff",
+			"name": "Button/pressed/text",
+			"ratio": 8.28739057434222,
+			"target": 4.5
+		},
+		{
+			"background": "3a4350ff",
+			"foreground": "b9c1ccff",
+			"name": "Button/pressed/boundary",
+			"ratio": 5.50973463467494,
+			"target": 3.0
+		},
+		{
+			"background": "8cb8ffff",
+			"foreground": "142035ff",
+			"name": "PrimaryButton/normal/text",
+			"ratio": 8.0879251680771,
+			"target": 4.5
+		},
+		{
+			"background": "8cb8ffff",
+			"foreground": "142035ff",
+			"name": "PrimaryButton/hover/text",
+			"ratio": 8.0879251680771,
+			"target": 4.5
+		},
+		{
+			"background": "8cb8ffff",
+			"foreground": "142035ff",
+			"name": "PrimaryButton/pressed/text",
+			"ratio": 8.0879251680771,
+			"target": 4.5
+		},
+		{
+			"background": "252930ff",
+			"foreground": "f08c91ff",
+			"name": "DestructiveButton/normal/text",
+			"ratio": 6.16269818731328,
+			"target": 4.5
+		},
+		{
+			"background": "252930ff",
+			"foreground": "f08c91ff",
+			"name": "DestructiveButton/normal/boundary",
+			"ratio": 6.16269818731328,
+			"target": 3.0
+		},
+		{
+			"background": "323943ff",
+			"foreground": "f08c91ff",
+			"name": "DestructiveButton/hover/text",
+			"ratio": 4.91983124848974,
+			"target": 4.5
+		},
+		{
+			"background": "323943ff",
+			"foreground": "f08c91ff",
+			"name": "DestructiveButton/hover/boundary",
+			"ratio": 4.91983124848974,
+			"target": 3.0
+		},
+		{
+			"background": "3a4350ff",
+			"foreground": "e6eaf0ff",
+			"name": "DestructiveButton/pressed/text",
+			"ratio": 8.28739057434222,
+			"target": 4.5
+		},
+		{
+			"background": "3a4350ff",
+			"foreground": "f08c91ff",
+			"name": "DestructiveButton/pressed/boundary",
+			"ratio": 4.22430282019512,
+			"target": 3.0
+		},
+		{
+			"background": "263f62ff",
+			"foreground": "dceaffff",
+			"name": "SelectedButton/normal/text",
+			"ratio": 8.76047756168208,
+			"target": 4.5
+		},
+		{
+			"background": "263f62ff",
+			"foreground": "8cb8ffff",
+			"name": "SelectedButton/normal/boundary",
+			"ratio": 5.28752483239824,
+			"target": 3.0
+		},
+		{
+			"background": "263f62ff",
+			"foreground": "e6eaf0ff",
+			"name": "SelectedButton/hover/text",
+			"ratio": 8.82938055872654,
+			"target": 4.5
+		},
+		{
+			"background": "263f62ff",
+			"foreground": "8cb8ffff",
+			"name": "SelectedButton/hover/boundary",
+			"ratio": 5.28752483239824,
+			"target": 3.0
+		},
+		{
+			"background": "263f62ff",
+			"foreground": "e6eaf0ff",
+			"name": "SelectedButton/pressed/text",
+			"ratio": 8.82938055872654,
+			"target": 4.5
+		},
+		{
+			"background": "263f62ff",
+			"foreground": "8cb8ffff",
+			"name": "SelectedButton/pressed/boundary",
+			"ratio": 5.28752483239824,
+			"target": 3.0
+		},
+		{
+			"background": "252930ff",
+			"foreground": "e6eaf0ff",
+			"name": "CompactButton/normal/text",
+			"ratio": 12.0902049507182,
+			"target": 4.5
+		},
+		{
+			"background": "252930ff",
+			"foreground": "707d8eff",
+			"name": "CompactButton/normal/boundary",
+			"ratio": 3.48483143191752,
+			"target": 3.0
+		},
+		{
+			"background": "323943ff",
+			"foreground": "e6eaf0ff",
+			"name": "CompactButton/hover/text",
+			"ratio": 9.65190348598279,
+			"target": 4.5
+		},
+		{
+			"background": "323943ff",
+			"foreground": "b9c1ccff",
+			"name": "CompactButton/hover/boundary",
+			"ratio": 6.41690848889188,
+			"target": 3.0
+		},
+		{
+			"background": "3a4350ff",
+			"foreground": "e6eaf0ff",
+			"name": "CompactButton/pressed/text",
+			"ratio": 8.28739057434222,
+			"target": 4.5
+		},
+		{
+			"background": "3a4350ff",
+			"foreground": "b9c1ccff",
+			"name": "CompactButton/pressed/boundary",
+			"ratio": 5.50973463467494,
+			"target": 3.0
+		},
+		{
+			"background": "252930ff",
+			"foreground": "e6eaf0ff",
+			"name": "OptionButton/normal/text",
+			"ratio": 12.0902049507182,
+			"target": 4.5
+		},
+		{
+			"background": "252930ff",
+			"foreground": "707d8eff",
+			"name": "OptionButton/normal/boundary",
+			"ratio": 3.48483143191752,
+			"target": 3.0
+		},
+		{
+			"background": "323943ff",
+			"foreground": "e6eaf0ff",
+			"name": "OptionButton/hover/text",
+			"ratio": 9.65190348598279,
+			"target": 4.5
+		},
+		{
+			"background": "323943ff",
+			"foreground": "b9c1ccff",
+			"name": "OptionButton/hover/boundary",
+			"ratio": 6.41690848889188,
+			"target": 3.0
+		},
+		{
+			"background": "3a4350ff",
+			"foreground": "e6eaf0ff",
+			"name": "OptionButton/pressed/text",
+			"ratio": 8.28739057434222,
+			"target": 4.5
+		},
+		{
+			"background": "3a4350ff",
+			"foreground": "b9c1ccff",
+			"name": "OptionButton/pressed/boundary",
+			"ratio": 5.50973463467494,
+			"target": 3.0
+		},
+		{
+			"background": "252930ff",
+			"foreground": "e6eaf0ff",
+			"name": "LineEdit/normal/text",
+			"ratio": 12.0902049507182,
+			"target": 4.5
+		},
+		{
+			"background": "252930ff",
+			"foreground": "707d8eff",
+			"name": "LineEdit/normal/boundary",
+			"ratio": 3.48483143191752,
+			"target": 3.0
+		},
+		{
+			"background": "1c1f24ff",
+			"foreground": "b9c1ccff",
+			"name": "read-only value remains legible",
+			"ratio": 9.09849138543447,
+			"target": 4.5
+		},
+		{
+			"background": "2d323aff",
+			"foreground": "e6eaf0ff",
+			"name": "embedded dialog title text",
+			"ratio": 10.677026139275,
+			"target": 4.5
+		},
+		{
+			"background": "1c1f24ff",
+			"foreground": "8cb8ffff",
+			"name": "primary filled boundary",
+			"ratio": 8.19556118577313,
+			"target": 3.0
+		},
+		{
+			"background": "263f62ff",
+			"foreground": "dceaffff",
+			"name": "selected rows/menu text",
+			"ratio": 8.76047756168208,
+			"target": 4.5
+		}
+	],
+	"display": "X11",
+	"engine": {
+		"build": "official",
+		"hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+		"hex": 263938,
+		"major": 4,
+		"minor": 7,
+		"patch": 2,
+		"status": "stable",
+		"string": "4.7.2-stable (official)",
+		"timestamp": 0
+	},
+	"failures": [],
+	"images": [
+		{
+			"file": "01-controls-focus-hover.png",
+			"sha256": "b88885277ebeb7b63bd007d55f8cf6c3a3144869bca65bdfeee8d7b81341dfa3",
+			"size": [
+				1440,
+				900
+			]
+		},
+		{
+			"file": "02-numbers.png",
+			"sha256": "4f85c747df564ec27f68a7734c411ece6123974fd11e61a18d85bbf8b96c1581",
+			"size": [
+				1440,
+				900
+			]
+		},
+		{
+			"file": "03-feedback.png",
+			"sha256": "2789f41963d1d4e98e069a26a04e6b25d915238a167708bbdc3cbfcee2886982",
+			"size": [
+				1440,
+				900
+			]
+		},
+		{
+			"file": "04-tokens.png",
+			"sha256": "94e4455d116fff8b74667f5d5b042d4cc73c9508d8eb4ffecfb5a76215b51cf6",
+			"size": [
+				1440,
+				900
+			]
+		},
+		{
+			"file": "05-slider-focus.png",
+			"sha256": "98f71ec9de9cb41bc488b399360de5c6b2dd89c736329b2d59b23c14a85e106d",
+			"size": [
+				1440,
+				900
+			]
+		},
+		{
+			"file": "06-menu.png",
+			"sha256": "1ad7b7998d8f1f8b6ec11b026a1b8754ac91c0c97ed26bf554cdf160f90c6518",
+			"size": [
+				1440,
+				900
+			]
+		},
+		{
+			"file": "07-dialog.png",
+			"sha256": "89f3868347c66cc67ea398778805dc0929e1a6e5367e08c2522e37ed0295c355",
+			"size": [
+				1440,
+				900
+			]
+		},
+		{
+			"file": "scale-1024x640-200.png",
+			"sha256": "76fda5427d8919767752276fcc2412ffa627fbf4cb77b377d48f4de213c6a118",
+			"size": [
+				1024,
+				640
+			]
+		},
+		{
+			"file": "scale-1440x900-100.png",
+			"sha256": "e3d8f35d48d74ea5497ba3ece5e6ce255c265a3d45dcce72b7c657206ff5617a",
+			"size": [
+				1440,
+				900
+			]
+		},
+		{
+			"file": "scale-1440x900-125.png",
+			"sha256": "1d6ba02fea2441f5f5efb3438f93a5012cd2207ab3951c863e9e6f0341862389",
+			"size": [
+				1440,
+				900
+			]
+		},
+		{
+			"file": "scale-1440x900-150.png",
+			"sha256": "4721fbf8137883ff84a9e0bbb253a790c6545d3e5dbbb4eff52aa8b6012f52f3",
+			"size": [
+				1440,
+				900
+			]
+		},
+		{
+			"file": "scale-1440x900-200.png",
+			"sha256": "6a5cfeb972e756b9de2a9671cd6388b3c2946cb1f5580e0dfe60f6b3a27d02e9",
+			"size": [
+				1440,
+				900
+			]
+		},
+		{
+			"file": "scale-3840x2160-200.png",
+			"sha256": "3b211559eac67b3c1acb8b192e3a29f8c20f72af2f9a1d9ff15caaaebd2e5279",
+			"size": [
+				3840,
+				2160
+			]
+		}
+	],
+	"metrics": [
+		{
+			"digit_widths": [
+				8.0,
+				8.0,
+				8.0,
+				8.0,
+				8.0,
+				8.0,
+				8.0,
+				8.0,
+				8.0,
+				8.0
+			],
+			"mono_height_13": 17.0,
+			"numeric_font": "DejaVu Sans Mono",
+			"sans_height_14": 20.0
+		},
+		{
+			"button_height": 32.0,
+			"compact_height": 28.0,
+			"logical": [
+				1024,
+				640
+			],
+			"pages": [
+				{
+					"content_size": [
+						938.0,
+						1225.0
+					],
+					"fits_width": true,
+					"page": 0,
+					"scroll_size": [
+						952.0,
+						467.0
+					]
+				},
+				{
+					"content_size": [
+						938.0,
+						1010.0
+					],
+					"fits_width": true,
+					"page": 1,
+					"scroll_size": [
+						952.0,
+						467.0
+					]
+				},
+				{
+					"content_size": [
+						938.0,
+						877.0
+					],
+					"fits_width": true,
+					"page": 2,
+					"scroll_size": [
+						952.0,
+						467.0
+					]
+				},
+				{
+					"content_size": [
+						938.0,
+						1189.0
+					],
+					"fits_width": true,
+					"page": 3,
+					"scroll_size": [
+						952.0,
+						467.0
+					]
+				}
+			],
+			"physical": [
+				1024,
+				640
+			],
+			"scale": 1.0
+		},
+		{
+			"button_height": 32.0,
+			"compact_height": 28.0,
+			"logical": [
+				819,
+				512
+			],
+			"pages": [
+				{
+					"content_size": [
+						733.0,
+						1225.0
+					],
+					"fits_width": true,
+					"page": 0,
+					"scroll_size": [
+						747.0,
+						339.0
+					]
+				},
+				{
+					"content_size": [
+						733.0,
+						1010.0
+					],
+					"fits_width": true,
+					"page": 1,
+					"scroll_size": [
+						747.0,
+						339.0
+					]
+				},
+				{
+					"content_size": [
+						733.0,
+						877.0
+					],
+					"fits_width": true,
+					"page": 2,
+					"scroll_size": [
+						747.0,
+						339.0
+					]
+				},
+				{
+					"content_size": [
+						733.0,
+						1189.0
+					],
+					"fits_width": true,
+					"page": 3,
+					"scroll_size": [
+						747.0,
+						339.0
+					]
+				}
+			],
+			"physical": [
+				1024,
+				640
+			],
+			"scale": 1.25
+		},
+		{
+			"button_height": 32.0,
+			"compact_height": 28.0,
+			"logical": [
+				682,
+				426
+			],
+			"pages": [
+				{
+					"content_size": [
+						596.0,
+						1247.0
+					],
+					"fits_width": true,
+					"page": 0,
+					"scroll_size": [
+						610.0,
+						253.0
+					]
+				},
+				{
+					"content_size": [
+						596.0,
+						1048.0
+					],
+					"fits_width": true,
+					"page": 1,
+					"scroll_size": [
+						610.0,
+						253.0
+					]
+				},
+				{
+					"content_size": [
+						596.0,
+						918.0
+					],
+					"fits_width": true,
+					"page": 2,
+					"scroll_size": [
+						610.0,
+						253.0
+					]
+				},
+				{
+					"content_size": [
+						596.0,
+						1208.0
+					],
+					"fits_width": true,
+					"page": 3,
+					"scroll_size": [
+						610.0,
+						253.0
+					]
+				}
+			],
+			"physical": [
+				1024,
+				640
+			],
+			"scale": 1.5
+		},
+		{
+			"button_height": 32.0,
+			"compact_height": 28.0,
+			"logical": [
+				512,
+				320
+			],
+			"pages": [
+				{
+					"content_size": [
+						426.0,
+						1304.0
+					],
+					"fits_width": true,
+					"page": 0,
+					"scroll_size": [
+						440.0,
+						113.0
+					]
+				},
+				{
+					"content_size": [
+						426.0,
+						1086.0
+					],
+					"fits_width": true,
+					"page": 1,
+					"scroll_size": [
+						440.0,
+						113.0
+					]
+				},
+				{
+					"content_size": [
+						426.0,
+						1066.0
+					],
+					"fits_width": true,
+					"page": 2,
+					"scroll_size": [
+						440.0,
+						113.0
+					]
+				},
+				{
+					"content_size": [
+						426.0,
+						1208.0
+					],
+					"fits_width": true,
+					"page": 3,
+					"scroll_size": [
+						440.0,
+						113.0
+					]
+				}
+			],
+			"physical": [
+				1024,
+				640
+			],
+			"scale": 2.0
+		},
+		{
+			"button_height": 32.0,
+			"compact_height": 28.0,
+			"logical": [
+				1440,
+				900
+			],
+			"pages": [
+				{
+					"content_size": [
+						1368.0,
+						685.0
+					],
+					"fits_width": true,
+					"page": 0,
+					"scroll_size": [
+						1368.0,
+						727.0
+					]
+				},
+				{
+					"content_size": [
+						1368.0,
+						545.0
+					],
+					"fits_width": true,
+					"page": 1,
+					"scroll_size": [
+						1368.0,
+						727.0
+					]
+				},
+				{
+					"content_size": [
+						1368.0,
+						570.0
+					],
+					"fits_width": true,
+					"page": 2,
+					"scroll_size": [
+						1368.0,
+						727.0
+					]
+				},
+				{
+					"content_size": [
+						1368.0,
+						618.0
+					],
+					"fits_width": true,
+					"page": 3,
+					"scroll_size": [
+						1368.0,
+						727.0
+					]
+				}
+			],
+			"physical": [
+				1440,
+				900
+			],
+			"scale": 1.0
+		},
+		{
+			"button_height": 32.0,
+			"compact_height": 28.0,
+			"logical": [
+				1152,
+				720
+			],
+			"pages": [
+				{
+					"content_size": [
+						1066.0,
+						707.0
+					],
+					"fits_width": true,
+					"page": 0,
+					"scroll_size": [
+						1080.0,
+						547.0
+					]
+				},
+				{
+					"content_size": [
+						1066.0,
+						583.0
+					],
+					"fits_width": true,
+					"page": 1,
+					"scroll_size": [
+						1080.0,
+						547.0
+					]
+				},
+				{
+					"content_size": [
+						1066.0,
+						592.0
+					],
+					"fits_width": true,
+					"page": 2,
+					"scroll_size": [
+						1080.0,
+						547.0
+					]
+				},
+				{
+					"content_size": [
+						1066.0,
+						618.0
+					],
+					"fits_width": true,
+					"page": 3,
+					"scroll_size": [
+						1080.0,
+						547.0
+					]
+				}
+			],
+			"physical": [
+				1440,
+				900
+			],
+			"scale": 1.25
+		},
+		{
+			"button_height": 32.0,
+			"compact_height": 28.0,
+			"logical": [
+				960,
+				600
+			],
+			"pages": [
+				{
+					"content_size": [
+						874.0,
+						1225.0
+					],
+					"fits_width": true,
+					"page": 0,
+					"scroll_size": [
+						888.0,
+						427.0
+					]
+				},
+				{
+					"content_size": [
+						874.0,
+						1010.0
+					],
+					"fits_width": true,
+					"page": 1,
+					"scroll_size": [
+						888.0,
+						427.0
+					]
+				},
+				{
+					"content_size": [
+						874.0,
+						877.0
+					],
+					"fits_width": true,
+					"page": 2,
+					"scroll_size": [
+						888.0,
+						427.0
+					]
+				},
+				{
+					"content_size": [
+						874.0,
+						1189.0
+					],
+					"fits_width": true,
+					"page": 3,
+					"scroll_size": [
+						888.0,
+						427.0
+					]
+				}
+			],
+			"physical": [
+				1440,
+				900
+			],
+			"scale": 1.5
+		},
+		{
+			"button_height": 32.0,
+			"compact_height": 28.0,
+			"logical": [
+				720,
+				450
+			],
+			"pages": [
+				{
+					"content_size": [
+						634.0,
+						1225.0
+					],
+					"fits_width": true,
+					"page": 0,
+					"scroll_size": [
+						648.0,
+						277.0
+					]
+				},
+				{
+					"content_size": [
+						634.0,
+						1029.0
+					],
+					"fits_width": true,
+					"page": 1,
+					"scroll_size": [
+						648.0,
+						277.0
+					]
+				},
+				{
+					"content_size": [
+						634.0,
+						899.0
+					],
+					"fits_width": true,
+					"page": 2,
+					"scroll_size": [
+						648.0,
+						277.0
+					]
+				},
+				{
+					"content_size": [
+						634.0,
+						1208.0
+					],
+					"fits_width": true,
+					"page": 3,
+					"scroll_size": [
+						648.0,
+						277.0
+					]
+				}
+			],
+			"physical": [
+				1440,
+				900
+			],
+			"scale": 2.0
+		},
+		{
+			"button_height": 32.0,
+			"compact_height": 28.0,
+			"logical": [
+				2560,
+				1440
+			],
+			"pages": [
+				{
+					"content_size": [
+						2488.0,
+						685.0
+					],
+					"fits_width": true,
+					"page": 0,
+					"scroll_size": [
+						2488.0,
+						1267.0
+					]
+				},
+				{
+					"content_size": [
+						2488.0,
+						545.0
+					],
+					"fits_width": true,
+					"page": 1,
+					"scroll_size": [
+						2488.0,
+						1267.0
+					]
+				},
+				{
+					"content_size": [
+						2488.0,
+						570.0
+					],
+					"fits_width": true,
+					"page": 2,
+					"scroll_size": [
+						2488.0,
+						1267.0
+					]
+				},
+				{
+					"content_size": [
+						2488.0,
+						599.0
+					],
+					"fits_width": true,
+					"page": 3,
+					"scroll_size": [
+						2488.0,
+						1267.0
+					]
+				}
+			],
+			"physical": [
+				2560,
+				1440
+			],
+			"scale": 1.0
+		},
+		{
+			"button_height": 32.0,
+			"compact_height": 28.0,
+			"logical": [
+				2048,
+				1152
+			],
+			"pages": [
+				{
+					"content_size": [
+						1976.0,
+						685.0
+					],
+					"fits_width": true,
+					"page": 0,
+					"scroll_size": [
+						1976.0,
+						979.0
+					]
+				},
+				{
+					"content_size": [
+						1976.0,
+						545.0
+					],
+					"fits_width": true,
+					"page": 1,
+					"scroll_size": [
+						1976.0,
+						979.0
+					]
+				},
+				{
+					"content_size": [
+						1976.0,
+						570.0
+					],
+					"fits_width": true,
+					"page": 2,
+					"scroll_size": [
+						1976.0,
+						979.0
+					]
+				},
+				{
+					"content_size": [
+						1976.0,
+						599.0
+					],
+					"fits_width": true,
+					"page": 3,
+					"scroll_size": [
+						1976.0,
+						979.0
+					]
+				}
+			],
+			"physical": [
+				2560,
+				1440
+			],
+			"scale": 1.25
+		},
+		{
+			"button_height": 32.0,
+			"compact_height": 28.0,
+			"logical": [
+				1706,
+				960
+			],
+			"pages": [
+				{
+					"content_size": [
+						1634.0,
+						685.0
+					],
+					"fits_width": true,
+					"page": 0,
+					"scroll_size": [
+						1634.0,
+						787.0
+					]
+				},
+				{
+					"content_size": [
+						1634.0,
+						545.0
+					],
+					"fits_width": true,
+					"page": 1,
+					"scroll_size": [
+						1634.0,
+						787.0
+					]
+				},
+				{
+					"content_size": [
+						1634.0,
+						570.0
+					],
+					"fits_width": true,
+					"page": 2,
+					"scroll_size": [
+						1634.0,
+						787.0
+					]
+				},
+				{
+					"content_size": [
+						1634.0,
+						599.0
+					],
+					"fits_width": true,
+					"page": 3,
+					"scroll_size": [
+						1634.0,
+						787.0
+					]
+				}
+			],
+			"physical": [
+				2560,
+				1440
+			],
+			"scale": 1.5
+		},
+		{
+			"button_height": 32.0,
+			"compact_height": 28.0,
+			"logical": [
+				1280,
+				720
+			],
+			"pages": [
+				{
+					"content_size": [
+						1194.0,
+						707.0
+					],
+					"fits_width": true,
+					"page": 0,
+					"scroll_size": [
+						1208.0,
+						547.0
+					]
+				},
+				{
+					"content_size": [
+						1194.0,
+						583.0
+					],
+					"fits_width": true,
+					"page": 1,
+					"scroll_size": [
+						1208.0,
+						547.0
+					]
+				},
+				{
+					"content_size": [
+						1194.0,
+						570.0
+					],
+					"fits_width": true,
+					"page": 2,
+					"scroll_size": [
+						1208.0,
+						547.0
+					]
+				},
+				{
+					"content_size": [
+						1194.0,
+						618.0
+					],
+					"fits_width": true,
+					"page": 3,
+					"scroll_size": [
+						1208.0,
+						547.0
+					]
+				}
+			],
+			"physical": [
+				2560,
+				1440
+			],
+			"scale": 2.0
+		},
+		{
+			"button_height": 32.0,
+			"compact_height": 28.0,
+			"logical": [
+				3840,
+				2160
+			],
+			"pages": [
+				{
+					"content_size": [
+						3768.0,
+						685.0
+					],
+					"fits_width": true,
+					"page": 0,
+					"scroll_size": [
+						3768.0,
+						1987.0
+					]
+				},
+				{
+					"content_size": [
+						3768.0,
+						545.0
+					],
+					"fits_width": true,
+					"page": 1,
+					"scroll_size": [
+						3768.0,
+						1987.0
+					]
+				},
+				{
+					"content_size": [
+						3768.0,
+						570.0
+					],
+					"fits_width": true,
+					"page": 2,
+					"scroll_size": [
+						3768.0,
+						1987.0
+					]
+				},
+				{
+					"content_size": [
+						3768.0,
+						599.0
+					],
+					"fits_width": true,
+					"page": 3,
+					"scroll_size": [
+						3768.0,
+						1987.0
+					]
+				}
+			],
+			"physical": [
+				3840,
+				2160
+			],
+			"scale": 1.0
+		},
+		{
+			"button_height": 32.0,
+			"compact_height": 28.0,
+			"logical": [
+				3072,
+				1728
+			],
+			"pages": [
+				{
+					"content_size": [
+						3000.0,
+						685.0
+					],
+					"fits_width": true,
+					"page": 0,
+					"scroll_size": [
+						3000.0,
+						1555.0
+					]
+				},
+				{
+					"content_size": [
+						3000.0,
+						545.0
+					],
+					"fits_width": true,
+					"page": 1,
+					"scroll_size": [
+						3000.0,
+						1555.0
+					]
+				},
+				{
+					"content_size": [
+						3000.0,
+						570.0
+					],
+					"fits_width": true,
+					"page": 2,
+					"scroll_size": [
+						3000.0,
+						1555.0
+					]
+				},
+				{
+					"content_size": [
+						3000.0,
+						599.0
+					],
+					"fits_width": true,
+					"page": 3,
+					"scroll_size": [
+						3000.0,
+						1555.0
+					]
+				}
+			],
+			"physical": [
+				3840,
+				2160
+			],
+			"scale": 1.25
+		},
+		{
+			"button_height": 32.0,
+			"compact_height": 28.0,
+			"logical": [
+				2560,
+				1440
+			],
+			"pages": [
+				{
+					"content_size": [
+						2488.0,
+						685.0
+					],
+					"fits_width": true,
+					"page": 0,
+					"scroll_size": [
+						2488.0,
+						1267.0
+					]
+				},
+				{
+					"content_size": [
+						2488.0,
+						545.0
+					],
+					"fits_width": true,
+					"page": 1,
+					"scroll_size": [
+						2488.0,
+						1267.0
+					]
+				},
+				{
+					"content_size": [
+						2488.0,
+						570.0
+					],
+					"fits_width": true,
+					"page": 2,
+					"scroll_size": [
+						2488.0,
+						1267.0
+					]
+				},
+				{
+					"content_size": [
+						2488.0,
+						599.0
+					],
+					"fits_width": true,
+					"page": 3,
+					"scroll_size": [
+						2488.0,
+						1267.0
+					]
+				}
+			],
+			"physical": [
+				3840,
+				2160
+			],
+			"scale": 1.5
+		},
+		{
+			"button_height": 32.0,
+			"compact_height": 28.0,
+			"logical": [
+				1920,
+				1080
+			],
+			"pages": [
+				{
+					"content_size": [
+						1848.0,
+						685.0
+					],
+					"fits_width": true,
+					"page": 0,
+					"scroll_size": [
+						1848.0,
+						907.0
+					]
+				},
+				{
+					"content_size": [
+						1848.0,
+						545.0
+					],
+					"fits_width": true,
+					"page": 1,
+					"scroll_size": [
+						1848.0,
+						907.0
+					]
+				},
+				{
+					"content_size": [
+						1848.0,
+						570.0
+					],
+					"fits_width": true,
+					"page": 2,
+					"scroll_size": [
+						1848.0,
+						907.0
+					]
+				},
+				{
+					"content_size": [
+						1848.0,
+						599.0
+					],
+					"fits_width": true,
+					"page": 3,
+					"scroll_size": [
+						1848.0,
+						907.0
+					]
+				}
+			],
+			"physical": [
+				3840,
+				2160
+			],
+			"scale": 2.0
+		}
+	],
+	"native_parser_mismatches": [
+		{
+			"expected": "0000000000001000",
+			"native": "0000000000000000",
+			"text": "2.2250738585072014e-308"
+		},
+		{
+			"expected": "0100000000000000",
+			"native": "0000000000000000",
+			"text": "4.9406564584124654e-324"
+		},
+		{
+			"expected": "000000000000f03f",
+			"native": "010000000000f03f",
+			"text": "1.00000000000000011102230246251565404236316680908203125"
+		},
+		{
+			"expected": "020000000000f03f",
+			"native": "010000000000f03f",
+			"text": "1.00000000000000033306690738754696212708950042724609375"
+		},
+		{
+			"expected": "0100000000000000",
+			"native": "0000000000000000",
+			"text": "2.5e-324"
+		},
+		{
+			"expected": "ffffffffffff0f00",
+			"native": "0000000000000000",
+			"text": "2.225073858507201e-308"
+		},
+		{
+			"expected": "0000000000001000",
+			"native": "0000000000000000",
+			"text": "0.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000022250738585072014"
+		},
+		{
+			"expected": "56aa95305a9f2ae8",
+			"native": "57aa95305a9f2ae8",
+			"text": "-6.0731719090735555e+193"
+		},
+		{
+			"expected": "5986d8e44f2b8ed5",
+			"native": "5886d8e44f2b8ed5",
+			"text": "-1.3514255965667817e+104"
+		},
+		{
+			"expected": "ba54000d0f354c5d",
+			"native": "b954000d0f354c5d",
+			"text": "2.6872551221955796e+141"
+		},
+		{
+			"expected": "c3467d354d72feeb",
+			"native": "c5467d354d72feeb",
+			"text": "-1.6015267835997075e+212"
+		},
+		{
+			"expected": "33a45622dff037b0",
+			"native": "32a45622dff037b0",
+			"text": "-2.067576888402513e-76"
+		},
+		{
+			"expected": "d73167b1a79f8a0e",
+			"native": "d53167b1a79f8a0e",
+			"text": "1.2776770205195341e-238"
+		},
+		{
+			"expected": "3a63bb67a8cda97d",
+			"native": "3c63bb67a8cda97d",
+			"text": "2.1094141077991659e+297"
+		},
+		{
+			"expected": "7ff9f26d6bc37f1f",
+			"native": "7ef9f26d6bc37f1f",
+			"text": "5.7837389327552972e-157"
+		},
+		{
+			"expected": "cc3f2015a6aa16ab",
+			"native": "cb3f2015a6aa16ab",
+			"text": "-4.0480678519018682e-101"
+		},
+		{
+			"expected": "f2a8f74f16d5295f",
+			"native": "f3a8f74f16d5295f",
+			"text": "2.6424825917033049e+150"
+		},
+		{
+			"expected": "c96aba86cc5112f9",
+			"native": "ca6aba86cc5112f9",
+			"text": "-1.5856608814475208e+275"
+		},
+		{
+			"expected": "9b4b8f365b145f75",
+			"native": "9c4b8f365b145f75",
+			"text": "2.3332999542077495e+257"
+		},
+		{
+			"expected": "d17ef89e13cdc687",
+			"native": "d07ef89e13cdc687",
+			"text": "-3.3718585376170762e-271"
+		},
+		{
+			"expected": "e626487b065eefdf",
+			"native": "e726487b065eefdf",
+			"text": "-1.3142704729588527e+154"
+		},
+		{
+			"expected": "cabf67ee6c5d9dff",
+			"native": "cbbf67ee6c5d9dff",
+			"text": "-5.1551911301253334e+306"
+		},
+		{
+			"expected": "7572bd543606cc0b",
+			"native": "7672bd543606cc0b",
+			"text": "7.6448310610553144e-252"
+		},
+		{
+			"expected": "f3e0e5e7bcbb0c2e",
+			"native": "f1e0e5e7bcbb0c2e",
+			"text": "7.2220009847035541e-87"
+		},
+		{
+			"expected": "75a666ba25a31bf7",
+			"native": "77a666ba25a31bf7",
+			"text": "-5.5696989081162114e+265"
+		},
+		{
+			"expected": "c985aef5f1793d03",
+			"native": "0000000000000000",
+			"text": "4.6152784808732884e-293"
+		},
+		{
+			"expected": "1a6cd656ec346b0d",
+			"native": "196cd656ec346b0d",
+			"text": "4.9806943569766929e-244"
+		},
+		{
+			"expected": "6e7100f1112f37a6",
+			"native": "6d7100f1112f37a6",
+			"text": "-1.3699593794337537e-124"
+		},
+		{
+			"expected": "6fd8be5992f7d014",
+			"native": "6ed8be5992f7d014",
+			"text": "2.0643818730182084e-208"
+		},
+		{
+			"expected": "c39dafaf9f523dd8",
+			"native": "c59dafaf9f523dd8",
+			"text": "-1.1553751424885663e+117"
+		},
+		{
+			"expected": "a13ad220cc87ab4c",
+			"native": "a23ad220cc87ab4c",
+			"text": "2.2119870569181211e+61"
+		},
+		{
+			"expected": "1a1dc0c876c619b7",
+			"native": "191dc0c876c619b7",
+			"text": "-2.8895054597173944e-43"
+		},
+		{
+			"expected": "104a25b8278faccf",
+			"native": "114a25b8278faccf",
+			"text": "-6.4588465116297509e+75"
+		},
+		{
+			"expected": "c1198ae6f6d58c64",
+			"native": "c2198ae6f6d58c64",
+			"text": "2.2822302904723657e+176"
+		},
+		{
+			"expected": "397291d287544db5",
+			"native": "387291d287544db5",
+			"text": "-6.1244309987702394e-52"
+		},
+		{
+			"expected": "abf75841ee268897",
+			"native": "aaf75841ee268897",
+			"text": "-2.5848017270717936e-195"
+		},
+		{
+			"expected": "243c81df4109df86",
+			"native": "253c81df4109df86",
+			"text": "-1.4006575998866082e-275"
+		},
+		{
+			"expected": "b78a0ae4ec75c691",
+			"native": "b58a0ae4ec75c691",
+			"text": "-4.8543989266205738e-223"
+		},
+		{
+			"expected": "618e23044dd3478f",
+			"native": "608e23044dd3478f",
+			"text": "-4.6833162461922886e-235"
+		},
+		{
+			"expected": "6585e8a7581b44a1",
+			"native": "6485e8a7581b44a1",
+			"text": "-1.9656019280362432e-148"
+		},
+		{
+			"expected": "55056f691e32d877",
+			"native": "54056f691e32d877",
+			"text": "1.9972650667021161e+269"
+		},
+		{
+			"expected": "c22fc5fc4ed2a890",
+			"native": "c12fc5fc4ed2a890",
+			"text": "-2.0464523331420557e-228"
+		},
+		{
+			"expected": "81eb35cf9a074add",
+			"native": "80eb35cf9a074add",
+			"text": "-2.4798033699881938e+141"
+		},
+		{
+			"expected": "4795269c51ad5df1",
+			"native": "4895269c51ad5df1",
+			"text": "-1.2078054269722311e+238"
+		},
+		{
+			"expected": "ce428a9a9456bf1d",
+			"native": "cd428a9a9456bf1d",
+			"text": "2.1257711603935413e-165"
+		},
+		{
+			"expected": "2bbc25c13206cf21",
+			"native": "2abc25c13206cf21",
+			"text": "7.7641312862934319e-146"
+		},
+		{
+			"expected": "470bbb158e636665",
+			"native": "480bbb158e636665",
+			"text": "2.9032198224589848e+180"
+		},
+		{
+			"expected": "ad6742d89bc77860",
+			"native": "ae6742d89bc77860",
+			"text": "5.3158679970109622e+156"
+		},
+		{
+			"expected": "30098d715030b01e",
+			"native": "2f098d715030b01e",
+			"text": "7.1967271259666721e-161"
+		},
+		{
+			"expected": "0b91b8051755944f",
+			"native": "0c91b8051755944f",
+			"text": "2.2991494666435822e+75"
+		},
+		{
+			"expected": "0cefad470d51a90a",
+			"native": "0befad470d51a90a",
+			"text": "2.6345063412760209e-257"
+		},
+		{
+			"expected": "138d1d457bdb1001",
+			"native": "0000000000000000",
+			"text": "1.5363624199226536e-303"
+		},
+		{
+			"expected": "a7e1bf19f082d080",
+			"native": "0000000000000080",
+			"text": "-9.4052490070403274e-305"
+		},
+		{
+			"expected": "1e21c885e061d9e7",
+			"native": "2021c885e061d9e7",
+			"text": "-1.8094591150975927e+192"
+		},
+		{
+			"expected": "93e1613d3dda102f",
+			"native": "92e1613d3dda102f",
+			"text": "5.5519487071822241e-82"
+		},
+		{
+			"expected": "6b6fae0208d3461a",
+			"native": "6a6fae0208d3461a",
+			"text": "4.2972525574930273e-182"
+		},
+		{
+			"expected": "a6bac273e1a861c9",
+			"native": "a5bac273e1a861c9",
+			"text": "-3.1505939985313945e+45"
+		},
+		{
+			"expected": "d56601976310f8f4",
+			"native": "d66601976310f8f4",
+			"text": "-2.8228286292410761e+255"
+		},
+		{
+			"expected": "f6961efca0adad61",
+			"native": "f7961efca0adad61",
+			"text": "3.3379958228280439e+162"
+		},
+		{
+			"expected": "b036ee897e4573ec",
+			"native": "b136ee897e4573ec",
+			"text": "-2.5950850446236608e+214"
+		},
+		{
+			"expected": "0d90930f1cfed481",
+			"native": "0000000000000080",
+			"text": "-7.8366577865001719e-300"
+		},
+		{
+			"expected": "560bc1251e2f6eb6",
+			"native": "550bc1251e2f6eb6",
+			"text": "-1.6522214135381797e-46"
+		},
+		{
+			"expected": "3c3f4bc21c30edf5",
+			"native": "3d3f4bc21c30edf5",
+			"text": "-1.1219401827388612e+260"
+		},
+		{
+			"expected": "b51597f67dc05c8d",
+			"native": "b41597f67dc05c8d",
+			"text": "-2.6317850272577196e-244"
+		},
+		{
+			"expected": "7f2247817d8a99ff",
+			"native": "802247817d8a99ff",
+			"text": "-4.4838710944187174e+306"
+		},
+		{
+			"expected": "7834c8f31f3758a0",
+			"native": "7734c8f31f3758a0",
+			"text": "-7.2242476710679252e-153"
+		},
+		{
+			"expected": "55ed8ec3df2417aa",
+			"native": "53ed8ec3df2417aa",
+			"text": "-6.306968970023095e-106"
+		},
+		{
+			"expected": "0d798eb15909a135",
+			"native": "0e798eb15909a135",
+			"text": "2.2767311221452366e-50"
+		},
+		{
+			"expected": "10227b23ea79be9b",
+			"native": "0f227b23ea79be9b",
+			"text": "-4.8133091813804762e-175"
+		},
+		{
+			"expected": "6f315628ee6906f4",
+			"native": "70315628ee6906f4",
+			"text": "-8.0238298163188449e+250"
+		},
+		{
+			"expected": "87b25abe61726bce",
+			"native": "88b25abe61726bce",
+			"text": "-5.919714965090743e+69"
+		},
+		{
+			"expected": "e152f2ab6e38ff8a",
+			"native": "e252f2ab6e38ff8a",
+			"text": "-1.0396393184170274e-255"
+		},
+		{
+			"expected": "4f953328e08a9f07",
+			"native": "4e953328e08a9f07",
+			"text": "5.8306880172659901e-272"
+		},
+		{
+			"expected": "3848f3f3f5c8e3a1",
+			"native": "3748f3f3f5c8e3a1",
+			"text": "-1.9805609966057552e-145"
+		},
+		{
+			"expected": "eb60ef8cade8ca67",
+			"native": "ec60ef8cade8ca67",
+			"text": "9.5914257804953659e+191"
+		},
+		{
+			"expected": "d39d378b7d0f85ec",
+			"native": "d49d378b7d0f85ec",
+			"text": "-5.6719944490034196e+214"
+		},
+		{
+			"expected": "902d39d3731f5a27",
+			"native": "8f2d39d3731f5a27",
+			"text": "4.0465272276420378e-119"
+		},
+		{
+			"expected": "a720dfbb8b8557f5",
+			"native": "a820dfbb8b8557f5",
+			"text": "-1.7658928396487159e+257"
+		},
+		{
+			"expected": "4e708abf23be9e04",
+			"native": "4d708abf23be9e04",
+			"text": "2.0189548618504921e-286"
+		},
+		{
+			"expected": "7394886932682ff8",
+			"native": "7594886932682ff8",
+			"text": "-8.2960782491723711e+270"
+		},
+		{
+			"expected": "4223c7f7b62d1c8f",
+			"native": "4123c7f7b62d1c8f",
+			"text": "-6.923766386798195e-236"
+		},
+		{
+			"expected": "e6257329976b4e9e",
+			"native": "e5257329976b4e9e",
+			"text": "-1.056514579372126e-162"
+		},
+		{
+			"expected": "70f5083b71cdf94b",
+			"native": "71f5083b71cdf94b",
+			"text": "1.0122810881004903e+58"
+		},
+		{
+			"expected": "510a5880add4dc5c",
+			"native": "520a5880add4dc5c",
+			"text": "2.1458249570817127e+139"
+		},
+		{
+			"expected": "1e7a0e93d63251e7",
+			"native": "1f7a0e93d63251e7",
+			"text": "-4.7892779711865207e+189"
+		},
+		{
+			"expected": "0adba0d5ce2280e6",
+			"native": "0bdba0d5ce2280e6",
+			"text": "-5.4850726044814246e+185"
+		},
+		{
+			"expected": "33b3dbaae634d99b",
+			"native": "32b3dbaae634d99b",
+			"text": "-1.5924197800856432e-174"
+		},
+		{
+			"expected": "ebd38f96ec9c9a99",
+			"native": "ead38f96ec9c9a99",
+			"text": "-2.4465622458584746e-185"
+		},
+		{
+			"expected": "ada4c84f3c262372",
+			"native": "aea4c84f3c262372",
+			"text": "6.3844097038133927e+241"
+		},
+		{
+			"expected": "d9058311c9286e61",
+			"native": "da058311c9286e61",
+			"text": "2.1200651883732701e+161"
+		},
+		{
+			"expected": "60acdafab16b4b77",
+			"native": "61acdafab16b4b77",
+			"text": "4.4208366898910624e+266"
+		},
+		{
+			"expected": "320b70063a65ec74",
+			"native": "340b70063a65ec74",
+			"text": "1.6654614711863476e+255"
+		},
+		{
+			"expected": "af29af4a4d401fa7",
+			"native": "ae29af4a4d401fa7",
+			"text": "-3.0255766147462865e-120"
+		},
+		{
+			"expected": "925eb9e065f30866",
+			"native": "945eb9e065f30866",
+			"text": "3.3130759100961526e+183"
+		},
+		{
+			"expected": "cb0ef1db3e1bfaef",
+			"native": "cc0ef1db3e1bfaef",
+			"text": "-2.5331688529390976e+231"
+		},
+		{
+			"expected": "62edc0fe8d6c1ee9",
+			"native": "64edc0fe8d6c1ee9",
+			"text": "-2.2742283630113447e+198"
+		},
+		{
+			"expected": "068eeb2daebf889e",
+			"native": "058eeb2daebf889e",
+			"text": "-1.3752625992949905e-161"
+		},
+		{
+			"expected": "21c4988824bfe868",
+			"native": "22c4988824bfe868",
+			"text": "2.3122969932277975e+197"
+		},
+		{
+			"expected": "55b7143243ed7f59",
+			"native": "54b7143243ed7f59",
+			"text": "1.3190878781314625e+123"
+		},
+		{
+			"expected": "fcce457d26bc4fa5",
+			"native": "fbce457d26bc4fa5",
+			"text": "-5.7228169601502729e-129"
+		},
+		{
+			"expected": "d7e0ac2d9ebcf265",
+			"native": "d8e0ac2d9ebcf265",
+			"text": "1.2439775368436057e+183"
+		},
+		{
+			"expected": "55a34787b92f0836",
+			"native": "54a34787b92f0836",
+			"text": "2.0686279159301938e-48"
+		},
+		{
+			"expected": "834b6966dc850f94",
+			"native": "824b6966dc850f94",
+			"text": "-4.6818678496655401e-212"
+		},
+		{
+			"expected": "ea6c1a385cdec94a",
+			"native": "eb6c1a385cdec94a",
+			"text": "1.9357180641399734e+52"
+		},
+		{
+			"expected": "5d4b1a52a42f51d0",
+			"native": "5e4b1a52a42f51d0",
+			"text": "-7.9600582019540329e+78"
+		},
+		{
+			"expected": "ef16992dc42c54f3",
+			"native": "f016992dc42c54f3",
+			"text": "-3.5265266042212896e+247"
+		},
+		{
+			"expected": "a6bb446acc36c9aa",
+			"native": "a5bb446acc36c9aa",
+			"text": "-1.4071947660064316e-102"
+		},
+		{
+			"expected": "dde5081e8cad6417",
+			"native": "dce5081e8cad6417",
+			"text": "5.5324776337301025e-196"
+		},
+		{
+			"expected": "9385de867f1bc658",
+			"native": "9485de867f1bc658",
+			"text": "4.4599116248282894e+119"
+		},
+		{
+			"expected": "af6192b421723af2",
+			"native": "b16192b421723af2",
+			"text": "-1.7634115481155976e+242"
+		},
+		{
+			"expected": "6e26360e0f5a2264",
+			"native": "6f26360e0f5a2264",
+			"text": "2.2694780698635031e+174"
+		},
+		{
+			"expected": "fb37a85eca2e7c20",
+			"native": "fa37a85eca2e7c20",
+			"text": "3.363147869021045e-152"
+		},
+		{
+			"expected": "dcc18a723b9508b0",
+			"native": "ddc18a723b9508b0",
+			"text": "-2.6537799891718355e-77"
+		},
+		{
+			"expected": "38e629d4b676cd8a",
+			"native": "37e629d4b676cd8a",
+			"text": "-1.2264261238692645e-256"
+		},
+		{
+			"expected": "0344a10a7f3fa784",
+			"native": "0244a10a7f3fa784",
+			"text": "-3.0535169256670722e-286"
+		},
+		{
+			"expected": "87246247ec4a4518",
+			"native": "86246247ec4a4518",
+			"text": "9.3338936825861602e-192"
+		},
+		{
+			"expected": "d0e7fbf95998ba19",
+			"native": "cfe7fbf95998ba19",
+			"text": "9.7796806441844199e-185"
+		},
+		{
+			"expected": "41807c7ca9275c08",
+			"native": "42807c7ca9275c08",
+			"text": "2.1317600880547459e-268"
+		},
+		{
+			"expected": "edc58d00aee25c9c",
+			"native": "ecc58d00aee25c9c",
+			"text": "-4.6715595640913723e-172"
+		},
+		{
+			"expected": "6ed17c47b57b723f",
+			"native": "64d17c47b57b723f",
+			"text": "0.0045125085087430582"
+		},
+		{
+			"expected": "0755d2509c117759",
+			"native": "0855d2509c117759",
+			"text": "9.5311014207226432e+122"
+		},
+		{
+			"expected": "0fb116ede861ed9e",
+			"native": "0eb116ede861ed9e",
+			"text": "-1.0449619357022602e-159"
+		},
+		{
+			"expected": "2de87ea2a78d9101",
+			"native": "0000000000000000",
+			"text": "4.0954732037496138e-301"
+		},
+		{
+			"expected": "401c8b18308f8f23",
+			"native": "3f1c8b18308f8f23",
+			"text": "2.1201165308854095e-137"
+		},
+		{
+			"expected": "aee275fecbf3e3a7",
+			"native": "ade275fecbf3e3a7",
+			"text": "-1.582433023187707e-116"
+		},
+		{
+			"expected": "38ed38c535988f5f",
+			"native": "39ed38c535988f5f",
+			"text": "2.0684274048180963e+152"
+		},
+		{
+			"expected": "0e5a201ae020495e",
+			"native": "0f5a201ae020495e",
+			"text": "1.5688921445406543e+146"
+		},
+		{
+			"expected": "825c02ca7bb160f0",
+			"native": "835c02ca7bb160f0",
+			"text": "-2.0733314157296602e+233"
+		},
+		{
+			"expected": "bd584387fe24de90",
+			"native": "bc584387fe24de90",
+			"text": "-1.988252321108792e-227"
+		},
+		{
+			"expected": "30d2ddf35a56af1a",
+			"native": "2ed2ddf35a56af1a",
+			"text": "3.7760221411871739e-180"
+		},
+		{
+			"expected": "455ea0f334f4c91a",
+			"native": "445ea0f334f4c91a",
+			"text": "1.2509379732390118e-179"
+		},
+		{
+			"expected": "3ad2c629ffd37e06",
+			"native": "38d2c629ffd37e06",
+			"text": "2.1738568288460922e-277"
+		},
+		{
+			"expected": "4abb2a36145ea968",
+			"native": "4cbb2a36145ea968",
+			"text": "1.4814424791233779e+196"
+		},
+		{
+			"expected": "98c59096934062d9",
+			"native": "99c59096934062d9",
+			"text": "-3.7705500435320551e+122"
+		},
+		{
+			"expected": "ffd007eb861aa2a3",
+			"native": "fed007eb861aa2a3",
+			"text": "-4.8647153692085247e-137"
+		},
+		{
+			"expected": "bd227e37989d47eb",
+			"native": "be227e37989d47eb",
+			"text": "-6.0654924744759237e+208"
+		},
+		{
+			"expected": "a30f134d18451c02",
+			"native": "0000000000000000",
+			"text": "1.6885293495371837e-298"
+		}
+	],
+	"renderer": "forward_plus"
+}

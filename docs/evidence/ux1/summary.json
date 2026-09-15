@@ -1,0 +1,1165 @@
+{
+  "baseline": "47fef34dc5bdcbbc8db7f562f778deb100a70d5c",
+  "checks": [
+    {
+      "description": "Saved 01-empty",
+      "passed": true
+    },
+    {
+      "description": "Saved 02-open-dialog",
+      "passed": true
+    },
+    {
+      "description": "Current particle/mesh/volume preparation completed",
+      "passed": true
+    },
+    {
+      "description": "Saved 03-loaded-default",
+      "passed": true
+    },
+    {
+      "description": "Saved 04-width-290",
+      "passed": true
+    },
+    {
+      "description": "Saved 04-width-600",
+      "passed": true
+    },
+    {
+      "description": "Saved 05-playback",
+      "passed": true
+    },
+    {
+      "description": "Saved 06-export-actions",
+      "passed": true
+    },
+    {
+      "description": "Saved 07-video-dialog",
+      "passed": true
+    },
+    {
+      "description": "Saved 07-video-actions",
+      "passed": true
+    },
+    {
+      "description": "Saved 08-recipe-dialog",
+      "passed": true
+    },
+    {
+      "description": "Saved 09-screenshot-folder",
+      "passed": true
+    },
+    {
+      "description": "Screenshot folder cancellation clears pending state",
+      "passed": true
+    },
+    {
+      "description": "Bounded G4 request completed",
+      "passed": true
+    },
+    {
+      "description": "G4 source binding exposes particles",
+      "passed": true
+    },
+    {
+      "description": "Bounded G4 request completed",
+      "passed": true
+    },
+    {
+      "description": "Exact ID selection created through current controller",
+      "passed": true
+    },
+    {
+      "description": "Saved 10-selections",
+      "passed": true
+    },
+    {
+      "description": "Bounded G4 request completed",
+      "passed": true
+    },
+    {
+      "description": "Native population analysis produced a named result",
+      "passed": true
+    },
+    {
+      "description": "Saved 11-temporal",
+      "passed": true
+    },
+    {
+      "description": "Saved 11-temporal-plot",
+      "passed": true
+    },
+    {
+      "description": "Native result plot contains bounded source observations",
+      "passed": true
+    },
+    {
+      "description": "Saved panel-diagnostics-and-comparisons",
+      "passed": true
+    },
+    {
+      "description": "Saved panel-space-time-analysis",
+      "passed": true
+    },
+    {
+      "description": "Saved panel-analysis-export-and-state",
+      "passed": true
+    },
+    {
+      "description": "Saved panel-matched-runs",
+      "passed": true
+    },
+    {
+      "description": "Saved panel-geometry-guides",
+      "passed": true
+    },
+    {
+      "description": "Saved panel-camera",
+      "passed": true
+    },
+    {
+      "description": "Saved panel-color-mapping",
+      "passed": true
+    },
+    {
+      "description": "Saved layer-surface",
+      "passed": true
+    },
+    {
+      "description": "Saved layer-density",
+      "passed": true
+    },
+    {
+      "description": "Saved 12-hidden",
+      "passed": true
+    },
+    {
+      "description": "Observed F1 hides mouse restore affordance",
+      "passed": true
+    },
+    {
+      "description": "Saved 13-window-1280x720",
+      "passed": true
+    },
+    {
+      "description": "Fullscreen restores windowed mode",
+      "passed": true
+    },
+    {
+      "description": "Saved 14-4k-scaled-target",
+      "passed": true
+    }
+  ],
+  "display_server": "X11",
+  "failures": [],
+  "fullscreen": {
+    "logical_rect": [
+      0.0,
+      0.0,
+      1440.0,
+      900.0
+    ],
+    "mode": 3,
+    "size": "(2560, 1440)"
+  },
+  "godot": "4.7.2-stable (official)",
+  "renderer": "forward_plus",
+  "root_content_scale_size": "(1440, 900)",
+  "screen_count": 2,
+  "screen_dpi": 93,
+  "screen_scale": 1.0,
+  "screen_size": "(2560, 1440)",
+  "sections": [
+    {
+      "height": 121.0,
+      "section": "Data cache",
+      "width": 323.0
+    },
+    {
+      "height": 302.0,
+      "section": "Playback",
+      "width": 323.0
+    },
+    {
+      "height": 181.0,
+      "section": "Rendering",
+      "width": 323.0
+    },
+    {
+      "height": 322.0,
+      "section": "Color Mapping",
+      "width": 323.0
+    },
+    {
+      "height": 123.0,
+      "section": "Advanced • Size / Brightness",
+      "width": 323.0
+    },
+    {
+      "height": 182.0,
+      "section": "Camera",
+      "width": 323.0
+    },
+    {
+      "height": 31.0,
+      "section": "Trails",
+      "width": 323.0
+    },
+    {
+      "height": 103.0,
+      "section": "Particle Filters",
+      "width": 323.0
+    },
+    {
+      "height": 203.0,
+      "section": "Advanced • Post-processing",
+      "width": 323.0
+    },
+    {
+      "height": 493.0,
+      "section": "Geometry / Guides",
+      "width": 323.0
+    },
+    {
+      "height": 2405.0,
+      "section": "Selections",
+      "width": 323.0
+    },
+    {
+      "height": 2155.0,
+      "section": "Temporal analysis",
+      "width": 323.0
+    },
+    {
+      "height": 3143.0,
+      "section": "Diagnostics and comparisons",
+      "width": 323.0
+    },
+    {
+      "height": 976.0,
+      "section": "Space-time analysis",
+      "width": 323.0
+    },
+    {
+      "height": 593.0,
+      "section": "Analysis export and state",
+      "width": 323.0
+    },
+    {
+      "height": 2501.0,
+      "section": "Matched runs",
+      "width": 323.0
+    },
+    {
+      "height": 327.0,
+      "section": "Capture / Export",
+      "width": 323.0
+    }
+  ],
+  "control_count": 590,
+  "control_counts": {
+    "Button": 112,
+    "CheckButton": 39,
+    "Control": 4,
+    "GridContainer": 1,
+    "HBoxContainer": 3,
+    "HSlider": 10,
+    "ItemList": 1,
+    "Label": 201,
+    "LineEdit": 93,
+    "OptionButton": 48,
+    "PanelContainer": 1,
+    "ProgressBar": 1,
+    "RichTextLabel": 1,
+    "ScrollContainer": 2,
+    "SpinBox": 29,
+    "TextureRect": 1,
+    "VBoxContainer": 43
+  },
+  "count_scope": "Constructed non-internal descendants, includes hidden and video controls; not simultaneously visible controls",
+  "observations": [
+    {
+      "content_height": 1228.0,
+      "image_size": "(1440, 900)",
+      "legend_rect": [
+        1070.0,
+        806.0,
+        340.0,
+        90.0
+      ],
+      "logical_rect": [
+        0.0,
+        0.0,
+        1440.0,
+        900.0
+      ],
+      "name": "01-empty",
+      "panel_rect": [
+        12.0,
+        12.0,
+        367.0,
+        876.0
+      ],
+      "scroll": 0,
+      "timeline_rect": [
+        30.0,
+        276.0,
+        323.0,
+        16.0
+      ],
+      "window_size": "(1440, 900)"
+    },
+    {
+      "content_height": 1228.0,
+      "image_size": "(1440, 900)",
+      "legend_rect": [
+        1070.0,
+        806.0,
+        340.0,
+        90.0
+      ],
+      "logical_rect": [
+        0.0,
+        0.0,
+        1440.0,
+        900.0
+      ],
+      "name": "02-open-dialog",
+      "panel_rect": [
+        12.0,
+        12.0,
+        367.0,
+        876.0
+      ],
+      "scroll": 0,
+      "timeline_rect": [
+        30.0,
+        276.0,
+        323.0,
+        16.0
+      ],
+      "window_size": "(1440, 900)"
+    },
+    {
+      "content_height": 2746.0,
+      "image_size": "(1440, 900)",
+      "legend_rect": [
+        1070.0,
+        806.0,
+        340.0,
+        90.0
+      ],
+      "logical_rect": [
+        0.0,
+        0.0,
+        1440.0,
+        900.0
+      ],
+      "name": "03-loaded-default",
+      "panel_rect": [
+        12.0,
+        12.0,
+        367.0,
+        876.0
+      ],
+      "scroll": 0,
+      "timeline_rect": [
+        30.0,
+        1472.0,
+        323.0,
+        16.0
+      ],
+      "window_size": "(1440, 900)"
+    },
+    {
+      "content_height": 2746.0,
+      "image_size": "(1440, 900)",
+      "legend_rect": [
+        1070.0,
+        806.0,
+        340.0,
+        90.0
+      ],
+      "logical_rect": [
+        0.0,
+        0.0,
+        1440.0,
+        900.0
+      ],
+      "name": "04-width-290",
+      "panel_rect": [
+        12.0,
+        12.0,
+        367.0,
+        876.0
+      ],
+      "scroll": 0,
+      "timeline_rect": [
+        30.0,
+        1472.0,
+        323.0,
+        16.0
+      ],
+      "window_size": "(1440, 900)"
+    },
+    {
+      "content_height": 2616.0,
+      "image_size": "(1440, 900)",
+      "legend_rect": [
+        1070.0,
+        806.0,
+        340.0,
+        90.0
+      ],
+      "logical_rect": [
+        0.0,
+        0.0,
+        1440.0,
+        900.0
+      ],
+      "name": "04-width-600",
+      "panel_rect": [
+        12.0,
+        12.0,
+        600.0,
+        876.0
+      ],
+      "scroll": 0,
+      "timeline_rect": [
+        30.0,
+        1342.0,
+        556.0,
+        16.0
+      ],
+      "window_size": "(1440, 900)"
+    },
+    {
+      "content_height": 2235.0,
+      "image_size": "(1440, 900)",
+      "legend_rect": [
+        1070.0,
+        806.0,
+        340.0,
+        90.0
+      ],
+      "logical_rect": [
+        0.0,
+        0.0,
+        1440.0,
+        900.0
+      ],
+      "name": "05-playback",
+      "panel_rect": [
+        12.0,
+        12.0,
+        367.0,
+        876.0
+      ],
+      "scroll": 1391,
+      "timeline_rect": [
+        30.0,
+        81.0,
+        323.0,
+        16.0
+      ],
+      "window_size": "(1440, 900)"
+    },
+    {
+      "content_height": 2260.0,
+      "image_size": "(1440, 900)",
+      "legend_rect": [
+        1070.0,
+        806.0,
+        340.0,
+        90.0
+      ],
+      "logical_rect": [
+        0.0,
+        0.0,
+        1440.0,
+        900.0
+      ],
+      "name": "06-export-actions",
+      "panel_rect": [
+        12.0,
+        12.0,
+        367.0,
+        876.0
+      ],
+      "scroll": 1416,
+      "timeline_rect": [
+        30.0,
+        56.0,
+        323.0,
+        16.0
+      ],
+      "window_size": "(1440, 900)"
+    },
+    {
+      "content_height": 2260.0,
+      "image_size": "(1440, 900)",
+      "legend_rect": [
+        1070.0,
+        806.0,
+        340.0,
+        90.0
+      ],
+      "logical_rect": [
+        0.0,
+        0.0,
+        1440.0,
+        900.0
+      ],
+      "name": "07-video-dialog",
+      "panel_rect": [
+        12.0,
+        12.0,
+        367.0,
+        876.0
+      ],
+      "scroll": 1416,
+      "timeline_rect": [
+        30.0,
+        56.0,
+        323.0,
+        16.0
+      ],
+      "window_size": "(1440, 900)"
+    },
+    {
+      "content_height": 2260.0,
+      "image_size": "(1440, 900)",
+      "legend_rect": [
+        1070.0,
+        806.0,
+        340.0,
+        90.0
+      ],
+      "logical_rect": [
+        0.0,
+        0.0,
+        1440.0,
+        900.0
+      ],
+      "name": "07-video-actions",
+      "panel_rect": [
+        12.0,
+        12.0,
+        367.0,
+        876.0
+      ],
+      "scroll": 1416,
+      "timeline_rect": [
+        30.0,
+        56.0,
+        323.0,
+        16.0
+      ],
+      "window_size": "(1440, 900)"
+    },
+    {
+      "content_height": 2260.0,
+      "image_size": "(1440, 900)",
+      "legend_rect": [
+        1070.0,
+        806.0,
+        340.0,
+        90.0
+      ],
+      "logical_rect": [
+        0.0,
+        0.0,
+        1440.0,
+        900.0
+      ],
+      "name": "08-recipe-dialog",
+      "panel_rect": [
+        12.0,
+        12.0,
+        367.0,
+        876.0
+      ],
+      "scroll": 1416,
+      "timeline_rect": [
+        30.0,
+        56.0,
+        323.0,
+        16.0
+      ],
+      "window_size": "(1440, 900)"
+    },
+    {
+      "content_height": 2260.0,
+      "image_size": "(1440, 900)",
+      "legend_rect": [
+        1070.0,
+        806.0,
+        340.0,
+        90.0
+      ],
+      "logical_rect": [
+        0.0,
+        0.0,
+        1440.0,
+        900.0
+      ],
+      "name": "09-screenshot-folder",
+      "panel_rect": [
+        12.0,
+        12.0,
+        367.0,
+        876.0
+      ],
+      "scroll": 1416,
+      "timeline_rect": [
+        30.0,
+        56.0,
+        323.0,
+        16.0
+      ],
+      "window_size": "(1440, 900)"
+    },
+    {
+      "content_height": 2685.0,
+      "image_size": "(1440, 900)",
+      "legend_rect": [
+        1070.0,
+        806.0,
+        340.0,
+        90.0
+      ],
+      "logical_rect": [
+        0.0,
+        0.0,
+        1440.0,
+        900.0
+      ],
+      "name": "10-selections",
+      "panel_rect": [
+        12.0,
+        12.0,
+        367.0,
+        876.0
+      ],
+      "scroll": 1723,
+      "timeline_rect": [
+        30.0,
+        -251.0,
+        323.0,
+        16.0
+      ],
+      "window_size": "(1440, 900)"
+    },
+    {
+      "content_height": 3284.0,
+      "image_size": "(1440, 900)",
+      "legend_rect": [
+        1070.0,
+        806.0,
+        340.0,
+        90.0
+      ],
+      "logical_rect": [
+        0.0,
+        0.0,
+        1440.0,
+        900.0
+      ],
+      "name": "11-temporal",
+      "panel_rect": [
+        12.0,
+        12.0,
+        367.0,
+        876.0
+      ],
+      "scroll": 1758,
+      "timeline_rect": [
+        30.0,
+        -286.0,
+        323.0,
+        16.0
+      ],
+      "window_size": "(1440, 900)"
+    },
+    {
+      "content_height": 3284.0,
+      "image_size": "(1440, 900)",
+      "legend_rect": [
+        1070.0,
+        806.0,
+        340.0,
+        90.0
+      ],
+      "logical_rect": [
+        0.0,
+        0.0,
+        1440.0,
+        900.0
+      ],
+      "name": "11-temporal-plot",
+      "panel_rect": [
+        12.0,
+        12.0,
+        367.0,
+        876.0
+      ],
+      "scroll": 2038,
+      "timeline_rect": [
+        30.0,
+        -566.0,
+        323.0,
+        16.0
+      ],
+      "window_size": "(1440, 900)"
+    },
+    {
+      "content_height": 2618.0,
+      "image_size": "(1440, 900)",
+      "legend_rect": [
+        1070.0,
+        806.0,
+        340.0,
+        90.0
+      ],
+      "logical_rect": [
+        0.0,
+        0.0,
+        1440.0,
+        900.0
+      ],
+      "name": "panel-diagnostics-and-comparisons",
+      "panel_rect": [
+        12.0,
+        12.0,
+        367.0,
+        876.0
+      ],
+      "scroll": 1774,
+      "timeline_rect": [
+        30.0,
+        -302.0,
+        323.0,
+        16.0
+      ],
+      "window_size": "(1440, 900)"
+    },
+    {
+      "content_height": 2845.0,
+      "image_size": "(1440, 900)",
+      "legend_rect": [
+        1070.0,
+        806.0,
+        340.0,
+        90.0
+      ],
+      "logical_rect": [
+        0.0,
+        0.0,
+        1440.0,
+        900.0
+      ],
+      "name": "panel-space-time-analysis",
+      "panel_rect": [
+        12.0,
+        12.0,
+        367.0,
+        876.0
+      ],
+      "scroll": 1828,
+      "timeline_rect": [
+        30.0,
+        -356.0,
+        323.0,
+        16.0
+      ],
+      "window_size": "(1440, 900)"
+    },
+    {
+      "content_height": 2298.0,
+      "image_size": "(1440, 900)",
+      "legend_rect": [
+        1070.0,
+        806.0,
+        340.0,
+        90.0
+      ],
+      "logical_rect": [
+        0.0,
+        0.0,
+        1440.0,
+        900.0
+      ],
+      "name": "panel-analysis-export-and-state",
+      "panel_rect": [
+        12.0,
+        12.0,
+        367.0,
+        876.0
+      ],
+      "scroll": 1454,
+      "timeline_rect": [
+        30.0,
+        18.0,
+        323.0,
+        16.0
+      ],
+      "window_size": "(1440, 900)"
+    },
+    {
+      "content_height": 3538.0,
+      "image_size": "(1440, 900)",
+      "legend_rect": [
+        1070.0,
+        806.0,
+        340.0,
+        90.0
+      ],
+      "logical_rect": [
+        0.0,
+        0.0,
+        1440.0,
+        900.0
+      ],
+      "name": "panel-matched-runs",
+      "panel_rect": [
+        12.0,
+        12.0,
+        367.0,
+        876.0
+      ],
+      "scroll": 1898,
+      "timeline_rect": [
+        30.0,
+        -426.0,
+        323.0,
+        16.0
+      ],
+      "window_size": "(1440, 900)"
+    },
+    {
+      "content_height": 2426.0,
+      "image_size": "(1440, 900)",
+      "legend_rect": [
+        1070.0,
+        806.0,
+        340.0,
+        90.0
+      ],
+      "logical_rect": [
+        0.0,
+        0.0,
+        1440.0,
+        900.0
+      ],
+      "name": "panel-geometry-guides",
+      "panel_rect": [
+        12.0,
+        12.0,
+        367.0,
+        876.0
+      ],
+      "scroll": 1582,
+      "timeline_rect": [
+        30.0,
+        -110.0,
+        323.0,
+        16.0
+      ],
+      "window_size": "(1440, 900)"
+    },
+    {
+      "content_height": 2115.0,
+      "image_size": "(1440, 900)",
+      "legend_rect": [
+        1070.0,
+        806.0,
+        340.0,
+        90.0
+      ],
+      "logical_rect": [
+        0.0,
+        0.0,
+        1440.0,
+        900.0
+      ],
+      "name": "panel-camera",
+      "panel_rect": [
+        12.0,
+        12.0,
+        367.0,
+        876.0
+      ],
+      "scroll": 1271,
+      "timeline_rect": [
+        30.0,
+        201.0,
+        323.0,
+        16.0
+      ],
+      "window_size": "(1440, 900)"
+    },
+    {
+      "content_height": 2255.0,
+      "image_size": "(1440, 900)",
+      "legend_rect": [
+        1070.0,
+        806.0,
+        340.0,
+        90.0
+      ],
+      "logical_rect": [
+        0.0,
+        0.0,
+        1440.0,
+        900.0
+      ],
+      "name": "panel-color-mapping",
+      "panel_rect": [
+        12.0,
+        12.0,
+        367.0,
+        876.0
+      ],
+      "scroll": 1411,
+      "timeline_rect": [
+        30.0,
+        61.0,
+        323.0,
+        16.0
+      ],
+      "window_size": "(1440, 900)"
+    },
+    {
+      "content_height": 2519.0,
+      "image_size": "(1440, 900)",
+      "legend_rect": [
+        1070.0,
+        806.0,
+        340.0,
+        90.0
+      ],
+      "logical_rect": [
+        0.0,
+        0.0,
+        1440.0,
+        900.0
+      ],
+      "name": "layer-surface",
+      "panel_rect": [
+        12.0,
+        12.0,
+        367.0,
+        876.0
+      ],
+      "scroll": 772,
+      "timeline_rect": [
+        30.0,
+        700.0,
+        323.0,
+        16.0
+      ],
+      "window_size": "(1440, 900)"
+    },
+    {
+      "content_height": 3155.0,
+      "image_size": "(1440, 900)",
+      "legend_rect": [
+        1070.0,
+        806.0,
+        340.0,
+        90.0
+      ],
+      "logical_rect": [
+        0.0,
+        0.0,
+        1440.0,
+        900.0
+      ],
+      "name": "layer-density",
+      "panel_rect": [
+        12.0,
+        12.0,
+        367.0,
+        876.0
+      ],
+      "scroll": 772,
+      "timeline_rect": [
+        30.0,
+        700.0,
+        323.0,
+        16.0
+      ],
+      "window_size": "(1440, 900)"
+    },
+    {
+      "content_height": 2235.0,
+      "image_size": "(1440, 900)",
+      "legend_rect": [
+        1070.0,
+        806.0,
+        340.0,
+        90.0
+      ],
+      "logical_rect": [
+        0.0,
+        0.0,
+        1440.0,
+        900.0
+      ],
+      "name": "12-hidden",
+      "panel_rect": [
+        12.0,
+        12.0,
+        367.0,
+        876.0
+      ],
+      "scroll": 1391,
+      "timeline_rect": [
+        30.0,
+        81.0,
+        323.0,
+        16.0
+      ],
+      "window_size": "(1440, 900)"
+    },
+    {
+      "content_height": 2235.0,
+      "image_size": "(1152, 720)",
+      "legend_rect": [
+        1070.0,
+        806.0,
+        340.0,
+        90.0
+      ],
+      "logical_rect": [
+        0.0,
+        0.0,
+        1440.0,
+        900.0
+      ],
+      "name": "13-window-1280x720",
+      "panel_rect": [
+        12.0,
+        12.0,
+        367.0,
+        876.0
+      ],
+      "scroll": 1391,
+      "timeline_rect": [
+        30.0,
+        81.0,
+        323.0,
+        16.0
+      ],
+      "window_size": "(1280, 720)"
+    },
+    {
+      "content_height": 2360.0,
+      "image_size": "(3840, 2160)",
+      "legend_rect": [
+        1070.0,
+        716.0,
+        340.0,
+        90.0
+      ],
+      "logical_rect": [
+        0.0,
+        0.0,
+        1440.0,
+        810.0
+      ],
+      "name": "14-4k-scaled-target",
+      "panel_rect": [
+        12.0,
+        12.0,
+        367.0,
+        786.0
+      ],
+      "scroll": 0,
+      "timeline_rect": [
+        30.0,
+        1086.0,
+        323.0,
+        16.0
+      ],
+      "window_size": "(1440, 900)"
+    }
+  ],
+  "images": [
+    {
+      "file": "01-empty.png",
+      "bytes": 164328,
+      "sha256": "9ada4fbb05a520ff17d32e364f67a8edfbcee4231652568d2f36f69356f49f02"
+    },
+    {
+      "file": "03-loaded-default.png",
+      "bytes": 250480,
+      "sha256": "f394163ce4ab09917551fc7166c863055e6ea17616b2b520aad00e89d216b067"
+    },
+    {
+      "file": "04-width-290.png",
+      "bytes": 250480,
+      "sha256": "f394163ce4ab09917551fc7166c863055e6ea17616b2b520aad00e89d216b067"
+    },
+    {
+      "file": "05-playback.png",
+      "bytes": 221702,
+      "sha256": "0e3d4137124ec53af149b7377df2f15b51212f0af8a2fc36f4f2a0f7c23b30a1"
+    },
+    {
+      "file": "06-export-actions.png",
+      "bytes": 229678,
+      "sha256": "40deab85e12d006de0ab38b9552899461ad1450509b927e6d8dd7ed18d140361"
+    },
+    {
+      "file": "07-video-dialog.png",
+      "bytes": 228887,
+      "sha256": "92498fd69592e23da9b93811fea77b196b795fab7200ff8c63f14886c77ce3df"
+    },
+    {
+      "file": "07-video-actions.png",
+      "bytes": 229893,
+      "sha256": "2f9195c111465deb72d85af645ecd3a75da6b5fed8ce04752cdd3e61155f2dd6"
+    },
+    {
+      "file": "08-recipe-dialog.png",
+      "bytes": 171695,
+      "sha256": "4cc00d1b8799290716f080c76d9612ce56fbd55d92d2d77a333fa586efb1756b"
+    },
+    {
+      "file": "10-selections.png",
+      "bytes": 226602,
+      "sha256": "c650772f6ce2bb0dddc69916b7fb12ce20ec556dd3accfb06fe2b7b1990a8726"
+    },
+    {
+      "file": "11-temporal-plot.png",
+      "bytes": 205521,
+      "sha256": "188609478af9849738fd892345175f94986e0fab0ddec7239939e45b846d1f0b"
+    },
+    {
+      "file": "12-hidden.png",
+      "bytes": 150249,
+      "sha256": "f347c70bc21200e86b6c30c6a35310e0905de4ac5ccceebf8e4c7d4d293b4575"
+    },
+    {
+      "file": "13-window-1280x720.png",
+      "bytes": 181392,
+      "sha256": "c4d8ea455f20369da7e8ed47ed3592c1106f8b4d58108d747c4ed7caab62d234"
+    },
+    {
+      "file": "14-4k-scaled-target.png",
+      "bytes": 884315,
+      "sha256": "2e2d4de4c3bce94653565bd57c1872101b0d985ff7c3be776527a26f4d5e9b77"
+    },
+    {
+      "file": "layer-surface.png",
+      "bytes": 208001,
+      "sha256": "8286ceff2071e831ed26490472ba477d3bd2ea3f9e39eba437639289ba5fd68f"
+    },
+    {
+      "file": "layer-density.png",
+      "bytes": 212389,
+      "sha256": "f2c45cd705f259b466c7ddf0c590037a79e9d17ba1ffe0ef01c2f79ff75c55a1"
+    }
+  ]
+}

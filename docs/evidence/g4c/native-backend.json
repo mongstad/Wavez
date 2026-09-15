@@ -1,0 +1,25 @@
+{
+  "status": "PASS",
+  "scope": "G4c native backend checkpoint; viewer/plots and full A01-A23 pending",
+  "command": "/tmp/simscope-g4-validation/bin/python -m unittest discover -s tests -q",
+  "tests": 158,
+  "passed": 158,
+  "skipped": 0,
+  "independent_oracles": [
+    "node integral 72",
+    "scaled explicitly declared mass 144",
+    "native particle times 0, 0.5, 1.5, 3",
+    "interval velocity [2,1,0] with missing endpoints and gap refusal"
+  ],
+  "worker_cases": [
+    "3 interactive cursor requests during a paused interval, full result has 4 distinct native observations",
+    "background cancellation under 1 second in bounded synthetic test",
+    "source truncation prevents completed publication",
+    "shared working-memory admission"
+  ],
+  "limitations": [
+    "no G4c rendered acceptance yet",
+    "no target workload latency/RSS performance claim",
+    "G4d-G4f pending"
+  ]
+}

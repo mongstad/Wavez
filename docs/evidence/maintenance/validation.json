@@ -1,0 +1,1933 @@
+{
+  "status": "PASS for the declared maintenance checks; ready for user review",
+  "date": "2026-09-12",
+  "base_commit": "58e3d961d72bb2b6956c464465aae195b34a266a",
+  "scope": [
+    "DOC-001",
+    "UI-001",
+    "UI-002",
+    "ARCH-001"
+  ],
+  "not_started": [
+    "G5",
+    "G6",
+    "web/dashboard",
+    "external simulation work"
+  ],
+  "code_snapshot": "SHA-256 of final changed code and validation tools; commit containing this evidence is the maintenance checkpoint",
+  "code_files": [
+    {
+      "path": "tools/validate_documentation.py",
+      "bytes": 3285,
+      "sha256": "f5841c44c04c118d5070d314498b9f2f2952bf6e1a6161702f1b0d672e1cfb78"
+    },
+    {
+      "path": "tools/validate_maintenance_ui.py",
+      "bytes": 2222,
+      "sha256": "e3f42a24f6d19b02ac1fed2e536bba426cbb6686b1d88314a35b8e2eaa3b8d69"
+    },
+    {
+      "path": "viewer/analysis/diagnostics_controller.gd",
+      "bytes": 15275,
+      "sha256": "2369d20bd955cb6af5f2ef7d0e6f2f1ad7476bfbead281d2bbe76312263a0a53"
+    },
+    {
+      "path": "viewer/analysis/durable_controller.gd",
+      "bytes": 12736,
+      "sha256": "565972e1d0c4081d5f9f6d7fcd4337186c88649f80f61e79d716ebdc4c4151a2"
+    },
+    {
+      "path": "viewer/analysis/matched_controller.gd",
+      "bytes": 10617,
+      "sha256": "8e145288483b9d521e2cc15f256563493ec60bf8cf409b3e8caeaf3581f7ff91"
+    },
+    {
+      "path": "viewer/analysis/native_plot.gd",
+      "bytes": 3922,
+      "sha256": "078da56439c881b253caf3573866ce12c3225e09ac5897dab5bcaae0b18617b7"
+    },
+    {
+      "path": "viewer/analysis/space_time_controller.gd",
+      "bytes": 6261,
+      "sha256": "0937ad54031448ad81155fe582c9cac48b89dd13affa5d1e11a5bc5495bd5f50"
+    },
+    {
+      "path": "viewer/analysis/space_time_plot.gd",
+      "bytes": 5032,
+      "sha256": "0bdf37d44c6bd853f326ab372a50657fc5f6616e2acff5e498dfc95d085a4322"
+    },
+    {
+      "path": "viewer/analysis/temporal_controller.gd",
+      "bytes": 16713,
+      "sha256": "cb62bc273740605e9bfed723cd4376de652efe8afd631a516fd7f5d185f8b492"
+    },
+    {
+      "path": "viewer/analysis/test_maintenance_ui.gd",
+      "bytes": 7105,
+      "sha256": "ee521ecde226b1f711a70c98f15249d08de92b485616865aca1d10365e23ca5c"
+    },
+    {
+      "path": "viewer/analysis/ui_controls.gd",
+      "bytes": 2182,
+      "sha256": "eb61f71301932afc14d69d1f61d1f6cc75fcadcec3f8e67ccea47b56b6e01da7"
+    },
+    {
+      "path": "viewer/main.gd",
+      "bytes": 95903,
+      "sha256": "7c2aba4d9717efde7e4e2e5ef775d0fd200b10b9fd5b21e68037ea0144727f3d"
+    },
+    {
+      "path": "viewer/selection/selection_controller.gd",
+      "bytes": 30530,
+      "sha256": "a5fe9bce77c715d671594f9529423269e2988e41ac52a09d1cce52d96210226d"
+    }
+  ],
+  "runtime": {
+    "godot": "4.7.2 stable ed1daf0bf",
+    "gpu": "NVIDIA GeForce RTX 3070 Ti",
+    "driver": "610.57.04",
+    "python": "3.14.7",
+    "numpy": "2.4.3"
+  },
+  "baseline_fixed_label": {
+    "legend_text": "fixed",
+    "legend_visible": true,
+    "colorbar_visible": false,
+    "backend": "gl_compatibility",
+    "artifacts": [
+      {
+        "path": "results/maintenance/before-fixed/before.png",
+        "bytes": 173720,
+        "sha256": "d2129a5ba70809bcf19029d91f3bd29e1fcc4522ac86cefb1cabf351a65c7bcf"
+      },
+      {
+        "path": "/tmp/simscope-maintenance-before.log",
+        "bytes": 284,
+        "sha256": "8b4c8794698819396afba25201d0db8b367a562f319f9e4e07ccf07fed1143ef"
+      }
+    ],
+    "note": "Original baseline JSON was overwritten by an early headless smoke and retained as after-first-headless.json; only the actual original screenshot and console log are baseline evidence."
+  },
+  "documentation": {
+    "command": [
+      "python",
+      "tools/validate_documentation.py",
+      "--output-dir",
+      "results/maintenance/docs-final"
+    ],
+    "report": {
+      "status": "PASS",
+      "documents": [
+        "AGENTS.md",
+        "CONTRIBUTING.md",
+        "G2B_FORMAT.md",
+        "G2_STORAGE.md",
+        "G3_FORMAT.md",
+        "G3_GUIDE.md",
+        "G3_REPORT.md",
+        "G4_DESIGN.md",
+        "G4_REPORT.md",
+        "INSPECTION_STATE.md",
+        "PLAYBACK_PERFORMANCE.md",
+        "QUICKSTART.md",
+        "README.md",
+        "SIMSCOPE_ACCEPTANCE_MATRIX.md",
+        "SIMSCOPE_API.md",
+        "SIMSCOPE_NEXT_DESIGN.md",
+        "VBC_FORMAT_SPEC.md",
+        "VIDEO_EXPORT.md",
+        "docs/CAPTURE_FORMAT_AND_API.md",
+        "docs/CAPTURE_FORMAT_POLICY.md",
+        "docs/CURRENT_STATUS.md",
+        "docs/EVIDENCE_INDEX.md",
+        "docs/EXPERIMENT_LESSONS.md",
+        "docs/G4_ACCEPTANCE.md",
+        "docs/G4_GUIDE.md",
+        "docs/G4_SCHEMAS.md",
+        "docs/LEGACY_API.md",
+        "docs/LEGACY_SUPPORT.md",
+        "docs/MAINTENANCE_REPORT.md",
+        "docs/NUMERICAL_VALIDATION_GUIDE.md",
+        "docs/REPOSITORY_BOUNDARY.md",
+        "docs/SIMSCOPE_HANDBOOK.md",
+        "docs/SIMULATION_INTEGRATION_GUIDE.md",
+        "docs/START_HERE.md",
+        "tests/fixtures/README.md",
+        "viewer/README.md"
+      ],
+      "missing_local_links": [],
+      "examples": [
+        {
+          "document": "SIMSCOPE_API.md",
+          "status": "PASS",
+          "source_unchanged": true,
+          "document_sha256": "bbb332d3a64e915304a169b1279e37d16f8e96d2ce90848f2e4012b200014833"
+        },
+        {
+          "document": "docs/SIMULATION_INTEGRATION_GUIDE.md",
+          "status": "PASS",
+          "source_unchanged": true,
+          "document_sha256": "0a7cad08b44024c61aeb2c08936b894d8f462b016ee200b1b32ae5f90a2448e1"
+        },
+        {
+          "document": "G3_GUIDE.md",
+          "status": "PASS",
+          "source_unchanged": true,
+          "document_sha256": "3b506363a68b5828c8ae90fdc013dbb0c0442a480780a2df8206e8f21bb32e7d"
+        }
+      ]
+    }
+  },
+  "ui": [
+    {
+      "name": "ui-headless-final",
+      "command": [
+        "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+        "--path",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+        "--audio-driver",
+        "Dummy",
+        "--log-file",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/maintenance/ui-headless-final/godot.log",
+        "--headless",
+        "--script",
+        "analysis/test_maintenance_ui.gd",
+        "--",
+        "--maintenance-fixture=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/maintenance/ui-headless-final",
+        "--maintenance-resolution=1440x900"
+      ],
+      "exit_code": 0,
+      "result": {
+        "backend": "forward_plus",
+        "checks": 28,
+        "failures": [],
+        "images": [],
+        "layouts": [
+          {
+            "expanded_height": 2316.0,
+            "panel": "Selections",
+            "width": 323.0
+          },
+          {
+            "expanded_height": 2107.0,
+            "panel": "Temporal analysis",
+            "width": 323.0
+          },
+          {
+            "expanded_height": 3143.0,
+            "panel": "Diagnostics and comparisons",
+            "width": 323.0
+          },
+          {
+            "expanded_height": 976.0,
+            "panel": "Space-time analysis",
+            "width": 323.0
+          },
+          {
+            "expanded_height": 593.0,
+            "panel": "Analysis export and state",
+            "width": 323.0
+          },
+          {
+            "expanded_height": 2501.0,
+            "panel": "Matched runs",
+            "width": 323.0
+          }
+        ],
+        "surface": "desktop window",
+        "viewport": "[P: (0.0, 0.0), S: (1440.0, 900.0)]",
+        "window": "(64, 64)"
+      },
+      "source_sha256": "ce74ca7c4df4a6b3498c6b16aedb0e46b512accb84fae1f5a5ede2d0ea9a5e70",
+      "source_unchanged": true,
+      "status": "PASS",
+      "artifacts": [
+        {
+          "path": "results/maintenance/ui-headless-final/report.json",
+          "bytes": 1626,
+          "sha256": "b272ebb61e96d97a663486c0d0464ee47776aade7c76a4b431ac5faff6c01b1a"
+        },
+        {
+          "path": "results/maintenance/ui-headless-final/godot.log",
+          "bytes": 111,
+          "sha256": "008affcf98440b675ae17b26c8ef2822d618f8b75b6c5670c14a77388b46e82d"
+        }
+      ],
+      "images": []
+    },
+    {
+      "name": "ui-gl-normal-final",
+      "command": [
+        "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+        "--path",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+        "--audio-driver",
+        "Dummy",
+        "--log-file",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/maintenance/ui-gl-normal-final/godot.log",
+        "--rendering-method",
+        "gl_compatibility",
+        "--resolution",
+        "1440x900",
+        "--script",
+        "analysis/test_maintenance_ui.gd",
+        "--",
+        "--maintenance-fixture=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/maintenance/ui-gl-normal-final",
+        "--maintenance-resolution=1440x900"
+      ],
+      "exit_code": 0,
+      "result": {
+        "backend": "gl_compatibility",
+        "checks": 36,
+        "failures": [],
+        "images": [
+          {
+            "file": "legend-scalar.png",
+            "height": 900,
+            "width": 1440
+          },
+          {
+            "file": "legend-fixed.png",
+            "height": 900,
+            "width": 1440
+          },
+          {
+            "file": "selections.png",
+            "height": 900,
+            "width": 1440
+          },
+          {
+            "file": "temporal-analysis.png",
+            "height": 900,
+            "width": 1440
+          },
+          {
+            "file": "diagnostics-and-comparisons.png",
+            "height": 900,
+            "width": 1440
+          },
+          {
+            "file": "space-time-analysis.png",
+            "height": 900,
+            "width": 1440
+          },
+          {
+            "file": "analysis-export-and-state.png",
+            "height": 900,
+            "width": 1440
+          },
+          {
+            "file": "matched-runs.png",
+            "height": 900,
+            "width": 1440
+          }
+        ],
+        "layouts": [
+          {
+            "expanded_height": 2316.0,
+            "panel": "Selections",
+            "width": 323.0
+          },
+          {
+            "expanded_height": 2107.0,
+            "panel": "Temporal analysis",
+            "width": 323.0
+          },
+          {
+            "expanded_height": 3143.0,
+            "panel": "Diagnostics and comparisons",
+            "width": 323.0
+          },
+          {
+            "expanded_height": 976.0,
+            "panel": "Space-time analysis",
+            "width": 323.0
+          },
+          {
+            "expanded_height": 593.0,
+            "panel": "Analysis export and state",
+            "width": 323.0
+          },
+          {
+            "expanded_height": 2501.0,
+            "panel": "Matched runs",
+            "width": 323.0
+          }
+        ],
+        "surface": "desktop window",
+        "viewport": "[P: (0.0, 0.0), S: (1440.0, 900.0)]",
+        "window": "(1440, 900)"
+      },
+      "source_sha256": "c3460da705fc999f839435a065fda106ef20736106e6e32d3888568c7612cf0f",
+      "source_unchanged": true,
+      "status": "PASS",
+      "artifacts": [
+        {
+          "path": "results/maintenance/ui-gl-normal-final/report.json",
+          "bytes": 2530,
+          "sha256": "0f4d01276a8384e7969319d4d1ac0187d855504f3a252e215da1399922699139"
+        },
+        {
+          "path": "results/maintenance/ui-gl-normal-final/godot.log",
+          "bytes": 213,
+          "sha256": "4b92ad117dc6c22176e2c020b34a0bb8a419c0d4e1f9d20d100d9e5912860a9e"
+        }
+      ],
+      "images": [
+        {
+          "path": "results/maintenance/ui-gl-normal-final/legend-scalar.png",
+          "bytes": 179992,
+          "sha256": "ea191f06785781cdea78ca253477d52b0ae56a55c24e909eeaf581314868873c",
+          "width": 1440,
+          "height": 900
+        },
+        {
+          "path": "results/maintenance/ui-gl-normal-final/legend-fixed.png",
+          "bytes": 172761,
+          "sha256": "d078df73f4abcf3058ef43f2e19f13abbff15463e06fdcbc672826063fa66baf",
+          "width": 1440,
+          "height": 900
+        },
+        {
+          "path": "results/maintenance/ui-gl-normal-final/selections.png",
+          "bytes": 140545,
+          "sha256": "28e1d553834bcf25587b8a000f17af7b9292884b3f4e86b482b66f1c45ca90f1",
+          "width": 1440,
+          "height": 900
+        },
+        {
+          "path": "results/maintenance/ui-gl-normal-final/temporal-analysis.png",
+          "bytes": 141705,
+          "sha256": "63314b41952aac6a0aafc2818b3e68a7b85060f9da7a801d10b223277f3fef49",
+          "width": 1440,
+          "height": 900
+        },
+        {
+          "path": "results/maintenance/ui-gl-normal-final/diagnostics-and-comparisons.png",
+          "bytes": 145937,
+          "sha256": "cec97cb785f506a77aa3c45ef69e3580275c2ce7f11e51e3a88fb9c8e9c4be47",
+          "width": 1440,
+          "height": 900
+        },
+        {
+          "path": "results/maintenance/ui-gl-normal-final/space-time-analysis.png",
+          "bytes": 126136,
+          "sha256": "c5907d00fde5b33b0d8a8e8e9d0886675b613d8d5b6b3b77d356e22c318c8619",
+          "width": 1440,
+          "height": 900
+        },
+        {
+          "path": "results/maintenance/ui-gl-normal-final/analysis-export-and-state.png",
+          "bytes": 163334,
+          "sha256": "21d262371072eed957047fd3fa2f3cffba71f63f6d4d86035eb046650810159e",
+          "width": 1440,
+          "height": 900
+        },
+        {
+          "path": "results/maintenance/ui-gl-normal-final/matched-runs.png",
+          "bytes": 139671,
+          "sha256": "4b8d50b6423d89636765b19c7ca1e739231f6b6cae3341d7362bae4d87ced1a7",
+          "width": 1440,
+          "height": 900
+        }
+      ]
+    },
+    {
+      "name": "ui-vulkan-normal-final",
+      "command": [
+        "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+        "--path",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+        "--audio-driver",
+        "Dummy",
+        "--log-file",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/maintenance/ui-vulkan-normal-final/godot.log",
+        "--rendering-method",
+        "forward_plus",
+        "--resolution",
+        "1440x900",
+        "--script",
+        "analysis/test_maintenance_ui.gd",
+        "--",
+        "--maintenance-fixture=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/maintenance/ui-vulkan-normal-final",
+        "--maintenance-resolution=1440x900"
+      ],
+      "exit_code": 0,
+      "result": {
+        "backend": "forward_plus",
+        "checks": 36,
+        "failures": [],
+        "images": [
+          {
+            "file": "legend-scalar.png",
+            "height": 900,
+            "width": 1440
+          },
+          {
+            "file": "legend-fixed.png",
+            "height": 900,
+            "width": 1440
+          },
+          {
+            "file": "selections.png",
+            "height": 900,
+            "width": 1440
+          },
+          {
+            "file": "temporal-analysis.png",
+            "height": 900,
+            "width": 1440
+          },
+          {
+            "file": "diagnostics-and-comparisons.png",
+            "height": 900,
+            "width": 1440
+          },
+          {
+            "file": "space-time-analysis.png",
+            "height": 900,
+            "width": 1440
+          },
+          {
+            "file": "analysis-export-and-state.png",
+            "height": 900,
+            "width": 1440
+          },
+          {
+            "file": "matched-runs.png",
+            "height": 900,
+            "width": 1440
+          }
+        ],
+        "layouts": [
+          {
+            "expanded_height": 2316.0,
+            "panel": "Selections",
+            "width": 323.0
+          },
+          {
+            "expanded_height": 2107.0,
+            "panel": "Temporal analysis",
+            "width": 323.0
+          },
+          {
+            "expanded_height": 3143.0,
+            "panel": "Diagnostics and comparisons",
+            "width": 323.0
+          },
+          {
+            "expanded_height": 976.0,
+            "panel": "Space-time analysis",
+            "width": 323.0
+          },
+          {
+            "expanded_height": 593.0,
+            "panel": "Analysis export and state",
+            "width": 323.0
+          },
+          {
+            "expanded_height": 2501.0,
+            "panel": "Matched runs",
+            "width": 323.0
+          }
+        ],
+        "surface": "desktop window",
+        "viewport": "[P: (0.0, 0.0), S: (1440.0, 900.0)]",
+        "window": "(1440, 900)"
+      },
+      "source_sha256": "8b7b393ed222d7a684af4bf34609a531dcc4fb4d6fec3fcbc4da6bc657659091",
+      "source_unchanged": true,
+      "status": "PASS",
+      "artifacts": [
+        {
+          "path": "results/maintenance/ui-vulkan-normal-final/report.json",
+          "bytes": 2530,
+          "sha256": "5a1c4c420ede89bb72f19189a6ca5c9ba045648ffcccf30039bbf60d0fd40e75"
+        },
+        {
+          "path": "results/maintenance/ui-vulkan-normal-final/godot.log",
+          "bytes": 192,
+          "sha256": "028e42ed28a7e0c9ed622f8a92fa12136a15cb2b89b6f7f78b698e726d73d139"
+        }
+      ],
+      "images": [
+        {
+          "path": "results/maintenance/ui-vulkan-normal-final/legend-scalar.png",
+          "bytes": 172656,
+          "sha256": "9a8683bd57b56538378fa426ff483a1727e546dabc9858b2b5da9e3065643f7b",
+          "width": 1440,
+          "height": 900
+        },
+        {
+          "path": "results/maintenance/ui-vulkan-normal-final/legend-fixed.png",
+          "bytes": 166137,
+          "sha256": "0e0af6a16922956fa2a27610ccb11513d65353f5b9ff2c2bc58d68547bd5bb38",
+          "width": 1440,
+          "height": 900
+        },
+        {
+          "path": "results/maintenance/ui-vulkan-normal-final/selections.png",
+          "bytes": 135166,
+          "sha256": "4df3b24676b6d02e75d228330c201f8b9211eda09a726073149458d6f5e69cd9",
+          "width": 1440,
+          "height": 900
+        },
+        {
+          "path": "results/maintenance/ui-vulkan-normal-final/temporal-analysis.png",
+          "bytes": 136818,
+          "sha256": "78f883246fac8428bbb71926492ad4d5860b0bde14a72b34d9d40071ef20a732",
+          "width": 1440,
+          "height": 900
+        },
+        {
+          "path": "results/maintenance/ui-vulkan-normal-final/diagnostics-and-comparisons.png",
+          "bytes": 140390,
+          "sha256": "9df05aef2d4559ca9bd31271ab906d21e85fbc8e0ae5508165c8b3271099f615",
+          "width": 1440,
+          "height": 900
+        },
+        {
+          "path": "results/maintenance/ui-vulkan-normal-final/space-time-analysis.png",
+          "bytes": 122731,
+          "sha256": "ca052b16805eec3854c3d32b3620943a601480ff9244828b878259c28bd85bf9",
+          "width": 1440,
+          "height": 900
+        },
+        {
+          "path": "results/maintenance/ui-vulkan-normal-final/analysis-export-and-state.png",
+          "bytes": 156924,
+          "sha256": "71068939e1c942e8df7fe56cc3ea352a9824994af02be4fb7db13bb570e11910",
+          "width": 1440,
+          "height": 900
+        },
+        {
+          "path": "results/maintenance/ui-vulkan-normal-final/matched-runs.png",
+          "bytes": 134219,
+          "sha256": "ab18b9f114f0664f5f627f2b53d0ae6356381ad6a317e9473be0243962343d0c",
+          "width": 1440,
+          "height": 900
+        }
+      ]
+    },
+    {
+      "name": "ui-gl-4k-final",
+      "command": [
+        "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+        "--path",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+        "--audio-driver",
+        "Dummy",
+        "--log-file",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/maintenance/ui-gl-4k-final/godot.log",
+        "--rendering-method",
+        "gl_compatibility",
+        "--resolution",
+        "3840x2160",
+        "--script",
+        "analysis/test_maintenance_ui.gd",
+        "--",
+        "--maintenance-fixture=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/maintenance/ui-gl-4k-final",
+        "--maintenance-resolution=3840x2160"
+      ],
+      "exit_code": 0,
+      "result": {
+        "backend": "gl_compatibility",
+        "checks": 36,
+        "failures": [],
+        "images": [
+          {
+            "file": "legend-scalar.png",
+            "height": 2160,
+            "width": 3840
+          },
+          {
+            "file": "legend-fixed.png",
+            "height": 2160,
+            "width": 3840
+          },
+          {
+            "file": "selections.png",
+            "height": 2160,
+            "width": 3840
+          },
+          {
+            "file": "temporal-analysis.png",
+            "height": 2160,
+            "width": 3840
+          },
+          {
+            "file": "diagnostics-and-comparisons.png",
+            "height": 2160,
+            "width": 3840
+          },
+          {
+            "file": "space-time-analysis.png",
+            "height": 2160,
+            "width": 3840
+          },
+          {
+            "file": "analysis-export-and-state.png",
+            "height": 2160,
+            "width": 3840
+          },
+          {
+            "file": "matched-runs.png",
+            "height": 2160,
+            "width": 3840
+          }
+        ],
+        "layouts": [
+          {
+            "expanded_height": 2316.0,
+            "panel": "Selections",
+            "width": 323.0
+          },
+          {
+            "expanded_height": 2107.0,
+            "panel": "Temporal analysis",
+            "width": 323.0
+          },
+          {
+            "expanded_height": 3143.0,
+            "panel": "Diagnostics and comparisons",
+            "width": 323.0
+          },
+          {
+            "expanded_height": 976.0,
+            "panel": "Space-time analysis",
+            "width": 323.0
+          },
+          {
+            "expanded_height": 593.0,
+            "panel": "Analysis export and state",
+            "width": 323.0
+          },
+          {
+            "expanded_height": 2501.0,
+            "panel": "Matched runs",
+            "width": 323.0
+          }
+        ],
+        "surface": "GPU SubViewport",
+        "viewport": "[P: (0.0, 0.0), S: (1440.0, 810.0)]",
+        "window": "(2552, 1362)"
+      },
+      "source_sha256": "efe7e9d44c08ed85b506e6b772ce99f6547626a3d0892f8af6c7e948f5636c6a",
+      "source_unchanged": true,
+      "status": "PASS",
+      "artifacts": [
+        {
+          "path": "results/maintenance/ui-gl-4k-final/report.json",
+          "bytes": 2534,
+          "sha256": "a5693c81dc41666b83816773a2d032c7bf11789ca816fbb1c3991ab56fdcd0f7"
+        },
+        {
+          "path": "results/maintenance/ui-gl-4k-final/godot.log",
+          "bytes": 213,
+          "sha256": "4b92ad117dc6c22176e2c020b34a0bb8a419c0d4e1f9d20d100d9e5912860a9e"
+        }
+      ],
+      "images": [
+        {
+          "path": "results/maintenance/ui-gl-4k-final/legend-scalar.png",
+          "bytes": 786880,
+          "sha256": "58eb3dab1da46df542e22c62e655f075f2c2125eeaeb18ac786b9213e62c705c",
+          "width": 3840,
+          "height": 2160
+        },
+        {
+          "path": "results/maintenance/ui-gl-4k-final/legend-fixed.png",
+          "bytes": 746338,
+          "sha256": "aa6c74babb3f0b46c81fae7f357e50a7a6fcd89c3cb32d6080d2a584fe846945",
+          "width": 3840,
+          "height": 2160
+        },
+        {
+          "path": "results/maintenance/ui-gl-4k-final/selections.png",
+          "bytes": 555829,
+          "sha256": "f61d3797e829f814b369a8948ab54e2954015beecf5fe2151f60f3b0f7cfadba",
+          "width": 3840,
+          "height": 2160
+        },
+        {
+          "path": "results/maintenance/ui-gl-4k-final/temporal-analysis.png",
+          "bytes": 569318,
+          "sha256": "9cc668754492a4947b4d538dfbf3a5357551a646706f2f1222161348bcfecd46",
+          "width": 3840,
+          "height": 2160
+        },
+        {
+          "path": "results/maintenance/ui-gl-4k-final/diagnostics-and-comparisons.png",
+          "bytes": 589461,
+          "sha256": "3dfce7a6b34b1974b9e0853f7aa4e14ba55923db2e462e9e5561df039d5644a2",
+          "width": 3840,
+          "height": 2160
+        },
+        {
+          "path": "results/maintenance/ui-gl-4k-final/space-time-analysis.png",
+          "bytes": 536170,
+          "sha256": "fbe3e9b63b0034c6f0c5e5e4c6adebeb37b25f6dd40faada41fe854c9ae5536c",
+          "width": 3840,
+          "height": 2160
+        },
+        {
+          "path": "results/maintenance/ui-gl-4k-final/analysis-export-and-state.png",
+          "bytes": 672593,
+          "sha256": "189dc240953bfca048b009db1d2851da6e8649a43a90e46d56665f3e6b9bc3d0",
+          "width": 3840,
+          "height": 2160
+        },
+        {
+          "path": "results/maintenance/ui-gl-4k-final/matched-runs.png",
+          "bytes": 560670,
+          "sha256": "7383a8840d7e8fdf3bde5dd201f76af0dcfc23eed4578364f29ea04d23b55194",
+          "width": 3840,
+          "height": 2160
+        }
+      ]
+    },
+    {
+      "name": "ui-vulkan-4k",
+      "command": [
+        "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+        "--path",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+        "--audio-driver",
+        "Dummy",
+        "--log-file",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/maintenance/ui-vulkan-4k/godot.log",
+        "--rendering-method",
+        "forward_plus",
+        "--resolution",
+        "3840x2160",
+        "--script",
+        "analysis/test_maintenance_ui.gd",
+        "--",
+        "--maintenance-fixture=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/maintenance/ui-vulkan-4k",
+        "--maintenance-resolution=3840x2160"
+      ],
+      "exit_code": 0,
+      "result": {
+        "backend": "forward_plus",
+        "checks": 36,
+        "failures": [],
+        "images": [
+          {
+            "file": "legend-scalar.png",
+            "height": 2160,
+            "width": 3840
+          },
+          {
+            "file": "legend-fixed.png",
+            "height": 2160,
+            "width": 3840
+          },
+          {
+            "file": "selections.png",
+            "height": 2160,
+            "width": 3840
+          },
+          {
+            "file": "temporal-analysis.png",
+            "height": 2160,
+            "width": 3840
+          },
+          {
+            "file": "diagnostics-and-comparisons.png",
+            "height": 2160,
+            "width": 3840
+          },
+          {
+            "file": "space-time-analysis.png",
+            "height": 2160,
+            "width": 3840
+          },
+          {
+            "file": "analysis-export-and-state.png",
+            "height": 2160,
+            "width": 3840
+          },
+          {
+            "file": "matched-runs.png",
+            "height": 2160,
+            "width": 3840
+          }
+        ],
+        "layouts": [
+          {
+            "expanded_height": 2316.0,
+            "panel": "Selections",
+            "width": 323.0
+          },
+          {
+            "expanded_height": 2107.0,
+            "panel": "Temporal analysis",
+            "width": 323.0
+          },
+          {
+            "expanded_height": 3143.0,
+            "panel": "Diagnostics and comparisons",
+            "width": 323.0
+          },
+          {
+            "expanded_height": 976.0,
+            "panel": "Space-time analysis",
+            "width": 323.0
+          },
+          {
+            "expanded_height": 593.0,
+            "panel": "Analysis export and state",
+            "width": 323.0
+          },
+          {
+            "expanded_height": 2501.0,
+            "panel": "Matched runs",
+            "width": 323.0
+          }
+        ],
+        "surface": "GPU SubViewport",
+        "viewport": "[P: (0.0, 0.0), S: (1440.0, 810.0)]",
+        "window": "(2552, 1362)"
+      },
+      "source_sha256": "a70e804121b576064b4131e3f07de98cd5f30380b25e0ed693dd146cc9e6a7fc",
+      "source_unchanged": true,
+      "status": "PASS",
+      "artifacts": [
+        {
+          "path": "results/maintenance/ui-vulkan-4k/report.json",
+          "bytes": 2522,
+          "sha256": "80f2a241e83d69fa73356e046fcaed33e49a404178140ae030fa6e298676a141"
+        },
+        {
+          "path": "results/maintenance/ui-vulkan-4k/godot.log",
+          "bytes": 192,
+          "sha256": "028e42ed28a7e0c9ed622f8a92fa12136a15cb2b89b6f7f78b698e726d73d139"
+        }
+      ],
+      "images": [
+        {
+          "path": "results/maintenance/ui-vulkan-4k/legend-scalar.png",
+          "bytes": 753811,
+          "sha256": "e687dfd2957389099cb92ea92f1693ac856433664018f320ca2a442933b3eda7",
+          "width": 3840,
+          "height": 2160
+        },
+        {
+          "path": "results/maintenance/ui-vulkan-4k/legend-fixed.png",
+          "bytes": 718671,
+          "sha256": "b04774f287bad49881839093f676e8d6d2927da7339ab2db91957477033c96c8",
+          "width": 3840,
+          "height": 2160
+        },
+        {
+          "path": "results/maintenance/ui-vulkan-4k/selections.png",
+          "bytes": 550633,
+          "sha256": "90d3c0a92b2a52de93241bf87a1402d8e1ca07c5246c0e53cfd88dada88022dc",
+          "width": 3840,
+          "height": 2160
+        },
+        {
+          "path": "results/maintenance/ui-vulkan-4k/temporal-analysis.png",
+          "bytes": 563161,
+          "sha256": "11aec4ec565968f26226b3ec061d6fef215a5bb5736e6c78ed4e0359722c5e76",
+          "width": 3840,
+          "height": 2160
+        },
+        {
+          "path": "results/maintenance/ui-vulkan-4k/diagnostics-and-comparisons.png",
+          "bytes": 581326,
+          "sha256": "7122b7c371f8f8159650615fd36060b712458e83be653f9d6990f46c6c546bc7",
+          "width": 3840,
+          "height": 2160
+        },
+        {
+          "path": "results/maintenance/ui-vulkan-4k/space-time-analysis.png",
+          "bytes": 534087,
+          "sha256": "17fa03c042250ef6086be2ce0448d9ac8905e1225ef8c6e804f2d588d1a62b64",
+          "width": 3840,
+          "height": 2160
+        },
+        {
+          "path": "results/maintenance/ui-vulkan-4k/analysis-export-and-state.png",
+          "bytes": 658338,
+          "sha256": "7ca3bae8737438446de9e9274b9322fff331bb0235aaa96fa91928f9e8726790",
+          "width": 3840,
+          "height": 2160
+        },
+        {
+          "path": "results/maintenance/ui-vulkan-4k/matched-runs.png",
+          "bytes": 557307,
+          "sha256": "95bc958dbe9709730b9ebf54c4fcea25f8a6b20fa0e8dd96d5776e3ea6e80ff4",
+          "width": 3840,
+          "height": 2160
+        }
+      ]
+    }
+  ],
+  "regressions": [
+    {
+      "name": "selections",
+      "artifacts": [
+        {
+          "path": "results/maintenance/selections/report.json",
+          "bytes": 981,
+          "sha256": "316e9d770c94e15d7172ac6b9a05a36ee23b350dd5bdba2be06738a67aade22f"
+        }
+      ],
+      "report": {
+        "command": [
+          "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+          "--path",
+          "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+          "--audio-driver",
+          "Dummy",
+          "--log-file",
+          "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/maintenance/selections/godot.log",
+          "--headless",
+          "--script",
+          "selection/test_selection.gd",
+          "--",
+          "--selection-fixture=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/maintenance/selections"
+        ],
+        "exit_code": 0,
+        "timed_out": false,
+        "seconds": 1.6581446359996335,
+        "source_unchanged": true,
+        "source_sha256": "469b460c3b8725706a3dc50bec5f511e320055c764d70130223d2733b1243843",
+        "category": "headless integration",
+        "result": {
+          "backend": "forward_plus",
+          "checks": 31,
+          "drawn": 5,
+          "failures": [],
+          "gpu_bytes": 12928,
+          "status": "3 selections \u2022 6 selected members\n5 present \u2022 5 highlights\nCounts include overlaps; highlights may show a subset."
+        }
+      }
+    },
+    {
+      "name": "temporal-sequential",
+      "artifacts": [
+        {
+          "path": "results/maintenance/temporal-sequential/report.json",
+          "bytes": 915,
+          "sha256": "e3832f67df61cfa8f741820ff4e267a3faea6d55ffc9fb438e1056b3e65b3c28"
+        }
+      ],
+      "report": {
+        "command": [
+          "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+          "--path",
+          "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+          "--audio-driver",
+          "Dummy",
+          "--log-file",
+          "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/maintenance/temporal-sequential/godot.log",
+          "--headless",
+          "--script",
+          "analysis/test_temporal.gd",
+          "--",
+          "--temporal-fixture=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/maintenance/temporal-sequential"
+        ],
+        "exit_code": 0,
+        "timed_out": false,
+        "seconds": 1.5549597119970713,
+        "source_unchanged": true,
+        "source_sha256": "5f156a47ea58e9399cf9ea587ca3b9b6c5dc535aec843c1a205223bde2b10dfc",
+        "category": "headless integration",
+        "result": {
+          "backend": "forward_plus",
+          "checks": 23,
+          "failures": [],
+          "integral_range": [
+            "72",
+            "72"
+          ],
+          "named_results": 3,
+          "native_rows": 3.0
+        }
+      }
+    },
+    {
+      "name": "diagnostics-sequential",
+      "artifacts": [
+        {
+          "path": "results/maintenance/diagnostics-sequential/report.json",
+          "bytes": 1158,
+          "sha256": "04a3bcaca4cc110208968dbf1415a9134c52a222b2b27747fe8a44b9d5050c61"
+        }
+      ],
+      "report": {
+        "command": [
+          "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+          "--path",
+          "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+          "--audio-driver",
+          "Dummy",
+          "--log-file",
+          "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/maintenance/diagnostics-sequential/godot.log",
+          "--headless",
+          "--script",
+          "analysis/test_diagnostics.gd",
+          "--",
+          "--diagnostics-fixture=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/maintenance/diagnostics-sequential"
+        ],
+        "exit_code": 0,
+        "seconds": 2.112486928999715,
+        "source_hashes": {
+          "run-a.ssc": "401404b1f3a137e55f68a715bf5fce0e05f020e2af5bfc98140723a7c53e7b1f",
+          "run-b.ssc": "462dea89c1b8c00d68ab4faa54178afca1e666ea0552f500230ee6d906f002d2",
+          "a.csv": "0bb81558c14e7080921360fca29da8b15d206c1e466d2ca4368941e31f527a31",
+          "b.csv": "992d21760f400edfaee41db67e6ccb21b20ab4d9bd14431363a9aa085be960b2",
+          "period.csv": "e892f172a98d270d96850b04abd576bc691cd67005e196d5da60dbc7b8de7f6c"
+        },
+        "source_unchanged": true,
+        "category": "headless integration",
+        "result": {
+          "backend": "forward_plus",
+          "checks": 23,
+          "failures": []
+        }
+      }
+    },
+    {
+      "name": "space-time-sequential",
+      "artifacts": [
+        {
+          "path": "results/maintenance/space-time-sequential/report.json",
+          "bytes": 799,
+          "sha256": "d47ea9e71cca48d9b895139ce268bd060b325efea9cd5874d32feba7da30038f"
+        }
+      ],
+      "report": {
+        "command": [
+          "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+          "--path",
+          "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+          "--audio-driver",
+          "Dummy",
+          "--log-file",
+          "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/maintenance/space-time-sequential/godot.log",
+          "--headless",
+          "--script",
+          "analysis/test_space_time.gd",
+          "--",
+          "--space-time-fixture=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/maintenance/space-time-sequential"
+        ],
+        "exit_code": 0,
+        "seconds": 1.6492787600000156,
+        "source_sha256": "5cfc3323918f281225895f904a0a57e3220de9f443ed8b2b3d75c33fcd1298e7",
+        "source_unchanged": true,
+        "category": "headless integration",
+        "result": {
+          "backend": "forward_plus",
+          "checks": 36,
+          "failures": []
+        }
+      }
+    },
+    {
+      "name": "render-gl",
+      "artifacts": [
+        {
+          "path": "results/maintenance/render-gl/report.json",
+          "bytes": 7183,
+          "sha256": "f89c80f2fd4d56c57c24260810d3289a9bc9e75675e3832ccb9c4ffa7dab68b1"
+        }
+      ],
+      "report": {
+        "status": "PASS",
+        "renderer": "gl_compatibility",
+        "source_sha256": "180f11d866140f077a79eb3a533b88c493b96aac2ce82db5164d2b1f0d7524fa",
+        "runs": [
+          {
+            "command": [
+              "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+              "--headless",
+              "--path",
+              "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+              "--audio-driver",
+              "Dummy",
+              "--log-file",
+              "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/maintenance/render-gl/setup.log",
+              "--script",
+              "analysis/test_render_state.gd",
+              "--",
+              "--g4-render-fixture=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/maintenance/render-gl"
+            ],
+            "exit_code": 0,
+            "seconds": 1.1171356760023627
+          },
+          {
+            "command": [
+              "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+              "--path",
+              "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+              "--rendering-method",
+              "gl_compatibility",
+              "--resolution",
+              "640x360",
+              "--audio-driver",
+              "Dummy",
+              "--log-file",
+              "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/maintenance/render-gl/normal/renderer.log",
+              "--fixed-fps",
+              "4",
+              "--disable-vsync",
+              "--",
+              "--simscope-render-job=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/maintenance/render-gl/normal/job.json"
+            ],
+            "exit_code": 0,
+            "seconds": 1.9423091629978444
+          },
+          {
+            "command": [
+              "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+              "--path",
+              "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+              "--rendering-method",
+              "gl_compatibility",
+              "--resolution",
+              "640x360",
+              "--audio-driver",
+              "Dummy",
+              "--log-file",
+              "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/maintenance/render-gl/delayed/renderer.log",
+              "--fixed-fps",
+              "4",
+              "--disable-vsync",
+              "--",
+              "--simscope-render-job=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/maintenance/render-gl/delayed/job.json"
+            ],
+            "exit_code": 0,
+            "seconds": 1.803223925002385
+          },
+          {
+            "command": [
+              "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+              "--path",
+              "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+              "--rendering-method",
+              "gl_compatibility",
+              "--resolution",
+              "640x360",
+              "--audio-driver",
+              "Dummy",
+              "--log-file",
+              "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/maintenance/render-gl/replay.log",
+              "--script",
+              "analysis/test_render_state.gd",
+              "--",
+              "--g4-render-fixture=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/maintenance/render-gl",
+              "--verify-sidecar=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/maintenance/render-gl/normal/inspection-00000001.json"
+            ],
+            "exit_code": 0,
+            "seconds": 1.7034499869987485
+          }
+        ],
+        "checks": [
+          {
+            "label": "normal complete clip",
+            "pass_": true
+          },
+          {
+            "label": "normal exact clip dimensions/frame count",
+            "pass_": true
+          },
+          {
+            "label": "normal frame 0 source/image hash",
+            "pass_": true
+          },
+          {
+            "label": "normal frame 0 exact time/revision",
+            "pass_": true
+          },
+          {
+            "label": "normal frame 0 exact membership",
+            "pass_": true
+          },
+          {
+            "label": "normal frame 0 independent position oracle ID 0",
+            "pass_": true
+          },
+          {
+            "label": "normal frame 0 independent position oracle ID 40",
+            "pass_": true
+          },
+          {
+            "label": "normal frame 0 visible selection markers on actual GPU",
+            "pass_": true
+          },
+          {
+            "label": "normal frame 1 source/image hash",
+            "pass_": true
+          },
+          {
+            "label": "normal frame 1 exact time/revision",
+            "pass_": true
+          },
+          {
+            "label": "normal frame 1 exact membership",
+            "pass_": true
+          },
+          {
+            "label": "normal frame 1 independent position oracle ID 0",
+            "pass_": true
+          },
+          {
+            "label": "normal frame 1 independent position oracle ID 40",
+            "pass_": true
+          },
+          {
+            "label": "normal frame 1 visible selection markers on actual GPU",
+            "pass_": true
+          },
+          {
+            "label": "normal frame 2 source/image hash",
+            "pass_": true
+          },
+          {
+            "label": "normal frame 2 exact time/revision",
+            "pass_": true
+          },
+          {
+            "label": "normal frame 2 exact membership",
+            "pass_": true
+          },
+          {
+            "label": "normal frame 2 independent position oracle ID 0",
+            "pass_": true
+          },
+          {
+            "label": "normal frame 2 independent position oracle ID 40",
+            "pass_": true
+          },
+          {
+            "label": "normal frame 2 visible selection markers on actual GPU",
+            "pass_": true
+          },
+          {
+            "label": "delayed complete clip",
+            "pass_": true
+          },
+          {
+            "label": "delayed exact clip dimensions/frame count",
+            "pass_": true
+          },
+          {
+            "label": "delayed frame 0 source/image hash",
+            "pass_": true
+          },
+          {
+            "label": "delayed frame 0 exact time/revision",
+            "pass_": true
+          },
+          {
+            "label": "delayed frame 0 exact membership",
+            "pass_": true
+          },
+          {
+            "label": "delayed frame 0 independent position oracle ID 0",
+            "pass_": true
+          },
+          {
+            "label": "delayed frame 0 independent position oracle ID 40",
+            "pass_": true
+          },
+          {
+            "label": "delayed frame 0 visible selection markers on actual GPU",
+            "pass_": true
+          },
+          {
+            "label": "delayed frame 1 source/image hash",
+            "pass_": true
+          },
+          {
+            "label": "delayed frame 1 exact time/revision",
+            "pass_": true
+          },
+          {
+            "label": "delayed frame 1 exact membership",
+            "pass_": true
+          },
+          {
+            "label": "delayed frame 1 independent position oracle ID 0",
+            "pass_": true
+          },
+          {
+            "label": "delayed frame 1 independent position oracle ID 40",
+            "pass_": true
+          },
+          {
+            "label": "delayed frame 1 visible selection markers on actual GPU",
+            "pass_": true
+          },
+          {
+            "label": "delayed frame 2 source/image hash",
+            "pass_": true
+          },
+          {
+            "label": "delayed frame 2 exact time/revision",
+            "pass_": true
+          },
+          {
+            "label": "delayed frame 2 exact membership",
+            "pass_": true
+          },
+          {
+            "label": "delayed frame 2 independent position oracle ID 0",
+            "pass_": true
+          },
+          {
+            "label": "delayed frame 2 independent position oracle ID 40",
+            "pass_": true
+          },
+          {
+            "label": "delayed frame 2 visible selection markers on actual GPU",
+            "pass_": true
+          },
+          {
+            "label": "all PNG pixels identical with delayed rendering",
+            "pass_": true
+          },
+          {
+            "label": "restored frame and ordinary PNG capture reproduce exact clip pixels",
+            "pass_": true
+          },
+          {
+            "label": "ordinary PNG and portable recipe image hash agree",
+            "pass_": true
+          },
+          {
+            "label": "capture checksum unchanged",
+            "pass_": true
+          }
+        ],
+        "image_inspection_required": true
+      }
+    },
+    {
+      "name": "matched-gl",
+      "artifacts": [
+        {
+          "path": "results/maintenance/matched-gl/report.json",
+          "bytes": 6591,
+          "sha256": "2834f341d0e03e7e110142a50749e88d3a56cb4b2cf539bb4a016ebc4d9e0fcb"
+        }
+      ],
+      "report": {
+        "status": "PASS",
+        "renderer": "gl_compatibility",
+        "runs": [
+          {
+            "command": [
+              "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+              "--headless",
+              "--path",
+              "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+              "--log-file",
+              "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/maintenance/matched-gl/left-input/godot.log",
+              "--script",
+              "analysis/test_render_state.gd",
+              "--",
+              "--g4-render-fixture=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/maintenance/matched-gl/left-input",
+              "--g4-render-visible"
+            ],
+            "exit_code": 0,
+            "seconds": 1.123275690999435
+          },
+          {
+            "command": [
+              "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+              "--headless",
+              "--path",
+              "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+              "--log-file",
+              "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/maintenance/matched-gl/right-input/godot.log",
+              "--script",
+              "analysis/test_render_state.gd",
+              "--",
+              "--g4-render-fixture=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/maintenance/matched-gl/right-input",
+              "--g4-render-visible"
+            ],
+            "exit_code": 0,
+            "seconds": 1.12370376400213
+          },
+          {
+            "command": [
+              "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+              "--path",
+              "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+              "--rendering-method",
+              "gl_compatibility",
+              "--resolution",
+              "640x360",
+              "--audio-driver",
+              "Dummy",
+              "--log-file",
+              "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/maintenance/matched-gl/native.log",
+              "--script",
+              "analysis/test_matched_render.gd",
+              "--",
+              "--matched-fixture=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/maintenance/matched-gl",
+              "--render-pair"
+            ],
+            "exit_code": 0,
+            "seconds": 4.915384080999502
+          }
+        ],
+        "checks": [
+          {
+            "label": "native UI prepared three frames per input",
+            "pass_": true
+          },
+          {
+            "label": "comparison retains both independent source identities",
+            "pass_": true
+          },
+          {
+            "label": "equal decimal IDs retain distinct source namespaces",
+            "pass_": true
+          },
+          {
+            "label": "left renderer completed",
+            "pass_": true
+          },
+          {
+            "label": "left full timing rows",
+            "pass_": true
+          },
+          {
+            "label": "left encoded dimensions/FPS/frame count",
+            "pass_": true
+          },
+          {
+            "label": "left frame 0 raw and aligned times",
+            "pass_": true
+          },
+          {
+            "label": "left frame 0 timing log retains matched provenance",
+            "pass_": true
+          },
+          {
+            "label": "left frame 0 both source provenances",
+            "pass_": true
+          },
+          {
+            "label": "left frame 0 explicit membership",
+            "pass_": true
+          },
+          {
+            "label": "left frame 0 independent physical position oracle",
+            "pass_": true
+          },
+          {
+            "label": "left frame 0 image checksum",
+            "pass_": true
+          },
+          {
+            "label": "left frame 1 raw and aligned times",
+            "pass_": true
+          },
+          {
+            "label": "left frame 1 timing log retains matched provenance",
+            "pass_": true
+          },
+          {
+            "label": "left frame 1 both source provenances",
+            "pass_": true
+          },
+          {
+            "label": "left frame 1 explicit membership",
+            "pass_": true
+          },
+          {
+            "label": "left frame 1 independent physical position oracle",
+            "pass_": true
+          },
+          {
+            "label": "left frame 1 image checksum",
+            "pass_": true
+          },
+          {
+            "label": "left frame 2 raw and aligned times",
+            "pass_": true
+          },
+          {
+            "label": "left frame 2 timing log retains matched provenance",
+            "pass_": true
+          },
+          {
+            "label": "left frame 2 both source provenances",
+            "pass_": true
+          },
+          {
+            "label": "left frame 2 explicit membership",
+            "pass_": true
+          },
+          {
+            "label": "left frame 2 independent physical position oracle",
+            "pass_": true
+          },
+          {
+            "label": "left frame 2 image checksum",
+            "pass_": true
+          },
+          {
+            "label": "right renderer completed",
+            "pass_": true
+          },
+          {
+            "label": "right full timing rows",
+            "pass_": true
+          },
+          {
+            "label": "right encoded dimensions/FPS/frame count",
+            "pass_": true
+          },
+          {
+            "label": "right frame 0 raw and aligned times",
+            "pass_": true
+          },
+          {
+            "label": "right frame 0 timing log retains matched provenance",
+            "pass_": true
+          },
+          {
+            "label": "right frame 0 both source provenances",
+            "pass_": true
+          },
+          {
+            "label": "right frame 0 explicit membership",
+            "pass_": true
+          },
+          {
+            "label": "right frame 0 independent physical position oracle",
+            "pass_": true
+          },
+          {
+            "label": "right frame 0 image checksum",
+            "pass_": true
+          },
+          {
+            "label": "right frame 1 raw and aligned times",
+            "pass_": true
+          },
+          {
+            "label": "right frame 1 timing log retains matched provenance",
+            "pass_": true
+          },
+          {
+            "label": "right frame 1 both source provenances",
+            "pass_": true
+          },
+          {
+            "label": "right frame 1 explicit membership",
+            "pass_": true
+          },
+          {
+            "label": "right frame 1 independent physical position oracle",
+            "pass_": true
+          },
+          {
+            "label": "right frame 1 image checksum",
+            "pass_": true
+          },
+          {
+            "label": "right frame 2 raw and aligned times",
+            "pass_": true
+          },
+          {
+            "label": "right frame 2 timing log retains matched provenance",
+            "pass_": true
+          },
+          {
+            "label": "right frame 2 both source provenances",
+            "pass_": true
+          },
+          {
+            "label": "right frame 2 explicit membership",
+            "pass_": true
+          },
+          {
+            "label": "right frame 2 independent physical position oracle",
+            "pass_": true
+          },
+          {
+            "label": "right frame 2 image checksum",
+            "pass_": true
+          },
+          {
+            "label": "right rendering follows left completion",
+            "pass_": true
+          },
+          {
+            "label": "separate sequential scene renderers",
+            "pass_": true
+          },
+          {
+            "label": "matched physical geometry reproduces identical PNG pixels across raw clocks",
+            "pass_": true
+          },
+          {
+            "label": "left-input source unchanged",
+            "pass_": true
+          },
+          {
+            "label": "right-input source unchanged",
+            "pass_": true
+          }
+        ],
+        "image_inspection_required": true
+      }
+    },
+    {
+      "name": "G1 inspection compatibility",
+      "status": "PASS",
+      "checks": 49,
+      "category": "headless, not rendered acceptance",
+      "command": [
+        "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+        "--headless",
+        "--path",
+        "viewer",
+        "--log-file",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/maintenance/inspection-compatibility.log",
+        "--script",
+        "scene/test_inspection.gd"
+      ],
+      "artifacts": [
+        {
+          "path": "results/maintenance/inspection-compatibility.log",
+          "bytes": 2653,
+          "sha256": "51f96c810e2bf978302e0807c33dc66a76369d7489118cfe460db1fdd696af43"
+        }
+      ]
+    }
+  ],
+  "failed_attempts": [
+    {
+      "name": "ui-headless-1",
+      "status": "FAIL",
+      "reason": "Scalar legend assertion preceded asynchronous style publication; corrected test waits for a committed sample.",
+      "exit_code": 1,
+      "result": {
+        "backend": "forward_plus",
+        "checks": 28,
+        "failures": [
+          "scalar legend retained"
+        ],
+        "images": [],
+        "layouts": [
+          {
+            "expanded_height": 2316.0,
+            "panel": "Selections",
+            "width": 323.0
+          },
+          {
+            "expanded_height": 2107.0,
+            "panel": "Temporal analysis",
+            "width": 323.0
+          },
+          {
+            "expanded_height": 3143.0,
+            "panel": "Diagnostics and comparisons",
+            "width": 323.0
+          },
+          {
+            "expanded_height": 976.0,
+            "panel": "Space-time analysis",
+            "width": 323.0
+          },
+          {
+            "expanded_height": 593.0,
+            "panel": "Analysis export and state",
+            "width": 323.0
+          },
+          {
+            "expanded_height": 2501.0,
+            "panel": "Matched runs",
+            "width": 323.0
+          }
+        ],
+        "viewport": "[P: (0.0, 0.0), S: (1440.0, 900.0)]",
+        "window": "(64, 64)"
+      },
+      "artifacts": [
+        {
+          "path": "results/maintenance/ui-headless-1/report.json",
+          "bytes": 1580,
+          "sha256": "92bf03114ab4617c6573e587bc8e7f1edc8cc21171ee89e47f1663354dfac758"
+        },
+        {
+          "path": "results/maintenance/ui-headless-1/stdout.log",
+          "bytes": 365,
+          "sha256": "d515453985e52540053fc37fa7f473feedeeeda868dae1992adace08cee03edc"
+        }
+      ]
+    },
+    {
+      "name": "ui-gl-4k",
+      "status": "FAIL",
+      "reason": "OS capped desktop window at 2179x1362. Not accepted as 4K; exact GPU SubViewport checks replace it.",
+      "exit_code": 0,
+      "result": {
+        "backend": "gl_compatibility",
+        "checks": 36,
+        "failures": [],
+        "images": [
+          {
+            "file": "legend-scalar.png",
+            "height": 1362,
+            "width": 2179
+          },
+          {
+            "file": "legend-fixed.png",
+            "height": 1362,
+            "width": 2179
+          },
+          {
+            "file": "selections.png",
+            "height": 1362,
+            "width": 2179
+          },
+          {
+            "file": "temporal-analysis.png",
+            "height": 1362,
+            "width": 2179
+          },
+          {
+            "file": "diagnostics-and-comparisons.png",
+            "height": 1362,
+            "width": 2179
+          },
+          {
+            "file": "space-time-analysis.png",
+            "height": 1362,
+            "width": 2179
+          },
+          {
+            "file": "analysis-export-and-state.png",
+            "height": 1362,
+            "width": 2179
+          },
+          {
+            "file": "matched-runs.png",
+            "height": 1362,
+            "width": 2179
+          }
+        ],
+        "layouts": [
+          {
+            "expanded_height": 2316.0,
+            "panel": "Selections",
+            "width": 323.0
+          },
+          {
+            "expanded_height": 2107.0,
+            "panel": "Temporal analysis",
+            "width": 323.0
+          },
+          {
+            "expanded_height": 3143.0,
+            "panel": "Diagnostics and comparisons",
+            "width": 323.0
+          },
+          {
+            "expanded_height": 976.0,
+            "panel": "Space-time analysis",
+            "width": 323.0
+          },
+          {
+            "expanded_height": 593.0,
+            "panel": "Analysis export and state",
+            "width": 323.0
+          },
+          {
+            "expanded_height": 2501.0,
+            "panel": "Matched runs",
+            "width": 323.0
+          }
+        ],
+        "viewport": "[P: (0.0, 0.0), S: (1440.0, 900.0)]",
+        "window": "(2552, 1362)"
+      },
+      "artifacts": [
+        {
+          "path": "results/maintenance/ui-gl-4k/report.json",
+          "bytes": 2446,
+          "sha256": "8b716c17ecd7fa72c072c196da4fa24062e83a87a511fb537d3779803733ae42"
+        },
+        {
+          "path": "results/maintenance/ui-gl-4k/stdout.log",
+          "bytes": 213,
+          "sha256": "4b92ad117dc6c22176e2c020b34a0bb8a419c0d4e1f9d20d100d9e5912860a9e"
+        }
+      ]
+    },
+    {
+      "name": "temporal",
+      "status": "FAIL",
+      "reason": "Parallel sandbox run failed; sequential run passed without product changes.",
+      "exit_code": 1,
+      "result": null,
+      "artifacts": [
+        {
+          "path": "results/maintenance/temporal/report.json",
+          "bytes": 721,
+          "sha256": "bcbe97b3556b9b530de37d222458f3e156dd02af392a1cdb72787d28e4cc893c"
+        },
+        {
+          "path": "results/maintenance/temporal/stdout.log",
+          "bytes": 1591,
+          "sha256": "507cce70a98a90788104a848baab25f81d9369926606aa179b13b2dad20708a6"
+        }
+      ]
+    },
+    {
+      "name": "diagnostics",
+      "status": "FAIL",
+      "reason": "Parallel sandbox run failed; sequential run passed without product changes.",
+      "exit_code": 1,
+      "result": null,
+      "artifacts": [
+        {
+          "path": "results/maintenance/diagnostics/report.json",
+          "bytes": 1067,
+          "sha256": "64e04efa69031260d56da21c03a9e2238473a6cfa8c560d3aa438205f8757261"
+        },
+        {
+          "path": "results/maintenance/diagnostics/stdout.log",
+          "bytes": 728,
+          "sha256": "6c469e894a9ff474de881bed4d09896620814b3bc1dd47ead4dd1dc0b3cc8fae"
+        }
+      ]
+    },
+    {
+      "name": "space_time",
+      "status": "FAIL",
+      "reason": "Parallel sandbox run failed; sequential run passed without product changes.",
+      "exit_code": 1,
+      "result": null,
+      "artifacts": [
+        {
+          "path": "results/maintenance/space_time/report.json",
+          "bytes": 708,
+          "sha256": "d3de749d5fe7ab732f6654c4a2136ba71033e6c437b84141df3fd7da00387655"
+        },
+        {
+          "path": "results/maintenance/space_time/stdout.log",
+          "bytes": 1647,
+          "sha256": "92fb8abeba34e3932e1d7808bdc42e7a858864021b17a38b83739bdbb855aca3"
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "4K is an exact GPU render target with existing export scaling, not a physical 4K monitor test.",
+    "No new throughput/RSS/VRAM claim; approved budgets and defaults are unchanged.",
+    "Parallel PID-namespace/shared-cache cleanup interference is suspected from ownership code; tests run sequentially after failed attempts.",
+    "Raw local captures, logs, screenshots and videos remain generated/ignored; hashes and reproduction commands are retained.",
+    "G4 A01-A23 registry and acceptance thresholds unchanged."
+  ]
+}

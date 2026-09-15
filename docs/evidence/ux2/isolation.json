@@ -1,0 +1,847 @@
+{
+	"after": {
+		"alpha": 0.0,
+		"frame_index": 0,
+		"geometry": {
+			"source": "capture metadata",
+			"value": {
+				"absorber": {
+					"center": [
+						0.0,
+						0.0,
+						0.0
+					],
+					"profile": "synthetic declared demonstration boundary",
+					"start": 14.0,
+					"width": 2.0
+				},
+				"coordinate_space": "viewer_world",
+				"domain": {
+					"max": [
+						16.0,
+						16.0,
+						16.0
+					],
+					"min": [
+						-16.0,
+						-16.0,
+						-16.0
+					]
+				},
+				"units": "demo units",
+				"version": 1.0
+			}
+		},
+		"history_indices": [],
+		"kind": "simscope-inspection",
+		"layers": [
+			{
+				"display_lod": "all recorded particles",
+				"id": "particles",
+				"kind": "particles",
+				"scalar_time": 0.0,
+				"source_indices": [
+					0,
+					0
+				],
+				"source_time": 0.0,
+				"status": "exact",
+				"units": "demo units",
+				"visible": true
+			},
+			{
+				"channel": "",
+				"display_lod": "full mesh",
+				"id": "surface",
+				"kind": "mesh",
+				"source_indices": [
+					0,
+					0
+				],
+				"source_time": 0.0,
+				"status": "exact",
+				"units": "demo units",
+				"visible": true
+			},
+			{
+				"channel": "rho",
+				"color_compositing": "Forward+ linear framebuffer",
+				"display_lod": "float32 / stride 1",
+				"effective_ray_step": "max(requested step, ray length / 1024); early alpha stop .995",
+				"geometry": {
+					"centering": "node",
+					"origin": [
+						-16.0,
+						-16.0,
+						-16.0
+					],
+					"shape": [
+						32.0,
+						32.0,
+						32.0
+					],
+					"spacing": [
+						1.03225806451613,
+						1.03225806451613,
+						1.03225806451613
+					]
+				},
+				"id": "density",
+				"kind": "volume",
+				"numeric_precision": "float32 source",
+				"source_indices": [
+					0
+				],
+				"source_time": 0.0,
+				"status": "exact",
+				"units": "density units",
+				"visible": true
+			}
+		],
+		"normalization": {
+			"bounds": null,
+			"mode": "frame",
+			"scalar_policy": "sample-and-hold",
+			"statistics": {
+				"count": 0,
+				"invalid_or_nonpositive": 0,
+				"outside_range": 0,
+				"valid": 0
+			}
+		},
+		"particle_identity": {
+			"available": true,
+			"count": 64,
+			"namespace": "5619c245baf941b0bfda369c78c4ded3/particles",
+			"preview_ids": [
+				"9007199254740993",
+				"9007199254740994",
+				"9007199254740995",
+				"9007199254740996",
+				"9007199254740997",
+				"9007199254740998",
+				"9007199254740999",
+				"9007199254741000",
+				"9007199254741001",
+				"9007199254741002",
+				"9007199254741003",
+				"9007199254741004",
+				"9007199254741005",
+				"9007199254741006",
+				"9007199254741007",
+				"9007199254741008"
+			],
+			"preview_only": true
+		},
+		"render": {
+			"backend": "forward_plus",
+			"dimensions": [
+				1440.0,
+				900.0
+			]
+		},
+		"sample": {
+			"alpha": 0.0,
+			"layers": [
+				{
+					"display_lod": "all recorded particles",
+					"id": "particles",
+					"kind": "particles",
+					"scalar_time": 0.0,
+					"source_indices": [
+						0,
+						0
+					],
+					"source_time": 0.0,
+					"status": "exact",
+					"units": "demo units",
+					"visible": true
+				},
+				{
+					"channel": "",
+					"display_lod": "full mesh",
+					"id": "surface",
+					"kind": "mesh",
+					"source_indices": [
+						0,
+						0
+					],
+					"source_time": 0.0,
+					"status": "exact",
+					"units": "demo units",
+					"visible": true
+				},
+				{
+					"channel": "rho",
+					"color_compositing": "Forward+ linear framebuffer",
+					"display_lod": "float32 / stride 1",
+					"effective_ray_step": "max(requested step, ray length / 1024); early alpha stop .995",
+					"geometry": {
+						"centering": "node",
+						"origin": [
+							-16.0,
+							-16.0,
+							-16.0
+						],
+						"shape": [
+							32.0,
+							32.0,
+							32.0
+						],
+						"spacing": [
+							1.03225806451613,
+							1.03225806451613,
+							1.03225806451613
+						]
+					},
+					"id": "density",
+					"kind": "volume",
+					"numeric_precision": "float32 source",
+					"source_indices": [
+						0
+					],
+					"source_time": 0.0,
+					"status": "exact",
+					"units": "density units",
+					"visible": true
+				}
+			],
+			"missing_layers": [],
+			"positions": "exact",
+			"requested_time": 0.0,
+			"scalar_time": 0.0,
+			"scalars": "exact",
+			"source_indices": [
+				0,
+				0
+			],
+			"source_times": [
+				0.0,
+				0.0
+			],
+			"stale_layers": [],
+			"time_mode": "physical",
+			"unavailable_channels": []
+		},
+		"selections": [],
+		"source": {
+			"committed_bytes": "172059",
+			"complete_frames": 9,
+			"format": "SIMSCP3",
+			"path": "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/ux2-accepted-candidate/scene.ssc",
+			"sha256": "f968a520315294f6fa80f5c7608c0aad8e93604916b8c70f429d4ef4e6c1cb42"
+		},
+		"version": 2,
+		"visual": {
+			"auto_range": true,
+			"brightness_channel": "fixed",
+			"brightness_scale": 1.0,
+			"camera": {
+				"far": 1000.0,
+				"fov": 55.0,
+				"keep_aspect": 1,
+				"near": 0.0500000007450581
+			},
+			"camera_distance": 79.4774826049805,
+			"camera_target": [
+				-1.13761234283447,
+				0.0,
+				0.0
+			],
+			"camera_transform": [
+				[
+					0.788010776042938,
+					0.0,
+					-0.61566150188446
+				],
+				[
+					-0.250412106513977,
+					0.913545429706573,
+					-0.320512890815735
+				],
+				[
+					0.562434732913971,
+					0.406736671924591,
+					0.719883620738983
+				],
+				[
+					43.5632858276367,
+					32.3264045715332,
+					57.2145385742188
+				]
+			],
+			"channel_preferences": {},
+			"clamp_map": true,
+			"clean_view": false,
+			"color_channel": "fixed",
+			"colormap_name": "viridis",
+			"cyclic": false,
+			"environment": {
+				"background_mode": 2,
+				"fog_density": 0.000899999984540045,
+				"fog_enabled": true,
+				"glow_bloom": 0.239999994635582,
+				"glow_enabled": true,
+				"glow_intensity": 1.35000002384186,
+				"glow_strength": 1.54999995231628,
+				"tonemap_exposure": 1.0,
+				"tonemap_mode": 3,
+				"tonemap_white": 1.0
+			},
+			"exposure": 0.65,
+			"gamma": 1.0,
+			"geometry_override": {},
+			"guide_visibility": {
+				"absorber": false,
+				"data": false,
+				"domain": false,
+				"imposed": false
+			},
+			"guide_visible": false,
+			"hidden_types": [],
+			"intensity_floor": 0.08,
+			"invert_map": false,
+			"logarithmic": false,
+			"manual_max": 1.0,
+			"manual_min": 0.0,
+			"mode": 0,
+			"normalization_mode": "frame",
+			"observer_scale": 9999999999999999583119736832.0,
+			"orbit_enabled": false,
+			"orbit_speed": 0.08,
+			"overlay_visible": true,
+			"panel_width": 340.0,
+			"particle_layer_visible": true,
+			"physical_rate": 1.0,
+			"pitch": 0.418879020478639,
+			"playback_fps": 12.0,
+			"point_scale": 1.8,
+			"preset": "Cinematic",
+			"range_interval": {},
+			"scene": {
+				"gpu_budget_mib": 256,
+				"layers": {
+					"density": {
+						"channel": "rho",
+						"clip": false,
+						"clip_distance": 0.0,
+						"clip_normal": [
+							1.0,
+							0.0,
+							0.0
+						],
+						"colormap": "viridis",
+						"isosurface": false,
+						"lower": 0.0,
+						"opacity": 0.25,
+						"slice": false,
+						"slice_distance": 0.0,
+						"slice_normal": [
+							0.0,
+							0.0,
+							1.0
+						],
+						"step": 0.5,
+						"threshold": 0.5,
+						"upper": 1.0,
+						"visible": true,
+						"volume": true
+					},
+					"surface": {
+						"channel": "",
+						"colormap": "viridis",
+						"lower": -2.0,
+						"upper": 2.0,
+						"visible": true,
+						"wireframe": false
+					}
+				}
+			},
+			"sections": {
+				"Advanced • Post-processing": false,
+				"Advanced • Size / Brightness": false,
+				"Analysis export and state": false,
+				"Camera": false,
+				"Capture / Export": false,
+				"Color Mapping": true,
+				"Data cache": false,
+				"Diagnostics and comparisons": false,
+				"Geometry / Guides": false,
+				"Matched runs": false,
+				"Particle Filters": false,
+				"Playback": true,
+				"Rendering": true,
+				"Selections": false,
+				"Space-time analysis": false,
+				"Temporal analysis": false,
+				"Trails": false
+			},
+			"show_legend": true,
+			"size_channel": "fixed",
+			"slice_enabled": false,
+			"slice_x": 0.0,
+			"sliders": {
+				"Bloom": 1.36,
+				"Brightness": 1.0,
+				"Exposure": 0.64,
+				"Gamma": 1.012,
+				"Intensity cutoff": 0.08,
+				"Orbit speed • radians / second": 0.08,
+				"Particle size": 1.838,
+				"Physical time units / second": 1.009,
+				"Playback • frames / second (index mode)": 12.08,
+				"Slice position • box fraction": 0.0
+			},
+			"starfield_visible": true,
+			"time_mode": "physical",
+			"trails_enabled": false,
+			"viewport": {
+				"msaa_3d": 0,
+				"scaling_3d_scale": 1.0,
+				"screen_space_aa": 0,
+				"use_debanding": false,
+				"use_taa": false
+			},
+			"yaw": 0.663225115757845
+		}
+	},
+	"before": {
+		"alpha": 0.0,
+		"frame_index": 0,
+		"geometry": {
+			"source": "capture metadata",
+			"value": {
+				"absorber": {
+					"center": [
+						0.0,
+						0.0,
+						0.0
+					],
+					"profile": "synthetic declared demonstration boundary",
+					"start": 14.0,
+					"width": 2.0
+				},
+				"coordinate_space": "viewer_world",
+				"domain": {
+					"max": [
+						16.0,
+						16.0,
+						16.0
+					],
+					"min": [
+						-16.0,
+						-16.0,
+						-16.0
+					]
+				},
+				"units": "demo units",
+				"version": 1.0
+			}
+		},
+		"history_indices": [],
+		"kind": "simscope-inspection",
+		"layers": [
+			{
+				"display_lod": "all recorded particles",
+				"id": "particles",
+				"kind": "particles",
+				"scalar_time": 0.0,
+				"source_indices": [
+					0,
+					0
+				],
+				"source_time": 0.0,
+				"status": "exact",
+				"units": "demo units",
+				"visible": true
+			},
+			{
+				"channel": "",
+				"display_lod": "full mesh",
+				"id": "surface",
+				"kind": "mesh",
+				"source_indices": [
+					0,
+					0
+				],
+				"source_time": 0.0,
+				"status": "exact",
+				"units": "demo units",
+				"visible": true
+			},
+			{
+				"channel": "rho",
+				"color_compositing": "Forward+ linear framebuffer",
+				"display_lod": "float32 / stride 1",
+				"effective_ray_step": "max(requested step, ray length / 1024); early alpha stop .995",
+				"geometry": {
+					"centering": "node",
+					"origin": [
+						-16.0,
+						-16.0,
+						-16.0
+					],
+					"shape": [
+						32.0,
+						32.0,
+						32.0
+					],
+					"spacing": [
+						1.03225806451613,
+						1.03225806451613,
+						1.03225806451613
+					]
+				},
+				"id": "density",
+				"kind": "volume",
+				"numeric_precision": "float32 source",
+				"source_indices": [
+					0
+				],
+				"source_time": 0.0,
+				"status": "exact",
+				"units": "density units",
+				"visible": true
+			}
+		],
+		"normalization": {
+			"bounds": null,
+			"mode": "frame",
+			"scalar_policy": "sample-and-hold",
+			"statistics": {
+				"count": 0,
+				"invalid_or_nonpositive": 0,
+				"outside_range": 0,
+				"valid": 0
+			}
+		},
+		"particle_identity": {
+			"available": true,
+			"count": 64,
+			"namespace": "5619c245baf941b0bfda369c78c4ded3/particles",
+			"preview_ids": [
+				"9007199254740993",
+				"9007199254740994",
+				"9007199254740995",
+				"9007199254740996",
+				"9007199254740997",
+				"9007199254740998",
+				"9007199254740999",
+				"9007199254741000",
+				"9007199254741001",
+				"9007199254741002",
+				"9007199254741003",
+				"9007199254741004",
+				"9007199254741005",
+				"9007199254741006",
+				"9007199254741007",
+				"9007199254741008"
+			],
+			"preview_only": true
+		},
+		"render": {
+			"backend": "forward_plus",
+			"dimensions": [
+				1440.0,
+				900.0
+			]
+		},
+		"sample": {
+			"alpha": 0.0,
+			"layers": [
+				{
+					"display_lod": "all recorded particles",
+					"id": "particles",
+					"kind": "particles",
+					"scalar_time": 0.0,
+					"source_indices": [
+						0,
+						0
+					],
+					"source_time": 0.0,
+					"status": "exact",
+					"units": "demo units",
+					"visible": true
+				},
+				{
+					"channel": "",
+					"display_lod": "full mesh",
+					"id": "surface",
+					"kind": "mesh",
+					"source_indices": [
+						0,
+						0
+					],
+					"source_time": 0.0,
+					"status": "exact",
+					"units": "demo units",
+					"visible": true
+				},
+				{
+					"channel": "rho",
+					"color_compositing": "Forward+ linear framebuffer",
+					"display_lod": "float32 / stride 1",
+					"effective_ray_step": "max(requested step, ray length / 1024); early alpha stop .995",
+					"geometry": {
+						"centering": "node",
+						"origin": [
+							-16.0,
+							-16.0,
+							-16.0
+						],
+						"shape": [
+							32.0,
+							32.0,
+							32.0
+						],
+						"spacing": [
+							1.03225806451613,
+							1.03225806451613,
+							1.03225806451613
+						]
+					},
+					"id": "density",
+					"kind": "volume",
+					"numeric_precision": "float32 source",
+					"source_indices": [
+						0
+					],
+					"source_time": 0.0,
+					"status": "exact",
+					"units": "density units",
+					"visible": true
+				}
+			],
+			"missing_layers": [],
+			"positions": "exact",
+			"requested_time": 0.0,
+			"scalar_time": 0.0,
+			"scalars": "exact",
+			"source_indices": [
+				0,
+				0
+			],
+			"source_times": [
+				0.0,
+				0.0
+			],
+			"stale_layers": [],
+			"time_mode": "physical",
+			"unavailable_channels": []
+		},
+		"selections": [],
+		"source": {
+			"committed_bytes": "172059",
+			"complete_frames": 9,
+			"format": "SIMSCP3",
+			"path": "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/ux2-accepted-candidate/scene.ssc",
+			"sha256": "f968a520315294f6fa80f5c7608c0aad8e93604916b8c70f429d4ef4e6c1cb42"
+		},
+		"version": 2,
+		"visual": {
+			"auto_range": true,
+			"brightness_channel": "fixed",
+			"brightness_scale": 1.0,
+			"camera": {
+				"far": 1000.0,
+				"fov": 55.0,
+				"keep_aspect": 1,
+				"near": 0.0500000007450581
+			},
+			"camera_distance": 79.4774826049805,
+			"camera_target": [
+				-1.13761234283447,
+				0.0,
+				0.0
+			],
+			"camera_transform": [
+				[
+					0.788010776042938,
+					0.0,
+					-0.61566150188446
+				],
+				[
+					-0.250412106513977,
+					0.913545429706573,
+					-0.320512890815735
+				],
+				[
+					0.562434732913971,
+					0.406736671924591,
+					0.719883620738983
+				],
+				[
+					43.5632858276367,
+					32.3264045715332,
+					57.2145385742188
+				]
+			],
+			"channel_preferences": {},
+			"clamp_map": true,
+			"clean_view": false,
+			"color_channel": "fixed",
+			"colormap_name": "viridis",
+			"cyclic": false,
+			"environment": {
+				"background_mode": 2,
+				"fog_density": 0.000899999984540045,
+				"fog_enabled": true,
+				"glow_bloom": 0.239999994635582,
+				"glow_enabled": true,
+				"glow_intensity": 1.35000002384186,
+				"glow_strength": 1.54999995231628,
+				"tonemap_exposure": 1.0,
+				"tonemap_mode": 3,
+				"tonemap_white": 1.0
+			},
+			"exposure": 0.65,
+			"gamma": 1.0,
+			"geometry_override": {},
+			"guide_visibility": {
+				"absorber": false,
+				"data": false,
+				"domain": false,
+				"imposed": false
+			},
+			"guide_visible": false,
+			"hidden_types": [],
+			"intensity_floor": 0.08,
+			"invert_map": false,
+			"logarithmic": false,
+			"manual_max": 1.0,
+			"manual_min": 0.0,
+			"mode": 0,
+			"normalization_mode": "frame",
+			"observer_scale": 9999999999999999583119736832.0,
+			"orbit_enabled": false,
+			"orbit_speed": 0.08,
+			"overlay_visible": true,
+			"panel_width": 340.0,
+			"particle_layer_visible": true,
+			"physical_rate": 1.0,
+			"pitch": 0.418879020478639,
+			"playback_fps": 12.0,
+			"point_scale": 1.8,
+			"preset": "Cinematic",
+			"range_interval": {},
+			"scene": {
+				"gpu_budget_mib": 256,
+				"layers": {
+					"density": {
+						"channel": "rho",
+						"clip": false,
+						"clip_distance": 0.0,
+						"clip_normal": [
+							1.0,
+							0.0,
+							0.0
+						],
+						"colormap": "viridis",
+						"isosurface": false,
+						"lower": 0.0,
+						"opacity": 0.25,
+						"slice": false,
+						"slice_distance": 0.0,
+						"slice_normal": [
+							0.0,
+							0.0,
+							1.0
+						],
+						"step": 0.5,
+						"threshold": 0.5,
+						"upper": 1.0,
+						"visible": true,
+						"volume": true
+					},
+					"surface": {
+						"channel": "",
+						"colormap": "viridis",
+						"lower": -2.0,
+						"upper": 2.0,
+						"visible": true,
+						"wireframe": false
+					}
+				}
+			},
+			"sections": {
+				"Advanced • Post-processing": false,
+				"Advanced • Size / Brightness": false,
+				"Analysis export and state": false,
+				"Camera": false,
+				"Capture / Export": false,
+				"Color Mapping": true,
+				"Data cache": false,
+				"Diagnostics and comparisons": false,
+				"Geometry / Guides": false,
+				"Matched runs": false,
+				"Particle Filters": false,
+				"Playback": true,
+				"Rendering": true,
+				"Selections": false,
+				"Space-time analysis": false,
+				"Temporal analysis": false,
+				"Trails": false
+			},
+			"show_legend": true,
+			"size_channel": "fixed",
+			"slice_enabled": false,
+			"slice_x": 0.0,
+			"sliders": {
+				"Bloom": 1.36,
+				"Brightness": 1.0,
+				"Exposure": 0.64,
+				"Gamma": 1.012,
+				"Intensity cutoff": 0.08,
+				"Orbit speed • radians / second": 0.08,
+				"Particle size": 1.838,
+				"Physical time units / second": 1.009,
+				"Playback • frames / second (index mode)": 12.08,
+				"Slice position • box fraction": 0.0
+			},
+			"starfield_visible": true,
+			"time_mode": "physical",
+			"trails_enabled": false,
+			"viewport": {
+				"msaa_3d": 0,
+				"scaling_3d_scale": 1.0,
+				"screen_space_aa": 0,
+				"use_debanding": false,
+				"use_taa": false
+			},
+			"yaw": 0.663225115757845
+		}
+	},
+	"checks": [
+		{
+			"description": "Loaded native combined SIMSCP3 fixture snapshot",
+			"passed": true
+		},
+		{
+			"description": "Native scientific/visual/recipe snapshot unchanged after library load, edit and theme rebuild",
+			"passed": true
+		},
+		{
+			"description": "Production viewport and existing UI pixels byte-identical",
+			"passed": true
+		},
+		{
+			"description": "No scientific preparation/hash/upload counters from theme/component activity",
+			"passed": true
+		},
+		{
+			"description": "Root and global production theme untouched",
+			"passed": true
+		},
+		{
+			"description": "Production startup scene unchanged",
+			"passed": true
+		}
+	],
+	"failures": [],
+	"production_after_sha256": "6d849c7b95a341c9e820c7a2a1bee08b5fc7990501fc45cae8520c23c8f7f08e",
+	"production_before_sha256": "6d849c7b95a341c9e820c7a2a1bee08b5fc7990501fc45cae8520c23c8f7f08e",
+	"profile": {
+		"counters": {},
+		"stages": {}
+	}
+}

@@ -1,0 +1,5190 @@
+[
+  {
+    "class": "PanelContainer",
+    "path": "@CanvasLayer@12/@PanelContainer@13",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "ScrollContainer",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "VBoxContainer",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@Label@18",
+    "text": "SimScope • G3 analytic field / mesh / particles\nFrame 1 / 9  ·  t = 0.00000\n64 particles\nPhysical time\nPositions: exact\nUnmatched IDs held\nScalars held at t=0.00000",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@Label@19",
+    "text": "Loaded scene.ssc • SIMSCP3 • 14 layer samples",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@Button@20",
+    "text": "Hide inspector  [F1]",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "VBoxContainer",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@Label@1310",
+    "text": "Particle playback buffer",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "OptionButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@OptionButton@1321",
+    "text": "Automatic (safe RAM)",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Automatically preload captures that fit safely; otherwise use a rolling window. Manual RAM choices keep a rolling cache. GPU resources are limited to current particles and visible trails.",
+    "options": [
+      "Automatic (safe RAM)",
+      "512 MiB RAM",
+      "2 GiB RAM",
+      "8 GiB RAM",
+      "16 GiB RAM",
+      "All particle pairs, if safe"
+    ],
+    "disabled": false
+  },
+  {
+    "class": "CheckButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@CheckButton@1322",
+    "text": "Loop recorded interval",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@Label@1323",
+    "text": "Playback ready • 8 prepared pairs • 2.000 source units buffered\nDecoded 0.2 / 0 MiB • prepared 0.4 / 1 MiB (CPU)\nFull particle preload: estimated 1 MiB including working space fits 18716 MiB safe RAM.",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@Label@1324",
+    "text": "Scene layers",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@Label@1325",
+    "text": "Layer GPU budget • MiB",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "SpinBox",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@SpinBox@1328",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@Label@1329",
+    "text": "particles: exact @ 0.0000\nall recorded particles",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": "{\n  \"display_lod\": \"all recorded particles\",\n  \"id\": \"particles\",\n  \"kind\": \"particles\",\n  \"scalar_time\": 0.0,\n  \"source_indices\": [\n    0,\n    0\n  ],\n  \"source_time\": 0.0,\n  \"status\": \"exact\",\n  \"units\": \"demo units\",\n  \"visible\": true\n}"
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@Label@1330",
+    "text": "surface: exact @ 0.0000\nfull mesh",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": "{\n  \"channel\": \"\",\n  \"display_lod\": \"full mesh\",\n  \"id\": \"surface\",\n  \"kind\": \"mesh\",\n  \"source_indices\": [\n    0,\n    0\n  ],\n  \"source_time\": 0.0,\n  \"status\": \"exact\",\n  \"units\": \"demo units\",\n  \"visible\": true\n}"
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@Button@1331",
+    "text": "Settings: surface",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "VBoxContainer",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@VBoxContainer@1332",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "CheckButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@VBoxContainer@1332/@CheckButton@1333",
+    "text": "Visible",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "OptionButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@VBoxContainer@1332/@OptionButton@1344",
+    "text": "Fixed mesh color",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "options": [
+      "Fixed mesh color",
+      "height"
+    ],
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@VBoxContainer@1332/@Label@1345",
+    "text": "Range minimum",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@VBoxContainer@1332/@LineEdit@1346",
+    "text": "-2.0",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@VBoxContainer@1332/@Label@1347",
+    "text": "Range maximum",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@VBoxContainer@1332/@LineEdit@1348",
+    "text": "2.0",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "OptionButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@VBoxContainer@1332/@OptionButton@1359",
+    "text": "viridis",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "options": [
+      "viridis",
+      "plasma",
+      "inferno",
+      "magma",
+      "cividis",
+      "turbo",
+      "coolwarm",
+      "seismic",
+      "twilight",
+      "gray"
+    ],
+    "disabled": false
+  },
+  {
+    "class": "CheckButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@VBoxContainer@1332/@CheckButton@1360",
+    "text": "Wireframe",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@Label@1361",
+    "text": "density: exact @ 0.0000\nfloat32 / stride 1",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": "{\n  \"channel\": \"rho\",\n  \"color_compositing\": \"Forward+ linear framebuffer\",\n  \"display_lod\": \"float32 / stride 1\",\n  \"effective_ray_step\": \"max(requested step, ray length / 1024); early alpha stop .995\",\n  \"geometry\": {\n    \"centering\": \"node\",\n    \"origin\": [\n      -16.0,\n      -16.0,\n      -16.0\n    ],\n    \"shape\": [\n      32.0,\n      32.0,\n      32.0\n    ],\n    \"spacing\": [\n      1.03225806451613,\n      1.03225806451613,\n      1.03225806451613\n    ]\n  },\n  \"id\": \"density\",\n  \"kind\": \"volume\",\n  \"numeric_precision\": \"float32 source\",\n  \"source_indices\": [\n    0\n  ],\n  \"source_time\": 0.0,\n  \"status\": \"exact\",\n  \"units\": \"density units\",\n  \"visible\": true\n}"
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@Button@1362",
+    "text": "Settings: density",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "VBoxContainer",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@VBoxContainer@1363",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "CheckButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@VBoxContainer@1363/@CheckButton@1364",
+    "text": "Visible",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "OptionButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@VBoxContainer@1363/@OptionButton@1375",
+    "text": "rho",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "options": [
+      "rho",
+      "signed"
+    ],
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@VBoxContainer@1363/@Label@1376",
+    "text": "Range minimum",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@VBoxContainer@1363/@LineEdit@1377",
+    "text": "0.0",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@VBoxContainer@1363/@Label@1378",
+    "text": "Range maximum",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@VBoxContainer@1363/@LineEdit@1379",
+    "text": "1.0",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "OptionButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@VBoxContainer@1363/@OptionButton@1390",
+    "text": "viridis",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "options": [
+      "viridis",
+      "plasma",
+      "inferno",
+      "magma",
+      "cividis",
+      "turbo",
+      "coolwarm",
+      "seismic",
+      "twilight",
+      "gray"
+    ],
+    "disabled": false
+  },
+  {
+    "class": "CheckButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@VBoxContainer@1363/@CheckButton@1391",
+    "text": "Volume ray march",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@VBoxContainer@1363/@Label@1392",
+    "text": "Opacity / world unit",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "SpinBox",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@VBoxContainer@1363/@SpinBox@1395",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@VBoxContainer@1363/@Label@1396",
+    "text": "Ray step • world units",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "SpinBox",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@VBoxContainer@1363/@SpinBox@1399",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "OptionButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@VBoxContainer@1363/@OptionButton@1410",
+    "text": "No slice",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "options": [
+      "No slice",
+      "XY",
+      "XZ",
+      "YZ",
+      "Oblique"
+    ],
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@VBoxContainer@1363/@Label@1411",
+    "text": "Plane normal X",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "SpinBox",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@VBoxContainer@1363/@SpinBox@1414",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@VBoxContainer@1363/@Label@1415",
+    "text": "Plane normal Y",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "SpinBox",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@VBoxContainer@1363/@SpinBox@1418",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@VBoxContainer@1363/@Label@1419",
+    "text": "Plane normal Z",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "SpinBox",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@VBoxContainer@1363/@SpinBox@1422",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@VBoxContainer@1363/@Label@1423",
+    "text": "Slice plane distance • world",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "SpinBox",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@VBoxContainer@1363/@SpinBox@1426",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "CheckButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@VBoxContainer@1363/@CheckButton@1427",
+    "text": "Clip at world X plane",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@VBoxContainer@1363/@Label@1428",
+    "text": "Clip X",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "SpinBox",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@VBoxContainer@1363/@SpinBox@1431",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@VBoxContainer@1363/@Label@1432",
+    "text": "Isosurface threshold",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@VBoxContainer@1363/@LineEdit@1433",
+    "text": "0.5",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@VBoxContainer@1363/@Button@1434",
+    "text": "Extract isosurface",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@VBoxContainer@1363/@Button@1435",
+    "text": "Remove isosurface",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "OptionButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@OptionButton@1446",
+    "text": "density",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "options": [
+      "density"
+    ],
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@Label@1447",
+    "text": "Source probe • world xyz",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@Label@1448",
+    "text": "X",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "SpinBox",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@SpinBox@1451",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@Label@1452",
+    "text": "Y",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "SpinBox",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@SpinBox@1455",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@Label@1456",
+    "text": "Z",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "SpinBox",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@SpinBox@1459",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@Button@1460",
+    "text": "Probe selected volume",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@Label@1461",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@Label@1462",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@Label@1463",
+    "text": "Field prefetch ready • 1.7 / 128 MiB CPU\n",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@1309/@Label@1464",
+    "text": "Mesh prefetch ready • 1.4 / 128 MiB CPU\n",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@Label@23",
+    "text": "Fields unavailable • no grid recorded",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@Button@24",
+    "text": "Data cache",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "VBoxContainer",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@25",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@25/@Label@26",
+    "text": "Synchronous layer reads • validated index • 0.4 / 256 MiB • 0 hits",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "SpinBox",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@25/@SpinBox@29",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": "Decoded frame cache budget. 0 disables caching. Displayed frames and rendering use additional memory."
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@25/@Button@30",
+    "text": "Clear decoded cache",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@Button@31",
+    "text": "Playback",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "VBoxContainer",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@32",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "HBoxContainer",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@32/@HBoxContainer@33",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@32/@HBoxContainer@33/@Button@34",
+    "text": "◀",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@32/@HBoxContainer@33/@Button@35",
+    "text": "Play / Pause",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@32/@HBoxContainer@33/@Button@36",
+    "text": "▶",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "HSlider",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@32/@HSlider@37",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@32/@Label@38",
+    "text": "Time mode",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "OptionButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@32/@OptionButton@49",
+    "text": "Physical time • recorded timestamps",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "options": [
+      "Frame index • union samples",
+      "Physical time • recorded timestamps"
+    ],
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@32/@Label@50",
+    "text": "Seek physical time",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "SpinBox",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@32/@SpinBox@53",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@32/@Button@54",
+    "text": "Seek time",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@32/@Label@55",
+    "text": "Playback • frames / second (index mode)",
+    "font_size": 12,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "HSlider",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@32/@HSlider@56",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@32/@Label@57",
+    "text": "Physical time units / second",
+    "font_size": 12,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "HSlider",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@32/@HSlider@58",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@Button@59",
+    "text": "Rendering",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "VBoxContainer",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@60",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@60/@Label@61",
+    "text": "Viewing preset",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "OptionButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@60/@OptionButton@72",
+    "text": "Cinematic",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "options": [
+      "Cinematic",
+      "Scientific",
+      "Temperature",
+      "Density",
+      "Velocity",
+      "Minimal / Presentation"
+    ],
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@60/@Label@73",
+    "text": "Particle size",
+    "font_size": 12,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "HSlider",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@60/@HSlider@74",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@60/@Label@75",
+    "text": "Brightness",
+    "font_size": 12,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "HSlider",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@60/@HSlider@76",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "CheckButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@60/@CheckButton@77",
+    "text": "Point rendering",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@Button@78",
+    "text": "Color Mapping",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "VBoxContainer",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@79",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "VBoxContainer",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@79/@VBoxContainer@80",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@79/@VBoxContainer@80/@Label@81",
+    "text": "Color by",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "OptionButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@79/@VBoxContainer@80/@OptionButton@92",
+    "text": "fixed",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "options": [
+      "fixed",
+      "particle_type",
+      "visual_size"
+    ],
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@79/@VBoxContainer@80/@Label@93",
+    "text": "Colormap",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "OptionButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@79/@VBoxContainer@80/@OptionButton@104",
+    "text": "viridis",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "options": [
+      "viridis",
+      "plasma",
+      "inferno",
+      "magma",
+      "cividis",
+      "turbo",
+      "coolwarm",
+      "seismic",
+      "twilight",
+      "gray"
+    ],
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@79/@VBoxContainer@80/@Label@105",
+    "text": "Range policy",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "OptionButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@79/@VBoxContainer@80/@OptionButton@116",
+    "text": "Automatic • per frame",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "options": [
+      "Automatic • per frame",
+      "Automatic • symmetric ±A",
+      "Fixed • manual",
+      "Fixed • selected interval"
+    ],
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@79/@VBoxContainer@80/@Button@117",
+    "text": "Symmetric about zero",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@79/@VBoxContainer@80/@Button@118",
+    "text": "Advanced normalization",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "VBoxContainer",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@79/@VBoxContainer@80/@VBoxContainer@119",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "CheckButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@79/@VBoxContainer@80/@VBoxContainer@119/@CheckButton@120",
+    "text": "Logarithmic",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Only finite positive values are valid; signed channels cannot use ordinary logarithms.",
+    "disabled": false
+  },
+  {
+    "class": "CheckButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@79/@VBoxContainer@80/@VBoxContainer@119/@CheckButton@121",
+    "text": "Cyclic phase",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@79/@VBoxContainer@80/@VBoxContainer@119/@Label@122",
+    "text": "Interval start",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "SpinBox",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@79/@VBoxContainer@80/@VBoxContainer@119/@SpinBox@125",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@79/@VBoxContainer@80/@VBoxContainer@119/@Label@126",
+    "text": "Interval end",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "SpinBox",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@79/@VBoxContainer@80/@VBoxContainer@119/@SpinBox@129",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@79/@VBoxContainer@80/@VBoxContainer@119/@Button@130",
+    "text": "Freeze range from recorded interval",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@79/@VBoxContainer@80/@VBoxContainer@119/@Button@131",
+    "text": "Cancel range scan",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@79/@VBoxContainer@80/@VBoxContainer@119/@Label@132",
+    "text": "Manual Minimum",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "SpinBox",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@79/@VBoxContainer@80/@VBoxContainer@119/@SpinBox@135",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@79/@VBoxContainer@80/@VBoxContainer@119/@Label@136",
+    "text": "Manual Maximum",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "SpinBox",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@79/@VBoxContainer@80/@VBoxContainer@119/@SpinBox@139",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "CheckButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@79/@VBoxContainer@80/@VBoxContainer@119/@CheckButton@141",
+    "text": "Clamp out-of-range values",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "CheckButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@79/@VBoxContainer@80/@CheckButton@140",
+    "text": "Invert",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "CheckButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@79/@VBoxContainer@80/@CheckButton@142",
+    "text": "Show legend",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@Button@145",
+    "text": "Advanced • Size / Brightness",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "VBoxContainer",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@146",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": "Semantic size and brightness use a per-frame finite linear range. Visual overrides are direct multipliers."
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@146/@Label@147",
+    "text": "Size by",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "OptionButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@146/@OptionButton@158",
+    "text": "fixed",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "options": [
+      "fixed",
+      "particle_type",
+      "visual_size"
+    ],
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@146/@Label@159",
+    "text": "Brightness by",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "OptionButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@146/@OptionButton@170",
+    "text": "fixed",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "options": [
+      "fixed",
+      "particle_type",
+      "visual_size"
+    ],
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@Button@171",
+    "text": "Camera",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "VBoxContainer",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@172",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "CheckButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@172/@CheckButton@173",
+    "text": "Auto orbit  [O]",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@172/@Label@174",
+    "text": "Orbit speed • radians / second",
+    "font_size": 12,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "HSlider",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@172/@HSlider@175",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "CheckButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@172/@CheckButton@176",
+    "text": "Free camera • WASD / Q / E",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@172/@Button@177",
+    "text": "Focus particles  [F]",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@172/@Button@178",
+    "text": "Fullscreen  [F11]",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@Button@179",
+    "text": "Trails",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "VBoxContainer",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@180",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "CheckButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@180/@CheckButton@181",
+    "text": "Recorded history  [T]",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@Button@182",
+    "text": "Particle Filters",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "VBoxContainer",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@183",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "CheckButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@183/@CheckButton@1465",
+    "text": "Type 0",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "CheckButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@183/@CheckButton@1466",
+    "text": "Type 1",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "CheckButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@183/@CheckButton@1467",
+    "text": "Type 2",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@Button@184",
+    "text": "Advanced • Post-processing",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "VBoxContainer",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@185",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@185/@Label@186",
+    "text": "Exposure",
+    "font_size": 12,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "HSlider",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@185/@HSlider@187",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@185/@Label@188",
+    "text": "Gamma",
+    "font_size": 12,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "HSlider",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@185/@HSlider@189",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@185/@Label@190",
+    "text": "Bloom",
+    "font_size": 12,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "HSlider",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@185/@HSlider@191",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "CheckButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@185/@CheckButton@192",
+    "text": "X slice • ±3 simulation units",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@185/@Label@193",
+    "text": "Slice position • box fraction",
+    "font_size": 12,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "HSlider",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@185/@HSlider@194",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@Button@195",
+    "text": "Geometry / Guides",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "VBoxContainer",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@196",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@196/@Label@197",
+    "text": "Geometry • capture metadata\nUnits: demo units\nDomain faces: [-16.0, -16.0, -16.0] → [16.0, 16.0, 16.0]\nAbsorber: center [0.0, 0.0, 0.0]; r≥14.00000; width 2.00000\nProfile: synthetic declared demonstration boundary",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "CheckButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@196/@CheckButton@198",
+    "text": "Reference grid / axes (display only)",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "CheckButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@196/@CheckButton@199",
+    "text": "Declared simulation domain",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "CheckButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@196/@CheckButton@200",
+    "text": "Recorded sample data bounds",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "CheckButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@196/@CheckButton@201",
+    "text": "Declared absorber",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "CheckButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@196/@CheckButton@202",
+    "text": "Declared imposed regions",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "CheckButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@196/@CheckButton@203",
+    "text": "Particle layer visible",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@196/@Button@204",
+    "text": "Load geometry override JSON…",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@196/@Button@205",
+    "text": "Clear geometry override",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@Button@211",
+    "text": "Selections",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "VBoxContainer",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@Label@213",
+    "text": "Choose Use current capture to begin.",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@Button@214",
+    "text": "Use current capture",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Use current capture",
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@Label@215",
+    "text": "Source layer",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "OptionButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@OptionButton@226",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "options": [],
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@Label@227",
+    "text": "Pointer tool",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "OptionButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@OptionButton@238",
+    "text": "Orbit",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Orbit",
+    "options": [
+      "Orbit",
+      "Click",
+      "Rectangle",
+      "Lasso",
+      "Mesh face",
+      "Mesh point",
+      "Mesh vertex",
+      "Slice probe",
+      "Derived face",
+      "Derived point",
+      "Field probe on surface"
+    ],
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@Label@239",
+    "text": "Selection edit",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "OptionButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@OptionButton@250",
+    "text": "New selection",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "New selection",
+    "options": [
+      "New selection",
+      "Replace active",
+      "Add to active",
+      "Subtract from active",
+      "Toggle in active"
+    ],
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@Label@251",
+    "text": "Pick through / visible surfaces",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "OptionButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@OptionButton@262",
+    "text": "Through chosen layer",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Through chosen layer",
+    "options": [
+      "Through chosen layer",
+      "Opaque meshes / slices"
+    ],
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@Label@263",
+    "text": "Name",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@LineEdit@264",
+    "text": "Selection",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "ItemList",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@ItemList@267",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@Button@390",
+    "text": "Edit selection",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Edit selection",
+    "disabled": false
+  },
+  {
+    "class": "VBoxContainer",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@VBoxContainer@391",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@VBoxContainer@391/@Button@268",
+    "text": "Rename selection",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Rename selection",
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@VBoxContainer@391/@Button@269",
+    "text": "Duplicate selection",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Duplicate selection",
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@VBoxContainer@391/@Button@270",
+    "text": "Delete selection",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Delete selection",
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@VBoxContainer@391/@Button@271",
+    "text": "Toggle highlight",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Toggle highlight",
+    "disabled": false
+  },
+  {
+    "class": "CheckButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@VBoxContainer@391/@CheckButton@272",
+    "text": "Show hidden selection",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Show hidden selection",
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@Button@388",
+    "text": "Select by ID or region",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Select by ID or region",
+    "disabled": false
+  },
+  {
+    "class": "VBoxContainer",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@VBoxContainer@389",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@VBoxContainer@389/@Label@273",
+    "text": "Selection type",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "OptionButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@VBoxContainer@389/@OptionButton@284",
+    "text": "Persistent IDs",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Persistent IDs",
+    "options": [
+      "Persistent IDs",
+      "Rows in one sample",
+      "Mesh object",
+      "Mesh vertex IDs",
+      "Mesh vertex rows",
+      "Mesh faces",
+      "Grid sample addresses",
+      "Probe",
+      "Box ROI",
+      "Sphere ROI",
+      "Cylinder ROI",
+      "Slab ROI"
+    ],
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@VBoxContainer@389/@Label@285",
+    "text": "IDs or sample addresses",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": "IDs or rows: comma-separated. Grid addresses: x,y,z triples separated by semicolons. IDs remain exact decimal integers."
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@VBoxContainer@389/@LineEdit@286",
+    "text": "7",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "IDs or rows: comma-separated. Grid addresses: x,y,z triples separated by semicolons. IDs remain exact decimal integers."
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@VBoxContainer@389/@Label@287",
+    "text": "Coordinate space",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": "World coordinates include the object's declared transform. Object-local coordinates are before that transform."
+  },
+  {
+    "class": "OptionButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@VBoxContainer@389/@OptionButton@298",
+    "text": "World",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "World coordinates include the object's declared transform. Object-local coordinates are before that transform.",
+    "options": [
+      "World",
+      "Object local"
+    ],
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@VBoxContainer@389/@Label@299",
+    "text": "Mesh elements",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "OptionButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@VBoxContainer@389/@OptionButton@310",
+    "text": "Source vertices",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Source vertices",
+    "options": [
+      "Source vertices",
+      "Source faces"
+    ],
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@VBoxContainer@389/@Label@311",
+    "text": "Start / center / lower corner (xyz)",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@VBoxContainer@389/@LineEdit@312",
+    "text": "0,0,0",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@VBoxContainer@389/@Label@313",
+    "text": "End / normal / upper corner (xyz)",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@VBoxContainer@389/@LineEdit@314",
+    "text": "1,1,1",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@VBoxContainer@389/@Label@315",
+    "text": "Radius",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "SpinBox",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@VBoxContainer@389/@SpinBox@318",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@VBoxContainer@389/@Label@319",
+    "text": "Slab width",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "SpinBox",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@VBoxContainer@389/@SpinBox@322",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@VBoxContainer@389/@Label@323",
+    "text": "Slab height",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "SpinBox",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@VBoxContainer@389/@SpinBox@326",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@VBoxContainer@389/@Label@327",
+    "text": "Slab thickness",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "SpinBox",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@VBoxContainer@389/@SpinBox@330",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@VBoxContainer@389/@Button@386",
+    "text": "Advanced • Value filters",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Filters change scientific membership and are saved with the selection.",
+    "disabled": false
+  },
+  {
+    "class": "VBoxContainer",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@VBoxContainer@389/@VBoxContainer@387",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@VBoxContainer@389/@VBoxContainer@387/@Label@331",
+    "text": "Filter channel",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@VBoxContainer@389/@VBoxContainer@387/@LineEdit@332",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@VBoxContainer@389/@VBoxContainer@387/@Label@333",
+    "text": "Value filter",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "OptionButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@VBoxContainer@389/@VBoxContainer@387/@OptionButton@344",
+    "text": "None",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "None",
+    "options": [
+      "None",
+      "Finite values",
+      "Inclusive numeric range",
+      "Integer membership",
+      "Exclude integer membership"
+    ],
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@VBoxContainer@389/@VBoxContainer@387/@Label@345",
+    "text": "Filter component",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "OptionButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@VBoxContainer@389/@VBoxContainer@387/@OptionButton@356",
+    "text": "Scalar",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Scalar",
+    "options": [
+      "Scalar",
+      "Component 0 / x",
+      "Component 1 / y",
+      "Component 2 / z",
+      "Component 3 / w"
+    ],
+    "disabled": false
+  },
+  {
+    "class": "CheckButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@VBoxContainer@389/@VBoxContainer@387/@CheckButton@357",
+    "text": "Exact integer range bounds",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Exact integer range bounds",
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@VBoxContainer@389/@VBoxContainer@387/@Label@358",
+    "text": "Lower bound",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@VBoxContainer@389/@VBoxContainer@387/@LineEdit@359",
+    "text": "0",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@VBoxContainer@389/@VBoxContainer@387/@Label@360",
+    "text": "Upper bound",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@VBoxContainer@389/@VBoxContainer@387/@LineEdit@361",
+    "text": "1",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@VBoxContainer@389/@VBoxContainer@387/@Label@362",
+    "text": "Integer values",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@VBoxContainer@389/@VBoxContainer@387/@LineEdit@363",
+    "text": "0",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "CheckButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@VBoxContainer@389/@VBoxContainer@387/@CheckButton@364",
+    "text": "Copy current particle type exclusions",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Copy current type exclusions into this selection. Later display-filter changes do not change membership.",
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@VBoxContainer@389/@Button@365",
+    "text": "Create selection",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Create selection",
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@Button@392",
+    "text": "Surface and cohort tools",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Generated surfaces have no persistent physical identity. A frozen cohort differs from a spatial region.",
+    "disabled": false
+  },
+  {
+    "class": "VBoxContainer",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@VBoxContainer@393",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@VBoxContainer@393/@Button@366",
+    "text": "Select generated surface",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Select generated surface",
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@VBoxContainer@393/@Button@367",
+    "text": "Save current members as cohort",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Save current members as cohort",
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@Button@394",
+    "text": "Selection groups",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Selection groups",
+    "disabled": false
+  },
+  {
+    "class": "VBoxContainer",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@VBoxContainer@395",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@VBoxContainer@395/@Button@368",
+    "text": "Group selected entries",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Group selected entries",
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@VBoxContainer@395/@Label@369",
+    "text": "Named groups",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "OptionButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@VBoxContainer@395/@OptionButton@380",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "options": [],
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@VBoxContainer@395/@Button@381",
+    "text": "Rename group",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Rename group",
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@VBoxContainer@395/@Button@382",
+    "text": "Delete group",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Delete group",
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@VBoxContainer@395/@Button@383",
+    "text": "Save group union",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Save group union",
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@VBoxContainer@395/@Button@384",
+    "text": "Save group intersection",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Save group intersection",
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@212/@Button@385",
+    "text": "Cancel selection query",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Cancel selection query",
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@Button@397",
+    "text": "Temporal analysis",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "VBoxContainer",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@398",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@398/@Label@399",
+    "text": "Capture changed. Completed results retain their explicit source bindings; choose one to inspect.",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@398/@Label@400",
+    "text": "Selections to analyze",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "OptionButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@398/@OptionButton@411",
+    "text": "Active selection",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Active selection",
+    "options": [
+      "Active selection",
+      "Selected list entries",
+      "Group (separate series)"
+    ],
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@398/@Label@412",
+    "text": "Analysis",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "OptionButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@398/@OptionButton@423",
+    "text": "Value trace",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Value trace",
+    "options": [
+      "Value trace",
+      "Channel statistics",
+      "Population counts",
+      "Grid integral (whole cells)",
+      "Velocity from position intervals",
+      "Centroid",
+      "Mesh area"
+    ],
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@398/@Label@424",
+    "text": "Range axis",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "OptionButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@398/@OptionButton@435",
+    "text": "Recorded time",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Recorded time",
+    "options": [
+      "Recorded time",
+      "Sample index"
+    ],
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@398/@Label@436",
+    "text": "Start (inclusive)",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@398/@LineEdit@437",
+    "text": "0",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@398/@Label@438",
+    "text": "End (inclusive)",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@398/@LineEdit@439",
+    "text": "1",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@398/@Button@440",
+    "text": "Use full layer range",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Use full layer range",
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@398/@Label@441",
+    "text": "Source channel",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@398/@LineEdit@442",
+    "text": "value",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@398/@Label@443",
+    "text": "Component",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "OptionButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@398/@OptionButton@454",
+    "text": "Scalar",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Scalar",
+    "options": [
+      "Scalar",
+      "x / 0",
+      "y / 1",
+      "z / 2",
+      "w / 3",
+      "Vector magnitude"
+    ],
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@398/@Button@544",
+    "text": "Advanced • Scientific options",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Coordinates, weights, units, physical mass declarations and missing-support policies.",
+    "disabled": false
+  },
+  {
+    "class": "VBoxContainer",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@398/@VBoxContainer@545",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@398/@VBoxContainer@545/@Label@455",
+    "text": "Position trace coordinates",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "OptionButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@398/@VBoxContainer@545/@OptionButton@466",
+    "text": "Object local",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Object local",
+    "options": [
+      "Object local",
+      "World"
+    ],
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@398/@VBoxContainer@545/@Label@467",
+    "text": "Override channel units",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": "Blank keeps the source declaration. An override records your interpretation; it does not alter source values."
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@398/@VBoxContainer@545/@LineEdit@468",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Blank keeps the source declaration. An override records your interpretation; it does not alter source values."
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@398/@VBoxContainer@545/@Label@469",
+    "text": "Statistics (comma-separated)",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@398/@VBoxContainer@545/@LineEdit@470",
+    "text": "count,min,max,mean,stddev",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@398/@VBoxContainer@545/@Label@471",
+    "text": "Weighting",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "OptionButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@398/@VBoxContainer@545/@OptionButton@482",
+    "text": "Unweighted",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Unweighted",
+    "options": [
+      "Unweighted",
+      "Source channel",
+      "Mesh face area (world)"
+    ],
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@398/@VBoxContainer@545/@Label@483",
+    "text": "Weight channel",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@398/@VBoxContainer@545/@LineEdit@484",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@398/@VBoxContainer@545/@Label@485",
+    "text": "Weight units override",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@398/@VBoxContainer@545/@LineEdit@486",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@398/@VBoxContainer@545/@Label@487",
+    "text": "Physical mass declaration",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "OptionButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@398/@VBoxContainer@545/@OptionButton@498",
+    "text": "No physical mass claim",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "No physical mass claim",
+    "options": [
+      "No physical mass claim",
+      "Actual particle mass",
+      "Original-grid mass density"
+    ],
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@398/@VBoxContainer@545/@Label@499",
+    "text": "Declared mass unit",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@398/@VBoxContainer@545/@LineEdit@500",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@398/@VBoxContainer@545/@Label@501",
+    "text": "Length unit for mass calculation",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@398/@VBoxContainer@545/@LineEdit@502",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@398/@VBoxContainer@545/@Label@503",
+    "text": "Physical value scale",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@398/@VBoxContainer@545/@LineEdit@504",
+    "text": "1",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@398/@VBoxContainer@545/@Label@505",
+    "text": "Maximum gap",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": "Maximum time gap to connect. Blank leaves gap length undeclared; missing samples remain explicit."
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@398/@VBoxContainer@545/@LineEdit@506",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Maximum time gap to connect. Blank leaves gap length undeclared; missing samples remain explicit."
+  },
+  {
+    "class": "CheckButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@398/@VBoxContainer@545/@CheckButton@507",
+    "text": "Include finite subtotal (incomplete)",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Report only the finite part of an incomplete grid integral, labeled incomplete. It is not a complete physical mass.",
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@398/@Button@508",
+    "text": "Run analysis",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Run analysis",
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@398/@Button@509",
+    "text": "Cancel analysis",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Cancel analysis",
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@398/@Label@510",
+    "text": "Results",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "OptionButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@398/@OptionButton@521",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "options": [],
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@398/@Button@522",
+    "text": "Remove result",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Remove result",
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@398/@Label@523",
+    "text": "Plot series",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "OptionButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@398/@OptionButton@534",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "options": [],
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@398/@Button@546",
+    "text": "Advanced • Member lookup",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Advanced • Member lookup",
+    "disabled": false
+  },
+  {
+    "class": "VBoxContainer",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@398/@VBoxContainer@547",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@398/@VBoxContainer@547/@Label@535",
+    "text": "Member address",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": "Exact member address, for example id:9007199254740993. Use this to inspect members outside the first 16 listed series."
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@398/@VBoxContainer@547/@LineEdit@536",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Exact member address, for example id:9007199254740993. Use this to inspect members outside the first 16 listed series."
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@398/@Button@537",
+    "text": "Show plot",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Show plot",
+    "disabled": false
+  },
+  {
+    "class": "Control",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@398/@Control@538",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "RichTextLabel",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@398/@RichTextLabel@541",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@398/@Button@542",
+    "text": "First data page",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "First data page",
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@398/@Button@543",
+    "text": "Next data page",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Next data page",
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@Button@549",
+    "text": "Diagnostics and comparisons",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "VBoxContainer",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@Label@551",
+    "text": "Import a diagnostic CSV, compare series, or estimate a period.",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@Label@552",
+    "text": "Series / bookmark name",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@LineEdit@553",
+    "text": "Series",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@Button@704",
+    "text": "Import CSV",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Supplied diagnostics keep their own recorded clock.",
+    "disabled": false
+  },
+  {
+    "class": "VBoxContainer",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@705",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@705/@Label@554",
+    "text": "CSV file",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@705/@LineEdit@555",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@705/@Button@556",
+    "text": "Choose CSV",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Choose CSV",
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@705/@Label@557",
+    "text": "Time column",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@705/@LineEdit@558",
+    "text": "time",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@705/@Label@559",
+    "text": "Time units",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@705/@LineEdit@560",
+    "text": "unknown",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@705/@Label@561",
+    "text": "Value columns (comma-separated)",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@705/@LineEdit@562",
+    "text": "value",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@705/@Label@563",
+    "text": "Value units",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@705/@LineEdit@564",
+    "text": "unknown",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@705/@Button@702",
+    "text": "Advanced • CSV parsing and gaps",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Advanced • CSV parsing and gaps",
+    "disabled": false
+  },
+  {
+    "class": "VBoxContainer",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@705/@VBoxContainer@703",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@705/@VBoxContainer@703/@Label@565",
+    "text": "Number type",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "OptionButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@705/@VBoxContainer@703/@OptionButton@576",
+    "text": "Float64",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Float64",
+    "options": [
+      "Float64",
+      "Exact int64"
+    ],
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@705/@VBoxContainer@703/@Label@577",
+    "text": "Delimiter",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "OptionButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@705/@VBoxContainer@703/@OptionButton@588",
+    "text": "Comma",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Comma",
+    "options": [
+      "Comma",
+      "Semicolon",
+      "Tab",
+      "Pipe"
+    ],
+    "disabled": false
+  },
+  {
+    "class": "CheckButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@705/@VBoxContainer@703/@CheckButton@589",
+    "text": "Skip blank lines",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Skip blank lines",
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@705/@VBoxContainer@703/@Label@590",
+    "text": "Maximum CSV gap",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": "Maximum connected interval in the CSV time units. Blank leaves the maximum undeclared; it does not fill missing observations."
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@705/@VBoxContainer@703/@LineEdit@591",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Maximum connected interval in the CSV time units. Blank leaves the maximum undeclared; it does not fill missing observations."
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@705/@VBoxContainer@703/@Label@592",
+    "text": "Missing time intervals",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": "Missing intervals as start,end pairs separated by semicolons. Imported diagnostics retain a separate clock."
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@705/@VBoxContainer@703/@LineEdit@593",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Missing intervals as start,end pairs separated by semicolons. Imported diagnostics retain a separate clock."
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@705/@Button@594",
+    "text": "Import diagnostic CSV",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Import diagnostic CSV",
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@Button@708",
+    "text": "Compare series",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Choose each source series and declare common time and quantity meaning.",
+    "disabled": false
+  },
+  {
+    "class": "VBoxContainer",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@709",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@709/@Label@595",
+    "text": "Common time unit",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@709/@LineEdit@596",
+    "text": "unknown",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@709/@Label@597",
+    "text": "Common time reference",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@709/@LineEdit@598",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@709/@Label@599",
+    "text": "Time scale",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@709/@LineEdit@600",
+    "text": "1",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@709/@Label@601",
+    "text": "Time offset (subtract)",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": "Aligned time = raw time × time scale − offset. Record why the offset is appropriate; no event is detected automatically."
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@709/@LineEdit@602",
+    "text": "0",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Aligned time = raw time × time scale − offset. Record why the offset is appropriate; no event is detected automatically."
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@709/@Label@603",
+    "text": "Reason for time offset",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@709/@LineEdit@604",
+    "text": "manual zero offset",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@709/@Label@605",
+    "text": "Common value unit",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@709/@LineEdit@606",
+    "text": "unknown",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@709/@Label@607",
+    "text": "Compared quantity",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@709/@LineEdit@608",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@709/@Label@609",
+    "text": "Source value scale",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@709/@LineEdit@610",
+    "text": "1",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@709/@Label@611",
+    "text": "Value offset (add)",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": "Compared value = source value × scale + offset. Confirm matching physical quantities and units."
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@709/@LineEdit@612",
+    "text": "0",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Compared value = source value × scale + offset. Confirm matching physical quantities and units."
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@709/@Button@613",
+    "text": "Use current series as left",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Use current series as left",
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@709/@Button@614",
+    "text": "Use current series as right",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Use current series as right",
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@709/@Button@615",
+    "text": "Clear left and right",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Clear left and right",
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@709/@Label@616",
+    "text": "Comparison",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "OptionButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@709/@OptionButton@627",
+    "text": "Left minus right",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Left minus right",
+    "options": [
+      "Left minus right",
+      "Left divided by right"
+    ],
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@709/@Label@628",
+    "text": "Comparison times",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": "Exact times leave unmatched samples missing. A common schedule explicitly evaluates holds or supported position interpolation, retaining both native brackets."
+  },
+  {
+    "class": "OptionButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@709/@OptionButton@639",
+    "text": "Exact recorded times",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Exact times leave unmatched samples missing. A common schedule explicitly evaluates holds or supported position interpolation, retaining both native brackets.",
+    "options": [
+      "Exact recorded times",
+      "Common schedule"
+    ],
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@709/@Button@706",
+    "text": "Common schedule settings",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Common schedule settings",
+    "disabled": false
+  },
+  {
+    "class": "VBoxContainer",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@709/@VBoxContainer@707",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@709/@VBoxContainer@707/@Label@640",
+    "text": "Schedule start",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@709/@VBoxContainer@707/@LineEdit@641",
+    "text": "0",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@709/@VBoxContainer@707/@Label@642",
+    "text": "Schedule step",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@709/@VBoxContainer@707/@LineEdit@643",
+    "text": "0.1",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@709/@VBoxContainer@707/@Label@644",
+    "text": "Schedule samples",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@709/@VBoxContainer@707/@LineEdit@645",
+    "text": "100",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@709/@Button@646",
+    "text": "Compare left and right",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Compare left and right",
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@709/@Button@647",
+    "text": "Add current series to shared plot",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Add current series to shared plot",
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@709/@Button@648",
+    "text": "Clear shared plot",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Clear shared plot",
+    "disabled": false
+  },
+  {
+    "class": "Control",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@709/@Control@649",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@Button@712",
+    "text": "Estimate a period",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Exploratory estimate within the Temporal analysis range, not automatic event detection.",
+    "disabled": false
+  },
+  {
+    "class": "VBoxContainer",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@713",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@713/@Label@650",
+    "text": "Period estimate method",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "OptionButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@713/@OptionButton@661",
+    "text": "Observed peak spacing",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Observed peak spacing",
+    "options": [
+      "Observed peak spacing",
+      "Autocorrelation"
+    ],
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@713/@Label@662",
+    "text": "Detrend",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "OptionButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@713/@OptionButton@673",
+    "text": "Mean",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Mean",
+    "options": [
+      "Mean",
+      "Linear"
+    ],
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@713/@Label@674",
+    "text": "Minimum lag",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@713/@LineEdit@675",
+    "text": "0.1",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@713/@Label@676",
+    "text": "Maximum lag",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@713/@LineEdit@677",
+    "text": "10",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@713/@Label@678",
+    "text": "Minimum peak separation",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@713/@LineEdit@679",
+    "text": "0.1",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@713/@Label@680",
+    "text": "Minimum peak prominence",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": "Minimum peak prominence in the normalized signal, not in the original channel units."
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@713/@LineEdit@681",
+    "text": "0.1",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Minimum peak prominence in the normalized signal, not in the original channel units."
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@713/@Button@710",
+    "text": "Advanced • Sampling assumptions",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Advanced • Sampling assumptions",
+    "disabled": false
+  },
+  {
+    "class": "VBoxContainer",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@713/@VBoxContainer@711",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "CheckButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@713/@VBoxContainer@711/@CheckButton@682",
+    "text": "Use uniform sampling assumption",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Declare uniform sampling with relative tolerance 1e-6. Unsupported or irregular inputs refuse this assumption.",
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@713/@VBoxContainer@711/@Label@683",
+    "text": "Hold-resampling step",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": "Blank uses recorded samples. A supplied cadence explicitly resamples by holding values; it does not create new observations."
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@713/@VBoxContainer@711/@LineEdit@684",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Blank uses recorded samples. A supplied cadence explicitly resamples by holding values; it does not create new observations."
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@713/@Button@685",
+    "text": "Estimate period in selected range",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Estimate period in selected range",
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@Button@714",
+    "text": "Manual bookmarks",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Manual bookmarks",
+    "disabled": false
+  },
+  {
+    "class": "VBoxContainer",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@715",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@715/@Label@686",
+    "text": "Manual bookmarks",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "OptionButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@715/@OptionButton@697",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "options": [],
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@715/@Button@698",
+    "text": "Save time and camera bookmark",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Save time and camera bookmark",
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@715/@Button@699",
+    "text": "Go to bookmark",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Go to bookmark",
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@715/@Button@700",
+    "text": "Use bookmark as manual offset",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Use bookmark as manual offset",
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@550/@VBoxContainer@715/@Button@701",
+    "text": "Delete bookmark",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Delete bookmark",
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@Button@717",
+    "text": "Space-time analysis",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "VBoxContainer",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@718",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@718/@Label@719",
+    "text": "Uses the layer selected in Selections and the range/channel in Temporal analysis.",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@718/@Label@720",
+    "text": "Analysis",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "OptionButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@718/@OptionButton@731",
+    "text": "Grid line probes",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Grid line probes",
+    "options": [
+      "Grid line probes",
+      "Grid slab mean",
+      "Grid slab integral",
+      "Tracer counts",
+      "Tracer sample mean",
+      "Weighted tracer estimate"
+    ],
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@718/@Label@732",
+    "text": "Axis start (xyz)",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@718/@LineEdit@733",
+    "text": "0,0,0",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@718/@Label@734",
+    "text": "Axis end (xyz)",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@718/@LineEdit@735",
+    "text": "1,0,0",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@718/@Label@736",
+    "text": "Spatial bins",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": "1–16,384 full spatial bins. Numerical exports retain all requested bins; the plot is a bounded preview."
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@718/@LineEdit@737",
+    "text": "64",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "1–16,384 full spatial bins. Numerical exports retain all requested bins; the plot is a bounded preview."
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@718/@Label@738",
+    "text": "Coordinate units",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@718/@LineEdit@739",
+    "text": "unknown",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@718/@Label@740",
+    "text": "Coordinate space",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "OptionButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@718/@OptionButton@751",
+    "text": "World",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "World",
+    "options": [
+      "World",
+      "Object local"
+    ],
+    "disabled": false
+  },
+  {
+    "class": "CheckButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@718/@CheckButton@752",
+    "text": "Use active tracer selection",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Use active tracer selection",
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@718/@Button@758",
+    "text": "Advanced • Tracer weighting",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Advanced • Tracer weighting",
+    "disabled": false
+  },
+  {
+    "class": "VBoxContainer",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@718/@VBoxContainer@759",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@718/@VBoxContainer@759/@Label@753",
+    "text": "Sampling population and weights",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": "For weighted tracer estimates, describe the sampled population and meaning of the weight channel chosen in Temporal analysis. Tracer density is not original-grid mass."
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@718/@VBoxContainer@759/@LineEdit@754",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "For weighted tracer estimates, describe the sampled population and meaning of the weight channel chosen in Temporal analysis. Tracer density is not original-grid mass."
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@718/@Button@755",
+    "text": "Run space-time analysis",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Run space-time analysis",
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@718/@Button@756",
+    "text": "Show space-time plot",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Show space-time plot",
+    "disabled": false
+  },
+  {
+    "class": "Control",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@718/@Control@757",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@Button@761",
+    "text": "Analysis export and state",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "VBoxContainer",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@762",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@762/@Label@763",
+    "text": "Export complete values or save the view with selections and analysis.",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@762/@Label@764",
+    "text": "New folder name",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@762/@LineEdit@765",
+    "text": "simscope-analysis",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@762/@Button@779",
+    "text": "Advanced • Export limits and members",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Advanced • Export limits and members",
+    "disabled": false
+  },
+  {
+    "class": "VBoxContainer",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@762/@VBoxContainer@780",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@762/@VBoxContainer@780/@Label@766",
+    "text": "Output limit (MiB)",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": "Finite output limit in MiB. Requests refuse if complete output cannot fit; scientific rows are never silently dropped."
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@762/@VBoxContainer@780/@LineEdit@767",
+    "text": "256",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Finite output limit in MiB. Requests refuse if complete output cannot fit; scientific rows are never silently dropped."
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@762/@VBoxContainer@780/@Label@768",
+    "text": "CPU time limit (seconds)",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@762/@VBoxContainer@780/@LineEdit@769",
+    "text": "120",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@762/@VBoxContainer@780/@Label@770",
+    "text": "Elapsed time limit (seconds)",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@762/@VBoxContainer@780/@LineEdit@771",
+    "text": "150",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "CheckButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@762/@VBoxContainer@780/@CheckButton@772",
+    "text": "Include selection members",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Include exact selection-member files in the numerical export. Omitting them leaves external references; values.csv still contains every result row.",
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@762/@Button@773",
+    "text": "Export numerical data…",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Export numerical data…",
+    "disabled": false
+  },
+  {
+    "class": "CheckButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@762/@CheckButton@774",
+    "text": "Include completed results in recipe",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Include completed numerical results for portable restore. Without them, restore requires the original cached result files.",
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@762/@Button@775",
+    "text": "Save inspection recipe…",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Save inspection recipe…",
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@762/@Button@776",
+    "text": "Load inspection recipe…",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Load inspection recipe…",
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@762/@Button@777",
+    "text": "Locate referenced input…",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Locate referenced input…",
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@762/@Button@778",
+    "text": "Recompute selected analysis",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Recompute selected analysis",
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@Button@782",
+    "text": "Matched runs",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "VBoxContainer",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@Label@784",
+    "text": "Compare two saved scenes with the current camera and a shared scalar range. Confirm their coordinates and time mapping.",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@Button@785",
+    "text": "Left recipe…",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Left recipe…",
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@Label@786",
+    "text": "Left selection keys",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": "Comma-separated selection keys from this recipe. Identical IDs in different captures are not automatically matched."
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@LineEdit@787",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Comma-separated selection keys from this recipe. Identical IDs in different captures are not automatically matched."
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@Label@788",
+    "text": "Left layer ID",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@LineEdit@789",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@Label@790",
+    "text": "Left scalar channel",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@LineEdit@791",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@Button@856",
+    "text": "Advanced • Left mapping",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Advanced • Left mapping",
+    "disabled": false
+  },
+  {
+    "class": "VBoxContainer",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@VBoxContainer@857",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@VBoxContainer@857/@Label@792",
+    "text": "Left time scale",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@VBoxContainer@857/@LineEdit@793",
+    "text": "1",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@VBoxContainer@857/@Label@794",
+    "text": "Left time offset",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": "Aligned time = raw time × scale − offset. Describe the offset; no automatic event alignment is performed."
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@VBoxContainer@857/@LineEdit@795",
+    "text": "0",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Aligned time = raw time × scale − offset. Describe the offset; no automatic event alignment is performed."
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@VBoxContainer@857/@Label@796",
+    "text": "Left value scale",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": "Scene color scales must be positive. Common bounds are converted to source bounds; source values are unchanged."
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@VBoxContainer@857/@LineEdit@797",
+    "text": "1",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Scene color scales must be positive. Common bounds are converted to source bounds; source values are unchanged."
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@VBoxContainer@857/@Label@798",
+    "text": "Left value offset",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@VBoxContainer@857/@LineEdit@799",
+    "text": "0",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@VBoxContainer@857/@Label@800",
+    "text": "Left time-offset reason",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@VBoxContainer@857/@LineEdit@801",
+    "text": "declared native origin",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@Button@802",
+    "text": "Right recipe…",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Right recipe…",
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@Label@803",
+    "text": "Right selection keys",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": "Comma-separated selection keys from this recipe. Identical IDs in different captures are not automatically matched."
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@LineEdit@804",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Comma-separated selection keys from this recipe. Identical IDs in different captures are not automatically matched."
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@Label@805",
+    "text": "Right layer ID",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@LineEdit@806",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@Label@807",
+    "text": "Right scalar channel",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@LineEdit@808",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@Button@858",
+    "text": "Advanced • Right mapping",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Advanced • Right mapping",
+    "disabled": false
+  },
+  {
+    "class": "VBoxContainer",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@VBoxContainer@859",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@VBoxContainer@859/@Label@809",
+    "text": "Right time scale",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@VBoxContainer@859/@LineEdit@810",
+    "text": "1",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@VBoxContainer@859/@Label@811",
+    "text": "Right time offset",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": "Aligned time = raw time × scale − offset. Describe the offset; no automatic event alignment is performed."
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@VBoxContainer@859/@LineEdit@812",
+    "text": "0",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Aligned time = raw time × scale − offset. Describe the offset; no automatic event alignment is performed."
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@VBoxContainer@859/@Label@813",
+    "text": "Right value scale",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": "Scene color scales must be positive. Common bounds are converted to source bounds; source values are unchanged."
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@VBoxContainer@859/@LineEdit@814",
+    "text": "1",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Scene color scales must be positive. Common bounds are converted to source bounds; source values are unchanged."
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@VBoxContainer@859/@Label@815",
+    "text": "Right value offset",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@VBoxContainer@859/@LineEdit@816",
+    "text": "0",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@VBoxContainer@859/@Label@817",
+    "text": "Right time-offset reason",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@VBoxContainer@859/@LineEdit@818",
+    "text": "declared native origin",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@Label@819",
+    "text": "Aligned time units",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@LineEdit@820",
+    "text": "s",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@Label@821",
+    "text": "Common time reference",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@LineEdit@822",
+    "text": "declared common origin",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@Label@823",
+    "text": "Common scalar units",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@LineEdit@824",
+    "text": "unknown",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@Label@825",
+    "text": "Common scalar quantity",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@LineEdit@826",
+    "text": "declared scalar",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@Label@827",
+    "text": "World coordinate units",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@LineEdit@828",
+    "text": "m",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@Label@829",
+    "text": "World origin and axes",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": "Declare compatible world origin, axes and units. Matched rendering does not register or rescale geometry."
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@LineEdit@830",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Declare compatible world origin, axes and units. Matched rendering does not register or rescale geometry."
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@Label@831",
+    "text": "Shared range minimum",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@LineEdit@832",
+    "text": "0",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@Label@833",
+    "text": "Shared range maximum",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@LineEdit@834",
+    "text": "1",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@Label@835",
+    "text": "Shared colormap",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@LineEdit@836",
+    "text": "viridis",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@Label@837",
+    "text": "Aligned start",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@LineEdit@838",
+    "text": "0",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@Label@839",
+    "text": "Aligned end (same = snapshot)",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@LineEdit@840",
+    "text": "0",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@Label@841",
+    "text": "FPS",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@LineEdit@842",
+    "text": "24",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@Button@860",
+    "text": "Advanced • Video and output limits",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Advanced • Video and output limits",
+    "disabled": false
+  },
+  {
+    "class": "VBoxContainer",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@VBoxContainer@861",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@VBoxContainer@861/@Label@843",
+    "text": "Aligned time per video second",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@VBoxContainer@861/@LineEdit@844",
+    "text": "1",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@VBoxContainer@861/@Label@845",
+    "text": "Width",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@VBoxContainer@861/@LineEdit@846",
+    "text": "640",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@VBoxContainer@861/@Label@847",
+    "text": "Height",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@VBoxContainer@861/@LineEdit@848",
+    "text": "360",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@VBoxContainer@861/@Label@849",
+    "text": "Pair output limit (MiB)",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@VBoxContainer@861/@LineEdit@850",
+    "text": "1024",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@Label@851",
+    "text": "New comparison folder",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@LineEdit@852",
+    "text": "matched-runs",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@Button@853",
+    "text": "Prepare matched views…",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Prepare matched views…",
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@Button@854",
+    "text": "Render matched views",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Render matched views",
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@783/@Button@855",
+    "text": "Cancel matched views",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Cancel matched views",
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@Button@862",
+    "text": "Capture / Export",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "VBoxContainer",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@863",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@863/@Button@864",
+    "text": "Open capture…",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@863/@Button@865",
+    "text": "Save PNG  [P]",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "CheckButton",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@863/@CheckButton@866",
+    "text": "PNG inspection JSON sidecar",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@863/@Button@867",
+    "text": "Copy Inspection State",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@863/@Button@868",
+    "text": "Save inspection recipe…",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@863/@Button@869",
+    "text": "Load inspection recipe…",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@863/@Button@1148",
+    "text": "Export Video…",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@PanelContainer@13/@ScrollContainer@16/@VBoxContainer@17/@VBoxContainer@863/@Label@1149",
+    "text": "Drag: orbit • Wheel: zoom\nSpace: pause • ← / →: step\nF1: inspector • R: reset camera",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Button",
+    "path": "@CanvasLayer@12/@Button@21",
+    "text": "SimScope  [F1]",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "Control",
+    "path": "@CanvasLayer@12/@Control@22",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "TextureRect",
+    "path": "@CanvasLayer@12/@TextureRect@143",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@CanvasLayer@12/@Label@144",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "ScrollContainer",
+    "path": "@Window@870/@ScrollContainer@873",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "VBoxContainer",
+    "path": "@Window@870/@ScrollContainer@873/@VBoxContainer@874",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "GridContainer",
+    "path": "@Window@870/@ScrollContainer@873/@VBoxContainer@874/@GridContainer@875",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@Window@870/@ScrollContainer@873/@VBoxContainer@874/@GridContainer@875/@Label@876",
+    "text": "Range",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "OptionButton",
+    "path": "@Window@870/@ScrollContainer@873/@VBoxContainer@874/@GridContainer@875/@OptionButton@887",
+    "text": "Entire capture",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "options": [
+      "Entire capture",
+      "Current position to end",
+      "Custom start/end"
+    ],
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@Window@870/@ScrollContainer@873/@VBoxContainer@874/@GridContainer@875/@Label@888",
+    "text": "Start • capture time",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "SpinBox",
+    "path": "@Window@870/@ScrollContainer@873/@VBoxContainer@874/@GridContainer@875/@SpinBox@891",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@Window@870/@ScrollContainer@873/@VBoxContainer@874/@GridContainer@875/@Label@892",
+    "text": "End • capture time (exclusive)",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "SpinBox",
+    "path": "@Window@870/@ScrollContainer@873/@VBoxContainer@874/@GridContainer@875/@SpinBox@895",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@Window@870/@ScrollContainer@873/@VBoxContainer@874/@GridContainer@875/@Label@896",
+    "text": "Resolution",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "OptionButton",
+    "path": "@Window@870/@ScrollContainer@873/@VBoxContainer@874/@GridContainer@875/@OptionButton@907",
+    "text": "1920 × 1080",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "options": [
+      "1920 × 1080",
+      "2560 × 1440",
+      "3840 × 2160",
+      "Custom"
+    ],
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@Window@870/@ScrollContainer@873/@VBoxContainer@874/@GridContainer@875/@Label@908",
+    "text": "Width",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "SpinBox",
+    "path": "@Window@870/@ScrollContainer@873/@VBoxContainer@874/@GridContainer@875/@SpinBox@911",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@Window@870/@ScrollContainer@873/@VBoxContainer@874/@GridContainer@875/@Label@912",
+    "text": "Height",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "SpinBox",
+    "path": "@Window@870/@ScrollContainer@873/@VBoxContainer@874/@GridContainer@875/@SpinBox@915",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@Window@870/@ScrollContainer@873/@VBoxContainer@874/@GridContainer@875/@Label@916",
+    "text": "Frame rate",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "OptionButton",
+    "path": "@Window@870/@ScrollContainer@873/@VBoxContainer@874/@GridContainer@875/@OptionButton@927",
+    "text": "30 FPS",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "options": [
+      "24 FPS",
+      "30 FPS",
+      "60 FPS",
+      "Custom"
+    ],
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@Window@870/@ScrollContainer@873/@VBoxContainer@874/@GridContainer@875/@Label@928",
+    "text": "Output FPS",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "SpinBox",
+    "path": "@Window@870/@ScrollContainer@873/@VBoxContainer@874/@GridContainer@875/@SpinBox@931",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@Window@870/@ScrollContainer@873/@VBoxContainer@874/@GridContainer@875/@Label@932",
+    "text": "Capture time units / video second",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "SpinBox",
+    "path": "@Window@870/@ScrollContainer@873/@VBoxContainer@874/@GridContainer@875/@SpinBox@935",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": "Uses recorded timestamps, not interactive frames/second. Output n samples start + n / FPS × rate."
+  },
+  {
+    "class": "Label",
+    "path": "@Window@870/@ScrollContainer@873/@VBoxContainer@874/@GridContainer@875/@Label@936",
+    "text": "Camera",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "OptionButton",
+    "path": "@Window@870/@ScrollContainer@873/@VBoxContainer@874/@GridContainer@875/@OptionButton@947",
+    "text": "Current camera locked",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "options": [
+      "Current camera locked",
+      "Current camera + orbit"
+    ],
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@Window@870/@ScrollContainer@873/@VBoxContainer@874/@GridContainer@875/@Label@948",
+    "text": "Orbit • radians / video second",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "SpinBox",
+    "path": "@Window@870/@ScrollContainer@873/@VBoxContainer@874/@GridContainer@875/@SpinBox@951",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@Window@870/@ScrollContainer@873/@VBoxContainer@874/@GridContainer@875/@Label@952",
+    "text": "Rendering",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "OptionButton",
+    "path": "@Window@870/@ScrollContainer@873/@VBoxContainer@874/@GridContainer@875/@OptionButton@963",
+    "text": "Current state",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "options": [
+      "Current state",
+      "Cinematic preset",
+      "Scientific preset"
+    ],
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@Window@870/@ScrollContainer@873/@VBoxContainer@874/@GridContainer@875/@Label@964",
+    "text": "Overlays",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "CheckButton",
+    "path": "@Window@870/@ScrollContainer@873/@VBoxContainer@874/@GridContainer@875/@CheckButton@965",
+    "text": "Include viewer overlays",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@Window@870/@ScrollContainer@873/@VBoxContainer@874/@GridContainer@875/@Label@966",
+    "text": "Trails",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "CheckButton",
+    "path": "@Window@870/@ScrollContainer@873/@VBoxContainer@874/@GridContainer@875/@CheckButton@967",
+    "text": "Include recorded history",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "Scientific rendering suppresses trails, matching the interactive viewer.",
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@Window@870/@ScrollContainer@873/@VBoxContainer@874/@GridContainer@875/@Label@968",
+    "text": "H.264 quality",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "OptionButton",
+    "path": "@Window@870/@ScrollContainer@873/@VBoxContainer@874/@GridContainer@875/@OptionButton@979",
+    "text": "High • CRF 18",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "options": [
+      "High • CRF 18",
+      "Balanced • CRF 21",
+      "Compact • CRF 25"
+    ],
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@Window@870/@ScrollContainer@873/@VBoxContainer@874/@GridContainer@875/@Label@980",
+    "text": "Temporary PNGs",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "CheckButton",
+    "path": "@Window@870/@ScrollContainer@873/@VBoxContainer@874/@GridContainer@875/@CheckButton@981",
+    "text": "Keep after successful MP4 encoding",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@Window@870/@ScrollContainer@873/@VBoxContainer@874/@GridContainer@875/@Label@982",
+    "text": "Inspection records",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "CheckButton",
+    "path": "@Window@870/@ScrollContainer@873/@VBoxContainer@874/@GridContainer@875/@CheckButton@983",
+    "text": "Save per-frame inspection JSON",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@Window@870/@ScrollContainer@873/@VBoxContainer@874/@GridContainer@875/@Label@984",
+    "text": "G4 output quota • MiB",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "SpinBox",
+    "path": "@Window@870/@ScrollContainer@873/@VBoxContainer@874/@GridContainer@875/@SpinBox@987",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": "Selection-aware jobs reserve a finite total output ceiling, including PNGs, sidecars, recipe assets and encoding."
+  },
+  {
+    "class": "Label",
+    "path": "@Window@870/@ScrollContainer@873/@VBoxContainer@874/@GridContainer@875/@Label@988",
+    "text": "Output MP4",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "HBoxContainer",
+    "path": "@Window@870/@ScrollContainer@873/@VBoxContainer@874/@GridContainer@875/@HBoxContainer@989",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "LineEdit",
+    "path": "@Window@870/@ScrollContainer@873/@VBoxContainer@874/@GridContainer@875/@HBoxContainer@989/@LineEdit@990",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": ""
+  },
+  {
+    "class": "Button",
+    "path": "@Window@870/@ScrollContainer@873/@VBoxContainer@874/@GridContainer@875/@HBoxContainer@989/@Button@991",
+    "text": "Browse…",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "Label",
+    "path": "@Window@870/@ScrollContainer@873/@VBoxContainer@874/@Label@1141",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Label",
+    "path": "@Window@870/@ScrollContainer@873/@VBoxContainer@874/@Label@1142",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "ProgressBar",
+    "path": "@Window@870/@ScrollContainer@873/@VBoxContainer@874/@ProgressBar@1143",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "HBoxContainer",
+    "path": "@Window@870/@ScrollContainer@873/@VBoxContainer@874/@HBoxContainer@1144",
+    "text": "",
+    "font_size": 16,
+    "focus_mode": 0,
+    "tooltip": ""
+  },
+  {
+    "class": "Button",
+    "path": "@Window@870/@ScrollContainer@873/@VBoxContainer@874/@HBoxContainer@1144/@Button@1145",
+    "text": "Start Export",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  },
+  {
+    "class": "Button",
+    "path": "@Window@870/@ScrollContainer@873/@VBoxContainer@874/@HBoxContainer@1144/@Button@1146",
+    "text": "Cancel export",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": true
+  },
+  {
+    "class": "Button",
+    "path": "@Window@870/@ScrollContainer@873/@VBoxContainer@874/@HBoxContainer@1144/@Button@1147",
+    "text": "Close panel • continue in background",
+    "font_size": 16,
+    "focus_mode": 2,
+    "tooltip": "",
+    "disabled": false
+  }
+]

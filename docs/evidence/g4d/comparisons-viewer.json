@@ -1,0 +1,191 @@
+{
+  "status": "PASS for implemented diagnostic/comparison checkpoint; G4d space-time and matched rendering still pending",
+  "python": {
+    "command": "/tmp/simscope-g4-validation/bin/python -m unittest discover -q",
+    "tests": 191,
+    "status": "PASS",
+    "optional_scikit_image": "0.26.0"
+  },
+  "runs": {
+    "diagnostics-temporal-regression-1": {
+      "report": {
+        "command": [
+          "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+          "--path",
+          "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+          "--audio-driver",
+          "Dummy",
+          "--log-file",
+          "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/diagnostics-temporal-regression-1/godot.log",
+          "--headless",
+          "--script",
+          "analysis/test_temporal.gd",
+          "--",
+          "--temporal-fixture=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/diagnostics-temporal-regression-1"
+        ],
+        "exit_code": 0,
+        "timed_out": false,
+        "seconds": 1.5521483199991053,
+        "source_unchanged": true,
+        "source_sha256": "899a4bb5ee8e2413976481724dd5993fbc33cfa8a6dd54fa30d620265c9e204d",
+        "category": "headless integration",
+        "result": {
+          "backend": "forward_plus",
+          "checks": 23,
+          "failures": [],
+          "integral_range": [
+            "72",
+            "72"
+          ],
+          "named_results": 3,
+          "native_rows": 3.0
+        }
+      },
+      "report_sha256": "2b6e90075ca40fe8b08a9186b6cf6025c6bf661811bffdc3a1af7b25379ebfdd"
+    },
+    "diagnostics-viewer-2": {
+      "report": {
+        "command": [
+          "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+          "--path",
+          "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+          "--audio-driver",
+          "Dummy",
+          "--log-file",
+          "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/diagnostics-viewer-2/godot.log",
+          "--headless",
+          "--script",
+          "analysis/test_diagnostics.gd",
+          "--",
+          "--diagnostics-fixture=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/diagnostics-viewer-2"
+        ],
+        "exit_code": 0,
+        "seconds": 2.019156344998919,
+        "source_hashes": {
+          "run-a.ssc": "b5a9f0308cc6c6b1fee3e7c241efeded58868b93b1a80a3ee812118e96c1b293",
+          "run-b.ssc": "f6b6070428f17c3a2e3da147651df789ca695fae24e8958c1d25edcb8083eb67",
+          "a.csv": "0bb81558c14e7080921360fca29da8b15d206c1e466d2ca4368941e31f527a31",
+          "b.csv": "992d21760f400edfaee41db67e6ccb21b20ab4d9bd14431363a9aa085be960b2",
+          "period.csv": "e892f172a98d270d96850b04abd576bc691cd67005e196d5da60dbc7b8de7f6c"
+        },
+        "source_unchanged": true,
+        "category": "headless integration",
+        "result": {
+          "backend": "forward_plus",
+          "checks": 23,
+          "failures": []
+        }
+      },
+      "report_sha256": "38dad43316df5def352d9193c15507ca6b8fb3723f8f4512a6cbe085ab88329f"
+    },
+    "diagnostics-rendered-gl-1": {
+      "report": {
+        "command": [
+          "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+          "--path",
+          "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+          "--audio-driver",
+          "Dummy",
+          "--log-file",
+          "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/diagnostics-rendered-gl-1/godot.log",
+          "--rendering-method",
+          "gl_compatibility",
+          "--resolution",
+          "1100x820",
+          "--script",
+          "analysis/test_diagnostics.gd",
+          "--",
+          "--diagnostics-fixture=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/diagnostics-rendered-gl-1"
+        ],
+        "exit_code": 0,
+        "seconds": 2.6998099820011703,
+        "source_hashes": {
+          "run-a.ssc": "a408a3b900787bcc201efd2f9c5e662dd9e5894affaaa1e7d551291518006701",
+          "run-b.ssc": "1831fa646fba68e78fe9fb2a9d711988f684a34d73bd1306b79339495665f595",
+          "a.csv": "0bb81558c14e7080921360fca29da8b15d206c1e466d2ca4368941e31f527a31",
+          "b.csv": "992d21760f400edfaee41db67e6ccb21b20ab4d9bd14431363a9aa085be960b2",
+          "period.csv": "e892f172a98d270d96850b04abd576bc691cd67005e196d5da60dbc7b8de7f6c"
+        },
+        "source_unchanged": true,
+        "category": "actual renderer; image inspection required",
+        "result": {
+          "backend": "gl_compatibility",
+          "checks": 24,
+          "failures": []
+        }
+      },
+      "report_sha256": "c29ad22fbc2d202185bf23e19b65e79b15e5724a1d35f66c24202e50e5c02589",
+      "image": {
+        "path": "results/g4/diagnostics-rendered-gl-1/diagnostics.png",
+        "sha256": "09418d52aec3eda9dad21c4ff2dfc08928a403d92f789c8a180d2eab51926c27",
+        "inspected": true,
+        "observation": "Two labeled source series with distinct markers, finite/missing counts and explicit mapped axes are readable."
+      }
+    },
+    "diagnostics-rendered-vk-1": {
+      "report": {
+        "command": [
+          "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+          "--path",
+          "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+          "--audio-driver",
+          "Dummy",
+          "--log-file",
+          "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/diagnostics-rendered-vk-1/godot.log",
+          "--rendering-method",
+          "forward_plus",
+          "--resolution",
+          "1100x820",
+          "--script",
+          "analysis/test_diagnostics.gd",
+          "--",
+          "--diagnostics-fixture=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/diagnostics-rendered-vk-1"
+        ],
+        "exit_code": 0,
+        "seconds": 3.2423259269999107,
+        "source_hashes": {
+          "run-a.ssc": "56e1f29b61326f82a2c8160bf6d5c5a8d8464deb38917733faaf47cabcff9267",
+          "run-b.ssc": "7dc795e89a9ead8d9d3b0dd66887b88dceb3e7eecc9a740d2710ae2102295d97",
+          "a.csv": "0bb81558c14e7080921360fca29da8b15d206c1e466d2ca4368941e31f527a31",
+          "b.csv": "992d21760f400edfaee41db67e6ccb21b20ab4d9bd14431363a9aa085be960b2",
+          "period.csv": "e892f172a98d270d96850b04abd576bc691cd67005e196d5da60dbc7b8de7f6c"
+        },
+        "source_unchanged": true,
+        "category": "actual renderer; image inspection required",
+        "result": {
+          "backend": "forward_plus",
+          "checks": 24,
+          "failures": []
+        }
+      },
+      "report_sha256": "1324a0f8c523670fc5a7e48bb4735209f4fab6009ba22872a500dd6abe414c99",
+      "image": {
+        "path": "results/g4/diagnostics-rendered-vk-1/diagnostics.png",
+        "sha256": "210c2284a7f9cd19564ceaa4aa983925d7d738fc13d6d72624ef8391a91d4010",
+        "inspected": true,
+        "observation": "Two labeled source series with distinct markers, finite/missing counts and explicit mapped axes are readable."
+      }
+    }
+  },
+  "numerical_oracles": [
+    "Exact int64 differences above 2^53",
+    "Manual offset produces differences 1,2,3,4",
+    "Source-ID interpolation and death holds; stable mesh epochs",
+    "One-second steady signal, absolute tolerance 1e-12",
+    "Exact Decimal overlay coordinates, missing support locations",
+    "Transitive result and exact member asset pins",
+    "Final source/CSV change rejects publication"
+  ],
+  "failed_runs": [
+    {
+      "path": "results/g4/diagnostics-viewer-1",
+      "status": "FAIL then timed out after test-script error",
+      "reason": "Shared dictionary clearing damaged saved source/result references at source switch; fixed before passing runs."
+    },
+    {
+      "status": "NOT PASS",
+      "reason": "Direct temporal invocation used a relative fixture path and lacked the validator log path. Replaced by fresh validator invocation; previous evidence not overwritten."
+    }
+  ],
+  "limits": "No whole A01\u2013A23 or target performance claim. Full-result dependency count remains 64; source position endpoints and scalar holds only on explicit common schedules; scheduled queries outside the analyzed dynamic range are missing."
+}

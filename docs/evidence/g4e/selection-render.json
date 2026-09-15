@@ -1,0 +1,584 @@
+{
+  "status": "PASS for selection-aware single-scene PNG/clip checkpoint; matched pairs and G4f remain pending",
+  "python": {
+    "command": "/tmp/simscope-g4-validation/bin/python -m unittest discover -s tests -q",
+    "tests": 217,
+    "skipped": 0,
+    "status": "PASS"
+  },
+  "runs": {
+    "selection-capture-gl-2": {
+      "status": "PASS",
+      "renderer": "gl_compatibility",
+      "source_sha256": "50df1d2e95ea3d8e54bdf182b9d0263eef9a3462cca6e1411f566bffb466c535",
+      "runs": [
+        {
+          "command": [
+            "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+            "--headless",
+            "--path",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+            "--audio-driver",
+            "Dummy",
+            "--log-file",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/selection-capture-gl-2/setup.log",
+            "--script",
+            "analysis/test_render_state.gd",
+            "--",
+            "--g4-render-fixture=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/selection-capture-gl-2"
+          ],
+          "exit_code": 0,
+          "seconds": 1.1461671389988624
+        },
+        {
+          "command": [
+            "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+            "--path",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+            "--rendering-method",
+            "gl_compatibility",
+            "--resolution",
+            "640x360",
+            "--audio-driver",
+            "Dummy",
+            "--log-file",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/selection-capture-gl-2/normal/renderer.log",
+            "--fixed-fps",
+            "4",
+            "--disable-vsync",
+            "--",
+            "--simscope-render-job=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/selection-capture-gl-2/normal/job.json"
+          ],
+          "exit_code": 0,
+          "seconds": 1.8293371649997425
+        },
+        {
+          "command": [
+            "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+            "--path",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+            "--rendering-method",
+            "gl_compatibility",
+            "--resolution",
+            "640x360",
+            "--audio-driver",
+            "Dummy",
+            "--log-file",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/selection-capture-gl-2/delayed/renderer.log",
+            "--fixed-fps",
+            "4",
+            "--disable-vsync",
+            "--",
+            "--simscope-render-job=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/selection-capture-gl-2/delayed/job.json"
+          ],
+          "exit_code": 0,
+          "seconds": 1.8153446139986045
+        },
+        {
+          "command": [
+            "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+            "--path",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+            "--rendering-method",
+            "gl_compatibility",
+            "--resolution",
+            "640x360",
+            "--audio-driver",
+            "Dummy",
+            "--log-file",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/selection-capture-gl-2/replay.log",
+            "--script",
+            "analysis/test_render_state.gd",
+            "--",
+            "--g4-render-fixture=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/selection-capture-gl-2",
+            "--verify-sidecar=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/selection-capture-gl-2/normal/inspection-00000001.json"
+          ],
+          "exit_code": 0,
+          "seconds": 1.7114940719984588
+        }
+      ],
+      "checks": [
+        {
+          "label": "normal complete clip",
+          "pass_": true
+        },
+        {
+          "label": "normal exact clip dimensions/frame count",
+          "pass_": true
+        },
+        {
+          "label": "normal frame 0 source/image hash",
+          "pass_": true
+        },
+        {
+          "label": "normal frame 0 exact time/revision",
+          "pass_": true
+        },
+        {
+          "label": "normal frame 0 exact membership",
+          "pass_": true
+        },
+        {
+          "label": "normal frame 0 independent position oracle ID 0",
+          "pass_": true
+        },
+        {
+          "label": "normal frame 0 independent position oracle ID 40",
+          "pass_": true
+        },
+        {
+          "label": "normal frame 0 visible selection markers on actual GPU",
+          "pass_": true
+        },
+        {
+          "label": "normal frame 1 source/image hash",
+          "pass_": true
+        },
+        {
+          "label": "normal frame 1 exact time/revision",
+          "pass_": true
+        },
+        {
+          "label": "normal frame 1 exact membership",
+          "pass_": true
+        },
+        {
+          "label": "normal frame 1 independent position oracle ID 0",
+          "pass_": true
+        },
+        {
+          "label": "normal frame 1 independent position oracle ID 40",
+          "pass_": true
+        },
+        {
+          "label": "normal frame 1 visible selection markers on actual GPU",
+          "pass_": true
+        },
+        {
+          "label": "normal frame 2 source/image hash",
+          "pass_": true
+        },
+        {
+          "label": "normal frame 2 exact time/revision",
+          "pass_": true
+        },
+        {
+          "label": "normal frame 2 exact membership",
+          "pass_": true
+        },
+        {
+          "label": "normal frame 2 independent position oracle ID 0",
+          "pass_": true
+        },
+        {
+          "label": "normal frame 2 independent position oracle ID 40",
+          "pass_": true
+        },
+        {
+          "label": "normal frame 2 visible selection markers on actual GPU",
+          "pass_": true
+        },
+        {
+          "label": "delayed complete clip",
+          "pass_": true
+        },
+        {
+          "label": "delayed exact clip dimensions/frame count",
+          "pass_": true
+        },
+        {
+          "label": "delayed frame 0 source/image hash",
+          "pass_": true
+        },
+        {
+          "label": "delayed frame 0 exact time/revision",
+          "pass_": true
+        },
+        {
+          "label": "delayed frame 0 exact membership",
+          "pass_": true
+        },
+        {
+          "label": "delayed frame 0 independent position oracle ID 0",
+          "pass_": true
+        },
+        {
+          "label": "delayed frame 0 independent position oracle ID 40",
+          "pass_": true
+        },
+        {
+          "label": "delayed frame 0 visible selection markers on actual GPU",
+          "pass_": true
+        },
+        {
+          "label": "delayed frame 1 source/image hash",
+          "pass_": true
+        },
+        {
+          "label": "delayed frame 1 exact time/revision",
+          "pass_": true
+        },
+        {
+          "label": "delayed frame 1 exact membership",
+          "pass_": true
+        },
+        {
+          "label": "delayed frame 1 independent position oracle ID 0",
+          "pass_": true
+        },
+        {
+          "label": "delayed frame 1 independent position oracle ID 40",
+          "pass_": true
+        },
+        {
+          "label": "delayed frame 1 visible selection markers on actual GPU",
+          "pass_": true
+        },
+        {
+          "label": "delayed frame 2 source/image hash",
+          "pass_": true
+        },
+        {
+          "label": "delayed frame 2 exact time/revision",
+          "pass_": true
+        },
+        {
+          "label": "delayed frame 2 exact membership",
+          "pass_": true
+        },
+        {
+          "label": "delayed frame 2 independent position oracle ID 0",
+          "pass_": true
+        },
+        {
+          "label": "delayed frame 2 independent position oracle ID 40",
+          "pass_": true
+        },
+        {
+          "label": "delayed frame 2 visible selection markers on actual GPU",
+          "pass_": true
+        },
+        {
+          "label": "all PNG pixels identical with delayed rendering",
+          "pass_": true
+        },
+        {
+          "label": "restored frame and ordinary PNG capture reproduce exact clip pixels",
+          "pass_": true
+        },
+        {
+          "label": "ordinary PNG and portable recipe image hash agree",
+          "pass_": true
+        },
+        {
+          "label": "capture checksum unchanged",
+          "pass_": true
+        }
+      ],
+      "image_inspection_required": false,
+      "image_inspected": true,
+      "visual_observation": "Two source-bound yellow endpoint markers at the declared positions; replay and clip pixels match at identical viewport dimensions.",
+      "image": {
+        "path": "results/g4/selection-capture-gl-2/replayed.png",
+        "sha256": "f422464e8fd995daa8dec7168dc83002cdc88aae5b8c312b87aa69f524c11c6e"
+      }
+    },
+    "selection-capture-vk-1": {
+      "status": "PASS",
+      "renderer": "forward_plus",
+      "source_sha256": "2b474e633cde1ca27c7993e1ffde747a3955fd7b387c022877a2ac3e68b654f2",
+      "runs": [
+        {
+          "command": [
+            "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+            "--headless",
+            "--path",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+            "--audio-driver",
+            "Dummy",
+            "--log-file",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/selection-capture-vk-1/setup.log",
+            "--script",
+            "analysis/test_render_state.gd",
+            "--",
+            "--g4-render-fixture=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/selection-capture-vk-1"
+          ],
+          "exit_code": 0,
+          "seconds": 1.1356875669989677
+        },
+        {
+          "command": [
+            "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+            "--path",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+            "--rendering-method",
+            "forward_plus",
+            "--resolution",
+            "640x360",
+            "--audio-driver",
+            "Dummy",
+            "--log-file",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/selection-capture-vk-1/normal/renderer.log",
+            "--fixed-fps",
+            "4",
+            "--disable-vsync",
+            "--",
+            "--simscope-render-job=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/selection-capture-vk-1/normal/job.json"
+          ],
+          "exit_code": 0,
+          "seconds": 2.489559105997614
+        },
+        {
+          "command": [
+            "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+            "--path",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+            "--rendering-method",
+            "forward_plus",
+            "--resolution",
+            "640x360",
+            "--audio-driver",
+            "Dummy",
+            "--log-file",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/selection-capture-vk-1/delayed/renderer.log",
+            "--fixed-fps",
+            "4",
+            "--disable-vsync",
+            "--",
+            "--simscope-render-job=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/selection-capture-vk-1/delayed/job.json"
+          ],
+          "exit_code": 0,
+          "seconds": 2.3420642080018297
+        },
+        {
+          "command": [
+            "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+            "--path",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+            "--rendering-method",
+            "forward_plus",
+            "--resolution",
+            "640x360",
+            "--audio-driver",
+            "Dummy",
+            "--log-file",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/selection-capture-vk-1/replay.log",
+            "--script",
+            "analysis/test_render_state.gd",
+            "--",
+            "--g4-render-fixture=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/selection-capture-vk-1",
+            "--verify-sidecar=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/selection-capture-vk-1/normal/inspection-00000001.json"
+          ],
+          "exit_code": 0,
+          "seconds": 2.110681933001615
+        }
+      ],
+      "checks": [
+        {
+          "label": "normal complete clip",
+          "pass_": true
+        },
+        {
+          "label": "normal exact clip dimensions/frame count",
+          "pass_": true
+        },
+        {
+          "label": "normal frame 0 source/image hash",
+          "pass_": true
+        },
+        {
+          "label": "normal frame 0 exact time/revision",
+          "pass_": true
+        },
+        {
+          "label": "normal frame 0 exact membership",
+          "pass_": true
+        },
+        {
+          "label": "normal frame 0 independent position oracle ID 0",
+          "pass_": true
+        },
+        {
+          "label": "normal frame 0 independent position oracle ID 40",
+          "pass_": true
+        },
+        {
+          "label": "normal frame 0 visible selection markers on actual GPU",
+          "pass_": true
+        },
+        {
+          "label": "normal frame 1 source/image hash",
+          "pass_": true
+        },
+        {
+          "label": "normal frame 1 exact time/revision",
+          "pass_": true
+        },
+        {
+          "label": "normal frame 1 exact membership",
+          "pass_": true
+        },
+        {
+          "label": "normal frame 1 independent position oracle ID 0",
+          "pass_": true
+        },
+        {
+          "label": "normal frame 1 independent position oracle ID 40",
+          "pass_": true
+        },
+        {
+          "label": "normal frame 1 visible selection markers on actual GPU",
+          "pass_": true
+        },
+        {
+          "label": "normal frame 2 source/image hash",
+          "pass_": true
+        },
+        {
+          "label": "normal frame 2 exact time/revision",
+          "pass_": true
+        },
+        {
+          "label": "normal frame 2 exact membership",
+          "pass_": true
+        },
+        {
+          "label": "normal frame 2 independent position oracle ID 0",
+          "pass_": true
+        },
+        {
+          "label": "normal frame 2 independent position oracle ID 40",
+          "pass_": true
+        },
+        {
+          "label": "normal frame 2 visible selection markers on actual GPU",
+          "pass_": true
+        },
+        {
+          "label": "delayed complete clip",
+          "pass_": true
+        },
+        {
+          "label": "delayed exact clip dimensions/frame count",
+          "pass_": true
+        },
+        {
+          "label": "delayed frame 0 source/image hash",
+          "pass_": true
+        },
+        {
+          "label": "delayed frame 0 exact time/revision",
+          "pass_": true
+        },
+        {
+          "label": "delayed frame 0 exact membership",
+          "pass_": true
+        },
+        {
+          "label": "delayed frame 0 independent position oracle ID 0",
+          "pass_": true
+        },
+        {
+          "label": "delayed frame 0 independent position oracle ID 40",
+          "pass_": true
+        },
+        {
+          "label": "delayed frame 0 visible selection markers on actual GPU",
+          "pass_": true
+        },
+        {
+          "label": "delayed frame 1 source/image hash",
+          "pass_": true
+        },
+        {
+          "label": "delayed frame 1 exact time/revision",
+          "pass_": true
+        },
+        {
+          "label": "delayed frame 1 exact membership",
+          "pass_": true
+        },
+        {
+          "label": "delayed frame 1 independent position oracle ID 0",
+          "pass_": true
+        },
+        {
+          "label": "delayed frame 1 independent position oracle ID 40",
+          "pass_": true
+        },
+        {
+          "label": "delayed frame 1 visible selection markers on actual GPU",
+          "pass_": true
+        },
+        {
+          "label": "delayed frame 2 source/image hash",
+          "pass_": true
+        },
+        {
+          "label": "delayed frame 2 exact time/revision",
+          "pass_": true
+        },
+        {
+          "label": "delayed frame 2 exact membership",
+          "pass_": true
+        },
+        {
+          "label": "delayed frame 2 independent position oracle ID 0",
+          "pass_": true
+        },
+        {
+          "label": "delayed frame 2 independent position oracle ID 40",
+          "pass_": true
+        },
+        {
+          "label": "delayed frame 2 visible selection markers on actual GPU",
+          "pass_": true
+        },
+        {
+          "label": "all PNG pixels identical with delayed rendering",
+          "pass_": true
+        },
+        {
+          "label": "restored frame and ordinary PNG capture reproduce exact clip pixels",
+          "pass_": true
+        },
+        {
+          "label": "ordinary PNG and portable recipe image hash agree",
+          "pass_": true
+        },
+        {
+          "label": "capture checksum unchanged",
+          "pass_": true
+        }
+      ],
+      "image_inspection_required": false,
+      "image_inspected": true,
+      "visual_observation": "Two source-bound yellow endpoint markers at the declared positions; replay and clip pixels match at identical viewport dimensions.",
+      "image": {
+        "path": "results/g4/selection-capture-vk-1/replayed.png",
+        "sha256": "5c4b2fce6c90f2e534aa8a5963407d509273349dda808b6b4ad25afbfca71e4b"
+      }
+    }
+  },
+  "legacy_video": {
+    "command": "python tools/validate_video.py --godot /home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64 --continuation",
+    "status": "PASS",
+    "ux_checks": 41,
+    "pass_lines_including_ux": 81,
+    "log": "results/video tests/acceptance kfrnvrme/validation.log",
+    "sha256": "aa06f92886e83eb25afc64b8c08bb816a70155927bc304f5c4e7a904b5804cd8"
+  },
+  "limits": [
+    "Finite G4 output quota 1 MiB\u201364 GiB; conservative preflight includes PNG/sidecar/encoding space; preserve 256 MiB free headroom",
+    "8192 job files / 1024 directories; refuse excessive frame/file count before rendering",
+    "Per-frame source selection query, captured revision and source brackets; combined preview <=512 markers; full membership unchanged",
+    "Scene-only video recipes omit computed plot results; no automatic interval analysis",
+    "Pixel equality requires the same renderer, viewport aspect/dimensions and visual settings"
+  ],
+  "failed_attempts": [
+    "selection-render-1 had correct numerical frame evidence but overlay parent visibility lagged one frame; visibility is now committed with geometry",
+    "selection-render-gl-1 setup used a nonexistent per-layer particle visibility field; corrected to G3 global particle visibility; interrupted attempt was not PASS",
+    "capture-state-parse-1 needed explicit Image/Error GDScript types; fixed",
+    "selection-capture-gl-1 compared a 576x360 native viewport with a 640x360 export; fixture now declares identical viewport aspect/dimensions"
+  ]
+}

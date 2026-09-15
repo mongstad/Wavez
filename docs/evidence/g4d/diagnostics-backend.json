@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "scope": "G4d CSV/period backend only; UI/comparisons/space-time/matched rendering pending",
+  "tests": 177,
+  "command": "/tmp/simscope-g4-validation/bin/python -m unittest discover -s tests -q",
+  "new_cases": 14,
+  "oracles": [
+    "1-second sampled sinusoid, period error <=1e-12",
+    "direct normalized overlap sums, ACF error <=1e-12",
+    "hand contour prominences 1,3,1",
+    "short/flat/chirped/noisy candidate refusal",
+    "explicit independent CSV raw clocks/int64/line spans and missing cells"
+  ],
+  "limitations": [
+    "No G4d rendered acceptance yet",
+    "No A06-A09 gate claim",
+    "No G5/G6 work"
+  ]
+}

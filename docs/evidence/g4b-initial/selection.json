@@ -1,0 +1,139 @@
+{
+  "scope": "Intermediate G4b selection checkpoint; G4b remains in progress, full A01-A23 pending",
+  "parent_commit": "49b25986d2bd3951d98c4fc9efb8507e5e950686",
+  "code_sha256": {
+    "simscope_export/analysis/__init__.py": "48dca038ee2510dfd2cc743e6048a747f3ae656f0a0e8733d90d08ea066b4778",
+    "simscope_export/analysis/contracts.py": "0ce0951d32452de58e1e961143f3f10125f655f081b9c4512c7dccfaba1c7274",
+    "simscope_export/analysis/jobs.py": "1b8d9e9ae1a46ccb0495cc81a5fd90deb878449e9f12d22aede2ec782441696b",
+    "simscope_export/analysis/picking.py": "24a1b78ed89711de109cc8e020cba521bf34f68e188ead2b534f6e760fb60f3a",
+    "simscope_export/analysis/sampling.py": "a5f08e574b2e4e06e24e83025b14a093edd1ba6e9f6653bd15e26df453597532",
+    "simscope_export/analysis/selection_jobs.py": "8058a7d2a8e63dfd0e25d53664e5fc12fad47f50ebba8470ffcac5d96fb754e0",
+    "simscope_export/analysis/selectors.py": "c23e18acbdbad5fa9b811774887fe28e2be58efb33c3ba1cda83b83e232caed2",
+    "simscope_export/analysis/source.py": "a4e93d1904c66d43be716b6a950d554c3778fdd0421335c8df60bcf2b68303f6",
+    "tests/test_picking.py": "bd3f172a52c157629914e7778040f9851b58525d5603d889b659d9fdbd05d338",
+    "tests/test_selections.py": "23044e33f86301ec722034be4d7ba14ed559a54c4b039162e0da2a65ce6fcbda",
+    "tools/validate_selections.py": "bf161be7414295293df93b701be8b97a9b1184ac26ff841837fbbcc557b1faef",
+    "viewer/analysis/analysis_jobs.gd": "4beecce53398c06ebccc28a982ab8944c7dff24aa1e7905b9698f846d7698907",
+    "viewer/analysis/test_foundation.gd": "2d63200a9b7e39053207a866d7544d5a75ee2824fdd51ab2d8a4b038a214370e",
+    "viewer/main.gd": "b62ea69bdb067a1288e93657aa2cd05da7ab7837f1826746e6a12b877734c4b5",
+    "viewer/selection/selection_controller.gd": "299191f9a77a5b9e9c1eff464db2d2a890336189941875575bd101ddbac5ed38",
+    "viewer/selection/selection_gesture.gd": "729eeaa45a93de5d85c286a8ea114b8402bbb42a0e0053cc136154a012740e53",
+    "viewer/selection/selection_overlay.gd": "877f76c08fed9a8c4786a06e883ea2bd100d1910a94b729a4c6bc1901cf2f5bc",
+    "viewer/selection/selection_state.gd": "117d5b400005971305a45715732606a9de43ee785b36f1c22dd96cbb0e85ec6e",
+    "viewer/selection/test_selection.gd": "ef1d8dc9db4a06c2b23de7f8120fbfaa192a214322402a36257740a3f6b4d7c9"
+  },
+  "python_tests": {
+    "status": "PASS",
+    "tests": 85
+  },
+  "g3_playback_headless": {
+    "status": "PASS",
+    "checks": 2457
+  },
+  "foundation": {
+    "status": "PASS",
+    "checks": 157
+  },
+  "runs": {
+    "headless": {
+      "command": [
+        "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+        "--path",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+        "--audio-driver",
+        "Dummy",
+        "--log-file",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/selections-8/godot.log",
+        "--headless",
+        "--script",
+        "selection/test_selection.gd",
+        "--",
+        "--selection-fixture=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/selections-8"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "seconds": 1.4594413859999804,
+      "source_unchanged": true,
+      "source_sha256": "ee42027591b3c1e0ffacbb5d91faeb7857e0face374f6915db07e26456fb9f40",
+      "category": "headless integration",
+      "result": {
+        "backend": "forward_plus",
+        "checks": 31,
+        "drawn": 5,
+        "failures": [],
+        "gpu_bytes": 12928,
+        "status": "3 selections \u2022 6 member references\n5 present references \u2022 5 preview markers\nOverlaps retained; preview may be thinned."
+      }
+    },
+    "gl_compatibility": {
+      "command": [
+        "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+        "--path",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+        "--audio-driver",
+        "Dummy",
+        "--log-file",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/selections-compat-4/godot.log",
+        "--rendering-method",
+        "gl_compatibility",
+        "--resolution",
+        "1100x820",
+        "--script",
+        "selection/test_selection.gd",
+        "--",
+        "--selection-fixture=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/selections-compat-4"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "seconds": 2.1786639309998463,
+      "source_unchanged": true,
+      "source_sha256": "19e52e55b296ef187e0c9ca82c7e120ebe6ac015ee7cdf8fc4217e05bfabb74d",
+      "category": "actual renderer integration; image requires inspection",
+      "result": {
+        "backend": "gl_compatibility",
+        "checks": 32,
+        "drawn": 5,
+        "failures": [],
+        "gpu_bytes": 12928,
+        "status": "3 selections \u2022 6 member references\n5 present references \u2022 5 preview markers\nOverlaps retained; preview may be thinned."
+      },
+      "image_sha256": "a03e105ca95caf57a16c2220fd878d1f1551e6498e1c22e2577658210219e52d",
+      "image_inspected": true
+    },
+    "forward_plus": {
+      "command": [
+        "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+        "--path",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+        "--audio-driver",
+        "Dummy",
+        "--log-file",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/selections-forward-3/godot.log",
+        "--rendering-method",
+        "forward_plus",
+        "--resolution",
+        "1100x820",
+        "--script",
+        "selection/test_selection.gd",
+        "--",
+        "--selection-fixture=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/selections-forward-3"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "seconds": 2.8038516020001225,
+      "source_unchanged": true,
+      "source_sha256": "5618354ac115df2e6c98b241c2dfc5362a2330fa28795b1ac71a378a97954301",
+      "category": "actual renderer integration; image requires inspection",
+      "result": {
+        "backend": "forward_plus",
+        "checks": 32,
+        "drawn": 5,
+        "failures": [],
+        "gpu_bytes": 12928,
+        "status": "3 selections \u2022 6 member references\n5 present references \u2022 5 preview markers\nOverlaps retained; preview may be thinned."
+      },
+      "image_sha256": "229a5300a650d16458e997e74fd38545241c911b73eef47a7d17920db234e8e6",
+      "image_inspected": true
+    }
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "status": "PASS for numerical export and inspection v3 checkpoint; selection-aware PNG/video and complete G4e/G4f gates remain pending",
+  "python": {
+    "command": "/tmp/simscope-g4-validation/bin/python -m unittest discover -s tests -q",
+    "tests": 214,
+    "skipped": 0,
+    "status": "PASS"
+  },
+  "viewer": {
+    "command": [
+      "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+      "--path",
+      "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+      "--audio-driver",
+      "Dummy",
+      "--log-file",
+      "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/recipe-viewer-final-1/godot.log",
+      "--headless",
+      "--script",
+      "analysis/test_space_time.gd",
+      "--",
+      "--space-time-fixture=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/recipe-viewer-final-1"
+    ],
+    "exit_code": 0,
+    "seconds": 1.644592251002905,
+    "source_sha256": "2eb1b8dae82937a369e2061d95ae4c05ba03a3d9ce43d6d132f3a453e09b3c64",
+    "source_unchanged": true,
+    "category": "headless integration",
+    "result": {
+      "backend": "forward_plus",
+      "checks": 34,
+      "failures": []
+    }
+  },
+  "compatibility": {
+    "G1_inspection": {
+      "checks": 49,
+      "status": "PASS",
+      "category": "headless; no rendered image claim"
+    },
+    "G3_storage": {
+      "checks": 23,
+      "status": "PASS",
+      "runtime": "validation venv includes scikit-image 0.26.0"
+    },
+    "G3_scene": {
+      "checks": 36,
+      "status": "PASS",
+      "renderer": "gl_compatibility",
+      "GPU": "NVIDIA GeForce RTX 3070 Ti",
+      "driver": "610.57.04",
+      "image_inspected": true
+    }
+  },
+  "covered": [
+    "Full CSV rows/support/units/IDs/provenance, including dependency source validation",
+    "Atomic no-replace output with cancellation/quota/destination-race refusal",
+    "Exact f64 and large-ID/group recipe round trip",
+    "Portable member/result assets into a fresh cache",
+    "Unknown fields, missing/modified/linked assets and unopened source refusal before UI state mutation",
+    "Current source stamp and view fingerprint checked after background validation"
+  ],
+  "limitations": [
+    "Full A01-A23 gate remains pending",
+    "No G4 target-workload performance claim",
+    "Versioned selection-aware image/video export follows this checkpoint",
+    "Unbundled computed results require existing hash-verified private results; missing references refuse restore",
+    "Derived artifact selections require their explicitly selected original artifact; derived files are not copied into recipe bundles"
+  ],
+  "failed_attempts": [
+    "recipe-parse-1: GDScript inferred array type; fixed",
+    "recipe-viewer-1/2: Godot structural float representation in exact result references; fixed",
+    "recipe-viewer-3/4: equivalent Godot 0.0 bookmark text versus Python canonical 0; canonicalized under v3 without changing G0-G3 exact parsers",
+    "First G1 invocation lacked generated inspection fixtures and was interrupted; fresh generated fixtures passed",
+    "G3 headless invocation refused actual-GPU requirement",
+    "Initial G3 GPU attempts lacked optional extraction runtime then the standard full demo fixture; interrupted; complete run passed after supplying documented prerequisites"
+  ],
+  "artifacts": {
+    "results/g4/recipe-python-final.log": {
+      "sha256": "fb6ae8dc86d8604d0c7ccf9faf1097529e47a860179320ccd1f4ef74f98a22c7",
+      "bytes": 287
+    },
+    "results/g4/recipe-g1-inspection-final.log": {
+      "sha256": "51f96c810e2bf978302e0807c33dc66a76369d7489118cfe460db1fdd696af43",
+      "bytes": 2653
+    },
+    "results/g4/recipe-g3-storage.log": {
+      "sha256": "b4b65c32b701d5cfdcab1f6a692f224a0658f5c9a733b70d8c8abcaeec3c2338",
+      "bytes": 2188
+    },
+    "results/g4/recipe-g3-inspection-gl-complete.log": {
+      "sha256": "624aa828db826149b52bd3b7f2a8155a5c85a0786afca2af315c093db9b18145",
+      "bytes": 2293
+    },
+    "results/g3/combined.png": {
+      "sha256": "620ad6a390082972d8d1115b5063b97f8144cb82aed89344166fa3b95b346d32",
+      "bytes": 80426
+    }
+  }
+}

@@ -1,0 +1,832 @@
+{
+  "date": "2026-09-13",
+  "baseline": "ed2ac2ad485fa0679d61afcd0b044092fc669ef9",
+  "status": "reviewed and accepted",
+  "code_sha256": {
+    "viewer/analysis/analysis_jobs.gd": "c8c57a19288fb4ee3c2bff1bf0d9423b60a2fb153137f004d322f1952cbd8512",
+    "viewer/layers/grid_view.gd": "55c3115022437b1d8705199af4a0d32ead1752de164f9d2d99d881acf50a7b71",
+    "viewer/layers/particle_playback.gd": "fe61bcb4761825e8f97802ed3b96ec87646204d64a9280fef63928a3abc08e53",
+    "viewer/layers/playback_buffer.gd": "57b9d5e0ba89a8d6f3a5039dcf8ae5041faa56eaa7db559b87862f1ebc2be4cd",
+    "viewer/layers/scene_layers.gd": "a350c044e0bc47be062bdf84054ba60866efd80123c67e720f1d82e480fa2bef",
+    "viewer/layers/scene_reader.gd": "e50adb77fe400527da836fffb6d097f2332e9ca73d8b957757f71afb97aea521",
+    "viewer/layers/test_scene_playback_lifecycle.gd": "93661828ab290ea46606e1d26dfb7141a821abc48f030e35aa1bcde998ff53cc",
+    "viewer/main.gd": "edd72e690f4054f3b7b6bc1a0bc1e85c3d3880fd701e61bff3e8e32631e95b35",
+    "viewer/selection/selection_controller.gd": "2cb98ac38e6e3742cf4ffd8653a5391e877b661c7e76636e1efed30b9438521b",
+    "tools/validate_performance_maintenance.py": "1265154f4defab66177653c5f94d2d8a093272f13a49cfd752c70426350884cb",
+    "viewer/layers/field_buffer.gd": "c905d708effcdd025de7ba684baa0d19fbf5617eb8a146b92f5ea7b8b99d0bc7",
+    "viewer/layers/field_playback.gd": "e8a8ffeb922ea72ea7a63eafec8083ce04f14098f0aac96d7bb77f8ee22d8c7a",
+    "viewer/layers/field_prepare.gd": "fef956307372fe7bd7f7da221f8b8f0724b6b0dfca58f0faf511fdc32f69cf84",
+    "viewer/layers/profile_maintenance.gd": "d0ab5c17379c60e57cb49522365979e55812be087183d66358d8e11629a98a38",
+    "viewer/layers/scene_channels.gd": "01e37dd7d6c83aea354dd506a3a1f0779055b972998fc09bdc6a03104495a706",
+    "viewer/layers/test_field_preparation.gd": "8712e2fd58c6ee38f12d392a993eae548fbda0e4a7d09acfa8f6b122dffe633b",
+    "viewer/layers/test_performance_maintenance.gd": "af0aa7f0b688c30f303b564cbc14daace8d43feded74d93d51fc725156bad036"
+  },
+  "source_sha256": {
+    "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope-Benchmarks/benchmarks/02_PySPH_DamBreak/frozen/02B/simscope/dam_break.ssc": "093a9c36901616166ad39541fd14a257d37f05ddee7c5d1231a206bf483935fe",
+    "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope-Benchmarks/benchmarks/03_FiPy_FieldTransport/frozen/03B/simscope/field.ssc": "4de3e71521b61fcffb29f601dfb4047c8c1aebe8864b66f0ecd5f8a7cbc60c33"
+  },
+  "source_unchanged": true,
+  "runs": [
+    {
+      "cache_mib": 256.0,
+      "case": "02B",
+      "device": "NVIDIA GeForce RTX 3070 Ti",
+      "duration_seconds": 15.999397,
+      "memory": {
+        "VmHWM": 1182679040,
+        "VmRSS": 1182679040,
+        "VmSwap": 0
+      },
+      "open_ms": 251.902,
+      "prebuffer_ms": 679.007,
+      "renderer": "gl_compatibility",
+      "callbacks_summary": {
+        "count": 31332,
+        "callbacks_per_second": 1958.3238043283757,
+        "p95_ms": 0.096,
+        "p99_ms": 10.173449999999994,
+        "max_ms": 15.856,
+        "over_50ms": 0,
+        "buffering_seconds": 4.559460666666667,
+        "buffering_callbacks": 11436,
+        "transitions": 342,
+        "wraps": 7,
+        "distinct_indices": 60
+      },
+      "mode": "before",
+      "particle": {
+        "full_preload": false,
+        "budget_message": "",
+        "decoded_limit": 1073741824,
+        "prepared_limit": 1073741824,
+        "estimates": {
+          "decoded_total": 1127834368,
+          "largest_pair": 40540416,
+          "prepared_total": 2454476288,
+          "total": 3582310656
+        },
+        "cache": {
+          "cancelled": 25,
+          "completed": 443,
+          "decoded_bytes": 831505152,
+          "decoded_hits": 853,
+          "decoded_misses": 76,
+          "decoded_samples": 61,
+          "error": "",
+          "prepared_bytes": 1047761408,
+          "prepared_evictions": 409,
+          "prepared_hits": 343,
+          "prepared_misses": 143,
+          "prepared_pairs": 34,
+          "trace_dropped": 0,
+          "worker_active": true,
+          "working_index": 40
+        }
+      },
+      "stages": {
+        "g3_sample": {
+          "count": 483,
+          "max_ms": 15.741,
+          "mean_ms": 8.160979296066253,
+          "p50_ms": 10.297,
+          "p95_ms": 11.045,
+          "samples_collected": 483,
+          "total_ms": 3941.753
+        },
+        "g3_tick": {
+          "count": 31332,
+          "max_ms": 15.841,
+          "mean_ms": 0.18769772117961936,
+          "p50_ms": 0.054,
+          "p95_ms": 0.078,
+          "samples_collected": 8192,
+          "total_ms": 5880.944999999834
+        }
+      }
+    },
+    {
+      "cache_mib": 256.0,
+      "case": "02B",
+      "device": "NVIDIA GeForce RTX 3070 Ti",
+      "duration_seconds": 16.00418,
+      "field": {
+        "buffering": false,
+        "cache": {
+          "active": false,
+          "bytes": 0,
+          "cancelled": 0,
+          "completed": 0,
+          "error": "",
+          "evictions": 0,
+          "frames": 0,
+          "limit": 134217728,
+          "test_barrier_waiting": false,
+          "worker_ms": 0.0,
+          "worker_thread": -1
+        },
+        "enabled": false,
+        "error": "",
+        "gpu_uploads": 0,
+        "staged_textures": 0
+      },
+      "memory": {
+        "VmHWM": 1263005696,
+        "VmRSS": 1263005696,
+        "VmSwap": 0
+      },
+      "open_ms": 255.291,
+      "prebuffer_ms": 4878.262,
+      "renderer": "gl_compatibility",
+      "callbacks_summary": {
+        "count": 27692,
+        "callbacks_per_second": 1730.2979596580392,
+        "p95_ms": 0.12,
+        "p99_ms": 10.367630000000002,
+        "max_ms": 15.142,
+        "over_50ms": 0,
+        "buffering_seconds": 0.0,
+        "buffering_callbacks": 0,
+        "transitions": 477,
+        "wraps": 10,
+        "distinct_indices": 60
+      },
+      "mode": "after",
+      "particle": {
+        "policy": "adaptive",
+        "strategy": "full_preload",
+        "memory": {
+          "available_physical": 34262933504,
+          "physical": 50404433920,
+          "reserve": 8634406912,
+          "safe_cache_bytes": 20161773568
+        },
+        "full_preload": true,
+        "budget_message": "Full particle preload: estimated 4348 MiB including working space fits 18716 MiB safe RAM.",
+        "decoded_limit": 1409792960,
+        "prepared_limit": 3068095360,
+        "estimates": {
+          "decoded_total": 1127834368,
+          "largest_pair": 40540416,
+          "prepared_total": 2454476288,
+          "total": 3582310656
+        },
+        "cache": {
+          "cancelled": 1,
+          "completed": 61,
+          "decoded_bytes": 831505152,
+          "decoded_hits": 60,
+          "decoded_misses": 63,
+          "decoded_samples": 61,
+          "error": "",
+          "prepared_bytes": 1866176000,
+          "prepared_evictions": 0,
+          "prepared_hits": 478,
+          "prepared_misses": 2,
+          "prepared_pairs": 61,
+          "trace_dropped": 0,
+          "worker_active": false,
+          "working_index": -1
+        }
+      },
+      "stages": {
+        "g3_sample": {
+          "count": 477,
+          "max_ms": 15.016,
+          "mean_ms": 10.36484067085954,
+          "p50_ms": 10.319,
+          "p95_ms": 10.819,
+          "samples_collected": 477,
+          "total_ms": 4944.029
+        },
+        "g3_tick": {
+          "count": 27692,
+          "max_ms": 15.128,
+          "mean_ms": 0.25692622418026767,
+          "p50_ms": 0.072,
+          "p95_ms": 0.108,
+          "samples_collected": 8192,
+          "total_ms": 7114.800999999972
+        }
+      }
+    },
+    {
+      "cache_mib": 0.0,
+      "case": "03B",
+      "device": "NVIDIA GeForce RTX 3070 Ti",
+      "duration_seconds": 12.007046,
+      "memory": {
+        "VmHWM": 272736256,
+        "VmRSS": 272736256,
+        "VmSwap": 0
+      },
+      "open_ms": 181.005,
+      "prebuffer_ms": 0.001,
+      "renderer": "gl_compatibility",
+      "callbacks_summary": {
+        "count": 1137,
+        "callbacks_per_second": 94.69439860561873,
+        "p95_ms": 48.5656,
+        "p99_ms": 49.36276,
+        "max_ms": 55.347,
+        "over_50ms": 3,
+        "buffering_seconds": 0.0,
+        "buffering_callbacks": 0,
+        "transitions": 119,
+        "wraps": 2,
+        "distinct_indices": 40
+      },
+      "mode": "before",
+      "particle": {
+        "full_preload": false,
+        "budget_message": "",
+        "decoded_limit": 0,
+        "prepared_limit": 0,
+        "estimates": {},
+        "cache": {
+          "cancelled": 0,
+          "completed": 0,
+          "decoded_bytes": 0,
+          "decoded_hits": 0,
+          "decoded_misses": 0,
+          "decoded_samples": 0,
+          "error": "",
+          "prepared_bytes": 0,
+          "prepared_evictions": 0,
+          "prepared_hits": 0,
+          "prepared_misses": 0,
+          "prepared_pairs": 0,
+          "trace_dropped": 0,
+          "worker_active": false,
+          "working_index": -1
+        }
+      },
+      "stages": {
+        "g3_channel_decode": {
+          "count": 314,
+          "max_ms": 16.196,
+          "mean_ms": 14.434515923566876,
+          "p50_ms": 14.426,
+          "p95_ms": 15.029,
+          "samples_collected": 314,
+          "total_ms": 4532.437999999999
+        },
+        "g3_read_sample": {
+          "count": 314,
+          "max_ms": 20.833,
+          "mean_ms": 18.921719745222923,
+          "p50_ms": 18.915,
+          "p95_ms": 19.652,
+          "samples_collected": 314,
+          "total_ms": 5941.419999999998
+        },
+        "g3_sample": {
+          "count": 314,
+          "max_ms": 55.317,
+          "mean_ms": 31.73647133757961,
+          "p50_ms": 21.853,
+          "p95_ms": 49.235,
+          "samples_collected": 314,
+          "total_ms": 9965.251999999997
+        },
+        "g3_tick": {
+          "count": 1137,
+          "max_ms": 55.335,
+          "mean_ms": 8.799436235707999,
+          "p50_ms": 0.011,
+          "p95_ms": 48.571,
+          "samples_collected": 1137,
+          "total_ms": 10004.958999999995
+        }
+      }
+    },
+    {
+      "cache_mib": 0.0,
+      "case": "03B",
+      "device": "NVIDIA GeForce RTX 3070 Ti",
+      "duration_seconds": 12.000914,
+      "field": {
+        "buffering": false,
+        "cache": {
+          "active": false,
+          "bytes": 131661824,
+          "cancelled": 0,
+          "completed": 41,
+          "error": "",
+          "evictions": 0,
+          "frames": 41,
+          "limit": 134217728,
+          "test_barrier_waiting": false,
+          "worker_ms": 2397.6839999999997,
+          "worker_thread": 45
+        },
+        "enabled": true,
+        "error": "",
+        "gpu_uploads": 122,
+        "staged_textures": 1
+      },
+      "memory": {
+        "VmHWM": 404410368,
+        "VmRSS": 404410368,
+        "VmSwap": 0
+      },
+      "open_ms": 196.952,
+      "prebuffer_ms": 0.0,
+      "renderer": "gl_compatibility",
+      "callbacks_summary": {
+        "count": 4268,
+        "callbacks_per_second": 355.63957878541584,
+        "p95_ms": 2.888949999999999,
+        "p99_ms": 5.90099,
+        "max_ms": 6.431,
+        "over_50ms": 0,
+        "buffering_seconds": 0.0,
+        "buffering_callbacks": 0,
+        "transitions": 119,
+        "wraps": 2,
+        "distinct_indices": 40
+      },
+      "mode": "after",
+      "particle": {
+        "policy": "adaptive",
+        "strategy": "rolling",
+        "memory": {},
+        "full_preload": false,
+        "budget_message": "",
+        "decoded_limit": 0,
+        "prepared_limit": 0,
+        "estimates": {},
+        "cache": {
+          "cancelled": 0,
+          "completed": 0,
+          "decoded_bytes": 0,
+          "decoded_hits": 0,
+          "decoded_misses": 0,
+          "decoded_samples": 0,
+          "error": "",
+          "prepared_bytes": 0,
+          "prepared_evictions": 0,
+          "prepared_hits": 0,
+          "prepared_misses": 0,
+          "prepared_pairs": 0,
+          "trace_dropped": 0,
+          "worker_active": false,
+          "working_index": -1
+        }
+      },
+      "stages": {
+        "g3_field_gpu_stage": {
+          "count": 122,
+          "max_ms": 0.638,
+          "mean_ms": 0.17349180327868854,
+          "p50_ms": 0.159,
+          "p95_ms": 0.2,
+          "samples_collected": 122,
+          "total_ms": 21.166000000000004
+        },
+        "g3_sample": {
+          "count": 355,
+          "max_ms": 6.319,
+          "mean_ms": 3.7364929577464787,
+          "p50_ms": 2.844,
+          "p95_ms": 5.864,
+          "samples_collected": 355,
+          "total_ms": 1326.455
+        },
+        "g3_tick": {
+          "count": 4268,
+          "max_ms": 6.422,
+          "mean_ms": 0.4186961105904444,
+          "p50_ms": 0.098,
+          "p95_ms": 2.88,
+          "samples_collected": 4268,
+          "total_ms": 1786.9950000000167
+        }
+      }
+    },
+    {
+      "cache_mib": 256.0,
+      "case": "03B",
+      "device": "NVIDIA GeForce RTX 3070 Ti",
+      "duration_seconds": 11.998881,
+      "memory": {
+        "VmHWM": 356098048,
+        "VmRSS": 356098048,
+        "VmSwap": 0
+      },
+      "open_ms": 189.174,
+      "prebuffer_ms": 0.0,
+      "renderer": "gl_compatibility",
+      "callbacks_summary": {
+        "count": 2872,
+        "callbacks_per_second": 239.3556532479987,
+        "p95_ms": 4.994599999999998,
+        "p99_ms": 48.56359,
+        "max_ms": 51.377,
+        "over_50ms": 10,
+        "buffering_seconds": 0.0,
+        "buffering_callbacks": 0,
+        "transitions": 119,
+        "wraps": 2,
+        "distinct_indices": 40
+      },
+      "mode": "before",
+      "particle": {
+        "full_preload": false,
+        "budget_message": "",
+        "decoded_limit": 0,
+        "prepared_limit": 0,
+        "estimates": {},
+        "cache": {
+          "cancelled": 0,
+          "completed": 0,
+          "decoded_bytes": 0,
+          "decoded_hits": 0,
+          "decoded_misses": 0,
+          "decoded_samples": 0,
+          "error": "",
+          "prepared_bytes": 0,
+          "prepared_evictions": 0,
+          "prepared_hits": 0,
+          "prepared_misses": 0,
+          "prepared_pairs": 0,
+          "trace_dropped": 0,
+          "worker_active": false,
+          "working_index": -1
+        }
+      },
+      "stages": {
+        "g3_channel_decode": {
+          "count": 39,
+          "max_ms": 16.357,
+          "mean_ms": 15.473820512820511,
+          "p50_ms": 15.444,
+          "p95_ms": 16.124,
+          "samples_collected": 39,
+          "total_ms": 603.4789999999999
+        },
+        "g3_read_sample": {
+          "count": 333,
+          "max_ms": 21.031,
+          "mean_ms": 4.208714714714719,
+          "p50_ms": 2.135,
+          "p95_ms": 20.035,
+          "samples_collected": 333,
+          "total_ms": 1401.5020000000015
+        },
+        "g3_sample": {
+          "count": 333,
+          "max_ms": 51.346,
+          "mean_ms": 16.558651651651644,
+          "p50_ms": 4.863,
+          "p95_ms": 49.222,
+          "samples_collected": 333,
+          "total_ms": 5514.030999999997
+        },
+        "g3_tick": {
+          "count": 2872,
+          "max_ms": 51.365,
+          "mean_ms": 1.9396918523676945,
+          "p50_ms": 0.009,
+          "p95_ms": 4.989,
+          "samples_collected": 2872,
+          "total_ms": 5570.795000000018
+        }
+      }
+    },
+    {
+      "cache_mib": 256.0,
+      "case": "03B",
+      "device": "NVIDIA GeForce RTX 3070 Ti",
+      "duration_seconds": 12.009875,
+      "field": {
+        "buffering": false,
+        "cache": {
+          "active": false,
+          "bytes": 131661824,
+          "cancelled": 0,
+          "completed": 41,
+          "error": "",
+          "evictions": 0,
+          "frames": 41,
+          "limit": 134217728,
+          "test_barrier_waiting": false,
+          "worker_ms": 2383.129000000001,
+          "worker_thread": 45
+        },
+        "enabled": true,
+        "error": "",
+        "gpu_uploads": 123,
+        "staged_textures": 0
+      },
+      "memory": {
+        "VmHWM": 406286336,
+        "VmRSS": 406286336,
+        "VmSwap": 0
+      },
+      "open_ms": 193.423,
+      "prebuffer_ms": 0.0,
+      "renderer": "gl_compatibility",
+      "callbacks_summary": {
+        "count": 4263,
+        "callbacks_per_second": 354.9578992287597,
+        "p95_ms": 2.8718999999999997,
+        "p99_ms": 5.918940000000001,
+        "max_ms": 6.485,
+        "over_50ms": 0,
+        "buffering_seconds": 0.0,
+        "buffering_callbacks": 0,
+        "transitions": 120,
+        "wraps": 3,
+        "distinct_indices": 40
+      },
+      "mode": "after",
+      "particle": {
+        "policy": "adaptive",
+        "strategy": "rolling",
+        "memory": {},
+        "full_preload": false,
+        "budget_message": "",
+        "decoded_limit": 0,
+        "prepared_limit": 0,
+        "estimates": {},
+        "cache": {
+          "cancelled": 0,
+          "completed": 0,
+          "decoded_bytes": 0,
+          "decoded_hits": 0,
+          "decoded_misses": 0,
+          "decoded_samples": 0,
+          "error": "",
+          "prepared_bytes": 0,
+          "prepared_evictions": 0,
+          "prepared_hits": 0,
+          "prepared_misses": 0,
+          "prepared_pairs": 0,
+          "trace_dropped": 0,
+          "worker_active": false,
+          "working_index": -1
+        }
+      },
+      "stages": {
+        "g3_field_gpu_stage": {
+          "count": 123,
+          "max_ms": 0.631,
+          "mean_ms": 0.17401626016260155,
+          "p50_ms": 0.154,
+          "p95_ms": 0.244,
+          "samples_collected": 123,
+          "total_ms": 21.40399999999999
+        },
+        "g3_sample": {
+          "count": 355,
+          "max_ms": 6.352,
+          "mean_ms": 3.727605633802819,
+          "p50_ms": 2.834,
+          "p95_ms": 5.893,
+          "samples_collected": 355,
+          "total_ms": 1323.3000000000009
+        },
+        "g3_tick": {
+          "count": 4263,
+          "max_ms": 6.475,
+          "mean_ms": 0.41662772695285505,
+          "p50_ms": 0.096,
+          "p95_ms": 2.864,
+          "samples_collected": 4263,
+          "total_ms": 1776.084000000021
+        }
+      }
+    }
+  ],
+  "performance_checks": [
+    {
+      "name": "02B cache 256 MiB zero playback underflow",
+      "passed": true
+    },
+    {
+      "name": "02B cache 256 MiB zero callbacks >=50 ms",
+      "passed": true
+    },
+    {
+      "name": "02B cache 256 MiB traverses retained intervals",
+      "passed": true
+    },
+    {
+      "name": "02B cache 256 MiB automatically preloads all pairs",
+      "passed": true
+    },
+    {
+      "name": "02B cache 256 MiB no prepared-pair churn",
+      "passed": true
+    },
+    {
+      "name": "02B cache 256 MiB bounded particle caches",
+      "passed": true
+    },
+    {
+      "name": "03B cache 0 MiB zero playback underflow",
+      "passed": true
+    },
+    {
+      "name": "03B cache 0 MiB zero callbacks >=50 ms",
+      "passed": true
+    },
+    {
+      "name": "03B cache 0 MiB traverses retained intervals",
+      "passed": true
+    },
+    {
+      "name": "03B cache 0 MiB bounded CPU preparation and GPU staging",
+      "passed": true
+    },
+    {
+      "name": "03B cache 0 MiB improves callback p99",
+      "passed": true
+    },
+    {
+      "name": "03B cache 0 MiB no field preparation errors",
+      "passed": true
+    },
+    {
+      "name": "03B cache 256 MiB zero playback underflow",
+      "passed": true
+    },
+    {
+      "name": "03B cache 256 MiB zero callbacks >=50 ms",
+      "passed": true
+    },
+    {
+      "name": "03B cache 256 MiB traverses retained intervals",
+      "passed": true
+    },
+    {
+      "name": "03B cache 256 MiB bounded CPU preparation and GPU staging",
+      "passed": true
+    },
+    {
+      "name": "03B cache 256 MiB improves callback p99",
+      "passed": true
+    },
+    {
+      "name": "03B cache 256 MiB no field preparation errors",
+      "passed": true
+    }
+  ],
+  "tests": [
+    {
+      "path": "results/perf-maintenance/final-playback/results.json",
+      "sha256": "944f9718c032a5e8c574d1e0a3aa151421c3c0f55710d4283c2dc80deb53e193",
+      "checks": 2457,
+      "failures": []
+    },
+    {
+      "path": "results/perf-maintenance/final-headless/fixtures/maintenance-results.json",
+      "sha256": "9bf3bc85e02be58e35a79eb09e23fd35134388c6e898332074c7da87e5e95a77",
+      "checks": 66,
+      "failures": []
+    },
+    {
+      "path": "results/perf-maintenance/final-headless/fixtures/lifecycle-results.json",
+      "sha256": "c0612b7f99147c97eb97157d2a5e95418d8d8961f62abf3bf0d00928a9ea6bb1",
+      "checks": 38,
+      "failures": []
+    },
+    {
+      "path": "results/perf-maintenance/field-headless/checks.json",
+      "sha256": "5f88ab9fef228c6890f25151c47267c4cee3f95f267d720ba63cbad92165097c",
+      "checks": 452,
+      "failures": []
+    },
+    {
+      "path": "results/perf-maintenance/field-gl_compatibility/checks.json",
+      "sha256": "4b1d95f044d642674cd4ef7b2459d8eb190e1b9ecd20c134550bebd94e78de5b",
+      "checks": 459,
+      "failures": []
+    },
+    {
+      "path": "results/perf-maintenance/field-forward_plus/checks.json",
+      "sha256": "27c943a2538db4d7371f397f4afcdccbbd71ab0219105642d344dc8267e1e99e",
+      "checks": 459,
+      "failures": []
+    },
+    {
+      "path": "results/perf-maintenance/final-headless/fixtures/images-gl_compatibility.json",
+      "sha256": "4adc6210081ac21faaccd6a0a7b9c80e7eec50bf5f3d43e14f8d7cfba8070d0b",
+      "checks": 4,
+      "failures": []
+    },
+    {
+      "path": "results/perf-maintenance/final-headless/fixtures/images-forward_plus.json",
+      "sha256": "da766f76d7c2eac5b2f56f8b88e9ee093b6ef7e72b05799d0fd6e4b335eb8322",
+      "checks": 4,
+      "failures": []
+    },
+    {
+      "path": "results/perf-maintenance/chunks/checks.json",
+      "sha256": "1af4cc1ccab6847fab5af57f80deaee4faaa633023dbda20dadf494aa84eacf3",
+      "checks": 48,
+      "failures": []
+    },
+    {
+      "path": "results/perf-maintenance/temporal/temporal.json",
+      "sha256": "74d8e642bc3d1e498f5a2fd82ac4f4c68b080daa118a16266eb761b885f6da68",
+      "result": {
+        "backend": "forward_plus",
+        "checks": 23,
+        "failures": [],
+        "integral_range": [
+          "72",
+          "72"
+        ],
+        "named_results": 3,
+        "native_rows": 3.0
+      }
+    },
+    {
+      "path": "results/perf-maintenance/documentation/report.json",
+      "sha256": "c34fd625dfc1a46e2b55b445560d3d8adcfb107276c9bb28da27b0164fcffac2",
+      "result": {
+        "status": "PASS",
+        "documents": [
+          "AGENTS.md",
+          "CONTRIBUTING.md",
+          "G2B_FORMAT.md",
+          "G2_STORAGE.md",
+          "G3_FORMAT.md",
+          "G3_GUIDE.md",
+          "G3_REPORT.md",
+          "G4_DESIGN.md",
+          "G4_REPORT.md",
+          "INSPECTION_STATE.md",
+          "PLAYBACK_PERFORMANCE.md",
+          "QUICKSTART.md",
+          "README.md",
+          "SIMSCOPE_ACCEPTANCE_MATRIX.md",
+          "SIMSCOPE_API.md",
+          "SIMSCOPE_NEXT_DESIGN.md",
+          "VBC_FORMAT_SPEC.md",
+          "VIDEO_EXPORT.md",
+          "docs/CAPTURE_FORMAT_AND_API.md",
+          "docs/CAPTURE_FORMAT_POLICY.md",
+          "docs/CURRENT_STATUS.md",
+          "docs/EVIDENCE_INDEX.md",
+          "docs/EXPERIMENT_LESSONS.md",
+          "docs/G4_ACCEPTANCE.md",
+          "docs/G4_GUIDE.md",
+          "docs/G4_SCHEMAS.md",
+          "docs/LEGACY_API.md",
+          "docs/LEGACY_SUPPORT.md",
+          "docs/MAINTENANCE_REPORT.md",
+          "docs/NUMERICAL_VALIDATION_GUIDE.md",
+          "docs/PERFORMANCE_MAINTENANCE_REPORT.md",
+          "docs/REPOSITORY_BOUNDARY.md",
+          "docs/SIMSCOPE_HANDBOOK.md",
+          "docs/SIMULATION_INTEGRATION_GUIDE.md",
+          "docs/START_HERE.md",
+          "tests/fixtures/README.md",
+          "viewer/README.md"
+        ],
+        "missing_local_links": [],
+        "examples": [
+          {
+            "document": "SIMSCOPE_API.md",
+            "status": "PASS",
+            "source_unchanged": true,
+            "document_sha256": "bbb332d3a64e915304a169b1279e37d16f8e96d2ce90848f2e4012b200014833"
+          },
+          {
+            "document": "docs/SIMULATION_INTEGRATION_GUIDE.md",
+            "status": "PASS",
+            "source_unchanged": true,
+            "document_sha256": "0a7cad08b44024c61aeb2c08936b894d8f462b016ee200b1b32ae5f90a2448e1"
+          },
+          {
+            "document": "G3_GUIDE.md",
+            "status": "PASS",
+            "source_unchanged": true,
+            "document_sha256": "3b506363a68b5828c8ae90fdc013dbb0c0442a480780a2df8206e8f21bb32e7d"
+          }
+        ]
+      }
+    }
+  ],
+  "raw_result_sha256": {
+    "results/perf-maintenance/final-retained/02B-256-before.json": "a662b082264ee6aeec5010db088ab9863e5c1c912827937b77fc82538e63d626",
+    "results/perf-maintenance/final-retained/02B-256-after.json": "2b77c6342f41dd58fcf39bf8e386a49bebe2785a1f1b03a71aaa0281c2a881f2",
+    "results/perf-maintenance/final-retained/03B-0-before.json": "6321aa28c455f40cc56b955bc84a4711d6babab7751be3b17f0d4cb13e281118",
+    "results/perf-maintenance/final-retained/03B-0-after.json": "b399c4cd3d387eaa371dc13b8a57dd7e48b82c5ee7b83c328881194b643ffa99",
+    "results/perf-maintenance/final-retained/03B-256-before.json": "5db5cbe77f85eb4696727243b14449a4b6b60ab94150ca951f26c4a0d6072781",
+    "results/perf-maintenance/final-retained/03B-256-after.json": "9ba1c198b3b410dc2a2e2a6daeb180712acc14e6184dcbcb54d1d6bac7b71e4c",
+    "results/perf-maintenance/final-retained/summary.json": "df68ca544b480c9e66119ea49bb84d22755a6957a4e8959f12eff121ae04ae52"
+  },
+  "scope": "Godot 4.7.2; OpenGL timing at 1280x800, VSync off, physical 1x, no trails; sequential non-isolated desktop runs; retained captures read only; scientific generators not rerun; image equality also on Vulkan; no universal FPS/RSS/swap guarantee.",
+  "acceptance": {
+    "date": "2026-09-13",
+    "reviewer": "user",
+    "items": [
+      "PERF-001",
+      "PERF-002"
+    ],
+    "implementation_commit": "008e13f19ce2740f7ab4189c0bf0b312bbb788e9"
+  }
+}

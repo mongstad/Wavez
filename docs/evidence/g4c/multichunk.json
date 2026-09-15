@@ -1,0 +1,19 @@
+{
+  "exit_code": 0,
+  "source_hashes": {
+    "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/multichunk-godot-1/none.ssc": "d6393eda57c705e20501b5eab332fd8b885b665e9542e08a3732a89f33962c2e",
+    "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/multichunk-godot-1/zstd.ssc": "3db2d7f87be67dd782ecf05d8dcebbcbfd44bdb4e000a7e1a9260e4941b9f12f"
+  },
+  "source_unchanged": true,
+  "result": {
+    "checks": 48,
+    "failures": []
+  },
+  "issue": "SIMSCP3 non-volume chunk iterator rebound its full backing buffer after the first chunk",
+  "python_checks": 33,
+  "existing_g3_checks": 23,
+  "existing_g3_failures": 0,
+  "existing_g3_errors": 0,
+  "format_or_validation_relaxed": false,
+  "source_file_sha256": "66c4219c509f2f7226a2926896b01d2aef3885f592b63e23bad9c67e40dfe037"
+}

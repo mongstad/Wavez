@@ -1,0 +1,158 @@
+{
+  "checkpoint": "G4b definitions/picking/groups and exact member assets",
+  "base_commit": "77b507e",
+  "full_G4_gate": "NOT RUN",
+  "runtime": {
+    "python": "3.14.7",
+    "numpy": "2.4.3",
+    "godot": "4.7.2.stable.official.ed1daf0bf",
+    "skimage_optional": "0.26.0"
+  },
+  "python_full_suite": {
+    "passed": 113,
+    "skipped": 0
+  },
+  "followup_tests": {
+    "passed": 37,
+    "skipped": 0,
+    "scope": "source worker including forced crash/restart, selections and real extracted sphere"
+  },
+  "existing_G3_headless_playback": {
+    "checks": 2457,
+    "failures": 0
+  },
+  "viewer_reports": {
+    "selections-b-final-headless": {
+      "exit_code": 0,
+      "timed_out": false,
+      "source_unchanged": true,
+      "source_sha256": "ccf5401c188a585955250cc6c100446edeffe2d811143d97c9dcad35024145a0",
+      "result": {
+        "backend": "forward_plus",
+        "checks": 31,
+        "drawn": 5,
+        "failures": [],
+        "gpu_bytes": 12928,
+        "status": "Scene or camera changed during the gesture; repeat the pick on the committed view."
+      },
+      "category": "headless integration"
+    },
+    "selections-derived-3": {
+      "exit_code": 0,
+      "timed_out": false,
+      "source_unchanged": true,
+      "source_sha256": "46f293dbd061f024f1498151fd3ad30b9d8debc647848debd956cd72efa17492",
+      "result": {
+        "backend": "forward_plus",
+        "checks": 37,
+        "drawn": 17,
+        "failures": [],
+        "gpu_bytes": 18560,
+        "status": "4 selections \u2022 7 member references\n6 present references \u2022 17 preview markers\nOverlaps retained; preview may be thinned."
+      },
+      "category": "headless integration"
+    },
+    "selections-b-final-gl": {
+      "exit_code": 0,
+      "timed_out": false,
+      "source_unchanged": true,
+      "source_sha256": "f16e6b5dd9867a894e5d583a1abbcc206995bb5a0fd28e50fc42819be78d1543",
+      "result": {
+        "backend": "gl_compatibility",
+        "checks": 38,
+        "drawn": 17,
+        "failures": [],
+        "gpu_bytes": 18560,
+        "status": "4 selections \u2022 7 member references\n6 present references \u2022 17 preview markers\nOverlaps retained; preview may be thinned."
+      },
+      "category": "actual renderer integration; image requires inspection"
+    },
+    "selections-b-final-vk": {
+      "exit_code": 0,
+      "timed_out": false,
+      "source_unchanged": true,
+      "source_sha256": "4e09603a63d8862a19d05fa0690e783ba598178e6b7a7dbe199885111aca6240",
+      "result": {
+        "backend": "forward_plus",
+        "checks": 38,
+        "drawn": 17,
+        "failures": [],
+        "gpu_bytes": 18560,
+        "status": "4 selections \u2022 7 member references\n6 present references \u2022 17 preview markers\nOverlaps retained; preview may be thinned."
+      },
+      "category": "actual renderer integration; image requires inspection"
+    }
+  },
+  "cohort_profile": {
+    "count": 100000,
+    "exit_code": 0,
+    "source_sha256": "90dc94730f63c7c0a6e7ccde6dbce0324eb93209d3056e8a560fe012217682c8",
+    "source_unchanged": true,
+    "full_member_bytes_exact": true,
+    "failures": [],
+    "end_to_end_ms": 621.494,
+    "preview_gpu_bytes": 40960,
+    "stages": {
+      "g4_overlay_tick": {
+        "count": 133,
+        "max_ms": 0.497,
+        "mean_ms": 0.12486466165413539,
+        "p50_ms": 0.064,
+        "p95_ms": 0.418,
+        "samples_collected": 133,
+        "total_ms": 16.607000000000006
+      },
+      "g4_request": {
+        "count": 7,
+        "max_ms": 3.33,
+        "mean_ms": 0.7545714285714286,
+        "p50_ms": 0.356,
+        "p95_ms": 3.33,
+        "samples_collected": 7,
+        "total_ms": 5.282
+      },
+      "g4_result_commit": {
+        "count": 7,
+        "max_ms": 3.163,
+        "mean_ms": 1.7287142857142856,
+        "p50_ms": 1.982,
+        "p95_ms": 3.163,
+        "samples_collected": 7,
+        "total_ms": 12.100999999999999
+      },
+      "g4_worker_poll": {
+        "count": 133,
+        "max_ms": 6.024,
+        "mean_ms": 0.3788796992481202,
+        "p50_ms": 0.002,
+        "p95_ms": 4.184,
+        "samples_collected": 133,
+        "total_ms": 50.390999999999984
+      }
+    },
+    "peak_worker_rss_bytes": 95105024.0,
+    "peak_charged_bytes": 84792720.0,
+    "notes": "Isolated final G4b headless cohort publication; no idle G3 comparison or universal playback-rate claim."
+  },
+  "checkpoint_file_sha256": {
+    "simscope_export/analysis/__init__.py": "48dca038ee2510dfd2cc743e6048a747f3ae656f0a0e8733d90d08ea066b4778",
+    "simscope_export/analysis/contracts.py": "0ce0951d32452de58e1e961143f3f10125f655f081b9c4512c7dccfaba1c7274",
+    "simscope_export/analysis/source.py": "d410997802f3e7e5d9f7d1919ea1828df702c654fb7faa20a07ba63423aadd41",
+    "simscope_export/analysis/sampling.py": "c6f2cf4195cb71005c31bbc86ced6ee74d3142a9d6c50fc1c5cc85aca9d99fd1",
+    "simscope_export/analysis/jobs.py": "e7062fe1a8df813c524db45b1d6da4baa8bdebea94ba47856198d273c3e9ef7f",
+    "simscope_export/analysis/selectors.py": "58edf281c8d684ac1e2254d064c061660352484bd91c5ec54164fc061ead0ff8",
+    "simscope_export/analysis/selection_jobs.py": "9cac4567432b269128669514ef405f5be043547fff2c306520ff3b3b03530754",
+    "simscope_export/analysis/picking.py": "737f102759e25c63b5d6a4927134127a5b68fc942bff9a61bb56c8673e693b3b",
+    "simscope_export/analysis/memo.py": "a343cb134c2ee581835dd7b1a9934a4d7ad3e0613c11639b35d0ac26020bd6c4",
+    "simscope_export/analysis/member_assets.py": "73abe769d304a39f9cb6783ad71d8ebba77bfb1548260bd06e4d4889478c7f08",
+    "simscope_export/analysis/derived.py": "f2cc8f194fb3bb77ab66af53d2899c2884536d1f923dfbc847e60409059c0ac4",
+    "viewer/selection/selection_state.gd": "aa3c2737cd30ec3e5cf2fc426a1cc682e2b4554412c705b6934b07f834906ca9",
+    "viewer/selection/selection_overlay.gd": "fd697bd74a2157f768ea0f036ed4858e238df8b150793c6e7bfd4d5c2e5a71d7",
+    "viewer/selection/selection_controller.gd": "4a66a872a894d8eb13001198f4b1a9115ff1c9f1c91fffcbe54c51df866161c8",
+    "viewer/selection/test_selection.gd": "f99c2820cf3637fafe36f5d6954de3eaaa9f4c1e8998e70ef010c10fdbf58814",
+    "viewer/selection/selection_gesture.gd": "729eeaa45a93de5d85c286a8ea114b8402bbb42a0e0053cc136154a012740e53",
+    "viewer/selection/profile_assets.gd": "06436e89f31e773a293e53d844beb2d404e094383b7ba86ee47df1981b7c25e1",
+    "viewer/analysis/analysis_jobs.gd": "09314226fc08fc689501405c76fd48c17dd8622e24b7634550a5e2359bb7a68e",
+    "tools/analyze_selection.py": "ddf8dd4ed5e50aaab79d9311071da4d18209235231ac672f2a27b88f28b4c434"
+  }
+}

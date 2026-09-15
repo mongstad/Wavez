@@ -1,0 +1,129 @@
+{
+  "status": "PASS",
+  "scope": "G4c native viewer checkpoint; full A01-A23 and G4d-G4f pending",
+  "python": {
+    "command": "/tmp/simscope-g4-validation/bin/python -m unittest discover -s tests -q",
+    "tests": 163,
+    "passed": 163
+  },
+  "viewer": {
+    "headless": {
+      "command": [
+        "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+        "--path",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+        "--audio-driver",
+        "Dummy",
+        "--log-file",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/temporal-native-final-headless/godot.log",
+        "--headless",
+        "--script",
+        "analysis/test_temporal.gd",
+        "--",
+        "--temporal-fixture=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/temporal-native-final-headless"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "seconds": 1.551580704999651,
+      "source_unchanged": true,
+      "source_sha256": "36e9660b1dd91e87ab35911344666f700da0e05fea50861e22c0e7ba55b385a9",
+      "category": "headless integration",
+      "result": {
+        "backend": "forward_plus",
+        "checks": 23,
+        "failures": [],
+        "integral_range": [
+          "72",
+          "72"
+        ],
+        "named_results": 3,
+        "native_rows": 3.0
+      }
+    },
+    "compatibility": {
+      "command": [
+        "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+        "--path",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+        "--audio-driver",
+        "Dummy",
+        "--log-file",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/temporal-native-final-gl/godot.log",
+        "--rendering-method",
+        "gl_compatibility",
+        "--resolution",
+        "1100x820",
+        "--script",
+        "analysis/test_temporal.gd",
+        "--",
+        "--temporal-fixture=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/temporal-native-final-gl"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "seconds": 2.218979235000006,
+      "source_unchanged": true,
+      "source_sha256": "0e687bf300442018d256c3b434d0a64870c908a296888b1912264540e4d12ece",
+      "category": "actual renderer integration; image requires inspection",
+      "result": {
+        "backend": "gl_compatibility",
+        "checks": 24,
+        "failures": [],
+        "integral_range": [
+          "72",
+          "72"
+        ],
+        "named_results": 3,
+        "native_rows": 3.0
+      }
+    },
+    "forward_plus": {
+      "command": [
+        "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+        "--path",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+        "--audio-driver",
+        "Dummy",
+        "--log-file",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/temporal-native-vk-1/godot.log",
+        "--rendering-method",
+        "forward_plus",
+        "--resolution",
+        "1100x820",
+        "--script",
+        "analysis/test_temporal.gd",
+        "--",
+        "--temporal-fixture=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/temporal-native-vk-1"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "seconds": 2.7005744149992097,
+      "source_unchanged": true,
+      "source_sha256": "59ad14ca7a69fefb735a502257573a62a01b66b809b2c9772313cacbe7aa6f0a",
+      "category": "actual renderer integration; image requires inspection",
+      "result": {
+        "backend": "forward_plus",
+        "checks": 24,
+        "failures": [],
+        "integral_range": [
+          "72",
+          "72"
+        ],
+        "named_results": 3,
+        "native_rows": 3.0
+      }
+    }
+  },
+  "regressions": {
+    "selection_checks": 31,
+    "playback_checks": 2457
+  },
+  "images_inspected": [
+    "results/g4/temporal-native-final-gl/temporal.png",
+    "results/g4/temporal-native-vk-1/temporal.png"
+  ],
+  "limitations": [
+    "No target 100k performance claim",
+    "No whole-gate A01-A23 claim",
+    "G4d comparisons and G4e state/export pending"
+  ]
+}

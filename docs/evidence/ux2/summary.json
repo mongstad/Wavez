@@ -1,0 +1,100 @@
+{
+  "status": "PASS",
+  "renderer": "forward_plus",
+  "commands": [
+    {
+      "name": "import",
+      "command": [
+        "/home/Nozba/Downloads/Godot_v4.7.2-stable_linux.x86_64",
+        "--headless",
+        "--path",
+        "viewer",
+        "--editor",
+        "--import"
+      ],
+      "exit_code": 0,
+      "clean_log": true
+    },
+    {
+      "name": "scene",
+      "command": [
+        "/tmp/perf003-analysis-runtime/bin/python",
+        "-m",
+        "examples.scene_demo",
+        "--small",
+        "--output",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/ux2-accepted-candidate/scene.ssc"
+      ],
+      "exit_code": 0,
+      "clean_log": true
+    },
+    {
+      "name": "identity",
+      "command": [
+        "/tmp/perf003-analysis-runtime/bin/python",
+        "-m",
+        "examples.identity_demo",
+        "--output",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/ux2-accepted-candidate/identity.ssc"
+      ],
+      "exit_code": 0,
+      "clean_log": true
+    },
+    {
+      "name": "native",
+      "command": [
+        "/home/Nozba/Downloads/Godot_v4.7.2-stable_linux.x86_64",
+        "--path",
+        "viewer",
+        "--rendering-method",
+        "forward_plus",
+        "--script",
+        "res://ui/lab/test_ui_foundation.gd",
+        "--",
+        "--ux2-output=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/ux2-accepted-candidate/native"
+      ],
+      "exit_code": 0,
+      "clean_log": true
+    },
+    {
+      "name": "isolation",
+      "command": [
+        "/home/Nozba/Downloads/Godot_v4.7.2-stable_linux.x86_64",
+        "--path",
+        "viewer",
+        "--rendering-method",
+        "forward_plus",
+        "--script",
+        "res://ui/lab/test_viewer_isolation.gd",
+        "--",
+        "--ux2-output=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/ux2-accepted-candidate/isolation",
+        "--ux2-fixture=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/ux2-accepted-candidate/scene.ssc"
+      ],
+      "exit_code": 0,
+      "clean_log": true
+    },
+    {
+      "name": "hud",
+      "command": [
+        "/home/Nozba/Downloads/Godot_v4.7.2-stable_linux.x86_64",
+        "--path",
+        "viewer",
+        "--rendering-method",
+        "forward_plus",
+        "--script",
+        "res://scene/test_hud_layout.gd",
+        "--",
+        "--hud-output=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/ux2-accepted-candidate/hud",
+        "--hud-fixture=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/ux2-accepted-candidate/identity.ssc"
+      ],
+      "exit_code": 0,
+      "clean_log": true
+    }
+  ],
+  "native_checks": 1174,
+  "contrast_pairs": 71,
+  "oracle_cases": 300,
+  "isolated_checks": 6,
+  "hud_cases": 6,
+  "source_baseline": "7037f5f"
+}

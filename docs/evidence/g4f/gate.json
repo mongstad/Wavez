@@ -1,0 +1,939 @@
+{
+  "status": "PASS for G4a\u2013G4f / A01\u2013A23 declared acceptance; awaiting user review",
+  "date": "2026-09-12",
+  "worktree_parent": "1308c934a8318fe9bd12cf8bff09c6395adf87bb",
+  "code_inventory": "source-files.json",
+  "hardware": {
+    "os": "Linux-7.2.4-200.fc44.x86_64-x86_64-with-glibc2.43",
+    "cpu": "AMD Ryzen 7 5800X 8-Core Processor",
+    "ram_bytes": 50404433920,
+    "gpu": "NVIDIA GeForce RTX 3070 Ti",
+    "driver": "610.57.04",
+    "godot": "4.7.2.stable.official.ed1daf0bf",
+    "python": "3.14.7",
+    "numpy": "2.4.3",
+    "scikit_image": "0.26.0",
+    "vulkan": "1.4.341"
+  },
+  "registry": "SIMSCOPE_ACCEPTANCE_MATRIX.md",
+  "ledger": "docs/G4_ACCEPTANCE.md",
+  "source_immutable": true,
+  "validation": [
+    {
+      "name": "Complete Python regression",
+      "status": "PASS",
+      "tests": 225,
+      "skips": 0,
+      "command": "/tmp/simscope-g4-validation/bin/python -m unittest discover -s tests -q",
+      "log": "results/g4/gate-python.log",
+      "log_sha256": "b445aa8844aab2cfb3144fbfebe66a9a75c1d09830fd458a18d2a3f1ad792ebc"
+    },
+    {
+      "name": "Source/worker foundation",
+      "status": "PASS",
+      "checks": 160,
+      "category": "headless source/protocol; not rendered acceptance",
+      "command": [
+        "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+        "--headless",
+        "--path",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+        "--audio-driver",
+        "Dummy",
+        "--log-file",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-foundation-1/godot.log",
+        "--script",
+        "analysis/test_foundation.gd",
+        "--",
+        "--foundation=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-foundation-1"
+      ],
+      "source_sha256": "5faaec16702b3d6299dc8cb99d7bfb183674472d8795e611ddda208863ff4b87",
+      "source_unchanged": true,
+      "report": "results/g4/gate-foundation-1/report.json",
+      "report_sha256": "d8a759c938f8a0830100902fe85c74f99cc5d46a1df25f8da92daf3d841a63ce"
+    },
+    {
+      "name": "Selections and exact derived artifact",
+      "status": "PASS",
+      "checks": 38,
+      "category": "actual renderer integration; image requires inspection",
+      "command": [
+        "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+        "--path",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+        "--audio-driver",
+        "Dummy",
+        "--log-file",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-selection-gl-1/godot.log",
+        "--rendering-method",
+        "gl_compatibility",
+        "--resolution",
+        "1100x820",
+        "--script",
+        "selection/test_selection.gd",
+        "--",
+        "--selection-fixture=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-selection-gl-1"
+      ],
+      "source_sha256": "2ed7a05fec038353424022bc8924bef90de94dfec3426e4eb68a964a1b38f6af",
+      "source_unchanged": true,
+      "report": "results/g4/gate-selection-gl-1/report.json",
+      "report_sha256": "6ef1fa7ff7f1dcd5dda6d0c1d34372df8b9a4c4a2936d40fcca62a1fbc7da444"
+    },
+    {
+      "name": "Space-time and durable state",
+      "status": "PASS",
+      "checks": 37,
+      "category": "actual renderer; image inspection required",
+      "command": [
+        "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+        "--path",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+        "--audio-driver",
+        "Dummy",
+        "--log-file",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-state-gl-1/godot.log",
+        "--rendering-method",
+        "gl_compatibility",
+        "--resolution",
+        "1100x820",
+        "--script",
+        "analysis/test_space_time.gd",
+        "--",
+        "--space-time-fixture=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-state-gl-1"
+      ],
+      "source_sha256": "74c9fa1930043b37fb7b57050d56f023ac265037187408bd8c001c01e09fabda",
+      "source_unchanged": true,
+      "report": "results/g4/gate-state-gl-1/report.json",
+      "report_sha256": "dd4daf8e2a521332299f499130c878705762e74cf706552c2bbf44a41f02f69c"
+    },
+    {
+      "name": "Selection PNG/video and exact replay",
+      "status": "PASS",
+      "checks": 44,
+      "renderer": "gl_compatibility",
+      "runs": [
+        {
+          "command": [
+            "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+            "--headless",
+            "--path",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+            "--audio-driver",
+            "Dummy",
+            "--log-file",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-render-gl-1/setup.log",
+            "--script",
+            "analysis/test_render_state.gd",
+            "--",
+            "--g4-render-fixture=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-render-gl-1"
+          ],
+          "exit_code": 0,
+          "seconds": 1.093083972002205
+        },
+        {
+          "command": [
+            "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+            "--path",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+            "--rendering-method",
+            "gl_compatibility",
+            "--resolution",
+            "640x360",
+            "--audio-driver",
+            "Dummy",
+            "--log-file",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-render-gl-1/normal/renderer.log",
+            "--fixed-fps",
+            "4",
+            "--disable-vsync",
+            "--",
+            "--simscope-render-job=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-render-gl-1/normal/job.json"
+          ],
+          "exit_code": 0,
+          "seconds": 1.8152468309999676
+        },
+        {
+          "command": [
+            "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+            "--path",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+            "--rendering-method",
+            "gl_compatibility",
+            "--resolution",
+            "640x360",
+            "--audio-driver",
+            "Dummy",
+            "--log-file",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-render-gl-1/delayed/renderer.log",
+            "--fixed-fps",
+            "4",
+            "--disable-vsync",
+            "--",
+            "--simscope-render-job=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-render-gl-1/delayed/job.json"
+          ],
+          "exit_code": 0,
+          "seconds": 1.8004996560011932
+        },
+        {
+          "command": [
+            "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+            "--path",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+            "--rendering-method",
+            "gl_compatibility",
+            "--resolution",
+            "640x360",
+            "--audio-driver",
+            "Dummy",
+            "--log-file",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-render-gl-1/replay.log",
+            "--script",
+            "analysis/test_render_state.gd",
+            "--",
+            "--g4-render-fixture=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-render-gl-1",
+            "--verify-sidecar=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-render-gl-1/normal/inspection-00000001.json"
+          ],
+          "exit_code": 0,
+          "seconds": 1.612359483999171
+        }
+      ],
+      "report": "results/g4/gate-render-gl-1/report.json",
+      "report_sha256": "97dff407e9924a2f8ec2adae3b139df522213d46565d0de7d4b4fff577aa3c44",
+      "image_inspection": "Selection/state/matched PNGs inspected; scientific assertions and pixel equality are additional checks"
+    },
+    {
+      "name": "Final matched pair including timing provenance",
+      "status": "PASS",
+      "checks": 50,
+      "renderer": "gl_compatibility",
+      "runs": [
+        {
+          "command": [
+            "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+            "--headless",
+            "--path",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+            "--log-file",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-matched-gl-1/left-input/godot.log",
+            "--script",
+            "analysis/test_render_state.gd",
+            "--",
+            "--g4-render-fixture=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-matched-gl-1/left-input",
+            "--g4-render-visible"
+          ],
+          "exit_code": 0,
+          "seconds": 1.1126386830001138
+        },
+        {
+          "command": [
+            "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+            "--headless",
+            "--path",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+            "--log-file",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-matched-gl-1/right-input/godot.log",
+            "--script",
+            "analysis/test_render_state.gd",
+            "--",
+            "--g4-render-fixture=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-matched-gl-1/right-input",
+            "--g4-render-visible"
+          ],
+          "exit_code": 0,
+          "seconds": 1.1089192170002207
+        },
+        {
+          "command": [
+            "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+            "--path",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+            "--rendering-method",
+            "gl_compatibility",
+            "--resolution",
+            "640x360",
+            "--audio-driver",
+            "Dummy",
+            "--log-file",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-matched-gl-1/native.log",
+            "--script",
+            "analysis/test_matched_render.gd",
+            "--",
+            "--matched-fixture=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-matched-gl-1",
+            "--render-pair"
+          ],
+          "exit_code": 0,
+          "seconds": 5.224410410999553
+        }
+      ],
+      "report": "results/g4/gate-matched-gl-1/report.json",
+      "report_sha256": "8f7c59f3d78b2531a5809a6701c240940cd023c000c86246a87fc0b6e731d201",
+      "image_inspection": "Selection/state/matched PNGs inspected; scientific assertions and pixel equality are additional checks"
+    },
+    {
+      "name": "Selections and exact derived artifact",
+      "status": "PASS",
+      "checks": 38,
+      "category": "actual renderer integration; image requires inspection",
+      "command": [
+        "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+        "--path",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+        "--audio-driver",
+        "Dummy",
+        "--log-file",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-selection-vk-1/godot.log",
+        "--rendering-method",
+        "forward_plus",
+        "--resolution",
+        "1100x820",
+        "--script",
+        "selection/test_selection.gd",
+        "--",
+        "--selection-fixture=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-selection-vk-1"
+      ],
+      "source_sha256": "afb2c24609a083a350c2ffc0736f89a0740a8e90ad3d5abc28505b514a838de3",
+      "source_unchanged": true,
+      "report": "results/g4/gate-selection-vk-1/report.json",
+      "report_sha256": "1cb99d21b25c2db9a9f43cbc659785e550992820056a73bad11b6f96540b242f"
+    },
+    {
+      "name": "Space-time and durable state",
+      "status": "PASS",
+      "checks": 37,
+      "category": "actual renderer; image inspection required",
+      "command": [
+        "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+        "--path",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+        "--audio-driver",
+        "Dummy",
+        "--log-file",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-state-vk-1/godot.log",
+        "--rendering-method",
+        "forward_plus",
+        "--resolution",
+        "1100x820",
+        "--script",
+        "analysis/test_space_time.gd",
+        "--",
+        "--space-time-fixture=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-state-vk-1"
+      ],
+      "source_sha256": "e4eab6d0260a00a71a3f466e9610c445a820b5444b72f616066583de514ea011",
+      "source_unchanged": true,
+      "report": "results/g4/gate-state-vk-1/report.json",
+      "report_sha256": "56406a24240c966a5e2faa27c171a9b720f885e8cacf53864b0d651d226bca48"
+    },
+    {
+      "name": "Selection PNG/video and exact replay",
+      "status": "PASS",
+      "checks": 44,
+      "renderer": "forward_plus",
+      "runs": [
+        {
+          "command": [
+            "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+            "--headless",
+            "--path",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+            "--audio-driver",
+            "Dummy",
+            "--log-file",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-render-vk-1/setup.log",
+            "--script",
+            "analysis/test_render_state.gd",
+            "--",
+            "--g4-render-fixture=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-render-vk-1"
+          ],
+          "exit_code": 0,
+          "seconds": 1.0957626850031374
+        },
+        {
+          "command": [
+            "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+            "--path",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+            "--rendering-method",
+            "forward_plus",
+            "--resolution",
+            "640x360",
+            "--audio-driver",
+            "Dummy",
+            "--log-file",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-render-vk-1/normal/renderer.log",
+            "--fixed-fps",
+            "4",
+            "--disable-vsync",
+            "--",
+            "--simscope-render-job=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-render-vk-1/normal/job.json"
+          ],
+          "exit_code": 0,
+          "seconds": 2.439911490997474
+        },
+        {
+          "command": [
+            "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+            "--path",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+            "--rendering-method",
+            "forward_plus",
+            "--resolution",
+            "640x360",
+            "--audio-driver",
+            "Dummy",
+            "--log-file",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-render-vk-1/delayed/renderer.log",
+            "--fixed-fps",
+            "4",
+            "--disable-vsync",
+            "--",
+            "--simscope-render-job=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-render-vk-1/delayed/job.json"
+          ],
+          "exit_code": 0,
+          "seconds": 2.364766590999352
+        },
+        {
+          "command": [
+            "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+            "--path",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+            "--rendering-method",
+            "forward_plus",
+            "--resolution",
+            "640x360",
+            "--audio-driver",
+            "Dummy",
+            "--log-file",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-render-vk-1/replay.log",
+            "--script",
+            "analysis/test_render_state.gd",
+            "--",
+            "--g4-render-fixture=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-render-vk-1",
+            "--verify-sidecar=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-render-vk-1/normal/inspection-00000001.json"
+          ],
+          "exit_code": 0,
+          "seconds": 2.135225279998849
+        }
+      ],
+      "report": "results/g4/gate-render-vk-1/report.json",
+      "report_sha256": "d5ee3ef4895bad8e7ba93eeca605aa1f0ce207c5e0625ebe7d9c2d1d3bfdb767",
+      "image_inspection": "Selection/state/matched PNGs inspected; scientific assertions and pixel equality are additional checks"
+    },
+    {
+      "name": "Final matched pair including timing provenance",
+      "status": "PASS",
+      "checks": 50,
+      "renderer": "forward_plus",
+      "runs": [
+        {
+          "command": [
+            "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+            "--headless",
+            "--path",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+            "--log-file",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-matched-vk-1/left-input/godot.log",
+            "--script",
+            "analysis/test_render_state.gd",
+            "--",
+            "--g4-render-fixture=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-matched-vk-1/left-input",
+            "--g4-render-visible"
+          ],
+          "exit_code": 0,
+          "seconds": 1.0958733019979263
+        },
+        {
+          "command": [
+            "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+            "--headless",
+            "--path",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+            "--log-file",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-matched-vk-1/right-input/godot.log",
+            "--script",
+            "analysis/test_render_state.gd",
+            "--",
+            "--g4-render-fixture=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-matched-vk-1/right-input",
+            "--g4-render-visible"
+          ],
+          "exit_code": 0,
+          "seconds": 1.0866526109966799
+        },
+        {
+          "command": [
+            "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+            "--path",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+            "--rendering-method",
+            "forward_plus",
+            "--resolution",
+            "640x360",
+            "--audio-driver",
+            "Dummy",
+            "--log-file",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-matched-vk-1/native.log",
+            "--script",
+            "analysis/test_matched_render.gd",
+            "--",
+            "--matched-fixture=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-matched-vk-1",
+            "--render-pair"
+          ],
+          "exit_code": 0,
+          "seconds": 6.558776662001037
+        }
+      ],
+      "report": "results/g4/gate-matched-vk-1/report.json",
+      "report_sha256": "72d351a9feaf275d9145c8ac1c174e05771d70acfd0ef7bb21ed7fbcbecb023e",
+      "image_inspection": "Selection/state/matched PNGs inspected; scientific assertions and pixel equality are additional checks"
+    },
+    {
+      "name": "Space-time/state headless",
+      "status": "PASS",
+      "checks": 36,
+      "category": "headless integration",
+      "command": [
+        "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+        "--path",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+        "--audio-driver",
+        "Dummy",
+        "--log-file",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-state-headless-1/godot.log",
+        "--headless",
+        "--script",
+        "analysis/test_space_time.gd",
+        "--",
+        "--space-time-fixture=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-state-headless-1"
+      ],
+      "source_sha256": "1a60cd6390a83afb62c58b4817365f26becec6275ccffaa84cc3bad37d731580",
+      "source_unchanged": true,
+      "report": "results/g4/gate-state-headless-1/report.json",
+      "report_sha256": "d442a8efbe57d899eef79cd983db9616202b4963dd5e9b068dbf019b2f89600e"
+    },
+    {
+      "name": "Append/mutation/quota/cancel render failures",
+      "status": "PASS",
+      "checks": 20,
+      "renderer": "gl_compatibility",
+      "runs": [
+        {
+          "case": "append",
+          "command": [
+            "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+            "--path",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+            "--rendering-method",
+            "gl_compatibility",
+            "--resolution",
+            "640x360",
+            "--audio-driver",
+            "Dummy",
+            "--log-file",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-render-failures-1/append/render/godot.log",
+            "--",
+            "--simscope-render-job=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-render-failures-1/append/render/job.json"
+          ],
+          "exit_code": 0,
+          "progress": {
+            "current_frame": 1,
+            "elapsed_seconds": 0.629,
+            "encoder_pid": -1,
+            "intermediate_directory": "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-render-failures-1/append/render",
+            "message": "Saved /home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-render-failures-1/append/render/result.mp4",
+            "output_path": "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-render-failures-1/append/render/result.mp4",
+            "renderer_pid": 124452,
+            "stage": "complete",
+            "total_frames": 1
+          }
+        },
+        {
+          "case": "quota",
+          "command": [
+            "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+            "--path",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+            "--rendering-method",
+            "gl_compatibility",
+            "--resolution",
+            "640x360",
+            "--audio-driver",
+            "Dummy",
+            "--log-file",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-render-failures-1/quota/render/godot.log",
+            "--",
+            "--simscope-render-job=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-render-failures-1/quota/render/job.json"
+          ],
+          "exit_code": 1,
+          "progress": {
+            "current_frame": 0,
+            "elapsed_seconds": 0.001,
+            "encoder_pid": -1,
+            "intermediate_directory": "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-render-failures-1/quota/render",
+            "message": "Selection-aware render quota/file-count/free-space admission failed; choose a larger explicit quota or a shorter/smaller export.",
+            "output_path": "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-render-failures-1/quota/render/result.mp4",
+            "renderer_pid": 124678,
+            "stage": "failed",
+            "total_frames": 3
+          }
+        },
+        {
+          "case": "mutation",
+          "command": [
+            "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+            "--path",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+            "--rendering-method",
+            "gl_compatibility",
+            "--resolution",
+            "640x360",
+            "--audio-driver",
+            "Dummy",
+            "--log-file",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-render-failures-1/mutation/render/godot.log",
+            "--",
+            "--simscope-render-job=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-render-failures-1/mutation/render/job.json"
+          ],
+          "exit_code": 1,
+          "progress": {
+            "current_frame": 0,
+            "elapsed_seconds": 0.099,
+            "encoder_pid": -1,
+            "intermediate_directory": "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-render-failures-1/mutation/render",
+            "message": "Capture identity/committed extent changed after export was requested.",
+            "output_path": "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-render-failures-1/mutation/render/result.mp4",
+            "renderer_pid": 124771,
+            "stage": "failed",
+            "total_frames": 3
+          }
+        },
+        {
+          "case": "cancel",
+          "command": [
+            "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+            "--path",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+            "--rendering-method",
+            "gl_compatibility",
+            "--resolution",
+            "640x360",
+            "--audio-driver",
+            "Dummy",
+            "--log-file",
+            "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-render-failures-1/cancel/render/godot.log",
+            "--",
+            "--simscope-render-job=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-render-failures-1/cancel/render/job.json"
+          ],
+          "exit_code": 2,
+          "progress": {
+            "current_frame": 1,
+            "elapsed_seconds": 0.874,
+            "encoder_pid": -1,
+            "intermediate_directory": "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-render-failures-1/cancel/render",
+            "message": "Export cancelled. Completed PNG frames retained in /home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-render-failures-1/cancel/render/frames",
+            "output_path": "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-render-failures-1/cancel/render/result.mp4",
+            "renderer_pid": 124877,
+            "stage": "cancelled",
+            "total_frames": 3
+          }
+        }
+      ],
+      "report": "results/g4/gate-render-failures-1/report.json",
+      "report_sha256": "7cd3553b69a4664f38015d0219101f507ccde1ee6e5a5a72eb58a935c527f770",
+      "image_inspection": "Selection/state/matched PNGs inspected; scientific assertions and pixel equality are additional checks"
+    },
+    {
+      "name": "G3 playback",
+      "status": "PASS",
+      "checks": 2457,
+      "report": "results/g4/gate-g3-playback-1/results.json",
+      "report_sha256": "944f9718c032a5e8c574d1e0a3aa151421c3c0f55710d4283c2dc80deb53e193",
+      "command": "python tools/validate_scene_playback.py --godot GODOT --output-dir NEW_DIRECTORY --renderer headless"
+    },
+    {
+      "name": "G3 playback lifecycle",
+      "status": "PASS",
+      "checks": 38,
+      "report": "results/g4/gate-g3-playback-1/lifecycle-results.json",
+      "report_sha256": "c0612b7f99147c97eb97157d2a5e95418d8d8961f62abf3bf0d00928a9ea6bb1",
+      "command": "GODOT --headless --path viewer --script layers/test_scene_playback_lifecycle.gd -- --playback-fixture=ABSOLUTE_PREPARED_PLAYBACK_FIXTURE"
+    },
+    {
+      "name": "Legacy deterministic video equality",
+      "status": "PASS",
+      "checks": 46,
+      "report": "results/g4/gate-g3-video-3/results.json",
+      "report_sha256": "3496aa6c02713a7498ed5d8a1cccb552b418b81c8bdc36b0e07597b6edcab091",
+      "command": "python tools/validate_scene_playback_video.py --godot GODOT --baseline-viewer TEMP_G3_VIEWER --job results/g4/gate-g3-playback-1/video-equality-g3-job.json --output-dir NEW_DIRECTORY"
+    },
+    {
+      "name": "Legacy inspection",
+      "status": "PASS",
+      "checks": 49,
+      "category": "headless",
+      "command": "GODOT --headless --path viewer --script scene/test_inspection.gd",
+      "log": "results/g4/gate-g1-inspection.log",
+      "log_sha256": "51f96c810e2bf978302e0807c33dc66a76369d7489118cfe460db1fdd696af43"
+    },
+    {
+      "name": "Altered matched jobs",
+      "status": "PASS",
+      "checks": 11,
+      "category": "headless",
+      "command": "GODOT --headless --path viewer --script analysis/test_matched_job.gd -- --matched-job=ABSOLUTE_PREPARED_MATCHED_LEFT_JOB",
+      "log": "/tmp/g4-matched-final.log"
+    },
+    {
+      "name": "Eviction/seek/scan/export/restart loop",
+      "status": "PASS",
+      "checks": 235,
+      "report": "results/g4/gate-lifecycle-2/report.json",
+      "report_sha256": "3db0f7f63b2f6a83c3b7c4f5de9232f3b13958d1ba86ea81acd8d1690343d79f",
+      "details": "performance.json"
+    },
+    {
+      "name": "100k idle and separately declared active workloads",
+      "status": "PASS within 10% idle target",
+      "details": "performance.json"
+    },
+    {
+      "name": "Relevant retained G0\u2013G3 checkpoint checks",
+      "status": "PASS at recorded checkpoint",
+      "evidence": [
+        "docs/evidence/g4e/state-export.json",
+        "docs/evidence/g4e/selection-render.json"
+      ],
+      "qualification": "23 G3 storage checks, 36 actual OpenGL G3 combined scene checks, legacy video continuation with 41 UX checks; historical source/runtime scope remains in those records, not represented as new full 4K/video validation."
+    }
+  ],
+  "demo": {
+    "status": "PASS",
+    "command": "/tmp/simscope-g4-validation/bin/python -m examples.g4_demo --output NEW_DIRECTORY",
+    "exports": 8,
+    "source": {
+      "path": "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-demo-2/scene.ssc",
+      "format": "SIMSCP3",
+      "uuid": "9e8f73e918ad425eae1d3703c89204bc",
+      "committed_bytes": "16196",
+      "sha256": "f73df3b7b251eac48ab1df235c39daf0927a86303fa6dbd3861fe410f8d91318",
+      "complete_records": 11
+    },
+    "tracer_source": {
+      "path": "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-demo-2/tracer-only.ssc",
+      "format": "SIMSCP3",
+      "uuid": "a7b1936bc14143149e2b1a03678742b2",
+      "committed_bytes": "4976",
+      "sha256": "1d4672d97e83dc190eaa51319a955cdf821f8a387174399da9ea362667ac6c8a",
+      "complete_records": 4
+    },
+    "oracles": {
+      "field_mass_kg": 288,
+      "lower_cylinder_mass_kg": 144,
+      "field_samples": 5,
+      "particle_times": [
+        0,
+        0.5,
+        1.5,
+        3
+      ],
+      "recorded_velocity_m_s": 1,
+      "diagnostic_period_seconds": 2
+    },
+    "tracer_field_integral_refusal": {
+      "code": "association",
+      "message": "Full-cell quadrature requires a geometric original-grid ROI without a node predicate",
+      "interpretation": "Sampled tracer density cannot supply an exact original-grid field integral"
+    },
+    "report_sha256": "fb25fd8c2c1a4af2df9acabf32991da313e9979e6e69b75fd6b45dd52434c26b"
+  },
+  "legacy_video_job": {
+    "version": 1,
+    "capture_path": "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/gate-g3-playback-1/ids.ssc",
+    "start_time": 1.25,
+    "end_time": 1.75,
+    "fps": 8,
+    "playback_rate": 1.0,
+    "width": 512,
+    "height": 384,
+    "output_path": "OUTPUT_DIRECTORY/result.mp4",
+    "state": {
+      "auto_range": true,
+      "brightness_channel": "fixed",
+      "brightness_scale": 1.3,
+      "camera": {
+        "far": 1000.0,
+        "fov": 55.0,
+        "keep_aspect": 1,
+        "near": 0.05000000074505806
+      },
+      "camera_distance": 5.6,
+      "camera_target": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "camera_transform": [
+        [
+          0.7880107760429382,
+          0.0,
+          -0.6156615018844604
+        ],
+        [
+          -0.25041210651397705,
+          0.9135454297065735,
+          -0.32051289081573486
+        ],
+        [
+          0.562434732913971,
+          0.40673667192459106,
+          0.7198836207389832
+        ],
+        [
+          3.149634599685669,
+          2.2777252197265625,
+          4.03134822845459
+        ]
+      ],
+      "channel_preferences": {},
+      "clamp_map": true,
+      "clean_view": true,
+      "color_channel": "scalar",
+      "colormap_name": "inferno",
+      "cyclic": false,
+      "environment": {
+        "background_mode": 2,
+        "fog_density": 0.0008999999845400453,
+        "fog_enabled": true,
+        "glow_bloom": 0.23999999463558197,
+        "glow_enabled": true,
+        "glow_intensity": 1.350000023841858,
+        "glow_strength": 1.5499999523162842,
+        "tonemap_exposure": 1.0,
+        "tonemap_mode": 3,
+        "tonemap_white": 1.0
+      },
+      "exposure": 0.65,
+      "gamma": 1.0,
+      "geometry_override": {},
+      "guide_visibility": {
+        "absorber": false,
+        "data": false,
+        "domain": false,
+        "imposed": false
+      },
+      "guide_visible": false,
+      "hidden_types": [],
+      "intensity_floor": 0.08,
+      "invert_map": false,
+      "logarithmic": false,
+      "manual_max": 1.0,
+      "manual_min": 0.0,
+      "mode": 0,
+      "normalization_mode": "frame",
+      "observer_scale": 1e+28,
+      "orbit_enabled": false,
+      "orbit_speed": 0.08,
+      "overlay_visible": false,
+      "panel_width": 340.0,
+      "particle_layer_visible": true,
+      "physical_rate": 1.0,
+      "pitch": 0.4188790204786391,
+      "playback_fps": 12.0,
+      "point_scale": 1.8,
+      "preset": "Scientific",
+      "range_interval": {},
+      "sections": {
+        "Advanced \u2022 Post-processing": false,
+        "Advanced \u2022 Size / Brightness": false,
+        "Camera": false,
+        "Capture / Export": false,
+        "Color Mapping": true,
+        "Data cache": false,
+        "Geometry / Guides": false,
+        "Particle Filters": false,
+        "Playback": true,
+        "Rendering": true,
+        "Trails": false
+      },
+      "show_legend": false,
+      "size_channel": "visual_size",
+      "slice_enabled": false,
+      "slice_x": 0.0,
+      "sliders": {
+        "Bloom": 1.3599999999999999,
+        "Brightness": 1.0,
+        "Exposure": 0.64,
+        "Gamma": 1.012,
+        "Intensity cutoff": 0.08,
+        "Orbit speed \u2022 radians / second": 0.07999999999999996,
+        "Particle size": 1.838,
+        "Physical time units / second": 1.009,
+        "Playback \u2022 frames / second (index mode)": 12.08,
+        "Slice position \u2022 box fraction": 0.0
+      },
+      "starfield_visible": false,
+      "time_mode": "index",
+      "trails_enabled": true,
+      "viewport": {
+        "msaa_3d": 0,
+        "scaling_3d_scale": 1.0,
+        "screen_space_aa": 0,
+        "use_debanding": false,
+        "use_taa": false
+      },
+      "yaw": 0.6632251157578453
+    },
+    "camera_mode": "locked",
+    "orbit_speed": 0.2,
+    "quality": "high",
+    "keep_frames": true,
+    "ffmpeg_path": "/usr/bin/ffmpeg",
+    "inspection_sidecars": true
+  },
+  "failure_qualifications": [
+    {
+      "attempt": "gate-profile-gl-1 active / active-retry / active-retry-2",
+      "outcome": "Not counted as PASS",
+      "reason": "Harness queried a reaped child or captured automatic plot metadata instead of full scientific metrics. Complete idle repeats preserved; corrected active-retry-3 only supplies final analysis metrics."
+    },
+    {
+      "attempt": "gate-lifecycle-1",
+      "outcome": "FAIL at cycle 21, preserved",
+      "reason": "Test harness invented new cache owner roots while retaining the same live owner PID; finite disk admission correctly refused. Corrected harness reuses the native-style member/results root across restarts. gate-lifecycle-2 completed all 30 cycles."
+    },
+    {
+      "attempt": "gate-demo-1",
+      "outcome": "Completed initial six-export demo; superseded for roadmap coverage",
+      "reason": "gate-demo-2 adds lower-cylinder 144 kg and tracer-only refusal/sample-mean exports."
+    },
+    {
+      "attempt": "gate-g3-video-1",
+      "outcome": "FAIL before baseline rendering",
+      "reason": "Generated legacy test job included new G4 panel names. Baseline correctly rejected sections; corrected G3-compatible job saved separately."
+    },
+    {
+      "attempt": "gate-g3-video-2",
+      "outcome": "FAIL exact timing text equality",
+      "reason": "Scientific values matched but new null comparison field altered legacy timing bytes. Product now adds comparison only for matched jobs. Unchanged legacy test passes 46 checks in gate-g3-video-3; final matched tests pass 50 each including timing provenance."
+    },
+    {
+      "attempt": "Original crash-interrupted work",
+      "outcome": "No incomplete test credited",
+      "reason": "Git status/history/fsck, tracked files, partial edits and processes inspected before continuing; valid work preserved, no reset/discard/recreation."
+    }
+  ],
+  "scope": {
+    "deferred": [
+      "G5 local control/services/MCP and recipe command orchestration",
+      "G6 automatic physical event detection, broader adapters and release work",
+      "web/dashboard work",
+      "external simulation work",
+      "unrelated visual enhancements"
+    ],
+    "unchanged": [
+      "G0\u2013G3 acceptance IDs and scientific sampling",
+      "SIMSCP3 preferred new writing",
+      "frozen legacy writer defaults",
+      "source bytes and repository boundaries"
+    ],
+    "remaining_authorized_implementation": "none",
+    "next": "user review; no further milestone started"
+  }
+}

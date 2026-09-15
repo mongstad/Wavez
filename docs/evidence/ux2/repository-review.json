@@ -1,0 +1,634 @@
+{
+  "baseline": "7037f5f",
+  "preserved_untracked": [
+    "viewer/layers/particle_playback.gd.uid",
+    "viewer/layers/particle_prepare.gd.uid",
+    "viewer/layers/playback_buffer.gd.uid",
+    "viewer/layers/profile_scene.gd.uid",
+    "viewer/layers/profile_scene_cache_memory.gd.uid",
+    "viewer/layers/profile_scene_playback.gd.uid",
+    "viewer/layers/profile_scene_preload.gd.uid",
+    "viewer/layers/profile_scene_stalls.gd.uid",
+    "viewer/layers/test_scene_playback.gd.uid",
+    "viewer/layers/test_scene_playback_images.gd.uid",
+    "viewer/layers/test_scene_playback_lifecycle.gd.uid",
+    "viewer/layers/test_scene_render.gd.uid",
+    "viewer/layers/test_scene_stall_profile.gd.uid",
+    "viewer/layers/test_scene_timeline.gd.uid",
+    "viewer/layers/test_scene_validation.gd.uid"
+  ],
+  "removed_generated_uids": [
+    "viewer/analysis/diagnostics_controller.gd.uid",
+    "viewer/analysis/durable_controller.gd.uid",
+    "viewer/analysis/inspection_v3.gd.uid",
+    "viewer/analysis/matched_controller.gd.uid",
+    "viewer/analysis/overlay_plot.gd.uid",
+    "viewer/analysis/profile_g4.gd.uid",
+    "viewer/analysis/space_time_controller.gd.uid",
+    "viewer/analysis/space_time_plot.gd.uid",
+    "viewer/analysis/test_diagnostics.gd.uid",
+    "viewer/analysis/test_maintenance_ui.gd.uid",
+    "viewer/analysis/test_matched_job.gd.uid",
+    "viewer/analysis/test_matched_render.gd.uid",
+    "viewer/analysis/test_render_state.gd.uid",
+    "viewer/analysis/test_space_time.gd.uid",
+    "viewer/analysis/test_temporal.gd.uid",
+    "viewer/analysis/ui_controls.gd.uid",
+    "viewer/layers/field_buffer.gd.uid",
+    "viewer/layers/field_playback.gd.uid",
+    "viewer/layers/field_prepare.gd.uid",
+    "viewer/layers/mesh_buffer.gd.uid",
+    "viewer/layers/mesh_playback.gd.uid",
+    "viewer/layers/mesh_prepare.gd.uid",
+    "viewer/layers/profile_maintenance.gd.uid",
+    "viewer/layers/profile_mesh_playback.gd.uid",
+    "viewer/layers/scene_channels.gd.uid",
+    "viewer/layers/test_field_preparation.gd.uid",
+    "viewer/layers/test_mesh_playback.gd.uid",
+    "viewer/layers/test_performance_maintenance.gd.uid"
+  ],
+  "branch": "main",
+  "reviewed_staged_files": 115,
+  "largest_file": {
+    "path": "docs/evidence/ux2/scale-3840x2160-200.png",
+    "bytes": 403296,
+    "sha256": "3b211559eac67b3c1acb8b192e3a29f8c20f72af2f9a1d9ff15caaaebd2e5279"
+  },
+  "credential_pattern_hits": [],
+  "scope": "New viewer/ui library; UX2 validator, docs, notices, evidence only. No existing production source changes.",
+  "staged_manifest_excluding_this_self_referential_report": [
+    {
+      "path": "README.md",
+      "bytes": 2943,
+      "sha256": "1968a71f56b894b1e0f5089bbf7928cee348f450e44a1b6d0d11ace86cf4b5e8"
+    },
+    {
+      "path": "THIRD_PARTY_LICENSES.md",
+      "bytes": 3725,
+      "sha256": "81a69e0318bbcbfc3f97650e3163d25e45eaa5d96c0ca43bb2976266322b745f"
+    },
+    {
+      "path": "UX_IMPLEMENTATION_PLAN.md",
+      "bytes": 26776,
+      "sha256": "4137b73c1cc5e0baf094da567cdc0e01509e35bbafbb901356c52d4a66aabc09"
+    },
+    {
+      "path": "docs/CURRENT_STATUS.md",
+      "bytes": 10978,
+      "sha256": "da837f25cbd67b9d71b6a8f7bc928083cb5c51e28b83a210dc19754ba335810b"
+    },
+    {
+      "path": "docs/EVIDENCE_INDEX.md",
+      "bytes": 5605,
+      "sha256": "475d87542224afa7f731ecad6039c8b61e59e94234b98f396db937121b65a1fb"
+    },
+    {
+      "path": "docs/UX2_REPORT.md",
+      "bytes": 11450,
+      "sha256": "9f15b696342265105a3de6b26a1568326aca0abfc7cdd76b48306a56bb4ee28c"
+    },
+    {
+      "path": "docs/UX2_THEME_LIBRARY.md",
+      "bytes": 12889,
+      "sha256": "1dc7070d972f5e627a3ec5657567d0444b087f934a7b7793998d0aad9b0a462d"
+    },
+    {
+      "path": "docs/evidence/ux2/01-controls-focus-hover.png",
+      "bytes": 125223,
+      "sha256": "b88885277ebeb7b63bd007d55f8cf6c3a3144869bca65bdfeee8d7b81341dfa3"
+    },
+    {
+      "path": "docs/evidence/ux2/02-numbers.png",
+      "bytes": 130626,
+      "sha256": "4f85c747df564ec27f68a7734c411ece6123974fd11e61a18d85bbf8b96c1581"
+    },
+    {
+      "path": "docs/evidence/ux2/03-feedback.png",
+      "bytes": 116928,
+      "sha256": "2789f41963d1d4e98e069a26a04e6b25d915238a167708bbdc3cbfcee2886982"
+    },
+    {
+      "path": "docs/evidence/ux2/04-tokens.png",
+      "bytes": 111678,
+      "sha256": "94e4455d116fff8b74667f5d5b042d4cc73c9508d8eb4ffecfb5a76215b51cf6"
+    },
+    {
+      "path": "docs/evidence/ux2/05-slider-focus.png",
+      "bytes": 125264,
+      "sha256": "98f71ec9de9cb41bc488b399360de5c6b2dd89c736329b2d59b23c14a85e106d"
+    },
+    {
+      "path": "docs/evidence/ux2/06-menu.png",
+      "bytes": 131725,
+      "sha256": "1ad7b7998d8f1f8b6ec11b026a1b8754ac91c0c97ed26bf554cdf160f90c6518"
+    },
+    {
+      "path": "docs/evidence/ux2/07-dialog.png",
+      "bytes": 138807,
+      "sha256": "89f3868347c66cc67ea398778805dc0929e1a6e5367e08c2522e37ed0295c355"
+    },
+    {
+      "path": "docs/evidence/ux2/README.md",
+      "bytes": 5954,
+      "sha256": "96ae3c1686b86cfdee9c8808dc0db37bf8c06540cd4d0447985d611f8121bc4e"
+    },
+    {
+      "path": "docs/evidence/ux2/documentation.json",
+      "bytes": 7963,
+      "sha256": "ff895bee7a694bce38b689427c0928effe249907063418c1fa7879cc7e80e967"
+    },
+    {
+      "path": "docs/evidence/ux2/float64-oracle.json",
+      "bytes": 28534,
+      "sha256": "af6a013cb919f8fb0b51de1cff370cc3ade263c408c6503b62406b028e55341a"
+    },
+    {
+      "path": "docs/evidence/ux2/hud.json",
+      "bytes": 1578,
+      "sha256": "7d5602d028ab2f8152f794e093d27d5fe7b93535eb560db2be9ea630e36e79c3"
+    },
+    {
+      "path": "docs/evidence/ux2/hud.log.txt",
+      "bytes": 217,
+      "sha256": "e94816b1328efb080acc5d37e588a61efaa0ebd52f1c2e9872b7823a368dbf99"
+    },
+    {
+      "path": "docs/evidence/ux2/isolation.json",
+      "bytes": 17997,
+      "sha256": "4cce03fa57ff0120b98d34367bcfb6f749a65b5a0b5b60f93bdb9a3fc94c0539"
+    },
+    {
+      "path": "docs/evidence/ux2/isolation.log.txt",
+      "bytes": 197,
+      "sha256": "8e7c8498df3a58524add3885b615777da031aad021b33bd945547a13ba809d51"
+    },
+    {
+      "path": "docs/evidence/ux2/native.log.txt",
+      "bytes": 190,
+      "sha256": "764e53f04a7ff14fdd95d4697aa4fcf7cb1ddf25a3c67d9cdbe714d5c294d9e4"
+    },
+    {
+      "path": "docs/evidence/ux2/production-preserved.png",
+      "bytes": 228188,
+      "sha256": "6d849c7b95a341c9e820c7a2a1bee08b5fc7990501fc45cae8520c23c8f7f08e"
+    },
+    {
+      "path": "docs/evidence/ux2/scale-1024x640-200.png",
+      "bytes": 88618,
+      "sha256": "76fda5427d8919767752276fcc2412ffa627fbf4cb77b377d48f4de213c6a118"
+    },
+    {
+      "path": "docs/evidence/ux2/scale-1440x900-100.png",
+      "bytes": 128356,
+      "sha256": "e3d8f35d48d74ea5497ba3ece5e6ce255c265a3d45dcce72b7c657206ff5617a"
+    },
+    {
+      "path": "docs/evidence/ux2/scale-1440x900-125.png",
+      "bytes": 183861,
+      "sha256": "1d6ba02fea2441f5f5efb3438f93a5012cd2207ab3951c863e9e6f0341862389"
+    },
+    {
+      "path": "docs/evidence/ux2/scale-1440x900-150.png",
+      "bytes": 136028,
+      "sha256": "4721fbf8137883ff84a9e0bbb253a790c6545d3e5dbbb4eff52aa8b6012f52f3"
+    },
+    {
+      "path": "docs/evidence/ux2/scale-1440x900-200.png",
+      "bytes": 149249,
+      "sha256": "6a5cfeb972e756b9de2a9671cd6388b3c2946cb1f5580e0dfe60f6b3a27d02e9"
+    },
+    {
+      "path": "docs/evidence/ux2/scale-3840x2160-200.png",
+      "bytes": 403296,
+      "sha256": "3b211559eac67b3c1acb8b192e3a29f8c20f72af2f9a1d9ff15caaaebd2e5279"
+    },
+    {
+      "path": "docs/evidence/ux2/source-invariance.json",
+      "bytes": 33472,
+      "sha256": "7c2abe3be3c2ba98f60e768da8e05f52f1135be787bfbb89b9b13296aed3499e"
+    },
+    {
+      "path": "docs/evidence/ux2/summary.json",
+      "bytes": 2757,
+      "sha256": "a1066e15d9d5939b5a2e3e846f07148cb67939c37e77a2c0e4fb0b9aba1638cd"
+    },
+    {
+      "path": "docs/evidence/ux2/validation.json",
+      "bytes": 159267,
+      "sha256": "113a90971678e26cc061e95ca414e0c6d79890fc82691dfbf6db9cf562202b5e"
+    },
+    {
+      "path": "tools/validate_ux2.py",
+      "bytes": 5069,
+      "sha256": "468f4c271f96bd018b116352e4fb5cb72035b1402a4c47c306385acf11fe0b57"
+    },
+    {
+      "path": "viewer/ui/components/action_button.gd",
+      "bytes": 1432,
+      "sha256": "784c298fb833a222255e8eb2ffa0d4256a64d982c3154d14de9c5b981210a1af"
+    },
+    {
+      "path": "viewer/ui/components/action_button.gd.uid",
+      "bytes": 20,
+      "sha256": "a03d3de8e8cfa5f10d82bd9fc6d9aba0a11363b661c968799fa4eee0d169da1a"
+    },
+    {
+      "path": "viewer/ui/components/dialog_shell.gd",
+      "bytes": 2334,
+      "sha256": "9134efdbb662ccca2fc4bb0b3e1e482146b66a6cc9bf65938aaa0691fee7e826"
+    },
+    {
+      "path": "viewer/ui/components/dialog_shell.gd.uid",
+      "bytes": 20,
+      "sha256": "d7adf57d149b2c37b48f96c7b647709af913a4dfb648938a0a4d23d2d151cb85"
+    },
+    {
+      "path": "viewer/ui/components/disclosure.gd",
+      "bytes": 1183,
+      "sha256": "03549f532ccfe5d80d35fdb7c646b86807d9685955fa86e377eca04ea3302920"
+    },
+    {
+      "path": "viewer/ui/components/disclosure.gd.uid",
+      "bytes": 20,
+      "sha256": "6b4f9bef12f27ccee92af7f374ed68d0128f02bf27e2edd39fd110c7b0c028b9"
+    },
+    {
+      "path": "viewer/ui/components/enum_field.gd",
+      "bytes": 1333,
+      "sha256": "5642de8c4adefc76f05b0855b92686e22f5450f539327174625a1f0e0abc36ff"
+    },
+    {
+      "path": "viewer/ui/components/enum_field.gd.uid",
+      "bytes": 20,
+      "sha256": "ebcb162ea848321b434d993322f7432df60dc72a82188db7954fe5bed07b9e05"
+    },
+    {
+      "path": "viewer/ui/components/float64_text.gd",
+      "bytes": 5519,
+      "sha256": "4538fbce68a688945b7282bec01615936ca19adb12c2737693d55f3e4c888cce"
+    },
+    {
+      "path": "viewer/ui/components/float64_text.gd.uid",
+      "bytes": 20,
+      "sha256": "7d8175d2199523430d8e15424db7b351b6efb37493ad99ca2647eb1333acb9e5"
+    },
+    {
+      "path": "viewer/ui/components/focus_slider.gd",
+      "bytes": 329,
+      "sha256": "b71c14e5e57a5a16679c8d1e3cc78fa802458ab639579b804fe4f63c736f66ea"
+    },
+    {
+      "path": "viewer/ui/components/focus_slider.gd.uid",
+      "bytes": 19,
+      "sha256": "96c1ed775fb1f27be2472c2d06a8e4f4f10f0600232b269c5195ff70ac6146d3"
+    },
+    {
+      "path": "viewer/ui/components/inline_message.gd",
+      "bytes": 1596,
+      "sha256": "9a6f47bd48730c93ee5fbc29cbc95be256a71128ecd72d406f6b254d6d041ae8"
+    },
+    {
+      "path": "viewer/ui/components/inline_message.gd.uid",
+      "bytes": 20,
+      "sha256": "5bbfc2a74847c2c073444bb3c6b5a6d7a8fcbec6842e7f36dc86705173338527"
+    },
+    {
+      "path": "viewer/ui/components/number_field.gd",
+      "bytes": 3862,
+      "sha256": "490db424e875d89fc782ccbff5b2afba53fe7f42fba894855f4786db139341b0"
+    },
+    {
+      "path": "viewer/ui/components/number_field.gd.uid",
+      "bytes": 20,
+      "sha256": "7dec5fe9b96099be2f41c3d84d40afc99ef726af0e8f93b22f409f161cb2c9fc"
+    },
+    {
+      "path": "viewer/ui/components/progress_status.gd",
+      "bytes": 604,
+      "sha256": "e95862266e1e9d185d78ae70e4dc01dd1b7aa49a456d26ba3fdb0c4798bd125b"
+    },
+    {
+      "path": "viewer/ui/components/progress_status.gd.uid",
+      "bytes": 20,
+      "sha256": "6c6a7e6045a29ae8c3bb657dc2e1bced73c313d488dfaa4b2f242bb8d78b332d"
+    },
+    {
+      "path": "viewer/ui/components/property_row.gd",
+      "bytes": 1521,
+      "sha256": "f3cab0fa4ac0cee00425d08342375f85f6c6703c6bc40bb63662e9e0c09ab380"
+    },
+    {
+      "path": "viewer/ui/components/property_row.gd.uid",
+      "bytes": 20,
+      "sha256": "9fdfdca913a222ed19db626aeb470e4311d2207258184a9aca3c86da03c1f5f5"
+    },
+    {
+      "path": "viewer/ui/components/scalar_slider.gd",
+      "bytes": 982,
+      "sha256": "abfcb8c6df22b08777a9e045519a8c89e0019811690d6d6c29ef6f87b36d4b52"
+    },
+    {
+      "path": "viewer/ui/components/scalar_slider.gd.uid",
+      "bytes": 20,
+      "sha256": "e2f36085acce611a53c361eafe5d7de27e1ad123e6bc9a49811454e21fe1542f"
+    },
+    {
+      "path": "viewer/ui/components/status_badge.gd",
+      "bytes": 613,
+      "sha256": "4b33ed0d52d7b0ac1c1fd607c37c655982ecd87ae50e8a1bdfc2897e6c7f3a5f"
+    },
+    {
+      "path": "viewer/ui/components/status_badge.gd.uid",
+      "bytes": 20,
+      "sha256": "d6fa8b082d4d0cd6a9d76d4ce65e54c566d24017f4222efb50f6b93c181ee24a"
+    },
+    {
+      "path": "viewer/ui/components/tooltip_button.gd",
+      "bytes": 437,
+      "sha256": "b6bbae83e93ad2b04fccb33b8903fe85621cbeba91d489fe98617fc7cd11f63d"
+    },
+    {
+      "path": "viewer/ui/components/tooltip_button.gd.uid",
+      "bytes": 20,
+      "sha256": "cdcd361eea573ec05d1ea964cb94c7b0b94deabde81f4a2655da634088aaf3cd"
+    },
+    {
+      "path": "viewer/ui/components/visual_spin_box.gd",
+      "bytes": 268,
+      "sha256": "1f51aac2d7bb0e514092be6a58b2c8a82ece5ca1c13c355d3e3042031607c145"
+    },
+    {
+      "path": "viewer/ui/components/visual_spin_box.gd.uid",
+      "bytes": 20,
+      "sha256": "38b620d89fb51a58f27e78071fb5a8c36cfaedc0e333cd373cdcb22299c0dc54"
+    },
+    {
+      "path": "viewer/ui/fonts/DejaVuSansMono.ttf",
+      "bytes": 340712,
+      "sha256": "b4a6c3e4faab8773f4ff761d56451646409f29abedd68f05d38c2df667d3c582"
+    },
+    {
+      "path": "viewer/ui/fonts/DejaVuSansMono.ttf.import",
+      "bytes": 776,
+      "sha256": "5ee5f3f30cbcebc88596183989a88508e57be4fa34d5d4087eaf5aecd8f00036"
+    },
+    {
+      "path": "viewer/ui/fonts/LICENSE-DejaVu.txt",
+      "bytes": 8816,
+      "sha256": "7a083b136e64d064794c3419751e5c7dd10d2f64c108fe5ba161eae5e5958a93"
+    },
+    {
+      "path": "viewer/ui/fonts/README.md",
+      "bytes": 788,
+      "sha256": "eff3556eb942a86248657de8b2d75010492ee2cc91539bed1d8f27c7a0f2dd2f"
+    },
+    {
+      "path": "viewer/ui/icons/box.svg",
+      "bytes": 234,
+      "sha256": "e54545a8d484dbbe232593b4630667fe6f1e868bd6e4c0006373b9afed26c8a8"
+    },
+    {
+      "path": "viewer/ui/icons/box.svg.import",
+      "bytes": 387,
+      "sha256": "05b1b4c8ce2e4a0371ecd0228913bd0bbb96efdf855c92b0a62c2ce9e7eefee9"
+    },
+    {
+      "path": "viewer/ui/icons/check.svg",
+      "bytes": 209,
+      "sha256": "500488f5226ea1748c090db44726748807bd0aaaaf928a7a7c972c404a8e6f60"
+    },
+    {
+      "path": "viewer/ui/icons/check.svg.import",
+      "bytes": 393,
+      "sha256": "599354fdaea340bb960e670d1df560db633640d65e90f27fbd762ecce1d629c4"
+    },
+    {
+      "path": "viewer/ui/icons/checked.svg",
+      "bytes": 258,
+      "sha256": "b16e177ed00bd03e3c701138913d6de28a8966f3f85ae2d0a67edb08733af98f"
+    },
+    {
+      "path": "viewer/ui/icons/checked.svg.import",
+      "bytes": 399,
+      "sha256": "47adf0296d47c7b0779211f358a110331d50ccfc08c16876b625c8a5a3f89a43"
+    },
+    {
+      "path": "viewer/ui/icons/chevron_down.svg",
+      "bytes": 209,
+      "sha256": "973228d5ca0bda47b2a10c92010dbc5576cf6f1105254f2ad0d467e5e5fa7267"
+    },
+    {
+      "path": "viewer/ui/icons/chevron_down.svg.import",
+      "bytes": 414,
+      "sha256": "c9f1d58ccc0e51c2390ff7d77bd8601db022302b3979257a18ff151d2e09fae8"
+    },
+    {
+      "path": "viewer/ui/icons/chevron_right.svg",
+      "bytes": 209,
+      "sha256": "7d2ad02f425ba811f4294cc3267be7c2a9ac83906c5d20b67c9500a5389963fd"
+    },
+    {
+      "path": "viewer/ui/icons/chevron_right.svg.import",
+      "bytes": 417,
+      "sha256": "d9ebf98549e335064e2b5398c8d48c0f764cf5e1f07906befe2bccf5eead8751"
+    },
+    {
+      "path": "viewer/ui/icons/chevron_up.svg",
+      "bytes": 210,
+      "sha256": "8b97f70e53405020f29c490beef7c06014b7ec131318ec389c11b9f2c97ef383"
+    },
+    {
+      "path": "viewer/ui/icons/chevron_up.svg.import",
+      "bytes": 408,
+      "sha256": "b0ee691c20f3302761072a292a329ad4c12428e36a5650578f7c8600e4520df5"
+    },
+    {
+      "path": "viewer/ui/icons/close.svg",
+      "bytes": 215,
+      "sha256": "fc3cb8aa5a9e917efae4e315a586d99d72d131b0a9f5c2f0026cca24e79d75e6"
+    },
+    {
+      "path": "viewer/ui/icons/close.svg.import",
+      "bytes": 392,
+      "sha256": "4e940eff75db225c08e0661505fadd1881c4ff25011253f81388f0199d865627"
+    },
+    {
+      "path": "viewer/ui/icons/copy.svg",
+      "bytes": 257,
+      "sha256": "5f995f770c41e01eb13fdada2ea18aadea32b6bcae259ed052f32a9249e42de3"
+    },
+    {
+      "path": "viewer/ui/icons/copy.svg.import",
+      "bytes": 390,
+      "sha256": "84491bb1f4a03181fa7957038dbf3641493a5f1e55cc9e52d5b6c1c65b992f35"
+    },
+    {
+      "path": "viewer/ui/icons/error.svg",
+      "bytes": 244,
+      "sha256": "1677ee0c4463f8b7bc033ceacd312e906a48299ec17d510ae802b0999d287999"
+    },
+    {
+      "path": "viewer/ui/icons/error.svg.import",
+      "bytes": 393,
+      "sha256": "513d3a3e592d15dcbd9779a1957b7a5296f0db79fa66447113a0218924e09e86"
+    },
+    {
+      "path": "viewer/ui/icons/grip.svg",
+      "bytes": 229,
+      "sha256": "f725cbf5f2dc9b3cabbcf25cefd442052de5a01894dd853f7d687759ff78655b"
+    },
+    {
+      "path": "viewer/ui/icons/grip.svg.import",
+      "bytes": 390,
+      "sha256": "3648365b4888c77ec33fe045f31dff2a1ac4f0037c5cae2ce473081b623d3d78"
+    },
+    {
+      "path": "viewer/ui/icons/info.svg",
+      "bytes": 238,
+      "sha256": "5aa97e9a52e5898c7c19e01e096fc43bebd03a787da545a3b4318ae7496e7a80"
+    },
+    {
+      "path": "viewer/ui/icons/info.svg.import",
+      "bytes": 390,
+      "sha256": "60c190e44202ac7de63a2e6263f97306b9a3007085a10126804c6de84ec73543"
+    },
+    {
+      "path": "viewer/ui/icons/play.svg",
+      "bytes": 210,
+      "sha256": "e3078edc6627fd7226e9921cc537106225d5499036779a9028fc40a6c2d93e81"
+    },
+    {
+      "path": "viewer/ui/icons/play.svg.import",
+      "bytes": 390,
+      "sha256": "58ddc2097949b1e1057045db6ed136c025fd2aa4c9ff29253665941678f3bd63"
+    },
+    {
+      "path": "viewer/ui/icons/radio.svg",
+      "bytes": 214,
+      "sha256": "5f89eb1e092899741ff1f0436dd9f89c4056666fbcda74c63c974e415207d3c7"
+    },
+    {
+      "path": "viewer/ui/icons/radio.svg.import",
+      "bytes": 393,
+      "sha256": "2858915fe48a0c000411a8cbfd4628a10c8617ac100b891cd593b897ac5ca3d3"
+    },
+    {
+      "path": "viewer/ui/icons/radio_checked.svg",
+      "bytes": 258,
+      "sha256": "6ba293c91bef85bdfcd111ec0690fe0c666925597ae32e629a773c9d9cbd8606"
+    },
+    {
+      "path": "viewer/ui/icons/radio_checked.svg.import",
+      "bytes": 417,
+      "sha256": "aa99d98101b197ac9d99ad5f1693a22b633e14ea283389ff30a1afbec13bb70b"
+    },
+    {
+      "path": "viewer/ui/icons/search.svg",
+      "bytes": 242,
+      "sha256": "53c21753d55a12be0b5bf169cc3f1d5d6271aafe0307d833fe69f4a2f75d9a16"
+    },
+    {
+      "path": "viewer/ui/icons/search.svg.import",
+      "bytes": 396,
+      "sha256": "4e6f4c1055fd3fd961fa665fd2f37ff06f3f50d13315e328c8a35a6a177c8856"
+    },
+    {
+      "path": "viewer/ui/icons/updown.svg",
+      "bytes": 222,
+      "sha256": "c02146659d89f6f297811c528b59a8ae2f15cbc98e01da56a79bc14dff55d23f"
+    },
+    {
+      "path": "viewer/ui/icons/updown.svg.import",
+      "bytes": 396,
+      "sha256": "de06a7c40d8066165906f83aeb45fc5ac3933f87c50868c9492c7c8ed3d07bfb"
+    },
+    {
+      "path": "viewer/ui/icons/warning.svg",
+      "bytes": 223,
+      "sha256": "1e9ff0526223c24a208b895ffcd32b03c7010c03bf34e3b1378c17a6cf187c0e"
+    },
+    {
+      "path": "viewer/ui/icons/warning.svg.import",
+      "bytes": 399,
+      "sha256": "5dbf63cc1707a6b204ec86cfa5f945661c2a29b9985fe305b131bacc8def33e5"
+    },
+    {
+      "path": "viewer/ui/lab/test_ui_foundation.gd",
+      "bytes": 17099,
+      "sha256": "dd0ce359ed2ac73cea9c95379b7966f9580d81dc7b99211a9ceb92b52e998b8b"
+    },
+    {
+      "path": "viewer/ui/lab/test_ui_foundation.gd.uid",
+      "bytes": 20,
+      "sha256": "c570853466f27ddcc85305a26778d11a6be222d9110d791b1d6454d80d9ff960"
+    },
+    {
+      "path": "viewer/ui/lab/test_viewer_isolation.gd",
+      "bytes": 4083,
+      "sha256": "37a1057fa0c57cd416d3b0a8b3fc112e9eb2e07609a5e5085644ebffd3100ef7"
+    },
+    {
+      "path": "viewer/ui/lab/test_viewer_isolation.gd.uid",
+      "bytes": 20,
+      "sha256": "d6e550f02ef596c25ee67bcd6278fa69026ded9b6e0f3bc23814c136fb0d3c8d"
+    },
+    {
+      "path": "viewer/ui/lab/ui_laboratory.gd",
+      "bytes": 16999,
+      "sha256": "0a992b1e5c0805bfe81bd14fec346920a2e3799badf13b93d31c20a017d5d3ad"
+    },
+    {
+      "path": "viewer/ui/lab/ui_laboratory.gd.uid",
+      "bytes": 20,
+      "sha256": "bc1fd9957bd2218b0adeccee4453a4e98beead0359810ec2cbca87d6f6bc1795"
+    },
+    {
+      "path": "viewer/ui/lab/ui_laboratory.tscn",
+      "bytes": 280,
+      "sha256": "5dc000874537f65d84d60313cd7c04fd3f00b7bc0e142d99ddcc8f3d57b3d70f"
+    },
+    {
+      "path": "viewer/ui/theme/simscope_dark.tres",
+      "bytes": 164,
+      "sha256": "0aa89e9c1c788d1eeabed3a1e3b79f65ed1289a6f7da0a5412eb60328415c880"
+    },
+    {
+      "path": "viewer/ui/theme/simscope_theme.gd",
+      "bytes": 15070,
+      "sha256": "5ea883685f4623b7649d45747376de3f6208f96d25e956bb7269d6e14e3b5e1a"
+    },
+    {
+      "path": "viewer/ui/theme/simscope_theme.gd.uid",
+      "bytes": 20,
+      "sha256": "46deddc4a5d5744be2aa5d68c787399c434a7428a3f6639265b17072bb192154"
+    },
+    {
+      "path": "viewer/ui/theme/simscope_tokens.gd",
+      "bytes": 1988,
+      "sha256": "8badaf701145ada2ddbe47132c04356545b9553b9cc467e1e0139784dfeabd54"
+    },
+    {
+      "path": "viewer/ui/theme/simscope_tokens.gd.uid",
+      "bytes": 20,
+      "sha256": "6241e2b9e4f51c973ac18a41a1bc636c82a93f46863c6bb7c18c9f0576aa4dc1"
+    },
+    {
+      "path": "viewer/ui/theme/simscope_tokens.tres",
+      "bytes": 184,
+      "sha256": "789a4e81e8bc86285096c58ac97949fd722b0d2476b2a179aae6d313ff6b1a6e"
+    },
+    {
+      "path": "viewer/ui/theme/ui_scale.gd",
+      "bytes": 403,
+      "sha256": "81bea013b1e4b2cf58b9bbdfb32565842a55d19ecbe18cfa3f834a1c2b86ca75"
+    },
+    {
+      "path": "viewer/ui/theme/ui_scale.gd.uid",
+      "bytes": 20,
+      "sha256": "d5cf6f7fd686fd1ca1d3fa2c2fbbb40384165f115d1cd82e6244573566e8a617"
+    }
+  ],
+  "reviewed_staged_bytes_excluding_this_report": 2975827,
+  "whitespace_review": "All original UX2 code/docs pass git diff --cached --check. The unmodified upstream LICENSE-DejaVu.txt retains one existing trailing space at line 77; preserve the original notice bytes.",
+  "font_notice_sha256": "7a083b136e64d064794c3419751e5c7dd10d2f64c108fe5ba161eae5e5958a93"
+}

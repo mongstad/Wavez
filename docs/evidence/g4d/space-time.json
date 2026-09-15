@@ -1,0 +1,149 @@
+{
+  "status": "PASS for source space-time kernels and viewer; matched render/state G4e work follows",
+  "python": {
+    "command": "/tmp/simscope-g4-validation/bin/python -m unittest discover -q",
+    "tests": 199,
+    "status": "PASS"
+  },
+  "runs": {
+    "space-time-temporal-regression-1": {
+      "command": [
+        "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+        "--path",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+        "--audio-driver",
+        "Dummy",
+        "--log-file",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/space-time-temporal-regression-1/godot.log",
+        "--headless",
+        "--script",
+        "analysis/test_temporal.gd",
+        "--",
+        "--temporal-fixture=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/space-time-temporal-regression-1"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "seconds": 1.4566762100002961,
+      "source_unchanged": true,
+      "source_sha256": "a62b32e805b4f6eb0965a47a7b0733cf59163fb9b90e45422effca5e08d5d59d",
+      "category": "headless integration",
+      "result": {
+        "backend": "forward_plus",
+        "checks": 23,
+        "failures": [],
+        "integral_range": [
+          "72",
+          "72"
+        ],
+        "named_results": 3,
+        "native_rows": 3.0
+      }
+    },
+    "space-time-viewer-final-1": {
+      "command": [
+        "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+        "--path",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+        "--audio-driver",
+        "Dummy",
+        "--log-file",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/space-time-viewer-final-1/godot.log",
+        "--headless",
+        "--script",
+        "analysis/test_space_time.gd",
+        "--",
+        "--space-time-fixture=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/space-time-viewer-final-1"
+      ],
+      "exit_code": 0,
+      "seconds": 1.1844617329988978,
+      "source_sha256": "8889edd6ae68ec32a748696103b2142fe841ae02eae6c1936f8cc6a521787b21",
+      "source_unchanged": true,
+      "category": "headless integration",
+      "result": {
+        "backend": "forward_plus",
+        "checks": 21,
+        "failures": []
+      }
+    },
+    "space-time-rendered-gl-1": {
+      "command": [
+        "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+        "--path",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+        "--audio-driver",
+        "Dummy",
+        "--log-file",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/space-time-rendered-gl-1/godot.log",
+        "--rendering-method",
+        "gl_compatibility",
+        "--resolution",
+        "1100x820",
+        "--script",
+        "analysis/test_space_time.gd",
+        "--",
+        "--space-time-fixture=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/space-time-rendered-gl-1"
+      ],
+      "exit_code": 0,
+      "seconds": 1.832447847998992,
+      "source_sha256": "4e5748b7428a97524bc8b87d3d15f3f0b4ddf24abd3b4827695542a30f6fbf58",
+      "source_unchanged": true,
+      "category": "actual renderer; image inspection required",
+      "result": {
+        "backend": "gl_compatibility",
+        "checks": 20,
+        "failures": []
+      },
+      "image": {
+        "path": "results/g4/space-time-rendered-gl-1/space-time.png",
+        "sha256": "b5aefb40c09d5202bb7cefdd8a226fffef43cad3e34e11f19f0c34220875f9e4",
+        "inspected": true,
+        "observation": "Pulse peak travels through five physically spaced native rows; intervening time gaps remain empty. Direct-grid labeling, value/time/distance units visible."
+      }
+    },
+    "space-time-rendered-vk-1": {
+      "command": [
+        "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+        "--path",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+        "--audio-driver",
+        "Dummy",
+        "--log-file",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/space-time-rendered-vk-1/godot.log",
+        "--rendering-method",
+        "forward_plus",
+        "--resolution",
+        "1100x820",
+        "--script",
+        "analysis/test_space_time.gd",
+        "--",
+        "--space-time-fixture=/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/g4/space-time-rendered-vk-1"
+      ],
+      "exit_code": 0,
+      "seconds": 2.619053978996817,
+      "source_sha256": "47eb3fafaf9bf2a9f0dc8c903facba93746d2301b9c26d8a8d099eeff5427faf",
+      "source_unchanged": true,
+      "category": "actual renderer; image inspection required",
+      "result": {
+        "backend": "forward_plus",
+        "checks": 20,
+        "failures": []
+      },
+      "image": {
+        "path": "results/g4/space-time-rendered-vk-1/space-time.png",
+        "sha256": "336e5f96c07b58211601b96ee41799b18bdced112ff956a9b380bb7e72f3f69b",
+        "inspected": true,
+        "observation": "Pulse peak travels through five physically spaced native rows; intervening time gaps remain empty. Direct-grid labeling, value/time/distance units visible."
+      }
+    }
+  },
+  "numerical_oracles": [
+    "Affine source line exact values 7.25,7.75,8.25 at native time zero",
+    "Whole node slab bins 24,24,24 sum to 72; cell-centered reflected grid bins 16,16",
+    "Tracer counts 2,3; sample means 2,7; declared weighted estimates 8,42",
+    "Missing/invalid/negative sampling weight support is unavailable",
+    "Pulse at x=t for t=0,0.25,1,2.5,4, no time-row fill",
+    "Invalid zero-weight trilinear corner remains unavailable"
+  ],
+  "limits": "Full spatial bins <=16384 under existing numerical quotas. Inline preview <=16384 display pixels within 1024x512, explicit refusal above IPC admission, no truncation of full scientific results. Default preview 128x64 with width capped by actual source bin count. Actual renderer checks preceded the final two headless sampling-weight UI assertions; rendered heatmap behavior was unchanged.",
+  "performance": "No target-workload or whole-gate performance claim."
+}
