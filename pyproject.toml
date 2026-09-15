@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "simscope-export"
+version = "2.0.0"
+description = "NumPy-first streamed particle, mesh and uniform-grid captures for SimScope"
+readme = "README.md"
+license = {file = "LICENSE"}
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.23"]
+
+[project.optional-dependencies]
+analysis = ["scikit-image>=0.26,<0.27; python_version >= '3.11'"]
+zstd = ["backports.zstd>=1.0; python_version < '3.14'"]
+
+[tool.setuptools.packages.find]
+include = ["simscope_export*"]
