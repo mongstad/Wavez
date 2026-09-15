@@ -1,0 +1,7 @@
+# Preserve historical CSV bytes and source hashes; CSV writers use CRLF.
+*.csv -text whitespace=cr-at-eol
+# Markdown uses trailing two-space hard line breaks.
+*.md whitespace=-blank-at-eol
+# Preserve third-party license text and accepted source byte-for-byte.
+viewer/COLORMAPS_LICENSE.txt whitespace=-blank-at-eol
+viewer/scene/visual_state.gd whitespace=-blank-at-eof
