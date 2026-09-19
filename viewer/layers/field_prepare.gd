@@ -13,6 +13,8 @@ static func prepare(obj: Dictionary, sample: Dictionary, selected: String, budge
 	var gpu_bytes := reduced.x*reduced.y*reduced.z*4
 	if gpu_bytes > budget: return {"error":"Volume texture budget exhausted; preview released."}
 	var values = sample.channels[selected]
+	var color_stats := preload("res://layers/volume_color.gd").statistics(values,cancel)
+	if color_stats.is_empty():return {}
 	if lod == 1 and values is PackedFloat64Array:
 		var display := PackedFloat32Array();display.resize(values.size())
 		for i in range(values.size()):
@@ -35,4 +37,4 @@ static func prepare(obj: Dictionary, sample: Dictionary, selected: String, budge
 					var ix := roundi(x*float(dims.x-1)/(reduced.x-1));plane[y*reduced.x+x] = values[(iz*dims.y+iy)*dims.x+ix]
 					if is_finite(values[(iz*dims.y+iy)*dims.x+ix]) and not is_finite(plane[y*reduced.x+x]):return {"error":"Field exceeds float32 display range; source unchanged."}
 			planes.append(Image.create_from_data(reduced.x,reduced.y,false,Image.FORMAT_RF,plane.to_byte_array()))
-	return {"planes":planes,"dims":dims,"reduced":reduced,"lod":lod,"gpu_bytes":gpu_bytes,"grid_to_world":grid_to_world,"sample":sample,"object":obj,"channel":selected}
+	return {"color_stats":color_stats,"planes":planes,"dims":dims,"reduced":reduced,"lod":lod,"gpu_bytes":gpu_bytes,"grid_to_world":grid_to_world,"sample":sample,"object":obj,"channel":selected}

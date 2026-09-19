@@ -196,6 +196,16 @@ New density defaults are preserved, and legacy recipes migrate their saved bound
 recipe/export checks and external-capture evidence. No VOLUME-003 range policies,
 VOLUME-001 presets or UX4 panel restructuring are included.
 
+## VOLUME-003 — pending owner review
+
+VOLUME-003 (#12) is implemented and **pending owner review** under
+**UX4 — Panels & Information Architecture**. Volume color ranges support frozen
+manual, symmetric-sample and percentile-sample policies with explicit clipping
+disclosure and validated logarithmic mapping. Opacity remains independent.
+[Normalization contract and validation](VOLUME_COLOR_NORMALIZATION.md) record
+native GPU, recipe, export, playback and read-only real-capture checks. No presets,
+interval scan, interpolation or panel reorganization are included.
+
 ## Current limits
 
 G3 permits at most one particle object per capture and supports one translucent volume and one derived isosurface at a time; multiple meshes and slices are supported. Interactive particle, field and mesh CPU preparation is asynchronous in the accepted maintenance implementation; field textures and mesh surfaces are staged on the main thread. Stable mesh positions interpolate on the GPU, while scalar colors hold the earlier source sample. Initial opening and explicit scientific inspection/export retain synchronous work. Mesh inspection positions and deformed normals are materialized on demand; rendering remains unshaded. Source arrays and probes retain scientific precision, while GPU previews use float32 and may reduce resolution; isosurfaces are explicitly approximate. Budgets are separate allocation limits, not a whole-process memory guarantee. The earlier full G3 demo completed about 19.2 samples/s; neither that result nor the new particle controls establish universal 30 FPS performance. Concurrent CuPy simulation/viewer performance has not been validated. Detailed contracts and measurements are in the [handbook](SIMSCOPE_HANDBOOK.md) and [format/API guide](CAPTURE_FORMAT_AND_API.md).

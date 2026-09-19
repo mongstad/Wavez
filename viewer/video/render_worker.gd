@@ -1,4 +1,5 @@
 extends Node
+const GridView = preload("res://layers/grid_view.gd")
 const Job = preload("res://video/render_job.gd")
 const Timeline = preload("res://video/offline_timeline.gd")
 var job_path := ""
@@ -151,6 +152,12 @@ func _run() -> void:
 		if point.is_empty():
 			finish("failed", timeline.error, 1)
 			return
+		if viewer.scene_layers != null:
+			for id in viewer.scene_layers.views:
+				var layer = viewer.scene_layers.views[id]
+				var settings: Dictionary = viewer.scene_layers.states[id]
+				if layer is GridView and settings.visible and (settings.volume or settings.slice) and not layer.color_error.is_empty():
+					finish("failed",layer.color_error,1);return
 		if viewer.scene_layers != null and not await viewer.scene_layers.wait_for_surface():
 			finish("failed",viewer.scene_layers.iso_error,1);return
 		viewer.camera.transform = Timeline.camera_at(job.state, float(n)/job.fps, job.get("camera_mode", "locked") == "orbit", float(job.get("orbit_speed", 0.08)))

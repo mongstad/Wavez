@@ -8,6 +8,7 @@ uniform vec3 grid_size;
 uniform vec3 texture_size;
 uniform vec3 bounds_min;
 uniform vec3 bounds_max;
+uniform bool color_log = false;
 uniform float lower = 0.0;
 uniform float upper = 1.0;
 uniform float opacity = 0.25;
@@ -57,6 +58,7 @@ void fragment() {
         float value=texture(field_texture,uv_at(go+gd*(t+dt*0.5))).r;
         if(isnan(value) || isinf(value)) continue;
         float u=clamp((value-lower)/max(upper-lower,1e-38),0.0,1.0);
+        if(color_log) u=clamp((log(max(value,lower))-log(lower))/(log(upper)-log(lower)),0.0,1.0);
         // Extinction has its own scalar thresholds; signed color ranges do
         // not give zero-valued space the midpoint's opacity.
         float opacity_value=opacity_magnitude ? abs(value) : value;

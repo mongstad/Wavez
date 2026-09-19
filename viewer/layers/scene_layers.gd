@@ -3,6 +3,7 @@ const Reader = preload("res://layers/scene_reader.gd")
 const GridView = preload("res://layers/grid_view.gd")
 const MeshView = preload("res://layers/mesh_view.gd")
 const Profile = preload("res://scene/playback_profile.gd")
+const ColorMapping = preload("res://layers/volume_color.gd")
 const Opacity = preload("res://layers/volume_opacity.gd")
 var viewer
 var playback
@@ -28,6 +29,9 @@ var probe_spins: Array[SpinBox] = []
 var selected_volume := ""
 var layer_settings_buttons: Dictionary = {}
 var opacity_controls := {}
+var color_controls := {}
+var range_thread := Thread.new()
+var range_request := {}
 var iso_pid := -1
 var iso_directory := ""
 var iso_node
@@ -57,6 +61,7 @@ func setup(scene, source) -> void:
 			var channel: String = reader.samples[id][0].descriptor.arrays[0].name if not reader.samples[id].is_empty() else ""
 			states[id] = {"visible":selected_volume.is_empty(),"channel":channel,"volume":true,"slice":false,"lower":0.0,"upper":1.0,"opacity":.25,"step":.5,"colormap":"viridis","slice_normal":[0.0,0.0,1.0],"slice_distance":0.0,"clip":false,"clip_normal":[1.0,0.0,0.0],"clip_distance":0.0,"threshold":.5,"isosurface":false}
 			states[id].opacity_mapping = Opacity.DEFAULT.duplicate()
+			states[id].color_mapping = ColorMapping.DEFAULT.duplicate()
 			if selected_volume.is_empty(): selected_volume = id
 		else:
 			var view := MeshView.new();add_child(view);views[id] = view
@@ -79,6 +84,8 @@ func clear_views() -> void:
 	cancel_iso();iso_finished_target = "";iso_target = "";iso_result = {};identity_generation = -1
 	if is_instance_valid(iso_node):iso_node.clear();iso_node.visible = false
 func close() -> void:
+	if range_thread.is_started():range_thread.wait_to_finish()
+	range_request = {}
 	if playback != null:playback.close()
 	if field_playback != null:field_playback.close()
 	if mesh_playback != null:mesh_playback.close()
@@ -224,6 +231,10 @@ func _sample_profiled(time: float, asynchronous: bool, force_particles: bool) ->
 					info.color_compositing = "Compatibility sRGB framebuffer" if RenderingServer.get_current_rendering_method() == "gl_compatibility" else "Forward+ linear framebuffer"
 					info.effective_ray_step = "max(requested step, ray length / 1024); early alpha stop .995"
 					info.opacity_mapping = Opacity.resolve(states[id]).duplicate()
+					info.color_mapping = ColorMapping.resolve(states[id]).duplicate()
+					info.color_bounds = [states[id].lower,states[id].upper]
+					info.color_source_statistics = view.color_stats
+					if not view.color_error.is_empty():info.status = "unavailable";info.reason = view.color_error
 					info.numeric_precision = str(a.channels[states[id].channel].get_class()) if a.channels[states[id].channel] is Object else ("float64 source" if a.channels[states[id].channel] is PackedFloat64Array else "float32 source")
 			else:
 				var view = views[id]
@@ -231,6 +242,7 @@ func _sample_profiled(time: float, asynchronous: bool, force_particles: bool) ->
 				if status == "unavailable": info.status = status;info.reason = view.error
 				elif status == "interpolated": info.status = status
 				info.display_lod = "full mesh";info.channel = states[id].channel
+		if views.has(id) and views[id] is GridView:_update_color_status(id)
 		layer_samples.append(info)
 		if labels.has(id):
 			labels[id].text = "%s: %s%s\n%s" % [id,info.status," @ %.4f" % info.source_time if info.source_time != null else "",info.display_lod]
@@ -357,7 +369,14 @@ func _scalar_input(parent: Control, title: String, value: float, changed: Callab
 func _set_range(id: String, key: String, value: float) -> bool:
 	if (key == "lower" and value >= states[id].upper) or (key == "upper" and value <= states[id].lower):
 		viewer.status_label.text = "Range maximum must exceed minimum.";return false
-	states[id][key] = value;resample();return true
+	if reader.objects[id].kind == "volume":
+		var candidate: Dictionary = states[id].duplicate(true);candidate[key] = value
+		candidate.color_mapping.policy = "manual";candidate.color_mapping.source_channel = "";candidate.color_mapping.source_time = 0.
+		var problem := ColorMapping.validate(candidate)
+		if not problem.is_empty():viewer.status_label.text = problem;return false
+		states[id] = candidate
+	else:states[id][key] = value
+	resample();return true
 func _set_threshold(id: String, value: float) -> bool:
 	states[id].threshold = value;_sync_iso_target();return true
 func _set_opacity_mapping(id: String, key: String, value) -> bool:
@@ -415,6 +434,7 @@ func _build_ui() -> void:
 		channel.item_selected.connect(func(i):states[id].channel = str(channel.get_item_metadata(i));resample())
 		_scalar_input(body,"Color range minimum" if reader.objects[id].kind == "volume" else "Range minimum",states[id].lower,func(v):return _set_range(id,"lower",v))
 		_scalar_input(body,"Color range maximum" if reader.objects[id].kind == "volume" else "Range maximum",states[id].upper,func(v):return _set_range(id,"upper",v))
+		if reader.objects[id].kind == "volume":_build_color_ui(body,id)
 		var map := OptionButton.new();body.add_child(map)
 		for name in viewer.colormaps:map.add_item(name)
 		for i in range(map.item_count):
@@ -488,6 +508,8 @@ func upgrade_state(value: Dictionary) -> Dictionary:
 		var layer = upgraded.layers[id]
 		if reader.objects.has(id) and reader.objects[id].kind == "volume" and layer is Dictionary and not layer.has("opacity_mapping") and layer.has_all(["lower","upper"]):
 			layer.opacity_mapping = Opacity.resolve(layer)
+		if reader.objects.has(id) and reader.objects[id].kind == "volume" and layer is Dictionary and not layer.has("color_mapping"):
+			layer.color_mapping = ColorMapping.DEFAULT.duplicate()
 	return upgraded
 func validate_state(value) -> String:
 	if not value is Dictionary or not value.get("layers") is Dictionary or not Reader.Index.whole(value.get("gpu_budget_mib")) or value.gpu_budget_mib < 1 or value.gpu_budget_mib > 2048: return "Invalid layer budget/state."
@@ -506,6 +528,8 @@ func validate_state(value) -> String:
 		if not names.has(incoming.channel):return "Unknown layer scalar channel."
 		if incoming.upper <= incoming.lower or not viewer.colormaps.has(incoming.colormap):return "Invalid layer range/colormap."
 		if reader.objects[id].kind == "volume":
+			var color_problem := ColorMapping.validate(incoming)
+			if not color_problem.is_empty():return color_problem
 			var opacity_problem := Opacity.validate(incoming.opacity_mapping)
 			if not opacity_problem.is_empty():return opacity_problem
 			if incoming.opacity < 0 or incoming.opacity > 10 or incoming.step < .05 or incoming.step > 10 or Reader.vec(incoming.slice_normal).length() < .001: return "Invalid volume controls."
@@ -516,6 +540,7 @@ func validate_state(value) -> String:
 	if visible_volumes>1:return "Only one translucent volume may be visible."
 	return ""
 func apply_state(value: Dictionary) -> void:
+	range_request = {} # A recipe/reset invalidates any pending derived range.
 	# Layer controls are rebuilt, but probe inputs/results and disclosure state
 	# belong to the current session, not the recipe's rendering-layer snapshot.
 	var probe_values: Array = probe_spins.map(func(spin):return spin.value)
@@ -526,7 +551,7 @@ func apply_state(value: Dictionary) -> void:
 	value = upgrade_state(value)
 	gpu_budget_mib = int(value.gpu_budget_mib);states = value.layers.duplicate(true)
 	if is_instance_valid(panel):panel.get_parent().remove_child(panel);panel.queue_free()
-	labels.clear();probe_spins.clear();layer_settings_buttons.clear();opacity_controls.clear();_build_ui()
+	labels.clear();probe_spins.clear();layer_settings_buttons.clear();opacity_controls.clear();color_controls.clear();_build_ui()
 	for i in range(mini(probe_values.size(),probe_spins.size())):probe_spins[i].set_value_no_signal(probe_values[i])
 	probe_label.text = probe_text
 	for id in expanded:
@@ -633,3 +658,68 @@ func frame_scene() -> void:
 	if not low.is_finite() or not high.is_finite():return
 	viewer.camera_target = (low+high)*.5;viewer.half_extent = maxf((high-low).length()*.5,.1)
 	viewer.camera_distance = viewer.half_extent*2.8;viewer.camera.far = maxf(1000,viewer.camera_distance*5);viewer._update_camera()
+
+func _set_color_normalization(id: String, mode: String) -> bool:
+	var candidate: Dictionary = states[id].duplicate(true);candidate.color_mapping.normalization = mode
+	var problem := ColorMapping.validate(candidate)
+	if problem.is_empty():problem = ColorMapping.sample_problem(candidate,views[id].color_stats)
+	if not problem.is_empty():viewer.status_label.text = problem;return false
+	states[id] = candidate;resample();return true
+func _build_color_ui(body: VBoxContainer, id: String) -> void:
+	var mode := OptionButton.new();mode.add_item("Linear color");mode.add_item("Logarithmic color • positive only");body.add_child(mode)
+	mode.select(1 if states[id].color_mapping.normalization == "log" else 0)
+	mode.tooltip_text = "Display-only normalization. Opacity remains independent. Log requires positive bounds and positive finite source samples; invalid samples are unavailable."
+	mode.item_selected.connect(func(i):
+		if not _set_color_normalization(id,"log" if i else "linear"):mode.select(1 if states[id].color_mapping.normalization == "log" else 0))
+	var symmetric := Button.new();symmetric.text = "Freeze symmetric range from sample";body.add_child(symmetric)
+	symmetric.pressed.connect(func():request_color_range(id,"symmetric"))
+	var low := _number(body,"Lower percentile • display choice",states[id].color_mapping.percentile_low,0,100,.1,func(_v):pass)
+	var high := _number(body,"Upper percentile • display choice",states[id].color_mapping.percentile_high,0,100,.1,func(_v):pass)
+	var percent := Button.new();percent.text = "Freeze percentile range from sample";body.add_child(percent)
+	percent.pressed.connect(func():request_color_range(id,"percentile",low.value,high.value))
+	var reset := Button.new();reset.text = "Reset color • linear 0–1";body.add_child(reset)
+	reset.pressed.connect(func():
+		states[id].lower = 0.;states[id].upper = 1.;states[id].color_mapping = ColorMapping.DEFAULT.duplicate();apply_state(snapshot()))
+	var status := Label.new();status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART;body.add_child(status)
+	color_controls[id] = {"mode":mode,"symmetric":symmetric,"percentile_low":low,"percentile_high":high,"percentile":percent,"reset":reset,"status":status}
+	_update_color_status(id)
+func _update_color_status(id: String) -> void:
+	if not color_controls.has(id):return
+	var state: Dictionary = states[id];var m: Dictionary = state.color_mapping
+	var description := "%s color • %s range • fixed across playback.\n" % [m.normalization,m.policy]
+	if not m.source_channel.is_empty():description += "Derived from %s @ %s; display choice.\n" % [m.source_channel,str(m.source_time)]
+	description += "Clipping: values below %s / above %s use endpoint colors." % [str(state.lower),str(state.upper)]
+	var view = views[id];var stats: Dictionary = view.color_stats
+	if stats.get("finite",0)>0:
+		description += "\nSource finite range: %s to %s." % [str(stats.minimum),str(stats.maximum)]
+		if stats.minimum < state.lower or stats.maximum > state.upper:description += " COLOR CLIPPING PRESENT."
+	if not view.color_error.is_empty():description += "\n"+view.color_error
+	color_controls[id].status.text = description
+func request_color_range(id: String, policy: String, low := 1.0, high := 99.0) -> bool:
+	if range_thread.is_started():viewer.status_label.text = "A range calculation is already running.";return false
+	var view = views[id]
+	if view.data.is_empty() or view.channel != states[id].channel:viewer.status_label.text = "Show and sample the volume first.";return false
+	if policy not in ["symmetric","percentile"] or not is_finite(low) or not is_finite(high) or low<0 or high>100 or low>=high:viewer.status_label.text = "Invalid range policy or percentiles.";return false
+	var values = view.data.channels[view.channel]
+	var memory := preload("res://layers/playback_buffer.gd").memory_headroom()
+	if values.size()>ColorMapping.MAX_VALUES or memory.available_physical < memory.reserve+values.size()*16:
+		viewer.status_label.text = "Range calculation exceeds its bounded memory budget; use manual bounds.";return false
+	range_request = {"id":id,"key":view.key,"generation":generation,"state":states[id].duplicate(true),"time":view.data.time,"policy":policy,"low":low,"high":high}
+	var status := range_thread.start(func():return ColorMapping.derive(values,policy,low,high),Thread.PRIORITY_LOW)
+	if status != OK:range_request = {};viewer.status_label.text = "Could not start range calculation.";return false
+	viewer.status_label.text = "Calculating a frozen display range from the current source sample…";return true
+func _process(_delta: float) -> void:
+	if not range_thread.is_started() or range_thread.is_alive():return
+	var result: Dictionary = range_thread.wait_to_finish();var request := range_request;range_request = {}
+	if request.is_empty():return
+	var id: String = request.id
+	if generation != request.generation or not states.has(id) or views[id].key != request.key or states[id] != request.state:
+		viewer.status_label.text = "Range result discarded because the sample or settings changed.";return
+	if result.has("error"):viewer.status_label.text = result.error;return
+	var candidate: Dictionary = states[id].duplicate(true)
+	candidate.lower = result.lower;candidate.upper = result.upper
+	candidate.color_mapping.policy = request.policy;candidate.color_mapping.source_channel = candidate.channel;candidate.color_mapping.source_time = request.time
+	candidate.color_mapping.percentile_low = request.low;candidate.color_mapping.percentile_high = request.high
+	var problem := ColorMapping.validate(candidate)
+	if not problem.is_empty():viewer.status_label.text = problem;return
+	states[id] = candidate;apply_state(snapshot());viewer.status_label.text = "Display range frozen from the recorded sample. Opacity unchanged."

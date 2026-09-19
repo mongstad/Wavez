@@ -72,11 +72,22 @@ func configure(viewer, preset: String, active: bool) -> void:
 	viewer.scene_layers.states.field.clip = active
 	viewer.scene_layers.states.field.slice = active
 	viewer.scene_layers.states.field.opacity_mapping = {"mode":"magnitude" if active else "linear","lower":.125 if active else -.5,"upper":3.75 if active else 20.0}
+	viewer.scene_layers.states.field.color_mapping = preload("res://layers/volume_color.gd").DEFAULT.duplicate()
+	viewer.scene_layers.states.field.color_mapping.normalization = "log" if active else "linear"
+	viewer.scene_layers.states.field.lower = .1 if active else -.5;viewer.scene_layers.states.field.upper = 30. if active else 20.
 	viewer.scene_layers.states.mesh.wireframe = active
 	viewer.scene_layers.resample()
 	viewer._seek_time(.5 if active else 0)
+	var field = viewer.scene_layers.views.field
+	var policy := "percentile" if active else "symmetric"
+	var bounds := preload("res://layers/volume_color.gd").derive(field.data.channels[field.channel],policy,1.,99.)
+	viewer.scene_layers.states.field.lower = bounds.lower;viewer.scene_layers.states.field.upper = bounds.upper
+	viewer.scene_layers.states.field.color_mapping.policy = policy
+	viewer.scene_layers.states.field.color_mapping.source_channel = field.channel;viewer.scene_layers.states.field.color_mapping.source_time = field.data.time
+	viewer.scene_layers.resample()
 
 func check_ui(viewer, visual: Dictionary, label: String) -> void:
+	check(viewer.scene_layers.color_controls.field.mode.selected == (1 if visual.scene.layers.field.color_mapping.normalization == "log" else 0),label+" color normalization control")
 	var mapping: Dictionary = visual.scene.layers.field.opacity_mapping
 	var controls: Dictionary = viewer.scene_layers.opacity_controls.field
 	check(controls.mode.selected == (1 if mapping.mode == "magnitude" else 0),label+" opacity mode control")
@@ -174,6 +185,7 @@ func run() -> void:
 	var old_recipe := Exact.snapshot(control.temporal,true)
 	var old_payload: Dictionary = Exact.unpack(old_recipe.payload)
 	old_payload.base.visual.scene.layers.field.erase("opacity_mapping")
+	old_payload.base.visual.scene.layers.field.erase("color_mapping")
 	old_payload.base.visual.scene.layers.field.lower = -.5;old_payload.base.visual.scene.layers.field.upper = 2.5
 	old_recipe.payload = Exact.pack(old_payload)
 	var old_path := output.path_join("legacy.inspection.json")

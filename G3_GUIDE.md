@@ -22,6 +22,16 @@ color range and a diverging colormap to distinguish sign. This is an explicit
 display choice; it changes neither source values nor probes. Fresh views use
 linear opacity thresholds 0–1. See [volume mapping](docs/VOLUME_OPACITY_MAPPING.md)
 for the exact formula, persistence and legacy recipe behavior.
+
+Volume color bounds remain fixed across playback. Edit them manually, or use
+**Freeze symmetric range from sample** / **Freeze percentile range from sample**
+to derive a frozen range from the currently displayed source sample. Percentiles
+are explicit display choices; clipping and the source finite range are disclosed
+beside the controls. **Logarithmic color** requires positive bounds and positive
+finite source values; invalid samples are unavailable rather than silently
+remapped. **Reset color • linear 0–1** preserves opacity settings. See
+[volume normalization](docs/VOLUME_COLOR_NORMALIZATION.md) for policy, limits and
+validation, including the distinction between frozen and interval-derived bounds.
 The three plane-normal controls also allow arbitrary orientations. Source probes
 accept world xyz and draw a crosshair. Layer labels show source time/status and
 preview LOD. Use Physical time to see independent layer cadences. The **Scientific**
