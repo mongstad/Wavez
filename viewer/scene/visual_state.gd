@@ -46,6 +46,7 @@ static func apply(viewer, state: Dictionary) -> void:
 	viewer.guide_mesh.visible = state.get("guide_visible", false)
 	viewer.starfield.visible = state.get("starfield_visible", not viewer.clean_view)
 	for key in state.get("environment", {}): viewer.environment.set(key, state.environment[key])
+	viewer.glow_slider.editable = viewer.environment.glow_enabled
 	for key in state.get("viewport", {}): viewer.get_viewport().set(key, state.viewport[key])
 	for name in state.get("sections", {}):
 		if viewer.sections.has(name): viewer.sections[name].visible = state.sections[name]
