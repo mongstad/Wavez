@@ -1,0 +1,32 @@
+{
+  "issue": 12,
+  "status": "pending owner review",
+  "baseline": "456930cf91f01da98fca83838d1347fea830c24e",
+  "godot": "4.7.2.stable.official.ed1daf0bf",
+  "gpu": "NVIDIA GeForce RTX 3070 Ti",
+  "backends": [
+    "forward_plus",
+    "gl_compatibility"
+  ],
+  "synthetic_checks_per_backend": 130,
+  "real_checks_per_backend": 106,
+  "opacity_regression_checks_per_backend": 98,
+  "recipe_checks": 3051,
+  "playback_maintenance_checks": 66,
+  "playback_lifecycle_checks": 51,
+  "unexpected_failures": [],
+  "export": "Frozen percentile still pixels identical; sidecar policy retained; invalid log export refused",
+  "historical_capture": "Old issue-11 path unavailable; used a newer read-only capture, not a baseline comparison",
+  "notes": [
+    "real visual replay and whole-file hashes validated; full source-bound recipes tested on synthetic fixtures",
+    "hidden-layer disclosure check added after real runs and verified on synthetic final runs"
+  ],
+  "skipped": [
+    "interval-wide range derivation (evaluated; frozen ranges implemented)",
+    "other GPUs/OSes",
+    "physical 4K/multiple UI scales",
+    "long-session/full-scale performance benchmark",
+    "full G0\u2013G4 suites",
+    "automated moving video clip"
+  ]
+}

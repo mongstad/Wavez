@@ -12,6 +12,8 @@ var key := ""
 var gpu_bytes := 0
 var lod := 1
 var error := ""
+var color_stats := {}
+var color_error := ""
 var world_to_grid := Transform3D.IDENTITY
 var grid_size := Vector3.ZERO
 var bounds_min := Vector3.ZERO
@@ -22,7 +24,7 @@ func setup(camera: Camera3D) -> void:
 	camera.add_child(quad)
 	slice_material.shader = preload("res://layers/slice.gdshader");slice.material_override = slice_material;add_child(slice)
 func clear() -> void:
-	texture = null;data = {};key = "";gpu_bytes = 0
+	texture = null;data = {};key = "";gpu_bytes = 0;color_stats = {};color_error = ""
 	material.set_shader_parameter("field_texture",null);slice_material.set_shader_parameter("field_texture",null)
 	if quad != null:quad.visible = false
 	slice.visible = false
@@ -44,7 +46,7 @@ func load_sample(obj: Dictionary, sample: Dictionary, selected: String, budget: 
 	var ready := staged
 	if ready.is_empty():ready = upload(preload("res://layers/field_prepare.gd").prepare(obj,sample,selected,budget))
 	if ready.is_empty() or ready.has("error"):error = ready.get("error","Field preparation cancelled.");return false
-	texture = ready.texture;lod = ready.lod;gpu_bytes = ready.gpu_bytes
+	texture = ready.texture;lod = ready.lod;gpu_bytes = ready.gpu_bytes;color_stats = ready.color_stats
 	object = obj;data = sample;channel = selected;key = target
 	world_to_grid = ready.grid_to_world.affine_inverse();grid_size = Vector3(ready.dims)
 	bounds_min = Vector3.ZERO if sample.geometry.centering == "node" else Vector3.ONE*-.5
@@ -55,8 +57,10 @@ func load_sample(obj: Dictionary, sample: Dictionary, selected: String, budget: 
 	return true
 func apply(state: Dictionary, lut: Texture2D) -> void:
 	if texture == null: return
-	quad.visible = state.visible and state.volume;slice.visible = state.visible and state.slice
+	color_error = preload("res://layers/volume_color.gd").sample_problem(state,color_stats)
+	quad.visible = state.visible and state.volume and color_error.is_empty();slice.visible = state.visible and state.slice and color_error.is_empty()
 	for mat in [material,slice_material]:
+		mat.set_shader_parameter("color_log",preload("res://layers/volume_color.gd").resolve(state).normalization == "log")
 		mat.set_shader_parameter("lower",state.lower);mat.set_shader_parameter("upper",state.upper);mat.set_shader_parameter("transfer",lut)
 	material.set_shader_parameter("opacity",state.opacity);material.set_shader_parameter("step_world",state.step)
 	var mapping := preload("res://layers/volume_opacity.gd").resolve(state)

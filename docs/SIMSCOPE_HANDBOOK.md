@@ -82,6 +82,16 @@ opacity thresholds to preserve their original rendering. The
 [mapping contract and validation](VOLUME_OPACITY_MAPPING.md) describe persistence,
 limits and examples. No automatic color-range policy or preset is added.
 
+Volume color normalization supports linear and explicitly selected logarithmic
+mapping, independently of opacity. Bounds can be entered manually or frozen from
+the current source sample using its symmetric extrema or selected percentiles.
+All policies retain the resolved bounds across playback and recipe restoration.
+The controls disclose endpoint clipping, source finite extrema and actual clipping
+presence. Log requires positive bounds and positive finite sample values; an
+ineligible sample is explicitly unavailable, with source probes still accessible.
+These are display choices, not calibrated interpretations. See
+[volume color policies and validation](VOLUME_COLOR_NORMALIZATION.md).
+
 Probes read full source arrays with trilinear spatial interpolation and explicit world-to-grid conversion. At source sample coordinates they recover the source value subject to arithmetic/coordinate precision. An arbitrary probe point is an interpolated value, not an extra recorded scientific sample. Out-of-domain probes and invalid interpolation neighborhoods report unavailable. Python uses float64 probe coordinates; Godot coordinates are float32, so its displayed decimal values are not a last-bit validation instrument.
 
 The white three-axis cross belongs to **Scene layers → Source probe**, not the

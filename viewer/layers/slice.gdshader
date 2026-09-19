@@ -7,6 +7,7 @@ uniform vec3 grid_size;
 uniform vec3 texture_size;
 uniform vec3 bounds_min;
 uniform vec3 bounds_max;
+uniform bool color_log = false;
 uniform float lower = 0.0;
 uniform float upper = 1.0;
 varying vec3 world;
@@ -18,5 +19,6 @@ void fragment() {
     float value=texture(field_texture,uv).r;
     if(isnan(value) || isinf(value)) discard;
     float u=clamp((value-lower)/max(upper-lower,1e-38),0.0,1.0);
+    if(color_log) u=clamp((log(max(value,lower))-log(lower))/(log(upper)-log(lower)),0.0,1.0);
     ALBEDO=texture(transfer,vec2((u*255.0+0.5)/256.0,0.5)).rgb;
 }

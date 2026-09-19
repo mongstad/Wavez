@@ -63,6 +63,18 @@ recipe validation before applying state. Reset restores only the opacity mapping
 to linear 0–1. [Mapping details](docs/VOLUME_OPACITY_MAPPING.md) explain threshold
 validation and float32 preview limits; numerical probes still use source values.
 
+Volume `color_mapping` independently records `normalization` (`linear`/`log`),
+`policy` (`manual`/`symmetric`/`percentile`), percentile endpoints and the derivation
+source channel/time. Resolved bounds remain in the layer's `lower`/`upper` fields.
+All three policies are frozen: restore and playback use saved bounds without
+recomputing percentiles. Manual edits replace the derivation policy with manual;
+reset restores only linear color 0–1. Older states missing the whole field migrate
+to frozen manual linear color, preserving their bounds and opacity. Partial or
+invalid mapping objects are refused. Source-dependent log validity is checked on
+each prepared sample; invalid views are explicitly unavailable and video exports
+fail rather than publishing blank field frames. See the
+[color contract](docs/VOLUME_COLOR_NORMALIZATION.md).
+
 v3 additionally owns selection definitions/groups/active selection/overlay
 settings and the saved analysis summaries, result references, comparison
 bindings, bookmarks and selected-series/member-address layout. Numerical results

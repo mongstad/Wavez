@@ -1,0 +1,197 @@
+{
+  "cases": [
+    {
+      "bounds": [
+        -1.7196707725524902,
+        1.7196707725524902
+      ],
+      "channel": "density",
+      "mapping": {
+        "normalization": "linear",
+        "percentile_high": 99.0,
+        "percentile_low": 1.0,
+        "policy": "symmetric",
+        "source_channel": "density",
+        "source_time": 200.0
+      },
+      "opacity": {
+        "lower": 0.0,
+        "mode": "magnitude",
+        "upper": 1.7196707725524902
+      },
+      "policy": "symmetric",
+      "probe": 1.5568903684616089
+    },
+    {
+      "bounds": [
+        0.0,
+        0.05876532409340133
+      ],
+      "channel": "density",
+      "mapping": {
+        "normalization": "linear",
+        "percentile_high": 99.0,
+        "percentile_low": 1.0,
+        "policy": "percentile",
+        "source_channel": "density",
+        "source_time": 200.0
+      },
+      "opacity": {
+        "lower": 0.0,
+        "mode": "magnitude",
+        "upper": 1.7196707725524902
+      },
+      "policy": "percentile",
+      "probe": 1.5568903684616089
+    },
+    {
+      "bounds": [
+        -1.2984671592712402,
+        1.2984671592712402
+      ],
+      "channel": "psi_real",
+      "mapping": {
+        "normalization": "linear",
+        "percentile_high": 99.0,
+        "percentile_low": 1.0,
+        "policy": "symmetric",
+        "source_channel": "psi_real",
+        "source_time": 200.0
+      },
+      "opacity": {
+        "lower": 0.0,
+        "mode": "magnitude",
+        "upper": 1.2984671592712402
+      },
+      "policy": "symmetric",
+      "probe": -1.04829740524292
+    },
+    {
+      "bounds": [
+        -0.17405554667115208,
+        0.034619959518313405
+      ],
+      "channel": "psi_real",
+      "mapping": {
+        "normalization": "linear",
+        "percentile_high": 99.0,
+        "percentile_low": 1.0,
+        "policy": "percentile",
+        "source_channel": "psi_real",
+        "source_time": 200.0
+      },
+      "opacity": {
+        "lower": 0.0,
+        "mode": "magnitude",
+        "upper": 1.2984671592712402
+      },
+      "policy": "percentile",
+      "probe": -1.04829740524292
+    },
+    {
+      "bounds": [
+        -0.9747978448867798,
+        0.9747978448867798
+      ],
+      "channel": "psi_imag",
+      "mapping": {
+        "normalization": "linear",
+        "percentile_high": 99.0,
+        "percentile_low": 1.0,
+        "policy": "symmetric",
+        "source_channel": "psi_imag",
+        "source_time": 200.0
+      },
+      "opacity": {
+        "lower": 0.0,
+        "mode": "magnitude",
+        "upper": 0.9747978448867798
+      },
+      "policy": "symmetric",
+      "probe": -0.6767295598983765
+    },
+    {
+      "bounds": [
+        -0.10162157841026781,
+        0.031119088437408203
+      ],
+      "channel": "psi_imag",
+      "mapping": {
+        "normalization": "linear",
+        "percentile_high": 99.0,
+        "percentile_low": 1.0,
+        "policy": "percentile",
+        "source_channel": "psi_imag",
+        "source_time": 200.0
+      },
+      "opacity": {
+        "lower": 0.0,
+        "mode": "magnitude",
+        "upper": 0.9747978448867798
+      },
+      "policy": "percentile",
+      "probe": -0.6767295598983765
+    }
+  ],
+  "checks": 106,
+  "failures": [],
+  "renderer": "gl_compatibility",
+  "export": {
+    "complete": true,
+    "pixels_identical": true,
+    "policy_preserved": true
+  },
+  "source_sha256_unchanged": "0805d497ad0f69440f3aa7ac30d6cfe9642a4efd142ae406d3a685b595d7d3f5",
+  "source_file": "free_collapse_simscope.ssc",
+  "source_bytes": 11542897957,
+  "oracles": {
+    "density": {
+      "bound": 1.7196707725524902,
+      "percentiles": [
+        0.0,
+        0.05876532409340133
+      ],
+      "sha256": "821d5a30c44a82acd0ebcd3ff2e310c4168bb8c80747418a6e1b22adc68a288f",
+      "probe_world": [
+        0.25,
+        0.25,
+        -0.25
+      ],
+      "probe_value": 1.5568903684616089,
+      "log_valid": false,
+      "percentile_clips": true
+    },
+    "psi_real": {
+      "bound": 1.2984671592712402,
+      "percentiles": [
+        -0.17405554667115208,
+        0.034619959518313405
+      ],
+      "sha256": "0250da0112a08cf2baf242d707b7e1cec09edfe1aa5ff718d205f3ab0f1d5763",
+      "probe_world": [
+        0.25,
+        0.25,
+        -0.25
+      ],
+      "probe_value": -1.04829740524292,
+      "log_valid": false,
+      "percentile_clips": true
+    },
+    "psi_imag": {
+      "bound": 0.9747978448867798,
+      "percentiles": [
+        -0.10162157841026781,
+        0.031119088437408203
+      ],
+      "sha256": "d4bc29577943b065a64c28c81ddaea04d6d75d920a3d91abfc5a07f2e244d75e",
+      "probe_world": [
+        0.25,
+        0.25,
+        -0.25
+      ],
+      "probe_value": -0.6767295598983765,
+      "log_valid": false,
+      "percentile_clips": true
+    }
+  }
+}
