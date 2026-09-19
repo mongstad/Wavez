@@ -115,6 +115,27 @@ that the background depth is noticeable but quiet, with no distracting banding,
 and that labels, diagnostics and focus states remain readable at their normal
 scale. Production captures should retain their previous appearance.
 
+## UX-STYLE-003 — pending owner review
+
+Issue #7 adds five separate UI tier tokens and compact Label variations for
+Low / Medium / High / XHigh / Max. The laboratory Tiers page pairs labeled,
+ordinal examples with independent operational status icons/text. Panels remain
+neutral; scientific colormaps and production consumers are unchanged.
+
+Godot 4.7.2 Forward+ validation passed 1,366 native checks, 218 contrast pairs,
+300 float64 oracle cases, six viewer-isolation checks, six HUD cases and the
+existing 16 size/scale combinations. Import and logs were clean; source
+invariance and whitespace checks passed. The tier labels meet 4.5:1 contrast
+on all four base surfaces. [Tier screenshot](evidence/issue-7/tiers.png) and
+[summary](evidence/issue-7/summary.json) retain review evidence.
+
+Owner review should check immediate tier recognition and separation from
+Warning/Error on their display, including the small labels at preferred scale.
+Color-vision accessibility is supported by explicit labels and ordinal cues;
+formal color-vision/user testing, physical 4K/mixed-monitor, compatibility
+renderer and archived historical comparisons were not performed. No subsequent
+issue or production migration is authorized by this implementation.
+
 ## Current limits
 
 G3 permits at most one particle object per capture and supports one translucent volume and one derived isosurface at a time; multiple meshes and slices are supported. Interactive particle, field and mesh CPU preparation is asynchronous in the accepted maintenance implementation; field textures and mesh surfaces are staged on the main thread. Stable mesh positions interpolate on the GPU, while scalar colors hold the earlier source sample. Initial opening and explicit scientific inspection/export retain synchronous work. Mesh inspection positions and deformed normals are materialized on demand; rendering remains unshaded. Source arrays and probes retain scientific precision, while GPU previews use float32 and may reduce resolution; isosurfaces are explicitly approximate. Budgets are separate allocation limits, not a whole-process memory guarantee. The earlier full G3 demo completed about 19.2 samples/s; neither that result nor the new particle controls establish universal 30 FPS performance. Concurrent CuPy simulation/viewer performance has not been validated. Detailed contracts and measurements are in the [handbook](SIMSCOPE_HANDBOOK.md) and [format/API guide](CAPTURE_FORMAT_AND_API.md).

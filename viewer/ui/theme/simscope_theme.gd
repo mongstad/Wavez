@@ -118,6 +118,11 @@ func _init() -> void:
 	set_color("font_color", "ErrorLabel", c(&"state.error"))
 	set_color("font_color", "NumericValue", c(&"text.numeric"))
 	set_font("font", "NumericValue", MONO); set_font_size("font_size", "NumericValue", TOKENS.numeric_size)
+	for tier in ["Low", "Medium", "High", "XHigh", "Max"]:
+		var role := StringName("Tier" + tier)
+		set_type_variation(role, "Label")
+		set_font_size("font_size", role, TOKENS.help_size)
+		set_color("font_color", role, c(StringName("tier." + tier.to_lower())))
 	# Native input states, including selection/caret; no global project theme.
 	_text("LineEdit"); _text("TextEdit")
 	for type in ["LineEdit", "TextEdit"]:

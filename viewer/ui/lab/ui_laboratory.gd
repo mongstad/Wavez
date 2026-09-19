@@ -43,7 +43,7 @@ func _ready() -> void:
 	scale_picker.item_selected.connect(func(index: int):
 		if manage_window: Scale.apply(get_window(), T.scales[index]))
 	layout.add_child(tabs); tabs.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	_controls(); _numbers(); _status(); _tokens()
+	_controls(); _numbers(); _status(); _tokens(); _tiers()
 	event_label.theme_type_variation = &"StatusLabel"
 	event_label.text = "Ready · Tab to move focus · Enter to commit numbers · Escape to restore a draft"
 	event_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -237,6 +237,26 @@ func _tokens() -> void:
 		var line := HBoxContainer.new(); identity.add_child(line)
 		var swatch := ColorRect.new(); swatch.color = T.color(StringName(role)); swatch.custom_minimum_size = Vector2(4, 24); line.add_child(swatch)
 		line.add_child(label(role + "  #" + swatch.color.to_html(false).to_upper(), &"NumericValue"))
+
+func _tiers() -> void:
+	var grid := page("Tiers")
+	var tiers := group(grid, "Categorical intensity · UI only")
+	tiers.add_child(label("Tier labels describe a category, not success, danger or a measured scientific value.", &"HelpLabel"))
+	for index in 5:
+		var tier: String = ["Low", "Medium", "High", "XHigh", "Max"][index]
+		var line := HBoxContainer.new(); tiers.add_child(line)
+		# A small ordinal cue and explicit text remain useful without color vision.
+		var indicator := label("%d / 5 · %s" % [index + 1, tier], StringName("Tier" + tier))
+		line.add_child(indicator)
+		line.add_child(label("tier." + tier.to_lower() + "  #" + T.color(StringName("tier." + tier.to_lower())).to_html(false).to_upper(), &"NumericValue"))
+	var states := group(grid, "Operational status · independent of tier")
+	states.add_child(label("A Max tier can succeed; a Low tier can fail. Status always retains its own icon and wording.", &"HelpLabel"))
+	for entry in [["Max", "success", "Success"], ["Low", "error", "Error"], ["High", "warning", "Warning"], ["Medium", "info", "Info"]]:
+		var line := HBoxContainer.new(); states.add_child(line)
+		line.add_child(label("Tier: " + entry[0], StringName("Tier" + entry[0])))
+		var badge := preload("res://ui/components/status_badge.gd").new()
+		badge.configure(entry[1], entry[2]); line.add_child(badge)
+	states.add_child(label("Use small labels only. Never tint a whole panel or use these colors as a scientific colormap.", &"HelpLabel"))
 
 func _layout_grids() -> void:
 	for grid in grids: grid.columns = 2 if size.x >= 1040 else 1

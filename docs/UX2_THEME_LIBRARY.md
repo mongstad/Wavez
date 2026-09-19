@@ -9,7 +9,7 @@ The opt-in theme now uses a blue-black surface ladder (`#0B101B`, `#111A29`,
 Blue remains the interaction accent; purple and teal appear only as small
 identity marks and token specimens in the laboratory. They carry no operational
 status, intensity-tier or scientific meaning. Depth comes from opaque tonal
-steps. Issue #6 adds the opt-in atmospheric background described below; tier families remain separate queued work.
+steps. Issue #6 adds the opt-in atmospheric background described below; issue #7 adds the categorical tier family described below.
 
 Typography, spacing, control heights, numeric formatting and status colors are
 unchanged. The theme remains opt-in: production viewer panels, scientific
@@ -33,6 +33,28 @@ checks endpoint contrast below 1.2:1, opacity, bounded texture size and retained
 flat surfaces. Existing native control, scale and scientific-viewer isolation
 checks still apply. Noticeability and long-session comfort require owner review.
 
+## Categorical tier accents — issue #7
+
+Tiers are UI categories, independent of operational severity and scientific data.
+Use the shared `TierLow`, `TierMedium`, `TierHigh`, `TierXHigh` and `TierMax`
+Label variations for compact 12 px labels on opaque base surfaces. Always spell
+out the tier; ordinal cues may supplement the label. Never rely on color alone,
+fill entire panels with a tier color, or replace status icons/text with tiers.
+
+| Tier | Token | Color |
+|---|---|---|
+| Low | `tier.low` | `#B8C2D1` (slate) |
+| Medium | `tier.medium` | `#62D5DB` (cyan) |
+| High | `tier.high` | `#80ACFF` (blue) |
+| XHigh | `tier.xhigh` | `#BC9AFF` (violet) |
+| Max | `tier.max` | `#EFA5DF` (orchid) |
+
+Amber Warning and red Error retain their operational meaning, icons and wording.
+A Max tier can have Success status; a Low tier can have Error status. The Tiers
+laboratory page shows these combinations side by side. Tier colors never define
+scientific magnitudes, normalization, colormaps, selection or renderer state.
+No production consumers or scientific behavior are changed.
+
 ## Launch the laboratory
 
 From the repository root with Godot 4.7.2 available:
@@ -42,7 +64,7 @@ godot --headless --path viewer --editor --import
 godot --path viewer res://ui/lab/ui_laboratory.tscn
 ```
 
-The scene opens without a capture. Four pages cover Controls, Numbers, Feedback and Tokens. Change scale using the header selector; resize and scroll each page. Tab/Shift-Tab moves focus, Space activates buttons, Enter commits numbers, and Escape restores a numeric draft. The example dialog has fixed actions and a scrolling body. All actions emit local demonstration intent; none open captures, write exports or start workers. The main scene and production menus are unchanged.
+The scene opens without a capture. Five pages cover Controls, Numbers, Feedback, Tokens and Tiers. Change scale using the header selector; resize and scroll each page. Tab/Shift-Tab moves focus, Space activates buttons, Enter commits numbers, and Escape restores a numeric draft. The example dialog has fixed actions and a scrolling body. All actions emit local demonstration intent; none open captures, write exports or start workers. The main scene and production menus are unchanged.
 
 A fresh checkout requires Godot's normal asset import before running scripts. Environments without writable Godot user/config directories can set `XDG_DATA_HOME` and `XDG_CONFIG_HOME` to fresh local directories. The validator does this automatically.
 
