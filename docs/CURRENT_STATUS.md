@@ -64,6 +64,17 @@ keyboard actions, shader state, and visual-state round trips. Owner acceptance
 should verify these combinations on a particle capture, including saving and
 reloading a recipe. This maintenance does not authorize further queued work.
 
+## STATE-001 — pending owner review
+
+Issue #21 corrects recipe/control synchronization and preserves session probe
+inputs/results and layer-settings disclosures during restoration. Partial
+environment/guide dictionaries preserve omitted live values without applying
+preset defaults. Complete v2/v3 state formats and legacy video-job defaults are
+retained. [Recipe ownership and investigation](../INSPECTION_STATE.md) documents
+the reproduced defects, intentionally persisted settings, session-only fields,
+and focused repeated-save/load regression. The owner's original combination of
+unexpected settings was not available; these are independently reproduced fixes.
+
 ## Current limits
 
 G3 permits at most one particle object per capture and supports one translucent volume and one derived isosurface at a time; multiple meshes and slices are supported. Interactive particle, field and mesh CPU preparation is asynchronous in the accepted maintenance implementation; field textures and mesh surfaces are staged on the main thread. Stable mesh positions interpolate on the GPU, while scalar colors hold the earlier source sample. Initial opening and explicit scientific inspection/export retain synchronous work. Mesh inspection positions and deformed normals are materialized on demand; rendering remains unshaded. Source arrays and probes retain scientific precision, while GPU previews use float32 and may reduce resolution; isosurfaces are explicitly approximate. Budgets are separate allocation limits, not a whole-process memory guarantee. The earlier full G3 demo completed about 19.2 samples/s; neither that result nor the new particle controls establish universal 30 FPS performance. Concurrent CuPy simulation/viewer performance has not been validated. Detailed contracts and measurements are in the [handbook](SIMSCOPE_HANDBOOK.md) and [format/API guide](CAPTURE_FORMAT_AND_API.md).

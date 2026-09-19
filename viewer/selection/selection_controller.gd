@@ -232,6 +232,7 @@ func _completed_profiled(result: Dictionary) -> void:
 		else:status.text = state.error
 
 func _changed() -> void:
+	viewer.control_checks["Show hidden selection"].set_pressed_no_signal(state.overlay.show_hidden)
 	last_resolution = []
 	if temporal != null:temporal.selection_changed()
 	jobs.cancel();operation = "";overlay_key = "";failed_overlay_key = "";overlay.clear();set_process(true)

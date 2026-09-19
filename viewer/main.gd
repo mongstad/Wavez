@@ -773,6 +773,7 @@ var filter_source_generation := -1
 var filter_hidden_types: Dictionary = {}
 var mapping_guard := false
 var visual_sliders: Dictionary = {}
+var section_buttons: Dictionary = {}
 
 func _section(title: String, expanded := false) -> VBoxContainer:
 	var toggle := Button.new()
@@ -787,6 +788,7 @@ func _section(title: String, expanded := false) -> VBoxContainer:
 	inspector_box.add_child(body)
 	toggle.toggled.connect(func(v: bool): body.visible = v)
 	sections[title] = body
+	section_buttons[title] = toggle
 	return body
 
 func _button(parent: Node, title: String, action: Callable) -> Button:
