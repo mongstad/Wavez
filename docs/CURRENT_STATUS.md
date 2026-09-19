@@ -75,6 +75,26 @@ the reproduced defects, intentionally persisted settings, session-only fields,
 and focused repeated-save/load regression. The owner's original combination of
 unexpected settings was not available; these are independently reproduced fixes.
 
+## UX-STYLE-001 — pending owner review
+
+Issue #5 refines the opt-in shared theme and UX2 laboratory with Midnight
+Scientific blue-black surfaces and sparse blue/purple/teal identity marks.
+Compact typography and control metrics remain unchanged. Production UI and
+scientific rendering consumers remain isolated. Native Godot 4.7.2 Forward+
+validation on NVIDIA RTX 3070 Ti passed 1,182 checks, 79 contrast pairs, 300
+float64 oracle cases, six viewer-isolation checks and six HUD cases. The
+16 size/scale combinations include 100%, 125%, 150% and 200% and a 4K
+SubViewport, not physical-monitor acceptance.
+
+[Review screenshot](evidence/issue-5/controls.png) and
+[validation summary](evidence/issue-5/summary.json) retain the focused evidence.
+The first sandboxed import failed on local socket creation; the authorized
+native rerun passed with clean logs. Compatibility renderer, physical 4K,
+mixed-monitor and long-session comfort checks were not run. Owner review
+should inspect the laboratory pages, focus/hover/disabled/error states and
+readability at the preferred desktop scale. Gradients, tier families, broader
+document reconciliation and UX3 remain separate work.
+
 ## Current limits
 
 G3 permits at most one particle object per capture and supports one translucent volume and one derived isosurface at a time; multiple meshes and slices are supported. Interactive particle, field and mesh CPU preparation is asynchronous in the accepted maintenance implementation; field textures and mesh surfaces are staged on the main thread. Stable mesh positions interpolate on the GPU, while scalar colors hold the earlier source sample. Initial opening and explicit scientific inspection/export retain synchronous work. Mesh inspection positions and deformed normals are materialized on demand; rendering remains unshaded. Source arrays and probes retain scientific precision, while GPU previews use float32 and may reduce resolution; isosurfaces are explicitly approximate. Budgets are separate allocation limits, not a whole-process memory guarantee. The earlier full G3 demo completed about 19.2 samples/s; neither that result nor the new particle controls establish universal 30 FPS performance. Concurrent CuPy simulation/viewer performance has not been validated. Detailed contracts and measurements are in the [handbook](SIMSCOPE_HANDBOOK.md) and [format/API guide](CAPTURE_FORMAT_AND_API.md).
