@@ -149,22 +149,27 @@ func run() -> void:
 	viewer.video_dialog.range_choice.select(2)
 	viewer.video_dialog.update_range()
 	viewer.video_dialog.start.value = .1
-	viewer.video_dialog.end.value = .2
+	viewer.video_dialog.end.value = .7
 	viewer.video_dialog.rate.value = 1
 	viewer.video_dialog.output.text = directory.path_join("ui launch %d.mp4" % Time.get_ticks_usec())
 	var before_frame: int = viewer.current_index
 	viewer.video_dialog.start_export()
 	check(viewer.video_dialog.pid > 0, "UI launches separate render process")
+	var launch := Job.launch_arguments(viewer.video_dialog.active_job_path,30)
+	check(not launch.has("--headless") and launch.has("--log-file"), "GPU worker retains persistent renderer diagnostics")
 	viewer._step_frame(1)
 	check(viewer.current_index == before_frame + 1, "parent playback remains usable during export")
 	viewer.video_dialog.hide()
+	root.mode = Window.MODE_MINIMIZED
 	var deadline := Time.get_ticks_msec() + 30000
 	while viewer.video_dialog.pid > 0 and Time.get_ticks_msec() < deadline:
 		await create_timer(.1).timeout
-	check(viewer.video_dialog.last_progress.get("stage") == "complete", "UI worker reports successful MP4 completion")
+	check(root.mode == Window.MODE_MINIMIZED, "main viewer remained minimized during export")
+	check(viewer.video_dialog.last_progress.get("stage") == "complete", "UI worker reports successful MP4 completion while main viewer minimized")
+	root.mode = Window.MODE_WINDOWED
 	print("VIDEO UX: %d checks, %d failures" % [checks, failures])
 	viewer.free()
 	for i in range(3):
 		await process_frame
-		await RenderingServer.frame_post_draw
+		RenderingServer.force_draw(false) # Test cleanup must also work with the main window minimized.
 	quit(1 if failures else 0)

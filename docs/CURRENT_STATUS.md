@@ -167,6 +167,15 @@ deterministic video retains its existing exclusion of session-only probe markers
 [Focused validation](PROBE_MARKER_VALIDATION.md) records both native renderers,
 source invariance, screenshot/video checks and owner verification steps.
 
+## VIDEO-001 — pending owner review
+
+Issue #1 makes offline GPU rendering independent of window redraws. The worker
+minimizes its noninteractive window and uses explicit draws for its export
+SubViewport. Progress, cancellation and source/sample/camera contracts remain
+intact; UI-launched jobs retain renderer diagnostics. [Background export
+validation](BACKGROUND_EXPORT_VALIDATION.md) records native window-state tests,
+unchanged frame/timing comparisons, limitations and manual owner checks.
+
 ## Current limits
 
 G3 permits at most one particle object per capture and supports one translucent volume and one derived isosurface at a time; multiple meshes and slices are supported. Interactive particle, field and mesh CPU preparation is asynchronous in the accepted maintenance implementation; field textures and mesh surfaces are staged on the main thread. Stable mesh positions interpolate on the GPU, while scalar colors hold the earlier source sample. Initial opening and explicit scientific inspection/export retain synchronous work. Mesh inspection positions and deformed normals are materialized on demand; rendering remains unshaded. Source arrays and probes retain scientific precision, while GPU previews use float32 and may reduce resolution; isosurfaces are explicitly approximate. Budgets are separate allocation limits, not a whole-process memory guarantee. The earlier full G3 demo completed about 19.2 samples/s; neither that result nor the new particle controls establish universal 30 FPS performance. Concurrent CuPy simulation/viewer performance has not been validated. Detailed contracts and measurements are in the [handbook](SIMSCOPE_HANDBOOK.md) and [format/API guide](CAPTURE_FORMAT_AND_API.md).

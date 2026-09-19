@@ -33,10 +33,15 @@ scientific override, overlays, trails, H.264 quality, and a new `.mp4` output pa
 The dialog estimates video duration, exact output-frame count and approximate
 uncompressed temporary storage (actual PNG size depends on image content).
 Click **Start Export**. A second Godot process renders and encodes the video.
-The regular viewer stays usable. Close the panel to keep working; reopen it for
+The worker keeps a real GPU display connection but minimizes its noninteractive
+window and makes it unfocusable. It no longer needs a visible debug window to
+render. A brief startup window/taskbar entry may still depend on the platform.
+The regular viewer stays usable and may be minimized. Close the panel to keep working; reopen it for
 progress. **Cancel export** stops after the current frame, or stops FFmpeg during
-encoding. Closing the render-process window or the parent viewer also requests
-cancellation. Closing only the Export Video panel does not cancel.
+encoding. Closing the parent viewer also requests cancellation. Closing only the
+Export Video panel does not cancel. The job directory retains `progress.json`,
+`renderer.log` (UI-launched workers) and `ffmpeg.log` for diagnosis. If writing the
+cancel request fails, the dialog reports the worker PID and retained job path.
 
 Existing output files are never intentionally replaced: choose a new filename.
 The selected visual state is copied when Start Export is pressed. Later changes
@@ -124,8 +129,10 @@ delays and compare the complete timing/camera manifests.
 
 A dedicated SubViewport allocates exactly the requested width and height,
 independently of the small 640×360 process window. It renders once after each
-sample is installed; the worker awaits frame_post_draw, checks actual image
-size and writes one PNG. UI uses a proportionally scaled logical canvas while
+sample is installed. The worker disables the automatic rendering loop, yields
+for event processing/layout, then calls `RenderingServer.force_draw(false, 1/fps)`
+without swapping a window buffer. GPU readback checks actual image size and
+writes one PNG. This removes the dependency on minimized-window redraw signals. UI uses a proportionally scaled logical canvas while
 the 3D render target remains native resolution. Tests verified **3840×2160** in
 both PNG headers and the encoded MP4 via ffprobe on this workstation.
 
