@@ -6,6 +6,7 @@ __pycache__/
 venv/
 env/
 .godot/
+# Script/shader .uid sidecars are source metadata and must be committed.
 .simscope-*/
 .pytest_cache/
 .mypy_cache/

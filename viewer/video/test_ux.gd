@@ -60,7 +60,13 @@ func run() -> void:
 	check(second.screenshot_directory.is_empty(), "new viewer session does not inherit screenshot folder")
 	second._save_image()
 	check(second.screenshot_dialog.visible, "new session prompts again")
-	second.screenshot_dialog.hide();second_viewport.queue_free()
+	second.screenshot_dialog.hide()
+	# Let the new viewport finish its first draw before destroying its sky.
+	# Godot 4.7.2 Compatibility leaks sky-filter textures if this viewport is
+	# created and freed in the same frame (also reproducible without SimScope).
+	await process_frame
+	await RenderingServer.frame_post_draw
+	second_viewport.queue_free()
 	viewer._set_clean(false)
 	viewer.color_channel = "temperature"
 	viewer.colormap_name = "inferno"

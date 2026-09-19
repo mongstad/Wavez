@@ -97,6 +97,15 @@ Run with the project's Python dependencies and a display:
 python3 tools/validate_ux2.py --godot /path/to/godot --output-dir results/ux2-new-review
 ```
 
-The output directory must be new. The runner imports resources, generates two tiny analytic fixtures and 300 independent float64 cases, exercises native input and all 16 size/scale combinations, verifies production snapshot/pixel/source isolation, and runs the existing HUD test. It rejects script errors or warning logs even if Godot exits with zero. Captures and raw logs remain ignored. See the [retained evidence guide](evidence/ux2/README.md).
+The output directory must be new. The runner imports resources, generates two tiny analytic fixtures and 300 independent float64 cases, exercises native input and all 16 size/scale combinations, verifies production snapshot/pixel isolation, and runs the existing HUD test. It hashes current source before and after validation and rejects changes, including added or removed files. It rejects script errors or warning logs even if Godot exits with zero. Captures and raw logs remain ignored. See the [retained evidence guide](evidence/ux2/README.md).
+
+The historical UX2 comparison against `7037f5f` is separate from current-tree
+validation: that commit belongs to the archived development history, not this
+fresh repository. Pass `--source-baseline <local-commit>` to explicitly request
+the historical comparison in a checkout containing that history. An unavailable
+baseline fails with an actionable error; the default report records the
+historical comparison as `NOT_REQUESTED`, never as a reproduced historical PASS.
+Historical reports and hashes remain unchanged. Current validation needs neither
+the old workspace nor its commits.
 
 The 4K and scale matrix use actual Godot SubViewport controls, with separate native root/dialog scale tests. They are not physical 4K or mixed-monitor tests. The tested Forward+ backend uses llvmpipe software Vulkan in this execution environment. Screenshot inspection and programmatic key/pointer input are not a human usability, screen-reader or cross-platform acceptance session. Very small logical canvases deliberately scroll; they are stress cases, not a new production minimum-window promise.
