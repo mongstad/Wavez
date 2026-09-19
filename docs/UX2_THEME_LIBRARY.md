@@ -9,13 +9,29 @@ The opt-in theme now uses a blue-black surface ladder (`#0B101B`, `#111A29`,
 Blue remains the interaction accent; purple and teal appear only as small
 identity marks and token specimens in the laboratory. They carry no operational
 status, intensity-tier or scientific meaning. Depth comes from opaque tonal
-steps. Gradients and tier families remain separate queued work.
+steps. Issue #6 adds the opt-in atmospheric background described below; tier families remain separate queued work.
 
 Typography, spacing, control heights, numeric formatting and status colors are
 unchanged. The theme remains opt-in: production viewer panels, scientific
 colormaps, renderer state and export consumers do not load it. This refinement
 does not start UX3. The palette rows in UX1 reflect these current tokens; the
 accepted UX2 report remains historical evidence.
+
+## Atmospheric depth — issue #6
+
+`AtmosphericSurface` is an explicit `PanelContainer` theme variation. It stretches
+one 256×256 generated gradient texture across the application background, from
+`#111E30` at the upper left to `#0B101B` at the lower right. The texture is static,
+opaque and UI-only; there are no animation callbacks or time-dependent shaders.
+It preserves the existing 24 px application margins. `AppSurface` remains flat
+for consumers that do not opt in. The laboratory opts in only at its root.
+Controls, panels, popups, diagnostic content and scientific viewports do not
+receive gradient fills. No external assets or dependencies are introduced.
+
+The native validator samples 17 positions for text/diagnostic contrast and
+checks endpoint contrast below 1.2:1, opacity, bounded texture size and retained
+flat surfaces. Existing native control, scale and scientific-viewer isolation
+checks still apply. Noticeability and long-session comfort require owner review.
 
 ## Launch the laboratory
 

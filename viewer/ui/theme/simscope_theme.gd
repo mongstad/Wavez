@@ -18,6 +18,20 @@ func box(fill: StringName, border: StringName = &"border.subtle", pad_x: int = 1
 	style.anti_aliasing = true
 	return style
 
+func atmosphere() -> StyleBoxTexture:
+	# One immutable texture: no shader time, animation or per-frame regeneration.
+	var gradient := Gradient.new()
+	gradient.colors = PackedColorArray([c(&"atmosphere.start"), c(&"atmosphere.end")])
+	var texture := GradientTexture2D.new()
+	texture.gradient = gradient
+	texture.width = 256; texture.height = 256
+	texture.fill_from = Vector2.ZERO; texture.fill_to = Vector2.ONE
+	var style := StyleBoxTexture.new()
+	style.texture = texture
+	style.content_margin_left = 24; style.content_margin_right = 24
+	style.content_margin_top = 24; style.content_margin_bottom = 24
+	return style
+
 func focus() -> StyleBoxFlat:
 	var style := box(&"surface.0", &"focus.ring", 0, 0)
 	style.draw_center = false
@@ -137,8 +151,9 @@ func _init() -> void:
 	for type in ["HBoxContainer", "VBoxContainer"]: set_constant("separation", type, TOKENS.spacing[1])
 	for type in ["HFlowContainer", "VFlowContainer", "GridContainer"]:
 		set_constant("h_separation", type, TOKENS.spacing[1]); set_constant("v_separation", type, TOKENS.spacing[1])
-	for role in ["AppSurface", "PropertyGroup", "RaisedPanel", "PopupSurface"]: set_type_variation(role, "PanelContainer")
+	for role in ["AppSurface", "AtmosphericSurface", "PropertyGroup", "RaisedPanel", "PopupSurface"]: set_type_variation(role, "PanelContainer")
 	set_stylebox("panel", "PanelContainer", box(&"surface.1", &"border.subtle", 12, 12, 0))
+	set_stylebox("panel", "AtmosphericSurface", atmosphere())
 	set_stylebox("panel", "AppSurface", box(&"surface.0", &"surface.0", 24, 24, 0))
 	set_stylebox("panel", "PropertyGroup", box(&"surface.1", &"border.subtle", 12, 12, 0))
 	set_stylebox("panel", "RaisedPanel", box(&"surface.2", &"border.subtle", 12, 12, 4))

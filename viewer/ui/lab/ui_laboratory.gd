@@ -21,7 +21,7 @@ var scale_picker := OptionButton.new()
 var dialog
 
 func _ready() -> void:
-	theme = DARK; theme_type_variation = &"AppSurface"
+	theme = DARK; theme_type_variation = &"AtmosphericSurface"
 	if manage_window:
 		get_window().title = "SimScope · UI Laboratory · Midnight Scientific"
 		Scale.apply(get_window(), 1.0)
@@ -219,6 +219,7 @@ func _tokens() -> void:
 		var line := HBoxContainer.new(); palette.add_child(line)
 		var swatch := ColorRect.new(); swatch.color = T.color(StringName(role)); swatch.custom_minimum_size = Vector2(48, 32); line.add_child(swatch)
 		line.add_child(label(role + "  #" + swatch.color.to_html(false).to_upper(), &"NumericValue"))
+	palette.add_child(label("Atmospheric background: static diagonal blue-black depth. Controls and diagnostic surfaces stay opaque.", &"HelpLabel"))
 	var type := group(grid, "Typography hierarchy")
 	for pair in [["ApplicationTitle", "Application title · 18"], ["PanelTitle", "Panel title · 16"], ["SectionTitle", "Section heading · 14"], ["PropertyLabel", "Property label / body · 14"], ["SecondaryLabel", "Secondary text · 14"], ["HelpLabel", "Help and units · 12"], ["NumericValue", "1234567890.01234567 · 13"], ["StatusLabel", "Ready · compact status · 12"]]: type.add_child(label(pair[1], pair[0]))
 	var metrics := group(grid, "Logical metrics")
