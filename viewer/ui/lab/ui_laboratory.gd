@@ -23,13 +23,19 @@ var dialog
 func _ready() -> void:
 	theme = DARK; theme_type_variation = &"AppSurface"
 	if manage_window:
-		get_window().title = "SimScope · UI Laboratory · UX2 review"
+		get_window().title = "SimScope · UI Laboratory · Midnight Scientific"
 		Scale.apply(get_window(), 1.0)
 	var layout := VBoxContainer.new(); add_child(layout)
 	var header := HFlowContainer.new(); layout.add_child(header)
+	# Small identity marks leave controls and content visually dominant.
+	for role in [&"accent.primary", &"identity.purple", &"identity.teal"]:
+		var mark := ColorRect.new(); mark.color = T.color(role)
+		mark.custom_minimum_size = Vector2(4, 16)
+		mark.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+		mark.mouse_filter = Control.MOUSE_FILTER_IGNORE; header.add_child(mark)
 	var title := label("SimScope / UI Laboratory", &"ApplicationTitle")
 	title.autowrap_mode = TextServer.AUTOWRAP_OFF; header.add_child(title)
-	var subtitle := label("UX2 · development showcase", &"SecondaryLabel")
+	var subtitle := label("Midnight Scientific · UX2", &"SecondaryLabel")
 	subtitle.autowrap_mode = TextServer.AUTOWRAP_OFF; header.add_child(subtitle)
 	for factor in T.scales: scale_picker.add_item("%d%%" % roundi(factor * 100))
 	scale_picker.tooltip_text = "Interface scale; logical tokens are applied once at the window boundary."
@@ -208,7 +214,7 @@ func show_dialog() -> void:
 
 func _tokens() -> void:
 	var grid := page("Tokens")
-	var palette := group(grid, "Opaque neutral surfaces")
+	var palette := group(grid, "Midnight blue-black surfaces")
 	for role in ["surface.0", "surface.1", "surface.2", "surface.3", "surface.hover", "surface.pressed"]:
 		var line := HBoxContainer.new(); palette.add_child(line)
 		var swatch := ColorRect.new(); swatch.color = T.color(StringName(role)); swatch.custom_minimum_size = Vector2(48, 32); line.add_child(swatch)
@@ -222,6 +228,13 @@ func _tokens() -> void:
 	for role in ["accent.primary", "selection.fill", "state.success", "state.warning", "state.error", "state.info", "focus.ring"]:
 		var line := HBoxContainer.new(); semantic.add_child(line)
 		var swatch := ColorRect.new(); swatch.color = T.color(StringName(role)); swatch.custom_minimum_size = Vector2(32, 24); line.add_child(swatch)
+		line.add_child(label(role + "  #" + swatch.color.to_html(false).to_upper(), &"NumericValue"))
+
+	var identity := group(grid, "Identity accents · sparse marks only")
+	identity.add_child(label("Blue leads interaction. Purple and teal are small identity details, separate from status, intensity tiers and scientific colormaps.", &"HelpLabel"))
+	for role in ["identity.purple", "identity.teal"]:
+		var line := HBoxContainer.new(); identity.add_child(line)
+		var swatch := ColorRect.new(); swatch.color = T.color(StringName(role)); swatch.custom_minimum_size = Vector2(4, 24); line.add_child(swatch)
 		line.add_child(label(role + "  #" + swatch.color.to_html(false).to_upper(), &"NumericValue"))
 
 func _layout_grids() -> void:

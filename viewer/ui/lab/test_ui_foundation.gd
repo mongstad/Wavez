@@ -93,7 +93,7 @@ func theme_tests() -> void:
 	var theme := ThemeFactory.new()
 	for background in ["surface.0", "surface.1", "surface.2", "surface.3"]:
 		for text in ["text.primary", "text.secondary", "text.muted"]: contrast(T.color(text), T.color(background), 4.5, text + "/" + background)
-		for color in ["focus.ring", "state.success", "state.warning", "state.error", "state.info"]: contrast(T.color(color), T.color(background), 3.0, color + "/" + background)
+		for color in ["focus.ring", "state.success", "state.warning", "state.error", "state.info", "identity.purple", "identity.teal"]: contrast(T.color(color), T.color(background), 3.0, color + "/" + background)
 	for type in ["Button", "PrimaryButton", "DestructiveButton", "SelectedButton", "CompactButton", "OptionButton", "LineEdit"]:
 		for state in ["normal", "hover", "pressed"]:
 			if type == "LineEdit" and state != "normal": continue

@@ -1,16 +1,18 @@
 @tool
 extends Resource
-## Canonical UX1 logical tokens. Scientific palettes and rendering never read this resource.
+## Midnight Scientific UI tokens (UX-STYLE-001). Scientific palettes and rendering never read this resource.
 @export var colors: Dictionary[StringName, Color] = {
-	&"surface.0": Color("15171b"), &"surface.1": Color("1c1f24"),
-	&"surface.2": Color("252930"), &"surface.3": Color("2d323a"),
-	&"surface.hover": Color("323943"), &"surface.pressed": Color("3a4350"),
+	&"surface.0": Color("0b101b"), &"surface.1": Color("111a29"),
+	&"surface.2": Color("1a2638"), &"surface.3": Color("243249"),
+	&"surface.hover": Color("2c3c54"), &"surface.pressed": Color("354862"),
 	&"text.primary": Color("e6eaf0"), &"text.secondary": Color("b9c1cc"),
 	&"text.muted": Color("9aa5b3"), &"text.disabled": Color("737c89"),
-	&"text.numeric": Color("e6eaf0"), &"border.subtle": Color("46505d"),
-	&"border.control": Color("707d8e"), &"focus.ring": Color("a8c9ff"),
+	&"text.numeric": Color("e6eaf0"), &"border.subtle": Color("465b76"),
+	&"border.control": Color("798fae"), &"focus.ring": Color("a8c9ff"),
 	&"accent.primary": Color("8cb8ff"), &"accent.foreground": Color("142035"),
-	&"selection.fill": Color("263f62"), &"selection.text": Color("dceaff"),
+	# Sparse identity marks only; never status, intensity tiers or scientific data.
+	&"identity.purple": Color("b4a2dc"), &"identity.teal": Color("79bfc4"),
+	&"selection.fill": Color("233f68"), &"selection.text": Color("dceaff"),
 	&"state.success": Color("7fd1a7"), &"state.warning": Color("e8bf72"),
 	&"state.error": Color("f08c91"), &"state.info": Color("9cbee8"),
 }

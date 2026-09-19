@@ -2,6 +2,21 @@
 
 The owner reviewed and accepted UX2 on 2026-09-13 at `5fae711`. The library remains opt-in and development-only. [UX1](UX1_DESIGN_SYSTEM.md) supplies the design specification; [UX2's report](UX2_REPORT.md) records the accepted implementation decisions and adjustments in its original review-time wording. No production viewer, panel, renderer, capture API, recipe or export consumer uses it yet. **UX3 is on hold until further notice from the owner.**
 
+## Midnight Scientific refinement — issue #5
+
+The opt-in theme now uses a blue-black surface ladder (`#0B101B`, `#111A29`,
+`#1A2638`, `#243249`) with quiet blue hover/pressed states and cool outlines.
+Blue remains the interaction accent; purple and teal appear only as small
+identity marks and token specimens in the laboratory. They carry no operational
+status, intensity-tier or scientific meaning. Depth comes from opaque tonal
+steps. Gradients and tier families remain separate queued work.
+
+Typography, spacing, control heights, numeric formatting and status colors are
+unchanged. The theme remains opt-in: production viewer panels, scientific
+colormaps, renderer state and export consumers do not load it. This refinement
+does not start UX3. The palette rows in UX1 reflect these current tokens; the
+accepted UX2 report remains historical evidence.
+
 ## Launch the laboratory
 
 From the repository root with Godot 4.7.2 available:
@@ -79,15 +94,15 @@ The actual Godot fallback sans at 14 px has a 20 px font height; the 13 px mono 
 
 | Finding | Evidence and UX2 treatment |
 |---|---|
-| Control boundary on active fills | `border.control` is 2.782:1 on hover and 2.389:1 on pressed. Hover/pressed outlines use existing `text.secondary`; rest remains `border.control`. Palette values are unchanged |
-| Destructive pressed text | `state.error` is 4.224:1 on pressed. Pressed destructive labels use `text.primary`, retaining the error border and explicit destructive wording |
+| Control boundary on active fills | In the accepted UX2 palette, `border.control` measured 2.782:1 on hover and 2.389:1 on pressed. Hover/pressed outlines use existing `text.secondary`; rest remains `border.control`. Hover/pressed outlines retain this conservative treatment in the Midnight palette |
+| Destructive pressed text | In the accepted UX2 palette, `state.error` measured 4.224:1 on pressed. Pressed destructive labels use `text.primary`, retaining the error border and explicit destructive wording |
 | Read-only values | Read-only scientific values remain meaningful content. They use secondary text rather than the disabled-value color; unavailable actions still use the disabled treatment and a visible explanation |
 | Slider focus | Native HSlider has no focus StyleBox item. `focus_slider.gd` draws the shared ring on focus changes, without an idle callback; it preserves native keyboard behavior |
 | Progress text | Accent-filled and dark unfilled portions cannot share one compliant overlaid text color. The numeric readout stays outside the bar |
 | Focus clearance | Shared focus StyleBox expands 4 px (2 px ring plus 2 px gap); standard 8 px gaps and panel padding keep adjacent control focus visible. Focus on the scrolled-out portion of a widget is naturally clipped by its scroll viewport |
 | Native motion / tooltips | UX2 uses immediate native hover/pressed/selection changes. The accepted 80/60 ms motion tokens are retained but not tweened. Native initial tooltip delay is 500 ms; adjacent-target 100 ms timing and global reduced-motion preferences remain later interaction work. This scope adjustment is part of the accepted UX2 baseline |
 
-Colors are UI-only. Do not reuse them for scientific palettes, source support encodings, GPU mappings, geometry or exports. All 71 tested foreground/background combinations pass their specified 4.5:1 text or 3:1 indicator target; this is measured palette arithmetic plus actual themed control evidence, not a whole-product accessibility certification.
+Colors are UI-only. Do not reuse them for scientific palettes, source support encodings, GPU mappings, geometry or exports. The validator checks text at 4.5:1 and indicators at 3:1, including the identity marks; this is measured palette arithmetic plus actual themed control evidence, not a whole-product accessibility certification.
 
 ## Validation and limits
 

@@ -4,7 +4,7 @@
 
 ## Design decisions
 
-Make the scientific viewport the visual center. Use opaque dark neutral chrome, compact forms and restrained blue for interaction. Keep scientific color maps, selection highlights, geometry guides and missing-support encodings independent of application chrome. Changing a theme must not change field colors, normalization, camera exposure, source interpretation or exported science.
+Make the scientific viewport the visual center. Use opaque Midnight Scientific blue-black chrome, compact forms and restrained blue for interaction. Keep scientific color maps, selection highlights, geometry guides and missing-support encodings independent of application chrome. Changing a theme must not change field colors, normalization, camera exposure, source interpretation or exported science.
 
 Keep the existing renderer and scientific controllers. Introduce reusable presentation components and stable semantic identifiers around their current operations. Prioritize access to Open, transport, current source/time/readiness, viewport navigation and export. Detailed caches, analysis assumptions and export limits remain available with accurate explanations.
 
@@ -77,19 +77,19 @@ All dimensions below are logical UI units at scale 1.0. Colors are opaque sRGB h
 
 | Token | Value | Use |
 |---|---|---|
-| `surface.0` | `#15171B` | App background / viewport-adjacent chrome; does not replace scene background |
-| `surface.1` | `#1C1F24` | Primary dock and toolbar |
-| `surface.2` | `#252930` | Grouped property area, inputs, result rows |
-| `surface.3` | `#2D323A` | Popups, menus, dialogs, tooltips |
-| `surface.hover` | `#323943` | Hovered neutral control |
-| `surface.pressed` | `#3A4350` | Pressed neutral control |
+| `surface.0` | `#0B101B` | App background / viewport-adjacent chrome; does not replace scene background |
+| `surface.1` | `#111A29` | Primary dock and toolbar |
+| `surface.2` | `#1A2638` | Grouped property area, inputs, result rows |
+| `surface.3` | `#243249` | Popups, menus, dialogs, tooltips |
+| `surface.hover` | `#2C3C54` | Hovered neutral control |
+| `surface.pressed` | `#354862` | Pressed neutral control |
 | `text.primary` | `#E6EAF0` | Body, active values, headings |
 | `text.secondary` | `#B9C1CC` | Supporting labels, units |
 | `text.muted` | `#9AA5B3` | Help and secondary metadata; still readable |
 | `text.disabled` | `#737C89` | Inactive value only; disabled reason uses secondary text |
 | `text.numeric` | `#E6EAF0` | Exact values, time, IDs; monospaced/tabular face |
-| `border.subtle` | `#46505D` | Decorative separators; never the sole control/focus boundary |
-| `border.control` | `#707D8E` | Input outline where boundary is needed |
+| `border.subtle` | `#465B76` | Decorative separators; never the sole control/focus boundary |
+| `border.control` | `#798FAE` | Input outline where boundary is needed |
 | `focus.ring` | `#A8C9FF` | Keyboard focus, 2 px with 2 px gap |
 
 Normal text must reach 4.5:1 against its actual background; meaningful icon/focus/control indicators target 3:1. Primary, secondary and muted text pass the proposed four base surfaces. Muted text is restricted to base surfaces: use secondary text on hover/pressed fills. Disabled controls are intentionally exempt from the normal-text target, but their explanation is not. Do not render semantic colors at arbitrary low opacity.
@@ -100,7 +100,9 @@ Normal text must reach 4.5:1 against its actual background; meaningful icon/focu
 |---|---|---|
 | `accent.primary` | `#8CB8FF` | Primary action or link, used sparingly |
 | `accent.foreground` | `#142035` | Text/icon on filled primary action |
-| `selection.fill` | `#263F62` | Selected UI row/tab; independent of scientific highlight |
+| `identity.purple` | `#B4A2DC` | Sparse identity marks only; not status, tiers or scientific data |
+| `identity.teal` | `#79BFC4` | Sparse identity marks only; not status, tiers or scientific data |
+| `selection.fill` | `#233F68` | Selected UI row/tab; independent of scientific highlight |
 | `selection.text` | `#DCEAFF` | Selected row text, also has check/marker |
 | `state.success` | `#7FD1A7` | Completed / verified, with status text |
 | `state.warning` | `#E8BF72` | Limited or missing support, with reason |
