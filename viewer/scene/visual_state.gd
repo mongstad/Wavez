@@ -34,9 +34,14 @@ static func snapshot(viewer) -> Dictionary:
 
 static func apply(viewer, state: Dictionary) -> void:
 	state = state.duplicate(true)
-	viewer._set_clean(state.get("clean_view", false))
+	# Legacy video jobs without an environment retain their preset defaults.
+	# Recipes carry an environment dictionary: omitted members leave live values
+	# untouched rather than implicitly enabling a Cinematic environment.
+	if not state.has("environment"): viewer._set_clean(state.get("clean_view", false))
 	for key in STATE_KEYS:
-		if state.has(key): viewer.set(key, state[key])
+		if key == "guide_visibility":
+			for guide in state.get(key, {}): viewer.guide_visibility[guide] = state[key][guide]
+		elif state.has(key): viewer.set(key, state[key])
 	viewer.camera_target = vector(state.camera_target)
 	var a: Array = state.camera_transform
 	viewer.camera.transform = Transform3D(Basis(vector(a[0]), vector(a[1]), vector(a[2])), vector(a[3]))
@@ -49,7 +54,9 @@ static func apply(viewer, state: Dictionary) -> void:
 	viewer.glow_slider.editable = viewer.environment.glow_enabled
 	for key in state.get("viewport", {}): viewer.get_viewport().set(key, state.viewport[key])
 	for name in state.get("sections", {}):
-		if viewer.sections.has(name): viewer.sections[name].visible = state.sections[name]
+		if viewer.sections.has(name):
+			viewer.sections[name].visible = state.sections[name]
+			viewer.section_buttons[name].set_pressed_no_signal(state.sections[name])
 	viewer.overlay_panel.visible = viewer.overlay_visible
 	viewer.show_panel_button.visible = not viewer.overlay_visible and not viewer.offline_instance
 	viewer.resize_handle.visible = viewer.overlay_visible and not viewer.offline_instance

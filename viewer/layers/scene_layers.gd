@@ -25,6 +25,7 @@ var panel: VBoxContainer
 var probe_label: Label
 var probe_spins: Array[SpinBox] = []
 var selected_volume := ""
+var layer_settings_buttons: Dictionary = {}
 var iso_pid := -1
 var iso_directory := ""
 var iso_node
@@ -361,6 +362,7 @@ func _build_ui() -> void:
 		var label := Label.new();label.text = id;label.clip_text = true;label.custom_minimum_size.y = 48;panel.add_child(label);labels[id] = label
 		if reader.objects[id].kind == "particles":continue
 		var toggle := Button.new();toggle.text = "Settings: "+id;toggle.toggle_mode = true;panel.add_child(toggle)
+		layer_settings_buttons[id] = toggle
 		var body := VBoxContainer.new();body.visible = false;panel.add_child(body);toggle.toggled.connect(func(v):body.visible = v)
 		var visible_check := CheckButton.new();visible_check.text = "Visible";visible_check.button_pressed = states[id].visible;body.add_child(visible_check)
 		visible_check.toggled.connect(func(v):
@@ -419,6 +421,8 @@ func _build_ui() -> void:
 	var volume_choice := OptionButton.new();panel.add_child(volume_choice)
 	for id in reader.objects:
 		if reader.objects[id].kind == "volume":volume_choice.add_item(id)
+	for i in range(volume_choice.item_count):
+		if volume_choice.get_item_text(i) == selected_volume:volume_choice.select(i)
 	volume_choice.item_selected.connect(func(i):selected_volume = volume_choice.get_item_text(i))
 	var probe_title := Label.new();probe_title.text = "Source probe • world xyz";panel.add_child(probe_title)
 	for axis in ["X","Y","Z"]:probe_spins.append(_number(panel,axis,0,-1e12,1e12,.1,func(_v):pass))
@@ -458,9 +462,21 @@ func validate_state(value) -> String:
 	if visible_volumes>1:return "Only one translucent volume may be visible."
 	return ""
 func apply_state(value: Dictionary) -> void:
+	# Layer controls are rebuilt, but probe inputs/results and disclosure state
+	# belong to the current session, not the recipe's rendering-layer snapshot.
+	var probe_values: Array = probe_spins.map(func(spin):return spin.value)
+	var probe_text := probe_label.text if is_instance_valid(probe_label) else ""
+	var expanded := {}
+	for id in layer_settings_buttons:
+		if is_instance_valid(layer_settings_buttons[id]):expanded[id] = layer_settings_buttons[id].button_pressed
 	gpu_budget_mib = int(value.gpu_budget_mib);states = value.layers.duplicate(true)
 	if is_instance_valid(panel):panel.get_parent().remove_child(panel);panel.queue_free()
-	labels.clear();probe_spins.clear();_build_ui();resample()
+	labels.clear();probe_spins.clear();layer_settings_buttons.clear();_build_ui()
+	for i in range(mini(probe_values.size(),probe_spins.size())):probe_spins[i].set_value_no_signal(probe_values[i])
+	probe_label.text = probe_text
+	for id in expanded:
+		if layer_settings_buttons.has(id):layer_settings_buttons[id].button_pressed = expanded[id]
+	resample()
 func request_iso(id: String) -> void:
 	for other in states:
 		if states[other].has("isosurface"):states[other].isosurface = other == id
