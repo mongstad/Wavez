@@ -1,0 +1,217 @@
+{
+  "renderer": "forward_plus",
+  "results": {
+    "baseline": {
+      "stage": "complete",
+      "frames": 30,
+      "window": {}
+    },
+    "visible": {
+      "stage": "complete",
+      "frames": 30,
+      "window": {
+        "display": "X11",
+        "final_mode": 0,
+        "scenario": "visible",
+        "stage": "complete",
+        "observed_frames": {
+          "count": 21,
+          "first": 10,
+          "last": 30,
+          "contiguous": true
+        },
+        "minimized_frames": {
+          "count": 0,
+          "first": null,
+          "last": null,
+          "contiguous": false
+        },
+        "unfocused_frames": {
+          "count": 0,
+          "first": null,
+          "last": null,
+          "contiguous": false
+        },
+        "unfocusable_frames": {
+          "count": 0,
+          "first": null,
+          "last": null,
+          "contiguous": false
+        }
+      }
+    },
+    "minimized": {
+      "stage": "complete",
+      "frames": 30,
+      "window": {
+        "display": "X11",
+        "final_mode": 1,
+        "scenario": "minimized",
+        "stage": "complete",
+        "observed_frames": {
+          "count": 21,
+          "first": 10,
+          "last": 30,
+          "contiguous": true
+        },
+        "minimized_frames": {
+          "count": 20,
+          "first": 11,
+          "last": 30,
+          "contiguous": true
+        },
+        "unfocused_frames": {
+          "count": 20,
+          "first": 11,
+          "last": 30,
+          "contiguous": true
+        },
+        "unfocusable_frames": {
+          "count": 0,
+          "first": null,
+          "last": null,
+          "contiguous": false
+        }
+      }
+    },
+    "unfocused": {
+      "stage": "complete",
+      "frames": 30,
+      "window": {
+        "display": "X11",
+        "final_mode": 0,
+        "scenario": "unfocused",
+        "stage": "complete",
+        "observed_frames": {
+          "count": 21,
+          "first": 10,
+          "last": 30,
+          "contiguous": true
+        },
+        "minimized_frames": {
+          "count": 0,
+          "first": null,
+          "last": null,
+          "contiguous": false
+        },
+        "unfocused_frames": {
+          "count": 20,
+          "first": 11,
+          "last": 30,
+          "contiguous": true
+        },
+        "unfocusable_frames": {
+          "count": 0,
+          "first": null,
+          "last": null,
+          "contiguous": false
+        }
+      }
+    },
+    "obscured": {
+      "stage": "complete",
+      "frames": 30,
+      "window": {
+        "display": "X11",
+        "final_mode": 0,
+        "scenario": "obscured",
+        "stage": "complete",
+        "observed_frames": {
+          "count": 21,
+          "first": 10,
+          "last": 30,
+          "contiguous": true
+        },
+        "minimized_frames": {
+          "count": 0,
+          "first": null,
+          "last": null,
+          "contiguous": false
+        },
+        "unfocused_frames": {
+          "count": 20,
+          "first": 11,
+          "last": 30,
+          "contiguous": true
+        },
+        "unfocusable_frames": {
+          "count": 0,
+          "first": null,
+          "last": null,
+          "contiguous": false
+        }
+      }
+    },
+    "background": {
+      "stage": "complete",
+      "frames": 30,
+      "window": {
+        "display": "X11",
+        "final_mode": 1,
+        "scenario": "background",
+        "stage": "complete",
+        "observed_frames": {
+          "count": 21,
+          "first": 10,
+          "last": 30,
+          "contiguous": true
+        },
+        "minimized_frames": {
+          "count": 21,
+          "first": 10,
+          "last": 30,
+          "contiguous": true
+        },
+        "unfocused_frames": {
+          "count": 21,
+          "first": 10,
+          "last": 30,
+          "contiguous": true
+        },
+        "unfocusable_frames": {
+          "count": 21,
+          "first": 10,
+          "last": 30,
+          "contiguous": true
+        }
+      }
+    },
+    "cancel": {
+      "stage": "cancelled",
+      "frames": 10,
+      "window": {
+        "display": "X11",
+        "final_mode": 1,
+        "scenario": "cancel",
+        "stage": "cancelled",
+        "observed_frames": {
+          "count": 1,
+          "first": 10,
+          "last": 10,
+          "contiguous": true
+        },
+        "minimized_frames": {
+          "count": 1,
+          "first": 10,
+          "last": 10,
+          "contiguous": true
+        },
+        "unfocused_frames": {
+          "count": 1,
+          "first": 10,
+          "last": 10,
+          "contiguous": true
+        },
+        "unfocusable_frames": {
+          "count": 1,
+          "first": 10,
+          "last": 10,
+          "contiguous": true
+        }
+      }
+    }
+  },
+  "source_sha256_unchanged": "d4747d16c5ee830dff2d8fc7fc60921915a40b7adfb712dfd7c3845b8ccee216",
+  "baseline_compared": true,
+  "pixel_and_timing_comparison": "All completed cases matched the original main baseline exactly"
+}

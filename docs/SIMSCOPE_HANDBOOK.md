@@ -97,7 +97,12 @@ and validates source/sample references. V3 pins the committed prefix, so later
 appends cannot alter the replay. Version 2 may reject appends that
 change a held bracket. Mutation, replacement and truncation refuse.
 
-PNG sidecars can record the same state and an image hash. The screenshot destination is selected for the current session. Deterministic video renders a separate SubViewport at specified resolution and times, independent of interactive rendering speed; a real GPU renderer is required for image acceptance.
+PNG sidecars can record the same state and an image hash. The screenshot destination is selected for the current session. Deterministic video renders a separate SubViewport at specified resolution and times, independent of interactive rendering speed; a real GPU renderer is required for image acceptance. The render worker minimizes
+its noninteractive window and draws export frames explicitly, so rendering can
+continue when it or the main viewer is minimized. Use the Export Video panel for
+progress/cancellation; UI-launched jobs retain `renderer.log` alongside progress
+and encoder diagnostics. A startup flash or taskbar entry can depend on the
+platform.
 
 For output frame `n`, requested capture time is `start + n × playback_rate / fps`; video time is `n / fps`. The interval is `[start,end)`, with a single frame for a zero-length interval. Samples use the same identity/held policies as inspection. Camera orbits advance by video time, not wall-clock render delays. Source identity and committed extent are pinned; unsupported source changes fail. Optional per-frame state survives successful PNG cleanup.
 

@@ -252,7 +252,7 @@ func cancel_export() -> void:
 	if f != null:
 		f.close()
 		message.text = "Cancelling after the current frame; completed PNGs will be retained."
-	else: message.text = "Could not write cancellation request. Close the render window to stop safely."
+	else: message.text = "Could not write cancellation request. Stop render process PID %d in the system monitor. Job retained: %s" % [pid, active_directory]
 
 func _process(delta: float) -> void:
 	if pid <= 0: return

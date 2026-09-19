@@ -133,4 +133,4 @@ static func find_ffmpeg() -> String:
 	return ""
 
 static func launch_arguments(job_path: String, fps: int) -> PackedStringArray:
-	return PackedStringArray(["--path", ProjectSettings.globalize_path("res://"), "--resolution", "640x360", "--position", "0,0", "--fixed-fps", str(fps), "--disable-vsync", "--audio-driver", "Dummy", "--", "--simscope-render-job=" + job_path])
+	return PackedStringArray(["--path", ProjectSettings.globalize_path("res://"), "--resolution", "640x360", "--position", "0,0", "--fixed-fps", str(fps), "--disable-vsync", "--audio-driver", "Dummy", "--log-file", job_path.get_base_dir().path_join("renderer.log"), "--", "--simscope-render-job=" + job_path])

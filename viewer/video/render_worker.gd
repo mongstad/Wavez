@@ -24,7 +24,16 @@ var initial_output_files := 0
 func _ready() -> void:
 	began = Time.get_ticks_msec()
 	get_tree().auto_accept_quit = false
+	RenderingServer.render_loop_enabled = false # Offline frames own their draw calls.
+	_configure_window()
 	_run.call_deferred()
+
+func _configure_window() -> void:
+	# Godot cannot hide its main window after startup. Keep the real GPU display
+	# connection but minimize this noninteractive worker and remove focusability.
+	get_tree().root.title = "SimScope export worker"
+	get_tree().root.unfocusable = true
+	get_tree().root.mode = Window.MODE_MINIMIZED
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
@@ -147,9 +156,13 @@ func _run() -> void:
 		viewer.camera.transform = Timeline.camera_at(job.state, float(n)/job.fps, job.get("camera_mode", "locked") == "orbit", float(job.get("orbit_speed", 0.08)))
 		if job.version == 2 and not await viewer.selection_controller.await_committed_overlay(150000,cancelled):
 			finish("cancelled" if cancelled() else "failed","Frame selection resolution cancelled or unavailable; no stale overlay frame was published.",2 if cancelled() else 1);return
-		# Only this SubViewport renders, once, after all state for n is installed.
+		# Yield for layout, process events and cancellation without depending on a
+		# visible OS window. Minimized/hidden windows may suppress the normal loop.
+		await get_tree().process_frame
+		if cancelled():
+			finish("cancelled", "Export cancelled. Completed PNG frames retained in " + frames_dir, 2);return
 		viewport.render_target_update_mode = SubViewport.UPDATE_ONCE
-		await RenderingServer.frame_post_draw
+		RenderingServer.force_draw(false, 1.0 / float(job.fps))
 		var img := viewport.get_texture().get_image()
 		if img == null or img.get_size() != Vector2i(int(job.width), int(job.height)):
 			finish("failed", "Rendered dimensions do not match the requested resolution.", 1)
