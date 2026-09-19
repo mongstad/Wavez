@@ -20,6 +20,22 @@ engines have separate availability requirements.
 
 Earlier documents sometimes append new checkpoints above obsolete scope tables. This handbook and [current status](CURRENT_STATUS.md) resolve that chronology; a historical “G3 future” paragraph is not current truth.
 
+## Camera inspection
+
+Mouse drag supports continuous yaw/pitch revolutions with no pitch clamp.
+Horizontal motion rotates about world Y; vertical motion rotates about the
+camera's yawed right axis. The camera up axis follows the tumble, including
+upside-down views, without a world-up flip at either pole. This preserves the
+existing two-axis orbit convention; it does not introduce a separate roll control.
+Wheel zoom, free-camera WASD/Q/E movement, F (Frame scene), R (reset) and the
+chosen orbit center retain their previous roles. O toggles automatic world-Y
+orbit independently; manual dragging temporarily suspends it.
+
+Recipes retain the existing yaw, pitch, target, distance and full transform
+fields. They can save pole and upside-down orientations without a new schema.
+Deterministic video still rotates the saved camera about world Y using video
+time. See [UI-003 validation](CAMERA_TUMBLE_VALIDATION.md) for coverage and limits.
+
 ## Scenes, layers and time
 
 SIMSCP3 describes named particle, mesh and volume objects, with at most one particle object and 16 total objects in the current implementation. Each has declared units, geometry/transform semantics, identity policy where relevant, and its own samples. A static object has one reusable sample. The scene timeline is the sorted union of committed timestamps, while layer sampling is independent. A field does not acquire a new scientific sample merely because particles were saved.

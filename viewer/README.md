@@ -14,7 +14,11 @@ See the [Quickstart](../QUICKSTART.md), [Python API](../SIMSCOPE_API.md),
 [capture format policy](../docs/CAPTURE_FORMAT_POLICY.md).
 
 F1 hides/restores the resizable inspector and legend; Space pauses; Left/Right
-steps; mouse drag orbits; wheel zooms; F11 toggles fullscreen. Capture / Export
+steps; mouse drag tumbles continuously through full revolutions in either direction;
+wheel zooms; F11 toggles fullscreen. F frames the scene and R resets the camera.
+Horizontal drag retains world-Y yaw; vertical drag carries the camera up axis
+through the poles, allowing upside-down views without a snap. Auto orbit (O)
+remains a separate world-Y rotation and pauses while dragging. Capture / Export
 opens files. Scalar colormaps use the bundled lookup data described in
 [COLORMAPS_LICENSE.txt](COLORMAPS_LICENSE.txt).
 
