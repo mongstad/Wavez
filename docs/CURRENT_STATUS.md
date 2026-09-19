@@ -145,7 +145,7 @@ and extends the scale matrix to all five laboratory pages. The
 218 contrast pairs, all four scales, scientific-viewer isolation and physical
 4K limitations. No theme or production behavior was changed. UX3 remains on hold.
 
-## UI-003 — pending owner review
+## UI-003 — accepted
 
 Issue #2 removes the manual pitch limit and derives the camera basis directly
 from yaw/pitch, carrying the up axis smoothly through both poles. Existing
@@ -153,7 +153,9 @@ camera recipe fields and automatic world-Y orbit are preserved. Pan, zoom,
 Frame scene, reset and orbit-center behavior have focused regression coverage.
 [Camera validation](CAMERA_TUMBLE_VALIDATION.md) records synthetic particle,
 volume and mesh results, native render checks, recipe/video regressions and
-owner acceptance steps. This implementation does not authorize another issue.
+original owner acceptance steps. The owner reviewed and accepted issue #2; PR #29
+was merged on 2026-09-19. The validation report and evidence preserve their
+original review-time state. Acceptance does not authorize another issue.
 
 ## Current limits
 
