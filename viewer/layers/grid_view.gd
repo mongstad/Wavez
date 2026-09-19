@@ -59,6 +59,9 @@ func apply(state: Dictionary, lut: Texture2D) -> void:
 	for mat in [material,slice_material]:
 		mat.set_shader_parameter("lower",state.lower);mat.set_shader_parameter("upper",state.upper);mat.set_shader_parameter("transfer",lut)
 	material.set_shader_parameter("opacity",state.opacity);material.set_shader_parameter("step_world",state.step)
+	var mapping := preload("res://layers/volume_opacity.gd").resolve(state)
+	material.set_shader_parameter("opacity_magnitude",mapping.mode == "magnitude")
+	material.set_shader_parameter("opacity_lower",mapping.lower);material.set_shader_parameter("opacity_upper",mapping.upper)
 	material.set_shader_parameter("clip_enabled",state.clip);material.set_shader_parameter("clip_plane",Vector4(state.clip_normal[0],state.clip_normal[1],state.clip_normal[2],state.clip_distance))
 	var normal := Reader.vec(state.slice_normal).normalized()
 	var tangent := normal.cross(Vector3.UP if absf(normal.y)<.9 else Vector3.RIGHT).normalized();var bitangent := normal.cross(tangent).normalized()

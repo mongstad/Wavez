@@ -71,11 +71,16 @@ func configure(viewer, preset: String, active: bool) -> void:
 	viewer.scene_layers.states.field.volume = active
 	viewer.scene_layers.states.field.clip = active
 	viewer.scene_layers.states.field.slice = active
+	viewer.scene_layers.states.field.opacity_mapping = {"mode":"magnitude" if active else "linear","lower":.125 if active else -.5,"upper":3.75 if active else 20.0}
 	viewer.scene_layers.states.mesh.wireframe = active
 	viewer.scene_layers.resample()
 	viewer._seek_time(.5 if active else 0)
 
 func check_ui(viewer, visual: Dictionary, label: String) -> void:
+	var mapping: Dictionary = visual.scene.layers.field.opacity_mapping
+	var controls: Dictionary = viewer.scene_layers.opacity_controls.field
+	check(controls.mode.selected == (1 if mapping.mode == "magnitude" else 0),label+" opacity mode control")
+	check(same(controls.lower.text.to_float(),mapping.lower) and same(controls.upper.text.to_float(),mapping.upper),label+" opacity threshold controls")
 	for name in visual.sections:
 		check(viewer.sections[name].visible == visual.sections[name],label+" section body "+name)
 		check(viewer.section_buttons[name].button_pressed == visual.sections[name],label+" section button "+name)
@@ -166,6 +171,16 @@ func run() -> void:
 				compare(live,session(viewer),preset+" v3 session untouched")
 				check(viewer.control_checks["Show hidden selection"].button_pressed == active,"v3 selection checkbox matches restored state")
 				check_ui(viewer,payload.base.visual,preset+" v3")
+	var old_recipe := Exact.snapshot(control.temporal,true)
+	var old_payload: Dictionary = Exact.unpack(old_recipe.payload)
+	old_payload.base.visual.scene.layers.field.erase("opacity_mapping")
+	old_payload.base.visual.scene.layers.field.lower = -.5;old_payload.base.visual.scene.layers.field.upper = 2.5
+	old_recipe.payload = Exact.pack(old_payload)
+	var old_path := output.path_join("legacy.inspection.json")
+	preload("res://video/render_job.gd").write_json(old_path,old_recipe)
+	control.temporal.durable.load_from(old_path)
+	check(await wait_jobs(control) and control.temporal.durable.last_recipe.get("restored",false),"load legacy v3 through verified worker")
+	compare({"mode":"linear","lower":-.5,"upper":2.5},viewer.scene_layers.states.field.opacity_mapping,"legacy v3 migration")
 	check(FileAccess.get_sha256(viewer.capture_path) == source_hash,"capture bytes unchanged")
 	if DisplayServer.get_name() != "headless":await process_frame;await RenderingServer.frame_post_draw
 	viewer.queue_free();await process_frame

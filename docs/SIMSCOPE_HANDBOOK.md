@@ -70,6 +70,18 @@ Particles support declared scalar semantics and categories, explicit marker chan
 
 Volumes use declared uniform-grid geometry, selected channels, transfer ranges/colormaps, opacity and world-distance ray steps. Ray integration clips to the grid and opaque geometry. Axis-aligned and oblique slices, world-coordinate probes and clipping support inspection of the field without inferring it from particles. The initial implementation allows one translucent volume and one derived isosurface; arbitrary overlapping transparent volumes are not composited. Additive particles do not supply opaque depth.
 
+Volume color range and extinction now have independent mappings. **Linear scalar**
+maps the selected source scalar between explicit zero/full-opacity thresholds;
+**Magnitude • absolute scalar** uses its absolute value for extinction while
+preserving sign for color. A non-negative zero threshold permits transparent
+zero/near-zero space even with a symmetric color range. **Opacity / world unit**
+scales this weight; **Ray step** remains a quality/performance control. These are
+presentation settings, not calibrated scientific measurements. New views retain
+linear opacity 0–1; old recipes copy their saved color range into independent
+opacity thresholds to preserve their original rendering. The
+[mapping contract and validation](VOLUME_OPACITY_MAPPING.md) describe persistence,
+limits and examples. No automatic color-range policy or preset is added.
+
 Probes read full source arrays with trilinear spatial interpolation and explicit world-to-grid conversion. At source sample coordinates they recover the source value subject to arithmetic/coordinate precision. An arbitrary probe point is an interpolated value, not an extra recorded scientific sample. Out-of-domain probes and invalid interpolation neighborhoods report unavailable. Python uses float64 probe coordinates; Godot coordinates are float32, so its displayed decimal values are not a last-bit validation instrument.
 
 The white three-axis cross belongs to **Scene layers → Source probe**, not the

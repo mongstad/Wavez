@@ -12,7 +12,16 @@ python -m examples.scene_demo --small
 ```
 
 Use **Scene layers → Settings** for visibility, scalar channel, range, colormap,
-volume opacity/step, slice orientation/distance, clipping and isosurface threshold.
+volume opacity mapping/strength/step, slice orientation/distance, clipping and
+isosurface threshold. Volume color ranges and opacity thresholds are independent.
+For signed fields, choose **Magnitude • absolute scalar**, a non-negative
+**Zero-opacity threshold**, and a larger **Full-opacity threshold**. Values at or
+below the zero threshold are transparent; the full threshold reaches the selected
+**Opacity / world unit** strength, not necessarily an opaque pixel. Use a symmetric
+color range and a diverging colormap to distinguish sign. This is an explicit
+display choice; it changes neither source values nor probes. Fresh views use
+linear opacity thresholds 0–1. See [volume mapping](docs/VOLUME_OPACITY_MAPPING.md)
+for the exact formula, persistence and legacy recipe behavior.
 The three plane-normal controls also allow arbitrary orientations. Source probes
 accept world xyz and draw a crosshair. Layer labels show source time/status and
 preview LOD. Use Physical time to see independent layer cadences. The **Scientific**

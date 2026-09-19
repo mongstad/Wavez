@@ -3,6 +3,7 @@ const Reader = preload("res://layers/scene_reader.gd")
 const GridView = preload("res://layers/grid_view.gd")
 const MeshView = preload("res://layers/mesh_view.gd")
 const Profile = preload("res://scene/playback_profile.gd")
+const Opacity = preload("res://layers/volume_opacity.gd")
 var viewer
 var playback
 var field_playback
@@ -26,6 +27,7 @@ var probe_label: Label
 var probe_spins: Array[SpinBox] = []
 var selected_volume := ""
 var layer_settings_buttons: Dictionary = {}
+var opacity_controls := {}
 var iso_pid := -1
 var iso_directory := ""
 var iso_node
@@ -54,6 +56,7 @@ func setup(scene, source) -> void:
 			var view := GridView.new();add_child(view);view.setup(viewer.camera);views[id] = view
 			var channel: String = reader.samples[id][0].descriptor.arrays[0].name if not reader.samples[id].is_empty() else ""
 			states[id] = {"visible":selected_volume.is_empty(),"channel":channel,"volume":true,"slice":false,"lower":0.0,"upper":1.0,"opacity":.25,"step":.5,"colormap":"viridis","slice_normal":[0.0,0.0,1.0],"slice_distance":0.0,"clip":false,"clip_normal":[1.0,0.0,0.0],"clip_distance":0.0,"threshold":.5,"isosurface":false}
+			states[id].opacity_mapping = Opacity.DEFAULT.duplicate()
 			if selected_volume.is_empty(): selected_volume = id
 		else:
 			var view := MeshView.new();add_child(view);views[id] = view
@@ -220,6 +223,7 @@ func _sample_profiled(time: float, asynchronous: bool, force_particles: bool) ->
 					info.channel = states[id].channel;info.geometry = a.geometry
 					info.color_compositing = "Compatibility sRGB framebuffer" if RenderingServer.get_current_rendering_method() == "gl_compatibility" else "Forward+ linear framebuffer"
 					info.effective_ray_step = "max(requested step, ray length / 1024); early alpha stop .995"
+					info.opacity_mapping = Opacity.resolve(states[id]).duplicate()
 					info.numeric_precision = str(a.channels[states[id].channel].get_class()) if a.channels[states[id].channel] is Object else ("float64 source" if a.channels[states[id].channel] is PackedFloat64Array else "float32 source")
 			else:
 				var view = views[id]
@@ -356,6 +360,30 @@ func _set_range(id: String, key: String, value: float) -> bool:
 	states[id][key] = value;resample();return true
 func _set_threshold(id: String, value: float) -> bool:
 	states[id].threshold = value;_sync_iso_target();return true
+func _set_opacity_mapping(id: String, key: String, value) -> bool:
+	var mapping: Dictionary = states[id].opacity_mapping.duplicate()
+	mapping[key] = value
+	var problem := Opacity.validate(mapping)
+	if not problem.is_empty():viewer.status_label.text = problem;return false
+	states[id].opacity_mapping = mapping;resample();return true
+func _build_opacity_ui(body: VBoxContainer, id: String) -> void:
+	var title := Label.new();title.text = "Opacity mapping • independent of color range";title.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART;body.add_child(title)
+	var mode := OptionButton.new();mode.add_item("Linear scalar");mode.add_item("Magnitude • absolute scalar")
+	mode.select(Opacity.MODES.find(states[id].opacity_mapping.mode));body.add_child(mode)
+	mode.tooltip_text = "Display extinction only; not a calibrated physical measurement. Magnitude treats positive and negative values equally without changing their color or source values."
+	mode.item_selected.connect(func(i):
+		if not _set_opacity_mapping(id,"mode",Opacity.MODES[i]):mode.select(Opacity.MODES.find(states[id].opacity_mapping.mode)))
+	var low := _scalar_input(body,"Zero-opacity threshold",states[id].opacity_mapping.lower,func(v):return _set_opacity_mapping(id,"lower",v))
+	var high := _scalar_input(body,"Full-opacity threshold",states[id].opacity_mapping.upper,func(v):return _set_opacity_mapping(id,"upper",v))
+	low.tooltip_text = "At or below this scalar (absolute scalar in Magnitude mode), extinction is zero. Set a positive threshold to suppress near-zero space."
+	high.tooltip_text = "At or above this scalar, extinction reaches Opacity / world unit. A linear ramp connects the thresholds; color range is unchanged."
+	var reset := Button.new();reset.text = "Reset opacity mapping • linear 0–1";body.add_child(reset)
+	reset.pressed.connect(func():
+		states[id].opacity_mapping = Opacity.DEFAULT.duplicate()
+		# Rebuild through the shared restore path so numeric editors' last values
+		# stay synchronized, while session probes/disclosures remain untouched.
+		apply_state(snapshot()))
+	opacity_controls[id] = {"mode":mode,"lower":low,"upper":high,"reset":reset}
 func _build_ui() -> void:
 	panel = VBoxContainer.new();viewer.inspector_box.add_child(panel);viewer.inspector_box.move_child(panel,3)
 	if playback != null:playback.build_ui(panel)
@@ -385,8 +413,8 @@ func _build_ui() -> void:
 		for i in range(channel.item_count):
 			if channel.get_item_metadata(i) == states[id].channel:channel.select(i)
 		channel.item_selected.connect(func(i):states[id].channel = str(channel.get_item_metadata(i));resample())
-		_scalar_input(body,"Range minimum",states[id].lower,func(v):return _set_range(id,"lower",v))
-		_scalar_input(body,"Range maximum",states[id].upper,func(v):return _set_range(id,"upper",v))
+		_scalar_input(body,"Color range minimum" if reader.objects[id].kind == "volume" else "Range minimum",states[id].lower,func(v):return _set_range(id,"lower",v))
+		_scalar_input(body,"Color range maximum" if reader.objects[id].kind == "volume" else "Range maximum",states[id].upper,func(v):return _set_range(id,"upper",v))
 		var map := OptionButton.new();body.add_child(map)
 		for name in viewer.colormaps:map.add_item(name)
 		for i in range(map.item_count):
@@ -400,6 +428,7 @@ func _build_ui() -> void:
 					if other != id and reader.objects[other].kind == "volume" and states[other].visible and states[other].volume:
 						viewer.status_label.text = "Disable the other volume before showing this one.";volume.set_pressed_no_signal(false);return
 			states[id].volume = v;resample())
+		_build_opacity_ui(body,id)
 		_number(body,"Opacity / world unit",states[id].opacity,0,10,.01,func(v):states[id].opacity = v;resample())
 		_number(body,"Ray step • world units",states[id].step,.05,10,.05,func(v):states[id].step = v;resample())
 		var slice_choice := OptionButton.new()
@@ -453,8 +482,16 @@ func probe_selected_volume() -> void:
 	probe_marker_valid = value != null;set_probe_marker_enabled(probe_marker_enabled)
 	probe_label.text = "Unavailable" if value == null else "%s = %s %s" % [states[selected_volume].channel,JSON.stringify(value,"",true,true),reader.objects[selected_volume].units]
 func snapshot() -> Dictionary: return {"gpu_budget_mib":gpu_budget_mib,"layers":states.duplicate(true)}
+func upgrade_state(value: Dictionary) -> Dictionary:
+	var upgraded := value.duplicate(true)
+	for id in upgraded.get("layers",{}):
+		var layer = upgraded.layers[id]
+		if reader.objects.has(id) and reader.objects[id].kind == "volume" and layer is Dictionary and not layer.has("opacity_mapping") and layer.has_all(["lower","upper"]):
+			layer.opacity_mapping = Opacity.resolve(layer)
+	return upgraded
 func validate_state(value) -> String:
 	if not value is Dictionary or not value.get("layers") is Dictionary or not Reader.Index.whole(value.get("gpu_budget_mib")) or value.gpu_budget_mib < 1 or value.gpu_budget_mib > 2048: return "Invalid layer budget/state."
+	value = upgrade_state(value)
 	if value.layers.size() != states.size() or not value.layers.has_all(states.keys()):return "Scene layer state differs from source objects."
 	var visible_volumes := 0;var surfaces := 0
 	for id in states:
@@ -469,6 +506,8 @@ func validate_state(value) -> String:
 		if not names.has(incoming.channel):return "Unknown layer scalar channel."
 		if incoming.upper <= incoming.lower or not viewer.colormaps.has(incoming.colormap):return "Invalid layer range/colormap."
 		if reader.objects[id].kind == "volume":
+			var opacity_problem := Opacity.validate(incoming.opacity_mapping)
+			if not opacity_problem.is_empty():return opacity_problem
 			if incoming.opacity < 0 or incoming.opacity > 10 or incoming.step < .05 or incoming.step > 10 or Reader.vec(incoming.slice_normal).length() < .001: return "Invalid volume controls."
 			if absf(Reader.vec(incoming.slice_normal).length()-1)>1e-5 or absf(Reader.vec(incoming.clip_normal).length()-1)>1e-5:return "Plane normals must be unit length."
 			if incoming.visible and incoming.volume:visible_volumes += 1
@@ -484,9 +523,10 @@ func apply_state(value: Dictionary) -> void:
 	var expanded := {}
 	for id in layer_settings_buttons:
 		if is_instance_valid(layer_settings_buttons[id]):expanded[id] = layer_settings_buttons[id].button_pressed
+	value = upgrade_state(value)
 	gpu_budget_mib = int(value.gpu_budget_mib);states = value.layers.duplicate(true)
 	if is_instance_valid(panel):panel.get_parent().remove_child(panel);panel.queue_free()
-	labels.clear();probe_spins.clear();layer_settings_buttons.clear();_build_ui()
+	labels.clear();probe_spins.clear();layer_settings_buttons.clear();opacity_controls.clear();_build_ui()
 	for i in range(mini(probe_values.size(),probe_spins.size())):probe_spins[i].set_value_no_signal(probe_values[i])
 	probe_label.text = probe_text
 	for id in expanded:
