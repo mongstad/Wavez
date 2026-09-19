@@ -518,7 +518,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		var d: Vector2 = mouse_event.position - last_mouse
 		last_mouse = mouse_event.position
 		yaw -= d.x * 0.006
-		pitch = clampf(pitch - d.y * 0.006, deg_to_rad(-82.0), deg_to_rad(82.0))
+		pitch -= d.y * 0.006
 		_update_camera()
 	elif event is InputEventKey and event.pressed and not event.echo:
 		match event.keycode:
@@ -536,12 +536,12 @@ func _unhandled_input(event: InputEvent) -> void:
 				camera_target = Vector3.ZERO; yaw = deg_to_rad(38.0); pitch = deg_to_rad(24.0); camera_distance = maxf(30.0, half_extent * 2.8); _update_camera()
 
 func _update_camera() -> void:
-	var cp: float = cos(pitch)
-	camera.position = camera_target + Vector3(
-		camera_distance * cp * sin(yaw),
-		camera_distance * sin(pitch),
-		camera_distance * cp * cos(yaw))
-	camera.look_at(camera_target, Vector3.UP)
+	# Carry the camera up axis through the poles instead of reconstructing it
+	# from world-up (look_at becomes singular at +/-90 degrees and flips beyond).
+	# This is the existing yaw/pitch orbit with continuous orientation; keeping
+	# those angles also preserves recipe fields and independent world-Y auto orbit.
+	var orientation := Basis(Vector3.UP, yaw) * Basis(Vector3.RIGHT, -pitch)
+	camera.transform = Transform3D(orientation, camera_target + orientation.z * camera_distance)
 
 func _comma(v: Variant) -> String:
 	var s := str(v)
