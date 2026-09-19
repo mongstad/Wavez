@@ -91,6 +91,12 @@ func numeric_tests() -> void:
 
 func theme_tests() -> void:
 	var theme := ThemeFactory.new()
+	for tier in ["Low", "Medium", "High", "XHigh", "Max"]:
+		var color := theme.get_color("font_color", StringName("Tier" + tier))
+		for background in ["surface.0", "surface.1", "surface.2", "surface.3"]:
+			contrast(color, T.color(background), 4.5, "Tier/" + tier + "/" + background)
+		for state in ["success", "warning", "error", "info"]:
+			check(color != T.color(StringName("state." + state)), "Tier does not alias operational status: " + tier + "/" + state)
 	var atmosphere: StyleBoxTexture = theme.get_stylebox("panel", "AtmosphericSurface")
 	var texture: GradientTexture2D = atmosphere.texture
 	check(texture.width == 256 and texture.height == 256, "Atmosphere has a bounded static texture")
@@ -166,6 +172,7 @@ func input_tests() -> void:
 	await screenshot(root, "02-numbers")
 	lab.tabs.current_tab = 2; await screenshot(root, "03-feedback")
 	lab.tabs.current_tab = 3; await screenshot(root, "04-tokens")
+	lab.tabs.current_tab = 4; await screenshot(root, "08-tiers")
 	lab.tabs.current_tab = 0; await settle()
 	lab.specimens.scalar.slider.grab_focus(); check(lab.specimens.scalar.slider.has_focus(), "Slider retains native keyboard focus plus shared ring"); await screenshot(root, "05-slider-focus")
 	lab.specimens.menu.show_popup(); await screenshot(root, "06-menu")

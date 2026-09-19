@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "renderer": "forward_plus",
+  "native_checks": 1366,
+  "contrast_pairs": 218,
+  "oracle_cases": 300,
+  "isolated_checks": 6,
+  "hud_cases": 6,
+  "source_check": "before_after_validation",
+  "historical_source_check": "NOT_REQUESTED"
+}

@@ -15,6 +15,10 @@ extends Resource
 	# Sparse identity marks only; never status, intensity tiers or scientific data.
 	&"identity.purple": Color("b4a2dc"), &"identity.teal": Color("79bfc4"),
 	&"selection.fill": Color("233f68"), &"selection.text": Color("dceaff"),
+	# Categorical UI tiers, not operational severity or scientific magnitudes.
+	&"tier.low": Color("b8c2d1"), &"tier.medium": Color("62d5db"),
+	&"tier.high": Color("80acff"), &"tier.xhigh": Color("bc9aff"),
+	&"tier.max": Color("efa5df"),
 	&"state.success": Color("7fd1a7"), &"state.warning": Color("e8bf72"),
 	&"state.error": Color("f08c91"), &"state.info": Color("9cbee8"),
 }

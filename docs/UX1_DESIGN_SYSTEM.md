@@ -236,3 +236,25 @@ Centralize UI scale conversion in the theme/presentation boundary. Components ac
 UX1 recommends the one-dock hierarchy, explicit recipe scope labels, token values and typed editor separation above. UX3 must validate right-side placement and minimum logical size with task walkthroughs; UX2 must validate numeric font packaging, real widget metrics, keyboard states and contrast on every component background. UX6/8 must validate physical 4K, mixed DPI, native window boundaries and assistive technology on available hardware. These are planned milestone tests, not open blockers to completing this specification.
 
 No UX2 Theme, component scene, font/icon asset, UI laboratory or application redesign is implemented here. See [regression gates](UX1_REGRESSION_WORKFLOWS.md) before any later consumer migration.
+
+## Categorical tier accents — issue #7
+
+Tiers are UI categories, independent of operational severity and scientific data.
+Use the shared `TierLow`, `TierMedium`, `TierHigh`, `TierXHigh` and `TierMax`
+Label variations for compact 12 px labels on opaque base surfaces. Always spell
+out the tier; ordinal cues may supplement the label. Never rely on color alone,
+fill entire panels with a tier color, or replace status icons/text with tiers.
+
+| Tier | Token | Color |
+|---|---|---|
+| Low | `tier.low` | `#B8C2D1` (slate) |
+| Medium | `tier.medium` | `#62D5DB` (cyan) |
+| High | `tier.high` | `#80ACFF` (blue) |
+| XHigh | `tier.xhigh` | `#BC9AFF` (violet) |
+| Max | `tier.max` | `#EFA5DF` (orchid) |
+
+Amber Warning and red Error retain their operational meaning, icons and wording.
+A Max tier can have Success status; a Low tier can have Error status. The Tiers
+laboratory page shows these combinations side by side. Tier colors never define
+scientific magnitudes, normalization, colormaps, selection or renderer state.
+No production consumers or scientific behavior are changed.
