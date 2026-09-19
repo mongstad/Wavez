@@ -1,0 +1,29 @@
+{
+  "issue": 11,
+  "status": "pending owner review",
+  "baseline": "fc05f2d4456f31112cdff47104220b80cc83425c",
+  "godot": "4.7.2.stable.official.ed1daf0bf",
+  "gpu": "NVIDIA GeForce RTX 3070 Ti",
+  "host": "Linux KDE Wayland / Godot default X11",
+  "focused_checks_per_backend": 98,
+  "real_checks_per_backend": 26,
+  "recipe_checks": 3031,
+  "recipe_failures": [],
+  "export_checks_per_backend": [
+    "MP4 complete",
+    "identical live/export frame pixels",
+    "explicit mapping in inspection sidecar",
+    "source checksum unchanged"
+  ],
+  "density_pixels_equal_issue13_forward_baseline": true,
+  "logs": "final native runs: no ERROR/WARNING; recipe run: no ERROR/WARNING",
+  "source_bytes_and_sha256": "see per-backend real_capture records",
+  "development_failure": "First Forward+ test had one pixel-replay failure caused by hiding the overlay without updating its saved visibility. Test fixture corrected; final reruns passed.",
+  "skipped": [
+    "other GPUs/OSes",
+    "physical 4K/multiple UI scales",
+    "long-session performance benchmarking",
+    "full G0\u2013G4 suites",
+    "independent real simulation families"
+  ]
+}

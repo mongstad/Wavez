@@ -53,6 +53,16 @@ label; it does not reapply preset defaults over explicitly saved settings. Point
 rendering and the environment remain independent, including Bloom availability.
 Control widgets must reflect the restored values without firing edit callbacks.
 
+Volume layers also save `opacity_mapping` with `mode` (`linear` or `magnitude`),
+`lower` (zero-opacity threshold) and `upper` (full-opacity threshold), independently
+of color `lower`/`upper` and the existing opacity strength. v2 recipes, v3 exact
+state and video jobs retain these settings. Older volume states without the whole
+mapping field migrate to linear opacity using their saved color bounds; subsequent
+color edits no longer change extinction. Partial/invalid mappings are refused by
+recipe validation before applying state. Reset restores only the opacity mapping
+to linear 0–1. [Mapping details](docs/VOLUME_OPACITY_MAPPING.md) explain threshold
+validation and float32 preview limits; numerical probes still use source values.
+
 v3 additionally owns selection definitions/groups/active selection/overlay
 settings and the saved analysis summaries, result references, comparison
 bindings, bookmarks and selected-series/member-address layout. Numerical results

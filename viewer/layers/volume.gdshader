@@ -11,6 +11,9 @@ uniform vec3 bounds_max;
 uniform float lower = 0.0;
 uniform float upper = 1.0;
 uniform float opacity = 0.25;
+uniform bool opacity_magnitude = false;
+uniform float opacity_lower = 0.0;
+uniform float opacity_upper = 1.0;
 uniform float step_world = 0.5;
 uniform bool clip_enabled = false;
 uniform vec4 clip_plane = vec4(1.0,0.0,0.0,0.0);
@@ -54,7 +57,11 @@ void fragment() {
         float value=texture(field_texture,uv_at(go+gd*(t+dt*0.5))).r;
         if(isnan(value) || isinf(value)) continue;
         float u=clamp((value-lower)/max(upper-lower,1e-38),0.0,1.0);
-        float a=1.0-exp(-max(opacity,0.0)*u*dt);
+        // Extinction has its own scalar thresholds; signed color ranges do
+        // not give zero-valued space the midpoint's opacity.
+        float opacity_value=opacity_magnitude ? abs(value) : value;
+        float weight=clamp((opacity_value-opacity_lower)/max(opacity_upper-opacity_lower,1e-38),0.0,1.0);
+        float a=1.0-exp(-max(opacity,0.0)*weight*dt);
         vec3 color=texture(transfer,vec2((u*255.0+0.5)/256.0,0.5)).rgb;
         accum.rgb+=(1.0-accum.a)*a*color;
         accum.a+=(1.0-accum.a)*a;
