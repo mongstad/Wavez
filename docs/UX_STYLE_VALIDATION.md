@@ -1,6 +1,6 @@
 # Midnight Scientific reconciliation and validation — issue #8
 
-Pending owner review. Issue #8 was the only Ready item before work began.
+Reviewed and accepted by the owner. Issue #8 was the only Ready item before work began.
 This review reconciles the accepted refinements from issues #5–#7; it does not
 start UX3 or migrate production controls.
 
