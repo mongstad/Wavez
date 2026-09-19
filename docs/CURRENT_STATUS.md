@@ -50,6 +50,20 @@ evidence preserve their original review-time state.
 not authorize a production shell or panel migration; wait for an explicit owner
 instruction under the [UX plan](../UX_IMPLEMENTATION_PLAN.md).
 
+## RENDER-001 — pending owner review
+
+Issue #3 separates the Point rendering checkbox and `V` shortcut from viewing
+preset environment changes. Particle representation can now change while the
+selected preset, background, starfield, fog, bloom and exposure remain intact.
+Selecting a viewing preset still applies its existing defaults. Visual recipes
+retain their existing state format; restoring a recipe also restores Bloom
+control availability from its saved environment rather than particle style.
+
+Focused Scientific/Cinematic coverage checks both particle styles, checkbox and
+keyboard actions, shader state, and visual-state round trips. Owner acceptance
+should verify these combinations on a particle capture, including saving and
+reloading a recipe. This maintenance does not authorize further queued work.
+
 ## Current limits
 
 G3 permits at most one particle object per capture and supports one translucent volume and one derived isosurface at a time; multiple meshes and slices are supported. Interactive particle, field and mesh CPU preparation is asynchronous in the accepted maintenance implementation; field textures and mesh surfaces are staged on the main thread. Stable mesh positions interpolate on the GPU, while scalar colors hold the earlier source sample. Initial opening and explicit scientific inspection/export retain synchronous work. Mesh inspection positions and deformed normals are materialized on demand; rendering remains unshaded. Source arrays and probes retain scientific precision, while GPU previews use float32 and may reduce resolution; isosurfaces are explicitly approximate. Budgets are separate allocation limits, not a whole-process memory guarantee. The earlier full G3 demo completed about 19.2 samples/s; neither that result nor the new particle controls establish universal 30 FPS performance. Concurrent CuPy simulation/viewer performance has not been validated. Detailed contracts and measurements are in the [handbook](SIMSCOPE_HANDBOOK.md) and [format/API guide](CAPTURE_FORMAT_AND_API.md).

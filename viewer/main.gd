@@ -528,7 +528,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			KEY_O: orbit_enabled = not orbit_enabled; inspection_paused = false; _sync_control_state()
 			KEY_T: _toggle_trails()
 			KEY_F: _focus_activity()
-			KEY_V: _set_clean(not clean_view)
+			KEY_V: _set_point_rendering(not clean_view)
 			KEY_P: _save_image()
 			KEY_F1: _toggle_overlay()
 			KEY_F11: _toggle_fullscreen()
@@ -621,16 +621,20 @@ func _sync_visuals_profiled() -> void:
 		mat.set_shader_parameter("slice_enabled", slice_enabled)
 		mat.set_shader_parameter("slice_x", slice_x * half_extent)
 
-func _set_clean(value: bool) -> void:
+func _set_point_rendering(value: bool) -> void:
 	clean_view = value
 	_sync_control_state()
+	_sync_visuals()
+	_rebuild_trails()
+
+func _set_clean(value: bool) -> void:
+	# Viewing presets retain their combined particle/environment behavior.
+	_set_point_rendering(value)
 	environment.background_mode = Environment.BG_COLOR if value else Environment.BG_SKY
 	environment.glow_enabled = not value
 	environment.fog_enabled = not value
 	starfield.visible = not value
 	glow_slider.editable = not value
-	_sync_visuals()
-	_rebuild_trails()
 	status_label.text = "Scientific view — decorative backdrop and bloom disabled." if value else "Cinematic view — artistic backdrop, halos and bloom enabled."
 
 func _build_guides() -> void:
@@ -889,7 +893,7 @@ func _build_inspector() -> void:
 	preset.item_selected.connect(func(i: int): _apply_preset(preset.get_item_text(i)))
 	_visual_slider(rendering, "Particle size", 0.1, 8, point_scale, func(v: float): point_scale = v; _sync_visuals())
 	_visual_slider(rendering, "Brightness", 0.0, 5, brightness_scale, func(v: float): brightness_scale = v; _restyle())
-	_check(rendering, "Point rendering", clean_view, func(v: bool): _set_clean(v))
+	_check(rendering, "Point rendering", clean_view, func(v: bool): _set_point_rendering(v))
 	var colors := _section("Color Mapping", true)
 	generic_box = VBoxContainer.new()
 	colors.add_child(generic_box)
