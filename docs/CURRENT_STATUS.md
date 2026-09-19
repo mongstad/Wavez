@@ -155,6 +155,16 @@ Frame scene, reset and orbit-center behavior have focused regression coverage.
 volume and mesh results, native render checks, recipe/video regressions and
 owner acceptance steps. This implementation does not authorize another issue.
 
+## UI-004 — pending owner review
+
+Issue #4 adds **Show probe marker** beside the volume source-probe action.
+The cross is `scene_layers.gd`’s `SourceProbeMarker`; hiding it retains the
+last probe and does not alter scientific data. The session preference survives
+playback, seeking and recipe restoration. Screenshots honor visibility;
+deterministic video retains its existing exclusion of session-only probe markers.
+[Focused validation](PROBE_MARKER_VALIDATION.md) records both native renderers,
+source invariance, screenshot/video checks and owner verification steps.
+
 ## Current limits
 
 G3 permits at most one particle object per capture and supports one translucent volume and one derived isosurface at a time; multiple meshes and slices are supported. Interactive particle, field and mesh CPU preparation is asynchronous in the accepted maintenance implementation; field textures and mesh surfaces are staged on the main thread. Stable mesh positions interpolate on the GPU, while scalar colors hold the earlier source sample. Initial opening and explicit scientific inspection/export retain synchronous work. Mesh inspection positions and deformed normals are materialized on demand; rendering remains unshaded. Source arrays and probes retain scientific precision, while GPU previews use float32 and may reduce resolution; isosurfaces are explicitly approximate. Budgets are separate allocation limits, not a whole-process memory guarantee. The earlier full G3 demo completed about 19.2 samples/s; neither that result nor the new particle controls establish universal 30 FPS performance. Concurrent CuPy simulation/viewer performance has not been validated. Detailed contracts and measurements are in the [handbook](SIMSCOPE_HANDBOOK.md) and [format/API guide](CAPTURE_FORMAT_AND_API.md).

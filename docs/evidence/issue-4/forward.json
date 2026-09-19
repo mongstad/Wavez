@@ -1,0 +1,7 @@
+{
+  "checks": 33,
+  "failures": [],
+  "renderer": "forward_plus",
+  "video": "Two four-frame MP4s PASS; identical frames/timing; marker-free baseline match",
+  "source_sha256_unchanged": "4f6a007d248fc9f344de6bd4a05ca0d4649a2c27f049e92decf9ecfe7dc2be03"
+}
