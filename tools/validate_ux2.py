@@ -13,7 +13,7 @@ import subprocess
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-BASELINE = "7037f5f"
+SOURCE_PATHS = ("viewer", "simscope_export", "examples", "tests")
 
 
 def write(path, value):
@@ -38,17 +38,46 @@ def oracle():
     return [dict(text=text, little_endian_hex=struct.pack("<d", float(text)).hex()) for text in texts]
 
 
-def source_invariance():
+def source_snapshot(root=ROOT):
+    """Hash current source, including new files but excluding generated caches."""
     paths = subprocess.check_output([
-        "git", "ls-tree", "-r", "--name-only", BASELINE, "--", "viewer", "simscope_export", "examples", "tests"
-    ], cwd=ROOT, text=True).splitlines()
+        "git", "ls-files", "--cached", "--others", "--exclude-standard", "--", *SOURCE_PATHS
+    ], cwd=root, text=True).splitlines()
+    return {name: hashlib.sha256((root / name).read_bytes()).hexdigest()
+            for name in sorted(set(paths)) if (root / name).is_file()}
+
+
+def source_invariance(before, root=ROOT):
+    after = source_snapshot(root)
+    changed = [name for name in sorted(before.keys() | after.keys())
+               if before.get(name) != after.get(name)]
+    if changed:
+        raise RuntimeError("Validation changed source files: " + ", ".join(changed))
+    return dict(mode="before_after_validation", status="PASS", files=after)
+
+
+def historical_source_invariance(baseline, root=ROOT):
+    try:
+        commit = subprocess.check_output([
+            "git", "rev-parse", "--verify", baseline + "^{commit}"
+        ], cwd=root, text=True, stderr=subprocess.PIPE).strip()
+    except subprocess.CalledProcessError as error:
+        raise ValueError(f"Source baseline {baseline!r} is not available locally. "
+                         "Historical comparison requires its archived Git history; "
+                         "omit --source-baseline for current-tree validation.") from error
+    paths = subprocess.check_output([
+        "git", "ls-tree", "-r", "--name-only", commit, "--", *SOURCE_PATHS
+    ], cwd=root, text=True).splitlines()
+    if not paths:
+        raise ValueError("Source baseline contains no protected source files")
     rows = []
     for name in paths:
-        old = subprocess.check_output(["git", "show", f"{BASELINE}:{name}"], cwd=ROOT)
-        current = (ROOT / name).read_bytes()
+        old = subprocess.check_output(["git", "show", f"{commit}:{name}"], cwd=root)
+        current = (root / name).read_bytes()
         rows.append(dict(path=name, identical=old == current, sha256=hashlib.sha256(current).hexdigest()))
-    assert all(row["identical"] for row in rows), "Existing production source changed during UX2"
-    return dict(baseline=BASELINE, files=rows, identical=len(rows))
+    if not all(row["identical"] for row in rows):
+        raise RuntimeError("Protected source differs from the requested historical baseline")
+    return dict(mode="historical", baseline=commit, files=rows, identical=len(rows), status="PASS")
 
 
 def main():
@@ -56,6 +85,7 @@ def main():
     parser.add_argument("--godot", required=True)
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--renderer", choices=["forward_plus", "gl_compatibility"], default="forward_plus")
+    parser.add_argument("--source-baseline", help="Optional local Git commit for historical source comparison")
     args = parser.parse_args()
     out = args.output_dir.resolve()
     out.mkdir(parents=True, exist_ok=False)
@@ -77,6 +107,9 @@ def main():
             raise RuntimeError(log[-5000:])
 
     try:
+        before = source_snapshot()
+        historical = (historical_source_invariance(args.source_baseline) if args.source_baseline
+                      else dict(status="NOT_REQUESTED", reason="Archived UX2 history is not part of this repository"))
         run("import", [args.godot, "--headless", "--path", "viewer", "--editor", "--import"])
         for module, name in [("examples.scene_demo", "scene"), ("examples.identity_demo", "identity")]:
             run(name, [sys.executable, "-m", module] + (["--small"] if name == "scene" else []) + ["--output", str(out / (name + ".ssc"))])
@@ -84,13 +117,15 @@ def main():
         run("native", native + ["res://ui/lab/test_ui_foundation.gd", "--", f"--ux2-output={out / 'native'}"])
         run("isolation", native + ["res://ui/lab/test_viewer_isolation.gd", "--", f"--ux2-output={out / 'isolation'}", f"--ux2-fixture={out / 'scene.ssc'}"])
         run("hud", native + ["res://scene/test_hud_layout.gd", "--", f"--hud-output={out / 'hud'}", f"--hud-fixture={out / 'identity.ssc'}"])
-        write(out / "source-invariance.json", source_invariance())
+        write(out / "source-invariance.json", source_invariance(before))
+        write(out / "historical-source-invariance.json", historical)
         native_result = json.loads((out / "native/validation.json").read_text())
         assert native_result["display"] != "headless", "Native rendering validation requires a display"
         assert not native_result["failures"]
         report = dict(status="PASS", renderer=args.renderer, commands=commands, native_checks=len(native_result["checks"]),
                       contrast_pairs=len(native_result["contrast"]), oracle_cases=300,
-                      isolated_checks=6, hud_cases=6, source_baseline=BASELINE)
+                      isolated_checks=6, hud_cases=6, source_check="before_after_validation",
+                      historical_source_check=historical["status"])
     except Exception as error:
         report = dict(status="FAIL", commands=commands, error=f"{type(error).__name__}: {error}")
     write(out / "summary.json", report)

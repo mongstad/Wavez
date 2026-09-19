@@ -18,3 +18,9 @@ implementation alone does not create a release tag. Historical viewer directory
 `v1.0.3` was not a package release. The descriptive `pre-g4-consolidation` tag
 records a historical checkpoint without claiming a new release.
 No force pushes or history rewrites without a documented need and authorization.
+
+Commit Godot `.gd.uid` and `.gdshader.uid` sidecars with their source files.
+They preserve resource identity across fresh imports and file moves; do not ignore
+or regenerate existing tracked UIDs. Include the sidecar when moving or deleting
+its script/shader. Godot's `.godot/` import cache remains ignored. Before opening a
+PR, import the viewer and check `git status` for newly generated sidecars.
