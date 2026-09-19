@@ -22,6 +22,11 @@ remains a separate world-Y rotation and pauses while dragging. Capture / Export
 opens files. Scalar colormaps use the bundled lookup data described in
 [COLORMAPS_LICENSE.txt](COLORMAPS_LICENSE.txt).
 
+In **Scene layers → Source probe**, **Show probe marker** hides/restores the
+last valid volume-probe cross without clearing coordinates or the result. It
+stays hidden through playback/seeks and recipe loads. Screenshots reflect the
+switch; recipes and deterministic video exclude this session-only marker.
+
 Core rendering runs in Godot. G4 numerical analysis requires Python and NumPy;
 optional isosurface extraction additionally requires scikit-image. Forward+
 supports cinematic bloom; Compatibility also runs.

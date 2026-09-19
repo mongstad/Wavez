@@ -72,6 +72,17 @@ Volumes use declared uniform-grid geometry, selected channels, transfer ranges/c
 
 Probes read full source arrays with trilinear spatial interpolation and explicit world-to-grid conversion. At source sample coordinates they recover the source value subject to arithmetic/coordinate precision. An arbitrary probe point is an interpolated value, not an extra recorded scientific sample. Out-of-domain probes and invalid interpolation neighborhoods report unavailable. Python uses float64 probe coordinates; Godot coordinates are float32, so its displayed decimal values are not a last-bit validation instrument.
 
+The white three-axis cross belongs to **Scene layers → Source probe**, not the
+camera or particle-selection overlay. **Show probe marker** hides/restores the
+last valid explicit probe without clearing coordinates or the numeric result.
+Playback and seeking retain that last probe; click **Probe selected volume** to
+sample again. Probing while hidden updates the result without showing the cross.
+An unavailable probe hides it even if the switch is on. Recipe loading preserves
+the session's marker visibility, but recipes/PNG sidecars do not serialize this
+session-only marker. Screenshots include the cross only when shown; deterministic
+video excludes it. F1 hides the inspector, not this 3D marker. Reopening a capture
+resets the probe session (switch on, no cross until a valid probe).
+
 GPU grids are float32 previews, potentially reduced by endpoint-aligned power-of-two LOD under budget; the shader samples that preview. Source arrays remain full resolution. Isosurfaces use optional scikit-image Lewiner marching cubes over the full source grid after the algorithm's float32 conversion, with no smoothing or decimation. Nonfinite-corner cells are omitted. A surface is an approximate level set, not a material boundary, tracked particle population or discovered physical object. Extraction is debounced, bounded, cancelable on stale requests and cached by source/settings identity.
 
 Meshes contain real indexed triangles and optional vertex/face channels. Surface and wireframe views are supported. Source CCW winding and normals are transformed explicitly, including reflection and inverse-transpose handling. Face colors may require expanded display geometry; display memory can exceed serialized array size.

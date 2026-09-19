@@ -41,6 +41,9 @@ var iso_debounce := 0.0
 var identity_generation := -1
 var source_identity := {}
 var probe_marker: MeshInstance3D
+var probe_marker_enabled := true
+var probe_marker_valid := false
+var probe_marker_check: CheckButton
 var layer_budget := 0
 func setup(scene, source) -> void:
 	viewer = scene;reader = source;generation = reader.generation
@@ -426,17 +429,29 @@ func _build_ui() -> void:
 	volume_choice.item_selected.connect(func(i):selected_volume = volume_choice.get_item_text(i))
 	var probe_title := Label.new();probe_title.text = "Source probe • world xyz";panel.add_child(probe_title)
 	for axis in ["X","Y","Z"]:probe_spins.append(_number(panel,axis,0,-1e12,1e12,.1,func(_v):pass))
-	viewer._button(panel,"Probe selected volume",func():
-		if selected_volume.is_empty() or not views.has(selected_volume):return
-		var value = views[selected_volume].probe(Vector3(probe_spins[0].value,probe_spins[1].value,probe_spins[2].value))
-		var position := Vector3(probe_spins[0].value,probe_spins[1].value,probe_spins[2].value)
-		if not is_instance_valid(probe_marker):probe_marker = MeshInstance3D.new();add_child(probe_marker)
-		var lines := PackedVector3Array()
-		for axis in [Vector3.RIGHT,Vector3.UP,Vector3.BACK]:lines.append_array(PackedVector3Array([position-axis*.35,position+axis*.35]))
-		probe_marker.mesh = preload("res://scene/geometry.gd").lines(lines,Color.WHITE);probe_marker.visible = value != null
-		probe_label.text = "Unavailable" if value == null else "%s = %s %s" % [states[selected_volume].channel,JSON.stringify(value,"",true,true),reader.objects[selected_volume].units])
+	viewer._button(panel,"Probe selected volume",probe_selected_volume)
+	probe_marker_check = CheckButton.new();probe_marker_check.text = "Show probe marker"
+	probe_marker_check.button_pressed = probe_marker_enabled
+	probe_marker_check.tooltip_text = "Show the last explicit source probe in the viewport and screenshots. Keeps coordinates/result when hidden; session-only, excluded from video."
+	panel.add_child(probe_marker_check);probe_marker_check.toggled.connect(set_probe_marker_enabled)
 	probe_label = Label.new();probe_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART;panel.add_child(probe_label)
 	iso_status = Label.new();iso_status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART;panel.add_child(iso_status)
+# Probe result/position and marker preference are session state, not recipe state.
+func set_probe_marker_enabled(enabled: bool) -> void:
+	probe_marker_enabled = enabled
+	if is_instance_valid(probe_marker_check):probe_marker_check.set_pressed_no_signal(enabled)
+	if is_instance_valid(probe_marker):probe_marker.visible = enabled and probe_marker_valid
+func probe_selected_volume() -> void:
+	if selected_volume.is_empty() or not views.has(selected_volume):return
+	var position := Vector3(probe_spins[0].value,probe_spins[1].value,probe_spins[2].value)
+	var value = views[selected_volume].probe(position)
+	if not is_instance_valid(probe_marker):
+		probe_marker = MeshInstance3D.new();probe_marker.name = "SourceProbeMarker";add_child(probe_marker)
+	var lines := PackedVector3Array()
+	for axis in [Vector3.RIGHT,Vector3.UP,Vector3.BACK]:lines.append_array(PackedVector3Array([position-axis*.35,position+axis*.35]))
+	probe_marker.mesh = preload("res://scene/geometry.gd").lines(lines,Color.WHITE)
+	probe_marker_valid = value != null;set_probe_marker_enabled(probe_marker_enabled)
+	probe_label.text = "Unavailable" if value == null else "%s = %s %s" % [states[selected_volume].channel,JSON.stringify(value,"",true,true),reader.objects[selected_volume].units]
 func snapshot() -> Dictionary: return {"gpu_budget_mib":gpu_budget_mib,"layers":states.duplicate(true)}
 func validate_state(value) -> String:
 	if not value is Dictionary or not value.get("layers") is Dictionary or not Reader.Index.whole(value.get("gpu_budget_mib")) or value.gpu_budget_mib < 1 or value.gpu_budget_mib > 2048: return "Invalid layer budget/state."
