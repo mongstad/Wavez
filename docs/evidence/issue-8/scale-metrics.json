@@ -1,0 +1,1219 @@
+[
+  {
+    "digit_widths": [
+      8.0,
+      8.0,
+      8.0,
+      8.0,
+      8.0,
+      8.0,
+      8.0,
+      8.0,
+      8.0,
+      8.0
+    ],
+    "mono_height_13": 17.0,
+    "numeric_font": "DejaVu Sans Mono",
+    "sans_height_14": 20.0
+  },
+  {
+    "button_height": 32.0,
+    "compact_height": 28.0,
+    "logical": [
+      1024,
+      640
+    ],
+    "pages": [
+      {
+        "content_size": [
+          938.0,
+          1225.0
+        ],
+        "fits_width": true,
+        "page": 0,
+        "scroll_size": [
+          952.0,
+          467.0
+        ]
+      },
+      {
+        "content_size": [
+          938.0,
+          1010.0
+        ],
+        "fits_width": true,
+        "page": 1,
+        "scroll_size": [
+          952.0,
+          467.0
+        ]
+      },
+      {
+        "content_size": [
+          938.0,
+          877.0
+        ],
+        "fits_width": true,
+        "page": 2,
+        "scroll_size": [
+          952.0,
+          467.0
+        ]
+      },
+      {
+        "content_size": [
+          938.0,
+          1374.0
+        ],
+        "fits_width": true,
+        "page": 3,
+        "scroll_size": [
+          952.0,
+          467.0
+        ]
+      },
+      {
+        "content_size": [
+          952.0,
+          434.0
+        ],
+        "fits_width": true,
+        "page": 4,
+        "scroll_size": [
+          952.0,
+          467.0
+        ]
+      }
+    ],
+    "physical": [
+      1024,
+      640
+    ],
+    "scale": 1.0
+  },
+  {
+    "button_height": 32.0,
+    "compact_height": 28.0,
+    "logical": [
+      819,
+      512
+    ],
+    "pages": [
+      {
+        "content_size": [
+          733.0,
+          1225.0
+        ],
+        "fits_width": true,
+        "page": 0,
+        "scroll_size": [
+          747.0,
+          339.0
+        ]
+      },
+      {
+        "content_size": [
+          733.0,
+          1010.0
+        ],
+        "fits_width": true,
+        "page": 1,
+        "scroll_size": [
+          747.0,
+          339.0
+        ]
+      },
+      {
+        "content_size": [
+          733.0,
+          877.0
+        ],
+        "fits_width": true,
+        "page": 2,
+        "scroll_size": [
+          747.0,
+          339.0
+        ]
+      },
+      {
+        "content_size": [
+          733.0,
+          1393.0
+        ],
+        "fits_width": true,
+        "page": 3,
+        "scroll_size": [
+          747.0,
+          339.0
+        ]
+      },
+      {
+        "content_size": [
+          733.0,
+          434.0
+        ],
+        "fits_width": true,
+        "page": 4,
+        "scroll_size": [
+          747.0,
+          339.0
+        ]
+      }
+    ],
+    "physical": [
+      1024,
+      640
+    ],
+    "scale": 1.25
+  },
+  {
+    "button_height": 32.0,
+    "compact_height": 28.0,
+    "logical": [
+      682,
+      426
+    ],
+    "pages": [
+      {
+        "content_size": [
+          596.0,
+          1247.0
+        ],
+        "fits_width": true,
+        "page": 0,
+        "scroll_size": [
+          610.0,
+          253.0
+        ]
+      },
+      {
+        "content_size": [
+          596.0,
+          1048.0
+        ],
+        "fits_width": true,
+        "page": 1,
+        "scroll_size": [
+          610.0,
+          253.0
+        ]
+      },
+      {
+        "content_size": [
+          596.0,
+          918.0
+        ],
+        "fits_width": true,
+        "page": 2,
+        "scroll_size": [
+          610.0,
+          253.0
+        ]
+      },
+      {
+        "content_size": [
+          596.0,
+          1431.0
+        ],
+        "fits_width": true,
+        "page": 3,
+        "scroll_size": [
+          610.0,
+          253.0
+        ]
+      },
+      {
+        "content_size": [
+          596.0,
+          434.0
+        ],
+        "fits_width": true,
+        "page": 4,
+        "scroll_size": [
+          610.0,
+          253.0
+        ]
+      }
+    ],
+    "physical": [
+      1024,
+      640
+    ],
+    "scale": 1.5
+  },
+  {
+    "button_height": 32.0,
+    "compact_height": 28.0,
+    "logical": [
+      512,
+      320
+    ],
+    "pages": [
+      {
+        "content_size": [
+          426.0,
+          1304.0
+        ],
+        "fits_width": true,
+        "page": 0,
+        "scroll_size": [
+          440.0,
+          113.0
+        ]
+      },
+      {
+        "content_size": [
+          426.0,
+          1086.0
+        ],
+        "fits_width": true,
+        "page": 1,
+        "scroll_size": [
+          440.0,
+          113.0
+        ]
+      },
+      {
+        "content_size": [
+          426.0,
+          1066.0
+        ],
+        "fits_width": true,
+        "page": 2,
+        "scroll_size": [
+          440.0,
+          113.0
+        ]
+      },
+      {
+        "content_size": [
+          426.0,
+          1431.0
+        ],
+        "fits_width": true,
+        "page": 3,
+        "scroll_size": [
+          440.0,
+          113.0
+        ]
+      },
+      {
+        "content_size": [
+          426.0,
+          491.0
+        ],
+        "fits_width": true,
+        "page": 4,
+        "scroll_size": [
+          440.0,
+          113.0
+        ]
+      }
+    ],
+    "physical": [
+      1024,
+      640
+    ],
+    "scale": 2.0
+  },
+  {
+    "button_height": 32.0,
+    "compact_height": 28.0,
+    "logical": [
+      1440,
+      900
+    ],
+    "pages": [
+      {
+        "content_size": [
+          1368.0,
+          685.0
+        ],
+        "fits_width": true,
+        "page": 0,
+        "scroll_size": [
+          1368.0,
+          727.0
+        ]
+      },
+      {
+        "content_size": [
+          1368.0,
+          545.0
+        ],
+        "fits_width": true,
+        "page": 1,
+        "scroll_size": [
+          1368.0,
+          727.0
+        ]
+      },
+      {
+        "content_size": [
+          1368.0,
+          570.0
+        ],
+        "fits_width": true,
+        "page": 2,
+        "scroll_size": [
+          1368.0,
+          727.0
+        ]
+      },
+      {
+        "content_size": [
+          1354.0,
+          822.0
+        ],
+        "fits_width": true,
+        "page": 3,
+        "scroll_size": [
+          1368.0,
+          727.0
+        ]
+      },
+      {
+        "content_size": [
+          1368.0,
+          213.0
+        ],
+        "fits_width": true,
+        "page": 4,
+        "scroll_size": [
+          1368.0,
+          727.0
+        ]
+      }
+    ],
+    "physical": [
+      1440,
+      900
+    ],
+    "scale": 1.0
+  },
+  {
+    "button_height": 32.0,
+    "compact_height": 28.0,
+    "logical": [
+      1152,
+      720
+    ],
+    "pages": [
+      {
+        "content_size": [
+          1066.0,
+          707.0
+        ],
+        "fits_width": true,
+        "page": 0,
+        "scroll_size": [
+          1080.0,
+          547.0
+        ]
+      },
+      {
+        "content_size": [
+          1066.0,
+          583.0
+        ],
+        "fits_width": true,
+        "page": 1,
+        "scroll_size": [
+          1080.0,
+          547.0
+        ]
+      },
+      {
+        "content_size": [
+          1066.0,
+          592.0
+        ],
+        "fits_width": true,
+        "page": 2,
+        "scroll_size": [
+          1080.0,
+          547.0
+        ]
+      },
+      {
+        "content_size": [
+          1066.0,
+          841.0
+        ],
+        "fits_width": true,
+        "page": 3,
+        "scroll_size": [
+          1080.0,
+          547.0
+        ]
+      },
+      {
+        "content_size": [
+          1080.0,
+          251.0
+        ],
+        "fits_width": true,
+        "page": 4,
+        "scroll_size": [
+          1080.0,
+          547.0
+        ]
+      }
+    ],
+    "physical": [
+      1440,
+      900
+    ],
+    "scale": 1.25
+  },
+  {
+    "button_height": 32.0,
+    "compact_height": 28.0,
+    "logical": [
+      960,
+      600
+    ],
+    "pages": [
+      {
+        "content_size": [
+          874.0,
+          1225.0
+        ],
+        "fits_width": true,
+        "page": 0,
+        "scroll_size": [
+          888.0,
+          427.0
+        ]
+      },
+      {
+        "content_size": [
+          874.0,
+          1010.0
+        ],
+        "fits_width": true,
+        "page": 1,
+        "scroll_size": [
+          888.0,
+          427.0
+        ]
+      },
+      {
+        "content_size": [
+          874.0,
+          877.0
+        ],
+        "fits_width": true,
+        "page": 2,
+        "scroll_size": [
+          888.0,
+          427.0
+        ]
+      },
+      {
+        "content_size": [
+          874.0,
+          1374.0
+        ],
+        "fits_width": true,
+        "page": 3,
+        "scroll_size": [
+          888.0,
+          427.0
+        ]
+      },
+      {
+        "content_size": [
+          874.0,
+          434.0
+        ],
+        "fits_width": true,
+        "page": 4,
+        "scroll_size": [
+          888.0,
+          427.0
+        ]
+      }
+    ],
+    "physical": [
+      1440,
+      900
+    ],
+    "scale": 1.5
+  },
+  {
+    "button_height": 32.0,
+    "compact_height": 28.0,
+    "logical": [
+      720,
+      450
+    ],
+    "pages": [
+      {
+        "content_size": [
+          634.0,
+          1225.0
+        ],
+        "fits_width": true,
+        "page": 0,
+        "scroll_size": [
+          648.0,
+          277.0
+        ]
+      },
+      {
+        "content_size": [
+          634.0,
+          1029.0
+        ],
+        "fits_width": true,
+        "page": 1,
+        "scroll_size": [
+          648.0,
+          277.0
+        ]
+      },
+      {
+        "content_size": [
+          634.0,
+          899.0
+        ],
+        "fits_width": true,
+        "page": 2,
+        "scroll_size": [
+          648.0,
+          277.0
+        ]
+      },
+      {
+        "content_size": [
+          634.0,
+          1412.0
+        ],
+        "fits_width": true,
+        "page": 3,
+        "scroll_size": [
+          648.0,
+          277.0
+        ]
+      },
+      {
+        "content_size": [
+          634.0,
+          434.0
+        ],
+        "fits_width": true,
+        "page": 4,
+        "scroll_size": [
+          648.0,
+          277.0
+        ]
+      }
+    ],
+    "physical": [
+      1440,
+      900
+    ],
+    "scale": 2.0
+  },
+  {
+    "button_height": 32.0,
+    "compact_height": 28.0,
+    "logical": [
+      2560,
+      1440
+    ],
+    "pages": [
+      {
+        "content_size": [
+          2488.0,
+          685.0
+        ],
+        "fits_width": true,
+        "page": 0,
+        "scroll_size": [
+          2488.0,
+          1267.0
+        ]
+      },
+      {
+        "content_size": [
+          2488.0,
+          545.0
+        ],
+        "fits_width": true,
+        "page": 1,
+        "scroll_size": [
+          2488.0,
+          1267.0
+        ]
+      },
+      {
+        "content_size": [
+          2488.0,
+          570.0
+        ],
+        "fits_width": true,
+        "page": 2,
+        "scroll_size": [
+          2488.0,
+          1267.0
+        ]
+      },
+      {
+        "content_size": [
+          2488.0,
+          784.0
+        ],
+        "fits_width": true,
+        "page": 3,
+        "scroll_size": [
+          2488.0,
+          1267.0
+        ]
+      },
+      {
+        "content_size": [
+          2488.0,
+          213.0
+        ],
+        "fits_width": true,
+        "page": 4,
+        "scroll_size": [
+          2488.0,
+          1267.0
+        ]
+      }
+    ],
+    "physical": [
+      2560,
+      1440
+    ],
+    "scale": 1.0
+  },
+  {
+    "button_height": 32.0,
+    "compact_height": 28.0,
+    "logical": [
+      2048,
+      1152
+    ],
+    "pages": [
+      {
+        "content_size": [
+          1976.0,
+          685.0
+        ],
+        "fits_width": true,
+        "page": 0,
+        "scroll_size": [
+          1976.0,
+          979.0
+        ]
+      },
+      {
+        "content_size": [
+          1976.0,
+          545.0
+        ],
+        "fits_width": true,
+        "page": 1,
+        "scroll_size": [
+          1976.0,
+          979.0
+        ]
+      },
+      {
+        "content_size": [
+          1976.0,
+          570.0
+        ],
+        "fits_width": true,
+        "page": 2,
+        "scroll_size": [
+          1976.0,
+          979.0
+        ]
+      },
+      {
+        "content_size": [
+          1976.0,
+          784.0
+        ],
+        "fits_width": true,
+        "page": 3,
+        "scroll_size": [
+          1976.0,
+          979.0
+        ]
+      },
+      {
+        "content_size": [
+          1976.0,
+          213.0
+        ],
+        "fits_width": true,
+        "page": 4,
+        "scroll_size": [
+          1976.0,
+          979.0
+        ]
+      }
+    ],
+    "physical": [
+      2560,
+      1440
+    ],
+    "scale": 1.25
+  },
+  {
+    "button_height": 32.0,
+    "compact_height": 28.0,
+    "logical": [
+      1706,
+      960
+    ],
+    "pages": [
+      {
+        "content_size": [
+          1634.0,
+          685.0
+        ],
+        "fits_width": true,
+        "page": 0,
+        "scroll_size": [
+          1634.0,
+          787.0
+        ]
+      },
+      {
+        "content_size": [
+          1634.0,
+          545.0
+        ],
+        "fits_width": true,
+        "page": 1,
+        "scroll_size": [
+          1634.0,
+          787.0
+        ]
+      },
+      {
+        "content_size": [
+          1634.0,
+          570.0
+        ],
+        "fits_width": true,
+        "page": 2,
+        "scroll_size": [
+          1634.0,
+          787.0
+        ]
+      },
+      {
+        "content_size": [
+          1634.0,
+          784.0
+        ],
+        "fits_width": true,
+        "page": 3,
+        "scroll_size": [
+          1634.0,
+          787.0
+        ]
+      },
+      {
+        "content_size": [
+          1634.0,
+          213.0
+        ],
+        "fits_width": true,
+        "page": 4,
+        "scroll_size": [
+          1634.0,
+          787.0
+        ]
+      }
+    ],
+    "physical": [
+      2560,
+      1440
+    ],
+    "scale": 1.5
+  },
+  {
+    "button_height": 32.0,
+    "compact_height": 28.0,
+    "logical": [
+      1280,
+      720
+    ],
+    "pages": [
+      {
+        "content_size": [
+          1194.0,
+          707.0
+        ],
+        "fits_width": true,
+        "page": 0,
+        "scroll_size": [
+          1208.0,
+          547.0
+        ]
+      },
+      {
+        "content_size": [
+          1194.0,
+          583.0
+        ],
+        "fits_width": true,
+        "page": 1,
+        "scroll_size": [
+          1208.0,
+          547.0
+        ]
+      },
+      {
+        "content_size": [
+          1194.0,
+          570.0
+        ],
+        "fits_width": true,
+        "page": 2,
+        "scroll_size": [
+          1208.0,
+          547.0
+        ]
+      },
+      {
+        "content_size": [
+          1194.0,
+          841.0
+        ],
+        "fits_width": true,
+        "page": 3,
+        "scroll_size": [
+          1208.0,
+          547.0
+        ]
+      },
+      {
+        "content_size": [
+          1208.0,
+          213.0
+        ],
+        "fits_width": true,
+        "page": 4,
+        "scroll_size": [
+          1208.0,
+          547.0
+        ]
+      }
+    ],
+    "physical": [
+      2560,
+      1440
+    ],
+    "scale": 2.0
+  },
+  {
+    "button_height": 32.0,
+    "compact_height": 28.0,
+    "logical": [
+      3840,
+      2160
+    ],
+    "pages": [
+      {
+        "content_size": [
+          3768.0,
+          685.0
+        ],
+        "fits_width": true,
+        "page": 0,
+        "scroll_size": [
+          3768.0,
+          1987.0
+        ]
+      },
+      {
+        "content_size": [
+          3768.0,
+          545.0
+        ],
+        "fits_width": true,
+        "page": 1,
+        "scroll_size": [
+          3768.0,
+          1987.0
+        ]
+      },
+      {
+        "content_size": [
+          3768.0,
+          570.0
+        ],
+        "fits_width": true,
+        "page": 2,
+        "scroll_size": [
+          3768.0,
+          1987.0
+        ]
+      },
+      {
+        "content_size": [
+          3768.0,
+          784.0
+        ],
+        "fits_width": true,
+        "page": 3,
+        "scroll_size": [
+          3768.0,
+          1987.0
+        ]
+      },
+      {
+        "content_size": [
+          3768.0,
+          213.0
+        ],
+        "fits_width": true,
+        "page": 4,
+        "scroll_size": [
+          3768.0,
+          1987.0
+        ]
+      }
+    ],
+    "physical": [
+      3840,
+      2160
+    ],
+    "scale": 1.0
+  },
+  {
+    "button_height": 32.0,
+    "compact_height": 28.0,
+    "logical": [
+      3072,
+      1728
+    ],
+    "pages": [
+      {
+        "content_size": [
+          3000.0,
+          685.0
+        ],
+        "fits_width": true,
+        "page": 0,
+        "scroll_size": [
+          3000.0,
+          1555.0
+        ]
+      },
+      {
+        "content_size": [
+          3000.0,
+          545.0
+        ],
+        "fits_width": true,
+        "page": 1,
+        "scroll_size": [
+          3000.0,
+          1555.0
+        ]
+      },
+      {
+        "content_size": [
+          3000.0,
+          570.0
+        ],
+        "fits_width": true,
+        "page": 2,
+        "scroll_size": [
+          3000.0,
+          1555.0
+        ]
+      },
+      {
+        "content_size": [
+          3000.0,
+          784.0
+        ],
+        "fits_width": true,
+        "page": 3,
+        "scroll_size": [
+          3000.0,
+          1555.0
+        ]
+      },
+      {
+        "content_size": [
+          3000.0,
+          213.0
+        ],
+        "fits_width": true,
+        "page": 4,
+        "scroll_size": [
+          3000.0,
+          1555.0
+        ]
+      }
+    ],
+    "physical": [
+      3840,
+      2160
+    ],
+    "scale": 1.25
+  },
+  {
+    "button_height": 32.0,
+    "compact_height": 28.0,
+    "logical": [
+      2560,
+      1440
+    ],
+    "pages": [
+      {
+        "content_size": [
+          2488.0,
+          685.0
+        ],
+        "fits_width": true,
+        "page": 0,
+        "scroll_size": [
+          2488.0,
+          1267.0
+        ]
+      },
+      {
+        "content_size": [
+          2488.0,
+          545.0
+        ],
+        "fits_width": true,
+        "page": 1,
+        "scroll_size": [
+          2488.0,
+          1267.0
+        ]
+      },
+      {
+        "content_size": [
+          2488.0,
+          570.0
+        ],
+        "fits_width": true,
+        "page": 2,
+        "scroll_size": [
+          2488.0,
+          1267.0
+        ]
+      },
+      {
+        "content_size": [
+          2488.0,
+          784.0
+        ],
+        "fits_width": true,
+        "page": 3,
+        "scroll_size": [
+          2488.0,
+          1267.0
+        ]
+      },
+      {
+        "content_size": [
+          2488.0,
+          213.0
+        ],
+        "fits_width": true,
+        "page": 4,
+        "scroll_size": [
+          2488.0,
+          1267.0
+        ]
+      }
+    ],
+    "physical": [
+      3840,
+      2160
+    ],
+    "scale": 1.5
+  },
+  {
+    "button_height": 32.0,
+    "compact_height": 28.0,
+    "logical": [
+      1920,
+      1080
+    ],
+    "pages": [
+      {
+        "content_size": [
+          1848.0,
+          685.0
+        ],
+        "fits_width": true,
+        "page": 0,
+        "scroll_size": [
+          1848.0,
+          907.0
+        ]
+      },
+      {
+        "content_size": [
+          1848.0,
+          545.0
+        ],
+        "fits_width": true,
+        "page": 1,
+        "scroll_size": [
+          1848.0,
+          907.0
+        ]
+      },
+      {
+        "content_size": [
+          1848.0,
+          570.0
+        ],
+        "fits_width": true,
+        "page": 2,
+        "scroll_size": [
+          1848.0,
+          907.0
+        ]
+      },
+      {
+        "content_size": [
+          1848.0,
+          784.0
+        ],
+        "fits_width": true,
+        "page": 3,
+        "scroll_size": [
+          1848.0,
+          907.0
+        ]
+      },
+      {
+        "content_size": [
+          1848.0,
+          213.0
+        ],
+        "fits_width": true,
+        "page": 4,
+        "scroll_size": [
+          1848.0,
+          907.0
+        ]
+      }
+    ],
+    "physical": [
+      3840,
+      2160
+    ],
+    "scale": 2.0
+  }
+]

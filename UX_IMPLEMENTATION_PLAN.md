@@ -48,7 +48,7 @@ The scientific visualization is the visual centerpiece. The UI exists to support
 
 Prefer:
 
-- dark neutral surfaces with subtle depth
+- Midnight Scientific blue-black surfaces with subtle depth
 - clear information hierarchy
 - excellent typography
 - consistent spacing and alignment
@@ -85,10 +85,40 @@ Color should primarily communicate:
 - warning
 - error
 - success
-- visualization/data meaning
+- categorical UI tier (Low / Medium / High / XHigh / Max)
+- scientific/data meaning through independent scientific palettes
 - hierarchy
 
 Color should not be used merely to make every panel visually exciting.
+
+### Current visual contract after UX-STYLE-001–003
+
+The [design system](docs/UX1_DESIGN_SYSTEM.md) specifies current token values;
+[theme documentation](docs/UX2_THEME_LIBRARY.md) specifies implemented primitives.
+This roadmap governs scope and milestone authorization. Earlier UX1/UX2 reports
+and their evidence are historical snapshots, not competing token definitions.
+
+- **Surfaces:** opaque blue-black `#0B101B`, `#111A29`, `#1A2638`, `#243249`.
+  Blue is the interaction accent; sparse purple/teal identity marks are separate.
+- **Depth:** optional `AtmosphericSurface` uses a static diagonal `#111E30` to
+  `#0B101B` background, below 1.2:1 endpoint contrast. Controls and diagnostics
+  remain flat and opaque; no bright, rainbow, animated or control-fill gradients.
+- **Tiers:** Low / Medium / High / XHigh / Max use dedicated `tier.*` colors,
+  compact labels and optional ordinal cues. They never replace operational
+  Success / Warning / Error / Info icons and text or scientific color mappings.
+- **Density:** 14 px body, 13 px numeric mono, 12 px help/status/tier text;
+  32 px normal and 28 px compact controls; spacing 4/8/12/16/24/32 logical units.
+  Apply 100%, 125%, 150% or 200% scale once at each owned window boundary.
+- **Motion:** current UX2 controls change states immediately. Retained timing
+  tokens are future limits, not implemented tweens; reduced-motion preferences
+  and adjacent-tooltip timing remain separately gated work.
+- **Isolation:** UI theme colors must never alter scientific colormaps,
+  normalization, source values, playback, renderer state, analysis or
+  deterministic export. The library and five-page laboratory remain opt-in.
+
+UX1 and UX2 and the refinements in issues #5–#7 are accepted. This does not
+start UX3. Issue #8 reconciles documentation and validates the existing theme;
+all production shell/panel migrations still require explicit authorization.
 
 ### 2.3 UX hierarchy
 
@@ -394,6 +424,8 @@ Conceptual tokens such as:
 
 ### Semantic colors
 
+- Separate categorical tiers: Low / Medium / High / XHigh / Max
+- Sparse identity accents (not state or data colors)
 - Primary accent
 - Selection
 - Success
@@ -412,7 +444,7 @@ Establish a small reusable spacing scale, for example:
 - 24
 - 32
 
-Exact values may change after audit.
+Current accepted spacing is 4, 8, 12, 16, 24, 32 logical units; see the design system.
 
 ### Component geometry
 

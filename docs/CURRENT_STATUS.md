@@ -75,7 +75,7 @@ the reproduced defects, intentionally persisted settings, session-only fields,
 and focused repeated-save/load regression. The owner's original combination of
 unexpected settings was not available; these are independently reproduced fixes.
 
-## UX-STYLE-001 — pending owner review
+## UX-STYLE-001 — accepted
 
 Issue #5 refines the opt-in shared theme and UX2 laboratory with Midnight
 Scientific blue-black surfaces and sparse blue/purple/teal identity marks.
@@ -95,7 +95,7 @@ should inspect the laboratory pages, focus/hover/disabled/error states and
 readability at the preferred desktop scale. Gradients, tier families, broader
 document reconciliation and UX3 remain separate work.
 
-## UX-STYLE-002 — pending owner review
+## UX-STYLE-002 — accepted
 
 Issue #6 adds an opt-in `AtmosphericSurface` shared theme variation and applies
 it to the UX2 laboratory root. A static opaque diagonal blue-black gradient
@@ -115,7 +115,7 @@ that the background depth is noticeable but quiet, with no distracting banding,
 and that labels, diagnostics and focus states remain readable at their normal
 scale. Production captures should retain their previous appearance.
 
-## UX-STYLE-003 — pending owner review
+## UX-STYLE-003 — accepted
 
 Issue #7 adds five separate UI tier tokens and compact Label variations for
 Low / Medium / High / XHigh / Max. The laboratory Tiers page pairs labeled,
@@ -135,6 +135,15 @@ Color-vision accessibility is supported by explicit labels and ordinal cues;
 formal color-vision/user testing, physical 4K/mixed-monitor, compatibility
 renderer and archived historical comparisons were not performed. No subsequent
 issue or production migration is authorized by this implementation.
+
+## UX-STYLE-004 — pending owner review
+
+Issue #8 reconciles the roadmap and current design system with accepted
+Midnight Scientific refinements, identifies historical versus current evidence,
+and extends the scale matrix to all five laboratory pages. The
+[validation report](UX_STYLE_VALIDATION.md) records 1,402 passing native checks,
+218 contrast pairs, all four scales, scientific-viewer isolation and physical
+4K limitations. No theme or production behavior was changed. UX3 remains on hold.
 
 ## Current limits
 

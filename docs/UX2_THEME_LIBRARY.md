@@ -126,7 +126,7 @@ Scientific text uses [float64_text.gd](../viewer/ui/components/float64_text.gd):
 
 The draft limit is 768 characters; oversized input, non-finite values, overflow and nonzero input rounded to zero are refused visibly. Finite subnormals are supported. This boundary applies only to the new presentation primitive; no production scientific parser or stored numeric format was changed.
 
-## Metrics and proposed adjustments for review
+## Accepted UX2 metrics and implementation adjustments
 
 The actual Godot fallback sans at 14 px has a 20 px font height; the 13 px mono face has a 17 px height, and all ten digits have 8 px advances. Native Button padding is computed from the font height: 6 px top/bottom gives exactly 32 px; 4 px gives 28 px compact. Numeric editors have a 32 px minimum and can grow. Labels wrap without shrinking. These metrics preserve the accepted height/font values rather than forcing fixed padding around a mismatched font.
 
@@ -150,7 +150,7 @@ Run with the project's Python dependencies and a display:
 python3 tools/validate_ux2.py --godot /path/to/godot --output-dir results/ux2-new-review
 ```
 
-The output directory must be new. The runner imports resources, generates two tiny analytic fixtures and 300 independent float64 cases, exercises native input and all 16 size/scale combinations, verifies production snapshot/pixel isolation, and runs the existing HUD test. It hashes current source before and after validation and rejects changes, including added or removed files. It rejects script errors or warning logs even if Godot exits with zero. Captures and raw logs remain ignored. See the [retained evidence guide](evidence/ux2/README.md).
+The output directory must be new. The runner imports resources, generates two tiny analytic fixtures and 300 independent float64 cases, exercises native input and all five pages in 16 size/scale combinations, verifies production snapshot/pixel isolation, and runs the existing HUD test. It hashes current source before and after validation and rejects changes, including added or removed files. It rejects script errors or warning logs even if Godot exits with zero. Captures and raw logs remain ignored. See the [retained evidence guide](evidence/ux2/README.md).
 
 The historical UX2 comparison against `7037f5f` is separate from current-tree
 validation: that commit belongs to the archived development history, not this
@@ -162,3 +162,5 @@ Historical reports and hashes remain unchanged. Current validation needs neither
 the old workspace nor its commits.
 
 The 4K and scale matrix use actual Godot SubViewport controls, with separate native root/dialog scale tests. They are not physical 4K or mixed-monitor tests. The tested Forward+ backend uses llvmpipe software Vulkan in this execution environment. Screenshot inspection and programmatic key/pointer input are not a human usability, screen-reader or cross-platform acceptance session. Very small logical canvases deliberately scroll; they are stress cases, not a new production minimum-window promise.
+
+Current Midnight Scientific reconciliation and measured validation: [issue #8 report](UX_STYLE_VALIDATION.md). The earlier llvmpipe results above describe the historical UX2 run; issue #8 used NVIDIA RTX 3070 Ti Forward+.
