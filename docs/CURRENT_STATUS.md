@@ -176,6 +176,16 @@ intact; UI-launched jobs retain renderer diagnostics. [Background export
 validation](BACKGROUND_EXPORT_VALIDATION.md) records native window-state tests,
 unchanged frame/timing comparisons, limitations and manual owner checks.
 
+## VOLUME-004 — validation pending owner review
+
+Issue #13 was reviewed under **Pre-UX3/UX4 — Validation & Maintenance**. The
+[real-capture volume review](VOLUME_DEFAULTS_VALIDATION.md) records 16 comparison
+views and 81 integrity/rendering checks per backend. Source data remains unchanged.
+The review identifies density-range tradeoffs and signed color/opacity coupling;
+useful untuned defaults are not demonstrated across all requested cases. This is
+validation only: no defaults or later-UX features were implemented. Recommendations
+remain subject to separate owner authorization.
+
 ## Current limits
 
 G3 permits at most one particle object per capture and supports one translucent volume and one derived isosurface at a time; multiple meshes and slices are supported. Interactive particle, field and mesh CPU preparation is asynchronous in the accepted maintenance implementation; field textures and mesh surfaces are staged on the main thread. Stable mesh positions interpolate on the GPU, while scalar colors hold the earlier source sample. Initial opening and explicit scientific inspection/export retain synchronous work. Mesh inspection positions and deformed normals are materialized on demand; rendering remains unshaded. Source arrays and probes retain scientific precision, while GPU previews use float32 and may reduce resolution; isosurfaces are explicitly approximate. Budgets are separate allocation limits, not a whole-process memory guarantee. The earlier full G3 demo completed about 19.2 samples/s; neither that result nor the new particle controls establish universal 30 FPS performance. Concurrent CuPy simulation/viewer performance has not been validated. Detailed contracts and measurements are in the [handbook](SIMSCOPE_HANDBOOK.md) and [format/API guide](CAPTURE_FORMAT_AND_API.md).
