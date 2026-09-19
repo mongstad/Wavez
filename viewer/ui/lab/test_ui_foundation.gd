@@ -91,6 +91,21 @@ func numeric_tests() -> void:
 
 func theme_tests() -> void:
 	var theme := ThemeFactory.new()
+	var atmosphere: StyleBoxTexture = theme.get_stylebox("panel", "AtmosphericSurface")
+	var texture: GradientTexture2D = atmosphere.texture
+	check(texture.width == 256 and texture.height == 256, "Atmosphere has a bounded static texture")
+	check(texture.fill_from == Vector2.ZERO and texture.fill_to == Vector2.ONE, "Atmosphere uses a single diagonal ramp")
+	var first := texture.gradient.sample(0.0)
+	var last := texture.gradient.sample(1.0)
+	check(first != last and (maxf(luminance(first), luminance(last)) + .05) / (minf(luminance(first), luminance(last)) + .05) < 1.2, "Atmospheric depth stays below 1.2:1 endpoint contrast")
+	for index in 17:
+		var background := texture.gradient.sample(float(index) / 16.0)
+		check(background.a == 1.0, "Atmospheric background remains opaque")
+		for role in ["text.primary", "text.secondary", "text.muted", "state.success", "state.warning", "state.error", "state.info"]:
+			contrast(T.color(role), background, 4.5, "Atmosphere/%d/%s" % [index, role])
+	for role in ["AppSurface", "PropertyGroup", "RaisedPanel", "PopupSurface"]:
+		check(theme.get_stylebox("panel", role) is StyleBoxFlat, "Opaque flat surface retained: " + role)
+
 	for background in ["surface.0", "surface.1", "surface.2", "surface.3"]:
 		for text in ["text.primary", "text.secondary", "text.muted"]: contrast(T.color(text), T.color(background), 4.5, text + "/" + background)
 		for color in ["focus.ring", "state.success", "state.warning", "state.error", "state.info", "identity.purple", "identity.teal"]: contrast(T.color(color), T.color(background), 3.0, color + "/" + background)

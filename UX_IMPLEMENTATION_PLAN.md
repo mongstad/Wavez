@@ -65,7 +65,9 @@ Avoid:
 
 - excessive glassmorphism
 - neon glow as a general UI treatment
-- large decorative gradients
+- large decorative, bright, rainbow or animated gradients; static low-contrast
+  environmental backgrounds are permitted by UX-STYLE-002, while controls
+  remain flat and scientific imagery stays independent
 - excessive translucency
 - oversized consumer/SaaS-style cards
 - gratuitous animations

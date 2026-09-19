@@ -8,7 +8,16 @@ Make the scientific viewport the visual center. Use opaque Midnight Scientific b
 
 Keep the existing renderer and scientific controllers. Introduce reusable presentation components and stable semantic identifiers around their current operations. Prioritize access to Open, transport, current source/time/readiness, viewport navigation and export. Detailed caches, analysis assumptions and export limits remain available with accurate explanations.
 
-Default density is compact desktop, with 32 logical-pixel controls and 14 px body text. Avoid translucent panel backgrounds, oversized cards, gradient chrome, rounded pill controls, decorative shadows and animated scientific content. Do not make a UI preset silently select a different scientific viewing preset.
+Default density is compact desktop, with 32 logical-pixel controls and 14 px body text. Avoid translucent panel backgrounds, oversized cards, gradient-filled controls, rounded pill controls, decorative shadows and animated scientific content. Do not make a UI preset silently select a different scientific viewing preset.
+
+UX-STYLE-002 permits a static, opaque, low-contrast atmospheric gradient on an
+explicitly opted-in application background. The shared `AtmosphericSurface`
+uses a single diagonal ramp from `atmosphere.start` (`#111E30`) to
+`atmosphere.end` (`#0B101B`), with endpoint contrast below 1.2:1. Keep normal
+controls, panels, popups and diagnostic surfaces flat and opaque. No bright,
+rainbow or animated gradients; never apply this background to a scientific
+viewport, colormap or export. The laboratory demonstrates this treatment;
+production migration remains separately gated.
 
 ## Proposed information hierarchy
 

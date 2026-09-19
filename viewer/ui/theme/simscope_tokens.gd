@@ -2,6 +2,8 @@
 extends Resource
 ## Midnight Scientific UI tokens (UX-STYLE-001). Scientific palettes and rendering never read this resource.
 @export var colors: Dictionary[StringName, Color] = {
+	# Static environmental depth only; never control fills or scientific backgrounds.
+	&"atmosphere.start": Color("111e30"), &"atmosphere.end": Color("0b101b"),
 	&"surface.0": Color("0b101b"), &"surface.1": Color("111a29"),
 	&"surface.2": Color("1a2638"), &"surface.3": Color("243249"),
 	&"surface.hover": Color("2c3c54"), &"surface.pressed": Color("354862"),
