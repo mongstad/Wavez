@@ -211,12 +211,14 @@ func scaling_tests() -> void:
 			var data := {"physical": [resolution.x, resolution.y], "scale": factor, "logical": [viewport.size_2d_override.x, viewport.size_2d_override.y], "pages": [], "button_height": specimen.specimens.open.button.size.y, "compact_height": specimen.specimens.compact.button.size.y}
 			check(specimen.specimens.open.button.size.y == 32, "32 px native action height at %s/%s" % [resolution, factor])
 			check(specimen.specimens.compact.button.size.y == 28, "28 px compact action height at %s/%s" % [resolution, factor])
-			for page in 4:
+			for page in specimen.tabs.get_tab_count():
 				specimen.tabs.current_tab = page; await settle()
 				var scroll: ScrollContainer = specimen.tabs.get_child(page)
 				var grid := scroll.get_child(0)
 				var fit: bool = grid.size.x <= scroll.size.x
 				check(fit, "No horizontal page overflow %s/%s/page%d" % [resolution, factor, page])
+				if resolution == Vector2i(1440, 900):
+					await screenshot(viewport, "review-page%d-scale%d" % [page, roundi(factor * 100)])
 				data.pages.append({"page": page, "scroll_size": [scroll.size.x, scroll.size.y], "content_size": [grid.size.x, grid.size.y], "fits_width": fit})
 			if (resolution == Vector2i(1440, 900) and factor in [1.0, 1.25, 1.5, 2.0]) or (resolution == Vector2i(3840, 2160) and factor == 2.0) or (resolution == Vector2i(1024, 640) and factor == 2.0):
 				specimen.tabs.current_tab = 0; await screenshot(viewport, "scale-%dx%d-%d" % [resolution.x, resolution.y, roundi(factor * 100)])

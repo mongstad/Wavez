@@ -1,6 +1,12 @@
-# UX1 — Proposed SimScope design system
+# SimScope design system — Midnight Scientific
 
-**Specification for review, 2026-09-13. Not implemented.** Based on the [current UI audit](UX1_UI_AUDIT.md) at accepted SIMSCP3 checkpoint `47fef34`. The [UX plan](../UX_IMPLEMENTATION_PLAN.md) remains authoritative. UX2 may implement the shared theme/components only after UX1 acceptance; shell, panel, settings and workspace migrations retain their separate gates.
+**Current design specification, reconciled by issue #8.** UX1/UX2 and issues
+#5–#7 are accepted. The [UX plan](../UX_IMPLEMENTATION_PLAN.md) governs milestone
+scope; this document specifies tokens and design rules; the
+[theme library](UX2_THEME_LIBRARY.md) documents implemented primitives. The
+original [UI audit](UX1_UI_AUDIT.md), milestone reports and their evidence remain
+historical. The shared theme and laboratory are implemented and opt-in. Shell,
+panel, settings and workspace proposals below remain future work; UX3 is on hold.
 
 ## Design decisions
 
@@ -69,7 +75,7 @@ Use sentence case for controls; noun section titles; verbs for actions; ellipsis
 | Physical time • recorded timestamps | Recorded time; slider still represents union sample index |
 | Playback • frames / second (index mode) | Samples per second; never presented as display FPS |
 | Physical time units / second | Recorded time units per playback second; show declared source unit, or “unknown” |
-| Point rendering / V / Scientific preset | Scientific view (existing behavior bundle); help explains backdrop/bloom/history effects |
+| Point rendering / V / Scientific preset | Point rendering / V changes particle representation only; viewing presets own backdrop/bloom/exposure defaults |
 | Size by / Particle size | Size channel / Size multiplier; distinguish data mapping from visual scale |
 | Save inspection recipe (two locations) | Save scene recipe… / Save analysis recipe…; load actions state matching scope |
 | Source layer / Scene layers | Source object in scientific requests; Layer for its visible representation, with kind shown |
@@ -80,7 +86,7 @@ These are label proposals. Existing serialized labels and schema fields remain m
 
 ## Tokens
 
-All dimensions below are logical UI units at scale 1.0. Colors are opaque sRGB hex. Tokens are semantic roles, not a license to recolor scientific data. The numeric contrast calculations are retained in [contrast evidence](evidence/ux1/contrast.json); these are design targets, not a claim that the current app meets an accessibility standard.
+All dimensions below are logical UI units at scale 1.0. Colors are opaque sRGB hex. Tokens are semantic roles, not a license to recolor scientific data. Original UX1 [contrast evidence](evidence/ux1/contrast.json) describes the historical palette. Current measured contrast and scale results are in the [issue #8 validation report](UX_STYLE_VALIDATION.md). Neither is a whole-product accessibility certification.
 
 ### Surfaces and text
 
@@ -101,7 +107,7 @@ All dimensions below are logical UI units at scale 1.0. Colors are opaque sRGB h
 | `border.control` | `#798FAE` | Input outline where boundary is needed |
 | `focus.ring` | `#A8C9FF` | Keyboard focus, 2 px with 2 px gap |
 
-Normal text must reach 4.5:1 against its actual background; meaningful icon/focus/control indicators target 3:1. Primary, secondary and muted text pass the proposed four base surfaces. Muted text is restricted to base surfaces: use secondary text on hover/pressed fills. Disabled controls are intentionally exempt from the normal-text target, but their explanation is not. Do not render semantic colors at arbitrary low opacity.
+Normal text must reach 4.5:1 against its actual background; meaningful icon/focus/control indicators target 3:1. Primary, secondary and muted text pass the four current base surfaces. Muted text is restricted to base surfaces: use secondary text on hover/pressed fills. Disabled controls are intentionally exempt from the normal-text target, but their explanation is not. Do not render semantic colors at arbitrary low opacity.
 
 ### Interaction and semantic colors
 
@@ -135,7 +141,10 @@ Use semantic color for an icon, left rule or short status label; ordinary explan
 | Dialog | 640 default form width; video/matched form up to 800; maximum 90% usable window width/height. Fixed title and action areas; only body scrolls |
 | Plot / table | Minimum 240×200 inline preview; expanded result workbench target ≥640×300; table uses tabular numbers and horizontal scrolling for exact columns, never silent data truncation |
 
-Typography uses the **existing Godot fallback sans face** for the first theme foundation, avoiding a font change and a theme change in the same checkpoint. Specify a separate numeric font role: proposed DejaVu Sans Mono, to be bundled with its notices and verified at UX2; do not depend on OS substitution. UX1 adds no font assets. If the numeric face is unavailable during early development, use the existing face without changing stored formatting; numeric-face acceptance remains required before shipping that component.
+Typography uses the **Godot fallback sans face** and bundled **DejaVu Sans Mono
+2.37** for numeric roles, with notices in `viewer/ui/fonts/`. UX2 verified numeric
+glyphs and tabular advances; no OS substitution is required. Font metrics may
+expand controls but must never change stored numeric formatting or precision.
 
 | Role | Size / emphasis | Rule |
 |---|---|---|
@@ -147,9 +156,14 @@ Typography uses the **existing Godot fallback sans face** for the first theme fo
 | Numeric / diagnostic | 13 / regular mono | Exact IDs, values and times; right-align comparable columns |
 | Compact status | 12 / regular | Short readiness text; full explanation in details |
 
-Allow at least 1.3× font-size line height where layout permits and expand controls for fallback glyph metrics. Font size must not be reduced to conceal overflow. Standard proposed interface scales are 100%, 125%, 150%, 200%; density changes spacing, not scientific numeric precision. Design scale and physical device scale must be applied exactly once. Root window, independent dialogs and exported SubViewports need separate tested scale contexts. Export overlay geometry stays pinned to the job's existing logical coordinate convention until a versioned change is approved.
+Allow at least 1.3× font-size line height where layout permits and expand controls for fallback glyph metrics. Font size must not be reduced to conceal overflow. Supported laboratory interface scales are 100%, 125%, 150%, 200%; density changes spacing, not scientific numeric precision. Design scale and physical device scale must be applied exactly once. Root window, independent dialogs and exported SubViewports need separate tested scale contexts. Export overlay geometry stays pinned to the job's existing logical coordinate convention until a versioned change is approved.
 
 ### States and motion
+
+The following durations are design limits for later authorized interaction work.
+Current UX2 uses immediate native state changes, no tweens and a 500 ms initial
+tooltip delay. Adjacent-target delay and reduced-motion preferences are deferred;
+static atmospheric backgrounds never animate.
 
 | State / transition | Visual / behavior contract |
 |---|---|
@@ -204,9 +218,9 @@ Proposed flow: **Control intent → presenter/controller operation → validated
 
 `TransportBar`, object workspaces, analysis forms and result workbench are future consumers of the library. UX2 demonstrates primitive components and their states in its development UI laboratory; it does not migrate these application workflows.
 
-### Theme/token resource proposal
+### Implemented theme/token resources
 
-Proposed future paths (not present or created by UX1):
+Current shared library paths (introduced in UX2):
 
 ```text
 viewer/ui/theme/simscope_tokens.gd        # typed semantic token Resource
@@ -215,17 +229,16 @@ viewer/ui/theme/simscope_tokens.tres      # one canonical token instance
 viewer/ui/fonts/                         # bundled numeric face and notices
 viewer/ui/icons/                         # consistent SVG command icons
 viewer/ui/components/                    # reusable controls/scenes
-viewer/ui/presenters/                    # thin adapters to existing controllers
 viewer/ui/lab/                           # UX2-only development showcase
 ```
 
-Use Godot Theme variations for PrimaryButton, SecondaryButton, DestructiveButton, SectionHeader, PropertyLabel, HelpLabel, NumericValue and compact variants. A theme builder or loader may derive StyleBox/font/color constants from the one token Resource; generated values must not become a second editable source. Prefer inheritance and containers over scattered per-node overrides. Windows must receive the same Theme explicitly where inheritance does not cross a viewport/window boundary. Plot chrome reads semantic tokens; scientific palettes remain in their current resources.
+Use Godot Theme variations for PrimaryButton, SecondaryButton, DestructiveButton, SectionHeader, PropertyLabel, HelpLabel, NumericValue and compact variants. The theme builder derives StyleBox/font/color constants from the one token Resource; generated values must not become a second editable source. Prefer inheritance and containers over scattered per-node overrides. Windows must receive the same Theme explicitly where inheritance does not cross a viewport/window boundary. Plot chrome reads semantic tokens; scientific palettes remain in their current resources.
 
 Centralize UI scale conversion in the theme/presentation boundary. Components accept logical sizes; do not multiply both root scale and each font/spacing token. Theme changes must not allocate scientific textures, call `_restyle`, restart workers, rehash captures, rebuild mappings or advance time. Avoid connecting each control to the process loop. Dispose signal connections on widget replacement without cancelling application-owned jobs.
 
 ### Compatibility and rollout rules
 
-1. UX2 builds tokens, theme, primitive controls and a development showcase without replacing the viewer's visual state model. Assert existing viewer behavior stays intact when only the library is loaded.
+1. UX2 provides tokens, theme, primitive controls and a development showcase without replacing the viewer's visual state model. Assert existing viewer behavior stays intact when only the library is loaded.
 2. Introduce semantic IDs such as `playback.index_rate`, `appearance.particle_size`, `workspace.camera` in adapters when migrating consumers. Maintain an explicit mapping to existing native recipe labels such as `Playback • frames / second (index mode)`, `Particle size` and `Camera`. Keep reserved inert fields readable. Do not edit frozen recipes to conceal incompatibility.
 3. Move one consumer at a time in its authorized milestone. Verify snapshot/apply round trips, no-signal refresh and exact numeric commits before moving the next. Application tests should gradually assert stable command/model behavior, while retaining coverage for old recipe aliases.
 4. Separating presentation settings from rendering requires a compatibility layer: v2 scene and v3 analysis recipes remain readable; current deterministic export still receives its expected overlay state. A new schema/version needs its own reviewed decision, not a cosmetic-change side effect.
@@ -233,9 +246,13 @@ Centralize UI scale conversion in the theme/presentation boundary. Components ac
 
 ## Review decisions and later evidence
 
-UX1 recommends the one-dock hierarchy, explicit recipe scope labels, token values and typed editor separation above. UX3 must validate right-side placement and minimum logical size with task walkthroughs; UX2 must validate numeric font packaging, real widget metrics, keyboard states and contrast on every component background. UX6/8 must validate physical 4K, mixed DPI, native window boundaries and assistive technology on available hardware. These are planned milestone tests, not open blockers to completing this specification.
-
-No UX2 Theme, component scene, font/icon asset, UI laboratory or application redesign is implemented here. See [regression gates](UX1_REGRESSION_WORKFLOWS.md) before any later consumer migration.
+The one-dock hierarchy and workflow label proposals remain gated by UX3/UX4.
+UX2 already validated font packaging, widget metrics, keyboard states and
+contrast. Issue #8 revalidates the Midnight Scientific refinement across all
+five laboratory pages and scales; see [results and limits](UX_STYLE_VALIDATION.md).
+Physical 4K, mixed DPI and assistive-technology acceptance require available
+hardware and owner review. See [regression gates](UX1_REGRESSION_WORKFLOWS.md)
+before any later production consumer migration.
 
 ## Categorical tier accents — issue #7
 
