@@ -1,6 +1,6 @@
 # Current status
 
-As of **2026-09-13**, including G4 and PERF-001/002 maintenance reviewed and accepted by the user. Scientific simulations were not rerun. Historical results identify their recorded checkpoints. PERF-003 mesh maintenance was also reviewed and accepted by the owner on 2026-09-13; implementation checkpoint `7974c78`.
+As of **2026-09-19**, including G4 and PERF-001/002 maintenance reviewed and accepted by the user. Scientific simulations were not rerun. Historical results identify their recorded checkpoints. PERF-003 mesh maintenance was also reviewed and accepted by the owner on 2026-09-13; implementation checkpoint `7974c78`.
 
 | Area | Current state |
 |---|---|
@@ -50,7 +50,7 @@ evidence preserve their original review-time state.
 not authorize a production shell or panel migration; wait for an explicit owner
 instruction under the [UX plan](../UX_IMPLEMENTATION_PLAN.md).
 
-## RENDER-001 — pending owner review
+## RENDER-001 — accepted
 
 Issue #3 separates the Point rendering checkbox and `V` shortcut from viewing
 preset environment changes. Particle representation can now change while the
@@ -64,7 +64,7 @@ keyboard actions, shader state, and visual-state round trips. Owner acceptance
 should verify these combinations on a particle capture, including saving and
 reloading a recipe. This maintenance does not authorize further queued work.
 
-## STATE-001 — pending owner review
+## STATE-001 — accepted
 
 Issue #21 corrects recipe/control synchronization and preserves session probe
 inputs/results and layer-settings disclosures during restoration. Partial
@@ -136,7 +136,7 @@ formal color-vision/user testing, physical 4K/mixed-monitor, compatibility
 renderer and archived historical comparisons were not performed. No subsequent
 issue or production migration is authorized by this implementation.
 
-## UX-STYLE-004 — pending owner review
+## UX-STYLE-004 — accepted
 
 Issue #8 reconciles the roadmap and current design system with accepted
 Midnight Scientific refinements, identifies historical versus current evidence,
