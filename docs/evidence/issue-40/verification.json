@@ -1,0 +1,141 @@
+{
+  "issue": 40,
+  "static_mockups": 17,
+  "vector_icons": 29,
+  "controls_with_bounds_nonoverlap_and_minimum_size": 525,
+  "labels_with_optical_alignment_checks": 504,
+  "command_bar_48px_with_8px_padding": "pass",
+  "sentence_case_neutral_names_and_no_duplicate_analysis_heading": "pass",
+  "proper_name_population_counts_and_state_menu": "pass",
+  "displayed_time_read_only_and_separate_seek_target": "pass",
+  "provisional_icon_geometry": "unchanged",
+  "contrast_pairs": [
+    {
+      "foreground": "text.primary",
+      "background": "surface.0",
+      "ratio": 15.751,
+      "minimum": 4.5
+    },
+    {
+      "foreground": "text.primary",
+      "background": "surface.1",
+      "ratio": 14.45,
+      "minimum": 4.5
+    },
+    {
+      "foreground": "text.primary",
+      "background": "surface.2",
+      "ratio": 12.619,
+      "minimum": 4.5
+    },
+    {
+      "foreground": "text.primary",
+      "background": "surface.3",
+      "ratio": 10.687,
+      "minimum": 4.5
+    },
+    {
+      "foreground": "text.secondary",
+      "background": "surface.0",
+      "ratio": 10.472,
+      "minimum": 4.5
+    },
+    {
+      "foreground": "text.secondary",
+      "background": "surface.1",
+      "ratio": 9.607,
+      "minimum": 4.5
+    },
+    {
+      "foreground": "text.secondary",
+      "background": "surface.2",
+      "ratio": 8.389,
+      "minimum": 4.5
+    },
+    {
+      "foreground": "text.secondary",
+      "background": "surface.3",
+      "ratio": 7.105,
+      "minimum": 4.5
+    },
+    {
+      "foreground": "text.muted",
+      "background": "surface.0",
+      "ratio": 7.614,
+      "minimum": 4.5
+    },
+    {
+      "foreground": "text.muted",
+      "background": "surface.1",
+      "ratio": 6.985,
+      "minimum": 4.5
+    },
+    {
+      "foreground": "text.muted",
+      "background": "surface.2",
+      "ratio": 6.1,
+      "minimum": 4.5
+    },
+    {
+      "foreground": "text.muted",
+      "background": "surface.3",
+      "ratio": 5.166,
+      "minimum": 4.5
+    },
+    {
+      "foreground": "accent.foreground",
+      "background": "accent.primary",
+      "ratio": 8.088,
+      "minimum": 4.5
+    },
+    {
+      "foreground": "selection.text",
+      "background": "selection.fill",
+      "ratio": 8.705,
+      "minimum": 4.5
+    },
+    {
+      "foreground": "focus.ring",
+      "background": "surface.1",
+      "ratio": 10.355,
+      "minimum": 3
+    },
+    {
+      "foreground": "border.control",
+      "background": "surface.2",
+      "ratio": 4.61,
+      "minimum": 3
+    },
+    {
+      "foreground": "state.success",
+      "background": "surface.1",
+      "ratio": 9.622,
+      "minimum": 4.5
+    },
+    {
+      "foreground": "state.warning",
+      "background": "surface.1",
+      "ratio": 10.075,
+      "minimum": 4.5
+    },
+    {
+      "foreground": "state.error",
+      "background": "surface.1",
+      "ratio": 7.365,
+      "minimum": 4.5
+    },
+    {
+      "foreground": "state.info",
+      "background": "surface.1",
+      "ratio": 9.093,
+      "minimum": 4.5
+    }
+  ],
+  "theme_token_hash": "matches current source",
+  "required_copy_navigation_and_adjacent_inputs": "pass",
+  "historical_evidence_and_control_map": "unchanged",
+  "production_diff": "empty",
+  "revision_scope": "pass",
+  "whitespace": "pass",
+  "limits": "Static evidence only; no runtime, human usability, scientific or physical DPI validation."
+}

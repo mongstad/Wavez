@@ -257,3 +257,24 @@ Track third-party licensing in [THIRD_PARTY_LICENSES.md](../THIRD_PARTY_LICENSES
 ## Repository baseline
 
 The current repository is a fresh source snapshot with prior development Git history intentionally archived outside this repository. Scientific simulations, raw captures and research projects remain external. SIMSCP3 is the only supported capture format for new work. See [repository boundaries](REPOSITORY_BOUNDARY.md), [capture policy](CAPTURE_FORMAT_POLICY.md), [evidence](EVIDENCE_INDEX.md), and [provenance](../PROVENANCE.md).
+
+## UX-IA-001 — design pending owner review
+
+Issue #14 proposes the permanent viewer information architecture under
+**Pre-UX3/UX4 — Validation & Maintenance**. The [design](UX_INFORMATION_ARCHITECTURE.md),
+[control map](UX_CONTROL_MAP.md) and [walkthrough/evidence report](UX_IA_REVIEW.md)
+cover the current baseline and proposed migration boundaries. Static layouts and
+current native observations support owner review; no production UI, scientific
+behavior, recipe schema or milestone status changed. UX3 remains on hold.
+
+The owner did not accept the initial visual/copy direction. Ready sub-issue #40
+revises the same PR #39 with a [visual language and copy guide](UX_VISUAL_LANGUAGE.md)
+and [high-fidelity static mockups](evidence/issue-40/README.md). The architecture,
+control ownership and scientific semantics remain intact. This revised proposal
+is pending owner review; no acceptance or production migration is implied.
+
+Final owner-requested design refinements specify sentence case and neutral example
+names, a 48-pixel command bar, optically aligned controls, compact heading help,
+and separate read-only displayed time and editable seek targets. UX3/UX4 input
+scope is desktop keyboard and mouse/trackpad; touch/tablet support requires future
+authorization. Icons remain provisional for later UX3 review and UX8 refinement.

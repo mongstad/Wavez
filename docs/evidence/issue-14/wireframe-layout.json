@@ -1,0 +1,166 @@
+[
+  {
+    "name": "empty",
+    "logical_size": [
+      1440,
+      900
+    ],
+    "overflowing_words": []
+  },
+  {
+    "name": "scene",
+    "logical_size": [
+      1440,
+      900
+    ],
+    "overflowing_words": []
+  },
+  {
+    "name": "volume",
+    "logical_size": [
+      1440,
+      900
+    ],
+    "overflowing_words": []
+  },
+  {
+    "name": "particle",
+    "logical_size": [
+      1440,
+      900
+    ],
+    "overflowing_words": []
+  },
+  {
+    "name": "selection",
+    "logical_size": [
+      1440,
+      900
+    ],
+    "overflowing_words": []
+  },
+  {
+    "name": "analysis",
+    "logical_size": [
+      1440,
+      900
+    ],
+    "overflowing_words": []
+  },
+  {
+    "name": "results",
+    "logical_size": [
+      1440,
+      900
+    ],
+    "overflowing_words": []
+  },
+  {
+    "name": "export",
+    "logical_size": [
+      1440,
+      900
+    ],
+    "overflowing_words": []
+  },
+  {
+    "name": "error",
+    "logical_size": [
+      1440,
+      900
+    ],
+    "overflowing_words": []
+  },
+  {
+    "name": "compact",
+    "logical_size": [
+      1024,
+      640
+    ],
+    "overflowing_words": []
+  },
+  {
+    "name": "details",
+    "logical_size": [
+      800,
+      620
+    ],
+    "overflowing_words": []
+  },
+  {
+    "name": "results-expanded",
+    "logical_size": [
+      1440,
+      900
+    ],
+    "overflowing_words": []
+  },
+  {
+    "physical_size": [
+      3840,
+      2160
+    ],
+    "scale": 1,
+    "logical_size": [
+      3840,
+      2160
+    ],
+    "dock": 360,
+    "viewport": [
+      3480,
+      2032
+    ],
+    "review": "allocation arithmetic; not native DPI acceptance"
+  },
+  {
+    "physical_size": [
+      3840,
+      2160
+    ],
+    "scale": 1.25,
+    "logical_size": [
+      3072,
+      1728
+    ],
+    "dock": 360,
+    "viewport": [
+      2712,
+      1600
+    ],
+    "review": "allocation arithmetic; not native DPI acceptance"
+  },
+  {
+    "physical_size": [
+      3840,
+      2160
+    ],
+    "scale": 1.5,
+    "logical_size": [
+      2560,
+      1440
+    ],
+    "dock": 360,
+    "viewport": [
+      2200,
+      1312
+    ],
+    "review": "allocation arithmetic; not native DPI acceptance"
+  },
+  {
+    "physical_size": [
+      3840,
+      2160
+    ],
+    "scale": 2,
+    "logical_size": [
+      1920,
+      1080
+    ],
+    "dock": 360,
+    "viewport": [
+      1560,
+      952
+    ],
+    "review": "allocation arithmetic; not native DPI acceptance"
+  }
+]
