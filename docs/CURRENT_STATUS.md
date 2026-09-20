@@ -1,6 +1,6 @@
 # Current status
 
-As of **2026-09-19**, including G4 and PERF-001/002 maintenance reviewed and accepted by the user. Scientific simulations were not rerun. Historical results identify their recorded checkpoints. PERF-003 mesh maintenance was also reviewed and accepted by the owner on 2026-09-13; implementation checkpoint `7974c78`.
+As of **2026-09-20**, including G4 and PERF-001/002 maintenance reviewed and accepted by the user. Scientific simulations were not rerun. Historical results identify their recorded checkpoints. PERF-003 mesh maintenance was also reviewed and accepted by the owner on 2026-09-13; implementation checkpoint `7974c78`.
 
 | Area | Current state |
 |---|---|
@@ -205,6 +205,16 @@ disclosure and validated logarithmic mapping. Opacity remains independent.
 [Normalization contract and validation](VOLUME_COLOR_NORMALIZATION.md) record
 native GPU, recipe, export, playback and read-only real-capture checks. No presets,
 interval scan, interpolation or panel reorganization are included.
+
+## VOLUME-001 — pending owner review
+
+Issue #10 adds opt-in Dense core, Faint structure and Signed field display
+presets plus control guidance under **UX4 — Panels & Information Architecture**.
+Actions resolve to explicit frozen color/opacity settings, retain manual controls
+and preserve ray step, strength, particles and scene presentation. Opening defaults
+and scientific source values are unchanged. [Preset semantics and validation](VOLUME_DISPLAY_PRESETS.md)
+record review evidence and limitations. No panel restructuring, interpolation or
+later issue is included. Implementation remains pending owner review.
 
 ## Current limits
 

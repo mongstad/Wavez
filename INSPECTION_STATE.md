@@ -75,6 +75,13 @@ each prepared sample; invalid views are explicitly unavailable and video exports
 fail rather than publishing blank field frames. See the
 [color contract](docs/VOLUME_COLOR_NORMALIZATION.md).
 
+Volume display presets save no preset identifier. They resolve into the existing
+`lower`, `upper`, `color_mapping`, `opacity_mapping` and `colormap` fields; v2/v3
+recipes and video jobs reproduce those values without rerunning a sample scan.
+Selecting an action without applying it changes no saved state. Later manual
+edits remain authoritative. Opening defaults and legacy migration are unchanged.
+See [display preset semantics](docs/VOLUME_DISPLAY_PRESETS.md).
+
 v3 additionally owns selection definitions/groups/active selection/overlay
 settings and the saved analysis summaries, result references, comparison
 bindings, bookmarks and selected-series/member-address layout. Numerical results

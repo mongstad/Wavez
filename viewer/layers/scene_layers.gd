@@ -4,6 +4,7 @@ const GridView = preload("res://layers/grid_view.gd")
 const MeshView = preload("res://layers/mesh_view.gd")
 const Profile = preload("res://scene/playback_profile.gd")
 const ColorMapping = preload("res://layers/volume_color.gd")
+const VolumePresets = preload("res://layers/volume_presets.gd")
 const Opacity = preload("res://layers/volume_opacity.gd")
 var viewer
 var playback
@@ -30,6 +31,7 @@ var selected_volume := ""
 var layer_settings_buttons: Dictionary = {}
 var opacity_controls := {}
 var color_controls := {}
+var preset_controls := {}
 var range_thread := Thread.new()
 var range_request := {}
 var iso_pid := -1
@@ -432,6 +434,7 @@ func _build_ui() -> void:
 		for i in range(channel.item_count):
 			if channel.get_item_metadata(i) == states[id].channel:channel.select(i)
 		channel.item_selected.connect(func(i):states[id].channel = str(channel.get_item_metadata(i));resample())
+		if reader.objects[id].kind == "volume":_build_preset_ui(body,id)
 		_scalar_input(body,"Color range minimum" if reader.objects[id].kind == "volume" else "Range minimum",states[id].lower,func(v):return _set_range(id,"lower",v))
 		_scalar_input(body,"Color range maximum" if reader.objects[id].kind == "volume" else "Range maximum",states[id].upper,func(v):return _set_range(id,"upper",v))
 		if reader.objects[id].kind == "volume":_build_color_ui(body,id)
@@ -449,8 +452,10 @@ func _build_ui() -> void:
 						viewer.status_label.text = "Disable the other volume before showing this one.";volume.set_pressed_no_signal(false);return
 			states[id].volume = v;resample())
 		_build_opacity_ui(body,id)
-		_number(body,"Opacity / world unit",states[id].opacity,0,10,.01,func(v):states[id].opacity = v;resample())
-		_number(body,"Ray step • world units",states[id].step,.05,10,.05,func(v):states[id].step = v;resample())
+		var strength := _number(body,"Opacity / world unit",states[id].opacity,0,10,.01,func(v):states[id].opacity = v;resample())
+		strength.tooltip_text = "Display extinction strength after the independent opacity mapping. Not a calibrated physical quantity; color normalization does not change this value."
+		var step := _number(body,"Ray step • world units (quality / cost)",states[id].step,.05,10,.05,func(v):states[id].step = v;resample())
+		step.tooltip_text = "Smaller steps improve integration detail at greater cost; larger steps can miss fine structure. Not a brightness control. The renderer may enlarge steps to fit its 1024-step cap."
 		var slice_choice := OptionButton.new()
 		for name in ["No slice","XY","XZ","YZ","Oblique"]:slice_choice.add_item(name)
 		body.add_child(slice_choice)
@@ -551,7 +556,7 @@ func apply_state(value: Dictionary) -> void:
 	value = upgrade_state(value)
 	gpu_budget_mib = int(value.gpu_budget_mib);states = value.layers.duplicate(true)
 	if is_instance_valid(panel):panel.get_parent().remove_child(panel);panel.queue_free()
-	labels.clear();probe_spins.clear();layer_settings_buttons.clear();opacity_controls.clear();color_controls.clear();_build_ui()
+	labels.clear();probe_spins.clear();layer_settings_buttons.clear();opacity_controls.clear();color_controls.clear();preset_controls.clear();_build_ui()
 	for i in range(mini(probe_values.size(),probe_spins.size())):probe_spins[i].set_value_no_signal(probe_values[i])
 	probe_label.text = probe_text
 	for id in expanded:
@@ -682,6 +687,8 @@ func _build_color_ui(body: VBoxContainer, id: String) -> void:
 		states[id].lower = 0.;states[id].upper = 1.;states[id].color_mapping = ColorMapping.DEFAULT.duplicate();apply_state(snapshot()))
 	var status := Label.new();status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART;body.add_child(status)
 	color_controls[id] = {"mode":mode,"symmetric":symmetric,"percentile_low":low,"percentile_high":high,"percentile":percent,"reset":reset,"status":status}
+	for spin in [low,high]:spin.value_changed.connect(func(_v):_update_preset_description(id))
+	_update_preset_description(id)
 	_update_color_status(id)
 func _update_color_status(id: String) -> void:
 	if not color_controls.has(id):return
@@ -695,7 +702,7 @@ func _update_color_status(id: String) -> void:
 		if stats.minimum < state.lower or stats.maximum > state.upper:description += " COLOR CLIPPING PRESENT."
 	if not view.color_error.is_empty():description += "\n"+view.color_error
 	color_controls[id].status.text = description
-func request_color_range(id: String, policy: String, low := 1.0, high := 99.0) -> bool:
+func request_color_range(id: String, policy: String, low := 1.0, high := 99.0, preset := "") -> bool:
 	if range_thread.is_started():viewer.status_label.text = "A range calculation is already running.";return false
 	var view = views[id]
 	if view.data.is_empty() or view.channel != states[id].channel:viewer.status_label.text = "Show and sample the volume first.";return false
@@ -704,7 +711,7 @@ func request_color_range(id: String, policy: String, low := 1.0, high := 99.0) -
 	var memory := preload("res://layers/playback_buffer.gd").memory_headroom()
 	if values.size()>ColorMapping.MAX_VALUES or memory.available_physical < memory.reserve+values.size()*16:
 		viewer.status_label.text = "Range calculation exceeds its bounded memory budget; use manual bounds.";return false
-	range_request = {"id":id,"key":view.key,"generation":generation,"state":states[id].duplicate(true),"time":view.data.time,"policy":policy,"low":low,"high":high}
+	range_request = {"id":id,"key":view.key,"generation":generation,"state":states[id].duplicate(true),"time":view.data.time,"policy":policy,"low":low,"high":high,"preset":preset}
 	var status := range_thread.start(func():return ColorMapping.derive(values,policy,low,high),Thread.PRIORITY_LOW)
 	if status != OK:range_request = {};viewer.status_label.text = "Could not start range calculation.";return false
 	viewer.status_label.text = "Calculating a frozen display range from the current source sample…";return true
@@ -720,6 +727,39 @@ func _process(_delta: float) -> void:
 	candidate.lower = result.lower;candidate.upper = result.upper
 	candidate.color_mapping.policy = request.policy;candidate.color_mapping.source_channel = candidate.channel;candidate.color_mapping.source_time = request.time
 	candidate.color_mapping.percentile_low = request.low;candidate.color_mapping.percentile_high = request.high
+	if not request.preset.is_empty():
+		var resolved := VolumePresets.resolve(states[id],request.preset,result,request.time,request.low,request.high)
+		if resolved.has("error"):viewer.status_label.text = resolved.error;return
+		candidate = resolved.state
 	var problem := ColorMapping.validate(candidate)
 	if not problem.is_empty():viewer.status_label.text = problem;return
-	states[id] = candidate;apply_state(snapshot());viewer.status_label.text = "Display range frozen from the recorded sample. Opacity unchanged."
+	states[id] = candidate;apply_state(snapshot())
+	viewer.status_label.text = "Display range frozen from the recorded sample. Opacity unchanged." if request.preset.is_empty() else "Display preset applied: linear color [%s, %s], %s; %s opacity [0, %s]. Strength %s and ray step %s unchanged. Manual controls remain available." % [str(candidate.lower),str(candidate.upper),candidate.colormap,candidate.opacity_mapping.mode,str(candidate.opacity_mapping.upper),str(candidate.opacity),str(candidate.step)]
+
+func _build_preset_ui(body: VBoxContainer, id: String) -> void:
+	var title := Label.new();title.text = "Volume display preset • optional action";body.add_child(title)
+	var help := Button.new();help.text = "What do these controls change?";help.toggle_mode = true;body.add_child(help)
+	var guide := Label.new();guide.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART;guide.visible = false
+	guide.text = "Color range/normalization maps values to colors. Opacity mapping controls extinction. Ray step controls integration quality/cost, not brightness. Particle visibility can obscure fields; adjust it separately. The scene Viewing preset controls presentation/background and particle style. These are display choices, not calibrated science."
+	body.add_child(guide);help.toggled.connect(func(v):guide.visible = v)
+	var choice := OptionButton.new()
+	for name in VolumePresets.NAMES:choice.add_item(name)
+	choice.tooltip_text = "Choose an action, then Apply. This is not an active mode; resolved settings below remain authoritative."
+	body.add_child(choice)
+	var description := Label.new();description.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART;body.add_child(description)
+	choice.item_selected.connect(func(_i):_update_preset_description(id))
+	var apply := Button.new();apply.text = "Apply volume display preset from sample";body.add_child(apply)
+	apply.pressed.connect(func():request_volume_preset(id,VolumePresets.IDS[choice.selected],color_controls[id].percentile_low.value,color_controls[id].percentile_high.value))
+	preset_controls[id] = {"choice":choice,"description":description,"apply":apply,"guide":title,"help":help}
+func _update_preset_description(id: String) -> void:
+	if not preset_controls.has(id) or not color_controls.has(id):return
+	var controls: Dictionary = preset_controls[id];var selected: int = controls.choice.selected
+	var text: String = VolumePresets.HELP[selected]
+	if VolumePresets.IDS[selected] == "faint_structure":
+		text = text.replace("the percentile entries below","P%s–P%s (edit percentile entries below)" % [str(color_controls[id].percentile_low.value),str(color_controls[id].percentile_high.value)])
+	controls.description.text = text+" Freezes color and opacity thresholds together. Keeps strength, ray step, particles and scene viewing preset. Manual controls remain available; not calibrated science."
+func request_volume_preset(id: String, preset: String, low := 1.0, high := 99.0) -> bool:
+	var problem := VolumePresets.problem(preset,views[id].color_stats)
+	if not problem.is_empty():viewer.status_label.text = problem;return false
+	if preset != "faint_structure":low = 0.;high = 100.
+	return request_color_range(id,"symmetric" if preset == "signed_field" else "percentile",low,high,preset)
