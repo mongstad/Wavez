@@ -144,8 +144,8 @@ func refresh() -> void:
 	var loaded: bool = viewer.generic_reader != null and viewer.frame_count > 0
 	var busy: bool = viewer.scene_layers != null and viewer.scene_layers.is_buffering()
 	viewer.play_button.text = "Ⅱ" if viewer.playing else "▶"
-	viewer.play_button.tooltip_text = "Preparing sample; playback will be available when ready" if busy else ("Pause" if viewer.playing else "Play")
-	viewer.play_button.disabled = not loaded or busy or viewer.inspection_busy
+	viewer.play_button.tooltip_text = "Pause" if viewer.playing else ("Preparing sample; playback will be available when ready" if busy else "Play")
+	viewer.play_button.disabled = not loaded or (busy and not viewer.playing) or viewer.inspection_busy
 	for index in [0,2]: actions.get_child(index).disabled = not loaded or viewer.inspection_busy
 	viewer.timeline.editable = loaded and not viewer.inspection_busy
 	seek_button.disabled = not loaded or viewer.inspection_busy

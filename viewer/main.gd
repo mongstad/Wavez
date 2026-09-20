@@ -1047,7 +1047,7 @@ func _layout_inspector(resize: Control) -> void:
 		legend.position = colorbar.position + Vector2(0,24)
 
 func _toggle_playback() -> void:
-	if scene_layers != null and scene_layers.is_buffering():return
+	if not playing and scene_layers != null and scene_layers.is_buffering():return
 	playing = not playing;inspection_paused = false
 
 func _step_frame(direction: int) -> void:

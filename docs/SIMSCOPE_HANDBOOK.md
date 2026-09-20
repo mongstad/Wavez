@@ -79,7 +79,9 @@ Recorded time is the only playback clock; there is no playback-mode selector.
 and 2× doubles progression. Negative speed reverses, zero holds, and Loop wraps
 the recorded interval. Sample indices remain navigation/lookup positions, not
 another playback mode. These rates do not set render or output video FPS.
-Preparation still holds the visible scene and disables Play until ready.
+Preparation still holds the visible scene. During active playback, Pause stays
+enabled and can stop playback while waiting for frames. Once paused, Play waits
+for readiness before resuming.
 Numeric/text focus suppresses viewport shortcuts. New recipes retain exact signed
 speed; obsolete mode/index-rate fields are removed without migration support.
 
@@ -239,7 +241,7 @@ Manual RAM choices retain a rolling cache; **All particle pairs, if safe** reque
 
 Temporal fields request the current source sample and up to four future samples per visible field, with reverse and loop ordering. A CPU LRU retains source arrays and prepared image planes up to 128 MiB, reduced on low-RAM hosts; another 128 MiB is reserved for active/in-flight field data. Required visible fields must fit the admission budget or preparation reports a refusal. The ordinary decoded-cache control still governs synchronous reads; this independent worker cache remains enabled with a 0 MiB decoded cache.
 
-Each visible field holds its current texture and at most one staged future texture. Their per-texture budgets split the existing layer GPU share; this can increase preview stride on large fields. GPU uploads occur on the main thread, at most one per process frame, ahead of source transitions where possible. Texture binding and shader state changes remain on the main thread. Cold seeks and underflow hold the committed physical clock, disable Play and pause background analysis until the required samples are ready. Stale source/configuration work is discarded. Initial opening, scientific inspection and deterministic export remain synchronous; large textures can still cause an upload callback stall. See the [PERF-001/002 report](PERFORMANCE_MAINTENANCE_REPORT.md) for exact guards, bounds and retained 02B/03B measurements.
+Each visible field holds its current texture and at most one staged future texture. Their per-texture budgets split the existing layer GPU share; this can increase preview stride on large fields. GPU uploads occur on the main thread, at most one per process frame, ahead of source transitions where possible. Texture binding and shader state changes remain on the main thread. Cold seeks and underflow hold the committed physical clock, gate paused Play and pause background analysis until the required samples are ready. Stale source/configuration work is discarded. Initial opening, scientific inspection and deterministic export remain synchronous; large textures can still cause an upload callback stall. See the [PERF-001/002 report](PERFORMANCE_MAINTENANCE_REPORT.md) for exact guards, bounds and retained 02B/03B measurements.
 
 Mesh playback uses at most four future source pairs per visible mesh in the current direction, including reverse loops. Its CPU cache is capped at 128 MiB and further limited by safe physical-RAM headroom; displayed, in-flight and temporary data have additional conservative charges. A current mesh and at most one staged future mesh share each layer's GPU quota. At most one mesh upload runs per process frame. Cold seeks hold the committed clock until the pair is ready, and source/settings changes cancel obsolete preparation. GPU budget or float32 display refusals preserve the decoded scientific samples and report the unavailable preview.
 

@@ -102,6 +102,16 @@ func run():
 	var deadline := Time.get_ticks_msec()+10000
 	while not worker.status().get("test_barrier_waiting",false) and Time.get_ticks_msec()<deadline: await process_frame
 	check(worker.status().get("test_barrier_waiting",false),"Real cold-seek publication barrier reached")
+	viewer.playing = true
+	for controller in [viewer.scene_layers.playback,viewer.scene_layers.field_playback,viewer.scene_layers.mesh_playback]:
+		controller._update_ui()
+		check(not viewer.play_button.disabled,"Layer readiness updates preserve active Pause while buffering")
+	ui.refresh()
+	check(not viewer.play_button.disabled and viewer.play_button.text == "Ⅱ" and viewer.play_button.tooltip_text == "Pause","Transport keeps Pause active while awaiting frames")
+	viewer.play_button.pressed.emit(); ui.refresh()
+	check(not viewer.playing and viewer.play_button.disabled,"Pause works during buffering; paused Play still waits for readiness")
+	viewer._toggle_playback()
+	check(not viewer.playing,"Buffered paused state cannot resume before readiness")
 	ui.refresh()
 	check(ui.displayed.text == "0.0" and ui.playback_timing().elapsed == 0 and viewer.committed_sample.requested_time == 0 and ui.requested.text == "Requested time 2.25123" and viewer.play_button.disabled,"Pending seek leaves displayed scene committed and exposes submitted target")
 	check(ui.pending_time() == 2.25123456789 and ui.requested.tooltip_text == "Requested time " + ui.FloatText.format_value(2.25123456789) + " s","Requested tooltip and controller retain exact submitted value")

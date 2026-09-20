@@ -42,6 +42,8 @@ selector, hidden selector, index-rate controller branch or mode-switch state.
 **Playback speed ×** maps directly to the existing recorded-time rate: 1× advances
 one recorded unit per playback second, 0.5× halves progression and 2× doubles it.
 Negative speed reverses; zero holds. Exact numeric draft/commit behavior remains.
+Pause stays enabled during active playback buffering, avoiding readiness-state
+flicker and allowing immediate pause. Paused Play still waits for readiness.
 
 Total is `last - first`; elapsed is `committed - first`, clamped to the interval;
 remaining is `max(0, total - elapsed)`. Empty captures display dashes; a single

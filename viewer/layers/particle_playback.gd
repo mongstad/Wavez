@@ -218,7 +218,7 @@ func _update_ui(status: Dictionary = {}) -> void:
 	if text != last_ui:
 		if is_instance_valid(label):label.text = text
 		last_ui = text
-	if is_instance_valid(viewer.play_button):viewer.play_button.disabled = layers.is_buffering()
+	if is_instance_valid(viewer.play_button):viewer.play_button.disabled = layers.is_buffering() and not viewer.playing
 func commit(pair: Dictionary, point: Dictionary) -> void:
 	var started := Profile.begin()
 	worker.pin(point.a);active_pair = pair

@@ -128,5 +128,5 @@ func _update_ui() -> void:
 	var status := worker.status()
 	if error.is_empty():error = status.error
 	if is_instance_valid(label):label.text = ("Preparing meshes…" if buffering else "Mesh prefetch ready")+" • %.1f / %.0f MiB CPU\n" % [status.bytes/float(Memory.MIB),cpu_limit/float(Memory.MIB)]+error
-	if is_instance_valid(viewer.play_button):viewer.play_button.disabled = buffering or layers.is_buffering()
+	if is_instance_valid(viewer.play_button):viewer.play_button.disabled = (buffering or layers.is_buffering()) and not viewer.playing
 func profile_report() -> Dictionary:return {"enabled":enabled,"buffering":buffering,"cache":worker.status(),"gpu_uploads":uploads,"staged_meshes":staged.size(),"error":error}
