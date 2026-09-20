@@ -6,7 +6,7 @@ from pathlib import Path
 from PIL import Image
 BASE='68e3b5abb548d2e95ba5ae5b8e57e03d652de502'
 ROOT=Path(__file__).resolve().parents[3]
-DOCS=[ROOT/p for p in ['UX_IMPLEMENTATION_PLAN.md','docs/CURRENT_STATUS.md','docs/UX1_DESIGN_SYSTEM.md','docs/UX_INFORMATION_ARCHITECTURE.md','docs/UX_CONTROL_MAP.md','docs/UX_IA_REVIEW.md','docs/evidence/issue-14/wireframes.md']]
+DOCS=[ROOT/p for p in ['UX_IMPLEMENTATION_PLAN.md','docs/CURRENT_STATUS.md','docs/UX1_DESIGN_SYSTEM.md','docs/UX_INFORMATION_ARCHITECTURE.md','docs/UX_CONTROL_MAP.md','docs/UX_IA_REVIEW.md','docs/evidence/issue-14/wireframes.md','docs/UX_VISUAL_LANGUAGE.md','docs/evidence/issue-40/README.md']]
 def anchors(path):
  result=set();seen={}
  for line in path.read_text().splitlines():
@@ -42,8 +42,8 @@ assert len([x for x in layout if 'scale' in x])==4
 assert all(not x.get('overflowing_words') for x in layout)
 changed=subprocess.check_output(['git','diff','--name-only',BASE],cwd=ROOT,text=True).splitlines()
 changed+=subprocess.check_output(['git','ls-files','--others','--exclude-standard'],cwd=ROOT,text=True).splitlines()
-allowed={'UX_IMPLEMENTATION_PLAN.md','docs/CURRENT_STATUS.md','docs/UX1_DESIGN_SYSTEM.md','docs/UX_INFORMATION_ARCHITECTURE.md','docs/UX_CONTROL_MAP.md','docs/UX_IA_REVIEW.md'}
-assert all(p in allowed or p.startswith('docs/evidence/issue-14/') for p in changed),changed
+allowed={'UX_IMPLEMENTATION_PLAN.md','docs/CURRENT_STATUS.md','docs/UX1_DESIGN_SYSTEM.md','docs/UX_INFORMATION_ARCHITECTURE.md','docs/UX_CONTROL_MAP.md','docs/UX_IA_REVIEW.md','docs/UX_VISUAL_LANGUAGE.md'}
+assert all(p in allowed or p.startswith(('docs/evidence/issue-14/','docs/evidence/issue-40/')) for p in changed),changed
 assert not subprocess.check_output(['git','diff',BASE,'--','viewer','simscope_export','tests','tools'],cwd=ROOT)
 subprocess.run(['git','diff','--check'],cwd=ROOT,check=True)
 print(json.dumps({'local_links_and_anchors':links,'inventory_rows':len(ids),'verified_source_symbols':len(symbols),'pngs_verified':len(images),'scale_allocations':4,'production_diff':'empty','scope':'pass','whitespace':'pass'},indent=2))

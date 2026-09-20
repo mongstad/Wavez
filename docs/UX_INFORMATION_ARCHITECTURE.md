@@ -2,15 +2,19 @@
 
 **Design proposal, pending owner review. No production migration is authorized.**
 Reviewed baseline: `68e3b5abb548d2e95ba5ae5b8e57e03d652de502` (2026-09-20).
-Issue #14 is Ready in **Pre-UX3/UX4 — Validation & Maintenance**. Its revised
-brief is design-only. [Roadmap](../UX_IMPLEMENTATION_PLAN.md) controls authorization;
+Issue #14 was confirmed Ready in **Pre-UX3/UX4 — Validation & Maintenance** when
+work began. Its revised brief is design-only. [Roadmap](../UX_IMPLEMENTATION_PLAN.md) controls authorization;
 [design system](UX1_DESIGN_SYSTEM.md) controls tokens; [UX2 library](UX2_THEME_LIBRARY.md)
 supplies implemented primitives. This proposal elaborates the existing one-dock
 hierarchy. It does not supersede those authorities or accept UX3/UX4.
 
 Review alongside the [control map](UX_CONTROL_MAP.md), [walkthroughs and validation](UX_IA_REVIEW.md)
-and [static wireframes](evidence/issue-14/wireframes.md). Every layout below is
-proposed; current behavior is identified explicitly in the control map.
+and [revised high-fidelity mockups](evidence/issue-40/README.md). Issue #40 was
+confirmed Ready for an in-place PR #39 revision after the owner declined the
+original visual/copy direction. The [visual language and copy guide](UX_VISUAL_LANGUAGE.md)
+supersedes that direction; original schematics remain historical structural evidence.
+Every layout below is proposed; current behavior is identified explicitly in the
+control map.
 
 ## Evidence and changes since UX1
 
@@ -36,16 +40,17 @@ At 1440×900 logical pixels use a 40-pixel command bar, 64-pixel transport and
 and 560 subject to at least 640 pixels of viewport width. The resulting default
 viewport is approximately 1080×772 before borders. A 1024×640 layout uses a
 320-pixel dock and approximately 704×512 viewport. These are design allocations,
-not runtime promises. Use a chooser at compact widths; four named workspaces
-remain Scene, Appearance, Selection and Analysis. No permanent second sidebar.
+not runtime promises. At desktop widths, show Scene, Appearance, Selection and
+Analysis as a two-by-two icon-and-label navigation grid. Use a chooser below
+1200 logical pixels. No permanent second sidebar.
 
 | Region | Canonical home and always-reachable content |
 |---|---|
 | Command bar | Open; copyable capture identity/details; **State** menu (scene and analysis recipe actions explicitly named); Export; View; Help. Settings comes in UX5. |
 | Viewport | Scientific image; Frame scene, Reset camera and pointer/navigation mode; concise sample/availability notices. Existing particle legend stays explicitly particle-scoped. |
-| Context dock | Workspace chooser and object/request identity fixed above independently scrolling content. Context header names kind, channel and current source sample where relevant. |
+| Context dock | Visible workspace navigation (compact chooser) and object/request identity fixed above independently scrolling content. Name, kind, visibility, channel and current source sample have separate structured presentations. |
 | Transport | Previous/next union sample, Play/Pause, union-index slider, index/count, time mode, committed time, requested time while buffering, explicit seek, applicable rate and loop. |
-| Status/jobs | Ready/Preparing/Unavailable; Jobs action with count and progress; durable failure indicator. Jobs opens fixed cancel/reopen actions and retained output/error details. |
+| Status/jobs | Ready/Preparing/Unavailable and durable failure indicator in the 24-pixel status line. The adjacent transport holds a full 32-pixel Jobs action with count/progress and access to cancel/reopen/output/error details. |
 
 Empty state: central **Open capture…** plus the same command-bar Open. They invoke
 one operation. No disabled dummy scientific form. Failed open retains the existing
@@ -56,11 +61,12 @@ View > Hide dock leaves a labeled **Show panels** edge button. Fullscreen retain
 that button and **Exit fullscreen**. F1/F11 remain alternatives. Hidden UI cannot
 trap a mouse-only user. Camera navigation does not require entering a property form.
 
-Time labels are literal: the slider is **Sample index (union)** even in Recorded
-time mode. Its equally spaced positions are not physical-time distances. Show
-**Displayed t**, **Requested t** only when different, and contextual **Source sample t**.
-Rate is **Samples / playback second** or **Recorded units / playback second**.
-Video forms separately say **Recorded units / video second** and **Output frames / second**.
+Time labels are literal: the slider is **Sample index**, with secondary
+**Union of recorded samples**, even in Recorded time mode. Its equally spaced
+positions are not physical-time distances. Show **Displayed time**; add
+**Requested time** only when different, with contextual **Source time** per object.
+Rate details say **Samples per playback second** or **Recorded units per playback second**.
+Video forms separately say **Recorded units per video second** and **Output frames per second**.
 Unknown physical units remain unknown. Independent layers retain held/interpolated/
 unavailable descriptions; a shared display time does not imply synchronous records.
 
@@ -88,7 +94,7 @@ particle-scoped. Label preset side effects before Apply: scene viewing presets c
 change environment and particle presentation, unlike volume starting points.
 
 **Source probe** shows target field/channel, world X/Y/Z, Probe, last result and
-**Last probed at t=…** together with Show probe marker. Proposed provenance display
+**Probed at** time metadata together with Show probe marker. Proposed provenance display
 must capture time/channel with the explicit probe operation; the current text lacks
 that stamp. This is a later UX4 presentation requirement, not implemented here.
 Playback does not relabel a stored result as newly sampled. Hide marker changes
@@ -124,16 +130,17 @@ process memory ceiling.
 ## Volume detail layout and disclosure
 
 The object/channel/representation header remains visible above scrolling content.
-The first loaded volume task shows Starting point, Color and Opacity summaries and
-editors. Use concise rows, not giant accordions. Default order and state:
+The ordinary volume view shows Color and Opacity editors beneath the optional
+Quick setup disclosure. The focused setup view keeps its inputs and Apply together.
+Use concise rows, not giant accordions. Default order and state:
 
 | Group | Initially visible | One named secondary disclosure |
 |---|---|---|
 | Object and representation | Name, field kind, channel, visibility, ray-march/slice/surface status, current source sample and unavailable reason | Metadata in Scene details; no nested metadata tree here |
-| Display starting point | Optional action chooser, exact affected settings, Apply; Faint percentile inputs beside Apply, current values and saturation warning | None; no generic explanatory button |
+| Quick setup | Named collapsed task in ordinary Appearance; opening it reveals action chooser, Apply and one-time guidance; Faint percentile inputs beside Apply with current values and prospective clipping notice | What changes details list exact affected settings; essential inputs, prerequisites and warnings stay visible |
 | Color | Colormap, linear/log normalization, resolved min/max, frozen/manual policy, derivation channel/time and clipping status | **Derive range from sample**: symmetric or percentile inputs + Freeze; **Reset color** action remains explicit |
 | Opacity | Linear scalar/Magnitude, zero/full thresholds and strength | Mapping details link, not hidden essential editors; explicit **Reset opacity mapping** |
-| Sampling quality | Current ray step and units, concise quality/cost help | **Sampling details**: cap/preview limits; editor can remain on main row |
+| Volume quality | Current ray step and units, concise quality/cost help | **Sampling details**: cap/preview limits; editor can remain on main row |
 | Slice / clipping / surface | Three separate named collapsed groups; each header shows active state | Expand the selected task once for plane/distance, X clip, or threshold/Extract/Remove and status |
 
 No generic Advanced drawer hides Color or Opacity. At small height the dock scrolls,
@@ -143,7 +150,7 @@ across a scroll boundary from its inputs. At most one disclosure within a volume
 task; full handbook detail opens separately. Current-value summaries do not require
 expanding derivation tools. A wider dock is optional, not required to read a value.
 
-Starting-point selector caption: **Apply once; mappings below define the view.**
+Quick setup caption: **Apply once, then edit any setting.**
 After Apply, show a completion message with resolved settings, not an “active preset”
 badge. Manual edits remain authoritative. Dense core sets stored percentiles to
 0–100; Faint structure must display those actual inputs until explicitly edited.
@@ -161,20 +168,23 @@ interval scanning or temporal field interpolation. #9 remains separate.
 
 ## Wording, help and reset contracts
 
-| Draft label / local guidance | Meaning and recovery |
+The [issue-40 copy guide](UX_VISUAL_LANGUAGE.md#ui-copy-style-guide) governs visible
+wording. Longer explanations below belong in details, not primary headings.
+
+| Revised label / local guidance | Meaning and recovery |
 |---|---|
 | Color bounds — “Values outside these bounds use endpoint colors.” | Show clipping present and derivation t/channel. Edit bounds or explicitly Freeze again. |
 | Opacity mapping — “Controls extinction independently of color.” | Linear uses scalar; Magnitude uses absolute scalar. Zero/full thresholds and strength remain separate. |
-| Extinction strength / world unit — “Display strength, not calibrated physical opacity.” | Preserve existing `opacity` value and units semantics. |
+| Strength, with separate `/ world unit` suffix — “Display strength, not calibrated physical opacity.” | Preserve existing `opacity` value and units semantics. |
 | Ray step / world unit — “Smaller steps sample more finely at higher GPU cost.” | Details explain 1024-step cap; not a brightness correction. |
 | Faint structure — “Values above the chosen upper percentile saturate.” | Show lower/upper inputs next to Apply, including inherited 0–100. |
-| Apply starting point — “Replace this field's color and opacity mappings once.” | List exact colormap/mapping changes; preserve strength and quality. |
-| Samples / playback second | Advances union sample indices; not monitor FPS. |
-| Recorded units / playback second | Advances requested recorded time; source values still follow their sampling contract. |
+| Apply in Quick setup — “Replace this field's color and opacity mappings once.” | List exact colormap/mapping changes in details; preserve strength and quality. |
+| Samples per playback second | Advances union sample indices; not monitor FPS. |
+| Recorded units per playback second | Advances requested recorded time; source values still follow their sampling contract. |
 | Save/Load scene recipe… | v2: scene/camera/time/visual state; not analysis definitions/results. |
 | Save/Load analysis recipe… | v3: validated inspection with selections, analysis and referenced assets; results inclusion explicit. |
-| Reset color to linear 0–1 | Only color bounds and color_mapping; not colormap, opacity, channel or other objects. |
-| Reset opacity mapping to linear 0–1 | Only opacity_mapping; not strength, color or ray step. |
+| Reset color; details specify linear 0–1 | Only color bounds and color_mapping; not colormap, opacity, channel or other objects. |
+| Reset opacity mapping; details specify linear 0–1 | Only opacity_mapping; not strength, color or ray step. |
 | Reset camera | Existing camera reset only; never reset source, selection or mapping. |
 | Clear decoded cache | Evict decoded cache, not source data or all memory; preserve existing lifecycle. |
 
@@ -195,7 +205,7 @@ No auto-binding or inferred scientific settings are justified by “reducing eff
 
 ## Drafts, focus and state transitions
 
-Proposed keyboard order: command bar → viewport navigation → dock chooser/context
+Proposed keyboard order: command bar → viewport navigation → dock navigation/context
 → current form in reading order → transport → jobs. Provide named region-navigation
 actions in Help and View; assign new shortcuts only after Nordic keyboard review.
 Tab/Shift-Tab, Enter/Space on buttons, native menu arrows and Escape provide a
@@ -233,12 +243,12 @@ The control map records current ownership; it must not be inferred from new loca
 
 Use 14-pixel body, 13-pixel numeric, 12-pixel secondary text; 32-pixel controls
 (28 compact), spacing 4/8/12/16/24/32. Opaque shared surfaces and focus/text roles
-come from the design system. Static wireframes use these tokens; actual font,
+come from the design system. Revised mockups read the current color tokens; actual font,
 assistive technology and physical DPI behavior still require later native tests.
 
 | Physical target / scale | Logical space | Proposed allocation |
 |---|---|---|
-| 1440×900 / 100% | 1440×900 | 360 dock, four workspaces via chooser; 1080×772 viewport |
+| 1440×900 / 100% | 1440×900 | 360 dock, four visible workspace choices; 1080×772 viewport |
 | 1024×640 / 100% | 1024×640 | 320 dock, stacked labels, two-row transport, 704×512 viewport |
 | 3840×2160 / 100% | 3840×2160 | 360 dock; no stretched full-width property cards |
 | 3840×2160 / 125% | 3072×1728 | Same logical sizes, one scale application |

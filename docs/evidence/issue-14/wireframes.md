@@ -1,5 +1,10 @@
 # Static wireframes — issue #14
 
+**Historical schematics.** The owner did not accept this visual/copy direction.
+Use the [issue-40 high-fidelity gallery](../issue-40/README.md) and
+[visual/copy guide](../../UX_VISUAL_LANGUAGE.md) for the current proposal. These
+figures remain structural review history; their labels and styling are superseded.
+
 **Proposed layouts, not screenshots of an implemented redesign.** Numbers and
 field values are illustrative. Source captures are not rendered into these figures.
 The [architecture](../../UX_INFORMATION_ARCHITECTURE.md) specifies full interaction

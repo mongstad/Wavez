@@ -1,5 +1,12 @@
 # Issue #14 — walkthrough and review evidence
 
+**Visual revision:** the owner declined this report's original schematic visual/copy
+direction. [Issue #40's mockups](evidence/issue-40/README.md) and
+[copy specification](UX_VISUAL_LANGUAGE.md) are the current visual review target.
+The observations, source research, W1–W8 semantics and original counts below are
+preserved as review-time evidence. Desktop workspace switching now uses visible
+navigation; old diagram labels are superseded, not new UI requirements.
+
 **Design delivered for owner review; not owner-accepted.** 2026-09-20.
 Baseline `68e3b5abb548d2e95ba5ae5b8e57e03d652de502`.
 See the [design](UX_INFORMATION_ARCHITECTURE.md), [96-row control map](UX_CONTROL_MAP.md)
