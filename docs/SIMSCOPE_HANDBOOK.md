@@ -22,7 +22,8 @@ Earlier documents sometimes append new checkpoints above obsolete scope tables. 
 
 ## Viewer shell
 
-The [issue-41 shell](UX3_SHELL.md) is implemented and pending owner review.
+The accepted [issue-41 shell](UX3_SHELL.md) hosts the
+[issue-42 persistent transport](UX3_TRANSPORT.md), pending owner review.
 Use Open… in the command bar or empty view. Click the capture name for copyable
 source details. State routes to the existing scene/analysis recipe controls;
 Export routes to PNG, video and numerical export. View and the viewport buttons
@@ -30,8 +31,8 @@ provide frame/reset, panel visibility and fullscreen.
 
 Scene retains the existing inspector. Appearance, Selection and Analysis provide
 links into the same controls; choosing a workspace never binds a scientific
-source or changes selection membership. Playback and budgets remain in that
-inspector for this slice. The fixed header reports current capture context, not
+source or changes selection membership. Playback is now in the persistent bottom transport. Preparation budgets remain in the
+inspector. The fixed header reports current capture context, not
 a selected-object editor.
 
 The right dock starts at 360 logical pixels, or 320 below 1200 pixels. Drag its
@@ -40,6 +41,36 @@ Below 970 logical pixels the dock starts collapsed and can reopen as a temporary
 sheet. Maximized mode keeps the top command bar. Fullscreen hides that bar and retains
 Frame scene, Reset camera, Navigate and Exit fullscreen; exiting restores the bar. Failed-open details remain visible
 until dismissed; a failed replacement retains the previous usable scene.
+
+## Playback transport
+
+Previous sample, Play/Pause, Next sample and the **Sample index** slider are
+available without scrolling or opening the dock. **Union of recorded samples**
+means equal slider steps select union indices, not equal elapsed-time intervals.
+The transport stays visible when the dock is hidden and in fullscreen. It is
+64 logical pixels high at normal desktop width and reflows to two rows (104 pixels)
+below 1200 logical pixels, without shrinking text.
+
+**Displayed time** is read-only and follows the committed visible scene. Choose
+**Seek…** to open **Seek time**, edit **Target** in the declared time units (or
+Source units if unknown), then click **Go**. Typing or pressing Enter commits
+only the local number-field draft; it never seeks. **Cancel** submits nothing.
+Escape while editing restores the field's committed text; Escape outside the
+editor closes the form. Invalid or out-of-range targets retain the draft and show
+an error. Opening another capture dismisses the old seek form.
+
+While preparation is pending, **Requested time** shows the submitted target only
+when different from the displayed clock. Changing a new draft does not replace
+that request. Independent layer source times and held/interpolated/unavailable
+states remain in Scene layers; they are not the common displayed clock.
+
+Time mode selects **Sample index** or **Recorded time**. Rate means **Samples per
+playback second** or **Recorded units per playback second**, respectively; hover
+for the full wording. Negative rates retain supported reverse playback. Loop
+uses the existing recorded-interval behavior. These rates do not set monitor FPS,
+output video FPS, or recorded units per video second. Preparation still holds the
+visible scene and disables Play until ready. Numeric/text focus suppresses viewport
+playback shortcuts. Existing recipe rate keys and session behavior are preserved.
 
 ## Camera inspection
 

@@ -6,9 +6,9 @@ particles, meshes and uniform-grid scalar fields. New integrations use
 
 G0–G4 are implemented and accepted. The current viewer includes deterministic
 video export, scientific inspection/analysis, bounded playback preparation, and
-particle/mesh/volume rendering. UX1 and UX2 are accepted. The first UX3 slice, the
-[production shell](docs/UX3_SHELL.md), is implemented for issue #41 and pending
-owner review; transport, Jobs and later workspace migration remain separate.
+particle/mesh/volume rendering. UX1 and UX2 are accepted. The accepted UX3
+[production shell](docs/UX3_SHELL.md) now hosts the [persistent transport](docs/UX3_TRANSPORT.md)
+for issue #42, pending owner review. Jobs and later workspace migration remain separate.
 
 Start with:
 

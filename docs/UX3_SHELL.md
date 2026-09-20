@@ -1,6 +1,7 @@
 # UX3 shell — issue #41
 
-Implemented, **pending owner review**. Baseline: `1043966`, owner-merged PR #39.
+Shell accepted in owner-merged PR #45 (`884ea73`). Original baseline: `1043966`, PR #39.
+The [issue-42 transport extension](UX3_TRANSPORT.md) is pending owner review.
 Issue #41 was the sole Ready item on Project 1 before implementation. This is
 only UX3-SHELL-001, not UX3 milestone acceptance. Historical design reports and
 review evidence remain unchanged.
@@ -53,14 +54,16 @@ provisional icon paths are consumed without changing tokens or finalizing artwor
 Long retained controls use the existing fitting helper and tooltips. Scientific
 input precision, source names, stored labels and recipe keys are unchanged.
 
-Playback, detailed readiness, jobs, scientific forms and their older labels remain
-in the inspector. Opening a workspace does not bind a source, change scientific
+Playback has moved to the [persistent bottom transport](UX3_TRANSPORT.md).
+Detailed readiness, scientific forms and their older labels remain in the inspector;
+Jobs remains a later slice. Opening a workspace does not bind a source, change scientific
 membership, run analysis or commit edits. No new persisted workspace fields,
 background-job engine, decoder, cache policy or worker is introduced. The existing
 `panel_width` and `overlay_visible` recipe fields remain readable; rendered dock
 geometry is constrained by available space. Crossing the compact breakpoint
 chooses its 320/360 default. The offline worker does not construct this shell and
-retains its legacy overlay presentation. This issue does not implement #42–44,
+retains its legacy overlay presentation. The original shell issue did not implement #42–44; #42 now extends it as linked above.
+This shell contract does not implement #43–44,
 UX4, Settings, new legends or other backlog polish.
 
 ## Validation
