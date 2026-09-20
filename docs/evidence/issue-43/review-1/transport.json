@@ -1,0 +1,21 @@
+{
+  "checks": 62,
+  "failures": [],
+  "layouts": [
+    {
+      "transport": "[P: (0.0, 796.0), S: (1440.0, 64.0)]",
+      "window": "(1440, 900)"
+    },
+    {
+      "transport": "[P: (0.0, 496.0), S: (1024.0, 104.0)]",
+      "window": "(1024, 640)"
+    }
+  ],
+  "refresh_activity": {
+    "counters": {},
+    "stages": {}
+  },
+  "source_hashes_unchanged": {
+    "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/issue-43-review1-transport/scene.ssc": "4bb2e14479db51888a8ec5fa1247d59ae2dc207eb0b375aad63fd0e6331ac6aa"
+  }
+}

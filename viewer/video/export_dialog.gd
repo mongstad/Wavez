@@ -1,4 +1,9 @@
 extends Window
+signal job_changed
+# Session-only presentation snapshot; worker lifecycle remains owned here.
+var job_status := {}
+var active_output := ""
+
 const Job = preload("res://video/render_job.gd")
 const Timeline = preload("res://video/offline_timeline.gd")
 var viewer
@@ -208,14 +213,18 @@ func start_export() -> void:
 	if not invalid.is_empty():
 		message.text = invalid
 		return
+	active_output = job.output_path
+	last_progress = {}
 	var name := ".simscope-export-%d-%d" % [Time.get_unix_time_from_system(), Time.get_ticks_usec()]
 	active_directory = job.output_path.get_base_dir().path_join(name)
+	active_job_path = active_directory.path_join("job.json")
 	if DirAccess.make_dir_recursive_absolute(active_directory) != OK:
 		message.text = "Cannot create temporary export directory."
+		publish_job("failed", message.text)
 		return
-	active_job_path = active_directory.path_join("job.json")
 	if with_selections:
 		preparing = true;start_button.disabled = true
+		publish_job("preparing", "Verifying the pinned selection recipe")
 		var durable = viewer.selection_controller.temporal.durable
 		durable.save_to(active_directory.path_join("recipe.inspection"),true,int(g4_quota.value)*1048576)
 		message.text = "Verifying the pinned selection recipe before launching the renderer…"
@@ -223,14 +232,17 @@ func start_export() -> void:
 		while viewer.selection_controller.jobs.busy() and Time.get_ticks_msec()-began < 150000:await get_tree().create_timer(.02).timeout
 		if viewer.selection_controller.jobs.busy():viewer.selection_controller.jobs.cancel_background()
 		preparing = false;start_button.disabled = false
-		if not durable.last_recipe.has("path"):message.text = "Selection recipe preparation failed: "+durable.status.text;return
+		if not durable.last_recipe.has("path"):
+			message.text = "Selection recipe preparation failed: "+durable.status.text
+			publish_job("failed", message.text);return
 		job.version = 2;job.inspection_path = durable.last_recipe.path;job.inspection_sha256 = durable.last_recipe.sha256;job.opened_paths = durable.opened_paths.duplicate();job.output_quota_bytes = str(int(g4_quota.value)*1048576)
 		job.exact_state = preload("res://analysis/inspection_v3.gd").pack(job.state)
 		job.exact_timing = preload("res://analysis/inspection_v3.gd").pack({"start_time":job.start_time,"end_time":job.end_time,"fps":job.fps,"playback_rate":job.playback_rate})
 		invalid = Job.validate(job)
-		if not invalid.is_empty():message.text = invalid;return
+		if not invalid.is_empty():message.text = invalid;publish_job("failed", message.text);return
 	if Job.write_json(active_job_path, job) != OK:
 		message.text = "Cannot write render job."
+		publish_job("failed", message.text)
 		return
 	var args := Job.launch_arguments(active_job_path, job.fps)
 	# Rendering backend must match the interactive appearance.
@@ -238,6 +250,7 @@ func start_export() -> void:
 	pid = OS.create_process(OS.get_executable_path(), args)
 	if pid <= 0:
 		message.text = "Could not start Godot render process. Job retained: " + active_job_path
+		publish_job("failed", message.text)
 		return
 	launch_ticks = Time.get_ticks_msec()
 	last_progress = {}
@@ -245,6 +258,12 @@ func start_export() -> void:
 	start_button.disabled = true
 	cancel_button.disabled = false
 	message.text = "Starting render process. The normal viewer remains usable."
+	publish_job("starting", message.text)
+
+func publish_job(stage: String, detail: String) -> void:
+	job_status = {"stage":stage, "detail":detail, "directory":active_directory, "job":active_job_path,
+		"output":active_output, "progress":last_progress.duplicate(true)}
+	job_changed.emit()
 
 func cancel_export() -> void:
 	if pid <= 0: return
@@ -252,7 +271,10 @@ func cancel_export() -> void:
 	if f != null:
 		f.close()
 		message.text = "Cancelling after the current frame; completed PNGs will be retained."
-	else: message.text = "Could not write cancellation request. Stop render process PID %d in the system monitor. Job retained: %s" % [pid, active_directory]
+		publish_job("cancelling", message.text)
+	else:
+		message.text = "Could not write cancellation request. Stop render process PID %d in the system monitor. Job retained: %s" % [pid, active_directory]
+		publish_job("failed", message.text)
 
 func _process(delta: float) -> void:
 	if pid <= 0: return
@@ -266,6 +288,7 @@ func _process(delta: float) -> void:
 			last_progress = data
 			progress.value = 100.0 * data.current_frame / maxf(1, data.total_frames)
 			message.text = "%s\n%d / %d frames • %.1f seconds elapsed\n%s" % [data.message, data.current_frame, data.total_frames, data.elapsed_seconds, active_directory]
+			publish_job("cancelling" if job_status.get("stage") == "cancelling" else str(data.stage), message.text)
 	if not OS.is_process_running(pid):
 		var exit_code := OS.get_process_exit_code(pid)
 		pid = -1
@@ -273,6 +296,7 @@ func _process(delta: float) -> void:
 		cancel_button.disabled = true
 		if last_progress.get("stage", "") not in ["complete", "frames_ready", "failed", "cancelled"]:
 			message.text = "Render process stopped unexpectedly (exit %d). Intermediates retained: %s" % [exit_code, active_directory]
+		publish_job(str(last_progress.get("stage", "failed")) if last_progress.get("stage", "") in ["complete", "frames_ready", "failed", "cancelled"] else "failed", message.text)
 		viewer.status_label.text = message.text
 
 func _exit_tree() -> void:

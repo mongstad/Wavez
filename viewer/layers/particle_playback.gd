@@ -24,6 +24,7 @@ var budget_message := ""
 var estimates := {}
 var label: Label
 var mode: OptionButton
+var readiness_error := ""
 var last_ui := ""
 var active_pair := {}
 var hidden := false
@@ -201,6 +202,7 @@ func pump() -> bool:
 func _update_ui(status: Dictionary = {}) -> void:
 	if not enabled:return
 	if status.is_empty():status = worker.status()
+	readiness_error = status.get("error", "")
 	var depth := _depth(status)
 	var duration := 0.0
 	if depth > 0 and not context.is_empty():

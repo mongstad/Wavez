@@ -19,6 +19,9 @@ provide entry points to its existing control groups. The
 [persistent transport](../docs/UX3_TRANSPORT.md) keeps playback, union sample index,
 Displayed time, Seek…, mode, rate and Loop available below the viewport. Seek uses
 a separate Target and explicit Go/Cancel; typing never changes the visible time.
+The [40-pixel status line and Jobs action](../docs/UX3_STATUS.md) remain available
+with the dock hidden. Details exposes readiness diagnostics; Jobs reopens existing
+operations, exposes supported cancellation and retains output/failure details.
 
 F1 hides/restores the resizable dock and legend; Space pauses; Left/Right
 steps; mouse drag tumbles continuously through full revolutions in either direction;

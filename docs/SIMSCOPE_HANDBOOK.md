@@ -23,7 +23,8 @@ Earlier documents sometimes append new checkpoints above obsolete scope tables. 
 ## Viewer shell
 
 The accepted [issue-41 shell](UX3_SHELL.md) hosts the
-[issue-42 persistent transport](UX3_TRANSPORT.md), pending owner review.
+[issue-42 persistent transport](UX3_TRANSPORT.md). The
+[issue-43 status and Jobs surface](UX3_STATUS.md) is pending owner review.
 Use Open… in the command bar or empty view. Click the capture name for copyable
 source details. State routes to the existing scene/analysis recipe controls;
 Export routes to PNG, video and numerical export. View and the viewport buttons
@@ -73,6 +74,33 @@ uses the existing recorded-interval behavior. These rates do not set monitor FPS
 output video FPS, or recorded units per video second. Preparation still holds the
 visible scene and disables Play until ready. Numeric/text focus suppresses viewport
 playback shortcuts. Existing recipe rate keys and session behavior are preserved.
+
+## Status and Jobs
+
+The 40-pixel bottom status line reports No capture, Preparing…, Ready or
+Unavailable from current readiness. A separate **Failed — details** notice
+survives unrelated informational updates and successful work. **Details…** opens
+copyable diagnostics; **Jobs → Acknowledge failures** dismisses retained notices.
+Current unavailability remains visible until the underlying condition resolves.
+The existing failed-open Dismiss action acknowledges that open failure only.
+Form validation remains beside its owning input; it is not a new global job.
+
+**Jobs (N)** in the transport counts active operations from existing controllers.
+It remains reachable with the dock hidden and in interactive fullscreen. Open
+reopens the original video panel or the owning legacy form. Details exposes
+progress, output/intermediate directories and existing diagnostic information.
+An open active-job Details view updates as progress is published, then retains
+the final state without following later jobs.
+Cancel delegates to the operation's existing cancellation behavior; video and
+analysis cancellation may wait for acknowledgement. Closing Jobs or the video
+panel does not cancel. Minimizing the viewer does not stop video export; closing
+the application retains its existing graceful cancellation behavior.
+
+Video completion, missing-FFmpeg PNG recovery and failures retain the latest
+session details even after reopening. No job history is persisted across launches.
+Selection/analysis/matched-view and isosurface forms remain in the inspector;
+Jobs provides access without migrating their scientific controls. Worker windows
+may still have a separate taskbar entry on KDE/Wayland.
 
 ## Camera inspection
 

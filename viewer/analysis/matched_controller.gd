@@ -1,4 +1,5 @@
 extends Node
+signal job_failed(message: String)
 const UI = preload("res://analysis/ui_controls.gd")
 # Explicit two-run preparation and sequential reuse of the existing renderer.
 const State = preload("res://analysis/inspection_v3.gd")
@@ -116,12 +117,12 @@ func launch_next() -> void:
 	if stopping:return
 	if index >= 2:status.text = "Matched pair complete: "+prepared.path;set_process(false);return
 	var entry: Dictionary = prepared.jobs[index];active_path = entry.path
-	if FileAccess.get_sha256(active_path) != entry.sha256:status.text = "Prepared job changed; render refused.";return
+	if FileAccess.get_sha256(active_path) != entry.sha256:status.text = "Prepared job changed; render refused.";job_failed.emit(status.text);return
 	var job = JSON.parse_string(FileAccess.get_file_as_string(active_path))
-	if not job is Dictionary:status.text = "Invalid prepared job.";return
+	if not job is Dictionary:status.text = "Invalid prepared job.";job_failed.emit(status.text);return
 	var args := Job.launch_arguments(active_path,int(job.fps));args.insert(0,RenderingServer.get_current_rendering_method());args.insert(0,"--rendering-method")
 	pid = OS.create_process(OS.get_executable_path(),args)
-	if pid <= 0:status.text = "Could not launch matched renderer.";return
+	if pid <= 0:status.text = "Could not launch matched renderer.";job_failed.emit(status.text);return
 	status.text = "Rendering the %s view…" % ("left" if index == 0 else "right");set_process(true)
 
 func cancel() -> void:
@@ -142,7 +143,10 @@ func _process(delta: float) -> void:
 		if progress is Dictionary and not progress.is_empty():status.text = "%s input: %s" % ["Left" if index == 0 else "Right",progress.get("message","")]
 		return
 	OS.get_process_exit_code(pid);pid = -1
-	if stopping or not progress is Dictionary or progress.get("stage") != "complete":status.text = "Matched rendering stopped; partial output retained: "+active_path.get_base_dir();set_process(false);return
+	if stopping or not progress is Dictionary or progress.get("stage") != "complete":
+		status.text = "Matched rendering stopped; partial output retained: "+active_path.get_base_dir()
+		if not stopping: job_failed.emit(status.text)
+		set_process(false);return
 	index += 1;launch_next()
 
 func _exit_tree() -> void:

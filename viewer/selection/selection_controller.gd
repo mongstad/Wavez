@@ -129,7 +129,7 @@ func setup(scene) -> void:
 	viewer._button(panel,"Delete group",func():state.remove_group(group_list.selected);_changed())
 	viewer._button(panel,"Save group union",func():_group_reduce("union"))
 	viewer._button(panel,"Save group intersection",func():_group_reduce("intersection"))
-	viewer._button(panel,"Cancel selection query",func():jobs.cancel();operation = "";failed_overlay_key = _current_key();status.text = "Selection query cancelled.")
+	viewer._button(panel,"Cancel selection query",cancel_query)
 	UI.hint(members_input,"IDs or rows: comma-separated. Grid addresses: x,y,z triples separated by semicolons. IDs remain exact decimal integers.")
 	UI.hint(coordinate_space,"World coordinates include the object's declared transform. Object-local coordinates are before that transform.")
 	UI.hint(copy_type_filter,"Copy current type exclusions into this selection. Later display-filter changes do not change membership.")
@@ -142,6 +142,9 @@ func setup(scene) -> void:
 
 	temporal = preload("res://analysis/temporal_controller.gd").new();add_child(temporal);temporal.setup(self)
 	set_process(false)
+
+func cancel_query() -> void:
+	jobs.cancel();operation = "";failed_overlay_key = _current_key();status.text = "Selection query cancelled."
 
 func _text(label: String, initial: String) -> LineEdit:
 	var title := Label.new();title.text = label;panel.add_child(title)
