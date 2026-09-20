@@ -1,6 +1,12 @@
 # UX2 — Theme and primitive component library
 
-The owner reviewed and accepted UX2 on 2026-09-13 at `5fae711`. The library remains opt-in and development-only. [UX1](UX1_DESIGN_SYSTEM.md) supplies the design specification; [UX2's report](UX2_REPORT.md) records the accepted implementation decisions and adjustments in its original review-time wording. No production viewer, panel, renderer, capture API, recipe or export consumer uses it yet. **UX3 is on hold until further notice from the owner.**
+The owner reviewed and accepted UX2 on 2026-09-13 at `5fae711`.
+[UX1](UX1_DESIGN_SYSTEM.md) supplies the design specification;
+[UX2’s report](UX2_REPORT.md) retains its original review-time wording.
+Issue #41 now consumes the shared Midnight Scientific theme in the production
+[shell and retained dock](UX3_SHELL.md), pending owner review. Scientific rendering,
+offline export presentation and the theme tokens themselves are unchanged.
+Full workspace migration remains separately gated.
 
 ## Midnight Scientific refinement — issue #5
 

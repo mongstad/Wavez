@@ -38,6 +38,8 @@ func run() -> void:
 			var dimensions := arg.trim_prefix("--maintenance-resolution=").split("x")
 			resolution = Vector2i(int(dimensions[0]),int(dimensions[1]))
 	if out.is_empty():quit(1);return
+	# Production shell uses available logical size rather than a fixed 1440 canvas.
+	root.size = resolution
 	surface = root
 	# The desktop may clamp windows below 4K. Use the same real GPU SubViewport
 	# and canvas scaling as deterministic export, with an exact 4K render target.
@@ -82,7 +84,7 @@ func run() -> void:
 	for title in names:
 		var panel: VBoxContainer = view.sections[title];panel.visible = true
 		await process_frame;await process_frame
-		var scroll: ScrollContainer = view.inspector_box.get_parent()
+		var scroll: ScrollContainer = view.shell.scroll if view.shell != null else view.inspector_box.get_parent()
 		scroll.scroll_vertical = int(panel.position.y)
 		await process_frame;await process_frame
 		var overflow: Array = []

@@ -341,8 +341,8 @@ A milestone may receive one of three outcomes:
 |---|---|---|
 | UX1 | Audit & Design System Specification | ACCEPTED by owner 2026-09-13 at `229d4ea`; [report](docs/UX1_REPORT.md) |
 | UX2 | Theme Foundation & Component Library | ACCEPTED by owner 2026-09-13 at `5fae711`; [report](docs/UX2_REPORT.md) |
-| Pre-UX3/UX4 | Information architecture & visual direction | PENDING OWNER ACCEPTANCE via #14/#40 / PR #39; design-only, no production migration |
-| UX3 | Main Viewer Shell | NOT STARTED — requires owner acceptance of the Pre-UX3/UX4 design package and separate implementation authorization |
+| Pre-UX3/UX4 | Information architecture & visual direction | Owner merged #14/#40 design package in PR #39 on 2026-09-20; historical review evidence retained |
+| UX3 | Main Viewer Shell | #41 shell slice implemented, PENDING OWNER REVIEW; transport/status/integration slices remain separately gated |
 | UX4 | Workspace & Control Migration | BLOCKED BY UX3 |
 | UX5 | Application Settings | BLOCKED BY UX4 |
 | UX6 | Detachable Windows & Multi-Monitor | BLOCKED BY UX5 |
@@ -352,10 +352,10 @@ A milestone may receive one of three outcomes:
 
 ### 6.1 Authority for UX3 and later
 
-Once #14/#40 / PR #39 are owner-accepted, the accepted
+The owner merged #14/#40 / PR #39 on 2026-09-20. The accepted
 [viewer information architecture](docs/UX_INFORMATION_ARCHITECTURE.md),
 [visual language](docs/UX_VISUAL_LANGUAGE.md) and
-[control map](docs/UX_CONTROL_MAP.md) become the placement/copy/ownership baseline
+[control map](docs/UX_CONTROL_MAP.md) are the placement/copy/ownership baseline
 for UX3 and UX4. They refine this roadmap; later milestones must not rediscover or
 replace that design casually.
 
@@ -1420,17 +1420,15 @@ UX1 and UX2 are accepted. The legacy capture retirement gate is historical
 completed groundwork and must not be rerun merely because this roadmap still
 records it.
 
-The current gate is:
+The owner merged the design package in PR #39. Issue #41 was the sole Ready item
+when this work began and authorizes only the production shell/command-bar slice.
+Its [implementation and validation](docs/UX3_SHELL.md) are pending owner review.
 
-1. owner-review #14/#40 / PR #39
-2. if accepted, merge/freeze the Pre-UX3/UX4 information architecture and visual direction
-3. explicitly authorize **UX3 — Main Viewer Shell** as a new implementation task
-4. implement UX3 only, validate it, write the UX3 report and stop
-5. do not begin any UX4 consumer migration until UX3 is owner-accepted
-
-The first current implementation assignment after design acceptance is therefore:
-
-> **UX3 — Main Viewer Shell**
+1. Review #41 shell implementation and its documented bounded adapters.
+2. The owner controls acceptance and merge.
+3. Do not start #42 transport, #43 status/Jobs or #44 integration without their
+   own Ready authorization; this is not a completed UX3 milestone report.
+4. Do not begin UX4 until UX3 is owner-accepted and UX4 is separately authorized.
 
 Astra must use the accepted design system, information architecture, visual
 language and control map as inputs. Do not rerun UX1/UX2, redesign the interface

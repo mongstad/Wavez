@@ -1,0 +1,121 @@
+{
+  "baseline": "1043966f1a62233e618a1e524c957bcb3af4ef7d",
+  "issue": 41,
+  "owner_review": "pending",
+  "shell": {
+    "forward_plus": {
+      "checks": 79,
+      "failures": [],
+      "layouts": [
+        {
+          "bar": "(1440.0, 48.0)",
+          "dock": "[P: (1080.0, 48.0), S: (360.0, 852.0)]",
+          "logical": "(1440, 900)",
+          "scale": 1.0
+        },
+        {
+          "bar": "(1024.0, 48.0)",
+          "dock": "[P: (704.0, 48.0), S: (320.0, 592.0)]",
+          "logical": "(1024, 640)",
+          "scale": 1.0
+        },
+        {
+          "bar": "(1024.0, 48.0)",
+          "dock": "[P: (704.0, 48.0), S: (320.0, 592.0)]",
+          "logical": "(1024, 640)",
+          "scale": 1.25
+        },
+        {
+          "bar": "(1024.0, 48.0)",
+          "dock": "[P: (704.0, 48.0), S: (320.0, 592.0)]",
+          "logical": "(1024, 640)",
+          "scale": 1.5
+        },
+        {
+          "bar": "(1024.0, 48.0)",
+          "dock": "[P: (704.0, 48.0), S: (320.0, 592.0)]",
+          "logical": "(1024, 640)",
+          "scale": 2.0
+        }
+      ],
+      "renderer": "forward_plus",
+      "shell_scientific_activity": {
+        "counters": {},
+        "stages": {}
+      },
+      "source_hashes_unchanged": {
+        "scene.ssc": "51ad55d07525b196a24348dc6753a6a8c9fd11ffbf3879b42b7bdb72de4009c8",
+        "replacement.ssc": "7c73e13d4e0048d311a34c9632a3438471ecba46ac8738409fcda1e56de6350e",
+        "invalid.ssc": "98fafded66db249c745f3e98bd145f7849e10dc31e718ddea82649e2ca8cc26f"
+      }
+    },
+    "gl_compatibility": {
+      "checks": 79,
+      "failures": [],
+      "layouts": [
+        {
+          "bar": "(1440.0, 48.0)",
+          "dock": "[P: (1080.0, 48.0), S: (360.0, 852.0)]",
+          "logical": "(1440, 900)",
+          "scale": 1.0
+        },
+        {
+          "bar": "(1024.0, 48.0)",
+          "dock": "[P: (704.0, 48.0), S: (320.0, 592.0)]",
+          "logical": "(1024, 640)",
+          "scale": 1.0
+        },
+        {
+          "bar": "(1024.0, 48.0)",
+          "dock": "[P: (704.0, 48.0), S: (320.0, 592.0)]",
+          "logical": "(1024, 640)",
+          "scale": 1.25
+        },
+        {
+          "bar": "(1024.0, 48.0)",
+          "dock": "[P: (704.0, 48.0), S: (320.0, 592.0)]",
+          "logical": "(1024, 640)",
+          "scale": 1.5
+        },
+        {
+          "bar": "(1024.0, 48.0)",
+          "dock": "[P: (704.0, 48.0), S: (320.0, 592.0)]",
+          "logical": "(1024, 640)",
+          "scale": 2.0
+        }
+      ],
+      "renderer": "gl_compatibility",
+      "shell_scientific_activity": {
+        "counters": {},
+        "stages": {}
+      },
+      "source_hashes_unchanged": {
+        "scene.ssc": "637dbc7acfdecb5dbaebfd2a901db12d3397b3b3c20bde9cdee84465518979db",
+        "replacement.ssc": "da102aa681ad7aa64c15d5625e18389fec9dbf3a640bcf0e88049d45ce2ef5da",
+        "invalid.ssc": "98fafded66db249c745f3e98bd145f7849e10dc31e718ddea82649e2ca8cc26f"
+      }
+    }
+  },
+  "recipes": {
+    "renderer": "headless",
+    "checks": 3051,
+    "failures": []
+  },
+  "camera": {
+    "renderer": "forward_plus",
+    "checks": 13044,
+    "failures": []
+  },
+  "maintenance_ui": {
+    "renderer": "headless",
+    "checks": 28,
+    "failures": []
+  },
+  "limitations": [
+    "Physical 4K and mixed-monitor scaling not run",
+    "1440x900 logical at 200% capped by window manager and excluded",
+    "No full external benchmark or video lifecycle matrix",
+    "Legacy maintenance harness adapted for explicit headless size and new scroll parent",
+    "Original sandbox import/display attempts failed; authorized native runs passed"
+  ]
+}
