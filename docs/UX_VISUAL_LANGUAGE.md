@@ -47,7 +47,7 @@ authorized future milestone. Desktop keyboard accessibility, visible focus,
 scaling, contrast and usable pointer targets remain required. The current 32-pixel
 controls are desktop targets, not a touch-support claim.
 
-## Midnight scientific composition
+## Midnight Scientific composition
 
 The generator reads colors directly from
 [the accepted token resource](../viewer/ui/theme/simscope_tokens.gd). It does not
@@ -133,9 +133,13 @@ identifiers, partial restore behavior or v2/v3 state.
 
 Sentence case applies to **every SimScope-authored heading, label, button, menu
 item, option and status**, not just section headings. Preserve source-defined
-object/channel names, the SimScope product name, established acronyms such as IDs,
-and conventional unit casing. Do not rewrite source metadata to enforce style.
+object/channel names, proper names such as SimScope and Midnight Scientific,
+established acronyms such as IDs, and conventional unit casing. Do not rewrite
+source metadata or sentence-case proper names to enforce style.
 Underlying schema keys and historical source labels remain unchanged.
+
+Use `Population counts` consistently for the analysis and its results. Keep the
+top-level menu name `State`.
 
 | Rule | Use | Avoid |
 |---|---|---|

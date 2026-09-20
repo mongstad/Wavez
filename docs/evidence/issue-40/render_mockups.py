@@ -436,7 +436,7 @@ def analysis(results=False):
     f,y=shell('results' if results else 'analysis','Analysis','particles')
     y=236
     y=f.section(y,'Results' if results else 'Analysis type')
-    f.button(f.x,y,f.cw,'Particle count' if results else 'Population counts',dropdown=True);y+=48
+    f.button(f.x,y,f.cw,'Population counts',dropdown=True);y+=48
     for label,value in [('Source','demo.ssc'),('Object','Particles'),('Selection','All particles'),('Units','particles')]:
         f.text(f.x,y,label,12,'text.muted');f.text(f.x+112,y,value,14);y+=28
     y+=8
@@ -449,8 +449,7 @@ def analysis(results=False):
         f.section(y,'Request details',closed=True)
         # Expanded result temporarily occupies the viewport, not a second dock.
         f.rect(16,104,1048,672,'surface.1','border.subtle',4)
-        f.text(40,128,'Particle count',18,role='heading')
-        f.text(40,160,'Population counts',14,'text.secondary')
+        f.text(40,128,'Population counts',18,role='heading')
         f.badge(904,124,'Complete',icon='check',color='state.success')
         f.text(40,206,'Particles',12,'text.secondary')
         for i,v in enumerate([64,48,32,16,0]):
@@ -480,7 +479,7 @@ def analysis(results=False):
 
 def specimens():
     f=Canvas('components');f.x=40;f.cw=400
-    f.text(40,32,'Midnight scientific',18,role='heading')
+    f.text(40,32,'Midnight Scientific',18,role='heading')
     f.text(40,64,'Control and copy review',14,'text.secondary')
     # Three intentionally distinct specimen areas, outside application chrome.
     f.rect(24,104,432,744,'surface.1','border.subtle')

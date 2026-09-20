@@ -74,10 +74,11 @@ for name,figure in figures.items():
         x,y,lw,lh=label['rect']
         assert x>=0 and y>=0 and x+lw<=w+.01 and y+lh<=h,(name,label)
         assert not any(t in label['text'] for t in ('·',' @ ','[ Apply','[ Probe','Workspace:')),(name,label)
-        assert not any(t in label['text'] for t in ('Dust particles','Collapse field','Core sample','What changes','Use full layer range')),(name,label)
-        # Check authored multiword copy, preserving conventional acronym/unit
+        assert not any(t in label['text'] for t in ('Dust particles','Collapse field','Core sample','What changes','Use full layer range','Particle count','Midnight scientific')),(name,label)
+        # Preserve the exact proper name as well as conventional acronym/unit
         # casing. This fixture audit is not a source-metadata rewriting rule.
-        for sentence in re.split(r'(?<=[.!?])\s+',label['text']):
+        authored_copy = label['text'].replace('Midnight Scientific','SimScope')
+        for sentence in re.split(r'(?<=[.!?])\s+',authored_copy):
             for word in re.findall(r'[A-Za-z]+',sentence)[1:]:
                 assert not word[0].isupper() or word in {'IDs','MiB','X','Y','Z'},(name,'sentence case',label)
     for alignment in figure['alignments']:
@@ -88,6 +89,7 @@ for name,figure in figures.items():
         nav = {x['name'] for x in controls if 40<x['rect'][1]<132}
         assert {'Scene','Appearance','Selection','Analysis'} <= nav,(name,nav)
     if name!='components':
+        assert any(x['name']=='State' and x['rect'][1]==8 for x in controls),(name,'State menu')
         assert any(x['name']=='Jobs 0' and x['rect'][1]>=h-88 for x in controls)
         assert any(x['name']=='Seek…' for x in controls)
         displayed=next(x for x in figure['labels'] if x['text']=='Displayed time' and x['rect'][1]>=h-88)
@@ -117,6 +119,9 @@ assert sum(x['text']=='Population counts' for x in figures['analysis']['labels']
 assert {'Analysis type','Use full range'} <= texts('analysis')
 assert {'Volume quality','Ray step','Reset opacity mapping'} <= texts('volume-details')
 assert {'For positive and negative data','Enter a finite number.'} <= texts('components')
+assert {'Midnight Scientific','State'} <= texts('components')
+assert next(x for x in figures['results']['labels'] if x['role']=='heading' and x['rect'][0]==40)['text']=='Population counts'
+assert any(x['name']=='Population counts' and x.get('dropdown') for x in figures['results']['controls'])
 assert {'Export numerical data…','Return to viewport','Recorded range'} <= texts('results')
 svg = ET.parse(OUT/'icons.svg').getroot()
 assert {x.attrib['id'] for x in svg} == set(layout['icons'])
@@ -147,6 +152,7 @@ report={'issue':40,'static_mockups':len(figures),'vector_icons':len(layout['icon
         'labels_with_optical_alignment_checks':alignment_count,
         'command_bar_48px_with_8px_padding':'pass',
         'sentence_case_neutral_names_and_no_duplicate_analysis_heading':'pass',
+        'proper_name_population_counts_and_state_menu':'pass',
         'displayed_time_read_only_and_separate_seek_target':'pass',
         'provisional_icon_geometry':'unchanged',
         'contrast_pairs':contrast,'theme_token_hash':'matches current source',

@@ -6,6 +6,7 @@
   "labels_with_optical_alignment_checks": 504,
   "command_bar_48px_with_8px_padding": "pass",
   "sentence_case_neutral_names_and_no_duplicate_analysis_heading": "pass",
+  "proper_name_population_counts_and_state_menu": "pass",
   "displayed_time_read_only_and_separate_seek_target": "pass",
   "provisional_icon_geometry": "unchanged",
   "contrast_pairs": [

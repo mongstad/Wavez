@@ -1113,7 +1113,7 @@
     {
       "name": "results",
       "size": [1440, 900],
-      "sha256": "4d869df493b78056078c2d682f6949d58f867111d3fbad6e677efa657b3af763",
+      "sha256": "f73c96d978d7d3561b534dec5284d9dbba26d5996172b1723f1498e906abd67a",
       "controls": [
         {"type": "secondary button", "name": "Open\u2026", "rect": [140, 8, 100, 32], "focus": false, "icon": "open", "icon_only": false, "dropdown": false, "icon_slot": [148, 16.0, 16, 16], "chevron_slot": null},
         {"type": "secondary button", "name": "State", "rect": [968, 8, 108, 32], "focus": false, "icon": "state", "icon_only": false, "dropdown": true, "icon_slot": [976, 16.0, 16, 16], "chevron_slot": [1052, 16.0, 16, 16]},
@@ -1137,7 +1137,7 @@
         {"type": "numeric input", "name": "1", "rect": [994, 839, 64, 32], "focus": false, "invalid": false},
         {"type": "secondary button", "name": "Loop playback", "rect": [1216, 828, 32, 32], "focus": false, "icon": "loop", "icon_only": true, "dropdown": false, "icon_slot": [1224.0, 836.0, 16, 16], "chevron_slot": null},
         {"type": "quiet button", "name": "Jobs 0", "rect": [1264, 828, 160, 32], "focus": false, "icon": "check", "icon_only": false, "dropdown": false, "icon_slot": [1272, 836.0, 16, 16], "chevron_slot": null},
-        {"type": "secondary button", "name": "Particle count", "rect": [1096, 280, 328, 32], "focus": false, "icon": null, "icon_only": false, "dropdown": true, "icon_slot": null, "chevron_slot": [1400, 288.0, 16, 16]},
+        {"type": "secondary button", "name": "Population counts", "rect": [1096, 280, 328, 32], "focus": false, "icon": null, "icon_only": false, "dropdown": true, "icon_slot": null, "chevron_slot": [1400, 288.0, 16, 16]},
         {"type": "secondary button", "name": "Export numerical data\u2026", "rect": [1096, 560, 328, 32], "focus": false, "icon": "export", "icon_only": false, "dropdown": false, "icon_slot": [1104, 568.0, 16, 16], "chevron_slot": null},
         {"type": "secondary button", "name": "Return to viewport", "rect": [1096, 604, 328, 32], "focus": false, "icon": "view", "icon_only": false, "dropdown": false, "icon_slot": [1104, 612.0, 16, 16], "chevron_slot": null},
         {"type": "quiet button", "name": "Request details", "rect": [1096, 656, 328, 32], "focus": false, "icon": "right", "icon_only": false, "dropdown": false, "icon_slot": [1104, 664.0, 16, 16], "chevron_slot": null},
@@ -1185,7 +1185,7 @@
         {"text": "Source units", "rect": [210, 882, 69.61, 12], "role": "body"},
         {"text": "No active jobs", "rect": [1280, 882, 78.87, 12], "role": "body"},
         {"text": "Results", "rect": [1096, 250, 56.66, 16], "role": "heading"},
-        {"text": "Particle count", "rect": [1108, 288.75, 90.17, 14], "role": "body"},
+        {"text": "Population counts", "rect": [1108, 288.75, 119.32, 14], "role": "body"},
         {"text": "Source", "rect": [1096, 328, 38.49, 12], "role": "body"},
         {"text": "demo.ssc", "rect": [1208, 328, 61.95, 14], "role": "body"},
         {"text": "Object", "rect": [1096, 356, 36.7, 12], "role": "body"},
@@ -1201,8 +1201,7 @@
         {"text": "Export numerical data\u2026", "rect": [1128, 568.75, 156.68, 14], "role": "body"},
         {"text": "Return to viewport", "rect": [1128, 612.75, 122.8, 14], "role": "body"},
         {"text": "Request details", "rect": [1128, 664.75, 100.5, 14], "role": "body"},
-        {"text": "Particle count", "rect": [40, 128, 121.58, 18], "role": "heading"},
-        {"text": "Population counts", "rect": [40, 160, 119.32, 14], "role": "body"},
+        {"text": "Population counts", "rect": [40, 128, 159.52, 18], "role": "heading"},
         {"text": "Complete", "rect": [932, 129.75, 54.4, 12], "role": "body"},
         {"text": "Particles", "rect": [40, 206, 47.73, 12], "role": "body"},
         {"text": "64", "rect": [56, 240, 15.66, 13], "role": "numeric"},
@@ -1255,7 +1254,7 @@
         {"text": "Recorded time", "slot": [826, 839, 124, 32], "ink_center_y": 853.0, "baseline": 858.25},
         {"text": "1", "slot": [1004, 839, 44, 32], "ink_center_y": 855.0, "baseline": 859.75},
         {"text": "Jobs 0", "slot": [1296, 828, 116, 32], "ink_center_y": 843.25, "baseline": 847.25},
-        {"text": "Particle count", "slot": [1108, 280, 288, 32], "ink_center_y": 294.0, "baseline": 299.25},
+        {"text": "Population counts", "slot": [1108, 280, 288, 32], "ink_center_y": 295.75, "baseline": 299.25},
         {"text": "Complete", "slot": [1124, 448, 54.3984375, 24], "ink_center_y": 459.75, "baseline": 462.75},
         {"text": "Export numerical data\u2026", "slot": [1128, 560, 284, 32], "ink_center_y": 575.75, "baseline": 579.25},
         {"text": "Return to viewport", "slot": [1128, 604, 284, 32], "ink_center_y": 619.75, "baseline": 623.25},
@@ -1369,7 +1368,7 @@
     {
       "name": "components",
       "size": [1440, 900],
-      "sha256": "1a23d993677659a441c7f1d2f1bd7789924bf525a9f0555aa5a3e38c52ce52f7",
+      "sha256": "c5f1ba0b500bb5499d9bb8f0bb331d7ddc7f28af7010038cedd5c5df06820aa4",
       "controls": [
         {"type": "primary button", "name": "Apply", "rect": [40, 164, 168, 32], "focus": true, "icon": null, "icon_only": false, "dropdown": false, "icon_slot": null, "chevron_slot": null},
         {"type": "secondary button", "name": "Reset color", "rect": [224, 164, 152, 32], "focus": false, "icon": null, "icon_only": false, "dropdown": false, "icon_slot": null, "chevron_slot": null},
@@ -1383,7 +1382,7 @@
         {"type": "disabled button", "name": "Apply", "rect": [496, 750, 388, 32], "focus": false, "icon": null, "icon_only": false, "dropdown": false, "icon_slot": null, "chevron_slot": null}
       ],
       "labels": [
-        {"text": "Midnight scientific", "rect": [40, 32, 162.62, 18], "role": "heading"},
+        {"text": "Midnight Scientific", "rect": [40, 32, 163.65, 18], "role": "heading"},
         {"text": "Control and copy review", "rect": [40, 64, 157.75, 14], "role": "body"},
         {"text": "Actions and menus", "rect": [40, 124, 148.71, 16], "role": "heading"},
         {"text": "Apply", "rect": [52, 172.75, 36.91, 14], "role": "body"},

@@ -62,12 +62,14 @@ compare the images at 100% native size. The
    membership and explicit source binding. Check the exact ID, inclusive range,
    units, support, full-result export and Return to viewport.
    Confirm the Analysis type selector has no repeated Population counts heading
-   and the immediate action says Use full range.
+   and the immediate action says Use full range. Both analysis and results use
+   Population counts consistently.
 6. Inspect the component sheet: primary versus secondary actions, menus, icons,
    focus clearance, readable disabled reason, persistent error and old probe time.
    Confirm that short details supplement rather than conceal essential warnings.
 7. Review sentence case, neutral names (Particles, Scalar field, Mesh) and the
-   old/revised wording table. Confirm desktop keyboard and mouse/trackpad scope;
+   old/revised wording table. Preserve the proper name Midnight Scientific and
+   the top-level State menu. Confirm desktop keyboard and mouse/trackpad scope;
    compact is not a mobile design. Icons remain provisional, with native quality
    review in UX3 and final artwork refinement in UX8. Decide
    whether this visual/copy direction is acceptable before authorizing production
