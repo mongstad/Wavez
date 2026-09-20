@@ -56,7 +56,7 @@ func run() -> void:
 	for time in [1.0,0.0,.5]:
 		viewer._seek_time(time)
 		check(not layers.probe_marker.visible and layers.probe_label.text == result,"Seek keeps hidden last explicit probe")
-	viewer.inspection_paused = false;viewer.playing = true;viewer.time_mode = "physical";viewer.physical_rate = .2
+	viewer.inspection_paused = false;viewer.playing = true;viewer.physical_rate = .2
 	layers.tick(.1);viewer.playing = false
 	check(viewer.requested_time > .5 and not layers.probe_marker.visible and layers.probe_label.text == result,"Playback advances without resurrecting or recomputing marker")
 	viewer._seek_time(1.0);layers.probe_selected_volume()

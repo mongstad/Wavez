@@ -42,8 +42,7 @@ func run() -> void:
 	var result := {"capture":job.capture,"format":view.generic_reader.format,"backend":RenderingServer.get_current_rendering_method(),"device":RenderingServer.get_video_adapter_name(),"source_frames":view.frame_count,"source_size":view.generic_reader.file.get_length(),"source_stamp":view.generic_reader.source_stamp,"hidden_scientific_rendering":true,"cases":[]}
 	for config in job.cases:
 		view.inspection_paused = false;view.playing = false
-		view.time_mode = config.get("time_mode","physical")
-		view.playback_fps = float(config.get("fps",1));view.physical_rate = float(config.get("rate",1))
+		view.physical_rate = float(config.get("rate",1))
 		view.scene_layers.sample(float(config.get("start_time",16)))
 		if view.overlay_visible != config.get("inspector",true):view._toggle_overlay()
 		for i in range(8):await process_frame

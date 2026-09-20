@@ -47,13 +47,12 @@ func run() -> void:
 	view.scene_layers.tick(.1)
 	if view.scene_layers.is_buffering():await await_ready(view)
 	check(control.direction == -1 and view.requested_time<2.125,"reverse physical playback builds backward window")
-	view.time_mode = "index";view.playback_fps = -1
 	view.scene_layers.tick(.2)
 	if view.scene_layers.is_buffering():await await_ready(view)
-	check(view.phase>=0 and view.phase<=1,"reverse frame-index playback keeps valid union phase")
+	check(view.phase>=0 and view.phase<=1,"reverse recorded-time playback keeps valid union phase")
 	view.playing = false;check(view.scene_layers.seek(0),"replay seek to start")
 	check(await await_ready(view) and view.requested_time==0,"replay commits source start")
-	view.scene_loop_playback = true;view.time_mode = "physical";view.physical_rate = 1
+	view.scene_loop_playback = true;view.physical_rate = 1
 	check(await sample(view,3.9,true),"loop starting sample")
 	view.playing = true;view.scene_layers.tick(.2)
 	if view.scene_layers.is_buffering():await await_ready(view)

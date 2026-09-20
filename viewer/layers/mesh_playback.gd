@@ -54,7 +54,7 @@ func request(time: float, budget: int) -> Array:
 		token = signature;request_signature = "";staged.clear()
 		cpu_limit = mini(128*Memory.MIB,int(Memory.memory_headroom().safe_cache_bytes)/4)
 	var targets: Array = [];var future: Array = []
-	var direction := -1 if (viewer.physical_rate if viewer.time_mode == "physical" else viewer.playback_fps) < 0 else 1
+	var direction := -1 if viewer.physical_rate < 0 else 1
 	for id in layers.states:
 		if not layers.views[id] is MeshView or not layers.states[id].visible:continue
 		var point: Dictionary = layers.reader.bracket(id,time)
@@ -128,5 +128,5 @@ func _update_ui() -> void:
 	var status := worker.status()
 	if error.is_empty():error = status.error
 	if is_instance_valid(label):label.text = ("Preparing meshes…" if buffering else "Mesh prefetch ready")+" • %.1f / %.0f MiB CPU\n" % [status.bytes/float(Memory.MIB),cpu_limit/float(Memory.MIB)]+error
-	if is_instance_valid(viewer.play_button):viewer.play_button.disabled = buffering or layers.is_buffering()
+	if is_instance_valid(viewer.play_button):viewer.play_button.disabled = (buffering or layers.is_buffering()) and not viewer.playing
 func profile_report() -> Dictionary:return {"enabled":enabled,"buffering":buffering,"cache":worker.status(),"gpu_uploads":uploads,"staged_meshes":staged.size(),"error":error}

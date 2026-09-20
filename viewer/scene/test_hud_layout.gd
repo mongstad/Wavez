@@ -17,18 +17,17 @@ func run() -> void:
 	var rows: Array = [];var failures := 0
 	for width in [290,366,600]:
 		viewer.panel_width = width;viewer._layout_inspector(viewer.resize_handle)
-		for mode in ["physical","index"]:
-			viewer._set_time_mode(mode)
+		for navigation in ["time","sample"]:
 			var heights: Array = [];var controls: Array = []
 			for t in [6.9,6.95,7.0,7.05,9.9,9.95,10.0]:
-				if mode == "physical": viewer._seek_time(t)
+				if navigation == "time": viewer._seek_time(t)
 				else:
 					viewer._seek_frame(int(round(t*10)))
 					viewer._render_current(0.0 if t == floor(t*10)/10 else 0.5);viewer._update_hud()
 				await settle()
 				heights.append(viewer.hud.size.y);controls.append(viewer.status_label.position.y)
 			if heights.max() != heights.min() or controls.max() != controls.min(): failures += 1
-			rows.append({"width":width,"mode":mode,"hud_heights":heights,"control_positions":controls})
+			rows.append({"width":width,"navigation":navigation,"hud_heights":heights,"control_positions":controls})
 	DirAccess.make_dir_recursive_absolute(out)
 	preload("res://video/render_job.gd").write_json(out.path_join("before.json" if baseline else "after.json"),{"cases":rows,"layout_changes":failures})
 	root.get_texture().get_image().save_png(out.path_join("before.png" if baseline else "after.png"))

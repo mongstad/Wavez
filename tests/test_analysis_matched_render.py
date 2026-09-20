@@ -43,6 +43,8 @@ class MatchedRenderTests(unittest.TestCase):
         self.assertEqual([unpack(j['exact_timing'])['playback_rate'] for j in jobs],[1.,2.])
         self.assertEqual([j['state']['manual_min'] for j in jobs],[0.,-.5]);self.assertEqual([j['state']['manual_max'] for j in jobs],[1.,0.])
         for j in jobs:
+            self.assertNotIn("time_mode", j["state"])
+            self.assertNotIn("playback_fps", j["state"])
             for key in self.camera:self.assertEqual(unpack(j['exact_state'])[key],self.camera[key])
             self.assertEqual(hashlib.sha256(Path(j['inspection_path']).read_bytes()).hexdigest(),j['inspection_sha256'])
             state=unpack(json.loads(Path(j['inspection_path']).read_text())['payload'])

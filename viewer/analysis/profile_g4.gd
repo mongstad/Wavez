@@ -36,7 +36,7 @@ func run() -> void:
 			view.scene_layers.states[id].visible = config.get("fields",false)
 			if view.scene_layers.states[id].has("isosurface"):view.scene_layers.states[id].isosurface = false
 		for id in view.guide_visibility:view.guide_visibility[id] = false
-		view.scene_layers.cancel_iso();view._apply_geometry();view.time_mode = "physical";view.physical_rate = 1
+		view.scene_layers.cancel_iso();view._apply_geometry();view.physical_rate = 1
 		var control = null;var ready_ms := 0.0;var worker_reply := {};var request := {};var source := {};var export_reply := {};var warm_ready_ms := 0.0
 		if config.get("analysis",false) or config.get("stored",false) or config.get("overlay",false) or config.get("export",false):
 			control = view.get("selection_controller");var started := Time.get_ticks_usec();control.bind_source()

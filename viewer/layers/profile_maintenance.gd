@@ -40,7 +40,7 @@ func run() -> void:
 		view.camera.look_at(view.camera_target,Vector3.BACK)
 		view.scene_layers.sample(0.)
 	view.camera_distance = view.camera.position.distance_to(view.camera_target)
-	view.time_mode = "physical";view.physical_rate = 1;view.scene_loop_playback = true
+	view.physical_rate = 1;view.scene_loop_playback = true
 	var controller = view.scene_layers.playback;controller.direction = 1
 	controller.begin(0.,controller.window_pairs)
 	began = Time.get_ticks_usec()

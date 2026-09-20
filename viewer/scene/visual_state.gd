@@ -1,6 +1,6 @@
 extends RefCounted
 # One visual snapshot/apply path. RenderJob retains backward-compatible wrappers.
-const STATE_KEYS := ["mode", "observer_scale", "point_scale", "exposure", "intensity_floor", "clean_view", "slice_enabled", "slice_x", "color_channel", "size_channel", "brightness_channel", "colormap_name", "auto_range", "logarithmic", "invert_map", "clamp_map", "manual_min", "manual_max", "show_legend", "brightness_scale", "gamma", "panel_width", "trails_enabled", "orbit_enabled", "orbit_speed", "yaw", "pitch", "camera_distance", "playback_fps", "overlay_visible", "normalization_mode", "cyclic", "range_interval", "channel_preferences", "time_mode", "physical_rate", "particle_layer_visible", "geometry_override", "guide_visibility"]
+const STATE_KEYS := ["mode", "observer_scale", "point_scale", "exposure", "intensity_floor", "clean_view", "slice_enabled", "slice_x", "color_channel", "size_channel", "brightness_channel", "colormap_name", "auto_range", "logarithmic", "invert_map", "clamp_map", "manual_min", "manual_max", "show_legend", "brightness_scale", "gamma", "panel_width", "trails_enabled", "orbit_enabled", "orbit_speed", "yaw", "pitch", "camera_distance", "overlay_visible", "normalization_mode", "cyclic", "range_interval", "channel_preferences", "physical_rate", "particle_layer_visible", "geometry_override", "guide_visibility"]
 
 static func vec(v: Vector3) -> Array: return [v.x, v.y, v.z]
 static func vector(a: Array) -> Vector3: return Vector3(a[0], a[1], a[2])

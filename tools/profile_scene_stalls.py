@@ -38,9 +38,9 @@ def analyze(path, threshold=50.0):
         changes = [r for r in rows if r.get('particle_pair_before') != r.get('particle_pair_after')]
         intervals = [(b['wall_start_us']-a['wall_start_us'])/1e6 for a,b in zip(slow,slow[1:])]
         elapsed = (case['wall_end_us']-case['wall_start_us'])/1e6
-        summary = dict(case=name, time_mode=case['config'].get('time_mode','physical'),
+        summary = dict(case=name,
                        playing=case['config'].get('playing', True),
-                       configured_rate=case['config'].get('fps',1) if case['config'].get('time_mode')=='index' else case['config'].get('rate',1),
+                       configured_rate=case['config'].get('rate',1),
                        seconds=elapsed, callbacks=len(rows), stall_threshold_ms=threshold,
                        stalls=len(slow), pair_changes=len(changes) if pair_known else None,
                        stalls_with_pair_change=sum(r in changes for r in slow) if pair_known else None,
@@ -96,8 +96,7 @@ def main():
             parser.error('Choose a start time/duration with room for the fastest case through start+2*seconds')
     out=args.output_dir.resolve();out.mkdir(parents=True,exist_ok=False)
     cases=[dict(name='paused',playing=False),dict(name='physical_slow',rate=.25),
-           dict(name='physical_fast',rate=2),dict(name='frames_slow',time_mode='index',fps=1),
-           dict(name='frames_fast',time_mode='index',fps=4),
+           dict(name='physical_fast',rate=2),
            dict(name='paused_inspector_hidden',playing=False,inspector=False),
            dict(name='physical_slow_shifted_poll',rate=.25,tail_phase=.5)]
     for case in cases:case.update(seconds=args.seconds,start_time=args.start_time)

@@ -87,7 +87,7 @@ def prepare_input(parent,item,cache,allowed,common):
         bounds=[(request_float(v)-offset)/scale for v in common['range']]
         if not all(math.isfinite(v) for v in bounds) or bounds[1]<=bounds[0]:raise AnalysisError('invalid_comparison','Mapped source range is nonfinite or collapsed')
         visual=payload['base']['visual'];visual.update(copy.deepcopy(common['camera']))
-        visual.update(orbit_enabled=False,time_mode='physical',show_legend=False)
+        visual.update(orbit_enabled=False,show_legend=False)
         if kind=='particles':
             visual.update(color_channel=item['channel'],normalization_mode='manual',auto_range=False,manual_min=bounds[0],manual_max=bounds[1],colormap_name=common['colormap'],logarithmic=False,cyclic=False,invert_map=False,clamp_map=True)
         else:

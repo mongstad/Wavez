@@ -28,7 +28,7 @@ func run() -> void:
 	view.camera.near = .001;view.camera.far = 100;view.camera.fov = 42
 	view.camera_target = Vector3(2,.5,.45);view.camera.position = view.camera_target+Vector3(3.5,-7,3.5)
 	view.camera.look_at(view.camera_target,Vector3.BACK);view.camera_distance = view.camera.position.distance_to(view.camera_target)
-	view.time_mode = "physical";view.physical_rate = job.rate;view.scene_loop_playback = true
+	view.physical_rate = job.rate;view.scene_loop_playback = true
 	var target: float = .99 if job.rate < 0 else 0.0
 	began = Time.get_ticks_usec()
 	while Time.get_ticks_usec()-began < 30000000:

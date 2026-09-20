@@ -292,7 +292,6 @@ func _process_profiled() -> void:
 			if definitions.is_empty():overlay.clear();overlay_key = key;return
 			requested_overlay_key = key
 			var args := {"selections":definitions,"time":_time(),"limit":int(state.overlay.maximum),"visual":_visual()}
-			if viewer.scene_layers == null and viewer.time_mode == "index":args.erase("time");args.index = viewer.current_index
 			_request("resolve_selections",args)
 	else:
 		overlay.visible = true;overlay.update_time(_time(),viewer,state)
@@ -309,7 +308,6 @@ func await_committed_overlay(timeout_ms := 150000, cancelled_callback: Callable 
 	if not source.has("sha256"):return false
 	jobs.cancel();operation = "";last_resolution = [];failed_overlay_key = "";overlay_key = "";requested_overlay_key = _current_key()
 	var arguments := {"selections":definitions,"time":expected_time,"limit":int(state.overlay.maximum),"visual":_visual()}
-	if viewer.scene_layers == null and viewer.time_mode == "index":arguments.erase("time");arguments.index = viewer.current_index
 	_request("resolve_selections",arguments)
 	var began := Time.get_ticks_msec()
 	while Time.get_ticks_msec()-began < timeout_ms:
@@ -459,7 +457,6 @@ func _pick(pixel: Vector2) -> void:
 	var oid: String = target.get_item_metadata(target.selected)
 	var mode: String = ["","click","polygon","polygon","mesh_face","mesh_point","mesh_vertex","probe","face","point","source_probe"][tool.selected]
 	var arguments := {"object":oid,"mode":mode,"time":_time(),"camera":_camera(),"point":[pixel.x,pixel.y],"radius":8,"occlusion":"opaque" if occlusion.selected == 1 else "through","key":_key(),"name":name_input.text}
-	if viewer.scene_layers == null and viewer.time_mode == "index":arguments.erase("time");arguments.index = viewer.current_index
 	if tool.selected == 2:arguments.polygon = [[drag_start.x,drag_start.y],[pixel.x,drag_start.y],[pixel.x,pixel.y],[drag_start.x,pixel.y]]
 	if tool.selected == 3:arguments.polygon = pick_points
 	if tool.selected in [4,5,7,8,9,10]:

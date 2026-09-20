@@ -22,7 +22,7 @@ func sequence(source: String, mode: int, hidden: bool) -> Array:
 	view._set_clean(true);view.particle_layer_visible = not hidden
 	for id in view.scene_layers.states:view.scene_layers.states[id].visible = not hidden
 	view.scene_layers.sample(0)
-	view.time_mode = "physical";view.physical_rate = .75;view.playing = true
+	view.physical_rate = .75;view.playing = true
 	view.tail_poll = 0;view.display_accum = 0
 	Profile.reset();Profile.enabled = mode>0;Profile.trace_enabled = mode==2
 	var values: Array = []

@@ -166,7 +166,7 @@ func pump() -> bool:
 	if layers.reader.bracket(layers.particle_id,target_time).is_empty():
 		worker.cancel();buffering = false;pending_time = null;last_target = -1;_update_ui();return true
 	if viewer.playing:
-		var rate: float = viewer.physical_rate if viewer.time_mode == "physical" else viewer.playback_fps
+		var rate: float = viewer.physical_rate
 		var next_direction := -1 if rate < 0 else 1
 		if next_direction != direction:direction = next_direction;last_target = -1;worker.cancel()
 	if not layers.particles_required():suspend();_update_ui();return true
@@ -218,7 +218,7 @@ func _update_ui(status: Dictionary = {}) -> void:
 	if text != last_ui:
 		if is_instance_valid(label):label.text = text
 		last_ui = text
-	if is_instance_valid(viewer.play_button):viewer.play_button.disabled = layers.is_buffering()
+	if is_instance_valid(viewer.play_button):viewer.play_button.disabled = layers.is_buffering() and not viewer.playing
 func commit(pair: Dictionary, point: Dictionary) -> void:
 	var started := Profile.begin()
 	worker.pin(point.a);active_pair = pair

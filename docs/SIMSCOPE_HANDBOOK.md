@@ -24,7 +24,8 @@ Earlier documents sometimes append new checkpoints above obsolete scope tables. 
 
 The accepted [issue-41 shell](UX3_SHELL.md) hosts the
 [issue-42 persistent transport](UX3_TRANSPORT.md). The
-[issue-43 status and Jobs surface](UX3_STATUS.md) is pending owner review.
+[issue-43 status and Jobs surface](UX3_STATUS.md) is owner-merged.
+[Issue-49 media timing](UX3_MEDIA_TRANSPORT.md) is pending owner review.
 Use Open… in the command bar or empty view. Click the capture name for copyable
 source details. State routes to the existing scene/analysis recipe controls;
 Export routes to PNG, video and numerical export. View and the viewport buttons
@@ -46,15 +47,21 @@ until dismissed; a failed replacement retains the previous usable scene.
 ## Playback transport
 
 Previous sample, Play/Pause, Next sample and the **Sample index** slider are
-available without scrolling or opening the dock. **Union of recorded samples**
-means equal slider steps select union indices, not equal elapsed-time intervals.
+available without scrolling or opening the dock. Hover or drag the slider to see
+the sample index/count; there is no persistent index caption. Equal slider steps
+select indices in the union of recorded samples, not equal elapsed-time intervals.
 The transport stays visible when the dock is hidden and in fullscreen. It is
 64 logical pixels high at normal desktop width and reflows to two rows (104 pixels)
 below 1200 logical pixels, without shrinking text.
 
-**Displayed time** is read-only and follows the committed visible scene.
-Displayed and Requested time labels use five decimal places; tooltips retain exact
-values. Internal clocks, recipes and the Seek Target editor keep full precision. Choose
+The slider is flanked by one-decimal **elapsed playback time** and **total duration**.
+Values adapt from `43.7` to `1:12.4` at a minute and `1:04:27.3` at an hour,
+rounding to tenths before carrying into the next unit.
+Click the right value to toggle **remaining duration**, shown with a leading minus
+(unless rounded to `0.0`). Values are nominal playback seconds at 1×; they do not count wall-clock pauses/buffering or change with speed. Progress
+follows only the committed visible position. Hover elapsed for exact displayed
+source time and its declared unit; Requested time retains five-decimal presentation.
+Internal clocks, recipes and Seek Target keep full precision. Choose
 **Seek…** to open **Seek time**, edit **Target** in the declared time units (or
 Source units if unknown), then click **Go**. Typing or pressing Enter commits
 only the local number-field draft; it never seeks. **Cancel** submits nothing.
@@ -67,13 +74,16 @@ when different from the displayed clock. Changing a new draft does not replace
 that request. Independent layer source times and held/interpolated/unavailable
 states remain in Scene layers; they are not the common displayed clock.
 
-Time mode selects **Sample index** or **Recorded time**. Rate means **Samples per
-playback second** or **Recorded units per playback second**, respectively; hover
-for the full wording. Negative rates retain supported reverse playback. Loop
-uses the existing recorded-interval behavior. These rates do not set monitor FPS,
-output video FPS, or recorded units per video second. Preparation still holds the
-visible scene and disables Play until ready. Numeric/text focus suppresses viewport
-playback shortcuts. Existing recipe rate keys and session behavior are preserved.
+Recorded time is the only playback clock; there is no playback-mode selector.
+**Playback speed ×** uses 1× = 1 recorded unit per playback second. 0.5× halves
+and 2× doubles progression. Negative speed reverses, zero holds, and Loop wraps
+the recorded interval. Sample indices remain navigation/lookup positions, not
+another playback mode. These rates do not set render or output video FPS.
+Preparation still holds the visible scene. During active playback, Pause stays
+enabled and can stop playback while waiting for frames. Once paused, Play waits
+for readiness before resuming.
+Numeric/text focus suppresses viewport shortcuts. New recipes retain exact signed
+speed; obsolete mode/index-rate fields are removed without migration support.
 
 ## Status and Jobs
 
@@ -231,7 +241,7 @@ Manual RAM choices retain a rolling cache; **All particle pairs, if safe** reque
 
 Temporal fields request the current source sample and up to four future samples per visible field, with reverse and loop ordering. A CPU LRU retains source arrays and prepared image planes up to 128 MiB, reduced on low-RAM hosts; another 128 MiB is reserved for active/in-flight field data. Required visible fields must fit the admission budget or preparation reports a refusal. The ordinary decoded-cache control still governs synchronous reads; this independent worker cache remains enabled with a 0 MiB decoded cache.
 
-Each visible field holds its current texture and at most one staged future texture. Their per-texture budgets split the existing layer GPU share; this can increase preview stride on large fields. GPU uploads occur on the main thread, at most one per process frame, ahead of source transitions where possible. Texture binding and shader state changes remain on the main thread. Cold seeks and underflow hold the committed physical clock, disable Play and pause background analysis until the required samples are ready. Stale source/configuration work is discarded. Initial opening, scientific inspection and deterministic export remain synchronous; large textures can still cause an upload callback stall. See the [PERF-001/002 report](PERFORMANCE_MAINTENANCE_REPORT.md) for exact guards, bounds and retained 02B/03B measurements.
+Each visible field holds its current texture and at most one staged future texture. Their per-texture budgets split the existing layer GPU share; this can increase preview stride on large fields. GPU uploads occur on the main thread, at most one per process frame, ahead of source transitions where possible. Texture binding and shader state changes remain on the main thread. Cold seeks and underflow hold the committed physical clock, gate paused Play and pause background analysis until the required samples are ready. Stale source/configuration work is discarded. Initial opening, scientific inspection and deterministic export remain synchronous; large textures can still cause an upload callback stall. See the [PERF-001/002 report](PERFORMANCE_MAINTENANCE_REPORT.md) for exact guards, bounds and retained 02B/03B measurements.
 
 Mesh playback uses at most four future source pairs per visible mesh in the current direction, including reverse loops. Its CPU cache is capped at 128 MiB and further limited by safe physical-RAM headroom; displayed, in-flight and temporary data have additional conservative charges. A current mesh and at most one staged future mesh share each layer's GPU quota. At most one mesh upload runs per process frame. Cold seeks hold the committed clock until the pair is ready, and source/settings changes cancel obsolete preparation. GPU budget or float32 display refusals preserve the decoded scientific samples and report the unavailable preview.
 

@@ -8,6 +8,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from tests.g4.fixtures import scene
+from simscope_export import SceneCapture
 
 
 def main():
@@ -19,9 +20,13 @@ def main():
     a = p.parse_args()
     out = a.output_dir.resolve(); out.mkdir(parents=True, exist_ok=False)
     source = scene(out / 'scene.ssc')
-    sources = [source] + ([a.real_capture.resolve()] if a.real_capture else [])
+    offset = out/'offset.ssc'; single = out/'single.ssc'
+    for path, times in [(offset, [100.0, 100.25, 102.0]), (single, [72.5])]:
+        with SceneCapture(path, objects=[dict(id='p', kind='particles', units='m', identity='persistent_i8')], metadata={'time_unit': 'ms'}) as writer:
+            for t in times: writer.add_particles('p', t, [[0., 0., 0.]], ids=[1])
+    sources = [source, offset, single] + ([a.real_capture.resolve()] if a.real_capture else [])
     hashes = {str(s): hashlib.sha256(s.read_bytes()).hexdigest() for s in sources}
-    (out/'config.json').write_text(json.dumps({'source': str(source), 'real': str(a.real_capture.resolve()) if a.real_capture else ''}))
+    (out/'config.json').write_text(json.dumps({'source': str(source), 'offset': str(offset), 'single': str(single), 'real': str(a.real_capture.resolve()) if a.real_capture else ''}))
     cmd = [a.godot, '--path', str(ROOT/'viewer'), '--rendering-method', a.renderer,
            '--audio-driver', 'Dummy', '--resolution', '1440x900', '--script', 'ui/shell/test_viewer_transport.gd',
            '--', '--transport-output='+str(out)]

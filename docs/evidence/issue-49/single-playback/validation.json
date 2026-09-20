@@ -1,0 +1,23 @@
+{
+  "maintenance": {
+    "checks": 66,
+    "failures": 0
+  },
+  "playback_lifecycle": {
+    "checks": 51,
+    "failures": 0
+  },
+  "union_timeline": {
+    "checks": 28,
+    "failures": 0
+  },
+  "video_continuation": {
+    "assertions": 86,
+    "native_ui_checks_included": 46,
+    "failures": 0
+  },
+  "python_matched_render_and_recipes": {
+    "tests": 15,
+    "failures": 0
+  }
+}
