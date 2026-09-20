@@ -53,9 +53,11 @@ func run():
 	for time in [1.0,1.234567891234,2.25]:
 		go(ui,ui.FloatText.format_value(time)); await ready(viewer)
 		check(viewer.committed_sample.requested_time == time,"Go commits exact or fractional target " + str(time))
-		check(ui.requested.text.is_empty() and ui.displayed.text == "Displayed time %.5f" % time,"Displayed clock uses five decimals from committed sample")
-		check(ui.displayed.tooltip_text == "Displayed time " + ui.FloatText.format_value(time) + " s","Displayed tooltip retains exact float64 value")
+		check(ui.requested.text.is_empty() and ui.displayed.text == "%.1f" % time,"Elapsed playback uses one decimal from committed sample")
+		check(ui.displayed.tooltip_text.ends_with("Displayed source time " + ui.FloatText.format_value(time) + " s"),"Displayed tooltip retains exact float64 value")
 	check(viewer.scene_layers.current.field.a.time == 1,"Sparse field holds independent source time at fractional seek")
+	await media_checks(viewer,ui,config)
+	go(ui,"2.25"); await ready(viewer)
 	var camera: Transform3D = viewer.camera.transform
 	ui.open_seek(); ui.target.editor.grab_focus()
 	for code in [KEY_SPACE,KEY_LEFT,KEY_RIGHT,KEY_R]:
@@ -64,9 +66,15 @@ func run():
 	ui.seek_dialog.hide()
 	viewer.time_option.item_selected.emit(0); ui.refresh()
 	ui.rate.editor.text = "2"; ui.rate.commit()
-	check(viewer.time_mode == "index" and viewer.playback_fps == 2,"Sample-index rate routes to existing model")
+	check(viewer.time_mode == "index" and viewer.playback_fps == 24,"Sample-index rate routes to existing model")
 	viewer.timeline.value = 1; await ready(viewer)
 	check(viewer.current_index == 1 and viewer.committed_sample.requested_time == .5,"Slider selects a union timestamp")
+	check(viewer.timeline.tooltip_text == "Sample index 2 / 8" and not ui.index_hint.visible,"Index count is available on hover without a persistent label")
+	viewer.timeline.drag_started.emit(); ui.refresh(); await settle()
+	check(ui.index_hint.visible and ui.index_hint.text == "Sample index 2 / 8","Dragging exposes the index hint")
+	picture("index-drag")
+	viewer.timeline.drag_ended.emit(false)
+	check(not ui.index_hint.visible,"Index hint disappears on drag end")
 	ui.actions.get_child(2).pressed.emit(); await ready(viewer)
 	check(viewer.committed_sample.requested_time == 1,"Next selects next union sample")
 	ui.actions.get_child(0).pressed.emit(); await ready(viewer)
@@ -92,14 +100,19 @@ func run():
 	while not worker.status().get("test_barrier_waiting",false) and Time.get_ticks_msec()<deadline: await process_frame
 	check(worker.status().get("test_barrier_waiting",false),"Real cold-seek publication barrier reached")
 	ui.refresh()
-	check(viewer.committed_sample.requested_time == 0 and ui.requested.text == "Requested time 2.25123" and viewer.play_button.disabled,"Pending seek leaves displayed scene committed and exposes submitted target")
+	check(ui.displayed.text == "0.0" and ui.playback_timing().elapsed == 0 and viewer.committed_sample.requested_time == 0 and ui.requested.text == "Requested time 2.25123" and viewer.play_button.disabled,"Pending seek leaves displayed scene committed and exposes submitted target")
 	check(ui.pending_time() == 2.25123456789 and ui.requested.tooltip_text == "Requested time " + ui.FloatText.format_value(2.25123456789) + " s","Requested tooltip and controller retain exact submitted value")
+	ui.show_remaining = true; ui.refresh()
+	check(ui.duration.text == "-6.0","Cold seek remaining follows committed origin, not pending request")
 	await settle(); picture("buffering")
 	ui.open_seek(); ui.target.editor.text = "4.5"; ui.refresh()
 	check(ui.requested.text == "Requested time 2.25123" and viewer.committed_sample.requested_time == 0,"Editing replacement target does not replace submitted request")
 	ui.seek_dialog.confirmed.emit(); go(ui,"3.125")
 	worker.test_barrier = null; gate.post(); await ready(viewer)
 	check(viewer.committed_sample.requested_time == 3.125 and ui.requested.text.is_empty(),"Only latest rapid seek commits and clears requested readout")
+	check(ui.displayed.text == "3.1" and ui.duration.text == "-2.9","Latest committed seek updates elapsed and remaining")
+	await settle(); picture("remaining")
+	ui.show_remaining = false; ui.refresh()
 	for i in 12: viewer.scene_layers.tick(0); await process_frame
 	check(viewer.committed_sample.requested_time == 3.125,"Stale completions do not move clock backwards")
 	var state := Visual.snapshot(viewer)
@@ -122,7 +135,11 @@ func run():
 		check(ui.options.get_global_rect().end.x <= dimensions.x and viewer.time_option.size.x >= 120,"Mode/rate/loop fit without clipping " + str(dimensions))
 		check(ui.size.y == (64 if dimensions.x == 1440 else 104),"Transport height follows desktop/compact allocation " + str(dimensions))
 		viewer._toggle_overlay(); await settle(); check(ui.is_visible_in_tree(),"Dock hide preserves transport"); viewer._toggle_overlay(); await settle()
+		check(ui.displayed.get_global_rect().end.x <= viewer.timeline.get_global_rect().position.x and viewer.timeline.get_global_rect().end.x <= ui.duration.get_global_rect().position.x,"Elapsed and total flank the union slider")
 		layouts.append({"window":str(dimensions),"transport":str(ui.get_rect())}); picture("loaded-"+str(dimensions.x))
+	viewer._toggle_fullscreen(); await settle()
+	check(ui.is_visible_in_tree() and ui.duration.is_visible_in_tree() and not viewer.shell.bar.visible,"Interactive fullscreen retains media transport")
+	viewer._toggle_fullscreen(); await settle()
 	if not config.real.is_empty():
 		viewer._open_capture(config.real); viewer.playing = false; await ready(viewer)
 		var time: float = lerpf(viewer.generic_reader.frames[0].time,viewer.generic_reader.frames[-1].time,.37)
@@ -133,3 +150,42 @@ func run():
 	file.store_string(JSON.stringify({"checks":checks,"failures":failures,"layouts":layouts,"refresh_activity":activity},"\t")); file.close()
 	viewer.free(); await process_frame
 	print("TRANSPORT: %d checks, %d failures" % [checks,failures.size()]); quit(0 if failures.is_empty() else 1)
+
+func media_checks(viewer, ui, config):
+	for mode in ["physical","index"]:
+		go(ui,"0"); await ready(viewer); viewer._set_time_mode(mode); ui.refresh()
+		check(ui.displayed.text == "0.0",mode+" begins at zero elapsed")
+		var total: float = 6.0 if mode == "physical" else 7.0/12.0
+		check(is_equal_approx(ui.playback_timing().total,total),mode+" nominal duration follows existing normal rate")
+		ui.duration.pressed.emit()
+		check(ui.show_remaining and ui.duration.text == "-%.1f" % total,mode+" duration toggles to negative remaining")
+		ui.duration.pressed.emit()
+		check(not ui.show_remaining and ui.duration.text == "%.1f" % total,mode+" duration toggles back to total")
+		for speed in [-2.0,-0.5,0.0,0.5,1.0,2.0]:
+			go(ui,"2.25"); await ready(viewer); viewer._set_time_mode(mode); ui.refresh()
+			var before: float = ui.playback_timing().elapsed
+			check(is_equal_approx(before,2.25 if mode == "physical" else 4.25/12.0),mode+" fractional seek maps committed position")
+			ui.rate.editor.text = ui.FloatText.format_value(speed); ui.rate.commit(); ui.refresh()
+			check(is_equal_approx(viewer.physical_rate if mode == "physical" else viewer.playback_fps,speed*(1 if mode == "physical" else 12)),mode+" multiplier maps to existing rate "+str(speed))
+			viewer.playing = true; viewer.scene_layers.tick(.05); await ready(viewer); viewer.playing = false; ui.refresh()
+			check(is_equal_approx(ui.playback_timing().elapsed,before+.05*speed),mode+" speed affects actual committed motion "+str(speed))
+			check(is_equal_approx(ui.playback_timing().total,total),mode+" duration stays stable during playback and speed edits")
+		go(ui,"6"); await ready(viewer); viewer._set_time_mode(mode); ui.refresh()
+		check(ui.displayed.text == ui.duration.text,mode+" end elapsed equals total")
+		ui.duration.pressed.emit(); check(ui.duration.text == "0.0",mode+" remaining ends at zero without negative zero")
+		ui.duration.pressed.emit()
+	# An unchanged multiplier must never round-trip or alter an arbitrary saved rate.
+	viewer._set_time_mode("index"); viewer.playback_fps = 0.12345678912345678; ui.refresh()
+	var exact: float = viewer.playback_fps
+	ui.rate.commit(); check(viewer.playback_fps == exact,"Unchanged speed editor preserves exact controller rate")
+	var saved := Visual.snapshot(viewer); viewer.playback_fps = 12; Visual.apply(viewer,saved); ui.refresh()
+	check(viewer.playback_fps == exact and ui.rate.model == exact/12,"Recipe restores original exact index rate without redefining it")
+	for path in [config.offset,config.single]:
+		viewer._open_capture(path); viewer.playing = false; await ready(viewer)
+		check(ui.displayed.text == "0.0","Nonzero source origin still begins at zero elapsed")
+		go(ui,ui.FloatText.format_value(float(viewer.generic_reader.frames[-1].time))); await ready(viewer)
+		check(ui.displayed.text == ui.duration.text,"Offset/single-sample capture ends at total")
+		ui.duration.pressed.emit(); check(ui.duration.text == "0.0","Offset/single-sample remaining reaches zero")
+		ui.duration.pressed.emit()
+		check(ui.displayed.tooltip_text.ends_with(" ms"),"Scientific unit remains in source tooltip, not playback duration")
+	viewer._open_capture(config.source); viewer.playing = false; await ready(viewer)

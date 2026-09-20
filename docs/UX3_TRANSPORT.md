@@ -8,6 +8,10 @@ No acceptance-only branch/PR or historical-report rewrite was created.
 
 ## Behavior and ownership
 
+Issue #49 refines the current presentation as described in
+[Media-style playback timing](UX3_MEDIA_TRANSPORT.md). Original review metadata
+and validation below remain historical.
+
 The bottom transport is always reachable without dock scrolling, including with
 Hide panel/F1 and fullscreen. Normal desktop height is 64 logical pixels; below
 1200 logical pixels it reflows to two rows at 104 pixels. Text is not scaled down.
@@ -18,20 +22,22 @@ and adds Jobs to its options row. The validation below records the original #42
 review checkpoint; it has not been rewritten as new evidence.
 
 Previous sample / Play-Pause / Next sample, the discrete **Sample index** slider,
-index/count, **Union of recorded samples**, **Displayed time**, **Seek…**, time
-mode, rate and Loop are present. The existing buttons, slider and mode selector
+index/count on hover or while dragging, elapsed/total/remaining playback
+duration, **Seek…**, time mode, **Playback speed** and Loop are present. The existing buttons, slider and mode selector
 are reparented, retaining their signal connections and readiness ownership.
 Legacy playback-section/slider keys remain available to recipes under an invisible
 compatibility parent, without a duplicate scrolling UI. The offline renderer
 still constructs its original presentation and has no transport.
 
 The slider selects sorted union timestamp indices. Equal slider distances do not
-mean equal elapsed time. **Displayed time** reads only `committed_sample`; differing
-**Requested time** reads the active particle/field/mesh preparation controller's
-submitted target. Passive time labels show five decimal places, matching the HUD; tooltips retain
-the exact float64 values. Internal clocks, persisted state and Seek Target retain
-full precision. A draft never writes either readout. Source times and sampling
-status remain per-layer in Scene layers. Unknown units are not inferred.
+mean equal elapsed time. Playback duration is now a one-decimal presentation at
+nominal 1×, derived only from the committed visible clock. Exact displayed source
+time remains in the elapsed tooltip; differing **Requested time** reads the
+submitted target from the active particle/field/mesh preparation controller and
+uses five decimal places with an exact tooltip. Internal clocks, persisted state
+and Seek Target retain full precision. A draft never writes those readouts.
+Source times and sampling status remain per-layer in Scene layers. Unknown units
+are not inferred.
 
 **Seek… → Seek time → Target → Go** invokes the existing seek path. It uses the
 accepted float64 number-field component: finite scientific notation, full round-trip
@@ -42,12 +48,11 @@ the dialog. Go validates the recorded interval; capture replacement dismisses a
 stale form. Invalid input retains the last visible scene and the draft.
 
 Time mode uses existing `index` / `physical` state with visible labels **Sample
-index** / **Recorded time**. Rate edits target existing `playback_fps` / `physical_rate`;
-the copy says **Samples per playback second** / **Recorded units per playback
-second** (compact suffixes samples/s / units/s). Negative rates preserve supported
-reverse behavior. Loop invokes the same controller callback previously used by
-the inspector. These are not monitor FPS, output video FPS or recorded units per
-video second. No new recipe fields or persistence semantics are introduced.
+index** / **Recorded time**. Playback speed edits the same `playback_fps` /
+`physical_rate` through a relative multiplier against defaults 12 / 1. Negative
+multipliers preserve reverse behavior; unchanged numeric commits and restoration
+preserve exact saved rates. Loop invokes the same controller callback previously
+used by the inspector. No new recipe fields or persistence semantics are introduced.
 
 No union-axis, particle/mesh interpolation, scalar/field Hold, independent cadence,
 source timestamp, capture-byte, buffering, cache/preparation-window or video-time

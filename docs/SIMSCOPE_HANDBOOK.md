@@ -24,7 +24,8 @@ Earlier documents sometimes append new checkpoints above obsolete scope tables. 
 
 The accepted [issue-41 shell](UX3_SHELL.md) hosts the
 [issue-42 persistent transport](UX3_TRANSPORT.md). The
-[issue-43 status and Jobs surface](UX3_STATUS.md) is pending owner review.
+[issue-43 status and Jobs surface](UX3_STATUS.md) is owner-merged.
+[Issue-49 media timing](UX3_MEDIA_TRANSPORT.md) is pending owner review.
 Use Open… in the command bar or empty view. Click the capture name for copyable
 source details. State routes to the existing scene/analysis recipe controls;
 Export routes to PNG, video and numerical export. View and the viewport buttons
@@ -46,15 +47,20 @@ until dismissed; a failed replacement retains the previous usable scene.
 ## Playback transport
 
 Previous sample, Play/Pause, Next sample and the **Sample index** slider are
-available without scrolling or opening the dock. **Union of recorded samples**
-means equal slider steps select union indices, not equal elapsed-time intervals.
+available without scrolling or opening the dock. Hover or drag the slider to see
+the sample index/count; there is no persistent index caption. Equal slider steps
+select indices in the union of recorded samples, not equal elapsed-time intervals.
 The transport stays visible when the dock is hidden and in fullscreen. It is
 64 logical pixels high at normal desktop width and reflows to two rows (104 pixels)
 below 1200 logical pixels, without shrinking text.
 
-**Displayed time** is read-only and follows the committed visible scene.
-Displayed and Requested time labels use five decimal places; tooltips retain exact
-values. Internal clocks, recipes and the Seek Target editor keep full precision. Choose
+The slider is flanked by one-decimal **elapsed playback time** and **total duration**.
+Click the right value to toggle **remaining duration**, shown with a leading minus
+(unless rounded to `0.0`). Values are nominal playback seconds at 1× in the selected
+mode; they do not count wall-clock pauses/buffering or change with speed. Progress
+follows only the committed visible position. Hover elapsed for exact displayed
+source time and its declared unit; Requested time retains five-decimal presentation.
+Internal clocks, recipes and Seek Target keep full precision. Choose
 **Seek…** to open **Seek time**, edit **Target** in the declared time units (or
 Source units if unknown), then click **Go**. Typing or pressing Enter commits
 only the local number-field draft; it never seeks. **Cancel** submits nothing.
@@ -67,11 +73,13 @@ when different from the displayed clock. Changing a new draft does not replace
 that request. Independent layer source times and held/interpolated/unavailable
 states remain in Scene layers; they are not the common displayed clock.
 
-Time mode selects **Sample index** or **Recorded time**. Rate means **Samples per
-playback second** or **Recorded units per playback second**, respectively; hover
-for the full wording. Negative rates retain supported reverse playback. Loop
-uses the existing recorded-interval behavior. These rates do not set monitor FPS,
-output video FPS, or recorded units per video second. Preparation still holds the
+Time mode selects **Sample index** or **Recorded time**. **Playback speed ×** is
+relative to the existing defaults: 1× = 12 union samples per playback second in
+Sample index mode; 1× = 1 recorded unit per playback second in Recorded time mode.
+0.5× halves and 2× doubles that mode’s motion. Each mode retains its own saved rate;
+switching modes can change speed and nominal duration. Negative multipliers retain
+reverse playback, and zero holds position. Loop uses the existing recorded interval.
+These rates do not set monitor FPS, output video FPS, or units per video second. Preparation still holds the
 visible scene and disables Play until ready. Numeric/text focus suppresses viewport
 playback shortcuts. Existing recipe rate keys and session behavior are preserved.
 
