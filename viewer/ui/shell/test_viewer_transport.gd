@@ -117,7 +117,7 @@ func run():
 	ui.seek_dialog.hide()
 	for dimensions in [Vector2i(1440,900),Vector2i(1024,640)]:
 		root.size = dimensions; await settle(); viewer.shell.layout(); await settle()
-		check(ui.get_global_rect().end.y == dimensions.y-24 and ui.size.x == dimensions.x,"Transport fits native window " + str(dimensions))
+		check(ui.get_global_rect().end.y == dimensions.y-viewer.shell.status_ui.size.y and ui.size.x == dimensions.x,"Transport fits native window " + str(dimensions))
 		check(viewer.overlay_panel.get_rect().end.y <= ui.position.y,"Dock cannot cover persistent transport " + str(dimensions))
 		check(ui.options.get_global_rect().end.x <= dimensions.x and viewer.time_option.size.x >= 120,"Mode/rate/loop fit without clipping " + str(dimensions))
 		check(ui.size.y == (64 if dimensions.x == 1440 else 104),"Transport height follows desktop/compact allocation " + str(dimensions))

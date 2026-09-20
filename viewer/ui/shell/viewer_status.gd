@@ -19,11 +19,16 @@ var readiness := "No capture"
 var readiness_detail := "Open a capture to begin."
 var source_generation := -1
 var refresh_count := 0
+var live_details := ""
+var live_identity := ""
 
 func setup(owner_shell) -> void:
 	shell = owner_shell; viewer = shell.viewer; name = "ViewerStatus"
 	add_theme_stylebox_override("panel", shell.theme.box(&"surface.1", &"border.subtle", 0, 0, 0))
-	var row := HBoxContainer.new(); add_child(row)
+	var margin := MarginContainer.new(); add_child(margin)
+	for side in ["left","right"]: margin.add_theme_constant_override("margin_"+side,8)
+	for side in ["top","bottom"]: margin.add_theme_constant_override("margin_"+side,6)
+	var row := HBoxContainer.new(); margin.add_child(row)
 	badge = preload("res://ui/components/status_badge.gd").new(); row.add_child(badge)
 	badge.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	badge.label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -31,10 +36,8 @@ func setup(owner_shell) -> void:
 	badge.symbol.custom_minimum_size = Vector2(16,16)
 	badge.label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 	detail_button = Button.new(); detail_button.text = "Details…"; detail_button.flat = true; detail_button.theme_type_variation = "CompactButton"
-	for state in ["normal","hover","pressed","disabled","focus"]:
-		var style: StyleBox = shell.theme.get_stylebox(state,"CompactButton").duplicate()
-		style.content_margin_top = 0; style.content_margin_bottom = 0
-		detail_button.add_theme_stylebox_override(state,style)
+	detail_button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	badge.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	detail_button.pressed.connect(show_status); row.add_child(detail_button)
 	jobs_button = shell.button(shell.transport.options, "Jobs (0)", open_jobs, "export")
 	jobs_button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
@@ -52,6 +55,8 @@ func setup(owner_shell) -> void:
 	shell.button(actions,"Acknowledge failures",acknowledge,"close")
 	jobs_dialog.visibility_changed.connect(func():
 		if not jobs_dialog.visible: jobs_button.grab_focus())
+	shell.details.visibility_changed.connect(func():
+		if not shell.details.visible: live_details = "")
 	viewer.video_dialog.job_changed.connect(video_changed)
 	viewer.selection_controller.temporal.matched.job_failed.connect(func(message): remember("Matched views",message))
 	var jobs = viewer.selection_controller.jobs
@@ -67,11 +72,33 @@ func add_job(parent: Node, title: String, reopen: Callable, cancel: Callable) ->
 	var row := HBoxContainer.new(); box.add_child(row)
 	var label := Label.new(); label.text = title; label.theme_type_variation = "SectionTitle"; label.size_flags_horizontal = Control.SIZE_EXPAND_FILL; row.add_child(label)
 	var open_button: Button = shell.button(row,"Open…",func(): jobs_dialog.hide(); reopen.call())
-	var details_button: Button = shell.button(row,"Details…",func():
-		jobs_dialog.hide(); shell.show_details(title,job_rows[title].detail))
+	var details_button: Button = shell.button(row,"Details…",open_job_details.bind(title))
 	var cancel_button: Button = shell.button(row,"Cancel",cancel)
 	var text := Label.new(); text.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; text.custom_minimum_size.x = 550; box.add_child(text)
-	job_rows[title] = {"text":text,"cancel":cancel_button,"open":open_button,"details":details_button,"detail":""}
+	job_rows[title] = {"text":text,"cancel":cancel_button,"open":open_button,"details":details_button,"detail":"","active":false,"identity":""}
+
+func open_job_details(title: String) -> void:
+	refresh(); jobs_dialog.hide()
+	shell.show_details(title,job_rows[title].detail)
+	live_details = title if job_rows[title].active else ""
+	live_identity = job_rows[title].identity
+
+func refresh_job_details() -> void:
+	if live_details.is_empty(): return
+	if not shell.details.visible or shell.details.title != live_details:
+		live_details = ""; return
+	var row: Dictionary = job_rows[live_details]
+	# Do not let a replacement job take over a detail view for an earlier job.
+	if not live_identity.is_empty() and not row.identity.is_empty() and row.identity != live_identity:
+		live_details = ""; return
+	var text: TextEdit = shell.detail_text
+	if text.text != row.detail:
+		var vertical := text.scroll_vertical
+		var horizontal := text.scroll_horizontal
+		text.text = row.detail
+		text.scroll_vertical = vertical; text.scroll_horizontal = horizontal
+	# Publish the final state once, then leave a stable terminal record on screen.
+	if not row.active: live_details = ""
 
 func reopen_video() -> void:
 	var video = viewer.video_dialog
@@ -146,10 +173,11 @@ func refresh() -> void:
 	if badge.label.text != summary: badge.configure("error" if not failures.is_empty() else ("success" if readiness == "Ready" else "info"), summary)
 	tooltip_text = readiness_detail
 
-func update_row(title: String, text: String, active: bool, cancellable: bool, available := true) -> void:
+func update_row(title: String, text: String, active: bool, cancellable: bool, available := true, identity := "") -> void:
 	if active: active_count += 1
 	var row: Dictionary = job_rows[title]
 	row.detail = text
+	row.active = active or cancellable; row.identity = identity
 	var concise: String = text.get_slice("\n",0)
 	if jobs_dialog.visible and row.text.text != concise: row.text.text = concise
 	row.text.tooltip_text = text
@@ -162,28 +190,31 @@ func update_jobs() -> void:
 	var text: String = str(state.get("stage","No video export in this session.")).replace("_"," ").capitalize()
 	if video.pid > 0 and not video.last_progress.is_empty(): text += " — %s / %s frames" % [video.last_progress.get("current_frame",0),video.last_progress.get("total_frames",0)]
 	if not state.is_empty(): text += "\n"+str(state.get("detail",""))+"\nOutput: "+str(state.get("output",""))+"\nJob, intermediates and diagnostics: "+str(state.get("directory",""))
-	update_row("Video export",text,video.pid > 0 or video.preparing,video.pid > 0, not state.is_empty() or viewer.generic_reader != null)
+	update_row("Video export",text,video.pid > 0 or video.preparing,video.pid > 0, not state.is_empty() or viewer.generic_reader != null,video.active_job_path)
+	if state.get("stage") in ["complete","frames_ready","failed","cancelled"]: job_rows["Video export"].active = false
 	var selections = viewer.selection_controller
 	var jobs = selections.jobs
 	if analysis_request != jobs.background_id:
 		analysis_request = jobs.background_id; analysis_progress = "Preparing…"
-	update_row("Selections", "Resolving source data…" if jobs.pending else ("Cancelling…" if not jobs.foreground_cancel_id.is_empty() else selection_result), jobs.pending or not jobs.foreground_cancel_id.is_empty(),jobs.pending)
+	update_row("Selections", "Resolving source data…" if jobs.pending else ("Cancelling…" if not jobs.foreground_cancel_id.is_empty() else selection_result), jobs.pending or not jobs.foreground_cancel_id.is_empty(),jobs.pending,true,jobs.current_id if jobs.pending else jobs.foreground_cancel_id)
 	var analysis_active: bool = jobs.background_pending or not jobs.background_cancel_id.is_empty()
 	var analysis_text: String = jobs.background_operation.replace("_"," ").capitalize()+"\n"+analysis_progress if jobs.background_pending else ("Cancelling…" if analysis_active else analysis_result)
-	update_row("Analysis",analysis_text+"\n"+jobs.directory,analysis_active and not video.preparing,jobs.background_pending)
+	update_row("Analysis",analysis_text+"\n"+jobs.directory,analysis_active and not video.preparing,jobs.background_pending,true,jobs.background_id if jobs.background_pending else jobs.background_cancel_id)
 	var matched = selections.temporal.matched
-	update_row("Matched views",matched.status.text,matched.pid > 0,matched.pid > 0 or matched.preparing)
+	update_row("Matched views",matched.status.text,matched.pid > 0,matched.pid > 0 or matched.preparing,true,str(matched.prepared.get("path","")))
 	var layers = viewer.scene_layers
 	if layers != null:
 		observe("Isosurface",layers.iso_error)
-		update_row("Isosurface", (layers.iso_status.text if is_instance_valid(layers.iso_status) else "No extraction in this session.")+"\n"+layers.iso_directory,layers.iso_pid > 0,layers.iso_pid > 0)
+		update_row("Isosurface", (layers.iso_status.text if is_instance_valid(layers.iso_status) else "No extraction in this session.")+"\n"+layers.iso_directory,layers.iso_pid > 0,layers.iso_pid > 0,true,layers.iso_directory)
 	else: update_row("Isosurface","Open a capture first.",false,false,false)
+	refresh_job_details()
 	var caption := "Jobs (%d)" % active_count
 	if not failures.is_empty(): caption += " !"
 	if jobs_button.text != caption: jobs_button.text = caption
 	jobs_button.tooltip_text = "Reopen jobs, progress, cancellation and retained output details" + ("\nVideo export: "+str(state.get("stage","Preparing")) if video.pid > 0 or video.preparing else "")
 
 func show_status() -> void:
+	live_details = ""
 	jobs_dialog.hide()
 	var lines := [readiness,readiness_detail]
 	for owner in failures: lines.append("\n"+owner+" — Failed\n"+str(failures[owner]))
@@ -195,5 +226,6 @@ func show_status() -> void:
 	shell.show_details("Status details", "\n".join(lines))
 
 func layout(width: float, bottom: float) -> float:
-	position = Vector2(0,bottom-24); size = Vector2(width,24)
-	return 24.0
+	var height := maxf(40,get_combined_minimum_size().y)
+	position = Vector2(0,bottom-height); size = Vector2(width,height)
+	return height

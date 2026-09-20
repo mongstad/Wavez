@@ -1,0 +1,16 @@
+{
+  "activity": {
+    "counters": {},
+    "stages": {}
+  },
+  "checks": 67,
+  "failures": [],
+  "parent_directory": "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/issue-43-review1-compatibility/.simscope-export-1789931388-11733555",
+  "timings": {
+    "refresh_1000_ms": 15.583
+  },
+  "parent_close_acknowledged": true,
+  "source_hashes_unchanged": {
+    "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/issue-43-review1-compatibility/scene.ssc": "8541e3db9cc53baf943498bea793d1e183f1dc0fbe4c5de98a46522e922e68ac"
+  }
+}

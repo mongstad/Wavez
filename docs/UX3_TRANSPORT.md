@@ -13,7 +13,7 @@ Hide panel/F1 and fullscreen. Normal desktop height is 64 logical pixels; below
 1200 logical pixels it reflows to two rows at 104 pixels. Text is not scaled down.
 The dock and splitter stop above it, and the existing particle legend moves above
 it. The scientific viewport remains full-frame: no camera/projection change.
-Issue #43 now places the transport above a 24-pixel [status line](UX3_STATUS.md)
+Issue #43 now places the transport above a 40-pixel [status line](UX3_STATUS.md)
 and adds Jobs to its options row. The validation below records the original #42
 review checkpoint; it has not been rewritten as new evidence.
 

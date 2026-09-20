@@ -77,7 +77,7 @@ playback shortcuts. Existing recipe rate keys and session behavior are preserved
 
 ## Status and Jobs
 
-The 24-pixel bottom status line reports No capture, Preparing…, Ready or
+The 40-pixel bottom status line reports No capture, Preparing…, Ready or
 Unavailable from current readiness. A separate **Failed — details** notice
 survives unrelated informational updates and successful work. **Details…** opens
 copyable diagnostics; **Jobs → Acknowledge failures** dismisses retained notices.
@@ -89,6 +89,8 @@ Form validation remains beside its owning input; it is not a new global job.
 It remains reachable with the dock hidden and in interactive fullscreen. Open
 reopens the original video panel or the owning legacy form. Details exposes
 progress, output/intermediate directories and existing diagnostic information.
+An open active-job Details view updates as progress is published, then retains
+the final state without following later jobs.
 Cancel delegates to the operation's existing cancellation behavior; video and
 analysis cancellation may wait for acknowledgement. Closing Jobs or the video
 panel does not cancel. Minimizing the viewer does not stop video export; closing

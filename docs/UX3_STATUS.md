@@ -9,9 +9,11 @@ branch/PR was created. Historical reports/evidence remain unchanged.
 
 ## Presentation and ownership
 
-The shell now has a 24-logical-pixel status line below the existing 64/104-pixel
+The shell now has a 40-logical-pixel status line below the existing 64/104-pixel
 transport. A full 32-pixel **Jobs (N)** button joins the transport options.
-Both remain visible with the dock hidden and in interactive fullscreen.
+Both remain visible with the dock hidden and in interactive fullscreen. The status
+controls are vertically centered with padding for the unchanged theme focus ring,
+including its outside expansion; normal, hover and focus states fit in the strip.
 The scientific viewport, projection, rendering, sampling and clocks are unchanged.
 Offline workers do not construct the shell; exports retain their existing chrome
 and overlay contracts.
@@ -37,7 +39,12 @@ snapshot. Jobs does not read progress files or poll processes a second time.
 Running/preparing jobs reopen without resetting their forms. Idle video forms
 use the canonical open path to refresh the current capture timeline; their
 terminal diagnostics and separate Jobs snapshot remain available. Progress,
-completed output, job/intermediate paths and diagnostics are retained.
+completed output, job/intermediate paths and diagnostics are retained. An open
+Jobs Details view follows the same published in-memory row while its job is active,
+including video progress notifications. It displays the terminal state once and
+then stops updating; a later/replacement job cannot overwrite that record. Closing
+it or opening a different details surface also ends the subscription. No file
+polling or worker ownership is added.
 Cancellation acknowledgement, parent shutdown, overwrite refusal, separate
 worker architecture and FFmpeg recovery are unchanged. The worker taskbar entry
 remains a KDE/Wayland platform limitation.
@@ -58,7 +65,8 @@ CPU cost or universal performance.
 
 ## Validation and limitations
 
-See [focused evidence](evidence/issue-43/README.md) for final counts and recorded
+The [owner-review revision](evidence/issue-43/review-1/README.md) records focus
+containment and live Details coverage. See [original focused evidence](evidence/issue-43/README.md) for final counts and recorded
 failures/skips. Native tests run on Fedora KDE/Wayland with Godot 4.7.2 and NVIDIA
 RTX 3070 Ti, using small existing mixed-cadence fixtures, not solver reruns.
 Native window state plus real worker output validates minimized-parent export;

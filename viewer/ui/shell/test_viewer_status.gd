@@ -96,22 +96,44 @@ func run():
 	check(ui.refresh_count-count <= 4,"Idle status refresh is bounded to five per second")
 	for dimensions in [Vector2i(1440,900),Vector2i(1024,640)]:
 		root.size = dimensions; await settle(); viewer.shell.layout(); await settle()
-		check(ui.size.y == 24 and ui.get_rect().end.y == dimensions.y,"Status is a 24-pixel bottom line "+str(dimensions))
+		check(ui.size.y == 40 and ui.get_rect().end.y == dimensions.y,"Status is a 40-pixel bottom line "+str(dimensions))
 		check(ui.badge.label.size.x > 100,"Readiness text has visible space")
 		check(ui.jobs_button.get_global_rect().end.x <= dimensions.x and ui.jobs_button.size.y == 32,"Jobs stays inside transport with 32px action")
 		viewer._toggle_overlay(); check(ui.is_visible_in_tree() and ui.jobs_button.is_visible_in_tree(),"Hidden dock preserves status and Jobs"); viewer._toggle_overlay()
+		ui.detail_button.grab_focus(); await settle()
+		check(is_equal_approx(ui.detail_button.get_global_rect().get_center().y,ui.get_global_rect().get_center().y),"Details is vertically centered")
+		for style_name in ["normal","hover","pressed","focus"]:
+			var style: StyleBoxFlat = ui.detail_button.get_theme_stylebox(style_name)
+			var drawn: Rect2 = ui.detail_button.get_global_rect().grow_individual(style.expand_margin_left,style.expand_margin_top,style.expand_margin_right,style.expand_margin_bottom)
+			check(ui.get_global_rect().encloses(drawn),"Status contains complete "+style_name+" outline "+str(dimensions))
+		picture("focus-"+str(dimensions.x))
+		var motion := InputEventMouseMotion.new(); motion.position = ui.detail_button.get_global_rect().get_center(); Input.parse_input_event(motion); await settle()
+		picture("hover-focus-"+str(dimensions.x))
+		ui.detail_button.release_focus()
 		picture("loaded-"+str(dimensions.x))
 		ui.open_jobs(); await settle(); check(ui.jobs_dialog.size.x <= dimensions.x and ui.jobs_dialog.size.y <= dimensions.y,"Jobs dialog fits desktop")
 		picture("jobs-"+str(dimensions.x)); ui.jobs_dialog.hide()
 	root.size = Vector2i(1440,900); await settle()
-	var video = configure_video(viewer,"complete",config.ffmpeg)
+	var video = configure_video(viewer,"complete",config.ffmpeg,6)
 	video.start_export(); ui.refresh(); var pid: int = video.pid
 	check(pid > 0 and ui.active_count == 1,"UI launch is counted as one running video job")
 	video.hide(); ui.open_jobs(); ui.reopen_video(); check(video.pid == pid and video.visible,"Jobs reopens original running export without restarting")
-	video.hide(); ui.jobs_dialog.hide(); root.mode = Window.MODE_MINIMIZED
+	video.hide(); ui.open_jobs(); ui.job_rows["Video export"].details.pressed.emit()
+	var initial_detail: String = viewer.shell.detail_text.text
+	deadline = Time.get_ticks_msec()+15000
+	while video.pid > 0 and video.last_progress.get("stage", "") != "rendering" and Time.get_ticks_msec()<deadline: await create_timer(.01).timeout
+	check(video.pid > 0 and viewer.shell.detail_text.text != initial_detail and ui.live_details == "Video export","Open active Details updates from real published export progress")
+	check(viewer.shell.detail_text.text == ui.job_rows["Video export"].detail,"Details and Jobs overview use the same progress snapshot")
+	await settle(); picture("live-details")
+	root.mode = Window.MODE_MINIMIZED
 	await wait_video(video)
 	check(root.mode == Window.MODE_MINIMIZED and video.job_status.stage == "complete","Export completes while main viewer minimized and panel hidden")
 	root.mode = Window.MODE_WINDOWED; await settle(); ui.refresh()
+	check(ui.live_details.is_empty() and viewer.shell.detail_text.text.begins_with("Complete"),"Details publishes terminal completion and stops following")
+	var completed_detail: String = viewer.shell.detail_text.text
+	await create_timer(.3).timeout
+	check(viewer.shell.detail_text.text == completed_detail,"Terminal detail view remains stable")
+	viewer.shell.details.hide()
 	check(ui.active_count == 0 and FileAccess.file_exists(output.path_join("complete.mp4")),"Completion clears active count and retains output")
 	var terminal: Dictionary = video.job_status.duplicate(true)
 	ui.open_jobs(); await settle(); picture("jobs-complete")
@@ -123,10 +145,14 @@ func run():
 	video = configure_video(viewer,"complete",config.ffmpeg); video.start_export()
 	check(video.pid <= 0 and video.message.text.contains("exists"),"Overwrite refusal remains inline; no job starts")
 	video.hide()
+	ui.open_jobs(); ui.job_rows["Video export"].details.pressed.emit()
+	completed_detail = viewer.shell.detail_text.text
 	video = configure_video(viewer,"cancel",config.ffmpeg,6); video.start_export(); video.hide(); ui.refresh()
 	check(not ui.job_rows["Video export"].cancel.disabled,"Jobs exposes supported cancellation")
 	ui.job_rows["Video export"].cancel.pressed.emit(); await wait_video(video)
 	check(video.job_status.stage == "cancelled","Jobs cancel follows worker acknowledgement")
+	check(viewer.shell.detail_text.text == completed_detail,"A later export cannot overwrite the terminal Details view")
+	viewer.shell.details.hide()
 	check(DirAccess.dir_exists_absolute(video.active_directory),"Cancelled intermediates retained")
 	video = configure_video(viewer,"missing-ffmpeg",""); video.start_export(); video.hide(); await wait_video(video)
 	check(video.job_status.stage == "frames_ready","Missing FFmpeg retains PNG sequence")
