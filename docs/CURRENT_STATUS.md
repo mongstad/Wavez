@@ -1,10 +1,10 @@
 # Current status
 
-PR #45 / issue #41 owner-review revision: fullscreen hides the complete top command
-bar; maximized mode retains it. Hide panel affects only the contextual dock.
-Fedora KDE/Wayland compositor evidence and 97-check native reruns on each renderer
-are recorded in [the revision report](evidence/issue-41/review-1/README.md).
-Pending owner review; transport #42 and UX4 control migration remain out of scope.
+Issue #42 (UX3-TRANSPORT-001) adds the [persistent playback transport](UX3_TRANSPORT.md)
+to the accepted shell from owner-merged PR #45 (`884ea73`). The transport and
+explicit Seek time form are implemented **pending owner review**. Sampling,
+preparation controllers, independent layer cadences and video time domains retain
+their existing ownership. #43 status/Jobs and UX4 remain outside this issue.
 
 As of **2026-09-20**, including G4 and PERF-001/002 maintenance reviewed and accepted by the user. Scientific simulations were not rerun. Historical results identify their recorded checkpoints. PERF-003 mesh maintenance was also reviewed and accepted by the owner on 2026-09-13; implementation checkpoint `7974c78`.
 
@@ -274,15 +274,15 @@ on the Project board. The [architecture](UX_INFORMATION_ARCHITECTURE.md),
 provide the design inputs for separately authorized implementation slices.
 Original review reports, mockups and evidence preserve their review-time wording.
 
-## UX3-SHELL-001 — pending owner review
+## UX3 shell and transport
 
-Issue #41 implements the 48-pixel Midnight Scientific command bar and a single
-right-hand contextual dock. Four workspace choices become a compact chooser
-below 1200 logical pixels. Existing inspector controls remain in Scene, with
-bounded workspace entry points, capture-level context, resize/collapse/recovery,
-source details, empty/loading presentation and durable failed-open details.
+The shell was accepted and merged in PR #45. Issue #42 moves playback/time controls
+into a persistent bottom transport and adds a separate draft/Go/Cancel seek form.
+Displayed time remains the committed scientific clock while requested time shows
+a differing submitted target during buffering. See the [transport contract and
+validation](UX3_TRANSPORT.md) for implementation, evidence, limits and owner checks.
 
-The [shell contract and validation](UX3_SHELL.md) describe retained camera
-projection, source/state ownership, native layouts, tests, limits and exact owner
-checks. No persistent transport, Jobs surface, full workspace migration or UX3
-milestone acceptance is claimed. Stop for owner review of #41.
+The right dock retains its workspace entry points and scientific forms. Native
+fullscreen hides the command bar and retains camera controls, transport and mouse
+recovery. Status/Jobs, full workspace migration and UX3 milestone acceptance are
+not claimed. Historical reports/evidence retain their original review wording.

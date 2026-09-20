@@ -45,8 +45,10 @@ func build_ui(parent: Control) -> void:
 	mode.selected = ["adaptive","512","2048","8192","16384","full"].find(policy)
 	mode.item_selected.connect(func(index: int):set_policy(["adaptive","512","2048","8192","16384","full"][index]))
 	mode.tooltip_text = "Automatically preload captures that fit safely; otherwise use a rolling window. Manual RAM choices keep a rolling cache. GPU resources are limited to current particles and visible trails."
-	viewer._check(parent,"Loop recorded interval",viewer.scene_loop_playback,func(value: bool):viewer.scene_loop_playback = value;last_target = -1;worker.cancel())
+	if viewer.shell == null: viewer._check(parent,"Loop recorded interval",viewer.scene_loop_playback,set_loop)
 	label = Label.new();label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART;parent.add_child(label)
+func set_loop(value: bool) -> void:
+	viewer.scene_loop_playback = value;last_target = -1;worker.cancel()
 func settings() -> Dictionary:
 	return {"color_channel":viewer.color_channel,"size_channel":viewer.size_channel,"brightness_channel":viewer.brightness_channel,"normalization":viewer._effective_normalization(),"manual_min":viewer.manual_min,"manual_max":viewer.manual_max,"logarithmic":viewer.logarithmic,"clamp_map":viewer.clamp_map,"cyclic":viewer.cyclic,"invert_map":viewer.invert_map,"hidden_types":viewer.hidden_types.duplicate(),"trails":viewer.trails_enabled and not viewer.clean_view}
 func set_policy(value: String) -> void:

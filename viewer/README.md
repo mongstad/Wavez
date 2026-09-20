@@ -15,7 +15,10 @@ See the [Quickstart](../QUICKSTART.md), [Python API](../SIMSCOPE_API.md),
 
 The [production shell](../docs/UX3_SHELL.md) adds Open, State, Export, View and
 Help above one right-hand dock. Scene retains the inspector; the other workspaces
-provide entry points to its existing control groups.
+provide entry points to its existing control groups. The
+[persistent transport](../docs/UX3_TRANSPORT.md) keeps playback, union sample index,
+Displayed time, Seek…, mode, rate and Loop available below the viewport. Seek uses
+a separate Target and explicit Go/Cancel; typing never changes the visible time.
 
 F1 hides/restores the resizable dock and legend; Space pauses; Left/Right
 steps; mouse drag tumbles continuously through full revolutions in either direction;

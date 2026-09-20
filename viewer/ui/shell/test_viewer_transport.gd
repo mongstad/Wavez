@@ -1,0 +1,135 @@
+extends SceneTree
+const Viewer = preload("res://main.gd")
+const Visual = preload("res://scene/visual_state.gd")
+const Profile = preload("res://scene/playback_profile.gd")
+var checks := 0
+var failures: Array = []
+var output := ""
+var layouts: Array = []
+func _initialize(): run.call_deferred()
+func check(ok: bool, message: String):
+	checks += 1
+	if not ok: failures.append(message); push_error(message)
+func settle():
+	for i in 8: await process_frame
+	await RenderingServer.frame_post_draw
+func ready(viewer):
+	var deadline := Time.get_ticks_msec()+15000
+	while viewer.scene_layers.is_buffering() and Time.get_ticks_msec()<deadline:
+		viewer.scene_layers.tick(0); await process_frame
+	viewer.shell.transport.refresh()
+	check(not viewer.scene_layers.is_buffering(),"Preparation completes")
+func picture(name: String): root.get_texture().get_image().save_png(output.path_join(name+".png"))
+func go(ui, text: String):
+	ui.open_seek(); ui.target.editor.text = text; ui.seek_dialog.confirmed.emit(); ui.refresh()
+func run():
+	for arg in OS.get_cmdline_user_args():
+		if arg.begins_with("--transport-output="): output = arg.trim_prefix("--transport-output=")
+	var config: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(output.path_join("config.json")))
+	var viewer = Viewer.new(); viewer.playing = false; viewer.orbit_enabled = false; root.add_child(viewer); viewer.set_process(false)
+	var ui = viewer.shell.transport
+	check(viewer.play_button.disabled and ui.seek_button.disabled,"Empty transport explains unavailable playback")
+	viewer._open_capture(config.source); viewer.playing = false; await ready(viewer); await settle()
+	check(ui.is_ancestor_of(viewer.play_button) and ui.is_ancestor_of(viewer.timeline),"Existing playback controls moved into persistent transport")
+	check(not viewer.section_buttons.Playback.is_visible_in_tree(),"Legacy playback section no longer duplicates transport")
+	var before: Dictionary = viewer.committed_sample.duplicate(true)
+	ui.open_seek(); ui.target.editor.text = "2.25"; ui.refresh()
+	check(viewer.committed_sample == before and ui.requested.text.is_empty(),"Unsubmitted draft changes neither displayed nor requested time")
+	ui.seek_dialog.canceled.emit(); ui.seek_dialog.hide()
+	check(viewer.committed_sample == before and ui.pending_time() == null,"Cancel submits nothing")
+	ui.open_seek(); ui.target.editor.text = "NaN"; ui.submit_seek()
+	check(ui.seek_dialog.visible and ui.target.error_label.visible and viewer.committed_sample == before,"Invalid target retains draft and scene")
+	ui.target.editor.text = "99"; ui.submit_seek()
+	check(ui.target.error_label.visible and viewer.committed_sample == before,"Out of range target refused")
+	ui.target.editor.text = "1.0000000000000002"; ui.target.editor.grab_focus(); await settle()
+	var enter := InputEventKey.new(); enter.keycode = KEY_ENTER; enter.pressed = true; enter.window_id = ui.seek_dialog.get_window_id()
+	Input.parse_input_event(enter); await settle()
+	check(ui.target.model == 1.0000000000000002 and viewer.committed_sample == before,"Exact float64 local commit does not seek")
+	ui.target.editor.text = "2.5"
+	var escape := InputEventKey.new(); escape.keycode = KEY_ESCAPE; escape.pressed = true
+	ui.target._input_editor(escape)
+	check(ui.target.editor.text == ui.target.committed_text and ui.seek_dialog.visible,"Escape in number field restores committed draft")
+	ui.seek_dialog.hide()
+	for time in [1.0,1.234567891234,2.25]:
+		go(ui,ui.FloatText.format_value(time)); await ready(viewer)
+		check(viewer.committed_sample.requested_time == time,"Go commits exact or fractional target " + str(time))
+		check(ui.requested.text.is_empty() and ui.displayed.text == "Displayed time %.5f" % time,"Displayed clock uses five decimals from committed sample")
+		check(ui.displayed.tooltip_text == "Displayed time " + ui.FloatText.format_value(time) + " s","Displayed tooltip retains exact float64 value")
+	check(viewer.scene_layers.current.field.a.time == 1,"Sparse field holds independent source time at fractional seek")
+	var camera: Transform3D = viewer.camera.transform
+	ui.open_seek(); ui.target.editor.grab_focus()
+	for code in [KEY_SPACE,KEY_LEFT,KEY_RIGHT,KEY_R]:
+		var event := InputEventKey.new(); event.keycode = code; event.pressed = true; root.push_input(event)
+	check(not viewer.playing and viewer.committed_sample.requested_time == 2.25 and viewer.camera.transform == camera,"Focused target suppresses viewport playback/camera shortcuts")
+	ui.seek_dialog.hide()
+	viewer.time_option.item_selected.emit(0); ui.refresh()
+	ui.rate.editor.text = "2"; ui.rate.commit()
+	check(viewer.time_mode == "index" and viewer.playback_fps == 2,"Sample-index rate routes to existing model")
+	viewer.timeline.value = 1; await ready(viewer)
+	check(viewer.current_index == 1 and viewer.committed_sample.requested_time == .5,"Slider selects a union timestamp")
+	ui.actions.get_child(2).pressed.emit(); await ready(viewer)
+	check(viewer.committed_sample.requested_time == 1,"Next selects next union sample")
+	ui.actions.get_child(0).pressed.emit(); await ready(viewer)
+	check(viewer.committed_sample.requested_time == .5,"Previous selects previous union sample")
+	viewer.play_button.pressed.emit(); check(viewer.playing,"Play invokes existing controller")
+	viewer.play_button.pressed.emit(); check(not viewer.playing,"Pause invokes existing controller")
+	viewer.time_option.item_selected.emit(1); ui.refresh(); ui.rate.editor.text = "-0.5"; ui.rate.commit()
+	check(viewer.physical_rate == -.5 and viewer.time_mode == "physical","Recorded rate supports existing reverse behavior")
+	go(ui,"2.25"); await ready(viewer); viewer.playing = true; viewer.scene_layers.tick(.1); await ready(viewer); viewer.playing = false
+	check(viewer.committed_sample.requested_time < 2.25,"Reverse recorded playback moves backwards")
+	ui.loop.button_pressed = true
+	check(viewer.scene_loop_playback,"Loop control consumes existing loop behavior")
+	viewer.physical_rate = 1; go(ui,"5.9"); await ready(viewer); viewer.playing = true; viewer.scene_layers.tick(.2); await ready(viewer); viewer.playing = false
+	check(is_equal_approx(viewer.committed_sample.requested_time,.1),"Loop wraps recorded interval")
+	ui.loop.button_pressed = false
+	# Hold a real worker completion to prove draft/request/display separation and stale rejection.
+	go(ui,"0"); await ready(viewer)
+	var worker = viewer.scene_layers.playback.worker
+	var gate := Semaphore.new(); worker.test_barrier = gate
+	viewer.scene_layers.playback.invalidate(); viewer.manual_max += 1
+	go(ui,"2.25123456789")
+	var deadline := Time.get_ticks_msec()+10000
+	while not worker.status().get("test_barrier_waiting",false) and Time.get_ticks_msec()<deadline: await process_frame
+	check(worker.status().get("test_barrier_waiting",false),"Real cold-seek publication barrier reached")
+	ui.refresh()
+	check(viewer.committed_sample.requested_time == 0 and ui.requested.text == "Requested time 2.25123" and viewer.play_button.disabled,"Pending seek leaves displayed scene committed and exposes submitted target")
+	check(ui.pending_time() == 2.25123456789 and ui.requested.tooltip_text == "Requested time " + ui.FloatText.format_value(2.25123456789) + " s","Requested tooltip and controller retain exact submitted value")
+	await settle(); picture("buffering")
+	ui.open_seek(); ui.target.editor.text = "4.5"; ui.refresh()
+	check(ui.requested.text == "Requested time 2.25123" and viewer.committed_sample.requested_time == 0,"Editing replacement target does not replace submitted request")
+	ui.seek_dialog.confirmed.emit(); go(ui,"3.125")
+	worker.test_barrier = null; gate.post(); await ready(viewer)
+	check(viewer.committed_sample.requested_time == 3.125 and ui.requested.text.is_empty(),"Only latest rapid seek commits and clears requested readout")
+	for i in 12: viewer.scene_layers.tick(0); await process_frame
+	check(viewer.committed_sample.requested_time == 3.125,"Stale completions do not move clock backwards")
+	var state := Visual.snapshot(viewer)
+	Profile.enabled = true; Profile.reset()
+	for i in 100: ui.refresh()
+	var activity := Profile.report(); Profile.enabled = false
+	check(activity.stages.is_empty() and activity.counters.is_empty() and Visual.snapshot(viewer)==state,"UI refresh causes no scientific/preparation/decode/upload activity or state changes")
+	ui.rate.editor.text = "-0.125"; ui.rate.commit(); var saved := Visual.snapshot(viewer)
+	viewer.physical_rate = 2; var sample_before: Dictionary = viewer.committed_sample.duplicate(true)
+	Visual.apply(viewer,saved); ui.refresh()
+	check(ui.rate.model == -.125 and viewer.committed_sample == sample_before,"Recipe visual restoration updates rate silently without seek")
+	ui.open_seek(); await settle()
+	check(ui.seek_dialog.size.y < 400 and ui.seek_dialog.get_ok_button().get_global_rect().end.y <= ui.seek_dialog.size.y,"Seek stays focused and Go/Cancel remain within dialog")
+	picture("seek")
+	ui.seek_dialog.hide()
+	for dimensions in [Vector2i(1440,900),Vector2i(1024,640)]:
+		root.size = dimensions; await settle(); viewer.shell.layout(); await settle()
+		check(ui.get_global_rect().end.y == dimensions.y and ui.size.x == dimensions.x,"Transport fits native window " + str(dimensions))
+		check(viewer.overlay_panel.get_rect().end.y <= ui.position.y,"Dock cannot cover persistent transport " + str(dimensions))
+		check(ui.options.get_global_rect().end.x <= dimensions.x and viewer.time_option.size.x >= 120,"Mode/rate/loop fit without clipping " + str(dimensions))
+		check(ui.size.y == (64 if dimensions.x == 1440 else 104),"Transport height follows desktop/compact allocation " + str(dimensions))
+		viewer._toggle_overlay(); await settle(); check(ui.is_visible_in_tree(),"Dock hide preserves transport"); viewer._toggle_overlay(); await settle()
+		layouts.append({"window":str(dimensions),"transport":str(ui.get_rect())}); picture("loaded-"+str(dimensions.x))
+	if not config.real.is_empty():
+		viewer._open_capture(config.real); viewer.playing = false; await ready(viewer)
+		var time: float = lerpf(viewer.generic_reader.frames[0].time,viewer.generic_reader.frames[-1].time,.37)
+		go(ui,ui.FloatText.format_value(time)); await ready(viewer)
+		check(viewer.committed_sample.requested_time == time,"Frozen real capture fractional seek")
+		await settle(); picture("real-capture")
+	var file := FileAccess.open(output.path_join("report.json"),FileAccess.WRITE)
+	file.store_string(JSON.stringify({"checks":checks,"failures":failures,"layouts":layouts,"refresh_activity":activity},"\t")); file.close()
+	viewer.free(); await process_frame
+	print("TRANSPORT: %d checks, %d failures" % [checks,failures.size()]); quit(0 if failures.is_empty() else 1)

@@ -3,6 +3,7 @@ extends Control
 const ThemeSource = preload("res://ui/theme/simscope_theme.gd")
 const WORKSPACES = ["Scene", "Appearance", "Selection", "Analysis"]
 var viewer
+var transport
 var bar: PanelContainer
 var dock: PanelContainer
 var scroll: ScrollContainer
@@ -124,6 +125,8 @@ func setup(owner_viewer) -> void:
 	details.close_requested.connect(restore_focus); details.confirmed.connect(restore_focus)
 	viewer.resize_handle.gui_input.connect(resize_input)
 	preload("res://analysis/ui_controls.gd").fit(viewer.inspector_box)
+	transport = preload("res://ui/shell/viewer_transport.gd").new()
+	add_child(transport); transport.setup(self)
 	select_workspace(0)
 	refresh()
 	layout()
@@ -280,8 +283,9 @@ func layout() -> void:
 	var width := clampf(viewer.panel_width, 320, maxf(320, minf(560, extent.x - 650)))
 	if too_narrow: width = minf(560, extent.x)
 	var top := 48.0 if bar.visible else 0.0
-	dock.position = Vector2(extent.x-width, top); dock.size = Vector2(width, maxf(0, extent.y-top)); dock.visible = viewer.overlay_visible
-	viewer.resize_handle.position = Vector2(extent.x-width-8, top); viewer.resize_handle.size = Vector2(8, maxf(0, extent.y-top)); viewer.resize_handle.visible = viewer.overlay_visible
+	var bottom: float = extent.y - (transport.layout(extent.x,extent.y) if transport != null else 0.0)
+	dock.position = Vector2(extent.x-width, top); dock.size = Vector2(width, maxf(0, bottom-top)); dock.visible = viewer.overlay_visible
+	viewer.resize_handle.position = Vector2(extent.x-width-8, top); viewer.resize_handle.size = Vector2(8, maxf(0, bottom-top)); viewer.resize_handle.visible = viewer.overlay_visible
 	viewer.show_panel_button.hide()
 	var scene_width := extent.x-width-8 if viewer.overlay_visible else extent.x
 	navigation.position = Vector2(12, top+12)
@@ -291,7 +295,7 @@ func layout() -> void:
 	empty.position = Vector2(maxf(12, (scene_width-empty.size.x)/2), maxf(152, extent.y/2-40))
 	open_error.position = Vector2(12, top+96)
 	if viewer.colorbar != null:
-		viewer.colorbar.position = Vector2(maxf(12, scene_width-352), extent.y-118)
+		viewer.colorbar.position = Vector2(maxf(12, scene_width-352), bottom-118)
 		viewer.legend.position = viewer.colorbar.position+Vector2(0,24)
 	refresh()
 	changing_layout = false

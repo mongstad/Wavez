@@ -1,0 +1,21 @@
+{
+  "checks": 55,
+  "failures": [],
+  "layouts": [
+    {
+      "transport": "[P: (0.0, 836.0), S: (1440.0, 64.0)]",
+      "window": "(1440, 900)"
+    },
+    {
+      "transport": "[P: (0.0, 536.0), S: (1024.0, 104.0)]",
+      "window": "(1024, 640)"
+    }
+  ],
+  "refresh_activity": {
+    "counters": {},
+    "stages": {}
+  },
+  "source_hashes_unchanged": {
+    "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/issue-42-final-compatibility/scene.ssc": "ca5f4fa56a24ae3ff38252b2e20445939270378c9983dfcf5c6bb8937d816f1b"
+  }
+}
