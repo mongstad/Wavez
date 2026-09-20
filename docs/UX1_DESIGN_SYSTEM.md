@@ -27,6 +27,11 @@ production migration remains separately gated.
 
 ## Proposed information hierarchy
 
+Issue #14 elaborates this hierarchy in the [information architecture](UX_INFORMATION_ARCHITECTURE.md),
+[control map](UX_CONTROL_MAP.md) and [annotated walkthroughs](UX_IA_REVIEW.md).
+Those documents are a pending design proposal, not production implementation or
+milestone acceptance. The one-dock baseline and tokens below remain authoritative.
+
 This is a placement specification for UX3/4, not a new layout implementation. Default to **one 360 px right-side workspace dock**, not two permanently open sidebars. The viewport occupies the remaining central/left region. Right-side placement is a design recommendation, with usability review in UX3; dock relocation/detachment belongs to UX6. Do not expose a second dock by default.
 
 ```text
@@ -52,15 +57,15 @@ For logical widths below 1200, use one workspace chooser rather than six crowded
 
 | Location | Content / scope | Persistent versus contextual |
 |---|---|---|
-| Command bar | Open `.ssc`; current capture name and source status; Export menu; View/panels/fullscreen; Help/shortcuts; Settings entry in UX5 | Persistent. Long paths/details in a copyable source-information view |
+| Command bar | Open `.ssc`; current capture name and source status; State menu with typed scene/analysis recipe actions; Export menu; View/panels/fullscreen; Help/shortcuts; Settings entry in UX5 | Persistent. Long paths/details in a copyable source-information view |
 | Transport | Previous/next union sample, Play/Pause, index slider, explicit mode, requested physical time, committed time, applicable rate, loop | Persistent. Mode-specific rate; readiness disables unsafe actions with a reason |
 | Viewport edge | Orbit/pointer mode, Frame scene, reset, concise sample/LOD warning, scalar legend | Near viewport; avoid occluding the active selection area. Detailed sampling text opens on demand |
-| Scene workspace | Object list with kind, visibility, availability and source sample time; selected object details; geometry metadata and guides | Frequent layer switches and visibility. Probe/slice/isosurface controls only for relevant object |
+| Scene workspace | Object list with kind, visibility, availability and source sample time; selected object details; geometry metadata; display guides are edited in Appearance > Viewport presentation | Frequent layer switches and visibility. Source probe in Scene details; slice/isosurface editing in Appearance for that field |
 | Appearance workspace | Selected object's color/channel/range/colormap; particle size/brightness/history/type display filters; mesh wireframe; volume representation | Contextual by object capability. Display filters remain separate from selection membership |
 | Selection workspace | Pinned source/layer, pointer/edit mode, exact selection list; selected definition; IDs/rows/ROI/predicates/cohorts/groups | Contextual. “Use current capture” becomes “Bind source snapshot”; never bind a changed source implicitly |
 | Analysis workspace | Task selector: Temporal, Space-time, Diagnostic CSV, Compare series, Period estimate, Matched views; shared visible request context; results | Request controls only for chosen task. Source/range/channel/units always explicit |
 | Results workbench | Named results, full provenance, bounded plot, exact address lookup, paged values, numerical export | Opens for a selected result. Keep full-result export available independently of plot resolution |
-| Export entry | PNG; Video; scene recipe; analysis recipe/bundle; numerical data; matched views | One discoverable entry, distinct scopes and existing publication rules. Do not route v2 files into a v3-only loader |
+| Export entry | PNG; Video; numerical data; links to matched views. Typed scene/analysis recipes live in the command-bar State menu | One discoverable entry, distinct scopes and existing publication rules. Do not route v2 files into a v3-only loader |
 | Settings (UX5) | Interface scale/density; application defaults; scoped resource budgets; screenshot/output defaults; shortcuts | Infrequent preferences. Current source/analysis assumptions stay in workspace |
 | Status / jobs | Readiness, active operation count, durable failure/success details and recoverable paths | Compact persistent summary; contextual inline validation remains next to the field |
 

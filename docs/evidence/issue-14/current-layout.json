@@ -1,0 +1,461 @@
+{
+  "baseline": "68e3b5abb548d2e95ba5ae5b8e57e03d652de502",
+  "method": "Current UI constructed and controller-opened; not physical input usability testing",
+  "renderer": "forward_plus",
+  "observations": [
+    {
+      "content_height": 1228.0,
+      "name": "empty-initial",
+      "scroll": 0,
+      "timeline_y": 276.0,
+      "measured_controls": []
+    },
+    {
+      "content_height": 2781.0,
+      "name": "combined-initial",
+      "scroll": 0,
+      "timeline_y": 1507.0,
+      "measured_controls": [
+        {
+          "class": "Button",
+          "height": 31.0,
+          "text": "Apply volume display preset from sample",
+          "visible": false,
+          "y": 325.0
+        },
+        {
+          "class": "Label",
+          "height": 23.0,
+          "text": "Lower percentile \u2022 display choice",
+          "visible": false,
+          "y": 325.0
+        },
+        {
+          "class": "Label",
+          "height": 23.0,
+          "text": "Upper percentile \u2022 display choice",
+          "visible": false,
+          "y": 325.0
+        },
+        {
+          "class": "Label",
+          "height": 1011.0,
+          "text": "Opacity mapping \u2022 independent of color range",
+          "visible": false,
+          "y": 325.0
+        },
+        {
+          "class": "Button",
+          "height": 31.0,
+          "text": "Probe selected volume",
+          "visible": true,
+          "y": 1171.0
+        }
+      ]
+    },
+    {
+      "content_height": 4954.0,
+      "name": "combined-layers",
+      "scroll": 0,
+      "timeline_y": 3680.0,
+      "measured_controls": [
+        {
+          "class": "Button",
+          "height": 31.0,
+          "text": "Apply volume display preset from sample",
+          "visible": true,
+          "y": 1563.0
+        },
+        {
+          "class": "Label",
+          "height": 23.0,
+          "text": "Lower percentile \u2022 display choice",
+          "visible": true,
+          "y": 1792.0
+        },
+        {
+          "class": "Label",
+          "height": 23.0,
+          "text": "Upper percentile \u2022 display choice",
+          "visible": true,
+          "y": 1854.0
+        },
+        {
+          "class": "Label",
+          "height": 49.0,
+          "text": "Opacity mapping \u2022 independent of color range",
+          "visible": true,
+          "y": 2213.0
+        },
+        {
+          "class": "Button",
+          "height": 31.0,
+          "text": "Probe selected volume",
+          "visible": true,
+          "y": 3344.0
+        }
+      ]
+    },
+    {
+      "content_height": 4954.0,
+      "name": "combined-preset",
+      "scroll": 722,
+      "timeline_y": 2958.0,
+      "measured_controls": [
+        {
+          "class": "Button",
+          "height": 31.0,
+          "text": "Apply volume display preset from sample",
+          "visible": true,
+          "y": 841.0
+        },
+        {
+          "class": "Label",
+          "height": 23.0,
+          "text": "Lower percentile \u2022 display choice",
+          "visible": true,
+          "y": 1070.0
+        },
+        {
+          "class": "Label",
+          "height": 23.0,
+          "text": "Upper percentile \u2022 display choice",
+          "visible": true,
+          "y": 1132.0
+        },
+        {
+          "class": "Label",
+          "height": 49.0,
+          "text": "Opacity mapping \u2022 independent of color range",
+          "visible": true,
+          "y": 1491.0
+        },
+        {
+          "class": "Button",
+          "height": 31.0,
+          "text": "Probe selected volume",
+          "visible": true,
+          "y": 2622.0
+        }
+      ]
+    },
+    {
+      "content_height": 2462.0,
+      "name": "particles-initial",
+      "scroll": 0,
+      "timeline_y": 1188.0,
+      "measured_controls": [
+        {
+          "class": "Button",
+          "height": 31.0,
+          "text": "Probe selected volume",
+          "visible": true,
+          "y": 958.0
+        }
+      ]
+    },
+    {
+      "content_height": 2462.0,
+      "name": "particles-layers",
+      "scroll": 0,
+      "timeline_y": 1188.0,
+      "measured_controls": [
+        {
+          "class": "Button",
+          "height": 31.0,
+          "text": "Probe selected volume",
+          "visible": true,
+          "y": 958.0
+        }
+      ]
+    },
+    {
+      "content_height": 1948.0,
+      "name": "mesh-initial",
+      "scroll": 0,
+      "timeline_y": 996.0,
+      "measured_controls": [
+        {
+          "class": "Button",
+          "height": 31.0,
+          "text": "Probe selected volume",
+          "visible": true,
+          "y": 713.0
+        }
+      ]
+    },
+    {
+      "content_height": 2212.0,
+      "name": "mesh-layers",
+      "scroll": 0,
+      "timeline_y": 1260.0,
+      "measured_controls": [
+        {
+          "class": "Button",
+          "height": 31.0,
+          "text": "Probe selected volume",
+          "visible": true,
+          "y": 977.0
+        }
+      ]
+    },
+    {
+      "content_height": 1959.0,
+      "name": "field-initial",
+      "scroll": 0,
+      "timeline_y": 1007.0,
+      "measured_controls": [
+        {
+          "class": "Button",
+          "height": 31.0,
+          "text": "Apply volume display preset from sample",
+          "visible": false,
+          "y": 299.0
+        },
+        {
+          "class": "Label",
+          "height": 23.0,
+          "text": "Lower percentile \u2022 display choice",
+          "visible": false,
+          "y": 299.0
+        },
+        {
+          "class": "Label",
+          "height": 23.0,
+          "text": "Upper percentile \u2022 display choice",
+          "visible": false,
+          "y": 299.0
+        },
+        {
+          "class": "Label",
+          "height": 1011.0,
+          "text": "Opacity mapping \u2022 independent of color range",
+          "visible": false,
+          "y": 299.0
+        },
+        {
+          "class": "Button",
+          "height": 31.0,
+          "text": "Probe selected volume",
+          "visible": true,
+          "y": 724.0
+        }
+      ]
+    },
+    {
+      "content_height": 3842.0,
+      "name": "field-layers",
+      "scroll": 0,
+      "timeline_y": 2890.0,
+      "measured_controls": [
+        {
+          "class": "Button",
+          "height": 31.0,
+          "text": "Apply volume display preset from sample",
+          "visible": true,
+          "y": 852.0
+        },
+        {
+          "class": "Label",
+          "height": 23.0,
+          "text": "Lower percentile \u2022 display choice",
+          "visible": true,
+          "y": 1081.0
+        },
+        {
+          "class": "Label",
+          "height": 23.0,
+          "text": "Upper percentile \u2022 display choice",
+          "visible": true,
+          "y": 1143.0
+        },
+        {
+          "class": "Label",
+          "height": 49.0,
+          "text": "Opacity mapping \u2022 independent of color range",
+          "visible": true,
+          "y": 1476.0
+        },
+        {
+          "class": "Button",
+          "height": 31.0,
+          "text": "Probe selected volume",
+          "visible": true,
+          "y": 2607.0
+        }
+      ]
+    },
+    {
+      "content_height": 3842.0,
+      "name": "field-preset",
+      "scroll": 11,
+      "timeline_y": 2879.0,
+      "measured_controls": [
+        {
+          "class": "Button",
+          "height": 31.0,
+          "text": "Apply volume display preset from sample",
+          "visible": true,
+          "y": 841.0
+        },
+        {
+          "class": "Label",
+          "height": 23.0,
+          "text": "Lower percentile \u2022 display choice",
+          "visible": true,
+          "y": 1070.0
+        },
+        {
+          "class": "Label",
+          "height": 23.0,
+          "text": "Upper percentile \u2022 display choice",
+          "visible": true,
+          "y": 1132.0
+        },
+        {
+          "class": "Label",
+          "height": 49.0,
+          "text": "Opacity mapping \u2022 independent of color range",
+          "visible": true,
+          "y": 1465.0
+        },
+        {
+          "class": "Button",
+          "height": 31.0,
+          "text": "Probe selected volume",
+          "visible": true,
+          "y": 2596.0
+        }
+      ]
+    },
+    {
+      "content_height": 2588.0,
+      "name": "real-initial",
+      "scroll": 0,
+      "timeline_y": 1314.0,
+      "measured_controls": [
+        {
+          "class": "Button",
+          "height": 31.0,
+          "text": "Apply volume display preset from sample",
+          "visible": false,
+          "y": 299.0
+        },
+        {
+          "class": "Label",
+          "height": 23.0,
+          "text": "Lower percentile \u2022 display choice",
+          "visible": false,
+          "y": 299.0
+        },
+        {
+          "class": "Label",
+          "height": 23.0,
+          "text": "Upper percentile \u2022 display choice",
+          "visible": false,
+          "y": 299.0
+        },
+        {
+          "class": "Label",
+          "height": 1011.0,
+          "text": "Opacity mapping \u2022 independent of color range",
+          "visible": false,
+          "y": 299.0
+        },
+        {
+          "class": "Button",
+          "height": 31.0,
+          "text": "Probe selected volume",
+          "visible": true,
+          "y": 1031.0
+        }
+      ]
+    },
+    {
+      "content_height": 4497.0,
+      "name": "real-layers",
+      "scroll": 0,
+      "timeline_y": 3223.0,
+      "measured_controls": [
+        {
+          "class": "Button",
+          "height": 31.0,
+          "text": "Apply volume display preset from sample",
+          "visible": true,
+          "y": 1106.0
+        },
+        {
+          "class": "Label",
+          "height": 23.0,
+          "text": "Lower percentile \u2022 display choice",
+          "visible": true,
+          "y": 1335.0
+        },
+        {
+          "class": "Label",
+          "height": 23.0,
+          "text": "Upper percentile \u2022 display choice",
+          "visible": true,
+          "y": 1397.0
+        },
+        {
+          "class": "Label",
+          "height": 49.0,
+          "text": "Opacity mapping \u2022 independent of color range",
+          "visible": true,
+          "y": 1756.0
+        },
+        {
+          "class": "Button",
+          "height": 31.0,
+          "text": "Probe selected volume",
+          "visible": true,
+          "y": 2940.0
+        }
+      ]
+    },
+    {
+      "content_height": 4497.0,
+      "name": "real-preset",
+      "scroll": 265,
+      "timeline_y": 2958.0,
+      "measured_controls": [
+        {
+          "class": "Button",
+          "height": 31.0,
+          "text": "Apply volume display preset from sample",
+          "visible": true,
+          "y": 841.0
+        },
+        {
+          "class": "Label",
+          "height": 23.0,
+          "text": "Lower percentile \u2022 display choice",
+          "visible": true,
+          "y": 1070.0
+        },
+        {
+          "class": "Label",
+          "height": 23.0,
+          "text": "Upper percentile \u2022 display choice",
+          "visible": true,
+          "y": 1132.0
+        },
+        {
+          "class": "Label",
+          "height": 49.0,
+          "text": "Opacity mapping \u2022 independent of color range",
+          "visible": true,
+          "y": 1491.0
+        },
+        {
+          "class": "Button",
+          "height": 31.0,
+          "text": "Probe selected volume",
+          "visible": true,
+          "y": 2675.0
+        }
+      ]
+    }
+  ]
+}

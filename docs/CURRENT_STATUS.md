@@ -257,3 +257,12 @@ Track third-party licensing in [THIRD_PARTY_LICENSES.md](../THIRD_PARTY_LICENSES
 ## Repository baseline
 
 The current repository is a fresh source snapshot with prior development Git history intentionally archived outside this repository. Scientific simulations, raw captures and research projects remain external. SIMSCP3 is the only supported capture format for new work. See [repository boundaries](REPOSITORY_BOUNDARY.md), [capture policy](CAPTURE_FORMAT_POLICY.md), [evidence](EVIDENCE_INDEX.md), and [provenance](../PROVENANCE.md).
+
+## UX-IA-001 — design pending owner review
+
+Issue #14 proposes the permanent viewer information architecture under
+**Pre-UX3/UX4 — Validation & Maintenance**. The [design](UX_INFORMATION_ARCHITECTURE.md),
+[control map](UX_CONTROL_MAP.md) and [walkthrough/evidence report](UX_IA_REVIEW.md)
+cover the current baseline and proposed migration boundaries. Static layouts and
+current native observations support owner review; no production UI, scientific
+behavior, recipe schema or milestone status changed. UX3 remains on hold.

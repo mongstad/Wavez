@@ -675,15 +675,21 @@ Reorganize controls according to user workflow rather than historical implementa
 
 ## Candidate Workspace Groups
 
-Exact naming must be validated during UX1–UX4, but likely categories include:
+Issue #14 provides a pending, design-only [information architecture](docs/UX_INFORMATION_ARCHITECTURE.md)
+and [control traceability map](docs/UX_CONTROL_MAP.md) under Pre-UX3/UX4 — Validation & Maintenance.
+Its Scene / Appearance / Selection / Analysis hierarchy refines the earlier workspace candidates.
+Owner design acceptance and explicit UX3/UX4 implementation authorization remain separate gates.
 
-- Scene / Data
-- Visualization
-- Inspector
-- Camera
-- Playback
-- Diagnostics
-- Performance
+Current proposed workspace names, pending owner design acceptance:
+
+- Scene
+- Appearance (selected object or explicitly named Viewport presentation)
+- Selection
+- Analysis and Results
+
+Playback belongs in persistent transport, camera actions near the viewport, and
+performance configuration in a dedicated dialog before its later UX5 Settings home.
+These placements are specified in issue #14 rather than a second competing hierarchy.
 
 ## Scope
 
