@@ -140,6 +140,18 @@ func run():
 		var last: Rect2 = ui.secondary.get_global_rect() if ui.compact else first
 		check(absf((first.position.y-ui.global_position.y)-(ui.get_global_rect().end.y-last.end.y)) <= 1,"Transport rows have equal top and bottom space")
 		check(absf(viewer.timeline.get_global_rect().get_center().y-ui.displayed.get_global_rect().get_center().y) <= 1 and absf(viewer.timeline.get_global_rect().get_center().y-ui.duration.get_global_rect().get_center().y) <= 1,"Slider and both time readouts share a vertical center")
+		var stable := [ui.get_global_rect(),ui.actions.get_global_rect(),viewer.timeline.get_global_rect(),ui.options.get_global_rect()]
+		var controller = viewer.scene_layers.playback
+		var prior_buffering: bool = controller.buffering; var prior_pending = controller.pending_time
+		for pending_value in [121.0,999999.99999,null]:
+			controller.buffering = pending_value != null; controller.pending_time = pending_value
+			ui.refresh(); await settle(); viewer.shell.layout(); await settle()
+			check(ui.requested.visible == (pending_value != null),"Layout stress keeps the requested readout present until cleared")
+			check(stable == [ui.get_global_rect(),ui.actions.get_global_rect(),viewer.timeline.get_global_rect(),ui.options.get_global_rect()],"Requested readout does not move or resize transport controls")
+			if pending_value != null:
+				check(ui.requested.get_global_rect().end.y <= (ui.secondary.get_global_rect().position.y if ui.compact else ui.get_global_rect().end.y),"Requested readout fits without overlapping the next row")
+				picture("pending-layout-"+str(dimensions.x))
+		controller.buffering = prior_buffering; controller.pending_time = prior_pending; ui.refresh()
 		layouts.append({"window":str(dimensions),"transport":str(ui.get_rect())}); picture("loaded-"+str(dimensions.x))
 	viewer._toggle_fullscreen(); await settle()
 	check(ui.is_visible_in_tree() and ui.duration.is_visible_in_tree() and not viewer.shell.bar.visible,"Interactive fullscreen retains media transport")

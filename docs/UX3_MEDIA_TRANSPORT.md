@@ -24,7 +24,8 @@ Exact displayed source time and its declared unit remain in the elapsed tooltip;
 Seek Target, layer/source diagnostics, persisted state and calculations stay exact.
 The differing Requested target still appears with five decimal places and an
 exact tooltip. During a pending request it occupies the secondary explanation
-area. The sample index is available on slider hover and in a floating hint while dragging, without a persistent index caption.
+area outside container sizing, so appearing/clearing text cannot shift the controls.
+The compact row gap reserves room for it without changing panel height. The sample index is available on slider hover and in a floating hint while dragging, without a persistent index caption.
 
 The slider still selects the sorted union of recorded samples. Its equally spaced
 indices do not represent equal source-time intervals. Sparse volume Hold,

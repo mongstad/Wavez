@@ -64,8 +64,11 @@ func setup(owner_shell) -> void:
 		var style: StyleBox = duration.get_theme_stylebox(state).duplicate()
 		style.content_margin_left = 4; style.content_margin_right = 4
 		duration.add_theme_stylebox_override(state,style)
-	requested = label(axis,""); requested.theme_type_variation = "HelpLabel"
-	requested.size_flags_horizontal = Control.SIZE_EXPAND_FILL; requested.clip_text = true
+	# A readout below the slider must not contribute to container minimum sizes.
+	requested = label(viewer.timeline, ""); requested.theme_type_variation = "HelpLabel"
+	requested.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_WIDE)
+	requested.offset_top = 2; requested.offset_bottom = 22; requested.clip_text = true
+	requested.mouse_filter = Control.MOUSE_FILTER_STOP
 	seek_button = shell.button(primary,"Seek…",open_seek); seek_button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	options = HBoxContainer.new(); options.add_theme_constant_override("separation",8); primary.add_child(options)
 	var rate_box := HBoxContainer.new(); rate_box.size_flags_vertical = Control.SIZE_SHRINK_CENTER; rate_box.add_theme_constant_override("separation",4); options.add_child(rate_box)
@@ -193,6 +196,7 @@ func layout(width: float, bottom: float) -> float:
 	var narrow := width < 1200
 	if options.get_parent() != (secondary if narrow else primary): options.reparent(secondary if narrow else primary)
 	secondary.visible = narrow; compact = narrow
+	rows.add_theme_constant_override("separation",16 if narrow else 8)
 	var height := maxf(104 if narrow else 64, rows.get_combined_minimum_size().y+8)
 	position = Vector2(0,bottom-height); size = Vector2(width,height)
 	return height
