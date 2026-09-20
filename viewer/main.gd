@@ -113,6 +113,7 @@ var timeline: HSlider
 var open_dialog: FileDialog
 var overlay_panel: PanelContainer
 var overlay_visible := true
+var shell
 var _timeline_guard := false
 var environment: Environment
 var starfield: MultiMeshInstance3D
@@ -338,11 +339,29 @@ func _build_particles() -> void:
 
 func _build_ui() -> void:
 	_build_inspector()
+	if not offline_instance:
+		shell = preload("res://ui/shell/viewer_shell.gd").new()
+		overlay_panel.get_parent().add_child(shell)
+		shell.setup(self)
+		# The dock remains above the shell background; its existing controls keep ownership.
+		overlay_panel.get_parent().move_child(overlay_panel, -1)
+		overlay_panel.get_parent().move_child(resize_handle, -1)
+
+func _open_from_picker(path: String) -> void:
+	if shell != null:
+		shell.begin_open()
+		await get_tree().process_frame
+		await get_tree().process_frame
+	_open_capture(path)
 
 func _show_open_dialog() -> void:
 	open_dialog.popup_centered_ratio(0.78)
 
 func _toggle_overlay() -> void:
+	if shell != null:
+		shell.toggle_dock()
+		_update_particle_legend()
+		return
 	overlay_visible = not overlay_visible
 	if overlay_panel != null:
 		overlay_panel.visible = overlay_visible
@@ -355,14 +374,22 @@ func _toggle_fullscreen() -> void:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+	if shell != null: shell.refresh.call_deferred()
 
 func _open_capture(path: String) -> void:
+	if shell != null: shell.begin_open()
 	var started := Profile.begin()
 	_open_capture_profiled(path)
 	Profile.end("open_inclusive",started)
+	if shell != null: shell.finish_open(_shell_open_error)
+
+var _shell_open_error := ""
 
 func _open_capture_profiled(path: String) -> void:
-	if inspection_busy: return
+	_shell_open_error = ""
+	if inspection_busy:
+		_shell_open_error = "Inspection is busy. Try opening the capture again when it finishes."
+		return
 	_open_scene(path)
 
 func _refresh_frame_count() -> void:
@@ -489,6 +516,7 @@ func _update_hud() -> void:
 	var started := Profile.begin()
 	_update_hud_profiled()
 	Profile.end("hud_cpu",started)
+	if shell != null: shell.refresh()
 
 func _update_hud_profiled() -> void:
 	if cache_label != null: cache_label.text = generic_reader.status() if generic_reader != null else "No scene loaded"
@@ -496,8 +524,16 @@ func _update_hud_profiled() -> void:
 		var population := "%d particles" % particle_count if not scene_layers.particle_id.is_empty() else "%d scene layers" % generic_reader.objects.size()
 		hud.text = "SimScope • %s\nFrame %d / %d  ·  t = %.5f\n%s\n%s" % [generic_reader.metadata.get("simulation_name", capture_path.get_file()), current_index + 1, frame_count, committed_sample.get("requested_time",frame_a.sim_time), population, _sample_label()]
 
+func _input(event: InputEvent) -> void:
+	# A release over chrome must still end a drag that started in the viewport.
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
+		dragging = false
+		resizing_panel = false
+
 func _unhandled_input(event: InputEvent) -> void:
 	if inspection_busy: return
+	var editor := get_viewport().gui_get_focus_owner()
+	if event is InputEventKey and (editor is LineEdit or editor is TextEdit or editor is SpinBox): return
 	if selection_controller != null and selection_controller.handle_input(event):get_viewport().set_input_as_handled();return
 	if event is InputEventMouseButton:
 		var mouse_button: InputEventMouseButton = event as InputEventMouseButton
@@ -532,8 +568,10 @@ func _unhandled_input(event: InputEvent) -> void:
 			KEY_P: _save_image()
 			KEY_F1: _toggle_overlay()
 			KEY_F11: _toggle_fullscreen()
-			KEY_R:
-				camera_target = Vector3.ZERO; yaw = deg_to_rad(38.0); pitch = deg_to_rad(24.0); camera_distance = maxf(30.0, half_extent * 2.8); _update_camera()
+			KEY_R: _reset_camera()
+
+func _reset_camera() -> void:
+	camera_target = Vector3.ZERO; yaw = deg_to_rad(38.0); pitch = deg_to_rad(24.0); camera_distance = maxf(30.0, half_extent * 2.8); _update_camera()
 
 func _update_camera() -> void:
 	# Carry the camera up axis through the poles instead of reconstructing it
@@ -837,7 +875,7 @@ func _build_inspector() -> void:
 	status_label = Label.new()
 	status_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	inspector_box.add_child(status_label)
-	_button(inspector_box, "Hide inspector  [F1]", _toggle_overlay)
+	if offline_instance: _button(inspector_box, "Hide inspector  [F1]", _toggle_overlay)
 	show_panel_button = _button(canvas, "SimScope  [F1]", _toggle_overlay)
 	show_panel_button.position = Vector2(12, 12)
 	show_panel_button.visible = false
@@ -847,6 +885,7 @@ func _build_inspector() -> void:
 	resize.mouse_default_cursor_shape = Control.CURSOR_HSIZE
 	canvas.add_child(resize)
 	resize.gui_input.connect(func(event: InputEvent):
+		if shell != null: return
 		if event is InputEventMouseButton: resizing_panel = event.pressed
 		if event is InputEventMouseMotion and resizing_panel:
 			panel_width = clampf(panel_width + event.relative.x, 290, 600)
@@ -997,13 +1036,16 @@ func _build_inspector() -> void:
 	open_dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE
 	open_dialog.access = FileDialog.ACCESS_FILESYSTEM
 	open_dialog.filters = PackedStringArray(["*.ssc ; SimScope scene (SIMSCP3)"])
-	open_dialog.file_selected.connect(_open_capture)
+	open_dialog.file_selected.connect(_open_from_picker)
 	canvas.add_child(open_dialog)
 	_layout_inspector(resize)
 	_update_colormap()
 	_refresh_mapping_options()
 
 func _layout_inspector(resize: Control) -> void:
+	if shell != null:
+		shell.layout()
+		return
 	var viewport_size := get_viewport().get_visible_rect().size
 	overlay_panel.size = Vector2(minf(panel_width, viewport_size.x - 24), viewport_size.y - 24)
 	resize.position = Vector2(overlay_panel.position.x + overlay_panel.size.x, 12)
@@ -1043,7 +1085,8 @@ func _apply_preset(name: String) -> void:
 
 func _open_scene(path: String) -> void:
 	var reader = preload("res://layers/scene_reader.gd").new()
-	if not reader.open(path): status_label.text = reader.error;return
+	if not reader.open(path):
+		status_label.text = reader.error; _shell_open_error = reader.error; return
 	_reset_inspection_source()
 	if generic_reader != null: generic_reader.close()
 	generic_reader = reader;reader_generation = reader.generation

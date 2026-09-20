@@ -13,13 +13,17 @@ See the [Quickstart](../QUICKSTART.md), [Python API](../SIMSCOPE_API.md),
 [scene format](../G3_FORMAT.md), [G4 guide](../docs/G4_GUIDE.md), and
 [capture format policy](../docs/CAPTURE_FORMAT_POLICY.md).
 
-F1 hides/restores the resizable inspector and legend; Space pauses; Left/Right
+The [production shell](../docs/UX3_SHELL.md) adds Open, State, Export, View and
+Help above one right-hand dock. Scene retains the inspector; the other workspaces
+provide entry points to its existing control groups.
+
+F1 hides/restores the resizable dock and legend; Space pauses; Left/Right
 steps; mouse drag tumbles continuously through full revolutions in either direction;
-wheel zooms; F11 toggles fullscreen. F frames the scene and R resets the camera.
+wheel zooms; F11 toggles fullscreen, hiding the top command bar until exit; maximized windows keep the bar. F frames the scene and R resets the camera.
 Horizontal drag retains world-Y yaw; vertical drag carries the camera up axis
 through the poles, allowing upside-down views without a snap. Auto orbit (O)
-remains a separate world-Y rotation and pauses while dragging. Capture / Export
-opens files. Scalar colormaps use the bundled lookup data described in
+remains a separate world-Y rotation and pauses while dragging. Open… opens
+files. Show panels and Exit fullscreen provide mouse recovery. Scalar colormaps use the bundled lookup data described in
 [COLORMAPS_LICENSE.txt](COLORMAPS_LICENSE.txt).
 
 In **Scene layers → Source probe**, **Show probe marker** hides/restores the

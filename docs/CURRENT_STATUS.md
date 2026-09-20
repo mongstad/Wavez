@@ -1,5 +1,11 @@
 # Current status
 
+PR #45 / issue #41 owner-review revision: fullscreen hides the complete top command
+bar; maximized mode retains it. Hide panel affects only the contextual dock.
+Fedora KDE/Wayland compositor evidence and 97-check native reruns on each renderer
+are recorded in [the revision report](evidence/issue-41/review-1/README.md).
+Pending owner review; transport #42 and UX4 control migration remain out of scope.
+
 As of **2026-09-20**, including G4 and PERF-001/002 maintenance reviewed and accepted by the user. Scientific simulations were not rerun. Historical results identify their recorded checkpoints. PERF-003 mesh maintenance was also reviewed and accepted by the owner on 2026-09-13; implementation checkpoint `7974c78`.
 
 | Area | Current state |
@@ -26,7 +32,7 @@ Representative external captures informed G3 timeline/playback validation. Scien
 
 Older capture writers/readers and public API entry points were retired before the UX milestones. The active product contract is SIMSCP3 / `.ssc` only; replacement coverage uses repository-owned native scenes and synthetic fixtures.
 
-## UX1 and UX2 — accepted; UX3 on hold
+## UX1 and UX2 — accepted; UX3 shell slice pending review
 
 The [UX1 report](UX1_REPORT.md) records the current UI inventory, observed layout
 problems, technical coupling, proposed information hierarchy, concrete design
@@ -46,9 +52,10 @@ records the measured widget metrics and proposed adjustments for review.
 The owner reviewed and accepted UX2 on 2026-09-13 at
 `5fae711aa042d16a72ce4e6283e030aa69a32097`. Its milestone report and retained
 evidence preserve their original review-time state.
-**UX3 has not started and is on hold until further notice.** UX2 acceptance does
-not authorize a production shell or panel migration; wait for an explicit owner
-instruction under the [UX plan](../UX_IMPLEMENTATION_PLAN.md).
+The owner merged the design package in PR #39 and placed #41 in Ready.
+Only the [UX3 shell slice](UX3_SHELL.md) is now implemented, pending owner review.
+Transport, status/Jobs, integration acceptance and UX4 require their separate
+authorizations under the [UX plan](../UX_IMPLEMENTATION_PLAN.md).
 
 ## RENDER-001 — accepted
 
@@ -143,7 +150,8 @@ Midnight Scientific refinements, identifies historical versus current evidence,
 and extends the scale matrix to all five laboratory pages. The
 [validation report](UX_STYLE_VALIDATION.md) records 1,402 passing native checks,
 218 contrast pairs, all four scales, scientific-viewer isolation and physical
-4K limitations. No theme or production behavior was changed. UX3 remains on hold.
+4K limitations. No theme or production behavior was changed by issue #8. The current UX3
+authorization is limited to #41 below.
 
 ## UI-003 — accepted
 
@@ -258,23 +266,23 @@ Track third-party licensing in [THIRD_PARTY_LICENSES.md](../THIRD_PARTY_LICENSES
 
 The current repository is a fresh source snapshot with prior development Git history intentionally archived outside this repository. Scientific simulations, raw captures and research projects remain external. SIMSCP3 is the only supported capture format for new work. See [repository boundaries](REPOSITORY_BOUNDARY.md), [capture policy](CAPTURE_FORMAT_POLICY.md), [evidence](EVIDENCE_INDEX.md), and [provenance](../PROVENANCE.md).
 
-## UX-IA-001 — design pending owner review
+## UX-IA-001 / UX-IA-002 — design baseline merged
 
-Issue #14 proposes the permanent viewer information architecture under
-**Pre-UX3/UX4 — Validation & Maintenance**. The [design](UX_INFORMATION_ARCHITECTURE.md),
-[control map](UX_CONTROL_MAP.md) and [walkthrough/evidence report](UX_IA_REVIEW.md)
-cover the current baseline and proposed migration boundaries. Static layouts and
-current native observations support owner review; no production UI, scientific
-behavior, recipe schema or milestone status changed. UX3 remains on hold.
+The owner merged PR #39 on 2026-09-20 at `1043966`. Issues #14 and #40 are Done
+on the Project board. The [architecture](UX_INFORMATION_ARCHITECTURE.md),
+[control map](UX_CONTROL_MAP.md) and [visual language](UX_VISUAL_LANGUAGE.md)
+provide the design inputs for separately authorized implementation slices.
+Original review reports, mockups and evidence preserve their review-time wording.
 
-The owner did not accept the initial visual/copy direction. Ready sub-issue #40
-revises the same PR #39 with a [visual language and copy guide](UX_VISUAL_LANGUAGE.md)
-and [high-fidelity static mockups](evidence/issue-40/README.md). The architecture,
-control ownership and scientific semantics remain intact. This revised proposal
-is pending owner review; no acceptance or production migration is implied.
+## UX3-SHELL-001 — pending owner review
 
-Final owner-requested design refinements specify sentence case and neutral example
-names, a 48-pixel command bar, optically aligned controls, compact heading help,
-and separate read-only displayed time and editable seek targets. UX3/UX4 input
-scope is desktop keyboard and mouse/trackpad; touch/tablet support requires future
-authorization. Icons remain provisional for later UX3 review and UX8 refinement.
+Issue #41 implements the 48-pixel Midnight Scientific command bar and a single
+right-hand contextual dock. Four workspace choices become a compact chooser
+below 1200 logical pixels. Existing inspector controls remain in Scene, with
+bounded workspace entry points, capture-level context, resize/collapse/recovery,
+source details, empty/loading presentation and durable failed-open details.
+
+The [shell contract and validation](UX3_SHELL.md) describe retained camera
+projection, source/state ownership, native layouts, tests, limits and exact owner
+checks. No persistent transport, Jobs surface, full workspace migration or UX3
+milestone acceptance is claimed. Stop for owner review of #41.

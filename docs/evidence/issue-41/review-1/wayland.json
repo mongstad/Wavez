@@ -1,0 +1,125 @@
+[
+  {
+    "backend": "Wayland",
+    "bar_visible": true,
+    "display_mode": 0,
+    "dock_top": 48.0,
+    "exit_visible": false,
+    "science_unchanged": true,
+    "screen_size": "(2560, 1440)",
+    "stage": "windowed",
+    "window_mode": 0,
+    "window_size": "(1440, 900)",
+    "kwin": [
+      {
+        "pid": 285639,
+        "uuid": "{8bb267fa-0fc8-4910-8ebd-ac11f0290fe7}",
+        "caption": "SimScope (DEBUG)",
+        "fullscreen": false,
+        "noBorder": false,
+        "active": true,
+        "frame": {
+          "x": 2796,
+          "y": 434,
+          "width": 1448,
+          "height": 932
+        },
+        "client": {
+          "x": 2800,
+          "y": 462,
+          "width": 1440,
+          "height": 900
+        },
+        "screen": {
+          "x": 2560,
+          "y": 360,
+          "width": 1920,
+          "height": 1080
+        }
+      }
+    ],
+    "screenshot_exit": 0
+  },
+  {
+    "backend": "Wayland",
+    "bar_visible": false,
+    "display_mode": 3,
+    "dock_top": 0.0,
+    "exit_visible": true,
+    "science_unchanged": true,
+    "screen_size": "(2560, 1440)",
+    "stage": "fullscreen",
+    "window_mode": 3,
+    "window_size": "(1920, 1080)",
+    "kwin": [
+      {
+        "pid": 285639,
+        "uuid": "{8bb267fa-0fc8-4910-8ebd-ac11f0290fe7}",
+        "caption": "SimScope (DEBUG)",
+        "fullscreen": true,
+        "noBorder": false,
+        "active": true,
+        "frame": {
+          "x": 2560,
+          "y": 360,
+          "width": 1920,
+          "height": 1080
+        },
+        "client": {
+          "x": 2560,
+          "y": 360,
+          "width": 1920,
+          "height": 1080
+        },
+        "screen": {
+          "x": 2560,
+          "y": 360,
+          "width": 1920,
+          "height": 1080
+        }
+      }
+    ],
+    "screenshot_exit": 0
+  },
+  {
+    "backend": "Wayland",
+    "bar_visible": true,
+    "display_mode": 0,
+    "dock_top": 48.0,
+    "exit_visible": false,
+    "science_unchanged": true,
+    "screen_size": "(2560, 1440)",
+    "stage": "restored",
+    "window_mode": 0,
+    "window_size": "(1440, 900)",
+    "kwin": [
+      {
+        "pid": 285639,
+        "uuid": "{8bb267fa-0fc8-4910-8ebd-ac11f0290fe7}",
+        "caption": "SimScope (DEBUG)",
+        "fullscreen": false,
+        "noBorder": false,
+        "active": true,
+        "frame": {
+          "x": 2796,
+          "y": 434,
+          "width": 1448,
+          "height": 932
+        },
+        "client": {
+          "x": 2800,
+          "y": 462,
+          "width": 1440,
+          "height": 900
+        },
+        "screen": {
+          "x": 2560,
+          "y": 360,
+          "width": 1920,
+          "height": 1080
+        }
+      }
+    ],
+    "screenshot_exit": 0
+  }
+]

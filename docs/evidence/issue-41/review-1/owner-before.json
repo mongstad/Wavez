@@ -1,0 +1,29 @@
+[
+  [
+    {
+      "pid": 283583,
+      "uuid": "{b3847128-bd10-4be1-8d36-c280e544d10f}",
+      "caption": "SimScope (DEBUG)",
+      "fullscreen": true,
+      "active": false,
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "width": 2560,
+        "height": 1440
+      },
+      "client": {
+        "x": 0,
+        "y": 0,
+        "width": 2560,
+        "height": 1440
+      },
+      "screen": {
+        "x": 0,
+        "y": 0,
+        "width": 2560,
+        "height": 1440
+      }
+    }
+  ]
+]

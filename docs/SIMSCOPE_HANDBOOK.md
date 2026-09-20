@@ -20,6 +20,27 @@ engines have separate availability requirements.
 
 Earlier documents sometimes append new checkpoints above obsolete scope tables. This handbook and [current status](CURRENT_STATUS.md) resolve that chronology; a historical “G3 future” paragraph is not current truth.
 
+## Viewer shell
+
+The [issue-41 shell](UX3_SHELL.md) is implemented and pending owner review.
+Use Open… in the command bar or empty view. Click the capture name for copyable
+source details. State routes to the existing scene/analysis recipe controls;
+Export routes to PNG, video and numerical export. View and the viewport buttons
+provide frame/reset, panel visibility and fullscreen.
+
+Scene retains the existing inspector. Appearance, Selection and Analysis provide
+links into the same controls; choosing a workspace never binds a scientific
+source or changes selection membership. Playback and budgets remain in that
+inspector for this slice. The fixed header reports current capture context, not
+a selected-object editor.
+
+The right dock starts at 360 logical pixels, or 320 below 1200 pixels. Drag its
+left edge to resize, use Hide panel/F1 to collapse, and Show panels to recover it.
+Below 970 logical pixels the dock starts collapsed and can reopen as a temporary
+sheet. Maximized mode keeps the top command bar. Fullscreen hides that bar and retains
+Frame scene, Reset camera, Navigate and Exit fullscreen; exiting restores the bar. Failed-open details remain visible
+until dismissed; a failed replacement retains the previous usable scene.
+
 ## Camera inspection
 
 Mouse drag supports continuous yaw/pitch revolutions with no pitch clamp.
