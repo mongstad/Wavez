@@ -13,7 +13,8 @@ clickable total/remaining duration on its right. Duration values show one decima
 remaining uses a leading minus, with `0.0` at the end (never `-0.0`). The toggle
 is a session-only preference, not scientific recipe state. The transport retains
 64/104 logical-pixel normal/compact heights and its existing Seek, Loop,
-previous/next, and Jobs controls.
+previous/next, and Jobs controls. Rows are vertically centered in the panel; the
+slider and time readouts share a vertical center with compact horizontal gaps.
 
 These are **nominal playback seconds at 1×**, not measured wall time or a claim
 about scientific units. Speed changes and buffering do not change the total.

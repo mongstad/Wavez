@@ -136,6 +136,10 @@ func run():
 		check(ui.size.y == (64 if dimensions.x == 1440 else 104),"Transport height follows desktop/compact allocation " + str(dimensions))
 		viewer._toggle_overlay(); await settle(); check(ui.is_visible_in_tree(),"Dock hide preserves transport"); viewer._toggle_overlay(); await settle()
 		check(ui.displayed.get_global_rect().end.x <= viewer.timeline.get_global_rect().position.x and viewer.timeline.get_global_rect().end.x <= ui.duration.get_global_rect().position.x,"Elapsed and total flank the union slider")
+		var first: Rect2 = ui.primary.get_global_rect()
+		var last: Rect2 = ui.secondary.get_global_rect() if ui.compact else first
+		check(absf((first.position.y-ui.global_position.y)-(ui.get_global_rect().end.y-last.end.y)) <= 1,"Transport rows have equal top and bottom space")
+		check(absf(viewer.timeline.get_global_rect().get_center().y-ui.displayed.get_global_rect().get_center().y) <= 1 and absf(viewer.timeline.get_global_rect().get_center().y-ui.duration.get_global_rect().get_center().y) <= 1,"Slider and both time readouts share a vertical center")
 		layouts.append({"window":str(dimensions),"transport":str(ui.get_rect())}); picture("loaded-"+str(dimensions.x))
 	viewer._toggle_fullscreen(); await settle()
 	check(ui.is_visible_in_tree() and ui.duration.is_visible_in_tree() and not viewer.shell.bar.visible,"Interactive fullscreen retains media transport")

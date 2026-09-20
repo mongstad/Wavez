@@ -34,7 +34,7 @@ func setup(owner_shell) -> void:
 	add_theme_stylebox_override("panel", theme_box())
 	var margin := MarginContainer.new(); add_child(margin)
 	for side in ["left", "right", "top", "bottom"]: margin.add_theme_constant_override("margin_"+side, 8 if side in ["left","right"] else 4)
-	rows = VBoxContainer.new(); rows.add_theme_constant_override("separation", 8); margin.add_child(rows)
+	rows = VBoxContainer.new(); rows.alignment = BoxContainer.ALIGNMENT_CENTER; rows.add_theme_constant_override("separation", 8); margin.add_child(rows)
 	primary = HBoxContainer.new(); primary.add_theme_constant_override("separation", 12); rows.add_child(primary)
 	secondary = HBoxContainer.new(); rows.add_child(secondary); secondary.hide()
 	# Retain legacy recipe/control references, but remove their presentation from the dock.
@@ -45,11 +45,12 @@ func setup(owner_shell) -> void:
 	for pair in [[0,"Previous sample","⏮"],[1,"Play","▶"],[2,"Next sample","⏭"]]:
 		var action: Button = actions.get_child(pair[0]); action.text = pair[2]; action.tooltip_text = pair[1]; action.custom_minimum_size = Vector2(40,32)
 	var axis := VBoxContainer.new(); axis.size_flags_horizontal = Control.SIZE_EXPAND_FILL; axis.custom_minimum_size.x = 200; axis.add_theme_constant_override("separation", 0); axis.size_flags_vertical = Control.SIZE_SHRINK_CENTER; primary.add_child(axis)
-	var progress := HBoxContainer.new(); progress.add_theme_constant_override("separation",8); axis.add_child(progress)
+	var progress := HBoxContainer.new(); progress.add_theme_constant_override("separation",4); axis.add_child(progress)
 	displayed = label(progress,"—"); displayed.custom_minimum_size.x = 48
-	displayed.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	displayed.vertical_alignment = VERTICAL_ALIGNMENT_CENTER; displayed.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	viewer.timeline.reparent(progress); viewer.timeline.custom_minimum_size.y = 16
 	viewer.timeline.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	viewer.timeline.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	index_hint = label(self, ""); index_hint.top_level = true; index_hint.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	index_hint.add_theme_stylebox_override("normal", shell.theme.box(&"surface.1", &"border.subtle", 4, 6, 4))
 	index_hint.hide()
@@ -57,7 +58,12 @@ func setup(owner_shell) -> void:
 	viewer.timeline.drag_ended.connect(func(_changed): dragging_index = false; update_index_hint())
 	viewer.timeline.value_changed.connect(func(_value): update_index_hint())
 	duration = shell.button(progress,"—",func(): show_remaining = not show_remaining; refresh())
-	duration.custom_minimum_size = Vector2(64,24); duration.theme_type_variation = "CompactButton"; duration.flat = true
+	duration.custom_minimum_size = Vector2(48,24); duration.theme_type_variation = "CompactButton"; duration.flat = true
+	duration.alignment = HORIZONTAL_ALIGNMENT_LEFT
+	for state in ["normal","hover","pressed","disabled"]:
+		var style: StyleBox = duration.get_theme_stylebox(state).duplicate()
+		style.content_margin_left = 4; style.content_margin_right = 4
+		duration.add_theme_stylebox_override(state,style)
 	requested = label(axis,""); requested.theme_type_variation = "HelpLabel"
 	requested.size_flags_horizontal = Control.SIZE_EXPAND_FILL; requested.clip_text = true
 	seek_button = shell.button(primary,"Seek…",open_seek); seek_button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
