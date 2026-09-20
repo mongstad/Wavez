@@ -8,7 +8,8 @@ G0–G4 are implemented and accepted. The current viewer includes deterministic
 video export, scientific inspection/analysis, bounded playback preparation, and
 particle/mesh/volume rendering. UX1 and UX2 are accepted. The accepted UX3
 [production shell](docs/UX3_SHELL.md) now hosts the [persistent transport](docs/UX3_TRANSPORT.md)
-for issue #42, pending owner review. Jobs and later workspace migration remain separate.
+and [persistent status and Jobs](docs/UX3_STATUS.md) for issue #43, pending owner review.
+Full workspace migration remains separate.
 
 Start with:
 

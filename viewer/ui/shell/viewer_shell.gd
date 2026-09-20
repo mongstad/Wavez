@@ -4,6 +4,7 @@ const ThemeSource = preload("res://ui/theme/simscope_theme.gd")
 const WORKSPACES = ["Scene", "Appearance", "Selection", "Analysis"]
 var viewer
 var transport
+var status_ui
 var bar: PanelContainer
 var dock: PanelContainer
 var scroll: ScrollContainer
@@ -118,7 +119,9 @@ func setup(owner_viewer) -> void:
 	error_text = Label.new(); error_text.text = "Capture could not be opened"; error_text.add_theme_color_override("font_color", theme.c(&"state.error")); error_row.add_child(error_text)
 	button(error_row, "Details…", func(): show_details("Open failed", error_details), "warning")
 	button(error_row, "Choose another…", viewer._show_open_dialog, "open")
-	button(error_row, "Dismiss", func(): open_error.hide(), "close")
+	button(error_row, "Dismiss", func():
+		open_error.hide()
+		if status_ui != null: status_ui.failures.erase("Open capture"); status_ui.refresh(), "close")
 	open_error.hide()
 	details = AcceptDialog.new(); details.title = "Source details"; details.theme = theme; add_child(details)
 	detail_text = TextEdit.new(); detail_text.editable = false; detail_text.custom_minimum_size = Vector2(480, 220); details.add_child(detail_text)
@@ -127,6 +130,8 @@ func setup(owner_viewer) -> void:
 	preload("res://analysis/ui_controls.gd").fit(viewer.inspector_box)
 	transport = preload("res://ui/shell/viewer_transport.gd").new()
 	add_child(transport); transport.setup(self)
+	status_ui = preload("res://ui/shell/viewer_status.gd").new()
+	add_child(status_ui); status_ui.setup(self)
 	select_workspace(0)
 	refresh()
 	layout()
@@ -240,7 +245,9 @@ func begin_open() -> void:
 func finish_open(problem: String) -> void:
 	loading = false
 	preload("res://analysis/ui_controls.gd").fit(viewer.inspector_box)
-	if not problem.is_empty(): error_details = problem; open_error.show()
+	if not problem.is_empty():
+		error_details = problem; open_error.show()
+		if status_ui != null: status_ui.remember("Open capture",problem)
 	# A successful open does not silently acknowledge the previous error.
 	refresh()
 
@@ -283,7 +290,8 @@ func layout() -> void:
 	var width := clampf(viewer.panel_width, 320, maxf(320, minf(560, extent.x - 650)))
 	if too_narrow: width = minf(560, extent.x)
 	var top := 48.0 if bar.visible else 0.0
-	var bottom: float = extent.y - (transport.layout(extent.x,extent.y) if transport != null else 0.0)
+	var status_height: float = status_ui.layout(extent.x,extent.y) if status_ui != null else 0.0
+	var bottom: float = extent.y - status_height - (transport.layout(extent.x,extent.y-status_height) if transport != null else 0.0)
 	dock.position = Vector2(extent.x-width, top); dock.size = Vector2(width, maxf(0, bottom-top)); dock.visible = viewer.overlay_visible
 	viewer.resize_handle.position = Vector2(extent.x-width-8, top); viewer.resize_handle.size = Vector2(8, maxf(0, bottom-top)); viewer.resize_handle.visible = viewer.overlay_visible
 	viewer.show_panel_button.hide()

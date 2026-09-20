@@ -75,7 +75,7 @@ func setup(controller) -> void:
 	max_gap = _text("Maximum gap","")
 	finite_subtotal = viewer._check(panel,"Include finite subtotal (incomplete)",false,func(_v):pass)
 	viewer._button(panel,"Run analysis",run_analysis)
-	viewer._button(panel,"Cancel analysis",func():jobs.cancel_background();revision += 1;status.text = "Cancellation requested; completed named results remain available.")
+	viewer._button(panel,"Cancel analysis",cancel_analysis)
 	result_list = viewer._option(panel,"Results")
 	result_list.item_selected.connect(_select_result)
 	viewer._button(panel,"Remove result",forget_result)
@@ -102,6 +102,9 @@ func setup(controller) -> void:
 	durable = preload("res://analysis/durable_controller.gd").new();add_child(durable);durable.setup(self)
 	matched = preload("res://analysis/matched_controller.gd").new();add_child(matched);matched.setup(self)
 	set_process(false)
+
+func cancel_analysis() -> void:
+	jobs.cancel_background();revision += 1;status.text = "Cancellation requested; completed named results remain available."
 
 func _text(label: String, initial: String) -> LineEdit:
 	var title := Label.new();title.text = label;panel.add_child(title)

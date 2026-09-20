@@ -342,7 +342,7 @@ A milestone may receive one of three outcomes:
 | UX1 | Audit & Design System Specification | ACCEPTED by owner 2026-09-13 at `229d4ea`; [report](docs/UX1_REPORT.md) |
 | UX2 | Theme Foundation & Component Library | ACCEPTED by owner 2026-09-13 at `5fae711`; [report](docs/UX2_REPORT.md) |
 | Pre-UX3/UX4 | Information architecture & visual direction | Owner merged #14/#40 design package in PR #39 on 2026-09-20; historical review evidence retained |
-| UX3 | Main Viewer Shell | #41 shell accepted/merged; #42 transport implemented, PENDING OWNER REVIEW; status/integration remain separately gated |
+| UX3 | Main Viewer Shell | #41 shell and #42 transport owner-merged; #43 status/Jobs PENDING OWNER REVIEW; integration separately gated |
 | UX4 | Workspace & Control Migration | BLOCKED BY UX3 |
 | UX5 | Application Settings | BLOCKED BY UX4 |
 | UX6 | Detachable Windows & Multi-Monitor | BLOCKED BY UX5 |
@@ -1420,14 +1420,14 @@ UX1 and UX2 are accepted. The legacy capture retirement gate is historical
 completed groundwork and must not be rerun merely because this roadmap still
 records it.
 
-The owner merged the design package in PR #39 and accepted shell PR #45.
-Issue #42 was the sole Ready item at the start of this work, on its existing
-owner-created issue-linked branch at accepted main `884ea73`. Its
-[transport implementation and validation](docs/UX3_TRANSPORT.md) are pending owner review.
+The owner merged shell PR #45 and transport PR #47. Issue #43 was the sole
+Ready item at the start of this work, using the existing owner-created linked
+branch at accepted main `a976ec6`. Its [status/Jobs implementation](docs/UX3_STATUS.md)
+is pending owner review.
 
-1. Review #42 persistent transport and explicit seek behavior.
+1. Review #43 persistent readiness, durable failures and existing Jobs access.
 2. The owner controls acceptance and merge; no UX3 milestone acceptance is claimed.
-3. Do not start #43 status/Jobs or #44 integration without their own Ready authorization.
+3. Do not start #44 integration without its own Ready authorization.
 4. Do not begin UX4 until UX3 is owner-accepted and UX4 is separately authorized.
 
 Astra must use the accepted design system, information architecture, visual

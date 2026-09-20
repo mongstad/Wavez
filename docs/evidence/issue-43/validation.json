@@ -1,0 +1,26 @@
+{
+  "baseline": "a976ec6a44913fec525252dd8276abeb7a91179d",
+  "native_shell_checks": 97,
+  "native_transport_checks": 62,
+  "performance_maintenance_checks": 66,
+  "playback_lifecycle_checks": 51,
+  "video_continuation_pass_assertions_including_native_ui": 83,
+  "native_video_ui_checks": 43,
+  "status_renderers": [
+    "forward_plus",
+    "gl_compatibility"
+  ],
+  "final_failures": [],
+  "development_failures": [
+    "Initial import: two inferred Button types corrected.",
+    "First status suite: status line inherited 32px control minimum; fixed local detail-button padding. Recovery PNG test used the wrong filename; corrected.",
+    "Second development suite timed out waiting for frame_post_draw after native minimize/restore. Harness now forces draws for evidence capture, matching existing background-export tests. Final lifecycle runs passed."
+  ],
+  "not_run": [
+    "Full 4K video matrix (continuation subset used).",
+    "Frozen 02B/03B performance benchmark comparison; historical external paths unavailable at prior check, not claimed as rerun.",
+    "Production real-capture suite; current issue uses small repository fixtures.",
+    "Exhaustive analysis/matched/isosurface permutations, mixed-monitor/HiDPI and long-session soak.",
+    "Manual owner desktop acceptance."
+  ]
+}

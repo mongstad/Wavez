@@ -1,10 +1,9 @@
 # Current status
 
-Issue #42 (UX3-TRANSPORT-001) adds the [persistent playback transport](UX3_TRANSPORT.md)
-to the accepted shell from owner-merged PR #45 (`884ea73`). The transport and
-explicit Seek time form are implemented **pending owner review**. Sampling,
-preparation controllers, independent layer cadences and video time domains retain
-their existing ownership. #43 status/Jobs and UX4 remain outside this issue.
+Issue #43 (UX3-STATUS-001) composes [persistent readiness and Jobs](UX3_STATUS.md)
+into the accepted shell/transport baseline, owner-merged PR #47 (`a976ec6`).
+Implementation is **pending owner review**. Existing worker and scientific
+ownership remains unchanged. #44 integration and UX4 are not started.
 
 As of **2026-09-20**, including G4 and PERF-001/002 maintenance reviewed and accepted by the user. Scientific simulations were not rerun. Historical results identify their recorded checkpoints. PERF-003 mesh maintenance was also reviewed and accepted by the owner on 2026-09-13; implementation checkpoint `7974c78`.
 
@@ -32,7 +31,7 @@ Representative external captures informed G3 timeline/playback validation. Scien
 
 Older capture writers/readers and public API entry points were retired before the UX milestones. The active product contract is SIMSCP3 / `.ssc` only; replacement coverage uses repository-owned native scenes and synthetic fixtures.
 
-## UX1 and UX2 — accepted; UX3 shell slice pending review
+## UX1 and UX2 — accepted; UX3 status slice pending review
 
 The [UX1 report](UX1_REPORT.md) records the current UI inventory, observed layout
 problems, technical coupling, proposed information hierarchy, concrete design
@@ -53,9 +52,9 @@ The owner reviewed and accepted UX2 on 2026-09-13 at
 `5fae711aa042d16a72ce4e6283e030aa69a32097`. Its milestone report and retained
 evidence preserve their original review-time state.
 The owner merged the design package in PR #39 and placed #41 in Ready.
-Only the [UX3 shell slice](UX3_SHELL.md) is now implemented, pending owner review.
-Transport, status/Jobs, integration acceptance and UX4 require their separate
-authorizations under the [UX plan](../UX_IMPLEMENTATION_PLAN.md).
+The shell and transport were owner-merged in PRs #45 and #47.
+[Status/Jobs](UX3_STATUS.md) is implemented pending owner review; integration
+acceptance and UX4 remain separately gated under the [UX plan](../UX_IMPLEMENTATION_PLAN.md).
 
 ## RENDER-001 — accepted
 
@@ -150,8 +149,8 @@ Midnight Scientific refinements, identifies historical versus current evidence,
 and extends the scale matrix to all five laboratory pages. The
 [validation report](UX_STYLE_VALIDATION.md) records 1,402 passing native checks,
 218 contrast pairs, all four scales, scientific-viewer isolation and physical
-4K limitations. No theme or production behavior was changed by issue #8. The current UX3
-authorization is limited to #41 below.
+4K limitations. No theme or production behavior was changed by issue #8. Current UX3
+authorization follows the issue #43 gate above.
 
 ## UI-003 — accepted
 
@@ -274,7 +273,7 @@ on the Project board. The [architecture](UX_INFORMATION_ARCHITECTURE.md),
 provide the design inputs for separately authorized implementation slices.
 Original review reports, mockups and evidence preserve their review-time wording.
 
-## UX3 shell and transport
+## UX3 shell, transport and status
 
 The shell was accepted and merged in PR #45. Issue #42 moves playback/time controls
 into a persistent bottom transport and adds a separate draft/Go/Cancel seek form.
@@ -284,5 +283,5 @@ validation](UX3_TRANSPORT.md) for implementation, evidence, limits and owner che
 
 The right dock retains its workspace entry points and scientific forms. Native
 fullscreen hides the command bar and retains camera controls, transport and mouse
-recovery. Status/Jobs, full workspace migration and UX3 milestone acceptance are
-not claimed. Historical reports/evidence retain their original review wording.
+recovery. [Status/Jobs](UX3_STATUS.md) adds persistent access to existing worker
+operations. Full workspace migration and UX3 milestone acceptance are not claimed. Historical reports/evidence retain their original review wording.
