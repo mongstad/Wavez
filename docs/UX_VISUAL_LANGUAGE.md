@@ -33,10 +33,21 @@ capture, renderer or dependency change. UX3 has not started.
 Three small composition corrections are intentional: the optional Quick setup
 body starts collapsed in the ordinary Appearance view; all workspaces are visible
 at normal widths; Jobs uses a 32-pixel action in the transport beside the 24-pixel
-status line. This fits the accepted target size without enlarging the shell.
+status line. The owner's final refinement expands the command bar from 40 to
+48 pixels, preserving 32-pixel controls with 8-pixel top/bottom padding.
 No control ownership or persistence changes follow from these placements.
 
-## Midnight Scientific composition
+## Platform and input scope
+
+UX3/UX4 target **desktop keyboard and mouse/trackpad** input. Compact layouts
+mean small desktop windows, not mobile or tablet navigation. Touch-first controls,
+touch gestures, tablet navigation, mobile layouts and touchscreen-specific target
+sizing are outside this design. Touch/tablet support requires a separately
+authorized future milestone. Desktop keyboard accessibility, visible focus,
+scaling, contrast and usable pointer targets remain required. The current 32-pixel
+controls are desktop targets, not a touch-support claim.
+
+## Midnight scientific composition
 
 The generator reads colors directly from
 [the accepted token resource](../viewer/ui/theme/simscope_tokens.gd). It does not
@@ -53,7 +64,8 @@ authoritative for native implementation.
   claim. No text is shrunk to fit a form.
 - **Geometry:** 32-pixel controls, 4-pixel control radius, 6-pixel popup radius;
   4/8/12/16/24/32 spacing; 128-pixel property-label column. Long threshold labels
-  wrap into two lines. Exact IDs use the full available width.
+  wrap into two lines. Exact IDs use the full available width. Both normal and
+  compact command bars are 48 pixels tall with controls at y=8 through y=40.
 - **Interaction:** blue fill identifies a primary action; secondary buttons have
   a visible boundary; quiet disclosures retain a chevron and hit area. Selection
   uses `selection.fill` and a leading icon/label. Focus has a separate 2-pixel ring
@@ -62,21 +74,42 @@ authoritative for native implementation.
   words and vector icons. A selected blue control is not a success signal.
   Purple/teal are confined to the small brand marks, not scientific quantities.
 
-The dock is 360 pixels at 1440×900 and 320 pixels at 1024×640. Its context header
+The dock is 360 pixels at 1440×900 and 320 pixels at 1024×640; the updated viewport
+allocations are 1080×764 and 704×504 before separators. Its context header
 stays fixed while its body scrolls. Large screens gain viewport area, not an
 unbounded property column. The compact screenshot shows a local task, not a claim
 that the entire volume form fits without scrolling. Color/Opacity are outside
 generic Advanced controls. Opening Quick setup focuses that task; closing it
 returns space to the editable mappings.
 
+### Vertical and optical alignment
+
+Center button labels and dropdown contents within the control's height using a
+shared font baseline per row; align by glyph metrics rather than a guessed top
+offset. Numeric content uses its numeric font metrics. Center chevrons and toolbar
+and transport icons in 16-pixel slots, vertically on the control midpoint.
+Icon-only buttons also center the slot horizontally, including the wider Play
+button. Small placement offsets center the existing provisional drawing within
+its slot; the icon paths are unchanged. Labels and icons must appear balanced
+when viewed together, without shifting adjacent controls' baselines.
+
+The static generator uses a cap/descender reference for label baselines and a
+digit reference for numeric fields. Visible ink may differ from the reference
+midpoint by up to 2 pixels for different glyph shapes. Static checks record these
+offsets and slot centers. Native pixel-perfect font/icon placement, scaling and
+optical review remain UX3 validation tasks, not results of this static check.
+
 ## Icon and control language
 
-[The specimen sheet](evidence/issue-40/components.png) demonstrates the icon family
+[The specimen sheet](evidence/issue-40/components.png) demonstrates a **provisional** icon family
 and actual button/menu shapes. [The SVG sprite](evidence/issue-40/icons.svg) and
 generator retain original, reviewable vector geometry: a 16-unit grid,
 1.5-unit outlines, round caps/joins and consistent optical margins. Existing UX2
 play/copy/chevron geometry is retained; additional commands are documentation-only
 proposals. There is no icon font, emoji, imported icon package or production asset.
+This issue does not finalize or expand the artwork. Native icon quality and
+optical refinement can be reviewed in UX3 and finalized in UX8, each under its
+own authorization. These stages do not authorize work now.
 
 | Pattern | Names and behavior contract |
 |---|---|
@@ -98,14 +131,20 @@ identifiers, partial restore behavior or v2/v3 state.
 
 ## UI copy style guide
 
-These rules apply to proposed visible copy; underlying schema keys and historical
-source labels remain unchanged.
+Sentence case applies to **every SimScope-authored heading, label, button, menu
+item, option and status**, not just section headings. Preserve source-defined
+object/channel names, the SimScope product name, established acronyms such as IDs,
+and conventional unit casing. Do not rewrite source metadata to enforce style.
+Underlying schema keys and historical source labels remain unchanged.
 
 | Rule | Use | Avoid |
 |---|---|---|
 | Sentence case | `Quick setup`, `Source probe`, `Recorded history` | Title Case Everywhere, uppercase emphasis |
 | Section titles | Short nouns naming a task or quantity: Color, Opacity, Volume quality | Packing values, algorithms, provenance or instructions into a heading |
+| Redundancy | `Analysis type` labels the `Population counts` selector | A Population counts heading immediately repeating the selected option |
 | Action verbs | Open, Apply, Probe source, Create selection, Run analysis, Copy result, Reset color | Bracketed pseudo-buttons, vague Go outside a clearly labeled seek field |
+| Range command | `Use full range` for an immediate action; `Full layer range` only for a mode/option | `Use full layer range` on the action button |
+| Illustrative names | `Particles`, `Scalar field`, `Mesh`, `Example selection` | Domain-specific names in generic mockups; source-defined names remain verbatim |
 | Status names | Ready, Preparing sample…, Unavailable, Complete, Cancelled, Failed; explain cause/recovery beside exceptions | Internal worker states or color-only status |
 | Units | Separate value and explicit source unit; use `world units`, `%`, `MiB`; unknown units stay `Source units` | Inferring seconds/metres/density units from a channel name |
 | Rates | `Rate` plus `units/s` in compact playback chrome; tooltip: `Recorded units per playback second`; sample mode says `Samples per playback second` | Confusing playback rate, output frames per second and recorded time |
@@ -121,8 +160,16 @@ inputs means percentiles, not opacity percentages; the surrounding Quick setup
 task and details supply that context. A real native field must keep its complete
 round-trip text; short illustrative mockup numbers are not a rounding policy.
 
-Normal views use one time readout. While seeking/buffering, **Displayed time**
-remains the committed scene time and **Requested time** shows the target. The
+Normal views use a **read-only Displayed time** readout and a separate **Seek…**
+action. Seek opens a small form titled **Seek time**, with an editable **Target**
+in recorded source units and explicit **Go** and **Cancel** actions. Merely editing
+the target does not advance the displayed scene or submit a request. Go submits
+the seek; Cancel closes the form without submitting. Escape in the numeric editor
+restores its committed text; Escape outside active editing closes the form.
+Retain the existing numeric draft/validation contract. An editable target is never labeled Displayed
+time. While buffering, read-only **Displayed time** remains the committed scene
+time and **Requested time** reports the submitted target. A new draft in Seek
+does not overwrite either readout until the relevant request/display transition. The
 slider says **Sample index**, with secondary **Union of recorded samples**; its
 positions are still discrete union indices. A layer's **Source time** is separate.
 Probe metadata says **Probed at** and can show an **Earlier sample** badge; it never
@@ -147,10 +194,15 @@ identified future UX4 requirement, not a new capability implemented here.
    other objects retain the existing [preset contract](VOLUME_DISPLAY_PRESETS.md).
    Reset color and Reset opacity mapping retain their separate scopes.
 
-“What changes” is supplementary: the inline one-time instruction, percentile
-inputs, eligibility and clipping notices are already visible. Details list the
-exact affected colormap/mappings and preserved strength/quality values. Formulae
-remain in technical documentation, not the action label. The
+Quick setup uses only the compact info affordance in its section heading; there
+is no additional **What changes** button. Hover or keyboard focus shows the
+one-sentence summary **Apply a one-time color and opacity setup.** Click or
+keyboard activation opens [concise details](evidence/issue-40/quick-setup-details.png)
+with a **Volume display handbook** link. Closing details restores focus to the
+heading's info action. The inline one-time instruction, percentile inputs,
+eligibility and clipping notices remain visible without opening help. Details
+identify affected colormap/mappings and preserved strength/quality values;
+formulae remain in technical documentation, not the action label. The
 [Color detail example](evidence/issue-40/color-details.png) demonstrates a short
 focused explanation and handbook action. Essential errors are never hidden there.
 
@@ -168,10 +220,15 @@ focused explanation and handbook action. Essential errors are never hidden there
 | [ Apply starting point ] / [ Probe source ] | Filled Apply / Probe source buttons | Makes the primary action visually recognizable |
 | Sampling quality | Volume quality; Ray step with world units | Names the user concern while preserving the actual parameter |
 | Text-only Previous / Play / Next line | Vector transport controls, indexed slider, mono time fields | Separates commands from readouts and exposes timeline structure |
+| Population counts heading plus Population counts selector | Analysis type plus selected Population counts option | Removes redundant text |
+| Dust particles / Collapse field / Boundary | Particles / Scalar field / Mesh | Keeps illustrative object names neutral |
+| Use full layer range action | Use full range | Uses a short immediate command |
+| What changes button | Section-heading info; focus summary and activated details | Removes a redundant help control |
+| Editable Displayed time | Read-only Displayed time; Seek… opens a labeled target field | Separates observed state from user intent |
 
 ## Review and limitations
 
-All 15 figures are **static visual proposals**, not screenshots of an implemented
+All 17 figures are **static visual proposals**, not screenshots of an implemented
 redesign. The procedural scene marks and result series are illustrative independent
 examples, not scientific output, capture-derived evidence or renderer proposals.
 The Selection example edits a single-ID selection; the separate Analysis example
@@ -183,6 +240,9 @@ The original native observations, W1–W8 tasks, control inventory and regressio
 mapping are preserved. Workspace switching now selects a visible segment rather
 than opening the desktop chooser; prior abstract activation counts were never
 physical click measurements. No usability speedup is claimed.
+The revised seek path is Seek… → edit Target → Go, one form-opening activation
+more than the original inline target. The old W1 counts remain historical; they
+are not current interaction counts for this refinement.
 
 Before acceptance, inspect the [gallery](evidence/issue-40/README.md) at native
 size and follow its seven review steps. Confirm the visual/copy direction

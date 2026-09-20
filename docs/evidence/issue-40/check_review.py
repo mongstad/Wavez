@@ -22,10 +22,11 @@ assert layout['token_sha256'] == hashlib.sha256(token_path.read_bytes()).hexdige
 tokens = dict(re.findall(r'&"([\w.]+)": Color\("([0-9a-f]+)"\)',token_path.read_text()))
 assert not git('diff',MAIN_BASE,'--','viewer','simscope_export','tests','tools')
 assert not git('diff',REVISION_BASE,'--','docs/UX_CONTROL_MAP.md')
+assert not git('diff','b2cab340b605d552462d0d5595cce0abe24c9198','--','docs/evidence/issue-40/icons.svg')
 assert not git('diff',REVISION_BASE,'--','docs/evidence/issue-14/*.png','docs/evidence/issue-14/*.json','docs/evidence/issue-14/render_wireframes.py')
 historical = git('show',REVISION_BASE+':docs/UX_IA_REVIEW.md').split('\n',2)[2]
 assert (ROOT/'docs/UX_IA_REVIEW.md').read_text().endswith(historical)
-allowed = {'docs/CURRENT_STATUS.md','docs/UX_INFORMATION_ARCHITECTURE.md',
+allowed = {'docs/CURRENT_STATUS.md','docs/UX_INFORMATION_ARCHITECTURE.md','docs/UX1_DESIGN_SYSTEM.md',
            'docs/UX_IA_REVIEW.md','docs/UX_VISUAL_LANGUAGE.md',
            'docs/evidence/issue-14/check_review.py','docs/evidence/issue-14/wireframes.md'}
 changed = git('diff','--name-only',REVISION_BASE).splitlines()
@@ -34,10 +35,14 @@ assert all(p in allowed or p.startswith('docs/evidence/issue-40/') for p in chan
 
 required = {'scene','particle','volume','volume-details','faint-inherited',
             'faint-edited','signed','selection','analysis','results','compact',
-            'mesh','components','time-difference','color-details'}
+            'mesh','components','time-difference','color-details','seek-target','quick-setup-details'}
 figures = {x['name']:x for x in layout['figures']}
 assert set(figures) == required
 control_count = 0
+alignment_count = 0
+assert layout['command_bar_height']==48
+assert layout['input_scope']=='Desktop keyboard and mouse/trackpad'
+assert 'Provisional' in layout['icon_status'] and 'UX3' in layout['icon_status'] and 'UX8' in layout['icon_status']
 for name,figure in figures.items():
     path = OUT/(name+'.png')
     assert path.stat().st_size < 1024*1024,path
@@ -52,8 +57,16 @@ for name,figure in figures.items():
         assert x>=0 and y>=0 and x+cw<=w and y+ch<=h,(name,control)
         assert cw>=28 and ch>=28,(name,control)
         assert control['name'],(name,control)
-        if name!='components' and 40<y<h-88:
+        if name!='components' and 48<y<h-88:
             assert y+ch<=h-88,(name,'dock/transport overlap',control)
+        if name!='components' and y<48:
+            assert y==8 and ch==32,(name,'command bar padding',control)
+        for key in ('icon_slot','chevron_slot'):
+            if control.get(key):
+                ix,iy,iw,ih=control[key]
+                assert abs((iy+ih/2)-(y+ch/2))<.01,(name,key,control)
+                if key=='icon_slot' and control['icon_only']:
+                    assert abs((ix+iw/2)-(x+cw/2))<.01,(name,'icon horizontal centering',control)
     for a,b in itertools.combinations(controls,2):
         ax,ay,aw,ah=a['rect'];bx,by,bw,bh=b['rect']
         assert min(ax+aw,bx+bw)<=max(ax,bx) or min(ay+ah,by+bh)<=max(ay,by),(name,'overlapping controls',a,b)
@@ -61,11 +74,26 @@ for name,figure in figures.items():
         x,y,lw,lh=label['rect']
         assert x>=0 and y>=0 and x+lw<=w+.01 and y+lh<=h,(name,label)
         assert not any(t in label['text'] for t in ('·',' @ ','[ Apply','[ Probe','Workspace:')),(name,label)
+        assert not any(t in label['text'] for t in ('Dust particles','Collapse field','Core sample','What changes','Use full layer range')),(name,label)
+        # Check authored multiword copy, preserving conventional acronym/unit
+        # casing. This fixture audit is not a source-metadata rewriting rule.
+        for sentence in re.split(r'(?<=[.!?])\s+',label['text']):
+            for word in re.findall(r'[A-Za-z]+',sentence)[1:]:
+                assert not word[0].isupper() or word in {'IDs','MiB','X','Y','Z'},(name,'sentence case',label)
+    for alignment in figure['alignments']:
+        x,y,aw,ah=alignment['slot']
+        assert abs(alignment['ink_center_y']-(y+ah/2))<=2,(name,alignment)
+        alignment_count+=1
     if name not in ('compact','components'):
         nav = {x['name'] for x in controls if 40<x['rect'][1]<132}
         assert {'Scene','Appearance','Selection','Analysis'} <= nav,(name,nav)
     if name!='components':
         assert any(x['name']=='Jobs 0' and x['rect'][1]>=h-88 for x in controls)
+        assert any(x['name']=='Seek…' for x in controls)
+        displayed=next(x for x in figure['labels'] if x['text']=='Displayed time' and x['rect'][1]>=h-88)
+        dx,dy,_,_=displayed['rect']
+        assert any(x['text']=='200' and x['rect'][0]==dx and x['rect'][1]>dy for x in figure['labels'])
+        assert not any(x['type']=='numeric input' and abs(x['rect'][0]-dx)<4 and dy<x['rect'][1]<dy+40 for x in controls)
 
 def texts(name):
     return {x['text'] for x in figures[name]['labels']}
@@ -73,15 +101,20 @@ def texts(name):
 assert {'0','100'} <= texts('faint-inherited')
 assert {'1','99'} <= texts('faint-edited')
 assert {'0','1.72'} <= texts('faint-edited')  # Existing mappings before Apply.
-for name in ('faint-inherited','faint-edited','compact'):
+for name in ('faint-inherited','faint-edited','compact','quick-setup-details'):
     controls=figures[name]['controls']
     apply=next(x for x in controls if x['name']=='Apply')
     neighbors=[x for x in controls if x['type']=='numeric input' and x['rect'][1]==apply['rect'][1]]
     assert len(neighbors)==2
+    assert sum(x['name']=='Quick setup details' and x['icon']=='info' for x in controls)==1
 assert {'Symmetric','Locked','Magnitude','0.01','1.298'} <= texts('signed')
 assert {'9007199254740993','Bind source snapshot…'} <= texts('selection')
 assert 'Requested time' not in texts('volume')
 assert {'Displayed time','Requested time','200','220'} <= texts('time-difference')
+assert {'Seek time','Target','240','Go','Cancel'} <= texts('seek-target')
+assert {'Apply a one-time color and opacity setup.','Volume display handbook'} <= texts('quick-setup-details')
+assert sum(x['text']=='Population counts' for x in figures['analysis']['labels'])==1
+assert {'Analysis type','Use full range'} <= texts('analysis')
 assert {'Volume quality','Ray step','Reset opacity mapping'} <= texts('volume-details')
 assert {'For positive and negative data','Enter a finite number.'} <= texts('components')
 assert {'Export numerical data…','Return to viewport','Recorded range'} <= texts('results')
@@ -111,6 +144,11 @@ for fore,back,minimum in pairs:
 subprocess.run(['git','diff','--check'],cwd=ROOT,check=True)
 report={'issue':40,'static_mockups':len(figures),'vector_icons':len(layout['icons']),
         'controls_with_bounds_nonoverlap_and_minimum_size':control_count,
+        'labels_with_optical_alignment_checks':alignment_count,
+        'command_bar_48px_with_8px_padding':'pass',
+        'sentence_case_neutral_names_and_no_duplicate_analysis_heading':'pass',
+        'displayed_time_read_only_and_separate_seek_target':'pass',
+        'provisional_icon_geometry':'unchanged',
         'contrast_pairs':contrast,'theme_token_hash':'matches current source',
         'required_copy_navigation_and_adjacent_inputs':'pass',
         'historical_evidence_and_control_map':'unchanged',

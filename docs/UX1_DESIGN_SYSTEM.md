@@ -36,7 +36,7 @@ This is a placement specification for UX3/4, not a new layout implementation. De
 
 ```text
 ┌──────────────────────────────────────────────────────────────────┐
-│ Open   capture name / source state          Export   View   Help │ 40
+│ Open   capture name / source state          Export   View   Help │ 48
 ├──────────────────────────────────────────┬───────────────────────┤
 │                                          │ Workspace chooser     │
 │ Scientific viewport                      │ Scene / Appearance /  │
@@ -51,7 +51,19 @@ This is a placement specification for UX3/4, not a new layout implementation. De
 └──────────────────────────────────────────────────────────────────┘
 ```
 
-At 1440×900, a 360 px dock leaves approximately 1080×772 for the viewport before separators. At a 1024×640 logical window, a 320 px dock leaves approximately 704×512. The transport may use two rows within its 64 px allocation. These are layout targets to validate, not current supported-size promises. A 44 px icon rail with accessible names may replace the open dock when collapsed; a visible Restore panels action must always remain. Fullscreen preserves that recovery action. F1 remains a compatible shortcut.
+Issue #40's owner refinement makes the command bar 48 px tall with 32 px controls
+and 8 px top/bottom padding. At 1440×900, a 360 px dock leaves approximately
+1080×764 for the viewport before separators. At a 1024×640 logical desktop
+window, a 320 px dock leaves approximately 704×504. The transport may use two
+rows within its 64 px allocation. These are layout targets to validate, not
+current supported-size promises. A 44 px icon rail with accessible names may
+replace the open dock when collapsed; a visible Restore panels action must
+always remain. Fullscreen preserves that recovery action. F1 remains compatible.
+
+UX3/UX4 target desktop keyboard and mouse/trackpad. The compact layout is not a
+mobile or tablet design. Touch-first controls, touch gestures and touchscreen
+target sizing require a separately authorized future milestone; desktop keyboard
+accessibility, focus, scaling, contrast and usable pointer targets remain required.
 
 For logical widths below 1200, use one workspace chooser rather than six crowded tabs. The dock can grow from 320 to 560 px; the viewport must retain at least 640 logical pixels while a dock is expanded. Below the proposed 1024×640 minimum, constrain the window or offer a clearly recoverable collapsed-dock layout; never shrink text to fit. Dialogs get a scrollable body and fixed action row. Analysis plots may expand within the viewport region as a temporary workbench; they do not require a permanently open second panel.
 

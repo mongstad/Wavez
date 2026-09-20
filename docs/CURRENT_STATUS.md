@@ -272,3 +272,9 @@ revises the same PR #39 with a [visual language and copy guide](UX_VISUAL_LANGUA
 and [high-fidelity static mockups](evidence/issue-40/README.md). The architecture,
 control ownership and scientific semantics remain intact. This revised proposal
 is pending owner review; no acceptance or production migration is implied.
+
+Final owner-requested design refinements specify sentence case and neutral example
+names, a 48-pixel command bar, optically aligned controls, compact heading help,
+and separate read-only displayed time and editable seek targets. UX3/UX4 input
+scope is desktop keyboard and mouse/trackpad; touch/tablet support requires future
+authorization. Icons remain provisional for later UX3 review and UX8 refinement.

@@ -35,11 +35,12 @@ is a discoverability limitation, not a demonstrated stale-legend defect.
 
 ## Shell and ownership
 
-At 1440×900 logical pixels use a 40-pixel command bar, 64-pixel transport and
+At 1440×900 logical pixels use a 48-pixel command bar, 64-pixel transport and
 24-pixel status line. One right dock starts at 360 pixels; resize between 320
 and 560 subject to at least 640 pixels of viewport width. The resulting default
-viewport is approximately 1080×772 before borders. A 1024×640 layout uses a
-320-pixel dock and approximately 704×512 viewport. These are design allocations,
+viewport is approximately 1080×764 before borders. A 1024×640 layout uses a
+320-pixel dock and approximately 704×504 viewport, also with a 48-pixel command
+bar. Its 32-pixel controls have 8-pixel top/bottom padding. These are design allocations,
 not runtime promises. At desktop widths, show Scene, Appearance, Selection and
 Analysis as a two-by-two icon-and-label navigation grid. Use a chooser below
 1200 logical pixels. No permanent second sidebar.
@@ -65,6 +66,9 @@ Time labels are literal: the slider is **Sample index**, with secondary
 **Union of recorded samples**, even in Recorded time mode. Its equally spaced
 positions are not physical-time distances. Show **Displayed time**; add
 **Requested time** only when different, with contextual **Source time** per object.
+Displayed/requested readouts are read-only. **Seek…** opens an explicit **Seek time**
+form with editable **Target** and Go/Cancel; entering a draft does not advance the
+display or submit a request. Never label a target editor Displayed time.
 Rate details say **Samples per playback second** or **Recorded units per playback second**.
 Video forms separately say **Recorded units per video second** and **Output frames per second**.
 Unknown physical units remain unknown. Independent layers retain held/interpolated/
@@ -137,7 +141,7 @@ Use concise rows, not giant accordions. Default order and state:
 | Group | Initially visible | One named secondary disclosure |
 |---|---|---|
 | Object and representation | Name, field kind, channel, visibility, ray-march/slice/surface status, current source sample and unavailable reason | Metadata in Scene details; no nested metadata tree here |
-| Quick setup | Named collapsed task in ordinary Appearance; opening it reveals action chooser, Apply and one-time guidance; Faint percentile inputs beside Apply with current values and prospective clipping notice | What changes details list exact affected settings; essential inputs, prerequisites and warnings stay visible |
+| Quick setup | Named collapsed task in ordinary Appearance; opening it reveals action chooser, Apply and one-time guidance; Faint percentile inputs beside Apply with current values and prospective clipping notice | Compact heading info: one-sentence hover/focus summary; activation opens concise details and handbook link. No extra What changes button; essential inputs, prerequisites and warnings stay visible |
 | Color | Colormap, linear/log normalization, resolved min/max, frozen/manual policy, derivation channel/time and clipping status | **Derive range from sample**: symmetric or percentile inputs + Freeze; **Reset color** action remains explicit |
 | Opacity | Linear scalar/Magnitude, zero/full thresholds and strength | Mapping details link, not hidden essential editors; explicit **Reset opacity mapping** |
 | Volume quality | Current ray step and units, concise quality/cost help | **Sampling details**: cap/preview limits; editor can remain on main row |
@@ -241,15 +245,25 @@ The control map records current ownership; it must not be inferred from new loca
 
 ## Responsive and accessibility review targets
 
+UX3/UX4 target desktop keyboard and mouse/trackpad. Compact means a small desktop
+window. Touch-first controls, touch gestures, tablet navigation, mobile layouts
+and touchscreen-specific sizing are excluded; touch/tablet support needs a
+separately authorized future milestone. Desktop keyboard accessibility, focus,
+scaling, contrast and usable pointer targets remain required.
+
 Use 14-pixel body, 13-pixel numeric, 12-pixel secondary text; 32-pixel controls
 (28 compact), spacing 4/8/12/16/24/32. Opaque shared surfaces and focus/text roles
 come from the design system. Revised mockups read the current color tokens; actual font,
 assistive technology and physical DPI behavior still require later native tests.
+The [alignment contract](UX_VISUAL_LANGUAGE.md#vertical-and-optical-alignment)
+centers labels, dropdown contents, chevrons and icons. Native pixel-perfect
+alignment remains a UX3 task. The current icons are provisional design evidence;
+native review belongs to UX3 and final artwork refinement to UX8.
 
 | Physical target / scale | Logical space | Proposed allocation |
 |---|---|---|
-| 1440×900 / 100% | 1440×900 | 360 dock, four visible workspace choices; 1080×772 viewport |
-| 1024×640 / 100% | 1024×640 | 320 dock, stacked labels, two-row transport, 704×512 viewport |
+| 1440×900 / 100% | 1440×900 | 360 dock, four visible workspace choices; 1080×764 viewport |
+| 1024×640 / 100% | 1024×640 | 320 dock, stacked labels, two-row transport, 704×504 viewport |
 | 3840×2160 / 100% | 3840×2160 | 360 dock; no stretched full-width property cards |
 | 3840×2160 / 125% | 3072×1728 | Same logical sizes, one scale application |
 | 3840×2160 / 150% | 2560×1440 | Same shell; more viewport, not more simultaneous forms |

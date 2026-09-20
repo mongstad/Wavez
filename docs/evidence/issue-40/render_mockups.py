@@ -24,9 +24,10 @@ SANS = Path(os.environ.get('UX_MOCKUP_FONT', '/usr/share/fonts/google-noto/NotoS
 BOLD = Path(os.environ.get('UX_MOCKUP_BOLD', '/usr/share/fonts/google-noto/NotoSans-SemiBold.ttf'))
 MONO = ROOT / 'viewer/ui/fonts/DejaVuSansMono.ttf'
 S = 2
+COMMAND_BAR = 48
 MANIFEST = []
 
-# Original 16-unit vector drawings. Existing UX2 play/copy/chevron geometry is
+# Provisional 16-unit vector drawings, not final icon artwork. UX2 play/copy/chevron geometry is
 # retained; additions follow its 1.5-unit outline, round caps and joins.
 # These tuples also generate the reviewable SVG sprite; no symbol fonts.
 ICONS = {
@@ -74,6 +75,7 @@ class Canvas:
         self.im = Image.new('RGB', (w*S, h*S), C['surface.0'])
         self.d = ImageDraw.Draw(self.im)
         self.controls, self.labels = [], []
+        self.alignments = []
         self.clip_bottom = h
 
     def rect(self, x, y, w, h, fill='surface.1', stroke=None, radius=4, width=1):
@@ -95,6 +97,14 @@ class Canvas:
         return width
 
     def icon(self, name, x, y, color='text.secondary', size=16):
+        # Center the existing drawing in its slot; do not refine the artwork.
+        points=[]
+        for typ,v in ICONS[name]:
+            if typ=='p':points.extend(v)
+            elif typ=='r':points.extend([(v[0],v[1]),(v[0]+v[2],v[1]+v[3])])
+            else:points.extend([(v[0]-v[2],v[1]-v[2]),(v[0]+v[2],v[1]+v[2])])
+        x+=(8-(min(p[0] for p in points)+max(p[0] for p in points))/2)*size/16
+        y+=(8-(min(p[1] for p in points)+max(p[1] for p in points))/2)*size/16
         for typ, v in ICONS[name]:
             k = size/16
             if typ == 'p':
@@ -106,6 +116,19 @@ class Canvas:
             else:
                 a,b,r=v;self.d.ellipse(((x+(a-r)*k)*S,(y+(b-r)*k)*S,(x+(a+r)*k)*S,(y+(b+r)*k)*S),outline=col(color),width=round(1.5*k*S))
 
+    def centered_text(self,x,y,w,h,value,size=14,color='text.primary',role='body'):
+        # Shared font baseline within a row, with the reference ink optically
+        # centered. Numeric roles use 0; labels use cap + descender reference Ag.
+        face=font(size,role)
+        reference=face.getbbox('0' if role=='numeric' else 'Ag',anchor='ls')
+        glyph=face.getbbox(str(value),anchor='ls')
+        baseline=y+h/2-(reference[1]+reference[3])/(2*S)
+        top=baseline+glyph[1]/S
+        self.text(x,top,value,size,color,role,limit=w)
+        self.alignments.append({'text':str(value),'slot':[x,y,w,h],
+                                'ink_center_y':round(baseline+(glyph[1]+glyph[3])/(2*S),3),
+                                'baseline':round(baseline,3)})
+
     def button(self, x,y,w,label='', icon=None, kind='secondary', dropdown=False, focus=False, name=None, h=32):
         fill = {'primary':'accent.primary','selected':'selection.fill','quiet':'surface.1','disabled':'surface.1'}.get(kind,'surface.2')
         border = 'accent.primary' if kind in ('primary','selected') else 'border.subtle' if kind in ('quiet','disabled') else 'border.control'
@@ -113,33 +136,36 @@ class Canvas:
         self.rect(x,y,w,h,fill,border)
         if focus: self.rect(x-4,y-4,w+8,h+8,None,'focus.ring',6,2)
         tx=x+12
-        if icon:self.icon(icon,x+8,y+(h-16)/2,ink);tx=x+32
-        if label:self.text(tx,y+(h-14)/2-1,label,color=ink,limit=w-(tx-x)-(28 if dropdown else 12))
+        icon_x=x+8 if label else x+(w-16)/2
+        if icon:self.icon(icon,icon_x,y+(h-16)/2,ink);tx=x+32
+        if label:self.centered_text(tx,y,w-(tx-x)-(28 if dropdown else 12),h,label,color=ink)
         if dropdown:self.icon('down',x+w-24,y+(h-16)/2,ink)
-        self.controls.append({'type':kind+' button','name':name or label or icon,'rect':[x,y,w,h],'focus':focus,'icon':icon,'dropdown':dropdown})
+        self.controls.append({'type':kind+' button','name':name or label or icon,'rect':[x,y,w,h],'focus':focus,'icon':icon,'icon_only':bool(icon and not label),'dropdown':dropdown,
+                              'icon_slot':[icon_x,y+(h-16)/2,16,16] if icon else None,
+                              'chevron_slot':[x+w-24,y+(h-16)/2,16,16] if dropdown else None})
 
     def input(self,x,y,w,value,numeric=True,focus=False,error=False):
         self.rect(x,y,w,32,'surface.2','state.error' if error else 'border.control')
         if focus:self.rect(x-4,y-4,w+8,40,None,'focus.ring',6,2)
-        self.text(x+10,y+9,value,13 if numeric else 14,role='numeric' if numeric else 'body',limit=w-20)
+        self.centered_text(x+10,y,w-20,32,value,13 if numeric else 14,role='numeric' if numeric else 'body')
         self.controls.append({'type':'numeric input' if numeric else 'text input','name':value,'rect':[x,y,w,32],'focus':focus,'invalid':error})
 
     def badge(self,x,y,label,icon=None,color='text.secondary'):
         width=self.d.textlength(label,font=font(12))/S+16+(20 if icon else 0)
         self.rect(x,y,width,24,'surface.2','border.subtle',4)
         if icon:self.icon(icon,x+6,y+5,color,14)
-        self.text(x+8+(20 if icon else 0),y+6,label,12,color)
+        self.centered_text(x+8+(20 if icon else 0),y,width-16-(20 if icon else 0),24,label,12,color)
         return width
 
     def toggle(self,x,y,label,on=True):
-        self.text(x,y+9,label)
+        self.centered_text(x,y,self.cw-48,32,label)
         self.rect(x+self.cw-40,y+6,36,20,'accent.primary' if on else 'surface.3','border.control',10)
         cx=x+self.cw-(16 if on else 30)
         self.d.ellipse(((cx-6)*S,(y+10)*S,(cx+6)*S,(y+22)*S),fill=col('accent.foreground' if on else 'text.secondary'))
         self.controls.append({'type':'toggle','name':label,'rect':[x,y,self.cw,32],'value':on})
 
     def row(self,y,label,value,choice=False,numeric=True):
-        self.text(self.x,y+9,label,color='text.secondary',limit=128)
+        self.centered_text(self.x,y,128,32,label,color='text.secondary')
         if choice:self.button(self.x+136,y,self.cw-136,value,dropdown=True)
         else:self.input(self.x+136,y,self.cw-136,value,numeric)
 
@@ -159,15 +185,16 @@ class Canvas:
     def save(self):
         path=OUT/(self.name+'.png')
         self.im.resize((self.w,self.h),Image.Resampling.LANCZOS).save(path,optimize=True)
-        MANIFEST.append({'name':self.name,'size':[self.w,self.h], 'controls':self.controls,'labels':self.labels,'sha256':hashlib.sha256(path.read_bytes()).hexdigest()})
+        MANIFEST.append({'name':self.name,'size':[self.w,self.h], 'controls':self.controls,'labels':self.labels,
+                         'alignments':self.alignments,'sha256':hashlib.sha256(path.read_bytes()).hexdigest()})
 
 
 def scene_image(f, kind='volume'):
     """Original deterministic illustrative marks, never native renderer evidence."""
     xend=f.w-f.dock
-    f.rect(0,40,xend,f.h-128,'#080d16',radius=0)
+    f.rect(0,COMMAND_BAR,xend,f.h-COMMAND_BAR-88,'#080d16',radius=0)
     rng=random.Random(40)
-    cx,cy=xend*.5,40+(f.h-128)*.47
+    cx,cy=xend*.5,COMMAND_BAR+(f.h-COMMAND_BAR-88)*.47
     # Faint perspective guide, distinct from scientific data coloring.
     for i in range(-3,4):
         f.line([(cx-250+i*24,cy+132+i*14),(cx+188+i*24,cy+200-i*10)],'#172334')
@@ -186,9 +213,9 @@ def scene_image(f, kind='volume'):
             f.d.ellipse(((x-radius)*S,(y-radius)*S,(x+radius)*S,(y+radius)*S),fill=tone)
     f.text(24,116,'demo.ssc',12,'text.muted')
     f.text(24,136,'3 objects',12,'text.muted')
-    f.button(16,56,140,'Frame scene','frame')
-    f.button(164,56,150,'Reset camera','reset')
-    f.button(322,56,114,'Navigate',dropdown=True)
+    f.button(16,64,140,'Frame scene','frame')
+    f.button(164,64,150,'Reset camera','reset')
+    f.button(322,64,114,'Navigate',dropdown=True)
     # Small orientation guide; no scientific legend or new source representation.
     f.line([(44,f.h-128),(65,f.h-136)],'text.muted')
     f.line([(44,f.h-128),(44,f.h-152)],'text.muted')
@@ -203,29 +230,29 @@ def shell(name,workspace='Appearance',object_type='field',compact=False,held=Fal
     a=tuple(bytes.fromhex(C['atmosphere.start'][1:]));b=tuple(bytes.fromhex(C['atmosphere.end'][1:]))
     for x in range(f.w):
         c=tuple(round(a[i]+(b[i]-a[i])*x/f.w) for i in range(3))
-        f.d.line((x*S,0,x*S,40*S),fill=c,width=S)
-    for i,key in enumerate(('accent.primary','identity.purple','identity.teal')):f.rect(16+i*6,12,3,16,key,radius=0)
-    f.text(42,12,'SimScope',16,role='heading')
-    f.button(140,4,100,'Open…','open')
-    f.text(260,13,'demo.ssc',14,'text.secondary')
+        f.d.line((x*S,0,x*S,COMMAND_BAR*S),fill=c,width=S)
+    for i,key in enumerate(('accent.primary','identity.purple','identity.teal')):f.rect(16+i*6,16,3,16,key,radius=0)
+    f.centered_text(42,0,90,COMMAND_BAR,'SimScope',16,role='heading')
+    f.button(140,8,100,'Open…','open')
+    f.centered_text(260,0,250,COMMAND_BAR,'demo.ssc',14,'text.secondary')
     bx=f.w-472
     for label,ico,width in [('State','state',108),('Export','export',112),('View','view',104),('Help','help',108)]:
-        f.button(bx,4,width,label,ico,dropdown=True);bx+=width+8
+        f.button(bx,8,width,label,ico,dropdown=True);bx+=width+8
     scene_image(f,'particle' if object_type=='particles' else 'signed' if 'signed' in name else 'volume')
-    f.rect(f.w-f.dock,40,f.dock,f.h-128,'surface.1',radius=0)
-    f.line([(f.w-f.dock,40),(f.w-f.dock,f.h-88)])
+    f.rect(f.w-f.dock,COMMAND_BAR,f.dock,f.h-COMMAND_BAR-88,'surface.1',radius=0)
+    f.line([(f.w-f.dock,COMMAND_BAR),(f.w-f.dock,f.h-88)])
     if compact:
-        f.button(f.x,52,f.cw,workspace,workspace.lower(),kind='selected',dropdown=True)
+        f.button(f.x,56,f.cw,workspace,workspace.lower(),kind='selected',dropdown=True)
         header=100
     else:
         for i,label in enumerate(('Scene','Appearance','Selection','Analysis')):
-            f.button(f.x+(i%2)*168,52+(i//2)*40,160,label,label.lower(),kind='selected' if workspace==label else 'quiet')
+            f.button(f.x+(i%2)*168,56+(i//2)*40,160,label,label.lower(),kind='selected' if workspace==label else 'quiet')
         header=148
-    f.text(f.x,header,{'particles':'Dust particles','mesh':'Boundary','field':'Collapse field'}[object_type],18,role='heading')
+    f.text(f.x,header,{'particles':'Particles','mesh':'Mesh','field':'Scalar field'}[object_type],18,role='heading')
     f.button(f.x+f.cw-72,header-4,32,icon='eye',name='Hide selected object')
     f.button(f.x+f.cw-32,header-4,32,icon='down',name='Choose object')
     f.icon(object_type,f.x,header+31)
-    f.text(f.x+24,header+32,{'particles':'Particles','mesh':'Triangle mesh','field':'Uniform grid'}[object_type],12,'text.secondary')
+    f.text(f.x+24,header+32,{'particles':'Particle object','mesh':'Triangle mesh','field':'Uniform grid'}[object_type],12,'text.secondary')
     f.text(f.x+132,header+32,'Recorded sample',12,'text.secondary')
     f.text(f.x,header+58,'Source time',12,'text.muted')
     f.text(f.x+88,header+57,'200',13,role='numeric')
@@ -239,30 +266,29 @@ def shell(name,workspace='Appearance',object_type='field',compact=False,held=Fal
     f.text(156,y+9,'Sample index',12,'text.secondary')
     f.text(254,y+8,'5 / 9',13,role='numeric')
     f.text(156,y+43,'Union of recorded samples',12,'text.muted')
-    end=340 if compact else 662
+    end=300 if compact else 530
     f.line([(156,y+32),(end,y+32)],'border.control',3)
     f.line([(156,y+32),((end+156)/2,y+32)],'accent.primary',3)
     tx=(end+156)/2;f.d.ellipse(((tx-5)*S,(y+27)*S,(tx+5)*S,(y+37)*S),fill=C['accent.primary'])
     f.text(end+24,y+9,'Displayed time',12,'text.secondary')
+    f.text(end+24,y+36,'200',13,role='numeric')
     if held:
-        f.text(end+24,y+36,'200',13,role='numeric')
-        f.text(end+188,y+9,'Requested time',12,'state.warning')
-        f.input(end+188,y+27,96,'220')
-        f.button(end+292,y+27,48,'Go')
+        f.text(end+148,y+9,'Requested time',12,'state.warning')
+        f.text(end+148,y+36,'220',13,role='numeric')
+        f.button(end+280,y+27,100,'Seek…')
     else:
-        f.input(end+24,y+27,96,'200')
-        f.button(end+128,y+27,48,'Go',h=32)
+        f.button(end+148,y+27,116,'Seek…')
     if not compact and not held:
-        f.text(end+196,y+9,'Time mode',12,'text.secondary')
-        f.button(end+196,y+27,164,'Recorded time',dropdown=True)
-        f.text(end+376,y+9,'Rate',12,'text.secondary')
-        f.input(end+376,y+27,64,'1')
-        f.text(end+448,y+36,'units/s',12,'text.secondary')
+        f.text(end+284,y+9,'Time mode',12,'text.secondary')
+        f.button(end+284,y+27,164,'Recorded time',dropdown=True)
+        f.text(end+464,y+9,'Rate',12,'text.secondary')
+        f.input(end+464,y+27,64,'1')
+        f.text(end+536,y+36,'units/s',12,'text.secondary')
     elif compact:
-        f.button(528,y+27,164,'Recorded time',dropdown=True)
-        f.button(704,y+27,112,'1 unit/s',dropdown=True,name='Playback rate')
-    f.button(f.w-196 if compact else f.w-224,y+16,32,icon='loop',name='Loop playback')
-    f.button(f.w-152 if compact else f.w-176,y+16,136 if compact else 160,'Jobs 0',icon='check',kind='quiet')
+        f.button(584,y+27,164,'Recorded time',dropdown=True)
+        f.button(756,y+27,112,'1 unit/s',dropdown=True,name='Playback rate')
+    f.button(876 if compact else f.w-224,y+16,32,icon='loop',name='Loop playback')
+    f.button(916 if compact else f.w-176,y+16,92 if compact else 160,'Jobs 0',icon='check',kind='quiet')
     f.text(16,f.h-18,'Preparing sample…' if held else 'Ready',12,'state.warning' if held else 'state.success')
     f.text(210,f.h-18,'Source units',12,'text.muted')
     f.text(f.w-160,f.h-18,'No active jobs',12,'text.muted')
@@ -315,17 +341,17 @@ def volume(name='volume',signed=False):
     f.rect(f.w-10,282,4,500,'surface.2',radius=2);f.rect(f.w-10,282,4,342,'border.subtle',radius=2)
     f.save()
 
-def faint(name,inherited=False,compact=False):
+def faint(name,inherited=False,compact=False,help_open=False):
     f,y=shell(name,compact=compact)
     y=f.section(y,'Quick setup',info=True)
     f.button(f.x,y,f.cw,'Faint structure',dropdown=True);y+=40
     f.text(f.x,y,'Apply once, then edit any setting.',12,'text.secondary');y+=28
     f.text(f.x,y,'Lower (%)',12,'text.secondary');f.text(f.x+92,y,'Upper (%)',12,'text.secondary');y+=20
-    f.input(f.x,y,80,'0' if inherited else '1',focus=not inherited)
+    f.input(f.x,y,80,'0' if inherited else '1',focus=not inherited and not help_open)
     f.input(f.x+92,y,80,'100' if inherited else '99')
     f.button(f.x+184,y,f.cw-184,'Apply',kind='primary');y+=44
     f.note(y,'Full sample range selected.' if inherited else 'Values above the chosen range will clip.','info' if inherited else 'warning');y+=28
-    f.button(f.x,y,164,'What changes',icon='info',kind='quiet');y+=44
+    y+=12
     if not compact:
         f.section(y,'Color',info=True);y+=44
         f.row(y,'Colormap','viridis',True);y+=40
@@ -337,13 +363,24 @@ def faint(name,inherited=False,compact=False):
         f.section(y,'Opacity',closed=True)
     f.rect(f.w-10,282 if not compact else 234,4,f.h-404,'surface.2',radius=2)
     f.rect(f.w-10,282 if not compact else 234,4,100,'border.subtle',radius=2)
+    if help_open:
+        f.rect(680,278,384,284,'surface.2','border.control',6)
+        f.text(696,300,'Quick setup',16,role='heading')
+        f.button(1016,290,32,icon='close',kind='quiet',name='Close quick setup details',focus=True)
+        for i,line in enumerate(('Apply a one-time color and opacity setup.',
+                                 'Manual settings remain editable.',
+                                 'Colormap and both mappings change.',
+                                 'Strength, ray step and source values stay',
+                                 'unchanged.')):
+            f.text(696,344+i*24,line,12,'text.secondary')
+        f.button(696,510,344,'Volume display handbook',icon='help')
     f.save()
 
 def loaded_scene():
     f,y=shell('scene','Scene')
     y=236
     y=f.section(y,'Objects')
-    for name,kind,desc,selected in [('Collapse field','field','Uniform grid',True),('Dust particles','particles','Particles',False),('Boundary','mesh','Triangle mesh',False)]:
+    for name,kind,desc,selected in [('Scalar field','field','Uniform grid',True),('Particles','particles','Recorded sample',False),('Mesh','mesh','Triangle mesh',False)]:
         f.rect(f.x,y,f.cw,60,'selection.fill' if selected else 'surface.1','accent.primary' if selected else 'border.subtle')
         f.icon(kind,f.x+12,y+12,'selection.text' if selected else 'text.secondary')
         f.text(f.x+40,y+10,name);f.text(f.x+40,y+34,desc,12,'text.secondary')
@@ -385,12 +422,12 @@ def selection():
     f.text(f.x+12,y+42,'Bound snapshot',12,'state.success');f.text(f.x+164,y+42,'9 samples',13,role='numeric');y+=88
     f.button(f.x,y,f.cw,'Bind source snapshot…',icon='state');y+=48
     y=f.section(y,'Create selection')
-    f.row(y,'Object','Dust particles',True);y+=40
+    f.row(y,'Object','Particles',True);y+=40
     f.row(y,'Selection type','Persistent IDs',True);y+=48
     f.text(f.x,y,'Particle IDs',14,'text.secondary');y+=24
     f.input(f.x,y,f.cw,'9007199254740993',focus=True);y+=48
     f.text(f.x,y,'Name',14,'text.secondary');y+=24
-    f.input(f.x,y,f.cw,'Core sample',numeric=False);y+=44
+    f.input(f.x,y,f.cw,'Example selection',numeric=False);y+=44
     f.button(f.x,y,168,'Create selection',kind='primary');y+=48
     f.section(y,'Saved selections',closed=True)
     f.save()
@@ -398,9 +435,9 @@ def selection():
 def analysis(results=False):
     f,y=shell('results' if results else 'analysis','Analysis','particles')
     y=236
-    y=f.section(y,'Results' if results else 'Population counts')
+    y=f.section(y,'Results' if results else 'Analysis type')
     f.button(f.x,y,f.cw,'Particle count' if results else 'Population counts',dropdown=True);y+=48
-    for label,value in [('Source','demo.ssc'),('Object','Dust particles'),('Selection','All particles'),('Units','particles')]:
+    for label,value in [('Source','demo.ssc'),('Object','Particles'),('Selection','All particles'),('Units','particles')]:
         f.text(f.x,y,label,12,'text.muted');f.text(f.x+112,y,value,14);y+=28
     y+=8
     if results:
@@ -436,14 +473,14 @@ def analysis(results=False):
         y=f.section(y,'Recorded range')
         f.row(y,'Start inclusive','0');y+=40
         f.row(y,'End inclusive','400');y+=44
-        f.button(f.x,y,f.cw,'Use full layer range',kind='quiet');y+=48
+        f.button(f.x,y,f.cw,'Use full range',kind='quiet');y+=48
         f.section(y,'Missing support',closed=True);y+=48
         f.button(f.x,y,164,'Run analysis',kind='primary');f.button(f.x+172,y,f.cw-172,'Results',icon='analysis')
     f.save()
 
 def specimens():
     f=Canvas('components');f.x=40;f.cw=400
-    f.text(40,32,'Midnight Scientific',18,role='heading')
+    f.text(40,32,'Midnight scientific',18,role='heading')
     f.text(40,64,'Control and copy review',14,'text.secondary')
     # Three intentionally distinct specimen areas, outside application chrome.
     f.rect(24,104,432,744,'surface.1','border.subtle')
@@ -456,7 +493,7 @@ def specimens():
     f.button(40,220,164,'State',icon='state',dropdown=True,kind='selected')
     f.rect(40,260,384,184,'surface.2','border.control',6)
     for i,label in enumerate(('Save scene recipe…','Load scene recipe…','Save analysis recipe…','Load analysis recipe…')):
-        y=272+i*40+(8 if i>=2 else 0);f.icon('state',52,y+6);f.text(80,y+8,label)
+        y=272+i*40+(8 if i>=2 else 0);f.icon('state',52,y+8);f.centered_text(80,y,320,32,label)
     f.line([(52,354),(412,354)])
     f.text(40,476,'Quick setup',16,role='heading')
     f.rect(40,512,384,220,'surface.2','border.control',6)
@@ -488,7 +525,7 @@ def specimens():
     for i,name in enumerate(names):
         x=976+(i%4)*104;y=172+(i//4)*64
         f.icon(name,x+28,y,'text.primary',20)
-        f.text(x,y+30,name,12,'text.secondary',limit=100)
+        f.text(x,y+30,name.capitalize(),12,'text.secondary',limit=100)
     f.text(976,648,'Source probe',16,role='heading')
     for i,(label,value) in enumerate([('Value','0.2875'),('Probed at','200'),('Displayed time','220')]):
         f.text(976,686+i*32,label,14,'text.secondary');f.text(1152,686+i*32,value,13,role='numeric')
@@ -499,6 +536,20 @@ def transport():
     f,y=shell('time-difference',held=True)
     f.section(y,'Quick setup',closed=True)
     color_group(f,y+48,False)
+    f.save()
+
+def seek_target():
+    f,y=shell('seek-target')
+    f.section(y,'Quick setup',closed=True)
+    color_group(f,y+48,False)
+    f.rect(536,606,344,190,'surface.2','border.control',6)
+    f.text(552,628,'Seek time',16,role='heading')
+    f.button(832,618,32,icon='close',kind='quiet',name='Close seek target')
+    f.text(552,668,'Target',14,'text.secondary')
+    f.input(680,656,184,'240',focus=True)
+    f.text(552,704,'Recorded source units',12,'text.muted')
+    f.button(552,748,144,'Go',kind='primary')
+    f.button(704,748,160,'Cancel')
     f.save()
 
 def volume_details():
@@ -555,18 +606,20 @@ def write_layout():
     """One evidence record per line; avoid thousands of formatting-only lines."""
     metadata={'token_sha256':hashlib.sha256(TOKEN_PATH.read_bytes()).hexdigest(),
               'body_font':str(SANS),'heading_font':str(BOLD),
-              'numeric_font':str(MONO.relative_to(ROOT)),'icons':list(ICONS)}
+              'numeric_font':str(MONO.relative_to(ROOT)),'icons':list(ICONS),
+              'command_bar_height':COMMAND_BAR,'input_scope':'Desktop keyboard and mouse/trackpad',
+              'icon_status':'Provisional; native review in UX3, final refinement in UX8'}
     lines=['{']+[f'  "{key}": {json.dumps(value)},' for key,value in metadata.items()]
     lines.append('  "figures": [')
     for i,figure in enumerate(MANIFEST):
         lines.append('    {')
         for key in ('name','size','sha256'):
             lines.append(f'      "{key}": {json.dumps(figure[key])},')
-        for key in ('controls','labels'):
+        for key in ('controls','labels','alignments'):
             lines.append(f'      "{key}": [')
             lines.extend('        '+json.dumps(row)+(',' if j<len(figure[key])-1 else '')
                          for j,row in enumerate(figure[key]))
-            lines.append('      ]'+(',' if key=='controls' else ''))
+            lines.append('      ]'+(',' if key!='alignments' else ''))
         lines.append('    }'+(',' if i<len(MANIFEST)-1 else ''))
     lines.extend(['  ]','}'])
     (OUT/'layout.json').write_text('\n'.join(lines)+'\n')
@@ -575,6 +628,7 @@ if __name__=='__main__':
     assert SANS.is_file() and BOLD.is_file() and MONO.is_file()
     loaded_scene();particle();volume();faint('faint-inherited',True);faint('faint-edited')
     volume('signed',True);selection();analysis();analysis(True);faint('compact',compact=True)
-    specimens();transport();volume_details();mesh();help_detail();svg_icons()
+    specimens();transport();seek_target();volume_details();mesh();help_detail()
+    faint('quick-setup-details',help_open=True);svg_icons()
     write_layout()
     print(f'Rendered {len(MANIFEST)} static mockups with {len(ICONS)} vector icons.')
