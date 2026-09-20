@@ -28,6 +28,9 @@ func run():
 	var config: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(output.path_join("config.json")))
 	var viewer = Viewer.new(); viewer.playing = false; viewer.orbit_enabled = false; root.add_child(viewer); viewer.set_process(false)
 	var ui = viewer.shell.transport
+	for row in [[0.0,"0.0"],[0.04,"0.0"],[43.7,"43.7"],[59.9,"59.9"],[59.94,"59.9"],[59.96,"1:00.0"],[60.0,"1:00.0"],[72.4,"1:12.4"],[763.6,"12:43.6"],[3599.9,"59:59.9"],[3599.94,"59:59.9"],[3599.96,"1:00:00.0"],[3600.0,"1:00:00.0"],[3867.3,"1:04:27.3"],[36000.0,"10:00:00.0"]]:
+		check(ui.format_duration(row[0]) == row[1],"Adaptive duration formatting: "+str(row[0]))
+		check(ui.format_duration(row[0],true) == ("-"+row[1] if row[1] != "0.0" else "0.0"),"Remaining formatting and zero: "+str(row[0]))
 	check(viewer.play_button.disabled and ui.seek_button.disabled,"Empty transport explains unavailable playback")
 	viewer._open_capture(config.source); viewer.playing = false; await ready(viewer); await settle()
 	check(ui.is_ancestor_of(viewer.play_button) and ui.is_ancestor_of(viewer.timeline),"Existing playback controls moved into persistent transport")

@@ -10,7 +10,11 @@ No acceptance-only PR or historical evidence rewrite was made.
 
 The union-index slider now has elapsed playback time on its left and a directly
 clickable total/remaining duration on its right. Duration values show one decimal;
-remaining uses a leading minus, with `0.0` at the end (never `-0.0`). The toggle
+remaining uses a leading minus, with `0.0` at the end (never `-0.0`).
+Elapsed/total/remaining use `43.7` below one minute, `1:12.4` from one minute,
+and `1:04:27.3` from one hour. Remaining uses the same format, e.g. `-12:43.6`.
+Rounding to tenths precedes unit splitting: `59.96` displays `1:00.0` and
+`3599.96` displays `1:00:00.0`, without changing the underlying value. The toggle
 is a session-only preference, not scientific recipe state. The transport retains
 64/104 logical-pixel normal/compact heights and its existing Seek, Loop,
 previous/next, and Jobs controls. Rows are vertically centered in the panel; the

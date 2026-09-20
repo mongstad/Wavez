@@ -55,6 +55,8 @@ The transport stays visible when the dock is hidden and in fullscreen. It is
 below 1200 logical pixels, without shrinking text.
 
 The slider is flanked by one-decimal **elapsed playback time** and **total duration**.
+Values adapt from `43.7` to `1:12.4` at a minute and `1:04:27.3` at an hour,
+rounding to tenths before carrying into the next unit.
 Click the right value to toggle **remaining duration**, shown with a leading minus
 (unless rounded to `0.0`). Values are nominal playback seconds at 1×; they do not count wall-clock pauses/buffering or change with speed. Progress
 follows only the committed visible position. Hover elapsed for exact displayed
