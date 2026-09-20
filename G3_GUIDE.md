@@ -32,6 +32,17 @@ finite source values; invalid samples are unavailable rather than silently
 remapped. **Reset color • linear 0–1** preserves opacity settings. See
 [volume normalization](docs/VOLUME_COLOR_NORMALIZATION.md) for policy, limits and
 validation, including the distinction between frozen and interval-derived bounds.
+For explicit starting views, select **Dense core**, **Faint structure** or
+**Signed field**, then **Apply volume display preset from sample**. Dense core
+uses the full finite range; Signed field uses symmetric color and magnitude
+opacity. Faint structure uses the displayed percentile entries (set them
+explicitly, for example 1 and 99); both its color and opacity can saturate cores.
+These opt-in actions freeze explicit color/opacity settings, preserve strength
+and ray step, and leave manual controls available. They do not change particles
+or the scene Viewing preset. See [display presets](docs/VOLUME_DISPLAY_PRESETS.md)
+for exact settings, evidence and limitations. Expand **What do these controls
+change?** for the distinction between the five display concerns.
+
 The three plane-normal controls also allow arbitrary orientations. Source probes
 accept world xyz and draw a crosshair. Layer labels show source time/status and
 preview LOD. Use Physical time to see independent layer cadences. The **Scientific**

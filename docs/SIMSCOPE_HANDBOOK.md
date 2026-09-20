@@ -80,7 +80,7 @@ presentation settings, not calibrated scientific measurements. New views retain
 linear opacity 0–1; old recipes copy their saved color range into independent
 opacity thresholds to preserve their original rendering. The
 [mapping contract and validation](VOLUME_OPACITY_MAPPING.md) describe persistence,
-limits and examples. No automatic color-range policy or preset is added.
+limits and examples. Color edits alone never change opacity.
 
 Volume color normalization supports linear and explicitly selected logarithmic
 mapping, independently of opacity. Bounds can be entered manually or frozen from
@@ -91,6 +91,15 @@ presence. Log requires positive bounds and positive finite sample values; an
 ineligible sample is explicitly unavailable, with source probes still accessible.
 These are display choices, not calibrated interpretations. See
 [volume color policies and validation](VOLUME_COLOR_NORMALIZATION.md).
+
+Optional volume display presets resolve to explicit frozen settings: **Dense
+core** uses full finite sample color extrema and linear opacity from zero to the
+maximum; **Faint structure** uses chosen percentiles for color and zero to the
+upper percentile for opacity; **Signed field** uses symmetric color and magnitude
+opacity. All select linear color and a suitable colormap; strength, ray step,
+particle visibility and the scene Viewing preset stay unchanged. These actions
+are not active modes or automatic opening defaults. Manual controls and resolved
+recipe settings remain authoritative. See [preset contract and review evidence](VOLUME_DISPLAY_PRESETS.md).
 
 Probes read full source arrays with trilinear spatial interpolation and explicit world-to-grid conversion. At source sample coordinates they recover the source value subject to arithmetic/coordinate precision. An arbitrary probe point is an interpolated value, not an extra recorded scientific sample. Out-of-domain probes and invalid interpolation neighborhoods report unavailable. Python uses float64 probe coordinates; Godot coordinates are float32, so its displayed decimal values are not a last-bit validation instrument.
 

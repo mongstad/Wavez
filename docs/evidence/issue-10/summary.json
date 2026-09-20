@@ -1,0 +1,169 @@
+{
+  "issue": 10,
+  "status": "implementation pending owner review",
+  "milestone": "UX4 \u2014 Panels & Information Architecture",
+  "date": "2026-09-20",
+  "baseline": "5088185a5d8310936477a764cc1bd820c2c32d52",
+  "environment": {
+    "godot": "4.7.2",
+    "os": "Linux",
+    "gpu": "NVIDIA GeForce RTX 3070 Ti",
+    "renderers": [
+      "Forward+",
+      "Compatibility"
+    ],
+    "viewport": "960x640"
+  },
+  "preset_runs": {
+    "forward": {
+      "checks": 99,
+      "failures": [],
+      "exports": [
+        {
+          "case": "density-dense_core",
+          "completed": true,
+          "identical_pixels": true,
+          "resolved_state_in_sidecar": true
+        },
+        {
+          "case": "density-faint_structure",
+          "completed": true,
+          "identical_pixels": true,
+          "resolved_state_in_sidecar": true
+        },
+        {
+          "case": "psi_real-signed_field",
+          "completed": true,
+          "identical_pixels": true,
+          "resolved_state_in_sidecar": true
+        }
+      ],
+      "source_sha256_unchanged": "1c6f95343691419260d231b52e58146ac691330a7745adeb5b84765ed4803e8d"
+    },
+    "compatibility": {
+      "checks": 99,
+      "failures": [],
+      "exports": [
+        {
+          "case": "density-dense_core",
+          "completed": true,
+          "identical_pixels": true,
+          "resolved_state_in_sidecar": true
+        },
+        {
+          "case": "density-faint_structure",
+          "completed": true,
+          "identical_pixels": true,
+          "resolved_state_in_sidecar": true
+        },
+        {
+          "case": "psi_real-signed_field",
+          "completed": true,
+          "identical_pixels": true,
+          "resolved_state_in_sidecar": true
+        }
+      ],
+      "source_sha256_unchanged": "bf0ad89179a3390c14d9d77dfe4a2c46e27a93fcf07cd4079084afee9d893cdc"
+    },
+    "real-forward": {
+      "checks": 94,
+      "failures": [],
+      "exports": [
+        {
+          "case": "density-dense_core",
+          "completed": true,
+          "identical_pixels": true,
+          "resolved_state_in_sidecar": true
+        },
+        {
+          "case": "density-faint_structure",
+          "completed": true,
+          "identical_pixels": true,
+          "resolved_state_in_sidecar": true
+        },
+        {
+          "case": "psi_real-signed_field",
+          "completed": true,
+          "identical_pixels": true,
+          "resolved_state_in_sidecar": true
+        }
+      ],
+      "source_sha256_unchanged": "0805d497ad0f69440f3aa7ac30d6cfe9642a4efd142ae406d3a685b595d7d3f5"
+    },
+    "real-compatibility": {
+      "checks": 96,
+      "failures": [],
+      "exports": [
+        {
+          "case": "density-dense_core",
+          "completed": true,
+          "identical_pixels": true,
+          "resolved_state_in_sidecar": true
+        },
+        {
+          "case": "density-faint_structure",
+          "completed": true,
+          "identical_pixels": true,
+          "resolved_state_in_sidecar": true
+        },
+        {
+          "case": "psi_real-signed_field",
+          "completed": true,
+          "identical_pixels": true,
+          "resolved_state_in_sidecar": true
+        }
+      ],
+      "source_sha256_unchanged": "0805d497ad0f69440f3aa7ac30d6cfe9642a4efd142ae406d3a685b595d7d3f5"
+    }
+  },
+  "existing_regressions": {
+    "recipe_state": {
+      "checks": 3051,
+      "renderer": "headless",
+      "passed": true
+    },
+    "volume_color": {
+      "checks": 130,
+      "renderer": "Compatibility",
+      "export": true,
+      "invalid_log_export_refused": true,
+      "passed": true
+    },
+    "volume_opacity": {
+      "checks": 98,
+      "renderer": "Forward+",
+      "export": true,
+      "passed": true
+    }
+  },
+  "final_import": "PASS; no errors or warnings",
+  "scope": "Only issue #10; five existing display fields resolve, no shader or default changes",
+  "evidence_notes": [
+    "Real Forward+ ran 94 checks before adding two UI-only checks (percentile label text and expanded-help screenshot). Both added checks passed on final synthetic runs and real Compatibility.",
+    "Twelve preset still exports across four runs: exact reference PNG equality before lossy H.264 encoding, resolved settings preserved in inspection sidecars.",
+    "Source-bound v2 restore uses the synthetic fixture. Large real captures use serialized visual-state validation/apply, with full capture hashes before/after. Existing v2/v3 recipe suite passes."
+  ],
+  "development_failures_resolved": [
+    "Initial sandboxed editor import could not open sockets/write settings; authorized native import passed.",
+    "Initial test assumed 1\u201399 after Dense core set 0\u2013100; test now explicitly sets desired percentiles.",
+    "New label assertion expected P1\u2013P99 instead of Godot P1.0\u2013P99.0; corrected expected decimal format."
+  ],
+  "skipped": [
+    "Full G0\u2013G4 suite",
+    "Other GPUs/OSes and other real scientific families",
+    "Physical 4K/mixed-monitor and long-session usability",
+    "Formal usability study and performance benchmark",
+    "Moving-camera/long-duration export",
+    "Scientific solver reruns"
+  ],
+  "manual_verification": "See docs/VOLUME_DISPLAY_PRESETS.md: Owner verification before acceptance",
+  "housekeeping": {
+    "previous_pr": 36,
+    "merge_verified": true,
+    "main_synchronized": true,
+    "working_tree_clean_before_issue": true,
+    "remote_pruned": "origin/issue-12-volume-normalization",
+    "completed_local_branch": "already removed before this task",
+    "acceptance_only_pr": false
+  }
+}
