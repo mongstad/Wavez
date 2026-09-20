@@ -140,11 +140,11 @@ func refresh() -> void:
 	rate.editor.editable = loaded; loop.disabled = not loaded
 	index_label.text = "%d / %d" % [viewer.current_index+1,viewer.frame_count] if loaded else "— / —"
 	var clock = viewer.committed_sample.get("requested_time")
-	displayed.text = "Displayed time " + (FloatText.format_value(float(clock)) if clock != null else "—")
-	displayed.tooltip_text = displayed.text + " " + units()
+	displayed.text = "Displayed time " + ("%.5f" % float(clock) if clock != null else "—")
+	displayed.tooltip_text = "Displayed time " + (FloatText.format_value(float(clock)) if clock != null else "—") + " " + units()
 	var pending = pending_time()
-	requested.text = "Requested time " + FloatText.format_value(float(pending)) if pending != null and (clock == null or pending != clock) else ""
-	requested.tooltip_text = requested.text + " " + units() if not requested.text.is_empty() else ""
+	requested.text = "Requested time %.5f" % float(pending) if pending != null and (clock == null or pending != clock) else ""
+	requested.tooltip_text = "Requested time " + FloatText.format_value(float(pending)) + " " + units() if not requested.text.is_empty() else ""
 	var value: float = viewer.physical_rate if viewer.time_mode == "physical" else viewer.playback_fps
 	if rate_mode != viewer.time_mode or rate.model != value:
 		rate.set_model(value); rate_mode = viewer.time_mode

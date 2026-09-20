@@ -50,10 +50,11 @@ func run():
 	ui.target._input_editor(escape)
 	check(ui.target.editor.text == ui.target.committed_text and ui.seek_dialog.visible,"Escape in number field restores committed draft")
 	ui.seek_dialog.hide()
-	for time in [1.0,2.25]:
-		go(ui,str(time)); await ready(viewer)
+	for time in [1.0,1.234567891234,2.25]:
+		go(ui,ui.FloatText.format_value(time)); await ready(viewer)
 		check(viewer.committed_sample.requested_time == time,"Go commits exact or fractional target " + str(time))
-		check(ui.requested.text.is_empty() and ui.displayed.text.contains(str(time)),"Displayed clock follows committed sample")
+		check(ui.requested.text.is_empty() and ui.displayed.text == "Displayed time %.5f" % time,"Displayed clock uses five decimals from committed sample")
+		check(ui.displayed.tooltip_text == "Displayed time " + ui.FloatText.format_value(time) + " s","Displayed tooltip retains exact float64 value")
 	check(viewer.scene_layers.current.field.a.time == 1,"Sparse field holds independent source time at fractional seek")
 	var camera: Transform3D = viewer.camera.transform
 	ui.open_seek(); ui.target.editor.grab_focus()
@@ -86,15 +87,16 @@ func run():
 	var worker = viewer.scene_layers.playback.worker
 	var gate := Semaphore.new(); worker.test_barrier = gate
 	viewer.scene_layers.playback.invalidate(); viewer.manual_max += 1
-	go(ui,"2.25")
+	go(ui,"2.25123456789")
 	var deadline := Time.get_ticks_msec()+10000
 	while not worker.status().get("test_barrier_waiting",false) and Time.get_ticks_msec()<deadline: await process_frame
 	check(worker.status().get("test_barrier_waiting",false),"Real cold-seek publication barrier reached")
 	ui.refresh()
-	check(viewer.committed_sample.requested_time == 0 and ui.requested.text == "Requested time 2.25" and viewer.play_button.disabled,"Pending seek leaves displayed scene committed and exposes submitted target")
+	check(viewer.committed_sample.requested_time == 0 and ui.requested.text == "Requested time 2.25123" and viewer.play_button.disabled,"Pending seek leaves displayed scene committed and exposes submitted target")
+	check(ui.pending_time() == 2.25123456789 and ui.requested.tooltip_text == "Requested time " + ui.FloatText.format_value(2.25123456789) + " s","Requested tooltip and controller retain exact submitted value")
 	await settle(); picture("buffering")
 	ui.open_seek(); ui.target.editor.text = "4.5"; ui.refresh()
-	check(ui.requested.text == "Requested time 2.25" and viewer.committed_sample.requested_time == 0,"Editing replacement target does not replace submitted request")
+	check(ui.requested.text == "Requested time 2.25123" and viewer.committed_sample.requested_time == 0,"Editing replacement target does not replace submitted request")
 	ui.seek_dialog.confirmed.emit(); go(ui,"3.125")
 	worker.test_barrier = null; gate.post(); await ready(viewer)
 	check(viewer.committed_sample.requested_time == 3.125 and ui.requested.text.is_empty(),"Only latest rapid seek commits and clears requested readout")
@@ -124,7 +126,7 @@ func run():
 	if not config.real.is_empty():
 		viewer._open_capture(config.real); viewer.playing = false; await ready(viewer)
 		var time: float = lerpf(viewer.generic_reader.frames[0].time,viewer.generic_reader.frames[-1].time,.37)
-		go(ui,str(time)); await ready(viewer)
+		go(ui,ui.FloatText.format_value(time)); await ready(viewer)
 		check(viewer.committed_sample.requested_time == time,"Frozen real capture fractional seek")
 		await settle(); picture("real-capture")
 	var file := FileAccess.open(output.path_join("report.json"),FileAccess.WRITE)

@@ -51,7 +51,9 @@ The transport stays visible when the dock is hidden and in fullscreen. It is
 64 logical pixels high at normal desktop width and reflows to two rows (104 pixels)
 below 1200 logical pixels, without shrinking text.
 
-**Displayed time** is read-only and follows the committed visible scene. Choose
+**Displayed time** is read-only and follows the committed visible scene.
+Displayed and Requested time labels use five decimal places; tooltips retain exact
+values. Internal clocks, recipes and the Seek Target editor keep full precision. Choose
 **Seek…** to open **Seek time**, edit **Target** in the declared time units (or
 Source units if unknown), then click **Go**. Typing or pressing Enter commits
 only the local number-field draft; it never seeks. **Cancel** submits nothing.

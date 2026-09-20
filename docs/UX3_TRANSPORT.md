@@ -26,7 +26,9 @@ still constructs its original presentation and has no transport.
 The slider selects sorted union timestamp indices. Equal slider distances do not
 mean equal elapsed time. **Displayed time** reads only `committed_sample`; differing
 **Requested time** reads the active particle/field/mesh preparation controller's
-submitted target. A draft never writes either readout. Source times and sampling
+submitted target. Passive time labels show five decimal places, matching the HUD; tooltips retain
+the exact float64 values. Internal clocks, persisted state and Seek Target retain
+full precision. A draft never writes either readout. Source times and sampling
 status remain per-layer in Scene layers. Unknown units are not inferred.
 
 **Seek… → Seek time → Target → Go** invokes the existing seek path. It uses the
@@ -51,6 +53,10 @@ algorithm changes. FIELD-001, full workspace migration, touch, shortcut redesign
 final artwork and #43 are excluded.
 
 ## Validation
+
+The [passive-precision review refinement](evidence/issue-42/precision/README.md)
+passed 62 focused native checks per renderer. The original implementation runs
+below remain historical.
 
 Godot 4.7.2 native Forward+ and Compatibility on the existing Fedora KDE/Wayland
 host, NVIDIA RTX 3070 Ti. [Evidence and reports](evidence/issue-42/README.md).
