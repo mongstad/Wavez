@@ -35,9 +35,10 @@ inspector for this slice. The fixed header reports current capture context, not
 a selected-object editor.
 
 The right dock starts at 360 logical pixels, or 320 below 1200 pixels. Drag its
-left edge to resize, use Hide/F1 to collapse, and Show panels to recover it.
+left edge to resize, use Hide panel/F1 to collapse, and Show panels to recover it.
 Below 970 logical pixels the dock starts collapsed and can reopen as a temporary
-sheet. Fullscreen retains Exit fullscreen. Failed-open details remain visible
+sheet. Maximized mode keeps the top command bar. Fullscreen hides that bar and retains
+Frame scene, Reset camera, Navigate and Exit fullscreen; exiting restores the bar. Failed-open details remain visible
 until dismissed; a failed replacement retains the previous usable scene.
 
 ## Camera inspection

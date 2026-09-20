@@ -19,7 +19,7 @@ provide entry points to its existing control groups.
 
 F1 hides/restores the resizable dock and legend; Space pauses; Left/Right
 steps; mouse drag tumbles continuously through full revolutions in either direction;
-wheel zooms; F11 toggles fullscreen. F frames the scene and R resets the camera.
+wheel zooms; F11 toggles fullscreen, hiding the top command bar until exit; maximized windows keep the bar. F frames the scene and R resets the camera.
 Horizontal drag retains world-Y yaw; vertical drag carries the camera up axis
 through the poles, allowing upside-down views without a snap. Auto orbit (O)
 remains a separate world-Y rotation and pauses while dragging. Open… opens

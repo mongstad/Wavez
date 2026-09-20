@@ -1,5 +1,11 @@
 # Current status
 
+PR #45 / issue #41 owner-review revision: fullscreen hides the complete top command
+bar; maximized mode retains it. Hide panel affects only the contextual dock.
+Fedora KDE/Wayland compositor evidence and 97-check native reruns on each renderer
+are recorded in [the revision report](evidence/issue-41/review-1/README.md).
+Pending owner review; transport #42 and UX4 control migration remain out of scope.
+
 As of **2026-09-20**, including G4 and PERF-001/002 maintenance reviewed and accepted by the user. Scientific simulations were not rerun. Historical results identify their recorded checkpoints. PERF-003 mesh maintenance was also reviewed and accepted by the owner on 2026-09-13; implementation checkpoint `7974c78`.
 
 | Area | Current state |

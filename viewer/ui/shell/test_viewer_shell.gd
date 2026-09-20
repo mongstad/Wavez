@@ -79,6 +79,7 @@ func run() -> void:
 	var focus: Control = viewer.section_buttons["Playback"]; focus.grab_focus()
 	viewer._toggle_overlay(); await settle()
 	check(not viewer.overlay_visible and shell.recovery.visible, "Dock hide leaves mouse recovery")
+	check(shell.navigation.is_visible_in_tree(), "Hiding the contextual panel keeps viewport camera controls visible")
 	shell.recovery.pressed.emit(); await settle()
 	check(viewer.overlay_visible and root.gui_get_focus_owner() == focus, "Dock recovery restores previous focus")
 	var camera_before: Transform3D = viewer.camera.transform
@@ -123,12 +124,32 @@ func run() -> void:
 	check(await wait_jobs(control) and control.temporal.durable.last_recipe.has("path"), "Production v3 save through canonical worker")
 	control.temporal.durable.load_from(output.path_join("analysis.inspection/inspection.json"))
 	check(await wait_jobs(control) and control.temporal.durable.last_recipe.get("restored",false), "Production v3 load through canonical worker")
-	# Fullscreen is a real window operation on native runs, not a fabricated state flag.
+	# Native transitions are asynchronous. Compositor geometry is checked separately on KDE.
 	if DisplayServer.get_name() != "headless":
-		viewer._toggle_fullscreen(); await settle(); shell.refresh()
-		check(shell.fullscreen_button.visible, "Fullscreen exposes mouse exit")
-		shell.fullscreen_button.pressed.emit(); await settle(); shell.refresh()
-		check(DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_WINDOWED, "Mouse exits fullscreen")
+		var fullscreen_state := science(viewer)
+		root.mode = Window.MODE_MAXIMIZED
+		await create_timer(.5).timeout; shell.refresh(); await settle()
+		check(shell.bar.visible and not shell.fullscreen_button.visible, "Maximized retains the command bar")
+		for route in ["menu", "F11"]:
+			if route == "menu": shell.menus.View.get_popup().id_pressed.emit(1)
+			else:
+				var event := InputEventKey.new(); event.keycode = KEY_F11; event.pressed = true
+				root.push_input(event)
+			await create_timer(.5).timeout; shell.refresh(); await settle()
+			check(shell.fullscreen_button.visible, route + " exposes mouse exit")
+			check(not shell.bar.visible, route + " hides the entire command bar")
+			check(shell.dock.position.y == 0 and shell.navigation.is_visible_in_tree(), route + " reclaims bar space and keeps camera controls")
+			check(science(viewer) == fullscreen_state, route + " preserves scientific state")
+			picture("fullscreen-" + route)
+			viewer._toggle_overlay(); await settle()
+			check(shell.recovery.visible and shell.fullscreen_button.visible and shell.navigation.is_visible_in_tree(), route + " panel hide retains camera and mouse recovery")
+			shell.recovery.pressed.emit(); await settle()
+			check(viewer.overlay_visible and not shell.bar.visible, route + " panel recovery keeps command bar hidden")
+			shell.fullscreen_button.pressed.emit()
+			await create_timer(.5).timeout; shell.refresh(); await settle()
+			check(DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_WINDOWED, route + " mouse exits fullscreen")
+			check(shell.bar.visible and shell.dock.position.y == 48, route + " restores command bar and layout")
+			check(science(viewer) == fullscreen_state, route + " exit preserves scientific state")
 	# Logical geometry at supported factors. No scientific projection/state changes.
 	shell.open_error.hide()
 	for dimensions in [Vector2i(1440,900), Vector2i(1024,640)]:

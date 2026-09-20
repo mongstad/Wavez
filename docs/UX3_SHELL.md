@@ -21,9 +21,12 @@ review evidence remain unchanged.
   Selection and Analysis are bounded entry points to the same controls. The
   fixed header currently identifies the **capture**, with loading/preparation
   information. Object/channel editing belongs to the later workspace migration.
-- Hide/F1 leaves Show panels. At less than 970 logical pixels, the dock collapses;
+- Hide panel/F1 hides only the contextual right-hand dock and leaves Show panels.
+  Frame scene, Reset camera and Navigate remain visible. At less than 970 logical pixels, the dock collapses;
   Show panels opens a temporary sheet that can be closed again. The 800×640 case
-  is tested. Fullscreen retains a mouse-accessible Exit fullscreen action.
+  is tested. Maximized windows keep the command bar. Fullscreen (View → Fullscreen
+  or F11) hides the entire command bar and reclaims its space; exiting restores it.
+  Camera controls and mouse-accessible Exit fullscreen remain visible.
 - Frame scene, Reset camera and Navigate invoke existing camera behavior.
   Number/text input suppresses viewport shortcuts; a pointer release over chrome
   ends an existing camera drag. Hiding the dock restores valid prior focus on
@@ -80,7 +83,11 @@ layout/navigation. Geometry assertions check actual logical dimensions and dock
 child bounds, not just requested window size. Native screenshots show intentional
 UI changes; they are not scientific pixel-equivalence claims.
 
-Final results and selected screenshots are in [the evidence index](evidence/issue-41/README.md).
+Original review results and selected screenshots are in [the evidence index](evidence/issue-41/README.md).
+The [owner-review revision](evidence/issue-41/review-1/README.md) records the actual
+Fedora KDE/Wayland diagnosis, revised fullscreen screenshots and affected reruns.
+The original 79-check runs below predate the revision and did not independently
+validate compositor fullscreen geometry.
 
 | Check | Result |
 |---|---|
@@ -123,8 +130,11 @@ lifecycle acceptance remains in the separately gated status/integration slices.
    forms, budgets, volume mappings and playback are reachable and unchanged.
    Merely changing workspace must not alter the scene, selection or source binding.
 3. Drag the splitter in both directions. Hide with the button and F1; recover
-   using only Show panels. Enter fullscreen via View, hide the dock, then recover
-   panels and exit using only the mouse. Repeat in an 800×640 window with the
+   using only Show panels. Maximize: the top command bar must stay visible.
+   Enter fullscreen via View and then in a separate cycle via F11: the entire top
+   bar must disappear, with no title bar or unused strip. Hide the dock, confirm
+   Frame scene / Reset camera / Navigate remain, recover panels and exit using
+   only the mouse. Confirm the command bar returns. Repeat F11 enter/exit. Repeat in an 800×640 window with the
    temporary sheet. Confirm focus returns appropriately.
 4. Frame and reset a wide scene; tumble through a pole, zoom and use Navigate.
    Check framing while resizing/hiding the dock: projection remains full-frame.

@@ -1,0 +1,46 @@
+{
+  "checks": 97,
+  "failures": [],
+  "layouts": [
+    {
+      "bar": "(1440.0, 48.0)",
+      "dock": "[P: (1080.0, 48.0), S: (360.0, 852.0)]",
+      "logical": "(1440, 900)",
+      "scale": 1.0
+    },
+    {
+      "bar": "(1024.0, 48.0)",
+      "dock": "[P: (704.0, 48.0), S: (320.0, 592.0)]",
+      "logical": "(1024, 640)",
+      "scale": 1.0
+    },
+    {
+      "bar": "(1024.0, 48.0)",
+      "dock": "[P: (704.0, 48.0), S: (320.0, 592.0)]",
+      "logical": "(1024, 640)",
+      "scale": 1.25
+    },
+    {
+      "bar": "(1024.0, 48.0)",
+      "dock": "[P: (704.0, 48.0), S: (320.0, 592.0)]",
+      "logical": "(1024, 640)",
+      "scale": 1.5
+    },
+    {
+      "bar": "(1024.0, 48.0)",
+      "dock": "[P: (704.0, 48.0), S: (320.0, 592.0)]",
+      "logical": "(1024, 640)",
+      "scale": 2.0
+    }
+  ],
+  "renderer": "gl_compatibility",
+  "shell_scientific_activity": {
+    "counters": {},
+    "stages": {}
+  },
+  "source_hashes_unchanged": {
+    "scene.ssc": "637c84617d198e00e193c1e49d2d2cf657348f897b1cb69a30d4445789c860f3",
+    "replacement.ssc": "1dd06eb56a237898df163c383bf5adcdcf27305849238895615e87be10fe3c92",
+    "invalid.ssc": "98fafded66db249c745f3e98bd145f7849e10dc31e718ddea82649e2ca8cc26f"
+  }
+}

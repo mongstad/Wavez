@@ -79,7 +79,7 @@ func setup(owner_viewer) -> void:
 	var dock_box := VBoxContainer.new(); dock.add_child(dock_box)
 	var header := HBoxContainer.new(); dock_box.add_child(header)
 	var title := Label.new(); title.text = "Workspace"; title.size_flags_horizontal = Control.SIZE_EXPAND_FILL; header.add_child(title)
-	button(header, "Hide", viewer._toggle_overlay, "close")
+	button(header, "Hide panel", viewer._toggle_overlay, "close")
 	tabs = GridContainer.new(); tabs.columns = 2; dock_box.add_child(tabs)
 	chooser = OptionButton.new(); chooser.custom_minimum_size.y = 32; dock_box.add_child(chooser)
 	for i in WORKSPACES.size():
@@ -221,7 +221,15 @@ func refresh() -> void:
 	empty.visible = not loaded and not loading
 	viewer.inspector_box.visible = loaded and workspace == 0
 	adapter.visible = loaded and workspace != 0
-	fullscreen_button.visible = DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN
+	var fullscreen := DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN
+	fullscreen_button.visible = fullscreen
+	if bar.visible == fullscreen:
+		var focused := get_viewport().gui_get_focus_owner()
+		var move_focus := fullscreen and focused != null and bar.is_ancestor_of(focused)
+		bar.visible = not fullscreen
+		# Window configure events can arrive during layout; update after that pass.
+		layout.call_deferred()
+		if move_focus: fullscreen_button.grab_focus()
 
 func begin_open() -> void:
 	loading = true; refresh()
@@ -271,16 +279,17 @@ func layout() -> void:
 	if was_visible != viewer.overlay_visible: viewer._update_particle_legend()
 	var width := clampf(viewer.panel_width, 320, maxf(320, minf(560, extent.x - 650)))
 	if too_narrow: width = minf(560, extent.x)
-	dock.position = Vector2(extent.x-width, 48); dock.size = Vector2(width, maxf(0, extent.y-48)); dock.visible = viewer.overlay_visible
-	viewer.resize_handle.position = Vector2(extent.x-width-8, 48); viewer.resize_handle.size = Vector2(8, maxf(0, extent.y-48)); viewer.resize_handle.visible = viewer.overlay_visible
+	var top := 48.0 if bar.visible else 0.0
+	dock.position = Vector2(extent.x-width, top); dock.size = Vector2(width, maxf(0, extent.y-top)); dock.visible = viewer.overlay_visible
+	viewer.resize_handle.position = Vector2(extent.x-width-8, top); viewer.resize_handle.size = Vector2(8, maxf(0, extent.y-top)); viewer.resize_handle.visible = viewer.overlay_visible
 	viewer.show_panel_button.hide()
 	var scene_width := extent.x-width-8 if viewer.overlay_visible else extent.x
-	navigation.position = Vector2(12, 60)
-	recovery.position = Vector2(maxf(12, extent.x-recovery.size.x-12), 60); recovery.visible = not viewer.overlay_visible
+	navigation.position = Vector2(12, top+12)
+	recovery.position = Vector2(maxf(12, extent.x-recovery.size.x-12), top+12); recovery.visible = not viewer.overlay_visible
 	recovery.tooltip_text = "Show panels as a temporary sheet (F1)" if too_narrow else "Show panels (F1)"
-	fullscreen_button.position = Vector2(12, 100)
+	fullscreen_button.position = Vector2(12, top+52)
 	empty.position = Vector2(maxf(12, (scene_width-empty.size.x)/2), maxf(152, extent.y/2-40))
-	open_error.position = Vector2(12, 144)
+	open_error.position = Vector2(12, top+96)
 	if viewer.colorbar != null:
 		viewer.colorbar.position = Vector2(maxf(12, scene_width-352), extent.y-118)
 		viewer.legend.position = viewer.colorbar.position+Vector2(0,24)

@@ -1,0 +1,122 @@
+[
+  {
+    "backend": "X11",
+    "bar_visible": true,
+    "display_mode": 0,
+    "dock_top": 48.0,
+    "exit_visible": false,
+    "science_unchanged": true,
+    "screen_size": "(2560, 1440)",
+    "stage": "windowed",
+    "window_mode": 0,
+    "window_size": "(1440, 900)",
+    "kwin": [
+      {
+        "pid": 285839,
+        "uuid": "{a2793740-d3d6-4802-90da-00f645c6eeca}",
+        "caption": "SimScope (DEBUG)",
+        "fullscreen": false,
+        "noBorder": false,
+        "active": false,
+        "frame": {
+          "x": 556,
+          "y": 219,
+          "width": 1448,
+          "height": 932
+        },
+        "client": {
+          "x": 560,
+          "y": 247,
+          "width": 1440,
+          "height": 900
+        },
+        "screen": {
+          "x": 0,
+          "y": 0,
+          "width": 2560,
+          "height": 1440
+        }
+      }
+    ]
+  },
+  {
+    "backend": "X11",
+    "bar_visible": false,
+    "display_mode": 3,
+    "dock_top": 0.0,
+    "exit_visible": true,
+    "science_unchanged": true,
+    "screen_size": "(2560, 1440)",
+    "stage": "fullscreen",
+    "window_mode": 3,
+    "window_size": "(2560, 1440)",
+    "kwin": [
+      {
+        "pid": 285839,
+        "uuid": "{a2793740-d3d6-4802-90da-00f645c6eeca}",
+        "caption": "SimScope (DEBUG)",
+        "fullscreen": true,
+        "noBorder": false,
+        "active": false,
+        "frame": {
+          "x": 0,
+          "y": 0,
+          "width": 2560,
+          "height": 1440
+        },
+        "client": {
+          "x": 0,
+          "y": 0,
+          "width": 2560,
+          "height": 1440
+        },
+        "screen": {
+          "x": 0,
+          "y": 0,
+          "width": 2560,
+          "height": 1440
+        }
+      }
+    ]
+  },
+  {
+    "backend": "X11",
+    "bar_visible": true,
+    "display_mode": 0,
+    "dock_top": 48.0,
+    "exit_visible": false,
+    "science_unchanged": true,
+    "screen_size": "(2560, 1440)",
+    "stage": "restored",
+    "window_mode": 0,
+    "window_size": "(1440, 900)",
+    "kwin": [
+      {
+        "pid": 285839,
+        "uuid": "{a2793740-d3d6-4802-90da-00f645c6eeca}",
+        "caption": "SimScope (DEBUG)",
+        "fullscreen": false,
+        "noBorder": false,
+        "active": false,
+        "frame": {
+          "x": 556,
+          "y": 219,
+          "width": 1448,
+          "height": 932
+        },
+        "client": {
+          "x": 560,
+          "y": 247,
+          "width": 1440,
+          "height": 900
+        },
+        "screen": {
+          "x": 0,
+          "y": 0,
+          "width": 2560,
+          "height": 1440
+        }
+      }
+    ]
+  }
+]
