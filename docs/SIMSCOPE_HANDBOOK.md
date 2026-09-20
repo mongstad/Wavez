@@ -56,8 +56,7 @@ below 1200 logical pixels, without shrinking text.
 
 The slider is flanked by one-decimal **elapsed playback time** and **total duration**.
 Click the right value to toggle **remaining duration**, shown with a leading minus
-(unless rounded to `0.0`). Values are nominal playback seconds at 1× in the selected
-mode; they do not count wall-clock pauses/buffering or change with speed. Progress
+(unless rounded to `0.0`). Values are nominal playback seconds at 1×; they do not count wall-clock pauses/buffering or change with speed. Progress
 follows only the committed visible position. Hover elapsed for exact displayed
 source time and its declared unit; Requested time retains five-decimal presentation.
 Internal clocks, recipes and Seek Target keep full precision. Choose
@@ -73,15 +72,14 @@ when different from the displayed clock. Changing a new draft does not replace
 that request. Independent layer source times and held/interpolated/unavailable
 states remain in Scene layers; they are not the common displayed clock.
 
-Time mode selects **Sample index** or **Recorded time**. **Playback speed ×** is
-relative to the existing defaults: 1× = 12 union samples per playback second in
-Sample index mode; 1× = 1 recorded unit per playback second in Recorded time mode.
-0.5× halves and 2× doubles that mode’s motion. Each mode retains its own saved rate;
-switching modes can change speed and nominal duration. Negative multipliers retain
-reverse playback, and zero holds position. Loop uses the existing recorded interval.
-These rates do not set monitor FPS, output video FPS, or units per video second. Preparation still holds the
-visible scene and disables Play until ready. Numeric/text focus suppresses viewport
-playback shortcuts. Existing recipe rate keys and session behavior are preserved.
+Recorded time is the only playback clock; there is no playback-mode selector.
+**Playback speed ×** uses 1× = 1 recorded unit per playback second. 0.5× halves
+and 2× doubles progression. Negative speed reverses, zero holds, and Loop wraps
+the recorded interval. Sample indices remain navigation/lookup positions, not
+another playback mode. These rates do not set render or output video FPS.
+Preparation still holds the visible scene and disables Play until ready.
+Numeric/text focus suppresses viewport shortcuts. New recipes retain exact signed
+speed; obsolete mode/index-rate fields are removed without migration support.
 
 ## Status and Jobs
 

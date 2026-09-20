@@ -90,13 +90,13 @@ static func validate_visual(viewer, state: Dictionary) -> String:
 		if not state.has(key): return "Missing visual field: " + key
 	if state.color_channel not in ["fixed","visual_color"] and not state.color_channel is String: return "Invalid channel."
 	if not viewer.colormaps.has(state.colormap_name): return "Unknown colormap."
-	if state.normalization_mode not in Normalization.MODES or state.time_mode not in ["index","physical"]: return "Unknown normalization or time mode."
+	if state.normalization_mode not in Normalization.MODES: return "Unknown normalization mode."
 	if state.manual_max < state.manual_min: return "Manual maximum is below minimum."
 	if state.cyclic and (state.logarithmic or state.manual_max <= state.manual_min): return "Cyclic mapping requires a nonzero linear period."
 	if state.logarithmic and viewer._channel_semantics(state.color_channel) == "signed": return "Signed ordinary log scaling is unsupported."
 	if not enum_value(state.mode,[0,1,2]) or not enum_value(state.camera.keep_aspect,[0,1]): return "Unknown camera or reserved display mode."
 	if not enum_value(state.viewport.msaa_3d,[0,1,2,3]) or not enum_value(state.viewport.screen_space_aa,[0,1,2]) or state.viewport.scaling_3d_scale <= 0 or state.viewport.scaling_3d_scale > 2: return "Invalid viewport quality."
-	if state.gamma <= 0 or state.physical_rate <= 0 or state.point_scale <= 0 or state.brightness_scale < 0: return "Invalid display scale."
+	if state.gamma <= 0 or state.point_scale <= 0 or state.brightness_scale < 0: return "Invalid display scale."
 	if state.panel_width < 290 or state.panel_width > 600: return "Inspector width must be 290–600."
 	if not state.camera.has_all(["fov","near","far","keep_aspect"]) or state.camera.fov < 1 or state.camera.fov > 179 or state.camera.near <= 0 or state.camera.far <= state.camera.near: return "Invalid camera settings."
 	var basis := Basis(Visual.vector(state.camera_transform[0]),Visual.vector(state.camera_transform[1]),Visual.vector(state.camera_transform[2]))

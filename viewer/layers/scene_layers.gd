@@ -250,7 +250,7 @@ func _sample_profiled(time: float, asynchronous: bool, force_particles: bool) ->
 			labels[id].text = "%s: %s%s\n%s" % [id,info.status," @ %.4f" % info.source_time if info.source_time != null else "",info.display_lod]
 			labels[id].tooltip_text = JSON.stringify(info,"  ")
 	if not prepared.has(particle_id):viewer.committed_sample = {}
-	viewer.committed_sample.requested_time = time;viewer.committed_sample.time_mode = viewer.time_mode;viewer.committed_sample.layers = layer_samples.duplicate(true)
+	viewer.committed_sample.requested_time = time;viewer.committed_sample.layers = layer_samples.duplicate(true)
 	if viewer.physical_time_spin != null:viewer.physical_time_spin.set_value_no_signal(time)
 	viewer._timeline_guard = true;viewer.timeline.value = lo;viewer._timeline_guard = false
 	viewer._update_hud();publishing = false
@@ -281,7 +281,7 @@ func resample() -> void:
 func tick(delta: float) -> void:
 	var started := Profile.begin()
 	if Profile.enabled and Profile.trace_enabled:
-		Profile.trace_context = {"time_mode":viewer.time_mode,"playing":viewer.playing,"requested_time_before":viewer.requested_time,"source_index_before":viewer.current_index,"particle_pair_before":particle_key,"tail_accumulator_before":viewer.tail_poll,"delta":delta}
+		Profile.trace_context = {"playing":viewer.playing,"requested_time_before":viewer.requested_time,"source_index_before":viewer.current_index,"particle_pair_before":particle_key,"tail_accumulator_before":viewer.tail_poll,"delta":delta}
 	_tick_profiled(delta)
 	Profile.end("g3_tick",started)
 func _tick_profiled(delta: float) -> void:
@@ -302,22 +302,9 @@ func _tick_profiled(delta: float) -> void:
 	if viewer.frame_a == null:return
 	if viewer.playing and reader.frames.size()>1:
 		var committed_index: int = viewer.current_index;var committed_phase: float = viewer.phase
-		if viewer.time_mode == "physical":
-			var next_time: float = viewer.requested_time+delta*viewer.physical_rate
-			if viewer.scene_loop_playback and (next_time>reader.frames[-1].time or next_time<reader.frames[0].time):next_time = wrapf(next_time,reader.frames[0].time,reader.frames[-1].time)
-			viewer.requested_time = clampf(next_time,reader.frames[0].time,reader.frames[-1].time)
-		else:
-			viewer.phase += delta*viewer.playback_fps
-			if viewer.scene_loop_playback:
-				var cursor: float = viewer.current_index+viewer.phase
-				if cursor<0 or cursor>reader.frames.size()-1:cursor = fposmod(cursor,reader.frames.size()-1)
-				viewer.current_index = int(floor(cursor));viewer.phase = cursor-viewer.current_index
-			while viewer.phase >= 1 and viewer.current_index+1 < reader.frames.size(): viewer.phase -= 1;viewer.current_index += 1
-			while viewer.phase < 0 and viewer.current_index > 0:viewer.phase += 1;viewer.current_index -= 1
-			if viewer.current_index == 0:viewer.phase = maxf(0,viewer.phase)
-			var i: int = viewer.current_index
-			viewer.phase = minf(viewer.phase,1.0) if i+1 < reader.frames.size() else 0.0
-			viewer.requested_time = lerpf(reader.frames[i].time,reader.frames[mini(i+1,reader.frames.size()-1)].time,viewer.phase)
+		var next_time: float = viewer.requested_time+delta*viewer.physical_rate
+		if viewer.scene_loop_playback and (next_time>reader.frames[-1].time or next_time<reader.frames[0].time):next_time = wrapf(next_time,reader.frames[0].time,reader.frames[-1].time)
+		viewer.requested_time = clampf(next_time,reader.frames[0].time,reader.frames[-1].time)
 		viewer.display_accum += delta
 		if viewer.display_accum >= 1.0/30.0:
 			viewer.display_accum = 0

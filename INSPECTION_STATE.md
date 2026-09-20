@@ -7,6 +7,11 @@ These state versions are independent of the capture format. See
 [G4 schemas](docs/G4_SCHEMAS.md), [the G4 guide](docs/G4_GUIDE.md) and
 [the handbook](docs/SIMSCOPE_HANDBOOK.md).
 
+Playback uses recorded time only. Recipes retain the exact signed `physical_rate`;
+`time_mode`, `playback_fps` and the index-rate slider are no longer state fields.
+Recipes containing these obsolete fields are rejected without migration. Sample
+indices remain available for navigation and exact lookup.
+
 ## Try a native scene
 
 ```sh

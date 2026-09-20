@@ -3,7 +3,8 @@
 Issue #49 (UX3-TRANSPORT-002) adds [media-style playback timing](UX3_MEDIA_TRANSPORT.md)
 to owner-merged shell/transport/status main `1976adc` (PR #48). Implementation is
 **pending owner review**. Relative speed and one-decimal progress are presentation
-adapters; exact source clocks, sampling, recipes and video timing are unchanged.
+adapters. Owner refinement removes the selectable clock and obsolete mode/index-rate
+recipe fields; recorded time is canonical. Sampling and video timing are unchanged.
 No #44 integration or later issue is started.
 
 As of **2026-09-20**, including G4 and PERF-001/002 maintenance reviewed and accepted by the user. Scientific simulations were not rerun. Historical results identify their recorded checkpoints. PERF-003 mesh maintenance was also reviewed and accepted by the owner on 2026-09-13; implementation checkpoint `7974c78`.

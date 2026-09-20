@@ -15,7 +15,6 @@ var displayed: Label
 var requested: Label
 var duration: Button
 var show_remaining := false
-const NORMAL_INDEX_RATE := 12.0
 const NORMAL_RECORDED_RATE := 1.0
 var seek_button: Button
 var rate
@@ -26,7 +25,6 @@ var target
 var seek_units: Label
 var seek_error: Label
 var source_generation := -1
-var rate_mode := ""
 var legacy: Control
 var compact := false
 
@@ -64,18 +62,12 @@ func setup(owner_shell) -> void:
 	requested.size_flags_horizontal = Control.SIZE_EXPAND_FILL; requested.clip_text = true
 	seek_button = shell.button(primary,"Seek…",open_seek); seek_button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	options = HBoxContainer.new(); options.add_theme_constant_override("separation",8); primary.add_child(options)
-	viewer.time_option.fit_to_longest_item = true; viewer.time_option.clip_text = false
-	viewer.time_option.reparent(options); viewer.time_option.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-	viewer.time_option.set_item_text(0,"Sample index"); viewer.time_option.set_item_text(1,"Recorded time")
-	viewer.time_option.tooltip_text = "Time mode; the timeline always uses union sample indices"
 	var rate_box := HBoxContainer.new(); rate_box.size_flags_vertical = Control.SIZE_SHRINK_CENTER; rate_box.add_theme_constant_override("separation",4); options.add_child(rate_box)
 	rate_units = label(rate_box,"Playback speed")
 	rate = NumberField.new(); rate.custom_minimum_size.x = 140; rate_box.add_child(rate)
 	label(rate_box,"×")
-	rate.validator = func(value): return "Playback speed is too large." if not is_finite(value*normal_rate()) else ""
-	rate.committed.connect(func(value):
-		if viewer.time_mode == "physical": viewer.physical_rate = value*NORMAL_RECORDED_RATE
-		else: viewer.playback_fps = value*NORMAL_INDEX_RATE)
+	rate.validator = func(value): return "Playback speed is too large." if not is_finite(value*NORMAL_RECORDED_RATE) else ""
+	rate.committed.connect(func(value): viewer.physical_rate = value*NORMAL_RECORDED_RATE)
 	loop = CheckButton.new(); loop.text = "Loop"; loop.tooltip_text = "Loop recorded interval"; loop.size_flags_vertical = Control.SIZE_SHRINK_CENTER; options.add_child(loop)
 	loop.toggled.connect(func(value):
 		if viewer.scene_layers != null and viewer.scene_layers.playback.enabled: viewer.scene_layers.playback.set_loop(value)
@@ -148,7 +140,6 @@ func refresh() -> void:
 	for index in [0,2]: actions.get_child(index).disabled = not loaded or viewer.inspection_busy
 	viewer.timeline.editable = loaded and not viewer.inspection_busy
 	seek_button.disabled = not loaded or viewer.inspection_busy
-	viewer.time_option.disabled = not loaded or viewer.inspection_busy
 	rate.editor.editable = loaded; loop.disabled = not loaded
 	update_index_hint()
 	var clock = viewer.committed_sample.get("requested_time")
@@ -162,12 +153,10 @@ func refresh() -> void:
 	requested.text = "Requested time %.5f" % float(pending) if pending != null and (clock == null or pending != clock) else ""
 	requested.visible = not requested.text.is_empty()
 	requested.tooltip_text = "Requested time " + FloatText.format_value(float(pending)) + " " + units() if not requested.text.is_empty() else ""
-	var value: float = viewer.physical_rate if viewer.time_mode == "physical" else viewer.playback_fps
-	if rate_mode != viewer.time_mode or rate.model != value/normal_rate():
-		rate.set_model(value/normal_rate()); rate_mode = viewer.time_mode
-	rate.tooltip_text = "Playback speed relative to 1×: " + ("1 recorded unit per playback second" if viewer.time_mode == "physical" else "12 union samples per playback second") + ". Negative values reverse; zero holds.\nExact controller rate: " + FloatText.format_value(value)
+	var value: float = viewer.physical_rate
+	if rate.model != value/NORMAL_RECORDED_RATE: rate.set_model(value/NORMAL_RECORDED_RATE)
+	rate.tooltip_text = "Playback speed relative to 1×: 1 recorded unit per playback second. Negative values reverse; zero holds.\nExact controller rate: " + FloatText.format_value(value)
 	rate.editor.tooltip_text = rate.tooltip_text
-	viewer.time_option.select(1 if viewer.time_mode == "physical" else 0)
 	loop.set_pressed_no_signal(viewer.scene_loop_playback)
 	if seek_dialog.visible and source_generation != viewer.capture_generation: seek_dialog.hide()
 
@@ -182,11 +171,8 @@ func update_index_hint() -> void:
 		var slider_rect: Rect2 = viewer.timeline.get_global_rect()
 		index_hint.global_position = Vector2(clampf(get_global_mouse_position().x,slider_rect.position.x,maxf(slider_rect.position.x,slider_rect.end.x-index_hint.size.x)),slider_rect.position.y-index_hint.size.y-6)
 
-func normal_rate() -> float:
-	return NORMAL_RECORDED_RATE if viewer.time_mode == "physical" else NORMAL_INDEX_RATE
-
 func playback_timing() -> Dictionary:
-	# Nominal duration at the existing mode's normal speed, independent of the
+	# Nominal duration at the normal recorded-time speed, independent of the
 	# selected multiplier or buffering. Only the committed clock drives progress.
 	if viewer.generic_reader == null or viewer.generic_reader.frames.is_empty(): return {"elapsed":0.0,"total":0.0,"remaining":0.0}
 	var frames: Array = viewer.generic_reader.frames
@@ -195,17 +181,6 @@ func playback_timing() -> Dictionary:
 	var time: float = clampf(float(viewer.committed_sample.get("requested_time",start)),start,end)
 	var total: float = (end-start)/NORMAL_RECORDED_RATE
 	var elapsed: float = (time-start)/NORMAL_RECORDED_RATE
-	if viewer.time_mode == "index":
-		# Binary search of the already loaded union axis, not a source scan.
-		var low := 0; var high := frames.size()-1
-		while low < high:
-			var middle := (low+high+1)/2
-			if frames[middle].time <= time: low = middle
-			else: high = middle-1
-		var fraction := 0.0
-		if low+1 < frames.size(): fraction = (time-float(frames[low].time))/(float(frames[low+1].time)-float(frames[low].time))
-		total = float(frames.size()-1)/NORMAL_INDEX_RATE
-		elapsed = (float(low)+fraction)/NORMAL_INDEX_RATE
 	return {"elapsed":elapsed,"total":total,"remaining":maxf(0,total-elapsed)}
 
 func layout(width: float, bottom: float) -> float:

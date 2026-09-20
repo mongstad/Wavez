@@ -64,9 +64,9 @@ func run():
 		var event := InputEventKey.new(); event.keycode = code; event.pressed = true; root.push_input(event)
 	check(not viewer.playing and viewer.committed_sample.requested_time == 2.25 and viewer.camera.transform == camera,"Focused target suppresses viewport playback/camera shortcuts")
 	ui.seek_dialog.hide()
-	viewer.time_option.item_selected.emit(0); ui.refresh()
+	ui.refresh()
 	ui.rate.editor.text = "2"; ui.rate.commit()
-	check(viewer.time_mode == "index" and viewer.playback_fps == 24,"Sample-index rate routes to existing model")
+	check(viewer.physical_rate == 2,"Playback speed routes to canonical recorded-time rate")
 	viewer.timeline.value = 1; await ready(viewer)
 	check(viewer.current_index == 1 and viewer.committed_sample.requested_time == .5,"Slider selects a union timestamp")
 	check(viewer.timeline.tooltip_text == "Sample index 2 / 8" and not ui.index_hint.visible,"Index count is available on hover without a persistent label")
@@ -81,8 +81,8 @@ func run():
 	check(viewer.committed_sample.requested_time == .5,"Previous selects previous union sample")
 	viewer.play_button.pressed.emit(); check(viewer.playing,"Play invokes existing controller")
 	viewer.play_button.pressed.emit(); check(not viewer.playing,"Pause invokes existing controller")
-	viewer.time_option.item_selected.emit(1); ui.refresh(); ui.rate.editor.text = "-0.5"; ui.rate.commit()
-	check(viewer.physical_rate == -.5 and viewer.time_mode == "physical","Recorded rate supports existing reverse behavior")
+	ui.refresh(); ui.rate.editor.text = "-0.5"; ui.rate.commit()
+	check(viewer.physical_rate == -.5,"Recorded rate supports existing reverse behavior")
 	go(ui,"2.25"); await ready(viewer); viewer.playing = true; viewer.scene_layers.tick(.1); await ready(viewer); viewer.playing = false
 	check(viewer.committed_sample.requested_time < 2.25,"Reverse recorded playback moves backwards")
 	ui.loop.button_pressed = true
@@ -132,7 +132,7 @@ func run():
 		root.size = dimensions; await settle(); viewer.shell.layout(); await settle()
 		check(ui.get_global_rect().end.y == dimensions.y-viewer.shell.status_ui.size.y and ui.size.x == dimensions.x,"Transport fits native window " + str(dimensions))
 		check(viewer.overlay_panel.get_rect().end.y <= ui.position.y,"Dock cannot cover persistent transport " + str(dimensions))
-		check(ui.options.get_global_rect().end.x <= dimensions.x and viewer.time_option.size.x >= 120,"Mode/rate/loop fit without clipping " + str(dimensions))
+		check(ui.options.get_global_rect().end.x <= dimensions.x,"Speed/loop fit without clipping " + str(dimensions))
 		check(ui.size.y == (64 if dimensions.x == 1440 else 104),"Transport height follows desktop/compact allocation " + str(dimensions))
 		viewer._toggle_overlay(); await settle(); check(ui.is_visible_in_tree(),"Dock hide preserves transport"); viewer._toggle_overlay(); await settle()
 		check(ui.displayed.get_global_rect().end.x <= viewer.timeline.get_global_rect().position.x and viewer.timeline.get_global_rect().end.x <= ui.duration.get_global_rect().position.x,"Elapsed and total flank the union slider")
@@ -152,34 +152,35 @@ func run():
 	print("TRANSPORT: %d checks, %d failures" % [checks,failures.size()]); quit(0 if failures.is_empty() else 1)
 
 func media_checks(viewer, ui, config):
-	for mode in ["physical","index"]:
-		go(ui,"0"); await ready(viewer); viewer._set_time_mode(mode); ui.refresh()
-		check(ui.displayed.text == "0.0",mode+" begins at zero elapsed")
-		var total: float = 6.0 if mode == "physical" else 7.0/12.0
-		check(is_equal_approx(ui.playback_timing().total,total),mode+" nominal duration follows existing normal rate")
-		ui.duration.pressed.emit()
-		check(ui.show_remaining and ui.duration.text == "-%.1f" % total,mode+" duration toggles to negative remaining")
-		ui.duration.pressed.emit()
-		check(not ui.show_remaining and ui.duration.text == "%.1f" % total,mode+" duration toggles back to total")
-		for speed in [-2.0,-0.5,0.0,0.5,1.0,2.0]:
-			go(ui,"2.25"); await ready(viewer); viewer._set_time_mode(mode); ui.refresh()
-			var before: float = ui.playback_timing().elapsed
-			check(is_equal_approx(before,2.25 if mode == "physical" else 4.25/12.0),mode+" fractional seek maps committed position")
-			ui.rate.editor.text = ui.FloatText.format_value(speed); ui.rate.commit(); ui.refresh()
-			check(is_equal_approx(viewer.physical_rate if mode == "physical" else viewer.playback_fps,speed*(1 if mode == "physical" else 12)),mode+" multiplier maps to existing rate "+str(speed))
-			viewer.playing = true; viewer.scene_layers.tick(.05); await ready(viewer); viewer.playing = false; ui.refresh()
-			check(is_equal_approx(ui.playback_timing().elapsed,before+.05*speed),mode+" speed affects actual committed motion "+str(speed))
-			check(is_equal_approx(ui.playback_timing().total,total),mode+" duration stays stable during playback and speed edits")
-		go(ui,"6"); await ready(viewer); viewer._set_time_mode(mode); ui.refresh()
-		check(ui.displayed.text == ui.duration.text,mode+" end elapsed equals total")
-		ui.duration.pressed.emit(); check(ui.duration.text == "0.0",mode+" remaining ends at zero without negative zero")
-		ui.duration.pressed.emit()
+	go(ui,"0"); await ready(viewer); ui.refresh()
+	check(ui.displayed.text == "0.0","Recorded playback begins at zero elapsed")
+	var total: float = 6.0
+	check(is_equal_approx(ui.playback_timing().total,total),"Recorded playback nominal duration follows existing normal rate")
+	ui.duration.pressed.emit()
+	check(ui.show_remaining and ui.duration.text == "-%.1f" % total,"Recorded playback duration toggles to negative remaining")
+	ui.duration.pressed.emit()
+	check(not ui.show_remaining and ui.duration.text == "%.1f" % total,"Recorded playback duration toggles back to total")
+	for speed in [-2.0,-0.5,0.0,0.5,1.0,2.0]:
+		go(ui,"2.25"); await ready(viewer); ui.refresh()
+		var before: float = ui.playback_timing().elapsed
+		check(is_equal_approx(before,2.25),"Recorded playback fractional seek maps committed position")
+		ui.rate.editor.text = ui.FloatText.format_value(speed); ui.rate.commit(); ui.refresh()
+		check(is_equal_approx(viewer.physical_rate,speed),"Recorded playback multiplier maps to existing rate "+str(speed))
+		viewer.playing = true; viewer.scene_layers.tick(.05); await ready(viewer); viewer.playing = false; ui.refresh()
+		check(is_equal_approx(ui.playback_timing().elapsed,before+.05*speed),"Recorded playback speed affects actual committed motion "+str(speed))
+		check(is_equal_approx(ui.playback_timing().total,total),"Recorded playback duration stays stable during playback and speed edits")
+	go(ui,"6"); await ready(viewer); ui.refresh()
+	check(ui.displayed.text == ui.duration.text,"Recorded playback end elapsed equals total")
+	ui.duration.pressed.emit(); check(ui.duration.text == "0.0","Recorded playback remaining ends at zero without negative zero")
+	ui.duration.pressed.emit()
+	check(not Visual.snapshot(viewer).has("time_mode") and not Visual.snapshot(viewer).has("playback_fps"),"Snapshots contain no obsolete playback-mode fields")
+	check(not viewer.visual_sliders.has("Playback • frames / second (index mode)"),"Obsolete index-rate control is not constructed")
 	# An unchanged multiplier must never round-trip or alter an arbitrary saved rate.
-	viewer._set_time_mode("index"); viewer.playback_fps = 0.12345678912345678; ui.refresh()
-	var exact: float = viewer.playback_fps
-	ui.rate.commit(); check(viewer.playback_fps == exact,"Unchanged speed editor preserves exact controller rate")
-	var saved := Visual.snapshot(viewer); viewer.playback_fps = 12; Visual.apply(viewer,saved); ui.refresh()
-	check(viewer.playback_fps == exact and ui.rate.model == exact/12,"Recipe restores original exact index rate without redefining it")
+	viewer.physical_rate = 0.12345678912345678; ui.refresh()
+	var exact: float = viewer.physical_rate
+	ui.rate.commit(); check(viewer.physical_rate == exact,"Unchanged speed editor preserves exact controller rate")
+	var saved := Visual.snapshot(viewer); viewer.physical_rate = 12; Visual.apply(viewer,saved); ui.refresh()
+	check(viewer.physical_rate == exact and ui.rate.model == exact,"Recipe restores original exact recorded rate without redefining it")
 	for path in [config.offset,config.single]:
 		viewer._open_capture(path); viewer.playing = false; await ready(viewer)
 		check(ui.displayed.text == "0.0","Nonzero source origin still begins at zero elapsed")

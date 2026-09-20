@@ -125,7 +125,7 @@ func run() -> void:
 	var before_uploads: int = controller.uploads
 	check(await sample(view,2.1,true),"same pair interpolates")
 	check(controller.uploads <= before_uploads+1,"same pair needs no repeated mesh upload (one future stage allowed)")
-	view.time_mode = "physical";view.physical_rate = -1;view.scene_loop_playback = true
+	view.physical_rate = -1;view.scene_loop_playback = true
 	check(await sample(view,.05,true),"reverse loop start")
 	view.playing = true;view.scene_layers.tick(.1);view.playing = false
 	while controller.buffering:controller.pump();await process_frame

@@ -33,8 +33,8 @@ func run() -> void:
 				if view.scene_layers.states[id].has("isosurface"):view.scene_layers.states[id].isosurface = false
 			for id in view.guide_visibility:view.guide_visibility[id] = false
 			view.scene_layers.cancel_iso();view._apply_geometry()
-		view.playing = false;view.time_mode = config.get("time_mode","physical");view.physical_rate = config.get("rate",1.0)
-		view.playback_fps = config.get("fps",2.0);view.set("scene_loop_playback",config.get("loop",false))
+		view.playing = false;view.physical_rate = config.get("rate",1.0)
+		view.set("scene_loop_playback",config.get("loop",false))
 		var controller = view.scene_layers.get("playback")
 		var target: float = config.get("start",16.0)
 		var ready_before := false

@@ -134,7 +134,6 @@ func _run() -> void:
 		Job.apply(viewer,merged)
 	elif job.get("inspection_sidecars",false): inspection_source = preload("res://scene/inspection_state.gd").identity(viewer)
 	# Rendering state is frozen; only deterministic sample and camera functions advance.
-	viewer.time_mode = "physical"
 	viewer.playing = false
 	viewer.orbit_enabled = false
 	viewer.free_camera = false

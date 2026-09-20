@@ -15,7 +15,6 @@ const Inspection = preload("res://scene/inspection_state.gd")
 const VisualState = preload("res://scene/visual_state.gd")
 const SharedTimeline = preload("res://scene/timeline_sampler.gd")
 var shared_timeline
-var time_mode := "index"
 var physical_rate := 1.0
 var requested_time := 0.0
 var committed_sample: Dictionary = {}
@@ -34,7 +33,6 @@ var geometry_metadata: Dictionary = {}
 var guide_visibility := {"domain":false,"data":false,"absorber":false,"imposed":false}
 var geometry_meshes: Dictionary = {}
 var geometry_label: Label
-var time_option: OptionButton
 var physical_time_spin: SpinBox
 var normalization_option: OptionButton
 var interval_start: SpinBox
@@ -84,7 +82,6 @@ var frame_b: FrameData
 var history: Array[FrameData] = []
 
 var playing := true
-var playback_fps := 12.0
 var phase := 0.0
 var display_accum := 0.0
 var mode := 0 # Reserved visual-state field in existing native recipes; no display dispatch.
@@ -919,13 +916,8 @@ func _build_inspector() -> void:
 	timeline.step = 1
 	timeline.value_changed.connect(_timeline_changed)
 	playback.add_child(timeline)
-	time_option = _option(playback,"Time mode")
-	time_option.add_item("Frame index • union samples")
-	time_option.add_item("Physical time • recorded timestamps")
-	time_option.item_selected.connect(func(i: int): _set_time_mode("physical" if i else "index"))
 	physical_time_spin = _inspection_number(playback,"Seek physical time",0)
 	_button(playback,"Seek time",func(): _seek_time(physical_time_spin.value))
-	_visual_slider(playback, "Playback • frames / second (index mode)", 0.1, 60, playback_fps, func(v: float): playback_fps = v)
 	_visual_slider(playback, "Physical time units / second", .01, 10, physical_rate, func(v: float): physical_rate = v)
 	var rendering := _section("Rendering", true)
 	var preset := _option(rendering, "Viewing preset")
@@ -1097,7 +1089,7 @@ func _open_scene(path: String) -> void:
 	current_mm.instance_count = 0
 	for mm in trail_mms: mm.instance_count = 0
 	scene_layers = preload("res://layers/scene_layers.gd").new();add_child(scene_layers);scene_layers.setup(self,reader)
-	_set_timeline_extent();time_mode = "physical"
+	_set_timeline_extent()
 	if frame_count == 0: status_label.text = "Waiting for a complete scene sample.";return
 	requested_time = reader.frames[0].time
 	scene_layers.sample(requested_time)
@@ -1420,7 +1412,6 @@ func _reset_inspection_source() -> void:
 	auto_range = true
 	cyclic = false
 	logarithmic = false
-	time_mode = "index"
 	requested_time = 0
 
 func _ensure_timeline() -> bool:
@@ -1429,21 +1420,11 @@ func _ensure_timeline() -> bool:
 		return shared_timeline.build(self)
 	return shared_timeline.valid_axis
 
-func _set_time_mode(value: String) -> void:
-	if value == "physical" and not _ensure_timeline():
-		status_label.text = shared_timeline.error
-		time_mode = "index"
-	else:
-		time_mode = value
-		requested_time = committed_sample.get("requested_time",frame_a.sim_time if frame_a != null else 0)
-	_sync_inspection_controls()
-	_update_hud()
-
 func _seek_time(time: float) -> bool:
 	if inspection_busy: return false
 	if scene_layers != null:
 		if not scene_layers.refresh() or generic_reader.frames.is_empty() or not is_finite(time) or time < generic_reader.frames[0].time or time > generic_reader.frames[-1].time:return false
-		playing = false;time_mode = "physical"
+		playing = false
 		return scene_layers.seek(time)
 	if not _ensure_timeline():
 		status_label.text = shared_timeline.error
@@ -1452,7 +1433,6 @@ func _seek_time(time: float) -> bool:
 		status_label.text = "Time unavailable: requests must lie within complete recorded timestamps."
 		return false
 	playing = false
-	time_mode = "physical"
 	var point: Dictionary = shared_timeline.sample(time)
 	_sync_inspection_controls()
 	return not point.is_empty()
@@ -1464,7 +1444,7 @@ func _commit_sample(alpha: float) -> void:
 	var requested := lerpf(frame_a.sim_time,b.sim_time,w)
 	var exact := w == 0 or b == frame_a or b.sim_time == frame_a.sim_time
 	var matching := frame_a.has_ids and b.has_ids
-	committed_sample = {"requested_time":requested,"source_indices":[frame_a.source_index,b.source_index],"source_times":[frame_a.sim_time,b.sim_time],"alpha":w,"positions":"exact" if exact else ("interpolated by ID; unmatched held" if matching else "held (no IDs)"),"scalars":"exact" if exact else "held","scalar_time":frame_a.sim_time,"missing_layers":[],"stale_layers":[],"unavailable_channels":frame_a.unavailable_channels.duplicate(),"time_mode":time_mode}
+	committed_sample = {"requested_time":requested,"source_indices":[frame_a.source_index,b.source_index],"source_times":[frame_a.sim_time,b.sim_time],"alpha":w,"positions":"exact" if exact else ("interpolated by ID; unmatched held" if matching else "held (no IDs)"),"scalars":"exact" if exact else "held","scalar_time":frame_a.sim_time,"missing_layers":[],"stale_layers":[],"unavailable_channels":frame_a.unavailable_channels.duplicate()}
 	current_instance.visible = particle_layer_visible
 	for instance in trail_instances: instance.visible = particle_layer_visible
 	if physical_time_spin != null: physical_time_spin.set_value_no_signal(requested)
@@ -1473,12 +1453,12 @@ func _commit_sample(alpha: float) -> void:
 func _sample_label() -> String:
 	if committed_sample.is_empty(): return ""
 	if scene_layers != null and not scene_layers.current.has(scene_layers.particle_id):
-		return "%s\nLayer samples held\n%s\nSee layer source times" % ["Physical time" if time_mode == "physical" else "Frame index","No particle layer" if scene_layers.particle_id.is_empty() else "Particles unavailable"]
+		return "%s\nLayer samples held\n%s\nSee layer source times" % ["Recorded time","No particle layer" if scene_layers.particle_id.is_empty() else "Particles unavailable"]
 	# Short, explicit lines keep the same height at exact and in-between samples.
 	# The detailed scientific policy remains in committed_sample and its sidecars.
 	var position_status := "exact"
 	if committed_sample.positions != "exact": position_status = "ID interpolation" if _has_particle_ids() else "held"
-	var label := "%s\nPositions: %s\n%s\nScalars held at t=%.5f" % ["Physical time" if time_mode == "physical" else "Frame index",position_status,"Unmatched IDs held" if _has_particle_ids() else "No IDs; samples held",committed_sample.scalar_time]
+	var label := "%s\nPositions: %s\n%s\nScalars held at t=%.5f" % ["Recorded time",position_status,"Unmatched IDs held" if _has_particle_ids() else "No IDs; samples held",committed_sample.scalar_time]
 	var unavailable: Array = committed_sample.get("unavailable_channels",[])
 	if not unavailable.is_empty(): label += "\nUnavailable channels: "+", ".join(unavailable)
 	return label
@@ -1583,7 +1563,6 @@ func _inspection_number(parent: Control, title: String, value: float) -> SpinBox
 
 func _sync_inspection_controls() -> void:
 	if normalization_option != null: normalization_option.select(Normalization.MODES.find(_effective_normalization()))
-	if time_option != null: time_option.select(1 if time_mode == "physical" else 0)
 	if control_checks.has("Cyclic phase"): control_checks["Cyclic phase"].set_pressed_no_signal(cyclic)
 	if control_checks.has("Logarithmic"): control_checks["Logarithmic"].disabled = _channel_semantics(color_channel) == "signed" or cyclic or _effective_normalization() == "symmetric"
 	for i in range(manual_spins.size()): manual_spins[i].set_value_no_signal(manual_min if i == 0 else manual_max)

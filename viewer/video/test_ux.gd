@@ -142,6 +142,12 @@ func run() -> void:
 	viewer.color_channel = "temperature"
 	variable_track.sample(.2)
 	check(viewer.color_channel == "fixed" and viewer.particle_count == 3, "changing schema removes unavailable export mapping")
+	# Export keeps an independent positive rate, initialized from canonical playback.
+	for speed in [2.0,0.0,-0.5]:
+		viewer.physical_rate = speed; viewer.video_dialog.open()
+		check(is_equal_approx(viewer.video_dialog.rate.value, speed if speed > 0 else 1.0),"Export initializes positive rate without retired index-clock state")
+		viewer.video_dialog.hide()
+	viewer.physical_rate = 1.0
 	# Exercise the actual UI-to-child-process launch and verify the parent stays alive.
 	viewer._open_capture(fixture.path_join("fixture.ssc"))
 	viewer.playing = false

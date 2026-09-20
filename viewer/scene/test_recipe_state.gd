@@ -117,6 +117,27 @@ func run() -> void:
 	viewer._open_capture(output.path_join("scene.ssc"));viewer.playing = false
 	await process_frame
 	var source_hash := FileAccess.get_sha256(viewer.capture_path)
+	var canonical := Visual.snapshot(viewer)
+	check(not canonical.has("time_mode") and not canonical.has("playback_fps"),"Recipe omits retired playback mode and index rate")
+	check(not canonical.sliders.has("Playback • frames / second (index mode)"),"Recipe omits retired index-rate slider")
+	var mode_controls := 0
+	for option in viewer.sections.Playback.find_children("*","OptionButton",true,false):
+		for i in range(option.item_count):
+			if option.get_item_text(i) in ["Frame index • union samples","Physical time • recorded timestamps","Recorded time","Sample index"]: mode_controls += 1
+	check(mode_controls == 0,"Playback-mode selector is not constructed even in offline viewer")
+	for obsolete in ["time_mode","playback_fps"]:
+		var rejected := canonical.duplicate(true); rejected[obsolete] = "index" if obsolete == "time_mode" else 12.0
+		check(not Inspection.validate_visual(viewer,rejected).is_empty(),"Retired recipe field rejected without migration: "+obsolete)
+	for speed in [-0.12345678912345678,0.0,0.5,1.0,2.0]:
+		viewer.physical_rate = speed
+		var signed_state := Visual.snapshot(viewer)
+		check(Inspection.validate_visual(viewer,signed_state).is_empty(),"Signed or zero canonical speed is valid recipe state")
+		var exact_state: Dictionary = Exact.unpack(Exact.pack(signed_state))
+		viewer.physical_rate = 3
+		Visual.apply(viewer,exact_state)
+		check(viewer.physical_rate == speed,"Exact recipe packing and restoration preserves canonical speed")
+	viewer.physical_rate = 1
+
 	for preset in ["Scientific","Cinematic"]:
 		for active in [false,true]:
 			change_session(viewer,false)

@@ -17,8 +17,8 @@ The [production shell](../docs/UX3_SHELL.md) adds Open, State, Export, View and
 Help above one right-hand dock. Scene retains the inspector; the other workspaces
 provide entry points to its existing control groups. The
 [persistent transport](../docs/UX3_TRANSPORT.md) keeps playback, union sample index,
-elapsed/total/remaining playback time, Seek…, mode, Playback speed and Loop below
-the viewport. [Media timing](../docs/UX3_MEDIA_TRANSPORT.md) is nominal at 1×; exact
+elapsed/total/remaining playback time, Seek…, Playback speed and Loop below
+the viewport. Playback uses recorded time only. [Media timing](../docs/UX3_MEDIA_TRANSPORT.md) is nominal at 1×; exact
 committed source time remains in the elapsed tooltip and Seek Target. Seek uses
 a separate Target and explicit Go/Cancel; typing never changes the visible time.
 The [40-pixel status line and Jobs action](../docs/UX3_STATUS.md) remain available

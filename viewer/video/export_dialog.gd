@@ -149,9 +149,8 @@ func open() -> void:
 	camera_mode.select(1 if viewer.orbit_enabled else 0)
 	overlays.button_pressed = viewer.overlay_visible
 	trails.button_pressed = viewer.trails_enabled
-	# Initialize rate from the current local capture interval when it is meaningful.
-	if viewer.frame_b != null and viewer.frame_b.sim_time > viewer.frame_a.sim_time:
-		rate.value = (viewer.frame_b.sim_time-viewer.frame_a.sim_time) * viewer.playback_fps
+	# Export is forward-only; initialize from canonical playback speed when positive.
+	rate.value = viewer.physical_rate if viewer.physical_rate > 0 else 1.0
 	ffmpeg = Job.find_ffmpeg()
 	message.text = "FFmpeg found. Export runs in a separate process." if not ffmpeg.is_empty() else "FFmpeg is missing. Export will retain the complete PNG sequence and encoding instructions."
 	update_range()
