@@ -19,7 +19,7 @@ func run() -> void:
 	var view := ObservedViewer.new();view.capture_path = job.capture;view.playing = false;view.orbit_enabled = false
 	var began := Time.get_ticks_usec();root.add_child(view);view.set_process(false)
 	var open_ms := (Time.get_ticks_usec()-began)/1000.0
-	view._set_clean(true);view.overlay_visible = false;view.overlay_panel.visible = false;view.show_panel_button.visible = false
+	view._set_clean(true);view.overlay_visible = false;view.overlay_panel.visible = false;view.shell.hide()
 	view.resize_handle.visible = false;view.legend.visible = false;view.colorbar.visible = false;view.show_legend = false
 	for id in view.guide_visibility:view.guide_visibility[id] = false
 	view.environment.tonemap_mode = Environment.TONE_MAPPER_LINEAR;view.environment.tonemap_exposure = 1

@@ -30,7 +30,7 @@ func run() -> void:
 	create_timer(160).timeout.connect(func():push_error("Color regression timeout");quit(1))
 	vp = SubViewport.new();vp.size = Vector2i(960,640);vp.own_world_3d = true;vp.render_target_update_mode = SubViewport.UPDATE_ALWAYS;root.add_child(vp)
 	viewer = load("res://main.gd").new();viewer.offline_instance = true;viewer.capture_path = job.capture;vp.add_child(viewer);viewer.set_process(false);viewer.playing = false;viewer.orbit_enabled = false
-	viewer._apply_preset("Scientific");viewer.overlay_visible = false;viewer.show_legend = false;viewer.overlay_panel.hide();viewer.legend.hide();viewer.colorbar.hide();viewer.particle_layer_visible = false
+	viewer._apply_preset("Scientific");viewer.overlay_visible = false;viewer.show_legend = false;viewer.overlay_panel.hide();viewer.shell.prepare_export({});viewer.legend.hide();viewer.colorbar.hide();viewer.particle_layer_visible = false
 	var layers = viewer.scene_layers;var id: String = job.field
 	var initial: Dictionary = layers.states[id].duplicate(true)
 	for channel in job.oracles:
@@ -72,12 +72,12 @@ func run() -> void:
 			cases.append({"channel":channel,"policy":policy,"bounds":bounds,"mapping":mapping,"opacity":opacity,"probe":source_probe})
 			if channel == "density" and policy == "percentile":
 				Job.write_json(job.output.path_join("export-state.json"),Job.snapshot(viewer))
-				viewer.overlay_visible = true;viewer.overlay_panel.show();layers.layer_settings_buttons[id].button_pressed = true
+				viewer.shell.toggle_dock();viewer.shell.refresh_export();layers.layer_settings_buttons[id].button_pressed = true
 				for i in 5:await process_frame
-				var scroll: ScrollContainer = viewer.inspector_box.get_parent()
+				var scroll: ScrollContainer = viewer.shell.scroll
 				scroll.scroll_vertical += int(layers.color_controls[id].mode.global_position.y-scroll.global_position.y)-90
 				await render("controls")
-				viewer.overlay_visible = false;viewer.overlay_panel.hide()
+				viewer.overlay_visible = false;viewer.overlay_panel.hide();viewer.shell.prepare_export({})
 		# Signed source rejects logarithmic display even if the bounds are positive.
 		layers.states[id].lower = .01;layers.states[id].upper = oracle.bound;layers.states[id].color_mapping.policy = "manual"
 		if channel != "density":check(not layers._set_color_normalization(id,"log"),channel+" log refused on signed source")

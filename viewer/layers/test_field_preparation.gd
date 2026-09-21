@@ -12,7 +12,7 @@ func run() -> void:
 	vp.msaa_3d = Viewport.MSAA_DISABLED;vp.screen_space_aa = Viewport.SCREEN_SPACE_AA_DISABLED;vp.use_taa = false;vp.use_debanding = false;root.add_child(vp)
 	var view = load("res://main.gd").new();view.capture_path = job.capture;view.playing = false;view.orbit_enabled = false
 	vp.add_child(view);view.set_process(false);view._set_clean(true)
-	view.overlay_panel.visible = false;view.show_panel_button.visible = false;view.resize_handle.visible = false
+	view.overlay_visible = false;view.overlay_panel.visible = false;view.shell.hide();view.resize_handle.visible = false
 	view.legend.visible = false;view.colorbar.visible = false;view.environment.glow_enabled = false;view.environment.fog_enabled = false
 	view.camera_target = Vector3(4,4,2.5);view.camera.position = Vector3(14,-11,11.5);view.camera.look_at(view.camera_target,Vector3.BACK)
 	view.camera.near = .01;view.camera.far = 150;view.camera.fov = 45

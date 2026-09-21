@@ -33,7 +33,7 @@ func run() -> void:
 	if not await wait_jobs(control):push_error(control.status.text);quit(1);return
 	control.state.overlay.show_hidden = true
 	viewer.scene_layers.states.field.visible = false;viewer.particle_layer_visible = show_particles;viewer.scene_layers.resample()
-	viewer._set_clean(true);viewer.overlay_visible = false;viewer.overlay_panel.visible = false;viewer.show_legend = false
+	viewer._set_clean(true);viewer.overlay_visible = false;viewer.overlay_panel.visible = false;viewer.shell.prepare_export({});viewer.show_legend = false
 	viewer.camera_target = Vector3(1,0,0);viewer.camera_distance = 8;viewer.camera.position = Vector3(1,0,8);viewer.camera.look_at(viewer.camera_target)
 	viewer.camera.fov = 45;viewer.camera.near = .01;viewer.camera.far = 100
 	viewer.environment.tonemap_mode = Environment.TONE_MAPPER_LINEAR;viewer.environment.tonemap_exposure = 1

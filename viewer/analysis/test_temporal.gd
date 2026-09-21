@@ -67,7 +67,8 @@ func run() -> void:
 	var report := {"checks":checks,"failures":failures,"backend":RenderingServer.get_current_rendering_method(),"native_rows":temporal.plot.data.count,"integral_range":temporal.plot.data.y_range,"named_results":temporal.summaries.size()}
 	if DisplayServer.get_name() != "headless":
 		temporal.panel.visible = true;control.panel.visible = false
-		var scroll: ScrollContainer = viewer.inspector_box.get_parent()
+		viewer.shell.refresh_export()
+		var scroll: ScrollContainer = viewer.shell.scroll
 		await process_frame;await process_frame
 		scroll.scroll_vertical = maxi(0,int(temporal.plot.global_position.y)-80+scroll.scroll_vertical)
 		await process_frame;await process_frame;await RenderingServer.frame_post_draw

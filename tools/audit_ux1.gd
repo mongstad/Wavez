@@ -46,12 +46,12 @@ func capture(name: String, surface: Viewport = root) -> void:
 	await settle()
 	var image := surface.get_texture().get_image()
 	check(image.save_png(out.path_join(name+".png")) == OK,"Saved "+name)
-	observations.append({"name":name,"image_size":str(image.get_size()),"logical_rect":rect(surface.get_visible_rect()),"window_size":str(root.size),"panel_rect":rect(view.overlay_panel.get_global_rect()),"content_height":view.inspector_box.size.y,"scroll":view.inspector_box.get_parent().scroll_vertical,"timeline_rect":rect(view.timeline.get_global_rect()),"legend_rect":rect(view.legend.get_global_rect()),"controls":collect(view)})
+	observations.append({"name":name,"image_size":str(image.get_size()),"logical_rect":rect(surface.get_visible_rect()),"window_size":str(root.size),"panel_rect":rect(view.overlay_panel.get_global_rect()),"content_height":view.inspector_box.size.y,"scroll":view.shell.scroll.scroll_vertical,"timeline_rect":rect(view.timeline.get_global_rect()),"legend_rect":rect(view.legend.get_global_rect()),"controls":collect(view)})
 
 func show_section(title: String) -> void:
 	for key in view.sections: view.sections[key].visible = key == title
 	await settle()
-	view.inspector_box.get_parent().scroll_vertical = int(view.sections[title].position.y)
+	view.shell.scroll.scroll_vertical = int(view.sections[title].position.y)
 	await settle()
 
 func wait_jobs() -> void:
@@ -77,11 +77,11 @@ func run() -> void:
 	view._update_hud()
 	await capture("03-loaded-default")
 	inventory = collect(view)
-	for width in [290,600]:
-		view.panel_width = width;view._layout_inspector(view.resize_handle)
+	for width in [320,560]:
+		view.panel_width = width;view.shell.layout()
 		await capture("04-width-"+str(width))
-	view.panel_width = 340;view._layout_inspector(view.resize_handle)
-	await show_section("Playback");await capture("05-playback")
+	view.panel_width = 340;view.shell.layout()
+	await show_section("Rendering");await capture("05-transport")
 	await show_section("Capture / Export");await capture("06-export-actions")
 	view.video_dialog.open();await capture("07-video-dialog")
 	view.video_dialog.get_child(0).ensure_control_visible(view.video_dialog.start_button)
@@ -105,7 +105,7 @@ func run() -> void:
 	temporal.mode.select(2);temporal.full_range();temporal.run_analysis();await wait_jobs()
 	check(not temporal.summaries.is_empty(),"Native population analysis produced a named result")
 	await show_section("Temporal analysis");await capture("11-temporal")
-	view.inspector_box.get_parent().ensure_control_visible(temporal.plot)
+	view.shell.scroll.ensure_control_visible(temporal.plot)
 	await capture("11-temporal-plot")
 	check(not temporal.plot.data.is_empty(),"Native result plot contains bounded source observations")
 	for title in ["Diagnostics and comparisons","Space-time analysis","Analysis export and state","Matched runs","Geometry / Guides","Camera","Color Mapping"]:
@@ -116,7 +116,7 @@ func run() -> void:
 			if item is Button and item.text == "Settings: "+id:
 				item.button_pressed = true
 				await settle()
-				view.inspector_box.get_parent().ensure_control_visible(item)
+				view.shell.scroll.ensure_control_visible(item)
 				await capture("layer-"+id)
 				item.button_pressed = false
 	var expanded: Array = []
@@ -129,9 +129,9 @@ func run() -> void:
 		expanded.append({"section":title,"width":panel.size.x,"height":panel.size.y})
 	for item in controls(view):
 		if item.has_meta("analysis_group"): item.button_pressed = false
-	await show_section("Playback")
+	await show_section("Rendering")
 	view._toggle_overlay();await capture("12-hidden")
-	check(not view.show_panel_button.visible,"Observed F1 hides mouse restore affordance")
+	check(view.shell.recovery.visible,"F1 leaves production mouse recovery reachable")
 	view._toggle_overlay()
 	var old_size := root.size
 	root.size = Vector2i(1280,720);await capture("13-window-1280x720")

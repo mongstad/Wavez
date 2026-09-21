@@ -251,7 +251,6 @@ func _sample_profiled(time: float, asynchronous: bool, force_particles: bool) ->
 			labels[id].tooltip_text = JSON.stringify(info,"  ")
 	if not prepared.has(particle_id):viewer.committed_sample = {}
 	viewer.committed_sample.requested_time = time;viewer.committed_sample.layers = layer_samples.duplicate(true)
-	if viewer.physical_time_spin != null:viewer.physical_time_spin.set_value_no_signal(time)
 	viewer._timeline_guard = true;viewer.timeline.value = lo;viewer._timeline_guard = false
 	viewer._update_hud();publishing = false
 	_sync_iso_target()

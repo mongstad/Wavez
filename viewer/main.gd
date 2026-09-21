@@ -33,7 +33,6 @@ var geometry_metadata: Dictionary = {}
 var guide_visibility := {"domain":false,"data":false,"absorber":false,"imposed":false}
 var geometry_meshes: Dictionary = {}
 var geometry_label: Label
-var physical_time_spin: SpinBox
 var normalization_option: OptionButton
 var interval_start: SpinBox
 var interval_end: SpinBox
@@ -129,7 +128,6 @@ var legend: Label
 var tail_poll := 0.0
 
 var offline_instance := false
-var export_shell := false # Video worker reuses production presentation without desktop input.
 var video_dialog
 var screenshot_directory := ""
 var screenshot_dialog: FileDialog
@@ -336,14 +334,17 @@ func _build_particles() -> void:
 		trail_mms.append(trail["multimesh"] as MultiMesh)
 
 func _build_ui() -> void:
-	_build_inspector()
-	if not offline_instance or export_shell:
-		shell = preload("res://ui/shell/viewer_shell.gd").new()
-		overlay_panel.get_parent().add_child(shell)
-		shell.setup(self)
-		# The dock remains above the shell background; its existing controls keep ownership.
-		overlay_panel.get_parent().move_child(overlay_panel, -1)
-		overlay_panel.get_parent().move_child(resize_handle, -1)
+	_build_inspector_controls()
+	shell = preload("res://ui/shell/viewer_shell.gd").new()
+	overlay_panel.get_parent().add_child(shell)
+	shell.setup(self)
+	# Neutral dock owns the retained canonical controls pending UX4 migration.
+	overlay_panel.get_parent().move_child(overlay_panel, -1)
+	overlay_panel.get_parent().move_child(resize_handle, -1)
+	get_viewport().size_changed.connect(shell.layout)
+	if offline_instance:
+		set_process_unhandled_input(false)
+		shell.prepare_export({})
 
 func _open_from_picker(path: String) -> void:
 	if shell != null:
@@ -356,17 +357,9 @@ func _show_open_dialog() -> void:
 	open_dialog.popup_centered_ratio(0.78)
 
 func _toggle_overlay() -> void:
-	if shell != null and shell.immersive: return
-	if shell != null:
-		shell.toggle_dock()
-		_update_particle_legend()
-		return
-	overlay_visible = not overlay_visible
-	if overlay_panel != null:
-		overlay_panel.visible = overlay_visible
-		show_panel_button.visible = false
-		resize_handle.visible = overlay_visible
-		_update_particle_legend()
+	if shell.immersive: return
+	shell.toggle_dock()
+	_update_particle_legend()
 
 func _toggle_fullscreen() -> void:
 	if shell != null and shell.immersive:
@@ -602,18 +595,6 @@ func _comma(v: Variant) -> String:
 	return out
 
 
-func _style_panel(panel: PanelContainer) -> void:
-	var style := StyleBoxFlat.new()
-	style.bg_color = Color(0.018, 0.035, 0.059, 0.91)
-	style.border_color = Color(0.24, 0.58, 0.65, 0.38)
-	style.set_border_width_all(1)
-	style.set_corner_radius_all(14)
-	style.content_margin_left = 18
-	style.content_margin_right = 18
-	style.content_margin_top = 16
-	style.content_margin_bottom = 16
-	panel.add_theme_stylebox_override("panel", style)
-
 func _build_backdrop(env: Environment) -> void:
 	var shader := Shader.new()
 	shader.code = """
@@ -780,7 +761,6 @@ func _notify_screenshot(message: String) -> void:
 
 # SimScope inspector and generic visualization layer.
 var inspector_box: VBoxContainer
-var show_panel_button: Button
 var sections: Dictionary = {}
 var color_option: OptionButton
 var size_option: OptionButton
@@ -864,13 +844,11 @@ func _option(parent: Control, title: String) -> OptionButton:
 	parent.add_child(option)
 	return option
 
-func _build_inspector() -> void:
+func _build_inspector_controls() -> void:
 	colormaps = JSON.parse_string(FileAccess.get_file_as_string("res://colormaps.json"))
 	var canvas := CanvasLayer.new()
 	add_child(canvas)
 	overlay_panel = PanelContainer.new()
-	overlay_panel.position = Vector2(12, 12)
-	_style_panel(overlay_panel)
 	canvas.add_child(overlay_panel)
 	var scroll := ScrollContainer.new()
 	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
@@ -885,24 +863,9 @@ func _build_inspector() -> void:
 	status_label = Label.new()
 	status_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	inspector_box.add_child(status_label)
-	if offline_instance and not export_shell: _button(inspector_box, "Hide inspector  [F1]", _toggle_overlay)
-	show_panel_button = _button(canvas, "SimScope  [F1]", _toggle_overlay)
-	show_panel_button.position = Vector2(12, 12)
-	show_panel_button.visible = false
-	var resize := Control.new()
-	resize_handle = resize
-	resize.custom_minimum_size = Vector2(10, 0)
-	resize.mouse_default_cursor_shape = Control.CURSOR_HSIZE
-	canvas.add_child(resize)
-	resize.gui_input.connect(func(event: InputEvent):
-		if shell != null: return
-		if event is InputEventMouseButton: resizing_panel = event.pressed
-		if event is InputEventMouseMotion and resizing_panel:
-			panel_width = clampf(panel_width + event.relative.x, 290, 600)
-			_layout_inspector(resize)
-	)
-	get_viewport().size_changed.connect(func(): _layout_inspector(resize))
-	_layout_inspector(resize)
+	resize_handle = Control.new()
+	resize_handle.mouse_default_cursor_shape = Control.CURSOR_HSIZE
+	canvas.add_child(resize_handle)
 	fields_availability = Label.new();fields_availability.text = "Fields unavailable • no grid recorded";fields_availability.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART;inspector_box.add_child(fields_availability)
 	var data_controls := _section("Data cache")
 	cache_label = Label.new(); cache_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -919,19 +882,6 @@ func _build_inspector() -> void:
 			generic_reader.configure_cache(0,false)
 			generic_reader.configure_cache(decoded_cache_mib*1048576,false)
 		_update_hud())
-	var playback := _section("Playback", true)
-	var row := HBoxContainer.new()
-	playback.add_child(row)
-	_button(row, "◀", func(): _step_frame(-1))
-	play_button = _button(row, "Play / Pause", _toggle_playback)
-	_button(row, "▶", func(): _step_frame(1))
-	timeline = HSlider.new()
-	timeline.step = 1
-	timeline.value_changed.connect(_timeline_changed)
-	playback.add_child(timeline)
-	physical_time_spin = _inspection_number(playback,"Seek physical time",0)
-	_button(playback,"Seek time",func(): _seek_time(physical_time_spin.value))
-	_visual_slider(playback, "Physical time units / second", .01, 10, physical_rate, func(v: float): physical_rate = v)
 	var rendering := _section("Rendering", true)
 	var preset := _option(rendering, "Viewing preset")
 	preset_option = preset
@@ -1028,11 +978,10 @@ func _build_inspector() -> void:
 	_button(export_box, "Open capture…", _show_open_dialog)
 	_button(export_box, "Save PNG  [P]", _save_image)
 	_build_inspection_ui(export_box)
-	if not offline_instance or export_shell:
-		video_dialog = preload("res://video/export_dialog.gd").new()
-		video_dialog.viewer = self
-		add_child(video_dialog)
-		_button(export_box, "Export Video…", func(): video_dialog.open())
+	video_dialog = preload("res://video/export_dialog.gd").new()
+	video_dialog.viewer = self
+	add_child(video_dialog)
+	_button(export_box, "Export Video…", func(): video_dialog.open())
 	help_label = Label.new()
 	help_label.text = "Drag: orbit • Wheel: zoom\nSpace: pause • ← / →: step\nF1: inspector • R: reset camera"
 	help_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -1043,21 +992,8 @@ func _build_inspector() -> void:
 	open_dialog.filters = PackedStringArray(["*.ssc ; SimScope scene (SIMSCP3)"])
 	open_dialog.file_selected.connect(_open_from_picker)
 	canvas.add_child(open_dialog)
-	_layout_inspector(resize)
 	_update_colormap()
 	_refresh_mapping_options()
-
-func _layout_inspector(resize: Control) -> void:
-	if shell != null:
-		shell.layout()
-		return
-	var viewport_size := get_viewport().get_visible_rect().size
-	overlay_panel.size = Vector2(minf(panel_width, viewport_size.x - 24), viewport_size.y - 24)
-	resize.position = Vector2(overlay_panel.position.x + overlay_panel.size.x, 12)
-	resize.size = Vector2(10, viewport_size.y - 24)
-	if colorbar != null:
-		colorbar.position = Vector2(maxf(panel_width+32, viewport_size.x-370), viewport_size.y-118)
-		legend.position = colorbar.position + Vector2(0,24)
 
 func _toggle_playback() -> void:
 	if not playing and scene_layers != null and scene_layers.is_buffering():return
@@ -1460,7 +1396,6 @@ func _commit_sample(alpha: float) -> void:
 	committed_sample = {"requested_time":requested,"source_indices":[frame_a.source_index,b.source_index],"source_times":[frame_a.sim_time,b.sim_time],"alpha":w,"positions":"exact" if exact else ("interpolated by ID; unmatched held" if matching else "held (no IDs)"),"scalars":"exact" if exact else "held","scalar_time":frame_a.sim_time,"missing_layers":[],"stale_layers":[],"unavailable_channels":frame_a.unavailable_channels.duplicate()}
 	current_instance.visible = particle_layer_visible
 	for instance in trail_instances: instance.visible = particle_layer_visible
-	if physical_time_spin != null: physical_time_spin.set_value_no_signal(requested)
 	if guide_visibility.data: _update_data_guide()
 
 func _sample_label() -> String:

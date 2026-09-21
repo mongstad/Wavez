@@ -120,8 +120,9 @@ func run() -> void:
 	var canonical := Visual.snapshot(viewer)
 	check(not canonical.has("time_mode") and not canonical.has("playback_fps"),"Recipe omits retired playback mode and index rate")
 	check(not canonical.sliders.has("Playback • frames / second (index mode)"),"Recipe omits retired index-rate slider")
+	check(not canonical.sections.has("Playback") and not canonical.sliders.has("Physical time units / second"),"Snapshots omit removed hidden presentation controls")
 	var mode_controls := 0
-	for option in viewer.sections.Playback.find_children("*","OptionButton",true,false):
+	for option in viewer.shell.transport.find_children("*","OptionButton",true,false):
 		for i in range(option.item_count):
 			if option.get_item_text(i) in ["Frame index • union samples","Physical time • recorded timestamps","Recorded time","Sample index"]: mode_controls += 1
 	check(mode_controls == 0,"Playback-mode selector is not constructed even in offline viewer")

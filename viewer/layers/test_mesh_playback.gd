@@ -45,7 +45,7 @@ func compare_mesh(view, reference, label: String) -> void:
 			for i in range(baked[Mesh.ARRAY_VERTEX].size()):max_error = maxf(max_error,baked[Mesh.ARRAY_VERTEX][i].distance_to(b[Mesh.ARRAY_VERTEX][i]))
 			check(max_error <= 2e-6,label+" rendered morph positions within float32 rounding "+id)
 func clean(view, retained: bool) -> void:
-	view.overlay_visible = false;view.overlay_panel.visible = false;view.show_panel_button.visible = false;view.resize_handle.visible = false
+	view.overlay_visible = false;view.overlay_panel.visible = false;view.shell.hide();view.resize_handle.visible = false
 	view.legend.visible = false;view.colorbar.visible = false;view.show_legend = false
 	for id in view.guide_visibility:view.guide_visibility[id] = false
 	view._apply_geometry();view._sync_visuals()

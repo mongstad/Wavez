@@ -58,7 +58,6 @@ static func apply(viewer, state: Dictionary) -> void:
 			viewer.sections[name].visible = state.sections[name]
 			viewer.section_buttons[name].set_pressed_no_signal(state.sections[name])
 	viewer.overlay_panel.visible = viewer.overlay_visible
-	viewer.show_panel_button.visible = not viewer.overlay_visible and not viewer.offline_instance
 	viewer.resize_handle.visible = viewer.overlay_visible and not viewer.offline_instance
 	viewer.channel_signature = ""
 	viewer._refresh_mapping_options()
@@ -71,7 +70,7 @@ static func apply(viewer, state: Dictionary) -> void:
 	for name in state.get("sliders", {}):
 		if viewer.visual_sliders.has(name): viewer.visual_sliders[name].set_value_no_signal(state.sliders[name])
 	for i in range(viewer.manual_spins.size()): viewer.manual_spins[i].set_value_no_signal(viewer.manual_min if i == 0 else viewer.manual_max)
-	viewer._layout_inspector(viewer.resize_handle)
+	viewer.shell.layout()
 	viewer._apply_geometry()
 	viewer._sync_inspection_controls()
 	if viewer.scene_layers != null and state.has("scene"):viewer.scene_layers.apply_state(state.scene)

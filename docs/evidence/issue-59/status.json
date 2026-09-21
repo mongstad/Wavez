@@ -1,0 +1,16 @@
+{
+  "activity": {
+    "counters": {},
+    "stages": {}
+  },
+  "checks": 67,
+  "failures": [],
+  "parent_directory": "/tmp/issue59-status/.simscope-export-1790014167-14994875",
+  "timings": {
+    "refresh_1000_ms": 14.747
+  },
+  "parent_close_acknowledged": true,
+  "source_hashes_unchanged": {
+    "/tmp/issue59-status/scene.ssc": "e949577c482d5fce6aa8325729b67c35b1d92a26e06a5f583e63d191accd4ddc"
+  }
+}

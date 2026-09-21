@@ -72,7 +72,7 @@ func run() -> void:
 	# Exercise actual layer controls, recipes, job apply and signed color images.
 	vp = SubViewport.new();vp.size = Vector2i(960,640);vp.own_world_3d = true;vp.render_target_update_mode = SubViewport.UPDATE_ALWAYS;root.add_child(vp)
 	var viewer = load("res://main.gd").new();viewer.offline_instance = true;viewer.capture_path = job.capture;vp.add_child(viewer);viewer.set_process(false);viewer.playing = false;viewer.orbit_enabled = false
-	viewer._apply_preset("Scientific");viewer.overlay_visible = false;viewer.show_legend = false;viewer.overlay_panel.hide();viewer.legend.hide();viewer.colorbar.hide()
+	viewer._apply_preset("Scientific");viewer.overlay_visible = false;viewer.show_legend = false;viewer.overlay_panel.hide();viewer.shell.prepare_export({});viewer.legend.hide();viewer.colorbar.hide()
 	viewer.camera_target = Vector3.ZERO;viewer.camera_distance = 8.;viewer.yaw = 0.;viewer.pitch = 0.;viewer._update_camera()
 	var layers = viewer.scene_layers
 	check(layers.states.field.opacity_mapping == Opacity.DEFAULT,"fresh default is independent linear 0–1")
@@ -128,9 +128,9 @@ func run() -> void:
 	layers.opacity_controls.field.reset.pressed.emit()
 	check(layers.states.field.opacity_mapping == Opacity.DEFAULT and [layers.states.field.lower,layers.states.field.upper] == color_bounds,"mapping reset preserves color range")
 	check(layers.opacity_controls.field.lower.text.to_float() == 0. and layers.opacity_controls.field.mode.selected == 0,"reset controls synchronized")
-	viewer.overlay_visible = true;viewer.overlay_panel.show();layers.layer_settings_buttons.field.button_pressed = true
+	viewer.shell.toggle_dock();viewer.shell.refresh_export();layers.layer_settings_buttons.field.button_pressed = true
 	for i in 5:await process_frame
-	var scroll: ScrollContainer = viewer.inspector_box.get_parent()
+	var scroll: ScrollContainer = viewer.shell.scroll
 	scroll.scroll_vertical += int(layers.opacity_controls.field.mode.global_position.y-scroll.global_position.y)-190
 	for i in 5:await process_frame
 	await RenderingServer.frame_post_draw

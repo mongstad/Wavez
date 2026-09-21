@@ -1,0 +1,33 @@
+{
+	"category": "headless source/protocol; not rendered acceptance",
+	"checks": 160,
+	"failures": [],
+	"request_callback_ms": 0.137,
+	"worker": {
+		"guard": {
+			"baseline": {
+				"VmHWM": 38662144.0,
+				"VmPeak": 383733760.0,
+				"VmRSS": 38662144.0,
+				"VmSize": 383733760.0
+			},
+			"ceiling_bytes": 2147483648.0,
+			"enabled": true,
+			"reason": "runtime plus 1 GiB workspace and 256 MiB overhead fit"
+		},
+		"memory": {
+			"VmHWM": 38912000.0,
+			"VmPeak": 384786432.0,
+			"VmRSS": 38912000.0,
+			"VmSize": 383733760.0
+		},
+		"metrics": {
+			"charged_bytes": 0.0,
+			"cpu_seconds": 0.00165014,
+			"decoded_bytes": 0.0,
+			"peak_charged_bytes": 5379896.0,
+			"read_bytes": 35094.0,
+			"seconds": 0.00165474799905496
+		}
+	}
+}

@@ -29,7 +29,6 @@ var target
 var seek_units: Label
 var seek_error: Label
 var source_generation := -1
-var legacy: Control
 var compact := false
 
 func setup(owner_shell) -> void:
@@ -41,18 +40,21 @@ func setup(owner_shell) -> void:
 	rows = VBoxContainer.new(); rows.alignment = BoxContainer.ALIGNMENT_CENTER; rows.add_theme_constant_override("separation", 8); margin.add_child(rows)
 	primary = HBoxContainer.new(); primary.add_theme_constant_override("separation", 12); rows.add_child(primary)
 	secondary = HBoxContainer.new(); rows.add_child(secondary); secondary.hide()
-	# Retain legacy recipe/control references, but remove their presentation from the dock.
-	legacy = Control.new(); legacy.hide(); add_child(legacy)
-	var playback: VBoxContainer = viewer.sections.Playback
-	actions = playback.get_child(0)
-	actions.reparent(primary); actions.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	# Construct the canonical transport directly; no hidden inspector transport.
+	actions = HBoxContainer.new(); primary.add_child(actions)
+	actions.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	shell.button(actions, "Previous sample", viewer._step_frame.bind(-1))
+	viewer.play_button = shell.button(actions, "Play", viewer._toggle_playback)
+	shell.button(actions, "Next sample", viewer._step_frame.bind(1))
 	for pair in [[0,"Previous sample","⏮"],[1,"Play","▶"],[2,"Next sample","⏭"]]:
 		var action: Button = actions.get_child(pair[0]); action.text = pair[2]; action.tooltip_text = pair[1]; action.custom_minimum_size = Vector2(40,32)
 	var axis := VBoxContainer.new(); axis.size_flags_horizontal = Control.SIZE_EXPAND_FILL; axis.custom_minimum_size.x = 200; axis.add_theme_constant_override("separation", 0); axis.size_flags_vertical = Control.SIZE_SHRINK_CENTER; primary.add_child(axis)
 	var progress := HBoxContainer.new(); progress.add_theme_constant_override("separation",4); axis.add_child(progress)
 	displayed = label(progress,"—"); displayed.custom_minimum_size.x = 48
 	displayed.vertical_alignment = VERTICAL_ALIGNMENT_CENTER; displayed.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-	viewer.timeline.reparent(progress); viewer.timeline.custom_minimum_size.y = 16
+	viewer.timeline = HSlider.new(); viewer.timeline.step = 1
+	viewer.timeline.value_changed.connect(viewer._timeline_changed)
+	progress.add_child(viewer.timeline); viewer.timeline.custom_minimum_size.y = 16
 	viewer.timeline.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	viewer.timeline.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	index_hint = label(self, ""); index_hint.top_level = true; index_hint.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -85,7 +87,6 @@ func setup(owner_shell) -> void:
 	loop.toggled.connect(func(value):
 		if viewer.scene_layers != null and viewer.scene_layers.playback.enabled: viewer.scene_layers.playback.set_loop(value)
 		else: viewer.scene_loop_playback = value)
-	playback.reparent(legacy); viewer.section_buttons.Playback.reparent(legacy)
 	_build_seek()
 	minimum_size_changed.connect(shell.layout.call_deferred)
 	refresh()

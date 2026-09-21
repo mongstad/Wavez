@@ -1,5 +1,10 @@
 # Current status
 
+Issue #59 removes retired left-panel/offline presentation and hidden duplicate
+transport controls, pending owner review. The current right-hand controls remain
+canonical UX4 migration dependencies; [ownership audit](UX3_UI_OWNERSHIP.md).
+Scientific/controller behavior and #55 export presentation are preserved.
+
 Issue #53 (UX3-TRANSPORT-003) delays the transient Requested time label by 450 ms
 on accepted `main` `195bd90` (owner-merged PR #51). Implementation is **pending
 owner review**. [Delay semantics and evidence](UX3_TRANSIENT_STATUS.md) describe

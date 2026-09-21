@@ -1,0 +1,264 @@
+{
+  "cases": [
+    {
+      "channel": "density",
+      "preset": "dense_core",
+      "settings": {
+        "channel": "density",
+        "clip": false,
+        "clip_distance": 0.0,
+        "clip_normal": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "color_mapping": {
+          "normalization": "linear",
+          "percentile_high": 100.0,
+          "percentile_low": 0.0,
+          "policy": "percentile",
+          "source_channel": "density",
+          "source_time": 2.0
+        },
+        "colormap": "viridis",
+        "isosurface": false,
+        "lower": 1.197185968400262e-16,
+        "opacity": 0.25,
+        "opacity_mapping": {
+          "lower": 0.0,
+          "mode": "linear",
+          "upper": 2.9703506657204124
+        },
+        "slice": false,
+        "slice_distance": 0.0,
+        "slice_normal": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "step": 0.5,
+        "threshold": 0.5,
+        "upper": 2.9703506657204124,
+        "visible": true,
+        "volume": true
+      }
+    },
+    {
+      "channel": "density",
+      "preset": "faint_structure",
+      "settings": {
+        "channel": "density",
+        "clip": false,
+        "clip_distance": 0.0,
+        "clip_normal": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "color_mapping": {
+          "normalization": "linear",
+          "percentile_high": 99.0,
+          "percentile_low": 1.0,
+          "policy": "percentile",
+          "source_channel": "density",
+          "source_time": 2.0
+        },
+        "colormap": "viridis",
+        "isosurface": false,
+        "lower": 8.184621149051619e-14,
+        "opacity": 0.25,
+        "opacity_mapping": {
+          "lower": 0.0,
+          "mode": "linear",
+          "upper": 1.421123413419804
+        },
+        "slice": false,
+        "slice_distance": 0.0,
+        "slice_normal": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "step": 0.5,
+        "threshold": 0.5,
+        "upper": 1.421123413419804,
+        "visible": true,
+        "volume": true
+      }
+    },
+    {
+      "channel": "psi_real",
+      "preset": "signed_field",
+      "settings": {
+        "channel": "psi_real",
+        "clip": false,
+        "clip_distance": 0.0,
+        "clip_normal": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "color_mapping": {
+          "normalization": "linear",
+          "percentile_high": 100.0,
+          "percentile_low": 0.0,
+          "policy": "symmetric",
+          "source_channel": "psi_real",
+          "source_time": 2.0
+        },
+        "colormap": "coolwarm",
+        "isosurface": false,
+        "lower": -2.9699483367745954,
+        "opacity": 0.25,
+        "opacity_mapping": {
+          "lower": 0.0,
+          "mode": "magnitude",
+          "upper": 2.9699483367745954
+        },
+        "slice": false,
+        "slice_distance": 0.0,
+        "slice_normal": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "step": 0.5,
+        "threshold": 0.5,
+        "upper": 2.9699483367745954,
+        "visible": true,
+        "volume": true
+      }
+    },
+    {
+      "channel": "psi_imag",
+      "preset": "signed_field",
+      "settings": {
+        "channel": "psi_imag",
+        "clip": false,
+        "clip_distance": 0.0,
+        "clip_normal": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "color_mapping": {
+          "normalization": "linear",
+          "percentile_high": 100.0,
+          "percentile_low": 0.0,
+          "policy": "symmetric",
+          "source_channel": "psi_imag",
+          "source_time": 2.0
+        },
+        "colormap": "coolwarm",
+        "isosurface": false,
+        "lower": -2.9699483367745954,
+        "opacity": 0.25,
+        "opacity_mapping": {
+          "lower": 0.0,
+          "mode": "magnitude",
+          "upper": 2.9699483367745954
+        },
+        "slice": false,
+        "slice_distance": 0.0,
+        "slice_normal": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "step": 0.5,
+        "threshold": 0.5,
+        "upper": 2.9699483367745954,
+        "visible": true,
+        "volume": true
+      }
+    }
+  ],
+  "checks": 99,
+  "failures": [],
+  "renderer": "forward_plus",
+  "exports": [
+    {
+      "case": "density-dense_core",
+      "completed": true,
+      "identical_pixels": true,
+      "resolved_state_in_sidecar": true
+    },
+    {
+      "case": "density-faint_structure",
+      "completed": true,
+      "identical_pixels": true,
+      "resolved_state_in_sidecar": true
+    },
+    {
+      "case": "psi_real-signed_field",
+      "completed": true,
+      "identical_pixels": true,
+      "resolved_state_in_sidecar": true
+    }
+  ],
+  "source_file": "presets.ssc",
+  "source_bytes": 2318054,
+  "source_sha256_unchanged": "58bf18aa197429315e0e478987141afe3d430401304cac1345e8d18a848291c4",
+  "oracles": {
+    "density": {
+      "minimum": 1.197185968400262e-16,
+      "maximum": 2.9703506657204124,
+      "bound": 2.9703506657204124,
+      "percentiles": [
+        8.184621149051619e-14,
+        1.421123413419804
+      ],
+      "custom_percentiles": [
+        1.1102842216027678e-11,
+        0.3211342184395854
+      ],
+      "sha256": "34ce6c00b42555dcb464416b9e3f2ebe3fcd0a13433ba1102af26f4b55774f19",
+      "probe_world": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "probe_value": 0.4638284426597983
+    },
+    "psi_real": {
+      "minimum": -2.9699483367745954,
+      "maximum": 2.9699483367745954,
+      "bound": 2.9699483367745954,
+      "percentiles": [
+        -0.8808599877356478,
+        0.8808599877356437
+      ],
+      "custom_percentiles": [
+        -0.07816749477985584,
+        0.07816749477985584
+      ],
+      "sha256": "6719a16da5e40826ad5dfb1a3530008a07383b0cd2f507bd74e643da866c5dad",
+      "probe_world": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "probe_value": 0.0
+    },
+    "psi_imag": {
+      "minimum": -2.9699483367745954,
+      "maximum": 2.9699483367745954,
+      "bound": 2.9699483367745954,
+      "percentiles": [
+        -0.8808599877356478,
+        0.8808599877356437
+      ],
+      "custom_percentiles": [
+        -0.07816749477985584,
+        0.07816749477985584
+      ],
+      "sha256": "e029bde312abe427c5e006ac40e1ed574bce1451080c07b22d23d870f93b1817",
+      "probe_world": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "probe_value": 0.0
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+	"backend": "forward_plus",
+	"checks": 32,
+	"drawn": 5,
+	"failures": [],
+	"gpu_bytes": 12928,
+	"status": "3 selections • 6 selected members\n5 present • 5 highlights\nCounts include overlaps; highlights may show a subset."
+}
