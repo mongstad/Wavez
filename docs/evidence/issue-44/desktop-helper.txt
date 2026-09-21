@@ -1,0 +1,3 @@
+/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/tools/validate_immersive_desktop.py:40: DeprecationWarning: Gio.DBusConnection.register_object is deprecated
+  registration = conn.register_object('/Review', Gio.DBusNodeInfo.new_for_xml(xml).interfaces[0], record, None, None)
+Native immersive desktop: 11 checks, 8 KWin geometry checks, 5 matching scientific regions per capture method PASS (forward_plus)

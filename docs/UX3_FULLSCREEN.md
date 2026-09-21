@@ -1,5 +1,8 @@
 # UX3-FULLSCREEN-001 — Immersive fullscreen
 
+Current integration status: the slice is owner-merged; the [#44 milestone report](UX3_REPORT.md)
+is pending owner review. Original issue review metadata and evidence below remain historical.
+
 Issue #46. Implementation pending owner review. This extends the accepted
 interactive fullscreen shell without changing the scientific or playback model.
 

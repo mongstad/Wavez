@@ -1,0 +1,24 @@
+{
+  "checks": 204,
+  "failures": [],
+  "layouts": [
+    {
+      "transport": "[P: (0.0, 796.0), S: (1440.0, 64.0)]",
+      "window": "(1440, 900)"
+    },
+    {
+      "transport": "[P: (0.0, 496.0), S: (1024.0, 104.0)]",
+      "window": "(1024, 640)"
+    }
+  ],
+  "refresh_activity": {
+    "counters": {},
+    "stages": {}
+  },
+  "request_delay_observed_ms": 460,
+  "source_hashes_unchanged": {
+    "/tmp/issue44/transport-compat/scene.ssc": "4a49a92e35c8e5759a57e6c5155d44d1d9db018382102bd1264af9df5c50f0d6",
+    "/tmp/issue44/transport-compat/offset.ssc": "46887fd9e0a9f4f0c259dc159691f1330b43e2c5c54b357ab45524300d9e04b5",
+    "/tmp/issue44/transport-compat/single.ssc": "d1e508947332f358edfff964822c9990ac8174758d776651241cae500fd90683"
+  }
+}

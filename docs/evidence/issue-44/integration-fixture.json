@@ -1,0 +1,706 @@
+{
+  "backend": "forward_plus",
+  "checks": 56,
+  "failures": [],
+  "measurements": [
+    {
+      "activity": {
+        "counters": {
+          "g3_tail_polls": 2
+        },
+        "stages": {
+          "g3_layer_refresh": {
+            "count": 2,
+            "max_ms": 2.708,
+            "mean_ms": 2.644,
+            "p50_ms": 2.708,
+            "p95_ms": 2.708,
+            "samples_collected": 2,
+            "total_ms": 5.288
+          },
+          "g3_mesh_gpu_stage": {
+            "count": 1,
+            "max_ms": 0.045,
+            "mean_ms": 0.045,
+            "p50_ms": 0.045,
+            "p95_ms": 0.045,
+            "samples_collected": 1,
+            "total_ms": 0.045
+          },
+          "g3_reader_refresh": {
+            "count": 2,
+            "max_ms": 2.698,
+            "mean_ms": 2.6334999999999997,
+            "p50_ms": 2.698,
+            "p95_ms": 2.698,
+            "samples_collected": 2,
+            "total_ms": 5.2669999999999995
+          },
+          "g3_source_stamp": {
+            "count": 2,
+            "max_ms": 2.686,
+            "mean_ms": 2.6195,
+            "p50_ms": 2.686,
+            "p95_ms": 2.686,
+            "samples_collected": 2,
+            "total_ms": 5.239
+          },
+          "g3_tail_poll": {
+            "count": 2,
+            "max_ms": 2.715,
+            "mean_ms": 2.6535,
+            "p50_ms": 2.715,
+            "p95_ms": 2.715,
+            "samples_collected": 2,
+            "total_ms": 5.307
+          },
+          "g3_tick": {
+            "count": 120,
+            "max_ms": 3.032,
+            "mean_ms": 0.3621083333333334,
+            "p50_ms": 0.306,
+            "p95_ms": 0.448,
+            "samples_collected": 120,
+            "total_ms": 43.45300000000001
+          },
+          "process_inclusive": {
+            "count": 120,
+            "max_ms": 3.038,
+            "mean_ms": 0.3693583333333333,
+            "p50_ms": 0.312,
+            "p95_ms": 0.458,
+            "samples_collected": 120,
+            "total_ms": 44.32299999999999
+          }
+        }
+      },
+      "callbacks": {
+        "count": 120,
+        "max_ms": 3.042,
+        "mean_ms": 0.3731666666666669,
+        "p95_ms": 0.464
+      },
+      "case": "idle-dock",
+      "frame_intervals": {
+        "count": 121,
+        "max_ms": 16.725,
+        "mean_ms": 16.660975206611568,
+        "p95_ms": 16.683
+      },
+      "memory_after": {
+        "godot_static_bytes": 118981734,
+        "gpu_buffer_bytes": 21745980,
+        "gpu_texture_bytes": 97506816,
+        "rss_bytes": 723652608
+      },
+      "memory_before": {
+        "godot_static_bytes": 118906822,
+        "gpu_buffer_bytes": 21745902,
+        "gpu_texture_bytes": 97506816,
+        "rss_bytes": 724176896
+      },
+      "seconds": 2.016039,
+      "source_end": 1.5,
+      "source_start": 1.5,
+      "status_refreshes": 9
+    },
+    {
+      "activity": {
+        "counters": {
+          "g3_tail_polls": 2
+        },
+        "stages": {
+          "g3_layer_refresh": {
+            "count": 2,
+            "max_ms": 2.782,
+            "mean_ms": 2.714,
+            "p50_ms": 2.782,
+            "p95_ms": 2.782,
+            "samples_collected": 2,
+            "total_ms": 5.428
+          },
+          "g3_reader_refresh": {
+            "count": 2,
+            "max_ms": 2.773,
+            "mean_ms": 2.705,
+            "p50_ms": 2.773,
+            "p95_ms": 2.773,
+            "samples_collected": 2,
+            "total_ms": 5.41
+          },
+          "g3_source_stamp": {
+            "count": 2,
+            "max_ms": 2.76,
+            "mean_ms": 2.692,
+            "p50_ms": 2.76,
+            "p95_ms": 2.76,
+            "samples_collected": 2,
+            "total_ms": 5.384
+          },
+          "g3_tail_poll": {
+            "count": 2,
+            "max_ms": 2.792,
+            "mean_ms": 2.7225,
+            "p50_ms": 2.792,
+            "p95_ms": 2.792,
+            "samples_collected": 2,
+            "total_ms": 5.445
+          },
+          "g3_tick": {
+            "count": 120,
+            "max_ms": 3.1,
+            "mean_ms": 0.34391666666666665,
+            "p50_ms": 0.292,
+            "p95_ms": 0.404,
+            "samples_collected": 120,
+            "total_ms": 41.269999999999996
+          },
+          "process_inclusive": {
+            "count": 120,
+            "max_ms": 3.106,
+            "mean_ms": 0.34976666666666656,
+            "p50_ms": 0.297,
+            "p95_ms": 0.411,
+            "samples_collected": 120,
+            "total_ms": 41.97199999999999
+          }
+        }
+      },
+      "callbacks": {
+        "count": 120,
+        "max_ms": 3.109,
+        "mean_ms": 0.35304166666666664,
+        "p95_ms": 0.416
+      },
+      "case": "idle-hidden",
+      "frame_intervals": {
+        "count": 121,
+        "max_ms": 16.692,
+        "mean_ms": 16.66016528925619,
+        "p95_ms": 16.679
+      },
+      "memory_after": {
+        "godot_static_bytes": 118996162,
+        "gpu_buffer_bytes": 21754452,
+        "gpu_texture_bytes": 97506816,
+        "rss_bytes": 723652608
+      },
+      "memory_before": {
+        "godot_static_bytes": 118985458,
+        "gpu_buffer_bytes": 21754452,
+        "gpu_texture_bytes": 97506816,
+        "rss_bytes": 723652608
+      },
+      "seconds": 2.015957,
+      "source_end": 1.5,
+      "source_start": 1.5,
+      "status_refreshes": 9
+    },
+    {
+      "activity": {
+        "counters": {
+          "g3_display_samples": 51,
+          "g3_particle_pair_changes": 2,
+          "g3_prepared_cache_hit": 51,
+          "g3_tail_polls": 2,
+          "scalar_cache_hit": 4
+        },
+        "stages": {
+          "buffer_submit": {
+            "count": 51,
+            "max_ms": 0.014,
+            "mean_ms": 0.006705882352941181,
+            "p50_ms": 0.006,
+            "p95_ms": 0.009,
+            "samples_collected": 51,
+            "total_ms": 0.34200000000000025
+          },
+          "g3_layer_refresh": {
+            "count": 53,
+            "max_ms": 2.982,
+            "mean_ms": 2.4232641509433956,
+            "p50_ms": 2.425,
+            "p95_ms": 2.786,
+            "samples_collected": 53,
+            "total_ms": 128.43299999999996
+          },
+          "g3_mesh_gpu_stage": {
+            "count": 1,
+            "max_ms": 0.058,
+            "mean_ms": 0.058,
+            "p50_ms": 0.058,
+            "p95_ms": 0.058,
+            "samples_collected": 1,
+            "total_ms": 0.058
+          },
+          "g3_prepared_pair_commit": {
+            "count": 2,
+            "max_ms": 0.377,
+            "mean_ms": 0.24,
+            "p50_ms": 0.377,
+            "p95_ms": 0.377,
+            "samples_collected": 2,
+            "total_ms": 0.48
+          },
+          "g3_reader_refresh": {
+            "count": 53,
+            "max_ms": 2.974,
+            "mean_ms": 2.416150943396226,
+            "p50_ms": 2.418,
+            "p95_ms": 2.779,
+            "samples_collected": 53,
+            "total_ms": 128.05599999999998
+          },
+          "g3_sample": {
+            "count": 51,
+            "max_ms": 8.688,
+            "mean_ms": 3.311960784313726,
+            "p50_ms": 3.208,
+            "p95_ms": 3.601,
+            "samples_collected": 51,
+            "total_ms": 168.91000000000003
+          },
+          "g3_source_stamp": {
+            "count": 53,
+            "max_ms": 2.96,
+            "mean_ms": 2.4054716981132076,
+            "p50_ms": 2.407,
+            "p95_ms": 2.766,
+            "samples_collected": 53,
+            "total_ms": 127.49000000000001
+          },
+          "g3_tail_poll": {
+            "count": 2,
+            "max_ms": 2.382,
+            "mean_ms": 2.3095,
+            "p50_ms": 2.382,
+            "p95_ms": 2.382,
+            "samples_collected": 2,
+            "total_ms": 4.619
+          },
+          "g3_tick": {
+            "count": 120,
+            "max_ms": 9.029,
+            "mean_ms": 1.7464999999999997,
+            "p50_ms": 0.348,
+            "p95_ms": 3.898,
+            "samples_collected": 120,
+            "total_ms": 209.57999999999996
+          },
+          "hud_cpu": {
+            "count": 51,
+            "max_ms": 0.04,
+            "mean_ms": 0.026274509803921566,
+            "p50_ms": 0.025,
+            "p95_ms": 0.036,
+            "samples_collected": 51,
+            "total_ms": 1.3399999999999999
+          },
+          "interpolation_pack": {
+            "count": 51,
+            "max_ms": 0.005,
+            "mean_ms": 0.0033333333333333357,
+            "p50_ms": 0.003,
+            "p95_ms": 0.004,
+            "samples_collected": 51,
+            "total_ms": 0.17000000000000012
+          },
+          "interpolation_submission_inclusive": {
+            "count": 51,
+            "max_ms": 0.074,
+            "mean_ms": 0.04598039215686274,
+            "p50_ms": 0.044,
+            "p95_ms": 0.059,
+            "samples_collected": 51,
+            "total_ms": 2.3449999999999998
+          },
+          "position_decode": {
+            "count": 3,
+            "max_ms": 0.017,
+            "mean_ms": 0.014,
+            "p50_ms": 0.017,
+            "p95_ms": 0.017,
+            "samples_collected": 3,
+            "total_ms": 0.042
+          },
+          "process_inclusive": {
+            "count": 120,
+            "max_ms": 9.034,
+            "mean_ms": 1.7523333333333333,
+            "p50_ms": 0.356,
+            "p95_ms": 3.904,
+            "samples_collected": 120,
+            "total_ms": 210.28
+          },
+          "ui_mapping_inclusive": {
+            "count": 2,
+            "max_ms": 0.298,
+            "mean_ms": 0.16749999999999998,
+            "p50_ms": 0.298,
+            "p95_ms": 0.298,
+            "samples_collected": 2,
+            "total_ms": 0.33499999999999996
+          }
+        }
+      },
+      "callbacks": {
+        "count": 120,
+        "max_ms": 9.037,
+        "mean_ms": 1.755841666666666,
+        "p95_ms": 3.908
+      },
+      "case": "play-dock",
+      "frame_intervals": {
+        "count": 121,
+        "max_ms": 16.718,
+        "mean_ms": 16.66053719008265,
+        "p95_ms": 16.703
+      },
+      "memory_after": {
+        "godot_static_bytes": 119010066,
+        "gpu_buffer_bytes": 21755480,
+        "gpu_texture_bytes": 97506816,
+        "rss_bytes": 723910656
+      },
+      "memory_before": {
+        "godot_static_bytes": 118998554,
+        "gpu_buffer_bytes": 21755484,
+        "gpu_texture_bytes": 97506816,
+        "rss_bytes": 723652608
+      },
+      "seconds": 2.016065,
+      "source_end": 3.499910333333327,
+      "source_start": 1.5,
+      "status_refreshes": 10
+    },
+    {
+      "activity": {
+        "counters": {
+          "g3_display_samples": 54,
+          "g3_particle_pair_changes": 2,
+          "g3_prepared_cache_hit": 54,
+          "g3_tail_polls": 2,
+          "scalar_cache_hit": 4
+        },
+        "stages": {
+          "buffer_submit": {
+            "count": 54,
+            "max_ms": 0.013,
+            "mean_ms": 0.006537037037037042,
+            "p50_ms": 0.006,
+            "p95_ms": 0.011,
+            "samples_collected": 54,
+            "total_ms": 0.35300000000000026
+          },
+          "g3_layer_refresh": {
+            "count": 56,
+            "max_ms": 2.712,
+            "mean_ms": 2.356553571428571,
+            "p50_ms": 2.365,
+            "p95_ms": 2.654,
+            "samples_collected": 56,
+            "total_ms": 131.96699999999998
+          },
+          "g3_mesh_gpu_stage": {
+            "count": 2,
+            "max_ms": 0.049,
+            "mean_ms": 0.0485,
+            "p50_ms": 0.049,
+            "p95_ms": 0.049,
+            "samples_collected": 2,
+            "total_ms": 0.097
+          },
+          "g3_prepared_pair_commit": {
+            "count": 2,
+            "max_ms": 0.434,
+            "mean_ms": 0.275,
+            "p50_ms": 0.434,
+            "p95_ms": 0.434,
+            "samples_collected": 2,
+            "total_ms": 0.55
+          },
+          "g3_reader_refresh": {
+            "count": 56,
+            "max_ms": 2.705,
+            "mean_ms": 2.348107142857142,
+            "p50_ms": 2.353,
+            "p95_ms": 2.648,
+            "samples_collected": 56,
+            "total_ms": 131.49399999999994
+          },
+          "g3_sample": {
+            "count": 54,
+            "max_ms": 8.468,
+            "mean_ms": 3.2200555555555557,
+            "p50_ms": 3.118,
+            "p95_ms": 3.611,
+            "samples_collected": 54,
+            "total_ms": 173.883
+          },
+          "g3_source_stamp": {
+            "count": 56,
+            "max_ms": 2.696,
+            "mean_ms": 2.3378214285714285,
+            "p50_ms": 2.344,
+            "p95_ms": 2.639,
+            "samples_collected": 56,
+            "total_ms": 130.918
+          },
+          "g3_tail_poll": {
+            "count": 2,
+            "max_ms": 2.374,
+            "mean_ms": 2.325,
+            "p50_ms": 2.374,
+            "p95_ms": 2.374,
+            "samples_collected": 2,
+            "total_ms": 4.65
+          },
+          "g3_tick": {
+            "count": 120,
+            "max_ms": 8.846,
+            "mean_ms": 1.7916750000000008,
+            "p50_ms": 0.431,
+            "p95_ms": 3.722,
+            "samples_collected": 120,
+            "total_ms": 215.0010000000001
+          },
+          "hud_cpu": {
+            "count": 54,
+            "max_ms": 0.041,
+            "mean_ms": 0.02424074074074074,
+            "p50_ms": 0.024,
+            "p95_ms": 0.031,
+            "samples_collected": 54,
+            "total_ms": 1.309
+          },
+          "interpolation_pack": {
+            "count": 54,
+            "max_ms": 0.05,
+            "mean_ms": 0.004148148148148151,
+            "p50_ms": 0.003,
+            "p95_ms": 0.005,
+            "samples_collected": 54,
+            "total_ms": 0.22400000000000014
+          },
+          "interpolation_submission_inclusive": {
+            "count": 54,
+            "max_ms": 0.103,
+            "mean_ms": 0.04670370370370369,
+            "p50_ms": 0.044,
+            "p95_ms": 0.085,
+            "samples_collected": 54,
+            "total_ms": 2.5219999999999994
+          },
+          "position_decode": {
+            "count": 3,
+            "max_ms": 0.019,
+            "mean_ms": 0.016,
+            "p50_ms": 0.019,
+            "p95_ms": 0.019,
+            "samples_collected": 3,
+            "total_ms": 0.048
+          },
+          "process_inclusive": {
+            "count": 120,
+            "max_ms": 8.851,
+            "mean_ms": 1.7971833333333334,
+            "p50_ms": 0.441,
+            "p95_ms": 3.729,
+            "samples_collected": 120,
+            "total_ms": 215.662
+          },
+          "ui_mapping_inclusive": {
+            "count": 2,
+            "max_ms": 0.347,
+            "mean_ms": 0.19249999999999998,
+            "p50_ms": 0.347,
+            "p95_ms": 0.347,
+            "samples_collected": 2,
+            "total_ms": 0.38499999999999995
+          }
+        }
+      },
+      "callbacks": {
+        "count": 120,
+        "max_ms": 8.854,
+        "mean_ms": 1.800575,
+        "p95_ms": 3.734
+      },
+      "case": "play-hidden",
+      "frame_intervals": {
+        "count": 121,
+        "max_ms": 16.752,
+        "mean_ms": 16.658314049586778,
+        "p95_ms": 16.686
+      },
+      "memory_after": {
+        "godot_static_bytes": 119025090,
+        "gpu_buffer_bytes": 21754448,
+        "gpu_texture_bytes": 97506816,
+        "rss_bytes": 723922944
+      },
+      "memory_before": {
+        "godot_static_bytes": 119033878,
+        "gpu_buffer_bytes": 21754374,
+        "gpu_texture_bytes": 97506816,
+        "rss_bytes": 723922944
+      },
+      "seconds": 2.01578,
+      "source_end": 3.4832446666666605,
+      "source_start": 1.5,
+      "status_refreshes": 9
+    },
+    {
+      "activity": {
+        "counters": {
+          "g3_tail_polls": 2
+        },
+        "stages": {
+          "g3_layer_refresh": {
+            "count": 2,
+            "max_ms": 2.442,
+            "mean_ms": 2.4005,
+            "p50_ms": 2.442,
+            "p95_ms": 2.442,
+            "samples_collected": 2,
+            "total_ms": 4.801
+          },
+          "g3_mesh_gpu_stage": {
+            "count": 1,
+            "max_ms": 0.051,
+            "mean_ms": 0.051,
+            "p50_ms": 0.051,
+            "p95_ms": 0.051,
+            "samples_collected": 1,
+            "total_ms": 0.051
+          },
+          "g3_reader_refresh": {
+            "count": 2,
+            "max_ms": 2.434,
+            "mean_ms": 2.3920000000000003,
+            "p50_ms": 2.434,
+            "p95_ms": 2.434,
+            "samples_collected": 2,
+            "total_ms": 4.784000000000001
+          },
+          "g3_source_stamp": {
+            "count": 2,
+            "max_ms": 2.422,
+            "mean_ms": 2.3805,
+            "p50_ms": 2.422,
+            "p95_ms": 2.422,
+            "samples_collected": 2,
+            "total_ms": 4.761
+          },
+          "g3_tail_poll": {
+            "count": 2,
+            "max_ms": 2.45,
+            "mean_ms": 2.409,
+            "p50_ms": 2.45,
+            "p95_ms": 2.45,
+            "samples_collected": 2,
+            "total_ms": 4.818
+          },
+          "g3_tick": {
+            "count": 120,
+            "max_ms": 2.763,
+            "mean_ms": 0.3625916666666665,
+            "p50_ms": 0.305,
+            "p95_ms": 0.504,
+            "samples_collected": 120,
+            "total_ms": 43.510999999999974
+          },
+          "process_inclusive": {
+            "count": 120,
+            "max_ms": 2.768,
+            "mean_ms": 0.3702416666666667,
+            "p50_ms": 0.312,
+            "p95_ms": 0.512,
+            "samples_collected": 120,
+            "total_ms": 44.429
+          }
+        }
+      },
+      "callbacks": {
+        "count": 120,
+        "max_ms": 2.773,
+        "mean_ms": 0.3741666666666668,
+        "p95_ms": 0.517
+      },
+      "case": "idle-repeat",
+      "frame_intervals": {
+        "count": 121,
+        "max_ms": 16.707,
+        "mean_ms": 16.660231404958676,
+        "p95_ms": 16.678
+      },
+      "memory_after": {
+        "godot_static_bytes": 119052390,
+        "gpu_buffer_bytes": 21755484,
+        "gpu_texture_bytes": 97506816,
+        "rss_bytes": 723931136
+      },
+      "memory_before": {
+        "godot_static_bytes": 119056006,
+        "gpu_buffer_bytes": 21755406,
+        "gpu_texture_bytes": 97506816,
+        "rss_bytes": 723931136
+      },
+      "seconds": 2.01596,
+      "source_end": 1.5,
+      "source_start": 1.5,
+      "status_refreshes": 9
+    }
+  ],
+  "refresh_100_ms": 69.234,
+  "refresh_activity": {
+    "counters": {},
+    "stages": {}
+  },
+  "seeks": [
+    {
+      "pass": 0,
+      "ready_ms": 8.185,
+      "submit_ms": 8.145
+    },
+    {
+      "pass": 1,
+      "ready_ms": 8.007,
+      "submit_ms": 7.971
+    }
+  ],
+  "source": "/tmp/issue44/integration-fixture-final/scene.ssc",
+  "workspace_memory_after": {
+    "godot_static_bytes": 118908574,
+    "gpu_buffer_bytes": 21745902,
+    "gpu_texture_bytes": 97505792,
+    "rss_bytes": 714711040
+  },
+  "workspace_memory_before": {
+    "godot_static_bytes": 118907914,
+    "gpu_buffer_bytes": 21745902,
+    "gpu_texture_bytes": 97505792,
+    "rss_bytes": 714641408
+  },
+  "source_sha256": "8f2db357c6716255d51964e49a2950fa2c062634cb406564b145bd3201126ccf",
+  "source_unchanged": true,
+  "command": [
+    "/home/Nozba/Documents/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+    "--path",
+    "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+    "--rendering-method",
+    "forward_plus",
+    "--resolution",
+    "1440x900",
+    "--audio-driver",
+    "Dummy",
+    "--disable-vsync",
+    "--max-fps",
+    "60",
+    "--script",
+    "ui/shell/test_ux3_integration.gd",
+    "--",
+    "--integration-source=/tmp/issue44/integration-fixture-final/scene.ssc",
+    "--integration-output=/tmp/issue44/integration-fixture-final"
+  ]
+}

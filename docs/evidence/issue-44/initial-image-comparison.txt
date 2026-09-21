@@ -1,0 +1,10 @@
+/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/tools/validate_immersive_desktop.py:40: DeprecationWarning: Gio.DBusConnection.register_object is deprecated
+  registration = conn.register_object('/Review', Gio.DBusNodeInfo.new_for_xml(xml).interfaces[0], record, None, None)
+Traceback (most recent call last):
+  File "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/tools/validate_immersive_desktop.py", line 121, in <module>
+    main()
+    ~~~~^^
+  File "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/tools/validate_immersive_desktop.py", line 108, in main
+    assert data == reference, (label, kind, 'Scientific region changed during fullscreen presentation')
+           ^^^^^^^^^^^^^^^^^
+AssertionError: ('interactive', 'desktop', 'Scientific region changed during fullscreen presentation')

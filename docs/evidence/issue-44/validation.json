@@ -1,0 +1,444 @@
+{
+  "issue": 44,
+  "date": "2026-09-21",
+  "status": "pending owner review",
+  "ready_at_start": true,
+  "baseline": "c240024cc0cf6f223e96763bf58cbabdfc7fcf85",
+  "branch": "44-ux3-validation-001-complete-shell-integration-and-ux3-milestone-validation",
+  "production_changes": false,
+  "runs": [
+    {
+      "suite": "shell-forward",
+      "command": [
+        "/home/Nozba/Documents/Codex/SIMSCOPE/.venv-dev/bin/python",
+        "tools/validate_viewer_shell.py",
+        "--godot",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--renderer",
+        "forward_plus",
+        "--output-dir",
+        "/tmp/issue44/shell-forward"
+      ],
+      "exit_code": 0,
+      "seconds": 23.26
+    },
+    {
+      "suite": "transport-forward",
+      "command": [
+        "/home/Nozba/Documents/Codex/SIMSCOPE/.venv-dev/bin/python",
+        "tools/validate_viewer_transport.py",
+        "--godot",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--renderer",
+        "forward_plus",
+        "--output-dir",
+        "/tmp/issue44/transport-forward",
+        "--real-capture",
+        "/home/Nozba/Documents/VB_FreeCollapse_v0_2/VB_FreeCollapse_v0_2/runs_free_collapse_v0_2/S2_20260919_204505_268717/free_collapse_simscope.ssc"
+      ],
+      "exit_code": 0,
+      "seconds": 34.02
+    },
+    {
+      "suite": "status-forward",
+      "command": [
+        "/home/Nozba/Documents/Codex/SIMSCOPE/.venv-dev/bin/python",
+        "tools/validate_viewer_status.py",
+        "--godot",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--renderer",
+        "forward_plus",
+        "--output-dir",
+        "/tmp/issue44/status-forward"
+      ],
+      "exit_code": 0,
+      "seconds": 16.29
+    },
+    {
+      "suite": "shell-compat",
+      "command": [
+        "/home/Nozba/Documents/Codex/SIMSCOPE/.venv-dev/bin/python",
+        "tools/validate_viewer_shell.py",
+        "--godot",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--renderer",
+        "gl_compatibility",
+        "--output-dir",
+        "/tmp/issue44/shell-compat"
+      ],
+      "exit_code": 0,
+      "seconds": 22.85
+    },
+    {
+      "suite": "transport-compat",
+      "command": [
+        "/home/Nozba/Documents/Codex/SIMSCOPE/.venv-dev/bin/python",
+        "tools/validate_viewer_transport.py",
+        "--godot",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--renderer",
+        "gl_compatibility",
+        "--output-dir",
+        "/tmp/issue44/transport-compat"
+      ],
+      "exit_code": 0,
+      "seconds": 7.63
+    },
+    {
+      "suite": "status-compat",
+      "command": [
+        "/home/Nozba/Documents/Codex/SIMSCOPE/.venv-dev/bin/python",
+        "tools/validate_viewer_status.py",
+        "--godot",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--renderer",
+        "gl_compatibility",
+        "--output-dir",
+        "/tmp/issue44/status-compat"
+      ],
+      "exit_code": 0,
+      "seconds": 14.19
+    },
+    {
+      "suite": "recipe_state",
+      "command": [
+        "/home/Nozba/Documents/Codex/SIMSCOPE/.venv-dev/bin/python",
+        "tools/validate_recipe_state.py",
+        "--godot",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--renderer",
+        "headless",
+        "--output-dir",
+        "/tmp/issue44/recipe_state"
+      ],
+      "exit_code": 0,
+      "seconds": 5.97
+    },
+    {
+      "suite": "scene_playback",
+      "command": [
+        "/home/Nozba/Documents/Codex/SIMSCOPE/.venv-dev/bin/python",
+        "tools/validate_scene_playback.py",
+        "--godot",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--renderer",
+        "headless",
+        "--output-dir",
+        "/tmp/issue44/scene_playback"
+      ],
+      "exit_code": 0,
+      "seconds": 5.62
+    },
+    {
+      "suite": "performance_maintenance",
+      "command": [
+        "/home/Nozba/Documents/Codex/SIMSCOPE/.venv-dev/bin/python",
+        "tools/validate_performance_maintenance.py",
+        "--godot",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--renderer",
+        "headless",
+        "--output-dir",
+        "/tmp/issue44/performance_maintenance"
+      ],
+      "exit_code": 0,
+      "seconds": 3.77
+    },
+    {
+      "suite": "camera_tumble",
+      "command": [
+        "/home/Nozba/Documents/Codex/SIMSCOPE/.venv-dev/bin/python",
+        "tools/validate_camera_tumble.py",
+        "--godot",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--renderer",
+        "headless",
+        "--output-dir",
+        "/tmp/issue44/camera_tumble"
+      ],
+      "exit_code": 0,
+      "seconds": 3.92
+    },
+    {
+      "suite": "desktop-forward",
+      "command": [
+        "python3",
+        "tools/validate_immersive_desktop.py",
+        "--godot",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--capture",
+        "/home/Nozba/Documents/VB_FreeCollapse_v0_2/VB_FreeCollapse_v0_2/runs_free_collapse_v0_2/S2_20260919_204505_268717/free_collapse_simscope.ssc",
+        "--output-dir",
+        "/tmp/issue44/desktop-forward",
+        "--renderer",
+        "forward_plus"
+      ],
+      "exit_code": 0,
+      "seconds": 35.87
+    },
+    {
+      "suite": "video-forward",
+      "command": [
+        "/home/Nozba/Documents/Codex/SIMSCOPE/.venv-dev/bin/python",
+        "tools/validate_video.py",
+        "--godot",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--output-dir",
+        "/tmp/issue44/video-forward",
+        "--renderer",
+        "forward_plus",
+        "--overlay-ui"
+      ],
+      "exit_code": 0,
+      "seconds": 18.64
+    },
+    {
+      "suite": "desktop-compat",
+      "command": [
+        "python3",
+        "tools/validate_immersive_desktop.py",
+        "--godot",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--capture",
+        "/home/Nozba/Documents/VB_FreeCollapse_v0_2/VB_FreeCollapse_v0_2/runs_free_collapse_v0_2/S2_20260919_204505_268717/free_collapse_simscope.ssc",
+        "--output-dir",
+        "/tmp/issue44/desktop-compat",
+        "--renderer",
+        "gl_compatibility"
+      ],
+      "exit_code": 0,
+      "seconds": 35.47
+    },
+    {
+      "suite": "video-compat",
+      "command": [
+        "/home/Nozba/Documents/Codex/SIMSCOPE/.venv-dev/bin/python",
+        "tools/validate_video.py",
+        "--godot",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--output-dir",
+        "/tmp/issue44/video-compat",
+        "--renderer",
+        "gl_compatibility",
+        "--overlay-ui"
+      ],
+      "exit_code": 0,
+      "seconds": 15.69
+    },
+    {
+      "suite": "integration-real-forward",
+      "command": [
+        "/home/Nozba/Documents/Codex/SIMSCOPE/.venv-dev/bin/python",
+        "tools/validate_ux3_integration.py",
+        "--godot",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--capture",
+        "/home/Nozba/Documents/VB_FreeCollapse_v0_2/VB_FreeCollapse_v0_2/runs_free_collapse_v0_2/S2_20260919_204505_268717/free_collapse_simscope.ssc",
+        "--output-dir",
+        "/tmp/issue44/integration-real-forward",
+        "--renderer",
+        "forward_plus"
+      ],
+      "exit_code": 0,
+      "seconds": 98.62
+    },
+    {
+      "suite": "integration-real-compat",
+      "command": [
+        "/home/Nozba/Documents/Codex/SIMSCOPE/.venv-dev/bin/python",
+        "tools/validate_ux3_integration.py",
+        "--godot",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--capture",
+        "/home/Nozba/Documents/VB_FreeCollapse_v0_2/VB_FreeCollapse_v0_2/runs_free_collapse_v0_2/S2_20260919_204505_268717/free_collapse_simscope.ssc",
+        "--output-dir",
+        "/tmp/issue44/integration-real-compat",
+        "--renderer",
+        "gl_compatibility"
+      ],
+      "exit_code": 1,
+      "seconds": 92.46
+    },
+    {
+      "suite": "g4_render",
+      "command": [
+        "/home/Nozba/Documents/Codex/SIMSCOPE/.venv-dev/bin/python",
+        "tools/validate_g4_render.py",
+        "--godot",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--output-dir",
+        "/tmp/issue44/g4_render",
+        "--renderer",
+        "forward_plus"
+      ],
+      "exit_code": 0,
+      "seconds": 7.53
+    },
+    {
+      "suite": "volume_presets",
+      "command": [
+        "/home/Nozba/Documents/Codex/SIMSCOPE/.venv-dev/bin/python",
+        "tools/validate_volume_presets.py",
+        "--godot",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--output-dir",
+        "/tmp/issue44/volume_presets",
+        "--renderer",
+        "forward_plus"
+      ],
+      "exit_code": 0,
+      "seconds": 9.18
+    },
+    {
+      "suite": "integration-real-compat-final",
+      "command": [
+        "/home/Nozba/Documents/Codex/SIMSCOPE/.venv-dev/bin/python",
+        "tools/validate_ux3_integration.py",
+        "--godot",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--capture",
+        "/home/Nozba/Documents/VB_FreeCollapse_v0_2/VB_FreeCollapse_v0_2/runs_free_collapse_v0_2/S2_20260919_204505_268717/free_collapse_simscope.ssc",
+        "--output-dir",
+        "/tmp/issue44/integration-real-compat-final",
+        "--renderer",
+        "gl_compatibility"
+      ],
+      "exit_code": 0,
+      "seconds": 97.72
+    },
+    {
+      "suite": "desktop-final-forward",
+      "command": [
+        "python3",
+        "tools/validate_immersive_desktop.py",
+        "--godot",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--capture",
+        "/home/Nozba/Documents/VB_FreeCollapse_v0_2/VB_FreeCollapse_v0_2/runs_free_collapse_v0_2/S2_20260919_204505_268717/free_collapse_simscope.ssc",
+        "--output-dir",
+        "/tmp/issue44/desktop-final-forward",
+        "--renderer",
+        "forward_plus"
+      ],
+      "exit_code": 0,
+      "seconds": 35.42
+    },
+    {
+      "suite": "desktop-final-compat",
+      "command": [
+        "python3",
+        "tools/validate_immersive_desktop.py",
+        "--godot",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--capture",
+        "/home/Nozba/Documents/VB_FreeCollapse_v0_2/VB_FreeCollapse_v0_2/runs_free_collapse_v0_2/S2_20260919_204505_268717/free_collapse_simscope.ssc",
+        "--output-dir",
+        "/tmp/issue44/desktop-final-compat",
+        "--renderer",
+        "gl_compatibility"
+      ],
+      "exit_code": 1,
+      "seconds": 29.61
+    },
+    {
+      "suite": "app-reopen-0",
+      "command": [
+        "/home/Nozba/Documents/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--path",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+        "--rendering-method",
+        "forward_plus",
+        "--audio-driver",
+        "Dummy",
+        "--quit-after",
+        "60",
+        "--",
+        "--capture=/tmp/issue44/integration-fixture-final/scene.ssc"
+      ],
+      "exit_code": 0,
+      "seconds": 2.12
+    },
+    {
+      "suite": "app-reopen-1",
+      "command": [
+        "/home/Nozba/Documents/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--path",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+        "--rendering-method",
+        "forward_plus",
+        "--audio-driver",
+        "Dummy",
+        "--quit-after",
+        "60",
+        "--",
+        "--capture=/tmp/issue44/integration-fixture-final/scene.ssc"
+      ],
+      "exit_code": 0,
+      "seconds": 2.02
+    },
+    {
+      "suite": "desktop-verified-forward",
+      "command": [
+        "python3",
+        "tools/validate_immersive_desktop.py",
+        "--godot",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--capture",
+        "/home/Nozba/Documents/VB_FreeCollapse_v0_2/VB_FreeCollapse_v0_2/runs_free_collapse_v0_2/S2_20260919_204505_268717/free_collapse_simscope.ssc",
+        "--output-dir",
+        "/tmp/issue44/desktop-verified-forward",
+        "--renderer",
+        "forward_plus"
+      ],
+      "exit_code": 0
+    },
+    {
+      "suite": "desktop-verified-compat",
+      "command": [
+        "python3",
+        "tools/validate_immersive_desktop.py",
+        "--godot",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--capture",
+        "/home/Nozba/Documents/VB_FreeCollapse_v0_2/VB_FreeCollapse_v0_2/runs_free_collapse_v0_2/S2_20260919_204505_268717/free_collapse_simscope.ssc",
+        "--output-dir",
+        "/tmp/issue44/desktop-verified-compat",
+        "--renderer",
+        "gl_compatibility"
+      ],
+      "exit_code": 0
+    },
+    {
+      "suite": "integration-fixture-final",
+      "command": [
+        "python",
+        "tools/validate_ux3_integration.py",
+        "--godot",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--output-dir",
+        "/tmp/issue44/integration-fixture-final",
+        "--renderer",
+        "forward_plus"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "limitations": [
+    "Physical Nordic keyboard/mouse and owner Project Manager Run path not automated",
+    "No mixed-DPI/multimonitor/physical 4K or other OS/GPU validation",
+    "No full historical performance or scientific/FFmpeg matrices",
+    "Short paired profile has evolving cache warmth; no causal dock-cost comparison",
+    "Initial harness pause and cross-capture pixel comparison corrected; shader-cache warning rerun cleanly; Gio deprecation retained"
+  ],
+  "project_status_at_final_read": "In progress",
+  "project_writes_by_this_task": false,
+  "static_checks": {
+    "godot_import": "PASS",
+    "gdscript_parse": "PASS",
+    "python_syntax": "PASS",
+    "git_whitespace": "PASS",
+    "new_uid": "viewer/ui/shell/test_ux3_integration.gd.uid",
+    "prior_evidence_changes": false,
+    "uid_scope": "All viewer GDScript/shader UID sidecars present; pre-existing tools/audit_ux1.gd outside viewer has no sidecar and was not changed."
+  }
+}

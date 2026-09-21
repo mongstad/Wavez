@@ -1,15 +1,12 @@
 # Current status
 
-Issue #59 removes retired left-panel/offline presentation and hidden duplicate
-transport controls, pending owner review. The current right-hand controls remain
-canonical UX4 migration dependencies; [ownership audit](UX3_UI_OWNERSHIP.md).
-Scientific/controller behavior and #55 export presentation are preserved.
-
-Issue #53 (UX3-TRANSPORT-003) delays the transient Requested time label by 450 ms
-on accepted `main` `195bd90` (owner-merged PR #51). Implementation is **pending
-owner review**. [Delay semantics and evidence](UX3_TRANSIENT_STATUS.md) describe
-short-wait suppression and immediate stale-label clearing. Seek, readiness,
-playback/Pause and scientific timing remain unchanged. No later issue is started.
+Issue #44 completes the final UX3 integration validation package and is **pending
+owner review**. All prerequisite slices are owner-merged: shell #41, transport
+#42, status/Jobs #43, media timing #49, transient feedback #53, immersive fullscreen
+#46 and video overlays #55. Cleanup #59 is also merged in PR #63 at `c240024`.
+The [UX3 milestone report](UX3_REPORT.md) records fresh workflows, native desktop
+and export checks, performance limits, manual acceptance steps and the UX4 handoff.
+No UX3 milestone acceptance or UX4 implementation is claimed.
 
 As of **2026-09-20**, including G4 and PERF-001/002 maintenance reviewed and accepted by the user. Scientific simulations were not rerun. Historical results identify their recorded checkpoints. PERF-003 mesh maintenance was also reviewed and accepted by the owner on 2026-09-13; implementation checkpoint `7974c78`.
 
@@ -37,7 +34,7 @@ Representative external captures informed G3 timeline/playback validation. Scien
 
 Older capture writers/readers and public API entry points were retired before the UX milestones. The active product contract is SIMSCP3 / `.ssc` only; replacement coverage uses repository-owned native scenes and synthetic fixtures.
 
-## UX1 and UX2 — accepted; UX3 transient-status refinement pending review
+## UX1 and UX2 — accepted; UX3 final integration pending review
 
 The [UX1 report](UX1_REPORT.md) records the current UI inventory, observed layout
 problems, technical coupling, proposed information hierarchy, concrete design
@@ -60,8 +57,11 @@ evidence preserve their original review-time state.
 The owner merged the design package in PR #39 and placed #41 in Ready.
 The shell and transport were owner-merged in PRs #45 and #47.
 Status/Jobs and media timing were owner-merged in PRs #48 and #51.
-[Transient seek status](UX3_TRANSIENT_STATUS.md) is pending owner review; integration
-acceptance and UX4 remain separately gated under the [UX plan](../UX_IMPLEMENTATION_PLAN.md).
+Transient seek status, immersive fullscreen, production-shell overlay exports and
+left-panel cleanup were owner-merged in PRs #57, #58, #60 and #63. The #44
+[integration report](UX3_REPORT.md) is pending owner review. UX4 remains separately
+gated under the [UX plan](../UX_IMPLEMENTATION_PLAN.md). Historical reports retain
+their original review-time wording and have not been relabeled as fresh #44 runs.
 
 ## RENDER-001 — accepted
 

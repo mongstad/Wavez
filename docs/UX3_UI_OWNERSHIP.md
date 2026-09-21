@@ -1,5 +1,8 @@
 # Production UI ownership — issue #59
 
+Current integration status: the slice is owner-merged; the [#44 milestone report](UX3_REPORT.md)
+is pending owner review. Original issue review metadata and evidence below remain historical.
+
 This dependency audit distinguishes retired presentation from canonical controls.
 Issue #59 is pending owner review; UX4 migration and #44 integration acceptance
 remain separate work.
