@@ -101,7 +101,6 @@ func _run() -> void:
 	add_child(viewport)
 	viewer = load("res://main.gd").new()
 	viewer.offline_instance = true
-	viewer.export_shell = true
 	viewer.capture_path = job.capture_path
 	viewport.add_child(viewer)
 	viewer.set_process(false)

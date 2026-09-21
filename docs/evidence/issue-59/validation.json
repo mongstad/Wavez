@@ -1,0 +1,47 @@
+{
+  "issue": 59,
+  "status": "pending owner review",
+  "accepted_main": "2fd44bae6198d83b0bfc2b7a8616c1b464293d3e",
+  "environment": "Fedora KDE Wayland; Godot 4.7.2; NVIDIA RTX 3070 Ti",
+  "checks": {
+    "shell_forward": 160,
+    "shell_compatibility": 160,
+    "transport_forward": 204,
+    "status_forward": 67,
+    "recipe_headless": 2957,
+    "camera_headless": 13032,
+    "analysis_headless": 160,
+    "selection_forward": 32,
+    "selection_render_forward": 44,
+    "probe_forward": 33,
+    "volume_presets_forward": 99,
+    "overlay_export_forward": 111,
+    "overlay_export_compatibility": 111,
+    "changed_script_parse": 28
+  },
+  "overlay_counts_include_native_ui_checks": 62,
+  "accepted_main_comparison": {
+    "image_size": [
+      1440,
+      810
+    ],
+    "changed_channels": 0,
+    "nonzero_channels": 2944110,
+    "before_image_sha256": "85a857361fb8f4a4cac2338d4af07645c757a9512c4b4eea0ce6a8820f768df8",
+    "after_image_sha256": "85a857361fb8f4a4cac2338d4af07645c757a9512c4b4eea0ce6a8820f768df8",
+    "visual_state_equal_except": [
+      "sections.Playback",
+      "sliders.Physical time units / second"
+    ],
+    "source_sha256": "1ca1a14a01ceee0650bdb7476336e8d3c0f158e46992ee82658134fd8737cd97"
+  },
+  "corrected_failure": "Initial volume harness assumed inspector direct parent was ScrollContainer. It raised a type error after scientific image/state checks. Failed instance terminated; harness now uses shell.scroll and current presentation refresh; 99 checks and three exports pass.",
+  "limits": [
+    "Synthetic fixtures only; no scientific solver or research capture reruns.",
+    "No full scientific/FFmpeg/performance matrices, other OS, physical mixed-DPI or long-session testing.",
+    "No separate compositor-geometry audit; native shell tests exercise fullscreen modes, screenshots and recovery.",
+    "Auxiliary temporal/space-time/diagnostics/opacity/color/profile/HUD/UX1 collectors updated for removed references but their full suites were not rerun.",
+    "Camera was headless; its Godot-reported renderer field alone is not GPU image validation."
+  ],
+  "baseline_identity_check": "Independently regenerated fixtures had different identities; final accepted-main comparison reuses the original fixture bytes."
+}

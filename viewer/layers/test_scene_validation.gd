@@ -21,7 +21,7 @@ func draw() -> Image:
 	return image
 func setup_capture(name: String) -> void:
 	view._open_capture(base.path_join(name));view.playing = false;view.orbit_enabled = false;view._set_clean(true)
-	view.overlay_panel.visible = false;view.show_panel_button.visible = false;view.resize_handle.visible = false;view.legend.visible = false;view.colorbar.visible = false
+	view.overlay_visible = false;view.overlay_panel.visible = false;view.shell.hide();view.resize_handle.visible = false;view.legend.visible = false;view.colorbar.visible = false
 	view.environment.tonemap_mode = Environment.TONE_MAPPER_LINEAR;view.environment.tonemap_exposure = 1
 	vp.msaa_3d = Viewport.MSAA_DISABLED;vp.screen_space_aa = Viewport.SCREEN_SPACE_AA_DISABLED;vp.use_taa = false;vp.use_debanding = false
 	view.camera.near = .01;view.camera.far = 300

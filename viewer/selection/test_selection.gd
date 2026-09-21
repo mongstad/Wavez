@@ -120,7 +120,8 @@ func run() -> void:
 	var report := {"checks":checks,"failures":failures,"backend":RenderingServer.get_current_rendering_method(),"drawn":control.overlay.drawn,"gpu_bytes":control.overlay.gpu_bytes,"status":control.status.text}
 	if not DisplayServer.get_name() == "headless":
 		control.panel.visible = true
-		var scroll: ScrollContainer = viewer.inspector_box.get_parent()
+		viewer.shell.refresh_export()
+		var scroll: ScrollContainer = viewer.shell.scroll
 		await process_frame;await process_frame
 		scroll.scroll_vertical = maxi(0,int(control.panel.position.y)-30)
 		await process_frame;await process_frame

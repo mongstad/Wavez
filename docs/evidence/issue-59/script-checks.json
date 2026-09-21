@@ -1,0 +1,114 @@
+[
+  {
+    "script": "tools/audit_ux1.gd",
+    "passed": true
+  },
+  {
+    "script": "viewer/analysis/test_diagnostics.gd",
+    "passed": true
+  },
+  {
+    "script": "viewer/analysis/test_maintenance_ui.gd",
+    "passed": true
+  },
+  {
+    "script": "viewer/analysis/test_render_state.gd",
+    "passed": true
+  },
+  {
+    "script": "viewer/analysis/test_space_time.gd",
+    "passed": true
+  },
+  {
+    "script": "viewer/analysis/test_temporal.gd",
+    "passed": true
+  },
+  {
+    "script": "viewer/layers/profile_maintenance.gd",
+    "passed": true
+  },
+  {
+    "script": "viewer/layers/profile_mesh_playback.gd",
+    "passed": true
+  },
+  {
+    "script": "viewer/layers/scene_layers.gd",
+    "passed": true
+  },
+  {
+    "script": "viewer/layers/test_field_preparation.gd",
+    "passed": true
+  },
+  {
+    "script": "viewer/layers/test_mesh_playback.gd",
+    "passed": true
+  },
+  {
+    "script": "viewer/layers/test_probe_marker.gd",
+    "passed": true
+  },
+  {
+    "script": "viewer/layers/test_scene_playback_images.gd",
+    "passed": true
+  },
+  {
+    "script": "viewer/layers/test_scene_validation.gd",
+    "passed": true
+  },
+  {
+    "script": "viewer/layers/test_volume_color.gd",
+    "passed": true
+  },
+  {
+    "script": "viewer/layers/test_volume_opacity.gd",
+    "passed": true
+  },
+  {
+    "script": "viewer/layers/test_volume_presets.gd",
+    "passed": true
+  },
+  {
+    "script": "viewer/main.gd",
+    "passed": true
+  },
+  {
+    "script": "viewer/scene/test_hud_layout.gd",
+    "passed": true
+  },
+  {
+    "script": "viewer/scene/test_recipe_state.gd",
+    "passed": true
+  },
+  {
+    "script": "viewer/scene/visual_state.gd",
+    "passed": true
+  },
+  {
+    "script": "viewer/selection/test_selection.gd",
+    "passed": true
+  },
+  {
+    "script": "viewer/ui/shell/test_viewer_shell.gd",
+    "passed": true
+  },
+  {
+    "script": "viewer/ui/shell/test_viewer_transport.gd",
+    "passed": true
+  },
+  {
+    "script": "viewer/ui/shell/viewer_shell.gd",
+    "passed": true
+  },
+  {
+    "script": "viewer/ui/shell/viewer_transport.gd",
+    "passed": true
+  },
+  {
+    "script": "viewer/video/render_worker.gd",
+    "passed": true
+  },
+  {
+    "script": "viewer/video/test_ux.gd",
+    "passed": true
+  }
+]

@@ -53,7 +53,8 @@ func run() -> void:
 	temporal.page_offset = 0;temporal.request_page();check(await wait_worker(control),"comparison full numerical rows available")
 	if DisplayServer.get_name() != "headless":
 		diagnostics.panel.visible = true;temporal.panel.visible = false;control.panel.visible = false
-		var scroll: ScrollContainer = viewer.inspector_box.get_parent()
+		viewer.shell.refresh_export()
+		var scroll: ScrollContainer = viewer.shell.scroll
 		await process_frame;await process_frame
 		scroll.scroll_vertical = maxi(0,int(diagnostics.overlay.global_position.y)-60+scroll.scroll_vertical)
 		await process_frame;await process_frame;await RenderingServer.frame_post_draw

@@ -138,7 +138,7 @@ both PNG headers and the encoded MP4 via ffprobe on this workstation.
 
 The same particle shaders, colormap LUTs, camera projection, environment and
 quality settings are reused. **Include viewer overlays** now reuses the current
-production shell (issue #55): command bar, camera controls, right workspace dock,
+production shell (issue #55, single construction path after #59): command bar, camera controls, right workspace dock,
 transport, status and Jobs. Workspace, scroll and total/remaining preference are
 captured when export starts; section and visual settings use the existing snapshot.
 The dock is included when this explicit checkbox is on, even if it was hidden on

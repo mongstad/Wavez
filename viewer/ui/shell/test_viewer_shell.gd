@@ -34,13 +34,18 @@ func run() -> void:
 		if arg.begins_with("--shell-output="): output = arg.trim_prefix("--shell-output=")
 	if output.is_empty(): quit(1); return
 	create_timer(150).timeout.connect(func(): push_error("Shell test timed out"); quit(1))
-	# Offline construction is the unchanged legacy presentation/scientific baseline.
-	var legacy = Viewer.new(); legacy.offline_instance = true; root.add_child(legacy); legacy.set_process(false)
-	var initial := science(legacy)
-	check(legacy.shell == null, "Offline worker does not construct production shell")
-	legacy.free()
+	# Offline and interactive instances share the canonical controls and state.
+	var offline = Viewer.new(); offline.offline_instance = true; root.add_child(offline); offline.set_process(false)
+	var initial := science(offline)
+	check(offline.shell != null and not offline.shell.transport.is_processing(), "Offline uses production shell without automatic refresh")
+	offline.free()
 	var viewer = Viewer.new(); viewer.scene_prebuffer_enabled = false; root.add_child(viewer); viewer.set_process(false)
 	var shell = viewer.shell
+	check(viewer.resize_handle.gui_input.get_connections().size() == 1, "Dock resize has one production event owner")
+	check(viewer.play_button.pressed.get_connections().size() == 1, "Play has one controller binding")
+	check(not viewer.sections.has("Playback") and not viewer.visual_sliders.has("Physical time units / second"), "Hidden duplicate playback form is absent")
+	for group in ["Data cache", "Rendering", "Color Mapping", "Advanced • Size / Brightness", "Camera", "Trails", "Particle Filters", "Advanced • Post-processing", "Capture / Export"]:
+		check(viewer.sections.has(group) and viewer.inspector_box.is_ancestor_of(viewer.sections[group]), "Canonical inspector group retained: " + group)
 	check(science(viewer) == initial, "Shell construction preserves scientific visual state and section keys")
 	await settle(); shell.layout(); await settle()
 	check(shell.empty.visible and not viewer.inspector_box.visible, "Empty shell offers Open without dummy scientific form")

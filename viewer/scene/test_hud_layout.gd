@@ -15,8 +15,8 @@ func run() -> void:
 	viewer.playing = false;viewer.orbit_enabled = false;viewer.scene_prebuffer_enabled = false
 	root.add_child(viewer);viewer.set_process(false)
 	var rows: Array = [];var failures := 0
-	for width in [290,366,600]:
-		viewer.panel_width = width;viewer._layout_inspector(viewer.resize_handle)
+	for width in [320,440,560]:
+		viewer.panel_width = width;viewer.shell.layout()
 		for navigation in ["time","sample"]:
 			var heights: Array = [];var controls: Array = []
 			for t in [6.9,6.95,7.0,7.05,9.9,9.95,10.0]:

@@ -21,7 +21,7 @@ func run() -> void:
 	viewport.own_world_3d = true;viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS;root.add_child(viewport)
 	var viewer = Viewer.new();viewer.offline_instance = true;viewer.capture_path = output.path_join("volume.ssc");viewport.add_child(viewer);viewer.set_process(false)
 	viewer.playing = false;viewer.orbit_enabled = false;viewer._apply_preset("Scientific")
-	viewer.overlay_visible = false;viewer.overlay_panel.hide();viewer.scene_layers.frame_scene()
+	viewer.overlay_visible = false;viewer.overlay_panel.hide();viewer.shell.prepare_export({});viewer.scene_layers.frame_scene()
 	var layers = viewer.scene_layers
 	check(layers != null and viewer.frame_count == 2,"Fixture opened")
 	check(layers.probe_marker_enabled and not is_instance_valid(layers.probe_marker),"No marker before first explicit probe")

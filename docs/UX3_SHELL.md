@@ -18,7 +18,9 @@ review evidence remain unchanged.
   drag the left edge between 320 and 560, constrained to retain at least 640
   pixels of unobscured scene. Four icon-and-label workspace choices become one
   chooser below 1200. Header/navigation stay fixed above a scrolling body.
-- Scene retains the inspector and every legacy section/state key. Appearance,
+- Scene retains the canonical inspector groups pending UX4 migration.
+  Issue #59 removes the hidden Playback form and the retired left-panel layout;
+  see the [dependency map and UX4 handoff](UX3_UI_OWNERSHIP.md). Appearance,
   Selection and Analysis are bounded entry points to the same controls. The
   fixed header currently identifies the **capture**, with loading/preparation
   information. Object/channel editing belongs to the later workspace migration.

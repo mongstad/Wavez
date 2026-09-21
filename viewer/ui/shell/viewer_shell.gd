@@ -81,7 +81,6 @@ func setup(owner_viewer) -> void:
 		if id == 1: show_source()
 		else: show_details("Navigation help", "Drag to orbit. Scroll to zoom.\nF: Frame scene   R: Reset camera\nO: Auto orbit   F1: Show or hide panels   F11: Fullscreen\nShift+F11: Immersive fullscreen   Esc: Restore preceding shell\nSpace: Play or pause   Left / Right: Step sample\n\nTab and Shift+Tab move focus. Enter or Space activates buttons.\nScientific controls remain in the existing inspector during shell migration.\n\nMidnight Scientific"))
 	dock = viewer.overlay_panel
-	dock.remove_theme_stylebox_override("panel")
 	dock.theme = theme
 	dock.theme_type_variation = "PropertyGroup"
 	scroll = viewer.inspector_box.get_parent()
@@ -105,7 +104,6 @@ func setup(owner_viewer) -> void:
 	var content := VBoxContainer.new(); content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	scroll.remove_child(viewer.inspector_box); scroll.add_child(content)
 	content.add_child(adapter); content.add_child(viewer.inspector_box)
-	viewer.show_panel_button.hide()
 	recovery = button(self, "Show panels", viewer._toggle_overlay, "view")
 	navigation = HBoxContainer.new(); add_child(navigation)
 	button(navigation, "Frame scene", viewer._focus_activity, "frame")
@@ -288,7 +286,7 @@ func resize_input(event: InputEvent) -> void:
 
 func layout() -> void:
 	if immersive:
-		dock.hide(); viewer.resize_handle.hide(); viewer.show_panel_button.hide()
+		dock.hide(); viewer.resize_handle.hide()
 		immersive_hint.position = Vector2((get_viewport().get_visible_rect().size.x - immersive_hint.size.x) / 2, 24)
 		return
 	if changing_layout or dock == null: return
@@ -315,7 +313,6 @@ func layout() -> void:
 	var bottom: float = extent.y - status_height - (transport.layout(extent.x,extent.y-status_height) if transport != null else 0.0)
 	dock.position = Vector2(extent.x-width, top); dock.size = Vector2(width, maxf(0, bottom-top)); dock.visible = viewer.overlay_visible
 	viewer.resize_handle.position = Vector2(extent.x-width-8, top); viewer.resize_handle.size = Vector2(8, maxf(0, bottom-top)); viewer.resize_handle.visible = viewer.overlay_visible
-	viewer.show_panel_button.hide()
 	var scene_width := extent.x-width-8 if viewer.overlay_visible else extent.x
 	navigation.position = Vector2(12, top+12)
 	recovery.position = Vector2(maxf(12, extent.x-recovery.size.x-12), top+12); recovery.visible = not viewer.overlay_visible
@@ -342,7 +339,6 @@ func enter_immersive() -> void:
 	hide()
 	dock.hide()
 	viewer.resize_handle.hide()
-	viewer.show_panel_button.hide()
 	if viewer.screenshot_notice != null: viewer.screenshot_notice.hide()
 	immersive_hint.show()
 	layout()
@@ -388,4 +384,3 @@ func refresh_export() -> void:
 	refresh(); transport.refresh(); status_ui.refresh(); layout()
 	visible = viewer.overlay_visible
 	# Scientific annotations remain outside the shell, with their existing gates.
-	viewer.show_panel_button.hide()

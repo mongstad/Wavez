@@ -24,11 +24,13 @@ review checkpoint; it has not been rewritten as new evidence.
 
 Previous sample / Play-Pause / Next sample, the discrete **Sample index** slider,
 index/count on hover or while dragging, elapsed/total/remaining playback
-duration, **Seek…**, **Playback speed** and Loop are present. The existing buttons and slider
-are reparented, retaining their signal connections and readiness ownership.
-The remaining Seek and recorded-rate inspector controls are not duplicated in the
-production transport. Retired mode/index-rate controls and their recipe fields
-are no longer constructed. The offline renderer has no transport.
+duration, **Seek…**, **Playback speed** and Loop are present. The transport directly
+constructs its canonical buttons and slider, bound to the existing controllers and
+readiness state. Issue #59 removes the hidden inspector Seek/rate form and its
+obsolete presentation snapshot entries. Retired mode/index-rate controls remain
+absent. Offline export uses this same transport under the explicit
+[export visibility contract](../VIDEO_EXPORT.md), with refresh after committed
+samples. See the [ownership audit and UX4 handoff](UX3_UI_OWNERSHIP.md).
 
 The slider selects sorted union timestamp indices. Equal slider distances do not
 mean equal elapsed time. Playback duration is now a one-decimal presentation at

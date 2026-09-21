@@ -52,7 +52,8 @@ func run() -> void:
 	check("bin:20" in temporal.table.text,"source bin addresses in full table")
 	if DisplayServer.get_name() != "headless":
 		spatial.panel.visible = true;temporal.panel.visible = false;control.panel.visible = false
-		var scroll: ScrollContainer = viewer.inspector_box.get_parent()
+		viewer.shell.refresh_export()
+		var scroll: ScrollContainer = viewer.shell.scroll
 		await process_frame;await process_frame
 		scroll.scroll_vertical = maxi(0,int(spatial.plot.global_position.y)-70+scroll.scroll_vertical)
 		await process_frame;await process_frame;await RenderingServer.frame_post_draw

@@ -31,7 +31,7 @@ func run() -> void:
 	create_timer(180).timeout.connect(func():push_error("Preset regression timeout");quit(1))
 	vp = SubViewport.new();vp.size = Vector2i(960,640);vp.own_world_3d = true;vp.render_target_update_mode = SubViewport.UPDATE_ALWAYS;root.add_child(vp)
 	viewer = load("res://main.gd").new();viewer.offline_instance = true;viewer.capture_path = job.capture;vp.add_child(viewer);viewer.set_process(false);viewer.playing = false;viewer.orbit_enabled = false
-	viewer._apply_preset("Scientific");viewer.overlay_visible = false;viewer.show_legend = false;viewer.overlay_panel.hide();viewer.legend.hide();viewer.colorbar.hide();viewer.particle_layer_visible = false
+	viewer._apply_preset("Scientific");viewer.overlay_visible = false;viewer.show_legend = false;viewer.overlay_panel.hide();viewer.shell.prepare_export({});viewer.legend.hide();viewer.colorbar.hide();viewer.particle_layer_visible = false
 	var layers = viewer.scene_layers;var id: String = job.field
 	var initial: Dictionary = layers.states[id].duplicate(true)
 	check(initial.lower == 0. and initial.upper == 1. and initial.opacity_mapping.upper == 1.,"opening defaults unchanged; no automatic preset")
@@ -110,9 +110,9 @@ func run() -> void:
 	for key in ["lower","upper","color_mapping","opacity_mapping","colormap"]:scene_after.scene.layers[id][key] = scene_before.scene.layers[id][key]
 	check(scene_after == scene_before,"cinematic environment and visible particle layer preserved")
 	viewer._apply_preset("Scientific");viewer.particle_layer_visible = false;layers.sample(job.time)
-	viewer.overlay_visible = true;viewer.overlay_panel.show();layers.layer_settings_buttons[id].button_pressed = true
+	viewer.shell.toggle_dock();viewer.shell.refresh_export();layers.layer_settings_buttons[id].button_pressed = true
 	for i in 5:await process_frame
-	var scroll: ScrollContainer = viewer.inspector_box.get_parent()
+	var scroll: ScrollContainer = viewer.shell.scroll
 	scroll.scroll_vertical += int(layers.preset_controls[id].guide.global_position.y-scroll.global_position.y)-50
 	await render("controls")
 	layers.preset_controls[id].help.button_pressed = true

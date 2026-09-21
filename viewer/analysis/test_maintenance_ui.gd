@@ -84,7 +84,7 @@ func run() -> void:
 	for title in names:
 		var panel: VBoxContainer = view.sections[title];panel.visible = true
 		await process_frame;await process_frame
-		var scroll: ScrollContainer = view.shell.scroll if view.shell != null else view.inspector_box.get_parent()
+		var scroll: ScrollContainer = view.shell.scroll
 		scroll.scroll_vertical = int(panel.position.y)
 		await process_frame;await process_frame
 		var overflow: Array = []

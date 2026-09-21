@@ -185,15 +185,14 @@ func check_export_shell(source) -> void:
 	var state := Job.snapshot(source)
 	state.overlay_visible = false
 	var images: Array = []
-	for current in [false,true]:
+	for current in [false,true]: # Repeat the same production path; no retired UI baseline.
 		var vp := SubViewport.new(); vp.size = Vector2i(1440,810); vp.own_world_3d = true; vp.render_target_update_mode = SubViewport.UPDATE_ALWAYS; root.add_child(vp)
-		var view = load("res://main.gd").new(); view.offline_instance = true; view.export_shell = current
+		var view = load("res://main.gd").new(); view.offline_instance = true
 		view.capture_path = fixture.path_join("fixture.ssc"); vp.add_child(view); view.set_process(false)
 		Job.apply(view,state); view.playing = false; view.orbit_enabled = false
-		if current:
-			check(view.shell != null,"Export uses the production shell component")
-			view.shell.prepare_export({"workspace":1,"scroll":0,"remaining":true})
-			check(not view.shell.visible and not view.overlay_panel.visible and not view.legend.visible,"Overlay off hides application chrome and its coupled legend")
+		check(view.shell != null,"Export uses the production shell component")
+		view.shell.prepare_export({"workspace":1,"scroll":0,"remaining":true})
+		check(not view.shell.visible and not view.overlay_panel.visible and not view.legend.visible,"Overlay off hides application chrome and its coupled legend")
 		for i in 4: await process_frame
 		RenderingServer.force_draw(false)
 		var image := vp.get_texture().get_image()
@@ -210,7 +209,7 @@ func check_export_shell(source) -> void:
 			check(view.camera.transform == source.camera.transform,"Export shell retains camera framing")
 			vp.get_texture().get_image().save_png(fixture.path_join("export-shell.png"))
 		vp.queue_free(); await process_frame
-	check(images[0] == images[1],"Overlay-off pixels match the pre-shell scientific-only path")
+	check(images[0] == images[1],"Repeated production-shell overlay-off pixels are identical")
 	var valid: Dictionary = source.video_dialog.settings(); valid.state = state
 	valid.output_path = fixture.path_join("valid-presentation.mp4")
 	check(Job.validate(valid).is_empty(),"Baseline export presentation job validates")
