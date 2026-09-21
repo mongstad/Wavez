@@ -44,13 +44,24 @@ sheet. Maximized mode keeps the top command bar. Fullscreen hides that bar and r
 Frame scene, Reset camera, Navigate and Exit fullscreen; exiting restores the bar. Failed-open details remain visible
 until dismissed; a failed replacement retains the previous usable scene.
 
+**View → Immersive fullscreen** (Shift+F11) is a separate simulation-only view.
+It hides all application chrome, including the dock, camera buttons, transport,
+status and Jobs. A noninteractive “Press Esc to exit fullscreen” hint disappears
+after three seconds. Esc restores the preceding windowed, maximized or interactive
+fullscreen state and its dock/focus. F11 or Shift+F11 also restores that state.
+Text/numeric entry suppresses fullscreen shortcuts; Esc recovery remains available.
+F1 has no effect while immersive. Camera interaction and ongoing playback continue.
+Scientific overlays retain their existing visibility: entering immersive never
+enables a hidden legend or disables a visible scientific annotation.
+See [immersive fullscreen semantics and validation](UX3_FULLSCREEN.md).
+
 ## Playback transport
 
 Previous sample, Play/Pause, Next sample and the **Sample index** slider are
 available without scrolling or opening the dock. Hover or drag the slider to see
 the sample index/count; there is no persistent index caption. Equal slider steps
 select indices in the union of recorded samples, not equal elapsed-time intervals.
-The transport stays visible when the dock is hidden and in fullscreen. It is
+The transport stays visible when the dock is hidden and in interactive fullscreen. It is
 64 logical pixels high at normal desktop width and reflows to two rows (104 pixels)
 below 1200 logical pixels, without shrinking text.
 

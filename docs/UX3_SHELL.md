@@ -28,6 +28,9 @@ review evidence remain unchanged.
   is tested. Maximized windows keep the command bar. Fullscreen (View → Fullscreen
   or F11) hides the entire command bar and reclaims its space; exiting restores it.
   Camera controls and mouse-accessible Exit fullscreen remain visible.
+  [Immersive fullscreen](UX3_FULLSCREEN.md) is a separate View action (Shift+F11):
+  all application chrome is hidden, scientific overlays retain their visibility,
+  and Esc restores the immediately preceding shell/native state.
 - Frame scene, Reset camera and Navigate invoke existing camera behavior.
   Number/text input suppresses viewport shortcuts; a pointer release over chrome
   ends an existing camera drag. Hiding the dock restores valid prior focus on

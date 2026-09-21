@@ -1,0 +1,103 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.351 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3070 Ti
+
+PASS: test capture opens
+PASS: recorded history disabled on startup
+PASS: T action enables trails
+PASS: presets preserve disabled trails
+PASS: disabled trails allocate no instances/history
+PASS: screenshot folder starts empty
+PASS: first screenshot prompts for destination
+PASS: cancel creates no screenshot and chooses no fallback
+PASS: cancelled choice prompts again
+PASS: directory selection saves first screenshot
+PASS: later screenshot reuses session directory
+PASS: consecutive screenshots create two distinct files without overwriting
+PASS: visible saved-path confirmation
+PASS: new viewer session does not inherit screenshot folder
+PASS: new session prompts again
+PASS: complete snapshot validates
+PASS: malformed path returns a validation error
+PASS: overflowing frame count is rejected before integer conversion
+PASS: half-open custom interval yields six frames
+PASS: frame clock uses capture units per video second
+PASS: capture timestamp index builds
+PASS: time-based interpolation between recorded frames
+PASS: UI enables actual recorded trail instances
+PASS: enabled trails use recorded particle positions
+PASS: UI disables and releases trail history and instances
+PASS: rebuilding a timeline resets stale sample cache and errors
+PASS: orbit angle depends on output seconds
+PASS: JSON snapshot preserves mappings and integer type filters
+PASS: snapshot preserves cinematic appearance
+PASS: snapshot restores size/brightness mappings and manual/log/invert/clamp normalization
+PASS: publication refuses competing output and retains encoded file
+PASS: publication succeeds to an unused path containing spaces
+PASS: Export Video dialog opens
+PASS: entire capture uses exact indexed endpoints
+PASS: current-position range uses captured sample time
+PASS: variable-count export index builds
+PASS: count change holds positions instead of blending unrelated particles
+PASS: changing schema removes unavailable export mapping
+PASS: Export initializes positive rate without retired index-clock state
+PASS: Export initializes positive rate without retired index-clock state
+PASS: Export initializes positive rate without retired index-clock state
+PASS: UI launches separate render process
+PASS: GPU worker retains persistent renderer diagnostics
+PASS: parent playback remains usable during export
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.351 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3070 Ti
+
+SimScope export: Saved /tmp/issue46-video/ui launch 1908357.mp4
+PASS: main viewer remained minimized during export
+PASS: UI worker reports successful MP4 completion while main viewer minimized
+VIDEO UX: 46 checks, 0 failures
+
+PASS: screenshot, trails, timeline and export-state UX suite
+1440p 24fps: complete — Saved /tmp/issue46-video/acceptance ksk6nk9y/1440p 24fps/result with spaces.mp4
+PASS: 1440p 24fps: expected completion state
+PASS: 1440p 24fps: no Godot script errors/resource leaks
+PASS: successful render process exit
+PASS: 1440p 24fps: actual MP4 dimensions
+PASS: 1440p 24fps: exact frame count and frame rate
+PASS: 1440p 24fps: playback-rate and range timing
+PASS: 1440p 24fps: one PNG per output frame
+PASS: 1440p 24fps: actual PNG dimensions
+custom resolution and FPS: complete — Saved /tmp/issue46-video/acceptance ksk6nk9y/custom resolution and FPS/result with spaces.mp4
+PASS: custom resolution and FPS: expected completion state
+PASS: custom resolution and FPS: no Godot script errors/resource leaks
+PASS: successful render process exit
+PASS: custom resolution and FPS: actual MP4 dimensions
+PASS: custom resolution and FPS: exact frame count and frame rate
+PASS: custom resolution and FPS: playback-rate and range timing
+PASS: successful atomic publication permits requested PNG cleanup
+trails enabled: complete — Saved /tmp/issue46-video/acceptance ksk6nk9y/trails enabled/result with spaces.mp4
+PASS: trails enabled: expected completion state
+PASS: trails enabled: no Godot script errors/resource leaks
+PASS: successful render process exit
+PASS: trails enabled: actual MP4 dimensions
+PASS: trails enabled: exact frame count and frame rate
+PASS: trails enabled: playback-rate and range timing
+PASS: trails enabled: one PNG per output frame
+PASS: trails enabled: actual PNG dimensions
+PASS: export includes actual recorded trail instances
+trails disabled: complete — Saved /tmp/issue46-video/acceptance ksk6nk9y/trails disabled/result with spaces.mp4
+PASS: trails disabled: expected completion state
+PASS: trails disabled: no Godot script errors/resource leaks
+PASS: successful render process exit
+PASS: trails disabled: actual MP4 dimensions
+PASS: trails disabled: exact frame count and frame rate
+PASS: trails disabled: playback-rate and range timing
+PASS: trails disabled: one PNG per output frame
+PASS: trails disabled: actual PNG dimensions
+PASS: export excludes trail instances when disabled
+PASS: enabling trails changes rendered pixels
+malformed path: failed — Invalid output_path
+PASS: malformed path: expected completion state
+PASS: malformed path: no Godot script errors/resource leaks
+overflowing frame count: failed — Export exceeds 10 million frames. Choose a shorter range.
+PASS: overflowing frame count: expected completion state
+PASS: overflowing frame count: no Godot script errors/resource leaks
+PASS: source capture bytes unchanged
+ALL CONTINUATION ACCEPTANCE TESTS PASSED
+Artifacts: /tmp/issue46-video/acceptance ksk6nk9y

@@ -153,6 +153,7 @@ func run() -> void:
 			check(DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_WINDOWED, route + " mouse exits fullscreen")
 			check(shell.bar.visible and shell.dock.position.y == 48, route + " restores command bar and layout")
 			check(science(viewer) == fullscreen_state, route + " exit preserves scientific state")
+	await immersive_checks(viewer)
 	# Logical geometry at supported factors. No scientific projection/state changes.
 	shell.open_error.hide()
 	for dimensions in [Vector2i(1440,900), Vector2i(1024,640)]:
@@ -195,3 +196,79 @@ func run() -> void:
 	viewer.free(); await process_frame
 	print("SHELL: %d checks, %d failures" % [checks,failures.size()])
 	quit(0 if failures.is_empty() else 1)
+
+func immersive_checks(viewer) -> void:
+	var shell = viewer.shell
+	var state := Visual.snapshot(viewer)
+	var sample: Dictionary = viewer.committed_sample.duplicate(true)
+	var camera: Transform3D = viewer.camera.transform
+	var source = viewer.generic_reader
+	viewer.playing = true # Clock is stopped by the harness; presentation must not pause it.
+	var playing: bool = viewer.playing
+	var focus: Control = viewer.section_buttons["Rendering"]
+	viewer.colorbar.hide(); viewer.legend.hide()
+	shell.enter_immersive(); await create_timer(.5).timeout
+	check(not viewer.colorbar.visible and not viewer.legend.visible, "Immersive does not enable hidden scientific overlays")
+	shell.exit_immersive(); await create_timer(.5).timeout
+	check(not viewer.colorbar.visible and not viewer.legend.visible, "Leaving immersive does not enable hidden scientific overlays")
+	viewer.colorbar.show(); viewer.legend.show()
+	var editor := LineEdit.new(); shell.add_child(editor); editor.grab_focus()
+	var shortcut := InputEventKey.new(); shortcut.keycode = KEY_F11; shortcut.pressed = true; shortcut.shift_pressed = true
+	viewer._unhandled_input(shortcut)
+	check(not shell.immersive, "Immersive shortcut respects focused text entry")
+	editor.release_focus(); editor.free()
+	for prior_mode in [Window.MODE_WINDOWED, Window.MODE_FULLSCREEN, Window.MODE_MAXIMIZED]:
+		root.mode = prior_mode
+		await create_timer(.5).timeout; shell.refresh(); await settle()
+		focus.grab_focus()
+		Profile.enabled = true; Profile.reset()
+		if prior_mode == Window.MODE_WINDOWED: shell.menus.View.get_popup().id_pressed.emit(4)
+		else: viewer._unhandled_input(shortcut)
+		await create_timer(.5).timeout; await settle()
+		check(shell.immersive and root.mode == Window.MODE_FULLSCREEN, "Immersive native entry from " + str(prior_mode))
+		check(not shell.is_visible_in_tree() and not shell.dock.visible and not viewer.resize_handle.visible, "Immersive hides shell and dock from " + str(prior_mode))
+		check(not shell.transport.is_visible_in_tree() and not shell.status_ui.is_visible_in_tree() and not shell.recovery.is_visible_in_tree(), "Immersive hides transport/status/recovery")
+		check(root.gui_get_focus_owner() == null, "Immersive releases hidden control focus")
+		check(shell.immersive_hint.visible and shell.immersive_hint.mouse_filter == Control.MOUSE_FILTER_IGNORE and shell.immersive_hint.focus_mode == Control.FOCUS_NONE, "Transient hint is visible and noninteractive")
+		check(viewer.colorbar.visible and viewer.legend.visible, "Scientific overlay visibility retained")
+		check(Visual.snapshot(viewer) == state and viewer.committed_sample == sample and viewer.camera.transform == camera and viewer.generic_reader == source, "Entry retains recipes sample camera and source")
+		check(viewer.playing == playing, "Immersive preserves play/pause state")
+		if prior_mode == Window.MODE_WINDOWED:
+			picture("immersive-hint")
+			await create_timer(3).timeout
+			check(not shell.immersive_hint.visible, "Hint disappears automatically after three seconds")
+			picture("immersive-clean")
+		shell.refresh(); shell.layout(); viewer._toggle_overlay(); await settle()
+		check(not shell.dock.visible and not shell.is_visible_in_tree(), "Refresh layout and F1 cannot expose immersive chrome")
+		var activity := Profile.report(); Profile.enabled = false
+		# Existing selection controller idle callbacks continue across frames.
+		for idle in ["g4_overlay_tick", "g4_worker_poll"]: activity.stages.erase(idle)
+		check(activity.stages.is_empty() and activity.counters.is_empty(), "Immersive presentation triggers no instrumented scientific work")
+		viewer.inspection_busy = true
+		var escape := InputEventKey.new(); escape.keycode = KEY_ESCAPE; escape.pressed = true
+		root.push_input(escape)
+		viewer.inspection_busy = false
+		await create_timer(.5).timeout; await settle()
+		check(not shell.immersive and root.mode == prior_mode, "Esc restores preceding native mode even while inspection is busy")
+		check(shell.visible and shell.dock.visible == viewer.overlay_visible and shell.transport.is_visible_in_tree(), "Esc restores shell controls")
+		check(root.gui_get_focus_owner() == focus, "Esc restores valid preceding focus")
+		check(Visual.snapshot(viewer) == state and viewer.committed_sample == sample and viewer.camera.transform == camera, "Exit retains scientific state")
+	viewer.playing = false
+	root.mode = Window.MODE_WINDOWED; await create_timer(.5).timeout
+	viewer._toggle_overlay(); await settle()
+	shell.enter_immersive(); await create_timer(.5).timeout
+	shell.exit_immersive(); await create_timer(.5).timeout
+	check(not viewer.overlay_visible and not shell.dock.visible and shell.recovery.visible, "Immersive preserves a previously hidden dock")
+	viewer._toggle_overlay(); await settle()
+	shell.enter_immersive(); await create_timer(3.1).timeout
+	check(await viewer._capture_inspection_png(output.path_join("immersive-png.png"), false) == OK, "Canonical PNG capture remains available during immersive")
+	viewer._notify_screenshot("Immersive PNG test")
+	check(not viewer.screenshot_notice.visible and not shell.visible, "PNG completion does not expose application chrome")
+	root.mode = Window.MODE_WINDOWED; await create_timer(.5).timeout
+	check(not shell.immersive and shell.visible and shell.bar.visible and shell.transport.is_visible_in_tree(), "Unexpected native fullscreen loss recovers usable shell")
+	shell.enter_immersive(); await create_timer(.5).timeout
+	var wheel := InputEventMouseButton.new(); wheel.button_index = MOUSE_BUTTON_WHEEL_UP; wheel.pressed = true
+	viewer._unhandled_input(wheel)
+	check(viewer.camera.transform != camera, "Immersive pointer camera controls remain active")
+	shell.exit_immersive(); await create_timer(.5).timeout
+	viewer._update_camera()

@@ -1,0 +1,306 @@
+[
+  {
+    "backend": "Wayland",
+    "checks": 3,
+    "colorbar_visible": false,
+    "dock_visible": true,
+    "failures": [],
+    "hint": false,
+    "immersive": false,
+    "legend_visible": false,
+    "mode": 0,
+    "pid": 44632,
+    "shell_visible": true,
+    "stage": "windowed",
+    "window_size": "(1440, 900)",
+    "kwin": {
+      "pid": 44632,
+      "active": true,
+      "fullscreen": false,
+      "frame": {
+        "x": 2796,
+        "y": 434,
+        "width": 1448,
+        "height": 932
+      },
+      "client": {
+        "x": 2800,
+        "y": 462,
+        "width": 1440,
+        "height": 900
+      },
+      "screen": {
+        "x": 2560,
+        "y": 360,
+        "width": 1920,
+        "height": 1080
+      }
+    }
+  },
+  {
+    "backend": "Wayland",
+    "checks": 4,
+    "colorbar_visible": false,
+    "dock_visible": true,
+    "failures": [],
+    "hint": false,
+    "immersive": false,
+    "legend_visible": false,
+    "mode": 3,
+    "pid": 44632,
+    "shell_visible": true,
+    "stage": "interactive",
+    "window_size": "(1920, 1080)",
+    "kwin": {
+      "pid": 44632,
+      "active": true,
+      "fullscreen": true,
+      "frame": {
+        "x": 2560,
+        "y": 360,
+        "width": 1920,
+        "height": 1080
+      },
+      "client": {
+        "x": 2560,
+        "y": 360,
+        "width": 1920,
+        "height": 1080
+      },
+      "screen": {
+        "x": 2560,
+        "y": 360,
+        "width": 1920,
+        "height": 1080
+      }
+    }
+  },
+  {
+    "backend": "Wayland",
+    "checks": 5,
+    "colorbar_visible": false,
+    "dock_visible": false,
+    "failures": [],
+    "hint": true,
+    "immersive": true,
+    "legend_visible": false,
+    "mode": 3,
+    "pid": 44632,
+    "shell_visible": false,
+    "stage": "immersive-hint",
+    "window_size": "(1920, 1080)",
+    "kwin": {
+      "pid": 44632,
+      "active": true,
+      "fullscreen": true,
+      "frame": {
+        "x": 2560,
+        "y": 360,
+        "width": 1920,
+        "height": 1080
+      },
+      "client": {
+        "x": 2560,
+        "y": 360,
+        "width": 1920,
+        "height": 1080
+      },
+      "screen": {
+        "x": 2560,
+        "y": 360,
+        "width": 1920,
+        "height": 1080
+      }
+    }
+  },
+  {
+    "backend": "Wayland",
+    "checks": 6,
+    "colorbar_visible": false,
+    "dock_visible": false,
+    "failures": [],
+    "hint": false,
+    "immersive": true,
+    "legend_visible": false,
+    "mode": 3,
+    "pid": 44632,
+    "shell_visible": false,
+    "stage": "immersive-clean",
+    "window_size": "(1920, 1080)",
+    "kwin": {
+      "pid": 44632,
+      "active": true,
+      "fullscreen": true,
+      "frame": {
+        "x": 2560,
+        "y": 360,
+        "width": 1920,
+        "height": 1080
+      },
+      "client": {
+        "x": 2560,
+        "y": 360,
+        "width": 1920,
+        "height": 1080
+      },
+      "screen": {
+        "x": 2560,
+        "y": 360,
+        "width": 1920,
+        "height": 1080
+      }
+    }
+  },
+  {
+    "backend": "Wayland",
+    "checks": 7,
+    "colorbar_visible": false,
+    "dock_visible": true,
+    "failures": [],
+    "hint": false,
+    "immersive": false,
+    "legend_visible": false,
+    "mode": 3,
+    "pid": 44632,
+    "shell_visible": true,
+    "stage": "restored-interactive",
+    "window_size": "(1920, 1080)",
+    "kwin": {
+      "pid": 44632,
+      "active": true,
+      "fullscreen": true,
+      "frame": {
+        "x": 2560,
+        "y": 360,
+        "width": 1920,
+        "height": 1080
+      },
+      "client": {
+        "x": 2560,
+        "y": 360,
+        "width": 1920,
+        "height": 1080
+      },
+      "screen": {
+        "x": 2560,
+        "y": 360,
+        "width": 1920,
+        "height": 1080
+      }
+    }
+  },
+  {
+    "backend": "Wayland",
+    "checks": 8,
+    "colorbar_visible": false,
+    "dock_visible": true,
+    "failures": [],
+    "hint": false,
+    "immersive": false,
+    "legend_visible": false,
+    "mode": 0,
+    "pid": 44632,
+    "shell_visible": true,
+    "stage": "restored-windowed",
+    "window_size": "(1440, 900)",
+    "kwin": {
+      "pid": 44632,
+      "active": true,
+      "fullscreen": false,
+      "frame": {
+        "x": 2796,
+        "y": 434,
+        "width": 1448,
+        "height": 932
+      },
+      "client": {
+        "x": 2800,
+        "y": 462,
+        "width": 1440,
+        "height": 900
+      },
+      "screen": {
+        "x": 2560,
+        "y": 360,
+        "width": 1920,
+        "height": 1080
+      }
+    }
+  },
+  {
+    "backend": "Wayland",
+    "checks": 9,
+    "colorbar_visible": false,
+    "dock_visible": false,
+    "failures": [],
+    "hint": false,
+    "immersive": true,
+    "legend_visible": false,
+    "mode": 3,
+    "pid": 44632,
+    "shell_visible": false,
+    "stage": "windowed-to-immersive",
+    "window_size": "(1920, 1080)",
+    "kwin": {
+      "pid": 44632,
+      "active": true,
+      "fullscreen": true,
+      "frame": {
+        "x": 2560,
+        "y": 360,
+        "width": 1920,
+        "height": 1080
+      },
+      "client": {
+        "x": 2560,
+        "y": 360,
+        "width": 1920,
+        "height": 1080
+      },
+      "screen": {
+        "x": 2560,
+        "y": 360,
+        "width": 1920,
+        "height": 1080
+      }
+    }
+  },
+  {
+    "backend": "Wayland",
+    "checks": 11,
+    "colorbar_visible": false,
+    "dock_visible": true,
+    "failures": [],
+    "hint": false,
+    "immersive": false,
+    "legend_visible": false,
+    "mode": 0,
+    "pid": 44632,
+    "shell_visible": true,
+    "stage": "wm-recovered",
+    "window_size": "(1440, 900)",
+    "kwin": {
+      "pid": 44632,
+      "active": true,
+      "fullscreen": false,
+      "frame": {
+        "x": 2796,
+        "y": 434,
+        "width": 1448,
+        "height": 932
+      },
+      "client": {
+        "x": 2800,
+        "y": 462,
+        "width": 1440,
+        "height": 900
+      },
+      "screen": {
+        "x": 2560,
+        "y": 360,
+        "width": 1920,
+        "height": 1080
+      }
+    }
+  }
+]
