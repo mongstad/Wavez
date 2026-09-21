@@ -6,6 +6,7 @@ var checks := 0
 var failures: Array = []
 var output := ""
 var layouts: Array = []
+var request_delay_observed_ms := 0
 func _initialize(): run.call_deferred()
 func check(ok: bool, message: String):
 	checks += 1
@@ -33,6 +34,7 @@ func run():
 		check(ui.format_duration(row[0],true) == ("-"+row[1] if row[1] != "0.0" else "0.0"),"Remaining formatting and zero: "+str(row[0]))
 	check(viewer.play_button.disabled and ui.seek_button.disabled,"Empty transport explains unavailable playback")
 	viewer._open_capture(config.source); viewer.playing = false; await ready(viewer); await settle()
+	await delay_checks(viewer,ui)
 	check(ui.is_ancestor_of(viewer.play_button) and ui.is_ancestor_of(viewer.timeline),"Existing playback controls moved into persistent transport")
 	check(not viewer.section_buttons.Playback.is_visible_in_tree(),"Legacy playback section no longer duplicates transport")
 	var before: Dictionary = viewer.committed_sample.duplicate(true)
@@ -99,6 +101,7 @@ func run():
 	var gate := Semaphore.new(); worker.test_barrier = gate
 	viewer.scene_layers.playback.invalidate(); viewer.manual_max += 1
 	go(ui,"2.25123456789")
+	var request_started := Time.get_ticks_msec()
 	var deadline := Time.get_ticks_msec()+10000
 	while not worker.status().get("test_barrier_waiting",false) and Time.get_ticks_msec()<deadline: await process_frame
 	check(worker.status().get("test_barrier_waiting",false),"Real cold-seek publication barrier reached")
@@ -113,6 +116,9 @@ func run():
 	viewer._toggle_playback()
 	check(not viewer.playing,"Buffered paused state cannot resume before readiness")
 	ui.refresh()
+	while not ui.requested.visible and Time.get_ticks_msec()-request_started < 2000: await process_frame
+	request_delay_observed_ms = Time.get_ticks_msec()-request_started
+	check(ui.requested.visible and request_delay_observed_ms >= ui.REQUESTED_DELAY_MS and request_delay_observed_ms < 1000,"Long real cold seek reveals status promptly after delay")
 	check(ui.displayed.text == "0.0" and ui.playback_timing().elapsed == 0 and viewer.committed_sample.requested_time == 0 and ui.requested.text == "Requested time 2.25123" and viewer.play_button.disabled,"Pending seek leaves displayed scene committed and exposes submitted target")
 	check(ui.pending_time() == 2.25123456789 and ui.requested.tooltip_text == "Requested time " + ui.FloatText.format_value(2.25123456789) + " s","Requested tooltip and controller retain exact submitted value")
 	ui.show_remaining = true; ui.refresh()
@@ -121,6 +127,7 @@ func run():
 	ui.open_seek(); ui.target.editor.text = "4.5"; ui.refresh()
 	check(ui.requested.text == "Requested time 2.25123" and viewer.committed_sample.requested_time == 0,"Editing replacement target does not replace submitted request")
 	ui.seek_dialog.confirmed.emit(); go(ui,"3.125")
+	check(not ui.requested.visible and ui.requested.text.is_empty(),"Rapid replacements clear stale status immediately")
 	worker.test_barrier = null; gate.post(); await ready(viewer)
 	check(viewer.committed_sample.requested_time == 3.125 and ui.requested.text.is_empty(),"Only latest rapid seek commits and clears requested readout")
 	check(ui.displayed.text == "3.1" and ui.duration.text == "-2.9","Latest committed seek updates elapsed and remaining")
@@ -158,7 +165,9 @@ func run():
 		var prior_buffering: bool = controller.buffering; var prior_pending = controller.pending_time
 		for pending_value in [121.0,999999.99999,null]:
 			controller.buffering = pending_value != null; controller.pending_time = pending_value
-			ui.refresh(); await settle(); viewer.shell.layout(); await settle()
+			ui.refresh()
+			if pending_value != null: await create_timer(float(ui.REQUESTED_DELAY_MS+50)/1000).timeout
+			await settle(); viewer.shell.layout(); await settle()
 			check(ui.requested.visible == (pending_value != null),"Layout stress keeps the requested readout present until cleared")
 			check(stable == [ui.get_global_rect(),ui.actions.get_global_rect(),viewer.timeline.get_global_rect(),ui.options.get_global_rect()],"Requested readout does not move or resize transport controls")
 			if pending_value != null:
@@ -176,7 +185,7 @@ func run():
 		check(viewer.committed_sample.requested_time == time,"Frozen real capture fractional seek")
 		await settle(); picture("real-capture")
 	var file := FileAccess.open(output.path_join("report.json"),FileAccess.WRITE)
-	file.store_string(JSON.stringify({"checks":checks,"failures":failures,"layouts":layouts,"refresh_activity":activity},"\t")); file.close()
+	file.store_string(JSON.stringify({"checks":checks,"failures":failures,"layouts":layouts,"request_delay_observed_ms":request_delay_observed_ms,"refresh_activity":activity},"\t")); file.close()
 	viewer.free(); await process_frame
 	print("TRANSPORT: %d checks, %d failures" % [checks,failures.size()]); quit(0 if failures.is_empty() else 1)
 
@@ -219,3 +228,45 @@ func media_checks(viewer, ui, config):
 		ui.duration.pressed.emit()
 		check(ui.displayed.tooltip_text.ends_with(" ms"),"Scientific unit remains in source tooltip, not playback duration")
 	viewer._open_capture(config.source); viewer.playing = false; await ready(viewer)
+
+func delay_checks(viewer, ui):
+	go(ui,"0.5")
+	var cached_flashed: bool = ui.requested.visible
+	var cached_started := Time.get_ticks_msec()
+	while viewer.scene_layers.is_buffering() and Time.get_ticks_msec()-cached_started < 2000:
+		await process_frame; viewer.scene_layers.tick(0); cached_flashed = cached_flashed or ui.requested.visible
+	ui.refresh()
+	check(not cached_flashed and not ui.requested.visible and viewer.committed_sample.requested_time == .5,"Cached seek commits without transient label")
+	go(ui,"0"); await ready(viewer)
+	ui.reset_requested()
+	ui.refresh_requested(1.0,0.0,1000)
+	check(not ui.requested.visible,"New request status starts hidden")
+	ui.refresh_requested(1.0,0.0,1449)
+	check(not ui.requested.visible,"Request remains hidden just below threshold")
+	ui.refresh_requested(1.0,0.0,1450)
+	check(ui.requested.visible,"Request appears at threshold")
+	ui.refresh_requested(2.0,0.0,1451)
+	check(not ui.requested.visible and ui.requested.text.is_empty(),"Replacement resets delay and stale text")
+	ui.refresh_requested(2.0,0.0,1901)
+	check(ui.requested.visible and ui.requested.text == "Requested time 2.00000","Replacement shows only latest target")
+	ui.pending_generation = -1; ui.refresh_requested(2.0,0.0,1902)
+	check(not ui.requested.visible,"Changed capture generation restarts presentation delay")
+	ui.refresh_requested(2.0,0.0,2352)
+	ui.refresh_requested(null,0.0,2353)
+	check(not ui.requested.visible,"Cancellation clears the label")
+	ui.refresh_requested(2.0,0.0,2000); ui.refresh_requested(2.0,2.0,2450)
+	check(not ui.requested.visible,"Commit clears the label")
+	var controller = viewer.scene_layers.playback
+	for duration_ms in [100,350]:
+		controller.buffering = true; controller.pending_time = 1.0; ui.refresh()
+		var began := Time.get_ticks_msec(); var flashed := false
+		while Time.get_ticks_msec()-began < duration_ms:
+			await process_frame; flashed = flashed or ui.requested.visible
+		controller.buffering = false; controller.pending_time = null; ui.refresh()
+		check(not flashed and not ui.requested.visible,"Native short wait stays hidden: "+str(duration_ms)+" ms")
+	controller.buffering = true; controller.pending_time = 1.0; ui.refresh()
+	await create_timer(.55).timeout
+	check(ui.requested.visible,"Native 550 ms wait displays status")
+	controller.readiness_error = "Injected preparation failure"; ui.refresh()
+	check(not ui.requested.visible and ui.requested.text.is_empty(),"Published preparation failure clears transient status")
+	controller.readiness_error = ""; controller.buffering = false; controller.pending_time = null; ui.refresh()

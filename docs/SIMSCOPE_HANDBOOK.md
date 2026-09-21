@@ -70,7 +70,10 @@ editor closes the form. Invalid or out-of-range targets retain the draft and sho
 an error. Opening another capture dismisses the old seek form.
 
 While preparation is pending, **Requested time** shows the submitted target only
-when different from the displayed clock. Changing a new draft does not replace
+when different from the displayed clock and pending for at least 450 ms. Short
+waits never show this transient label. Replacement, cancellation, commit or a
+published preparation failure clears it immediately; replacements start a fresh
+delay. Readiness and actual seek submission are never delayed. Changing a new draft does not replace
 that request. Independent layer source times and held/interpolated/unavailable
 states remain in Scene layers; they are not the common displayed clock.
 

@@ -1,11 +1,10 @@
 # Current status
 
-Issue #49 (UX3-TRANSPORT-002) adds [media-style playback timing](UX3_MEDIA_TRANSPORT.md)
-to owner-merged shell/transport/status main `1976adc` (PR #48). Implementation is
-**pending owner review**. Relative speed and one-decimal progress are presentation
-adapters. Owner refinement removes the selectable clock and obsolete mode/index-rate
-recipe fields; recorded time is canonical. Sampling and video timing are unchanged.
-No #44 integration or later issue is started.
+Issue #53 (UX3-TRANSPORT-003) delays the transient Requested time label by 450 ms
+on accepted `main` `195bd90` (owner-merged PR #51). Implementation is **pending
+owner review**. [Delay semantics and evidence](UX3_TRANSIENT_STATUS.md) describe
+short-wait suppression and immediate stale-label clearing. Seek, readiness,
+playback/Pause and scientific timing remain unchanged. No later issue is started.
 
 As of **2026-09-20**, including G4 and PERF-001/002 maintenance reviewed and accepted by the user. Scientific simulations were not rerun. Historical results identify their recorded checkpoints. PERF-003 mesh maintenance was also reviewed and accepted by the owner on 2026-09-13; implementation checkpoint `7974c78`.
 
@@ -33,7 +32,7 @@ Representative external captures informed G3 timeline/playback validation. Scien
 
 Older capture writers/readers and public API entry points were retired before the UX milestones. The active product contract is SIMSCP3 / `.ssc` only; replacement coverage uses repository-owned native scenes and synthetic fixtures.
 
-## UX1 and UX2 — accepted; UX3 media transport slice pending review
+## UX1 and UX2 — accepted; UX3 transient-status refinement pending review
 
 The [UX1 report](UX1_REPORT.md) records the current UI inventory, observed layout
 problems, technical coupling, proposed information hierarchy, concrete design
@@ -55,8 +54,8 @@ The owner reviewed and accepted UX2 on 2026-09-13 at
 evidence preserve their original review-time state.
 The owner merged the design package in PR #39 and placed #41 in Ready.
 The shell and transport were owner-merged in PRs #45 and #47.
-Status/Jobs was owner-merged in PR #48. [Media timing](UX3_MEDIA_TRANSPORT.md)
-is pending owner review; integration
+Status/Jobs and media timing were owner-merged in PRs #48 and #51.
+[Transient seek status](UX3_TRANSIENT_STATUS.md) is pending owner review; integration
 acceptance and UX4 remain separately gated under the [UX plan](../UX_IMPLEMENTATION_PLAN.md).
 
 ## RENDER-001 — accepted
@@ -153,7 +152,7 @@ and extends the scale matrix to all five laboratory pages. The
 [validation report](UX_STYLE_VALIDATION.md) records 1,402 passing native checks,
 218 contrast pairs, all four scales, scientific-viewer isolation and physical
 4K limitations. No theme or production behavior was changed by issue #8. Current UX3
-authorization follows the issue #49 gate above.
+authorization follows the issue #53 gate above.
 
 ## UI-003 — accepted
 
