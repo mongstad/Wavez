@@ -64,8 +64,8 @@ membership, run analysis or commit edits. No new persisted workspace fields,
 background-job engine, decoder, cache policy or worker is introduced. The existing
 `panel_width` and `overlay_visible` recipe fields remain readable; rendered dock
 geometry is constrained by available space. Crossing the compact breakpoint
-chooses its 320/360 default. The offline worker does not construct this shell and
-retains its legacy overlay presentation. The original shell issue did not implement #42–44; #42 now extends it as linked above.
+chooses its 320/360 default. The video worker now reuses this shell under the explicit
+[export overlay contract](../VIDEO_EXPORT.md), independently of desktop visibility. The original shell issue did not implement #42–44; #42 now extends it as linked above.
 This shell contract does not implement #44,
 UX4, Settings, new legends or other backlog polish.
 

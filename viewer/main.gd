@@ -129,6 +129,7 @@ var legend: Label
 var tail_poll := 0.0
 
 var offline_instance := false
+var export_shell := false # Video worker reuses production presentation without desktop input.
 var video_dialog
 var screenshot_directory := ""
 var screenshot_dialog: FileDialog
@@ -336,7 +337,7 @@ func _build_particles() -> void:
 
 func _build_ui() -> void:
 	_build_inspector()
-	if not offline_instance:
+	if not offline_instance or export_shell:
 		shell = preload("res://ui/shell/viewer_shell.gd").new()
 		overlay_panel.get_parent().add_child(shell)
 		shell.setup(self)
@@ -884,7 +885,7 @@ func _build_inspector() -> void:
 	status_label = Label.new()
 	status_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	inspector_box.add_child(status_label)
-	if offline_instance: _button(inspector_box, "Hide inspector  [F1]", _toggle_overlay)
+	if offline_instance and not export_shell: _button(inspector_box, "Hide inspector  [F1]", _toggle_overlay)
 	show_panel_button = _button(canvas, "SimScope  [F1]", _toggle_overlay)
 	show_panel_button.position = Vector2(12, 12)
 	show_panel_button.visible = false
@@ -1027,7 +1028,7 @@ func _build_inspector() -> void:
 	_button(export_box, "Open capture…", _show_open_dialog)
 	_button(export_box, "Save PNG  [P]", _save_image)
 	_build_inspection_ui(export_box)
-	if not offline_instance:
+	if not offline_instance or export_shell:
 		video_dialog = preload("res://video/export_dialog.gd").new()
 		video_dialog.viewer = self
 		add_child(video_dialog)

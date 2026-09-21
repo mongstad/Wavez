@@ -1,0 +1,164 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.351 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3070 Ti
+
+PASS: test capture opens
+PASS: recorded history disabled on startup
+PASS: T action enables trails
+PASS: presets preserve disabled trails
+PASS: disabled trails allocate no instances/history
+PASS: screenshot folder starts empty
+PASS: first screenshot prompts for destination
+PASS: cancel creates no screenshot and chooses no fallback
+PASS: cancelled choice prompts again
+PASS: directory selection saves first screenshot
+PASS: later screenshot reuses session directory
+PASS: consecutive screenshots create two distinct files without overwriting
+PASS: visible saved-path confirmation
+PASS: new viewer session does not inherit screenshot folder
+PASS: new session prompts again
+PASS: complete snapshot validates
+PASS: malformed path returns a validation error
+PASS: overflowing frame count is rejected before integer conversion
+PASS: half-open custom interval yields six frames
+PASS: frame clock uses capture units per video second
+PASS: capture timestamp index builds
+PASS: time-based interpolation between recorded frames
+PASS: UI enables actual recorded trail instances
+PASS: enabled trails use recorded particle positions
+PASS: UI disables and releases trail history and instances
+PASS: rebuilding a timeline resets stale sample cache and errors
+PASS: orbit angle depends on output seconds
+PASS: JSON snapshot preserves mappings and integer type filters
+PASS: snapshot preserves cinematic appearance
+PASS: snapshot restores size/brightness mappings and manual/log/invert/clamp normalization
+PASS: publication refuses competing output and retains encoded file
+PASS: publication succeeds to an unused path containing spaces
+PASS: Export Video dialog opens
+PASS: entire capture uses exact indexed endpoints
+PASS: current-position range uses captured sample time
+PASS: variable-count export index builds
+PASS: count change holds positions instead of blending unrelated particles
+PASS: changing schema removes unavailable export mapping
+PASS: Export initializes positive rate without retired index-clock state
+PASS: Export initializes positive rate without retired index-clock state
+PASS: Export initializes positive rate without retired index-clock state
+PASS: UI launches separate render process
+PASS: GPU worker retains persistent renderer diagnostics
+PASS: parent playback remains usable during export
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.351 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3070 Ti
+
+SimScope export: Saved /tmp/issue55-video-final/ui launch 1933080.mp4
+PASS: main viewer remained minimized during export
+PASS: UI worker reports successful MP4 completion while main viewer minimized
+PASS: Export uses the production shell component
+PASS: Overlay off hides application chrome and its coupled legend
+PASS: Export includes current command bar transport and status
+PASS: Export restores workspace and duration presentation
+PASS: Export excludes desktop recovery hints and export dialogs
+PASS: Export uses full-width bar and current right dock
+PASS: Export dock does not overlap transport
+PASS: Export shell retains camera framing
+PASS: Overlay-off pixels match the pre-shell scientific-only path
+PASS: Baseline export presentation job validates
+PASS: Reject invalid export presentation { "workspace": 4 }
+PASS: Reject invalid export presentation { "scroll": -1 }
+PASS: Reject invalid export presentation { "remaining": "yes" }
+PASS: Reject invalid export presentation { "fullscreen": true }
+VIDEO UX: 60 checks, 0 failures
+
+PASS: screenshot, trails, timeline and export-state UX suite
+1080p 30fps: complete — Saved /tmp/issue55-video-final/acceptance vkwnv1mx/1080p 30fps/result with spaces.mp4
+PASS: 1080p 30fps: expected completion state
+PASS: 1080p 30fps: no Godot script errors/resource leaks
+PASS: successful render process exit
+PASS: 1080p 30fps: actual MP4 dimensions
+PASS: 1080p 30fps: exact frame count and frame rate
+PASS: 1080p 30fps: playback-rate and range timing
+PASS: 1080p 30fps: one PNG per output frame
+PASS: 1080p 30fps: actual PNG dimensions
+1080p 60fps: complete — Saved /tmp/issue55-video-final/acceptance vkwnv1mx/1080p 60fps/result with spaces.mp4
+PASS: 1080p 60fps: expected completion state
+PASS: 1080p 60fps: no Godot script errors/resource leaks
+PASS: successful render process exit
+PASS: 1080p 60fps: actual MP4 dimensions
+PASS: 1080p 60fps: exact frame count and frame rate
+PASS: 1080p 60fps: playback-rate and range timing
+PASS: 1080p 60fps: one PNG per output frame
+PASS: 1080p 60fps: actual PNG dimensions
+slow render repeat: complete — Saved /tmp/issue55-video-final/acceptance vkwnv1mx/slow render repeat/result with spaces.mp4
+PASS: slow render repeat: expected completion state
+PASS: slow render repeat: no Godot script errors/resource leaks
+PASS: successful render process exit
+PASS: slow render repeat: actual MP4 dimensions
+PASS: slow render repeat: exact frame count and frame rate
+PASS: slow render repeat: playback-rate and range timing
+PASS: slow render repeat: one PNG per output frame
+PASS: slow render repeat: actual PNG dimensions
+PASS: identical samples and camera transforms despite per-frame delays
+4K scientific: complete — Saved /tmp/issue55-video-final/acceptance vkwnv1mx/4K scientific/result with spaces.mp4
+PASS: 4K scientific: expected completion state
+PASS: 4K scientific: no Godot script errors/resource leaks
+PASS: successful render process exit
+PASS: 4K scientific: actual MP4 dimensions
+PASS: 4K scientific: exact frame count and frame rate
+PASS: 4K scientific: playback-rate and range timing
+PASS: 4K scientific: one PNG per output frame
+PASS: 4K scientific: actual PNG dimensions
+PASS: scientific appearance, mapping and overlays reproduced
+overlays enabled: complete — Saved /tmp/issue55-video-final/acceptance vkwnv1mx/overlays enabled/result with spaces.mp4
+PASS: overlays enabled: expected completion state
+PASS: overlays enabled: no Godot script errors/resource leaks
+PASS: successful render process exit
+PASS: overlays enabled: actual MP4 dimensions
+PASS: overlays enabled: exact frame count and frame rate
+PASS: overlays enabled: playback-rate and range timing
+PASS: overlays enabled: one PNG per output frame
+PASS: overlays enabled: actual PNG dimensions
+rate two: complete — Saved /tmp/issue55-video-final/acceptance vkwnv1mx/rate two/result with spaces.mp4
+PASS: rate two: expected completion state
+PASS: rate two: no Godot script errors/resource leaks
+PASS: successful render process exit
+PASS: rate two: actual MP4 dimensions
+PASS: rate two: exact frame count and frame rate
+PASS: rate two: playback-rate and range timing
+PASS: rate two: one PNG per output frame
+PASS: rate two: actual PNG dimensions
+locked camera: complete — Saved /tmp/issue55-video-final/acceptance vkwnv1mx/locked camera/result with spaces.mp4
+PASS: locked camera: expected completion state
+PASS: locked camera: no Godot script errors/resource leaks
+PASS: successful render process exit
+PASS: locked camera: actual MP4 dimensions
+PASS: locked camera: exact frame count and frame rate
+PASS: locked camera: playback-rate and range timing
+PASS: locked camera: one PNG per output frame
+PASS: locked camera: actual PNG dimensions
+PASS: locked camera remains exact
+missing ffmpeg: frames_ready — FFmpeg is unavailable. All PNG frames and encoding instructions are retained in /tmp/issue55-video-final/acceptance vkwnv1mx/missing ffmpeg
+PASS: missing ffmpeg: expected completion state
+PASS: missing ffmpeg: no Godot script errors/resource leaks
+PASS: missing FFmpeg retains PNGs even when cleanup was selected
+failed encoder: failed — FFmpeg failed (exit 1), or produced no valid output.
+PNGs and any partial MP4 retained in /tmp/issue55-video-final/acceptance vkwnv1mx/failed encoder
+PASS: failed encoder: expected completion state
+PASS: failed encoder: no Godot script errors/resource leaks
+PASS: failed encoding never removes source frames or publishes output
+cancel render: cancelled — Export cancelled. Completed PNG frames retained in /tmp/issue55-video-final/acceptance vkwnv1mx/cancel render/frames
+PASS: cancel render: expected completion state
+PASS: cancel render: no Godot script errors/resource leaks
+PASS: render cancellation preserves completed PNGs and no final MP4
+cancel encoding: cancelled — Encoding cancelled. PNGs and partial MP4 retained in /tmp/issue55-video-final/acceptance vkwnv1mx/cancel encoding
+PASS: cancel encoding: expected completion state
+PASS: cancel encoding: no Godot script errors/resource leaks
+PASS: interrupted encoding preserves frames and isolates partial MP4
+cleanup success: complete — Saved /tmp/issue55-video-final/acceptance vkwnv1mx/cleanup success/result with spaces.mp4
+PASS: cleanup success: expected completion state
+PASS: cleanup success: no Godot script errors/resource leaks
+PASS: successful render process exit
+PASS: cleanup success: actual MP4 dimensions
+PASS: cleanup success: exact frame count and frame rate
+PASS: cleanup success: playback-rate and range timing
+PASS: PNG cleanup only after verified final MP4
+PASS: source capture bytes unchanged
+ALL VIDEO ACCEPTANCE TESTS PASSED
+Artifacts: /tmp/issue55-video-final/acceptance vkwnv1mx

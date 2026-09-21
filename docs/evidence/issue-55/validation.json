@@ -1,0 +1,44 @@
+[
+  {
+    "suite": "overlay exports",
+    "renderer": "forward",
+    "assertions": 95,
+    "result": "PASS",
+    "note": "The offscreen comparison harness was subsequently corrected; see final UI results."
+  },
+  {
+    "suite": "overlay exports",
+    "renderer": "compat",
+    "assertions": 109,
+    "result": "PASS",
+    "note": "The offscreen comparison harness was subsequently corrected; see final UI results."
+  },
+  {
+    "suite": "forward-full-video",
+    "assertions": 140,
+    "result": "PASS"
+  },
+  {
+    "suite": "compat-final-ui",
+    "assertions": 60,
+    "result": "PASS"
+  },
+  {
+    "suite": "recipe state",
+    "assertions": 2998,
+    "result": "PASS",
+    "renderer": "headless"
+  },
+  {
+    "suite": "interactive shell",
+    "renderer": "forward_plus",
+    "assertions": 148,
+    "result": "PASS"
+  },
+  {
+    "suite": "selection render",
+    "renderer": "forward_plus",
+    "assertions": 44,
+    "result": "PASS"
+  }
+]

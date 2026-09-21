@@ -1,0 +1,270 @@
+{
+  "status": "PASS",
+  "renderer": "forward_plus",
+  "source_sha256": "152165f7b691876fb34604567a22ef3c2217915c22d52702d938fa530319d0a5",
+  "runs": [
+    {
+      "command": [
+        "/home/Nozba/Documents/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--headless",
+        "--path",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+        "--audio-driver",
+        "Dummy",
+        "--log-file",
+        "/tmp/issue55-selection/setup.log",
+        "--script",
+        "analysis/test_render_state.gd",
+        "--",
+        "--g4-render-fixture=/tmp/issue55-selection"
+      ],
+      "exit_code": 0,
+      "seconds": 0.9742572180002753
+    },
+    {
+      "command": [
+        "/home/Nozba/Documents/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--path",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+        "--rendering-method",
+        "forward_plus",
+        "--resolution",
+        "640x360",
+        "--audio-driver",
+        "Dummy",
+        "--log-file",
+        "/tmp/issue55-selection/normal/renderer.log",
+        "--fixed-fps",
+        "4",
+        "--disable-vsync",
+        "--",
+        "--simscope-render-job=/tmp/issue55-selection/normal/job.json"
+      ],
+      "exit_code": 0,
+      "seconds": 2.290514708000046
+    },
+    {
+      "command": [
+        "/home/Nozba/Documents/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--path",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+        "--rendering-method",
+        "forward_plus",
+        "--resolution",
+        "640x360",
+        "--audio-driver",
+        "Dummy",
+        "--log-file",
+        "/tmp/issue55-selection/delayed/renderer.log",
+        "--fixed-fps",
+        "4",
+        "--disable-vsync",
+        "--",
+        "--simscope-render-job=/tmp/issue55-selection/delayed/job.json"
+      ],
+      "exit_code": 0,
+      "seconds": 2.094542593999904
+    },
+    {
+      "command": [
+        "/home/Nozba/Documents/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--path",
+        "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+        "--rendering-method",
+        "forward_plus",
+        "--resolution",
+        "640x360",
+        "--audio-driver",
+        "Dummy",
+        "--log-file",
+        "/tmp/issue55-selection/replay.log",
+        "--script",
+        "analysis/test_render_state.gd",
+        "--",
+        "--g4-render-fixture=/tmp/issue55-selection",
+        "--verify-sidecar=/tmp/issue55-selection/normal/inspection-00000001.json"
+      ],
+      "exit_code": 0,
+      "seconds": 1.8724308490000112
+    }
+  ],
+  "checks": [
+    {
+      "label": "normal complete clip",
+      "pass_": true
+    },
+    {
+      "label": "normal exact clip dimensions/frame count",
+      "pass_": true
+    },
+    {
+      "label": "normal frame 0 source/image hash",
+      "pass_": true
+    },
+    {
+      "label": "normal frame 0 exact time/revision",
+      "pass_": true
+    },
+    {
+      "label": "normal frame 0 exact membership",
+      "pass_": true
+    },
+    {
+      "label": "normal frame 0 independent position oracle ID 0",
+      "pass_": true
+    },
+    {
+      "label": "normal frame 0 independent position oracle ID 40",
+      "pass_": true
+    },
+    {
+      "label": "normal frame 0 visible selection markers on actual GPU",
+      "pass_": true
+    },
+    {
+      "label": "normal frame 1 source/image hash",
+      "pass_": true
+    },
+    {
+      "label": "normal frame 1 exact time/revision",
+      "pass_": true
+    },
+    {
+      "label": "normal frame 1 exact membership",
+      "pass_": true
+    },
+    {
+      "label": "normal frame 1 independent position oracle ID 0",
+      "pass_": true
+    },
+    {
+      "label": "normal frame 1 independent position oracle ID 40",
+      "pass_": true
+    },
+    {
+      "label": "normal frame 1 visible selection markers on actual GPU",
+      "pass_": true
+    },
+    {
+      "label": "normal frame 2 source/image hash",
+      "pass_": true
+    },
+    {
+      "label": "normal frame 2 exact time/revision",
+      "pass_": true
+    },
+    {
+      "label": "normal frame 2 exact membership",
+      "pass_": true
+    },
+    {
+      "label": "normal frame 2 independent position oracle ID 0",
+      "pass_": true
+    },
+    {
+      "label": "normal frame 2 independent position oracle ID 40",
+      "pass_": true
+    },
+    {
+      "label": "normal frame 2 visible selection markers on actual GPU",
+      "pass_": true
+    },
+    {
+      "label": "delayed complete clip",
+      "pass_": true
+    },
+    {
+      "label": "delayed exact clip dimensions/frame count",
+      "pass_": true
+    },
+    {
+      "label": "delayed frame 0 source/image hash",
+      "pass_": true
+    },
+    {
+      "label": "delayed frame 0 exact time/revision",
+      "pass_": true
+    },
+    {
+      "label": "delayed frame 0 exact membership",
+      "pass_": true
+    },
+    {
+      "label": "delayed frame 0 independent position oracle ID 0",
+      "pass_": true
+    },
+    {
+      "label": "delayed frame 0 independent position oracle ID 40",
+      "pass_": true
+    },
+    {
+      "label": "delayed frame 0 visible selection markers on actual GPU",
+      "pass_": true
+    },
+    {
+      "label": "delayed frame 1 source/image hash",
+      "pass_": true
+    },
+    {
+      "label": "delayed frame 1 exact time/revision",
+      "pass_": true
+    },
+    {
+      "label": "delayed frame 1 exact membership",
+      "pass_": true
+    },
+    {
+      "label": "delayed frame 1 independent position oracle ID 0",
+      "pass_": true
+    },
+    {
+      "label": "delayed frame 1 independent position oracle ID 40",
+      "pass_": true
+    },
+    {
+      "label": "delayed frame 1 visible selection markers on actual GPU",
+      "pass_": true
+    },
+    {
+      "label": "delayed frame 2 source/image hash",
+      "pass_": true
+    },
+    {
+      "label": "delayed frame 2 exact time/revision",
+      "pass_": true
+    },
+    {
+      "label": "delayed frame 2 exact membership",
+      "pass_": true
+    },
+    {
+      "label": "delayed frame 2 independent position oracle ID 0",
+      "pass_": true
+    },
+    {
+      "label": "delayed frame 2 independent position oracle ID 40",
+      "pass_": true
+    },
+    {
+      "label": "delayed frame 2 visible selection markers on actual GPU",
+      "pass_": true
+    },
+    {
+      "label": "all PNG pixels identical with delayed rendering",
+      "pass_": true
+    },
+    {
+      "label": "restored frame and ordinary PNG capture reproduce exact clip pixels",
+      "pass_": true
+    },
+    {
+      "label": "ordinary PNG and portable recipe image hash agree",
+      "pass_": true
+    },
+    {
+      "label": "capture checksum unchanged",
+      "pass_": true
+    }
+  ],
+  "image_inspection_required": true
+}
