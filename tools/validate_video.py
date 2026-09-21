@@ -24,6 +24,7 @@ def main():
     parser.add_argument('--output-dir',type=Path)
     parser.add_argument('--renderer',choices=['gl_compatibility','forward_plus'],default='gl_compatibility')
     parser.add_argument('--continuation', action='store_true', help='Run focused additional coverage without repeating the full 4K suite.')
+    parser.add_argument('--overlay-ui', action='store_true', help='Focused production overlay, resolution and deterministic repeat coverage.')
     args=parser.parse_args()
     ffmpeg=shutil.which('ffmpeg'); probe=shutil.which('ffprobe')
     if not ffmpeg or not probe: raise SystemExit('Full acceptance suite requires ffmpeg and ffprobe.')
@@ -87,6 +88,25 @@ def main():
             check(len(files)==count,f'{path.parent.name}: one PNG per output frame')
             check(all(struct.unpack('>II',f.read_bytes()[16:24])==(job['width'],job['height']) for f in files),f'{path.parent.name}: actual PNG dimensions')
         return traces
+    if args.overlay_ui:
+        ui_state=copy.deepcopy(state);ui_state['overlay_visible']=True
+        presentation=dict(workspace=0,scroll=0,remaining=False)
+        first_frames=None
+        for name,width,height in [('overlay 1080p',1920,1080),('overlay repeat',1920,1080),('overlay 4K',3840,2160)]:
+            p,j=job_for(name,width=width,height=height,end_time=.2,state=ui_state,presentation=presentation)
+            traces=movie(p,j)
+            hashes=[hashlib.sha256(f.read_bytes()).hexdigest() for f in sorted((p.parent/'frames').glob('*.png'))]
+            check(all(t['overlays'] for t in traces),name+': explicit overlay included')
+            if first_frames is None: first_frames=hashes
+            elif name=='overlay repeat':check(first_frames==hashes,'production UI repeated export pixels are deterministic')
+        p,j=job_for('overlay disabled',end_time=.2);traces=movie(p,j)
+        check(not any(t['overlays'] for t in traces),'overlay disabled remains explicit')
+        check(hashlib.sha256((p.parent/'frames/frame00000000.png').read_bytes()).hexdigest()!=first_frames[0],'UI inclusion changes rendered pixels')
+        p,j=job_for('appearance workspace',end_time=.2,state=ui_state,presentation=dict(workspace=1,scroll=0,remaining=True));movie(p,j)
+        check(hashlib.sha256((p.parent/'frames/frame00000000.png').read_bytes()).hexdigest()!=first_frames[0],'accepted workspace and remaining preference reach rendered UI')
+        check(hashlib.sha256((base/'fixture.ssc').read_bytes()).hexdigest()==capture_hash,'source capture bytes unchanged')
+        record('ALL OVERLAY UI TESTS PASSED\nArtifacts: '+str(run))
+        return
     if args.continuation:
         p,j=job_for('1440p 24fps',width=2560,height=1440,fps=24,end_time=.2);movie(p,j)
         p,j=job_for('custom resolution and FPS',width=640,height=480,fps=17,end_time=.2,keep_frames=False);movie(p,j)

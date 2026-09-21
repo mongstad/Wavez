@@ -294,3 +294,9 @@ issue branch, pending owner review. Interactive fullscreen retains the controls
 above; immersive hides all application chrome while preserving scientific
 overlays and restores the preceding shell/native mode with Esc. This is session-only
 presentation state, with no recipe or rendering-model change.
+
+
+Issue #55 reuses the current production shell for video UI overlays, pending owner
+review. The explicit export checkbox controls UI inclusion independently of
+fullscreen; existing scientific-overlay gates and native 3D framing are preserved.
+See [export behavior](../VIDEO_EXPORT.md) and [validation](evidence/issue-55/README.md).

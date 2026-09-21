@@ -16,9 +16,18 @@ static func sample_time(job: Dictionary, n: int) -> float:
 	return float(job.start_time) + float(n) / float(job.fps) * float(job.playback_rate)
 
 static func validate(job: Dictionary) -> String:
+	if job.has("presentation"):
+		var presentation = job.presentation
+		if not presentation is Dictionary: return "Invalid export presentation."
+		for key in presentation:
+			if key not in ["workspace","scroll","remaining"]: return "Unsupported export presentation field: " + str(key)
+		for key in ["workspace","scroll"]:
+			var value = presentation.get(key,0)
+			if not (value is int or value is float) or not is_finite(value) or value != floor(value) or value < 0 or value > (3 if key == "workspace" else 2147483647): return "Invalid export presentation " + key
+		if presentation.has("remaining") and not presentation.remaining is bool: return "Invalid export remaining preference."
 	if job.get("version") == 2:
 		for key in job:
-			if key not in ["version","capture_path","source","state","start_time","end_time","start_frame","end_frame","fps","width","height","playback_rate","output_path","camera_mode","orbit_speed","quality","keep_frames","inspection_sidecars","ffmpeg_path","rendering_method","inspection_path","inspection_sha256","opened_paths","exact_timing","exact_state","test_frame_delay_ms","comparison","output_quota_bytes"]:return "Unsupported version-2 render field: "+key
+			if key not in ["version","capture_path","source","state","start_time","end_time","start_frame","end_frame","fps","width","height","playback_rate","output_path","camera_mode","orbit_speed","quality","keep_frames","inspection_sidecars","ffmpeg_path","rendering_method","inspection_path","inspection_sha256","opened_paths","exact_timing","exact_state","presentation","test_frame_delay_ms","comparison","output_quota_bytes"]:return "Unsupported version-2 render field: "+key
 		var compatible := job.duplicate(true);compatible.version = 1
 		var base_problem := validate(compatible)
 		if not base_problem.is_empty():return base_problem

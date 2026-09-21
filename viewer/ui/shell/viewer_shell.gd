@@ -245,7 +245,7 @@ func refresh() -> void:
 	empty.visible = not loaded and not loading
 	viewer.inspector_box.visible = loaded and workspace == 0
 	adapter.visible = loaded and workspace != 0
-	var fullscreen := DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN
+	var fullscreen: bool = not viewer.offline_instance and DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN
 	fullscreen_button.visible = fullscreen
 	if bar.visible == fullscreen:
 		var focused := get_viewport().gui_get_focus_owner()
@@ -371,3 +371,21 @@ func _process(_delta: float) -> void:
 	elif immersive_native_seen or elapsed >= 1500:
 		# Compositor rejection/external exit: recover chrome without fighting the WM.
 		exit_immersive(false)
+
+func export_state() -> Dictionary:
+	return {"workspace":workspace,"scroll":scroll.scroll_vertical,"remaining":transport.show_remaining}
+
+func prepare_export(state: Dictionary) -> void:
+	# Export settings own visibility; no desktop fullscreen, popup, focus or job state.
+	set_process(false); transport.set_process(false); status_ui.set_process(false)
+	select_workspace(int(state.get("workspace",0)))
+	transport.show_remaining = state.get("remaining",false)
+	scroll_position = int(state.get("scroll",0))
+	scroll.set_deferred("scroll_vertical",scroll_position)
+	refresh_export()
+
+func refresh_export() -> void:
+	refresh(); transport.refresh(); status_ui.refresh(); layout()
+	visible = viewer.overlay_visible
+	# Scientific annotations remain outside the shell, with their existing gates.
+	viewer.show_panel_button.hide()

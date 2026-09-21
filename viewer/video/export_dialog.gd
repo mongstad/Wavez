@@ -85,6 +85,7 @@ func _ready() -> void:
 	orbit = number("Orbit • radians / video second", .08, -10, 10, .001)
 	rendering = choice("Rendering", ["Current state", "Cinematic preset", "Scientific preset"])
 	overlays = check("Overlays", "Include viewer overlays")
+	overlays.tooltip_text = "Include the current shell UI and the enabled particle legend. Independent scientific guides and markers retain their settings; desktop fullscreen is not exported."
 	trails = check("Trails", "Include recorded history")
 	trails.tooltip_text = "Scientific rendering suppresses trails, matching the interactive viewer."
 	quality = choice("H.264 quality", ["High • CRF 18", "Balanced • CRF 21", "Compact • CRF 25"])
@@ -191,6 +192,7 @@ func start_export() -> void:
 	if pid > 0 or preparing or timeline == null: return
 	var job := settings()
 	job.state = Job.snapshot(viewer)
+	if viewer.shell != null: job.presentation = viewer.shell.export_state()
 	var with_selections: bool = viewer.selection_controller != null and not viewer.selection_controller.state.definitions.is_empty()
 	if with_selections:
 		var recipe := preload("res://analysis/inspection_v3.gd").scene_snapshot(viewer.selection_controller.temporal)

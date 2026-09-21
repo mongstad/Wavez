@@ -1,0 +1,111 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.351 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3070 Ti
+
+PASS: test capture opens
+PASS: recorded history disabled on startup
+PASS: T action enables trails
+PASS: presets preserve disabled trails
+PASS: disabled trails allocate no instances/history
+PASS: screenshot folder starts empty
+PASS: first screenshot prompts for destination
+PASS: cancel creates no screenshot and chooses no fallback
+PASS: cancelled choice prompts again
+PASS: directory selection saves first screenshot
+PASS: later screenshot reuses session directory
+PASS: consecutive screenshots create two distinct files without overwriting
+PASS: visible saved-path confirmation
+PASS: new viewer session does not inherit screenshot folder
+PASS: new session prompts again
+PASS: complete snapshot validates
+PASS: malformed path returns a validation error
+PASS: overflowing frame count is rejected before integer conversion
+PASS: half-open custom interval yields six frames
+PASS: frame clock uses capture units per video second
+PASS: capture timestamp index builds
+PASS: time-based interpolation between recorded frames
+PASS: UI enables actual recorded trail instances
+PASS: enabled trails use recorded particle positions
+PASS: UI disables and releases trail history and instances
+PASS: rebuilding a timeline resets stale sample cache and errors
+PASS: orbit angle depends on output seconds
+PASS: JSON snapshot preserves mappings and integer type filters
+PASS: snapshot preserves cinematic appearance
+PASS: snapshot restores size/brightness mappings and manual/log/invert/clamp normalization
+PASS: publication refuses competing output and retains encoded file
+PASS: publication succeeds to an unused path containing spaces
+PASS: Export Video dialog opens
+PASS: entire capture uses exact indexed endpoints
+PASS: current-position range uses captured sample time
+PASS: variable-count export index builds
+PASS: count change holds positions instead of blending unrelated particles
+PASS: changing schema removes unavailable export mapping
+PASS: Export initializes positive rate without retired index-clock state
+PASS: Export initializes positive rate without retired index-clock state
+PASS: Export initializes positive rate without retired index-clock state
+PASS: UI launches separate render process
+PASS: GPU worker retains persistent renderer diagnostics
+PASS: parent playback remains usable during export
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.351 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3070 Ti
+
+SimScope export: Saved /tmp/issue55-overlay-forward/ui launch 1886679.mp4
+PASS: main viewer remained minimized during export
+PASS: UI worker reports successful MP4 completion while main viewer minimized
+VIDEO UX: 46 checks, 0 failures
+
+PASS: screenshot, trails, timeline and export-state UX suite
+overlay 1080p: complete — Saved /tmp/issue55-overlay-forward/acceptance 7ksaek32/overlay 1080p/result with spaces.mp4
+PASS: overlay 1080p: expected completion state
+PASS: overlay 1080p: no Godot script errors/resource leaks
+PASS: successful render process exit
+PASS: overlay 1080p: actual MP4 dimensions
+PASS: overlay 1080p: exact frame count and frame rate
+PASS: overlay 1080p: playback-rate and range timing
+PASS: overlay 1080p: one PNG per output frame
+PASS: overlay 1080p: actual PNG dimensions
+PASS: overlay 1080p: explicit overlay included
+overlay repeat: complete — Saved /tmp/issue55-overlay-forward/acceptance 7ksaek32/overlay repeat/result with spaces.mp4
+PASS: overlay repeat: expected completion state
+PASS: overlay repeat: no Godot script errors/resource leaks
+PASS: successful render process exit
+PASS: overlay repeat: actual MP4 dimensions
+PASS: overlay repeat: exact frame count and frame rate
+PASS: overlay repeat: playback-rate and range timing
+PASS: overlay repeat: one PNG per output frame
+PASS: overlay repeat: actual PNG dimensions
+PASS: overlay repeat: explicit overlay included
+PASS: production UI repeated export pixels are deterministic
+overlay 4K: complete — Saved /tmp/issue55-overlay-forward/acceptance 7ksaek32/overlay 4K/result with spaces.mp4
+PASS: overlay 4K: expected completion state
+PASS: overlay 4K: no Godot script errors/resource leaks
+PASS: successful render process exit
+PASS: overlay 4K: actual MP4 dimensions
+PASS: overlay 4K: exact frame count and frame rate
+PASS: overlay 4K: playback-rate and range timing
+PASS: overlay 4K: one PNG per output frame
+PASS: overlay 4K: actual PNG dimensions
+PASS: overlay 4K: explicit overlay included
+overlay disabled: complete — Saved /tmp/issue55-overlay-forward/acceptance 7ksaek32/overlay disabled/result with spaces.mp4
+PASS: overlay disabled: expected completion state
+PASS: overlay disabled: no Godot script errors/resource leaks
+PASS: successful render process exit
+PASS: overlay disabled: actual MP4 dimensions
+PASS: overlay disabled: exact frame count and frame rate
+PASS: overlay disabled: playback-rate and range timing
+PASS: overlay disabled: one PNG per output frame
+PASS: overlay disabled: actual PNG dimensions
+PASS: overlay disabled remains explicit
+PASS: UI inclusion changes rendered pixels
+appearance workspace: complete — Saved /tmp/issue55-overlay-forward/acceptance 7ksaek32/appearance workspace/result with spaces.mp4
+PASS: appearance workspace: expected completion state
+PASS: appearance workspace: no Godot script errors/resource leaks
+PASS: successful render process exit
+PASS: appearance workspace: actual MP4 dimensions
+PASS: appearance workspace: exact frame count and frame rate
+PASS: appearance workspace: playback-rate and range timing
+PASS: appearance workspace: one PNG per output frame
+PASS: appearance workspace: actual PNG dimensions
+PASS: accepted workspace and remaining preference reach rendered UI
+PASS: source capture bytes unchanged
+ALL OVERLAY UI TESTS PASSED
+Artifacts: /tmp/issue55-overlay-forward/acceptance 7ksaek32

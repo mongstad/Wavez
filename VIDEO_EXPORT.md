@@ -137,10 +137,31 @@ the 3D render target remains native resolution. Tests verified **3840×2160** in
 both PNG headers and the encoded MP4 via ffprobe on this workstation.
 
 The same particle shaders, colormap LUTs, camera projection, environment and
-quality settings are reused. Export can include the current inspector/HUD and
-scientific legend, or hide overlays completely; the export-settings window and
-screenshot confirmations are not included. Overlays are not a separate title or
-annotation editor. Matching output aspect ratio preserves framing; changing
+quality settings are reused. **Include viewer overlays** now reuses the current
+production shell (issue #55): command bar, camera controls, right workspace dock,
+transport, status and Jobs. Workspace, scroll and total/remaining preference are
+captured when export starts; section and visual settings use the existing snapshot.
+The dock is included when this explicit checkbox is on, even if it was hidden on
+the desktop. The normal command bar is included regardless of desktop fullscreen
+or immersive state. No desktop exit/hint, tooltip, dialog, export progress window
+or screenshot toast is recorded.
+
+Application chrome and scientific overlays have different ownership. This existing
+checkbox still gates the particle colorbar/legend together with application UI;
+`show_legend` and channel eligibility continue to apply. Turning it off does not
+turn off independently enabled scene guides, probe markers or selection annotations.
+No scientific overlay is enabled merely by constructing the shell. This issue does
+not introduce independent legend controls. Overlay-off pixels are regression-tested
+against the earlier scientific-only path.
+
+Transport labels follow each committed output sample. The worker is not an
+interactive player: its Play button is paused, and status/Jobs describe its ready
+scene rather than the parent application's live jobs or wall-clock export progress.
+Playback-speed controls retain the captured viewer setting; the explicit video
+Playback rate still owns output timing. The shell uses the existing 1440-wide
+logical export canvas, scaled to the selected output size; 3D remains native
+resolution. Export overlays are not a screen recording, title or annotation editor.
+See [current overlay evidence and owner checks](docs/evidence/issue-55/README.md). Matching output aspect ratio preserves framing; changing
 aspect ratio follows Godot's camera keep-aspect setting.
 
 Forward+/Vulkan was tested on the RTX 3070 Ti. A functioning graphics display

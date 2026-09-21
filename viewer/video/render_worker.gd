@@ -101,6 +101,7 @@ func _run() -> void:
 	add_child(viewport)
 	viewer = load("res://main.gd").new()
 	viewer.offline_instance = true
+	viewer.export_shell = true
 	viewer.capture_path = job.capture_path
 	viewport.add_child(viewer)
 	viewer.set_process(false)
@@ -137,6 +138,7 @@ func _run() -> void:
 	viewer.playing = false
 	viewer.orbit_enabled = false
 	viewer.free_camera = false
+	viewer.shell.prepare_export(job.get("presentation",{}))
 	trace = FileAccess.open(directory.path_join("timing.jsonl"), FileAccess.WRITE)
 	if trace == null:
 		finish("failed", "Could not write timing manifest.", 1)
@@ -162,6 +164,7 @@ func _run() -> void:
 		viewer.camera.transform = Timeline.camera_at(job.state, float(n)/job.fps, job.get("camera_mode", "locked") == "orbit", float(job.get("orbit_speed", 0.08)))
 		if job.version == 2 and not await viewer.selection_controller.await_committed_overlay(150000,cancelled):
 			finish("cancelled" if cancelled() else "failed","Frame selection resolution cancelled or unavailable; no stale overlay frame was published.",2 if cancelled() else 1);return
+		viewer.shell.refresh_export()
 		# Yield for layout, process events and cancellation without depending on a
 		# visible OS window. Minimized/hidden windows may suppress the normal loop.
 		await get_tree().process_frame
