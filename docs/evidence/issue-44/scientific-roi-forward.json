@@ -1,0 +1,112 @@
+[
+  {
+    "stage": "interactive",
+    "capture": "viewport",
+    "box": [
+      896,
+      460,
+      1664,
+      964
+    ],
+    "sha256": "58e33ad0adcd6350139df70f615b4255aea7f19634a66b54c1d9d61bbc62927f"
+  },
+  {
+    "stage": "interactive",
+    "capture": "desktop",
+    "box": [
+      896,
+      460,
+      1664,
+      964
+    ],
+    "sha256": "58e33ad0adcd6350139df70f615b4255aea7f19634a66b54c1d9d61bbc62927f"
+  },
+  {
+    "stage": "immersive-hint",
+    "capture": "viewport",
+    "box": [
+      896,
+      460,
+      1664,
+      964
+    ],
+    "sha256": "58e33ad0adcd6350139df70f615b4255aea7f19634a66b54c1d9d61bbc62927f"
+  },
+  {
+    "stage": "immersive-hint",
+    "capture": "desktop",
+    "box": [
+      896,
+      460,
+      1664,
+      964
+    ],
+    "sha256": "58e33ad0adcd6350139df70f615b4255aea7f19634a66b54c1d9d61bbc62927f"
+  },
+  {
+    "stage": "immersive-clean",
+    "capture": "viewport",
+    "box": [
+      896,
+      460,
+      1664,
+      964
+    ],
+    "sha256": "58e33ad0adcd6350139df70f615b4255aea7f19634a66b54c1d9d61bbc62927f"
+  },
+  {
+    "stage": "immersive-clean",
+    "capture": "desktop",
+    "box": [
+      896,
+      460,
+      1664,
+      964
+    ],
+    "sha256": "58e33ad0adcd6350139df70f615b4255aea7f19634a66b54c1d9d61bbc62927f"
+  },
+  {
+    "stage": "restored-interactive",
+    "capture": "viewport",
+    "box": [
+      896,
+      460,
+      1664,
+      964
+    ],
+    "sha256": "58e33ad0adcd6350139df70f615b4255aea7f19634a66b54c1d9d61bbc62927f"
+  },
+  {
+    "stage": "restored-interactive",
+    "capture": "desktop",
+    "box": [
+      896,
+      460,
+      1664,
+      964
+    ],
+    "sha256": "58e33ad0adcd6350139df70f615b4255aea7f19634a66b54c1d9d61bbc62927f"
+  },
+  {
+    "stage": "windowed-to-immersive",
+    "capture": "viewport",
+    "box": [
+      896,
+      460,
+      1664,
+      964
+    ],
+    "sha256": "58e33ad0adcd6350139df70f615b4255aea7f19634a66b54c1d9d61bbc62927f"
+  },
+  {
+    "stage": "windowed-to-immersive",
+    "capture": "desktop",
+    "box": [
+      896,
+      460,
+      1664,
+      964
+    ],
+    "sha256": "58e33ad0adcd6350139df70f615b4255aea7f19634a66b54c1d9d61bbc62927f"
+  }
+]

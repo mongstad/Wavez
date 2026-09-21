@@ -1,5 +1,8 @@
 # UX3 persistent status and Jobs — issue #43
 
+Current integration status: the slice is owner-merged; the [#44 milestone report](UX3_REPORT.md)
+is pending owner review. Original issue review metadata and evidence below remain historical.
+
 Implemented, **pending owner review**. #43 was the only Ready Project item.
 The owner's linked branch
 `43-ux3-status-001-implement-persistent-status-readiness-and-jobs-access`
@@ -15,8 +18,9 @@ Both remain visible with the dock hidden and in interactive fullscreen. The stat
 controls are vertically centered with padding for the unchanged theme focus ring,
 including its outside expansion; normal, hover and focus states fit in the strip.
 The scientific viewport, projection, rendering, sampling and clocks are unchanged.
-Offline workers do not construct the shell; exports retain their existing chrome
-and overlay contracts.
+Offline viewers construct the same production shell after #55/#59. Their automatic
+presentation processing is disabled; the video worker refreshes it explicitly
+after committed samples under the [export overlay contract](../VIDEO_EXPORT.md).
 
 Status reads existing open/loading, particle/field/mesh readiness and committed
 layer availability. No capture, Preparing…, Ready and Unavailable are distinct.

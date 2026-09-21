@@ -1,5 +1,8 @@
 # UX3 persistent transport — issue #42
 
+Current integration status: the slice is owner-merged; the [#44 milestone report](UX3_REPORT.md)
+is pending owner review. Original issue review metadata and evidence below remain historical.
+
 Implemented, **pending owner review**. Issue #42 was the sole Ready item on Project 1.
 Work uses the owner's existing linked branch
 `42-ux3-transport-001-migrate-playback-and-seek-into-the-persistent-transport`,

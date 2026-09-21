@@ -1,0 +1,46 @@
+{
+  "checks": 160,
+  "failures": [],
+  "layouts": [
+    {
+      "bar": "(1440.0, 48.0)",
+      "dock": "[P: (1080.0, 48.0), S: (360.0, 748.0)]",
+      "logical": "(1440, 900)",
+      "scale": 1.0
+    },
+    {
+      "bar": "(1024.0, 48.0)",
+      "dock": "[P: (704.0, 48.0), S: (320.0, 448.0)]",
+      "logical": "(1024, 640)",
+      "scale": 1.0
+    },
+    {
+      "bar": "(1024.0, 48.0)",
+      "dock": "[P: (704.0, 48.0), S: (320.0, 448.0)]",
+      "logical": "(1024, 640)",
+      "scale": 1.25
+    },
+    {
+      "bar": "(1024.0, 48.0)",
+      "dock": "[P: (704.0, 48.0), S: (320.0, 448.0)]",
+      "logical": "(1024, 640)",
+      "scale": 1.5
+    },
+    {
+      "bar": "(1024.0, 48.0)",
+      "dock": "[P: (704.0, 48.0), S: (320.0, 448.0)]",
+      "logical": "(1024, 640)",
+      "scale": 2.0
+    }
+  ],
+  "renderer": "forward_plus",
+  "shell_scientific_activity": {
+    "counters": {},
+    "stages": {}
+  },
+  "source_hashes_unchanged": {
+    "invalid.ssc": "98fafded66db249c745f3e98bd145f7849e10dc31e718ddea82649e2ca8cc26f",
+    "replacement.ssc": "0d4b719b40c2c626e350b7f98ba00d3586164374e16c01cc47a069b0edc43796",
+    "scene.ssc": "8a0bf0fd13ec69f36525887c5d8bed90f4b177f5f855bba70f1858b628ec9a6c"
+  }
+}

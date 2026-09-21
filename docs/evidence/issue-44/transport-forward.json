@@ -1,0 +1,25 @@
+{
+  "checks": 207,
+  "failures": [],
+  "layouts": [
+    {
+      "transport": "[P: (0.0, 796.0), S: (1440.0, 64.0)]",
+      "window": "(1440, 900)"
+    },
+    {
+      "transport": "[P: (0.0, 496.0), S: (1024.0, 104.0)]",
+      "window": "(1024, 640)"
+    }
+  ],
+  "refresh_activity": {
+    "counters": {},
+    "stages": {}
+  },
+  "request_delay_observed_ms": 459,
+  "source_hashes_unchanged": {
+    "/tmp/issue44/transport-forward/scene.ssc": "3c7e53c014038f20058b6ef7eb409db85dd6bcb45aee348e99eb1cd7d7876f3f",
+    "/tmp/issue44/transport-forward/offset.ssc": "8a8633d70a2de8eecf26c2b7f53b53b20d596a6c3a4cbb151d681eb8563d9977",
+    "/tmp/issue44/transport-forward/single.ssc": "99b2122ffa7fe9086be185aa6dc502e5b129182c8b7b9a98bb6a9ac22d55618d",
+    "/home/Nozba/Documents/VB_FreeCollapse_v0_2/VB_FreeCollapse_v0_2/runs_free_collapse_v0_2/S2_20260919_204505_268717/free_collapse_simscope.ssc": "0805d497ad0f69440f3aa7ac30d6cfe9642a4efd142ae406d3a685b595d7d3f5"
+  }
+}

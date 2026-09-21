@@ -1,7 +1,8 @@
 # UX3 shell — issue #41
 
 Shell accepted in owner-merged PR #45 (`884ea73`). Original baseline: `1043966`, PR #39.
-The [issue-42 transport extension](UX3_TRANSPORT.md) is pending owner review.
+The [issue-42 transport extension](UX3_TRANSPORT.md) and later UX3 slices are
+owner-merged; [final integration validation](UX3_REPORT.md) is pending review.
 Issue #41 was the sole Ready item on Project 1 before implementation. This is
 only UX3-SHELL-001, not UX3 milestone acceptance. Historical design reports and
 review evidence remain unchanged.
@@ -68,8 +69,8 @@ background-job engine, decoder, cache policy or worker is introduced. The existi
 geometry is constrained by available space. Crossing the compact breakpoint
 chooses its 320/360 default. The video worker now reuses this shell under the explicit
 [export overlay contract](../VIDEO_EXPORT.md), independently of desktop visibility. The original shell issue did not implement #42–44; #42 now extends it as linked above.
-This shell contract does not implement #44,
-UX4, Settings, new legends or other backlog polish.
+The [#44 report](UX3_REPORT.md) validates the combined shell. UX4, Settings,
+new legends and other backlog polish remain separate.
 
 ## Validation
 

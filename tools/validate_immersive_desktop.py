@@ -1,6 +1,6 @@
 """KDE/Wayland real-capture review. Uses a temporary PID-scoped KWin script.
 
-Requires system Python with PyGObject, qdbus (Qt6), Spectacle and a physical KDE
+Requires system Python with PyGObject/Pillow, qdbus (Qt6), Spectacle and a physical KDE
 session. Changes fullscreen only on the test process, then unloads its script.
 """
 import argparse
@@ -11,6 +11,7 @@ import shutil
 import subprocess
 import time
 from gi.repository import Gio, GLib
+from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -90,9 +91,28 @@ def main():
             assert process.returncode == 0, 'Godot review failed; inspect godot.log'
             assert len(reports) == 8, 'Incomplete native review'
             assert 'ERROR:' not in (out/'godot.log').read_text(), 'Godot error'
+            # Inspect actual rendered science as well as state and KWin geometry.
+            # This common central region excludes shell chrome and the hint.
+            references = {}
+            pixels = []
+            for label in ['interactive', 'immersive-hint', 'immersive-clean',
+                          'restored-interactive', 'windowed-to-immersive']:
+                for kind in ['viewport', 'desktop']:
+                    with Image.open(out / (label+'-'+kind+'.png')) as image:
+                        width, height = image.size
+                        box = (int(width*.35), int(height*.32), int(width*.65), int(height*.67))
+                        region = image.convert('RGB').crop(box)
+                        data = region.tobytes()
+                        assert max(channel[1] for channel in region.getextrema()) > 100, 'Scientific region is unexpectedly blank'
+                    # Compare like capture paths: the compositor may quantize
+                    # RGB differently from Godot's viewport readback.
+                    if kind not in references: references[kind] = data
+                    assert data == references[kind], (label, kind, 'Scientific region changed during fullscreen presentation')
+                    pixels.append(dict(stage=label, capture=kind, box=box, sha256=hashlib.sha256(data).hexdigest()))
+            (out/'scientific-roi.json').write_text(json.dumps(pixels, indent=2)+'\n')
             assert digest() == source_hash, 'Real source changed'
             (out/'source.json').write_text(json.dumps({'capture':str(args.capture),'sha256':source_hash,'unchanged':True},indent=2)+'\n')
-            print(f'Native immersive desktop: {reports[-1]["checks"]} checks, 8 KWin geometry checks PASS ({args.renderer})')
+            print(f'Native immersive desktop: {reports[-1]["checks"]} checks, 8 KWin geometry checks, 5 matching scientific regions per capture method PASS ({args.renderer})')
         finally:
             if process.poll() is None: process.terminate(); process.wait(timeout=10)
             conn.unregister_object(registration)

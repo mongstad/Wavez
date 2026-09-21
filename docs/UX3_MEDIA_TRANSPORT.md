@@ -1,7 +1,7 @@
 # Media-style playback timing — issue #49
 
-Current behavior includes the [#53 transient-label delay](UX3_TRANSIENT_STATUS.md),
-pending owner review on owner-merged PR #51.
+Current behavior includes the owner-merged [#53 transient-label delay](UX3_TRANSIENT_STATUS.md)
+(PR #57). [Final UX3 integration validation](UX3_REPORT.md) is pending review.
 
 Original #49 review checkpoint (historical):
 

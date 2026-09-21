@@ -8,10 +8,11 @@ G0–G4 are implemented and accepted. The current viewer includes deterministic
 video export, scientific inspection/analysis, bounded playback preparation, and
 particle/mesh/volume rendering. UX1 and UX2 are accepted. The accepted UX3
 [production shell](docs/UX3_SHELL.md) now hosts the [persistent transport](docs/UX3_TRANSPORT.md)
-and [persistent status and Jobs](docs/UX3_STATUS.md). The accepted
-[media-style playback timing](docs/UX3_MEDIA_TRANSPORT.md) now includes issue #53
-[delayed transient seek status](docs/UX3_TRANSIENT_STATUS.md), pending owner review.
-Full workspace migration remains separate.
+and [persistent status and Jobs](docs/UX3_STATUS.md). Recorded-time playback,
+[media timing](docs/UX3_MEDIA_TRANSPORT.md), [delayed seek feedback](docs/UX3_TRANSIENT_STATUS.md),
+[immersive fullscreen](docs/UX3_FULLSCREEN.md) and production-shell video overlays
+are owner-merged. Final [UX3 integration validation](docs/UX3_REPORT.md) is pending
+owner review under #44. Full workspace migration remains separately gated in UX4.
 
 Start with:
 

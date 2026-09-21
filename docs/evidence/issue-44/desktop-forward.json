@@ -1,0 +1,306 @@
+[
+  {
+    "backend": "Wayland",
+    "checks": 3,
+    "colorbar_visible": false,
+    "dock_visible": true,
+    "failures": [],
+    "hint": false,
+    "immersive": false,
+    "legend_visible": false,
+    "mode": 0,
+    "pid": 294337,
+    "shell_visible": true,
+    "stage": "windowed",
+    "window_size": "(1440, 900)",
+    "kwin": {
+      "pid": 294337,
+      "active": true,
+      "fullscreen": false,
+      "frame": {
+        "x": 556,
+        "y": 231,
+        "width": 1448,
+        "height": 932
+      },
+      "client": {
+        "x": 560,
+        "y": 259,
+        "width": 1440,
+        "height": 900
+      },
+      "screen": {
+        "x": 0,
+        "y": 0,
+        "width": 2560,
+        "height": 1440
+      }
+    }
+  },
+  {
+    "backend": "Wayland",
+    "checks": 4,
+    "colorbar_visible": false,
+    "dock_visible": true,
+    "failures": [],
+    "hint": false,
+    "immersive": false,
+    "legend_visible": false,
+    "mode": 3,
+    "pid": 294337,
+    "shell_visible": true,
+    "stage": "interactive",
+    "window_size": "(2560, 1440)",
+    "kwin": {
+      "pid": 294337,
+      "active": true,
+      "fullscreen": true,
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "width": 2560,
+        "height": 1440
+      },
+      "client": {
+        "x": 0,
+        "y": 0,
+        "width": 2560,
+        "height": 1440
+      },
+      "screen": {
+        "x": 0,
+        "y": 0,
+        "width": 2560,
+        "height": 1440
+      }
+    }
+  },
+  {
+    "backend": "Wayland",
+    "checks": 5,
+    "colorbar_visible": false,
+    "dock_visible": false,
+    "failures": [],
+    "hint": true,
+    "immersive": true,
+    "legend_visible": false,
+    "mode": 3,
+    "pid": 294337,
+    "shell_visible": false,
+    "stage": "immersive-hint",
+    "window_size": "(2560, 1440)",
+    "kwin": {
+      "pid": 294337,
+      "active": true,
+      "fullscreen": true,
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "width": 2560,
+        "height": 1440
+      },
+      "client": {
+        "x": 0,
+        "y": 0,
+        "width": 2560,
+        "height": 1440
+      },
+      "screen": {
+        "x": 0,
+        "y": 0,
+        "width": 2560,
+        "height": 1440
+      }
+    }
+  },
+  {
+    "backend": "Wayland",
+    "checks": 6,
+    "colorbar_visible": false,
+    "dock_visible": false,
+    "failures": [],
+    "hint": false,
+    "immersive": true,
+    "legend_visible": false,
+    "mode": 3,
+    "pid": 294337,
+    "shell_visible": false,
+    "stage": "immersive-clean",
+    "window_size": "(2560, 1440)",
+    "kwin": {
+      "pid": 294337,
+      "active": true,
+      "fullscreen": true,
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "width": 2560,
+        "height": 1440
+      },
+      "client": {
+        "x": 0,
+        "y": 0,
+        "width": 2560,
+        "height": 1440
+      },
+      "screen": {
+        "x": 0,
+        "y": 0,
+        "width": 2560,
+        "height": 1440
+      }
+    }
+  },
+  {
+    "backend": "Wayland",
+    "checks": 7,
+    "colorbar_visible": false,
+    "dock_visible": true,
+    "failures": [],
+    "hint": false,
+    "immersive": false,
+    "legend_visible": false,
+    "mode": 3,
+    "pid": 294337,
+    "shell_visible": true,
+    "stage": "restored-interactive",
+    "window_size": "(2560, 1440)",
+    "kwin": {
+      "pid": 294337,
+      "active": true,
+      "fullscreen": true,
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "width": 2560,
+        "height": 1440
+      },
+      "client": {
+        "x": 0,
+        "y": 0,
+        "width": 2560,
+        "height": 1440
+      },
+      "screen": {
+        "x": 0,
+        "y": 0,
+        "width": 2560,
+        "height": 1440
+      }
+    }
+  },
+  {
+    "backend": "Wayland",
+    "checks": 8,
+    "colorbar_visible": false,
+    "dock_visible": true,
+    "failures": [],
+    "hint": false,
+    "immersive": false,
+    "legend_visible": false,
+    "mode": 0,
+    "pid": 294337,
+    "shell_visible": true,
+    "stage": "restored-windowed",
+    "window_size": "(1440, 900)",
+    "kwin": {
+      "pid": 294337,
+      "active": true,
+      "fullscreen": false,
+      "frame": {
+        "x": 556,
+        "y": 231,
+        "width": 1448,
+        "height": 932
+      },
+      "client": {
+        "x": 560,
+        "y": 259,
+        "width": 1440,
+        "height": 900
+      },
+      "screen": {
+        "x": 0,
+        "y": 0,
+        "width": 2560,
+        "height": 1440
+      }
+    }
+  },
+  {
+    "backend": "Wayland",
+    "checks": 9,
+    "colorbar_visible": false,
+    "dock_visible": false,
+    "failures": [],
+    "hint": false,
+    "immersive": true,
+    "legend_visible": false,
+    "mode": 3,
+    "pid": 294337,
+    "shell_visible": false,
+    "stage": "windowed-to-immersive",
+    "window_size": "(2560, 1440)",
+    "kwin": {
+      "pid": 294337,
+      "active": true,
+      "fullscreen": true,
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "width": 2560,
+        "height": 1440
+      },
+      "client": {
+        "x": 0,
+        "y": 0,
+        "width": 2560,
+        "height": 1440
+      },
+      "screen": {
+        "x": 0,
+        "y": 0,
+        "width": 2560,
+        "height": 1440
+      }
+    }
+  },
+  {
+    "backend": "Wayland",
+    "checks": 11,
+    "colorbar_visible": false,
+    "dock_visible": true,
+    "failures": [],
+    "hint": false,
+    "immersive": false,
+    "legend_visible": false,
+    "mode": 0,
+    "pid": 294337,
+    "shell_visible": true,
+    "stage": "wm-recovered",
+    "window_size": "(1440, 900)",
+    "kwin": {
+      "pid": 294337,
+      "active": true,
+      "fullscreen": false,
+      "frame": {
+        "x": 556,
+        "y": 231,
+        "width": 1448,
+        "height": 932
+      },
+      "client": {
+        "x": 560,
+        "y": 259,
+        "width": 1440,
+        "height": 900
+      },
+      "screen": {
+        "x": 0,
+        "y": 0,
+        "width": 2560,
+        "height": 1440
+      }
+    }
+  }
+]

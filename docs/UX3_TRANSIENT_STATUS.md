@@ -1,5 +1,8 @@
 # Transient seek status delay — issue #53
 
+Current integration status: the slice is owner-merged; the [#44 milestone report](UX3_REPORT.md)
+is pending owner review. Original issue review metadata and evidence below remain historical.
+
 Implemented, **pending owner review**. #53 was the sole Ready item. Its exact
 owner-linked branch `53-ux3-transport-003-delay-transient-seek-status` started clean
 at accepted main `195bd9053182800924484f488c66d62074a4bd91` (PR #51). Local main and
