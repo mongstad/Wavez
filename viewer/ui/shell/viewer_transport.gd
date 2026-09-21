@@ -15,6 +15,10 @@ var displayed: Label
 var requested: Label
 var duration: Button
 var show_remaining := false
+const REQUESTED_DELAY_MS := 450
+var pending_since_ms := -1
+var pending_target = null
+var pending_generation := -1
 const NORMAL_RECORDED_RATE := 1.0
 var seek_button: Button
 var rate
@@ -126,13 +130,16 @@ func submit_seek() -> void:
 		seek_error.text = "Capture changed. Close and reopen Seek time."; seek_error.show(); return
 	if not target.commit(): return
 	# Enter commits a local number-field draft only. Go is the sole submit action.
+	reset_requested()
 	if not viewer._seek_time(target.model):
 		seek_error.text = "Seek could not be submitted. Check the recorded interval and inspection state."; seek_error.show(); return
 	seek_dialog.hide(); refresh()
 
 func pending_time():
 	if viewer.scene_layers == null: return null
-	for controller in [viewer.scene_layers.playback,viewer.scene_layers.field_playback,viewer.scene_layers.mesh_playback]:
+	var layers = viewer.scene_layers
+	if (layers.playback != null and not layers.playback.readiness_error.is_empty()) or (layers.field_playback != null and not layers.field_playback.error.is_empty()) or (layers.mesh_playback != null and not layers.mesh_playback.error.is_empty()): return null
+	for controller in [layers.playback,layers.field_playback,layers.mesh_playback]:
 		if controller != null and controller.buffering and controller.pending_time != null: return controller.pending_time
 	return null
 
@@ -159,15 +166,29 @@ func refresh() -> void:
 	if not loaded: duration.text = "—"
 	duration.tooltip_text = ("Remaining duration; click for total" if show_remaining else "Total duration; click for remaining") + ". Nominal playback seconds at 1×; buffering and speed do not change the interval."
 	var pending = pending_time()
-	requested.text = "Requested time %.5f" % float(pending) if pending != null and (clock == null or pending != clock) else ""
-	requested.visible = not requested.text.is_empty()
-	requested.tooltip_text = "Requested time " + FloatText.format_value(float(pending)) + " " + units() if not requested.text.is_empty() else ""
+	refresh_requested(pending,clock,Time.get_ticks_msec())
 	var value: float = viewer.physical_rate
 	if rate.model != value/NORMAL_RECORDED_RATE: rate.set_model(value/NORMAL_RECORDED_RATE)
 	rate.tooltip_text = "Playback speed relative to 1×: 1 recorded unit per playback second. Negative values reverse; zero holds.\nExact controller rate: " + FloatText.format_value(value)
 	rate.editor.tooltip_text = rate.tooltip_text
 	loop.set_pressed_no_signal(viewer.scene_loop_playback)
 	if seek_dialog.visible and source_generation != viewer.capture_generation: seek_dialog.hide()
+
+func reset_requested() -> void:
+	pending_since_ms = -1; pending_target = null; pending_generation = -1
+	requested.text = ""; requested.tooltip_text = ""; requested.hide()
+
+func refresh_requested(pending, clock, now_ms: int) -> void:
+	# Observe published state only; this timer never schedules or delays a seek.
+	if pending == null or pending == clock:
+		reset_requested(); return
+	if pending_since_ms < 0 or pending_target != pending or pending_generation != viewer.capture_generation:
+		reset_requested()
+		pending_since_ms = now_ms; pending_target = pending; pending_generation = viewer.capture_generation
+	if now_ms-pending_since_ms < REQUESTED_DELAY_MS: return
+	requested.text = "Requested time %.5f" % float(pending)
+	requested.tooltip_text = "Requested time " + FloatText.format_value(float(pending)) + " " + units()
+	requested.show()
 
 func update_index_hint() -> void:
 	var index := int(viewer.timeline.value) if dragging_index else int(viewer.current_index)

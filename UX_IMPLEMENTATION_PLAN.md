@@ -342,7 +342,7 @@ A milestone may receive one of three outcomes:
 | UX1 | Audit & Design System Specification | ACCEPTED by owner 2026-09-13 at `229d4ea`; [report](docs/UX1_REPORT.md) |
 | UX2 | Theme Foundation & Component Library | ACCEPTED by owner 2026-09-13 at `5fae711`; [report](docs/UX2_REPORT.md) |
 | Pre-UX3/UX4 | Information architecture & visual direction | Owner merged #14/#40 design package in PR #39 on 2026-09-20; historical review evidence retained |
-| UX3 | Main Viewer Shell | #41–43 owner-merged; #49 media transport PENDING OWNER REVIEW; integration separately gated |
+| UX3 | Main Viewer Shell | #41–43 and #49 owner-merged; #53 transient seek status PENDING OWNER REVIEW; integration separately gated |
 | UX4 | Workspace & Control Migration | BLOCKED BY UX3 |
 | UX5 | Application Settings | BLOCKED BY UX4 |
 | UX6 | Detachable Windows & Multi-Monitor | BLOCKED BY UX5 |
@@ -1420,12 +1420,12 @@ UX1 and UX2 are accepted. The legacy capture retirement gate is historical
 completed groundwork and must not be rerun merely because this roadmap still
 records it.
 
-The owner merged shell PR #45, transport PR #47 and status PR #48. Issue #49
-was the sole Ready item at this work’s start, using the existing linked branch at
-accepted main `1976adc`. Its [media transport refinement](docs/UX3_MEDIA_TRANSPORT.md)
-is pending owner review.
+The owner merged media transport PR #51 at `195bd90`. Issue #53 was the sole
+Ready item at this work’s start, on its existing owner-linked branch at the same
+accepted main. Its [transient seek status delay](docs/UX3_TRANSIENT_STATUS.md)
+is pending owner review. Earlier review evidence remains historical.
 
-1. Review #49 elapsed/total/remaining presentation and relative Playback speed.
+1. Review #53 short-wait suppression and delayed, current-target feedback.
 2. The owner controls acceptance and merge; no UX3 milestone acceptance is claimed.
 3. Do not start #44, #46, #50 or another issue without separate Ready authorization.
 4. Do not begin UX4 until UX3 is owner-accepted and UX4 is separately authorized.

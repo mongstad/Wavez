@@ -1,5 +1,10 @@
 # Media-style playback timing — issue #49
 
+Current behavior includes the [#53 transient-label delay](UX3_TRANSIENT_STATUS.md),
+pending owner review on owner-merged PR #51.
+
+Original #49 review checkpoint (historical):
+
 Implemented, **pending owner review**. #49 was the sole Ready item. The exact
 owner-created linked branch `49-ux3-transport-002-media-style-playback-timing`
 started clean at accepted `main` `1976adc` (owner-merged PR #48). The previous
@@ -26,7 +31,8 @@ Source growth can change the interval/duration. Elapsed follows
 only committed visible source time, never a pending seek or an unsubmitted draft.
 Exact displayed source time and its declared unit remain in the elapsed tooltip;
 Seek Target, layer/source diagnostics, persisted state and calculations stay exact.
-The differing Requested target still appears with five decimal places and an
+The differing Requested target appears after a 450 ms presentation delay with
+five decimal places and an
 exact tooltip. During a pending request it occupies the secondary explanation
 area outside container sizing, so appearing/clearing text cannot shift the controls.
 The compact row gap reserves room for it without changing panel height. The sample index is available on slider hover and in a floating hint while dragging, without a persistent index caption.

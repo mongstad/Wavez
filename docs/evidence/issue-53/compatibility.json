@@ -1,0 +1,24 @@
+{
+  "checks": 204,
+  "failures": [],
+  "layouts": [
+    {
+      "transport": "[P: (0.0, 796.0), S: (1440.0, 64.0)]",
+      "window": "(1440, 900)"
+    },
+    {
+      "transport": "[P: (0.0, 496.0), S: (1024.0, 104.0)]",
+      "window": "(1024, 640)"
+    }
+  ],
+  "refresh_activity": {
+    "counters": {},
+    "stages": {}
+  },
+  "request_delay_observed_ms": 458,
+  "source_hashes_unchanged": {
+    "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/issue-53-reviewed-compatibility/scene.ssc": "7d41b46adb0f87e0e5d3acdc8427ed40b3d9144a1b32d9b0ccb1b0ea94a826f2",
+    "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/issue-53-reviewed-compatibility/offset.ssc": "40abdb20b480f6729fb3411bb346bd5ace0c7a51ecad2d44f27cf0b0b3a6791d",
+    "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/results/issue-53-reviewed-compatibility/single.ssc": "487e2b8d5cf9f2348b3a71adb031ab79d664bac7d19ba91c1063ceb415203a03"
+  }
+}

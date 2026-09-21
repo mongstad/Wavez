@@ -32,7 +32,8 @@ are no longer constructed. The offline renderer has no transport.
 The slider selects sorted union timestamp indices. Equal slider distances do not
 mean equal elapsed time. Playback duration is now a one-decimal presentation at
 nominal 1×, derived only from the committed visible clock. Exact displayed source
-time remains in the elapsed tooltip; differing **Requested time** reads the
+time remains in the elapsed tooltip; after the [450 ms transient delay](UX3_TRANSIENT_STATUS.md),
+differing **Requested time** reads the
 submitted target from the active particle/field/mesh preparation controller and
 uses five decimal places with an exact tooltip. Internal clocks, persisted state
 and Seek Target retain full precision. A draft never writes those readouts.
