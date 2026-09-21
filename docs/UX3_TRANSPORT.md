@@ -13,7 +13,8 @@ Issue #49 refines the current presentation as described in
 and validation below remain historical.
 
 The bottom transport is always reachable without dock scrolling, including with
-Hide panel/F1 and fullscreen. Normal desktop height is 64 logical pixels; below
+Hide panel/F1 and interactive fullscreen. [Immersive fullscreen](UX3_FULLSCREEN.md)
+hides the entire transport until exit. Normal desktop height is 64 logical pixels; below
 1200 logical pixels it reflows to two rows at 104 pixels. Text is not scaled down.
 The dock and splitter stop above it, and the existing particle legend moves above
 it. The scientific viewport remains full-frame: no camera/projection change.

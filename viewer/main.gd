@@ -355,6 +355,7 @@ func _show_open_dialog() -> void:
 	open_dialog.popup_centered_ratio(0.78)
 
 func _toggle_overlay() -> void:
+	if shell != null and shell.immersive: return
 	if shell != null:
 		shell.toggle_dock()
 		_update_particle_legend()
@@ -367,6 +368,8 @@ func _toggle_overlay() -> void:
 		_update_particle_legend()
 
 func _toggle_fullscreen() -> void:
+	if shell != null and shell.immersive:
+		shell.exit_immersive(); return
 	if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 	else:
@@ -522,6 +525,11 @@ func _update_hud_profiled() -> void:
 		hud.text = "SimScope • %s\nFrame %d / %d  ·  t = %.5f\n%s\n%s" % [generic_reader.metadata.get("simulation_name", capture_path.get_file()), current_index + 1, frame_count, committed_sample.get("requested_time",frame_a.sim_time), population, _sample_label()]
 
 func _input(event: InputEvent) -> void:
+	# Recovery precedes GUI, busy-inspection and selection input handling.
+	if shell != null and shell.immersive and event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_ESCAPE:
+		shell.exit_immersive()
+		get_viewport().set_input_as_handled()
+		return
 	# A release over chrome must still end a drag that started in the viewport.
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
 		dragging = false
@@ -564,7 +572,11 @@ func _unhandled_input(event: InputEvent) -> void:
 			KEY_V: _set_point_rendering(not clean_view)
 			KEY_P: _save_image()
 			KEY_F1: _toggle_overlay()
-			KEY_F11: _toggle_fullscreen()
+			KEY_F11:
+				if event.shift_pressed and shell != null:
+					if shell.immersive: shell.exit_immersive()
+					else: shell.enter_immersive()
+				else: _toggle_fullscreen()
 			KEY_R: _reset_camera()
 
 func _reset_camera() -> void:
@@ -759,7 +771,7 @@ func _notify_screenshot(message: String) -> void:
 		screenshot_notice.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		overlay_panel.get_parent().add_child(screenshot_notice)
 	screenshot_notice.text = message
-	screenshot_notice.show()
+	screenshot_notice.visible = shell == null or not shell.immersive
 	screenshot_notice_serial += 1
 	var serial := screenshot_notice_serial
 	await get_tree().create_timer(5).timeout

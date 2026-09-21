@@ -1,0 +1,65 @@
+[
+  {
+    "suite": "shell",
+    "renderer": "forward_plus",
+    "checks": 148,
+    "failures": [],
+    "result": "PASS",
+    "output": "/tmp/issue46-shell-forward-final"
+  },
+  {
+    "suite": "shell",
+    "renderer": "gl_compatibility",
+    "checks": 148,
+    "failures": [],
+    "result": "PASS",
+    "output": "/tmp/issue46-shell-compat-warm"
+  },
+  {
+    "suite": "recipe",
+    "renderer": "headless",
+    "checks": 2998,
+    "failures": [],
+    "result": "PASS",
+    "output": "/tmp/issue46-recipe"
+  },
+  {
+    "suite": "real-capture native desktop",
+    "renderer": "forward",
+    "checks": 11,
+    "kwin_checks": 8,
+    "result": "PASS",
+    "source_hash_unchanged": true
+  },
+  {
+    "suite": "real-capture native desktop",
+    "renderer": "compat",
+    "checks": 11,
+    "kwin_checks": 8,
+    "result": "PASS",
+    "source_hash_unchanged": true
+  },
+  {
+    "suite": "transport",
+    "renderer": "forward_plus",
+    "checks": 204,
+    "failures": [],
+    "result": "PASS",
+    "output": "/tmp/issue46-transport"
+  },
+  {
+    "suite": "status",
+    "renderer": "forward_plus",
+    "checks": 67,
+    "failures": [],
+    "result": "PASS",
+    "output": "/tmp/issue46-status"
+  },
+  {
+    "suite": "video continuation including PNG/UI",
+    "renderer": "forward_plus",
+    "checks": 86,
+    "result": "PASS",
+    "output": "/tmp/issue46-video/acceptance ksk6nk9y"
+  }
+]

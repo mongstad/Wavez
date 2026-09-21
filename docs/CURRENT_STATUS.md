@@ -287,3 +287,10 @@ The right dock retains its workspace entry points and scientific forms. Native
 fullscreen hides the command bar and retains camera controls, transport and mouse
 recovery. [Status/Jobs](UX3_STATUS.md) adds persistent access to existing worker
 operations. Full workspace migration and UX3 milestone acceptance are not claimed. Historical reports/evidence retain their original review wording.
+
+
+Issue #46 adds a separate [immersive fullscreen](UX3_FULLSCREEN.md) action on its
+issue branch, pending owner review. Interactive fullscreen retains the controls
+above; immersive hides all application chrome while preserving scientific
+overlays and restores the preceding shell/native mode with Esc. This is session-only
+presentation state, with no recipe or rendering-model change.

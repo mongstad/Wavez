@@ -35,6 +35,13 @@ var requested_dock := true
 var auto_collapsed := false
 var changing_layout := false
 var narrow_open := false
+# Session-only presentation state; never change serialized scientific visibility.
+var immersive := false
+var immersive_hint: Label
+var immersive_started := 0
+var immersive_native_seen := false
+var immersive_mode := DisplayServer.WINDOW_MODE_WINDOWED
+var immersive_focus: WeakRef
 
 func setup(owner_viewer) -> void:
 	viewer = owner_viewer
@@ -62,16 +69,17 @@ func setup(owner_viewer) -> void:
 			1: viewer.video_dialog.open()
 			2: show_section("Analysis export and state")
 	)
-	menu(row, "View", "view", ["Show or hide panels", "Fullscreen", "Frame scene", "Reset camera"], func(id):
+	menu(row, "View", "view", ["Show or hide panels", "Fullscreen", "Frame scene", "Reset camera", "Immersive fullscreen (Shift+F11)"], func(id):
 		match id:
 			0: viewer._toggle_overlay()
 			1: viewer._toggle_fullscreen()
 			2: viewer._focus_activity()
 			3: viewer._reset_camera()
+			4: enter_immersive()
 	)
 	menu(row, "Help", "help", ["Navigation help…", "Source details…"], func(id):
 		if id == 1: show_source()
-		else: show_details("Navigation help", "Drag to orbit. Scroll to zoom.\nF: Frame scene   R: Reset camera\nO: Auto orbit   F1: Show or hide panels   F11: Fullscreen\nSpace: Play or pause   Left / Right: Step sample\n\nTab and Shift+Tab move focus. Enter or Space activates buttons.\nScientific controls remain in the existing inspector during shell migration.\n\nMidnight Scientific"))
+		else: show_details("Navigation help", "Drag to orbit. Scroll to zoom.\nF: Frame scene   R: Reset camera\nO: Auto orbit   F1: Show or hide panels   F11: Fullscreen\nShift+F11: Immersive fullscreen   Esc: Restore preceding shell\nSpace: Play or pause   Left / Right: Step sample\n\nTab and Shift+Tab move focus. Enter or Space activates buttons.\nScientific controls remain in the existing inspector during shell migration.\n\nMidnight Scientific"))
 	dock = viewer.overlay_panel
 	dock.remove_theme_stylebox_override("panel")
 	dock.theme = theme
@@ -132,6 +140,13 @@ func setup(owner_viewer) -> void:
 	add_child(transport); transport.setup(self)
 	status_ui = preload("res://ui/shell/viewer_status.gd").new()
 	add_child(status_ui); status_ui.setup(self)
+	immersive_hint = Label.new()
+	immersive_hint.text = "Press Esc to exit fullscreen"
+	immersive_hint.theme = theme
+	immersive_hint.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	immersive_hint.focus_mode = Control.FOCUS_NONE
+	get_parent().add_child(immersive_hint)
+	immersive_hint.hide()
 	select_workspace(0)
 	refresh()
 	layout()
@@ -212,6 +227,7 @@ func restore_focus() -> void:
 	source_button.grab_focus()
 
 func refresh() -> void:
+	if immersive: return
 	if source_button == null: return
 	var loaded: bool = viewer.generic_reader != null
 	for menu_name in ["State", "Export"]:
@@ -252,6 +268,7 @@ func finish_open(problem: String) -> void:
 	refresh()
 
 func toggle_dock() -> void:
+	if immersive: return
 	var focused := get_viewport().gui_get_focus_owner()
 	if viewer.overlay_visible:
 		if focused != null and dock.is_ancestor_of(focused): previous_focus = weakref(focused)
@@ -270,6 +287,10 @@ func resize_input(event: InputEvent) -> void:
 		layout()
 
 func layout() -> void:
+	if immersive:
+		dock.hide(); viewer.resize_handle.hide(); viewer.show_panel_button.hide()
+		immersive_hint.position = Vector2((get_viewport().get_visible_rect().size.x - immersive_hint.size.x) / 2, 24)
+		return
 	if changing_layout or dock == null: return
 	changing_layout = true
 	var extent := get_viewport().get_visible_rect().size
@@ -307,3 +328,46 @@ func layout() -> void:
 		viewer.legend.position = viewer.colorbar.position+Vector2(0,24)
 	refresh()
 	changing_layout = false
+
+func enter_immersive() -> void:
+	if immersive: return
+	immersive_mode = DisplayServer.window_get_mode()
+	var focused := get_viewport().gui_get_focus_owner()
+	immersive_focus = weakref(focused) if focused != null else null
+	if focused != null: focused.release_focus()
+	for control in menus.values(): control.get_popup().hide()
+	immersive = true
+	immersive_started = Time.get_ticks_msec()
+	immersive_native_seen = immersive_mode == DisplayServer.WINDOW_MODE_FULLSCREEN
+	hide()
+	dock.hide()
+	viewer.resize_handle.hide()
+	viewer.show_panel_button.hide()
+	if viewer.screenshot_notice != null: viewer.screenshot_notice.hide()
+	immersive_hint.show()
+	layout()
+	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+
+func exit_immersive(restore_native := true) -> void:
+	if not immersive: return
+	immersive = false
+	immersive_hint.hide()
+	if restore_native: DisplayServer.window_set_mode(immersive_mode)
+	show()
+	refresh()
+	layout()
+	# Configure events subsequently lay out the restored native window size.
+	if immersive_focus != null:
+		var focused = immersive_focus.get_ref()
+		if is_instance_valid(focused) and focused.is_visible_in_tree(): focused.grab_focus()
+	immersive_focus = null
+
+func _process(_delta: float) -> void:
+	if not immersive: return
+	var elapsed := Time.get_ticks_msec() - immersive_started
+	if elapsed >= 3000: immersive_hint.hide()
+	if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
+		immersive_native_seen = true
+	elif immersive_native_seen or elapsed >= 1500:
+		# Compositor rejection/external exit: recover chrome without fighting the WM.
+		exit_immersive(false)

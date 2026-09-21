@@ -1,0 +1,103 @@
+"""KDE/Wayland real-capture review. Uses a temporary PID-scoped KWin script.
+
+Requires system Python with PyGObject, qdbus (Qt6), Spectacle and a physical KDE
+session. Changes fullscreen only on the test process, then unloads its script.
+"""
+import argparse
+import hashlib
+import json
+from pathlib import Path
+import shutil
+import subprocess
+import time
+from gi.repository import Gio, GLib
+
+ROOT = Path(__file__).resolve().parents[1]
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--godot', required=True)
+    parser.add_argument('--capture', required=True, type=Path)
+    parser.add_argument('--output-dir', required=True, type=Path)
+    parser.add_argument('--renderer', choices=['forward_plus', 'gl_compatibility'], default='forward_plus')
+    args = parser.parse_args()
+    out = args.output_dir.resolve(); out.mkdir(parents=True, exist_ok=False)
+    def digest():
+        with args.capture.open('rb') as stream:
+            return hashlib.file_digest(stream, 'sha256').hexdigest()
+    source_hash = digest()
+    qdbus = shutil.which('qdbus6') or shutil.which('qdbus') or '/usr/lib64/qt6/bin/qdbus'
+    conn = Gio.bus_get_sync(Gio.BusType.SESSION, None)
+    service = 'org.simscope.FullscreenReview'
+    conn.call_sync('org.freedesktop.DBus', '/org/freedesktop/DBus', 'org.freedesktop.DBus',
+                   'RequestName', GLib.Variant('(su)', (service, 4)), None, Gio.DBusCallFlags.NONE, -1, None)
+    xml = '<node><interface name="org.simscope.Review"><method name="Record"><arg type="s" direction="in"/></method></interface></node>'
+    received = []
+    def record(_c, _s, _p, _i, _m, values, invocation):
+        received.append(json.loads(values.unpack()[0])); invocation.return_value(None)
+    registration = conn.register_object('/Review', Gio.DBusNodeInfo.new_for_xml(xml).interfaces[0], record, None, None)
+    def dbus(path, *args):
+        return subprocess.check_output([qdbus, 'org.kde.KWin', path, *args], text=True).strip()
+    plugin = 'simscope-issue46-review'
+    def kwin(pid, leave=False):
+        received.clear()
+        script = out / 'kwin-probe.js'
+        script.write_text('function rect(r) { return {x:r.x,y:r.y,width:r.width,height:r.height}; }\n'
+            'var windows=workspace.windowList().filter(function(w) { return w.pid === ' + str(pid) + '; });\n'
+            + ('windows.forEach(function(w) { w.fullScreen=false; });\n' if leave else '')
+            + 'callDBus("' + service + '","/Review","org.simscope.Review","Record",JSON.stringify(windows.map(function(w) { return {pid:w.pid,active:w.active,fullscreen:w.fullScreen,frame:rect(w.frameGeometry),client:rect(w.clientGeometry),screen:rect(w.output.geometry)}; })));\n')
+        script_id = dbus('/Scripting', 'loadScript', str(script), plugin)
+        try:
+            dbus('/Scripting/Script' + script_id, 'run')
+            until = time.monotonic() + 5
+            context = GLib.MainContext.default()
+            while not received and time.monotonic() < until:
+                while context.pending(): context.iteration(False)
+                time.sleep(.01)
+            assert received and len(received[0]) == 1, 'KWin test window unavailable or ambiguous'
+            return received[0][0]
+        finally:
+            dbus('/Scripting', 'unloadScript', plugin)
+    command = [args.godot, '--path', str(ROOT/'viewer'), '--display-driver', 'wayland',
+               '--rendering-method', args.renderer, '--resolution', '1440x900', '--audio-driver', 'Dummy',
+               '--script', 'ui/shell/test_immersive_desktop.gd', '--', '--review-output='+str(out),
+               '--review-capture='+str(args.capture.resolve())]
+    reports = []
+    with (out/'godot.log').open('w') as log:
+        process = subprocess.Popen(command, stdout=log, stderr=subprocess.STDOUT)
+        try:
+            seen = set(); deadline = time.monotonic()+180
+            while process.poll() is None:
+                assert time.monotonic() < deadline, 'Native review timed out'
+                path = out/'stage.json'
+                if not path.exists(): time.sleep(.05); continue
+                try: stage = json.loads(path.read_text())
+                except json.JSONDecodeError: continue
+                label = stage['stage']
+                if label in seen: time.sleep(.05); continue
+                native = kwin(process.pid)
+                fullscreen = label not in ['windowed', 'restored-windowed', 'wm-recovered']
+                assert native['fullscreen'] == fullscreen, (label, native)
+                if fullscreen: assert native['frame'] == native['client'] == native['screen'], (label, native)
+                assert native['active'], 'Test window lost focus; do not capture another application'
+                subprocess.run(['spectacle','-a','-b','-n','-o',str(out/(label+'-desktop.png'))], check=True, timeout=20)
+                stage['kwin'] = native; reports.append(stage)
+                (out/'desktop-report.json').write_text(json.dumps(reports, indent=2)+'\n')
+                assert not stage['failures'], stage['failures']
+                if label == 'windowed-to-immersive': kwin(process.pid, leave=True)
+                (out/(label+'.ack')).touch(); seen.add(label)
+            assert process.returncode == 0, 'Godot review failed; inspect godot.log'
+            assert len(reports) == 8, 'Incomplete native review'
+            assert 'ERROR:' not in (out/'godot.log').read_text(), 'Godot error'
+            assert digest() == source_hash, 'Real source changed'
+            (out/'source.json').write_text(json.dumps({'capture':str(args.capture),'sha256':source_hash,'unchanged':True},indent=2)+'\n')
+            print(f'Native immersive desktop: {reports[-1]["checks"]} checks, 8 KWin geometry checks PASS ({args.renderer})')
+        finally:
+            if process.poll() is None: process.terminate(); process.wait(timeout=10)
+            conn.unregister_object(registration)
+            conn.call_sync('org.freedesktop.DBus','/org/freedesktop/DBus','org.freedesktop.DBus','ReleaseName',GLib.Variant('(s)',(service,)),None,Gio.DBusCallFlags.NONE,-1,None)
+
+
+if __name__ == '__main__':
+    main()
