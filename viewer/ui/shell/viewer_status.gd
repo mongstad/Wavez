@@ -226,7 +226,7 @@ func show_status() -> void:
 	if layers != null:
 		for controller in [layers.playback,layers.field_playback,layers.mesh_playback]:
 			if is_instance_valid(controller.label): lines.append(controller.label.text)
-	lines.append("\nUse Jobs → Acknowledge failures to dismiss retained notices.\n\nCurrent viewer message\n"+viewer.status_label.text)
+	lines.append("\nUse Jobs → Acknowledge failures to dismiss retained notices.\n\n"+shell.source_details())
 	shell.show_details("Status details", "\n".join(lines))
 
 func layout(width: float, bottom: float) -> float:

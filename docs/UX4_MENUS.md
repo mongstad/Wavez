@@ -63,6 +63,27 @@ and retains existing cancellation behavior. Each task keeps its in-session scrol
 position. Immersive entry hides the tool without restoring focus into hidden
 chrome. These UI positions and new hosts add no recipe fields.
 
+## Owner-review correction: permanent-panel metadata
+
+PR #73 removes the duplicate capture filename/“Current capture” header and the
+capture, sample/interpolation and layer diagnostic blocks from Scene/Appearance.
+The existing title-bar source control and status area remain; no new permanent
+source label is added. Control order and grouping are unchanged.
+
+The status area's **Details…** and title-bar source details use the same current
+metadata snapshot: capture identity, SIMSCP3/sample counts, frame/population and
+interpolation/ID/held-scalar text, cache information, complete layer descriptions
+and structured metadata (including dtype/stride), plus full color-policy, finite
+range and clipping diagnostics. Text wraps and scrolls in the existing dialog;
+reopen it for a fresh snapshot. Existing status failures and job details remain.
+
+Only an active **⚠ Color clipping** or **⚠ Color unavailable** indication remains
+beside the affected field controls. It clears when the underlying diagnostic
+clears; the explanation is in Details. No scientific computations, recipe fields,
+source values or callbacks change. This correction does not start #68.
+
+Correction checks and screenshots: [metadata review evidence](evidence/issue-67/metadata-review/README.md).
+
 ## State and sidebar boundaries
 
 Removed sidebar command paths include Capture/Export, Selection, all analysis
@@ -134,6 +155,12 @@ coverage and screenshots do not establish owner acceptance.
    permanent sidebar, and Jobs reopens the correct host.
 7. Repeat state restore while a field tool is open. Confirm rebuilt controls work
    once, exact values persist, and no stale or duplicate controls appear.
+
+8. Confirm Scene/Appearance has no repeated capture header or metadata paragraphs.
+   Expand a field: only a concise clipping/unavailable warning may remain. Open
+   the status area's Details to inspect the full range, interpolation, sample and
+   layer information; seek or replace the source and reopen Details to verify it
+   reflects the current source. Controls should retain their previous ordering.
 
 Stop for owner review. Do not merge, auto-merge, close #67, change Project state,
 or begin #68/#69 or any other issue.

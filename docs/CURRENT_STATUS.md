@@ -4,7 +4,9 @@ The owner merged final UX3 validation in PR #64 and accepted the revised
 [UX4 design](UX4_DESIGN.md) in PR #72 at `34edfca`. Current authorized work is
 #67, the only Ready item verified on 2026-09-22: [UX4 command menus](UX4_MENUS.md),
 **pending owner review**. File, View, Tools and Help now own their canonical
-commands, with existing scientific controls in minimal focused hosts. #68's
+commands, with existing scientific controls in minimal focused hosts. The PR #73
+owner-review correction moves permanent-panel metadata into Details, leaving only
+concise active color warnings beside field controls. #68's
 simulation-panel redesign and #69's final form composition remain separate.
 Historical review reports and evidence retain their original wording.
 

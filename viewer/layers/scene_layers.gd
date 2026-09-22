@@ -413,12 +413,12 @@ func _tool_body(title: String, id := "") -> VBoxContainer:
 
 func _build_ui() -> void:
 	_clear_tool_bodies()
-	panel = VBoxContainer.new();viewer.inspector_box.add_child(panel);viewer.inspector_box.move_child(panel,3)
+	panel = VBoxContainer.new();viewer.inspector_box.add_child(panel);viewer.inspector_box.move_child(panel,0)
 	if playback != null:playback.build_ui(_tool_body("Performance"))
 	var title := Label.new();title.text = "Scene layers";panel.add_child(title)
 	_number(_tool_body("Performance"),"Layer GPU budget • MiB",gpu_budget_mib,1,2048,1,func(v):gpu_budget_mib = int(v);resample())
 	for id in reader.objects:
-		var label := Label.new();label.text = id;label.clip_text = true;label.custom_minimum_size.y = 48;panel.add_child(label);labels[id] = label
+		var label := Label.new();label.text = id;label.clip_text = true;panel.add_child(label);label.hide();labels[id] = label
 		if reader.objects[id].kind == "particles":continue
 		var toggle := Button.new();toggle.text = "Settings: "+id;toggle.toggle_mode = true;panel.add_child(toggle)
 		layer_settings_buttons[id] = toggle
@@ -691,8 +691,10 @@ func _build_color_ui(body: VBoxContainer, id: String) -> void:
 	var reset := Button.new();reset.text = "Reset color • linear 0–1";derive.add_child(reset)
 	reset.pressed.connect(func():
 		states[id].lower = 0.;states[id].upper = 1.;states[id].color_mapping = ColorMapping.DEFAULT.duplicate();apply_state(snapshot()))
-	var status := Label.new();status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART;body.add_child(status)
-	color_controls[id] = {"mode":mode,"symmetric":symmetric,"percentile_low":low,"percentile_high":high,"percentile":percent,"reset":reset,"status":status}
+	var status := Label.new();status.hide();body.add_child(status)
+	var indicator := Label.new();indicator.hide();body.add_child(indicator)
+	indicator.tooltip_text = "Open Details for source ranges and color diagnostics."
+	color_controls[id] = {"mode":mode,"symmetric":symmetric,"percentile_low":low,"percentile_high":high,"percentile":percent,"reset":reset,"status":status,"indicator":indicator}
 	for spin in [low,high]:spin.value_changed.connect(func(_v):_update_preset_description(id))
 	_update_preset_description(id)
 	_update_color_status(id)
@@ -708,6 +710,10 @@ func _update_color_status(id: String) -> void:
 		if stats.minimum < state.lower or stats.maximum > state.upper:description += " COLOR CLIPPING PRESENT."
 	if not view.color_error.is_empty():description += "\n"+view.color_error
 	color_controls[id].status.text = description
+	var indicator: Label = color_controls[id].indicator
+	var clipped: bool = stats.get("finite",0)>0 and (stats.minimum < state.lower or stats.maximum > state.upper)
+	indicator.text = "⚠ Color unavailable" if not view.color_error.is_empty() else "⚠ Color clipping"
+	indicator.visible = clipped or not view.color_error.is_empty()
 func request_color_range(id: String, policy: String, low := 1.0, high := 99.0, preset := "") -> bool:
 	if range_thread.is_started():viewer.status_label.text = "A range calculation is already running.";return false
 	var view = views[id]

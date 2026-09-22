@@ -10,8 +10,6 @@ var dock: PanelContainer
 var scroll: ScrollContainer
 var tabs: GridContainer
 var chooser: OptionButton
-var context_title: Label
-var context_detail: Label
 var source_button: Button
 var navigation: HBoxContainer
 var recovery: Button
@@ -78,8 +76,6 @@ func setup(owner_viewer) -> void:
 		tab.size_flags_horizontal = Control.SIZE_EXPAND_FILL; tab_buttons.append(tab)
 		chooser.add_item(WORKSPACES[i])
 	chooser.item_selected.connect(select_workspace)
-	context_title = Label.new(); context_title.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS; context_title.theme_type_variation = "SectionTitle"; dock_box.add_child(context_title)
-	context_detail = Label.new(); context_detail.text = "Current capture"; context_detail.theme_type_variation = "SecondaryLabel"; dock_box.add_child(context_detail)
 	dock_box.add_child(scroll); scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	adapter = VBoxContainer.new(); adapter.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	# All retained controls stay in their original VBox and retain serialized section keys.
@@ -113,7 +109,7 @@ func setup(owner_viewer) -> void:
 		if status_ui != null: status_ui.failures.erase("Open capture"); status_ui.refresh(), "close")
 	open_error.hide()
 	details = AcceptDialog.new(); details.title = "Source details"; details.theme = theme; add_child(details)
-	detail_text = TextEdit.new(); detail_text.editable = false; detail_text.custom_minimum_size = Vector2(480, 220); details.add_child(detail_text)
+	detail_text = TextEdit.new(); detail_text.editable = false; detail_text.wrap_mode = TextEdit.LINE_WRAPPING_BOUNDARY; detail_text.custom_minimum_size = Vector2(480, 220); details.add_child(detail_text)
 	details.close_requested.connect(restore_focus); details.confirmed.connect(restore_focus)
 	viewer.resize_handle.gui_input.connect(resize_input)
 	preload("res://analysis/ui_controls.gd").fit(viewer.inspector_box)
@@ -197,7 +193,22 @@ func show_section(section: String) -> void:
 	viewer.section_buttons[section].grab_focus()
 
 func show_source() -> void:
-	show_details("Source details", "No capture loaded." if viewer.generic_reader == null else viewer.capture_path + "\n\n" + viewer.hud.text + "\n\n" + viewer.status_label.text)
+	show_details("Source details", source_details())
+
+func source_details() -> String:
+	if viewer.generic_reader == null: return "No capture loaded."
+	var lines := [viewer.capture_path, viewer.hud.text,
+		"SIMSCP3 • %d layer samples" % viewer.generic_reader.records.size(), viewer.cache_label.text]
+	var layers = viewer.scene_layers
+	if layers != null:
+		for id in layers.labels:
+			var label = layers.labels[id]
+			if is_instance_valid(label): lines.append(label.text + "\n" + label.tooltip_text)
+		for id in layers.color_controls:
+			lines.append(str(id) + " — Color mapping\n" + layers.color_controls[id].status.text)
+	else: lines.append(viewer.fields_availability.text)
+	lines.append("Current viewer message\n" + viewer.status_label.text)
+	return "\n\n".join(lines)
 
 func show_details(title: String, text: String) -> void:
 	var focus := get_viewport().gui_get_focus_owner()
@@ -218,13 +229,6 @@ func refresh() -> void:
 	viewer.tools_ui.refresh_context()
 	var title: String = viewer.capture_path.get_file() if loaded else "No capture"
 	if source_button.text != title: source_button.text = title; source_button.tooltip_text = viewer.capture_path if loaded else "Source details"
-	context_title.text = title
-	# Context is capture-level until UX4 supplies selected-object adapters. No implicit binding.
-	var availability := "Current capture" if loaded else "No capture loaded"
-	if loading: availability = "Opening capture…"
-	elif loaded and viewer.scene_layers != null and viewer.scene_layers.is_buffering(): availability = "Preparing sample…"
-	elif loaded and viewer.frame_count == 0: availability = "Waiting for a complete sample"
-	context_detail.text = availability
 	empty.visible = not loaded and not loading
 	viewer.inspector_box.visible = loaded and workspace == 0
 	adapter.visible = loaded and workspace != 0

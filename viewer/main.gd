@@ -866,14 +866,14 @@ func _build_inspector_controls() -> void:
 	hud = Label.new()
 	hud.text = "SimScope"
 	hud.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	inspector_box.add_child(hud)
+	tools_ui.storage.add_child(hud)
 	status_label = Label.new()
 	status_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	inspector_box.add_child(status_label)
+	tools_ui.storage.add_child(status_label)
 	resize_handle = Control.new()
 	resize_handle.mouse_default_cursor_shape = Control.CURSOR_HSIZE
 	canvas.add_child(resize_handle)
-	fields_availability = Label.new();fields_availability.text = "Fields unavailable • no grid recorded";fields_availability.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART;inspector_box.add_child(fields_availability)
+	fields_availability = Label.new();fields_availability.text = "Fields unavailable • no grid recorded";fields_availability.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART;tools_ui.storage.add_child(fields_availability)
 	var data_controls := _section("Data cache")
 	cache_label = Label.new(); cache_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	data_controls.add_child(cache_label)

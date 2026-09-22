@@ -55,7 +55,7 @@ func run() -> void:
 	viewer._show_open_dialog(); await settle(); check(viewer.open_dialog.visible, "Canonical Open picker reachable")
 	viewer.open_dialog.canceled.emit(); viewer.open_dialog.hide()
 	check(viewer.generic_reader == null, "Picker cancel does not open source")
-	shell.begin_open(); check(shell.context_detail.text == "Opening capture…" and not shell.empty.visible, "Unknown loading progress represented without percentage")
+	shell.begin_open(); shell.status_ui.refresh(); check(shell.status_ui.readiness == "Preparing…" and not shell.empty.visible, "Unknown loading progress represented without percentage")
 	picture("opening")
 	viewer._open_capture(output.path_join("scene.ssc")); viewer.playing = false; viewer.orbit_enabled = false
 	await settle()
@@ -311,6 +311,30 @@ func activate(shell, name: String) -> void:
 
 func menu_checks(viewer) -> void:
 	var shell = viewer.shell
+	var initial_state := science(viewer)
+	var initial_sample: Dictionary = viewer.committed_sample.duplicate(true)
+	check(not viewer.inspector_box.is_ancestor_of(viewer.hud) and not viewer.inspector_box.is_ancestor_of(viewer.status_label),"Capture and viewer diagnostics do not occupy permanent panel")
+	for id in viewer.scene_layers.labels:
+		check(not viewer.scene_layers.labels[id].visible,"Verbose layer diagnostics hidden from panel: " + id)
+	for id in viewer.scene_layers.color_controls:
+		var controls: Dictionary = viewer.scene_layers.color_controls[id]
+		check(not controls.status.visible,"Color explanation does not occupy panel: " + id)
+		check(controls.indicator.text in ["⚠ Color clipping","⚠ Color unavailable"],"Color exception indicator is concise")
+	shell.status_ui.detail_button.pressed.emit()
+	check(shell.details.visible and shell.detail_text.text.contains(viewer.hud.text) and shell.detail_text.text.contains("SIMSCP3"),"Existing status Details preserves capture and interpolation information")
+	for id in viewer.scene_layers.labels:
+		check(shell.detail_text.text.contains(viewer.scene_layers.labels[id].tooltip_text),"Details preserves exact layer metadata: " + id)
+	for id in viewer.scene_layers.color_controls:
+		check(shell.detail_text.text.contains(viewer.scene_layers.color_controls[id].status.text),"Details preserves full color diagnostics: " + id)
+	shell.show_source()
+	await settle(); picture("metadata-details")
+	shell.details.hide()
+	for id in viewer.scene_layers.layer_settings_buttons:
+		if viewer.scene_layers.color_controls.has(id): viewer.scene_layers.layer_settings_buttons[id].button_pressed = true
+	shell.scroll.scroll_vertical = 0
+	await settle(); picture("metadata-field")
+	Visual.apply(viewer,initial_state)
+	check(science(viewer) == initial_state and viewer.committed_sample == initial_sample,"Opening metadata Details preserves scientific state and committed sample")
 	check(shell.menus.keys() == ["File","View","Tools","Help"],"Exact four top menus without duplicate State or Export")
 	for title in viewer.tools_ui.SECTIONS:
 		check(not viewer.sections.has(title) and not viewer.section_buttons.has(title),"No sidebar action for migrated " + title)
