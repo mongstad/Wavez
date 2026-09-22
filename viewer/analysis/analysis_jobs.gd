@@ -24,6 +24,7 @@ var memory_bytes := 512*1048576
 var last_result := {}
 var member_pins: Array = []
 var result_pins: Array = []
+var background_error_code := "" # Presentation-only availability for Resolve input.
 var background_pending := false
 var background_id := ""
 var background_scene := 0
@@ -76,6 +77,7 @@ func request(source: Dictionary, operation: String, arguments: Dictionary, sourc
 func request_background(source: Dictionary, operation: String, arguments: Dictionary, source_revision: int, selection_version: int, analysis_version: int, budget_override: Dictionary = {}) -> String:
 	if worker_pid <= 0 or not OS.is_process_running(worker_pid):
 		if not start():return ""
+	background_error_code = ""
 	serial += 1;background_id = "%d-b%d" % [OS.get_process_id(),serial]
 	background_scene = source_revision;background_selection = selection_version;analysis_revision = analysis_version;background_operation = operation
 	var job := {"version":1,"id":background_id,"scene_revision":source_revision,"selection_revision":selection_version,"analysis_revision":analysis_version,"source":source.duplicate(true),"operation":operation,"arguments":arguments.duplicate(true),"budget":{"memory_bytes":memory_bytes},"member_pins":member_pins,"result_pins":result_pins}
@@ -164,7 +166,9 @@ func _poll() -> void:
 		if result.get("id") == background_id and result.get("scene_revision") == background_scene and result.get("selection_revision") == background_selection and result.get("analysis_revision") == analysis_revision:
 			background_pending = false
 			if result.get("ok",false):background_completed.emit(result)
-			else:error = result.get("error","Interval analysis failed.");background_failed.emit(error)
+			else:
+				background_error_code = result.get("code","")
+				error = result.get("error","Interval analysis failed.");background_failed.emit(error)
 		else:
 			var progress := _read("background_progress.json")
 			if progress.get("id") == background_id:background_progress.emit(progress)

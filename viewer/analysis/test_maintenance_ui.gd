@@ -71,20 +71,21 @@ func run() -> void:
 	var scientific: Button = UI.button(temporal.panel,"Advanced • Scientific options")
 	check(scientific != null and not scientific.button_pressed,"advanced scientific controls start collapsed")
 	check(UI.button(temporal.panel,"Run analysis") != null,"primary analysis action stays outside Advanced")
-	check(UI.button(temporal.durable.panel,"Export numerical data…") != null and UI.button(temporal.durable.panel,"Save inspection recipe…") != null,"primary export and recipe actions stay outside Advanced")
+	check(view.tools_ui.durable_controls.has("Data") and view.tools_ui.durable_controls.has("Save analysis"),"primary export and recipe actions stay outside Advanced")
 	var before := Job.snapshot(view);var members: String = control.members_input.text
 	for button in [typed,scientific]:button.button_pressed = true;button.button_pressed = false
 	check(Job.snapshot(view)==before and control.members_input.text==members,"opening groups changes no saved scientific or visual settings")
-	check("incomplete" in temporal.finite_subtotal.text and not temporal.finite_subtotal.tooltip_text.is_empty(),"incomplete subtotal meaning remains visible")
+	check("incomplete" in temporal.finite_subtotal.tooltip_text and not temporal.finite_subtotal.tooltip_text.is_empty(),"incomplete subtotal meaning remains visible")
 	check(not temporal.diagnostics.join.tooltip_text.is_empty() and not temporal.matched.common.coordinate_reference.tooltip_text.is_empty(),"clock and coordinate assumptions remain explained")
 	check(view.open_dialog.filters[0].begins_with("*.ssc"),"modern capture picker is first")
 	await capture("legend-fixed")
 	var names := ["Selections","Temporal analysis","Diagnostics and comparisons","Space-time analysis","Analysis export and state","Matched runs"]
 	var layouts: Array = []
 	for title in names:
-		var panel: VBoxContainer = view.sections[title];panel.visible = true
+		view.tools_ui.open(view.tools_ui.SECTIONS[title])
+		var panel: VBoxContainer = view.tools_ui.content.get_child(0)
 		await process_frame;await process_frame
-		var scroll: ScrollContainer = view.shell.scroll
+		var scroll: ScrollContainer = view.tools_ui.content.get_parent()
 		scroll.scroll_vertical = int(panel.position.y)
 		await process_frame;await process_frame
 		var overflow: Array = []
@@ -103,7 +104,7 @@ func run() -> void:
 		layouts.append({"panel":title,"width":panel.size.x,"expanded_height":panel.size.y})
 		for item in all_controls(panel):
 			if item.has_meta("analysis_group"):item.button_pressed = false
-		panel.visible = false
+		view.tools_ui.close()
 	check(control.jobs.worker_pid<0,"UI organization starts no background analysis")
 	Job.write_json(out.path_join("ui.json"),{"checks":checks,"failures":failures,"backend":RenderingServer.get_current_rendering_method(),"images":images,"layouts":layouts,"viewport":str(surface.get_visible_rect()),"window":str(root.size),"surface":"GPU SubViewport" if surface != root else "desktop window"})
 	view.free();print("MAINTENANCE UI: ",checks," checks, ",failures.size()," failures");quit(0 if failures.is_empty() else 1)

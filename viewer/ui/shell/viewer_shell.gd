@@ -1,7 +1,7 @@
 extends Control
 ## Presentation-only adapter. Controllers and the root scientific viewport retain ownership.
 const ThemeSource = preload("res://ui/theme/simscope_theme.gd")
-const WORKSPACES = ["Scene", "Appearance", "Selection", "Analysis"]
+const WORKSPACES = ["Scene", "Appearance"]
 var viewer
 var transport
 var status_ui
@@ -26,6 +26,7 @@ var adapter: VBoxContainer
 var workspace := 0
 var tab_buttons: Array[Button] = []
 var menus: Dictionary = {}
+var commands: Dictionary = {}
 var loading := false
 var previous_focus: WeakRef
 var compact := false
@@ -57,29 +58,10 @@ func setup(owner_viewer) -> void:
 	for side in ["top", "bottom"]: margin.add_theme_constant_override("margin_"+side, 8)
 	var row := HBoxContainer.new(); row.add_theme_constant_override("separation", 8); margin.add_child(row)
 	var brand := Label.new(); brand.text = "SimScope"; row.add_child(brand)
-	button(row, "Open…", viewer._show_open_dialog, "open").theme_type_variation = "PrimaryButton"
 	source_button = button(row, "No capture", show_source, "info")
 	source_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	source_button.clip_text = true; source_button.custom_minimum_size.x = 80
-	menu(row, "State", "state", ["Scene recipe controls…", "Analysis recipe controls…"], func(id):
-		show_section("Capture / Export" if id == 0 else "Analysis export and state"))
-	menu(row, "Export", "export", ["Save PNG…", "Export video…", "Numerical export controls…"], func(id):
-		match id:
-			0: viewer._save_image()
-			1: viewer.video_dialog.open()
-			2: show_section("Analysis export and state")
-	)
-	menu(row, "View", "view", ["Show or hide panels", "Fullscreen", "Frame scene", "Reset camera", "Immersive fullscreen (Shift+F11)"], func(id):
-		match id:
-			0: viewer._toggle_overlay()
-			1: viewer._toggle_fullscreen()
-			2: viewer._focus_activity()
-			3: viewer._reset_camera()
-			4: enter_immersive()
-	)
-	menu(row, "Help", "help", ["Navigation help…", "Source details…"], func(id):
-		if id == 1: show_source()
-		else: show_details("Navigation help", "Drag to orbit. Scroll to zoom.\nF: Frame scene   R: Reset camera\nO: Auto orbit   F1: Show or hide panels   F11: Fullscreen\nShift+F11: Immersive fullscreen   Esc: Restore preceding shell\nSpace: Play or pause   Left / Right: Step sample\n\nTab and Shift+Tab move focus. Enter or Space activates buttons.\nScientific controls remain in the existing inspector during shell migration.\n\nMidnight Scientific"))
+	build_menus(row)
 	dock = viewer.overlay_panel
 	dock.theme = theme
 	dock.theme_type_variation = "PropertyGroup"
@@ -109,17 +91,18 @@ func setup(owner_viewer) -> void:
 	button(navigation, "Frame scene", viewer._focus_activity, "frame")
 	button(navigation, "Reset camera", viewer._reset_camera, "reset")
 	var navigate := MenuButton.new(); navigate.flat = false; navigate.text = "Navigate"; navigate.custom_minimum_size.y = 32; navigation.add_child(navigate); decorate_menu(navigate)
-	var modes := navigate.get_popup(); modes.add_check_item("Free camera"); modes.add_check_item("Auto orbit")
+	var modes := navigate.get_popup(); modes.add_check_item("Free camera"); modes.add_check_item("Auto orbit"); modes.add_item("Orbit speed")
 	navigate.about_to_popup.connect(func(): modes.set_item_checked(0, viewer.free_camera); modes.set_item_checked(1, viewer.orbit_enabled))
 	modes.id_pressed.connect(func(id):
 		if id == 0:
-			viewer.control_checks["Free camera • WASD / Q / E"].button_pressed = not viewer.free_camera
-		else: viewer.orbit_enabled = not viewer.orbit_enabled; viewer.inspection_paused = false
+			viewer.free_camera = not viewer.free_camera; viewer.orbit_enabled = not viewer.free_camera
+		elif id == 1: viewer.orbit_enabled = not viewer.orbit_enabled; viewer.inspection_paused = false
+		else: viewer.tools_ui.open("Camera")
 		viewer._sync_control_state())
 	fullscreen_button = button(self, "Exit fullscreen", viewer._toggle_fullscreen, "view")
 	empty = VBoxContainer.new(); add_child(empty)
 	var welcome := Label.new(); welcome.text = "Open a capture to begin"; empty.add_child(welcome)
-	button(empty, "Open capture…", viewer._show_open_dialog, "open").theme_type_variation = "PrimaryButton"
+	button(empty, "Open capture", viewer._show_open_dialog, "open").theme_type_variation = "PrimaryButton"
 	open_error = PanelContainer.new(); add_child(open_error)
 	var error_row := HBoxContainer.new(); open_error.add_child(error_row)
 	error_text = Label.new(); error_text.text = "Capture could not be opened"; error_text.add_theme_color_override("font_color", theme.c(&"state.error")); error_row.add_child(error_text)
@@ -179,6 +162,7 @@ func decorate_menu(control: MenuButton) -> void:
 
 func select_workspace(index: int) -> void:
 	if workspace == 0 and scroll != null: scroll_position = scroll.scroll_vertical
+	index = clampi(index,0,WORKSPACES.size()-1)
 	workspace = index
 	chooser.select(index)
 	for i in tab_buttons.size(): tab_buttons[i].theme_type_variation = "SelectedButton" if i == index else "SecondaryButton"
@@ -188,13 +172,15 @@ func select_workspace(index: int) -> void:
 	if index != 0:
 		var note := Label.new(); note.text = "Open a control group in the inspector."
 		note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; adapter.add_child(note)
-		var targets: Array = [[], ["Rendering", "Color Mapping", "Camera", "Scene layers"], ["Selections"], ["Temporal analysis", "Space-time analysis", "Diagnostics and comparisons", "Matched runs", "Analysis export and state"]][index]
+		var targets: Array = [[], ["Rendering", "Color Mapping", "Scene layers"]][index]
 		for target in targets:
 			if viewer.sections.has(target) or target == "Scene layers": button(adapter, target, show_section.bind(target))
 	else: scroll.set_deferred("scroll_vertical", scroll_position)
 	refresh()
 
 func show_section(section: String) -> void:
+	if viewer.tools_ui.SECTIONS.has(section):
+		viewer.tools_ui.open(viewer.tools_ui.SECTIONS[section]); return
 	if section == "Scene layers":
 		if viewer.scene_layers == null: return
 		if not viewer.overlay_visible: viewer._toggle_overlay()
@@ -228,9 +214,8 @@ func refresh() -> void:
 	if immersive: return
 	if source_button == null: return
 	var loaded: bool = viewer.generic_reader != null
-	for menu_name in ["State", "Export"]:
-		menus[menu_name].disabled = not loaded
-		menus[menu_name].tooltip_text = menu_name if loaded else "Open a capture first"
+	refresh_commands()
+	viewer.tools_ui.refresh_context()
 	var title: String = viewer.capture_path.get_file() if loaded else "No capture"
 	if source_button.text != title: source_button.text = title; source_button.tooltip_text = viewer.capture_path if loaded else "Source details"
 	context_title.text = title
@@ -333,6 +318,7 @@ func enter_immersive() -> void:
 	immersive_focus = weakref(focused) if focused != null else null
 	if focused != null: focused.release_focus()
 	for control in menus.values(): control.get_popup().hide()
+	viewer.tools_ui.close(false)
 	immersive = true
 	immersive_started = Time.get_ticks_msec()
 	immersive_native_seen = immersive_mode == DisplayServer.WINDOW_MODE_FULLSCREEN
@@ -384,3 +370,87 @@ func refresh_export() -> void:
 	refresh(); transport.refresh(); status_ui.refresh(); layout()
 	visible = viewer.overlay_visible
 	# Scientific annotations remain outside the shell, with their existing gates.
+
+func build_menus(row: HBoxContainer) -> void:
+	for entry in [["File","open"],["View","view"],["Tools","analysis"],["Help","help"]]:
+		menu(row,entry[0],entry[1],[],func(_id):pass)
+		menus[entry[0]].about_to_popup.connect(refresh_commands)
+	var file: PopupMenu = menus.File.get_popup()
+	command(file,"Open capture",viewer._show_open_dialog,"open")
+	var state := submenu(file,"State")
+	command(state,"Copy state",viewer._copy_inspection_state,"copy")
+	for title in ["Save scene","Load scene","Save analysis","Load analysis"]: command(state,title,viewer.tools_ui.open.bind(title),title)
+	command(state,"Resolve input",func(): viewer.selection_controller.temporal.durable.choose_input(),"resolve")
+	var export_menu := submenu(file,"Export")
+	command(export_menu,"Image",viewer.tools_ui.open.bind("Image"),"image")
+	command(export_menu,"Video",func():viewer.video_dialog.open(),"video")
+	command(export_menu,"Data",viewer.tools_ui.open.bind("Data"),"data")
+	var view: PopupMenu = menus.View.get_popup()
+	command(view,"Panels",viewer._toggle_overlay,"panels",true)
+	command(view,"Fullscreen",viewer._toggle_fullscreen,"fullscreen",true)
+	command(view,"Immersive",enter_immersive,"immersive")
+	command(view,"Probe marker",func():viewer.scene_layers.set_probe_marker_enabled(not viewer.scene_layers.probe_marker_enabled),"probe",true)
+	var guides := submenu(view,"Guides")
+	command(guides,"Grid and axes",func():viewer.guide_mesh.visible = not viewer.guide_mesh.visible,"grid",true)
+	for pair in [["Domain","domain"],["Data bounds","data"],["Absorber","absorber"],["Imposed regions","imposed"]]:
+		command(guides,pair[0],toggle_guide.bind(pair[1]),"guide:"+pair[1],true)
+	var presets := submenu(view,"Viewing preset")
+	for title in viewer.VIEWING_PRESETS: command(presets,"Minimal" if title == "Minimal / Presentation" else title,viewer._apply_preset.bind(title),"preset:"+title,true)
+	var tools: PopupMenu = menus.Tools.get_popup()
+	command(tools,"Selection",viewer.tools_ui.open.bind("Selection"),"tool:Selection")
+	var analysis := submenu(tools,"Analysis")
+	for title in ["Temporal","Space time","Diagnostics","Compare","Matched runs","Period","Bookmarks","Results"]: command(analysis,title,viewer.tools_ui.open.bind(title),"tool:"+title)
+	for title in ["Mapping","Quick setup","Derive range","Slice","Clipping","Isosurface","Source probe","Performance","Geometry"]: command(tools,title,viewer.tools_ui.open.bind(title),"tool:"+title)
+	var help: PopupMenu = menus.Help.get_popup()
+	command(help,"Shortcuts",func():show_details("Shortcuts","Drag to orbit. Scroll to zoom.\nF: Frame scene   R: Reset camera\nO: Auto orbit   F1: Panels   F11: Fullscreen\nShift+F11: Immersive   Esc: Restore preceding shell\nSpace: Play or pause   Left and Right: Step sample\n\nTab and Shift+Tab move focus. Enter or Space activates buttons.\n\nMidnight Scientific"),"shortcuts")
+	command(help,"Handbook",func():
+		var path := ProjectSettings.globalize_path("res://../docs/SIMSCOPE_HANDBOOK.md")
+		show_details("Handbook",FileAccess.get_file_as_string(path) if FileAccess.file_exists(path) else "Handbook unavailable in this installation."),"handbook")
+
+func submenu(parent: PopupMenu, title: String) -> PopupMenu:
+	var popup := PopupMenu.new(); popup.name = title.replace(" ",""); parent.add_child(popup)
+	parent.add_submenu_item(title,popup.name)
+	return popup
+
+func command(popup: PopupMenu, title: String, action: Callable, key: String, checked := false) -> void:
+	var id := popup.item_count
+	if checked: popup.add_check_item(title,id)
+	else: popup.add_item(title,id)
+	popup.id_pressed.connect(func(chosen):
+		if chosen == id and not popup.is_item_disabled(id): action.call())
+	commands[key] = {"popup":popup,"index":id}
+
+func toggle_guide(key: String) -> void:
+	viewer.guide_visibility[key] = not viewer.guide_visibility[key]; viewer._apply_geometry()
+
+func refresh_commands() -> void:
+	var loaded: bool = viewer.generic_reader != null
+	var fields := false
+	if loaded:
+		for obj in viewer.generic_reader.objects.values():
+			if obj.kind == "volume": fields = true
+	var particles: bool = loaded and viewer.scene_layers != null and not viewer.scene_layers.particle_id.is_empty()
+	for key in commands:
+		var entry: Dictionary = commands[key]
+		var enabled: bool = loaded or key in ["open","panels","fullscreen","immersive","shortcuts","handbook"]
+		if key in ["probe","tool:Quick setup","tool:Clipping","tool:Isosurface","tool:Source probe"]: enabled = fields
+		if key == "tool:Mapping": enabled = particles
+		if key in ["tool:Slice","tool:Derive range"]: enabled = fields or particles
+		if key == "resolve":
+			var jobs = viewer.selection_controller.jobs
+			enabled = loaded and jobs.background_operation == "load_recipe" and jobs.background_scene == viewer.capture_generation and jobs.background_error_code == "unopened_source"
+		if key.begins_with("preset:"): enabled = loaded and viewer.preset_available.get(key.trim_prefix("preset:"),true)
+		entry.popup.set_item_disabled(entry.index,not enabled)
+		entry.popup.set_item_tooltip(entry.index,"" if enabled else ("Open a compatible capture first" if not loaded else "Unavailable for the current source or state"))
+		var checked := false
+		if key == "panels": checked = viewer.overlay_visible
+		elif key == "fullscreen": checked = DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN
+		elif key == "probe": checked = fields and viewer.scene_layers.probe_marker_enabled
+		elif key == "grid": checked = viewer.guide_mesh.visible
+		elif key.begins_with("guide:"):
+			var guide: String = key.trim_prefix("guide:")
+			checked = viewer.guide_visibility[guide]
+			var metadata_key: String = "imposed_regions" if guide == "imposed" else guide
+			entry.popup.set_item_disabled(entry.index,not loaded or (guide != "data" and not viewer.geometry_metadata.has(metadata_key)))
+		elif key.begins_with("preset:"): checked = viewer.selected_preset == key.trim_prefix("preset:")
+		if entry.popup.is_item_checkable(entry.index): entry.popup.set_item_checked(entry.index,checked)

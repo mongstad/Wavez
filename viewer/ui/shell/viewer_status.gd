@@ -48,7 +48,7 @@ func setup(owner_shell) -> void:
 	add_job(content,"Selections", func(): shell.show_section("Selections"), func(): viewer.selection_controller.cancel_query(); selection_result = "Cancelled. Completed selections remain available.")
 	add_job(content,"Analysis", reopen_analysis, func(): viewer.selection_controller.temporal.cancel_analysis(); analysis_result = "Cancellation requested. Completed named results remain available.")
 	add_job(content,"Matched views", func(): shell.show_section("Matched runs"), func(): viewer.selection_controller.temporal.matched.cancel())
-	add_job(content,"Isosurface", func(): shell.show_section("Scene layers"), func():
+	add_job(content,"Isosurface", func(): viewer.tools_ui.open("Isosurface"), func():
 		if viewer.scene_layers != null: viewer.scene_layers.cancel_iso())
 	var actions := HBoxContainer.new(); content.add_child(actions)
 	shell.button(actions,"Failure details…",show_status,"warning")
@@ -110,12 +110,16 @@ func reopen_video() -> void:
 
 func reopen_analysis() -> void:
 	var operation: String = viewer.selection_controller.jobs.background_operation
-	var section := "Temporal analysis"
-	if operation in ["save_recipe","load_recipe","export_analysis"]: section = "Analysis export and state"
-	elif operation in ["import_csv","compare_series","estimate_period","result_overlay"]: section = "Diagnostics and comparisons"
-	elif operation == "prepare_matched_render": section = "Matched runs"
-	elif operation == "result_heatmap": section = "Space-time analysis"
-	shell.show_section(section)
+	var task := "Temporal"
+	if operation == "save_recipe": task = "Save analysis"
+	elif operation == "load_recipe": task = "Load analysis"
+	elif operation == "export_analysis": task = "Data"
+	elif operation == "import_csv": task = "Diagnostics"
+	elif operation in ["compare_series","result_overlay"]: task = "Compare"
+	elif operation == "estimate_period": task = "Period"
+	elif operation == "prepare_matched_render": task = "Matched runs"
+	elif operation == "result_heatmap": task = "Space time"
+	viewer.tools_ui.open(task)
 
 func open_jobs() -> void:
 	jobs_dialog.popup_centered(Vector2i(640,440)); refresh()

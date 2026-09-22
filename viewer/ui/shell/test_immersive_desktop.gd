@@ -52,7 +52,7 @@ func run() -> void:
 	await stage("restored-interactive")
 	viewer.shell.fullscreen_button.pressed.emit()
 	await stage("restored-windowed")
-	viewer.shell.menus.View.get_popup().id_pressed.emit(4)
+	viewer.shell.menus.View.get_popup().id_pressed.emit(2)
 	await create_timer(3.1).timeout
 	await stage("windowed-to-immersive")
 	# The harness requests an actual KWin fullscreen exit for this test window.

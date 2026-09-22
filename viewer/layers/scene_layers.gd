@@ -51,7 +51,8 @@ var source_identity := {}
 var probe_marker: MeshInstance3D
 var probe_marker_enabled := true
 var probe_marker_valid := false
-var probe_marker_check: CheckButton
+var performance_panel: VBoxContainer
+var tool_bodies := {}
 var layer_budget := 0
 func setup(scene, source) -> void:
 	viewer = scene;reader = source;generation = reader.generation
@@ -69,6 +70,7 @@ func setup(scene, source) -> void:
 			var view := MeshView.new();add_child(view);views[id] = view
 			states[id] = {"visible":true,"channel":"","lower":-2.0,"upper":2.0,"colormap":"viridis","wireframe":false}
 	playback = preload("res://layers/particle_playback.gd").new();playback.setup(self)
+	performance_panel = VBoxContainer.new(); viewer.tools_ui.form("Performance").add_child(performance_panel)
 	_build_ui()
 	field_playback = preload("res://layers/field_playback.gd").new();field_playback.setup(self)
 	mesh_playback = preload("res://layers/mesh_playback.gd").new();mesh_playback.setup(self)
@@ -92,6 +94,9 @@ func close() -> void:
 	if field_playback != null:field_playback.close()
 	if mesh_playback != null:mesh_playback.close()
 	cancel_iso()
+	_clear_tool_bodies()
+	if is_instance_valid(performance_panel):
+		performance_panel.get_parent().remove_child(performance_panel);performance_panel.queue_free();performance_panel = null
 	if is_instance_valid(panel):
 		panel.get_parent().remove_child(panel);panel.queue_free();panel = null
 	for id in labels: labels[id] = null
@@ -384,18 +389,34 @@ func _build_opacity_ui(body: VBoxContainer, id: String) -> void:
 	var high := _scalar_input(body,"Full-opacity threshold",states[id].opacity_mapping.upper,func(v):return _set_opacity_mapping(id,"upper",v))
 	low.tooltip_text = "At or below this scalar (absolute scalar in Magnitude mode), extinction is zero. Set a positive threshold to suppress near-zero space."
 	high.tooltip_text = "At or above this scalar, extinction reaches Opacity / world unit. A linear ramp connects the thresholds; color range is unchanged."
-	var reset := Button.new();reset.text = "Reset opacity mapping • linear 0–1";body.add_child(reset)
+	var reset := Button.new();reset.text = "Reset opacity";_tool_body("Derive range",id).add_child(reset)
 	reset.pressed.connect(func():
 		states[id].opacity_mapping = Opacity.DEFAULT.duplicate()
 		# Rebuild through the shared restore path so numeric editors' last values
 		# stay synchronized, while session probes/disclosures remain untouched.
 		apply_state(snapshot()))
 	opacity_controls[id] = {"mode":mode,"lower":low,"upper":high,"reset":reset}
+func _clear_tool_bodies() -> void:
+	for body in tool_bodies.values():
+		if is_instance_valid(body): body.get_parent().remove_child(body); body.queue_free()
+	tool_bodies.clear()
+
+func _tool_body(title: String, id := "") -> VBoxContainer:
+	var key := title+":"+id
+	if not tool_bodies.has(key):
+		var body := VBoxContainer.new()
+		(performance_panel if title == "Performance" else viewer.tools_ui.form(title)).add_child(body)
+		if not id.is_empty():
+			var label := Label.new(); label.text = id; label.set_meta("source_name",true); body.add_child(label)
+		tool_bodies[key] = body
+	return tool_bodies[key]
+
 func _build_ui() -> void:
+	_clear_tool_bodies()
 	panel = VBoxContainer.new();viewer.inspector_box.add_child(panel);viewer.inspector_box.move_child(panel,3)
-	if playback != null:playback.build_ui(panel)
+	if playback != null:playback.build_ui(_tool_body("Performance"))
 	var title := Label.new();title.text = "Scene layers";panel.add_child(title)
-	_number(panel,"Layer GPU budget • MiB",gpu_budget_mib,1,2048,1,func(v):gpu_budget_mib = int(v);resample())
+	_number(_tool_body("Performance"),"Layer GPU budget • MiB",gpu_budget_mib,1,2048,1,func(v):gpu_budget_mib = int(v);resample())
 	for id in reader.objects:
 		var label := Label.new();label.text = id;label.clip_text = true;label.custom_minimum_size.y = 48;panel.add_child(label);labels[id] = label
 		if reader.objects[id].kind == "particles":continue
@@ -420,7 +441,7 @@ func _build_ui() -> void:
 		for i in range(channel.item_count):
 			if channel.get_item_metadata(i) == states[id].channel:channel.select(i)
 		channel.item_selected.connect(func(i):states[id].channel = str(channel.get_item_metadata(i));resample())
-		if reader.objects[id].kind == "volume":_build_preset_ui(body,id)
+		if reader.objects[id].kind == "volume":_build_preset_ui(_tool_body("Quick setup",id),id)
 		_scalar_input(body,"Color range minimum" if reader.objects[id].kind == "volume" else "Range minimum",states[id].lower,func(v):return _set_range(id,"lower",v))
 		_scalar_input(body,"Color range maximum" if reader.objects[id].kind == "volume" else "Range maximum",states[id].upper,func(v):return _set_range(id,"upper",v))
 		if reader.objects[id].kind == "volume":_build_color_ui(body,id)
@@ -442,44 +463,42 @@ func _build_ui() -> void:
 		strength.tooltip_text = "Display extinction strength after the independent opacity mapping. Not a calibrated physical quantity; color normalization does not change this value."
 		var step := _number(body,"Ray step • world units (quality / cost)",states[id].step,.05,10,.05,func(v):states[id].step = v;resample())
 		step.tooltip_text = "Smaller steps improve integration detail at greater cost; larger steps can miss fine structure. Not a brightness control. The renderer may enlarge steps to fit its 1024-step cap."
+		var slice_body := _tool_body("Slice",id)
 		var slice_choice := OptionButton.new()
 		for name in ["No slice","XY","XZ","YZ","Oblique"]:slice_choice.add_item(name)
-		body.add_child(slice_choice)
+		slice_body.add_child(slice_choice)
 		if states[id].slice:
 			var normal := Reader.vec(states[id].slice_normal)
 			slice_choice.select(1 if normal.is_equal_approx(Vector3.BACK) else (2 if normal.is_equal_approx(Vector3.UP) else (3 if normal.is_equal_approx(Vector3.RIGHT) else 4)))
 		slice_choice.item_selected.connect(func(i):states[id].slice = i != 0;states[id].slice_normal = [[0.,0.,1.],[0.,0.,1.],[0.,1.,0.],[1.,0.,0.],[.577350269,.577350269,.577350269]][i];resample())
 		for axis in range(3):
-			_number(body,"Plane normal "+["X","Y","Z"][axis],states[id].slice_normal[axis],-1,1,.01,func(v):
+			_number(slice_body,"Plane normal "+["X","Y","Z"][axis],states[id].slice_normal[axis],-1,1,.01,func(v):
 				var n := Reader.vec(states[id].slice_normal);n[axis] = v
 				if n.length() < .001:return
 				n = n.normalized();states[id].slice_normal = [n.x,n.y,n.z];states[id].slice = true;resample())
-		_number(body,"Slice plane distance • world",states[id].slice_distance,-10000,10000,.1,func(v):states[id].slice_distance = v;resample())
-		var clip := CheckButton.new();clip.text = "Clip at world X plane";clip.button_pressed = states[id].clip;body.add_child(clip);clip.toggled.connect(func(v):states[id].clip = v;resample())
-		_number(body,"Clip X",states[id].clip_distance,-10000,10000,.1,func(v):states[id].clip_distance = v;resample())
-		_scalar_input(body,"Isosurface threshold",states[id].threshold,func(v):return _set_threshold(id,v))
-		viewer._button(body,"Extract isosurface",func():request_iso(id))
-		viewer._button(body,"Remove isosurface",func():
+		_number(slice_body,"Slice plane distance • world",states[id].slice_distance,-10000,10000,.1,func(v):states[id].slice_distance = v;resample())
+		var clip := CheckButton.new();clip.text = "Clip at world X plane";clip.button_pressed = states[id].clip;_tool_body("Clipping",id).add_child(clip);clip.toggled.connect(func(v):states[id].clip = v;resample())
+		_number(_tool_body("Clipping",id),"Clip X",states[id].clip_distance,-10000,10000,.1,func(v):states[id].clip_distance = v;resample())
+		_scalar_input(_tool_body("Isosurface",id),"Isosurface threshold",states[id].threshold,func(v):return _set_threshold(id,v))
+		viewer._button(_tool_body("Isosurface",id),"Extract isosurface",func():request_iso(id))
+		viewer._button(_tool_body("Isosurface",id),"Remove isosurface",func():
 			states[id].isosurface = false;_sync_iso_target())
-	var volume_choice := OptionButton.new();panel.add_child(volume_choice)
+	var probe_body := _tool_body("Source probe")
+	var volume_choice := OptionButton.new();probe_body.add_child(volume_choice)
 	for id in reader.objects:
 		if reader.objects[id].kind == "volume":volume_choice.add_item(id)
 	for i in range(volume_choice.item_count):
 		if volume_choice.get_item_text(i) == selected_volume:volume_choice.select(i)
 	volume_choice.item_selected.connect(func(i):selected_volume = volume_choice.get_item_text(i))
-	var probe_title := Label.new();probe_title.text = "Source probe • world xyz";panel.add_child(probe_title)
-	for axis in ["X","Y","Z"]:probe_spins.append(_number(panel,axis,0,-1e12,1e12,.1,func(_v):pass))
-	viewer._button(panel,"Probe selected volume",probe_selected_volume)
-	probe_marker_check = CheckButton.new();probe_marker_check.text = "Show probe marker"
-	probe_marker_check.button_pressed = probe_marker_enabled
-	probe_marker_check.tooltip_text = "Show the last explicit source probe in the viewport and screenshots. Keeps coordinates/result when hidden; session-only, excluded from video."
-	panel.add_child(probe_marker_check);probe_marker_check.toggled.connect(set_probe_marker_enabled)
-	probe_label = Label.new();probe_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART;panel.add_child(probe_label)
-	iso_status = Label.new();iso_status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART;panel.add_child(iso_status)
+	var probe_title := Label.new();probe_title.text = "Source probe • world xyz";probe_body.add_child(probe_title)
+	for axis in ["X","Y","Z"]:probe_spins.append(_number(probe_body,axis,0,-1e12,1e12,.1,func(_v):pass))
+	viewer._button(probe_body,"Probe selected volume",probe_selected_volume)
+	probe_label = Label.new();probe_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART;probe_body.add_child(probe_label)
+	iso_status = Label.new();iso_status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART;_tool_body("Isosurface").add_child(iso_status)
+	for body in tool_bodies.values(): viewer.tools_ui.shorten_copy(body)
 # Probe result/position and marker preference are session state, not recipe state.
 func set_probe_marker_enabled(enabled: bool) -> void:
 	probe_marker_enabled = enabled
-	if is_instance_valid(probe_marker_check):probe_marker_check.set_pressed_no_signal(enabled)
 	if is_instance_valid(probe_marker):probe_marker.visible = enabled and probe_marker_valid
 func probe_selected_volume() -> void:
 	if selected_volume.is_empty() or not views.has(selected_volume):return
@@ -662,13 +681,14 @@ func _build_color_ui(body: VBoxContainer, id: String) -> void:
 	mode.tooltip_text = "Display-only normalization. Opacity remains independent. Log requires positive bounds and positive finite source samples; invalid samples are unavailable."
 	mode.item_selected.connect(func(i):
 		if not _set_color_normalization(id,"log" if i else "linear"):mode.select(1 if states[id].color_mapping.normalization == "log" else 0))
-	var symmetric := Button.new();symmetric.text = "Freeze symmetric range from sample";body.add_child(symmetric)
+	var derive := _tool_body("Derive range",id)
+	var symmetric := Button.new();symmetric.text = "Freeze symmetric range from sample";derive.add_child(symmetric)
 	symmetric.pressed.connect(func():request_color_range(id,"symmetric"))
-	var low := _number(body,"Lower percentile • display choice",states[id].color_mapping.percentile_low,0,100,.1,func(_v):pass)
-	var high := _number(body,"Upper percentile • display choice",states[id].color_mapping.percentile_high,0,100,.1,func(_v):pass)
-	var percent := Button.new();percent.text = "Freeze percentile range from sample";body.add_child(percent)
+	var low := _number(derive,"Lower percentile • display choice",states[id].color_mapping.percentile_low,0,100,.1,func(_v):pass)
+	var high := _number(derive,"Upper percentile • display choice",states[id].color_mapping.percentile_high,0,100,.1,func(_v):pass)
+	var percent := Button.new();percent.text = "Freeze percentile range from sample";derive.add_child(percent)
 	percent.pressed.connect(func():request_color_range(id,"percentile",low.value,high.value))
-	var reset := Button.new();reset.text = "Reset color • linear 0–1";body.add_child(reset)
+	var reset := Button.new();reset.text = "Reset color • linear 0–1";derive.add_child(reset)
 	reset.pressed.connect(func():
 		states[id].lower = 0.;states[id].upper = 1.;states[id].color_mapping = ColorMapping.DEFAULT.duplicate();apply_state(snapshot()))
 	var status := Label.new();status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART;body.add_child(status)

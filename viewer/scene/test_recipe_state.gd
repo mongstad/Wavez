@@ -51,7 +51,7 @@ func session(viewer) -> Dictionary:
 func change_session(viewer, value: bool) -> void:
 	viewer.screenshot_directory = output.path_join("session-destination" if value else "original-destination")
 	viewer.control_checks["PNG inspection JSON sidecar"].button_pressed = value
-	viewer.control_checks["Free camera • WASD / Q / E"].button_pressed = value
+	viewer.free_camera = value; viewer.orbit_enabled = not value
 	viewer.scene_loop_playback = value
 	viewer.scene_layers.playback.policy = "512" if value else "adaptive"
 	for i in range(3):viewer.scene_layers.probe_spins[i].value = (12+i if value else 2+i)
@@ -62,8 +62,12 @@ func change_session(viewer, value: bool) -> void:
 
 func configure(viewer, preset: String, active: bool) -> void:
 	viewer._apply_preset(preset)
-	for name in ["Point rendering","Auto orbit  [O]","Recorded history  [T]","Invert","Show legend","X slice • ±3 simulation units","Reference grid / axes (display only)","Declared simulation domain","Recorded sample data bounds"]:
+	for name in ["Point rendering","Recorded history  [T]","Invert","Show legend","X slice • ±3 simulation units"]:
 		viewer.control_checks[name].button_pressed = active
+	viewer.orbit_enabled = active
+	viewer.guide_mesh.visible = active
+	viewer.guide_visibility.domain = active; viewer.guide_visibility.data = active
+	for name in viewer.legacy_sections: viewer.legacy_sections[name] = active
 	viewer.control_checks["Particle layer visible"].button_pressed = not active
 	for name in viewer.section_buttons:viewer.section_buttons[name].button_pressed = active
 	viewer.visual_sliders.Exposure.value = 1.2 if active else .8
@@ -93,9 +97,11 @@ func check_ui(viewer, visual: Dictionary, label: String) -> void:
 	check(controls.mode.selected == (1 if mapping.mode == "magnitude" else 0),label+" opacity mode control")
 	check(same(controls.lower.text.to_float(),mapping.lower) and same(controls.upper.text.to_float(),mapping.upper),label+" opacity threshold controls")
 	for name in visual.sections:
+		if viewer.legacy_sections.has(name):
+			check(viewer.legacy_sections[name] == visual.sections[name],label+" legacy section state "+name); continue
 		check(viewer.sections[name].visible == visual.sections[name],label+" section body "+name)
 		check(viewer.section_buttons[name].button_pressed == visual.sections[name],label+" section button "+name)
-	var fields := {"Point rendering":"clean_view","Auto orbit  [O]":"orbit_enabled","Recorded history  [T]":"trails_enabled","Invert":"invert_map","Show legend":"show_legend","X slice • ±3 simulation units":"slice_enabled","Particle layer visible":"particle_layer_visible"}
+	var fields := {"Point rendering":"clean_view","Recorded history  [T]":"trails_enabled","Invert":"invert_map","Show legend":"show_legend","X slice • ±3 simulation units":"slice_enabled","Particle layer visible":"particle_layer_visible"}
 	for name in fields:check(viewer.control_checks[name].button_pressed == visual[fields[name]],label+" checkbox "+name)
 	check(viewer.glow_slider.editable == viewer.environment.glow_enabled,label+" Bloom availability")
 	check(not viewer.playing and viewer.inspection_paused,label+" intentional playback pause")

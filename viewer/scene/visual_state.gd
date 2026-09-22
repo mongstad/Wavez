@@ -15,13 +15,13 @@ static func snapshot(viewer) -> Dictionary:
 	state.hidden_types = viewer.hidden_types.keys()
 	state.guide_visible = viewer.guide_mesh.visible
 	state.starfield_visible = viewer.starfield.visible
-	state.preset = viewer.preset_option.get_item_text(viewer.preset_option.selected)
+	state.preset = viewer.selected_preset
 	state.sliders = {}
 	for name in viewer.visual_sliders: state.sliders[name] = viewer.visual_sliders[name].value
 	# Existing native scene recipes include this inert field. Keep their state shape
 	# readable without recreating the retired spectrum controls.
 	state.sliders["Intensity cutoff"] = viewer.intensity_floor
-	state.sections = {}
+	state.sections = viewer.legacy_sections.duplicate()
 	for name in viewer.sections: state.sections[name] = viewer.sections[name].visible
 	state.environment = {}
 	for key in ["glow_enabled", "glow_intensity", "glow_strength", "glow_bloom", "fog_enabled", "fog_density", "tonemap_mode", "tonemap_exposure", "tonemap_white", "background_mode"]:
@@ -54,6 +54,7 @@ static func apply(viewer, state: Dictionary) -> void:
 	viewer.glow_slider.editable = viewer.environment.glow_enabled
 	for key in state.get("viewport", {}): viewer.get_viewport().set(key, state.viewport[key])
 	for name in state.get("sections", {}):
+		if viewer.legacy_sections.has(name): viewer.legacy_sections[name] = state.sections[name]
 		if viewer.sections.has(name):
 			viewer.sections[name].visible = state.sections[name]
 			viewer.section_buttons[name].set_pressed_no_signal(state.sections[name])
@@ -65,8 +66,7 @@ static func apply(viewer, state: Dictionary) -> void:
 	viewer._restyle()
 	for i in range(viewer.colormap_option.item_count):
 		if viewer.colormap_option.get_item_text(i) == viewer.colormap_name: viewer.colormap_option.select(i)
-	for i in range(viewer.preset_option.item_count):
-		if viewer.preset_option.get_item_text(i) == state.get("preset", ""): viewer.preset_option.select(i)
+	if state.get("preset", "") in viewer.VIEWING_PRESETS: viewer.selected_preset = state.preset
 	for name in state.get("sliders", {}):
 		if viewer.visual_sliders.has(name): viewer.visual_sliders[name].set_value_no_signal(state.sliders[name])
 	for i in range(viewer.manual_spins.size()): viewer.manual_spins[i].set_value_no_signal(viewer.manual_min if i == 0 else viewer.manual_max)

@@ -44,12 +44,12 @@ func run() -> void:
 	check(viewer.resize_handle.gui_input.get_connections().size() == 1, "Dock resize has one production event owner")
 	check(viewer.play_button.pressed.get_connections().size() == 1, "Play has one controller binding")
 	check(not viewer.sections.has("Playback") and not viewer.visual_sliders.has("Physical time units / second"), "Hidden duplicate playback form is absent")
-	for group in ["Data cache", "Rendering", "Color Mapping", "Advanced • Size / Brightness", "Camera", "Trails", "Particle Filters", "Advanced • Post-processing", "Capture / Export"]:
+	for group in ["Rendering", "Color Mapping", "Advanced • Size / Brightness", "Trails", "Particle Filters", "Advanced • Post-processing"]:
 		check(viewer.sections.has(group) and viewer.inspector_box.is_ancestor_of(viewer.sections[group]), "Canonical inspector group retained: " + group)
 	check(science(viewer) == initial, "Shell construction preserves scientific visual state and section keys")
 	await settle(); shell.layout(); await settle()
 	check(shell.empty.visible and not viewer.inspector_box.visible, "Empty shell offers Open without dummy scientific form")
-	check(shell.menus.State.disabled and shell.menus.Export.disabled, "Source-dependent menus explain unavailable state")
+	check(shell.commands.copy.popup.is_item_disabled(shell.commands.copy.index) and shell.commands.video.popup.is_item_disabled(shell.commands.video.index), "Source-dependent menus explain unavailable state")
 	check(shell.bar.size.y == 48, "Command bar is 48 logical pixels")
 	picture("empty")
 	viewer._show_open_dialog(); await settle(); check(viewer.open_dialog.visible, "Canonical Open picker reachable")
@@ -73,12 +73,12 @@ func run() -> void:
 	# No source, rendering or scientific controller work may be caused by shell redraw/nav.
 	Profile.enabled = true; Profile.reset()
 	for repeat in 10:
-		for page in 4: shell.select_workspace(page); shell.layout()
+		for page in 2: shell.select_workspace(page); shell.layout()
 		shell.select_workspace(0)
 	var activity := Profile.report(); Profile.enabled = false
 	check(activity.stages.is_empty() and activity.counters.is_empty(), "Shell layout and navigation trigger no instrumented scientific work")
 	check(science(viewer) == before and viewer.committed_sample == prior_sample, "Workspace navigation preserves scientific state, source binding and sample")
-	for page in 4:
+	for page in 2:
 		shell.select_workspace(page); check(shell.chooser.selected == page, "Workspace choice synchronized " + str(page))
 		shell.select_workspace(0)
 	var focus: Control = viewer.section_buttons["Rendering"]; focus.grab_focus()
@@ -102,20 +102,23 @@ func run() -> void:
 	var release := InputEventMouseButton.new(); release.button_index = MOUSE_BUTTON_LEFT
 	viewer._input(release); check(not viewer.dragging, "Release over chrome ends viewport drag")
 	# Menus expose canonical forms, not duplicate save/export models.
-	shell.menus.State.get_popup().id_pressed.emit(0); await settle()
-	check(viewer.sections["Capture / Export"].visible, "State routes to existing scene recipe controls")
-	shell.menus.State.get_popup().id_pressed.emit(1); await settle()
-	check(viewer.sections["Analysis export and state"].visible, "State routes to existing analysis recipe controls")
-	shell.menus.Export.get_popup().id_pressed.emit(2); await settle()
-	check(viewer.sections["Analysis export and state"].visible, "Numerical export routes to existing controller")
-	shell.menus.Export.get_popup().id_pressed.emit(0); await settle()
-	check(viewer.screenshot_dialog.visible and viewer.screenshot_pending, "PNG menu routes to canonical folder picker")
-	viewer.screenshot_dialog.canceled.emit(); viewer.screenshot_dialog.hide()
+	activate(shell,"Save scene"); await settle()
+	check(viewer.tools_ui.window.visible and viewer.tools_ui.current == "Save scene", "State reaches canonical scene save with shared limits")
+	activate(shell,"Save analysis"); await settle()
+	check(viewer.tools_ui.content.is_ancestor_of(viewer.selection_controller.temporal.durable.quota), "Analysis state retains the existing request limits")
+	activate(shell,"data"); await settle()
+	check(viewer.tools_ui.current == "Data", "Numerical export routes to existing controller")
+	activate(shell,"image"); await settle()
+	check(viewer.tools_ui.current == "Image", "Image menu reaches existing sidecar option")
+	var save := preload("res://analysis/ui_controls.gd").button(viewer.tools_ui.form("Image"),"Image")
+	save.pressed.emit(); await settle()
+	check(viewer.screenshot_dialog.visible and viewer.screenshot_pending, "PNG action routes to canonical folder picker")
+	viewer.screenshot_dialog.canceled.emit(); viewer.screenshot_dialog.hide(); viewer.tools_ui.close()
 	check(not viewer.screenshot_pending and viewer.screenshot_directory.is_empty(), "PNG cancel retains existing session semantics")
 	shell.menus.Help.get_popup().id_pressed.emit(0); await settle()
 	check(shell.details.visible and shell.detail_text.text.contains("Midnight Scientific"), "Help menu opens focused navigation details")
 	shell.details.hide()
-	shell.menus.Export.get_popup().id_pressed.emit(1); await settle()
+	activate(shell,"video"); await settle()
 	check(viewer.video_dialog.visible, "Video menu reopens canonical export dialog")
 	viewer.video_dialog.hide()
 	shell.show_source(); await settle()
@@ -132,6 +135,24 @@ func run() -> void:
 	check(await wait_jobs(control) and control.temporal.durable.last_recipe.has("path"), "Production v3 save through canonical worker")
 	control.temporal.durable.load_from(output.path_join("analysis.inspection/inspection.json"))
 	check(await wait_jobs(control) and control.temporal.durable.last_recipe.get("restored",false), "Production v3 load through canonical worker")
+	# Execute an existing numerical request and export through the migrated controls.
+	var temporal = control.temporal
+	temporal.mode.select(2); temporal.start_time.text = "0"; temporal.end_time.text = "1"
+	activate(shell,"tool:Temporal")
+	preload("res://analysis/ui_controls.gd").button(temporal.panel,"Run analysis").pressed.emit()
+	check(await wait_jobs(control) and not temporal.current_result.is_empty(),"Focused Temporal retains numerical request lifecycle")
+	activate(shell,"data")
+	temporal.durable.folder_name.text = "menu-data"
+	viewer.tools_ui.durable_controls.Data.pressed.emit(); await settle()
+	var picker: FileDialog
+	for child in temporal.durable.get_children():
+		if child is FileDialog and child.visible: picker = child
+	check(picker != null,"Data action opens existing destination picker")
+	if picker != null:
+		picker.dir_selected.emit(output); picker.hide()
+		check(await wait_jobs(control) and temporal.durable.last_export.has("path"),"Data export completes through canonical worker")
+		check(FileAccess.file_exists(output.path_join("menu-data/values.csv")),"Data export retains full values artifact")
+	viewer.tools_ui.close()
 	# Native transitions are asynchronous. Compositor geometry is checked separately on KDE.
 	if DisplayServer.get_name() != "headless":
 		var fullscreen_state := science(viewer)
@@ -158,11 +179,12 @@ func run() -> void:
 			check(DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_WINDOWED, route + " mouse exits fullscreen")
 			check(shell.bar.visible and shell.dock.position.y == 48, route + " restores command bar and layout")
 			check(science(viewer) == fullscreen_state, route + " exit preserves scientific state")
+	await menu_checks(viewer)
 	await immersive_checks(viewer)
 	# Logical geometry at supported factors. No scientific projection/state changes.
 	shell.open_error.hide()
-	for dimensions in [Vector2i(1440,900), Vector2i(1024,640)]:
-		for factor in ([1.0] if dimensions.x == 1440 else [1.0, 1.25, 1.5, 2.0]):
+	for dimensions in [Vector2i(1440,900), Vector2i(1920,1080), Vector2i(1024,640)]:
+		for factor in ([1.0] if dimensions.x >= 1440 else [1.0, 1.25, 1.5, 2.0]):
 			root.content_scale_size = Vector2i.ZERO; root.content_scale_factor = factor
 			root.size = Vector2i(Vector2(dimensions)*factor)
 			await settle(); shell.layout(); await settle()
@@ -194,10 +216,14 @@ func run() -> void:
 	check(absf(viewer.overlay_panel.size.x-440) < 1, "Right dock splitter drag direction")
 	viewer.panel_width = 360; shell.layout()
 	# Replacement still invalidates source-bound state through the existing lifecycle.
+	viewer.scene_prebuffer_enabled = true
 	viewer._open_capture(output.path_join("replacement.ssc")); await settle()
+	check(viewer.tools_ui.form("Performance").is_ancestor_of(viewer.scene_layers.performance_panel),"Replaced-source budgets live only in Performance")
+	for worker in [viewer.scene_layers.field_playback,viewer.scene_layers.mesh_playback]:
+		if worker.enabled: check(viewer.scene_layers.performance_panel.is_ancestor_of(worker.label),"Preparation metrics remain in Performance")
 	check(viewer.generic_reader != prior_reader and control.state.definitions.is_empty(), "Successful replacement clears prior bound definitions")
 	var file := FileAccess.open(output.path_join("shell-report.json"), FileAccess.WRITE)
-	file.store_string(JSON.stringify({"checks":checks,"failures":failures,"layouts":layouts,"shell_scientific_activity":activity,"renderer":RenderingServer.get_current_rendering_method()},"\t")); file.close()
+	file.store_string(JSON.stringify({"checks":checks,"failures":failures,"layouts":layouts,"shell_scientific_activity":activity,"menu_tree":menu_tree(shell),"renderer":RenderingServer.get_current_rendering_method()},"\t")); file.close()
 	viewer.free(); await process_frame
 	print("SHELL: %d checks, %d failures" % [checks,failures.size()])
 	quit(0 if failures.is_empty() else 1)
@@ -227,7 +253,7 @@ func immersive_checks(viewer) -> void:
 		await create_timer(.5).timeout; shell.refresh(); await settle()
 		focus.grab_focus()
 		Profile.enabled = true; Profile.reset()
-		if prior_mode == Window.MODE_WINDOWED: shell.menus.View.get_popup().id_pressed.emit(4)
+		if prior_mode == Window.MODE_WINDOWED: activate(shell,"immersive")
 		else: viewer._unhandled_input(shortcut)
 		await create_timer(.5).timeout; await settle()
 		check(shell.immersive and root.mode == Window.MODE_FULLSCREEN, "Immersive native entry from " + str(prior_mode))
@@ -277,3 +303,55 @@ func immersive_checks(viewer) -> void:
 	check(viewer.camera.transform != camera, "Immersive pointer camera controls remain active")
 	shell.exit_immersive(); await create_timer(.5).timeout
 	viewer._update_camera()
+
+func activate(shell, name: String) -> void:
+	shell.refresh_commands()
+	var command: Dictionary = shell.commands[name]
+	command.popup.id_pressed.emit(command.index)
+
+func menu_checks(viewer) -> void:
+	var shell = viewer.shell
+	check(shell.menus.keys() == ["File","View","Tools","Help"],"Exact four top menus without duplicate State or Export")
+	for title in viewer.tools_ui.SECTIONS:
+		check(not viewer.sections.has(title) and not viewer.section_buttons.has(title),"No sidebar action for migrated " + title)
+	var snapshot := science(viewer)
+	var requests: int = viewer.selection_controller.jobs.serial
+	Profile.enabled = true; Profile.reset()
+	for name in shell.commands:
+		if not name.begins_with("tool:"): continue
+		activate(shell,name)
+		check(viewer.tools_ui.current == name.trim_prefix("tool:") and viewer.tools_ui.window.visible,"Reachable tool " + name)
+		check(viewer.tools_ui.content.get_child_count() == 1,"Only one focused form for " + name)
+	var activity := Profile.report(); Profile.enabled = false
+	check(activity.stages.is_empty() and activity.counters.is_empty(),"Tool navigation performs no scientific work")
+	check(viewer.selection_controller.jobs.serial == requests and science(viewer) == snapshot,"Tool navigation preserves requests and visual state")
+	activate(shell,"tool:Performance"); await settle()
+	if DisplayServer.get_name() != "headless": viewer.tools_ui.window.get_texture().get_image().save_png(output.path_join("tool-performance.png"))
+	activate(shell,"tool:Selection"); await settle()
+	if DisplayServer.get_name() != "headless": viewer.tools_ui.window.get_texture().get_image().save_png(output.path_join("tool-selection.png"))
+	activate(shell,"tool:Source probe"); await settle()
+	if DisplayServer.get_name() != "headless": viewer.tools_ui.window.get_texture().get_image().save_png(output.path_join("tool-probe.png"))
+	viewer.tools_ui.close()
+	activate(shell,"probe"); check(not viewer.scene_layers.probe_marker_enabled,"View probe marker toggles existing session state")
+	activate(shell,"probe"); check(viewer.scene_layers.probe_marker_enabled,"View probe marker restores session state")
+	activate(shell,"preset:Scientific"); check(viewer.selected_preset == "Scientific" and not viewer.environment.glow_enabled,"Viewing preset reuses existing environment action")
+	Visual.apply(viewer,snapshot)
+	check(science(viewer) == snapshot,"Menu changes preserve recipe round trip")
+	for name in shell.commands:
+		var entry: Dictionary = shell.commands[name]
+		var label: String = entry.popup.get_item_text(entry.index)
+		for character in ["/", "\\", "*", "(", ")", "_"]: check(not label.contains(character),"Concise menu label " + label)
+
+func menu_tree(shell) -> Array:
+	var result: Array = []
+	for title in shell.menus:
+		result.append(title); result.append_array(menu_children(shell.menus[title].get_popup(),"  "))
+	return result
+
+func menu_children(popup: PopupMenu, indent: String) -> Array:
+	var result: Array = []
+	for i in popup.item_count:
+		result.append(indent+popup.get_item_text(i))
+		var child := popup.get_item_submenu(i)
+		if not child.is_empty(): result.append_array(menu_children(popup.get_node(child),indent+"  "))
+	return result
