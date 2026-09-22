@@ -33,7 +33,10 @@ repository handbook in a read-only text dialog. Packaged builds without the
 handbook file report it unavailable; no new packaging or external dependency is
 introduced.
 
-Tools uses one nonmodal, scrollable host containing only the selected task. The
+Tools uses one nonmodal, scrollable host containing only the selected task.
+It starts hidden before entering the scene tree and opens only on an explicit
+command; [startup regression evidence](evidence/issue-67/tools-startup/README.md)
+covers the PR #73 launch-popup correction. The
 existing controls and controllers are retained once; navigation does not create
 requests or bind a source. Selection remains usable with viewport gestures.
 Temporal results and the existing diagnostics subsections have separate Results,

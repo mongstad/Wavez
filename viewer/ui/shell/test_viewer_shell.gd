@@ -38,6 +38,7 @@ func run() -> void:
 	var offline = Viewer.new(); offline.offline_instance = true; root.add_child(offline); offline.set_process(false)
 	var initial := science(offline)
 	check(offline.shell != null and not offline.shell.transport.is_processing(), "Offline uses production shell without automatic refresh")
+	check(not offline.tools_ui.window.visible,"Offline startup does not open Tools")
 	offline.free()
 	var viewer = Viewer.new(); viewer.scene_prebuffer_enabled = false; root.add_child(viewer); viewer.set_process(false)
 	var shell = viewer.shell
@@ -51,6 +52,7 @@ func run() -> void:
 	check(shell.empty.visible and not viewer.inspector_box.visible, "Empty shell offers Open without dummy scientific form")
 	check(shell.commands.copy.popup.is_item_disabled(shell.commands.copy.index) and shell.commands.video.popup.is_item_disabled(shell.commands.video.index), "Source-dependent menus explain unavailable state")
 	check(shell.bar.size.y == 48, "Command bar is 48 logical pixels")
+	check(not viewer.tools_ui.window.visible and viewer.tools_ui.current.is_empty(),"Interactive startup leaves Tools closed before any command")
 	picture("empty")
 	viewer._show_open_dialog(); await settle(); check(viewer.open_dialog.visible, "Canonical Open picker reachable")
 	viewer.open_dialog.canceled.emit(); viewer.open_dialog.hide()
@@ -61,6 +63,7 @@ func run() -> void:
 	await settle()
 	check(viewer.generic_reader != null and viewer.frame_count > 0, "Current SSC opens in production shell")
 	check(not shell.empty.visible and viewer.inspector_box.visible, "Successful open reveals retained inspector")
+	check(not viewer.tools_ui.window.visible,"Opening a capture does not open Tools")
 	var prior_reader = viewer.generic_reader
 	var prior_sample: Dictionary = viewer.committed_sample.duplicate(true)
 	var before := science(viewer)

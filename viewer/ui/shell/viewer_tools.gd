@@ -35,6 +35,8 @@ func setup(owner_viewer, canvas: CanvasLayer) -> void:
 	viewer = owner_viewer
 	storage = Control.new(); storage.hide(); canvas.add_child(storage)
 	window = Window.new(); window.title = "Tools"; window.transient = true
+	# A plain Window starts visible; hide before entering the tree to prevent a launch popup.
+	window.hide()
 	window.min_size = Vector2i(320,240); window.size = Vector2i(520,600)
 	window.close_requested.connect(close); canvas.add_child(window)
 	surface = PanelContainer.new(); window.add_child(surface); surface.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
