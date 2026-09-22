@@ -25,7 +25,7 @@ func run() -> void:
 	var layers = viewer.scene_layers
 	check(layers != null and viewer.frame_count == 2,"Fixture opened")
 	check(layers.probe_marker_enabled and not is_instance_valid(layers.probe_marker),"No marker before first explicit probe")
-	layers.probe_marker_check.button_pressed = false;layers.probe_marker_check.button_pressed = true
+	layers.set_probe_marker_enabled(false);layers.set_probe_marker_enabled(true)
 	check(not is_instance_valid(layers.probe_marker),"Toggling before probe creates no phantom marker")
 	var baseline: Image = await shot(viewer,"baseline")
 	layers.probe_selected_volume()
@@ -39,20 +39,20 @@ func run() -> void:
 	check(baseline.get_data() != shown.get_data(),"Shown cross appears in screenshot")
 	Job.write_json(output.path_join("shown-state.json"),Job.snapshot(viewer))
 	for repeat in 3:
-		layers.probe_marker_check.button_pressed = false
+		layers.set_probe_marker_enabled(false)
 		check(not layers.probe_marker.visible and layers.probe_label.text == result and layers.probe_marker.mesh == mesh,"Hide retains last result and geometry")
 		check(layers.views.field.probe(Vector3.ZERO) == 12.0 and layers.views.field.data.channels.value == values and viewer.committed_sample == scientific,"Visibility leaves source and sampling untouched")
-		layers.probe_marker_check.button_pressed = true
+		layers.set_probe_marker_enabled(true)
 		check(layers.probe_marker.visible and layers.probe_marker.mesh == mesh,"Restore same marker without re-probing")
-	layers.probe_marker_check.button_pressed = false
+	layers.set_probe_marker_enabled(false)
 	var hidden: Image = await shot(viewer,"hidden")
 	check(hidden.get_data() == baseline.get_data(),"Hidden screenshot equals marker-free baseline")
 	Job.write_json(output.path_join("hidden-state.json"),Job.snapshot(viewer))
 	check(viewer._save_inspection(output.path_join("recipe.json")) == OK,"Save recipe")
 	for enabled in [true,false]:
-		layers.probe_marker_check.button_pressed = enabled
+		layers.set_probe_marker_enabled(enabled)
 		check(viewer._load_inspection(output.path_join("recipe.json")).is_empty(),"Restore recipe")
-		check(layers.probe_marker_enabled == enabled and layers.probe_marker_check.button_pressed == enabled and layers.probe_marker.visible == enabled and layers.probe_label.text == result,"Recipe rebuild preserves session visibility and result")
+		check(layers.probe_marker_enabled == enabled and layers.probe_marker.visible == enabled and layers.probe_label.text == result,"Recipe rebuild preserves session visibility and result")
 	for time in [1.0,0.0,.5]:
 		viewer._seek_time(time)
 		check(not layers.probe_marker.visible and layers.probe_label.text == result,"Seek keeps hidden last explicit probe")
@@ -61,10 +61,10 @@ func run() -> void:
 	check(viewer.requested_time > .5 and not layers.probe_marker.visible and layers.probe_label.text == result,"Playback advances without resurrecting or recomputing marker")
 	viewer._seek_time(1.0);layers.probe_selected_volume()
 	check(not layers.probe_marker.visible and layers.probe_label.text.trim_prefix("value = ").to_float() == 22.0,"New probe while hidden updates value but stays hidden")
-	layers.probe_marker_check.button_pressed = true
+	layers.set_probe_marker_enabled(true)
 	check(layers.probe_marker.visible,"Restore latest hidden probe")
 	layers.probe_spins[0].value = 100;layers.probe_selected_volume()
-	layers.probe_marker_check.button_pressed = false;layers.probe_marker_check.button_pressed = true
+	layers.set_probe_marker_enabled(false);layers.set_probe_marker_enabled(true)
 	check(not layers.probe_marker.visible and layers.probe_label.text == "Unavailable","Invalid probe cannot restore stale cross")
 	layers.probe_spins[0].value = 0;layers.probe_selected_volume()
 	check(layers.probe_marker.visible,"Valid probe recovers visibility")

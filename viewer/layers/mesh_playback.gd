@@ -24,7 +24,7 @@ func setup(owner) -> void:
 	enabled = enabled and viewer.scene_prebuffer_enabled and not viewer.offline_instance and layers.reader.trusted
 	if enabled and worker.start() != OK:enabled = false
 	if enabled:
-		label = Label.new();label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART;layers.panel.add_child(label)
+		label = Label.new();label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART;layers.performance_panel.add_child(label)
 func close() -> void:worker.close();staged.clear()
 func invalidate() -> void:
 	worker.cancel();token = "";request_signature = "";staged.clear();buffering = false;pending_time = null;error = ""

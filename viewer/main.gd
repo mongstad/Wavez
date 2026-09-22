@@ -103,7 +103,6 @@ var current_sizes := PackedFloat32Array()
 var current_buffer := PackedFloat32Array()
 
 var hud: Label
-var help_label: Label
 var status_label: Label
 var timeline: HSlider
 var open_dialog: FileDialog
@@ -794,7 +793,11 @@ var resizing_panel := false
 var resize_handle: Control
 var control_checks: Dictionary = {}
 var manual_spins: Array[SpinBox] = []
-var preset_option: OptionButton
+var selected_preset := "Cinematic"
+const VIEWING_PRESETS := ["Cinematic", "Scientific", "Temperature", "Density", "Velocity", "Minimal / Presentation"]
+var preset_available := {}
+var tools_ui
+var legacy_sections := {}
 var channel_signature := ""
 var filter_values := PackedFloat64Array()
 var filter_source_generation := -1
@@ -804,6 +807,9 @@ var visual_sliders: Dictionary = {}
 var section_buttons: Dictionary = {}
 
 func _section(title: String, expanded := false) -> VBoxContainer:
+	if tools_ui.SECTIONS.has(title):
+		legacy_sections[title] = expanded
+		return tools_ui.form(tools_ui.SECTIONS[title])
 	var toggle := Button.new()
 	toggle.text = title
 	toggle.toggle_mode = true
@@ -850,6 +856,7 @@ func _build_inspector_controls() -> void:
 	add_child(canvas)
 	overlay_panel = PanelContainer.new()
 	canvas.add_child(overlay_panel)
+	tools_ui = preload("res://ui/shell/viewer_tools.gd").new(); add_child(tools_ui); tools_ui.setup(self,canvas)
 	var scroll := ScrollContainer.new()
 	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	overlay_panel.add_child(scroll)
@@ -859,14 +866,14 @@ func _build_inspector_controls() -> void:
 	hud = Label.new()
 	hud.text = "SimScope"
 	hud.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	inspector_box.add_child(hud)
+	tools_ui.storage.add_child(hud)
 	status_label = Label.new()
 	status_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	inspector_box.add_child(status_label)
+	tools_ui.storage.add_child(status_label)
 	resize_handle = Control.new()
 	resize_handle.mouse_default_cursor_shape = Control.CURSOR_HSIZE
 	canvas.add_child(resize_handle)
-	fields_availability = Label.new();fields_availability.text = "Fields unavailable • no grid recorded";fields_availability.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART;inspector_box.add_child(fields_availability)
+	fields_availability = Label.new();fields_availability.text = "Fields unavailable • no grid recorded";fields_availability.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART;tools_ui.storage.add_child(fields_availability)
 	var data_controls := _section("Data cache")
 	cache_label = Label.new(); cache_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	data_controls.add_child(cache_label)
@@ -883,10 +890,6 @@ func _build_inspector_controls() -> void:
 			generic_reader.configure_cache(decoded_cache_mib*1048576,false)
 		_update_hud())
 	var rendering := _section("Rendering", true)
-	var preset := _option(rendering, "Viewing preset")
-	preset_option = preset
-	for name in ["Cinematic", "Scientific", "Temperature", "Density", "Velocity", "Minimal / Presentation"]: preset.add_item(name)
-	preset.item_selected.connect(func(i: int): _apply_preset(preset.get_item_text(i)))
 	_visual_slider(rendering, "Particle size", 0.1, 8, point_scale, func(v: float): point_scale = v; _sync_visuals())
 	_visual_slider(rendering, "Brightness", 0.0, 5, brightness_scale, func(v: float): brightness_scale = v; _restyle())
 	_check(rendering, "Point rendering", clean_view, func(v: bool): _set_point_rendering(v))
@@ -910,13 +913,13 @@ func _build_inspector_controls() -> void:
 	advanced_color.visible = false
 	generic_box.add_child(advanced_color)
 	advanced_toggle.toggled.connect(func(v: bool): advanced_color.visible = v)
-	var norm := _check(advanced_color, "Logarithmic", false, func(v: bool): logarithmic = v; _remember_mapping(); _restyle())
+	var norm := _check(tools_ui.form("Mapping"), "Logarithmic", false, func(v: bool): logarithmic = v; _remember_mapping(); _restyle())
 	norm.tooltip_text = "Only finite positive values are valid; signed channels cannot use ordinary logarithms."
-	_check(advanced_color,"Cyclic phase",false,func(v: bool): cyclic = v; logarithmic = false if v else logarithmic; _remember_mapping(); _restyle())
-	interval_start = _inspection_number(advanced_color,"Interval start",0)
-	interval_end = _inspection_number(advanced_color,"Interval end",1)
-	_button(advanced_color,"Freeze range from recorded interval",_freeze_interval)
-	_button(advanced_color,"Cancel range scan",func(): range_request += 1)
+	_check(tools_ui.form("Mapping"),"Cyclic phase",false,func(v: bool): cyclic = v; logarithmic = false if v else logarithmic; _remember_mapping(); _restyle())
+	interval_start = _inspection_number(tools_ui.form("Derive range"),"Interval start",0)
+	interval_end = _inspection_number(tools_ui.form("Derive range"),"Interval end",1)
+	_button(tools_ui.form("Derive range"),"Freeze range from recorded interval",_freeze_interval)
+	_button(tools_ui.form("Derive range"),"Cancel range scan",func(): range_request += 1)
 	for key in ["Minimum", "Maximum"]:
 		var label := Label.new()
 		label.text = "Manual " + key
@@ -935,7 +938,7 @@ func _build_inspector_controls() -> void:
 		manual_spins.append(spin)
 		spin.editable = not auto_range
 	_check(generic_box, "Invert", false, func(v: bool): invert_map = v; _restyle())
-	_check(advanced_color, "Clamp out-of-range values", true, func(v: bool): clamp_map = v; _restyle())
+	_check(tools_ui.form("Mapping"), "Clamp out-of-range values", true, func(v: bool): clamp_map = v; _restyle())
 	_check(generic_box, "Show legend", true, func(v: bool): show_legend = v; _restyle())
 	colorbar = TextureRect.new()
 	colorbar.custom_minimum_size = Vector2(0, 18)
@@ -951,41 +954,37 @@ func _build_inspector_controls() -> void:
 	legend.size = Vector2(340, 90)
 	legend.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	var mappings := _section("Advanced • Size / Brightness")
+	section_buttons["Advanced • Size / Brightness"].text = "Advanced"
+	# Preserve retired disclosure keys without duplicate or nested expanders.
+	legacy_sections["Trails"] = false
+	legacy_sections["Advanced • Post-processing"] = false
 	size_option = _option(mappings, "Size by")
 	size_option.item_selected.connect(func(i: int): size_channel = size_option.get_item_text(i); _restyle())
 	brightness_option = _option(mappings, "Brightness by")
 	brightness_option.item_selected.connect(func(i: int): brightness_channel = brightness_option.get_item_text(i); _restyle())
 	mappings.tooltip_text = "Semantic size and brightness use a per-frame finite linear range. Visual overrides are direct multipliers."
 	var cam := _section("Camera")
-	_check(cam, "Auto orbit  [O]", orbit_enabled, func(v: bool): orbit_enabled = v; inspection_paused = false)
 	_visual_slider(cam, "Orbit speed • radians / second", -0.5, 0.5, orbit_speed, func(v: float): orbit_speed = v)
-	_check(cam, "Free camera • WASD / Q / E", false, func(v: bool): free_camera = v; orbit_enabled = not v)
-	_button(cam, "Focus particles  [F]", _focus_activity)
-	_button(cam, "Fullscreen  [F11]", _toggle_fullscreen)
-	var trails := _section("Trails")
-	_check(trails, "Recorded history  [T]", trails_enabled, func(v: bool): trails_enabled = v; _rebuild_trails())
+	_check(mappings, "Recorded history  [T]", trails_enabled, func(v: bool): trails_enabled = v; _rebuild_trails())
 	filter_box = _section("Particle Filters")
-	var post := _section("Advanced • Post-processing")
+	section_buttons["Particle Filters"].reparent(rendering)
+	filter_box.reparent(rendering)
+	var post := mappings
 	_visual_slider(post, "Exposure", .05, 3, exposure, func(v: float): exposure = v; _sync_visuals())
 	_visual_slider(post, "Gamma", .2, 3, gamma, func(v: float): gamma = v; _sync_visuals())
 	glow_slider = _visual_slider(post, "Bloom", 0, 2, environment.glow_intensity, func(v: float): environment.glow_intensity = v)
-	_check(post, "X slice • ±3 simulation units", false, func(v: bool): slice_enabled = v; _sync_visuals())
-	_visual_slider(post, "Slice position • box fraction", -1, 1, 0, func(v: float): slice_x = v; _sync_visuals())
+	_check(tools_ui.form("Slice"), "X slice • ±3 simulation units", false, func(v: bool): slice_enabled = v; _sync_visuals())
+	_visual_slider(tools_ui.form("Slice"), "Slice position • box fraction", -1, 1, 0, func(v: float): slice_x = v; _sync_visuals())
 	_build_geometry_ui()
 	selection_controller = preload("res://selection/selection_controller.gd").new()
 	add_child(selection_controller);selection_controller.setup(self)
 	var export_box := _section("Capture / Export")
-	_button(export_box, "Open capture…", _show_open_dialog)
-	_button(export_box, "Save PNG  [P]", _save_image)
-	_build_inspection_ui(export_box)
+	_button(export_box, "Image", _save_image)
+	_check(export_box,"PNG inspection JSON sidecar",false,func(v: bool): screenshot_sidecar = v).text = "Inspection sidecar"
 	video_dialog = preload("res://video/export_dialog.gd").new()
 	video_dialog.viewer = self
 	add_child(video_dialog)
-	_button(export_box, "Export Video…", func(): video_dialog.open())
-	help_label = Label.new()
-	help_label.text = "Drag: orbit • Wheel: zoom\nSpace: pause • ← / →: step\nF1: inspector • R: reset camera"
-	help_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	export_box.add_child(help_label)
+	tools_ui.finish_static()
 	open_dialog = FileDialog.new()
 	open_dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE
 	open_dialog.access = FileDialog.ACCESS_FILESYSTEM
@@ -1010,9 +1009,7 @@ func _move_free_camera(delta: float) -> void:
 	_update_camera()
 
 func _apply_preset(name: String) -> void:
-	if preset_option != null:
-		for i in range(preset_option.item_count):
-			if preset_option.get_item_text(i) == name: preset_option.select(i)
+	selected_preset = name
 	_set_clean(name != "Cinematic")
 	if name in ["Temperature", "Density", "Velocity"]:
 		var requested := name.to_lower() if name != "Velocity" else "velocity_magnitude"
@@ -1028,6 +1025,7 @@ func _open_scene(path: String) -> void:
 	var reader = preload("res://layers/scene_reader.gd").new()
 	if not reader.open(path):
 		status_label.text = reader.error; _shell_open_error = reader.error; return
+	tools_ui.close(false)
 	_reset_inspection_source()
 	if generic_reader != null: generic_reader.close()
 	generic_reader = reader;reader_generation = reader.generation
@@ -1127,11 +1125,9 @@ func _refresh_mapping_options_profiled() -> void:
 	brightness_option.disabled = scene_layers == null
 	var available := _scalar_channels(frame_a, false).duplicate() if scene_layers != null else {}
 	if scene_layers != null and _has_velocity(frame_a): available.velocity_magnitude = true
-	for i in range(preset_option.item_count):
-		var preset_name := preset_option.get_item_text(i)
-		if preset_name in ["Temperature", "Density", "Velocity"]:
-			var required := "velocity_magnitude" if preset_name == "Velocity" else preset_name.to_lower()
-			preset_option.set_item_disabled(i, not available.has(required))
+	for preset_name in VIEWING_PRESETS:
+		var required: String = "velocity_magnitude" if preset_name == "Velocity" else preset_name.to_lower()
+		preset_available[preset_name] = not preset_name in ["Temperature", "Density", "Velocity"] or available.has(required)
 	if scene_layers == null:
 		legend.visible = false
 		colorbar.visible = false
@@ -1336,7 +1332,7 @@ func _sync_control_state_profiled() -> void:
 	if control_checks.has("Recorded history  [T]"):
 		control_checks["Recorded history  [T]"].disabled = not _has_particle_ids()
 		control_checks["Recorded history  [T]"].tooltip_text = "Historical markers require explicitly recorded particle IDs."
-	var states := {"Point rendering":clean_view, "Auto orbit  [O]":orbit_enabled, "Recorded history  [T]":trails_enabled, "Automatic range":auto_range, "Logarithmic":logarithmic, "Invert":invert_map, "Clamp out-of-range values":clamp_map, "Show legend":show_legend,"X slice • ±3 simulation units":slice_enabled,"Particle layer visible":particle_layer_visible}
+	var states := {"Point rendering":clean_view, "Auto orbit  [O]":orbit_enabled, "Recorded history  [T]":trails_enabled, "Automatic range":auto_range, "Logarithmic":logarithmic, "Invert":invert_map, "Clamp out-of-range values":clamp_map, "Show legend":show_legend,"X slice • ±3 simulation units":slice_enabled}
 	for key in states:
 		if control_checks.has(key): control_checks[key].set_pressed_no_signal(states[key])
 	for spin in manual_spins: spin.editable = not auto_range
@@ -1524,11 +1520,6 @@ func _sync_inspection_controls() -> void:
 func _build_geometry_ui() -> void:
 	var panel := _section("Geometry / Guides")
 	geometry_label = Label.new(); geometry_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; panel.add_child(geometry_label)
-	_check(panel,"Reference grid / axes (display only)",false,func(v: bool): guide_mesh.visible = v)
-	for key in guide_visibility:
-		var title: String = {"domain":"Declared simulation domain","data":"Recorded sample data bounds","absorber":"Declared absorber","imposed":"Declared imposed regions"}[key]
-		_check(panel,title,false,func(v: bool): guide_visibility[key] = v; _apply_geometry())
-	_check(panel,"Particle layer visible",true,func(v: bool): particle_layer_visible = v; _render_current(phase))
 	_button(panel,"Load geometry override JSON…",func():
 		if geometry_dialog == null:
 			geometry_dialog = FileDialog.new(); geometry_dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE; geometry_dialog.access = FileDialog.ACCESS_FILESYSTEM
@@ -1584,17 +1575,13 @@ func _update_data_guide_profiled() -> void:
 	geometry_label.text = Geometry.describe(geometry_metadata,not geometry_override.is_empty())
 	geometry_label.text += "\nData bounds at recorded scalar sample t=%.5f: %s → %s" % [frame_a.sim_time,Geometry.a(low),Geometry.a(high)] if frame_a != null and low.is_finite() else "\nData bounds: unavailable"
 
-func _build_inspection_ui(parent: Control) -> void:
-	_check(parent,"PNG inspection JSON sidecar",false,func(v: bool): screenshot_sidecar = v)
-	_button(parent,"Copy Inspection State",func():
-		if frame_a == null: status_label.text = "Open a capture first."; return
-		if scene_layers != null: _refresh_frame_count()
-		var state := Inspection.snapshot(self)
-		if state.is_empty(): status_label.text = "Source changed during inspection; retry when stable."; return
-		DisplayServer.clipboard_set(JSON.stringify(state,"\t"))
-		status_label.text = "Copied versioned inspection JSON with committed sample and capture identity.")
-	_button(parent,"Save inspection recipe…",func(): _show_recipe_dialog(true))
-	_button(parent,"Load inspection recipe…",func(): _show_recipe_dialog(false))
+func _copy_inspection_state() -> void:
+	if frame_a == null: status_label.text = "Open a capture first."; return
+	if scene_layers != null: _refresh_frame_count()
+	var state := Inspection.snapshot(self)
+	if state.is_empty(): status_label.text = "Source changed during inspection; retry when stable."; return
+	DisplayServer.clipboard_set(JSON.stringify(state,"\t"))
+	status_label.text = "Copied versioned inspection JSON with committed sample and capture identity."
 
 func _show_recipe_dialog(saving: bool) -> void:
 	if frame_a == null: status_label.text = "Open the capture first."; return

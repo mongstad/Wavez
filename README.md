@@ -12,8 +12,9 @@ and [persistent status and Jobs](docs/UX3_STATUS.md). Recorded-time playback,
 [media timing](docs/UX3_MEDIA_TRANSPORT.md), [delayed seek feedback](docs/UX3_TRANSIENT_STATUS.md),
 [immersive fullscreen](docs/UX3_FULLSCREEN.md) and production-shell video overlays
 are owner-merged, including final [UX3 integration validation](docs/UX3_REPORT.md)
-in PR #64. The [UX4 menu and panel contract](docs/UX4_DESIGN.md) is pending owner
-review under #66. Production control migration remains separately gated.
+in PR #64. The [UX4 design](docs/UX4_DESIGN.md) was owner-merged in PR #72.
+[UX4 command menus](docs/UX4_MENUS.md) are pending owner review under #67;
+the permanent-panel redesign and final focused tool composition remain gated.
 
 Start with:
 

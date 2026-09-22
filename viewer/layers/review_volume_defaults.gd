@@ -46,6 +46,6 @@ func run() -> void:
 		gpu.sort();cpu.sort();elapsed.sort()
 		var image := vp.get_texture().get_image()
 		check(image.save_png(job.output.path_join(item.name+".png")) == OK,item.name+" screenshot")
-		results.append({"name":item.name,"time":item.time,"state":viewer.scene_layers.states[job.field].duplicate(true),"particles":viewer.particle_layer_visible,"preset":viewer.preset_option.get_item_text(viewer.preset_option.selected),"sample_ms":sample_ms,"gpu_ms_median":gpu[15],"gpu_ms_p95":gpu[28],"render_cpu_ms_median":cpu[15],"frame_wall_ms_median":elapsed[15],"probe":probe,"grid_lod":grid.lod})
+		results.append({"name":item.name,"time":item.time,"state":viewer.scene_layers.states[job.field].duplicate(true),"particles":viewer.particle_layer_visible,"preset":viewer.selected_preset,"sample_ms":sample_ms,"gpu_ms_median":gpu[15],"gpu_ms_p95":gpu[28],"render_cpu_ms_median":cpu[15],"frame_wall_ms_median":elapsed[15],"probe":probe,"grid_lod":grid.lod})
 	Job.write_json(job.output.path_join("render-report.json"),{"checks":checks,"failures":failures,"renderer":RenderingServer.get_current_rendering_method(),"initial_state":initial,"cases":results})
 	vp.queue_free();await process_frame;print("VOLUME REVIEW: ",checks," checks; ",failures.size()," failures");quit(0 if failures.is_empty() else 1)

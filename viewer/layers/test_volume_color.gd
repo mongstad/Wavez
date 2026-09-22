@@ -55,6 +55,7 @@ func run() -> void:
 			check(state.opacity_mapping == opacity,channel+" opacity unchanged")
 			check(layers.color_controls[id].status.text.contains("fixed across playback") and layers.color_controls[id].status.text.contains("Clipping:"),channel+" frozen/clipping disclosure")
 			if policy == "percentile":check(layers.color_controls[id].status.text.contains("COLOR CLIPPING PRESENT") == bool(oracle.percentile_clips),channel+" actual clipping agrees with NumPy")
+			check(not layers.color_controls[id].status.visible and layers.color_controls[id].indicator.visible == layers.color_controls[id].status.text.contains("COLOR CLIPPING PRESENT"),channel+" concise warning agrees with detailed clipping diagnostics")
 			var mapping: Dictionary = state.color_mapping.duplicate(true);var bounds := [state.lower,state.upper]
 			layers.sample(0.);check([layers.states[id].lower,layers.states[id].upper] == bounds and layers.states[id].color_mapping == mapping,channel+" frozen across seek")
 			layers.sample(job.time)
@@ -104,6 +105,7 @@ func run() -> void:
 	if job.get("synthetic",false):await synthetic_checks(id)
 	layers.states[id].visible = false;layers.resample()
 	check(not layers.color_controls[id].status.text.contains("Source finite range"),"hidden layer clears stale source statistics disclosure")
+	check(not layers.color_controls[id].indicator.visible,"hidden layer clears stale clipping indicator")
 	vp.queue_free();await process_frame
 	Job.write_json(job.output.path_join("report.json"),{"checks":checks,"failures":failures,"renderer":RenderingServer.get_current_rendering_method(),"cases":cases})
 	print("VOLUME COLOR: ",checks," checks, ",failures.size()," failures");quit(0 if failures.is_empty() else 1)
@@ -136,6 +138,7 @@ func synthetic_checks(id: String) -> void:
 	Job.write_json(job.output.path_join("invalid-export-state.json"),Job.snapshot(viewer))
 	layers.sample(2.)
 	check(not grid.color_error.is_empty() and not grid.quad.visible and layers.color_controls[id].status.text.contains("unavailable"),"nonpositive future sample explicitly unavailable")
+	check(layers.color_controls[id].indicator.visible and layers.color_controls[id].indicator.text == "⚠ Color unavailable","invalid color sample has concise exception indicator")
 	check(grid.probe(Vector3.ZERO) == 0.,"unavailable log view still probes original zero")
 	layers.states[id].color_mapping.normalization = "linear";layers.states[id].channel = "ten";layers.sample(0.)
 	var before: Dictionary = layers.snapshot()

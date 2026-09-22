@@ -1,0 +1,109 @@
+{
+  "checks": 507,
+  "failures": [],
+  "layouts": [
+    {
+      "bar": "(1440.0, 48.0)",
+      "dock": "[P: (1080.0, 48.0), S: (360.0, 748.0)]",
+      "logical": "(1440, 900)",
+      "scale": 1.0
+    },
+    {
+      "bar": "(1920.0, 48.0)",
+      "dock": "[P: (1560.0, 48.0), S: (360.0, 928.0)]",
+      "logical": "(1920, 1080)",
+      "scale": 1.0
+    },
+    {
+      "bar": "(1024.0, 48.0)",
+      "dock": "[P: (704.0, 48.0), S: (320.0, 448.0)]",
+      "logical": "(1024, 640)",
+      "scale": 1.0
+    },
+    {
+      "bar": "(1024.0, 48.0)",
+      "dock": "[P: (704.0, 48.0), S: (320.0, 448.0)]",
+      "logical": "(1024, 640)",
+      "scale": 1.25
+    },
+    {
+      "bar": "(1024.0, 48.0)",
+      "dock": "[P: (704.0, 48.0), S: (320.0, 448.0)]",
+      "logical": "(1024, 640)",
+      "scale": 1.5
+    },
+    {
+      "bar": "(1024.0, 48.0)",
+      "dock": "[P: (704.0, 48.0), S: (320.0, 448.0)]",
+      "logical": "(1024, 640)",
+      "scale": 2.0
+    }
+  ],
+  "menu_tree": [
+    "File",
+    "  Open capture",
+    "  State",
+    "    Copy state",
+    "    Save scene",
+    "    Load scene",
+    "    Save analysis",
+    "    Load analysis",
+    "    Resolve input",
+    "  Export",
+    "    Image",
+    "    Video",
+    "    Data",
+    "View",
+    "  Panels",
+    "  Fullscreen",
+    "  Immersive",
+    "  Probe marker",
+    "  Guides",
+    "    Grid and axes",
+    "    Domain",
+    "    Data bounds",
+    "    Absorber",
+    "    Imposed regions",
+    "  Viewing preset",
+    "    Cinematic",
+    "    Scientific",
+    "    Temperature",
+    "    Density",
+    "    Velocity",
+    "    Minimal",
+    "Tools",
+    "  Selection",
+    "  Analysis",
+    "    Temporal",
+    "    Space time",
+    "    Diagnostics",
+    "    Compare",
+    "    Matched runs",
+    "    Period",
+    "    Bookmarks",
+    "    Results",
+    "  Mapping",
+    "  Quick setup",
+    "  Derive range",
+    "  Slice",
+    "  Clipping",
+    "  Isosurface",
+    "  Source probe",
+    "  Performance",
+    "  Geometry",
+    "Help",
+    "  Shortcuts",
+    "  Handbook"
+  ],
+  "renderer": "gl_compatibility",
+  "shell_scientific_activity": {
+    "counters": {},
+    "stages": {}
+  },
+  "menu_contract_matches": true,
+  "source_hashes_unchanged": {
+    "invalid.ssc": "98fafded66db249c745f3e98bd145f7849e10dc31e718ddea82649e2ca8cc26f",
+    "replacement.ssc": "bc29a5a69e86a6ee2f4d5751f47fe5eb411094538215d388a55bac45a7775c0a",
+    "scene.ssc": "3abfdcec38ed7fe8d18dd81db49e0c36937b1f0f89206b030727d337f06fd707"
+  }
+}

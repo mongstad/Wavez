@@ -33,6 +33,9 @@ def main():
         raise RuntimeError(f'Shell regression failed; see {output / "stdout.log"}')
     report = json.loads((output / 'shell-report.json').read_text())
     assert not report['failures'], report['failures']
+    contract = (ROOT / 'docs/UX4_DESIGN.md').read_text().split('```text\n', 1)[1].split('```', 1)[0].strip().splitlines()
+    assert report['menu_tree'] == contract, 'Runtime menu hierarchy differs from accepted UX4 contract'
+    report['menu_contract_matches'] = True
     assert hashes == {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in output.glob('*.ssc')}
     report['source_hashes_unchanged'] = hashes
     (output / 'shell-report.json').write_text(json.dumps(report, indent=2) + '\n')

@@ -343,7 +343,7 @@ A milestone may receive one of three outcomes:
 | UX2 | Theme Foundation & Component Library | ACCEPTED by owner 2026-09-13 at `5fae711`; [report](docs/UX2_REPORT.md) |
 | Pre-UX3/UX4 | Information architecture & visual direction | Owner merged #14/#40 design package in PR #39 on 2026-09-20; historical review evidence retained |
 | UX3 | Main Viewer Shell | Final validation #44 owner-merged in PR #64 at `bfbb26c`; historical [report](docs/UX3_REPORT.md) retained |
-| UX4 | Panels & Information Architecture | #66 design contract in review; implementation slices separately gated |
+| UX4 | Panels & Information Architecture | #66 owner-merged in PR #72; #67 command menus pending review; later slices gated |
 | UX5 | Application Settings | BLOCKED BY UX4 |
 | UX6 | Detachable Windows & Multi-Monitor | BLOCKED BY UX5 |
 | UX7 | Workspace Persistence & Recovery | BLOCKED BY UX6 |
@@ -791,8 +791,9 @@ The owner split UX4 into issues #66–71. The [UX4 contract](docs/UX4_DESIGN.md)
 defines a comfortable simulation panel targeting 1440×900 logical desktop pixels,
 with one level of related-control expanders and File, View, Tools and Help menus.
 1024×640 is a compact fallback check, not the ordinary panel density target.
-The contract is pending owner review under #66; no production migration is
-included in that issue.
+The contract was accepted in owner-merged PR #72. [Command-menu migration](docs/UX4_MENUS.md)
+is pending owner review under #67; #68 panel layout and #69 final focused forms
+are not included in that slice.
 
 Once accepted, this contract supersedes the earlier scrolling-workspace and
 top-level State/Export placement proposals. The original
@@ -1411,14 +1412,15 @@ The owner merged final UX3 validation #44 in PR #64 on 2026-09-21 at `bfbb26c`.
 Its [report](docs/UX3_REPORT.md) and [evidence](docs/evidence/issue-44/README.md)
 retain their historical review-time wording.
 
-On 2026-09-22, #66 was the only Ready item. Work is limited to the
-[UX4 design contract](docs/UX4_DESIGN.md), on the existing owner-linked branch
-`66-ux4-design-001-finalize-menu-and-panel-contract`. This is design-only and
-pending owner review. No production control migration or UX4 acceptance is claimed.
+The owner accepted #66 in PR #72 at `34edfca`. On 2026-09-22, #67 was the only
+Ready item and its existing owner-linked branch was checked out at that baseline:
+`67-ux4-menu-001-build-file-view-and-tools-menus`.
 
-Use accepted UX3 behavior and the existing control inventory as inputs. Stop after
-the #66 PR. Later issues #67–71 each require owner acceptance of predecessors,
-Ready status and the owner's existing issue-linked branch. Do not merge,
+[Command menus and minimal focused hosts](docs/UX4_MENUS.md) are pending owner
+review under #67. Scientific/controller/state ownership is preserved; this does
+not implement #68's permanent-panel redesign or #69's final tool composition.
+Stop after the #67 PR. Later issues each require separate owner acceptance,
+Ready authorization and an existing issue-linked branch. Do not merge,
 auto-merge, close issues, change Project state or begin another issue.
 
 ---
