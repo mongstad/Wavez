@@ -13,6 +13,9 @@ acceptance it supersedes the scrolling workspace/drawer destinations and top-lev
 State/Export proposals in [the earlier architecture](UX_INFORMATION_ARCHITECTURE.md),
 [visual proposal](UX_VISUAL_LANGUAGE.md) and [control map](UX_CONTROL_MAP.md).
 Those documents and their review evidence remain intact as historical inputs.
+This revision incorporates owner review of PR #72: desktop-first spacing and one
+level of related-control expanders replace the initial compact-first flat layout.
+It remains a design proposal awaiting owner acceptance.
 Their scientific, source, state and controller constraints still apply. The
 96 inventory IDs below retain traceability; they are not new serialized keys.
 
@@ -29,12 +32,18 @@ acceptance is claimed. The owner separately gates #67 menus, #68 panel, #69 tool
 
 ## Permanent panel rule
 
-The right panel is a flat simulation editor. Every function is directly operable
-with one visible control, button or dropdown. No nested menus, accordions,
-expanders, advanced sections, More buttons, ellipsis menus, secondary drawers,
-buttons that open another form, or prose blocks belong here. There is no panel
-scrollbar, including in ordinary particle, mesh and field contexts at **1024×640
-logical pixels**. Larger windows do not gain extra low-frequency forms.
+The right panel contains frequently adjusted simulation controls, with comfortable
+spacing at a contemporary desktop window size. **1440×900 logical pixels** is the
+standard design baseline; 1920×1080 is an additional roomy desktop check.
+**1024×640 is a compact fallback validation case**, not the density target.
+
+One level of clean expanders is allowed for closely related, frequently useful
+controls. An expander contains only direct controls: no nested expander, category,
+submenu or secondary drawer. No generic Advanced or More groups, ellipsis action
+menus, buttons that open another form, prose blocks or hidden documentation belong
+here. Outside those explicitly named groups, controls remain directly visible.
+Larger windows do not gain extra low-frequency forms. Complex workflows remain
+in the canonical menus and focused surfaces below.
 
 A single **Object** dropdown selects a source object; it is context navigation,
 not a hidden workspace or a scientific selection. It replaces the stacked
@@ -148,45 +157,68 @@ Navigate. Do not keep a Camera section in the right panel. Fullscreen's accepted
 mouse recovery controls and Jobs reopen/cancel actions are deliberate recovery
 routes to the same state owners, not competing editors.
 
-## Panel geometry and row contract
+## Panel geometry and grouping contract
 
-Use the accepted 320-pixel compact width and 360-pixel default width, with the
-existing 320–560 resize bounds and minimum viewport-width constraint. At 1024×640
-the current shell reserves 48 pixels for the command bar, at least 104 for the
-compact transport and at least 40 for status: **448 pixels remain**, not the
-504 assumed by the earlier mockups. This is a source-derived design budget,
-not a native fit measurement of a new UI.
+Use a 360-pixel default panel at the **1440×900 logical desktop baseline**, with
+existing 320–560 resize bounds and the minimum viewport-width constraint.
+The accepted shell reserves 48 pixels for the command bar, at least 64 for the
+normal transport and at least 40 for status, leaving **748 pixels nominally**.
+At 1920×1080 the same calculation leaves 928 pixels. These are source-derived
+planning dimensions, not native measurements of the proposed panel.
 
-Reserve 8 pixels at top and bottom, a 32-pixel Object row and a 4-pixel gap.
-The dense particle case uses fourteen rows at a 28-pixel pitch: a 24-pixel compact
-control plus 4-pixel separation. Total budget is **444 pixels**, leaving 4 pixels
-slack at the nominal shell minima. Use existing compact theme variations and
-readable font metrics; never shrink text to force a fit. No repeated headings,
-workspace tabs or capture HUD consume these rows. Row captions are inline.
+Use 32-pixel normal controls, 8-pixel row gaps and 12-pixel top/bottom padding.
+Reserve a 32-pixel Object row plus a 12-pixel gap: **68 pixels of base space**.
+Each following direct-control row occupies a 40-pixel pitch, including its gap.
+Each expander header occupies the same 40 pixels. When expanded, add an 8-pixel
+inset gap and 40 pixels per child row. Headers are neutral and concise, with a
+clear disclosure indicator and keyboard activation. No smaller font or forced
+24-pixel control height is needed to meet a compact-window budget.
 
-At 320 wide, 12-pixel side margins leave 296 pixels. A single editor row uses an
-88-pixel caption, 8-pixel gap and 200-pixel editor. Paired bounds use two equal
-144-pixel cells separated by 8 pixels; short Min/Max or Zero/Full captions leave
-an editable value region. Numeric text may scroll horizontally within its editor
-and must remain selectable at full precision; it must not be rounded to fit.
-Dropdown popups may scroll long source lists without making the panel scroll.
+The following table defines order, row count and initial state. Semicolons separate
+rows; commas combine related direct controls on one row. All groups are siblings,
+and their children are controls only. No category or nested navigation belongs
+inside them. These groups replace obsolete generic Advanced section identities
+in presentation only; saved state compatibility remains unchanged.
 
-| Row | Particles | Mesh | Field |
-|---|---|---|---|
-| 1 | Visible, Points, History toggles | Visible, Wireframe toggles | Visible, Volume toggles |
-| 2 | Size | Channel | Channel |
-| 3 | Brightness | Colormap | Colormap |
-| 4 | Channel | Min, Max | Min, Max |
-| 5 | Colormap | Exposure | Color mode |
-| 6 | Range policy | Gamma | Opacity mode |
-| 7 | Min, Max | Bloom | Zero, Full |
-| 8 | Invert, Legend toggles | — | Opacity |
-| 9 | Size channel | — | Ray step |
-| 10 | Brightness channel | — | Exposure |
-| 11 | Filters dropdown | — | Gamma |
-| 12 | Exposure | — | Bloom |
-| 13 | Gamma | — | — |
-| 14 | Bloom | — | — |
+| Context | Always-visible rows, after Object | One-level groups in order |
+|---|---|---|
+| Particles | Visible, Points, History; Size; Channel; Colormap; Range policy; Min, Max; Invert, Legend; Filters — 8 rows | **Brightness and effects**, initially open: Brightness; Exposure; Gamma; Bloom — 4 rows. **Attribute mapping**, initially closed: Size channel; Brightness channel — 2 rows. |
+| Mesh | Visible, Wireframe; Channel; Colormap; Min, Max — 4 rows | **Effects**, initially open: Exposure; Gamma; Bloom — 3 rows. |
+| Field | Visible, Volume; Channel; Colormap; Min, Max; Color mode — 5 rows | **Opacity**, initially open: Opacity mode; Zero, Full; Opacity; Ray step — 4 rows. **Effects**, initially closed: Exposure; Gamma; Bloom — 3 rows. |
+
+Brightness and effects places the particle gain beside the related global
+presentation controls without changing their ownership. Attribute mapping keeps two
+related attribute mappings together. Field Opacity groups extinction and sampling
+controls while color stays immediately visible and independent. Effects groups
+only the three shared presentation controls in mesh/field contexts; it adds no
+particle Brightness control to those contexts. No other expander is proposed.
+
+| Context | Initial layout calculation | Initial height | All groups open | Initial spare height at 1440×900 |
+|---|---|---|---|---|
+| Particles | 68 + 8×40 + 2×40 + 8 + 4×40 | 636 px | 724 px | 112 px |
+| Mesh | 68 + 4×40 + 40 + 8 + 3×40 | 396 px | 396 px | 352 px |
+| Field | 68 + 5×40 + 2×40 + 8 + 4×40 | 516 px | 644 px | 232 px |
+
+The ordinary desktop layout should fit comfortably without routine scrolling in
+its initial state. The all-open estimates fit at the nominal desktop baseline,
+but are not a rigid promise for every warning, font metric or window height.
+Readability and reachability take precedence over fitting a fixed height.
+
+At 360 wide, 12-pixel side margins leave 336 pixels: a single editor row can use
+a 104-pixel caption, 12-pixel gap and 220-pixel editor. Paired bounds use two
+164-pixel cells with an 8-pixel gap. At the existing 320-pixel compact width,
+296 pixels remain; use an 88-pixel caption, 8-pixel gap and 200-pixel editor, or
+two 144-pixel bound cells. If native labels or inputs require wrapping, increase
+the row height rather than clip or shrink them. Exact numeric text remains
+selectable and may scroll horizontally within its editor; never round it to fit.
+Dropdown popups may scroll long source/category lists.
+
+Initial group states apply only on first presentation. Remember user toggles for
+the current session/context; resizing or switching objects does not reset them or
+change scientific state. Groups expand independently, not as a mutually exclusive
+accordion. Collapsing a group preserves its values and shows any live invalid-state
+indicator on the header and in status; never hide a blocking refusal with its form.
+No new disk persistence or recipe keys are introduced for these new UI groups.
 
 Exposure, Gamma and Bloom are global controls bound to the same owner, shown once
 in the active context. Their existing particle/environment effects do not gain
@@ -220,14 +252,32 @@ and preparation details live in source details, tool context or Jobs, not repeat
 paragraphs in the panel. Scientific legends remain viewport overlays with their
 existing visibility/export gates.
 
-If native minimum sizes exceed the budget, treat that as a failed #68 layout
-acceptance: do not add a scrollbar, shrink fonts, clip controls or invent another
-disclosure. Return to owner review to revise this contract. Test long names,
-numeric focus, all filter counts and warning states. At 1440×900 keep the same
-order and compact controls with free space below. Below the supported logical
-minimum retain accepted automatic collapse and mouse recovery; a temporary sheet
-may scroll there, but is not evidence of meeting the 1024×640 requirement.
-HiDPI validation uses logical sizes, separately from physical-monitor acceptance.
+### Compact fallback and layout acceptance
+
+At **1024×640**, retain the existing compact-width panel and compact transport.
+There is **no requirement that every panel control fit fully expanded without
+scrolling**. Keep the same destinations, group order, labels and readable metrics.
+Users may collapse the named groups; when content exceeds the available height,
+allow vertical scrolling of the panel body, with Object context kept reachable.
+Do not silently close groups on resize, remove controls or pack the ordinary
+desktop layout more tightly to satisfy this fallback case. No horizontal panel
+scrollbar, nested hierarchy or generic overflow group is introduced.
+
+Retain F1 hide/show, mouse recovery and the existing width-driven automatic
+collapse below 970 logical pixels. At those smaller widths, the existing temporary
+sheet may scroll. A short window alone does not require changing that collapse
+threshold. Transport, Jobs and fullscreen/immersive recovery remain independent
+of panel expansion and scrolling.
+
+Later native validation must inspect the comfortable initial desktop layouts at
+1440×900, the roomier 1920×1080 case, and the usable fallback at 1024×640. Test
+all groups open/closed, long names, exact numeric editing, warning visibility,
+keyboard traversal, scroll reachability, hide/show and resize without state loss.
+If native minimum sizes exceed these estimates, preserve spacing and readable
+fonts; use overflow scrolling where needed rather than clipping or hiding a
+capability. Unexpected routine scrolling at the standard initial desktop layout
+requires layout review, not a denser compact-first redesign. HiDPI uses logical
+sizes; physical-monitor acceptance remains a separate check.
 
 ## Focused surfaces and behavior
 
@@ -285,7 +335,7 @@ through text/numeric input. No new persistent workspace preference is introduced
 Each row covers every constituent of its referenced [original inventory](UX_CONTROL_MAP.md)
 entry, including dynamic choices, native pickers, cancel, errors and unavailable
 states. The original source symbols and state/regression columns still apply.
-Where a row splits, the split is explicit below. “Panel” means the row contract
+Where a row splits, the split is explicit below. “Panel” means the grouping contract
 above; “Jobs” means existing status/detail/reopen/cancel, not another editable form.
 
 | ID | Canonical UX4 disposition |
@@ -410,7 +460,8 @@ probe, Quick setup, Derive range, Slice, Clipping and Isosurface. Move their act
 controls as mapped above; do not merely hide their section buttons. Remove all
 Settings object expanders, Advanced normalization, Advanced Size and Brightness,
 Advanced Post-processing and explanatory expanders. Their retained frequent
-controls become direct rows. Remove Show probe marker from the panel.
+controls become direct rows or the explicitly named one-level groups above.
+Remove Show probe marker from the panel.
 
 The table prescribes shortened UI copy. Old strings below are evidence, not
 permitted new labels. The menu tree, panel table and focused-surface table provide
@@ -476,7 +527,7 @@ or a focused info dialog, never an expander. Essential refusals remain visible.
   particle channel preferences and nested layer/opacity/color mappings. Display
   labels must not become new recipe keys. Legacy sections may be ignored for
   presentation but their old payloads must remain readable; do not delete keys
-  merely because expanders disappear. Preserve partial-restore semantics.
+  merely because legacy expanders are replaced. Preserve partial-restore semantics.
 - Preserve exact IDs and float64 source/request values, source fingerprints,
   selection revisions, committed results and finite worker limits. Object context
   must not rebind an analysis. Preserve missing data, Hold/interpolation behavior,
@@ -495,7 +546,7 @@ or a focused info dialog, never an expander. Essential refusals remain visible.
 - #67 must move controls to their canonical surfaces as it removes sidebar
   access; it cannot leave menu items pointing at hidden or missing sections.
   Minimal reachable focused hosts can precede #69's final task composition.
-  #68 implements the exact flat row contract after #67 acceptance. #69 finishes
+  #68 implements the desktop grouping and compact fallback contract after #67 acceptance. #69 finishes
   focused forms; #70 audits all changed copy. #71 validates the merged result
   using current captures and small fixtures without rerunning solvers.
 
@@ -503,19 +554,19 @@ or a focused info dialog, never an expander. Essential refusals remain visible.
 
 For #66, validation is documentary: inventory coverage, current source bindings,
 menu/label review, geometry arithmetic, local links, whitespace and production
-file invariance. The 444-pixel design budget is not a screenshot, usability test
-or native layout pass. No new native GUI, GPU, recipe or scientific regression is
+file invariance. The revised desktop calculations are not screenshots, usability
+tests or native layout passes. No new native GUI, GPU, recipe or scientific regression is
 claimed for this documentation-only change. Historical review reports and
 screenshots are intentionally preserved, including their review-time wording.
 
-Checks completed on 2026-09-22:
+Initial submission checks on 2026-09-22, with superseded layout evidence identified:
 
 | Check | Result |
 |---|---|
 | Inventory set and uniqueness against original map | PASS: 96 of 96 entries, no duplicates |
 | Proposed menu labels and forbidden characters | PASS: 54 labels |
 | Local Markdown link targets across four changed documents | PASS: 95 targets exist |
-| Compact design arithmetic | PASS: 444 pixels within nominal 448; native fit untested |
+| Initial compact-first arithmetic | Superseded by owner review; it is not the revised layout acceptance gate |
 | Git whitespace and change-scope audit | PASS: four Markdown files only |
 | Godot 4.7.2 headless editor import | PASS on unsandboxed rerun, exit 0 with no errors; no new UID files |
 
@@ -526,13 +577,33 @@ and completed cleanly. Native interactive layout, physical DPI/monitor checks,
 GPU rendering and scientific regressions were not run: this issue introduces no
 production or engine inputs. The import is project hygiene, not UX4 validation.
 
+Owner-review revision checks:
+
+- PASS: all 96 disposition rows and all 54 menu labels are byte-for-byte unchanged
+  from the initial PR commit `5c1e0d5`; all four distinct group labels comply with
+  the naming rules.
+- PASS: desktop initial/all-open height arithmetic for particles 636/724, mesh
+  396/396 and field 516/644 pixels against the nominal 748-pixel desktop area.
+- PASS: all 95 local link targets across the design, roadmap, status and README;
+  removed obsolete fixed-height constraints; Git whitespace check.
+- PASS: only this design, affected roadmap wording and one current-status sentence
+  changed in the revision. README, production files and historical evidence are
+  unchanged. All destinations, exclusions and scientific/state ownership remain.
+- Native import was not repeated for this prose-only revision; the initial import
+  result above remains historical. No native layout, GUI, GPU or scientific test
+  is claimed for the proposed groups. The downstream issue specifications may
+  still contain their original compact-first wording; this owner-reviewed design
+  revision must govern their later scope reconciliation before implementation.
+  No downstream issue or production implementation is changed here.
+
 Before accepting this design, the owner should:
 
 1. Review the menu tree and verify one destination for opening, both state types,
    all three exports, Performance and Geometry. Confirm no Settings menu.
-2. Walk the three panel columns in order against a particle, mesh and field
-   capture. Confirm Filters is a direct selector and that fourteen compact rows
-   are the desired density. Native fit remains a required implementation gate.
+2. Review the particle, mesh and field groupings at the 1440×900 desktop target.
+   Confirm comfortable spacing, the named one-level groups and their initial
+   states. Check that no group contains another category, submenu or expander.
+   Native fit and readability remain required implementation gates.
 3. Confirm lower-frequency Mapping, Quick setup, reset and field tools belong
    outside the permanent panel, and confirm Source probe belongs in Tools.
 4. Trace a selection into Temporal and Space time, a CSV into Compare and Period,
@@ -541,8 +612,9 @@ Before accepting this design, the owner should:
 5. Review field color/opacity labels with their separate meanings; verify the
    source-probe stamp and the distinction between Object and scientific binding.
 6. Approve or request changes to this contract before #67. Later #68/#71 owner
-   checks must inspect actual 1024×640 and 1440×900 layouts, warnings, long source
-   names, keyboard focus, hide/recovery, fullscreen and immersive, and equivalent
+   checks must inspect the standard 1440×900 and roomy 1920×1080 layouts, plus
+   1024×640 fallback reachability with expansion and scrolling. Verify warnings,
+   long source names, keyboard focus, hide/recovery, fullscreen and immersive, and equivalent
    state/export/scientific outcomes. Automated passes do not confer acceptance.
 
 Stop after this issue's PR for owner review; do not start a dependent issue.

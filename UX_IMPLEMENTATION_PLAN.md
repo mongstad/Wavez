@@ -788,9 +788,11 @@ Acceptance of UX3 authorizes **no UX4 control migration automatically**.
 ## Goal and presentation authority
 
 The owner split UX4 into issues #66–71. The [UX4 contract](docs/UX4_DESIGN.md)
-defines a flat, scrollbar-free simulation panel at 1024×640 logical pixels and
-File, View, Tools and Help menus. It is pending owner review under #66; no
-production migration is included in that issue.
+defines a comfortable simulation panel targeting 1440×900 logical desktop pixels,
+with one level of related-control expanders and File, View, Tools and Help menus.
+1024×640 is a compact fallback check, not the ordinary panel density target.
+The contract is pending owner review under #66; no production migration is
+included in that issue.
 
 Once accepted, this contract supersedes the earlier scrolling-workspace and
 top-level State/Export placement proposals. The original
@@ -804,7 +806,8 @@ scientific/controller/state behavior remains authoritative.
 1. #66 finalizes the menu, panel, focused-tool and copy contract; owner review.
 2. #67 implements canonical File, View, Tools and Help access, retaining reachable
    focused hosts when removing old sidebar commands; owner review.
-3. #68 builds the flat particle, mesh and field panel after #66/#67 merge.
+3. #68 builds the desktop particle, mesh and field panel with one-level grouping
+   after #66/#67 merge.
 4. #69 completes the focused scientific forms after design/menu acceptance.
 5. #70 audits concise labels and removes normal-flow prose after destinations
    are accepted. Essential warnings and refusals remain visible.
@@ -884,7 +887,8 @@ For each migration slice:
 - verify source/provenance labels and unavailable/refusal states
 - verify panel switching/hiding does not submit, cancel, rebind or recompute
 - verify state/recipe round trips and export behavior where affected
-- inspect 1024×640 and 1440×900 layouts and supported scale factors
+- inspect 1440×900 desktop spacing, 1920×1080 roomy layout and 1024×640 fallback
+  reachability, including group toggles, overflow scrolling and supported scales
 - check focused performance traces when a UI move touches preparation/upload paths
 
 Do not claim a usability improvement from screenshots alone; owner review of real
@@ -894,19 +898,24 @@ tasks is required.
 
 1. Owner-reviewed menu/panel contract and full inventory disposition
 2. File, View, Tools and Help command migration
-3. Flat particle, mesh and field simulation panel
+3. Comfortable particle, mesh and field panel with named one-level groups
 4. Focused selection, analysis and field tools
 5. Concise copy and preserved live warnings
 6. Completed control traceability and equivalent-behavior validation
-7. Native 1024×640 and 1440×900 workflow evidence
+7. Native 1440×900 desktop, 1920×1080 roomy and 1024×640 fallback evidence
 8. UX4 milestone report and UX5 handoff
 
 ## Acceptance Criteria
 
 All current supported user-facing capabilities have a canonical destination or a
 documented separately deferred issue. No duplicate legacy inspector remains as a
-competing production path. The permanent panel is flat and scrollbar-free at
-1024×640 logical pixels; complex forms have canonical menu/tool destinations.
+competing production path. The permanent panel prioritizes comfortable spacing
+at 1440×900 logical pixels. One level of clean, related-control expanders is
+allowed; no nested categories, submenus, expanders, generic Advanced/More groups
+or hidden documentation. Complex forms retain canonical menu/tool destinations.
+At 1024×640, preserve readable controls, named groups, overflow scrolling and
+existing compact/collapse/recovery behavior; full expansion without scrolling
+is not an acceptance requirement.
 Normal tasks require less hunting without changing scientific meaning.
 
 ---
