@@ -954,6 +954,10 @@ func _build_inspector_controls() -> void:
 	legend.size = Vector2(340, 90)
 	legend.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	var mappings := _section("Advanced • Size / Brightness")
+	section_buttons["Advanced • Size / Brightness"].text = "Advanced"
+	# Preserve retired disclosure keys without duplicate or nested expanders.
+	legacy_sections["Trails"] = false
+	legacy_sections["Advanced • Post-processing"] = false
 	size_option = _option(mappings, "Size by")
 	size_option.item_selected.connect(func(i: int): size_channel = size_option.get_item_text(i); _restyle())
 	brightness_option = _option(mappings, "Brightness by")
@@ -961,10 +965,9 @@ func _build_inspector_controls() -> void:
 	mappings.tooltip_text = "Semantic size and brightness use a per-frame finite linear range. Visual overrides are direct multipliers."
 	var cam := _section("Camera")
 	_visual_slider(cam, "Orbit speed • radians / second", -0.5, 0.5, orbit_speed, func(v: float): orbit_speed = v)
-	var trails := _section("Trails")
-	_check(trails, "Recorded history  [T]", trails_enabled, func(v: bool): trails_enabled = v; _rebuild_trails())
+	_check(mappings, "Recorded history  [T]", trails_enabled, func(v: bool): trails_enabled = v; _rebuild_trails())
 	filter_box = _section("Particle Filters")
-	var post := _section("Advanced • Post-processing")
+	var post := mappings
 	_visual_slider(post, "Exposure", .05, 3, exposure, func(v: float): exposure = v; _sync_visuals())
 	_visual_slider(post, "Gamma", .2, 3, gamma, func(v: float): gamma = v; _sync_visuals())
 	glow_slider = _visual_slider(post, "Bloom", 0, 2, environment.glow_intensity, func(v: float): environment.glow_intensity = v)

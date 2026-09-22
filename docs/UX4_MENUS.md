@@ -87,6 +87,16 @@ source values or callbacks change. This correction does not start #68.
 
 Correction checks and screenshots: [metadata review evidence](evidence/issue-67/metadata-review/README.md).
 
+## Owner-requested Advanced refinement
+
+One **Advanced** expander directly contains Size by, Brightness by, Recorded
+history [T], Exposure, Gamma and Bloom. Trails and Advanced Post-processing no
+longer have separate expanders. This explicit owner instruction supersedes the
+previous Advanced-label restriction for these controls; no nested groups or wider
+#68 redesign are introduced. Existing callbacks and scientific values are retained.
+The combined expander keeps the Size/Brightness recipe key; retired disclosure
+keys remain inert. See [validation](evidence/issue-67/advanced-refinement/README.md).
+
 ## State and sidebar boundaries
 
 Removed sidebar command paths include Capture/Export, Selection, all analysis
