@@ -68,7 +68,8 @@ func configure(viewer, preset: String, active: bool) -> void:
 	viewer.guide_mesh.visible = active
 	viewer.guide_visibility.domain = active; viewer.guide_visibility.data = active
 	for name in viewer.legacy_sections: viewer.legacy_sections[name] = active
-	viewer.control_checks["Particle layer visible"].button_pressed = not active
+	viewer.particle_layer_visible = not active
+	viewer._render_current(viewer.phase)
 	for name in viewer.section_buttons:viewer.section_buttons[name].button_pressed = active
 	viewer.visual_sliders.Exposure.value = 1.2 if active else .8
 	viewer.visual_sliders.Bloom.value = .8 if active else .4
@@ -101,8 +102,9 @@ func check_ui(viewer, visual: Dictionary, label: String) -> void:
 			check(viewer.legacy_sections[name] == visual.sections[name],label+" legacy section state "+name); continue
 		check(viewer.sections[name].visible == visual.sections[name],label+" section body "+name)
 		check(viewer.section_buttons[name].button_pressed == visual.sections[name],label+" section button "+name)
-	var fields := {"Point rendering":"clean_view","Recorded history  [T]":"trails_enabled","Invert":"invert_map","Show legend":"show_legend","X slice • ±3 simulation units":"slice_enabled","Particle layer visible":"particle_layer_visible"}
+	var fields := {"Point rendering":"clean_view","Recorded history  [T]":"trails_enabled","Invert":"invert_map","Show legend":"show_legend","X slice • ±3 simulation units":"slice_enabled"}
 	for name in fields:check(viewer.control_checks[name].button_pressed == visual[fields[name]],label+" checkbox "+name)
+	check(viewer.particle_layer_visible == visual.particle_layer_visible,label+" particle visibility model state")
 	check(viewer.glow_slider.editable == viewer.environment.glow_enabled,label+" Bloom availability")
 	check(not viewer.playing and viewer.inspection_paused,label+" intentional playback pause")
 

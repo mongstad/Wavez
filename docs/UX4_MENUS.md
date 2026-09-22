@@ -97,6 +97,14 @@ previous Advanced-label restriction for these controls; no nested groups or wide
 The combined expander keeps the Size/Brightness recipe key; retired disclosure
 keys remain inert. See [validation](evidence/issue-67/advanced-refinement/README.md).
 
+## Owner-requested Particle Filters placement
+
+The redundant Particle layer visible checkbox is removed. Particle Filters and
+its existing controls occupy that position inside Rendering, immediately after
+Point rendering. Existing filter callbacks and keys are retained; particle
+visibility remains model state for recipe/export compatibility. See
+[validation and owner check](evidence/issue-67/particle-filters/README.md).
+
 ## State and sidebar boundaries
 
 Removed sidebar command paths include Capture/Export, Selection, all analysis

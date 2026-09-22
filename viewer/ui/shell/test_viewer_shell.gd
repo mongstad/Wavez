@@ -47,6 +47,10 @@ func run() -> void:
 	check(not viewer.sections.has("Playback") and not viewer.visual_sliders.has("Physical time units / second"), "Hidden duplicate playback form is absent")
 	for group in ["Rendering", "Color Mapping", "Advanced • Size / Brightness", "Particle Filters"]:
 		check(viewer.sections.has(group) and viewer.inspector_box.is_ancestor_of(viewer.sections[group]), "Canonical inspector group retained: " + group)
+	check(not viewer.control_checks.has("Particle layer visible"),"Redundant particle visibility checkbox removed")
+	var rendering: Control = viewer.sections["Rendering"]
+	check(viewer.section_buttons["Particle Filters"].get_parent() == rendering and viewer.filter_box.get_parent() == rendering,"Particle Filters occupies Rendering at the former visibility control")
+	check(viewer.section_buttons["Particle Filters"].get_index() == viewer.control_checks["Point rendering"].get_index()+1,"Particle Filters immediately follows Point rendering")
 	var advanced: Control = viewer.sections["Advanced • Size / Brightness"]
 	check(viewer.section_buttons["Advanced • Size / Brightness"].text == "Advanced" and not viewer.section_buttons.has("Trails") and not viewer.section_buttons.has("Advanced • Post-processing"),"One Advanced expander replaces three disclosures")
 	for control in [viewer.size_option,viewer.brightness_option,viewer.control_checks["Recorded history  [T]"],viewer.visual_sliders["Exposure"],viewer.visual_sliders["Gamma"],viewer.glow_slider]:

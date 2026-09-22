@@ -967,6 +967,8 @@ func _build_inspector_controls() -> void:
 	_visual_slider(cam, "Orbit speed • radians / second", -0.5, 0.5, orbit_speed, func(v: float): orbit_speed = v)
 	_check(mappings, "Recorded history  [T]", trails_enabled, func(v: bool): trails_enabled = v; _rebuild_trails())
 	filter_box = _section("Particle Filters")
+	section_buttons["Particle Filters"].reparent(rendering)
+	filter_box.reparent(rendering)
 	var post := mappings
 	_visual_slider(post, "Exposure", .05, 3, exposure, func(v: float): exposure = v; _sync_visuals())
 	_visual_slider(post, "Gamma", .2, 3, gamma, func(v: float): gamma = v; _sync_visuals())
@@ -1330,7 +1332,7 @@ func _sync_control_state_profiled() -> void:
 	if control_checks.has("Recorded history  [T]"):
 		control_checks["Recorded history  [T]"].disabled = not _has_particle_ids()
 		control_checks["Recorded history  [T]"].tooltip_text = "Historical markers require explicitly recorded particle IDs."
-	var states := {"Point rendering":clean_view, "Auto orbit  [O]":orbit_enabled, "Recorded history  [T]":trails_enabled, "Automatic range":auto_range, "Logarithmic":logarithmic, "Invert":invert_map, "Clamp out-of-range values":clamp_map, "Show legend":show_legend,"X slice • ±3 simulation units":slice_enabled,"Particle layer visible":particle_layer_visible}
+	var states := {"Point rendering":clean_view, "Auto orbit  [O]":orbit_enabled, "Recorded history  [T]":trails_enabled, "Automatic range":auto_range, "Logarithmic":logarithmic, "Invert":invert_map, "Clamp out-of-range values":clamp_map, "Show legend":show_legend,"X slice • ±3 simulation units":slice_enabled}
 	for key in states:
 		if control_checks.has(key): control_checks[key].set_pressed_no_signal(states[key])
 	for spin in manual_spins: spin.editable = not auto_range
@@ -1518,7 +1520,6 @@ func _sync_inspection_controls() -> void:
 func _build_geometry_ui() -> void:
 	var panel := _section("Geometry / Guides")
 	geometry_label = Label.new(); geometry_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; panel.add_child(geometry_label)
-	_check(sections["Rendering"],"Particle layer visible",true,func(v: bool): particle_layer_visible = v; _render_current(phase))
 	_button(panel,"Load geometry override JSON…",func():
 		if geometry_dialog == null:
 			geometry_dialog = FileDialog.new(); geometry_dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE; geometry_dialog.access = FileDialog.ACCESS_FILESYSTEM
