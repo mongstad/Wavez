@@ -342,8 +342,8 @@ A milestone may receive one of three outcomes:
 | UX1 | Audit & Design System Specification | ACCEPTED by owner 2026-09-13 at `229d4ea`; [report](docs/UX1_REPORT.md) |
 | UX2 | Theme Foundation & Component Library | ACCEPTED by owner 2026-09-13 at `5fae711`; [report](docs/UX2_REPORT.md) |
 | Pre-UX3/UX4 | Information architecture & visual direction | Owner merged #14/#40 design package in PR #39 on 2026-09-20; historical review evidence retained |
-| UX3 | Main Viewer Shell | #41–43/#49/#53/#46/#55 and cleanup #59 owner-merged; [#44 integration report](docs/UX3_REPORT.md) PENDING OWNER REVIEW |
-| UX4 | Workspace & Control Migration | BLOCKED BY UX3 |
+| UX3 | Main Viewer Shell | Final validation #44 owner-merged in PR #64 at `bfbb26c`; historical [report](docs/UX3_REPORT.md) retained |
+| UX4 | Panels & Information Architecture | #66 design contract in review; implementation slices separately gated |
 | UX5 | Application Settings | BLOCKED BY UX4 |
 | UX6 | Detachable Windows & Multi-Monitor | BLOCKED BY UX5 |
 | UX7 | Workspace Persistence & Recovery | BLOCKED BY UX6 |
@@ -783,60 +783,38 @@ Acceptance of UX3 authorizes **no UX4 control migration automatically**.
 
 ---
 
-# UX4 — Workspace & Control Migration
+# UX4 — Panels & Information Architecture
 
-## Goal
+## Goal and presentation authority
 
-Migrate the existing controls into the accepted Scene / Appearance / Selection /
-Analysis architecture **without rebuilding the underlying features**.
+The owner split UX4 into issues #66–71. The [UX4 contract](docs/UX4_DESIGN.md)
+defines a flat, scrollbar-free simulation panel at 1024×640 logical pixels and
+File, View, Tools and Help menus. It is pending owner review under #66; no
+production migration is included in that issue.
 
-The accepted `docs/UX_CONTROL_MAP.md` is the migration checklist and ownership
-contract. Every migrated control must preserve its current controller/state owner
-unless a separately reviewed architecture change explicitly says otherwise.
+Once accepted, this contract supersedes the earlier scrolling-workspace and
+top-level State/Export placement proposals. The original
+[control inventory](docs/UX_CONTROL_MAP.md) retains its source/state/regression
+traceability; the new contract assigns all 96 entries concrete destinations.
+Historical designs, mockups and review reports remain unchanged. Existing
+scientific/controller/state behavior remains authoritative.
 
 ## Migration order
 
-Prefer bounded, reviewable slices rather than one giant panel rewrite:
+1. #66 finalizes the menu, panel, focused-tool and copy contract; owner review.
+2. #67 implements canonical File, View, Tools and Help access, retaining reachable
+   focused hosts when removing old sidebar commands; owner review.
+3. #68 builds the flat particle, mesh and field panel after #66/#67 merge.
+4. #69 completes the focused scientific forms after design/menu acceptance.
+5. #70 audits concise labels and removes normal-flow prose after destinations
+   are accepted. Essential warnings and refusals remain visible.
+6. #71 validates all merged slices and records the UX4 milestone review package.
 
-1. **Scene and object context**
-   - object list, visibility, availability and source sample status
-   - selected-object header/context
-   - metadata/geometry details
-   - Source probe composition, including the approved provenance presentation when
-     its runtime binding is explicitly implemented and tested
-
-2. **Appearance**
-   - particle representation/color/history/display filters
-   - mesh color/wireframe
-   - field Quick setup, Color, Opacity, Volume quality, Slice/Clipping/Surface
-   - Viewport presentation as a clearly separate context
-   - current reset scopes and one-time action semantics
-
-3. **Selection**
-   - explicit source binding
-   - exact IDs/rows/ROI/predicates/cohorts/groups
-   - gesture/edit modes and membership semantics
-
-4. **Analysis and Results**
-   - task-specific Temporal / Space-time / Diagnostic CSV / Compare / Period /
-     Matched views forms
-   - effective request context shown locally
-   - named results, provenance, bounded previews, exact lookup and complete numerical export
-   - temporary expanded Results workbench
-
-5. **State / Export composition**
-   - keep **State** as the top-level menu name
-   - preserve distinct scene v2 and analysis v3 save/load semantics
-   - canonical PNG/video/numerical export entry points
-   - fixed actions and persistent Jobs integration
-
-6. **Performance access during migration**
-   - keep current cache/RAM/GPU/resource controls reachable in a dedicated
-     Performance surface
-   - do not bury them in Appearance
-   - do not remove them before UX5 supplies their approved long-term home
-
-Each slice must be independently reviewable and reversible.
+Each issue requires its own Ready authorization and existing owner-linked branch.
+Do not create duplicate editors, defer existing capabilities to UX5, or start a
+later slice automatically. Performance remains accessible under Tools. Settings
+is not a UX4 menu. State and Export are File submenus with distinct scene/analysis
+semantics and existing output contracts.
 
 ## Existing behavior to consume, not redo
 
@@ -862,7 +840,7 @@ Use the accepted visual/copy specification:
 - Midnight Scientific remains the proper design-system name
 - SimScope-authored copy uses sentence case
 - **Population counts** is the consistent analysis/result term
-- **State** remains the top-level menu
+- **State** becomes a File submenu under the owner-approved UX4 direction
 - source-defined object/channel names and unit casing are preserved
 - developer/state shorthand does not leak into primary labels
 - detailed help moves to concise info/details + handbook links where approved
@@ -914,20 +892,21 @@ tasks is required.
 
 ## Deliverables
 
-1. Scene workspace migration
-2. Appearance workspace migration
-3. Selection workspace migration
-4. Analysis/Results migration
-5. State/Export/Performance access migration
-6. Control-map completion/traceability report
-7. Real-workflow validation evidence
-8. UX4 milestone report
+1. Owner-reviewed menu/panel contract and full inventory disposition
+2. File, View, Tools and Help command migration
+3. Flat particle, mesh and field simulation panel
+4. Focused selection, analysis and field tools
+5. Concise copy and preserved live warnings
+6. Completed control traceability and equivalent-behavior validation
+7. Native 1024×640 and 1440×900 workflow evidence
+8. UX4 milestone report and UX5 handoff
 
 ## Acceptance Criteria
 
 All current supported user-facing capabilities have a canonical destination or a
 documented separately deferred issue. No duplicate legacy inspector remains as a
-competing production path unless explicitly retained as a temporary rollback path.
+competing production path. The permanent panel is flat and scrollbar-free at
+1024×640 logical pixels; complex forms have canonical menu/tool destinations.
 Normal tasks require less hunting without changing scientific meaning.
 
 ---
@@ -1419,22 +1398,19 @@ UX1 and UX2 are accepted. The legacy capture retirement gate is historical
 completed groundwork and must not be rerun merely because this roadmap still
 records it.
 
-The owner merged all required UX3 slices and cleanup #59. Issue #44 was the sole
-Ready item when final integration validation began, on the existing owner-linked
-branch at accepted `main` `c240024` (PR #63). The [UX3 report](docs/UX3_REPORT.md)
-and [fresh evidence](docs/evidence/issue-44/README.md) are pending owner review.
-Older review evidence remains historical.
+The owner merged final UX3 validation #44 in PR #64 on 2026-09-21 at `bfbb26c`.
+Its [report](docs/UX3_REPORT.md) and [evidence](docs/evidence/issue-44/README.md)
+retain their historical review-time wording.
 
-1. Review the combined shell, recorded-time transport, Jobs, fullscreen and export workflows.
-2. Complete the report's owner-only desktop/input checks and evaluate its stated limits.
-3. The owner controls acceptance, merge and milestone completion; passing tests do not accept UX3.
-4. Do not begin UX4 or any other issue without separate Ready authorization.
+On 2026-09-22, #66 was the only Ready item. Work is limited to the
+[UX4 design contract](docs/UX4_DESIGN.md), on the existing owner-linked branch
+`66-ux4-design-001-finalize-menu-and-panel-contract`. This is design-only and
+pending owner review. No production control migration or UX4 acceptance is claimed.
 
-Astra must use the accepted design system, information architecture, visual
-language and control map as inputs. Do not rerun UX1/UX2, redesign the interface
-from scratch, or opportunistically implement later UX/backlog features.
-
-**Do not begin UX4.**
+Use accepted UX3 behavior and the existing control inventory as inputs. Stop after
+the #66 PR. Later issues #67–71 each require owner acceptance of predecessors,
+Ready status and the owner's existing issue-linked branch. Do not merge,
+auto-merge, close issues, change Project state or begin another issue.
 
 ---
 

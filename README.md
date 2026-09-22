@@ -11,8 +11,9 @@ particle/mesh/volume rendering. UX1 and UX2 are accepted. The accepted UX3
 and [persistent status and Jobs](docs/UX3_STATUS.md). Recorded-time playback,
 [media timing](docs/UX3_MEDIA_TRANSPORT.md), [delayed seek feedback](docs/UX3_TRANSIENT_STATUS.md),
 [immersive fullscreen](docs/UX3_FULLSCREEN.md) and production-shell video overlays
-are owner-merged. Final [UX3 integration validation](docs/UX3_REPORT.md) is pending
-owner review under #44. Full workspace migration remains separately gated in UX4.
+are owner-merged, including final [UX3 integration validation](docs/UX3_REPORT.md)
+in PR #64. The [UX4 menu and panel contract](docs/UX4_DESIGN.md) is pending owner
+review under #66. Production control migration remains separately gated.
 
 Start with:
 

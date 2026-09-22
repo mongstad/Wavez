@@ -1,12 +1,12 @@
 # Current status
 
-Issue #44 completes the final UX3 integration validation package and is **pending
-owner review**. All prerequisite slices are owner-merged: shell #41, transport
-#42, status/Jobs #43, media timing #49, transient feedback #53, immersive fullscreen
-#46 and video overlays #55. Cleanup #59 is also merged in PR #63 at `c240024`.
-The [UX3 milestone report](UX3_REPORT.md) records fresh workflows, native desktop
-and export checks, performance limits, manual acceptance steps and the UX4 handoff.
-No UX3 milestone acceptance or UX4 implementation is claimed.
+The owner merged final UX3 validation #44 in PR #64 on 2026-09-21 at `bfbb26c`.
+The [UX3 report](UX3_REPORT.md) and its evidence retain their historical review-time
+wording. Current authorized work is #66, the only Ready item verified on
+2026-09-22: [UX4 menu and panel design](UX4_DESIGN.md), **pending owner review**.
+It specifies the flat simulation panel, File/View/Tools/Help destinations and
+complete control disposition. Production behavior is unchanged. Issues #67–71
+remain separately gated; no UX4 implementation or milestone acceptance is claimed.
 
 As of **2026-09-20**, including G4 and PERF-001/002 maintenance reviewed and accepted by the user. Scientific simulations were not rerun. Historical results identify their recorded checkpoints. PERF-003 mesh maintenance was also reviewed and accepted by the owner on 2026-09-13; implementation checkpoint `7974c78`.
 
