@@ -1,0 +1,106 @@
+{
+  "command": [
+    "/home/Nozba/Documents/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+    "--path",
+    "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+    "--audio-driver",
+    "Dummy",
+    "--log-file",
+    "/tmp/simscope69-maintenance/godot.log",
+    "--rendering-method",
+    "gl_compatibility",
+    "--resolution",
+    "1440x900",
+    "--script",
+    "analysis/test_maintenance_ui.gd",
+    "--",
+    "--maintenance-fixture=/tmp/simscope69-maintenance",
+    "--maintenance-resolution=1440x900"
+  ],
+  "exit_code": 0,
+  "result": {
+    "backend": "gl_compatibility",
+    "checks": 37,
+    "failures": [],
+    "images": [
+      {
+        "file": "legend-scalar.png",
+        "height": 900,
+        "width": 1440
+      },
+      {
+        "file": "legend-fixed.png",
+        "height": 900,
+        "width": 1440
+      },
+      {
+        "file": "selections.png",
+        "height": 900,
+        "width": 1440
+      },
+      {
+        "file": "temporal-analysis.png",
+        "height": 900,
+        "width": 1440
+      },
+      {
+        "file": "diagnostics-and-comparisons.png",
+        "height": 900,
+        "width": 1440
+      },
+      {
+        "file": "space-time-analysis.png",
+        "height": 900,
+        "width": 1440
+      },
+      {
+        "file": "analysis-export-and-state.png",
+        "height": 900,
+        "width": 1440
+      },
+      {
+        "file": "matched-runs.png",
+        "height": 900,
+        "width": 1440
+      }
+    ],
+    "layouts": [
+      {
+        "expanded_height": 340.0,
+        "panel": "Selections",
+        "width": 576.0
+      },
+      {
+        "expanded_height": 1034.0,
+        "panel": "Temporal analysis",
+        "width": 562.0
+      },
+      {
+        "expanded_height": 858.0,
+        "panel": "Diagnostics and comparisons",
+        "width": 562.0
+      },
+      {
+        "expanded_height": 1034.0,
+        "panel": "Space-time analysis",
+        "width": 562.0
+      },
+      {
+        "expanded_height": 388.0,
+        "panel": "Analysis export and state",
+        "width": 576.0
+      },
+      {
+        "expanded_height": 634.0,
+        "panel": "Matched runs",
+        "width": 562.0
+      }
+    ],
+    "surface": "desktop window",
+    "viewport": "[P: (0.0, 0.0), S: (1440.0, 900.0)]",
+    "window": "(1440, 900)"
+  },
+  "source_sha256": "113dee748baf55812c79fd4dd46472befe99474ec84549edd3e76a00d2bff5d3",
+  "source_unchanged": true,
+  "status": "PASS"
+}

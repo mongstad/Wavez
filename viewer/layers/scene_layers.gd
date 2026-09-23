@@ -26,6 +26,11 @@ var error := ""
 var gpu_budget_mib := 256
 var panel: VBoxContainer
 var probe_label: Label
+var probe_stamp := {}
+var probe_stamp_label: Label
+var probe_channel_label: Label
+var probe_channel := ""
+var probe_channel_choice: OptionButton
 var probe_spins: Array[SpinBox] = []
 var selected_volume := ""
 var panel_groups: Dictionary = {}
@@ -449,7 +454,8 @@ func _build_ui() -> void:
 			var empty := Label.new();empty.text = "No fields" if kind == "volume" else "No meshes";page.add_child(empty)
 		choice.item_selected.connect(func(i):choose_object(kind,str(choice.get_item_metadata(i))))
 	if playback != null:playback.build_ui(_tool_body("Performance"))
-	_number(_tool_body("Performance"),"Layer GPU budget • MiB",gpu_budget_mib,1,2048,1,func(v):gpu_budget_mib = int(v);resample())
+	var gpu := _number(_tool_body("Performance"),"Layer GPU budget • MiB",gpu_budget_mib,1,2048,1,func(v):gpu_budget_mib = int(v);resample())
+	gpu.tooltip_text = "MiB for field, mesh and derived-surface allocations. Decoded cache, particle buffering and other process memory are separate."
 	for id in reader.objects:
 		var label := Label.new();label.text = id;label.clip_text = true;panel.add_child(label);label.hide();labels[id] = label
 		if reader.objects[id].kind == "particles":continue
@@ -527,11 +533,22 @@ func _build_ui() -> void:
 		if reader.objects[id].kind == "volume":volume_choice.add_item(id)
 	for i in range(volume_choice.item_count):
 		if volume_choice.get_item_text(i) == selected_volume:volume_choice.select(i)
-	volume_choice.item_selected.connect(func(i):selected_volume = volume_choice.get_item_text(i))
+	volume_choice.item_selected.connect(func(i):selected_volume = volume_choice.get_item_text(i); refresh_probe_channels())
+	probe_channel_label = Label.new(); probe_channel_label.text = "Channel"; probe_body.add_child(probe_channel_label)
+	probe_channel_choice = OptionButton.new();probe_body.add_child(probe_channel_choice)
+	probe_channel_choice.item_selected.connect(func(i):probe_channel = probe_channel_choice.get_item_text(i))
+	refresh_probe_channels()
 	var probe_title := Label.new();probe_title.text = "Source probe • world xyz";probe_body.add_child(probe_title)
 	for axis in ["X","Y","Z"]:probe_spins.append(_number(probe_body,axis,0,-1e12,1e12,.1,func(_v):pass))
 	viewer._button(probe_body,"Probe selected volume",probe_selected_volume)
 	probe_label = Label.new();probe_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART;probe_body.add_child(probe_label)
+	probe_stamp_label = Label.new();probe_stamp_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART;probe_body.add_child(probe_stamp_label)
+	viewer.tools_ui.configure_layer_tools(self)
+	for id in color_controls:
+		for title in ["Quick setup","Derive range","Slice","Clipping","Isosurface"]:
+			var target_body: VBoxContainer = tool_bodies[title+":"+id]
+			var context_label := Label.new();context_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+			context_label.set_meta("tool_object",id);target_body.add_child(context_label);target_body.move_child(context_label,1)
 	iso_status = Label.new();iso_status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART;_tool_body("Isosurface").add_child(iso_status)
 	for body in tool_bodies.values(): viewer.tools_ui.shorten_copy(body)
 	for kind in object_choices:
@@ -549,14 +566,47 @@ func set_probe_marker_enabled(enabled: bool) -> void:
 func probe_selected_volume() -> void:
 	if selected_volume.is_empty() or not views.has(selected_volume):return
 	var position := Vector3(probe_spins[0].value,probe_spins[1].value,probe_spins[2].value)
-	var value = views[selected_volume].probe(position)
+	var view = views[selected_volume]
+	var value = view.probe(position,probe_channel)
+	probe_stamp = {"capture":reader.source_path,"uuid":reader.metadata.uuid,"extent":reader.scan_offset,"object":selected_volume,"channel":probe_channel,"position":position,"key":view.key,"time":view.data.get("time")}
+
 	if not is_instance_valid(probe_marker):
 		probe_marker = MeshInstance3D.new();probe_marker.name = "SourceProbeMarker";add_child(probe_marker)
 	var lines := PackedVector3Array()
 	for axis in [Vector3.RIGHT,Vector3.UP,Vector3.BACK]:lines.append_array(PackedVector3Array([position-axis*.35,position+axis*.35]))
 	probe_marker.mesh = preload("res://scene/geometry.gd").lines(lines,Color.WHITE)
 	probe_marker_valid = value != null;set_probe_marker_enabled(probe_marker_enabled)
-	probe_label.text = "Unavailable" if value == null else "%s = %s %s" % [states[selected_volume].channel,JSON.stringify(value,"",true,true),reader.objects[selected_volume].units]
+	probe_label.tooltip_text = "The chosen channel must be present in the prepared field sample, and coordinates must fall inside its finite source support. Probe does not prepare hidden fields or change display channels."
+	probe_label.text = "Unavailable" if value == null else "%s = %s %s" % [probe_channel,JSON.stringify(value,"",true,true),reader.objects[selected_volume].units]
+	refresh_probe_stamp()
+
+func refresh_probe_channels() -> void:
+	if not is_instance_valid(probe_channel_choice):return
+	probe_channel_choice.clear()
+	if selected_volume.is_empty():return
+	var channels := {}
+	for row in reader.samples[selected_volume]:
+		for array in row.descriptor.arrays:channels[array.name] = true
+	for channel in channels:probe_channel_choice.add_item(channel)
+	if not channels.has(probe_channel):probe_channel = states[selected_volume].channel
+	for i in probe_channel_choice.item_count:
+		if probe_channel_choice.get_item_text(i) == probe_channel:probe_channel_choice.select(i)
+
+func refresh_probe_stamp() -> void:
+	for body in tool_bodies.values():
+		for child in body.get_children():
+			if child.has_meta("tool_object"):
+				var id: String = child.get_meta("tool_object")
+				var field = views[id]
+				child.text = "Channel: %s · source time %s" % [states[id].channel,str(field.data.get("time","unavailable"))]
+	if not is_instance_valid(probe_stamp_label):return
+	var view = views.get(selected_volume)
+	if probe_stamp.is_empty():return
+	var position := Vector3(probe_spins[0].value,probe_spins[1].value,probe_spins[2].value)
+	var stale: bool = view == null or selected_volume != probe_stamp.object or view.key != probe_stamp.key or probe_channel != probe_stamp.channel or position != probe_stamp.position
+	probe_stamp_label.text = "%s\n%s · %s\nWorld %s · source time %s%s" % [str(probe_stamp.capture).get_file(),probe_stamp.object,probe_stamp.channel,str(probe_stamp.position),str(probe_stamp.time),"\n⚠ Context changed; press Probe to sample again" if stale else ""]
+	probe_stamp_label.tooltip_text = "%s\nCapture %s · committed bytes %s" % [probe_stamp.capture,probe_stamp.uuid,str(probe_stamp.extent)]
+
 func snapshot() -> Dictionary: return {"gpu_budget_mib":gpu_budget_mib,"layers":states.duplicate(true)}
 func upgrade_state(value: Dictionary) -> Dictionary:
 	var upgraded := value.duplicate(true)
@@ -799,9 +849,9 @@ func _build_preset_ui(body: VBoxContainer, id: String) -> void:
 	var help := Button.new();help.text = "What do these controls change?";help.toggle_mode = true;body.add_child(help)
 	var guide := Label.new();guide.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART;guide.visible = false
 	guide.text = "Color range/normalization maps values to colors. Opacity mapping controls extinction. Ray step controls integration quality/cost, not brightness. Particle visibility can obscure fields; adjust it separately. The scene Viewing preset controls presentation/background and particle style. These are display choices, not calibrated science."
-	body.add_child(guide);help.toggled.connect(func(v):guide.visible = v)
+	body.add_child(guide);help.hide();guide.hide();title.tooltip_text = guide.text;help.toggled.connect(func(v):guide.visible = v)
 	var choice := OptionButton.new()
-	for name in VolumePresets.NAMES:choice.add_item(name)
+	for name in ["Dense core","Faint structure","Signed field"]:choice.add_item(name)
 	choice.tooltip_text = "Choose an action, then Apply. This is not an active mode; resolved settings below remain authoritative."
 	body.add_child(choice)
 	var description := Label.new();description.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART;body.add_child(description)
@@ -815,7 +865,11 @@ func _update_preset_description(id: String) -> void:
 	var text: String = VolumePresets.HELP[selected]
 	if VolumePresets.IDS[selected] == "faint_structure":
 		text = text.replace("the percentile entries below","P%s–P%s (edit percentile entries below)" % [str(color_controls[id].percentile_low.value),str(color_controls[id].percentile_high.value)])
-	controls.description.text = text+" Freezes color and opacity thresholds together. Keeps strength, ray step, particles and scene viewing preset. Manual controls remain available; not calibrated science."
+	controls.description.tooltip_text = text+" Freezes color and opacity thresholds together. Keeps strength, ray step, particles and scene viewing preset. Manual controls remain available; not calibrated science."
+	var problem: String = VolumePresets.problem(VolumePresets.IDS[selected],views[id].color_stats)
+	controls.description.text = problem if not problem.is_empty() else "One-time display action"
+	var group = viewer.tools_ui.shared_percentiles.get(id)
+	if is_instance_valid(group) and viewer.tools_ui.current == "Quick setup":group.visible = selected == 1
 func request_volume_preset(id: String, preset: String, low := 1.0, high := 99.0) -> bool:
 	var problem := VolumePresets.problem(preset,views[id].color_stats)
 	if not problem.is_empty():viewer.status_label.text = problem;return false

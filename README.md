@@ -14,8 +14,8 @@ and [persistent status and Jobs](docs/UX3_STATUS.md). Recorded-time playback,
 are owner-merged, including final [UX3 integration validation](docs/UX3_REPORT.md)
 in PR #64. The [UX4 design](docs/UX4_DESIGN.md) was owner-merged in PR #72.
 [UX4 command menus](docs/UX4_MENUS.md) were owner-merged in PR #73.
-The [category simulation panel](docs/UX4_PANEL.md) is pending owner review under
-#68; final focused tool composition remains separately gated.
+The [category simulation panel](docs/UX4_PANEL.md) was owner-merged in PR #75.
+[Focused scientific tools](docs/UX4_TOOLS.md) are pending owner review under #69.
 
 Start with:
 
