@@ -810,19 +810,9 @@ func _section(title: String, expanded := false) -> VBoxContainer:
 	if tools_ui.SECTIONS.has(title):
 		legacy_sections[title] = expanded
 		return tools_ui.form(tools_ui.SECTIONS[title])
-	var toggle := Button.new()
-	toggle.text = title
-	toggle.toggle_mode = true
-	toggle.button_pressed = expanded
-	toggle.alignment = HORIZONTAL_ALIGNMENT_LEFT
-	inspector_box.add_child(toggle)
-	var body := VBoxContainer.new()
-	body.visible = expanded
-	body.add_theme_constant_override("separation", 5)
-	inspector_box.add_child(body)
-	toggle.toggled.connect(func(v: bool): body.visible = v)
+	var body := preload("res://ui/shell/panel_group.gd").create(inspector_box,title,expanded)
 	sections[title] = body
-	section_buttons[title] = toggle
+	section_buttons[title] = body.get_meta("panel_header")
 	return body
 
 func _button(parent: Node, title: String, action: Callable) -> Button:
@@ -893,6 +883,7 @@ func _build_inspector_controls() -> void:
 	_visual_slider(rendering, "Particle size", 0.1, 8, point_scale, func(v: float): point_scale = v; _sync_visuals())
 	_visual_slider(rendering, "Brightness", 0.0, 5, brightness_scale, func(v: float): brightness_scale = v; _restyle())
 	_check(rendering, "Point rendering", clean_view, func(v: bool): _set_point_rendering(v))
+	filter_box = _section("Particle Filters")
 	var colors := _section("Color Mapping", true)
 	generic_box = VBoxContainer.new()
 	colors.add_child(generic_box)
@@ -905,14 +896,7 @@ func _build_inspector_controls() -> void:
 	for label in Normalization.LABELS: normalization_option.add_item(label)
 	normalization_option.item_selected.connect(func(i: int): _set_normalization(Normalization.MODES[i]))
 	_button(generic_box,"Symmetric about zero",func(): _set_normalization("symmetric"))
-	var advanced_toggle := Button.new()
-	advanced_toggle.text = "Advanced normalization"
-	advanced_toggle.toggle_mode = true
-	generic_box.add_child(advanced_toggle)
-	var advanced_color := VBoxContainer.new()
-	advanced_color.visible = false
-	generic_box.add_child(advanced_color)
-	advanced_toggle.toggled.connect(func(v: bool): advanced_color.visible = v)
+	var advanced_color := generic_box
 	var norm := _check(tools_ui.form("Mapping"), "Logarithmic", false, func(v: bool): logarithmic = v; _remember_mapping(); _restyle())
 	norm.tooltip_text = "Only finite positive values are valid; signed channels cannot use ordinary logarithms."
 	_check(tools_ui.form("Mapping"),"Cyclic phase",false,func(v: bool): cyclic = v; logarithmic = false if v else logarithmic; _remember_mapping(); _restyle())
@@ -966,13 +950,11 @@ func _build_inspector_controls() -> void:
 	var cam := _section("Camera")
 	_visual_slider(cam, "Orbit speed • radians / second", -0.5, 0.5, orbit_speed, func(v: float): orbit_speed = v)
 	_check(mappings, "Recorded history  [T]", trails_enabled, func(v: bool): trails_enabled = v; _rebuild_trails())
-	filter_box = _section("Particle Filters")
-	section_buttons["Particle Filters"].reparent(rendering)
-	filter_box.reparent(rendering)
 	var post := mappings
 	_visual_slider(post, "Exposure", .05, 3, exposure, func(v: float): exposure = v; _sync_visuals())
 	_visual_slider(post, "Gamma", .2, 3, gamma, func(v: float): gamma = v; _sync_visuals())
-	glow_slider = _visual_slider(post, "Bloom", 0, 2, environment.glow_intensity, func(v: float): environment.glow_intensity = v)
+	glow_slider = _visual_slider(tools_ui.form("Global effects"), "Bloom", 0, 2, environment.glow_intensity, func(v: float): environment.glow_intensity = v)
+	glow_slider.tooltip_text = "Global environment effect shared by particles, fields and meshes. Availability follows the viewing preset and renderer."
 	_check(tools_ui.form("Slice"), "X slice • ±3 simulation units", false, func(v: bool): slice_enabled = v; _sync_visuals())
 	_visual_slider(tools_ui.form("Slice"), "Slice position • box fraction", -1, 1, 0, func(v: float): slice_x = v; _sync_visuals())
 	_build_geometry_ui()
@@ -985,6 +967,7 @@ func _build_inspector_controls() -> void:
 	video_dialog.viewer = self
 	add_child(video_dialog)
 	tools_ui.finish_static()
+	preload("res://ui/shell/panel_group.gd").fit(inspector_box)
 	open_dialog = FileDialog.new()
 	open_dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE
 	open_dialog.access = FileDialog.ACCESS_FILESYSTEM
@@ -1150,10 +1133,13 @@ func _refresh_mapping_options_profiled() -> void:
 		var types: Dictionary = {}
 		for value in types_now: types[int(value)] = true
 		for value in types:
-			_check(filter_box, _type_label(value), not hidden_types.has(value), func(v: bool):
+			var filter := _check(filter_box, _type_label(value), not hidden_types.has(value), func(v: bool):
 				if v: hidden_types.erase(value)
 				else: hidden_types[value] = true
 				_restyle())
+			filter.tooltip_text = _type_description(value)
+			filter.text = _filter_display_label(value)
+			filter.custom_minimum_size.y = 32
 	if signature == channel_signature: return
 	channel_signature = signature
 	var choices: Array = ["fixed"] + names
@@ -1499,6 +1485,15 @@ func _type_label(value: int) -> String:
 	if labels is Dictionary and labels.get(str(value)) is String:
 		return "%s (Type %d)" % [labels[str(value)].left(160),value]
 	return "Type %d" % value
+
+func _type_description(value: int) -> String:
+	var labels = generic_reader.metadata.get("type_labels",{}) if generic_reader != null else {}
+	return "%s (Type %d)" % [labels[str(value)],value] if labels is Dictionary and labels.get(str(value)) is String else "Type %d" % value
+
+func _filter_display_label(value: int) -> String:
+	var full := _type_label(value)
+	var source: String = full.trim_suffix(" (Type %d)" % value)
+	return {"Density-seeded passive tracers":"Density tracers", "Coverage-seeded passive tracers":"Coverage tracers"}.get(source,full)
 
 func _inspection_number(parent: Control, title: String, value: float) -> SpinBox:
 	var label := Label.new(); label.text = title; parent.add_child(label)

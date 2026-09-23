@@ -48,13 +48,12 @@ func run() -> void:
 	for group in ["Rendering", "Color Mapping", "Advanced • Size / Brightness", "Particle Filters"]:
 		check(viewer.sections.has(group) and viewer.inspector_box.is_ancestor_of(viewer.sections[group]), "Canonical inspector group retained: " + group)
 	check(not viewer.control_checks.has("Particle layer visible"),"Redundant particle visibility checkbox removed")
-	var rendering: Control = viewer.sections["Rendering"]
-	check(viewer.section_buttons["Particle Filters"].get_parent() == rendering and viewer.filter_box.get_parent() == rendering,"Particle Filters occupies Rendering at the former visibility control")
-	check(viewer.section_buttons["Particle Filters"].get_index() == viewer.control_checks["Point rendering"].get_index()+1,"Particle Filters immediately follows Point rendering")
+	check(viewer.section_buttons["Particle Filters"].get_parent() == viewer.section_buttons["Rendering"].get_parent(),"Particle Filters is a sibling of Rendering")
 	var advanced: Control = viewer.sections["Advanced • Size / Brightness"]
 	check(viewer.section_buttons["Advanced • Size / Brightness"].text == "Advanced" and not viewer.section_buttons.has("Trails") and not viewer.section_buttons.has("Advanced • Post-processing"),"One Advanced expander replaces three disclosures")
-	for control in [viewer.size_option,viewer.brightness_option,viewer.control_checks["Recorded history  [T]"],viewer.visual_sliders["Exposure"],viewer.visual_sliders["Gamma"],viewer.glow_slider]:
+	for control in [viewer.size_option,viewer.brightness_option,viewer.control_checks["Recorded history  [T]"],viewer.visual_sliders["Exposure"],viewer.visual_sliders["Gamma"]]:
 		check(control.get_parent() == advanced,"Advanced options are direct children without nested expanders")
+	check(viewer.glow_slider.get_parent() == viewer.tools_ui.form("Global effects"),"Bloom belongs only to global View effects")
 	check(science(viewer) == initial, "Shell construction preserves scientific visual state and section keys")
 	await settle(); shell.layout(); await settle()
 	check(shell.empty.visible and not viewer.inspector_box.visible, "Empty shell offers Open without dummy scientific form")
@@ -84,12 +83,12 @@ func run() -> void:
 	# No source, rendering or scientific controller work may be caused by shell redraw/nav.
 	Profile.enabled = true; Profile.reset()
 	for repeat in 10:
-		for page in 2: shell.select_workspace(page); shell.layout()
+		for page in 3: shell.select_workspace(page); shell.layout()
 		shell.select_workspace(0)
 	var activity := Profile.report(); Profile.enabled = false
 	check(activity.stages.is_empty() and activity.counters.is_empty(), "Shell layout and navigation trigger no instrumented scientific work")
 	check(science(viewer) == before and viewer.committed_sample == prior_sample, "Workspace navigation preserves scientific state, source binding and sample")
-	for page in 2:
+	for page in 3:
 		shell.select_workspace(page); check(shell.chooser.selected == page, "Workspace choice synchronized " + str(page))
 		shell.select_workspace(0)
 	var focus: Control = viewer.section_buttons["Rendering"]; focus.grab_focus()
@@ -206,9 +205,14 @@ func run() -> void:
 			check(viewer.overlay_panel.position.x >= 640 and viewer.overlay_panel.get_rect().end.x <= shell.size.x+.1, "Dock preserves 640px scene region %s / %s" % [dimensions,factor])
 			check(viewer.overlay_panel.size.x <= 560 and shell.scroll.size.y > 100, "Bounded dock with independent scroll %s / %s" % [dimensions,factor])
 			layouts.append({"logical":str(dimensions),"scale":factor,"bar":str(shell.bar.size),"dock":str(viewer.overlay_panel.get_rect())})
+			for category in 3:
+				shell.select_workspace(category);await settle()
+				panel_bounds(viewer.inspector_box if category == 0 else shell.adapter,shell)
 			if factor == 1.0:
 				shell.select_workspace(0); await settle(); shell.scroll.scroll_vertical = 0; await settle(); picture("loaded-"+str(dimensions.x))
-				shell.select_workspace(1); await settle(); picture("appearance-"+str(dimensions.x))
+				shell.select_workspace(1); await settle(); picture("fields-"+str(dimensions.x))
+				shell.select_workspace(2); await settle(); picture("meshes-"+str(dimensions.x))
+				shell.select_workspace(0)
 	# Below minimum logical space: collapse and a recoverable temporary sheet.
 	viewer.color_channel = "value"; viewer._update_particle_legend()
 	root.content_scale_factor = 1; root.size = Vector2i(800,640); await settle(); shell.layout(); await settle()
@@ -340,10 +344,10 @@ func menu_checks(viewer) -> void:
 	shell.show_source()
 	await settle(); picture("metadata-details")
 	shell.details.hide()
-	for id in viewer.scene_layers.layer_settings_buttons:
-		if viewer.scene_layers.color_controls.has(id): viewer.scene_layers.layer_settings_buttons[id].button_pressed = true
+	shell.select_workspace(1)
 	shell.scroll.scroll_vertical = 0
 	await settle(); picture("metadata-field")
+	shell.select_workspace(0)
 	Visual.apply(viewer,initial_state)
 	check(science(viewer) == initial_state and viewer.committed_sample == initial_sample,"Opening metadata Details preserves scientific state and committed sample")
 	check(shell.menus.keys() == ["File","View","Tools","Help"],"Exact four top menus without duplicate State or Export")
@@ -376,6 +380,11 @@ func menu_checks(viewer) -> void:
 		var entry: Dictionary = shell.commands[name]
 		var label: String = entry.popup.get_item_text(entry.index)
 		for character in ["/", "\\", "*", "(", ")", "_"]: check(not label.contains(character),"Concise menu label " + label)
+
+func panel_bounds(node: Node, shell) -> void:
+	if node is Control and node.is_visible_in_tree():
+		check(node.get_global_rect().end.x <= shell.dock.get_global_rect().end.x+.5,"Panel control fits logical width: "+str(node.get_path()))
+	for child in node.get_children():panel_bounds(child,shell)
 
 func menu_tree(shell) -> Array:
 	var result: Array = []

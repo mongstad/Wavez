@@ -1,0 +1,198 @@
+{
+  "cases": [
+    {
+      "bounds": [
+        -60.256610769563004,
+        60.256610769563004
+      ],
+      "channel": "density",
+      "mapping": {
+        "normalization": "linear",
+        "percentile_high": 99.0,
+        "percentile_low": 1.0,
+        "policy": "symmetric",
+        "source_channel": "density",
+        "source_time": 2.0
+      },
+      "opacity": {
+        "lower": 0.0,
+        "mode": "magnitude",
+        "upper": 60.25661076956301
+      },
+      "policy": "symmetric",
+      "probe": 3.0
+    },
+    {
+      "bounds": [
+        0.2790434676319905,
+        32.25303955822906
+      ],
+      "channel": "density",
+      "mapping": {
+        "normalization": "linear",
+        "percentile_high": 99.0,
+        "percentile_low": 1.0,
+        "policy": "percentile",
+        "source_channel": "density",
+        "source_time": 2.0
+      },
+      "opacity": {
+        "lower": 0.0,
+        "mode": "magnitude",
+        "upper": 60.25661076956301
+      },
+      "policy": "percentile",
+      "probe": 3.0
+    },
+    {
+      "bounds": [
+        -6.0,
+        6.0
+      ],
+      "channel": "psi_real",
+      "mapping": {
+        "normalization": "linear",
+        "percentile_high": 99.0,
+        "percentile_low": 1.0,
+        "policy": "symmetric",
+        "source_channel": "psi_real",
+        "source_time": 2.0
+      },
+      "opacity": {
+        "lower": 0.0,
+        "mode": "magnitude",
+        "upper": 6.0
+      },
+      "policy": "symmetric",
+      "probe": 0.0
+    },
+    {
+      "bounds": [
+        -6.0,
+        6.0
+      ],
+      "channel": "psi_real",
+      "mapping": {
+        "normalization": "linear",
+        "percentile_high": 99.0,
+        "percentile_low": 1.0,
+        "policy": "percentile",
+        "source_channel": "psi_real",
+        "source_time": 2.0
+      },
+      "opacity": {
+        "lower": 0.0,
+        "mode": "magnitude",
+        "upper": 6.0
+      },
+      "policy": "percentile",
+      "probe": 0.0
+    },
+    {
+      "bounds": [
+        -6.0,
+        6.0
+      ],
+      "channel": "psi_imag",
+      "mapping": {
+        "normalization": "linear",
+        "percentile_high": 99.0,
+        "percentile_low": 1.0,
+        "policy": "symmetric",
+        "source_channel": "psi_imag",
+        "source_time": 2.0
+      },
+      "opacity": {
+        "lower": 0.0,
+        "mode": "magnitude",
+        "upper": 6.0
+      },
+      "policy": "symmetric",
+      "probe": 0.0
+    },
+    {
+      "bounds": [
+        -6.0,
+        6.0
+      ],
+      "channel": "psi_imag",
+      "mapping": {
+        "normalization": "linear",
+        "percentile_high": 99.0,
+        "percentile_low": 1.0,
+        "policy": "percentile",
+        "source_channel": "psi_imag",
+        "source_time": 2.0
+      },
+      "opacity": {
+        "lower": 0.0,
+        "mode": "magnitude",
+        "upper": 6.0
+      },
+      "policy": "percentile",
+      "probe": 0.0
+    }
+  ],
+  "checks": 138,
+  "failures": [],
+  "renderer": "gl_compatibility",
+  "export": {
+    "complete": true,
+    "pixels_identical": true,
+    "policy_preserved": true
+  },
+  "invalid_log_export_refused": true,
+  "source_sha256_unchanged": "407b869da4adca50d2afc42dafd877043b2b501a93da04c56a6a04d8fe8719fa",
+  "source_file": "color.ssc",
+  "source_bytes": 397220,
+  "oracles": {
+    "density": {
+      "bound": 60.256610769563004,
+      "percentiles": [
+        0.2790434676319905,
+        32.25303955822906
+      ],
+      "sha256": "a3cd22076fc2eec3cc7fb3e4e4eb7f07855386591f9a53324058a6522075d0de",
+      "probe_world": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "probe_value": 3.0,
+      "log_valid": true,
+      "percentile_clips": true
+    },
+    "psi_real": {
+      "bound": 6.0,
+      "percentiles": [
+        -6.0,
+        6.0
+      ],
+      "sha256": "5b44e9d38f121ca5c73ec5d18ae263e74341584f83b067d821b735fe57de5ae1",
+      "probe_world": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "probe_value": 0.0,
+      "log_valid": false,
+      "percentile_clips": false
+    },
+    "psi_imag": {
+      "bound": 6.0,
+      "percentiles": [
+        -6.0,
+        6.0
+      ],
+      "sha256": "5061aee5a15aca6c018720cca2746f7a132e4d985966f6c7143722c59943a496",
+      "probe_world": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "probe_value": 0.0,
+      "log_valid": false,
+      "percentile_clips": false
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "baseline": "3dddf7151295cef1499a96f052df823f82ea0898",
+  "renderer": "gl_compatibility",
+  "fixture": "tests.g4.fixtures.scene",
+  "source_sha256": "a5604d3b2024eb54ee064a523d0f81d7847a6fbadecf5725255f856abb17fe21",
+  "sample_time": 0.5,
+  "image_size": [
+    960,
+    640
+  ],
+  "overlay": false,
+  "cases": [
+    {
+      "preset": "Scientific",
+      "pixels_equal": true,
+      "before_sha256": "0e1e7f92dc353b937b2d2bea6ba38261c64b9fafd7f33a4b9967bdd83be18080",
+      "after_sha256": "0e1e7f92dc353b937b2d2bea6ba38261c64b9fafd7f33a4b9967bdd83be18080"
+    },
+    {
+      "preset": "Cinematic",
+      "pixels_equal": true,
+      "before_sha256": "ab293635290c68dbdb1e6b0832f9f9a88fc51700faebf4d82e1c704ef56f46f7",
+      "after_sha256": "ab293635290c68dbdb1e6b0832f9f9a88fc51700faebf4d82e1c704ef56f46f7"
+    }
+  ]
+}

@@ -110,7 +110,7 @@ func run() -> void:
 	for key in ["lower","upper","color_mapping","opacity_mapping","colormap"]:scene_after.scene.layers[id][key] = scene_before.scene.layers[id][key]
 	check(scene_after == scene_before,"cinematic environment and visible particle layer preserved")
 	viewer._apply_preset("Scientific");viewer.particle_layer_visible = false;layers.sample(job.time)
-	viewer.shell.toggle_dock();viewer.shell.refresh_export();layers.layer_settings_buttons[id].button_pressed = true
+	viewer.shell.toggle_dock();viewer.shell.refresh_export();viewer.shell.select_workspace(1);layers.choose_object("volume",id)
 	for i in 5:await process_frame
 	var scroll: ScrollContainer = viewer.shell.scroll
 	scroll.scroll_vertical += int(layers.preset_controls[id].guide.global_position.y-scroll.global_position.y)-50

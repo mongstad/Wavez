@@ -85,7 +85,8 @@ func open(title: String) -> void:
 	window.theme = viewer.shell.theme
 	surface.add_theme_stylebox_override("panel",viewer.shell.theme.box(&"surface.1", &"border.subtle",0,0,0))
 	var extent: Vector2 = viewer.get_viewport().get_visible_rect().size
-	window.popup_centered(Vector2i(minf(560,extent.x-32),minf(640,extent.y-64)))
+	var desired := Vector2i(440,240) if title == "Global effects" else Vector2i(560,640)
+	window.popup_centered(Vector2i(minf(desired.x,extent.x-32),minf(desired.y,extent.y-64)))
 	refresh_context()
 
 func reversed_shared() -> Array:
@@ -144,7 +145,7 @@ func shorten_copy(parent: Node) -> void:
 func refresh_context() -> void:
 	if not window.visible: return
 	var source: String = viewer.capture_path.get_file() if viewer.generic_reader != null else "No capture"
-	context.text = source
+	context.text = "All simulation content" if current == "Global effects" else source
 	if current in ["Temporal","Space time","Compare","Period","Results"]:
 		var temporal = viewer.selection_controller.temporal
 		var target = viewer.selection_controller.target

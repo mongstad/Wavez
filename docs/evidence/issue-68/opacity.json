@@ -1,0 +1,69 @@
+{
+  "alpha_cases": [
+    {
+      "alpha": 0.0,
+      "case": "zero-symmetric",
+      "expected": 0.0
+    },
+    {
+      "alpha": 0.40392157435417175,
+      "case": "magnitude-positive",
+      "expected": 0.4028727265783726
+    },
+    {
+      "alpha": 0.40392157435417175,
+      "case": "magnitude-negative",
+      "expected": 0.4028727265783726
+    },
+    {
+      "alpha": 0.6431372761726379,
+      "case": "saturated-weight",
+      "expected": 0.6434390193360531
+    },
+    {
+      "alpha": 0.0,
+      "case": "nearzero-dead-zone",
+      "expected": 0.0
+    },
+    {
+      "alpha": 0.0,
+      "case": "linear-negative-transparent",
+      "expected": 0.0
+    },
+    {
+      "alpha": 0.40392157435417175,
+      "case": "density-default",
+      "expected": 0.4028727265783726
+    },
+    {
+      "alpha": 0.40392157435417175,
+      "case": "color-range-independent",
+      "expected": 0.4028727265783726
+    },
+    {
+      "alpha": 0.40392157435417175,
+      "case": "constant-field-step-one",
+      "expected": 0.4028727265783726
+    },
+    {
+      "alpha": 0.40392157435417175,
+      "case": "legacy-range",
+      "expected": 0.4028727265783726
+    },
+    {
+      "alpha": 0.40392157435417175,
+      "case": "migrated-range",
+      "expected": 0.4028727265783726
+    }
+  ],
+  "checks": 98,
+  "failures": [],
+  "renderer": "gl_compatibility",
+  "source_sha256_unchanged": "92acdc9d9c0e860805bd6341fdce8ccb467cf00a6916f8cf36b08ee345a163a7",
+  "export": {
+    "completed": true,
+    "identical_pixels": true,
+    "mapping_in_sidecar": true,
+    "source_unchanged": true
+  }
+}

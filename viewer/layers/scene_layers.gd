@@ -28,7 +28,7 @@ var panel: VBoxContainer
 var probe_label: Label
 var probe_spins: Array[SpinBox] = []
 var selected_volume := ""
-var layer_settings_buttons: Dictionary = {}
+var panel_groups: Dictionary = {}
 var opacity_controls := {}
 var color_controls := {}
 var preset_controls := {}
@@ -379,8 +379,8 @@ func _set_opacity_mapping(id: String, key: String, value) -> bool:
 	if not problem.is_empty():viewer.status_label.text = problem;return false
 	states[id].opacity_mapping = mapping;resample();return true
 func _build_opacity_ui(body: VBoxContainer, id: String) -> void:
-	var title := Label.new();title.text = "Opacity mapping • independent of color range";title.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART;body.add_child(title)
-	var mode := OptionButton.new();mode.add_item("Linear scalar");mode.add_item("Magnitude • absolute scalar")
+	var title := Label.new();title.text = "Mapping";title.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART;body.add_child(title)
+	var mode := OptionButton.new();mode.add_item("Linear scalar");mode.add_item("Magnitude")
 	mode.select(Opacity.MODES.find(states[id].opacity_mapping.mode));body.add_child(mode)
 	mode.tooltip_text = "Display extinction only; not a calibrated physical measurement. Magnitude treats positive and negative values equally without changing their color or source values."
 	mode.item_selected.connect(func(i):
@@ -411,26 +411,61 @@ func _tool_body(title: String, id := "") -> VBoxContainer:
 		tool_bodies[key] = body
 	return tool_bodies[key]
 
+var category_pages := {}
+var object_choices := {}
+var object_bodies := {}
+var selected_objects := {}
+var panel_controls := {}
+
+func show_category(index: int) -> void:
+	for kind in category_pages: category_pages[kind].visible = kind == ("volume" if index == 1 else "mesh") and index != 0
+
+func choose_object(kind: String, id: String) -> void:
+	if not object_bodies.has(id) or reader.objects[id].kind != kind: return
+	selected_objects[kind] = id
+	for key in object_bodies:
+		if reader.objects[key].kind == kind:object_bodies[key].visible = key == id
+	var choice: OptionButton = object_choices[kind]
+	for i in choice.item_count:
+		if choice.get_item_metadata(i) == id: choice.select(i)
+
+func _panel_group(parent: VBoxContainer, id: String, title: String, expanded := true) -> VBoxContainer:
+	var body := preload("res://ui/shell/panel_group.gd").create(parent,title,expanded)
+	panel_groups[id+"/"+title] = body.get_meta("panel_header")
+	return body
+
 func _build_ui() -> void:
 	_clear_tool_bodies()
-	panel = VBoxContainer.new();viewer.inspector_box.add_child(panel);viewer.inspector_box.move_child(panel,0)
+	panel = VBoxContainer.new();viewer.shell.adapter.add_child(panel)
+	category_pages.clear();object_choices.clear();object_bodies.clear();panel_controls.clear()
+	for kind in ["volume","mesh"]:
+		var page := VBoxContainer.new();panel.add_child(page);category_pages[kind] = page
+		var heading := Label.new();heading.text = "Object";page.add_child(heading)
+		var choice := OptionButton.new();choice.fit_to_longest_item = false;page.add_child(choice);object_choices[kind] = choice
+		for id in reader.objects:
+			if reader.objects[id].kind == kind:choice.add_item(id);choice.set_item_metadata(choice.item_count-1,id)
+		choice.disabled = choice.item_count == 0
+		if choice.item_count == 0:
+			var empty := Label.new();empty.text = "No fields" if kind == "volume" else "No meshes";page.add_child(empty)
+		choice.item_selected.connect(func(i):choose_object(kind,str(choice.get_item_metadata(i))))
 	if playback != null:playback.build_ui(_tool_body("Performance"))
-	var title := Label.new();title.text = "Scene layers";panel.add_child(title)
 	_number(_tool_body("Performance"),"Layer GPU budget • MiB",gpu_budget_mib,1,2048,1,func(v):gpu_budget_mib = int(v);resample())
 	for id in reader.objects:
 		var label := Label.new();label.text = id;label.clip_text = true;panel.add_child(label);label.hide();labels[id] = label
 		if reader.objects[id].kind == "particles":continue
-		var toggle := Button.new();toggle.text = "Settings: "+id;toggle.toggle_mode = true;panel.add_child(toggle)
-		layer_settings_buttons[id] = toggle
-		var body := VBoxContainer.new();body.visible = false;panel.add_child(body);toggle.toggled.connect(func(v):body.visible = v)
-		var visible_check := CheckButton.new();visible_check.text = "Visible";visible_check.button_pressed = states[id].visible;body.add_child(visible_check)
+		var body := VBoxContainer.new();category_pages[reader.objects[id].kind].add_child(body);object_bodies[id] = body
+		var rendering := _panel_group(body,id,"Rendering")
+		var colors := _panel_group(body,id,"Color Mapping")
+		panel_controls[id] = {}
+		var visible_check := CheckButton.new();visible_check.text = "Visible";visible_check.button_pressed = states[id].visible;rendering.add_child(visible_check)
+		panel_controls[id].visible = visible_check
 		visible_check.toggled.connect(func(v):
 			if v and reader.objects[id].kind == "volume" and states[id].volume:
 				for other in states:
 					if other != id and reader.objects[other].kind == "volume" and states[other].visible and states[other].volume:
 						viewer.status_label.text = "Disable the other volume before showing this one.";visible_check.set_pressed_no_signal(false);return
 			states[id].visible = v;resample())
-		var channel := OptionButton.new();body.add_child(channel)
+		var channel: OptionButton = viewer._option(colors,"Channel");panel_controls[id].channel = channel
 		if reader.objects[id].kind == "mesh":channel.add_item("Fixed mesh color");channel.set_item_metadata(0,"")
 		var channel_names := {}
 		for row in reader.samples[id]:
@@ -442,27 +477,30 @@ func _build_ui() -> void:
 			if channel.get_item_metadata(i) == states[id].channel:channel.select(i)
 		channel.item_selected.connect(func(i):states[id].channel = str(channel.get_item_metadata(i));resample())
 		if reader.objects[id].kind == "volume":_build_preset_ui(_tool_body("Quick setup",id),id)
-		_scalar_input(body,"Color range minimum" if reader.objects[id].kind == "volume" else "Range minimum",states[id].lower,func(v):return _set_range(id,"lower",v))
-		_scalar_input(body,"Color range maximum" if reader.objects[id].kind == "volume" else "Range maximum",states[id].upper,func(v):return _set_range(id,"upper",v))
-		if reader.objects[id].kind == "volume":_build_color_ui(body,id)
-		var map := OptionButton.new();body.add_child(map)
+		panel_controls[id].lower = _scalar_input(colors,"Color range minimum" if reader.objects[id].kind == "volume" else "Range minimum",states[id].lower,func(v):return _set_range(id,"lower",v))
+		panel_controls[id].upper = _scalar_input(colors,"Color range maximum" if reader.objects[id].kind == "volume" else "Range maximum",states[id].upper,func(v):return _set_range(id,"upper",v))
+		if reader.objects[id].kind == "volume":_build_color_ui(colors,id)
+		var map: OptionButton = viewer._option(colors,"Colormap");panel_controls[id].colormap = map
 		for name in viewer.colormaps:map.add_item(name)
 		for i in range(map.item_count):
 			if map.get_item_text(i) == states[id].colormap:map.select(i)
 		map.item_selected.connect(func(i):states[id].colormap = map.get_item_text(i);resample())
 		if reader.objects[id].kind == "mesh":
-			var wire := CheckButton.new();wire.text = "Wireframe";wire.button_pressed = states[id].wireframe;body.add_child(wire);wire.toggled.connect(func(v):states[id].wireframe = v;resample());continue
-		var volume := CheckButton.new();volume.text = "Volume ray march";volume.button_pressed = states[id].volume;body.add_child(volume);volume.toggled.connect(func(v):
+			var wire := CheckButton.new();wire.text = "Wireframe";wire.button_pressed = states[id].wireframe;rendering.add_child(wire);panel_controls[id].wireframe = wire;wire.toggled.connect(func(v):states[id].wireframe = v;resample());continue
+		var volume := CheckButton.new();volume.text = "Volume ray march";volume.button_pressed = states[id].volume;rendering.add_child(volume);panel_controls[id].volume = volume;volume.toggled.connect(func(v):
 			if v and states[id].visible:
 				for other in states:
 					if other != id and reader.objects[other].kind == "volume" and states[other].visible and states[other].volume:
 						viewer.status_label.text = "Disable the other volume before showing this one.";volume.set_pressed_no_signal(false);return
 			states[id].volume = v;resample())
-		_build_opacity_ui(body,id)
-		var strength := _number(body,"Opacity / world unit",states[id].opacity,0,10,.01,func(v):states[id].opacity = v;resample())
-		strength.tooltip_text = "Display extinction strength after the independent opacity mapping. Not a calibrated physical quantity; color normalization does not change this value."
-		var step := _number(body,"Ray step • world units (quality / cost)",states[id].step,.05,10,.05,func(v):states[id].step = v;resample())
-		step.tooltip_text = "Smaller steps improve integration detail at greater cost; larger steps can miss fine structure. Not a brightness control. The renderer may enlarge steps to fit its 1024-step cap."
+		var opacity_body := _panel_group(body,id,"Opacity")
+		_build_opacity_ui(opacity_body,id)
+		var strength := _number(opacity_body,"Opacity strength",states[id].opacity,0,10,.01,func(v):states[id].opacity = v;resample())
+		panel_controls[id].strength = strength
+		strength.tooltip_text = "Display extinction strength per world unit after the independent opacity mapping. Not a calibrated physical quantity; color normalization does not change this value."
+		var step := _number(rendering,"Ray step",states[id].step,.05,10,.05,func(v):states[id].step = v;resample())
+		panel_controls[id].step = step
+		step.tooltip_text = "Ray step in world units. Smaller steps improve integration detail at greater cost; larger steps can miss fine structure. Not a brightness control. The renderer may enlarge steps to fit its 1024-step cap."
 		var slice_body := _tool_body("Slice",id)
 		var slice_choice := OptionButton.new()
 		for name in ["No slice","XY","XZ","YZ","Oblique"]:slice_choice.add_item(name)
@@ -496,6 +534,14 @@ func _build_ui() -> void:
 	probe_label = Label.new();probe_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART;probe_body.add_child(probe_label)
 	iso_status = Label.new();iso_status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART;_tool_body("Isosurface").add_child(iso_status)
 	for body in tool_bodies.values(): viewer.tools_ui.shorten_copy(body)
+	for kind in object_choices:
+		var choice: OptionButton = object_choices[kind]
+		if choice.item_count > 0:
+			var id: String = selected_objects.get(kind,"")
+			choose_object(kind,id if object_bodies.has(id) else str(choice.get_item_metadata(0)))
+	preload("res://ui/shell/panel_group.gd").fit(panel)
+	preload("res://analysis/ui_controls.gd").fit(panel)
+	show_category(viewer.shell.workspace)
 # Probe result/position and marker preference are session state, not recipe state.
 func set_probe_marker_enabled(enabled: bool) -> void:
 	probe_marker_enabled = enabled
@@ -556,16 +602,16 @@ func apply_state(value: Dictionary) -> void:
 	var probe_values: Array = probe_spins.map(func(spin):return spin.value)
 	var probe_text := probe_label.text if is_instance_valid(probe_label) else ""
 	var expanded := {}
-	for id in layer_settings_buttons:
-		if is_instance_valid(layer_settings_buttons[id]):expanded[id] = layer_settings_buttons[id].button_pressed
+	for id in panel_groups:
+		if is_instance_valid(panel_groups[id]):expanded[id] = panel_groups[id].button_pressed
 	value = upgrade_state(value)
 	gpu_budget_mib = int(value.gpu_budget_mib);states = value.layers.duplicate(true)
 	if is_instance_valid(panel):panel.get_parent().remove_child(panel);panel.queue_free()
-	labels.clear();probe_spins.clear();layer_settings_buttons.clear();opacity_controls.clear();color_controls.clear();preset_controls.clear();_build_ui()
+	labels.clear();probe_spins.clear();panel_groups.clear();opacity_controls.clear();color_controls.clear();preset_controls.clear();_build_ui()
 	for i in range(mini(probe_values.size(),probe_spins.size())):probe_spins[i].set_value_no_signal(probe_values[i])
 	probe_label.text = probe_text
 	for id in expanded:
-		if layer_settings_buttons.has(id):layer_settings_buttons[id].button_pressed = expanded[id]
+		if panel_groups.has(id):panel_groups[id].button_pressed = expanded[id]
 	resample()
 func request_iso(id: String) -> void:
 	for other in states:
