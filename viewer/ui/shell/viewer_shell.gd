@@ -1,7 +1,7 @@
 extends Control
 ## Presentation-only adapter. Controllers and the root scientific viewport retain ownership.
 const ThemeSource = preload("res://ui/theme/simscope_theme.gd")
-const WORKSPACES = ["Scene", "Appearance"]
+const WORKSPACES = ["Particles", "Fields", "Meshes"]
 var viewer
 var transport
 var status_ui
@@ -20,6 +20,7 @@ var error_text: Label
 var error_details := ""
 var details: AcceptDialog
 var detail_text: TextEdit
+var particle_empty: Label
 var adapter: VBoxContainer
 var workspace := 0
 var tab_buttons: Array[Button] = []
@@ -67,12 +68,12 @@ func setup(owner_viewer) -> void:
 	dock.remove_child(scroll)
 	var dock_box := VBoxContainer.new(); dock.add_child(dock_box)
 	var header := HBoxContainer.new(); dock_box.add_child(header)
-	var title := Label.new(); title.text = "Workspace"; title.size_flags_horizontal = Control.SIZE_EXPAND_FILL; header.add_child(title)
+	var title := Label.new(); title.text = "Simulation"; title.size_flags_horizontal = Control.SIZE_EXPAND_FILL; header.add_child(title)
 	button(header, "Hide panel", viewer._toggle_overlay, "close")
-	tabs = GridContainer.new(); tabs.columns = 2; dock_box.add_child(tabs)
+	tabs = GridContainer.new(); tabs.columns = 3; dock_box.add_child(tabs)
 	chooser = OptionButton.new(); chooser.custom_minimum_size.y = 32; dock_box.add_child(chooser)
 	for i in WORKSPACES.size():
-		var tab := button(tabs, WORKSPACES[i], select_workspace.bind(i), ["scene", "appearance", "selection", "analysis"][i])
+		var tab := button(tabs, WORKSPACES[i], select_workspace.bind(i))
 		tab.size_flags_horizontal = Control.SIZE_EXPAND_FILL; tab_buttons.append(tab)
 		chooser.add_item(WORKSPACES[i])
 	chooser.item_selected.connect(select_workspace)
@@ -82,6 +83,7 @@ func setup(owner_viewer) -> void:
 	var content := VBoxContainer.new(); content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	scroll.remove_child(viewer.inspector_box); scroll.add_child(content)
 	content.add_child(adapter); content.add_child(viewer.inspector_box)
+	particle_empty = Label.new();particle_empty.text = "No particles";content.add_child(particle_empty)
 	recovery = button(self, "Show panels", viewer._toggle_overlay, "view")
 	navigation = HBoxContainer.new(); add_child(navigation)
 	button(navigation, "Frame scene", viewer._focus_activity, "frame")
@@ -162,16 +164,10 @@ func select_workspace(index: int) -> void:
 	workspace = index
 	chooser.select(index)
 	for i in tab_buttons.size(): tab_buttons[i].theme_type_variation = "SelectedButton" if i == index else "SecondaryButton"
-	for child in adapter.get_children(): adapter.remove_child(child); child.queue_free()
 	viewer.inspector_box.visible = index == 0
 	adapter.visible = index != 0
-	if index != 0:
-		var note := Label.new(); note.text = "Open a control group in the inspector."
-		note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; adapter.add_child(note)
-		var targets: Array = [[], ["Rendering", "Color Mapping", "Scene layers"]][index]
-		for target in targets:
-			if viewer.sections.has(target) or target == "Scene layers": button(adapter, target, show_section.bind(target))
-	else: scroll.set_deferred("scroll_vertical", scroll_position)
+	if viewer.scene_layers != null: viewer.scene_layers.show_category(index)
+	scroll.set_deferred("scroll_vertical",scroll_position if index == 0 else 0)
 	refresh()
 
 func show_section(section: String) -> void:
@@ -180,7 +176,7 @@ func show_section(section: String) -> void:
 	if section == "Scene layers":
 		if viewer.scene_layers == null: return
 		if not viewer.overlay_visible: viewer._toggle_overlay()
-		select_workspace(0)
+		select_workspace(1)
 		await get_tree().process_frame
 		scroll.ensure_control_visible(viewer.scene_layers.panel)
 		return
@@ -230,8 +226,11 @@ func refresh() -> void:
 	var title: String = viewer.capture_path.get_file() if loaded else "No capture"
 	if source_button.text != title: source_button.text = title; source_button.tooltip_text = viewer.capture_path if loaded else "Source details"
 	empty.visible = not loaded and not loading
-	viewer.inspector_box.visible = loaded and workspace == 0
+	var has_particles: bool = loaded and viewer.scene_layers != null and not viewer.scene_layers.particle_id.is_empty()
+	viewer.inspector_box.visible = has_particles and workspace == 0
+	particle_empty.visible = loaded and workspace == 0 and not has_particles
 	adapter.visible = loaded and workspace != 0
+	if viewer.scene_layers != null: viewer.scene_layers.show_category(workspace)
 	var fullscreen: bool = not viewer.offline_instance and DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN
 	fullscreen_button.visible = fullscreen
 	if bar.visible == fullscreen:
@@ -393,6 +392,7 @@ func build_menus(row: HBoxContainer) -> void:
 	command(view,"Panels",viewer._toggle_overlay,"panels",true)
 	command(view,"Fullscreen",viewer._toggle_fullscreen,"fullscreen",true)
 	command(view,"Immersive",enter_immersive,"immersive")
+	command(view,"Global effects",viewer.tools_ui.open.bind("Global effects"),"global_effects")
 	command(view,"Probe marker",func():viewer.scene_layers.set_probe_marker_enabled(not viewer.scene_layers.probe_marker_enabled),"probe",true)
 	var guides := submenu(view,"Guides")
 	command(guides,"Grid and axes",func():viewer.guide_mesh.visible = not viewer.guide_mesh.visible,"grid",true)

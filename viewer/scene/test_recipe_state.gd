@@ -40,7 +40,7 @@ func compare(expected: Dictionary, actual: Dictionary, label: String) -> void:
 func session(viewer) -> Dictionary:
 	var layers = viewer.scene_layers
 	var expanded := {}
-	for id in layers.layer_settings_buttons:expanded[id] = layers.layer_settings_buttons[id].button_pressed
+	for id in layers.panel_groups:expanded[id] = layers.panel_groups[id].button_pressed
 	return {"screenshot_directory":viewer.screenshot_directory,"screenshot_sidecar":viewer.screenshot_sidecar,
 		"free_camera":viewer.free_camera,"loop":viewer.scene_loop_playback,"buffer_policy":layers.playback.policy,
 		"probe_values":layers.probe_spins.map(func(spin):return spin.value),"probe_text":layers.probe_label.text,
@@ -56,7 +56,7 @@ func change_session(viewer, value: bool) -> void:
 	viewer.scene_layers.playback.policy = "512" if value else "adaptive"
 	for i in range(3):viewer.scene_layers.probe_spins[i].value = (12+i if value else 2+i)
 	viewer.scene_layers.probe_label.text = "last probe remains session state" if value else "original probe"
-	for id in viewer.scene_layers.layer_settings_buttons:viewer.scene_layers.layer_settings_buttons[id].button_pressed = value
+	for id in viewer.scene_layers.panel_groups:viewer.scene_layers.panel_groups[id].button_pressed = value
 	viewer.selection_controller.name_input.text = "new draft" if value else "old draft"
 	viewer.selection_controller.predicate_integer.button_pressed = value
 

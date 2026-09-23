@@ -128,7 +128,7 @@ func run() -> void:
 	layers.opacity_controls.field.reset.pressed.emit()
 	check(layers.states.field.opacity_mapping == Opacity.DEFAULT and [layers.states.field.lower,layers.states.field.upper] == color_bounds,"mapping reset preserves color range")
 	check(layers.opacity_controls.field.lower.text.to_float() == 0. and layers.opacity_controls.field.mode.selected == 0,"reset controls synchronized")
-	viewer.shell.toggle_dock();viewer.shell.refresh_export();layers.layer_settings_buttons.field.button_pressed = true
+	viewer.shell.toggle_dock();viewer.shell.refresh_export();viewer.shell.select_workspace(1);layers.choose_object("volume","field")
 	for i in 5:await process_frame
 	var scroll: ScrollContainer = viewer.shell.scroll
 	scroll.scroll_vertical += int(layers.opacity_controls.field.mode.global_position.y-scroll.global_position.y)-190

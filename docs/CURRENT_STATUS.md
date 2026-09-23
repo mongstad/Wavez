@@ -1,14 +1,14 @@
 # Current status
 
-The owner merged final UX3 validation in PR #64 and accepted the revised
-[UX4 design](UX4_DESIGN.md) in PR #72 at `34edfca`. Current authorized work is
-#67, the only Ready item verified on 2026-09-22: [UX4 command menus](UX4_MENUS.md),
-**pending owner review**. File, View, Tools and Help now own their canonical
-commands, with existing scientific controls in minimal focused hosts. The PR #73
-owner-review correction moves permanent-panel metadata into Details, leaving only
-concise active color warnings beside field controls. #68's
-simulation-panel redesign and #69's final form composition remain separate.
-Historical review reports and evidence retain their original wording.
+The owner merged final UX3 validation in PR #64, the [UX4 design](UX4_DESIGN.md)
+in PR #72, and [command menus](UX4_MENUS.md) in PR #73 at `3dddf71`.
+Current authorized work is #68, the only Ready item verified on 2026-09-23:
+[the category simulation panel](UX4_PANEL.md), **pending owner review**.
+Particles, Fields and Meshes now have shallow, distinct disclosure groups;
+field/mesh object selectors change presentation only. Bloom remains global under
+View. #67 owner-approved menu, metadata and startup behavior is retained.
+#69's final focused-tool composition remains separate. Historical reports and
+evidence retain their original review-time wording.
 
 As of **2026-09-20**, including G4 and PERF-001/002 maintenance reviewed and accepted by the user. Scientific simulations were not rerun. Historical results identify their recorded checkpoints. PERF-003 mesh maintenance was also reviewed and accepted by the owner on 2026-09-13; implementation checkpoint `7974c78`.
 

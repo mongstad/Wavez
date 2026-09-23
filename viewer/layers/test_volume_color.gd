@@ -73,7 +73,7 @@ func run() -> void:
 			cases.append({"channel":channel,"policy":policy,"bounds":bounds,"mapping":mapping,"opacity":opacity,"probe":source_probe})
 			if channel == "density" and policy == "percentile":
 				Job.write_json(job.output.path_join("export-state.json"),Job.snapshot(viewer))
-				viewer.shell.toggle_dock();viewer.shell.refresh_export();layers.layer_settings_buttons[id].button_pressed = true
+				viewer.shell.toggle_dock();viewer.shell.refresh_export();viewer.shell.select_workspace(1);layers.choose_object("volume",id)
 				for i in 5:await process_frame
 				var scroll: ScrollContainer = viewer.shell.scroll
 				scroll.scroll_vertical += int(layers.color_controls[id].mode.global_position.y-scroll.global_position.y)-90
