@@ -1,0 +1,32 @@
+{
+  "command": [
+    "/home/Nozba/Documents/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+    "--path",
+    "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+    "--audio-driver",
+    "Dummy",
+    "--log-file",
+    "/tmp/simscope69-diagnostics/godot.log",
+    "--headless",
+    "--script",
+    "analysis/test_diagnostics.gd",
+    "--",
+    "--diagnostics-fixture=/tmp/simscope69-diagnostics"
+  ],
+  "exit_code": 0,
+  "seconds": 2.371651945002668,
+  "source_hashes": {
+    "period.csv": "e892f172a98d270d96850b04abd576bc691cd67005e196d5da60dbc7b8de7f6c",
+    "b.csv": "992d21760f400edfaee41db67e6ccb21b20ab4d9bd14431363a9aa085be960b2",
+    "a.csv": "0bb81558c14e7080921360fca29da8b15d206c1e466d2ca4368941e31f527a31",
+    "run-b.ssc": "8e28b51d87ddd7b24a4b342894745015010d9fa5e5b4b3a8a9708fe15640ac0a",
+    "run-a.ssc": "fe638e8855653054f7faf50e9f16786485cff128ec187a6eaf106bd753379602"
+  },
+  "source_unchanged": true,
+  "category": "headless integration",
+  "result": {
+    "backend": "forward_plus",
+    "checks": 23,
+    "failures": []
+  }
+}

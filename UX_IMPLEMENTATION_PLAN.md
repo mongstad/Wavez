@@ -343,7 +343,7 @@ A milestone may receive one of three outcomes:
 | UX2 | Theme Foundation & Component Library | ACCEPTED by owner 2026-09-13 at `5fae711`; [report](docs/UX2_REPORT.md) |
 | Pre-UX3/UX4 | Information architecture & visual direction | Owner merged #14/#40 design package in PR #39 on 2026-09-20; historical review evidence retained |
 | UX3 | Main Viewer Shell | Final validation #44 owner-merged in PR #64 at `bfbb26c`; historical [report](docs/UX3_REPORT.md) retained |
-| UX4 | Panels & Information Architecture | #66/#67 owner-merged in PR #72/#73; #68 category panel pending review; later slices gated |
+| UX4 | Panels & Information Architecture | #66–68 owner-merged in PR #72/#73/#75; #69 focused tools pending review; later slices gated |
 | UX5 | Application Settings | BLOCKED BY UX4 |
 | UX6 | Detachable Windows & Multi-Monitor | BLOCKED BY UX5 |
 | UX7 | Workspace Persistence & Recovery | BLOCKED BY UX6 |
@@ -792,9 +792,9 @@ defines a comfortable simulation panel targeting 1440×900 logical desktop pixel
 with one level of related-control expanders and File, View, Tools and Help menus.
 1024×640 is a compact fallback check, not the ordinary panel density target.
 The contract was accepted in owner-merged PR #72. [Command-menu migration](docs/UX4_MENUS.md)
-was owner-merged in PR #73. The [category panel](docs/UX4_PANEL.md) is pending
-owner review under #68; #69 final focused forms remain separately gated. The
-current #68 issue consumes the owner-approved #67 refinements and supersedes the
+was owner-merged in PR #73. The [category panel](docs/UX4_PANEL.md) was owner-merged
+in PR #75. [Focused tools](docs/UX4_TOOLS.md) are pending review under #69. The
+accepted #68 implementation consumes the owner-approved #67 refinements and supersedes the
 older sketch where specified, including particle Advanced and global Bloom.
 
 The accepted contract supersedes the earlier scrolling-workspace and
@@ -1415,14 +1415,15 @@ Its [report](docs/UX3_REPORT.md) and [evidence](docs/evidence/issue-44/README.md
 retain their historical review-time wording.
 
 The owner accepted #66 in PR #72 at `34edfca` and #67 in PR #73 at `3dddf71`.
-On 2026-09-23, #68 was the only Ready item. Its existing owner-linked branch
-`68-ux4-panel-001-build-the-flat-simulation-panel` was checked out, clean and equal
-to accepted main. The [category panel](docs/UX4_PANEL.md) is pending owner review.
+The owner accepted #68 in PR #75 at `b2f0384`.
+On 2026-09-23, #69 was the only Ready item. Its existing owner-linked branch
+`69-ux4-tools-001-create-focused-scientific-tool-dialogs` was checked out, clean
+and equal to accepted main. The [focused-tool report](docs/UX4_TOOLS.md) is
+pending owner review.
 
-#68 implements Particles/Fields/Meshes presentation, shallow disclosure styling,
-particle filter label refinement and a global View destination for Bloom. It
-preserves scientific/controller/state ownership and the accepted #67 tool paths.
-#69's final focused-tool composition is not included. Stop after the #68 PR.
+#69 refines task sections, field targets, shared input presentation and probe
+provenance in the existing focused hosts. It retains the #67 menu destinations
+and #68 permanent panel. Stop after the #69 PR; do not begin #70 or #71.
 Later issues require separate owner acceptance, Ready authorization and an
 existing issue-linked branch. Do not merge, auto-merge, close issues, change
 Project state or begin another issue.

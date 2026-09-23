@@ -66,15 +66,19 @@ func run() -> void:
 	await settle_style(view)
 	for value in view.sections.values():value.visible = false
 	var control = view.selection_controller;var temporal = control.temporal
-	var typed: Button = UI.button(control.panel,"Select by ID or region")
-	check(typed != null and not typed.button_pressed,"typed selection tools start collapsed")
-	var scientific: Button = UI.button(temporal.panel,"Advanced • Scientific options")
-	check(scientific != null and not scientific.button_pressed,"advanced scientific controls start collapsed")
-	check(UI.button(temporal.panel,"Run analysis") != null,"primary analysis action stays outside Advanced")
-	check(view.tools_ui.durable_controls.has("Data") and view.tools_ui.durable_controls.has("Save analysis"),"primary export and recipe actions stay outside Advanced")
 	var before := Job.snapshot(view);var members: String = control.members_input.text
-	for button in [typed,scientific]:button.button_pressed = true;button.button_pressed = false
-	check(Job.snapshot(view)==before and control.members_input.text==members,"opening groups changes no saved scientific or visual settings")
+	for title in ["Selection","Temporal"]:
+		view.tools_ui.open(title)
+		var found := false
+		for item in all_controls(view.tools_ui.form(title)):
+			if item is OptionButton and item.has_meta("tool_pages"):
+				found = true
+				for i in item.item_count:item.select(i);item.item_selected.emit(i)
+		check(found,"Task sections replace legacy nested groups: "+title)
+		check(view.tools_ui.footers.has(title),"Primary actions stay outside scrolling sections: "+title)
+		view.tools_ui.close()
+	check(view.tools_ui.durable_controls.has("Data") and view.tools_ui.durable_controls.has("Save analysis"),"Primary export and recipe actions retained")
+	check(Job.snapshot(view)==before and control.members_input.text==members,"Switching task sections changes no saved scientific or visual settings")
 	check("incomplete" in temporal.finite_subtotal.tooltip_text and not temporal.finite_subtotal.tooltip_text.is_empty(),"incomplete subtotal meaning remains visible")
 	check(not temporal.diagnostics.join.tooltip_text.is_empty() and not temporal.matched.common.coordinate_reference.tooltip_text.is_empty(),"clock and coordinate assumptions remain explained")
 	check(view.open_dialog.filters[0].begins_with("*.ssc"),"modern capture picker is first")
@@ -93,9 +97,9 @@ func run() -> void:
 			if item.is_visible_in_tree() and item is BaseButton and item.get_global_rect().end.x > panel.get_global_rect().end.x+1:overflow.append(item.text)
 		check(overflow.is_empty(),title+" default controls fit the panel width")
 		await capture(title.to_lower().replace(" ","-"))
-		# Expand every nested group and verify uncommon controls are still reachable.
+		# Select remaining task sections and verify controls are still reachable.
 		for item in all_controls(panel):
-			if item.has_meta("analysis_group"):item.button_pressed = true
+			if item is OptionButton and item.has_meta("tool_pages"):item.select(item.item_count-1);item.item_selected.emit(item.selected)
 		await process_frame;await process_frame
 		overflow.clear()
 		for item in all_controls(panel):
@@ -103,7 +107,7 @@ func run() -> void:
 		check(overflow.is_empty(),title+" expanded controls fit the panel width")
 		layouts.append({"panel":title,"width":panel.size.x,"expanded_height":panel.size.y})
 		for item in all_controls(panel):
-			if item.has_meta("analysis_group"):item.button_pressed = false
+			if item is OptionButton and item.has_meta("tool_pages"):item.select(0);item.item_selected.emit(0)
 		view.tools_ui.close()
 	check(control.jobs.worker_pid<0,"UI organization starts no background analysis")
 	Job.write_json(out.path_join("ui.json"),{"checks":checks,"failures":failures,"backend":RenderingServer.get_current_rendering_method(),"images":images,"layouts":layouts,"viewport":str(surface.get_visible_rect()),"window":str(root.size),"surface":"GPU SubViewport" if surface != root else "desktop window"})

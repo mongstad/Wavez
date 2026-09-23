@@ -51,11 +51,11 @@ func run() -> void:
 			var choice: int = Presets.IDS.find(preset)
 			controls.choice.select(choice);controls.choice.item_selected.emit(choice)
 			check(Job.snapshot(viewer) == before,"choosing an action alone changes no display state")
-			check(controls.description.text.contains("opacity") and controls.description.text.contains("ray step"),"preset changes and preserved controls disclosed before applying")
+			check(controls.description.tooltip_text.contains("opacity") and controls.description.tooltip_text.contains("ray step"),"preset changes and preserved controls disclosed before applying")
 			if preset == "faint_structure":
 				layers.color_controls[id].percentile_low.value = 1.
 				layers.color_controls[id].percentile_high.value = 99.
-				check(controls.description.text.contains("P1.0–P99.0"),"faint action discloses current percentile inputs before Apply")
+				check(controls.description.tooltip_text.contains("P1.0–P99.0"),"faint action discloses current percentile inputs before Apply")
 			controls.apply.pressed.emit();await wait_range()
 			var state: Dictionary = layers.states[id]
 			var bounds: Array = [oracle.minimum,oracle.maximum] if preset == "dense_core" else (oracle.percentiles if preset == "faint_structure" else [-oracle.bound,oracle.bound])

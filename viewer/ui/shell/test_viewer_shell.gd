@@ -149,7 +149,7 @@ func run() -> void:
 	var temporal = control.temporal
 	temporal.mode.select(2); temporal.start_time.text = "0"; temporal.end_time.text = "1"
 	activate(shell,"tool:Temporal")
-	preload("res://analysis/ui_controls.gd").button(temporal.panel,"Run analysis").pressed.emit()
+	viewer.tools_ui.find_button(viewer.tools_ui.footers["Temporal"],"Run").pressed.emit()
 	check(await wait_jobs(control) and not temporal.current_result.is_empty(),"Focused Temporal retains numerical request lifecycle")
 	activate(shell,"data")
 	temporal.durable.folder_name.text = "menu-data"

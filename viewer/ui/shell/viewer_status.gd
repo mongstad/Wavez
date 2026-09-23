@@ -118,7 +118,8 @@ func reopen_analysis() -> void:
 	elif operation in ["compare_series","result_overlay"]: task = "Compare"
 	elif operation == "estimate_period": task = "Period"
 	elif operation == "prepare_matched_render": task = "Matched runs"
-	elif operation == "result_heatmap": task = "Space time"
+	elif operation in ["space_time","result_heatmap"]: task = "Space time"
+	elif operation in ["result_series","result_plot","result_page"]: task = "Results"
 	viewer.tools_ui.open(task)
 
 func open_jobs() -> void:

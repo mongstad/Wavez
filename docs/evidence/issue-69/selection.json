@@ -1,0 +1,30 @@
+{
+  "command": [
+    "/home/Nozba/Documents/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+    "--path",
+    "/home/Nozba/Documents/Codex/SIMSCOPE/SimScope/viewer",
+    "--audio-driver",
+    "Dummy",
+    "--log-file",
+    "/tmp/simscope69-selections/godot.log",
+    "--headless",
+    "--script",
+    "selection/test_selection.gd",
+    "--",
+    "--selection-fixture=/tmp/simscope69-selections"
+  ],
+  "exit_code": 0,
+  "timed_out": false,
+  "seconds": 1.8100391539992415,
+  "source_unchanged": true,
+  "source_sha256": "eab7dded7f66a941ab1e9bc6ac35857fe275159c0775ee98bb1a6bdd50636a6c",
+  "category": "headless integration",
+  "result": {
+    "backend": "forward_plus",
+    "checks": 31,
+    "drawn": 5,
+    "failures": [],
+    "gpu_bytes": 12928,
+    "status": "3 selections \u2022 6 selected members\n5 present \u2022 5 highlights\nCounts include overlaps; highlights may show a subset."
+  }
+}

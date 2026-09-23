@@ -74,13 +74,14 @@ func apply(state: Dictionary, lut: Texture2D) -> void:
 	var size := 2*(transform.basis.x.length()*grid_size.x+transform.basis.y.length()*grid_size.y+transform.basis.z.length()*grid_size.z)
 	if slice.mesh == null: slice.mesh = QuadMesh.new()
 	slice.mesh.size = Vector2(size,size);slice.transform = Transform3D(Basis(tangent,bitangent,normal),center)
-func probe(world: Vector3):
-	if data.is_empty(): return null
+func probe(world: Vector3, source_channel := ""):
+	if source_channel.is_empty():source_channel = channel
+	if data.is_empty() or not data.channels.has(source_channel): return null
 	var p := world_to_grid*world
 	if p.x < bounds_min.x or p.y < bounds_min.y or p.z < bounds_min.z or p.x > bounds_max.x or p.y > bounds_max.y or p.z > bounds_max.z: return null
 	p = p.clamp(Vector3.ZERO,grid_size-Vector3.ONE)
 	var lo := Vector3i(p.floor());var hi := (lo+Vector3i.ONE).min(Vector3i(grid_size)-Vector3i.ONE);var f := p-Vector3(lo);var result := 0.0
-	var values = data.channels[channel];var nx := int(grid_size.x);var ny := int(grid_size.y)
+	var values = data.channels[source_channel];var nx := int(grid_size.x);var ny := int(grid_size.y)
 	for dz in range(2):
 		for dy in range(2):
 			for dx in range(2):
