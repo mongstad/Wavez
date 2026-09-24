@@ -434,9 +434,12 @@ func choose_object(kind: String, id: String) -> void:
 	for i in choice.item_count:
 		if choice.get_item_metadata(i) == id: choice.select(i)
 
-func _panel_group(parent: VBoxContainer, id: String, title: String, expanded := true) -> VBoxContainer:
-	var body := preload("res://ui/shell/panel_group.gd").create(parent,title,expanded)
-	panel_groups[id+"/"+title] = body.get_meta("panel_header")
+func _panel_group(parent: VBoxContainer, id: String, title: String) -> VBoxContainer:
+	var key: String = reader.objects[id].kind + "/" + id + "/" + title
+	var body := preload("res://ui/shell/panel_group.gd").create(parent,title,viewer.layer_panel_disclosures.get(key,false))
+	var header: Button = body.get_meta("panel_header")
+	header.toggled.connect(func(value: bool): viewer.layer_panel_disclosures[key] = value)
+	panel_groups[id+"/"+title] = header
 	return body
 
 func _build_ui() -> void:

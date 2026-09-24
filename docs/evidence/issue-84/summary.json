@@ -1,0 +1,43 @@
+{
+  "forward_empty": {
+    "checks": 259,
+    "failures": [],
+    "source_hashes_unchanged": {
+      "particles.ssc": "5985d4cb0c3fc7fd6e4339a8b28eedaa08d67d455d72b4d4209459ecee2f91e0",
+      "fields.ssc": "fb4faccfa30ff4db594b23dd21540db09cca7b0f348c0554829e5928d1222b48",
+      "mixed-replacement.ssc": "9d027d8d8fcbe83fb95fcc14c7d674ab5813ff19ee552fb7134f6e76e1e99d20",
+      "mixed.ssc": "0d639956fd8095593b2a7e179aefe9c7b18473852b51ec72b5851eb04676b93e"
+    }
+  },
+  "forward_startup": {
+    "checks": 269,
+    "failures": [],
+    "source_hashes_unchanged": {
+      "particles.ssc": "471a0950e6653e8e477fce762bb0879152a3f764096b26c220b0c336126f237c",
+      "fields.ssc": "4b2082d5dc15c31ddc43445cadc1f258e0787c799aaf0c24ffc91e4ad5a54d00",
+      "mixed-replacement.ssc": "1db2f1a391a01b67519541073b1597a2908f40a17f909d7149eb9e2041542db8",
+      "mixed.ssc": "fa24fd05e7e2250b7673f0ba8366e93a1903dc54012c98baffe57fda5b0cc928"
+    }
+  },
+  "compatibility_startup": {
+    "checks": 269,
+    "failures": [],
+    "source_hashes_unchanged": {
+      "particles.ssc": "cbdce3116bcb3e6f6fc5f5fccb03b75c689d38343cc529319e30216d256d7f6f",
+      "fields.ssc": "5478a409c1aa33ae4db2904809a30da446b87c3b0355aa3cc80cd1accb4b0a60",
+      "mixed-replacement.ssc": "1b5f666b537a482a5eaaf479dca872f41ed6877f7f0eed5dff2f9bb5943dc763",
+      "mixed.ssc": "7296dd7f5e9a3126b33ba1ae23b6a3af410befe6d4faa3c4e23a6e21cd9a935a"
+    }
+  },
+  "recipes_headless": {
+    "checks": 2697,
+    "failures": []
+  },
+  "compatibility_initial": {
+    "checks": 269,
+    "assertion_failures": 0,
+    "runner_passed": false,
+    "warning": "Failed to load cached shader, recompiling.",
+    "resolution": "Clean warm-cache rerun passed."
+  }
+}

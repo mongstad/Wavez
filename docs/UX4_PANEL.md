@@ -61,6 +61,16 @@ Particle slider labels use the normal theme font size instead of the old 12-pixe
 override. The nested Advanced normalization disclosure is removed; its manual
 bounds remain directly inside Color Mapping. There are no nested expanders.
 
+On a fresh application session, every Particles, Fields and Meshes group starts
+collapsed, including groups first made available by opening a capture. Disclosure
+choices then remain session UI state: capture replacement, category/object
+switching and layer-control rebuilds do not reset matching groups. Field/mesh
+choices are retained by category, source object ID and group title, including
+when an object temporarily disappears. New logical groups start collapsed.
+The existing recipe-owned particle `sections` values are still honored when
+explicitly restored; field/mesh disclosures remain outside recipe state.
+See [launch-default validation](PANEL_DISCLOSURE_VALIDATION.md).
+
 1440×900 logical pixels is the primary target; 1920×1080 is the roomy check.
 1024×640 remains a readable fallback with the category selector, independent
 vertical scrolling and existing hide/show recovery. Fully expanded groups may
