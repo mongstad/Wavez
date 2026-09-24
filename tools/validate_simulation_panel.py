@@ -40,15 +40,18 @@ def main():
     p.add_argument('--godot', required=True)
     p.add_argument('--output-dir', required=True, type=Path)
     p.add_argument('--renderer', choices=['gl_compatibility','forward_plus'], default='gl_compatibility')
+    p.add_argument('--startup-capture', action='store_true', help='Launch directly into a capture to check fresh-session disclosure defaults.')
     args = p.parse_args()
     out = args.output_dir.resolve(); out.mkdir(parents=True, exist_ok=False)
     fixture(out/'mixed.ssc', ['particles','volume','mesh'])
+    fixture(out/'mixed-replacement.ssc', ['particles','volume','mesh'])
     fixture(out/'fields.ssc', ['volume'])
     fixture(out/'particles.ssc', ['particles'])
     hashes = {f.name:hashlib.sha256(f.read_bytes()).hexdigest() for f in out.glob('*.ssc')}
     run = subprocess.run([args.godot, '--path', str(ROOT/'viewer'), '--rendering-method', args.renderer,
                           '--audio-driver','Dummy','--resolution','1440x900', '--script',
-                          'ui/shell/test_simulation_panel.gd','--',str(out)], text=True,
+                          'ui/shell/test_simulation_panel.gd','--',str(out)] +
+                         (['--capture='+str(out/'mixed.ssc')] if args.startup_capture else []), text=True,
                          stdout=subprocess.PIPE, stderr=subprocess.STDOUT, timeout=150)
     (out/'native.log').write_text(run.stdout)
     if run.returncode or 'ERROR:' in run.stdout or 'WARNING:' in run.stdout:

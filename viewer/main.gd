@@ -39,6 +39,8 @@ var interval_end: SpinBox
 var recipe_dialog: FileDialog
 var geometry_dialog: FileDialog
 var recipe_saving := false
+# Session-only field/mesh disclosures survive replacement of the layer controller.
+var layer_panel_disclosures := {}
 # Session-only interactive fullscreen return mode; native window geometry stays
 # owned by the window manager. Immersive keeps its separate immediate return mode.
 var fullscreen_restore_mode := DisplayServer.WINDOW_MODE_WINDOWED
@@ -883,12 +885,12 @@ func _build_inspector_controls() -> void:
 			generic_reader.configure_cache(0,false)
 			generic_reader.configure_cache(decoded_cache_mib*1048576,false)
 		_update_hud())
-	var rendering := _section("Rendering", true)
+	var rendering := _section("Rendering")
 	_visual_slider(rendering, "Particle size", 0.1, 8, point_scale, func(v: float): point_scale = v; _sync_visuals())
 	_visual_slider(rendering, "Brightness", 0.0, 5, brightness_scale, func(v: float): brightness_scale = v; _restyle())
 	_check(rendering, "Point rendering", clean_view, func(v: bool): _set_point_rendering(v))
 	filter_box = _section("Particle Filters")
-	var colors := _section("Color Mapping", true)
+	var colors := _section("Color Mapping")
 	generic_box = VBoxContainer.new()
 	colors.add_child(generic_box)
 	color_option = _option(generic_box, "Color by")

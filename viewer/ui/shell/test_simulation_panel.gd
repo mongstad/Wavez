@@ -24,10 +24,54 @@ func hierarchy(node: Node, depth := 0) -> void:
 	for child in node.get_children():hierarchy(child,depth)
 func settle() -> void:
 	for i in 5:await process_frame
+
+func disclosures() -> Dictionary:
+	var values := {}
+	for title in viewer.section_buttons: values["particles/"+title] = viewer.section_buttons[title].button_pressed
+	if viewer.scene_layers != null:
+		for title in viewer.scene_layers.panel_groups: values[title] = viewer.scene_layers.panel_groups[title].button_pressed
+	return values
+
+func check_session_disclosures() -> void:
+	for title in disclosures():check(not disclosures()[title],"Fresh session starts collapsed: "+title)
+	viewer._open_capture(output.path_join("mixed.ssc"));viewer.playing = false
+	for title in disclosures():check(not disclosures()[title],"First mixed capture starts collapsed: "+title)
+	viewer.section_buttons.Rendering.button_pressed = true
+	viewer.section_buttons["Advanced • Size / Brightness"].button_pressed = true
+	var layers = viewer.scene_layers
+	layers.panel_groups["volume0/Rendering"].button_pressed = true
+	layers.panel_groups["volume1/Opacity"].button_pressed = true
+	layers.panel_groups["mesh1/Color Mapping"].button_pressed = true
+	var chosen := disclosures()
+	for repeat in 3:
+		for index in 3:
+			viewer.shell.select_workspace(index)
+			for kind in ["volume","mesh"]:
+				for i in 2:pick(layers.object_choices[kind],i)
+	check(disclosures() == chosen,"Category/object switches preserve mixed open and closed groups")
+	var saved := Visual.snapshot(viewer)
+	Visual.apply(viewer,saved)
+	check(disclosures() == chosen,"Visual recipe rebuild preserves session layer disclosures")
+	# Particle sections are explicitly recipe-owned; do not remove that contract.
+	viewer.section_buttons.Rendering.button_pressed = false
+	Visual.apply(viewer,saved)
+	check(disclosures() == chosen,"Explicit particle recipe disclosure is honored")
+	viewer._open_capture(output.path_join("mixed-replacement.ssc"));viewer.playing = false
+	check(disclosures() == chosen,"Different capture with matching logical groups preserves choices")
+	viewer._open_capture(output.path_join("particles.ssc"));viewer.playing = false
+	for title in disclosures():check(disclosures()[title] == chosen[title],"Particle disclosure survives missing layers: "+title)
+	viewer._open_capture(output.path_join("mixed.ssc"));viewer.playing = false
+	check(disclosures() == chosen,"Layer disclosures survive absence and reintroduction in session")
+	viewer._open_capture(output.path_join("fields.ssc"));viewer.playing = false
+	for title in disclosures():check(disclosures()[title] == chosen[title],"Field-only replacement preserves matching choices: "+title)
+	viewer._open_capture(output.path_join("mixed.ssc"));viewer.playing = false
+	check(disclosures() == chosen,"Replacement after object selection preserves per-object disclosures")
+
 func run() -> void:
 	output = OS.get_cmdline_user_args()[0]
 	create_timer(120).timeout.connect(func():push_error("Panel test timeout");quit(1))
 	viewer = Viewer.new();viewer.scene_prebuffer_enabled = false;root.add_child(viewer);viewer.set_process(false)
+	check_session_disclosures()
 	viewer._open_capture(output.path_join("mixed.ssc"));viewer.playing = false;viewer.orbit_enabled = false
 	await settle()
 	var shell = viewer.shell;var layers = viewer.scene_layers
