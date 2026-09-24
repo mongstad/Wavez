@@ -2,6 +2,7 @@ extends SceneTree
 const Viewer = preload("res://main.gd")
 const Visual = preload("res://scene/visual_state.gd")
 const Profile = preload("res://scene/playback_profile.gd")
+const ProgressDetails = preload("res://video/progress_details.gd")
 var output := ""
 var checks := 0
 var failures := []
@@ -31,7 +32,48 @@ func configure_video(viewer, name: String, encoder: String, end_time := .2):
 	video.width.value = 128; video.height.value = 128; video.fps.value = 30
 	video.overlays.button_pressed = false; video.output.text = output.path_join(name+".mp4"); video.ffmpeg = encoder
 	return video
+
+func check_video_details():
+	var snapshot := {"stage":"rendering", "snapshot_ticks":1000, "progress_ticks":1000,
+		"elapsed_seconds":100.0, "progress":{"current_frame":3000.0,"total_frames":12000.0,"elapsed_seconds":100.0},
+		"output":"/exports/movie.mp4", "directory":"/exports/job"}
+	var text := ProgressDetails.format(snapshot,1000)
+	check(text.begins_with("Rendering frame 3000 / 12000 (25%)\n"),"One integer frame count and actual percentage")
+	check(text.contains("Elapsed: 00:01:40\nEstimated remaining: 00:05:00\n"),"Elapsed and estimated remaining use separate hh:mm:ss lines")
+	check(text.count("3000 / 12000") == 1 and text.count("/exports/movie.mp4") == 1 and text.count("/exports/job") == 1,"No duplicate progress or equivalent paths")
+	check(text.contains("Output: /exports/movie.mp4") and text.contains("Temporary files: /exports/job"),"Both paths are labeled")
+	text = ProgressDetails.format(snapshot,3000)
+	check(text.contains("Elapsed: 00:01:42") and text.contains("Estimated remaining: 00:05:06"),"Published snapshot advances elapsed and ETA between worker updates")
+	text = ProgressDetails.format(snapshot,12000)
+	check(text.contains("Estimated remaining: Unavailable — no recent frame progress"),"No stale ETA after a prolonged gap in frame progress")
+	for stage in ["starting","loading","cancelling","encoding","failed","cancelled"]:
+		snapshot.stage = stage
+		snapshot.detail = "Diagnostic retained in /exports/job"
+		text = ProgressDetails.format(snapshot,3000)
+		check(not text.contains("approximate") and text.contains("Estimated remaining: Unavailable"),"No rendering ETA for "+stage)
+		if stage in ["failed","cancelled"]:
+			check(text == ProgressDetails.format(snapshot,999000),"Terminal time is frozen for "+stage)
+			check(text.contains("Diagnostic retained in [Temporary files]") and text.count("/exports/job") == 1,"Terminal diagnostic preserved with one labeled directory")
+	for stage in ["complete","frames_ready"]:
+		snapshot.stage = stage; snapshot.progress.current_frame = 12000
+		text = ProgressDetails.format(snapshot,3000)
+		check(text.contains("12000 / 12000 frames rendered (100%)") and text.contains("Estimated remaining: 00:00:00"),"Completed frame count and zero remainder for "+stage)
+		check(text == ProgressDetails.format(snapshot,999000),"Stable completed time for "+stage)
+	check(text.contains("FFmpeg unavailable"),"Frames-ready is distinguished from saved MP4")
+	snapshot.stage = "rendering"; snapshot.elapsed_seconds = 0
+	for count in [0,1]:
+		snapshot.progress.current_frame = count
+		check(ProgressDetails.format(snapshot,1000).contains("Waiting for render progress"),"Initial render waits for sufficient progress "+str(count))
+	for counts in [[0,0],[-1,10],[11,10],[0,-10],[0,NAN],[INF,10],[1.5,10]]:
+		snapshot.progress.current_frame = counts[0]; snapshot.progress.total_frames = counts[1]
+		text = ProgressDetails.format(snapshot,1000)
+		check(text.begins_with("Rendering — frame count unavailable") and not text.contains("%"),"Invalid counts have no fabricated percent "+str(counts))
+	snapshot.stage = "failed"; snapshot.progress = {"current_frame":3,"total_frames":12}
+	check(ProgressDetails.format(snapshot,1000).begins_with("Failed — 3 / 12 frames rendered (25%)"),"Failure preserves actual partial progress rather than reporting completion")
+	check(ProgressDetails.duration(360005) == "100:00:05","Long exports retain hours beyond 24")
+
 func run():
+	check_video_details()
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--status-output="): output = arg.trim_prefix("--status-output=")
 	var config: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(output.path_join("config.json")))
@@ -124,6 +166,11 @@ func run():
 	while video.pid > 0 and video.last_progress.get("stage", "") != "rendering" and Time.get_ticks_msec()<deadline: await create_timer(.01).timeout
 	check(video.pid > 0 and viewer.shell.detail_text.text != initial_detail and ui.live_details == "Video export","Open active Details updates from real published export progress")
 	check(viewer.shell.detail_text.text == ui.job_rows["Video export"].detail,"Details and Jobs overview use the same progress snapshot")
+	check(viewer.shell.detail_text.text.begins_with("Rendering frame ") and viewer.shell.detail_text.text.contains("%)\nElapsed: "),"Real worker produces canonical progress and elapsed")
+	check(viewer.shell.detail_text.text.count(" / ") == 1 and viewer.shell.detail_text.text.count(video.active_directory) == 1,"Live Details has no duplicate frame count or directory")
+	deadline = Time.get_ticks_msec()+15000
+	while video.pid > 0 and not viewer.shell.detail_text.text.contains("Estimated remaining: 00:") and Time.get_ticks_msec()<deadline: await create_timer(.01).timeout
+	check(video.pid > 0 and viewer.shell.detail_text.text.contains("Estimated remaining: 00:"),"Live Details acquires a render ETA from real worker progress")
 	await settle(); picture("live-details")
 	root.mode = Window.MODE_MINIMIZED
 	await wait_video(video)
@@ -131,8 +178,10 @@ func run():
 	root.mode = Window.MODE_WINDOWED; await settle(); ui.refresh()
 	check(ui.live_details.is_empty() and viewer.shell.detail_text.text.begins_with("Complete"),"Details publishes terminal completion and stops following")
 	var completed_detail: String = viewer.shell.detail_text.text
+	check(completed_detail.contains("(100%)") and completed_detail.contains("Estimated remaining: 00:00:00"),"Real completion reports 100 percent and zero remaining")
 	await create_timer(.3).timeout
 	check(viewer.shell.detail_text.text == completed_detail,"Terminal detail view remains stable")
+	picture("complete-details")
 	viewer.shell.details.hide()
 	check(ui.active_count == 0 and FileAccess.file_exists(output.path_join("complete.mp4")),"Completion clears active count and retains output")
 	var terminal: Dictionary = video.job_status.duplicate(true)

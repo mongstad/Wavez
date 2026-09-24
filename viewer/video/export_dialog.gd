@@ -6,6 +6,7 @@ var active_output := ""
 
 const Job = preload("res://video/render_job.gd")
 const Timeline = preload("res://video/offline_timeline.gd")
+const ProgressDetails = preload("res://video/progress_details.gd")
 var viewer
 var timeline
 var range_choice: OptionButton
@@ -41,6 +42,7 @@ var g4_quota: SpinBox
 var preparing := false
 var last_progress: Dictionary = {}
 var launch_ticks := 0
+var progress_ticks := 0
 
 func _ready() -> void:
 	title = "SimScope • Export Video"
@@ -216,6 +218,8 @@ func start_export() -> void:
 		return
 	active_output = job.output_path
 	last_progress = {}
+	launch_ticks = Time.get_ticks_msec()
+	progress_ticks = launch_ticks
 	var name := ".simscope-export-%d-%d" % [Time.get_unix_time_from_system(), Time.get_ticks_usec()]
 	active_directory = job.output_path.get_base_dir().path_join(name)
 	active_job_path = active_directory.path_join("job.json")
@@ -254,6 +258,7 @@ func start_export() -> void:
 		publish_job("failed", message.text)
 		return
 	launch_ticks = Time.get_ticks_msec()
+	progress_ticks = launch_ticks
 	last_progress = {}
 	progress.value = 0
 	start_button.disabled = true
@@ -262,9 +267,20 @@ func start_export() -> void:
 	publish_job("starting", message.text)
 
 func publish_job(stage: String, detail: String) -> void:
+	var now := Time.get_ticks_msec()
+	var seconds := maxf(0, (now - launch_ticks) / 1000.0)
+	if not last_progress.is_empty():
+		seconds = float(last_progress.get("elapsed_seconds", seconds))
+		if last_progress.get("stage", "") not in ProgressDetails.TERMINAL:
+			seconds += maxf(0, (now - progress_ticks) / 1000.0)
 	job_status = {"stage":stage, "detail":detail, "directory":active_directory, "job":active_job_path,
-		"output":active_output, "progress":last_progress.duplicate(true)}
+		"output":active_output, "progress":last_progress.duplicate(true),
+		"elapsed_seconds":seconds, "snapshot_ticks":now, "progress_ticks":progress_ticks}
+	message.text = progress_details()
 	job_changed.emit()
+
+func progress_details() -> String:
+	return ProgressDetails.format(job_status, Time.get_ticks_msec())
 
 func cancel_export() -> void:
 	if pid <= 0: return
@@ -286,10 +302,10 @@ func _process(delta: float) -> void:
 	if FileAccess.file_exists(path):
 		var data = JSON.parse_string(FileAccess.get_file_as_string(path))
 		if data is Dictionary:
+			if data != last_progress: progress_ticks = Time.get_ticks_msec()
 			last_progress = data
 			progress.value = 100.0 * data.current_frame / maxf(1, data.total_frames)
-			message.text = "%s\n%d / %d frames • %.1f seconds elapsed\n%s" % [data.message, data.current_frame, data.total_frames, data.elapsed_seconds, active_directory]
-			publish_job("cancelling" if job_status.get("stage") == "cancelling" else str(data.stage), message.text)
+			publish_job("cancelling" if job_status.get("stage") == "cancelling" else str(data.stage), str(data.message))
 	if not OS.is_process_running(pid):
 		var exit_code := OS.get_process_exit_code(pid)
 		pid = -1
@@ -297,8 +313,10 @@ func _process(delta: float) -> void:
 		cancel_button.disabled = true
 		if last_progress.get("stage", "") not in ["complete", "frames_ready", "failed", "cancelled"]:
 			message.text = "Render process stopped unexpectedly (exit %d). Intermediates retained: %s" % [exit_code, active_directory]
-		publish_job(str(last_progress.get("stage", "failed")) if last_progress.get("stage", "") in ["complete", "frames_ready", "failed", "cancelled"] else "failed", message.text)
+		publish_job(str(last_progress.get("stage", "failed")) if last_progress.get("stage", "") in ProgressDetails.TERMINAL else "failed", str(last_progress.get("message", "")) if last_progress.get("stage", "") in ProgressDetails.TERMINAL else message.text)
 		viewer.status_label.text = message.text
+	elif not job_status.is_empty():
+		message.text = progress_details()
 
 func _exit_tree() -> void:
 	# Closing the parent viewer requests a graceful worker/encoder shutdown.

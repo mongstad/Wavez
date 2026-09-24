@@ -43,6 +43,21 @@ Export Video panel does not cancel. The job directory retains `progress.json`,
 `renderer.log` (UI-launched workers) and `ffmpeg.log` for diagnosis. If writing the
 cancel request fails, the dialog reports the worker PID and retained job path.
 
+**Jobs → Video export → Details** and the export dialog share one progress
+summary, for example `Rendering frame 3000 / 12000 (25%)`. The integer percentage
+uses the actual rendered frame count. Separate **Elapsed** and **Estimated
+remaining** lines use `hh:mm:ss`; elapsed advances between worker updates.
+The approximate remaining time uses observed frames and elapsed wall time and
+covers rendering only, not encoding. It appears after at least two frames and
+one second. A gap longer than the greater of ten seconds or three observed
+average frame durations suppresses the estimate without declaring worker failure.
+Starting/loading, encoding, cancelling, failed and cancelled states have no ETA.
+Completed video or retained complete PNG sequences show zero remaining; terminal
+elapsed time freezes. Partial failures/cancellations retain their actual frame
+counts, and invalid counts show no percentage. **Output** labels the requested
+MP4 path; **Temporary files** labels the job directory containing intermediates,
+`job.json` and diagnostics. A failed/cancelled job does not imply the MP4 exists.
+
 Existing output files are never intentionally replaced: choose a new filename.
 The selected visual state is copied when Start Export is pressed. Later changes
 in the interactive viewer do not affect the running job. Scientific rendering
