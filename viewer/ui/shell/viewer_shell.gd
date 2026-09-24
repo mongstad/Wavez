@@ -4,6 +4,8 @@ const ThemeSource = preload("res://ui/theme/simscope_theme.gd")
 const WORKSPACES = ["Particles", "Fields", "Meshes"]
 var viewer
 var legend_available := Vector2.ZERO
+var layer_legends
+var particle_legend_panel: Panel
 var transport
 var status_ui
 var bar: PanelContainer
@@ -127,7 +129,16 @@ func setup(owner_viewer) -> void:
 	immersive_hint.focus_mode = Control.FOCUS_NONE
 	get_parent().add_child(immersive_hint)
 	immersive_hint.hide()
+	particle_legend_panel = Panel.new()
+	particle_legend_panel.add_theme_stylebox_override("panel", theme.box(&"surface.1", &"border.subtle", 8, 6))
+	particle_legend_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	get_parent().add_child(particle_legend_panel)
+	get_parent().move_child(particle_legend_panel, viewer.colorbar.get_index())
 	viewer.legend.resized.connect(reposition_legend)
+	viewer.legend.theme = theme
+	viewer.legend.visibility_changed.connect(reposition_legend)
+	layer_legends = preload("res://ui/shell/layer_legends.gd").new()
+	get_parent().add_child(layer_legends); layer_legends.setup(viewer)
 	select_workspace(0)
 	refresh()
 	layout()
@@ -311,7 +322,7 @@ func layout() -> void:
 	fullscreen_button.position = Vector2(12, top+52)
 	empty.position = Vector2(maxf(12, (scene_width-empty.size.x)/2), maxf(152, extent.y/2-40))
 	open_error.position = Vector2(12, top+96)
-	layout_legend(Vector2(scene_width, bottom))
+	layout_legend(Vector2(dock.position.x if viewer.overlay_visible else extent.x, bottom))
 	refresh()
 	changing_layout = false
 
@@ -325,8 +336,13 @@ func reposition_legend() -> void:
 	# Text shaping can grow the label after layout; move only the scientific overlay.
 	if legend_available == Vector2.ZERO: return
 	var right := maxf(viewer.colorbar.size.x, viewer.legend.size.x)
-	viewer.colorbar.position = Vector2(maxf(12, legend_available.x-right-12), maxf(12, legend_available.y-viewer.legend.size.y-24-12))
+	viewer.colorbar.position = Vector2(maxf(20, legend_available.x-right-20), maxf(18, legend_available.y-viewer.legend.size.y-24-18))
 	viewer.legend.position = viewer.colorbar.position+Vector2(0,24)
+	particle_legend_panel.position = viewer.colorbar.position-Vector2(8,6)
+	particle_legend_panel.size = Vector2(right+16, viewer.legend.size.y+36)
+	particle_legend_panel.visible = viewer.legend.visible
+	if layer_legends != null:
+		layer_legends.place(legend_available, particle_legend_panel.position.y if viewer.legend.visible else legend_available.y)
 
 func enter_immersive() -> void:
 	if immersive: return

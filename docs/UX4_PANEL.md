@@ -31,10 +31,10 @@ fresh object choices for that source. Missing categories show concise empty stat
 | Particles / Color Mapping | Color by, Colormap, Range policy, Symmetric about zero, Manual Minimum/Maximum, Invert, Show legend |
 | Particles / Advanced | Size by, Brightness by, Recorded history [T], Exposure, Gamma |
 | Fields / Rendering | Visible, Volume ray march, Ray step |
-| Fields / Color Mapping | Channel, Color range minimum/maximum, linear/log color, concise exceptional color indicator, Colormap |
+| Fields / Color Mapping | Channel, Color range minimum/maximum, linear/log color, concise exceptional color indicator, Colormap, Show legend |
 | Fields / Opacity | Linear scalar/Magnitude mapping, zero/full-opacity thresholds, Opacity strength |
 | Meshes / Rendering | Visible, Wireframe |
-| Meshes / Color Mapping | Channel (including fixed mesh color), Range minimum/maximum, Colormap |
+| Meshes / Color Mapping | Channel (including fixed mesh color), Range minimum/maximum, Colormap, Show legend |
 | View / Global effects | The single existing global Bloom slider |
 
 Every control keeps its existing callback and model. Opacity strength still means

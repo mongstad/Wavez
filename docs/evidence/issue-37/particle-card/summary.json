@@ -1,0 +1,28 @@
+{
+  "forward_plus": {
+    "checks": 35,
+    "failures": [],
+    "source_sha256_unchanged": "62a24271869f49a81b13b38f0424ff60ae226867967376549227545e2aec8efb"
+  },
+  "gl_compatibility": {
+    "checks": 35,
+    "failures": [],
+    "one_frame_exports": {
+      "True": "8c1323ad73b5a5c4ce8c793609f305d1cd05c4c2315e7977b1cc74f59364bb29",
+      "False": "99295e94f66db2367d81e91733028cef4f7a73117b4d0f543695b17dee279e02"
+    },
+    "source_sha256_unchanged": "bc55c1f8135e710a6d2ed50e03591ffbf332706f779841f1f2ce0b19bc49b3f9"
+  },
+  "incomplete_desktop_run": {
+    "reason": "Lost focus at screenshot guard",
+    "last_stage": {
+      "checks": 130,
+      "expected_mode": 3,
+      "failures": [],
+      "mode": 3,
+      "restore": "",
+      "stage": "manual-fullscreen",
+      "window_size": "(1920, 1080)"
+    }
+  }
+}

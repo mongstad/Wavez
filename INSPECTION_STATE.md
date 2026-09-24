@@ -51,6 +51,7 @@ and the visual portion of v3 own the following settings:
 | Viewport | MSAA, screen-space AA, TAA, debanding, rendering scale |
 | Guides and layout | Geometry override, domain/data/absorber/imposed visibility, reference grid, inspector width/visibility, named inspector section expansion, visual slider positions |
 | Layers | GPU budget and per-layer channel, range, colormap, visibility, mesh wireframe, volume/ray/slice/clip/isosurface parameters |
+| Layer legend presentation | `scene.legend_visibility` maps field/mesh object IDs to independent boolean preferences; particle visibility retains `show_legend`. Missing preferences in older recipes default to enabled for eligible layers. These preferences are separate from rendering-layer state and do not invalidate prepared data. |
 
 The reserved `mode` and `observer_scale` fields and inert intensity-cutoff slider
 remain readable for compatibility. A viewing-preset label is restored as a

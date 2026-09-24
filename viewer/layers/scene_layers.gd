@@ -14,6 +14,7 @@ var particle_skipped := false
 var prepared_token := ""
 var reader
 var states := {}
+var legend_visibility := {}
 var views := {}
 var labels := {}
 var current := {}
@@ -263,6 +264,7 @@ func _sample_profiled(time: float, asynchronous: bool, force_particles: bool) ->
 	viewer.committed_sample.requested_time = time;viewer.committed_sample.layers = layer_samples.duplicate(true)
 	viewer._timeline_guard = true;viewer.timeline.value = lo;viewer._timeline_guard = false
 	viewer._update_hud();publishing = false
+	viewer._update_particle_legend()
 	_sync_iso_target()
 	if field_playback != null:
 		field_playback.committed()
@@ -494,6 +496,12 @@ func _build_ui() -> void:
 		for i in range(map.item_count):
 			if map.get_item_text(i) == states[id].colormap:map.select(i)
 		map.item_selected.connect(func(i):states[id].colormap = map.get_item_text(i);resample())
+		var legend_check := CheckButton.new(); legend_check.text = "Show legend"
+		legend_check.button_pressed = legend_visibility.get(id,true); colors.add_child(legend_check)
+		panel_controls[id].legend = legend_check
+		legend_check.toggled.connect(func(v):
+			legend_visibility[id] = v
+			viewer.shell.layer_legends.sync(); viewer.shell.reposition_legend())
 		if reader.objects[id].kind == "mesh":
 			var wire := CheckButton.new();wire.text = "Wireframe";wire.button_pressed = states[id].wireframe;rendering.add_child(wire);panel_controls[id].wireframe = wire;wire.toggled.connect(func(v):states[id].wireframe = v;resample());continue
 		var volume := CheckButton.new();volume.text = "Volume ray march";volume.button_pressed = states[id].volume;rendering.add_child(volume);panel_controls[id].volume = volume;volume.toggled.connect(func(v):
@@ -610,7 +618,7 @@ func refresh_probe_stamp() -> void:
 	probe_stamp_label.text = "%s\n%s · %s\nWorld %s · source time %s%s" % [str(probe_stamp.capture).get_file(),probe_stamp.object,probe_stamp.channel,str(probe_stamp.position),str(probe_stamp.time),"\n⚠ Context changed; press Probe to sample again" if stale else ""]
 	probe_stamp_label.tooltip_text = "%s\nCapture %s · committed bytes %s" % [probe_stamp.capture,probe_stamp.uuid,str(probe_stamp.extent)]
 
-func snapshot() -> Dictionary: return {"gpu_budget_mib":gpu_budget_mib,"layers":states.duplicate(true)}
+func snapshot() -> Dictionary: return {"gpu_budget_mib":gpu_budget_mib,"layers":states.duplicate(true),"legend_visibility":legend_visibility.duplicate()}
 func upgrade_state(value: Dictionary) -> Dictionary:
 	var upgraded := value.duplicate(true)
 	for id in upgraded.get("layers",{}):
@@ -622,6 +630,9 @@ func upgrade_state(value: Dictionary) -> Dictionary:
 	return upgraded
 func validate_state(value) -> String:
 	if not value is Dictionary or not value.get("layers") is Dictionary or not Reader.Index.whole(value.get("gpu_budget_mib")) or value.gpu_budget_mib < 1 or value.gpu_budget_mib > 2048: return "Invalid layer budget/state."
+	if not value.get("legend_visibility",{}) is Dictionary: return "Invalid legend preferences."
+	for id in value.get("legend_visibility",{}):
+		if not states.has(id) or not value.legend_visibility[id] is bool: return "Invalid layer legend preference."
 	value = upgrade_state(value)
 	if value.layers.size() != states.size() or not value.layers.has_all(states.keys()):return "Scene layer state differs from source objects."
 	var visible_volumes := 0;var surfaces := 0
@@ -659,6 +670,7 @@ func apply_state(value: Dictionary) -> void:
 		if is_instance_valid(panel_groups[id]):expanded[id] = panel_groups[id].button_pressed
 	value = upgrade_state(value)
 	gpu_budget_mib = int(value.gpu_budget_mib);states = value.layers.duplicate(true)
+	legend_visibility = value.get("legend_visibility",{}).duplicate()
 	if is_instance_valid(panel):panel.get_parent().remove_child(panel);panel.queue_free()
 	labels.clear();probe_spins.clear();panel_groups.clear();opacity_controls.clear();color_controls.clear();preset_controls.clear();_build_ui()
 	for i in range(mini(probe_values.size(),probe_spins.size())):probe_spins[i].set_value_no_signal(probe_values[i])

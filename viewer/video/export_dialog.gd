@@ -89,7 +89,7 @@ func _ready() -> void:
 	orbit = number("Orbit • radians / video second", .08, -10, 10, .001)
 	rendering = choice("Rendering", ["Current state", "Cinematic preset", "Scientific preset"])
 	overlays = check("Overlays", "Include viewer overlays")
-	overlays.tooltip_text = "Include the current shell UI and the enabled particle legend. Independent scientific guides and markers retain their settings; desktop fullscreen is not exported."
+	overlays.tooltip_text = "Include the current shell UI and enabled layer legends. Independent scientific guides and markers retain their settings; desktop fullscreen is not exported."
 	trails = check("Trails", "Include recorded history")
 	trails.tooltip_text = "Scientific rendering suppresses trails, matching the interactive viewer."
 	quality = choice("H.264 quality", ["High • CRF 18", "Balanced • CRF 21", "Compact • CRF 25"])
