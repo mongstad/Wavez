@@ -6,11 +6,12 @@ The category simulation panel was owner-merged in PR #75 at `b2f0384`.
 Focused scientific tools were owner-merged in PR #76 at `28b5358`.
 Video export progress details were owner-merged in PR #87 at `7e656e2`.
 Fullscreen window-state restoration was owner-merged in PR #88 at `f74a11f`.
-Current authorized work is #84, the only Ready item verified on 2026-09-24:
-[simulation-panel launch defaults](PANEL_DISCLOSURE_VALIDATION.md),
-**pending owner review**. Category groups start collapsed in each fresh session;
-in-session disclosure choices survive capture replacement and control rebuilds.
-Existing recipe-owned particle section values remain compatible.
+Simulation-panel launch defaults were owner-merged in PR #89 at `a3c6c50`.
+Current authorized work is #65, the only Ready item verified on 2026-09-24:
+[video export dialog actions](VIDEO_ACTIONS_VALIDATION.md), **pending owner review**.
+One primary button starts or cancels export according to worker state. Run in
+background is enabled only for active exports; Cancel closes the dialog.
+Existing export ownership, progress and cancellation behavior remain intact.
 Historical reports and evidence retain their original review-time wording.
 
 As of **2026-09-20**, including G4 and PERF-001/002 maintenance reviewed and accepted by the user. Scientific simulations were not rerun. Historical results identify their recorded checkpoints. PERF-003 mesh maintenance was also reviewed and accepted by the owner on 2026-09-13; implementation checkpoint `7974c78`.

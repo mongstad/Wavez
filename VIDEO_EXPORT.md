@@ -36,10 +36,16 @@ Click **Start Export**. A second Godot process renders and encodes the video.
 The worker keeps a real GPU display connection but minimizes its noninteractive
 window and makes it unfocusable. It no longer needs a visible debug window to
 render. A brief startup window/taskbar entry may still depend on the platform.
-The regular viewer stays usable and may be minimized. Close the panel to keep working; reopen it for
-progress. **Cancel export** stops after the current frame, or stops FFmpeg during
-encoding. Closing the parent viewer also requests cancellation. Closing only the
-Export Video panel does not cancel. The job directory retains `progress.json`,
+The regular viewer stays usable and may be minimized. The primary button changes
+from **Start Export** to **Cancel export** while the worker runs; it stops after
+the current frame, or stops FFmpeg during encoding. **Run in background** hides
+the dialog and is enabled only while an export is preparing or running. **Cancel**
+closes the dialog without cancelling an active export; its tooltip makes this
+distinction explicit. Reopen through File → Export → Video or Jobs for progress.
+During selection-recipe preparation, the primary action is disabled until worker
+cancellation becomes available. Terminal jobs restore **Start Export** and disable
+**Run in background**. Closing the parent viewer still requests cancellation.
+The job directory retains `progress.json`,
 `renderer.log` (UI-launched workers) and `ffmpeg.log` for diagnosis. If writing the
 cancel request fails, the dialog reports the worker PID and retained job path.
 
