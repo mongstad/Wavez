@@ -39,9 +39,10 @@ seek, reset/frame the camera, change speed, or change render settings.
 
 Only application controls are hidden. The existing colorbar/particle legend,
 scene guides, probe markers and selection/analysis overlays retain their current
-visibility. Immersive does not enable a hidden legend. In particular it does not
-set the recipe's `overlay_visible` to false: that existing field also participates
-in scientific legend visibility. Inspector HUD/readiness labels belong to the
+visibility. The particle legend and colorbar follow **Show legend** independently
+of panel visibility in every window mode; fixed/visual-color mappings still have
+no scalar legend. Immersive does not enable a hidden legend or change the recipe's
+`overlay_visible` value. Inspector HUD/readiness labels belong to the
 application dock and disappear with it. The screenshot completion toast is also
 suppressed while immersive; its status remains available after leaving the mode.
 

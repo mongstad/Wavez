@@ -23,7 +23,10 @@ def main():
     parser.add_argument('--output-dir', required=True, type=Path)
     parser.add_argument('--renderer', choices=['forward_plus', 'gl_compatibility'], default='forward_plus')
     parser.add_argument('--window-restore', action='store_true', help='Check interactive fullscreen mode/geometry restoration and immersive nesting.')
+    parser.add_argument('--legend-visibility', action='store_true', help='Also check independent legend/panel visibility and recipe restore at each window stage.')
     args = parser.parse_args()
+    if args.legend_visibility:
+        args.window_restore = True
     out = args.output_dir.resolve(); out.mkdir(parents=True, exist_ok=False)
     def digest():
         with args.capture.open('rb') as stream:
@@ -63,7 +66,7 @@ def main():
             dbus('/Scripting', 'unloadScript', plugin)
     command = [args.godot, '--path', str(ROOT/'viewer'), '--display-driver', 'wayland',
                '--rendering-method', args.renderer, '--resolution', '1440x900', '--audio-driver', 'Dummy',
-               '--script', 'ui/shell/test_fullscreen_restore.gd' if args.window_restore else 'ui/shell/test_immersive_desktop.gd', '--', '--review-output='+str(out),
+               '--script', 'ui/shell/test_legend_visibility.gd' if args.legend_visibility else ('ui/shell/test_fullscreen_restore.gd' if args.window_restore else 'ui/shell/test_immersive_desktop.gd'), '--', '--review-output='+str(out),
                '--review-capture='+str(args.capture.resolve())]
     reports = []
     with (out/'godot.log').open('w') as log:
