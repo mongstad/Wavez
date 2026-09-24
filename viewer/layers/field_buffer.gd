@@ -72,8 +72,8 @@ func _run() -> void:
 			var job := _next()
 			if job.is_empty():break
 			var began := Time.get_ticks_usec();var result := {};var memory := Memory.memory_headroom()
-			if memory.available_physical < memory.reserve+job.charge*3:
-				result = {"error":"Field preparation paused to preserve physical RAM headroom."}
+			if memory.available_physical < memory.reserve+int(job.get("other_reservation",0))+job.charge*3:
+				result = {"error":"Field preparation needs %.1f MiB available RAM including other reservations; %.1f MiB is available. Free RAM or reduce other caches." % [(memory.reserve+int(job.get("other_reservation",0))+job.charge*3)/float(Memory.MIB),memory.available_physical/float(Memory.MIB)]}
 			elif Stamp.read(job.path) != job.stamp:result = {"error":"Field source changed; waiting for refresh."}
 			elif not _prune(job.charge,job.key):result = {"error":"Field frame exceeds the preparation budget."}
 			else:
@@ -93,6 +93,9 @@ func _run() -> void:
 			mutex.lock()
 			if obsolete or token != working_token or closing:cancelled += 1
 			elif result.has("error"):error = result.error;jobs = []
+			elif not result.is_empty() and used+job.charge > limit:
+				# A controller may reduce the budget while this job is decoding.
+				cancelled += 1
 			elif not result.is_empty():
 				result.token = working_token;result.bytes = job.charge;prepared[job.key] = result;order.append(job.key);used += job.charge;completed += 1
 			worker_ms += (Time.get_ticks_usec()-began)/1000.0;working_key = ""

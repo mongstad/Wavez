@@ -9,11 +9,12 @@ Fullscreen window-state restoration was owner-merged in PR #88 at `f74a11f`.
 Simulation-panel launch defaults were owner-merged in PR #89 at `a3c6c50`.
 Video export dialog actions were owner-merged in PR #90 at `a6a34c5`.
 Independent legend visibility and placement were owner-merged in PR #91 at `d11e426`.
-Current authorized work is #37, the top Ready item verified on 2026-09-24:
-[independent layer legends](LAYER_LEGENDS.md), **pending owner review**.
-Eligible particle, field and mesh legends can coexist, with independent controls
-and recipe preferences. Field/mesh cards form a bounded scrolling stack above
-the particle legend, using the accepted panel-aware and Immersive placement.
+Independent layer legends were owner-merged in PR #92 at `9774623`.
+Current authorized work is #98, the top Ready item verified on 2026-09-24:
+[adaptive field preparation capacity](FIELD_PREPARATION_BUDGET.md), **pending owner review**.
+Field CPU capacity scales with visible workload and remaining safe physical RAM,
+reserving existing particle/scene/mesh budgets and retaining bounded lookahead
+and GPU staging. External simulation/exporter work is outside this issue.
 Historical reports and evidence retain their original review-time wording.
 
 As of **2026-09-20**, including G4 and PERF-001/002 maintenance reviewed and accepted by the user. Scientific simulations were not rerun. Historical results identify their recorded checkpoints. PERF-003 mesh maintenance was also reviewed and accepted by the owner on 2026-09-13; implementation checkpoint `7974c78`.

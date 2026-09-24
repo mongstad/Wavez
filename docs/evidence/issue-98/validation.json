@@ -1,0 +1,497 @@
+{
+  "issue": 98,
+  "accepted_main": "97746234f3894f99fe4d055892566529bc12d1df",
+  "status": "Pending owner review",
+  "date": "2026-09-24",
+  "godot": "4.7.2 stable",
+  "gpu": "NVIDIA GeForce RTX 3070 Ti",
+  "baseline": {
+    "checks": 1,
+    "cpu_limit": 134217728,
+    "error": "Visible fields exceed the safe preparation budget; hide a layer or reduce the preview budget.",
+    "failures": [],
+    "memory": {
+      "available_physical": 40140681216,
+      "physical": 50404548608,
+      "reserve": 8634424115,
+      "safe_cache_bytes": 20161819443
+    },
+    "targets": [
+      {
+        "charge": 113311744,
+        "decoded": 84934656,
+        "preview_budget": 134217728
+      }
+    ]
+  },
+  "large_field": {
+    "forward_plus": {
+      "result": {
+        "checks": 56,
+        "cpu_limit": 226623488,
+        "error": "",
+        "failures": [],
+        "final": {
+          "budget": {
+            "cpu_limit": 339935232,
+            "memory": {
+              "available_physical": 37972774912,
+              "physical": 50404548608,
+              "reserve": 8634424115,
+              "safe_cache_bytes": 20161819443
+            },
+            "preview_budget_per_field": 134217728,
+            "remaining_safe_bytes": 19711703587,
+            "required_bytes": 226623488,
+            "reservations": {
+              "mesh_cache_and_working": 0,
+              "particle_decoded": 42786480,
+              "particle_prepared": 85622240,
+              "particle_working": 53271680,
+              "scene_cache": 268435456
+            },
+            "reserved_other_bytes": 450115856,
+            "target_bytes": 113311744,
+            "targets": [
+              {
+                "decoded_bytes": 84934656,
+                "id": "field",
+                "preview_charge": 28311552,
+                "total_charge": 113311744
+              }
+            ],
+            "window_bytes": 339935232
+          },
+          "buffering": false,
+          "cache": {
+            "active": false,
+            "bytes": 339935232,
+            "cancelled": 1,
+            "completed": 3,
+            "error": "",
+            "evictions": 0,
+            "frames": 3,
+            "limit": 339935232,
+            "test_barrier_waiting": false,
+            "worker_ms": 5217.731,
+            "worker_thread": 47
+          },
+          "current_gpu_bytes": 28311552,
+          "enabled": true,
+          "error": "",
+          "gpu_uploads": 4,
+          "staged_gpu_bytes": 0,
+          "staged_textures": 0
+        },
+        "memory": {
+          "available_physical": 38860124160,
+          "physical": 50404548608,
+          "reserve": 8634424115,
+          "safe_cache_bytes": 20161819443
+        },
+        "targets": [
+          {
+            "charge": 113311744,
+            "decoded": 84934656,
+            "preview_budget": 134217728
+          }
+        ]
+      },
+      "source": {
+        "sha256": "dbd5490027e0c94a52733d0af38090bef1fb2c964700e84ba7a44e1d871e55fb",
+        "unchanged": true
+      }
+    },
+    "gl_compatibility": {
+      "result": {
+        "checks": 56,
+        "cpu_limit": 226623488,
+        "error": "",
+        "failures": [],
+        "final": {
+          "budget": {
+            "cpu_limit": 339935232,
+            "memory": {
+              "available_physical": 38503522304,
+              "physical": 50404548608,
+              "reserve": 8634424115,
+              "safe_cache_bytes": 20161819443
+            },
+            "preview_budget_per_field": 134217728,
+            "remaining_safe_bytes": 19711703587,
+            "required_bytes": 226623488,
+            "reservations": {
+              "mesh_cache_and_working": 0,
+              "particle_decoded": 42786480,
+              "particle_prepared": 85622240,
+              "particle_working": 53271680,
+              "scene_cache": 268435456
+            },
+            "reserved_other_bytes": 450115856,
+            "target_bytes": 113311744,
+            "targets": [
+              {
+                "decoded_bytes": 84934656,
+                "id": "field",
+                "preview_charge": 28311552,
+                "total_charge": 113311744
+              }
+            ],
+            "window_bytes": 339935232
+          },
+          "buffering": false,
+          "cache": {
+            "active": false,
+            "bytes": 339935232,
+            "cancelled": 1,
+            "completed": 3,
+            "error": "",
+            "evictions": 0,
+            "frames": 3,
+            "limit": 339935232,
+            "test_barrier_waiting": false,
+            "worker_ms": 5249.613,
+            "worker_thread": 47
+          },
+          "current_gpu_bytes": 28311552,
+          "enabled": true,
+          "error": "",
+          "gpu_uploads": 4,
+          "staged_gpu_bytes": 0,
+          "staged_textures": 0
+        },
+        "memory": {
+          "available_physical": 38798065664,
+          "physical": 50404548608,
+          "reserve": 8634424115,
+          "safe_cache_bytes": 20161819443
+        },
+        "targets": [
+          {
+            "charge": 113311744,
+            "decoded": 84934656,
+            "preview_budget": 134217728
+          }
+        ]
+      },
+      "source": {
+        "sha256": "e1095ab6d214104db8e224c945de1da05ad0721f38fe1f062611b5c38a4e0818",
+        "unchanged": true
+      }
+    }
+  },
+  "regressions": {
+    "forward_plus": {
+      "scene_playback": {
+        "checks": 2457,
+        "failures": []
+      },
+      "maintenance": {
+        "checks": 66,
+        "failures": []
+      },
+      "lifecycle": {
+        "checks": 51,
+        "failures": []
+      },
+      "field_preparation": {
+        "checks": 32,
+        "failures": [],
+        "field": {
+          "budget": {
+            "cpu_limit": 207368,
+            "memory": {
+              "available_physical": 39181492224,
+              "physical": 50404548608,
+              "reserve": 8634424115,
+              "safe_cache_bytes": 20161819443
+            },
+            "preview_budget_per_field": 134217728,
+            "remaining_safe_bytes": 19893383987,
+            "required_bytes": 207368,
+            "reservations": {
+              "mesh_cache_and_working": 0,
+              "particle_decoded": 0,
+              "particle_prepared": 0,
+              "particle_working": 0,
+              "scene_cache": 268435456
+            },
+            "reserved_other_bytes": 268435456,
+            "target_bytes": 103684,
+            "targets": [
+              {
+                "decoded_bytes": 25432,
+                "id": "field",
+                "preview_charge": 12716,
+                "total_charge": 103684
+              }
+            ],
+            "window_bytes": 207368
+          },
+          "buffering": false,
+          "cache": {
+            "active": false,
+            "bytes": 207368,
+            "cancelled": 0,
+            "completed": 3,
+            "error": "",
+            "evictions": 1,
+            "frames": 2,
+            "limit": 207368,
+            "test_barrier_waiting": false,
+            "worker_ms": 17.108,
+            "worker_thread": 45
+          },
+          "current_gpu_bytes": 12716,
+          "enabled": true,
+          "error": "",
+          "gpu_uploads": 4,
+          "staged_gpu_bytes": 12716,
+          "staged_textures": 1
+        }
+      },
+      "volume_opacity": {
+        "alpha_cases": [
+          {
+            "alpha": 0.0,
+            "case": "zero-symmetric",
+            "expected": 0.0
+          },
+          {
+            "alpha": 0.40392157435417175,
+            "case": "magnitude-positive",
+            "expected": 0.4028727265783726
+          },
+          {
+            "alpha": 0.40392157435417175,
+            "case": "magnitude-negative",
+            "expected": 0.4028727265783726
+          },
+          {
+            "alpha": 0.6431372761726379,
+            "case": "saturated-weight",
+            "expected": 0.6434390193360531
+          },
+          {
+            "alpha": 0.0,
+            "case": "nearzero-dead-zone",
+            "expected": 0.0
+          },
+          {
+            "alpha": 0.0,
+            "case": "linear-negative-transparent",
+            "expected": 0.0
+          },
+          {
+            "alpha": 0.40392157435417175,
+            "case": "density-default",
+            "expected": 0.4028727265783726
+          },
+          {
+            "alpha": 0.40392157435417175,
+            "case": "color-range-independent",
+            "expected": 0.4028727265783726
+          },
+          {
+            "alpha": 0.40392157435417175,
+            "case": "constant-field-step-one",
+            "expected": 0.4028727265783726
+          },
+          {
+            "alpha": 0.40392157435417175,
+            "case": "legacy-range",
+            "expected": 0.4028727265783726
+          },
+          {
+            "alpha": 0.40392157435417175,
+            "case": "migrated-range",
+            "expected": 0.4028727265783726
+          }
+        ],
+        "checks": 98,
+        "failures": [],
+        "renderer": "forward_plus",
+        "source_sha256_unchanged": "d122abbc3aeb635f7e27c9074af7713870922f05ed6d444079fe03438ca900d2",
+        "export": {
+          "completed": true,
+          "identical_pixels": true,
+          "mapping_in_sidecar": true,
+          "source_unchanged": true
+        }
+      },
+      "volume_color": {
+        "checks": 138,
+        "failures": [
+          "GPU logarithmic midpoint matches linear oracle",
+          "slice uses identical logarithmic color semantics"
+        ],
+        "same_on_accepted_main": true
+      }
+    },
+    "gl_compatibility": {
+      "scene_playback": {
+        "checks": 2457,
+        "failures": []
+      },
+      "maintenance": {
+        "checks": 66,
+        "failures": []
+      },
+      "lifecycle": {
+        "checks": 51,
+        "failures": []
+      },
+      "field_preparation": {
+        "checks": 32,
+        "failures": [],
+        "field": {
+          "budget": {
+            "cpu_limit": 207368,
+            "memory": {
+              "available_physical": 39401795584,
+              "physical": 50404548608,
+              "reserve": 8634424115,
+              "safe_cache_bytes": 20161819443
+            },
+            "preview_budget_per_field": 134217728,
+            "remaining_safe_bytes": 19893383987,
+            "required_bytes": 207368,
+            "reservations": {
+              "mesh_cache_and_working": 0,
+              "particle_decoded": 0,
+              "particle_prepared": 0,
+              "particle_working": 0,
+              "scene_cache": 268435456
+            },
+            "reserved_other_bytes": 268435456,
+            "target_bytes": 103684,
+            "targets": [
+              {
+                "decoded_bytes": 25432,
+                "id": "field",
+                "preview_charge": 12716,
+                "total_charge": 103684
+              }
+            ],
+            "window_bytes": 207368
+          },
+          "buffering": false,
+          "cache": {
+            "active": false,
+            "bytes": 207368,
+            "cancelled": 0,
+            "completed": 3,
+            "error": "",
+            "evictions": 1,
+            "frames": 2,
+            "limit": 207368,
+            "test_barrier_waiting": false,
+            "worker_ms": 17.024,
+            "worker_thread": 45
+          },
+          "current_gpu_bytes": 12716,
+          "enabled": true,
+          "error": "",
+          "gpu_uploads": 4,
+          "staged_gpu_bytes": 12716,
+          "staged_textures": 1
+        }
+      },
+      "volume_opacity": {
+        "alpha_cases": [
+          {
+            "alpha": 0.0,
+            "case": "zero-symmetric",
+            "expected": 0.0
+          },
+          {
+            "alpha": 0.40392157435417175,
+            "case": "magnitude-positive",
+            "expected": 0.4028727265783726
+          },
+          {
+            "alpha": 0.40392157435417175,
+            "case": "magnitude-negative",
+            "expected": 0.4028727265783726
+          },
+          {
+            "alpha": 0.6431372761726379,
+            "case": "saturated-weight",
+            "expected": 0.6434390193360531
+          },
+          {
+            "alpha": 0.0,
+            "case": "nearzero-dead-zone",
+            "expected": 0.0
+          },
+          {
+            "alpha": 0.0,
+            "case": "linear-negative-transparent",
+            "expected": 0.0
+          },
+          {
+            "alpha": 0.40392157435417175,
+            "case": "density-default",
+            "expected": 0.4028727265783726
+          },
+          {
+            "alpha": 0.40392157435417175,
+            "case": "color-range-independent",
+            "expected": 0.4028727265783726
+          },
+          {
+            "alpha": 0.40392157435417175,
+            "case": "constant-field-step-one",
+            "expected": 0.4028727265783726
+          },
+          {
+            "alpha": 0.40392157435417175,
+            "case": "legacy-range",
+            "expected": 0.4028727265783726
+          },
+          {
+            "alpha": 0.40392157435417175,
+            "case": "migrated-range",
+            "expected": 0.4028727265783726
+          }
+        ],
+        "checks": 98,
+        "failures": [],
+        "renderer": "gl_compatibility",
+        "source_sha256_unchanged": "fef58e0b9d374409dc331f7d4ee17e2f55e21c19331bf584b843b80110b5c906",
+        "export": {
+          "completed": true,
+          "identical_pixels": true,
+          "mapping_in_sidecar": true,
+          "source_unchanged": true
+        }
+      },
+      "volume_color": {
+        "checks": 138,
+        "failures": [
+          "GPU logarithmic midpoint matches linear oracle",
+          "slice uses identical logarithmic color semantics"
+        ],
+        "same_on_accepted_main": true
+      }
+    }
+  },
+  "limitations": [
+    "External N=192 t_end=300 simulation/exporter not run or modified.",
+    "Retained 03B unavailable; generated float64 oracle used.",
+    "Low memory simulated through reservation inputs, not host pressure.",
+    "Two volume-color GPU log assertions fail on patch and accepted main on both renderers. Color export phase not reached; opacity export passed.",
+    "Initial baseline before asset import inconclusive. Sandboxed editor reported socket/settings restrictions; native imported runs used for validation."
+  ],
+  "recipe": {
+    "checks": 2697,
+    "failures": [],
+    "renderer": "headless"
+  },
+  "code_sha256": {
+    "viewer/layers/field_playback.gd": "efee85b5d4ebc477be269a78ecfbe0292995df8ac88c8b732a1d1837c5180cee",
+    "viewer/layers/field_buffer.gd": "2dc1710fb1e0405e96c1332dbd0a0ff1f589fc63ab43957dbc3535b5e1d0303b",
+    "viewer/layers/test_field_budget.gd": "2f447db2fe7f21e2205fc58b06726abd2a199424ed282b72545ceeadd571949e",
+    "tools/validate_field_budget.py": "0989430bb0e8ec953e72f451fd895bfd041189804e79f28b25692dd387b82cef"
+  }
+}
