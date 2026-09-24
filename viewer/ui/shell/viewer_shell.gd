@@ -3,6 +3,7 @@ extends Control
 const ThemeSource = preload("res://ui/theme/simscope_theme.gd")
 const WORKSPACES = ["Particles", "Fields", "Meshes"]
 var viewer
+var legend_available := Vector2.ZERO
 var transport
 var status_ui
 var bar: PanelContainer
@@ -126,6 +127,7 @@ func setup(owner_viewer) -> void:
 	immersive_hint.focus_mode = Control.FOCUS_NONE
 	get_parent().add_child(immersive_hint)
 	immersive_hint.hide()
+	viewer.legend.resized.connect(reposition_legend)
 	select_workspace(0)
 	refresh()
 	layout()
@@ -315,9 +317,15 @@ func layout() -> void:
 
 func layout_legend(available: Vector2) -> void:
 	if viewer.colorbar == null or viewer.legend == null: return
+	legend_available = available
 	viewer.legend.size.y = viewer.legend.get_minimum_size().y
+	reposition_legend()
+
+func reposition_legend() -> void:
+	# Text shaping can grow the label after layout; move only the scientific overlay.
+	if legend_available == Vector2.ZERO: return
 	var right := maxf(viewer.colorbar.size.x, viewer.legend.size.x)
-	viewer.colorbar.position = Vector2(maxf(12, available.x-right-12), maxf(12, available.y-viewer.legend.size.y-24-12))
+	viewer.colorbar.position = Vector2(maxf(12, legend_available.x-right-12), maxf(12, legend_available.y-viewer.legend.size.y-24-12))
 	viewer.legend.position = viewer.colorbar.position+Vector2(0,24)
 
 func enter_immersive() -> void:

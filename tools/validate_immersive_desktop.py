@@ -24,6 +24,7 @@ def main():
     parser.add_argument('--renderer', choices=['forward_plus', 'gl_compatibility'], default='forward_plus')
     parser.add_argument('--window-restore', action='store_true', help='Check interactive fullscreen mode/geometry restoration and immersive nesting.')
     parser.add_argument('--legend-visibility', action='store_true', help='Also check independent legend/panel visibility and recipe restore at each window stage.')
+    parser.add_argument('--screen', type=int, help='Request a specific Godot monitor index; verify actual placement in the KWin report.')
     args = parser.parse_args()
     if args.legend_visibility:
         args.window_restore = True
@@ -68,6 +69,8 @@ def main():
                '--rendering-method', args.renderer, '--resolution', '1440x900', '--audio-driver', 'Dummy',
                '--script', 'ui/shell/test_legend_visibility.gd' if args.legend_visibility else ('ui/shell/test_fullscreen_restore.gd' if args.window_restore else 'ui/shell/test_immersive_desktop.gd'), '--', '--review-output='+str(out),
                '--review-capture='+str(args.capture.resolve())]
+    if args.screen is not None:
+        command[1:1] = ['--screen', str(args.screen)]
     reports = []
     with (out/'godot.log').open('w') as log:
         process = subprocess.Popen(command, stdout=log, stderr=subprocess.STDOUT)
