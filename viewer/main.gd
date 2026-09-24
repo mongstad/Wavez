@@ -1278,11 +1278,14 @@ func _style_generic_frame(fr: FrameData, mm: MultiMesh, fade: float, current: bo
 
 
 func _update_particle_legend() -> void:
-	legend.visible = scene_layers != null and show_legend and color_channel not in ["fixed", "visual_color"]
+	legend.visible = scene_layers != null and not scene_layers.particle_id.is_empty() and particle_layer_visible and show_legend and color_channel not in ["fixed", "visual_color"] and not (offline_instance and not overlay_visible)
 	colorbar.visible = legend.visible
 	colorbar.flip_h = invert_map
 	legend.text = "%s • %s\n%.5f → %.5f • %s%s" % [color_channel, colormap_name, range_min, range_max, {"frame":"auto per frame","symmetric":"auto symmetric","manual":"fixed manual","interval":"fixed interval"}[_effective_normalization()], " • cyclic" if cyclic else (" • log" if logarithmic else " • linear")] if color_channel not in ["fixed","visual_color"] else ""
 	if color_channel not in ["fixed","visual_color"] and (not is_finite(range_min) or not is_finite(range_max) or range_max < range_min): legend.text = color_channel + " • no valid range"
+	if scene_layers != null and not legend.text.is_empty(): legend.text = "Particles • " + scene_layers.particle_id + "\n" + legend.text
+	if shell != null and shell.layer_legends != null:
+		shell.layer_legends.sync(); shell.reposition_legend()
 
 func _rebuild_generic_trails() -> void:
 	var active: Dictionary = frame_a.identity_map.rows.duplicate() if _has_particle_ids() else {}

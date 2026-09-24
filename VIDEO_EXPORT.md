@@ -168,11 +168,11 @@ or immersive state. No desktop exit/hint, tooltip, dialog, export progress windo
 or screenshot toast is recorded.
 
 Application chrome and scientific overlays have different ownership. This existing
-checkbox still gates the particle colorbar/legend together with application UI;
-`show_legend` and channel eligibility continue to apply. Turning it off does not
+checkbox gates enabled particle, field and mesh legends together with application UI;
+per-layer legend preferences and channel eligibility continue to apply. Turning it off does not
 turn off independently enabled scene guides, probe markers or selection annotations.
-No scientific overlay is enabled merely by constructing the shell. This issue does
-not introduce independent legend controls. Overlay-off pixels are regression-tested
+No scientific overlay is enabled merely by constructing the shell. Independent
+legend controls are described in [Layer legends](docs/LAYER_LEGENDS.md). Overlay-off pixels are regression-tested
 against the earlier scientific-only path.
 
 Transport labels follow each committed output sample. The worker is not an

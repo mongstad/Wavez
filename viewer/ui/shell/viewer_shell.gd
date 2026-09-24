@@ -4,6 +4,7 @@ const ThemeSource = preload("res://ui/theme/simscope_theme.gd")
 const WORKSPACES = ["Particles", "Fields", "Meshes"]
 var viewer
 var legend_available := Vector2.ZERO
+var layer_legends
 var transport
 var status_ui
 var bar: PanelContainer
@@ -128,6 +129,8 @@ func setup(owner_viewer) -> void:
 	get_parent().add_child(immersive_hint)
 	immersive_hint.hide()
 	viewer.legend.resized.connect(reposition_legend)
+	layer_legends = preload("res://ui/shell/layer_legends.gd").new()
+	get_parent().add_child(layer_legends); layer_legends.setup(viewer)
 	select_workspace(0)
 	refresh()
 	layout()
@@ -327,6 +330,8 @@ func reposition_legend() -> void:
 	var right := maxf(viewer.colorbar.size.x, viewer.legend.size.x)
 	viewer.colorbar.position = Vector2(maxf(12, legend_available.x-right-12), maxf(12, legend_available.y-viewer.legend.size.y-24-12))
 	viewer.legend.position = viewer.colorbar.position+Vector2(0,24)
+	if layer_legends != null:
+		layer_legends.place(legend_available, viewer.colorbar.position.y if viewer.legend.visible else legend_available.y)
 
 func enter_immersive() -> void:
 	if immersive: return
