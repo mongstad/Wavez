@@ -33,7 +33,7 @@ static func format(state: Dictionary, now: int) -> String:
 		if progress_age > maxf(10, 3 * observed_elapsed / maxf(1, current)):
 			remaining = "Unavailable — no recent frame progress"
 		elif current >= 2 and elapsed >= 1 and current < total:
-			remaining = duration(ceil(elapsed * (total - current) / current)) + " (approximate; rendering only)"
+			remaining = duration(ceil(elapsed * (total - current) / current))
 		else: remaining = "Waiting for render progress"
 	var lines := [summary, "Elapsed: " + (duration(elapsed) if valid_elapsed else "Unavailable"), "Estimated remaining: " + remaining]
 	if stage in ["failed", "cancelled"]:

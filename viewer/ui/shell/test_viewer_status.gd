@@ -39,7 +39,7 @@ func check_video_details():
 		"output":"/exports/movie.mp4", "directory":"/exports/job"}
 	var text := ProgressDetails.format(snapshot,1000)
 	check(text.begins_with("Rendering frame 3000 / 12000 (25%)\n"),"One integer frame count and actual percentage")
-	check(text.contains("Elapsed: 00:01:40\nEstimated remaining: 00:05:00 (approximate; rendering only)"),"Elapsed and estimated remaining use separate hh:mm:ss lines")
+	check(text.contains("Elapsed: 00:01:40\nEstimated remaining: 00:05:00\n"),"Elapsed and estimated remaining use separate hh:mm:ss lines")
 	check(text.count("3000 / 12000") == 1 and text.count("/exports/movie.mp4") == 1 and text.count("/exports/job") == 1,"No duplicate progress or equivalent paths")
 	check(text.contains("Output: /exports/movie.mp4") and text.contains("Temporary files: /exports/job"),"Both paths are labeled")
 	text = ProgressDetails.format(snapshot,3000)
@@ -169,8 +169,8 @@ func run():
 	check(viewer.shell.detail_text.text.begins_with("Rendering frame ") and viewer.shell.detail_text.text.contains("%)\nElapsed: "),"Real worker produces canonical progress and elapsed")
 	check(viewer.shell.detail_text.text.count(" / ") == 1 and viewer.shell.detail_text.text.count(video.active_directory) == 1,"Live Details has no duplicate frame count or directory")
 	deadline = Time.get_ticks_msec()+15000
-	while video.pid > 0 and not viewer.shell.detail_text.text.contains("approximate; rendering only") and Time.get_ticks_msec()<deadline: await create_timer(.01).timeout
-	check(video.pid > 0 and viewer.shell.detail_text.text.contains("approximate; rendering only"),"Live Details acquires a render ETA from real worker progress")
+	while video.pid > 0 and not viewer.shell.detail_text.text.contains("Estimated remaining: 00:") and Time.get_ticks_msec()<deadline: await create_timer(.01).timeout
+	check(video.pid > 0 and viewer.shell.detail_text.text.contains("Estimated remaining: 00:"),"Live Details acquires a render ETA from real worker progress")
 	await settle(); picture("live-details")
 	root.mode = Window.MODE_MINIMIZED
 	await wait_video(video)
