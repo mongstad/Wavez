@@ -3,11 +3,14 @@
 The owner merged final UX3 validation in PR #64, the [UX4 design](UX4_DESIGN.md)
 in PR #72, and [command menus](UX4_MENUS.md) in PR #73 at `3dddf71`.
 The category simulation panel was owner-merged in PR #75 at `b2f0384`.
-Current authorized work is #69, the only Ready item verified on 2026-09-23:
-[focused scientific tools](UX4_TOOLS.md), **pending owner review**.
-Task sections and field targets reuse existing controls, drafts and controllers.
-Probe results retain event-time provenance. The #67 menus and #68 permanent
-Particles / Fields / Meshes panel remain intact. #70 and #71 remain gated.
+Focused scientific tools were owner-merged in PR #76 at `28b5358`.
+Current authorized work is #52, the only Ready item verified on 2026-09-24:
+[video export progress details](../VIDEO_EXPORT.md), **pending owner review**.
+Video Details and the export dialog share one frame/percentage summary, live
+elapsed time, an approximate rendering ETA, and labeled output/temporary paths.
+Worker ownership, deterministic frame timing, encoding and cancellation remain
+unchanged. [Validation and owner checks](VIDEO_PROGRESS_VALIDATION.md) record
+the current issue's evidence and limits.
 Historical reports and evidence retain their original review-time wording.
 
 As of **2026-09-20**, including G4 and PERF-001/002 maintenance reviewed and accepted by the user. Scientific simulations were not rerun. Historical results identify their recorded checkpoints. PERF-003 mesh maintenance was also reviewed and accepted by the owner on 2026-09-13; implementation checkpoint `7974c78`.

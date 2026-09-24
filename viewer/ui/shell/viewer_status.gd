@@ -106,7 +106,7 @@ func reopen_video() -> void:
 	# idle draft follows the current capture. Retain terminal diagnostics separately.
 	if video.preparing: video.popup_centered(); return
 	video.open()
-	if video.pid <= 0 and not video.start_button.disabled and not video.job_status.is_empty(): video.message.text = str(video.job_status.detail)
+	if video.pid <= 0 and not video.start_button.disabled and not video.job_status.is_empty(): video.message.text = video.progress_details()
 
 func reopen_analysis() -> void:
 	var operation: String = viewer.selection_controller.jobs.background_operation
@@ -192,9 +192,7 @@ func update_jobs() -> void:
 	active_count = 0
 	var video = viewer.video_dialog
 	var state: Dictionary = video.job_status
-	var text: String = str(state.get("stage","No video export in this session.")).replace("_"," ").capitalize()
-	if video.pid > 0 and not video.last_progress.is_empty(): text += " — %s / %s frames" % [video.last_progress.get("current_frame",0),video.last_progress.get("total_frames",0)]
-	if not state.is_empty(): text += "\n"+str(state.get("detail",""))+"\nOutput: "+str(state.get("output",""))+"\nJob, intermediates and diagnostics: "+str(state.get("directory",""))
+	var text: String = video.progress_details()
 	update_row("Video export",text,video.pid > 0 or video.preparing,video.pid > 0, not state.is_empty() or viewer.generic_reader != null,video.active_job_path)
 	if state.get("stage") in ["complete","frames_ready","failed","cancelled"]: job_rows["Video export"].active = false
 	var selections = viewer.selection_controller

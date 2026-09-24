@@ -1,0 +1,34 @@
+{
+  "forward_plus": {
+    "activity": {
+      "counters": {},
+      "stages": {}
+    },
+    "checks": 103,
+    "failures": [],
+    "parent_directory": "/tmp/issue52-status-forward-final/.simscope-export-1790225613-14790358",
+    "timings": {
+      "refresh_1000_ms": 13.922
+    },
+    "parent_close_acknowledged": true,
+    "source_hashes_unchanged": {
+      "/tmp/issue52-status-forward-final/scene.ssc": "fed5be6b445bae18145206f838247bd85810da023af8f6fcfdb7bde27eef2307"
+    }
+  },
+  "gl_compatibility": {
+    "activity": {
+      "counters": {},
+      "stages": {}
+    },
+    "checks": 103,
+    "failures": [],
+    "parent_directory": "/tmp/issue52-status-gl-final/.simscope-export-1790225628-12451042",
+    "timings": {
+      "refresh_1000_ms": 13.99
+    },
+    "parent_close_acknowledged": true,
+    "source_hashes_unchanged": {
+      "/tmp/issue52-status-gl-final/scene.ssc": "ccfa3ef68eb35a33f1c67d794ca3b2fb993c5e14dc09be659f1134034a7b303d"
+    }
+  }
+}

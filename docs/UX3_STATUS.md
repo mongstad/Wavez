@@ -49,6 +49,12 @@ including video progress notifications. It displays the terminal state once and
 then stops updating; a later/replacement job cannot overwrite that record. Closing
 it or opening a different details surface also ends the subscription. No file
 polling or worker ownership is added.
+Video Details uses the export dialog's shared presentation formatter: one
+frame/percentage line, separate elapsed and approximate render-only remaining
+time, and labeled Output/Temporary files paths. The existing 5 Hz refresh advances
+wall time from the published snapshot; no additional file polling is used.
+See [video progress semantics](../VIDEO_EXPORT.md) for initial, stale-progress,
+encoding and terminal states.
 Cancellation acknowledgement, parent shutdown, overwrite refusal, separate
 worker architecture and FFmpeg recovery are unchanged. The worker taskbar entry
 remains a KDE/Wayland platform limitation.
