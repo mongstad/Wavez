@@ -135,6 +135,7 @@ func setup(owner_viewer) -> void:
 	get_parent().add_child(particle_legend_panel)
 	get_parent().move_child(particle_legend_panel, viewer.colorbar.get_index())
 	viewer.legend.resized.connect(reposition_legend)
+	viewer.legend.theme = theme
 	viewer.legend.visibility_changed.connect(reposition_legend)
 	layer_legends = preload("res://ui/shell/layer_legends.gd").new()
 	get_parent().add_child(layer_legends); layer_legends.setup(viewer)
@@ -321,7 +322,7 @@ func layout() -> void:
 	fullscreen_button.position = Vector2(12, top+52)
 	empty.position = Vector2(maxf(12, (scene_width-empty.size.x)/2), maxf(152, extent.y/2-40))
 	open_error.position = Vector2(12, top+96)
-	layout_legend(Vector2(scene_width, bottom))
+	layout_legend(Vector2(dock.position.x if viewer.overlay_visible else extent.x, bottom))
 	refresh()
 	changing_layout = false
 

@@ -25,6 +25,9 @@ func run() -> void:
 	layers.resample(); await settle()
 	var collection = viewer.shell.layer_legends
 	check(collection.entries.size() == 4 and viewer.legend.visible, "Particles, two fields and two meshes coexist")
+	check(viewer.legend.get_theme_font("font") == collection.entries.volume0.label.get_theme_font("font") and viewer.legend.get_theme_font_size("font_size") == collection.entries.volume0.label.get_theme_font_size("font_size"), "All legends share font and size")
+	var card: Rect2 = viewer.shell.particle_legend_panel.get_rect()
+	check(is_equal_approx(viewer.overlay_panel.position.x-card.end.x,12.0) and is_equal_approx(viewer.shell.transport.position.y-card.end.y,12.0), "Horizontal gap matches unchanged 12-pixel vertical gap")
 	check(viewer.shell.particle_legend_panel.visible and viewer.shell.particle_legend_panel.get_rect().encloses(viewer.legend.get_rect()), "Particle text enclosed by visible card")
 	check("Particles • p" in viewer.legend.text and "plasma" in viewer.legend.text, "Particle identity and mapping")
 	check("Field • volume0" in collection.entries.volume0.label.text and "coolwarm" in collection.entries.volume0.label.text and "-1" in collection.entries.volume0.label.text, "Field identity and active range")

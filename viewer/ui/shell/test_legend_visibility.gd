@@ -43,7 +43,7 @@ func checkpoint(label: String, expected: int, restore := "") -> void:
 			for repeat in 3:
 				check(viewer.legend.is_visible_in_tree() == enabled and viewer.colorbar.is_visible_in_tree() == enabled, label + " legend and colorbar follow preference")
 				check(viewer.show_legend == enabled, label + " panel toggle preserves preference")
-				var edge: float = viewer.overlay_panel.position.x-8 if viewer.overlay_visible else root.size.x
+				var edge: float = viewer.overlay_panel.position.x if viewer.overlay_visible else root.size.x
 				check(absf(viewer.shell.particle_legend_panel.get_rect().end.x-(edge-12)) < 1, label + " legend tracks right panel boundary")
 				viewer._toggle_overlay()
 				check(viewer.overlay_panel.visible == viewer.overlay_visible, label + " panel visibility synchronized")
