@@ -25,6 +25,7 @@ func wait_video(video):
 	var deadline := Time.get_ticks_msec()+60000
 	while video.pid > 0 and Time.get_ticks_msec()<deadline: await create_timer(.05).timeout
 	check(video.pid <= 0,"Video worker terminates")
+	check(video.start_button.text == "Start Export" and not video.start_button.disabled and video.background_button.disabled,"Terminal export restores Start and disables background action")
 func configure_video(viewer, name: String, encoder: String, end_time := .2):
 	var video = viewer.video_dialog
 	video.open(); video.range_choice.select(2); video.update_range()
@@ -78,6 +79,7 @@ func run():
 		if arg.begins_with("--status-output="): output = arg.trim_prefix("--status-output=")
 	var config: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(output.path_join("config.json")))
 	var viewer = Viewer.new(); root.add_child(viewer); await settle()
+	check(viewer.video_dialog.start_button.disabled and viewer.video_dialog.background_button.disabled,"Unconfigured export cannot start or run in background")
 	var ui = viewer.shell.status_ui
 	ui.refresh(); check(ui.readiness == "No capture" and ui.active_count == 0,"Empty status and Jobs are persistent")
 	viewer.shell.begin_open(); ui.refresh(); check(ui.readiness == "Preparing…","Opening has indeterminate preparation state")
@@ -157,10 +159,32 @@ func run():
 		picture("jobs-"+str(dimensions.x)); ui.jobs_dialog.hide()
 	root.size = Vector2i(1440,900); await settle()
 	var video = configure_video(viewer,"complete",config.ffmpeg,6)
-	video.start_export(); ui.refresh(); var pid: int = video.pid
+	check(video.start_button.text == "Start Export" and not video.start_button.disabled and video.background_button.disabled,"Idle export has one Start action and disabled background action")
+	check(video.start_button.get_parent().get_child_count() == 3 and video.close_button.text == "Cancel" and video.background_button.text == "Run in background","Exactly three requested dialog actions")
+	video.close_button.pressed.emit()
+	check(not video.visible and video.pid <= 0,"Idle Cancel closes without launching work")
+	video.open()
+	# Presentation-state injection: selection-recipe preparation has no worker yet.
+	video.preparing = true; video._sync_action_buttons()
+	var preparing_timeline = video.timeline
+	video.open()
+	check(video.timeline == preparing_timeline and video.start_button.text == "Cancel export" and video.start_button.disabled and not video.background_button.disabled,"Preparation preserves draft and exposes background without unsupported worker cancellation")
+	video.preparing = false; video._sync_action_buttons()
+	await settle(); video.get_child(0).ensure_control_visible(video.close_button); await settle()
+	check(Rect2(Vector2.ZERO,Vector2(video.size)).encloses(video.close_button.get_global_rect()),"Idle action row reachable by scrolling")
+	video.get_texture().get_image().save_png(output.path_join("export-idle.png"))
+	video.start_button.pressed.emit(); ui.refresh(); var pid: int = video.pid
 	check(pid > 0 and ui.active_count == 1,"UI launch is counted as one running video job")
-	video.hide(); ui.open_jobs(); ui.reopen_video(); check(video.pid == pid and video.visible,"Jobs reopens original running export without restarting")
-	video.hide(); ui.open_jobs(); ui.job_rows["Video export"].details.pressed.emit()
+	check(video.start_button.text == "Cancel export" and not video.start_button.disabled and not video.background_button.disabled,"Running export switches primary action and enables background")
+	await settle(); video.get_child(0).ensure_control_visible(video.close_button); await settle()
+	check(Rect2(Vector2.ZERO,Vector2(video.size)).encloses(video.close_button.get_global_rect()),"Running action row reachable by scrolling")
+	video.get_texture().get_image().save_png(output.path_join("export-running.png"))
+	video.background_button.pressed.emit()
+	check(not video.visible and video.pid == pid and not FileAccess.file_exists(video.active_directory.path_join("cancel")),"Run in background hides without cancellation or restart")
+	ui.open_jobs(); ui.reopen_video(); check(video.pid == pid and video.visible,"Jobs reopens original running export without restarting")
+	video.close_button.pressed.emit()
+	check(not video.visible and video.pid == pid and not FileAccess.file_exists(video.active_directory.path_join("cancel")),"Running Cancel closes only the dialog")
+	ui.open_jobs(); ui.job_rows["Video export"].details.pressed.emit()
 	var initial_detail: String = viewer.shell.detail_text.text
 	deadline = Time.get_ticks_msec()+15000
 	while video.pid > 0 and video.last_progress.get("stage", "") != "rendering" and Time.get_ticks_msec()<deadline: await create_timer(.01).timeout
@@ -203,6 +227,12 @@ func run():
 	check(viewer.shell.detail_text.text == completed_detail,"A later export cannot overwrite the terminal Details view")
 	viewer.shell.details.hide()
 	check(DirAccess.dir_exists_absolute(video.active_directory),"Cancelled intermediates retained")
+	video = configure_video(viewer,"primary-cancel",config.ffmpeg,6)
+	video.start_button.pressed.emit(); pid = video.pid
+	video.start_button.pressed.emit()
+	check(video.pid == pid and FileAccess.file_exists(video.active_directory.path_join("cancel")) and video.job_status.stage == "cancelling","Primary running action requests canonical cancellation without starting another job")
+	video.hide(); await wait_video(video)
+	check(video.job_status.stage == "cancelled","Primary cancellation follows worker acknowledgement")
 	video = configure_video(viewer,"missing-ffmpeg",""); video.start_export(); video.hide(); await wait_video(video)
 	check(video.job_status.stage == "frames_ready","Missing FFmpeg retains PNG sequence")
 	check(FileAccess.file_exists(video.active_directory.path_join("frames/frame00000000.png")),"Recoverable PNG output exists")

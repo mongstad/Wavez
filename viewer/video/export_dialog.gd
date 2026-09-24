@@ -29,7 +29,9 @@ var estimate: Label
 var progress: ProgressBar
 var message: Label
 var start_button: Button
-var cancel_button: Button
+var background_button: Button
+var close_button: Button
+var can_start := false
 var save_dialog: FileDialog
 var fields: GridContainer
 var pid := -1
@@ -110,12 +112,17 @@ func _ready() -> void:
 	message = Label.new(); message.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; box.add_child(message)
 	progress = ProgressBar.new(); progress.min_value = 0; progress.max_value = 100; box.add_child(progress)
 	var buttons := HBoxContainer.new(); box.add_child(buttons)
-	start_button = Button.new(); start_button.text = "Start Export"; buttons.add_child(start_button)
-	start_button.pressed.connect(start_export)
-	cancel_button = Button.new(); cancel_button.text = "Cancel export"; cancel_button.disabled = true; buttons.add_child(cancel_button)
-	cancel_button.pressed.connect(cancel_export)
-	var close_button := Button.new(); close_button.text = "Close panel • continue in background"; buttons.add_child(close_button)
+	start_button = Button.new(); buttons.add_child(start_button)
+	start_button.pressed.connect(func():
+		if pid > 0: cancel_export()
+		else: start_export())
+	background_button = Button.new(); background_button.text = "Run in background"; buttons.add_child(background_button)
+	background_button.pressed.connect(func():
+		if pid > 0 or preparing: hide())
+	close_button = Button.new(); close_button.text = "Cancel"; buttons.add_child(close_button)
+	close_button.tooltip_text = "Close this dialog. An active export continues in the background."
 	close_button.pressed.connect(hide)
+	_sync_action_buttons()
 	for spin in [start, end, width, height, fps, rate]: spin.value_changed.connect(func(_v: float): update_estimate())
 
 func choice(label: String, options: Array) -> OptionButton:
@@ -138,13 +145,14 @@ func check(label: String, text: String) -> CheckButton:
 
 func open() -> void:
 	popup_centered()
-	if pid > 0: return
+	if pid > 0 or preparing:
+		_sync_action_buttons(); return
 	timeline = Timeline.new()
 	if not timeline.build(viewer):
 		message.text = timeline.error
-		start_button.disabled = true
+		can_start = false; _sync_action_buttons()
 		return
-	start_button.disabled = false
+	can_start = true; _sync_action_buttons()
 	opened_current = viewer.frame_a.sim_time
 	if viewer.frame_b != null:
 		opened_current = lerpf(viewer.frame_a.sim_time, viewer.frame_b.sim_time, viewer.phase)
@@ -228,7 +236,7 @@ func start_export() -> void:
 		publish_job("failed", message.text)
 		return
 	if with_selections:
-		preparing = true;start_button.disabled = true
+		preparing = true
 		publish_job("preparing", "Verifying the pinned selection recipe")
 		var durable = viewer.selection_controller.temporal.durable
 		durable.save_to(active_directory.path_join("recipe.inspection"),true,int(g4_quota.value)*1048576)
@@ -236,7 +244,7 @@ func start_export() -> void:
 		var began := Time.get_ticks_msec()
 		while viewer.selection_controller.jobs.busy() and Time.get_ticks_msec()-began < 150000:await get_tree().create_timer(.02).timeout
 		if viewer.selection_controller.jobs.busy():viewer.selection_controller.jobs.cancel_background()
-		preparing = false;start_button.disabled = false
+		preparing = false
 		if not durable.last_recipe.has("path"):
 			message.text = "Selection recipe preparation failed: "+durable.status.text
 			publish_job("failed", message.text);return
@@ -261,10 +269,16 @@ func start_export() -> void:
 	progress_ticks = launch_ticks
 	last_progress = {}
 	progress.value = 0
-	start_button.disabled = true
-	cancel_button.disabled = false
 	message.text = "Starting render process. The normal viewer remains usable."
 	publish_job("starting", message.text)
+
+func _sync_action_buttons() -> void:
+	var active := pid > 0 or preparing
+	start_button.text = "Cancel export" if active else "Start Export"
+	# Preparation has no existing video-worker cancellation operation.
+	start_button.disabled = preparing or (pid <= 0 and not can_start)
+	start_button.tooltip_text = "Preparing the selection recipe; cancellation is available when the renderer starts." if preparing else ""
+	background_button.disabled = not active
 
 func publish_job(stage: String, detail: String) -> void:
 	var now := Time.get_ticks_msec()
@@ -277,6 +291,7 @@ func publish_job(stage: String, detail: String) -> void:
 		"output":active_output, "progress":last_progress.duplicate(true),
 		"elapsed_seconds":seconds, "snapshot_ticks":now, "progress_ticks":progress_ticks}
 	message.text = progress_details()
+	_sync_action_buttons()
 	job_changed.emit()
 
 func progress_details() -> String:
@@ -309,8 +324,6 @@ func _process(delta: float) -> void:
 	if not OS.is_process_running(pid):
 		var exit_code := OS.get_process_exit_code(pid)
 		pid = -1
-		start_button.disabled = false
-		cancel_button.disabled = true
 		if last_progress.get("stage", "") not in ["complete", "frames_ready", "failed", "cancelled"]:
 			message.text = "Render process stopped unexpectedly (exit %d). Intermediates retained: %s" % [exit_code, active_directory]
 		publish_job(str(last_progress.get("stage", "failed")) if last_progress.get("stage", "") in ProgressDetails.TERMINAL else "failed", str(last_progress.get("message", "")) if last_progress.get("stage", "") in ProgressDetails.TERMINAL else message.text)
