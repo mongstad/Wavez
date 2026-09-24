@@ -25,6 +25,7 @@ func run() -> void:
 	layers.resample(); await settle()
 	var collection = viewer.shell.layer_legends
 	check(collection.entries.size() == 4 and viewer.legend.visible, "Particles, two fields and two meshes coexist")
+	check(viewer.shell.particle_legend_panel.visible and viewer.shell.particle_legend_panel.get_rect().encloses(viewer.legend.get_rect()), "Particle text enclosed by visible card")
 	check("Particles • p" in viewer.legend.text and "plasma" in viewer.legend.text, "Particle identity and mapping")
 	check("Field • volume0" in collection.entries.volume0.label.text and "coolwarm" in collection.entries.volume0.label.text and "-1" in collection.entries.volume0.label.text, "Field identity and active range")
 	check("Mesh • mesh1" in collection.entries.mesh1.label.text, "Additional mesh legend")
@@ -47,6 +48,7 @@ func run() -> void:
 	layers.panel_controls.volume0.legend.button_pressed = true
 	viewer.show_legend = false; viewer._update_particle_legend()
 	check(not viewer.legend.visible and collection.entries.size() == 4, "Particle toggle independent")
+	check(not viewer.shell.particle_legend_panel.visible, "Particle card follows legend visibility")
 	Visual.apply(viewer,JSON.parse_string(FileAccess.get_file_as_string(output.path_join("state.json"))))
 	await settle()
 	check(viewer.legend.visible and not collection.entries.has("volume0"), "JSON state roundtrip restores independent preferences")

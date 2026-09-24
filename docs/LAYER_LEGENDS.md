@@ -35,6 +35,8 @@ legend) and scrolls when needed. Scroll inside the stack to reach later entries.
 This avoids a hardcoded two-legend limit while keeping the viewport center free.
 Visible panels and playback/status controls reserve space; Immersive uses the full
 viewport and existing margins. Late text/layout changes reposition the stack.
+The particle legend also uses the shared background/border with padded contents;
+its outer card edge owns the clearance. See the [review refinement](LEGEND_CARD_REVIEW.md).
 
 ## Ownership, recipes and export
 
