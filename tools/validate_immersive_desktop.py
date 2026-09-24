@@ -22,6 +22,7 @@ def main():
     parser.add_argument('--capture', required=True, type=Path)
     parser.add_argument('--output-dir', required=True, type=Path)
     parser.add_argument('--renderer', choices=['forward_plus', 'gl_compatibility'], default='forward_plus')
+    parser.add_argument('--window-restore', action='store_true', help='Check interactive fullscreen mode/geometry restoration and immersive nesting.')
     args = parser.parse_args()
     out = args.output_dir.resolve(); out.mkdir(parents=True, exist_ok=False)
     def digest():
@@ -62,7 +63,7 @@ def main():
             dbus('/Scripting', 'unloadScript', plugin)
     command = [args.godot, '--path', str(ROOT/'viewer'), '--display-driver', 'wayland',
                '--rendering-method', args.renderer, '--resolution', '1440x900', '--audio-driver', 'Dummy',
-               '--script', 'ui/shell/test_immersive_desktop.gd', '--', '--review-output='+str(out),
+               '--script', 'ui/shell/test_fullscreen_restore.gd' if args.window_restore else 'ui/shell/test_immersive_desktop.gd', '--', '--review-output='+str(out),
                '--review-capture='+str(args.capture.resolve())]
     reports = []
     with (out/'godot.log').open('w') as log:
@@ -78,9 +79,12 @@ def main():
                 label = stage['stage']
                 if label in seen: time.sleep(.05); continue
                 native = kwin(process.pid)
-                fullscreen = label not in ['windowed', 'restored-windowed', 'wm-recovered']
+                fullscreen = stage['expected_mode'] == 3 if args.window_restore else label not in ['windowed', 'restored-windowed', 'wm-recovered']
                 assert native['fullscreen'] == fullscreen, (label, native)
                 if fullscreen: assert native['frame'] == native['client'] == native['screen'], (label, native)
+                if args.window_restore and stage['restore']:
+                    reference = next(item['kwin'] for item in reports if item['stage'] == stage['restore'])
+                    assert native['frame'] == reference['frame'] and native['client'] == reference['client'], (label, native, reference)
                 assert native['active'], 'Test window lost focus; do not capture another application'
                 subprocess.run(['spectacle','-a','-b','-n','-o',str(out/(label+'-desktop.png'))], check=True, timeout=20)
                 stage['kwin'] = native; reports.append(stage)
@@ -89,6 +93,13 @@ def main():
                 if label == 'windowed-to-immersive': kwin(process.pid, leave=True)
                 (out/(label+'.ack')).touch(); seen.add(label)
             assert process.returncode == 0, 'Godot review failed; inspect godot.log'
+            if args.window_restore:
+                assert len(reports) == 16, 'Incomplete fullscreen restore review'
+                assert 'ERROR:' not in (out/'godot.log').read_text(), 'Godot error'
+                assert digest() == source_hash, 'Source changed'
+                (out/'source.json').write_text(json.dumps({'sha256':source_hash,'unchanged':True},indent=2)+'\n')
+                print(f'Fullscreen restore: {reports[-1]["checks"]} checks, 16 KWin geometry stages PASS ({args.renderer})')
+                return
             assert len(reports) == 8, 'Incomplete native review'
             assert 'ERROR:' not in (out/'godot.log').read_text(), 'Godot error'
             # Inspect actual rendered science as well as state and KWin geometry.

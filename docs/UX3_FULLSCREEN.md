@@ -14,6 +14,13 @@ interactive fullscreen shell without changing the scientific or playback model.
 | View → Fullscreen / F11 | Command bar hidden; camera controls, dock/recovery, transport/status/Jobs remain | Exit fullscreen button / F11 |
 | View → Immersive fullscreen / Shift+F11 | None | Esc; F11 or Shift+F11 also restore the preceding mode |
 
+Interactive fullscreen remembers the native mode from each entry. F11 and the
+mouse Exit fullscreen button return to maximized when entered from maximized,
+or to the preceding manual window geometry when entered from windowed mode.
+Geometry remains owned by the window manager. An intervening immersive round
+trip preserves this interactive return mode. This is session-only state; see
+[#86 validation and owner checks](FULLSCREEN_RESTORE_VALIDATION.md).
+
 Immersive briefly shows **Press Esc to exit fullscreen** centered near the top.
 It disappears after three seconds, does not accept focus or intercept the pointer.
 Esc restores the immediately preceding native windowed, maximized or interactive

@@ -1,0 +1,31 @@
+{
+  "forward_plus": {
+    "checks": 51,
+    "native_stages": 16,
+    "failures": [],
+    "source": {
+      "sha256": "3f876c28cd4ed5a5cfd2a4e49e08a1c4d3b93ed803e63b27208d72b61bb7239e",
+      "unchanged": true
+    }
+  },
+  "gl_compatibility": {
+    "checks": 51,
+    "native_stages": 16,
+    "failures": [],
+    "source": {
+      "sha256": "3f876c28cd4ed5a5cfd2a4e49e08a1c4d3b93ed803e63b27208d72b61bb7239e",
+      "unchanged": true
+    }
+  },
+  "baseline_failure": {
+    "checks": 19,
+    "expected_mode": 2,
+    "failures": [
+      "max-restored-0 native mode"
+    ],
+    "mode": 0,
+    "restore": "maximized",
+    "stage": "max-restored-0",
+    "window_size": "(1100, 700)"
+  }
+}

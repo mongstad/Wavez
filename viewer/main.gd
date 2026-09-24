@@ -39,6 +39,9 @@ var interval_end: SpinBox
 var recipe_dialog: FileDialog
 var geometry_dialog: FileDialog
 var recipe_saving := false
+# Session-only interactive fullscreen return mode; native window geometry stays
+# owned by the window manager. Immersive keeps its separate immediate return mode.
+var fullscreen_restore_mode := DisplayServer.WINDOW_MODE_WINDOWED
 
 class FrameData:
 	var source_index := 0
@@ -364,8 +367,9 @@ func _toggle_fullscreen() -> void:
 	if shell != null and shell.immersive:
 		shell.exit_immersive(); return
 	if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+		DisplayServer.window_set_mode(fullscreen_restore_mode)
 	else:
+		fullscreen_restore_mode = DisplayServer.window_get_mode()
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	if shell != null: shell.refresh.call_deferred()
 
