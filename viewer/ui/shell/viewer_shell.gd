@@ -275,6 +275,7 @@ func resize_input(event: InputEvent) -> void:
 func layout() -> void:
 	if immersive:
 		dock.hide(); viewer.resize_handle.hide()
+		layout_legend(get_viewport().get_visible_rect().size)
 		immersive_hint.position = Vector2((get_viewport().get_visible_rect().size.x - immersive_hint.size.x) / 2, 24)
 		return
 	if changing_layout or dock == null: return
@@ -308,11 +309,16 @@ func layout() -> void:
 	fullscreen_button.position = Vector2(12, top+52)
 	empty.position = Vector2(maxf(12, (scene_width-empty.size.x)/2), maxf(152, extent.y/2-40))
 	open_error.position = Vector2(12, top+96)
-	if viewer.colorbar != null:
-		viewer.colorbar.position = Vector2(maxf(12, scene_width-352), bottom-118)
-		viewer.legend.position = viewer.colorbar.position+Vector2(0,24)
+	layout_legend(Vector2(scene_width, bottom))
 	refresh()
 	changing_layout = false
+
+func layout_legend(available: Vector2) -> void:
+	if viewer.colorbar == null or viewer.legend == null: return
+	viewer.legend.size.y = viewer.legend.get_minimum_size().y
+	var right := maxf(viewer.colorbar.size.x, viewer.legend.size.x)
+	viewer.colorbar.position = Vector2(maxf(12, available.x-right-12), maxf(12, available.y-viewer.legend.size.y-24-12))
+	viewer.legend.position = viewer.colorbar.position+Vector2(0,24)
 
 func enter_immersive() -> void:
 	if immersive: return

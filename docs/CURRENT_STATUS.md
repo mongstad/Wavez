@@ -12,6 +12,8 @@ Current authorized work is #85, the top Ready item verified on 2026-09-24:
 [independent legend visibility](LEGEND_VISIBILITY_VALIDATION.md), **pending owner review**.
 The particle legend and colorbar follow Show legend independently of panel
 visibility. Existing scalar-mapping eligibility and recipe fields remain intact.
+The owner-requested [placement refinement](LEGEND_PLACEMENT_VALIDATION.md) anchors
+the legend to the available scene's lower-right, including the full Immersive viewport.
 Historical reports and evidence retain their original review-time wording.
 
 As of **2026-09-20**, including G4 and PERF-001/002 maintenance reviewed and accepted by the user. Scientific simulations were not rerun. Historical results identify their recorded checkpoints. PERF-003 mesh maintenance was also reviewed and accepted by the owner on 2026-09-13; implementation checkpoint `7974c78`.

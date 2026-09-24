@@ -46,6 +46,12 @@ no scalar legend. Immersive does not enable a hidden legend or change the recipe
 application dock and disappear with it. The screenshot completion toast is also
 suppressed while immersive; its status remains available after leaving the mode.
 
+The legend sits at the lower-right of the available scene area with a 12-pixel
+margin. Visible side panels and bottom transport/status controls reserve space;
+Immersive uses the full viewport. Entering/leaving Immersive, resizing, and toggling
+panels reposition the legend and colorbar together. The label uses its text height
+instead of reserving an empty 90-pixel box below the colorbar.
+
 PNG retains its existing **current visible viewport** behavior and sidecar/state
 semantics. A PNG taken during the three-second hint includes that hint; wait for
 it to disappear for a clean view. Entering immersive does not rewrite the saved
