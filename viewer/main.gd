@@ -1278,7 +1278,7 @@ func _style_generic_frame(fr: FrameData, mm: MultiMesh, fade: float, current: bo
 
 
 func _update_particle_legend() -> void:
-	legend.visible = scene_layers != null and show_legend and overlay_visible and color_channel not in ["fixed", "visual_color"]
+	legend.visible = scene_layers != null and show_legend and color_channel not in ["fixed", "visual_color"]
 	colorbar.visible = legend.visible
 	colorbar.flip_h = invert_map
 	legend.text = "%s • %s\n%.5f → %.5f • %s%s" % [color_channel, colormap_name, range_min, range_max, {"frame":"auto per frame","symmetric":"auto symmetric","manual":"fixed manual","interval":"fixed interval"}[_effective_normalization()], " • cyclic" if cyclic else (" • log" if logarithmic else " • linear")] if color_channel not in ["fixed","visual_color"] else ""

@@ -1,0 +1,1042 @@
+{
+  "forward_plus": {
+    "stages": [
+      {
+        "checks": 50,
+        "expected_mode": 0,
+        "failures": [],
+        "mode": 0,
+        "restore": "",
+        "stage": "manual",
+        "window_size": "(1100, 700)",
+        "kwin": {
+          "pid": 108941,
+          "active": true,
+          "fullscreen": false,
+          "frame": {
+            "x": 556,
+            "y": 231,
+            "width": 1108,
+            "height": 732
+          },
+          "client": {
+            "x": 560,
+            "y": 259,
+            "width": 1100,
+            "height": 700
+          },
+          "screen": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          }
+        }
+      },
+      {
+        "checks": 99,
+        "expected_mode": 3,
+        "failures": [],
+        "mode": 3,
+        "restore": "",
+        "stage": "manual-fullscreen",
+        "window_size": "(2560, 1440)",
+        "kwin": {
+          "pid": 108941,
+          "active": true,
+          "fullscreen": true,
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          },
+          "client": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          },
+          "screen": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          }
+        }
+      },
+      {
+        "checks": 148,
+        "expected_mode": 0,
+        "failures": [],
+        "mode": 0,
+        "restore": "manual",
+        "stage": "manual-restored",
+        "window_size": "(1100, 700)",
+        "kwin": {
+          "pid": 108941,
+          "active": true,
+          "fullscreen": false,
+          "frame": {
+            "x": 556,
+            "y": 231,
+            "width": 1108,
+            "height": 732
+          },
+          "client": {
+            "x": 560,
+            "y": 259,
+            "width": 1100,
+            "height": 700
+          },
+          "screen": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          }
+        }
+      },
+      {
+        "checks": 197,
+        "expected_mode": 2,
+        "failures": [],
+        "mode": 2,
+        "restore": "",
+        "stage": "maximized",
+        "window_size": "(2560, 1370)",
+        "kwin": {
+          "pid": 108941,
+          "active": true,
+          "fullscreen": false,
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1394
+          },
+          "client": {
+            "x": 0,
+            "y": 24,
+            "width": 2560,
+            "height": 1370
+          },
+          "screen": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          }
+        }
+      },
+      {
+        "checks": 246,
+        "expected_mode": 3,
+        "failures": [],
+        "mode": 3,
+        "restore": "",
+        "stage": "max-fullscreen-0",
+        "window_size": "(2560, 1440)",
+        "kwin": {
+          "pid": 108941,
+          "active": true,
+          "fullscreen": true,
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          },
+          "client": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          },
+          "screen": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          }
+        }
+      },
+      {
+        "checks": 295,
+        "expected_mode": 2,
+        "failures": [],
+        "mode": 2,
+        "restore": "maximized",
+        "stage": "max-restored-0",
+        "window_size": "(2560, 1370)",
+        "kwin": {
+          "pid": 108941,
+          "active": true,
+          "fullscreen": false,
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1394
+          },
+          "client": {
+            "x": 0,
+            "y": 24,
+            "width": 2560,
+            "height": 1370
+          },
+          "screen": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          }
+        }
+      },
+      {
+        "checks": 344,
+        "expected_mode": 3,
+        "failures": [],
+        "mode": 3,
+        "restore": "",
+        "stage": "max-fullscreen-1",
+        "window_size": "(2560, 1440)",
+        "kwin": {
+          "pid": 108941,
+          "active": true,
+          "fullscreen": true,
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          },
+          "client": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          },
+          "screen": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          }
+        }
+      },
+      {
+        "checks": 393,
+        "expected_mode": 2,
+        "failures": [],
+        "mode": 2,
+        "restore": "maximized",
+        "stage": "max-restored-1",
+        "window_size": "(2560, 1370)",
+        "kwin": {
+          "pid": 108941,
+          "active": true,
+          "fullscreen": false,
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1394
+          },
+          "client": {
+            "x": 0,
+            "y": 24,
+            "width": 2560,
+            "height": 1370
+          },
+          "screen": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          }
+        }
+      },
+      {
+        "checks": 442,
+        "expected_mode": 3,
+        "failures": [],
+        "mode": 3,
+        "restore": "",
+        "stage": "nested-fullscreen",
+        "window_size": "(2560, 1440)",
+        "kwin": {
+          "pid": 108941,
+          "active": true,
+          "fullscreen": true,
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          },
+          "client": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          },
+          "screen": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          }
+        }
+      },
+      {
+        "checks": 492,
+        "expected_mode": 3,
+        "failures": [],
+        "mode": 3,
+        "restore": "",
+        "stage": "nested-interactive",
+        "window_size": "(2560, 1440)",
+        "kwin": {
+          "pid": 108941,
+          "active": true,
+          "fullscreen": true,
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          },
+          "client": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          },
+          "screen": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          }
+        }
+      },
+      {
+        "checks": 541,
+        "expected_mode": 2,
+        "failures": [],
+        "mode": 2,
+        "restore": "maximized",
+        "stage": "nested-max-restored",
+        "window_size": "(2560, 1370)",
+        "kwin": {
+          "pid": 108941,
+          "active": true,
+          "fullscreen": false,
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1394
+          },
+          "client": {
+            "x": 0,
+            "y": 24,
+            "width": 2560,
+            "height": 1370
+          },
+          "screen": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          }
+        }
+      },
+      {
+        "checks": 590,
+        "expected_mode": 0,
+        "failures": [],
+        "mode": 0,
+        "restore": "",
+        "stage": "resized",
+        "window_size": "(1200, 760)",
+        "kwin": {
+          "pid": 108941,
+          "active": true,
+          "fullscreen": false,
+          "frame": {
+            "x": 556,
+            "y": 231,
+            "width": 1208,
+            "height": 792
+          },
+          "client": {
+            "x": 560,
+            "y": 259,
+            "width": 1200,
+            "height": 760
+          },
+          "screen": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          }
+        }
+      },
+      {
+        "checks": 639,
+        "expected_mode": 3,
+        "failures": [],
+        "mode": 3,
+        "restore": "",
+        "stage": "resized-fullscreen",
+        "window_size": "(2560, 1440)",
+        "kwin": {
+          "pid": 108941,
+          "active": true,
+          "fullscreen": true,
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          },
+          "client": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          },
+          "screen": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          }
+        }
+      },
+      {
+        "checks": 688,
+        "expected_mode": 0,
+        "failures": [],
+        "mode": 0,
+        "restore": "resized",
+        "stage": "resized-restored",
+        "window_size": "(1200, 760)",
+        "kwin": {
+          "pid": 108941,
+          "active": true,
+          "fullscreen": false,
+          "frame": {
+            "x": 556,
+            "y": 231,
+            "width": 1208,
+            "height": 792
+          },
+          "client": {
+            "x": 560,
+            "y": 259,
+            "width": 1200,
+            "height": 760
+          },
+          "screen": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          }
+        }
+      },
+      {
+        "checks": 737,
+        "expected_mode": 2,
+        "failures": [],
+        "mode": 2,
+        "restore": "maximized",
+        "stage": "maximized-again",
+        "window_size": "(2560, 1370)",
+        "kwin": {
+          "pid": 108941,
+          "active": true,
+          "fullscreen": false,
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1394
+          },
+          "client": {
+            "x": 0,
+            "y": 24,
+            "width": 2560,
+            "height": 1370
+          },
+          "screen": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          }
+        }
+      },
+      {
+        "checks": 787,
+        "expected_mode": 2,
+        "failures": [],
+        "mode": 2,
+        "restore": "maximized",
+        "stage": "immersive-max-restored",
+        "window_size": "(2560, 1370)",
+        "kwin": {
+          "pid": 108941,
+          "active": true,
+          "fullscreen": false,
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1394
+          },
+          "client": {
+            "x": 0,
+            "y": 24,
+            "width": 2560,
+            "height": 1370
+          },
+          "screen": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          }
+        }
+      }
+    ],
+    "source": {
+      "sha256": "648fcc70dc1ba0bd68eef1d5a841babb54f43debc32c7b0a767234b5bcdbba93",
+      "unchanged": true
+    }
+  },
+  "gl_compatibility": {
+    "stages": [
+      {
+        "checks": 50,
+        "expected_mode": 0,
+        "failures": [],
+        "mode": 0,
+        "restore": "",
+        "stage": "manual",
+        "window_size": "(1100, 700)",
+        "kwin": {
+          "pid": 110739,
+          "active": true,
+          "fullscreen": false,
+          "frame": {
+            "x": 556,
+            "y": 231,
+            "width": 1108,
+            "height": 732
+          },
+          "client": {
+            "x": 560,
+            "y": 259,
+            "width": 1100,
+            "height": 700
+          },
+          "screen": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          }
+        }
+      },
+      {
+        "checks": 99,
+        "expected_mode": 3,
+        "failures": [],
+        "mode": 3,
+        "restore": "",
+        "stage": "manual-fullscreen",
+        "window_size": "(2560, 1440)",
+        "kwin": {
+          "pid": 110739,
+          "active": true,
+          "fullscreen": true,
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          },
+          "client": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          },
+          "screen": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          }
+        }
+      },
+      {
+        "checks": 148,
+        "expected_mode": 0,
+        "failures": [],
+        "mode": 0,
+        "restore": "manual",
+        "stage": "manual-restored",
+        "window_size": "(1100, 700)",
+        "kwin": {
+          "pid": 110739,
+          "active": true,
+          "fullscreen": false,
+          "frame": {
+            "x": 556,
+            "y": 231,
+            "width": 1108,
+            "height": 732
+          },
+          "client": {
+            "x": 560,
+            "y": 259,
+            "width": 1100,
+            "height": 700
+          },
+          "screen": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          }
+        }
+      },
+      {
+        "checks": 197,
+        "expected_mode": 2,
+        "failures": [],
+        "mode": 2,
+        "restore": "",
+        "stage": "maximized",
+        "window_size": "(2560, 1370)",
+        "kwin": {
+          "pid": 110739,
+          "active": true,
+          "fullscreen": false,
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1394
+          },
+          "client": {
+            "x": 0,
+            "y": 24,
+            "width": 2560,
+            "height": 1370
+          },
+          "screen": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          }
+        }
+      },
+      {
+        "checks": 246,
+        "expected_mode": 3,
+        "failures": [],
+        "mode": 3,
+        "restore": "",
+        "stage": "max-fullscreen-0",
+        "window_size": "(2560, 1440)",
+        "kwin": {
+          "pid": 110739,
+          "active": true,
+          "fullscreen": true,
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          },
+          "client": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          },
+          "screen": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          }
+        }
+      },
+      {
+        "checks": 295,
+        "expected_mode": 2,
+        "failures": [],
+        "mode": 2,
+        "restore": "maximized",
+        "stage": "max-restored-0",
+        "window_size": "(2560, 1370)",
+        "kwin": {
+          "pid": 110739,
+          "active": true,
+          "fullscreen": false,
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1394
+          },
+          "client": {
+            "x": 0,
+            "y": 24,
+            "width": 2560,
+            "height": 1370
+          },
+          "screen": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          }
+        }
+      },
+      {
+        "checks": 344,
+        "expected_mode": 3,
+        "failures": [],
+        "mode": 3,
+        "restore": "",
+        "stage": "max-fullscreen-1",
+        "window_size": "(2560, 1440)",
+        "kwin": {
+          "pid": 110739,
+          "active": true,
+          "fullscreen": true,
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          },
+          "client": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          },
+          "screen": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          }
+        }
+      },
+      {
+        "checks": 393,
+        "expected_mode": 2,
+        "failures": [],
+        "mode": 2,
+        "restore": "maximized",
+        "stage": "max-restored-1",
+        "window_size": "(2560, 1370)",
+        "kwin": {
+          "pid": 110739,
+          "active": true,
+          "fullscreen": false,
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1394
+          },
+          "client": {
+            "x": 0,
+            "y": 24,
+            "width": 2560,
+            "height": 1370
+          },
+          "screen": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          }
+        }
+      },
+      {
+        "checks": 442,
+        "expected_mode": 3,
+        "failures": [],
+        "mode": 3,
+        "restore": "",
+        "stage": "nested-fullscreen",
+        "window_size": "(2560, 1440)",
+        "kwin": {
+          "pid": 110739,
+          "active": true,
+          "fullscreen": true,
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          },
+          "client": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          },
+          "screen": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          }
+        }
+      },
+      {
+        "checks": 492,
+        "expected_mode": 3,
+        "failures": [],
+        "mode": 3,
+        "restore": "",
+        "stage": "nested-interactive",
+        "window_size": "(2560, 1440)",
+        "kwin": {
+          "pid": 110739,
+          "active": true,
+          "fullscreen": true,
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          },
+          "client": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          },
+          "screen": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          }
+        }
+      },
+      {
+        "checks": 541,
+        "expected_mode": 2,
+        "failures": [],
+        "mode": 2,
+        "restore": "maximized",
+        "stage": "nested-max-restored",
+        "window_size": "(2560, 1370)",
+        "kwin": {
+          "pid": 110739,
+          "active": true,
+          "fullscreen": false,
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1394
+          },
+          "client": {
+            "x": 0,
+            "y": 24,
+            "width": 2560,
+            "height": 1370
+          },
+          "screen": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          }
+        }
+      },
+      {
+        "checks": 590,
+        "expected_mode": 0,
+        "failures": [],
+        "mode": 0,
+        "restore": "",
+        "stage": "resized",
+        "window_size": "(1200, 760)",
+        "kwin": {
+          "pid": 110739,
+          "active": true,
+          "fullscreen": false,
+          "frame": {
+            "x": 556,
+            "y": 231,
+            "width": 1208,
+            "height": 792
+          },
+          "client": {
+            "x": 560,
+            "y": 259,
+            "width": 1200,
+            "height": 760
+          },
+          "screen": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          }
+        }
+      },
+      {
+        "checks": 639,
+        "expected_mode": 3,
+        "failures": [],
+        "mode": 3,
+        "restore": "",
+        "stage": "resized-fullscreen",
+        "window_size": "(2560, 1440)",
+        "kwin": {
+          "pid": 110739,
+          "active": true,
+          "fullscreen": true,
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          },
+          "client": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          },
+          "screen": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          }
+        }
+      },
+      {
+        "checks": 688,
+        "expected_mode": 0,
+        "failures": [],
+        "mode": 0,
+        "restore": "resized",
+        "stage": "resized-restored",
+        "window_size": "(1200, 760)",
+        "kwin": {
+          "pid": 110739,
+          "active": true,
+          "fullscreen": false,
+          "frame": {
+            "x": 556,
+            "y": 231,
+            "width": 1208,
+            "height": 792
+          },
+          "client": {
+            "x": 560,
+            "y": 259,
+            "width": 1200,
+            "height": 760
+          },
+          "screen": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          }
+        }
+      },
+      {
+        "checks": 737,
+        "expected_mode": 2,
+        "failures": [],
+        "mode": 2,
+        "restore": "maximized",
+        "stage": "maximized-again",
+        "window_size": "(2560, 1370)",
+        "kwin": {
+          "pid": 110739,
+          "active": true,
+          "fullscreen": false,
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1394
+          },
+          "client": {
+            "x": 0,
+            "y": 24,
+            "width": 2560,
+            "height": 1370
+          },
+          "screen": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          }
+        }
+      },
+      {
+        "checks": 787,
+        "expected_mode": 2,
+        "failures": [],
+        "mode": 2,
+        "restore": "maximized",
+        "stage": "immersive-max-restored",
+        "window_size": "(2560, 1370)",
+        "kwin": {
+          "pid": 110739,
+          "active": true,
+          "fullscreen": false,
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1394
+          },
+          "client": {
+            "x": 0,
+            "y": 24,
+            "width": 2560,
+            "height": 1370
+          },
+          "screen": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          }
+        }
+      }
+    ],
+    "source": {
+      "sha256": "648fcc70dc1ba0bd68eef1d5a841babb54f43debc32c7b0a767234b5bcdbba93",
+      "unchanged": true
+    }
+  }
+}

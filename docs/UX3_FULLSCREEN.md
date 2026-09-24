@@ -39,11 +39,20 @@ seek, reset/frame the camera, change speed, or change render settings.
 
 Only application controls are hidden. The existing colorbar/particle legend,
 scene guides, probe markers and selection/analysis overlays retain their current
-visibility. Immersive does not enable a hidden legend. In particular it does not
-set the recipe's `overlay_visible` to false: that existing field also participates
-in scientific legend visibility. Inspector HUD/readiness labels belong to the
+visibility. The particle legend and colorbar follow **Show legend** independently
+of panel visibility in every window mode; fixed/visual-color mappings still have
+no scalar legend. Immersive does not enable a hidden legend or change the recipe's
+`overlay_visible` value. Inspector HUD/readiness labels belong to the
 application dock and disappear with it. The screenshot completion toast is also
 suppressed while immersive; its status remains available after leaving the mode.
+
+The legend sits at the lower-right of the available scene area with a 12-pixel
+margin. Visible side panels and bottom transport/status controls reserve space;
+Immersive uses the full viewport. Entering/leaving Immersive, resizing, and toggling
+panels reposition the legend and colorbar together. The label uses its text height
+instead of reserving an empty 90-pixel box below the colorbar.
+If text shaping grows the label after layout, its position is refreshed against
+the same bounds without changing panel or control sizes.
 
 PNG retains its existing **current visible viewport** behavior and sidecar/state
 semantics. A PNG taken during the three-second hint includes that hint; wait for
