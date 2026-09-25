@@ -1,5 +1,6 @@
 extends RefCounted
 # One private CPU thread; immutable publication, independent file handle, finite LRU.
+const Reader = preload("res://layers/scene_reader.gd")
 const Channels = preload("res://layers/scene_channels.gd")
 const Prepare = preload("res://layers/field_prepare.gd")
 const Stamp = preload("res://data/source_stamp.gd")
@@ -17,6 +18,7 @@ var order: Array[String] = []
 var used := 0
 var limit := 128*Memory.MIB
 var error := ""
+var failures := {}
 var completed := 0
 var cancelled := 0
 var evictions := 0
@@ -29,7 +31,12 @@ func close() -> void:
 	mutex.lock();closing = true;mutex.unlock();wake.post()
 	if thread.is_started():thread.wait_to_finish()
 func request(next_token: String, next_jobs: Array, bytes: int) -> void:
-	mutex.lock();token = next_token;jobs = next_jobs;limit = bytes;error = "";mutex.unlock();wake.post()
+	mutex.lock()
+	if token != next_token:failures.clear()
+	token = next_token;jobs = next_jobs;limit = bytes;error = ""
+	for old in failures.keys():
+		if not jobs.any(func(job):return job.key == old):failures.erase(old)
+	mutex.unlock();wake.post()
 func cancel() -> void:
 	mutex.lock();token += "!";jobs = [];mutex.unlock();wake.post()
 func stopped() -> bool:
@@ -41,7 +48,7 @@ func get_frame(key: String) -> Dictionary:
 	mutex.unlock();return value
 func status() -> Dictionary:
 	mutex.lock()
-	var result := {"bytes":used,"limit":limit,"frames":prepared.size(),"completed":completed,"cancelled":cancelled,"evictions":evictions,"worker_ms":worker_ms,"worker_thread":worker_thread,"active":not working_key.is_empty(),"error":error,"test_barrier_waiting":at_barrier}
+	var result := {"bytes":used,"limit":limit,"frames":prepared.size(),"completed":completed,"cancelled":cancelled,"evictions":evictions,"worker_ms":worker_ms,"worker_thread":worker_thread,"active":not working_key.is_empty(),"error":error,"failures":failures.duplicate(),"test_barrier_waiting":at_barrier}
 	mutex.unlock();return result
 func _prune(incoming: int, key: String) -> bool:
 	var retired: Array = []
@@ -58,7 +65,7 @@ func _next() -> Dictionary:
 	mutex.lock();var next := {}
 	if not closing:
 		for job in jobs:
-			if not prepared.has(job.key) or prepared[job.key].token != token:
+			if not failures.has(job.key) and (not prepared.has(job.key) or prepared[job.key].token != token):
 				next = job;working_key = job.key;working_token = token;break
 	mutex.unlock();return next
 func _run() -> void:
@@ -80,10 +87,12 @@ func _run() -> void:
 				var file := FileAccess.open(job.path,FileAccess.READ)
 				if file == null:result = {"error":"Cannot open field source."}
 				else:
-					var decoded := Channels.read(file,job.entry,job.object,self)
-					if decoded.has("error") or decoded.is_empty():result = decoded
+					var entry := Reader.materialize(file,job.entry,job.object)
+					var decoded := entry if entry.has("error") else Channels.read(file,entry,job.object,self)
+					if decoded.has("error"):result = {"error":decoded.error if entry.has("error") else Reader.record_error(job.entry,decoded.error)}
+					elif decoded.is_empty():result = decoded
 					else:
-						var sample := {"time":job.entry.time,"count":0,"channels":decoded.channels,"components":decoded.components,"shapes":decoded.shapes,"associations":decoded.associations,"geometry":job.entry.descriptor.geometry,"has_ids":false,"identity_map":null,"source_index":job.entry.index,"sequence":job.entry.sequence,"decoded_bytes":decoded.reserve}
+						var sample := {"time":job.entry.time,"count":0,"channels":decoded.channels,"components":decoded.components,"shapes":decoded.shapes,"associations":decoded.associations,"geometry":entry.descriptor.geometry,"has_ids":false,"identity_map":null,"source_index":job.entry.index,"sequence":job.entry.sequence,"decoded_bytes":decoded.reserve}
 						result = Prepare.prepare(job.object,sample,job.channel,job.budget,self)
 			var gate := test_barrier
 			if gate != null:
@@ -92,7 +101,7 @@ func _run() -> void:
 			var obsolete := stopped()
 			mutex.lock()
 			if obsolete or token != working_token or closing:cancelled += 1
-			elif result.has("error"):error = result.error;jobs = []
+			elif result.has("error"):failures[job.key] = result.error
 			elif not result.is_empty() and used+job.charge > limit:
 				# A controller may reduce the budget while this job is decoding.
 				cancelled += 1

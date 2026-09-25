@@ -14,6 +14,7 @@ var header := {}
 var metadata := {}
 var objects := {}
 var samples := {}
+var observed_arrays := {}
 var records: Array[Dictionary] = []
 var frames: Array[Dictionary] = [] # union clock; never scientific particle samples
 var cache := Cache.new()
@@ -64,7 +65,7 @@ func reload_source() -> bool:
 	Profile.end("g3_reload_source",started)
 	return result
 func _reload_source_profiled() -> bool:
-	index_valid = false;generation += 1;cache.clear();records.clear();frames.clear();samples.clear();objects.clear();error = ""
+	index_valid = false;generation += 1;cache.clear();records.clear();frames.clear();samples.clear();observed_arrays.clear();objects.clear();error = ""
 	var metadata_started := Profile.begin()
 	var before := _source_stamp_profiled()
 	file = FileAccess.open(source_path,FileAccess.READ)
@@ -94,21 +95,8 @@ func _reload_source_profiled() -> bool:
 	metadata.storage = {"uuid":metadata.uuid}
 	prefix.append_array(raw);header = {"sha256":Hash.digest(prefix),"metadata":metadata}
 	Profile.end("g3_index_metadata",metadata_started)
-	var cached_index_started := Profile.begin()
-	var cache_path := cache_dir.path_join(source_path.sha256_text()+".sidx3.json")
-	var saved: Array = [];var index_file := FileAccess.open(cache_path,FileAccess.READ)
-	if trusted and index_file != null and index_file.get_length() <= Hash.MAX_INDEX:
-		var envelope = Hash.parse_json(index_file.get_as_text())
-		if envelope is Dictionary and envelope.get("body") is String and envelope.body.sha256_text() == envelope.get("sha256"):
-			var body = Hash.parse_json(envelope.body)
-			if body is Dictionary and body.get("parser") == "SIMSCP3/g3-1" and body.get("source") == before and body.get("header") == header.sha256 and body.get("records") is Array:
-				for row in body.records:
-					if not row is Dictionary or not Index.valid_hex(row.get("h"),160) or not row.get("d") is String: saved.clear();break
-					row.parsed = Hash.parse_json(row.d)
-					saved.append(row)
-	Profile.end("g3_index_cache_parse",cached_index_started)
 	var scan_started := Profile.begin()
-	var offset := 16+size;var end := file.get_length();var index_bytes := 0;var used_index := not saved.is_empty();var rows: Array = [];var times := {}
+	var offset := 16+size;var end := file.get_length();var index_bytes := 0;var times := {}
 	while offset < end:
 		if end-offset < 80: break
 		file.seek(offset);var h := file.get_buffer(80)
@@ -119,40 +107,60 @@ func _reload_source_profiled() -> bool:
 		if index_bytes > Hash.MAX_INDEX: return fail("Scene index metadata exceeds 32 MiB.")
 		var obj: Dictionary = metadata.objects[oi];var prior: Array = samples[obj.id]
 		if not prior.is_empty() and (obj.static or time <= prior[-1].time): return fail("Object timestamps/static violation.")
-		var d := file.get_buffer(dlen)
-		if Hash.digest(d) != h.slice(48).hex_encode(): return fail("Scene descriptor checksum.")
-		var parse_started := Profile.begin()
-		var text := d.get_string_from_utf8();var desc
-		if seq < saved.size() and saved[seq].h == h.hex_encode() and saved[seq].d == text: desc = saved[seq].parsed
-		else: desc = Hash.parse_json(text);used_index = false
-		Profile.end("g3_descriptor_parse",parse_started)
-		var validation_started := Profile.begin()
-		var invalid := validate_sample(obj,desc,stored,decoded)
-		Profile.end("g3_descriptor_validation",validation_started)
-		if not invalid.is_empty(): return fail(invalid)
-		if desc.arrays.size() != n: return fail("Array count mismatch.")
-		file.seek(offset+128+dlen+stored-48);var trailer := file.get_buffer(48);var proof := h.duplicate();proof.append_array(d)
-		if trailer.slice(0,8) != "COMMIT3".to_utf8_buffer()+PackedByteArray([0]) or trailer.decode_u64(8) != seq or trailer.slice(16).hex_encode() != Hash.digest(proof): return fail("Scene commit checksum.")
-		var record := {"time":time,"object":obj.id,"offset":offset+80+dlen,"end":offset+128+dlen+stored,"decoded":decoded,"descriptor":desc,"sequence":seq,"index":prior.size()}
-		records.append(record);samples[obj.id].append(record);times[time] = true;rows.append({"h":h.hex_encode(),"d":text})
+		# Only fixed-size headers are needed to locate records and build the clock.
+		# Descriptor parsing, proofs and payload checks belong to requested reads.
+		var record := {"time":time,"object":obj.id,"offset":offset+80+dlen,"end":offset+128+dlen+stored,"decoded":decoded,"descriptor":{},"sequence":seq,"index":prior.size(),"header_offset":offset,"raw_header":h,"stored":stored,"descriptor_length":dlen,"array_count":n,"kind":obj.kind,"identity":obj.get("identity","")}
+		records.append(record);samples[obj.id].append(record);times[time] = true
 		offset = record.end
 	Profile.end("g3_index_scan_inclusive",scan_started)
 	if trusted and _source_stamp_profiled() != before: return fail("Scene changed while indexing.")
 	var timestamps_started := Profile.begin()
 	var ordered: Array = times.keys();ordered.sort()
 	for time in ordered: frames.append({"time":time,"offset":0,"bytes":offset,"end":offset})
-	scan_offset = offset;source_stamp = before;index_state = "validated index" if used_index and saved.size() == rows.size() else "rebuilt index"
+	scan_offset = offset;source_stamp = before;index_state = "lazy record index"
 	Profile.end("g3_timestamp_index",timestamps_started)
-	var save_started := Profile.begin()
-	if trusted and index_state == "rebuilt index":
-		var body := JSON.stringify({"parser":"SIMSCP3/g3-1","source":before,"header":header.sha256,"records":rows},"",true,true)
-		var envelope := JSON.stringify({"body":body,"sha256":body.sha256_text()})
-		if envelope.length() <= Hash.MAX_INDEX and DirAccess.make_dir_recursive_absolute(cache_dir) == OK:
-			var tmp := cache_path+".tmp-%d" % OS.get_process_id();var f := FileAccess.open(tmp,FileAccess.WRITE)
-			if f != null: f.store_string(envelope);f.flush();f.close();DirAccess.rename_absolute(tmp,cache_path)
-	Profile.end("g3_index_cache_write",save_started)
 	index_valid = true
 	return true
+static func record_error(entry: Dictionary, message: String) -> String:
+	return "%s sample %d (record %d): %s Reopen or re-export the capture." % [entry.get("object","Scene"),int(entry.get("index",-1)),int(entry.get("sequence",-1)),message]
+static func materialize(source: FileAccess, entry: Dictionary, obj: Dictionary) -> Dictionary:
+	if not entry.descriptor.is_empty():return entry
+	if source == null:return {"error":record_error(entry,"Cannot open source.")}
+	# Header bounds were checked at index construction; check again on this handle.
+	if entry.header_offset < 16 or entry.end > source.get_length() or entry.offset < entry.header_offset+80:return {"error":record_error(entry,"Record outside source bounds.")}
+	source.seek(entry.header_offset)
+	var h := source.get_buffer(80)
+	if h != entry.raw_header:return {"error":record_error(entry,"Record header changed.")}
+	var d := source.get_buffer(entry.descriptor_length)
+	if Hash.digest(d) != h.slice(48).hex_encode():return {"error":record_error(entry,"Descriptor checksum mismatch.")}
+	var desc = Hash.parse_json(d.get_string_from_utf8())
+	var problem := validate_sample(obj,desc,entry.stored,entry.decoded)
+	if not problem.is_empty():return {"error":record_error(entry,problem)}
+	if desc.arrays.size() != entry.array_count:return {"error":record_error(entry,"Array count mismatch.")}
+	source.seek(entry.end-48);var trailer := source.get_buffer(48);var proof := h.duplicate();proof.append_array(d)
+	if trailer.slice(0,8) != "COMMIT3".to_utf8_buffer()+PackedByteArray([0]) or trailer.decode_u64(8) != entry.sequence or trailer.slice(16).hex_encode() != Hash.digest(proof):return {"error":record_error(entry,"Commit checksum mismatch.")}
+	var result := entry.duplicate();result.descriptor = desc
+	return result
+func describe(id: String, index: int) -> Dictionary:
+	if not samples.has(id) or index < 0 or index >= samples[id].size():return {}
+	var entry: Dictionary = samples[id][index]
+	var started := Profile.begin()
+	var result := materialize(file,entry,objects[id])
+	Profile.end("g3_requested_descriptor",started)
+	if result.has("error"):fail(result.error);return {}
+	entry.descriptor = result.descriptor
+	return entry.descriptor
+func known_arrays(id: String) -> Array:
+	var result: Array = [];var names := {}
+	for a in observed_arrays.get(id,{}).values():names[a.name] = true;result.append(a)
+	for entry in samples.get(id,[]):
+		for a in entry.descriptor.get("arrays",[]):
+			if not names.has(a.name):names[a.name] = true;result.append(a)
+	return result
+func note_channels(id: String, data: Dictionary) -> void:
+	if not observed_arrays.has(id):observed_arrays[id] = {}
+	for name in data.channels:
+		observed_arrays[id][name] = {"name":name,"shape":data.shapes[name].duplicate()}
 static func dimensions_equal(a, b) -> bool:
 	if not a is Array or not b is Array or a.size() != b.size(): return false
 	for i in range(a.size()):
@@ -237,10 +245,11 @@ func _read_sample_profiled(id: String, index: int) -> Dictionary:
 	var entry: Dictionary = samples[id][index];var hit := cache.get_frame(entry.sequence) if trusted else {}
 	Profile.end("g3_cache_lookup",cache_started,{"hit":not hit.is_empty(),"object":id,"sample_index":index})
 	if not hit.is_empty(): return hit
+	if describe(id,index).is_empty():return {}
 	Profile.count("g3_sample_cache_misses")
 	var decode_started := Profile.begin()
 	var decoded := preload("res://layers/scene_channels.gd").read(file,entry,objects[id])
-	if decoded.has("error") or decoded.is_empty():fail(decoded.get("error","Scene decode cancelled."));return {}
+	if decoded.has("error") or decoded.is_empty():fail(record_error(entry,decoded.get("error","Scene decode cancelled.")));return {}
 	var channels: Dictionary = decoded.channels;var components: Dictionary = decoded.components;var shapes: Dictionary = decoded.shapes;var associations: Dictionary = decoded.associations;var reserve: int = decoded.reserve
 	Profile.end("g3_channel_decode",decode_started,{"object":id,"sample_index":index,"decoded_bytes":entry.decoded})
 	var count: int = int(shapes.position[0]) if objects[id].kind != "volume" and shapes.has("position") else 0;var has_ids: bool = objects[id].kind == "particles" and channels.has("particle_id");var map
@@ -248,14 +257,14 @@ func _read_sample_profiled(id: String, index: int) -> Dictionary:
 		var identity_started := Profile.begin()
 		var result := Identity.build(channels.particle_id,self)
 		Profile.end("g3_identity_build",identity_started,{"particles":count})
-		if result.is_empty() or result.has("error"): fail(result.get("error","ID decode failed."));return {}
+		if result.is_empty() or result.has("error"): fail(record_error(entry,result.get("error","ID decode failed.")));return {}
 		map = result.map;reserve += count*160
 	if objects[id].kind == "mesh" and channels.has("vertex_id"):
 		var vertex_ids := Identity.build(channels.vertex_id,self)
-		if vertex_ids.is_empty() or vertex_ids.has("error"):fail("Invalid vertex IDs.");return {}
+		if vertex_ids.is_empty() or vertex_ids.has("error"):fail(record_error(entry,"Invalid vertex IDs."));return {}
 	if objects[id].kind == "mesh" and channels.has("triangles"):
 		for i in channels.triangles:
-			if i < 0 or i >= count: fail("Triangle index outside vertices.");return {}
+			if i < 0 or i >= count: fail(record_error(entry,"Triangle index outside vertices."));return {}
 	var data := {"time":entry.time,"count":count,"channels":channels,"components":components,"shapes":shapes,"associations":associations,"geometry":entry.descriptor.geometry,"has_ids":has_ids,"identity_map":map,"source_index":index,"sequence":entry.sequence,"decoded_bytes":reserve}
 	if trusted and _source_stamp_profiled() != source_stamp: fail("Source changed during sample decode.");return {}
 	var publish_started := Profile.begin()

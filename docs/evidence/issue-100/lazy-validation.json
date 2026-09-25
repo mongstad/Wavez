@@ -1,0 +1,494 @@
+{
+  "issue": 100,
+  "pr": 101,
+  "date": "2026-09-25",
+  "status": "Pending owner review",
+  "baseline": "d42a4dcd295718357d7bca068e57b1b644311c75",
+  "initial_pr_commit": "f8e2c80f402765652a83bb3d663e1478e76da5a7",
+  "method": "Serial native warm-filesystem-cache runs, Godot 4.7.2, RTX 3070 Ti, 1280x800. Timed viewer tree attachment includes UI construction/open, excludes process startup/import and external integrity hashes. Controls measured using an actual Input.parse_input_event mouse press/release on Play after first draw. Background checkpoints while paused; request availability uses the normal asynchronous sampler.",
+  "renderers": {
+    "forward_plus": {
+      "open_ms": 860.106,
+      "first_draw_ms": 878.234,
+      "controls_responsive_ms": 878.841,
+      "controls_responsive": true,
+      "ready": true,
+      "background_progress": [
+        {
+          "after_first_scene_ms": 0.6759999999999309,
+          "field_prepared_frames": 0,
+          "interaction_blocked": false,
+          "particle_prepared_pairs": 0,
+          "particle_requested_pairs": 8
+        },
+        {
+          "after_first_scene_ms": 255.43099999999993,
+          "field_prepared_frames": 0,
+          "interaction_blocked": false,
+          "particle_prepared_pairs": 3,
+          "particle_requested_pairs": 8
+        },
+        {
+          "after_first_scene_ms": 1005.6929999999999,
+          "field_prepared_frames": 2,
+          "interaction_blocked": false,
+          "particle_prepared_pairs": 8,
+          "particle_requested_pairs": 8
+        },
+        {
+          "after_first_scene_ms": 2007.085,
+          "field_prepared_frames": 4,
+          "interaction_blocked": false,
+          "particle_prepared_pairs": 8,
+          "particle_requested_pairs": 8
+        }
+      ],
+      "request_latencies": [
+        {
+          "available_ms": 18.386,
+          "time": 0.1
+        },
+        {
+          "available_ms": 660.835,
+          "time": 30.8
+        },
+        {
+          "available_ms": 624.763,
+          "time": 61.6
+        },
+        {
+          "available_ms": 506.983,
+          "time": 0.0
+        }
+      ],
+      "open_memory": {
+        "VmHWM": 749441024,
+        "VmRSS": 749441024,
+        "VmSwap": 0
+      },
+      "memory": {
+        "VmHWM": 993431552,
+        "VmRSS": 993431552,
+        "VmSwap": 0
+      },
+      "index_state": "lazy record index",
+      "first_field": {
+        "free_collapse_field": {
+          "gpu_bytes": 8388608,
+          "hashes": {
+            "density": "3f4e3485fb24fe75afc2b722ab9bf4e19052df2d422b1b3291dba097dc5e0ba2",
+            "psi_imag": "7acb05c99d279522a374ed23e20ac9614117ca851ec0a0ce3bf38c3bebd82935",
+            "psi_real": "baaec5d00503ec98880761d4bb977b8acf3006dbee3fe2bb557fce23a9835d22"
+          },
+          "lod": 1,
+          "statistics": {
+            "finite": 2097152,
+            "maximum": 0.422494113445282,
+            "minimum": 0.0,
+            "nonfinite": 0,
+            "nonpositive": 696448
+          }
+        }
+      },
+      "exercise": {
+        "clock_0.0": true,
+        "clock_0.1": true,
+        "clock_30.8": true,
+        "clock_61.6": true,
+        "field_cpu_bound": true,
+        "field_staging_bound": true,
+        "initial": true,
+        "particle_bounds": true,
+        "pause": true,
+        "paused_clock": true,
+        "play": true,
+        "resume": true,
+        "seek_0.0": true,
+        "seek_0.1": true,
+        "seek_30.8": true,
+        "seek_61.6": true
+      },
+      "objects": {
+        "free_collapse_field": {
+          "first_decoded_bytes": 25165824,
+          "geometry": {
+            "centering": "cell",
+            "origin": [
+              -31.75,
+              -31.75,
+              -31.75
+            ],
+            "shape": [
+              128.0,
+              128.0,
+              128.0
+            ],
+            "spacing": [
+              0.5,
+              0.5,
+              0.5
+            ]
+          },
+          "kind": "volume",
+          "samples": 617
+        },
+        "tracers": {
+          "first_decoded_bytes": 4200000,
+          "geometry": {},
+          "kind": "particles",
+          "samples": 247
+        }
+      },
+      "records": 864,
+      "index_ms": 10.159,
+      "header_scan_ms": 4.694,
+      "initial_requested_descriptors": 3,
+      "first_field_matches_accepted_baseline": true,
+      "particle_strategy": "rolling",
+      "particle_cache": {
+        "cancelled": 0,
+        "completed": 8,
+        "decoded_bytes": 120682944,
+        "decoded_hits": 7,
+        "decoded_misses": 9,
+        "decoded_samples": 9,
+        "desired": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "error": "",
+        "failures": {},
+        "prepared_bytes": 245012992,
+        "prepared_evictions": 0,
+        "prepared_hits": 0,
+        "prepared_misses": 0,
+        "prepared_pairs": 8,
+        "ready_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "trace_dropped": 0,
+        "worker_active": false,
+        "working_index": -1
+      },
+      "particle_limits": {
+        "decoded_limit": 1073741824,
+        "prepared_limit": 1073741824
+      }
+    },
+    "gl_compatibility": {
+      "open_ms": 822.159,
+      "first_draw_ms": 856.495,
+      "controls_responsive_ms": 857.053,
+      "controls_responsive": true,
+      "ready": true,
+      "background_progress": [
+        {
+          "after_first_scene_ms": 0.6159999999999854,
+          "field_prepared_frames": 0,
+          "interaction_blocked": false,
+          "particle_prepared_pairs": 0,
+          "particle_requested_pairs": 8
+        },
+        {
+          "after_first_scene_ms": 253.3180000000001,
+          "field_prepared_frames": 0,
+          "interaction_blocked": false,
+          "particle_prepared_pairs": 3,
+          "particle_requested_pairs": 8
+        },
+        {
+          "after_first_scene_ms": 1003.331,
+          "field_prepared_frames": 2,
+          "interaction_blocked": false,
+          "particle_prepared_pairs": 8,
+          "particle_requested_pairs": 8
+        },
+        {
+          "after_first_scene_ms": 2005.0390000000002,
+          "field_prepared_frames": 3,
+          "interaction_blocked": false,
+          "particle_prepared_pairs": 8,
+          "particle_requested_pairs": 8
+        }
+      ],
+      "request_latencies": [
+        {
+          "available_ms": 21.505,
+          "time": 0.1
+        },
+        {
+          "available_ms": 691.007,
+          "time": 30.8
+        },
+        {
+          "available_ms": 648.941,
+          "time": 61.6
+        },
+        {
+          "available_ms": 513.409,
+          "time": 0.0
+        }
+      ],
+      "open_memory": {
+        "VmHWM": 362696704,
+        "VmRSS": 362696704,
+        "VmSwap": 0
+      },
+      "memory": {
+        "VmHWM": 622055424,
+        "VmRSS": 622055424,
+        "VmSwap": 0
+      },
+      "index_state": "lazy record index",
+      "first_field": {
+        "free_collapse_field": {
+          "gpu_bytes": 8388608,
+          "hashes": {
+            "density": "3f4e3485fb24fe75afc2b722ab9bf4e19052df2d422b1b3291dba097dc5e0ba2",
+            "psi_imag": "7acb05c99d279522a374ed23e20ac9614117ca851ec0a0ce3bf38c3bebd82935",
+            "psi_real": "baaec5d00503ec98880761d4bb977b8acf3006dbee3fe2bb557fce23a9835d22"
+          },
+          "lod": 1,
+          "statistics": {
+            "finite": 2097152,
+            "maximum": 0.422494113445282,
+            "minimum": 0.0,
+            "nonfinite": 0,
+            "nonpositive": 696448
+          }
+        }
+      },
+      "exercise": {
+        "clock_0.0": true,
+        "clock_0.1": true,
+        "clock_30.8": true,
+        "clock_61.6": true,
+        "field_cpu_bound": true,
+        "field_staging_bound": true,
+        "initial": true,
+        "particle_bounds": true,
+        "pause": true,
+        "paused_clock": true,
+        "play": true,
+        "resume": true,
+        "seek_0.0": true,
+        "seek_0.1": true,
+        "seek_30.8": true,
+        "seek_61.6": true
+      },
+      "objects": {
+        "free_collapse_field": {
+          "first_decoded_bytes": 25165824,
+          "geometry": {
+            "centering": "cell",
+            "origin": [
+              -31.75,
+              -31.75,
+              -31.75
+            ],
+            "shape": [
+              128.0,
+              128.0,
+              128.0
+            ],
+            "spacing": [
+              0.5,
+              0.5,
+              0.5
+            ]
+          },
+          "kind": "volume",
+          "samples": 617
+        },
+        "tracers": {
+          "first_decoded_bytes": 4200000,
+          "geometry": {},
+          "kind": "particles",
+          "samples": 247
+        }
+      },
+      "records": 864,
+      "index_ms": 8.969,
+      "header_scan_ms": 3.805,
+      "initial_requested_descriptors": 3,
+      "first_field_matches_accepted_baseline": true,
+      "particle_strategy": "rolling",
+      "particle_cache": {
+        "cancelled": 0,
+        "completed": 8,
+        "decoded_bytes": 120682944,
+        "decoded_hits": 7,
+        "decoded_misses": 9,
+        "decoded_samples": 9,
+        "desired": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "error": "",
+        "failures": {},
+        "prepared_bytes": 245012992,
+        "prepared_evictions": 0,
+        "prepared_hits": 0,
+        "prepared_misses": 0,
+        "prepared_pairs": 8,
+        "ready_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "trace_dropped": 0,
+        "worker_active": false,
+        "working_index": -1
+      },
+      "particle_limits": {
+        "decoded_limit": 1073741824,
+        "prepared_limit": 1073741824
+      }
+    }
+  },
+  "checks": {
+    "playback_forward_plus": {
+      "checks": 2457,
+      "failures": []
+    },
+    "maintenance_forward_plus": {
+      "checks": 66,
+      "failures": []
+    },
+    "lifecycle_forward_plus": {
+      "checks": 51,
+      "failures": []
+    },
+    "field_oracle_forward_plus": {
+      "checks": 32,
+      "failures": []
+    },
+    "field_budget_forward_plus": {
+      "checks": 56,
+      "failures": []
+    },
+    "opacity_forward_plus": {
+      "checks": 98,
+      "failures": [],
+      "export": {
+        "completed": true,
+        "identical_pixels": true,
+        "mapping_in_sidecar": true,
+        "source_unchanged": true
+      }
+    },
+    "playback_gl_compatibility": {
+      "checks": 2457,
+      "failures": []
+    },
+    "maintenance_gl_compatibility": {
+      "checks": 66,
+      "failures": []
+    },
+    "lifecycle_gl_compatibility": {
+      "checks": 51,
+      "failures": []
+    },
+    "field_oracle_gl_compatibility": {
+      "checks": 32,
+      "failures": []
+    },
+    "field_budget_gl_compatibility": {
+      "checks": 56,
+      "failures": []
+    },
+    "opacity_gl_compatibility": {
+      "checks": 98,
+      "failures": [],
+      "export": {
+        "completed": true,
+        "identical_pixels": true,
+        "mapping_in_sidecar": true,
+        "source_unchanged": true
+      }
+    },
+    "identity_grammar": {
+      "checks": 26406,
+      "failures": []
+    },
+    "mesh": {
+      "checks": 2731,
+      "failures": []
+    },
+    "multichunk": {
+      "checks": 48,
+      "failures": []
+    },
+    "lazy_headless": {
+      "checks": 217,
+      "failures": []
+    },
+    "recipe_restore": {
+      "checks": 2697,
+      "failures": []
+    },
+    "storage_interop": {
+      "checks": 109,
+      "failures": []
+    },
+    "python_storage": {
+      "tests": 5,
+      "failures": []
+    },
+    "explicit_verifier": {
+      "valid_captures": 3,
+      "rejected_corrupt_captures": 15,
+      "source_bytes_unchanged": true
+    },
+    "lazy_forward_plus": {
+      "checks": 217,
+      "failures": [],
+      "native_log_clean": true,
+      "source_bytes_unchanged": true
+    },
+    "lazy_gl_compatibility": {
+      "checks": 217,
+      "failures": [],
+      "native_log_clean": true,
+      "source_bytes_unchanged": true
+    }
+  },
+  "source": {
+    "path": "/home/Nozba/Documents/VB_FreeCollapse_v0_2/VB_FreeCollapse_v0_2/runs_free_collapse_v0_2/S0_20260925_060202_938955/free_collapse_simscope.ssc",
+    "bytes": 14878413684,
+    "sha256": "c76d2cc2e9909dcfac5ed90a5526c8873cafb4b3d0d37ea949b135fe4a27e22a",
+    "unchanged": true
+  },
+  "limitations": [
+    "Warm cache only; no cold-cache SSD benchmark, OS executable/import latency or production 192^3 comparison.",
+    "Full fixed-header scan remains necessary for the unindexed SSC clock and safe record location; descriptors/payloads are lazy.",
+    "Initial visible sample decode/statistics/texture creation is synchronous. Uncached seeks may buffer; camera/UI remain usable.",
+    "Earlier volume-color run had two of 138 assertions failing per renderer; both reproduced on accepted main d42a4dc. No color-shader changes; independent opacity/MP4 tests pass.",
+    "Initial lazy profiling harness did not pump the controller between direct samples; fixed by clearing readiness after successful acquire. Initial lifecycle expectation of four startup pairs updated to the authorized rolling policy.",
+    "Initial Compatibility lazy-test assertions passed but destroying viewers before their first draw emitted GL texture warnings. Waiting for that first draw in the test harness fixes cleanup; final native run is clean."
+  ]
+}

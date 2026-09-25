@@ -67,7 +67,9 @@ func setup(scene, source) -> void:
 		if obj.kind == "particles": particle_id = id;continue
 		if obj.kind == "volume":
 			var view := GridView.new();add_child(view);view.setup(viewer.camera);views[id] = view
-			var channel: String = reader.samples[id][0].descriptor.arrays[0].name if not reader.samples[id].is_empty() else ""
+			var first: Dictionary = reader.bracket(id,reader.frames[0].time) if not reader.frames.is_empty() else {}
+			var descriptor: Dictionary = reader.describe(id,first.a) if selected_volume.is_empty() and not first.is_empty() else {}
+			var channel: String = descriptor.arrays[0].name if not descriptor.is_empty() else ""
 			states[id] = {"visible":selected_volume.is_empty(),"channel":channel,"volume":true,"slice":false,"lower":0.0,"upper":1.0,"opacity":.25,"step":.5,"colormap":"viridis","slice_normal":[0.0,0.0,1.0],"slice_distance":0.0,"clip":false,"clip_normal":[1.0,0.0,0.0],"clip_distance":0.0,"threshold":.5,"isosurface":false}
 			states[id].opacity_mapping = Opacity.DEFAULT.duplicate()
 			states[id].color_mapping = ColorMapping.DEFAULT.duplicate()
@@ -135,6 +137,10 @@ func sample(time: float, asynchronous := false, force_particles := false) -> Dic
 func _sample_profiled(time: float, asynchronous: bool, force_particles: bool) -> Dictionary:
 	if not refresh() or reader.frames.is_empty(): return {}
 	if time < reader.frames[0].time or time > reader.frames[-1].time: error = "Scene time outside recorded range.";return {}
+	# Default channels for newly visible/available fields are resolved only at
+	# the requested time; hidden layers and future schemas do not delay opening.
+	for id in states:
+		if states[id].visible and not ensure_channel(id,time):return {}
 	var need_particles := force_particles or particles_required()
 	var buffered := {}
 	if asynchronous and playback.enabled and use_async() and need_particles and not reader.bracket(particle_id,time).is_empty():
@@ -239,6 +245,7 @@ func _sample_profiled(time: float, asynchronous: bool, force_particles: bool) ->
 				if not view.load_sample(obj,a,states[id].channel,field_budget(),fields.get(id,{}) if fields.get(id,{}).has("texture") else {}):
 					info.status = "unavailable";info.reason = view.error
 				else:
+					_note_channels(id,a)
 					view.apply(states[id],lut(states[id].colormap));info.display_lod = "float32 / stride %d" % view.lod
 					info.channel = states[id].channel;info.geometry = a.geometry
 					info.color_compositing = "Compatibility sRGB framebuffer" if RenderingServer.get_current_rendering_method() == "gl_compatibility" else "Forward+ linear framebuffer"
@@ -250,6 +257,7 @@ func _sample_profiled(time: float, asynchronous: bool, force_particles: bool) ->
 					if not view.color_error.is_empty():info.status = "unavailable";info.reason = view.color_error
 					info.numeric_precision = str(a.channels[states[id].channel].get_class()) if a.channels[states[id].channel] is Object else ("float64 source" if a.channels[states[id].channel] is PackedFloat64Array else "float32 source")
 			else:
+				_note_channels(id,a)
 				var view = views[id]
 				var status: String = view.apply_prepared(meshes[id],meshes[id].key,point.alpha,states[id].visible) if meshes.has(id) else view.load_samples(obj,a,b,point.alpha,states[id],layer_budget,viewer.colormaps[states[id].colormap])
 				if status == "unavailable": info.status = status;info.reason = view.error
@@ -285,6 +293,31 @@ func lut(name: String) -> Texture2D:
 	var image := Image.create(256,1,false,Image.FORMAT_RGB8)
 	for i in range(256): var c: Array = viewer.colormaps[name][i];image.set_pixel(i,0,Color(c[0],c[1],c[2]))
 	luts[name] = ImageTexture.create_from_image(image);return luts[name]
+func ensure_channel(id: String, time: float) -> bool:
+	if reader.objects[id].kind != "volume" or not states[id].channel.is_empty():return true
+	var point: Dictionary = reader.bracket(id,time)
+	if point.is_empty():return true
+	var descriptor: Dictionary = reader.describe(id,point.a)
+	if descriptor.is_empty():fail_playback(reader.error);return false
+	states[id].channel = descriptor.arrays[0].name
+	if id == selected_volume and probe_channel.is_empty():probe_channel = states[id].channel
+	return true
+func _note_channels(id: String, data: Dictionary) -> void:
+	reader.note_channels(id,data)
+	if not panel_controls.has(id) or not panel_controls[id].has("channel"):return
+	var choice: OptionButton = panel_controls[id].channel
+	var names := {}
+	for i in choice.item_count:names[choice.get_item_metadata(i)] = true
+	for name in data.channels:
+		if names.has(name) or (reader.objects[id].kind == "mesh" and (data.shapes[name].size() != 1 or name == "vertex_id")):continue
+		choice.add_item(name);choice.set_item_metadata(choice.item_count-1,name)
+	if id == selected_volume and is_instance_valid(probe_channel_choice):
+		var known := {}
+		for i in probe_channel_choice.item_count:known[probe_channel_choice.get_item_text(i)] = true
+		for name in data.channels:
+			if not known.has(name):probe_channel_choice.add_item(name)
+func fail_playback(message: String) -> void:
+	viewer.playing = false;error = message;viewer.status_label.text = message
 func resample() -> void:
 	particle_key = ""
 	var result := sample(viewer.requested_time,use_async())
@@ -479,9 +512,8 @@ func _build_ui() -> void:
 		var channel: OptionButton = viewer._option(colors,"Channel");panel_controls[id].channel = channel
 		if reader.objects[id].kind == "mesh":channel.add_item("Fixed mesh color");channel.set_item_metadata(0,"")
 		var channel_names := {}
-		for row in reader.samples[id]:
-			for a in row.descriptor.arrays:
-				if reader.objects[id].kind == "volume" or (a.shape.size() == 1 and a.name != "vertex_id"):channel_names[a.name] = true
+		for a in reader.known_arrays(id):
+			if reader.objects[id].kind == "volume" or (a.shape.size() == 1 and a.name != "vertex_id"):channel_names[a.name] = true
 		for name in channel_names:
 			channel.add_item(name);channel.set_item_metadata(channel.item_count-1,name)
 		for i in range(channel.item_count):
@@ -596,8 +628,7 @@ func refresh_probe_channels() -> void:
 	probe_channel_choice.clear()
 	if selected_volume.is_empty():return
 	var channels := {}
-	for row in reader.samples[selected_volume]:
-		for array in row.descriptor.arrays:channels[array.name] = true
+	for array in reader.known_arrays(selected_volume):channels[array.name] = true
 	for channel in channels:probe_channel_choice.add_item(channel)
 	if not channels.has(probe_channel):probe_channel = states[selected_volume].channel
 	for i in probe_channel_choice.item_count:
@@ -628,7 +659,7 @@ func upgrade_state(value: Dictionary) -> Dictionary:
 		if reader.objects.has(id) and reader.objects[id].kind == "volume" and layer is Dictionary and not layer.has("color_mapping"):
 			layer.color_mapping = ColorMapping.DEFAULT.duplicate()
 	return upgraded
-func validate_state(value) -> String:
+func validate_state(value, requested_time = null) -> String:
 	if not value is Dictionary or not value.get("layers") is Dictionary or not Reader.Index.whole(value.get("gpu_budget_mib")) or value.gpu_budget_mib < 1 or value.gpu_budget_mib > 2048: return "Invalid layer budget/state."
 	if not value.get("legend_visibility",{}) is Dictionary: return "Invalid legend preferences."
 	for id in value.get("legend_visibility",{}):
@@ -641,10 +672,12 @@ func validate_state(value) -> String:
 		if not incoming is Dictionary or incoming.size() != states[id].size():return "Invalid layer state fields."
 		for key in states[id]:
 			if not incoming.has(key) or not preload("res://scene/inspection_state.gd").shape(incoming[key],states[id][key]):return "Invalid layer state: "+key
-		var names := {"":true} if reader.objects[id].kind == "mesh" else {}
-		for row in reader.samples[id]:
-			for a in row.descriptor.arrays:
-				if reader.objects[id].kind == "volume" or (a.shape.size() == 1 and a.name != "vertex_id"):names[a.name] = true
+		var names := {"":true} if reader.objects[id].kind == "mesh" or not incoming.visible else {}
+		# Recipe application is an explicit request; resolve its requested-time schema.
+		var point: Dictionary = reader.bracket(id,viewer.requested_time if requested_time == null else float(requested_time))
+		if not point.is_empty() and not incoming.channel.is_empty():reader.describe(id,point.a)
+		for a in reader.known_arrays(id):
+			if reader.objects[id].kind == "volume" or (a.shape.size() == 1 and a.name != "vertex_id"):names[a.name] = true
 		if not names.has(incoming.channel):return "Unknown layer scalar channel."
 		if incoming.upper <= incoming.lower or not viewer.colormaps.has(incoming.colormap):return "Invalid layer range/colormap."
 		if reader.objects[id].kind == "volume":

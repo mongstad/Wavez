@@ -1028,11 +1028,15 @@ func _open_scene(path: String) -> void:
 	_set_timeline_extent()
 	if frame_count == 0: status_label.text = "Waiting for a complete scene sample.";return
 	requested_time = reader.frames[0].time
-	scene_layers.sample(requested_time)
+	var initial: Dictionary = scene_layers.sample(requested_time)
+	if initial.is_empty():
+		_shell_open_error = scene_layers.error;status_label.text = _shell_open_error;return
 	scene_layers.frame_scene()
 	_build_guides();_apply_geometry();_update_camera();_sync_visuals();_sync_inspection_controls()
 	status_label.text = "Loaded %s • SIMSCP3 • %d layer samples" % [path.get_file(),reader.records.size()]
-	scene_layers.playback.begin(requested_time)
+	# The synchronous initial sample is already usable; its rolling request was
+	# submitted by sample(). Background preparation must not gate interaction.
+	scene_layers.playback._update_ui()
 	_update_hud()
 
 func _frame_from_data(data: Dictionary, index: int) -> FrameData:

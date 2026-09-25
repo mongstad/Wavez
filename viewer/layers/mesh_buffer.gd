@@ -1,5 +1,6 @@
 extends RefCounted
 # One private CPU thread; immutable publication, independent file handle, finite LRU.
+const Reader = preload("res://layers/scene_reader.gd")
 const Channels = preload("res://layers/scene_channels.gd")
 const Prepare = preload("res://layers/mesh_prepare.gd")
 const Stamp = preload("res://data/source_stamp.gd")
@@ -17,6 +18,7 @@ var order: Array[String] = []
 var used := 0
 var limit := 128*Memory.MIB
 var error := ""
+var failures := {}
 var completed := 0
 var cancelled := 0
 var evictions := 0
@@ -29,7 +31,12 @@ func close() -> void:
 	mutex.lock();closing = true;mutex.unlock();wake.post()
 	if thread.is_started():thread.wait_to_finish()
 func request(next_token: String, next_jobs: Array, bytes: int) -> void:
-	mutex.lock();token = next_token;jobs = next_jobs;limit = bytes;error = "";mutex.unlock();wake.post()
+	mutex.lock()
+	if token != next_token:failures.clear()
+	token = next_token;jobs = next_jobs;limit = bytes;error = ""
+	for old in failures.keys():
+		if not jobs.any(func(job):return job.key == old):failures.erase(old)
+	mutex.unlock();wake.post()
 func cancel() -> void:
 	mutex.lock();token += "!";jobs = [];mutex.unlock();wake.post()
 func stopped() -> bool:
@@ -41,7 +48,7 @@ func get_frame(key: String) -> Dictionary:
 	mutex.unlock();return value
 func status() -> Dictionary:
 	mutex.lock()
-	var result := {"bytes":used,"limit":limit,"frames":prepared.size(),"completed":completed,"cancelled":cancelled,"evictions":evictions,"worker_ms":worker_ms,"worker_thread":worker_thread,"active":not working_key.is_empty(),"error":error,"test_barrier_waiting":at_barrier}
+	var result := {"bytes":used,"limit":limit,"frames":prepared.size(),"completed":completed,"cancelled":cancelled,"evictions":evictions,"worker_ms":worker_ms,"worker_thread":worker_thread,"active":not working_key.is_empty(),"error":error,"failures":failures.duplicate(),"test_barrier_waiting":at_barrier}
 	mutex.unlock();return result
 func _prune(incoming: int, key: String) -> bool:
 	var retired: Array = []
@@ -58,7 +65,7 @@ func _next() -> Dictionary:
 	mutex.lock();var next := {}
 	if not closing:
 		for job in jobs:
-			if not prepared.has(job.key) or prepared[job.key].token != token:
+			if not failures.has(job.key) and (not prepared.has(job.key) or prepared[job.key].token != token):
 				next = job;working_key = job.key;working_token = token;break
 	mutex.unlock();return next
 func _run() -> void:
@@ -97,7 +104,7 @@ func _run() -> void:
 			var obsolete := stopped()
 			mutex.lock()
 			if obsolete or token != working_token or closing:cancelled += 1
-			elif result.has("error"):error = result.error;jobs = []
+			elif result.has("error"):failures[job.key] = result.error
 			elif not result.is_empty():
 				result.token = working_token;result.bytes = job.charge;prepared[job.key] = result;order.append(job.key);used += job.charge;completed += 1
 			worker_ms += (Time.get_ticks_usec()-began)/1000.0;working_key = ""
@@ -107,15 +114,18 @@ func _run() -> void:
 	prepared.clear();order.clear()
 
 func _decode(file: FileAccess, entry: Dictionary, obj: Dictionary) -> Dictionary:
+	entry = Reader.materialize(file,entry,obj)
+	if entry.has("error"):return entry
 	var decoded := Channels.read(file,entry,obj,self)
-	if decoded.is_empty() or decoded.has("error"):return decoded
+	if decoded.has("error"):return {"error":Reader.record_error(entry,decoded.error)}
+	if decoded.is_empty():return decoded
 	var count: int = int(decoded.shapes.position[0])
 	if decoded.channels.has("vertex_id"):
 		var ids := preload("res://data/particle_identity.gd").build(decoded.channels.vertex_id,self)
 		if ids.is_empty():return {}
-		if ids.has("error"):return {"error":"Invalid vertex IDs."}
+		if ids.has("error"):return {"error":Reader.record_error(entry,"Invalid vertex IDs.")}
 	var indices: PackedInt32Array = decoded.channels.triangles
 	for i in range(indices.size()):
 		if i % 4096 == 0 and stopped():return {}
-		if indices[i] < 0 or indices[i] >= count:return {"error":"Triangle index outside vertices."}
+		if indices[i] < 0 or indices[i] >= count:return {"error":Reader.record_error(entry,"Triangle index outside vertices.")}
 	return {"time":entry.time,"count":count,"channels":decoded.channels,"components":decoded.components,"shapes":decoded.shapes,"associations":decoded.associations,"geometry":entry.descriptor.geometry,"has_ids":false,"identity_map":null,"source_index":entry.index,"sequence":entry.sequence,"decoded_bytes":decoded.reserve}

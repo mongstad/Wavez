@@ -12,11 +12,14 @@ Independent legend visibility and placement were owner-merged in PR #91 at `d11e
 Independent layer legends were owner-merged in PR #92 at `9774623`.
 Adaptive field preparation capacity was owner-merged in PR #99 at `d42a4dc`.
 Current authorized work is #100, the top Ready item verified on 2026-09-25:
-[SSC loading/preparation profiling](SSC_LOAD_PERFORMANCE.md), **pending owner review**.
-The owner-confirmed 13.86 GiB capture records 128³ fields. Profiling identified
-particle identity-map rebuilding and descriptor validation overhead; focused
-reuse/native validation reduces startup time and actual RSS while preserving
-preload policy, scientific values and the accepted field memory safeguards.
+[Lazy SSC startup and deferred loading](SSC_LAZY_LOADING.md), **pending owner review** in PR #101.
+The owner-confirmed 13.86 GiB capture records 128³ fields. Normal opening now
+indexes bounded record headers and loads the first visible scene; requested
+records are validated and decoded on demand or within bounded background windows.
+Automatic particle preparation no longer preloads the full timeline or gates the
+first usable scene. Exact identity-map reuse and native descriptor predicates
+remain from the initial profiling change. Comprehensive verification is explicit
+through `python tools/verify_ssc.py CAPTURE.ssc`.
 Historical reports and evidence retain their original review-time wording.
 
 As of **2026-09-20**, including G4 and PERF-001/002 maintenance reviewed and accepted by the user. Scientific simulations were not rerun. Historical results identify their recorded checkpoints. PERF-003 mesh maintenance was also reviewed and accepted by the owner on 2026-09-13; implementation checkpoint `7974c78`.
@@ -37,7 +40,7 @@ The slider bug was reproduced on independent particle/volume cadences and a reta
 
 The prior investigation associated all **113 callbacks above 50 ms** with particle source-pair changes, while the nominal one-second tail poll stayed below 3.1 ms. The focused optimization now skips unneeded hidden-particle work and prepares visible particle pairs on a CPU worker. On the exact retained `complete.ssc`, median visible transitions fell from **177–181 ms to about 20 ms**, and hidden transitions to about 2.6 ms. Both renderers had zero ≥50 ms callbacks in the final matrix and longer replenishment, 2× speed and loop controls. Cold startup and uncached seeks explicitly buffer; they do not synchronously rebuild the pair on the UI callback. All **3,168 regression checks and 122 performance assertions passed**, including deterministic visible/hidden video equality. These are retained historical measurements; current maintenance reports supersede the old investigation files.
 
-Automatic particle buffering estimates the full decoded/prepared capture, adds a 25% margin and transient working space, and selects full preload only within conservative physical-RAM headroom. Automatic full mode waits for all pairs before Play. Larger captures use an at-most-2-GiB rolling cache with a four-pair startup and up to eight pairs ahead; manual budgets and explicit safe full preload remain available. Fields use a separate bounded CPU preparation queue and one staged future texture per visible field, with at most one main-thread upload per process frame. Source values and independent physical clocks are preserved. Retained 02B/03B before/after measurements, memory limits and validation are in the [maintenance report](PERFORMANCE_MAINTENANCE_REPORT.md).
+Automatic particle buffering uses a rolling cache capped at 2 GiB and physical-RAM headroom, with up to eight requested pairs. First display and controls do not wait for that window. Uncached seeks wait only for the requested samples and retain the last committed scene. Fields and meshes retain separate bounded CPU workers, at most four future samples/pairs per visible layer, and one staged GPU resource. Later corrupt requested records pause playback and identify their object, sample and record. The [lazy loading report](SSC_LAZY_LOADING.md) supersedes the startup policy described in the historical [maintenance report](PERFORMANCE_MAINTENANCE_REPORT.md).
 
 Representative external captures informed G3 timeline/playback validation. Scientific interpretation remains outside SimScope and is not a product result or dependency.
 

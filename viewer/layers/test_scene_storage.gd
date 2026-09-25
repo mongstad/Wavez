@@ -26,10 +26,11 @@ func _initialize() -> void:
 	var a := r.read_sample("field",0);var original: float = a.channels.f[0];a.channels.f[0] = -999;a.geometry.shape[0] = 999;a.shapes.f[0] = 888
 	var again := r.read_sample("field",0)
 	check(again.channels.f[0] == original and again.geometry.shape[0] == 35 and r.records[0].descriptor.geometry.shape[0] == 35,"Caller cannot mutate cached values or trusted geometry")
-	check(r.open(source) and r.index_state == "validated index","Disposable index revalidated")
+	check(r.open(source) and r.index_state == "lazy record index" and r.records[0].descriptor.is_empty(),"Open indexes headers without descriptor validation")
 	var index_path := r.cache_dir.path_join(r.source_path.sha256_text()+".sidx3.json")
+	DirAccess.make_dir_recursive_absolute(r.cache_dir)
 	var f := FileAccess.open(index_path,FileAccess.WRITE);f.store_string("corrupt");f.close()
-	check(r.open(source) and r.index_state == "rebuilt index","Corrupt disposable index rebuilt")
+	check(r.open(source) and r.index_state == "lazy record index","Legacy disposable index is ignored without startup parsing or writes")
 	var bytes := FileAccess.get_file_as_bytes(source);var path := base.path_join("storage-working.ssc")
 	f = FileAccess.open(path,FileAccess.WRITE);f.store_buffer(bytes.slice(0,bytes.size()-20));f.close()
 	check(r.open(path) and r.records.size() == 1,"Interrupted final commit remains unavailable")

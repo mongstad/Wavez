@@ -18,21 +18,21 @@ func run() -> void:
 		if arg.begins_with("--playback-fixture="):out = arg.trim_prefix("--playback-fixture=")
 	if out.is_empty():push_error("Missing fixture");quit(1);return
 	var view = make_view(out.path_join("ids.ssc"),true)
-	check(view.play_button.disabled,"startup Play waits for minimum preparation")
+	check(view.play_button.disabled,"style change waits only for its newly requested pair")
 	check(await await_ready(view),"automatic startup completes safe preparation")
 	check(not view.play_button.disabled and view.requested_time==0,"startup enables Play with unchanged source time")
-	check(view.scene_layers.playback.worker.status().prepared_pairs>=4,"minimum useful startup window")
+	check(view.scene_layers.playback.worker.status().desired.size()<=8,"bounded startup lookahead")
 	# Pre-retirement native v2 recipes serialized this hidden visual value.
 	var native_recipe := preload("res://scene/inspection_state.gd").snapshot(view)
 	native_recipe.visual.intensity_floor = .125
 	native_recipe.visual.sliders["Intensity cutoff"] = .125
 	check(preload("res://scene/inspection_state.gd").restore(view,native_recipe).is_empty() and view.requested_time==0,"existing native recipe fields restore after obsolete controls are removed")
 	view.scene_layers.playback.set_policy("full")
-	check(await await_ready(view),"safe full preload permits startup before all pairs")
+	check(await await_ready(view),"legacy full setting requires only current pair")
 	var start := Time.get_ticks_msec()
-	while view.scene_layers.playback.worker.status().prepared_pairs<9 and Time.get_ticks_msec()-start<10000:await process_frame
-	check(view.scene_layers.playback.worker.status().prepared_pairs==9,"safe full particle preload completes")
-	check(view.current_mm.instance_count==3,"full preload does not create extra GPU particle instances")
+	while view.scene_layers.playback.worker.status().prepared_pairs<control_window(view) and Time.get_ticks_msec()-start<10000:await process_frame
+	check(view.scene_layers.playback.worker.status().prepared_pairs<=8 and not view.scene_layers.playback.full_preload,"legacy full policy uses bounded rolling preparation")
+	check(view.current_mm.instance_count==3,"rolling cache does not create extra GPU particle instances")
 	var control = view.scene_layers.playback
 	var entry: Dictionary = control.context.entries[0].duplicate(true)
 	entry.decoded = 256*1048576
@@ -40,7 +40,7 @@ func run() -> void:
 	var fake: Array = []
 	for i in range(40):fake.append(entry)
 	control._budgets(fake,control.settings())
-	check(not control.full_preload and "exceeds safe RAM" in control.budget_message,"unsafe full-preload estimate falls back without payload allocation")
+	check(not control.full_preload and control.window_pairs <= 8,"large estimates never enable exhaustive preload")
 	control.set_policy("adaptive");check(await await_ready(view),"adaptive mode recovers after estimate-only refusal")
 	view.playing = true;view.physical_rate = -.5
 	check(await sample(view,2.125,true),"reverse playback starting pair")
@@ -128,3 +128,5 @@ func run() -> void:
 	Job.write_json(out.path_join("lifecycle-results.json"),{"checks":checks,"failures":failures})
 	print("G3 PLAYBACK LIFECYCLE: ",checks," checks, ",failures.size()," failures")
 	quit(0 if failures.is_empty() else 1)
+
+func control_window(view) -> int:return view.scene_layers.playback.window_pairs

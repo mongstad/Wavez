@@ -41,6 +41,7 @@ func run() -> void:
 	var reader := Reader.new();check(reader.open(out.path_join("identity.ssc")),"Open identity fixture")
 	var previous := {};var worker := Worker.new()
 	for index in range(4):
+		reader.describe("p",index)
 		var entry: Dictionary = reader.samples.p[index];var descriptors: Array = []
 		for a in entry.descriptor.arrays:descriptors.append({"name":a.name,"dtype":a.dtype,"components":int(a.shape[1]) if a.shape.size()==2 else 1,"required":true,"chunks":a.chunks})
 		var descriptor := {"offset":entry.offset,"time":entry.time,"count":3,"has_ids":true,"channels":descriptors}

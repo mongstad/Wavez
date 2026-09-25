@@ -56,10 +56,10 @@ func _job(id: String, index: int, budget: int) -> Dictionary:
 	var entry: Dictionary = layers.reader.samples[id][index]
 	var state: Dictionary = layers.states[id]
 	var obj: Dictionary = layers.reader.objects[id]
-	var size := 0
-	for array in entry.descriptor.arrays:
+	var size: int = entry.decoded # Conservative until this descriptor is requested.
+	for array in entry.descriptor.get("arrays",[]):
 		if array.name == state.channel:size = int(array.shape[0])*int(array.shape[1])*int(array.shape[2])*4
-	return {"key":Grid.sample_key(obj,entry.sequence,state.channel,budget),"id":id,"entry":entry,"object":obj,"channel":state.channel,"budget":budget,"decoded_charge":int(entry.decoded),"preview_charge":mini(size,budget),"charge":int(entry.decoded)+mini(size,budget)+65536,"path":layers.reader.source_path,"stamp":layers.reader.source_stamp}
+	return {"key":Grid.sample_key(obj,entry.sequence,state.channel,budget),"id":id,"entry":entry.duplicate(true),"object":obj,"channel":state.channel,"budget":budget,"decoded_charge":int(entry.decoded),"preview_charge":mini(size,budget),"charge":int(entry.decoded)+mini(size,budget)+65536,"path":layers.reader.source_path,"stamp":layers.reader.source_stamp}
 func request(time: float, budget: int) -> Array:
 	var signature := str(layers.reader.generation)+JSON.stringify(layers.reader.source_stamp)+str(budget)
 	for id in layers.states:
@@ -132,6 +132,8 @@ func request(time: float, budget: int) -> Array:
 func acquire(time: float, budget: int) -> Dictionary:
 	var targets := request(time,budget);var result := {};var ready := true # A failed future prefetch must not block an already resident sample.
 	for job in targets:
+		var failure: String = worker.status().get("failures",{}).get(job.key,"")
+		if not failure.is_empty():error = failure;layers.fail_playback(failure)
 		var view = layers.views[job.id]
 		if view.key == job.key:result[job.id] = {"sample":view.data}
 		elif staged.has(job.id) and staged[job.id].key == job.key:result[job.id] = staged[job.id]
