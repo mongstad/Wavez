@@ -16,14 +16,14 @@ static func parse_json(text: String):
 	return parsed.data
 static func valid_hex(value, length: int) -> bool:
 	if not value is String or value.length() != length: return false
-	for c in value:
-		if c not in "0123456789abcdef": return false
-	return true
+	if value.is_empty(): return true
+	# Native string validation avoids a script iteration for every checksum digit.
+	# Keep the exact lowercase, unsigned wire representation (no signs/prefixes).
+	return value.is_valid_hex_number(false) and value == value.to_lower() and not value.begins_with("+") and not value.begins_with("-") and not value.begins_with("0x")
 
 static func decimal(value) -> int:
 	if not value is String or value.is_empty() or value.length() > 19: return -1
-	for c in value:
-		if c not in "0123456789": return -1
+	if not value.is_valid_int(): return -1
 	var result := int(value)
 	if result < 0 or str(result) != value: return -1
 	return result

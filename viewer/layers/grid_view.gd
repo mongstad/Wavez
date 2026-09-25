@@ -1,4 +1,5 @@
 extends Node3D
+const Profile = preload("res://scene/playback_profile.gd")
 const Reader = preload("res://layers/scene_reader.gd")
 var quad: MeshInstance3D
 var slice := MeshInstance3D.new()
@@ -35,8 +36,10 @@ static func sample_key(obj: Dictionary, sequence: int, selected: String, budget:
 static func upload(prepared: Dictionary) -> Dictionary:
 	if prepared.is_empty() or prepared.has("error"):return prepared
 	var result := prepared.duplicate()
+	var upload_started := Profile.begin()
 	var next := ImageTexture3D.new();var reduced: Vector3i = prepared.reduced
 	if next.create(Image.FORMAT_RF,reduced.x,reduced.y,reduced.z,false,prepared.planes) != OK:return {"error":"Volume GPU allocation failed; preview released."}
+	Profile.end("g3_field_texture_upload",upload_started)
 	result.erase("planes");result.texture = next
 	return result
 func load_sample(obj: Dictionary, sample: Dictionary, selected: String, budget: int, staged: Dictionary = {}) -> bool:
@@ -44,7 +47,12 @@ func load_sample(obj: Dictionary, sample: Dictionary, selected: String, budget: 
 	if key == target:return true
 	clear();error = ""
 	var ready := staged
-	if ready.is_empty():ready = upload(preload("res://layers/field_prepare.gd").prepare(obj,sample,selected,budget))
+	if ready.is_empty():
+		var prepare_started := Profile.begin()
+		var prepared := preload("res://layers/field_prepare.gd").prepare(obj,sample,selected,budget)
+		Profile.end("g3_field_cpu_prepare",prepare_started)
+		for stage in prepared.get("timings",{}):Profile.observe("g3_field_"+stage,prepared.timings[stage])
+		ready = upload(prepared)
 	if ready.is_empty() or ready.has("error"):error = ready.get("error","Field preparation cancelled.");return false
 	texture = ready.texture;lod = ready.lod;gpu_bytes = ready.gpu_bytes;color_stats = ready.color_stats
 	object = obj;data = sample;channel = selected;key = target

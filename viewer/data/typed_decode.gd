@@ -36,7 +36,7 @@ static func zstd_header(bytes: PackedByteArray, expected: int) -> bool:
 	if descriptor&4: offset += 4
 	return offset == bytes.size()
 
-static func read(file: FileAccess, entry: Dictionary, worker) -> Dictionary:
+static func read(file: FileAccess, entry: Dictionary, worker, identity_reference: Dictionary = {}) -> Dictionary:
 	var channels := {};var components := {};var unavailable: Array = [];var used: int = 4096+entry.channels.size()*256
 	var id_map
 	for d in entry.channels:
@@ -84,9 +84,20 @@ static func read(file: FileAccess, entry: Dictionary, worker) -> Dictionary:
 		components[d.name] = int(d.components)
 		used += entry.count*int(d.components)*(4 if d.dtype == "f4" else 8)
 		if d.name == "particle_id":
-			tick = Time.get_ticks_usec();var validated := Identity.build(channels[d.name],worker)
-			if validated.is_empty() or validated.has("error"): return validated
-			id_map = validated.map;used += entry.count*160
+			tick = Time.get_ticks_usec()
+			# Reuse only a resident, validated immutable lookup with exactly the
+			# same ordered int64 IDs. Payload checksums above are still verified.
+			var previous = identity_reference.get("identity_map")
+			var previous_ids = identity_reference.get("channels",{}).get("particle_id")
+			if previous is Identity and previous.rows.is_read_only() and previous_ids is PackedInt64Array and previous_ids == channels[d.name]:
+				id_map = previous
+				observe(worker,"identity_reuse",tick)
+			else:
+				var validated := Identity.build(channels[d.name],worker)
+				if validated.is_empty() or validated.has("error"): return validated
+				id_map = validated.map
+			# Preserve conservative cache accounting even when maps are shared.
+			used += entry.count*160
 			observe(worker,"identity_decode",tick)
 	return {"time":entry.time,"count":entry.count,"channels":channels,"components":components,"decoded_bytes":used,"has_ids":entry.has_ids,"identity_map":id_map,"unavailable_channels":unavailable}
 

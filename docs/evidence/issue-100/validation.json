@@ -1,0 +1,1358 @@
+{
+  "issue": 100,
+  "baseline_commit": "d42a4dcd295718357d7bca068e57b1b644311c75",
+  "status": "Pending owner review",
+  "date": "2026-09-25",
+  "scope": "Owner confirmed the exact slow production capture with recorded 128^3 fields; no production 192^3 comparison.",
+  "godot": "4.7.2 stable",
+  "gpu": "NVIDIA GeForce RTX 3070 Ti",
+  "method": "Serial native runs; warm filesystem cache; per-process RSS/HWM; UI setup included, executable startup/import and source hashing excluded from readiness timings. Inclusive stages overlap.",
+  "source": {
+    "path": "/home/Nozba/Documents/VB_FreeCollapse_v0_2/VB_FreeCollapse_v0_2/runs_free_collapse_v0_2/S0_20260925_060202_938955/free_collapse_simscope.ssc",
+    "bytes": 14878413684,
+    "mtime_ns": 1790309423585375096,
+    "sha256": "c76d2cc2e9909dcfac5ed90a5526c8873cafb4b3d0d37ea949b135fe4a27e22a"
+  },
+  "renderers": {
+    "forward_plus": {
+      "before": {
+        "open_ms": 4783.083,
+        "first_draw_ms": 4802.642,
+        "ready_ms": 26265.069,
+        "prebuffer_ms": 21462.378,
+        "memory": {
+          "VmHWM": 5265338368,
+          "VmRSS": 5265338368,
+          "VmSwap": 0
+        },
+        "index_state": "rebuilt index",
+        "objects": {
+          "free_collapse_field": {
+            "first_decoded_bytes": 25165824,
+            "geometry": {
+              "centering": "cell",
+              "origin": [
+                -31.75,
+                -31.75,
+                -31.75
+              ],
+              "shape": [
+                128.0,
+                128.0,
+                128.0
+              ],
+              "spacing": [
+                0.5,
+                0.5,
+                0.5
+              ]
+            },
+            "kind": "volume",
+            "samples": 617
+          },
+          "tracers": {
+            "first_decoded_bytes": 4200000,
+            "geometry": {},
+            "kind": "particles",
+            "samples": 247
+          }
+        },
+        "open_stages": {
+          "buffer_submit": {
+            "count": 2,
+            "total_ms": 1.956
+          },
+          "data_guide_cpu": {
+            "count": 3,
+            "total_ms": 0.01
+          },
+          "g3_cache_lookup": {
+            "count": 2,
+            "total_ms": 0.009000000000000001
+          },
+          "g3_cache_publish": {
+            "count": 2,
+            "total_ms": 0.053000000000000005
+          },
+          "g3_channel_decode": {
+            "count": 2,
+            "total_ms": 176.861
+          },
+          "g3_descriptor_parse": {
+            "count": 864,
+            "total_ms": 728.4089999999993
+          },
+          "g3_descriptor_validation": {
+            "count": 864,
+            "total_ms": 2153.908
+          },
+          "g3_field_conversion": {
+            "count": 1,
+            "total_ms": 0.0
+          },
+          "g3_field_cpu_prepare": {
+            "count": 1,
+            "total_ms": 330.066
+          },
+          "g3_field_plane_copies": {
+            "count": 1,
+            "total_ms": 5.509
+          },
+          "g3_field_statistics": {
+            "count": 1,
+            "total_ms": 324.528
+          },
+          "g3_field_texture_upload": {
+            "count": 1,
+            "total_ms": 2.637
+          },
+          "g3_identity_build": {
+            "count": 1,
+            "total_ms": 11.164
+          },
+          "g3_index_cache_parse": {
+            "count": 1,
+            "total_ms": 0.028
+          },
+          "g3_index_cache_write": {
+            "count": 1,
+            "total_ms": 789.119
+          },
+          "g3_index_metadata": {
+            "count": 1,
+            "total_ms": 2.451
+          },
+          "g3_index_scan_inclusive": {
+            "count": 1,
+            "total_ms": 3108.645
+          },
+          "g3_layer_refresh": {
+            "count": 1,
+            "total_ms": 2.312
+          },
+          "g3_particle_frame_conversion": {
+            "count": 1,
+            "total_ms": 0.255
+          },
+          "g3_particle_pair_rebuild": {
+            "count": 1,
+            "total_ms": 35.684
+          },
+          "g3_read_sample": {
+            "count": 2,
+            "total_ms": 197.722
+          },
+          "g3_reader_refresh": {
+            "count": 3,
+            "total_ms": 6.8309999999999995
+          },
+          "g3_reload_source": {
+            "count": 1,
+            "total_ms": 3922.508
+          },
+          "g3_sample": {
+            "count": 1,
+            "total_ms": 600.895
+          },
+          "g3_source_stamp": {
+            "count": 7,
+            "total_ms": 16.654999999999998
+          },
+          "g3_timestamp_index": {
+            "count": 1,
+            "total_ms": 0.772
+          },
+          "hud_cpu": {
+            "count": 2,
+            "total_ms": 0.046
+          },
+          "identity_match": {
+            "count": 1,
+            "total_ms": 9.844
+          },
+          "interpolation_pack": {
+            "count": 1,
+            "total_ms": 7.869
+          },
+          "interpolation_submission_inclusive": {
+            "count": 1,
+            "total_ms": 18.795
+          },
+          "normalization_ranges": {
+            "count": 1,
+            "total_ms": 0.006
+          },
+          "open_inclusive": {
+            "count": 1,
+            "total_ms": 4574.638
+          },
+          "position_decode": {
+            "count": 2,
+            "total_ms": 0.242
+          },
+          "shader_uniforms_cpu": {
+            "count": 5,
+            "total_ms": 0.13
+          },
+          "style_inclusive": {
+            "count": 1,
+            "total_ms": 30.136
+          },
+          "style_particle_pack": {
+            "count": 1,
+            "total_ms": 24.808
+          },
+          "trails_inclusive": {
+            "count": 1,
+            "total_ms": 3.142
+          },
+          "ui_mapping_inclusive": {
+            "count": 2,
+            "total_ms": 2.1260000000000003
+          }
+        },
+        "worker_stages_ms": {
+          "channel_decode": 485.31899999999973,
+          "chunk_hash": 4575.165999999999,
+          "decompress": 902.0980000000003,
+          "file_io": 113.053,
+          "frame_conversion": 1849.6079999999995,
+          "id_matching": 2318.3480000000004,
+          "identity_decode": 3647.496000000001,
+          "pair_preparation": 8525.659000000001,
+          "read_decode_identity": 9790.645000000004,
+          "source_validation": 1179.5930000000014,
+          "style": 6201.944000000001,
+          "trails": 0.4230000000000003
+        },
+        "identity_reused_samples": 0,
+        "particle_policy": {
+          "policy": "adaptive",
+          "strategy": "full_preload",
+          "full_preload": true,
+          "decoded_limit": 5377308560,
+          "prepared_limit": 11911155200
+        },
+        "particle_pairs": 247,
+        "first_field": {
+          "free_collapse_field": {
+            "gpu_bytes": 8388608,
+            "hashes": {
+              "density": "3f4e3485fb24fe75afc2b722ab9bf4e19052df2d422b1b3291dba097dc5e0ba2",
+              "psi_imag": "7acb05c99d279522a374ed23e20ac9614117ca851ec0a0ce3bf38c3bebd82935",
+              "psi_real": "baaec5d00503ec98880761d4bb977b8acf3006dbee3fe2bb557fce23a9835d22"
+            },
+            "lod": 1,
+            "statistics": {
+              "finite": 2097152,
+              "maximum": 0.422494113445282,
+              "minimum": 0.0,
+              "nonfinite": 0,
+              "nonpositive": 696448
+            }
+          }
+        }
+      },
+      "after": {
+        "open_ms": 3777.431,
+        "first_draw_ms": 3796.813,
+        "ready_ms": 22089.48,
+        "prebuffer_ms": 18292.613,
+        "memory": {
+          "VmHWM": 3916308480,
+          "VmRSS": 3916308480,
+          "VmSwap": 0
+        },
+        "index_state": "rebuilt index",
+        "objects": {
+          "free_collapse_field": {
+            "first_decoded_bytes": 25165824,
+            "geometry": {
+              "centering": "cell",
+              "origin": [
+                -31.75,
+                -31.75,
+                -31.75
+              ],
+              "shape": [
+                128.0,
+                128.0,
+                128.0
+              ],
+              "spacing": [
+                0.5,
+                0.5,
+                0.5
+              ]
+            },
+            "kind": "volume",
+            "samples": 617
+          },
+          "tracers": {
+            "first_decoded_bytes": 4200000,
+            "geometry": {},
+            "kind": "particles",
+            "samples": 247
+          }
+        },
+        "open_stages": {
+          "buffer_submit": {
+            "count": 2,
+            "total_ms": 1.941
+          },
+          "data_guide_cpu": {
+            "count": 3,
+            "total_ms": 0.008
+          },
+          "g3_cache_lookup": {
+            "count": 2,
+            "total_ms": 0.008
+          },
+          "g3_cache_publish": {
+            "count": 2,
+            "total_ms": 0.054000000000000006
+          },
+          "g3_channel_decode": {
+            "count": 2,
+            "total_ms": 175.222
+          },
+          "g3_descriptor_parse": {
+            "count": 864,
+            "total_ms": 697.1100000000018
+          },
+          "g3_descriptor_validation": {
+            "count": 864,
+            "total_ms": 1193.3589999999983
+          },
+          "g3_field_conversion": {
+            "count": 1,
+            "total_ms": 0.0
+          },
+          "g3_field_cpu_prepare": {
+            "count": 1,
+            "total_ms": 318.788
+          },
+          "g3_field_plane_copies": {
+            "count": 1,
+            "total_ms": 5.173
+          },
+          "g3_field_statistics": {
+            "count": 1,
+            "total_ms": 313.589
+          },
+          "g3_field_texture_upload": {
+            "count": 1,
+            "total_ms": 2.974
+          },
+          "g3_identity_build": {
+            "count": 1,
+            "total_ms": 11.129
+          },
+          "g3_index_cache_parse": {
+            "count": 1,
+            "total_ms": 0.026
+          },
+          "g3_index_cache_write": {
+            "count": 1,
+            "total_ms": 778.071
+          },
+          "g3_index_metadata": {
+            "count": 1,
+            "total_ms": 2.414
+          },
+          "g3_index_scan_inclusive": {
+            "count": 1,
+            "total_ms": 2110.998
+          },
+          "g3_layer_refresh": {
+            "count": 1,
+            "total_ms": 2.514
+          },
+          "g3_particle_frame_conversion": {
+            "count": 1,
+            "total_ms": 0.273
+          },
+          "g3_particle_pair_rebuild": {
+            "count": 1,
+            "total_ms": 34.96
+          },
+          "g3_read_sample": {
+            "count": 2,
+            "total_ms": 195.98
+          },
+          "g3_reader_refresh": {
+            "count": 3,
+            "total_ms": 7.184
+          },
+          "g3_reload_source": {
+            "count": 1,
+            "total_ms": 2914.42
+          },
+          "g3_sample": {
+            "count": 1,
+            "total_ms": 587.719
+          },
+          "g3_source_stamp": {
+            "count": 7,
+            "total_ms": 16.897
+          },
+          "g3_timestamp_index": {
+            "count": 1,
+            "total_ms": 0.781
+          },
+          "hud_cpu": {
+            "count": 2,
+            "total_ms": 0.044
+          },
+          "identity_match": {
+            "count": 1,
+            "total_ms": 9.835
+          },
+          "interpolation_pack": {
+            "count": 1,
+            "total_ms": 8.336
+          },
+          "interpolation_submission_inclusive": {
+            "count": 1,
+            "total_ms": 19.131
+          },
+          "normalization_ranges": {
+            "count": 1,
+            "total_ms": 0.006
+          },
+          "open_inclusive": {
+            "count": 1,
+            "total_ms": 3554.099
+          },
+          "position_decode": {
+            "count": 2,
+            "total_ms": 0.259
+          },
+          "shader_uniforms_cpu": {
+            "count": 5,
+            "total_ms": 0.12200000000000003
+          },
+          "style_inclusive": {
+            "count": 1,
+            "total_ms": 29.109
+          },
+          "style_particle_pack": {
+            "count": 1,
+            "total_ms": 23.903
+          },
+          "trails_inclusive": {
+            "count": 1,
+            "total_ms": 3.251
+          },
+          "ui_mapping_inclusive": {
+            "count": 2,
+            "total_ms": 2.304
+          }
+        },
+        "worker_stages_ms": {
+          "channel_decode": 472.098,
+          "chunk_hash": 4575.513999999998,
+          "decompress": 910.8319999999989,
+          "file_io": 127.16499999999996,
+          "frame_conversion": 1827.834000000001,
+          "id_matching": 2893.8249999999994,
+          "identity_decode": 21.39999999999997,
+          "identity_reuse": 6.096999999999994,
+          "pair_preparation": 8994.444,
+          "read_decode_identity": 6170.8669999999975,
+          "source_validation": 1182.0829999999999,
+          "style": 6095.310000000002,
+          "trails": 0.44800000000000034
+        },
+        "identity_reused_samples": 246,
+        "particle_policy": {
+          "policy": "adaptive",
+          "strategy": "full_preload",
+          "full_preload": true,
+          "decoded_limit": 5377308560,
+          "prepared_limit": 11911155200
+        },
+        "particle_pairs": 247,
+        "first_field": {
+          "free_collapse_field": {
+            "gpu_bytes": 8388608,
+            "hashes": {
+              "density": "3f4e3485fb24fe75afc2b722ab9bf4e19052df2d422b1b3291dba097dc5e0ba2",
+              "psi_imag": "7acb05c99d279522a374ed23e20ac9614117ca851ec0a0ce3bf38c3bebd82935",
+              "psi_real": "baaec5d00503ec98880761d4bb977b8acf3006dbee3fe2bb557fce23a9835d22"
+            },
+            "lod": 1,
+            "statistics": {
+              "finite": 2097152,
+              "maximum": 0.422494113445282,
+              "minimum": 0.0,
+              "nonfinite": 0,
+              "nonpositive": 696448
+            }
+          }
+        }
+      },
+      "scientific_first_field_unchanged": true,
+      "source_unchanged": true,
+      "production_exercise": {
+        "clock_0.0": true,
+        "clock_30.8": true,
+        "clock_61.6": true,
+        "field_cpu_bound": true,
+        "field_staging_bound": true,
+        "initial": true,
+        "particle_bounds": true,
+        "pause": true,
+        "paused_clock": true,
+        "play": true,
+        "resume": true,
+        "seek_0.0": true,
+        "seek_30.8": true,
+        "seek_61.6": true
+      },
+      "production_repeat_ready_ms": 21610.211,
+      "regressions": {
+        "playback": {
+          "checks": 2457,
+          "failures": []
+        },
+        "maintenance": {
+          "checks": 66,
+          "failures": []
+        },
+        "lifecycle": {
+          "checks": 51,
+          "failures": []
+        },
+        "field_budget": {
+          "checks": 56,
+          "failures": []
+        },
+        "field_preparation": {
+          "checks": 32,
+          "failures": [],
+          "field": {
+            "budget": {
+              "cpu_limit": 207368,
+              "memory": {
+                "available_physical": 39689146368,
+                "physical": 50404552704,
+                "reserve": 8634424729,
+                "safe_cache_bytes": 20161821081
+              },
+              "preview_budget_per_field": 134217728,
+              "remaining_safe_bytes": 19893385625,
+              "required_bytes": 207368,
+              "reservations": {
+                "mesh_cache_and_working": 0,
+                "particle_decoded": 0,
+                "particle_prepared": 0,
+                "particle_working": 0,
+                "scene_cache": 268435456
+              },
+              "reserved_other_bytes": 268435456,
+              "target_bytes": 103684,
+              "targets": [
+                {
+                  "decoded_bytes": 25432,
+                  "id": "field",
+                  "preview_charge": 12716,
+                  "total_charge": 103684
+                }
+              ],
+              "window_bytes": 207368
+            },
+            "buffering": false,
+            "cache": {
+              "active": false,
+              "bytes": 207368,
+              "cancelled": 0,
+              "completed": 3,
+              "error": "",
+              "evictions": 1,
+              "frames": 2,
+              "limit": 207368,
+              "test_barrier_waiting": false,
+              "worker_ms": 17.307000000000002,
+              "worker_thread": 45
+            },
+            "current_gpu_bytes": 12716,
+            "enabled": true,
+            "error": "",
+            "gpu_uploads": 4,
+            "staged_gpu_bytes": 12716,
+            "staged_textures": 1
+          }
+        },
+        "volume_opacity": {
+          "alpha_cases": [
+            {
+              "alpha": 0.0,
+              "case": "zero-symmetric",
+              "expected": 0.0
+            },
+            {
+              "alpha": 0.40392157435417175,
+              "case": "magnitude-positive",
+              "expected": 0.4028727265783726
+            },
+            {
+              "alpha": 0.40392157435417175,
+              "case": "magnitude-negative",
+              "expected": 0.4028727265783726
+            },
+            {
+              "alpha": 0.6431372761726379,
+              "case": "saturated-weight",
+              "expected": 0.6434390193360531
+            },
+            {
+              "alpha": 0.0,
+              "case": "nearzero-dead-zone",
+              "expected": 0.0
+            },
+            {
+              "alpha": 0.0,
+              "case": "linear-negative-transparent",
+              "expected": 0.0
+            },
+            {
+              "alpha": 0.40392157435417175,
+              "case": "density-default",
+              "expected": 0.4028727265783726
+            },
+            {
+              "alpha": 0.40392157435417175,
+              "case": "color-range-independent",
+              "expected": 0.4028727265783726
+            },
+            {
+              "alpha": 0.40392157435417175,
+              "case": "constant-field-step-one",
+              "expected": 0.4028727265783726
+            },
+            {
+              "alpha": 0.40392157435417175,
+              "case": "legacy-range",
+              "expected": 0.4028727265783726
+            },
+            {
+              "alpha": 0.40392157435417175,
+              "case": "migrated-range",
+              "expected": 0.4028727265783726
+            }
+          ],
+          "checks": 98,
+          "failures": [],
+          "renderer": "forward_plus",
+          "source_sha256_unchanged": "87b9b06aaa162301c3bdb690c837370a560635f705364a9ce76e393f43391259",
+          "export": {
+            "completed": true,
+            "identical_pixels": true,
+            "mapping_in_sidecar": true,
+            "source_unchanged": true
+          }
+        },
+        "volume_color": {
+          "checks": 138,
+          "failures": [
+            "GPU logarithmic midpoint matches linear oracle",
+            "slice uses identical logarithmic color semantics"
+          ],
+          "same_on_accepted_main": true
+        }
+      }
+    },
+    "gl_compatibility": {
+      "before": {
+        "open_ms": 4655.197,
+        "first_draw_ms": 4695.831,
+        "ready_ms": 26027.754,
+        "prebuffer_ms": 21331.844,
+        "memory": {
+          "VmHWM": 4922695680,
+          "VmRSS": 4922695680,
+          "VmSwap": 0
+        },
+        "index_state": "rebuilt index",
+        "objects": {
+          "free_collapse_field": {
+            "first_decoded_bytes": 25165824,
+            "geometry": {
+              "centering": "cell",
+              "origin": [
+                -31.75,
+                -31.75,
+                -31.75
+              ],
+              "shape": [
+                128.0,
+                128.0,
+                128.0
+              ],
+              "spacing": [
+                0.5,
+                0.5,
+                0.5
+              ]
+            },
+            "kind": "volume",
+            "samples": 617
+          },
+          "tracers": {
+            "first_decoded_bytes": 4200000,
+            "geometry": {},
+            "kind": "particles",
+            "samples": 247
+          }
+        },
+        "open_stages": {
+          "buffer_submit": {
+            "count": 2,
+            "total_ms": 6.21
+          },
+          "data_guide_cpu": {
+            "count": 3,
+            "total_ms": 0.008
+          },
+          "g3_cache_lookup": {
+            "count": 2,
+            "total_ms": 0.008
+          },
+          "g3_cache_publish": {
+            "count": 2,
+            "total_ms": 0.057999999999999996
+          },
+          "g3_channel_decode": {
+            "count": 2,
+            "total_ms": 171.47
+          },
+          "g3_descriptor_parse": {
+            "count": 864,
+            "total_ms": 701.1670000000009
+          },
+          "g3_descriptor_validation": {
+            "count": 864,
+            "total_ms": 2146.1339999999996
+          },
+          "g3_field_conversion": {
+            "count": 1,
+            "total_ms": 0.0
+          },
+          "g3_field_cpu_prepare": {
+            "count": 1,
+            "total_ms": 318.938
+          },
+          "g3_field_plane_copies": {
+            "count": 1,
+            "total_ms": 5.222
+          },
+          "g3_field_statistics": {
+            "count": 1,
+            "total_ms": 313.685
+          },
+          "g3_field_texture_upload": {
+            "count": 1,
+            "total_ms": 0.738
+          },
+          "g3_identity_build": {
+            "count": 1,
+            "total_ms": 11.005
+          },
+          "g3_index_cache_parse": {
+            "count": 1,
+            "total_ms": 0.026
+          },
+          "g3_index_cache_write": {
+            "count": 1,
+            "total_ms": 770.633
+          },
+          "g3_index_metadata": {
+            "count": 1,
+            "total_ms": 2.289
+          },
+          "g3_index_scan_inclusive": {
+            "count": 1,
+            "total_ms": 3070.581
+          },
+          "g3_layer_refresh": {
+            "count": 1,
+            "total_ms": 2.396
+          },
+          "g3_particle_frame_conversion": {
+            "count": 1,
+            "total_ms": 0.279
+          },
+          "g3_particle_pair_rebuild": {
+            "count": 1,
+            "total_ms": 36.361
+          },
+          "g3_read_sample": {
+            "count": 2,
+            "total_ms": 191.924
+          },
+          "g3_reader_refresh": {
+            "count": 3,
+            "total_ms": 6.837
+          },
+          "g3_reload_source": {
+            "count": 1,
+            "total_ms": 3866.119
+          },
+          "g3_sample": {
+            "count": 1,
+            "total_ms": 584.815
+          },
+          "g3_source_stamp": {
+            "count": 7,
+            "total_ms": 16.47
+          },
+          "g3_timestamp_index": {
+            "count": 1,
+            "total_ms": 0.728
+          },
+          "hud_cpu": {
+            "count": 2,
+            "total_ms": 0.043
+          },
+          "identity_match": {
+            "count": 1,
+            "total_ms": 9.713
+          },
+          "interpolation_pack": {
+            "count": 1,
+            "total_ms": 8.771
+          },
+          "interpolation_submission_inclusive": {
+            "count": 1,
+            "total_ms": 21.055
+          },
+          "normalization_ranges": {
+            "count": 1,
+            "total_ms": 0.007
+          },
+          "open_inclusive": {
+            "count": 1,
+            "total_ms": 4490.028
+          },
+          "position_decode": {
+            "count": 2,
+            "total_ms": 0.266
+          },
+          "shader_uniforms_cpu": {
+            "count": 5,
+            "total_ms": 0.10500000000000001
+          },
+          "style_inclusive": {
+            "count": 1,
+            "total_ms": 30.252
+          },
+          "style_particle_pack": {
+            "count": 1,
+            "total_ms": 24.996
+          },
+          "trails_inclusive": {
+            "count": 1,
+            "total_ms": 3.411
+          },
+          "ui_mapping_inclusive": {
+            "count": 2,
+            "total_ms": 2.3909999999999996
+          }
+        },
+        "worker_stages_ms": {
+          "channel_decode": 481.5130000000002,
+          "chunk_hash": 4548.345000000001,
+          "decompress": 898.9519999999999,
+          "file_io": 113.0350000000001,
+          "frame_conversion": 1865.2780000000002,
+          "id_matching": 2318.9740000000006,
+          "identity_decode": 3656.597000000001,
+          "pair_preparation": 8435.988000000005,
+          "read_decode_identity": 9763.514000000001,
+          "source_validation": 1174.3109999999997,
+          "style": 6111.894999999998,
+          "trails": 0.3890000000000003
+        },
+        "identity_reused_samples": 0,
+        "particle_policy": {
+          "policy": "adaptive",
+          "strategy": "full_preload",
+          "full_preload": true,
+          "decoded_limit": 5377308560,
+          "prepared_limit": 11911155200
+        },
+        "particle_pairs": 247,
+        "first_field": {
+          "free_collapse_field": {
+            "gpu_bytes": 8388608,
+            "hashes": {
+              "density": "3f4e3485fb24fe75afc2b722ab9bf4e19052df2d422b1b3291dba097dc5e0ba2",
+              "psi_imag": "7acb05c99d279522a374ed23e20ac9614117ca851ec0a0ce3bf38c3bebd82935",
+              "psi_real": "baaec5d00503ec98880761d4bb977b8acf3006dbee3fe2bb557fce23a9835d22"
+            },
+            "lod": 1,
+            "statistics": {
+              "finite": 2097152,
+              "maximum": 0.422494113445282,
+              "minimum": 0.0,
+              "nonfinite": 0,
+              "nonpositive": 696448
+            }
+          }
+        }
+      },
+      "after": {
+        "open_ms": 3678.233,
+        "first_draw_ms": 3713.482,
+        "ready_ms": 21514.918,
+        "prebuffer_ms": 17801.372,
+        "memory": {
+          "VmHWM": 3586224128,
+          "VmRSS": 3586224128,
+          "VmSwap": 0
+        },
+        "index_state": "rebuilt index",
+        "objects": {
+          "free_collapse_field": {
+            "first_decoded_bytes": 25165824,
+            "geometry": {
+              "centering": "cell",
+              "origin": [
+                -31.75,
+                -31.75,
+                -31.75
+              ],
+              "shape": [
+                128.0,
+                128.0,
+                128.0
+              ],
+              "spacing": [
+                0.5,
+                0.5,
+                0.5
+              ]
+            },
+            "kind": "volume",
+            "samples": 617
+          },
+          "tracers": {
+            "first_decoded_bytes": 4200000,
+            "geometry": {},
+            "kind": "particles",
+            "samples": 247
+          }
+        },
+        "open_stages": {
+          "buffer_submit": {
+            "count": 2,
+            "total_ms": 8.596
+          },
+          "data_guide_cpu": {
+            "count": 3,
+            "total_ms": 0.006
+          },
+          "g3_cache_lookup": {
+            "count": 2,
+            "total_ms": 0.007
+          },
+          "g3_cache_publish": {
+            "count": 2,
+            "total_ms": 0.064
+          },
+          "g3_channel_decode": {
+            "count": 2,
+            "total_ms": 174.56799999999998
+          },
+          "g3_descriptor_parse": {
+            "count": 864,
+            "total_ms": 680.0940000000011
+          },
+          "g3_descriptor_validation": {
+            "count": 864,
+            "total_ms": 1164.494
+          },
+          "g3_field_conversion": {
+            "count": 1,
+            "total_ms": 0.0
+          },
+          "g3_field_cpu_prepare": {
+            "count": 1,
+            "total_ms": 333.344
+          },
+          "g3_field_plane_copies": {
+            "count": 1,
+            "total_ms": 5.501
+          },
+          "g3_field_statistics": {
+            "count": 1,
+            "total_ms": 327.815
+          },
+          "g3_field_texture_upload": {
+            "count": 1,
+            "total_ms": 0.758
+          },
+          "g3_identity_build": {
+            "count": 1,
+            "total_ms": 11.904
+          },
+          "g3_index_cache_parse": {
+            "count": 1,
+            "total_ms": 0.031
+          },
+          "g3_index_cache_write": {
+            "count": 1,
+            "total_ms": 783.779
+          },
+          "g3_index_metadata": {
+            "count": 1,
+            "total_ms": 2.335
+          },
+          "g3_index_scan_inclusive": {
+            "count": 1,
+            "total_ms": 2060.097
+          },
+          "g3_layer_refresh": {
+            "count": 1,
+            "total_ms": 2.621
+          },
+          "g3_particle_frame_conversion": {
+            "count": 1,
+            "total_ms": 0.247
+          },
+          "g3_particle_pair_rebuild": {
+            "count": 1,
+            "total_ms": 40.521
+          },
+          "g3_read_sample": {
+            "count": 2,
+            "total_ms": 196.68200000000002
+          },
+          "g3_reader_refresh": {
+            "count": 3,
+            "total_ms": 6.748
+          },
+          "g3_reload_source": {
+            "count": 1,
+            "total_ms": 2869.343
+          },
+          "g3_sample": {
+            "count": 1,
+            "total_ms": 609.297
+          },
+          "g3_source_stamp": {
+            "count": 7,
+            "total_ms": 17.314
+          },
+          "g3_timestamp_index": {
+            "count": 1,
+            "total_ms": 0.797
+          },
+          "hud_cpu": {
+            "count": 2,
+            "total_ms": 0.044
+          },
+          "identity_match": {
+            "count": 1,
+            "total_ms": 9.992
+          },
+          "interpolation_pack": {
+            "count": 1,
+            "total_ms": 8.607
+          },
+          "interpolation_submission_inclusive": {
+            "count": 1,
+            "total_ms": 21.605
+          },
+          "normalization_ranges": {
+            "count": 1,
+            "total_ms": 0.006
+          },
+          "open_inclusive": {
+            "count": 1,
+            "total_ms": 3519.142
+          },
+          "position_decode": {
+            "count": 2,
+            "total_ms": 0.235
+          },
+          "shader_uniforms_cpu": {
+            "count": 5,
+            "total_ms": 0.10600000000000001
+          },
+          "style_inclusive": {
+            "count": 1,
+            "total_ms": 34.871
+          },
+          "style_particle_pack": {
+            "count": 1,
+            "total_ms": 24.725
+          },
+          "trails_inclusive": {
+            "count": 1,
+            "total_ms": 3.26
+          },
+          "ui_mapping_inclusive": {
+            "count": 2,
+            "total_ms": 2.119
+          }
+        },
+        "worker_stages_ms": {
+          "channel_decode": 473.71100000000024,
+          "chunk_hash": 4606.725000000002,
+          "decompress": 913.7570000000003,
+          "file_io": 128.32300000000006,
+          "frame_conversion": 1848.609,
+          "id_matching": 2337.5450000000005,
+          "identity_decode": 22.310999999999964,
+          "identity_reuse": 6.104999999999996,
+          "pair_preparation": 8467.616999999998,
+          "read_decode_identity": 6207.878999999997,
+          "source_validation": 1172.3569999999995,
+          "style": 6124.983999999996,
+          "trails": 0.3930000000000003
+        },
+        "identity_reused_samples": 246,
+        "particle_policy": {
+          "policy": "adaptive",
+          "strategy": "full_preload",
+          "full_preload": true,
+          "decoded_limit": 5377308560,
+          "prepared_limit": 11911155200
+        },
+        "particle_pairs": 247,
+        "first_field": {
+          "free_collapse_field": {
+            "gpu_bytes": 8388608,
+            "hashes": {
+              "density": "3f4e3485fb24fe75afc2b722ab9bf4e19052df2d422b1b3291dba097dc5e0ba2",
+              "psi_imag": "7acb05c99d279522a374ed23e20ac9614117ca851ec0a0ce3bf38c3bebd82935",
+              "psi_real": "baaec5d00503ec98880761d4bb977b8acf3006dbee3fe2bb557fce23a9835d22"
+            },
+            "lod": 1,
+            "statistics": {
+              "finite": 2097152,
+              "maximum": 0.422494113445282,
+              "minimum": 0.0,
+              "nonfinite": 0,
+              "nonpositive": 696448
+            }
+          }
+        }
+      },
+      "scientific_first_field_unchanged": true,
+      "source_unchanged": true,
+      "production_exercise": {
+        "clock_0.0": true,
+        "clock_30.8": true,
+        "clock_61.6": true,
+        "field_cpu_bound": true,
+        "field_staging_bound": true,
+        "initial": true,
+        "particle_bounds": true,
+        "pause": true,
+        "paused_clock": true,
+        "play": true,
+        "resume": true,
+        "seek_0.0": true,
+        "seek_30.8": true,
+        "seek_61.6": true
+      },
+      "production_repeat_ready_ms": 21536.471,
+      "regressions": {
+        "playback": {
+          "checks": 2457,
+          "failures": []
+        },
+        "maintenance": {
+          "checks": 66,
+          "failures": []
+        },
+        "lifecycle": {
+          "checks": 51,
+          "failures": []
+        },
+        "field_budget": {
+          "checks": 56,
+          "failures": []
+        },
+        "field_preparation": {
+          "checks": 32,
+          "failures": [],
+          "field": {
+            "budget": {
+              "cpu_limit": 207368,
+              "memory": {
+                "available_physical": 39846600704,
+                "physical": 50404552704,
+                "reserve": 8634424729,
+                "safe_cache_bytes": 20161821081
+              },
+              "preview_budget_per_field": 134217728,
+              "remaining_safe_bytes": 19893385625,
+              "required_bytes": 207368,
+              "reservations": {
+                "mesh_cache_and_working": 0,
+                "particle_decoded": 0,
+                "particle_prepared": 0,
+                "particle_working": 0,
+                "scene_cache": 268435456
+              },
+              "reserved_other_bytes": 268435456,
+              "target_bytes": 103684,
+              "targets": [
+                {
+                  "decoded_bytes": 25432,
+                  "id": "field",
+                  "preview_charge": 12716,
+                  "total_charge": 103684
+                }
+              ],
+              "window_bytes": 207368
+            },
+            "buffering": false,
+            "cache": {
+              "active": false,
+              "bytes": 207368,
+              "cancelled": 0,
+              "completed": 3,
+              "error": "",
+              "evictions": 1,
+              "frames": 2,
+              "limit": 207368,
+              "test_barrier_waiting": false,
+              "worker_ms": 17.217,
+              "worker_thread": 45
+            },
+            "current_gpu_bytes": 12716,
+            "enabled": true,
+            "error": "",
+            "gpu_uploads": 4,
+            "staged_gpu_bytes": 12716,
+            "staged_textures": 1
+          }
+        },
+        "volume_opacity": {
+          "alpha_cases": [
+            {
+              "alpha": 0.0,
+              "case": "zero-symmetric",
+              "expected": 0.0
+            },
+            {
+              "alpha": 0.40392157435417175,
+              "case": "magnitude-positive",
+              "expected": 0.4028727265783726
+            },
+            {
+              "alpha": 0.40392157435417175,
+              "case": "magnitude-negative",
+              "expected": 0.4028727265783726
+            },
+            {
+              "alpha": 0.6431372761726379,
+              "case": "saturated-weight",
+              "expected": 0.6434390193360531
+            },
+            {
+              "alpha": 0.0,
+              "case": "nearzero-dead-zone",
+              "expected": 0.0
+            },
+            {
+              "alpha": 0.0,
+              "case": "linear-negative-transparent",
+              "expected": 0.0
+            },
+            {
+              "alpha": 0.40392157435417175,
+              "case": "density-default",
+              "expected": 0.4028727265783726
+            },
+            {
+              "alpha": 0.40392157435417175,
+              "case": "color-range-independent",
+              "expected": 0.4028727265783726
+            },
+            {
+              "alpha": 0.40392157435417175,
+              "case": "constant-field-step-one",
+              "expected": 0.4028727265783726
+            },
+            {
+              "alpha": 0.40392157435417175,
+              "case": "legacy-range",
+              "expected": 0.4028727265783726
+            },
+            {
+              "alpha": 0.40392157435417175,
+              "case": "migrated-range",
+              "expected": 0.4028727265783726
+            }
+          ],
+          "checks": 98,
+          "failures": [],
+          "renderer": "gl_compatibility",
+          "source_sha256_unchanged": "7b1e94463eec97cb734c8aa1e85ef2555a38a1b28218ad662f575df944d8e06c",
+          "export": {
+            "completed": true,
+            "identical_pixels": true,
+            "mapping_in_sidecar": true,
+            "source_unchanged": true
+          }
+        },
+        "volume_color": {
+          "checks": 138,
+          "failures": [
+            "GPU logarithmic midpoint matches linear oracle",
+            "slice uses identical logarithmic color semantics"
+          ],
+          "same_on_accepted_main": true
+        }
+      }
+    }
+  },
+  "additional_validation": {
+    "load_optimizations": {
+      "checks": 26406,
+      "failures": []
+    },
+    "recipe": {
+      "checks": 2697,
+      "failures": []
+    },
+    "mesh": {
+      "checks": 2731,
+      "failures": []
+    },
+    "native_multichunk": {
+      "checks": 48,
+      "failures": []
+    },
+    "python_storage": {
+      "tests": 5,
+      "passed": true
+    },
+    "editor_import": true
+  },
+  "code_sha256": {
+    "viewer/data/capture_index.gd": "5de63ed16cea42a92a936a87a8bf52215dc4c1d666ff727c06d41693fc34ca30",
+    "viewer/data/typed_decode.gd": "56b0ee04eb4ae4a544a18889fb90ef5c1dfed35ca66f670bb0f9adf9874de3e9",
+    "viewer/layers/playback_buffer.gd": "d334291122604b14908c4e4c312b067830bc61f6ee4ac2f229f16db8889c1ed4",
+    "viewer/layers/scene_reader.gd": "5c105bcd9f4d5588db4fc62c47c3cf1d4d3a665a9db04c1b0a7fc44bd0da5cc2",
+    "viewer/layers/grid_view.gd": "8b85205d3f777c326b7bf245bf4194871c91c60e9449a8323c1ba7aae64b1bbd",
+    "viewer/layers/field_prepare.gd": "28cf9871ee8340059747480dd023c7914e664581d9ef8c448ea2b4b9ba663cc4",
+    "viewer/layers/profile_field_load.gd": "1700c33e127e2e04ba3116c7c14461a747700b5c12d85d4414178350f83394cc",
+    "viewer/layers/test_load_optimizations.gd": "f04ccd770f9e125cec9217765b0188d067a6fcdbb2889af7bf1a4e5527f5193b",
+    "tools/profile_field_load.py": "395469fdace187a3906c8c7cce600710bd97929d7d9f95061f25e94460b3aacf",
+    "tools/validate_load_optimizations.py": "8eac7c2c17b210843b6512dbde29d27abaefdc7acf0eccca1489f73dbb7a5f37"
+  },
+  "limitations": [
+    "No retained production 192^3 capture or voxel-scaling conclusion.",
+    "Cold page-cache or storage throughput not rebenchmarked.",
+    "Two baseline-equivalent volume-color assertions fail; that suite stops before export. Separate opacity export passes.",
+    "Initial harness parse error corrected; initial sandbox log-path/NUL test-output errors corrected; final checks clean.",
+    "Full particle preload and single-worker CPU costs remain; no preload policy change or new parallelism."
+  ]
+}

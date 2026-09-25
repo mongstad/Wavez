@@ -134,7 +134,10 @@ func _read(index: int, job: Dictionary, file: FileAccess) -> Dictionary:
 	var descriptor := {"offset":entry.offset,"count":count,"time":entry.time,"channels":descriptors,"has_ids":ids}
 	var memory_before := OS.get_static_memory_usage()
 	var start_time := Time.get_ticks_usec()
-	var data := Typed.read(file,descriptor,self)
+	# This worker owns decoded entries. Borrow a resident neighbor without
+	# retaining a new cache or changing its LRU order/limits.
+	var reference: Dictionary = decoded.entries.get(index-1,decoded.entries.get(index+1,{})).get("value",{})
+	var data := Typed.read(file,descriptor,self,reference)
 	observe("read_decode_identity",start_time)
 	if data.is_empty() or data.has("error"):return data
 	data.source_index = index;data.sequence = entry.sequence;data.shapes = shapes;data.associations = associations;data.geometry = entry.descriptor.geometry

@@ -13,8 +13,11 @@ static func prepare(obj: Dictionary, sample: Dictionary, selected: String, budge
 	var gpu_bytes := reduced.x*reduced.y*reduced.z*4
 	if gpu_bytes > budget: return {"error":"Volume texture budget exhausted; preview released."}
 	var values = sample.channels[selected]
+	var statistics_started := Time.get_ticks_usec()
 	var color_stats := preload("res://layers/volume_color.gd").statistics(values,cancel)
 	if color_stats.is_empty():return {}
+	var timings := {"statistics":(Time.get_ticks_usec()-statistics_started)/1000.0}
+	var conversion_started := Time.get_ticks_usec()
 	if lod == 1 and values is PackedFloat64Array:
 		var display := PackedFloat32Array();display.resize(values.size())
 		for i in range(values.size()):
@@ -22,6 +25,8 @@ static func prepare(obj: Dictionary, sample: Dictionary, selected: String, budge
 			display[i] = values[i]
 			if is_finite(values[i]) and not is_finite(display[i]):return {"error":"Field exceeds float32 display range; source unchanged."}
 		values = display
+	timings.conversion = (Time.get_ticks_usec()-conversion_started)/1000.0
+	var copies_started := Time.get_ticks_usec()
 	var planes: Array[Image] = []
 	if lod == 1:
 		var raw: PackedByteArray = values.to_byte_array();var length := dims.x*dims.y*4
@@ -37,4 +42,5 @@ static func prepare(obj: Dictionary, sample: Dictionary, selected: String, budge
 					var ix := roundi(x*float(dims.x-1)/(reduced.x-1));plane[y*reduced.x+x] = values[(iz*dims.y+iy)*dims.x+ix]
 					if is_finite(values[(iz*dims.y+iy)*dims.x+ix]) and not is_finite(plane[y*reduced.x+x]):return {"error":"Field exceeds float32 display range; source unchanged."}
 			planes.append(Image.create_from_data(reduced.x,reduced.y,false,Image.FORMAT_RF,plane.to_byte_array()))
-	return {"color_stats":color_stats,"planes":planes,"dims":dims,"reduced":reduced,"lod":lod,"gpu_bytes":gpu_bytes,"grid_to_world":grid_to_world,"sample":sample,"object":obj,"channel":selected}
+	timings.plane_copies = (Time.get_ticks_usec()-copies_started)/1000.0
+	return {"timings":timings,"color_stats":color_stats,"planes":planes,"dims":dims,"reduced":reduced,"lod":lod,"gpu_bytes":gpu_bytes,"grid_to_world":grid_to_world,"sample":sample,"object":obj,"channel":selected}

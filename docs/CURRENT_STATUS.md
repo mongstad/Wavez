@@ -10,11 +10,13 @@ Simulation-panel launch defaults were owner-merged in PR #89 at `a3c6c50`.
 Video export dialog actions were owner-merged in PR #90 at `a6a34c5`.
 Independent legend visibility and placement were owner-merged in PR #91 at `d11e426`.
 Independent layer legends were owner-merged in PR #92 at `9774623`.
-Current authorized work is #98, the top Ready item verified on 2026-09-24:
-[adaptive field preparation capacity](FIELD_PREPARATION_BUDGET.md), **pending owner review**.
-Field CPU capacity scales with visible workload and remaining safe physical RAM,
-reserving existing particle/scene/mesh budgets and retaining bounded lookahead
-and GPU staging. External simulation/exporter work is outside this issue.
+Adaptive field preparation capacity was owner-merged in PR #99 at `d42a4dc`.
+Current authorized work is #100, the top Ready item verified on 2026-09-25:
+[SSC loading/preparation profiling](SSC_LOAD_PERFORMANCE.md), **pending owner review**.
+The owner-confirmed 13.86 GiB capture records 128³ fields. Profiling identified
+particle identity-map rebuilding and descriptor validation overhead; focused
+reuse/native validation reduces startup time and actual RSS while preserving
+preload policy, scientific values and the accepted field memory safeguards.
 Historical reports and evidence retain their original review-time wording.
 
 As of **2026-09-20**, including G4 and PERF-001/002 maintenance reviewed and accepted by the user. Scientific simulations were not rerun. Historical results identify their recorded checkpoints. PERF-003 mesh maintenance was also reviewed and accepted by the owner on 2026-09-13; implementation checkpoint `7974c78`.

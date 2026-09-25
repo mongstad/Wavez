@@ -25,6 +25,7 @@ var trusted := false
 var error := ""
 var index_valid := false
 var index_state := ""
+var last_index_ms := 0.0
 func stopped() -> bool: return false
 static func transform_of(value: Array) -> Transform3D:
 	return Transform3D(Basis(Vector3(value[0],value[4],value[8]),Vector3(value[1],value[5],value[9]),Vector3(value[2],value[6],value[10])),Vector3(value[3],value[7],value[11]))
@@ -34,7 +35,7 @@ func fail(message: String) -> bool:
 func close() -> void:
 	file = null;cache.clear()
 func configure_cache(bytes: int, _prefetch: bool) -> void: cache.configure(bytes)
-func status() -> String: return "Synchronous layer reads • %s • %.1f / %.0f MiB • %d hits" % [index_state,cache.used/1048576.0,cache.limit/1048576.0,cache.hits]
+func status() -> String: return "Synchronous layer reads • %s • %.1f / %.0f MiB • %d hits • last index %.0f ms" % [index_state,cache.used/1048576.0,cache.limit/1048576.0,cache.hits,last_index_ms]
 func open(path: String) -> bool:
 	source_path = ProjectSettings.globalize_path(path).simplify_path()
 	trusted = Stamp.supported(source_path)
@@ -56,12 +57,15 @@ func _refresh_profiled() -> bool:
 	if trusted and _source_stamp_profiled() == source_stamp: return index_valid
 	return reload_source()
 func reload_source() -> bool:
+	var wall_started := Time.get_ticks_usec()
 	var started := Profile.begin()
 	var result := _reload_source_profiled()
+	last_index_ms = (Time.get_ticks_usec()-wall_started)/1000.0
 	Profile.end("g3_reload_source",started)
 	return result
 func _reload_source_profiled() -> bool:
 	index_valid = false;generation += 1;cache.clear();records.clear();frames.clear();samples.clear();objects.clear();error = ""
+	var metadata_started := Profile.begin()
 	var before := _source_stamp_profiled()
 	file = FileAccess.open(source_path,FileAccess.READ)
 	if file == null or file.get_length() < 16: return fail("Incomplete scene prefix.")
@@ -89,6 +93,8 @@ func _reload_source_profiled() -> bool:
 	# Compatibility metadata for particle mapping; UUID remains the actual scene UUID.
 	metadata.storage = {"uuid":metadata.uuid}
 	prefix.append_array(raw);header = {"sha256":Hash.digest(prefix),"metadata":metadata}
+	Profile.end("g3_index_metadata",metadata_started)
+	var cached_index_started := Profile.begin()
 	var cache_path := cache_dir.path_join(source_path.sha256_text()+".sidx3.json")
 	var saved: Array = [];var index_file := FileAccess.open(cache_path,FileAccess.READ)
 	if trusted and index_file != null and index_file.get_length() <= Hash.MAX_INDEX:
@@ -100,6 +106,8 @@ func _reload_source_profiled() -> bool:
 					if not row is Dictionary or not Index.valid_hex(row.get("h"),160) or not row.get("d") is String: saved.clear();break
 					row.parsed = Hash.parse_json(row.d)
 					saved.append(row)
+	Profile.end("g3_index_cache_parse",cached_index_started)
+	var scan_started := Profile.begin()
 	var offset := 16+size;var end := file.get_length();var index_bytes := 0;var used_index := not saved.is_empty();var rows: Array = [];var times := {}
 	while offset < end:
 		if end-offset < 80: break
@@ -113,10 +121,14 @@ func _reload_source_profiled() -> bool:
 		if not prior.is_empty() and (obj.static or time <= prior[-1].time): return fail("Object timestamps/static violation.")
 		var d := file.get_buffer(dlen)
 		if Hash.digest(d) != h.slice(48).hex_encode(): return fail("Scene descriptor checksum.")
+		var parse_started := Profile.begin()
 		var text := d.get_string_from_utf8();var desc
 		if seq < saved.size() and saved[seq].h == h.hex_encode() and saved[seq].d == text: desc = saved[seq].parsed
 		else: desc = Hash.parse_json(text);used_index = false
+		Profile.end("g3_descriptor_parse",parse_started)
+		var validation_started := Profile.begin()
 		var invalid := validate_sample(obj,desc,stored,decoded)
+		Profile.end("g3_descriptor_validation",validation_started)
 		if not invalid.is_empty(): return fail(invalid)
 		if desc.arrays.size() != n: return fail("Array count mismatch.")
 		file.seek(offset+128+dlen+stored-48);var trailer := file.get_buffer(48);var proof := h.duplicate();proof.append_array(d)
@@ -124,16 +136,21 @@ func _reload_source_profiled() -> bool:
 		var record := {"time":time,"object":obj.id,"offset":offset+80+dlen,"end":offset+128+dlen+stored,"decoded":decoded,"descriptor":desc,"sequence":seq,"index":prior.size()}
 		records.append(record);samples[obj.id].append(record);times[time] = true;rows.append({"h":h.hex_encode(),"d":text})
 		offset = record.end
+	Profile.end("g3_index_scan_inclusive",scan_started)
 	if trusted and _source_stamp_profiled() != before: return fail("Scene changed while indexing.")
+	var timestamps_started := Profile.begin()
 	var ordered: Array = times.keys();ordered.sort()
 	for time in ordered: frames.append({"time":time,"offset":0,"bytes":offset,"end":offset})
 	scan_offset = offset;source_stamp = before;index_state = "validated index" if used_index and saved.size() == rows.size() else "rebuilt index"
+	Profile.end("g3_timestamp_index",timestamps_started)
+	var save_started := Profile.begin()
 	if trusted and index_state == "rebuilt index":
 		var body := JSON.stringify({"parser":"SIMSCP3/g3-1","source":before,"header":header.sha256,"records":rows},"",true,true)
 		var envelope := JSON.stringify({"body":body,"sha256":body.sha256_text()})
 		if envelope.length() <= Hash.MAX_INDEX and DirAccess.make_dir_recursive_absolute(cache_dir) == OK:
 			var tmp := cache_path+".tmp-%d" % OS.get_process_id();var f := FileAccess.open(tmp,FileAccess.WRITE)
 			if f != null: f.store_string(envelope);f.flush();f.close();DirAccess.rename_absolute(tmp,cache_path)
+	Profile.end("g3_index_cache_write",save_started)
 	index_valid = true
 	return true
 static func dimensions_equal(a, b) -> bool:
