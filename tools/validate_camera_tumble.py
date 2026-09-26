@@ -1,4 +1,4 @@
-"""Focused continuous camera regression using tiny native SIMSCP3 fixtures."""
+"""Focused continuous camera regression using tiny native SIMSCP4 fixtures."""
 import argparse
 import hashlib
 import json

@@ -1,11 +1,12 @@
-"""Version 3: independently committed, lossless particle/mesh/grid samples."""
+"""Version 4: independently committed, lossless particle/mesh/grid samples."""
 import hashlib,json,math,os,re,struct,tempfile,uuid
 from collections import OrderedDict
 from pathlib import Path
 import numpy as np
 from . import codec
 from . import storage
-MAGIC=b'SIMSCP3\0'
+from . import field_statistics
+MAGIC=b'SIMSCP4\0'
 PREFIX=struct.Struct('<8sII')
 FRAME=storage.FRAME
 COMMIT=storage.COMMIT
@@ -21,7 +22,7 @@ def affine(value):
 
 
 def metadata_valid(meta):
-    if not isinstance(meta,dict) or meta.get('version')!=3 or not re.fullmatch('[a-f0-9]{32}',str(meta.get('uuid',''))): raise ValueError('Unsupported scene metadata/version')
+    if not isinstance(meta,dict) or meta.get('version')!=4 or not re.fullmatch('[a-f0-9]{32}',str(meta.get('uuid',''))): raise ValueError('Unsupported scene metadata/version')
     objects=meta.get('objects');names=set()
     if not isinstance(objects,list) or not 1<=len(objects)<=16: raise ValueError('Object table limit')
     for obj in objects:
@@ -80,17 +81,12 @@ def schema_valid(obj,desc,stored,decoded):
         names.add(a['name']);shape=a.get('shape')
         if not isinstance(shape,list) or not 1<=len(shape)<=3 or any(type(x) is not int or x<0 or x>10_000_000 for x in shape): raise ValueError('Invalid shape')
         size=math.prod(shape)*storage.DTYPES[a['dtype']]
+        if obj['kind']=='volume':field_statistics.validate(a.get('statistics_v1'),math.prod(shape))
+        elif 'statistics_v1' in a:raise ValueError('statistics_v1 requires a volume')
         total+=size
         if total>MAX_SAMPLE: raise ValueError('Sample allocation ceiling')
         parts=a.get('chunks')
         if not isinstance(parts,list) or len(parts)>4096: raise ValueError('Chunk table ceiling')
-        expected=[]
-        if obj['kind']=='volume':
-            if len(shape)!=3 or any(not 2<=v<=512 for v in shape):raise ValueError('Grid shape ceiling')
-            for z in range(0,shape[0],32):
-                for y in range(0,shape[1],32):
-                    for x in range(0,shape[2],32): expected.append(([z,y,x],[min(32,shape[0]-z),min(32,shape[1]-y),min(32,shape[2]-x)]))
-            if len(parts)!=len(expected): raise ValueError('Brick coverage mismatch')
         length=0
         for i,p in enumerate(parts):
             off=storage.decimal(p.get('offset'));s=storage.decimal(p.get('stored'));d=storage.decimal(p.get('decoded'))
@@ -98,7 +94,7 @@ def schema_valid(obj,desc,stored,decoded):
             if p['codec']==0 and s!=d: raise ValueError('None byte count mismatch')
             for key in ('raw_sha256','stored_sha256'):
                 if not re.fullmatch('[a-f0-9]{64}',str(p.get(key,''))): raise ValueError('Chunk checksum missing')
-            if expected and (p.get('origin')!=expected[i][0] or p.get('shape')!=expected[i][1] or d!=math.prod(expected[i][1])*storage.DTYPES[a['dtype']]): raise ValueError('Brick shape/coverage mismatch')
+            if 'origin' in p or 'shape' in p or d!=min(codec.MAX_CHUNK,size-length):raise ValueError('Noncanonical contiguous chunk')
             offset+=s;length+=d
         if length!=size: raise ValueError('Decoded array length mismatch')
     if offset!=stored or total!=decoded: raise ValueError('Sample byte totals mismatch')
@@ -111,13 +107,13 @@ class SceneCapture:
         if compression=='zstd':codec.zstd_module()
         self.codec=int(compression=='zstd');self.level=compression_level
         if type(self.level) is not int or not 1<=self.level<=6:raise ValueError('Compression level 1..6 required')
-        self.metadata=dict(metadata or {},version=3,uuid=uuid.uuid4().hex,objects=[])
+        self.metadata=dict(metadata or {},version=4,uuid=uuid.uuid4().hex,objects=[])
         for obj in objects:
             o=dict(space='viewer_world',static=False,data_to_world=IDENTITY.copy());o.update(obj)
             self.metadata['objects'].append(o)
         metadata_valid(self.metadata);raw=storage.dumps(self.metadata)
         if len(raw)>1048576:raise ValueError('Metadata limit')
-        self.file=Path(path).open('xb');self.file.write(PREFIX.pack(MAGIC,3,len(raw))+raw);self.file.flush()
+        self.file=Path(path).open('xb');self.file.write(PREFIX.pack(MAGIC,4,len(raw))+raw);self.file.flush()
         self.seq=0;self.index_bytes=0;self.last={};self.failed=False;self.histories={}
     def _add(self,object_id,time,arrays,associations,geometry):
         if self.failed or self.file.closed:raise ValueError('Closed or failed writer')
@@ -144,10 +140,9 @@ class SceneCapture:
             for a in specs:
                 value=prepared[a['name']];parts=[]
                 if obj['kind']=='volume':
-                    pieces=((np.ascontiguousarray(value[z:z+32,y:y+32,x:x+32]),dict(origin=[z,y,x],shape=list(value[z:z+32,y:y+32,x:x+32].shape))) for z in range(0,value.shape[0],32) for y in range(0,value.shape[1],32) for x in range(0,value.shape[2],32))
-                else:
-                    raw_view=memoryview(value).cast('B') if value.size else memoryview(b'')
-                    pieces=((raw_view[start:start+codec.MAX_CHUNK],{}) for start in range(0,value.nbytes,codec.MAX_CHUNK))
+                    a['statistics_v1']=field_statistics.summarize(value)
+                raw_view=memoryview(value).cast('B') if value.size else memoryview(b'')
+                pieces=((raw_view[start:start+codec.MAX_CHUNK],{}) for start in range(0,value.nbytes,codec.MAX_CHUNK))
                 for piece,extra in pieces:
                     raw=memoryview(piece).cast('B');encoded=codec.encode(raw,self.codec,self.level)
                     parts.append(dict(offset=str(stored),stored=str(len(encoded)),decoded=str(len(raw)),codec=self.codec,raw_sha256=storage.sha(raw),stored_sha256=storage.sha(encoded),**extra))
@@ -156,11 +151,11 @@ class SceneCapture:
             desc=dict(geometry=geometry,arrays=specs);schema_valid(obj,desc,stored,total);d=storage.dumps(desc)
             if len(d)>storage.MAX_DESC or self.index_bytes+128+len(d)>MAX_INDEX:raise ValueError('Index metadata ceiling')
             if ordered is not None:self.histories.setdefault(object_id,storage.IdentityHistory()).advance(ordered)
-            h=FRAME.pack(b'FRM3',len(d),stored,total,time,index,len(specs),self.seq,hashlib.sha256(d).digest())
+            h=FRAME.pack(b'FRM4',len(d),stored,total,time,index,len(specs),self.seq,hashlib.sha256(d).digest())
             try:
                 self.file.write(h);self.file.write(d);payload.seek(0)
                 while block:=payload.read(codec.MAX_CHUNK):self.file.write(block)
-                self.file.write(COMMIT.pack(b'COMMIT3\0',self.seq,hashlib.sha256(h+d).digest()));self.file.flush()
+                self.file.write(COMMIT.pack(b'COMMIT4\0',self.seq,hashlib.sha256(h+d).digest()));self.file.flush()
             except Exception:self.failed=True;raise
         self.last[index]=time;self.seq+=1;self.index_bytes+=128+len(d)
     def add_particles(self,object_id,time,positions,*,ids=None,**channels):
@@ -200,7 +195,7 @@ class SceneReader:
         prefix=self.file.read(16)
         if len(prefix)!=16:raise ValueError('Incomplete scene prefix')
         magic,version,n=PREFIX.unpack(prefix)
-        if magic!=MAGIC or version!=3 or n>1048576:raise ValueError('Unsupported scene format/version')
+        if magic!=MAGIC or version!=4 or n>1048576:raise ValueError('Unsupported scene format/version')
         self.metadata=json.loads(self.file.read(n));metadata_valid(self.metadata);self.objects={o['id']:o for o in self.metadata['objects']};self.samples={key:[] for key in self.objects}
         end=getattr(self.file,'read_extent',os.fstat(self.file.fileno()).st_size);offset=16+n;index_bytes=0;last={}
         while offset<end:
@@ -208,7 +203,7 @@ class SceneReader:
                 if strict:raise ValueError('Incomplete scene record')
                 break
             self.file.seek(offset);h=self.file.read(80);tag,dlen,stored,decoded,time,oi,narrays,seq,digest=FRAME.unpack(h)
-            if tag!=b'FRM3' or dlen>storage.MAX_DESC or stored>MAX_SAMPLE+64*1024*1024 or decoded>MAX_SAMPLE or oi>=len(self.objects) or not math.isfinite(time) or seq!=len(self.records) or seq>=1_000_000 or not 1<=narrays<=256:raise ValueError('Scene header/allocation limit')
+            if tag!=b'FRM4' or dlen>storage.MAX_DESC or stored>MAX_SAMPLE+64*1024*1024 or decoded>MAX_SAMPLE or oi>=len(self.objects) or not math.isfinite(time) or seq!=len(self.records) or seq>=1_000_000 or not 1<=narrays<=256:raise ValueError('Scene header/allocation limit')
             size=128+dlen+stored
             if size>end-offset:
                 if strict:raise ValueError('Incomplete scene payload/commit')
@@ -222,7 +217,7 @@ class SceneReader:
             desc=json.loads(raw);schema_valid(obj,desc,stored,decoded)
             if len(desc['arrays'])!=narrays:raise ValueError('Array count')
             self.file.seek(offset+size-48)
-            if COMMIT.unpack(self.file.read(48))!=(b'COMMIT3\0',seq,hashlib.sha256(h+raw).digest()):raise ValueError('Commit checksum')
+            if COMMIT.unpack(self.file.read(48))!=(b'COMMIT4\0',seq,hashlib.sha256(h+raw).digest()):raise ValueError('Commit checksum')
             record=dict(time=time,object=obj['id'],offset=offset+80+dlen,end=offset+size,decoded=decoded,descriptor=desc,sequence=seq)
             self.records.append(record);self.samples[obj['id']].append(record);last[oi]=time;offset+=size
         self.committed_end=offset;self.times=sorted(set(r['time'] for r in self.records));self._unchanged()
@@ -233,17 +228,14 @@ class SceneReader:
             self.cache.move_to_end(key);return {k:v.view() for k,v in self.cache[key].items()}
         arrays={}
         for a in r['descriptor']['arrays']:
-            value=np.empty(a['shape'],dtype='<'+a['dtype']);pieces=[]
+            pieces=[]
             for p in a['chunks']:
                 self.file.seek(r['offset']+int(p['offset']));stored=self.file.read(int(p['stored']))
                 if storage.sha(stored)!=p['stored_sha256']:raise ValueError('Stored checksum')
                 raw=codec.decode(stored,int(p['decoded']),p['codec'])
                 if storage.sha(raw)!=p['raw_sha256']:raise ValueError('Decoded checksum')
-                if 'origin' in p:
-                    z,y,x=p['origin'];bz,by,bx=p['shape'];value[z:z+bz,y:y+by,x:x+bx]=np.frombuffer(raw,dtype=value.dtype).reshape(p['shape'])
-                else:pieces.append(raw)
-            if pieces:value=np.frombuffer(b''.join(pieces),dtype=value.dtype).reshape(a['shape'])
-            value=np.frombuffer(value.tobytes(),dtype=value.dtype).reshape(value.shape) if value.flags.owndata else value
+                pieces.append(raw)
+            value=np.frombuffer(b''.join(pieces),dtype='<'+a['dtype']).reshape(a['shape'])
             value.flags.writeable=False;arrays[a['name']]=value
         self._unchanged()
         if self.objects[object_id]['kind']=='mesh' and 'vertex_id' in arrays:storage.validate_ids(arrays['vertex_id'],len(arrays['position']))

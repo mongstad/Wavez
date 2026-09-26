@@ -11,5 +11,5 @@ and are not product dependencies. See [repository boundaries](REPOSITORY_BOUNDAR
 - [Retained evidence](EVIDENCE_INDEX.md)
 
 G0–G4 are implemented and accepted. G5/G6 require separate authorization and have
-not started. New work targets `.ssc` / SIMSCP3 under the
+not started. New work targets `.ssc` / SIMSCP4 under the
 [capture format policy](CAPTURE_FORMAT_POLICY.md). SimScope is the final name.

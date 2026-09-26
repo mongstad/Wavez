@@ -27,7 +27,7 @@ static func digest(path: String, extent: int) -> String:
 static func identity(viewer) -> Dictionary:
 	if viewer.generic_reader == null: return {}
 	var extent: int = viewer.generic_reader.scan_offset
-	return {"path":viewer.capture_path,"committed_bytes":str(extent),"sha256":digest(viewer.capture_path,extent),"format":"SIMSCP3", "complete_frames":viewer.frame_count}
+	return {"path":viewer.capture_path,"committed_bytes":str(extent),"sha256":digest(viewer.capture_path,extent),"format":"SIMSCP4", "complete_frames":viewer.frame_count}
 
 static func snapshot(viewer, source: Dictionary = {}) -> Dictionary:
 	if viewer.scene_layers != null and not viewer.scene_layers.ensure_particle_data():return {}
@@ -128,10 +128,10 @@ static func restore(viewer, recipe: Dictionary) -> String:
 
 static func restore_scene(viewer, recipe: Dictionary) -> String:
 	if viewer.inspection_busy:return "An inspection capture is in progress."
-	if viewer.scene_layers == null or recipe.get("kind") != "simscope-inspection":return "Open the SIMSCP3 scene first."
+	if viewer.scene_layers == null or recipe.get("kind") != "simscope-inspection":return "Open the SIMSCP4 scene first."
 	if not recipe.get("source") is Dictionary or not recipe.get("visual") is Dictionary or not recipe.get("sample") is Dictionary:return "Missing scene inspection state."
 	var source: Dictionary = recipe.source
-	if not source.get("committed_bytes") is String or not source.committed_bytes.is_valid_int() or not source.get("sha256") is String or source.get("format") != "SIMSCP3":return "Invalid scene source identity."
+	if not source.get("committed_bytes") is String or not source.committed_bytes.is_valid_int() or not source.get("sha256") is String or source.get("format") != "SIMSCP4":return "Invalid scene source identity."
 	if digest(viewer.capture_path,int(source.committed_bytes)) != source.sha256:return "Scene source identity mismatch; no state applied."
 	if not recipe.get("layers") is Array or recipe.layers.size() != viewer.generic_reader.objects.size():return "Scene layer manifest differs."
 	var seen := {}

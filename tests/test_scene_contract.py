@@ -24,7 +24,7 @@ class SceneContractTests(unittest.TestCase):
         self.temp.cleanup()
 
     def test_retired_magic_is_refused_even_with_native_suffix(self):
-        for magic in [b'VBCOSM1\0', b'SIMSCP1\0', b'SIMSCP2\0']:
+        for magic in [b'VBCOSM1\0', b'SIMSCP1\0', b'SIMSCP2\0', b'SIMSCP3\0']:
             with self.subTest(magic=magic):
                 self.path.write_bytes(magic + self.raw[8:])
                 for strict in [True, False]:

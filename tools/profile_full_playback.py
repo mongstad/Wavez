@@ -5,6 +5,7 @@ No OS page-cache flush. Captures are read-only; hashing occurs AFTER timing.
 import argparse
 import hashlib
 import json
+import math
 import os
 from pathlib import Path
 import subprocess
@@ -23,12 +24,17 @@ def main():
     p.add_argument('--renderer', default='forward_plus', choices=['forward_plus', 'gl_compatibility'])
     p.add_argument('--runs', type=int, default=2)
     p.add_argument('--wall-limit', type=float, default=1200)
+    p.add_argument('--interval', type=float, nargs=2, metavar=('START', 'END'))
+    p.add_argument('--switch-channels', nargs='*', default=[])
     a = p.parse_args()
+    if a.interval and (not all(math.isfinite(v) for v in a.interval) or a.interval[0] >= a.interval[1]):
+        p.error('interval must have finite START < END')
     out = a.output_dir.resolve(); out.mkdir(parents=True, exist_ok=False)
     source = a.capture.resolve(); initial = source.stat()
     cmd = [a.godot, '--path', str(a.viewer.resolve()), '--rendering-method', a.renderer,
            '--audio-driver', 'Dummy', '--resolution', '1280x800', '--script', str(a.script.resolve()),
-           '--', str(source), str(out / 'playback.json'), str(a.runs), str(a.wall_limit)]
+           '--', str(source), str(out / 'playback.json'), str(a.runs), str(a.wall_limit),
+           json.dumps(a.interval), json.dumps(a.switch_channels)]
     metadata = dict(command=cmd, capture=str(source), bytes=initial.st_size,
                     clock_ticks=os.sysconf('SC_CLK_TCK'), page_cache='uncontrolled; no pre-timing integrity read',
                     cpu_count=os.cpu_count(), started=time.time())
@@ -50,7 +56,7 @@ def main():
                     except OSError:
                         pass
                 resources.write(json.dumps(row)+'\n'); resources.flush()
-                if row['wall_s'] > a.runs*a.wall_limit+120:
+                if row['wall_s'] > (a.runs+len(a.switch_channels))*a.wall_limit+120:
                     process.terminate(); raise TimeoutError('Native playback timed out')
                 time.sleep(.5)
         finally:
@@ -70,6 +76,11 @@ def main():
     for run in result['runs']:
         print(json.dumps({k: run[k] for k in ['complete', 'preparation_ms', 'wall_s', 'advanced', 'frame_ms', 'commit_ms', 'error']}))
         print('interruptions:', len(run['interruptions']))
+        if not run['complete'] or run['error']:
+            raise SystemExit('Playback did not complete successfully; see playback.json')
+    for switch in result.get('switches', []):
+        if switch['error'] or switch['after']['session'].get('state') != 'ready':
+            raise SystemExit('Channel preparation failed; see playback.json')
 
 
 if __name__ == '__main__':

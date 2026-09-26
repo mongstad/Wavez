@@ -24,7 +24,7 @@ func run() -> void:
 	await settle()
 	var source := Inspection.identity(viewer)
 	var before := Inspection.snapshot(viewer, source)
-	check(not before.is_empty(), "Loaded native combined SIMSCP3 fixture snapshot")
+	check(not before.is_empty(), "Loaded native combined SIMSCP4 fixture snapshot")
 	var image_before := root.get_texture().get_image(); image_before.save_png(out.path_join("production-before.png"))
 	var original_theme = root.theme
 	var original_project_theme = ProjectSettings.get_setting("gui/theme/custom", "")

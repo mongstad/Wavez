@@ -1,4 +1,4 @@
-"""Native scientific scenes: SIMSCP3 / .ssc."""
+"""Native scientific scenes: SIMSCP4 / .ssc."""
 from .scene import SceneCapture, SceneReader
 
 __all__ = ['SceneCapture', 'SceneReader']

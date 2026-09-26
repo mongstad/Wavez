@@ -35,5 +35,23 @@ class SceneChunkTests(unittest.TestCase):
                             self.assertEqual(set(selected.arrays),{"velocity"})
                             np.testing.assert_array_equal(selected.arrays["velocity"],expected_velocity)
 
+    def test_volume_chunks_cross_planes_and_preserve_float_bits(self):
+        shape=(67, 129, 130)
+        with tempfile.TemporaryDirectory() as directory:
+            for dtype in ('f4','f8'):
+                values=np.arange(np.prod(shape),dtype=dtype).reshape(shape)/7
+                values[0,0,:4]=[np.nan,np.inf,-np.inf,-0.]
+                for compression in ('none','zstd'):
+                    path=Path(directory)/f'{dtype}-{compression}.ssc'
+                    with SceneCapture(path,objects=[dict(id='f',kind='volume',units='m')],compression=compression) as writer:
+                        writer.add_volume('f',0,dict(value=values),origin=[0]*3,spacing=[1]*3)
+                    with SceneReader(path) as reader,SourceSnapshot(path) as source:
+                        spec=reader.records[0]['descriptor']['arrays'][0]
+                        self.assertEqual(len(spec['chunks']),(values.nbytes+MAX_CHUNK-1)//MAX_CHUNK)
+                        self.assertTrue(all('origin' not in c and 'shape' not in c for c in spec['chunks']))
+                        self.assertEqual(reader.read_sample('f',0)['value'].tobytes(),values.tobytes())
+                        with source.read_sample('f',0,['value']) as sample:
+                            self.assertEqual(sample.arrays['value'].tobytes(),values.tobytes())
+
 
 if __name__=="__main__":unittest.main()

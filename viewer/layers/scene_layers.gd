@@ -347,8 +347,10 @@ func _tick_profiled(delta: float) -> void:
 	if viewer.playing and reader.frames.size()>1:
 		var committed_index: int = viewer.current_index;var committed_phase: float = viewer.phase
 		var next_time: float = viewer.requested_time+delta*viewer.physical_rate
-		if viewer.scene_loop_playback and (next_time>reader.frames[-1].time or next_time<reader.frames[0].time):next_time = wrapf(next_time,reader.frames[0].time,reader.frames[-1].time)
-		viewer.requested_time = clampf(next_time,reader.frames[0].time,reader.frames[-1].time)
+		var interval: Array = field_playback.playback_range() if field_playback != null else [reader.frames[0].time,reader.frames[-1].time]
+		var outside: bool = next_time>interval[1] or next_time<interval[0]
+		if viewer.scene_loop_playback and outside:next_time = wrapf(next_time,interval[0],interval[1])
+		viewer.requested_time = clampf(next_time,interval[0],interval[1])
 		viewer.display_accum += delta
 		if viewer.display_accum >= 1.0/viewer.DISPLAY_HZ:
 			# Keep the fractional frame remainder; resetting it quantizes 30 Hz
@@ -359,6 +361,7 @@ func _tick_profiled(delta: float) -> void:
 				viewer.requested_time = viewer.committed_sample.get("requested_time",viewer.requested_time)
 				viewer.current_index = committed_index;viewer.phase = committed_phase
 			Profile.count("g3_display_samples")
+			if outside and not viewer.scene_loop_playback and not result.has("pending") and field_playback != null and field_playback.limited_playback():viewer._toggle_playback()
 	_poll_iso()
 func use_async() -> bool:
 	return ((playback != null and playback.enabled) or (field_playback != null and field_playback.enabled) or (mesh_playback != null and mesh_playback.enabled)) and not viewer.offline_instance and not viewer.inspection_busy
@@ -378,6 +381,7 @@ func ensure_particle_data() -> bool:
 func seek(time: float) -> bool:
 	if not refresh() or reader.frames.is_empty() or not is_finite(time) or time < reader.frames[0].time or time > reader.frames[-1].time:return false
 	if field_playback != null:
+		field_playback.seek_outside_interval(time)
 		if field_playback.session_waiting:
 			field_playback.cancel_session();field_playback.pending_time = time;field_playback.begin_session(time)
 		else:field_playback.pending_time = null;field_playback.buffering = false

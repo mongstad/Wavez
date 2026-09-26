@@ -1,4 +1,4 @@
-# G3 — SIMSCP3 layered capture contract
+# SIMSCP4 layered capture contract
 
 Implemented in the authoritative `SimScope` repository. `SceneCapture` / `SceneReader` are
 the supported writer/reader APIs. See [G3_REPORT.md](G3_REPORT.md) for historical
@@ -7,18 +7,18 @@ acceptance, [G3_GUIDE.md](G3_GUIDE.md) for examples and the
 
 ## Wire and scientific data
 
-All numbers on disk are little-endian. Prefix `<8sII>` is magic `SIMSCP3\0`,
-version 3, metadata byte length, then at most 1 MiB UTF-8 JSON. Metadata has version,
+All numbers on disk are little-endian. Prefix `<8sII>` is magic `SIMSCP4\0`,
+version 4, metadata byte length, then at most 1 MiB UTF-8 JSON. Metadata has version,
 a hexadecimal UUID and 1–16 unique objects. Each object declares `id`, `kind`
 (particles/mesh/volume), `units`, `space: viewer_world`, `static`, and affine
 `data_to_world` (row-major 3×4). The writer supplies identity transform/static=false
 when omitted. Required unknown kinds fail; this version has no optional-kind skip.
 Additional descriptive metadata, including channel units/provenance, is retained.
 
-One record per object sample uses `<4sIQQdIIQ32s>` (80 bytes): `FRM3`, descriptor
+One record per object sample uses `<4sIQQdIIQ32s>` (80 bytes): `FRM4`, descriptor
 length, stored bytes, decoded bytes, exact float64 timestamp, object-table index,
 array count, global sequence, descriptor SHA-256. Descriptor JSON contains `geometry`
-and `arrays`. Payload follows. The 48-byte `<8sQ32s>` commit has `COMMIT3\0`, sequence,
+and `arrays`. Payload follows. The 48-byte `<8sQ32s>` commit has `COMMIT4\0`, sequence,
 and SHA-256(header + descriptor). No footer is needed. Object timestamps strictly
 increase; records for different objects can be interleaved independently. A static
 object has one sample. Incomplete trailing records remain unavailable; corruption
@@ -32,11 +32,28 @@ apply. Compression is lossless; no scientific-value normalization is performed.
 NaNs, signed zero and source float precision survive round trips. There is no lossy
 storage option in this release.
 
-Particles/meshes use contiguous chunks of at most 4 MiB. Grid scalar channels use
-canonical 32³ bricks, shortened at edges, each with z,y,x origin and shape. Grid
-arrays are C-order `(Nz, Ny, Nx)`, x fastest. Readers validate exact brick coverage,
-byte totals and commit/checksums before accepting data. Complete grids are assembled
-for display/analysis; brick boundaries do not become extraction boundaries.
+All arrays use canonical contiguous chunks of 4 MiB except the final chunk,
+which contains the remainder. Empty arrays have no chunks. Grid arrays are C-order
+`(Nz, Ny, Nx)`, x fastest; chunks may cross rows and planes. There are no brick
+origin/shape fields. Readers reject noncanonical chunks, validate byte totals and
+commit/checksums, then concatenate exact source bytes for display/analysis.
+
+Every volume array requires `statistics_v1` with exactly `minimum`, `maximum`,
+`finite`, `nonfinite`, `nonpositive`. Counts are nonnegative integers; finite +
+nonfinite equals the element count. Nonpositive counts only finite values <= 0.
+Finite extrema are 16 lowercase hex digits encoding little-endian float64; both
+are null if finite is zero. Counts/extrema must be mutually consistent. Descriptor
+hashes and commit proofs cover the summary. Source chunk hashes remain mandatory;
+statistics are consumed only after payload validation. The explicit verifier
+recomputes every summary against source values. Statistics do not replace the
+source arrays used for inspection, percentiles or analysis.
+
+This is a clean format break. The runtime supports only SIMSCP4 and refuses older
+magic/version values. Package 3.0.0 updates writer, reader, analysis and generated
+fixtures together. No legacy reader or runtime fallback is shipped. Historical
+G3 reports describe their original version, not this contract. See the
+[decision and measurements](docs/SSC_ACCELERATION.md) and the
+[capture parameter inventory](docs/SSC_CAPTURE_PARAMETERS.md).
 
 ## Geometry and identity
 
@@ -68,7 +85,7 @@ Particles require identity `anonymous` or `persistent_i8`; the latter requires
 `particle_id`. Positions must already be in viewer-world coordinates (identity
 object transform). Exact IDs, matching, birth/death and gap rules follow G2b. No
 array-index or nearest-neighbor identity is inferred. ALL interpolation/trails
-require explicit IDs, including older captures. Random seeks cannot certify unseen
+require explicit IDs, for all supported scenes. Random seeks cannot certify unseen
 lifetimes; `SceneReader.audit_identity()` checks the complete recorded history.
 
 Object `units` describes its primary values (positions for mesh/particles, scalar
@@ -85,7 +102,7 @@ Explicit static geometry is reusable throughout the scene. Grid geometry changes
 replace textures discretely. No temporal grid interpolation or reconstructed field
 from sparse particles is implied. Particle-only captures say fields are unavailable.
 
-SIMSCP3 uses version-2 inspection recipes with actual layer manifests and layer
+SIMSCP4 uses version-2 inspection recipes with actual layer manifests and layer
 visual state. Version-1 particle recipes remain supported. Restore validates source
 identity, channel/state schema and referenced samples before applying state. A recipe
 can refuse an appended source when new samples alter the formerly held bracket;
@@ -123,7 +140,7 @@ and [depth reconstruction](https://docs.godotengine.org/en/4.7/tutorials/shaders
 ## Derived surfaces and allocation ceilings
 
 Optional Python worker: scikit-image 0.26.x Lewiner marching cubes, no smoothing or
-decimation. Full source grids are assembled across bricks; float32 algorithm input
+decimation. Full source grids are assembled from contiguous chunks; float32 algorithm input
 is an explicit derived-analysis approximation. Cells with any nonfinite corner are
 omitted. A surface is a chosen level set, not automatically a material boundary.
 Source hash/extent, object, channel, time, geometry, transform, threshold and algorithm

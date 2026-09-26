@@ -1,4 +1,4 @@
-"""Rendered regression for live SIMSCP3 union-clock slider extent.
+"""Rendered regression for live SIMSCP4 union-clock slider extent.
 
 Optionally replay committed prefixes of a real layered capture, without writing
 to that source. The native test appends bytes only to disposable fixture copies.

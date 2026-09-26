@@ -14,7 +14,10 @@ var working_token := ""
 var working_key := ""
 var jobs: Array = []
 var wanted := {}
+var wanted_sources := {}
 var prepared := {}
+var source_keys := {} # One selected preview per immutable all-channel source sample.
+var source_reuses := 0
 var cache_token := ""
 var order: Array[String] = []
 var used := 0
@@ -65,13 +68,13 @@ func get_frame(key: String) -> Dictionary:
 	mutex.unlock();return value
 func status() -> Dictionary:
 	mutex.lock()
-	var result := {"bytes":used,"limit":limit,"retained_limit":retained_limit,"frames":prepared.size(),"completed":completed,"cancelled":cancelled,"evictions":evictions,"worker_ms":worker_ms,"pipeline_stages":pipeline_stages.duplicate(true),"worker_thread":worker_thread,"active":not working_key.is_empty(),"error":error,"failures":failures.duplicate(),"test_barrier_waiting":at_barrier,"session":session.duplicate()}
+	var result := {"bytes":used,"limit":limit,"retained_limit":retained_limit,"frames":prepared.size(),"completed":completed,"source_reuses":source_reuses,"cancelled":cancelled,"evictions":evictions,"worker_ms":worker_ms,"pipeline_stages":pipeline_stages.duplicate(true),"worker_thread":worker_thread,"active":not working_key.is_empty(),"error":error,"failures":failures.duplicate(),"test_barrier_waiting":at_barrier,"session":session.duplicate()}
 	mutex.unlock();return result
 # Caller holds the publication mutex. This also makes cancellation O(1),
 # independent of the number of admitted samples.
 func _set_jobs(next_jobs: Array) -> void:
-	jobs = next_jobs;wanted = {}
-	for job in jobs:wanted[job.key] = true
+	jobs = next_jobs;wanted = {};wanted_sources = {}
+	for job in jobs:wanted[job.key] = true;wanted_sources[job.get("source_key",job.key)] = true
 func prepare_session(next_token: String, next_jobs: Array) -> void:
 	mutex.lock()
 	if token == next_token and session.get("state") == "ready":
@@ -102,7 +105,11 @@ func _plan_session() -> void:
 		var job: Dictionary = plan[i]
 		if Stamp.read(job.path) != job.stamp:problem = "Field source changed during preparation.";break
 		var file := FileAccess.open(job.path,FileAccess.READ)
-		var entry := Reader.materialize(file,job.entry,job.object)
+		mutex.lock()
+		var cached: Dictionary = prepared.get(source_keys.get(job.get("source_key",""),""),{})
+		var prior_entry: Dictionary = cached.get("entry",{}) if cached.get("scope") == job.get("scope") else {}
+		mutex.unlock()
+		var entry := Reader.materialize(file,job.entry,job.object) if prior_entry.is_empty() else prior_entry
 		if entry.has("error"):problem = entry.error;break
 		job.entry = entry
 		var charge := Prepare.charge(entry,job.channel,job.budget)
@@ -123,7 +130,7 @@ func _plan_session() -> void:
 	session.capacity = capacity;session.memory = memory;session.required_bytes = required
 	session.resident_credit = resident;session.reserved_other_bytes = other;session.largest_job_bytes = largest
 	if problem.is_empty() and required > capacity:
-		problem = "Continuous field playback needs %.1f GiB prepared RAM; %.1f GiB is safely available. Free RAM and retry. This workload cannot be declared ready with only a short prefetch window." % [required/float(1024*Memory.MIB),capacity/float(1024*Memory.MIB)]
+		problem = "Continuous field playback needs %.1f GiB prepared RAM; %.1f GiB is safely available. Choose a shorter interval in Performance, or free RAM and retry. Source quality is unchanged." % [required/float(1024*Memory.MIB),capacity/float(1024*Memory.MIB)]
 	if not problem.is_empty():session.state = "blocked";session.error = problem;mutex.unlock();return
 	# Replace conservative lazy-header charges with the validated exact plan.
 	var ready := 0
@@ -144,11 +151,13 @@ func _prune(incoming: int, key: String) -> bool:
 		var kept: Array[String] = []
 		for old in order:
 			if prepared[old].token != token:
+				source_keys.erase(prepared[old].get("source_key",""))
 				retired.append(prepared[old]);used -= int(prepared[old].bytes);prepared.erase(old)
 			else:kept.append(old)
 		order = kept;cache_token = token
 	# A matching key from an invalidated generation cannot block its replacement.
 	if prepared.has(key) and prepared[key].token != token:
+		source_keys.erase(prepared[key].get("source_key",""))
 		retired.append(prepared[key]);used -= int(prepared[key].bytes);prepared.erase(key);order.erase(key)
 	while used+incoming > limit and not order.is_empty():
 		# Retire obsolete channels first, preserving every current-session sample
@@ -156,10 +165,26 @@ func _prune(incoming: int, key: String) -> bool:
 		var victim := 0
 		for i in range(order.size()):
 			if prepared[order[i]].token != token:victim = i;break
+		# A smaller interval should retain its already-decoded source samples
+		# while releasing unrelated times, even across a channel generation.
+		for i in range(order.size()):
+			if prepared[order[i]].token != token and not wanted_sources.has(prepared[order[i]].get("source_key",order[i])):victim = i;break
 		var old: String = order[victim];order.remove_at(victim)
+		source_keys.erase(prepared[old].get("source_key",""))
 		retired.append(prepared[old]);used -= int(prepared[old].bytes);prepared.erase(old);evictions += 1
 	var fits := used+incoming <= limit and not prepared.has(key)
 	mutex.unlock();retired.clear();return fits
+func _take_source(job: Dictionary) -> Dictionary:
+	# Only compatible source/visibility/budget scopes can reuse arrays. Remove
+	# the obsolete preview's charge before replacing it, retaining one allocation.
+	mutex.lock()
+	var key: String = source_keys.get(job.get("source_key",""),"")
+	var value: Dictionary = prepared.get(key,{})
+	var result := {}
+	if not value.is_empty() and value.get("scope") == job.get("scope"):
+		result = {"sample":value.sample,"entry":value.entry,"previous":value,"previous_key":key}
+		used -= int(value.bytes);prepared.erase(key);order.erase(key);source_keys.erase(job.source_key);source_reuses += 1
+	mutex.unlock();return result
 func _next() -> Dictionary:
 	mutex.lock();var next := {}
 	if not closing and session.get("state") not in ["ready","blocked"]:
@@ -168,6 +193,13 @@ func _next() -> Dictionary:
 			var job: Dictionary = jobs[index]
 			if session.get("state") == "preparing":session.next = index+1
 			if not failures.has(job.key) and (not prepared.has(job.key) or prepared[job.key].token != token):
+				var source: Dictionary = prepared.get(source_keys.get(job.get("source_key",""),""),{})
+				if not source.is_empty() and source.get("scope") == job.get("scope"):
+					# Lazy headers overestimate the preview by all channel bytes.
+					# Use the already-validated descriptor so replacing one preview
+					# cannot evict other reusable source samples unnecessarily.
+					var exact := Prepare.charge(source.entry,job.channel,job.budget)
+					if not exact.has("error"):job = job.duplicate();job.charge = exact.bytes
 				next = job;working_key = job.key;working_token = token;break
 	mutex.unlock();return next
 func _run() -> void:
@@ -183,21 +215,27 @@ func _run() -> void:
 			if job.is_empty():
 				_session_progress();break
 			var began := Time.get_ticks_usec();var result := {};var stages := {};var memory := Memory.memory_headroom()
+			var reusable := {};var materialized := {}
 			if memory.available_physical < memory.reserve+int(job.get("other_reservation",0))+job.charge*3:
 				result = {"error":"Field preparation needs %.1f MiB available RAM including other reservations; %.1f MiB is available. Free RAM or reduce other caches." % [(memory.reserve+int(job.get("other_reservation",0))+job.charge*3)/float(Memory.MIB),memory.available_physical/float(Memory.MIB)]}
 			elif Stamp.read(job.path) != job.stamp:result = {"error":"Field source changed; waiting for refresh."}
-			elif not _prune(job.charge,job.key):result = {"error":"Field frame exceeds the preparation budget."}
 			else:
-				var file := FileAccess.open(job.path,FileAccess.READ)
-				if file == null:result = {"error":"Cannot open field source."}
+				reusable = _take_source(job)
+				if not _prune(job.charge,job.key):result = {"error":"Field frame exceeds the preparation budget."}
+				elif not reusable.is_empty():
+					materialized = reusable.entry
+					result = Prepare.prepare(job.object,reusable.sample,job.channel,job.budget,self)
+					stages = result.get("timings",{}).duplicate()
 				else:
+					var file := FileAccess.open(job.path,FileAccess.READ)
 					var entry := Reader.materialize(file,job.entry,job.object)
+					materialized = entry
 					var decoded := entry if entry.has("error") else Channels.read(file,entry,job.object,self)
 					if decoded.has("error"):result = {"error":decoded.error if entry.has("error") else Reader.record_error(job.entry,decoded.error)}
 					elif decoded.is_empty():result = decoded
 					else:
 						stages = decoded.get("timings",{}).duplicate()
-						var sample := {"time":job.entry.time,"count":0,"channels":decoded.channels,"components":decoded.components,"shapes":decoded.shapes,"associations":decoded.associations,"geometry":entry.descriptor.geometry,"has_ids":false,"identity_map":null,"source_index":job.entry.index,"sequence":job.entry.sequence,"decoded_bytes":decoded.reserve}
+						var sample := {"time":job.entry.time,"count":0,"channels":decoded.channels,"components":decoded.components,"shapes":decoded.shapes,"associations":decoded.associations,"statistics":decoded.get("statistics",{}),"geometry":entry.descriptor.geometry,"has_ids":false,"identity_map":null,"source_index":job.entry.index,"sequence":job.entry.sequence,"decoded_bytes":decoded.reserve}
 						result = Prepare.prepare(job.object,sample,job.channel,job.budget,self)
 						stages.merge(result.get("timings",{}))
 			var gate := test_barrier
@@ -206,7 +244,15 @@ func _run() -> void:
 			if not result.is_empty() and not result.has("error") and Stamp.read(job.path) != job.stamp:result = {"error":"Field source changed during preparation."}
 			var obsolete := stopped()
 			mutex.lock()
-			if obsolete or token != working_token or closing:cancelled += 1
+			if obsolete or token != working_token or closing:
+				cancelled += 1
+				# Planning or a rapid channel switch can cancel the replacement
+				# after it borrowed source arrays. Return the old, still-invalidated
+				# entry to the bounded cache; never publish it as the new channel.
+				if not closing and retained_limit > 0 and reusable.has("previous"):
+					var previous: Dictionary = reusable.previous
+					if not source_keys.has(previous.source_key) and used+int(previous.bytes) <= limit:
+						prepared[reusable.previous_key] = previous;order.append(reusable.previous_key);source_keys[previous.source_key] = reusable.previous_key;used += int(previous.bytes)
 			elif result.has("error"):
 				failures[job.key] = result.error
 				if session.get("state") == "preparing":session.state = "blocked";session.error = result.error
@@ -214,6 +260,7 @@ func _run() -> void:
 				# A controller may reduce the budget while this job is decoding.
 				cancelled += 1
 			elif not result.is_empty():
+				result.entry = materialized;result.scope = job.get("scope","");result.source_key = job.get("source_key",job.key);source_keys[result.source_key] = job.key
 				result.token = working_token;result.bytes = job.charge;prepared[job.key] = result;order.append(job.key);used += job.charge;completed += 1
 				if session.get("state") == "preparing":session.ready += 1
 			for stage in stages:
@@ -225,4 +272,4 @@ func _run() -> void:
 			mutex.unlock();result = {}
 			_session_progress()
 			if failed:break
-	prepared.clear();order.clear();mutex.lock();used = 0;retained_limit = 0;mutex.unlock()
+	prepared.clear();source_keys.clear();order.clear();mutex.lock();used = 0;retained_limit = 0;mutex.unlock()

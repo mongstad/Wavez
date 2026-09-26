@@ -1,32 +1,24 @@
 # Capture format policy
 
-SimScope supports **SIMSCP3**, normally stored as **`.ssc`**, through
-`SceneCapture` and `SceneReader`. This applies to the viewer, analysis, export,
-examples, tools and integrations. See the [public API](../SIMSCOPE_API.md) and
-[wire contract](../G3_FORMAT.md). Readers verify magic and version; renaming a
-file cannot make an unsupported capture valid.
+The current branch supports **SIMSCP4**, normally **`.ssc`**, through
+`SceneCapture` / `SceneReader` across viewer, analysis, examples and tools.
+Package **3.0.0** marks the clean break from SIMSCP3. Older captures are refused by
+magic/version; changing a suffix does not upgrade a capture. Writer, native reader,
+Python analysis, fixtures and current documentation change together. There is no
+legacy parser, fallback or migration layer in the runtime. No conversion tool is
+required or supplied by #102. A separate one-time conversion utility may be
+considered later if retained historical captures justify it.
 
-Package version **2.0.0** records the breaking transition to the SIMSCP3-only
-public contract. Older writers, readers, dispatch and discovery paths are not part
-of this fresh source snapshot. No in-place historical capture conversion is
-provided by the current package.
+See the [wire contract](../G3_FORMAT.md), [API](../SIMSCOPE_API.md),
+[format investigation](SSC_ACCELERATION.md) and
+[capture fidelity inventory](SSC_CAPTURE_PARAMETERS.md). Historical reports and
+evidence remain unchanged and describe their original contracts.
 
-Shared framing, typed arrays, exact int64 identity validation, checksums and
-bounded codec helpers serve the native contract. Python stores these in
-`simscope_export/storage.py` and `codec.py`. Godot's `data/capture_index.gd` now
-contains only shared bounds, numeric validation, hashing and JSON helpers;
-`typed_decode.gd` serves native particle preparation. Neither module scans an
-older capture format. Source values, corruption refusal and cache limits remain
-part of the supported scientific contract.
-
-SIMSCP3 capture format, scene inspection v2, G4 inspection v3 and render jobs
-v1/v2 are distinct contracts. Retiring old captures does not retire current
-native inspection/export state. Reserved visual fields in existing native
-recipes remain serializable without enabling any old capture workflow.
-
-external simulation is an external validation/test simulation, not a supported SimScope
-integration. It must not impose compatibility requirements on the product.
-Current native benchmark integrations use explicit scene/object writers.
-
-The cleanup awaits review before UX1. G5/G6, web, remote and AI work remain
-outside this assignment.
+Source values, explicit identity, corruption refusal and bounded allocation remain
+part of the scientific contract. Shared `storage.py`, `codec.py`,
+`capture_index.gd` and `typed_decode.gd` serve only the current capture contract.
+SSC version 4, scene inspection v2, G4 inspection v3 and render jobs v1/v2 are
+separate versioned contracts. Existing recipes tied to old capture identities need
+recreation for newly exported captures; recipes are not relabeled automatically.
+External research simulations must update their integrations to the current API;
+they impose no runtime compatibility requirement on SimScope.

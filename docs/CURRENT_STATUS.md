@@ -11,16 +11,19 @@ Video export dialog actions were owner-merged in PR #90 at `a6a34c5`.
 Independent legend visibility and placement were owner-merged in PR #91 at `d11e426`.
 Independent layer legends were owner-merged in PR #92 at `9774623`.
 Adaptive field preparation capacity was owner-merged in PR #99 at `d42a4dc`.
-Current authorized work is #100, the top Ready item verified on 2026-09-25:
-[Continuous SSC playback preparation](SSC_CONTINUOUS_PLAYBACK.md), **pending owner review** in PR #101.
-Lazy opening is retained; Play prepares the full visible-field timeline within
-a shared available-memory budget before advancing, with progress and cancellation.
-The [channel-switch stability correction](SSC_CHANNEL_SWITCH_STABILITY.md)
-addresses a PR-only admission failure after repeated channel changes: one bounded
-cache retains its memory accounting while obsolete entries are replaced.
-The complete-run report records preserved quality and uninterrupted 1× playback
-on the measured workstation. Strict 33.3 ms frame pacing and continuous streaming
-beyond admitted RAM remain unmet limits; this is not a universal smoothness claim.
+Continuous SSC playback preparation was owner-merged in PR #101 at `573c097`.
+Current authorized work is #102, selected as the only Ready item on 2026-09-26
+and subsequently observed In progress (no Project changes made by this work):
+[SSC generation and preparation acceleration](SSC_ACCELERATION.md), **pending owner review**.
+Lazy opening is retained. Play prepares the entire visible-field timeline or an
+explicit interval within the shared available-memory budget. Compatible channel
+changes reuse validated source arrays. SIMSCP4 requires exact field statistics and
+contiguous array chunks; package 3.0.0 refuses old capture formats without fallbacks.
+The external S0 run stopped on the previous format's descriptor ceiling. Its exact
+recorded prefix now needs 2.70 MB of descriptor charge rather than 33.55 MB.
+The report distinguishes this format limit from RAM admission and frame pacing.
+Strict 33.3 ms pacing, adaptive streaming beyond prepared intervals and 100–200 GB
+support remain unestablished; this is not a universal smoothness claim.
 The owner-confirmed 13.86 GiB capture records 128³ fields. Normal opening now
 indexes bounded record headers and loads the first visible scene; requested
 records are validated and decoded on demand or within bounded background windows.
@@ -36,8 +39,8 @@ As of **2026-09-20**, including G4 and PERF-001/002 maintenance reviewed and acc
 |---|---|
 | Authoritative viewer/exporter | `SimScope/` |
 | Repository boundary | SimScope product code/docs/tests only; scientific simulations and research data are external |
-| Preferred new capture workflow | Explicit `SceneCapture` / `SceneReader`, **SIMSCP3**, normally `.ssc` |
-| Capture contract | SIMSCP3 / `.ssc` only; package 2.0.0 removes older capture APIs |
+| Preferred new capture workflow | Explicit `SceneCapture` / `SceneReader`, **SIMSCP4**, normally `.ssc` |
+| Capture contract | SIMSCP4 / `.ssc` only; package 3.0.0, clean format break under #102 |
 | G0–G3 | Implemented: inspection, bounded storage/cache, typed identities, independent particle/mesh/volume layers, rendering and export |
 | Latest maintenance | PERF-003: bounded mesh preparation/prefetch and GPU position interpolation complete; reviewed and accepted by the owner (2026-09-13). [Mesh maintenance report](MESH_PLAYBACK_MAINTENANCE_REPORT.md). PERF-001/002 remain accepted: [report](PERFORMANCE_MAINTENANCE_REPORT.md). |
 | G4 | Implemented through G4f; A01–A23 PASS for declared fixtures and measured workloads. Accepted by the user. [Report](../G4_REPORT.md), [acceptance ledger](G4_ACCEPTANCE.md), [guide](G4_GUIDE.md). |
@@ -48,13 +51,13 @@ The slider bug was reproduced on independent particle/volume cadences and a reta
 
 The prior investigation associated all **113 callbacks above 50 ms** with particle source-pair changes, while the nominal one-second tail poll stayed below 3.1 ms. The focused optimization now skips unneeded hidden-particle work and prepares visible particle pairs on a CPU worker. On the exact retained `complete.ssc`, median visible transitions fell from **177–181 ms to about 20 ms**, and hidden transitions to about 2.6 ms. Both renderers had zero ≥50 ms callbacks in the final matrix and longer replenishment, 2× speed and loop controls. Cold startup and uncached seeks explicitly buffer; they do not synchronously rebuild the pair on the UI callback. All **3,168 regression checks and 122 performance assertions passed**, including deterministic visible/hidden video equality. These are retained historical measurements; current maintenance reports supersede the old investigation files.
 
-Automatic particle buffering uses a rolling cache capped at 2 GiB and physical-RAM headroom, with up to eight requested pairs. First display and controls do not wait for that window. Uncached seeks wait only for the requested samples and retain the last committed scene. Fields use full admitted CPU preparation on Play and bounded lookahead while paused; meshes retain at most four future pairs. Both keep one staged GPU resource per visible layer. Later corrupt requested records pause playback and identify their object, sample and record. The [lazy loading report](SSC_LAZY_LOADING.md) supersedes the startup policy described in the historical [maintenance report](PERFORMANCE_MAINTENANCE_REPORT.md).
+Automatic particle buffering uses a rolling cache capped at 2 GiB and physical-RAM headroom, with up to eight requested pairs. First display and controls do not wait for that window. Uncached seeks wait only for the requested samples and retain the last committed scene. Fields use admitted whole-timeline or interval CPU preparation on Play and bounded lookahead while paused; meshes retain at most four future pairs. Both keep one staged GPU resource per visible layer. Later corrupt requested records pause playback and identify their object, sample and record. The [lazy loading report](SSC_LAZY_LOADING.md) supersedes the startup policy described in the historical [maintenance report](PERFORMANCE_MAINTENANCE_REPORT.md).
 
 Representative external captures informed G3 timeline/playback validation. Scientific interpretation remains outside SimScope and is not a product result or dependency.
 
 ## Capture contract cleanup — accepted
 
-Older capture writers/readers and public API entry points were retired before the UX milestones. The active product contract is SIMSCP3 / `.ssc` only; replacement coverage uses repository-owned native scenes and synthetic fixtures.
+Older capture writers/readers and public API entry points were retired before the UX milestones. The active product contract is SIMSCP4 / `.ssc` only; replacement coverage uses repository-owned native scenes and synthetic fixtures.
 
 ## UX1 and UX2 — accepted; UX3 final integration pending review
 
@@ -292,7 +295,7 @@ Track third-party licensing in [THIRD_PARTY_LICENSES.md](../THIRD_PARTY_LICENSES
 
 ## Repository baseline
 
-The current repository is a fresh source snapshot with prior development Git history intentionally archived outside this repository. Scientific simulations, raw captures and research projects remain external. SIMSCP3 is the only supported capture format for new work. See [repository boundaries](REPOSITORY_BOUNDARY.md), [capture policy](CAPTURE_FORMAT_POLICY.md), [evidence](EVIDENCE_INDEX.md), and [provenance](../PROVENANCE.md).
+The current repository is a fresh source snapshot with prior development Git history intentionally archived outside this repository. Scientific simulations, raw captures and research projects remain external. SIMSCP4 is the only supported capture format for new work. See [repository boundaries](REPOSITORY_BOUNDARY.md), [capture policy](CAPTURE_FORMAT_POLICY.md), [evidence](EVIDENCE_INDEX.md), and [provenance](../PROVENANCE.md).
 
 ## UX-IA-001 / UX-IA-002 — design baseline merged
 

@@ -135,11 +135,11 @@ class SourceSnapshot:
                 raise AnalysisError("source_extent", "Invalid or truncated committed extent")
             self.file = _BoundedFile(self.raw, extent, self.context)
             magic = self.file.read(8)
-            if magic != b"SIMSCP3\0":
-                raise AnalysisError("unsupported_format", "Only SIMSCP3 scene captures are supported")
+            if magic != b"SIMSCP4\0":
+                raise AnalysisError("unsupported_format", "Only SIMSCP4 scene captures are supported")
             self.file.seek(0)
             index = _SceneIndex(self, committed_bytes is not None)
-            self.format = "SIMSCP3"
+            self.format = "SIMSCP4"
             self.metadata = index.metadata
             self.objects = index.objects
             self.samples = index.samples
@@ -269,7 +269,6 @@ class SourceSnapshot:
                     unavailable.append(a["name"])
                     continue
                 pieces = []
-                grid = np.empty(a["shape"], dtype="<"+a["dtype"]) if obj["kind"] == "volume" else None
                 for p in a["chunks"]:
                     self.context.check()
                     self.file.seek(record["offset"]+int(p["offset"]))
@@ -279,13 +278,8 @@ class SourceSnapshot:
                     raw = codec.decode(stored, int(p["decoded"]), p["codec"])
                     if typed.sha(raw) != p["raw_sha256"]:
                         raise AnalysisError("corrupt_source", "Decoded chunk checksum mismatch")
-                    if grid is None:
-                        pieces.append(raw)
-                    else:
-                        z, y, x = p["origin"]
-                        dz, dy, dx = p["shape"]
-                        grid[z:z+dz, y:y+dy, x:x+dx] = np.frombuffer(raw, dtype=grid.dtype).reshape(p["shape"])
-                data = b"".join(pieces) if grid is None else grid.tobytes()
+                    pieces.append(raw)
+                data = b"".join(pieces)
                 arrays[a["name"]] = np.frombuffer(data, dtype="<"+a["dtype"]).reshape(a["shape"])
             count = specs.get("position", {}).get("shape", [0])[0]
             for name in ("particle_id", "vertex_id"):

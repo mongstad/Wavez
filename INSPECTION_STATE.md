@@ -1,6 +1,6 @@
 # Native scene inspection
 
-Inspection operates on SIMSCP3 particles, meshes and scalar fields with independent
+Inspection operates on SIMSCP4 particles, meshes and scalar fields with independent
 source clocks. Scene recipes use version 2; G4 durable inspection uses version 3
 with exact selections, groups, analysis results, bookmarks and source provenance.
 These state versions are independent of the capture format. See

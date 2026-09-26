@@ -4,7 +4,7 @@
 
 G0–G4 are implemented and accepted. The original version-1 job contract and
 historical validation below remain applicable to that path. G4 adds **render job
-v2** and **inspection recipe v3** without changing SIMSCP3 capture bytes. Current
+v2** and **inspection recipe v3** without changing SIMSCP4 capture bytes. Current
 code is in `viewer/video/` and `viewer/analysis/`; see [G4 schemas](docs/G4_SCHEMAS.md)
 and [the G4 guide](docs/G4_GUIDE.md#save-restore-and-export).
 

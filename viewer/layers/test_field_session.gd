@@ -40,6 +40,7 @@ func repeated_switches(view, oracle: Array, gpu_oracle: Array) -> void:
 				check(await sample(view,.5,true),"Paused replacement sample arrives")
 				view.play_button.pressed.emit()
 			check(await session_ready(view),"Repeated channel switch prepares every sample")
+			check(control.worker.status().pipeline_stages.stored_hash.count == before.pipeline_stages.stored_hash.count,"Prepared channel changes do not reread, hash or decode resident source channels: %s %s -> %s" % [channel,before.pipeline_stages.stored_hash.count,control.worker.status().pipeline_stages.stored_hash.count])
 			check(control.worker.status().session.get("resident_credit",0) >= int(before.bytes*.7),"Replacement admission credits the still-owned allocation")
 			check(await sample(view,.5,true),"Replacement source sample commits")
 			var field = view.scene_layers.views.field
@@ -71,6 +72,30 @@ func repeated_switches(view, oracle: Array, gpu_oracle: Array) -> void:
 	check(view.scene_layers.views.field.channel == "density" and accounting(control.worker),"Stale completion preserves selected channel and exact accounting")
 func run() -> void:
 	var directory := OS.get_cmdline_user_args()[0]
+	var Reader = preload("res://layers/scene_reader.gd")
+	var unsupported = Reader.new()
+	check(not unsupported.open(directory.path_join("unsupported-v3.ssc")) and unsupported.error.contains("Unsupported scene version"),"SIMSCP3 prefix refuses without a fallback parser")
+	unsupported.close()
+	var required = Reader.new();check(required.open(directory.path_join("session.ssc")),"SIMSCP4 opens")
+	var description: Dictionary = required.describe("field",0).duplicate(true)
+	var record: Dictionary = required.samples.field[0]
+	description.arrays[0].erase("statistics_v1")
+	check(Reader.validate_sample(required.objects.field,description,record.stored,record.decoded).contains("statistics_v1"),"Missing mandatory volume statistics refuses")
+	description = required.describe("field",0).duplicate(true);description.arrays[0].chunks[0].origin = [0,0,0]
+	check(Reader.validate_sample(required.objects.field,description,record.stored,record.decoded).contains("contiguous"),"Legacy brick descriptors refuse")
+	for shape in [[32,32],[1,32,32],[513,2,2]]:
+		description = required.describe("field",0).duplicate(true);description.arrays[0].shape = shape
+		check(Reader.validate_sample(required.objects.field,description,record.stored,record.decoded).begins_with("Grid"),"Volume dimensional bounds refuse before decode: "+str(shape))
+	required.close()
+	var summary := {"minimum":PackedFloat64Array([-1.0]).to_byte_array().hex_encode(),"maximum":"010000000000f03f","finite":5,"nonfinite":3,"nonpositive":3}
+	var Statistics = preload("res://layers/field_statistics.gd")
+	check(Statistics.valid(summary,8),"Binary statistics accepts finite counts and extrema")
+	var decoded: Dictionary = Statistics.decode(summary)
+	check(decoded.maximum == "010000000000f03f".hex_decode().decode_double(0),"Binary summary preserves float64 extrema exactly")
+	check(decoded == preload("res://layers/volume_color.gd").statistics(PackedFloat64Array([NAN,INF,-INF,-1.,0.,-0.,1.,decoded.maximum])),"Summary equals authoritative nonfinite and signed-zero source statistics")
+	for key in ["minimum","maximum","finite","nonfinite","nonpositive"]:
+		var bad: Dictionary = summary.duplicate();bad[key] = -1
+		check(not Statistics.valid(bad,8),"Malformed recognized summary refuses: "+key)
 	var gib := 1024*1024*1024
 	for available in [0,2*gib,8*gib,32*gib]:
 		var cap := FieldBuffer.session_capacity({"available_physical":available,"reserve":2*gib},0,gib,gib/8)
@@ -123,6 +148,51 @@ func run() -> void:
 	view.scene_layers.resample();view.scene_layers.tick(0)
 	check(await session_ready(view),"Channel change reparses/prepares its new generation")
 	await repeated_switches(view,oracle,gpu_oracle)
+	view.playing = false;control.cancel_session()
+	var prior_decode_count: int = control.worker.status().pipeline_stages.stored_hash.count
+	control.scope_choice.select(1);control.range_start.value = .65;control.range_end.value = 1.05
+	view.playing = true;control.begin_session()
+	check(await session_ready(view),"Selected interval reaches readiness")
+	check(control.worker.status().session.total == 5,"Interval prepares only its held start through end samples")
+	check(control.worker.status().pipeline_stages.stored_hash.count == prior_decode_count,"Narrowing an admitted timeline retains selected source samples without rereading")
+	check(control.playback_range() == [.65,1.05],"Prepared interval is explicit")
+	check(await sample(view,1.05,true),"Interval end is available")
+	view.scene_layers.tick(.1)
+	check(not view.playing and view.requested_time == 1.05,"Interval playback pauses exactly at its end")
+	view.scene_loop_playback = true;view.playing = true;control.begin_session()
+	check(await session_ready(view),"Prepared interval resumes for looping")
+	check(await sample(view,1.0,true),"Loop boundary target arrives")
+	await process_frame
+	var loop_jobs: Array = control.request(1.0,view.scene_layers.field_budget())
+	control.worker.mutex.lock()
+	var bounded := true
+	for job in control.worker.jobs:bounded = bounded and job.entry.index >= 6 and job.entry.index <= 10
+	control.worker.mutex.unlock()
+	check(bounded and loop_jobs.size() == 1,"Interval lookahead and loop wrap stay inside admitted samples")
+	check(control.staged.has("field") and control.staged.field.sample.source_index == 6,"GPU lookahead stages the interval's first held sample at the loop boundary")
+	view.scene_layers.tick(.1)
+	check(await sample(view,.8,true),"Loop wrap uses the prepared interval")
+	check(view.playing,"Interval loop remains playing")
+	view.scene_loop_playback = false
+	check(view.scene_layers.seek(1.8),"Seek outside prepared interval remains available")
+	check(await sample(view,1.8,true),"Outside-interval seek uses bounded preparation")
+	check(not view.playing and control.prepared_range.is_empty(),"Outside seek exits interval playback")
+	control.scope_choice.select(2);control.forward_duration.value = .4
+	check(await sample(view,.85,true),"Forward-window start is available")
+	view.playing = true;control.begin_session()
+	check(await session_ready(view),"Current-position-forward window prepares")
+	check(control.worker.status().session.total == 5 and is_equal_approx(control.playback_range()[1],1.25),"Forward window has bounded coverage")
+	view.playing = false;control.cancel_session();control.invalidate();view.physical_rate = -2.0
+	check(await sample(view,.85,true),"Reverse-window start arrives")
+	view.playing = true;control.begin_session()
+	check(await session_ready(view),"Current-position reverse window prepares")
+	check(control.worker.status().session.total == 5 and is_equal_approx(control.playback_range()[0],.45),"Reverse window follows playback direction")
+	view.physical_rate = 2.0
+	view.playing = false;control.cancel_session();control.invalidate()
+	control.scope_choice.select(1);control.range_start.value = 1.05;control.range_end.value = .65
+	view.playing = true;control.begin_session()
+	check(not view.playing and control.worker.status().session.is_empty(),"Inverted interval refuses without preparing")
+	control.scope_choice.select(0)
 	view.playing = false;control.cancel_session();control.invalidate()
 	view.scene_layers.reader.cache.limit = 1 << 50
 	view.playing = true;control.begin_session()
@@ -145,5 +215,16 @@ func run() -> void:
 	autoplay.scene_layers.tick(.1)
 	check(autoplay.requested_time > autoplay_start,"Autoplay advances after full readiness")
 	autoplay.free();await process_frame
+	var late = load("res://main.gd").new();late.capture_path = directory.path_join("late.ssc");late.playing = false;late.orbit_enabled = false
+	root.add_child(late);late.set_process(false);await process_frame
+	var late_control = late.scene_layers.field_playback
+	late_control.range_start.value = 1e-9
+	check(late_control.range_start.value == 1e-9,"Preparation input does not quantize small scientific times")
+	late_control.scope_choice.select(1);late_control.range_start.value = .2;late_control.range_end.value = 1.0
+	late.playing = true;late_control.begin_session()
+	check(await session_ready(late),"Interval can begin before a field's independent clock")
+	check(late_control.worker.status().session.total == 2,"Late field prepares only samples within the interval")
+	check(await sample(late,.8,true),"Late field appears with its recorded source sample")
+	late.free();await process_frame
 	Job.write_json(directory.path_join("checks.json"),{"checks":checks,"failures":failures,"field":report})
 	print("FIELD SESSION: ",checks," checks, ",failures.size()," failures");quit(0 if failures.is_empty() else 1)

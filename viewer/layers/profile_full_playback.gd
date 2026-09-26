@@ -31,6 +31,11 @@ func run() -> void:
 	var report := {"capture":args[0],"open_first_draw_ms":(Time.get_ticks_usec()-began)/1000.0,"renderer":RenderingServer.get_current_rendering_method(),"device":RenderingServer.get_video_adapter_name(),"target_rate":1.0,"paused_warmup_ms":2000,"display_target_ms":1000.0/30,"draw_target_ms":1000.0/60,"viewport":root.size,"visual":Visual.snapshot(view),"runs":[]}
 	if view.scene_layers == null:report.error = "open failed";save(args[1],report);quit(1);return
 	var first: float = view.generic_reader.frames[0].time;var last: float = view.generic_reader.frames[-1].time
+	var interval = JSON.parse_string(args[4]) if args.size()>4 else null
+	if interval is Array:
+		view.scene_layers.field_playback.scope_choice.select(1)
+		view.scene_layers.field_playback.range_start.value = interval[0];view.scene_layers.field_playback.range_end.value = interval[1]
+		first = interval[0];last = interval[1]
 	report.first = first;report.last = last
 	for attempt in range(int(args[2]) if args.size()>2 else 2):
 		view.playing = false
@@ -69,4 +74,21 @@ func run() -> void:
 		view.playing = false
 		var result := {"complete":previous_time>=last,"preparation_ms":(ready-start)/1000.0,"wall_s":(Time.get_ticks_usec()-ready)/1000000.0,"advanced":previous_time-first,"frame_ms":distribution(frames),"commit_ms":distribution(commits),"interruptions":interruptions,"timeline":rows,"snapshots":snapshots,"profile":Profile.report(),"preparation_profile":prep_profile,"field_samples_presented":seen,"error":view.scene_layers.error}
 		report.runs.append(result);save(args[1],report);print("COMPLETE ",JSON.stringify({"complete":result.complete,"wall_s":result.wall_s,"frame_ms":result.frame_ms,"interruptions":interruptions.size()}))
+	var channels = JSON.parse_string(args[5]) if args.size()>5 else []
+	report.switches = []
+	for channel in channels:
+		var control = view.scene_layers.field_playback
+		view.playing = false;control.cancel_session()
+		view.scene_layers.seek((first+last)*.5)
+		while view.scene_layers.is_buffering():await process_frame
+		var before: Dictionary = control.worker.status();var started := Time.get_ticks_usec()
+		var id: String = view.scene_layers.selected_volume
+		view.scene_layers.states[id].channel = channel;view.scene_layers.resample()
+		while view.scene_layers.is_buffering() and Time.get_ticks_usec()-started<wall_limit_us:await process_frame
+		var visible_ms := (Time.get_ticks_usec()-started)/1000.0
+		view.play_button.pressed.emit()
+		while control.session_waiting and Time.get_ticks_usec()-started<wall_limit_us:await process_frame
+		var after: Dictionary = control.worker.status()
+		report.switches.append({"channel":channel,"visible_ms":visible_ms,"ready_ms":(Time.get_ticks_usec()-started)/1000.0,"before":before,"after":after,"error":view.scene_layers.error})
+		view.playing = false;control.cancel_session();save(args[1],report)
 	view.free();await process_frame;quit()

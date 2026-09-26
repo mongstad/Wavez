@@ -19,7 +19,7 @@ var records: Array[Dictionary] = []
 var frames: Array[Dictionary] = [] # union clock; never scientific particle samples
 var cache := Cache.new()
 var cache_dir := ""
-var format := "SIMSCP3"
+var format := "SIMSCP4"
 var generation := 0
 var scan_offset := 0
 var trusted := false
@@ -71,9 +71,9 @@ func _reload_source_profiled() -> bool:
 	file = FileAccess.open(source_path,FileAccess.READ)
 	if file == null or file.get_length() < 16: return fail("Incomplete scene prefix.")
 	var prefix := file.get_buffer(16);var size := prefix.decode_u32(12)
-	if prefix.slice(0,8) != "SIMSCP3".to_utf8_buffer()+PackedByteArray([0]) or prefix.decode_u32(8) != 3 or size > 1048576 or size > file.get_length()-16: return fail("Unsupported scene version/header.")
+	if prefix.slice(0,8) != "SIMSCP4".to_utf8_buffer()+PackedByteArray([0]) or prefix.decode_u32(8) != 4 or size > 1048576 or size > file.get_length()-16: return fail("Unsupported scene version/header.")
 	var raw := file.get_buffer(size);var parsed = Hash.parse_json(raw.get_string_from_utf8())
-	if not parsed is Dictionary or parsed.get("version") != 3 or not Index.valid_hex(parsed.get("uuid"),32) or not parsed.get("objects") is Array or parsed.objects.is_empty() or parsed.objects.size() > 16: return fail("Invalid scene metadata/object table.")
+	if not parsed is Dictionary or parsed.get("version") != 4 or not Index.valid_hex(parsed.get("uuid"),32) or not parsed.get("objects") is Array or parsed.objects.is_empty() or parsed.objects.size() > 16: return fail("Invalid scene metadata/object table.")
 	metadata = parsed
 	var pattern := RegEx.new();pattern.compile("^[a-z][a-z0-9_]*$")
 	var particle_objects := 0
@@ -101,7 +101,7 @@ func _reload_source_profiled() -> bool:
 		if end-offset < 80: break
 		file.seek(offset);var h := file.get_buffer(80)
 		var dlen := h.decode_u32(4);var stored := h.decode_u64(8);var decoded := h.decode_u64(16);var time := h.decode_double(24);var oi := h.decode_u32(32);var n := h.decode_u32(36);var seq := h.decode_u64(40)
-		if h.slice(0,4).get_string_from_ascii() != "FRM3" or dlen > 4*1048576 or stored < 0 or stored > MAX_SAMPLE+64*1048576 or decoded < 0 or decoded > MAX_SAMPLE or oi >= metadata.objects.size() or seq != records.size() or seq >= 1000000 or n < 1 or n > 256 or not is_finite(time): return fail("Scene header/allocation ceiling.")
+		if h.slice(0,4).get_string_from_ascii() != "FRM4" or dlen > 4*1048576 or stored < 0 or stored > MAX_SAMPLE+64*1048576 or decoded < 0 or decoded > MAX_SAMPLE or oi >= metadata.objects.size() or seq != records.size() or seq >= 1000000 or n < 1 or n > 256 or not is_finite(time): return fail("Scene header/allocation ceiling.")
 		if 128+dlen+stored > end-offset: break
 		index_bytes += 128+dlen
 		if index_bytes > Hash.MAX_INDEX: return fail("Scene index metadata exceeds 32 MiB.")
@@ -138,7 +138,7 @@ static func materialize(source: FileAccess, entry: Dictionary, obj: Dictionary) 
 	if not problem.is_empty():return {"error":record_error(entry,problem)}
 	if desc.arrays.size() != entry.array_count:return {"error":record_error(entry,"Array count mismatch.")}
 	source.seek(entry.end-48);var trailer := source.get_buffer(48);var proof := h.duplicate();proof.append_array(d)
-	if trailer.slice(0,8) != "COMMIT3".to_utf8_buffer()+PackedByteArray([0]) or trailer.decode_u64(8) != entry.sequence or trailer.slice(16).hex_encode() != Hash.digest(proof):return {"error":record_error(entry,"Commit checksum mismatch.")}
+	if trailer.slice(0,8) != "COMMIT4".to_utf8_buffer()+PackedByteArray([0]) or trailer.decode_u64(8) != entry.sequence or trailer.slice(16).hex_encode() != Hash.digest(proof):return {"error":record_error(entry,"Commit checksum mismatch.")}
 	var result := entry.duplicate();result.descriptor = desc
 	return result
 func describe(id: String, index: int) -> Dictionary:
@@ -179,16 +179,13 @@ static func validate_sample(obj: Dictionary, desc, stored: int, decoded: int) ->
 			bytes *= int(dim)
 		total += bytes
 		if total > MAX_SAMPLE: return "Sample allocation ceiling."
-		if not a.get("chunks") is Array or a.chunks.size() > 4096: return "Chunk table ceiling."
-		var expected: Array = []
 		if obj.kind == "volume":
-			if a.shape.size() != 3: return "Grid requires zyx shape."
+			if a.shape.size() != 3:return "Grid requires zyx shape."
 			for dim in a.shape:
-				if dim < 2 or dim > 512: return "Grid dimension ceiling."
-			for z in range(0,int(a.shape[0]),32):
-				for y in range(0,int(a.shape[1]),32):
-					for x in range(0,int(a.shape[2]),32): expected.append({"origin":[z,y,x],"shape":[mini(32,int(a.shape[0])-z),mini(32,int(a.shape[1])-y),mini(32,int(a.shape[2])-x)]})
-			if a.chunks.size() != expected.size(): return "Brick coverage mismatch."
+				if dim < 2 or dim > 512:return "Grid dimension ceiling."
+		if obj.kind == "volume" and not preload("res://layers/field_statistics.gd").valid(a.get("statistics_v1"),bytes/int(Index.TYPES[a.dtype])):return "Required statistics_v1 invalid."
+		if obj.kind != "volume" and a.has("statistics_v1"):return "statistics_v1 requires a volume."
+		if not a.get("chunks") is Array or a.chunks.size() > 4096: return "Chunk table ceiling."
 		var length := 0
 		for i in range(a.chunks.size()):
 			var p = a.chunks[i]
@@ -197,9 +194,7 @@ static func validate_sample(obj: Dictionary, desc, stored: int, decoded: int) ->
 			if off != offset or d <= 0 or d > Index.MAX_CHUNK or s <= 0 or s > d+65536 or not Index.whole(p.get("codec")) or int(p.codec) not in [0,1]: return "Chunk bounds/codec."
 			if p.codec == 0 and s != d: return "None size mismatch."
 			if not Index.valid_hex(p.get("raw_sha256"),64) or not Index.valid_hex(p.get("stored_sha256"),64): return "Missing chunk checksum."
-			if not expected.is_empty():
-				var e: Dictionary = expected[i]
-				if not dimensions_equal(p.get("origin"),e.origin) or not dimensions_equal(p.get("shape"),e.shape) or d != e.shape[0]*e.shape[1]*e.shape[2]*int(Index.TYPES[a.dtype]): return "Invalid brick shape/coverage."
+			if p.has("origin") or p.has("shape") or d != mini(Index.MAX_CHUNK,bytes-length):return "Noncanonical contiguous chunk."
 			offset += s;length += d
 		if bytes != length: return "Decoded array length mismatch."
 		specs[a.name] = a
@@ -265,7 +260,7 @@ func _read_sample_profiled(id: String, index: int) -> Dictionary:
 	if objects[id].kind == "mesh" and channels.has("triangles"):
 		for i in channels.triangles:
 			if i < 0 or i >= count: fail(record_error(entry,"Triangle index outside vertices."));return {}
-	var data := {"time":entry.time,"count":count,"channels":channels,"components":components,"shapes":shapes,"associations":associations,"geometry":entry.descriptor.geometry,"has_ids":has_ids,"identity_map":map,"source_index":index,"sequence":entry.sequence,"decoded_bytes":reserve}
+	var data := {"time":entry.time,"count":count,"channels":channels,"components":components,"shapes":shapes,"associations":associations,"statistics":decoded.get("statistics",{}),"geometry":entry.descriptor.geometry,"has_ids":has_ids,"identity_map":map,"source_index":index,"sequence":entry.sequence,"decoded_bytes":reserve}
 	if trusted and _source_stamp_profiled() != source_stamp: fail("Source changed during sample decode.");return {}
 	var publish_started := Profile.begin()
 	if trusted: cache.put(entry.sequence,data,reserve)

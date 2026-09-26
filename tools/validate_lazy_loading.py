@@ -52,7 +52,7 @@ def prepare(out):
                 elif fault == 'commit': raw[record['end'] - 1] ^= 1
                 else:
                     # Complete header with an unsafe declared decoded allocation.
-                    # Locate FRM3 by walking fixed headers, independent of JSON formatting.
+                    # Locate FRM4 by walking fixed headers, independent of JSON formatting.
                     start = 16 + struct.unpack_from('<I', raw, 12)[0]
                     for _ in range(3):
                         dlen, stored = struct.unpack_from('<IQ', raw, start + 4)

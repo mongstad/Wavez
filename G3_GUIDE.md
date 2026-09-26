@@ -3,7 +3,7 @@
 Work in the authoritative `SimScope` repository. Bulk historical material is in the external backup.
 Generate a small analytic field, explicit-ID tracers, a deforming mesh and declared
 demonstration guides. Captures are not shipped in Git. These are synthetic data,
-not a reconstruction from a real tracer capture. New work targets `.ssc` / SIMSCP3
+not a reconstruction from a real tracer capture. New work targets `.ssc` / SIMSCP4
 under the [capture format policy](docs/CAPTURE_FORMAT_POLICY.md).
 
 ```bash

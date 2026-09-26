@@ -41,7 +41,7 @@ func bracket(time: float) -> Dictionary:
 
 func sample(time: float) -> Dictionary:
 	if viewer.scene_layers == null:
-		error = "Open a SIMSCP3 scene before sampling."
+		error = "Open a SIMSCP4 scene before sampling."
 		return {}
 	var result: Dictionary = viewer.scene_layers.sample(time)
 	error = viewer.scene_layers.error
