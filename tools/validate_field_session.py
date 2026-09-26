@@ -11,13 +11,7 @@ sys.path.insert(0, str(ROOT))
 from simscope_export import SceneCapture
 
 
-def main():
-    p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument('--godot', required=True)
-    p.add_argument('--output-dir', type=Path, required=True)
-    p.add_argument('--renderer', default='headless', choices=['headless', 'forward_plus', 'gl_compatibility'])
-    a = p.parse_args()
-    out = a.output_dir.resolve(); out.mkdir(parents=True, exist_ok=False)
+def fixture(out):
     source = out / 'session.ssc'
     oracle = []
     gpu_oracle = []
@@ -37,6 +31,17 @@ def main():
         for t in (.4, .8, 1.2):writer.add_volume('field', t, dict(rho=np.ones((2, 2, 2), dtype='f4')), origin=[0]*3, spacing=[1]*3)
     old_prefix = bytearray(source.read_bytes()); old_prefix[:8] = b'SIMSCP3\0'; old_prefix[8:12] = (3).to_bytes(4, 'little')
     (out/'unsupported-v3.ssc').write_bytes(old_prefix)
+    return source
+
+
+def main():
+    p = argparse.ArgumentParser(description=__doc__)
+    p.add_argument('--godot', required=True)
+    p.add_argument('--output-dir', type=Path, required=True)
+    p.add_argument('--renderer', default='headless', choices=['headless', 'forward_plus', 'gl_compatibility'])
+    a = p.parse_args()
+    out = a.output_dir.resolve(); out.mkdir(parents=True, exist_ok=False)
+    source = fixture(out)
     before = hashlib.sha256(source.read_bytes()).hexdigest()
     cmd = [a.godot, '--path', str(ROOT / 'viewer'), '--audio-driver', 'Dummy', '--log-file', str(out / 'godot.log')]
     cmd += ['--headless'] if a.renderer == 'headless' else ['--rendering-method', a.renderer, '--resolution', '1280x800']

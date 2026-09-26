@@ -1,5 +1,8 @@
 # Lazy SSC startup — issue #100 / PR #101
 
+Field lookahead and Play admission are now superseded by [adaptive playback caching](SSC_ADAPTIVE_CACHE.md).
+The opening and requested-record integrity behavior described here remains applicable.
+
 The opening behavior below is retained. The Play preparation policy and sustained
 playback measurements are superseded by [continuous playback](SSC_CONTINUOUS_PLAYBACK.md).
 

@@ -32,22 +32,7 @@ var metrics := {"prepared_hits":0,"prepared_misses":0,"prepared_evictions":0,"ca
 var test_barrier: Semaphore
 
 static func memory_headroom() -> Dictionary:
-	# OS.get_memory_info().available can include swap. Linux MemAvailable does not.
-	var info := OS.get_memory_info()
-	var physical: int = maxi(0,info.get("physical",0))
-	var available: int = maxi(0,info.get("free",0))
-	if OS.get_name() == "Linux":
-		var proc := FileAccess.open("/proc/meminfo",FileAccess.READ)
-		var text := proc.get_buffer(65536).get_string_from_utf8() if proc != null else ""
-		for line in text.split("\n"):
-			var parts := line.split(" ",false)
-			if parts.size() >= 2:
-				if parts[0] == "MemTotal:":physical = int(parts[1])*1024
-				if parts[0] == "MemAvailable:":available = int(parts[1])*1024
-	var reserve := maxi(2*1024*MIB,int(physical*.15))
-	# Includes an extra 1 GiB reserve for renderer/layers/transient preparation.
-	var safe := maxi(0,mini(int(physical*.4),available-reserve-1024*MIB))
-	return {"physical":physical,"available_physical":available,"reserve":reserve+1024*MIB,"safe_cache_bytes":safe}
+	return preload("res://layers/playback_memory.gd").snapshot()
 
 static func estimate(entries: Array, trails: bool) -> Dictionary:
 	var samples: Array[int] = []

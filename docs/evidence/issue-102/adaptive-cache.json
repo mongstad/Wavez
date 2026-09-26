@@ -1,0 +1,186 @@
+{
+  "date": "2026-09-27",
+  "baseline": "824f87de66205c1ee9a109d40ea3e3cc6bb8f0f6",
+  "scope": "Adaptive viewer cache only; SIMSCP4/exporter/scientific capture settings unchanged",
+  "environment": {
+    "godot": "4.7.2",
+    "renderer": "Forward+",
+    "gpu": "NVIDIA GeForce RTX 3070 Ti",
+    "physical_bytes": 50404548608,
+    "external_output": "/home/Nozba/Codex/SIMSCOPE/ssc-adaptive-20260927",
+    "window": [
+      960,
+      640
+    ],
+    "view": "Scientific point-particle view; decorative bloom/backdrop and orbit disabled"
+  },
+  "capture": {
+    "path": "/home/Nozba/Codex/SIMSCOPE/case_D_SIMSCP4_D192_T200_20260926_230101/SIMSCP4_D192_T200_simscope.ssc",
+    "identity": {
+      "bytes": 125950754101,
+      "mtime_ns": 1790459431649621061,
+      "inode": 20372149
+    },
+    "unchanged_stat": true,
+    "independent_source_hashes": {
+      "density": "713b94435e4e6eedd31bd34d6b7fffbe5f02b3cdf8f60f58c30c270b1347b0c8",
+      "psi_real": "a9af950f37b823c1c57cd0e5160cfebc5d791663467f810649c38a57c61b171a",
+      "psi_imag": "1953c9875fbfe687e909fdc54d159bb22d79ed9a3b2f2bcb0542420623d54091"
+    },
+    "scope": "Stat identity plus independent full-channel oracle for the reported sample; not a whole-file hash.",
+    "field_samples": 1566,
+    "particle_samples": 627,
+    "recorded_end": 156.49999999993017,
+    "shape": [
+      192,
+      192,
+      192
+    ],
+    "field_channels": [
+      "density",
+      "psi_real",
+      "psi_imag"
+    ],
+    "tracers": 50000
+  },
+  "real_capture": {
+    "checks": 7,
+    "failures": [],
+    "open_seconds": 1.617,
+    "filled_seconds": 200.402,
+    "cache_bytes": 34560081920,
+    "cache_frames": 305,
+    "window_start": 0,
+    "window_end": 30.399999999998236,
+    "overlap_target_ms": 45,
+    "overlap": {
+      "after_frames": 306,
+      "before_frames": 305,
+      "cached_samples_reread": 0,
+      "missing_in_final_window": 11,
+      "new_reads": 13
+    },
+    "distant_target_ms": 791,
+    "minimum_available_physical_bytes": 4974985216,
+    "peak_process_rss_bytes": 37007794176,
+    "maximum_observed_process_swap_bytes": 0,
+    "scientific": {
+      "hashes": {
+        "density": "713b94435e4e6eedd31bd34d6b7fffbe5f02b3cdf8f60f58c30c270b1347b0c8",
+        "psi_imag": "1953c9875fbfe687e909fdc54d159bb22d79ed9a3b2f2bcb0542420623d54091",
+        "psi_real": "a9af950f37b823c1c57cd0e5160cfebc5d791663467f810649c38a57c61b171a"
+      },
+      "lod": 1,
+      "source_index": 161,
+      "time": 16.10000000000108
+    },
+    "playback": {
+      "buffered_callbacks": 65,
+      "committed_seconds": 15.138851999999993,
+      "field_waits": 0,
+      "particle_waits": 65,
+      "speed": 4,
+      "wall_seconds": 4.017221,
+      "callback_count": 419,
+      "callback_median_ms": 1.554,
+      "callback_p95_ms": 24.875,
+      "callback_max_ms": 37.96
+    }
+  },
+  "policy_comparison": {
+    "method": "Same observed RAM snapshot, owned credit, pending other allowances and transient sample size; only reserve and slack formulas differ. This is a policy calculation, not a measured baseline preparation run.",
+    "new_capacity_bytes": 34705593361,
+    "old_capacity_bytes": 25727844199,
+    "new_system_renderer_reserve_bytes": 1780571914,
+    "old_system_renderer_reserve_bytes": 8634424115,
+    "pending_other_bytes": 2095089840,
+    "pending_other_details": {
+      "mesh_cache_and_working": 0,
+      "particle_decoded": 956663488,
+      "particle_prepared": 835137024,
+      "particle_working": 131796720,
+      "scene_cache": 171492608
+    },
+    "field_transient_bytes": 339935232,
+    "allocation_slack_bytes": 1735279668
+  },
+  "validation": {
+    "adaptive_headless": {
+      "checks": 73,
+      "failures": []
+    },
+    "adaptive_forward_plus": {
+      "checks": 64,
+      "failures": [],
+      "note": "Before adding final scope/worker-pressure/startup assertions; final additions covered headless and Compatibility."
+    },
+    "advanced_session_headless": {
+      "checks": 330,
+      "failures": []
+    },
+    "advanced_session_compatibility": {
+      "checks": 331,
+      "failures": []
+    },
+    "field_budget_forward_plus": {
+      "checks": 56,
+      "failures": []
+    },
+    "lazy_integrity_headless": {
+      "checks": 217,
+      "failures": []
+    },
+    "scene_playback_headless": {
+      "checks": 2457,
+      "failures": []
+    },
+    "mesh_headless": {
+      "checks": 2731,
+      "failures": []
+    },
+    "viewer_status_compatibility": {
+      "checks": 123,
+      "failures": []
+    },
+    "adaptive_compatibility": {
+      "checks": 71,
+      "failures": [],
+      "note": "Before the two final initial-Play window assertions; those pass headless."
+    },
+    "normal_large_capture_open": {
+      "checks": 2,
+      "failures": [],
+      "paused_at": 0,
+      "automatic_jobs_at_open": 217,
+      "early_play_uses_bounded_window": true
+    },
+    "documentation": {
+      "local_links": "PASS",
+      "executable_examples": 3
+    },
+    "native_import": {
+      "script_errors": 0
+    }
+  },
+  "corrected_attempts": [
+    {
+      "run": "adaptive-1",
+      "issue": "Three oracle expectations and reverse/loop indices assumed decimal times exactly equaled binary recorded timestamps; tests now use authoritative held-source bracketing and recorded endpoints."
+    },
+    {
+      "run": "lazy-1",
+      "issue": "Non-volume controllers have no scope control; cancel_session now guards the absent UI. All 217 behavior checks passed but script errors correctly failed the first harness."
+    },
+    {
+      "run": "real-vulkan-1",
+      "issue": "Final-window count did not account for budget changes while filling. Bounded opt-in source-read tracing directly verifies zero rereads of resident overlapping samples. Initial fixed-step callback probe was replaced by actual elapsed-time playback."
+    }
+  ],
+  "limits": [
+    "Measured field preparation has zero waits in the short 4x segment; particle preparation has 65 buffered callbacks. This is not universal uninterrupted whole-scene playback.",
+    "No indefinitely sustained larger-than-RAM or full-duration 4x acceptance claim; field decoder measured around 1.5 samples/s while recording cadence is 10/s.",
+    "No cgroup-specific discovery or non-Linux native memory validation.",
+    "Production capture stat identity and selected-source hashes were verified; no full 125.95 GB source hash.",
+    "Initial Play waits only for the admitted automatic window. Large-capture startup pause, this warm-up gate and the stale-worker pressure guard were finalized after the full-capacity probe and covered by focused native follow-up checks."
+  ]
+}

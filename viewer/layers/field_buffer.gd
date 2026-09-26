@@ -28,7 +28,7 @@ var limit := 128*Memory.MIB
 var retained_limit := 0
 var error := ""
 var failures := {}
-# Full visible-field preparation is requested by Play, never by opening.
+# Automatic windows and explicitly selected interval preparation share one cache.
 var session := {}
 var pending_plan: Array = []
 var session_serial := 0
@@ -38,26 +38,35 @@ var evictions := 0
 var worker_ms := 0.0
 var pipeline_stages := {}
 var worker_thread := -1
+var trace_reads := false # Opt-in bounded diagnostic, never a second capture index.
+var read_keys: Array[String] = []
 var test_barrier: Semaphore
 var at_barrier := false
 func start() -> Error:return thread.start(_run,Thread.PRIORITY_LOW)
 func close() -> void:
 	mutex.lock();closing = true;mutex.unlock();wake.post()
 	if thread.is_started():thread.wait_to_finish()
-func request(next_token: String, next_jobs: Array, bytes: int) -> void:
+func request(next_token: String, next_jobs: Array, bytes: int, automatic := false) -> void:
 	mutex.lock()
 	if token != next_token:
 		failures.clear();session.clear();pending_plan.clear();session_serial += 1
-	if not session.is_empty() and session.get("state") in ["planning","preparing","ready"]:
+	if not automatic and not session.get("automatic",false) and session.get("state") in ["planning","preparing","ready"]:
 		mutex.unlock();return
 	if session.get("state") == "blocked":session.state = "refused"
-	token = next_token;_set_jobs(next_jobs);limit = maxi(bytes,retained_limit);error = ""
+	token = next_token;_set_jobs(next_jobs);limit = bytes if automatic else maxi(bytes,retained_limit);error = ""
+	if automatic:
+		retained_limit = mini(retained_limit,limit)
+		var ready := 0;var rejected := 0
+		for job in jobs:
+			if prepared.has(job.key) and prepared[job.key].token == token:ready += 1
+			if failures.has(job.key):rejected += 1
+		session = {"automatic":true,"state":"ready" if ready+rejected == jobs.size() else "preparing","ready":ready,"failed":rejected,"total":jobs.size(),"next":0,"required_bytes":bytes,"started_us":Time.get_ticks_usec()}
 	for old in failures.keys():
 		if not wanted.has(old):failures.erase(old)
 	mutex.unlock();wake.post()
 func cancel(retain_cache := false) -> void:
 	mutex.lock()
-	retained_limit = mini(retained_limit,used) if retain_cache else 0
+	retained_limit = used if retain_cache else 0
 	token += "!";_set_jobs([]);session.clear();pending_plan.clear();session_serial += 1;mutex.unlock();wake.post()
 func stopped() -> bool:
 	mutex.lock();var stop := closing or token != working_token or not wanted.has(working_key);mutex.unlock();return stop
@@ -69,7 +78,15 @@ func get_frame(key: String) -> Dictionary:
 func status() -> Dictionary:
 	mutex.lock()
 	var result := {"bytes":used,"limit":limit,"retained_limit":retained_limit,"frames":prepared.size(),"completed":completed,"source_reuses":source_reuses,"cancelled":cancelled,"evictions":evictions,"worker_ms":worker_ms,"pipeline_stages":pipeline_stages.duplicate(true),"worker_thread":worker_thread,"active":not working_key.is_empty(),"error":error,"failures":failures.duplicate(),"test_barrier_waiting":at_barrier,"session":session.duplicate()}
+	var charges := {};var resident := 0
+	for key in prepared:
+		var value: Dictionary = prepared[key]
+		resident += mini(int(value.bytes),int(value.sample.decoded_bytes)+int(value.gpu_bytes))
+		if value.token == token:charges[key] = value.bytes
+	result.charges = charges;result.resident_bytes = resident
 	mutex.unlock();return result
+func read_trace() -> Array[String]:
+	mutex.lock();var result := read_keys.duplicate();mutex.unlock();return result
 # Caller holds the publication mutex. This also makes cancellation O(1),
 # independent of the number of admitted samples.
 func _set_jobs(next_jobs: Array) -> void:
@@ -92,10 +109,7 @@ func cancel_session() -> void:
 func _planning_cancelled(serial: int) -> bool:
 	mutex.lock();var stop := closing or serial != session_serial;mutex.unlock();return stop
 static func session_capacity(memory: Dictionary, resident: int, other: int, largest: int) -> int:
-	# Available physical RAM, never swap. Credit this cache's existing allocation
-	# once, reserve all competing caches, three jobs of working space and 15%
-	# allocator/driver slack. The OS + renderer reserve is shared with rolling.
-	return maxi(0,int((int(memory.available_physical)+resident-int(memory.reserve)-other-largest*3)/1.15))
+	return preload("res://layers/playback_memory.gd").capacity(memory,resident,other,largest)
 func _plan_session() -> void:
 	mutex.lock();var plan := pending_plan;pending_plan = [];var serial := session_serial;mutex.unlock()
 	if plan.is_empty():return
@@ -141,7 +155,7 @@ func _plan_session() -> void:
 	mutex.unlock()
 func _session_progress() -> void:
 	mutex.lock()
-	if session.get("state") == "preparing" and session.ready == session.total:
+	if session.get("state") == "preparing" and session.ready+int(session.get("failed",0)) == session.total:
 		session.state = "ready";session.elapsed_ms = (Time.get_ticks_usec()-session.started_us)/1000.0
 	mutex.unlock()
 func _prune(incoming: int, key: String) -> bool:
@@ -168,7 +182,7 @@ func _prune(incoming: int, key: String) -> bool:
 		# A smaller interval should retain its already-decoded source samples
 		# while releasing unrelated times, even across a channel generation.
 		for i in range(order.size()):
-			if prepared[order[i]].token != token and not wanted_sources.has(prepared[order[i]].get("source_key",order[i])):victim = i;break
+			if not wanted_sources.has(prepared[order[i]].get("source_key",order[i])):victim = i;break
 		var old: String = order[victim];order.remove_at(victim)
 		source_keys.erase(prepared[old].get("source_key",""))
 		retired.append(prepared[old]);used -= int(prepared[old].bytes);prepared.erase(old);evictions += 1
@@ -187,7 +201,7 @@ func _take_source(job: Dictionary) -> Dictionary:
 	mutex.unlock();return result
 func _next() -> Dictionary:
 	mutex.lock();var next := {}
-	if not closing and session.get("state") not in ["ready","blocked"]:
+	if not closing and session.get("state") not in ["ready","blocked","pressure"]:
 		var first: int = session.get("next",0) if session.get("state") == "preparing" else 0
 		for index in range(first,jobs.size()):
 			var job: Dictionary = jobs[index]
@@ -215,20 +229,48 @@ func _run() -> void:
 			if job.is_empty():
 				_session_progress();break
 			var began := Time.get_ticks_usec();var result := {};var stages := {};var memory := Memory.memory_headroom()
-			var reusable := {};var materialized := {}
-			if memory.available_physical < memory.reserve+int(job.get("other_reservation",0))+job.charge*3:
+			var reusable := {};var materialized := {};var file: FileAccess
+			mutex.lock()
+			var prior: Dictionary = prepared.get(source_keys.get(job.get("source_key",""),""),{})
+			if prior.get("scope") == job.get("scope"):materialized = prior.get("entry",{})
+			var automatic: bool = session.get("automatic",false)
+			mutex.unlock()
+			if materialized.is_empty():
+				file = FileAccess.open(job.path,FileAccess.READ)
+				materialized = Reader.materialize(file,job.entry,job.object)
+			if materialized.has("error"):result = {"error":materialized.error}
+			else:
+				var exact := Prepare.charge(materialized,job.channel,job.budget)
+				if exact.has("error"):result = {"error":Reader.record_error(job.entry,exact.error)}
+				else:job = job.duplicate();job.charge = exact.bytes
+			mutex.lock();var fits_limit: bool = job.charge <= limit;mutex.unlock()
+			if result.is_empty() and automatic and (not fits_limit or memory.available_physical < memory.reserve+int(job.get("other_reservation",0))+job.charge*3):
+				# Capacity pressure is retryable, not corrupt source data. Release
+				# cold entries on this worker and leave the displayed scene intact.
+				var owned: int = status().resident_bytes
+				mutex.lock()
+				if token == working_token and wanted.has(job.key) and not closing:
+					limit = mini(limit,session_capacity(memory,owned,int(job.get("other_reservation",0)),job.charge))
+					retained_limit = mini(retained_limit,limit);session.state = "pressure"
+				working_key = ""
+				mutex.unlock();_prune(0,"");break
+			if not result.is_empty():pass
+			elif memory.available_physical < memory.reserve+int(job.get("other_reservation",0))+job.charge*3:
 				result = {"error":"Field preparation needs %.1f MiB available RAM including other reservations; %.1f MiB is available. Free RAM or reduce other caches." % [(memory.reserve+int(job.get("other_reservation",0))+job.charge*3)/float(Memory.MIB),memory.available_physical/float(Memory.MIB)]}
 			elif Stamp.read(job.path) != job.stamp:result = {"error":"Field source changed; waiting for refresh."}
 			else:
 				reusable = _take_source(job)
-				if not _prune(job.charge,job.key):result = {"error":"Field frame exceeds the preparation budget."}
+				if not _prune(job.charge,job.key):result = {"capacity":true} if automatic else {"error":"Field frame exceeds the preparation budget."}
 				elif not reusable.is_empty():
 					materialized = reusable.entry
 					result = Prepare.prepare(job.object,reusable.sample,job.channel,job.budget,self)
 					stages = result.get("timings",{}).duplicate()
 				else:
-					var file := FileAccess.open(job.path,FileAccess.READ)
-					var entry := Reader.materialize(file,job.entry,job.object)
+					if file == null:file = FileAccess.open(job.path,FileAccess.READ)
+					mutex.lock()
+					if trace_reads and read_keys.size() < 4096:read_keys.append(job.key)
+					mutex.unlock()
+					var entry := materialized
 					materialized = entry
 					var decoded := entry if entry.has("error") else Channels.read(file,entry,job.object,self)
 					if decoded.has("error"):result = {"error":decoded.error if entry.has("error") else Reader.record_error(job.entry,decoded.error)}
@@ -253,9 +295,12 @@ func _run() -> void:
 					var previous: Dictionary = reusable.previous
 					if not source_keys.has(previous.source_key) and used+int(previous.bytes) <= limit:
 						prepared[reusable.previous_key] = previous;order.append(reusable.previous_key);source_keys[previous.source_key] = reusable.previous_key;used += int(previous.bytes)
+			elif result.has("capacity"):
+				cancelled += 1;session.state = "pressure"
 			elif result.has("error"):
 				failures[job.key] = result.error
-				if session.get("state") == "preparing":session.state = "blocked";session.error = result.error
+				if session.get("automatic",false):session.failed += 1
+				elif session.get("state") == "preparing":session.state = "blocked";session.error = result.error
 			elif not result.is_empty() and used+job.charge > limit:
 				# A controller may reduce the budget while this job is decoding.
 				cancelled += 1

@@ -92,6 +92,11 @@ func run():
 	ui.show_status(); check(viewer.shell.detail_text.text.contains("Test open failure"),"Durable diagnostic reachable")
 	viewer.shell.details.hide(); ui.acknowledge(); check(ui.failures.is_empty(),"Explicit acknowledgement clears failure notice")
 	var layers = viewer.scene_layers
+	var fields = layers.field_playback
+	fields.cache_cap_bytes = 1;fields.request(viewer.requested_time,layers.field_budget());ui.refresh()
+	check(ui.readiness == "Ready" and ui.badge.label.text.contains("Waiting for memory") and not ui.failures.has("Fields"),"Capacity wait preserves a valid usable scene in the status badge")
+	fields.cache_cap_bytes = 0;fields.request(viewer.requested_time,layers.field_budget());ui.refresh()
+	check(not ui.badge.label.text.contains("Waiting for memory"),"Memory status recovers without reopening")
 	var worker = layers.playback.worker
 	var gate := Semaphore.new(); worker.test_barrier = gate
 	layers.playback.invalidate(); viewer.manual_max += 1; viewer._seek_time(2.25)

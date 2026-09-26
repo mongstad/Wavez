@@ -105,7 +105,8 @@ func run() -> void:
 	root.add_child(view);view.set_process(false)
 	await process_frame
 	var control = view.scene_layers.field_playback
-	check(control.worker.status().session.is_empty() and not view.scene_layers.is_buffering(),"Opening remains lazy and interactive")
+	check(control.worker.status().session.get("automatic",false) and not view.scene_layers.is_buffering(),"Opening prepares ahead and remains interactive")
+	control.scope_choice.select(1) # Retain full-interval regression coverage as an advanced choice.
 	view.play_button.pressed.emit()
 	check(view.playing and control.session_waiting,"Play starts explicit initial preparation")
 	var initial: float = view.requested_time
@@ -192,7 +193,7 @@ func run() -> void:
 	control.scope_choice.select(1);control.range_start.value = 1.05;control.range_end.value = .65
 	view.playing = true;control.begin_session()
 	check(not view.playing and control.worker.status().session.is_empty(),"Inverted interval refuses without preparing")
-	control.scope_choice.select(0)
+	control.scope_choice.select(1);control.range_start.value = 0;control.range_end.value = 1.9
 	view.playing = false;control.cancel_session();control.invalidate()
 	view.scene_layers.reader.cache.limit = 1 << 50
 	view.playing = true;control.begin_session()
@@ -204,16 +205,12 @@ func run() -> void:
 	var report: Dictionary = control.profile_report();var worker = control.worker
 	view.free();await process_frame
 	check(worker.status().bytes == 0 and worker.status().frames == 0,"Closing releases all retained CPU preparations")
-	# The native viewer defaults to autoplay; opening must not bypass Play's gate.
+	# Small-capture autoplay waits for its admitted automatic window.
 	var autoplay = load("res://main.gd").new();autoplay.capture_path = directory.path_join("session.ssc");autoplay.orbit_enabled = false
 	root.add_child(autoplay);autoplay.set_process(false)
-	check(autoplay.playing and autoplay.scene_layers.field_playback.session_waiting,"Autoplay requests complete initial preparation")
-	var autoplay_start: float = autoplay.requested_time
-	autoplay.scene_layers.tick(.5)
-	check(autoplay.requested_time == autoplay_start,"Autoplay clock waits for all fields")
-	check(await session_ready(autoplay),"Autoplay reaches full readiness")
-	autoplay.scene_layers.tick(.1)
-	check(autoplay.requested_time > autoplay_start,"Autoplay advances after full readiness")
+	check(autoplay.playing and autoplay.scene_layers.field_playback.worker.status().session.get("automatic",false),"Autoplay uses automatic preparation")
+	check(await session_ready(autoplay),"Autoplay waits for its admitted cache, without explicit interval planning")
+	check(await sample(autoplay,.1,true),"Automatic target is ready")
 	autoplay.free();await process_frame
 	var late = load("res://main.gd").new();late.capture_path = directory.path_join("late.ssc");late.playing = false;late.orbit_enabled = false
 	root.add_child(late);late.set_process(false);await process_frame

@@ -1,5 +1,8 @@
 # Continuous SSC playback — issue #100 / PR #101
 
+Historical implementation/measurement report. The default preparation and memory policy
+are superseded by [adaptive playback caching](SSC_ADAPTIVE_CACHE.md) in PR #103.
+
 Pending owner review. This extends the lazy opening policy at `f63b140`.
 The original startup reports remain historical evidence. Opening is still lazy;
 Play now requests complete preparation of the visible temporal fields before

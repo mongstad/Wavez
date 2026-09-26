@@ -1041,8 +1041,9 @@ func _open_scene(path: String) -> void:
 	# submitted by sample(). Background preparation must not gate interaction.
 	scene_layers.playback._update_ui()
 	_update_hud()
-	# Opening while transport is already playing must use the same readiness
-	# gate as pressing Play; paused opening still returns after the first scene.
+	# Large captures build useful coverage before the owner's first Play. The
+	# automatic worker continues while paused; no interval entry is required.
+	if playing and scene_layers.field_playback.partial_initial_window():_toggle_playback()
 	if playing:scene_layers.field_playback.begin_session()
 
 func _frame_from_data(data: Dictionary, index: int) -> FrameData:

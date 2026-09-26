@@ -4,7 +4,8 @@ Pending owner review; baseline is owner-merged PR #101, `573c097`.
 Historical reports/evidence remain unchanged. This branch proposes a clean
 **SIMSCP4 / package 3.0.0** break, mandatory exact field statistics, contiguous
 array chunks, resident source reuse across channel changes, and explicit finite
-preparation intervals. It does not establish universal 30 fps or unlimited
+preparation intervals. The owner-authorized [adaptive cache follow-up](SSC_ADAPTIVE_CACHE.md)
+replaces manual-first whole-timeline admission. It does not establish universal 30 fps or unlimited
 streaming. The [parameter inventory](SSC_CAPTURE_PARAMETERS.md) separates solver
 fidelity, capture policy, format efficiency and viewer work.
 
@@ -85,15 +86,16 @@ range. Source-change invalidation, cancellation and conservative memory admissio
 remain active. The main thread retains current plus one future GPU texture per
 visible field and uploads at most one future texture per process frame.
 
-Performance offers **Entire recording** (default), **Selected interval**, and
-**From current position** with a duration. Play admits the selected field samples
-at full source quality within shared available memory, then advances. Explicit
-intervals clamp or loop the playback clock at their boundaries; seeks outside
-pause/end the session. Nonlooping intervals pause at their boundary. Reverse
-current-position windows extend backward. Controls preserve source time precision
-and late-starting independent object clocks. Prepared bounds and readiness remain
-visible. Range selection changes the inspected interval, never the file or its
-sample cadence. Finite forward preparation is not automatic rolling streaming.
+Performance defaults to **Automatic**: opening prepares forward from the playhead
+within current safe physical RAM. Initial Play waits for admitted coverage and
+does not require a full-timeline allocation. Scrubs preserve overlapping cached samples, prioritize
+the requested time, and fill ahead; reverse and loop playback follow their direction.
+The [adaptive cache report](SSC_ADAPTIVE_CACHE.md) defines admission, capacity waits,
+measurement and remaining throughput limits. This changes no recorded data or format.
+
+**Selected interval (advanced)** and **From current position (advanced)** still admit
+an explicit range before playback. Intervals clamp or loop the clock; seeking outside
+ends interval playback. Source timestamp precision and independent clocks remain.
 
 ## Alternatives considered
 
@@ -102,9 +104,9 @@ sample cadence. Finite forward preparation is not automatic rolling streaming.
 | Required statistics | Implemented; removes the dominant repeated native scalar pass at a measured export cost. |
 | Shared immutable all-channel arrays | Implemented; practical channel switching without repeated payload I/O/validation while resident. All channels stay available to probes. |
 | Contiguous full-array chunks | Implemented; much smaller descriptor footprint and no brick reconstruction for current whole-grid consumers. |
-| Whole-timeline admission | Retained default; zero recurring preparation waits for captures fitting safe RAM. Rejects unsafe plans explicitly. |
+| Whole-timeline admission | Superseded as the default by automatic cache admission; advanced intervals still support complete-range preparation. |
 | Selected / finite forward interval | Implemented; bounded full-quality work when a whole capture cannot fit. Interval results are separate scope experiments. |
-| Adaptive streaming | Investigated, deferred. Sustained validation/decode/upload must stay ahead of cadence and playback speed in both directions; when it cannot, explicit buffering is unavoidable. Current finite windows do not claim that guarantee. |
+| Adaptive playback cache | Implemented in the owner-authorized follow-up. Reuses overlapping windows without requiring a manual interval; consumption beyond prepared coverage can still buffer. |
 | Paged global time/channel directory | Future large-record-count work. Existing header scan is cheap in measured captures. Paging may help extreme record counts and linear startup cost; it is not needed to remove the aggregate descriptor export ceiling. Reader memory admission is separate; see [the contained correction](SSC_METADATA_BUDGET.md). |
 | Selected-channel-only retention | Deferred; reduces RAM but trades away instant alternate channels and requires probe/schema/cache changes. Full-quality multi-channel behavior takes priority. |
 | Parallel validation/decode | Deferred; may reduce CPU preparation time but adds competing memory/I/O, cancellation and ordering work. Does not by itself fix GPU frame pacing. |
@@ -228,10 +230,10 @@ indexing, refusal and interval behavior beyond RAM; it is not a physical 200 GB
 throughput benchmark, a representative scientific dataset or sustained streaming.
 
 Whole-timeline preparation cannot fit a 100–200 GB decoded capture on this roughly
-47 GiB machine. Explicit intervals preserve full scientific quality within the
-existing budget; each newly selected interval has a preparation delay. No physical
-100–200 GB production capture, sustained larger-than-RAM streaming, cross-machine
-performance guarantee, or strict 33.3 ms frame pacing is established here.
+47 GiB machine. The follow-up now tests a physical 125.95 GB production capture with
+automatic RAM-bounded caching; see its separate report. The original measurements
+above used complete timeline or explicit interval preparation and remain historical.
+Cross-machine performance guarantees and strict 33.3 ms pacing are not established.
 Compression/storage bytes and decoded RAM are distinct quantities. Shader cost,
 particle work, GPU uploads, driver scheduling and display synchronization remain
 possible frame-pacing limits after preparation is accelerated.
@@ -244,8 +246,9 @@ possible frame-pacing limits after preparation is accelerated.
 2. On regenerated equivalent S0/S2 captures, play the entire timeline twice at full
    quality, switch density/psi_real/psi_imag, and assess uninterrupted visual motion.
    Compare p95/p99/worst committed frame gaps, not only average fps.
-3. Exercise a selected interval and forward/reverse current-position window; verify
-   prepared bounds, boundary pause/loop and outside-range seek behavior.
+3. Open the provided large SIMSCP4 capture with Automatic preparation; verify useful
+   coverage builds while paused, Play uses that coverage, and overlapping/distant
+   scrubs recover without manual ranges. Also check advanced interval boundaries.
 4. Check low-memory refusal, channel-switch progress and GPU/display behavior on the
    actual monitor setup, and review the measured limits before accepting #102.
 
@@ -273,6 +276,7 @@ possible frame-pacing limits after preparation is accelerated.
 - Initial sandbox native-start attempts were unavailable; actual display validation
   used approved native execution. An earlier load-optimization invocation supplied
   an unsupported renderer argument; the correct invocation passes above.
-- Physical cold-cache trials, other machines, actual 100–200 GB captures and
-  sustained adaptive streaming are untested. The superseded optional-summary
+- Physical cold-cache trials, other machines and indefinitely sustained streaming
+  remain untested. The later [adaptive-cache follow-up](SSC_ADAPTIVE_CACHE.md) tests
+  the physical 125.95 GB owner capture. The superseded optional-summary
   prototype results are not included as final SIMSCP4 performance evidence.
