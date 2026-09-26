@@ -86,6 +86,13 @@ resident data. Source, channel, visibility or texture-budget changes invalidate
 the generation. The status badge and Performance details expose field progress.
 No status is suppressed to disguise a wait.
 
+The [channel-switch stability correction](SSC_CHANNEL_SWITCH_STABILITY.md)
+keeps one bounded allocation across compatible channel changes. Old-generation
+entries remain charged until replacements need their space, and cannot be
+acquired by the new generation. This prevents allocator-retained pages from
+losing their admission credit between repeated channel preparations. GPU staging
+and the physical-memory guard retain their existing bounds.
+
 The display scheduler retains the fractional remainder of its 30 Hz accumulator.
 Discarding that remainder previously quantized slightly-short 60 Hz callbacks
 into 20 Hz display updates. Requested timestamps and playback rate are unchanged;

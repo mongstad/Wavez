@@ -10,6 +10,7 @@ var enabled := false
 var buffering := false
 var pending_time = null
 var token := ""
+var cache_scope := ""
 var request_signature := ""
 var staged := {} # At most one future GPU texture per visible field.
 var cpu_limit := 0
@@ -33,7 +34,7 @@ func setup(owner) -> void:
 		label = Label.new();label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART;layers.performance_panel.add_child(label)
 func close() -> void:worker.close();staged.clear()
 func invalidate() -> void:
-	worker.cancel();token = "";request_signature = "";staged.clear();buffering = false;pending_time = null;error = "";session_waiting = false;session_requested = false;session_restart = false
+	worker.cancel();token = "";cache_scope = "";request_signature = "";staged.clear();buffering = false;pending_time = null;error = "";session_waiting = false;session_requested = false;session_restart = false
 func active() -> bool:return enabled and not viewer.offline_instance and not viewer.inspection_busy
 func begin_session(target_time = null) -> void:
 	if not active():return
@@ -84,11 +85,18 @@ func _job(id: String, index: int, budget: int) -> Dictionary:
 		if array.name == state.channel:size = int(array.shape[0])*int(array.shape[1])*int(array.shape[2])*4
 	return {"key":Grid.sample_key(obj,entry.sequence,state.channel,budget),"id":id,"entry":entry.duplicate(true),"object":obj,"channel":state.channel,"budget":budget,"decoded_charge":int(entry.decoded),"preview_charge":mini(size,budget),"charge":int(entry.decoded)+mini(size,budget)+65536,"path":layers.reader.source_path,"stamp":layers.reader.source_stamp}
 func request(time: float, budget: int) -> Array:
-	var signature := str(layers.reader.generation)+JSON.stringify(layers.reader.source_stamp)+str(budget)
+	var scope := str(layers.reader.generation)+JSON.stringify(layers.reader.source_stamp)+str(budget)
+	var channels: Array = []
 	for id in layers.states:
-		if layers.views[id] is Grid:signature += id+str(layers.states[id].visible)+layers.states[id].channel
+		if layers.views[id] is Grid:
+			scope += id+str(layers.states[id].visible);channels.append([id,layers.states[id].channel])
+	var signature := scope+JSON.stringify(channels)
 	if token != signature:
-		token = signature;request_signature = "";staged.clear();worker.cancel();session_waiting = false;session_restart = session_requested and viewer.playing
+		# Retain a bounded full-session allocation only for channel changes in the
+		# same source/visibility/texture-budget scope. Acquisition still requires
+		# the new generation; CPU replacements evict old entries incrementally.
+		worker.cancel(scope == cache_scope);cache_scope = scope
+		token = signature;request_signature = "";staged.clear();session_waiting = false;session_restart = session_requested and viewer.playing
 	var targets: Array = [];var future: Array = []
 	var direction := -1 if viewer.physical_rate < 0 else 1
 	for id in layers.states:
@@ -120,9 +128,11 @@ func request(time: float, budget: int) -> Array:
 		budget_report.reservations = reservations
 		budget_report.preview_budget_per_field = budget
 		budget_report.targets = targets.map(func(job):return {"id":job.id,"decoded_bytes":job.decoded_charge,"preview_charge":job.preview_charge,"total_charge":job.charge})
-	var session: Dictionary = worker.status().session
+	var status := worker.status();var session: Dictionary = status.session
+	if status.retained_limit > 0:
+		cpu_limit = maxi(cpu_limit,status.retained_limit);budget_report.cpu_limit = cpu_limit
 	if session.get("state") in ["preparing","ready"]:
-		cpu_limit = worker.status().limit;budget_report.cpu_limit = cpu_limit
+		cpu_limit = status.limit;budget_report.cpu_limit = cpu_limit
 		budget_report.strategy = "full_timeline";budget_report.full_required_bytes = session.required_bytes
 		budget_report.admission_memory = session.get("memory",{})
 	error = ""

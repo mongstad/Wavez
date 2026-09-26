@@ -19,6 +19,10 @@ var cache_token := ""
 var order: Array[String] = []
 var used := 0
 var limit := 128*Memory.MIB
+# Keep one already-admitted allocation across compatible channel changes.
+# Obsolete entries stay owned/charged until replacements need their space;
+# freeing them all can leave malloc-resident pages invisible to RAM admission.
+var retained_limit := 0
 var error := ""
 var failures := {}
 # Full visible-field preparation is requested by Play, never by opening.
@@ -44,12 +48,14 @@ func request(next_token: String, next_jobs: Array, bytes: int) -> void:
 	if not session.is_empty() and session.get("state") in ["planning","preparing","ready"]:
 		mutex.unlock();return
 	if session.get("state") == "blocked":session.state = "refused"
-	token = next_token;_set_jobs(next_jobs);limit = bytes;error = ""
+	token = next_token;_set_jobs(next_jobs);limit = maxi(bytes,retained_limit);error = ""
 	for old in failures.keys():
 		if not wanted.has(old):failures.erase(old)
 	mutex.unlock();wake.post()
-func cancel() -> void:
-	mutex.lock();token += "!";_set_jobs([]);session.clear();pending_plan.clear();session_serial += 1;mutex.unlock();wake.post()
+func cancel(retain_cache := false) -> void:
+	mutex.lock()
+	retained_limit = mini(retained_limit,used) if retain_cache else 0
+	token += "!";_set_jobs([]);session.clear();pending_plan.clear();session_serial += 1;mutex.unlock();wake.post()
 func stopped() -> bool:
 	mutex.lock();var stop := closing or token != working_token or not wanted.has(working_key);mutex.unlock();return stop
 func get_frame(key: String) -> Dictionary:
@@ -59,7 +65,7 @@ func get_frame(key: String) -> Dictionary:
 	mutex.unlock();return value
 func status() -> Dictionary:
 	mutex.lock()
-	var result := {"bytes":used,"limit":limit,"frames":prepared.size(),"completed":completed,"cancelled":cancelled,"evictions":evictions,"worker_ms":worker_ms,"pipeline_stages":pipeline_stages.duplicate(true),"worker_thread":worker_thread,"active":not working_key.is_empty(),"error":error,"failures":failures.duplicate(),"test_barrier_waiting":at_barrier,"session":session.duplicate()}
+	var result := {"bytes":used,"limit":limit,"retained_limit":retained_limit,"frames":prepared.size(),"completed":completed,"cancelled":cancelled,"evictions":evictions,"worker_ms":worker_ms,"pipeline_stages":pipeline_stages.duplicate(true),"worker_thread":worker_thread,"active":not working_key.is_empty(),"error":error,"failures":failures.duplicate(),"test_barrier_waiting":at_barrier,"session":session.duplicate()}
 	mutex.unlock();return result
 # Caller holds the publication mutex. This also makes cancellation O(1),
 # independent of the number of admitted samples.
@@ -77,6 +83,7 @@ func prepare_session(next_token: String, next_jobs: Array) -> void:
 func cancel_session() -> void:
 	mutex.lock()
 	if session.get("state") != "ready":
+		retained_limit = mini(retained_limit,used)
 		session.clear();pending_plan.clear();_set_jobs([]);session_serial += 1
 	mutex.unlock();wake.post()
 func _planning_cancelled(serial: int) -> bool:
@@ -123,7 +130,7 @@ func _plan_session() -> void:
 	for job in plan:
 		if prepared.has(job.key) and prepared[job.key].token == token:
 			used += job.charge-int(prepared[job.key].bytes);prepared[job.key].bytes = job.charge;ready += 1
-	limit = required;_set_jobs(plan);session.state = "preparing";session.ready = ready;session.next = 0
+	limit = required;retained_limit = required;_set_jobs(plan);session.state = "preparing";session.ready = ready;session.next = 0
 	mutex.unlock()
 func _session_progress() -> void:
 	mutex.lock()
@@ -133,18 +140,24 @@ func _session_progress() -> void:
 func _prune(incoming: int, key: String) -> bool:
 	var retired: Array = []
 	mutex.lock()
-	if cache_token != token:
+	if cache_token != token and retained_limit == 0:
 		var kept: Array[String] = []
 		for old in order:
 			if prepared[old].token != token:
 				retired.append(prepared[old]);used -= int(prepared[old].bytes);prepared.erase(old)
 			else:kept.append(old)
 		order = kept;cache_token = token
-	var removed := 0
-	while used+incoming > limit and removed < order.size():
-		var old: String = order[removed];removed += 1
+	# A matching key from an invalidated generation cannot block its replacement.
+	if prepared.has(key) and prepared[key].token != token:
+		retired.append(prepared[key]);used -= int(prepared[key].bytes);prepared.erase(key);order.erase(key)
+	while used+incoming > limit and not order.is_empty():
+		# Retire obsolete channels first, preserving every current-session sample
+		# already counted toward readiness. The cache never exceeds its one limit.
+		var victim := 0
+		for i in range(order.size()):
+			if prepared[order[i]].token != token:victim = i;break
+		var old: String = order[victim];order.remove_at(victim)
 		retired.append(prepared[old]);used -= int(prepared[old].bytes);prepared.erase(old);evictions += 1
-	if removed > 0:order = order.slice(removed)
 	var fits := used+incoming <= limit and not prepared.has(key)
 	mutex.unlock();retired.clear();return fits
 func _next() -> Dictionary:
@@ -212,4 +225,4 @@ func _run() -> void:
 			mutex.unlock();result = {}
 			_session_progress()
 			if failed:break
-	prepared.clear();order.clear();mutex.lock();used = 0;mutex.unlock()
+	prepared.clear();order.clear();mutex.lock();used = 0;retained_limit = 0;mutex.unlock()

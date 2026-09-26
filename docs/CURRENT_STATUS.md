@@ -15,6 +15,9 @@ Current authorized work is #100, the top Ready item verified on 2026-09-25:
 [Continuous SSC playback preparation](SSC_CONTINUOUS_PLAYBACK.md), **pending owner review** in PR #101.
 Lazy opening is retained; Play prepares the full visible-field timeline within
 a shared available-memory budget before advancing, with progress and cancellation.
+The [channel-switch stability correction](SSC_CHANNEL_SWITCH_STABILITY.md)
+addresses a PR-only admission failure after repeated channel changes: one bounded
+cache retains its memory accounting while obsolete entries are replaced.
 The complete-run report records preserved quality and uninterrupted 1× playback
 on the measured workstation. Strict 33.3 ms frame pacing and continuous streaming
 beyond admitted RAM remain unmet limits; this is not a universal smoothness claim.

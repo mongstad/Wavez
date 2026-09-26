@@ -5,6 +5,70 @@ func session_ready(view) -> bool:
 	while view.scene_layers.field_playback.session_waiting and Time.get_ticks_msec()-began < 20000:
 		view.scene_layers.tick(0);await process_frame
 	return view.scene_layers.field_playback.worker.status().session.get("state") == "ready"
+func accounting(worker) -> bool:
+	worker.mutex.lock()
+	var total := 0;var keys := {}
+	for key in worker.prepared:total += int(worker.prepared[key].bytes)
+	for key in worker.order:keys[key] = true
+	var correct: bool = total == worker.used and total <= worker.limit and keys.size() == worker.order.size() and keys.size() == worker.prepared.size()
+	worker.mutex.unlock();return correct
+func switch_channel(view, channel: String) -> void:
+	var choice: OptionButton = view.scene_layers.panel_controls.field.channel
+	for index in choice.item_count:
+		if choice.get_item_metadata(index) == channel:
+			choice.select(index);choice.item_selected.emit(index);return
+func repeated_switches(view, oracle: Array, gpu_oracle: Array) -> void:
+	var control = view.scene_layers.field_playback
+	view.physical_rate = 2.0
+	# Allow the worker to run between the UI channel change and Play. Discarding
+	# the whole allocation here loses admission credit even if malloc keeps its
+	# pages resident. Exercise both scalar channels, including signed values.
+	for other in ["signed","exact"]:
+		for channel in ["density",other,"density",other,"density"]:
+			view.playing = false;control.cancel_session()
+			var before: Dictionary = control.worker.status()
+			var previous_key: String = view.scene_layers.views.field.key
+			var previous_channel: String = view.scene_layers.states.field.channel
+			switch_channel(view,channel)
+			await create_timer(.15).timeout
+			check(control.worker.status().bytes >= int(before.bytes*.75),"Channel switch retains the bounded allocation until replacements need it")
+			if previous_channel != channel:check(control.worker.get_frame(previous_key).is_empty(),"Old channel preparation cannot be acquired in the new generation")
+			check(accounting(control.worker),"Repeated switch cache charges and LRU membership agree")
+			view.play_button.pressed.emit()
+			# The real button may be disabled until the new visible sample arrives.
+			if not view.playing:
+				check(await sample(view,.5,true),"Paused replacement sample arrives")
+				view.play_button.pressed.emit()
+			check(await session_ready(view),"Repeated channel switch prepares every sample")
+			check(control.worker.status().session.get("resident_credit",0) >= int(before.bytes*.7),"Replacement admission credits the still-owned allocation")
+			check(await sample(view,.5,true),"Replacement source sample commits")
+			var field = view.scene_layers.views.field
+			check(field.channel == channel and field.lod == 1,"Replacement publishes the selected channel at full resolution")
+			for source_channel in oracle[5]:check(Hash.digest(field.data.channels[source_channel].to_byte_array()) == oracle[5][source_channel],"Repeated switch retains exact "+source_channel)
+			var prepared_pixels := PackedByteArray()
+			for plane in control.worker.get_frame(field.key).get("planes",[]):prepared_pixels.append_array(plane.get_data())
+			check(Hash.digest(prepared_pixels) == gpu_oracle[5][channel],"Replacement planes contain the selected scalar values")
+			# Compatibility's Godot 4.7.2 readback clips/quantizes float 3D textures
+			# even in an isolated upload without SimScope. It is not a byte oracle.
+			if DisplayServer.get_name() != "headless" and RenderingServer.get_current_rendering_method() == "forward_plus":
+				var pixels := PackedByteArray()
+				for plane in field.texture.get_data():pixels.append_array(plane.get_data())
+				check(Hash.digest(pixels) == gpu_oracle[5][channel],"Replacement GPU texture contains the selected scalar values")
+			check(control.error.is_empty() and view.scene_layers.error.is_empty() and control.staged.size() <= 1,"Switching preserves playback and bounded GPU staging")
+	# Hold publication while multiple new plans replace each other. Releasing
+	# the old worker result must neither publish it nor lose the cache credit.
+	var gate := Semaphore.new();control.worker.test_barrier = gate
+	switch_channel(view,"exact")
+	var began := Time.get_ticks_msec()
+	while not control.worker.status().test_barrier_waiting and Time.get_ticks_msec()-began < 5000:
+		view.scene_layers.tick(0);await process_frame
+	check(control.worker.status().test_barrier_waiting,"Switch cancellation overlaps an unfinished preparation")
+	for channel in ["density","signed","density","exact","density"]:
+		switch_channel(view,channel);view.scene_layers.tick(0)
+	control.worker.test_barrier = null;gate.post()
+	check(await session_ready(view),"Repeated cancellation reaches full readiness for the final channel")
+	check(await sample(view,.5,true),"Final channel commits after stale work completes")
+	check(view.scene_layers.views.field.channel == "density" and accounting(control.worker),"Stale completion preserves selected channel and exact accounting")
 func run() -> void:
 	var directory := OS.get_cmdline_user_args()[0]
 	var gib := 1024*1024*1024
@@ -32,6 +96,7 @@ func run() -> void:
 	check(state.session.ready == 20 and state.frames == 20,"Readiness includes the entire file")
 	check(state.bytes <= state.limit and state.limit == state.session.required_bytes,"Validated full allocation remains bounded")
 	var oracle = JSON.parse_string(FileAccess.get_file_as_string(directory.path_join("oracle.json")))
+	var gpu_oracle = JSON.parse_string(FileAccess.get_file_as_string(directory.path_join("gpu-oracle.json")))
 	for i in range(20):
 		check(await sample(view,i*.1,true),"Prepared sample "+str(i))
 		var field = view.scene_layers.views.field
@@ -57,6 +122,7 @@ func run() -> void:
 	view.scene_layers.states.field.channel = "exact"
 	view.scene_layers.resample();view.scene_layers.tick(0)
 	check(await session_ready(view),"Channel change reparses/prepares its new generation")
+	await repeated_switches(view,oracle,gpu_oracle)
 	view.playing = false;control.cancel_session();control.invalidate()
 	view.scene_layers.reader.cache.limit = 1 << 50
 	view.playing = true;control.begin_session()

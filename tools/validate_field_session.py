@@ -20,13 +20,17 @@ def main():
     out = a.output_dir.resolve(); out.mkdir(parents=True, exist_ok=False)
     source = out / 'session.ssc'
     oracle = []
+    gpu_oracle = []
     with SceneCapture(source, objects=[dict(id='field', kind='volume', units='m')], compression='zstd') as writer:
         for i in range(20):
             channels = dict(density=(np.arange(32**3, dtype='f4') / 32768 + i).reshape(32, 32, 32),
+                            signed=(np.arange(32**3, dtype='f4') / 16384 - 1 - i/32).reshape(32, 32, 32),
                             exact=np.full((32, 32, 32), 1+i/32, dtype='f8'))
             writer.add_volume('field', i*.1, channels, origin=[0, 0, 0], spacing=[1, 1, 1])
             oracle.append({k: hashlib.sha256(v.tobytes()).hexdigest() for k, v in channels.items()})
+            gpu_oracle.append({k: hashlib.sha256(v.astype('f4').tobytes()).hexdigest() for k, v in channels.items()})
     (out / 'oracle.json').write_text(json.dumps(oracle))
+    (out / 'gpu-oracle.json').write_text(json.dumps(gpu_oracle))
     before = hashlib.sha256(source.read_bytes()).hexdigest()
     cmd = [a.godot, '--path', str(ROOT / 'viewer'), '--audio-driver', 'Dummy', '--log-file', str(out / 'godot.log')]
     cmd += ['--headless'] if a.renderer == 'headless' else ['--rendering-method', a.renderer, '--resolution', '1280x800']
