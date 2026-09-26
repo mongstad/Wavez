@@ -34,18 +34,19 @@ func _job(id: String, index: int, budget: int) -> Dictionary:
 	var entry: Dictionary = entries[index];var next: Dictionary = entries[mini(index+1,entries.size()-1)]
 	var state: Dictionary = layers.states[id]
 	var obj: Dictionary = layers.reader.objects[id]
-	var vertices := 0;var indices := 0
-	for array in entry.descriptor.arrays:
-		if array.name == "position":vertices = int(array.shape[0])
-		if array.name == "triangles":indices = int(array.shape[0])*3
+	var unresolved: int = maxi(int(entry.decoded) if entry.descriptor.is_empty() else 0,int(next.decoded) if next.descriptor.is_empty() else 0)
+	var vertices := mini(1000000,unresolved/12);var indices := mini(6000000,unresolved/4)
+	for array in entry.descriptor.get("arrays",[]):
+		if array.name == "position":vertices = maxi(vertices,int(array.shape[0]))
+		if array.name == "triangles":indices = maxi(indices,int(array.shape[0])*3)
 	# Includes decoded pairs, temporary exact-ID maps, original/expanded display
 	# arrays, morph input/output, and allocation overhead (shared bytes overcounted).
-	for array in next.descriptor.arrays:
+	for array in next.descriptor.get("arrays",[]):
 		if array.name == "position":vertices = maxi(vertices,int(array.shape[0]))
 		if array.name == "triangles":indices = maxi(indices,int(array.shape[0])*3)
 	var charge := int(entry.decoded)+int(next.decoded)+vertices*200+indices*160+65536
 	var key := "%s/%s/%s/%s/%s" % [id,entry.sequence,next.sequence,budget,JSON.stringify(state)]
-	return {"key":key,"id":id,"entry":entry,"next":next,"object":obj,"state":state.duplicate(true),"colors":viewer.colormaps[state.colormap],"budget":budget,"charge":charge,"path":layers.reader.source_path,"stamp":layers.reader.source_stamp}
+	return {"key":key,"id":id,"entry":entry.duplicate(true),"next":next.duplicate(true),"object":obj,"state":state.duplicate(true),"colors":viewer.colormaps[state.colormap],"budget":budget,"charge":charge,"path":layers.reader.source_path,"stamp":layers.reader.source_stamp}
 func request(time: float, budget: int) -> Array:
 	var signature := str(layers.reader.generation)+JSON.stringify(layers.reader.source_stamp)+str(budget)
 	for id in layers.states:
@@ -105,6 +106,8 @@ func acquire(time: float, budget: int) -> Dictionary:
 		if layers.views[id] is MeshView and layers.views[id].gpu_bytes > budget:layers.views[id].clear()
 	var targets := request(time,budget);var result := {};var ready := true # A failed future prefetch must not block an already resident sample.
 	for job in targets:
+		var failure: String = worker.status().get("failures",{}).get(job.key,"")
+		if not failure.is_empty():error = failure;layers.fail_playback(failure)
 		var view = layers.views[job.id]
 		if view.key == job.key and view.data.get("token") == token:result[job.id] = view.data
 		elif staged.has(job.id) and staged[job.id].key == job.key:result[job.id] = staged[job.id]

@@ -4,6 +4,7 @@ extends RefCounted
 const Cache = preload("res://data/byte_cache.gd")
 const Typed = preload("res://data/typed_decode.gd")
 const Stamp = preload("res://data/source_stamp.gd")
+const Reader = preload("res://layers/scene_reader.gd")
 const Prepare = preload("res://layers/particle_prepare.gd")
 const MIB := 1048576
 var mutex := Mutex.new()
@@ -15,6 +16,7 @@ var desired: Array[int] = []
 var token := ""
 var working_token := ""
 var working_index := -1
+var failures := {} # Only requested-window failures; future failures do not gate a resident pair.
 var pinned := -1
 var prior_pin := -1
 var prepared := {}
@@ -50,8 +52,9 @@ static func memory_headroom() -> Dictionary:
 static func estimate(entries: Array, trails: bool) -> Dictionary:
 	var samples: Array[int] = []
 	for entry in entries:
-		var count := 0;var ids := false;var scalars := 0
-		for array in entry.descriptor.arrays:
+		var ids: bool = entry.get("identity","") == "persistent_i8"
+		var count := mini(1000000 if ids else 10000000,int(entry.decoded)/(20 if ids else 12));var scalars: int = entry.get("array_count",256) if entry.descriptor.is_empty() else 0
+		for array in entry.descriptor.get("arrays",[]):
 			if array.name == "position":count = int(array.shape[0])
 			if array.name == "particle_id":ids = true
 			scalars += 1
@@ -59,8 +62,8 @@ static func estimate(entries: Array, trails: bool) -> Dictionary:
 		samples.append(int(entry.decoded)*2+count*(180 if ids else 20)+8192+scalars*512)
 	var pairs: Array[int] = []
 	for i in range(entries.size()):
-		var count := 0
-		for array in entries[i].descriptor.arrays:
+		var count := mini(10000000,int(entries[i].decoded)/12)
+		for array in entries[i].descriptor.get("arrays",[]):
 			if array.name == "position":count = int(array.shape[0])
 		var cost := samples[i]+(samples[i+1] if i+1<samples.size() else 0)+count*76+16384
 		if trails:
@@ -78,7 +81,10 @@ func close() -> void:
 	if thread.is_started():thread.wait_to_finish()
 func request(next_context: Dictionary, indices: Array[int]) -> void:
 	mutex.lock()
+	if token != next_context.token:failures.clear()
 	context = next_context;token = context.token;desired = indices
+	for old in failures.keys():
+		if not indices.has(old):failures.erase(old)
 	metrics.error = ""
 	mutex.unlock();wake.post()
 func cancel() -> void:
@@ -107,7 +113,7 @@ func status() -> Dictionary:
 	var ready: Array[int] = []
 	for index in prepared:
 		if prepared[index].token == token:ready.append(index)
-	result.ready_indices = ready;result.prepared_pairs = ready.size();result.prepared_bytes = prepared_used
+	result.failures = failures.duplicate();result.ready_indices = ready;result.prepared_pairs = ready.size();result.prepared_bytes = prepared_used
 	result.desired = desired.duplicate();result.working_index = working_index;result.trace_dropped = events_dropped
 	mutex.unlock();return result
 func drain_events() -> Array:
@@ -123,7 +129,8 @@ func _read(index: int, job: Dictionary, file: FileAccess) -> Dictionary:
 	var hit := decoded.get_frame(index)
 	if not hit.is_empty():return hit
 	if stopped():return {}
-	var entry: Dictionary = job.entries[index]
+	var entry: Dictionary = Reader.materialize(file,job.entries[index],job.object)
+	if entry.has("error"):return entry
 	var descriptors: Array = [];var count := 0;var ids := false;var shapes := {};var associations := {}
 	for array in entry.descriptor.arrays:
 		var components: int = int(array.shape[1]) if array.shape.size()==2 else 1
@@ -134,9 +141,13 @@ func _read(index: int, job: Dictionary, file: FileAccess) -> Dictionary:
 	var descriptor := {"offset":entry.offset,"count":count,"time":entry.time,"channels":descriptors,"has_ids":ids}
 	var memory_before := OS.get_static_memory_usage()
 	var start_time := Time.get_ticks_usec()
-	var data := Typed.read(file,descriptor,self)
+	# This worker owns decoded entries. Borrow a resident neighbor without
+	# retaining a new cache or changing its LRU order/limits.
+	var reference: Dictionary = decoded.entries.get(index-1,decoded.entries.get(index+1,{})).get("value",{})
+	var data := Typed.read(file,descriptor,self,reference)
 	observe("read_decode_identity",start_time)
-	if data.is_empty() or data.has("error"):return data
+	if data.has("error"):return {"error":Reader.record_error(entry,data.error)}
+	if data.is_empty():return data
 	data.source_index = index;data.sequence = entry.sequence;data.shapes = shapes;data.associations = associations;data.geometry = entry.descriptor.geometry
 	data = Prepare.frame(data,self)
 	if data.is_empty() or data.has("error"):return data
@@ -169,7 +180,7 @@ func _next_job() -> Dictionary:
 	var job := {}
 	if not closing and not context.is_empty():
 		for index in desired:
-			if not prepared.has(index) or prepared[index].token != token:
+			if not failures.has(index) and (not prepared.has(index) or prepared[index].token != token):
 				working_index = index;working_token = token;job = context;metrics.worker_active = true;break
 	mutex.unlock();return job
 func _run() -> void:
@@ -196,7 +207,8 @@ func _run() -> void:
 			_prune(job,0,index)
 			var outcome := {}
 			var memory := memory_headroom()
-			if memory.available_physical < memory.reserve+int(job.get("transient_estimate",0)):
+			var ahead := estimate(job.entries.slice(maxi(0,index-5) if job.config.trails else index,mini(job.entries.size(),index+2)),job.config.trails)
+			if memory.available_physical < memory.reserve+ahead.largest_pair*2:
 				outcome = {"error":"Playback preparation paused to preserve physical RAM headroom."}
 			elif _source_matches(job):
 				var file := FileAccess.open(job.path,FileAccess.READ)
@@ -227,7 +239,7 @@ func _run() -> void:
 			cancelled = cancelled or working_token != token or not desired.has(index) or closing
 			if cancelled:metrics.cancelled += 1
 			elif outcome.has("error"):
-				metrics.error = outcome.error;desired = []
+				failures[index] = outcome.error;metrics.error = ""
 			elif not outcome.is_empty():
 				outcome.token = working_token;outcome.timings = timings.duplicate();outcome.worker_ms = (Time.get_ticks_usec()-started)/1000.0
 				prepared[index] = outcome;prepared_used += int(outcome.bytes);order.append(index);metrics.completed += 1

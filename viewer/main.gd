@@ -986,6 +986,9 @@ func _build_inspector_controls() -> void:
 func _toggle_playback() -> void:
 	if not playing and scene_layers != null and scene_layers.is_buffering():return
 	playing = not playing;inspection_paused = false
+	if scene_layers != null and scene_layers.field_playback != null:
+		if playing:scene_layers.field_playback.begin_session()
+		else:scene_layers.field_playback.cancel_session()
 
 func _step_frame(direction: int) -> void:
 	playing = false
@@ -1028,12 +1031,19 @@ func _open_scene(path: String) -> void:
 	_set_timeline_extent()
 	if frame_count == 0: status_label.text = "Waiting for a complete scene sample.";return
 	requested_time = reader.frames[0].time
-	scene_layers.sample(requested_time)
+	var initial: Dictionary = scene_layers.sample(requested_time)
+	if initial.is_empty():
+		_shell_open_error = scene_layers.error;status_label.text = _shell_open_error;return
 	scene_layers.frame_scene()
 	_build_guides();_apply_geometry();_update_camera();_sync_visuals();_sync_inspection_controls()
 	status_label.text = "Loaded %s • SIMSCP3 • %d layer samples" % [path.get_file(),reader.records.size()]
-	scene_layers.playback.begin(requested_time)
+	# The synchronous initial sample is already usable; its rolling request was
+	# submitted by sample(). Background preparation must not gate interaction.
+	scene_layers.playback._update_ui()
 	_update_hud()
+	# Opening while transport is already playing must use the same readiness
+	# gate as pressing Play; paused opening still returns after the first scene.
+	if playing:scene_layers.field_playback.begin_session()
 
 func _frame_from_data(data: Dictionary, index: int) -> FrameData:
 	var decode_started := Profile.begin()

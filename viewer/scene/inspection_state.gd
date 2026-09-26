@@ -80,7 +80,7 @@ static func shape(value, model) -> bool:
 		return true
 	return false
 
-static func validate_visual(viewer, state: Dictionary) -> String:
+static func validate_visual(viewer, state: Dictionary, requested_time = null) -> String:
 	var model := Visual.snapshot(viewer)
 	for key in state:
 		if not model.has(key): return "Unsupported visual field: " + key
@@ -118,7 +118,7 @@ static func validate_visual(viewer, state: Dictionary) -> String:
 		if not state.range_interval.has_all(["start","end","channel","samples"]): return "Missing interval provenance."
 		if not numeric(state.range_interval.start) or not numeric(state.range_interval.end) or state.range_interval.end < state.range_interval.start or not state.range_interval.channel is String or not numeric(state.range_interval.samples): return "Invalid range interval."
 	if viewer.scene_layers != null:
-		var problem: String = viewer.scene_layers.validate_state(state.get("scene"))
+		var problem: String = viewer.scene_layers.validate_state(state.get("scene"),requested_time)
 		if not problem.is_empty():return problem
 	return Geometry.validate(state.geometry_override)
 
@@ -139,10 +139,10 @@ static func restore_scene(viewer, recipe: Dictionary) -> String:
 		if not layer is Dictionary or not viewer.generic_reader.objects.has(layer.get("id")) or seen.has(layer.id) or layer.get("kind") != viewer.generic_reader.objects[layer.id].kind:return "Unknown/duplicate scene layer."
 		seen[layer.id] = true
 	if recipe.get("selections",[]) != []:return "Selections are not yet supported."
-	var invalid := validate_visual(viewer,recipe.visual)
-	if not invalid.is_empty():return invalid
 	var time = recipe.sample.get("requested_time")
 	if not numeric(time) or not viewer._ensure_timeline() or viewer.shared_timeline.bracket(time).is_empty():return "Scene time unavailable."
+	var invalid := validate_visual(viewer,recipe.visual,time)
+	if not invalid.is_empty():return invalid
 	for id in viewer.generic_reader.objects:
 		var point: Dictionary = viewer.generic_reader.bracket(id,time)
 		if point.is_empty():continue

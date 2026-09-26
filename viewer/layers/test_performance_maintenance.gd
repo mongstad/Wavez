@@ -16,10 +16,10 @@ func run() -> void:
 	var control := Policy.new()
 	var entries: Array = view.generic_reader.samples.particles
 	control._budgets(entries,{"trails":false},{"safe_cache_bytes":16*1024*Memory.MIB})
-	check(control.full_preload,"automatic selects full on safe RAM")
+	check(not control.full_preload and control.window_pairs <= 8,"automatic remains bounded rolling even on abundant RAM")
 	var cost: Dictionary = Memory.estimate(entries,false)
 	control._budgets(entries,{"trails":false},{"safe_cache_bytes":ceili(cost.total*1.25)+cost.largest_pair*2-1})
-	check(not control.full_preload,"25 percent margin and transient threshold enforced")
+	check(not control.full_preload,"reduced headroom still uses rolling preparation")
 	control._budgets(entries,{"trails":false},{"safe_cache_bytes":0})
 	check(not control.full_preload and control.prepared_limit==0,"unavailable safe RAM never enables preload")
 	control.policy = "512"
