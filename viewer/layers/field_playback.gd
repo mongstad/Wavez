@@ -20,6 +20,9 @@ var error := ""
 var label: Label
 var uploads := 0
 var last_upload_frame := -1
+var session_waiting := false
+var session_requested := false
+var session_restart := false
 func setup(owner) -> void:
 	layers = owner;viewer = layers.viewer
 	for obj in layers.reader.objects.values():
@@ -30,8 +33,28 @@ func setup(owner) -> void:
 		label = Label.new();label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART;layers.performance_panel.add_child(label)
 func close() -> void:worker.close();staged.clear()
 func invalidate() -> void:
-	worker.cancel();token = "";request_signature = "";staged.clear();buffering = false;pending_time = null;error = ""
+	worker.cancel();token = "";request_signature = "";staged.clear();buffering = false;pending_time = null;error = "";session_waiting = false;session_requested = false;session_restart = false
 func active() -> bool:return enabled and not viewer.offline_instance and not viewer.inspection_busy
+func begin_session(target_time = null) -> void:
+	if not active():return
+	session_requested = true;session_restart = false;error = ""
+	var time: float = viewer.requested_time if target_time == null else float(target_time)
+	request(time,layers.field_budget())
+	var jobs: Array = [];var reserved := 0
+	for amount in other_reservations().values():reserved += int(amount)
+	for id in layers.states:
+		if not layers.views[id] is Grid or not layers.states[id].visible:continue
+		if not layers.ensure_channel(id,time):return
+		var point: Dictionary = layers.reader.bracket(id,time)
+		var start: int = point.get("a",0);var count: int = layers.reader.samples[id].size()
+		for offset in range(count):
+			var index := posmod(start+offset*(-1 if viewer.physical_rate<0 else 1),count)
+			var job := _job(id,index,layers.field_budget());job.other_reservation = reserved;jobs.append(job)
+	if jobs.is_empty():return
+	worker.prepare_session(token,jobs);session_restart = false;session_waiting = true;buffering = true;_update_ui()
+func cancel_session() -> void:
+	worker.cancel_session();session_waiting = false;session_requested = false;session_restart = false;buffering = false;request_signature = ""
+	_update_ui()
 static func preparation_budget(target_bytes: int, window_bytes: int, memory: Dictionary, reserved: int) -> Dictionary:
 	# One cache share plus two shares for current/staged sample references and
 	# decoder/conversion temporaries. Leave a fourth share unused. The workload
@@ -65,7 +88,7 @@ func request(time: float, budget: int) -> Array:
 	for id in layers.states:
 		if layers.views[id] is Grid:signature += id+str(layers.states[id].visible)+layers.states[id].channel
 	if token != signature:
-		token = signature;request_signature = "";staged.clear()
+		token = signature;request_signature = "";staged.clear();worker.cancel();session_waiting = false;session_restart = session_requested and viewer.playing
 	var targets: Array = [];var future: Array = []
 	var direction := -1 if viewer.physical_rate < 0 else 1
 	for id in layers.states:
@@ -97,8 +120,13 @@ func request(time: float, budget: int) -> Array:
 		budget_report.reservations = reservations
 		budget_report.preview_budget_per_field = budget
 		budget_report.targets = targets.map(func(job):return {"id":job.id,"decoded_bytes":job.decoded_charge,"preview_charge":job.preview_charge,"total_charge":job.charge})
+	var session: Dictionary = worker.status().session
+	if session.get("state") in ["preparing","ready"]:
+		cpu_limit = worker.status().limit;budget_report.cpu_limit = cpu_limit
+		budget_report.strategy = "full_timeline";budget_report.full_required_bytes = session.required_bytes
+		budget_report.admission_memory = session.get("memory",{})
 	error = ""
-	if charge*2 > cpu_limit:
+	if charge*2 > cpu_limit and session.is_empty():
 		error = "Field preparation needs %.1f MiB; safe budget is %.1f MiB. Hide a field or free RAM; preview reduction cannot remove decoded source costs." % [charge*2/float(Memory.MIB),cpu_limit/float(Memory.MIB)]
 		jobs.clear()
 	else:
@@ -138,15 +166,28 @@ func acquire(time: float, budget: int) -> Dictionary:
 		if view.key == job.key:result[job.id] = {"sample":view.data}
 		elif staged.has(job.id) and staged[job.id].key == job.key:result[job.id] = staged[job.id]
 		else:ready = false
-	buffering = not ready;pending_time = time if buffering else null
+	buffering = session_waiting or not ready;pending_time = time if not ready else null
 	_update_ui()
 	return result if ready else {"pending":true}
 func committed() -> void:
 	for id in staged.keys():
 		if layers.views[id].key == staged[id].key:staged.erase(id)
-	buffering = false;pending_time = null;_update_ui()
+	buffering = session_waiting;pending_time = null;_update_ui()
 func pump() -> bool:
 	if not active():return true
+	if session_restart:begin_session()
+	if session_waiting:
+		if not viewer.playing:cancel_session();return true
+		var status := worker.status();var session: Dictionary = status.session
+		if session.get("state") in ["blocked","refused"]:
+			error = session.error;layers.fail_playback(error);session_waiting = false;buffering = false;_update_ui();return false
+		if session.get("state") != "ready":
+			# An explicit seek may publish its target as soon as that sample is
+			# available; the continuous-play clock still waits for the full plan.
+			if pending_time != null:layers.sample(float(pending_time),true)
+			buffering = true;_update_ui();return false
+		cpu_limit = status.limit;session_waiting = false;buffering = false;viewer.display_accum = 0
+
 	if pending_time != null:
 		var result: Dictionary = layers.sample(float(pending_time),true)
 		if result.is_empty() or result.has("pending"):return false
@@ -156,8 +197,13 @@ func pump() -> bool:
 func _update_ui() -> void:
 	var status := worker.status()
 	if error.is_empty():error = status.error
+	var session: Dictionary = status.session
+	if session.get("state") in ["blocked","refused"]:error = session.error
 	if is_instance_valid(label):
 		label.text = ("Field preparation blocked" if not error.is_empty() else ("Preparing fields…" if buffering else "Field prefetch ready"))+" • %.1f / %.1f MiB CPU cache\n" % [status.bytes/float(Memory.MIB),cpu_limit/float(Memory.MIB)]+error
+		if session_waiting:
+			label.text = ("Planning fields… %d / %d" % [session.get("planned",0),session.get("total",0)] if session.get("state") == "planning" else "Preparing fields… %d / %d • Pause to cancel" % [session.get("ready",0),session.get("total",0)])
+		elif session.get("state") == "ready":label.text = "All fields prepared • %.1f GiB CPU • bounded GPU staging" % [status.bytes/float(1024*Memory.MIB)]
 		label.tooltip_text = "Field cache only, not a process limit. Required target allowance: %.1f MiB. Other cache/worker reservations: %.1f MiB. Current/staged references and preparation temporaries have separate headroom." % [budget_report.get("required_bytes",0)/float(Memory.MIB),budget_report.get("reserved_other_bytes",0)/float(Memory.MIB)]
 	if is_instance_valid(viewer.play_button):viewer.play_button.disabled = layers.is_buffering() and not viewer.playing
 func profile_report() -> Dictionary:

@@ -165,6 +165,7 @@ func refresh() -> void:
 			readiness = "Unavailable"; readiness_detail = "Waiting for a complete recorded sample."
 		if layers != null:
 			if layers.is_buffering(): readiness = "Preparing…"; readiness_detail = "Preparing the requested sample; the displayed clock remains committed."
+			if layers.field_playback.session_waiting and is_instance_valid(layers.field_playback.label):readiness_detail = layers.field_playback.label.text
 			var errors := []
 			for pair in [["Scene",layers.error],["Particles",layers.playback.readiness_error],["Fields",layers.field_playback.error],["Meshes",layers.mesh_playback.error]]:
 				observe(pair[0],pair[1])
@@ -175,6 +176,9 @@ func refresh() -> void:
 					readiness = "Unavailable"; readiness_detail += "\n"+str(sample.id)+": "+str(sample.get("reason","No sample available at the displayed time."))
 	update_jobs()
 	var summary: String = readiness + ("   •   Failed — details" if not failures.is_empty() else "")
+	if layers != null and layers.field_playback.session_waiting:
+		var progress: Dictionary = layers.field_playback.worker.status().session
+		summary += "  %d/%d fields" % [progress.get("planned",0) if progress.get("state") == "planning" else progress.get("ready",0),progress.get("total",0)]
 	if badge.label.text != summary: badge.configure("error" if not failures.is_empty() else ("success" if readiness == "Ready" else "info"), summary)
 	tooltip_text = readiness_detail
 

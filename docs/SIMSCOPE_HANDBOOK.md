@@ -255,7 +255,16 @@ Manual RAM choices also use rolling caches. The old explicit full-preload policy
 
 Historical explicit-preload evidence on the 48 GB workstation: a retained 100k-particle capture prepared 81 pairs in 13.3 seconds, enabled Play after 0.78 seconds and used about 2.50 GiB process RSS. An isolated probe measured 18.67 MiB of retained Godot allocations per decoded 100k-particle sample and another 7.27 MiB per prepared pair without trails. Conservative cache charges are larger and count shared references again. CPU preparation does not create GPU resources for every cached pair.
 
-Temporal fields request the current source sample and up to four future samples per visible field, with reverse and loop ordering. The CPU preparation budget follows the accepted #98/#99 workload and safe-RAM policy, including decoded source bytes, preview charges and other cache reservations. The ordinary decoded-cache control still governs synchronous reads; this independent worker cache remains enabled with a 0 MiB decoded cache.
+Temporal fields retain current-plus-four lookahead for paused navigation. On Play,
+the viewer validates the visible-field plan and prepares the complete timeline in
+available RAM before advancing. Status shows progress; Pause cancels preparation.
+All source channels and selected-channel display planes are retained, subject to
+combined cache/worker reservations and OS/renderer headroom. Repeat playback and
+seeks reuse them. GPU staging remains current-plus-one, never the whole file.
+If the complete plan cannot fit safely, the viewer reports the required and
+available capacity; sustained streaming of dense fields beyond that capacity is
+not yet established. See [continuous playback](SSC_CONTINUOUS_PLAYBACK.md) for
+measured workload limits and reproducible full-file validation.
 
 Each visible field holds its current texture and at most one staged future texture. Their per-texture budgets split the existing layer GPU share; this can increase preview stride on large fields. GPU uploads occur on the main thread, at most one per process frame, ahead of source transitions where possible. Texture binding and shader state changes remain on the main thread. Cold seeks and underflow hold the committed physical clock, gate paused Play and pause background analysis until the required samples are ready. Stale source/configuration work is discarded. Initial opening, scientific inspection and deterministic export remain synchronous; large textures can still cause an upload callback stall. See the [PERF-001/002 report](PERFORMANCE_MAINTENANCE_REPORT.md) for exact guards, bounds and retained 02B/03B measurements.
 

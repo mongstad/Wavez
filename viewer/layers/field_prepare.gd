@@ -1,5 +1,20 @@
 extends RefCounted
 const Reader = preload("res://layers/scene_reader.gd")
+# Exact retained allocation charge after descriptor validation; all source
+# channels remain available for probes and scientific inspection.
+static func charge(entry: Dictionary, channel: String, budget: int) -> Dictionary:
+	var decoded: int = entry.decoded;var preview := 0
+	for a in entry.descriptor.arrays:
+		var count := int(a.shape[0])*int(a.shape[1])*int(a.shape[2])
+		if a.dtype == "u4":decoded += count*4 # existing decoder widens unsigned values
+		if a.name == channel:
+			var dims := Vector3i(int(a.shape[2]),int(a.shape[1]),int(a.shape[0]));var reduced := dims;var lod := 1
+			while reduced.x*reduced.y*reduced.z*4 > budget and mini(reduced.x,mini(reduced.y,reduced.z)) > 2:
+				lod *= 2;reduced = Vector3i(maxi(2,ceili(dims.x/float(lod))),maxi(2,ceili(dims.y/float(lod))),maxi(2,ceili(dims.z/float(lod))))
+			preview = reduced.x*reduced.y*reduced.z*4
+	if preview == 0:return {"error":"Scalar channel unavailable."}
+	if preview > budget:return {"error":"Volume texture budget exhausted."}
+	return {"bytes":decoded+preview+65536,"decoded":decoded,"preview":preview}
 static func prepare(obj: Dictionary, sample: Dictionary, selected: String, budget: int, cancel = null) -> Dictionary:
 	if not sample.channels.has(selected): return {"error":"Scalar channel unavailable."}
 	var geometry: Dictionary = sample.geometry

@@ -13,16 +13,23 @@ var token := ""
 var working_token := ""
 var working_key := ""
 var jobs: Array = []
+var wanted := {}
 var prepared := {}
+var cache_token := ""
 var order: Array[String] = []
 var used := 0
 var limit := 128*Memory.MIB
 var error := ""
 var failures := {}
+# Full visible-field preparation is requested by Play, never by opening.
+var session := {}
+var pending_plan: Array = []
+var session_serial := 0
 var completed := 0
 var cancelled := 0
 var evictions := 0
 var worker_ms := 0.0
+var pipeline_stages := {}
 var worker_thread := -1
 var test_barrier: Semaphore
 var at_barrier := false
@@ -32,15 +39,19 @@ func close() -> void:
 	if thread.is_started():thread.wait_to_finish()
 func request(next_token: String, next_jobs: Array, bytes: int) -> void:
 	mutex.lock()
-	if token != next_token:failures.clear()
-	token = next_token;jobs = next_jobs;limit = bytes;error = ""
+	if token != next_token:
+		failures.clear();session.clear();pending_plan.clear();session_serial += 1
+	if not session.is_empty() and session.get("state") in ["planning","preparing","ready"]:
+		mutex.unlock();return
+	if session.get("state") == "blocked":session.state = "refused"
+	token = next_token;_set_jobs(next_jobs);limit = bytes;error = ""
 	for old in failures.keys():
-		if not jobs.any(func(job):return job.key == old):failures.erase(old)
+		if not wanted.has(old):failures.erase(old)
 	mutex.unlock();wake.post()
 func cancel() -> void:
-	mutex.lock();token += "!";jobs = [];mutex.unlock();wake.post()
+	mutex.lock();token += "!";_set_jobs([]);session.clear();pending_plan.clear();session_serial += 1;mutex.unlock();wake.post()
 func stopped() -> bool:
-	mutex.lock();var stop := closing or token != working_token or not jobs.any(func(job):return job.key == working_key);mutex.unlock();return stop
+	mutex.lock();var stop := closing or token != working_token or not wanted.has(working_key);mutex.unlock();return stop
 func get_frame(key: String) -> Dictionary:
 	mutex.lock();var value: Dictionary = prepared.get(key,{})
 	if value.get("token") != token:value = {}
@@ -48,23 +59,101 @@ func get_frame(key: String) -> Dictionary:
 	mutex.unlock();return value
 func status() -> Dictionary:
 	mutex.lock()
-	var result := {"bytes":used,"limit":limit,"frames":prepared.size(),"completed":completed,"cancelled":cancelled,"evictions":evictions,"worker_ms":worker_ms,"worker_thread":worker_thread,"active":not working_key.is_empty(),"error":error,"failures":failures.duplicate(),"test_barrier_waiting":at_barrier}
+	var result := {"bytes":used,"limit":limit,"frames":prepared.size(),"completed":completed,"cancelled":cancelled,"evictions":evictions,"worker_ms":worker_ms,"pipeline_stages":pipeline_stages.duplicate(true),"worker_thread":worker_thread,"active":not working_key.is_empty(),"error":error,"failures":failures.duplicate(),"test_barrier_waiting":at_barrier,"session":session.duplicate()}
 	mutex.unlock();return result
+# Caller holds the publication mutex. This also makes cancellation O(1),
+# independent of the number of admitted samples.
+func _set_jobs(next_jobs: Array) -> void:
+	jobs = next_jobs;wanted = {}
+	for job in jobs:wanted[job.key] = true
+func prepare_session(next_token: String, next_jobs: Array) -> void:
+	mutex.lock()
+	if token == next_token and session.get("state") == "ready":
+		mutex.unlock();return
+	if token != next_token:failures.clear()
+	token = next_token;session_serial += 1;pending_plan = next_jobs;_set_jobs([]);failures.clear()
+	session = {"state":"planning","planned":0,"total":next_jobs.size(),"ready":0,"required_bytes":0,"error":"","started_us":Time.get_ticks_usec()}
+	mutex.unlock();wake.post()
+func cancel_session() -> void:
+	mutex.lock()
+	if session.get("state") != "ready":
+		session.clear();pending_plan.clear();_set_jobs([]);session_serial += 1
+	mutex.unlock();wake.post()
+func _planning_cancelled(serial: int) -> bool:
+	mutex.lock();var stop := closing or serial != session_serial;mutex.unlock();return stop
+static func session_capacity(memory: Dictionary, resident: int, other: int, largest: int) -> int:
+	# Available physical RAM, never swap. Credit this cache's existing allocation
+	# once, reserve all competing caches, three jobs of working space and 15%
+	# allocator/driver slack. The OS + renderer reserve is shared with rolling.
+	return maxi(0,int((int(memory.available_physical)+resident-int(memory.reserve)-other-largest*3)/1.15))
+func _plan_session() -> void:
+	mutex.lock();var plan := pending_plan;pending_plan = [];var serial := session_serial;mutex.unlock()
+	if plan.is_empty():return
+	var required := 0;var largest := 0;var other := 0;var problem := ""
+	for i in range(plan.size()):
+		if _planning_cancelled(serial):return
+		var job: Dictionary = plan[i]
+		if Stamp.read(job.path) != job.stamp:problem = "Field source changed during preparation.";break
+		var file := FileAccess.open(job.path,FileAccess.READ)
+		var entry := Reader.materialize(file,job.entry,job.object)
+		if entry.has("error"):problem = entry.error;break
+		job.entry = entry
+		var charge := Prepare.charge(entry,job.channel,job.budget)
+		if charge.has("error"):problem = Reader.record_error(entry,charge.error);break
+		job.charge = charge.bytes;job.preview_charge = charge.preview;job.decoded_charge = charge.decoded
+		required += job.charge;largest = maxi(largest,job.charge);other = maxi(other,int(job.get("other_reservation",0)))
+		mutex.lock()
+		if serial == session_serial:session.planned = i+1;session.required_bytes = required
+		mutex.unlock()
+	var memory := Memory.memory_headroom()
+	mutex.lock()
+	if serial != session_serial or closing:mutex.unlock();return
+	# Lazy window charges can overestimate a future preview. Credit only the
+	# known retained arrays/planes, not that conservative admission estimate.
+	var resident := 0
+	for value in prepared.values():resident += mini(int(value.bytes),int(value.sample.decoded_bytes)+int(value.gpu_bytes))
+	var capacity := session_capacity(memory,resident,other,largest)
+	session.capacity = capacity;session.memory = memory;session.required_bytes = required
+	session.resident_credit = resident;session.reserved_other_bytes = other;session.largest_job_bytes = largest
+	if problem.is_empty() and required > capacity:
+		problem = "Continuous field playback needs %.1f GiB prepared RAM; %.1f GiB is safely available. Free RAM and retry. This workload cannot be declared ready with only a short prefetch window." % [required/float(1024*Memory.MIB),capacity/float(1024*Memory.MIB)]
+	if not problem.is_empty():session.state = "blocked";session.error = problem;mutex.unlock();return
+	# Replace conservative lazy-header charges with the validated exact plan.
+	var ready := 0
+	for job in plan:
+		if prepared.has(job.key) and prepared[job.key].token == token:
+			used += job.charge-int(prepared[job.key].bytes);prepared[job.key].bytes = job.charge;ready += 1
+	limit = required;_set_jobs(plan);session.state = "preparing";session.ready = ready;session.next = 0
+	mutex.unlock()
+func _session_progress() -> void:
+	mutex.lock()
+	if session.get("state") == "preparing" and session.ready == session.total:
+		session.state = "ready";session.elapsed_ms = (Time.get_ticks_usec()-session.started_us)/1000.0
+	mutex.unlock()
 func _prune(incoming: int, key: String) -> bool:
 	var retired: Array = []
 	mutex.lock()
-	for old in order.duplicate():
-		if prepared[old].token != token:
-			retired.append(prepared[old]);used -= int(prepared[old].bytes);prepared.erase(old);order.erase(old)
-	while used+incoming > limit and not order.is_empty():
-		var old: String = order.pop_front()
+	if cache_token != token:
+		var kept: Array[String] = []
+		for old in order:
+			if prepared[old].token != token:
+				retired.append(prepared[old]);used -= int(prepared[old].bytes);prepared.erase(old)
+			else:kept.append(old)
+		order = kept;cache_token = token
+	var removed := 0
+	while used+incoming > limit and removed < order.size():
+		var old: String = order[removed];removed += 1
 		retired.append(prepared[old]);used -= int(prepared[old].bytes);prepared.erase(old);evictions += 1
+	if removed > 0:order = order.slice(removed)
 	var fits := used+incoming <= limit and not prepared.has(key)
 	mutex.unlock();retired.clear();return fits
 func _next() -> Dictionary:
 	mutex.lock();var next := {}
-	if not closing:
-		for job in jobs:
+	if not closing and session.get("state") not in ["ready","blocked"]:
+		var first: int = session.get("next",0) if session.get("state") == "preparing" else 0
+		for index in range(first,jobs.size()):
+			var job: Dictionary = jobs[index]
+			if session.get("state") == "preparing":session.next = index+1
 			if not failures.has(job.key) and (not prepared.has(job.key) or prepared[job.key].token != token):
 				next = job;working_key = job.key;working_token = token;break
 	mutex.unlock();return next
@@ -74,11 +163,13 @@ func _run() -> void:
 		wake.wait()
 		mutex.lock();var done := closing;mutex.unlock()
 		if done:break
+		_plan_session()
 		_prune(0,"")
 		while true:
 			var job := _next()
-			if job.is_empty():break
-			var began := Time.get_ticks_usec();var result := {};var memory := Memory.memory_headroom()
+			if job.is_empty():
+				_session_progress();break
+			var began := Time.get_ticks_usec();var result := {};var stages := {};var memory := Memory.memory_headroom()
 			if memory.available_physical < memory.reserve+int(job.get("other_reservation",0))+job.charge*3:
 				result = {"error":"Field preparation needs %.1f MiB available RAM including other reservations; %.1f MiB is available. Free RAM or reduce other caches." % [(memory.reserve+int(job.get("other_reservation",0))+job.charge*3)/float(Memory.MIB),memory.available_physical/float(Memory.MIB)]}
 			elif Stamp.read(job.path) != job.stamp:result = {"error":"Field source changed; waiting for refresh."}
@@ -92,8 +183,10 @@ func _run() -> void:
 					if decoded.has("error"):result = {"error":decoded.error if entry.has("error") else Reader.record_error(job.entry,decoded.error)}
 					elif decoded.is_empty():result = decoded
 					else:
+						stages = decoded.get("timings",{}).duplicate()
 						var sample := {"time":job.entry.time,"count":0,"channels":decoded.channels,"components":decoded.components,"shapes":decoded.shapes,"associations":decoded.associations,"geometry":entry.descriptor.geometry,"has_ids":false,"identity_map":null,"source_index":job.entry.index,"sequence":job.entry.sequence,"decoded_bytes":decoded.reserve}
 						result = Prepare.prepare(job.object,sample,job.channel,job.budget,self)
+						stages.merge(result.get("timings",{}))
 			var gate := test_barrier
 			if gate != null:
 				mutex.lock();at_barrier = true;mutex.unlock();gate.wait();mutex.lock();at_barrier = false;mutex.unlock()
@@ -101,14 +194,22 @@ func _run() -> void:
 			var obsolete := stopped()
 			mutex.lock()
 			if obsolete or token != working_token or closing:cancelled += 1
-			elif result.has("error"):failures[job.key] = result.error
+			elif result.has("error"):
+				failures[job.key] = result.error
+				if session.get("state") == "preparing":session.state = "blocked";session.error = result.error
 			elif not result.is_empty() and used+job.charge > limit:
 				# A controller may reduce the budget while this job is decoding.
 				cancelled += 1
 			elif not result.is_empty():
 				result.token = working_token;result.bytes = job.charge;prepared[job.key] = result;order.append(job.key);used += job.charge;completed += 1
+				if session.get("state") == "preparing":session.ready += 1
+			for stage in stages:
+				if not pipeline_stages.has(stage):pipeline_stages[stage] = {"count":0,"total_ms":0.0,"max_ms":0.0}
+				pipeline_stages[stage].count += 1;pipeline_stages[stage].total_ms += stages[stage]
+				pipeline_stages[stage].max_ms = maxf(pipeline_stages[stage].max_ms,stages[stage])
 			worker_ms += (Time.get_ticks_usec()-began)/1000.0;working_key = ""
-			var failed := not error.is_empty()
+			var failed: bool = not error.is_empty() or session.get("state") == "blocked"
 			mutex.unlock();result = {}
+			_session_progress()
 			if failed:break
-	prepared.clear();order.clear()
+	prepared.clear();order.clear();mutex.lock();used = 0;mutex.unlock()

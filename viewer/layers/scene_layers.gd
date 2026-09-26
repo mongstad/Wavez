@@ -350,8 +350,10 @@ func _tick_profiled(delta: float) -> void:
 		if viewer.scene_loop_playback and (next_time>reader.frames[-1].time or next_time<reader.frames[0].time):next_time = wrapf(next_time,reader.frames[0].time,reader.frames[-1].time)
 		viewer.requested_time = clampf(next_time,reader.frames[0].time,reader.frames[-1].time)
 		viewer.display_accum += delta
-		if viewer.display_accum >= 1.0/30.0:
-			viewer.display_accum = 0
+		if viewer.display_accum >= 1.0/viewer.DISPLAY_HZ:
+			# Keep the fractional frame remainder; resetting it quantizes 30 Hz
+			# playback down to 20 Hz on slightly-short 60 Hz callbacks.
+			viewer.display_accum -= 1.0/viewer.DISPLAY_HZ
 			var result := sample(viewer.requested_time,use_async())
 			if result.has("pending"):
 				viewer.requested_time = viewer.committed_sample.get("requested_time",viewer.requested_time)
@@ -375,7 +377,10 @@ func ensure_particle_data() -> bool:
 	return not sample(viewer.requested_time,false,true).is_empty()
 func seek(time: float) -> bool:
 	if not refresh() or reader.frames.is_empty() or not is_finite(time) or time < reader.frames[0].time or time > reader.frames[-1].time:return false
-	if field_playback != null:field_playback.pending_time = null;field_playback.buffering = false
+	if field_playback != null:
+		if field_playback.session_waiting:
+			field_playback.cancel_session();field_playback.pending_time = time;field_playback.begin_session(time)
+		else:field_playback.pending_time = null;field_playback.buffering = false
 	if mesh_playback != null:mesh_playback.pending_time = null;mesh_playback.buffering = false
 	if use_async() and playback.enabled and not particle_id.is_empty() and not reader.bracket(particle_id,time).is_empty():return playback.seek(time)
 	return not sample(time,use_async()).is_empty()

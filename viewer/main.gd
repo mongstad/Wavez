@@ -986,6 +986,9 @@ func _build_inspector_controls() -> void:
 func _toggle_playback() -> void:
 	if not playing and scene_layers != null and scene_layers.is_buffering():return
 	playing = not playing;inspection_paused = false
+	if scene_layers != null and scene_layers.field_playback != null:
+		if playing:scene_layers.field_playback.begin_session()
+		else:scene_layers.field_playback.cancel_session()
 
 func _step_frame(direction: int) -> void:
 	playing = false
@@ -1038,6 +1041,9 @@ func _open_scene(path: String) -> void:
 	# submitted by sample(). Background preparation must not gate interaction.
 	scene_layers.playback._update_ui()
 	_update_hud()
+	# Opening while transport is already playing must use the same readiness
+	# gate as pressing Play; paused opening still returns after the first scene.
+	if playing:scene_layers.field_playback.begin_session()
 
 func _frame_from_data(data: Dictionary, index: int) -> FrameData:
 	var decode_started := Profile.begin()

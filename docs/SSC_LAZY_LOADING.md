@@ -1,5 +1,8 @@
 # Lazy SSC startup — issue #100 / PR #101
 
+The opening behavior below is retained. The Play preparation policy and sustained
+playback measurements are superseded by [continuous playback](SSC_CONTINUOUS_PLAYBACK.md).
+
 Pending owner review. This revision implements the owner's 2026-09-25 startup
 policy. It supersedes the startup/preload policy in the historical
 [initial profiling report](SSC_LOAD_PERFORMANCE.md) and
