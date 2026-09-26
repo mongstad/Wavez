@@ -164,6 +164,7 @@ func refresh() -> void:
 		if viewer.frame_count == 0:
 			readiness = "Unavailable"; readiness_detail = "Waiting for a complete recorded sample."
 		if layers != null:
+			if layers.field_playback.active() and is_instance_valid(layers.field_playback.label):readiness_detail = layers.field_playback.label.text
 			if layers.is_buffering(): readiness = "Preparing…"; readiness_detail = "Preparing the requested sample; the displayed clock remains committed."
 			if layers.field_playback.session_waiting and is_instance_valid(layers.field_playback.label):readiness_detail = layers.field_playback.label.text
 			var errors := []
@@ -176,9 +177,13 @@ func refresh() -> void:
 					readiness = "Unavailable"; readiness_detail += "\n"+str(sample.id)+": "+str(sample.get("reason","No sample available at the displayed time."))
 	update_jobs()
 	var summary: String = readiness + ("   •   Failed — details" if not failures.is_empty() else "")
-	if layers != null and layers.field_playback.session_waiting:
+	if layers != null and layers.field_playback.session_waiting and layers.field_playback.scope_choice.selected != 0:
 		var progress: Dictionary = layers.field_playback.worker.status().session
 		summary += "  %d/%d fields" % [progress.get("planned",0) if progress.get("state") == "planning" else progress.get("ready",0),progress.get("total",0)]
+	elif layers != null and layers.field_playback.active():
+		var progress: Dictionary = layers.field_playback.worker.status().session
+		if layers.field_playback.capacity_wait or progress.get("state") == "pressure":summary += " • Waiting for memory"
+		elif progress.get("automatic",false) and progress.get("state") == "preparing":summary += " • Preparing ahead %d/%d" % [progress.get("ready",0),progress.get("total",0)]
 	if badge.label.text != summary: badge.configure("error" if not failures.is_empty() else ("success" if readiness == "Ready" else "info"), summary)
 	tooltip_text = readiness_detail
 

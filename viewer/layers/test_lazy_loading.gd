@@ -31,7 +31,8 @@ func run() -> void:
 			check(not view.scene_layers.sample(0,true).has("pending"),"current sample survives bad lookahead")
 			check(view.generic_reader.records[19].descriptor.is_empty(),"far descriptor remains lazy")
 			if kind == "particles":check(controller.worker.status().desired.size()<=8 and not controller.full_preload,"bounded particle window")
-			else:check(controller.worker.status().frames<=5,"bounded layer window")
+			elif kind == "volume":check(controller.worker.status().bytes<=controller.worker.status().limit,"RAM-bounded automatic field cache")
+			else:check(controller.worker.status().frames<=5,"bounded mesh window")
 			view.playing = true;view.scene_layers.seek(3)
 			began = Time.get_ticks_msec()
 			while view.scene_layers.error.is_empty() and Time.get_ticks_msec()-began < 10000:

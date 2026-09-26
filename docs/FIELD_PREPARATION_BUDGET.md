@@ -1,5 +1,8 @@
 # Field preparation memory budget
 
+Historical implementation/measurement report. The default preparation and memory policy
+are superseded by [adaptive playback caching](SSC_ADAPTIVE_CACHE.md) in PR #103.
+
 Issue #98 (PERF-FIELD-004), verified top Ready on 2026-09-24. Implementation
 is pending owner review, based on accepted main `9774623` (PR #92).
 

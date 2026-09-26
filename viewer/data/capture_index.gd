@@ -1,6 +1,5 @@
 extends RefCounted
 # Native scene storage primitives. No capture format scanner or dispatch lives here.
-const MAX_INDEX := 32*1024*1024
 const MAX_CHUNK := 4*1024*1024
 const MAX_DESC := 4*1024*1024
 const MAX_IDS := 1000000

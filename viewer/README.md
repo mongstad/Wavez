@@ -1,6 +1,6 @@
 # SimScope viewer
 
-Godot scientific viewer for SIMSCP3 particles, meshes and scalar fields. Open
+Godot scientific viewer for SIMSCP4 particles, meshes and scalar fields. Open
 native `.ssc` scenes; older capture generations are unsupported.
 
 Open `project.godot` in Godot 4.7 (validated with 4.7.2) and run, or pass:
@@ -43,7 +43,7 @@ Core rendering runs in Godot. G4 numerical analysis requires Python and NumPy;
 optional isosurface extraction additionally requires scikit-image. Forward+
 supports cinematic bloom; Compatibility also runs.
 
-Interactive SIMSCP3 playback selects safe particle full preload automatically and
+Interactive SIMSCP4 playback selects safe particle full preload automatically and
 prepares temporal fields and meshes on bounded CPU workers, with GPU/main-thread
 staging where required. See the
 [performance maintenance report](../docs/PERFORMANCE_MAINTENANCE_REPORT.md) and

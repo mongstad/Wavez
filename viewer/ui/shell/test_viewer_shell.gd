@@ -336,7 +336,7 @@ func menu_checks(viewer) -> void:
 		check(not controls.status.visible,"Color explanation does not occupy panel: " + id)
 		check(controls.indicator.text in ["⚠ Color clipping","⚠ Color unavailable"],"Color exception indicator is concise")
 	shell.status_ui.detail_button.pressed.emit()
-	check(shell.details.visible and shell.detail_text.text.contains(viewer.hud.text) and shell.detail_text.text.contains("SIMSCP3"),"Existing status Details preserves capture and interpolation information")
+	check(shell.details.visible and shell.detail_text.text.contains(viewer.hud.text) and shell.detail_text.text.contains("SIMSCP4"),"Existing status Details preserves capture and interpolation information")
 	for id in viewer.scene_layers.labels:
 		check(shell.detail_text.text.contains(viewer.scene_layers.labels[id].tooltip_text),"Details preserves exact layer metadata: " + id)
 	for id in viewer.scene_layers.color_controls:

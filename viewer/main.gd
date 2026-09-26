@@ -1,7 +1,7 @@
 extends Node3D
 
 # SimScope
-# Godot 4 scientific viewer for SIMSCP3 particle, mesh and volume scenes.
+# Godot 4 scientific viewer for SIMSCP4 particle, mesh and volume scenes.
 #
 # The renderer is observational only. It never feeds information back into the
 # Python/CuPy simulation.
@@ -66,7 +66,7 @@ var held_positions_ready := false
 var generic_reader # Native SceneReader; name retained for current scene tools.
 var scene_layers
 var selection_controller
-# SIMSCP3-only controls; retained synchronous mode supports export and comparisons.
+# SIMSCP4-only controls; retained synchronous mode supports export and comparisons.
 var scene_prebuffer_enabled := true
 var scene_hidden_fast_path := true
 var scene_loop_playback := false
@@ -168,7 +168,7 @@ func _ready() -> void:
 	if FileAccess.file_exists(capture_path):
 		_open_capture(capture_path)
 	else:
-		status_label.text = "No capture loaded. Open a SIMSCP3 scene (.ssc)."
+		status_label.text = "No capture loaded. Open a SIMSCP4 scene (.ssc)."
 	for arg in args:
 		if arg.begins_with("--inspection="): _load_inspection(arg.trim_prefix("--inspection="))
 
@@ -977,7 +977,7 @@ func _build_inspector_controls() -> void:
 	open_dialog = FileDialog.new()
 	open_dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE
 	open_dialog.access = FileDialog.ACCESS_FILESYSTEM
-	open_dialog.filters = PackedStringArray(["*.ssc ; SimScope scene (SIMSCP3)"])
+	open_dialog.filters = PackedStringArray(["*.ssc ; SimScope scene (SIMSCP4)"])
 	open_dialog.file_selected.connect(_open_from_picker)
 	canvas.add_child(open_dialog)
 	_update_colormap()
@@ -1036,13 +1036,14 @@ func _open_scene(path: String) -> void:
 		_shell_open_error = scene_layers.error;status_label.text = _shell_open_error;return
 	scene_layers.frame_scene()
 	_build_guides();_apply_geometry();_update_camera();_sync_visuals();_sync_inspection_controls()
-	status_label.text = "Loaded %s • SIMSCP3 • %d layer samples" % [path.get_file(),reader.records.size()]
+	status_label.text = "Loaded %s • SIMSCP4 • %d layer samples" % [path.get_file(),reader.records.size()]
 	# The synchronous initial sample is already usable; its rolling request was
 	# submitted by sample(). Background preparation must not gate interaction.
 	scene_layers.playback._update_ui()
 	_update_hud()
-	# Opening while transport is already playing must use the same readiness
-	# gate as pressing Play; paused opening still returns after the first scene.
+	# Large captures build useful coverage before the owner's first Play. The
+	# automatic worker continues while paused; no interval entry is required.
+	if playing and scene_layers.field_playback.partial_initial_window():_toggle_playback()
 	if playing:scene_layers.field_playback.begin_session()
 
 func _frame_from_data(data: Dictionary, index: int) -> FrameData:

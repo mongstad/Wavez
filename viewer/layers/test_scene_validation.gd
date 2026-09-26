@@ -36,7 +36,7 @@ func run() -> void:
 	vp = SubViewport.new();vp.size = Vector2i(512,512);vp.own_world_3d = true;vp.render_target_update_mode = SubViewport.UPDATE_DISABLED;root.add_child(vp)
 	view = load("res://main.gd").new();view.offline_instance = true;view.capture_path = base.path_join("small.ssc");vp.add_child(view)
 	setup_capture("small.ssc")
-	check(view.frame_a != null and view.frame_count == 9,"SIMSCP3 opens with independent union clock")
+	check(view.frame_a != null and view.frame_count == 9,"SIMSCP4 opens with independent union clock")
 	view.scene_layers.sample(.55)
 	check(view.committed_sample.layers[0].status == "interpolated by ID" and view.committed_sample.layers[1].status == "interpolated" and view.committed_sample.layers[2].source_time == 0,"I14 independent particle / mesh / held volume times")
 	check(view.frame_a.ids[0]>=9007199254740993,"Exact >2^53 particle IDs survive scene reader")

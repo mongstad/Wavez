@@ -72,7 +72,7 @@ class SceneTests(unittest.TestCase):
     def setUpClass(cls):fixtures()
     def setUp(self):self.tmp=tempfile.TemporaryDirectory();self.base=Path(self.tmp.name)
     def tearDown(self):self.tmp.cleanup()
-    def test_none_zstd_bitwise_bricks_and_nan(self):
+    def test_none_zstd_bitwise_chunks_and_nan(self):
         a=np.arange(35*34*33,dtype='f8').reshape(35,34,33)/7;a[2,3,4]=np.nan;a[5,6,7]=-0.
         for codec in ['none','zstd']:
             p=self.base/(codec+'.ssc')
@@ -181,7 +181,7 @@ class SceneTests(unittest.TestCase):
             self.assertLess(float(error.max()),.04)
             if name=='sphere':self.assertGreater(float(np.mean(np.sum(norm*center,axis=1))),0)
             edges=np.sort(np.concatenate([f[:,[0,1]],f[:,[1,2]],f[:,[2,0]]]),axis=1);_,counts=np.unique(edges,axis=0,return_counts=True)
-            if name!='missing':self.assertTrue(np.all(counts==2),'No brick-boundary cracks')
+            if name!='missing':self.assertTrue(np.all(counts==2),'No chunk-boundary cracks')
             else:self.assertGreater(np.sum(counts==1),0,'Explicit invalid-data opening')
             self.assertTrue(extract(job)['cache_hit']);evidence.append(dict(name=name,max_error=float(error.max()),boundary_edges=int(np.sum(counts==1)),**{k:result[k] for k in ['vertices','triangles','seconds','peak_rss_mib']}))
             Path(result['path']).write_bytes(b'corrupt');self.assertFalse(extract(job)['cache_hit'])

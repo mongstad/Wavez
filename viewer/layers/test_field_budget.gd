@@ -28,10 +28,10 @@ func run() -> void:
 		var particles = view.scene_layers.playback
 		var limits := [particles.decoded_limit,particles.prepared_limit]
 		particles.prepared_limit = 1 << 50 # Simulated reservation, no allocation.
-		playback.request(1.0,view.scene_layers.field_budget())
-		check(playback.cpu_limit == 0 and "needs" in playback.error and "safe budget" in playback.error,"Constrained reservation refusal explains required/budget")
+		playback.automatic_checked = -1000;playback.request(1.0,view.scene_layers.field_budget())
+		check(playback.cpu_limit == 0 and playback.capacity_wait and playback.error.is_empty(),"Constrained capacity waits without invalidating the capture")
 		particles.prepared_limit = limits[1]
-		playback.request(1.0,view.scene_layers.field_budget())
+		playback.automatic_checked = -1000;playback.request(1.0,view.scene_layers.field_budget())
 		check(playback.error.is_empty(),"Admission recovers when reservation is released")
 		var oracle = JSON.parse_string(FileAccess.get_file_as_string(directory.path_join("oracle.json")))
 		for t in [1.0,2.0,0.0]:
@@ -46,7 +46,7 @@ func run() -> void:
 			playback.worker.mutex.lock()
 			var queued: int = playback.worker.jobs.size()
 			playback.worker.mutex.unlock()
-			check(queued <= 5,"At most current plus four lookahead jobs")
+			check(queued <= 3,"Automatic queue remains bounded by this recording")
 			var before_uploads: int = playback.uploads
 			playback.request(t,view.scene_layers.field_budget())
 			playback.request(t,view.scene_layers.field_budget())
@@ -83,11 +83,11 @@ func run() -> void:
 		check(combined.size() == 2,"Two visible field targets requested")
 		var total := 0
 		for job in combined:total += job.charge
-		check(fields.budget_report.required_bytes == 2*total,"Visible fields charged together")
+		check(fields.budget_report.required_bytes == total,"Visible fields charged together")
 		check(await sample(multi,1.0,true),"Two visible slices prepare together")
 		multi.scene_layers.reader.cache.limit = 1 << 50
-		fields.request(0.0,multi.scene_layers.field_budget())
-		check(fields.cpu_limit == 0 and not fields.error.is_empty(),"Aggregate fields refuse under constrained headroom")
+		fields.automatic_checked = -1000;fields.request(0.0,multi.scene_layers.field_budget())
+		check(fields.cpu_limit == 0 and fields.capacity_wait and fields.error.is_empty(),"Aggregate fields wait under constrained headroom")
 		multi.free();await process_frame
 	report.checks = checks;report.failures = failures
 	Job.write_json(directory.path_join("baseline.json" if "--baseline" in OS.get_cmdline_user_args() else "result.json"),report)

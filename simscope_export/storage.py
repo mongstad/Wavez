@@ -1,4 +1,4 @@
-"""SIMSCP3 framing, lossless types, checksums and exact identity primitives.
+"""SIMSCP4 framing, lossless types, checksums and exact identity primitives.
 
 These helpers have no reader/writer dispatch or dependency on retired formats.
 The framing structs and validation semantics are unchanged.

@@ -60,3 +60,10 @@ Native foundation: 1,174 checks, 300 independent float64 cases, 71 contrast pair
 16 size/scale combinations, six production isolation checks and six stable HUD
 cases. All 195 pre-existing protected source files are unchanged. The UI Laboratory
 is opt-in; no production migration or UX3 work has begun.
+
+## SSC format investigation — #102, pending owner review
+
+[Design and measurements](SSC_ACCELERATION.md), [capture parameter inventory](SSC_CAPTURE_PARAMETERS.md),
+and [compact evidence](evidence/issue-102/summary.json) cover the clean SIMSCP4
+break, exact real-capture equivalence, preparation/switching and finite intervals.
+Older SSC reports above retain their original format, results and review state.

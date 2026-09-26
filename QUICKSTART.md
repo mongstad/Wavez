@@ -35,7 +35,7 @@ Choose fresh validation output directories. Use `--renderer gl_compatibility` or
 `--renderer forward_plus` for actual maintenance UI images; `--resolution 3840x2160`
 uses an exact GPU SubViewport with the existing export canvas scaling. Headless
 checks establish behavior, not rendered appearance. Capture and regression
-fixtures use SIMSCP3. Current storage, viewer, analysis and deterministic-export
+fixtures use SIMSCP4. Current storage, viewer, analysis and deterministic-export
 validation are recorded in the maintained reports under `docs/`.
 
 Generated `results/`, local environments, caches and captures are ignored by Git.

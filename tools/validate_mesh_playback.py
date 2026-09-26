@@ -1,4 +1,4 @@
-"""Synthetic mesh worker/lifecycle/render regression; optional retained SIMSCP3 input, no solver."""
+"""Synthetic mesh worker/lifecycle/render regression; optional retained SIMSCP4 input, no solver."""
 import argparse, hashlib, json, os, subprocess, sys
 from pathlib import Path
 import numpy as np

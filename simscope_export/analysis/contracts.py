@@ -10,7 +10,6 @@ from pathlib import Path
 MIB = 1024 * 1024
 MAX_CONTROL = MIB
 MAX_RECORDS = 1_000_000
-MAX_INDEX = 33 * MIB  # Existing 32 MiB record metadata plus file header.
 
 
 class AnalysisError(ValueError):

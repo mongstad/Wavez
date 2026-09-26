@@ -24,6 +24,18 @@ var last_upload_frame := -1
 var session_waiting := false
 var session_requested := false
 var session_restart := false
+var scope_choice: OptionButton
+var range_start: SpinBox
+var range_end: SpinBox
+var forward_duration: SpinBox
+var prepared_range: Array = []
+var cache_cap_bytes := 0 # Optional per-controller ceiling; zero uses system capacity.
+var automatic_jobs: Array = []
+var automatic_anchor := 0.0
+var automatic_end := 0.0
+var automatic_generation := ""
+var automatic_checked := -1000
+var capacity_wait := false
 func setup(owner) -> void:
 	layers = owner;viewer = layers.viewer
 	for obj in layers.reader.objects.values():
@@ -32,29 +44,100 @@ func setup(owner) -> void:
 	if enabled and worker.start() != OK:enabled = false
 	if enabled:
 		label = Label.new();label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART;layers.performance_panel.add_child(label)
+		var title := Label.new();title.text = "Playback preparation";layers.performance_panel.add_child(title)
+		scope_choice = OptionButton.new()
+		for choice in ["Automatic","Selected interval (advanced)","From current position (advanced)"]:scope_choice.add_item(choice)
+		layers.performance_panel.add_child(scope_choice)
+		var first: float = layers.reader.frames[0].time if not layers.reader.frames.is_empty() else 0.0
+		var last: float = layers.reader.frames[-1].time if not layers.reader.frames.is_empty() else 0.0
+		range_start = _range_control("Start time",first,last,first)
+		range_end = _range_control("End time",first,last,last)
+		forward_duration = _range_control("Window duration",0.0,last-first,minf(10,last-first))
+		scope_choice.item_selected.connect(func(_index):_scope_changed())
+		_scope_controls()
+func _range_control(title: String, low: float, high: float, value: float) -> SpinBox:
+	var row := HBoxContainer.new();layers.performance_panel.add_child(row)
+	var caption := Label.new();caption.text = title;row.add_child(caption)
+	var control := SpinBox.new();control.min_value = low;control.max_value = high;control.step = 0.0;control.value = value;control.size_flags_horizontal = Control.SIZE_EXPAND_FILL;row.add_child(control)
+	control.value_changed.connect(func(_value):_scope_changed())
+	return control
+func _scope_controls() -> void:
+	range_start.get_parent().visible = scope_choice.selected == 1
+	range_end.get_parent().visible = scope_choice.selected == 1
+	forward_duration.get_parent().visible = scope_choice.selected == 2
+	scope_choice.tooltip_text = "Automatic prepares ahead using available RAM and reuses cached samples when seeking. Advanced intervals restrict playback to chosen times. Source values and rendering quality are unchanged."
+func _scope_changed() -> void:
+	if viewer.playing:viewer._toggle_playback()
+	else:cancel_session()
+	worker.cancel(true);token = "";automatic_generation = "";capacity_wait = false
+	prepared_range.clear();_scope_controls()
+func playback_range() -> Array:
+	if layers.reader.frames.is_empty():return [0.0,0.0]
+	return prepared_range if limited_playback() else [layers.reader.frames[0].time,layers.reader.frames[-1].time]
+func limited_playback() -> bool:
+	return active() and is_instance_valid(scope_choice) and scope_choice.selected != 0 and not prepared_range.is_empty()
+func seek_outside_interval(time: float) -> void:
+	if active() and scope_choice.selected == 0:
+		# A scrub takes priority even when its target was already queued far ahead.
+		automatic_generation = "";return
+	if not active() or scope_choice.selected == 0 or prepared_range.is_empty() or (time >= prepared_range[0] and time <= prepared_range[1]):return
+	if viewer.playing:viewer._toggle_playback()
+	cancel_session();worker.cancel(true);token = "";request_signature = "";prepared_range.clear()
+func _selected_range(time: float) -> Array:
+	var first: float = layers.reader.frames[0].time;var last: float = layers.reader.frames[-1].time
+	if scope_choice.selected == 1:return [clampf(range_start.value,first,last),clampf(range_end.value,first,last)]
+	if scope_choice.selected == 2:
+		return [maxf(first,time-forward_duration.value),time] if viewer.physical_rate < 0 else [time,minf(last,time+forward_duration.value)]
+	return [first,last]
 func close() -> void:worker.close();staged.clear()
 func invalidate() -> void:
-	worker.cancel();token = "";cache_scope = "";request_signature = "";staged.clear();buffering = false;pending_time = null;error = "";session_waiting = false;session_requested = false;session_restart = false
+	worker.cancel();token = "";cache_scope = "";request_signature = "";staged.clear();buffering = false;pending_time = null;error = "";session_waiting = false;session_requested = false;session_restart = false;prepared_range.clear()
+	automatic_generation = "";automatic_jobs.clear();capacity_wait = false
 func active() -> bool:return enabled and not viewer.offline_instance and not viewer.inspection_busy
+func partial_initial_window() -> bool:
+	if not active() or scope_choice.selected != 0:return false
+	var count := 0
+	for id in layers.states:
+		if layers.views[id] is Grid and layers.states[id].visible:count += layers.reader.samples[id].size()
+	return automatic_jobs.size() < count
 func begin_session(target_time = null) -> void:
-	if not active():return
+	if not active() or layers.reader.frames.is_empty():return
+	if scope_choice.selected == 0:
+		session_requested = false
+		request(viewer.requested_time if target_time == null else float(target_time),layers.field_budget())
+		# Initial Play waits for useful admitted coverage, never the whole file
+		# when it exceeds RAM. Subsequent moving windows replenish in background.
+		session_waiting = capacity_wait or worker.status().session.get("state") != "ready"
+		buffering = session_waiting;_update_ui()
+		return
 	session_requested = true;session_restart = false;error = ""
 	var time: float = viewer.requested_time if target_time == null else float(target_time)
+	# Independent object clocks include the held sample at the interval start.
+	if not session_waiting:prepared_range = _selected_range(time)
+	if prepared_range[0] >= prepared_range[1] and layers.reader.frames.size() > 1:
+		layers.fail_playback("Choose an end time after the start time for field preparation.");session_requested = false;return
+	if time < prepared_range[0] or time > prepared_range[1]:
+		time = prepared_range[1] if viewer.physical_rate < 0 else prepared_range[0]
+		session_waiting = false;layers.seek(time)
 	request(time,layers.field_budget())
 	var jobs: Array = [];var reserved := 0
 	for amount in other_reservations().values():reserved += int(amount)
 	for id in layers.states:
 		if not layers.views[id] is Grid or not layers.states[id].visible:continue
-		if not layers.ensure_channel(id,time):return
 		var point: Dictionary = layers.reader.bracket(id,time)
-		var start: int = point.get("a",0);var count: int = layers.reader.samples[id].size()
+		var lower: Dictionary = layers.reader.bracket(id,prepared_range[0]);var upper: Dictionary = layers.reader.bracket(id,prepared_range[1])
+		if upper.is_empty():continue
+		var lo: int = lower.get("a",0);var hi: int = upper.a
+		if not layers.ensure_channel(id,maxf(time,layers.reader.samples[id][lo].time)):return
+		var start: int = clampi(point.get("a",lo),lo,hi);var count: int = hi-lo+1
 		for offset in range(count):
-			var index := posmod(start+offset*(-1 if viewer.physical_rate<0 else 1),count)
+			var index := lo+posmod(start-lo+offset*(-1 if viewer.physical_rate<0 else 1),count)
 			var job := _job(id,index,layers.field_budget());job.other_reservation = reserved;jobs.append(job)
 	if jobs.is_empty():return
 	worker.prepare_session(token,jobs);session_restart = false;session_waiting = true;buffering = true;_update_ui()
 func cancel_session() -> void:
-	worker.cancel_session();session_waiting = false;session_requested = false;session_restart = false;buffering = false;request_signature = ""
+	if not is_instance_valid(scope_choice) or scope_choice.selected != 0:worker.cancel_session()
+	session_waiting = false;session_requested = false;session_restart = false;buffering = false;request_signature = ""
 	_update_ui()
 static func preparation_budget(target_bytes: int, window_bytes: int, memory: Dictionary, reserved: int) -> Dictionary:
 	# One cache share plus two shares for current/staged sample references and
@@ -67,14 +150,15 @@ static func preparation_budget(target_bytes: int, window_bytes: int, memory: Dic
 		"target_bytes":target_bytes,"window_bytes":window_bytes,"reserved_other_bytes":reserved,
 		"remaining_safe_bytes":remaining,"memory":memory.duplicate()}
 func other_reservations() -> Dictionary:
-	var reservations := {"scene_cache":layers.reader.cache.limit,"particle_decoded":0,
+	var reservations := {"scene_cache":maxi(0,layers.reader.cache.limit-layers.reader.cache.used),"particle_decoded":0,
 		"particle_prepared":0,"particle_working":0,"mesh_cache_and_working":0}
 	if layers.playback != null and layers.playback.enabled:
-		reservations.particle_decoded = layers.playback.decoded_limit
-		reservations.particle_prepared = layers.playback.prepared_limit
+		var status: Dictionary = layers.playback.worker.status()
+		reservations.particle_decoded = maxi(0,layers.playback.decoded_limit-int(status.decoded_bytes))
+		reservations.particle_prepared = maxi(0,layers.playback.prepared_limit-int(status.prepared_bytes))
 		reservations.particle_working = int(layers.playback.estimates.get("largest_pair",0))*2
 	# Mesh preparation retains its existing cache + working-space reservation.
-	if layers.mesh_playback != null and layers.mesh_playback.enabled:reservations.mesh_cache_and_working = 256*Memory.MIB
+	if layers.mesh_playback != null and layers.mesh_playback.enabled:reservations.mesh_cache_and_working = maxi(0,256*Memory.MIB-int(layers.mesh_playback.worker.status().bytes))
 	return reservations
 func _job(id: String, index: int, budget: int) -> Dictionary:
 	var entry: Dictionary = layers.reader.samples[id][index]
@@ -83,20 +167,22 @@ func _job(id: String, index: int, budget: int) -> Dictionary:
 	var size: int = entry.decoded # Conservative until this descriptor is requested.
 	for array in entry.descriptor.get("arrays",[]):
 		if array.name == state.channel:size = int(array.shape[0])*int(array.shape[1])*int(array.shape[2])*4
-	return {"key":Grid.sample_key(obj,entry.sequence,state.channel,budget),"id":id,"entry":entry.duplicate(true),"object":obj,"channel":state.channel,"budget":budget,"decoded_charge":int(entry.decoded),"preview_charge":mini(size,budget),"charge":int(entry.decoded)+mini(size,budget)+65536,"path":layers.reader.source_path,"stamp":layers.reader.source_stamp}
+	return {"key":Grid.sample_key(obj,entry.sequence,state.channel,budget),"source_key":Grid.sample_key(obj,entry.sequence,"",budget),"scope":cache_scope,"id":id,"entry":entry.duplicate(true),"object":obj,"channel":state.channel,"budget":budget,"decoded_charge":int(entry.decoded),"preview_charge":mini(size,budget),"charge":int(entry.decoded)+mini(size,budget)+65536,"path":layers.reader.source_path,"stamp":layers.reader.source_stamp}
 func request(time: float, budget: int) -> Array:
 	var scope := str(layers.reader.generation)+JSON.stringify(layers.reader.source_stamp)+str(budget)
 	var channels: Array = []
 	for id in layers.states:
 		if layers.views[id] is Grid:
 			scope += id+str(layers.states[id].visible);channels.append([id,layers.states[id].channel])
-	var signature := scope+JSON.stringify(channels)
+	var signature := scope+JSON.stringify(channels)+str(scope_choice.selected)+JSON.stringify(prepared_range if scope_choice.selected != 0 else [])
 	if token != signature:
 		# Retain a bounded full-session allocation only for channel changes in the
 		# same source/visibility/texture-budget scope. Acquisition still requires
 		# the new generation; CPU replacements evict old entries incrementally.
 		worker.cancel(scope == cache_scope);cache_scope = scope
 		token = signature;request_signature = "";staged.clear();session_waiting = false;session_restart = session_requested and viewer.playing
+	if scope_choice.selected == 0:return _automatic_request(time,budget)
+	capacity_wait = false
 	var targets: Array = [];var future: Array = []
 	var direction := -1 if viewer.physical_rate < 0 else 1
 	for id in layers.states:
@@ -104,10 +190,14 @@ func request(time: float, budget: int) -> Array:
 		var point: Dictionary = layers.reader.bracket(id,time)
 		if point.is_empty():continue
 		targets.append(_job(id,point.a,budget))
+		var first_index := 0;var last_index: int = layers.reader.samples[id].size()-1
+		if scope_choice.selected != 0 and not prepared_range.is_empty():
+			first_index = layers.reader.bracket(id,prepared_range[0]).get("a",0)
+			last_index = layers.reader.bracket(id,prepared_range[1]).get("a",last_index)
 		for offset in range(1,5):
 			var index: int = point.a+offset*direction
-			if viewer.scene_loop_playback:index = posmod(index,layers.reader.samples[id].size())
-			if index >= 0 and index < layers.reader.samples[id].size() and index != point.a:future.append(_job(id,index,budget))
+			if viewer.scene_loop_playback:index = first_index+posmod(index-first_index,last_index-first_index+1)
+			if index >= first_index and index <= last_index and index != point.a:future.append(_job(id,index,budget))
 	var jobs: Array = [];var charge := 0
 	for job in targets:
 		charge += job.charge;jobs.append(job)
@@ -133,7 +223,7 @@ func request(time: float, budget: int) -> Array:
 		cpu_limit = maxi(cpu_limit,status.retained_limit);budget_report.cpu_limit = cpu_limit
 	if session.get("state") in ["preparing","ready"]:
 		cpu_limit = status.limit;budget_report.cpu_limit = cpu_limit
-		budget_report.strategy = "full_timeline";budget_report.full_required_bytes = session.required_bytes
+		budget_report.strategy = "full_timeline" if scope_choice.selected == 0 else "interval";budget_report.prepared_range = prepared_range.duplicate();budget_report.full_required_bytes = session.required_bytes
 		budget_report.admission_memory = session.get("memory",{})
 	error = ""
 	if charge*2 > cpu_limit and session.is_empty():
@@ -149,6 +239,64 @@ func request(time: float, budget: int) -> Array:
 	for job in jobs:keys += job.key
 	if keys != request_signature:
 		request_signature = keys;worker.request(token,jobs,cpu_limit)
+	_stage(targets,jobs)
+	return targets
+func _automatic_request(time: float, budget: int) -> Array:
+	var targets: Array = [];var display: Array = [];var heads: Array = []
+	var direction := -1 if viewer.physical_rate < 0 else 1
+	var status := worker.status();var required := 0;var largest := 0
+	for id in layers.states:
+		if not layers.views[id] is Grid or not layers.states[id].visible:continue
+		var rows: Array = layers.reader.samples[id]
+		if rows.is_empty():continue
+		var point: Dictionary = layers.reader.bracket(id,time)
+		var index: int = point.get("a",0)
+		var job := _job(id,index,budget)
+		job.charge = int(status.charges.get(job.key,job.charge))
+		largest = maxi(largest,job.charge)
+		if not point.is_empty():targets.append(job);display.append(job);required += job.charge
+		heads.append({"id":id,"index":index,"seen":0,"count":rows.size()})
+		var next := index+direction
+		if viewer.scene_loop_playback:next = posmod(next,rows.size())
+		if next >= 0 and next < rows.size() and next != index:display.append(_job(id,next,budget))
+	var signature := token+str(direction)+str(viewer.scene_loop_playback)+str(cache_cap_bytes)
+	largest = maxi(largest,required) # Current/staged references for every visible field.
+	var target_missing := targets.any(func(job):return not status.charges.has(job.key) and not automatic_jobs.any(func(item):return item.key == job.key))
+	var progressed := absf(time-automatic_anchor) > maxf(.000001,absf(automatic_end-automatic_anchor)*.2)
+	var refresh := automatic_generation != signature or target_missing or progressed or Time.get_ticks_msec()-automatic_checked >= 1000
+	if refresh:
+		automatic_generation = signature;automatic_checked = Time.get_ticks_msec();automatic_anchor = time;automatic_end = time
+		var reservations := other_reservations();var other := 0
+		for value in reservations.values():other += int(value)
+		var memory := Memory.memory_headroom()
+		cpu_limit = Buffer.session_capacity(memory,int(status.resident_bytes),other,largest)
+		if cache_cap_bytes > 0:cpu_limit = mini(cpu_limit,cache_cap_bytes)
+		budget_report = {"strategy":"automatic","cpu_limit":cpu_limit,"required_bytes":required,"reserved_other_bytes":other,"reservations":reservations,"memory":memory,"resident_credit":status.resident_bytes,"largest_job_bytes":largest}
+		capacity_wait = required > cpu_limit
+		automatic_jobs = [];var charge := 0
+		# Interleave independent object clocks in playback order. Only headers and
+		# already known charges are needed; workers validate/decode on demand.
+		while not capacity_wait and not heads.is_empty():
+			var best := 0;var distance := INF
+			for i in range(heads.size()):
+				var head: Dictionary = heads[i]
+				var when: float = layers.reader.samples[head.id][head.index].time
+				var delta := (when-time)*direction
+				if delta < 0 and head.seen > 0:delta += layers.reader.frames[-1].time-layers.reader.frames[0].time
+				if delta < distance:distance = delta;best = i
+			var head: Dictionary = heads[best]
+			var job := _job(head.id,head.index,budget)
+			job.charge = int(status.charges.get(job.key,job.charge));job.other_reservation = other
+			if charge+job.charge > cpu_limit:break
+			charge += job.charge;automatic_jobs.append(job);automatic_end = time+maxf(0,distance)*direction
+			head.seen += 1;head.index += direction
+			if viewer.scene_loop_playback:head.index = posmod(head.index,head.count)
+			if head.seen >= head.count or head.index < 0 or head.index >= head.count:heads.remove_at(best)
+		worker.request(token,automatic_jobs,cpu_limit,true)
+		error = ""
+	_stage(targets,display)
+	return targets
+func _stage(_targets: Array, jobs: Array) -> void:
 	# Drop obsolete staging before allocating another texture (current + one ahead).
 	for id in staged.keys():
 		if not jobs.any(func(job):return job.id == id and job.key == staged[id].key):staged.erase(id)
@@ -166,7 +314,6 @@ func request(time: float, budget: int) -> Array:
 		last_upload_frame = Engine.get_process_frames();uploads += 1
 		if uploaded.has("error"):error = uploaded.error;break
 		uploaded.key = job.key;staged[job.id] = uploaded
-	return targets
 func acquire(time: float, budget: int) -> Dictionary:
 	var targets := request(time,budget);var result := {};var ready := true # A failed future prefetch must not block an already resident sample.
 	for job in targets:
@@ -188,10 +335,11 @@ func pump() -> bool:
 	if session_restart:begin_session()
 	if session_waiting:
 		if not viewer.playing:cancel_session();return true
+		if scope_choice.selected == 0:request(viewer.requested_time if pending_time == null else float(pending_time),layers.field_budget())
 		var status := worker.status();var session: Dictionary = status.session
 		if session.get("state") in ["blocked","refused"]:
 			error = session.error;layers.fail_playback(error);session_waiting = false;buffering = false;_update_ui();return false
-		if session.get("state") != "ready":
+		if session.get("state") != "ready" or (scope_choice.selected == 0 and capacity_wait):
 			# An explicit seek may publish its target as soon as that sample is
 			# available; the continuous-play clock still waits for the full plan.
 			if pending_time != null:layers.sample(float(pending_time),true)
@@ -205,15 +353,24 @@ func pump() -> bool:
 	else:request(viewer.requested_time,layers.field_budget())
 	_update_ui();return not buffering
 func _update_ui() -> void:
+	if is_instance_valid(scope_choice) and not layers.reader.frames.is_empty():
+		var last: float = layers.reader.frames[-1].time
+		for control in [range_start,range_end]:
+			control.set_block_signals(true);control.max_value = last;control.set_block_signals(false)
+		forward_duration.set_block_signals(true);forward_duration.max_value = last-layers.reader.frames[0].time;forward_duration.set_block_signals(false)
 	var status := worker.status()
 	if error.is_empty():error = status.error
 	var session: Dictionary = status.session
 	if session.get("state") in ["blocked","refused"]:error = session.error
 	if is_instance_valid(label):
 		label.text = ("Field preparation blocked" if not error.is_empty() else ("Preparing fields…" if buffering else "Field prefetch ready"))+" • %.1f / %.1f MiB CPU cache\n" % [status.bytes/float(Memory.MIB),cpu_limit/float(Memory.MIB)]+error
-		if session_waiting:
+		if session_waiting and scope_choice.selected != 0:
 			label.text = ("Planning fields… %d / %d" % [session.get("planned",0),session.get("total",0)] if session.get("state") == "planning" else "Preparing fields… %d / %d • Pause to cancel" % [session.get("ready",0),session.get("total",0)])
-		elif session.get("state") == "ready":label.text = "All fields prepared • %.1f GiB CPU • bounded GPU staging" % [status.bytes/float(1024*Memory.MIB)]
+		elif scope_choice.selected == 0:
+			label.text = "Waiting for available memory" if capacity_wait or session.get("state") == "pressure" else ("Playback cache ready" if session.get("state") == "ready" else "Preparing playback… %d / %d" % [session.get("ready",0),session.get("total",0)])
+			label.text += " • %.1f / %.1f GiB" % [status.bytes/float(1024*Memory.MIB),cpu_limit/float(1024*Memory.MIB)]
+			if not error.is_empty():label.text = "Field playback unavailable\n"+error
+		elif session.get("state") == "ready" and not prepared_range.is_empty():label.text = "Fields prepared: %s–%s • %.1f GiB CPU" % [prepared_range[0],prepared_range[1],status.bytes/float(1024*Memory.MIB)]
 		label.tooltip_text = "Field cache only, not a process limit. Required target allowance: %.1f MiB. Other cache/worker reservations: %.1f MiB. Current/staged references and preparation temporaries have separate headroom." % [budget_report.get("required_bytes",0)/float(Memory.MIB),budget_report.get("reserved_other_bytes",0)/float(Memory.MIB)]
 	if is_instance_valid(viewer.play_button):viewer.play_button.disabled = layers.is_buffering() and not viewer.playing
 func profile_report() -> Dictionary:

@@ -1,4 +1,4 @@
-"""Generate adversarial SIMSCP3 fixtures and validate asynchronous playback semantics."""
+"""Generate adversarial SIMSCP4 fixtures and validate asynchronous playback semantics."""
 import argparse,json,subprocess,sys
 from pathlib import Path
 import numpy as np

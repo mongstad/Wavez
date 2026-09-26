@@ -144,7 +144,7 @@ time. See [UI-003 validation](CAMERA_TUMBLE_VALIDATION.md) for coverage and limi
 
 ## Scenes, layers and time
 
-SIMSCP3 describes named particle, mesh and volume objects, with at most one particle object and 16 total objects in the current implementation. Each has declared units, geometry/transform semantics, identity policy where relevant, and its own samples. A static object has one reusable sample. The scene timeline is the sorted union of committed timestamps, while layer sampling is independent. A field does not acquire a new scientific sample merely because particles were saved.
+SIMSCP4 describes named particle, mesh and volume objects, with at most one particle object and 16 total objects in the current implementation. Each has declared units, geometry/transform semantics, identity policy where relevant, and its own samples. A static object has one reusable sample. The scene timeline is the sorted union of committed timestamps, while layer sampling is independent. A field does not acquire a new scientific sample merely because particles were saved.
 
 | Situation at requested physical time | Display/sample behavior |
 |---|---|
@@ -247,7 +247,7 @@ PNG sequences can be encoded with FFmpeg/H.264. Missing FFmpeg leaves useful PNG
 
 ## Storage and performance
 
-Typed SIMSCP3 channels preserve supported source bytes with optional lossless Zstandard. Compression is a storage choice, not a promise of faster playback. Normal viewer opening checks the format, object metadata and bounded fixed-size record headers, then loads the initial visible samples. It does not parse every future descriptor, verify every payload, or build/write a full descriptor index. Descriptor, commit and payload validation occurs when each record is requested, including bounded background lookahead. Decoded LRUs and source-generation checks prevent stale data from being applied. Legacy `.sidx3.json` files are ignored. Python's `SceneReader` remains the strict scientific/tooling reader.
+Typed SIMSCP4 channels preserve supported source bytes with optional lossless Zstandard. Compression is a storage choice, not a promise of faster playback. Normal viewer opening checks the format, object metadata and bounded fixed-size record headers, then loads the initial visible samples. It does not parse every future descriptor, verify every payload, or build/write a full descriptor index. Descriptor, commit and payload validation occurs when each record is requested, including bounded background lookahead. Decoded LRUs and source-generation checks prevent stale data from being applied. No legacy format or sidecar reader is included. Python's `SceneReader` remains the strict scientific/tooling reader.
 
 The scene inspector's **Particle playback buffer** separates decoded sample RAM, prepared pair RAM and current GPU resources. **Automatic (safe RAM)** uses a rolling cache capped at 2 GiB and safe physical-RAM headroom, with up to eight requested pairs including the current pair. Opening presents the initial scene immediately after its required samples are ready; controls do not wait for background preparation. Uncached seeks retain the previous committed scene and wait only for the requested samples. Rapid seeks replace obsolete work; reverse playback and **Loop recorded interval** reorder the bounded window. Loop defaults off. Hidden particles skip preparation unless a guide, inspection or reveal needs their data.
 
@@ -256,15 +256,27 @@ Manual RAM choices also use rolling caches. The old explicit full-preload policy
 Historical explicit-preload evidence on the 48 GB workstation: a retained 100k-particle capture prepared 81 pairs in 13.3 seconds, enabled Play after 0.78 seconds and used about 2.50 GiB process RSS. An isolated probe measured 18.67 MiB of retained Godot allocations per decoded 100k-particle sample and another 7.27 MiB per prepared pair without trails. Conservative cache charges are larger and count shared references again. CPU preparation does not create GPU resources for every cached pair.
 
 Temporal fields retain current-plus-four lookahead for paused navigation. On Play,
-the viewer validates the visible-field plan and prepares the complete timeline in
-available RAM before advancing. Status shows progress; Pause cancels preparation.
+the viewer validates the visible-field plan and prepares the chosen scope in
+available RAM before advancing. **Performance → Playback preparation** offers
+**Entire recording** (default), **Selected interval** (start/end times), and
+**From current position** (a duration, following playback direction).
+Choose the scope, then press Play. Status shows progress and the prepared bounds;
+Pause cancels preparation. An interval starts at its boundary if the current time
+is outside it, pauses at the far boundary, and loops within those bounds when
+Loop is enabled. Seeking outside a prepared interval pauses and returns to bounded
+navigation. These scope controls are session-only; offline exports retain their
+explicit job sampling. An interval includes each field's held sample at its start.
 All source channels and selected-channel display planes are retained, subject to
 combined cache/worker reservations and OS/renderer headroom. Repeat playback and
-seeks reuse them. GPU staging remains current-plus-one, never the whole file.
-If the complete plan cannot fit safely, the viewer reports the required and
-available capacity; sustained streaming of dense fields beyond that capacity is
-not yet established. See [continuous playback](SSC_CONTINUOUS_PLAYBACK.md) for
-measured workload limits and reproducible full-file validation.
+seeks reuse them. Compatible channel changes reuse validated arrays and statistics,
+replacing only the selected-channel planes. Required exporter statistics remove per-channel rescanning. Only SIMSCP4
+captures are supported; old captures must be re-exported. GPU staging remains current-plus-one, never the whole file.
+If the chosen plan cannot fit safely, select a shorter interval or free RAM; the
+viewer does not silently reduce source quality or call a short window fully ready.
+Sustained streaming beyond an admitted interval and 100–200 GB support are not
+established. See [SSC acceleration](SSC_ACCELERATION.md) for the format's current
+metadata ceiling, measurements and remaining limits. The prior
+[continuous playback report](SSC_CONTINUOUS_PLAYBACK.md) remains historical evidence.
 
 Each visible field holds its current texture and at most one staged future texture. Their per-texture budgets split the existing layer GPU share; this can increase preview stride on large fields. GPU uploads occur on the main thread, at most one per process frame, ahead of source transitions where possible. Texture binding and shader state changes remain on the main thread. Cold seeks and underflow hold the committed physical clock, gate paused Play and pause background analysis until the required samples are ready. Stale source/configuration work is discarded. Initial opening, scientific inspection and deterministic export remain synchronous; large textures can still cause an upload callback stall. See the [PERF-001/002 report](PERFORMANCE_MAINTENANCE_REPORT.md) for exact guards, bounds and retained 02B/03B measurements.
 
@@ -288,7 +300,7 @@ selections remain numerically usable. [The guide](G4_GUIDE.md) distinguishes sou
 traces, weighted statistics, field integrals, tracer estimates and exploratory periods.
 G5 local control/optional MCP and G6 events/broader adapters/release work are
 **NOT IMPLEMENTED and NOT STARTED**. No web/dashboard work is authorized.
-New development targets `.ssc` / SIMSCP3 under the
+New development targets `.ssc` / SIMSCP4 under the
 [capture format policy](CAPTURE_FORMAT_POLICY.md). The
 [roadmap](../SIMSCOPE_NEXT_DESIGN.md) and [acceptance registry](../SIMSCOPE_ACCEPTANCE_MATRIX.md)
 do not independently authorize future milestones.

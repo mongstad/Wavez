@@ -21,7 +21,7 @@ def main():
     output.mkdir(parents=True, exist_ok=False)
     for name in ['scene.ssc', 'replacement.ssc']:
         scene(output / name)
-    (output / 'invalid.ssc').write_bytes(b'not a SIMSCP3 capture')
+    (output / 'invalid.ssc').write_bytes(b'not a SIMSCP4 capture')
     hashes = {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in output.glob('*.ssc')}
     command = [args.godot, '--path', str(ROOT / 'viewer'), '--rendering-method', args.renderer,
                '--audio-driver', 'Dummy', '--resolution', '1440x900', '--log-file', str(output / 'godot.log'),

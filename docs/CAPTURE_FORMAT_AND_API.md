@@ -1,15 +1,15 @@
 # Capture format and API
 
-For new layered work, use **SIMSCP3 with a `.ssc` suffix** and explicit `SceneCapture` / `SceneReader`. This is a current overview, backed by the [G3 wire contract](<../G3_FORMAT.md>) and [implementation](<../simscope_export/scene.py>). The [public API](../SIMSCOPE_API.md) documents the modern entry points.
+For new layered work, use **SIMSCP4 with a `.ssc` suffix** and explicit `SceneCapture` / `SceneReader`. This is a current overview, backed by the [G3 wire contract](<../G3_FORMAT.md>) and [implementation](<../simscope_export/scene.py>). The [public API](../SIMSCOPE_API.md) documents the modern entry points.
 The [capture format policy](CAPTURE_FORMAT_POLICY.md) defines the sole supported
-capture generation. Readers verify SIMSCP3 magic and version independently of
+capture generation. Readers verify SIMSCP4 magic and version independently of
 suffix; new files should use `.ssc`.
 
 ## Format and entry points
 
 | Format | Purpose | Python entry points |
 |---|---|---|
-| SIMSCP3 | Independently timed particle, mesh and volume objects | `SceneCapture`; `SceneReader` |
+| SIMSCP4 | Independently timed particle, mesh and volume objects | `SceneCapture`; `SceneReader` |
 
 ## Current Python interface
 
@@ -27,7 +27,8 @@ capture.add_volume(object_id, time, fields,
 capture.close()
 
 # Use context managers in normal code to close on errors.
-with SceneReader(path, strict=True, cache_bytes=256 * 1024**2) as reader:
+with SceneReader(path, strict=True, cache_bytes=256 * 1024**2,
+                 metadata_bytes=512 * 1024**2) as reader:
     arrays = reader.read_sample(object_id, sample_index)
     source_bracket = reader.bracket(object_id, requested_time)
     reader.audit_identity()
@@ -43,15 +44,15 @@ Particle positions are already in viewer world, so their object affine must be i
 `time_unit`, `position_unit` and `channel_metadata[object_id][channel]`; see the
 [public API metadata reference](../SIMSCOPE_API.md#metadata-and-g4-analysis). Grid shape is zyx, origin/spacing are xyz, arrays are C-order with x fastest, and origin means first sample. All volume channels in a sample share geometry. A changed grid geometry is a discrete sample transition.
 
-Typed SIMSCP3 arrays support `f4`, `f8`, `u4`, `i8`. Positions must be finite floating arrays; indices and IDs have their specific integer contracts. Scalar data retain their supported source values, including signed zeros and nonfinite payloads where permitted; renderers mark unavailable/invalid values explicitly. Arbitrary complex arrays are not a native channel type: export named components. Do not normalize or cast scientific fields merely to match a GPU preview.
+Typed SIMSCP4 arrays support `f4`, `f8`, `u4`, `i8`. Positions must be finite floating arrays; indices and IDs have their specific integer contracts. Scalar data retain their supported source values, including signed zeros and nonfinite payloads where permitted; renderers mark unavailable/invalid values explicitly. Arbitrary complex arrays are not a native channel type: export named components. Do not normalize or cast scientific fields merely to match a GPU preview.
 
 Persistent particle identity requires explicit nonnegative int64 IDs, unique within each record and never reused after disappearance. The namespace includes capture/object identity. Mesh `stable_topology` requires explicit `vertex_id`; interpolation requires compatible ordered IDs and triangles. Anonymous particles and identity-free/changed meshes are held. Full identity history is checked by `audit_identity()`; a random-access sample read alone is not a full lifetime audit. Exact int64 IDs are represented as decimal strings where JSON precision would otherwise be unsafe.
 
-## SIMSCP3 storage and recovery
+## SIMSCP4 storage and recovery
 
-The little-endian prefix `<8sII>` contains `SIMSCP3\0`, version 3 and JSON metadata length. Each record has an 80-byte `<4sIQQdIIQ32s>` header with `FRM3`, descriptor and payload lengths, physical time, object index, array count, sequence and descriptor SHA-256. Array descriptors identify type, association and chunks. A 48-byte `<8sQ32s>` `COMMIT3\0` trailer commits the sequence and hash of header/descriptor. Chunks carry independent stored/raw SHA-256 checks; the descriptor/commit hash is not a replacement for payload checks.
+The little-endian prefix `<8sII>` contains `SIMSCP4\0`, version 4 and JSON metadata length. Each record has an 80-byte `<4sIQQdIIQ32s>` header with `FRM4`, descriptor and payload lengths, physical time, object index, array count, sequence and descriptor SHA-256. Array descriptors identify type, association and chunks. A 48-byte `<8sQ32s>` `COMMIT4\0` trailer commits the sequence and hash of header/descriptor. Chunks carry independent stored/raw SHA-256 checks; the descriptor/commit hash is not a replacement for payload checks.
 
-Ordinary array chunks are bounded; grid fields use 32³ zyx bricks with shortened boundary bricks and validated exact coverage. Current readers assemble full source grids, rather than treating bricks as sparse physical regions. Codec 0 is uncompressed (default); codec 1 is Zstandard, default level 1. Supported writer levels are 1–6. Compression is lossless and optional; unavailable requested codecs fail explicitly. No lossy “scientific compression” is implied.
+All arrays use canonical contiguous chunks of 4 MiB except the final remainder; grids are zyx C-order, x fastest. Mandatory exact volume statistics replace repeated display scans. Codec 0 is uncompressed (default); codec 1 is Zstandard, default level 1. Supported writer levels are 1–6. Compression is lossless and optional; unavailable requested codecs fail explicitly. No lossy “scientific compression” is implied.
 
 A complete record becomes visible only after its commit. There is no required closing footer. An incomplete trailing record can be withheld in live/non-strict reads while earlier committed records remain available; corruption is an error, not a fabricated frame. `SceneReader(path, strict=False)` and `refresh(strict=False)` support reading a growing committed prefix. Reopening/refreshing validates source changes; same path does not establish same source identity.
 
@@ -72,7 +73,10 @@ a changed source cannot silently become a different reproducible inspection. The
 
 ## Limits and budgets
 
-These are current G3 contracts, not a whole-process memory estimate. MiB/GiB mean binary units.
+Per-record constraints remain format contracts. Aggregate metadata admission is
+a reader resource policy, not an export or wire-size ceiling. See
+[configuration, accounting and resource errors](SSC_METADATA_BUDGET.md).
+These budgets are not a whole-process memory estimate. MiB/GiB mean binary units.
 
 | Resource | Limit/default |
 |---|---|
@@ -81,7 +85,7 @@ These are current G3 contracts, not a whole-process memory estimate. MiB/GiB mea
 | Particles per sample | 10,000,000 anonymous; persistent IDs additionally capped at 1,000,000 |
 | Decoded object sample, all channels | 256 MiB |
 | Raw chunk / stored chunk | 4 MiB / raw + 64 KiB |
-| Aggregate index metadata | 32 MiB; at most 1,000,000 records |
+| Reader metadata | Configurable memory budget; 512 MiB Python / 4096 MiB conservative native reservation; separate 1,000,000-record reader capacity |
 | Arrays per sample | 256 |
 | Grid axes | Each 2–512, additionally constrained by the all-channel sample limit |
 | Mesh geometry | 1,000,000 vertices / 2,000,000 triangles |

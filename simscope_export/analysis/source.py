@@ -16,7 +16,8 @@ import numpy as np
 from .. import codec
 from .. import storage as typed
 from ..scene import SceneReader
-from .contracts import AnalysisError, Context, MIB, MAX_INDEX, MAX_RECORDS, integer
+from ..metadata_budget import MetadataBudget, MetadataCapacityError
+from .contracts import AnalysisError, Context, MIB, integer
 from .memo import VerificationMemo
 
 
@@ -34,8 +35,6 @@ class _BoundedFile:
         self.read_extent = extent
         self.context = context
         self.indexing = True
-        self.index_bytes = 0
-        self.index_charge = 0
 
     def fileno(self):
         return self.raw.fileno()
@@ -55,11 +54,6 @@ class _BoundedFile:
         count = self.read_extent-self.tell() if count < 0 else min(count, self.read_extent-self.tell())
         if count < 0 or count > 4*MIB:
             raise AnalysisError("memory_limit", "Source read exceeds bounded chunk size")
-        if self.indexing:
-            self.index_bytes += count
-            if self.index_bytes > MAX_INDEX:
-                raise AnalysisError("memory_limit", "Analysis index exceeds its metadata budget")
-            self.index_charge += self.context.acquire(count*8)
         data = self.raw.read(count)
         if len(data) != count:
             raise AnalysisError("source_changed", "Source truncated during a bounded read")
@@ -76,6 +70,7 @@ class _SceneIndex(SceneReader):
         self.source = source
         self.path = source.path
         self.file = source.file
+        self.metadata_budget = source.metadata_budget
         self.records = []
         self._scan(strict)
 
@@ -114,7 +109,7 @@ class SourceSnapshot:
     pinned SHA-256 is reverified; replacement/truncation/mutation are errors.
     """
 
-    def __init__(self, path, *, committed_bytes=None, sha256=None, context=None, memo=None, assets=None):
+    def __init__(self, path, *, committed_bytes=None, sha256=None, context=None, memo=None, assets=None, metadata_bytes=None):
         self.path = Path(path).absolute()
         self.context = context or Context()
         self.raw = self.path.open("rb")
@@ -127,19 +122,28 @@ class SourceSnapshot:
         self.member_charge = 0
         self.closed = False
         self.sha256 = None
+        self.metadata_budget = None
         try:
+            # Metadata shares the request's total workspace; an optional lower
+            # metadata budget cannot bypass that enclosing allocation limit.
+            self.metadata_budget = MetadataBudget(
+                self.context.limit if metadata_bytes is None else metadata_bytes,
+                acquire=self._acquire_metadata, release=self.context.release)
             self.memo_charge = self.context.acquire(self.memo.limit)
+            # Preserve the analysis adapter's existing fixed bookkeeping/I/O
+            # allowance in addition to measured retained metadata.
+            self.charge = self.context.acquire(MIB)
             self.stamp = _stamp(self.path, self.raw)
             extent = self.stamp[2] if committed_bytes is None else typed.decimal(committed_bytes)
             if not 16 <= extent <= self.stamp[2]:
                 raise AnalysisError("source_extent", "Invalid or truncated committed extent")
             self.file = _BoundedFile(self.raw, extent, self.context)
             magic = self.file.read(8)
-            if magic != b"SIMSCP3\0":
-                raise AnalysisError("unsupported_format", "Only SIMSCP3 scene captures are supported")
+            if magic != b"SIMSCP4\0":
+                raise AnalysisError("unsupported_format", "Only SIMSCP4 scene captures are supported")
             self.file.seek(0)
             index = _SceneIndex(self, committed_bytes is not None)
-            self.format = "SIMSCP3"
+            self.format = "SIMSCP4"
             self.metadata = index.metadata
             self.objects = index.objects
             self.samples = index.samples
@@ -150,10 +154,6 @@ class SourceSnapshot:
                 raise AnalysisError("source_extent", "Extent is not an exact complete-record boundary")
             self.file.read_extent = self.committed_end
             self.file.indexing = False
-            # Conservative parsed-object overhead is part of admission control.
-            needed = self.record_count*512+MIB
-            if needed > self.charge:
-                self.charge += self.context.acquire(needed-self.charge)
             self.verify()
             digest_key = ("prefix", str(self.path), *self.stamp, self.committed_end)
             cached_digest = self.memo.get(digest_key) if self.memo is not None else None
@@ -167,9 +167,19 @@ class SourceSnapshot:
             self.uuid = self.metadata.get("uuid", self.metadata.get("storage", {}).get("uuid"))
             self.context.verified_source(self.path,self.stamp,(self.sha256,self.committed_end))
             self.audit_coverage = {}
+        except MetadataCapacityError as exc:
+            self.close()
+            raise AnalysisError("memory_limit", str(exc)) from exc
         except Exception:
             self.close()
             raise
+
+    def _acquire_metadata(self, amount):
+        try:
+            self.context.acquire(amount)
+        except AnalysisError as exc:
+            if exc.code != "memory_limit":raise
+            raise AnalysisError("memory_limit", "Reader metadata exceeds the available job memory_bytes budget; capture validity is unchanged") from exc
 
     def _digest(self):
         position = self.file.tell()
@@ -269,7 +279,6 @@ class SourceSnapshot:
                     unavailable.append(a["name"])
                     continue
                 pieces = []
-                grid = np.empty(a["shape"], dtype="<"+a["dtype"]) if obj["kind"] == "volume" else None
                 for p in a["chunks"]:
                     self.context.check()
                     self.file.seek(record["offset"]+int(p["offset"]))
@@ -279,13 +288,8 @@ class SourceSnapshot:
                     raw = codec.decode(stored, int(p["decoded"]), p["codec"])
                     if typed.sha(raw) != p["raw_sha256"]:
                         raise AnalysisError("corrupt_source", "Decoded chunk checksum mismatch")
-                    if grid is None:
-                        pieces.append(raw)
-                    else:
-                        z, y, x = p["origin"]
-                        dz, dy, dx = p["shape"]
-                        grid[z:z+dz, y:y+dy, x:x+dx] = np.frombuffer(raw, dtype=grid.dtype).reshape(p["shape"])
-                data = b"".join(pieces) if grid is None else grid.tobytes()
+                    pieces.append(raw)
+                data = b"".join(pieces)
                 arrays[a["name"]] = np.frombuffer(data, dtype="<"+a["dtype"]).reshape(a["shape"])
             count = specs.get("position", {}).get("shape", [0])[0]
             for name in ("particle_id", "vertex_id"):
@@ -340,9 +344,9 @@ class SourceSnapshot:
             self.member_arrays.clear()
             self.context.release(self.member_charge)
             self.member_charge = 0
-            if hasattr(self, "file"):
-                self.context.release(self.file.index_charge)
-                self.file.index_charge = 0
+            self.samples = {};self.objects = {};self.metadata = {}
+            if self.metadata_budget is not None:
+                self.metadata_budget.clear()
             self.charge = 0
             self.closed = True
 

@@ -2,7 +2,7 @@
 
 SimScope is a NumPy-first scientific capture and Godot visualization platform for
 particles, meshes and uniform-grid scalar fields. New integrations use
-`SceneCapture` / `SceneReader` and the SIMSCP3 (`.ssc`) capture format.
+`SceneCapture` / `SceneReader` and the SIMSCP4 (`.ssc`) capture format.
 
 G0–G4 are implemented and accepted. The current viewer includes deterministic
 video export, scientific inspection/analysis, bounded playback preparation, and

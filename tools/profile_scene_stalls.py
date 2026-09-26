@@ -1,4 +1,4 @@
-"""Measure SIMSCP3 main-thread stalls without changing playback/sampling policies.
+"""Measure SIMSCP4 main-thread stalls without changing playback/sampling policies.
 
 Run a short real-renderer profile, or analyze a retained profile.json. Outputs go
 into a new directory; captures are read-only. No per-frame log writes occur.

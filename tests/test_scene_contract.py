@@ -6,7 +6,7 @@ import unittest
 from unittest.mock import patch
 
 import numpy as np
-from simscope_export import SceneCapture, SceneReader
+from simscope_export import SceneCapture, SceneReader, MetadataCapacityError
 from simscope_export import scene, storage
 from simscope_export.analysis import AnalysisError, Context, SourceSnapshot
 
@@ -24,7 +24,7 @@ class SceneContractTests(unittest.TestCase):
         self.temp.cleanup()
 
     def test_retired_magic_is_refused_even_with_native_suffix(self):
-        for magic in [b'VBCOSM1\0', b'SIMSCP1\0', b'SIMSCP2\0']:
+        for magic in [b'VBCOSM1\0', b'SIMSCP1\0', b'SIMSCP2\0', b'SIMSCP3\0']:
             with self.subTest(magic=magic):
                 self.path.write_bytes(magic + self.raw[8:])
                 for strict in [True, False]:
@@ -59,16 +59,69 @@ class SceneContractTests(unittest.TestCase):
             SourceSnapshot(self.path, context=context)
         self.assertEqual(context.used, 0)
 
-    def test_index_ceiling_and_corrupt_commit_do_not_publish_partial_success(self):
-        with patch.object(scene, 'MAX_INDEX', 128):
-            with self.assertRaisesRegex(ValueError, 'Index metadata ceiling'):
-                SceneReader(self.path)
+    def test_metadata_capacity_is_separate_from_corruption(self):
+        with patch.object(scene.json, 'loads', side_effect=AssertionError('parse before admission')):
+            with self.assertRaises(MetadataCapacityError):
+                SceneReader(self.path, metadata_bytes=128)
+        context = Context()
+        with self.assertRaises(AnalysisError) as error:
+            SourceSnapshot(self.path, context=context, metadata_bytes=128)
+        self.assertEqual(error.exception.code, 'memory_limit')
+        self.assertEqual(context.used, 0)
+        with SceneReader(self.path) as reader:
+            self.assertEqual(len(reader.records), 2)
+            used = reader.metadata_budget.used
+            reader.refresh(strict=True)
+            self.assertEqual(reader.metadata_budget.used, used)
+        self.assertEqual(reader.metadata_budget.used, 0)
+        self.assertFalse(reader.records)
         raw = bytearray(self.raw)
         raw[-1] ^= 1
         self.path.write_bytes(raw)
         for strict in [True, False]:
             with self.assertRaisesRegex(ValueError, 'Commit checksum'):
                 SceneReader(self.path, strict=strict)
+
+    def test_late_admission_failure_and_shared_analysis_budget_release(self):
+        with SceneReader(self.path) as reader:
+            limit = reader.metadata_budget.peak - 1
+        with self.assertRaises(MetadataCapacityError):
+            SceneReader(self.path, metadata_bytes=limit)
+        context = Context()
+        with self.assertRaises(AnalysisError) as error:
+            SourceSnapshot(self.path, context=context, metadata_bytes=limit)
+        self.assertEqual(error.exception.code, 'memory_limit')
+        self.assertEqual(context.used, 0)
+        # A larger metadata sub-budget cannot bypass the enclosing job budget.
+        context = Context(memory_bytes=1024*1024)
+        reservation = context.acquire(context.limit-128)
+        with self.assertRaises(AnalysisError) as error:
+            SourceSnapshot(self.path, context=context, metadata_bytes=2**30)
+        self.assertEqual(error.exception.code, 'memory_limit')
+        self.assertEqual(context.used, reservation)
+        context.release(reservation)
+
+    def test_failed_refresh_drops_previous_metadata_and_can_reopen(self):
+        reader = SceneReader(self.path)
+        reader.metadata_budget.limit = 128
+        with self.assertRaises(MetadataCapacityError):reader.refresh()
+        self.assertEqual(reader.metadata_budget.used, 0)
+        self.assertFalse(reader.records)
+        reader.metadata_budget.limit = 512*1024**2
+        reader.refresh(strict=True)
+        self.assertEqual(len(reader.records), 2)
+        reader.close()
+
+    def test_writer_keeps_individual_descriptor_limit_and_committed_prefix(self):
+        path = self.path.with_name('wide.ssc')
+        with SceneCapture(path, objects=[dict(id='p', kind='particles', units='m', identity='anonymous')]) as writer:
+            before = writer.file.tell()
+            with self.assertRaisesRegex(ValueError, 'Record descriptor ceiling'):
+                writer.add_particles('p', 0., np.zeros((1, 3)), **{'a'*storage.MAX_DESC: np.ones(1)})
+            self.assertEqual(writer.file.tell(), before)
+            self.assertEqual(writer.seq, 0)
+            writer.add_particles('p', 0., np.zeros((1, 3)))
+        with SceneReader(path) as reader:self.assertEqual(len(reader.records), 1)
 
 
 if __name__ == '__main__':

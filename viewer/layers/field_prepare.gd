@@ -29,8 +29,8 @@ static func prepare(obj: Dictionary, sample: Dictionary, selected: String, budge
 	if gpu_bytes > budget: return {"error":"Volume texture budget exhausted; preview released."}
 	var values = sample.channels[selected]
 	var statistics_started := Time.get_ticks_usec()
-	var color_stats := preload("res://layers/volume_color.gd").statistics(values,cancel)
-	if color_stats.is_empty():return {}
+	var color_stats: Dictionary = sample.get("statistics",{}).get(selected,{})
+	if color_stats.is_empty():return {"error":"Required field statistics unavailable."}
 	var timings := {"statistics":(Time.get_ticks_usec()-statistics_started)/1000.0}
 	var conversion_started := Time.get_ticks_usec()
 	if lod == 1 and values is PackedFloat64Array:
