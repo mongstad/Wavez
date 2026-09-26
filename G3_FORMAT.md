@@ -153,7 +153,8 @@ is optional; export/reading/slicing require no scikit-image.
 |---|---|
 | Decoded object sample | 256 MiB total across its channels |
 | Chunk / descriptor | 4 MiB raw chunk; stored ≤ raw + 64 KiB; 4 MiB descriptor |
-| Index wire metadata | 32 MiB aggregate; 1 million records; 256 arrays/sample |
+| Reader metadata | Configurable memory admission; one million records per reader; no aggregate descriptor export ceiling ([policy](docs/SSC_METADATA_BUDGET.md)) |
+| Arrays per sample | 256 |
 | Grid | Each dimension 2–512, also subject to sample-byte ceiling |
 | Mesh | 1 million vertices; 2 million triangles |
 | Identity | 1 million lifetime IDs per identity-bearing object |

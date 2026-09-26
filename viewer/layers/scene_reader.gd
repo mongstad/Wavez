@@ -7,6 +7,15 @@ const Cache = preload("res://data/byte_cache.gd")
 const Identity = preload("res://data/particle_identity.gd")
 const Profile = preload("res://scene/playback_profile.gd")
 const MAX_SAMPLE := 256*1024*1024
+# Resource policy, not wire validity. Reserve for eventual descriptor trees,
+# copies held by preparation workers, parsing/hash scratch and index/clock rows.
+# This conservative estimate is not a whole-process RSS guarantee.
+const DEFAULT_METADATA_BYTES := 4*1024*1024*1024
+const METADATA_FACTOR := 64
+const RECORD_OVERHEAD := 4096
+var metadata_limit := DEFAULT_METADATA_BYTES
+var metadata_reserved := 0
+var error_code := ""
 var file: FileAccess
 var source_path := ""
 var source_stamp := {}
@@ -27,6 +36,20 @@ var error := ""
 var index_valid := false
 var index_state := ""
 var last_index_ms := 0.0
+func _init() -> void:
+	var configured := OS.get_environment("SIMSCOPE_METADATA_BUDGET_MIB")
+	if not configured.is_empty():
+		metadata_limit = int(configured)*1048576 if configured.is_valid_int() and int(configured) > 0 and int(configured) <= 8796093022207 else 0
+func admit_metadata(wire_bytes: int) -> bool:
+	var charge := wire_bytes*METADATA_FACTOR+RECORD_OVERHEAD
+	if metadata_limit <= 0 or charge > metadata_limit-metadata_reserved:
+		error_code = "metadata_capacity"
+		return fail("Reader metadata capacity exceeded: need %d bytes, budget %d. Increase SIMSCOPE_METADATA_BUDGET_MIB or metadata_limit; capture validity is unchanged." % [metadata_reserved+charge,metadata_limit])
+	metadata_reserved += charge
+	return true
+func clear_metadata() -> void:
+	records.clear();frames.clear();samples.clear();observed_arrays.clear();objects.clear();metadata.clear();header.clear()
+	metadata_reserved = 0;index_valid = false
 func stopped() -> bool: return false
 static func transform_of(value: Array) -> Transform3D:
 	return Transform3D(Basis(Vector3(value[0],value[4],value[8]),Vector3(value[1],value[5],value[9]),Vector3(value[2],value[6],value[10])),Vector3(value[3],value[7],value[11]))
@@ -34,7 +57,7 @@ static func vec(value: Array) -> Vector3: return Vector3(value[0],value[1],value
 func fail(message: String) -> bool:
 	error = message;return false
 func close() -> void:
-	file = null;cache.clear()
+	file = null;cache.clear();clear_metadata()
 func configure_cache(bytes: int, _prefetch: bool) -> void: cache.configure(bytes)
 func status() -> String: return "Synchronous layer reads • %s • %.1f / %.0f MiB • %d hits • last index %.0f ms" % [index_state,cache.used/1048576.0,cache.limit/1048576.0,cache.hits,last_index_ms]
 func open(path: String) -> bool:
@@ -61,17 +84,20 @@ func reload_source() -> bool:
 	var wall_started := Time.get_ticks_usec()
 	var started := Profile.begin()
 	var result := _reload_source_profiled()
+	if not result:
+		file = null;cache.clear();clear_metadata()
 	last_index_ms = (Time.get_ticks_usec()-wall_started)/1000.0
 	Profile.end("g3_reload_source",started)
 	return result
 func _reload_source_profiled() -> bool:
-	index_valid = false;generation += 1;cache.clear();records.clear();frames.clear();samples.clear();observed_arrays.clear();objects.clear();error = ""
+	generation += 1;cache.clear();clear_metadata();error = "";error_code = ""
 	var metadata_started := Profile.begin()
 	var before := _source_stamp_profiled()
 	file = FileAccess.open(source_path,FileAccess.READ)
 	if file == null or file.get_length() < 16: return fail("Incomplete scene prefix.")
 	var prefix := file.get_buffer(16);var size := prefix.decode_u32(12)
 	if prefix.slice(0,8) != "SIMSCP4".to_utf8_buffer()+PackedByteArray([0]) or prefix.decode_u32(8) != 4 or size > 1048576 or size > file.get_length()-16: return fail("Unsupported scene version/header.")
+	if not admit_metadata(size):return false
 	var raw := file.get_buffer(size);var parsed = Hash.parse_json(raw.get_string_from_utf8())
 	if not parsed is Dictionary or parsed.get("version") != 4 or not Index.valid_hex(parsed.get("uuid"),32) or not parsed.get("objects") is Array or parsed.objects.is_empty() or parsed.objects.size() > 16: return fail("Invalid scene metadata/object table.")
 	metadata = parsed
@@ -96,15 +122,17 @@ func _reload_source_profiled() -> bool:
 	prefix.append_array(raw);header = {"sha256":Hash.digest(prefix),"metadata":metadata}
 	Profile.end("g3_index_metadata",metadata_started)
 	var scan_started := Profile.begin()
-	var offset := 16+size;var end := file.get_length();var index_bytes := 0;var times := {}
+	var offset := 16+size;var end := file.get_length();var times := {}
 	while offset < end:
 		if end-offset < 80: break
 		file.seek(offset);var h := file.get_buffer(80)
 		var dlen := h.decode_u32(4);var stored := h.decode_u64(8);var decoded := h.decode_u64(16);var time := h.decode_double(24);var oi := h.decode_u32(32);var n := h.decode_u32(36);var seq := h.decode_u64(40)
-		if h.slice(0,4).get_string_from_ascii() != "FRM4" or dlen > 4*1048576 or stored < 0 or stored > MAX_SAMPLE+64*1048576 or decoded < 0 or decoded > MAX_SAMPLE or oi >= metadata.objects.size() or seq != records.size() or seq >= 1000000 or n < 1 or n > 256 or not is_finite(time): return fail("Scene header/allocation ceiling.")
+		if h.slice(0,4).get_string_from_ascii() != "FRM4" or dlen > 4*1048576 or stored < 0 or stored > MAX_SAMPLE+64*1048576 or decoded < 0 or decoded > MAX_SAMPLE or oi >= metadata.objects.size() or seq != records.size() or n < 1 or n > 256 or not is_finite(time): return fail("Scene header/allocation ceiling.")
 		if 128+dlen+stored > end-offset: break
-		index_bytes += 128+dlen
-		if index_bytes > Hash.MAX_INDEX: return fail("Scene index metadata exceeds 32 MiB.")
+		if seq >= 1000000:
+			error_code = "metadata_capacity"
+			return fail("Reader record capacity exceeded (one million records). Capture validity is unchanged.")
+		if not admit_metadata(dlen):return false
 		var obj: Dictionary = metadata.objects[oi];var prior: Array = samples[obj.id]
 		if not prior.is_empty() and (obj.static or time <= prior[-1].time): return fail("Object timestamps/static violation.")
 		# Only fixed-size headers are needed to locate records and build the clock.

@@ -105,7 +105,7 @@ sample cadence. Finite forward preparation is not automatic rolling streaming.
 | Whole-timeline admission | Retained default; zero recurring preparation waits for captures fitting safe RAM. Rejects unsafe plans explicitly. |
 | Selected / finite forward interval | Implemented; bounded full-quality work when a whole capture cannot fit. Interval results are separate scope experiments. |
 | Adaptive streaming | Investigated, deferred. Sustained validation/decode/upload must stay ahead of cadence and playback speed in both directions; when it cannot, explicit buffering is unavoidable. Current finite windows do not claim that guarantee. |
-| Paged global time/channel directory | Future large-record-count work. Existing header scan is cheap in measured captures, but linear header traversal/aggregate descriptor limits eventually need a bounded paged index. Adding a footer and live/finalized directory lifecycle now would increase complexity without a measured startup benefit. |
+| Paged global time/channel directory | Future large-record-count work. Existing header scan is cheap in measured captures. Paging may help extreme record counts and linear startup cost; it is not needed to remove the aggregate descriptor export ceiling. Reader memory admission is separate; see [the contained correction](SSC_METADATA_BUDGET.md). |
 | Selected-channel-only retention | Deferred; reduces RAM but trades away instant alternate channels and requires probe/schema/cache changes. Full-quality multi-channel behavior takes priority. |
 | Parallel validation/decode | Deferred; may reduce CPU preparation time but adds competing memory/I/O, cancellation and ordering work. Does not by itself fix GPU frame pacing. |
 | mmap/alignment/GPU-ready auxiliary regions | Deferred; current Godot packed-array/Image/texture APIs still copy. A mapping alone does not make GPU upload zero-copy. Additional derived regions duplicate data and require validity/version management. |
@@ -205,14 +205,17 @@ outside the repository. The owner checks below remain required.
 
 ## Capacity and limits
 
-SIMSCP4 keeps bounded 256 MiB decoded samples, 2–512 grid dimensions, 32 MiB total
-descriptor charge and one million records. These are refusal limits, not automatic
-quality reductions. Contiguous blocks improve descriptor capacity substantially,
-but size alone does not determine supported duration: many channels or small
-particle frames can exhaust descriptors before payloads reach 100–200 GB. At S0's
-measured descriptor/payload mix, a linear extrapolation reaches the cap around
-184 GB (not a tested safe-duration guarantee). A paged time/channel directory and
-bounded Python index would be needed to remove this aggregate constraint cleanly.
+SIMSCP4 keeps bounded 256 MiB decoded samples and 2–512 grid dimensions. The
+inherited 32 MiB aggregate descriptor/export guard has been removed following
+owner review. Python and native readers instead admit metadata under explicit
+configurable memory budgets, with the existing separate million-record reader
+capacity. Individual-record and integrity checks are unchanged. See
+[accounting, configuration and above-boundary validation](SSC_METADATA_BUDGET.md).
+
+The original S0-mix estimate reached the removed guard around 184 GB; it is no
+longer an export stopping condition. Metadata residency and linear header scans
+still scale with record count. A paged directory is not required for this
+correction, and no SIMSCP4 layout/version change is involved.
 
 A separate synthetic capacity check creates a valid 201,344,904,307-byte sparse
 file with 8,000 128³, three-channel f4 samples and 18,312,000 bytes of descriptors.

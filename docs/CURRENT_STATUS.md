@@ -21,7 +21,9 @@ changes reuse validated source arrays. SIMSCP4 requires exact field statistics a
 contiguous array chunks; package 3.0.0 refuses old capture formats without fallbacks.
 The external S0 run stopped on the previous format's descriptor ceiling. Its exact
 recorded prefix now needs 2.70 MB of descriptor charge rather than 33.55 MB.
-The report distinguishes this format limit from RAM admission and frame pacing.
+The inherited aggregate export ceiling is now removed; [reader metadata budgets](SSC_METADATA_BUDGET.md)
+separate resource admission from SIMSCP4 validity. Above-boundary native/Python
+validation preserves per-record limits, checksums and scientific values.
 Strict 33.3 ms pacing, adaptive streaming beyond prepared intervals and 100–200 GB
 support remain unestablished; this is not a universal smoothness claim.
 The owner-confirmed 13.86 GiB capture records 128³ fields. Normal opening now

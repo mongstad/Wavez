@@ -37,6 +37,11 @@ request does not supersede that ID. Fixed-job member references remain pinned.
 retained by the live state; the worker also preserves references in the current
 arguments before reclaiming unpinned assets. Bounded structural integers also accept the exact integer-valued
 double representation produced by Godot's JSON parser; IDs still require strings.
+Source metadata now shares the enclosing `memory_bytes` allocation pool rather
+than a fixed 33 MiB cumulative-read cap. An internal `SourceSnapshot(metadata_bytes=...)`
+can additionally restrict metadata; exhaustion is `memory_limit`. See
+[reader accounting](SSC_METADATA_BUDGET.md).
+
 Budgets have `memory_bytes`, `wall_seconds`,
 `cpu_seconds`; omitted fields use the approved defaults.
 

@@ -27,7 +27,8 @@ capture.add_volume(object_id, time, fields,
 capture.close()
 
 # Use context managers in normal code to close on errors.
-with SceneReader(path, strict=True, cache_bytes=256 * 1024**2) as reader:
+with SceneReader(path, strict=True, cache_bytes=256 * 1024**2,
+                 metadata_bytes=512 * 1024**2) as reader:
     arrays = reader.read_sample(object_id, sample_index)
     source_bracket = reader.bracket(object_id, requested_time)
     reader.audit_identity()
@@ -72,7 +73,10 @@ a changed source cannot silently become a different reproducible inspection. The
 
 ## Limits and budgets
 
-These are current G3 contracts, not a whole-process memory estimate. MiB/GiB mean binary units.
+Per-record constraints remain format contracts. Aggregate metadata admission is
+a reader resource policy, not an export or wire-size ceiling. See
+[configuration, accounting and resource errors](SSC_METADATA_BUDGET.md).
+These budgets are not a whole-process memory estimate. MiB/GiB mean binary units.
 
 | Resource | Limit/default |
 |---|---|
@@ -81,7 +85,7 @@ These are current G3 contracts, not a whole-process memory estimate. MiB/GiB mea
 | Particles per sample | 10,000,000 anonymous; persistent IDs additionally capped at 1,000,000 |
 | Decoded object sample, all channels | 256 MiB |
 | Raw chunk / stored chunk | 4 MiB / raw + 64 KiB |
-| Aggregate index metadata | 32 MiB; at most 1,000,000 records |
+| Reader metadata | Configurable memory budget; 512 MiB Python / 4096 MiB conservative native reservation; separate 1,000,000-record reader capacity |
 | Arrays per sample | 256 |
 | Grid axes | Each 2–512, additionally constrained by the all-channel sample limit |
 | Mesh geometry | 1,000,000 vertices / 2,000,000 triangles |

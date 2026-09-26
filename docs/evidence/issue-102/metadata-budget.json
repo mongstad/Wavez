@@ -1,0 +1,98 @@
+{
+  "records": 1316,
+  "aggregate_descriptor_charge": 35658336,
+  "bytes": 41048878,
+  "oracle": [
+    {
+      "index": 0,
+      "time": 0.0,
+      "sha256": "e84cadc4b8b7dfdfd11b65a63d3a7dc49867547995abd366eca4703702e70eb9"
+    },
+    {
+      "index": 658,
+      "time": 82.25,
+      "sha256": "f84e47209b1d7b4c69f4fe31fc5aa95be6cb3ee1d28bd1c9d43366a4ca8a0b32"
+    },
+    {
+      "index": 1315,
+      "time": 164.375,
+      "sha256": "414e7445347c9d74ab96ebfe6810cdeca19b1dda92d5ae23f23495962c59adae"
+    }
+  ],
+  "last": {
+    "header": 41017686,
+    "descriptor": 41017766,
+    "payload": 41044734,
+    "commit": 41048830
+  },
+  "python_metadata_used": 135953571,
+  "python_metadata_peak": 137580315,
+  "analysis_peak": 146451619,
+  "native": {
+    "checks": 1535,
+    "failures": 0,
+    "metadata_limit": 4294967296,
+    "metadata_reserved": 2276759424,
+    "records": 1316.0
+  },
+  "source_sha256": "897095ddf3b0deaa11759b2ae1b5df00e32012b255c27d78be6af94646754f7c",
+  "all_payloads_and_statistics_verified": true,
+  "capacity_and_corruption_checks_passed": true,
+  "baseline_commit": "268fbd87803b3023370426bb028c2efedc002af4",
+  "wire_equivalence": {
+    "none": {
+      "bytes": 5734,
+      "sha256": "c0c8f5bf52f815da4eed475040fb3a0435a6e45a26dbea196b576b535d22a2d7",
+      "identical": true
+    },
+    "zstd": {
+      "bytes": 5824,
+      "sha256": "e0b2b7f39c35f7c269f3a2a17ffd1b0ed66364143a9be1e7f9119fd589e69075",
+      "identical": true
+    }
+  },
+  "validation": {
+    "python_discovery": {
+      "tests": 214,
+      "failures": 0
+    },
+    "python_scene": {
+      "tests": 23,
+      "failures": 0
+    },
+    "native_storage": {
+      "checks": 109,
+      "failures": 0
+    },
+    "native_lazy_loading": {
+      "checks": 217,
+      "failures": 0
+    },
+    "native_field_session": {
+      "checks": 331,
+      "failures": 0
+    },
+    "verifier_cli": "invalid-budget, resource-refusal and full verification pass",
+    "godot_import": "passes with local IPC access"
+  },
+  "initial_attempts": [
+    {
+      "check": "Python discovery",
+      "outcome": "One member-asset budget regression exposed removal of the existing 1 MiB analysis allowance; restored it and all 214 tests pass."
+    },
+    {
+      "check": "Scene validator default results directory",
+      "outcome": "Two tests encountered a retained SIMSCP3 small.ssc; fresh isolated SIMSCP4 fixtures pass all 23 tests."
+    },
+    {
+      "check": "Sandboxed Godot import",
+      "outcome": "Local socket/editor-settings access errors; permitted native import passes."
+    }
+  ],
+  "limits": [
+    "Synthetic metadata-boundary test, not a production 200 GB throughput/playback benchmark.",
+    "Memory charges are per-reader estimates, not process RSS guarantees.",
+    "One-million-record reader capacity remains; no paged/global directory added.",
+    "Earlier renderer/performance results are retained historical #103 evidence, not rerun by this correction."
+  ]
+}

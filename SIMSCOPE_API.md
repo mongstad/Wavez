@@ -63,7 +63,8 @@ broadcasting and implicit channel aliases are not part of `SceneCapture`.
 ```python
 from simscope_export import SceneReader
 
-reader = SceneReader(path, strict=True, cache_bytes=256 * 1024**2)
+reader = SceneReader(path, strict=True, cache_bytes=256 * 1024**2,
+                     metadata_bytes=512 * 1024**2)
 arrays = reader.read_sample(object_id, sample_index)
 bracket = reader.bracket(object_id, requested_time)
 value = reader.probe(volume_id, sample_index, channel, world_xyz)
@@ -77,6 +78,13 @@ sample index**, preserving source types. It reads all channels of that sample.
 Use `.copy()` for independent editable arrays. `reader.objects` maps IDs to object
 metadata; `reader.samples[id]` lists records for that object; `reader.records`
 retains file order; `reader.times` is the sorted union of times.
+
+`metadata_bytes` admits the retained index and parsing workspace separately from
+decoded arrays. Insufficient capacity raises `MetadataCapacityError` (exported
+from `simscope_export`, subclass of `MemoryError`), not an invalid-format error.
+Close/refusal releases owned index state; refresh re-admits it. There is no
+aggregate descriptor-byte export limit. See [reader budgets](docs/SSC_METADATA_BUDGET.md)
+for accounting, native configuration and analysis job limits.
 
 `bracket` returns `(a, b, alpha, status)` or `None`. It reports source indices and
 weight, not interpolated arrays. Static samples return `(0,0,0.0,"static")`;

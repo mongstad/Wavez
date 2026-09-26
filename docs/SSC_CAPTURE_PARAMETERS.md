@@ -66,7 +66,7 @@ Nonfinite positions and unsupported scientific dtypes are refused, not silently 
 Format-owned constants are not scientific tuning parameters: 4 MiB canonical
 contiguous chunks, mandatory per-volume statistics, 80-byte headers, 48-byte
 commits, SHA-256 checks, 1 MiB prefix metadata, 4 MiB descriptors, 256 MiB decoded
-samples, 32 MiB aggregate descriptor charge, at most one million records, 16
+samples, 16
 objects/one particle object, 256 arrays, 4096 chunks/array, grid dimensions 2–512,
 mesh limits one million vertices/two million triangles, particle limit ten million
 (also subject to 256 MiB/sample), and persistent identity lifetime limits. These
@@ -74,12 +74,20 @@ change refusal/capacity and structural overhead, not automatic sampling. Hitting
 a limit is a failed export and must be reported; reducing fidelity to evade it is
 a separate experiment. `storage.MAX_IDS` is one million distinct lifetime IDs.
 
+There is no aggregate descriptor-byte export ceiling. Reader metadata budgets
+and the separate million-record reader capacity are resource policies, not
+capture-fidelity settings or wire-format ceilings. `metadata_bytes` (Python),
+`Context.memory_bytes` (analysis total workspace), and native `metadata_limit` /
+`SIMSCOPE_METADATA_BUDGET_MIB` affect reader admission only: no solver, cadence,
+SSC structure/size, samples or playback temporal fidelity changes. See
+[metadata capacity](SSC_METADATA_BUDGET.md) for defaults and accounting.
+
 The existing codec implementation fixes zstd `window_log=22`,
 `content_size_flag=1`, `checksum_flag=1`, `nb_workers=0`; these affect format framing,
 bounds, export work and stored bytes, not source fidelity or cadence. They are
 unchanged in comparisons. No dictionary, quantizer or temporal predictor exists.
 
-`SceneReader(strict, cache_bytes)`, analysis memory limits, viewer cache/GPU budgets,
+`SceneReader(strict, cache_bytes, metadata_bytes)`, analysis memory limits, viewer cache/GPU budgets,
 selected channel, preparation interval, playback speed, interpolation, LOD and
 render quality are downstream controls. They do not change SSC samples or size.
 They do affect work, presentation, and potentially visible timing/spatial quality;
