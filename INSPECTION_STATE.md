@@ -154,3 +154,12 @@ graphics session for native GPU coverage. Use a fresh output directory per run;
 Use fresh directories. Actual screenshots/video require a graphics session and
 FFmpeg for MP4 encoding. Current inspection and export validation is recorded in
 the maintained regression tools and reports; retired formats are not current guidance.
+
+### Local video frame state (#116)
+
+Ordinary video-export sidecars use `source.kind = "simscope-export-source"` with
+UUID/header fingerprints, committed extent/counts and a high-resolution local
+filesystem stamp. They restore only against the same unchanged local source;
+they do not require a whole-source payload hash. This avoids an implicit extra
+100+ GiB pass when frame JSON is enabled. Explicit portable inspection recipes
+retain their existing SHA-256 contract. See [VIDEO_EXPORT.md](VIDEO_EXPORT.md).

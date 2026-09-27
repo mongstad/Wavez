@@ -23,8 +23,8 @@ unstarted and outside this contract.
 
 ## Using Export Video
 
-Open a capture and set its appearance/camera, then expand **Capture / Export →
-Export Video…**. Choose entire capture, current position to end, or custom start/end
+Open a capture and set its appearance/camera, then choose **File → Export →
+Video**. Choose entire capture, current position to end, or custom start/end
 in recorded capture-time units. Select 1080p, 1440p, 4K, or even custom dimensions;
 24/30/60 or custom integer FPS; and capture-time units per video second.
 
@@ -42,8 +42,8 @@ the current frame, or stops FFmpeg during encoding. **Run in background** hides
 the dialog and is enabled only while an export is preparing or running. **Cancel**
 closes the dialog without cancelling an active export; its tooltip makes this
 distinction explicit. Reopen through File → Export → Video or Jobs for progress.
-During selection-recipe preparation, the primary action is disabled until worker
-cancellation becomes available. Terminal jobs restore **Start Export** and disable
+During selection-recipe preparation, **Cancel export** requests cancellation of
+the existing background analysis job before any renderer is launched. Terminal jobs restore **Start Export** and disable
 **Run in background**. Closing the parent viewer still requests cancellation.
 The job directory retains `progress.json`,
 `renderer.log` (UI-launched workers) and `ffmpeg.log` for diagnosis. If writing the
@@ -110,6 +110,25 @@ overlay/section state, environment properties and viewport quality settings.
 No physics runs; capture access is read-only. Indexing freezes the available
 complete frames for that job instead of live-tailing the capture.
 
+## Current SIMSCP4 regression baseline (#116)
+
+[Current audit and validation](docs/VIDEO_REGRESSION.md) cover development-checkout
+exports after the SIMSCP4, caching, preparation and production-UI changes. Earlier
+measurements below retain their historical scope.
+
+The worker resolves the source sample/schema at the requested export start before
+restoring appearance. A particle or field channel introduced later in a capture
+therefore remains selectable for a segment starting there. A visible layer that
+fails display preparation (for example, mesh GPU budget or float32 field display
+range) fails the export with its layer/time/reason instead of publishing a video
+with that layer missing. Completed intermediates remain available for diagnosis.
+
+Offline readers retain strict payload checks for records they read. The worker
+uses the current synchronous scene sampler and bounded decoded cache; interactive
+preparation workers and startup gates are disabled. This does not prepare the
+whole capture or change its bytes, clocks, channel precision or cache architecture.
+Explicit whole-capture verification remains `python tools/verify_ssc.py CAPTURE.ssc`.
+
 ## Exact timing semantics
 
 For zero-based output frame n:
@@ -128,9 +147,10 @@ current-to-end ranges retain the exact float64 capture endpoints rather than
 rounding them to the displayed spinbox precision.
 
 Playback rate is in **recorded simulation/capture time units per video second**.
-It is not the interactive frames/second slider. For convenience the dialog's
-initial rate uses the current neighboring-frame interval × interactive FPS when
-that interval is positive. Check this rate for captures with irregular spacing.
+The dialog initializes it from the current positive playback speed, or 1×
+when the viewer is paused at zero speed or playing in reverse. “Current position
+to end” starts at the committed scene time, including mixed scenes whose particle,
+field and mesh clocks differ; an uncommitted seek target is not exported.
 
 Frames are located by a timestamp binary search. Duplicate, decreasing or
 nonfinite time axes are rejected for physical-time export. Positions interpolate
@@ -312,7 +332,8 @@ these controls. Scientific mode suppresses trails as before.
 
 ## v1.0.3 inspection extension
 
-UI-launched jobs pin the source SHA-256/committed extent and use the shared
+Ordinary UI-launched jobs bind local source identity and committed extent (see
+below), and use the shared
 physical-time sampler and visual-state module. Duplicate/reverse timestamps
 remain inspectable in index mode but cannot be physically interpolated/exported.
 The optional per-frame inspection JSON checkbox writes reproducible state records
@@ -322,9 +343,36 @@ See [INSPECTION_STATE.md](INSPECTION_STATE.md) for the state and geometry contra
 
 ### Source changes during export (G2a)
 
-A job still pins its committed extent and uses the existing end-exclusive timing.
-An append completed before the worker opens the capture does not expand that
-snapshot. If the source changes while the worker is rendering, validated generic
-reads fail the job and retain completed PNGs. Restart from the current source or
-export a stable copy. Inspection PNG/state capture also refuses a source/data
-mismatch. Cache metadata never replaces the committed-prefix SHA-256 identity.
+Ordinary exports bind SIMSCP4/version, capture UUID, metadata SHA-256, the ordered
+80-byte record-header fingerprint, indexed committed extent/record/frame counts,
+and the existing local filesystem stamp (device, inode, size, nanosecond mtime and
+ctime). Path is only a locator. Startup never reads/hashes the complete payload
+prefix. Stamps are checked before and after identity generation, on worker open,
+around every requested sample, after readback, during encoding and before MP4
+publication. Any change, including append or equal-size replacement, refuses the
+ordinary job; restart from the current source. There is no persistent trust store.
+The accepted reliable stamp implementation currently supports Linux local
+btrfs/ext2/ext3/ext4/xfs/tmpfs/overlayfs via `/usr/bin/stat`. Unsupported/coarse
+stamps fail explicitly, rather than falling back to a slow whole-file hash or
+path-only identity. This is a current platform limitation.
+
+This identity is a mutation binding, **not** a whole-capture integrity certificate.
+Every record actually decoded offline still validates descriptors, commit proofs,
+bounds, codecs, structure, stored-chunk and decoded-chunk SHA-256. Unused corrupt
+payloads need not block an unrelated clip. Use `tools/verify_ssc.py` explicitly to
+verify all records. Normal video inspection sidecars reuse the same local binding;
+restore requires that same unchanged source inode. They are not portable
+whole-source certificates. Explicit portable inspection/selection recipes retain
+their content-hash contract and pinned append semantics. Their existing analysis
+verification can still be long; the renderer no longer duplicates that hash before
+asking the portable validator to verify the recipe. Explicit SHA-bound jobs use a
+chunked cancellable verifier.
+
+Cancellation is checked during indexing, between record decode chunks and
+particle-ID batches, between explicit prefix-hash chunks, and at rendering/encoding
+boundaries. Individual codec/hash calls, field preparation, draw/readback and PNG
+writes remain bounded synchronous operations. Parent-close requests the same
+worker cancellation. `metrics.json` separates snapshot/worker identity, opening,
+sampling, readback, PNG and encoding timings. `SIMSCOPE_VIDEO_PROFILE=1` adds bounded
+strict-read/I/O/hash/decode counters; those nested timings overlap sampling/opening.
+See [the startup regression evidence](docs/VIDEO_STARTUP_116.md).

@@ -131,8 +131,11 @@ static func restore_scene(viewer, recipe: Dictionary) -> String:
 	if viewer.scene_layers == null or recipe.get("kind") != "simscope-inspection":return "Open the SIMSCP4 scene first."
 	if not recipe.get("source") is Dictionary or not recipe.get("visual") is Dictionary or not recipe.get("sample") is Dictionary:return "Missing scene inspection state."
 	var source: Dictionary = recipe.source
-	if not source.get("committed_bytes") is String or not source.committed_bytes.is_valid_int() or not source.get("sha256") is String or source.get("format") != "SIMSCP4":return "Invalid scene source identity."
-	if digest(viewer.capture_path,int(source.committed_bytes)) != source.sha256:return "Scene source identity mismatch; no state applied."
+	if preload("res://video/source_identity.gd").is_local(source):
+		if not preload("res://video/source_identity.gd").matches(viewer.generic_reader,source):return "Local export source changed; no state applied."
+	else:
+		if not source.get("committed_bytes") is String or not source.committed_bytes.is_valid_int() or not source.get("sha256") is String or source.get("format") != "SIMSCP4":return "Invalid scene source identity."
+		if digest(viewer.capture_path,int(source.committed_bytes)) != source.sha256:return "Scene source identity mismatch; no state applied."
 	if not recipe.get("layers") is Array or recipe.layers.size() != viewer.generic_reader.objects.size():return "Scene layer manifest differs."
 	var seen := {}
 	for layer in recipe.layers:

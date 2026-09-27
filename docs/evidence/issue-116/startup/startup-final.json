@@ -1,0 +1,365 @@
+{
+  "checks": [
+    {
+      "label": "Strict reader opens current fixture",
+      "ok": true
+    },
+    {
+      "label": "Local identity has no payload-prefix hash",
+      "ok": true
+    },
+    {
+      "label": "Metadata/header/stamp identity round trips",
+      "ok": true
+    },
+    {
+      "label": "JSON preserves identity including nanosecond stamps",
+      "ok": true
+    },
+    {
+      "label": "Path text never establishes identity",
+      "ok": true
+    },
+    {
+      "label": "Reject changed identity field: uuid",
+      "ok": true
+    },
+    {
+      "label": "Reject changed identity field: header_sha256",
+      "ok": true
+    },
+    {
+      "label": "Reject changed identity field: record_headers_sha256",
+      "ok": true
+    },
+    {
+      "label": "Reject changed identity field: committed_bytes",
+      "ok": true
+    },
+    {
+      "label": "Reject changed identity field: complete_records",
+      "ok": true
+    },
+    {
+      "label": "Reject changed identity field: complete_frames",
+      "ok": true
+    },
+    {
+      "label": "Reject changed identity field: format",
+      "ok": true
+    },
+    {
+      "label": "Reject changed identity field: version",
+      "ok": true
+    },
+    {
+      "label": "Byte-identical replacement inode is not the same local source",
+      "ok": true
+    },
+    {
+      "label": "Index scan cancellation stops before completion",
+      "ok": true
+    },
+    {
+      "label": "Strict sample read cancellation refuses a partial sample",
+      "ok": true
+    },
+    {
+      "ok": true,
+      "label": "Identity unit process passes"
+    },
+    {
+      "ok": true,
+      "label": "normal: no script errors/resource leaks"
+    },
+    {
+      "ok": true,
+      "label": "normal: complete"
+    },
+    {
+      "ok": true,
+      "label": "normal: Start Export returns within one second"
+    },
+    {
+      "ok": true,
+      "label": "normal: source bytes unchanged"
+    },
+    {
+      "ok": true,
+      "label": "normal: UI sends metadata identity, no whole-prefix hash"
+    },
+    {
+      "ok": true,
+      "label": "normal: sidecar reuses binding without another full hash"
+    },
+    {
+      "ok": true,
+      "label": "normal: local inspection frame restores on unchanged source"
+    },
+    {
+      "ok": true,
+      "label": "used-corruption: no script errors/resource leaks"
+    },
+    {
+      "ok": true,
+      "label": "used-corruption: failed"
+    },
+    {
+      "ok": true,
+      "label": "used-corruption: Start Export returns within one second"
+    },
+    {
+      "ok": true,
+      "label": "used-corruption: source bytes unchanged"
+    },
+    {
+      "ok": true,
+      "label": "used-corruption: no MP4 published"
+    },
+    {
+      "ok": true,
+      "label": "used-corruption: strict payload rejection"
+    },
+    {
+      "ok": true,
+      "label": "used-corruption: UI sends metadata identity, no whole-prefix hash"
+    },
+    {
+      "ok": true,
+      "label": "unused-corruption: no script errors/resource leaks"
+    },
+    {
+      "ok": true,
+      "label": "unused-corruption: complete"
+    },
+    {
+      "ok": true,
+      "label": "unused-corruption: Start Export returns within one second"
+    },
+    {
+      "ok": true,
+      "label": "unused-corruption: source bytes unchanged"
+    },
+    {
+      "ok": true,
+      "label": "unused-corruption: UI sends metadata identity, no whole-prefix hash"
+    },
+    {
+      "ok": true,
+      "label": "cancel-loading: no script errors/resource leaks"
+    },
+    {
+      "ok": true,
+      "label": "cancel-loading: cancelled"
+    },
+    {
+      "ok": true,
+      "label": "cancel-loading: Start Export returns within one second"
+    },
+    {
+      "ok": true,
+      "label": "cancel-loading: source bytes unchanged"
+    },
+    {
+      "ok": true,
+      "label": "cancel-loading: no MP4 published"
+    },
+    {
+      "ok": true,
+      "label": "cancel-loading: worker exits within two seconds"
+    },
+    {
+      "ok": true,
+      "label": "cancel-loading: UI sends metadata identity, no whole-prefix hash"
+    },
+    {
+      "ok": true,
+      "label": "mutate-rendering: no script errors/resource leaks"
+    },
+    {
+      "ok": true,
+      "label": "mutate-rendering: failed"
+    },
+    {
+      "ok": true,
+      "label": "mutate-rendering: Start Export returns within one second"
+    },
+    {
+      "ok": true,
+      "label": "mutate-rendering: source mutation refuses safely"
+    },
+    {
+      "ok": true,
+      "label": "mutate-rendering: no MP4 published"
+    },
+    {
+      "ok": true,
+      "label": "mutate-rendering: UI sends metadata identity, no whole-prefix hash"
+    },
+    {
+      "ok": true,
+      "label": "mutate-encoding: no script errors/resource leaks"
+    },
+    {
+      "ok": true,
+      "label": "mutate-encoding: failed"
+    },
+    {
+      "ok": true,
+      "label": "mutate-encoding: Start Export returns within one second"
+    },
+    {
+      "ok": true,
+      "label": "mutate-encoding: source mutation refuses safely"
+    },
+    {
+      "ok": true,
+      "label": "mutate-encoding: no MP4 published"
+    },
+    {
+      "ok": true,
+      "label": "mutate-encoding: UI sends metadata identity, no whole-prefix hash"
+    }
+  ],
+  "runs": [
+    {
+      "name": "normal",
+      "cancel_to_exit_ms": -1,
+      "directory": "/home/Nozba/Codex/SIMSCOPE/video-startup-116/startup-final/normal/.simscope-export-1790536418-1473906",
+      "first_frame_ms": 1680,
+      "launch_return_ms": 17,
+      "max_ui_tick_gap_ms": 23,
+      "message": "Complete \u2014 60 / 60 frames rendered (100%)\nElapsed: 00:00:02\nEstimated remaining: 00:00:00\nOutput: /home/Nozba/Codex/SIMSCOPE/video-startup-116/startup-final/normal/result.mp4\nTemporary files: /home/Nozba/Codex/SIMSCOPE/video-startup-116/startup-final/normal/.simscope-export-1790536418-1473906",
+      "progress": {
+        "current_frame": 60.0,
+        "elapsed_seconds": 2.532,
+        "encoder_pid": -1.0,
+        "intermediate_directory": "/home/Nozba/Codex/SIMSCOPE/video-startup-116/startup-final/normal/.simscope-export-1790536418-1473906",
+        "message": "Saved /home/Nozba/Codex/SIMSCOPE/video-startup-116/startup-final/normal/result.mp4",
+        "output_path": "/home/Nozba/Codex/SIMSCOPE/video-startup-116/startup-final/normal/result.mp4",
+        "renderer_pid": 242111.0,
+        "stage": "complete",
+        "total_frames": 60.0
+      },
+      "restore_error": "",
+      "stage": "complete",
+      "ui_ticks": 590,
+      "worker_ready_ms": 1493
+    },
+    {
+      "name": "used-corruption",
+      "cancel_to_exit_ms": -1,
+      "directory": "/home/Nozba/Codex/SIMSCOPE/video-startup-116/startup-final/used-corruption/.simscope-export-1790536424-1442120",
+      "first_frame_ms": 1679,
+      "launch_return_ms": 17,
+      "max_ui_tick_gap_ms": 22,
+      "message": "Failed \u2014 15 / 60 frames rendered (25%)\nElapsed: 00:00:00\nEstimated remaining: Unavailable\nfield sample 2 (record 2): Stored scene chunk checksum. Reopen or re-export the capture.\nOutput: /home/Nozba/Codex/SIMSCOPE/video-startup-116/startup-final/used-corruption/result.mp4\nTemporary files: /home/Nozba/Codex/SIMSCOPE/video-startup-116/startup-final/used-corruption/.simscope-export-1790536424-1442120",
+      "progress": {
+        "current_frame": 15.0,
+        "elapsed_seconds": 0.72,
+        "encoder_pid": -1.0,
+        "intermediate_directory": "/home/Nozba/Codex/SIMSCOPE/video-startup-116/startup-final/used-corruption/.simscope-export-1790536424-1442120",
+        "message": "field sample 2 (record 2): Stored scene chunk checksum. Reopen or re-export the capture.",
+        "output_path": "/home/Nozba/Codex/SIMSCOPE/video-startup-116/startup-final/used-corruption/result.mp4",
+        "renderer_pid": 243628.0,
+        "stage": "failed",
+        "total_frames": 60.0
+      },
+      "stage": "failed",
+      "ui_ticks": 302,
+      "worker_ready_ms": 1492
+    },
+    {
+      "name": "unused-corruption",
+      "cancel_to_exit_ms": -1,
+      "directory": "/home/Nozba/Codex/SIMSCOPE/video-startup-116/startup-final/unused-corruption/.simscope-export-1790536427-1419468",
+      "first_frame_ms": 1680,
+      "launch_return_ms": 18,
+      "max_ui_tick_gap_ms": 23,
+      "message": "Complete \u2014 6 / 6 frames rendered (100%)\nElapsed: 00:00:00\nEstimated remaining: 00:00:00\nOutput: /home/Nozba/Codex/SIMSCOPE/video-startup-116/startup-final/unused-corruption/result.mp4\nTemporary files: /home/Nozba/Codex/SIMSCOPE/video-startup-116/startup-final/unused-corruption/.simscope-export-1790536427-1419468",
+      "progress": {
+        "current_frame": 6.0,
+        "elapsed_seconds": 0.671,
+        "encoder_pid": -1.0,
+        "intermediate_directory": "/home/Nozba/Codex/SIMSCOPE/video-startup-116/startup-final/unused-corruption/.simscope-export-1790536427-1419468",
+        "message": "Saved /home/Nozba/Codex/SIMSCOPE/video-startup-116/startup-final/unused-corruption/result.mp4",
+        "output_path": "/home/Nozba/Codex/SIMSCOPE/video-startup-116/startup-final/unused-corruption/result.mp4",
+        "renderer_pid": 243947.0,
+        "stage": "complete",
+        "total_frames": 6.0
+      },
+      "stage": "complete",
+      "ui_ticks": 302,
+      "worker_ready_ms": 1493
+    },
+    {
+      "name": "cancel-loading",
+      "cancel_to_exit_ms": 394,
+      "directory": "/home/Nozba/Codex/SIMSCOPE/video-startup-116/startup-final/cancel-loading/.simscope-export-1790536431-1414749",
+      "first_frame_ms": -1,
+      "launch_return_ms": 16,
+      "max_ui_tick_gap_ms": 21,
+      "message": "Cancelled \u2014 0 / 60 frames rendered (0%)\nElapsed: 00:00:00\nEstimated remaining: Unavailable\nExport cancelled during source preparation.\nOutput: /home/Nozba/Codex/SIMSCOPE/video-startup-116/startup-final/cancel-loading/result.mp4\nTemporary files: /home/Nozba/Codex/SIMSCOPE/video-startup-116/startup-final/cancel-loading/.simscope-export-1790536431-1414749",
+      "progress": {
+        "current_frame": 0.0,
+        "elapsed_seconds": 0.219,
+        "encoder_pid": -1.0,
+        "intermediate_directory": "/home/Nozba/Codex/SIMSCOPE/video-startup-116/startup-final/cancel-loading/.simscope-export-1790536431-1414749",
+        "message": "Export cancelled during source preparation.",
+        "output_path": "/home/Nozba/Codex/SIMSCOPE/video-startup-116/startup-final/cancel-loading/result.mp4",
+        "renderer_pid": 244355.0,
+        "stage": "cancelled",
+        "total_frames": 60.0
+      },
+      "stage": "cancelled",
+      "ui_ticks": 241,
+      "worker_ready_ms": -1
+    },
+    {
+      "name": "mutate-rendering",
+      "cancel_to_exit_ms": -1,
+      "directory": "/home/Nozba/Codex/SIMSCOPE/video-startup-116/startup-final/mutate-rendering/.simscope-export-1790536435-1405787",
+      "first_frame_ms": 1674,
+      "launch_return_ms": 16,
+      "max_ui_tick_gap_ms": 22,
+      "message": "Failed \u2014 1 / 60 frames rendered (1%)\nElapsed: 00:00:00\nEstimated remaining: Unavailable\nSource changed during export; no MP4 published. Intermediates retained.\nOutput: /home/Nozba/Codex/SIMSCOPE/video-startup-116/startup-final/mutate-rendering/result.mp4\nTemporary files: /home/Nozba/Codex/SIMSCOPE/video-startup-116/startup-final/mutate-rendering/.simscope-export-1790536435-1405787",
+      "progress": {
+        "current_frame": 1.0,
+        "elapsed_seconds": 0.451,
+        "encoder_pid": -1.0,
+        "intermediate_directory": "/home/Nozba/Codex/SIMSCOPE/video-startup-116/startup-final/mutate-rendering/.simscope-export-1790536435-1405787",
+        "message": "Source changed during export; no MP4 published. Intermediates retained.",
+        "output_path": "/home/Nozba/Codex/SIMSCOPE/video-startup-116/startup-final/mutate-rendering/result.mp4",
+        "renderer_pid": 244482.0,
+        "stage": "failed",
+        "total_frames": 60.0
+      },
+      "stage": "failed",
+      "ui_ticks": 301,
+      "worker_ready_ms": -1
+    },
+    {
+      "name": "mutate-encoding",
+      "cancel_to_exit_ms": -1,
+      "directory": "/home/Nozba/Codex/SIMSCOPE/video-startup-116/startup-final/mutate-encoding/.simscope-export-1790536439-1479418",
+      "first_frame_ms": 1695,
+      "launch_return_ms": 18,
+      "max_ui_tick_gap_ms": 25,
+      "message": "Failed \u2014 60 / 60 frames rendered (100%)\nElapsed: 00:00:01\nEstimated remaining: Unavailable\nSource changed during export; no MP4 published. Intermediates retained.\nOutput: /home/Nozba/Codex/SIMSCOPE/video-startup-116/startup-final/mutate-encoding/result.mp4\nTemporary files: /home/Nozba/Codex/SIMSCOPE/video-startup-116/startup-final/mutate-encoding/.simscope-export-1790536439-1479418",
+      "progress": {
+        "current_frame": 60.0,
+        "elapsed_seconds": 1.731,
+        "encoder_pid": 245368.0,
+        "intermediate_directory": "/home/Nozba/Codex/SIMSCOPE/video-startup-116/startup-final/mutate-encoding/.simscope-export-1790536439-1479418",
+        "message": "Source changed during export; no MP4 published. Intermediates retained.",
+        "output_path": "/home/Nozba/Codex/SIMSCOPE/video-startup-116/startup-final/mutate-encoding/result.mp4",
+        "renderer_pid": 244671.0,
+        "stage": "failed",
+        "total_frames": 60.0
+      },
+      "stage": "failed",
+      "ui_ticks": 484,
+      "worker_ready_ms": 1695
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+	"cancel_to_exit_ms": -1,
+	"directory": "/home/Nozba/Codex/SIMSCOPE/video-startup-116/after-full/.simscope-export-1790536100-2337258",
+	"first_frame_ms": 4088,
+	"launch_return_ms": 37,
+	"max_ui_tick_gap_ms": 47,
+	"message": "Complete — 1200 / 1200 frames rendered (100%)\nElapsed: 00:03:50\nEstimated remaining: 00:00:00\nOutput: /home/Nozba/Codex/SIMSCOPE/video-startup-116/after-full/result.mp4\nTemporary files: /home/Nozba/Codex/SIMSCOPE/video-startup-116/after-full/.simscope-export-1790536100-2337258",
+	"progress": {
+		"current_frame": 1200.0,
+		"elapsed_seconds": 230.14,
+		"encoder_pid": -1.0,
+		"intermediate_directory": "/home/Nozba/Codex/SIMSCOPE/video-startup-116/after-full/.simscope-export-1790536100-2337258",
+		"message": "Saved /home/Nozba/Codex/SIMSCOPE/video-startup-116/after-full/result.mp4",
+		"output_path": "/home/Nozba/Codex/SIMSCOPE/video-startup-116/after-full/result.mp4",
+		"renderer_pid": 217189.0,
+		"stage": "complete",
+		"total_frames": 1200.0
+	},
+	"stage": "complete",
+	"ui_ticks": 33646,
+	"worker_ready_ms": 3881
+}

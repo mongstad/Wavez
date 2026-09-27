@@ -1,0 +1,60 @@
+{
+  "issue": 116,
+  "pr": 122,
+  "status": "pending owner review",
+  "baseline": "ffa5e95ba23047c0bab743ea63e18081f1872935",
+  "suites": [
+    {
+      "name": "current-forward",
+      "checks": 235,
+      "failures": 0
+    },
+    {
+      "name": "current-gl",
+      "checks": 225,
+      "failures": 0
+    },
+    {
+      "name": "startup-final",
+      "checks": 55,
+      "failures": 0
+    },
+    {
+      "name": "status",
+      "checks": 124,
+      "failures": 0
+    },
+    {
+      "name": "g4-render",
+      "checks": 44,
+      "failures": 0
+    },
+    {
+      "name": "g4-failures",
+      "checks": 20,
+      "failures": 0
+    },
+    {
+      "name": "full-video",
+      "checks": 142,
+      "failures": 0
+    },
+    {
+      "name": "overlay-gl",
+      "checks": 111,
+      "failures": 0
+    }
+  ],
+  "checks": 956,
+  "failures": 0,
+  "production_frames": 1200,
+  "all_frames_full_quality": true,
+  "environment": {
+    "godot": "4.7.2 ed1daf0bf",
+    "backend": "Forward+ Vulkan",
+    "gpu": "NVIDIA RTX 3070 Ti",
+    "driver": "615.71.09",
+    "ffmpeg": "8.1.3"
+  },
+  "external_artifacts": "/home/Nozba/Codex/SIMSCOPE/video-startup-116"
+}
