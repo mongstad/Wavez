@@ -21,11 +21,32 @@ func ready(viewer):
 	check(not viewer.scene_layers.is_buffering(),"Preparation completes")
 	viewer.shell.status_ui.refresh()
 func picture(name): root.get_texture().get_image().save_png(output.path_join(name+".png"))
+func locked_fields(node: Node) -> bool:
+	for child in node.get_children():
+		if child is SpinBox or child is LineEdit:
+			if child.editable:return false
+		elif child is BaseButton:
+			if not child.disabled:return false
+		elif not locked_fields(child):return false
+	return true
+func setting_choice(video, label: String) -> OptionButton:
+	for i in range(video.fields.get_child_count()-1):
+		var node = video.fields.get_child(i)
+		if node is Label and node.text == label:return video.fields.get_child(i+1)
+	return null
+func check_active_export(video, label: String):
+	check(locked_fields(video.fields),label+": every setting, including Browse, is locked")
+	check(not video.close_button.visible and video.background_button.visible and not video.background_button.disabled,label+": only background dismiss action is visible")
+func check_idle_export(video, label: String):
+	check(video.output.editable and video.rate.editable and not video.range_choice.disabled and not video.quality.disabled and not video.keep.disabled and video.g4_quota.editable,label+": settings editable again")
+	check(video.start.editable and video.end.editable and not video.width.editable and not video.height.editable and not video.fps.editable,label+": custom range and preset dimension/FPS policies restored")
+	check(video.close_button.visible and not video.background_button.visible,label+": dismiss restored, background hidden")
 func wait_video(video):
 	var deadline := Time.get_ticks_msec()+60000
 	while video.pid > 0 and Time.get_ticks_msec()<deadline: await create_timer(.05).timeout
 	check(video.pid <= 0,"Video worker terminates")
 	check(video.start_button.text == "Start Export" and not video.start_button.disabled and video.background_button.disabled,"Terminal export restores Start and disables background action")
+	check_idle_export(video,"Terminal "+str(video.job_status.stage))
 func configure_video(viewer, name: String, encoder: String, end_time := .2):
 	var video = viewer.video_dialog
 	video.open(); video.range_choice.select(2); video.update_range()
@@ -169,28 +190,53 @@ func run():
 	video.close_button.pressed.emit()
 	check(not video.visible and video.pid <= 0,"Idle Cancel closes without launching work")
 	video.open()
+	check_idle_export(video,"Before export")
 	# Presentation-state injection: selection-recipe preparation has no worker yet.
 	video.preparing = true; video._sync_action_buttons()
+	check_active_export(video,"Preparation")
 	var preparing_timeline = video.timeline
 	video.open()
 	check(video.timeline == preparing_timeline and video.start_button.text == "Cancel export" and not video.start_button.disabled and not video.background_button.disabled,"Preparation preserves draft and exposes background and cooperative cancellation")
 	video.start_button.pressed.emit()
 	check(video.preparation_cancelled and video.job_status.stage == "cancelling","Preparation action requests background cancellation")
 	video.preparing = false; video._sync_action_buttons()
+	check_idle_export(video,"Cancelled preparation")
+	var resolution := setting_choice(video,"Resolution")
+	var frame_rate := setting_choice(video,"Frame rate")
+	resolution.select(3);resolution.item_selected.emit(3)
+	frame_rate.select(3);frame_rate.item_selected.emit(3)
+	video.range_choice.select(0);video.update_range()
+	video.preparing = true;video._sync_action_buttons()
+	check_active_export(video,"Custom resolution/FPS preparation")
+	video.preparing = false;video._sync_action_buttons()
+	check(video.width.editable and video.height.editable and video.fps.editable and not video.start.editable and not video.end.editable,"Custom dimensions/FPS and non-custom range restore their distinct idle policies")
+	resolution.select(0);resolution.item_selected.emit(0)
+	frame_rate.select(1);frame_rate.item_selected.emit(1)
+	video.width.value = 128;video.height.value = 128
+	video.range_choice.select(2);video.update_range();video.start.value = 0;video.end.value = 6
 	await settle(); video.get_child(0).ensure_control_visible(video.close_button); await settle()
 	check(Rect2(Vector2.ZERO,Vector2(video.size)).encloses(video.close_button.get_global_rect()),"Idle action row reachable by scrolling")
 	video.get_texture().get_image().save_png(output.path_join("export-idle.png"))
+	var idle_secondary_x: float = video.close_button.position.x
+	var idle_row_width: float = video.close_button.get_parent().size.x
 	video.start_button.pressed.emit(); ui.refresh(); var pid: int = video.pid
+	check_active_export(video,"Immediate launch")
+	var job_hash := FileAccess.get_sha256(video.active_job_path)
+	var running_settings: Dictionary = video.settings()
+	video.save_dialog.file_selected.emit(output.path_join("late-picker.mp4"))
+	check(video.settings() == running_settings,"Late file-picker callback cannot mutate active configuration")
 	check(pid > 0 and ui.active_count == 1,"UI launch is counted as one running video job")
 	check(video.start_button.text == "Cancel export" and not video.start_button.disabled and not video.background_button.disabled,"Running export switches primary action and enables background")
-	await settle(); video.get_child(0).ensure_control_visible(video.close_button); await settle()
-	check(Rect2(Vector2.ZERO,Vector2(video.size)).encloses(video.close_button.get_global_rect()),"Running action row reachable by scrolling")
+	await settle(); video.get_child(0).ensure_control_visible(video.background_button); await settle()
+	check(Rect2(Vector2.ZERO,Vector2(video.size)).encloses(video.background_button.get_global_rect()),"Running action row reachable by scrolling")
+	check(video.background_button.position.x == idle_secondary_x and video.background_button.get_parent().size.x == idle_row_width,"Action row keeps secondary position and width across launch")
 	video.get_texture().get_image().save_png(output.path_join("export-running.png"))
 	video.background_button.pressed.emit()
 	check(not video.visible and video.pid == pid and not FileAccess.file_exists(video.active_directory.path_join("cancel")),"Run in background hides without cancellation or restart")
 	ui.open_jobs(); ui.reopen_video(); check(video.pid == pid and video.visible,"Jobs reopens original running export without restarting")
-	video.close_button.pressed.emit()
-	check(not video.visible and video.pid == pid and not FileAccess.file_exists(video.active_directory.path_join("cancel")),"Running Cancel closes only the dialog")
+	check_active_export(video,"Jobs reopen")
+	check(video.settings() == running_settings and FileAccess.get_sha256(video.active_job_path) == job_hash,"Background/reopen and blocked picker preserve visible and worker configuration")
+	video.background_button.pressed.emit()
 	ui.open_jobs(); ui.job_rows["Video export"].details.pressed.emit()
 	var initial_detail: String = viewer.shell.detail_text.text
 	deadline = Time.get_ticks_msec()+15000
@@ -215,6 +261,10 @@ func run():
 	picture("complete-details")
 	viewer.shell.details.hide()
 	check(ui.active_count == 0 and FileAccess.file_exists(output.path_join("complete.mp4")),"Completion clears active count and retains output")
+	check(FileAccess.get_sha256(video.active_job_path) == job_hash,"Running job configuration is immutable through completion")
+	ui.reopen_video(); await settle();video.get_child(0).ensure_control_visible(video.close_button);await settle()
+	video.get_texture().get_image().save_png(output.path_join("export-complete.png"))
+	video.close_button.pressed.emit();check(not video.visible,"Successful terminal Cancel dismisses the dialog")
 	var terminal: Dictionary = video.job_status.duplicate(true)
 	ui.open_jobs(); await settle(); picture("jobs-complete")
 	ui.job_rows["Video export"].details.pressed.emit(); await settle()
@@ -234,6 +284,9 @@ func run():
 	check(viewer.shell.detail_text.text == completed_detail,"A later export cannot overwrite the terminal Details view")
 	viewer.shell.details.hide()
 	check(DirAccess.dir_exists_absolute(video.active_directory),"Cancelled intermediates retained")
+	video = configure_video(viewer,"second-success",config.ffmpeg)
+	video.start_button.pressed.emit();await wait_video(video)
+	check(video.job_status.stage == "complete" and FileAccess.file_exists(output.path_join("second-success.mp4")),"Edited settings launch and complete another export after terminal cleanup")
 	video = configure_video(viewer,"primary-cancel",config.ffmpeg,6)
 	video.start_button.pressed.emit(); pid = video.pid
 	video.start_button.pressed.emit()

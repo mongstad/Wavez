@@ -1,0 +1,16 @@
+{
+  "activity": {
+    "counters": {},
+    "stages": {}
+  },
+  "checks": 164,
+  "failures": [],
+  "parent_directory": "/home/Nozba/Codex/SIMSCOPE/video-ux-125/forward-final/.simscope-export-1790539576-21285350",
+  "timings": {
+    "refresh_1000_ms": 29.201
+  },
+  "parent_close_acknowledged": true,
+  "source_hashes_unchanged": {
+    "/home/Nozba/Codex/SIMSCOPE/video-ux-125/forward-final/scene.ssc": "3a4dcd8f72a29d0aa727248b09005c04d45d53c99a104192f89b00cee4c3489a"
+  }
+}
