@@ -247,6 +247,13 @@ PNG sequences can be encoded with FFmpeg/H.264. Missing FFmpeg leaves useful PNG
 
 ## Storage and performance
 
+While playback is paused, an unchanged view redraws only when needed. Input,
+preparation and status updates remain active. Paused Auto orbit renders at up to
+60 FPS (or a lower existing frame cap); its angular speed still follows elapsed
+time. Play restores the previous frame cap. Scientific samples, field resolution,
+rendering settings and deterministic exports are unchanged by this policy.
+See [paused rendering](PAUSED_RENDERING.md) for measured behavior and limits.
+
 Typed SIMSCP4 channels preserve supported source bytes with optional lossless Zstandard. Compression is a storage choice, not a promise of faster playback. Normal viewer opening checks the format, object metadata and bounded fixed-size record headers, then loads the initial visible samples. It does not parse every future descriptor or build/write a full descriptor index. Requested reads retain descriptor/commit hashes, schema/bounds checks and bounded decoding, including background lookahead. Interactive playback skips stored/raw payload SHA comparisons. Readable payload corruption can therefore display incorrect scientific values without an error, including in native source probes. Run the [explicit integrity verifier](PLAYBACK_INTEGRITY.md) to check the whole capture. Python readers/analysis and offline video export retain strict payload checks. Decoded LRUs and source-generation checks still invalidate changed sources; file paths/stamps are not proof of integrity. No legacy format or sidecar reader is included.
 
 The scene inspector's **Particle playback buffer** separates decoded sample RAM, prepared pair RAM and current GPU resources. **Automatic (safe RAM)** uses a rolling cache capped at 2 GiB and safe physical-RAM headroom, with up to eight requested pairs including the current pair. Opening presents the initial scene immediately after its required samples are ready; controls do not wait for background preparation. Uncached seeks retain the previous committed scene and wait only for the requested samples. Rapid seeks replace obsolete work; reverse playback and **Loop recorded interval** reorder the bounded window. Loop defaults off. Hidden particles skip preparation unless a guide, inspection or reveal needs their data.

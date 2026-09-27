@@ -15,8 +15,9 @@ Continuous SSC playback preparation was owner-merged in PR #101 at `573c097`.
 SSC generation and adaptive playback caching were owner-merged in PR #103 at
 `6d4df9a`. Playback integrity policy was owner-merged in PR #108 at `d9876ee`.
 Bounded parallel field preparation was owner-merged in PR #110 at `7dc253e`.
-Current authorized work is #111, the only Ready item when selected on 2026-09-27:
-[dynamic field preparation](DYNAMIC_FIELD_PREPARATION.md), **pending owner review**.
+Dynamic field preparation was owner-merged in PR #113 at `0b3d3b4`.
+Current authorized work is #118, the only Ready item when selected on 2026-09-27:
+[paused rendering](PAUSED_RENDERING.md), **pending owner review**.
 Field preparation uses a small CPU pool with ordered publication and explicit
 in-flight memory reservations. Auto starts conservatively and changes active
 concurrency within a CPU-count-bounded pool of at most four lanes, using measured

@@ -8,6 +8,7 @@ extends Node3D
 
 const TRAIL_LAYERS := 5
 const DISPLAY_HZ := 30.0
+const PAUSED_ORBIT_MAX_FPS := 60
 const Profile = preload("res://scene/playback_profile.gd")
 const Normalization = preload("res://scene/normalization.gd")
 const Geometry = preload("res://scene/geometry.gd")
@@ -132,6 +133,9 @@ var legend: Label
 var tail_poll := 0.0
 
 var offline_instance := false
+# Rendering policy belongs to the interactive viewer, never an offline worker.
+var _previous_low_processor_mode: Variant = null
+var _previous_max_fps := 0
 var video_dialog
 var screenshot_directory := ""
 var screenshot_dialog: FileDialog
@@ -411,9 +415,33 @@ func _read_frame_profiled(index: int) -> FrameData:
 	return scene_layers.particle_frame_at_union(index) if scene_layers != null else null
 
 func _process(delta: float) -> void:
+	_update_render_pacing()
 	var started := Profile.begin()
 	_process_profiled(delta)
 	Profile.end("process_inclusive",started)
+
+func _update_render_pacing() -> void:
+	if offline_instance:
+		_restore_render_pacing()
+		return
+	if _previous_low_processor_mode == null:
+		_previous_low_processor_mode = OS.low_processor_usage_mode
+		_previous_max_fps = Engine.max_fps
+	# Godot still processes input, workers and UI; it draws when render state
+	# changes. Intentional paused orbit still draws, with bounded presentation
+	# demand. Neither policy changes the recorded clock or camera speed.
+	var camera_animating := orbit_enabled and not dragging and orbit_speed != 0.0
+	OS.low_processor_usage_mode = bool(_previous_low_processor_mode) or (not playing and not camera_animating)
+	var frame_cap := _previous_max_fps
+	if not playing and camera_animating:
+		frame_cap = mini(frame_cap,PAUSED_ORBIT_MAX_FPS) if frame_cap > 0 else PAUSED_ORBIT_MAX_FPS
+	Engine.max_fps = frame_cap
+
+func _restore_render_pacing() -> void:
+	if _previous_low_processor_mode == null:return
+	OS.low_processor_usage_mode = bool(_previous_low_processor_mode)
+	Engine.max_fps = _previous_max_fps
+	_previous_low_processor_mode = null
 
 func _process_profiled(delta: float) -> void:
 	if offline_instance or inspection_busy or inspection_paused: return
@@ -421,7 +449,7 @@ func _process_profiled(delta: float) -> void:
 		scene_layers.tick(delta)
 		return
 	_move_free_camera(delta)
-	if orbit_enabled and not dragging:
+	if orbit_enabled and not dragging and orbit_speed != 0.0:
 		yaw += delta * orbit_speed
 		_update_camera()
 
@@ -997,6 +1025,7 @@ func _step_frame(direction: int) -> void:
 func _move_free_camera(delta: float) -> void:
 	if not free_camera or get_viewport().gui_get_focus_owner() != null: return
 	var move := Vector3(float(Input.is_physical_key_pressed(KEY_D)) - float(Input.is_physical_key_pressed(KEY_A)), float(Input.is_physical_key_pressed(KEY_E)) - float(Input.is_physical_key_pressed(KEY_Q)), float(Input.is_physical_key_pressed(KEY_S)) - float(Input.is_physical_key_pressed(KEY_W)))
+	if move == Vector3.ZERO:return
 	camera_target += camera.global_basis * move * delta * maxf(1, camera_distance * .5)
 	_update_camera()
 
@@ -1690,5 +1719,6 @@ func _sync_generic_source() -> bool:
 	return scene_layers.refresh() if scene_layers != null else false
 
 func _exit_tree() -> void:
+	_restore_render_pacing()
 	if scene_layers != null:scene_layers.close()
 	if generic_reader != null: generic_reader.close()
