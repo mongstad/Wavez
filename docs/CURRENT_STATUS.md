@@ -18,9 +18,10 @@ Bounded parallel field preparation was owner-merged in PR #110 at `7dc253e`.
 Dynamic field preparation was owner-merged in PR #113 at `0b3d3b4`.
 Paused rendering was owner-merged in PR #119 at `788de5d`.
 Current video-export regression and startup corrections were owner-merged in
-PR #122 at `f867248`. Current authorized work is #125, the only Ready item when
-selected: [locking export settings and simplifying active-job actions](VIDEO_EXPORT_LOCKS.md),
-**pending owner review**. Historical #116 review-time reports remain unchanged.
+PR #122 at `f867248`. Export-setting locks and active-job actions (#125) were
+owner-merged in PR #126 at `e26af1e`. Current authorized work is #115, the only
+Ready item when selected: [clearer, compact legend content](LEGEND_CONTENT_LAYOUT.md),
+**pending owner review**. Historical review-time reports remain unchanged.
 Field preparation uses a small CPU pool with ordered publication and explicit
 in-flight memory reservations. Auto starts conservatively and changes active
 concurrency within a CPU-count-bounded pool of at most four lanes, using measured

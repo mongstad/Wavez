@@ -960,14 +960,14 @@ func _build_inspector_controls() -> void:
 	_check(tools_ui.form("Mapping"), "Clamp out-of-range values", true, func(v: bool): clamp_map = v; _restyle())
 	_check(generic_box, "Show legend", true, func(v: bool): show_legend = v; _restyle())
 	colorbar = TextureRect.new()
-	colorbar.custom_minimum_size = Vector2(0, 18)
+	colorbar.custom_minimum_size = Vector2(0, 14)
 	colorbar.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	canvas.add_child(colorbar)
 	colorbar.position = Vector2(1060, 818)
-	colorbar.size = Vector2(340, 18)
+	colorbar.size = Vector2(340, 14)
 	colorbar.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	legend = Label.new()
-	legend.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	preload("res://ui/shell/legend_text.gd").configure(legend)
 	canvas.add_child(legend)
 	legend.position = Vector2(1060, 842)
 	legend.size = Vector2(340, 90)
@@ -1325,9 +1325,14 @@ func _update_particle_legend() -> void:
 	legend.visible = scene_layers != null and not scene_layers.particle_id.is_empty() and particle_layer_visible and show_legend and color_channel not in ["fixed", "visual_color"] and not (offline_instance and not overlay_visible)
 	colorbar.visible = legend.visible
 	colorbar.flip_h = invert_map
-	legend.text = "%s • %s\n%.5f → %.5f • %s%s" % [color_channel, colormap_name, range_min, range_max, {"frame":"auto per frame","symmetric":"auto symmetric","manual":"fixed manual","interval":"fixed interval"}[_effective_normalization()], " • cyclic" if cyclic else (" • log" if logarithmic else " • linear")] if color_channel not in ["fixed","visual_color"] else ""
-	if color_channel not in ["fixed","visual_color"] and (not is_finite(range_min) or not is_finite(range_max) or range_max < range_min): legend.text = color_channel + " • no valid range"
-	if scene_layers != null and not legend.text.is_empty(): legend.text = "Particles • " + scene_layers.particle_id + "\n" + legend.text
+	legend.text = ""
+	if scene_layers != null and color_channel not in ["fixed","visual_color"]:
+		var bounds := "%.5f → %.5f" % [range_min,range_max]
+		if not is_finite(range_min) or not is_finite(range_max) or range_max < range_min:bounds = "no valid range"
+		legend.text = preload("res://ui/shell/legend_text.gd").content(scene_layers.particle_id,color_channel,colormap_name,bounds,
+			"cyclic" if cyclic else ("log" if logarithmic else "linear"),
+			Normalization.LABELS[Normalization.MODES.find(_effective_normalization())])
+	legend.tooltip_text = legend.text
 	if shell != null and shell.layer_legends != null:
 		shell.layer_legends.sync(); shell.reposition_legend()
 

@@ -5,6 +5,7 @@ var checks := 0
 var failures: Array[String] = []
 var viewer
 var output := ""
+var layout_evidence := {}
 func _initialize() -> void: run.call_deferred()
 func check(ok: bool, label: String) -> void:
 	checks += 1
@@ -29,13 +30,26 @@ func run() -> void:
 	var card: Rect2 = viewer.shell.particle_legend_panel.get_rect()
 	check(is_equal_approx(viewer.overlay_panel.position.x-card.end.x,12.0) and is_equal_approx(viewer.shell.transport.position.y-card.end.y,12.0), "Horizontal gap matches unchanged 12-pixel vertical gap")
 	check(viewer.shell.particle_legend_panel.visible and viewer.shell.particle_legend_panel.get_rect().encloses(viewer.legend.get_rect()), "Particle text enclosed by visible card")
-	check("Particles • p" in viewer.legend.text and "plasma" in viewer.legend.text, "Particle identity and mapping")
-	check("Field • volume0" in collection.entries.volume0.label.text and "coolwarm" in collection.entries.volume0.label.text and "-1" in collection.entries.volume0.label.text, "Field identity and active range")
-	check("Mesh • mesh1" in collection.entries.mesh1.label.text, "Additional mesh legend")
+	check("Object: p" in viewer.legend.text and "plasma" in viewer.legend.text, "Particle identity and mapping")
+	check("Object: volume0" in collection.entries.volume0.label.text and "coolwarm" in collection.entries.volume0.label.text and "-1" in collection.entries.volume0.label.text, "Field identity and active range")
+	check("Object: mesh1" in collection.entries.mesh1.label.text, "Additional mesh legend")
+	for id in collection.entries:
+		var text: String = collection.entries[id].label.text
+		check(text.contains("Object: "+id) and text.contains("Channel: ") and text.contains("Colormap: ") and text.contains("Color range: ") and text.contains("(linear)"),"Explicit labeled content for "+id)
+		check(collection.entries[id].label.get_line_count() == 2 and collection.entries[id].card.size.y <= 80,"Two-row compact card for "+id)
+	check(viewer.legend.get_line_count() == 3 and viewer.legend.text.contains("Range policy: Automatic • per frame"),"Particle policy remains distinct in a compact third row")
+	check(collection.stack.get_theme_constant("separation") == 6,"Subtle six-pixel card spacing")
+	for id in collection.entries:
+		check(is_equal_approx(collection.entries[id].card.size.x,card.size.x),"Layer and particle card widths match: "+id)
+		check(is_equal_approx(collection.entries[id].card.global_position.x,viewer.shell.particle_legend_panel.global_position.x),"Layer and particle left edges match: "+id)
+	layout_evidence.field_card_width = collection.entries.volume0.card.size.x
+	layout_evidence.particle_card_width = card.size.x
+	layout_evidence.field_card_height = collection.entries.volume0.card.size.y
+	layout_evidence.particle_card_height = viewer.shell.particle_legend_panel.size.y
 	check(collection.entries.volume0.bar.texture == layers.lut("coolwarm"), "Legend uses layer colormap LUT")
 	check(collection.size.y <= viewer.shell.legend_available.y*.4+1, "Collection height bounded")
 	collection.ensure_control_visible(collection.entries.mesh1.card); await settle()
-	check(collection.scroll_vertical > 0, "Overflow legends remain reachable by scrolling")
+	check(collection.scroll_vertical > 0 if collection.stack.size.y > collection.size.y else collection.scroll_vertical == 0, "Compact stack scrolls only when content exceeds available height")
 	collection.scroll_vertical = 0
 	check(collection.get_rect().end.y <= viewer.colorbar.position.y-12+1, "Collection clears particle legend")
 	check(viewer.legend.get_rect().end.y <= viewer.shell.transport.position.y-12+1, "Initial particle legend clears playback")
@@ -67,6 +81,25 @@ func run() -> void:
 	check(not collection.entries.has("volume0"), "Unavailable logarithmic field has no misleading legend")
 	layers.states.volume0.color_mapping.normalization = "linear"; layers.resample(); await settle()
 	check("0.1 → 2.0" in collection.entries.volume0.label.text, "Legend follows changed active display bounds")
+	layers.states.volume0.channel = "other";layers.states.volume0.colormap = "plasma"
+	layers.states.volume0.color_mapping.normalization = "log";layers.resample();await settle()
+	check(collection.entries.volume0.label.text.contains("Channel: other") and collection.entries.volume0.label.text.contains("Colormap: plasma") and collection.entries.volume0.label.text.contains("(log)"),"Valid logarithmic channel and changed colormap update labeled content")
+	check(layers.object_choices.volume.get_item_text(0).contains("volume0") and collection.entries.volume0.label.text.contains("Object: volume0"),"Legend object terminology agrees with panel selector")
+	layers.states.volume0.channel = "value";layers.states.volume0.colormap = "coolwarm"
+	layers.states.volume0.color_mapping.normalization = "linear";layers.resample();await settle()
+	for mode in viewer.Normalization.MODES:
+		viewer.normalization_mode = mode;viewer.auto_range = mode in ["frame","symmetric"];viewer._update_particle_legend()
+		check(viewer.legend.text.contains(viewer.Normalization.LABELS[viewer.Normalization.MODES.find(mode)]),"Particle policy matches panel wording: "+mode)
+	viewer.normalization_mode = "frame";viewer.auto_range = true
+	viewer.cyclic = true;viewer._update_particle_legend();check(viewer.legend.text.contains("(cyclic)"),"Cyclic mapping is explicit")
+	viewer.cyclic = false;viewer._update_particle_legend()
+	for dimensions in [Vector2i(1024,640),Vector2i(1440,900)]:
+		root.size = dimensions;await settle();viewer.shell.layout();await settle()
+		check(collection.get_rect().position.x >= 0 and collection.get_rect().end.x <= viewer.shell.legend_available.x-12+1,"Stack width stays within viewport at "+str(dimensions))
+		check(viewer.shell.particle_legend_panel.get_rect().end.y <= viewer.shell.transport.position.y-12+1,"Compact particle card clears transport at "+str(dimensions))
+		collection.ensure_control_visible(collection.entries.mesh1.card);await settle()
+		check(collection.scroll_vertical > 0,"Overflow is scrollable at "+str(dimensions))
+		collection.scroll_vertical = 0
 	for panels in [false,true]:
 		if viewer.overlay_visible != panels: viewer._toggle_overlay()
 		await settle()
@@ -84,12 +117,25 @@ func run() -> void:
 	check(collection.entries.keys() == ["volume0"], "Only eligible visible color-mapped layers remain")
 	viewer.particle_layer_visible = false; viewer._update_particle_legend()
 	check(not viewer.legend.visible and collection.entries.has("volume0"), "Hidden particle layer has no legend")
+	await settle()
+	check(is_equal_approx(collection.entries.volume0.card.size.x,viewer.shell.particle_legend_panel.size.x),"Single layer retains matching card width without scrollbar")
+	check(collection.entries.size() == 1 and collection.size.y <= 80,"Single field remains a compact two-row card")
+	var compact_height: float = collection.size.y
+	var compact_bottom: float = collection.get_rect().end.y
+	var original: String = collection.entries.volume0.label.text
+	collection.entries.volume0.label.text = preload("res://ui/shell/legend_text.gd").content("long_scientific_object_identifier_for_display","long_scientific_channel_identifier_for_display","coolwarm","-123456789.0 → 123456789.0","linear")
+	await settle()
+	check(collection.size.y > compact_height and is_equal_approx(collection.get_rect().end.y,compact_bottom),"Long content wraps and grows upward from the same bottom edge")
+	check(collection.entries.volume0.label.get_visible_line_count() == collection.entries.volume0.label.get_line_count(),"Long labeled values remain visible without truncation")
+	collection.entries.volume0.label.text = original;await settle()
+	await RenderingServer.frame_post_draw
+	root.get_texture().get_image().save_png(output.path_join("single-field.png"))
 	viewer.offline_instance = true; viewer.overlay_visible = false; viewer._update_particle_legend()
 	check(not collection.visible and not viewer.legend.visible, "Video overlay-off gate hides legends")
 	viewer.overlay_visible = true; viewer._update_particle_legend()
 	check(collection.visible, "Video overlay-on gate restores enabled legends")
 	viewer.offline_instance = false
-	var report := {"checks":checks,"failures":failures}
+	var report := {"checks":checks,"failures":failures,"layout":layout_evidence}
 	FileAccess.open(output.path_join("report.json"),FileAccess.WRITE).store_string(JSON.stringify(report))
 	print("LAYER LEGENDS: ",checks," checks; ",failures.size()," failures")
 	viewer.free(); await process_frame; quit(0 if failures.is_empty() else 1)

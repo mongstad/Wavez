@@ -329,6 +329,9 @@ func layout() -> void:
 func layout_legend(available: Vector2) -> void:
 	if viewer.colorbar == null or viewer.legend == null: return
 	legend_available = available
+	var width := minf(preload("res://ui/shell/legend_text.gd").WIDTH,maxf(0,available.x-40))
+	viewer.legend.size.x = width
+	viewer.colorbar.size.x = width
 	viewer.legend.size.y = viewer.legend.get_minimum_size().y
 	reposition_legend()
 
@@ -336,10 +339,10 @@ func reposition_legend() -> void:
 	# Text shaping can grow the label after layout; move only the scientific overlay.
 	if legend_available == Vector2.ZERO: return
 	var right := maxf(viewer.colorbar.size.x, viewer.legend.size.x)
-	viewer.colorbar.position = Vector2(maxf(20, legend_available.x-right-20), maxf(18, legend_available.y-viewer.legend.size.y-24-18))
-	viewer.legend.position = viewer.colorbar.position+Vector2(0,24)
+	viewer.colorbar.position = Vector2(maxf(20, legend_available.x-right-20), maxf(18, legend_available.y-viewer.legend.size.y-20-18))
+	viewer.legend.position = viewer.colorbar.position+Vector2(0,20)
 	particle_legend_panel.position = viewer.colorbar.position-Vector2(8,6)
-	particle_legend_panel.size = Vector2(right+16, viewer.legend.size.y+36)
+	particle_legend_panel.size = Vector2(right+16, viewer.legend.size.y+32)
 	particle_legend_panel.visible = viewer.legend.visible
 	if layer_legends != null:
 		layer_legends.place(legend_available, particle_legend_panel.position.y if viewer.legend.visible else legend_available.y)

@@ -55,6 +55,24 @@ Scientific overlays retain their existing visibility: entering immersive never
 enables a hidden legend or disables a visible scientific annotation.
 See [immersive fullscreen semantics and validation](UX3_FULLSCREEN.md).
 
+## Color legends
+
+Enabled scalar legends show the color ramp above labeled **Object**, **Channel**,
+**Colormap** and **Color range** values. The range includes the active linear,
+log or cyclic mapping; particle legends also show **Range policy** using the same
+wording as the panel. These are the existing effective display bounds, not a new
+normalization calculation.
+
+Two text columns keep ordinary field/mesh legends to two rows. Particle range
+policy occupies a third row. Long values wrap without reducing the font size.
+Cards share a width of up to 476 logical pixels including padding. Overflow
+scrollbars sit outside the cards on the left, preserving aligned edges.
+Cards stack above the playback controls with six-pixel gaps, grow upward, and
+scroll when the layer collection exceeds its bounded viewport space. Each layer's
+**Show legend** remains independent of panel visibility; hidden or ineligible layers
+have no legend. Video exports retain the existing overlay inclusion control.
+See [legend content and layout validation](LEGEND_CONTENT_LAYOUT.md).
+
 ## Playback transport
 
 Previous sample, Play/Pause, Next sample and the **Sample index** slider are
