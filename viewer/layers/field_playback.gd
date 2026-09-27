@@ -3,6 +3,7 @@ const Buffer = preload("res://layers/field_buffer.gd")
 const Grid = preload("res://layers/grid_view.gd")
 const Memory = preload("res://layers/playback_buffer.gd")
 const Profile = preload("res://scene/playback_profile.gd")
+const Concurrency = preload("res://layers/field_concurrency.gd")
 var layers
 var viewer
 var worker := Buffer.new()
@@ -36,12 +37,24 @@ var automatic_end := 0.0
 var automatic_generation := ""
 var automatic_checked := -1000
 var capacity_wait := false
+var concurrency := Concurrency.new()
+var policy_checked := -1000
+var policy_pressure_events := 0
+var policy_frames: Array[float] = []
+var last_tick_us := 0
+var demand_report := {}
+var startup_report := {}
+var startup_events: Array = []
+var last_speed := 0.0
+# Test-only observation override; cannot relax the worker's physical admission.
+var policy_memory_override := {}
 func setup(owner) -> void:
 	layers = owner;viewer = layers.viewer
 	for obj in layers.reader.objects.values():
 		if obj.kind == "volume":enabled = true
 	enabled = enabled and viewer.scene_prebuffer_enabled and not viewer.offline_instance and layers.reader.trusted
 	if enabled and worker.start() != OK:enabled = false
+	concurrency.setup(worker.worker_count,worker.automatic_workers)
 	if enabled:
 		label = Label.new();label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART;layers.performance_panel.add_child(label)
 		var title := Label.new();title.text = "Playback preparation";layers.performance_panel.add_child(title)
@@ -107,7 +120,7 @@ func begin_session(target_time = null) -> void:
 		request(viewer.requested_time if target_time == null else float(target_time),layers.field_budget())
 		# Initial Play waits for useful admitted coverage, never the whole file
 		# when it exceeds RAM. Subsequent moving windows replenish in background.
-		session_waiting = capacity_wait or worker.status().session.get("state") != "ready"
+		session_waiting = not _automatic_ready()
 		buffering = session_waiting;_update_ui()
 		return
 	session_requested = true;session_restart = false;error = ""
@@ -181,6 +194,7 @@ func request(time: float, budget: int) -> Array:
 		# the new generation; CPU replacements evict old entries incrementally.
 		worker.cancel(scope == cache_scope);cache_scope = scope
 		token = signature;request_signature = "";staged.clear();session_waiting = false;session_restart = session_requested and viewer.playing
+		concurrency.reset_rates(worker.status().rates)
 	if scope_choice.selected == 0:return _automatic_request(time,budget)
 	capacity_wait = false
 	var targets: Array = [];var future: Array = []
@@ -316,13 +330,19 @@ func _stage(_targets: Array, jobs: Array) -> void:
 		uploaded.key = job.key;staged[job.id] = uploaded
 func acquire(time: float, budget: int) -> Dictionary:
 	var targets := request(time,budget);var result := {};var ready := true # A failed future prefetch must not block an already resident sample.
+	var cache := worker.status();var preparation_missing := false
 	for job in targets:
-		var failure: String = worker.status().get("failures",{}).get(job.key,"")
+		var failure: String = cache.get("failures",{}).get(job.key,"")
 		if not failure.is_empty():error = failure;layers.fail_playback(failure)
 		var view = layers.views[job.id]
 		if view.key == job.key:result[job.id] = {"sample":view.data}
 		elif staged.has(job.id) and staged[job.id].key == job.key:result[job.id] = staged[job.id]
-		else:ready = false
+		else:
+			ready = false
+			if not cache.charges.has(job.key):preparation_missing = true
+	# A pending main-thread texture upload is not a producer shortage. Keep
+	# its existing one-frame wait without restarting the CPU startup gate.
+	if preparation_missing and viewer.playing and scope_choice.selected == 0:session_waiting = true
 	buffering = session_waiting or not ready;pending_time = time if not ready else null
 	_update_ui()
 	return result if ready else {"pending":true}
@@ -339,12 +359,16 @@ func pump() -> bool:
 		var status := worker.status();var session: Dictionary = status.session
 		if session.get("state") in ["blocked","refused"]:
 			error = session.error;layers.fail_playback(error);session_waiting = false;buffering = false;_update_ui();return false
-		if session.get("state") != "ready" or (scope_choice.selected == 0 and capacity_wait):
+		var ready: bool = _automatic_ready() if scope_choice.selected == 0 else session.get("state") == "ready"
+		if not ready:
 			# An explicit seek may publish its target as soon as that sample is
-			# available; the continuous-play clock still waits for the full plan.
+			# available; continuous playback still waits for safe prepared runway.
 			if pending_time != null:layers.sample(float(pending_time),true)
 			buffering = true;_update_ui();return false
 		cpu_limit = status.limit;session_waiting = false;buffering = false;viewer.display_accum = 0
+		if scope_choice.selected == 0:
+			startup_events.append(startup_report.merged({"seconds":Time.get_ticks_msec()/1000.0,"time":viewer.requested_time}))
+			if startup_events.size() > 64:startup_events.pop_front()
 
 	if pending_time != null:
 		var result: Dictionary = layers.sample(float(pending_time),true)
@@ -352,6 +376,74 @@ func pump() -> bool:
 		viewer.display_accum = 0
 	else:request(viewer.requested_time,layers.field_budget())
 	_update_ui();return not buffering
+func _demand(status: Dictionary, time: float) -> Dictionary:
+	# Sum source-clock consumption, but use the least contiguous lead across
+	# visible fields. Neither a distant cached island nor another field can
+	# make a gap in the requested playback direction count as ready coverage.
+	var speed: float = maxf(absf(viewer.physical_rate),.000001)
+	var direction := -1 if viewer.physical_rate < 0 else 1
+	var consumer := 0.0;var lead := INF;var samples := 0
+	for id in layers.states:
+		if not layers.views[id] is Grid or not layers.states[id].visible:continue
+		var rows: Array = layers.reader.samples[id]
+		if rows.size() < 2:continue
+		var point: Dictionary = layers.reader.bracket(id,time)
+		var index: int = point.get("a",0)
+		var lo := maxi(0,index-16);var hi := mini(rows.size()-1,index+16)
+		var duration: float = rows[hi].time-rows[lo].time
+		if duration > 0:consumer += (hi-lo)/duration*speed
+		var coverage := 0.0;var wrapped := 0.0;var count := 0
+		for offset in range(rows.size()):
+			var cursor := index+offset*direction
+			if viewer.scene_loop_playback:cursor = posmod(cursor,rows.size())
+			elif cursor < 0 or cursor >= rows.size():
+				coverage = absf((float(rows[-1].time) if direction > 0 else float(rows[0].time))-time);break
+			if offset > 0 and cursor == (0 if direction > 0 else rows.size()-1):wrapped += layers.reader.frames[-1].time-layers.reader.frames[0].time
+			var key := Grid.sample_key(layers.reader.objects[id],rows[cursor].sequence,layers.states[id].channel,layers.field_budget())
+			if not status.charges.has(key):break
+			count += 1
+			# Hold at cursor until the next source boundary (reverse needs cursor-1).
+			var boundary := mini(cursor+1,rows.size()-1) if direction > 0 else cursor
+			coverage = maxf(0,(float(rows[boundary].time)-time)*direction+wrapped)
+		lead = minf(lead,coverage/speed);samples += count
+	return {"consumer":consumer,"ahead_seconds":0.0 if is_inf(lead) else lead,"ahead_samples":samples}
+func _automatic_ready() -> bool:
+	var status := worker.status()
+	demand_report = _demand(status,viewer.requested_time if pending_time == null else float(pending_time))
+	startup_report = concurrency.gate(demand_report.consumer,demand_report.ahead_seconds,status.session.get("state") == "ready")
+	startup_report.merge(demand_report)
+	return not capacity_wait and startup_report.ready
+func observe_frame(milliseconds: float) -> void:
+	if not active():return
+	var now := Time.get_ticks_usec()
+	var interval := (now-last_tick_us)/1000.0 if last_tick_us > 0 else 0.0
+	last_tick_us = now
+	if policy_frames.size() < 1024:policy_frames.append(maxf(milliseconds,interval))
+	if Time.get_ticks_msec()-policy_checked < 1000:return
+	policy_checked = Time.get_ticks_msec()
+	policy_frames.sort()
+	var p95 := policy_frames[mini(policy_frames.size()-1,ceili(policy_frames.size()*.95)-1)] if not policy_frames.is_empty() else 0.0
+	policy_frames.clear()
+	var status := worker.status()
+	demand_report = _demand(status,viewer.requested_time if pending_time == null else float(pending_time))
+	var memory := Memory.memory_headroom() if policy_memory_override.is_empty() else policy_memory_override
+	var other := 0
+	for value in other_reservations().values():other += int(value)
+	var largest: int = maxi(int(status.largest_job_charge),int(budget_report.get("largest_job_bytes",0)))
+	var reserve: int = int(memory.reserve)+other+int(status.retirement_reserve_bytes)
+	var available: int = int(memory.available_physical)-reserve
+	var margin: int = maxi(256*Memory.MIB,int(memory.physical*.01))
+	var signals := demand_report.merged({"rates":status.rates,"demand":status.session.get("state") == "preparing", "waiting":session_waiting or buffering,"swap":memory.get("process_swap",0),"memory_pressure":available < largest*3*concurrency.active+margin,"can_grow":available >= largest*3*(concurrency.active+1)+margin,"admission_pressure":status.pressure_events > policy_pressure_events,"frame_p95_ms":p95,"available_physical":memory.available_physical,"cache_bytes":status.bytes,"in_flight_bytes":status.in_flight_bytes})
+	policy_pressure_events = status.pressure_events
+	var count := concurrency.tick(now/1000000.0,signals)
+	if count != status.active_limit:worker.set_concurrency(count)
+	# Speed changes and exhausted runway explicitly rebuffer. A ready finite
+	# window (including the end of the recording) always remains playable.
+	if scope_choice.selected == 0 and viewer.playing and status.session.get("state") != "ready":
+		var changed: bool = last_speed != viewer.physical_rate
+		if (changed or demand_report.ahead_seconds < 1.0) and concurrency.rate < demand_report.consumer*.95:
+			session_waiting = true;buffering = true
+	last_speed = viewer.physical_rate
 func _update_ui() -> void:
 	if is_instance_valid(scope_choice) and not layers.reader.frames.is_empty():
 		var last: float = layers.reader.frames[-1].time
@@ -378,4 +470,4 @@ func profile_report() -> Dictionary:
 	for view in layers.views.values():
 		if view is Grid:current_gpu += view.gpu_bytes
 	for ready in staged.values():staged_gpu += int(ready.get("gpu_bytes",0))
-	return {"enabled":enabled,"buffering":buffering,"cache":worker.status(),"budget":budget_report,"gpu_uploads":uploads,"current_gpu_bytes":current_gpu,"staged_gpu_bytes":staged_gpu,"staged_textures":staged.size(),"error":error}
+	return {"enabled":enabled,"buffering":buffering,"cache":worker.status(),"budget":budget_report,"concurrency":concurrency.report(),"demand":demand_report.duplicate(),"startup":startup_report.duplicate(),"startup_events":startup_events.duplicate(true),"gpu_uploads":uploads,"current_gpu_bytes":current_gpu,"staged_gpu_bytes":staged_gpu,"staged_textures":staged.size(),"error":error}

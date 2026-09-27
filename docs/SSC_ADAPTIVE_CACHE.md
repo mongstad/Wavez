@@ -9,11 +9,15 @@ export settings, checksums and recorded scientific values are unchanged.
 Opening a capture commits its first visible scene and immediately starts a CPU
 pool preparing ahead from the playhead. Issue #109's
 [bounded parallel preparation](PARALLEL_FIELD_PREPARATION.md) updates the execution
-and in-flight allowances in these operational sections; the #102 measurements
+and in-flight allowances in these operational sections; issue #111 adds
+[dynamic concurrency and measured startup gating](DYNAMIC_FIELD_PREPARATION.md).
+The #102 measurements
 below retain their original scope and review-time wording. **Automatic** is the default in
 Performance. It fills as much useful forward coverage as safely fits in current
-physical RAM, even while paused. If Play is pressed early, its clock waits for the admitted
-window; it never requires an allocation for the complete remaining recording.
+physical RAM, even while paused. If Play is pressed early, measured production
+faster than consumption permits a short prepared lead; near parity needs a larger
+lead. Slower or unmeasured production waits for the admitted window. It never
+requires an allocation for the complete remaining recording.
 After that initial preparation, moving windows replenish in the background. Large captures open paused so useful coverage can build before the first Play;
 recordings fitting the initial window retain the existing transport state. The status badge shows background progress without declaring
 an otherwise usable scene unavailable.

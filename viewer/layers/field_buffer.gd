@@ -6,6 +6,10 @@ const Stamp = preload("res://data/source_stamp.gd")
 const Memory = preload("res://layers/playback_buffer.gd")
 const Work = preload("res://layers/field_work.gd")
 var worker_count := default_worker_count()
+var automatic_workers := not OS.get_environment("SIMSCOPE_FIELD_WORKERS") in ["1","2","3","4"]
+var active_limit := 1
+var pressure_events := 0
+var rates := {} # Busy batch wall time and successful publications, by lane count.
 var lanes: Array = []
 var in_flight := {} # Key -> exact retained charge; includes cancelled work until joined.
 var in_flight_bytes := 0
@@ -51,10 +55,11 @@ var test_barrier: Semaphore
 var at_barrier := false
 static func default_worker_count() -> int:
 	var configured := OS.get_environment("SIMSCOPE_FIELD_WORKERS")
-	if configured.is_valid_int() and int(configured) >= 1 and int(configured) <= 4:return int(configured)
-	return 2 if OS.get_processor_count() >= 4 else 1
+	if configured in ["1","2","3","4"]:return int(configured)
+	return clampi(OS.get_processor_count()-2,1,4)
 func start() -> Error:
 	worker_count = clampi(worker_count,1,4)
+	active_limit = mini(2,worker_count) if automatic_workers else worker_count
 	for i in range(worker_count):
 		var lane := Work.new();var result := lane.start(self)
 		if result != OK:
@@ -66,6 +71,8 @@ func start() -> Error:
 		for lane in lanes:lane.close()
 		lanes.clear()
 	return result
+func set_concurrency(count: int) -> void:
+	mutex.lock();active_limit = clampi(count,1,worker_count);mutex.unlock();wake.post()
 func close() -> void:
 	mutex.lock();closing = true;mutex.unlock();wake.post()
 	if thread.is_started():thread.wait_to_finish()
@@ -103,6 +110,7 @@ func status() -> Dictionary:
 	var result := {"bytes":used,"limit":limit,"retained_limit":retained_limit,"frames":prepared.size(),"completed":completed,"source_reuses":source_reuses,"cancelled":cancelled,"evictions":evictions,"worker_ms":worker_ms,"pipeline_stages":pipeline_stages.duplicate(true),"worker_thread":worker_thread,"active":not working_key.is_empty(),"error":error,"failures":failures.duplicate(),"test_barrier_waiting":at_barrier,"session":session.duplicate()}
 	result.active = not in_flight.is_empty() or not working_key.is_empty()
 	result.worker_count = worker_count;result.in_flight_bytes = in_flight_bytes;result.active_jobs = in_flight.size()
+	result.active_limit = active_limit;result.automatic_workers = automatic_workers;result.pressure_events = pressure_events;result.rates = rates.duplicate(true)
 	result.peak_in_flight_bytes = peak_in_flight_bytes;result.peak_active = peak_active
 	result.largest_job_charge = largest_job_charge
 	result.retirement_reserve_bytes = largest_job_charge*3*(worker_count-1)
@@ -271,6 +279,9 @@ func _admit(lane, job: Dictionary) -> bool:
 	mutex.unlock()
 	var required: int = memory.reserve+int(job.get("other_reservation",0))+retirement_reserve+(job.charge+outstanding)*3
 	if result.is_empty() and (not fits_limit or memory.available_physical < required):
+		mutex.lock();pressure_events += 1
+		if automatic_workers:active_limit = 1
+		mutex.unlock()
 		# Drain existing work before retrying with fewer simultaneous lanes.
 		if outstanding > 0:return false
 		if automatic:
@@ -345,13 +356,20 @@ func _run() -> void:
 		_plan_session();_prune(0,"")
 		while true:
 			var batch: Array = []
-			for lane in lanes:
+			mutex.lock();var count := active_limit;var before := completed;mutex.unlock()
+			var began := Time.get_ticks_usec()
+			for lane in lanes.slice(0,count):
 				var job := _next()
 				if job.is_empty() or not _admit(lane,job):break
 				batch.append(lane)
 			# Fixed batches bound the completion queue to worker_count. A later
 			# result can never publish ahead of an earlier requested sample.
 			for lane in batch:_collect(lane)
+			if not batch.is_empty():
+				mutex.lock();var key := str(batch.size())
+				if not rates.has(key):rates[key] = {"samples":0,"seconds":0.0}
+				rates[key].samples += completed-before;rates[key].seconds += (Time.get_ticks_usec()-began)/1000000.0
+				mutex.unlock()
 			mutex.lock();working_key = "";var stop: bool = closing or session.get("state") in ["blocked","pressure"];mutex.unlock()
 			_prune(0,"");_session_progress()
 			if batch.is_empty() or stop:break
