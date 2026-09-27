@@ -38,7 +38,7 @@ func run() -> void:
 	var oracle: Array = JSON.parse_string(FileAccess.get_file_as_string(out.path_join("oracle.json")))
 	var gpu: Array = JSON.parse_string(FileAccess.get_file_as_string(out.path_join("gpu-oracle.json")))
 	for count in [1,2,3,4]:
-		var worker := Buffer.new();worker.worker_count = count;worker.trace_reads = true
+		var worker := Buffer.new();worker.worker_count = count;worker.automatic_workers = false;worker.trace_reads = true
 		check(worker.start() == OK,"Start configured pool")
 		worker.request("density",jobs_for(reader),32*MIB,true)
 		check(await ready(worker),"Concurrent window completes")
@@ -64,7 +64,7 @@ func run() -> void:
 		worker.close();check(worker.status().bytes == 0,"Close releases cache")
 	# Deterministic races after all lanes are admitted, before any publication.
 	for action in ["generation","seek","shrink","source"]:
-		var worker := Buffer.new();worker.worker_count = 4
+		var worker := Buffer.new();worker.worker_count = 4;worker.automatic_workers = false
 		var gate := Semaphore.new();worker.test_barrier = gate;worker.start()
 		worker.request("old",jobs_for(reader),32*MIB,true)
 		check(await barrier(worker),"Race overlaps active batch: "+action)

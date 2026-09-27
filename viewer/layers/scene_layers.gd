@@ -323,10 +323,12 @@ func resample() -> void:
 	var result := sample(viewer.requested_time,use_async())
 	if result.is_empty():viewer.status_label.text = error
 func tick(delta: float) -> void:
+	var responsiveness := Time.get_ticks_usec()
 	var started := Profile.begin()
 	if Profile.enabled and Profile.trace_enabled:
 		Profile.trace_context = {"playing":viewer.playing,"requested_time_before":viewer.requested_time,"source_index_before":viewer.current_index,"particle_pair_before":particle_key,"tail_accumulator_before":viewer.tail_poll,"delta":delta}
 	_tick_profiled(delta)
+	if field_playback != null:field_playback.observe_frame((Time.get_ticks_usec()-responsiveness)/1000.0)
 	Profile.end("g3_tick",started)
 func _tick_profiled(delta: float) -> void:
 	if iso_debounce > 0:

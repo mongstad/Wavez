@@ -14,11 +14,15 @@ Adaptive field preparation capacity was owner-merged in PR #99 at `d42a4dc`.
 Continuous SSC playback preparation was owner-merged in PR #101 at `573c097`.
 SSC generation and adaptive playback caching were owner-merged in PR #103 at
 `6d4df9a`. Playback integrity policy was owner-merged in PR #108 at `d9876ee`.
-Current authorized work is #109, the only Ready item on 2026-09-27:
-[bounded parallel field preparation](PARALLEL_FIELD_PREPARATION.md), **pending owner review**.
+Bounded parallel field preparation was owner-merged in PR #110 at `7dc253e`.
+Current authorized work is #111, the only Ready item when selected on 2026-09-27:
+[dynamic field preparation](DYNAMIC_FIELD_PREPARATION.md), **pending owner review**.
 Field preparation uses a small CPU pool with ordered publication and explicit
-in-flight memory reservations. The default is two workers on hosts with at least
-four logical CPUs, otherwise one; `SIMSCOPE_FIELD_WORKERS=1..4` selects a cap.
+in-flight memory reservations. Auto starts conservatively and changes active
+concurrency within a CPU-count-bounded pool of at most four lanes, using measured
+preparation demand and resource pressure. `SIMSCOPE_FIELD_WORKERS=1..4` selects a
+fixed diagnostic cap. A measured faster producer can start playback with a short
+prepared lead; slower preparation retains the admitted-window startup gate.
 The adaptive cache and [interactive integrity policy](PLAYBACK_INTEGRITY.md) remain intact.
 Interactive reads skip payload SHA recomputation while preserving structural,
 descriptor/commit, decode and source-change checks. Readable scientific corruption

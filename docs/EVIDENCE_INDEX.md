@@ -1,5 +1,15 @@
 # Retained evidence
 
+## Dynamic field preparation — issue #111, pending owner review
+
+[Policy, validation and owner checks](DYNAMIC_FIELD_PREPARATION.md) and
+[compact evidence](evidence/issue-111/dynamic.json) cover Auto versus fixed 1–4
+lanes, full 192³ 1× playback, 2×/4× trials, measured startup gates, resource
+backoff, scientific-value/cache regressions and interaction/close/reopen behavior.
+The report explicitly records the fixed-two swap observation and probe repairs.
+Historical #109 evidence below retains its original review-time wording.
+
+
 ## Bounded parallel preparation — issue #109, pending owner review
 
 [Investigation and validation](PARALLEL_FIELD_PREPARATION.md) and

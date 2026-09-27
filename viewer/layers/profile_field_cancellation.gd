@@ -5,7 +5,7 @@ func run() -> void:
 	var rows: Array = []
 	for count in [1,2,3,4]:
 		for operation in ["cancel","close"]:
-			var worker := Buffer.new();worker.worker_count = count;worker.start()
+			var worker := Buffer.new();worker.worker_count = count;worker.automatic_workers = false;worker.start()
 			var jobs := jobs_for(reader,"density",range(100,116))
 			# 512 MiB preview allowance preserves full 192³ density planes.
 			for job in jobs:job.budget = 512*MIB

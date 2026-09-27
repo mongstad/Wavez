@@ -278,12 +278,22 @@ established. See [SSC acceleration](SSC_ACCELERATION.md) for the format's curren
 metadata ceiling, measurements and remaining limits. The prior
 [continuous playback report](SSC_CONTINUOUS_PLAYBACK.md) remains historical evidence.
 
-Field CPU preparation uses a [bounded worker pool](PARALLEL_FIELD_PREPARATION.md)
-with ordered publication and per-job transient memory reservations. The default
-is two workers with at least four logical CPUs, otherwise one. Set
-`SIMSCOPE_FIELD_WORKERS` to an integer from 1 to 4 before launching to select a
-cap; live physical headroom may admit fewer simultaneous jobs. This preserves
-all-channel source reuse and the existing adaptive cache policy.
+Field CPU preparation uses a bounded pool with ordered publication and per-job
+transient memory reservations. [Dynamic preparation](DYNAMIC_FIELD_PREPARATION.md)
+is the default: unset or `auto` selects a pool capped at logical CPUs minus two,
+clamped to 1–4, and starts at two active lanes (one when capped there). It measures
+production rate and prepared lead, increases concurrency when needed, and backs
+off for memory, swap or sustained presentation pressure. Idle lanes sleep.
+Set `SIMSCOPE_FIELD_WORKERS=1`, `2`, `3` or `4` before launching for a fixed
+diagnostic cap; live physical admission still may allow fewer jobs. Other values
+use Auto. All-channel source reuse and adaptive cache semantics remain intact.
+
+In Automatic preparation, Play can start before its admitted window is full when
+measured production supports consumption with a prepared safety lead. Near parity
+needs a larger lead; slower or unmeasured production waits for the admitted
+window. Playback speed, direction, channel changes and resource pressure can
+require explicit buffering again. Advanced selected intervals still prepare their
+whole requested interval. Neither mode changes source cadence or quality.
 
 Each visible field holds its current texture and at most one staged future texture. Their per-texture budgets split the existing layer GPU share; this can increase preview stride on large fields. GPU uploads occur on the main thread, at most one per process frame, ahead of source transitions where possible. Texture binding and shader state changes remain on the main thread. Cold seeks and underflow hold the committed physical clock, gate paused Play and pause background analysis until the required samples are ready. Stale source/configuration work is discarded. Initial opening, scientific inspection and deterministic export remain synchronous; large textures can still cause an upload callback stall. See the [PERF-001/002 report](PERFORMANCE_MAINTENANCE_REPORT.md) for exact guards, bounds and retained 02B/03B measurements.
 

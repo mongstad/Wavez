@@ -1,0 +1,3409 @@
+{
+  "issue": 111,
+  "baseline": "7dc253ed8c430a85548e80f57c8e2ebaaf69d9bc",
+  "timeline_note": "Full one-second timeline and 100ms CPU/RSS/swap telemetry remain external. Compact timeline keeps roughly five-second observations plus worker/wait/phase/pressure changes.",
+  "method": "Fresh processes, uncontrolled OS cache, same external read-only capture. CPU samples use 100% for one core. Selected strict oracles, not whole-file re-verification.",
+  "profiles": {
+    "1-speed-2": {
+      "summary": {
+        "mode": "1",
+        "speed": 2.0,
+        "open_seconds": 0.890863,
+        "ready_seconds": 63.239389,
+        "startup": {
+          "ahead_samples": 313,
+          "ahead_seconds": 15.649999999999029,
+          "consumer": 20.000000000000153,
+          "measured_seconds": 62.125220000000006,
+          "producer": 4.772486821030258,
+          "ratio": 0.23862434105151106,
+          "ready": true,
+          "reason": "admitted_window",
+          "required_lead_seconds": -1.0
+        },
+        "wall_seconds": 75.262712,
+        "committed_seconds": 24.058628000000027,
+        "complete": false,
+        "field_waits": 0,
+        "particle_waits": 0,
+        "field_wait_seconds": 0.0,
+        "particle_wait_seconds": 0.0,
+        "checks": 4,
+        "draw_ms": {
+          "p50": 6.937,
+          "p95": 7.891,
+          "p99": 24.662,
+          "max": 45.186
+        },
+        "callback_ms": {
+          "p50": 1.276,
+          "p95": 3.288,
+          "p99": 23.484,
+          "max": 43.937
+        },
+        "peak_rss": 38581637120,
+        "process_swap": 0,
+        "cpu_percent_one_core": 132.4495606265694,
+        "presented": 241,
+        "events": [],
+        "source_stat": [
+          47,
+          20372149,
+          125950754101,
+          1790459431649621061,
+          1790459508131850482
+        ],
+        "unchanged_stat": true,
+        "strict_selected_oracles": 2,
+        "cache_state": "Uncontrolled OS cache; fresh native process"
+      },
+      "startup_events": [
+        {
+          "ahead_samples": 313,
+          "ahead_seconds": 15.649999999999029,
+          "consumer": 20.000000000000153,
+          "measured_seconds": 62.125220000000006,
+          "producer": 4.772486821030258,
+          "ratio": 0.23862434105151106,
+          "ready": true,
+          "reason": "admitted_window",
+          "required_lead_seconds": -1.0,
+          "seconds": 64.016,
+          "time": 0.0
+        }
+      ],
+      "pipeline": {
+        "assembly": {
+          "count": 372,
+          "max_ms": 91.01800000000003,
+          "total_ms": 22767.588000000003
+        },
+        "conversion": {
+          "count": 372,
+          "max_ms": 0.001,
+          "total_ms": 0.06800000000000005
+        },
+        "decompress": {
+          "count": 372,
+          "max_ms": 67.171,
+          "total_ms": 21679.971999999998
+        },
+        "file_io": {
+          "count": 372,
+          "max_ms": 52.543000000000006,
+          "total_ms": 7470.495
+        },
+        "plane_copies": {
+          "count": 372,
+          "max_ms": 27.902,
+          "total_ms": 4544.8060000000005
+        },
+        "raw_hash": {
+          "count": 372,
+          "max_ms": 0.0,
+          "total_ms": 0.0
+        },
+        "statistics": {
+          "count": 372,
+          "max_ms": 0.002,
+          "total_ms": 0.3040000000000002
+        },
+        "stored_hash": {
+          "count": 372,
+          "max_ms": 0.0,
+          "total_ms": 0.0
+        },
+        "typed_conversion": {
+          "count": 372,
+          "max_ms": 65.542,
+          "total_ms": 13584.75599999999
+        }
+      },
+      "regressions": [],
+      "timeline_observations": 17
+    },
+    "1-speed-4": {
+      "summary": {
+        "mode": "1",
+        "speed": 4.0,
+        "open_seconds": 0.916417,
+        "ready_seconds": 64.024886,
+        "startup": {
+          "ahead_samples": 314,
+          "ahead_seconds": 7.849999999999509,
+          "consumer": 40.000000000000306,
+          "measured_seconds": 62.053178999999986,
+          "producer": 4.706183951067502,
+          "ratio": 0.11765459877668666,
+          "ready": true,
+          "reason": "admitted_window",
+          "required_lead_seconds": -1.0
+        },
+        "wall_seconds": 76.033492,
+        "committed_seconds": 32.402364,
+        "complete": false,
+        "field_waits": 1,
+        "particle_waits": 0,
+        "field_wait_seconds": 3.910935000000003,
+        "particle_wait_seconds": 0.0,
+        "checks": 4,
+        "draw_ms": {
+          "p50": 6.942,
+          "p95": 7.971,
+          "p99": 26.982,
+          "max": 38.844
+        },
+        "callback_ms": {
+          "p50": 1.256,
+          "p95": 3.032,
+          "p99": 25.383,
+          "max": 37.179
+        },
+        "peak_rss": 38665461760,
+        "process_swap": 0,
+        "cpu_percent_one_core": 131.69178057015594,
+        "presented": 244,
+        "events": [],
+        "source_stat": [
+          47,
+          20372149,
+          125950754101,
+          1790459431649621061,
+          1790459508131850482
+        ],
+        "unchanged_stat": true,
+        "strict_selected_oracles": 2,
+        "cache_state": "Uncontrolled OS cache; fresh native process"
+      },
+      "startup_events": [
+        {
+          "ahead_samples": 314,
+          "ahead_seconds": 7.849999999999509,
+          "consumer": 40.000000000000306,
+          "measured_seconds": 62.053178999999986,
+          "producer": 4.706183951067502,
+          "ratio": 0.11765459877668666,
+          "ready": true,
+          "reason": "admitted_window",
+          "required_lead_seconds": -1.0,
+          "seconds": 64.771,
+          "time": 0.0
+        }
+      ],
+      "pipeline": {
+        "assembly": {
+          "count": 372,
+          "max_ms": 90.852,
+          "total_ms": 23118.685999999998
+        },
+        "conversion": {
+          "count": 372,
+          "max_ms": 0.036,
+          "total_ms": 0.10900000000000006
+        },
+        "decompress": {
+          "count": 372,
+          "max_ms": 69.06400000000001,
+          "total_ms": 21890.112000000005
+        },
+        "file_io": {
+          "count": 372,
+          "max_ms": 59.359,
+          "total_ms": 7432.178999999998
+        },
+        "plane_copies": {
+          "count": 372,
+          "max_ms": 30.44,
+          "total_ms": 4589.674000000004
+        },
+        "raw_hash": {
+          "count": 372,
+          "max_ms": 0.0,
+          "total_ms": 0.0
+        },
+        "statistics": {
+          "count": 372,
+          "max_ms": 0.002,
+          "total_ms": 0.2980000000000002
+        },
+        "stored_hash": {
+          "count": 372,
+          "max_ms": 0.0,
+          "total_ms": 0.0
+        },
+        "typed_conversion": {
+          "count": 372,
+          "max_ms": 65.98400000000001,
+          "total_ms": 13595.356000000002
+        }
+      },
+      "regressions": [],
+      "timeline_observations": 17
+    },
+    "1-speed-4-final": {
+      "summary": {
+        "mode": "1",
+        "speed": 4.0,
+        "open_seconds": 0.903344,
+        "ready_seconds": 64.295392,
+        "startup": {
+          "ahead_samples": 314,
+          "ahead_seconds": 7.849999999999509,
+          "consumer": 40.000000000000306,
+          "measured_seconds": 63.17556600000002,
+          "producer": 4.644269378679727,
+          "ratio": 0.1161067344669923,
+          "ready": true,
+          "reason": "admitted_window",
+          "required_lead_seconds": -1.0
+        },
+        "wall_seconds": 76.298492,
+        "committed_seconds": 31.778855999999962,
+        "complete": false,
+        "field_waits": 2,
+        "particle_waits": 0,
+        "field_wait_seconds": 4.0815769999999985,
+        "particle_wait_seconds": 0.0,
+        "checks": 4,
+        "draw_ms": {
+          "p50": 6.942,
+          "p95": 7.872,
+          "p99": 27.636,
+          "max": 37.186
+        },
+        "callback_ms": {
+          "p50": 1.256,
+          "p95": 2.427,
+          "p99": 26.144,
+          "max": 35.226
+        },
+        "peak_rss": 38559698944,
+        "process_swap": 0,
+        "cpu_percent_one_core": 131.21941638384098,
+        "presented": 239,
+        "events": [],
+        "source_stat": [
+          47,
+          20372149,
+          125950754101,
+          1790459431649621061,
+          1790459508131850482
+        ],
+        "unchanged_stat": true,
+        "strict_selected_oracles": 2,
+        "cache_state": "Uncontrolled OS cache; fresh native process"
+      },
+      "startup_events": [
+        {
+          "ahead_samples": 314,
+          "ahead_seconds": 7.849999999999509,
+          "consumer": 40.000000000000306,
+          "measured_seconds": 63.17556600000002,
+          "producer": 4.644269378679727,
+          "ratio": 0.1161067344669923,
+          "ready": true,
+          "reason": "admitted_window",
+          "required_lead_seconds": -1.0,
+          "seconds": 65.101,
+          "time": 0.0
+        }
+      ],
+      "pipeline": {
+        "assembly": {
+          "count": 374,
+          "max_ms": 88.859,
+          "total_ms": 22982.905000000013
+        },
+        "conversion": {
+          "count": 374,
+          "max_ms": 0.001,
+          "total_ms": 0.06200000000000005
+        },
+        "decompress": {
+          "count": 374,
+          "max_ms": 66.807,
+          "total_ms": 21799.23099999998
+        },
+        "file_io": {
+          "count": 374,
+          "max_ms": 213.78799999999998,
+          "total_ms": 8430.491999999998
+        },
+        "plane_copies": {
+          "count": 374,
+          "max_ms": 34.305,
+          "total_ms": 4559.873000000001
+        },
+        "raw_hash": {
+          "count": 374,
+          "max_ms": 0.0,
+          "total_ms": 0.0
+        },
+        "statistics": {
+          "count": 374,
+          "max_ms": 0.003,
+          "total_ms": 0.2890000000000002
+        },
+        "stored_hash": {
+          "count": 374,
+          "max_ms": 0.0,
+          "total_ms": 0.0
+        },
+        "typed_conversion": {
+          "count": 374,
+          "max_ms": 66.61500000000001,
+          "total_ms": 13377.546000000004
+        }
+      },
+      "regressions": [],
+      "timeline_observations": 17
+    },
+    "2-speed-2": {
+      "summary": {
+        "mode": "2",
+        "speed": 2.0,
+        "open_seconds": 0.906586,
+        "ready_seconds": 36.5313,
+        "startup": {
+          "ahead_samples": 307,
+          "ahead_seconds": 15.349999999999088,
+          "consumer": 20.000000000000153,
+          "measured_seconds": 34.931473,
+          "producer": 8.488812563389494,
+          "ratio": 0.4244406281694715,
+          "ready": true,
+          "reason": "admitted_window",
+          "required_lead_seconds": -1.0
+        },
+        "wall_seconds": 48.583129,
+        "committed_seconds": 24.077326000000035,
+        "complete": false,
+        "field_waits": 0,
+        "particle_waits": 0,
+        "field_wait_seconds": 0.0,
+        "particle_wait_seconds": 0.0,
+        "checks": 4,
+        "draw_ms": {
+          "p50": 6.936,
+          "p95": 17.349,
+          "p99": 30.16,
+          "max": 38.06
+        },
+        "callback_ms": {
+          "p50": 1.385,
+          "p95": 16.269,
+          "p99": 28.589,
+          "max": 35.987
+        },
+        "peak_rss": 38271373312,
+        "process_swap": 0,
+        "cpu_percent_one_core": 210.86514288789226,
+        "presented": 241,
+        "events": [],
+        "source_stat": [
+          47,
+          20372149,
+          125950754101,
+          1790459431649621061,
+          1790459508131850482
+        ],
+        "unchanged_stat": true,
+        "strict_selected_oracles": 2,
+        "cache_state": "Uncontrolled OS cache; fresh native process"
+      },
+      "startup_events": [
+        {
+          "ahead_samples": 307,
+          "ahead_seconds": 15.349999999999088,
+          "consumer": 20.000000000000153,
+          "measured_seconds": 34.931473,
+          "producer": 8.488812563389494,
+          "ratio": 0.4244406281694715,
+          "ready": true,
+          "reason": "admitted_window",
+          "required_lead_seconds": -1.0,
+          "seconds": 37.342,
+          "time": 0.0
+        }
+      ],
+      "pipeline": {
+        "assembly": {
+          "count": 410,
+          "max_ms": 105.39,
+          "total_ms": 26317.296000000002
+        },
+        "conversion": {
+          "count": 410,
+          "max_ms": 0.001,
+          "total_ms": 0.06900000000000005
+        },
+        "decompress": {
+          "count": 410,
+          "max_ms": 89.12299999999999,
+          "total_ms": 28494.238000000012
+        },
+        "file_io": {
+          "count": 410,
+          "max_ms": 50.805,
+          "total_ms": 10625.235000000006
+        },
+        "plane_copies": {
+          "count": 410,
+          "max_ms": 32.023,
+          "total_ms": 5602.289
+        },
+        "raw_hash": {
+          "count": 410,
+          "max_ms": 0.0,
+          "total_ms": 0.0
+        },
+        "statistics": {
+          "count": 410,
+          "max_ms": 0.002,
+          "total_ms": 0.32600000000000023
+        },
+        "stored_hash": {
+          "count": 410,
+          "max_ms": 0.0,
+          "total_ms": 0.0
+        },
+        "typed_conversion": {
+          "count": 410,
+          "max_ms": 69.656,
+          "total_ms": 14554.3
+        }
+      },
+      "regressions": [],
+      "timeline_observations": 12
+    },
+    "2-speed-4": {
+      "summary": {
+        "mode": "2",
+        "speed": 4.0,
+        "open_seconds": 0.914755,
+        "ready_seconds": 36.618216,
+        "startup": {
+          "ahead_samples": 306,
+          "ahead_seconds": 7.649999999999549,
+          "consumer": 40.000000000000306,
+          "measured_seconds": 34.978376000000004,
+          "producer": 8.41750429577448,
+          "ratio": 0.21043760739436038,
+          "ready": true,
+          "reason": "admitted_window",
+          "required_lead_seconds": -1.0
+        },
+        "wall_seconds": 48.627024,
+        "committed_seconds": 35.565523999999996,
+        "complete": false,
+        "field_waits": 106,
+        "particle_waits": 30,
+        "field_wait_seconds": 4.683529999999989,
+        "particle_wait_seconds": 0.8294700000000004,
+        "checks": 4,
+        "draw_ms": {
+          "p50": 6.946,
+          "p95": 17.256,
+          "p99": 33.602,
+          "max": 49.551
+        },
+        "callback_ms": {
+          "p50": 1.359,
+          "p95": 15.899,
+          "p99": 31.888,
+          "max": 48.109
+        },
+        "peak_rss": 38473850880,
+        "process_swap": 0,
+        "cpu_percent_one_core": 213.14023530147512,
+        "presented": 207,
+        "events": [],
+        "source_stat": [
+          47,
+          20372149,
+          125950754101,
+          1790459431649621061,
+          1790459508131850482
+        ],
+        "unchanged_stat": true,
+        "strict_selected_oracles": 2,
+        "cache_state": "Uncontrolled OS cache; fresh native process"
+      },
+      "startup_events": [
+        {
+          "ahead_samples": 306,
+          "ahead_seconds": 7.649999999999549,
+          "consumer": 40.000000000000306,
+          "measured_seconds": 34.978376000000004,
+          "producer": 8.41750429577448,
+          "ratio": 0.21043760739436038,
+          "ready": true,
+          "reason": "admitted_window",
+          "required_lead_seconds": -1.0,
+          "seconds": 37.495,
+          "time": 0.0
+        }
+      ],
+      "pipeline": {
+        "assembly": {
+          "count": 408,
+          "max_ms": 105.266,
+          "total_ms": 26691.731000000025
+        },
+        "conversion": {
+          "count": 408,
+          "max_ms": 0.001,
+          "total_ms": 0.1240000000000001
+        },
+        "decompress": {
+          "count": 408,
+          "max_ms": 87.29099999999998,
+          "total_ms": 28581.071000000018
+        },
+        "file_io": {
+          "count": 408,
+          "max_ms": 56.44,
+          "total_ms": 10871.37299999999
+        },
+        "plane_copies": {
+          "count": 408,
+          "max_ms": 32.672,
+          "total_ms": 5531.923000000003
+        },
+        "raw_hash": {
+          "count": 408,
+          "max_ms": 0.0,
+          "total_ms": 0.0
+        },
+        "statistics": {
+          "count": 408,
+          "max_ms": 0.042,
+          "total_ms": 0.39900000000000024
+        },
+        "stored_hash": {
+          "count": 408,
+          "max_ms": 0.0,
+          "total_ms": 0.0
+        },
+        "typed_conversion": {
+          "count": 408,
+          "max_ms": 66.56700000000001,
+          "total_ms": 14708.567000000008
+        }
+      },
+      "regressions": [],
+      "timeline_observations": 15
+    },
+    "3-speed-2": {
+      "summary": {
+        "mode": "3",
+        "speed": 2.0,
+        "open_seconds": 0.903172,
+        "ready_seconds": 28.78844,
+        "startup": {
+          "ahead_samples": 296,
+          "ahead_seconds": 14.799999999999198,
+          "consumer": 20.000000000000153,
+          "measured_seconds": 27.084327,
+          "producer": 10.570457270022429,
+          "ratio": 0.5285228635011174,
+          "ready": true,
+          "reason": "admitted_window",
+          "required_lead_seconds": -1.0
+        },
+        "wall_seconds": 40.838954,
+        "committed_seconds": 24.075385999999995,
+        "complete": false,
+        "field_waits": 0,
+        "particle_waits": 0,
+        "field_wait_seconds": 0.0,
+        "particle_wait_seconds": 0.0,
+        "checks": 4,
+        "draw_ms": {
+          "p50": 6.946,
+          "p95": 25.863,
+          "p99": 38.547,
+          "max": 52.857
+        },
+        "callback_ms": {
+          "p50": 1.436,
+          "p95": 24.288,
+          "p99": 36.261,
+          "max": 50.58
+        },
+        "peak_rss": 37583945728,
+        "process_swap": 0,
+        "cpu_percent_one_core": 263.54016744135794,
+        "presented": 241,
+        "events": [],
+        "source_stat": [
+          47,
+          20372149,
+          125950754101,
+          1790459431649621061,
+          1790459508131850482
+        ],
+        "unchanged_stat": true,
+        "strict_selected_oracles": 2,
+        "cache_state": "Uncontrolled OS cache; fresh native process"
+      },
+      "startup_events": [
+        {
+          "ahead_samples": 296,
+          "ahead_seconds": 14.799999999999198,
+          "consumer": 20.000000000000153,
+          "measured_seconds": 27.084327,
+          "producer": 10.570457270022429,
+          "ratio": 0.5285228635011174,
+          "ready": true,
+          "reason": "admitted_window",
+          "required_lead_seconds": -1.0,
+          "seconds": 29.539,
+          "time": 0.0
+        }
+      ],
+      "pipeline": {
+        "assembly": {
+          "count": 417,
+          "max_ms": 113.39899999999999,
+          "total_ms": 29069.695000000032
+        },
+        "conversion": {
+          "count": 417,
+          "max_ms": 0.007,
+          "total_ms": 0.1490000000000001
+        },
+        "decompress": {
+          "count": 417,
+          "max_ms": 137.299,
+          "total_ms": 41341.76600000002
+        },
+        "file_io": {
+          "count": 417,
+          "max_ms": 88.615,
+          "total_ms": 13435.530000000002
+        },
+        "plane_copies": {
+          "count": 417,
+          "max_ms": 49.339,
+          "total_ms": 6347.36
+        },
+        "raw_hash": {
+          "count": 417,
+          "max_ms": 0.0,
+          "total_ms": 0.0
+        },
+        "statistics": {
+          "count": 417,
+          "max_ms": 0.003,
+          "total_ms": 0.3850000000000003
+        },
+        "stored_hash": {
+          "count": 417,
+          "max_ms": 0.0,
+          "total_ms": 0.0
+        },
+        "typed_conversion": {
+          "count": 417,
+          "max_ms": 76.893,
+          "total_ms": 15961.00199999999
+        }
+      },
+      "regressions": [],
+      "timeline_observations": 10
+    },
+    "3-speed-4": {
+      "summary": {
+        "mode": "3",
+        "speed": 4.0,
+        "open_seconds": 0.899922,
+        "ready_seconds": 29.257399,
+        "startup": {
+          "ahead_samples": 301,
+          "ahead_seconds": 7.524999999999574,
+          "consumer": 40.000000000000306,
+          "measured_seconds": 27.863063000000007,
+          "producer": 10.577200075145718,
+          "ratio": 0.26443000187864096,
+          "ready": true,
+          "reason": "admitted_window",
+          "required_lead_seconds": -1.0
+        },
+        "wall_seconds": 41.291005,
+        "committed_seconds": 35.12799200000002,
+        "complete": false,
+        "field_waits": 68,
+        "particle_waits": 77,
+        "field_wait_seconds": 1.4775989999999997,
+        "particle_wait_seconds": 3.6977570000000015,
+        "checks": 4,
+        "draw_ms": {
+          "p50": 6.944,
+          "p95": 21.398,
+          "p99": 38.465,
+          "max": 51.038
+        },
+        "callback_ms": {
+          "p50": 1.367,
+          "p95": 20.145,
+          "p99": 36.282,
+          "max": 47.124
+        },
+        "peak_rss": 37396475904,
+        "process_swap": 0,
+        "cpu_percent_one_core": 264.4415102852576,
+        "presented": 192,
+        "events": [],
+        "source_stat": [
+          47,
+          20372149,
+          125950754101,
+          1790459431649621061,
+          1790459508131850482
+        ],
+        "unchanged_stat": true,
+        "strict_selected_oracles": 2,
+        "cache_state": "Uncontrolled OS cache; fresh native process"
+      },
+      "startup_events": [
+        {
+          "ahead_samples": 301,
+          "ahead_seconds": 7.524999999999574,
+          "consumer": 40.000000000000306,
+          "measured_seconds": 27.863063000000007,
+          "producer": 10.577200075145718,
+          "ratio": 0.26443000187864096,
+          "ready": true,
+          "reason": "admitted_window",
+          "required_lead_seconds": -1.0,
+          "seconds": 30.097,
+          "time": 0.0
+        }
+      ],
+      "pipeline": {
+        "assembly": {
+          "count": 421,
+          "max_ms": 114.75599999999999,
+          "total_ms": 29332.63099999998
+        },
+        "conversion": {
+          "count": 421,
+          "max_ms": 0.002,
+          "total_ms": 0.11900000000000009
+        },
+        "decompress": {
+          "count": 421,
+          "max_ms": 137.23400000000004,
+          "total_ms": 41768.71100000002
+        },
+        "file_io": {
+          "count": 421,
+          "max_ms": 62.624,
+          "total_ms": 13173.649000000007
+        },
+        "plane_copies": {
+          "count": 421,
+          "max_ms": 33.875,
+          "total_ms": 6148.683000000001
+        },
+        "raw_hash": {
+          "count": 421,
+          "max_ms": 0.0,
+          "total_ms": 0.0
+        },
+        "statistics": {
+          "count": 421,
+          "max_ms": 0.006,
+          "total_ms": 0.4020000000000003
+        },
+        "stored_hash": {
+          "count": 421,
+          "max_ms": 0.0,
+          "total_ms": 0.0
+        },
+        "typed_conversion": {
+          "count": 421,
+          "max_ms": 78.599,
+          "total_ms": 16050.973000000016
+        }
+      },
+      "regressions": [],
+      "timeline_observations": 10
+    },
+    "4-speed-2": {
+      "summary": {
+        "mode": "4",
+        "speed": 2.0,
+        "open_seconds": 0.908746,
+        "ready_seconds": 25.679354,
+        "startup": {
+          "ahead_samples": 290,
+          "ahead_seconds": 14.499999999999257,
+          "consumer": 20.000000000000153,
+          "measured_seconds": 23.843780999999993,
+          "producer": 11.638070162082425,
+          "ratio": 0.5819035081041168,
+          "ready": true,
+          "reason": "admitted_window",
+          "required_lead_seconds": -1.0
+        },
+        "wall_seconds": 37.73278,
+        "committed_seconds": 24.08417600000003,
+        "complete": false,
+        "field_waits": 0,
+        "particle_waits": 0,
+        "field_wait_seconds": 0.0,
+        "particle_wait_seconds": 0.0,
+        "checks": 4,
+        "draw_ms": {
+          "p50": 6.955,
+          "p95": 27.295,
+          "p99": 38.206,
+          "max": 58.224
+        },
+        "callback_ms": {
+          "p50": 1.583,
+          "p95": 25.732,
+          "p99": 35.631,
+          "max": 56.374
+        },
+        "peak_rss": 36498460672,
+        "process_swap": 0,
+        "cpu_percent_one_core": 299.7648888621349,
+        "presented": 241,
+        "events": [],
+        "source_stat": [
+          47,
+          20372149,
+          125950754101,
+          1790459431649621061,
+          1790459508131850482
+        ],
+        "unchanged_stat": true,
+        "strict_selected_oracles": 2,
+        "cache_state": "Uncontrolled OS cache; fresh native process"
+      },
+      "startup_events": [
+        {
+          "ahead_samples": 290,
+          "ahead_seconds": 14.499999999999257,
+          "consumer": 20.000000000000153,
+          "measured_seconds": 23.843780999999993,
+          "producer": 11.638070162082425,
+          "ratio": 0.5819035081041168,
+          "ready": true,
+          "reason": "admitted_window",
+          "required_lead_seconds": -1.0,
+          "seconds": 26.483,
+          "time": 0.0
+        }
+      ],
+      "pipeline": {
+        "assembly": {
+          "count": 419,
+          "max_ms": 123.584,
+          "total_ms": 30514.701000000023
+        },
+        "conversion": {
+          "count": 419,
+          "max_ms": 0.006,
+          "total_ms": 0.1450000000000001
+        },
+        "decompress": {
+          "count": 419,
+          "max_ms": 199.719,
+          "total_ms": 59044.787000000004
+        },
+        "file_io": {
+          "count": 419,
+          "max_ms": 99.56200000000001,
+          "total_ms": 15803.844000000003
+        },
+        "plane_copies": {
+          "count": 419,
+          "max_ms": 35.755,
+          "total_ms": 6867.474000000001
+        },
+        "raw_hash": {
+          "count": 419,
+          "max_ms": 0.0,
+          "total_ms": 0.0
+        },
+        "statistics": {
+          "count": 419,
+          "max_ms": 0.013,
+          "total_ms": 0.46000000000000035
+        },
+        "stored_hash": {
+          "count": 419,
+          "max_ms": 0.0,
+          "total_ms": 0.0
+        },
+        "typed_conversion": {
+          "count": 419,
+          "max_ms": 107.898,
+          "total_ms": 17977.655000000002
+        }
+      },
+      "regressions": [],
+      "timeline_observations": 9
+    },
+    "4-speed-4": {
+      "summary": {
+        "mode": "4",
+        "speed": 4.0,
+        "open_seconds": 0.911208,
+        "ready_seconds": 25.548475,
+        "startup": {
+          "ahead_samples": 289,
+          "ahead_seconds": 7.224999999999634,
+          "consumer": 40.000000000000306,
+          "measured_seconds": 23.757598,
+          "producer": 11.46275595438332,
+          "ratio": 0.2865688988595808,
+          "ready": true,
+          "reason": "admitted_window",
+          "required_lead_seconds": -1.0
+        },
+        "wall_seconds": 37.583255,
+        "committed_seconds": 27.478128,
+        "complete": false,
+        "field_waits": 37,
+        "particle_waits": 73,
+        "field_wait_seconds": 0.857772,
+        "particle_wait_seconds": 5.61453599999999,
+        "checks": 4,
+        "draw_ms": {
+          "p50": 6.94,
+          "p95": 19.162,
+          "p99": 40.18,
+          "max": 58.267
+        },
+        "callback_ms": {
+          "p50": 1.373,
+          "p95": 17.537,
+          "p99": 38.474,
+          "max": 56.206
+        },
+        "peak_rss": 36737937408,
+        "process_swap": 0,
+        "cpu_percent_one_core": 294.49267415730674,
+        "presented": 145,
+        "events": [],
+        "source_stat": [
+          47,
+          20372149,
+          125950754101,
+          1790459431649621061,
+          1790459508131850482
+        ],
+        "unchanged_stat": true,
+        "strict_selected_oracles": 2,
+        "cache_state": "Uncontrolled OS cache; fresh native process"
+      },
+      "startup_events": [
+        {
+          "ahead_samples": 289,
+          "ahead_seconds": 7.224999999999634,
+          "consumer": 40.000000000000306,
+          "measured_seconds": 23.757598,
+          "producer": 11.46275595438332,
+          "ratio": 0.2865688988595808,
+          "ready": true,
+          "reason": "admitted_window",
+          "required_lead_seconds": -1.0,
+          "seconds": 26.391,
+          "time": 0.0
+        }
+      ],
+      "pipeline": {
+        "assembly": {
+          "count": 421,
+          "max_ms": 126.06800000000001,
+          "total_ms": 30625.659
+        },
+        "conversion": {
+          "count": 421,
+          "max_ms": 0.001,
+          "total_ms": 0.08500000000000006
+        },
+        "decompress": {
+          "count": 421,
+          "max_ms": 205.38899999999998,
+          "total_ms": 59848.879999999976
+        },
+        "file_io": {
+          "count": 421,
+          "max_ms": 68.485,
+          "total_ms": 15304.463999999994
+        },
+        "plane_copies": {
+          "count": 421,
+          "max_ms": 35.651,
+          "total_ms": 6784.902999999995
+        },
+        "raw_hash": {
+          "count": 421,
+          "max_ms": 0.0,
+          "total_ms": 0.0
+        },
+        "statistics": {
+          "count": 421,
+          "max_ms": 0.029,
+          "total_ms": 0.4830000000000004
+        },
+        "stored_hash": {
+          "count": 421,
+          "max_ms": 0.0,
+          "total_ms": 0.0
+        },
+        "typed_conversion": {
+          "count": 421,
+          "max_ms": 99.12400000000001,
+          "total_ms": 17930.343000000008
+        }
+      },
+      "regressions": [],
+      "timeline_observations": 10
+    },
+    "actions-final": {
+      "summary": {
+        "actions": [
+          {
+            "action": "channel",
+            "seconds": 2.037123
+          },
+          {
+            "action": "seek",
+            "seconds": 3.126424,
+            "target": 3.972526000000001
+          },
+          {
+            "action": "seek",
+            "seconds": 3.514784,
+            "target": 109.54999999995111
+          }
+        ],
+        "close_ms": 1933.913,
+        "checks": 22,
+        "draw_ms": null,
+        "callback_ms": null,
+        "peak_rss": 39166119936,
+        "process_swap": 0,
+        "cpu_percent_one_core": 235.05827994958057,
+        "presented": 0,
+        "events": [
+          {
+            "ahead_seconds": 2.7999999999999625,
+            "consumer": 10.000000000000076,
+            "from": 2,
+            "producer": 9.294141506943122,
+            "reason": "producer_below_margin",
+            "seconds": 4.742088,
+            "to": 3
+          },
+          {
+            "ahead_seconds": 5.999999999999894,
+            "consumer": 10.000000000000076,
+            "from": 3,
+            "producer": 11.375472918740549,
+            "reason": "producer_below_margin",
+            "seconds": 7.751285,
+            "to": 4
+          },
+          {
+            "ahead_seconds": 2.9529019999668833,
+            "consumer": 10.000000000009095,
+            "from": 4,
+            "producer": 8.867111948665952,
+            "reason": "memory_headroom",
+            "seconds": 34.805177,
+            "to": 1
+          },
+          {
+            "ahead_seconds": 6.399999999999892,
+            "consumer": 10.000000000009095,
+            "from": 1,
+            "producer": 6.499820067708131,
+            "reason": "producer_below_margin",
+            "seconds": 60.016175,
+            "to": 2
+          },
+          {
+            "ahead_seconds": 8.562372999999951,
+            "consumer": 10.00000000000009,
+            "from": 2,
+            "producer": 9.612196978673879,
+            "reason": "producer_below_margin",
+            "seconds": 63.048278,
+            "to": 3
+          },
+          {
+            "ahead_seconds": 7.94458400000048,
+            "consumer": 10.000000000000213,
+            "from": 3,
+            "producer": 11.378482512963439,
+            "reason": "producer_below_margin",
+            "seconds": 67.05312,
+            "to": 4
+          }
+        ],
+        "source_stat": [
+          47,
+          20372149,
+          125950754101,
+          1790459431649621061,
+          1790459508131850482
+        ],
+        "unchanged_stat": true,
+        "strict_selected_oracles": 1,
+        "cache_state": "Uncontrolled OS cache; fresh native process"
+      },
+      "startup_events": [
+        {
+          "ahead_samples": 104,
+          "ahead_seconds": 10.400000000000226,
+          "consumer": 10.000000000000076,
+          "measured_seconds": 3.579928,
+          "producer": 11.208331588266333,
+          "ratio": 1.1208331588266247,
+          "ready": true,
+          "reason": "faster_producer",
+          "required_lead_seconds": 3.0,
+          "seconds": 11.765,
+          "time": 0.0
+        },
+        {
+          "ahead_samples": 112,
+          "ahead_seconds": 11.127474000000959,
+          "consumer": 10.000000000000213,
+          "measured_seconds": 3.3239139999999994,
+          "producer": 43.2107804197734,
+          "ratio": 4.321078041977247,
+          "ready": true,
+          "reason": "faster_producer",
+          "required_lead_seconds": 3.0,
+          "seconds": 16.928,
+          "time": 3.972526000000001
+        },
+        {
+          "ahead_samples": 31,
+          "ahead_seconds": 3.0500000000189686,
+          "consumer": 10.000000000009095,
+          "measured_seconds": 7.668017,
+          "producer": 16.570764477161617,
+          "ratio": 1.6570764477146547,
+          "ready": true,
+          "reason": "faster_producer",
+          "required_lead_seconds": 3.0,
+          "seconds": 22.235,
+          "time": 109.54999999995111
+        },
+        {
+          "ahead_samples": 31,
+          "ahead_seconds": 3.024075999975665,
+          "consumer": 10.000000000009095,
+          "measured_seconds": 10.851062,
+          "producer": 12.849558136345976,
+          "ratio": 1.284955813633429,
+          "ready": true,
+          "reason": "faster_producer",
+          "required_lead_seconds": 3.0,
+          "seconds": 25.102,
+          "time": 109.72407599995111
+        },
+        {
+          "ahead_samples": 90,
+          "ahead_seconds": 8.799999999999926,
+          "consumer": 10.000000000009095,
+          "measured_seconds": 1.71244,
+          "producer": 9.322767861711691,
+          "ratio": 0.9322767861703212,
+          "ready": true,
+          "reason": "admitted_window",
+          "required_lead_seconds": -1.0,
+          "seconds": 62.604,
+          "time": 156.29999999993018
+        },
+        {
+          "ahead_samples": 132,
+          "ahead_seconds": 6.569072000000095,
+          "consumer": 19.999999999999545,
+          "measured_seconds": 5.535525999999994,
+          "producer": 12.434371647849991,
+          "ratio": 0.6217185823925137,
+          "ready": true,
+          "reason": "admitted_window",
+          "required_lead_seconds": -1.0,
+          "seconds": 73.493,
+          "time": 7.261856000000035
+        },
+        {
+          "ahead_samples": 158,
+          "ahead_seconds": 3.929862499999762,
+          "consumer": 39.99999999999375,
+          "measured_seconds": 10.086327999999998,
+          "producer": 12.356343137821874,
+          "ratio": 0.3089085784455951,
+          "ready": true,
+          "reason": "admitted_window",
+          "required_lead_seconds": -1.0,
+          "seconds": 78.569,
+          "time": 10.480550000000024
+        }
+      ],
+      "pipeline": {
+        "assembly": {
+          "count": 729,
+          "max_ms": 105.55499999999999,
+          "total_ms": 47124.91500000003
+        },
+        "conversion": {
+          "count": 836,
+          "max_ms": 0.002,
+          "total_ms": 0.21100000000000016
+        },
+        "decompress": {
+          "count": 729,
+          "max_ms": 196.215,
+          "total_ms": 86007.76400000013
+        },
+        "file_io": {
+          "count": 729,
+          "max_ms": 75.498,
+          "total_ms": 22483.895000000004
+        },
+        "plane_copies": {
+          "count": 836,
+          "max_ms": 39.045,
+          "total_ms": 12520.68400000001
+        },
+        "raw_hash": {
+          "count": 729,
+          "max_ms": 0.0,
+          "total_ms": 0.0
+        },
+        "statistics": {
+          "count": 836,
+          "max_ms": 0.004,
+          "total_ms": 0.8900000000000007
+        },
+        "stored_hash": {
+          "count": 729,
+          "max_ms": 0.0,
+          "total_ms": 0.0
+        },
+        "typed_conversion": {
+          "count": 729,
+          "max_ms": 77.0,
+          "total_ms": 21673.12500000001
+        }
+      },
+      "regressions": [],
+      "timeline_observations": 27
+    },
+    "auto-full-1": {
+      "summary": {
+        "mode": "auto",
+        "speed": 1.0,
+        "open_seconds": 1.187609,
+        "ready_seconds": 12.224958,
+        "startup": {
+          "ahead_samples": 120,
+          "ahead_seconds": 12.000000000000476,
+          "consumer": 10.000000000000076,
+          "measured_seconds": 3.752365,
+          "producer": 11.736115194825501,
+          "ratio": 1.1736115194825412,
+          "ready": true,
+          "reason": "faster_producer",
+          "required_lead_seconds": 3.0
+        },
+        "wall_seconds": 168.736279,
+        "committed_seconds": 156.49999999993017,
+        "complete": true,
+        "field_waits": 0,
+        "particle_waits": 0,
+        "field_wait_seconds": 0.0,
+        "particle_wait_seconds": 0.0,
+        "checks": 5,
+        "draw_ms": {
+          "p50": 5.86,
+          "p95": 32.077,
+          "p99": 40.634,
+          "max": 73.71
+        },
+        "callback_ms": {
+          "p50": 1.453,
+          "p95": 30.229,
+          "p99": 38.05,
+          "max": 67.577
+        },
+        "peak_rss": 36857765888,
+        "process_swap": 0,
+        "cpu_percent_one_core": 291.8448214941347,
+        "presented": 1566,
+        "events": [
+          {
+            "ahead_seconds": 2.6999999999999647,
+            "consumer": 10.000000000000076,
+            "from": 2,
+            "producer": 9.055104234120725,
+            "reason": "producer_below_margin",
+            "seconds": 5.093707,
+            "to": 3
+          },
+          {
+            "ahead_seconds": 7.299999999999867,
+            "consumer": 10.000000000000076,
+            "from": 3,
+            "producer": 11.31773967298106,
+            "reason": "producer_below_margin",
+            "seconds": 9.09509,
+            "to": 4
+          }
+        ],
+        "source_stat": [
+          47,
+          20372149,
+          125950754101,
+          1790459431649621061,
+          1790459508131850482
+        ],
+        "unchanged_stat": true,
+        "strict_selected_oracles": 4,
+        "cache_state": "Uncontrolled OS cache; fresh native process"
+      },
+      "startup_events": [
+        {
+          "ahead_samples": 120,
+          "ahead_seconds": 12.000000000000476,
+          "consumer": 10.000000000000076,
+          "measured_seconds": 3.752365,
+          "producer": 11.736115194825501,
+          "ratio": 1.1736115194825412,
+          "ready": true,
+          "reason": "faster_producer",
+          "required_lead_seconds": 3.0,
+          "seconds": 13.115,
+          "time": 0.0
+        }
+      ],
+      "pipeline": {
+        "assembly": {
+          "count": 1630,
+          "max_ms": 139.98899999999998,
+          "total_ms": 106370.46499999982
+        },
+        "conversion": {
+          "count": 1630,
+          "max_ms": 0.002,
+          "total_ms": 0.34300000000000025
+        },
+        "decompress": {
+          "count": 1630,
+          "max_ms": 208.31799999999996,
+          "total_ms": 265569.5040000001
+        },
+        "file_io": {
+          "count": 1630,
+          "max_ms": 85.89500000000001,
+          "total_ms": 60652.353999999956
+        },
+        "plane_copies": {
+          "count": 1630,
+          "max_ms": 38.665,
+          "total_ms": 26478.20300000003
+        },
+        "raw_hash": {
+          "count": 1630,
+          "max_ms": 0.0,
+          "total_ms": 0.0
+        },
+        "statistics": {
+          "count": 1630,
+          "max_ms": 0.013,
+          "total_ms": 2.0339999999999363
+        },
+        "stored_hash": {
+          "count": 1630,
+          "max_ms": 0.0,
+          "total_ms": 0.0
+        },
+        "typed_conversion": {
+          "count": 1630,
+          "max_ms": 109.753,
+          "total_ms": 38940.00099999995
+        }
+      },
+      "regressions": [],
+      "timeline_observations": 35
+    },
+    "auto-full-final": {
+      "summary": {
+        "mode": "auto",
+        "speed": 1.0,
+        "open_seconds": 0.892756,
+        "ready_seconds": 10.921759,
+        "startup": {
+          "ahead_samples": 107,
+          "ahead_seconds": 10.700000000000273,
+          "consumer": 10.000000000000076,
+          "measured_seconds": 3.81355,
+          "producer": 11.542595476490552,
+          "ratio": 1.1542595476490465,
+          "ready": true,
+          "reason": "faster_producer",
+          "required_lead_seconds": 3.0
+        },
+        "wall_seconds": 167.434039,
+        "committed_seconds": 156.49999999993017,
+        "complete": true,
+        "field_waits": 0,
+        "particle_waits": 0,
+        "field_wait_seconds": 0.0,
+        "particle_wait_seconds": 0.0,
+        "checks": 5,
+        "draw_ms": {
+          "p50": 5.773,
+          "p95": 28.825,
+          "p99": 36.509,
+          "max": 165.347
+        },
+        "callback_ms": {
+          "p50": 1.041,
+          "p95": 27.064,
+          "p99": 34.357,
+          "max": 163.993
+        },
+        "peak_rss": 38189981696,
+        "process_swap": 0,
+        "cpu_percent_one_core": 287.3861493027916,
+        "presented": 1566,
+        "events": [
+          {
+            "ahead_seconds": 2.7999999999999625,
+            "consumer": 10.000000000000076,
+            "from": 2,
+            "producer": 9.46906561801143,
+            "reason": "producer_below_margin",
+            "seconds": 4.740012,
+            "to": 3
+          },
+          {
+            "ahead_seconds": 6.19999999999989,
+            "consumer": 10.000000000000076,
+            "from": 3,
+            "producer": 11.418667566206034,
+            "reason": "producer_below_margin",
+            "seconds": 7.741729,
+            "to": 4
+          },
+          {
+            "ahead_seconds": 11.432799999999208,
+            "consumer": 10.00000000000199,
+            "from": 4,
+            "producer": 8.227683577168637,
+            "reason": "memory_headroom",
+            "seconds": 34.932688,
+            "to": 1
+          },
+          {
+            "ahead_seconds": 5.904951000001617,
+            "consumer": 9.999999999995994,
+            "from": 1,
+            "producer": 4.2690868817070795,
+            "reason": "producer_below_margin",
+            "seconds": 44.942743,
+            "to": 2
+          },
+          {
+            "ahead_seconds": 5.2009820000027815,
+            "consumer": 9.999999999994884,
+            "from": 2,
+            "producer": 7.640121683747425,
+            "reason": "producer_below_margin",
+            "seconds": 47.946643,
+            "to": 3
+          },
+          {
+            "ahead_seconds": 3.9383200000062004,
+            "consumer": 9.999999999994884,
+            "from": 3,
+            "producer": 8.033359750309895,
+            "reason": "producer_below_margin",
+            "seconds": 56.009047,
+            "to": 4
+          }
+        ],
+        "source_stat": [
+          47,
+          20372149,
+          125950754101,
+          1790459431649621061,
+          1790459508131850482
+        ],
+        "unchanged_stat": true,
+        "strict_selected_oracles": 4,
+        "cache_state": "Uncontrolled OS cache; fresh native process"
+      },
+      "startup_events": [
+        {
+          "ahead_samples": 107,
+          "ahead_seconds": 10.700000000000273,
+          "consumer": 10.000000000000076,
+          "measured_seconds": 3.81355,
+          "producer": 11.542595476490552,
+          "ratio": 1.1542595476490465,
+          "ready": true,
+          "reason": "faster_producer",
+          "required_lead_seconds": 3.0,
+          "seconds": 11.754,
+          "time": 0.0
+        }
+      ],
+      "pipeline": {
+        "assembly": {
+          "count": 1679,
+          "max_ms": 121.38099999999999,
+          "total_ms": 107653.97600000007
+        },
+        "conversion": {
+          "count": 1679,
+          "max_ms": 0.006,
+          "total_ms": 0.5910000000000004
+        },
+        "decompress": {
+          "count": 1679,
+          "max_ms": 201.679,
+          "total_ms": 257334.4399999997
+        },
+        "file_io": {
+          "count": 1679,
+          "max_ms": 84.803,
+          "total_ms": 61422.57499999997
+        },
+        "plane_copies": {
+          "count": 1679,
+          "max_ms": 36.246,
+          "total_ms": 25504.820000000043
+        },
+        "raw_hash": {
+          "count": 1679,
+          "max_ms": 0.0,
+          "total_ms": 0.0
+        },
+        "statistics": {
+          "count": 1679,
+          "max_ms": 0.01,
+          "total_ms": 2.0969999999999405
+        },
+        "stored_hash": {
+          "count": 1679,
+          "max_ms": 0.0,
+          "total_ms": 0.0
+        },
+        "typed_conversion": {
+          "count": 1679,
+          "max_ms": 110.34100000000001,
+          "total_ms": 38331.72299999997
+        }
+      },
+      "regressions": [],
+      "timeline_observations": 37
+    },
+    "auto-speed-2": {
+      "summary": {
+        "mode": "auto",
+        "speed": 2.0,
+        "open_seconds": 0.936663,
+        "ready_seconds": 26.88638,
+        "startup": {
+          "ahead_samples": 291,
+          "ahead_seconds": 14.549999999999248,
+          "consumer": 20.000000000000153,
+          "measured_seconds": 18.810584000000002,
+          "producer": 11.81556774615647,
+          "ratio": 0.590778387307819,
+          "ready": true,
+          "reason": "admitted_window",
+          "required_lead_seconds": -1.0
+        },
+        "wall_seconds": 38.936036,
+        "committed_seconds": 23.982402000000032,
+        "complete": false,
+        "field_waits": 0,
+        "particle_waits": 1,
+        "field_wait_seconds": 0.0,
+        "particle_wait_seconds": 0.054065999999999996,
+        "checks": 4,
+        "draw_ms": {
+          "p50": 6.946,
+          "p95": 25.599,
+          "p99": 38.304,
+          "max": 69.775
+        },
+        "callback_ms": {
+          "p50": 1.489,
+          "p95": 23.845,
+          "p99": 36.131,
+          "max": 68.486
+        },
+        "peak_rss": 37033529344,
+        "process_swap": 0,
+        "cpu_percent_one_core": 284.68321851331996,
+        "presented": 239,
+        "events": [
+          {
+            "ahead_seconds": 1.3499999999999823,
+            "consumer": 20.000000000000153,
+            "from": 2,
+            "producer": 9.053532970914624,
+            "reason": "producer_below_margin",
+            "seconds": 4.732288,
+            "to": 3
+          },
+          {
+            "ahead_seconds": 3.049999999999946,
+            "consumer": 20.000000000000153,
+            "from": 3,
+            "producer": 11.616762489288448,
+            "reason": "producer_below_margin",
+            "seconds": 7.743106,
+            "to": 4
+          }
+        ],
+        "source_stat": [
+          47,
+          20372149,
+          125950754101,
+          1790459431649621061,
+          1790459508131850482
+        ],
+        "unchanged_stat": true,
+        "strict_selected_oracles": 2,
+        "cache_state": "Uncontrolled OS cache; fresh native process"
+      },
+      "startup_events": [
+        {
+          "ahead_samples": 291,
+          "ahead_seconds": 14.549999999999248,
+          "consumer": 20.000000000000153,
+          "measured_seconds": 18.810584000000002,
+          "producer": 11.81556774615647,
+          "ratio": 0.590778387307819,
+          "ready": true,
+          "reason": "admitted_window",
+          "required_lead_seconds": -1.0,
+          "seconds": 27.671,
+          "time": 0.0
+        }
+      ],
+      "pipeline": {
+        "assembly": {
+          "count": 418,
+          "max_ms": 122.228,
+          "total_ms": 30272.402000000002
+        },
+        "conversion": {
+          "count": 418,
+          "max_ms": 0.001,
+          "total_ms": 0.10600000000000008
+        },
+        "decompress": {
+          "count": 418,
+          "max_ms": 207.06200000000004,
+          "total_ms": 57357.507000000034
+        },
+        "file_io": {
+          "count": 418,
+          "max_ms": 68.006,
+          "total_ms": 14234.173000000012
+        },
+        "plane_copies": {
+          "count": 418,
+          "max_ms": 36.66,
+          "total_ms": 6744.933000000004
+        },
+        "raw_hash": {
+          "count": 418,
+          "max_ms": 0.0,
+          "total_ms": 0.0
+        },
+        "statistics": {
+          "count": 418,
+          "max_ms": 0.007,
+          "total_ms": 0.47000000000000036
+        },
+        "stored_hash": {
+          "count": 418,
+          "max_ms": 0.0,
+          "total_ms": 0.0
+        },
+        "typed_conversion": {
+          "count": 418,
+          "max_ms": 84.206,
+          "total_ms": 16964.43699999999
+        }
+      },
+      "regressions": [],
+      "timeline_observations": 10
+    },
+    "auto-speed-4": {
+      "summary": {
+        "mode": "auto",
+        "speed": 4.0,
+        "open_seconds": 0.898328,
+        "ready_seconds": 26.670604,
+        "startup": {
+          "ahead_samples": 290,
+          "ahead_seconds": 7.249999999999629,
+          "consumer": 40.000000000000306,
+          "measured_seconds": 18.666966999999996,
+          "producer": 11.767068546927641,
+          "ratio": 0.29417671367318876,
+          "ready": true,
+          "reason": "admitted_window",
+          "required_lead_seconds": -1.0
+        },
+        "wall_seconds": 38.676285,
+        "committed_seconds": 13.153787999999993,
+        "complete": false,
+        "field_waits": 7,
+        "particle_waits": 0,
+        "field_wait_seconds": 8.764406999999991,
+        "particle_wait_seconds": 0.0,
+        "checks": 4,
+        "draw_ms": {
+          "p50": 6.946,
+          "p95": 8.271,
+          "p99": 23.993,
+          "max": 51.676
+        },
+        "callback_ms": {
+          "p50": 1.643,
+          "p95": 3.308,
+          "p99": 22.616,
+          "max": 50.774
+        },
+        "peak_rss": 36809486336,
+        "process_swap": 0,
+        "cpu_percent_one_core": 257.1271843024768,
+        "presented": 94,
+        "events": [
+          {
+            "ahead_seconds": 0.6749999999999912,
+            "consumer": 40.000000000000306,
+            "from": 2,
+            "producer": 9.061367005955653,
+            "reason": "producer_below_margin",
+            "seconds": 4.753283,
+            "to": 3
+          },
+          {
+            "ahead_seconds": 1.524999999999973,
+            "consumer": 40.000000000000306,
+            "from": 3,
+            "producer": 11.5102101771344,
+            "reason": "producer_below_margin",
+            "seconds": 7.76185,
+            "to": 4
+          }
+        ],
+        "source_stat": [
+          47,
+          20372149,
+          125950754101,
+          1790459431649621061,
+          1790459508131850482
+        ],
+        "unchanged_stat": true,
+        "strict_selected_oracles": 1,
+        "cache_state": "Uncontrolled OS cache; fresh native process"
+      },
+      "startup_events": [
+        {
+          "ahead_samples": 290,
+          "ahead_seconds": 7.249999999999629,
+          "consumer": 40.000000000000306,
+          "measured_seconds": 18.666966999999996,
+          "producer": 11.767068546927641,
+          "ratio": 0.29417671367318876,
+          "ready": true,
+          "reason": "admitted_window",
+          "required_lead_seconds": -1.0,
+          "seconds": 27.507,
+          "time": 0.0
+        },
+        {
+          "ahead_samples": 291,
+          "ahead_seconds": 7.271982999999549,
+          "consumer": 40.00000000000057,
+          "measured_seconds": 20.083448999999998,
+          "producer": 11.461166455298343,
+          "ratio": 0.2865291613824545,
+          "ready": true,
+          "reason": "admitted_window",
+          "required_lead_seconds": -1.0,
+          "seconds": 29.31,
+          "time": 1.5120680000000002
+        },
+        {
+          "ahead_samples": 284,
+          "ahead_seconds": 7.087579999999504,
+          "consumer": 40.00000000000085,
+          "measured_seconds": 21.485842999999996,
+          "producer": 10.694210183045984,
+          "ratio": 0.2673552545761439,
+          "ready": true,
+          "reason": "admitted_window",
+          "required_lead_seconds": -1.0,
+          "seconds": 31.43,
+          "time": 3.8496800000000015
+        },
+        {
+          "ahead_samples": 274,
+          "ahead_seconds": 6.84670699999962,
+          "consumer": 40.00000000000085,
+          "measured_seconds": 21.485842999999996,
+          "producer": 10.694210183045984,
+          "ratio": 0.2673552545761439,
+          "ready": true,
+          "reason": "admitted_window",
+          "required_lead_seconds": -1.0,
+          "seconds": 32.667,
+          "time": 5.713171999999998
+        },
+        {
+          "ahead_samples": 271,
+          "ahead_seconds": 6.76557099999971,
+          "consumer": 40.0000000000002,
+          "measured_seconds": 22.530717999999993,
+          "producer": 10.970856190699005,
+          "ratio": 0.27427140476747375,
+          "ready": true,
+          "reason": "admitted_window",
+          "required_lead_seconds": -1.0,
+          "seconds": 33.41,
+          "time": 6.737715999999999
+        },
+        {
+          "ahead_samples": 267,
+          "ahead_seconds": 6.667593999999927,
+          "consumer": 39.99999999999554,
+          "measured_seconds": 23.931165999999994,
+          "producer": 10.130096831056079,
+          "ratio": 0.25325242077643023,
+          "ready": true,
+          "reason": "admitted_window",
+          "required_lead_seconds": -1.0,
+          "seconds": 35.611,
+          "time": 8.829623999999999
+        },
+        {
+          "ahead_samples": 258,
+          "ahead_seconds": 6.44160499999998,
+          "consumer": 39.99999999999375,
+          "measured_seconds": 24.563003999999992,
+          "producer": 11.016078613507789,
+          "ratio": 0.27540196533773775,
+          "ready": true,
+          "reason": "admitted_window",
+          "required_lead_seconds": -1.0,
+          "seconds": 36.175,
+          "time": 10.133579999999995
+        }
+      ],
+      "pipeline": {
+        "assembly": {
+          "count": 399,
+          "max_ms": 114.32900000000001,
+          "total_ms": 28261.063000000002
+        },
+        "conversion": {
+          "count": 399,
+          "max_ms": 0.002,
+          "total_ms": 0.12500000000000008
+        },
+        "decompress": {
+          "count": 399,
+          "max_ms": 192.77999999999997,
+          "total_ms": 52491.811000000016
+        },
+        "file_io": {
+          "count": 399,
+          "max_ms": 64.322,
+          "total_ms": 13354.066999999997
+        },
+        "plane_copies": {
+          "count": 399,
+          "max_ms": 32.264,
+          "total_ms": 6040.632999999994
+        },
+        "raw_hash": {
+          "count": 399,
+          "max_ms": 0.0,
+          "total_ms": 0.0
+        },
+        "statistics": {
+          "count": 399,
+          "max_ms": 0.003,
+          "total_ms": 0.3800000000000003
+        },
+        "stored_hash": {
+          "count": 399,
+          "max_ms": 0.0,
+          "total_ms": 0.0
+        },
+        "typed_conversion": {
+          "count": 399,
+          "max_ms": 79.536,
+          "total_ms": 16249.366999999986
+        }
+      },
+      "regressions": [],
+      "timeline_observations": 10
+    },
+    "auto-speed-4-final": {
+      "summary": {
+        "mode": "auto",
+        "speed": 4.0,
+        "open_seconds": 0.888896,
+        "ready_seconds": 27.169263,
+        "startup": {
+          "ahead_samples": 293,
+          "ahead_seconds": 7.324999999999614,
+          "consumer": 40.000000000000306,
+          "measured_seconds": 19.849114999999994,
+          "producer": 11.693650819964706,
+          "ratio": 0.2923412704991154,
+          "ready": true,
+          "reason": "admitted_window",
+          "required_lead_seconds": -1.0
+        },
+        "wall_seconds": 39.172253,
+        "committed_seconds": 27.85310799999999,
+        "complete": false,
+        "field_waits": 32,
+        "particle_waits": 69,
+        "field_wait_seconds": 0.704514,
+        "particle_wait_seconds": 5.491434999999998,
+        "checks": 4,
+        "draw_ms": {
+          "p50": 6.95,
+          "p95": 17.783,
+          "p99": 37.22,
+          "max": 62.33
+        },
+        "callback_ms": {
+          "p50": 1.25,
+          "p95": 16.236,
+          "p99": 34.964,
+          "max": 50.735
+        },
+        "peak_rss": 37538258944,
+        "process_swap": 0,
+        "cpu_percent_one_core": 279.8055481760561,
+        "presented": 164,
+        "events": [
+          {
+            "ahead_seconds": 0.6999999999999906,
+            "consumer": 40.000000000000306,
+            "from": 2,
+            "producer": 9.233502538186661,
+            "reason": "producer_below_margin",
+            "seconds": 4.682913,
+            "to": 3
+          },
+          {
+            "ahead_seconds": 1.4999999999999736,
+            "consumer": 40.000000000000306,
+            "from": 3,
+            "producer": 11.335417713208129,
+            "reason": "producer_below_margin",
+            "seconds": 7.6854,
+            "to": 4
+          }
+        ],
+        "source_stat": [
+          47,
+          20372149,
+          125950754101,
+          1790459431649621061,
+          1790459508131850482
+        ],
+        "unchanged_stat": true,
+        "strict_selected_oracles": 1,
+        "cache_state": "Uncontrolled OS cache; fresh native process"
+      },
+      "startup_events": [
+        {
+          "ahead_samples": 293,
+          "ahead_seconds": 7.324999999999614,
+          "consumer": 40.000000000000306,
+          "measured_seconds": 19.849114999999994,
+          "producer": 11.693650819964706,
+          "ratio": 0.2923412704991154,
+          "ready": true,
+          "reason": "admitted_window",
+          "required_lead_seconds": -1.0,
+          "seconds": 27.947,
+          "time": 0.0
+        }
+      ],
+      "pipeline": {
+        "assembly": {
+          "count": 417,
+          "max_ms": 121.19000000000001,
+          "total_ms": 30386.947999999982
+        },
+        "conversion": {
+          "count": 417,
+          "max_ms": 0.006,
+          "total_ms": 0.09800000000000007
+        },
+        "decompress": {
+          "count": 417,
+          "max_ms": 210.30299999999997,
+          "total_ms": 56366.52900000004
+        },
+        "file_io": {
+          "count": 417,
+          "max_ms": 139.466,
+          "total_ms": 14870.319999999998
+        },
+        "plane_copies": {
+          "count": 417,
+          "max_ms": 43.163,
+          "total_ms": 6435.450999999999
+        },
+        "raw_hash": {
+          "count": 417,
+          "max_ms": 0.0,
+          "total_ms": 0.0
+        },
+        "statistics": {
+          "count": 417,
+          "max_ms": 0.005,
+          "total_ms": 0.4150000000000003
+        },
+        "stored_hash": {
+          "count": 417,
+          "max_ms": 0.0,
+          "total_ms": 0.0
+        },
+        "typed_conversion": {
+          "count": 417,
+          "max_ms": 97.969,
+          "total_ms": 17147.239999999998
+        }
+      },
+      "regressions": [],
+      "timeline_observations": 11
+    },
+    "fixed-1-full": {
+      "summary": {
+        "mode": "1",
+        "speed": 1.0,
+        "open_seconds": 0.90915,
+        "ready_seconds": 64.50352,
+        "startup": {
+          "ahead_samples": 314,
+          "ahead_seconds": 31.399999999998037,
+          "consumer": 10.000000000000076,
+          "measured_seconds": 63.161369999999984,
+          "producer": 4.7009700495504205,
+          "ratio": 0.4700970049550385,
+          "ready": true,
+          "reason": "admitted_window",
+          "required_lead_seconds": -1.0
+        },
+        "wall_seconds": 288.367032,
+        "committed_seconds": 156.49999999993017,
+        "complete": true,
+        "field_waits": 2,
+        "particle_waits": 0,
+        "field_wait_seconds": 67.376615,
+        "particle_wait_seconds": 0.0,
+        "checks": 5,
+        "draw_ms": {
+          "p50": 6.91,
+          "p95": 18.685,
+          "p99": 26.04,
+          "max": 68.105
+        },
+        "callback_ms": {
+          "p50": 1.424,
+          "p95": 17.442,
+          "p99": 24.734,
+          "max": 67.103
+        },
+        "peak_rss": 38586929152,
+        "process_swap": 0,
+        "cpu_percent_one_core": 149.56155257376594,
+        "presented": 1565,
+        "events": [],
+        "source_stat": [
+          47,
+          20372149,
+          125950754101,
+          1790459431649621061,
+          1790459508131850482
+        ],
+        "unchanged_stat": true,
+        "strict_selected_oracles": 3,
+        "cache_state": "Uncontrolled OS cache; fresh native process"
+      },
+      "startup_events": [
+        {
+          "ahead_samples": 314,
+          "ahead_seconds": 31.399999999998037,
+          "consumer": 10.000000000000076,
+          "measured_seconds": 63.161369999999984,
+          "producer": 4.7009700495504205,
+          "ratio": 0.4700970049550385,
+          "ready": true,
+          "reason": "admitted_window",
+          "required_lead_seconds": -1.0,
+          "seconds": 65.367,
+          "time": 0.0
+        },
+        {
+          "ahead_samples": 307,
+          "ahead_seconds": 30.667147999982276,
+          "consumer": 10.000000000009095,
+          "measured_seconds": 178.74496800000006,
+          "producer": 6.1764359553397465,
+          "ratio": 0.6176435955334129,
+          "ready": true,
+          "reason": "admitted_window",
+          "required_lead_seconds": -1.0,
+          "seconds": 182.044,
+          "time": 68.83285199999972
+        },
+        {
+          "ahead_samples": 132,
+          "ahead_seconds": 13.014832999931627,
+          "consumer": 10.000000000009095,
+          "measured_seconds": 272.5391189999995,
+          "producer": 6.153220462960763,
+          "ratio": 0.6153220462955167,
+          "ready": true,
+          "reason": "admitted_window",
+          "required_lead_seconds": -1.0,
+          "seconds": 276.215,
+          "time": 143.48516699999854
+        }
+      ],
+      "pipeline": {
+        "assembly": {
+          "count": 1586,
+          "max_ms": 88.772,
+          "total_ms": 79595.7159999999
+        },
+        "conversion": {
+          "count": 1586,
+          "max_ms": 0.001,
+          "total_ms": 0.3870000000000003
+        },
+        "decompress": {
+          "count": 1586,
+          "max_ms": 68.23800000000001,
+          "total_ms": 98340.54000000004
+        },
+        "file_io": {
+          "count": 1586,
+          "max_ms": 39.218999999999994,
+          "total_ms": 34907.97100000002
+        },
+        "plane_copies": {
+          "count": 1586,
+          "max_ms": 27.322,
+          "total_ms": 18714.471000000016
+        },
+        "raw_hash": {
+          "count": 1586,
+          "max_ms": 0.0,
+          "total_ms": 0.0
+        },
+        "statistics": {
+          "count": 1586,
+          "max_ms": 0.002,
+          "total_ms": 1.3189999999999664
+        },
+        "stored_hash": {
+          "count": 1586,
+          "max_ms": 0.0,
+          "total_ms": 0.0
+        },
+        "typed_conversion": {
+          "count": 1586,
+          "max_ms": 66.529,
+          "total_ms": 26021.762999999974
+        }
+      },
+      "regressions": [],
+      "timeline_observations": 60
+    },
+    "fixed-1-full-final": {
+      "summary": {
+        "mode": "1",
+        "speed": 1.0,
+        "open_seconds": 0.887474,
+        "ready_seconds": 63.640471,
+        "startup": {
+          "ahead_samples": 315,
+          "ahead_seconds": 31.499999999998018,
+          "consumer": 10.000000000000076,
+          "measured_seconds": 62.110764999999965,
+          "producer": 4.7815440936087965,
+          "ratio": 0.478154409360876,
+          "ready": true,
+          "reason": "admitted_window",
+          "required_lead_seconds": -1.0
+        },
+        "wall_seconds": 282.878334,
+        "committed_seconds": 156.49999999993017,
+        "complete": true,
+        "field_waits": 2,
+        "particle_waits": 0,
+        "field_wait_seconds": 62.73064399999986,
+        "particle_wait_seconds": 0.0,
+        "checks": 5,
+        "draw_ms": {
+          "p50": 6.913,
+          "p95": 18.653,
+          "p99": 26.214,
+          "max": 76.58
+        },
+        "callback_ms": {
+          "p50": 1.435,
+          "p95": 17.388,
+          "p99": 24.933,
+          "max": 74.74
+        },
+        "peak_rss": 38710837248,
+        "process_swap": 0,
+        "cpu_percent_one_core": 151.40814157080027,
+        "presented": 1566,
+        "events": [],
+        "source_stat": [
+          47,
+          20372149,
+          125950754101,
+          1790459431649621061,
+          1790459508131850482
+        ],
+        "unchanged_stat": true,
+        "strict_selected_oracles": 4,
+        "cache_state": "Uncontrolled OS cache; fresh native process"
+      },
+      "startup_events": [
+        {
+          "ahead_samples": 315,
+          "ahead_seconds": 31.499999999998018,
+          "consumer": 10.000000000000076,
+          "measured_seconds": 62.110764999999965,
+          "producer": 4.7815440936087965,
+          "ratio": 0.478154409360876,
+          "ready": true,
+          "reason": "admitted_window",
+          "required_lead_seconds": -1.0,
+          "seconds": 64.437,
+          "time": 0.0
+        },
+        {
+          "ahead_samples": 311,
+          "ahead_seconds": 31.093579999981202,
+          "consumer": 10.000000000009095,
+          "measured_seconds": 178.98514099999994,
+          "producer": 6.247543915260678,
+          "ratio": 0.6247543915254996,
+          "ready": true,
+          "reason": "admitted_window",
+          "required_lead_seconds": -1.0,
+          "seconds": 181.648,
+          "time": 69.70641999999961
+        },
+        {
+          "ahead_samples": 109,
+          "ahead_seconds": 10.792459999930458,
+          "consumer": 10.000000000009095,
+          "measured_seconds": 269.68337099999997,
+          "producer": 6.5880790635786015,
+          "ratio": 0.6588079063572609,
+          "ready": true,
+          "reason": "admitted_window",
+          "required_lead_seconds": -1.0,
+          "seconds": 272.86,
+          "time": 145.7075399999997
+        }
+      ],
+      "pipeline": {
+        "assembly": {
+          "count": 1582,
+          "max_ms": 89.24999999999999,
+          "total_ms": 78789.02300000006
+        },
+        "conversion": {
+          "count": 1582,
+          "max_ms": 0.001,
+          "total_ms": 0.4050000000000003
+        },
+        "decompress": {
+          "count": 1582,
+          "max_ms": 70.92699999999999,
+          "total_ms": 97434.77399999995
+        },
+        "file_io": {
+          "count": 1582,
+          "max_ms": 40.29700000000001,
+          "total_ms": 34143.90300000003
+        },
+        "plane_copies": {
+          "count": 1582,
+          "max_ms": 31.176,
+          "total_ms": 18520.77900000003
+        },
+        "raw_hash": {
+          "count": 1582,
+          "max_ms": 0.0,
+          "total_ms": 0.0
+        },
+        "statistics": {
+          "count": 1582,
+          "max_ms": 0.007,
+          "total_ms": 1.2969999999999688
+        },
+        "stored_hash": {
+          "count": 1582,
+          "max_ms": 0.0,
+          "total_ms": 0.0
+        },
+        "typed_conversion": {
+          "count": 1582,
+          "max_ms": 67.327,
+          "total_ms": 25679.068999999956
+        }
+      },
+      "regressions": [],
+      "timeline_observations": 59
+    },
+    "fixed-2-full": {
+      "summary": {
+        "mode": "2",
+        "speed": 1.0,
+        "open_seconds": 0.947502,
+        "ready_seconds": 35.547797,
+        "startup": {
+          "ahead_samples": 296,
+          "ahead_seconds": 29.599999999998396,
+          "consumer": 10.000000000000076,
+          "measured_seconds": 33.90020899999998,
+          "producer": 8.743750927726417,
+          "ratio": 0.874375092772635,
+          "ready": true,
+          "reason": "admitted_window",
+          "required_lead_seconds": -1.0
+        },
+        "wall_seconds": 192.060205,
+        "committed_seconds": 156.49999999993017,
+        "complete": true,
+        "field_waits": 0,
+        "particle_waits": 0,
+        "field_wait_seconds": 0.0,
+        "particle_wait_seconds": 0.0,
+        "checks": 5,
+        "draw_ms": {
+          "p50": 6.692,
+          "p95": 26.284,
+          "p99": 32.929,
+          "max": 83.791
+        },
+        "callback_ms": {
+          "p50": 1.454,
+          "p95": 24.844,
+          "p99": 31.041,
+          "max": 81.834
+        },
+        "peak_rss": 37953773568,
+        "process_swap": 354004992,
+        "cpu_percent_one_core": 231.50770774333057,
+        "presented": 1566,
+        "events": [],
+        "source_stat": [
+          47,
+          20372149,
+          125950754101,
+          1790459431649621061,
+          1790459508131850482
+        ],
+        "unchanged_stat": true,
+        "strict_selected_oracles": 4,
+        "cache_state": "Uncontrolled OS cache; fresh native process"
+      },
+      "startup_events": [
+        {
+          "ahead_samples": 296,
+          "ahead_seconds": 29.599999999998396,
+          "consumer": 10.000000000000076,
+          "measured_seconds": 33.90020899999998,
+          "producer": 8.743750927726417,
+          "ratio": 0.874375092772635,
+          "ready": true,
+          "reason": "admitted_window",
+          "required_lead_seconds": -1.0,
+          "seconds": 36.368,
+          "time": 0.0
+        }
+      ],
+      "pipeline": {
+        "assembly": {
+          "count": 1613,
+          "max_ms": 107.64500000000001,
+          "total_ms": 89538.468
+        },
+        "conversion": {
+          "count": 1613,
+          "max_ms": 0.001,
+          "total_ms": 0.2900000000000002
+        },
+        "decompress": {
+          "count": 1613,
+          "max_ms": 96.071,
+          "total_ms": 120013.79299999995
+        },
+        "file_io": {
+          "count": 1613,
+          "max_ms": 195.40800000000002,
+          "total_ms": 48035.39400000009
+        },
+        "plane_copies": {
+          "count": 1613,
+          "max_ms": 31.198,
+          "total_ms": 21270.43300000002
+        },
+        "raw_hash": {
+          "count": 1613,
+          "max_ms": 0.0,
+          "total_ms": 0.0
+        },
+        "statistics": {
+          "count": 1613,
+          "max_ms": 0.006,
+          "total_ms": 1.544999999999952
+        },
+        "stored_hash": {
+          "count": 1613,
+          "max_ms": 0.0,
+          "total_ms": 0.0
+        },
+        "typed_conversion": {
+          "count": 1613,
+          "max_ms": 73.247,
+          "total_ms": 30821.341999999957
+        }
+      },
+      "regressions": [],
+      "timeline_observations": 39
+    },
+    "fixed-3-full": {
+      "summary": {
+        "mode": "3",
+        "speed": 1.0,
+        "open_seconds": 0.901838,
+        "ready_seconds": 4.922949,
+        "startup": {
+          "ahead_samples": 45,
+          "ahead_seconds": 4.499999999999926,
+          "consumer": 10.000000000000076,
+          "measured_seconds": 3.867067,
+          "producer": 11.565731273124307,
+          "ratio": 1.1565731273124218,
+          "ready": true,
+          "reason": "faster_producer",
+          "required_lead_seconds": 3.0
+        },
+        "wall_seconds": 161.436419,
+        "committed_seconds": 156.49999999993017,
+        "complete": true,
+        "field_waits": 0,
+        "particle_waits": 0,
+        "field_wait_seconds": 0.0,
+        "particle_wait_seconds": 0.0,
+        "checks": 5,
+        "draw_ms": {
+          "p50": 4.887,
+          "p95": 33.046,
+          "p99": 40.507,
+          "max": 73.079
+        },
+        "callback_ms": {
+          "p50": 1.501,
+          "p95": 31.174,
+          "p99": 38.142,
+          "max": 70.861
+        },
+        "peak_rss": 36515770368,
+        "process_swap": 0,
+        "cpu_percent_one_core": 301.6512322340359,
+        "presented": 1566,
+        "events": [],
+        "source_stat": [
+          47,
+          20372149,
+          125950754101,
+          1790459431649621061,
+          1790459508131850482
+        ],
+        "unchanged_stat": true,
+        "strict_selected_oracles": 4,
+        "cache_state": "Uncontrolled OS cache; fresh native process"
+      },
+      "startup_events": [
+        {
+          "ahead_samples": 45,
+          "ahead_seconds": 4.499999999999926,
+          "consumer": 10.000000000000076,
+          "measured_seconds": 3.867067,
+          "producer": 11.565731273124307,
+          "ratio": 1.1565731273124218,
+          "ready": true,
+          "reason": "faster_producer",
+          "required_lead_seconds": 3.0,
+          "seconds": 5.771,
+          "time": 0.0
+        }
+      ],
+      "pipeline": {
+        "assembly": {
+          "count": 1669,
+          "max_ms": 118.53000000000002,
+          "total_ms": 105034.43499999991
+        },
+        "conversion": {
+          "count": 1669,
+          "max_ms": 0.002,
+          "total_ms": 0.31900000000000023
+        },
+        "decompress": {
+          "count": 1669,
+          "max_ms": 138.274,
+          "total_ms": 182479.48499999972
+        },
+        "file_io": {
+          "count": 1669,
+          "max_ms": 65.315,
+          "total_ms": 62605.00900000007
+        },
+        "plane_copies": {
+          "count": 1669,
+          "max_ms": 34.373,
+          "total_ms": 25084.250000000007
+        },
+        "raw_hash": {
+          "count": 1669,
+          "max_ms": 0.0,
+          "total_ms": 0.0
+        },
+        "statistics": {
+          "count": 1669,
+          "max_ms": 0.071,
+          "total_ms": 1.991999999999935
+        },
+        "stored_hash": {
+          "count": 1669,
+          "max_ms": 0.0,
+          "total_ms": 0.0
+        },
+        "typed_conversion": {
+          "count": 1669,
+          "max_ms": 81.98400000000001,
+          "total_ms": 36866.83799999997
+        }
+      },
+      "regressions": [],
+      "timeline_observations": 33
+    },
+    "fixed-4-full": {
+      "summary": {
+        "mode": "4",
+        "speed": 1.0,
+        "open_seconds": 0.916526,
+        "ready_seconds": 4.940749,
+        "startup": {
+          "ahead_samples": 52,
+          "ahead_seconds": 5.199999999999911,
+          "consumer": 10.000000000000076,
+          "measured_seconds": 3.950299,
+          "producer": 13.129331924993911,
+          "ratio": 1.312933192499381,
+          "ready": true,
+          "reason": "faster_producer",
+          "required_lead_seconds": 3.0
+        },
+        "wall_seconds": 161.454293,
+        "committed_seconds": 156.49999999993017,
+        "complete": true,
+        "field_waits": 0,
+        "particle_waits": 0,
+        "field_wait_seconds": 0.0,
+        "particle_wait_seconds": 0.0,
+        "checks": 5,
+        "draw_ms": {
+          "p50": 5.255,
+          "p95": 34.072,
+          "p99": 41.454,
+          "max": 69.53
+        },
+        "callback_ms": {
+          "p50": 1.64,
+          "p95": 32.062,
+          "p99": 39.23,
+          "max": 68.031
+        },
+        "peak_rss": 36079669248,
+        "process_swap": 0,
+        "cpu_percent_one_core": 313.1229963974985,
+        "presented": 1566,
+        "events": [],
+        "source_stat": [
+          47,
+          20372149,
+          125950754101,
+          1790459431649621061,
+          1790459508131850482
+        ],
+        "unchanged_stat": true,
+        "strict_selected_oracles": 4,
+        "cache_state": "Uncontrolled OS cache; fresh native process"
+      },
+      "startup_events": [
+        {
+          "ahead_samples": 52,
+          "ahead_seconds": 5.199999999999911,
+          "consumer": 10.000000000000076,
+          "measured_seconds": 3.950299,
+          "producer": 13.129331924993911,
+          "ratio": 1.312933192499381,
+          "ready": true,
+          "reason": "faster_producer",
+          "required_lead_seconds": 3.0,
+          "seconds": 5.782,
+          "time": 0.0
+        }
+      ],
+      "pipeline": {
+        "assembly": {
+          "count": 1680,
+          "max_ms": 133.147,
+          "total_ms": 111583.68499999992
+        },
+        "conversion": {
+          "count": 1680,
+          "max_ms": 0.007,
+          "total_ms": 0.5750000000000004
+        },
+        "decompress": {
+          "count": 1680,
+          "max_ms": 210.71399999999997,
+          "total_ms": 280333.7130000006
+        },
+        "file_io": {
+          "count": 1680,
+          "max_ms": 77.242,
+          "total_ms": 63659.072999999946
+        },
+        "plane_copies": {
+          "count": 1680,
+          "max_ms": 39.981,
+          "total_ms": 27767.33999999999
+        },
+        "raw_hash": {
+          "count": 1680,
+          "max_ms": 0.0,
+          "total_ms": 0.0
+        },
+        "statistics": {
+          "count": 1680,
+          "max_ms": 0.051,
+          "total_ms": 1.9819999999999316
+        },
+        "stored_hash": {
+          "count": 1680,
+          "max_ms": 0.0,
+          "total_ms": 0.0
+        },
+        "typed_conversion": {
+          "count": 1680,
+          "max_ms": 96.066,
+          "total_ms": 40635.37999999997
+        }
+      },
+      "regressions": [],
+      "timeline_observations": 33
+    }
+  },
+  "final_rechecks": [
+    {
+      "name": "import-final",
+      "returncode": 0,
+      "seconds": 2.5177690770015033
+    },
+    {
+      "name": "cancellation",
+      "returncode": 0,
+      "seconds": 0.5144941190010286
+    },
+    {
+      "name": "actions-final",
+      "returncode": 0,
+      "seconds": 84.77911656200013
+    },
+    {
+      "name": "auto-full-final",
+      "returncode": 0,
+      "seconds": 174.29071937100161
+    },
+    {
+      "name": "fixed-1-full-final",
+      "returncode": 0,
+      "seconds": 289.675654396
+    },
+    {
+      "name": "auto-speed-4-final",
+      "returncode": 0,
+      "seconds": 44.30490477499916
+    },
+    {
+      "name": "1-speed-4-final",
+      "returncode": 0,
+      "seconds": 82.20436053699996
+    }
+  ],
+  "validation": [
+    {
+      "name": "fixed-4-full",
+      "command": [
+        "/home/Nozba/Codex/SIMSCOPE/.venv-dev/bin/python",
+        "tools/profile_dynamic_preparation.py",
+        "--godot",
+        "/home/Nozba/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--capture",
+        "/home/Nozba/Codex/SIMSCOPE/case_D_SIMSCP4_D192_T200_20260926_230101/SIMSCP4_D192_T200_simscope.ssc",
+        "--output-dir",
+        "/home/Nozba/Codex/SIMSCOPE/ssc-dynamic-20260927/fixed-4-full",
+        "--workers",
+        "4"
+      ],
+      "environment": {},
+      "returncode": 0,
+      "seconds": 168.3425177750014
+    },
+    {
+      "name": "fixed-3-full",
+      "command": [
+        "/home/Nozba/Codex/SIMSCOPE/.venv-dev/bin/python",
+        "tools/profile_dynamic_preparation.py",
+        "--godot",
+        "/home/Nozba/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--capture",
+        "/home/Nozba/Codex/SIMSCOPE/case_D_SIMSCP4_D192_T200_20260926_230101/SIMSCP4_D192_T200_simscope.ssc",
+        "--output-dir",
+        "/home/Nozba/Codex/SIMSCOPE/ssc-dynamic-20260927/fixed-3-full",
+        "--workers",
+        "3"
+      ],
+      "environment": {},
+      "returncode": 0,
+      "seconds": 168.28831471400008
+    },
+    {
+      "name": "fixed-2-full",
+      "command": [
+        "/home/Nozba/Codex/SIMSCOPE/.venv-dev/bin/python",
+        "tools/profile_dynamic_preparation.py",
+        "--godot",
+        "/home/Nozba/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--capture",
+        "/home/Nozba/Codex/SIMSCOPE/case_D_SIMSCP4_D192_T200_20260926_230101/SIMSCP4_D192_T200_simscope.ssc",
+        "--output-dir",
+        "/home/Nozba/Codex/SIMSCOPE/ssc-dynamic-20260927/fixed-2-full",
+        "--workers",
+        "2"
+      ],
+      "environment": {},
+      "returncode": 0,
+      "seconds": 199.25050386899966
+    },
+    {
+      "name": "fixed-1-full",
+      "command": [
+        "/home/Nozba/Codex/SIMSCOPE/.venv-dev/bin/python",
+        "tools/profile_dynamic_preparation.py",
+        "--godot",
+        "/home/Nozba/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--capture",
+        "/home/Nozba/Codex/SIMSCOPE/case_D_SIMSCP4_D192_T200_20260926_230101/SIMSCP4_D192_T200_simscope.ssc",
+        "--output-dir",
+        "/home/Nozba/Codex/SIMSCOPE/ssc-dynamic-20260927/fixed-1-full",
+        "--workers",
+        "1"
+      ],
+      "environment": {},
+      "returncode": 0,
+      "seconds": 294.83167918600157
+    },
+    {
+      "name": "auto-speed-2",
+      "command": [
+        "/home/Nozba/Codex/SIMSCOPE/.venv-dev/bin/python",
+        "tools/profile_dynamic_preparation.py",
+        "--godot",
+        "/home/Nozba/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--capture",
+        "/home/Nozba/Codex/SIMSCOPE/case_D_SIMSCP4_D192_T200_20260926_230101/SIMSCP4_D192_T200_simscope.ssc",
+        "--output-dir",
+        "/home/Nozba/Codex/SIMSCOPE/ssc-dynamic-20260927/auto-speed-2",
+        "--workers",
+        "auto",
+        "--speed",
+        "2",
+        "--seconds",
+        "12"
+      ],
+      "environment": {},
+      "returncode": 0,
+      "seconds": 44.355683518999285
+    },
+    {
+      "name": "1-speed-2",
+      "command": [
+        "/home/Nozba/Codex/SIMSCOPE/.venv-dev/bin/python",
+        "tools/profile_dynamic_preparation.py",
+        "--godot",
+        "/home/Nozba/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--capture",
+        "/home/Nozba/Codex/SIMSCOPE/case_D_SIMSCP4_D192_T200_20260926_230101/SIMSCP4_D192_T200_simscope.ssc",
+        "--output-dir",
+        "/home/Nozba/Codex/SIMSCOPE/ssc-dynamic-20260927/1-speed-2",
+        "--workers",
+        "1",
+        "--speed",
+        "2",
+        "--seconds",
+        "12"
+      ],
+      "environment": {},
+      "returncode": 0,
+      "seconds": 81.25084783099919
+    },
+    {
+      "name": "2-speed-2",
+      "command": [
+        "/home/Nozba/Codex/SIMSCOPE/.venv-dev/bin/python",
+        "tools/profile_dynamic_preparation.py",
+        "--godot",
+        "/home/Nozba/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--capture",
+        "/home/Nozba/Codex/SIMSCOPE/case_D_SIMSCP4_D192_T200_20260926_230101/SIMSCP4_D192_T200_simscope.ssc",
+        "--output-dir",
+        "/home/Nozba/Codex/SIMSCOPE/ssc-dynamic-20260927/2-speed-2",
+        "--workers",
+        "2",
+        "--speed",
+        "2",
+        "--seconds",
+        "12"
+      ],
+      "environment": {},
+      "returncode": 0,
+      "seconds": 54.26232625299963
+    },
+    {
+      "name": "3-speed-2",
+      "command": [
+        "/home/Nozba/Codex/SIMSCOPE/.venv-dev/bin/python",
+        "tools/profile_dynamic_preparation.py",
+        "--godot",
+        "/home/Nozba/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--capture",
+        "/home/Nozba/Codex/SIMSCOPE/case_D_SIMSCP4_D192_T200_20260926_230101/SIMSCP4_D192_T200_simscope.ssc",
+        "--output-dir",
+        "/home/Nozba/Codex/SIMSCOPE/ssc-dynamic-20260927/3-speed-2",
+        "--workers",
+        "3",
+        "--speed",
+        "2",
+        "--seconds",
+        "12"
+      ],
+      "environment": {},
+      "returncode": 0,
+      "seconds": 46.40711582299991
+    },
+    {
+      "name": "4-speed-2",
+      "command": [
+        "/home/Nozba/Codex/SIMSCOPE/.venv-dev/bin/python",
+        "tools/profile_dynamic_preparation.py",
+        "--godot",
+        "/home/Nozba/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--capture",
+        "/home/Nozba/Codex/SIMSCOPE/case_D_SIMSCP4_D192_T200_20260926_230101/SIMSCP4_D192_T200_simscope.ssc",
+        "--output-dir",
+        "/home/Nozba/Codex/SIMSCOPE/ssc-dynamic-20260927/4-speed-2",
+        "--workers",
+        "4",
+        "--speed",
+        "2",
+        "--seconds",
+        "12"
+      ],
+      "environment": {},
+      "returncode": 0,
+      "seconds": 42.95455546899939
+    },
+    {
+      "name": "auto-speed-4",
+      "command": [
+        "/home/Nozba/Codex/SIMSCOPE/.venv-dev/bin/python",
+        "tools/profile_dynamic_preparation.py",
+        "--godot",
+        "/home/Nozba/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--capture",
+        "/home/Nozba/Codex/SIMSCOPE/case_D_SIMSCP4_D192_T200_20260926_230101/SIMSCP4_D192_T200_simscope.ssc",
+        "--output-dir",
+        "/home/Nozba/Codex/SIMSCOPE/ssc-dynamic-20260927/auto-speed-4",
+        "--workers",
+        "auto",
+        "--speed",
+        "4",
+        "--seconds",
+        "12"
+      ],
+      "environment": {},
+      "returncode": 0,
+      "seconds": 43.600227395998445
+    },
+    {
+      "name": "1-speed-4",
+      "command": [
+        "/home/Nozba/Codex/SIMSCOPE/.venv-dev/bin/python",
+        "tools/profile_dynamic_preparation.py",
+        "--godot",
+        "/home/Nozba/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--capture",
+        "/home/Nozba/Codex/SIMSCOPE/case_D_SIMSCP4_D192_T200_20260926_230101/SIMSCP4_D192_T200_simscope.ssc",
+        "--output-dir",
+        "/home/Nozba/Codex/SIMSCOPE/ssc-dynamic-20260927/1-speed-4",
+        "--workers",
+        "1",
+        "--speed",
+        "4",
+        "--seconds",
+        "12"
+      ],
+      "environment": {},
+      "returncode": 0,
+      "seconds": 81.90352791699843
+    },
+    {
+      "name": "2-speed-4",
+      "command": [
+        "/home/Nozba/Codex/SIMSCOPE/.venv-dev/bin/python",
+        "tools/profile_dynamic_preparation.py",
+        "--godot",
+        "/home/Nozba/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--capture",
+        "/home/Nozba/Codex/SIMSCOPE/case_D_SIMSCP4_D192_T200_20260926_230101/SIMSCP4_D192_T200_simscope.ssc",
+        "--output-dir",
+        "/home/Nozba/Codex/SIMSCOPE/ssc-dynamic-20260927/2-speed-4",
+        "--workers",
+        "2",
+        "--speed",
+        "4",
+        "--seconds",
+        "12"
+      ],
+      "environment": {},
+      "returncode": 0,
+      "seconds": 54.56518042700009
+    },
+    {
+      "name": "3-speed-4",
+      "command": [
+        "/home/Nozba/Codex/SIMSCOPE/.venv-dev/bin/python",
+        "tools/profile_dynamic_preparation.py",
+        "--godot",
+        "/home/Nozba/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--capture",
+        "/home/Nozba/Codex/SIMSCOPE/case_D_SIMSCP4_D192_T200_20260926_230101/SIMSCP4_D192_T200_simscope.ssc",
+        "--output-dir",
+        "/home/Nozba/Codex/SIMSCOPE/ssc-dynamic-20260927/3-speed-4",
+        "--workers",
+        "3",
+        "--speed",
+        "4",
+        "--seconds",
+        "12"
+      ],
+      "environment": {},
+      "returncode": 0,
+      "seconds": 47.0565504949991
+    },
+    {
+      "name": "4-speed-4",
+      "command": [
+        "/home/Nozba/Codex/SIMSCOPE/.venv-dev/bin/python",
+        "tools/profile_dynamic_preparation.py",
+        "--godot",
+        "/home/Nozba/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--capture",
+        "/home/Nozba/Codex/SIMSCOPE/case_D_SIMSCP4_D192_T200_20260926_230101/SIMSCP4_D192_T200_simscope.ssc",
+        "--output-dir",
+        "/home/Nozba/Codex/SIMSCOPE/ssc-dynamic-20260927/4-speed-4",
+        "--workers",
+        "4",
+        "--speed",
+        "4",
+        "--seconds",
+        "12"
+      ],
+      "environment": {},
+      "returncode": 0,
+      "seconds": 43.355029301001196
+    },
+    {
+      "name": "actions",
+      "command": [
+        "/home/Nozba/Codex/SIMSCOPE/.venv-dev/bin/python",
+        "tools/profile_dynamic_preparation.py",
+        "--godot",
+        "/home/Nozba/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--capture",
+        "/home/Nozba/Codex/SIMSCOPE/case_D_SIMSCP4_D192_T200_20260926_230101/SIMSCP4_D192_T200_simscope.ssc",
+        "--output-dir",
+        "/home/Nozba/Codex/SIMSCOPE/ssc-dynamic-20260927/actions",
+        "--actions"
+      ],
+      "environment": {},
+      "returncode": 1,
+      "seconds": 83.87850103499841
+    },
+    {
+      "name": "concurrency",
+      "command": [
+        "/home/Nozba/Codex/SIMSCOPE/.venv-dev/bin/python",
+        "tools/validate_field_concurrency.py",
+        "--godot",
+        "/home/Nozba/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--output-dir",
+        "/home/Nozba/Codex/SIMSCOPE/ssc-dynamic-20260927/concurrency"
+      ],
+      "environment": {
+        "SIMSCOPE_FIELD_WORKERS": "auto"
+      },
+      "returncode": 0,
+      "seconds": 1.4672012819992233
+    },
+    {
+      "name": "parallel",
+      "command": [
+        "/home/Nozba/Codex/SIMSCOPE/.venv-dev/bin/python",
+        "tools/validate_field_parallel.py",
+        "--godot",
+        "/home/Nozba/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--output-dir",
+        "/home/Nozba/Codex/SIMSCOPE/ssc-dynamic-20260927/parallel",
+        "--renderer",
+        "headless"
+      ],
+      "environment": {
+        "SIMSCOPE_FIELD_WORKERS": "auto"
+      },
+      "returncode": 0,
+      "seconds": 2.6187584409999545
+    },
+    {
+      "name": "session-forward",
+      "command": [
+        "/home/Nozba/Codex/SIMSCOPE/.venv-dev/bin/python",
+        "tools/validate_field_session.py",
+        "--godot",
+        "/home/Nozba/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--output-dir",
+        "/home/Nozba/Codex/SIMSCOPE/ssc-dynamic-20260927/session-forward",
+        "--renderer",
+        "forward_plus"
+      ],
+      "environment": {
+        "SIMSCOPE_FIELD_WORKERS": "auto"
+      },
+      "returncode": 0,
+      "seconds": 6.726207093000994
+    },
+    {
+      "name": "session-gl",
+      "command": [
+        "/home/Nozba/Codex/SIMSCOPE/.venv-dev/bin/python",
+        "tools/validate_field_session.py",
+        "--godot",
+        "/home/Nozba/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--output-dir",
+        "/home/Nozba/Codex/SIMSCOPE/ssc-dynamic-20260927/session-gl",
+        "--renderer",
+        "gl_compatibility"
+      ],
+      "environment": {
+        "SIMSCOPE_FIELD_WORKERS": "auto"
+      },
+      "returncode": 0,
+      "seconds": 6.173639426000591
+    },
+    {
+      "name": "adaptive-forward",
+      "command": [
+        "/home/Nozba/Codex/SIMSCOPE/.venv-dev/bin/python",
+        "tools/validate_adaptive_cache.py",
+        "--godot",
+        "/home/Nozba/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--output-dir",
+        "/home/Nozba/Codex/SIMSCOPE/ssc-dynamic-20260927/adaptive-forward",
+        "--renderer",
+        "forward_plus"
+      ],
+      "environment": {
+        "SIMSCOPE_FIELD_WORKERS": "auto"
+      },
+      "returncode": 0,
+      "seconds": 29.155412665000767
+    },
+    {
+      "name": "adaptive-gl",
+      "command": [
+        "/home/Nozba/Codex/SIMSCOPE/.venv-dev/bin/python",
+        "tools/validate_adaptive_cache.py",
+        "--godot",
+        "/home/Nozba/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--output-dir",
+        "/home/Nozba/Codex/SIMSCOPE/ssc-dynamic-20260927/adaptive-gl",
+        "--renderer",
+        "gl_compatibility"
+      ],
+      "environment": {
+        "SIMSCOPE_FIELD_WORKERS": "auto"
+      },
+      "returncode": 0,
+      "seconds": 28.805413879999833
+    },
+    {
+      "name": "integrity",
+      "command": [
+        "/home/Nozba/Codex/SIMSCOPE/.venv-dev/bin/python",
+        "tools/validate_payload_integrity.py",
+        "--godot",
+        "/home/Nozba/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--output-dir",
+        "/home/Nozba/Codex/SIMSCOPE/ssc-dynamic-20260927/integrity",
+        "--renderer",
+        "headless"
+      ],
+      "environment": {
+        "SIMSCOPE_FIELD_WORKERS": "auto"
+      },
+      "returncode": 0,
+      "seconds": 7.126207846000398
+    },
+    {
+      "name": "budget-forward",
+      "command": [
+        "/home/Nozba/Codex/SIMSCOPE/.venv-dev/bin/python",
+        "tools/validate_field_budget.py",
+        "--godot",
+        "/home/Nozba/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--output-dir",
+        "/home/Nozba/Codex/SIMSCOPE/ssc-dynamic-20260927/budget-forward",
+        "--renderer",
+        "forward_plus"
+      ],
+      "environment": {
+        "SIMSCOPE_FIELD_WORKERS": "auto"
+      },
+      "returncode": 0,
+      "seconds": 5.1724375289995805
+    },
+    {
+      "name": "budget-gl",
+      "command": [
+        "/home/Nozba/Codex/SIMSCOPE/.venv-dev/bin/python",
+        "tools/validate_field_budget.py",
+        "--godot",
+        "/home/Nozba/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--output-dir",
+        "/home/Nozba/Codex/SIMSCOPE/ssc-dynamic-20260927/budget-gl",
+        "--renderer",
+        "gl_compatibility"
+      ],
+      "environment": {
+        "SIMSCOPE_FIELD_WORKERS": "auto"
+      },
+      "returncode": 0,
+      "seconds": 4.722100150000188
+    },
+    {
+      "name": "lifecycle",
+      "command": [
+        "/home/Nozba/Codex/SIMSCOPE/.venv-dev/bin/python",
+        "tools/validate_performance_maintenance.py",
+        "--godot",
+        "/home/Nozba/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--output-dir",
+        "/home/Nozba/Codex/SIMSCOPE/ssc-dynamic-20260927/lifecycle",
+        "--renderer",
+        "headless"
+      ],
+      "environment": {
+        "SIMSCOPE_FIELD_WORKERS": "auto"
+      },
+      "returncode": 0,
+      "seconds": 3.7706659979994583
+    },
+    {
+      "name": "lazy",
+      "command": [
+        "/home/Nozba/Codex/SIMSCOPE/.venv-dev/bin/python",
+        "tools/validate_lazy_loading.py",
+        "--godot",
+        "/home/Nozba/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--output-dir",
+        "/home/Nozba/Codex/SIMSCOPE/ssc-dynamic-20260927/lazy",
+        "--renderer",
+        "headless"
+      ],
+      "environment": {
+        "SIMSCOPE_FIELD_WORKERS": "auto"
+      },
+      "returncode": 0,
+      "seconds": 4.771631630999764
+    },
+    {
+      "name": "scene",
+      "command": [
+        "/home/Nozba/Codex/SIMSCOPE/.venv-dev/bin/python",
+        "tools/validate_scene_playback.py",
+        "--godot",
+        "/home/Nozba/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--output-dir",
+        "/home/Nozba/Codex/SIMSCOPE/ssc-dynamic-20260927/scene",
+        "--renderer",
+        "headless"
+      ],
+      "environment": {
+        "SIMSCOPE_FIELD_WORKERS": "auto"
+      },
+      "returncode": 0,
+      "seconds": 6.323894698000004
+    },
+    {
+      "name": "mesh",
+      "command": [
+        "/home/Nozba/Codex/SIMSCOPE/.venv-dev/bin/python",
+        "tools/validate_mesh_playback.py",
+        "--godot",
+        "/home/Nozba/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--output-dir",
+        "/home/Nozba/Codex/SIMSCOPE/ssc-dynamic-20260927/mesh",
+        "--renderer",
+        "headless"
+      ],
+      "environment": {
+        "SIMSCOPE_FIELD_WORKERS": "auto"
+      },
+      "returncode": 0,
+      "seconds": 6.724975950999578
+    },
+    {
+      "name": "python",
+      "command": [
+        "/home/Nozba/Codex/SIMSCOPE/.venv-dev/bin/python",
+        "-m",
+        "unittest",
+        "tests.test_scene_contract",
+        "tests.test_scene_chunks",
+        "tests.test_field_statistics",
+        "tests.test_metadata_budget"
+      ],
+      "environment": {},
+      "returncode": 0,
+      "seconds": 6.223901330000444
+    }
+  ],
+  "superseded_profiles": {
+    "fixed-1-full": "fixed-1-full-final",
+    "auto-speed-4": "auto-speed-4-final",
+    "1-speed-4": "1-speed-4-final",
+    "auto-full-1": "auto-full-final"
+  },
+  "cancellation": [
+    {
+      "operation": "cancel",
+      "workers": 1,
+      "latency_ms": 13.787
+    },
+    {
+      "operation": "close",
+      "workers": 1,
+      "latency_ms": 7.096
+    },
+    {
+      "operation": "cancel",
+      "workers": 2,
+      "latency_ms": 13.807
+    },
+    {
+      "operation": "close",
+      "workers": 2,
+      "latency_ms": 12.37
+    },
+    {
+      "operation": "cancel",
+      "workers": 3,
+      "latency_ms": 20.634
+    },
+    {
+      "operation": "close",
+      "workers": 3,
+      "latency_ms": 10.094
+    },
+    {
+      "operation": "cancel",
+      "workers": 4,
+      "latency_ms": 20.665
+    },
+    {
+      "operation": "close",
+      "workers": 4,
+      "latency_ms": 11.32
+    }
+  ],
+  "interaction_checks": 22,
+  "regression_checks": 8846,
+  "python_tests": 14,
+  "strict_corruption_rejections": 63,
+  "failed_attempts": [
+    "Initial action profile finished preparation before its active-close assertion. Repeat queues a cold target to verify an actual in-flight close.",
+    "Initial fixed-one full probe stopped on requested time before the final displayed sample committed. Completion now waits for the committed scene; repeated case supersedes it.",
+    "Initial Auto and fixed-one 4x probes predate the GPU-wait classification correction. The repeated 4x cases supersede them.",
+    "Fixed-two full playback observed 354004992 bytes of process swap despite successful playback. This does not meet a zero-swap criterion; retained as an explicit fixed-mode limitation.",
+    "Initial import had two inferred-bool parse errors; explicit bool annotations fixed them.",
+    "The first 20-second Auto pilot had zero playback waits/swap but asserted cache <= just-shrunk limit before an admitted batch drained. Corrected benchmark waits for drained bound; raw attempt retained externally."
+  ],
+  "documentation_checks": {
+    "status": "PASS",
+    "missing_links": 0,
+    "executable_examples": 3
+  },
+  "godot_import": "PASS",
+  "timeline_file": "timeline.csv"
+}
