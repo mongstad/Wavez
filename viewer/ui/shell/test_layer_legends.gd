@@ -39,6 +39,11 @@ func run() -> void:
 		check(collection.entries[id].label.get_line_count() == 2 and collection.entries[id].card.size.y <= 80,"Two-row compact card for "+id)
 	check(viewer.legend.get_line_count() == 3 and viewer.legend.text.contains("Range policy: Automatic • per frame"),"Particle policy remains distinct in a compact third row")
 	check(collection.stack.get_theme_constant("separation") == 6,"Subtle six-pixel card spacing")
+	for id in collection.entries:
+		check(is_equal_approx(collection.entries[id].card.size.x,card.size.x),"Layer and particle card widths match: "+id)
+		check(is_equal_approx(collection.entries[id].card.global_position.x,viewer.shell.particle_legend_panel.global_position.x),"Layer and particle left edges match: "+id)
+	layout_evidence.field_card_width = collection.entries.volume0.card.size.x
+	layout_evidence.particle_card_width = card.size.x
 	layout_evidence.field_card_height = collection.entries.volume0.card.size.y
 	layout_evidence.particle_card_height = viewer.shell.particle_legend_panel.size.y
 	check(collection.entries.volume0.bar.texture == layers.lut("coolwarm"), "Legend uses layer colormap LUT")
@@ -113,6 +118,7 @@ func run() -> void:
 	viewer.particle_layer_visible = false; viewer._update_particle_legend()
 	check(not viewer.legend.visible and collection.entries.has("volume0"), "Hidden particle layer has no legend")
 	await settle()
+	check(is_equal_approx(collection.entries.volume0.card.size.x,viewer.shell.particle_legend_panel.size.x),"Single layer retains matching card width without scrollbar")
 	check(collection.entries.size() == 1 and collection.size.y <= 80,"Single field remains a compact two-row card")
 	var compact_height: float = collection.size.y
 	var compact_bottom: float = collection.get_rect().end.y

@@ -84,3 +84,24 @@ compactness does not imply every card always fits simultaneously.
 The handbook and current-status page describe this change. Historical layer,
 placement, visibility and previous export review-time reports are intentionally
 preserved. Passing validation is not owner acceptance; stop at PR review.
+
+## Owner-review width adjustment
+
+Before merge, the owner requested removing about 75% of the unused right-hand
+space and making the containers equal width. Content width is now 460 instead
+of 520 logical pixels: a 60-pixel reduction, approximately three quarters of the
+marked 80-pixel spare region. Cards include 16 pixels of padding, giving a common
+476-pixel outer width. Smaller viewports still constrain that width.
+
+The layer scroll container now accounts for its gutter only when present and
+places it outside the cards on the left. Single-field cards no longer consume an
+unused scrollbar allowance; both edges align with the particle card, with and
+without overflow. Text remains left-to-right with the same font and columns.
+
+The final focused suite passes **72 checks on each renderer**, including nine new
+width/alignment assertions. All four overlay-on/off one-frame MP4 exports pass;
+source hashes remain unchanged. Screenshots were inspected. Evidence is in
+[evidence/issue-115/width-review](evidence/issue-115/width-review/); the initial
+review evidence above is retained. The previously passing recipe and native
+fullscreen suites were not repeated for this width-only adjustment. Owner review
+of the narrower layout remains pending.

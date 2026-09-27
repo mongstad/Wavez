@@ -12,6 +12,10 @@ func setup(owner_viewer) -> void:
 	theme = viewer.shell.theme
 	horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
+	# Put the overflow gutter outside the cards, on their left.
+	layout_direction = Control.LAYOUT_DIRECTION_RTL
+	stack.layout_direction = Control.LAYOUT_DIRECTION_LTR
+	get_v_scroll_bar().visibility_changed.connect(arrange.call_deferred)
 	mouse_filter = Control.MOUSE_FILTER_PASS
 	tooltip_text = "Layer color legends. Scroll to see additional enabled layers."
 	stack.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -68,6 +72,7 @@ func arrange() -> void:
 	if available == Vector2.ZERO: return
 	# Bound the collection, leaving the center available even for many layers.
 	var height := minf(stack.get_combined_minimum_size().y, maxf(0, minf(available.y*.4, bottom-72)))
-	var width := minf(LegendText.WIDTH+16+get_v_scroll_bar().get_combined_minimum_size().x,maxf(0,available.x-24))
+	var gutter := get_v_scroll_bar().get_combined_minimum_size().x if get_v_scroll_bar().visible else 0.0
+	var width := minf(LegendText.WIDTH,maxf(0,available.x-40))+16+gutter
 	size = Vector2(width, height)
 	position = Vector2(maxf(12,available.x-width-12), maxf(12,bottom-height-(6 if viewer.legend.visible else 12)))
