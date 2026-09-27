@@ -39,12 +39,26 @@ render. A brief startup window/taskbar entry may still depend on the platform.
 The regular viewer stays usable and may be minimized. The primary button changes
 from **Start Export** to **Cancel export** while the worker runs; it stops after
 the current frame, or stops FFmpeg during encoding. **Run in background** hides
-the dialog and is enabled only while an export is preparing or running. **Cancel**
-closes the dialog without cancelling an active export; its tooltip makes this
-distinction explicit. Reopen through File → Export → Video or Jobs for progress.
+the dialog and is visible only while an export is preparing or running. All
+configuration controls remain visible but read-only during that time, including
+output Browse and selection quotas. Reopening through File → Export → Video or
+Jobs preserves the locked configuration. A late file-picker result cannot change
+an active job's output path.
+
+The dismiss-only **Cancel** button is hidden during active work. After success,
+PNG-only completion, failure or acknowledged cancellation, **Start Export** and
+**Cancel** are available again and **Run in background** is hidden. Settings regain
+their previous editability: preset dimensions/FPS and automatic range endpoints
+remain read-only until their corresponding Custom mode is selected. The two
+secondary actions occupy the same position/width to limit layout movement.
+**Cancel** dismisses the idle/terminal dialog only; it never cancels the job.
+
 During selection-recipe preparation, **Cancel export** requests cancellation of
-the existing background analysis job before any renderer is launched. Terminal jobs restore **Start Export** and disable
-**Run in background**. Closing the parent viewer still requests cancellation.
+the existing background analysis job before any renderer is launched. Controls
+remain locked until preparation ends or the worker exits; a terminal-looking
+progress message alone does not release an active worker's configuration. Closing
+the parent viewer still requests cancellation through the existing protocol.
+See [the #125 validation and owner checks](docs/VIDEO_EXPORT_LOCKS.md).
 The job directory retains `progress.json`,
 `renderer.log` (UI-launched workers) and `ffmpeg.log` for diagnosis. If writing the
 cancel request fails, the dialog reports the worker PID and retained job path.

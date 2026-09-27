@@ -1,0 +1,20 @@
+{
+  "issue": 125,
+  "status": "pending owner review",
+  "base": "f867248a87a3f070c6744302027b86103729bbd8",
+  "branch": "125-video-ux-005-lock-export-settings-and-simplify-actions-during-active-jobs",
+  "checks": 383,
+  "failures": 0,
+  "suites": {
+    "forward-final": 164,
+    "compatibility-final": 164,
+    "startup": 55
+  },
+  "godot": "4.7.2 ed1daf0bf",
+  "platform": "Linux native GPU development viewer",
+  "external_artifacts": "/home/Nozba/Codex/SIMSCOPE/video-ux-125",
+  "limitations": [
+    "Preparation controls use state injection in the UI test; real worker/encoder lifecycle is exercised.",
+    "No production performance rerun, other operating systems, display scaling or packaged-deployment validation."
+  ]
+}

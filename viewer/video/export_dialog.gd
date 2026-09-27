@@ -46,6 +46,8 @@ var preparation_cancelled := false
 var last_progress: Dictionary = {}
 var launch_ticks := 0
 var progress_ticks := 0
+var settings_locked := false
+var setting_states: Array[Dictionary] = []
 
 func _ready() -> void:
 	title = "SimScope • Export Video"
@@ -106,9 +108,11 @@ func _ready() -> void:
 	save_dialog.file_mode = FileDialog.FILE_MODE_SAVE_FILE
 	save_dialog.access = FileDialog.ACCESS_FILESYSTEM
 	save_dialog.filters = PackedStringArray(["*.mp4 ; H.264 MP4"])
-	save_dialog.file_selected.connect(func(path: String): output.text = path)
+	save_dialog.file_selected.connect(func(path: String):
+		if pid <= 0 and not preparing: output.text = path)
 	add_child(save_dialog)
-	browse.pressed.connect(func(): save_dialog.popup_centered_ratio(.8))
+	browse.pressed.connect(func():
+		if pid <= 0 and not preparing: save_dialog.popup_centered_ratio(.8))
 	estimate = Label.new(); estimate.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; box.add_child(estimate)
 	message = Label.new(); message.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; box.add_child(message)
 	progress = ProgressBar.new(); progress.min_value = 0; progress.max_value = 100; box.add_child(progress)
@@ -121,8 +125,14 @@ func _ready() -> void:
 	background_button.pressed.connect(func():
 		if pid > 0 or preparing: hide())
 	close_button = Button.new(); close_button.text = "Cancel"; buttons.add_child(close_button)
-	close_button.tooltip_text = "Close this dialog. An active export continues in the background."
+	close_button.tooltip_text = "Close this dialog."
 	close_button.pressed.connect(hide)
+	# The mutually exclusive secondary actions share the same width/position.
+	var secondary_width := maxf(background_button.get_combined_minimum_size().x,close_button.get_combined_minimum_size().x)
+	background_button.custom_minimum_size.x = secondary_width
+	close_button.custom_minimum_size.x = secondary_width
+	start_button.text = "Cancel export"
+	start_button.custom_minimum_size.x = start_button.get_combined_minimum_size().x
 	_sync_action_buttons()
 	for spin in [start, end, width, height, fps, rate]: spin.value_changed.connect(func(_v: float): update_estimate())
 
@@ -291,6 +301,31 @@ func _sync_action_buttons() -> void:
 	start_button.disabled = not active and not can_start
 	start_button.tooltip_text = ""
 	background_button.disabled = not active
+	background_button.visible = active
+	close_button.visible = not active
+	_sync_settings(active)
+
+func _sync_settings(active: bool) -> void:
+	if settings_locked == active:return
+	settings_locked = active
+	if active:
+		save_dialog.hide()
+		_lock_fields(fields)
+	else:
+		# Restore each control's idle policy (e.g. preset dimensions remain read-only).
+		for state in setting_states:state.control.set(state.property,state.value)
+		setting_states.clear()
+
+func _lock_fields(node: Node) -> void:
+	for control in node.get_children():
+		var property := ""
+		if control is SpinBox or control is LineEdit:property = "editable"
+		elif control is BaseButton:property = "disabled"
+		if not property.is_empty():
+			setting_states.append({"control":control,"property":property,"value":control.get(property)})
+			if control is OptionButton:control.get_popup().hide()
+			control.set(property,property == "disabled")
+		else:_lock_fields(control)
 
 func publish_job(stage: String, detail: String) -> void:
 	var now := Time.get_ticks_msec()
