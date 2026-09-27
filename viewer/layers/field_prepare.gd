@@ -45,7 +45,9 @@ static func prepare(obj: Dictionary, sample: Dictionary, selected: String, budge
 	var planes: Array[Image] = []
 	if lod == 1:
 		var raw: PackedByteArray = values.to_byte_array();var length := dims.x*dims.y*4
-		for z in range(dims.z): planes.append(Image.create_from_data(dims.x,dims.y,false,Image.FORMAT_RF,raw.slice(z*length,(z+1)*length)))
+		for z in range(dims.z):
+			if cancel != null and cancel.stopped():return {}
+			planes.append(Image.create_from_data(dims.x,dims.y,false,Image.FORMAT_RF,raw.slice(z*length,(z+1)*length)))
 	else:
 		for z in range(reduced.z):
 			if cancel != null and cancel.stopped():return {}

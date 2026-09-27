@@ -1,5 +1,12 @@
 # Retained evidence
 
+## Bounded parallel preparation — issue #109, pending owner review
+
+[Investigation and validation](PARALLEL_FIELD_PREPARATION.md) and
+[compact evidence](evidence/issue-109/parallel.json) cover matched one-to-four-worker
+CPU/native measurements, complete 1× playback, scientific equality, cancellation
+and cache races. Earlier #100/#102/#107 reports retain their historical wording.
+
 ## UX1 — accepted
 
 [Milestone report](UX1_REPORT.md), [UI audit](UX1_UI_AUDIT.md), [design specification](UX1_DESIGN_SYSTEM.md),

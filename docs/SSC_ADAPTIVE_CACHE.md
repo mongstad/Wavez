@@ -7,7 +7,10 @@ export settings, checksums and recorded scientific values are unchanged.
 ## Normal operation
 
 Opening a capture commits its first visible scene and immediately starts a CPU
-worker preparing ahead from the playhead. **Automatic** is the default in
+pool preparing ahead from the playhead. Issue #109's
+[bounded parallel preparation](PARALLEL_FIELD_PREPARATION.md) updates the execution
+and in-flight allowances in these operational sections; the #102 measurements
+below retain their original scope and review-time wording. **Automatic** is the default in
 Performance. It fills as much useful forward coverage as safely fits in current
 physical RAM, even while paused. If Play is pressed early, its clock waits for the admitted
 window; it never requires an allocation for the complete remaining recording.
@@ -35,7 +38,7 @@ explicit interval preparation and its boundary/loop behavior. No interval entry
 is needed for ordinary large-capture use. A capacity shortage says **Waiting for
 available memory**, trims cold cache entries, and retries automatically; it is not
 an invalid-capture condition. Pausing transport keeps useful automatic preparation
-running. Closing the scene stops its worker and releases owned cache entries.
+running. Closing the scene joins all preparation workers and releases owned cache entries.
 
 ## Physical-memory admission
 
@@ -50,7 +53,7 @@ already reduce available physical RAM and are not subtracted again.
 | System reserve | 3% of physical RAM, clamped to 512 MiB–2 GiB; modest desktop/OS growth headroom rather than a large fixed share on large hosts |
 | Renderer reserve | 256 MiB future driver/UI growth; existing allocations are already excluded from available RAM |
 | Other caches | Only unallocated parts of scene, particle decoded/prepared and mesh allowances, plus particle working space; occupied pages are already excluded |
-| Field transient/reference allowance | Three times the largest target charge, or aggregate simultaneous visible-target charge if larger; covers decode/copy work and current/staged references |
+| Field transient/reference allowance | Three times the largest target charge (or aggregate simultaneous visible-target charge if larger) for the first lane, plus six times that charge per extra lane: live scratch and a retired-batch allowance; covers concurrent decode/copy work and current/staged references |
 | Allocation slack | 5% beyond explicit cache accounting for allocator, array, image and descriptor overhead |
 | Owned cache credit | Still-owned source-array and preview bytes, reduced by process swap on Linux; never historical RSS peaks or a released-cache high-water mark |
 
@@ -68,10 +71,12 @@ charge unused. Source arrays, precision, resolution and channels are never reduc
 to make a window fit. Existing explicit display-quality controls are unchanged.
 
 The controller recalculates capacity from current state, including owned cache
-credit. Each worker job independently checks live physical headroom before large
-allocation. A smaller budget cancels over-budget publication and evicts on the
-worker, preserving UI responsiveness. Capacity guards do not replace per-record
-allocation bounds or stored/decoded checksum validation.
+credit. The coordinator checks live physical headroom before each dispatch,
+including all outstanding jobs, and drains the current batch when another lane
+will not fit. Cancelled results retain their reservation until released. A smaller
+budget cancels over-budget publication and evicts on the coordinator, preserving
+UI responsiveness. Capacity guards preserve per-record allocation bounds and the
+[interactive/strict integrity policy](PLAYBACK_INTEGRITY.md).
 
 The old field-session formula reserved `max(2 GiB, 15% physical) + 1 GiB`, all
 configured other cache allowances (including already occupied pages), three
