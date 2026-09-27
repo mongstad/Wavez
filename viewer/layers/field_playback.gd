@@ -455,14 +455,17 @@ func _update_ui() -> void:
 	var session: Dictionary = status.session
 	if session.get("state") in ["blocked","refused"]:error = session.error
 	if is_instance_valid(label):
-		label.text = ("Field preparation blocked" if not error.is_empty() else ("Preparing fields…" if buffering else "Field prefetch ready"))+" • %.1f / %.1f MiB CPU cache\n" % [status.bytes/float(Memory.MIB),cpu_limit/float(Memory.MIB)]+error
+		# Build the final status before assigning it. Intermediate strings dirty
+		# the visible Performance dialog every callback even when nothing changes.
+		var text := ("Field preparation blocked" if not error.is_empty() else ("Preparing fields…" if buffering else "Field prefetch ready"))+" • %.1f / %.1f MiB CPU cache\n" % [status.bytes/float(Memory.MIB),cpu_limit/float(Memory.MIB)]+error
 		if session_waiting and scope_choice.selected != 0:
-			label.text = ("Planning fields… %d / %d" % [session.get("planned",0),session.get("total",0)] if session.get("state") == "planning" else "Preparing fields… %d / %d • Pause to cancel" % [session.get("ready",0),session.get("total",0)])
+			text = ("Planning fields… %d / %d" % [session.get("planned",0),session.get("total",0)] if session.get("state") == "planning" else "Preparing fields… %d / %d • Pause to cancel" % [session.get("ready",0),session.get("total",0)])
 		elif scope_choice.selected == 0:
-			label.text = "Waiting for available memory" if capacity_wait or session.get("state") == "pressure" else ("Playback cache ready" if session.get("state") == "ready" else "Preparing playback… %d / %d" % [session.get("ready",0),session.get("total",0)])
-			label.text += " • %.1f / %.1f GiB" % [status.bytes/float(1024*Memory.MIB),cpu_limit/float(1024*Memory.MIB)]
-			if not error.is_empty():label.text = "Field playback unavailable\n"+error
-		elif session.get("state") == "ready" and not prepared_range.is_empty():label.text = "Fields prepared: %s–%s • %.1f GiB CPU" % [prepared_range[0],prepared_range[1],status.bytes/float(1024*Memory.MIB)]
+			text = "Waiting for available memory" if capacity_wait or session.get("state") == "pressure" else ("Playback cache ready" if session.get("state") == "ready" else "Preparing playback… %d / %d" % [session.get("ready",0),session.get("total",0)])
+			text += " • %.1f / %.1f GiB" % [status.bytes/float(1024*Memory.MIB),cpu_limit/float(1024*Memory.MIB)]
+			if not error.is_empty():text = "Field playback unavailable\n"+error
+		elif session.get("state") == "ready" and not prepared_range.is_empty():text = "Fields prepared: %s–%s • %.1f GiB CPU" % [prepared_range[0],prepared_range[1],status.bytes/float(1024*Memory.MIB)]
+		if label.text != text:label.text = text
 		label.tooltip_text = "Field cache only, not a process limit. Required target allowance: %.1f MiB. Other cache/worker reservations: %.1f MiB. Current/staged references and preparation temporaries have separate headroom." % [budget_report.get("required_bytes",0)/float(Memory.MIB),budget_report.get("reserved_other_bytes",0)/float(Memory.MIB)]
 	if is_instance_valid(viewer.play_button):viewer.play_button.disabled = layers.is_buffering() and not viewer.playing
 func profile_report() -> Dictionary:

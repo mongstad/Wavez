@@ -1,0 +1,599 @@
+{
+  "status": "pending owner review",
+  "checks": 20263,
+  "runs": {
+    "pacing-forward-complete": {
+      "checks": 290,
+      "failures": [],
+      "source_hashes_unchanged": {
+        "particles.ssc": "b2f62e5b7f9953ac677d1406464456d98659e7c461759004c85e3601c5f4aba5",
+        "field.ssc": "12705b5af0a33a8136afa5f5edefc7cbff167082f0ee1ee222c529f4d41d8f3e",
+        "mesh.ssc": "87b4699f92eb808851aeb8a1e4bc424a0c93494b95b15b84584dba499397cd13",
+        "mixed.ssc": "d49fe37b6a90236cbe2600cb8d04e10f3c7ccb686a8ea4e0b3e3f86ac0e860da"
+      },
+      "phases": {
+        "field_after_orbit": {
+          "callbacks": 175,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "field_channel": {
+          "callbacks": 175,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "field_free_camera_stationary": {
+          "callbacks": 176,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "field_paused_again": {
+          "callbacks": 175,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "field_performance": {
+          "callbacks": 175,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "field_ready": {
+          "callbacks": 174,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "field_resized": {
+          "callbacks": 174,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "field_seek": {
+          "callbacks": 175,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "field_zero_speed_orbit": {
+          "callbacks": 175,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "mesh_after_orbit": {
+          "callbacks": 175,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "mesh_free_camera_stationary": {
+          "callbacks": 175,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "mesh_paused_again": {
+          "callbacks": 175,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "mesh_performance": {
+          "callbacks": 175,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "mesh_ready": {
+          "callbacks": 174,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "mesh_resized": {
+          "callbacks": 176,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "mesh_seek": {
+          "callbacks": 175,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "mesh_zero_speed_orbit": {
+          "callbacks": 176,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "mixed_after_orbit": {
+          "callbacks": 175,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "mixed_channel": {
+          "callbacks": 175,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "mixed_free_camera_stationary": {
+          "callbacks": 175,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "mixed_paused_again": {
+          "callbacks": 175,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "mixed_performance": {
+          "callbacks": 175,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "mixed_ready": {
+          "callbacks": 175,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "mixed_resized": {
+          "callbacks": 175,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "mixed_seek": {
+          "callbacks": 175,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "mixed_zero_speed_orbit": {
+          "callbacks": 175,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "particles_after_orbit": {
+          "callbacks": 175,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "particles_free_camera_stationary": {
+          "callbacks": 175,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "particles_paused_again": {
+          "callbacks": 173,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "particles_performance": {
+          "callbacks": 175,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "particles_ready": {
+          "callbacks": 173,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "particles_resized": {
+          "callbacks": 175,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "particles_seek": {
+          "callbacks": 174,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "particles_zero_speed_orbit": {
+          "callbacks": 175,
+          "draws": 0,
+          "same_pixels": true
+        }
+      },
+      "reproduction_command": [
+        "python",
+        "tools/validate_render_pacing.py",
+        "--godot",
+        "/absolute/path/godot",
+        "--output-dir",
+        "/fresh/pacing-forward-complete",
+        "--renderer",
+        "forward_plus"
+      ]
+    },
+    "pacing-compatibility-complete": {
+      "checks": 290,
+      "failures": [],
+      "source_hashes_unchanged": {
+        "particles.ssc": "726206d1646827bbaa28e14f9d4c9d7b2fb5e49e02b540cdd770d9b3a7f005c9",
+        "field.ssc": "ffe5ef2bd70380dde905084f3d6dd67410062248aee2d80f1a04fef03052d9f6",
+        "mesh.ssc": "4e42a069a88b5576c3b9c88fa68d11ea468ee2eb2641e12b14e665cb62bd3124",
+        "mixed.ssc": "ca9c4514ffeba73a6cfda192787764cc89ea70cc93bf3f59d288dd48a7e741d4"
+      },
+      "phases": {
+        "field_after_orbit": {
+          "callbacks": 175,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "field_channel": {
+          "callbacks": 174,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "field_free_camera_stationary": {
+          "callbacks": 176,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "field_paused_again": {
+          "callbacks": 175,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "field_performance": {
+          "callbacks": 174,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "field_ready": {
+          "callbacks": 174,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "field_resized": {
+          "callbacks": 173,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "field_seek": {
+          "callbacks": 175,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "field_zero_speed_orbit": {
+          "callbacks": 175,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "mesh_after_orbit": {
+          "callbacks": 175,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "mesh_free_camera_stationary": {
+          "callbacks": 176,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "mesh_paused_again": {
+          "callbacks": 175,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "mesh_performance": {
+          "callbacks": 174,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "mesh_ready": {
+          "callbacks": 175,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "mesh_resized": {
+          "callbacks": 176,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "mesh_seek": {
+          "callbacks": 175,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "mesh_zero_speed_orbit": {
+          "callbacks": 175,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "mixed_after_orbit": {
+          "callbacks": 175,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "mixed_channel": {
+          "callbacks": 175,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "mixed_free_camera_stationary": {
+          "callbacks": 175,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "mixed_paused_again": {
+          "callbacks": 175,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "mixed_performance": {
+          "callbacks": 175,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "mixed_ready": {
+          "callbacks": 175,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "mixed_resized": {
+          "callbacks": 175,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "mixed_seek": {
+          "callbacks": 175,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "mixed_zero_speed_orbit": {
+          "callbacks": 175,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "particles_after_orbit": {
+          "callbacks": 176,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "particles_free_camera_stationary": {
+          "callbacks": 176,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "particles_paused_again": {
+          "callbacks": 174,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "particles_performance": {
+          "callbacks": 175,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "particles_ready": {
+          "callbacks": 173,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "particles_resized": {
+          "callbacks": 174,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "particles_seek": {
+          "callbacks": 174,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "particles_zero_speed_orbit": {
+          "callbacks": 175,
+          "draws": 0,
+          "same_pixels": true
+        }
+      },
+      "reproduction_command": [
+        "python",
+        "tools/validate_render_pacing.py",
+        "--godot",
+        "/absolute/path/godot",
+        "--output-dir",
+        "/fresh/pacing-compatibility-complete",
+        "--renderer",
+        "gl_compatibility"
+      ]
+    },
+    "camera-forward": {
+      "checks": 13044,
+      "failures": [],
+      "source_hashes_unchanged": {
+        "particles.ssc": "a257694341bc737b8b31f7411236fea2d6a1254e4d57243f16cf8259a789b4d4",
+        "volume.ssc": "8dbc07540291500ff1471cfa93e151b9619db049d60782a7237438b59c9e6351",
+        "mesh.ssc": "5356556e5e404d6a72427427b5fb602c54c81a668da3f6fc604ce46cf9d6c5e7"
+      },
+      "reproduction_command": [
+        "python",
+        "tools/validate_camera_tumble.py",
+        "--godot",
+        "/absolute/path/godot",
+        "--output-dir",
+        "/fresh/camera-forward",
+        "--renderer",
+        "forward_plus"
+      ]
+    },
+    "legends-export-forward": {
+      "checks": 37,
+      "failures": [],
+      "source_sha256_unchanged": "66a390a18455cab6da0ea25dc9d7205b087f8ca8789d826b0e6bfc1555bc5a13",
+      "one_frame_exports": {
+        "True": "64a1e33f47077c520dce2c704e3ad7b3ea66d9e0a8a9799a1694608fb0089c33",
+        "False": "87d9b551b25a079345ce0d7c8c1d4c3d857c61e2b6252593182401dd8c5531a7"
+      },
+      "reproduction_command": [
+        "python",
+        "tools/validate_layer_legends.py",
+        "--godot",
+        "/absolute/path/godot",
+        "--output-dir",
+        "/fresh/legends-export-forward",
+        "--renderer",
+        "forward_plus",
+        "--export"
+      ]
+    },
+    "transport-forward": {
+      "checks": 204,
+      "failures": [],
+      "source_hashes_unchanged": {
+        "/home/Nozba/Codex/SIMSCOPE/ssc-idle-20260927/transport-forward/scene.ssc": "ed92a55e4684325e8717b39db9e27d07050241e19fdc30b3849f4eaa9e2be177",
+        "/home/Nozba/Codex/SIMSCOPE/ssc-idle-20260927/transport-forward/offset.ssc": "da4090c9448fe7ef0581ac9adcfe42849dd7b7d9b9d849a58975d0cd68eb2708",
+        "/home/Nozba/Codex/SIMSCOPE/ssc-idle-20260927/transport-forward/single.ssc": "12bbf5b37ea12bd85050aa626f2920f90fa6b9a5178d9582035c96529ec161e2"
+      },
+      "reproduction_command": [
+        "python",
+        "tools/validate_viewer_transport.py",
+        "--godot",
+        "/absolute/path/godot",
+        "--output-dir",
+        "/fresh/transport-forward",
+        "--renderer",
+        "forward_plus"
+      ]
+    },
+    "budget-forward": {
+      "checks": 56,
+      "failures": [],
+      "source": {
+        "sha256": "8b5d1518636af4d832b650d8ff5007c396bbde22bf9482ee24b269f10cc21236",
+        "unchanged": true
+      },
+      "reproduction_command": [
+        "python",
+        "tools/validate_field_budget.py",
+        "--godot",
+        "/absolute/path/godot",
+        "--output-dir",
+        "/fresh/budget-forward",
+        "--renderer",
+        "forward_plus"
+      ]
+    },
+    "budget-compatibility": {
+      "checks": 56,
+      "failures": [],
+      "source": {
+        "sha256": "fc0282062d05cf021a6dfbfd70cf1a9c95cd55b7329ea8ee0a64470c62011f2d",
+        "unchanged": true
+      },
+      "reproduction_command": [
+        "python",
+        "tools/validate_field_budget.py",
+        "--godot",
+        "/absolute/path/godot",
+        "--output-dir",
+        "/fresh/budget-compatibility",
+        "--renderer",
+        "gl_compatibility"
+      ]
+    },
+    "session-forward": {
+      "checks": 342,
+      "failures": [],
+      "reproduction_command": [
+        "python",
+        "tools/validate_field_session.py",
+        "--godot",
+        "/absolute/path/godot",
+        "--output-dir",
+        "/fresh/session-forward",
+        "--renderer",
+        "forward_plus"
+      ]
+    },
+    "session-compatibility": {
+      "checks": 332,
+      "failures": [],
+      "reproduction_command": [
+        "python",
+        "tools/validate_field_session.py",
+        "--godot",
+        "/absolute/path/godot",
+        "--output-dir",
+        "/fresh/session-compatibility",
+        "--renderer",
+        "gl_compatibility"
+      ]
+    },
+    "concurrency-headless": {
+      "checks": 94,
+      "failures": [],
+      "reproduction_command": [
+        "python",
+        "tools/validate_field_concurrency.py",
+        "--godot",
+        "/absolute/path/godot",
+        "--output-dir",
+        "/fresh/concurrency-headless"
+      ]
+    },
+    "scene-headless": {
+      "checks": 2457,
+      "failures": [],
+      "reproduction_command": [
+        "python",
+        "tools/validate_scene_playback.py",
+        "--godot",
+        "/absolute/path/godot",
+        "--output-dir",
+        "/fresh/scene-headless",
+        "--renderer",
+        "headless"
+      ]
+    },
+    "session-headless": {
+      "checks": 330,
+      "failures": [],
+      "reproduction_command": [
+        "python",
+        "tools/validate_field_session.py",
+        "--godot",
+        "/absolute/path/godot",
+        "--output-dir",
+        "/fresh/session-headless",
+        "--renderer",
+        "headless"
+      ]
+    },
+    "mesh-headless": {
+      "checks": 2731,
+      "failures": [],
+      "reproduction_command": [
+        "python",
+        "tools/validate_mesh_playback.py",
+        "--godot",
+        "/absolute/path/godot",
+        "--output-dir",
+        "/fresh/mesh-headless",
+        "--renderer",
+        "headless"
+      ]
+    }
+  },
+  "documentation": {
+    "status": "PASS",
+    "documents": 119,
+    "missing_local_links": [],
+    "examples": [
+      {
+        "document": "SIMSCOPE_API.md",
+        "status": "PASS",
+        "source_unchanged": true,
+        "document_sha256": "dc196243d3ee730da23d7aa7013a9481e690337296265a0bd7fee32ef2d20dd4"
+      },
+      {
+        "document": "docs/SIMULATION_INTEGRATION_GUIDE.md",
+        "status": "PASS",
+        "source_unchanged": true,
+        "document_sha256": "9de55b956c14a9a84a8596b5382500aed2c59b45558dc2bfc427de0f70c07f1f"
+      },
+      {
+        "document": "G3_GUIDE.md",
+        "status": "PASS",
+        "source_unchanged": true,
+        "document_sha256": "677144dbe2c19d6879835c33697db746ce296871b52cc8e408c9b90b8f445c04"
+      }
+    ],
+    "reproduction_command": [
+      "python",
+      "tools/validate_documentation.py",
+      "--output-dir",
+      "/fresh/documentation"
+    ]
+  },
+  "python_syntax": "PASS: py_compile of both new Python tools",
+  "diff_whitespace": "PASS: git diff --check"
+}

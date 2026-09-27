@@ -335,7 +335,7 @@ func _tick_profiled(delta: float) -> void:
 		iso_debounce -= delta
 		if iso_debounce <= 0:_start_iso()
 	viewer._move_free_camera(delta)
-	if viewer.orbit_enabled and not viewer.dragging: viewer.yaw += delta*viewer.orbit_speed;viewer._update_camera()
+	if viewer.orbit_enabled and not viewer.dragging and viewer.orbit_speed != 0.0: viewer.yaw += delta*viewer.orbit_speed;viewer._update_camera()
 	viewer.tail_poll += delta
 	if viewer.tail_poll >= 1:
 		var poll_started := Profile.begin()

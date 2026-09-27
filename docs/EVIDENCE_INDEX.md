@@ -1,5 +1,13 @@
 # Retained evidence
 
+## Paused rendering — issue #118, pending owner review
+
+[Investigation, policy and owner checks](PAUSED_RENDERING.md) and
+[compact production evidence](evidence/issue-118/rendering.json) describe redundant
+paused frames, the GPU drop on Play, bounded paused orbit and redraw-on-change.
+Earlier reports below retain their original review-time wording; current merged
+status is recorded in [Current status](CURRENT_STATUS.md).
+
 ## Dynamic field preparation — issue #111, pending owner review
 
 [Policy, validation and owner checks](DYNAMIC_FIELD_PREPARATION.md) and
