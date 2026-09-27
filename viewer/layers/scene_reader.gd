@@ -36,7 +36,11 @@ var error := ""
 var index_valid := false
 var index_state := ""
 var last_index_ms := 0.0
-func _init() -> void:
+# Fixed per reader lifetime, never a path-based trust decision or a UI mode.
+# Tooling/offline consumers remain strict; interactive opening opts out below.
+var _verify_payloads := true
+func _init(verify_payloads := true) -> void:
+	_verify_payloads = verify_payloads
 	var configured := OS.get_environment("SIMSCOPE_METADATA_BUDGET_MIB")
 	if not configured.is_empty():
 		metadata_limit = int(configured)*1048576 if configured.is_valid_int() and int(configured) > 0 and int(configured) <= 8796093022207 else 0
@@ -136,7 +140,7 @@ func _reload_source_profiled() -> bool:
 		var obj: Dictionary = metadata.objects[oi];var prior: Array = samples[obj.id]
 		if not prior.is_empty() and (obj.static or time <= prior[-1].time): return fail("Object timestamps/static violation.")
 		# Only fixed-size headers are needed to locate records and build the clock.
-		# Descriptor parsing, proofs and payload checks belong to requested reads.
+		# Descriptor parsing, proofs and bounded decoding belong to requested reads.
 		var record := {"time":time,"object":obj.id,"offset":offset+80+dlen,"end":offset+128+dlen+stored,"decoded":decoded,"descriptor":{},"sequence":seq,"index":prior.size(),"header_offset":offset,"raw_header":h,"stored":stored,"descriptor_length":dlen,"array_count":n,"kind":obj.kind,"identity":obj.get("identity","")}
 		records.append(record);samples[obj.id].append(record);times[time] = true
 		offset = record.end
@@ -271,7 +275,7 @@ func _read_sample_profiled(id: String, index: int) -> Dictionary:
 	if describe(id,index).is_empty():return {}
 	Profile.count("g3_sample_cache_misses")
 	var decode_started := Profile.begin()
-	var decoded := preload("res://layers/scene_channels.gd").read(file,entry,objects[id])
+	var decoded := preload("res://layers/scene_channels.gd").read(file,entry,objects[id],null,_verify_payloads)
 	if decoded.has("error") or decoded.is_empty():fail(record_error(entry,decoded.get("error","Scene decode cancelled.")));return {}
 	var channels: Dictionary = decoded.channels;var components: Dictionary = decoded.components;var shapes: Dictionary = decoded.shapes;var associations: Dictionary = decoded.associations;var reserve: int = decoded.reserve
 	Profile.end("g3_channel_decode",decode_started,{"object":id,"sample_index":index,"decoded_bytes":entry.decoded})

@@ -1014,7 +1014,9 @@ func _apply_preset(name: String) -> void:
 	_restyle()
 
 func _open_scene(path: String) -> void:
-	var reader = preload("res://layers/scene_reader.gd").new()
+	# Interactive display validates structure; offline exports retain payload SHA checks.
+	# Full-capture integrity verification is the separate tools/verify_ssc.py workflow.
+	var reader = preload("res://layers/scene_reader.gd").new(offline_instance)
 	if not reader.open(path):
 		status_label.text = reader.error; _shell_open_error = reader.error; return
 	tools_ui.close(false)

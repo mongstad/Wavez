@@ -12,9 +12,13 @@ Independent legend visibility and placement were owner-merged in PR #91 at `d11e
 Independent layer legends were owner-merged in PR #92 at `9774623`.
 Adaptive field preparation capacity was owner-merged in PR #99 at `d42a4dc`.
 Continuous SSC playback preparation was owner-merged in PR #101 at `573c097`.
-Current authorized work is #102, selected as the only Ready item on 2026-09-26
-and subsequently observed In progress (no Project changes made by this work):
-[SSC generation and preparation acceleration](SSC_ACCELERATION.md), **pending owner review**.
+SSC generation and adaptive playback caching were owner-merged in PR #103 at
+`6d4df9a`. Current authorized work is #107, the only Ready item on 2026-09-27:
+[playback integrity and preparation throughput](PLAYBACK_INTEGRITY.md), **pending owner review**.
+Interactive reads skip payload SHA recomputation while preserving structural,
+descriptor/commit, decode and source-change checks. Readable scientific corruption
+may be missed during playback; explicit full verification, Python analysis and
+offline exports retain strict checking. SIMSCP4 and #103's cache policy are unchanged.
 Lazy opening is retained. [Adaptive playback caching](SSC_ADAPTIVE_CACHE.md) now
 prepares forward automatically within current physical-RAM capacity. Scrubs reuse
 overlapping samples and prioritize missing targets; manual intervals remain advanced
@@ -54,7 +58,7 @@ The slider bug was reproduced on independent particle/volume cadences and a reta
 
 The prior investigation associated all **113 callbacks above 50 ms** with particle source-pair changes, while the nominal one-second tail poll stayed below 3.1 ms. The focused optimization now skips unneeded hidden-particle work and prepares visible particle pairs on a CPU worker. On the exact retained `complete.ssc`, median visible transitions fell from **177–181 ms to about 20 ms**, and hidden transitions to about 2.6 ms. Both renderers had zero ≥50 ms callbacks in the final matrix and longer replenishment, 2× speed and loop controls. Cold startup and uncached seeks explicitly buffer; they do not synchronously rebuild the pair on the UI callback. All **3,168 regression checks and 122 performance assertions passed**, including deterministic visible/hidden video equality. These are retained historical measurements; current maintenance reports supersede the old investigation files.
 
-Automatic particle buffering uses a rolling cache capped at 2 GiB and physical-RAM headroom, with up to eight requested pairs. First display and controls do not wait for that window. Uncached seeks wait only for the requested samples and retain the last committed scene. Fields automatically fill a RAM-bounded window while paused or playing, retain overlapping prepared samples on scrubs, and prepare missing targets first. Explicit interval preparation is an advanced option; meshes retain at most four future pairs. Both keep one staged GPU resource per visible layer. Later corrupt requested records pause playback and identify their object, sample and record. The [lazy loading report](SSC_LAZY_LOADING.md) supersedes the startup policy described in the historical [maintenance report](PERFORMANCE_MAINTENANCE_REPORT.md).
+Automatic particle buffering uses a rolling cache capped at 2 GiB and physical-RAM headroom, with up to eight requested pairs. First display and controls do not wait for that window. Uncached seeks wait only for the requested samples and retain the last committed scene. Fields automatically fill a RAM-bounded window while paused or playing, retain overlapping prepared samples on scrubs, and prepare missing targets first. Explicit interval preparation is an advanced option; meshes retain at most four future pairs. Both keep one staged GPU resource per visible layer. Later structurally malformed or undecodable requested records pause playback and identify their object, sample and record. The [lazy loading report](SSC_LAZY_LOADING.md) supersedes the startup policy described in the historical [maintenance report](PERFORMANCE_MAINTENANCE_REPORT.md).
 
 Representative external captures informed G3 timeline/playback validation. Scientific interpretation remains outside SimScope and is not a product result or dependency.
 

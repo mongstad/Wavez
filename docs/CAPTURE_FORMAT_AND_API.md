@@ -50,11 +50,11 @@ Persistent particle identity requires explicit nonnegative int64 IDs, unique wit
 
 ## SIMSCP4 storage and recovery
 
-The little-endian prefix `<8sII>` contains `SIMSCP4\0`, version 4 and JSON metadata length. Each record has an 80-byte `<4sIQQdIIQ32s>` header with `FRM4`, descriptor and payload lengths, physical time, object index, array count, sequence and descriptor SHA-256. Array descriptors identify type, association and chunks. A 48-byte `<8sQ32s>` `COMMIT4\0` trailer commits the sequence and hash of header/descriptor. Chunks carry independent stored/raw SHA-256 checks; the descriptor/commit hash is not a replacement for payload checks.
+The little-endian prefix `<8sII>` contains `SIMSCP4\0`, version 4 and JSON metadata length. Each record has an 80-byte `<4sIQQdIIQ32s>` header with `FRM4`, descriptor and payload lengths, physical time, object index, array count, sequence and descriptor SHA-256. Array descriptors identify type, association and chunks. A 48-byte `<8sQ32s>` `COMMIT4\0` trailer commits the sequence and hash of header/descriptor. Chunks carry independent stored/raw SHA-256 checks; the descriptor/commit hash is not a replacement for payload checks. Interactive playback retains structural/descriptor/commit validation and bounded decoding but skips payload SHA comparisons. Readable scientific corruption can remain undetected there. Python analysis/readers and offline export retain strict payload checks; [explicit verification](PLAYBACK_INTEGRITY.md) checks the whole capture.
 
 All arrays use canonical contiguous chunks of 4 MiB except the final remainder; grids are zyx C-order, x fastest. Mandatory exact volume statistics replace repeated display scans. Codec 0 is uncompressed (default); codec 1 is Zstandard, default level 1. Supported writer levels are 1–6. Compression is lossless and optional; unavailable requested codecs fail explicitly. No lossy “scientific compression” is implied.
 
-A complete record becomes visible only after its commit. There is no required closing footer. An incomplete trailing record can be withheld in live/non-strict reads while earlier committed records remain available; corruption is an error, not a fabricated frame. `SceneReader(path, strict=False)` and `refresh(strict=False)` support reading a growing committed prefix. Reopening/refreshing validates source changes; same path does not establish same source identity.
+A complete record becomes visible only after its commit. There is no required closing footer. An incomplete trailing record can be withheld in live/non-strict reads while earlier committed records remain available; detected corruption is an error, not a fabricated frame. Python `SceneReader(path, strict=False)` and `refresh(strict=False)` permit a growing committed prefix but still check payload SHA. Reopening/refreshing validates source changes; same path does not establish same source identity.
 
 Writes are synchronous with bounded backpressure. There is no archive background queue, writer resume or per-record fsync guarantee. Flush/commit visibility is not a promise of power-loss durability. The v3 writer opens exclusively and refuses an existing destination; choose a fresh destination for each export.
 
@@ -62,7 +62,12 @@ Writes are synchronous with bounded backpressure. There is no archive background
 
 The viewer's timeline combines committed times from every layer. The live-slider maintenance updates its index range as the union changes. Physical-time seeks still sample layers independently. Volumes/scalars remain held; no denser field cadence or field interpolation is invented by dragging a slider.
 
-G1/G2 inspection and indexes distinguish source identity from convenience caches. v1/v2 have their established shared index path; Godot G3 uses disposable `.sidx3.json` verified against actual source headers/descriptors/commits. Python v3 currently scans directly. Payload checks occur when decoding, while a pinned scientific inspection/export also uses the committed-prefix identity. A cache is never the authoritative scientific source.
+Inspection and indexes distinguish source identity from convenience caches. The
+native SIMSCP4 reader builds a bounded header index and materializes requested
+descriptors; it neither reads nor writes a disposable descriptor sidecar. Python
+scans descriptors directly. Pinned scientific analysis/export also uses the
+committed-prefix identity. A cache is never the authoritative scientific source,
+and file paths or change-detection stamps never establish payload integrity.
 
 Inspection recipe v3 adds G4 selections, analysis and exact member assets to the
 v2 layer/v1 particle contracts, which remain readable. V3 recipes and render job v2

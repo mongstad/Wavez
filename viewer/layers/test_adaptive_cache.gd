@@ -51,7 +51,7 @@ func run() -> void:
 	for key in keys:
 		if not before.charges.has(key):missing += 1
 	check(keys.any(func(key):return overlap.has(key)),"New window overlaps cached samples")
-	check(control.worker.status().pipeline_stages.stored_hash.count-before.pipeline_stages.stored_hash.count == missing,"Only missing overlapping-window samples read/hash/decode")
+	check(control.worker.status().pipeline_stages.file_io.count-before.pipeline_stages.file_io.count == missing,"Only missing overlapping-window samples read/decode")
 	var oracle = JSON.parse_string(FileAccess.get_file_as_string(directory.path_join("oracle.json")))
 	for time in [1.5,.2,1.8,.6]:
 		check(view.scene_layers.seek(time) and await sample(view,time,true),"Distant seek prepares its target automatically: "+str(time))

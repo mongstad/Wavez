@@ -3,7 +3,7 @@ const Reader = preload("res://layers/scene_reader.gd")
 func run() -> void:
 	out = OS.get_cmdline_user_args()[0]
 	for kind in ["particles","volume","mesh"]:
-		for fault in ["payload","descriptor","commit","shape","header"]:
+		for fault in ["chunk_bounds","descriptor","commit","shape","header"]:
 			var path := out.path_join(kind+"-"+fault+".ssc")
 			var reader := Reader.new()
 			if fault == "header":

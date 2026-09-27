@@ -129,7 +129,7 @@ func _read(index: int, job: Dictionary, file: FileAccess) -> Dictionary:
 	# This worker owns decoded entries. Borrow a resident neighbor without
 	# retaining a new cache or changing its LRU order/limits.
 	var reference: Dictionary = decoded.entries.get(index-1,decoded.entries.get(index+1,{})).get("value",{})
-	var data := Typed.read(file,descriptor,self,reference)
+	var data := Typed.read(file,descriptor,self,reference,false)
 	observe("read_decode_identity",start_time)
 	if data.has("error"):return {"error":Reader.record_error(entry,data.error)}
 	if data.is_empty():return data

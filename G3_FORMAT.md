@@ -36,7 +36,9 @@ All arrays use canonical contiguous chunks of 4 MiB except the final chunk,
 which contains the remainder. Empty arrays have no chunks. Grid arrays are C-order
 `(Nz, Ny, Nx)`, x fastest; chunks may cross rows and planes. There are no brick
 origin/shape fields. Readers reject noncanonical chunks, validate byte totals and
-commit/checksums, then concatenate exact source bytes for display/analysis.
+descriptor/commit proofs, then concatenate source bytes. Interactive playback skips
+payload SHA comparisons; strict readers and explicit verification retain them.
+See [playback versus integrity verification](docs/PLAYBACK_INTEGRITY.md).
 
 Every volume array requires `statistics_v1` with exactly `minimum`, `maximum`,
 `finite`, `nonfinite`, `nonpositive`. Counts are nonnegative integers; finite +
@@ -44,7 +46,9 @@ nonfinite equals the element count. Nonpositive counts only finite values <= 0.
 Finite extrema are 16 lowercase hex digits encoding little-endian float64; both
 are null if finite is zero. Counts/extrema must be mutually consistent. Descriptor
 hashes and commit proofs cover the summary. Source chunk hashes remain mandatory;
-statistics are consumed only after payload validation. The explicit verifier
+interactive statistics are consumed after structural validation and decoding.
+Readable payload corruption can therefore disagree with these statistics without
+being detected during playback. Strict readers check payload SHA; the explicit verifier
 recomputes every summary against source values. Statistics do not replace the
 source arrays used for inspection, percentiles or analysis.
 

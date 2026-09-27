@@ -102,9 +102,9 @@ func run() -> void:
 	var prepared := preload("res://layers/field_prepare.gd").prepare(view.generic_reader.objects.field,bad,"rho",32)
 	check(prepared.has("error") and bad.channels.rho[0]==1e100,"float32 overflow refuses without changing source")
 	# Retain a displayed field if an intentionally tiny budget disables future work.
-	fields.cpu_limit = 1;fields.request_signature = ""
+	fields.cache_cap_bytes = 1;fields.request_signature = ""
 	check(not view.scene_layers.sample(view.requested_time,true).has("pending"),"resident field remains usable when future prefetch is refused")
-	check(fields.staged.is_empty(),"budget refusal releases future staging")
+	check(fields.capacity_wait and fields.automatic_jobs.is_empty() and fields.staged.size() <= 1,"automatic refusal stops CPU preparation with bounded GPU staging")
 	view.free();await process_frame
 	# Source changes during a gated field publication must not publish stale arrays.
 	var path := out.path_join("field-live.ssc")

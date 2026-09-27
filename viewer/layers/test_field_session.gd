@@ -40,7 +40,7 @@ func repeated_switches(view, oracle: Array, gpu_oracle: Array) -> void:
 				check(await sample(view,.5,true),"Paused replacement sample arrives")
 				view.play_button.pressed.emit()
 			check(await session_ready(view),"Repeated channel switch prepares every sample")
-			check(control.worker.status().pipeline_stages.stored_hash.count == before.pipeline_stages.stored_hash.count,"Prepared channel changes do not reread, hash or decode resident source channels: %s %s -> %s" % [channel,before.pipeline_stages.stored_hash.count,control.worker.status().pipeline_stages.stored_hash.count])
+			check(control.worker.status().pipeline_stages.file_io.count == before.pipeline_stages.file_io.count,"Prepared channel changes do not reread or decode resident source channels: %s %s -> %s" % [channel,before.pipeline_stages.file_io.count,control.worker.status().pipeline_stages.file_io.count])
 			check(control.worker.status().session.get("resident_credit",0) >= int(before.bytes*.7),"Replacement admission credits the still-owned allocation")
 			check(await sample(view,.5,true),"Replacement source sample commits")
 			var field = view.scene_layers.views.field
@@ -150,12 +150,12 @@ func run() -> void:
 	check(await session_ready(view),"Channel change reparses/prepares its new generation")
 	await repeated_switches(view,oracle,gpu_oracle)
 	view.playing = false;control.cancel_session()
-	var prior_decode_count: int = control.worker.status().pipeline_stages.stored_hash.count
+	var prior_decode_count: int = control.worker.status().pipeline_stages.file_io.count
 	control.scope_choice.select(1);control.range_start.value = .65;control.range_end.value = 1.05
 	view.playing = true;control.begin_session()
 	check(await session_ready(view),"Selected interval reaches readiness")
 	check(control.worker.status().session.total == 5,"Interval prepares only its held start through end samples")
-	check(control.worker.status().pipeline_stages.stored_hash.count == prior_decode_count,"Narrowing an admitted timeline retains selected source samples without rereading")
+	check(control.worker.status().pipeline_stages.file_io.count == prior_decode_count,"Narrowing an admitted timeline retains selected source samples without rereading")
 	check(control.playback_range() == [.65,1.05],"Prepared interval is explicit")
 	check(await sample(view,1.05,true),"Interval end is available")
 	view.scene_layers.tick(.1)
