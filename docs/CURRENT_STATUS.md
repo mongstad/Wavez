@@ -13,8 +13,13 @@ Independent layer legends were owner-merged in PR #92 at `9774623`.
 Adaptive field preparation capacity was owner-merged in PR #99 at `d42a4dc`.
 Continuous SSC playback preparation was owner-merged in PR #101 at `573c097`.
 SSC generation and adaptive playback caching were owner-merged in PR #103 at
-`6d4df9a`. Current authorized work is #107, the only Ready item on 2026-09-27:
-[playback integrity and preparation throughput](PLAYBACK_INTEGRITY.md), **pending owner review**.
+`6d4df9a`. Playback integrity policy was owner-merged in PR #108 at `d9876ee`.
+Current authorized work is #109, the only Ready item on 2026-09-27:
+[bounded parallel field preparation](PARALLEL_FIELD_PREPARATION.md), **pending owner review**.
+Field preparation uses a small CPU pool with ordered publication and explicit
+in-flight memory reservations. The default is two workers on hosts with at least
+four logical CPUs, otherwise one; `SIMSCOPE_FIELD_WORKERS=1..4` selects a cap.
+The adaptive cache and [interactive integrity policy](PLAYBACK_INTEGRITY.md) remain intact.
 Interactive reads skip payload SHA recomputation while preserving structural,
 descriptor/commit, decode and source-change checks. Readable scientific corruption
 may be missed during playback; explicit full verification, Python analysis and

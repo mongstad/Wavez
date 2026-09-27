@@ -278,6 +278,13 @@ established. See [SSC acceleration](SSC_ACCELERATION.md) for the format's curren
 metadata ceiling, measurements and remaining limits. The prior
 [continuous playback report](SSC_CONTINUOUS_PLAYBACK.md) remains historical evidence.
 
+Field CPU preparation uses a [bounded worker pool](PARALLEL_FIELD_PREPARATION.md)
+with ordered publication and per-job transient memory reservations. The default
+is two workers with at least four logical CPUs, otherwise one. Set
+`SIMSCOPE_FIELD_WORKERS` to an integer from 1 to 4 before launching to select a
+cap; live physical headroom may admit fewer simultaneous jobs. This preserves
+all-channel source reuse and the existing adaptive cache policy.
+
 Each visible field holds its current texture and at most one staged future texture. Their per-texture budgets split the existing layer GPU share; this can increase preview stride on large fields. GPU uploads occur on the main thread, at most one per process frame, ahead of source transitions where possible. Texture binding and shader state changes remain on the main thread. Cold seeks and underflow hold the committed physical clock, gate paused Play and pause background analysis until the required samples are ready. Stale source/configuration work is discarded. Initial opening, scientific inspection and deterministic export remain synchronous; large textures can still cause an upload callback stall. See the [PERF-001/002 report](PERFORMANCE_MAINTENANCE_REPORT.md) for exact guards, bounds and retained 02B/03B measurements.
 
 Mesh playback uses at most four future source pairs per visible mesh in the current direction, including reverse loops. Its CPU cache is capped at 128 MiB and further limited by safe physical-RAM headroom; displayed, in-flight and temporary data have additional conservative charges. A current mesh and at most one staged future mesh share each layer's GPU quota. At most one mesh upload runs per process frame. Cold seeks hold the committed clock until the pair is ready, and source/settings changes cancel obsolete preparation. GPU budget or float32 display refusals preserve the decoded scientific samples and report the unavailable preview.

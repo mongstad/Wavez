@@ -269,7 +269,7 @@ func _automatic_request(time: float, budget: int) -> Array:
 		var reservations := other_reservations();var other := 0
 		for value in reservations.values():other += int(value)
 		var memory := Memory.memory_headroom()
-		cpu_limit = Buffer.session_capacity(memory,int(status.resident_bytes),other,largest)
+		cpu_limit = Buffer.session_capacity(memory,int(status.resident_bytes),other,maxi(largest,int(status.largest_job_charge)),worker.worker_count)
 		if cache_cap_bytes > 0:cpu_limit = mini(cpu_limit,cache_cap_bytes)
 		budget_report = {"strategy":"automatic","cpu_limit":cpu_limit,"required_bytes":required,"reserved_other_bytes":other,"reservations":reservations,"memory":memory,"resident_credit":status.resident_bytes,"largest_job_bytes":largest}
 		capacity_wait = required > cpu_limit
