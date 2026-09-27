@@ -116,7 +116,7 @@ func _run() -> void:
 func _decode(file: FileAccess, entry: Dictionary, obj: Dictionary) -> Dictionary:
 	entry = Reader.materialize(file,entry,obj)
 	if entry.has("error"):return entry
-	var decoded := Channels.read(file,entry,obj,self)
+	var decoded := Channels.read(file,entry,obj,self,false)
 	if decoded.has("error"):return {"error":Reader.record_error(entry,decoded.error)}
 	if decoded.is_empty():return decoded
 	var count: int = int(decoded.shapes.position[0])

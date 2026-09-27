@@ -14,8 +14,11 @@ See the [wire contract](../G3_FORMAT.md), [API](../SIMSCOPE_API.md),
 [capture fidelity inventory](SSC_CAPTURE_PARAMETERS.md). Historical reports and
 evidence remain unchanged and describe their original contracts.
 
-Source values, explicit identity, corruption refusal and bounded allocation remain
-part of the scientific contract. Shared `storage.py`, `codec.py`,
+Source values, explicit identity and bounded allocation remain part of the
+scientific contract. Interactive playback refuses malformed/undecodable data but
+does not recompute payload SHA. Structurally readable scientific corruption may
+go undetected until [explicit integrity verification](PLAYBACK_INTEGRITY.md).
+Python analysis and offline export retain strict payload checks. Shared `storage.py`, `codec.py`,
 `capture_index.gd` and `typed_decode.gd` serve only the current capture contract.
 SSC version 4, scene inspection v2, G4 inspection v3 and render jobs v1/v2 are
 separate versioned contracts. Existing recipes tied to old capture identities need

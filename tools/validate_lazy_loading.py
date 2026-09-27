@@ -38,17 +38,18 @@ def prepare(out):
                 else: w.add_mesh('object', i, np.array([[0, 0, 0], [1, 0, 0], [0, 1, 0]], dtype='f4'), np.array([[0, 1, 2]], dtype='u4'))
         assert verify(path) == 20
         with SceneReader(path) as reader: record = reader.records[3]
-        for fault in ['payload', 'descriptor', 'commit', 'shape', 'header']:
+        for fault in ['chunk_bounds', 'descriptor', 'commit', 'shape', 'header']:
             target = out / f'{kind}-{fault}.ssc'
             shutil.copyfile(path, target)
-            if fault == 'shape':
+            if fault in ('shape', 'chunk_bounds'):
                 def change(seq, row, desc, payload):
-                    if seq == 3: desc['arrays'][0]['shape'][0] = 1000000000
+                    if seq == 3:
+                        if fault == 'shape':desc['arrays'][0]['shape'][0] = 1000000000
+                        else:desc['arrays'][0]['chunks'][0]['offset'] = str(1<<50)
                 rewrite(target, change)
             else:
                 raw = bytearray(target.read_bytes())
-                if fault == 'payload': raw[record['offset']] ^= 1
-                elif fault == 'descriptor': raw[record['offset'] - 1] ^= 1
+                if fault == 'descriptor': raw[record['offset'] - 1] ^= 1
                 elif fault == 'commit': raw[record['end'] - 1] ^= 1
                 else:
                     # Complete header with an unsafe declared decoded allocation.

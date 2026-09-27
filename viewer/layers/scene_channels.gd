@@ -3,7 +3,7 @@ extends RefCounted
 const Index = preload("res://data/capture_index.gd")
 const Hash = preload("res://data/capture_index.gd")
 const Codec = preload("res://data/typed_decode.gd")
-static func read(source_file: FileAccess, entry: Dictionary, obj: Dictionary, cancel = null) -> Dictionary:
+static func read(source_file: FileAccess, entry: Dictionary, obj: Dictionary, cancel = null, verify_payloads := true) -> Dictionary:
 	var channels := {};var components := {};var shapes := {};var associations := {};var statistics := {};var reserve: int = entry.decoded+4096
 	var timings := {"file_io":0.0,"stored_hash":0.0,"decompress":0.0,"raw_hash":0.0,"assembly":0.0,"typed_conversion":0.0}
 	for a in entry.descriptor.arrays:
@@ -13,17 +13,22 @@ static func read(source_file: FileAccess, entry: Dictionary, obj: Dictionary, ca
 			var tick := Time.get_ticks_usec()
 			source_file.seek(entry.offset+Index.decimal(p.offset));var stored := source_file.get_buffer(Index.decimal(p.stored))
 			timings.file_io += (Time.get_ticks_usec()-tick)/1000.0;tick = Time.get_ticks_usec()
-			var hash := Hash.digest(stored)
-			timings.stored_hash += (Time.get_ticks_usec()-tick)/1000.0
-			if hash != p.stored_sha256 or stored.size() != Index.decimal(p.stored): return {"error":"Stored scene chunk checksum."}
+			if stored.size() != Index.decimal(p.stored): return {"error":"Stored scene chunk length mismatch."}
+			var hash := ""
+			if verify_payloads:
+				hash = Hash.digest(stored)
+				timings.stored_hash += (Time.get_ticks_usec()-tick)/1000.0
+				if hash != p.stored_sha256:return {"error":"Stored scene chunk checksum."}
 			var decoded := Index.decimal(p.decoded)
 			if p.codec == 1 and not Codec.zstd_header(stored,decoded): return {"error":"Invalid bounded Zstandard frame."}
 			tick = Time.get_ticks_usec()
 			var raw: PackedByteArray = stored if p.codec == 0 else stored.decompress(decoded,FileAccess.COMPRESSION_ZSTD)
 			timings.decompress += (Time.get_ticks_usec()-tick)/1000.0;tick = Time.get_ticks_usec()
-			var raw_hash: String = hash if p.codec == 0 else Hash.digest(raw)
-			timings.raw_hash += (Time.get_ticks_usec()-tick)/1000.0
-			if raw.size() != decoded or raw_hash != p.raw_sha256: return {"error":"Decoded scene chunk checksum."}
+			if raw.size() != decoded:return {"error":"Scene chunk decode failed or decoded length mismatch."}
+			if verify_payloads:
+				var raw_hash: String = hash if p.codec == 0 else Hash.digest(raw)
+				timings.raw_hash += (Time.get_ticks_usec()-tick)/1000.0
+				if raw_hash != p.raw_sha256:return {"error":"Decoded scene chunk checksum."}
 			tick = Time.get_ticks_usec()
 			full.append_array(raw)
 			timings.assembly += (Time.get_ticks_usec()-tick)/1000.0

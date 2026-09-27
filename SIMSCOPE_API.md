@@ -30,10 +30,14 @@ per-record fsync promise. An I/O failure makes the writer unusable; retain the
 committed prefix and choose a new destination.
 
 Volume statistics are mandatory and computed once during export. The current
-viewer consumes them after source validation; no legacy reader or optional summary
+viewer consumes them after structural validation/decoding; no legacy reader or optional summary
 fallback is included. `tools/verify_ssc.py` recomputes summaries. Source arrays,
 timestamps and precision are unchanged. See [format decisions](docs/SSC_ACCELERATION.md)
 and the [complete capture-policy inventory](docs/SSC_CAPTURE_PARAMETERS.md).
+Interactive playback skips payload SHA recomputation; readable corruption may
+remain undetected there. Python `SceneReader` and scientific analysis retain
+payload checks, including when `strict=False` permits an incomplete trailing record.
+See [explicit integrity verification](docs/PLAYBACK_INTEGRITY.md).
 
 | Argument | Contract |
 |---|---|

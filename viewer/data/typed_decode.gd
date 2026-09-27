@@ -36,7 +36,7 @@ static func zstd_header(bytes: PackedByteArray, expected: int) -> bool:
 	if descriptor&4: offset += 4
 	return offset == bytes.size()
 
-static func read(file: FileAccess, entry: Dictionary, worker, identity_reference: Dictionary = {}) -> Dictionary:
+static func read(file: FileAccess, entry: Dictionary, worker, identity_reference: Dictionary = {}, verify_payloads := true) -> Dictionary:
 	var channels := {};var components := {};var unavailable: Array = [];var used: int = 4096+entry.channels.size()*256
 	var id_map
 	for d in entry.channels:
@@ -55,18 +55,23 @@ static func read(file: FileAccess, entry: Dictionary, worker, identity_reference
 			var tick := Time.get_ticks_usec();file.seek(entry.offset+Index.decimal(part.offset));var stored := file.get_buffer(stored_size)
 			observe(worker,"file_io",tick)
 			tick = Time.get_ticks_usec()
-			var stored_hash := Hash.digest(stored)
-			if stored.size() != stored_size or stored_hash != part.stored_sha256: return {"error":"Stored chunk checksum mismatch."}
-			observe(worker,"chunk_hash",tick)
+			if stored.size() != stored_size:return {"error":"Stored chunk length mismatch."}
+			var stored_hash := ""
+			if verify_payloads:
+				stored_hash = Hash.digest(stored)
+				if stored_hash != part.stored_sha256:return {"error":"Stored chunk checksum mismatch."}
+				observe(worker,"chunk_hash",tick)
 			if part.codec == 1 and not zstd_header(stored,raw_size): return {"error":"Unsupported Zstandard window/dictionary/header."}
 			tick = Time.get_ticks_usec()
 			var raw: PackedByteArray = stored if part.codec == 0 else stored.decompress(raw_size,FileAccess.COMPRESSION_ZSTD)
 			observe(worker,"decompress",tick)
 			tick = Time.get_ticks_usec()
-			# None uses exactly the same bytes for both proofs; avoid hashing them twice.
-			var raw_hash: String = stored_hash if part.codec == 0 else Hash.digest(raw)
-			if raw.size() != raw_size or raw_hash != part.raw_sha256: return {"error":"Decoded chunk checksum/length mismatch."}
-			observe(worker,"chunk_hash",tick)
+			if raw.size() != raw_size:return {"error":"Chunk decode failed or decoded length mismatch."}
+			if verify_payloads:
+				# None uses the same bytes for both proofs; hash only once.
+				var raw_hash: String = stored_hash if part.codec == 0 else Hash.digest(raw)
+				if raw_hash != part.raw_sha256:return {"error":"Decoded chunk checksum mismatch."}
+				observe(worker,"chunk_hash",tick)
 			if channel_bytes.is_empty(): channel_bytes = raw
 			else: channel_bytes.append_array(raw)
 		var tick := Time.get_ticks_usec()
@@ -86,7 +91,7 @@ static func read(file: FileAccess, entry: Dictionary, worker, identity_reference
 		if d.name == "particle_id":
 			tick = Time.get_ticks_usec()
 			# Reuse only a resident, validated immutable lookup with exactly the
-			# same ordered int64 IDs. Payload checksums above are still verified.
+			# same ordered int64 IDs. Structural identity checks remain mandatory.
 			var previous = identity_reference.get("identity_map")
 			var previous_ids = identity_reference.get("channels",{}).get("particle_id")
 			if previous is Identity and previous.rows.is_read_only() and previous_ids is PackedInt64Array and previous_ids == channels[d.name]:

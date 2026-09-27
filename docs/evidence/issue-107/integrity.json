@@ -1,0 +1,526 @@
+{
+  "issue": 107,
+  "baseline": "6d4df9ade291e4f9c5c6c0148915dd8c07440d35",
+  "state": "pending owner review",
+  "machine": {
+    "cpu": "AMD Ryzen 7 5800X, 8 cores / 16 threads",
+    "ram_bytes": 50404548608,
+    "gpu": "NVIDIA RTX 3070 Ti",
+    "godot": "4.7.2 stable",
+    "renderer": "Forward+",
+    "viewport": "960x640",
+    "presentation": "Scientific, points, orbit disabled"
+  },
+  "capture": {
+    "bytes": 125950754101,
+    "records": 2193,
+    "field_samples": 1566,
+    "particle_samples": 627,
+    "field_shape": [
+      192,
+      192,
+      192
+    ],
+    "channels": [
+      "density",
+      "psi_real",
+      "psi_imag"
+    ],
+    "field_dtype": "f4",
+    "tracers": 50000,
+    "committed_end_seconds": 156.49999999993017,
+    "unchanged_export_settings": true
+  },
+  "runs": {
+    "before": {
+      "raw_directory": "/home/Nozba/Codex/SIMSCOPE/ssc-integrity-20260927/before-matched",
+      "checks": 141,
+      "sequential": {
+        "cadence": 0.10000000000001563,
+        "count": 64,
+        "first": 100,
+        "samples_per_second": 1.7771464958503074,
+        "source_seconds_per_wall_second": 0.1777146495850585,
+        "stages_ms": {
+          "assembly": 3091.1249999999995,
+          "conversion": 0.010000000000000002,
+          "decompress": 3835.7249999999995,
+          "descriptor": 25.51300000000001,
+          "file_io": 505.29799999999994,
+          "plane_copies": 612.503,
+          "raw_hash": 13784.911,
+          "statistics": 0.10200000000000008,
+          "stored_hash": 13118.975999999999,
+          "typed_conversion": 903.043
+        },
+        "wall_seconds": 36.012788
+      },
+      "playback": [
+        {
+          "cache_cap_mib": 2048,
+          "committed_seconds": 3.5895200000000003,
+          "field_wait_seconds": 6.475106,
+          "field_waits": 933,
+          "fill_seconds": 13.806293,
+          "particle_wait_seconds": 0.0,
+          "particle_waits": 0,
+          "speed": 1,
+          "wall_seconds": 10.00081,
+          "initial_frames": 18,
+          "initial_bytes": 2039611392,
+          "initial_limit": 2147483648,
+          "prepared_during_play": 18,
+          "final_bytes": 1926299648,
+          "final_limit": 2147483648,
+          "callbacks": {
+            "median_ms": 2.5715000000000003,
+            "p95_ms": 12.2243,
+            "p99_ms": 17.642,
+            "max_ms": 22.072,
+            "count": 1438
+          }
+        },
+        {
+          "cache_cap_mib": 2048,
+          "committed_seconds": 3.5968260000000023,
+          "field_wait_seconds": 8.280242,
+          "field_waits": 1198,
+          "fill_seconds": 12.393325,
+          "particle_wait_seconds": 0.0,
+          "particle_waits": 0,
+          "speed": 2,
+          "wall_seconds": 10.001774,
+          "initial_frames": 18,
+          "initial_bytes": 2039611392,
+          "initial_limit": 2147483648,
+          "prepared_during_play": 18,
+          "final_bytes": 1926299648,
+          "final_limit": 2147483648,
+          "callbacks": {
+            "median_ms": 2.645,
+            "p95_ms": 3.712849999999999,
+            "p99_ms": 18.075260000000014,
+            "max_ms": 23.553,
+            "count": 1434
+          }
+        },
+        {
+          "cache_cap_mib": 2048,
+          "committed_seconds": 3.693507999999999,
+          "field_wait_seconds": 9.136563,
+          "field_waits": 1324,
+          "fill_seconds": 12.347006,
+          "particle_wait_seconds": 0.0,
+          "particle_waits": 0,
+          "speed": 4,
+          "wall_seconds": 10.000859,
+          "initial_frames": 18,
+          "initial_bytes": 2039611392,
+          "initial_limit": 2147483648,
+          "prepared_during_play": 17,
+          "final_bytes": 1926299648,
+          "final_limit": 2147483648,
+          "callbacks": {
+            "median_ms": 3.033,
+            "p95_ms": 3.7537999999999996,
+            "p99_ms": 20.241439999999997,
+            "max_ms": 29.519,
+            "count": 1423
+          }
+        }
+      ],
+      "resource_telemetry": {
+        "phases": {
+          "fill_1": {
+            "observed_wall_seconds": 13.7449964059997,
+            "cpu_seconds": 13.200000000000003,
+            "cpu_percent_one_core": 96.03494690066411,
+            "peak_rss": 3219599360,
+            "process_swap": 0
+          },
+          "fill_2": {
+            "observed_wall_seconds": 12.341653691000829,
+            "cpu_seconds": 12.599999999999994,
+            "cpu_percent_one_core": 102.09328762147607,
+            "peak_rss": 5009141760,
+            "process_swap": 0
+          },
+          "fill_4": {
+            "observed_wall_seconds": 12.241012496997428,
+            "cpu_seconds": 11.950000000000003,
+            "cpu_percent_one_core": 97.62264357569435,
+            "peak_rss": 4126441472,
+            "process_swap": 0
+          },
+          "oracle": {
+            "observed_wall_seconds": 2.3083719029964413,
+            "cpu_seconds": 2.269999999999996,
+            "cpu_percent_one_core": 98.33770706762478,
+            "peak_rss": 900952064,
+            "process_swap": 0
+          },
+          "play_1": {
+            "observed_wall_seconds": 9.933639089998906,
+            "cpu_seconds": 14.079999999999998,
+            "cpu_percent_one_core": 141.74060354352525,
+            "peak_rss": 3388796928,
+            "process_swap": 0
+          },
+          "play_2": {
+            "observed_wall_seconds": 10.033327690005535,
+            "cpu_seconds": 14.469999999999999,
+            "cpu_percent_one_core": 144.21935022030578,
+            "peak_rss": 5597966336,
+            "process_swap": 0
+          },
+          "play_4": {
+            "observed_wall_seconds": 10.536775262000447,
+            "cpu_seconds": 16.67,
+            "cpu_percent_one_core": 158.20779684006604,
+            "peak_rss": 4182937600,
+            "process_swap": 0
+          },
+          "sequential": {
+            "observed_wall_seconds": 35.92222043599759,
+            "cpu_seconds": 35.71,
+            "cpu_percent_one_core": 99.40922238819925,
+            "peak_rss": 726085632,
+            "process_swap": 0
+          },
+          "startup": {
+            "observed_wall_seconds": 0.7023107729983167,
+            "cpu_seconds": 0.69,
+            "cpu_percent_one_core": 98.24710463350016,
+            "peak_rss": 565678080,
+            "process_swap": 0
+          }
+        },
+        "peak_rss": 5603516416,
+        "process_swap": 0,
+        "cache_state": "Uncontrolled OS cache; no privileged cache drop. Fresh process each run.",
+        "scope": "Selected full-channel Python checksum oracles and stat invariance, not a whole-file digest."
+      },
+      "independent_oracles": true,
+      "unchanged_stat": true,
+      "scientific": [
+        {
+          "hashes": {
+            "density": "991a3639adadc52a6e96f080cdf32a33b243092ae53147587b8d96d3d4759f8f",
+            "psi_imag": "a9a4c49b62daf4d72c80125fb56d6b460977993fab8b97e1033c3c5ebc91f929",
+            "psi_real": "860a78a5810e9f22581f8ccf4c8428d279c1a237c20df6345921cb62756e8113"
+          },
+          "index": 100,
+          "time": 10.000000000000163
+        },
+        {
+          "hashes": {
+            "density": "ca796fa7d1df4cca28f614bd1ff7b790ef12db28830dac511fd36f022d6567a8",
+            "psi_imag": "43982587d01d1653ee42fe0ad5ccbba01356071eb7323f016f9e88dee0eafd2e",
+            "psi_real": "098c113f6398d6c1a699aeccd7e0e19ec9ea1983931b41a8c23bc4b75f3f37e6"
+          },
+          "index": 132,
+          "time": 13.200000000000664
+        },
+        {
+          "hashes": {
+            "density": "661f8817e6d5c01596349b4062045011beb2244a142bd45c6cfe3043814caa8e",
+            "psi_imag": "5f05824e925749b4b6a576923c925b82b8b9ba73d32480c1a790faeefaa40310",
+            "psi_real": "62fde1ae67bf9d208df09267e32461a4855e242d55bba659b4f7bfbb222d21c9"
+          },
+          "index": 163,
+          "time": 16.30000000000104
+        }
+      ]
+    },
+    "after": {
+      "raw_directory": "/home/Nozba/Codex/SIMSCOPE/ssc-integrity-20260927/after-matched",
+      "checks": 141,
+      "sequential": {
+        "cadence": 0.10000000000001563,
+        "count": 64,
+        "first": 100,
+        "samples_per_second": 7.17111983871255,
+        "source_seconds_per_wall_second": 0.7171119838713671,
+        "stages_ms": {
+          "assembly": 3019.6629999999996,
+          "conversion": 0.012000000000000004,
+          "decompress": 3851.4770000000003,
+          "descriptor": 25.517,
+          "file_io": 463.85299999999984,
+          "plane_copies": 580.1570000000002,
+          "raw_hash": 0.0,
+          "statistics": 0.09800000000000007,
+          "stored_hash": 0.0,
+          "typed_conversion": 876.377
+        },
+        "wall_seconds": 8.924687
+      },
+      "playback": [
+        {
+          "cache_cap_mib": 2048,
+          "committed_seconds": 9.191077999999996,
+          "field_wait_seconds": 0.947196,
+          "field_waits": 136,
+          "fill_seconds": 7.061269,
+          "particle_wait_seconds": 0.0,
+          "particle_waits": 0,
+          "speed": 1,
+          "wall_seconds": 10.002672,
+          "initial_frames": 18,
+          "initial_bytes": 2039611392,
+          "initial_limit": 2147483648,
+          "prepared_during_play": 74,
+          "final_bytes": 1926299648,
+          "final_limit": 2147483648,
+          "callbacks": {
+            "median_ms": 0.522,
+            "p95_ms": 18.43825,
+            "p99_ms": 22.255069999999982,
+            "max_ms": 26.279,
+            "count": 1414
+          }
+        },
+        {
+          "cache_cap_mib": 2048,
+          "committed_seconds": 9.174794,
+          "field_wait_seconds": 5.895393,
+          "field_waits": 857,
+          "fill_seconds": 6.696719,
+          "particle_wait_seconds": 0.0,
+          "particle_waits": 0,
+          "speed": 2,
+          "wall_seconds": 10.012714,
+          "initial_frames": 18,
+          "initial_bytes": 2039611392,
+          "initial_limit": 2147483648,
+          "prepared_during_play": 74,
+          "final_bytes": 1926299648,
+          "final_limit": 2147483648,
+          "callbacks": {
+            "median_ms": 2.889,
+            "p95_ms": 18.1695,
+            "p99_ms": 21.983100000000004,
+            "max_ms": 26.051,
+            "count": 1411
+          }
+        },
+        {
+          "cache_cap_mib": 2048,
+          "committed_seconds": 9.521611999999996,
+          "field_wait_seconds": 7.959455,
+          "field_waits": 1176,
+          "fill_seconds": 5.699326,
+          "particle_wait_seconds": 0.0,
+          "particle_waits": 0,
+          "speed": 4,
+          "wall_seconds": 10.001141,
+          "initial_frames": 18,
+          "initial_bytes": 2039611392,
+          "initial_limit": 2147483648,
+          "prepared_during_play": 74,
+          "final_bytes": 1926299648,
+          "final_limit": 2147483648,
+          "callbacks": {
+            "median_ms": 3.259,
+            "p95_ms": 9.0775,
+            "p99_ms": 22.164800000000003,
+            "max_ms": 27.641,
+            "count": 1411
+          }
+        }
+      ],
+      "resource_telemetry": {
+        "phases": {
+          "fill_1": {
+            "observed_wall_seconds": 7.022844175997307,
+            "cpu_seconds": 5.140000000000001,
+            "cpu_percent_one_core": 73.18972016448129,
+            "peak_rss": 3220983808,
+            "process_swap": 0
+          },
+          "fill_2": {
+            "observed_wall_seconds": 6.621522564004408,
+            "cpu_seconds": 4.659999999999997,
+            "cpu_percent_one_core": 70.37656301788438,
+            "peak_rss": 4783960064,
+            "process_swap": 0
+          },
+          "fill_4": {
+            "observed_wall_seconds": 5.518174543998612,
+            "cpu_seconds": 3.75,
+            "cpu_percent_one_core": 67.95725597477482,
+            "peak_rss": 4387794944,
+            "process_swap": 0
+          },
+          "oracle": {
+            "observed_wall_seconds": 1.0033553350003785,
+            "cpu_seconds": 1.0,
+            "cpu_percent_one_core": 99.66558856236337,
+            "peak_rss": 918016000,
+            "process_swap": 0
+          },
+          "play_1": {
+            "observed_wall_seconds": 9.938054024998564,
+            "cpu_seconds": 16.07,
+            "cpu_percent_one_core": 161.70167680289222,
+            "peak_rss": 3576365056,
+            "process_swap": 0
+          },
+          "play_2": {
+            "observed_wall_seconds": 10.038450056003057,
+            "cpu_seconds": 15.990000000000002,
+            "cpu_percent_one_core": 159.2875385223228,
+            "peak_rss": 5463633920,
+            "process_swap": 0
+          },
+          "play_4": {
+            "observed_wall_seconds": 10.540927382993686,
+            "cpu_seconds": 16.790000000000006,
+            "cpu_percent_one_core": 159.2838978009499,
+            "peak_rss": 4444422144,
+            "process_swap": 0
+          },
+          "sequential": {
+            "observed_wall_seconds": 8.832884994000779,
+            "cpu_seconds": 8.85,
+            "cpu_percent_one_core": 100.19376461949687,
+            "peak_rss": 726667264,
+            "process_swap": 0
+          },
+          "startup": {
+            "observed_wall_seconds": 0.7022596130045713,
+            "cpu_seconds": 0.71,
+            "cpu_percent_one_core": 101.10221161121767,
+            "peak_rss": 572981248,
+            "process_swap": 0
+          }
+        },
+        "peak_rss": 5463633920,
+        "process_swap": 0,
+        "cache_state": "Uncontrolled OS cache; no privileged cache drop. Fresh process each run.",
+        "scope": "Selected full-channel Python checksum oracles and stat invariance, not a whole-file digest."
+      },
+      "independent_oracles": true,
+      "unchanged_stat": true,
+      "scientific": [
+        {
+          "hashes": {
+            "density": "991a3639adadc52a6e96f080cdf32a33b243092ae53147587b8d96d3d4759f8f",
+            "psi_imag": "a9a4c49b62daf4d72c80125fb56d6b460977993fab8b97e1033c3c5ebc91f929",
+            "psi_real": "860a78a5810e9f22581f8ccf4c8428d279c1a237c20df6345921cb62756e8113"
+          },
+          "index": 100,
+          "time": 10.000000000000163
+        },
+        {
+          "hashes": {
+            "density": "ca796fa7d1df4cca28f614bd1ff7b790ef12db28830dac511fd36f022d6567a8",
+            "psi_imag": "43982587d01d1653ee42fe0ad5ccbba01356071eb7323f016f9e88dee0eafd2e",
+            "psi_real": "098c113f6398d6c1a699aeccd7e0e19ec9ea1983931b41a8c23bc4b75f3f37e6"
+          },
+          "index": 132,
+          "time": 13.200000000000664
+        },
+        {
+          "hashes": {
+            "density": "661f8817e6d5c01596349b4062045011beb2244a142bd45c6cfe3043814caa8e",
+            "psi_imag": "5f05824e925749b4b6a576923c925b82b8b9ba73d32480c1a790faeefaa40310",
+            "psi_real": "62fde1ae67bf9d208df09267e32461a4855e242d55bba659b4f7bfbb222d21c9"
+          },
+          "index": 163,
+          "time": 16.30000000000104
+        }
+      ]
+    }
+  },
+  "measured_speedup": 4.0351877886585825,
+  "consumption_samples_per_second": {
+    "1x": 10,
+    "2x": 20,
+    "4x": 40
+  },
+  "interpretation": "Payload hashing eliminated from interactive decode; material throughput improvement, still below sustained 1x/2x/4x consumption. Short prepared intervals can play smoothly. No universal pacing or indefinitely uninterrupted playback claim.",
+  "validation": {
+    "native": {
+      "integrity_forward_plus": {
+        "checks": 473,
+        "failures": [],
+        "raw_result": "/home/Nozba/Codex/SIMSCOPE/ssc-integrity-20260927/integrity-vulkan-verified/checks.json"
+      },
+      "integrity_compatibility": {
+        "checks": 473,
+        "failures": [],
+        "raw_result": "/home/Nozba/Codex/SIMSCOPE/ssc-integrity-20260927/integrity-gl-rendered/checks.json"
+      },
+      "lazy": {
+        "checks": 217,
+        "failures": [],
+        "raw_result": "/home/Nozba/Codex/SIMSCOPE/ssc-integrity-20260927/lazy/checks.json"
+      },
+      "adaptive": {
+        "checks": 73,
+        "failures": [],
+        "raw_result": "/home/Nozba/Codex/SIMSCOPE/ssc-integrity-20260927/adaptive/checks.json"
+      },
+      "field_sessions": {
+        "checks": 330,
+        "failures": [],
+        "raw_result": "/home/Nozba/Codex/SIMSCOPE/ssc-integrity-20260927/field-session/checks.json"
+      },
+      "particles": {
+        "checks": 2457,
+        "failures": [],
+        "raw_result": "/home/Nozba/Codex/SIMSCOPE/ssc-integrity-20260927/particles/results.json"
+      },
+      "meshes": {
+        "checks": 2731,
+        "failures": [],
+        "raw_result": "/home/Nozba/Codex/SIMSCOPE/ssc-integrity-20260927/mesh/checks.json"
+      },
+      "maintenance": {
+        "checks": 66,
+        "failures": [],
+        "raw_result": "/home/Nozba/Codex/SIMSCOPE/ssc-integrity-20260927/lifecycle-verified/fixtures/maintenance-results.json"
+      },
+      "lifecycle": {
+        "checks": 51,
+        "failures": [],
+        "raw_result": "/home/Nozba/Codex/SIMSCOPE/ssc-integrity-20260927/lifecycle-verified/fixtures/lifecycle-results.json"
+      }
+    },
+    "native_total": 6871,
+    "python_tests": 214,
+    "strict_corrupt_cases": 63,
+    "documentation_examples": 3,
+    "missing_documentation_links": [],
+    "python_compile": "PASS",
+    "godot_import": "PASS",
+    "full_capture_verification": {
+      "records": 2193,
+      "status": "PASS",
+      "wall_seconds": 363.53,
+      "user_seconds": 301.31,
+      "system_seconds": 54.0,
+      "peak_rss_kib": 320048,
+      "swaps": 0,
+      "exit": 0,
+      "source_stat_unchanged": true
+    },
+    "final_failures": []
+  },
+  "limitations": [
+    "Short bounded playback trials, not indefinitely uninterrupted playback or presentation pacing",
+    "Warm/uncontrolled OS cache; no cold-cache claim",
+    "Other operating systems and hardware not tested",
+    "Offline reader refusal tested; full end-to-end video export not rerun",
+    "Process swap measurement is not whole-system swap usage"
+  ],
+  "earlier_attempts": [
+    "Wrong mesh fixture keyword corrected before native execution",
+    "Harness controller-pump and in-flight publication synchronization corrected",
+    "Baseline snapshot missing asset imports: failed UI attempt excluded and rerun after import",
+    "Initial readiness condition yielded unequal cache coverage: replaced by stable readiness and matched pair rerun",
+    "Compatibility transient offline-viewer teardown leaked two textures: resolved with render-before-destroy and queued-free completion",
+    "Maintenance assertion failed on accepted baseline too: test corrected to existing adaptive capacity and separate GPU-staging contract"
+  ]
+}

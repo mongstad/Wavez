@@ -272,7 +272,7 @@ func _run() -> void:
 					mutex.unlock()
 					var entry := materialized
 					materialized = entry
-					var decoded := entry if entry.has("error") else Channels.read(file,entry,job.object,self)
+					var decoded := entry if entry.has("error") else Channels.read(file,entry,job.object,self,false)
 					if decoded.has("error"):result = {"error":decoded.error if entry.has("error") else Reader.record_error(job.entry,decoded.error)}
 					elif decoded.is_empty():result = decoded
 					else:
