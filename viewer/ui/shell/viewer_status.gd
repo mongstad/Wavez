@@ -149,6 +149,35 @@ func _process(delta: float) -> void:
 	elapsed = 0
 	refresh()
 
+func playback_status(layers) -> Dictionary:
+	var result := {"text":"Ready", "detail":"The committed visible sample is ready."}
+	var interval: Array = layers.field_playback.playback_range()
+	var at_end: bool = not viewer.scene_loop_playback and (viewer.requested_time >= float(interval[1]) if viewer.physical_rate >= 0 else viewer.requested_time <= float(interval[0]))
+	var advancing: bool = viewer.playing and viewer.frame_count > 1 and viewer.physical_rate != 0 and not at_end
+	var waiting: bool = layers.is_buffering()
+	var fields = layers.field_playback
+	var session := {}
+	if fields.active():
+		var status: Dictionary = fields.worker.status()
+		session = status.session
+		if is_instance_valid(fields.label):result.detail = fields.label.text
+		if fields.capacity_wait or session.get("state") == "pressure":result.detail = "Waiting for available memory.\n"+result.detail
+		# Read the same gate as Play without requesting work or changing its state.
+		if not viewer.playing and not at_end and fields.scope_choice.selected == 0:
+			var demand: Dictionary = fields._demand(status,viewer.requested_time)
+			var gate: Dictionary = fields.concurrency.gate(demand.consumer,demand.ahead_seconds,session.get("state") == "ready")
+			waiting = waiting or fields.capacity_wait or not gate.ready
+	if waiting:
+		result.text = "Buffering / Preparing…" if advancing else "Preparing…"
+		result.detail = "Waiting for requested data or sufficient prepared playback coverage.\n"+result.detail
+		# Automatic coverage and its target adapt: never imply whole-file progress.
+		if fields.active() and fields.session_waiting and fields.scope_choice.selected != 0 and session.get("state") == "preparing" and int(session.get("total",0)) > 0:
+			var percent := clampi(floori(100.0*int(session.get("ready",0))/int(session.total)),0,100)
+			result.text = ("Buffering / Preparing" if advancing else "Preparing")+" — %d%%" % percent
+			result.detail += "\nPercentage: prepared field samples / all field samples in the explicitly requested preparation interval; not elapsed time or whole-capture progress."
+	elif advancing:result.text = "Playing"
+	return result
+
 func refresh() -> void:
 	if viewer == null: return
 	refresh_count += 1
@@ -164,9 +193,9 @@ func refresh() -> void:
 		if viewer.frame_count == 0:
 			readiness = "Unavailable"; readiness_detail = "Waiting for a complete recorded sample."
 		if layers != null:
-			if layers.field_playback.active() and is_instance_valid(layers.field_playback.label):readiness_detail = layers.field_playback.label.text
-			if layers.is_buffering(): readiness = "Preparing…"; readiness_detail = "Preparing the requested sample; the displayed clock remains committed."
-			if layers.field_playback.session_waiting and is_instance_valid(layers.field_playback.label):readiness_detail = layers.field_playback.label.text
+			if viewer.frame_count > 0:
+				var state := playback_status(layers)
+				readiness = state.text; readiness_detail = state.detail
 			var errors := []
 			for pair in [["Scene",layers.error],["Particles",layers.playback.readiness_error],["Fields",layers.field_playback.error],["Meshes",layers.mesh_playback.error]]:
 				observe(pair[0],pair[1])
@@ -177,13 +206,6 @@ func refresh() -> void:
 					readiness = "Unavailable"; readiness_detail += "\n"+str(sample.id)+": "+str(sample.get("reason","No sample available at the displayed time."))
 	update_jobs()
 	var summary: String = readiness + ("   •   Failed — details" if not failures.is_empty() else "")
-	if layers != null and layers.field_playback.session_waiting and layers.field_playback.scope_choice.selected != 0:
-		var progress: Dictionary = layers.field_playback.worker.status().session
-		summary += "  %d/%d fields" % [progress.get("planned",0) if progress.get("state") == "planning" else progress.get("ready",0),progress.get("total",0)]
-	elif layers != null and layers.field_playback.active():
-		var progress: Dictionary = layers.field_playback.worker.status().session
-		if layers.field_playback.capacity_wait or progress.get("state") == "pressure":summary += " • Waiting for memory"
-		elif progress.get("automatic",false) and progress.get("state") == "preparing":summary += " • Preparing ahead %d/%d" % [progress.get("ready",0),progress.get("total",0)]
 	if badge.label.text != summary: badge.configure("error" if not failures.is_empty() else ("success" if readiness == "Ready" else "info"), summary)
 	tooltip_text = readiness_detail
 

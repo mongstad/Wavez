@@ -16,8 +16,10 @@ func settle():
 	RenderingServer.force_draw(false)
 func ready(viewer):
 	var deadline := Time.get_ticks_msec()+15000
-	while viewer.scene_layers.is_buffering() and Time.get_ticks_msec()<deadline:
+	viewer.shell.status_ui.refresh()
+	while (viewer.scene_layers.is_buffering() or viewer.shell.status_ui.readiness.begins_with("Preparing")) and Time.get_ticks_msec()<deadline:
 		viewer.scene_layers.tick(0); await process_frame
+		viewer.shell.status_ui.refresh()
 	check(not viewer.scene_layers.is_buffering(),"Preparation completes")
 	viewer.shell.status_ui.refresh()
 func picture(name): root.get_texture().get_image().save_png(output.path_join(name+".png"))
@@ -115,7 +117,7 @@ func run():
 	var layers = viewer.scene_layers
 	var fields = layers.field_playback
 	fields.cache_cap_bytes = 1;fields.request(viewer.requested_time,layers.field_budget());ui.refresh()
-	check(ui.readiness == "Ready" and ui.badge.label.text.contains("Waiting for memory") and not ui.failures.has("Fields"),"Capacity wait preserves a valid usable scene in the status badge")
+	check(ui.readiness == "Preparing…" and ui.readiness_detail.contains("memory") and not ui.failures.has("Fields"),"Capacity wait reports insufficient startup coverage without duplicate status")
 	fields.cache_cap_bytes = 0;fields.request(viewer.requested_time,layers.field_budget());ui.refresh()
 	check(not ui.badge.label.text.contains("Waiting for memory"),"Memory status recovers without reopening")
 	var worker = layers.playback.worker
@@ -164,6 +166,7 @@ func run():
 	var count: int = ui.refresh_count
 	await create_timer(.65).timeout
 	check(ui.refresh_count-count <= 4,"Idle status refresh is bounded to five per second")
+	await check_playback_status(viewer,config)
 	for dimensions in [Vector2i(1440,900),Vector2i(1024,640)]:
 		root.size = dimensions; await settle(); viewer.shell.layout(); await settle()
 		check(ui.size.y == 40 and ui.get_rect().end.y == dimensions.y,"Status is a 40-pixel bottom line "+str(dimensions))
@@ -309,3 +312,75 @@ func run():
 	var file := FileAccess.open(output.path_join("report.json"),FileAccess.WRITE)
 	file.store_string(JSON.stringify({"checks":checks,"failures":failures,"timings":timings,"activity":activity,"parent_directory":parent_directory},"\t")); file.close()
 	print("STATUS: %d checks, %d failures" % [checks,failures.size()]); quit(0 if failures.is_empty() else 1)
+
+func check_playback_status(viewer, config: Dictionary) -> void:
+	viewer.set_process(false)
+	viewer._open_capture(config.fields);viewer.playing = false
+	var ui = viewer.shell.status_ui
+	var layers = viewer.scene_layers
+	var fields = layers.field_playback
+	await ready(viewer)
+	check(ui.readiness == "Ready","Paused startup reaches sufficient prepared coverage")
+	viewer._toggle_playback();ui.refresh()
+	check(ui.readiness == "Playing","Play shows Playing")
+	layers.tick(.05);ui.refresh()
+	check(ui.readiness == "Playing" and viewer.requested_time > 0,"Advancing playback remains Playing")
+	viewer._toggle_playback();ui.refresh();check(ui.readiness == "Ready","Pause shows Ready with coverage")
+	# Real field publication barrier: hold preparation without changing algorithms.
+	var gate := Semaphore.new();fields.worker.test_barrier = gate
+	fields.invalidate();viewer._seek_time(.7)
+	var deadline := Time.get_ticks_msec()+10000
+	while not fields.worker.status().test_barrier_waiting and Time.get_ticks_msec()<deadline:await process_frame
+	check(fields.worker.status().test_barrier_waiting,"Cold seek overlaps real field preparation")
+	ui.refresh();check(ui.readiness == "Preparing…" and not ui.badge.label.text.contains("Preparing ahead") and not ui.badge.label.text.contains("%"),"Paused cold seek has one indeterminate Automatic status")
+	viewer.playing = true;fields.begin_session();ui.refresh()
+	check(ui.readiness == "Buffering / Preparing…","Blocked playback shows Buffering")
+	fields.worker.test_barrier = null;gate.post()
+	deadline = Time.get_ticks_msec()+15000
+	while layers.is_buffering() and Time.get_ticks_msec()<deadline:layers.tick(0);await process_frame
+	ui.refresh();check(ui.readiness == "Playing","Preparation recovery returns to Playing")
+	viewer._toggle_playback();await ready(viewer)
+	viewer._seek_time(.8);await ready(viewer);check(ui.readiness == "Ready","Warm seek stays ready")
+	for channel in ["density","psi_real","psi_imag"]:
+		var choice: OptionButton = layers.panel_controls.field.channel
+		for index in choice.item_count:
+			if choice.get_item_metadata(index) == channel:choice.select(index);choice.item_selected.emit(index);break
+		await ready(viewer)
+		check(ui.readiness == "Ready" and layers.views.field.channel == channel,"Channel replacement reaches Ready: "+channel)
+	viewer.physical_rate = -1;viewer._seek_time(1.0);await ready(viewer)
+	viewer._toggle_playback();layers.tick(.05);ui.refresh()
+	check(ui.readiness == "Playing" and viewer.requested_time < 1.0,"Reverse playback shows Playing")
+	viewer.playing = false;fields.cancel_session();viewer.physical_rate = 1
+	var recording_end: float = viewer.generic_reader.frames[-1].time
+	viewer._seek_time(recording_end);await ready(viewer);viewer.playing = true;ui.refresh()
+	check(ui.readiness == "Ready","Recording end never leaves Playing stale even if transport intent remains set")
+	viewer.scene_loop_playback = true;fields.begin_session()
+	deadline = Time.get_ticks_msec()+15000
+	while layers.is_buffering() and Time.get_ticks_msec()<deadline:layers.tick(0);await process_frame
+	layers.tick(.05)
+	while layers.is_buffering() and Time.get_ticks_msec()<deadline:layers.tick(0);await process_frame
+	ui.refresh()
+	check(ui.readiness == "Playing" and viewer.requested_time < recording_end,"Loop wraps and remains Playing")
+	viewer.playing = false;fields.cancel_session();viewer.scene_loop_playback = false
+	# Controlled presentation snapshots isolate worker activity from readiness.
+	await ready(viewer)
+	fields.worker.mutex.lock();var saved: Dictionary = fields.worker.session.duplicate();fields.worker.session = {"state":"preparing","automatic":true,"ready":1,"total":20};fields.worker.mutex.unlock()
+	viewer.playing = true;fields.buffering = false;fields.session_waiting = false
+	ui.refresh();check(ui.readiness == "Playing" and ui.badge.label.text == "Playing","Background work never replaces progressing Playing or adds an adjacent counter")
+	fields.scope_choice.select(1);fields.session_waiting = true;fields.buffering = true
+	fields.worker.mutex.lock();fields.worker.session = {"state":"preparing","ready":5,"total":20};fields.worker.mutex.unlock()
+	ui.refresh();check(ui.readiness == "Buffering / Preparing — 25%" and ui.readiness_detail.contains("explicitly requested preparation interval"),"Explicit interval percentage is scoped to prepared samples")
+	fields.worker.mutex.lock();fields.worker.session = {"state":"planning","planned":5,"total":20};fields.worker.mutex.unlock()
+	ui.refresh();check(not ui.readiness.contains("%"),"Planning does not misrepresent prepared progress")
+	fields.worker.mutex.lock();fields.worker.session = saved;fields.worker.mutex.unlock()
+	fields.scope_choice.select(0);viewer.playing = false;fields.cancel_session()
+	viewer._open_capture(output.path_join("missing.ssc"));ui.refresh()
+	check(ui.failures.has("Open capture"),"Actual missing-file failure remains available")
+	viewer._open_capture(config.source);viewer.playing = false;await ready(viewer)
+	check(ui.readiness == "Ready" and ui.failures.has("Open capture"),"Valid open recovers readiness while retaining failure details")
+	ui.acknowledge()
+	var reader = viewer.generic_reader;viewer.generic_reader = null;ui.refresh()
+	check(ui.readiness == "No capture" and ui.badge.label.text == "No capture","No-source presentation cannot retain old playback status")
+	viewer.generic_reader = reader;ui.refresh()
+	check(ui.readiness == "Ready" and not ui.badge.label.text.contains("%"),"Capture replacement clears prior status")
+	viewer.set_process(true)

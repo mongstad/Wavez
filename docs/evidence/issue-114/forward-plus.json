@@ -1,0 +1,17 @@
+{
+  "activity": {
+    "counters": {},
+    "stages": {}
+  },
+  "checks": 196,
+  "failures": [],
+  "parent_directory": "/home/Nozba/Codex/SIMSCOPE/status-114/verified-forward/.simscope-export-1790542424-21711416",
+  "timings": {
+    "refresh_1000_ms": 47.932
+  },
+  "parent_close_acknowledged": true,
+  "source_hashes_unchanged": {
+    "/home/Nozba/Codex/SIMSCOPE/status-114/verified-forward/scene.ssc": "2db9a1aa34ed2381f8ae418258e9c1f3d56be6778e1a0bb03a42953f27cf75b7",
+    "/home/Nozba/Codex/SIMSCOPE/status-114/verified-forward/fields.ssc": "4042ee7757849b71ad05523ac32f9723f9d7f6ceaaf1be4f1fe5d45d7cef5ef8"
+  }
+}

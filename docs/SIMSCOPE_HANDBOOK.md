@@ -119,8 +119,24 @@ speed; obsolete mode/index-rate fields are removed without migration support.
 
 ## Status and Jobs
 
-The 40-pixel bottom status line reports No capture, Preparing…, Ready or
-Unavailable from current readiness. A separate **Failed — details** notice
+The 40-pixel bottom status line shows one playback/preparation message:
+**Preparing…** while paused without enough prepared coverage, **Ready** when
+paused with sufficient coverage, **Playing** while advancing, or
+**Buffering / Preparing…** when playback must wait. It also retains **No capture**
+and **Unavailable**. Background preparation does not replace Playing or add an
+adjacent counter. At a non-looping recording boundary, it shows Ready rather than
+leaving Playing stale; transport timing and playback intent are unchanged.
+
+Automatic preparation uses an indeterminate message because its admitted window
+and useful startup lead can change. For an explicitly requested preparation
+interval, **Preparing — N%** (or **Buffering / Preparing — N%**) means completed
+field-sample preparations divided by the total field samples in that interval,
+rounded down. It is not elapsed-time or whole-capture progress. Planning and
+unknown totals remain indeterminate. Memory-wait and detailed cache diagnostics
+are available through Details and the existing Performance controls.
+See [status presentation validation](STATUS_PLAYBACK_STATE.md).
+
+A separate **Failed — details** notice
 survives unrelated informational updates and successful work. **Details…** opens
 copyable diagnostics; **Jobs → Acknowledge failures** dismisses retained notices.
 Current unavailability remains visible until the underlying condition resolves.

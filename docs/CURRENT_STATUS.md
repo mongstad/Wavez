@@ -19,8 +19,9 @@ Dynamic field preparation was owner-merged in PR #113 at `0b3d3b4`.
 Paused rendering was owner-merged in PR #119 at `788de5d`.
 Current video-export regression and startup corrections were owner-merged in
 PR #122 at `f867248`. Export-setting locks and active-job actions (#125) were
-owner-merged in PR #126 at `e26af1e`. Current authorized work is #115, the only
-Ready item when selected: [clearer, compact legend content](LEGEND_CONTENT_LAYOUT.md),
+owner-merged in PR #126 at `e26af1e`. Compact legend content (#115) was
+owner-merged in PR #127 at `2c3678a`. Current authorized work is #114, the only
+Ready item when selected: [unified playback/preparation status](STATUS_PLAYBACK_STATE.md),
 **pending owner review**. Historical review-time reports remain unchanged.
 Field preparation uses a small CPU pool with ordered publication and explicit
 in-flight memory reservations. Auto starts conservatively and changes active
