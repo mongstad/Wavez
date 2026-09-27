@@ -1,0 +1,23 @@
+{
+  "bytes": 125950754101,
+  "sha256_before": "c782dcd65ffa6bf8a2e6b548e051a3f258b331802fcd18d3b63042f6763d6e24",
+  "sha256_after": "c782dcd65ffa6bf8a2e6b548e051a3f258b331802fcd18d3b63042f6763d6e24",
+  "hash_check_seconds": 104.9145716260009,
+  "unchanged": true,
+  "probe": {
+    "width": 2560,
+    "height": 1440,
+    "avg_frame_rate": "60/1",
+    "duration": "20.000000",
+    "nb_frames": "1200"
+  },
+  "times_exact_within_1e-12": true,
+  "dimensions_all_frames": true,
+  "first_time": 20.0,
+  "last_time": 24.9958333333333,
+  "before_after_png_sha256": [
+    "839d7a4fe281f8bc6a785027e9d56dbb4d9caf562e768ae663e5824c1dbabe69",
+    "839d7a4fe281f8bc6a785027e9d56dbb4d9caf562e768ae663e5824c1dbabe69"
+  ],
+  "pixel_identical": true
+}

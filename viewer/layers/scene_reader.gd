@@ -54,7 +54,8 @@ func admit_metadata(wire_bytes: int) -> bool:
 func clear_metadata() -> void:
 	records.clear();frames.clear();samples.clear();observed_arrays.clear();objects.clear();metadata.clear();header.clear()
 	metadata_reserved = 0;index_valid = false
-func stopped() -> bool: return false
+var cancellation: Callable
+func stopped() -> bool: return cancellation.is_valid() and cancellation.call()
 static func transform_of(value: Array) -> Transform3D:
 	return Transform3D(Basis(Vector3(value[0],value[4],value[8]),Vector3(value[1],value[5],value[9]),Vector3(value[2],value[6],value[10])),Vector3(value[3],value[7],value[11]))
 static func vec(value: Array) -> Vector3: return Vector3(value[0],value[1],value[2])
@@ -128,6 +129,7 @@ func _reload_source_profiled() -> bool:
 	var scan_started := Profile.begin()
 	var offset := 16+size;var end := file.get_length();var times := {}
 	while offset < end:
+		if stopped():return fail("Scene indexing cancelled.")
 		if end-offset < 80: break
 		file.seek(offset);var h := file.get_buffer(80)
 		var dlen := h.decode_u32(4);var stored := h.decode_u64(8);var decoded := h.decode_u64(16);var time := h.decode_double(24);var oi := h.decode_u32(32);var n := h.decode_u32(36);var seq := h.decode_u64(40)
@@ -267,6 +269,7 @@ func read_sample(id: String, index: int) -> Dictionary:
 	Profile.end("g3_read_sample",started,{"object":id,"sample_index":index,"source_time":result.get("time"),"ok":not result.is_empty()})
 	return result
 func _read_sample_profiled(id: String, index: int) -> Dictionary:
+	if stopped():fail("Scene read cancelled.");return {}
 	if not refresh() or not samples.has(id) or index < 0 or index >= samples[id].size(): fail("Sample unavailable.");return {}
 	var cache_started := Profile.begin()
 	var entry: Dictionary = samples[id][index];var hit := cache.get_frame(entry.sequence) if trusted else {}
@@ -274,9 +277,11 @@ func _read_sample_profiled(id: String, index: int) -> Dictionary:
 	if not hit.is_empty(): return hit
 	if describe(id,index).is_empty():return {}
 	Profile.count("g3_sample_cache_misses")
+	if _verify_payloads:Profile.count("g3_strict_records");Profile.count("g3_strict_stored_bytes",entry.stored)
 	var decode_started := Profile.begin()
-	var decoded := preload("res://layers/scene_channels.gd").read(file,entry,objects[id],null,_verify_payloads)
+	var decoded := preload("res://layers/scene_channels.gd").read(file,entry,objects[id],self,_verify_payloads)
 	if decoded.has("error") or decoded.is_empty():fail(record_error(entry,decoded.get("error","Scene decode cancelled.")));return {}
+	for stage in decoded.get("timings",{}):Profile.observe("g3_record_"+stage,decoded.timings[stage])
 	var channels: Dictionary = decoded.channels;var components: Dictionary = decoded.components;var shapes: Dictionary = decoded.shapes;var associations: Dictionary = decoded.associations;var reserve: int = decoded.reserve
 	Profile.end("g3_channel_decode",decode_started,{"object":id,"sample_index":index,"decoded_bytes":entry.decoded})
 	var count: int = int(shapes.position[0]) if objects[id].kind != "volume" and shapes.has("position") else 0;var has_ids: bool = objects[id].kind == "particles" and channels.has("particle_id");var map

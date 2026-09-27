@@ -5,6 +5,15 @@ Issue #116 was the only Ready item on 2026-09-27. The owner-created linked branc
 started at accepted `main` `788de5d` (PR #119), including #103/#108/#110/#113.
 Implementation and the evidence below are **pending owner review**.
 
+## Owner-review startup correction
+
+The initial worker-only production result below omitted the UI's source identity
+hash and therefore did **not** prove practical Start Export latency. Owner review
+reproduced two full 118 GiB prefix passes before frame 1. The correction, full
+20–25 production export, cancellation/mutation results and refreshed regression
+results are documented in [VIDEO_STARTUP_116.md](VIDEO_STARTUP_116.md). The original
+measurements below remain historical evidence, not the final startup claim.
+
 ## Reproduced defects and changes
 
 1. **Wrong current-position start.** The dialog combined particle sample endpoints
@@ -27,9 +36,10 @@ Implementation and the evidence below are **pending owner review**.
    that frame. Tests reproduce a finite float64 field outside float32 display range
    and a mesh above its selected GPU budget. Neither publishes a final MP4.
 
-These are export-side changes only. No capture writer/reader, scientific sampling,
-interactive preparation, source values, shader, precision policy or cache policy
-was changed. Historical evidence was preserved.
+The initial three corrections were export-side changes. They did not change the
+capture writer/reader, scientific sampling, interactive preparation, source values,
+shaders, precision or cache policies. The owner-review correction additionally wires cooperative cancellation
+into the existing reader; strict decoding remains unchanged. Historical evidence was preserved.
 
 ## Audit of the current path
 
@@ -128,11 +138,12 @@ long-export benchmark. No scientific solver was rerun.
   cross-driver and temporal-AA pixel identity are not promised. Exact float texture
   readback is checked on Forward+; Compatibility is checked using source arrays,
   transfer state, scientific geometry and rendered images.
-- Production export covers three frames, not the entire capture; production 4K
+- The initial production export below covers three frames; the startup correction
+  adds the full 1,200-frame owner clip. Neither covers the entire capture. Production 4K
   throughput, long-export resource stability and other hardware remain unmeasured.
   4K uses the small synthetic capture.
-- Cancellation remains cooperative at frame boundaries; synchronous loading,
-  hashing, individual preparation and PNG writes are not interruptible mid-call.
+- Cancellation boundaries were extended in the owner-review correction; individual
+  decode/hash calls, preparation, rendering and PNG writes remain synchronous.
 - Existing finite per-sample/GPU/output quotas remain. Export does not make an
   otherwise undisplayable source sample renderable, and may use the viewer's
   existing budget-governed preview policy. The measured 192³ segment remained LOD 1.

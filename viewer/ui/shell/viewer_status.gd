@@ -202,7 +202,7 @@ func update_jobs() -> void:
 	var video = viewer.video_dialog
 	var state: Dictionary = video.job_status
 	var text: String = video.progress_details()
-	update_row("Video export",text,video.pid > 0 or video.preparing,video.pid > 0, not state.is_empty() or viewer.generic_reader != null,video.active_job_path)
+	update_row("Video export",text,video.pid > 0 or video.preparing,video.pid > 0 or video.preparing, not state.is_empty() or viewer.generic_reader != null,video.active_job_path)
 	if state.get("stage") in ["complete","frames_ready","failed","cancelled"]: job_rows["Video export"].active = false
 	var selections = viewer.selection_controller
 	var jobs = selections.jobs

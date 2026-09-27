@@ -1,0 +1,75 @@
+{
+	"elapsed_ms": 220,
+	"open_ms": 216.332,
+	"png_ms": 0.0,
+	"profile": {
+		"counters": {},
+		"stages": {
+			"data_guide_cpu": {
+				"count": 1,
+				"max_ms": 0.002,
+				"mean_ms": 0.002,
+				"p50_ms": 0.002,
+				"p95_ms": 0.002,
+				"samples_collected": 1,
+				"total_ms": 0.002
+			},
+			"g3_index_metadata": {
+				"count": 1,
+				"max_ms": 2.286,
+				"mean_ms": 2.286,
+				"p50_ms": 2.286,
+				"p95_ms": 2.286,
+				"samples_collected": 1,
+				"total_ms": 2.286
+			},
+			"g3_reload_source": {
+				"count": 1,
+				"max_ms": 2.328,
+				"mean_ms": 2.328,
+				"p50_ms": 2.328,
+				"p95_ms": 2.328,
+				"samples_collected": 1,
+				"total_ms": 2.328
+			},
+			"g3_source_stamp": {
+				"count": 1,
+				"max_ms": 2.03,
+				"mean_ms": 2.03,
+				"p50_ms": 2.03,
+				"p95_ms": 2.03,
+				"samples_collected": 1,
+				"total_ms": 2.03
+			},
+			"open_inclusive": {
+				"count": 1,
+				"max_ms": 4.88,
+				"mean_ms": 4.88,
+				"p50_ms": 4.88,
+				"p95_ms": 4.88,
+				"samples_collected": 1,
+				"total_ms": 4.88
+			},
+			"shader_uniforms_cpu": {
+				"count": 3,
+				"max_ms": 0.051,
+				"mean_ms": 0.02733333333333333,
+				"p50_ms": 0.021,
+				"p95_ms": 0.051,
+				"samples_collected": 3,
+				"total_ms": 0.08199999999999999
+			},
+			"ui_mapping_inclusive": {
+				"count": 1,
+				"max_ms": 0.014,
+				"mean_ms": 0.014,
+				"p50_ms": 0.014,
+				"p95_ms": 0.014,
+				"samples_collected": 1,
+				"total_ms": 0.014
+			}
+		}
+	},
+	"render_readback_ms": 0.0,
+	"sample_ms": 0.0
+}

@@ -1,0 +1,22 @@
+{
+	"cancel_to_exit_ms": 1242,
+	"directory": "/home/Nozba/Codex/SIMSCOPE/video-startup-116/before/.simscope-export-1790535692-334392594",
+	"first_frame_ms": 670550,
+	"launch_return_ms": 332108,
+	"max_ui_tick_gap_ms": 332114,
+	"message": "Cancelled — 1 / 1200 frames rendered (0%)\nElapsed: 00:05:38\nEstimated remaining: Unavailable\nExport cancelled. Completed PNG frames retained in [Temporary files]/frames\nOutput: /home/Nozba/Codex/SIMSCOPE/video-startup-116/before/result.mp4\nTemporary files: /home/Nozba/Codex/SIMSCOPE/video-startup-116/before/.simscope-export-1790535692-334392594",
+	"progress": {
+		"current_frame": 1.0,
+		"elapsed_seconds": 338.079,
+		"encoder_pid": -1.0,
+		"intermediate_directory": "/home/Nozba/Codex/SIMSCOPE/video-startup-116/before/.simscope-export-1790535692-334392594",
+		"message": "Export cancelled. Completed PNG frames retained in /home/Nozba/Codex/SIMSCOPE/video-startup-116/before/.simscope-export-1790535692-334392594/frames",
+		"output_path": "/home/Nozba/Codex/SIMSCOPE/video-startup-116/before/result.mp4",
+		"renderer_pid": 206946.0,
+		"stage": "cancelled",
+		"total_frames": 1200.0
+	},
+	"stage": "cancelled",
+	"ui_ticks": 49230,
+	"worker_ready_ms": 670550
+}

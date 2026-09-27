@@ -173,7 +173,9 @@ func run():
 	video.preparing = true; video._sync_action_buttons()
 	var preparing_timeline = video.timeline
 	video.open()
-	check(video.timeline == preparing_timeline and video.start_button.text == "Cancel export" and video.start_button.disabled and not video.background_button.disabled,"Preparation preserves draft and exposes background without unsupported worker cancellation")
+	check(video.timeline == preparing_timeline and video.start_button.text == "Cancel export" and not video.start_button.disabled and not video.background_button.disabled,"Preparation preserves draft and exposes background and cooperative cancellation")
+	video.start_button.pressed.emit()
+	check(video.preparation_cancelled and video.job_status.stage == "cancelling","Preparation action requests background cancellation")
 	video.preparing = false; video._sync_action_buttons()
 	await settle(); video.get_child(0).ensure_control_visible(video.close_button); await settle()
 	check(Rect2(Vector2.ZERO,Vector2(video.size)).encloses(video.close_button.get_global_rect()),"Idle action row reachable by scrolling")

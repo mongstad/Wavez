@@ -133,6 +133,7 @@ var legend: Label
 var tail_poll := 0.0
 
 var offline_instance := false
+var offline_cancel: Callable # Export-only cooperative source-read cancellation.
 # Rendering policy belongs to the interactive viewer, never an offline worker.
 var _previous_low_processor_mode: Variant = null
 var _previous_max_fps := 0
@@ -1046,6 +1047,7 @@ func _open_scene(path: String) -> void:
 	# Interactive display validates structure; offline exports retain payload SHA checks.
 	# Full-capture integrity verification is the separate tools/verify_ssc.py workflow.
 	var reader = preload("res://layers/scene_reader.gd").new(offline_instance)
+	if offline_instance:reader.cancellation = offline_cancel
 	if not reader.open(path):
 		status_label.text = reader.error; _shell_open_error = reader.error; return
 	tools_ui.close(false)

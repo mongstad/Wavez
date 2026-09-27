@@ -1,6 +1,8 @@
 extends Node
 const GridView = preload("res://layers/grid_view.gd")
 const Job = preload("res://video/render_job.gd")
+const SourceIdentity = preload("res://video/source_identity.gd")
+const Profile = preload("res://scene/playback_profile.gd")
 const Timeline = preload("res://video/offline_timeline.gd")
 var job_path := ""
 var job: Dictionary
@@ -21,9 +23,13 @@ var inspection_source: Dictionary = {}
 var selection_recipe: Dictionary = {}
 var committed_output_bytes := 0
 var initial_output_files := 0
+var source_binding: Dictionary = {}
+var metrics := {"sample_ms":0.0,"render_readback_ms":0.0,"png_ms":0.0}
+var encoding_began := 0
 
 func _ready() -> void:
 	began = Time.get_ticks_msec()
+	Profile.enabled = OS.get_environment("SIMSCOPE_VIDEO_PROFILE") == "1"
 	get_tree().auto_accept_quit = false
 	RenderingServer.render_loop_enabled = false # Offline frames own their draw calls.
 	_configure_window()
@@ -50,6 +56,11 @@ func status(stage: String, message: String) -> void:
 	Job.write_json(directory.path_join("progress.json"), {"stage":stage, "message":message, "current_frame":completed, "total_frames":total, "elapsed_seconds":float(Time.get_ticks_msec()-began)/1000, "renderer_pid":OS.get_process_id(), "encoder_pid":encoder_pid, "output_path":job.get("output_path", ""), "intermediate_directory":directory})
 
 func finish(stage: String, message: String, code: int) -> void:
+	if cancelled() and stage == "failed":stage = "cancelled";message = "Export cancelled during source preparation.";code = 2
+	metrics.elapsed_ms = Time.get_ticks_msec()-began
+	if encoding_began > 0:metrics.encoding_ms = Time.get_ticks_msec()-encoding_began
+	metrics.profile = Profile.report()
+	Job.write_json(directory.path_join("metrics.json"),metrics)
 	if encoder_pid > 0 and OS.is_process_running(encoder_pid): OS.kill(encoder_pid)
 	if trace != null: trace.close()
 	if encoder_log != null: encoder_log.close()
@@ -91,6 +102,9 @@ func _run() -> void:
 	if DirAccess.make_dir_recursive_absolute(frames_dir) != OK:
 		finish("failed", "Cannot create temporary frame directory.", 1)
 		return
+	if cancelled():finish("cancelled","Export cancelled before loading.",2);return
+	if job.get("source") is Dictionary and SourceIdentity.is_local(job.source) and not SourceIdentity.unchanged(job.capture_path,job.source):finish("failed","Source changed before worker launch.",1);return
+	var loading_began := Time.get_ticks_usec()
 	status("loading", "Loading capture and reproducing viewer state…")
 	viewport = SubViewport.new()
 	viewport.size = Vector2i(int(job.width), int(job.height))
@@ -101,21 +115,34 @@ func _run() -> void:
 	add_child(viewport)
 	viewer = load("res://main.gd").new()
 	viewer.offline_instance = true
+	viewer.offline_cancel = cancelled
 	viewer.capture_path = job.capture_path
 	viewport.add_child(viewer)
+	metrics.open_ms = (Time.get_ticks_usec()-loading_began)/1000.0
 	viewer.set_process(false)
 	viewer.set_process_unhandled_input(false)
 	if viewer.frame_a == null:
 		finish("failed", "Capture could not be loaded: " + viewer.status_label.text, 1)
 		return
+	var identity_began := Time.get_ticks_usec()
 	if job.has("source"):
 		var identity = job.source
 		if not identity is Dictionary or not identity.get("committed_bytes") is String or not identity.committed_bytes.is_valid_int() or not identity.get("complete_frames") is float and not identity.get("complete_frames") is int:
-			finish("failed","Invalid committed source extent.",1); return
-		if identity.complete_frames < 1 or identity.complete_frames > viewer.frame_count or int(identity.complete_frames) != identity.complete_frames or preload("res://scene/inspection_state.gd").digest(viewer.capture_path,int(identity.committed_bytes)) != identity.get("sha256"):
-			finish("failed","Capture identity/committed extent changed after export was requested.",1); return
+			finish("failed","Invalid committed source extent.",1);return
+		var matches := false
+		if SourceIdentity.is_local(identity):matches = SourceIdentity.matches(viewer.generic_reader,identity)
+		else:
+			# Portable inspection recipes retain their explicit content-hash contract.
+			# Normal dialog jobs use the local metadata/stamp binding above.
+			matches = recipe_source_matches(identity) if job.version == 2 else await verify_prefix(identity)
+		if not matches or identity.complete_frames < 1 or identity.complete_frames > viewer.frame_count or int(identity.complete_frames) != identity.complete_frames:
+			finish("failed","Capture identity/committed extent changed after export was requested.",1);return
 		viewer.frame_count = int(identity.complete_frames)
 		if viewer.scene_layers != null and not viewer.generic_reader.pin_extent(int(identity.committed_bytes)):finish("failed","Invalid scene committed extent.",1);return
+	source_binding = SourceIdentity.capture(viewer.generic_reader)
+	if source_binding.is_empty():finish("failed","Cannot bind export to a reliable unchanged local source stamp.",1);return
+	metrics.worker_identity_ms = (Time.get_ticks_usec()-identity_began)/1000.0
+	metrics.snapshot_identity_ms = job.get("source_identity_ms",0)
 	timeline = Timeline.new()
 	if not timeline.build(viewer):
 		finish("failed", timeline.error, 1)
@@ -126,7 +153,12 @@ func _run() -> void:
 	# Resolve the current source schema at the export start, not at capture open.
 	# This also prevents visual-state restoration from resetting a later particle
 	# mapping simply because that channel is absent from the first sample.
-	if timeline.sample(job.start_time).is_empty():
+	if not source_unchanged():return
+	var sample_began := Time.get_ticks_usec()
+	var first_sample: Dictionary = timeline.sample(job.start_time)
+	metrics.sample_ms += (Time.get_ticks_usec()-sample_began)/1000.0
+	if not source_unchanged():return
+	if first_sample.is_empty():
 		finish("failed", timeline.error, 1)
 		return
 	# Version-1 jobs made before G1 inherit defaults only for newly added fields.
@@ -138,7 +170,7 @@ func _run() -> void:
 	if job.version == 2:
 		if not await load_selections():finish("failed","Selection recipe could not be verified/restored: "+viewer.selection_controller.temporal.durable.status.text,1);return
 		Job.apply(viewer,merged)
-	elif job.get("inspection_sidecars",false): inspection_source = preload("res://scene/inspection_state.gd").identity(viewer)
+	elif job.get("inspection_sidecars",false): inspection_source = source_binding.duplicate(true)
 	# Rendering state is frozen; only deterministic sample and camera functions advance.
 	viewer.playing = false
 	viewer.orbit_enabled = false
@@ -148,13 +180,20 @@ func _run() -> void:
 	if trace == null:
 		finish("failed", "Could not write timing manifest.", 1)
 		return
+	metrics.ready_ms = Time.get_ticks_msec()-began
+	status("ready","Source verified; beginning offline rendering…")
+	await get_tree().process_frame
 	for n in range(total):
 		if cancelled():
 			finish("cancelled", "Export cancelled. Completed PNG frames retained in " + frames_dir, 2)
 			return
 		if job.version == 2 and not output_fits():finish("failed","Output quota or free-space headroom exhausted; partial frames retained.",1);return
 		var time := Job.sample_time(job, n)
+		if not source_unchanged():return
+		sample_began = Time.get_ticks_usec()
 		var point: Dictionary = timeline.sample(time)
+		metrics.sample_ms += (Time.get_ticks_usec()-sample_began)/1000.0
+		if not source_unchanged():return
 		if point.is_empty():
 			finish("failed", timeline.error, 1)
 			return
@@ -178,16 +217,22 @@ func _run() -> void:
 		await get_tree().process_frame
 		if cancelled():
 			finish("cancelled", "Export cancelled. Completed PNG frames retained in " + frames_dir, 2);return
+		var render_began := Time.get_ticks_usec()
 		viewport.render_target_update_mode = SubViewport.UPDATE_ONCE
 		RenderingServer.force_draw(false, 1.0 / float(job.fps))
 		var img := viewport.get_texture().get_image()
+		metrics.render_readback_ms += (Time.get_ticks_usec()-render_began)/1000.0
+		if not source_unchanged():return
 		if img == null or img.get_size() != Vector2i(int(job.width), int(job.height)):
 			finish("failed", "Rendered dimensions do not match the requested resolution.", 1)
 			return
 		var path := frames_dir.path_join("frame%08d.png" % n)
+		var png_began := Time.get_ticks_usec()
 		if img.save_png(path) != OK:
 			finish("failed", "Could not save PNG; check free disk space: " + path, 1)
 			return
+		metrics.png_ms += (Time.get_ticks_usec()-png_began)/1000.0
+		if not metrics.has("first_frame_ms"):metrics.first_frame_ms = Time.get_ticks_msec()-began
 		if job.version == 2:committed_output_bytes += FileAccess.open(path,FileAccess.READ).get_length()
 		if job.get("inspection_sidecars",false) or job.version == 2:
 			var record: Dictionary
@@ -257,6 +302,10 @@ func load_selections() -> bool:
 		if cancelled():control.jobs.shutdown();return false
 		await get_tree().create_timer(.01).timeout
 	if control.jobs.busy() or not control.jobs.error.is_empty():return false
+	# The analysis bind already verifies this exact prefix. Do not hash it again
+	# on the renderer thread before the portable recipe validator does its work.
+	for key in ["sha256","committed_bytes","format"]:
+		if control.source.get(key) != job.source.get(key):return false
 	control.temporal.durable.load_from(job.inspection_path)
 	start = Time.get_ticks_msec()
 	while control.jobs.busy() and Time.get_ticks_msec()-start < 150000:
@@ -265,6 +314,8 @@ func load_selections() -> bool:
 	return control.temporal.durable.last_recipe.get("restored",false) and control.temporal.durable.last_recipe.get("sha256") == job.inspection_sha256
 
 func encode(frames_dir: String) -> void:
+	if not source_unchanged():return
+	encoding_began = Time.get_ticks_msec()
 	var executable: String = job.get("ffmpeg_path", Job.find_ffmpeg())
 	var staging := directory.path_join("encoded.partial.mp4")
 	var crf: int = {"high":18, "balanced":21, "compact":25}[job.get("quality", "high")]
@@ -281,6 +332,7 @@ func encode(frames_dir: String) -> void:
 		finish("failed", "Could not launch FFmpeg. PNG sequence retained in " + directory, 1)
 		return
 	while OS.is_process_running(encoder_pid):
+		if not source_unchanged():return
 		drain_encoder()
 		if job.version == 2 and not output_fits():OS.kill(encoder_pid);finish("failed","Encoding reached the declared output quota; partial output retained.",1);return
 		if cancelled():
@@ -306,6 +358,7 @@ func encode(frames_dir: String) -> void:
 		return
 	output.close()
 	if job.version == 2 and not output_fits():finish("failed","Output exceeds the declared quota; no MP4 published.",1);return
+	if not source_unchanged():return
 	if Job.publish(staging, job.output_path) != OK:
 		finish("failed", "Cannot publish MP4; output exists, is unwritable, or the filesystem cannot publish it safely. Encoded file retained in " + directory, 1)
 		return
@@ -330,3 +383,43 @@ func comparison_frame(n: int, raw_time: float) -> Dictionary:
 	var timing: Dictionary = comparison.common.timing
 	comparison.frame = {"index":n,"raw_time":raw_time,"aligned_time":float(timing.start_time)+float(n)/timing.fps*timing.playback_rate}
 	return comparison
+
+func source_unchanged() -> bool:
+	if SourceIdentity.unchanged(job.capture_path,source_binding):return true
+	finish("failed","Source changed during export; no MP4 published. Intermediates retained.",1)
+	return false
+
+func verify_prefix(identity: Dictionary) -> bool:
+	if not identity.get("sha256") is String:return false
+	var extent := int(identity.committed_bytes)
+	var file := FileAccess.open(job.capture_path,FileAccess.READ)
+	if file == null or extent < 16 or extent > file.get_length():return false
+	var hash := HashingContext.new();hash.start(HashingContext.HASH_SHA256)
+	var remaining := extent;var chunks := 0
+	status("verifying","Verifying explicit portable recipe source; cancellation is available…")
+	while remaining > 0:
+		if cancelled():return false
+		var count := mini(1048576,remaining);var data := file.get_buffer(count)
+		if data.size() != count:return false
+		hash.update(data);remaining -= count;chunks += 1
+		if chunks % 16 == 0:await get_tree().process_frame
+	return hash.finish().hex_encode() == identity.get("sha256")
+
+func recipe_source_matches(identity: Dictionary) -> bool:
+	# Verify the small recipe envelope before pinning; load_selections performs
+	# the existing strict portable-source verification before any rendered frame.
+	if job.inspection_path != directory.path_join("recipe.inspection/inspection.json"):return false
+	var file := FileAccess.open(job.inspection_path,FileAccess.READ)
+	if file == null or file.get_length() > 983040:return false
+	var raw := file.get_buffer(file.get_length())
+	var hash := HashingContext.new();hash.start(HashingContext.HASH_SHA256);hash.update(raw)
+	if hash.finish().hex_encode() != job.inspection_sha256:return false
+	var recipe = JSON.parse_string(raw.get_string_from_utf8())
+	if not recipe is Dictionary or not recipe.get("payload") is Dictionary:return false
+	var payload = preload("res://analysis/inspection_v3.gd").unpack(recipe.payload)
+	if not payload is Dictionary or not payload.get("base") is Dictionary or not payload.base.get("source") is Dictionary:return false
+	for key in ["sha256","committed_bytes","format"]:
+		if not payload.base.source.get(key) is String or not identity.get(key) is String or payload.base.source[key] != identity[key]:return false
+	var frames = payload.base.source.get("complete_frames")
+	if not (frames is float or frames is int) or frames != identity.complete_frames:return false
+	return true

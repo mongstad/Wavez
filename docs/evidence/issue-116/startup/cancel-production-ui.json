@@ -1,0 +1,22 @@
+{
+	"cancel_to_exit_ms": 413,
+	"directory": "/home/Nozba/Codex/SIMSCOPE/video-startup-116/cancel-production/.simscope-export-1790536360-2456089",
+	"first_frame_ms": -1,
+	"launch_return_ms": 27,
+	"max_ui_tick_gap_ms": 33,
+	"message": "Cancelled — 0 / 1200 frames rendered (0%)\nElapsed: 00:00:00\nEstimated remaining: Unavailable\nExport cancelled during source preparation.\nOutput: /home/Nozba/Codex/SIMSCOPE/video-startup-116/cancel-production/result.mp4\nTemporary files: /home/Nozba/Codex/SIMSCOPE/video-startup-116/cancel-production/.simscope-export-1790536360-2456089",
+	"progress": {
+		"current_frame": 0.0,
+		"elapsed_seconds": 0.22,
+		"encoder_pid": -1.0,
+		"intermediate_directory": "/home/Nozba/Codex/SIMSCOPE/video-startup-116/cancel-production/.simscope-export-1790536360-2456089",
+		"message": "Export cancelled during source preparation.",
+		"output_path": "/home/Nozba/Codex/SIMSCOPE/video-startup-116/cancel-production/result.mp4",
+		"renderer_pid": 241682.0,
+		"stage": "cancelled",
+		"total_frames": 1200.0
+	},
+	"stage": "cancelled",
+	"ui_ticks": 239,
+	"worker_ready_ms": -1
+}

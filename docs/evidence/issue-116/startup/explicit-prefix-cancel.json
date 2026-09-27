@@ -1,0 +1,15 @@
+{
+  "cancel_to_exit_seconds": 0.35648118700009945,
+  "exit_code": 2,
+  "progress": {
+    "current_frame": 0,
+    "elapsed_seconds": 1.525,
+    "encoder_pid": -1,
+    "intermediate_directory": "/home/Nozba/Codex/SIMSCOPE/video-startup-116/explicit-prefix-cancel",
+    "message": "Export cancelled during source preparation.",
+    "output_path": "/home/Nozba/Codex/SIMSCOPE/video-startup-116/explicit-prefix-cancel/result.mp4",
+    "renderer_pid": 254196,
+    "stage": "cancelled",
+    "total_frames": 1200
+  }
+}

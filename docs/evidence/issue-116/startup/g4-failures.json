@@ -1,0 +1,208 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "label": "append portable pinned setup",
+      "pass_": true
+    },
+    {
+      "label": "appended capture renders the original committed extent",
+      "pass_": true
+    },
+    {
+      "label": "append does not replace pinned source hash/extent",
+      "pass_": true
+    },
+    {
+      "label": "append does not increase saved frame count",
+      "pass_": true
+    },
+    {
+      "label": "last pinned particle sample has no bracket in appended future",
+      "pass_": true
+    },
+    {
+      "label": "append renderer leaves test input unchanged",
+      "pass_": true
+    },
+    {
+      "label": "quota portable pinned setup",
+      "pass_": true
+    },
+    {
+      "label": "quota explicitly refused",
+      "pass_": true
+    },
+    {
+      "label": "quota never publishes MP4",
+      "pass_": true
+    },
+    {
+      "label": "quota renderer leaves test input unchanged",
+      "pass_": true
+    },
+    {
+      "label": "mutation portable pinned setup",
+      "pass_": true
+    },
+    {
+      "label": "mutation explicitly refused",
+      "pass_": true
+    },
+    {
+      "label": "mutation never publishes MP4",
+      "pass_": true
+    },
+    {
+      "label": "mutation renderer leaves test input unchanged",
+      "pass_": true
+    },
+    {
+      "label": "cancel portable pinned setup",
+      "pass_": true
+    },
+    {
+      "label": "cancellation is explicit",
+      "pass_": true
+    },
+    {
+      "label": "render cancellation completes within three seconds",
+      "pass_": true
+    },
+    {
+      "label": "completed partial PNGs retained",
+      "pass_": true
+    },
+    {
+      "label": "cancelled export never publishes MP4",
+      "pass_": true
+    },
+    {
+      "label": "cancel renderer leaves test input unchanged",
+      "pass_": true
+    }
+  ],
+  "runs": [
+    {
+      "case": "append",
+      "command": [
+        "/home/Nozba/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--path",
+        "/home/Nozba/Codex/SIMSCOPE/SimScope/viewer",
+        "--rendering-method",
+        "forward_plus",
+        "--resolution",
+        "640x360",
+        "--audio-driver",
+        "Dummy",
+        "--log-file",
+        "/home/Nozba/Codex/SIMSCOPE/video-startup-116/g4-failures/append/render/godot.log",
+        "--",
+        "--simscope-render-job=/home/Nozba/Codex/SIMSCOPE/video-startup-116/g4-failures/append/render/job.json"
+      ],
+      "exit_code": 0,
+      "progress": {
+        "current_frame": 1,
+        "elapsed_seconds": 0.919,
+        "encoder_pid": -1,
+        "intermediate_directory": "/home/Nozba/Codex/SIMSCOPE/video-startup-116/g4-failures/append/render",
+        "message": "Saved /home/Nozba/Codex/SIMSCOPE/video-startup-116/g4-failures/append/render/result.mp4",
+        "output_path": "/home/Nozba/Codex/SIMSCOPE/video-startup-116/g4-failures/append/render/result.mp4",
+        "renderer_pid": 259421,
+        "stage": "complete",
+        "total_frames": 1
+      }
+    },
+    {
+      "case": "quota",
+      "command": [
+        "/home/Nozba/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--path",
+        "/home/Nozba/Codex/SIMSCOPE/SimScope/viewer",
+        "--rendering-method",
+        "forward_plus",
+        "--resolution",
+        "640x360",
+        "--audio-driver",
+        "Dummy",
+        "--log-file",
+        "/home/Nozba/Codex/SIMSCOPE/video-startup-116/g4-failures/quota/render/godot.log",
+        "--",
+        "--simscope-render-job=/home/Nozba/Codex/SIMSCOPE/video-startup-116/g4-failures/quota/render/job.json"
+      ],
+      "exit_code": 1,
+      "progress": {
+        "current_frame": 0,
+        "elapsed_seconds": 0.001,
+        "encoder_pid": -1,
+        "intermediate_directory": "/home/Nozba/Codex/SIMSCOPE/video-startup-116/g4-failures/quota/render",
+        "message": "Selection-aware render quota/file-count/free-space admission failed; choose a larger explicit quota or a shorter/smaller export.",
+        "output_path": "/home/Nozba/Codex/SIMSCOPE/video-startup-116/g4-failures/quota/render/result.mp4",
+        "renderer_pid": 259663,
+        "stage": "failed",
+        "total_frames": 3
+      }
+    },
+    {
+      "case": "mutation",
+      "command": [
+        "/home/Nozba/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--path",
+        "/home/Nozba/Codex/SIMSCOPE/SimScope/viewer",
+        "--rendering-method",
+        "forward_plus",
+        "--resolution",
+        "640x360",
+        "--audio-driver",
+        "Dummy",
+        "--log-file",
+        "/home/Nozba/Codex/SIMSCOPE/video-startup-116/g4-failures/mutation/render/godot.log",
+        "--",
+        "--simscope-render-job=/home/Nozba/Codex/SIMSCOPE/video-startup-116/g4-failures/mutation/render/job.json"
+      ],
+      "exit_code": 1,
+      "progress": {
+        "current_frame": 0,
+        "elapsed_seconds": 0.469,
+        "encoder_pid": -1,
+        "intermediate_directory": "/home/Nozba/Codex/SIMSCOPE/video-startup-116/g4-failures/mutation/render",
+        "message": "Selection recipe could not be verified/restored: Export complete values or save the view with selections and analysis.",
+        "output_path": "/home/Nozba/Codex/SIMSCOPE/video-startup-116/g4-failures/mutation/render/result.mp4",
+        "renderer_pid": 259749,
+        "stage": "failed",
+        "total_frames": 3
+      }
+    },
+    {
+      "case": "cancel",
+      "command": [
+        "/home/Nozba/Codex/SIMSCOPE/Godot_v4.7.2-stable_linux.x86_64",
+        "--path",
+        "/home/Nozba/Codex/SIMSCOPE/SimScope/viewer",
+        "--rendering-method",
+        "forward_plus",
+        "--resolution",
+        "640x360",
+        "--audio-driver",
+        "Dummy",
+        "--log-file",
+        "/home/Nozba/Codex/SIMSCOPE/video-startup-116/g4-failures/cancel/render/godot.log",
+        "--",
+        "--simscope-render-job=/home/Nozba/Codex/SIMSCOPE/video-startup-116/g4-failures/cancel/render/job.json"
+      ],
+      "exit_code": 2,
+      "progress": {
+        "current_frame": 1,
+        "elapsed_seconds": 1.17,
+        "encoder_pid": -1,
+        "intermediate_directory": "/home/Nozba/Codex/SIMSCOPE/video-startup-116/g4-failures/cancel/render",
+        "message": "Export cancelled. Completed PNG frames retained in /home/Nozba/Codex/SIMSCOPE/video-startup-116/g4-failures/cancel/render/frames",
+        "output_path": "/home/Nozba/Codex/SIMSCOPE/video-startup-116/g4-failures/cancel/render/result.mp4",
+        "renderer_pid": 259875,
+        "stage": "cancelled",
+        "total_frames": 3
+      }
+    }
+  ],
+  "renderer": "forward_plus"
+}

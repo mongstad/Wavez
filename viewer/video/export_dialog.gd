@@ -42,6 +42,7 @@ var opened_current := 0.0
 var ffmpeg := ""
 var g4_quota: SpinBox
 var preparing := false
+var preparation_cancelled := false
 var last_progress: Dictionary = {}
 var launch_ticks := 0
 var progress_ticks := 0
@@ -114,7 +115,7 @@ func _ready() -> void:
 	var buttons := HBoxContainer.new(); box.add_child(buttons)
 	start_button = Button.new(); buttons.add_child(start_button)
 	start_button.pressed.connect(func():
-		if pid > 0: cancel_export()
+		if pid > 0 or preparing: cancel_export()
 		else: start_export())
 	background_button = Button.new(); background_button.text = "Run in background"; buttons.add_child(background_button)
 	background_button.pressed.connect(func():
@@ -212,7 +213,13 @@ func start_export() -> void:
 		var recipe := preload("res://analysis/inspection_v3.gd").scene_snapshot(viewer.selection_controller.temporal)
 		if recipe.is_empty():message.text = "Bind the selection source before export.";return
 		job.source = preload("res://analysis/inspection_v3.gd").unpack(recipe.payload).base.source
-	else:job.source = preload("res://scene/inspection_state.gd").identity(viewer)
+	else:
+		var identity_began := Time.get_ticks_usec()
+		job.source = preload("res://video/source_identity.gd").capture(viewer.generic_reader)
+		job.source_identity_ms = (Time.get_ticks_usec()-identity_began)/1000.0
+		if job.source.is_empty():
+			message.text = "Cannot bind export to an unchanged local source. Reopen the capture; reliable high-resolution source stamps are required."
+			return
 	if rendering.selected > 0:
 		var clean := rendering.selected == 2
 		job.state.clean_view = clean
@@ -241,14 +248,16 @@ func start_export() -> void:
 		return
 	if with_selections:
 		preparing = true
+		preparation_cancelled = false
 		publish_job("preparing", "Verifying the pinned selection recipe")
 		var durable = viewer.selection_controller.temporal.durable
 		durable.save_to(active_directory.path_join("recipe.inspection"),true,int(g4_quota.value)*1048576)
 		message.text = "Verifying the pinned selection recipe before launching the renderer…"
 		var began := Time.get_ticks_msec()
-		while viewer.selection_controller.jobs.busy() and Time.get_ticks_msec()-began < 150000:await get_tree().create_timer(.02).timeout
+		while viewer.selection_controller.jobs.busy() and not preparation_cancelled and Time.get_ticks_msec()-began < 150000:await get_tree().create_timer(.02).timeout
 		if viewer.selection_controller.jobs.busy():viewer.selection_controller.jobs.cancel_background()
 		preparing = false
+		if preparation_cancelled:publish_job("cancelled","Selection recipe preparation cancelled.");return
 		if not durable.last_recipe.has("path"):
 			message.text = "Selection recipe preparation failed: "+durable.status.text
 			publish_job("failed", message.text);return
@@ -279,9 +288,8 @@ func start_export() -> void:
 func _sync_action_buttons() -> void:
 	var active := pid > 0 or preparing
 	start_button.text = "Cancel export" if active else "Start Export"
-	# Preparation has no existing video-worker cancellation operation.
-	start_button.disabled = preparing or (pid <= 0 and not can_start)
-	start_button.tooltip_text = "Preparing the selection recipe; cancellation is available when the renderer starts." if preparing else ""
+	start_button.disabled = not active and not can_start
+	start_button.tooltip_text = ""
 	background_button.disabled = not active
 
 func publish_job(stage: String, detail: String) -> void:
@@ -302,6 +310,11 @@ func progress_details() -> String:
 	return ProgressDetails.format(job_status, Time.get_ticks_msec())
 
 func cancel_export() -> void:
+	if preparing:
+		preparation_cancelled = true
+		viewer.selection_controller.jobs.cancel_background()
+		publish_job("cancelling","Cancelling selection recipe preparation…")
+		return
 	if pid <= 0: return
 	var f := FileAccess.open(active_directory.path_join("cancel"), FileAccess.WRITE)
 	if f != null:
@@ -337,4 +350,4 @@ func _process(delta: float) -> void:
 
 func _exit_tree() -> void:
 	# Closing the parent viewer requests a graceful worker/encoder shutdown.
-	if pid > 0: cancel_export()
+	if pid > 0 or preparing: cancel_export()

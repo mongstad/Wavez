@@ -1,0 +1,16 @@
+{
+  "activity": {
+    "counters": {},
+    "stages": {}
+  },
+  "checks": 124,
+  "failures": [],
+  "parent_directory": "/home/Nozba/Codex/SIMSCOPE/video-startup-116/status/.simscope-export-1790536521-19375471",
+  "timings": {
+    "refresh_1000_ms": 28.529
+  },
+  "parent_close_acknowledged": true,
+  "source_hashes_unchanged": {
+    "/home/Nozba/Codex/SIMSCOPE/video-startup-116/status/scene.ssc": "44931cb587c736aa78954c5fca77bdf60847f040b512bf03b23148498d4fe2e8"
+  }
+}

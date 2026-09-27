@@ -42,8 +42,8 @@ the current frame, or stops FFmpeg during encoding. **Run in background** hides
 the dialog and is enabled only while an export is preparing or running. **Cancel**
 closes the dialog without cancelling an active export; its tooltip makes this
 distinction explicit. Reopen through File → Export → Video or Jobs for progress.
-During selection-recipe preparation, the primary action is disabled until worker
-cancellation becomes available. Terminal jobs restore **Start Export** and disable
+During selection-recipe preparation, **Cancel export** requests cancellation of
+the existing background analysis job before any renderer is launched. Terminal jobs restore **Start Export** and disable
 **Run in background**. Closing the parent viewer still requests cancellation.
 The job directory retains `progress.json`,
 `renderer.log` (UI-launched workers) and `ffmpeg.log` for diagnosis. If writing the
@@ -332,7 +332,8 @@ these controls. Scientific mode suppresses trails as before.
 
 ## v1.0.3 inspection extension
 
-UI-launched jobs pin the source SHA-256/committed extent and use the shared
+Ordinary UI-launched jobs bind local source identity and committed extent (see
+below), and use the shared
 physical-time sampler and visual-state module. Duplicate/reverse timestamps
 remain inspectable in index mode but cannot be physically interpolated/exported.
 The optional per-frame inspection JSON checkbox writes reproducible state records
@@ -342,9 +343,36 @@ See [INSPECTION_STATE.md](INSPECTION_STATE.md) for the state and geometry contra
 
 ### Source changes during export (G2a)
 
-A job still pins its committed extent and uses the existing end-exclusive timing.
-An append completed before the worker opens the capture does not expand that
-snapshot. If the source changes while the worker is rendering, validated generic
-reads fail the job and retain completed PNGs. Restart from the current source or
-export a stable copy. Inspection PNG/state capture also refuses a source/data
-mismatch. Cache metadata never replaces the committed-prefix SHA-256 identity.
+Ordinary exports bind SIMSCP4/version, capture UUID, metadata SHA-256, the ordered
+80-byte record-header fingerprint, indexed committed extent/record/frame counts,
+and the existing local filesystem stamp (device, inode, size, nanosecond mtime and
+ctime). Path is only a locator. Startup never reads/hashes the complete payload
+prefix. Stamps are checked before and after identity generation, on worker open,
+around every requested sample, after readback, during encoding and before MP4
+publication. Any change, including append or equal-size replacement, refuses the
+ordinary job; restart from the current source. There is no persistent trust store.
+The accepted reliable stamp implementation currently supports Linux local
+btrfs/ext2/ext3/ext4/xfs/tmpfs/overlayfs via `/usr/bin/stat`. Unsupported/coarse
+stamps fail explicitly, rather than falling back to a slow whole-file hash or
+path-only identity. This is a current platform limitation.
+
+This identity is a mutation binding, **not** a whole-capture integrity certificate.
+Every record actually decoded offline still validates descriptors, commit proofs,
+bounds, codecs, structure, stored-chunk and decoded-chunk SHA-256. Unused corrupt
+payloads need not block an unrelated clip. Use `tools/verify_ssc.py` explicitly to
+verify all records. Normal video inspection sidecars reuse the same local binding;
+restore requires that same unchanged source inode. They are not portable
+whole-source certificates. Explicit portable inspection/selection recipes retain
+their content-hash contract and pinned append semantics. Their existing analysis
+verification can still be long; the renderer no longer duplicates that hash before
+asking the portable validator to verify the recipe. Explicit SHA-bound jobs use a
+chunked cancellable verifier.
+
+Cancellation is checked during indexing, between record decode chunks and
+particle-ID batches, between explicit prefix-hash chunks, and at rendering/encoding
+boundaries. Individual codec/hash calls, field preparation, draw/readback and PNG
+writes remain bounded synchronous operations. Parent-close requests the same
+worker cancellation. `metrics.json` separates snapshot/worker identity, opening,
+sampling, readback, PNG and encoding timings. `SIMSCOPE_VIDEO_PROFILE=1` adds bounded
+strict-read/I/O/hash/decode counters; those nested timings overlap sampling/opening.
+See [the startup regression evidence](docs/VIDEO_STARTUP_116.md).
