@@ -23,8 +23,8 @@ unstarted and outside this contract.
 
 ## Using Export Video
 
-Open a capture and set its appearance/camera, then expand **Capture / Export →
-Export Video…**. Choose entire capture, current position to end, or custom start/end
+Open a capture and set its appearance/camera, then choose **File → Export →
+Video**. Choose entire capture, current position to end, or custom start/end
 in recorded capture-time units. Select 1080p, 1440p, 4K, or even custom dimensions;
 24/30/60 or custom integer FPS; and capture-time units per video second.
 
@@ -110,6 +110,25 @@ overlay/section state, environment properties and viewport quality settings.
 No physics runs; capture access is read-only. Indexing freezes the available
 complete frames for that job instead of live-tailing the capture.
 
+## Current SIMSCP4 regression baseline (#116)
+
+[Current audit and validation](docs/VIDEO_REGRESSION.md) cover development-checkout
+exports after the SIMSCP4, caching, preparation and production-UI changes. Earlier
+measurements below retain their historical scope.
+
+The worker resolves the source sample/schema at the requested export start before
+restoring appearance. A particle or field channel introduced later in a capture
+therefore remains selectable for a segment starting there. A visible layer that
+fails display preparation (for example, mesh GPU budget or float32 field display
+range) fails the export with its layer/time/reason instead of publishing a video
+with that layer missing. Completed intermediates remain available for diagnosis.
+
+Offline readers retain strict payload checks for records they read. The worker
+uses the current synchronous scene sampler and bounded decoded cache; interactive
+preparation workers and startup gates are disabled. This does not prepare the
+whole capture or change its bytes, clocks, channel precision or cache architecture.
+Explicit whole-capture verification remains `python tools/verify_ssc.py CAPTURE.ssc`.
+
 ## Exact timing semantics
 
 For zero-based output frame n:
@@ -128,9 +147,10 @@ current-to-end ranges retain the exact float64 capture endpoints rather than
 rounding them to the displayed spinbox precision.
 
 Playback rate is in **recorded simulation/capture time units per video second**.
-It is not the interactive frames/second slider. For convenience the dialog's
-initial rate uses the current neighboring-frame interval × interactive FPS when
-that interval is positive. Check this rate for captures with irregular spacing.
+The dialog initializes it from the current positive playback speed, or 1×
+when the viewer is paused at zero speed or playing in reverse. “Current position
+to end” starts at the committed scene time, including mixed scenes whose particle,
+field and mesh clocks differ; an uncommitted seek target is not exported.
 
 Frames are located by a timestamp binary search. Duplicate, decreasing or
 nonfinite time axes are rejected for physical-time export. Positions interpolate

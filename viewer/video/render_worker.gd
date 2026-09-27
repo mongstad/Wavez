@@ -123,6 +123,12 @@ func _run() -> void:
 	if job.start_time < timeline.times[0] or job.end_time > timeline.times[-1]:
 		finish("failed", "Selected range is outside the complete capture timestamps.", 1)
 		return
+	# Resolve the current source schema at the export start, not at capture open.
+	# This also prevents visual-state restoration from resetting a later particle
+	# mapping simply because that channel is absent from the first sample.
+	if timeline.sample(job.start_time).is_empty():
+		finish("failed", timeline.error, 1)
+		return
 	# Version-1 jobs made before G1 inherit defaults only for newly added fields.
 	var merged: Dictionary = Job.snapshot(viewer)
 	merged.merge(job.state,true)
@@ -152,12 +158,15 @@ func _run() -> void:
 		if point.is_empty():
 			finish("failed", timeline.error, 1)
 			return
+		# The interactive viewer can disclose an unavailable preview and continue.
+		# A video must not publish that missing scientific layer as a valid frame.
+		# A layer before its first recorded sample has no failure reason and remains
+		# legitimately absent under the current independent-clock semantics.
 		if viewer.scene_layers != null:
-			for id in viewer.scene_layers.views:
-				var layer = viewer.scene_layers.views[id]
-				var settings: Dictionary = viewer.scene_layers.states[id]
-				if layer is GridView and settings.visible and (settings.volume or settings.slice) and not layer.color_error.is_empty():
-					finish("failed",layer.color_error,1);return
+			for info in viewer.scene_layers.layer_samples:
+				if info.visible and info.status == "unavailable" and not info.get("reason", "").is_empty():
+					finish("failed", "Layer %s at t=%s: %s" % [info.id,time,info.reason], 1)
+					return
 		if viewer.scene_layers != null and not await viewer.scene_layers.wait_for_surface():
 			finish("failed",viewer.scene_layers.iso_error,1);return
 		viewer.camera.transform = Timeline.camera_at(job.state, float(n)/job.fps, job.get("camera_mode", "locked") == "orbit", float(job.get("orbit_speed", 0.08)))

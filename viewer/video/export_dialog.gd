@@ -152,10 +152,14 @@ func open() -> void:
 		message.text = timeline.error
 		can_start = false; _sync_action_buttons()
 		return
+	if not viewer.committed_sample.has("requested_time"):
+		message.text = "No committed scene sample to export."
+		can_start = false; _sync_action_buttons()
+		return
 	can_start = true; _sync_action_buttons()
-	opened_current = viewer.frame_a.sim_time
-	if viewer.frame_b != null:
-		opened_current = lerpf(viewer.frame_a.sim_time, viewer.frame_b.sim_time, viewer.phase)
+	# Particle pairs use their own cadence; phase belongs to the union clock.
+	# Export starts at the scene actually displayed, including while a seek waits.
+	opened_current = float(viewer.committed_sample.requested_time)
 	orbit.value = viewer.orbit_speed
 	camera_mode.select(1 if viewer.orbit_enabled else 0)
 	overlays.button_pressed = viewer.overlay_visible

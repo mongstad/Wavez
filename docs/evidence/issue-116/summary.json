@@ -1,0 +1,76 @@
+{
+  "issue": 116,
+  "base": "788de5dbed73394c62f24222296b15b03cfa4396",
+  "status": "pending owner review",
+  "environment": {
+    "godot": "4.7.2 ed1daf0bf",
+    "gpu": "NVIDIA RTX 3070 Ti",
+    "driver": "615.71.09",
+    "ffmpeg": "8.1.3",
+    "platform": "Linux development checkout"
+  },
+  "suites": [
+    {
+      "name": "final-forward",
+      "checks": 268,
+      "failures": 0,
+      "evidence": "final-forward.json"
+    },
+    {
+      "name": "final-gl",
+      "checks": 225,
+      "failures": 0,
+      "evidence": "final-gl.json"
+    },
+    {
+      "name": "status-forward",
+      "checks": 123,
+      "failures": 0,
+      "evidence": "status-forward.json"
+    },
+    {
+      "name": "g4-forward",
+      "checks": 44,
+      "failures": 0,
+      "evidence": "g4-forward.json"
+    },
+    {
+      "name": "full-forward",
+      "checks": 142,
+      "failures": 0,
+      "evidence": "full-forward.txt"
+    },
+    {
+      "name": "overlay-gl",
+      "checks": 111,
+      "failures": 0,
+      "evidence": "overlay-gl.txt"
+    },
+    {
+      "name": "g4-lifecycle-forward",
+      "checks": 20,
+      "failures": 0,
+      "evidence": "g4-lifecycle-forward.json"
+    }
+  ],
+  "production": {
+    "name": "production",
+    "exit_code": 0,
+    "seconds": 4.119599999999991,
+    "peak_rss_kib": 1088488,
+    "peak_swap_kib": 0,
+    "frames_per_second_including_startup_and_encode": 0.7282260413632407
+  },
+  "limitations": [
+    "Production export is three 1080p frames on Forward+; no long-capture or production 4K throughput claim.",
+    "RSS/swap sampled on worker every 50ms; excludes encoder process and VRAM.",
+    "No packaged-build, Windows, macOS or cross-GPU pixel verification.",
+    "Cross-backend pixel equality is not a contract; exact texture readback only on Forward+."
+  ],
+  "total_passing_checks": 933,
+  "baseline_before_changes": {
+    "renderer": "gl_compatibility",
+    "passing_checks": 142,
+    "evidence": "baseline-gl.txt"
+  }
+}

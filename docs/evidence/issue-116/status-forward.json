@@ -1,0 +1,16 @@
+{
+  "activity": {
+    "counters": {},
+    "stages": {}
+  },
+  "checks": 123,
+  "failures": [],
+  "parent_directory": "/home/Nozba/Codex/SIMSCOPE/video-regression-116/status-forward/.simscope-export-1790533631-19893264",
+  "timings": {
+    "refresh_1000_ms": 29.98
+  },
+  "parent_close_acknowledged": true,
+  "source_hashes_unchanged": {
+    "/home/Nozba/Codex/SIMSCOPE/video-regression-116/status-forward/scene.ssc": "e579771a5827ab6026add98c060e0c5c54615cb0e2d63edd4b945589fce37c00"
+  }
+}
