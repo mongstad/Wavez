@@ -7,9 +7,11 @@ import subprocess
 import sys
 import shutil
 import time
+import numpy as np
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from tests.g4.fixtures import scene
+from simscope_export import SceneCapture
 
 
 def main():
@@ -20,11 +22,16 @@ def main():
     a = p.parse_args()
     out = a.output_dir.resolve(); out.mkdir(parents=True, exist_ok=False)
     source = scene(out / 'scene.ssc')
-    sources = [source]
+    fields = out / 'fields.ssc'
+    with SceneCapture(fields, objects=[dict(id='field', kind='volume', units='u')]) as capture:
+        for i in range(20):
+            data = np.full((16,16,16), 1+i/20, dtype='f4')
+            capture.add_volume('field', i*.1, dict(density=data, psi_real=data-1, psi_imag=1-data), origin=[0]*3, spacing=[1]*3)
+    sources = [source, fields]
     hashes = {str(s): hashlib.sha256(s.read_bytes()).hexdigest() for s in sources}
     ffmpeg = shutil.which('ffmpeg'); assert ffmpeg
     bad = out/'bad-ffmpeg'; bad.write_text('#!/bin/sh\nexit 1\n'); bad.chmod(0o755)
-    (out/'config.json').write_text(json.dumps({'source': str(source), 'ffmpeg': ffmpeg, 'bad_ffmpeg': str(bad)}))
+    (out/'config.json').write_text(json.dumps({'source': str(source), 'fields': str(fields), 'ffmpeg': ffmpeg, 'bad_ffmpeg': str(bad)}))
     cmd = [a.godot, '--path', str(ROOT/'viewer'), '--rendering-method', a.renderer,
            '--log-file', str(out/'native.log'), '--audio-driver', 'Dummy', '--resolution', '1440x900', '--script', 'ui/shell/test_viewer_status.gd',
            '--', '--status-output='+str(out)]

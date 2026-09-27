@@ -1,0 +1,17 @@
+{
+  "activity": {
+    "counters": {},
+    "stages": {}
+  },
+  "checks": 196,
+  "failures": [],
+  "parent_directory": "/home/Nozba/Codex/SIMSCOPE/status-114/compatibility/.simscope-export-1790542392-18939569",
+  "timings": {
+    "refresh_1000_ms": 51.688
+  },
+  "parent_close_acknowledged": true,
+  "source_hashes_unchanged": {
+    "/home/Nozba/Codex/SIMSCOPE/status-114/compatibility/scene.ssc": "557a32c3e23c94324d4d2d64dbeb68c973472eda5e0e243a7afba943e0375a68",
+    "/home/Nozba/Codex/SIMSCOPE/status-114/compatibility/fields.ssc": "a79c773f563c692d73e1c913d665183811b8ee80c2048011415638b402f3eef9"
+  }
+}

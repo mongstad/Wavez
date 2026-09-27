@@ -1,0 +1,17 @@
+{
+  "activity": {
+    "counters": {},
+    "stages": {}
+  },
+  "checks": 231,
+  "failures": [],
+  "parent_directory": "/home/Nozba/Codex/SIMSCOPE/status-114/transport-final-compatibility/.simscope-export-1790543956-22126870",
+  "timings": {
+    "refresh_1000_ms": 48.911
+  },
+  "parent_close_acknowledged": true,
+  "source_hashes_unchanged": {
+    "/home/Nozba/Codex/SIMSCOPE/status-114/transport-final-compatibility/scene.ssc": "968bff687a92ed1ba7b060227557467a9716151a68e444cbbf278950fb4c8809",
+    "/home/Nozba/Codex/SIMSCOPE/status-114/transport-final-compatibility/fields.ssc": "8183648c66fe46f8e954ee84982af3694a1263f665e6a0ab49ae2619d5a64d1b"
+  }
+}
