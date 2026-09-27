@@ -1,0 +1,17 @@
+{
+  "activity": {
+    "counters": {},
+    "stages": {}
+  },
+  "checks": 231,
+  "failures": [],
+  "parent_directory": "/home/Nozba/Codex/SIMSCOPE/status-114/transport-final-forward/.simscope-export-1790543889-24958321",
+  "timings": {
+    "refresh_1000_ms": 48.475
+  },
+  "parent_close_acknowledged": true,
+  "source_hashes_unchanged": {
+    "/home/Nozba/Codex/SIMSCOPE/status-114/transport-final-forward/scene.ssc": "1f3cf97acdda5e20c35e2432edb7f7e97c846af6f1675d1a3b75751303dd917b",
+    "/home/Nozba/Codex/SIMSCOPE/status-114/transport-final-forward/fields.ssc": "0eda38aed402d6c15da7bac43de790a65f0d96819036a3aebe1ffb22299f760f"
+  }
+}

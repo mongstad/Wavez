@@ -122,16 +122,22 @@ speed; obsolete mode/index-rate fields are removed without migration support.
 The 40-pixel bottom status line shows one playback/preparation message:
 **Preparing…** while paused without enough prepared coverage, **Ready** when
 paused with sufficient coverage, **Playing** while advancing, or
-**Buffering / Preparing…** when playback must wait. It also retains **No capture**
+**Buffering** only when required scientific content holds the committed playback
+clock for at least 400 ms. It also retains **No capture**
 and **Unavailable**. Background preparation does not replace Playing or add an
-adjacent counter. At a non-looping recording boundary, it shows Ready rather than
+adjacent counter. Transient controller buffering flags, prefetch and upload waits
+do not replace Playing while committed playback progresses. Actual transport wait
+points are observed without changing playback; any committed-clock progress clears
+the hold immediately. The existing 200 ms status refresh means a sustained hold
+appears as Buffering after roughly 400–600 ms. At a non-looping recording boundary, it shows Ready rather than
 leaving Playing stale; transport timing and playback intent are unchanged.
 
 Automatic preparation uses an indeterminate message because its admitted window
 and useful startup lead can change. For an explicitly requested preparation
-interval, **Preparing — N%** (or **Buffering / Preparing — N%**) means completed
+interval, paused **Preparing — N%** means completed
 field-sample preparations divided by the total field samples in that interval,
-rounded down. It is not elapsed-time or whole-capture progress. Planning and
+rounded down. While playing, the status remains simply Playing or Buffering;
+preparation percentage and reason remain in Details. It is not elapsed-time or whole-capture progress. Planning and
 unknown totals remain indeterminate. Memory-wait and detailed cache diagnostics
 are available through Details and the existing Performance controls.
 See [status presentation validation](STATUS_PLAYBACK_STATE.md).

@@ -152,9 +152,10 @@ func _process(delta: float) -> void:
 func playback_status(layers) -> Dictionary:
 	var result := {"text":"Ready", "detail":"The committed visible sample is ready."}
 	var interval: Array = layers.field_playback.playback_range()
-	var at_end: bool = not viewer.scene_loop_playback and (viewer.requested_time >= float(interval[1]) if viewer.physical_rate >= 0 else viewer.requested_time <= float(interval[0]))
+	var clock: float = viewer.committed_sample.get("requested_time",viewer.requested_time)
+	var at_end: bool = viewer.committed_sample.has("requested_time") and not viewer.scene_loop_playback and (minf(clock,viewer.requested_time) >= float(interval[1]) if viewer.physical_rate >= 0 else maxf(clock,viewer.requested_time) <= float(interval[0]))
 	var advancing: bool = viewer.playing and viewer.frame_count > 1 and viewer.physical_rate != 0 and not at_end
-	var waiting: bool = layers.is_buffering()
+	var waiting: bool = layers.transport_stalled() if viewer.playing else layers.is_buffering()
 	var fields = layers.field_playback
 	var session := {}
 	if fields.active():
@@ -167,13 +168,14 @@ func playback_status(layers) -> Dictionary:
 			var demand: Dictionary = fields._demand(status,viewer.requested_time)
 			var gate: Dictionary = fields.concurrency.gate(demand.consumer,demand.ahead_seconds,session.get("state") == "ready")
 			waiting = waiting or fields.capacity_wait or not gate.ready
-	if waiting:
-		result.text = "Buffering / Preparing…" if advancing else "Preparing…"
-		result.detail = "Waiting for requested data or sufficient prepared playback coverage.\n"+result.detail
+	if waiting and (not at_end or not viewer.playing):
+		result.text = "Buffering" if advancing else "Preparing…"
+		result.detail = (layers.transport_wait_reason+" is holding playback.\n" if advancing else "Waiting for requested data or sufficient prepared playback coverage.\n")+result.detail
 		# Automatic coverage and its target adapt: never imply whole-file progress.
 		if fields.active() and fields.session_waiting and fields.scope_choice.selected != 0 and session.get("state") == "preparing" and int(session.get("total",0)) > 0:
 			var percent := clampi(floori(100.0*int(session.get("ready",0))/int(session.total)),0,100)
-			result.text = ("Buffering / Preparing" if advancing else "Preparing")+" — %d%%" % percent
+			if not advancing:result.text = "Preparing — %d%%" % percent
+			result.detail += "\nPreparation: %d%%." % percent
 			result.detail += "\nPercentage: prepared field samples / all field samples in the explicitly requested preparation interval; not elapsed time or whole-capture progress."
 	elif advancing:result.text = "Playing"
 	return result

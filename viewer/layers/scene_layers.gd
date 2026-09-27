@@ -10,6 +10,10 @@ var viewer
 var playback
 var field_playback
 var mesh_playback
+# Presentation-only observation of actual transport holds, never a playback gate.
+const STATUS_STALL_MSEC := 400
+var transport_hold_since := -1
+var transport_wait_reason := ""
 var particle_skipped := false
 var prepared_token := ""
 var reader
@@ -327,7 +331,12 @@ func tick(delta: float) -> void:
 	var started := Profile.begin()
 	if Profile.enabled and Profile.trace_enabled:
 		Profile.trace_context = {"playing":viewer.playing,"requested_time_before":viewer.requested_time,"source_index_before":viewer.current_index,"particle_pair_before":particle_key,"tail_accumulator_before":viewer.tail_poll,"delta":delta}
+	var previous_clock = viewer.committed_sample.get("requested_time")
+	transport_wait_reason = ""
 	_tick_profiled(delta)
+	var progressed: bool = viewer.committed_sample.get("requested_time") != previous_clock
+	if not viewer.playing or progressed or transport_wait_reason.is_empty():transport_hold_since = -1
+	elif transport_hold_since < 0:transport_hold_since = Time.get_ticks_msec()
 	if field_playback != null:field_playback.observe_frame((Time.get_ticks_usec()-responsiveness)/1000.0)
 	Profile.end("g3_tick",started)
 func _tick_profiled(delta: float) -> void:
@@ -342,9 +351,9 @@ func _tick_profiled(delta: float) -> void:
 		viewer.tail_poll = 0;refresh()
 		Profile.count("g3_tail_polls")
 		Profile.end("g3_tail_poll",poll_started)
-	if playback != null and playback.enabled and use_async() and not playback.pump():_poll_iso();return
-	if field_playback != null and not field_playback.pump():_poll_iso();return
-	if mesh_playback != null and not mesh_playback.pump():_poll_iso();return
+	if playback != null and playback.enabled and use_async() and not playback.pump():transport_wait_reason = "Required particle content";_poll_iso();return
+	if field_playback != null and not field_playback.pump():transport_wait_reason = "Required field content or startup coverage";_poll_iso();return
+	if mesh_playback != null and not mesh_playback.pump():transport_wait_reason = "Required mesh content";_poll_iso();return
 	if viewer.frame_a == null:return
 	if viewer.playing and reader.frames.size()>1:
 		var committed_index: int = viewer.current_index;var committed_phase: float = viewer.phase
@@ -360,6 +369,7 @@ func _tick_profiled(delta: float) -> void:
 			viewer.display_accum -= 1.0/viewer.DISPLAY_HZ
 			var result := sample(viewer.requested_time,use_async())
 			if result.has("pending"):
+				transport_wait_reason = "Required scientific sample"
 				viewer.requested_time = viewer.committed_sample.get("requested_time",viewer.requested_time)
 				viewer.current_index = committed_index;viewer.phase = committed_phase
 			Profile.count("g3_display_samples")
@@ -367,6 +377,8 @@ func _tick_profiled(delta: float) -> void:
 	_poll_iso()
 func use_async() -> bool:
 	return ((playback != null and playback.enabled) or (field_playback != null and field_playback.enabled) or (mesh_playback != null and mesh_playback.enabled)) and not viewer.offline_instance and not viewer.inspection_busy
+func transport_stalled() -> bool:
+	return viewer.playing and transport_hold_since >= 0 and not transport_wait_reason.is_empty() and Time.get_ticks_msec()-transport_hold_since >= STATUS_STALL_MSEC
 func is_buffering() -> bool:
 	return (playback != null and playback.buffering) or (field_playback != null and field_playback.buffering) or (mesh_playback != null and mesh_playback.buffering)
 func field_budget() -> int:
@@ -381,6 +393,7 @@ func ensure_particle_data() -> bool:
 	if not particle_skipped:return true
 	return not sample(viewer.requested_time,false,true).is_empty()
 func seek(time: float) -> bool:
+	transport_hold_since = -1;transport_wait_reason = ""
 	if not refresh() or reader.frames.is_empty() or not is_finite(time) or time < reader.frames[0].time or time > reader.frames[-1].time:return false
 	if field_playback != null:
 		field_playback.seek_outside_interval(time)

@@ -126,8 +126,24 @@ func run():
 	var deadline := Time.get_ticks_msec()+10000
 	while not worker.status().get("test_barrier_waiting",false) and Time.get_ticks_msec()<deadline: await process_frame
 	ui.refresh(); check(ui.readiness == "Preparing…","Cold seek reports real preparation")
+	viewer.playing = true;var particle_clock = viewer.committed_sample.get("requested_time")
+	layers.tick(.05);await create_timer(.45).timeout;ui.refresh()
+	check(ui.readiness == "Buffering" and viewer.committed_sample.get("requested_time") == particle_clock,"Required particle worker stall holds the committed clock")
+	viewer.playing = false
 	viewer._seek_time(3.125); worker.test_barrier = null; gate.post(); await ready(viewer)
 	check(ui.readiness == "Ready" and viewer.committed_sample.requested_time == 3.125,"Latest rapid replacement seek becomes ready")
+	var mesh_worker = layers.mesh_playback.worker
+	gate = Semaphore.new();mesh_worker.test_barrier = gate;layers.mesh_playback.invalidate();layers.views.mesh.clear()
+	viewer._seek_time(2.5)
+	deadline = Time.get_ticks_msec()+10000
+	while not mesh_worker.status().test_barrier_waiting and Time.get_ticks_msec()<deadline:await process_frame
+	check(mesh_worker.status().test_barrier_waiting,"Required mesh preparation reaches the real worker barrier")
+	viewer.playing = true;var mesh_clock = viewer.committed_sample.get("requested_time")
+	layers.tick(.05);await create_timer(.45).timeout;ui.refresh()
+	check(ui.readiness == "Buffering" and viewer.committed_sample.get("requested_time") == mesh_clock,"Required mesh worker stall holds the committed clock")
+	mesh_worker.test_barrier = null;gate.post();await ready(viewer);ui.refresh()
+	check(ui.readiness == "Playing","Mesh recovery returns directly to Playing")
+	viewer.playing = false;await ready(viewer)
 	# Presentation contract injection, not a claimed scientific failure reproduction.
 	layers.mesh_playback.error = "Injected unavailable mesh diagnostic"; ui.refresh()
 	check(ui.readiness == "Unavailable" and ui.failures.has("Meshes"),"Typed readiness failure is visible and durable")
@@ -325,6 +341,23 @@ func check_playback_status(viewer, config: Dictionary) -> void:
 	check(ui.readiness == "Playing","Play shows Playing")
 	layers.tick(.05);ui.refresh()
 	check(ui.readiness == "Playing" and viewer.requested_time > 0,"Advancing playback remains Playing")
+	var start_clock: float = viewer.committed_sample.requested_time
+	var commits := 0
+	viewer.physical_rate = .5
+	for i in 24:
+		var before: float = viewer.committed_sample.requested_time
+		layers.tick(.04)
+		if viewer.committed_sample.requested_time != before:commits += 1
+		# Inject fluctuating internal flags after real transport ticks. These
+		# cannot define a stall when the committed playback keeps progressing.
+		var old_buffering: bool = fields.buffering
+		var old_waiting: bool = fields.session_waiting
+		fields.buffering = i % 2 == 0;fields.session_waiting = i % 3 == 0
+		ui.refresh();check(ui.readiness == "Playing","Progressing playback ignores transient preparation/staging flags: "+str(i))
+		fields.buffering = old_buffering;fields.session_waiting = old_waiting
+		await create_timer(.025).timeout
+	check(commits >= 8 and viewer.committed_sample.requested_time > start_clock,"Fluctuation regression advances the real committed clock repeatedly")
+	viewer.physical_rate = 1
 	viewer._toggle_playback();ui.refresh();check(ui.readiness == "Ready","Pause shows Ready with coverage")
 	# Real field publication barrier: hold preparation without changing algorithms.
 	var gate := Semaphore.new();fields.worker.test_barrier = gate
@@ -333,12 +366,27 @@ func check_playback_status(viewer, config: Dictionary) -> void:
 	while not fields.worker.status().test_barrier_waiting and Time.get_ticks_msec()<deadline:await process_frame
 	check(fields.worker.status().test_barrier_waiting,"Cold seek overlaps real field preparation")
 	ui.refresh();check(ui.readiness == "Preparing…" and not ui.badge.label.text.contains("Preparing ahead") and not ui.badge.label.text.contains("%"),"Paused cold seek has one indeterminate Automatic status")
-	viewer.playing = true;fields.begin_session();ui.refresh()
-	check(ui.readiness == "Buffering / Preparing…","Blocked playback shows Buffering")
+	viewer.playing = true;fields.begin_session()
+	var held_clock = viewer.committed_sample.get("requested_time")
+	layers.tick(.05);ui.refresh()
+	check(ui.readiness == "Playing","A transient hold does not flash Buffering")
+	await create_timer(.45).timeout;layers.tick(.05);ui.refresh()
+	check(viewer.committed_sample.get("requested_time") == held_clock and ui.readiness == "Buffering","Real cold seek holds committed clock and reports Buffering")
 	fields.worker.test_barrier = null;gate.post()
 	deadline = Time.get_ticks_msec()+15000
 	while layers.is_buffering() and Time.get_ticks_msec()<deadline:layers.tick(0);await process_frame
 	ui.refresh();check(ui.readiness == "Playing","Preparation recovery returns to Playing")
+	# Exhaust the prepared runway while active, with no seek request.
+	gate = Semaphore.new();fields.worker.test_barrier = gate;fields.invalidate();fields.begin_session()
+	deadline = Time.get_ticks_msec()+10000
+	while not fields.worker.status().test_barrier_waiting and Time.get_ticks_msec()<deadline:await process_frame
+	held_clock = viewer.committed_sample.requested_time
+	layers.tick(.05);await create_timer(.45).timeout;layers.tick(.05);ui.refresh()
+	check(ui.readiness == "Buffering" and viewer.committed_sample.requested_time == held_clock,"Exhausted runway holds playback and reports Buffering")
+	fields.worker.test_barrier = null;gate.post()
+	deadline = Time.get_ticks_msec()+15000
+	while layers.is_buffering() and Time.get_ticks_msec()<deadline:layers.tick(0);await process_frame
+	ui.refresh();check(ui.readiness == "Playing","Runway recovery returns directly to Playing")
 	viewer._toggle_playback();await ready(viewer)
 	viewer._seek_time(.8);await ready(viewer);check(ui.readiness == "Ready","Warm seek stays ready")
 	for channel in ["density","psi_real","psi_imag"]:
@@ -354,6 +402,9 @@ func check_playback_status(viewer, config: Dictionary) -> void:
 	var recording_end: float = viewer.generic_reader.frames[-1].time
 	viewer._seek_time(recording_end);await ready(viewer);viewer.playing = true;ui.refresh()
 	check(ui.readiness == "Ready","Recording end never leaves Playing stale even if transport intent remains set")
+	viewer.playing = false;fields.buffering = true;ui.refresh()
+	check(ui.readiness == "Preparing…","Paused endpoint still reports a missing required replacement sample")
+	fields.buffering = false;viewer.playing = true
 	viewer.scene_loop_playback = true;fields.begin_session()
 	deadline = Time.get_ticks_msec()+15000
 	while layers.is_buffering() and Time.get_ticks_msec()<deadline:layers.tick(0);await process_frame
@@ -367,9 +418,10 @@ func check_playback_status(viewer, config: Dictionary) -> void:
 	fields.worker.mutex.lock();var saved: Dictionary = fields.worker.session.duplicate();fields.worker.session = {"state":"preparing","automatic":true,"ready":1,"total":20};fields.worker.mutex.unlock()
 	viewer.playing = true;fields.buffering = false;fields.session_waiting = false
 	ui.refresh();check(ui.readiness == "Playing" and ui.badge.label.text == "Playing","Background work never replaces progressing Playing or adds an adjacent counter")
+	viewer.playing = false
 	fields.scope_choice.select(1);fields.session_waiting = true;fields.buffering = true
 	fields.worker.mutex.lock();fields.worker.session = {"state":"preparing","ready":5,"total":20};fields.worker.mutex.unlock()
-	ui.refresh();check(ui.readiness == "Buffering / Preparing — 25%" and ui.readiness_detail.contains("explicitly requested preparation interval"),"Explicit interval percentage is scoped to prepared samples")
+	ui.refresh();check(ui.readiness == "Preparing — 25%" and ui.readiness_detail.contains("explicitly requested preparation interval"),"Explicit interval percentage is scoped to prepared samples")
 	fields.worker.mutex.lock();fields.worker.session = {"state":"planning","planned":5,"total":20};fields.worker.mutex.unlock()
 	ui.refresh();check(not ui.readiness.contains("%"),"Planning does not misrepresent prepared progress")
 	fields.worker.mutex.lock();fields.worker.session = saved;fields.worker.mutex.unlock()

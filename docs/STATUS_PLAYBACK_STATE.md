@@ -110,3 +110,52 @@ reports are unchanged; the handbook/current-status page describes current behavi
    and Details explanation; Automatic should never show a whole-capture percentage.
 5. Hide/show the panel and inspect Jobs/failure details; existing actions must remain
    available. Stop at owner review; no merge or auto-merge is authorized.
+
+## Owner-review correction: observe transport progression
+
+This correction supersedes the initial active-playback status semantics above.
+`layers.is_buffering()` combines particle, field and mesh controller flags; it can
+be true during transient staging or preparation even while committed playback
+continues. Using that aggregate directly caused intermittent visible Buffering.
+
+The scene transport now records when an existing pump returns without advancing
+because content is pending, or sampling returns pending and holds the clock.
+It observes the committed clock before/after each tick. Any clock change (including
+reverse and loop wrap), successful unblocked tick or paused tick clears the hold.
+Seeking resets the observation, and a new scene starts with fresh observation.
+No pump order, sample request, cache, worker, playback gate or timing changes.
+
+The status uses this observation for active playback, not `is_buffering()`. A
+continuous content wait without committed-clock progress must last **400 ms**
+before the caption becomes **Buffering**. With the existing 200 ms refresh cadence,
+this is normally visible after 400–600 ms. Short staging/upload waits deliberately
+stay Playing. Recovery clears the hold immediately and the next refresh returns
+directly to Playing. Active captions never use combined Buffering / Preparing
+wording or append a percentage; preparation details remain in Details/tooltip.
+Paused readiness retains its existing required-sample/startup-coverage semantics.
+Endpoints now require both requested and committed clocks to reach the boundary,
+so merely requesting an endpoint does not prematurely show Ready. A paused
+endpoint with a missing replacement sample still shows Preparing.
+
+The expanded regression deliberately fluctuates preparation/staging flags across
+24 real transport ticks over more than 400 ms, requires repeated committed-clock
+advances, and checks Playing after every tick. Real worker barriers also verify
+particle, field and mesh stalls, a cold seek, exhausted field runway without a
+seek, unchanged committed clocks during holds, and direct recovery to Playing.
+These are deterministic fixtures and controlled pressure, not a claim to reproduce
+every scheduling pattern of the production capture.
+
+The final status/lifecycle suite passes **231 checks per renderer**, Forward+ and
+Compatibility, with unchanged source hashes and parent-close cancellation
+acknowledgement. Existing presentation/Jobs/export tests remain included. Compact
+reports are retained separately under
+[evidence/issue-114/transport-review](evidence/issue-114/transport-review/), preserving
+the initial review-time evidence. No final failures; production-scale timing and
+other operating systems were not rerun.
+
+Owner check: run the production capture through normal playback and confirm
+Playing stays stable during background preparation. Force a cold seek or exhaust
+prepared coverage: only a sustained hold should show Buffering, with immediate
+return to Playing at the next refresh after recovery. Recheck Pause/Ready,
+reverse/loop and the non-looping endpoint. This remains #114 / PR #129, pending
+owner review; do not merge automatically.
