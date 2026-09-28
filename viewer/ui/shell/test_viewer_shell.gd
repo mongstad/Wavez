@@ -231,7 +231,7 @@ func run() -> void:
 				shell.select_workspace(2); await settle(); picture("meshes-"+str(dimensions.x))
 				shell.select_workspace(0)
 	# Below minimum logical space: collapse and a recoverable temporary sheet.
-	viewer.color_channel = "value"; viewer._update_particle_legend()
+	viewer.color_channel = "value"; viewer.show_legend = true; viewer._update_particle_legend()
 	root.content_scale_factor = 1; root.size = Vector2i(800,640); await settle(); shell.layout(); await settle()
 	check(not viewer.overlay_visible and shell.recovery.visible, "Narrow window collapses dock")
 	check(viewer.legend.visible and viewer.colorbar.visible, "Automatic collapse preserves independent enabled legend visibility")

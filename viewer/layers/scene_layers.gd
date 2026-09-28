@@ -553,7 +553,7 @@ func _build_ui() -> void:
 			if map.get_item_text(i) == states[id].colormap:map.select(i)
 		map.item_selected.connect(func(i):states[id].colormap = map.get_item_text(i);resample())
 		var legend_check := CheckButton.new(); legend_check.text = "Show legend"
-		legend_check.button_pressed = legend_visibility.get(id,true); colors.add_child(legend_check)
+		legend_check.button_pressed = legend_visibility.get(id,false); colors.add_child(legend_check)
 		panel_controls[id].legend = legend_check
 		legend_check.toggled.connect(func(v):
 			legend_visibility[id] = v

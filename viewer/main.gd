@@ -817,7 +817,7 @@ var manual_min := 0.0
 var manual_max := 1.0
 var range_min := 0.0
 var range_max := 1.0
-var show_legend := true
+var show_legend := false
 var hidden_types: Dictionary = {}
 var brightness_scale := 1.0
 var gamma := 1.0
@@ -958,7 +958,7 @@ func _build_inspector_controls() -> void:
 		spin.editable = not auto_range
 	_check(generic_box, "Invert", false, func(v: bool): invert_map = v; _restyle())
 	_check(tools_ui.form("Mapping"), "Clamp out-of-range values", true, func(v: bool): clamp_map = v; _restyle())
-	_check(generic_box, "Show legend", true, func(v: bool): show_legend = v; _restyle())
+	_check(generic_box, "Show legend", show_legend, func(v: bool): show_legend = v; _restyle())
 	colorbar = TextureRect.new()
 	colorbar.custom_minimum_size = Vector2(0, 14)
 	colorbar.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
