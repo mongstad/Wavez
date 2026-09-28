@@ -181,8 +181,10 @@ reopens the original video panel or the owning legacy form. Details exposes
 progress, output/intermediate directories and existing diagnostic information.
 An open active-job Details view updates as progress is published, then retains
 the final state without following later jobs.
-Cancel delegates to the operation's existing cancellation behavior; video and
-analysis cancellation may wait for acknowledgement. Closing Jobs or the video
+Cancel delegates to the operation's existing cancellation behavior. Video export
+first asks **Cancel video export?**; **No** is initially focused, and only **Yes**
+sends the request. Dismissal leaves the export running. Video and analysis
+cancellation may wait for acknowledgement. Closing Jobs or the video
 panel does not cancel. Minimizing the viewer does not stop video export; closing
 the application retains its existing graceful cancellation behavior.
 

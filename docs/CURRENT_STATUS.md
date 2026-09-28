@@ -27,11 +27,12 @@ Application version/build identity was owner-merged in PR #132 at `653f817`.
 About SimScope was owner-merged in PR #133 at `f6191e0`.
 Load-error recovery was owner-merged in PR #134 at `a97af18`.
 Hidden legend defaults were owner-merged in PR #137 at `26b6800`.
-Current authorized work is #138, the only Ready item when selected:
-[portable view presets](VIEW_PRESETS.md), **pending owner review**.
+Portable view presets were owner-merged in PR #139 at `b6008e0`.
+Current authorized work is #97, the only Ready item when selected:
+[video cancellation confirmation](VIDEO_CANCEL_CONFIRMATION.md), **pending owner review**.
 Ordinary recipe save/load now uses a small source-independent presentation JSON
 and direct platform file picker. Scientific inspection bundles remain separate.
-Build 5 is the merge candidate. Historical evidence remains unchanged.
+Build 6 is the merge candidate. Historical evidence remains unchanged.
 Field preparation uses a small CPU pool with ordered publication and explicit
 in-flight memory reservations. Auto starts conservatively and changes active
 concurrency within a CPU-count-bounded pool of at most four lanes, using measured

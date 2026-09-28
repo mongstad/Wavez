@@ -48,6 +48,8 @@ var launch_ticks := 0
 var progress_ticks := 0
 var settings_locked := false
 var setting_states: Array[Dictionary] = []
+var cancel_confirmation: ConfirmationDialog
+var pending_cancel_directory := ""
 
 func _ready() -> void:
 	title = "SimScope • Export Video"
@@ -119,7 +121,7 @@ func _ready() -> void:
 	var buttons := HBoxContainer.new(); box.add_child(buttons)
 	start_button = Button.new(); buttons.add_child(start_button)
 	start_button.pressed.connect(func():
-		if pid > 0 or preparing: cancel_export()
+		if pid > 0 or preparing: request_cancel_export()
 		else: start_export())
 	background_button = Button.new(); background_button.text = "Run in background"; buttons.add_child(background_button)
 	background_button.pressed.connect(func():
@@ -133,6 +135,19 @@ func _ready() -> void:
 	close_button.custom_minimum_size.x = secondary_width
 	start_button.text = "Cancel export"
 	start_button.custom_minimum_size.x = start_button.get_combined_minimum_size().x
+	cancel_confirmation = ConfirmationDialog.new()
+	cancel_confirmation.title = "Cancel video export?"
+	cancel_confirmation.dialog_text = "The current export will stop. Completed frames and temporary files may be retained."
+	cancel_confirmation.ok_button_text = "Yes"
+	cancel_confirmation.cancel_button_text = "No"
+	cancel_confirmation.dialog_hide_on_ok = false
+	cancel_confirmation.confirmed.connect(_confirm_cancel_export)
+	cancel_confirmation.close_requested.connect(cancel_confirmation.hide)
+	cancel_confirmation.visibility_changed.connect(func():
+		if not cancel_confirmation.visible: pending_cancel_directory = "")
+	visibility_changed.connect(func():
+		if not visible: cancel_confirmation.hide())
+	add_child(cancel_confirmation)
 	_sync_action_buttons()
 	for spin in [start, end, width, height, fps, rate]: spin.value_changed.connect(func(_v: float): update_estimate())
 
@@ -298,7 +313,9 @@ func start_export() -> void:
 func _sync_action_buttons() -> void:
 	var active := pid > 0 or preparing
 	start_button.text = "Cancel export" if active else "Start Export"
-	start_button.disabled = not active and not can_start
+	start_button.disabled = not can_cancel_export() if active else not can_start
+	if cancel_confirmation != null and (not can_cancel_export() or pending_cancel_directory != active_directory):
+		cancel_confirmation.hide()
 	start_button.tooltip_text = ""
 	background_button.disabled = not active
 	background_button.visible = active
@@ -343,6 +360,24 @@ func publish_job(stage: String, detail: String) -> void:
 
 func progress_details() -> String:
 	return ProgressDetails.format(job_status, Time.get_ticks_msec())
+
+# User actions share this gate. Shutdown keeps using the cooperative request below.
+func can_cancel_export() -> bool:
+	if job_status.get("stage","") in ProgressDetails.TERMINAL or job_status.get("stage") == "cancelling":return false
+	return preparing or (pid > 0 and OS.is_process_running(pid))
+
+func request_cancel_export() -> void:
+	if not can_cancel_export() or cancel_confirmation.visible:return
+	if not visible:popup_centered()
+	pending_cancel_directory = active_directory
+	if viewer.shell != null:cancel_confirmation.theme = viewer.shell.theme
+	cancel_confirmation.popup_centered()
+	cancel_confirmation.get_cancel_button().grab_focus.call_deferred()
+
+func _confirm_cancel_export() -> void:
+	var matches := cancel_confirmation.visible and pending_cancel_directory == active_directory
+	cancel_confirmation.hide()
+	if matches and can_cancel_export():cancel_export()
 
 func cancel_export() -> void:
 	if preparing:
