@@ -55,6 +55,8 @@ func setup(owner_shell) -> void:
 	viewer.timeline = preload("res://ui/shell/prepared_timeline.gd").new(); viewer.timeline.step = 1
 	viewer.timeline.value_changed.connect(viewer._timeline_changed)
 	progress.add_child(viewer.timeline); viewer.timeline.custom_minimum_size.y = 16
+	# The endpoint-centred thumb extends half its texture beyond the track.
+	progress.add_theme_constant_override("separation",4+ceili(viewer.timeline.get_theme_icon("grabber").get_width()*.5))
 	viewer.timeline.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	viewer.timeline.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	index_hint = label(self, ""); index_hint.top_level = true; index_hint.mouse_filter = Control.MOUSE_FILTER_IGNORE

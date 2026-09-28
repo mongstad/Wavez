@@ -61,6 +61,9 @@ func run():
 		check(ui.requested.text.is_empty() and ui.displayed.text == "%.1f" % time,"Elapsed playback uses one decimal from committed sample")
 		check(ui.displayed.tooltip_text.ends_with("Displayed source time " + ui.FloatText.format_value(time) + " s"),"Displayed tooltip retains exact float64 value")
 	check(viewer.scene_layers.current.field.a.time == 1,"Sparse field holds independent source time at fractional seek")
+	for index in [0,viewer.frame_count-1]:
+		viewer.timeline.value = index;await ready(viewer);ui.refresh()
+		check(viewer.current_index == index and viewer.committed_sample.requested_time == viewer.generic_reader.frames[index].time,"Endpoint seeks preserve exact recorded time/index")
 	await media_checks(viewer,ui,config)
 	go(ui,"2.25"); await ready(viewer)
 	var camera: Transform3D = viewer.camera.transform
@@ -156,6 +159,8 @@ func run():
 		check(ui.size.y == (64 if dimensions.x == 1440 else 104),"Transport height follows desktop/compact allocation " + str(dimensions))
 		viewer._toggle_overlay(); await settle(); check(ui.is_visible_in_tree(),"Dock hide preserves transport"); viewer._toggle_overlay(); await settle()
 		check(ui.displayed.get_global_rect().end.x <= viewer.timeline.get_global_rect().position.x and viewer.timeline.get_global_rect().end.x <= ui.duration.get_global_rect().position.x,"Elapsed and total flank the union slider")
+		var radius: float = viewer.timeline.get_theme_icon("grabber").get_width()*.5
+		check(viewer.timeline.get_global_rect().position.x-ui.displayed.get_global_rect().end.x >= radius and ui.duration.get_global_rect().position.x-viewer.timeline.get_global_rect().end.x >= radius,"Endpoint thumb has room beside time readouts")
 		var first: Rect2 = ui.primary.get_global_rect()
 		var last: Rect2 = ui.secondary.get_global_rect() if ui.compact else first
 		check(absf((first.position.y-ui.global_position.y)-(ui.get_global_rect().end.y-last.end.y)) <= 1,"Transport rows have equal top and bottom space")

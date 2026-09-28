@@ -1,0 +1,665 @@
+{
+  "issue": 136,
+  "baseline": "dd706ca45b0cd7d64ae6f2762ebd48ac2cb85a77",
+  "candidate": "v0.1.0.7",
+  "owner_acceptance": "pending",
+  "before": {
+    "baseline": true,
+    "checks": 80,
+    "failures": [],
+    "rows": [
+      {
+        "center": 40.0,
+        "error": 8.0,
+        "expected": 32.0,
+        "ratio": 0.0,
+        "scale": 1.0,
+        "width": 200.0
+      },
+      {
+        "center": 132.0,
+        "error": 0.0,
+        "expected": 132.0,
+        "ratio": 0.5,
+        "scale": 1.0,
+        "width": 200.0
+      },
+      {
+        "center": 224.0,
+        "error": -8.0,
+        "expected": 232.0,
+        "ratio": 1.0,
+        "scale": 1.0,
+        "width": 200.0
+      },
+      {
+        "center": 40.0,
+        "error": 8.0,
+        "expected": 32.0,
+        "ratio": 0.0,
+        "scale": 1.0,
+        "width": 600.0
+      },
+      {
+        "center": 332.0,
+        "error": 0.0,
+        "expected": 332.0,
+        "ratio": 0.5,
+        "scale": 1.0,
+        "width": 600.0
+      },
+      {
+        "center": 624.0,
+        "error": -8.0,
+        "expected": 632.0,
+        "ratio": 1.0,
+        "scale": 1.0,
+        "width": 600.0
+      },
+      {
+        "center": 50.0,
+        "error": 10.0,
+        "expected": 40.0,
+        "ratio": 0.0,
+        "scale": 1.25,
+        "width": 200.0
+      },
+      {
+        "center": 165.0,
+        "error": 0.0,
+        "expected": 165.0,
+        "ratio": 0.5,
+        "scale": 1.25,
+        "width": 200.0
+      },
+      {
+        "center": 280.0,
+        "error": -10.0,
+        "expected": 290.0,
+        "ratio": 1.0,
+        "scale": 1.25,
+        "width": 200.0
+      },
+      {
+        "center": 50.0,
+        "error": 10.0,
+        "expected": 40.0,
+        "ratio": 0.0,
+        "scale": 1.25,
+        "width": 600.0
+      },
+      {
+        "center": 415.0,
+        "error": 0.0,
+        "expected": 415.0,
+        "ratio": 0.5,
+        "scale": 1.25,
+        "width": 600.0
+      },
+      {
+        "center": 780.0,
+        "error": -10.0,
+        "expected": 790.0,
+        "ratio": 1.0,
+        "scale": 1.25,
+        "width": 600.0
+      },
+      {
+        "center": 60.0,
+        "error": 12.0,
+        "expected": 48.0,
+        "ratio": 0.0,
+        "scale": 1.5,
+        "width": 200.0
+      },
+      {
+        "center": 198.0,
+        "error": 0.0,
+        "expected": 198.0,
+        "ratio": 0.5,
+        "scale": 1.5,
+        "width": 200.0
+      },
+      {
+        "center": 336.0,
+        "error": -12.0,
+        "expected": 348.0,
+        "ratio": 1.0,
+        "scale": 1.5,
+        "width": 200.0
+      },
+      {
+        "center": 60.0,
+        "error": 12.0,
+        "expected": 48.0,
+        "ratio": 0.0,
+        "scale": 1.5,
+        "width": 600.0
+      },
+      {
+        "center": 498.0,
+        "error": 0.0,
+        "expected": 498.0,
+        "ratio": 0.5,
+        "scale": 1.5,
+        "width": 600.0
+      },
+      {
+        "center": 936.0,
+        "error": -12.0,
+        "expected": 948.0,
+        "ratio": 1.0,
+        "scale": 1.5,
+        "width": 600.0
+      },
+      {
+        "center": 80.0,
+        "error": 16.0,
+        "expected": 64.0,
+        "ratio": 0.0,
+        "scale": 2.0,
+        "width": 200.0
+      },
+      {
+        "center": 264.0,
+        "error": 0.0,
+        "expected": 264.0,
+        "ratio": 0.5,
+        "scale": 2.0,
+        "width": 200.0
+      },
+      {
+        "center": 448.0,
+        "error": -16.0,
+        "expected": 464.0,
+        "ratio": 1.0,
+        "scale": 2.0,
+        "width": 200.0
+      },
+      {
+        "center": 80.0,
+        "error": 16.0,
+        "expected": 64.0,
+        "ratio": 0.0,
+        "scale": 2.0,
+        "width": 600.0
+      },
+      {
+        "center": 664.0,
+        "error": 0.0,
+        "expected": 664.0,
+        "ratio": 0.5,
+        "scale": 2.0,
+        "width": 600.0
+      },
+      {
+        "center": 1248.0,
+        "error": -16.0,
+        "expected": 1264.0,
+        "ratio": 1.0,
+        "scale": 2.0,
+        "width": 600.0
+      }
+    ]
+  },
+  "forward_geometry": {
+    "baseline": false,
+    "checks": 104,
+    "failures": [],
+    "rows": [
+      {
+        "center": 32.0,
+        "error": 0.0,
+        "expected": 32.0,
+        "ratio": 0.0,
+        "scale": 1.0,
+        "width": 200.0
+      },
+      {
+        "center": 132.0,
+        "error": 0.0,
+        "expected": 132.0,
+        "ratio": 0.5,
+        "scale": 1.0,
+        "width": 200.0
+      },
+      {
+        "center": 232.0,
+        "error": 0.0,
+        "expected": 232.0,
+        "ratio": 1.0,
+        "scale": 1.0,
+        "width": 200.0
+      },
+      {
+        "center": 32.0,
+        "error": 0.0,
+        "expected": 32.0,
+        "ratio": 0.0,
+        "scale": 1.0,
+        "width": 600.0
+      },
+      {
+        "center": 332.0,
+        "error": 0.0,
+        "expected": 332.0,
+        "ratio": 0.5,
+        "scale": 1.0,
+        "width": 600.0
+      },
+      {
+        "center": 632.0,
+        "error": 0.0,
+        "expected": 632.0,
+        "ratio": 1.0,
+        "scale": 1.0,
+        "width": 600.0
+      },
+      {
+        "center": 40.0,
+        "error": 0.0,
+        "expected": 40.0,
+        "ratio": 0.0,
+        "scale": 1.25,
+        "width": 200.0
+      },
+      {
+        "center": 165.0,
+        "error": 0.0,
+        "expected": 165.0,
+        "ratio": 0.5,
+        "scale": 1.25,
+        "width": 200.0
+      },
+      {
+        "center": 290.0,
+        "error": 0.0,
+        "expected": 290.0,
+        "ratio": 1.0,
+        "scale": 1.25,
+        "width": 200.0
+      },
+      {
+        "center": 40.0,
+        "error": 0.0,
+        "expected": 40.0,
+        "ratio": 0.0,
+        "scale": 1.25,
+        "width": 600.0
+      },
+      {
+        "center": 415.0,
+        "error": 0.0,
+        "expected": 415.0,
+        "ratio": 0.5,
+        "scale": 1.25,
+        "width": 600.0
+      },
+      {
+        "center": 790.0,
+        "error": 0.0,
+        "expected": 790.0,
+        "ratio": 1.0,
+        "scale": 1.25,
+        "width": 600.0
+      },
+      {
+        "center": 48.0,
+        "error": 0.0,
+        "expected": 48.0,
+        "ratio": 0.0,
+        "scale": 1.5,
+        "width": 200.0
+      },
+      {
+        "center": 198.0,
+        "error": 0.0,
+        "expected": 198.0,
+        "ratio": 0.5,
+        "scale": 1.5,
+        "width": 200.0
+      },
+      {
+        "center": 348.0,
+        "error": 0.0,
+        "expected": 348.0,
+        "ratio": 1.0,
+        "scale": 1.5,
+        "width": 200.0
+      },
+      {
+        "center": 48.0,
+        "error": 0.0,
+        "expected": 48.0,
+        "ratio": 0.0,
+        "scale": 1.5,
+        "width": 600.0
+      },
+      {
+        "center": 498.0,
+        "error": 0.0,
+        "expected": 498.0,
+        "ratio": 0.5,
+        "scale": 1.5,
+        "width": 600.0
+      },
+      {
+        "center": 948.0,
+        "error": 0.0,
+        "expected": 948.0,
+        "ratio": 1.0,
+        "scale": 1.5,
+        "width": 600.0
+      },
+      {
+        "center": 64.0,
+        "error": 0.0,
+        "expected": 64.0,
+        "ratio": 0.0,
+        "scale": 2.0,
+        "width": 200.0
+      },
+      {
+        "center": 264.0,
+        "error": 0.0,
+        "expected": 264.0,
+        "ratio": 0.5,
+        "scale": 2.0,
+        "width": 200.0
+      },
+      {
+        "center": 464.0,
+        "error": 0.0,
+        "expected": 464.0,
+        "ratio": 1.0,
+        "scale": 2.0,
+        "width": 200.0
+      },
+      {
+        "center": 64.0,
+        "error": 0.0,
+        "expected": 64.0,
+        "ratio": 0.0,
+        "scale": 2.0,
+        "width": 600.0
+      },
+      {
+        "center": 664.0,
+        "error": 0.0,
+        "expected": 664.0,
+        "ratio": 0.5,
+        "scale": 2.0,
+        "width": 600.0
+      },
+      {
+        "center": 1264.0,
+        "error": 0.0,
+        "expected": 1264.0,
+        "ratio": 1.0,
+        "scale": 2.0,
+        "width": 600.0
+      }
+    ]
+  },
+  "compatibility_geometry": {
+    "baseline": false,
+    "checks": 104,
+    "failures": [],
+    "rows": [
+      {
+        "center": 32.0,
+        "error": 0.0,
+        "expected": 32.0,
+        "ratio": 0.0,
+        "scale": 1.0,
+        "width": 200.0
+      },
+      {
+        "center": 132.0,
+        "error": 0.0,
+        "expected": 132.0,
+        "ratio": 0.5,
+        "scale": 1.0,
+        "width": 200.0
+      },
+      {
+        "center": 232.0,
+        "error": 0.0,
+        "expected": 232.0,
+        "ratio": 1.0,
+        "scale": 1.0,
+        "width": 200.0
+      },
+      {
+        "center": 32.0,
+        "error": 0.0,
+        "expected": 32.0,
+        "ratio": 0.0,
+        "scale": 1.0,
+        "width": 600.0
+      },
+      {
+        "center": 332.0,
+        "error": 0.0,
+        "expected": 332.0,
+        "ratio": 0.5,
+        "scale": 1.0,
+        "width": 600.0
+      },
+      {
+        "center": 632.0,
+        "error": 0.0,
+        "expected": 632.0,
+        "ratio": 1.0,
+        "scale": 1.0,
+        "width": 600.0
+      },
+      {
+        "center": 40.0,
+        "error": 0.0,
+        "expected": 40.0,
+        "ratio": 0.0,
+        "scale": 1.25,
+        "width": 200.0
+      },
+      {
+        "center": 165.0,
+        "error": 0.0,
+        "expected": 165.0,
+        "ratio": 0.5,
+        "scale": 1.25,
+        "width": 200.0
+      },
+      {
+        "center": 290.0,
+        "error": 0.0,
+        "expected": 290.0,
+        "ratio": 1.0,
+        "scale": 1.25,
+        "width": 200.0
+      },
+      {
+        "center": 40.0,
+        "error": 0.0,
+        "expected": 40.0,
+        "ratio": 0.0,
+        "scale": 1.25,
+        "width": 600.0
+      },
+      {
+        "center": 415.0,
+        "error": 0.0,
+        "expected": 415.0,
+        "ratio": 0.5,
+        "scale": 1.25,
+        "width": 600.0
+      },
+      {
+        "center": 790.0,
+        "error": 0.0,
+        "expected": 790.0,
+        "ratio": 1.0,
+        "scale": 1.25,
+        "width": 600.0
+      },
+      {
+        "center": 48.0,
+        "error": 0.0,
+        "expected": 48.0,
+        "ratio": 0.0,
+        "scale": 1.5,
+        "width": 200.0
+      },
+      {
+        "center": 198.0,
+        "error": 0.0,
+        "expected": 198.0,
+        "ratio": 0.5,
+        "scale": 1.5,
+        "width": 200.0
+      },
+      {
+        "center": 348.0,
+        "error": 0.0,
+        "expected": 348.0,
+        "ratio": 1.0,
+        "scale": 1.5,
+        "width": 200.0
+      },
+      {
+        "center": 48.0,
+        "error": 0.0,
+        "expected": 48.0,
+        "ratio": 0.0,
+        "scale": 1.5,
+        "width": 600.0
+      },
+      {
+        "center": 498.0,
+        "error": 0.0,
+        "expected": 498.0,
+        "ratio": 0.5,
+        "scale": 1.5,
+        "width": 600.0
+      },
+      {
+        "center": 948.0,
+        "error": 0.0,
+        "expected": 948.0,
+        "ratio": 1.0,
+        "scale": 1.5,
+        "width": 600.0
+      },
+      {
+        "center": 64.0,
+        "error": 0.0,
+        "expected": 64.0,
+        "ratio": 0.0,
+        "scale": 2.0,
+        "width": 200.0
+      },
+      {
+        "center": 264.0,
+        "error": 0.0,
+        "expected": 264.0,
+        "ratio": 0.5,
+        "scale": 2.0,
+        "width": 200.0
+      },
+      {
+        "center": 464.0,
+        "error": 0.0,
+        "expected": 464.0,
+        "ratio": 1.0,
+        "scale": 2.0,
+        "width": 200.0
+      },
+      {
+        "center": 64.0,
+        "error": 0.0,
+        "expected": 64.0,
+        "ratio": 0.0,
+        "scale": 2.0,
+        "width": 600.0
+      },
+      {
+        "center": 664.0,
+        "error": 0.0,
+        "expected": 664.0,
+        "ratio": 0.5,
+        "scale": 2.0,
+        "width": 600.0
+      },
+      {
+        "center": 1264.0,
+        "error": 0.0,
+        "expected": 1264.0,
+        "ratio": 1.0,
+        "scale": 2.0,
+        "width": 600.0
+      }
+    ]
+  },
+  "forward_transport": {
+    "checks": 210,
+    "failures": [],
+    "layouts": [
+      {
+        "transport": "[P: (0.0, 796.0), S: (1440.0, 64.0)]",
+        "window": "(1440, 900)"
+      },
+      {
+        "transport": "[P: (0.0, 496.0), S: (1024.0, 104.0)]",
+        "window": "(1024, 640)"
+      }
+    ],
+    "refresh_activity": {
+      "counters": {},
+      "stages": {}
+    },
+    "request_delay_observed_ms": 459,
+    "source_hashes_unchanged": {
+      "/tmp/simscope-136-transport-forward/scene.ssc": "73a60bae0bafdb706a4c93398c7ba0197dea26670e05dcd094490915917db774",
+      "/tmp/simscope-136-transport-forward/offset.ssc": "e64b80e10d8d1e767d034f0a1f11c40ffc8b8fa69167738904ef3fa75c19fbbe",
+      "/tmp/simscope-136-transport-forward/single.ssc": "501c62b06206ce5a3a58ccffa1871b249dbd9b507085b707a4f3fbc4eb361cd3"
+    }
+  },
+  "rolling_cache": {
+    "checks": 81,
+    "failures": 0,
+    "renderer": "headless",
+    "source_hash_unchanged": true
+  },
+  "compatibility_transport": {
+    "checks": 210,
+    "failures": [],
+    "layouts": [
+      {
+        "transport": "[P: (0.0, 796.0), S: (1440.0, 64.0)]",
+        "window": "(1440, 900)"
+      },
+      {
+        "transport": "[P: (0.0, 496.0), S: (1024.0, 104.0)]",
+        "window": "(1024, 640)"
+      }
+    ],
+    "refresh_activity": {
+      "counters": {},
+      "stages": {}
+    },
+    "request_delay_observed_ms": 457,
+    "source_hashes_unchanged": {
+      "/tmp/simscope-136-transport-compat/scene.ssc": "7350620ebf494e87b5beac2519fe5fa781f3d2e73773aa47ed8566db4682d3b8",
+      "/tmp/simscope-136-transport-compat/offset.ssc": "89e1abccd1baef692131bb1e5360883f75cef06dcb3c661d96972d795418d7b3",
+      "/tmp/simscope-136-transport-compat/single.ssc": "18861f2faa29e52752df41c008e6cdda71e889554608406e289b12340f95cb61"
+    }
+  },
+  "import": "PASS",
+  "additional_checks": {
+    "version_unit_tests": 2,
+    "documentation_links": "PASS",
+    "documentation_examples": 3,
+    "python_compile": "PASS",
+    "whitespace": "PASS"
+  }
+}

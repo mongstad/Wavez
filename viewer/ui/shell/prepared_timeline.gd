@@ -16,6 +16,8 @@ class CoverageOverlay extends Control:
 		get_parent().draw_coverage(self)
 
 func _ready() -> void:
+	# Match native thumb travel/input to the full-width track and coverage axis.
+	add_theme_constant_override("center_grabber",1)
 	# Keep the native track outline/focus and thumb, allowing the buffered band
 	# to show through its interior instead of appearing as two outside stripes.
 	for part in ["slider","grabber_area","grabber_area_highlight"]:
