@@ -2,8 +2,8 @@ extends Node
 ## Session-only chrome persistence. Never serialized into scientific/view state.
 const DWELL := 0.5
 const GRACE := 0.35
-const VERTICAL_EDGE := 8.0
-const RIGHT_EDGE := 3.0
+const VERTICAL_EDGE := 10.0
+const RIGHT_EDGE := 10.0
 var shell
 var states := {
 	"top": {"pinned":true, "visible":true, "dwell":0.0, "leave":0.0},

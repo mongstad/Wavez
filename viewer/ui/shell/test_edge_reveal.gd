@@ -77,10 +77,10 @@ func run() -> void:
 		edge.set_pinned(side,true)
 		check(edge.states[side].visible and edge.pins[side].button_pressed,side+" pin immediately persists")
 		check(science() == original and viewer.committed_sample == sample,side+" preserves scientific state and clock")
-	# Owner review: top/bottom accept an extra 5px, with deliberate dwell retained.
+	# Owner review: all three edges accept 10px, with deliberate dwell retained.
 	for side in ["top","bottom","right"]:
 		var extent := root.get_visible_rect().size
-		var width: float = 3.0 if side == "right" else 8.0
+		var width := 10.0
 		var inside_point: Vector2 = {"top":Vector2(500,width),"bottom":Vector2(500,extent.y-width),"right":Vector2(extent.x-width,300)}[side]
 		var outside_point: Vector2 = inside_point + {"top":Vector2(0,1),"bottom":Vector2(0,-1),"right":Vector2(-1,0)}[side]
 		edge.set_pinned(side,false)

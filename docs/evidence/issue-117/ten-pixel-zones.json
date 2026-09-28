@@ -1,0 +1,31 @@
+{
+  "review_change": "Top, bottom and right reveal zones all set to 10 logical pixels.",
+  "forward_plus": {
+    "checks": 114,
+    "dwell_seconds": 0.5,
+    "failures": [],
+    "hide_grace_seconds": 0.35,
+    "renderer": "forward_plus",
+    "right_zone_pixels": 10.0,
+    "top_bottom_zone_pixels": 10.0,
+    "source_hashes_unchanged": {
+      "invalid.ssc": "85b88a0128bebf2b8c2c6e7b9030e49cbbb83f2f60ec834420eaade3db477d90",
+      "replacement.ssc": "d369af731a04be0361b64592dcb8bc30664b581636b2a455d188758a48dfc097",
+      "scene.ssc": "d8816963ca1f3e02d4b45fb0216cf8c2ab4112cc9469ccb178076daccbbf32eb"
+    }
+  },
+  "gl_compatibility": {
+    "checks": 114,
+    "dwell_seconds": 0.5,
+    "failures": [],
+    "hide_grace_seconds": 0.35,
+    "renderer": "gl_compatibility",
+    "right_zone_pixels": 10.0,
+    "top_bottom_zone_pixels": 10.0,
+    "source_hashes_unchanged": {
+      "invalid.ssc": "85b88a0128bebf2b8c2c6e7b9030e49cbbb83f2f60ec834420eaade3db477d90",
+      "replacement.ssc": "69f052fe56ed7983e2117e49c0646608aa025f8d8b1eea70e9cbda93fb705474",
+      "scene.ssc": "549337038e98eb153f6b2ac23f1c44da53af564baa0c0cfa0d8a23e0322e6807"
+    }
+  }
+}
