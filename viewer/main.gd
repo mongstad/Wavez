@@ -175,7 +175,8 @@ func _ready() -> void:
 	else:
 		status_label.text = "No capture loaded. Open a SIMSCP4 scene (.ssc)."
 	for arg in args:
-		if arg.begins_with("--inspection="): _load_inspection(arg.trim_prefix("--inspection="))
+		if arg.begins_with("--inspection="): _load_scientific_inspection(arg.trim_prefix("--inspection="))
+		if arg.begins_with("--view-preset="): _load_inspection(arg.trim_prefix("--view-preset="))
 
 func _build_world() -> void:
 	var world_env := WorldEnvironment.new()
@@ -1637,17 +1638,20 @@ func _copy_inspection_state() -> void:
 	status_label.text = "Copied versioned inspection JSON with committed sample and capture identity."
 
 func _show_recipe_dialog(saving: bool) -> void:
-	if frame_a == null: status_label.text = "Open the capture first."; return
+	if generic_reader == null: status_label.text = "Open a capture first."; return
 	if recipe_dialog == null:
 		recipe_dialog = FileDialog.new(); recipe_dialog.access = FileDialog.ACCESS_FILESYSTEM
-		recipe_dialog.filters = PackedStringArray(["*.json ; SimScope inspection recipe"])
+		recipe_dialog.use_native_dialog = true
+		recipe_dialog.filters = PackedStringArray(["*.json ; SimScope view preset"])
 		recipe_dialog.file_selected.connect(func(path: String):
 			if recipe_saving: _save_inspection(path)
-			else: _load_inspection(path))
+			else: _load_inspection(path)
+			if shell != null:shell.show_details("View preset",status_label.text))
 		add_child(recipe_dialog)
 	recipe_saving = saving
 	recipe_dialog.file_mode = FileDialog.FILE_MODE_SAVE_FILE if saving else FileDialog.FILE_MODE_OPEN_FILE
-	recipe_dialog.title = "Save inspection recipe" if saving else "Load recipe for the open capture"
+	recipe_dialog.title = "Save view preset" if saving else "Load view preset"
+	if saving:recipe_dialog.current_file = "view-preset.json"
 	recipe_dialog.popup_centered_ratio(.65)
 
 func _read_small_json(path: String):
@@ -1656,28 +1660,44 @@ func _read_small_json(path: String):
 	return JSON.parse_string(file.get_as_text())
 
 func _save_inspection(path: String) -> Error:
-	if selection_controller != null and not selection_controller.state.definitions.is_empty():
-		selection_controller.temporal.durable.save_to(path.get_basename()+".inspection")
-		status_label.text = selection_controller.temporal.durable.status.text
-		return OK
-	if scene_layers != null: _refresh_frame_count()
-	if frame_a == null: return ERR_UNAVAILABLE
-	var state := Inspection.snapshot(self)
-	if state.is_empty(): status_label.text = "Source changed during inspection; retry when stable."; return ERR_BUSY
-	var result: Error = preload("res://video/render_job.gd").write_json(path,state)
-	status_label.text = "Saved inspection " + path if result == OK else "Could not save inspection."
-	return result
+	var Preset = preload("res://scene/view_preset.gd")
+	if generic_reader == null:status_label.text = "Open a capture before saving a view preset.";return ERR_UNAVAILABLE
+	if path.simplify_path() == capture_path.simplify_path():status_label.text = "Choose a preset filename distinct from the open capture.";return ERR_INVALID_PARAMETER
+	if path.get_extension().to_lower() != "json":status_label.text = "Choose a .json filename for the view preset.";return ERR_INVALID_PARAMETER
+	var data := Preset.snapshot(self)
+	var text := JSON.stringify(data,"\t",true,true)
+	if text.to_utf8_buffer().size() > Preset.MAX_BYTES:status_label.text = "View preset exceeds the 64 KiB limit.";return ERR_OUT_OF_MEMORY
+	var temporary := path+".partial-%d-%d" % [OS.get_process_id(),Time.get_ticks_usec()]
+	var file := FileAccess.open(temporary,FileAccess.WRITE)
+	if file == null:status_label.text = "Could not save view preset. Choose a writable folder.";return FileAccess.get_open_error()
+	file.store_string(text);file.flush();var problem := file.get_error();file.close()
+	if problem == OK:problem = DirAccess.rename_absolute(temporary,path)
+	if problem != OK:DirAccess.remove_absolute(temporary)
+	status_label.text = "Saved view preset: "+path if problem == OK else "Could not save view preset (%s). Check the destination and free space." % error_string(problem)
+	return problem
 
 func _load_inspection(path: String) -> String:
+	if inspection_busy:status_label.text = "Finish the current image capture before loading a view preset.";return status_label.text
+	var Preset = preload("res://scene/view_preset.gd")
+	if generic_reader == null:status_label.text = "Open a capture before loading a view preset.";return status_label.text
+	var file := FileAccess.open(path,FileAccess.READ)
+	if file == null or file.get_length() > Preset.MAX_BYTES:status_label.text = "Missing or oversized view preset (maximum 64 KiB).";return status_label.text
+	var parser := JSON.new();var parse_error := parser.parse(file.get_as_text());file.close()
+	if parse_error != OK:status_label.text = "Malformed view preset JSON: "+parser.get_error_message();return status_label.text
+	var recipe = parser.data
+	var result := Preset.apply(self,recipe)
+	status_label.text = result.error if not result.error.is_empty() else "Loaded view preset."+(" Skipped: "+", ".join(result.skipped) if not result.skipped.is_empty() else "")
+	return result.error
+
+# Explicit scientific CLI/sidecar workflow; never called by the ordinary preset UI.
+func _load_scientific_inspection(path: String) -> void:
 	var recipe = _read_small_json(path)
-	if not recipe is Dictionary: status_label.text = "Invalid or oversized inspection JSON."; return status_label.text
+	if not recipe is Dictionary:status_label.text = "Invalid or oversized inspection JSON.";return
 	if recipe.get("version") == 3 and selection_controller != null:
 		selection_controller.temporal.durable.load_from(path)
-		status_label.text = selection_controller.temporal.durable.status.text
-		return status_label.text
-	var invalid := Inspection.restore(self,recipe)
-	status_label.text = "Restored inspection; playback paused." if invalid.is_empty() else invalid
-	return invalid
+		status_label.text = selection_controller.temporal.durable.status.text;return
+	var problem := Inspection.restore(self,recipe)
+	status_label.text = "Restored scientific inspection; playback paused." if problem.is_empty() else problem
 
 func _capture_inspection_png(path: String, with_state: bool) -> Error:
 	if with_state and selection_controller != null and not selection_controller.state.definitions.is_empty():return await selection_controller.temporal.durable.capture_to(path)

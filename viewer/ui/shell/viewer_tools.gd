@@ -88,9 +88,9 @@ func open(title: String) -> void:
 	current = title
 	selection_shape();selection_predicate()
 	var body := form(title)
-	if title in ["Data","Save analysis","Save scene","Load scene","Load analysis"]:
+	if title in ["Data","Save analysis","Load analysis"]:
 		body = state_body
-		for key in durable_controls: durable_controls[key].visible = key == title or key == "shared" or (key == "results" and title in ["Save analysis","Save scene"]) or (key == "members" and title == "Data")
+		for key in durable_controls: durable_controls[key].visible = key == title or key == "shared" or (key == "results" and title == "Save analysis") or (key == "members" and title == "Data")
 	if title in ["Diagnostics","Compare","Period","Bookmarks"]:
 		for control in reversed_shared():
 			control.reparent(body); body.move_child(control,0)
@@ -133,7 +133,7 @@ func finish_static() -> void:
 	var first: int = temporal.result_list.get_index()-1
 	for child in temporal.panel.get_children().slice(first): child.reparent(form("Results"))
 	viewer._button(form("Results"),"Recompute",temporal.durable.recompute)
-	# Request limits are a single control set consumed by scene/analysis/data operations.
+	# Resource limits belong only to the separate analysis/data operations.
 	state_body = temporal.durable.panel
 	var shared := VBoxContainer.new(); state_body.add_child(shared)
 	for child in state_body.get_children():
@@ -154,8 +154,6 @@ func finish_static() -> void:
 	for pair in [["members",temporal.durable.include_members],["results",temporal.durable.bundle_results]]:
 		pair[1].reparent(state_body); durable_controls[pair[0]] = pair[1]
 	durable_controls.shared = shared
-	durable_controls["Save scene"] = viewer._button(state_body,"Save",viewer._show_recipe_dialog.bind(true))
-	durable_controls["Load scene"] = viewer._button(state_body,"Load",viewer._show_recipe_dialog.bind(false))
 	for title in ["Mapping","Quick setup","Derive range","Slice","Clipping","Isosurface","Source probe","Performance","Geometry","Camera"]: form(title)
 
 	compose_tasks()

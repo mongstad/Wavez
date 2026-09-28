@@ -1,0 +1,1163 @@
+{
+  "issue": 138,
+  "baseline_commit": "26b680065f5a05796622156fbc943c182d72759d",
+  "candidate": "v0.1.0.5",
+  "owner_acceptance": "pending",
+  "baseline_production": {
+    "load_message": "",
+    "load_ms": 339683.132,
+    "load_profile": {
+      "counters": {
+        "g3_particle_pair_changes": 2,
+        "identity_bytes": 125950754101,
+        "identity_hash_calls": 1,
+        "scalar_cache_hit": 7,
+        "scalar_cache_miss": 2
+      },
+      "stages": {
+        "buffer_submit": {
+          "count": 6,
+          "max_ms": 0.266,
+          "mean_ms": 0.246666666666667,
+          "p50_ms": 0.255,
+          "p95_ms": 0.266,
+          "samples_collected": 6,
+          "total_ms": 1.48
+        },
+        "data_guide_cpu": {
+          "count": 1,
+          "max_ms": 0.002,
+          "mean_ms": 0.002,
+          "p50_ms": 0.002,
+          "p95_ms": 0.002,
+          "samples_collected": 1,
+          "total_ms": 0.002
+        },
+        "g3_cache_lookup": {
+          "count": 10,
+          "max_ms": 0.048,
+          "mean_ms": 0.0296,
+          "p50_ms": 0.028,
+          "p95_ms": 0.048,
+          "samples_collected": 10,
+          "total_ms": 0.296
+        },
+        "g3_layer_refresh": {
+          "count": 3,
+          "max_ms": 2.781,
+          "mean_ms": 2.60333333333333,
+          "p50_ms": 2.648,
+          "p95_ms": 2.781,
+          "samples_collected": 3,
+          "total_ms": 7.81
+        },
+        "g3_particle_frame_conversion": {
+          "count": 2,
+          "max_ms": 0.344,
+          "mean_ms": 0.2795,
+          "p50_ms": 0.344,
+          "p95_ms": 0.344,
+          "samples_collected": 2,
+          "total_ms": 0.559
+        },
+        "g3_particle_pair_rebuild": {
+          "count": 2,
+          "max_ms": 28.162,
+          "mean_ms": 27.6735,
+          "p50_ms": 28.162,
+          "p95_ms": 28.162,
+          "samples_collected": 2,
+          "total_ms": 55.347
+        },
+        "g3_read_sample": {
+          "count": 10,
+          "max_ms": 2.641,
+          "mean_ms": 2.2454,
+          "p50_ms": 2.243,
+          "p95_ms": 2.641,
+          "samples_collected": 10,
+          "total_ms": 22.454
+        },
+        "g3_reader_refresh": {
+          "count": 13,
+          "max_ms": 2.766,
+          "mean_ms": 2.29369230769231,
+          "p50_ms": 2.226,
+          "p95_ms": 2.766,
+          "samples_collected": 13,
+          "total_ms": 29.818
+        },
+        "g3_requested_descriptor": {
+          "count": 1,
+          "max_ms": 0.003,
+          "mean_ms": 0.003,
+          "p50_ms": 0.003,
+          "p95_ms": 0.003,
+          "samples_collected": 1,
+          "total_ms": 0.003
+        },
+        "g3_sample": {
+          "count": 3,
+          "max_ms": 54.436,
+          "mean_ms": 40.6893333333333,
+          "p50_ms": 52.21,
+          "p95_ms": 54.436,
+          "samples_collected": 3,
+          "total_ms": 122.068
+        },
+        "g3_source_stamp": {
+          "count": 13,
+          "max_ms": 2.742,
+          "mean_ms": 2.284,
+          "p50_ms": 2.216,
+          "p95_ms": 2.742,
+          "samples_collected": 13,
+          "total_ms": 29.692
+        },
+        "hud_cpu": {
+          "count": 3,
+          "max_ms": 0.053,
+          "mean_ms": 0.0353333333333333,
+          "p50_ms": 0.028,
+          "p95_ms": 0.053,
+          "samples_collected": 3,
+          "total_ms": 0.106
+        },
+        "identity_hash": {
+          "count": 1,
+          "max_ms": 339494.08,
+          "mean_ms": 339494.08,
+          "p50_ms": 339494.08,
+          "p95_ms": 339494.08,
+          "samples_collected": 1,
+          "total_ms": 339494.08
+        },
+        "identity_match": {
+          "count": 2,
+          "max_ms": 10.522,
+          "mean_ms": 10.17,
+          "p50_ms": 10.522,
+          "p95_ms": 10.522,
+          "samples_collected": 2,
+          "total_ms": 20.34
+        },
+        "interpolation_pack": {
+          "count": 3,
+          "max_ms": 7.612,
+          "mean_ms": 7.44366666666667,
+          "p50_ms": 7.368,
+          "p95_ms": 7.612,
+          "samples_collected": 3,
+          "total_ms": 22.331
+        },
+        "interpolation_submission_inclusive": {
+          "count": 4,
+          "max_ms": 52.221,
+          "mean_ms": 23.95925,
+          "p50_ms": 18.209,
+          "p95_ms": 52.221,
+          "samples_collected": 4,
+          "total_ms": 95.837
+        },
+        "normalization_ranges": {
+          "count": 3,
+          "max_ms": 0.009,
+          "mean_ms": 0.00633333333333333,
+          "p50_ms": 0.005,
+          "p95_ms": 0.009,
+          "samples_collected": 3,
+          "total_ms": 0.019
+        },
+        "position_decode": {
+          "count": 4,
+          "max_ms": 0.173,
+          "mean_ms": 0.13275,
+          "p50_ms": 0.155,
+          "p95_ms": 0.173,
+          "samples_collected": 4,
+          "total_ms": 0.531
+        },
+        "shader_uniforms_cpu": {
+          "count": 2,
+          "max_ms": 0.016,
+          "mean_ms": 0.0135,
+          "p50_ms": 0.016,
+          "p95_ms": 0.016,
+          "samples_collected": 2,
+          "total_ms": 0.027
+        },
+        "style_inclusive": {
+          "count": 3,
+          "max_ms": 23.905,
+          "mean_ms": 23.6566666666667,
+          "p50_ms": 23.767,
+          "p95_ms": 23.905,
+          "samples_collected": 3,
+          "total_ms": 70.97
+        },
+        "style_particle_pack": {
+          "count": 3,
+          "max_ms": 22.706,
+          "mean_ms": 22.494,
+          "p50_ms": 22.585,
+          "p95_ms": 22.706,
+          "samples_collected": 3,
+          "total_ms": 67.482
+        },
+        "trails_inclusive": {
+          "count": 3,
+          "max_ms": 4.479,
+          "mean_ms": 3.93833333333333,
+          "p50_ms": 3.775,
+          "p95_ms": 4.479,
+          "samples_collected": 3,
+          "total_ms": 11.815
+        },
+        "ui_controls_cpu": {
+          "count": 1,
+          "max_ms": 0.049,
+          "mean_ms": 0.049,
+          "p50_ms": 0.049,
+          "p95_ms": 0.049,
+          "samples_collected": 1,
+          "total_ms": 0.049
+        },
+        "ui_mapping_inclusive": {
+          "count": 3,
+          "max_ms": 0.276,
+          "mean_ms": 0.15,
+          "p50_ms": 0.095,
+          "p95_ms": 0.276,
+          "samples_collected": 3,
+          "total_ms": 0.45
+        }
+      }
+    },
+    "save_error": 0,
+    "save_ms": 350798.567,
+    "save_profile": {
+      "counters": {
+        "identity_bytes": 125950754101,
+        "identity_hash_calls": 1,
+        "scalar_cache_hit": 1
+      },
+      "stages": {
+        "g3_layer_refresh": {
+          "count": 1,
+          "max_ms": 2.712,
+          "mean_ms": 2.712,
+          "p50_ms": 2.712,
+          "p95_ms": 2.712,
+          "samples_collected": 1,
+          "total_ms": 2.712
+        },
+        "g3_reader_refresh": {
+          "count": 1,
+          "max_ms": 2.703,
+          "mean_ms": 2.703,
+          "p50_ms": 2.703,
+          "p95_ms": 2.703,
+          "samples_collected": 1,
+          "total_ms": 2.703
+        },
+        "g3_source_stamp": {
+          "count": 1,
+          "max_ms": 2.683,
+          "mean_ms": 2.683,
+          "p50_ms": 2.683,
+          "p95_ms": 2.683,
+          "samples_collected": 1,
+          "total_ms": 2.683
+        },
+        "identity_hash": {
+          "count": 1,
+          "max_ms": 350785.671,
+          "mean_ms": 350785.671,
+          "p50_ms": 350785.671,
+          "p95_ms": 350785.671,
+          "samples_collected": 1,
+          "total_ms": 350785.671
+        },
+        "index_refresh_inclusive": {
+          "count": 1,
+          "max_ms": 2.718,
+          "mean_ms": 2.718,
+          "p50_ms": 2.718,
+          "p95_ms": 2.718,
+          "samples_collected": 1,
+          "total_ms": 2.718
+        },
+        "scalar_derivation": {
+          "count": 1,
+          "max_ms": 5.089,
+          "mean_ms": 5.089,
+          "p50_ms": 5.089,
+          "p95_ms": 5.089,
+          "samples_collected": 1,
+          "total_ms": 5.089
+        }
+      }
+    },
+    "source": "/home/Nozba/Codex/SIMSCOPE/case_D_SIMSCP4_D192_T200_20260926_230101/SIMSCP4_D192_T200_simscope.ssc"
+  },
+  "baseline_small": {
+    "checks": 2697,
+    "failures": []
+  },
+  "baseline_reopen_different": {
+    "/tmp/simscope-138-forward-final/different.ssc": "Scene source identity mismatch; no state applied.",
+    "/tmp/simscope-138-old-roundtrip/scene.ssc": ""
+  },
+  "reports": {
+    "preset_forward": {
+      "bytes": 2083,
+      "checks": 814,
+      "failures": [],
+      "fields": {
+        "kind": "simscope-view-preset",
+        "settings": {
+          "camera": {
+            "far": 1000.0,
+            "fov": 55.0,
+            "keep_aspect": 1,
+            "near": 0.0500000007450581
+          },
+          "environment": {
+            "background_color": [
+              0.00100000004749745,
+              0.00100000004749745,
+              0.0031999999191612,
+              1.0
+            ],
+            "background_mode": 2,
+            "fog_density": 0.0199999995529652,
+            "fog_enabled": true,
+            "glow_bloom": 0.239999994635582,
+            "glow_enabled": true,
+            "glow_intensity": 1.35000002384186,
+            "glow_strength": 1.54999995231628,
+            "tonemap_exposure": 1.0,
+            "tonemap_mode": 3,
+            "tonemap_white": 1.0
+          },
+          "mesh": {
+            "colormap": "viridis",
+            "legend": false,
+            "lower": -2.0,
+            "upper": 2.0,
+            "wireframe": true
+          },
+          "particles": {
+            "clamp_map": true,
+            "colormap_name": "plasma",
+            "cyclic": false,
+            "invert_map": false,
+            "logarithmic": false,
+            "manual_max": 1.0,
+            "manual_min": 0.0,
+            "normalization_mode": "frame",
+            "show_legend": true
+          },
+          "quality": {
+            "msaa_3d": 0,
+            "scaling_3d_scale": 1.0,
+            "screen_space_aa": 0,
+            "use_debanding": false,
+            "use_taa": false
+          },
+          "view": {
+            "brightness_scale": 1.0,
+            "camera_distance": 9.0,
+            "camera_target": [
+              2.0,
+              3.0,
+              4.0
+            ],
+            "camera_transform": [
+              [
+                0.877582550048828,
+                0.0,
+                -0.479425549507141
+              ],
+              [
+                0.0952471494674683,
+                0.9800665974617,
+                0.174348741769791
+              ],
+              [
+                0.469868957996368,
+                -0.198669329285622,
+                0.860089361667633
+              ],
+              [
+                6.22882080078125,
+                1.21197605133057,
+                11.7408046722412
+              ]
+            ],
+            "clean_view": false,
+            "exposure": 1.7,
+            "free_camera": false,
+            "gamma": 1.0,
+            "orbit_enabled": false,
+            "orbit_speed": 0.08,
+            "pitch": -0.2,
+            "point_scale": 1.25,
+            "starfield_visible": true,
+            "yaw": 0.5
+          },
+          "volume": {
+            "colormap": "viridis",
+            "legend": true,
+            "lower": 0.1,
+            "normalization": "linear",
+            "opacity": 0.7,
+            "opacity_lower": 0.2,
+            "opacity_mode": "magnitude",
+            "opacity_upper": 4.0,
+            "step": 0.75,
+            "upper": 5.0
+          }
+        },
+        "version": 1
+      },
+      "file_selected_callback_ms": 1.952,
+      "frame_gaps_ms": {
+        "count": 74,
+        "median": 6.848000000000001,
+        "maximum": 78.614
+      },
+      "memory_static": 103670466,
+      "production": false,
+      "renderer": "forward_plus",
+      "timings": [
+        {
+          "five_frames_ms": 13.59,
+          "load_apply_ms": 20.007,
+          "save_callback_ms": 0.231,
+          "save_total_ms": 0.231
+        },
+        {
+          "five_frames_ms": 21.534,
+          "load_apply_ms": 11.95,
+          "save_callback_ms": 0.276,
+          "save_total_ms": 0.276
+        },
+        {
+          "five_frames_ms": 22.343,
+          "load_apply_ms": 11.423,
+          "save_callback_ms": 0.228,
+          "save_total_ms": 0.228
+        },
+        {
+          "five_frames_ms": 22.158,
+          "load_apply_ms": 11.559,
+          "save_callback_ms": 0.227,
+          "save_total_ms": 0.227
+        },
+        {
+          "five_frames_ms": 21.577,
+          "load_apply_ms": 12.134,
+          "save_callback_ms": 0.239,
+          "save_total_ms": 0.239
+        },
+        {
+          "five_frames_ms": 21.587,
+          "load_apply_ms": 12.115,
+          "save_callback_ms": 0.216,
+          "save_total_ms": 0.216
+        },
+        {
+          "five_frames_ms": 22.175,
+          "load_apply_ms": 11.592,
+          "save_callback_ms": 0.222,
+          "save_total_ms": 0.222
+        },
+        {
+          "five_frames_ms": 21.601,
+          "load_apply_ms": 12.197,
+          "save_callback_ms": 0.231,
+          "save_total_ms": 0.231
+        },
+        {
+          "five_frames_ms": 21.604,
+          "load_apply_ms": 11.959,
+          "save_callback_ms": 0.243,
+          "save_total_ms": 0.243
+        },
+        {
+          "five_frames_ms": 22.384,
+          "load_apply_ms": 11.395,
+          "save_callback_ms": 0.221,
+          "save_total_ms": 0.221
+        },
+        {
+          "five_frames_ms": 21.994,
+          "load_apply_ms": 11.782,
+          "save_callback_ms": 0.226,
+          "save_total_ms": 0.226
+        },
+        {
+          "five_frames_ms": 22.247,
+          "load_apply_ms": 11.61,
+          "save_callback_ms": 0.19,
+          "save_total_ms": 0.19
+        }
+      ],
+      "source_hashes_unchanged": {
+        "particles.ssc": "29b8aca17b7aad81f895e777cb4dbd2be28a1fec86100f78b353633375c14f08",
+        "different.ssc": "fad9e6e2fa631b5d33927234e435a9de9ae760df158bdadf4fecb3ab1017754a",
+        "scene.ssc": "0e7bc1a24d8e87b9d9c396b994c527ad001283aa46b29853f2503aef504634ea"
+      },
+      "production_stat_unchanged": false,
+      "rss_peak": 689242112,
+      "cpu_seconds": 1.97,
+      "total_seconds": 2.512618767999811
+    },
+    "preset_compatibility": {
+      "bytes": 2083,
+      "checks": 754,
+      "failures": [],
+      "fields": {
+        "kind": "simscope-view-preset",
+        "settings": {
+          "camera": {
+            "far": 1000.0,
+            "fov": 55.0,
+            "keep_aspect": 1,
+            "near": 0.0500000007450581
+          },
+          "environment": {
+            "background_color": [
+              0.00100000004749745,
+              0.00100000004749745,
+              0.0031999999191612,
+              1.0
+            ],
+            "background_mode": 2,
+            "fog_density": 0.0199999995529652,
+            "fog_enabled": true,
+            "glow_bloom": 0.239999994635582,
+            "glow_enabled": true,
+            "glow_intensity": 1.35000002384186,
+            "glow_strength": 1.54999995231628,
+            "tonemap_exposure": 1.0,
+            "tonemap_mode": 3,
+            "tonemap_white": 1.0
+          },
+          "mesh": {
+            "colormap": "viridis",
+            "legend": false,
+            "lower": -2.0,
+            "upper": 2.0,
+            "wireframe": true
+          },
+          "particles": {
+            "clamp_map": true,
+            "colormap_name": "plasma",
+            "cyclic": false,
+            "invert_map": false,
+            "logarithmic": false,
+            "manual_max": 1.0,
+            "manual_min": 0.0,
+            "normalization_mode": "frame",
+            "show_legend": true
+          },
+          "quality": {
+            "msaa_3d": 0,
+            "scaling_3d_scale": 1.0,
+            "screen_space_aa": 0,
+            "use_debanding": false,
+            "use_taa": false
+          },
+          "view": {
+            "brightness_scale": 1.0,
+            "camera_distance": 9.0,
+            "camera_target": [
+              2.0,
+              3.0,
+              4.0
+            ],
+            "camera_transform": [
+              [
+                0.877582550048828,
+                0.0,
+                -0.479425549507141
+              ],
+              [
+                0.0952471494674683,
+                0.9800665974617,
+                0.174348741769791
+              ],
+              [
+                0.469868957996368,
+                -0.198669329285622,
+                0.860089361667633
+              ],
+              [
+                6.22882080078125,
+                1.21197605133057,
+                11.7408046722412
+              ]
+            ],
+            "clean_view": false,
+            "exposure": 1.7,
+            "free_camera": false,
+            "gamma": 1.0,
+            "orbit_enabled": false,
+            "orbit_speed": 0.08,
+            "pitch": -0.2,
+            "point_scale": 1.25,
+            "starfield_visible": true,
+            "yaw": 0.5
+          },
+          "volume": {
+            "colormap": "viridis",
+            "legend": true,
+            "lower": 0.1,
+            "normalization": "linear",
+            "opacity": 0.7,
+            "opacity_lower": 0.2,
+            "opacity_mode": "magnitude",
+            "opacity_upper": 4.0,
+            "step": 0.75,
+            "upper": 5.0
+          }
+        },
+        "version": 1
+      },
+      "file_selected_callback_ms": 2.155,
+      "frame_gaps_ms": {
+        "count": 74,
+        "median": 6.8555,
+        "maximum": 75.017
+      },
+      "memory_static": 82153622,
+      "production": false,
+      "renderer": "gl_compatibility",
+      "timings": [
+        {
+          "five_frames_ms": 23.845,
+          "load_apply_ms": 13.993,
+          "save_callback_ms": 0.247,
+          "save_total_ms": 0.247
+        },
+        {
+          "five_frames_ms": 22.092,
+          "load_apply_ms": 11.656,
+          "save_callback_ms": 0.246,
+          "save_total_ms": 0.246
+        },
+        {
+          "five_frames_ms": 22.95,
+          "load_apply_ms": 10.931,
+          "save_callback_ms": 0.223,
+          "save_total_ms": 0.223
+        },
+        {
+          "five_frames_ms": 20.774,
+          "load_apply_ms": 12.147,
+          "save_callback_ms": 0.219,
+          "save_total_ms": 0.219
+        },
+        {
+          "five_frames_ms": 21.825,
+          "load_apply_ms": 11.932,
+          "save_callback_ms": 0.22,
+          "save_total_ms": 0.22
+        },
+        {
+          "five_frames_ms": 22.066,
+          "load_apply_ms": 11.708,
+          "save_callback_ms": 0.233,
+          "save_total_ms": 0.233
+        },
+        {
+          "five_frames_ms": 21.94,
+          "load_apply_ms": 11.699,
+          "save_callback_ms": 0.236,
+          "save_total_ms": 0.236
+        },
+        {
+          "five_frames_ms": 22.984,
+          "load_apply_ms": 10.879,
+          "save_callback_ms": 0.214,
+          "save_total_ms": 0.214
+        },
+        {
+          "five_frames_ms": 22.369,
+          "load_apply_ms": 11.44,
+          "save_callback_ms": 0.225,
+          "save_total_ms": 0.225
+        },
+        {
+          "five_frames_ms": 21.969,
+          "load_apply_ms": 11.619,
+          "save_callback_ms": 0.252,
+          "save_total_ms": 0.252
+        },
+        {
+          "five_frames_ms": 23.175,
+          "load_apply_ms": 11.575,
+          "save_callback_ms": 0.23,
+          "save_total_ms": 0.23
+        },
+        {
+          "five_frames_ms": 22.453,
+          "load_apply_ms": 11.357,
+          "save_callback_ms": 0.216,
+          "save_total_ms": 0.216
+        }
+      ],
+      "source_hashes_unchanged": {
+        "particles.ssc": "1d102089f890898042fb8e0472edef1f1e1a15cbf5bd97564d969b41e302ebbe",
+        "different.ssc": "20a46c6c6d37457d9fe194e66761a45c7faad507c5d89ed799cf306d03813be2",
+        "scene.ssc": "b07d2cd0a627e81e5721682a97ed91429c8e7699433608390efe71b2db881e55"
+      },
+      "production_stat_unchanged": false,
+      "rss_peak": 294535168,
+      "cpu_seconds": 1.36,
+      "total_seconds": 2.2100417239998933
+    },
+    "production": {
+      "bytes": 1964,
+      "checks": 749,
+      "failures": [],
+      "fields": {
+        "kind": "simscope-view-preset",
+        "settings": {
+          "camera": {
+            "far": 1000.0,
+            "fov": 55.0,
+            "keep_aspect": 1,
+            "near": 0.0500000007450581
+          },
+          "environment": {
+            "background_color": [
+              0.00100000004749745,
+              0.00100000004749745,
+              0.0031999999191612,
+              1.0
+            ],
+            "background_mode": 2,
+            "fog_density": 0.0199999995529652,
+            "fog_enabled": true,
+            "glow_bloom": 0.239999994635582,
+            "glow_enabled": true,
+            "glow_intensity": 1.35000002384186,
+            "glow_strength": 1.54999995231628,
+            "tonemap_exposure": 1.0,
+            "tonemap_mode": 3,
+            "tonemap_white": 1.0
+          },
+          "particles": {
+            "clamp_map": true,
+            "colormap_name": "plasma",
+            "cyclic": false,
+            "invert_map": false,
+            "logarithmic": false,
+            "manual_max": 1.0,
+            "manual_min": 0.0,
+            "normalization_mode": "frame",
+            "show_legend": true
+          },
+          "quality": {
+            "msaa_3d": 0,
+            "scaling_3d_scale": 1.0,
+            "screen_space_aa": 0,
+            "use_debanding": false,
+            "use_taa": false
+          },
+          "view": {
+            "brightness_scale": 1.0,
+            "camera_distance": 9.0,
+            "camera_target": [
+              2.0,
+              3.0,
+              4.0
+            ],
+            "camera_transform": [
+              [
+                0.877582550048828,
+                0.0,
+                -0.479425549507141
+              ],
+              [
+                0.0952471494674683,
+                0.9800665974617,
+                0.174348741769791
+              ],
+              [
+                0.469868957996368,
+                -0.198669329285622,
+                0.860089361667633
+              ],
+              [
+                6.22882080078125,
+                1.21197605133057,
+                11.7408046722412
+              ]
+            ],
+            "clean_view": false,
+            "exposure": 1.7,
+            "free_camera": false,
+            "gamma": 1.0,
+            "orbit_enabled": false,
+            "orbit_speed": 0.08,
+            "pitch": -0.2,
+            "point_scale": 1.25,
+            "starfield_visible": true,
+            "yaw": 0.5
+          },
+          "volume": {
+            "colormap": "viridis",
+            "legend": true,
+            "lower": 0.1,
+            "normalization": "linear",
+            "opacity": 0.7,
+            "opacity_lower": 0.2,
+            "opacity_mode": "magnitude",
+            "opacity_upper": 4.0,
+            "step": 0.75,
+            "upper": 5.0
+          }
+        },
+        "version": 1
+      },
+      "file_selected_callback_ms": 1.985,
+      "frame_gaps_ms": {
+        "count": 59,
+        "median": 3.284,
+        "maximum": 91.53
+      },
+      "memory_static": 219520076,
+      "production": true,
+      "renderer": "forward_plus",
+      "timings": [
+        {
+          "five_frames_ms": 16.843,
+          "load_apply_ms": 86.079,
+          "save_callback_ms": 0.218,
+          "save_total_ms": 0.218
+        },
+        {
+          "five_frames_ms": 17.537,
+          "load_apply_ms": 85.68,
+          "save_callback_ms": 0.227,
+          "save_total_ms": 0.227
+        },
+        {
+          "five_frames_ms": 16.89,
+          "load_apply_ms": 86.208,
+          "save_callback_ms": 0.235,
+          "save_total_ms": 0.235
+        },
+        {
+          "five_frames_ms": 18.752,
+          "load_apply_ms": 84.341,
+          "save_callback_ms": 0.279,
+          "save_total_ms": 0.279
+        },
+        {
+          "five_frames_ms": 11.236,
+          "load_apply_ms": 84.842,
+          "save_callback_ms": 0.23,
+          "save_total_ms": 0.23
+        },
+        {
+          "five_frames_ms": 18.7,
+          "load_apply_ms": 84.232,
+          "save_callback_ms": 0.316,
+          "save_total_ms": 0.316
+        },
+        {
+          "five_frames_ms": 17.158,
+          "load_apply_ms": 85.801,
+          "save_callback_ms": 0.281,
+          "save_total_ms": 0.281
+        },
+        {
+          "five_frames_ms": 16.416,
+          "load_apply_ms": 86.505,
+          "save_callback_ms": 0.239,
+          "save_total_ms": 0.239
+        },
+        {
+          "five_frames_ms": 12.962,
+          "load_apply_ms": 83.359,
+          "save_callback_ms": 0.233,
+          "save_total_ms": 0.233
+        },
+        {
+          "five_frames_ms": 12.833,
+          "load_apply_ms": 83.459,
+          "save_callback_ms": 0.242,
+          "save_total_ms": 0.242
+        },
+        {
+          "five_frames_ms": 12.071,
+          "load_apply_ms": 83.984,
+          "save_callback_ms": 0.218,
+          "save_total_ms": 0.218
+        },
+        {
+          "five_frames_ms": 15.396,
+          "load_apply_ms": 87.759,
+          "save_callback_ms": 0.299,
+          "save_total_ms": 0.299
+        }
+      ],
+      "source_hashes_unchanged": {
+        "particles.ssc": "c9dd0b4acb19ef2cc2024e5c707c6096f85b989a355fa18381ebbee02efc0d40",
+        "different.ssc": "c756998004466b3483fd7c76624af0001c4db40030a2d6e7712554189b7f0b3c",
+        "scene.ssc": "6a188d6894babc6130ec2e537cff5cb175e2cdd181f0f189c1e5babb051e300c"
+      },
+      "production_stat_unchanged": true,
+      "rss_peak": 983072768,
+      "cpu_seconds": 3.14,
+      "total_seconds": 3.5673790439996083
+    },
+    "shell_forward": {
+      "checks": 682,
+      "failures": [],
+      "layouts": [
+        {
+          "bar": "(1440.0, 48.0)",
+          "dock": "[P: (1080.0, 48.0), S: (360.0, 748.0)]",
+          "logical": "(1440, 900)",
+          "scale": 1.0
+        },
+        {
+          "bar": "(1920.0, 48.0)",
+          "dock": "[P: (1560.0, 48.0), S: (360.0, 928.0)]",
+          "logical": "(1920, 1080)",
+          "scale": 1.0
+        },
+        {
+          "bar": "(1024.0, 48.0)",
+          "dock": "[P: (704.0, 48.0), S: (320.0, 448.0)]",
+          "logical": "(1024, 640)",
+          "scale": 1.0
+        },
+        {
+          "bar": "(1024.0, 48.0)",
+          "dock": "[P: (704.0, 48.0), S: (320.0, 448.0)]",
+          "logical": "(1024, 640)",
+          "scale": 1.25
+        },
+        {
+          "bar": "(1024.0, 48.0)",
+          "dock": "[P: (704.0, 48.0), S: (320.0, 448.0)]",
+          "logical": "(1024, 640)",
+          "scale": 1.5
+        },
+        {
+          "bar": "(1024.0, 48.0)",
+          "dock": "[P: (704.0, 48.0), S: (320.0, 448.0)]",
+          "logical": "(1024, 640)",
+          "scale": 2.0
+        }
+      ],
+      "menu_tree": [
+        "File",
+        "  Open capture",
+        "  State",
+        "    Copy state",
+        "    Save view preset\u2026",
+        "    Load view preset\u2026",
+        "    Save analysis",
+        "    Load analysis",
+        "    Resolve input",
+        "  Export",
+        "    Image",
+        "    Video",
+        "    Data",
+        "View",
+        "  Panels",
+        "  Fullscreen",
+        "  Immersive",
+        "  Global effects",
+        "  Probe marker",
+        "  Guides",
+        "    Grid and axes",
+        "    Domain",
+        "    Data bounds",
+        "    Absorber",
+        "    Imposed regions",
+        "  Viewing preset",
+        "    Cinematic",
+        "    Scientific",
+        "    Temperature",
+        "    Density",
+        "    Velocity",
+        "    Minimal",
+        "Tools",
+        "  Selection",
+        "  Analysis",
+        "    Temporal",
+        "    Space time",
+        "    Diagnostics",
+        "    Compare",
+        "    Matched runs",
+        "    Period",
+        "    Bookmarks",
+        "    Results",
+        "  Mapping",
+        "  Quick setup",
+        "  Derive range",
+        "  Slice",
+        "  Clipping",
+        "  Isosurface",
+        "  Source probe",
+        "  Performance",
+        "  Geometry",
+        "Help",
+        "  Shortcuts",
+        "  Handbook",
+        "  About SimScope"
+      ],
+      "renderer": "forward_plus",
+      "shell_scientific_activity": {
+        "counters": {},
+        "stages": {}
+      },
+      "menu_contract_matches": true,
+      "source_hashes_unchanged": {
+        "invalid.ssc": "85b88a0128bebf2b8c2c6e7b9030e49cbbb83f2f60ec834420eaade3db477d90",
+        "replacement.ssc": "51e464a0343535d270a385e31c6a2b57c97241be4056e006589cf019ae95e012",
+        "scene.ssc": "c8eadf63c94bc10d671f27690e8975e8ff34016f00e358f94d1844f6d1818952"
+      }
+    },
+    "shell_compatibility": {
+      "checks": 682,
+      "failures": [],
+      "layouts": [
+        {
+          "bar": "(1440.0, 48.0)",
+          "dock": "[P: (1080.0, 48.0), S: (360.0, 748.0)]",
+          "logical": "(1440, 900)",
+          "scale": 1.0
+        },
+        {
+          "bar": "(1920.0, 48.0)",
+          "dock": "[P: (1560.0, 48.0), S: (360.0, 928.0)]",
+          "logical": "(1920, 1080)",
+          "scale": 1.0
+        },
+        {
+          "bar": "(1024.0, 48.0)",
+          "dock": "[P: (704.0, 48.0), S: (320.0, 448.0)]",
+          "logical": "(1024, 640)",
+          "scale": 1.0
+        },
+        {
+          "bar": "(1024.0, 48.0)",
+          "dock": "[P: (704.0, 48.0), S: (320.0, 448.0)]",
+          "logical": "(1024, 640)",
+          "scale": 1.25
+        },
+        {
+          "bar": "(1024.0, 48.0)",
+          "dock": "[P: (704.0, 48.0), S: (320.0, 448.0)]",
+          "logical": "(1024, 640)",
+          "scale": 1.5
+        },
+        {
+          "bar": "(1024.0, 48.0)",
+          "dock": "[P: (704.0, 48.0), S: (320.0, 448.0)]",
+          "logical": "(1024, 640)",
+          "scale": 2.0
+        }
+      ],
+      "menu_tree": [
+        "File",
+        "  Open capture",
+        "  State",
+        "    Copy state",
+        "    Save view preset\u2026",
+        "    Load view preset\u2026",
+        "    Save analysis",
+        "    Load analysis",
+        "    Resolve input",
+        "  Export",
+        "    Image",
+        "    Video",
+        "    Data",
+        "View",
+        "  Panels",
+        "  Fullscreen",
+        "  Immersive",
+        "  Global effects",
+        "  Probe marker",
+        "  Guides",
+        "    Grid and axes",
+        "    Domain",
+        "    Data bounds",
+        "    Absorber",
+        "    Imposed regions",
+        "  Viewing preset",
+        "    Cinematic",
+        "    Scientific",
+        "    Temperature",
+        "    Density",
+        "    Velocity",
+        "    Minimal",
+        "Tools",
+        "  Selection",
+        "  Analysis",
+        "    Temporal",
+        "    Space time",
+        "    Diagnostics",
+        "    Compare",
+        "    Matched runs",
+        "    Period",
+        "    Bookmarks",
+        "    Results",
+        "  Mapping",
+        "  Quick setup",
+        "  Derive range",
+        "  Slice",
+        "  Clipping",
+        "  Isosurface",
+        "  Source probe",
+        "  Performance",
+        "  Geometry",
+        "Help",
+        "  Shortcuts",
+        "  Handbook",
+        "  About SimScope"
+      ],
+      "renderer": "gl_compatibility",
+      "shell_scientific_activity": {
+        "counters": {},
+        "stages": {}
+      },
+      "menu_contract_matches": true,
+      "source_hashes_unchanged": {
+        "invalid.ssc": "85b88a0128bebf2b8c2c6e7b9030e49cbbb83f2f60ec834420eaade3db477d90",
+        "replacement.ssc": "0082de870c9913165b0ee3fae395d5cd21d12405a32be7c10578c8715fb65c10",
+        "scene.ssc": "5c85360343786297da312fee8ba9c01bd5329fd09e2625dbec224f603a5754bb"
+      }
+    },
+    "retained_inspection": {
+      "checks": 2697,
+      "failures": [],
+      "renderer": "forward_plus",
+      "inventory_cases": 67,
+      "inventory_mismatches": []
+    },
+    "camera": {
+      "checks": 13032,
+      "failures": [],
+      "renderer": "forward_plus",
+      "source_hashes_unchanged": {
+        "mesh.ssc": "5b14e28b86df647b4e74e90c5ccd63a34d83b9fa49b4484ff3002807217dfc2b",
+        "volume.ssc": "785cf2cfb77246ddb7151c9fc44d16b049b187c3c921bcb8d452424a4d22bd78",
+        "particles.ssc": "273d1f012f2eb325567b36d294831121e4ef46f0804a02c80ea0488bb48fba7f"
+      }
+    }
+  },
+  "python_version_tests": 2,
+  "documentation_examples": 3,
+  "manual_boundary": "Native dialog configured and callbacks/cancel exercised; physical native desktop input not automated. Production unchanged size/mtime, synthetic captures unchanged hashes."
+}

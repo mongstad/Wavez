@@ -1,5 +1,9 @@
 # Native scene inspection
 
+Ordinary State → Save/Load view preset uses the separate [portable presentation
+contract](docs/VIEW_PRESETS.md). This document describes retained scientific
+inspection/sidecar and analysis-bundle APIs, not the ordinary preset workflow.
+
 Inspection operates on SIMSCP4 particles, meshes and scalar fields with independent
 source clocks. Scene recipes use version 2; G4 durable inspection uses version 3
 with exact selections, groups, analysis results, bookmarks and source provenance.

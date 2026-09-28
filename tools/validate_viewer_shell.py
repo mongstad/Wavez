@@ -36,6 +36,7 @@ def main():
     contract = (ROOT / 'docs/UX4_DESIGN.md').read_text().split('```text\n', 1)[1].split('```', 1)[0].strip().splitlines()
     contract.insert(contract.index('  Probe marker'), '  Global effects')  # #68: global Bloom destination
     contract.insert(contract.index('  Handbook') + 1, '  About SimScope')  # #96 replaces #131's temporary Version entry
+    contract = [line.replace('Save scene', 'Save view preset…').replace('Load scene', 'Load view preset…') for line in contract]
     assert report['menu_tree'] == contract, 'Runtime menu hierarchy differs from accepted UX4 contract'
     report['menu_contract_matches'] = True
     assert hashes == {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in output.glob('*.ssc')}

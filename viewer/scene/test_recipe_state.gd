@@ -152,19 +152,19 @@ func run() -> void:
 			change_session(viewer,false)
 			configure(viewer,preset,active)
 			var path := output.path_join(preset+str(active)+".json")
-			check(viewer._save_inspection(path) == OK,"save controlled v2 recipe")
+			check(preload("res://video/render_job.gd").write_json(path,Inspection.snapshot(viewer)) == OK,"save controlled v2 recipe")
 			var saved: Dictionary = viewer._read_small_json(path)
 			for cycle in range(3):
 				configure(viewer,"Cinematic" if preset == "Scientific" else "Scientific",not active)
 				change_session(viewer,true)
 				var live := session(viewer)
 				var label := "%s/%s/cycle%d" % [preset,active,cycle]
-				check(viewer._load_inspection(path).is_empty(),label+" load v2")
+				check(Inspection.restore(viewer,viewer._read_small_json(path)).is_empty(),label+" load v2")
 				compare(saved.visual,Visual.snapshot(viewer),label+" saved visual")
 				compare(live,session(viewer),label+" session untouched")
 				check_ui(viewer,saved.visual,label)
 				check(same(viewer.committed_sample.requested_time,saved.sample.requested_time),label+" saved sample time")
-				check(viewer._save_inspection(path) == OK,label+" resave")
+				check(preload("res://video/render_job.gd").write_json(path,Inspection.snapshot(viewer)) == OK,label+" resave")
 				compare(saved.visual,viewer._read_small_json(path).visual,label+" resaved payload")
 		# Partial dictionaries are accepted by the existing recipe schema.
 		var partial := Inspection.snapshot(viewer)

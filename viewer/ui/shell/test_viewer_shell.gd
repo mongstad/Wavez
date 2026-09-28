@@ -126,7 +126,8 @@ func run() -> void:
 	viewer._input(release); check(not viewer.dragging, "Release over chrome ends viewport drag")
 	# Menus expose canonical forms, not duplicate save/export models.
 	activate(shell,"Save scene"); await settle()
-	check(viewer.tools_ui.window.visible and viewer.tools_ui.current == "Save scene", "State reaches canonical scene save with shared limits")
+	check(viewer.recipe_dialog != null and viewer.recipe_dialog.file_mode == FileDialog.FILE_MODE_SAVE_FILE and viewer.recipe_dialog.use_native_dialog, "State opens the native portable preset picker directly")
+	viewer.recipe_dialog.canceled.emit();viewer.recipe_dialog.hide()
 	activate(shell,"Save analysis"); await settle()
 	check(viewer.tools_ui.content.is_ancestor_of(viewer.selection_controller.temporal.durable.quota), "Analysis state retains the existing request limits")
 	activate(shell,"data"); await settle()
@@ -147,13 +148,18 @@ func run() -> void:
 	shell.show_source(); await settle()
 	check(shell.details.visible and shell.detail_text.text.contains(viewer.capture_path), "Copyable full source details remain accessible")
 	shell.details.hide()
-	# Existing scene v2 and real worker-backed analysis v3 round trips in production shell.
-	check(viewer._save_inspection(output.path_join("scene.json")) == OK, "Production v2 save")
-	check(viewer._load_inspection(output.path_join("scene.json")).is_empty(), "Production v2 restore")
+	# Portable presets and separate worker-backed analysis bundles in the production shell.
+	check(viewer._save_inspection(output.path_join("scene.json")) == OK, "Production portable preset save")
+	check(viewer._load_inspection(output.path_join("scene.json")).is_empty(), "Production portable preset restore")
 	var control = viewer.selection_controller
 	control.bind_source(); check(await wait_jobs(control), "Production analysis source bind")
 	control._request("define_selection", {"key":"shell-test", "object":"p", "kind":"particle_ids", "selector":{"ids":["7"]}})
 	check(await wait_jobs(control), "Production exact-ID selection")
+	var selected_before: Dictionary = control.state.snapshot()
+	var serial_before: int = control.jobs.serial
+	check(viewer._save_inspection(output.path_join("with-selection.json")) == OK,"Portable save with a real scientific selection")
+	check(control.jobs.serial == serial_before and control.state.snapshot() == selected_before,"Portable save never packages or changes selections")
+	check(viewer._read_small_json(output.path_join("with-selection.json")).kind == "simscope-view-preset","Selection does not change ordinary recipe format")
 	control.temporal.durable.save_to(output.path_join("analysis.inspection"), true)
 	check(await wait_jobs(control) and control.temporal.durable.last_recipe.has("path"), "Production v3 save through canonical worker")
 	control.temporal.durable.load_from(output.path_join("analysis.inspection/inspection.json"))
