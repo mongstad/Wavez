@@ -31,3 +31,9 @@ They preserve resource identity across fresh imports and file moves; do not igno
 or regenerate existing tracked UIDs. Include the sidecar when moving or deleting
 its script/shader. Godot's `.godot/` import cache remains ignored. Before opening a
 PR, import the viewer and check `git status` for newly generated sidecars.
+
+About packages canonical licensing notices as a preloaded resource. After editing
+LICENSE, THIRD_PARTY_LICENSES.md, TRADEMARKS.md or the bundled font/colormap notices,
+run `python tools/sync_about_notices.py`, then verify with `--check`. See
+[About resources](viewer/ui/about/README.md). Do not independently edit generated
+notice text or copy externally installed runtimes into the repository.

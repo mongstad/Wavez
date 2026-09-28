@@ -1,0 +1,428 @@
+{
+  "issue": 96,
+  "baseline": "653f817ce85bbd08b02a1c586599cfc8da607043",
+  "candidate": "v0.1.0.2",
+  "date": "2026-09-28",
+  "owner_acceptance": "pending",
+  "native_checks": 1729,
+  "python_version_tests": 2,
+  "documentation_examples": 3,
+  "reports": {
+    "source_forward": {
+      "architecture": "x86_64",
+      "checks": 98,
+      "failures": [],
+      "help": [
+        "Shortcuts",
+        "Handbook",
+        "About SimScope"
+      ],
+      "layouts": [
+        {
+          "dialog": "(580, 560)",
+          "viewport": "(1440, 900)"
+        },
+        {
+          "dialog": "(580, 560)",
+          "viewport": "(1920, 1080)"
+        },
+        {
+          "dialog": "(580, 536)",
+          "viewport": "(800, 600)"
+        },
+        {
+          "dialog": "(432, 416)",
+          "viewport": "(480, 480)"
+        }
+      ],
+      "notice_sha256": {
+        "Branding": "f609fea579bd47c024fb2378b989c629ba79de80e9a86b353c79a4dd2282cbf7",
+        "Colormap notices": "dbb9ad7495a83b0f2f48c94b06e23020587d82f8d1492dcb717fb1ebc2f86c18",
+        "DejaVu font notices": "7a083b136e64d064794c3419751e5c7dd10d2f64c108fe5ba161eae5e5958a93",
+        "Godot Engine \u2014 MIT License": "b0435e3b3e4e55238f05f4b306f30524a1b2e20147810d436eaa554fa6855c80",
+        "Godot third-party notices": "1288215255d0a55623f7726ef90772926449514cb230abb76dc2a86c9a5d72dd",
+        "SimScope \u2014 PolyForm Noncommercial 1.0.0": "9ef5c30eae3a6970dbe5029e4f77d6ade72ab9c6fa72d51b7e9b229bd1d304f6",
+        "Third-party inventory": "de23bd2e267e1c96c634b839efebbaecea58e6e8de65955a59fe0eb9d32dc5ac"
+      },
+      "renderer": "forward_plus",
+      "runtime": "4.7.2-stable (official)",
+      "version": {
+        "build": "2",
+        "full": "v0.1.0.2",
+        "release": "v0.1.0"
+      },
+      "source_unchanged_sha256": "3ce8b23ebf533bd3b243299da822262151923408bcb214ce59acdf688d369c9a",
+      "packaged": false
+    },
+    "source_compat": {
+      "architecture": "x86_64",
+      "browser_result": 0,
+      "browser_url": "https://github.com/mongstad/SimScope",
+      "checks": 99,
+      "failures": [],
+      "help": [
+        "Shortcuts",
+        "Handbook",
+        "About SimScope"
+      ],
+      "layouts": [
+        {
+          "dialog": "(580, 560)",
+          "viewport": "(1440, 900)"
+        },
+        {
+          "dialog": "(580, 560)",
+          "viewport": "(1920, 1080)"
+        },
+        {
+          "dialog": "(580, 536)",
+          "viewport": "(800, 600)"
+        },
+        {
+          "dialog": "(432, 416)",
+          "viewport": "(480, 480)"
+        }
+      ],
+      "notice_sha256": {
+        "Branding": "f609fea579bd47c024fb2378b989c629ba79de80e9a86b353c79a4dd2282cbf7",
+        "Colormap notices": "dbb9ad7495a83b0f2f48c94b06e23020587d82f8d1492dcb717fb1ebc2f86c18",
+        "DejaVu font notices": "7a083b136e64d064794c3419751e5c7dd10d2f64c108fe5ba161eae5e5958a93",
+        "Godot Engine \u2014 MIT License": "b0435e3b3e4e55238f05f4b306f30524a1b2e20147810d436eaa554fa6855c80",
+        "Godot third-party notices": "1288215255d0a55623f7726ef90772926449514cb230abb76dc2a86c9a5d72dd",
+        "SimScope \u2014 PolyForm Noncommercial 1.0.0": "9ef5c30eae3a6970dbe5029e4f77d6ade72ab9c6fa72d51b7e9b229bd1d304f6",
+        "Third-party inventory": "de23bd2e267e1c96c634b839efebbaecea58e6e8de65955a59fe0eb9d32dc5ac"
+      },
+      "renderer": "gl_compatibility",
+      "runtime": "4.7.2-stable (official)",
+      "version": {
+        "build": "2",
+        "full": "v0.1.0.2",
+        "release": "v0.1.0"
+      },
+      "source_unchanged_sha256": "22e1b35fa46ecba749dd66f9753748698d0a716f9b5de5c3b5f95e2bfeb8834e",
+      "packaged": false
+    },
+    "export_forward": {
+      "architecture": "x86_64",
+      "checks": 98,
+      "failures": [],
+      "help": [
+        "Shortcuts",
+        "Handbook",
+        "About SimScope"
+      ],
+      "layouts": [
+        {
+          "dialog": "(580, 560)",
+          "viewport": "(1440, 900)"
+        },
+        {
+          "dialog": "(580, 560)",
+          "viewport": "(1920, 1080)"
+        },
+        {
+          "dialog": "(580, 536)",
+          "viewport": "(800, 600)"
+        },
+        {
+          "dialog": "(432, 416)",
+          "viewport": "(480, 480)"
+        }
+      ],
+      "notice_sha256": {
+        "Branding": "f609fea579bd47c024fb2378b989c629ba79de80e9a86b353c79a4dd2282cbf7",
+        "Colormap notices": "dbb9ad7495a83b0f2f48c94b06e23020587d82f8d1492dcb717fb1ebc2f86c18",
+        "DejaVu font notices": "7a083b136e64d064794c3419751e5c7dd10d2f64c108fe5ba161eae5e5958a93",
+        "Godot Engine \u2014 MIT License": "b0435e3b3e4e55238f05f4b306f30524a1b2e20147810d436eaa554fa6855c80",
+        "Godot third-party notices": "1288215255d0a55623f7726ef90772926449514cb230abb76dc2a86c9a5d72dd",
+        "SimScope \u2014 PolyForm Noncommercial 1.0.0": "9ef5c30eae3a6970dbe5029e4f77d6ade72ab9c6fa72d51b7e9b229bd1d304f6",
+        "Third-party inventory": "de23bd2e267e1c96c634b839efebbaecea58e6e8de65955a59fe0eb9d32dc5ac"
+      },
+      "renderer": "forward_plus",
+      "runtime": "4.7.2-stable (official)",
+      "version": {
+        "build": "2",
+        "full": "v0.1.0.2",
+        "release": "v0.1.0"
+      },
+      "source_unchanged_sha256": "bab366a9a0475211d62d749434fb2f2996d2379571480bd7f477035acbf313ba",
+      "packaged": true
+    },
+    "export_compat": {
+      "architecture": "x86_64",
+      "checks": 98,
+      "failures": [],
+      "help": [
+        "Shortcuts",
+        "Handbook",
+        "About SimScope"
+      ],
+      "layouts": [
+        {
+          "dialog": "(580, 560)",
+          "viewport": "(1440, 900)"
+        },
+        {
+          "dialog": "(580, 560)",
+          "viewport": "(1920, 1080)"
+        },
+        {
+          "dialog": "(580, 536)",
+          "viewport": "(800, 600)"
+        },
+        {
+          "dialog": "(432, 416)",
+          "viewport": "(480, 480)"
+        }
+      ],
+      "notice_sha256": {
+        "Branding": "f609fea579bd47c024fb2378b989c629ba79de80e9a86b353c79a4dd2282cbf7",
+        "Colormap notices": "dbb9ad7495a83b0f2f48c94b06e23020587d82f8d1492dcb717fb1ebc2f86c18",
+        "DejaVu font notices": "7a083b136e64d064794c3419751e5c7dd10d2f64c108fe5ba161eae5e5958a93",
+        "Godot Engine \u2014 MIT License": "b0435e3b3e4e55238f05f4b306f30524a1b2e20147810d436eaa554fa6855c80",
+        "Godot third-party notices": "1288215255d0a55623f7726ef90772926449514cb230abb76dc2a86c9a5d72dd",
+        "SimScope \u2014 PolyForm Noncommercial 1.0.0": "9ef5c30eae3a6970dbe5029e4f77d6ade72ab9c6fa72d51b7e9b229bd1d304f6",
+        "Third-party inventory": "de23bd2e267e1c96c634b839efebbaecea58e6e8de65955a59fe0eb9d32dc5ac"
+      },
+      "renderer": "gl_compatibility",
+      "runtime": "4.7.2-stable (official)",
+      "version": {
+        "build": "2",
+        "full": "v0.1.0.2",
+        "release": "v0.1.0"
+      },
+      "source_unchanged_sha256": "e7d6477fa9b0eabd232dddd5e5dcc5075bca5689147121c5ea468e4db6ac2956",
+      "packaged": true
+    },
+    "shell_forward": {
+      "checks": 668,
+      "failures": [],
+      "layouts": [
+        {
+          "bar": "(1440.0, 48.0)",
+          "dock": "[P: (1080.0, 48.0), S: (360.0, 748.0)]",
+          "logical": "(1440, 900)",
+          "scale": 1.0
+        },
+        {
+          "bar": "(1920.0, 48.0)",
+          "dock": "[P: (1560.0, 48.0), S: (360.0, 928.0)]",
+          "logical": "(1920, 1080)",
+          "scale": 1.0
+        },
+        {
+          "bar": "(1024.0, 48.0)",
+          "dock": "[P: (704.0, 48.0), S: (320.0, 448.0)]",
+          "logical": "(1024, 640)",
+          "scale": 1.0
+        },
+        {
+          "bar": "(1024.0, 48.0)",
+          "dock": "[P: (704.0, 48.0), S: (320.0, 448.0)]",
+          "logical": "(1024, 640)",
+          "scale": 1.25
+        },
+        {
+          "bar": "(1024.0, 48.0)",
+          "dock": "[P: (704.0, 48.0), S: (320.0, 448.0)]",
+          "logical": "(1024, 640)",
+          "scale": 1.5
+        },
+        {
+          "bar": "(1024.0, 48.0)",
+          "dock": "[P: (704.0, 48.0), S: (320.0, 448.0)]",
+          "logical": "(1024, 640)",
+          "scale": 2.0
+        }
+      ],
+      "menu_tree": [
+        "File",
+        "  Open capture",
+        "  State",
+        "    Copy state",
+        "    Save scene",
+        "    Load scene",
+        "    Save analysis",
+        "    Load analysis",
+        "    Resolve input",
+        "  Export",
+        "    Image",
+        "    Video",
+        "    Data",
+        "View",
+        "  Panels",
+        "  Fullscreen",
+        "  Immersive",
+        "  Global effects",
+        "  Probe marker",
+        "  Guides",
+        "    Grid and axes",
+        "    Domain",
+        "    Data bounds",
+        "    Absorber",
+        "    Imposed regions",
+        "  Viewing preset",
+        "    Cinematic",
+        "    Scientific",
+        "    Temperature",
+        "    Density",
+        "    Velocity",
+        "    Minimal",
+        "Tools",
+        "  Selection",
+        "  Analysis",
+        "    Temporal",
+        "    Space time",
+        "    Diagnostics",
+        "    Compare",
+        "    Matched runs",
+        "    Period",
+        "    Bookmarks",
+        "    Results",
+        "  Mapping",
+        "  Quick setup",
+        "  Derive range",
+        "  Slice",
+        "  Clipping",
+        "  Isosurface",
+        "  Source probe",
+        "  Performance",
+        "  Geometry",
+        "Help",
+        "  Shortcuts",
+        "  Handbook",
+        "  About SimScope"
+      ],
+      "renderer": "forward_plus",
+      "shell_scientific_activity": {
+        "counters": {},
+        "stages": {}
+      },
+      "menu_contract_matches": true,
+      "source_hashes_unchanged": {
+        "invalid.ssc": "85b88a0128bebf2b8c2c6e7b9030e49cbbb83f2f60ec834420eaade3db477d90",
+        "replacement.ssc": "a949daabd3a12ce9b401cafa6d38dca767c43642f0cc8bd3baf6650c05a8b47f",
+        "scene.ssc": "5dbad16d64c3ae5dd28bf54248e74e3fe07e9fb96a35287156a2dca98a84c621"
+      }
+    },
+    "shell_compat": {
+      "checks": 668,
+      "failures": [],
+      "layouts": [
+        {
+          "bar": "(1440.0, 48.0)",
+          "dock": "[P: (1080.0, 48.0), S: (360.0, 748.0)]",
+          "logical": "(1440, 900)",
+          "scale": 1.0
+        },
+        {
+          "bar": "(1920.0, 48.0)",
+          "dock": "[P: (1560.0, 48.0), S: (360.0, 928.0)]",
+          "logical": "(1920, 1080)",
+          "scale": 1.0
+        },
+        {
+          "bar": "(1024.0, 48.0)",
+          "dock": "[P: (704.0, 48.0), S: (320.0, 448.0)]",
+          "logical": "(1024, 640)",
+          "scale": 1.0
+        },
+        {
+          "bar": "(1024.0, 48.0)",
+          "dock": "[P: (704.0, 48.0), S: (320.0, 448.0)]",
+          "logical": "(1024, 640)",
+          "scale": 1.25
+        },
+        {
+          "bar": "(1024.0, 48.0)",
+          "dock": "[P: (704.0, 48.0), S: (320.0, 448.0)]",
+          "logical": "(1024, 640)",
+          "scale": 1.5
+        },
+        {
+          "bar": "(1024.0, 48.0)",
+          "dock": "[P: (704.0, 48.0), S: (320.0, 448.0)]",
+          "logical": "(1024, 640)",
+          "scale": 2.0
+        }
+      ],
+      "menu_tree": [
+        "File",
+        "  Open capture",
+        "  State",
+        "    Copy state",
+        "    Save scene",
+        "    Load scene",
+        "    Save analysis",
+        "    Load analysis",
+        "    Resolve input",
+        "  Export",
+        "    Image",
+        "    Video",
+        "    Data",
+        "View",
+        "  Panels",
+        "  Fullscreen",
+        "  Immersive",
+        "  Global effects",
+        "  Probe marker",
+        "  Guides",
+        "    Grid and axes",
+        "    Domain",
+        "    Data bounds",
+        "    Absorber",
+        "    Imposed regions",
+        "  Viewing preset",
+        "    Cinematic",
+        "    Scientific",
+        "    Temperature",
+        "    Density",
+        "    Velocity",
+        "    Minimal",
+        "Tools",
+        "  Selection",
+        "  Analysis",
+        "    Temporal",
+        "    Space time",
+        "    Diagnostics",
+        "    Compare",
+        "    Matched runs",
+        "    Period",
+        "    Bookmarks",
+        "    Results",
+        "  Mapping",
+        "  Quick setup",
+        "  Derive range",
+        "  Slice",
+        "  Clipping",
+        "  Isosurface",
+        "  Source probe",
+        "  Performance",
+        "  Geometry",
+        "Help",
+        "  Shortcuts",
+        "  Handbook",
+        "  About SimScope"
+      ],
+      "renderer": "gl_compatibility",
+      "shell_scientific_activity": {
+        "counters": {},
+        "stages": {}
+      },
+      "menu_contract_matches": true,
+      "source_hashes_unchanged": {
+        "invalid.ssc": "85b88a0128bebf2b8c2c6e7b9030e49cbbb83f2f60ec834420eaade3db477d90",
+        "replacement.ssc": "109f982d21a376188b0bc2d257a049fbe5529d90f677dffef99d12ef6f4cc8b3",
+        "scene.ssc": "036cc09e4d640bb5411e47f65c886b1906512d612bd6119fe8dba91a78d82acd"
+      }
+    }
+  },
+  "logo_sha256": "61de3bc7c7f6ee61bbfc5a589a7c1de57de02fc56fbb1f332ae04818c9554d03",
+  "export_method": "Temporary viewer copy with test-only autoload driving normal Main scene; no production autoload",
+  "limitations": [
+    "Linux x86_64 only",
+    "Browser dispatch returned OK; page load not observable",
+    "Missing handler injected, not system configuration changed",
+    "Shell suites precede final error scroll timing fix; focused four About runs include it"
+  ]
+}

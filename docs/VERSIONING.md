@@ -1,10 +1,11 @@
 # SimScope application version and build policy
 
-Issue #131 introduces the application identity, pending owner review. The sole
+Issue #131 established the application identity (owner-merged in PR #132). The sole
 mutable source is `application/config/version` in
 [`viewer/project.godot`](../viewer/project.godot). Godot runtime and exported
-project settings consume that value. Help → Version opens the existing copyable
-details surface, available with or without a capture. No new About dialog is needed.
+project settings consume that value. Help → About SimScope displays the identity
+with or without a capture. #96 consolidates the temporary Version menu into About;
+version ownership and the numbering convention are unchanged.
 
 The display form is exactly `vMAJOR.MINOR.PATCH.BUILD`. Each component uses
 canonical decimal digits without leading zeroes; release components are
@@ -12,7 +13,7 @@ non-negative, and BUILD is positive. BUILD has no three-digit ceiling.
 
 ## Initial identity
 
-The proposed starting identity is **v0.1.0.1**. This establishes a pre-1.0
+The starting identity was **v0.1.0.1**. This establishes a pre-1.0
 application development family and makes acceptance of #131 build 1. Earlier
 merges are not numbered retroactively. The number does not imply a public release,
 stability guarantee, or a change to the project's compatibility policy.
@@ -51,7 +52,7 @@ do not generate the application BUILD from Git history or a PR identifier.
 
 [`application_version.gd`](../viewer/application_version.gd) validates the live
 project setting and provides the full identity, public release version and BUILD.
-The details surface explicitly says **SimScope version unavailable** with a
+About explicitly says **SimScope version unavailable** with a
 metadata diagnostic if the setting is missing or malformed; it does not invent a
 default version or prevent opening a scientific capture.
 
@@ -84,12 +85,12 @@ Run the Python metadata/CLI contract checks with:
 python -m unittest tests.test_application_version
 ```
 
-The existing `tools/validate_viewer_shell.py` suite exercises Help → Version,
+The existing `tools/validate_viewer_shell.py` suite exercises Help → About SimScope,
 changes the live source setting, checks explicit missing/malformed fallback and
 restores it before continuing existing viewer regressions. Both supported renderers
 must pass. Source metadata changes need no duplicate manual UI edit.
 
-Owner verification: open Help → Version before and after opening a capture; check
-the full four-component identity against the project setting and copy its text.
+Owner verification: open Help → About SimScope before and after opening a capture;
+check the full four-component identity against the project setting.
 Check ordinary startup, capture opening and playback. Review the initial numbering
 and future merge/release convention before accepting this issue.

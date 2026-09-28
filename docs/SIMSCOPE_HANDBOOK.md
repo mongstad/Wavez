@@ -31,6 +31,12 @@ source details. State routes to the existing scene/analysis recipe controls;
 Export routes to PNG, video and numerical export. View and the viewport buttons
 provide frame/reset, panel visibility and fullscreen.
 
+**Help → About SimScope** shows the full application version, owner logo,
+copyright, licensing summary and GitHub link. **Licenses and notices** provides
+the full packaged project and third-party notices without an internet connection.
+About replaces the temporary standalone Version entry and works without a capture;
+see [About behavior and validation](ABOUT_SIMSCOPE.md) and [version policy](VERSIONING.md).
+
 Scene retains the existing inspector. Appearance, Selection and Analysis provide
 links into the same controls; choosing a workspace never binds a scientific
 source or changes selection membership. Playback is now in the persistent bottom transport. Preparation budgets remain in the
