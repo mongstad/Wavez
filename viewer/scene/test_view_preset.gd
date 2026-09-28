@@ -145,6 +145,7 @@ func run():
 	var picker_callback_ms := (Time.get_ticks_usec()-picker_begin)/1000.0
 	check(FileAccess.file_exists(output.path_join("picker-name.json")),"selected filename saves immediately")
 	view.shell.details.hide()
+	await zoom_roundtrip(path)
 	var report := {"checks":checks,"failures":failures,"timings":timings,"bytes":bytes,"fields":expected,"renderer":RenderingServer.get_current_rendering_method(),"production":not production.is_empty(),"memory_static":OS.get_static_memory_usage(),"frame_gaps_ms":frame_times,"file_selected_callback_ms":picker_callback_ms}
 	FileAccess.open(output.path_join("report.json"),FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
 	view.free();print("PRESET: ",checks," checks, ",failures.size()," failures");quit(0 if failures.is_empty() else 1)
@@ -164,3 +165,33 @@ func record_frame():
 	var now := Time.get_ticks_usec()
 	if last_frame > 0:frame_times.append((now-last_frame)/1000.0)
 	last_frame = now
+
+# Exercise actual wheel input and picker callbacks while the viewer ticks normally.
+func zoom_roundtrip(path: String):
+	view.playing = false;view.orbit_enabled = false;view.free_camera = false
+	view.set_process(true)
+	view.camera_distance = 40.;view._update_camera()
+	for i in 4:wheel(MOUSE_BUTTON_WHEEL_UP)
+	var distance: float = view.camera_distance
+	var transform: Transform3D = view.camera.transform
+	var projection: Projection = view.camera.get_camera_projection()
+	view.recipe_saving = true;view.recipe_dialog.file_selected.emit(path)
+	view.shell.details.hide()
+	var data = JSON.parse_string(FileAccess.get_file_as_string(path))
+	check(is_equal_approx(data.settings.view.camera_distance,distance),"wheel zoom is exported to JSON")
+	for reopen in [false,true]:
+		for i in 6:wheel(MOUSE_BUTTON_WHEEL_DOWN)
+		check(not view.camera.transform.is_equal_approx(transform),"wheel changes visible camera before reload")
+		if reopen:view._open_capture(view.capture_path);await settle()
+		view.recipe_saving = false;view.recipe_dialog.file_selected.emit(path)
+		view.shell.details.hide();await settle()
+		check(is_equal_approx(view.camera_distance,distance),"picker restores zoom distance; reopen="+str(reopen))
+		check(view.camera.transform.is_equal_approx(transform),"picker restores visible zoom after live ticks; reopen="+str(reopen))
+		check(view.camera.get_camera_projection() == projection,"picker restores projection; reopen="+str(reopen))
+		wheel(MOUSE_BUTTON_WHEEL_UP)
+		check(is_equal_approx(view.camera.position.distance_to(view.camera_target),distance*.9),"first wheel after loading continues from saved zoom")
+	view.set_process(false)
+
+func wheel(button: MouseButton):
+	var event := InputEventMouseButton.new();event.button_index = button;event.pressed = true
+	view._unhandled_input(event)

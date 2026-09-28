@@ -175,3 +175,29 @@ python tools/validate_recipe_state.py --godot /path/to/godot --output-dir /tmp/i
    desktop. Save/Load analysis remains a separate source-bound workflow.
 
 Stop for owner review; no merge, auto-merge, issue closure or board changes.
+
+
+## Owner-review follow-up: channel and zoom
+
+Field channels belong to the current capture's object/array schema. Names may
+repeat across simulations, but neither their presence nor meaning is portable;
+loading a preset intentionally keeps the current channel.
+
+Scroll-wheel zoom is already saved as `settings.view.camera_distance`, together
+with `camera_target`, `camera_transform`, yaw/pitch and camera FOV. The reported
+zoom failure has **not been reproduced** on this branch. Added a focused regression
+using wheel-input handling and actual file-selected callbacks with normal viewer
+processing enabled. It checks exported distance, restored camera transform and
+projection after several live frames, same-source and reopen loading, and the
+first wheel movement after loading. No runtime change or claimed zoom fix was
+made without reproducing the defect.
+
+Results: **825 Forward+**, **765 Compatibility**, **760 production** checks passed.
+The first development run used an unavailable `Projection.is_equal_approx`
+method; corrected to exact projection equality and all final runs passed.
+The additional 11 checks are recorded in
+[zoom review evidence](evidence/issue-138/zoom-review.json); earlier timing evidence
+is preserved. Physical native dialog interaction remains outside automation.
+The owner's saved JSON and exact save/change/load sequence are still needed to
+resolve the reported discrepancy; matching camera state is not a claim that the
+owner's visual observation has been explained.
