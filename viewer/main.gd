@@ -42,9 +42,6 @@ var geometry_dialog: FileDialog
 var recipe_saving := false
 # Session-only field/mesh disclosures survive replacement of the layer controller.
 var layer_panel_disclosures := {}
-# Session-only interactive fullscreen return mode; native window geometry stays
-# owned by the window manager. Immersive keeps its separate immediate return mode.
-var fullscreen_restore_mode := DisplayServer.WINDOW_MODE_WINDOWED
 
 class FrameData:
 	var source_index := 0
@@ -372,14 +369,9 @@ func _toggle_overlay() -> void:
 	_update_particle_legend()
 
 func _toggle_fullscreen() -> void:
-	if shell != null and shell.immersive:
-		shell.exit_immersive(); return
-	if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
-		DisplayServer.window_set_mode(fullscreen_restore_mode)
-	else:
-		fullscreen_restore_mode = DisplayServer.window_get_mode()
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
-	if shell != null: shell.refresh.call_deferred()
+	if shell == null: return
+	if shell.immersive: shell.exit_immersive()
+	else: shell.enter_immersive()
 
 func _open_capture(path: String) -> void:
 	if shell != null: shell.begin_open()
@@ -571,6 +563,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	if selection_controller != null and selection_controller.handle_input(event):get_viewport().set_input_as_handled();return
 	if event is InputEventMouseButton:
 		var mouse_button: InputEventMouseButton = event as InputEventMouseButton
+		if mouse_button.button_index == MOUSE_BUTTON_LEFT and mouse_button.pressed and mouse_button.double_click and shell.edge_reveal.is_viewport_point(mouse_button.position):
+			dragging = false
+			_toggle_fullscreen(); get_viewport().set_input_as_handled(); return
 		if mouse_button.button_index == MOUSE_BUTTON_LEFT:
 			if mouse_button.pressed:
 				var focused := get_viewport().gui_get_focus_owner()
@@ -600,12 +595,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			KEY_F: _focus_activity()
 			KEY_V: _set_point_rendering(not clean_view)
 			KEY_P: _save_image()
-			KEY_F1: _toggle_overlay()
-			KEY_F11:
-				if event.shift_pressed and shell != null:
-					if shell.immersive: shell.exit_immersive()
-					else: shell.enter_immersive()
-				else: _toggle_fullscreen()
+			KEY_F11: _toggle_fullscreen()
 			KEY_R: _reset_camera()
 
 func _reset_camera() -> void:

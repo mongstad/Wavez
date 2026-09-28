@@ -22,6 +22,7 @@ Start with:
 - [Quickstart](QUICKSTART.md)
 - [Current status](docs/CURRENT_STATUS.md)
 - [Application version and build policy](docs/VERSIONING.md) — view the identity in Help → About SimScope
+- [Pinned edge reveal and Fullscreen](docs/WINDOW_EDGE_REVEAL.md)
 - [Portable view presets](docs/VIEW_PRESETS.md)
 - [SimScope handbook](docs/SIMSCOPE_HANDBOOK.md)
 - [Python API](SIMSCOPE_API.md)

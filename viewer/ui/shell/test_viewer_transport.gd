@@ -181,7 +181,7 @@ func run():
 		controller.buffering = prior_buffering; controller.pending_time = prior_pending; ui.refresh()
 		layouts.append({"window":str(dimensions),"transport":str(ui.get_rect())}); picture("loaded-"+str(dimensions.x))
 	viewer._toggle_fullscreen(); await settle()
-	check(ui.is_visible_in_tree() and ui.duration.is_visible_in_tree() and not viewer.shell.bar.visible,"Interactive fullscreen retains media transport")
+	check(viewer.shell.immersive and not ui.is_visible_in_tree() and not viewer.shell.status_ui.is_visible_in_tree(),"Fullscreen hides combined media strip")
 	viewer._toggle_fullscreen(); await settle()
 	if not config.real.is_empty():
 		viewer._open_capture(config.real); viewer.playing = false; await ready(viewer)

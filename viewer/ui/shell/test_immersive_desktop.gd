@@ -40,21 +40,19 @@ func run() -> void:
 	await create_timer(1).timeout
 	before = Visual.snapshot(viewer); sample = viewer.committed_sample.duplicate(true)
 	await stage("windowed")
-	viewer.shell.menus.View.get_popup().id_pressed.emit(1)
-	await stage("interactive")
-	var shortcut := InputEventKey.new(); shortcut.keycode = KEY_F11; shortcut.shift_pressed = true; shortcut.pressed = true
-	root.push_input(shortcut)
-	await stage("immersive-hint")
+	viewer._toggle_fullscreen()
+	await stage("fullscreen-entry")
+	await stage("fullscreen-settled")
 	await create_timer(3).timeout
-	await stage("immersive-clean")
+	await stage("fullscreen-clean")
+	await stage("fullscreen-stable")
 	var escape := InputEventKey.new(); escape.keycode = KEY_ESCAPE; escape.pressed = true
 	root.push_input(escape)
-	await stage("restored-interactive")
-	viewer.shell.fullscreen_button.pressed.emit()
 	await stage("restored-windowed")
-	viewer.shell.menus.View.get_popup().id_pressed.emit(2)
-	await create_timer(3.1).timeout
-	await stage("windowed-to-immersive")
+	var shortcut := InputEventKey.new(); shortcut.keycode = KEY_F11; shortcut.pressed = true
+	root.push_input(shortcut)
+	await create_timer(.7).timeout
+	await stage("windowed-to-fullscreen")
 	# The harness requests an actual KWin fullscreen exit for this test window.
 	for i in 100:
 		if not viewer.shell.immersive: break

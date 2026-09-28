@@ -1,5 +1,9 @@
 # UX3-FULLSCREEN-001 — Immersive fullscreen
 
+Current presentation behavior is specified in [#117 edge reveal and Fullscreen](WINDOW_EDGE_REVEAL.md).
+The original #46/#86 implementation and review record below is historical: the two
+user-facing modes and viewport recovery controls have been superseded.
+
 Current integration status: the slice is owner-merged; the [#44 milestone report](UX3_REPORT.md)
 is pending owner review. Original issue review metadata and evidence below remain historical.
 

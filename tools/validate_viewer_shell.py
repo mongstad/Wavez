@@ -37,6 +37,8 @@ def main():
     contract.insert(contract.index('  Probe marker'), '  Global effects')  # #68: global Bloom destination
     contract.insert(contract.index('  Handbook') + 1, '  About SimScope')  # #96 replaces #131's temporary Version entry
     contract = [line.replace('Save scene', 'Save view preset…').replace('Load scene', 'Load view preset…') for line in contract]
+    contract = [line for line in contract if line not in ['  Panels', '  Immersive']]
+    contract[contract.index('  Fullscreen'):contract.index('  Fullscreen')+1] = ['  Window', '    Fullscreen']
     assert report['menu_tree'] == contract, 'Runtime menu hierarchy differs from accepted UX4 contract'
     report['menu_contract_matches'] = True
     assert hashes == {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in output.glob('*.ssc')}

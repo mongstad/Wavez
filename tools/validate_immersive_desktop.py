@@ -22,8 +22,9 @@ def main():
     parser.add_argument('--capture', required=True, type=Path)
     parser.add_argument('--output-dir', required=True, type=Path)
     parser.add_argument('--renderer', choices=['forward_plus', 'gl_compatibility'], default='forward_plus')
-    parser.add_argument('--window-restore', action='store_true', help='Check interactive fullscreen mode/geometry restoration and immersive nesting.')
+    parser.add_argument('--window-restore', action='store_true', help='Check fullscreen mode/geometry restoration and unpinned visibility.')
     parser.add_argument('--legend-visibility', action='store_true', help='Also check independent legend/panel visibility and recipe restore at each window stage.')
+    parser.add_argument('--display-driver', choices=['wayland', 'x11'], default='wayland')
     parser.add_argument('--screen', type=int, help='Request a specific Godot monitor index; verify actual placement in the KWin report.')
     args = parser.parse_args()
     if args.legend_visibility:
@@ -65,7 +66,7 @@ def main():
             return received[0][0]
         finally:
             dbus('/Scripting', 'unloadScript', plugin)
-    command = [args.godot, '--path', str(ROOT/'viewer'), '--display-driver', 'wayland',
+    command = [args.godot, '--path', str(ROOT/'viewer'), '--display-driver', args.display_driver,
                '--rendering-method', args.renderer, '--resolution', '1440x900', '--audio-driver', 'Dummy',
                '--script', 'ui/shell/test_legend_visibility.gd' if args.legend_visibility else ('ui/shell/test_fullscreen_restore.gd' if args.window_restore else 'ui/shell/test_immersive_desktop.gd'), '--', '--review-output='+str(out),
                '--review-capture='+str(args.capture.resolve())]
@@ -91,12 +92,16 @@ def main():
                 if args.window_restore and stage['restore']:
                     reference = next(item['kwin'] for item in reports if item['stage'] == stage['restore'])
                     assert native['frame'] == reference['frame'] and native['client'] == reference['client'], (label, native, reference)
-                assert native['active'], 'Test window lost focus; do not capture another application'
+                if not native['active']:
+                    (out/'focus-loss.json').write_text(json.dumps(dict(stage=label, kwin=native), indent=2)+'\n')
+                    raise AssertionError('Test window lost focus; do not capture another application')
                 subprocess.run(['spectacle','-a','-b','-n','-o',str(out/(label+'-desktop.png'))], check=True, timeout=20)
+                if fullscreen:
+                    subprocess.run(['spectacle','-m','-b','-n','-o',str(out/(label+'-monitor.png'))], check=True, timeout=20)
                 stage['kwin'] = native; reports.append(stage)
                 (out/'desktop-report.json').write_text(json.dumps(reports, indent=2)+'\n')
                 assert not stage['failures'], stage['failures']
-                if label == 'windowed-to-immersive': kwin(process.pid, leave=True)
+                if label == 'windowed-to-fullscreen': kwin(process.pid, leave=True)
                 (out/(label+'.ack')).touch(); seen.add(label)
             assert process.returncode == 0, 'Godot review failed; inspect godot.log'
             if args.window_restore:
@@ -112,8 +117,8 @@ def main():
             # This common central region excludes shell chrome and the hint.
             references = {}
             pixels = []
-            for label in ['interactive', 'immersive-hint', 'immersive-clean',
-                          'restored-interactive', 'windowed-to-immersive']:
+            for label in ['fullscreen-entry', 'fullscreen-settled', 'fullscreen-clean',
+                          'fullscreen-stable', 'windowed-to-fullscreen']:
                 for kind in ['viewport', 'desktop']:
                     with Image.open(out / (label+'-'+kind+'.png')) as image:
                         width, height = image.size
