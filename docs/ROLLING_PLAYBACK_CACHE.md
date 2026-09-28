@@ -12,9 +12,8 @@ was created or switched. Historical reports and review-time evidence are preserv
 
 Automatic field preparation previously checked live physical RAM before retiring
 resident history. A low-headroom admission could enter pressure state before that
-capacity was reclaimed. Initial Play also waited for the requested window when
-producer throughput was unmeasured or below consumption, even inside a useful
-prepared region.
+capacity was reclaimed. Adaptive startup preparation remains necessary to absorb
+short-term production deficits during playback.
 
 The coordinator now removes eligible obsolete/history entries before checking
 physical admission, then rechecks actual headroom after each bounded reclamation.
@@ -27,7 +26,9 @@ Automatic eviction protects the committed visible sample, requested current and
 next directional samples, staged textures' source preparations, and in-flight
 jobs. It prefers unrelated source entries farthest from the new playhead, preserves
 wanted current-generation runway, and mirrors when direction changes. New plans
-follow every source-sample boundary and retry at least once per second. Already
+follow every source-sample boundary and retry at least once per second. Immutable
+job metadata is reused within the same source/channel/budget scope, and history
+accounting stops once its bounded allowance is covered. Already
 resident overlap is reused without hashing/decoding/preparing it again.
 
 Resident history receives an allowance of at most 10% of the cache, targeting
@@ -38,11 +39,23 @@ while space is unused. A sharply reduced budget can temporarily be below protect
 resident ownership; new work cannot publish above it and obsolete history is
 released. The current scene is never destroyed merely to meet a new target.
 
-Play starts when every visible field has its current and next directional sample
-prepared (or reaches its non-looping boundary). Unrelated queued preparation does
-not block this. Actual missing samples still hold the scientific clock explicitly.
-The existing concurrency controller still uses measured production and demand;
-explicit advanced intervals retain their complete-interval gate and eviction order.
+Play reuses existing contiguous coverage through the #111/#113 adaptive gate:
+three seconds for a measured producer at least 1.10× consumption, eight seconds
+near parity (at least 0.95×), otherwise the admitted rolling window. Measurements
+need three busy seconds at the current concurrency. Current/next samples remain
+required, but no longer override the gate. Status reads the same decision.
+
+While playing, a measured deficit reopens the gate when lead falls below two
+seconds or predicted depletion is less than eight seconds away. Unmeasured
+production also holds below two seconds. The one-second policy cadence therefore
+has room to react before exhaustion. Speed changes recheck the gate. Waiting is
+latched until the appropriate startup runway is rebuilt, reusing resident coverage;
+a completed admitted window remains playable, including recording boundaries.
+GPU staging retains its bounded target wait without resetting CPU-runway confidence.
+Eligible history is also reclaimed before publication when the budget shrinks
+during decoding, avoiding cancellation/recomputation of already-finished work.
+The publication limit remains hard. Explicit advanced intervals retain their
+complete-interval gate and eviction order.
 
 ## One overlay on the existing playback track
 
@@ -70,6 +83,13 @@ rendering fidelity, particle/mesh scheduling and offline export semantics are
 unchanged. No new dependency or runtime is bundled.
 
 ## Validation
+
+The measurements below describe the initial `9130336` review checkpoint. Its
+production traversal prefilled the admitted window before Play and therefore did
+not test immediate-Play runway gating. The owner's reported regression prompted
+the [adaptive-runway follow-up](PLAYBACK_RUNWAY_REVIEW.md), which compares immediate
+Play against accepted main and this initial PR checkpoint. Historical measurements
+and evidence below remain unchanged.
 
 2026-09-28, Linux, Godot 4.7.2, NVIDIA RTX 3070 Ti, 46.94 GiB physical RAM.
 The [validation ledger](evidence/issue-106/validation.json) records **9,285 focused
@@ -200,7 +220,8 @@ checks source stat identity. This is distinct from full-file strict verification
    Hover for the blue/teal meanings; toggle particles and visible layers to confirm
    the all-layer coverage changes appropriately.
 2. Seek inside blue coverage, allow the requested visible layers to commit, and
-   press Play at 1×. Playback must begin without waiting for unrelated future work.
+   press Play at 1×. Resident preparations must be reused; playback begins when
+   the adaptive runway gate is satisfied, without preparing the whole recording.
 3. Let playback pass the initially prepared end. Inspect Performance/Details and
    confirm historical entries are reclaimed and future coverage advances. A real
    throughput shortage may buffer; it must recover without manual restart when

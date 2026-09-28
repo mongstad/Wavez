@@ -312,14 +312,30 @@ func _automatic_request(time: float, budget: int) -> Array:
 		var history_bytes := 0
 		for id in layers.states:
 			if not layers.views[id] is Grid or not layers.states[id].visible:continue
-			for row in layers.reader.samples[id]:
-				if (float(row.time)-time)*direction >= 0:continue
+			var rows: Array = layers.reader.samples[id]
+			var point: Dictionary = layers.reader.bracket(id,time)
+			var index: int = point.get("a",0)
+			if direction < 0:
+				if not point.is_empty():index += 1
+			elif not rows.is_empty() and float(rows[index].time) >= time:index -= 1
+			# Only the bounded allowance matters; do not scan the whole recording
+			# and rebuild every history key at each source-sample boundary.
+			while history_bytes < history and index >= 0 and index < rows.size():
+				var row: Dictionary = rows[index]
 				var key := Grid.sample_key(layers.reader.objects[id],row.sequence,layers.states[id].channel,budget)
 				history_bytes += int(status.charges.get(key,0))
+				index -= direction
 		history = mini(history,history_bytes)
 		var forward_limit := maxi(required+largest,cpu_limit-history)
 		forward_limit = mini(cpu_limit,forward_limit)
 		budget_report.history_allowance_bytes = history;budget_report.history_seconds = history_seconds
+		# The source headers are immutable in this scope. Reuse their existing
+		# job metadata, copying only the mutable charge/reservation envelope.
+		var reusable_jobs := {}
+		for job in automatic_jobs:
+			if job.scope != cache_scope or job.budget != budget or job.channel != layers.states[job.id].channel:continue
+			if not reusable_jobs.has(job.id):reusable_jobs[job.id] = {}
+			reusable_jobs[job.id][job.entry.index] = job
 		automatic_jobs = [];var charge := 0
 		# Interleave independent object clocks in playback order. Only headers and
 		# already known charges are needed; workers validate/decode on demand.
@@ -332,7 +348,8 @@ func _automatic_request(time: float, budget: int) -> Array:
 				if delta < 0 and head.seen > 0:delta += layers.reader.frames[-1].time-layers.reader.frames[0].time
 				if delta < distance:distance = delta;best = i
 			var head: Dictionary = heads[best]
-			var job := _job(head.id,head.index,budget)
+			var cached: Dictionary = reusable_jobs.get(head.id,{}).get(head.index,{})
+			var job: Dictionary = cached.duplicate() if not cached.is_empty() else _job(head.id,head.index,budget)
 			job.charge = int(status.charges.get(job.key,job.charge));job.other_reservation = other
 			if charge+job.charge > forward_limit:break
 			charge += job.charge;automatic_jobs.append(job);automatic_end = time+maxf(0,distance)*direction
@@ -449,15 +466,15 @@ func _demand(status: Dictionary, time: float) -> Dictionary:
 func startup_state(status: Dictionary, time: float) -> Dictionary:
 	var demand := _demand(status,time)
 	var gate := concurrency.gate(demand.consumer,demand.ahead_seconds,status.session.get("state") == "ready")
-	# An actual contiguous resident region is playable regardless of unrelated
-	# queued work or measured producer speed. Missing data still explicitly holds.
-	if demand.contiguous_ready:gate.ready = true;gate.reason = "prepared_region"
+	# Current/next residency is necessary, but does not establish a sustainable
+	# runway. Retained coverage must satisfy the same measured startup gate.
+	gate.ready = gate.ready and demand.contiguous_ready and not capacity_wait
 	gate.merge(demand);return gate
 func _automatic_ready() -> bool:
 	var status := worker.status()
 	startup_report = startup_state(status,viewer.requested_time if pending_time == null else float(pending_time))
 	demand_report = _demand(status,viewer.requested_time if pending_time == null else float(pending_time))
-	return startup_report.ready and (not capacity_wait or demand_report.contiguous_ready)
+	return startup_report.ready
 func observe_frame(milliseconds: float) -> void:
 	if not active():return
 	var now := Time.get_ticks_usec()
@@ -482,11 +499,11 @@ func observe_frame(milliseconds: float) -> void:
 	policy_pressure_events = status.pressure_events
 	var count := concurrency.tick(now/1000000.0,signals)
 	if count != status.active_limit:worker.set_concurrency(count)
-	# Speed changes and exhausted runway explicitly rebuffer. A ready finite
-	# window (including the end of the recording) always remains playable.
-	if scope_choice.selected == 0 and viewer.playing and status.session.get("state") != "ready":
+	# Latch a predictive wait before the producer exhausts the runway. pump()
+	# holds the clock and releases it only through the adaptive startup gate.
+	if scope_choice.selected == 0 and viewer.playing and not session_waiting:
 		var changed: bool = last_speed != viewer.physical_rate
-		if not demand_report.contiguous_ready and (changed or demand_report.ahead_seconds <= 0.0):
+		if concurrency.needs_runway(demand_report.consumer,demand_report.ahead_seconds,status.session.get("state") == "ready",changed):
 			session_waiting = true;buffering = true
 	last_speed = viewer.physical_rate
 func _update_ui() -> void:

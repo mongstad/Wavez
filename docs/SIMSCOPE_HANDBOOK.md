@@ -312,8 +312,8 @@ Manual RAM choices also use rolling caches. The old explicit full-preload policy
 Historical explicit-preload evidence on the 48 GB workstation: a retained 100k-particle capture prepared 81 pairs in 13.3 seconds, enabled Play after 0.78 seconds and used about 2.50 GiB process RSS. An isolated probe measured 18.67 MiB of retained Godot allocations per decoded 100k-particle sample and another 7.27 MiB per prepared pair without trails. Conservative cache charges are larger and count shared references again. CPU preparation does not create GPU resources for every cached pair.
 
 **Performance → Playback preparation** defaults to **Automatic**. Opening prepares
-as much useful directional coverage as safely fits, while current/next sample
-readiness controls Play. Moving the playhead reuses overlapping preparations and
+as much useful directional coverage as safely fits, while measured throughput and
+prepared lead control Play. Moving the playhead reuses overlapping preparations and
 redirects missing work. Memory pressure reclaims eligible history before new
 allocation is refused; current/staged samples and in-flight ownership stay protected.
 A reasonable history allowance is retained when capacity permits. Pausing keeps
@@ -345,9 +345,12 @@ Set `SIMSCOPE_FIELD_WORKERS=1`, `2`, `3` or `4` before launching for a fixed
 diagnostic cap; live physical admission still may allow fewer jobs. Other values
 use Auto. All-channel source reuse and adaptive cache semantics remain intact.
 
-In Automatic preparation, Play can start inside a contiguous prepared region
-without waiting for unrelated future work. Current and next directional samples
-must be resident for every visible field, except at its recording boundary. The
+In Automatic preparation, Play starts from resident coverage when it provides
+an appropriate runway. With three busy seconds of measured throughput, a producer
+at least 1.10× demand needs three seconds of lead; near parity (at least 0.95×)
+needs eight. Slower or unmeasured production prepares the admitted rolling window.
+Current/next residency alone does not bypass this gate. Predicted depletion causes
+an intentional pause; the same runway gate controls a clean resume. The
 [rolling cache](ROLLING_PLAYBACK_CACHE.md) reclaims eligible history before retrying
 physical admission, protects current/staged samples, and reuses overlapping data.
 Missing data, direction/channel changes and resource pressure can require explicit

@@ -209,8 +209,7 @@ func run() -> void:
 	var autoplay = load("res://main.gd").new();autoplay.capture_path = directory.path_join("session.ssc");autoplay.orbit_enabled = false
 	root.add_child(autoplay);autoplay.set_process(false)
 	check(autoplay.playing and autoplay.scene_layers.field_playback.worker.status().session.get("automatic",false),"Autoplay uses automatic preparation")
-	await session_ready(autoplay)
-	check(not autoplay.scene_layers.field_playback.session_waiting,"Autoplay starts with contiguous automatic coverage, without explicit interval planning")
+	check(await session_ready(autoplay),"Unmeasured autoplay prepares its admitted automatic window")
 	check(await sample(autoplay,.1,true),"Automatic target is ready")
 	autoplay.free();await process_frame
 	var late = load("res://main.gd").new();late.capture_path = directory.path_join("late.ssc");late.playing = false;late.orbit_enabled = false

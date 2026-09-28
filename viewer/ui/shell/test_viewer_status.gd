@@ -117,7 +117,7 @@ func run():
 	var layers = viewer.scene_layers
 	var fields = layers.field_playback
 	fields.cache_cap_bytes = 1;fields.request(viewer.requested_time,layers.field_budget());ui.refresh()
-	check(ui.readiness == "Ready" and ui.readiness_detail.contains("memory") and not ui.failures.has("Fields"),"Capacity wait retains playable protected coverage and reports memory detail")
+	check(ui.readiness == "Preparing…" and ui.readiness_detail.contains("memory") and not ui.failures.has("Fields"),"Capacity wait preserves current display while continuous playback waits safely")
 	fields.cache_cap_bytes = 0;fields.request(viewer.requested_time,layers.field_budget());ui.refresh()
 	check(not ui.badge.label.text.contains("Waiting for memory"),"Memory status recovers without reopening")
 	var worker = layers.playback.worker

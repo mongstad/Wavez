@@ -28,8 +28,10 @@ Field preparation uses a small CPU pool with ordered publication and explicit
 in-flight memory reservations. Auto starts conservatively and changes active
 concurrency within a CPU-count-bounded pool of at most four lanes, using measured
 preparation demand and resource pressure. `SIMSCOPE_FIELD_WORKERS=1..4` selects a
-fixed diagnostic cap. Playback can start inside a contiguous prepared region without waiting for
-unrelated queued work. Automatic windows reclaim eligible history before retrying
+fixed diagnostic cap. Playback reuses contiguous prepared coverage and waits for
+an adaptive startup/resume runway: three seconds with measured faster production,
+eight near parity, otherwise the admitted window. Predicted depletion triggers
+intentional buffering before the lead is exhausted. Automatic windows reclaim eligible history before retrying
 physical admission, while protecting current/staged samples. A single overlay in
 the playback slider shows actual prepared coverage for fields and visible layers.
 The adaptive cache and [interactive integrity policy](PLAYBACK_INTEGRITY.md) remain intact.

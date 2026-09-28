@@ -370,6 +370,15 @@ func _collect(lane) -> void:
 		mutex.lock();at_barrier = true;mutex.unlock();gate.wait();mutex.lock();at_barrier = false;mutex.unlock()
 	if not result.is_empty() and not result.has("error") and not result.has("capacity") and Stamp.read(job.path) != job.stamp:
 		result = {"error":"Field source changed during preparation."}
+	# A rolling limit can shrink while a batch is decoding. Reclaim eligible
+	# history before the publication guard, just as at admission; otherwise each
+	# completed result is discarded while reclaimable history occupies its space.
+	mutex.lock()
+	var reclaim: bool = session.get("automatic",false) and not closing and token == lane.generation and wanted.has(job.key)
+	var outstanding := in_flight_bytes
+	mutex.unlock()
+	if reclaim and not result.is_empty() and not result.has("error") and not result.has("capacity"):
+		_prune(outstanding,job.key)
 	mutex.lock()
 	if closing or token != lane.generation or not wanted.has(job.key):
 		cancelled += 1

@@ -15,10 +15,11 @@ and in-flight allowances in these operational sections; issue #111 adds
 The #102 measurements
 below retain their original scope and review-time wording. **Automatic** is the default in
 Performance. It fills as much useful forward coverage as safely fits in current
-physical RAM, even while paused. Play can begin as soon as the current and next
-sample in the chosen direction are prepared for each visible field, or its recording
-boundary is reached. It does not wait for unrelated future work. An exhausted
-region explicitly buffers, preserving source values and the committed clock.
+physical RAM, even while paused. Play reuses resident coverage subject to the
+adaptive runway gate: three seconds for a measured producer at least 1.10× demand,
+eight seconds near parity (at least 0.95×), otherwise the admitted window. Rate
+confidence requires three busy seconds at the current concurrency. A predicted
+shortfall intentionally holds the clock and rebuilds this runway before resuming.
 It never requires an allocation for the complete remaining recording.
 After that initial preparation, moving windows replenish in the background. Large captures open paused so useful coverage can build before the first Play;
 recordings fitting the initial window retain the existing transport state. The status badge shows background progress without declaring
@@ -34,7 +35,8 @@ allowance when capacity permits; pressure removes that allowance for ten seconds
 Backward playback fills toward earlier times; loops wrap at the
 recording bounds. Each visible field follows its own clock, including a held sample
 at the playhead. The cache redirects at each source-sample boundary and refreshes
-at least once per second while the controller is active. A single overlay on the
+at least once per second. Compatible job metadata and bounded history accounting
+reduce repeated planning work. A single overlay on the
 slider uses actual source-time bounds: blue for prepared selected fields, teal
 where all required visible-layer data is prepared. GPU staging can still wait
 briefly; the overlay is not a throughput guarantee. Completed captures that fit stay reusable.

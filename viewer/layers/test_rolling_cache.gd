@@ -53,6 +53,32 @@ func pressure_case(control, reverse: bool) -> Dictionary:
 	check(await wait_worker(worker),"Physical headroom recovery resumes safely")
 	worker.close();return after
 
+func shrink_during_publication(control) -> void:
+	var worker := FieldBuffer.new();worker.worker_count = 1;worker.trace_reads = true;worker.start()
+	var jobs: Array = []
+	for index in range(4):
+		var job: Dictionary = control._job("field",index,control.layers.field_budget())
+		var entry: Dictionary = FieldBuffer.Reader.materialize(FileAccess.open(job.path,FileAccess.READ),job.entry,job.object)
+		job.charge = FieldBuffer.Prepare.charge(entry,job.channel,job.budget).bytes;jobs.append(job)
+	var charge: int = jobs[0].charge
+	worker.request("shrink",jobs.slice(0,3),charge*4,true)
+	check(await wait_worker(worker),"Mid-batch shrink starts with three resident samples")
+	worker.protect({jobs[2].key:true},jobs[2].entry.time,1)
+	var gate := Semaphore.new();worker.test_barrier = gate
+	worker.request("shrink",jobs.slice(2,4),charge*4,true)
+	var deadline := Time.get_ticks_msec()+5000
+	while not worker.status().test_barrier_waiting and Time.get_ticks_msec()<deadline:await process_frame
+	check(worker.status().test_barrier_waiting,"Completed incoming sample is held before publication")
+	var before: Dictionary = worker.status()
+	worker.request("shrink",jobs.slice(2,4),charge*2,true)
+	worker.test_barrier = null;gate.post()
+	check(await wait_worker(worker),"Shrunken rolling budget reclaims history and publishes the completed sample")
+	var after: Dictionary = worker.status()
+	check(after.cancelled == before.cancelled and worker.read_trace().count(jobs[3].key) == 1,"Budget shrink does not discard and recompute usable in-flight work")
+	check(after.charges.has(jobs[2].key) and after.charges.has(jobs[3].key) and after.evictions == 2,"Publication reclamation preserves current and incoming data")
+	check(after.bytes+after.in_flight_bytes <= after.limit,"Publication still respects the reduced hard limit")
+	worker.close()
+
 func run() -> void:
 	var directory := OS.get_cmdline_user_args()[0]
 	var view = make_view(directory.path_join("session.ssc"),true)
@@ -72,18 +98,32 @@ func run() -> void:
 		Job.write_json(directory.path_join("timeline-geometry.json"),{"rect":var_to_str(view.timeline.get_global_rect()),"center_grabber":view.timeline.get_theme_constant("center_grabber"),"icon_width":view.timeline.get_theme_icon("grabber").get_width(),"coverage":view.timeline.coverage})
 	var forward := await pressure_case(control,false)
 	var reverse := await pressure_case(control,true)
+	await shrink_during_publication(control)
 	control.cache_cap_bytes = 6*(32*32*32*20+65536)
 	control.invalidate()
 	check(await sample(view,.5,true) and await settle(view,.5),"Bounded window prepared away from origin")
 	var before: Dictionary = control.worker.status()
+	var retained_times: Array = []
+	for row in view.generic_reader.samples.field:
+		if before.charges.has(control._job("field",row.index,view.scene_layers.field_budget()).key):retained_times.append(float(row.time))
+	var retained_time: float = retained_times[-2] # Current/next exist, but later runway does not.
 	var gate := Semaphore.new();control.worker.test_barrier = gate
-	view.scene_layers.seek(.6)
-	check(await sample(view,.6,true),"Seek inside prepared region commits")
+	view.scene_layers.seek(retained_time)
+	check(await sample(view,retained_time,true),"Seek inside prepared region commits")
+	var deadline := Time.get_ticks_msec()+5000
+	while not control.worker.status().test_barrier_waiting and Time.get_ticks_msec()<deadline:await process_frame
+	check(control.worker.status().test_barrier_waiting,"Missing future runway reaches the real publication barrier")
 	view.playing = true;control.begin_session()
-	check(not control.session_waiting,"Play inside contiguous prepared region ignores unrelated fill")
-	view.playing = false
+	check(control.session_waiting,"Minimal retained coverage waits for adaptive runway while new fill is blocked")
+	for frame in range(5):view.scene_layers.tick(.05);await process_frame
+	check(control.session_waiting and view.committed_sample.requested_time == retained_time,"Intentional runway wait holds the committed clock despite a ready current/next pair")
 	control.worker.test_barrier = null;gate.post()
-	check(await settle(view,.6),"Background fill resumes")
+	check(await session_ready(view) and not control.session_waiting,"Rebuilt admitted runway releases the latched wait")
+	view.playing = false;control.cancel_session()
+	check(await settle(view,retained_time),"Background fill resumes")
+	view.playing = true;control.begin_session()
+	check(not control.session_waiting,"Completed admitted runway resumes without recomputing resident overlap")
+	view.playing = false;control.cancel_session()
 	check(control.worker.status().completed-before.completed < control.worker.status().frames,"Overlapping seek reuses preparations")
 	var oracle = JSON.parse_string(FileAccess.get_file_as_string(directory.path_join("oracle.json")))
 	for i in range(28):

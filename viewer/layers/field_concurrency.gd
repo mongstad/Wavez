@@ -59,5 +59,15 @@ func gate(consumer: float, ahead_seconds: float, all_ready: bool) -> Dictionary:
 	var lead := 3.0 if ratio >= 1.10 else 8.0
 	var confident := measured_seconds >= 3 and ratio >= .95
 	return {"ready":all_ready or (confident and ahead_seconds >= lead),"producer":rate,"consumer":consumer,"ratio":ratio,"measured_seconds":measured_seconds,"required_lead_seconds":lead if confident else -1.0,"reason":"admitted_window" if all_ready else ("faster_producer" if confident and ratio >= 1.10 else ("near_parity" if confident else "conservative_window"))}
+func needs_runway(consumer: float, ahead_seconds: float, all_ready: bool, speed_changed: bool) -> bool:
+	if all_ready or consumer <= 0:return false
+	if speed_changed and not gate(consumer,ahead_seconds,false).ready:return true
+	# Allow two one-second policy observations before exhaustion. If measured
+	# production is falling behind, also react to depletion within eight seconds.
+	# Resume still uses gate(), so a wait rebuilds runway instead of chattering
+	# around the low-water mark. A lane change needs fresh rate confidence.
+	if measured_seconds < 3:return ahead_seconds < 2.0
+	var deficit := 1.0-rate/consumer
+	return deficit > 0 and (ahead_seconds < 2.0 or ahead_seconds/deficit < 8.0)
 func report() -> Dictionary:
 	return {"mode":"auto" if automatic else "fixed","cap":cap,"active_limit":active,"producer":rate,"measured_seconds":measured_seconds,"blocked_until":blocked_until,"events":events.duplicate(true),"signals":last.duplicate(true)}

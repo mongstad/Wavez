@@ -166,7 +166,7 @@ func playback_status(layers) -> Dictionary:
 		# Read the same gate as Play without requesting work or changing its state.
 		if not viewer.playing and not at_end and fields.scope_choice.selected == 0:
 			var gate: Dictionary = fields.startup_state(status,viewer.requested_time)
-			waiting = waiting or (fields.capacity_wait and not gate.contiguous_ready) or not gate.ready
+			waiting = waiting or not gate.ready
 	if waiting and (not at_end or not viewer.playing):
 		result.text = "Buffering" if advancing else "Preparing…"
 		result.detail = (layers.transport_wait_reason+" is holding playback.\n" if advancing else "Waiting for requested data or sufficient prepared playback coverage.\n")+result.detail
