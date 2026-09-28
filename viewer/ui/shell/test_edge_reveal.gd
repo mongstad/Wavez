@@ -77,6 +77,21 @@ func run() -> void:
 		edge.set_pinned(side,true)
 		check(edge.states[side].visible and edge.pins[side].button_pressed,side+" pin immediately persists")
 		check(science() == original and viewer.committed_sample == sample,side+" preserves scientific state and clock")
+	# Owner review: top/bottom accept an extra 5px, with deliberate dwell retained.
+	for side in ["top","bottom","right"]:
+		var extent := root.get_visible_rect().size
+		var width: float = 3.0 if side == "right" else 8.0
+		var inside_point: Vector2 = {"top":Vector2(500,width),"bottom":Vector2(500,extent.y-width),"right":Vector2(extent.x-width,300)}[side]
+		var outside_point: Vector2 = inside_point + {"top":Vector2(0,1),"bottom":Vector2(0,-1),"right":Vector2(-1,0)}[side]
+		edge.set_pinned(side,false)
+		edge.tick(.36,Vector2(100,200),false,false)
+		edge.tick(.6,outside_point,true,false)
+		check(not edge.states[side].visible,side+" does not reveal beyond configured zone")
+		edge.tick(.49,inside_point,true,false)
+		check(not edge.states[side].visible,side+" widened boundary still requires dwell")
+		edge.tick(.02,inside_point,true,false)
+		check(edge.states[side].visible,side+" reveals at configured boundary")
+		edge.set_pinned(side,true)
 	check(shell.transport.visible == shell.status_ui.visible,"Bottom child visibility never diverges")
 	# A clicked slider can retain focus after release without trapping its strip open.
 	edge.set_pinned("bottom",false); viewer.timeline.grab_focus()
@@ -146,7 +161,7 @@ func run() -> void:
 	for side in edge.states: edge.set_pinned(side,true)
 	await settle(); await RenderingServer.frame_post_draw
 	root.get_texture().get_image().save_png(output.path_join("pins.png"))
-	var report := {"checks":checks,"failures":failures,"renderer":RenderingServer.get_current_rendering_method(),"dwell_seconds":edge.DWELL,"hide_grace_seconds":edge.GRACE}
+	var report := {"checks":checks,"failures":failures,"renderer":RenderingServer.get_current_rendering_method(),"dwell_seconds":edge.DWELL,"hide_grace_seconds":edge.GRACE,"top_bottom_zone_pixels":edge.VERTICAL_EDGE,"right_zone_pixels":edge.RIGHT_EDGE}
 	FileAccess.open(output.path_join("report.json"),FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
 	print("EDGE: ",checks," checks; ",failures.size()," failures")
 	viewer.free(); await process_frame; quit(0 if failures.is_empty() else 1)

@@ -13,8 +13,8 @@ session-only and absent from portable view presets and export-state dictionaries
 The existing source-independent preset schema and scientific controllers are unchanged.
 
 Unpinned surfaces hide automatically after **0.35 seconds** away from the surface
-and its active interactions. A continuous **0.5-second** hover within **3 logical
-pixels** of the matching client-window edge reveals a surface temporarily.
+and its active interactions. A continuous **0.5-second** hover within **8 logical
+pixels** of the top/bottom client-window edge or **3 logical pixels** of the right edge reveals a surface temporarily.
 Leaving the edge before that deadline resets the dwell. Pinning reveals immediately;
 unpinning grants the ordinary grace period rather than hiding during the click.
 Fullscreen suspends edge timers and restores their preceding values on exit.
@@ -59,7 +59,8 @@ conflict with this left-button gesture; no orbit setup is implemented here.
 
 ## Validation
 
-See [machine-readable evidence](evidence/issue-117/validation.json). Native tests
+See [initial machine-readable evidence](evidence/issue-117/validation.json) and
+[owner-review wider-zone checks](evidence/issue-117/wider-zones.json). Native tests
 use Godot 4.7.2 on Linux/NVIDIA RTX 3070 Ti, tiny mixed SIMSCP4 fixtures, and unchanged
 source SHA-256 checks. The deterministic edge tests inject elapsed time into the
 same controller used by `_process`; real popup objects and viewport input dispatch
@@ -68,7 +69,7 @@ proof of physical hover feel.
 
 | Check | Result |
 |---|---|
-| Edge/pin/input matrix | 105 PASS per renderer |
+| Edge/pin/input matrix | 114 PASS per renderer after owner-requested wider zones |
 | Complete shell/menu/state suite | 661 PASS per renderer |
 | Transport regression | 210 PASS per renderer |
 | Portable view presets, including zoom | 826 PASS, Forward+ |

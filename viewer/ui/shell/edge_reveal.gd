@@ -2,7 +2,8 @@ extends Node
 ## Session-only chrome persistence. Never serialized into scientific/view state.
 const DWELL := 0.5
 const GRACE := 0.35
-const EDGE := 3.0
+const VERTICAL_EDGE := 8.0
+const RIGHT_EDGE := 3.0
 var shell
 var states := {
 	"top": {"pinned":true, "visible":true, "dwell":0.0, "leave":0.0},
@@ -82,7 +83,7 @@ func _process(delta: float) -> void:
 func tick(delta: float, point: Vector2, inside: bool, busy: bool) -> void:
 	if shell.immersive: return
 	var extent := get_viewport().get_visible_rect().size
-	var edges := {"top": point.y <= EDGE, "right": point.x >= extent.x-EDGE, "bottom": point.y >= extent.y-EDGE}
+	var edges := {"top": point.y <= VERTICAL_EDGE, "right": point.x >= extent.x-RIGHT_EDGE, "bottom": point.y >= extent.y-VERTICAL_EDGE}
 	var changed := false
 	for side in states:
 		var state: Dictionary = states[side]
