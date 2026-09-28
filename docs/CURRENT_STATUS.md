@@ -21,9 +21,13 @@ Current video-export regression and startup corrections were owner-merged in
 PR #122 at `f867248`. Export-setting locks and active-job actions (#125) were
 owner-merged in PR #126 at `e26af1e`. Compact legend content (#115) was
 owner-merged in PR #127 at `2c3678a`. Unified playback/preparation status (#114)
-was owner-merged in PR #129 at `309ec00`. Current authorized work is #106, the only
-Ready item when selected: [rolling cache and prepared timeline](ROLLING_PLAYBACK_CACHE.md),
-**pending owner review**. Historical review-time reports remain unchanged.
+was owner-merged in PR #129 at `309ec00`. Rolling cache, prepared timeline and
+adaptive runway corrections were owner-merged in PR #130 at `fb75c8c`.
+Current authorized work is #131, the only Ready item when selected:
+[application version/build identity](VERSIONING.md), **pending owner review**.
+Help → Version reads the authoritative project setting; the initial build starts
+a new lifetime counter without numbering historical merges. Historical review-time
+reports remain unchanged.
 Field preparation uses a small CPU pool with ordered publication and explicit
 in-flight memory reservations. Auto starts conservatively and changes active
 concurrency within a CPU-count-bounded pool of at most four lanes, using measured

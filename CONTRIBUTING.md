@@ -11,9 +11,17 @@ G5/G6 and web/dashboard work require separate authorization. Preserve accepted G
 behavior and run focused relevant validation. New work targets `.ssc` / SIMSCP4 under
 the [capture format policy](docs/CAPTURE_FORMAT_POLICY.md).
 
-Version strategy: #102 advances the exporter to `3.0.0` for the clean SIMSCP4 break. Use semantic package
-versions and annotated `vMAJOR.MINOR.PATCH` tags for reviewed stable releases;
-implementation alone does not create a release tag. Historical viewer directory
+Application identity follows [the version/build policy](docs/VERSIONING.md):
+`viewer/project.godot` → `application/config/version` is the sole source, displayed
+as `vMAJOR.MINOR.PATCH.BUILD`. Every future accepted implementation PR must carry
+exactly `main.BUILD + 1`; keep that candidate unchanged through review commits,
+and reconcile with current accepted main before merge. BUILD never resets.
+Only the owner declares MAJOR/MINOR/PATCH changes. No release automation is added.
+
+The Python exporter package has its own compatibility version: #102 advances it
+to `3.0.0` for the clean SIMSCP4 break. Application release tags normally use
+`vMAJOR.MINOR.PATCH`; implementation alone does not create a release tag or GitHub
+Release. Historical viewer directory
 `v1.0.3` was not a package release. The descriptive `pre-g4-consolidation` tag
 records a historical checkpoint without claiming a new release.
 No force pushes or history rewrites without a documented need and authorization.
