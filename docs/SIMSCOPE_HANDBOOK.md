@@ -161,7 +161,10 @@ A separate **Failed — details** notice
 survives unrelated informational updates and successful work. **Details…** opens
 copyable diagnostics; **Jobs → Acknowledge failures** dismisses retained notices.
 Current unavailability remains visible until the underlying condition resolves.
-The existing failed-open Dismiss action acknowledges that open failure only.
+A successful capture load automatically clears the previous failed-open banner
+and its retained load diagnostic. Failed retries, picker cancellation and unrelated
+updates do not clear it; other job failures remain retained. The failed-open
+Dismiss action acknowledges that open failure only.
 Form validation remains beside its owning input; it is not a new global job.
 
 **Jobs (N)** in the transport counts active operations from existing controllers.

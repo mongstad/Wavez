@@ -1,0 +1,349 @@
+{
+  "issue": 104,
+  "date": "2026-09-28",
+  "baseline": "f6191e0af4a3a432c870bd8455cdd3e532a99640",
+  "candidate": "v0.1.0.3",
+  "owner_acceptance": "pending",
+  "reports": {
+    "before": {
+      "checks": 679,
+      "failures": [
+        "Successful load clears the previous banner and stored load details",
+        "Successful load removes the stale status-bar load failure",
+        "Current status details omit stale load failure but keep unrelated diagnostics",
+        "Second successful load restores normal current status without acknowledgement",
+        "Recovered status belongs to the newly loaded capture"
+      ],
+      "layouts": [
+        {
+          "bar": "(1440.0, 48.0)",
+          "dock": "[P: (1080.0, 48.0), S: (360.0, 748.0)]",
+          "logical": "(1440, 900)",
+          "scale": 1.0
+        },
+        {
+          "bar": "(1920.0, 48.0)",
+          "dock": "[P: (1560.0, 48.0), S: (360.0, 928.0)]",
+          "logical": "(1920, 1080)",
+          "scale": 1.0
+        },
+        {
+          "bar": "(1024.0, 48.0)",
+          "dock": "[P: (704.0, 48.0), S: (320.0, 448.0)]",
+          "logical": "(1024, 640)",
+          "scale": 1.0
+        },
+        {
+          "bar": "(1024.0, 48.0)",
+          "dock": "[P: (704.0, 48.0), S: (320.0, 448.0)]",
+          "logical": "(1024, 640)",
+          "scale": 1.25
+        },
+        {
+          "bar": "(1024.0, 48.0)",
+          "dock": "[P: (704.0, 48.0), S: (320.0, 448.0)]",
+          "logical": "(1024, 640)",
+          "scale": 1.5
+        },
+        {
+          "bar": "(1024.0, 48.0)",
+          "dock": "[P: (704.0, 48.0), S: (320.0, 448.0)]",
+          "logical": "(1024, 640)",
+          "scale": 2.0
+        }
+      ],
+      "menu_tree": [
+        "File",
+        "  Open capture",
+        "  State",
+        "    Copy state",
+        "    Save scene",
+        "    Load scene",
+        "    Save analysis",
+        "    Load analysis",
+        "    Resolve input",
+        "  Export",
+        "    Image",
+        "    Video",
+        "    Data",
+        "View",
+        "  Panels",
+        "  Fullscreen",
+        "  Immersive",
+        "  Global effects",
+        "  Probe marker",
+        "  Guides",
+        "    Grid and axes",
+        "    Domain",
+        "    Data bounds",
+        "    Absorber",
+        "    Imposed regions",
+        "  Viewing preset",
+        "    Cinematic",
+        "    Scientific",
+        "    Temperature",
+        "    Density",
+        "    Velocity",
+        "    Minimal",
+        "Tools",
+        "  Selection",
+        "  Analysis",
+        "    Temporal",
+        "    Space time",
+        "    Diagnostics",
+        "    Compare",
+        "    Matched runs",
+        "    Period",
+        "    Bookmarks",
+        "    Results",
+        "  Mapping",
+        "  Quick setup",
+        "  Derive range",
+        "  Slice",
+        "  Clipping",
+        "  Isosurface",
+        "  Source probe",
+        "  Performance",
+        "  Geometry",
+        "Help",
+        "  Shortcuts",
+        "  Handbook",
+        "  About SimScope"
+      ],
+      "renderer": "gl_compatibility",
+      "shell_scientific_activity": {
+        "counters": {},
+        "stages": {}
+      }
+    },
+    "compat": {
+      "checks": 679,
+      "failures": [],
+      "layouts": [
+        {
+          "bar": "(1440.0, 48.0)",
+          "dock": "[P: (1080.0, 48.0), S: (360.0, 748.0)]",
+          "logical": "(1440, 900)",
+          "scale": 1.0
+        },
+        {
+          "bar": "(1920.0, 48.0)",
+          "dock": "[P: (1560.0, 48.0), S: (360.0, 928.0)]",
+          "logical": "(1920, 1080)",
+          "scale": 1.0
+        },
+        {
+          "bar": "(1024.0, 48.0)",
+          "dock": "[P: (704.0, 48.0), S: (320.0, 448.0)]",
+          "logical": "(1024, 640)",
+          "scale": 1.0
+        },
+        {
+          "bar": "(1024.0, 48.0)",
+          "dock": "[P: (704.0, 48.0), S: (320.0, 448.0)]",
+          "logical": "(1024, 640)",
+          "scale": 1.25
+        },
+        {
+          "bar": "(1024.0, 48.0)",
+          "dock": "[P: (704.0, 48.0), S: (320.0, 448.0)]",
+          "logical": "(1024, 640)",
+          "scale": 1.5
+        },
+        {
+          "bar": "(1024.0, 48.0)",
+          "dock": "[P: (704.0, 48.0), S: (320.0, 448.0)]",
+          "logical": "(1024, 640)",
+          "scale": 2.0
+        }
+      ],
+      "menu_tree": [
+        "File",
+        "  Open capture",
+        "  State",
+        "    Copy state",
+        "    Save scene",
+        "    Load scene",
+        "    Save analysis",
+        "    Load analysis",
+        "    Resolve input",
+        "  Export",
+        "    Image",
+        "    Video",
+        "    Data",
+        "View",
+        "  Panels",
+        "  Fullscreen",
+        "  Immersive",
+        "  Global effects",
+        "  Probe marker",
+        "  Guides",
+        "    Grid and axes",
+        "    Domain",
+        "    Data bounds",
+        "    Absorber",
+        "    Imposed regions",
+        "  Viewing preset",
+        "    Cinematic",
+        "    Scientific",
+        "    Temperature",
+        "    Density",
+        "    Velocity",
+        "    Minimal",
+        "Tools",
+        "  Selection",
+        "  Analysis",
+        "    Temporal",
+        "    Space time",
+        "    Diagnostics",
+        "    Compare",
+        "    Matched runs",
+        "    Period",
+        "    Bookmarks",
+        "    Results",
+        "  Mapping",
+        "  Quick setup",
+        "  Derive range",
+        "  Slice",
+        "  Clipping",
+        "  Isosurface",
+        "  Source probe",
+        "  Performance",
+        "  Geometry",
+        "Help",
+        "  Shortcuts",
+        "  Handbook",
+        "  About SimScope"
+      ],
+      "renderer": "gl_compatibility",
+      "shell_scientific_activity": {
+        "counters": {},
+        "stages": {}
+      },
+      "menu_contract_matches": true,
+      "source_hashes_unchanged": {
+        "invalid.ssc": "85b88a0128bebf2b8c2c6e7b9030e49cbbb83f2f60ec834420eaade3db477d90",
+        "replacement.ssc": "103eb0ef1436096eb4fb294f767b91549154a6f40f8b6779b19425867caaec55",
+        "scene.ssc": "09f1b138d2e9433e27f3664daf8468d7e976708310c0112d7a3bc4b17697443e"
+      }
+    },
+    "forward": {
+      "checks": 679,
+      "failures": [],
+      "layouts": [
+        {
+          "bar": "(1440.0, 48.0)",
+          "dock": "[P: (1080.0, 48.0), S: (360.0, 748.0)]",
+          "logical": "(1440, 900)",
+          "scale": 1.0
+        },
+        {
+          "bar": "(1920.0, 48.0)",
+          "dock": "[P: (1560.0, 48.0), S: (360.0, 928.0)]",
+          "logical": "(1920, 1080)",
+          "scale": 1.0
+        },
+        {
+          "bar": "(1024.0, 48.0)",
+          "dock": "[P: (704.0, 48.0), S: (320.0, 448.0)]",
+          "logical": "(1024, 640)",
+          "scale": 1.0
+        },
+        {
+          "bar": "(1024.0, 48.0)",
+          "dock": "[P: (704.0, 48.0), S: (320.0, 448.0)]",
+          "logical": "(1024, 640)",
+          "scale": 1.25
+        },
+        {
+          "bar": "(1024.0, 48.0)",
+          "dock": "[P: (704.0, 48.0), S: (320.0, 448.0)]",
+          "logical": "(1024, 640)",
+          "scale": 1.5
+        },
+        {
+          "bar": "(1024.0, 48.0)",
+          "dock": "[P: (704.0, 48.0), S: (320.0, 448.0)]",
+          "logical": "(1024, 640)",
+          "scale": 2.0
+        }
+      ],
+      "menu_tree": [
+        "File",
+        "  Open capture",
+        "  State",
+        "    Copy state",
+        "    Save scene",
+        "    Load scene",
+        "    Save analysis",
+        "    Load analysis",
+        "    Resolve input",
+        "  Export",
+        "    Image",
+        "    Video",
+        "    Data",
+        "View",
+        "  Panels",
+        "  Fullscreen",
+        "  Immersive",
+        "  Global effects",
+        "  Probe marker",
+        "  Guides",
+        "    Grid and axes",
+        "    Domain",
+        "    Data bounds",
+        "    Absorber",
+        "    Imposed regions",
+        "  Viewing preset",
+        "    Cinematic",
+        "    Scientific",
+        "    Temperature",
+        "    Density",
+        "    Velocity",
+        "    Minimal",
+        "Tools",
+        "  Selection",
+        "  Analysis",
+        "    Temporal",
+        "    Space time",
+        "    Diagnostics",
+        "    Compare",
+        "    Matched runs",
+        "    Period",
+        "    Bookmarks",
+        "    Results",
+        "  Mapping",
+        "  Quick setup",
+        "  Derive range",
+        "  Slice",
+        "  Clipping",
+        "  Isosurface",
+        "  Source probe",
+        "  Performance",
+        "  Geometry",
+        "Help",
+        "  Shortcuts",
+        "  Handbook",
+        "  About SimScope"
+      ],
+      "renderer": "forward_plus",
+      "shell_scientific_activity": {
+        "counters": {},
+        "stages": {}
+      },
+      "menu_contract_matches": true,
+      "source_hashes_unchanged": {
+        "invalid.ssc": "85b88a0128bebf2b8c2c6e7b9030e49cbbb83f2f60ec834420eaade3db477d90",
+        "replacement.ssc": "d1a22c03b8488a0783d1acc25babe4f22a1d467b8c8b6ddc9383c6c8f345415e",
+        "scene.ssc": "99da41fca42c07cb7f0d852ded6ea8814f986873dce6c1a8d7b30c8fedbfa4f7"
+      }
+    }
+  },
+  "python_version_tests": 2,
+  "documentation_examples": 3,
+  "limits": [
+    "Linux source viewer only; no standalone export",
+    "Synthetic fixtures; no production rerun",
+    "Unrelated export failure injected"
+  ]
+}
