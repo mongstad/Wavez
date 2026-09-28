@@ -267,7 +267,11 @@ func finish_open(problem: String) -> void:
 	if not problem.is_empty():
 		error_details = problem; open_error.show()
 		if status_ui != null: status_ui.remember("Open capture",problem)
-	# A successful open does not silently acknowledge the previous error.
+	else:
+		# Only the failed-open diagnostic is superseded by a successful load.
+		error_details = ""; open_error.hide()
+		if status_ui != null: status_ui.failures.erase("Open capture")
+	if status_ui != null: status_ui.refresh()
 	refresh()
 
 func toggle_dock() -> void:

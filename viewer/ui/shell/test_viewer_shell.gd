@@ -254,6 +254,7 @@ func run() -> void:
 	for worker in [viewer.scene_layers.field_playback,viewer.scene_layers.mesh_playback]:
 		if worker.enabled: check(viewer.scene_layers.performance_panel.is_ancestor_of(worker.label),"Preparation metrics remain in Performance")
 	check(viewer.generic_reader != prior_reader and control.state.definitions.is_empty(), "Successful replacement clears prior bound definitions")
+	await load_error_recovery_checks(viewer)
 	var file := FileAccess.open(output.path_join("shell-report.json"), FileAccess.WRITE)
 	file.store_string(JSON.stringify({"checks":checks,"failures":failures,"layouts":layouts,"shell_scientific_activity":activity,"menu_tree":menu_tree(shell),"renderer":RenderingServer.get_current_rendering_method()},"\t")); file.close()
 	viewer.free(); await process_frame
@@ -416,3 +417,34 @@ func menu_children(popup: PopupMenu, indent: String) -> Array:
 		var child := popup.get_item_submenu(i)
 		if not child.is_empty(): result.append_array(menu_children(popup.get_node(child),indent+"  "))
 	return result
+
+func load_error_recovery_checks(viewer) -> void:
+	var shell = viewer.shell
+	var status = shell.status_ui
+	status.acknowledge()
+	viewer._open_capture(output.path_join("invalid.ssc")); await settle()
+	var problem: String = shell.error_details
+	check(not problem.is_empty() and shell.open_error.visible and status.failures.get("Open capture") == problem,"Failed load exposes actionable banner and status diagnostic")
+	status.show_status()
+	check(shell.detail_text.text.contains(problem),"Failed load details contain the actual reader error")
+	shell.details.hide()
+	viewer._show_open_dialog(); viewer.open_dialog.canceled.emit(); viewer.open_dialog.hide()
+	check(shell.open_error.visible and status.failures.get("Open capture") == problem,"Cancelling the picker retains the unresolved load error")
+	viewer.inspection_busy = true
+	viewer._open_capture(output.path_join("scene.ssc")); viewer.inspection_busy = false
+	check(shell.error_details.contains("Inspection is busy") and status.failures.get("Open capture") == shell.error_details,"Rejected retry replaces the load diagnostic rather than clearing it")
+	status.remember("Video export","Retained export failure")
+	viewer._open_capture(output.path_join("scene.ssc")); await settle(); status.refresh()
+	check(not shell.open_error.visible and shell.error_details.is_empty(),"Successful load clears the previous banner and stored load details")
+	check(not status.failures.has("Open capture"),"Successful load removes the stale status-bar load failure")
+	check(status.failures.get("Video export") == "Retained export failure" and status.badge.label.text.contains("Failed"),"Successful load preserves unrelated failure reporting")
+	status.show_status()
+	check(not shell.detail_text.text.contains("Open capture — Failed") and shell.detail_text.text.contains("Retained export failure"),"Current status details omit stale load failure but keep unrelated diagnostics")
+	shell.details.hide(); status.acknowledge()
+	viewer._open_capture(output.path_join("invalid.ssc")); await settle()
+	check(shell.open_error.visible and status.failures.has("Open capture"),"A new invalid load after recovery is still reported")
+	picture("load-error-current")
+	viewer._open_capture(output.path_join("replacement.ssc")); await settle(); status.refresh()
+	check(not shell.open_error.visible and status.failures.is_empty() and not status.badge.label.text.contains("Failed"),"Second successful load restores normal current status without acknowledgement")
+	check(status.badge.label.text == status.readiness and viewer.capture_path.ends_with("replacement.ssc"),"Recovered status belongs to the newly loaded capture")
+	picture("load-error-recovered")

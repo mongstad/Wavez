@@ -24,11 +24,12 @@ owner-merged in PR #127 at `2c3678a`. Unified playback/preparation status (#114)
 was owner-merged in PR #129 at `309ec00`. Rolling cache, prepared timeline and
 adaptive runway corrections were owner-merged in PR #130 at `fb75c8c`.
 Application version/build identity was owner-merged in PR #132 at `653f817`.
-Current authorized work is #96, the only Ready item when selected:
-[About SimScope](ABOUT_SIMSCOPE.md), **pending owner review**. About replaces the
-temporary Version menu and reads the same authoritative setting; build 2 is the
-candidate for this merge. The dialog includes the owner logo and packaged licensing
-notices. Historical review-time reports remain unchanged.
+About SimScope was owner-merged in PR #133 at `f6191e0`.
+Current authorized work is #104, the only Ready item when selected:
+[load-error recovery](LOAD_ERROR_RECOVERY.md), **pending owner review**.
+A successful capture load clears the previous failed-open banner and status
+notice while retaining unrelated job failures. Build 3 is the merge candidate.
+Historical review-time reports remain unchanged.
 Field preparation uses a small CPU pool with ordered publication and explicit
 in-flight memory reservations. Auto starts conservatively and changes active
 concurrency within a CPU-count-bounded pool of at most four lanes, using measured
