@@ -34,6 +34,16 @@ The SVG command icons under `viewer/ui/icons/` are original project assets recor
 by the accepted UX2 work and are covered as original SimScope material by the root
 license.
 
+The owner-supplied SimScope logo at `viewer/ui/about/simscope-logo.png` is project
+branding, not a third-party dependency. Its unchanged import is recorded in
+[`viewer/ui/about/README.md`](viewer/ui/about/README.md); the existing
+[branding policy](TRADEMARKS.md) applies.
+
+About SimScope packages generated copies of the canonical notices as a Godot
+resource for offline access. Run `python tools/sync_about_notices.py` after editing
+the source notices, and `--check` to verify synchronization. Godot's MIT notice
+and third-party component/license information are read from the running engine.
+
 ## External runtime/build dependencies — not vendored here
 
 These dependencies are obtained separately and are not copied into this source

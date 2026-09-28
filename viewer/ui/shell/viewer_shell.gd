@@ -1,7 +1,7 @@
 extends Control
 ## Presentation-only adapter. Controllers and the root scientific viewport retain ownership.
 const ThemeSource = preload("res://ui/theme/simscope_theme.gd")
-const AppVersion = preload("res://application_version.gd")
+const About = preload("res://ui/about/about_dialog.gd")
 const WORKSPACES = ["Particles", "Fields", "Meshes"]
 var viewer
 var legend_available := Vector2.ZERO
@@ -24,6 +24,7 @@ var error_text: Label
 var error_details := ""
 var details: AcceptDialog
 var detail_text: TextEdit
+var about: AcceptDialog
 var particle_empty: Label
 var adapter: VBoxContainer
 var workspace := 0
@@ -117,6 +118,8 @@ func setup(owner_viewer) -> void:
 	details = AcceptDialog.new(); details.title = "Source details"; details.theme = theme; add_child(details)
 	detail_text = TextEdit.new(); detail_text.editable = false; detail_text.wrap_mode = TextEdit.LINE_WRAPPING_BOUNDARY; detail_text.custom_minimum_size = Vector2(480, 220); details.add_child(detail_text)
 	details.close_requested.connect(restore_focus); details.confirmed.connect(restore_focus)
+	about = About.new(); about.theme = theme; add_child(about)
+	about.close_requested.connect(restore_focus); about.confirmed.connect(restore_focus)
 	viewer.resize_handle.gui_input.connect(resize_input)
 	preload("res://analysis/ui_controls.gd").fit(viewer.inspector_box)
 	transport = preload("res://ui/shell/viewer_transport.gd").new()
@@ -444,7 +447,10 @@ func build_menus(row: HBoxContainer) -> void:
 	command(help,"Handbook",func():
 		var path := ProjectSettings.globalize_path("res://../docs/SIMSCOPE_HANDBOOK.md")
 		show_details("Handbook",FileAccess.get_file_as_string(path) if FileAccess.file_exists(path) else "Handbook unavailable in this installation."),"handbook")
-	command(help,"Version",func():show_details("SimScope version",AppVersion.details()),"version")
+	command(help,"About SimScope",func():
+		var focus := get_viewport().gui_get_focus_owner()
+		if focus != null:previous_focus = weakref(focus)
+		about.open(),"about")
 
 func submenu(parent: PopupMenu, title: String) -> PopupMenu:
 	var popup := PopupMenu.new(); popup.name = title.replace(" ",""); parent.add_child(popup)
@@ -471,7 +477,7 @@ func refresh_commands() -> void:
 	var particles: bool = loaded and viewer.scene_layers != null and not viewer.scene_layers.particle_id.is_empty()
 	for key in commands:
 		var entry: Dictionary = commands[key]
-		var enabled: bool = loaded or key in ["open","panels","fullscreen","immersive","shortcuts","handbook","version"]
+		var enabled: bool = loaded or key in ["open","panels","fullscreen","immersive","shortcuts","handbook","about"]
 		if key in ["probe","tool:Quick setup","tool:Clipping","tool:Isosurface","tool:Source probe"]: enabled = fields
 		if key == "tool:Mapping": enabled = particles
 		if key in ["tool:Slice","tool:Derive range"]: enabled = fields or particles
