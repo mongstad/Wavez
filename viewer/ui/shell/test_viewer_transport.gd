@@ -74,7 +74,7 @@ func run():
 	check(viewer.physical_rate == 2,"Playback speed routes to canonical recorded-time rate")
 	viewer.timeline.value = 1; await ready(viewer)
 	check(viewer.current_index == 1 and viewer.committed_sample.requested_time == .5,"Slider selects a union timestamp")
-	check(viewer.timeline.tooltip_text == "Sample index 2 / 8" and not ui.index_hint.visible,"Index count is available on hover without a persistent label")
+	check(viewer.timeline.tooltip_text.begins_with("Sample index 2 / 8\n") and not ui.index_hint.visible,"Index count is available on hover without a persistent label")
 	viewer.timeline.drag_started.emit(); ui.refresh(); await settle()
 	check(ui.index_hint.visible and ui.index_hint.text == "Sample index 2 / 8","Dragging exposes the index hint")
 	picture("index-drag")

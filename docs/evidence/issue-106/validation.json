@@ -1,0 +1,114 @@
+{
+  "focused_checks": 9285,
+  "focused": [
+    {
+      "run": "endpoint-verified-forward_plus",
+      "result": "checks.json",
+      "checks": 72,
+      "failures": []
+    },
+    {
+      "run": "endpoint-verified-gl_compatibility",
+      "result": "checks.json",
+      "checks": 72,
+      "failures": []
+    },
+    {
+      "run": "field_session-final-forward_plus",
+      "result": "checks.json",
+      "checks": 342,
+      "failures": []
+    },
+    {
+      "run": "field_session-final-gl_compatibility",
+      "result": "checks.json",
+      "checks": 332,
+      "failures": []
+    },
+    {
+      "run": "verified-field_session-headless",
+      "result": "checks.json",
+      "checks": 330,
+      "failures": []
+    },
+    {
+      "run": "verified-adaptive_cache-headless",
+      "result": "checks.json",
+      "checks": 73,
+      "failures": []
+    },
+    {
+      "run": "verified-field_parallel-headless",
+      "result": "parallel-results.json",
+      "checks": 1800,
+      "failures": []
+    },
+    {
+      "run": "verified-field_concurrency-None",
+      "result": "concurrency.json",
+      "checks": 94,
+      "failures": []
+    },
+    {
+      "run": "verified-viewer_status-forward_plus",
+      "result": "report.json",
+      "checks": 231,
+      "failures": []
+    },
+    {
+      "run": "verified-viewer_status-gl_compatibility",
+      "result": "report.json",
+      "checks": 231,
+      "failures": []
+    },
+    {
+      "run": "verified-viewer_transport-forward_plus",
+      "result": "report.json",
+      "checks": 204,
+      "failures": []
+    },
+    {
+      "run": "viewer_transport-final-gl_compatibility",
+      "result": "report.json",
+      "checks": 204,
+      "failures": []
+    },
+    {
+      "run": "field_budget-final-forward_plus",
+      "result": "result.json",
+      "checks": 56,
+      "failures": []
+    },
+    {
+      "run": "field_budget-final-gl_compatibility",
+      "result": "result.json",
+      "checks": 56,
+      "failures": []
+    },
+    {
+      "run": "scene_playback-final-headless",
+      "result": "results.json",
+      "checks": 2457,
+      "failures": []
+    },
+    {
+      "run": "mesh_playback-final-headless",
+      "result": "checks.json",
+      "checks": 2731,
+      "failures": []
+    }
+  ],
+  "production_checks": 36,
+  "production_failures": [],
+  "total_native_checks": 9321,
+  "notes": [
+    "Passing final focused runs; development attempts are not added to this total.",
+    "Production playback ran alone; a prior exploratory run overlapped native validation and reached about 2.89 GB process swap before it was stopped. It is excluded from performance conclusions."
+  ],
+  "strict_whole_file": {
+    "exit_code": 0,
+    "seconds": 336.02962585299974,
+    "scope": "All records, payload checksums and required statistics; external capture is read-only."
+  },
+  "strict_output": "Verified 2193 records: descriptors, commit proofs, decoded payload checksums, sample constraints and required field statistics."
+}

@@ -1,0 +1,355 @@
+{
+  "baseline_main": "309ec00ac0df17c5957b7215282340d51f110cf3",
+  "initial_pr": "9130336469472fd9baabfbccced928deb1b58977",
+  "scope": "Sequential immediate-Play full 1x runs, same production capture, Forward+ 960x640, Auto workers and capacity. Source stat and four selected full-channel strict Python oracles verified by the runner. Raw profiling output remains external.",
+  "lead_sampling": "Once per second; terminal-excluded minimum omits final eight recorded seconds.",
+  "runs": {
+    "accepted_main": {
+      "ready_seconds": 12.20587,
+      "initial_runway": {
+        "ahead_samples": 119,
+        "ahead_seconds": 11.89310500000046,
+        "consumer": 10.000000000000076
+      },
+      "startup": {
+        "ahead_samples": 119,
+        "ahead_seconds": 11.90000000000046,
+        "consumer": 10.000000000000076,
+        "measured_seconds": 3.786383,
+        "producer": 11.60548771597822,
+        "ratio": 1.1605487715978131,
+        "ready": true,
+        "reason": "faster_producer",
+        "required_lead_seconds": 3.0
+      },
+      "wall_seconds": 168.718173,
+      "committed_seconds": 156.49999999993017,
+      "complete": true,
+      "field_waits": 0,
+      "field_wait_seconds": 0.0,
+      "particle_waits": 0,
+      "particle_wait_seconds": 0.0,
+      "cpu_runway_holds": 0,
+      "cpu_runway_seconds": 0.0,
+      "playback_draw_ms": {
+        "count": 15689,
+        "p50": 4.792,
+        "p95": 32.928,
+        "p99": 41.249,
+        "max": 131.81,
+        "over_50_ms": 19,
+        "over_100_ms": 1
+      },
+      "advancing_draw_ms": {
+        "count": 15689,
+        "p50": 4.792,
+        "p95": 32.928,
+        "p99": 41.249,
+        "max": 131.81,
+        "over_50_ms": 19,
+        "over_100_ms": 1
+      },
+      "playback_callback_ms": {
+        "count": 15689,
+        "p50": 1.449,
+        "p95": 31.013,
+        "p99": 38.827,
+        "max": 129.661,
+        "over_50_ms": 10,
+        "over_100_ms": 1
+      },
+      "field_presentation_ms": {
+        "count": 1565,
+        "p50": 99.165,
+        "p95": 104.688,
+        "p99": 106.612,
+        "max": 152.554,
+        "over_50_ms": 1565,
+        "over_100_ms": 693
+      },
+      "peak_rss": 38282162176,
+      "process_swap": 0,
+      "presented": 1566,
+      "strict_selected_oracles": 4,
+      "unchanged_stat": true,
+      "final_cache": {
+        "bytes": 26741571584,
+        "limit": 27218259342,
+        "completed": 1566,
+        "evictions": 1330,
+        "cancelled": 115,
+        "source_reuses": 0,
+        "pressure_events": 0
+      },
+      "busy_producer_samples_per_second": 10.717800457674725,
+      "minimum_sampled_lead": 0.42849499993099016,
+      "minimum_sampled_lead_excluding_final_eight_seconds": 7.915742000013552,
+      "cache_bytes_range": [
+        13484097536,
+        34333458432
+      ],
+      "budget_bytes_range": [
+        17657424112,
+        35181598680
+      ],
+      "minimum_available_physical": 5231427584,
+      "checks": 5
+    },
+    "initial_pr": {
+      "ready_seconds": 1.172338,
+      "initial_runway": {
+        "ahead_samples": 2,
+        "ahead_seconds": 0.1930840000000001,
+        "consumer": 10.000000000000076,
+        "contiguous_ready": true
+      },
+      "startup": {
+        "ahead_samples": 2,
+        "ahead_seconds": 0.2000000000000001,
+        "consumer": 10.000000000000076,
+        "contiguous_ready": true,
+        "measured_seconds": 0.0,
+        "producer": 0.0,
+        "ratio": 0.0,
+        "ready": true,
+        "reason": "prepared_region",
+        "required_lead_seconds": -1.0
+      },
+      "wall_seconds": 163.695951,
+      "committed_seconds": 156.49999999993017,
+      "complete": true,
+      "field_waits": 22,
+      "field_wait_seconds": 6.337798000000005,
+      "particle_waits": 0,
+      "particle_wait_seconds": 0.0,
+      "cpu_runway_holds": 22,
+      "cpu_runway_seconds": 6.337798000000005,
+      "playback_draw_ms": {
+        "count": 11147,
+        "p50": 7.448,
+        "p95": 40.802,
+        "p99": 52.48,
+        "max": 165.726,
+        "over_50_ms": 156,
+        "over_100_ms": 2
+      },
+      "advancing_draw_ms": {
+        "count": 10303,
+        "p50": 8.044,
+        "p95": 41.237,
+        "p99": 53.009,
+        "max": 165.726,
+        "over_50_ms": 156,
+        "over_100_ms": 2
+      },
+      "playback_callback_ms": {
+        "count": 11147,
+        "p50": 5.436,
+        "p95": 38.134,
+        "p99": 48.085,
+        "max": 102.929,
+        "over_50_ms": 86,
+        "over_100_ms": 1
+      },
+      "field_presentation_ms": {
+        "count": 1565,
+        "p50": 99.972,
+        "p95": 130.361,
+        "p99": 144.552,
+        "max": 729.726,
+        "over_50_ms": 1564,
+        "over_100_ms": 778
+      },
+      "peak_rss": 37670940672,
+      "process_swap": 0,
+      "presented": 1566,
+      "strict_selected_oracles": 4,
+      "unchanged_stat": true,
+      "final_cache": {
+        "bytes": 30027612160,
+        "limit": 30500688417,
+        "completed": 1566,
+        "evictions": 1301,
+        "cancelled": 230,
+        "source_reuses": 0,
+        "pressure_events": 0
+      },
+      "busy_producer_samples_per_second": 9.916471018999461,
+      "minimum_sampled_lead": 0.0020140000139790004,
+      "minimum_sampled_lead_excluding_final_eight_seconds": 0.0020140000139790004,
+      "cache_bytes_range": [
+        906493952,
+        34900017152
+      ],
+      "budget_bytes_range": [
+        26166134634,
+        35676414680
+      ],
+      "minimum_available_physical": 6188744704,
+      "checks": 5
+    },
+    "corrected": {
+      "ready_seconds": 10.999044,
+      "initial_runway": {
+        "ahead_samples": 105,
+        "ahead_seconds": 10.493042000000242,
+        "consumer": 10.000000000000076,
+        "contiguous_ready": true
+      },
+      "startup": {
+        "ahead_samples": 105,
+        "ahead_seconds": 10.500000000000242,
+        "consumer": 10.000000000000076,
+        "contiguous_ready": true,
+        "measured_seconds": 3.523397,
+        "producer": 11.383309575214025,
+        "ratio": 1.1383309575213938,
+        "ready": true,
+        "reason": "faster_producer",
+        "required_lead_seconds": 3.0
+      },
+      "wall_seconds": 167.511399,
+      "committed_seconds": 156.49999999993017,
+      "complete": true,
+      "field_waits": 0,
+      "field_wait_seconds": 0.0,
+      "particle_waits": 0,
+      "particle_wait_seconds": 0.0,
+      "cpu_runway_holds": 0,
+      "cpu_runway_seconds": 0.0,
+      "playback_draw_ms": {
+        "count": 14076,
+        "p50": 5.776,
+        "p95": 36.641,
+        "p99": 46.288,
+        "max": 129.61,
+        "over_50_ms": 66,
+        "over_100_ms": 1
+      },
+      "advancing_draw_ms": {
+        "count": 14076,
+        "p50": 5.776,
+        "p95": 36.641,
+        "p99": 46.288,
+        "max": 129.61,
+        "over_50_ms": 66,
+        "over_100_ms": 1
+      },
+      "playback_callback_ms": {
+        "count": 14076,
+        "p50": 1.624,
+        "p95": 34.443,
+        "p99": 42.784,
+        "max": 61.178,
+        "over_50_ms": 22,
+        "over_100_ms": 0
+      },
+      "field_presentation_ms": {
+        "count": 1565,
+        "p50": 99.59,
+        "p95": 104.747,
+        "p99": 109.306,
+        "max": 156.808,
+        "over_50_ms": 1565,
+        "over_100_ms": 715
+      },
+      "peak_rss": 38696615936,
+      "process_swap": 0,
+      "presented": 1566,
+      "strict_selected_oracles": 4,
+      "unchanged_stat": true,
+      "final_cache": {
+        "bytes": 14163968000,
+        "limit": 14679541232,
+        "completed": 1566,
+        "evictions": 1441,
+        "cancelled": 11,
+        "source_reuses": 0,
+        "pressure_events": 0
+      },
+      "busy_producer_samples_per_second": 10.771245454556771,
+      "minimum_sampled_lead": 0.05001799993087275,
+      "minimum_sampled_lead_excluding_final_eight_seconds": 8.093303999930185,
+      "cache_bytes_range": [
+        10537992192,
+        34446770176
+      ],
+      "budget_bytes_range": [
+        11023562017,
+        35562185651
+      ],
+      "minimum_available_physical": 5100007424,
+      "checks": 5
+    }
+  },
+  "source_stat": [
+    36,
+    20372149,
+    125950754101,
+    1790459431649621061,
+    1790459508131850482
+  ],
+  "validation": [
+    {
+      "run": "fix-field_concurrency",
+      "checks": 109,
+      "failures": []
+    },
+    {
+      "run": "publication-field_parallel",
+      "checks": 1800,
+      "failures": []
+    },
+    {
+      "run": "metadata-rolling_cache",
+      "checks": 82,
+      "failures": []
+    },
+    {
+      "run": "final-field_session-forward_plus",
+      "checks": 342,
+      "failures": []
+    },
+    {
+      "run": "final-field_session-gl_compatibility",
+      "checks": 332,
+      "failures": []
+    },
+    {
+      "run": "final-adaptive_cache-headless",
+      "checks": 73,
+      "failures": []
+    },
+    {
+      "run": "final-rolling_cache-gl_compatibility",
+      "checks": 82,
+      "failures": []
+    },
+    {
+      "run": "final-viewer_status-forward_plus",
+      "checks": 231,
+      "failures": []
+    },
+    {
+      "run": "final-viewer_status-gl_compatibility",
+      "checks": 231,
+      "failures": []
+    },
+    {
+      "run": "final-field_budget-forward_plus",
+      "checks": 56,
+      "failures": []
+    },
+    {
+      "run": "final-field_budget-gl_compatibility",
+      "checks": 56,
+      "failures": []
+    },
+    {
+      "run": "final-actions",
+      "checks": 22,
+      "failures": []
+    }
+  ],
+  "followup_native_checks": 3431
+}

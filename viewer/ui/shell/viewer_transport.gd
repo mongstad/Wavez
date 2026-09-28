@@ -52,7 +52,7 @@ func setup(owner_shell) -> void:
 	var progress := HBoxContainer.new(); progress.add_theme_constant_override("separation",4); axis.add_child(progress)
 	displayed = label(progress,"—"); displayed.custom_minimum_size.x = 48
 	displayed.vertical_alignment = VERTICAL_ALIGNMENT_CENTER; displayed.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-	viewer.timeline = HSlider.new(); viewer.timeline.step = 1
+	viewer.timeline = preload("res://ui/shell/prepared_timeline.gd").new(); viewer.timeline.step = 1
 	viewer.timeline.value_changed.connect(viewer._timeline_changed)
 	progress.add_child(viewer.timeline); viewer.timeline.custom_minimum_size.y = 16
 	viewer.timeline.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -156,6 +156,7 @@ func refresh() -> void:
 	viewer.play_button.disabled = not loaded or (busy and not viewer.playing) or viewer.inspection_busy
 	for index in [0,2]: actions.get_child(index).disabled = not loaded or viewer.inspection_busy
 	viewer.timeline.editable = loaded and not viewer.inspection_busy
+	viewer.timeline.refresh(viewer)
 	seek_button.disabled = not loaded or viewer.inspection_busy
 	rate.editor.editable = loaded; loop.disabled = not loaded
 	update_index_hint()
@@ -194,7 +195,7 @@ func refresh_requested(pending, clock, now_ms: int) -> void:
 func update_index_hint() -> void:
 	var index := int(viewer.timeline.value) if dragging_index else int(viewer.current_index)
 	var text := "Sample index %d / %d" % [index+1,viewer.frame_count] if viewer.frame_count > 0 else "Sample index — / —"
-	viewer.timeline.tooltip_text = text
+	viewer.timeline.tooltip_text = text+"\nBuffered overlay: blue = selected fields prepared; teal = all visible layers prepared.\nRanges follow recorded source times on this sample-index axis. GPU staging may still briefly wait."
 	index_hint.text = text
 	index_hint.visible = dragging_index
 	if dragging_index:

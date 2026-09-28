@@ -39,6 +39,47 @@ func policy_checks() -> void:
 	check(policy.active == 2,"Scale-up needs additional physical headroom even with unmet demand")
 	policy.reset_rates(rates)
 	check(policy.rate == 0 and not policy.gate(10,12,false).ready,"Channel generation discards stale fast-producer confidence")
+	check(policy.needs_runway(10,1.5,false,false),"Unmeasured producer rebuilds before two policy ticks exhaust the lead")
+	policy.rate = 5;policy.measured_seconds = 4
+	check(policy.needs_runway(10,3.5,false,false),"Measured deficit predicts exhaustion while several seconds remain")
+	check(not policy.needs_runway(10,8,false,false),"A healthy finite runway absorbs a temporary deficit")
+	check(not policy.gate(10,3.5,false).ready,"A predictive wait cannot immediately reopen on the same short runway")
+	check(policy.gate(10,3.5,true).ready and not policy.needs_runway(10,.2,true,false),"Completed admitted window and recording boundary remain playable")
+	policy.rate = 9.8
+	check(policy.needs_runway(10,1.5,false,false) and not policy.gate(10,7,false).ready and policy.gate(10,8,false).ready,"Near-parity rebuffering has distinct stop and resume thresholds")
+	policy.rate = 12
+	check(not policy.needs_runway(10,2,false,false),"Sustained faster production does not repeatedly reopen the latched startup gate")
+	check(policy.needs_runway(40,6,false,true),"Speed increase re-evaluates the throughput gate before draining the cache")
+func startup_checks(control, view) -> void:
+	var status: Dictionary = control.worker.status().duplicate(true)
+	status.session.state = "preparing"
+	var resident: Dictionary = status.charges.duplicate()
+	status.charges.clear()
+	for index in range(2):
+		var key: String = control._job("field",index,view.scene_layers.field_budget()).key
+		status.charges[key] = resident[key]
+	control.concurrency.rate = 12;control.concurrency.measured_seconds = 4
+	var gate: Dictionary = control.startup_state(status,0)
+	check(gate.contiguous_ready and not gate.ready,"Current plus next cannot bypass a measured adaptive runway")
+	view.physical_rate = .1;control.concurrency.rate = 1.2
+	for index in range(2,5):
+		var key: String = control._job("field",index,view.scene_layers.field_budget()).key
+		status.charges[key] = resident[key]
+	check(control.startup_state(status,0).ready,"Sufficient retained coverage starts a faster producer without unrelated window completion")
+	control.concurrency.rate = 1
+	check(not control.startup_state(status,0).ready,"Same resident range waits for a larger lead near parity")
+	for index in range(5,10):
+		var key: String = control._job("field",index,view.scene_layers.field_budget()).key
+		status.charges[key] = resident[key]
+	check(control.startup_state(status,0).ready,"Near parity releases when retained coverage reaches its runway")
+	control.concurrency.rate = .5
+	check(not control.startup_state(status,0).ready,"Slower production needs the admitted window despite current/next residency")
+	status.session.state = "ready"
+	check(control.startup_state(status,0).ready,"Prepared admitted window releases conservative startup")
+	control.capacity_wait = true
+	check(not control.startup_state(status,0).ready,"Current/next residency cannot override insufficient admission capacity")
+	control.capacity_wait = false;view.physical_rate = 1
+	control.concurrency.reset_rates(control.worker.status().rates)
 func run() -> void:
 	policy_checks()
 	out = OS.get_cmdline_user_args()[0]
@@ -68,6 +109,7 @@ func run() -> void:
 	var view = make_view(out.path_join("session.ssc"),true)
 	var control = view.scene_layers.field_playback
 	check(await ready(control.worker),"GPU-wait case has a prepared CPU window")
+	startup_checks(control,view)
 	control.staged.clear();control.last_upload_frame = Engine.get_process_frames()
 	view.playing = true;control.session_waiting = false
 	var pending: Dictionary = control.acquire(.1,view.scene_layers.field_budget())
