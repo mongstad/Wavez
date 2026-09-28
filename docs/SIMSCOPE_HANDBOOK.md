@@ -140,6 +140,9 @@ union-sample axis, so irregular timestamps remain aligned with seeking. Hover
 explains the colors. The native playhead remains on top. GPU staging can still
 briefly wait; this is cache coverage, not a frame-rate guarantee.
 
+The playback slider centres its circular playhead on the visible track endpoints;
+prepared coverage uses the same axis. See [endpoint validation](TIMELINE_ENDPOINTS.md).
+
 ## Status and Jobs
 
 The 40-pixel bottom status line shows one playback/preparation message:
