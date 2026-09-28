@@ -27,7 +27,7 @@ The accepted [issue-41 shell](UX3_SHELL.md) hosts the
 [issue-43 status and Jobs surface](UX3_STATUS.md) is owner-merged.
 [Issue-49 media timing](UX3_MEDIA_TRANSPORT.md) is pending owner review.
 Use Open… in the command bar or empty view. Click the capture name for copyable
-source details. State routes to the existing scene/analysis recipe controls;
+source details. State opens Save/Load view preset directly in the platform file picker; analysis bundles remain separate;
 Export routes to PNG, video and numerical export. View and the viewport buttons
 provide frame/reset, panel visibility and fullscreen.
 
@@ -128,7 +128,7 @@ another playback mode. These rates do not set render or output video FPS.
 Preparation still holds the visible scene. During active playback, Pause stays
 enabled and can stop playback while waiting for frames. Once paused, Play waits
 for readiness before resuming.
-Numeric/text focus suppresses viewport shortcuts. New recipes retain exact signed
+Numeric/text focus suppresses viewport shortcuts. Scientific inspection snapshots retain exact signed
 speed; obsolete mode/index-rate fields are removed without migration support.
 
 The playback slider contains a single buffered overlay. Blue shows resident
@@ -294,11 +294,20 @@ Scientific rendering disables decorative effects. Forward+ and Compatibility can
 
 ## Recipes, PNG and deterministic video
 
-Inspection recipes save the source identity/committed extent, requested and actual layer times, camera, geometry guides, normalization and representation settings. The current native scene recipe is version 2; version 3
-adds G4 selections, results and exact member assets. Replay pauses automatic clocks
-and validates source/sample references. V3 pins the committed prefix, so later
-appends cannot alter the replay. Version 2 may reject appends that
-change a held bracket. Mutation, replacement and truncation refuse.
+**State → Save view preset… / Load view preset…** saves a small portable JSON
+file in the chosen filename/location. It restores SimScope-owned viewport settings
+(camera, particle presentation, current selected volume/mesh mapping, opacity,
+legends, environment and render quality). It does not store source/object/channel
+names, exact simulation time, selections, results or UI layout. Per-layer settings
+apply to the current compatible selection; missing kinds/unsupported optional
+controls are skipped with diagnostics. No source-name remapping or capture scan
+is performed. Save and failed load preserve playback; successful load changes only
+presentation. See the [complete field contract and validation](VIEW_PRESETS.md).
+
+The separate Save/Load analysis workflow and inspection PNG/video sidecars retain
+source-bound scientific state and verification. Those inspection bundles are not
+portable view presets and are explicitly refused by Load view preset; no legacy
+conversion is provided.
 
 PNG sidecars can record the same state and an image hash. The screenshot destination is selected for the current session. Deterministic video renders a separate SubViewport at specified resolution and times, independent of interactive rendering speed; a real GPU renderer is required for image acceptance. The render worker minimizes
 its noninteractive window and draws export frames explicitly, so rendering can

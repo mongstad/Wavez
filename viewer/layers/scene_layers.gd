@@ -410,6 +410,7 @@ func _scalar_input(parent: Control, title: String, value: float, changed: Callab
 	var label := Label.new();label.text = title;parent.add_child(label)
 	var edit := LineEdit.new();edit.text = JSON.stringify(value,"",true,true);parent.add_child(edit)
 	var last := {"value":value}
+	edit.set_meta("scalar_value",last)
 	var commit := func():
 		var text := edit.text.strip_edges()
 		# Preserve the model when focus leaves unchanged text: the engine decimal
@@ -947,3 +948,23 @@ func request_volume_preset(id: String, preset: String, low := 1.0, high := 99.0)
 	if not problem.is_empty():viewer.status_label.text = problem;return false
 	if preset != "faint_structure":low = 0.;high = 100.
 	return request_color_range(id,"symmetric" if preset == "signed_field" else "percentile",low,high,preset)
+
+# Update portable presentation controls in place, preserving focus/disclosures/scroll.
+func sync_preset_controls(id: String) -> void:
+	var state: Dictionary = states[id];var controls: Dictionary = panel_controls[id]
+	for key in ["lower","upper"]:sync_scalar(controls[key],state[key])
+	controls.legend.set_pressed_no_signal(legend_visibility.get(id,false))
+	for i in controls.colormap.item_count:
+		if controls.colormap.get_item_text(i) == state.colormap:controls.colormap.select(i)
+	if reader.objects[id].kind == "volume":
+		controls.strength.set_value_no_signal(state.opacity);controls.step.set_value_no_signal(state.step)
+		opacity_controls[id].mode.select(Opacity.MODES.find(state.opacity_mapping.mode))
+		for key in ["lower","upper"]:sync_scalar(opacity_controls[id][key],state.opacity_mapping[key])
+		color_controls[id].mode.select(1 if state.color_mapping.normalization == "log" else 0)
+		_update_color_status(id)
+	else:
+		controls.wireframe.set_pressed_no_signal(state.wireframe)
+
+func sync_scalar(edit: LineEdit, value: float) -> void:
+	edit.text = JSON.stringify(value,"",true,true)
+	edit.get_meta("scalar_value").value = value

@@ -90,7 +90,7 @@ func fixture_tests(viewer, kind: String) -> void:
 	check(viewer._save_inspection(path) == OK, kind + " save pole camera recipe")
 	press(viewer,KEY_R)
 	check(viewer.camera_target == Vector3.ZERO and is_equal_approx(viewer.yaw,deg_to_rad(38)) and is_equal_approx(viewer.pitch,deg_to_rad(24)), kind + " reset restores defaults")
-	check(viewer._load_inspection(path).is_empty(), kind + " restore existing v2 recipe schema")
+	check(viewer._load_inspection(path).is_empty(), kind + " restore portable camera preset")
 	check(close_transform(saved,viewer.camera.transform), kind + " recipe camera round trip")
 	viewer._update_camera()
 	check(close_transform(saved,viewer.camera.transform), kind + " restored camera has no first-update snap")

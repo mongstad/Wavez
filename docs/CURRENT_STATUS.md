@@ -26,11 +26,12 @@ adaptive runway corrections were owner-merged in PR #130 at `fb75c8c`.
 Application version/build identity was owner-merged in PR #132 at `653f817`.
 About SimScope was owner-merged in PR #133 at `f6191e0`.
 Load-error recovery was owner-merged in PR #134 at `a97af18`.
-Current authorized work is #105, the only Ready item when selected:
-[hidden legend defaults](LEGEND_DEFAULTS.md), **pending owner review**.
-Particle and per-layer legend controls default to hidden; explicit saved visibility
-and manual controls retain their behavior. Build 4 is the merge candidate.
-Historical review-time reports remain unchanged.
+Hidden legend defaults were owner-merged in PR #137 at `26b6800`.
+Current authorized work is #138, the only Ready item when selected:
+[portable view presets](VIEW_PRESETS.md), **pending owner review**.
+Ordinary recipe save/load now uses a small source-independent presentation JSON
+and direct platform file picker. Scientific inspection bundles remain separate.
+Build 5 is the merge candidate. Historical evidence remains unchanged.
 Field preparation uses a small CPU pool with ordered publication and explicit
 in-flight memory reservations. Auto starts conservatively and changes active
 concurrency within a CPU-count-bounded pool of at most four lanes, using measured
