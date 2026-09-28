@@ -1,0 +1,68 @@
+{
+  "baseline": "fb75c8c294c4b3105c7a1608e639e9ee6b43a53c",
+  "application_version": "v0.1.0.1",
+  "godot": "4.7.2",
+  "platform": "Linux / NVIDIA RTX 3070 Ti",
+  "python_unittest_methods": 2,
+  "shell_runs": [
+    {
+      "renderer": "forward_plus",
+      "checks": 668,
+      "failures": [],
+      "menu_contract_matches": true,
+      "source_hashes_unchanged": {
+        "invalid.ssc": "85b88a0128bebf2b8c2c6e7b9030e49cbbb83f2f60ec834420eaade3db477d90",
+        "replacement.ssc": "a1964010abf8e9fc7e6bd0c0a2782a49a0c98fd9791f2455881316203f4ba9e3",
+        "scene.ssc": "7ac027472de395ebc7243e68e06f95c93a4a70613abb56c23860677f52c209ce"
+      }
+    },
+    {
+      "renderer": "gl_compatibility",
+      "checks": 668,
+      "failures": [],
+      "menu_contract_matches": true,
+      "source_hashes_unchanged": {
+        "invalid.ssc": "85b88a0128bebf2b8c2c6e7b9030e49cbbb83f2f60ec834420eaade3db477d90",
+        "replacement.ssc": "a8aaf2eb760549a30c2e519f89b5d0ff687a2f5687879de15216aa1b10937eda",
+        "scene.ssc": "ad050dc2eda38154001faabf7094f9017d2423fcb1628ac5af022927b4dff193"
+      }
+    }
+  ],
+  "native_checks": 1336,
+  "exported_pck_scenarios": [
+    {
+      "identity": {
+        "build": "1",
+        "full": "v0.1.0.1",
+        "release": "v0.1.0"
+      },
+      "export": true,
+      "runtime_matches_tool": true,
+      "main_startup": true
+    },
+    {
+      "identity": {
+        "build": "1000",
+        "full": "v0.1.0.1000",
+        "release": "v0.1.0"
+      },
+      "export": true,
+      "runtime_matches_tool": true,
+      "main_startup": true
+    }
+  ],
+  "unchanged_main_reproduction": {
+    "checks": 653,
+    "failures": [
+      "menu mouse exits fullscreen",
+      "F11 mouse exits fullscreen",
+      "Automatic collapse preserves legend visibility contract"
+    ]
+  },
+  "limits": [
+    "Review convention, no automated merge enforcement",
+    "PCK and headless startup on Linux; no installer, signed binary, Windows/macOS export or release",
+    "Intermediate fullscreen state-invariance failure did not reproduce with diagnostics; cause unestablished",
+    "No production scientific rerun"
+  ]
+}

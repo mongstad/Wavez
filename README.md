@@ -21,6 +21,7 @@ Start with:
 
 - [Quickstart](QUICKSTART.md)
 - [Current status](docs/CURRENT_STATUS.md)
+- [Application version and build policy](docs/VERSIONING.md) — view the identity in Help → Version
 - [SimScope handbook](docs/SIMSCOPE_HANDBOOK.md)
 - [Python API](SIMSCOPE_API.md)
 - [Capture format](G3_FORMAT.md)

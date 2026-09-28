@@ -1,6 +1,7 @@
 extends Control
 ## Presentation-only adapter. Controllers and the root scientific viewport retain ownership.
 const ThemeSource = preload("res://ui/theme/simscope_theme.gd")
+const AppVersion = preload("res://application_version.gd")
 const WORKSPACES = ["Particles", "Fields", "Meshes"]
 var viewer
 var legend_available := Vector2.ZERO
@@ -443,6 +444,7 @@ func build_menus(row: HBoxContainer) -> void:
 	command(help,"Handbook",func():
 		var path := ProjectSettings.globalize_path("res://../docs/SIMSCOPE_HANDBOOK.md")
 		show_details("Handbook",FileAccess.get_file_as_string(path) if FileAccess.file_exists(path) else "Handbook unavailable in this installation."),"handbook")
+	command(help,"Version",func():show_details("SimScope version",AppVersion.details()),"version")
 
 func submenu(parent: PopupMenu, title: String) -> PopupMenu:
 	var popup := PopupMenu.new(); popup.name = title.replace(" ",""); parent.add_child(popup)
@@ -469,7 +471,7 @@ func refresh_commands() -> void:
 	var particles: bool = loaded and viewer.scene_layers != null and not viewer.scene_layers.particle_id.is_empty()
 	for key in commands:
 		var entry: Dictionary = commands[key]
-		var enabled: bool = loaded or key in ["open","panels","fullscreen","immersive","shortcuts","handbook"]
+		var enabled: bool = loaded or key in ["open","panels","fullscreen","immersive","shortcuts","handbook","version"]
 		if key in ["probe","tool:Quick setup","tool:Clipping","tool:Isosurface","tool:Source probe"]: enabled = fields
 		if key == "tool:Mapping": enabled = particles
 		if key in ["tool:Slice","tool:Derive range"]: enabled = fields or particles
