@@ -109,10 +109,10 @@ func run():
 	viewer.shell.finish_open("Test open failure"); ui.refresh()
 	check(ui.failures.has("Open capture"),"Open failure survives ending preparation")
 	viewer._open_capture(config.source); viewer.playing = false; await ready(viewer)
-	check(ui.readiness == "Ready" and ui.failures.has("Open capture"),"Successful open does not acknowledge old failure")
+	check(ui.readiness == "Ready" and not ui.failures.has("Open capture"),"Successful open clears its load failure as accepted in #134")
 	viewer.status_label.text = "Unrelated information"; ui.refresh()
-	check(ui.badge.label.text.contains("Failed"),"Unrelated viewer status does not erase failure badge")
-	ui.show_status(); check(viewer.shell.detail_text.text.contains("Test open failure"),"Durable diagnostic reachable")
+	check(not ui.badge.label.text.contains("Failed"),"Unrelated status does not resurrect cleared load failure")
+	ui.show_status(); check(not viewer.shell.detail_text.text.contains("Test open failure"),"Recovered load diagnostic is cleared")
 	viewer.shell.details.hide(); ui.acknowledge(); check(ui.failures.is_empty(),"Explicit acknowledgement clears failure notice")
 	var layers = viewer.scene_layers
 	var fields = layers.field_playback
@@ -220,7 +220,9 @@ func run():
 	video.open()
 	check(video.timeline == preparing_timeline and video.start_button.text == "Cancel export" and not video.start_button.disabled and not video.background_button.disabled,"Preparation preserves draft and exposes background and cooperative cancellation")
 	video.start_button.pressed.emit()
-	check(video.preparation_cancelled and video.job_status.stage == "cancelling","Preparation action requests background cancellation")
+	check(video.cancel_confirmation.visible and not video.preparation_cancelled,"Preparation action confirms before background cancellation")
+	video.cancel_confirmation.confirmed.emit()
+	check(video.preparation_cancelled and video.job_status.stage == "cancelling","Confirmed preparation requests background cancellation")
 	video.preparing = false; video._sync_action_buttons()
 	check_idle_export(video,"Cancelled preparation")
 	var resolution := setting_choice(video,"Resolution")
@@ -254,7 +256,7 @@ func run():
 	check(video.background_button.position.x == idle_secondary_x and video.background_button.get_parent().size.x == idle_row_width,"Action row keeps secondary position and width across launch")
 	video.get_texture().get_image().save_png(output.path_join("export-running.png"))
 	video.background_button.pressed.emit()
-	check(not video.visible and video.pid == pid and not FileAccess.file_exists(video.active_directory.path_join("cancel")),"Run in background hides without cancellation or restart")
+	check(not video.visible and not video.cancel_confirmation.visible and video.pid == pid and not FileAccess.file_exists(video.active_directory.path_join("cancel")),"Run in background hides without cancellation or restart")
 	ui.open_jobs(); ui.reopen_video(); check(video.pid == pid and video.visible,"Jobs reopens original running export without restarting")
 	check_active_export(video,"Jobs reopen")
 	check(video.settings() == running_settings and FileAccess.get_sha256(video.active_job_path) == job_hash,"Background/reopen and blocked picker preserve visible and worker configuration")
@@ -301,7 +303,9 @@ func run():
 	completed_detail = viewer.shell.detail_text.text
 	video = configure_video(viewer,"cancel",config.ffmpeg,6); video.start_export(); video.hide(); ui.refresh()
 	check(not ui.job_rows["Video export"].cancel.disabled,"Jobs exposes supported cancellation")
-	ui.job_rows["Video export"].cancel.pressed.emit(); await wait_video(video)
+	ui.job_rows["Video export"].cancel.pressed.emit()
+	check(video.cancel_confirmation.visible,"Jobs cancel opens shared confirmation")
+	video.cancel_confirmation.confirmed.emit(); await wait_video(video)
 	check(video.job_status.stage == "cancelled","Jobs cancel follows worker acknowledgement")
 	check(viewer.shell.detail_text.text == completed_detail,"A later export cannot overwrite the terminal Details view")
 	viewer.shell.details.hide()
@@ -311,7 +315,10 @@ func run():
 	check(video.job_status.stage == "complete" and FileAccess.file_exists(output.path_join("second-success.mp4")),"Edited settings launch and complete another export after terminal cleanup")
 	video = configure_video(viewer,"primary-cancel",config.ffmpeg,6)
 	video.start_button.pressed.emit(); pid = video.pid
-	video.start_button.pressed.emit()
+	deadline = Time.get_ticks_msec()+15000
+	while video.pid > 0 and video.last_progress.get("stage") != "rendering" and Time.get_ticks_msec()<deadline:await create_timer(.02).timeout
+	check(video.last_progress.get("stage") == "rendering","Primary cancellation exercises a rendering worker")
+	await check_cancel_confirmation(video)
 	check(video.pid == pid and FileAccess.file_exists(video.active_directory.path_join("cancel")) and video.job_status.stage == "cancelling","Primary running action requests canonical cancellation without starting another job")
 	video.hide(); await wait_video(video)
 	check(video.job_status.stage == "cancelled","Primary cancellation follows worker acknowledgement")
@@ -322,6 +329,23 @@ func run():
 	check(video.job_status.stage == "failed" and ui.failures.has("Video export"),"Encoding failure persists in Jobs and status")
 	viewer.status_label.text = "Another information message"; ui.refresh(); check(ui.failures.has("Video export"),"Unrelated update retains export failure")
 	ui.open_jobs(); await settle(); picture("jobs-failed"); ui.jobs_dialog.hide(); ui.acknowledge()
+	# Encoding uses real FFmpeg paced at input speed so the confirmation race is observable.
+	video = configure_video(viewer,"cancel-encoding",config.slow_ffmpeg,3);video.start_export()
+	deadline = Time.get_ticks_msec()+15000
+	while video.pid > 0 and video.last_progress.get("stage") != "encoding" and Time.get_ticks_msec()<deadline:await create_timer(.02).timeout
+	check(video.last_progress.get("stage") == "encoding","Real worker reaches FFmpeg encoding")
+	await check_cancel_confirmation(video);await wait_video(video)
+	check(video.job_status.stage == "cancelled" and not FileAccess.file_exists(output.path_join("cancel-encoding.mp4")),"Confirmed encoding cancellation retains protocol and no final MP4")
+	for terminal_stage in ["complete","frames_ready","failed","cancelled"]:
+		video.job_status.stage = terminal_stage;video.request_cancel_export()
+		check(not video.cancel_confirmation.visible,"Terminal job never prompts: "+terminal_stage)
+	# Simulate completion publication while the prompt is open, before process cleanup.
+	video.preparing = true;video.job_status.stage = "preparing";video.request_cancel_export()
+	check(video.cancel_confirmation.visible,"Prompt opens for active preparation")
+	video.publish_job("complete","Finished while confirmation was open")
+	video.cancel_confirmation.confirmed.emit()
+	check(not video.cancel_confirmation.visible and video.job_status.stage == "complete","Completion dismisses stale confirmation and Yes is inert")
+	video.preparing = false
 	# Parent close requests cancellation through the same existing _exit_tree path.
 	video = configure_video(viewer,"parent-close",config.ffmpeg,6); video.start_export()
 	var parent_directory: String = video.active_directory
@@ -329,7 +353,7 @@ func run():
 	viewer.free(); await process_frame
 	check(FileAccess.file_exists(parent_directory.path_join("cancel")),"Parent teardown requests graceful cancellation")
 	var file := FileAccess.open(output.path_join("report.json"),FileAccess.WRITE)
-	file.store_string(JSON.stringify({"checks":checks,"failures":failures,"timings":timings,"activity":activity,"parent_directory":parent_directory},"\t")); file.close()
+	file.store_string(JSON.stringify({"checks":checks,"failures":failures,"timings":timings,"activity":activity,"parent_directory":parent_directory,"standalone":not OS.has_feature("editor")},"\t")); file.close()
 	print("STATUS: %d checks, %d failures" % [checks,failures.size()]); quit(0 if failures.is_empty() else 1)
 
 func check_playback_status(viewer, config: Dictionary) -> void:
@@ -435,10 +459,30 @@ func check_playback_status(viewer, config: Dictionary) -> void:
 	viewer._open_capture(output.path_join("missing.ssc"));ui.refresh()
 	check(ui.failures.has("Open capture"),"Actual missing-file failure remains available")
 	viewer._open_capture(config.source);viewer.playing = false;await ready(viewer)
-	check(ui.readiness == "Ready" and ui.failures.has("Open capture"),"Valid open recovers readiness while retaining failure details")
+	check(ui.readiness == "Ready" and not ui.failures.has("Open capture"),"Valid open recovers readiness and clears its load failure")
 	ui.acknowledge()
 	var reader = viewer.generic_reader;viewer.generic_reader = null;ui.refresh()
 	check(ui.readiness == "No capture" and ui.badge.label.text == "No capture","No-source presentation cannot retain old playback status")
 	viewer.generic_reader = reader;ui.refresh()
 	check(ui.readiness == "Ready" and not ui.badge.label.text.contains("%"),"Capture replacement clears prior status")
 	viewer.set_process(true)
+
+func check_cancel_confirmation(video):
+	var marker: String = video.active_directory.path_join("cancel")
+	video.start_button.pressed.emit();await settle()
+	var dialog = video.cancel_confirmation
+	check(dialog.visible and not FileAccess.file_exists(marker),"Cancel export prompts before writing marker")
+	check(dialog.gui_get_focus_owner() == dialog.get_cancel_button(),"No receives default confirmation focus")
+	video.request_cancel_export()
+	check(video.cancel_confirmation == dialog and dialog.visible,"Repeated request reuses the single prompt")
+	dialog.get_cancel_button().pressed.emit();await settle()
+	check(not dialog.visible and not FileAccess.file_exists(marker) and video.pid > 0,"No keeps worker running without marker")
+	video.request_cancel_export();dialog.close_requested.emit();await settle()
+	check(not dialog.visible and not FileAccess.file_exists(marker) and video.pid > 0,"Window dismissal keeps worker running")
+	video.request_cancel_export()
+	dialog.confirmed.emit()
+	check(FileAccess.file_exists(marker) and video.job_status.stage == "cancelling","Yes invokes existing cancellation")
+	# A second signal must not invoke the writer again while acknowledgement is pending.
+	var file := FileAccess.open(marker,FileAccess.WRITE);file.store_string("request already sent");file.close()
+	dialog.confirmed.emit();video.request_cancel_export()
+	check(FileAccess.get_file_as_string(marker) == "request already sent" and not dialog.visible,"Repeated Yes/click does not send another request")

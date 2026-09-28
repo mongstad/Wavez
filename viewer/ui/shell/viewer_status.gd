@@ -44,7 +44,7 @@ func setup(owner_shell) -> void:
 	jobs_dialog = AcceptDialog.new(); jobs_dialog.title = "Jobs"; jobs_dialog.get_ok_button().text = "Close"; add_child(jobs_dialog)
 	var scroll := ScrollContainer.new(); scroll.custom_minimum_size = Vector2(600,360); jobs_dialog.add_child(scroll)
 	var content := VBoxContainer.new(); content.size_flags_horizontal = Control.SIZE_EXPAND_FILL; scroll.add_child(content)
-	add_job(content,"Video export", reopen_video, func(): viewer.video_dialog.cancel_export())
+	add_job(content,"Video export", reopen_video, func(): viewer.video_dialog.request_cancel_export())
 	add_job(content,"Selections", func(): shell.show_section("Selections"), func(): viewer.selection_controller.cancel_query(); selection_result = "Cancelled. Completed selections remain available.")
 	add_job(content,"Analysis", reopen_analysis, func(): viewer.selection_controller.temporal.cancel_analysis(); analysis_result = "Cancellation requested. Completed named results remain available.")
 	add_job(content,"Matched views", func(): shell.show_section("Matched runs"), func(): viewer.selection_controller.temporal.matched.cancel())
@@ -225,7 +225,7 @@ func update_jobs() -> void:
 	var video = viewer.video_dialog
 	var state: Dictionary = video.job_status
 	var text: String = video.progress_details()
-	update_row("Video export",text,video.pid > 0 or video.preparing,video.pid > 0 or video.preparing, not state.is_empty() or viewer.generic_reader != null,video.active_job_path)
+	update_row("Video export",text,video.pid > 0 or video.preparing,video.can_cancel_export(), not state.is_empty() or viewer.generic_reader != null,video.active_job_path)
 	if state.get("stage") in ["complete","frames_ready","failed","cancelled"]: job_rows["Video export"].active = false
 	var selections = viewer.selection_controller
 	var jobs = selections.jobs

@@ -1,0 +1,125 @@
+{
+  "issue": 97,
+  "baseline": "b6008e08bc2f88eb471be99343c218518e1965ad",
+  "candidate": "v0.1.0.6",
+  "owner_acceptance": "pending",
+  "runs": {
+    "development_forward": {
+      "activity": {
+        "counters": {},
+        "stages": {}
+      },
+      "checks": 261,
+      "failures": [],
+      "parent_directory": "/tmp/simscope-97-status-forward-final/.simscope-export-1790625749-31630384",
+      "standalone": false,
+      "timings": {
+        "refresh_1000_ms": 54.063
+      },
+      "known_encoder_cleanup_diagnostics": [
+        "ERROR: The process 220984 does not exist or is not a child of the calling process.\n   at: _check_pid_is_running (drivers/unix/os_unix.cpp:863)\n   GDScript backtrace (most recent call first):\n       [0] finish (res://video/render_worker.gd:64)\n       [1] encode (res://video/render_worker.gd:340)\n",
+        "ERROR: The process 220984 does not exist or is not a child of the calling process.\n   at: _check_pid_is_running (drivers/unix/os_unix.cpp:863)\n   GDScript backtrace (most recent call first):\n       [0] _exit_tree (res://video/render_worker.gd:50)\n"
+      ],
+      "parent_close_acknowledged": true,
+      "source_hashes_unchanged": {
+        "/tmp/simscope-97-status-forward-final/scene.ssc": "30a7e76c2886838c7bba6c888d8d2e927fc7ccb441797114d2ae1b74ea8d8649",
+        "/tmp/simscope-97-status-forward-final/fields.ssc": "ca81b6bcc5c64561fc3591a6242efde7ad8cef8df115d294a3704769cfe449f1"
+      }
+    },
+    "development_compatibility": {
+      "activity": {
+        "counters": {},
+        "stages": {}
+      },
+      "checks": 261,
+      "failures": [],
+      "parent_directory": "/tmp/simscope-97-status-compat-final/.simscope-export-1790625863-28836144",
+      "standalone": false,
+      "timings": {
+        "refresh_1000_ms": 53.582
+      },
+      "known_encoder_cleanup_diagnostics": [
+        "ERROR: The process 230202 does not exist or is not a child of the calling process.\n   at: _check_pid_is_running (drivers/unix/os_unix.cpp:863)\n   GDScript backtrace (most recent call first):\n       [0] finish (res://video/render_worker.gd:64)\n       [1] encode (res://video/render_worker.gd:340)\n",
+        "ERROR: The process 230202 does not exist or is not a child of the calling process.\n   at: _check_pid_is_running (drivers/unix/os_unix.cpp:863)\n   GDScript backtrace (most recent call first):\n       [0] _exit_tree (res://video/render_worker.gd:50)\n"
+      ],
+      "parent_close_acknowledged": true,
+      "source_hashes_unchanged": {
+        "/tmp/simscope-97-status-compat-final/scene.ssc": "c83156659d002ff67ec201f6790b9379cce251e508daad3bffa457600ea1560e",
+        "/tmp/simscope-97-status-compat-final/fields.ssc": "5303d2007235bab5aae241ad30ae08c06891e868d71e9f7a02f77871ef9c963d"
+      }
+    },
+    "standalone_debug_failed": {
+      "activity": {
+        "counters": {},
+        "stages": {}
+      },
+      "checks": 261,
+      "failures": [
+        "Background work never replaces progressing Playing or adds an adjacent counter",
+        "Running action row reachable by scrolling",
+        "Run in background hides without cancellation or restart",
+        "Jobs reopens original running export without restarting",
+        "Jobs reopen: every setting, including Browse, is locked",
+        "Jobs reopen: only background dismiss action is visible",
+        "Open active Details updates from real published export progress",
+        "Real worker produces canonical progress and elapsed",
+        "Live Details has no duplicate frame count or directory",
+        "Live Details acquires a render ETA from real worker progress",
+        "Export completes while main viewer minimized and panel hidden",
+        "Details publishes terminal completion and stops following",
+        "Real completion reports 100 percent and zero remaining",
+        "Completion clears active count and retains output",
+        "Idle reopen refreshes current capture timeline and preserves terminal diagnostics/output",
+        "Overwrite refusal remains inline; no job starts",
+        "Jobs cancel follows worker acknowledgement",
+        "A later export cannot overwrite the terminal Details view",
+        "Edited settings launch and complete another export after terminal cleanup",
+        "Primary cancellation exercises a rendering worker",
+        "Cancel export prompts before writing marker",
+        "Repeated request reuses the single prompt",
+        "No keeps worker running without marker",
+        "Window dismissal keeps worker running",
+        "Yes invokes existing cancellation",
+        "Primary running action requests canonical cancellation without starting another job",
+        "Primary cancellation follows worker acknowledgement",
+        "Missing FFmpeg retains PNG sequence",
+        "Recoverable PNG output exists",
+        "Real worker reaches FFmpeg encoding",
+        "Cancel export prompts before writing marker",
+        "Repeated request reuses the single prompt",
+        "No keeps worker running without marker",
+        "Window dismissal keeps worker running",
+        "Yes invokes existing cancellation",
+        "Confirmed encoding cancellation retains protocol and no final MP4"
+      ],
+      "parent_directory": "/tmp/simscope-97-status-package2/.simscope-export-1790625778-11456966",
+      "standalone": true,
+      "timings": {
+        "refresh_1000_ms": 57.616
+      },
+      "limitation": "Worker launch fails: --path unsupported by installed template. Existing #93; package end-to-end acceptance unverified."
+    }
+  },
+  "development_first_run_failures": [
+    "Successful open does not acknowledge old failure",
+    "Unrelated viewer status does not erase failure badge",
+    "Durable diagnostic reachable",
+    "Valid open recovers readiness while retaining failure details",
+    "Window dismissal keeps worker running"
+  ],
+  "version_tests": {
+    "passed": 2,
+    "runner": "unittest; pytest unavailable"
+  },
+  "known_limitations": [
+    "Unchanged encoder cleanup rechecks a killed PID; exact diagnostic recorded, all other errors fatal.",
+    "Initial package ignored --script; stopped and replaced by explicit test entry scene.",
+    "No Windows/macOS, manual desktop acceptance or production-size scientific rerun.",
+    "Standalone run also failed a background-playback presentation assertion before worker launch; unresolved within #97."
+  ],
+  "documentation": {
+    "links": "PASS",
+    "executable_examples": 3
+  },
+  "python_compile": "PASS"
+}
