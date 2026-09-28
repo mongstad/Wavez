@@ -18,8 +18,8 @@ pixels** of the top, bottom or right client-window edge reveals a surface tempor
 Leaving the edge before that deadline resets the dwell. Pinning reveals immediately;
 unpinning grants the ordinary grace period rather than hiding during the click.
 Fullscreen saves all pin/visibility/timer state, initially hides and unpins all three
-surfaces, and keeps edge reveal active. Exiting restores the saved state, including
-pin preferences changed temporarily while fullscreen.
+surfaces, and keeps edge reveal active. Exiting discards pin changes made while
+fullscreen and restores the original pre-fullscreen pin, visibility and timer state.
 
 Open menus (including Godot internal popup nodes), dropdowns/dialogs, held mouse
 buttons, panel resize, text/numeric editing and keyboard navigation protect the
