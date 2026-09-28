@@ -194,7 +194,7 @@ func run() -> void:
 				var event := InputEventKey.new(); event.keycode = KEY_F11; event.pressed = true
 				root.push_input(event)
 			await create_timer(.5).timeout
-			check(shell.immersive and not shell.is_visible_in_tree() and not shell.dock.visible, route + " hides application chrome")
+			check(shell.immersive and not shell.bar.is_visible_in_tree() and not shell.navigation.is_visible_in_tree() and not shell.dock.visible, route + " hides application chrome")
 			check(science(viewer) == fullscreen_state, route + " preserves science")
 			var escape := InputEventKey.new(); escape.keycode = KEY_ESCAPE; escape.pressed = true
 			root.push_input(escape)
@@ -287,7 +287,7 @@ func immersive_checks(viewer) -> void:
 		else: viewer._unhandled_input(shortcut)
 		await create_timer(.5).timeout; await settle()
 		check(shell.immersive and root.mode == Window.MODE_FULLSCREEN, "Immersive native entry from " + str(prior_mode))
-		check(not shell.is_visible_in_tree() and not shell.dock.visible and not viewer.resize_handle.visible, "Immersive hides shell and dock from " + str(prior_mode))
+		check(not shell.bar.is_visible_in_tree() and not shell.navigation.is_visible_in_tree() and not shell.dock.visible and not viewer.resize_handle.visible, "Immersive hides shell and dock from " + str(prior_mode))
 		check(not shell.transport.is_visible_in_tree() and not shell.status_ui.is_visible_in_tree(), "Immersive hides transport/status/recovery")
 		check(root.gui_get_focus_owner() == null, "Immersive releases hidden control focus")
 		check(not shell.immersive_hint.visible, "Fullscreen has no viewport recovery chrome")
@@ -300,7 +300,7 @@ func immersive_checks(viewer) -> void:
 			check(not shell.immersive_hint.visible, "Hint disappears automatically after three seconds")
 			picture("immersive-clean")
 		shell.refresh(); shell.layout(); viewer._toggle_overlay(); await settle()
-		check(not shell.dock.visible and not shell.is_visible_in_tree(), "Refresh layout and F1 cannot expose immersive chrome")
+		check(not shell.dock.visible and not shell.bar.is_visible_in_tree() and not shell.navigation.is_visible_in_tree(), "Refresh layout and F1 cannot expose immersive chrome")
 		var activity := Profile.report(); Profile.enabled = false
 		# Existing selection controller idle callbacks continue across frames.
 		for idle in ["g4_overlay_tick", "g4_worker_poll"]: activity.stages.erase(idle)
@@ -324,7 +324,7 @@ func immersive_checks(viewer) -> void:
 	shell.enter_immersive(); await create_timer(3.1).timeout
 	check(await viewer._capture_inspection_png(output.path_join("immersive-png.png"), false) == OK, "Canonical PNG capture remains available during immersive")
 	viewer._notify_screenshot("Immersive PNG test")
-	check(not viewer.screenshot_notice.visible and not shell.visible, "PNG completion does not expose application chrome")
+	check(not viewer.screenshot_notice.visible and not shell.bar.visible, "PNG completion does not expose application chrome")
 	root.mode = Window.MODE_WINDOWED; await create_timer(.5).timeout
 	check(not shell.immersive and shell.visible and shell.bar.visible and shell.transport.is_visible_in_tree(), "Unexpected native fullscreen loss recovers usable shell")
 	shell.enter_immersive(); await create_timer(.5).timeout

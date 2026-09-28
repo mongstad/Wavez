@@ -1,0 +1,792 @@
+{
+  "review_change": "Fullscreen saves pin state, initially hides/unpins all three surfaces, permits edge reveal, and restores pre-fullscreen state on exit.",
+  "version": "v0.1.0.8",
+  "status": "pending owner review",
+  "edge_forward_plus": {
+    "checks": 210,
+    "dwell_seconds": 0.5,
+    "failures": [],
+    "hide_grace_seconds": 0.35,
+    "renderer": "forward_plus",
+    "right_zone_pixels": 10.0,
+    "top_bottom_zone_pixels": 10.0,
+    "source_hashes_unchanged": {
+      "invalid.ssc": "85b88a0128bebf2b8c2c6e7b9030e49cbbb83f2f60ec834420eaade3db477d90",
+      "replacement.ssc": "6ce1d3dc421a30aae372d291d642426abf55176344bcde5f8400edb2577fc76e",
+      "scene.ssc": "b58a2483c80d15366013b6fe3667675a980ea673d130decec2d7d72ff52fddc0"
+    }
+  },
+  "shell_forward_plus": {
+    "checks": 661,
+    "failures": [],
+    "layouts": [
+      {
+        "bar": "(1440.0, 48.0)",
+        "dock": "[P: (1080.0, 48.0), S: (360.0, 748.0)]",
+        "logical": "(1440, 900)",
+        "scale": 1.0
+      },
+      {
+        "bar": "(1920.0, 48.0)",
+        "dock": "[P: (1560.0, 48.0), S: (360.0, 928.0)]",
+        "logical": "(1920, 1080)",
+        "scale": 1.0
+      },
+      {
+        "bar": "(1024.0, 48.0)",
+        "dock": "[P: (704.0, 48.0), S: (320.0, 448.0)]",
+        "logical": "(1024, 640)",
+        "scale": 1.0
+      },
+      {
+        "bar": "(1024.0, 48.0)",
+        "dock": "[P: (704.0, 48.0), S: (320.0, 448.0)]",
+        "logical": "(1024, 640)",
+        "scale": 1.25
+      },
+      {
+        "bar": "(1024.0, 48.0)",
+        "dock": "[P: (704.0, 48.0), S: (320.0, 448.0)]",
+        "logical": "(1024, 640)",
+        "scale": 1.5
+      },
+      {
+        "bar": "(1024.0, 48.0)",
+        "dock": "[P: (704.0, 48.0), S: (320.0, 448.0)]",
+        "logical": "(1024, 640)",
+        "scale": 2.0
+      }
+    ],
+    "menu_tree": [
+      "File",
+      "  Open capture",
+      "  State",
+      "    Copy state",
+      "    Save view preset\u2026",
+      "    Load view preset\u2026",
+      "    Save analysis",
+      "    Load analysis",
+      "    Resolve input",
+      "  Export",
+      "    Image",
+      "    Video",
+      "    Data",
+      "View",
+      "  Window",
+      "    Fullscreen",
+      "  Global effects",
+      "  Probe marker",
+      "  Guides",
+      "    Grid and axes",
+      "    Domain",
+      "    Data bounds",
+      "    Absorber",
+      "    Imposed regions",
+      "  Viewing preset",
+      "    Cinematic",
+      "    Scientific",
+      "    Temperature",
+      "    Density",
+      "    Velocity",
+      "    Minimal",
+      "Tools",
+      "  Selection",
+      "  Analysis",
+      "    Temporal",
+      "    Space time",
+      "    Diagnostics",
+      "    Compare",
+      "    Matched runs",
+      "    Period",
+      "    Bookmarks",
+      "    Results",
+      "  Mapping",
+      "  Quick setup",
+      "  Derive range",
+      "  Slice",
+      "  Clipping",
+      "  Isosurface",
+      "  Source probe",
+      "  Performance",
+      "  Geometry",
+      "Help",
+      "  Shortcuts",
+      "  Handbook",
+      "  About SimScope"
+    ],
+    "renderer": "forward_plus",
+    "shell_scientific_activity": {
+      "counters": {},
+      "stages": {}
+    },
+    "menu_contract_matches": true,
+    "source_hashes_unchanged": {
+      "invalid.ssc": "85b88a0128bebf2b8c2c6e7b9030e49cbbb83f2f60ec834420eaade3db477d90",
+      "replacement.ssc": "1f45219359509b7778383b84fab2732fcff8c51241ba8e64a334e71bf30f7d75",
+      "scene.ssc": "dbca84cfcb1f3300095a8240251cd882ababb8cbee49511cae9a5f06da48842b"
+    }
+  },
+  "edge_gl_compatibility": {
+    "checks": 210,
+    "dwell_seconds": 0.5,
+    "failures": [],
+    "hide_grace_seconds": 0.35,
+    "renderer": "gl_compatibility",
+    "right_zone_pixels": 10.0,
+    "top_bottom_zone_pixels": 10.0,
+    "source_hashes_unchanged": {
+      "invalid.ssc": "85b88a0128bebf2b8c2c6e7b9030e49cbbb83f2f60ec834420eaade3db477d90",
+      "replacement.ssc": "b60d79b7b2128f0881c85b20c633d1f00f705bdec45bd5943280aa53f1c35b2e",
+      "scene.ssc": "75aa54592cd6e033db8490a483c092231cca12749fe17f4f06440118c6c4d1a0"
+    }
+  },
+  "shell_gl_compatibility": {
+    "checks": 661,
+    "failures": [],
+    "layouts": [
+      {
+        "bar": "(1440.0, 48.0)",
+        "dock": "[P: (1080.0, 48.0), S: (360.0, 748.0)]",
+        "logical": "(1440, 900)",
+        "scale": 1.0
+      },
+      {
+        "bar": "(1920.0, 48.0)",
+        "dock": "[P: (1560.0, 48.0), S: (360.0, 928.0)]",
+        "logical": "(1920, 1080)",
+        "scale": 1.0
+      },
+      {
+        "bar": "(1024.0, 48.0)",
+        "dock": "[P: (704.0, 48.0), S: (320.0, 448.0)]",
+        "logical": "(1024, 640)",
+        "scale": 1.0
+      },
+      {
+        "bar": "(1024.0, 48.0)",
+        "dock": "[P: (704.0, 48.0), S: (320.0, 448.0)]",
+        "logical": "(1024, 640)",
+        "scale": 1.25
+      },
+      {
+        "bar": "(1024.0, 48.0)",
+        "dock": "[P: (704.0, 48.0), S: (320.0, 448.0)]",
+        "logical": "(1024, 640)",
+        "scale": 1.5
+      },
+      {
+        "bar": "(1024.0, 48.0)",
+        "dock": "[P: (704.0, 48.0), S: (320.0, 448.0)]",
+        "logical": "(1024, 640)",
+        "scale": 2.0
+      }
+    ],
+    "menu_tree": [
+      "File",
+      "  Open capture",
+      "  State",
+      "    Copy state",
+      "    Save view preset\u2026",
+      "    Load view preset\u2026",
+      "    Save analysis",
+      "    Load analysis",
+      "    Resolve input",
+      "  Export",
+      "    Image",
+      "    Video",
+      "    Data",
+      "View",
+      "  Window",
+      "    Fullscreen",
+      "  Global effects",
+      "  Probe marker",
+      "  Guides",
+      "    Grid and axes",
+      "    Domain",
+      "    Data bounds",
+      "    Absorber",
+      "    Imposed regions",
+      "  Viewing preset",
+      "    Cinematic",
+      "    Scientific",
+      "    Temperature",
+      "    Density",
+      "    Velocity",
+      "    Minimal",
+      "Tools",
+      "  Selection",
+      "  Analysis",
+      "    Temporal",
+      "    Space time",
+      "    Diagnostics",
+      "    Compare",
+      "    Matched runs",
+      "    Period",
+      "    Bookmarks",
+      "    Results",
+      "  Mapping",
+      "  Quick setup",
+      "  Derive range",
+      "  Slice",
+      "  Clipping",
+      "  Isosurface",
+      "  Source probe",
+      "  Performance",
+      "  Geometry",
+      "Help",
+      "  Shortcuts",
+      "  Handbook",
+      "  About SimScope"
+    ],
+    "renderer": "gl_compatibility",
+    "shell_scientific_activity": {
+      "counters": {},
+      "stages": {}
+    },
+    "menu_contract_matches": true,
+    "source_hashes_unchanged": {
+      "invalid.ssc": "85b88a0128bebf2b8c2c6e7b9030e49cbbb83f2f60ec834420eaade3db477d90",
+      "replacement.ssc": "ab078fc66687fe72c342ae116f6610981dec984ba7c31e4d644bcb99db14f2c0",
+      "scene.ssc": "b5197d88ec9c9374eee10e3121f46747dff548773df18208ad07c65bb2dc3be3"
+    }
+  },
+  "native_forward": [
+    {
+      "checks": 4,
+      "expected_mode": 0,
+      "failures": [],
+      "mode": 0,
+      "restore": "",
+      "stage": "manual",
+      "window_size": "(1100, 700)",
+      "kwin": {
+        "pid": 309341,
+        "active": true,
+        "fullscreen": false,
+        "frame": {
+          "x": 556,
+          "y": 231,
+          "width": 1108,
+          "height": 732
+        },
+        "client": {
+          "x": 560,
+          "y": 259,
+          "width": 1100,
+          "height": 700
+        },
+        "screen": {
+          "x": 0,
+          "y": 0,
+          "width": 2560,
+          "height": 1440
+        }
+      }
+    },
+    {
+      "checks": 10,
+      "expected_mode": 3,
+      "failures": [],
+      "mode": 3,
+      "restore": "",
+      "stage": "manual-fullscreen",
+      "window_size": "(2560, 1440)",
+      "kwin": {
+        "pid": 309341,
+        "active": true,
+        "fullscreen": true,
+        "frame": {
+          "x": 0,
+          "y": 0,
+          "width": 2560,
+          "height": 1440
+        },
+        "client": {
+          "x": 0,
+          "y": 0,
+          "width": 2560,
+          "height": 1440
+        },
+        "screen": {
+          "x": 0,
+          "y": 0,
+          "width": 2560,
+          "height": 1440
+        }
+      }
+    },
+    {
+      "checks": 13,
+      "expected_mode": 0,
+      "failures": [],
+      "mode": 0,
+      "restore": "manual",
+      "stage": "manual-restored",
+      "window_size": "(1100, 700)",
+      "kwin": {
+        "pid": 309341,
+        "active": true,
+        "fullscreen": false,
+        "frame": {
+          "x": 556,
+          "y": 231,
+          "width": 1108,
+          "height": 732
+        },
+        "client": {
+          "x": 560,
+          "y": 259,
+          "width": 1100,
+          "height": 700
+        },
+        "screen": {
+          "x": 0,
+          "y": 0,
+          "width": 2560,
+          "height": 1440
+        }
+      }
+    },
+    {
+      "checks": 16,
+      "expected_mode": 2,
+      "failures": [],
+      "mode": 2,
+      "restore": "",
+      "stage": "maximized",
+      "window_size": "(2560, 1370)",
+      "kwin": {
+        "pid": 309341,
+        "active": true,
+        "fullscreen": false,
+        "frame": {
+          "x": 0,
+          "y": 0,
+          "width": 2560,
+          "height": 1394
+        },
+        "client": {
+          "x": 0,
+          "y": 24,
+          "width": 2560,
+          "height": 1370
+        },
+        "screen": {
+          "x": 0,
+          "y": 0,
+          "width": 2560,
+          "height": 1440
+        }
+      }
+    },
+    {
+      "checks": 22,
+      "expected_mode": 3,
+      "failures": [],
+      "mode": 3,
+      "restore": "",
+      "stage": "max-fullscreen-0",
+      "window_size": "(2560, 1440)",
+      "kwin": {
+        "pid": 309341,
+        "active": true,
+        "fullscreen": true,
+        "frame": {
+          "x": 0,
+          "y": 0,
+          "width": 2560,
+          "height": 1440
+        },
+        "client": {
+          "x": 0,
+          "y": 0,
+          "width": 2560,
+          "height": 1440
+        },
+        "screen": {
+          "x": 0,
+          "y": 0,
+          "width": 2560,
+          "height": 1440
+        }
+      }
+    },
+    {
+      "checks": 25,
+      "expected_mode": 2,
+      "failures": [],
+      "mode": 2,
+      "restore": "maximized",
+      "stage": "max-restored-0",
+      "window_size": "(2560, 1370)",
+      "kwin": {
+        "pid": 309341,
+        "active": true,
+        "fullscreen": false,
+        "frame": {
+          "x": 0,
+          "y": 0,
+          "width": 2560,
+          "height": 1394
+        },
+        "client": {
+          "x": 0,
+          "y": 24,
+          "width": 2560,
+          "height": 1370
+        },
+        "screen": {
+          "x": 0,
+          "y": 0,
+          "width": 2560,
+          "height": 1440
+        }
+      }
+    },
+    {
+      "checks": 31,
+      "expected_mode": 3,
+      "failures": [],
+      "mode": 3,
+      "restore": "",
+      "stage": "max-fullscreen-1",
+      "window_size": "(2560, 1440)",
+      "kwin": {
+        "pid": 309341,
+        "active": true,
+        "fullscreen": true,
+        "frame": {
+          "x": 0,
+          "y": 0,
+          "width": 2560,
+          "height": 1440
+        },
+        "client": {
+          "x": 0,
+          "y": 0,
+          "width": 2560,
+          "height": 1440
+        },
+        "screen": {
+          "x": 0,
+          "y": 0,
+          "width": 2560,
+          "height": 1440
+        }
+      }
+    },
+    {
+      "checks": 34,
+      "expected_mode": 2,
+      "failures": [],
+      "mode": 2,
+      "restore": "maximized",
+      "stage": "max-restored-1",
+      "window_size": "(2560, 1370)",
+      "kwin": {
+        "pid": 309341,
+        "active": true,
+        "fullscreen": false,
+        "frame": {
+          "x": 0,
+          "y": 0,
+          "width": 2560,
+          "height": 1394
+        },
+        "client": {
+          "x": 0,
+          "y": 24,
+          "width": 2560,
+          "height": 1370
+        },
+        "screen": {
+          "x": 0,
+          "y": 0,
+          "width": 2560,
+          "height": 1440
+        }
+      }
+    },
+    {
+      "checks": 37,
+      "expected_mode": 0,
+      "failures": [],
+      "mode": 0,
+      "restore": "",
+      "stage": "resized",
+      "window_size": "(1200, 760)",
+      "kwin": {
+        "pid": 309341,
+        "active": true,
+        "fullscreen": false,
+        "frame": {
+          "x": 556,
+          "y": 231,
+          "width": 1208,
+          "height": 792
+        },
+        "client": {
+          "x": 560,
+          "y": 259,
+          "width": 1200,
+          "height": 760
+        },
+        "screen": {
+          "x": 0,
+          "y": 0,
+          "width": 2560,
+          "height": 1440
+        }
+      }
+    },
+    {
+      "checks": 43,
+      "expected_mode": 3,
+      "failures": [],
+      "mode": 3,
+      "restore": "",
+      "stage": "resized-fullscreen",
+      "window_size": "(2560, 1440)",
+      "kwin": {
+        "pid": 309341,
+        "active": true,
+        "fullscreen": true,
+        "frame": {
+          "x": 0,
+          "y": 0,
+          "width": 2560,
+          "height": 1440
+        },
+        "client": {
+          "x": 0,
+          "y": 0,
+          "width": 2560,
+          "height": 1440
+        },
+        "screen": {
+          "x": 0,
+          "y": 0,
+          "width": 2560,
+          "height": 1440
+        }
+      }
+    },
+    {
+      "checks": 46,
+      "expected_mode": 0,
+      "failures": [],
+      "mode": 0,
+      "restore": "resized",
+      "stage": "resized-restored",
+      "window_size": "(1200, 760)",
+      "kwin": {
+        "pid": 309341,
+        "active": true,
+        "fullscreen": false,
+        "frame": {
+          "x": 556,
+          "y": 231,
+          "width": 1208,
+          "height": 792
+        },
+        "client": {
+          "x": 560,
+          "y": 259,
+          "width": 1200,
+          "height": 760
+        },
+        "screen": {
+          "x": 0,
+          "y": 0,
+          "width": 2560,
+          "height": 1440
+        }
+      }
+    },
+    {
+      "checks": 49,
+      "expected_mode": 2,
+      "failures": [],
+      "mode": 2,
+      "restore": "maximized",
+      "stage": "maximized-again",
+      "window_size": "(2560, 1370)",
+      "kwin": {
+        "pid": 309341,
+        "active": true,
+        "fullscreen": false,
+        "frame": {
+          "x": 0,
+          "y": 0,
+          "width": 2560,
+          "height": 1394
+        },
+        "client": {
+          "x": 0,
+          "y": 24,
+          "width": 2560,
+          "height": 1370
+        },
+        "screen": {
+          "x": 0,
+          "y": 0,
+          "width": 2560,
+          "height": 1440
+        }
+      }
+    },
+    {
+      "checks": 55,
+      "expected_mode": 3,
+      "failures": [],
+      "mode": 3,
+      "restore": "",
+      "stage": "unpinned-fullscreen-false",
+      "window_size": "(2560, 1440)",
+      "kwin": {
+        "pid": 309341,
+        "active": true,
+        "fullscreen": true,
+        "frame": {
+          "x": 0,
+          "y": 0,
+          "width": 2560,
+          "height": 1440
+        },
+        "client": {
+          "x": 0,
+          "y": 0,
+          "width": 2560,
+          "height": 1440
+        },
+        "screen": {
+          "x": 0,
+          "y": 0,
+          "width": 2560,
+          "height": 1440
+        }
+      }
+    },
+    {
+      "checks": 59,
+      "expected_mode": 2,
+      "failures": [],
+      "mode": 2,
+      "restore": "maximized",
+      "stage": "unpinned-restored-false",
+      "window_size": "(2560, 1370)",
+      "kwin": {
+        "pid": 309341,
+        "active": true,
+        "fullscreen": false,
+        "frame": {
+          "x": 0,
+          "y": 0,
+          "width": 2560,
+          "height": 1394
+        },
+        "client": {
+          "x": 0,
+          "y": 24,
+          "width": 2560,
+          "height": 1370
+        },
+        "screen": {
+          "x": 0,
+          "y": 0,
+          "width": 2560,
+          "height": 1440
+        }
+      }
+    },
+    {
+      "checks": 65,
+      "expected_mode": 3,
+      "failures": [],
+      "mode": 3,
+      "restore": "",
+      "stage": "unpinned-fullscreen-true",
+      "window_size": "(2560, 1440)",
+      "kwin": {
+        "pid": 309341,
+        "active": true,
+        "fullscreen": true,
+        "frame": {
+          "x": 0,
+          "y": 0,
+          "width": 2560,
+          "height": 1440
+        },
+        "client": {
+          "x": 0,
+          "y": 0,
+          "width": 2560,
+          "height": 1440
+        },
+        "screen": {
+          "x": 0,
+          "y": 0,
+          "width": 2560,
+          "height": 1440
+        }
+      }
+    },
+    {
+      "checks": 69,
+      "expected_mode": 2,
+      "failures": [],
+      "mode": 2,
+      "restore": "maximized",
+      "stage": "unpinned-restored-true",
+      "window_size": "(2560, 1370)",
+      "kwin": {
+        "pid": 309341,
+        "active": true,
+        "fullscreen": false,
+        "frame": {
+          "x": 0,
+          "y": 0,
+          "width": 2560,
+          "height": 1394
+        },
+        "client": {
+          "x": 0,
+          "y": 24,
+          "width": 2560,
+          "height": 1370
+        },
+        "screen": {
+          "x": 0,
+          "y": 0,
+          "width": 2560,
+          "height": 1440
+        }
+      }
+    }
+  ],
+  "documentation": {
+    "status": "PASS",
+    "missing_local_links": [],
+    "examples": [
+      {
+        "document": "SIMSCOPE_API.md",
+        "status": "PASS",
+        "source_unchanged": true,
+        "document_sha256": "dc196243d3ee730da23d7aa7013a9481e690337296265a0bd7fee32ef2d20dd4"
+      },
+      {
+        "document": "docs/SIMULATION_INTEGRATION_GUIDE.md",
+        "status": "PASS",
+        "source_unchanged": true,
+        "document_sha256": "9de55b956c14a9a84a8596b5382500aed2c59b45558dc2bfc427de0f70c07f1f"
+      },
+      {
+        "document": "G3_GUIDE.md",
+        "status": "PASS",
+        "source_unchanged": true,
+        "document_sha256": "677144dbe2c19d6879835c33697db746ce296871b52cc8e408c9b90b8f445c04"
+      }
+    ]
+  },
+  "version_tests": 2
+}

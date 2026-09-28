@@ -73,7 +73,7 @@ func popup_active(node: Node) -> bool:
 	return false
 
 func _process(delta: float) -> void:
-	if shell == null or shell.bottom_strip == null or shell.immersive or shell.viewer.offline_instance: return
+	if shell == null or shell.bottom_strip == null or shell.viewer.offline_instance: return
 	if states.top.pinned and states.right.pinned and states.bottom.pinned: return
 	var point := get_viewport().get_mouse_position()
 	var inside := pointer_inside and get_window().has_focus() and get_viewport().get_visible_rect().has_point(point)
@@ -81,7 +81,6 @@ func _process(delta: float) -> void:
 	tick(delta, point, inside, busy)
 
 func tick(delta: float, point: Vector2, inside: bool, busy: bool) -> void:
-	if shell.immersive: return
 	var extent := get_viewport().get_visible_rect().size
 	var edges := {"top": point.y <= VERTICAL_EDGE, "right": point.x >= extent.x-RIGHT_EDGE, "bottom": point.y >= extent.y-VERTICAL_EDGE}
 	var changed := false

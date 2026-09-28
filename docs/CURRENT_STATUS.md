@@ -33,7 +33,9 @@ Timeline endpoint alignment was owner-merged in PR #141 at `e11ea58`.
 Current authorized work is #117, the only Ready item when selected:
 [pinned edge reveal and simulation-only Fullscreen](WINDOW_EDGE_REVEAL.md),
 **pending owner review**. The three chrome surfaces use local session-only pins;
-the bottom transport/status strip is one visibility unit. F11 and View → Window
+the bottom transport/status strip is one visibility unit. Fullscreen temporarily
+unpins and initially hides all three surfaces, permits edge access, then restores
+the previous pins and visibility on exit. F11 and View → Window
 → Fullscreen use the accepted immersive native restoration path. Build 8 is the
 merge candidate. Historical evidence remains unchanged.
 Ordinary recipe save/load uses a small source-independent presentation JSON and

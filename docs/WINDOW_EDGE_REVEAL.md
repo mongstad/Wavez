@@ -17,7 +17,9 @@ and its active interactions. A continuous **0.5-second** hover within **10 logic
 pixels** of the top, bottom or right client-window edge reveals a surface temporarily.
 Leaving the edge before that deadline resets the dwell. Pinning reveals immediately;
 unpinning grants the ordinary grace period rather than hiding during the click.
-Fullscreen suspends edge timers and restores their preceding values on exit.
+Fullscreen saves all pin/visibility/timer state, initially hides and unpins all three
+surfaces, and keeps edge reveal active. Exiting restores the saved state, including
+pin preferences changed temporarily while fullscreen.
 
 Open menus (including Godot internal popup nodes), dropdowns/dialogs, held mouse
 buttons, panel resize, text/numeric editing and keyboard navigation protect the
@@ -45,8 +47,10 @@ double-click restores the preceding native mode/geometry and shell state. Shift+
 is the same F11 action, not a second mode. Native maximize/restore remains owned by
 the compositor. The previous Exit fullscreen button and transient hint are not drawn.
 
-Fullscreen hides all application chrome, including viewport camera controls,
-while preserving explicitly enabled scientific overlays. Playback and camera
+Fullscreen initially hides all application chrome, including viewport camera controls,
+while preserving explicitly enabled scientific overlays. The top bar, right panel
+and complete bottom strip can then be revealed from their 10px edges. Their normal
+interaction protection and auto-hide grace still apply. Playback and camera
 controls continue. Esc recovery still runs before inspection-busy and GUI input
 guards; text/numeric entry suppresses the entry shortcut. Native rejection or an
 external compositor exit uses the existing recovery path.
@@ -61,7 +65,8 @@ conflict with this left-button gesture; no orbit setup is implemented here.
 
 See [initial machine-readable evidence](evidence/issue-117/validation.json) and
 [initial wider-zone checks](evidence/issue-117/wider-zones.json) and
-[current 10px-zone checks](evidence/issue-117/ten-pixel-zones.json). Native tests
+[10px-zone checks](evidence/issue-117/ten-pixel-zones.json) and
+[current fullscreen edge-access checks](evidence/issue-117/fullscreen-edge-access.json). Native tests
 use Godot 4.7.2 on Linux/NVIDIA RTX 3070 Ti, tiny mixed SIMSCP4 fixtures, and unchanged
 source SHA-256 checks. The deterministic edge tests inject elapsed time into the
 same controller used by `_process`; real popup objects and viewport input dispatch
@@ -70,11 +75,11 @@ proof of physical hover feel.
 
 | Check | Result |
 |---|---|
-| Edge/pin/input matrix | 114 PASS per renderer after owner-requested wider zones |
+| Edge/pin/input matrix | 210 PASS per renderer after fullscreen edge-access review |
 | Complete shell/menu/state suite | 661 PASS per renderer |
 | Transport regression | 210 PASS per renderer |
 | Portable view presets, including zoom | 826 PASS, Forward+ |
-| KDE/Wayland window restoration | 16 stages each; 51 Forward+ / 69 Compatibility checks |
+| KDE/Wayland window restoration | 16 stages each; 69 Forward+ follow-up / 69 prior Compatibility checks |
 | Monitor/taskbar check with legends | 6 Wayland + 3 partial X11 bottom-region comparisons match |
 | Application version | 2 unittest cases PASS |
 | Documentation | Local links + 3 executable examples PASS |
@@ -82,8 +87,8 @@ proof of physical hover feel.
 
 [Pin placement](evidence/issue-117/pins.png) and
 [fullscreen monitor capture](evidence/issue-117/fullscreen-monitor.png) show the
-reviewed presentation. Forward+ native restoration preceded the additional
-legend assertions; the Compatibility native run includes those assertions.
+reviewed presentation. The initial Forward+ native run preceded the additional legend assertions; the
+latest Forward+ fullscreen edge-access run and prior Compatibility run both include them.
 
 The KDE/Wayland harness uses only its test PID, a temporary KWin script and
 Spectacle. It checks actual compositor frame/client/output rectangles and exact
@@ -128,8 +133,9 @@ was added. Recheck physical F11 transitions during owner review.
    navigate controls with Tab. Finish interaction and move away; check the grace.
 3. Try all pinned, each individually unpinned, and all unpinned. Enter with F11
    and exit with F11 and Esc. Repeat while an unpinned surface is temporarily
-   revealed. Confirm prior visibility/pins return and edges stay inactive inside
-   Fullscreen.
+   revealed. Confirm prior visibility/pins return. Inside Fullscreen, reveal each surface
+   from its edge, use its controls, then leave it to auto-hide. Temporarily pin a
+   surface there and verify exiting still restores the original preference.
 4. Repeat from a restored window and maximized KDE window. Confirm exact previous
    geometry, no recovery buttons, and no changes to playback, camera or layer state.
 5. Double-click an unobstructed viewport to enter/exit. Double-click on a legend,

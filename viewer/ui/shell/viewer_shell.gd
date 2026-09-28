@@ -44,6 +44,8 @@ var immersive_started := 0
 var immersive_native_seen := false
 var immersive_mode := DisplayServer.WINDOW_MODE_WINDOWED
 var immersive_focus: WeakRef
+var immersive_edges := {}
+var immersive_chrome := {}
 
 func setup(owner_viewer) -> void:
 	viewer = owner_viewer
@@ -236,14 +238,13 @@ func restore_focus() -> void:
 	source_button.grab_focus()
 
 func refresh() -> void:
-	if immersive: return
 	if source_button == null: return
 	var loaded: bool = viewer.generic_reader != null
 	refresh_commands()
 	viewer.tools_ui.refresh_context()
 	var title: String = viewer.capture_path.get_file() if loaded else "No capture"
 	if source_button.text != title: source_button.text = title; source_button.tooltip_text = viewer.capture_path if loaded else "Source details"
-	empty.visible = not loaded and not loading
+	empty.visible = not immersive and not loaded and not loading
 	var has_particles: bool = loaded and viewer.scene_layers != null and not viewer.scene_layers.particle_id.is_empty()
 	viewer.inspector_box.visible = has_particles and workspace == 0
 	particle_empty.visible = loaded and workspace == 0 and not has_particles
@@ -280,11 +281,6 @@ func resize_input(event: InputEvent) -> void:
 		layout()
 
 func layout() -> void:
-	if immersive:
-		dock.hide(); viewer.resize_handle.hide()
-		layout_legend(get_viewport().get_visible_rect().size)
-		immersive_hint.position = Vector2((get_viewport().get_visible_rect().size.x - immersive_hint.size.x) / 2, 24)
-		return
 	if changing_layout or dock == null: return
 	changing_layout = true
 	var extent := get_viewport().get_visible_rect().size
@@ -296,7 +292,8 @@ func layout() -> void:
 	tabs.visible = not compact; chooser.visible = compact
 	# Preserve the root camera projection and export sampling. This is overlay chrome.
 	var too_narrow := extent.x < 970
-	if not viewer.offline_instance: viewer.overlay_visible = edge_reveal.states.right.visible
+	if not viewer.offline_instance and not immersive: viewer.overlay_visible = edge_reveal.states.right.visible
+	var dock_visible: bool = viewer.overlay_visible if viewer.offline_instance else edge_reveal.states.right.visible
 	bar.visible = edge_reveal.states.top.visible
 	bottom_strip.visible = edge_reveal.states.bottom.visible
 	var width := clampf(viewer.panel_width, 320, maxf(320, minf(560, extent.x - 650)))
@@ -304,13 +301,13 @@ func layout() -> void:
 	var top := 48.0 if bar.visible else 0.0
 	var status_height: float = status_ui.layout(extent.x,extent.y) if bottom_strip.visible else 0.0
 	var bottom: float = extent.y - status_height - (transport.layout(extent.x,extent.y-status_height) if bottom_strip.visible else 0.0)
-	dock.position = Vector2(extent.x-width, top); dock.size = Vector2(width, maxf(0, bottom-top)); dock.visible = viewer.overlay_visible
-	viewer.resize_handle.position = Vector2(extent.x-width-8, top); viewer.resize_handle.size = Vector2(8, maxf(0, bottom-top)); viewer.resize_handle.visible = viewer.overlay_visible
-	var scene_width := extent.x-width-8 if viewer.overlay_visible else extent.x
+	dock.position = Vector2(extent.x-width, top); dock.size = Vector2(width, maxf(0, bottom-top)); dock.visible = dock_visible
+	viewer.resize_handle.position = Vector2(extent.x-width-8, top); viewer.resize_handle.size = Vector2(8, maxf(0, bottom-top)); viewer.resize_handle.visible = dock_visible
+	var scene_width := extent.x-width-8 if dock_visible else extent.x
 	navigation.position = Vector2(12, top+12)
 	empty.position = Vector2(maxf(12, (scene_width-empty.size.x)/2), maxf(152, extent.y/2-40))
 	open_error.position = Vector2(12, top+96)
-	layout_legend(Vector2(dock.position.x if viewer.overlay_visible else extent.x, bottom))
+	layout_legend(Vector2(dock.position.x if dock_visible else extent.x, bottom))
 	refresh()
 	changing_layout = false
 
@@ -343,10 +340,15 @@ func enter_immersive() -> void:
 	if focused != null: focused.release_focus()
 	for control in menus.values(): control.get_popup().hide()
 	viewer.tools_ui.close(false)
+	immersive_edges = edge_reveal.states.duplicate(true)
+	immersive_chrome = {"navigation":navigation.visible,"error":open_error.visible}
+	for side in edge_reveal.states:
+		edge_reveal.states[side] = {"pinned":false,"visible":false,"dwell":0.0,"leave":0.0}
+		edge_reveal.update_pin(side)
 	immersive = true
 	immersive_started = Time.get_ticks_msec()
 	immersive_native_seen = immersive_mode == DisplayServer.WINDOW_MODE_FULLSCREEN
-	hide()
+	navigation.hide(); empty.hide(); open_error.hide()
 	dock.hide()
 	viewer.resize_handle.hide()
 	if viewer.screenshot_notice != null: viewer.screenshot_notice.hide()
@@ -357,6 +359,12 @@ func enter_immersive() -> void:
 func exit_immersive(restore_native := true) -> void:
 	if not immersive: return
 	immersive = false
+	edge_reveal.states = immersive_edges.duplicate(true)
+	immersive_edges.clear()
+	for side in edge_reveal.states: edge_reveal.update_pin(side)
+	navigation.visible = immersive_chrome.navigation
+	open_error.visible = immersive_chrome.error
+	immersive_chrome.clear()
 	immersive_hint.hide()
 	if restore_native: DisplayServer.window_set_mode(immersive_mode)
 	show()

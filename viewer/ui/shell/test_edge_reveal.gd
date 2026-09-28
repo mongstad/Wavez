@@ -133,9 +133,20 @@ func run() -> void:
 		edge.tick(.36,Vector2(100,200),false,false)
 		var before: Dictionary = edge.states.duplicate(true)
 		viewer._toggle_fullscreen(); await create_timer(.25).timeout
-		check(shell.immersive and not shell.visible and not shell.dock.visible and not shell.transport.is_visible_in_tree() and not shell.status_ui.is_visible_in_tree(),"Fullscreen hides every surface mask "+str(mask))
-		edge.tick(10,Vector2(1,1),true,false)
-		check(edge.states == before,"Fullscreen freezes edge states mask "+str(mask))
+		check(shell.immersive and not shell.bar.visible and not shell.navigation.visible and not shell.dock.visible and not shell.transport.is_visible_in_tree() and not shell.status_ui.is_visible_in_tree(),"Fullscreen hides every surface mask "+str(mask))
+		for side in edge.states:
+			check(not edge.states[side].pinned and not edge.states[side].visible,"Fullscreen initially unpins and hides "+side+" mask "+str(mask))
+			var extent := root.get_visible_rect().size
+			var point: Vector2 = {"top":Vector2(500,5),"right":Vector2(extent.x-5,300),"bottom":Vector2(500,extent.y-5)}[side]
+			edge.tick(.49,point,true,false)
+			check(not edge.states[side].visible,"Fullscreen retains deliberate dwell "+side)
+			edge.tick(.02,point,true,false)
+			check(edge.states[side].visible and edge.controls(side)[0].is_visible_in_tree(),"Fullscreen edge reveals usable "+side)
+			edge.tick(.36,Vector2(100,200),false,false)
+			check(not edge.states[side].visible,"Fullscreen auto-hides "+side)
+			# Fullscreen pin changes are temporary and cannot overwrite saved state.
+			edge.set_pinned(side,true)
+		check(science() == original and viewer.committed_sample == sample,"Fullscreen reveal preserves science mask "+str(mask))
 		viewer.inspection_busy = true; key(KEY_ESCAPE); viewer.inspection_busy = false
 		await create_timer(.25).timeout
 		check(not shell.immersive and edge.states == before,"Esc restores exact pin visibility and timers mask "+str(mask))

@@ -55,7 +55,9 @@ Failed-open details remain available until dismissed; failed replacement retains
 the previous usable scene.
 
 **View → Window → Fullscreen**, **F11**, or a double-click in the unobstructed
-simulation viewport enters simulation-only fullscreen. **Esc**, F11 or viewport
+simulation viewport enters fullscreen with all controls initially hidden and the
+three surfaces temporarily unpinned. Their 10px edge zones remain active for access.
+**Esc**, F11 or viewport
 double-click exits and restores the prior native window mode/geometry, pin states
 and temporary visibility. Scientific overlays retain their enabled state.
 There are no viewport recovery buttons, separate Immersive command, or View-menu
