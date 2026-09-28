@@ -41,7 +41,7 @@ def main():
             directory.mkdir()
             state = copy.deepcopy(json.loads((out / 'state.json').read_text()))
             state['overlay_visible'] = enabled
-            state['scene']['legend_visibility'] = {}
+            state['scene']['legend_visibility'] = {key: True for key in state['scene']['layers']}
             job = dict(version=1, capture_path=str(source), state=state, start_time=0., end_time=.5,
                        fps=2, playback_rate=1., width=1440, height=900, camera_mode='locked',
                        quality='high', keep_frames=True, ffmpeg_path=shutil.which('ffmpeg'),

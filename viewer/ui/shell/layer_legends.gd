@@ -32,7 +32,7 @@ func sync() -> void:
 		for info in layers.layer_samples:
 			var id: String = info.id
 			if info.kind == "particles" or not info.visible or info.status in ["hidden", "unavailable"]: continue
-			if not layers.legend_visibility.get(id, true): continue
+			if not layers.legend_visibility.get(id, false): continue
 			var state: Dictionary = layers.states[id]
 			if state.channel.is_empty(): continue
 			var view = layers.views[id]

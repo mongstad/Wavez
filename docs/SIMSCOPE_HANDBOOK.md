@@ -63,6 +63,14 @@ See [immersive fullscreen semantics and validation](UX3_FULLSCREEN.md).
 
 ## Color legends
 
+Legends start hidden: particle **Show legend** is unchecked at application
+startup, and field/mesh layers without an explicit preference default to hidden.
+Enable each legend with its existing **Show legend** control. Explicit recipe
+visibility values still restore as saved. Particle visibility remains a session
+preference when replacing captures; newly constructed field/mesh layers use the
+hidden default. Recipes omitting layer preferences use that same default; an
+omitted particle preference retains the live value, as before.
+
 Enabled scalar legends show the color ramp above labeled **Object**, **Channel**,
 **Colormap** and **Color range** values. The range includes the active linear,
 log or cyclic mapping; particle legends also show **Range policy** using the same

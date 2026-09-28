@@ -25,6 +25,15 @@ func run() -> void:
 	layers.states.volume1.volume = false; layers.states.volume1.slice = true; layers.states.volume1.visible = true
 	layers.resample(); await settle()
 	var collection = viewer.shell.layer_legends
+	check(not viewer.show_legend and not viewer.legend.visible and not viewer.colorbar.visible and collection.entries.is_empty(), "Fresh scalar capture has no legend overlays")
+	var particle_toggle: CheckButton
+	for control in viewer.generic_box.find_children("*", "CheckButton", true, false):
+		if control.text == "Show legend": particle_toggle = control
+	check(particle_toggle != null and not particle_toggle.button_pressed, "Particle legend control starts unchecked")
+	for id in ["volume0","volume1","mesh0","mesh1"]:
+		check(not layers.panel_controls[id].legend.button_pressed, "Layer legend control starts unchecked: "+id)
+		layers.panel_controls[id].legend.button_pressed = true
+	particle_toggle.button_pressed = true; await settle()
 	check(collection.entries.size() == 4 and viewer.legend.visible, "Particles, two fields and two meshes coexist")
 	check(viewer.legend.get_theme_font("font") == collection.entries.volume0.label.get_theme_font("font") and viewer.legend.get_theme_font_size("font_size") == collection.entries.volume0.label.get_theme_font_size("font_size"), "All legends share font and size")
 	var card: Rect2 = viewer.shell.particle_legend_panel.get_rect()
@@ -73,7 +82,9 @@ func run() -> void:
 	var legacy: Dictionary = saved.scene.duplicate(true); legacy.erase("legend_visibility")
 	check(layers.validate_state(legacy).is_empty(), "Older recipes accepted")
 	layers.apply_state(legacy); await settle()
-	check(collection.entries.has("volume0"), "Older recipes default eligible field legends on")
+	check(collection.entries.is_empty(), "Recipes without layer preferences use hidden defaults")
+	for id in ["volume0","volume1","mesh0","mesh1"]: layers.panel_controls[id].legend.button_pressed = true
+	await settle()
 	var invalid: Dictionary = layers.snapshot(); invalid.legend_visibility = {"volume0":"yes"}
 	check(not layers.validate_state(invalid).is_empty(), "Malformed legend preferences rejected")
 	layers.states.volume0.lower = .1; layers.states.volume0.upper = 2.0
