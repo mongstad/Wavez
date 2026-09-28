@@ -44,22 +44,27 @@ inspector. The fixed header reports current capture context, not
 a selected-object editor.
 
 The right dock starts at 360 logical pixels, or 320 below 1200 pixels. Drag its
-left edge to resize, use Hide panel/F1 to collapse, and Show panels to recover it.
-Below 970 logical pixels the dock starts collapsed and can reopen as a temporary
-sheet. Maximized mode keeps the top command bar. Fullscreen hides that bar and retains
-Frame scene, Reset camera, Navigate and Exit fullscreen; exiting restores the bar. Failed-open details remain visible
-until dismissed; a failed replacement retains the previous usable scene.
+left edge to resize. The top bar, right panel and combined playback/status strip
+each have one local pin. All start pinned. Unpin to auto-hide after leaving the
+surface for 0.35 seconds; hover its window edge for 0.5 seconds to reveal it.
+Menus, dialogs, dragging and focused text edits keep revealed surfaces available.
+Pin again for persistent visibility. Playback and status always hide/reveal together.
+These preferences last for the session and are not saved in portable view presets.
+At narrow widths the right panel overlays the scene; pinning keeps it visible.
+Failed-open details remain available until dismissed; failed replacement retains
+the previous usable scene.
 
-**View → Immersive fullscreen** (Shift+F11) is a separate simulation-only view.
-It hides all application chrome, including the dock, camera buttons, transport,
-status and Jobs. A noninteractive “Press Esc to exit fullscreen” hint disappears
-after three seconds. Esc restores the preceding windowed, maximized or interactive
-fullscreen state and its dock/focus. F11 or Shift+F11 also restores that state.
-Text/numeric entry suppresses fullscreen shortcuts; Esc recovery remains available.
-F1 has no effect while immersive. Camera interaction and ongoing playback continue.
-Scientific overlays retain their existing visibility: entering immersive never
-enables a hidden legend or disables a visible scientific annotation.
-See [immersive fullscreen semantics and validation](UX3_FULLSCREEN.md).
+**View → Window → Fullscreen**, **F11**, or a double-click in the unobstructed
+simulation viewport enters simulation-only fullscreen. **Esc**, F11 or viewport
+double-click exits and restores the prior native window mode/geometry, pin states
+and temporary visibility. Scientific overlays retain their enabled state.
+There are no viewport recovery buttons, separate Immersive command, or View-menu
+hide/show commands. F1 no longer toggles panel visibility. Shift+F11 follows the
+same F11 action; it does not select another presentation mode.
+Text/numeric entry suppresses the entry shortcut; Esc recovery remains available.
+Selection tools keep priority over viewport clicks. Camera interaction and playback
+continue. See [edge reveal and fullscreen](WINDOW_EDGE_REVEAL.md) for validation,
+interaction boundaries and owner review steps.
 
 ## Color legends
 
@@ -288,7 +293,7 @@ sample again. Probing while hidden updates the result without showing the cross.
 An unavailable probe hides it even if the switch is on. Recipe loading preserves
 the session's marker visibility, but recipes/PNG sidecars do not serialize this
 session-only marker. Screenshots include the cross only when shown; deterministic
-video excludes it. F1 hides the inspector, not this 3D marker. Reopening a capture
+video excludes it. Auto-hiding the inspector does not hide this 3D marker. Reopening a capture
 resets the probe session (switch on, no cross until a valid probe).
 
 GPU grids are float32 previews, potentially reduced by endpoint-aligned power-of-two LOD under budget; the shader samples that preview. Source arrays remain full resolution. Isosurfaces use optional scikit-image Lewiner marching cubes over the full source grid after the algorithm's float32 conversion, with no smoothing or decimation. Nonfinite-corner cells are omitted. A surface is an approximate level set, not a material boundary, tracked particle population or discovered physical object. Extraction is debounced, bounded, cancelable on stale requests and cached by source/settings identity.

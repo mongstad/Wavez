@@ -106,10 +106,10 @@ func run() -> void:
 		shell.select_workspace(0)
 	var focus: Control = viewer.section_buttons["Rendering"]; focus.grab_focus()
 	viewer._toggle_overlay(); await settle()
-	check(not viewer.overlay_visible and shell.recovery.visible, "Dock hide leaves mouse recovery")
+	check(not viewer.overlay_visible and not shell.dock.visible, "Unpinned dock hides")
 	check(shell.navigation.is_visible_in_tree(), "Hiding the contextual panel keeps viewport camera controls visible")
-	shell.recovery.pressed.emit(); await settle()
-	check(viewer.overlay_visible and root.gui_get_focus_owner() == focus, "Dock recovery restores previous focus")
+	shell.edge_reveal.set_pinned("right",true); await settle()
+	check(viewer.overlay_visible and shell.edge_reveal.states.right.pinned, "Pin restores persistent dock")
 	var camera_before: Transform3D = viewer.camera.transform
 	shell.transport.open_seek(); await settle(); shell.transport.target.editor.grab_focus()
 	for code in [KEY_R,KEY_SPACE]:
@@ -182,36 +182,26 @@ func run() -> void:
 		check(await wait_jobs(control) and temporal.durable.last_export.has("path"),"Data export completes through canonical worker")
 		check(FileAccess.file_exists(output.path_join("menu-data/values.csv")),"Data export retains full values artifact")
 	viewer.tools_ui.close()
-	# Native transitions are asynchronous. Compositor geometry is checked separately on KDE.
+	# Fullscreen is now the single simulation-only presentation mode.
 	if DisplayServer.get_name() != "headless":
 		var fullscreen_state := science(viewer)
 		root.mode = Window.MODE_MAXIMIZED
-		await create_timer(.5).timeout; shell.refresh(); await settle()
-		check(shell.bar.visible and not shell.fullscreen_button.visible, "Maximized retains the command bar")
+		await create_timer(.5).timeout
 		for route in ["menu", "F11"]:
 			var preceding_mode := DisplayServer.window_get_mode()
-			if route == "menu": shell.menus.View.get_popup().id_pressed.emit(1)
+			if route == "menu": activate(shell,"fullscreen")
 			else:
 				var event := InputEventKey.new(); event.keycode = KEY_F11; event.pressed = true
 				root.push_input(event)
-			await create_timer(.5).timeout; shell.refresh(); await settle()
-			check(shell.fullscreen_button.visible, route + " exposes mouse exit")
-			check(not shell.bar.visible, route + " hides the entire command bar")
-			check(shell.dock.position.y == 0 and shell.navigation.is_visible_in_tree(), route + " reclaims bar space and keeps camera controls")
-			var current_state := science(viewer)
-			for state_key in fullscreen_state:
-				if current_state[state_key] != fullscreen_state[state_key]:print("FULLSCREEN STATE ",state_key," before=",fullscreen_state[state_key]," after=",current_state[state_key])
-			check(science(viewer) == fullscreen_state, route + " preserves scientific state")
-			picture("fullscreen-" + route)
-			viewer._toggle_overlay(); await settle()
-			check(shell.recovery.visible and shell.fullscreen_button.visible and shell.navigation.is_visible_in_tree(), route + " panel hide retains camera and mouse recovery")
-			shell.recovery.pressed.emit(); await settle()
-			check(viewer.overlay_visible and not shell.bar.visible, route + " panel recovery keeps command bar hidden")
-			shell.fullscreen_button.pressed.emit()
-			await create_timer(.5).timeout; shell.refresh(); await settle()
-			check(DisplayServer.window_get_mode() == preceding_mode, route + " mouse exits fullscreen to preceding mode")
-			check(shell.bar.visible and shell.dock.position.y == 48, route + " restores command bar and layout")
-			check(science(viewer) == fullscreen_state, route + " exit preserves scientific state")
+			await create_timer(.5).timeout
+			check(shell.immersive and not shell.is_visible_in_tree() and not shell.dock.visible, route + " hides application chrome")
+			check(science(viewer) == fullscreen_state, route + " preserves science")
+			var escape := InputEventKey.new(); escape.keycode = KEY_ESCAPE; escape.pressed = true
+			root.push_input(escape)
+			await create_timer(.5).timeout
+			check(DisplayServer.window_get_mode() == preceding_mode, route + " restores native mode")
+			check(shell.bar.visible and shell.dock.position.y == 48, route + " restores layout")
+			check(science(viewer) == fullscreen_state, route + " exit preserves science")
 	await menu_checks(viewer)
 	await immersive_checks(viewer)
 	# Logical geometry at supported factors. No scientific projection/state changes.
@@ -239,12 +229,13 @@ func run() -> void:
 	# Below minimum logical space: collapse and a recoverable temporary sheet.
 	viewer.color_channel = "value"; viewer.show_legend = true; viewer._update_particle_legend()
 	root.content_scale_factor = 1; root.size = Vector2i(800,640); await settle(); shell.layout(); await settle()
-	check(not viewer.overlay_visible and shell.recovery.visible, "Narrow window collapses dock")
+	shell.edge_reveal.set_pinned("right",false); shell.edge_reveal.tick(.36,Vector2(100,200),false,false)
+	check(not viewer.overlay_visible and not shell.dock.visible, "Narrow window unpinned dock hides")
 	check(viewer.legend.visible and viewer.colorbar.visible, "Automatic collapse preserves independent enabled legend visibility")
-	shell.recovery.pressed.emit(); await settle()
-	check(viewer.overlay_visible, "Narrow window mouse recovery opens temporary sheet")
+	shell.edge_reveal.set_pinned("right",true); await settle()
+	check(viewer.overlay_visible, "Narrow window pin restores panel")
 	check(viewer.legend.visible, "Temporary sheet recovery restores scalar legend")
-	viewer._toggle_overlay(); await settle(); check(shell.recovery.visible, "Temporary sheet can be closed")
+	viewer._toggle_overlay(); await settle(); check(not shell.dock.visible, "Temporary sheet can be closed")
 	root.size = Vector2i(1440,900); await settle(); shell.layout()
 	if not viewer.overlay_visible: viewer._toggle_overlay()
 	viewer.panel_width = 480; shell.layout(); await settle()
@@ -292,14 +283,14 @@ func immersive_checks(viewer) -> void:
 		await create_timer(.5).timeout; shell.refresh(); await settle()
 		focus.grab_focus()
 		Profile.enabled = true; Profile.reset()
-		if prior_mode == Window.MODE_WINDOWED: activate(shell,"immersive")
+		if prior_mode == Window.MODE_WINDOWED: activate(shell,"fullscreen")
 		else: viewer._unhandled_input(shortcut)
 		await create_timer(.5).timeout; await settle()
 		check(shell.immersive and root.mode == Window.MODE_FULLSCREEN, "Immersive native entry from " + str(prior_mode))
 		check(not shell.is_visible_in_tree() and not shell.dock.visible and not viewer.resize_handle.visible, "Immersive hides shell and dock from " + str(prior_mode))
-		check(not shell.transport.is_visible_in_tree() and not shell.status_ui.is_visible_in_tree() and not shell.recovery.is_visible_in_tree(), "Immersive hides transport/status/recovery")
+		check(not shell.transport.is_visible_in_tree() and not shell.status_ui.is_visible_in_tree(), "Immersive hides transport/status/recovery")
 		check(root.gui_get_focus_owner() == null, "Immersive releases hidden control focus")
-		check(shell.immersive_hint.visible and shell.immersive_hint.mouse_filter == Control.MOUSE_FILTER_IGNORE and shell.immersive_hint.focus_mode == Control.FOCUS_NONE, "Transient hint is visible and noninteractive")
+		check(not shell.immersive_hint.visible, "Fullscreen has no viewport recovery chrome")
 		check(viewer.colorbar.visible and viewer.legend.visible, "Scientific overlay visibility retained")
 		check(Visual.snapshot(viewer) == state and viewer.committed_sample == sample and viewer.camera.transform == camera and viewer.generic_reader == source, "Entry retains recipes sample camera and source")
 		check(viewer.playing == playing, "Immersive preserves play/pause state")
@@ -328,7 +319,7 @@ func immersive_checks(viewer) -> void:
 	viewer._toggle_overlay(); await settle()
 	shell.enter_immersive(); await create_timer(.5).timeout
 	shell.exit_immersive(); await create_timer(.5).timeout
-	check(not viewer.overlay_visible and not shell.dock.visible and shell.recovery.visible, "Immersive preserves a previously hidden dock")
+	check(not viewer.overlay_visible and not shell.dock.visible, "Immersive preserves a previously hidden dock")
 	viewer._toggle_overlay(); await settle()
 	shell.enter_immersive(); await create_timer(3.1).timeout
 	check(await viewer._capture_inspection_png(output.path_join("immersive-png.png"), false) == OK, "Canonical PNG capture remains available during immersive")
