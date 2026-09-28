@@ -41,7 +41,8 @@ func run() -> void:
 	check(accounting(control.worker),"Initial allocation is bounded")
 	check(not control.session_waiting and not view.play_button.disabled,"Play does not require the whole timeline")
 	control.invalidate();view.scene_layers.seek(0);view.playing = true;control.begin_session()
-	check(await session_ready(view) and control.worker.status().frames < 20,"Early Play waits only for its admitted window")
+	await session_ready(view)
+	check(not control.session_waiting and control.worker.status().frames < 20,"Early Play starts with contiguous prepared data inside its bounded window")
 	view.playing = false;control.cancel_session()
 	check(await settle(view,0),"Pause retains automatic coverage after initial Play")
 	var before: Dictionary = control.worker.status();var overlap := window_keys(control)
@@ -69,7 +70,7 @@ func run() -> void:
 	var committed: float = view.requested_time
 	control.cache_cap_bytes = 1;control.request(1.4,view.scene_layers.field_budget())
 	await create_timer(.1).timeout
-	check(control.capacity_wait and control.worker.status().bytes == 0,"Too-small capacity releases the cache")
+	check(control.capacity_wait and control.worker.status().frames <= 2,"Too-small capacity releases unprotected cache and preserves current/staged ownership")
 	check(control.error.is_empty() and view.scene_layers.error.is_empty() and view.requested_time == committed,"Capacity wait leaves a valid committed scene")
 	control.cache_cap_bytes = 4*(32*32*32*16*2+65536)
 	check(await sample(view,1.4,true) and await settle(view,1.4),"Capacity recovery retries without reopening")

@@ -11,6 +11,7 @@ var enabled := false
 var buffering := false
 var pending_time = null
 var token := ""
+var invalidation_serial := 0
 var cache_scope := ""
 var request_signature := ""
 var staged := {} # At most one future GPU texture per visible field.
@@ -36,6 +37,9 @@ var automatic_anchor := 0.0
 var automatic_end := 0.0
 var automatic_generation := ""
 var automatic_checked := -1000
+var automatic_targets := ""
+var pressure_until := 0
+var rolling_pressure_events := 0
 var capacity_wait := false
 var concurrency := Concurrency.new()
 var policy_checked := -1000
@@ -104,6 +108,7 @@ func _selected_range(time: float) -> Array:
 	return [first,last]
 func close() -> void:worker.close();staged.clear()
 func invalidate() -> void:
+	invalidation_serial += 1
 	worker.cancel();token = "";cache_scope = "";request_signature = "";staged.clear();buffering = false;pending_time = null;error = "";session_waiting = false;session_requested = false;session_restart = false;prepared_range.clear()
 	automatic_generation = "";automatic_jobs.clear();capacity_wait = false
 func active() -> bool:return enabled and not viewer.offline_instance and not viewer.inspection_busy
@@ -187,7 +192,7 @@ func request(time: float, budget: int) -> Array:
 	for id in layers.states:
 		if layers.views[id] is Grid:
 			scope += id+str(layers.states[id].visible);channels.append([id,layers.states[id].channel])
-	var signature := scope+JSON.stringify(channels)+str(scope_choice.selected)+JSON.stringify(prepared_range if scope_choice.selected != 0 else [])
+	var signature := scope+JSON.stringify(channels)+str(scope_choice.selected)+JSON.stringify(prepared_range if scope_choice.selected != 0 else [])+":"+str(invalidation_serial)
 	if token != signature:
 		# Retain a bounded full-session allocation only for channel changes in the
 		# same source/visibility/texture-budget scope. Acquisition still requires
@@ -196,6 +201,7 @@ func request(time: float, budget: int) -> Array:
 		token = signature;request_signature = "";staged.clear();session_waiting = false;session_restart = session_requested and viewer.playing
 		concurrency.reset_rates(worker.status().rates)
 	if scope_choice.selected == 0:return _automatic_request(time,budget)
+	worker.protect({},time,-1 if viewer.physical_rate < 0 else 1)
 	capacity_wait = false
 	var targets: Array = [];var future: Array = []
 	var direction := -1 if viewer.physical_rate < 0 else 1
@@ -274,11 +280,19 @@ func _automatic_request(time: float, budget: int) -> Array:
 		if viewer.scene_loop_playback:next = posmod(next,rows.size())
 		if next >= 0 and next < rows.size() and next != index:display.append(_job(id,next,budget))
 	var signature := token+str(direction)+str(viewer.scene_loop_playback)+str(cache_cap_bytes)
+	var protected := {}
+	for job in display:protected[job.key] = true
+	for id in layers.views:
+		if layers.views[id] is Grid and not layers.views[id].key.is_empty():protected[layers.views[id].key] = true
+	for ready in staged.values():protected[ready.key] = true
+	worker.protect(protected,time,direction)
+	var target_signature := str(targets.map(func(job):return job.key))
 	largest = maxi(largest,required) # Current/staged references for every visible field.
 	var target_missing := targets.any(func(job):return not status.charges.has(job.key) and not automatic_jobs.any(func(item):return item.key == job.key))
 	var progressed := absf(time-automatic_anchor) > maxf(.000001,absf(automatic_end-automatic_anchor)*.2)
-	var refresh := automatic_generation != signature or target_missing or progressed or Time.get_ticks_msec()-automatic_checked >= 1000
+	var refresh := automatic_generation != signature or automatic_targets != target_signature or target_missing or progressed or Time.get_ticks_msec()-automatic_checked >= 1000
 	if refresh:
+		automatic_targets = target_signature
 		automatic_generation = signature;automatic_checked = Time.get_ticks_msec();automatic_anchor = time;automatic_end = time
 		var reservations := other_reservations();var other := 0
 		for value in reservations.values():other += int(value)
@@ -287,6 +301,25 @@ func _automatic_request(time: float, budget: int) -> Array:
 		if cache_cap_bytes > 0:cpu_limit = mini(cpu_limit,cache_cap_bytes)
 		budget_report = {"strategy":"automatic","cpu_limit":cpu_limit,"required_bytes":required,"reserved_other_bytes":other,"reservations":reservations,"memory":memory,"resident_credit":status.resident_bytes,"largest_job_bytes":largest}
 		capacity_wait = required > cpu_limit
+		if status.pressure_events > rolling_pressure_events:pressure_until = Time.get_ticks_msec()+10000
+		rolling_pressure_events = status.pressure_events
+		# Reserve a modest amount for resident history, without scheduling it for
+		# preparation. Pressure removes this allowance with a ten-second cooldown.
+		var demand := _demand(status,time)
+		var history_seconds := clampf(concurrency.rate/maxf(1.0,demand.consumer),1.0,3.0)
+		var history := mini(int(cpu_limit*.1),int(ceil(demand.consumer*history_seconds))*largest)
+		if Time.get_ticks_msec() < pressure_until:history = 0
+		var history_bytes := 0
+		for id in layers.states:
+			if not layers.views[id] is Grid or not layers.states[id].visible:continue
+			for row in layers.reader.samples[id]:
+				if (float(row.time)-time)*direction >= 0:continue
+				var key := Grid.sample_key(layers.reader.objects[id],row.sequence,layers.states[id].channel,budget)
+				history_bytes += int(status.charges.get(key,0))
+		history = mini(history,history_bytes)
+		var forward_limit := maxi(required+largest,cpu_limit-history)
+		forward_limit = mini(cpu_limit,forward_limit)
+		budget_report.history_allowance_bytes = history;budget_report.history_seconds = history_seconds
 		automatic_jobs = [];var charge := 0
 		# Interleave independent object clocks in playback order. Only headers and
 		# already known charges are needed; workers validate/decode on demand.
@@ -301,7 +334,7 @@ func _automatic_request(time: float, budget: int) -> Array:
 			var head: Dictionary = heads[best]
 			var job := _job(head.id,head.index,budget)
 			job.charge = int(status.charges.get(job.key,job.charge));job.other_reservation = other
-			if charge+job.charge > cpu_limit:break
+			if charge+job.charge > forward_limit:break
 			charge += job.charge;automatic_jobs.append(job);automatic_end = time+maxf(0,distance)*direction
 			head.seen += 1;head.index += direction
 			if viewer.scene_loop_playback:head.index = posmod(head.index,head.count)
@@ -382,13 +415,19 @@ func _demand(status: Dictionary, time: float) -> Dictionary:
 	# make a gap in the requested playback direction count as ready coverage.
 	var speed: float = maxf(absf(viewer.physical_rate),.000001)
 	var direction := -1 if viewer.physical_rate < 0 else 1
-	var consumer := 0.0;var lead := INF;var samples := 0
+	var consumer := 0.0;var lead := INF;var samples := 0;var contiguous := true
 	for id in layers.states:
 		if not layers.views[id] is Grid or not layers.states[id].visible:continue
 		var rows: Array = layers.reader.samples[id]
-		if rows.size() < 2:continue
+		if rows.is_empty():continue
 		var point: Dictionary = layers.reader.bracket(id,time)
 		var index: int = point.get("a",0)
+		for offset in range(2):
+			var required_index := index+offset*direction
+			if viewer.scene_loop_playback:required_index = posmod(required_index,rows.size())
+			if required_index < 0 or required_index >= rows.size():continue
+			var required_key := Grid.sample_key(layers.reader.objects[id],rows[required_index].sequence,layers.states[id].channel,layers.field_budget())
+			if not status.charges.has(required_key):contiguous = false
 		var lo := maxi(0,index-16);var hi := mini(rows.size()-1,index+16)
 		var duration: float = rows[hi].time-rows[lo].time
 		if duration > 0:consumer += (hi-lo)/duration*speed
@@ -406,13 +445,19 @@ func _demand(status: Dictionary, time: float) -> Dictionary:
 			var boundary := mini(cursor+1,rows.size()-1) if direction > 0 else cursor
 			coverage = maxf(0,(float(rows[boundary].time)-time)*direction+wrapped)
 		lead = minf(lead,coverage/speed);samples += count
-	return {"consumer":consumer,"ahead_seconds":0.0 if is_inf(lead) else lead,"ahead_samples":samples}
+	return {"consumer":consumer,"ahead_seconds":0.0 if is_inf(lead) else lead,"ahead_samples":samples,"contiguous_ready":contiguous}
+func startup_state(status: Dictionary, time: float) -> Dictionary:
+	var demand := _demand(status,time)
+	var gate := concurrency.gate(demand.consumer,demand.ahead_seconds,status.session.get("state") == "ready")
+	# An actual contiguous resident region is playable regardless of unrelated
+	# queued work or measured producer speed. Missing data still explicitly holds.
+	if demand.contiguous_ready:gate.ready = true;gate.reason = "prepared_region"
+	gate.merge(demand);return gate
 func _automatic_ready() -> bool:
 	var status := worker.status()
+	startup_report = startup_state(status,viewer.requested_time if pending_time == null else float(pending_time))
 	demand_report = _demand(status,viewer.requested_time if pending_time == null else float(pending_time))
-	startup_report = concurrency.gate(demand_report.consumer,demand_report.ahead_seconds,status.session.get("state") == "ready")
-	startup_report.merge(demand_report)
-	return not capacity_wait and startup_report.ready
+	return startup_report.ready and (not capacity_wait or demand_report.contiguous_ready)
 func observe_frame(milliseconds: float) -> void:
 	if not active():return
 	var now := Time.get_ticks_usec()
@@ -441,7 +486,7 @@ func observe_frame(milliseconds: float) -> void:
 	# window (including the end of the recording) always remains playable.
 	if scope_choice.selected == 0 and viewer.playing and status.session.get("state") != "ready":
 		var changed: bool = last_speed != viewer.physical_rate
-		if (changed or demand_report.ahead_seconds < 1.0) and concurrency.rate < demand_report.consumer*.95:
+		if not demand_report.contiguous_ready and (changed or demand_report.ahead_seconds <= 0.0):
 			session_waiting = true;buffering = true
 	last_speed = viewer.physical_rate
 func _update_ui() -> void:
@@ -473,4 +518,4 @@ func profile_report() -> Dictionary:
 	for view in layers.views.values():
 		if view is Grid:current_gpu += view.gpu_bytes
 	for ready in staged.values():staged_gpu += int(ready.get("gpu_bytes",0))
-	return {"enabled":enabled,"buffering":buffering,"cache":worker.status(),"budget":budget_report,"concurrency":concurrency.report(),"demand":demand_report.duplicate(),"startup":startup_report.duplicate(),"startup_events":startup_events.duplicate(true),"gpu_uploads":uploads,"current_gpu_bytes":current_gpu,"staged_gpu_bytes":staged_gpu,"staged_textures":staged.size(),"error":error}
+	return {"enabled":enabled,"buffering":buffering,"cache":worker.status(true),"budget":budget_report,"concurrency":concurrency.report(),"demand":demand_report.duplicate(),"startup":startup_report.duplicate(),"startup_events":startup_events.duplicate(true),"gpu_uploads":uploads,"current_gpu_bytes":current_gpu,"staged_gpu_bytes":staged_gpu,"staged_textures":staged.size(),"error":error}

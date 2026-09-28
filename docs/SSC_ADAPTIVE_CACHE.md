@@ -10,14 +10,16 @@ Opening a capture commits its first visible scene and immediately starts a CPU
 pool preparing ahead from the playhead. Issue #109's
 [bounded parallel preparation](PARALLEL_FIELD_PREPARATION.md) updates the execution
 and in-flight allowances in these operational sections; issue #111 adds
-[dynamic concurrency and measured startup gating](DYNAMIC_FIELD_PREPARATION.md).
+[dynamic concurrency](DYNAMIC_FIELD_PREPARATION.md). Issue #106 adds
+[pressure-driven reclamation and prepared-range playback](ROLLING_PLAYBACK_CACHE.md).
 The #102 measurements
 below retain their original scope and review-time wording. **Automatic** is the default in
 Performance. It fills as much useful forward coverage as safely fits in current
-physical RAM, even while paused. If Play is pressed early, measured production
-faster than consumption permits a short prepared lead; near parity needs a larger
-lead. Slower or unmeasured production waits for the admitted window. It never
-requires an allocation for the complete remaining recording.
+physical RAM, even while paused. Play can begin as soon as the current and next
+sample in the chosen direction are prepared for each visible field, or its recording
+boundary is reached. It does not wait for unrelated future work. An exhausted
+region explicitly buffers, preserving source values and the committed clock.
+It never requires an allocation for the complete remaining recording.
 After that initial preparation, moving windows replenish in the background. Large captures open paused so useful coverage can build before the first Play;
 recordings fitting the initial window retain the existing transport state. The status badge shows background progress without declaring
 an otherwise usable scene unavailable.
@@ -25,10 +27,17 @@ an otherwise usable scene unavailable.
 A scrub prioritizes its target and a new forward window. Cached overlapping samples
 keep their all-channel source arrays and selected preview; only missing samples are
 read, checked and decoded. Cold entries outside the wanted window are evicted first
-when room is needed. Backward playback fills toward earlier times; loops wrap at the
+when room is needed. Before refusing a missing job for physical RAM, the worker
+reclaims eligible history and rechecks actual available memory. Current and staged
+samples and in-flight ownership stay protected. Resident history gets a modest
+allowance when capacity permits; pressure removes that allowance for ten seconds.
+Backward playback fills toward earlier times; loops wrap at the
 recording bounds. Each visible field follows its own clock, including a held sample
-at the playhead. The cache refreshes as playback advances and at least once per
-second while the controller is active. Completed captures that fit stay reusable.
+at the playhead. The cache redirects at each source-sample boundary and refreshes
+at least once per second while the controller is active. A single overlay on the
+slider uses actual source-time bounds: blue for prepared selected fields, teal
+where all required visible-layer data is prepared. GPU staging can still wait
+briefly; the overlay is not a throughput guarantee. Completed captures that fit stay reusable.
 
 Compatible channel changes retain all scientific source channels and replace only
 the selected display planes. Current plus one future GPU texture remain bounded

@@ -117,26 +117,28 @@ func run():
 	var layers = viewer.scene_layers
 	var fields = layers.field_playback
 	fields.cache_cap_bytes = 1;fields.request(viewer.requested_time,layers.field_budget());ui.refresh()
-	check(ui.readiness == "Preparing…" and ui.readiness_detail.contains("memory") and not ui.failures.has("Fields"),"Capacity wait reports insufficient startup coverage without duplicate status")
+	check(ui.readiness == "Ready" and ui.readiness_detail.contains("memory") and not ui.failures.has("Fields"),"Capacity wait retains playable protected coverage and reports memory detail")
 	fields.cache_cap_bytes = 0;fields.request(viewer.requested_time,layers.field_budget());ui.refresh()
 	check(not ui.badge.label.text.contains("Waiting for memory"),"Memory status recovers without reopening")
 	var worker = layers.playback.worker
+	var was_processing: bool = viewer.is_processing();viewer.set_process(false)
 	var gate := Semaphore.new(); worker.test_barrier = gate
 	layers.playback.invalidate(); viewer.manual_max += 1; viewer._seek_time(2.25)
 	var deadline := Time.get_ticks_msec()+10000
 	while not worker.status().get("test_barrier_waiting",false) and Time.get_ticks_msec()<deadline: await process_frame
 	ui.refresh(); check(ui.readiness == "Preparing…","Cold seek reports real preparation")
 	viewer.playing = true;var particle_clock = viewer.committed_sample.get("requested_time")
-	layers.tick(.05);await create_timer(.45).timeout;ui.refresh()
+	layers.tick(.05);await create_timer(.45).timeout;layers.tick(.05);ui.refresh()
 	check(ui.readiness == "Buffering" and viewer.committed_sample.get("requested_time") == particle_clock,"Required particle worker stall holds the committed clock")
 	viewer.playing = false
 	viewer._seek_time(3.125); worker.test_barrier = null; gate.post(); await ready(viewer)
 	check(ui.readiness == "Ready" and viewer.committed_sample.requested_time == 3.125,"Latest rapid replacement seek becomes ready")
 	var mesh_worker = layers.mesh_playback.worker
 	gate = Semaphore.new();mesh_worker.test_barrier = gate;layers.mesh_playback.invalidate();layers.views.mesh.clear()
+	layers.states.mesh.wireframe = not layers.states.mesh.wireframe
 	viewer._seek_time(2.5)
 	deadline = Time.get_ticks_msec()+10000
-	while not mesh_worker.status().test_barrier_waiting and Time.get_ticks_msec()<deadline:await process_frame
+	while not mesh_worker.status().test_barrier_waiting and Time.get_ticks_msec()<deadline:layers.tick(0);await process_frame
 	check(mesh_worker.status().test_barrier_waiting,"Required mesh preparation reaches the real worker barrier")
 	viewer.playing = true;var mesh_clock = viewer.committed_sample.get("requested_time")
 	layers.tick(.05);await create_timer(.45).timeout;ui.refresh()
@@ -144,6 +146,7 @@ func run():
 	mesh_worker.test_barrier = null;gate.post();await ready(viewer);ui.refresh()
 	check(ui.readiness == "Playing","Mesh recovery returns directly to Playing")
 	viewer.playing = false;await ready(viewer)
+	viewer.set_process(was_processing)
 	# Presentation contract injection, not a claimed scientific failure reproduction.
 	layers.mesh_playback.error = "Injected unavailable mesh diagnostic"; ui.refresh()
 	check(ui.readiness == "Unavailable" and ui.failures.has("Meshes"),"Typed readiness failure is visible and durable")
@@ -396,7 +399,10 @@ func check_playback_status(viewer, config: Dictionary) -> void:
 		await ready(viewer)
 		check(ui.readiness == "Ready" and layers.views.field.channel == channel,"Channel replacement reaches Ready: "+channel)
 	viewer.physical_rate = -1;viewer._seek_time(1.0);await ready(viewer)
-	viewer._toggle_playback();layers.tick(.05);ui.refresh()
+	viewer._toggle_playback();layers.tick(.05)
+	deadline = Time.get_ticks_msec()+10000
+	while viewer.requested_time >= 1.0 and Time.get_ticks_msec()<deadline:await process_frame;layers.tick(.05)
+	ui.refresh()
 	check(ui.readiness == "Playing" and viewer.requested_time < 1.0,"Reverse playback shows Playing")
 	viewer.playing = false;fields.cancel_session();viewer.physical_rate = 1
 	var recording_end: float = viewer.generic_reader.frames[-1].time

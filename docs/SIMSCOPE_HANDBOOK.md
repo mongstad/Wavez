@@ -117,6 +117,15 @@ for readiness before resuming.
 Numeric/text focus suppresses viewport shortcuts. New recipes retain exact signed
 speed; obsolete mode/index-rate fields are removed without migration support.
 
+The playback slider contains a single buffered overlay. Blue shows resident
+preparations for the selected visible field channels; teal shows the intersection
+where all required visible-layer data is prepared. Dark gaps need preparation;
+a narrow gap can look like a black vertical line and disappears as its samples arrive.
+The overlay uses actual recorded source-time boundaries mapped to the slider's
+union-sample axis, so irregular timestamps remain aligned with seeking. Hover
+explains the colors. The native playhead remains on top. GPU staging can still
+briefly wait; this is cache coverage, not a frame-rate guarantee.
+
 ## Status and Jobs
 
 The 40-pixel bottom status line shows one playback/preparation message:
@@ -302,28 +311,29 @@ Manual RAM choices also use rolling caches. The old explicit full-preload policy
 
 Historical explicit-preload evidence on the 48 GB workstation: a retained 100k-particle capture prepared 81 pairs in 13.3 seconds, enabled Play after 0.78 seconds and used about 2.50 GiB process RSS. An isolated probe measured 18.67 MiB of retained Godot allocations per decoded 100k-particle sample and another 7.27 MiB per prepared pair without trails. Conservative cache charges are larger and count shared references again. CPU preparation does not create GPU resources for every cached pair.
 
-Temporal fields retain current-plus-four lookahead for paused navigation. On Play,
-the viewer validates the visible-field plan and prepares the chosen scope in
-available RAM before advancing. **Performance → Playback preparation** offers
-**Entire recording** (default), **Selected interval** (start/end times), and
-**From current position** (a duration, following playback direction).
-Choose the scope, then press Play. Status shows progress and the prepared bounds;
-Pause cancels preparation. An interval starts at its boundary if the current time
-is outside it, pauses at the far boundary, and loops within those bounds when
-Loop is enabled. Seeking outside a prepared interval pauses and returns to bounded
-navigation. These scope controls are session-only; offline exports retain their
-explicit job sampling. An interval includes each field's held sample at its start.
-All source channels and selected-channel display planes are retained, subject to
+**Performance → Playback preparation** defaults to **Automatic**. Opening prepares
+as much useful directional coverage as safely fits, while current/next sample
+readiness controls Play. Moving the playhead reuses overlapping preparations and
+redirects missing work. Memory pressure reclaims eligible history before new
+allocation is refused; current/staged samples and in-flight ownership stay protected.
+A reasonable history allowance is retained when capacity permits. Pausing keeps
+Automatic preparation active.
+
+**Selected interval (advanced)** and **From current position (advanced)** prepare
+an explicit bounded interval before playback. It starts at the interval boundary
+if the current time lies outside, pauses at its far boundary, and loops inside it
+when Loop is enabled. Seeking outside pauses and returns to bounded navigation.
+These controls are session-only; exports keep their explicit job sampling.
+An interval includes each field's held sample at its start. If it cannot fit safely,
+select a shorter interval or free RAM; source quality is unchanged.
+
+All source channels and selected-channel display planes are retained within
 combined cache/worker reservations and OS/renderer headroom. Repeat playback and
 seeks reuse them. Compatible channel changes reuse validated arrays and statistics,
-replacing only the selected-channel planes. Required exporter statistics remove per-channel rescanning. Only SIMSCP4
-captures are supported; old captures must be re-exported. GPU staging remains current-plus-one, never the whole file.
-If the chosen plan cannot fit safely, select a shorter interval or free RAM; the
-viewer does not silently reduce source quality or call a short window fully ready.
-Sustained streaming beyond an admitted interval and 100–200 GB support are not
-established. See [SSC acceleration](SSC_ACCELERATION.md) for the format's current
-metadata ceiling, measurements and remaining limits. The prior
-[continuous playback report](SSC_CONTINUOUS_PLAYBACK.md) remains historical evidence.
+replacing only selected-channel planes. GPU staging remains current plus one future
+texture per field. SIMSCP4 is the only supported capture format. See
+[rolling playback](ROLLING_PLAYBACK_CACHE.md) for current validation and limits;
+[continuous playback](SSC_CONTINUOUS_PLAYBACK.md) retains historical evidence.
 
 Field CPU preparation uses a bounded pool with ordered publication and per-job
 transient memory reservations. [Dynamic preparation](DYNAMIC_FIELD_PREPARATION.md)
@@ -335,11 +345,13 @@ Set `SIMSCOPE_FIELD_WORKERS=1`, `2`, `3` or `4` before launching for a fixed
 diagnostic cap; live physical admission still may allow fewer jobs. Other values
 use Auto. All-channel source reuse and adaptive cache semantics remain intact.
 
-In Automatic preparation, Play can start before its admitted window is full when
-measured production supports consumption with a prepared safety lead. Near parity
-needs a larger lead; slower or unmeasured production waits for the admitted
-window. Playback speed, direction, channel changes and resource pressure can
-require explicit buffering again. Advanced selected intervals still prepare their
+In Automatic preparation, Play can start inside a contiguous prepared region
+without waiting for unrelated future work. Current and next directional samples
+must be resident for every visible field, except at its recording boundary. The
+[rolling cache](ROLLING_PLAYBACK_CACHE.md) reclaims eligible history before retrying
+physical admission, protects current/staged samples, and reuses overlapping data.
+Missing data, direction/channel changes and resource pressure can require explicit
+buffering again. Advanced selected intervals still prepare their
 whole requested interval. Neither mode changes source cadence or quality.
 
 Each visible field holds its current texture and at most one staged future texture. Their per-texture budgets split the existing layer GPU share; this can increase preview stride on large fields. GPU uploads occur on the main thread, at most one per process frame, ahead of source transitions where possible. Texture binding and shader state changes remain on the main thread. Cold seeks and underflow hold the committed physical clock, gate paused Play and pause background analysis until the required samples are ready. Stale source/configuration work is discarded. Initial opening, scientific inspection and deterministic export remain synchronous; large textures can still cause an upload callback stall. See the [PERF-001/002 report](PERFORMANCE_MAINTENANCE_REPORT.md) for exact guards, bounds and retained 02B/03B measurements.

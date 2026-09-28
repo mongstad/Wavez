@@ -49,6 +49,9 @@ func get_frame(key: String) -> Dictionary:
 func status() -> Dictionary:
 	mutex.lock()
 	var result := {"bytes":used,"limit":limit,"frames":prepared.size(),"completed":completed,"cancelled":cancelled,"evictions":evictions,"worker_ms":worker_ms,"worker_thread":worker_thread,"active":not working_key.is_empty(),"error":error,"failures":failures.duplicate(),"test_barrier_waiting":at_barrier}
+	result.ready_keys = []
+	for key in prepared:
+		if prepared[key].token == token:result.ready_keys.append(key)
 	mutex.unlock();return result
 func _prune(incoming: int, key: String) -> bool:
 	var retired: Array = []

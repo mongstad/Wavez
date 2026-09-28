@@ -20,15 +20,18 @@ Paused rendering was owner-merged in PR #119 at `788de5d`.
 Current video-export regression and startup corrections were owner-merged in
 PR #122 at `f867248`. Export-setting locks and active-job actions (#125) were
 owner-merged in PR #126 at `e26af1e`. Compact legend content (#115) was
-owner-merged in PR #127 at `2c3678a`. Current authorized work is #114, the only
-Ready item when selected: [unified playback/preparation status](STATUS_PLAYBACK_STATE.md),
+owner-merged in PR #127 at `2c3678a`. Unified playback/preparation status (#114)
+was owner-merged in PR #129 at `309ec00`. Current authorized work is #106, the only
+Ready item when selected: [rolling cache and prepared timeline](ROLLING_PLAYBACK_CACHE.md),
 **pending owner review**. Historical review-time reports remain unchanged.
 Field preparation uses a small CPU pool with ordered publication and explicit
 in-flight memory reservations. Auto starts conservatively and changes active
 concurrency within a CPU-count-bounded pool of at most four lanes, using measured
 preparation demand and resource pressure. `SIMSCOPE_FIELD_WORKERS=1..4` selects a
-fixed diagnostic cap. A measured faster producer can start playback with a short
-prepared lead; slower preparation retains the admitted-window startup gate.
+fixed diagnostic cap. Playback can start inside a contiguous prepared region without waiting for
+unrelated queued work. Automatic windows reclaim eligible history before retrying
+physical admission, while protecting current/staged samples. A single overlay in
+the playback slider shows actual prepared coverage for fields and visible layers.
 The adaptive cache and [interactive integrity policy](PLAYBACK_INTEGRITY.md) remain intact.
 Interactive reads skip payload SHA recomputation while preserving structural,
 descriptor/commit, decode and source-change checks. Readable scientific corruption

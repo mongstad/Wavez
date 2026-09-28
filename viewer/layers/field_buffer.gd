@@ -46,6 +46,12 @@ var session_serial := 0
 var completed := 0
 var cancelled := 0
 var evictions := 0
+var pressure_evictions := 0
+var eviction_events: Array = [] # Bounded diagnostics; no sample payloads.
+var protected_keys := {}
+var rolling_time := 0.0
+var rolling_direction := 1
+var cache_hits := 0
 var worker_ms := 0.0
 var pipeline_stages := {}
 var worker_thread := -1
@@ -103,15 +109,17 @@ func job_stopped(generation: String, key: String) -> bool:
 func get_frame(key: String) -> Dictionary:
 	mutex.lock();var value: Dictionary = prepared.get(key,{})
 	if value.get("token") != token:value = {}
-	elif not value.is_empty():order.erase(key);order.append(key)
+	elif not value.is_empty():order.erase(key);order.append(key);cache_hits += 1
 	mutex.unlock();return value
-func status() -> Dictionary:
+func status(include_events := false) -> Dictionary:
 	mutex.lock()
 	var result := {"bytes":used,"limit":limit,"retained_limit":retained_limit,"frames":prepared.size(),"completed":completed,"source_reuses":source_reuses,"cancelled":cancelled,"evictions":evictions,"worker_ms":worker_ms,"pipeline_stages":pipeline_stages.duplicate(true),"worker_thread":worker_thread,"active":not working_key.is_empty(),"error":error,"failures":failures.duplicate(),"test_barrier_waiting":at_barrier,"session":session.duplicate()}
 	result.active = not in_flight.is_empty() or not working_key.is_empty()
 	result.worker_count = worker_count;result.in_flight_bytes = in_flight_bytes;result.active_jobs = in_flight.size()
 	result.active_limit = active_limit;result.automatic_workers = automatic_workers;result.pressure_events = pressure_events;result.rates = rates.duplicate(true)
 	result.peak_in_flight_bytes = peak_in_flight_bytes;result.peak_active = peak_active
+	result.pressure_evictions = pressure_evictions;result.cache_hits = cache_hits
+	if include_events:result.eviction_events = eviction_events.duplicate(true)
 	result.largest_job_charge = largest_job_charge
 	result.retirement_reserve_bytes = largest_job_charge*3*(worker_count-1)
 	var charges := {};var resident := 0
@@ -123,6 +131,10 @@ func status() -> Dictionary:
 	mutex.unlock();return result
 func read_trace() -> Array[String]:
 	mutex.lock();var result := read_keys.duplicate();mutex.unlock();return result
+func protect(keys: Dictionary, time: float, direction: int) -> void:
+	mutex.lock();protected_keys = keys;rolling_time = time;rolling_direction = direction;mutex.unlock()
+func _memory_headroom() -> Dictionary:
+	return Memory.memory_headroom()
 # Caller holds the publication mutex. This also makes cancellation O(1),
 # independent of the number of admitted samples.
 func _set_jobs(next_jobs: Array) -> void:
@@ -196,34 +208,58 @@ func _session_progress() -> void:
 	if session.get("state") == "preparing" and session.ready+int(session.get("failed",0)) == session.total:
 		session.state = "ready";session.elapsed_ms = (Time.get_ticks_usec()-session.started_us)/1000.0
 	mutex.unlock()
-func _prune(incoming: int, key: String) -> bool:
+func _victim() -> String:
+	# Caller holds the mutex. Automatic jobs are already ordered by direction;
+	# never sacrifice their contiguous runway to prepare a more distant sample.
+	if not session.get("automatic",false):
+		# Explicit interval admission retains its established replacement order.
+		var candidates := order.filter(func(old):return not protected_keys.has(old) and not in_flight.has(old))
+		var victim: String = candidates[0] if not candidates.is_empty() else ""
+		for old in candidates:
+			if prepared[old].token != token:victim = old;break
+		for old in candidates:
+			if not wanted_sources.has(prepared[old].get("source_key",old)):victim = old;break
+		return victim
+	var victim := "";var distance := -INF;var unrelated := false
+	for old in order:
+		if protected_keys.has(old) or in_flight.has(old):continue
+		var value: Dictionary = prepared[old]
+		if session.get("automatic",false) and wanted.has(old) and value.token == token:continue
+		var score := absf(float(value.sample.time)-rolling_time)
+		var outside := not wanted_sources.has(value.get("source_key",old))
+		if victim.is_empty() or (outside and not unrelated) or (outside == unrelated and score > distance):
+			victim = old;distance = score;unrelated = outside
+	return victim
+func _retire(key: String, pressure: bool) -> Dictionary:
+	# Caller holds the mutex; destruction happens outside it on the coordinator.
+	var value: Dictionary = prepared[key]
+	if source_keys.get(value.get("source_key","")) == key:source_keys.erase(value.get("source_key",""))
+	used -= int(value.bytes);prepared.erase(key);order.erase(key);evictions += 1
+	if pressure:pressure_evictions += 1
+	eviction_events.append({"time":value.sample.time,"playhead":rolling_time,"direction":rolling_direction,"bytes":value.bytes,"pressure":pressure})
+	if eviction_events.size() > 128:eviction_events.pop_front()
+	return value
+func _prune(incoming: int, key: String, release_bytes := 0) -> bool:
 	var retired: Array = []
 	mutex.lock()
 	if cache_token != token and retained_limit == 0:
 		var kept: Array[String] = []
 		for old in order:
-			if prepared[old].token != token:
+			if prepared[old].token != token and not protected_keys.has(old):
 				source_keys.erase(prepared[old].get("source_key",""))
 				retired.append(prepared[old]);used -= int(prepared[old].bytes);prepared.erase(old)
 			else:kept.append(old)
 		order = kept;cache_token = token
 	# A matching key from an invalidated generation cannot block its replacement.
-	if prepared.has(key) and prepared[key].token != token:
+	if prepared.has(key) and prepared[key].token != token and not protected_keys.has(key):
 		source_keys.erase(prepared[key].get("source_key",""))
 		retired.append(prepared[key]);used -= int(prepared[key].bytes);prepared.erase(key);order.erase(key)
-	while used+incoming > limit and not order.is_empty():
-		# Retire obsolete channels first, preserving every current-session sample
-		# already counted toward readiness. The cache never exceeds its one limit.
-		var victim := 0
-		for i in range(order.size()):
-			if prepared[order[i]].token != token:victim = i;break
-		# A smaller interval should retain its already-decoded source samples
-		# while releasing unrelated times, even across a channel generation.
-		for i in range(order.size()):
-			if not wanted_sources.has(prepared[order[i]].get("source_key",order[i])):victim = i;break
-		var old: String = order[victim];order.remove_at(victim)
-		source_keys.erase(prepared[old].get("source_key",""))
-		retired.append(prepared[old]);used -= int(prepared[old].bytes);prepared.erase(old);evictions += 1
+	var released := 0
+	while used+incoming > limit or released < release_bytes:
+		var victim := _victim()
+		if victim.is_empty():break
+		var value := _retire(victim,release_bytes > 0)
+		released += int(value.bytes);retired.append(value)
 	var fits := used+incoming <= limit and not prepared.has(key)
 	mutex.unlock();retired.clear();return fits
 func _take_source(job: Dictionary) -> Dictionary:
@@ -262,6 +298,7 @@ func _admit(lane, job: Dictionary) -> bool:
 	mutex.lock()
 	var prior: Dictionary = prepared.get(source_keys.get(job.get("source_key",""),""),{})
 	if prior.get("scope") == job.get("scope"):materialized = prior.get("entry",{})
+	var replacement_bytes: int = int(prior.get("bytes",0)) if not materialized.is_empty() else 0
 	var automatic: bool = session.get("automatic",false)
 	mutex.unlock()
 	if job_stopped(generation,job.key):return false
@@ -271,13 +308,30 @@ func _admit(lane, job: Dictionary) -> bool:
 		var exact := Prepare.charge(materialized,job.channel,job.budget)
 		if exact.has("error"):result = {"error":Reader.record_error(job.entry,exact.error)}
 		else:job = job.duplicate();job.charge = exact.bytes
-	var memory := Memory.memory_headroom()
+	# Remove the local payload reference before attempting physical reclamation.
+	prior = {}
+	var memory := _memory_headroom()
 	mutex.lock()
 	largest_job_charge = maxi(largest_job_charge,int(job.charge))
 	var outstanding := in_flight_bytes;var fits_limit: bool = job.charge+outstanding <= limit
 	var retirement_reserve := largest_job_charge*3*(worker_count-1)
 	mutex.unlock()
 	var required: int = memory.reserve+int(job.get("other_reservation",0))+retirement_reserve+(job.charge+outstanding)*3
+	if result.is_empty() and automatic and fits_limit:
+		# Reclaim before the physical admission check. MemAvailable excludes these
+		# resident pages already; ownership credit alone cannot admit new work.
+		_prune(maxi(0,outstanding+job.charge-replacement_bytes),job.key)
+		memory = _memory_headroom()
+		if memory.available_physical < required:
+			mutex.lock();pressure_events += 1
+			if automatic_workers:active_limit = 1
+			mutex.unlock()
+			if outstanding > 0:return false
+		while memory.available_physical < required:
+			var before: int = status().bytes
+			_prune(maxi(0,outstanding+job.charge-replacement_bytes),job.key,required-int(memory.available_physical))
+			memory = _memory_headroom()
+			if status().bytes == before:break
 	if result.is_empty() and (not fits_limit or memory.available_physical < required):
 		mutex.lock();pressure_events += 1
 		if automatic_workers:active_limit = 1
