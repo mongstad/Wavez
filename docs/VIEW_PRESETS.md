@@ -189,15 +189,21 @@ zoom failure has **not been reproduced** on this branch. Added a focused regress
 using wheel-input handling and actual file-selected callbacks with normal viewer
 processing enabled. It checks exported distance, restored camera transform and
 projection after several live frames, same-source and reopen loading, and the
-first wheel movement after loading. No runtime change or claimed zoom fix was
+first wheel movement after loading. The Save picker is opened with live processing
+and checked for zoom preservation; reopening uses the same deferred file-picker
+callback in the same viewer instance. No runtime change or claimed zoom fix was
 made without reproducing the defect.
 
-Results: **825 Forward+**, **765 Compatibility**, **760 production** checks passed.
+Results: **826 Forward+**, **766 Compatibility**, **761 production** checks passed.
 The first development run used an unavailable `Projection.is_equal_approx`
 method; corrected to exact projection equality and all final runs passed.
-The additional 11 checks are recorded in
+The additional 12 checks are recorded in
 [zoom review evidence](evidence/issue-138/zoom-review.json); earlier timing evidence
 is preserved. Physical native dialog interaction remains outside automation.
-The owner's saved JSON and exact save/change/load sequence are still needed to
-resolve the reported discrepancy; matching camera state is not a claim that the
-owner's visual observation has been explained.
+The owner confirmed open → zoom → save → reopen → load and supplied `viridis.json`.
+Loading that exact file against the owner's 192³ capture succeeds: saved distance
+154.38348541259765 matches both the default opening distance and the restored
+distance, including after two seconds of live auto-orbit (actual float32 transform
+distance 154.383483886719). Thus that file contains default zoom. Why the intended
+adjusted zoom was absent remains unresolved; a newly saved file after conspicuous
+zoom and observation of the Save dialog interaction have been requested.

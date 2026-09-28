@@ -175,14 +175,18 @@ func zoom_roundtrip(path: String):
 	var distance: float = view.camera_distance
 	var transform: Transform3D = view.camera.transform
 	var projection: Projection = view.camera.get_camera_projection()
-	view.recipe_saving = true;view.recipe_dialog.file_selected.emit(path)
+	view._show_recipe_dialog(true);await settle()
+	check(is_equal_approx(view.camera_distance,distance),"opening Save picker preserves adjusted zoom")
+	view.recipe_dialog.hide();view.recipe_dialog.file_selected.emit(path)
 	view.shell.details.hide()
 	var data = JSON.parse_string(FileAccess.get_file_as_string(path))
 	check(is_equal_approx(data.settings.view.camera_distance,distance),"wheel zoom is exported to JSON")
 	for reopen in [false,true]:
 		for i in 6:wheel(MOUSE_BUTTON_WHEEL_DOWN)
 		check(not view.camera.transform.is_equal_approx(transform),"wheel changes visible camera before reload")
-		if reopen:view._open_capture(view.capture_path);await settle()
+		if reopen:
+			await view._open_from_picker(view.capture_path)
+			await settle()
 		view.recipe_saving = false;view.recipe_dialog.file_selected.emit(path)
 		view.shell.details.hide();await settle()
 		check(is_equal_approx(view.camera_distance,distance),"picker restores zoom distance; reopen="+str(reopen))

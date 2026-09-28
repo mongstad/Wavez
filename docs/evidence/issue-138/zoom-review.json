@@ -3,44 +3,70 @@
   "runtime_change": false,
   "reproduced": false,
   "checks": {
-    "forward2": {
-      "checks": 825,
+    "forward": {
+      "checks": 826,
       "failures": [],
       "renderer": "forward_plus",
       "production": false,
       "source_hashes_unchanged": {
-        "particles.ssc": "ef8bb346c8bc1e6455da4cea13a78babcc2b3f48bc05c8deb0ac966f740842a2",
-        "different.ssc": "d6554ba95e97481ba2068033ecbac51f6d54030bcae6b4ddb21dc48c6927f432",
-        "scene.ssc": "83788844f84aff01a4c4bd49e310347307ac1facd79edfb0178706b44603a70b"
+        "particles.ssc": "301feb6c19f1c4a64da7200629853b745efdf3b449e5d3e581660a3a23763404",
+        "different.ssc": "9995593544c3e4f6e07f2e14ddb9dc9b34cabc99ffae2e1e475eb77ed00ff74e",
+        "scene.ssc": "61a33cf7844edf6ccb9ee0ee4c7374a4e7505fdb8a65dd983fc4168ed2c3fae1"
       },
       "production_stat_unchanged": false,
       "saved_zoom": 26.244
     },
     "compat": {
-      "checks": 765,
+      "checks": 766,
       "failures": [],
       "renderer": "gl_compatibility",
       "production": false,
       "source_hashes_unchanged": {
-        "particles.ssc": "60bccf66c01c9bda74a97192585a75468fa6a7828ea6c77001f38f8fa4ccbce1",
-        "different.ssc": "534864030bdf8c4fb04d4d2f1d2942bc25f713b40f2351717200d4f65c206ed6",
-        "scene.ssc": "9e0dfee930ad08e754f1a81a7c656095e31546c0a042ac2683e8c2eb969e82b3"
+        "particles.ssc": "66fdae5767ef9f18046524ad486c9cfb80025f37e8af3d28a114a3d40c47952e",
+        "different.ssc": "b93876fa69bff3e70305391e912b0dfbbf4e1ade365fddd1e0f21aa4fe3605ab",
+        "scene.ssc": "4064be5f3ae5646ede70c18353fc9b970510158f6ecaa8cba01dfcb876cd7491"
       },
       "production_stat_unchanged": false,
       "saved_zoom": 26.244
     },
     "production": {
-      "checks": 760,
+      "checks": 761,
       "failures": [],
       "renderer": "forward_plus",
       "production": true,
       "source_hashes_unchanged": {
-        "particles.ssc": "7adc2c152c39bd8fae29016dfd5c9be958a4e863d9f2fd7cf567f8ec8eaa0f2b",
-        "different.ssc": "9bd798809ae41e0e93fd6772869ed9cc984c264679c7c06f55fdd5f4b5ab6a64",
-        "scene.ssc": "0e5fb8f058a0eb36a5835b814c9ceeeeae29128ac21b85d851666688b5588121"
+        "particles.ssc": "7b916dd426acd78e6a48398990edda670ad2d7c50527f06b8ce2c0ca328fbcc8",
+        "different.ssc": "11ec972c8cfbd925cc56da0af31179daf38b5c865b5c36d6e96d3ba16064694e",
+        "scene.ssc": "e5ceb6272bd20704762106b5722e17d5846bff6035d06c936c730e8889999965"
       },
       "production_stat_unchanged": true,
       "saved_zoom": 26.244
     }
+  },
+  "owner_file_observation": {
+    "after_live_ticks": {
+      "actual_distance": 154.383483886719,
+      "distance": 154.383485412598,
+      "fov": 55.0,
+      "status": "Loaded view preset.",
+      "yaw": 58.4434392383841
+    },
+    "error": "",
+    "immediate": {
+      "actual_distance": 154.383483886719,
+      "distance": 154.383485412598,
+      "fov": 55.0,
+      "status": "Loaded view preset.",
+      "yaw": 58.283296998384
+    },
+    "initial": {
+      "actual_distance": 154.383483886719,
+      "distance": 154.383485412598,
+      "fov": 55.0,
+      "status": "Loaded SIMSCP4_D192_T200_simscope.ssc \u2022 SIMSCP4 \u2022 2193 layer samples",
+      "yaw": 0.714010529091178
+    },
+    "saved_distance": 154.38348541259765,
+    "conclusion": "Provided preset contains the default opening distance; exact preset loads successfully and remains stable through live orbit. Why the intended adjusted zoom was absent from this file is unresolved."
   }
 }
