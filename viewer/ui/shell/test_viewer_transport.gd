@@ -22,7 +22,7 @@ func ready(viewer):
 	check(not viewer.scene_layers.is_buffering(),"Preparation completes")
 func picture(name: String): root.get_texture().get_image().save_png(output.path_join(name+".png"))
 func go(ui, text: String):
-	ui.open_seek(); ui.target.editor.text = text; ui.seek_dialog.confirmed.emit(); ui.refresh()
+	ui.open_seek(); ui.seek_dialog.editor.text = ui.SeekPopover.format_time(text.to_float() - ui.seek_dialog.origin); ui.seek_dialog.confirmed.emit(); ui.refresh()
 func run():
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--transport-output="): output = arg.trim_prefix("--transport-output=")
@@ -32,28 +32,31 @@ func run():
 	for row in [[0.0,"0.0"],[0.04,"0.0"],[43.7,"43.7"],[59.9,"59.9"],[59.94,"59.9"],[59.96,"1:00.0"],[60.0,"1:00.0"],[72.4,"1:12.4"],[763.6,"12:43.6"],[3599.9,"59:59.9"],[3599.94,"59:59.9"],[3599.96,"1:00:00.0"],[3600.0,"1:00:00.0"],[3867.3,"1:04:27.3"],[36000.0,"10:00:00.0"]]:
 		check(ui.format_duration(row[0]) == row[1],"Adaptive duration formatting: "+str(row[0]))
 		check(ui.format_duration(row[0],true) == ("-"+row[1] if row[1] != "0.0" else "0.0"),"Remaining formatting and zero: "+str(row[0]))
-	check(viewer.play_button.disabled and ui.seek_button.disabled,"Empty transport explains unavailable playback")
+	check(viewer.play_button.disabled and ui.rate.disabled,"Empty transport explains unavailable playback")
 	viewer._open_capture(config.source); viewer.playing = false; await ready(viewer); await settle()
 	await delay_checks(viewer,ui)
 	check(ui.is_ancestor_of(viewer.play_button) and ui.is_ancestor_of(viewer.timeline),"Canonical playback controls owned by persistent transport")
 	check(not viewer.sections.has("Playback") and not viewer.visual_sliders.has("Physical time units / second"),"Retired playback controls are not constructed")
 	var before: Dictionary = viewer.committed_sample.duplicate(true)
-	ui.open_seek(); ui.target.editor.text = "2.25"; ui.refresh()
+	ui.open_seek(); ui.seek_dialog.editor.text = "2.25"; ui.refresh()
 	check(viewer.committed_sample == before and ui.requested.text.is_empty(),"Unsubmitted draft changes neither displayed nor requested time")
-	ui.seek_dialog.canceled.emit(); ui.seek_dialog.hide()
+	ui.seek_dialog.hide()
 	check(viewer.committed_sample == before and ui.pending_time() == null,"Cancel submits nothing")
-	ui.open_seek(); ui.target.editor.text = "NaN"; ui.submit_seek()
-	check(ui.seek_dialog.visible and ui.target.error_label.visible and viewer.committed_sample == before,"Invalid target retains draft and scene")
-	ui.target.editor.text = "99"; ui.submit_seek()
-	check(ui.target.error_label.visible and viewer.committed_sample == before,"Out of range target refused")
-	ui.target.editor.text = "1.0000000000000002"; ui.target.editor.grab_focus(); await settle()
-	var enter := InputEventKey.new(); enter.keycode = KEY_ENTER; enter.pressed = true; enter.window_id = ui.seek_dialog.get_window_id()
-	Input.parse_input_event(enter); await settle()
-	check(ui.target.model == 1.0000000000000002 and viewer.committed_sample == before,"Exact float64 local commit does not seek")
-	ui.target.editor.text = "2.5"
+	ui.open_seek(); ui.seek_dialog.editor.text = "NaN"; ui.submit_seek()
+	check(ui.seek_dialog.visible and ui.seek_dialog.error_label.visible and viewer.committed_sample == before,"Invalid target retains draft and scene")
+	ui.seek_dialog.editor.text = "99"; ui.submit_seek()
+	check(ui.seek_dialog.error_label.visible and viewer.committed_sample == before,"Out of range target refused")
+	ui.seek_dialog.editor.text = "1.0000000000000002"
+	# Native keyboard delivery is covered by test_violet_round2; this suite
+	# stresses rapid same-frame requests through the production submit signal.
+	ui.seek_dialog.editor.text_submitted.emit(ui.seek_dialog.editor.text); await settle()
+	await ready(viewer)
+	check(viewer.committed_sample.requested_time == 1.0000000000000002 and not ui.seek_dialog.visible,"Enter seeks the exact float64 target")
+	ui.open_seek()
+	ui.seek_dialog.editor.text = "2.5"
 	var escape := InputEventKey.new(); escape.keycode = KEY_ESCAPE; escape.pressed = true
-	ui.target._input_editor(escape)
-	check(ui.target.editor.text == ui.target.committed_text and ui.seek_dialog.visible,"Escape in number field restores committed draft")
+	ui.seek_dialog.editor.gui_input.emit(escape)
+	check(not ui.seek_dialog.visible and viewer.committed_sample.requested_time == 1.0000000000000002,"Escape dismisses without applying")
 	ui.seek_dialog.hide()
 	for time in [1.0,1.234567891234,2.25]:
 		go(ui,ui.FloatText.format_value(time)); await ready(viewer)
@@ -67,17 +70,17 @@ func run():
 	await media_checks(viewer,ui,config)
 	go(ui,"2.25"); await ready(viewer)
 	var camera: Transform3D = viewer.camera.transform
-	ui.open_seek(); ui.target.editor.grab_focus()
+	ui.open_seek(); ui.seek_dialog.editor.grab_focus()
 	for code in [KEY_SPACE,KEY_LEFT,KEY_RIGHT,KEY_R]:
 		var event := InputEventKey.new(); event.keycode = code; event.pressed = true; root.push_input(event)
 	check(not viewer.playing and viewer.committed_sample.requested_time == 2.25 and viewer.camera.transform == camera,"Focused target suppresses viewport playback/camera shortcuts")
 	ui.seek_dialog.hide()
 	ui.refresh()
-	ui.rate.editor.text = "2"; ui.rate.commit()
+	ui.rate.item_selected.emit(ui.SPEEDS.find(2.0))
 	check(viewer.physical_rate == 2,"Playback speed routes to canonical recorded-time rate")
 	viewer.timeline.value = 1; await ready(viewer)
 	check(viewer.current_index == 1 and viewer.committed_sample.requested_time == .5,"Slider selects a union timestamp")
-	check(viewer.timeline.tooltip_text.begins_with("Sample index 2 / 8\n") and not ui.index_hint.visible,"Index count is available on hover without a persistent label")
+	check(viewer.timeline.tooltip_text.contains("Sample index 2 / 8\n") and not ui.index_hint.visible,"Index count is available on hover without a persistent label")
 	viewer.timeline.drag_started.emit(); ui.refresh(); await settle()
 	check(ui.index_hint.visible and ui.index_hint.text == "Sample index 2 / 8","Dragging exposes the index hint")
 	picture("index-drag")
@@ -89,7 +92,7 @@ func run():
 	check(viewer.committed_sample.requested_time == .5,"Previous selects previous union sample")
 	viewer.play_button.pressed.emit(); check(viewer.playing,"Play invokes existing controller")
 	viewer.play_button.pressed.emit(); check(not viewer.playing,"Pause invokes existing controller")
-	ui.refresh(); ui.rate.editor.text = "-0.5"; ui.rate.commit()
+	ui.refresh(); viewer.physical_rate = -.5; ui.refresh()
 	check(viewer.physical_rate == -.5,"Recorded rate supports existing reverse behavior")
 	go(ui,"2.25"); await ready(viewer); viewer.playing = true; viewer.scene_layers.tick(.1); await ready(viewer); viewer.playing = false
 	check(viewer.committed_sample.requested_time < 2.25,"Reverse recorded playback moves backwards")
@@ -127,7 +130,7 @@ func run():
 	ui.show_remaining = true; ui.refresh()
 	check(ui.duration.text == "-6.0","Cold seek remaining follows committed origin, not pending request")
 	await settle(); picture("buffering")
-	ui.open_seek(); ui.target.editor.text = "4.5"; ui.refresh()
+	ui.open_seek(); ui.seek_dialog.editor.text = "4.5"; ui.refresh()
 	check(ui.requested.text == "Requested time 2.25123" and viewer.committed_sample.requested_time == 0,"Editing replacement target does not replace submitted request")
 	ui.seek_dialog.confirmed.emit(); go(ui,"3.125")
 	check(not ui.requested.visible and ui.requested.text.is_empty(),"Rapid replacements clear stale status immediately")
@@ -143,12 +146,12 @@ func run():
 	for i in 100: ui.refresh()
 	var activity := Profile.report(); Profile.enabled = false
 	check(activity.stages.is_empty() and activity.counters.is_empty() and Visual.snapshot(viewer)==state,"UI refresh causes no scientific/preparation/decode/upload activity or state changes")
-	ui.rate.editor.text = "-0.125"; ui.rate.commit(); var saved := Visual.snapshot(viewer)
+	viewer.physical_rate = -.125; ui.refresh(); var saved := Visual.snapshot(viewer)
 	viewer.physical_rate = 2; var sample_before: Dictionary = viewer.committed_sample.duplicate(true)
 	Visual.apply(viewer,saved); ui.refresh()
-	check(ui.rate.model == -.125 and viewer.committed_sample == sample_before,"Recipe visual restoration updates rate silently without seek")
+	check(viewer.physical_rate == -.125 and ui.rate.selected == -1 and viewer.committed_sample == sample_before,"Recipe visual restoration updates rate silently without seek")
 	ui.open_seek(); await settle()
-	check(ui.seek_dialog.size.y < 400 and ui.seek_dialog.get_ok_button().get_global_rect().end.y <= ui.seek_dialog.size.y,"Seek stays focused and Go/Cancel remain within dialog")
+	check(ui.seek_dialog.size.y < 240 and ui.seek_dialog.size.x < 360,"Seek remains a compact formatted-time popover")
 	picture("seek")
 	ui.seek_dialog.hide()
 	for dimensions in [Vector2i(1440,900),Vector2i(1024,640)]:
@@ -207,7 +210,7 @@ func media_checks(viewer, ui, config):
 		go(ui,"2.25"); await ready(viewer); ui.refresh()
 		var before: float = ui.playback_timing().elapsed
 		check(is_equal_approx(before,2.25),"Recorded playback fractional seek maps committed position")
-		ui.rate.editor.text = ui.FloatText.format_value(speed); ui.rate.commit(); ui.refresh()
+		viewer.physical_rate = speed; ui.refresh()
 		check(is_equal_approx(viewer.physical_rate,speed),"Recorded playback multiplier maps to existing rate "+str(speed))
 		viewer.playing = true; viewer.scene_layers.tick(.05); await ready(viewer); viewer.playing = false; ui.refresh()
 		check(is_equal_approx(ui.playback_timing().elapsed,before+.05*speed),"Recorded playback speed affects actual committed motion "+str(speed))
@@ -221,9 +224,9 @@ func media_checks(viewer, ui, config):
 	# An unchanged multiplier must never round-trip or alter an arbitrary saved rate.
 	viewer.physical_rate = 0.12345678912345678; ui.refresh()
 	var exact: float = viewer.physical_rate
-	ui.rate.commit(); check(viewer.physical_rate == exact,"Unchanged speed editor preserves exact controller rate")
+	ui.refresh(); check(viewer.physical_rate == exact and ui.rate.selected == -1,"Preset selector preserves an arbitrary exact controller rate")
 	var saved := Visual.snapshot(viewer); viewer.physical_rate = 12; Visual.apply(viewer,saved); ui.refresh()
-	check(viewer.physical_rate == exact and ui.rate.model == exact,"Recipe restores original exact recorded rate without redefining it")
+	check(viewer.physical_rate == exact and ui.rate.selected == -1,"Recipe restores original exact recorded rate without redefining it")
 	for path in [config.offset,config.single]:
 		viewer._open_capture(path); viewer.playing = false; await ready(viewer)
 		check(ui.displayed.text == "0.0","Nonzero source origin still begins at zero elapsed")

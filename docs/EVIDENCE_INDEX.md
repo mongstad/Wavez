@@ -7,6 +7,12 @@
 production slice. Broader propagation waits for owner approval. Earlier visual
 proposals and review-time reports below remain historical records.
 
+The owner reviewed v1 at `0d32d08`, approved its overall direction, and requested
+refinement before broader propagation. [Round 2 evidence](evidence/issue-143/round2/README.md)
+covers the revised representative surfaces and transport/window interactions.
+Round 2 awaits owner visual review on the same Draft PR #145; banner styling is
+deferred at the owner's request. The v1 report and evidence remain unchanged.
+
 ## Paused rendering — issue #118, pending owner review
 
 [Investigation, policy and owner checks](PAUSED_RENDERING.md) and

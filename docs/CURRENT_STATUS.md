@@ -34,11 +34,14 @@ Pinned edge reveal and simulation-only Fullscreen (#117) were owner-merged in
 PR #142 at `b33e9a8`. Capture and video file-dialog preferences (#50) were
 owner-merged in PR #144 at `61f6a78`, accepted build 9.
 Current authorized work is #143, the first and only Ready item when selected:
-the [violet visual-system slice](UX5_STYLE_SLICE.md), **pending owner visual
-review**. It styles representative production controls before broader
-propagation. Build 10 is the candidate; scientific behavior, the macro layout,
-semantic status and #117 interaction contracts are retained. Historical
-review-time reports and evidence remain unchanged.
+the [violet visual-system slice](UX5_STYLE_SLICE.md). The owner reviewed v1 at
+`0d32d08` and approved the overall direction, while requiring refinement before
+broad propagation. **Round 2 is pending owner visual review** on the same branch
+and Draft PR #145: restrained surface depth, compact speed/seek controls, a clean
+viewport and integrated borderless-window controls; banner styling is deferred
+by the owner. Build 10 remains the candidate. Scientific behavior, semantic
+status and #117 edge-state
+contracts are retained; v1 reports/screenshots remain historical review evidence.
 Ordinary recipe save/load uses a small source-independent presentation JSON and
 direct platform file picker. Scientific inspection bundles remain separate.
 Field preparation uses a small CPU pool with ordered publication and explicit

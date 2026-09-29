@@ -150,3 +150,168 @@ testing an on-to-off redraw; product legend defaults remain unchanged.
    Leave playback paused after hover ends and check idle usage settles normally.
 6. Approve or adjust this representative slice. Broader propagation must wait
    for that visual decision and continue on the same issue branch/PR.
+
+## Owner review → Round 2
+
+The owner completed visual review of v1 at `0d32d08` and approved the overall
+violet/dark direction, while requiring more depth and refinement before broad
+propagation. That commit, the report above, and all v1 screenshots remain the
+historical checkpoint. Round 2 continues on the existing #143 branch and Draft
+PR #145, **pending another owner visual review**. It keeps candidate build 10.
+
+### Refinement and representative scope
+
+- The existing slice Theme now provides a static tonal surface primitive with
+  closely spaced dark levels. Top bar, dock and transport share it; the status
+  foundation sits slightly deeper. No animated gradient, shader time or glow is
+  introduced. Clearer section spacing, a stronger Simulation heading, numeric
+  readouts and a single restrained selected-tab edge establish hierarchy.
+- Top/right/bottom pins use the same silhouettes and behavior, with neutral
+  unpinned ink and violet pinned ink. Rest and toggled-on fills are transparent;
+  hover and keyboard focus remain visible.
+- The owner subsequently deferred the supplied banner treatment while deciding
+  on another approach. Round 2 retains the plain SimScope wordmark and adds no
+  banner asset or new font. Branding can be revisited after that direction is
+  supplied.
+- Frame scene, Reset camera and Navigate now live in the top bar. F, R and O
+  retain their assigned actions. Navigate gains **Alt+N**, checked against the
+  current repository shortcut inventory. The scientific viewport has no
+  permanent camera-control overlay.
+- Representative secondary surfaces now share the slice Theme: the new seek
+  popover, Source/Status/Help detail dialog, About and video-cancellation prompt.
+  Tools, Jobs content, remaining particle/field/mesh forms and other application
+  dialogs are still deferred. OS-owned native/portal UI remains OS-owned.
+
+### Transport interaction
+
+The permanent Playback speed label, numeric textbox and Seek button are removed.
+A compact selector beside the timeline/end-time value offers exactly 0.25×,
+0.5×, 0.75×, 1×, 1.5×, 2×, 3× and 4×. It writes the existing `physical_rate`;
+recorded-time advancement, total duration and export timing are unchanged.
+Signed/zero/arbitrary exact rates loaded from a recipe remain intact. A
+non-preset rate displays `—×` with its exact value in the tooltip; merely
+refreshing the UI never rounds or coerces it.
+
+Double-click either the playhead or current-time readout to open the same seek
+popover near that control. Dragging still scrubs the union-sample axis. The
+current-time readout also supports Tab focus and Enter for keyboard access.
+The popover selects its exact editable prefill, accepts seconds, `m:ss.s` or
+`h:mm:ss.s`, submits with Enter, and cancels with Esc or click-away. Invalid
+syntax/range stays in the popover with restrained semantic error feedback.
+
+The edited value is **elapsed time from the first recorded sample**, matching
+the displayed adaptive clock. The existing 1× baseline maps it back to source
+time before calling the unchanged `_seek_time`. A capture beginning at source
+100 maps `1:00.25` to source 160.25. Source units and the exact committed source
+time remain in tooltips. An unchanged prefill submits the exact original clock
+without a formatting/parsing round trip. Capture replacement dismisses stale
+entry; Play does not open seek.
+
+### Borderless desktop window
+
+The interactive window suppresses native decorations and supplies far-right
+Minimize, Maximize/Restore and Close actions. The wordmark, blank top-bar drag
+area and bar padding act as the title area; double-click toggles maximize.
+Eight invisible six-pixel edge/corner grips supply normal resize cursors.
+Movement and resizing delegate to Godot's
+[compositor-driven drag/resize APIs](https://docs.godotengine.org/en/stable/classes/class_displayserver.html#class-displayserver-method-window-start-drag).
+Offline scientific workers do not install native window-management handlers.
+
+On tested KDE/Wayland, Godot's minimize request drops maximization and its mode
+query cannot acknowledge minimization. The chrome remembers the prior mode and
+restores it only after a real focus-loss/focus-return pair; KWin verifies the
+actual minimized state and restored geometry. Fullscreen minimization retains
+#117's immersive session and saved edge state while the native window is hidden,
+then restores fullscreen on focus return. F11/Esc retain the preceding native
+mode and original pins/visibility/timers, discarding temporary fullscreen pins.
+KWin may retain its fullscreen flag on a minimized X11 window; Wayland can clear
+that flag. The harness requires actual minimization and restored fullscreen on
+return, rather than treating the hidden window's fullscreen flag as universal.
+
+### Round 2 verification and owner checks
+
+New evidence lives in [the separate Round 2 directory](evidence/issue-143/round2/).
+Final results are recorded in its `summary.json`; v1 evidence above is unchanged.
+The focused interaction suite and dedicated PID-scoped KWin harness complement
+the existing shell, transport, edge/fullscreen, redraw and scientific-video
+regressions. The KWin harness verifies client/frame geometry, resize eligibility,
+minimize/restore from restored/maximized/fullscreen, F11/Esc, title double-click,
+pin restoration and the actual Close handler.
+
+Physical pointer dragging/snapping and resize feel remain owner checks. An
+initial XTest pointer attempt under XWayland did not reliably deliver input to
+the title area, so it establishes no physical-drag result. Focused routing checks
+verify delegation to the native drag/resize APIs; compositor checks verify actual
+window geometry and mode transitions. Native Wayland startup emits the system's
+GTK decorator-plugin initialization warning; logs retain it explicitly. The
+harness allows that exact startup warning and rejects Godot errors/other warnings.
+Physical 4K/mixed-monitor visual quality and production GPU utilization/power
+remain unverified. There is no whole-application style acceptance claim.
+
+1. Compare the new 1440×900 and 1024×640 production screenshots with v1 and the
+   approved reference. Review depth, grouping, selected tabs and pins;
+   the viewport should remain visually dominant.
+2. On a familiar SSC, choose the eight speeds, scrub/step/play/Loop, and seek from
+   both double-click entry points. Type a fractional/clock value, an invalid or
+   out-of-range value, then verify Enter, Esc, click-away and unchanged prefill.
+   Tab to the current-time readout and press Enter. Check readiness/legends retain
+   their scientific/semantic colors.
+3. Drag the blank title area, resize each edge/corner, minimize from restored and
+   maximized windows, restore, then repeat through F11/Esc and fullscreen minimize.
+   Check KDE snapping, monitor movement and desktop scaling on your actual setup.
+   Unpin/reveal every edge and verify original state returns after fullscreen.
+4. Review Source/Status details, About, cancellation prompt, selectors and seek
+   feedback. Pause and let hover transitions settle; idle rendering should stop.
+5. Approve or adjust this representative Round 2 slice before any broader
+   propagation on the same branch/PR. No merge, auto-merge, issue closure,
+   acceptance marking, Project movement or next issue is authorized here.
+
+Round 2 visual audit corrected read-only dialog text falling back to Godot's
+dim default. The shared slice Theme now sets its native read-only text key
+explicitly, and the focused suite checks the live control color and contrast.
+
+### Completed Round 2 results
+
+Godot 4.7.2 / NVIDIA RTX 3070 Ti native validation completed **4,332 checks**
+across the relevant suites, plus **2 Python version tests**. The final focused
+UI/transport/status/desktop suites were rerun after the owner's banner deferral
+and exact speed-label refinement. The broad shell/edge/pacing/video matrix ran
+before those final presentation changes; the accepted-main scientific comparison
+ran afterward. The [compact summary](evidence/issue-143/round2/summary.json) records
+each actual run path, counts, diagnostics and limits.
+
+| Suite | Forward+ | Compatibility |
+| --- | ---: | ---: |
+| Theme, contrast, scope and settled motion | 52 | 52 |
+| New seek/speed/navigation/window interactions | 99 | 99 |
+| Existing transport and exact clock/rate behavior | 211 | 211 |
+| Existing shell, menus, layouts and state isolation | 661 | 661 |
+| #117 edges, pins and fullscreen | 210 | 210 |
+| #118 redraw and retained scientific image | 290 | 290 |
+| Current scientific video export | 235 | 225 |
+| Persistent status, jobs and cancellation lifecycle | 261 | 261 |
+| Native window chrome — Wayland | 76 / 18 stages | 76 / 18 stages |
+| Native window chrome — X11 | 76 / 18 stages | 76 / 18 stages |
+
+All 34 paused phases per renderer recorded **zero new draws** with stable pixels
+equal to a forced full-quality render. Complete generated capture hashes stayed
+unchanged. The same mixed scientific job on accepted `main` (`61f6a78`) and the
+candidate produced four identical 960×540 decoded RGBA frames and byte-identical
+timing manifests on their respective renderers. The archived baseline's 183
+viewer source files were verified against accepted `main`; no branch was created
+or switched. Exact GPU float32 plane readback remains a Forward+-only assertion.
+
+One initial X11 run failed the combined state/clock guard after fullscreen exit;
+it did not record which key differed, so the cause remains unconfirmed. The
+harness now records exact differences. Two Compatibility diagnostic reruns and
+the Forward+ run passed all 18 stages with unchanged state and clock. Review
+camera/time preservation during actual desktop transitions alongside drag,
+resize and snapping. Startup cache warnings, the known encoder cleanup messages,
+the inconclusive XTest attempt, and corrected intermediate failures are recorded
+in the [Round 2 evidence notes](evidence/issue-143/round2/README.md).
+
+The Godot editor import and new script UID generation passed with a clean native
+log after its local services were blocked in the initial sandbox attempt.
+Eleven new unedited production screenshots are retained separately from v1.
+Round 2 remains pending owner review on Draft PR #145; build 10 and the broader
+propagation boundary are unchanged.

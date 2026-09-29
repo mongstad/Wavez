@@ -111,13 +111,13 @@ func run() -> void:
 	shell.edge_reveal.set_pinned("right",true); await settle()
 	check(viewer.overlay_visible and shell.edge_reveal.states.right.pinned, "Pin restores persistent dock")
 	var camera_before: Transform3D = viewer.camera.transform
-	shell.transport.open_seek(); await settle(); shell.transport.target.editor.grab_focus()
+	shell.transport.open_seek(); await settle(); shell.transport.seek_dialog.editor.grab_focus()
 	for code in [KEY_R,KEY_SPACE]:
 		var typing := InputEventKey.new(); typing.keycode = code; typing.pressed = true; typing.window_id = shell.transport.seek_dialog.get_window_id()
 		Input.parse_input_event(typing)
 	await settle()
 	check(viewer.camera.transform == camera_before and not viewer.playing, "Text entry suppresses viewport shortcuts")
-	shell.transport.target.editor.release_focus(); shell.transport.seek_dialog.hide()
+	shell.transport.seek_dialog.editor.release_focus(); shell.transport.seek_dialog.hide()
 	viewer.yaw = 1.7; viewer._update_camera(); key(viewer, KEY_R)
 	check(is_equal_approx(viewer.yaw, deg_to_rad(38.0)), "Reset entry uses canonical camera reset")
 	viewer._focus_activity(); check(viewer.camera.transform.is_finite(), "Frame scene remains available")

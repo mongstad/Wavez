@@ -6,15 +6,19 @@ var theme := ThemeSource.new()
 func install(shell) -> void:
 	for surface in [shell.bar, shell.transport, shell.status_ui]:
 		surface.theme = theme
-		surface.add_theme_stylebox_override("panel", theme.flat_box(&"surface.1", 0, 0, 0))
+		surface.add_theme_stylebox_override("panel", theme.tonal_surface())
+	shell.status_ui.add_theme_stylebox_override("panel", theme.flat_box(&"surface.shade", 0, 0, 0))
 	# Deeper dock foundation; only the first particle control groups are migrated.
-	shell.dock.add_theme_stylebox_override("panel", theme.flat_box(&"surface.1", 12, 12, 0))
+	shell.dock.add_theme_stylebox_override("panel", theme.tonal_surface(14, 12))
 	var header = shell.edge_reveal.pins.right.get_parent()
 	header.theme = theme
+	header.get_child(0).theme_type_variation = "PanelTitle"
+	header.get_parent().add_theme_constant_override("separation", 10)
 	shell.tabs.theme = theme; shell.chooser.theme = theme
 	for group in ["Rendering", "Color Mapping"]:
 		var body: Control = shell.viewer.sections[group]
 		body.theme = theme
+		body.add_theme_constant_override("separation", 8)
 		if group == "Rendering":
 			for child in body.get_children():
 				if child is Label:
@@ -22,20 +26,22 @@ func install(shell) -> void:
 					child.theme_type_variation = "PropertyLabel"
 		var disclosure: Button = shell.viewer.section_buttons[group]
 		disclosure.theme = theme
+		disclosure.add_theme_font_override("font", theme.get_font("font", "SectionHeader"))
 		for state in ["normal", "hover", "pressed", "hover_pressed"]:
-			disclosure.add_theme_stylebox_override(state, theme.flat_box(&"surface.hover" if state.begins_with("hover") else &"surface.1", 4, 8, 0))
+			disclosure.add_theme_stylebox_override(state, theme.flat_box(&"surface.hover" if state.begins_with("hover") else &"surface.2", 8, 9, 4))
 		animate_buttons(body)
 		animate_buttons(disclosure)
 	# MenuButton padding overrides were built before the review Theme existed.
-	for menu in shell.menus.values():
+	for menu in shell.menus.values() + [shell.navigation.get_child(2)]:
 		for state in ["normal", "hover", "pressed", "disabled"]:
 			var style: StyleBox = theme.get_stylebox(state, "MenuButton").duplicate()
 			style.content_margin_right += 20
 			menu.add_theme_stylebox_override(state, style)
+	for action in shell.navigation.get_children(): action.theme_type_variation = "IconAction"
 	for node in [shell.bar, header, shell.tabs, shell.transport, shell.status_ui]: animate_buttons(node)
 	for side in shell.edge_reveal.pins:
 		var pin: Button = shell.edge_reveal.pins[side]
-		pin.theme = theme; pin.theme_type_variation = "IconAction"
+		pin.theme = theme; pin.theme_type_variation = "PinAction"
 		shell.edge_reveal.update_pin(side)
 	# The readiness overlay retains its accepted blue/teal meaning and geometry.
 	# Only the native playhead is violet; scientific legends retain the old theme.
@@ -46,7 +52,12 @@ func install(shell) -> void:
 	track.border_color = theme.c(&"border.control")
 	shell.viewer.timeline.add_theme_stylebox_override("slider", track)
 	for action in shell.transport.actions.get_children(): action.theme_type_variation = "IconAction"
-	shell.transport.seek_dialog.theme = shell.theme
+	shell.transport.displayed.theme_type_variation = "NumericValue"
+	shell.transport.duration.add_theme_font_override("font", theme.MONO)
+	shell.transport.seek_dialog.theme = theme
+	shell.details.theme = theme
+	shell.about.theme = theme
+	# Representative dialog/confirmation surfaces, not broad Tools/Jobs propagation.
 	shell.status_ui.jobs_dialog.theme = shell.theme
 
 func animate_buttons(node: Node) -> void:

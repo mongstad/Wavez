@@ -1,6 +1,8 @@
 extends PanelContainer
 ## Presentation adapter: all sampling and preparation remain in the existing controllers.
-const NumberField = preload("res://ui/components/number_field.gd")
+const SeekPopover = preload("res://ui/shell/time_seek_popover.gd")
+const SPEEDS = [.25, .5, .75, 1.0, 1.5, 2.0, 3.0, 4.0]
+const SPEED_LABELS = ["0.25×", "0.5×", "0.75×", "1×", "1.5×", "2×", "3×", "4×"]
 const FloatText = preload("res://ui/components/float64_text.gd")
 var viewer
 var shell
@@ -20,14 +22,9 @@ var pending_since_ms := -1
 var pending_target = null
 var pending_generation := -1
 const NORMAL_RECORDED_RATE := 1.0
-var seek_button: Button
-var rate
-var rate_units: Label
+var rate: OptionButton
 var loop: CheckButton
-var seek_dialog: AcceptDialog
-var target
-var seek_units: Label
-var seek_error: Label
+var seek_dialog
 var source_generation := -1
 var compact := false
 
@@ -52,8 +49,18 @@ func setup(owner_shell) -> void:
 	var progress := HBoxContainer.new(); progress.add_theme_constant_override("separation",4); axis.add_child(progress)
 	displayed = label(progress,"—"); displayed.custom_minimum_size.x = 48
 	displayed.vertical_alignment = VERTICAL_ALIGNMENT_CENTER; displayed.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	displayed.mouse_filter = Control.MOUSE_FILTER_STOP
+	displayed.focus_mode = Control.FOCUS_ALL
+	displayed.focus_entered.connect(func(): displayed.add_theme_stylebox_override("normal", shell.style_slice.theme.focus()))
+	displayed.focus_exited.connect(func(): displayed.remove_theme_stylebox_override("normal"))
+	displayed.gui_input.connect(func(event):
+		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed and event.double_click:
+			open_seek(displayed); displayed.accept_event()
+		elif event is InputEventKey and event.pressed and event.keycode in [KEY_ENTER, KEY_KP_ENTER]:
+			open_seek(displayed); displayed.accept_event())
 	viewer.timeline = preload("res://ui/shell/prepared_timeline.gd").new(); viewer.timeline.step = 1
 	viewer.timeline.value_changed.connect(viewer._timeline_changed)
+	viewer.timeline.seek_requested.connect(func(): open_seek(viewer.timeline))
 	progress.add_child(viewer.timeline); viewer.timeline.custom_minimum_size.y = 16
 	# The endpoint-centred thumb extends half its texture beyond the track.
 	progress.add_theme_constant_override("separation",4+ceili(viewer.timeline.get_theme_icon("grabber").get_width()*.5))
@@ -77,14 +84,12 @@ func setup(owner_shell) -> void:
 	requested.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_WIDE)
 	requested.offset_top = 2; requested.offset_bottom = 22; requested.clip_text = true
 	requested.mouse_filter = Control.MOUSE_FILTER_STOP
-	seek_button = shell.button(primary,"Seek…",open_seek); seek_button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	rate = OptionButton.new(); rate.name = "PlaybackSpeed"
+	rate.fit_to_longest_item = false; rate.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	progress.add_child(rate)
+	for title in SPEED_LABELS: rate.add_item(title)
+	rate.item_selected.connect(func(index): viewer.physical_rate = SPEEDS[index] * NORMAL_RECORDED_RATE)
 	options = HBoxContainer.new(); options.add_theme_constant_override("separation",8); primary.add_child(options)
-	var rate_box := HBoxContainer.new(); rate_box.size_flags_vertical = Control.SIZE_SHRINK_CENTER; rate_box.add_theme_constant_override("separation",4); options.add_child(rate_box)
-	rate_units = label(rate_box,"Playback speed")
-	rate = NumberField.new(); rate.custom_minimum_size.x = 140; rate_box.add_child(rate)
-	label(rate_box,"×")
-	rate.validator = func(value): return "Playback speed is too large." if not is_finite(value*NORMAL_RECORDED_RATE) else ""
-	rate.committed.connect(func(value): viewer.physical_rate = value*NORMAL_RECORDED_RATE)
 	loop = CheckButton.new(); loop.text = "Loop"; loop.tooltip_text = "Loop recorded interval"; loop.size_flags_vertical = Control.SIZE_SHRINK_CENTER; options.add_child(loop)
 	loop.toggled.connect(func(value):
 		if viewer.scene_layers != null and viewer.scene_layers.playback.enabled: viewer.scene_layers.playback.set_loop(value)
@@ -100,42 +105,35 @@ func label(parent: Node, text: String) -> Label:
 	var result := Label.new(); result.text = text; parent.add_child(result); return result
 
 func _build_seek() -> void:
-	seek_dialog = AcceptDialog.new(); seek_dialog.title = "Seek time"; seek_dialog.dialog_hide_on_ok = false
-	seek_dialog.get_ok_button().text = "Go"; seek_dialog.add_cancel_button("Cancel"); add_child(seek_dialog)
-	var form := VBoxContainer.new(); form.custom_minimum_size.x = 420; seek_dialog.add_child(form)
-	label(form,"Target")
-	target = NumberField.new(); target.custom_minimum_size.x = 420; target.error_label.custom_minimum_size.x = 420; form.add_child(target)
-	seek_units = label(form,"Source units")
-	seek_error = label(form,""); seek_error.custom_minimum_size.x = 420; seek_error.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; seek_error.hide()
-	target.validator = func(value):
-		if viewer.generic_reader == null or viewer.generic_reader.frames.is_empty(): return "Open a capture with recorded samples first."
-		if value < viewer.generic_reader.frames[0].time or value > viewer.generic_reader.frames[-1].time: return "Target is outside the recorded interval."
-		return ""
+	seek_dialog = SeekPopover.new(); add_child(seek_dialog)
 	seek_dialog.confirmed.connect(submit_seek)
-	seek_dialog.canceled.connect(func(): target.cancel())
-	seek_dialog.visibility_changed.connect(func():
-		if not seek_dialog.visible: seek_button.grab_focus())
 
 func units() -> String:
 	if viewer.generic_reader == null: return "Source units"
 	var unit = viewer.generic_reader.metadata.get("time_unit","")
 	return unit if unit is String and not unit.is_empty() and unit != "unknown" else "Source units"
 
-func open_seek() -> void:
-	if viewer.generic_reader == null or viewer.generic_reader.frames.is_empty(): return
+func open_seek(anchor: Control = null) -> void:
+	if viewer.generic_reader == null or viewer.generic_reader.frames.is_empty() or viewer.inspection_busy: return
+	if anchor == null: anchor = displayed
 	source_generation = viewer.capture_generation
-	target.set_model(float(viewer.committed_sample.get("requested_time",viewer.generic_reader.frames[0].time)))
-	seek_units.text = units(); seek_error.hide()
-	seek_dialog.popup_centered(Vector2i(480,220)); target.editor.grab_focus()
+	var frames: Array = viewer.generic_reader.frames
+	seek_dialog.configure(float(frames[0].time), float(frames[-1].time), float(viewer.committed_sample.get("requested_time", frames[0].time)), displayed)
+	var rect := anchor.get_global_rect()
+	if anchor == viewer.timeline:
+		var thumb: Rect2 = viewer.timeline.playhead_rect()
+		rect = Rect2(viewer.timeline.global_position + thumb.position, thumb.size)
+	seek_dialog.open_at(rect)
 
 func submit_seek() -> void:
 	if source_generation != viewer.capture_generation:
-		seek_error.text = "Capture changed. Close and reopen Seek time."; seek_error.show(); return
-	if not target.commit(): return
-	# Enter commits a local number-field draft only. Go is the sole submit action.
+		seek_dialog.show_error("Capture changed. Reopen seek."); return
+	var candidate: Dictionary = seek_dialog.source_target()
+	if candidate.has("error"):
+		seek_dialog.show_error(candidate.error); return
 	reset_requested()
-	if not viewer._seek_time(target.model):
-		seek_error.text = "Seek could not be submitted. Check the recorded interval and inspection state."; seek_error.show(); return
+	if not viewer._seek_time(candidate.value):
+		seek_dialog.show_error("Seek unavailable. Check the recorded interval and inspection state."); return
 	seek_dialog.hide(); refresh()
 
 func pending_time():
@@ -159,22 +157,25 @@ func refresh() -> void:
 	for index in [0,2]: actions.get_child(index).disabled = not loaded or viewer.inspection_busy
 	viewer.timeline.editable = loaded and not viewer.inspection_busy
 	viewer.timeline.refresh(viewer)
-	seek_button.disabled = not loaded or viewer.inspection_busy
-	rate.editor.editable = loaded; loop.disabled = not loaded
+	rate.disabled = not loaded; loop.disabled = not loaded
 	update_index_hint()
 	var clock = viewer.committed_sample.get("requested_time")
 	var timing := playback_timing()
 	displayed.text = format_duration(timing.elapsed) if loaded else "—"
-	displayed.tooltip_text = "Elapsed playback at 1× (nominal seconds).\nDisplayed source time " + (FloatText.format_value(float(clock)) if clock != null else "—") + " " + units()
+	displayed.tooltip_text = "Double-click to seek · Elapsed playback at 1× (nominal seconds).\nDisplayed source time " + (FloatText.format_value(float(clock)) if clock != null else "—") + " " + units()
 	duration.text = format_duration(timing.remaining,true) if show_remaining else format_duration(timing.total)
 	if not loaded: duration.text = "—"
 	duration.tooltip_text = ("Remaining duration; click for total" if show_remaining else "Total duration; click for remaining") + ". Nominal playback seconds at 1×; buffering and speed do not change the interval."
 	var pending = pending_time()
 	refresh_requested(pending,clock,Time.get_ticks_msec())
 	var value: float = viewer.physical_rate
-	if rate.model != value/NORMAL_RECORDED_RATE: rate.set_model(value/NORMAL_RECORDED_RATE)
+	var selected := SPEEDS.find(value / NORMAL_RECORDED_RATE)
+	if rate.selected != selected: rate.select(selected)
+	if selected < 0: rate.text = "—×" # Retain arbitrary saved rates without coercion.
+	var font := rate.get_theme_font("font")
+	var widest := font.get_string_size("0.75×", HORIZONTAL_ALIGNMENT_LEFT, -1, rate.get_theme_font_size("font_size")).x
+	rate.custom_minimum_size.x = ceili(widest) + rate.get_theme_icon("arrow").get_width() + 24
 	rate.tooltip_text = "Playback speed relative to 1×: 1 recorded unit per playback second. Negative values reverse; zero holds.\nExact controller rate: " + FloatText.format_value(value)
-	rate.editor.tooltip_text = rate.tooltip_text
 	loop.set_pressed_no_signal(viewer.scene_loop_playback)
 	if seek_dialog.visible and source_generation != viewer.capture_generation: seek_dialog.hide()
 
@@ -197,7 +198,7 @@ func refresh_requested(pending, clock, now_ms: int) -> void:
 func update_index_hint() -> void:
 	var index := int(viewer.timeline.value) if dragging_index else int(viewer.current_index)
 	var text := "Sample index %d / %d" % [index+1,viewer.frame_count] if viewer.frame_count > 0 else "Sample index — / —"
-	viewer.timeline.tooltip_text = text+"\nBuffered overlay: blue = selected fields prepared; teal = all visible layers prepared.\nRanges follow recorded source times on this sample-index axis. GPU staging may still briefly wait."
+	viewer.timeline.tooltip_text = "Drag to scrub · Double-click to seek\n"+text+"\nBuffered overlay: blue = selected fields prepared; teal = all visible layers prepared.\nRanges follow recorded source times on this sample-index axis. GPU staging may still briefly wait."
 	index_hint.text = text
 	index_hint.visible = dragging_index
 	if dragging_index:

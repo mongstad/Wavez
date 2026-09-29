@@ -11,15 +11,28 @@ const PALETTE = {
 	&"border.control": Color("39465e"), &"focus.ring": Color("9695f5"),
 	&"accent.primary": Color("7270d8"), &"accent.foreground": Color("080d14"),
 	&"selection.fill": Color("27294c"), &"selection.text": Color("dedcff"),
+	&"surface.lit": Color("192133"), &"surface.shade": Color("101623"),
 }
 var shell_icons := {}
 
 func c(key: StringName) -> Color:
-	return PALETTE.get(key, TOKENS.color(key))
+	return PALETTE[key] if PALETTE.has(key) else TOKENS.color(key)
 
 func flat_box(fill: StringName, x := 12, y := 6, radius := 4) -> StyleBoxFlat:
 	var style := box(fill, &"border.subtle", x, y, radius)
 	style.set_border_width_all(0)
+	return style
+
+func tonal_surface(x := 0, y := 0) -> StyleBoxTexture:
+	# Static, closely spaced tones. No time uniform or idle animation.
+	var gradient := Gradient.new()
+	gradient.colors = PackedColorArray([c(&"surface.lit"), c(&"surface.shade")])
+	var texture := GradientTexture2D.new(); texture.gradient = gradient
+	texture.width = 16; texture.height = 128
+	texture.fill_from = Vector2.ZERO; texture.fill_to = Vector2(0, 1)
+	var style := StyleBoxTexture.new(); style.texture = texture
+	style.content_margin_left = x; style.content_margin_right = x
+	style.content_margin_top = y; style.content_margin_bottom = y
 	return style
 
 func _init() -> void:
@@ -48,9 +61,20 @@ func _init() -> void:
 		set_color("icon_disabled_color", type, c(&"text.disabled"))
 	# Active tabs have one accent underline rather than a boxed selected button.
 	for state in ["normal", "hover", "pressed", "hover_pressed"]:
-		var selected := flat_box(&"selection.fill")
-		selected.border_width_bottom = 2; selected.border_color = c(&"accent.primary")
+		var selected := flat_box(&"surface.2" if state.begins_with("hover") else &"surface.1")
+		selected.border_width_bottom = 1; selected.border_color = c(&"accent.primary")
 		set_stylebox(state, "SelectedButton", selected)
+	set_color("font_color", "SelectedButton", c(&"selection.text"))
+	# Pins carry their state in silhouette and ink, including when toggled on.
+	set_type_variation("PinAction", "IconAction")
+	for state in ["normal", "pressed", "disabled", "hover", "hover_pressed"]:
+		var pin := flat_box(&"surface.hover", 8, 6)
+		if state in ["normal", "pressed", "disabled"]: pin.bg_color = Color.TRANSPARENT
+		set_stylebox(state, "PinAction", pin)
+	set_stylebox("focus", "PinAction", focus())
+	set_color("icon_pressed_color", "PinAction", c(&"accent.primary"))
+	set_color("icon_hover_pressed_color", "PinAction", c(&"focus.ring"))
+	set_color("icon_normal_color", "PinAction", c(&"text.secondary"))
 	set_stylebox("normal", "LineEdit", flat_box(&"surface.2"))
 	set_stylebox("read_only", "LineEdit", flat_box(&"surface.1"))
 	var invalid := flat_box(&"surface.2"); invalid.border_width_bottom = 1; invalid.border_color = c(&"state.error")
@@ -74,6 +98,16 @@ func _init() -> void:
 	set_icon("radio_checked", "PopupMenu", icon_named("radio_checked", &"selection.text"))
 	set_icon("radio_unchecked", "PopupMenu", icon_named("radio", &"text.secondary"))
 	set_stylebox("panel", "TooltipPanel", flat_box(&"surface.3", 12, 8, 6))
+	set_stylebox("panel", "PopupPanel", flat_box(&"surface.3", 16, 14, 6))
+	set_stylebox("panel", "AcceptDialog", flat_box(&"surface.3", 24, 20, 6))
+	var dialog_border := flat_box(&"surface.3", 12, 12, 6)
+	dialog_border.expand_margin_top = 32
+	dialog_border.shadow_color = Color(0, 0, 0, .25); dialog_border.shadow_size = 6
+	set_stylebox("embedded_border", "Window", dialog_border)
+	set_stylebox("embedded_unfocused_border", "Window", dialog_border)
+	set_stylebox("normal", "TextEdit", flat_box(&"surface.1", 12, 10))
+	set_stylebox("read_only", "TextEdit", flat_box(&"surface.1", 12, 10))
+	set_color("font_readonly_color", "TextEdit", c(&"text.secondary"))
 
 func svg_texture(source: String, tint: Color) -> DPITexture:
 	return DPITexture.create_from_string(source, 1.0, 1.0, {Color.WHITE: tint})
@@ -84,3 +118,11 @@ func shell_icon(id: String) -> Texture2D:
 		var colors := RegEx.new(); colors.compile("#[0-9a-fA-F]{6}")
 		shell_icons[id] = DPITexture.create_from_string(colors.sub(original.get_source(), "#ffffff", true))
 	return shell_icons[id]
+
+func chrome_icon(id: String) -> Texture2D:
+	if id == "close": return shell_icon("close")
+	var shapes := {"minimize":'<path d="M6 16h12"/>', "maximize":'<rect x="6" y="6" width="12" height="12"/>', "restore":'<path d="M9 6h9v9M6 9h9v9H6z"/>'}
+	var key := "chrome:" + id
+	if not shell_icons.has(key):
+		shell_icons[key] = DPITexture.create_from_string('<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><g fill="none" stroke="#ffffff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">%s</g></svg>' % shapes[id])
+	return shell_icons[key]

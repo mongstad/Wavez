@@ -38,8 +38,8 @@ func run() -> void:
 		shell.viewer.section_buttons[group].button_pressed = true
 		check(viewer.sections[group].theme == theme, group + " uses scoped review theme")
 	check(viewer.sections["Advanced • Size / Brightness"].theme == null, "Advanced remains outside review slice")
-	check(viewer.tools_ui.window.theme != theme and shell.about.theme != theme, "Tools and About remain outside slice")
-	check(shell.transport.seek_dialog.theme == shell.theme and shell.status_ui.jobs_dialog.theme == shell.theme, "Dialog propagation deferred")
+	check(viewer.tools_ui.window.theme != theme and shell.status_ui.jobs_dialog.theme != theme, "Tools and Jobs remain outside Round 2 slice")
+	check(shell.transport.seek_dialog.theme == theme and shell.details.theme == theme and shell.about.theme == theme, "Representative popover and informational dialogs share the slice theme")
 	check(viewer.legend.theme == shell.theme, "Scientific legend retains accepted theme")
 	check(viewer.timeline.field_color == legacy.c(&"accent.primary") and viewer.timeline.scene_color == legacy.c(&"identity.teal"), "Readiness overlay keeps accepted blue/teal meaning")
 	for severity in ["success", "warning", "error", "info"]:
@@ -55,6 +55,8 @@ func run() -> void:
 	check(theme.get_stylebox("focus", "IconAction").border_width_top >= 2, "Keyboard focus remains explicit")
 	check(theme.get_stylebox("focus", "IconAction").border_color == theme.c(&"focus.ring"), "Focus consumes periwinkle token")
 	check(theme.get_color("font_color", "Label") == theme.c(&"text.primary"), "Derived theme retains shared typography")
+	check(shell.detail_text.get_theme_color("font_readonly_color") == theme.c(&"text.secondary"), "Informational dialog consumes explicit read-only text color")
+	check(contrast(shell.detail_text.get_theme_color("font_readonly_color"), theme.c(&"surface.1")) >= 4.5, "Read-only dialog text contrast")
 	for icon in ["checked", "unchecked", "checked_disabled", "unchecked_disabled"]:
 		check(theme.get_icon(icon, "CheckButton").get_size() == Vector2(32,20), "Compact switch native icon " + icon)
 	check(theme.get_icon("checked", "CheckButton").get_image().get_data() != theme.get_icon("unchecked", "CheckButton").get_image().get_data(), "Switch state includes knob position")

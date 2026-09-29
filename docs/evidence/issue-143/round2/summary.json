@@ -1,0 +1,1884 @@
+{
+  "date": "2026-09-29",
+  "issue": 143,
+  "pr": 145,
+  "review_state": "Round 2 pending owner visual review; no broad propagation",
+  "branch": "143-ux5-style-001-establish-modern-flat-violet-simscope-visual-design-system",
+  "accepted_main": "61f6a785ff8cf3bdf19da30b6d6e69a8b71f5a02",
+  "v1_checkpoint": "0d32d08a7333e6982fd26ebc8b190ba208ee2ab6",
+  "candidate_version": "v0.1.0.10",
+  "banner": "Deferred by owner; plain wordmark retained; no banner asset added",
+  "runtime": "Godot 4.7.2 stable; NVIDIA RTX 3070 Ti; KDE/KWin Wayland and X11",
+  "native_checks_total": 4332,
+  "suites": [
+    {
+      "suite": "violet_style_slice",
+      "renderer": "forward_plus",
+      "checks": 52,
+      "status": "PASS",
+      "report": "/home/Nozba/Codex/SIMSCOPE/style-143/round2/review-final/violet_style_slice-forward_plus/report.json"
+    },
+    {
+      "suite": "violet_round2",
+      "renderer": "forward_plus",
+      "checks": 99,
+      "status": "PASS",
+      "report": "/home/Nozba/Codex/SIMSCOPE/style-143/round2/review-final/violet_round2-forward_plus/report.json"
+    },
+    {
+      "suite": "viewer_transport",
+      "renderer": "forward_plus",
+      "checks": 211,
+      "status": "PASS",
+      "report": "/home/Nozba/Codex/SIMSCOPE/style-143/round2/review-final/viewer_transport-forward_plus/report.json"
+    },
+    {
+      "suite": "viewer_shell",
+      "renderer": "forward_plus",
+      "checks": 661,
+      "status": "PASS",
+      "report": "/home/Nozba/Codex/SIMSCOPE/style-143/round2/final/viewer_shell-forward_plus/shell-report.json"
+    },
+    {
+      "suite": "edge_reveal",
+      "renderer": "forward_plus",
+      "checks": 210,
+      "status": "PASS",
+      "report": "/home/Nozba/Codex/SIMSCOPE/style-143/round2/final/edge_reveal-forward_plus/report.json"
+    },
+    {
+      "suite": "render_pacing",
+      "renderer": "forward_plus",
+      "checks": 290,
+      "status": "PASS",
+      "report": "/home/Nozba/Codex/SIMSCOPE/style-143/round2/final/render_pacing-forward_plus/report.json"
+    },
+    {
+      "suite": "video_current",
+      "renderer": "forward_plus",
+      "checks": 235,
+      "status": "PASS",
+      "report": "/home/Nozba/Codex/SIMSCOPE/style-143/round2/final/video_current-forward_plus/report.json"
+    },
+    {
+      "suite": "viewer_status",
+      "renderer": "forward_plus",
+      "checks": 261,
+      "status": "PASS",
+      "report": "/home/Nozba/Codex/SIMSCOPE/style-143/round2/review-final-completion/viewer_status-forward_plus/report.json"
+    },
+    {
+      "suite": "violet_style_slice",
+      "renderer": "gl_compatibility",
+      "checks": 52,
+      "status": "PASS",
+      "report": "/home/Nozba/Codex/SIMSCOPE/style-143/round2/review-final-completion/violet_style_slice-gl_compatibility/report.json"
+    },
+    {
+      "suite": "violet_round2",
+      "renderer": "gl_compatibility",
+      "checks": 99,
+      "status": "PASS",
+      "report": "/home/Nozba/Codex/SIMSCOPE/style-143/round2/review-final-completion/violet_round2-gl_compatibility/report.json"
+    },
+    {
+      "suite": "viewer_transport",
+      "renderer": "gl_compatibility",
+      "checks": 211,
+      "status": "PASS",
+      "report": "/home/Nozba/Codex/SIMSCOPE/style-143/round2/review-final-completion/viewer_transport-gl_compatibility/report.json"
+    },
+    {
+      "suite": "viewer_shell",
+      "renderer": "gl_compatibility",
+      "checks": 661,
+      "status": "PASS",
+      "report": "/home/Nozba/Codex/SIMSCOPE/style-143/round2/final/viewer_shell-gl_compatibility/shell-report.json"
+    },
+    {
+      "suite": "edge_reveal",
+      "renderer": "gl_compatibility",
+      "checks": 210,
+      "status": "PASS",
+      "report": "/home/Nozba/Codex/SIMSCOPE/style-143/round2/final/edge_reveal-gl_compatibility/report.json"
+    },
+    {
+      "suite": "render_pacing",
+      "renderer": "gl_compatibility",
+      "checks": 290,
+      "status": "PASS",
+      "report": "/home/Nozba/Codex/SIMSCOPE/style-143/round2/final/render_pacing-gl_compatibility/report.json"
+    },
+    {
+      "suite": "video_current",
+      "renderer": "gl_compatibility",
+      "checks": 225,
+      "status": "PASS",
+      "report": "/home/Nozba/Codex/SIMSCOPE/style-143/round2/final/video_current-gl_compatibility/report.json"
+    },
+    {
+      "suite": "viewer_status",
+      "renderer": "gl_compatibility",
+      "checks": 261,
+      "status": "PASS",
+      "report": "/home/Nozba/Codex/SIMSCOPE/style-143/round2/review-final-completion/viewer_status-gl_compatibility/report.json"
+    },
+    {
+      "suite": "window_chrome",
+      "renderer": "forward_plus",
+      "driver": "wayland",
+      "checks": 76,
+      "status": "PASS",
+      "report": "/home/Nozba/Codex/SIMSCOPE/style-143/round2/review-final-completion/window_chrome-forward_plus-wayland/desktop-report.json"
+    },
+    {
+      "suite": "window_chrome",
+      "renderer": "gl_compatibility",
+      "driver": "wayland",
+      "checks": 76,
+      "status": "PASS",
+      "report": "/home/Nozba/Codex/SIMSCOPE/style-143/round2/final-desktop/window_chrome-gl_compatibility-wayland/desktop-report.json"
+    },
+    {
+      "suite": "window_chrome",
+      "renderer": "forward_plus",
+      "driver": "x11",
+      "checks": 76,
+      "status": "PASS",
+      "report": "/home/Nozba/Codex/SIMSCOPE/style-143/round2/final-x11-repeat/window_chrome-forward_plus-x11/desktop-report.json"
+    },
+    {
+      "suite": "window_chrome",
+      "renderer": "gl_compatibility",
+      "driver": "x11",
+      "checks": 76,
+      "status": "PASS",
+      "report": "/home/Nozba/Codex/SIMSCOPE/style-143/round2/final-x11-repeat/window_chrome-gl_compatibility-x11/desktop-report.json"
+    }
+  ],
+  "python_version_tests": {
+    "command": "python -m unittest tests.test_application_version",
+    "tests": 2,
+    "status": "PASS"
+  },
+  "python_harness_compile": "PASS",
+  "editor_import": {
+    "status": "PASS",
+    "clean_log": "/home/Nozba/Codex/SIMSCOPE/style-143/round2/editor-import-native.log",
+    "initial_sandbox_attempt": "Local editor socket/settings writes blocked; repeated with native permissions successfully"
+  },
+  "validation_sequence": "Broad shell/edge/pacing/video matrix completed before final plain-wordmark deferral and exact preset-label refinement. Focused UI, transport, status and desktop suites were rerun after those final presentation changes; accepted-main scientific comparison ran afterward.",
+  "idle": {
+    "forward_plus": {
+      "phases": 34,
+      "max_new_draws": 0,
+      "all_stable_pixels": true,
+      "all_source_hashes_unchanged": {
+        "particles.ssc": "dcc76730c5701a2f8484d109791d507a2435519aa1b3efd8059ef5ac58b7c37c",
+        "field.ssc": "ddaa74b929544e7a1ca8ade061722c8445d8803dc8a5bf23acb2564d9f951105",
+        "mesh.ssc": "79d6c8f3480ef71ad26a5a427b8629c6e93c7f4b7fcf30bb9760a46f9ea7e102",
+        "mixed.ssc": "9d7727fbd92e4000390b21290c120dac3a59c3e24789f424967a8af90202e4f2"
+      }
+    },
+    "gl_compatibility": {
+      "phases": 34,
+      "max_new_draws": 0,
+      "all_stable_pixels": true,
+      "all_source_hashes_unchanged": {
+        "particles.ssc": "da37b086000d6defa2f7acbb109b3dc836f1d1bdc3f2b93351e220fb6d1c74a9",
+        "field.ssc": "df186e91a0ad3ceffcea19660229afbf7b86b401491ac1eccdc17322e1b16d69",
+        "mesh.ssc": "2dd1b5106487b452056926bdb54a1a9a02f7d30263c2c8d54f7fe216061fe99f",
+        "mixed.ssc": "f92969605555c068d0d19d0b9a3b0849630ee0922efa428c8959ee3f2c3bc8dc"
+      }
+    }
+  },
+  "cancellation": {
+    "forward_plus": {
+      "parent_close_acknowledged": true,
+      "known_encoder_cleanup_diagnostics": [
+        "ERROR: The process 196885 does not exist or is not a child of the calling process.\n   at: _check_pid_is_running (drivers/unix/os_unix.cpp:863)\n   GDScript backtrace (most recent call first):\n       [0] finish (res://video/render_worker.gd:64)\n       [1] encode (res://video/render_worker.gd:340)\n",
+        "ERROR: The process 196885 does not exist or is not a child of the calling process.\n   at: _check_pid_is_running (drivers/unix/os_unix.cpp:863)\n   GDScript backtrace (most recent call first):\n       [0] _exit_tree (res://video/render_worker.gd:50)\n"
+      ],
+      "source_hashes_unchanged": {
+        "/home/Nozba/Codex/SIMSCOPE/style-143/round2/review-final-completion/viewer_status-forward_plus/scene.ssc": "8df8f3cc74e4de42b23410f454325b27200fe7e4a0121cfc86a06dd7c0f7d1bf",
+        "/home/Nozba/Codex/SIMSCOPE/style-143/round2/review-final-completion/viewer_status-forward_plus/fields.ssc": "d80fb5c37148ae794b70feedea15e4bacf7a142020339277bc4a5ad58b3bcca4"
+      }
+    },
+    "gl_compatibility": {
+      "parent_close_acknowledged": true,
+      "known_encoder_cleanup_diagnostics": [
+        "ERROR: The process 204873 does not exist or is not a child of the calling process.\n   at: _check_pid_is_running (drivers/unix/os_unix.cpp:863)\n   GDScript backtrace (most recent call first):\n       [0] finish (res://video/render_worker.gd:64)\n       [1] encode (res://video/render_worker.gd:340)\n",
+        "ERROR: The process 204873 does not exist or is not a child of the calling process.\n   at: _check_pid_is_running (drivers/unix/os_unix.cpp:863)\n   GDScript backtrace (most recent call first):\n       [0] _exit_tree (res://video/render_worker.gd:50)\n"
+      ],
+      "source_hashes_unchanged": {
+        "/home/Nozba/Codex/SIMSCOPE/style-143/round2/review-final-completion/viewer_status-gl_compatibility/scene.ssc": "aed4daec15831836073944c430684c60244fe8e5457151e1a25e1f7c394e5370",
+        "/home/Nozba/Codex/SIMSCOPE/style-143/round2/review-final-completion/viewer_status-gl_compatibility/fields.ssc": "24602777a77ea71d4d14e676943b3042a25d48881745fbbbd583d4b280b44da8"
+      }
+    }
+  },
+  "compact_window_actions": {
+    "forward_plus": [
+      {
+        "icon": "(24.0, 24.0)",
+        "modulate": "(0.94, 0.94, 0.94, 1.0)",
+        "rect": "[P: (916.0, 8.0), S: (32.0, 32.0)]",
+        "visible": true
+      },
+      {
+        "icon": "(24.0, 24.0)",
+        "modulate": "(0.94, 0.94, 0.94, 1.0)",
+        "rect": "[P: (948.0, 8.0), S: (32.0, 32.0)]",
+        "visible": true
+      },
+      {
+        "icon": "(16.0, 16.0)",
+        "modulate": "(0.94, 0.94, 0.94, 1.0)",
+        "rect": "[P: (980.0, 8.0), S: (32.0, 32.0)]",
+        "visible": true
+      }
+    ],
+    "gl_compatibility": [
+      {
+        "icon": "(24.0, 24.0)",
+        "modulate": "(0.94, 0.94, 0.94, 1.0)",
+        "rect": "[P: (916.0, 8.0), S: (32.0, 32.0)]",
+        "visible": true
+      },
+      {
+        "icon": "(24.0, 24.0)",
+        "modulate": "(0.94, 0.94, 0.94, 1.0)",
+        "rect": "[P: (948.0, 8.0), S: (32.0, 32.0)]",
+        "visible": true
+      },
+      {
+        "icon": "(16.0, 16.0)",
+        "modulate": "(0.94, 0.94, 0.94, 1.0)",
+        "rect": "[P: (980.0, 8.0), S: (32.0, 32.0)]",
+        "visible": true
+      }
+    ]
+  },
+  "desktop": [
+    {
+      "renderer": "forward_plus",
+      "driver": "wayland",
+      "stages": [
+        {
+          "stage": "restored",
+          "godot_mode": 0,
+          "expected_mode": 0,
+          "kwin_fullscreen": false,
+          "kwin_minimized": false,
+          "frame": {
+            "x": 556,
+            "y": 231,
+            "width": 1100,
+            "height": 700
+          },
+          "client": {
+            "x": 556,
+            "y": 231,
+            "width": 1100,
+            "height": 700
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "resize-request",
+          "godot_mode": 0,
+          "expected_mode": 0,
+          "kwin_fullscreen": false,
+          "kwin_minimized": false,
+          "frame": {
+            "x": 556,
+            "y": 231,
+            "width": 1100,
+            "height": 700
+          },
+          "client": {
+            "x": 556,
+            "y": 231,
+            "width": 1100,
+            "height": 700
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "resized",
+          "godot_mode": 0,
+          "expected_mode": 0,
+          "kwin_fullscreen": false,
+          "kwin_minimized": false,
+          "frame": {
+            "x": 556,
+            "y": 231,
+            "width": 1200,
+            "height": 760
+          },
+          "client": {
+            "x": 556,
+            "y": 231,
+            "width": 1200,
+            "height": 760
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "maximized",
+          "godot_mode": 2,
+          "expected_mode": 2,
+          "kwin_fullscreen": false,
+          "kwin_minimized": false,
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1394
+          },
+          "client": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1394
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "minimized-max",
+          "godot_mode": 0,
+          "expected_mode": 1,
+          "kwin_fullscreen": false,
+          "kwin_minimized": true,
+          "frame": {
+            "x": 556,
+            "y": 231,
+            "width": 1200,
+            "height": 760
+          },
+          "client": {
+            "x": 556,
+            "y": 231,
+            "width": 1200,
+            "height": 760
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "unminimized-max",
+          "godot_mode": 2,
+          "expected_mode": 2,
+          "kwin_fullscreen": false,
+          "kwin_minimized": false,
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1394
+          },
+          "client": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1394
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "max-fullscreen",
+          "godot_mode": 3,
+          "expected_mode": 3,
+          "kwin_fullscreen": true,
+          "kwin_minimized": false,
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          },
+          "client": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "minimized-fullscreen",
+          "godot_mode": 0,
+          "expected_mode": 1,
+          "kwin_fullscreen": false,
+          "kwin_minimized": true,
+          "frame": {
+            "x": 556,
+            "y": 231,
+            "width": 1200,
+            "height": 760
+          },
+          "client": {
+            "x": 556,
+            "y": 231,
+            "width": 1200,
+            "height": 760
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "unminimized-fullscreen",
+          "godot_mode": 3,
+          "expected_mode": 3,
+          "kwin_fullscreen": true,
+          "kwin_minimized": false,
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          },
+          "client": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "max-restored",
+          "godot_mode": 2,
+          "expected_mode": 2,
+          "kwin_fullscreen": false,
+          "kwin_minimized": false,
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1394
+          },
+          "client": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1394
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "restore-button",
+          "godot_mode": 0,
+          "expected_mode": 0,
+          "kwin_fullscreen": false,
+          "kwin_minimized": false,
+          "frame": {
+            "x": 556,
+            "y": 231,
+            "width": 1200,
+            "height": 760
+          },
+          "client": {
+            "x": 556,
+            "y": 231,
+            "width": 1200,
+            "height": 760
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "title-max",
+          "godot_mode": 2,
+          "expected_mode": 2,
+          "kwin_fullscreen": false,
+          "kwin_minimized": false,
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1394
+          },
+          "client": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1394
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "title-restore",
+          "godot_mode": 0,
+          "expected_mode": 0,
+          "kwin_fullscreen": false,
+          "kwin_minimized": false,
+          "frame": {
+            "x": 556,
+            "y": 231,
+            "width": 1200,
+            "height": 760
+          },
+          "client": {
+            "x": 556,
+            "y": 231,
+            "width": 1200,
+            "height": 760
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "minimized-window",
+          "godot_mode": 0,
+          "expected_mode": 1,
+          "kwin_fullscreen": false,
+          "kwin_minimized": true,
+          "frame": {
+            "x": 556,
+            "y": 231,
+            "width": 1200,
+            "height": 760
+          },
+          "client": {
+            "x": 556,
+            "y": 231,
+            "width": 1200,
+            "height": 760
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "unminimized-window",
+          "godot_mode": 0,
+          "expected_mode": 0,
+          "kwin_fullscreen": false,
+          "kwin_minimized": false,
+          "frame": {
+            "x": 556,
+            "y": 231,
+            "width": 1200,
+            "height": 760
+          },
+          "client": {
+            "x": 556,
+            "y": 231,
+            "width": 1200,
+            "height": 760
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "unpinned-fullscreen",
+          "godot_mode": 3,
+          "expected_mode": 3,
+          "kwin_fullscreen": true,
+          "kwin_minimized": false,
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          },
+          "client": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "unpinned-restored",
+          "godot_mode": 0,
+          "expected_mode": 0,
+          "kwin_fullscreen": false,
+          "kwin_minimized": false,
+          "frame": {
+            "x": 556,
+            "y": 231,
+            "width": 1200,
+            "height": 760
+          },
+          "client": {
+            "x": 556,
+            "y": 231,
+            "width": 1200,
+            "height": 760
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "close-request",
+          "godot_mode": 0,
+          "expected_mode": 0,
+          "kwin_fullscreen": false,
+          "kwin_minimized": false,
+          "frame": {
+            "x": 556,
+            "y": 231,
+            "width": 1200,
+            "height": 760
+          },
+          "client": {
+            "x": 556,
+            "y": 231,
+            "width": 1200,
+            "height": 760
+          },
+          "scientific_guard_passed": true
+        }
+      ],
+      "source": {
+        "sha256": "7546f6680c31356feaf9bd7919f3c423b5c78a8f193dd98d88b0c8515760beae",
+        "unchanged": true
+      },
+      "startup": {
+        "libdecor_gtk_fallback_warning": true
+      }
+    },
+    {
+      "renderer": "gl_compatibility",
+      "driver": "wayland",
+      "stages": [
+        {
+          "stage": "restored",
+          "godot_mode": 0,
+          "expected_mode": 0,
+          "kwin_fullscreen": false,
+          "kwin_minimized": false,
+          "frame": {
+            "x": 556,
+            "y": 231,
+            "width": 1100,
+            "height": 700
+          },
+          "client": {
+            "x": 556,
+            "y": 231,
+            "width": 1100,
+            "height": 700
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "resize-request",
+          "godot_mode": 0,
+          "expected_mode": 0,
+          "kwin_fullscreen": false,
+          "kwin_minimized": false,
+          "frame": {
+            "x": 556,
+            "y": 231,
+            "width": 1100,
+            "height": 700
+          },
+          "client": {
+            "x": 556,
+            "y": 231,
+            "width": 1100,
+            "height": 700
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "resized",
+          "godot_mode": 0,
+          "expected_mode": 0,
+          "kwin_fullscreen": false,
+          "kwin_minimized": false,
+          "frame": {
+            "x": 556,
+            "y": 231,
+            "width": 1200,
+            "height": 760
+          },
+          "client": {
+            "x": 556,
+            "y": 231,
+            "width": 1200,
+            "height": 760
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "maximized",
+          "godot_mode": 2,
+          "expected_mode": 2,
+          "kwin_fullscreen": false,
+          "kwin_minimized": false,
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1394
+          },
+          "client": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1394
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "minimized-max",
+          "godot_mode": 0,
+          "expected_mode": 1,
+          "kwin_fullscreen": false,
+          "kwin_minimized": true,
+          "frame": {
+            "x": 556,
+            "y": 231,
+            "width": 1200,
+            "height": 760
+          },
+          "client": {
+            "x": 556,
+            "y": 231,
+            "width": 1200,
+            "height": 760
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "unminimized-max",
+          "godot_mode": 2,
+          "expected_mode": 2,
+          "kwin_fullscreen": false,
+          "kwin_minimized": false,
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1394
+          },
+          "client": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1394
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "max-fullscreen",
+          "godot_mode": 3,
+          "expected_mode": 3,
+          "kwin_fullscreen": true,
+          "kwin_minimized": false,
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          },
+          "client": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "minimized-fullscreen",
+          "godot_mode": 0,
+          "expected_mode": 1,
+          "kwin_fullscreen": false,
+          "kwin_minimized": true,
+          "frame": {
+            "x": 556,
+            "y": 231,
+            "width": 1200,
+            "height": 760
+          },
+          "client": {
+            "x": 556,
+            "y": 231,
+            "width": 1200,
+            "height": 760
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "unminimized-fullscreen",
+          "godot_mode": 3,
+          "expected_mode": 3,
+          "kwin_fullscreen": true,
+          "kwin_minimized": false,
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          },
+          "client": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "max-restored",
+          "godot_mode": 2,
+          "expected_mode": 2,
+          "kwin_fullscreen": false,
+          "kwin_minimized": false,
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1394
+          },
+          "client": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1394
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "restore-button",
+          "godot_mode": 0,
+          "expected_mode": 0,
+          "kwin_fullscreen": false,
+          "kwin_minimized": false,
+          "frame": {
+            "x": 556,
+            "y": 231,
+            "width": 1200,
+            "height": 760
+          },
+          "client": {
+            "x": 556,
+            "y": 231,
+            "width": 1200,
+            "height": 760
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "title-max",
+          "godot_mode": 2,
+          "expected_mode": 2,
+          "kwin_fullscreen": false,
+          "kwin_minimized": false,
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1394
+          },
+          "client": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1394
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "title-restore",
+          "godot_mode": 0,
+          "expected_mode": 0,
+          "kwin_fullscreen": false,
+          "kwin_minimized": false,
+          "frame": {
+            "x": 556,
+            "y": 231,
+            "width": 1200,
+            "height": 760
+          },
+          "client": {
+            "x": 556,
+            "y": 231,
+            "width": 1200,
+            "height": 760
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "minimized-window",
+          "godot_mode": 0,
+          "expected_mode": 1,
+          "kwin_fullscreen": false,
+          "kwin_minimized": true,
+          "frame": {
+            "x": 556,
+            "y": 231,
+            "width": 1200,
+            "height": 760
+          },
+          "client": {
+            "x": 556,
+            "y": 231,
+            "width": 1200,
+            "height": 760
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "unminimized-window",
+          "godot_mode": 0,
+          "expected_mode": 0,
+          "kwin_fullscreen": false,
+          "kwin_minimized": false,
+          "frame": {
+            "x": 556,
+            "y": 231,
+            "width": 1200,
+            "height": 760
+          },
+          "client": {
+            "x": 556,
+            "y": 231,
+            "width": 1200,
+            "height": 760
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "unpinned-fullscreen",
+          "godot_mode": 3,
+          "expected_mode": 3,
+          "kwin_fullscreen": true,
+          "kwin_minimized": false,
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          },
+          "client": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "unpinned-restored",
+          "godot_mode": 0,
+          "expected_mode": 0,
+          "kwin_fullscreen": false,
+          "kwin_minimized": false,
+          "frame": {
+            "x": 556,
+            "y": 231,
+            "width": 1200,
+            "height": 760
+          },
+          "client": {
+            "x": 556,
+            "y": 231,
+            "width": 1200,
+            "height": 760
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "close-request",
+          "godot_mode": 0,
+          "expected_mode": 0,
+          "kwin_fullscreen": false,
+          "kwin_minimized": false,
+          "frame": {
+            "x": 556,
+            "y": 231,
+            "width": 1200,
+            "height": 760
+          },
+          "client": {
+            "x": 556,
+            "y": 231,
+            "width": 1200,
+            "height": 760
+          },
+          "scientific_guard_passed": true
+        }
+      ],
+      "source": {
+        "sha256": "75e6552f265cd04eceaf54a8a35428b15534ad759811b25e4179f08e8276b1f4",
+        "unchanged": true
+      },
+      "startup": {
+        "libdecor_gtk_fallback_warning": true
+      }
+    },
+    {
+      "renderer": "forward_plus",
+      "driver": "x11",
+      "stages": [
+        {
+          "stage": "restored",
+          "godot_mode": 0,
+          "expected_mode": 0,
+          "kwin_fullscreen": false,
+          "kwin_minimized": false,
+          "frame": {
+            "x": 560,
+            "y": 247,
+            "width": 1100,
+            "height": 700
+          },
+          "client": {
+            "x": 560,
+            "y": 247,
+            "width": 1100,
+            "height": 700
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "resize-request",
+          "godot_mode": 0,
+          "expected_mode": 0,
+          "kwin_fullscreen": false,
+          "kwin_minimized": false,
+          "frame": {
+            "x": 560,
+            "y": 247,
+            "width": 1100,
+            "height": 700
+          },
+          "client": {
+            "x": 560,
+            "y": 247,
+            "width": 1100,
+            "height": 700
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "resized",
+          "godot_mode": 0,
+          "expected_mode": 0,
+          "kwin_fullscreen": false,
+          "kwin_minimized": false,
+          "frame": {
+            "x": 560,
+            "y": 247,
+            "width": 1200,
+            "height": 760
+          },
+          "client": {
+            "x": 560,
+            "y": 247,
+            "width": 1200,
+            "height": 760
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "maximized",
+          "godot_mode": 2,
+          "expected_mode": 2,
+          "kwin_fullscreen": false,
+          "kwin_minimized": false,
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1394
+          },
+          "client": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1394
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "minimized-max",
+          "godot_mode": 1,
+          "expected_mode": 1,
+          "kwin_fullscreen": false,
+          "kwin_minimized": true,
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1394
+          },
+          "client": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1394
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "unminimized-max",
+          "godot_mode": 2,
+          "expected_mode": 2,
+          "kwin_fullscreen": false,
+          "kwin_minimized": false,
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1394
+          },
+          "client": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1394
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "max-fullscreen",
+          "godot_mode": 3,
+          "expected_mode": 3,
+          "kwin_fullscreen": true,
+          "kwin_minimized": false,
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          },
+          "client": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "minimized-fullscreen",
+          "godot_mode": 1,
+          "expected_mode": 1,
+          "kwin_fullscreen": true,
+          "kwin_minimized": true,
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          },
+          "client": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "unminimized-fullscreen",
+          "godot_mode": 3,
+          "expected_mode": 3,
+          "kwin_fullscreen": true,
+          "kwin_minimized": false,
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          },
+          "client": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "max-restored",
+          "godot_mode": 2,
+          "expected_mode": 2,
+          "kwin_fullscreen": false,
+          "kwin_minimized": false,
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1394
+          },
+          "client": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1394
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "restore-button",
+          "godot_mode": 0,
+          "expected_mode": 0,
+          "kwin_fullscreen": false,
+          "kwin_minimized": false,
+          "frame": {
+            "x": 560,
+            "y": 247,
+            "width": 1200,
+            "height": 760
+          },
+          "client": {
+            "x": 560,
+            "y": 247,
+            "width": 1200,
+            "height": 760
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "title-max",
+          "godot_mode": 2,
+          "expected_mode": 2,
+          "kwin_fullscreen": false,
+          "kwin_minimized": false,
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1394
+          },
+          "client": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1394
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "title-restore",
+          "godot_mode": 0,
+          "expected_mode": 0,
+          "kwin_fullscreen": false,
+          "kwin_minimized": false,
+          "frame": {
+            "x": 560,
+            "y": 247,
+            "width": 1200,
+            "height": 760
+          },
+          "client": {
+            "x": 560,
+            "y": 247,
+            "width": 1200,
+            "height": 760
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "minimized-window",
+          "godot_mode": 1,
+          "expected_mode": 1,
+          "kwin_fullscreen": false,
+          "kwin_minimized": true,
+          "frame": {
+            "x": 560,
+            "y": 247,
+            "width": 1200,
+            "height": 760
+          },
+          "client": {
+            "x": 560,
+            "y": 247,
+            "width": 1200,
+            "height": 760
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "unminimized-window",
+          "godot_mode": 0,
+          "expected_mode": 0,
+          "kwin_fullscreen": false,
+          "kwin_minimized": false,
+          "frame": {
+            "x": 560,
+            "y": 247,
+            "width": 1200,
+            "height": 760
+          },
+          "client": {
+            "x": 560,
+            "y": 247,
+            "width": 1200,
+            "height": 760
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "unpinned-fullscreen",
+          "godot_mode": 3,
+          "expected_mode": 3,
+          "kwin_fullscreen": true,
+          "kwin_minimized": false,
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          },
+          "client": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "unpinned-restored",
+          "godot_mode": 0,
+          "expected_mode": 0,
+          "kwin_fullscreen": false,
+          "kwin_minimized": false,
+          "frame": {
+            "x": 560,
+            "y": 247,
+            "width": 1200,
+            "height": 760
+          },
+          "client": {
+            "x": 560,
+            "y": 247,
+            "width": 1200,
+            "height": 760
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "close-request",
+          "godot_mode": 0,
+          "expected_mode": 0,
+          "kwin_fullscreen": false,
+          "kwin_minimized": false,
+          "frame": {
+            "x": 560,
+            "y": 247,
+            "width": 1200,
+            "height": 760
+          },
+          "client": {
+            "x": 560,
+            "y": 247,
+            "width": 1200,
+            "height": 760
+          },
+          "scientific_guard_passed": true
+        }
+      ],
+      "source": {
+        "sha256": "93d89ee2eaa0401a40721a74fa18cc2053033b001270ce05a13a52156527f822",
+        "unchanged": true
+      },
+      "startup": {
+        "libdecor_gtk_fallback_warning": false
+      }
+    },
+    {
+      "renderer": "gl_compatibility",
+      "driver": "x11",
+      "stages": [
+        {
+          "stage": "restored",
+          "godot_mode": 0,
+          "expected_mode": 0,
+          "kwin_fullscreen": false,
+          "kwin_minimized": false,
+          "frame": {
+            "x": 560,
+            "y": 247,
+            "width": 1100,
+            "height": 700
+          },
+          "client": {
+            "x": 560,
+            "y": 247,
+            "width": 1100,
+            "height": 700
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "resize-request",
+          "godot_mode": 0,
+          "expected_mode": 0,
+          "kwin_fullscreen": false,
+          "kwin_minimized": false,
+          "frame": {
+            "x": 560,
+            "y": 247,
+            "width": 1100,
+            "height": 700
+          },
+          "client": {
+            "x": 560,
+            "y": 247,
+            "width": 1100,
+            "height": 700
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "resized",
+          "godot_mode": 0,
+          "expected_mode": 0,
+          "kwin_fullscreen": false,
+          "kwin_minimized": false,
+          "frame": {
+            "x": 560,
+            "y": 247,
+            "width": 1200,
+            "height": 760
+          },
+          "client": {
+            "x": 560,
+            "y": 247,
+            "width": 1200,
+            "height": 760
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "maximized",
+          "godot_mode": 2,
+          "expected_mode": 2,
+          "kwin_fullscreen": false,
+          "kwin_minimized": false,
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1394
+          },
+          "client": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1394
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "minimized-max",
+          "godot_mode": 1,
+          "expected_mode": 1,
+          "kwin_fullscreen": false,
+          "kwin_minimized": true,
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1394
+          },
+          "client": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1394
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "unminimized-max",
+          "godot_mode": 2,
+          "expected_mode": 2,
+          "kwin_fullscreen": false,
+          "kwin_minimized": false,
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1394
+          },
+          "client": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1394
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "max-fullscreen",
+          "godot_mode": 3,
+          "expected_mode": 3,
+          "kwin_fullscreen": true,
+          "kwin_minimized": false,
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          },
+          "client": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "minimized-fullscreen",
+          "godot_mode": 1,
+          "expected_mode": 1,
+          "kwin_fullscreen": true,
+          "kwin_minimized": true,
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          },
+          "client": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "unminimized-fullscreen",
+          "godot_mode": 3,
+          "expected_mode": 3,
+          "kwin_fullscreen": true,
+          "kwin_minimized": false,
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          },
+          "client": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "max-restored",
+          "godot_mode": 2,
+          "expected_mode": 2,
+          "kwin_fullscreen": false,
+          "kwin_minimized": false,
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1394
+          },
+          "client": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1394
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "restore-button",
+          "godot_mode": 0,
+          "expected_mode": 0,
+          "kwin_fullscreen": false,
+          "kwin_minimized": false,
+          "frame": {
+            "x": 560,
+            "y": 247,
+            "width": 1200,
+            "height": 760
+          },
+          "client": {
+            "x": 560,
+            "y": 247,
+            "width": 1200,
+            "height": 760
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "title-max",
+          "godot_mode": 2,
+          "expected_mode": 2,
+          "kwin_fullscreen": false,
+          "kwin_minimized": false,
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1394
+          },
+          "client": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1394
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "title-restore",
+          "godot_mode": 0,
+          "expected_mode": 0,
+          "kwin_fullscreen": false,
+          "kwin_minimized": false,
+          "frame": {
+            "x": 560,
+            "y": 247,
+            "width": 1200,
+            "height": 760
+          },
+          "client": {
+            "x": 560,
+            "y": 247,
+            "width": 1200,
+            "height": 760
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "minimized-window",
+          "godot_mode": 1,
+          "expected_mode": 1,
+          "kwin_fullscreen": false,
+          "kwin_minimized": true,
+          "frame": {
+            "x": 560,
+            "y": 247,
+            "width": 1200,
+            "height": 760
+          },
+          "client": {
+            "x": 560,
+            "y": 247,
+            "width": 1200,
+            "height": 760
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "unminimized-window",
+          "godot_mode": 0,
+          "expected_mode": 0,
+          "kwin_fullscreen": false,
+          "kwin_minimized": false,
+          "frame": {
+            "x": 560,
+            "y": 247,
+            "width": 1200,
+            "height": 760
+          },
+          "client": {
+            "x": 560,
+            "y": 247,
+            "width": 1200,
+            "height": 760
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "unpinned-fullscreen",
+          "godot_mode": 3,
+          "expected_mode": 3,
+          "kwin_fullscreen": true,
+          "kwin_minimized": false,
+          "frame": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          },
+          "client": {
+            "x": 0,
+            "y": 0,
+            "width": 2560,
+            "height": 1440
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "unpinned-restored",
+          "godot_mode": 0,
+          "expected_mode": 0,
+          "kwin_fullscreen": false,
+          "kwin_minimized": false,
+          "frame": {
+            "x": 560,
+            "y": 247,
+            "width": 1200,
+            "height": 760
+          },
+          "client": {
+            "x": 560,
+            "y": 247,
+            "width": 1200,
+            "height": 760
+          },
+          "scientific_guard_passed": true
+        },
+        {
+          "stage": "close-request",
+          "godot_mode": 0,
+          "expected_mode": 0,
+          "kwin_fullscreen": false,
+          "kwin_minimized": false,
+          "frame": {
+            "x": 560,
+            "y": 247,
+            "width": 1200,
+            "height": 760
+          },
+          "client": {
+            "x": 560,
+            "y": 247,
+            "width": 1200,
+            "height": 760
+          },
+          "scientific_guard_passed": true
+        }
+      ],
+      "source": {
+        "sha256": "f7542b3a30222c7f2a42de9be37cec3b3954b6e2899624a142831666858a0a06",
+        "unchanged": true
+      },
+      "startup": {
+        "libdecor_gtk_fallback_warning": false
+      }
+    }
+  ],
+  "scientific_export_comparison": {
+    "accepted_main": "61f6a785ff8cf3bdf19da30b6d6e69a8b71f5a02",
+    "comparison": "same complete synthetic mixed capture and exact saved state, no UI/legends; only output path changed",
+    "results": [
+      {
+        "renderer": "forward_plus",
+        "frames": [
+          {
+            "frame": "frame00000000.png",
+            "size": [
+              960,
+              540
+            ],
+            "rgba_sha256": "e893d8ba68c48343774b9d5792e0c66719bb17d1e46dcb74ae272fd399fb7338",
+            "equal": true
+          },
+          {
+            "frame": "frame00000001.png",
+            "size": [
+              960,
+              540
+            ],
+            "rgba_sha256": "6984ddcd49d7a4b2a1fa18a4077536c623f1dcd533ff719f40cd723e251b5338",
+            "equal": true
+          }
+        ],
+        "timing_identical": true,
+        "timing_sha256": "d1636acd3863b2729e558cfc27dff92ea31d04f92539fde310222e04a15b0173",
+        "capture_sha256": "3117377d9357a0e45c1d8323a5cc3cf87caa3054be9c2177a45effa528cbc62a",
+        "source_unchanged": true
+      },
+      {
+        "renderer": "gl_compatibility",
+        "frames": [
+          {
+            "frame": "frame00000000.png",
+            "size": [
+              960,
+              540
+            ],
+            "rgba_sha256": "88d8a7c256c17853f00292761f9519ca7b0e6d86653cee779d09c9f8b3c0bd89",
+            "equal": true
+          },
+          {
+            "frame": "frame00000001.png",
+            "size": [
+              960,
+              540
+            ],
+            "rgba_sha256": "0ba6f98e921439f78f0f3ebeae3a0ef99549e1b533b051640d7e7b35fd759ecc",
+            "equal": true
+          }
+        ],
+        "timing_identical": true,
+        "timing_sha256": "a00ac82a1dfd0bc9cd102ca8a7304f72b16a51f3183da57828b2229499e80023",
+        "capture_sha256": "361e9bd55dc3471a15131847dfaa3edab397938c2149014e061e0299f81d7135",
+        "source_unchanged": true
+      }
+    ]
+  },
+  "x11_repeatability": {
+    "initial_state_guard_failure": "/home/Nozba/Codex/SIMSCOPE/style-143/round2/final-x11/window_chrome-gl_compatibility-x11/godot.log",
+    "cause": "Unknown; original guard combined state and clock without recording the changed key.",
+    "diagnostic_reruns": [
+      "/home/Nozba/Codex/SIMSCOPE/style-143/round2/x11-state-diagnostic/desktop-report.json",
+      "/home/Nozba/Codex/SIMSCOPE/style-143/round2/final-x11-repeat/window_chrome-gl_compatibility-x11/desktop-report.json"
+    ],
+    "result": "Both Compatibility diagnostic reruns passed 18 stages with exact state/clock preservation; Forward+ passed independently."
+  },
+  "diagnostics": [
+    "Compatibility cache-recompilation warnings rejected by strict harness; clean renderer-specific reruns retained.",
+    "Wayland GTK decorator initialization warning is explicitly retained and allowed; other Godot errors/warnings rejected.",
+    "Existing synthetic encoder PID cleanup diagnostics retained in status suite.",
+    "Initial minimized-fullscreen X11 harness assertion corrected for KWin retaining fullscreen while actually minimized.",
+    "Temporary speed-label formatting attempt timed out; final explicit labels pass both renderers."
+  ],
+  "limits": [
+    "Physical pointer drag/resize feel and KDE snapping remain owner checks; XTest attempt was inconclusive.",
+    "4K/mixed-monitor quality and production GPU power/utilization not measured.",
+    "Complete generated fixtures and exact two-frame scientific comparisons do not establish universal production capture performance.",
+    "Exact GPU float32 readback verified on Forward+ only.",
+    "Tools/Jobs content, remaining forms/dialogs and broad propagation deferred."
+  ],
+  "screenshots": {
+    "about-dialog.png": {
+      "bytes": 168648,
+      "sha256": "22e04c8fa252b03c3f3403e181ac27eadeea7224021a3ddd30ec6f628c29d0f6"
+    },
+    "compatibility-1024.png": {
+      "bytes": 39449,
+      "sha256": "2eb13b8e8243a55f597a034c230a2c661f2f9bf8d5565a79c1a648ca587ea459"
+    },
+    "compatibility-1440.png": {
+      "bytes": 60904,
+      "sha256": "3fb1b020233b2afc0af7d552c8ea3a0efef362bd8a00b0a3a3cfab47f6f507d1"
+    },
+    "confirmation-dialog.png": {
+      "bytes": 123391,
+      "sha256": "5ce1328d06f1c985bb7bcb39f9061ea290ea8a17d555a45db01bb5499b295258"
+    },
+    "forward-1024.png": {
+      "bytes": 66092,
+      "sha256": "bfda6dd08cd0c7d1073f6af872c46ee67064acd45e0bc923813b0d4580b7636b"
+    },
+    "forward-1440.png": {
+      "bytes": 117508,
+      "sha256": "5fe5606f297ecce7aa9e58597fd1436dbfddc72b22397da8ec0c95dec20a7719"
+    },
+    "seek-invalid.png": {
+      "bytes": 106320,
+      "sha256": "80081ad01f0a73460f1ae67c8772934c10c45c3e57a082e62a08d9c25bfca2ea"
+    },
+    "seek-playhead.png": {
+      "bytes": 102341,
+      "sha256": "50d27894df352f6a1a60d073a1f9e9001a6e5ada0db13ae62ac5f0fceca7dc51"
+    },
+    "source-dialog.png": {
+      "bytes": 129525,
+      "sha256": "191c1e9b5068873fda4592d08e60f7fe1ca71cb20d1ef7d96fbcc7e99caacbc7"
+    },
+    "speed-presets.png": {
+      "bytes": 127607,
+      "sha256": "19c1a2984e7208cf033c3231898eff5721921c7402346d5b8fee5f61d66b802a"
+    },
+    "wayland-restored.png": {
+      "bytes": 82048,
+      "sha256": "6a43ec0eb2f3670f9b7784bbb63188b98db0a7af455a5b64e4f0b23ac3565521"
+    }
+  }
+}
