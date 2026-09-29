@@ -1,0 +1,177 @@
+{
+  "accepted_main": "b33e9a8af5a1148930d94b2f1fc66ff076aaf131",
+  "candidate_version": "v0.1.0.9",
+  "owner_acceptance": "pending",
+  "platform": "Fedora 44 KDE/Wayland; Godot 4.7.2 ed1daf0bf; NVIDIA RTX 3070 Ti",
+  "dialog_runs": {
+    "forward": {
+      "phases": [
+        {
+          "checks": 2,
+          "display": "Wayland",
+          "engine": "4.7.2-stable (official)",
+          "failures": [],
+          "phase": "baseline",
+          "known_baseline_gl_cleanup_diagnostics": []
+        },
+        {
+          "checks": 22,
+          "display": "Wayland",
+          "engine": "4.7.2-stable (official)",
+          "failures": [],
+          "phase": "capture_add",
+          "known_baseline_gl_cleanup_diagnostics": []
+        },
+        {
+          "checks": 12,
+          "display": "Wayland",
+          "engine": "4.7.2-stable (official)",
+          "failures": [],
+          "phase": "capture_remove",
+          "known_baseline_gl_cleanup_diagnostics": []
+        },
+        {
+          "checks": 17,
+          "display": "Wayland",
+          "engine": "4.7.2-stable (official)",
+          "failures": [],
+          "phase": "export_add",
+          "known_baseline_gl_cleanup_diagnostics": []
+        },
+        {
+          "checks": 12,
+          "display": "Wayland",
+          "engine": "4.7.2-stable (official)",
+          "failures": [],
+          "phase": "export_remove",
+          "known_baseline_gl_cleanup_diagnostics": []
+        },
+        {
+          "checks": 15,
+          "display": "Wayland",
+          "engine": "4.7.2-stable (official)",
+          "failures": [],
+          "phase": "stale",
+          "known_baseline_gl_cleanup_diagnostics": []
+        },
+        {
+          "checks": 10,
+          "display": "Wayland",
+          "engine": "4.7.2-stable (official)",
+          "failures": [],
+          "phase": "stale_reload",
+          "known_baseline_gl_cleanup_diagnostics": []
+        }
+      ],
+      "checks": 90,
+      "source_hashes_unchanged": {
+        "invalid/invalid.ssc": "85b88a0128bebf2b8c2c6e7b9030e49cbbb83f2f60ec834420eaade3db477d90",
+        "other/scene.ssc": "61fee9c7f6915e215bc9f7ee945211d5c53eba307f952a6f08b3a6ffb3957864",
+        "capture/scene.ssc": "a1503dd7d8b12ad8e72db3e862e53cc8ae64110591d17ff4b0ee7c0d9c8ef7ec"
+      }
+    },
+    "compatibility": {
+      "phases": [
+        {
+          "checks": 2,
+          "display": "Wayland",
+          "engine": "4.7.2-stable (official)",
+          "failures": [],
+          "phase": "baseline",
+          "known_baseline_gl_cleanup_diagnostics": []
+        },
+        {
+          "checks": 22,
+          "display": "Wayland",
+          "engine": "4.7.2-stable (official)",
+          "failures": [],
+          "phase": "capture_add",
+          "known_baseline_gl_cleanup_diagnostics": [
+            "ERROR: Texture with GL ID of 56: leaked 349524 bytes.\n   at: ~Utilities (drivers/gles3/storage/utilities.cpp:82)\n",
+            "ERROR: Texture with GL ID of 57: leaked 349524 bytes.\n   at: ~Utilities (drivers/gles3/storage/utilities.cpp:82)\n"
+          ]
+        },
+        {
+          "checks": 12,
+          "display": "Wayland",
+          "engine": "4.7.2-stable (official)",
+          "failures": [],
+          "phase": "capture_remove",
+          "known_baseline_gl_cleanup_diagnostics": [
+            "ERROR: Texture with GL ID of 56: leaked 349524 bytes.\n   at: ~Utilities (drivers/gles3/storage/utilities.cpp:82)\n",
+            "ERROR: Texture with GL ID of 57: leaked 349524 bytes.\n   at: ~Utilities (drivers/gles3/storage/utilities.cpp:82)\n"
+          ]
+        },
+        {
+          "checks": 17,
+          "display": "Wayland",
+          "engine": "4.7.2-stable (official)",
+          "failures": [],
+          "phase": "export_add",
+          "known_baseline_gl_cleanup_diagnostics": [
+            "ERROR: Texture with GL ID of 56: leaked 349524 bytes.\n   at: ~Utilities (drivers/gles3/storage/utilities.cpp:82)\n",
+            "ERROR: Texture with GL ID of 57: leaked 349524 bytes.\n   at: ~Utilities (drivers/gles3/storage/utilities.cpp:82)\n"
+          ]
+        },
+        {
+          "checks": 12,
+          "display": "Wayland",
+          "engine": "4.7.2-stable (official)",
+          "failures": [],
+          "phase": "export_remove",
+          "known_baseline_gl_cleanup_diagnostics": [
+            "ERROR: Texture with GL ID of 56: leaked 349524 bytes.\n   at: ~Utilities (drivers/gles3/storage/utilities.cpp:82)\n",
+            "ERROR: Texture with GL ID of 57: leaked 349524 bytes.\n   at: ~Utilities (drivers/gles3/storage/utilities.cpp:82)\n"
+          ]
+        },
+        {
+          "checks": 15,
+          "display": "Wayland",
+          "engine": "4.7.2-stable (official)",
+          "failures": [],
+          "phase": "stale",
+          "known_baseline_gl_cleanup_diagnostics": [
+            "ERROR: Texture with GL ID of 56: leaked 349524 bytes.\n   at: ~Utilities (drivers/gles3/storage/utilities.cpp:82)\n",
+            "ERROR: Texture with GL ID of 57: leaked 349524 bytes.\n   at: ~Utilities (drivers/gles3/storage/utilities.cpp:82)\n"
+          ]
+        },
+        {
+          "checks": 10,
+          "display": "Wayland",
+          "engine": "4.7.2-stable (official)",
+          "failures": [],
+          "phase": "stale_reload",
+          "known_baseline_gl_cleanup_diagnostics": [
+            "ERROR: Texture with GL ID of 56: leaked 349524 bytes.\n   at: ~Utilities (drivers/gles3/storage/utilities.cpp:82)\n",
+            "ERROR: Texture with GL ID of 57: leaked 349524 bytes.\n   at: ~Utilities (drivers/gles3/storage/utilities.cpp:82)\n"
+          ]
+        }
+      ],
+      "checks": 90,
+      "source_hashes_unchanged": {
+        "invalid/invalid.ssc": "85b88a0128bebf2b8c2c6e7b9030e49cbbb83f2f60ec834420eaade3db477d90",
+        "other/scene.ssc": "cbdbbe15ff63d6868916f3cab988a56ae70a4dd94208b13c184495143fd2a351",
+        "capture/scene.ssc": "c2977b81539d2dbfd090eb5a1e6610edf668dd5d0bbb7755824eb6cfb3e9498c"
+      }
+    }
+  },
+  "existing_regressions": {
+    "forward": {
+      "shell_checks": 661,
+      "shell_failures": [],
+      "status_checks": 261,
+      "status_failures": [],
+      "encoder_cleanup_diagnostic_count": 2,
+      "source_hashes_unchanged": true
+    },
+    "compatibility": {
+      "shell_checks": 661,
+      "shell_failures": [],
+      "status_checks": 261,
+      "status_failures": [],
+      "encoder_cleanup_diagnostic_count": 2,
+      "source_hashes_unchanged": true
+    }
+  },
+  "python_version_tests_passed": 2
+}

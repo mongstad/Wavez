@@ -30,14 +30,13 @@ Hidden legend defaults were owner-merged in PR #137 at `26b6800`.
 Portable view presets were owner-merged in PR #139 at `b6008e0`.
 Video cancellation confirmation was owner-merged in PR #140 at `dd706ca`.
 Timeline endpoint alignment was owner-merged in PR #141 at `e11ea58`.
-Current authorized work is #117, the only Ready item when selected:
-[pinned edge reveal and simulation-only Fullscreen](WINDOW_EDGE_REVEAL.md),
-**pending owner review**. The three chrome surfaces use local session-only pins;
-the bottom transport/status strip is one visibility unit. Fullscreen temporarily
-unpins and initially hides all three surfaces, permits edge access, then restores
-the previous pins and visibility on exit. F11 and View → Window
-→ Fullscreen use the accepted immersive native restoration path. Build 8 is the
-merge candidate. Historical evidence remains unchanged.
+Pinned edge reveal and simulation-only Fullscreen (#117) were owner-merged in
+PR #142 at `b33e9a8`. Current authorized work is #50, the only Ready item when
+selected: [capture and video file dialogs](FILE_DIALOGS.md), **pending owner
+review**. Both retain Godot's built-in picker with domain-specific titles and
+shared persistent navigation preferences. Capture Recent records only accepted
+opens; export destination Recent preserves Godot's selection-time behavior.
+Build 9 is the merge candidate. Historical review evidence remains unchanged.
 Ordinary recipe save/load uses a small source-independent presentation JSON and
 direct platform file picker. Scientific inspection bundles remain separate.
 Field preparation uses a small CPU pool with ordered publication and explicit

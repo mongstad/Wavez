@@ -109,6 +109,7 @@ var hud: Label
 var status_label: Label
 var timeline: HSlider
 var open_dialog: FileDialog
+var file_dialog_preferences: Node
 var overlay_panel: PanelContainer
 var overlay_visible := true
 var shell
@@ -154,6 +155,9 @@ func _ready() -> void:
 				guide_mesh.free() # This bootstrap instance never builds its world.
 				queue_free()
 				return
+	if not offline_instance:
+		file_dialog_preferences = preload("res://ui/file_dialog_preferences.gd").new()
+		add_child(file_dialog_preferences)
 	_build_world()
 	_build_starfield()
 	_build_particles()
@@ -379,6 +383,8 @@ func _open_capture(path: String) -> void:
 	_open_capture_profiled(path)
 	Profile.end("open_inclusive",started)
 	if shell != null: shell.finish_open(_shell_open_error)
+	if _shell_open_error.is_empty() and file_dialog_preferences != null:
+		file_dialog_preferences.capture_opened(path)
 
 var _shell_open_error := ""
 
@@ -998,6 +1004,10 @@ func _build_inspector_controls() -> void:
 	open_dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE
 	open_dialog.access = FileDialog.ACCESS_FILESYSTEM
 	open_dialog.filters = PackedStringArray(["*.ssc ; SimScope scene (SIMSCP4)"])
+	open_dialog.mode_overrides_title = false
+	open_dialog.title = "Open capture"
+	if file_dialog_preferences != null:
+		file_dialog_preferences.attach(open_dialog, true)
 	open_dialog.file_selected.connect(_open_from_picker)
 	canvas.add_child(open_dialog)
 	_update_colormap()

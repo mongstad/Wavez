@@ -110,6 +110,10 @@ func _ready() -> void:
 	save_dialog.file_mode = FileDialog.FILE_MODE_SAVE_FILE
 	save_dialog.access = FileDialog.ACCESS_FILESYSTEM
 	save_dialog.filters = PackedStringArray(["*.mp4 ; H.264 MP4"])
+	save_dialog.mode_overrides_title = false
+	save_dialog.title = "Export video"
+	if viewer.file_dialog_preferences != null:
+		viewer.file_dialog_preferences.attach(save_dialog)
 	save_dialog.file_selected.connect(func(path: String):
 		if pid <= 0 and not preparing: output.text = path)
 	add_child(save_dialog)

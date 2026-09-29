@@ -1,0 +1,15 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 615.71.09 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 3070 Ti
+
+BASELINE DIFFERENCE: Capture title
+BASELINE DIFFERENCE: Video title
+BASELINE DIFFERENCE: Closing picker persists Favorites before application exit
+BASELINE DIFFERENCE: Failed capture does not add or reorder Recent
+BASELINE DIFFERENCE: Busy open rejected without recording history
+BASELINE DIFFERENCE: Recent is most-recent-first
+BASELINE DIFFERENCE: History uses actual selected directory and deduplicates
+File dialogs capture_add: 22 checks; failures=0
+ERROR: Texture with GL ID of 56: leaked 349524 bytes.
+   at: ~Utilities (drivers/gles3/storage/utilities.cpp:82)
+ERROR: Texture with GL ID of 57: leaked 349524 bytes.
+   at: ~Utilities (drivers/gles3/storage/utilities.cpp:82)
