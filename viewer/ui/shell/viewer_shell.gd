@@ -46,6 +46,7 @@ var immersive_mode := DisplayServer.WINDOW_MODE_WINDOWED
 var immersive_focus: WeakRef
 var immersive_edges := {}
 var immersive_chrome := {}
+var style_slice
 
 func setup(owner_viewer) -> void:
 	viewer = owner_viewer
@@ -146,6 +147,8 @@ func setup(owner_viewer) -> void:
 	viewer.legend.visibility_changed.connect(reposition_legend)
 	layer_legends = preload("res://ui/shell/layer_legends.gd").new()
 	get_parent().add_child(layer_legends); layer_legends.setup(viewer)
+	style_slice = preload("res://ui/shell/violet_style_slice.gd").new()
+	style_slice.install(self)
 	select_workspace(0)
 	refresh()
 	layout()

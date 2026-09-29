@@ -35,6 +35,7 @@ func update_pin(side: String) -> void:
 	var pin: Button = pins[side]
 	pin.set_pressed_no_signal(states[side].pinned)
 	pin.icon = preload("res://ui/shell/icons/pin.svg") if states[side].pinned else preload("res://ui/shell/icons/unpin.svg")
+	if shell.style_slice != null: pin.icon = shell.style_slice.theme.shell_icon("pin" if states[side].pinned else "unpin")
 	pin.tooltip_text = ("Unpin " if states[side].pinned else "Pin ") + {"top":"top bar","right":"simulation panel","bottom":"playback and status"}[side]
 
 func set_pinned(side: String, value: bool) -> void:

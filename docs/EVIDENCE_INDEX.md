@@ -1,5 +1,12 @@
 # Retained evidence
 
+## Violet visual-system slice — issue #143, pending owner visual review
+
+[Scope, component structure and owner checks](UX5_STYLE_SLICE.md) and
+[native evidence](evidence/issue-143/summary.json) cover the representative
+production slice. Broader propagation waits for owner approval. Earlier visual
+proposals and review-time reports below remain historical records.
+
 ## Paused rendering — issue #118, pending owner review
 
 [Investigation, policy and owner checks](PAUSED_RENDERING.md) and

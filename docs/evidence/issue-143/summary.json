@@ -1,0 +1,162 @@
+{
+  "issue": 143,
+  "state": "representative slice pending owner visual review",
+  "baseline_main": "61f6a785ff8cf3bdf19da30b6d6e69a8b71f5a02",
+  "candidate_version": "v0.1.0.10",
+  "environment": {
+    "godot": "4.7.2.stable.official.ed1daf0bf",
+    "gpu": "NVIDIA GeForce RTX 3070 Ti",
+    "platform": "Linux native X11 desktop",
+    "physical_4k_kde_review": false
+  },
+  "results": {
+    "forward_plus": {
+      "violet_style_slice": {
+        "checks": 50,
+        "failures": [],
+        "source_invariance": true
+      },
+      "viewer_shell": {
+        "checks": 661,
+        "failures": [],
+        "source_invariance": true
+      },
+      "edge_reveal": {
+        "checks": 210,
+        "failures": [],
+        "source_invariance": true
+      },
+      "viewer_transport": {
+        "checks": 210,
+        "failures": [],
+        "source_invariance": true
+      },
+      "render_pacing": {
+        "checks": 290,
+        "failures": [],
+        "source_invariance": true,
+        "stable_idle_phases": 34,
+        "maximum_draws_per_1_2_seconds": 0,
+        "retained_pixels_equal_forced_render": true
+      },
+      "video_current": {
+        "checks": 235,
+        "failures": 0,
+        "source_invariance": true,
+        "complete_capture_hash_checks": 9
+      },
+      "accepted_main_export_comparison": {
+        "source_commit": "61f6a785ff8cf3bdf19da30b6d6e69a8b71f5a02",
+        "frames": [
+          {
+            "frame": "frame00000000.png",
+            "dimensions": [
+              960,
+              540
+            ],
+            "rgba_sha256": "e893d8ba68c48343774b9d5792e0c66719bb17d1e46dcb74ae272fd399fb7338"
+          },
+          {
+            "frame": "frame00000001.png",
+            "dimensions": [
+              960,
+              540
+            ],
+            "rgba_sha256": "6984ddcd49d7a4b2a1fa18a4077536c623f1dcd533ff719f40cd723e251b5338"
+          }
+        ],
+        "timing_manifest_identical": true
+      }
+    },
+    "gl_compatibility": {
+      "violet_style_slice": {
+        "checks": 50,
+        "failures": [],
+        "source_invariance": true
+      },
+      "viewer_shell": {
+        "checks": 661,
+        "failures": [],
+        "source_invariance": true
+      },
+      "edge_reveal": {
+        "checks": 210,
+        "failures": [],
+        "source_invariance": true
+      },
+      "viewer_transport": {
+        "checks": 210,
+        "failures": [],
+        "source_invariance": true
+      },
+      "render_pacing": {
+        "checks": 290,
+        "failures": [],
+        "source_invariance": true,
+        "stable_idle_phases": 34,
+        "maximum_draws_per_1_2_seconds": 0,
+        "retained_pixels_equal_forced_render": true
+      },
+      "video_current": {
+        "checks": 225,
+        "failures": 0,
+        "source_invariance": true,
+        "complete_capture_hash_checks": 9
+      },
+      "accepted_main_export_comparison": {
+        "source_commit": "61f6a785ff8cf3bdf19da30b6d6e69a8b71f5a02",
+        "frames": [
+          {
+            "frame": "frame00000000.png",
+            "dimensions": [
+              960,
+              540
+            ],
+            "rgba_sha256": "88d8a7c256c17853f00292761f9519ca7b0e6d86653cee779d09c9f8b3c0bd89"
+          },
+          {
+            "frame": "frame00000001.png",
+            "dimensions": [
+              960,
+              540
+            ],
+            "rgba_sha256": "0ba6f98e921439f78f0f3ebeae3a0ef99549e1b533b051640d7e7b35fd759ecc"
+          }
+        ],
+        "timing_manifest_identical": true
+      }
+    }
+  },
+  "native_checks_total": 3302,
+  "python_version_tests": {
+    "tests": 2,
+    "failures": 0
+  },
+  "scientific_viewport_comparison": {
+    "backend": "forward_plus",
+    "window": [
+      1440,
+      900
+    ],
+    "crop_xyxy": [
+      0,
+      110,
+      1070,
+      775
+    ],
+    "pixels": 711550,
+    "identical": true,
+    "raw_pixel_sha256": "c3ea30d61a167ad5b1bb6900f8eb2d62bbaba1c0d5fa06cd1575503758b5d28c"
+  },
+  "initial_failures": {
+    "restricted_desktop_import": "Unavailable; rerun with native desktop access",
+    "initial_slice": "Pin icon import mismatch; hover metadata access; assertion included presentation width; corrected",
+    "theme_visual_audit": "Explicit parent Theme initialization required for intended focus and typography; corrected",
+    "idle_baseline": "Accepted main and initial candidate failed the same two no-op legend-toggle assertions; setup now enables legend before disabling it"
+  },
+  "limitations": [
+    "Owner slice approval pending; no broad propagation",
+    "Physical 4K/KDE and mixed-monitor review unavailable",
+    "No production-capture 30-60 second GPU utilization or power profile rerun"
+  ]
+}
