@@ -440,3 +440,100 @@ Physical drag/resize feel, snapping, 4K/mixed-monitor quality and production
 power/utilization were not remeasured. The earlier desktop-chrome suite and
 its inconclusive initial X11 guard remain historical. Broad propagation and
 owner acceptance remain pending.
+
+## Owner review — Round 4 dropdown consistency
+
+The owner approved the Round 3 direction at `6d1eff6` in principle, then found
+legacy dropdown/popup styling in Fields and Meshes during physical review.
+This is another correction on the same #143 branch and Draft PR #145. The earlier
+sections and evidence remain historical, including `0d32d08`, `b9a2df3` and
+`6d1eff6`. Candidate identity remains `v0.1.0.10` against accepted main build 9.
+
+### Cause and shared component correction
+
+A production-control audit reproduced the mismatch before editing: Particles'
+Color Mapping dropdown/popup resolved to `182234` / `141c2b`, with no popup border.
+Advanced Size/Brightness and Fields/Meshes Channel dropdowns resolved to
+`1a2638` / `243249`, with a one-pixel popup border. The latter inherited the
+accepted older dock theme because their forms were outside the original slice.
+Fields/Meshes and tool-target selectors are also rebuilt after source/recipe
+changes, so styling only the initial widgets would leave the mismatch recurring.
+
+`VioletStyleSlice.style_dropdowns` now binds production OptionButtons and their
+internal PopupMenus to the single existing violet Theme. It runs at shell
+construction and after the layer UI and reparented tool pages finish rebuilding.
+The binding applies to selector widgets rather than whole forms. It covers
+Particles (including Advanced), Fields/Meshes object/channel/colormap/mapping
+choices, dynamically constructed scene and Tools target choices, analysis
+selectors, playback speed, informational selectors and export dropdowns.
+Application submenus also use this shared popup skin. FileDialog trees remain
+outside this binding; platform picker behavior is unchanged.
+
+The shared Theme owns normal and disabled check/radio artwork using the existing
+scalable SVGs. Popup surfaces, typography, violet hover/keyboard highlights,
+checked-current radio indication, padding, corners, separators and depth all
+resolve through the same resource path. Dropdown arrows/focus/disabled ink retain
+the existing violet component treatment. The accepted 80 ms event-driven
+brightness fade now applies to every production dropdown; it ends at its
+endpoint and adds no idle loop. No one-off category styles are introduced.
+
+The rest of Fields/Meshes numeric inputs, switches and surrounding Tools/Jobs
+forms/dialogs remain deferred. This correction does not approve their broad
+styling propagation. Item contents/IDs/metadata, selection signals, scientific
+values/ranges, channel/source routing, playback, SSC, rendering and export code
+are unchanged. The layer-controller diff adds only the construction-time
+presentation binding; its scientific callbacks remain intact.
+
+### Round 4 owner checks
+
+1. On both Forward+ and Compatibility, expand Particles Color Mapping and open
+   Colormap. Repeat in Fields and Meshes. Compare the checked current row,
+   hovered row, rounded surface, spacing, text, indicators and separators.
+2. Compare Fields Channel/Color mode/Opacity mapping and Meshes Channel with
+   Particles Color by/Range policy and Advanced Size by/Brightness by. Confirm
+   consistent closed, hovered, focused and disabled dropdown treatment.
+3. Tab to a selector, open with Enter, navigate with arrows and apply with Enter.
+   Cancel with Esc; check focus recovery and Tab/Shift+Tab traversal. Confirm
+   the existing choices still affect only their intended object/channel/mapping.
+4. Switch category/object and load/reapply a visual recipe or another capture.
+   Check the rebuilt selectors, Slice/Quick setup/Derive range tool targets and
+   Source probe choices. A missing category's Object selector stays disabled.
+5. Recheck Fullscreen edge-revealed Tools, playback/seek and settled hover/idle
+   behavior. Surrounding controls intentionally retain the prior scoped review
+   boundary. Finish with owner visual review before any broad propagation.
+
+[Round 4 screenshots and reproduction](evidence/issue-143/round4/README.md) and
+[compact results](evidence/issue-143/round4/summary.json) append the evidence for
+this correction. No merge, Ready transition, auto-merge, issue closure, Project
+movement, acceptance or next issue is included.
+
+### Completed Round 4 validation
+
+Godot 4.7.2 / NVIDIA RTX 3070 Ti passed **3,442 checks across 16 final runs**
+on the final production code, plus **2 Python version tests**. Each renderer
+passed 493 focused dropdown checks, 263 multi-object panel checks, 52 existing
+theme checks, 109 preserved Round 2 interactions, 74 Fullscreen/clock/filename
+corrections on native X11, 210 edge/pin/restoration checks and 290 redraw checks.
+Current scientific video passed 235 checks on Forward+ and 225 on Compatibility.
+
+Both backends resolved identical popup metrics: `141c2b` surface, `27294c`
+hover/keyboard wash, six-pixel corners, eight-pixel panel padding, twelve-pixel
+row separation and shared 14 px typography. Current selection retains native
+radio indication; hover/focus does not change the selected option. Disabled
+rows use the shared muted text/glyphs and are skipped by native arrow navigation.
+There were 203 selector visits per renderer across capture, recipe rebuild and
+replacement, including Advanced and dynamically reparented tool selectors.
+
+All 34 paused phases per backend recorded zero new draws and unchanged pixels.
+The same complete capture and exact saved scientific job ran freshly on accepted
+main `61f6a78` and this candidate. Four decoded 960×540 RGBA frames and both
+timing manifests matched exactly within their respective renderers. All 437
+archived tracked viewer files matched accepted main byte-for-byte. Complete
+source hashes stayed unchanged; exact GPU float32 readback remains Forward+-only.
+
+All 33 previous evidence files and the earlier style-document prefix were checked
+byte-for-byte against `6d1eff6`. Eighteen new unedited screenshots remain separate.
+Initial harness input/snapshot assumptions and a rejected Compatibility cache
+warning are documented in the new evidence. Final native logs are clean.
+Wayland, physical 4K/mixed-monitor review and production power/performance were
+not remeasured. Draft PR #145 remains pending owner visual review.

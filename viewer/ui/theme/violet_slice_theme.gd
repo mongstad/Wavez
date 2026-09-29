@@ -105,8 +105,11 @@ func _init() -> void:
 	set_stylebox("panel", "PopupMenu", flat_box(&"surface.3", 8, 8, 6))
 	set_stylebox("hover", "PopupMenu", flat_box(&"selection.fill", 8, 4))
 	set_color("font_hover_color", "PopupMenu", c(&"selection.text"))
-	set_icon("radio_checked", "PopupMenu", icon_named("radio_checked", &"selection.text"))
-	set_icon("radio_unchecked", "PopupMenu", icon_named("radio", &"text.secondary"))
+	# Own every check/radio state, including disabled rows, rather than falling
+	# through to the engine's default popup artwork for a subset of states.
+	for pair in [["checked", "checked", &"selection.text"], ["unchecked", "box", &"text.secondary"], ["radio_checked", "radio_checked", &"selection.text"], ["radio_unchecked", "radio", &"text.secondary"]]:
+		set_icon(pair[0], "PopupMenu", icon_named(pair[1], pair[2]))
+		set_icon(pair[0] + "_disabled", "PopupMenu", icon_named(pair[1], &"text.disabled"))
 	set_stylebox("panel", "TooltipPanel", flat_box(&"surface.3", 12, 8, 6))
 	set_stylebox("panel", "PopupPanel", flat_box(&"surface.3", 16, 14, 6))
 	set_stylebox("panel", "AcceptDialog", flat_box(&"surface.3", 24, 20, 6))

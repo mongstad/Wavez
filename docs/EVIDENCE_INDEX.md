@@ -20,6 +20,14 @@ disclosures/sliders, whole-second clock seeking, filename privacy and real
 Fullscreen Tools menu dispatch. This correction round awaits owner review on
 Draft PR #145. The original v1/Round 2 records above remain historical.
 
+**Round 4 dropdown consistency correction:** the owner approved the Round 3
+direction at `6d1eff6` in principle and found legacy dropdown/popup styling in
+Fields/Meshes. [New comparison screenshots and reproduction](evidence/issue-143/round4/README.md)
+and [results](evidence/issue-143/round4/summary.json) cover a shared production
+selector/popup skin, dynamic rebuilds, native focus/navigation and retained
+scientific behavior on both renderers. This round awaits owner visual review;
+`0d32d08`, `b9a2df3`, `6d1eff6` and their evidence remain unchanged.
+
 ## Paused rendering — issue #118, pending owner review
 
 [Investigation, policy and owner checks](PAUSED_RENDERING.md) and

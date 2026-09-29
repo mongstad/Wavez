@@ -627,6 +627,8 @@ func _build_ui() -> void:
 	preload("res://ui/shell/panel_group.gd").fit(panel)
 	preload("res://analysis/ui_controls.gd").fit(panel)
 	show_category(viewer.shell.workspace)
+	# Source/recipe rebuilds create new selectors, including reparented Tools pages.
+	viewer.shell.style_slice.style_dropdowns(viewer)
 # Probe result/position and marker preference are session state, not recipe state.
 func set_probe_marker_enabled(enabled: bool) -> void:
 	probe_marker_enabled = enabled

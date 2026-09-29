@@ -46,6 +46,14 @@ surface depth and glyph-only pins remain. Banner styling is deferred by the
 owner. Build 10 remains the candidate. Scientific behavior, semantic status and
 #117/#118 contracts are retained; v1 and Round 2 reports/screenshots remain
 unchanged historical review evidence.
+The owner approved the Round 3 direction at `6d1eff6` in principle and requested
+another consistency correction: production dropdowns/popups across Particles,
+Fields, Meshes and rebuilt scene/tool selectors now share the reusable violet
+widget theme, including disabled check/radio artwork and bounded hover treatment.
+[Round 4 evidence](evidence/issue-143/round4/README.md) appends the new comparison
+and interaction checks. Surrounding deferred forms retain their existing styling.
+Draft PR #145 still requires owner visual review; no acceptance, Project move or
+broad propagation is included. All three historical checkpoints remain intact.
 Ordinary recipe save/load uses a small source-independent presentation JSON and
 direct platform file picker. Scientific inspection bundles remain separate.
 Field preparation uses a small CPU pool with ordered publication and explicit

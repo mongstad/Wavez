@@ -8,7 +8,7 @@ func install(shell) -> void:
 		surface.theme = theme
 		surface.add_theme_stylebox_override("panel", theme.tonal_surface())
 	shell.status_ui.add_theme_stylebox_override("panel", theme.flat_box(&"surface.shade", 0, 0, 0))
-	# Deeper dock foundation; only the first particle control groups are migrated.
+	# Deeper dock foundation; full group styling remains a bounded particle slice.
 	shell.dock.add_theme_stylebox_override("panel", theme.tonal_surface(14, 12))
 	var header = shell.edge_reveal.pins.right.get_parent()
 	header.theme = theme
@@ -56,6 +56,20 @@ func install(shell) -> void:
 	shell.about.theme = theme
 	# Representative dialog/confirmation surfaces, not broad Tools/Jobs propagation.
 	shell.status_ui.jobs_dialog.theme = shell.theme
+	style_dropdowns(shell.viewer)
+
+func style_dropdowns(node: Node) -> void:
+	# Widget-only binding: deferred forms/dialogs keep their surrounding theme.
+	# OptionButton's internal PopupMenu is not in get_children(); bind it explicitly
+	# so native/embedded popups and reparented tool selectors share the same skin.
+	if node is FileDialog: return
+	if node is OptionButton:
+		node.theme = theme
+		node.get_popup().theme = theme
+		animate_buttons(node)
+	elif node is PopupMenu:
+		node.theme = theme
+	for child in node.get_children(): style_dropdowns(child)
 
 func animate_buttons(node: Node) -> void:
 	if node is Button and not node.has_meta("violet_motion"):
