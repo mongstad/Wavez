@@ -374,7 +374,7 @@ func request_cancel_export() -> void:
 	if not can_cancel_export() or cancel_confirmation.visible:return
 	if not visible:popup_centered()
 	pending_cancel_directory = active_directory
-	if viewer.shell != null:cancel_confirmation.theme = viewer.shell.theme
+	if viewer.shell != null:cancel_confirmation.theme = viewer.shell.style_slice.theme
 	cancel_confirmation.popup_centered()
 	cancel_confirmation.get_cancel_button().grab_focus.call_deferred()
 

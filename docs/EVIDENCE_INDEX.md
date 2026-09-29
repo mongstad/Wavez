@@ -1,5 +1,33 @@
 # Retained evidence
 
+## Violet visual-system slice — issue #143, pending owner visual review
+
+[Scope, component structure and owner checks](UX5_STYLE_SLICE.md) and
+[native evidence](evidence/issue-143/summary.json) cover the representative
+production slice. Broader propagation waits for owner approval. Earlier visual
+proposals and review-time reports below remain historical records.
+
+The owner reviewed v1 at `0d32d08`, approved its overall direction, and requested
+refinement before broader propagation. [Round 2 evidence](evidence/issue-143/round2/README.md)
+covers the revised representative surfaces and transport/window interactions.
+Round 2 awaits owner visual review on the same Draft PR #145; banner styling is
+deferred at the owner's request. The v1 report and evidence remain unchanged.
+
+**2026-09-30 correction round:** the owner subsequently reviewed Round 2 at
+`b9a2df3` and requested corrections before propagation approval. The
+[new evidence and screenshots](evidence/issue-143/round3/README.md) cover uniform
+disclosures/sliders, whole-second clock seeking, filename privacy and real
+Fullscreen Tools menu dispatch. This correction round awaits owner review on
+Draft PR #145. The original v1/Round 2 records above remain historical.
+
+**Round 4 dropdown consistency correction:** the owner approved the Round 3
+direction at `6d1eff6` in principle and found legacy dropdown/popup styling in
+Fields/Meshes. [New comparison screenshots and reproduction](evidence/issue-143/round4/README.md)
+and [results](evidence/issue-143/round4/summary.json) cover a shared production
+selector/popup skin, dynamic rebuilds, native focus/navigation and retained
+scientific behavior on both renderers. This round awaits owner visual review;
+`0d32d08`, `b9a2df3`, `6d1eff6` and their evidence remain unchanged.
+
 ## Paused rendering — issue #118, pending owner review
 
 [Investigation, policy and owner checks](PAUSED_RENDERING.md) and

@@ -133,7 +133,7 @@ func run() -> void:
 		edge.tick(.36,Vector2(100,200),false,false)
 		var before: Dictionary = edge.states.duplicate(true)
 		viewer._toggle_fullscreen(); await create_timer(.25).timeout
-		check(shell.immersive and not shell.bar.visible and not shell.navigation.visible and not shell.dock.visible and not shell.transport.is_visible_in_tree() and not shell.status_ui.is_visible_in_tree(),"Fullscreen hides every surface mask "+str(mask))
+		check(shell.immersive and not shell.bar.visible and not shell.navigation.is_visible_in_tree() and not shell.dock.visible and not shell.transport.is_visible_in_tree() and not shell.status_ui.is_visible_in_tree(),"Fullscreen hides every surface mask "+str(mask))
 		for side in edge.states:
 			check(not edge.states[side].pinned and not edge.states[side].visible,"Fullscreen initially unpins and hides "+side+" mask "+str(mask))
 			var extent := root.get_visible_rect().size

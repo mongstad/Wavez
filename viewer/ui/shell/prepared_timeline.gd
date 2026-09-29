@@ -2,6 +2,7 @@ extends HSlider
 ## Read-only CPU readiness overlay. The inherited slider keeps its union-index axis.
 const Grid = preload("res://layers/grid_view.gd")
 const MeshView = preload("res://layers/mesh_view.gd")
+signal seek_requested
 var coverage := {"fields":[],"scene":[]}
 var frames: Array = []
 var checked_ms := -1000
@@ -121,3 +122,14 @@ func draw_coverage(canvas: Control) -> void:
 			var left := 0.0 if span[0] <= frames[0].time else inset+axis_position(span[0],frames)*width
 			var right := size.x if span[1] >= frames[-1].time else inset+axis_position(span[1],frames)*width
 			canvas.draw_line(Vector2(left,size.y*.5),Vector2(right,size.y*.5),row[1],4)
+
+func playhead_rect() -> Rect2:
+	var texture := get_theme_icon("grabber")
+	var inset := 0.0 if get_theme_constant("center_grabber") else texture.get_width() * .5
+	var fraction := (value - min_value) / (max_value - min_value) if max_value > min_value else 0.0
+	return Rect2(Vector2(inset + fraction * (size.x - inset * 2), size.y * .5) - texture.get_size() * .5, texture.get_size()).grow(4)
+
+func _gui_input(event: InputEvent) -> void:
+	# Claim only a double-click on the current thumb; native Slider owns scrubbing.
+	if editable and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed and event.double_click and playhead_rect().has_point(event.position):
+		seek_requested.emit(); accept_event()

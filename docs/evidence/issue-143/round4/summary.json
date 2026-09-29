@@ -1,0 +1,570 @@
+{
+  "date": "2026-09-30",
+  "issue": 143,
+  "pr": 145,
+  "review_state": "pending owner visual review",
+  "branch": "143-ux5-style-001-establish-modern-flat-violet-simscope-visual-design-system",
+  "checkpoints": [
+    "0d32d08a7333e6982fd26ebc8b190ba208ee2ab6",
+    "b9a2df3828ddca89be437eb0ae3e9bdcbbfdd70c",
+    "6d1eff612e29e6d28ade8c9dd06a88f518e9d42e"
+  ],
+  "candidate_version": "v0.1.0.10",
+  "runtime": {
+    "godot": "4.7.2.stable.official.ed1daf0bf",
+    "gpu": "NVIDIA GeForce RTX 3070 Ti",
+    "native_fullscreen_driver": "X11"
+  },
+  "checks_total": 3442,
+  "suites": [
+    {
+      "suite": "edge_reveal",
+      "renderer": "forward_plus",
+      "checks": 210,
+      "result": "PASS",
+      "report": "/home/Nozba/Codex/SIMSCOPE/style-143/round4/verified/edge_reveal-forward_plus/report.json",
+      "source_hashes_unchanged": {
+        "scene.ssc": "4bb3d6663d7b9dc066a2802efd468098caec98f4f2fdbc8d24434b5919ab66f4",
+        "replacement.ssc": "daa52e6d2f108988d90a26104f9157552fcd9fe6341a4d7b2c51ab6c34fb356d",
+        "invalid.ssc": "85b88a0128bebf2b8c2c6e7b9030e49cbbb83f2f60ec834420eaade3db477d90"
+      }
+    },
+    {
+      "suite": "edge_reveal",
+      "renderer": "gl_compatibility",
+      "checks": 210,
+      "result": "PASS",
+      "report": "/home/Nozba/Codex/SIMSCOPE/style-143/round4/verified/edge_reveal-gl_compatibility/report.json",
+      "source_hashes_unchanged": {
+        "scene.ssc": "4dbb2aa06b5f14fdf0ff7dda6b550a4d2a6f5ea2e8cd9b4fe41944fcbe811586",
+        "replacement.ssc": "28a51fc4f411ac2d8c20189e0c9786c019575a8f14278b5ac9281c38420b2bbd",
+        "invalid.ssc": "85b88a0128bebf2b8c2c6e7b9030e49cbbb83f2f60ec834420eaade3db477d90"
+      }
+    },
+    {
+      "suite": "render_pacing",
+      "renderer": "forward_plus",
+      "checks": 290,
+      "result": "PASS",
+      "report": "/home/Nozba/Codex/SIMSCOPE/style-143/round4/verified/render_pacing-forward_plus/report.json",
+      "source_hashes_unchanged": {
+        "particles.ssc": "0ada0b0821a976bfe2c2f0a4360ebbd5a2bdccb3c5287e2a66a63f834a7e5094",
+        "field.ssc": "8daa0dac8ddc95412b3e189a7414613cfb736a47af1b4ee451fae221ced69b68",
+        "mesh.ssc": "87c691c7321f87f13577a688394722aef30a582cd3ed03248c5961ffd2f5cad4",
+        "mixed.ssc": "718bf055a6173c70afa768371efe063c84fab36bd23a18787564e29ec9a5a462"
+      }
+    },
+    {
+      "suite": "render_pacing",
+      "renderer": "gl_compatibility",
+      "checks": 290,
+      "result": "PASS",
+      "report": "/home/Nozba/Codex/SIMSCOPE/style-143/round4/verified/render_pacing-gl_compatibility/report.json",
+      "source_hashes_unchanged": {
+        "particles.ssc": "95292e7ed9562ef946d37ab8d8ada039add795a17ab044a0d17940c5ea93ca90",
+        "field.ssc": "15252e8272670f7444093361aaea93590a6e6725705dca0df81704a3a5b2dc9e",
+        "mesh.ssc": "afbbd0b1f596506885f0c4075da900992136369d374943b677f06ad00960a7f2",
+        "mixed.ssc": "c91c8c909b3f1384403336b2131483092f37855f9dd7b697fa832fcd7d914d7b"
+      }
+    },
+    {
+      "suite": "simulation_panel",
+      "renderer": "forward_plus",
+      "checks": 263,
+      "result": "PASS",
+      "report": "/home/Nozba/Codex/SIMSCOPE/style-143/round4/verified/simulation_panel-forward_plus/report.json",
+      "source_hashes_unchanged": {
+        "mixed.ssc": "7db1ced5b8bd09a7c30c836b395a6c8d1f765bda31d18b57ddfaf39c8c8a05c5",
+        "mixed-replacement.ssc": "26225a2782ac5e7e558c0c8ac44a886569b17447676685a6ad15896496053189",
+        "fields.ssc": "353d3dd9aec93c87ef573f67b0b5cdf19ca0aa883c2ca0aabbaddb440ff13114",
+        "particles.ssc": "80cf6c33c476bcefad38f57d4904f848d288bd01dffa8c90d9daf92db70c18ab"
+      }
+    },
+    {
+      "suite": "simulation_panel",
+      "renderer": "gl_compatibility",
+      "checks": 263,
+      "result": "PASS",
+      "report": "/home/Nozba/Codex/SIMSCOPE/style-143/round4/verified/simulation_panel-gl_compatibility/report.json",
+      "source_hashes_unchanged": {
+        "mixed.ssc": "8f60dbfcc57b8140e2be59aae6db910d55cf86d93421d27417903d94f9d67211",
+        "mixed-replacement.ssc": "f90ec51b965b0a732def24079bbcc25dc9c4e95b5595596eb30534d0c6f1a2bb",
+        "fields.ssc": "f1dc86ec61b2de6088454cccbc977564babc86cfbe733b8adc562aaa3bd9e058",
+        "particles.ssc": "857d2a72b22e5c0d45d9f5b894d0e4587b0f52170af780537d5c0e4ba57dd038"
+      }
+    },
+    {
+      "suite": "video_current",
+      "renderer": "forward_plus",
+      "checks": 235,
+      "result": "PASS",
+      "report": "/home/Nozba/Codex/SIMSCOPE/style-143/round4/verified/video_current-forward_plus/report.json",
+      "source_hashes_unchanged": {
+        "particles.ssc": "12871c22e4730baaa2f2ada8ba038c03e5838e8364d0313bde012ab23286901f",
+        "late-particles.ssc": "ae64aa9ef81269304f674637a2ab19fa85f79c20dde72877023deb958c1ca97c",
+        "field.ssc": "96649e793c916dce5e6c8013abf0bb9e6a3cd61afc1d466a3ee0861c5abdeb97",
+        "mesh.ssc": "c95d79d2606e442695ee0bc5099d234ca1e9ac7e3c61589a4d8520fb87248fef",
+        "mixed.ssc": "8c4144663edc1b6a8fa44620d2b043c0cec3ad506b09b1c8842ae2f08e982a6b",
+        "late.ssc": "40e7690a4fe222db472f236701a605b968d9a3cebff5375b7878d825a2adbc2d",
+        "overflow.ssc": "1fac9974cfe3db4f1e6453414bf598548044a3452291566b77a67bd44ecc01fe",
+        "budget.ssc": "0d4eca080b2c262d57fe44866eedc4bfdc82240543bd66dcd545e36dff8a53ce",
+        "corrupt.ssc": "3262f0062b86b2667f6fffdb6d22a951121ebc8fab8f858d0663de06f3784f55"
+      }
+    },
+    {
+      "suite": "video_current",
+      "renderer": "gl_compatibility",
+      "checks": 225,
+      "result": "PASS",
+      "report": "/home/Nozba/Codex/SIMSCOPE/style-143/round4/verified/video_current-gl_compatibility/report.json",
+      "source_hashes_unchanged": {
+        "particles.ssc": "dfd65d227eede206ab7a6ef7d8a72d22fbd0f1e0ab994c9bc2578f4c9f2a8f8d",
+        "late-particles.ssc": "45b6d090162eed3054d7c6bef1f54d8e36033ff18b34b0ee22b9b3ced9e59271",
+        "field.ssc": "ac27d8fbf20774d91072b56cb07743660b5c674ecda4d855dad6e713f2edec97",
+        "mesh.ssc": "ef61efce3e1544ff43c75e24cedf359f36dcb0e71c9e718fc13f233c906cbdb9",
+        "mixed.ssc": "8f40677fe21722a48f91529a89145092ff24b44a6614cc4e8a1edad36b150cab",
+        "late.ssc": "55b4b434ac177026fb6f597ac2df2fd905f7ffc89414d6d99d3df5f31cac756d",
+        "overflow.ssc": "f37841e465703345ed94b213f3b11477bbe1771f337e2b4324bb36cad9721142",
+        "budget.ssc": "1941c00879d3e4c5f0b46d6772bec1ff08f859a2d9ddb483728b665bb51249b5",
+        "corrupt.ssc": "464f7271b5200ed50b60b8202b0942a1ef16057ad92ab0d29eb53498020fc646"
+      }
+    },
+    {
+      "suite": "violet_dropdowns",
+      "renderer": "forward_plus",
+      "checks": 493,
+      "result": "PASS",
+      "report": "/home/Nozba/Codex/SIMSCOPE/style-143/round4/verified/violet_dropdowns-forward_plus/report.json",
+      "source_hashes_unchanged": {
+        "mixed.ssc": "3e8d9408094addd6b408b48dae56363609ebc61e4d459ef5101da30e5a59ea80",
+        "particles.ssc": "78fc905221cf650c46e8a7b7a4ef258b1ac3ee368969f90e70277d249d79d0c1"
+      }
+    },
+    {
+      "suite": "violet_dropdowns",
+      "renderer": "gl_compatibility",
+      "checks": 493,
+      "result": "PASS",
+      "report": "/home/Nozba/Codex/SIMSCOPE/style-143/round4/verified/violet_dropdowns-gl_compatibility/report.json",
+      "source_hashes_unchanged": {
+        "mixed.ssc": "bbbce8fb3e1d574e8715ffc3c58bcb8000245b156a0aebdb6948405d4750523d",
+        "particles.ssc": "f332209f0f82acdc9964795c14c20c335c5e30701d72f05139121c5136547ac4"
+      }
+    },
+    {
+      "suite": "violet_review_corrections",
+      "renderer": "forward_plus",
+      "checks": 74,
+      "result": "PASS",
+      "report": "/home/Nozba/Codex/SIMSCOPE/style-143/round4/verified/violet_review_corrections-forward_plus/report.json",
+      "source_hashes_unchanged": {
+        "scene.ssc": "c8a943a89d180c026e88c52b308d9df69e7f63d526711e37d3b6cc4cf017371e",
+        "clock.ssc": "f82ae4307ed2800834f61c5d10e98bea99552a1e9d4c8f91fc77fd0822acbe1d"
+      }
+    },
+    {
+      "suite": "violet_review_corrections",
+      "renderer": "gl_compatibility",
+      "checks": 74,
+      "result": "PASS",
+      "report": "/home/Nozba/Codex/SIMSCOPE/style-143/round4/verified/violet_review_corrections-gl_compatibility/report.json",
+      "source_hashes_unchanged": {
+        "scene.ssc": "3a607fe8b44bfd59b68a707f82b1d7e86633e7d80a1d0a280626277a86a437b4",
+        "clock.ssc": "df1b1fc735e15469d1c56183fb9fd2c63e768fc14ef6c7e88fb6fe144f0a039a"
+      }
+    },
+    {
+      "suite": "violet_round2",
+      "renderer": "forward_plus",
+      "checks": 109,
+      "result": "PASS",
+      "report": "/home/Nozba/Codex/SIMSCOPE/style-143/round4/verified/violet_round2-forward_plus/report.json",
+      "source_hashes_unchanged": {
+        "scene.ssc": "866edee77bca50bb4c4120aa6233ca1afc1460917fdb686e3af81b53dcffd6c7",
+        "clock.ssc": "a8ee74889948862c932312153cd0e270d9d969064be97b0d69ec699884af9a23"
+      }
+    },
+    {
+      "suite": "violet_round2",
+      "renderer": "gl_compatibility",
+      "checks": 109,
+      "result": "PASS",
+      "report": "/home/Nozba/Codex/SIMSCOPE/style-143/round4/verified/violet_round2-gl_compatibility/report.json",
+      "source_hashes_unchanged": {
+        "scene.ssc": "dbf841752b012c033169b663c2a4f06fa487bb6bb7e274e6570f4f7babeddc04",
+        "clock.ssc": "de476351b799b642fab2235ecdeb3f475d894131d40d7092dcb66a304921fb0d"
+      }
+    },
+    {
+      "suite": "violet_style_slice",
+      "renderer": "forward_plus",
+      "checks": 52,
+      "result": "PASS",
+      "report": "/home/Nozba/Codex/SIMSCOPE/style-143/round4/verified/violet_style_slice-forward_plus/report.json",
+      "source_hashes_unchanged": "44b1e21346c49f0ae086647b129e6bb5bedac09e771a22503aadd90321c78b45"
+    },
+    {
+      "suite": "violet_style_slice",
+      "renderer": "gl_compatibility",
+      "checks": 52,
+      "result": "PASS",
+      "report": "/home/Nozba/Codex/SIMSCOPE/style-143/round4/verified/violet_style_slice-gl_compatibility/report.json",
+      "source_hashes_unchanged": "fa4c82810a49559d6d51c925b136fab6b37c459e771b3bb6dcd6475036cc742c"
+    }
+  ],
+  "popup_parity": {
+    "forward_plus": {
+      "selector_visits": 203,
+      "comparisons": [
+        {
+          "category": "particles",
+          "popup": {
+            "border_width": 0,
+            "disabled_text": "748096ff",
+            "embedded": true,
+            "font_size": 14,
+            "hover": "27294cff",
+            "padding": [
+              8.0,
+              8.0,
+              8.0,
+              8.0
+            ],
+            "radius": 6,
+            "row_separation": 12,
+            "selected_text": "dedcffff",
+            "shadow_size": 0,
+            "surface": "141c2bff",
+            "text": "e5eaf2ff"
+          },
+          "selection_intents": [
+            1
+          ]
+        },
+        {
+          "category": "fields",
+          "popup": {
+            "border_width": 0,
+            "disabled_text": "748096ff",
+            "embedded": true,
+            "font_size": 14,
+            "hover": "27294cff",
+            "padding": [
+              8.0,
+              8.0,
+              8.0,
+              8.0
+            ],
+            "radius": 6,
+            "row_separation": 12,
+            "selected_text": "dedcffff",
+            "shadow_size": 0,
+            "surface": "141c2bff",
+            "text": "e5eaf2ff"
+          },
+          "selection_intents": [
+            1
+          ]
+        },
+        {
+          "category": "meshes",
+          "popup": {
+            "border_width": 0,
+            "disabled_text": "748096ff",
+            "embedded": true,
+            "font_size": 14,
+            "hover": "27294cff",
+            "padding": [
+              8.0,
+              8.0,
+              8.0,
+              8.0
+            ],
+            "radius": 6,
+            "row_separation": 12,
+            "selected_text": "dedcffff",
+            "shadow_size": 0,
+            "surface": "141c2bff",
+            "text": "e5eaf2ff"
+          },
+          "selection_intents": [
+            1
+          ]
+        }
+      ]
+    },
+    "gl_compatibility": {
+      "selector_visits": 203,
+      "comparisons": [
+        {
+          "category": "particles",
+          "popup": {
+            "border_width": 0,
+            "disabled_text": "748096ff",
+            "embedded": true,
+            "font_size": 14,
+            "hover": "27294cff",
+            "padding": [
+              8.0,
+              8.0,
+              8.0,
+              8.0
+            ],
+            "radius": 6,
+            "row_separation": 12,
+            "selected_text": "dedcffff",
+            "shadow_size": 0,
+            "surface": "141c2bff",
+            "text": "e5eaf2ff"
+          },
+          "selection_intents": [
+            1
+          ]
+        },
+        {
+          "category": "fields",
+          "popup": {
+            "border_width": 0,
+            "disabled_text": "748096ff",
+            "embedded": true,
+            "font_size": 14,
+            "hover": "27294cff",
+            "padding": [
+              8.0,
+              8.0,
+              8.0,
+              8.0
+            ],
+            "radius": 6,
+            "row_separation": 12,
+            "selected_text": "dedcffff",
+            "shadow_size": 0,
+            "surface": "141c2bff",
+            "text": "e5eaf2ff"
+          },
+          "selection_intents": [
+            1
+          ]
+        },
+        {
+          "category": "meshes",
+          "popup": {
+            "border_width": 0,
+            "disabled_text": "748096ff",
+            "embedded": true,
+            "font_size": 14,
+            "hover": "27294cff",
+            "padding": [
+              8.0,
+              8.0,
+              8.0,
+              8.0
+            ],
+            "radius": 6,
+            "row_separation": 12,
+            "selected_text": "dedcffff",
+            "shadow_size": 0,
+            "surface": "141c2bff",
+            "text": "e5eaf2ff"
+          },
+          "selection_intents": [
+            1
+          ]
+        }
+      ]
+    }
+  },
+  "idle": {
+    "forward_plus": {
+      "phases": 34,
+      "all_zero_new_draws": true,
+      "all_pixels_unchanged": true,
+      "report": "/home/Nozba/Codex/SIMSCOPE/style-143/round4/verified/render_pacing-forward_plus/report.json"
+    },
+    "gl_compatibility": {
+      "phases": 34,
+      "all_zero_new_draws": true,
+      "all_pixels_unchanged": true,
+      "report": "/home/Nozba/Codex/SIMSCOPE/style-143/round4/verified/render_pacing-gl_compatibility/report.json"
+    }
+  },
+  "python_version_tests": 2,
+  "python_harness_compile": "PASS",
+  "historical_preservation": {
+    "evidence_files_unchanged": 33,
+    "previous_style_document_prefix_unchanged": true
+  },
+  "scientific_export_comparison": {
+    "accepted_main": "61f6a785ff8cf3bdf19da30b6d6e69a8b71f5a02",
+    "verified_archive_files": 437,
+    "comparison": "same complete capture and exact Round 3 saved scientific job; only output path changes",
+    "results": [
+      {
+        "renderer": "forward_plus",
+        "frames": [
+          {
+            "frame": "frame00000000.png",
+            "size": [
+              960,
+              540
+            ],
+            "rgba_sha256": "e893d8ba68c48343774b9d5792e0c66719bb17d1e46dcb74ae272fd399fb7338",
+            "equal": true
+          },
+          {
+            "frame": "frame00000001.png",
+            "size": [
+              960,
+              540
+            ],
+            "rgba_sha256": "6984ddcd49d7a4b2a1fa18a4077536c623f1dcd533ff719f40cd723e251b5338",
+            "equal": true
+          }
+        ],
+        "timing_identical": true,
+        "timing_sha256": "d1636acd3863b2729e558cfc27dff92ea31d04f92539fde310222e04a15b0173",
+        "capture_sha256": "16f228f5fcc09e45bc0ad3f651b29a39cc8650f797ef34621e3089b35e730b77",
+        "source_unchanged": true
+      },
+      {
+        "renderer": "gl_compatibility",
+        "frames": [
+          {
+            "frame": "frame00000000.png",
+            "size": [
+              960,
+              540
+            ],
+            "rgba_sha256": "88d8a7c256c17853f00292761f9519ca7b0e6d86653cee779d09c9f8b3c0bd89",
+            "equal": true
+          },
+          {
+            "frame": "frame00000001.png",
+            "size": [
+              960,
+              540
+            ],
+            "rgba_sha256": "0ba6f98e921439f78f0f3ebeae3a0ef99549e1b533b051640d7e7b35fd759ecc",
+            "equal": true
+          }
+        ],
+        "timing_identical": true,
+        "timing_sha256": "a00ac82a1dfd0bc9cd102ca8a7304f72b16a51f3183da57828b2229499e80023",
+        "capture_sha256": "e6ca71fd89312fb69129294d85bcca5da981f060fdcca21d313238446372f523",
+        "source_unchanged": true
+      }
+    ]
+  },
+  "diagnostics": {
+    "initial_harness_corrections": [
+      "snapshot scene.layers key",
+      "moving hover event through root embedded-window coordinates",
+      "native Enter entry with paused playback guard"
+    ],
+    "rejected_cached_shader_warning": "/home/Nozba/Codex/SIMSCOPE/style-143/round4/final/violet_dropdowns-gl_compatibility/native.log",
+    "clean_repeat": "/home/Nozba/Codex/SIMSCOPE/style-143/round4/final/violet_dropdowns-gl_compatibility-clean/native.log",
+    "final_matrix": "/home/Nozba/Codex/SIMSCOPE/style-143/round4/verified/matrix-runs.json"
+  },
+  "limits": [
+    "Small complete synthetic captures; no production performance claim",
+    "Native X11 fullscreen; Wayland evidence is historical",
+    "Physical feel and 4K/mixed-monitor review pending",
+    "Surrounding deferred forms and platform picker trees not restyled"
+  ],
+  "screenshots": [
+    {
+      "file": "compatibility-fields-focus.png",
+      "sha256": "75dbca852e8dda14b1405cb9cfa60260f1dc7e95e35449b991bdf8119751bdc2",
+      "bytes": 138932
+    },
+    {
+      "file": "compatibility-fields-hover.png",
+      "sha256": "10e953ca065a07d8ee483ecd5edf0a3198f77fd8746cdbbbb68ed277fb9b2e48",
+      "bytes": 142329
+    },
+    {
+      "file": "compatibility-fields-selected.png",
+      "sha256": "40b1647440adc5a48d8477a5126ce239e8f7a7f5ed5a878444ce9847647a49a4",
+      "bytes": 142460
+    },
+    {
+      "file": "compatibility-meshes-disabled-row.png",
+      "sha256": "87faa91464cc30837c669ca2481354be3e1da8609c5d85ecafb012efd0a69d36",
+      "bytes": 141203
+    },
+    {
+      "file": "compatibility-meshes-empty.png",
+      "sha256": "2eabfa638523d476fd64109f76e43bdd49bfe6330184a358d2ab7c03734ad913",
+      "bytes": 43216
+    },
+    {
+      "file": "compatibility-meshes-hover.png",
+      "sha256": "1dba46117258983431bbce9e85e54975b702589c5d887ecf575ba253d156075c",
+      "bytes": 141831
+    },
+    {
+      "file": "compatibility-meshes-selected.png",
+      "sha256": "c22bce9564178b901fe64e895d1df81e4355a19acc10730e56e9e26f37651c88",
+      "bytes": 141795
+    },
+    {
+      "file": "compatibility-particles-hover.png",
+      "sha256": "b59bf63e6019a6f7d845757b3130c3277743bed697d4862b9a4bd16f73d378a3",
+      "bytes": 143283
+    },
+    {
+      "file": "compatibility-particles-selected.png",
+      "sha256": "fd67f95b026d340b521f46708daf949a545c22e0a10eb036d48120357aa4e734",
+      "bytes": 143231
+    },
+    {
+      "file": "forward-fields-channel.png",
+      "sha256": "0a48d6ea91962f832792d0927dbc0f5cae8002ed7710b04920f4d7d5b469d443",
+      "bytes": 227923
+    },
+    {
+      "file": "forward-fields-disabled-row.png",
+      "sha256": "0cdd6944382e5a0db1bfd66178bae0f1c4bee20ce472a25fa32434e902176a19",
+      "bytes": 232178
+    },
+    {
+      "file": "forward-fields-hover.png",
+      "sha256": "c05b731d07e27d83fb19bffaf2fe9b6bb9b992207953900db4af6a7c46bd212d",
+      "bytes": 232685
+    },
+    {
+      "file": "forward-fields-selected.png",
+      "sha256": "4ee3ca1b2613cefbd6fb680e6de9f4e7e9023ccce15d7da8f4c4de2e29aec22f",
+      "bytes": 232611
+    },
+    {
+      "file": "forward-meshes-channel.png",
+      "sha256": "8524b14df12326a5f81e1135e5c9e29a2ecdcec866c27c2f744f319ab3f588aa",
+      "bytes": 223295
+    },
+    {
+      "file": "forward-meshes-hover.png",
+      "sha256": "920fe2aa9160e7ea366e3e4a86b2301b315f89b1ee68d57c6f7c2b7d07d00595",
+      "bytes": 231997
+    },
+    {
+      "file": "forward-meshes-selected.png",
+      "sha256": "c677ec343e21abefb66d0462bdd622c7f98dfc764feeddc2532d6b27b44db5e7",
+      "bytes": 231928
+    },
+    {
+      "file": "forward-particles-hover.png",
+      "sha256": "3fc03f11159c14f0aeacf7f64ff9f1ee012fb50b9685723c11e57f63476b6522",
+      "bytes": 236548
+    },
+    {
+      "file": "forward-particles-selected.png",
+      "sha256": "75f331d42c5f0d43fd5ced1be7ed8d822a2fe60adac5f25d2d5cd3b3f573352b",
+      "bytes": 236418
+    }
+  ],
+  "editor_import": {
+    "result": "PASS",
+    "log": "/home/Nozba/Codex/SIMSCOPE/style-143/round4/editor-import-final.log"
+  }
+}

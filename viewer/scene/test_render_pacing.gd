@@ -84,6 +84,8 @@ func run() -> void:
 			choice.select(1);choice.item_selected.emit(1);await ready(view)
 			check(view.scene_layers.views.field.channel == choice.get_item_metadata(1),kind+" channel change commits")
 			await idle(view,kind+"_channel")
+			# #137 starts legends hidden. Exercise a real on -> off transition.
+			view.scene_layers.panel_controls.field.legend.button_pressed = true;await settle()
 			frames = Engine.get_frames_drawn();view.scene_layers.panel_controls.field.legend.button_pressed = false;await settle()
 			check(Engine.get_frames_drawn() > frames and not view.shell.layer_legends.entries.has("field"),kind+" legend toggle redraws")
 			view.scene_layers.panel_controls.field.legend.button_pressed = true;await settle()
