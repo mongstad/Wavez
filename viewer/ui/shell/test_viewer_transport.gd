@@ -22,16 +22,18 @@ func ready(viewer):
 	check(not viewer.scene_layers.is_buffering(),"Preparation completes")
 func picture(name: String): root.get_texture().get_image().save_png(output.path_join(name+".png"))
 func go(ui, text: String):
-	ui.open_seek(); ui.seek_dialog.editor.text = ui.SeekPopover.format_time(text.to_float() - ui.seek_dialog.origin); ui.seek_dialog.confirmed.emit(); ui.refresh()
+	# Scientific-controller coverage intentionally includes fractional targets that
+	# the normal whole-clock editor no longer accepts. Native UI is tested separately.
+	ui.reset_requested(); check(ui.viewer._seek_time(text.to_float()), "Scientific seek accepts " + text); ui.refresh()
 func run():
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--transport-output="): output = arg.trim_prefix("--transport-output=")
 	var config: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(output.path_join("config.json")))
 	var viewer = Viewer.new(); viewer.playing = false; viewer.orbit_enabled = false; root.add_child(viewer); viewer.set_process(false)
 	var ui = viewer.shell.transport
-	for row in [[0.0,"0.0"],[0.04,"0.0"],[43.7,"43.7"],[59.9,"59.9"],[59.94,"59.9"],[59.96,"1:00.0"],[60.0,"1:00.0"],[72.4,"1:12.4"],[763.6,"12:43.6"],[3599.9,"59:59.9"],[3599.94,"59:59.9"],[3599.96,"1:00:00.0"],[3600.0,"1:00:00.0"],[3867.3,"1:04:27.3"],[36000.0,"10:00:00.0"]]:
-		check(ui.format_duration(row[0]) == row[1],"Adaptive duration formatting: "+str(row[0]))
-		check(ui.format_duration(row[0],true) == ("-"+row[1] if row[1] != "0.0" else "0.0"),"Remaining formatting and zero: "+str(row[0]))
+	for row in [[0.0,"00:00"],[0.04,"00:00"],[43.7,"00:43"],[59.9,"00:59"],[59.94,"00:59"],[59.96,"00:59"],[60.0,"01:00"],[72.4,"01:12"],[763.6,"12:43"],[3599.9,"59:59"],[3599.94,"59:59"],[3599.96,"59:59"],[3600.0,"01:00:00"],[3867.3,"01:04:27"],[36000.0,"10:00:00"]]:
+		check(ui.format_duration(row[0]) == row[1],"Whole-clock duration formatting: "+str(row[0]))
+		check(ui.format_duration(row[0],true) == ("-"+row[1] if row[1] != "00:00" else "00:00"),"Remaining formatting and zero: "+str(row[0]))
 	check(viewer.play_button.disabled and ui.rate.disabled,"Empty transport explains unavailable playback")
 	viewer._open_capture(config.source); viewer.playing = false; await ready(viewer); await settle()
 	await delay_checks(viewer,ui)
@@ -44,14 +46,15 @@ func run():
 	check(viewer.committed_sample == before and ui.pending_time() == null,"Cancel submits nothing")
 	ui.open_seek(); ui.seek_dialog.editor.text = "NaN"; ui.submit_seek()
 	check(ui.seek_dialog.visible and ui.seek_dialog.error_label.visible and viewer.committed_sample == before,"Invalid target retains draft and scene")
-	ui.seek_dialog.editor.text = "99"; ui.submit_seek()
+	ui.seek_dialog.editor.text = "99:00"; ui.submit_seek()
 	check(ui.seek_dialog.error_label.visible and viewer.committed_sample == before,"Out of range target refused")
-	ui.seek_dialog.editor.text = "1.0000000000000002"
+	ui.seek_dialog.hide(); viewer._seek_time(1.0000000000000002); await ready(viewer); ui.open_seek()
+	check(ui.seek_dialog.editor.text == "00:01", "Precise scientific clock prefills whole seconds")
 	# Native keyboard delivery is covered by test_violet_round2; this suite
 	# stresses rapid same-frame requests through the production submit signal.
 	ui.seek_dialog.editor.text_submitted.emit(ui.seek_dialog.editor.text); await settle()
 	await ready(viewer)
-	check(viewer.committed_sample.requested_time == 1.0000000000000002 and not ui.seek_dialog.visible,"Enter seeks the exact float64 target")
+	check(viewer.committed_sample.requested_time == 1.0000000000000002 and not ui.seek_dialog.visible,"Accepting unchanged whole-clock prefill preserves exact float64 target")
 	ui.open_seek()
 	ui.seek_dialog.editor.text = "2.5"
 	var escape := InputEventKey.new(); escape.keycode = KEY_ESCAPE; escape.pressed = true
@@ -61,8 +64,8 @@ func run():
 	for time in [1.0,1.234567891234,2.25]:
 		go(ui,ui.FloatText.format_value(time)); await ready(viewer)
 		check(viewer.committed_sample.requested_time == time,"Go commits exact or fractional target " + str(time))
-		check(ui.requested.text.is_empty() and ui.displayed.text == "%.1f" % time,"Elapsed playback uses one decimal from committed sample")
-		check(ui.displayed.tooltip_text.ends_with("Displayed source time " + ui.FloatText.format_value(time) + " s"),"Displayed tooltip retains exact float64 value")
+		check(ui.requested.text.is_empty() and ui.displayed.text == ui.format_duration(time),"Elapsed playback uses whole seconds from precise committed sample")
+		check(not ui.displayed.tooltip_text.contains(ui.FloatText.format_value(time)),"Normal elapsed tooltip does not expose raw decimal source timing")
 	check(viewer.scene_layers.current.field.a.time == 1,"Sparse field holds independent source time at fractional seek")
 	for index in [0,viewer.frame_count-1]:
 		viewer.timeline.value = index;await ready(viewer);ui.refresh()
@@ -125,18 +128,18 @@ func run():
 	while not ui.requested.visible and Time.get_ticks_msec()-request_started < 2000: await process_frame
 	request_delay_observed_ms = Time.get_ticks_msec()-request_started
 	check(ui.requested.visible and request_delay_observed_ms >= ui.REQUESTED_DELAY_MS and request_delay_observed_ms < 1000,"Long real cold seek reveals status promptly after delay")
-	check(ui.displayed.text == "0.0" and ui.playback_timing().elapsed == 0 and viewer.committed_sample.requested_time == 0 and ui.requested.text == "Requested time 2.25123" and viewer.play_button.disabled,"Pending seek leaves displayed scene committed and exposes submitted target")
-	check(ui.pending_time() == 2.25123456789 and ui.requested.tooltip_text == "Requested time " + ui.FloatText.format_value(2.25123456789) + " s","Requested tooltip and controller retain exact submitted value")
+	check(ui.displayed.text == "00:00" and ui.playback_timing().elapsed == 0 and viewer.committed_sample.requested_time == 0 and ui.requested.text == "Requested time 00:02" and viewer.play_button.disabled,"Pending seek leaves displayed scene committed and exposes submitted target")
+	check(ui.pending_time() == 2.25123456789 and not ui.requested.tooltip_text.contains(ui.FloatText.format_value(2.25123456789)),"Requested UI uses whole clock while controller retains exact submitted value")
 	ui.show_remaining = true; ui.refresh()
-	check(ui.duration.text == "-6.0","Cold seek remaining follows committed origin, not pending request")
+	check(ui.duration.text == "-00:06","Cold seek remaining follows committed origin, not pending request")
 	await settle(); picture("buffering")
-	ui.open_seek(); ui.seek_dialog.editor.text = "4.5"; ui.refresh()
-	check(ui.requested.text == "Requested time 2.25123" and viewer.committed_sample.requested_time == 0,"Editing replacement target does not replace submitted request")
+	ui.open_seek(); ui.seek_dialog.editor.text = "00:04"; ui.refresh()
+	check(ui.requested.text == "Requested time 00:02" and viewer.committed_sample.requested_time == 0,"Editing replacement target does not replace submitted request")
 	ui.seek_dialog.confirmed.emit(); go(ui,"3.125")
 	check(not ui.requested.visible and ui.requested.text.is_empty(),"Rapid replacements clear stale status immediately")
 	worker.test_barrier = null; gate.post(); await ready(viewer)
 	check(viewer.committed_sample.requested_time == 3.125 and ui.requested.text.is_empty(),"Only latest rapid seek commits and clears requested readout")
-	check(ui.displayed.text == "3.1" and ui.duration.text == "-2.9","Latest committed seek updates elapsed and remaining")
+	check(ui.displayed.text == "00:03" and ui.duration.text == "-00:02","Latest committed seek updates elapsed and remaining")
 	await settle(); picture("remaining")
 	ui.show_remaining = false; ui.refresh()
 	for i in 12: viewer.scene_layers.tick(0); await process_frame
@@ -199,13 +202,13 @@ func run():
 
 func media_checks(viewer, ui, config):
 	go(ui,"0"); await ready(viewer); ui.refresh()
-	check(ui.displayed.text == "0.0","Recorded playback begins at zero elapsed")
+	check(ui.displayed.text == "00:00","Recorded playback begins at zero elapsed")
 	var total: float = 6.0
 	check(is_equal_approx(ui.playback_timing().total,total),"Recorded playback nominal duration follows existing normal rate")
 	ui.duration.pressed.emit()
-	check(ui.show_remaining and ui.duration.text == "-%.1f" % total,"Recorded playback duration toggles to negative remaining")
+	check(ui.show_remaining and ui.duration.text == ui.format_duration(total,true),"Recorded playback duration toggles to negative remaining")
 	ui.duration.pressed.emit()
-	check(not ui.show_remaining and ui.duration.text == "%.1f" % total,"Recorded playback duration toggles back to total")
+	check(not ui.show_remaining and ui.duration.text == ui.format_duration(total),"Recorded playback duration toggles back to total")
 	for speed in [-2.0,-0.5,0.0,0.5,1.0,2.0]:
 		go(ui,"2.25"); await ready(viewer); ui.refresh()
 		var before: float = ui.playback_timing().elapsed
@@ -217,7 +220,7 @@ func media_checks(viewer, ui, config):
 		check(is_equal_approx(ui.playback_timing().total,total),"Recorded playback duration stays stable during playback and speed edits")
 	go(ui,"6"); await ready(viewer); ui.refresh()
 	check(ui.displayed.text == ui.duration.text,"Recorded playback end elapsed equals total")
-	ui.duration.pressed.emit(); check(ui.duration.text == "0.0","Recorded playback remaining ends at zero without negative zero")
+	ui.duration.pressed.emit(); check(ui.duration.text == "00:00","Recorded playback remaining ends at zero without negative zero")
 	ui.duration.pressed.emit()
 	check(not Visual.snapshot(viewer).has("time_mode") and not Visual.snapshot(viewer).has("playback_fps"),"Snapshots contain no obsolete playback-mode fields")
 	check(not viewer.visual_sliders.has("Playback • frames / second (index mode)"),"Obsolete index-rate control is not constructed")
@@ -229,12 +232,12 @@ func media_checks(viewer, ui, config):
 	check(viewer.physical_rate == exact and ui.rate.selected == -1,"Recipe restores original exact recorded rate without redefining it")
 	for path in [config.offset,config.single]:
 		viewer._open_capture(path); viewer.playing = false; await ready(viewer)
-		check(ui.displayed.text == "0.0","Nonzero source origin still begins at zero elapsed")
+		check(ui.displayed.text == "00:00","Nonzero source origin still begins at zero elapsed")
 		go(ui,ui.FloatText.format_value(float(viewer.generic_reader.frames[-1].time))); await ready(viewer)
 		check(ui.displayed.text == ui.duration.text,"Offset/single-sample capture ends at total")
-		ui.duration.pressed.emit(); check(ui.duration.text == "0.0","Offset/single-sample remaining reaches zero")
+		ui.duration.pressed.emit(); check(ui.duration.text == "00:00","Offset/single-sample remaining reaches zero")
 		ui.duration.pressed.emit()
-		check(ui.displayed.tooltip_text.ends_with(" ms"),"Scientific unit remains in source tooltip, not playback duration")
+		check(ui.displayed.tooltip_text.contains("MM:SS") and not ui.displayed.tooltip_text.contains(" ms"),"Offset source units do not change the elapsed-clock representation")
 	viewer._open_capture(config.source); viewer.playing = false; await ready(viewer)
 
 func delay_checks(viewer, ui):
@@ -256,7 +259,7 @@ func delay_checks(viewer, ui):
 	ui.refresh_requested(2.0,0.0,1451)
 	check(not ui.requested.visible and ui.requested.text.is_empty(),"Replacement resets delay and stale text")
 	ui.refresh_requested(2.0,0.0,1901)
-	check(ui.requested.visible and ui.requested.text == "Requested time 2.00000","Replacement shows only latest target")
+	check(ui.requested.visible and ui.requested.text == "Requested time 00:02","Replacement shows only latest target")
 	ui.pending_generation = -1; ui.refresh_requested(2.0,0.0,1902)
 	check(not ui.requested.visible,"Changed capture generation restarts presentation delay")
 	ui.refresh_requested(2.0,0.0,2352)

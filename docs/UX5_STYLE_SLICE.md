@@ -315,3 +315,128 @@ log after its local services were blocked in the initial sandbox attempt.
 Eleven new unedited production screenshots are retained separately from v1.
 Round 2 remains pending owner review on Draft PR #145; build 10 and the broader
 propagation boundary are unchanged.
+
+## Owner review → Round 2 corrections
+
+The owner completed visual review of Round 2 at `b9a2df3` and requested the
+following corrections before approving broad propagation. This new round
+(evidence directory `round3`) continues the exact issue-linked branch and Draft
+PR #145. Both `0d32d08` and `b9a2df3`, and their review-time records above, remain
+unchanged historical checkpoints. Build `v0.1.0.10` remains the candidate.
+
+### Disclosure and slider consistency
+
+Every right-panel disclosure, including dynamically rebuilt Fields/Meshes
+headers, uses one reusable `PanelDisclosure` theme variation. Resting and
+expanded headers share the dock surface; six-pixel corners appear on the quiet
+hover treatment. Chevron direction, header typography, existing indentation and
+restrained violet expanded-state ink communicate disclosure without alternating
+full-width bands. Existing section keys, body visibility and recipe routing stay
+in the original component.
+
+Application visual sliders use the same violet track/knob resources already
+accepted for Particle size and Brightness. Exposure, Gamma, Orbit speed, Bloom
+and Slice position consume those resources directly, including widgets hosted
+in deferred Tools forms. Ranges, increments, values, mappings and callbacks are
+unchanged. Tools/Jobs and remaining form content await broad propagation.
+
+### Whole-second seek clock
+
+Current, total, remaining and delayed requested time share the same completed-
+second clock formatter: `00:00`, `01:45`, `12:43`, extending to `HH:MM:SS` from
+one hour (`01:00:00`). Playback state and nonzero scientific source origins do
+not change the representation. The editor prefills/selects precisely the same
+displayed clock. Its normal surface contains only the focused input; the title
+and permanent keyboard hint are removed. Feedback appears only for an invalid
+submission and clears on editing.
+
+Normal seek input accepts whole-digit `MM:SS` or `HH:MM:SS`; seconds and an hour
+clock's minute field must be `00`–`59`. Negative, signed, decimal, malformed and
+non-finite input are refused. Validation compares elapsed input against the
+actual capture duration, including a fractional endpoint. An edited clock maps
+back to the original source origin and routes through the existing `_seek_time`
+controller. No sampling, interpolation, timing model or float64 storage changes.
+Accepting an unchanged prefill retains the precise current source time rather
+than quantizing it to the displayed second. This also preserves an exact
+fractional capture endpoint. Both double-click gestures, Enter/Esc/click-away,
+keyboard entry and native playhead dragging remain.
+
+### Fullscreen dialog correction and filename placement
+
+`ViewerTools.open` contained an unconditional early return in immersive mode.
+Removing that guard allows the existing application-owned Window and unchanged
+forms to open from the edge-revealed toolbar. The #117 popup-interaction guard
+already protects reveal state while a dialog is open; fullscreen entry/exit,
+saved pins/visibility/timers and native mode restoration are unchanged.
+
+The top bar retains an icon-only explicit Source details command. The loaded
+basename appears in a clipped, ellipsized bottom status label. It has no source
+path tooltip; diagnostic tooltips attach to the readiness badge rather than a
+shared ancestor of the filename. Full paths remain available through explicit
+Source/Status details commands. This relocation is owner-authorized within #143.
+
+### Correction-round owner checks
+
+1. At 1440×900 and 1024×640 on both renderers, expand/collapse Rendering,
+   Particle Filters, Color Mapping and Advanced; check coherent surfaces,
+   chevrons, focus and rounded hover. Check equivalent Fields/Meshes headers.
+2. Compare Exposure/Gamma with Particle size/Brightness. Confirm only the slider
+   styling changed, including Camera/Global effects/Slice sliders.
+3. Before Play, during Play and paused, double-click the current clock and
+   playhead. Confirm `MM:SS` prefill, immediate selection, Enter, Esc, click-away
+   and conditional feedback. Try `00:02`, `-00:01`, `00:60`, decimal input and a
+   clock beyond the recording. For a long recording, try `01:00:00`. Scrub by
+   dragging the native playhead and confirm precise source timing in explicit
+   details/export output.
+4. Enter Fullscreen with F11, dwell at the top edge, open Tools and choose
+   Performance, Mapping and Source probe. Confirm visible, usable dialogs and
+   their Close controls. Also try View → Global effects and Help → Shortcuts.
+   Exit with F11/Esc and confirm the original pins/visibility/native mode return,
+   discarding temporary Fullscreen pin changes.
+5. Confirm the top bar shows no capture name, the bottom status shows only the
+   basename, and filename hover exposes no path. Open Source details explicitly
+   to inspect the source path. Review compact speed presets, window actions,
+   camera shortcuts and settled idle rendering alongside these changes.
+
+The [new evidence](evidence/issue-143/round3/README.md) records final validation,
+screenshots, diagnostics and limits. Correction-round owner review is still
+required. No broad propagation, merge, Ready transition, issue closure, auto-merge
+or Project movement is included.
+
+### Completed correction-round validation
+
+Godot 4.7.2 / NVIDIA RTX 3070 Ti completed **4,390 native checks** across 20
+final suite runs, plus **2 Python version tests**. Godot editor import and Python
+harness compilation passed. The [new summary](evidence/issue-143/round3/summary.json)
+records exact run paths, diagnostics, native drivers and limits.
+
+| Suite | Forward+ | Compatibility |
+| --- | ---: | ---: |
+| Correction interactions — X11 | 74 | 74 |
+| Correction interactions — Wayland | 74 | 74 |
+| Preserved Round 2 interactions | 109 | 109 |
+| Whole-clock UI and precise scientific transport | 234 | 234 |
+| Existing theme/contrast/scope | 52 | 52 |
+| Existing shell/menu/layout/state | 661 | 661 |
+| #117 edge/pin/fullscreen | 210 | 210 |
+| #118 redraw and retained scientific image | 290 | 290 |
+| Current scientific video export | 235 | 225 |
+| Status/jobs/cancellation lifecycle | 261 | 261 |
+
+All 30 static paused phases per renderer recorded zero new draws and unchanged
+pixels. A live Performance phase on Forward+ recorded one redraw and changed UI
+pixels; the suite explicitly permits diagnostic settling. Every phase retained
+its scientific clock/camera and matched a forced full-quality render. Complete
+generated capture hashes stayed unchanged. Baseline and candidate mixed export
+jobs produced four identical 960×540 decoded RGBA frames and byte-identical
+timing manifests on their respective renderers. All 437 tracked viewer files in
+the accepted-main archive were verified against `61f6a78`.
+
+Initial Compatibility shader-cache warnings were rejected by strict harnesses;
+clean repeats are recorded separately. Exact existing Wayland GTK startup and
+encoder-PID cleanup diagnostics remain visible in the evidence. Eleven new
+unedited screenshots are retained without changing any v1/Round 2 evidence.
+Physical drag/resize feel, snapping, 4K/mixed-monitor quality and production
+power/utilization were not remeasured. The earlier desktop-chrome suite and
+its inconclusive initial X11 guard remain historical. Broad propagation and
+owner acceptance remain pending.

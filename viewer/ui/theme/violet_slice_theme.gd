@@ -65,6 +65,16 @@ func _init() -> void:
 		selected.border_width_bottom = 1; selected.border_color = c(&"accent.primary")
 		set_stylebox(state, "SelectedButton", selected)
 	set_color("font_color", "SelectedButton", c(&"selection.text"))
+	# All right-panel disclosures share the dock surface. State lives in the
+	# chevron and ink; a quiet rounded hover is the only full-width wash.
+	set_type_variation("PanelDisclosure", "SectionHeader")
+	for state in ["normal", "pressed", "disabled", "hover", "hover_pressed"]:
+		var disclosure := flat_box(&"surface.hover", 8, 9, 6)
+		if state in ["normal", "pressed", "disabled"]: disclosure.bg_color = Color.TRANSPARENT
+		set_stylebox(state, "PanelDisclosure", disclosure)
+	set_stylebox("focus", "PanelDisclosure", focus())
+	set_color("icon_pressed_color", "PanelDisclosure", c(&"accent.primary"))
+	set_color("icon_hover_pressed_color", "PanelDisclosure", c(&"focus.ring"))
 	# Pins carry their state in silhouette and ink, including when toggled on.
 	set_type_variation("PinAction", "IconAction")
 	for state in ["normal", "pressed", "disabled", "hover", "hover_pressed"]:

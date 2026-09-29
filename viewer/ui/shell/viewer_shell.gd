@@ -68,10 +68,11 @@ func setup(owner_viewer) -> void:
 	brand.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	brand.tooltip_text = "SimScope · Drag to move window · Double-click to maximize/restore"
 	brand.mouse_filter = Control.MOUSE_FILTER_STOP; row.add_child(brand)
-	source_button = button(row, "No capture", show_source, "info")
+	source_button = button(row, "", show_source, "info")
+	source_button.tooltip_text = "Source details"
 	source_button.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
 	source_button.alignment = HORIZONTAL_ALIGNMENT_LEFT
-	source_button.clip_text = true; source_button.custom_minimum_size.x = 120
+	source_button.custom_minimum_size.x = 32
 	title_drag = Control.new(); title_drag.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	title_drag.tooltip_text = "Drag to move window · Double-click to maximize/restore"; row.add_child(title_drag)
 	edge_reveal = preload("res://ui/shell/edge_reveal.gd").new()
@@ -259,8 +260,6 @@ func refresh() -> void:
 	var loaded: bool = viewer.generic_reader != null
 	refresh_commands()
 	viewer.tools_ui.refresh_context()
-	var title: String = viewer.capture_path.get_file() if loaded else "No capture"
-	if source_button.text != title: source_button.text = title; source_button.tooltip_text = viewer.capture_path if loaded else "Source details"
 	empty.visible = not immersive and not loaded and not loading
 	var has_particles: bool = loaded and viewer.scene_layers != null and not viewer.scene_layers.particle_id.is_empty()
 	viewer.inspector_box.visible = has_particles and workspace == 0

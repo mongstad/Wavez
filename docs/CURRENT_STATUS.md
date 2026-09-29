@@ -36,12 +36,16 @@ owner-merged in PR #144 at `61f6a78`, accepted build 9.
 Current authorized work is #143, the first and only Ready item when selected:
 the [violet visual-system slice](UX5_STYLE_SLICE.md). The owner reviewed v1 at
 `0d32d08` and approved the overall direction, while requiring refinement before
-broad propagation. **Round 2 is pending owner visual review** on the same branch
-and Draft PR #145: restrained surface depth, compact speed/seek controls, a clean
-viewport and integrated borderless-window controls; banner styling is deferred
-by the owner. Build 10 remains the candidate. Scientific behavior, semantic
-status and #117 edge-state
-contracts are retained; v1 reports/screenshots remain historical review evidence.
+broad propagation. The owner reviewed Round 2 at `b9a2df3` and requested another
+correction round before propagation approval. **The corrections await owner
+review** on the same branch and Draft PR #145: coherent rounded disclosures,
+consistent violet sliders, whole-second clock seeking, usable Tools dialogs from
+the edge-revealed Fullscreen toolbar, and filename-only bottom status chrome.
+Compact speed presets, borderless window actions, camera shortcuts, static
+surface depth and glyph-only pins remain. Banner styling is deferred by the
+owner. Build 10 remains the candidate. Scientific behavior, semantic status and
+#117/#118 contracts are retained; v1 and Round 2 reports/screenshots remain
+unchanged historical review evidence.
 Ordinary recipe save/load uses a small source-independent presentation JSON and
 direct platform file picker. Scientific inspection bundles remain separate.
 Field preparation uses a small CPU pool with ordered publication and explicit

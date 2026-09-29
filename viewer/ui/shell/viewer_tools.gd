@@ -79,7 +79,6 @@ func close(recover_focus := true) -> void:
 		if is_instance_valid(control) and control.is_visible_in_tree(): control.grab_focus()
 
 func open(title: String) -> void:
-	if viewer.shell != null and viewer.shell.immersive: return
 	var focused: Control = viewer.get_viewport().gui_get_focus_owner()
 	if focused != null: previous_focus = weakref(focused)
 	if not current.is_empty(): scroll_positions[current] = content.get_parent().scroll_vertical

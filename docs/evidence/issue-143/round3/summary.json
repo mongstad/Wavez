@@ -1,0 +1,539 @@
+{
+  "date": "2026-09-30",
+  "issue": 143,
+  "pr": 145,
+  "review_state": "Round 2 corrections pending owner review; broad propagation held",
+  "branch": "143-ux5-style-001-establish-modern-flat-violet-simscope-visual-design-system",
+  "accepted_main": "61f6a785ff8cf3bdf19da30b6d6e69a8b71f5a02",
+  "v1_checkpoint": "0d32d08a7333e6982fd26ebc8b190ba208ee2ab6",
+  "round2_checkpoint": "b9a2df3828ddca89be437eb0ae3e9bdcbbfdd70c",
+  "candidate_version": "v0.1.0.10",
+  "runtime": "Godot 4.7.2 stable; NVIDIA RTX 3070 Ti; KDE/KWin X11 and Wayland",
+  "native_checks_total": 4390,
+  "suites": [
+    {
+      "suite": "edge_reveal",
+      "renderer": "forward_plus",
+      "driver": null,
+      "checks": 210,
+      "status": "PASS",
+      "report": "/home/Nozba/Codex/SIMSCOPE/style-143/round3/completion/edge_reveal-forward_plus/report.json"
+    },
+    {
+      "suite": "edge_reveal",
+      "renderer": "gl_compatibility",
+      "driver": null,
+      "checks": 210,
+      "status": "PASS",
+      "report": "/home/Nozba/Codex/SIMSCOPE/style-143/round3/completion/edge_reveal-gl_compatibility/report.json"
+    },
+    {
+      "suite": "render_pacing",
+      "renderer": "forward_plus",
+      "driver": null,
+      "checks": 290,
+      "status": "PASS",
+      "report": "/home/Nozba/Codex/SIMSCOPE/style-143/round3/completion/render_pacing-forward_plus/report.json"
+    },
+    {
+      "suite": "render_pacing",
+      "renderer": "gl_compatibility",
+      "driver": null,
+      "checks": 290,
+      "status": "PASS",
+      "report": "/home/Nozba/Codex/SIMSCOPE/style-143/round3/completion/render_pacing-gl_compatibility/report.json"
+    },
+    {
+      "suite": "video_current",
+      "renderer": "forward_plus",
+      "driver": null,
+      "checks": 235,
+      "status": "PASS",
+      "report": "/home/Nozba/Codex/SIMSCOPE/style-143/round3/completion/video_current-forward_plus/report.json"
+    },
+    {
+      "suite": "video_current",
+      "renderer": "gl_compatibility",
+      "driver": null,
+      "checks": 225,
+      "status": "PASS",
+      "report": "/home/Nozba/Codex/SIMSCOPE/style-143/round3/completion/video_current-gl_compatibility/report.json"
+    },
+    {
+      "suite": "viewer_shell",
+      "renderer": "forward_plus",
+      "driver": null,
+      "checks": 661,
+      "status": "PASS",
+      "report": "/home/Nozba/Codex/SIMSCOPE/style-143/round3/completion/viewer_shell-forward_plus/shell-report.json"
+    },
+    {
+      "suite": "viewer_shell",
+      "renderer": "gl_compatibility",
+      "driver": null,
+      "checks": 661,
+      "status": "PASS",
+      "report": "/home/Nozba/Codex/SIMSCOPE/style-143/round3/completion/viewer_shell-gl_compatibility-clean-repeat/shell-report.json"
+    },
+    {
+      "suite": "viewer_status",
+      "renderer": "forward_plus",
+      "driver": null,
+      "checks": 261,
+      "status": "PASS",
+      "report": "/home/Nozba/Codex/SIMSCOPE/style-143/round3/completion/viewer_status-forward_plus/report.json"
+    },
+    {
+      "suite": "viewer_status",
+      "renderer": "gl_compatibility",
+      "driver": null,
+      "checks": 261,
+      "status": "PASS",
+      "report": "/home/Nozba/Codex/SIMSCOPE/style-143/round3/completion/viewer_status-gl_compatibility/report.json"
+    },
+    {
+      "suite": "viewer_transport",
+      "renderer": "forward_plus",
+      "driver": null,
+      "checks": 234,
+      "status": "PASS",
+      "report": "/home/Nozba/Codex/SIMSCOPE/style-143/round3/focused/viewer_transport-forward_plus/report.json"
+    },
+    {
+      "suite": "viewer_transport",
+      "renderer": "gl_compatibility",
+      "driver": null,
+      "checks": 234,
+      "status": "PASS",
+      "report": "/home/Nozba/Codex/SIMSCOPE/style-143/round3/focused/viewer_transport-gl_compatibility/report.json"
+    },
+    {
+      "suite": "violet_round2",
+      "renderer": "forward_plus",
+      "driver": null,
+      "checks": 109,
+      "status": "PASS",
+      "report": "/home/Nozba/Codex/SIMSCOPE/style-143/round3/focused/violet_round2-forward_plus/report.json"
+    },
+    {
+      "suite": "violet_round2",
+      "renderer": "gl_compatibility",
+      "driver": null,
+      "checks": 109,
+      "status": "PASS",
+      "report": "/home/Nozba/Codex/SIMSCOPE/style-143/round3/focused/violet_round2-gl_compatibility/report.json"
+    },
+    {
+      "suite": "violet_style_slice",
+      "renderer": "forward_plus",
+      "driver": null,
+      "checks": 52,
+      "status": "PASS",
+      "report": "/home/Nozba/Codex/SIMSCOPE/style-143/round3/focused/violet_style_slice-forward_plus/report.json"
+    },
+    {
+      "suite": "violet_style_slice",
+      "renderer": "gl_compatibility",
+      "driver": null,
+      "checks": 52,
+      "status": "PASS",
+      "report": "/home/Nozba/Codex/SIMSCOPE/style-143/round3/focused/violet_style_slice-gl_compatibility/report.json"
+    },
+    {
+      "suite": "violet_review_corrections",
+      "renderer": "forward_plus",
+      "driver": "x11",
+      "checks": 74,
+      "status": "PASS",
+      "report": "/home/Nozba/Codex/SIMSCOPE/style-143/round3/final-dialogs/violet_review_corrections-forward_plus-x11/report.json"
+    },
+    {
+      "suite": "violet_review_corrections",
+      "renderer": "gl_compatibility",
+      "driver": "x11",
+      "checks": 74,
+      "status": "PASS",
+      "report": "/home/Nozba/Codex/SIMSCOPE/style-143/round3/final-dialogs/violet_review_corrections-gl_compatibility-x11/report.json"
+    },
+    {
+      "suite": "violet_review_corrections",
+      "renderer": "forward_plus",
+      "driver": "wayland",
+      "checks": 74,
+      "status": "PASS",
+      "report": "/home/Nozba/Codex/SIMSCOPE/style-143/round3/final-dialogs/violet_review_corrections-forward_plus-wayland/report.json"
+    },
+    {
+      "suite": "violet_review_corrections",
+      "renderer": "gl_compatibility",
+      "driver": "wayland",
+      "checks": 74,
+      "status": "PASS",
+      "report": "/home/Nozba/Codex/SIMSCOPE/style-143/round3/final-dialogs/violet_review_corrections-gl_compatibility-wayland-clean-repeat/report.json"
+    }
+  ],
+  "python_version_tests": {
+    "command": "python -m unittest tests.test_application_version",
+    "tests": 2,
+    "status": "PASS"
+  },
+  "python_harness_compile": "PASS",
+  "editor_import": {
+    "status": "PASS",
+    "log": "/home/Nozba/Codex/SIMSCOPE/style-143/round3/editor-import-final.log",
+    "new_uid": "viewer/ui/shell/test_violet_review_corrections.gd.uid"
+  },
+  "idle": {
+    "forward_plus": {
+      "total_phases": 34,
+      "static_phases": 30,
+      "static_new_draws": 0,
+      "static_pixels_stable": true,
+      "performance_phases": {
+        "field_performance": {
+          "callbacks": 175,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "mesh_performance": {
+          "callbacks": 173,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "mixed_performance": {
+          "callbacks": 174,
+          "draws": 1,
+          "same_pixels": false
+        },
+        "particles_performance": {
+          "callbacks": 175,
+          "draws": 0,
+          "same_pixels": true
+        }
+      },
+      "all_clock_camera_and_forced_render_checks_pass": true,
+      "source_hashes_unchanged": {
+        "particles.ssc": "68dd55ed28008ab98fa9a326eb06ebb6c9dfb17c1a00649cb08deaf2821dadd3",
+        "field.ssc": "3bfa2e1a4fb9791030cd8edea6969dbb78599e4b5be118babdf6143c8b60d2d8",
+        "mesh.ssc": "a180d5b3a75b0fdfe15f2b2ab8de55f58772f615000407c0d4752a32a074a20d",
+        "mixed.ssc": "4288f884f6060775f4d4331d1bd6746d3102d1a307b54e438c90c1fc0c975640"
+      }
+    },
+    "gl_compatibility": {
+      "total_phases": 34,
+      "static_phases": 30,
+      "static_new_draws": 0,
+      "static_pixels_stable": true,
+      "performance_phases": {
+        "field_performance": {
+          "callbacks": 175,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "mesh_performance": {
+          "callbacks": 175,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "mixed_performance": {
+          "callbacks": 175,
+          "draws": 0,
+          "same_pixels": true
+        },
+        "particles_performance": {
+          "callbacks": 175,
+          "draws": 0,
+          "same_pixels": true
+        }
+      },
+      "all_clock_camera_and_forced_render_checks_pass": true,
+      "source_hashes_unchanged": {
+        "particles.ssc": "8cfc77698ce19489e76a38763eb4acd4ec027307c6bde9a0f503e82a28b0fe05",
+        "field.ssc": "395d13a76a989ecd7c8c50312f1681b4751177c7712fc6f671e90fc21d2d251d",
+        "mesh.ssc": "fbbccaaac2001a1437ca75f8384adb4109098690075083f35fae92abb7d91278",
+        "mixed.ssc": "0cc7f03af339934e1838348a1e39755c9197788a57fb46fd080027f5a7df672c"
+      }
+    }
+  },
+  "fullscreen_dialogs": {
+    "forward_plus-x11": {
+      "display_driver": "X11",
+      "dialogs": [
+        {
+          "embedded": true,
+          "native_mode": 3,
+          "size": "(600, 720)",
+          "tool": "Performance"
+        },
+        {
+          "embedded": true,
+          "native_mode": 3,
+          "size": "(600, 720)",
+          "tool": "Mapping"
+        },
+        {
+          "embedded": true,
+          "native_mode": 3,
+          "size": "(600, 720)",
+          "tool": "Source probe"
+        }
+      ],
+      "known_libdecor_gtk_startup_warning": false,
+      "source_hashes_unchanged": {
+        "scene.ssc": "11e6178d388bd5e3f99732388ad222af7b4cf1a238fdc0a4c444069f986ae08c",
+        "clock.ssc": "266b36e170d723a306ca423c32822ab0f753ad36ec039ac8c92af50efda636e6"
+      }
+    },
+    "gl_compatibility-x11": {
+      "display_driver": "X11",
+      "dialogs": [
+        {
+          "embedded": true,
+          "native_mode": 3,
+          "size": "(600, 720)",
+          "tool": "Performance"
+        },
+        {
+          "embedded": true,
+          "native_mode": 3,
+          "size": "(600, 720)",
+          "tool": "Mapping"
+        },
+        {
+          "embedded": true,
+          "native_mode": 3,
+          "size": "(600, 720)",
+          "tool": "Source probe"
+        }
+      ],
+      "known_libdecor_gtk_startup_warning": false,
+      "source_hashes_unchanged": {
+        "scene.ssc": "bc82cdeefdc1c9367f9494bcddf3dec20562dba864c72ef93775a0500a4baa99",
+        "clock.ssc": "808e272219cc55de0ef887d5739d3dfdc1ac89fa37bb2af682ac4d649e66bc08"
+      }
+    },
+    "forward_plus-wayland": {
+      "display_driver": "Wayland",
+      "dialogs": [
+        {
+          "embedded": true,
+          "native_mode": 3,
+          "size": "(600, 720)",
+          "tool": "Performance"
+        },
+        {
+          "embedded": true,
+          "native_mode": 3,
+          "size": "(600, 720)",
+          "tool": "Mapping"
+        },
+        {
+          "embedded": true,
+          "native_mode": 3,
+          "size": "(600, 720)",
+          "tool": "Source probe"
+        }
+      ],
+      "known_libdecor_gtk_startup_warning": true,
+      "source_hashes_unchanged": {
+        "scene.ssc": "06c7f951849b528e1b5502f8523f54c38dfc403b867aba98b9bcbd9f9ab84223",
+        "clock.ssc": "d2fde983009fc5cdffe0d94f8c282f72ab362eaacdf4010487cc5bf29ed1e0f3"
+      }
+    },
+    "gl_compatibility-wayland": {
+      "display_driver": "Wayland",
+      "dialogs": [
+        {
+          "embedded": true,
+          "native_mode": 3,
+          "size": "(600, 720)",
+          "tool": "Performance"
+        },
+        {
+          "embedded": true,
+          "native_mode": 3,
+          "size": "(600, 720)",
+          "tool": "Mapping"
+        },
+        {
+          "embedded": true,
+          "native_mode": 3,
+          "size": "(600, 720)",
+          "tool": "Source probe"
+        }
+      ],
+      "known_libdecor_gtk_startup_warning": true,
+      "source_hashes_unchanged": {
+        "scene.ssc": "969bb5ff2807e19755684c63afc078ebf237d63d766f8edfffe56f4eed189342",
+        "clock.ssc": "1090c59177d5c9f3b36697cc7cbc8acc07165213c818d8d08ed82f91bd08cd7b"
+      }
+    }
+  },
+  "cancellation": {
+    "forward_plus": {
+      "parent_close_acknowledged": true,
+      "known_encoder_cleanup_diagnostics": [
+        "ERROR: The process 254702 does not exist or is not a child of the calling process.\n   at: _check_pid_is_running (drivers/unix/os_unix.cpp:863)\n   GDScript backtrace (most recent call first):\n       [0] finish (res://video/render_worker.gd:64)\n       [1] encode (res://video/render_worker.gd:340)\n",
+        "ERROR: The process 254702 does not exist or is not a child of the calling process.\n   at: _check_pid_is_running (drivers/unix/os_unix.cpp:863)\n   GDScript backtrace (most recent call first):\n       [0] _exit_tree (res://video/render_worker.gd:50)\n"
+      ],
+      "source_hashes_unchanged": {
+        "/home/Nozba/Codex/SIMSCOPE/style-143/round3/completion/viewer_status-forward_plus/scene.ssc": "e01270f79dc5c35b3ff1ad9c4373e49db9fd4a3ce7d251bf79c993f49827a611",
+        "/home/Nozba/Codex/SIMSCOPE/style-143/round3/completion/viewer_status-forward_plus/fields.ssc": "8ea0afa051ebc71968355bec7eea32bb66a5153b751e9f02147c4f6aa08773ca"
+      }
+    },
+    "gl_compatibility": {
+      "parent_close_acknowledged": true,
+      "known_encoder_cleanup_diagnostics": [
+        "ERROR: The process 266699 does not exist or is not a child of the calling process.\n   at: _check_pid_is_running (drivers/unix/os_unix.cpp:863)\n   GDScript backtrace (most recent call first):\n       [0] finish (res://video/render_worker.gd:64)\n       [1] encode (res://video/render_worker.gd:340)\n",
+        "ERROR: The process 266699 does not exist or is not a child of the calling process.\n   at: _check_pid_is_running (drivers/unix/os_unix.cpp:863)\n   GDScript backtrace (most recent call first):\n       [0] _exit_tree (res://video/render_worker.gd:50)\n"
+      ],
+      "source_hashes_unchanged": {
+        "/home/Nozba/Codex/SIMSCOPE/style-143/round3/completion/viewer_status-gl_compatibility/scene.ssc": "5482c9da4380049a2fb1ee7112e0f2846629cd3227f2a147a245ce271c1e9cfd",
+        "/home/Nozba/Codex/SIMSCOPE/style-143/round3/completion/viewer_status-gl_compatibility/fields.ssc": "bf1ffb393a9c554959fbc81ad8bb0519749c012d52d8b357326b2e66267d9268"
+      }
+    }
+  },
+  "historical_preservation": {
+    "previous_evidence_files": 20,
+    "all_bytes_unchanged": true,
+    "style_document_full_round2_prefix_unchanged": true,
+    "old_git_checkpoints_unchanged": true
+  },
+  "scientific_export_comparison": {
+    "accepted_main": "61f6a785ff8cf3bdf19da30b6d6e69a8b71f5a02",
+    "comparison": "same complete synthetic mixed capture and exact saved state, no UI/legends; only output path changed",
+    "results": [
+      {
+        "renderer": "forward_plus",
+        "frames": [
+          {
+            "frame": "frame00000000.png",
+            "size": [
+              960,
+              540
+            ],
+            "rgba_sha256": "e893d8ba68c48343774b9d5792e0c66719bb17d1e46dcb74ae272fd399fb7338",
+            "equal": true
+          },
+          {
+            "frame": "frame00000001.png",
+            "size": [
+              960,
+              540
+            ],
+            "rgba_sha256": "6984ddcd49d7a4b2a1fa18a4077536c623f1dcd533ff719f40cd723e251b5338",
+            "equal": true
+          }
+        ],
+        "timing_identical": true,
+        "timing_sha256": "d1636acd3863b2729e558cfc27dff92ea31d04f92539fde310222e04a15b0173",
+        "capture_sha256": "16f228f5fcc09e45bc0ad3f651b29a39cc8650f797ef34621e3089b35e730b77",
+        "source_unchanged": true
+      },
+      {
+        "renderer": "gl_compatibility",
+        "frames": [
+          {
+            "frame": "frame00000000.png",
+            "size": [
+              960,
+              540
+            ],
+            "rgba_sha256": "88d8a7c256c17853f00292761f9519ca7b0e6d86653cee779d09c9f8b3c0bd89",
+            "equal": true
+          },
+          {
+            "frame": "frame00000001.png",
+            "size": [
+              960,
+              540
+            ],
+            "rgba_sha256": "0ba6f98e921439f78f0f3ebeae3a0ef99549e1b533b051640d7e7b35fd759ecc",
+            "equal": true
+          }
+        ],
+        "timing_identical": true,
+        "timing_sha256": "a00ac82a1dfd0bc9cd102ca8a7304f72b16a51f3183da57828b2229499e80023",
+        "capture_sha256": "e6ca71fd89312fb69129294d85bcca5da981f060fdcca21d313238446372f523",
+        "source_unchanged": true
+      }
+    ]
+  },
+  "verified_accepted_main_archive": {
+    "tracked_viewer_files": 437,
+    "all_bytes_match_accepted_main": true
+  },
+  "diagnostics": [
+    {
+      "kind": "corrected_iteration",
+      "detail": "Initial formatter Variant inference compile error corrected with floorf. First new harness run corrected command key global_effects and existing title Shortcuts."
+    },
+    {
+      "kind": "shader_cache_warning",
+      "detail": "Strict harness rejected Compatibility Wayland cached shader recompilation warnings on initial and final focused matrices, and the first broad-shell run; separate clean reruns pass.",
+      "logs": [
+        "/home/Nozba/Codex/SIMSCOPE/style-143/round3/regressions/violet_review_corrections-gl_compatibility-wayland/godot.log",
+        "/home/Nozba/Codex/SIMSCOPE/style-143/round3/completion/viewer_shell-gl_compatibility/godot.log",
+        "/home/Nozba/Codex/SIMSCOPE/style-143/round3/final-dialogs/violet_review_corrections-gl_compatibility-wayland/godot.log"
+      ]
+    },
+    {
+      "kind": "retained_platform_diagnostic",
+      "detail": "Exact existing GTK decorator startup warning allowed and recorded only for Wayland; other warnings/errors fail. Existing synthetic encoder PID cleanup diagnostics retained in status suite."
+    }
+  ],
+  "limits": [
+    "Physical drag/resize feel, KDE snapping, 4K/mixed-monitor quality and production power/utilization not remeasured.",
+    "Prior Round 2 desktop minimize/resize stages were not rerun; current round adds real Fullscreen dialog coverage on both native drivers and renderers.",
+    "One Forward+ live Performance phase recorded one redraw and changed UI pixels; all 30 static phases per renderer had zero new draws and stable pixels.",
+    "Synthetic complete-file and scientific export equality do not establish universal production capture performance.",
+    "Exact GPU float32 readback asserted on Forward+ only.",
+    "Remaining Tools/Jobs/form/dialog style propagation and banner styling remain deferred."
+  ],
+  "screenshots": {
+    "clock-invalid-end.png": {
+      "bytes": 209206,
+      "sha256": "ae5ccbd4dba947f11b0090fdc2ec6c1fec819e0e928ca9164e881e2210256f92"
+    },
+    "compatibility-1024.png": {
+      "bytes": 41388,
+      "sha256": "8d0b07c7652f52beae434be7523bcf2fcd4b434dbca70fef55aee2028405de43"
+    },
+    "compatibility-1440.png": {
+      "bytes": 61840,
+      "sha256": "9ad36fc303828515e56f47bd4a80ba1a79036f403e46fe810aa75e949cb836a1"
+    },
+    "forward-1024.png": {
+      "bytes": 69702,
+      "sha256": "310405ee974c18e44b1631aeab8eb647ee16684e0e4e1624240999f4d59ef2b1"
+    },
+    "forward-1440.png": {
+      "bytes": 118499,
+      "sha256": "41e24dda4f10f341c5309aead601fa6bf32c0de761c806f6c37958905b442bd1"
+    },
+    "fullscreen-mapping-wayland.png": {
+      "bytes": 229550,
+      "sha256": "ca04e2dd42b02af4f965e7cc0c065dfee34d99bcd7858db7671cda3800fdc9a9"
+    },
+    "fullscreen-performance-x11.png": {
+      "bytes": 242609,
+      "sha256": "7f84f3da28664c3fde527f8e800bc868bf85c35066ac7a1d9aba7921736e6ee8"
+    },
+    "fullscreen-source-probe-wayland.png": {
+      "bytes": 237639,
+      "sha256": "5cfb7a995052fc45c2f04063bda430cb110a00dac71fc9389185f198236d811b"
+    },
+    "seek-invalid.png": {
+      "bytes": 100040,
+      "sha256": "3d522bf29925af1422e12eaa6175c3c446efa1ac7e46b17b760af744eba2d0d4"
+    },
+    "seek-playhead.png": {
+      "bytes": 99459,
+      "sha256": "79d273f6c72adc69cd97cc71719a0268c44c3cb80ab60c565a2fc2efba6f578c"
+    },
+    "violet-exposure-gamma.png": {
+      "bytes": 116555,
+      "sha256": "b17712538316968c143d20f1d8c798ae3850bae344dd55909811de862571bb04"
+    }
+  }
+}

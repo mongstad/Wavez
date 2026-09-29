@@ -13,6 +13,13 @@ covers the revised representative surfaces and transport/window interactions.
 Round 2 awaits owner visual review on the same Draft PR #145; banner styling is
 deferred at the owner's request. The v1 report and evidence remain unchanged.
 
+**2026-09-30 correction round:** the owner subsequently reviewed Round 2 at
+`b9a2df3` and requested corrections before propagation approval. The
+[new evidence and screenshots](evidence/issue-143/round3/README.md) cover uniform
+disclosures/sliders, whole-second clock seeking, filename privacy and real
+Fullscreen Tools menu dispatch. This correction round awaits owner review on
+Draft PR #145. The original v1/Round 2 records above remain historical.
+
 ## Paused rendering — issue #118, pending owner review
 
 [Investigation, policy and owner checks](PAUSED_RENDERING.md) and

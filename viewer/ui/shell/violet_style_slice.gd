@@ -24,13 +24,10 @@ func install(shell) -> void:
 				if child is Label:
 					child.remove_theme_color_override("font_color")
 					child.theme_type_variation = "PropertyLabel"
-		var disclosure: Button = shell.viewer.section_buttons[group]
-		disclosure.theme = theme
-		disclosure.add_theme_font_override("font", theme.get_font("font", "SectionHeader"))
-		for state in ["normal", "hover", "pressed", "hover_pressed"]:
-			disclosure.add_theme_stylebox_override(state, theme.flat_box(&"surface.hover" if state.begins_with("hover") else &"surface.2", 8, 9, 4))
 		animate_buttons(body)
-		animate_buttons(disclosure)
+	# Slider widgets alone adopt the accepted violet treatment, including those
+	# in deferred Tools forms. Their values, ranges and signal wiring stay intact.
+	for slider in shell.viewer.visual_sliders.values(): slider.theme = theme
 	# MenuButton padding overrides were built before the review Theme existed.
 	for menu in shell.menus.values() + [shell.navigation.get_child(2)]:
 		for state in ["normal", "hover", "pressed", "disabled"]:

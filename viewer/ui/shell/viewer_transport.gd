@@ -162,7 +162,7 @@ func refresh() -> void:
 	var clock = viewer.committed_sample.get("requested_time")
 	var timing := playback_timing()
 	displayed.text = format_duration(timing.elapsed) if loaded else "—"
-	displayed.tooltip_text = "Double-click to seek · Elapsed playback at 1× (nominal seconds).\nDisplayed source time " + (FloatText.format_value(float(clock)) if clock != null else "—") + " " + units()
+	displayed.tooltip_text = "Double-click to seek · Elapsed playback at 1× · MM:SS or HH:MM:SS"
 	duration.text = format_duration(timing.remaining,true) if show_remaining else format_duration(timing.total)
 	if not loaded: duration.text = "—"
 	duration.tooltip_text = ("Remaining duration; click for total" if show_remaining else "Total duration; click for remaining") + ". Nominal playback seconds at 1×; buffering and speed do not change the interval."
@@ -191,8 +191,9 @@ func refresh_requested(pending, clock, now_ms: int) -> void:
 		reset_requested()
 		pending_since_ms = now_ms; pending_target = pending; pending_generation = viewer.capture_generation
 	if now_ms-pending_since_ms < REQUESTED_DELAY_MS: return
-	requested.text = "Requested time %.5f" % float(pending)
-	requested.tooltip_text = "Requested time " + FloatText.format_value(float(pending)) + " " + units()
+	var first: float = viewer.generic_reader.frames[0].time if viewer.generic_reader != null and not viewer.generic_reader.frames.is_empty() else 0.0
+	requested.text = "Requested time " + format_duration(float(pending) - first)
+	requested.tooltip_text = "Waiting for the requested elapsed time to become visible."
 	requested.show()
 
 func update_index_hint() -> void:
@@ -207,16 +208,8 @@ func update_index_hint() -> void:
 		index_hint.global_position = Vector2(clampf(get_global_mouse_position().x,slider_rect.position.x,maxf(slider_rect.position.x,slider_rect.end.x-index_hint.size.x)),slider_rect.position.y-index_hint.size.y-6)
 
 static func format_duration(seconds: float, remaining := false) -> String:
-	# Round before splitting units so carry never produces 0:60.0 or 59:60.0.
-	var rounded := float("%.1f" % maxf(0,seconds))
-	var text: String
-	if rounded < 60:
-		text = "%.1f" % rounded
-	elif rounded < 3600:
-		text = "%.0f:%04.1f" % [floor(rounded/60),fmod(rounded,60)]
-	else:
-		text = "%.0f:%02d:%04.1f" % [floor(rounded/3600),int(fmod(floor(rounded/60),60)),fmod(rounded,60)]
-	return "-"+text if remaining and rounded > 0 else text
+	var text := SeekPopover.format_time(seconds)
+	return "-"+text if remaining and seconds >= 1 else text
 
 func playback_timing() -> Dictionary:
 	# Nominal duration at the normal recorded-time speed, independent of the

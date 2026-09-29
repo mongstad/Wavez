@@ -56,9 +56,9 @@ func run() -> void:
 		viewer.physical_rate = value; ui.refresh()
 		check(viewer.physical_rate == value and ui.rate.selected == -1 and ui.rate.item_count == 8, "Saved custom rate remains exact " + str(value))
 	viewer.physical_rate = 1; ui.refresh()
-	for pair in [["1.25",1.25],["1:02.125",62.125],["1:02:03.25",3723.25],["12:43.6",763.6]]:
+	for pair in [["00:00",0.0],["01:45",105.0],["12:43",763.0],["01:02:03",3723.0]]:
 		check(Seek.parse_time(pair[0]).get("value") == pair[1], "Formatted time parser " + pair[0])
-	for text in ["NaN","INF","1:60","1:60:00","-1:02","1::2","bad","1:2:3:4"]:
+	for text in ["NaN","INF","00:60","01:60:00","-01:02","1::2","bad","1:2:3:4","1.25","01:02.125","01:02:03.25","1:02","+01:02","00:-1"]:
 		check(Seek.parse_time(text).has("error"), "Malformed clock refused " + text)
 	var sample: Dictionary = viewer.committed_sample.duplicate(true); var camera: Transform3D = viewer.camera.transform
 	click(ui.displayed.get_global_rect().get_center(), true); await settle()
@@ -68,19 +68,23 @@ func run() -> void:
 	ui.seek_dialog.editor.text = "NaN"; key(KEY_ENTER, ui.seek_dialog); await settle()
 	check(ui.seek_dialog.visible and ui.seek_dialog.error_label.visible and viewer.committed_sample == sample, "Invalid Enter retains scene and shows restrained feedback")
 	picture("seek-invalid")
-	ui.seek_dialog.editor.text = "99"; key(KEY_ENTER, ui.seek_dialog); await settle()
+	ui.seek_dialog.editor.text = "99:00"; key(KEY_ENTER, ui.seek_dialog); await settle()
 	check(ui.seek_dialog.visible and ui.seek_dialog.error_label.text.contains("interval") and viewer.committed_sample == sample, "Out-of-range time refused")
-	ui.seek_dialog.editor.text = "2.25"; key(KEY_ESCAPE, ui.seek_dialog); await settle()
+	ui.seek_dialog.editor.text = "00:02"; key(KEY_ESCAPE, ui.seek_dialog); await settle()
 	check(not ui.seek_dialog.visible and viewer.committed_sample == sample, "Esc cancels entire popover without seek")
-	ui.open_seek(); await settle(); ui.seek_dialog.editor.text = "2.25"
+	ui.open_seek(); await settle(); ui.seek_dialog.editor.text = "00:02"
 	click(Vector2(200, 180)); await settle()
 	check(not ui.seek_dialog.visible and viewer.committed_sample == sample, "Click away dismisses without applying")
 	click(viewer.timeline.global_position + viewer.timeline.playhead_rect().get_center(), true); await settle()
 	check(ui.seek_dialog.visible, "Playhead double-click opens same seek popover")
 	check(absf(ui.seek_dialog.position.x + ui.seek_dialog.size.x * .5 - (viewer.timeline.global_position + viewer.timeline.playhead_rect().get_center()).x) < ui.seek_dialog.size.x, "Popover remains near playhead")
 	picture("seek-playhead")
-	ui.seek_dialog.editor.text = "1.0000000000000002"; key(KEY_ENTER, ui.seek_dialog); await settle(); await ready(); await settle()
-	check(not ui.seek_dialog.visible and viewer.committed_sample.requested_time == 1.0000000000000002, "Enter seeks exact float64 fractional source time")
+	ui.seek_dialog.editor.text = "00:02"; key(KEY_ENTER, ui.seek_dialog); await settle(); await ready(); await settle()
+	check(not ui.seek_dialog.visible and viewer.committed_sample.requested_time == 2.0, "Enter routes whole clock through the scientific seek controller")
+	viewer._seek_time(1.0000000000000002); await ready(); ui.open_seek(); await settle()
+	check(ui.seek_dialog.editor.text == ui.displayed.text and ui.displayed.text == "00:01", "Whole-clock prefill equals the displayed current time")
+	key(KEY_ENTER, ui.seek_dialog); await settle(); await ready()
+	check(viewer.committed_sample.requested_time == 1.0000000000000002, "Unchanged whole-clock prefill preserves exact float64 source time")
 	check(viewer.camera.transform == camera and not viewer.playing, "Seek preserves camera and paused state")
 	# A real native Slider drag continues to use the union-sample index.
 	var start: Vector2 = viewer.timeline.global_position + viewer.timeline.playhead_rect().get_center()
@@ -152,9 +156,9 @@ func run() -> void:
 		check(visible_ink(root.get_texture().get_image(), action), "Every compact window-action glyph is rendered")
 	# Offset origin and long formatted time map back to unchanged source units.
 	viewer._open_capture(output.path_join("clock.ssc")); viewer.playing = false; await ready()
-	ui.open_seek(); await settle(); ui.seek_dialog.editor.text = "1:00.25"; key(KEY_ENTER, ui.seek_dialog); await settle(); await ready()
-	check(viewer.committed_sample.requested_time == 160.25, "Formatted elapsed time maps to nonzero scientific origin")
-	ui.open_seek(); await settle(); ui.seek_dialog.editor.text = "1:00:00"; key(KEY_ENTER, ui.seek_dialog); await settle(); await ready()
+	ui.open_seek(); await settle(); ui.seek_dialog.editor.text = "01:00"; key(KEY_ENTER, ui.seek_dialog); await settle(); await ready()
+	check(viewer.committed_sample.requested_time == 160.0, "Formatted elapsed time maps to nonzero scientific origin")
+	ui.open_seek(); await settle(); ui.seek_dialog.editor.text = "01:00:00"; key(KEY_ENTER, ui.seek_dialog); await settle(); await ready()
 	check(viewer.committed_sample.requested_time == 3700.0, "Hour format maps to established source seek")
 	ui.open_seek(); await settle(); var exact: Dictionary = viewer.committed_sample.duplicate(true); key(KEY_ENTER, ui.seek_dialog); await settle(); await ready()
 	check(viewer.committed_sample == exact, "Unchanged formatted prefill preserves exact clock")

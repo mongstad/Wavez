@@ -1,6 +1,6 @@
 extends RefCounted
 ## One disclosure level; body visibility remains the existing recipe-facing value.
-const ThemeSource = preload("res://ui/theme/simscope_theme.gd")
+const ThemeSource = preload("res://ui/theme/violet_slice_theme.gd")
 const CLOSED = preload("res://ui/icons/chevron_right.svg")
 const OPEN = preload("res://ui/icons/chevron_down.svg")
 static func create(parent: VBoxContainer, title: String, expanded := false) -> VBoxContainer:
@@ -9,11 +9,7 @@ static func create(parent: VBoxContainer, title: String, expanded := false) -> V
 	header.alignment = HORIZONTAL_ALIGNMENT_LEFT; header.custom_minimum_size.y = 36
 	header.button_pressed = expanded; header.icon = OPEN if expanded else CLOSED
 	header.set_meta("panel_disclosure",true)
-	for state in ["normal","pressed","hover","hover_pressed"]:
-		var style := theme.box(&"surface.1", &"border.subtle",4,8,0)
-		style.set_border_width_all(0);style.border_width_bottom = 1
-		if state.begins_with("hover"):style.bg_color = theme.c(&"surface.2")
-		header.add_theme_stylebox_override(state,style)
+	header.theme = theme; header.theme_type_variation = "PanelDisclosure"
 	parent.add_child(header)
 	var margin := MarginContainer.new();margin.add_theme_constant_override("margin_left",12)
 	margin.add_theme_constant_override("margin_bottom",12);parent.add_child(margin)
