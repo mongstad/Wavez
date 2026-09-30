@@ -1,5 +1,9 @@
 # About SimScope — issue #96
 
+Current #147 update: About uses the owner-supplied violet logo without changing
+its layout, identity reader, notices or links. See [asset provenance](../viewer/ui/about/README.md)
+and [the cleanup contract](UX5_CLEANUP.md). The original #96 report below is historical.
+
 Pending owner review on the existing
 `96-ux-about-001-add-about-simscope-dialog` branch. #96 was the only Ready issue
 when selected, based on accepted main `653f817` (PR #132). Fetch/prune completed,

@@ -1,0 +1,749 @@
+{
+  "issue": 147,
+  "status": "pending owner review",
+  "selected_ready": "only Ready item on 2026-09-30",
+  "branch": "147-ux5-cleanup-001-clean-up-residual-ui-inconsistencies-after-violet-redesign",
+  "accepted_main": "d23f43164858f2ea64a9ebc9aa2de444d69a7c08",
+  "predecessor_pr": 145,
+  "candidate_version": "v0.1.0.11",
+  "environment": {
+    "godot": "4.7.2.stable.official.ed1daf0bf",
+    "gpu": "NVIDIA GeForce RTX 3070 Ti",
+    "platform": "Linux x86_64",
+    "driver": "615.71.09"
+  },
+  "results": {
+    "forward_plus": {
+      "cleanup": {
+        "checks": 1099,
+        "failures": 0,
+        "status": "PASS",
+        "source_hashes_unchanged": {
+          "mixed.ssc": "c687568216a2505bac0a20244ba6c8ece4bddd0442a092f0ec9257c7a237a614",
+          "particles.ssc": "c866f9d275655c530dab57f86ab9cd5b693d5d5b1002c32331a4ec306deba253"
+        },
+        "audits": [
+          {
+            "booleans": 39,
+            "stage": "mixed capture"
+          },
+          {
+            "booleans": 39,
+            "stage": "saved visual-state rebuild"
+          },
+          {
+            "booleans": 39,
+            "stage": "visual recipe rebuild"
+          },
+          {
+            "booleans": 25,
+            "stage": "capture replacement"
+          }
+        ],
+        "scaled_layouts": [
+          {
+            "actual": "(1440, 900)",
+            "logical": "(1440.0, 900.0)",
+            "requested": "(1440, 900)",
+            "scale": 1.0
+          },
+          {
+            "actual": "(1024, 640)",
+            "logical": "(1024.0, 640.0)",
+            "requested": "(1024, 640)",
+            "scale": 1.0
+          },
+          {
+            "actual": "(2560, 1394)",
+            "logical": "(1280.0, 697.0)",
+            "requested": "(3840, 2160)",
+            "scale": 2.0
+          }
+        ]
+      },
+      "shell": {
+        "checks": 667,
+        "failures": 0,
+        "status": "PASS",
+        "source_hashes_unchanged": {
+          "scene.ssc": "c7fa738c0655587b1fe41cc1ff1233c511aeaa836348ae0147c017e8a9c00203",
+          "replacement.ssc": "7b5123bb554a04e6a89a05a68e6226d621baa7002a48d3aa4ac4d01591396c2f",
+          "invalid.ssc": "85b88a0128bebf2b8c2c6e7b9030e49cbbb83f2f60ec834420eaade3db477d90"
+        },
+        "menu_contract_matches": true
+      },
+      "edge_reveal": {
+        "checks": 210,
+        "failures": 0,
+        "status": "PASS",
+        "source_hashes_unchanged": {
+          "scene.ssc": "6e8a99606d76f6adbbf9f1703255a4a494ddd08ab9417d214a25a0132e2f3cfe",
+          "replacement.ssc": "e2fdc920c1917ed347c7f98f6226ef7b126a3f1a0ce2b6b046a98ae39c76f065",
+          "invalid.ssc": "85b88a0128bebf2b8c2c6e7b9030e49cbbb83f2f60ec834420eaade3db477d90"
+        }
+      },
+      "redraw_pacing": {
+        "checks": 290,
+        "failures": 0,
+        "status": "PASS",
+        "source_hashes_unchanged": {
+          "particles.ssc": "2dd569efe3ba2b4b9e2da1b01dd47bfebecb154283a1ee613ca277940cc8ce32",
+          "field.ssc": "4ceb289979a49ab218def3d03dd2eae4c763875901dc53ceb511562bca34529f",
+          "mesh.ssc": "4402fcfb1f1620662930d3faa72f40dca1e972bbe29d1d52c0528a08d3f51a2f",
+          "mixed.ssc": "86ff93ebcce8d03570c10a3e85b738718b74b86716ad940ddf870d706d313973"
+        },
+        "idle_phases": {
+          "field_after_orbit": {
+            "callbacks": 175,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "field_channel": {
+            "callbacks": 175,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "field_free_camera_stationary": {
+            "callbacks": 174,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "field_paused_again": {
+            "callbacks": 175,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "field_performance": {
+            "callbacks": 175,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "field_ready": {
+            "callbacks": 175,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "field_resized": {
+            "callbacks": 175,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "field_seek": {
+            "callbacks": 174,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "field_zero_speed_orbit": {
+            "callbacks": 175,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "mesh_after_orbit": {
+            "callbacks": 176,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "mesh_free_camera_stationary": {
+            "callbacks": 174,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "mesh_paused_again": {
+            "callbacks": 175,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "mesh_performance": {
+            "callbacks": 175,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "mesh_ready": {
+            "callbacks": 174,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "mesh_resized": {
+            "callbacks": 175,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "mesh_seek": {
+            "callbacks": 174,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "mesh_zero_speed_orbit": {
+            "callbacks": 175,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "mixed_after_orbit": {
+            "callbacks": 175,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "mixed_channel": {
+            "callbacks": 175,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "mixed_free_camera_stationary": {
+            "callbacks": 176,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "mixed_paused_again": {
+            "callbacks": 175,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "mixed_performance": {
+            "callbacks": 175,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "mixed_ready": {
+            "callbacks": 174,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "mixed_resized": {
+            "callbacks": 173,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "mixed_seek": {
+            "callbacks": 175,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "mixed_zero_speed_orbit": {
+            "callbacks": 175,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "particles_after_orbit": {
+            "callbacks": 176,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "particles_free_camera_stationary": {
+            "callbacks": 176,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "particles_paused_again": {
+            "callbacks": 175,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "particles_performance": {
+            "callbacks": 175,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "particles_ready": {
+            "callbacks": 174,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "particles_resized": {
+            "callbacks": 175,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "particles_seek": {
+            "callbacks": 175,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "particles_zero_speed_orbit": {
+            "callbacks": 175,
+            "draws": 0,
+            "same_pixels": true
+          }
+        }
+      },
+      "fullscreen_details": {
+        "checks": 74,
+        "failures": 0,
+        "status": "PASS",
+        "source_hashes_unchanged": {
+          "scene.ssc": "02b5cf40a0d6fe55b66044ada2d35af1d715a50cc679c261e3f7fafe6b4bdc8e",
+          "clock.ssc": "171c46a4b60d119435651f7c88a2eac269bbf81b054b825bcf10865299ebaa17"
+        },
+        "display_driver": "Wayland",
+        "known_libdecor_gtk_startup_warning": true
+      },
+      "about": {
+        "checks": 98,
+        "failures": 0,
+        "status": "PASS",
+        "source_unchanged_sha256": "bfd9c96b692bfcc51b66a1cc3b9a15b497f67e252a1d25cb0289192c8e421932",
+        "layouts": [
+          {
+            "actual_viewport": "(1440, 900)",
+            "dialog": "(580, 560)",
+            "viewport": "(1440, 900)"
+          },
+          {
+            "actual_viewport": "(1920, 1080)",
+            "dialog": "(580, 560)",
+            "viewport": "(1920, 1080)"
+          },
+          {
+            "actual_viewport": "(800, 600)",
+            "dialog": "(580, 536)",
+            "viewport": "(800, 600)"
+          },
+          {
+            "actual_viewport": "(480, 480)",
+            "dialog": "(432, 416)",
+            "viewport": "(480, 480)"
+          }
+        ],
+        "notice_sha256": {
+          "Branding": "f609fea579bd47c024fb2378b989c629ba79de80e9a86b353c79a4dd2282cbf7",
+          "Colormap notices": "dbb9ad7495a83b0f2f48c94b06e23020587d82f8d1492dcb717fb1ebc2f86c18",
+          "DejaVu font notices": "7a083b136e64d064794c3419751e5c7dd10d2f64c108fe5ba161eae5e5958a93",
+          "Godot Engine \u2014 MIT License": "b0435e3b3e4e55238f05f4b306f30524a1b2e20147810d436eaa554fa6855c80",
+          "Godot third-party notices": "1288215255d0a55623f7726ef90772926449514cb230abb76dc2a86c9a5d72dd",
+          "SimScope \u2014 PolyForm Noncommercial 1.0.0": "9ef5c30eae3a6970dbe5029e4f77d6ade72ab9c6fa72d51b7e9b229bd1d304f6",
+          "Third-party inventory": "de23bd2e267e1c96c634b839efebbaecea58e6e8de65955a59fe0eb9d32dc5ac"
+        }
+      },
+      "status_jobs": {
+        "checks": 257,
+        "failures": 0,
+        "status": "PASS",
+        "source_hashes_unchanged": {
+          "/home/Nozba/Codex/SIMSCOPE/cleanup-147/final/status-forward_plus-final/scene.ssc": "e895e90cd3cd004a7f56f81f2212eae853e4facce52ce56662cb4b78049691e9",
+          "/home/Nozba/Codex/SIMSCOPE/cleanup-147/final/status-forward_plus-final/fields.ssc": "b0b1c469d25e825f73f2caeeec3a4f529f4c53fcde744bebfa44f089f38de37a"
+        },
+        "known_encoder_cleanup_diagnostics": [
+          "ERROR: The process 42254 does not exist or is not a child of the calling process.\n   at: _check_pid_is_running (drivers/unix/os_unix.cpp:863)\n   GDScript backtrace (most recent call first):\n       [0] finish (res://video/render_worker.gd:64)\n       [1] encode (res://video/render_worker.gd:340)\n",
+          "ERROR: The process 42254 does not exist or is not a child of the calling process.\n   at: _check_pid_is_running (drivers/unix/os_unix.cpp:863)\n   GDScript backtrace (most recent call first):\n       [0] _exit_tree (res://video/render_worker.gd:50)\n"
+        ]
+      },
+      "scientific_video": {
+        "checks": 235,
+        "failures": 0,
+        "status": "PASS"
+      }
+    },
+    "gl_compatibility": {
+      "cleanup": {
+        "checks": 1099,
+        "failures": 0,
+        "status": "PASS",
+        "source_hashes_unchanged": {
+          "mixed.ssc": "9dbba500449fae586a84d58e7736259dd12b3fc68d88740b81a3c467d6c8cf5d",
+          "particles.ssc": "866b9033e9b7a5a69e23a81d604aaece55428768fe169f4d15f7aaabe637eaf4"
+        },
+        "audits": [
+          {
+            "booleans": 39,
+            "stage": "mixed capture"
+          },
+          {
+            "booleans": 39,
+            "stage": "saved visual-state rebuild"
+          },
+          {
+            "booleans": 39,
+            "stage": "visual recipe rebuild"
+          },
+          {
+            "booleans": 25,
+            "stage": "capture replacement"
+          }
+        ],
+        "scaled_layouts": [
+          {
+            "actual": "(1440, 900)",
+            "logical": "(1440.0, 900.0)",
+            "requested": "(1440, 900)",
+            "scale": 1.0
+          },
+          {
+            "actual": "(1024, 640)",
+            "logical": "(1024.0, 640.0)",
+            "requested": "(1024, 640)",
+            "scale": 1.0
+          },
+          {
+            "actual": "(2560, 1394)",
+            "logical": "(1280.0, 697.0)",
+            "requested": "(3840, 2160)",
+            "scale": 2.0
+          }
+        ]
+      },
+      "shell": {
+        "checks": 667,
+        "failures": 0,
+        "status": "PASS",
+        "source_hashes_unchanged": {
+          "scene.ssc": "bc5d0c76771b77fb01f16ca88baa6e6b4774c933ae410909e8141d0b4fb0f533",
+          "replacement.ssc": "be67eeed1c09be28083e7cd4e148ce6db922c70ef6d3b2bb75d7eb8f9d33e9fe",
+          "invalid.ssc": "85b88a0128bebf2b8c2c6e7b9030e49cbbb83f2f60ec834420eaade3db477d90"
+        },
+        "menu_contract_matches": true
+      },
+      "edge_reveal": {
+        "checks": 210,
+        "failures": 0,
+        "status": "PASS",
+        "source_hashes_unchanged": {
+          "scene.ssc": "af4d7134a2942c3377b5d83898b4fe67cf8f3102ff456a3008e167b3e89175a4",
+          "replacement.ssc": "eb3c6bfbae8c833ece7e8ce710d55bb7843968d1966664855810a1d3c419b409",
+          "invalid.ssc": "85b88a0128bebf2b8c2c6e7b9030e49cbbb83f2f60ec834420eaade3db477d90"
+        }
+      },
+      "redraw_pacing": {
+        "checks": 290,
+        "failures": 0,
+        "status": "PASS",
+        "source_hashes_unchanged": {
+          "particles.ssc": "59caa03647dc3f20c14d3bb3cef9c13f4a0cc84cb6d4970830612c78048939b9",
+          "field.ssc": "f5a5917572e8fe3f45a44a3d67eccbc293b8a9830729dc04925439302cd64b24",
+          "mesh.ssc": "a5af09862d4cf99071e11c19209311e17cce566f96999ba1b49e7d5ceeb32a16",
+          "mixed.ssc": "68ec0434b71ba4dc8973edabd427fea627f539f38cbbf9189b57fc7c36115b9f"
+        },
+        "idle_phases": {
+          "field_after_orbit": {
+            "callbacks": 176,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "field_channel": {
+            "callbacks": 175,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "field_free_camera_stationary": {
+            "callbacks": 176,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "field_paused_again": {
+            "callbacks": 175,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "field_performance": {
+            "callbacks": 174,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "field_ready": {
+            "callbacks": 175,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "field_resized": {
+            "callbacks": 174,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "field_seek": {
+            "callbacks": 175,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "field_zero_speed_orbit": {
+            "callbacks": 176,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "mesh_after_orbit": {
+            "callbacks": 175,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "mesh_free_camera_stationary": {
+            "callbacks": 176,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "mesh_paused_again": {
+            "callbacks": 175,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "mesh_performance": {
+            "callbacks": 174,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "mesh_ready": {
+            "callbacks": 174,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "mesh_resized": {
+            "callbacks": 174,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "mesh_seek": {
+            "callbacks": 175,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "mesh_zero_speed_orbit": {
+            "callbacks": 176,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "mixed_after_orbit": {
+            "callbacks": 176,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "mixed_channel": {
+            "callbacks": 174,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "mixed_free_camera_stationary": {
+            "callbacks": 175,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "mixed_paused_again": {
+            "callbacks": 175,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "mixed_performance": {
+            "callbacks": 175,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "mixed_ready": {
+            "callbacks": 174,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "mixed_resized": {
+            "callbacks": 173,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "mixed_seek": {
+            "callbacks": 174,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "mixed_zero_speed_orbit": {
+            "callbacks": 176,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "particles_after_orbit": {
+            "callbacks": 176,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "particles_free_camera_stationary": {
+            "callbacks": 176,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "particles_paused_again": {
+            "callbacks": 174,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "particles_performance": {
+            "callbacks": 175,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "particles_ready": {
+            "callbacks": 173,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "particles_resized": {
+            "callbacks": 175,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "particles_seek": {
+            "callbacks": 174,
+            "draws": 0,
+            "same_pixels": true
+          },
+          "particles_zero_speed_orbit": {
+            "callbacks": 175,
+            "draws": 0,
+            "same_pixels": true
+          }
+        }
+      },
+      "fullscreen_details": {
+        "checks": 74,
+        "failures": 0,
+        "status": "PASS",
+        "source_hashes_unchanged": {
+          "scene.ssc": "5b93fcb8615634589a855cd8d831eba6149eed690af640cbec168078326b026e",
+          "clock.ssc": "8c61a57063ba87352735fd2a110f84b7303347d16a0a05dd5edcb82e48bc808b"
+        },
+        "display_driver": "Wayland",
+        "known_libdecor_gtk_startup_warning": true
+      },
+      "about": {
+        "checks": 98,
+        "failures": 0,
+        "status": "PASS",
+        "source_unchanged_sha256": "c1591902cd7ee1edf0225c3d4079fe0a4c14c28d527a1637d277318328ccf68b",
+        "layouts": [
+          {
+            "actual_viewport": "(1440, 900)",
+            "dialog": "(580, 560)",
+            "viewport": "(1440, 900)"
+          },
+          {
+            "actual_viewport": "(1920, 1080)",
+            "dialog": "(580, 560)",
+            "viewport": "(1920, 1080)"
+          },
+          {
+            "actual_viewport": "(800, 600)",
+            "dialog": "(580, 536)",
+            "viewport": "(800, 600)"
+          },
+          {
+            "actual_viewport": "(480, 480)",
+            "dialog": "(432, 416)",
+            "viewport": "(480, 480)"
+          }
+        ],
+        "notice_sha256": {
+          "Branding": "f609fea579bd47c024fb2378b989c629ba79de80e9a86b353c79a4dd2282cbf7",
+          "Colormap notices": "dbb9ad7495a83b0f2f48c94b06e23020587d82f8d1492dcb717fb1ebc2f86c18",
+          "DejaVu font notices": "7a083b136e64d064794c3419751e5c7dd10d2f64c108fe5ba161eae5e5958a93",
+          "Godot Engine \u2014 MIT License": "b0435e3b3e4e55238f05f4b306f30524a1b2e20147810d436eaa554fa6855c80",
+          "Godot third-party notices": "1288215255d0a55623f7726ef90772926449514cb230abb76dc2a86c9a5d72dd",
+          "SimScope \u2014 PolyForm Noncommercial 1.0.0": "9ef5c30eae3a6970dbe5029e4f77d6ade72ab9c6fa72d51b7e9b229bd1d304f6",
+          "Third-party inventory": "de23bd2e267e1c96c634b839efebbaecea58e6e8de65955a59fe0eb9d32dc5ac"
+        }
+      },
+      "status_jobs": {
+        "checks": 257,
+        "failures": 0,
+        "status": "PASS",
+        "source_hashes_unchanged": {
+          "/home/Nozba/Codex/SIMSCOPE/cleanup-147/final/status-gl_compatibility-final/scene.ssc": "e09637d2e573493ae7204112b8bb688f89bfb0a3b17725debbc5d1c88e252928",
+          "/home/Nozba/Codex/SIMSCOPE/cleanup-147/final/status-gl_compatibility-final/fields.ssc": "0126145cbb14330690b78dcac244154595b838fbdb20124e063ea3e8d145046d"
+        },
+        "known_encoder_cleanup_diagnostics": [
+          "ERROR: The process 50251 does not exist or is not a child of the calling process.\n   at: _check_pid_is_running (drivers/unix/os_unix.cpp:863)\n   GDScript backtrace (most recent call first):\n       [0] finish (res://video/render_worker.gd:64)\n       [1] encode (res://video/render_worker.gd:340)\n",
+          "ERROR: The process 50251 does not exist or is not a child of the calling process.\n   at: _check_pid_is_running (drivers/unix/os_unix.cpp:863)\n   GDScript backtrace (most recent call first):\n       [0] _exit_tree (res://video/render_worker.gd:50)\n"
+        ]
+      },
+      "scientific_video": {
+        "checks": 225,
+        "failures": 0,
+        "status": "PASS"
+      }
+    }
+  },
+  "native_assertions": 5850,
+  "python_version_tests": 2,
+  "notice_sync_check": "PASS",
+  "python_compile": "PASS",
+  "whitespace_check": "PASS",
+  "logo_sha256": "b666a782e6f3a482ae8e87bee5231aaaa7b7711e4d2ba7a91362f7cbdc6e9722",
+  "scientific_comparison": [
+    {
+      "renderer": "forward_plus",
+      "accepted_main": "d23f43164858f2ea64a9ebc9aa2de444d69a7c08",
+      "frames": [
+        {
+          "frame": "frame00000000.png",
+          "dimensions": [
+            960,
+            540
+          ],
+          "rgb_sha256": "b1179f7fb584ea03b5eb254da74346e905b2b9fd4e5fe258f686b8f8a992aae3"
+        },
+        {
+          "frame": "frame00000001.png",
+          "dimensions": [
+            960,
+            540
+          ],
+          "rgb_sha256": "4a86d4b9baa66cdc78dd037e7467fe53322551782c0f7b7be4860c844128e96c"
+        }
+      ],
+      "timing_identical": true,
+      "scientific_evidence_identical": true,
+      "source_sha256_unchanged": "0a86c305f46adedda03b2d81a6803b6fa6832c995ee21586e629b402923220d0"
+    },
+    {
+      "renderer": "gl_compatibility",
+      "accepted_main": "d23f43164858f2ea64a9ebc9aa2de444d69a7c08",
+      "frames": [
+        {
+          "frame": "frame00000000.png",
+          "dimensions": [
+            960,
+            540
+          ],
+          "rgb_sha256": "cd751b3e43c495c42a6fd07de501ddd33f9559db1fc81d4b24f00907219bd783"
+        },
+        {
+          "frame": "frame00000001.png",
+          "dimensions": [
+            960,
+            540
+          ],
+          "rgb_sha256": "0058c340aaa4b5723ac53c6a0b02ac0ee21003bcf1ce473d9721aa8a8d79cc37"
+        }
+      ],
+      "timing_identical": true,
+      "scientific_evidence_identical": true,
+      "source_sha256_unchanged": "6f2be1f5bd503808aee8499de94c55c276a85d7ea9e83182b0e5fb67ba4ef95f"
+    }
+  ],
+  "keyboard_baseline_comparison": {
+    "baseline": [
+      "KEYBOARD before=32 focus=true control=CheckButton playing=false filters={  }",
+      "KEYBOARD press=32 playing=false filters={  }",
+      "KEYBOARD release=32 playing=true filters={ 0: true }",
+      "KEYBOARD before=4194309 focus=true control=CheckButton playing=false filters={ 0: true }",
+      "KEYBOARD press=4194309 playing=false filters={ 0: true }",
+      "KEYBOARD release=4194309 playing=false filters={  }"
+    ],
+    "candidate": [
+      "KEYBOARD before=32 focus=true control=CheckBox playing=false filters={  }",
+      "KEYBOARD press=32 playing=false filters={  }",
+      "KEYBOARD release=32 playing=true filters={ 0: true }",
+      "KEYBOARD before=4194309 focus=true control=CheckBox playing=false filters={ 0: true }",
+      "KEYBOARD press=4194309 playing=false filters={ 0: true }",
+      "KEYBOARD release=4194309 playing=false filters={  }"
+    ]
+  },
+  "development_failures": [
+    "Restricted import could not create local sockets or save editor settings; authorized import completed cleanly.",
+    "New/updated test declarations and stale removed-widget references were corrected before final validation.",
+    "New filter assertion assumed Space did not start playback; baseline probe reproduced identical behavior on accepted main. Enter activation is independently covered.",
+    "First Compatibility Wayland fullscreen harness rejected a cached-shader recompilation warning although all 74 assertions passed; warmed repeat passed.",
+    "Old About test compared a compositor-clamped window against 480x480; accepted main had the same two failures. The isolated test now clears its native minimum and records actual size.",
+    "One About test-only attempt to restore the native minimum immediately before shutdown passed all assertions but Godot exited with signal 11; that shutdown resize was removed. Final source runs exited cleanly."
+  ],
+  "limitations": [
+    "Physical 4K/KDE and mixed-monitor quality remain unverified. Requested 3840x2160 was clamped to actual 2560x1394; 200% logical scale was verified.",
+    "Focused Space on rebuilt Particle Filters also starts playback on both accepted main and candidate; Enter changes membership without playback. Existing behavior retained under the issue scope boundary.",
+    "Validation uses complete small synthetic fixtures; no large production capture run, utilization/power profile, or subjective owner acceptance is claimed.",
+    "Standalone release packaging and real browser dispatch were not rerun; source About validates packaged resource dependencies and injected link outcomes.",
+    "Wayland native fullscreen runs report the existing libdecor GTK plugin initialization warning; the configured harness permits only that fallback message.",
+    "Status/job suites retain two known encoder-PID cleanup diagnostics per renderer through their existing allowlist; all 257 assertions pass. The diagnostic paths and messages are retained in results."
+  ],
+  "historical_evidence": "Existing issue-143 and issue-96 review reports/screenshots remain unchanged.",
+  "project_status_before_push": "In progress (initial selection was the only Ready item; no Project writes performed)"
+}

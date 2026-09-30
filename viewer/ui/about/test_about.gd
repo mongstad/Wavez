@@ -64,6 +64,10 @@ func run() -> void:
 	await settle()
 	check(viewer.generic_reader != null,"Synthetic capture opens normally")
 	var layouts := []
+	# #143 native chrome sets a 970x600 minimum. Allow the isolated About
+	# compact cases to reach their requested sizes instead of comparing a
+	# compositor-clamped viewport against an impossible 480x480 request.
+	root.min_size = Vector2i.ZERO
 	for dimensions in [Vector2i(1440,900),Vector2i(1920,1080),Vector2i(800,600),Vector2i(480,480)]:
 		root.content_scale_size = Vector2i.ZERO; root.content_scale_factor = 1; root.size = dimensions
 		await settle(); shell.layout(); await settle()
@@ -99,7 +103,7 @@ func run() -> void:
 		check(not dialog.visible,"Close dismisses About")
 		check(Visual.snapshot(viewer) == before and viewer.committed_sample == committed and not viewer.playing,"About leaves scientific/session state unchanged "+str(dimensions))
 		check(viewer.selection_controller.jobs.serial == requests,"About makes no analysis request")
-		layouts.append({"viewport":str(dimensions),"dialog":str(dialog.size)})
+		layouts.append({"viewport":str(dimensions),"actual_viewport":str(root.size),"dialog":str(dialog.size)})
 	open_about(shell); await settle()
 	var requested := []; var normal_opener: Callable = dialog.url_opener
 	dialog.url_opener = func(url):requested.append(url);return ERR_UNAVAILABLE

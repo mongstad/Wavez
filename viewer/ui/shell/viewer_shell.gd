@@ -17,7 +17,6 @@ var dock: PanelContainer
 var scroll: ScrollContainer
 var tabs: GridContainer
 var chooser: OptionButton
-var source_button: Button
 var navigation: HBoxContainer
 var edge_reveal
 var bottom_strip: Control
@@ -68,11 +67,6 @@ func setup(owner_viewer) -> void:
 	brand.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	brand.tooltip_text = "SimScope · Drag to move window · Double-click to maximize/restore"
 	brand.mouse_filter = Control.MOUSE_FILTER_STOP; row.add_child(brand)
-	source_button = button(row, "", show_source, "info")
-	source_button.tooltip_text = "Source details"
-	source_button.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
-	source_button.alignment = HORIZONTAL_ALIGNMENT_LEFT
-	source_button.custom_minimum_size.x = 32
 	title_drag = Control.new(); title_drag.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	title_drag.tooltip_text = "Drag to move window · Double-click to maximize/restore"; row.add_child(title_drag)
 	edge_reveal = preload("res://ui/shell/edge_reveal.gd").new()
@@ -103,7 +97,7 @@ func setup(owner_viewer) -> void:
 	content.add_child(adapter); content.add_child(viewer.inspector_box)
 	particle_empty = Label.new();particle_empty.text = "No particles";content.add_child(particle_empty)
 	navigation = HBoxContainer.new(); row.add_child(navigation)
-	row.move_child(navigation, source_button.get_index()+1)
+	row.move_child(navigation, brand.get_index()+1)
 	var frame_action := button(navigation, "", viewer._focus_activity, "frame"); frame_action.tooltip_text = "Frame scene [F]"
 	var reset_action := button(navigation, "", viewer._reset_camera, "reset"); reset_action.tooltip_text = "Reset camera [R]"
 	var navigate := MenuButton.new(); navigate.flat = false; navigate.icon = icon("view"); navigate.tooltip_text = "Navigate [Alt+N]"; navigate.custom_minimum_size.y = 32; navigation.add_child(navigate); decorate_menu(navigate)
@@ -253,10 +247,10 @@ func restore_focus() -> void:
 	if previous_focus != null:
 		var control = previous_focus.get_ref()
 		if is_instance_valid(control) and control.is_visible_in_tree(): control.grab_focus(); return
-	source_button.grab_focus()
+	navigation.get_child(0).grab_focus()
 
 func refresh() -> void:
-	if source_button == null: return
+	if menus.is_empty(): return
 	var loaded: bool = viewer.generic_reader != null
 	refresh_commands()
 	viewer.tools_ui.refresh_context()
@@ -428,6 +422,7 @@ func build_menus(row: HBoxContainer) -> void:
 		menus[entry[0]].about_to_popup.connect(refresh_commands)
 	var file: PopupMenu = menus.File.get_popup()
 	command(file,"Open capture",viewer._show_open_dialog,"open")
+	command(file,"Details…",func(): status_ui.show_status(),"details")
 	var state := submenu(file,"State")
 	command(state,"Copy state",viewer._copy_inspection_state,"copy")
 	command(state,"Save view preset…",viewer._show_recipe_dialog.bind(true),"Save scene")
@@ -489,7 +484,7 @@ func refresh_commands() -> void:
 	var particles: bool = loaded and viewer.scene_layers != null and not viewer.scene_layers.particle_id.is_empty()
 	for key in commands:
 		var entry: Dictionary = commands[key]
-		var enabled: bool = loaded or key in ["open","fullscreen","shortcuts","handbook","about"]
+		var enabled: bool = loaded or key in ["open","details","fullscreen","shortcuts","handbook","about"]
 		if key in ["probe","tool:Quick setup","tool:Clipping","tool:Isosurface","tool:Source probe"]: enabled = fields
 		if key == "tool:Mapping": enabled = particles
 		if key in ["tool:Slice","tool:Derive range"]: enabled = fields or particles

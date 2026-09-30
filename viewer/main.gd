@@ -863,6 +863,18 @@ func _check(parent: Control, title: String, initial: bool, action: Callable) -> 
 	control_checks[title] = check
 	return check
 
+func _membership_check(parent: Control, title: String, initial: bool, action: Callable) -> CheckBox:
+	# Type rows select members of a set; retain the same control key and callback.
+	var check := CheckBox.new()
+	check.text = title
+	check.button_pressed = initial
+	check.toggled.connect(action)
+	parent.add_child(check)
+	control_checks[title] = check
+	check.theme = shell.style_slice.theme
+	shell.style_slice.animate_buttons(check)
+	return check
+
 func _option(parent: Control, title: String) -> OptionButton:
 	var label := Label.new()
 	label.text = title
@@ -1184,7 +1196,7 @@ func _refresh_mapping_options_profiled() -> void:
 		var types: Dictionary = {}
 		for value in types_now: types[int(value)] = true
 		for value in types:
-			var filter := _check(filter_box, _type_label(value), not hidden_types.has(value), func(v: bool):
+			var filter := _membership_check(filter_box, _type_label(value), not hidden_types.has(value), func(v: bool):
 				if v: hidden_types.erase(value)
 				else: hidden_types[value] = true
 				_restyle())

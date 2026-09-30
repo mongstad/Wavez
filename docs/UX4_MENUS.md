@@ -1,5 +1,10 @@
 # UX4 command menus — issue #67
 
+Current #147 update: File contains a direct **Details…** command for the existing
+source/status dialog. The permanent Source icon, filename and status Details
+action are removed. See [the cleanup contract](UX5_CLEANUP.md). The original
+implementation report below retains its review-time wording and menu count.
+
 Implementation **pending owner review**. Baseline `34edfca`, owner-merged #66 in
 PR #72. Issue #67 was the only Ready item on Project 1; the existing linked branch
 is `67-ux4-menu-001-build-file-view-and-tools-menus`. The accepted
