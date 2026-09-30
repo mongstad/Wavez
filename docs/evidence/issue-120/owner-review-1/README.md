@@ -28,7 +28,9 @@ Auto Orbit rotated the same broken reset view. The reproduction logs are clean:
 this is functional clipping/framing failure, not an engine crash or NaN transform.
 
 [Forward+ trace](forward-reproduction.json) and [Compatibility trace](compatibility-reproduction.json)
-retain all target/radius/basis/origin/clip values and counts. The reproduction uses
+retain all target/radius/basis/origin/clip values and counts. Reproduction logs
+omit only the engine header's trailing blank line for repository whitespace checks.
+The reproduction uses
 synthetic data; the owner's exact production capture was not supplied.
 
 ## Changes and final evidence
