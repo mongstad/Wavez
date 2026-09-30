@@ -98,6 +98,7 @@ var camera_distance := 112.0
 var dragging := false
 var last_mouse := Vector2.ZERO
 var custom_orbit := false
+var scene_camera_frame := {} # Loaded-scene recovery; never a portable preset field.
 var orbit_setup
 
 var current_instance: MultiMeshInstance3D
@@ -596,12 +597,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		elif mouse_button.pressed and mouse_button.button_index == MOUSE_BUTTON_WHEEL_UP:
 			_align_custom_orbit()
 			camera_distance = maxf(0.0001 if custom_orbit else 8.0, camera_distance * 0.90)
-			if custom_orbit: _custom_camera_clip()
 			_update_camera()
 		elif mouse_button.pressed and mouse_button.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			_align_custom_orbit()
 			camera_distance = minf(1e12 if custom_orbit else 500.0, camera_distance * 1.11)
-			if custom_orbit: _custom_camera_clip()
 			_update_camera()
 	elif event is InputEventMouseMotion and dragging:
 		var mouse_event: InputEventMouseMotion = event as InputEventMouseMotion
@@ -615,7 +614,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			KEY_LEFT: _step_frame(-1)
 			KEY_RIGHT: _step_frame(1)
 			KEY_SPACE: _toggle_playback()
-			KEY_O: orbit_enabled = not orbit_enabled; inspection_paused = false; _sync_control_state()
+			KEY_O: _set_auto_orbit(not orbit_enabled); _sync_control_state()
 			KEY_T: _toggle_trails()
 			KEY_F: _focus_activity()
 			KEY_V: _set_point_rendering(not clean_view)
@@ -625,7 +624,17 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _reset_camera() -> void:
 	_clear_custom_orbit()
-	camera_target = Vector3.ZERO; yaw = deg_to_rad(38.0); pitch = deg_to_rad(24.0); camera_distance = maxf(30.0, half_extent * 2.8); _update_camera()
+	# Recover independently of the custom target, transform and clipping. World
+	# origin is not a usable reset target for an off-center loaded capture.
+	camera_target = scene_camera_frame.get("center", Vector3.ZERO)
+	var extent: float = scene_camera_frame.get("extent", 40.0)
+	yaw = deg_to_rad(38.0); pitch = deg_to_rad(24.0)
+	camera_distance = extent * 2.8
+	dragging = false
+	if not is_finite(camera.fov) or camera.fov < 1 or camera.fov > 179: camera.fov = 55.0
+	camera.near = .05; camera.far = maxf(1000.0, camera_distance * 5.0)
+	var orientation := Basis(Vector3.UP, yaw) * Basis(Vector3.RIGHT, -pitch)
+	camera.transform = Transform3D(orientation, camera_target + orientation.z * camera_distance)
 
 func _orbit_setup_active() -> bool:
 	return orbit_setup != null and orbit_setup.active
@@ -634,18 +643,36 @@ func _clear_custom_orbit() -> void:
 	if orbit_setup != null: orbit_setup.cancel()
 	if custom_orbit:
 		camera.near = .05
-		camera.far = maxf(1000.0, half_extent * 2.8 * 5.0)
+		camera.far = maxf(1000.0, float(scene_camera_frame.get("extent", 40.0)) * 14.0)
 	custom_orbit = false
 
+func _camera_pose_valid() -> bool:
+	if not camera_target.is_finite() or not is_finite(camera_distance) or camera_distance <= 0 or camera_distance > 1e12 or not is_finite(yaw) or not is_finite(pitch): return false
+	if not camera.transform.is_finite() or absf(camera.basis.determinant()-1.0) >= .001 or not camera.basis.is_equal_approx(camera.basis.orthonormalized()): return false
+	return is_finite(camera.fov) and camera.fov >= 1 and camera.fov <= 179 and is_finite(camera.near) and camera.near > 0 and is_finite(camera.far) and camera.far > camera.near
+
+func _set_auto_orbit(enabled: bool) -> void:
+	if enabled and not _orbit_setup_active():
+		if not _camera_pose_valid(): _reset_camera()
+		elif custom_orbit: _custom_camera_clip()
+	orbit_enabled = enabled
+	inspection_paused = false
+
 func _custom_camera_clip() -> void:
-	# Keep a representable projection at both tiny and very large local scales.
-	# A scene-sized far plane with a microscopic near plane can be singular in
-	# the native renderer. This changes camera clipping only for custom orbit.
-	camera.near = maxf(0.000001, camera_distance * .0001)
-	camera.far = maxf(camera_distance * 8.0, camera.near * 1000.0)
+	# Radius alone is not a far-plane budget: a small local orbit must not cull
+	# the loaded scene. Keep the complete framed bounds in range from this pose.
+	var reach := camera_distance * 8.0
+	if not scene_camera_frame.is_empty():
+		var scene_distance: float = maxf(camera.position.distance_to(scene_camera_frame.center),camera_target.distance_to(scene_camera_frame.center)+camera_distance)
+		reach = maxf(reach, scene_distance + scene_camera_frame.extent * 2.0)
+	camera.far = maxf(reach, .0001)
+	# Bound the clip ratio as well; tiny near + scene-sized far can make the
+	# Forward+ projection singular. This depends on the actual scene/camera scale.
+	camera.near = maxf(.000001, camera.far / 90000.0)
 
 func _align_custom_orbit() -> void:
 	if not custom_orbit or _orbit_setup_active(): return
+	if not _camera_pose_valid(): _reset_camera(); return
 	var orientation := Basis(Vector3.UP, yaw) * Basis(Vector3.RIGHT, -pitch)
 	if camera.position.distance_to(camera_target + orientation.z * camera_distance) <= maxf(.00001, camera_distance * .000001): return
 	# Deliberately resuming orbit after free translation keeps the pivot and
@@ -663,11 +690,14 @@ func _align_custom_orbit() -> void:
 
 func _advance_orbit(delta: float) -> void:
 	if not orbit_enabled or dragging or orbit_speed == 0.0 or _orbit_setup_active(): return
+	if not _camera_pose_valid(): _reset_camera()
 	_align_custom_orbit()
 	yaw += delta * orbit_speed
 	_update_camera()
 
 func _update_camera() -> void:
+	if not camera_target.is_finite() or not is_finite(camera_distance) or camera_distance <= 0 or camera_distance > 1e12 or not is_finite(yaw) or not is_finite(pitch):
+		_reset_camera(); return
 	# Carry the camera up axis through the poles instead of reconstructing it
 	# from world-up (look_at becomes singular at +/-90 degrees and flips beyond).
 	# This is the existing yaw/pitch orbit with continuous orientation; keeping
@@ -678,6 +708,7 @@ func _update_camera() -> void:
 		orbit_setup.refresh()
 		return
 	camera.transform = Transform3D(orientation, camera_target + orientation.z * camera_distance)
+	if custom_orbit: _custom_camera_clip()
 
 func _comma(v: Variant) -> String:
 	var s := str(v)
@@ -1110,6 +1141,7 @@ func _move_free_camera(delta: float) -> void:
 	if custom_orbit or _orbit_setup_active():
 		camera.position += shift
 		if _orbit_setup_active(): orbit_setup.refresh()
+		elif custom_orbit: _custom_camera_clip()
 		return
 	camera_target += shift
 	_update_camera()
@@ -1138,6 +1170,7 @@ func _open_scene(path: String) -> void:
 	_reset_inspection_source()
 	if generic_reader != null: generic_reader.close()
 	generic_reader = reader;reader_generation = reader.generation
+	scene_camera_frame.clear()
 	reader.configure_cache(decoded_cache_mib*1048576,false)
 	capture = reader.file;capture_path = path;frame_count = reader.frames.size()
 	frame_a = null;frame_b = null;current_index = 0;phase = 0;history.clear();hidden_types.clear();channel_signature = ""

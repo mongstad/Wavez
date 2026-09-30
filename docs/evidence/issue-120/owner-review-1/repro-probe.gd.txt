@@ -1,0 +1,50 @@
+extends SceneTree
+const Viewer = preload("res://main.gd")
+const Visual = preload("res://scene/visual_state.gd")
+var view
+var out := ""
+var traces := {}
+var viewport: SubViewport
+var observer: Camera3D
+func _initialize() -> void: run.call_deferred()
+func snapshot(label: String) -> void:
+	observer.transform = view.camera.global_transform
+	observer.fov = view.camera.fov; observer.near = view.camera.near; observer.far = view.camera.far
+	viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
+	for n in 4: await process_frame
+	await RenderingServer.frame_post_draw
+	var image := viewport.get_texture().get_image()
+	image.save_png(out.path_join(label+".png"))
+	var colored := 0
+	var background := image.get_pixel(0,0)
+	for x in image.get_width():
+		for y in image.get_height():
+			var color := image.get_pixel(x,y)
+			if absf(color.r-background.r)+absf(color.g-background.g)+absf(color.b-background.b) > .05: colored += 1
+	var state := Visual.snapshot(view)
+	traces[label] = {"target":state.camera_target,"radius":view.camera_distance,"transform":state.camera_transform,"near":view.camera.near,"far":view.camera.far,"scene_pixels":colored}
+	viewport.render_target_update_mode = SubViewport.UPDATE_DISABLED
+func run() -> void:
+	out = OS.get_cmdline_user_args()[0]
+	create_timer(90).timeout.connect(func():quit(1))
+	view = Viewer.new();root.add_child(view);view.set_process(false)
+	await process_frame
+	view._open_capture(OS.get_cmdline_user_args()[1]);view.playing = false;view.orbit_enabled = false;view.free_camera = true
+	view.starfield.hide();view.guide_mesh.hide();view.environment.background_mode = Environment.BG_COLOR;view.environment.background_color = Color(.02,.02,.02);view.environment.fog_enabled = false
+	viewport = SubViewport.new();viewport.size = Vector2i(640,400);viewport.world_3d = view.get_world_3d();root.add_child(viewport)
+	observer = Camera3D.new();viewport.add_child(observer);observer.current = true
+	await snapshot("before")
+	view.orbit_setup.begin()
+	traces["guide"] = {"radius":view.orbit_setup.radius,"center_distance":view.camera.position.distance_to(view.orbit_setup.pivot),"camera_on_surface":is_equal_approx(view.orbit_setup.radius,view.camera.position.distance_to(view.orbit_setup.pivot))}
+	for n in 3:await process_frame
+	await RenderingServer.frame_post_draw
+	root.get_texture().get_image().save_png(out.path_join("guide.png"))
+	view.orbit_setup.set_radius(.01);view.orbit_setup.commit()
+	await snapshot("committed")
+	view._reset_camera()
+	await snapshot("reset")
+	view.orbit_enabled = true;view.orbit_speed = .2;view._advance_orbit(.1)
+	await snapshot("auto-orbit")
+	var file := FileAccess.open(out.path_join("trace.json"),FileAccess.WRITE);file.store_string(JSON.stringify(traces,"\t"));file.close()
+	viewport.queue_free();view.queue_free();await process_frame;await process_frame
+	quit()

@@ -1,0 +1,8 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 615.71.09 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 3070 Ti
+
+ORBIT_SETUP: 1028 checks, 0 failures
+ERROR: Texture with GL ID of 141: leaked 349524 bytes.
+   at: ~Utilities (drivers/gles3/storage/utilities.cpp:82)
+ERROR: Texture with GL ID of 142: leaked 349524 bytes.
+   at: ~Utilities (drivers/gles3/storage/utilities.cpp:82)

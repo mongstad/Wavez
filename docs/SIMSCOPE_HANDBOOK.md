@@ -216,14 +216,18 @@ chosen orbit center retain their previous roles. O toggles automatic world-Y
 orbit independently; manual dragging temporarily suspends it.
 
 With Free camera enabled, hold **RMB inside the viewport** to configure a custom
-orbit around any region. The proposed pivot is the camera position plus its
-forward direction times the selected radius. Use the logarithmic slider or wheel
-(**Shift+wheel** for fine adjustment), and continue WASD/QE flight and mouse-look.
-Release RMB to commit; **R** cancels/resets through the existing Reset Camera
-action. Temporary violet radius guides and their panel are excluded from PNGs
-and video. Free movement after commit retains the pivot; deliberately resuming
-orbit reconciles its distance from the current position. Reset/Frame Scene
-replace the custom pivot. See [custom orbit setup](CUSTOM_ORBIT_SETUP.md).
+orbit around any region. A compact sphere starts ahead of the camera. Wheel
+adjusts its radius by 1.6× per notch; **Shift+wheel** uses 1.01× for fine adjustment.
+The logarithmic **Target distance** slider places the pivot independently along
+the viewing ray. Continue WASD/QE flight and mouse-look. The panel states the
+camera movement on release: committing moves to the sphere's near side, at the
+chosen radius, preserving orientation. **R** abandons/reset custom state and
+restores the loaded scene's framed center/distance with default yaw/pitch and
+normal clipping, including off-center captures. Auto Orbit repairs broken custom
+clipping or restores an invalid camera before rotating. Frame Scene retains its
+current-scene framing and orientation behavior. Temporary guides/panel are absent
+from PNGs/video. Free movement after commit keeps the pivot; resuming orbit
+reconciles distance from the current position. See [custom orbit setup](CUSTOM_ORBIT_SETUP.md).
 
 Presets retain yaw, pitch, target, distance and full transform, plus the generic
 `custom_orbit` flag. They can save pole and upside-down orientations within the

@@ -46,10 +46,13 @@ About uses the unchanged owner-supplied violet logo. Scientific behavior, saved
 state, dropdown styling, #117 edge/fullscreen and #118 redraw contracts remain intact.
 Current authorized work is #120, the top Ready item at initial inspection on
 2026-09-30 (subsequently In progress, explicitly confirmed by the owner):
-[custom orbit setup](CUSTOM_ORBIT_SETUP.md), **pending owner UX review**, candidate
-build 12. Free camera uses an RMB hold with live movement/look, logarithmic radius
-adjustment and temporary guides; release commits a source-independent pivot. R
-cancels through Reset Camera. Custom pivots survive later free movement and
+[custom orbit setup](CUSTOM_ORBIT_SETUP.md), **pending owner verification after requested changes**, candidate
+build 12. Free camera uses an RMB hold with a compact sphere ahead of the camera,
+independent target-distance/radius controls, coarse wheel (1.6×) and fine
+Shift+wheel (1.01×). Release commits the indicated camera landing and pivot.
+Custom clipping retains framed scene bounds; Reset restores visible off-center
+scene framing, and Auto Orbit recovers malformed camera state. Rendered recovery
+is covered on both renderers. Custom pivots survive later free movement and
 portable presets. Screenshot/video paths exclude the temporary preview.
 Ordinary recipe save/load uses a small source-independent presentation JSON and
 direct platform file picker. Scientific inspection bundles remain separate.

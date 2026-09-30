@@ -49,6 +49,11 @@ nonsingular. Range, logarithm, opacity and camera constraints are validated too.
 | `volume` | `colormap`, `lower`, `upper`, `legend`, `opacity`, `step`, `normalization`, `opacity_mode`, `opacity_lower`, `opacity_upper` |
 | `mesh` | `colormap`, `lower`, `upper`, `legend`, `wireframe` |
 
+Custom orbit proposals and the loaded scene's camera recovery bounds are not
+saved. Presets retain only the committed generic camera presentation. Reset uses
+the current source's last successful framing; enabling Auto Orbit repairs custom
+clipping against that scene and restores malformed camera state before rotating.
+
 The schema and validation bounds live in
 [view_preset.gd](../viewer/scene/view_preset.gd). Volume/mesh groups capture the
 **currently selected object of that kind**, and apply to the current selection in

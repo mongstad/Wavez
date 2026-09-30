@@ -1,0 +1,77 @@
+[
+  {
+    "name": "import",
+    "exit_code": 0,
+    "output": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\n[   0% ] \u001b[90m\u001b[1mfirst_scan_filesystem\u001b[22m | Started Project initialization (5 steps)\u001b[39m\u001b[0m\n[   0% ] \u001b[90m\u001b[1mfirst_scan_filesystem\u001b[22m | Scanning file structure...\u001b[39m\u001b[0m\n[  16% ] \u001b[90m\u001b[1mfirst_scan_filesystem\u001b[22m | Loading global class names...\u001b[39m\u001b[0m\n[  33% ] \u001b[90m\u001b[1mfirst_scan_filesystem\u001b[22m | Verifying GDExtensions...\u001b[39m\u001b[0m\n[  50% ] \u001b[90m\u001b[1mfirst_scan_filesystem\u001b[22m | Creating autoload scripts...\u001b[39m\u001b[0m\n[  66% ] \u001b[90m\u001b[1mfirst_scan_filesystem\u001b[22m | Initializing plugins...\u001b[39m\u001b[0m\n[  83% ] \u001b[90m\u001b[1mfirst_scan_filesystem\u001b[22m | Starting file scan...\u001b[39m\u001b[0m\n\u001b[92m[ DONE ]\u001b[39m \u001b[1mfirst_scan_filesystem\u001b[22m\n\u001b[0m\n[   0% ] \u001b[90m\u001b[1mupdate_scripts_classes\u001b[22m | Started Registering global classes... (6 steps)\u001b[39m\u001b[0m\n[   0% ] \u001b[90m\u001b[1mupdate_scripts_classes\u001b[22m | \u001b[39m\u001b[0m\n[  14% ] \u001b[90m\u001b[1mupdate_scripts_classes\u001b[22m | \u001b[39m\u001b[0m\n[  28% ] \u001b[90m\u001b[1mupdate_scripts_classes\u001b[22m | \u001b[39m\u001b[0m\n[  42% ] \u001b[90m\u001b[1mupdate_scripts_classes\u001b[22m | \u001b[39m\u001b[0m\n[  57% ] \u001b[90m\u001b[1mupdate_scripts_classes\u001b[22m | \u001b[39m\u001b[0m\n[  71% ] \u001b[90m\u001b[1mupdate_scripts_classes\u001b[22m | \u001b[39m\u001b[0m\n\u001b[92m[ DONE ]\u001b[39m \u001b[1mupdate_scripts_classes\u001b[22m\n\u001b[0m\n[   0% ] \u001b[90m\u001b[1mloading_editor_layout\u001b[22m | Started Loading editor (5 steps)\u001b[39m\u001b[0m\n[   0% ] \u001b[90m\u001b[1mloading_editor_layout\u001b[22m | Loading editor layout...\u001b[39m\u001b[0m\n[  16% ] \u001b[90m\u001b[1mloading_editor_layout\u001b[22m | Loading docks...\u001b[39m\u001b[0m\n[  33% ] \u001b[90m\u001b[1mloading_editor_layout\u001b[22m | Reopening scenes...\u001b[39m\u001b[0m\n[  50% ] \u001b[90m\u001b[1mloading_editor_layout\u001b[22m | Loading central editor layout...\u001b[39m\u001b[0m\n[  66% ] \u001b[90m\u001b[1mloading_editor_layout\u001b[22m | Loading plugin window layout...\u001b[39m\u001b[0m\n[  83% ] \u001b[90m\u001b[1mloading_editor_layout\u001b[22m | Editor layout ready.\u001b[39m\u001b[0m\n\u001b[92m[ DONE ]\u001b[39m \u001b[1mloading_editor_layout\u001b[22m\n\u001b[0m\n"
+  },
+  {
+    "name": "forward_plus-camera_tumble",
+    "exit_code": 0,
+    "output": "Camera tumble: 13044 checks PASS (forward_plus); capture hashes unchanged\n"
+  },
+  {
+    "name": "forward_plus-view_preset",
+    "exit_code": 0,
+    "output": "Preset: 838 PASS (forward_plus)\n"
+  },
+  {
+    "name": "forward_plus-viewer_shell",
+    "exit_code": 0,
+    "output": "Viewer shell: 667 checks PASS (forward_plus); source hashes unchanged\n"
+  },
+  {
+    "name": "forward_plus-edge_reveal",
+    "exit_code": 0,
+    "output": "Edge reveal: 210 checks PASS (forward_plus); sources unchanged\n"
+  },
+  {
+    "name": "forward_plus-render_pacing",
+    "exit_code": 0,
+    "output": "Render pacing: 290 checks PASS (forward_plus)\n"
+  },
+  {
+    "name": "forward_plus-viewer_status",
+    "exit_code": 0,
+    "output": "Status: 257 checks PASS (forward_plus); sources unchanged\n"
+  },
+  {
+    "name": "forward_plus-video_current",
+    "exit_code": 0,
+    "output": "ed-ui: MP4 dimensions/count/FPS\nPASS: mixed-ui: half-open output times within JSON decimal precision\nPASS: mixed-ui/0: strict bounded synchronous offline path\nPASS: mixed-ui/0: requested backend\nPASS: mixed-ui/0: explicit scientific legend gate\nPASS: mixed-ui/0: deterministic orbit\nPASS: mixed-ui/0: requested particle mapping survives start-time restore\nPASS: mixed-ui/0: exact IDs and interpolated particle positions\nPASS: mixed-ui/0: mesh interpolation and display winding\nPASS: mixed-ui/0: selected exact float64 source channel\nPASS: mixed-ui/0: exact uploaded float32 plane bytes\nPASS: mixed-ui/0: full field and requested transfer state\nPASS: mixed-ui/1: strict bounded synchronous offline path\nPASS: mixed-ui/1: requested backend\nPASS: mixed-ui/1: explicit scientific legend gate\nPASS: mixed-ui/1: deterministic orbit\nPASS: mixed-ui/1: requested particle mapping survives start-time restore\nPASS: mixed-ui/1: exact IDs and interpolated particle positions\nPASS: mixed-ui/1: mesh interpolation and display winding\nPASS: mixed-ui/1: selected exact float64 source channel\nPASS: mixed-ui/1: exact uploaded float32 plane bytes\nPASS: mixed-ui/1: full field and requested transfer state\nPASS: mixed-ui: nonempty rendered image\nPASS: production UI and legends affect pixels\nPASS: late: clean native log\nPASS: late: complete (got complete)\nPASS: late: successful worker exit\nPASS: late: MP4 dimensions/count/FPS\nPASS: late: half-open output times within JSON decimal precision\nPASS: late/0: strict bounded synchronous offline path\nPASS: late/0: requested backend\nPASS: late/0: explicit scientific legend gate\nPASS: late/0: deterministic orbit\nPASS: late/0: selected exact float64 source channel\nPASS: late/0: exact uploaded float32 plane bytes\nPASS: late/0: full field and requested transfer state\nPASS: late/1: strict bounded synchronous offline path\nPASS: late/1: requested backend\nPASS: late/1: explicit scientific legend gate\nPASS: late/1: deterministic orbit\nPASS: late/1: selected exact float64 source channel\nPASS: late/1: exact uploaded float32 plane bytes\nPASS: late/1: full field and requested transfer state\nPASS: late: nonempty rendered image\nPASS: overflow: clean native log\nPASS: overflow: failed (got failed)\nPASS: overflow: no misleading MP4 published\nPASS: overflow: actionable failure\nPASS: budget: clean native log\nPASS: budget: failed (got failed)\nPASS: budget: no misleading MP4 published\nPASS: budget: actionable failure\nPASS: corrupt: clean native log\nPASS: corrupt: failed (got failed)\nPASS: corrupt: no misleading MP4 published\nPASS: corrupt: actionable failure\nPASS: particles.ssc: source bytes unchanged\nPASS: late-particles.ssc: source bytes unchanged\nPASS: field.ssc: source bytes unchanged\nPASS: mesh.ssc: source bytes unchanged\nPASS: mixed.ssc: source bytes unchanged\nPASS: late.ssc: source bytes unchanged\nPASS: overflow.ssc: source bytes unchanged\nPASS: budget.ssc: source bytes unchanged\nPASS: corrupt.ssc: source bytes unchanged\nCURRENT VIDEO: 235 checks, 0 failures\n"
+  },
+  {
+    "name": "gl_compatibility-camera_tumble",
+    "exit_code": 0,
+    "output": "Camera tumble: 13044 checks PASS (gl_compatibility); capture hashes unchanged\n"
+  },
+  {
+    "name": "gl_compatibility-view_preset",
+    "exit_code": 0,
+    "output": "Preset: 778 PASS (gl_compatibility)\n"
+  },
+  {
+    "name": "gl_compatibility-viewer_shell",
+    "exit_code": 0,
+    "output": "Viewer shell: 667 checks PASS (gl_compatibility); source hashes unchanged\n"
+  },
+  {
+    "name": "gl_compatibility-edge_reveal",
+    "exit_code": 0,
+    "output": "Edge reveal: 210 checks PASS (gl_compatibility); sources unchanged\n"
+  },
+  {
+    "name": "gl_compatibility-render_pacing",
+    "exit_code": 0,
+    "output": "Render pacing: 290 checks PASS (gl_compatibility)\n"
+  },
+  {
+    "name": "gl_compatibility-viewer_status",
+    "exit_code": 0,
+    "output": "Status: 257 checks PASS (gl_compatibility); sources unchanged\n"
+  },
+  {
+    "name": "gl_compatibility-video_current",
+    "exit_code": 0,
+    "output": "ed mixed export has identical pixels\nPASS: delayed mixed timing manifest identical\nPASS: mixed-ui: clean native log\nPASS: mixed-ui: complete (got complete)\nPASS: mixed-ui: successful worker exit\nPASS: mixed-ui: MP4 dimensions/count/FPS\nPASS: mixed-ui: half-open output times within JSON decimal precision\nPASS: mixed-ui/0: strict bounded synchronous offline path\nPASS: mixed-ui/0: requested backend\nPASS: mixed-ui/0: explicit scientific legend gate\nPASS: mixed-ui/0: deterministic orbit\nPASS: mixed-ui/0: requested particle mapping survives start-time restore\nPASS: mixed-ui/0: exact IDs and interpolated particle positions\nPASS: mixed-ui/0: mesh interpolation and display winding\nPASS: mixed-ui/0: selected exact float64 source channel\nPASS: mixed-ui/0: full field and requested transfer state\nPASS: mixed-ui/1: strict bounded synchronous offline path\nPASS: mixed-ui/1: requested backend\nPASS: mixed-ui/1: explicit scientific legend gate\nPASS: mixed-ui/1: deterministic orbit\nPASS: mixed-ui/1: requested particle mapping survives start-time restore\nPASS: mixed-ui/1: exact IDs and interpolated particle positions\nPASS: mixed-ui/1: mesh interpolation and display winding\nPASS: mixed-ui/1: selected exact float64 source channel\nPASS: mixed-ui/1: full field and requested transfer state\nPASS: mixed-ui: nonempty rendered image\nPASS: production UI and legends affect pixels\nPASS: late: clean native log\nPASS: late: complete (got complete)\nPASS: late: successful worker exit\nPASS: late: MP4 dimensions/count/FPS\nPASS: late: half-open output times within JSON decimal precision\nPASS: late/0: strict bounded synchronous offline path\nPASS: late/0: requested backend\nPASS: late/0: explicit scientific legend gate\nPASS: late/0: deterministic orbit\nPASS: late/0: selected exact float64 source channel\nPASS: late/0: full field and requested transfer state\nPASS: late/1: strict bounded synchronous offline path\nPASS: late/1: requested backend\nPASS: late/1: explicit scientific legend gate\nPASS: late/1: deterministic orbit\nPASS: late/1: selected exact float64 source channel\nPASS: late/1: full field and requested transfer state\nPASS: late: nonempty rendered image\nPASS: overflow: clean native log\nPASS: overflow: failed (got failed)\nPASS: overflow: no misleading MP4 published\nPASS: overflow: actionable failure\nPASS: budget: clean native log\nPASS: budget: failed (got failed)\nPASS: budget: no misleading MP4 published\nPASS: budget: actionable failure\nPASS: corrupt: clean native log\nPASS: corrupt: failed (got failed)\nPASS: corrupt: no misleading MP4 published\nPASS: corrupt: actionable failure\nPASS: particles.ssc: source bytes unchanged\nPASS: late-particles.ssc: source bytes unchanged\nPASS: field.ssc: source bytes unchanged\nPASS: mesh.ssc: source bytes unchanged\nPASS: mixed.ssc: source bytes unchanged\nPASS: late.ssc: source bytes unchanged\nPASS: overflow.ssc: source bytes unchanged\nPASS: budget.ssc: source bytes unchanged\nPASS: corrupt.ssc: source bytes unchanged\nCURRENT VIDEO: 225 checks, 0 failures\n"
+  }
+]

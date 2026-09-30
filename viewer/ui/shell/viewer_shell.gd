@@ -108,8 +108,8 @@ func setup(owner_viewer) -> void:
 	modes.id_pressed.connect(func(id):
 		if id == 0:
 			if viewer.orbit_setup != null: viewer.orbit_setup.cancel()
-			viewer.free_camera = not viewer.free_camera; viewer.orbit_enabled = not viewer.free_camera
-		elif id == 1: viewer.orbit_enabled = not viewer.orbit_enabled; viewer.inspection_paused = false
+			viewer.free_camera = not viewer.free_camera; viewer._set_auto_orbit(not viewer.free_camera)
+		elif id == 1: viewer._set_auto_orbit(not viewer.orbit_enabled)
 		else: viewer.tools_ui.open("Camera")
 		viewer._sync_control_state())
 	window_chrome = preload("res://ui/shell/window_chrome.gd").new(); add_child(window_chrome); window_chrome.setup(self, row)
@@ -451,7 +451,7 @@ func build_menus(row: HBoxContainer) -> void:
 	for title in ["Temporal","Space time","Diagnostics","Compare","Matched runs","Period","Bookmarks","Results"]: command(analysis,title,viewer.tools_ui.open.bind(title),"tool:"+title)
 	for title in ["Mapping","Quick setup","Derive range","Slice","Clipping","Isosurface","Source probe","Performance","Geometry"]: command(tools,title,viewer.tools_ui.open.bind(title),"tool:"+title)
 	var help: PopupMenu = menus.Help.get_popup()
-	command(help,"Shortcuts",func():show_details("Shortcuts","Drag to orbit. Scroll to zoom.\nFree camera: WASD/QE to fly. Hold RMB for orbit setup.\nDuring setup: wheel or slider sets radius; Shift+wheel is fine.\nMove mouse to look; release RMB to commit. R resets/cancels.\nF: Frame scene   R: Reset camera\nO: Auto orbit   Alt+N: Navigate\nF11: Fullscreen\nDouble-click viewport: Fullscreen   Esc: Restore preceding shell\nSpace: Play or pause   Left and Right: Step sample\nTimeline: Drag to scrub; double-click playhead/current time to seek\n\nTab and Shift+Tab move focus. Enter or Space activates buttons.\n\nMidnight Scientific"),"shortcuts")
+	command(help,"Shortcuts",func():show_details("Shortcuts","Drag to orbit. Scroll to zoom.\nFree camera: WASD/QE to fly. Hold RMB for orbit setup.\nSetup wheel: radius ×1.6; Shift+wheel: ×1.01 fine adjustment.\nTarget distance slider places the sphere. Mouse moves the view.\nRelease moves to the sphere surface and commits. R restores scene.\nF: Frame scene   R: Reset camera\nO: Auto orbit   Alt+N: Navigate\nF11: Fullscreen\nDouble-click viewport: Fullscreen   Esc: Restore preceding shell\nSpace: Play or pause   Left and Right: Step sample\nTimeline: Drag to scrub; double-click playhead/current time to seek\n\nTab and Shift+Tab move focus. Enter or Space activates buttons.\n\nMidnight Scientific"),"shortcuts")
 	command(help,"Handbook",func():
 		var path := ProjectSettings.globalize_path("res://../docs/SIMSCOPE_HANDBOOK.md")
 		show_details("Handbook",FileAccess.get_file_as_string(path) if FileAccess.file_exists(path) else "Handbook unavailable in this installation."),"handbook")

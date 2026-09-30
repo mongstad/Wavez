@@ -1,0 +1,74 @@
+[
+  {
+    "capture": "final-forward3/mesh-large-scale.ssc",
+    "exit_code": 0,
+    "result": "Verified 2 records: descriptors, commit proofs, decoded payload checksums, sample constraints and required field statistics.",
+    "errors": ""
+  },
+  {
+    "capture": "final-forward3/mesh-small-scale.ssc",
+    "exit_code": 0,
+    "result": "Verified 2 records: descriptors, commit proofs, decoded payload checksums, sample constraints and required field statistics.",
+    "errors": ""
+  },
+  {
+    "capture": "final-forward3/mesh.ssc",
+    "exit_code": 0,
+    "result": "Verified 2 records: descriptors, commit proofs, decoded payload checksums, sample constraints and required field statistics.",
+    "errors": ""
+  },
+  {
+    "capture": "final-forward3/mixed.ssc",
+    "exit_code": 0,
+    "result": "Verified 11 records: descriptors, commit proofs, decoded payload checksums, sample constraints and required field statistics.",
+    "errors": ""
+  },
+  {
+    "capture": "final-forward3/particles.ssc",
+    "exit_code": 0,
+    "result": "Verified 2 records: descriptors, commit proofs, decoded payload checksums, sample constraints and required field statistics.",
+    "errors": ""
+  },
+  {
+    "capture": "final-forward3/volume.ssc",
+    "exit_code": 0,
+    "result": "Verified 2 records: descriptors, commit proofs, decoded payload checksums, sample constraints and required field statistics.",
+    "errors": ""
+  },
+  {
+    "capture": "final-compatibility/mesh-large-scale.ssc",
+    "exit_code": 0,
+    "result": "Verified 2 records: descriptors, commit proofs, decoded payload checksums, sample constraints and required field statistics.",
+    "errors": ""
+  },
+  {
+    "capture": "final-compatibility/mesh-small-scale.ssc",
+    "exit_code": 0,
+    "result": "Verified 2 records: descriptors, commit proofs, decoded payload checksums, sample constraints and required field statistics.",
+    "errors": ""
+  },
+  {
+    "capture": "final-compatibility/mesh.ssc",
+    "exit_code": 0,
+    "result": "Verified 2 records: descriptors, commit proofs, decoded payload checksums, sample constraints and required field statistics.",
+    "errors": ""
+  },
+  {
+    "capture": "final-compatibility/mixed.ssc",
+    "exit_code": 0,
+    "result": "Verified 11 records: descriptors, commit proofs, decoded payload checksums, sample constraints and required field statistics.",
+    "errors": ""
+  },
+  {
+    "capture": "final-compatibility/particles.ssc",
+    "exit_code": 0,
+    "result": "Verified 2 records: descriptors, commit proofs, decoded payload checksums, sample constraints and required field statistics.",
+    "errors": ""
+  },
+  {
+    "capture": "final-compatibility/volume.ssc",
+    "exit_code": 0,
+    "result": "Verified 2 records: descriptors, commit proofs, decoded payload checksums, sample constraints and required field statistics.",
+    "errors": ""
+  }
+]

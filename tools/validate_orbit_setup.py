@@ -37,6 +37,11 @@ def main():
                     writer.add_volume('object', t, dict(value=(x+2*y+3*z+t).astype('f8')), origin=[1297, -103, 3437], spacing=[1, 1, 1])
                 else:
                     writer.add_mesh('object', t, np.vstack((points, [1300., -100., 3442.+t])), np.array([[0, 1, 2], [0, 1, 3], [0, 2, 3], [1, 2, 3]]), vertex_channels=dict(vertex_id=np.arange(4, dtype='i8')))
+    for name, scale in [('mesh-small-scale', .01), ('mesh-large-scale', 1000.)]:
+        with SceneCapture(out / (name+'.ssc'), objects=[dict(id='object', kind='mesh', units='m', identity='stable_topology')], compression='none') as writer:
+            for t in [0., 1.]:
+                points = (np.array([[-2., 0., 0.], [2., 0., 0.], [0., 3., 1.], [0., 0., 3.]]) + [1300, -100, 3439+t]) * scale
+                writer.add_mesh('object', t, points, np.array([[0, 1, 2], [0, 1, 3], [0, 2, 3], [1, 2, 3]]), vertex_channels=dict(vertex_id=np.arange(4, dtype='i8')))
     hashes = {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in out.glob('*.ssc')}
     env = os.environ.copy()
     env.update(XDG_DATA_HOME=str(out/'userdata'), XDG_CONFIG_HOME=str(out/'config'))
@@ -46,10 +51,9 @@ def main():
         result = subprocess.run(command, cwd=ROOT, env=env, text=True, stdout=stream, stderr=subprocess.STDOUT, timeout=180)
     log = (out/'native.log').read_text()
     report = json.loads((out/'report.json').read_text())
-    assert not report['failures'], report
     assert hashes == {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in out.glob('*.ssc')}, 'Capture bytes changed'
     report['source_hashes_unchanged'] = hashes
-    errors = re.findall(r'^ERROR: .*$', log, flags=re.MULTILINE)
+    errors = re.findall(r'^(?:ERROR|SCRIPT ERROR): .*$', log, flags=re.MULTILINE)
     matched = False
     if errors and args.baseline_log and args.renderer == 'gl_compatibility':
         baseline = re.findall(r'^ERROR: .*$', args.baseline_log.read_text(), flags=re.MULTILINE)
@@ -61,9 +65,10 @@ def main():
     report['runtime'] = dict(exit_code=result.returncode, errors=errors, clean_log=not errors and 'WARNING:' not in log,
                              matched_accepted_main_gl_teardown=matched)
     (out/'report.json').write_text(json.dumps(report, indent=2)+'\n')
+    assert not report['failures'], report['failures']
     assert result.returncode == 0 and (not errors or matched) and 'WARNING:' not in log, out/'native.log'
     suffix = '; matched accepted-main GL teardown diagnostics remain' if matched else ''
-    print(f'Orbit setup: {report["checks"]} checks PASS ({args.renderer}); four complete capture hashes unchanged{suffix}')
+    print(f'Orbit setup: {report["checks"]} checks PASS ({args.renderer}); {len(hashes)} complete capture hashes unchanged{suffix}')
 
 
 if __name__ == '__main__':

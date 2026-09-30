@@ -1,0 +1,224 @@
+{
+  "issue": 120,
+  "branch": "120-camera-orbit-001-add-custom-orbit-pivotradius-setup-for-free-camera",
+  "pr": 149,
+  "accepted_main": "1a607740876736fdff34a25ca18ef395d33a4fe7",
+  "reproduced_commit": "9fa0e6667e080462c871d82ba39aa14c5de289de",
+  "candidate_version": "v0.1.0.12",
+  "owner_acceptance": "pending owner verification after requested changes",
+  "platform": "Linux x86_64 / Godot 4.7.2 / NVIDIA RTX 3070 Ti",
+  "reproduction_fixture_sha256": "5c7de2a384a4095f8eb6ed95c9af8e8fa92a1ee229dfa00a64fedff85caa6212",
+  "renderers": {
+    "forward_plus": {
+      "orbit_setup": {
+        "checks": 1028,
+        "failures": [],
+        "renderer": "forward_plus",
+        "source_hashes_unchanged": {
+          "mixed.ssc": "b60cc71370c15934d254f470b5e0f3310bfd24ab955976a5c1aa76f43e9bac9a",
+          "particles.ssc": "1ef9d616ce14fb3541255afc49ed1fdff3f68a41cb8b8216f25999643bc4dc7a",
+          "volume.ssc": "26c1380790c5de757173d2fc87f134e45ca5895af4d14b726ce7e519ee010d71",
+          "mesh.ssc": "d3bc3eba985a7050ac246e75210053292496b472ec3b927f952075dc230b8bc9",
+          "mesh-small-scale.ssc": "53b87703d63c35dcdd6397e5c9d69800798cce96534eefe4f03b7f677aceb96e",
+          "mesh-large-scale.ssc": "389ddc08dc37cf04bca1f1deb28e41612cd6ca9f04ccb78663ac7618791c6f0b"
+        },
+        "runtime": {
+          "exit_code": 0,
+          "errors": [],
+          "clean_log": true,
+          "matched_accepted_main_gl_teardown": false
+        }
+      },
+      "reproduction_scene_pixels": {
+        "auto-orbit": 0,
+        "before": 44673,
+        "committed": 0,
+        "reset": 0
+      },
+      "rendered_recovery_cases": 78,
+      "camera_tumble": {
+        "checks": 13044,
+        "failures": [],
+        "source_hashes_unchanged": {
+          "particles.ssc": "1e15dcbd85f288aa74da948702734fa2b258e151081035585e8676f9dcd6fd80",
+          "volume.ssc": "60848daaac37d8ba2f74d68562dae80198ee44c6df4b9bf9ca9195d2547a89ed",
+          "mesh.ssc": "25dd9a3b000b797d9231a1109e34164d45020c966c5b139fc8a7be807575f163"
+        },
+        "runtime_directory": "regressions/forward_plus-camera_tumble"
+      },
+      "view_preset": {
+        "checks": 838,
+        "failures": [],
+        "source_hashes_unchanged": {
+          "scene.ssc": "ffb4db6cf2cb49c51ae5e4638f90d04e9821fe301347b4c52f360a1848bad86d",
+          "different.ssc": "e4d88c8a87c87523b91220c5f73828b7e485854150ba5e5c978f2cd38be2926c",
+          "particles.ssc": "c055f3ff753ba22495832e6d07935144523c6f71cba4b0c62b7bbe28898d71b8"
+        },
+        "runtime_directory": "regressions/forward_plus-view_preset"
+      },
+      "viewer_shell": {
+        "checks": 667,
+        "failures": [],
+        "source_hashes_unchanged": {
+          "scene.ssc": "974a3c6514694e48597112d2e3b88dd58b5ca77ab0e68ba1fbbef4d5cf00242a",
+          "replacement.ssc": "8551376145816cc88ef3f3a2e8bc42263978c21e5e6d87edacfab0cbc57cb24f",
+          "invalid.ssc": "85b88a0128bebf2b8c2c6e7b9030e49cbbb83f2f60ec834420eaade3db477d90"
+        },
+        "runtime_directory": "regressions/forward_plus-viewer_shell"
+      },
+      "edge_reveal": {
+        "checks": 210,
+        "failures": [],
+        "source_hashes_unchanged": {
+          "scene.ssc": "347efc33a5b596eb70973177a4133088aa2a41a6a238feeda17338ff231c315d",
+          "replacement.ssc": "5e15c47738b0cc6090804e97e67fd92e02088168bb3688f0358e0568dde250c0",
+          "invalid.ssc": "85b88a0128bebf2b8c2c6e7b9030e49cbbb83f2f60ec834420eaade3db477d90"
+        },
+        "runtime_directory": "regressions/forward_plus-edge_reveal"
+      },
+      "render_pacing": {
+        "checks": 290,
+        "failures": [],
+        "source_hashes_unchanged": {
+          "particles.ssc": "36e7a4e99702a9057cc969b6532c5183365db51f03bf135972a58dc0841e77c4",
+          "field.ssc": "9cb84fc87189539beefb1e9aed93bc0452d7a0fc1fc34497eec472b750ad0f63",
+          "mesh.ssc": "2602cd66a1d0ae4e021d7cb7a4d6693275a42dc35b408cdffd05e0e15cf484f7",
+          "mixed.ssc": "5c0bd4c4d7b984c92f78f38f8eadd62c38aa84fc0525e0db327e4d4e5229aca2"
+        },
+        "runtime_directory": "regressions/forward_plus-render_pacing",
+        "idle_phases_zero_extra_draws": 34
+      },
+      "viewer_status": {
+        "checks": 257,
+        "failures": [],
+        "source_hashes_unchanged": {
+          "/home/Nozba/Codex/SIMSCOPE/orbit-120/owner-review-1/regressions/forward_plus-viewer_status/scene.ssc": "a3ccffc97cb82a5cb2724b0dc8f2a6411e5b4fd315abba969421b9ca248700d7",
+          "/home/Nozba/Codex/SIMSCOPE/orbit-120/owner-review-1/regressions/forward_plus-viewer_status/fields.ssc": "b9d2806a1ed5947706d65fb0106cb2d61b95efe52b8bff9572324e2fd30f4604"
+        },
+        "runtime_directory": "regressions/forward_plus-viewer_status"
+      },
+      "video_current": {
+        "checks": 235,
+        "failures": 0,
+        "source_hashes_unchanged": "verified by suite",
+        "runtime_directory": "regressions/forward_plus-video_current"
+      }
+    },
+    "gl_compatibility": {
+      "orbit_setup": {
+        "checks": 1028,
+        "failures": [],
+        "renderer": "gl_compatibility",
+        "source_hashes_unchanged": {
+          "mixed.ssc": "cf005450c4b6158ab31a758b52452f75e4498e67ec56091fb0da9b1a6667afc6",
+          "particles.ssc": "c3549ecf53a014cc460b583f2c4b0c66ce96de41aaebe815565c3e8dfd46deac",
+          "volume.ssc": "a1c49c508c1fb631d19b3590ac11c43ee1b69b0074954d0406bf3c821054e5ec",
+          "mesh.ssc": "3264fddfa5d1c44f305cb5a2a87df32f6ad97868c50f938c51cc6aff974c5261",
+          "mesh-small-scale.ssc": "b4ce96c41ba367a5a9194e1634f136fc97c17ae464bded9672a36b94a71bd865",
+          "mesh-large-scale.ssc": "5873c2d0d45cc1cfe57cd0915e2a7a58012b9f9061af4b72e632fe07e4779b46"
+        },
+        "runtime": {
+          "exit_code": 0,
+          "errors": [
+            "ERROR: Texture with GL ID of 141: leaked 349524 bytes.",
+            "ERROR: Texture with GL ID of 142: leaked 349524 bytes."
+          ],
+          "clean_log": false,
+          "matched_accepted_main_gl_teardown": true
+        }
+      },
+      "reproduction_scene_pixels": {
+        "auto-orbit": 0,
+        "before": 19708,
+        "committed": 0,
+        "reset": 0
+      },
+      "rendered_recovery_cases": 78,
+      "camera_tumble": {
+        "checks": 13044,
+        "failures": [],
+        "source_hashes_unchanged": {
+          "particles.ssc": "837438831c886421c2615779a4547e6f603aae33f60771333832bdb60a07ab64",
+          "volume.ssc": "1adb55ecf782e2d3c93e7ecbc876720df221d9c6f585083dc8ba4f3b7b966c72",
+          "mesh.ssc": "1de2c39e1d6870ea00c599a8ede9394a33a323d65f835d3e659c5fbf34bc8f28"
+        },
+        "runtime_directory": "regressions/gl_compatibility-camera_tumble"
+      },
+      "view_preset": {
+        "checks": 778,
+        "failures": [],
+        "source_hashes_unchanged": {
+          "scene.ssc": "30f107b6baf1806f0dfd024b3d5b756d6c2b15d59aadb3d04d3208717041ec32",
+          "different.ssc": "c52ac544d95e0a43ab2376926ea492c0d244793547822ce57ca7a03e1a443de0",
+          "particles.ssc": "060257fa7f93eabbdaf4919db41be22824c973f3d6247ad4db1a600e7ca6d656"
+        },
+        "runtime_directory": "regressions/gl_compatibility-view_preset"
+      },
+      "viewer_shell": {
+        "checks": 667,
+        "failures": [],
+        "source_hashes_unchanged": {
+          "scene.ssc": "5013e20f71900b0ec907dfc181f3e9a2eb3612cfc752ab497a6c189ed7242cf9",
+          "replacement.ssc": "3f6a119e5df9fbbb88b6b555fe8f7091f15d1af1f40c960986d1684cba5a95c3",
+          "invalid.ssc": "85b88a0128bebf2b8c2c6e7b9030e49cbbb83f2f60ec834420eaade3db477d90"
+        },
+        "runtime_directory": "regressions/gl_compatibility-viewer_shell"
+      },
+      "edge_reveal": {
+        "checks": 210,
+        "failures": [],
+        "source_hashes_unchanged": {
+          "scene.ssc": "2fc58b03e3465408ac67ebfd55daa8e9e26687807b850ad03d46d9fcc3b0f236",
+          "replacement.ssc": "a22ed4351b179628d8aa89e58b49e3539faf3da3fe7f8f0c27a8bcde0c25665c",
+          "invalid.ssc": "85b88a0128bebf2b8c2c6e7b9030e49cbbb83f2f60ec834420eaade3db477d90"
+        },
+        "runtime_directory": "regressions/gl_compatibility-edge_reveal"
+      },
+      "render_pacing": {
+        "checks": 290,
+        "failures": [],
+        "source_hashes_unchanged": {
+          "particles.ssc": "75da2e3a232d04add3d0e05d40a754b1d0dc71759a12d2fd613eceb41a4a1773",
+          "field.ssc": "95185628bf6e489b4561b55255e39c1e8485c4b8e0c27a97d1883eb5557e5f57",
+          "mesh.ssc": "2b956487486495f3f321060278af22b693ed3406a99bc65f06e836870428324e",
+          "mixed.ssc": "1897b08c36f11bbd24d19bc60486980241154ada467f5c8ef81c4b021d2bca57"
+        },
+        "runtime_directory": "regressions/gl_compatibility-render_pacing",
+        "idle_phases_zero_extra_draws": 34
+      },
+      "viewer_status": {
+        "checks": 257,
+        "failures": [],
+        "source_hashes_unchanged": {
+          "/home/Nozba/Codex/SIMSCOPE/orbit-120/owner-review-1/regressions/gl_compatibility-viewer_status/scene.ssc": "89e7feb634f810d9b1b53d71022ac1359261203b31000996d0a31c9c7cd0d549",
+          "/home/Nozba/Codex/SIMSCOPE/orbit-120/owner-review-1/regressions/gl_compatibility-viewer_status/fields.ssc": "7f3f4edc8eb678049ff9ab6127168ce15ad5465cabb809576dcb75e4ffde11f0"
+        },
+        "runtime_directory": "regressions/gl_compatibility-viewer_status"
+      },
+      "video_current": {
+        "checks": 225,
+        "failures": 0,
+        "source_hashes_unchanged": "verified by suite",
+        "runtime_directory": "regressions/gl_compatibility-video_current"
+      }
+    }
+  },
+  "native_assertions_passed": 33068,
+  "python_version_tests": {
+    "tests": 2,
+    "failures": 0
+  },
+  "strict_complete_capture_verifications": 12,
+  "static_checks": [
+    "native editor import",
+    "Python compilation",
+    "git diff --check"
+  ],
+  "limitations": [
+    "Two matching accepted-main Compatibility GL texture-leak teardown errors remain (349524 bytes each); no clean focused Compatibility teardown claim.",
+    "Compatibility skips 60 existing preset quality comparisons and 10 exact GPU float-plane readback assertions.",
+    "Owner feel and the original production-capture reproduction still require owner verification; Windows/macOS and other GPUs untested.",
+    "Tiny radii at large coordinates can be unrepresentable; proposals are rejected with visible scene-camera recovery. Extremely wide clip spans retain GPU depth precision limits.",
+    "No production scientific simulation was rerun."
+  ]
+}

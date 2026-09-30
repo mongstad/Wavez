@@ -840,6 +840,7 @@ func frame_scene() -> void:
 				var p: Vector3 = views[id].transform*point;low = low.min(p);high = high.max(p)
 	if not low.is_finite() or not high.is_finite():return
 	viewer.camera_target = (low+high)*.5;viewer.half_extent = maxf((high-low).length()*.5,.1)
+	viewer.scene_camera_frame = {"center":viewer.camera_target,"extent":viewer.half_extent}
 	viewer.camera_distance = viewer.half_extent*2.8;viewer.camera.far = maxf(1000,viewer.camera_distance*5);viewer._update_camera()
 
 func _set_color_normalization(id: String, mode: String) -> bool:
