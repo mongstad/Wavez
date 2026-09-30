@@ -33,27 +33,17 @@ Timeline endpoint alignment was owner-merged in PR #141 at `e11ea58`.
 Pinned edge reveal and simulation-only Fullscreen (#117) were owner-merged in
 PR #142 at `b33e9a8`. Capture and video file-dialog preferences (#50) were
 owner-merged in PR #144 at `61f6a78`, accepted build 9.
-Current authorized work is #143, the first and only Ready item when selected:
-the [violet visual-system slice](UX5_STYLE_SLICE.md). The owner reviewed v1 at
-`0d32d08` and approved the overall direction, while requiring refinement before
-broad propagation. The owner reviewed Round 2 at `b9a2df3` and requested another
-correction round before propagation approval. **The corrections await owner
-review** on the same branch and Draft PR #145: coherent rounded disclosures,
-consistent violet sliders, whole-second clock seeking, usable Tools dialogs from
-the edge-revealed Fullscreen toolbar, and filename-only bottom status chrome.
-Compact speed presets, borderless window actions, camera shortcuts, static
-surface depth and glyph-only pins remain. Banner styling is deferred by the
-owner. Build 10 remains the candidate. Scientific behavior, semantic status and
-#117/#118 contracts are retained; v1 and Round 2 reports/screenshots remain
-unchanged historical review evidence.
-The owner approved the Round 3 direction at `6d1eff6` in principle and requested
-another consistency correction: production dropdowns/popups across Particles,
-Fields, Meshes and rebuilt scene/tool selectors now share the reusable violet
-widget theme, including disabled check/radio artwork and bounded hover treatment.
-[Round 4 evidence](evidence/issue-143/round4/README.md) appends the new comparison
-and interaction checks. Surrounding deferred forms retain their existing styling.
-Draft PR #145 still requires owner visual review; no acceptance, Project move or
-broad propagation is included. All three historical checkpoints remain intact.
+The violet visual-system slice (#143) was owner-merged in PR #145 at `d23f431`,
+accepted build 10. Its [review reports](UX5_STYLE_SLICE.md) and Round 1–4 evidence
+retain their original review-time wording. Current authorized work is #147,
+the sole Ready item when selected on 2026-09-30: [residual UI cleanup](UX5_CLEANUP.md),
+**pending owner review**, candidate build 11. Particle Filters retain membership
+semantics with violet checkboxes; immediate boolean controls share violet switches,
+including rebuilt Fields/Meshes and Tools controls. **File → Details…** opens the
+existing source/status surface, retaining full paths and diagnostics. The top Source
+icon, passive bottom filename and persistent bottom Details action are removed.
+About uses the unchanged owner-supplied violet logo. Scientific behavior, saved
+state, dropdown styling, #117 edge/fullscreen and #118 redraw contracts remain intact.
 Ordinary recipe save/load uses a small source-independent presentation JSON and
 direct platform file picker. Scientific inspection bundles remain separate.
 Field preparation uses a small CPU pool with ordered publication and explicit

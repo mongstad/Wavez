@@ -1,0 +1,52 @@
+[
+  {
+    "renderer": "forward_plus",
+    "accepted_main": "d23f43164858f2ea64a9ebc9aa2de444d69a7c08",
+    "frames": [
+      {
+        "frame": "frame00000000.png",
+        "dimensions": [
+          960,
+          540
+        ],
+        "rgb_sha256": "b1179f7fb584ea03b5eb254da74346e905b2b9fd4e5fe258f686b8f8a992aae3"
+      },
+      {
+        "frame": "frame00000001.png",
+        "dimensions": [
+          960,
+          540
+        ],
+        "rgb_sha256": "4a86d4b9baa66cdc78dd037e7467fe53322551782c0f7b7be4860c844128e96c"
+      }
+    ],
+    "timing_identical": true,
+    "scientific_evidence_identical": true,
+    "source_sha256_unchanged": "0a86c305f46adedda03b2d81a6803b6fa6832c995ee21586e629b402923220d0"
+  },
+  {
+    "renderer": "gl_compatibility",
+    "accepted_main": "d23f43164858f2ea64a9ebc9aa2de444d69a7c08",
+    "frames": [
+      {
+        "frame": "frame00000000.png",
+        "dimensions": [
+          960,
+          540
+        ],
+        "rgb_sha256": "cd751b3e43c495c42a6fd07de501ddd33f9559db1fc81d4b24f00907219bd783"
+      },
+      {
+        "frame": "frame00000001.png",
+        "dimensions": [
+          960,
+          540
+        ],
+        "rgb_sha256": "0058c340aaa4b5723ac53c6a0b02ac0ee21003bcf1ce473d9721aa8a8d79cc37"
+      }
+    ],
+    "timing_identical": true,
+    "scientific_evidence_identical": true,
+    "source_sha256_unchanged": "6f2be1f5bd503808aee8499de94c55c276a85d7ea9e83182b0e5fb67ba4ef95f"
+  }
+]

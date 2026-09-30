@@ -3,8 +3,6 @@ extends PanelContainer
 var shell
 var viewer
 var badge
-var detail_button: Button
-var filename: Label
 var jobs_button: Button
 var jobs_dialog: AcceptDialog
 var job_rows := {}
@@ -36,16 +34,7 @@ func setup(owner_shell) -> void:
 	badge.symbol.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	badge.symbol.custom_minimum_size = Vector2(16,16)
 	badge.label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
-	filename = Label.new(); filename.name = "CaptureFilename"; row.add_child(filename)
-	filename.theme_type_variation = "HelpLabel"
-	filename.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	filename.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-	filename.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-	filename.clip_text = true; filename.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
-	detail_button = Button.new(); detail_button.text = "Details…"; detail_button.flat = true; detail_button.theme_type_variation = "CompactButton"
-	detail_button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	badge.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-	detail_button.pressed.connect(show_status); row.add_child(detail_button)
 	jobs_button = shell.button(shell.transport.options, "Jobs (0)", open_jobs, "export")
 	jobs_button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	jobs_dialog = AcceptDialog.new(); jobs_dialog.title = "Jobs"; jobs_dialog.get_ok_button().text = "Close"; add_child(jobs_dialog)
@@ -215,9 +204,6 @@ func refresh() -> void:
 	update_jobs()
 	var summary: String = readiness + ("   •   Failed — details" if not failures.is_empty() else "")
 	if badge.label.text != summary: badge.configure("error" if not failures.is_empty() else ("success" if readiness == "Ready" else "info"), summary)
-	var caption: String = viewer.capture_path.get_file() if viewer.generic_reader != null else ""
-	if filename.text != caption: filename.text = caption
-	# Keep diagnostic tooltips on the badge, away from passive filename chrome.
 	badge.tooltip_text = readiness_detail
 
 func update_row(title: String, text: String, active: bool, cancellable: bool, available := true, identity := "") -> void:

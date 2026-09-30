@@ -1,5 +1,10 @@
 # UX3 persistent status and Jobs — issue #43
 
+Current #147 update: **File → Details…** opens the existing status/source dialog.
+The persistent status Details button and passive capture filename are removed;
+readiness, Jobs and retained diagnostics keep their existing ownership. See
+[the cleanup contract](UX5_CLEANUP.md). The original report below is historical.
+
 Current integration status: the slice is owner-merged; the [#44 milestone report](UX3_REPORT.md)
 is pending owner review. Original issue review metadata and evidence below remain historical.
 

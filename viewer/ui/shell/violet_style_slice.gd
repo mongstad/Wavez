@@ -57,6 +57,15 @@ func install(shell) -> void:
 	# Representative dialog/confirmation surfaces, not broad Tools/Jobs propagation.
 	shell.status_ui.jobs_dialog.theme = shell.theme
 	style_dropdowns(shell.viewer)
+	style_booleans(shell.viewer)
+
+func style_booleans(node: Node) -> void:
+	# Bind only boolean widgets; forms, callbacks and semantic ownership stay intact.
+	if node is FileDialog: return
+	if node is CheckButton or node is CheckBox:
+		node.theme = theme
+		animate_buttons(node)
+	for child in node.get_children(): style_booleans(child)
 
 func style_dropdowns(node: Node) -> void:
 	# Widget-only binding: deferred forms/dialogs keep their surrounding theme.

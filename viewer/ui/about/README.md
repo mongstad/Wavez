@@ -1,5 +1,19 @@
 # About resources
 
+The current `simscope-logo.png` is the owner-provided violet artwork requested
+by #147, copied unchanged from
+`SimScope Theme Package/SimScope_Logo_Purple.png` outside the repository.
+
+- Source/import SHA-256: `b666a782e6f3a482ae8e87bee5231aaaa7b7711e4d2ba7a91362f7cbdc6e9722`
+- Dimensions: 1254 × 1254; original PNG bytes retained.
+- The runtime path, import UID, lossless mipmapped import and aspect-preserving
+  About layout remain unchanged. Only About consumes this resource.
+- Branding remains governed by [TRADEMARKS.md](../../../TRADEMARKS.md).
+
+## Original #96 asset provenance
+
+The following records the original About artwork, replaced by #147:
+
 `simscope-logo.png` is the owner-provided artwork named in issue #96:
 `ChatGPT Image Sep 12, 2026, 04_04_12 PM (1).png`. The file had moved into the
 owner's `SimScope-Logo-Package` directory when imported. It was copied unchanged;

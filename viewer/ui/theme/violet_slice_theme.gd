@@ -102,6 +102,11 @@ func _init() -> void:
 		var source := '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="20"><rect x="1" y="2" width="30" height="16" rx="8" fill="#%s"/><circle cx="%s" cy="10" r="6" fill="#%s"/></svg>' % [track.to_html(false), "22" if pair[1] else "10", knob.to_html(false)]
 		set_icon(pair[0], "CheckButton", DPITexture.create_from_string(source))
 	set_constant("icon_max_width", "CheckButton", 32)
+	# Membership lists use compact checks, with explicit disabled artwork.
+	for pair in [["checked", "checked", &"accent.primary"], ["unchecked", "box", &"text.secondary"], ["radio_checked", "radio_checked", &"accent.primary"], ["radio_unchecked", "radio", &"text.secondary"]]:
+		set_icon(pair[0], "CheckBox", icon_named(pair[1], pair[2]))
+		set_icon(pair[0] + "_disabled", "CheckBox", icon_named(pair[1], &"text.disabled"))
+
 	set_stylebox("panel", "PopupMenu", flat_box(&"surface.3", 8, 8, 6))
 	set_stylebox("hover", "PopupMenu", flat_box(&"selection.fill", 8, 4))
 	set_color("font_hover_color", "PopupMenu", c(&"selection.text"))

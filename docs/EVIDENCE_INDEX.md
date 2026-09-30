@@ -1,5 +1,13 @@
 # Retained evidence
 
+## Residual violet UI cleanup — issue #147, pending owner review
+
+[Current behavior and owner checks](UX5_CLEANUP.md) and
+[focused evidence](evidence/issue-147/summary.json) cover semantic boolean styling,
+File Details, quieter shell chrome and the owner-supplied violet About logo.
+#143 was owner-merged in PR #145; its reports below retain their historical
+review-time wording.
+
 ## Violet visual-system slice — issue #143, pending owner visual review
 
 [Scope, component structure and owner checks](UX5_STYLE_SLICE.md) and
