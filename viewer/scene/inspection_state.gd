@@ -87,7 +87,6 @@ static func validate_visual(viewer, state: Dictionary, requested_time = null) ->
 		if key in ["hidden_types","channel_preferences","geometry_override","range_interval","scene"]: continue
 		if not shape(state[key],model[key]): return "Invalid visual field: " + key
 	for key in model:
-		if key == "custom_orbit": continue # Optional navigation preference; apply defaults to false.
 		if not state.has(key): return "Missing visual field: " + key
 	if state.color_channel not in ["fixed","visual_color"] and not state.color_channel is String: return "Invalid channel."
 	if not viewer.colormaps.has(state.colormap_name): return "Unknown colormap."

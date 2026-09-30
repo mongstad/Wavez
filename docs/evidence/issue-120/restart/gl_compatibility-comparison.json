@@ -1,0 +1,54 @@
+{
+  "renderer": "gl_compatibility",
+  "reference_checks": 408,
+  "candidate_checks": 829,
+  "camera_samples_equal": 300,
+  "playback_samples_equal": 72,
+  "export_pixel_equal_frames": {
+    "locked": 2,
+    "orbit": 2
+  },
+  "source_hashes_unchanged": {
+    "particles.ssc": "6b160eb3bd43745a37c84bcddc94de701caf71840c2dc1f4e5555cea9500b685",
+    "field.ssc": "547edaac8912bbaa50c440347417bf2df533294db7cf0b7e7a78bcbfa5081c6e",
+    "mesh.ssc": "880b1d34f5c24546a08b8a1808ce83133e0e33988bc96c1f878d1bf5ea3e9bf2",
+    "mixed.ssc": "a1e390af132640e9a71e601231956072dc62271be1c33324aa5cb4d8d08b379e",
+    "small.ssc": "2c10a7fa593cbb2f2870b3a369c9130e6ec25251f0f44e79a0cde0675a203916",
+    "large.ssc": "c3a1a4fc6e5f2f7c7a18abb9a76f4afbb4cce3c4f17d32c2718320f267e5f0f1"
+  },
+  "stationary_editor_draws": {
+    "field": 0,
+    "large": 0,
+    "mesh": 0,
+    "mixed": 0,
+    "particles": 0,
+    "small": 0
+  },
+  "runs": [
+    {
+      "implementation": "reference",
+      "mode": "locked",
+      "frames": 2,
+      "exit_code": 0
+    },
+    {
+      "implementation": "reference",
+      "mode": "orbit",
+      "frames": 2,
+      "exit_code": 0
+    },
+    {
+      "implementation": "candidate",
+      "mode": "locked",
+      "frames": 2,
+      "exit_code": 0
+    },
+    {
+      "implementation": "candidate",
+      "mode": "orbit",
+      "frames": 2,
+      "exit_code": 0
+    }
+  ],
+  "failures": []
+}

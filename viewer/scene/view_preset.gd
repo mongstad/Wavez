@@ -8,7 +8,7 @@ const Visual = preload("res://scene/visual_state.gd")
 const VIEW := {
 	"point_scale":[0.1,8.0], "exposure":[0.05,3.0], "clean_view":true,
 	"brightness_scale":[0.0,5.0], "gamma":[0.2,3.0],
-	"orbit_enabled":true, "orbit_speed":[-0.5,0.5], "free_camera":true, "custom_orbit":true,
+	"orbit_enabled":true, "orbit_speed":[-0.5,0.5], "free_camera":true,
 	"yaw":[-1e9,1e9], "pitch":[-1e9,1e9], "camera_distance":[0.000001,1e15],
 	"camera_target":"vec3", "camera_transform":"transform", "starfield_visible":true
 }
@@ -44,7 +44,6 @@ static func snapshot(viewer) -> Dictionary:
 			"camera_target":groups.view[key] = Visual.vec(viewer.camera_target)
 			"camera_transform":
 				var t: Transform3D = viewer.camera.transform
-				if viewer.orbit_setup != null and viewer.orbit_setup.active: t = viewer.orbit_setup.saved.transform
 				groups.view[key] = [Visual.vec(t.basis.x),Visual.vec(t.basis.y),Visual.vec(t.basis.z),Visual.vec(t.origin)]
 			"starfield_visible":groups.view[key] = viewer.starfield.visible
 			_:groups.view[key] = viewer.get(key)
@@ -134,7 +133,6 @@ static func prepare(viewer, recipe) -> Dictionary:
 static func apply(viewer, recipe) -> Dictionary:
 	var plan := prepare(viewer,recipe)
 	if not plan.error.is_empty():return plan
-	viewer._cancel_orbit_setup()
 	var s: Dictionary = plan.settings
 	for key in s.get("view",{}):
 		var value = s.view[key]

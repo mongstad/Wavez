@@ -344,8 +344,7 @@ func _tick_profiled(delta: float) -> void:
 		iso_debounce -= delta
 		if iso_debounce <= 0:_start_iso()
 	viewer._move_free_camera(delta)
-	if viewer._auto_orbit_active():
-		viewer.yaw += delta*viewer.orbit_speed;viewer._update_camera()
+	if viewer.orbit_enabled and not viewer.dragging and viewer.orbit_speed != 0.0: viewer.yaw += delta*viewer.orbit_speed;viewer._update_camera()
 	viewer.tail_poll += delta
 	if viewer.tail_poll >= 1:
 		var poll_started := Profile.begin()
@@ -824,7 +823,6 @@ func particle_frame_at_union(index: int):
 	return frame
 
 func frame_scene() -> void:
-	viewer._cancel_orbit_setup(); viewer.custom_orbit = false
 	var low := Vector3(INF,INF,INF);var high := Vector3(-INF,-INF,-INF)
 	if viewer.frame_a != null:
 		for p in viewer.frame_a.positions:
