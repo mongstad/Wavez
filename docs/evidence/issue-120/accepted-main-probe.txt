@@ -1,0 +1,20 @@
+extends SceneTree
+const Viewer = preload("res://main.gd")
+const Visual = preload("res://scene/visual_state.gd")
+func _initialize() -> void: run.call_deferred()
+func run() -> void:
+	var out: String = OS.get_cmdline_user_args()[0]
+	var view = Viewer.new();root.add_child(view);view.set_process(false)
+	await process_frame
+	for kind in ["particles","volume","mesh","mixed"]:
+		view._open_capture(out.path_join(kind+".ssc"));view.playing = false;view.orbit_enabled = false
+		for n in 3: await process_frame
+		await RenderingServer.frame_post_draw
+		root.get_texture().get_image().save_png(out.path_join("baseline-"+kind+".png"))
+	var state := Visual.snapshot(view)
+	var offline = Viewer.new();offline.offline_instance = true;root.add_child(offline);offline.set_process(false)
+	Visual.apply(offline,state)
+	offline.queue_free();await process_frame
+	view.queue_free();await process_frame;await process_frame
+	print("ACCEPTED_MAIN_PROBE_COMPLETE")
+	quit()

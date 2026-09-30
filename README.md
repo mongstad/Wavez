@@ -23,6 +23,7 @@ Start with:
 - [Current status](docs/CURRENT_STATUS.md)
 - [Violet UI cleanup and owner checks](docs/UX5_CLEANUP.md)
 - [Application version and build policy](docs/VERSIONING.md) — view the identity in Help → About SimScope
+- [Custom orbit pivot/radius setup](docs/CUSTOM_ORBIT_SETUP.md)
 - [Pinned edge reveal and Fullscreen](docs/WINDOW_EDGE_REVEAL.md)
 - [Portable view presets](docs/VIEW_PRESETS.md)
 - [SimScope handbook](docs/SIMSCOPE_HANDBOOK.md)

@@ -35,15 +35,22 @@ PR #142 at `b33e9a8`. Capture and video file-dialog preferences (#50) were
 owner-merged in PR #144 at `61f6a78`, accepted build 9.
 The violet visual-system slice (#143) was owner-merged in PR #145 at `d23f431`,
 accepted build 10. Its [review reports](UX5_STYLE_SLICE.md) and Round 1–4 evidence
-retain their original review-time wording. Current authorized work is #147,
-the sole Ready item when selected on 2026-09-30: [residual UI cleanup](UX5_CLEANUP.md),
-**pending owner review**, candidate build 11. Particle Filters retain membership
-semantics with violet checkboxes; immediate boolean controls share violet switches,
+retain their original review-time wording. Residual UI cleanup (#147) was
+owner-merged in PR #148 at `1a60774`, accepted build 11. Its
+[review report](UX5_CLEANUP.md) and evidence retain their review-time wording.
+Particle Filters retain membership semantics with violet checkboxes; immediate boolean controls share violet switches,
 including rebuilt Fields/Meshes and Tools controls. **File → Details…** opens the
 existing source/status surface, retaining full paths and diagnostics. The top Source
 icon, passive bottom filename and persistent bottom Details action are removed.
 About uses the unchanged owner-supplied violet logo. Scientific behavior, saved
 state, dropdown styling, #117 edge/fullscreen and #118 redraw contracts remain intact.
+Current authorized work is #120, the top Ready item at initial inspection on
+2026-09-30 (subsequently In progress, explicitly confirmed by the owner):
+[custom orbit setup](CUSTOM_ORBIT_SETUP.md), **pending owner UX review**, candidate
+build 12. Free camera uses an RMB hold with live movement/look, logarithmic radius
+adjustment and temporary guides; release commits a source-independent pivot. R
+cancels through Reset Camera. Custom pivots survive later free movement and
+portable presets. Screenshot/video paths exclude the temporary preview.
 Ordinary recipe save/load uses a small source-independent presentation JSON and
 direct platform file picker. Scientific inspection bundles remain separate.
 Field preparation uses a small CPU pool with ordered publication and explicit

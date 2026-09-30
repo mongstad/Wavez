@@ -1,5 +1,13 @@
 # Retained evidence
 
+## Custom orbit setup — issue #120, pending owner UX review
+
+[Interaction, validation and owner checks](CUSTOM_ORBIT_SETUP.md) and
+[focused evidence](evidence/issue-120/summary.json) cover geometric pivot/radius
+setup, input ownership, scientific-state preservation, portable presets and
+temporary-guide exclusion from screenshot/export paths. Earlier reports below
+retain their original review-time wording.
+
 ## Residual violet UI cleanup — issue #147, pending owner review
 
 [Current behavior and owner checks](UX5_CLEANUP.md) and

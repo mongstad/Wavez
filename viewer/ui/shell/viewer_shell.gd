@@ -100,13 +100,14 @@ func setup(owner_viewer) -> void:
 	row.move_child(navigation, brand.get_index()+1)
 	var frame_action := button(navigation, "", viewer._focus_activity, "frame"); frame_action.tooltip_text = "Frame scene [F]"
 	var reset_action := button(navigation, "", viewer._reset_camera, "reset"); reset_action.tooltip_text = "Reset camera [R]"
-	var navigate := MenuButton.new(); navigate.flat = false; navigate.icon = icon("view"); navigate.tooltip_text = "Navigate [Alt+N]"; navigate.custom_minimum_size.y = 32; navigation.add_child(navigate); decorate_menu(navigate)
+	var navigate := MenuButton.new(); navigate.flat = false; navigate.icon = icon("view"); navigate.tooltip_text = "Navigate [Alt+N]\nFree camera: hold RMB to set orbit pivot/radius"; navigate.custom_minimum_size.y = 32; navigation.add_child(navigate); decorate_menu(navigate)
 	var nav_key := InputEventKey.new(); nav_key.keycode = KEY_N; nav_key.alt_pressed = true
 	navigate.shortcut = Shortcut.new(); navigate.shortcut.events = [nav_key]
 	var modes := navigate.get_popup(); modes.add_check_item("Free camera"); modes.add_check_item("Auto orbit"); modes.add_item("Orbit speed")
 	navigate.about_to_popup.connect(func(): modes.set_item_checked(0, viewer.free_camera); modes.set_item_checked(1, viewer.orbit_enabled))
 	modes.id_pressed.connect(func(id):
 		if id == 0:
+			if viewer.orbit_setup != null: viewer.orbit_setup.cancel()
 			viewer.free_camera = not viewer.free_camera; viewer.orbit_enabled = not viewer.free_camera
 		elif id == 1: viewer.orbit_enabled = not viewer.orbit_enabled; viewer.inspection_paused = false
 		else: viewer.tools_ui.open("Camera")
@@ -450,7 +451,7 @@ func build_menus(row: HBoxContainer) -> void:
 	for title in ["Temporal","Space time","Diagnostics","Compare","Matched runs","Period","Bookmarks","Results"]: command(analysis,title,viewer.tools_ui.open.bind(title),"tool:"+title)
 	for title in ["Mapping","Quick setup","Derive range","Slice","Clipping","Isosurface","Source probe","Performance","Geometry"]: command(tools,title,viewer.tools_ui.open.bind(title),"tool:"+title)
 	var help: PopupMenu = menus.Help.get_popup()
-	command(help,"Shortcuts",func():show_details("Shortcuts","Drag to orbit. Scroll to zoom.\nF: Frame scene   R: Reset camera\nO: Auto orbit   Alt+N: Navigate\nF11: Fullscreen\nDouble-click viewport: Fullscreen   Esc: Restore preceding shell\nSpace: Play or pause   Left and Right: Step sample\nTimeline: Drag to scrub; double-click playhead/current time to seek\n\nTab and Shift+Tab move focus. Enter or Space activates buttons.\n\nMidnight Scientific"),"shortcuts")
+	command(help,"Shortcuts",func():show_details("Shortcuts","Drag to orbit. Scroll to zoom.\nFree camera: WASD/QE to fly. Hold RMB for orbit setup.\nDuring setup: wheel or slider sets radius; Shift+wheel is fine.\nMove mouse to look; release RMB to commit. R resets/cancels.\nF: Frame scene   R: Reset camera\nO: Auto orbit   Alt+N: Navigate\nF11: Fullscreen\nDouble-click viewport: Fullscreen   Esc: Restore preceding shell\nSpace: Play or pause   Left and Right: Step sample\nTimeline: Drag to scrub; double-click playhead/current time to seek\n\nTab and Shift+Tab move focus. Enter or Space activates buttons.\n\nMidnight Scientific"),"shortcuts")
 	command(help,"Handbook",func():
 		var path := ProjectSettings.globalize_path("res://../docs/SIMSCOPE_HANDBOOK.md")
 		show_details("Handbook",FileAccess.get_file_as_string(path) if FileAccess.file_exists(path) else "Handbook unavailable in this installation."),"handbook")

@@ -7,6 +7,7 @@ static func vector(a: Array) -> Vector3: return Vector3(a[0], a[1], a[2])
 
 static func snapshot(viewer) -> Dictionary:
 	var state := {}
+	state.custom_orbit = viewer.custom_orbit
 	for key in STATE_KEYS: state[key] = viewer.get(key)
 	state.camera_target = vec(viewer.camera_target)
 	var t: Transform3D = viewer.camera.transform
@@ -34,6 +35,8 @@ static func snapshot(viewer) -> Dictionary:
 
 static func apply(viewer, state: Dictionary) -> void:
 	state = state.duplicate(true)
+	if viewer.orbit_setup != null: viewer.orbit_setup.cancel()
+	viewer.custom_orbit = state.get("custom_orbit", false)
 	# Legacy video jobs without an environment retain their preset defaults.
 	# Recipes carry an environment dictionary: omitted members leave live values
 	# untouched rather than implicitly enabling a Cinematic environment.

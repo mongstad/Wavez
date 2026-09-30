@@ -97,6 +97,8 @@ var pitch := deg_to_rad(24.0)
 var camera_distance := 112.0
 var dragging := false
 var last_mouse := Vector2.ZERO
+var custom_orbit := false
+var orbit_setup
 
 var current_instance: MultiMeshInstance3D
 var current_mm: MultiMesh
@@ -165,6 +167,10 @@ func _ready() -> void:
 	_build_visual_ui()
 	_build_guides()
 	_update_camera()
+	if not offline_instance:
+		orbit_setup = preload("res://ui/orbit_setup.gd").new()
+		overlay_panel.get_parent().add_child(orbit_setup)
+		orbit_setup.setup(self)
 
 	var args := OS.get_cmdline_user_args()
 	if offline_instance: args = PackedStringArray()
@@ -430,7 +436,7 @@ func _update_render_pacing() -> void:
 	# Godot still processes input, workers and UI; it draws when render state
 	# changes. Intentional paused orbit still draws, with bounded presentation
 	# demand. Neither policy changes the recorded clock or camera speed.
-	var camera_animating := orbit_enabled and not dragging and orbit_speed != 0.0
+	var camera_animating := orbit_enabled and not dragging and orbit_speed != 0.0 and not _orbit_setup_active()
 	OS.low_processor_usage_mode = bool(_previous_low_processor_mode) or (not playing and not camera_animating)
 	var frame_cap := _previous_max_fps
 	if not playing and camera_animating:
@@ -449,9 +455,7 @@ func _process_profiled(delta: float) -> void:
 		scene_layers.tick(delta)
 		return
 	_move_free_camera(delta)
-	if orbit_enabled and not dragging and orbit_speed != 0.0:
-		yaw += delta * orbit_speed
-		_update_camera()
+	_advance_orbit(delta)
 
 func _render_current(alpha: float) -> void:
 	var started := Profile.begin()
@@ -557,6 +561,14 @@ func _input(event: InputEvent) -> void:
 		shell.exit_immersive()
 		get_viewport().set_input_as_handled()
 		return
+	# Finish the hold even over chrome; GUI focus must not swallow reset/cancel.
+	if _orbit_setup_active():
+		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and not event.pressed:
+			orbit_setup.commit(); get_viewport().set_input_as_handled(); return
+		if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_R:
+			_reset_camera(); get_viewport().set_input_as_handled(); return
+		if orbit_setup.handle_input(event):
+			get_viewport().set_input_as_handled(); return
 	# A release over chrome must still end a drag that started in the viewport.
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
 		dragging = false
@@ -569,20 +581,27 @@ func _unhandled_input(event: InputEvent) -> void:
 	if selection_controller != null and selection_controller.handle_input(event):get_viewport().set_input_as_handled();return
 	if event is InputEventMouseButton:
 		var mouse_button: InputEventMouseButton = event as InputEventMouseButton
+		if mouse_button.button_index == MOUSE_BUTTON_RIGHT and mouse_button.pressed and free_camera and orbit_setup != null and shell.edge_reveal.is_viewport_point(mouse_button.position):
+			orbit_setup.begin(); get_viewport().set_input_as_handled(); return
 		if mouse_button.button_index == MOUSE_BUTTON_LEFT and mouse_button.pressed and mouse_button.double_click and shell.edge_reveal.is_viewport_point(mouse_button.position):
 			dragging = false
 			_toggle_fullscreen(); get_viewport().set_input_as_handled(); return
 		if mouse_button.button_index == MOUSE_BUTTON_LEFT:
 			if mouse_button.pressed:
+				_align_custom_orbit()
 				var focused := get_viewport().gui_get_focus_owner()
 				if focused != null: focused.release_focus()
 			dragging = mouse_button.pressed
 			last_mouse = mouse_button.position
 		elif mouse_button.pressed and mouse_button.button_index == MOUSE_BUTTON_WHEEL_UP:
-			camera_distance = maxf(8.0, camera_distance * 0.90)
+			_align_custom_orbit()
+			camera_distance = maxf(0.0001 if custom_orbit else 8.0, camera_distance * 0.90)
+			if custom_orbit: _custom_camera_clip()
 			_update_camera()
 		elif mouse_button.pressed and mouse_button.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-			camera_distance = minf(500.0, camera_distance * 1.11)
+			_align_custom_orbit()
+			camera_distance = minf(1e12 if custom_orbit else 500.0, camera_distance * 1.11)
+			if custom_orbit: _custom_camera_clip()
 			_update_camera()
 	elif event is InputEventMouseMotion and dragging:
 		var mouse_event: InputEventMouseMotion = event as InputEventMouseMotion
@@ -605,7 +624,48 @@ func _unhandled_input(event: InputEvent) -> void:
 			KEY_R: _reset_camera()
 
 func _reset_camera() -> void:
+	_clear_custom_orbit()
 	camera_target = Vector3.ZERO; yaw = deg_to_rad(38.0); pitch = deg_to_rad(24.0); camera_distance = maxf(30.0, half_extent * 2.8); _update_camera()
+
+func _orbit_setup_active() -> bool:
+	return orbit_setup != null and orbit_setup.active
+
+func _clear_custom_orbit() -> void:
+	if orbit_setup != null: orbit_setup.cancel()
+	if custom_orbit:
+		camera.near = .05
+		camera.far = maxf(1000.0, half_extent * 2.8 * 5.0)
+	custom_orbit = false
+
+func _custom_camera_clip() -> void:
+	# Keep a representable projection at both tiny and very large local scales.
+	# A scene-sized far plane with a microscopic near plane can be singular in
+	# the native renderer. This changes camera clipping only for custom orbit.
+	camera.near = maxf(0.000001, camera_distance * .0001)
+	camera.far = maxf(camera_distance * 8.0, camera.near * 1000.0)
+
+func _align_custom_orbit() -> void:
+	if not custom_orbit or _orbit_setup_active(): return
+	var orientation := Basis(Vector3.UP, yaw) * Basis(Vector3.RIGHT, -pitch)
+	if camera.position.distance_to(camera_target + orientation.z * camera_distance) <= maxf(.00001, camera_distance * .000001): return
+	# Deliberately resuming orbit after free translation keeps the pivot and
+	# camera position. Reconcile the orbit distance/angles from that position.
+	var radial := camera.position - camera_target
+	if radial.length() < .0001: radial = camera.basis.z * .0001
+	camera_distance = radial.length()
+	var next_pitch := asin(clampf(radial.y / camera_distance, -1, 1))
+	var next_yaw := atan2(radial.x, radial.z)
+	if cos(pitch) < 0:
+		next_pitch = PI - next_pitch; next_yaw += PI
+	yaw += wrapf(next_yaw - yaw, -PI, PI)
+	pitch += wrapf(next_pitch - pitch, -PI, PI)
+	_custom_camera_clip()
+
+func _advance_orbit(delta: float) -> void:
+	if not orbit_enabled or dragging or orbit_speed == 0.0 or _orbit_setup_active(): return
+	_align_custom_orbit()
+	yaw += delta * orbit_speed
+	_update_camera()
 
 func _update_camera() -> void:
 	# Carry the camera up axis through the poles instead of reconstructing it
@@ -613,6 +673,10 @@ func _update_camera() -> void:
 	# This is the existing yaw/pitch orbit with continuous orientation; keeping
 	# those angles also preserves recipe fields and independent world-Y auto orbit.
 	var orientation := Basis(Vector3.UP, yaw) * Basis(Vector3.RIGHT, -pitch)
+	if _orbit_setup_active():
+		camera.basis = orientation
+		orbit_setup.refresh()
+		return
 	camera.transform = Transform3D(orientation, camera_target + orientation.z * camera_distance)
 
 func _comma(v: Variant) -> String:
@@ -714,6 +778,7 @@ func _build_guides() -> void:
 	_sync_visuals()
 
 func _focus_activity() -> void:
+	_clear_custom_orbit()
 	if scene_layers != null:scene_layers.frame_scene();return
 	if frame_a == null: return
 	var high := _robust_high(frame_a.intensity)
@@ -1040,7 +1105,13 @@ func _move_free_camera(delta: float) -> void:
 	if not free_camera or get_viewport().gui_get_focus_owner() != null: return
 	var move := Vector3(float(Input.is_physical_key_pressed(KEY_D)) - float(Input.is_physical_key_pressed(KEY_A)), float(Input.is_physical_key_pressed(KEY_E)) - float(Input.is_physical_key_pressed(KEY_Q)), float(Input.is_physical_key_pressed(KEY_S)) - float(Input.is_physical_key_pressed(KEY_W)))
 	if move == Vector3.ZERO:return
-	camera_target += camera.global_basis * move * delta * maxf(1, camera_distance * .5)
+	var distance: float = orbit_setup.radius if _orbit_setup_active() else camera_distance
+	var shift := camera.global_basis * move * delta * maxf(.0001 if custom_orbit or _orbit_setup_active() else 1.0, distance * .5)
+	if custom_orbit or _orbit_setup_active():
+		camera.position += shift
+		if _orbit_setup_active(): orbit_setup.refresh()
+		return
+	camera_target += shift
 	_update_camera()
 
 func _apply_preset(name: String) -> void:
@@ -1712,6 +1783,14 @@ func _load_scientific_inspection(path: String) -> void:
 	status_label.text = "Restored scientific inspection; playback paused." if problem.is_empty() else problem
 
 func _capture_inspection_png(path: String, with_state: bool) -> Error:
+	# Also covers durable-selection screenshots. Temporary setup graphics are
+	# never scientific overlays or part of exported presentation.
+	if orbit_setup != null: orbit_setup.suppress_capture(true)
+	var result: Error = await _capture_inspection_png_clean(path, with_state)
+	if orbit_setup != null: orbit_setup.suppress_capture(false)
+	return result
+
+func _capture_inspection_png_clean(path: String, with_state: bool) -> Error:
 	if with_state and selection_controller != null and not selection_controller.state.definitions.is_empty():return await selection_controller.temporal.durable.capture_to(path)
 	if inspection_busy: return ERR_BUSY
 	if with_state and frame_a == null: return ERR_UNAVAILABLE

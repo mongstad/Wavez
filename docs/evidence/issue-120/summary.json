@@ -1,0 +1,201 @@
+{
+  "issue": 120,
+  "title": "CAMERA-ORBIT-001 \u2014 Add custom orbit pivot/radius setup for Free camera",
+  "branch": "120-camera-orbit-001-add-custom-orbit-pivotradius-setup-for-free-camera",
+  "accepted_main": "1a607740876736fdff34a25ca18ef395d33a4fe7",
+  "accepted_main_pr": 148,
+  "candidate_version": "v0.1.0.12",
+  "owner_acceptance": "pending owner UX review",
+  "platform": "Linux x86_64 / Godot 4.7.2 / NVIDIA RTX 3070 Ti",
+  "renderers": {
+    "forward_plus": {
+      "orbit_setup": {
+        "checks": 716,
+        "failures": [],
+        "source_hashes_unchanged": {
+          "mixed.ssc": "7d76cf259eb5e9231b99742db5360ed287b3478accdebd3fd92829b878340050",
+          "particles.ssc": "9d57589b351ffcb265fb4fb7e786286acce7ca26c3dfb297587f9ab38d36db94",
+          "volume.ssc": "6b292199708e36ee482ab43a833474c774c9852fbf1779199400b27e750b0fab",
+          "mesh.ssc": "5c7de2a384a4095f8eb6ed95c9af8e8fa92a1ee229dfa00a64fedff85caa6212"
+        },
+        "runtime": {
+          "exit_code": 0,
+          "errors": [],
+          "clean_log": true,
+          "matched_accepted_main_gl_teardown": false
+        }
+      },
+      "camera_tumble": {
+        "checks": 13044,
+        "failures": [],
+        "source_hashes_unchanged": {
+          "particles.ssc": "da3d1b570c4ec763c0cc3c475f66498b8bdedc377c9d72f2fa8cac73979c98dc",
+          "volume.ssc": "f5d4381b515411d7dfa4533b66c5b3a849b631088c1a3e80b9e7d1a901bd0b07",
+          "mesh.ssc": "08030d2237b8fcbd99b42fe301a97001f9b77929609046a9d3d67ef400f07256"
+        },
+        "runtime_log": "orbit-120/regressions/forward_plus-camera_tumble"
+      },
+      "view_preset": {
+        "checks": 838,
+        "failures": [],
+        "source_hashes_unchanged": {
+          "scene.ssc": "88f5c645163ec80bb4a58e55e2601c27db75652bc5fa266a3556fa07904ad277",
+          "different.ssc": "34f16b63549cc20886649d8522857ae6b0cfa88b0fbeda63bdca1d3fcb955056",
+          "particles.ssc": "37307ed4714a1f7be9264f4df4c472bc6625ce3e7c123d4519f89aca5b61abe2"
+        },
+        "runtime_log": "orbit-120/regressions/forward_plus-view_preset"
+      },
+      "viewer_shell": {
+        "checks": 667,
+        "failures": [],
+        "source_hashes_unchanged": {
+          "scene.ssc": "af6b5691ed0ff9e684b5b21bd2d00100bc0c950b99c6ac9722fe331b3712961c",
+          "replacement.ssc": "50fde15b609c0aec8b98d24f1f20a6114eba8934c9ff0140758b8bac5a96c7e5",
+          "invalid.ssc": "85b88a0128bebf2b8c2c6e7b9030e49cbbb83f2f60ec834420eaade3db477d90"
+        },
+        "runtime_log": "orbit-120/regressions/forward_plus-viewer_shell"
+      },
+      "edge_reveal": {
+        "checks": 210,
+        "failures": [],
+        "source_hashes_unchanged": {
+          "scene.ssc": "93ef125b2d03670e53092dc06a01006c15688da9cf39163df02ac4d78bbe7a18",
+          "replacement.ssc": "ea47378284fc50901d666f4d47ff58d4b6024c875184b94dcbf748707bfc6d93",
+          "invalid.ssc": "85b88a0128bebf2b8c2c6e7b9030e49cbbb83f2f60ec834420eaade3db477d90"
+        },
+        "runtime_log": "orbit-120/regressions/forward_plus-edge_reveal"
+      },
+      "render_pacing": {
+        "checks": 290,
+        "failures": [],
+        "source_hashes_unchanged": {
+          "particles.ssc": "f728233d087062d8af16e9b8385ba587a1c110cd2a0e58e40eedd2917ecd2d4a",
+          "field.ssc": "592ed6de0638a458caf330dd8fedf68f288fbd2d7a1e6a8d143997281f2ee9e7",
+          "mesh.ssc": "879de0a102279b289e44c042a82c0b286080e9cd0e9b36f86ad3a6c5acb54a96",
+          "mixed.ssc": "fa24fc5c6152d039889a523ad3acc5239db20d325ffda3ef7217137ec563cf86"
+        },
+        "runtime_log": "orbit-120/regressions/forward_plus-render_pacing"
+      },
+      "viewer_status": {
+        "checks": 257,
+        "failures": [],
+        "source_hashes_unchanged": {
+          "/home/Nozba/Codex/SIMSCOPE/orbit-120/regressions/forward_plus-viewer_status/scene.ssc": "4f1fca159ee36dc5648ad03905041b8d1c6b3e11540142453dd9a8a8749da7ab",
+          "/home/Nozba/Codex/SIMSCOPE/orbit-120/regressions/forward_plus-viewer_status/fields.ssc": "9aad1192bfdd1ff6f9fe64c7efff43c80bb7b8994f0b389d86d49b88b216dd74"
+        },
+        "runtime_log": "orbit-120/regressions/forward_plus-viewer_status"
+      },
+      "video_current": {
+        "checks": 235,
+        "failures": 0,
+        "source_hashes_unchanged": "verified by suite",
+        "runtime_log": "orbit-120/regressions/forward_plus-video_current"
+      }
+    },
+    "gl_compatibility": {
+      "orbit_setup": {
+        "checks": 716,
+        "failures": [],
+        "source_hashes_unchanged": {
+          "mixed.ssc": "f2a3e01fcfc6b88ef6fc86115d3a3f278deb8fbf8f713c0633199f0d5829aa17",
+          "particles.ssc": "c72b740d9dbb617c577f9e5646b47c3ec5cdb609e94b55e9c4c744ceaa4297a8",
+          "volume.ssc": "e4d4c11c12c2ca6744cc0777fef90ab39bfe3e802b686638d3829b7685245f36",
+          "mesh.ssc": "39348de8e358afa6add598e3f60578d25e7d9bd963ab6136cd8fd6ea212597a2"
+        },
+        "runtime": {
+          "exit_code": 0,
+          "errors": [
+            "ERROR: Texture with GL ID of 54: leaked 349524 bytes.",
+            "ERROR: Texture with GL ID of 147: leaked 349524 bytes."
+          ],
+          "clean_log": false,
+          "matched_accepted_main_gl_teardown": true
+        }
+      },
+      "camera_tumble": {
+        "checks": 13044,
+        "failures": [],
+        "source_hashes_unchanged": {
+          "particles.ssc": "6428b2d8c1bbbfd764555a28053fda7098612a8507d99e91589a078fb19f8fa5",
+          "volume.ssc": "533e81d26bbf58a510621ae96f3663938c3d3d1c343c552d38fc48540081ce54",
+          "mesh.ssc": "bad51c93c104708e212fdb4abf731453f2e7b466c0f5436fb1b6b7f229cb5079"
+        },
+        "runtime_log": "orbit-120/regressions/gl_compatibility-camera_tumble"
+      },
+      "view_preset": {
+        "checks": 778,
+        "failures": [],
+        "source_hashes_unchanged": {
+          "scene.ssc": "53d093f3b5d98b67a71f3b7c0ca6a471145ba378d12f9001eb9a279eb423cc5a",
+          "different.ssc": "4728be050523940465c2cda3724416ce4fb3d4ce44bf55f0cd98da38d40cdec9",
+          "particles.ssc": "8e3de4041a4d02070005c08e207f112b5cc080bbe9b2a659bd705788eef0cbe1"
+        },
+        "runtime_log": "orbit-120/regressions/gl_compatibility-view_preset"
+      },
+      "viewer_shell": {
+        "checks": 667,
+        "failures": [],
+        "source_hashes_unchanged": {
+          "scene.ssc": "b2943a40646d4691c86b1da9d85359e7125b3e5d905b39d38d352664d1c42668",
+          "replacement.ssc": "ba0a06792b7f3c74c6280aa5541ba9243762d559542246054f2305e8e4d2631b",
+          "invalid.ssc": "85b88a0128bebf2b8c2c6e7b9030e49cbbb83f2f60ec834420eaade3db477d90"
+        },
+        "runtime_log": "orbit-120/regressions/gl_compatibility-viewer_shell"
+      },
+      "edge_reveal": {
+        "checks": 210,
+        "failures": [],
+        "source_hashes_unchanged": {
+          "scene.ssc": "77078b5217f719a653f812738a611edf1789e5192141f6dfa9e0e1b176720371",
+          "replacement.ssc": "c852a7727fc48a2f05574f169f5860b3a2e747b715386f1e261b95df09ed03b9",
+          "invalid.ssc": "85b88a0128bebf2b8c2c6e7b9030e49cbbb83f2f60ec834420eaade3db477d90"
+        },
+        "runtime_log": "orbit-120/regressions/gl_compatibility-edge_reveal"
+      },
+      "render_pacing": {
+        "checks": 290,
+        "failures": [],
+        "source_hashes_unchanged": {
+          "particles.ssc": "9fe5147b07ad21f545df4c4925ebc44d8c2285a2416b6df2b503f672b69d5a5c",
+          "field.ssc": "d5ebdf0b2c238336b4bfed5998fe476d3b0725f73bf87687125cd66efd13705a",
+          "mesh.ssc": "e86ecdb7aa8d01736868d1e90c26f0cc29d2f632dc590e0791af221457691cd5",
+          "mixed.ssc": "c17ab5aa4bc1495a443a2bd81acca6bc00b177f595c6b04e75ec0339a1ebda75"
+        },
+        "runtime_log": "orbit-120/regressions/gl_compatibility-render_pacing"
+      },
+      "viewer_status": {
+        "checks": 257,
+        "failures": [],
+        "source_hashes_unchanged": {
+          "/home/Nozba/Codex/SIMSCOPE/orbit-120/regressions/gl_compatibility-viewer_status/scene.ssc": "95d82cd9b9ddb52439204774e2afa92351e211911d7fc23e274cb7fa46d90b1d",
+          "/home/Nozba/Codex/SIMSCOPE/orbit-120/regressions/gl_compatibility-viewer_status/fields.ssc": "f10c4b9de0adb1c9369709a9cf8a52d69d1646f8629881d74fcaf9da2ed2e162"
+        },
+        "runtime_log": "orbit-120/regressions/gl_compatibility-viewer_status"
+      },
+      "video_current": {
+        "checks": 225,
+        "failures": 0,
+        "source_hashes_unchanged": "verified by suite",
+        "runtime_log": "orbit-120/regressions/gl_compatibility-video_current"
+      }
+    }
+  },
+  "python_version_tests": {
+    "tests": 2,
+    "failures": 0
+  },
+  "static_checks": [
+    "isolated native import passed",
+    "python compilation passed",
+    "git diff --check passed"
+  ],
+  "native_assertions_passed": 32444,
+  "limitations": [
+    "Focused strict Compatibility log check fails without explicit baseline comparison. Two GL texture-leak teardown diagnostics (349524 bytes each) reproduce on accepted main; count/type/size match after normalizing runtime IDs.",
+    "Compatibility omits the existing 60 preset quality round-trip comparisons and 10 exact GPU float-plane readback assertions; Forward+ retains them.",
+    "PNG pixel comparisons cover the full simulation area and the temporary panel position; capture-time transport disabling lies outside that comparison.",
+    "Hands-on owner UX acceptance, Windows/macOS, other GPUs and production-scale camera precision are unverified. No production scientific simulation was rerun.",
+    "World-space float32 precision limits tiny radii at large coordinates. Custom radius scales near/far clipping, so distant geometry can lie beyond the local far plane; Reset/Frame restores normal clipping."
+  ],
+  "initial_failures_corrected": "See README.md for sandbox/editor, harness, first-frame label layout and tiny-radius projection corrections. Final focused suites have zero assertion failures."
+}

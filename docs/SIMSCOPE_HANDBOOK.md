@@ -215,8 +215,19 @@ Wheel zoom, free-camera WASD/Q/E movement, F (Frame scene), R (reset) and the
 chosen orbit center retain their previous roles. O toggles automatic world-Y
 orbit independently; manual dragging temporarily suspends it.
 
-Recipes retain the existing yaw, pitch, target, distance and full transform
-fields. They can save pole and upside-down orientations without a new schema.
+With Free camera enabled, hold **RMB inside the viewport** to configure a custom
+orbit around any region. The proposed pivot is the camera position plus its
+forward direction times the selected radius. Use the logarithmic slider or wheel
+(**Shift+wheel** for fine adjustment), and continue WASD/QE flight and mouse-look.
+Release RMB to commit; **R** cancels/resets through the existing Reset Camera
+action. Temporary violet radius guides and their panel are excluded from PNGs
+and video. Free movement after commit retains the pivot; deliberately resuming
+orbit reconciles its distance from the current position. Reset/Frame Scene
+replace the custom pivot. See [custom orbit setup](CUSTOM_ORBIT_SETUP.md).
+
+Presets retain yaw, pitch, target, distance and full transform, plus the generic
+`custom_orbit` flag. They can save pole and upside-down orientations within the
+existing version-1 preset format.
 Deterministic video still rotates the saved camera about world Y using video
 time. See [UI-003 validation](CAMERA_TUMBLE_VALIDATION.md) for coverage and limits.
 

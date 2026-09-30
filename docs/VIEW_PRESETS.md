@@ -41,7 +41,7 @@ nonsingular. Range, logarithm, opacity and camera constraints are validated too.
 
 | Group | Saved members |
 | --- | --- |
-| `view` | `point_scale`, `exposure`, `clean_view`, `brightness_scale`, `gamma`, `orbit_enabled`, `orbit_speed`, `free_camera`, `yaw`, `pitch`, `camera_distance`, `camera_target` (xyz), `camera_transform` (basis xyz + origin), `starfield_visible` |
+| `view` | `point_scale`, `exposure`, `clean_view`, `brightness_scale`, `gamma`, `orbit_enabled`, `orbit_speed`, `free_camera`, `custom_orbit`, `yaw`, `pitch`, `camera_distance`, `camera_target` (xyz), `camera_transform` (basis xyz + origin), `starfield_visible` |
 | `particles` | `colormap_name`, `normalization_mode`, `manual_min`, `manual_max`, `logarithmic`, `cyclic`, `invert_map`, `clamp_map`, `show_legend` |
 | `environment` | `glow_enabled`, `glow_intensity`, `glow_strength`, `glow_bloom`, `fog_enabled`, `fog_density`, `tonemap_mode`, `tonemap_exposure`, `tonemap_white`, `background_mode`, `background_color` (RGBA) |
 | `camera` | `fov`, `near`, `far`, `keep_aspect` |
