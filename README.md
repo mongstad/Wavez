@@ -20,6 +20,7 @@ The [category simulation panel](docs/UX4_PANEL.md) was owner-merged in PR #75.
 Start with:
 
 - [Quickstart](QUICKSTART.md)
+- [Custom orbit setup](docs/CUSTOM_ORBIT.md)
 - [Current status](docs/CURRENT_STATUS.md)
 - [Violet UI cleanup and owner checks](docs/UX5_CLEANUP.md)
 - [Application version and build policy](docs/VERSIONING.md) — view the identity in Help → About SimScope

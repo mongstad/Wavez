@@ -1,0 +1,33 @@
+{
+  "checks": 438,
+  "failures": [],
+  "renderer": "gl_compatibility",
+  "custom_camera_exports": [
+    {
+      "camera": "locked",
+      "overlay": false,
+      "complete": true
+    },
+    {
+      "camera": "locked",
+      "overlay": true,
+      "complete": true
+    },
+    {
+      "camera": "orbit",
+      "overlay": false,
+      "complete": true
+    },
+    {
+      "camera": "orbit",
+      "overlay": true,
+      "complete": true
+    }
+  ],
+  "source_hashes_unchanged": {
+    "particles.ssc": "930ed1e0a0f3d4f336f8bcee0712adc150fd46dc0bd136f9533089cbcf3b819a",
+    "field.ssc": "47b379efc8fe1253e75f78540a7365975f361f735fb4e8e9598a971c995f0d01",
+    "mesh.ssc": "f72ecf10622d8938c0c6acfc4b4d2737b1d5eb8cd5edbd20a6ee802cdd1bdb13",
+    "mixed.ssc": "f51ee3dbb16fd0d593c1381d698cf42dfd660d0d5808675b0cc6f5639ee941dc"
+  }
+}

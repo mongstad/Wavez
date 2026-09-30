@@ -41,13 +41,18 @@ nonsingular. Range, logarithm, opacity and camera constraints are validated too.
 
 | Group | Saved members |
 | --- | --- |
-| `view` | `point_scale`, `exposure`, `clean_view`, `brightness_scale`, `gamma`, `orbit_enabled`, `orbit_speed`, `free_camera`, `yaw`, `pitch`, `camera_distance`, `camera_target` (xyz), `camera_transform` (basis xyz + origin), `starfield_visible` |
+| `view` | `point_scale`, `exposure`, `clean_view`, `brightness_scale`, `gamma`, `orbit_enabled`, `orbit_speed`, `free_camera`, `custom_orbit`, `yaw`, `pitch`, `camera_distance`, `camera_target` (xyz), `camera_transform` (basis xyz + origin), `starfield_visible` |
 | `particles` | `colormap_name`, `normalization_mode`, `manual_min`, `manual_max`, `logarithmic`, `cyclic`, `invert_map`, `clamp_map`, `show_legend` |
 | `environment` | `glow_enabled`, `glow_intensity`, `glow_strength`, `glow_bloom`, `fog_enabled`, `fog_density`, `tonemap_mode`, `tonemap_exposure`, `tonemap_white`, `background_mode`, `background_color` (RGBA) |
 | `camera` | `fov`, `near`, `far`, `keep_aspect` |
 | `quality` | `msaa_3d`, `screen_space_aa`, `use_taa`, `use_debanding`, `scaling_3d_scale` |
 | `volume` | `colormap`, `lower`, `upper`, `legend`, `opacity`, `step`, `normalization`, `opacity_mode`, `opacity_lower`, `opacity_upper` |
 | `mesh` | `colormap`, `lower`, `upper`, `legend`, `wireframe` |
+
+Custom orbit setup (#120) stores its committed generic camera and `custom_orbit`
+boolean for scale-aware navigation. The temporary radius/pivot proposal is never
+serialized: saving during RMB setup uses the pre-setup camera, and loading a valid
+preset abandons the draft. See [custom orbit setup](CUSTOM_ORBIT.md).
 
 The schema and validation bounds live in
 [view_preset.gd](../viewer/scene/view_preset.gd). Volume/mesh groups capture the

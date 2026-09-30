@@ -215,6 +215,15 @@ Wheel zoom, free-camera WASD/Q/E movement, F (Frame scene), R (reset) and the
 chosen orbit center retain their previous roles. O toggles automatic world-Y
 orbit independently; manual dragging temporarily suspends it.
 
+In Free camera, hold **RMB** in the viewport to set a custom local orbit. Move
+the mouse to look, fly with **WASD/Q/E**, and scroll to adjust the radius
+(**Shift-wheel** for fine adjustment). Release RMB to commit. Normal drag,
+zoom and free movement then continue at the new position/range; free movement
+translates the camera and local center together. **R** resets/cancels through
+the existing camera reset; **Esc** remains fullscreen recovery. Temporary
+guides are excluded from PNG/video output. See [custom orbit setup](CUSTOM_ORBIT.md)
+for geometry, preset behavior, capture boundaries and owner checks.
+
 Recipes retain the existing yaw, pitch, target, distance and full transform
 fields. They can save pole and upside-down orientations without a new schema.
 Deterministic video still rotates the saved camera about world Y using video

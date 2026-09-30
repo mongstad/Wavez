@@ -125,6 +125,7 @@ func recompute() -> void:
 	temporal.submit(saved.operation,saved.request.duplicate(true),saved.source.duplicate(true),saved.label+" recomputed")
 
 func capture_to(path: String) -> Error:
+	viewer._cancel_orbit_setup()
 	if viewer.inspection_busy:return ERR_BUSY
 	if FileAccess.file_exists(path) or DirAccess.dir_exists_absolute(path):status.text = "Choose a new PNG filename.";return ERR_ALREADY_EXISTS
 	var destination := path.get_basename()+".inspection"

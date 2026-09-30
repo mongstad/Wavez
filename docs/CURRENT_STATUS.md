@@ -35,9 +35,18 @@ PR #142 at `b33e9a8`. Capture and video file-dialog preferences (#50) were
 owner-merged in PR #144 at `61f6a78`, accepted build 9.
 The violet visual-system slice (#143) was owner-merged in PR #145 at `d23f431`,
 accepted build 10. Its [review reports](UX5_STYLE_SLICE.md) and Round 1–4 evidence
-retain their original review-time wording. Current authorized work is #147,
-the sole Ready item when selected on 2026-09-30: [residual UI cleanup](UX5_CLEANUP.md),
-**pending owner review**, candidate build 11. Particle Filters retain membership
+retain their original review-time wording. Residual UI cleanup (#147) was
+owner-merged in PR #148 at `1a60774`, accepted build 11. Its
+[review report](UX5_CLEANUP.md) retains its original review-time wording.
+Current authorized work is #120, the sole Ready item when selected on 2026-09-30:
+[custom orbit setup](CUSTOM_ORBIT.md), **pending owner UX review**, candidate
+build 12. Hold RMB in Free camera to preview a pivot/radius along the view ray,
+use wheel/Shift-wheel and live WASD/Q/E/look, then release to commit. Normal
+navigation continues at the new position/scale; free movement translates the
+camera and orbit together. R uses the existing reset; Esc retains fullscreen
+recovery. Draft guides are excluded from PNG/video and saved camera state.
+
+Particle Filters retain membership
 semantics with violet checkboxes; immediate boolean controls share violet switches,
 including rebuilt Fields/Meshes and Tools controls. **File → Details…** opens the
 existing source/status surface, retaining full paths and diagnostics. The top Source
