@@ -1,0 +1,57 @@
+{
+  "baseline": "f82a939b9f7136e4aac5d0cda36d2f579687fcf0",
+  "candidate_version": "v0.1.0.13",
+  "initial_runs": [
+    {
+      "renderer": "forward_plus",
+      "suite": "exit_menu",
+      "code": 0,
+      "result": "Exit menu: 6 native process cases PASS (forward_plus), including 3 graceful worker cancellations\n"
+    },
+    {
+      "renderer": "forward_plus",
+      "suite": "viewer_shell",
+      "code": 0,
+      "result": "Viewer shell: 673 checks PASS (forward_plus); source hashes unchanged\n"
+    },
+    {
+      "renderer": "forward_plus",
+      "suite": "window_chrome",
+      "code": 0,
+      "result": "Window chrome: 76 checks, 18 KWin stages PASS (wayland, forward_plus)\n/home/Nozba/Codex/SIMSCOPE/SimScope/tools/validate_window_chrome.py:39: DeprecationWarning: Gio.DBusConnection.register_object is deprecated\n  registration = conn.register_object('/Review', Gio.DBusNodeInfo.new_for_xml(xml).interfaces[0], record, None, None)\n"
+    },
+    {
+      "renderer": "gl_compatibility",
+      "suite": "exit_menu",
+      "code": 0,
+      "result": "Exit menu: 6 native process cases PASS (gl_compatibility), including 3 graceful worker cancellations\n"
+    },
+    {
+      "renderer": "gl_compatibility",
+      "suite": "viewer_shell",
+      "code": 0,
+      "result": "Viewer shell: 673 checks PASS (gl_compatibility); source hashes unchanged\n"
+    },
+    {
+      "renderer": "gl_compatibility",
+      "suite": "window_chrome",
+      "code": 1,
+      "result": "/home/Nozba/Codex/SIMSCOPE/SimScope/tools/validate_window_chrome.py:39: DeprecationWarning: Gio.DBusConnection.register_object is deprecated\n  registration = conn.register_object('/Review', Gio.DBusNodeInfo.new_for_xml(xml).interfaces[0], record, None, None)\nTraceback (most recent call last):\n  File \"/home/Nozba/Codex/SIMSCOPE/SimScope/tools/validate_window_chrome.py\", line 123, in <module>\n    main()\n    ~~~~^^\n  File \"/home/Nozba/Codex/SIMSCOPE/SimScope/tools/validate_window_chrome.py\", line 110, in main\n    assert not any(word in clean_log for word in ['ERROR:', 'WARNING:']), 'Godot diagnostic'\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: Godot diagnostic\n"
+    }
+  ],
+  "rerun": {
+    "renderer": "gl_compatibility",
+    "suite": "window_chrome",
+    "code": 0,
+    "result": "/home/Nozba/Codex/SIMSCOPE/SimScope/tools/validate_window_chrome.py:39: DeprecationWarning: Gio.DBusConnection.register_object is deprecated\n  registration = conn.register_object('/Review', Gio.DBusNodeInfo.new_for_xml(xml).interfaces[0], record, None, None)\nWindow chrome: 76 checks, 18 KWin stages PASS (wayland, gl_compatibility)\n"
+  },
+  "native_regression_checks": 1498,
+  "shutdown_cases": 12,
+  "graceful_worker_cancellations": 6,
+  "python_version_tests": 2,
+  "final_failures": [],
+  "diagnostics": [
+    "First Compatibility window-chrome run passed 76 assertions and 18 stages but failed the warning gate because Godot recompiled a cached shader. Unmodified rerun passed.",
+    "Existing KWin harness reports Gio register_object deprecation and permits its documented libdecor GTK fallback."
+  ]
+}

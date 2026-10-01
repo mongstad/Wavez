@@ -38,15 +38,13 @@ accepted build 10. Its [review reports](UX5_STYLE_SLICE.md) and Round 1–4 evid
 retain their original review-time wording. Residual UI cleanup (#147) was
 owner-merged in PR #148 at `1a60774`, accepted build 11. Its
 [review report](UX5_CLEANUP.md) retains its original review-time wording.
-Current authorized work is the owner-requested restart of #120 against its revised
-2026-09-30 description: [edit the existing orbit center/radius](ORBIT_CENTER.md),
-**pending owner UX review** in PR #152, candidate build 12. Navigate → Edit orbit
-center… opens a temporary XYZ/radius editor. Apply changes the existing target
-and distance; Cancel discards the draft. Normal orbit, wheel zoom, Free-camera
-movement, Auto Orbit, playback, preparation and pacing keep their accepted-main
-implementations. The previous [custom-orbit report](CUSTOM_ORBIT.md) and its
-original evidence are historical records of the superseded attempt, not current
-usage or validation guidance.
+Repositioning the existing orbit center/radius (#120) was owner-merged in PR #152
+at `f82a939`, accepted build 12. Its [review report](ORBIT_CENTER.md) and earlier
+custom-orbit report/evidence retain their historical review-time wording.
+Current authorized work is #153, the sole Ready issue when selected on 2026-10-01:
+[File → Exit](EXIT_MENU.md), **pending owner review**, candidate build 13. Exit is
+available with or without a capture and shares the window close button's normal
+shutdown function; existing worker/job cleanup is unchanged.
 
 Particle Filters retain membership
 semantics with violet checkboxes; immediate boolean controls share violet switches,

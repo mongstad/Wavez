@@ -17,7 +17,7 @@ func setup(owner_shell, row: HBoxContainer) -> void:
 	var minimize_action: Button = shell.button(actions, "", minimize)
 	minimize_action.tooltip_text = "Minimize"; minimize_action.set_meta("chrome_icon", "minimize")
 	maximize_button = shell.button(actions, "", toggle_maximize); maximize_button.set_meta("chrome_icon", "maximize")
-	var close: Button = shell.button(actions, "", func(): get_tree().quit())
+	var close: Button = shell.button(actions, "", request_close)
 	close.tooltip_text = "Close SimScope"; close.set_meta("chrome_icon", "close")
 	for action in actions.get_children():
 		action.custom_minimum_size = Vector2(32, 32); action.theme_type_variation = "IconAction"
@@ -104,3 +104,7 @@ func _input(event: InputEvent) -> void:
 		if DisplayServer.has_feature(DisplayServer.FEATURE_WINDOW_DRAG):
 			start_resize.call(edge, get_window().get_window_id())
 			get_viewport().set_input_as_handled()
+
+func request_close() -> void:
+	# File → Exit and the window close button share normal SceneTree teardown.
+	get_tree().quit()

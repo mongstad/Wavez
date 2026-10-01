@@ -35,6 +35,7 @@ def main():
     assert not report['failures'], report['failures']
     contract = (ROOT / 'docs/UX4_DESIGN.md').read_text().split('```text\n', 1)[1].split('```', 1)[0].strip().splitlines()
     contract.insert(contract.index('  Open capture') + 1, '  Details…')  # #147 source/status entry
+    contract.insert(contract.index('View'), '  Exit')  # #153 normal application shutdown
     contract.insert(contract.index('  Probe marker'), '  Global effects')  # #68: global Bloom destination
     contract.insert(contract.index('  Handbook') + 1, '  About SimScope')  # #96 replaces #131's temporary Version entry
     contract = [line.replace('Save scene', 'Save view preset…').replace('Load scene', 'Load view preset…') for line in contract]

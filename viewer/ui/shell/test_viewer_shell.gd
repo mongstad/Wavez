@@ -410,6 +410,7 @@ func menu_tree(shell) -> Array:
 func menu_children(popup: PopupMenu, indent: String) -> Array:
 	var result: Array = []
 	for i in popup.item_count:
+		if popup.is_item_separator(i): continue
 		result.append(indent+popup.get_item_text(i))
 		var child := popup.get_item_submenu(i)
 		if not child.is_empty(): result.append_array(menu_children(popup.get_node(child),indent+"  "))
