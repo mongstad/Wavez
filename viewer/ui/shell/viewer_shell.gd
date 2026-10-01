@@ -466,9 +466,6 @@ func build_menus(row: HBoxContainer) -> void:
 	for title in ["Mapping","Derive range","Slice","Clipping","Isosurface","Source probe","Performance","Geometry"]: command(tools,title,viewer.tools_ui.open.bind(title),"tool:"+title)
 	var help: PopupMenu = menus.Help.get_popup()
 	command(help,"Shortcuts",func():show_details("Shortcuts","Drag to orbit. Scroll to zoom.\nF: Frame scene   R: Reset camera\nO: Auto orbit   Alt+N: Navigate\nF11: Fullscreen\nDouble-click viewport: Fullscreen   Esc: Restore preceding shell\nSpace: Play or pause   Left and Right: Step sample\nTimeline: Drag to scrub; double-click playhead/current time to seek\n\nTab and Shift+Tab move focus. Enter or Space activates buttons.\n\nMidnight Scientific"),"shortcuts")
-	command(help,"Handbook",func():
-		var path := ProjectSettings.globalize_path("res://../docs/SIMSCOPE_HANDBOOK.md")
-		show_details("Handbook",FileAccess.get_file_as_string(path) if FileAccess.file_exists(path) else "Handbook unavailable in this installation."),"handbook")
 	command(help,"About WAVEZ",func():
 		var focus := get_viewport().gui_get_focus_owner()
 		if focus != null:previous_focus = weakref(focus)
@@ -499,7 +496,7 @@ func refresh_commands() -> void:
 	var particles: bool = loaded and viewer.scene_layers != null and not viewer.scene_layers.particle_id.is_empty()
 	for key in commands:
 		var entry: Dictionary = commands[key]
-		var enabled: bool = loaded or key in ["open","details","fullscreen","shortcuts","handbook","about","exit"]
+		var enabled: bool = loaded or key in ["open","details","fullscreen","shortcuts","about","exit"]
 		if key in ["probe","tool:Clipping","tool:Isosurface","tool:Source probe"]: enabled = fields
 		if key == "tool:Mapping": enabled = particles
 		if key in ["tool:Slice","tool:Derive range"]: enabled = fields or particles

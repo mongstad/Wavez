@@ -1,7 +1,10 @@
 # About resources
 
 The current About repository link displays `github.com/mongstad/Wavez` and opens
-`https://github.com/mongstad/Wavez` (#164).
+`https://github.com/mongstad/Wavez` (#164). The adjacent **Documentation** link
+opens `https://github.com/mongstad/Wavez#readme` (#171), replacing the removed
+in-app Help → Handbook route. Both links use the platform browser handler and
+show a copyable requested URL if it is unavailable.
 
 ## Current WAVEZ artwork (#155)
 

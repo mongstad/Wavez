@@ -41,7 +41,8 @@ func run() -> void:
 	check(not shell.commands.has("version") and shell.commands.has("about"),"About is the only application identity menu")
 	var help: PopupMenu = shell.menus.Help.get_popup(); var entries := PackedStringArray()
 	for index in help.item_count:entries.append(help.get_item_text(index))
-	check(entries == PackedStringArray(["Shortcuts","Handbook","About WAVEZ"]),"Exact Help menu has no standalone Version")
+	check(entries == PackedStringArray(["Shortcuts","About WAVEZ"]),"Exact Help menu has no standalone Version")
+	check(not shell.commands.has("handbook"),"Handbook route is absent")
 	open_about(shell); await settle()
 	check(dialog.visible and not shell.details.visible,"Help opens the dedicated About surface without a capture")
 	check(dialog.identity.text == "WAVEZ "+Version.read().full,"About uses authoritative full identity")
@@ -75,6 +76,11 @@ func run() -> void:
 		var requests: int = viewer.selection_controller.jobs.serial
 		open_about(shell); await settle()
 		check(dialog.visible and dialog.size.x <= dimensions.x and dialog.size.y <= dimensions.y,"About fits viewport "+str(dimensions))
+		if dimensions.x < 1440:
+			dialog.scroller.ensure_control_visible(dialog.documentation); await settle()
+		check(dialog.documentation.text == "Documentation" and dialog.documentation.is_visible_in_tree(),"Documentation link visible "+str(dimensions))
+		check(dialog.scroller.get_global_rect().encloses(dialog.documentation.get_global_rect()),"Documentation link unclipped "+str(dimensions))
+		check(dialog.documentation.get_parent().get_global_rect().encloses(dialog.github.get_global_rect()),"Repository link fits beside Documentation "+str(dimensions))
 		check(dialog.scroller.horizontal_scroll_mode == ScrollContainer.SCROLL_MODE_DISABLED,"Compact layout wraps instead of horizontal scrolling")
 		check(dialog.logo.size.x >= 96 and dialog.logo.size.y >= 96,"Logo remains compact and readable")
 		check(dialog.identity.text == "WAVEZ "+Version.read().full,"Full version remains visible "+str(dimensions))
@@ -106,16 +112,22 @@ func run() -> void:
 		layouts.append({"viewport":str(dimensions),"actual_viewport":str(root.size),"dialog":str(dialog.size)})
 	open_about(shell); await settle()
 	var requested := []; var normal_opener: Callable = dialog.url_opener
-	dialog.url_opener = func(url):requested.append(url);return ERR_UNAVAILABLE
-	dialog.github.pressed.emit(); await settle()
+	var link_state := Visual.snapshot(viewer); var link_sample: Dictionary = viewer.committed_sample.duplicate(true)
 	check(dialog.github.text == "github.com/mongstad/Wavez","GitHub displays the current repository")
-	check(requested == [dialog.REPOSITORY] and dialog.REPOSITORY == "https://github.com/mongstad/Wavez","GitHub dispatches only the canonical URL")
-	check(dialog.browser_error.visible and dialog.browser_error.text.contains(dialog.REPOSITORY) and dialog.visible,"Missing browser handler leaves About usable with a copyable URL")
-	check(dialog.scroller.get_global_rect().encloses(dialog.browser_error.get_global_rect()),"Browser failure message is visible in the compact viewport")
-	picture(dialog,"browser-unavailable")
-	dialog.url_opener = func(url):requested.append(url);return OK
-	dialog.github.pressed.emit()
-	check(not dialog.browser_error.visible,"Successful dispatch clears the previous error")
+	check(dialog.REPOSITORY == "https://github.com/mongstad/Wavez" and dialog.DOCUMENTATION == "https://github.com/mongstad/Wavez#readme","Distinct repository and README destinations")
+	for link in [dialog.github,dialog.documentation]:
+		var expected: String = dialog.REPOSITORY if link == dialog.github else dialog.DOCUMENTATION
+		requested.clear()
+		dialog.url_opener = func(url):requested.append(url);return ERR_UNAVAILABLE
+		link.pressed.emit(); await settle()
+		check(requested == [expected],"Link dispatches only its canonical URL: "+expected)
+		check(dialog.browser_error.visible and dialog.browser_error.text.contains(expected) and dialog.visible,"Missing handler leaves a copyable requested URL: "+expected)
+		check(dialog.scroller.get_global_rect().encloses(dialog.browser_error.get_global_rect()),"Browser failure message visible in compact viewport")
+		picture(dialog,"browser-unavailable-"+("repository" if link == dialog.github else "documentation"))
+		dialog.url_opener = func(url):requested.append(url);return OK
+		link.pressed.emit()
+		check(not dialog.browser_error.visible,"Successful dispatch clears previous error")
+	check(Visual.snapshot(viewer) == link_state and viewer.committed_sample == link_sample,"Both URL routes preserve scientific/session state")
 	dialog.url_opener = normal_opener
 	var escape := InputEventKey.new(); escape.keycode = KEY_ESCAPE; escape.pressed = true
 	escape.window_id = root.get_window_id() if dialog.is_embedded() else dialog.get_window_id()
@@ -123,10 +135,12 @@ func run() -> void:
 	check(not dialog.visible,"Escape dismisses About")
 	open_about(shell); await settle()
 	if real_browser:
+		report.browser_dispatches = []
 		dialog.url_opener = func(url):
-			var result := OS.shell_open(url); report.browser_url = url; report.browser_result = result; return result
-		dialog.github.pressed.emit()
-		check(report.browser_result == OK,"Normal platform handler accepts the GitHub URL")
+			var result := OS.shell_open(url); report.browser_dispatches.append({"url":url,"result":result}); return result
+		for link in [dialog.github,dialog.documentation]:
+			link.pressed.emit()
+			check(report.browser_dispatches[-1].result == OK,"Normal platform handler accepts the URL")
 	report.merge({"checks":checks,"failures":failures,"version":Version.read(),"layouts":layouts,"help":entries,"runtime":Engine.get_version_info().string,"renderer":RenderingServer.get_current_rendering_method(),"architecture":Engine.get_architecture_name()})
 	FileAccess.open(output.path_join("about-report.json"),FileAccess.WRITE).store_string(JSON.stringify(report,"  "))
 	viewer.free(); print("ABOUT: ",checks," checks, ",failures.size()," failures");get_tree().quit(0 if failures.is_empty() else 1)

@@ -1,5 +1,11 @@
 # Current status
 
+Issue #171 replaces Help → Handbook with **About WAVEZ → Documentation**,
+opening the repository README. The normal repository link and shared Details
+surface remain. This navigation change is pending owner review; repository
+documentation and version/license/runtime information are preserved. See the
+[navigation validation and owner checks](ABOUT_DOCUMENTATION_NAVIGATION.md).
+
 Issue #160 removes Quick setup and its Tools menu entry, pending owner review
 (candidate build 15). Field/channel controls, Derive range percentile inputs,
 manual color/opacity mappings, scene/portable view presets and reusable volume
