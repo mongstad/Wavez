@@ -1,5 +1,9 @@
 # Current status
 
+Issue #151 removes the redundant instruction above the empty viewport’s
+**Open capture** button and centers the button in the available scene area.
+Capture opening is unchanged; candidate build 16 is pending owner review.
+
 Issue #171 replaces Help → Handbook with **About WAVEZ → Documentation**,
 opening the repository README. The normal repository link and shared Details
 surface remain. This navigation change is pending owner review; repository

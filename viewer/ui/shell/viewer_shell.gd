@@ -126,7 +126,6 @@ func setup(owner_viewer) -> void:
 		viewer._sync_control_state())
 	window_chrome = preload("res://ui/shell/window_chrome.gd").new(); add_child(window_chrome); window_chrome.setup(self, row)
 	empty = VBoxContainer.new(); add_child(empty)
-	var welcome := Label.new(); welcome.text = "Open a capture to begin"; empty.add_child(welcome)
 	button(empty, "Open capture", viewer._show_open_dialog, "open").theme_type_variation = "PrimaryButton"
 	open_error = PanelContainer.new(); add_child(open_error)
 	var error_row := HBoxContainer.new(); open_error.add_child(error_row)
@@ -327,7 +326,7 @@ func layout() -> void:
 	dock.position = Vector2(extent.x-width, top); dock.size = Vector2(width, maxf(0, bottom-top)); dock.visible = dock_visible
 	viewer.resize_handle.position = Vector2(extent.x-width-8, top); viewer.resize_handle.size = Vector2(8, maxf(0, bottom-top)); viewer.resize_handle.visible = dock_visible
 	var scene_width := extent.x-width-8 if dock_visible else extent.x
-	empty.position = Vector2(maxf(12, (scene_width-empty.size.x)/2), maxf(152, extent.y/2-40))
+	empty.position = Vector2(maxf(12, (scene_width-empty.size.x)/2), maxf(top+12, top+(bottom-top-empty.size.y)/2))
 	open_error.position = Vector2(12, top+96)
 	layout_legend(Vector2(dock.position.x if dock_visible else extent.x, bottom))
 	if window_chrome != null: window_chrome.refresh()
