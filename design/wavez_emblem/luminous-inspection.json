@@ -1,0 +1,173 @@
+{
+  "blender_version": "5.2.2 LTS",
+  "scene": "Wavez Emblem - Contained Luminous Orb",
+  "review_state": "Luminous refinement; awaiting owner visual approval",
+  "reference_sha256": "4398a96d6aaf89733417d5c6c204c1d0238751bee07ad5250a63bcce1ef21aa3",
+  "meshes": [
+    {
+      "name": "Wavez_Luminous_Body.004",
+      "vertices": 1106,
+      "triangles": 2208,
+      "dimensions": [
+        1.974,
+        1.974,
+        1.974
+      ],
+      "finite_vertices": true,
+      "degenerate_triangles": 0,
+      "maximum_radius": 0.987,
+      "color_attribute": false,
+      "finite_colors": null,
+      "materials": [
+        "Wavez Luminous / abyss blue body.004"
+      ]
+    },
+    {
+      "name": "Wavez_Luminous_Swirling_Layers.004",
+      "vertices": 42750,
+      "triangles": 42560,
+      "dimensions": [
+        2.004,
+        2.001917,
+        1.999928
+      ],
+      "finite_vertices": true,
+      "degenerate_triangles": 0,
+      "maximum_radius": 1.002002,
+      "color_attribute": true,
+      "finite_colors": true,
+      "materials": [
+        "Wavez Luminous / cobalt violet currents.004"
+      ]
+    },
+    {
+      "name": "Wavez_Luminous_Energy_Band.004",
+      "vertices": 7459,
+      "triangles": 10048,
+      "dimensions": [
+        2.020438,
+        1.031875,
+        2.0076
+      ],
+      "finite_vertices": true,
+      "degenerate_triangles": 0,
+      "maximum_radius": 1.0142,
+      "color_attribute": true,
+      "finite_colors": true,
+      "materials": [
+        "Wavez Luminous / energy crest.004"
+      ]
+    },
+    {
+      "name": "Wavez_Luminous_Energy_Mantle.003",
+      "vertices": 3825,
+      "triangles": 7168,
+      "dimensions": [
+        2.007936,
+        0.998166,
+        0.981352
+      ],
+      "finite_vertices": true,
+      "degenerate_triangles": 0,
+      "maximum_radius": 1.004,
+      "color_attribute": true,
+      "finite_colors": true,
+      "materials": [
+        "Wavez Luminous / translucent energy mantle.003"
+      ]
+    },
+    {
+      "name": "Wavez_Luminous_Depth_Network.004",
+      "vertices": 5676,
+      "triangles": 3784,
+      "dimensions": [
+        1.947149,
+        1.932508,
+        1.992894
+      ],
+      "finite_vertices": true,
+      "degenerate_triangles": 0,
+      "maximum_radius": 1.002006,
+      "color_attribute": true,
+      "finite_colors": true,
+      "materials": [
+        "Wavez Luminous / fine energy network.004"
+      ]
+    }
+  ],
+  "materials": {
+    "Wavez Luminous / abyss blue body.004": {
+      "emission_strength": 0.0,
+      "roughness": 0.699999988079071,
+      "surface_render_method": "DITHERED"
+    },
+    "Wavez Luminous / cobalt violet currents.004": {
+      "emission_strength": 3.0,
+      "roughness": 0.41999998688697815,
+      "surface_render_method": "DITHERED"
+    },
+    "Wavez Luminous / energy crest.004": {
+      "emission_strength": 35.0,
+      "roughness": 0.41999998688697815,
+      "surface_render_method": "DITHERED"
+    },
+    "Wavez Luminous / translucent energy mantle.003": {
+      "emission_strength": 9.0,
+      "roughness": 0.41999998688697815,
+      "surface_render_method": "BLENDED"
+    },
+    "Wavez Luminous / fine energy network.004": {
+      "emission_strength": 2.5,
+      "roughness": 0.41999998688697815,
+      "surface_render_method": "DITHERED"
+    }
+  },
+  "total_vertices": 60816,
+  "total_triangles": 65768,
+  "bounds": {
+    "min": [
+      -1.010219,
+      -1.012675,
+      -1.0038
+    ],
+    "max": [
+      1.010219,
+      0.999917,
+      1.0038
+    ]
+  },
+  "unit_orb_maximum_geometry_radius": 1.0142,
+  "all_geometry_within_1_015_radius": true,
+  "root_rotation_radians": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "particle_systems": 0,
+  "modifiers": 0,
+  "reference_landmark_count": 14,
+  "reference_wave_error_pixels": {
+    "maximum": 2.8707,
+    "mean": 1.2496,
+    "each": [
+      2.8538,
+      0.3791,
+      2.0169,
+      1.824,
+      0.774,
+      0.035,
+      0.1817,
+      0.1888,
+      0.4987,
+      1.2666,
+      1.7373,
+      1.8024,
+      1.0658,
+      2.8707
+    ],
+    "meaning": "2D tube-centerline distance at the original 1254px image scale; not full-image similarity or owner acceptance"
+  },
+  "preview_bloom": "Blender compositor, two Fog Glow scales; not a runtime export feature",
+  "runtime_exported": false,
+  "godot_integration_validated": false
+}
