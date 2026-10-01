@@ -32,7 +32,7 @@ def main():
     report = json.loads((out / 'report.json').read_text())
     assert not report['failures'], report['failures']
     assert hashes == {path.name: hashlib.sha256(path.read_bytes()).hexdigest() for path in out.glob('*.ssc')}
-    assert hashlib.sha256((ROOT / 'viewer/ui/about/simscope-logo.png').read_bytes()).hexdigest() == 'b666a782e6f3a482ae8e87bee5231aaaa7b7711e4d2ba7a91362f7cbdc6e9722'
+    assert hashlib.sha256((ROOT / 'viewer/ui/about/wavez-logo-dark.png').read_bytes()).hexdigest() == '4398a96d6aaf89733417d5c6c204c1d0238751bee07ad5250a63bcce1ef21aa3'
     report['source_hashes_unchanged'] = hashes
     (out / 'report.json').write_text(json.dumps(report, indent=2) + '\n')
     print(f'Violet cleanup: {report["checks"]} PASS ({args.renderer}); complete sources unchanged')

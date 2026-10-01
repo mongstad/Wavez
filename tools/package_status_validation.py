@@ -23,7 +23,7 @@ def main():
     (project/'review_entry.gd').write_text('''extends Node
 func _ready():
     for arg in OS.get_cmdline_user_args():
-        if arg.begins_with("--simscope-render-job="):
+        if arg.begins_with("--wavez-render-job="):
             add_child(load("res://Main.tscn").instantiate());return
     add_child(load("res://review_status.gd").new())
 ''')
@@ -40,7 +40,7 @@ exclude_filter=""
 binary_format/architecture="x86_64"
 binary_format/embed_pck=false
 ''')
-    binary = out/'SimScope.x86_64'
+    binary = out/'wavez.x86_64'
     for name, flags in [('import', ['--editor', '--import']), ('export', ['--export-debug', 'Review Linux', str(binary)])]:
         with (out/(name+'.log')).open('w') as log:
             subprocess.run([a.godot, '--headless', '--path', str(project)]+flags, stdout=log, stderr=subprocess.STDOUT, check=True, timeout=120)

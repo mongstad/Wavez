@@ -3,8 +3,8 @@ import hashlib,json,shutil,struct,sys,tempfile,time,unittest,subprocess
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
 import numpy as np
-from simscope_export import SceneCapture,SceneReader
-from simscope_export.scene import schema_valid,MAX_SAMPLE
+from wavez_export import SceneCapture,SceneReader
+from wavez_export.scene import schema_valid,MAX_SAMPLE
 from tools.extract_surface import extract
 from tools.import_grid_npz import convert,inspect_npz
 OUT=ROOT/'results/g3';OUT.mkdir(parents=True,exist_ok=True)

@@ -1,7 +1,7 @@
-# SimScope UX Implementation Plan
+# Wavez UX Implementation Plan
 
 **Document:** `UX_IMPLEMENTATION_PLAN.md`  
-**Project:** SimScope  
+**Project:** Wavez  
 **Status:** Authoritative UX/UI roadmap  
 **Primary UI technology:** Godot  
 **Review model:** Milestone-gated; no milestone advances without explicit acceptance
@@ -10,11 +10,11 @@
 
 ## 1. Purpose
 
-This document defines the staged UX/UI modernization plan for SimScope.
+This document defines the staged UX/UI modernization plan for Wavez.
 
-The goal is not to redesign the application in one large pass. The goal is to evolve SimScope into a coherent, professional scientific visualization application through small, reviewable milestones while preserving existing functionality and scientific behavior.
+The goal is not to redesign the application in one large pass. The goal is to evolve Wavez into a coherent, professional scientific visualization application through small, reviewable milestones while preserving existing functionality and scientific behavior.
 
-This roadmap is intentionally separate from the main SimScope engineering roadmap (`G1`, `G2`, `G3`, ...). Core engineering milestones and UX milestones may progress independently unless a dependency is explicitly documented.
+This roadmap is intentionally separate from the main Wavez engineering roadmap (`G1`, `G2`, `G3`, ...). Core engineering milestones and UX milestones may progress independently unless a dependency is explicitly documented.
 
 UX milestones use the prefix:
 
@@ -29,7 +29,7 @@ Every UX milestone has a hard review gate. Astra must complete, validate, report
 
 ## 2. Product Design Charter
 
-SimScope should feel like a **modern professional scientific application designed in 2026**:
+Wavez should feel like a **modern professional scientific application designed in 2026**:
 
 - sleek
 - elegant
@@ -137,7 +137,7 @@ When priorities conflict:
 
 ### 3.1 Current direction
 
-Godot remains the primary SimScope application UI and visualization environment.
+Godot remains the primary Wavez application UI and visualization environment.
 
 The UX modernization should strengthen separation between:
 
@@ -246,7 +246,7 @@ A visually successful milestone that breaks workflows is a failed milestone.
 
 The UX modernization must **not preserve obsolete capture formats merely for historical compatibility**.
 
-Before UX1 implementation work begins, SimScope should retire legacy capture compatibility unless a current, supported workflow is proven to depend on it.
+Before UX1 implementation work begins, Wavez should retire legacy capture compatibility unless a current, supported workflow is proven to depend on it.
 
 Legacy formats targeted for removal:
 
@@ -270,7 +270,7 @@ The supported capture baseline for the UX program is:
 
 Before deleting legacy compatibility code, Astra must perform a focused dependency audit and verify that no current supported:
 
-- SimScope feature
+- Wavez feature
 - exporter
 - example
 - benchmark
@@ -286,7 +286,7 @@ If a genuine current dependency is found, document it and stop for review rather
 
 Historical source, reports, Git history, and archived benchmark evidence may continue to mention old formats. Historical records do not make those formats part of the current supported product contract.
 
-The UX roadmap protects the **current supported capture contract**, not every historical capture format SimScope has ever understood.
+The UX roadmap protects the **current supported capture contract**, not every historical capture format Wavez has ever understood.
 
 ---
 
@@ -384,7 +384,7 @@ them opportunistically. #37 may reserve visual space only until separately Ready
 
 ## Goal
 
-Understand the existing SimScope UI before redesigning it, identify technical/UX debt, and define the visual and structural design system that later milestones will implement.
+Understand the existing Wavez UI before redesigning it, identify technical/UX debt, and define the visual and structural design system that later milestones will implement.
 
 UX1 should make **minimal product-facing visual changes**.
 
@@ -432,7 +432,7 @@ Identify:
 
 ## Design System Specification
 
-Define a proposed SimScope design system, including at minimum:
+Define a proposed Wavez design system, including at minimum:
 
 ### Surface hierarchy
 
@@ -521,7 +521,7 @@ UX1 must produce:
 2. UX/problem inventory
 3. Coupling/technical-risk inventory
 4. Proposed information hierarchy
-5. SimScope design-system specification
+5. Wavez design-system specification
 6. Recommended reusable component list
 7. Proposed theme/token architecture
 8. Regression-sensitive workflow list
@@ -844,7 +844,7 @@ Moving a control is not permission to rewrite its algorithm or saved semantics.
 Use the accepted visual/copy specification:
 
 - Midnight Scientific remains the proper design-system name
-- SimScope-authored copy uses sentence case
+- Wavez-authored copy uses sentence case
 - **Population counts** is the consistent analysis/result term
 - **State** becomes a File submenu under the owner-approved UX4 direction
 - source-defined object/channel names and unit casing are preserved
@@ -1195,7 +1195,7 @@ Include real native interaction review, not just screenshots:
 
 ## Goal
 
-Prove that the completed UX migration preserves the accepted SimScope product
+Prove that the completed UX migration preserves the accepted Wavez product
 contracts and does not introduce material performance regressions.
 
 UX9 is verification/hardening, not a final opportunity to add postponed features.
@@ -1432,7 +1432,7 @@ Project state or begin another issue.
 
 ## 11. Definition of Success
 
-The UX modernization is successful when SimScope feels like a coherent professional application rather than a collection of individually added controls.
+The UX modernization is successful when Wavez feels like a coherent professional application rather than a collection of individually added controls.
 
 A successful result should:
 

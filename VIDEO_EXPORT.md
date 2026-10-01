@@ -1,4 +1,4 @@
-# SimScope deterministic video export
+# Wavez deterministic video export
 
 ## Current contract and G4 extension
 
@@ -103,7 +103,7 @@ controls. PNG capability was exercised; OGV was not used for this feature.
 
 Godot documents Movie Maker as a startup mode and supports PNG sequences as well
 as movie containers. Its automatic writer captures viewport frames, including
-startup iterations. For SimScope's explicit load/index/sample/save lifecycle,
+startup iterations. For Wavez's explicit load/index/sample/save lifecycle,
 we use a manually updated **SubViewport** and save its completed image directly.
 This avoids startup frames in the video, AVI container limits, and coupling the
 export's resolution to a desktop window. The separate process still uses
@@ -121,7 +121,7 @@ Modules under `viewer/video/`:
   cancellation, FFmpeg encoding and verified output publication.
 - `export_dialog.gd`: settings, estimates, launch, nonblocking monitoring and cancel.
 
-Normal Godot startup recognizes `--simscope-render-job=...` and dispatches to the
+Normal Godot startup recognizes `--wavez-render-job=...` and dispatches to the
 worker before building an interactive scene. Jobs serialize capture path/range,
 frame bounds, output FPS/rate/size/path, camera transform/projection/target,
 orbit, preset, particle appearance, mappings, normalization, filters, trails,
@@ -294,9 +294,9 @@ The existing capture is not needed to encode already-rendered PNGs.
 The viewer launches the equivalent of:
 
 ```bash
-godot --path /absolute/path/SimScope/viewer --resolution 640x360 \
+godot --path /absolute/path/Wavez/viewer --resolution 640x360 \
   --fixed-fps 30 --disable-vsync --audio-driver Dummy -- \
-  --simscope-render-job='/absolute/path/.simscope-export-ID/job.json'
+  --wavez-render-job='/absolute/path/.simscope-export-ID/job.json'
 ```
 
 A retained job can be copied into a new directory and edited for automation; use
@@ -307,7 +307,7 @@ window and setup iterations, not the export SubViewport.
 For comparison, the installed Movie Maker PNG probe used:
 
 ```bash
-godot --path /tmp/simscope-movie-probe --script probe.gd \
+godot --path /tmp/wavez-movie-probe --script probe.gd \
   --resolution 96x64 --write-movie probe.png --fixed-fps 30 --quit-after 2
 ```
 

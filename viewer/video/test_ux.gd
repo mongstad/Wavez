@@ -63,7 +63,7 @@ func run() -> void:
 	second.screenshot_dialog.hide()
 	# Let the new viewport finish its first draw before destroying its sky.
 	# Godot 4.7.2 Compatibility leaks sky-filter textures if this viewport is
-	# created and freed in the same frame (also reproducible without SimScope).
+	# created and freed in the same frame (also reproducible without WAVEZ).
 	await process_frame
 	await RenderingServer.frame_post_draw
 	second_viewport.queue_free()

@@ -1,4 +1,4 @@
-# SimScope viewer
+# Wavez viewer
 
 Godot scientific viewer for SIMSCP4 particles, meshes and scalar fields. Open
 native `.ssc` scenes; older capture generations are unsupported.

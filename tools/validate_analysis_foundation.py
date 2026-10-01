@@ -11,8 +11,8 @@ import time
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
 from tests.g4.fixtures import scene
-from simscope_export.analysis.contracts import float_token
-from simscope_export.analysis.sampling import bracket
+from wavez_export.analysis.contracts import float_token
+from wavez_export.analysis.sampling import bracket
 
 
 def main():
@@ -43,7 +43,7 @@ def main():
     report=dict(command=command,exit_code=result.returncode,timed_out=timed_out,seconds=time.monotonic()-start,source_sha256=before,
                 source_unchanged=before==after,code_revision=subprocess.check_output(["git","rev-parse","HEAD"],cwd=ROOT,text=True).strip(),
                 source_files={str(f.relative_to(ROOT)):hashlib.sha256(f.read_bytes()).hexdigest()
-                              for folder in [ROOT/"simscope_export/analysis",ROOT/"viewer/analysis"] for f in folder.glob("*") if f.is_file()},
+                              for folder in [ROOT/"wavez_export/analysis",ROOT/"viewer/analysis"] for f in folder.glob("*") if f.is_file()},
                 result=json.loads((out/"godot.json").read_text()) if (out/"godot.json").exists() else None)
     (out/"report.json").write_text(json.dumps(report,indent=2))
     return 0 if result.returncode==0 and "ERROR:" not in result.stdout and before==after and report["result"] and not report["result"]["failures"] else 1

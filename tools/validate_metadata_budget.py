@@ -10,8 +10,8 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from simscope_export import SceneReader, MetadataCapacityError
-from simscope_export.analysis import SourceSnapshot, Context, AnalysisError
+from wavez_export import SceneReader, MetadataCapacityError
+from wavez_export.analysis import SourceSnapshot, Context, AnalysisError
 from tests.metadata_fixture import generate
 from tools.verify_ssc import verify
 

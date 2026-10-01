@@ -1,6 +1,6 @@
 extends Control
 ## Presentation-only adapter. Controllers and the root scientific viewport retain ownership.
-const ThemeSource = preload("res://ui/theme/simscope_theme.gd")
+const ThemeSource = preload("res://ui/theme/wavez_theme.gd")
 const About = preload("res://ui/about/about_dialog.gd")
 const WORKSPACES = ["Particles", "Fields", "Meshes"]
 var viewer
@@ -75,9 +75,9 @@ func setup(owner_viewer) -> void:
 	for side in ["left", "right"]: margin.add_theme_constant_override("margin_"+side, 12)
 	for side in ["top", "bottom"]: margin.add_theme_constant_override("margin_"+side, 8)
 	var row := HBoxContainer.new(); row.add_theme_constant_override("separation", 8); margin.add_child(row)
-	brand = Label.new(); brand.name = "SimScopeBrand"; brand.text = "SimScope"
+	brand = Label.new(); brand.name = "WavezBrand"; brand.text = "WAVEZ"
 	brand.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	brand.tooltip_text = "SimScope · Drag to move window · Double-click to maximize/restore"
+	brand.tooltip_text = "WAVEZ · Drag to move window · Double-click to maximize/restore"
 	brand.mouse_filter = Control.MOUSE_FILTER_STOP; row.add_child(brand)
 	title_drag = Control.new(); title_drag.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	title_drag.tooltip_text = "Drag to move window · Double-click to maximize/restore"; row.add_child(title_drag)
@@ -469,7 +469,7 @@ func build_menus(row: HBoxContainer) -> void:
 	command(help,"Handbook",func():
 		var path := ProjectSettings.globalize_path("res://../docs/SIMSCOPE_HANDBOOK.md")
 		show_details("Handbook",FileAccess.get_file_as_string(path) if FileAccess.file_exists(path) else "Handbook unavailable in this installation."),"handbook")
-	command(help,"About SimScope",func():
+	command(help,"About WAVEZ",func():
 		var focus := get_viewport().gui_get_focus_owner()
 		if focus != null:previous_focus = weakref(focus)
 		about.open(),"about")

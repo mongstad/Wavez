@@ -41,23 +41,23 @@ func run() -> void:
 	check(not shell.commands.has("version") and shell.commands.has("about"),"About is the only application identity menu")
 	var help: PopupMenu = shell.menus.Help.get_popup(); var entries := PackedStringArray()
 	for index in help.item_count:entries.append(help.get_item_text(index))
-	check(entries == PackedStringArray(["Shortcuts","Handbook","About SimScope"]),"Exact Help menu has no standalone Version")
+	check(entries == PackedStringArray(["Shortcuts","Handbook","About WAVEZ"]),"Exact Help menu has no standalone Version")
 	open_about(shell); await settle()
 	check(dialog.visible and not shell.details.visible,"Help opens the dedicated About surface without a capture")
-	check(dialog.identity.text == "SimScope "+Version.read().full,"About uses authoritative full identity")
+	check(dialog.identity.text == "WAVEZ "+Version.read().full,"About uses authoritative full identity")
 	check(dialog.logo.texture.get_size() == Vector2(1254,1254),"Unmodified owner logo is available as a packaged texture")
 	check(dialog.logo.stretch_mode == TextureRect.STRETCH_KEEP_ASPECT_CENTERED,"Logo preserves aspect ratio")
 	var summary := ""
 	for child in dialog.overview.get_children():
 		if child is Label:summary += child.text+"\n"
 	check(summary.contains("Copyright © 2026 Johnny Mongstad"),"Overview shows the canonical rights holder")
-	check(summary.contains("SimScope project material\nPolyForm Noncommercial 1.0.0"),"Overview attributes PolyForm to SimScope")
+	check(summary.contains("WAVEZ project material\nPolyForm Noncommercial 1.0.0"),"Overview attributes PolyForm to WAVEZ")
 	check(summary.contains("Godot Engine/runtime — MIT License") and summary.contains("third-party components retain"),"Overview distinguishes engine and other third-party licensing")
 	var source_version = ProjectSettings.get_setting(Version.SETTING)
 	ProjectSettings.set_setting(Version.SETTING,"v2.3.4.1001"); open_about(shell)
-	check(dialog.identity.text == "SimScope v2.3.4.1001","About follows release and BUILD changes without another literal")
+	check(dialog.identity.text == "WAVEZ v2.3.4.1001","About follows release and BUILD changes without another literal")
 	ProjectSettings.set_setting(Version.SETTING,null); open_about(shell)
-	check(dialog.identity.text.begins_with("SimScope version unavailable."),"Missing version has an explicit fallback")
+	check(dialog.identity.text.begins_with("WAVEZ version unavailable."),"Missing version has an explicit fallback")
 	ProjectSettings.set_setting(Version.SETTING,source_version)
 	dialog.hide()
 	viewer._open_capture(output.path_join("scene.ssc")); viewer.playing = false; viewer.orbit_enabled = false
@@ -77,7 +77,7 @@ func run() -> void:
 		check(dialog.visible and dialog.size.x <= dimensions.x and dialog.size.y <= dimensions.y,"About fits viewport "+str(dimensions))
 		check(dialog.scroller.horizontal_scroll_mode == ScrollContainer.SCROLL_MODE_DISABLED,"Compact layout wraps instead of horizontal scrolling")
 		check(dialog.logo.size.x >= 96 and dialog.logo.size.y >= 96,"Logo remains compact and readable")
-		check(dialog.identity.text == "SimScope "+Version.read().full,"Full version remains visible "+str(dimensions))
+		check(dialog.identity.text == "WAVEZ "+Version.read().full,"Full version remains visible "+str(dimensions))
 		check(dialog.runtime.text.contains(Engine.get_version_info().string),"Godot runtime version is read live")
 		picture(dialog,"about-%d" % dimensions.x)
 		if dimensions.x >= 1440:
@@ -94,7 +94,7 @@ func run() -> void:
 			if not report.has("notice_sha256"):report.notice_sha256 = {}
 			report.notice_sha256[dialog.notice_choice.get_item_text(index)] = dialog.notice_text.text.sha256_text()
 			if index == 0:
-				check(dialog.notice_text.text.contains("PolyForm Noncommercial License 1.0.0") and dialog.notice_text.text.contains("Johnny Mongstad"),"SimScope license and rights holder are preserved")
+				check(dialog.notice_text.text.contains("PolyForm Noncommercial License 1.0.0") and dialog.notice_text.text.contains("Johnny Mongstad"),"WAVEZ license and rights holder are preserved")
 			if dialog.notice_choice.get_item_text(index) == "Godot Engine — MIT License":
 				check(dialog.notice_text.text == Engine.get_license_text(),"Godot MIT notice belongs to the running engine")
 		check(dialog.size.x <= dimensions.x,"Notices retain compact width")

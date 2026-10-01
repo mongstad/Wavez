@@ -3,7 +3,7 @@ import argparse, hashlib, json, sys, zipfile
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
 import numpy as np
-from simscope_export import SceneCapture
+from wavez_export import SceneCapture
 MAX_SOURCE=256*1024**2
 
 

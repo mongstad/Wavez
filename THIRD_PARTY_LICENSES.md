@@ -1,6 +1,6 @@
 # Third-party licenses and dependency notices
 
-The root [SimScope license](LICENSE) applies to original SimScope material only.
+The root [Wavez license](LICENSE) applies to original Wavez material only.
 Third-party software, libraries, fonts, palette data and tools retain their own
 licenses, copyright notices and distribution obligations.
 
@@ -18,7 +18,7 @@ actually shipped.
   [`viewer/COLORMAPS_LICENSE.txt`](viewer/COLORMAPS_LICENSE.txt).
 - **Use:** display-only scalar lookup tables.
 - **Obligation:** preserve the applicable Matplotlib and component notices. The
-  generated palette data are not relicensed as original SimScope material.
+  generated palette data are not relicensed as original Wavez material.
 
 ### DejaVu Sans Mono 2.37
 
@@ -28,18 +28,18 @@ actually shipped.
 - **Use:** numeric typography in the optional UX component/theme library.
 - **Modifications:** none recorded.
 
-### SimScope SVG command icons
+### Wavez SVG command icons
 
 The SVG command icons under `viewer/ui/icons/` are original project assets recorded
-by the accepted UX2 work and are covered as original SimScope material by the root
+by the accepted UX2 work and are covered as original Wavez material by the root
 license.
 
-The owner-supplied SimScope logo at `viewer/ui/about/simscope-logo.png` is project
+The owner-supplied Wavez logo at `viewer/ui/about/wavez-logo-dark.png` is project
 branding, not a third-party dependency. Its unchanged import is recorded in
 [`viewer/ui/about/README.md`](viewer/ui/about/README.md); the existing
 [branding policy](TRADEMARKS.md) applies.
 
-About SimScope packages generated copies of the canonical notices as a Godot
+About WAVEZ packages generated copies of the canonical notices as a Godot
 resource for offline access. Run `python tools/sync_about_notices.py` after editing
 the source notices, and `--check` to verify synchronization. Godot's MIT notice
 and third-party component/license information are read from the running engine.
@@ -47,7 +47,7 @@ and third-party component/license information are read from the running engine.
 ## External runtime/build dependencies — not vendored here
 
 These dependencies are obtained separately and are not copied into this source
-repository merely because SimScope can use them:
+repository merely because Wavez can use them:
 
 - **Python >= 3.10** — runtime for the Python package and analysis tools.
 - **NumPy >= 1.23** — required Python runtime dependency.
@@ -59,7 +59,7 @@ repository merely because SimScope can use them:
 - **Godot Engine 4.7.x** — viewer runtime/development engine; Godot itself is not
   vendored in this repository.
 - **FFmpeg** — optional external executable used by deterministic video export;
-  SimScope invokes a separately installed executable and does not bundle FFmpeg
+  Wavez invokes a separately installed executable and does not bundle FFmpeg
   in this source tree.
 
 If a future release bundles Python wheels, a Godot executable/runtime, FFmpeg, or

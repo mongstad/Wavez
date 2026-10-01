@@ -19,7 +19,7 @@ and [public API](SIMSCOPE_API.md). G4 selections and analysis
 use Python/NumPy; follow [the G4 guide](docs/G4_GUIDE.md) or generate its synthetic
 walkthrough with `python -m examples.g4_demo --output results/g4-demo`.
 
-SimScope does not require any scientific-simulation checkout. Optional external
+Wavez does not require any scientific-simulation checkout. Optional external
 integration work uses caller-supplied paths; see [repository boundaries](docs/REPOSITORY_BOUNDARY.md).
 
 Small validation (no scientific production runs):

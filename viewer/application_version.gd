@@ -15,5 +15,5 @@ static func read() -> Dictionary:
 
 static func details() -> String:
 	var identity := read()
-	if identity.has("error"):return "SimScope version unavailable.\n\n"+identity.error
-	return "SimScope "+identity.full
+	if identity.has("error"):return "WAVEZ version unavailable.\n\n"+identity.error
+	return "WAVEZ "+identity.full

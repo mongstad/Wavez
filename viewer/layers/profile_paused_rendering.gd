@@ -72,7 +72,7 @@ func run() -> void:
 	Profile.enabled = true
 	view = load("res://main.gd").new();view.capture_path = args[0];view.playing = false;view.orbit_enabled = orbit
 	var opened := Time.get_ticks_usec();root.add_child(view)
-	root.title = "SimScope #118 automated profile — " + output.get_base_dir().get_file()
+	root.title = "WAVEZ #118 automated profile — " + output.get_base_dir().get_file()
 	report.open_seconds = (Time.get_ticks_usec()-opened)/1000000.0
 	if view.generic_reader == null:check(false,"Capture opens");Job.write_json(output,report);quit(1);return
 	if owner_settings:

@@ -2,9 +2,9 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from simscope_export.analysis import Context,AnalysisError
-from simscope_export.analysis.result_store import ResultCache
-from simscope_export.analysis.plot_preview import preview,series
+from wavez_export.analysis import Context,AnalysisError
+from wavez_export.analysis.result_store import ResultCache
+from wavez_export.analysis.plot_preview import preview,series
 
 
 class PlotTests(unittest.TestCase):

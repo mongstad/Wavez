@@ -2,17 +2,17 @@ import csv,hashlib,json,os,tempfile,unittest
 from pathlib import Path
 from unittest.mock import patch
 import numpy as np
-from simscope_export.analysis import SourceSnapshot,Context,AnalysisError
-from simscope_export.analysis import selectors as S
-from simscope_export.analysis.native_analysis import run as analyze
-from simscope_export.analysis.diagnostics import run as import_csv
-from simscope_export.analysis.comparisons import run as compare
-from simscope_export.analysis.jobs import execute
-from simscope_export.analysis.result_store import ResultCache
-from simscope_export.analysis.member_assets import MemberAssets
-from simscope_export.analysis.atomic_output import Output
-from simscope_export.analysis.contracts import MIB
-from simscope_export.analysis.input_provenance import verify_inputs
+from wavez_export.analysis import SourceSnapshot,Context,AnalysisError
+from wavez_export.analysis import selectors as S
+from wavez_export.analysis.native_analysis import run as analyze
+from wavez_export.analysis.diagnostics import run as import_csv
+from wavez_export.analysis.comparisons import run as compare
+from wavez_export.analysis.jobs import execute
+from wavez_export.analysis.result_store import ResultCache
+from wavez_export.analysis.member_assets import MemberAssets
+from wavez_export.analysis.atomic_output import Output
+from wavez_export.analysis.contracts import MIB
+from wavez_export.analysis.input_provenance import verify_inputs
 from tests.g4.fixtures import scene,HIGH_ID
 
 

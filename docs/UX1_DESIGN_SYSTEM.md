@@ -1,4 +1,4 @@
-# SimScope design system — Midnight Scientific
+# Wavez design system — Midnight Scientific
 
 **Current design specification, reconciled by issue #8.** UX1/UX2 and issues
 #5–#7 are accepted. The [UX plan](../UX_IMPLEMENTATION_PLAN.md) governs milestone
@@ -240,9 +240,9 @@ Proposed flow: **Control intent → presenter/controller operation → validated
 Current shared library paths (introduced in UX2):
 
 ```text
-viewer/ui/theme/simscope_tokens.gd        # typed semantic token Resource
-viewer/ui/theme/simscope_dark.tres        # Godot Theme + style/type variations
-viewer/ui/theme/simscope_tokens.tres      # one canonical token instance
+viewer/ui/theme/wavez_tokens.gd        # typed semantic token Resource
+viewer/ui/theme/wavez_dark.tres        # Godot Theme + style/type variations
+viewer/ui/theme/wavez_tokens.tres      # one canonical token instance
 viewer/ui/fonts/                         # bundled numeric face and notices
 viewer/ui/icons/                         # consistent SVG command icons
 viewer/ui/components/                    # reusable controls/scenes

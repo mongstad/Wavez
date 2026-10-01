@@ -18,7 +18,7 @@ def main():
             job=copy.deepcopy(template);job['output_path']=str(folder/'result.mp4')
             path=folder/'job.json';path.write_text(json.dumps(job,indent=2))
             viewer=ROOT/'viewer' if mode=='optimized' else a.baseline_viewer.resolve()
-            cmd=[a.godot,'--path',str(viewer),'--resolution','512x384','--rendering-method',renderer,'--audio-driver','Dummy','--log-file',str(folder/'godot.log'),'--','--simscope-render-job='+str(path)]
+            cmd=[a.godot,'--path',str(viewer),'--resolution','512x384','--rendering-method',renderer,'--audio-driver','Dummy','--log-file',str(folder/'godot.log'),'--','--wavez-render-job='+str(path)]
             r=subprocess.run(cmd,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True,timeout=120)
             (folder/'stdout.log').write_text(r.stdout)
             check(r.returncode==0 and 'ERROR:' not in r.stdout,renderer+'/'+mode+' native export completed')

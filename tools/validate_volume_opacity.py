@@ -13,7 +13,7 @@ from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from simscope_export import SceneCapture, SceneReader
+from wavez_export import SceneCapture, SceneReader
 
 
 def run_native(command, out, env):
@@ -118,7 +118,7 @@ def main():
     (export/'job.json').write_text(json.dumps(job))
     run_native([args.godot, '--path', str(ROOT/'viewer'), '--rendering-method', args.renderer,
                 '--audio-driver', 'Dummy', '--fixed-fps', '4', '--disable-vsync', '--',
-                '--simscope-render-job='+str(export/'job.json')], export, env)
+                '--wavez-render-job='+str(export/'job.json')], export, env)
     assert json.loads((export/'progress.json').read_text())['stage'] == 'complete'
     assert np.array_equal(np.asarray(Image.open(out/'psi_real.png')),
                           np.asarray(Image.open(export/'frames/frame00000000.png'))), 'Export pixels differ'

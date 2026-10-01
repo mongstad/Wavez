@@ -72,7 +72,7 @@ func run() -> void:
 	check(capture.title == "Open capture" and not capture.mode_overrides_title, "Capture title")
 	check(video.title == "Export video" and not video.mode_overrides_title, "Video title")
 	check(not capture.use_native_dialog and not video.use_native_dialog, "Accepted built-in picker implementation retained")
-	check(capture.filters == PackedStringArray(["*.ssc ; SimScope scene (SIMSCP4)"]), "Capture filter retained")
+	check(capture.filters == PackedStringArray(["*.ssc ; WAVEZ scene (SIMSCP4)"]), "Capture filter retained")
 	check(video.filters == PackedStringArray(["*.mp4 ; H.264 MP4"]), "Export filter retained")
 	check(video.overwrite_warning_enabled, "Overwrite confirmation retained")
 	if phase == "capture_add":

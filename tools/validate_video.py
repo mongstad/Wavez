@@ -15,7 +15,7 @@ import time
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
 import numpy as np
-from simscope_export import SceneCapture
+from wavez_export import SceneCapture
 
 
 def main():
@@ -28,7 +28,7 @@ def main():
     args=parser.parse_args()
     ffmpeg=shutil.which('ffmpeg'); probe=shutil.which('ffprobe')
     if not ffmpeg or not probe: raise SystemExit('Full acceptance suite requires ffmpeg and ffprobe.')
-    base=args.output_dir.resolve() if args.output_dir else Path(tempfile.mkdtemp(prefix='simscope-native-video-'))
+    base=args.output_dir.resolve() if args.output_dir else Path(tempfile.mkdtemp(prefix='wavez-native-video-'))
     if args.output_dir:base.mkdir(parents=True,exist_ok=False)
     run=Path(tempfile.mkdtemp(prefix='acceptance ',dir=base))
     log=[]
@@ -64,7 +64,7 @@ def main():
         return path,job
     def launch(path,job):
         stream=(path.parent/'renderer.log').open('w')
-        process=subprocess.Popen(command(['--fixed-fps',str(job['fps']),'--disable-vsync','--','--simscope-render-job='+str(path)]),stdout=stream,stderr=subprocess.STDOUT)
+        process=subprocess.Popen(command(['--fixed-fps',str(job['fps']),'--disable-vsync','--','--wavez-render-job='+str(path)]),stdout=stream,stderr=subprocess.STDOUT)
         return process,stream
     def finish(process,stream,path,stage='complete'):
         process.wait(timeout=120);stream.close()

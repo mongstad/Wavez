@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" uid="uid://3ninko5w4s42" path="res://main.gd" id="1_main"]
 
-[node name="SimScope" type="Node3D" unique_id=390817511]
+[node name="WAVEZ" type="Node3D" unique_id=390817511]
 script = ExtResource("1_main")

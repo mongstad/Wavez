@@ -8,7 +8,7 @@ import sys
 import argparse
 import numpy as np
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
-from simscope_export import SceneCapture
+from wavez_export import SceneCapture
 
 
 def main():

@@ -6,11 +6,11 @@ import unittest
 
 import numpy as np
 
-from simscope_export.analysis import AnalysisError,Context
-from simscope_export.analysis.contracts import MIB,float_token
-from simscope_export.analysis.disk_quota import DiskQuota
-from simscope_export.analysis.member_assets import MemberAssets
-from simscope_export.analysis.result_store import ResultCache
+from wavez_export.analysis import AnalysisError,Context
+from wavez_export.analysis.contracts import MIB,float_token
+from wavez_export.analysis.disk_quota import DiskQuota
+from wavez_export.analysis.member_assets import MemberAssets
+from wavez_export.analysis.result_store import ResultCache
 
 
 class ResultStoreTests(unittest.TestCase):

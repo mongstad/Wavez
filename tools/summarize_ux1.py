@@ -67,7 +67,7 @@ def main():
     assert all(pair["passed"] for pair in pairs), pairs
     write(destination / "contrast.json", dict(status="PASS", purpose="Proposed UX1 palette only; not current UI accessibility certification", colors=COLORS, pairs=pairs))
     paths = subprocess.check_output(["git", "ls-tree", "-r", "--name-only", BASELINE], cwd=ROOT, text=True).splitlines()
-    protected = [name for name in paths if name.startswith(("viewer/", "simscope_export/", "examples/", "tests/"))]
+    protected = [name for name in paths if name.startswith(("viewer/", "wavez_export/", "examples/", "tests/"))]
     unchanged = []
     for name in protected:
         original = subprocess.check_output(["git", "show", BASELINE + ":" + name], cwd=ROOT)

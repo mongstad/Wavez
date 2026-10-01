@@ -8,10 +8,10 @@ import unittest
 
 import numpy as np
 
-from simscope_export import SceneCapture, SceneReader
-from simscope_export.analysis import AnalysisError, Cancelled, Context, SourceSnapshot
-from simscope_export.analysis.contracts import MIB, exact_id, float_token, parse_float_token
-from simscope_export.analysis.sampling import bracket, epoch, interpolated_positions, match_rows, mesh_compatible, probe_array, source_bracket, valid_axis
+from wavez_export import SceneCapture, SceneReader
+from wavez_export.analysis import AnalysisError, Cancelled, Context, SourceSnapshot
+from wavez_export.analysis.contracts import MIB, exact_id, float_token, parse_float_token
+from wavez_export.analysis.sampling import bracket, epoch, interpolated_positions, match_rows, mesh_compatible, probe_array, source_bracket, valid_axis
 from tests.g4.fixtures import scene, HIGH_ID
 from tests.scene_mutation import rewrite, set_ids
 

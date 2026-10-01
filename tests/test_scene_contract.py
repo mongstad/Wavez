@@ -6,9 +6,9 @@ import unittest
 from unittest.mock import patch
 
 import numpy as np
-from simscope_export import SceneCapture, SceneReader, MetadataCapacityError
-from simscope_export import scene, storage
-from simscope_export.analysis import AnalysisError, Context, SourceSnapshot
+from wavez_export import SceneCapture, SceneReader, MetadataCapacityError
+from wavez_export import scene, storage
+from wavez_export.analysis import AnalysisError, Context, SourceSnapshot
 
 
 class SceneContractTests(unittest.TestCase):

@@ -3,8 +3,8 @@ import copy
 import hashlib
 import struct
 import numpy as np
-from simscope_export import SceneReader
-from simscope_export import storage
+from wavez_export import SceneReader
+from wavez_export import storage
 
 
 def rewrite(path, change):

@@ -29,7 +29,7 @@ class ApplicationVersionTests(unittest.TestCase):
                     path.write_text('[application]\nconfig/version=' + json.dumps(value) + '\n')
                     with self.assertRaisesRegex(ValueError, "application/config/version"):
                         read_version(path)
-            for text in ['', '[application]\nconfig/name="SimScope"', '[application]\nconfig/version=broken']:
+            for text in ['', '[application]\nconfig/name="WAVEZ"', '[application]\nconfig/version=broken']:
                 path.write_text(text)
                 with self.assertRaises(ValueError):
                     read_version(path)

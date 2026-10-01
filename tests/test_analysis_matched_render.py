@@ -1,11 +1,11 @@
 import copy,hashlib,json,tempfile,unittest
 from pathlib import Path
-from simscope_export.analysis import SourceSnapshot,AnalysisError
-from simscope_export.analysis import selectors as S
-from simscope_export.analysis.jobs import execute
-from simscope_export.analysis.member_assets import MemberAssets
-from simscope_export.analysis.result_store import ResultCache
-from simscope_export.analysis.recipes import pack,unpack
+from wavez_export.analysis import SourceSnapshot,AnalysisError
+from wavez_export.analysis import selectors as S
+from wavez_export.analysis.jobs import execute
+from wavez_export.analysis.member_assets import MemberAssets
+from wavez_export.analysis.result_store import ResultCache
+from wavez_export.analysis.recipes import pack,unpack
 from tests.g4.fixtures import traveling_pulse
 
 
@@ -77,14 +77,14 @@ class MatchedRenderTests(unittest.TestCase):
         self.assertEqual((self.root/'pair/comparison.json').read_bytes(),before)
 
     def test_cancelled_preparation_never_publishes(self):
-        from simscope_export.analysis.contracts import Context
+        from wavez_export.analysis.contracts import Context
         context=Context(cancelled=lambda:True)
         with self.assertRaises(AnalysisError):self.run_job(context=context)
         self.assertFalse((self.root/'pair').exists())
 
     def test_recipe_race_after_initial_hash_refuses(self):
         from unittest.mock import patch
-        from simscope_export.analysis import recipes
+        from wavez_export.analysis import recipes
         original=recipes.load
         def changed(*args,**kwargs):
             path=Path(args[1]['path']);path.write_bytes(path.read_bytes()+b' ')

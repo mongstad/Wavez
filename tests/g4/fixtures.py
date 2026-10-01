@@ -1,6 +1,6 @@
 from pathlib import Path
 import numpy as np
-from simscope_export import SceneCapture
+from wavez_export import SceneCapture
 
 HIGH_ID = 9007199254740993
 

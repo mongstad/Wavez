@@ -43,7 +43,7 @@ def main():
         command = [args.godot,'--path',str(project),'--resolution','640x360','--position','0,0','--rendering-method',args.renderer,'--audio-driver','Dummy','--fixed-fps','30','--disable-vsync']
         if scenario == 'baseline':
             run([args.godot,'--headless','--path',str(project),'--editor','--import'],directory/'import.log')
-            command += ['--','--simscope-render-job='+str(path)]
+            command += ['--','--wavez-render-job='+str(path)]
         else:command += ['--script','res://video/test_background_worker.gd','--','--job='+str(path),'--scenario='+scenario]
         run(command,directory/'worker.log',2 if scenario == 'cancel' else 0)
         progress = json.loads((directory/'progress.json').read_text())

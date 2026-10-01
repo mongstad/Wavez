@@ -4,7 +4,7 @@ from pathlib import Path
 import numpy as np
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
-from simscope_export import SceneCapture
+from wavez_export import SceneCapture
 
 def prepare(out):
     out.mkdir(parents=True,exist_ok=True)
@@ -36,7 +36,7 @@ def prepare(out):
     (out/'replacement.ssc').unlink(missing_ok=True)
     with SceneCapture(out/'replacement.ssc',objects=[dict(id='field',kind='volume',units='u')]) as w:
         for t in [0,1]:w.add_volume('field',t,{'rho':np.ones((2,2,2),dtype='f8')},origin=[0,0,0],spacing=[1,1,1])
-    from simscope_export import SceneReader
+    from wavez_export import SceneReader
     with SceneReader(out/'ids.ssc') as reader:
         initial_end=max(r['end'] for r in reader.records if r['time']<=.5)
         (out/'live-config.json').write_text(json.dumps({'initial_end':initial_end,'final_end':(out/'ids.ssc').stat().st_size},indent=2))

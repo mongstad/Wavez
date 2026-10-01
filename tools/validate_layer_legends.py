@@ -48,7 +48,7 @@ def main():
                        output_path=str(directory / 'result.mp4'))
             path = directory / 'job.json'; path.write_text(json.dumps(job))
             render = subprocess.run([args.godot, '--path', str(ROOT / 'viewer'), '--rendering-method', args.renderer,
-                                     '--audio-driver', 'Dummy', '--', '--simscope-render-job=' + str(path)],
+                                     '--audio-driver', 'Dummy', '--', '--wavez-render-job=' + str(path)],
                                     capture_output=True, text=True, timeout=90)
             (directory / 'native.log').write_text(render.stdout + render.stderr)
             assert render.returncode == 0 and 'ERROR:' not in render.stdout + render.stderr

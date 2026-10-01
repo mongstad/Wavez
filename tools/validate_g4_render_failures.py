@@ -3,8 +3,8 @@ import argparse,hashlib,json,shutil,subprocess,sys,time
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
 from tests.g4.fixtures import traveling_pulse
-from simscope_export.analysis import SourceSnapshot
-from simscope_export.analysis.recipes import unpack,pack
+from wavez_export.analysis import SourceSnapshot
+from wavez_export.analysis.recipes import unpack,pack
 
 
 def main():
@@ -30,7 +30,7 @@ def main():
             if label=='mutation':
                 changed=bytearray(live.read_bytes());changed[-100]^=1;live.write_bytes(changed)
             expected=hashlib.sha256(live.read_bytes()).hexdigest();path=output/'job.json';path.write_text(json.dumps(job))
-            command=[args.godot,'--path',str(ROOT/'viewer'),'--rendering-method',args.renderer,'--resolution','640x360','--audio-driver','Dummy','--log-file',str(output/'godot.log'),'--','--simscope-render-job='+str(path)]
+            command=[args.godot,'--path',str(ROOT/'viewer'),'--rendering-method',args.renderer,'--resolution','640x360','--audio-driver','Dummy','--log-file',str(output/'godot.log'),'--','--wavez-render-job='+str(path)]
             with (output/'stdout.log').open('w') as file:
                 process=subprocess.Popen(command,cwd=ROOT,stdout=file,stderr=subprocess.STDOUT)
                 try:

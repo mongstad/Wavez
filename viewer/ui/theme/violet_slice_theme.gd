@@ -1,5 +1,5 @@
 @tool
-extends "res://ui/theme/simscope_theme.gd"
+extends "res://ui/theme/wavez_theme.gd"
 ## #143 review slice. The accepted theme/colormaps remain separate resources.
 const PALETTE = {
 	&"surface.0": Color("080d14"), &"surface.1": Color("111827"),

@@ -52,7 +52,7 @@ var cancel_confirmation: ConfirmationDialog
 var pending_cancel_directory := ""
 
 func _ready() -> void:
-	title = "SimScope • Export Video"
+	title = "WAVEZ • Export Video"
 	visible = false
 	size = Vector2i(760, 800)
 	min_size = Vector2i(600, 500)

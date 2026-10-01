@@ -7,11 +7,11 @@ import unittest
 
 import numpy as np
 
-from simscope_export import SceneCapture
-from simscope_export.analysis import SourceSnapshot,Context,AnalysisError
-from simscope_export.analysis.member_assets import MemberAssets
-from simscope_export.analysis.selection_jobs import dispatch
-from simscope_export.analysis import selectors as S
+from wavez_export import SceneCapture
+from wavez_export.analysis import SourceSnapshot,Context,AnalysisError
+from wavez_export.analysis.member_assets import MemberAssets
+from wavez_export.analysis.selection_jobs import dispatch
+from wavez_export.analysis import selectors as S
 
 
 class MemberAssetTests(unittest.TestCase):
@@ -87,7 +87,7 @@ class MemberAssetTests(unittest.TestCase):
         self.assertFalse(dead.root.exists());self.assertTrue(live.root.exists());self.assertTrue(unknown.root.exists())
 
     def test_request_collects_only_unpinned_assets_and_keeps_incoming_definition(self):
-        from simscope_export.analysis.jobs import execute
+        from wavez_export.analysis.jobs import execute
         with SourceSnapshot(self.path,assets=self.store) as source:definition=self.freeze(source)
         spare=self.store.put(np.arange(65,dtype="i8"),Context())
         request=dict(version=1,id="collect",scene_revision=0,selection_revision=0,source=dict(path=str(self.path)),

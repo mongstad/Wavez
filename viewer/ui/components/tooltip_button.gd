@@ -1,5 +1,5 @@
 extends Button
-const T = preload("res://ui/theme/simscope_tokens.tres")
+const T = preload("res://ui/theme/wavez_tokens.tres")
 
 func _make_custom_tooltip(for_text: String) -> Object:
 	var label := Label.new(); label.text = for_text

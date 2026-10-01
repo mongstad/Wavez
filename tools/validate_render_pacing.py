@@ -8,7 +8,7 @@ import sys
 import numpy as np
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from simscope_export import SceneCapture
+from wavez_export import SceneCapture
 
 
 def fixtures(out):

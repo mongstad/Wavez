@@ -1,7 +1,7 @@
 extends SceneTree
 const Viewer = preload("res://main.gd")
 const Visual = preload("res://scene/visual_state.gd")
-const Legacy = preload("res://ui/theme/simscope_theme.gd")
+const Legacy = preload("res://ui/theme/wavez_theme.gd")
 var output := ""
 var checks := 0
 var failures: Array[String] = []
@@ -24,7 +24,7 @@ func contrast(foreground: Color, background: Color) -> float:
 
 func run() -> void:
 	output = OS.get_cmdline_user_args()[0]
-	root.title = "SimScope #143 visual slice validation"
+	root.title = "WAVEZ #143 visual slice validation"
 	viewer = Viewer.new(); viewer.scene_prebuffer_enabled = false
 	root.add_child(viewer); viewer.set_process(false)
 	viewer._open_capture(output.path_join("scene.ssc")); viewer.playing = false; viewer.orbit_enabled = false

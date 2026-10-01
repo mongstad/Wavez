@@ -1,17 +1,17 @@
-# SimScope repository boundary
+# Wavez repository boundary
 
-SimScope contains the capture/export library, Godot viewer, current specifications,
+Wavez contains the capture/export library, Godot viewer, current specifications,
 small repository-owned examples, regression tests and development tools.
 
 Scientific simulations, research notebooks, generated captures, benchmark source
 datasets, videos, screenshots, large result tables, local environments and caches
 belong outside this repository. Integration and benchmark suites may consume
-SimScope as a dependency through explicit paths or installed packages; they must
+Wavez as a dependency through explicit paths or installed packages; they must
 not become hidden product dependencies.
 
 ## Included
 
-- `simscope_export/` — production Python library and analysis code
+- `wavez_export/` — production Python library and analysis code
 - `viewer/` — production Godot viewer, shaders, bundled UI assets and native tests
 - `examples/` — small synthetic examples owned by this repository
 - `tests/` — deterministic Python fixtures/regressions
@@ -29,6 +29,6 @@ not become hidden product dependencies.
 - generated videos/screenshots and local profiling output
 - virtual environments, caches, credentials and machine-specific configuration
 
-The package discovery rule includes only `simscope_export*`. New integrations
+The package discovery rule includes only `wavez_export*`. New integrations
 should use the public scene/capture API rather than copying simulator-specific
 source into this repository.

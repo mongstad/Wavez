@@ -5,7 +5,7 @@ ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
 import numpy as np
 from PIL import Image
 from tests.g4.fixtures import traveling_pulse
-from simscope_export.analysis.recipes import unpack,pack
+from wavez_export.analysis.recipes import unpack,pack
 
 
 def main():
@@ -27,7 +27,7 @@ def main():
             timing=dict(start_time=0.,end_time=.75,fps=4,playback_rate=1.)
             job=dict(version=2,capture_path=str(source),source=base['source'],state=base['visual'],**timing,width=640,height=360,output_path=str(directory/'selection.mp4'),camera_mode='locked',orbit_speed=0.,quality='high',keep_frames=True,inspection_sidecars=True,ffmpeg_path=shutil.which('ffmpeg'),inspection_path=str(inspection),inspection_sha256=hashlib.sha256(inspection.read_bytes()).hexdigest(),opened_paths=[str(source)],output_quota_bytes=str(256*1024**2),exact_timing=pack(timing),test_frame_delay_ms=delay)
             (directory/'job.json').write_text(json.dumps(job))
-            run([args.godot,'--path',str(ROOT/'viewer'),'--rendering-method',args.renderer,'--resolution','640x360','--audio-driver','Dummy','--log-file',str(directory/'renderer.log'),'--fixed-fps','4','--disable-vsync','--','--simscope-render-job='+str(directory/'job.json')],directory)
+            run([args.godot,'--path',str(ROOT/'viewer'),'--rendering-method',args.renderer,'--resolution','640x360','--audio-driver','Dummy','--log-file',str(directory/'renderer.log'),'--fixed-fps','4','--disable-vsync','--','--wavez-render-job='+str(directory/'job.json')],directory)
             progress=json.loads((directory/'progress.json').read_text());check(progress['stage']=='complete',label+' complete clip')
             stream=json.loads(subprocess.check_output(['ffprobe','-v','error','-select_streams','v:0','-show_entries','stream=width,height,nb_frames,avg_frame_rate','-of','json',job['output_path']]))['streams'][0]
             check((stream['width'],stream['height'],int(stream['nb_frames']),stream['avg_frame_rate'])==(640,360,3,'4/1'),label+' exact clip dimensions/frame count')

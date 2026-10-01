@@ -2,9 +2,9 @@ import unittest
 from types import SimpleNamespace
 import numpy as np
 
-from simscope_export.analysis import Context,AnalysisError
-from simscope_export.analysis.quadrature import volume_integral,face_areas
-from simscope_export.analysis.selectors import region
+from wavez_export.analysis import Context,AnalysisError
+from wavez_export.analysis.quadrature import volume_integral,face_areas
+from wavez_export.analysis.selectors import region
 
 
 class QuadratureTests(unittest.TestCase):

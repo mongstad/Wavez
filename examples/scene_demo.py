@@ -3,7 +3,7 @@ import argparse,sys
 from pathlib import Path
 import numpy as np
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
-from simscope_export import SceneCapture
+from wavez_export import SceneCapture
 
 
 def torus(n=32,m=16,radius=8.,tube=2.):

@@ -12,7 +12,7 @@ from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from simscope_export import SceneCapture, SceneReader
+from wavez_export import SceneCapture, SceneReader
 from tools.validate_volume_opacity import digest, run_native
 
 
@@ -79,7 +79,7 @@ def main():
             quality='high', keep_frames=True, inspection_sidecars=True, ffmpeg_path=ffmpeg)
         (export/'job.json').write_text(json.dumps(render))
         run_native(base + ['--fixed-fps', '4', '--disable-vsync', '--',
-                          '--simscope-render-job='+str(export/'job.json')], export, env)
+                          '--wavez-render-job='+str(export/'job.json')], export, env)
         assert json.loads((export/'progress.json').read_text())['stage'] == 'complete'
         assert np.array_equal(np.asarray(Image.open(out/(name+'.png'))),
                               np.asarray(Image.open(export/'frames/frame00000000.png')))

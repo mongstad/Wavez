@@ -1,6 +1,6 @@
-# SimScope handbook
+# Wavez handbook
 
-SimScope is a scientific capture viewer with a Python export layer and a Godot desktop viewer. Its job is to preserve declared data and make representation choices inspectable. A visually persuasive image is not a substitute for a numerical field, a conservation check or a declared boundary. The current implementation is `SimScope/`; see [current status](CURRENT_STATUS.md) for accepted scope and [evidence](EVIDENCE_INDEX.md) for measurements.
+Wavez is a scientific capture viewer with a Python export layer and a Godot desktop viewer. Its job is to preserve declared data and make representation choices inspectable. A visually persuasive image is not a substitute for a numerical field, a conservation check or a declared boundary. The current implementation is `SimScope/`; see [current status](CURRENT_STATUS.md) for accepted scope and [evidence](EVIDENCE_INDEX.md) for measurements.
 
 ## Architecture and development history
 
@@ -38,7 +38,7 @@ source details. State opens Save/Load view preset directly in the platform file 
 Export routes to PNG, video and numerical export. View and the viewport buttons
 provide frame/reset, panel visibility and fullscreen.
 
-**Help → About SimScope** shows the full application version, owner logo,
+**Help → About WAVEZ** shows the full application version, owner logo,
 copyright, licensing summary and GitHub link. **Licenses and notices** provides
 the full packaged project and third-party notices without an internet connection.
 About replaces the temporary standalone Version entry and works without a capture;
@@ -334,7 +334,7 @@ Scientific rendering disables decorative effects. Forward+ and Compatibility can
 ## Recipes, PNG and deterministic video
 
 **State → Save view preset… / Load view preset…** saves a small portable JSON
-file in the chosen filename/location. It restores SimScope-owned viewport settings
+file in the chosen filename/location. It restores Wavez-owned viewport settings
 (camera, particle presentation, current selected volume/mesh mapping, opacity,
 legends, environment and render quality). It does not store source/object/channel
 names, exact simulation time, selections, results or UI layout. Per-layer settings

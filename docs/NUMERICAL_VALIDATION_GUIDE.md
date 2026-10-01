@@ -1,6 +1,6 @@
 # Numerical validation guide
 
-This is a reusable checklist for simulations visualized with SimScope. SimScope is
+This is a reusable checklist for simulations visualized with Wavez. Wavez is
 not the scientific solver and cannot establish physical correctness from an image.
 Keep solver validation, visualization mapping and interpretation separate.
 

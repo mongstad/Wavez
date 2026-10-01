@@ -50,7 +50,7 @@ func repeated_switches(view, oracle: Array, gpu_oracle: Array) -> void:
 			for plane in control.worker.get_frame(field.key).get("planes",[]):prepared_pixels.append_array(plane.get_data())
 			check(Hash.digest(prepared_pixels) == gpu_oracle[5][channel],"Replacement planes contain the selected scalar values")
 			# Compatibility's Godot 4.7.2 readback clips/quantizes float 3D textures
-			# even in an isolated upload without SimScope. It is not a byte oracle.
+			# even in an isolated upload without WAVEZ. It is not a byte oracle.
 			if DisplayServer.get_name() != "headless" and RenderingServer.get_current_rendering_method() == "forward_plus":
 				var pixels := PackedByteArray()
 				for plane in field.texture.get_data():pixels.append_array(plane.get_data())

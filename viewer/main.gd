@@ -1,6 +1,6 @@
 extends Node3D
 
-# SimScope
+# WAVEZ
 # Godot 4 scientific viewer for SIMSCP4 particle, mesh and volume scenes.
 #
 # The renderer is observational only. It never feeds information back into the
@@ -147,10 +147,10 @@ var screenshot_notice_serial := 0
 func _ready() -> void:
 	if not offline_instance:
 		for argument in OS.get_cmdline_user_args():
-			if argument.begins_with("--simscope-render-job="):
+			if argument.begins_with("--wavez-render-job="):
 				set_process_unhandled_input(false) # The bootstrap never builds interactive controls.
 				var worker = preload("res://video/render_worker.gd").new()
-				worker.job_path = argument.trim_prefix("--simscope-render-job=")
+				worker.job_path = argument.trim_prefix("--wavez-render-job=")
 				get_tree().root.add_child.call_deferred(worker)
 				guide_mesh.free() # This bootstrap instance never builds its world.
 				queue_free()
@@ -550,7 +550,7 @@ func _update_hud_profiled() -> void:
 	if cache_label != null: cache_label.text = generic_reader.status() if generic_reader != null else "No scene loaded"
 	if scene_layers != null and frame_a != null:
 		var population := "%d particles" % particle_count if not scene_layers.particle_id.is_empty() else "%d scene layers" % generic_reader.objects.size()
-		hud.text = "SimScope • %s\nFrame %d / %d  ·  t = %.5f\n%s\n%s" % [generic_reader.metadata.get("simulation_name", capture_path.get_file()), current_index + 1, frame_count, committed_sample.get("requested_time",frame_a.sim_time), population, _sample_label()]
+		hud.text = "WAVEZ • %s\nFrame %d / %d  ·  t = %.5f\n%s\n%s" % [generic_reader.metadata.get("simulation_name", capture_path.get_file()), current_index + 1, frame_count, committed_sample.get("requested_time",frame_a.sim_time), population, _sample_label()]
 
 func _input(event: InputEvent) -> void:
 	# Recovery precedes GUI, busy-inspection and selection input handling.
@@ -770,7 +770,7 @@ func _write_screenshot() -> void:
 	if screenshot_notice != null: screenshot_notice.hide()
 	screenshot_count += 1
 	var stamp := Time.get_datetime_string_from_system().replace(":", "-")
-	var path := screenshot_directory.path_join("simscope-%s-%d-%04d.png" % [stamp, Time.get_ticks_usec(), screenshot_count])
+	var path := screenshot_directory.path_join("wavez-%s-%d-%04d.png" % [stamp, Time.get_ticks_usec(), screenshot_count])
 	while FileAccess.file_exists(path): path = path.get_basename() + "-1.png"
 	var result: Error = await _capture_inspection_png(path,screenshot_sidecar)
 	screenshot_saving = false
@@ -794,7 +794,7 @@ func _notify_screenshot(message: String) -> void:
 	await get_tree().create_timer(5).timeout
 	if is_instance_valid(screenshot_notice) and serial == screenshot_notice_serial: screenshot_notice.hide()
 
-# SimScope inspector and generic visualization layer.
+# WAVEZ inspector and generic visualization layer.
 var inspector_box: VBoxContainer
 var sections: Dictionary = {}
 var color_option: OptionButton
@@ -902,7 +902,7 @@ func _build_inspector_controls() -> void:
 	inspector_box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	scroll.add_child(inspector_box)
 	hud = Label.new()
-	hud.text = "SimScope"
+	hud.text = "WAVEZ"
 	hud.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	tools_ui.storage.add_child(hud)
 	status_label = Label.new()
@@ -1019,7 +1019,7 @@ func _build_inspector_controls() -> void:
 	open_dialog = FileDialog.new()
 	open_dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE
 	open_dialog.access = FileDialog.ACCESS_FILESYSTEM
-	open_dialog.filters = PackedStringArray(["*.ssc ; SimScope scene (SIMSCP4)"])
+	open_dialog.filters = PackedStringArray(["*.ssc ; WAVEZ scene (SIMSCP4)"])
 	open_dialog.mode_overrides_title = false
 	open_dialog.title = "Open capture"
 	if file_dialog_preferences != null:
@@ -1659,7 +1659,7 @@ func _show_recipe_dialog(saving: bool) -> void:
 	if recipe_dialog == null:
 		recipe_dialog = FileDialog.new(); recipe_dialog.access = FileDialog.ACCESS_FILESYSTEM
 		recipe_dialog.use_native_dialog = true
-		recipe_dialog.filters = PackedStringArray(["*.json ; SimScope view preset"])
+		recipe_dialog.filters = PackedStringArray(["*.json ; WAVEZ view preset"])
 		recipe_dialog.file_selected.connect(func(path: String):
 			if recipe_saving: _save_inspection(path)
 			else: _load_inspection(path)

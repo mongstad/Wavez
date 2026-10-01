@@ -1,8 +1,8 @@
 # Simulation integration guide
 
-**SimScope owns capture/storage/viewer mechanics. The simulation owns scientific meaning and declares its data truthfully.** Use native `SceneCapture` for new layered integrations. The adapter supplies objects, NumPy arrays, geometry and provenance directly; normal integration requires no manually authored mapping JSON.
+**Wavez owns capture/storage/viewer mechanics. The simulation owns scientific meaning and declares its data truthfully.** Use native `SceneCapture` for new layered integrations. The adapter supplies objects, NumPy arrays, geometry and provenance directly; normal integration requires no manually authored mapping JSON.
 
-Install and import the authoritative `SimScope` Python package; record its Git revision for provenance. [Current API](CAPTURE_FORMAT_AND_API.md) defines storage limits and compatibility; [source implementation](<../simscope_export/scene.py>) is the callable contract.
+Install and import the authoritative `SimScope` Python package; record its Git revision for provenance. [Current API](CAPTURE_FORMAT_AND_API.md) defines storage limits and compatibility; [source implementation](<../wavez_export/scene.py>) is the callable contract.
 
 ## Before connecting the writer
 
@@ -50,7 +50,7 @@ This example exercises persistent tracers, a complex field represented as real c
 
 ```python
 import numpy as np
-from simscope_export import SceneCapture, SceneReader
+from wavez_export import SceneCapture, SceneReader
 
 objects = [
     dict(id="tracers", kind="particles", units="m", identity="persistent_i8"),
@@ -110,7 +110,7 @@ Open the result with Godot from `SimScope` using `godot --path viewer -- --captu
 ## External-engine boundary
 
 Use an explicit `SceneCapture` object and declared object IDs. External engines remain
-outside the SimScope core; an adapter extracts only the engine-owned state required
+outside the Wavez core; an adapter extracts only the engine-owned state required
 for capture. Do not infer persistent identities from changing row order.
 
 ```python

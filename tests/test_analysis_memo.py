@@ -3,9 +3,9 @@ import tempfile
 import unittest
 import os
 
-from simscope_export.analysis import SourceSnapshot,Context,AnalysisError
-from simscope_export.analysis.memo import VerificationMemo
-from simscope_export.analysis.sampling import epoch
+from wavez_export.analysis import SourceSnapshot,Context,AnalysisError
+from wavez_export.analysis.memo import VerificationMemo
+from wavez_export.analysis.sampling import epoch
 from tests.g4.fixtures import scene
 
 

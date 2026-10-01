@@ -1,7 +1,7 @@
 @tool
 extends Theme
 ## Derived at load time: edit tokens/builder, never a second serialized style palette.
-const TOKENS = preload("res://ui/theme/simscope_tokens.tres")
+const TOKENS = preload("res://ui/theme/wavez_tokens.tres")
 const MONO = preload("res://ui/fonts/DejaVuSansMono.ttf")
 var _icons: Dictionary = {}
 

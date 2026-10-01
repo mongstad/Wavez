@@ -18,7 +18,7 @@ func setup(owner_shell, row: HBoxContainer) -> void:
 	minimize_action.tooltip_text = "Minimize"; minimize_action.set_meta("chrome_icon", "minimize")
 	maximize_button = shell.button(actions, "", toggle_maximize); maximize_button.set_meta("chrome_icon", "maximize")
 	var close: Button = shell.button(actions, "", request_close)
-	close.tooltip_text = "Close SimScope"; close.set_meta("chrome_icon", "close")
+	close.tooltip_text = "Close WAVEZ"; close.set_meta("chrome_icon", "close")
 	for action in actions.get_children():
 		action.custom_minimum_size = Vector2(32, 32); action.theme_type_variation = "IconAction"
 	if shell.viewer.offline_instance:

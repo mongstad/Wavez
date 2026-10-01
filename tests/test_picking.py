@@ -5,10 +5,10 @@ import unittest
 from types import SimpleNamespace
 import numpy as np
 
-from simscope_export import SceneCapture
-from simscope_export.analysis import AnalysisError,SourceSnapshot
-from simscope_export.analysis.picking import dispatch,polygon_mask,triangle_hit,marker_mask
-from simscope_export.analysis.contracts import parse_float_token
+from wavez_export import SceneCapture
+from wavez_export.analysis import AnalysisError,SourceSnapshot
+from wavez_export.analysis.picking import dispatch,polygon_mask,triangle_hit,marker_mask
+from wavez_export.analysis.contracts import parse_float_token
 
 
 def camera():

@@ -1,6 +1,22 @@
 # About resources
 
-The current `simscope-logo.png` is the owner-provided violet artwork requested
+## Current WAVEZ artwork (#155)
+
+`wavez-logo-dark.png` is copied byte-for-byte from the owner-approved
+`Wavez_ThemeBranding/Dark_Mode/Wavez_Square_Logo_No_Slogan_No_Border_Dark.png`.
+It is a 1254 × 1254 PNG, SHA-256
+`4398a96d6aaf89733417d5c6c204c1d0238751bee07ad5250a63bcce1ef21aa3`.
+About retains its square, aspect-preserving, lossless mipmapped layout.
+The same resource is the application icon. The resource import UID is retained.
+No image recreation or restyling was performed; the approved dark artwork is unchanged.
+The README uses the unchanged dark, no-slogan banner from the same package
+(2172 × 724, SHA-256
+`81426cb5a6b248a7f1948d86c911fb7147bd8f31dc53ded1d696b40edcd1b9e4`).
+[TRADEMARKS.md](../../../TRADEMARKS.md) governs both assets.
+
+## Historical #147 artwork provenance
+
+The then-current `simscope-logo.png` is the owner-provided violet artwork requested
 by #147, copied unchanged from
 `SimScope Theme Package/SimScope_Logo_Purple.png` outside the repository.
 

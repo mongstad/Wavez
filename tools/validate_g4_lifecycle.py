@@ -3,8 +3,8 @@ import argparse,hashlib,json,os,random,subprocess,sys,time
 from pathlib import Path
 import numpy as np
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
-from simscope_export import SceneCapture
-from simscope_export.analysis import SourceSnapshot,selectors as S
+from wavez_export import SceneCapture
+from wavez_export.analysis import SourceSnapshot,selectors as S
 
 
 def main():

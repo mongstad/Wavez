@@ -27,4 +27,4 @@ func configure(severity: String, message: String, explanation: String = "", dism
 	title.text = severity.capitalize() + ": " + message
 	detail.text = explanation; detail.visible = not explanation.is_empty()
 	dismiss.visible = dismissible
-	symbol.texture = preload("res://ui/theme/simscope_dark.tres").icon_named("check" if severity == "success" else severity, StringName("state." + severity))
+	symbol.texture = preload("res://ui/theme/wavez_dark.tres").icon_named("check" if severity == "success" else severity, StringName("state." + severity))

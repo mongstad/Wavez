@@ -2,7 +2,7 @@ extends AcceptDialog
 ## Informational only: no capture, playback or scientific controller dependencies.
 const Version = preload("res://application_version.gd")
 const Notices = preload("res://ui/about/notices.tres")
-const Logo = preload("res://ui/about/simscope-logo.png")
+const Logo = preload("res://ui/about/wavez-logo-dark.png")
 const REPOSITORY := "https://github.com/mongstad/SimScope"
 var url_opener: Callable = OS.shell_open
 var identity: Label
@@ -18,7 +18,7 @@ var licenses: Button
 var scroller: ScrollContainer
 
 func _ready() -> void:
-	title = "About SimScope"
+	title = "About WAVEZ"
 	get_ok_button().text = "Close"
 	scroller = ScrollContainer.new(); scroller.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	add_child(scroller)
@@ -35,7 +35,7 @@ func _ready() -> void:
 	identity = paragraph(heading,""); identity.add_theme_font_size_override("font_size",22)
 	paragraph(heading,"Scientific capture, playback and analysis for particles, meshes and scalar fields.")
 	paragraph(overview,Notices.get_meta("copyright"))
-	paragraph(overview,"SimScope project material\nPolyForm Noncommercial 1.0.0. Commercial use requires a separate agreement with the rights holder.")
+	paragraph(overview,"WAVEZ project material\nPolyForm Noncommercial 1.0.0. Commercial use requires a separate agreement with the rights holder.")
 	paragraph(overview,"Godot Engine/runtime — MIT License.\nOther third-party components retain their respective licenses.")
 	runtime = paragraph(overview,""); runtime.add_theme_color_override("font_color",get_theme_color("font_color","Label"))
 	paragraph(overview,"Full license texts and third-party notices are available here and in the project repository.")

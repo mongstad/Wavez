@@ -50,7 +50,7 @@ controls are desktop targets, not a touch-support claim.
 ## Midnight Scientific composition
 
 The generator reads colors directly from
-[the accepted token resource](../viewer/ui/theme/simscope_tokens.gd). It does not
+[the accepted token resource](../viewer/ui/theme/wavez_tokens.gd). It does not
 write to that resource. The [UX2 component contracts](UX2_THEME_LIBRARY.md) remain
 authoritative for native implementation.
 
@@ -131,9 +131,9 @@ identifiers, partial restore behavior or v2/v3 state.
 
 ## UI copy style guide
 
-Sentence case applies to **every SimScope-authored heading, label, button, menu
+Sentence case applies to **every Wavez-authored heading, label, button, menu
 item, option and status**, not just section headings. Preserve source-defined
-object/channel names, proper names such as SimScope and Midnight Scientific,
+object/channel names, proper names such as Wavez and Midnight Scientific,
 established acronyms such as IDs, and conventional unit casing. Do not rewrite
 source metadata or sentence-case proper names to enforce style.
 Underlying schema keys and historical source labels remain unchanged.

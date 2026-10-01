@@ -3,7 +3,7 @@ import argparse,hashlib,json,shutil,statistics,subprocess,sys,tempfile
 from pathlib import Path
 import numpy as np
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
-from simscope_export import SceneCapture
+from wavez_export import SceneCapture
 
 
 def fixture(path):
@@ -33,7 +33,7 @@ def main():
         report['prior_failure']=report.pop('error',report['status'])
     else:
         out.mkdir(parents=True,exist_ok=False);source=args.capture.resolve() if args.capture else fixture(out/'100k.ssc');before=hashlib.sha256(source.read_bytes()).hexdigest()
-        baseline=Path(tempfile.mkdtemp(prefix='simscope-g4-g3-baseline-'))
+        baseline=Path(tempfile.mkdtemp(prefix='wavez-g4-g3-baseline-'))
         with (out/'baseline.tar').open('wb') as file:subprocess.run(['git','archive','--format=tar','pre-g4-consolidation'],cwd=ROOT,stdout=file,check=True)
         subprocess.run(['tar','-xf',str(out/'baseline.tar'),'-C',str(baseline)],check=True);(out/'baseline.tar').unlink()
         (baseline/'viewer/analysis').mkdir(exist_ok=True);shutil.copyfile(ROOT/'viewer/analysis/profile_g4.gd',baseline/'viewer/analysis/profile_g4.gd')

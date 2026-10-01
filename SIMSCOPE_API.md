@@ -1,8 +1,8 @@
-# SimScope Python API
+# Wavez Python API
 
 **New integrations use `SceneCapture` and `SceneReader`, writing `.ssc` files in
-SIMSCP4 format.** This reference follows [the current source](simscope_export/scene.py).
-Install `simscope-export` from this repository; import it as `simscope_export`.
+SIMSCP4 format.** This reference follows [the current source](wavez_export/scene.py).
+Install `wavez-export` from this repository; import it as `wavez_export`.
 See [Quickstart](QUICKSTART.md) for dependencies and the native viewer.
 
 ## Write a scene
@@ -65,7 +65,7 @@ broadcasting and implicit channel aliases are not part of `SceneCapture`.
 ## Read recorded values
 
 ```python
-from simscope_export import SceneReader
+from wavez_export import SceneReader
 
 reader = SceneReader(path, strict=True, cache_bytes=256 * 1024**2,
                      metadata_bytes=512 * 1024**2)
@@ -85,7 +85,7 @@ retains file order; `reader.times` is the sorted union of times.
 
 `metadata_bytes` admits the retained index and parsing workspace separately from
 decoded arrays. Insufficient capacity raises `MetadataCapacityError` (exported
-from `simscope_export`, subclass of `MemoryError`), not an invalid-format error.
+from `wavez_export`, subclass of `MemoryError`), not an invalid-format error.
 Close/refusal releases owned index state; refresh re-admits it. There is no
 aggregate descriptor-byte export limit. See [reader budgets](docs/SSC_METADATA_BUDGET.md)
 for accounting, native configuration and analysis job limits.
@@ -116,7 +116,7 @@ Run in a directory where `example.ssc` does not exist:
 
 ```python
 import numpy as np
-from simscope_export import SceneCapture, SceneReader
+from wavez_export import SceneCapture, SceneReader
 
 objects = [
     dict(id="particles", kind="particles", units="m", identity="persistent_i8"),
@@ -164,7 +164,7 @@ it is separate from G4 scientific channel declarations. See
 
 Selections, statistics, traces, CSV diagnostics, comparisons, inspection recipes
 and exports are described in [the G4 guide](docs/G4_GUIDE.md).
-`simscope_export.analysis` and `tools/analyze_selection.py` are internal worker
+`wavez_export.analysis` and `tools/analyze_selection.py` are internal worker
 interfaces, not a public command service. G5 is not implemented.
 
 ## Supported package contract
