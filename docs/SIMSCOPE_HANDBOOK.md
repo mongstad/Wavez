@@ -22,6 +22,11 @@ Earlier documents sometimes append new checkpoints above obsolete scope tables. 
 
 ## Viewer shell
 
+Open **Help → About WAVEZ → Documentation** to reach the repository README
+and its guidance links. The in-app Handbook surface has been removed; this
+repository handbook remains available as a documentation file. The separate
+repository link and **Licenses and notices** remain in About.
+
 **File → Exit** is the final File-menu command, below a separator. It is available
 with or without a capture and uses the same shutdown function as the window's
 close button. Normal reader, preparation, analysis and export cleanup runs;

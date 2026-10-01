@@ -4,6 +4,7 @@ const Version = preload("res://application_version.gd")
 const Notices = preload("res://ui/about/notices.tres")
 const Logo = preload("res://ui/about/wavez-logo-dark.png")
 const REPOSITORY := "https://github.com/mongstad/Wavez"
+const DOCUMENTATION := "https://github.com/mongstad/Wavez#readme"
 var url_opener: Callable = OS.shell_open
 var identity: Label
 var runtime: Label
@@ -13,6 +14,7 @@ var license_page: VBoxContainer
 var notice_choice: OptionButton
 var notice_text: TextEdit
 var browser_error: RichTextLabel
+var documentation: LinkButton
 var github: LinkButton
 var licenses: Button
 var scroller: ScrollContainer
@@ -39,7 +41,9 @@ func _ready() -> void:
 	paragraph(overview,"Godot Engine/runtime — MIT License.\nOther third-party components retain their respective licenses.")
 	runtime = paragraph(overview,""); runtime.add_theme_color_override("font_color",get_theme_color("font_color","Label"))
 	paragraph(overview,"Full license texts and third-party notices are available here and in the project repository.")
-	github = LinkButton.new(); github.text = "github.com/mongstad/Wavez"; github.pressed.connect(open_repository); overview.add_child(github)
+	var links := HBoxContainer.new(); links.add_theme_constant_override("separation",16); overview.add_child(links)
+	github = LinkButton.new(); github.text = "github.com/mongstad/Wavez"; github.pressed.connect(open_url.bind(REPOSITORY)); links.add_child(github)
+	documentation = LinkButton.new(); documentation.text = "Documentation"; documentation.pressed.connect(open_url.bind(DOCUMENTATION)); links.add_child(documentation)
 	licenses = Button.new(); licenses.text = "Licenses and notices"; licenses.pressed.connect(show_notices); overview.add_child(licenses)
 	browser_error = RichTextLabel.new(); browser_error.fit_content = true; browser_error.selection_enabled = true
 	browser_error.scroll_active = false; overview.add_child(browser_error); browser_error.hide()
@@ -91,10 +95,10 @@ func select_notice(index: int) -> void:
 		notice_text.text = "\n\n".join(parts)
 	notice_text.scroll_vertical = 0
 
-func open_repository() -> void:
-	var result: int = url_opener.call(REPOSITORY)
+func open_url(url: String) -> void:
+	var result: int = url_opener.call(url)
 	if result != OK:
-		browser_error.text = "Could not open your browser. Copy this address:\n"+REPOSITORY
+		browser_error.text = "Could not open your browser. Copy this address:\n"+url
 		browser_error.show()
 		reveal_browser_error()
 	else:browser_error.hide()
