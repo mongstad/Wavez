@@ -6,7 +6,7 @@ Read README.md, docs/CURRENT_STATUS.md and CONTRIBUTING.md before making changes
 - Preserve accepted G0–G4 behavior. Post-G4 maintenance is authorized; G5/G6 and web/dashboard work require separate authorization.
 - Support SIMSCP4 / SceneCapture / SceneReader only; see docs/CAPTURE_FORMAT_POLICY.md. Do not restore retired capture APIs.
 - Backward compatibility is not a project requirement unless the owner explicitly states otherwise for a specific issue or interface. Prefer clean current architecture over legacy support, compatibility shims, fallback parsers, migration layers, or preserving retired behavior. If a change would break existing files, APIs, formats, recipes, or workflows, document the break clearly and update the current writer/reader/tests/docs together. Do not add backward-compatibility complexity proactively. Separate one-time migration/conversion tooling may be proposed when old data has clear value, but it is not required by default.
-- GitHub Issues, milestones and the SimScope Development project are the authoritative operational work queue. Work only on an issue that has been explicitly placed in a state that authorizes implementation; do not start unrelated issues opportunistically.
+- GitHub Issues, milestones and the Wavez Development project are the authoritative operational work queue. Work only on an issue that has been explicitly placed in a state that authorizes implementation; do not start unrelated issues opportunistically.
 - For each authorized issue, create a dedicated branch from the current `main` baseline before making code or documentation changes. Prefer names such as `issue-<number>-<short-slug>`. Keep one issue per branch unless the owner explicitly approves a combined change.
 - Never commit directly to `main`. Never push changes directly to `main`. Never merge a branch or pull request into `main`. `main` is owner-controlled and may change only through explicit owner review and approval.
 - Push work only to the dedicated issue branch, then open or update a pull request targeting `main`. Reference the issue in the pull request, summarize implementation and validation, and stop for owner review. Do not enable auto-merge or otherwise arrange for unattended merging.
@@ -19,3 +19,14 @@ Read README.md, docs/CURRENT_STATUS.md and CONTRIBUTING.md before making changes
 - Validate relevant changes with small generated fixtures; avoid production scientific reruns for housekeeping.
 - At the end of an authorized issue, report the branch, commit(s), files changed, validation performed, failures/skips, known limitations and pull-request state, then STOP and await owner review unless explicitly instructed otherwise.
 - Preserve third-party licensing boundaries. Do not vendor, copy, commit, or redistribute third-party tools, executables, runtimes, libraries, fonts, datasets, or other assets unless the repository explicitly documents them as bundled and their license obligations have been reviewed. In particular, dependencies listed in THIRD_PARTY_LICENSES.md as external/not vendored — including Godot Engine and FFmpeg — must remain externally installed and must not be added to the repository. If implementation appears to require bundling a new third-party component, STOP and request owner review before adding it.
+
+
+## Blender / 3D asset preservation
+
+- For any task that creates or modifies 3D assets in Blender, save useful editable Blender source projects (`.blend`) to an appropriate repository-controlled asset-source location before completing the task. Do not leave valuable completed work only in a live Blender/MCP session, unsaved scene, or temporary/headless workspace.
+- Preserve editable source models in addition to runtime/exported assets such as `.glb` / `.gltf`. Prefer retaining useful intermediate models, experiments and iterations over deleting them; the owner may perform manual cleanup later.
+- Do not delete or overwrite an existing Blender source project unless the owner explicitly authorizes it.
+- Use descriptive filenames and keep Blender source assets separate from runtime/exported assets where practical.
+- Save useful current Blender work before ending a Blender/MCP task, even when final runtime integration is not yet complete.
+- When a final 3D asset is accepted, retain both the authoritative editable `.blend` source and the runtime asset(s) used by WAVEZ.
+- Do not commit Blender autosaves, caches, temporary renders, Python virtual environments, MCP tooling, Blender installations, or clearly disposable generated working files. Blender/MCP/Codex tooling remains external unless the owner explicitly authorizes vendoring after license review.
