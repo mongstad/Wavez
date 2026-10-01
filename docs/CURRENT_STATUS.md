@@ -1,5 +1,13 @@
 # Current status
 
+Issue #175 adds **Edit → Preferences → Keyboard Shortcuts**, replacing the Help
+shortcut list with a compact custom violet editor. Captured bindings are staged;
+duplicates unbind their previous action, Cancel discards edits, and Apply saves
+and activates them immediately. Preferences remain outside scientific/session
+and export state. Candidate build 17 is **pending owner review**. See
+[behavior, validation and owner checks](KEYBOARD_SHORTCUTS.md). Earlier review-time
+reports and evidence below retain their original wording.
+
 Issue #151 removes the redundant instruction above the empty viewport’s
 **Open capture** button and centers the button in the available scene area.
 Capture opening is unchanged; candidate build 16 is pending owner review.

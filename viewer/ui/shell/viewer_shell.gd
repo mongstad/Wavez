@@ -5,6 +5,58 @@ const About = preload("res://ui/about/about_dialog.gd")
 const WORKSPACES = ["Particles", "Fields", "Meshes"]
 var viewer
 var orbit_editor
+var shortcuts := preload("res://ui/keyboard_shortcuts.gd").new()
+var shortcuts_editor
+var shortcut_hints_map := {}
+
+func edit_shortcuts() -> void:
+	if viewer.offline_instance: return
+	if shortcuts_editor == null:
+		var canvas := CanvasLayer.new(); canvas.layer = 20; add_child(canvas)
+		shortcuts_editor = preload("res://ui/shell/keyboard_shortcuts_editor.gd").new()
+		canvas.add_child(shortcuts_editor); shortcuts_editor.setup(self)
+	shortcuts_editor.open()
+
+func editing_shortcuts() -> bool:
+	return shortcuts_editor != null and shortcuts_editor.visible
+
+func invoke_shortcut_command(key: String) -> void:
+	refresh_commands()
+	var entry: Dictionary = commands[key]
+	if not entry.popup.is_item_disabled(entry.index): entry.popup.id_pressed.emit(entry.index)
+
+func cycle_category(direction: int) -> void:
+	select_workspace(posmod(workspace + direction, WORKSPACES.size()))
+
+func shortcut_context(action: String) -> String:
+	var menu_keys := {"export_video":"video", "mapping":"tool:Mapping", "derive_range":"tool:Derive range"}
+	if menu_keys.has(action):
+		var entry: Dictionary = commands[menu_keys[action]]
+		if entry.popup.is_item_disabled(entry.index): return entry.popup.get_item_tooltip(entry.index)
+	if viewer.generic_reader == null and action in ["frame_scene","play_pause","previous_sample","next_sample","loop_playback","recorded_history"]:
+		return "Open a capture to use this action."
+	if action == "recorded_history" and not viewer._has_particle_ids(): return "Recorded history requires recorded particle IDs."
+	return ""
+
+func refresh_shortcut_hints() -> void:
+	if navigation == null: return
+	if shortcut_hints_map == shortcuts.active: return
+	shortcut_hints_map = shortcuts.active.duplicate()
+	navigation.get_child(0).tooltip_text = "Frame scene" + shortcuts.hint("frame_scene")
+	navigation.get_child(1).tooltip_text = "Reset camera" + shortcuts.hint("reset_camera")
+	navigation.get_child(2).tooltip_text = "Navigate" + shortcuts.hint("navigate")
+	for pair in [["fullscreen","fullscreen"],["open","open_capture"],["video","export_video"],["tool:Mapping","mapping"],["tool:Derive range","derive_range"]]:
+		var entry: Dictionary = commands[pair[0]]
+		var shortcut := Shortcut.new()
+		if shortcuts.active[pair[1]] != 0: shortcut.events = [shortcuts.event_for(pair[1])]
+		# Display only: the viewer owns dispatch and its focus/busy guards.
+		entry.popup.set_item_shortcut(entry.index, shortcut)
+		entry.popup.set_item_shortcut_disabled(entry.index, true)
+	if transport != null:
+		transport.loop.tooltip_text = "Loop recorded interval" + shortcuts.hint("loop_playback")
+		viewer.play_button.tooltip_text = "Play or pause" + shortcuts.hint("play_pause")
+	for pair in [["Auto orbit  [O]","Auto orbit","auto_orbit"],["Recorded history  [T]","Recorded history","recorded_history"]]:
+		if viewer.control_checks.has(pair[0]): viewer.control_checks[pair[0]].text = pair[1] + shortcuts.hint(pair[2])
 
 func edit_orbit_center() -> void:
 	if viewer.offline_instance or viewer.inspection_busy: return
@@ -113,14 +165,11 @@ func setup(owner_viewer) -> void:
 	var frame_action := button(navigation, "", viewer._focus_activity, "frame"); frame_action.tooltip_text = "Frame scene [F]"
 	var reset_action := button(navigation, "", viewer._reset_camera, "reset"); reset_action.tooltip_text = "Reset camera [R]"
 	var navigate := MenuButton.new(); navigate.flat = false; navigate.icon = icon("view"); navigate.tooltip_text = "Navigate [Alt+N]"; navigate.custom_minimum_size.y = 32; navigation.add_child(navigate); decorate_menu(navigate)
-	var nav_key := InputEventKey.new(); nav_key.keycode = KEY_N; nav_key.alt_pressed = true
-	navigate.shortcut = Shortcut.new(); navigate.shortcut.events = [nav_key]
 	var modes := navigate.get_popup(); modes.add_check_item("Free camera"); modes.add_check_item("Auto orbit"); modes.add_item("Orbit speed"); modes.add_item("Edit orbit center…")
 	navigate.about_to_popup.connect(func(): modes.set_item_checked(0, viewer.free_camera); modes.set_item_checked(1, viewer.orbit_enabled))
 	modes.id_pressed.connect(func(id):
-		if id == 0:
-			viewer.free_camera = not viewer.free_camera; viewer.orbit_enabled = not viewer.free_camera
-		elif id == 1: viewer.orbit_enabled = not viewer.orbit_enabled; viewer.inspection_paused = false
+		if id == 0: viewer._toggle_free_camera()
+		elif id == 1: viewer._toggle_auto_orbit()
 		elif id == 2: viewer.tools_ui.open("Camera")
 		else: edit_orbit_center()
 		viewer._sync_control_state())
@@ -169,6 +218,10 @@ func setup(owner_viewer) -> void:
 	get_parent().add_child(layer_legends); layer_legends.setup(viewer)
 	style_slice = preload("res://ui/shell/violet_style_slice.gd").new()
 	style_slice.install(self)
+	if not viewer.offline_instance:
+		var error: Error = shortcuts.load_preferences()
+		if error != OK: push_warning("Could not load keyboard shortcuts: " + error_string(error))
+	refresh_shortcut_hints()
 	window_chrome.refresh()
 	select_workspace(0)
 	refresh()
@@ -265,6 +318,7 @@ func refresh() -> void:
 	if menus.is_empty(): return
 	var loaded: bool = viewer.generic_reader != null
 	refresh_commands()
+	refresh_shortcut_hints()
 	viewer.tools_ui.refresh_context()
 	empty.visible = not immersive and not loaded and not loading
 	var has_particles: bool = loaded and viewer.scene_layers != null and not viewer.scene_layers.particle_id.is_empty()
@@ -429,7 +483,7 @@ func refresh_export() -> void:
 	# Scientific annotations remain outside the shell, with their existing gates.
 
 func build_menus(row: HBoxContainer) -> void:
-	for entry in [["File","open"],["View","view"],["Tools","analysis"],["Help","help"]]:
+	for entry in [["File","open"],["Edit","view"],["View","view"],["Tools","analysis"],["Help","help"]]:
 		menu(row,entry[0],entry[1],[],func(_id):pass)
 		menus[entry[0]].about_to_popup.connect(refresh_commands)
 	var file: PopupMenu = menus.File.get_popup()
@@ -447,6 +501,8 @@ func build_menus(row: HBoxContainer) -> void:
 	command(export_menu,"Data",viewer.tools_ui.open.bind("Data"),"data")
 	file.add_separator()
 	command(file,"Exit",func(): window_chrome.request_close(),"exit")
+	var preferences := submenu(menus.Edit.get_popup(),"Preferences")
+	command(preferences,"Keyboard Shortcuts",edit_shortcuts,"keyboard_shortcuts")
 	var view: PopupMenu = menus.View.get_popup()
 	var window_menu := submenu(view,"Window")
 	command(window_menu,"Fullscreen",viewer._toggle_fullscreen,"fullscreen",true)
@@ -464,7 +520,6 @@ func build_menus(row: HBoxContainer) -> void:
 	for title in ["Temporal","Space time","Diagnostics","Compare","Matched runs","Period","Bookmarks","Results"]: command(analysis,title,viewer.tools_ui.open.bind(title),"tool:"+title)
 	for title in ["Mapping","Derive range","Slice","Clipping","Isosurface","Source probe","Performance","Geometry"]: command(tools,title,viewer.tools_ui.open.bind(title),"tool:"+title)
 	var help: PopupMenu = menus.Help.get_popup()
-	command(help,"Shortcuts",func():show_details("Shortcuts","Drag to orbit. Scroll to zoom.\nF: Frame scene   R: Reset camera\nO: Auto orbit   Alt+N: Navigate\nF11: Fullscreen\nDouble-click viewport: Fullscreen   Esc: Restore preceding shell\nSpace: Play or pause   Left and Right: Step sample\nTimeline: Drag to scrub; double-click playhead/current time to seek\n\nTab and Shift+Tab move focus. Enter or Space activates buttons.\n\nMidnight Scientific"),"shortcuts")
 	command(help,"About WAVEZ",func():
 		var focus := get_viewport().gui_get_focus_owner()
 		if focus != null:previous_focus = weakref(focus)
@@ -495,7 +550,7 @@ func refresh_commands() -> void:
 	var particles: bool = loaded and viewer.scene_layers != null and not viewer.scene_layers.particle_id.is_empty()
 	for key in commands:
 		var entry: Dictionary = commands[key]
-		var enabled: bool = loaded or key in ["open","details","fullscreen","shortcuts","about","exit"]
+		var enabled: bool = loaded or key in ["open","details","fullscreen","keyboard_shortcuts","about","exit"]
 		if key in ["probe","tool:Clipping","tool:Isosurface","tool:Source probe"]: enabled = fields
 		if key == "tool:Mapping": enabled = particles
 		if key in ["tool:Slice","tool:Derive range"]: enabled = fields or particles

@@ -91,15 +91,20 @@ func setup(owner_shell) -> void:
 	rate.item_selected.connect(func(index): viewer.physical_rate = SPEEDS[index] * NORMAL_RECORDED_RATE)
 	options = HBoxContainer.new(); options.add_theme_constant_override("separation",8); primary.add_child(options)
 	loop = CheckButton.new(); loop.text = "Loop"; loop.tooltip_text = "Loop recorded interval"; loop.size_flags_vertical = Control.SIZE_SHRINK_CENTER; options.add_child(loop)
-	loop.toggled.connect(func(value):
-		if viewer.scene_layers != null and viewer.scene_layers.playback.enabled: viewer.scene_layers.playback.set_loop(value)
-		else: viewer.scene_loop_playback = value)
+	loop.toggled.connect(set_loop)
 	_build_seek()
 	minimum_size_changed.connect(shell.layout.call_deferred)
 	refresh()
 
 func theme_box() -> StyleBox:
 	return shell.theme.box(&"surface.1", &"border.subtle", 0, 0, 0)
+
+func set_loop(value: bool) -> void:
+	if viewer.scene_layers != null and viewer.scene_layers.playback.enabled: viewer.scene_layers.playback.set_loop(value)
+	else: viewer.scene_loop_playback = value
+
+func toggle_loop() -> void:
+	loop.button_pressed = not loop.button_pressed
 
 func label(parent: Node, text: String) -> Label:
 	var result := Label.new(); result.text = text; parent.add_child(result); return result

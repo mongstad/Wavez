@@ -69,19 +69,29 @@ At narrow widths the right panel overlays the scene; pinning keeps it visible.
 Failed-open details remain available until dismissed; failed replacement retains
 the previous usable scene.
 
-**View → Window → Fullscreen**, **F11**, or a double-click in the unobstructed
+**View → Window → Fullscreen**, the default **F11** binding, or a double-click in the unobstructed
 simulation viewport enters fullscreen with all controls initially hidden and the
 three surfaces temporarily unpinned. Their 10px edge zones remain active for access.
-**Esc**, F11 or viewport
+**Esc**, the configured Fullscreen binding or viewport
 double-click exits and restores the prior native window mode/geometry, pin states
 and temporary visibility. Scientific overlays retain their enabled state.
 There are no viewport recovery buttons, separate Immersive command, or View-menu
-hide/show commands. F1 no longer toggles panel visibility. Shift+F11 follows the
-same F11 action; it does not select another presentation mode.
+hide/show commands. F1 no longer toggles panel visibility. The default Shift+F11
+alternate invokes the same Fullscreen action; both bindings are editable.
 Text/numeric entry suppresses the entry shortcut; Esc recovery remains available.
 Selection tools keep priority over viewport clicks. Camera interaction and playback
 continue. See [edge reveal and fullscreen](WINDOW_EDGE_REVEAL.md) for validation,
 interaction boundaries and owner review steps.
+
+**Edit → Preferences → Keyboard Shortcuts** opens the compact violet shortcut
+editor; Help no longer contains a static shortcut list. Select a binding and
+press a key combination to stage it. Reusing a binding immediately unbinds its
+previous action in the draft. Apply saves and activates changes, then closes;
+Cancel or dismissal discards them. Escape cancels a listening field first, and
+Tab/Shift+Tab navigate the editor. Clear and Reset Defaults also remain staged.
+The application profile retains these preferences across restarts, separately
+from captures, recipes, presets and video output. See
+[defaults, action routes and owner checks](KEYBOARD_SHORTCUTS.md).
 
 ## Color legends
 

@@ -1,0 +1,32 @@
+{
+  "checks": 75,
+  "display_driver": "X11",
+  "failures": [],
+  "fullscreen_dialogs": [
+    {
+      "embedded": true,
+      "native_mode": 3,
+      "size": "(600, 720)",
+      "tool": "Performance"
+    },
+    {
+      "embedded": true,
+      "native_mode": 3,
+      "size": "(600, 720)",
+      "tool": "Mapping"
+    },
+    {
+      "embedded": true,
+      "native_mode": 3,
+      "size": "(600, 720)",
+      "tool": "Source probe"
+    }
+  ],
+  "renderer": "forward_plus",
+  "source_hashes_unchanged": {
+    "clock.ssc": "1bbc9ea36569570ab512c032d6297246c833dfe308a5a085b73f0e6108aee7fc",
+    "scene.ssc": "31bde2491a578bb3f8b5d134a990095dbbbe35a59f2f14599e7f666614e62420"
+  },
+  "requested_display_driver": "default",
+  "known_libdecor_gtk_startup_warning": false
+}

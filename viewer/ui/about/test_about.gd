@@ -41,7 +41,7 @@ func run() -> void:
 	check(not shell.commands.has("version") and shell.commands.has("about"),"About is the only application identity menu")
 	var help: PopupMenu = shell.menus.Help.get_popup(); var entries := PackedStringArray()
 	for index in help.item_count:entries.append(help.get_item_text(index))
-	check(entries == PackedStringArray(["Shortcuts","About WAVEZ"]),"Exact Help menu has no standalone Version")
+	check(entries == PackedStringArray(["About WAVEZ"]),"Help has only About; shortcut preferences live under Edit")
 	check(not shell.commands.has("handbook"),"Handbook route is absent")
 	open_about(shell); await settle()
 	check(dialog.visible and not shell.details.visible,"Help opens the dedicated About surface without a capture")
