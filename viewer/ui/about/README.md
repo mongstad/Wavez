@@ -1,5 +1,8 @@
 # About resources
 
+The current About repository link displays `github.com/mongstad/Wavez` and opens
+`https://github.com/mongstad/Wavez` (#164).
+
 ## Current WAVEZ artwork (#155)
 
 `wavez-logo-dark.png` is copied byte-for-byte from the owner-approved
