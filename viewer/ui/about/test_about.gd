@@ -108,7 +108,8 @@ func run() -> void:
 	var requested := []; var normal_opener: Callable = dialog.url_opener
 	dialog.url_opener = func(url):requested.append(url);return ERR_UNAVAILABLE
 	dialog.github.pressed.emit(); await settle()
-	check(requested == [dialog.REPOSITORY] and dialog.REPOSITORY == "https://github.com/mongstad/SimScope","GitHub dispatches only the canonical URL")
+	check(dialog.github.text == "github.com/mongstad/Wavez","GitHub displays the current repository")
+	check(requested == [dialog.REPOSITORY] and dialog.REPOSITORY == "https://github.com/mongstad/Wavez","GitHub dispatches only the canonical URL")
 	check(dialog.browser_error.visible and dialog.browser_error.text.contains(dialog.REPOSITORY) and dialog.visible,"Missing browser handler leaves About usable with a copyable URL")
 	check(dialog.scroller.get_global_rect().encloses(dialog.browser_error.get_global_rect()),"Browser failure message is visible in the compact viewport")
 	picture(dialog,"browser-unavailable")

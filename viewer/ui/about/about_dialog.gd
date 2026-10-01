@@ -3,7 +3,7 @@ extends AcceptDialog
 const Version = preload("res://application_version.gd")
 const Notices = preload("res://ui/about/notices.tres")
 const Logo = preload("res://ui/about/wavez-logo-dark.png")
-const REPOSITORY := "https://github.com/mongstad/SimScope"
+const REPOSITORY := "https://github.com/mongstad/Wavez"
 var url_opener: Callable = OS.shell_open
 var identity: Label
 var runtime: Label
@@ -39,7 +39,7 @@ func _ready() -> void:
 	paragraph(overview,"Godot Engine/runtime — MIT License.\nOther third-party components retain their respective licenses.")
 	runtime = paragraph(overview,""); runtime.add_theme_color_override("font_color",get_theme_color("font_color","Label"))
 	paragraph(overview,"Full license texts and third-party notices are available here and in the project repository.")
-	github = LinkButton.new(); github.text = "github.com/mongstad/SimScope"; github.pressed.connect(open_repository); overview.add_child(github)
+	github = LinkButton.new(); github.text = "github.com/mongstad/Wavez"; github.pressed.connect(open_repository); overview.add_child(github)
 	licenses = Button.new(); licenses.text = "Licenses and notices"; licenses.pressed.connect(show_notices); overview.add_child(licenses)
 	browser_error = RichTextLabel.new(); browser_error.fit_content = true; browser_error.selection_enabled = true
 	browser_error.scroll_active = false; overview.add_child(browser_error); browser_error.hide()
