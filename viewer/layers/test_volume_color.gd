@@ -46,7 +46,10 @@ func run() -> void:
 		check(source_probe != null and absf(source_probe-oracle.probe_value)<1e-7,channel+" Python source probe")
 		var opacity: Dictionary = layers.states[id].opacity_mapping.duplicate()
 		for policy in ["symmetric","percentile"]:
-			check(layers.request_color_range(id,policy,1.,99.),channel+" requests "+policy)
+			var controls: Dictionary = layers.color_controls[id]
+			controls.percentile_low.value = 1.;controls.percentile_high.value = 99.
+			controls[policy].pressed.emit()
+			check(layers.range_thread.is_started(),channel+" Derive range UI requests "+policy)
 			await wait_range()
 			var state: Dictionary = layers.states[id]
 			var expected: Array = [-oracle.bound,oracle.bound] if policy == "symmetric" else oracle.percentiles
