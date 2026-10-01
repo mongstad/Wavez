@@ -4,12 +4,6 @@ extends RefCounted
 const ColorMapping = preload("res://layers/volume_color.gd")
 const Opacity = preload("res://layers/volume_opacity.gd")
 const IDS := ["dense_core","faint_structure","signed_field"]
-const NAMES := ["Dense core • full range","Faint structure • chosen percentiles","Signed field • symmetric"]
-const HELP := [
-	"Nonnegative field: linear color over the full finite sample range, viridis; linear opacity from 0 to the sample maximum.",
-	"Nonnegative field: linear color over the percentile entries below, viridis; linear opacity from 0 to the upper percentile. Faint values gain visibility at the cost of saturated cores. Clipping is disclosed.",
-	"Field with both signs: linear color over ±maximum absolute sample value, coolwarm; magnitude opacity from 0 to that maximum. Both signs contribute extinction."
-]
 static func problem(preset: String, stats: Dictionary) -> String:
 	if preset not in IDS:return "Unknown volume display preset."
 	if stats.get("finite",0) == 0:return "Show and sample a field with finite values first."

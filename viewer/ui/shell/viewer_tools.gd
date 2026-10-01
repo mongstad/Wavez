@@ -15,7 +15,6 @@ const COPY := {
 	"Freeze symmetric range from sample":"Freeze symmetric", "Freeze percentile range from sample":"Freeze percentile", "Reset color • linear 0–1":"Reset color",
 	"Clip at world X plane":"Enabled", "Clip X":"X", "Slice plane distance • world":"Distance", "Isosurface threshold":"Threshold", "Extract isosurface":"Extract", "Remove isosurface":"Remove",
 	"Source probe • world xyz":"World coordinates", "Probe selected volume":"Probe",
-	"Volume display preset • optional action":"Preset", "Apply volume display preset from sample":"Apply",
 	"Load geometry override JSON…":"Load override", "Clear geometry override":"Clear override"
 }
 var viewer
@@ -42,7 +41,6 @@ var shared_request: VBoxContainer
 var result_context: VBoxContainer
 var shared_slots := {}
 var selection_context: VBoxContainer
-var shared_percentiles := {}
 
 
 func setup(owner_viewer, canvas: CanvasLayer) -> void:
@@ -95,7 +93,6 @@ func open(title: String) -> void:
 			control.reparent(body); body.move_child(control,0)
 	body.reparent(content); body.show()
 	if footers.has(title):footers[title].reparent(footer)
-	share_percentiles(title)
 	share_analysis(title)
 	shorten_copy(body)
 	shorten_copy(footer)
@@ -153,7 +150,7 @@ func finish_static() -> void:
 	for pair in [["members",temporal.durable.include_members],["results",temporal.durable.bundle_results]]:
 		pair[1].reparent(state_body); durable_controls[pair[0]] = pair[1]
 	durable_controls.shared = shared
-	for title in ["Mapping","Quick setup","Derive range","Slice","Clipping","Isosurface","Source probe","Performance","Geometry","Camera"]: form(title)
+	for title in ["Mapping","Derive range","Slice","Clipping","Isosurface","Source probe","Performance","Geometry","Camera"]: form(title)
 
 	compose_tasks()
 
@@ -283,7 +280,7 @@ func selection_shape() -> void:
 
 func configure_layer_tools(layers) -> void:
 	# Rebuild only presentation navigation when the authoritative layer UI rebuilds.
-	for title in ["Quick setup","Derive range","Slice","Clipping","Isosurface"]:
+	for title in ["Derive range","Slice","Clipping","Isosurface"]:
 		if target_choices.has(title) and is_instance_valid(target_choices[title]):
 			var choice: Control = target_choices[title];choice.get_parent().remove_child(choice);choice.queue_free()
 		var body := form(title);var choice := OptionButton.new();body.add_child(choice);body.move_child(choice,0)
@@ -304,17 +301,6 @@ func configure_layer_tools(layers) -> void:
 		if not target_pages[title].has(saved) and choice.item_count > 0:saved = str(choice.get_item_metadata(0))
 		select_target(title,saved)
 		Layout.fit(body)
-	shared_percentiles.clear()
-	for id in layers.color_controls:
-		var controls: Dictionary = layers.color_controls[id];var group := Layout.page(layers.tool_bodies["Derive range:"+id])
-		for control in [controls.percentile_low,controls.percentile_high]:
-			var parent: Node = control.get_parent();var heading: Node = parent.get_child(control.get_index()-1)
-			heading.reparent(group);control.reparent(group)
-		shared_percentiles[id] = group
-		var quick: VBoxContainer = layers.tool_bodies["Quick setup:"+id]
-		var apply: Button = layers.preset_controls[id].apply
-		quick.move_child(apply,quick.get_child_count()-1)
-	share_percentiles(current)
 
 func select_target(title: String, id: String) -> void:
 	target_selected[title] = id
@@ -322,18 +308,6 @@ func select_target(title: String, id: String) -> void:
 	var choice: OptionButton = target_choices[title]
 	for index in choice.item_count:
 		if str(choice.get_item_metadata(index)) == id:choice.select(index)
-
-func share_percentiles(title: String) -> void:
-	if title not in ["Quick setup","Derive range"] or viewer.scene_layers == null:return
-	for id in shared_percentiles:
-		var group = shared_percentiles[id]
-		if not is_instance_valid(group):continue
-		var destination = viewer.scene_layers.tool_bodies.get(title+":"+id)
-		if destination != null:
-			group.reparent(destination)
-			group.visible = title != "Quick setup" or viewer.scene_layers.preset_controls[id].choice.selected == 1
-			if title == "Quick setup":destination.move_child(group,viewer.scene_layers.preset_controls[id].apply.get_index())
-			else:destination.move_child(group,viewer.scene_layers.color_controls[id].percentile.get_index())
 
 func _process(_delta: float) -> void:
 	if not is_instance_valid(window) or not window.visible:return
@@ -344,8 +318,6 @@ func _process(_delta: float) -> void:
 	notice.text = statuses[current].text if statuses.has(current) else viewer.status_label.text
 	if viewer.scene_layers != null:
 		viewer.scene_layers.refresh_probe_stamp()
-		if current == "Quick setup":
-			for id in viewer.scene_layers.preset_controls:viewer.scene_layers._update_preset_description(id)
 
 func move_input(control: Control, destination: Node) -> void:
 	var parent := control.get_parent();var index := control.get_index()

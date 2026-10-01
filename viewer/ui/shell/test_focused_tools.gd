@@ -2,7 +2,7 @@ extends SceneTree
 const Viewer = preload("res://main.gd")
 const Visual = preload("res://scene/visual_state.gd")
 const Profile = preload("res://scene/playback_profile.gd")
-const TITLES = ["Selection","Temporal","Space time","Diagnostics","Compare","Matched runs","Period","Bookmarks","Results","Mapping","Quick setup","Derive range","Slice","Clipping","Isosurface","Source probe","Performance","Geometry"]
+const TITLES = ["Selection","Temporal","Space time","Diagnostics","Compare","Matched runs","Period","Bookmarks","Results","Mapping","Derive range","Slice","Clipping","Isosurface","Source probe","Performance","Geometry"]
 var checks := 0
 var failures: Array[String] = []
 var viewer
@@ -60,12 +60,14 @@ func run() -> void:
 		pick(selection.kind,index)
 		check(selection.radius_input.visible == (index in [9,10]),"Radius shown only for sphere or cylinder")
 		check(selection.members_input.visible == (index in [0,1,3,4,5,6]),"Only applicable address inputs visible")
-	tools.open("Quick setup")
+	check(not tools.forms.has("Quick setup") and not tools.target_choices.has("Quick setup"),"Removed setup has no form or target route")
+	check(not viewer.shell.commands.has("tool:Quick setup"),"Removed setup has no menu command")
+	for key in layers.tool_bodies:check(not key.begins_with("Quick setup"),"No removed setup layer body: "+key)
+	tools.open("Derive range")
 	var low = layers.color_controls.volume0.percentile_low
 	low.value = 7.5
-	check(layers.tool_bodies["Quick setup:volume0"].is_ancestor_of(low),"Quick setup owns shared percentile widget while open")
-	tools.open("Derive range")
-	check(layers.tool_bodies["Derive range:volume0"].is_ancestor_of(low) and low.value == 7.5,"Derive range reuses percentile draft")
+	tools.close();tools.open("Derive range")
+	check(layers.tool_bodies["Derive range:volume0"].is_ancestor_of(low) and low.value == 7.5,"Derive range owns persistent percentile draft")
 	layers.sample(.5);layers.probe_channel = "other";layers.refresh_probe_channels();layers.probe_selected_volume()
 	check(layers.probe_label.text.begins_with("other = 1"),"Explicit probe channel samples loaded source independently of display channel")
 	check(layers.states.volume0.channel != "other","Probe channel leaves display mapping unchanged")
@@ -105,7 +107,7 @@ func run() -> void:
 							if node is Control and node.is_visible_in_tree() and node is not PopupMenu:check(node.size.x <= tools.window.size.x,"Section width: "+title+" "+choice.get_item_text(index))
 						if size.x == 1440 and title in ["Selection","Temporal","Compare"]:tools.window.get_texture().get_image().save_png(output.path_join(title.to_lower()+"-section-"+str(index)+".png"))
 					pick(choice,0);await settle()
-			if title in ["Selection","Temporal","Matched runs","Source probe","Quick setup","Performance"]:
+			if title in ["Selection","Temporal","Matched runs","Source probe","Performance"]:
 				tools.window.get_texture().get_image().save_png(output.path_join(title.to_lower().replace(" ","-")+"-"+str(size.x)+".png"))
 			tools.close()
 	viewer.scene_prebuffer_enabled = true;viewer._open_capture(output.path_join("mixed.ssc"));viewer.set_process(true);viewer.playing = false

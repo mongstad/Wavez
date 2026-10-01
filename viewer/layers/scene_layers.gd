@@ -41,7 +41,6 @@ var selected_volume := ""
 var panel_groups: Dictionary = {}
 var opacity_controls := {}
 var color_controls := {}
-var preset_controls := {}
 var range_thread := Thread.new()
 var range_request := {}
 var iso_pid := -1
@@ -544,7 +543,6 @@ func _build_ui() -> void:
 		for i in range(channel.item_count):
 			if channel.get_item_metadata(i) == states[id].channel:channel.select(i)
 		channel.item_selected.connect(func(i):states[id].channel = str(channel.get_item_metadata(i));resample())
-		if reader.objects[id].kind == "volume":_build_preset_ui(_tool_body("Quick setup",id),id)
 		panel_controls[id].lower = _scalar_input(colors,"Color range minimum" if reader.objects[id].kind == "volume" else "Range minimum",states[id].lower,func(v):return _set_range(id,"lower",v))
 		panel_controls[id].upper = _scalar_input(colors,"Color range maximum" if reader.objects[id].kind == "volume" else "Range maximum",states[id].upper,func(v):return _set_range(id,"upper",v))
 		if reader.objects[id].kind == "volume":_build_color_ui(colors,id)
@@ -613,7 +611,7 @@ func _build_ui() -> void:
 	probe_stamp_label = Label.new();probe_stamp_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART;probe_body.add_child(probe_stamp_label)
 	viewer.tools_ui.configure_layer_tools(self)
 	for id in color_controls:
-		for title in ["Quick setup","Derive range","Slice","Clipping","Isosurface"]:
+		for title in ["Derive range","Slice","Clipping","Isosurface"]:
 			var target_body: VBoxContainer = tool_bodies[title+":"+id]
 			var context_label := Label.new();context_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 			context_label.set_meta("tool_object",id);target_body.add_child(context_label);target_body.move_child(context_label,1)
@@ -733,7 +731,7 @@ func apply_state(value: Dictionary) -> void:
 	gpu_budget_mib = int(value.gpu_budget_mib);states = value.layers.duplicate(true)
 	legend_visibility = value.get("legend_visibility",{}).duplicate()
 	if is_instance_valid(panel):panel.get_parent().remove_child(panel);panel.queue_free()
-	labels.clear();probe_spins.clear();panel_groups.clear();opacity_controls.clear();color_controls.clear();preset_controls.clear();_build_ui()
+	labels.clear();probe_spins.clear();panel_groups.clear();opacity_controls.clear();color_controls.clear();_build_ui()
 	for i in range(mini(probe_values.size(),probe_spins.size())):probe_spins[i].set_value_no_signal(probe_values[i])
 	probe_label.text = probe_text
 	for id in expanded:
@@ -867,8 +865,6 @@ func _build_color_ui(body: VBoxContainer, id: String) -> void:
 	var indicator := Label.new();indicator.hide();body.add_child(indicator)
 	indicator.tooltip_text = "Open Details for source ranges and color diagnostics."
 	color_controls[id] = {"mode":mode,"symmetric":symmetric,"percentile_low":low,"percentile_high":high,"percentile":percent,"reset":reset,"status":status,"indicator":indicator}
-	for spin in [low,high]:spin.value_changed.connect(func(_v):_update_preset_description(id))
-	_update_preset_description(id)
 	_update_color_status(id)
 func _update_color_status(id: String) -> void:
 	if not color_controls.has(id):return
@@ -920,32 +916,6 @@ func _process(_delta: float) -> void:
 	states[id] = candidate;apply_state(snapshot())
 	viewer.status_label.text = "Display range frozen from the recorded sample. Opacity unchanged." if request.preset.is_empty() else "Display preset applied: linear color [%s, %s], %s; %s opacity [0, %s]. Strength %s and ray step %s unchanged. Manual controls remain available." % [str(candidate.lower),str(candidate.upper),candidate.colormap,candidate.opacity_mapping.mode,str(candidate.opacity_mapping.upper),str(candidate.opacity),str(candidate.step)]
 
-func _build_preset_ui(body: VBoxContainer, id: String) -> void:
-	var title := Label.new();title.text = "Volume display preset • optional action";body.add_child(title)
-	var help := Button.new();help.text = "What do these controls change?";help.toggle_mode = true;body.add_child(help)
-	var guide := Label.new();guide.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART;guide.visible = false
-	guide.text = "Color range/normalization maps values to colors. Opacity mapping controls extinction. Ray step controls integration quality/cost, not brightness. Particle visibility can obscure fields; adjust it separately. The scene Viewing preset controls presentation/background and particle style. These are display choices, not calibrated science."
-	body.add_child(guide);help.hide();guide.hide();title.tooltip_text = guide.text;help.toggled.connect(func(v):guide.visible = v)
-	var choice := OptionButton.new()
-	for name in ["Dense core","Faint structure","Signed field"]:choice.add_item(name)
-	choice.tooltip_text = "Choose an action, then Apply. This is not an active mode; resolved settings below remain authoritative."
-	body.add_child(choice)
-	var description := Label.new();description.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART;body.add_child(description)
-	choice.item_selected.connect(func(_i):_update_preset_description(id))
-	var apply := Button.new();apply.text = "Apply volume display preset from sample";body.add_child(apply)
-	apply.pressed.connect(func():request_volume_preset(id,VolumePresets.IDS[choice.selected],color_controls[id].percentile_low.value,color_controls[id].percentile_high.value))
-	preset_controls[id] = {"choice":choice,"description":description,"apply":apply,"guide":title,"help":help}
-func _update_preset_description(id: String) -> void:
-	if not preset_controls.has(id) or not color_controls.has(id):return
-	var controls: Dictionary = preset_controls[id];var selected: int = controls.choice.selected
-	var text: String = VolumePresets.HELP[selected]
-	if VolumePresets.IDS[selected] == "faint_structure":
-		text = text.replace("the percentile entries below","P%s–P%s (edit percentile entries below)" % [str(color_controls[id].percentile_low.value),str(color_controls[id].percentile_high.value)])
-	controls.description.tooltip_text = text+" Freezes color and opacity thresholds together. Keeps strength, ray step, particles and scene viewing preset. Manual controls remain available; not calibrated science."
-	var problem: String = VolumePresets.problem(VolumePresets.IDS[selected],views[id].color_stats)
-	controls.description.text = problem if not problem.is_empty() else "One-time display action"
-	var group = viewer.tools_ui.shared_percentiles.get(id)
-	if is_instance_valid(group) and viewer.tools_ui.current == "Quick setup":group.visible = selected == 1
 func request_volume_preset(id: String, preset: String, low := 1.0, high := 99.0) -> bool:
 	var problem := VolumePresets.problem(preset,views[id].color_stats)
 	if not problem.is_empty():viewer.status_label.text = problem;return false

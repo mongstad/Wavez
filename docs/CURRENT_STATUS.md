@@ -1,5 +1,10 @@
 # Current status
 
+Issue #160 removes Quick setup and its Tools menu entry, pending owner review
+(candidate build 15). Field/channel controls, Derive range percentile inputs,
+manual color/opacity mappings, scene/portable view presets and reusable volume
+preset calculations remain. See [dependency audit and owner checks](QUICK_SETUP_REMOVAL.md).
+
 The owner merged final UX3 validation in PR #64, the [UX4 design](UX4_DESIGN.md)
 in PR #72, and [command menus](UX4_MENUS.md) in PR #73 at `3dddf71`.
 The category simulation panel was owner-merged in PR #75 at `b2f0384`.

@@ -47,16 +47,7 @@ func run() -> void:
 			var before: Dictionary = Job.snapshot(viewer)
 			var bad := "signed_field" if channel == "density" else "dense_core"
 			check(not layers.request_volume_preset(id,bad) and Job.snapshot(viewer) == before,"incompatible preset refuses atomically")
-			var controls: Dictionary = layers.preset_controls[id]
-			var choice: int = Presets.IDS.find(preset)
-			controls.choice.select(choice);controls.choice.item_selected.emit(choice)
-			check(Job.snapshot(viewer) == before,"choosing an action alone changes no display state")
-			check(controls.description.tooltip_text.contains("opacity") and controls.description.tooltip_text.contains("ray step"),"preset changes and preserved controls disclosed before applying")
-			if preset == "faint_structure":
-				layers.color_controls[id].percentile_low.value = 1.
-				layers.color_controls[id].percentile_high.value = 99.
-				check(controls.description.tooltip_text.contains("P1.0–P99.0"),"faint action discloses current percentile inputs before Apply")
-			controls.apply.pressed.emit();await wait_range()
+			check(layers.request_volume_preset(id,preset),"Retained programmatic preset starts");await wait_range()
 			var state: Dictionary = layers.states[id]
 			var bounds: Array = [oracle.minimum,oracle.maximum] if preset == "dense_core" else (oracle.percentiles if preset == "faint_structure" else [-oracle.bound,oracle.bound])
 			check(equal(state.lower,bounds[0]) and equal(state.upper,bounds[1]),preset+" bounds match independent NumPy")
@@ -110,13 +101,6 @@ func run() -> void:
 	for key in ["lower","upper","color_mapping","opacity_mapping","colormap"]:scene_after.scene.layers[id][key] = scene_before.scene.layers[id][key]
 	check(scene_after == scene_before,"cinematic environment and visible particle layer preserved")
 	viewer._apply_preset("Scientific");viewer.particle_layer_visible = false;layers.sample(job.time)
-	viewer.shell.toggle_dock();viewer.shell.refresh_export();viewer.shell.select_workspace(1);layers.choose_object("volume",id)
-	for i in 5:await process_frame
-	var scroll: ScrollContainer = viewer.shell.scroll
-	scroll.scroll_vertical += int(layers.preset_controls[id].guide.global_position.y-scroll.global_position.y)-50
-	await render("controls")
-	layers.preset_controls[id].help.button_pressed = true
-	await render("controls-help")
 	if job.synthetic:
 		layers.states[id].channel = "zero";layers.sample(job.time);before = layers.snapshot()
 		for preset in Presets.IDS:check(not layers.request_volume_preset(id,preset) and layers.snapshot() == before,"zero field refuses "+preset)
