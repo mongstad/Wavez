@@ -1,0 +1,24 @@
+{
+  "checks": 234,
+  "failures": [],
+  "layouts": [
+    {
+      "transport": "[P: (0.0, 796.0), S: (1440.0, 64.0)]",
+      "window": "(1440, 900)"
+    },
+    {
+      "transport": "[P: (0.0, 496.0), S: (1024.0, 104.0)]",
+      "window": "(1024, 640)"
+    }
+  ],
+  "refresh_activity": {
+    "counters": {},
+    "stages": {}
+  },
+  "request_delay_observed_ms": 463,
+  "source_hashes_unchanged": {
+    "/tmp/wavez-shortcuts-final-transport-compat/scene.ssc": "823015ac4f3c950bdccf8d3f0e052303a9d49ea58aa333fcbb6726590c07cf89",
+    "/tmp/wavez-shortcuts-final-transport-compat/offset.ssc": "0e5453611b7717abd1574a30cb451dc1eb34d11bf6d74f38e068eaea6fc53c77",
+    "/tmp/wavez-shortcuts-final-transport-compat/single.ssc": "f76f5a177d1c770ce1f316c1e9198b2203b9cab68646a45ab859b6ac9efc8921"
+  }
+}

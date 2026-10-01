@@ -1,0 +1,1635 @@
+{
+  "accepted_main": "0496d12",
+  "reports": [
+    {
+      "renderer": "forward_plus",
+      "setup_checks": 40,
+      "comparisons": [
+        {
+          "kind": "particles",
+          "rgba_frames_identical": true,
+          "timing_identical": true,
+          "scientific_evidence_identical": true,
+          "variants": {
+            "accepted-main": {
+              "frames": [
+                "5d09bdb27fc90773dd0a4affa2b0f579f3db02297d15c7dce05ae6b2575f9965",
+                "e4e224c5608da32a4b7d61c4adb39797a0ddacd36d60e59f40ce8e4a7be875d2"
+              ],
+              "timing_sha256": "0426b11991483be6d578597f1e15aac68096b9b98c4d91b84891c35ad4c10e71",
+              "evidence": [
+                {
+                  "async_workers": [
+                    false,
+                    false,
+                    false
+                  ],
+                  "backend": "forward_plus",
+                  "camera": [
+                    1.574817180633545,
+                    1.1388626098632812,
+                    2.015674114227295
+                  ],
+                  "legends_visible": false,
+                  "p": {
+                    "ids": [
+                      "10",
+                      "20"
+                    ],
+                    "positions": [
+                      [
+                        -0.25,
+                        0.0,
+                        0.0
+                      ],
+                      [
+                        1.75,
+                        0.0,
+                        0.0
+                      ]
+                    ]
+                  },
+                  "strict": true
+                },
+                {
+                  "async_workers": [
+                    false,
+                    false,
+                    false
+                  ],
+                  "backend": "forward_plus",
+                  "camera": [
+                    1.614812970161438,
+                    1.1388626098632812,
+                    1.9837766885757446
+                  ],
+                  "legends_visible": false,
+                  "p": {
+                    "ids": [
+                      "10",
+                      "20"
+                    ],
+                    "positions": [
+                      [
+                        0.0,
+                        0.0,
+                        0.0
+                      ],
+                      [
+                        2.0,
+                        0.0,
+                        0.0
+                      ]
+                    ]
+                  },
+                  "strict": true
+                }
+              ],
+              "diagnostics": []
+            },
+            "candidate": {
+              "frames": [
+                "5d09bdb27fc90773dd0a4affa2b0f579f3db02297d15c7dce05ae6b2575f9965",
+                "e4e224c5608da32a4b7d61c4adb39797a0ddacd36d60e59f40ce8e4a7be875d2"
+              ],
+              "timing_sha256": "0426b11991483be6d578597f1e15aac68096b9b98c4d91b84891c35ad4c10e71",
+              "evidence": [
+                {
+                  "async_workers": [
+                    false,
+                    false,
+                    false
+                  ],
+                  "backend": "forward_plus",
+                  "camera": [
+                    1.574817180633545,
+                    1.1388626098632812,
+                    2.015674114227295
+                  ],
+                  "legends_visible": false,
+                  "p": {
+                    "ids": [
+                      "10",
+                      "20"
+                    ],
+                    "positions": [
+                      [
+                        -0.25,
+                        0.0,
+                        0.0
+                      ],
+                      [
+                        1.75,
+                        0.0,
+                        0.0
+                      ]
+                    ]
+                  },
+                  "strict": true
+                },
+                {
+                  "async_workers": [
+                    false,
+                    false,
+                    false
+                  ],
+                  "backend": "forward_plus",
+                  "camera": [
+                    1.614812970161438,
+                    1.1388626098632812,
+                    1.9837766885757446
+                  ],
+                  "legends_visible": false,
+                  "p": {
+                    "ids": [
+                      "10",
+                      "20"
+                    ],
+                    "positions": [
+                      [
+                        0.0,
+                        0.0,
+                        0.0
+                      ],
+                      [
+                        2.0,
+                        0.0,
+                        0.0
+                      ]
+                    ]
+                  },
+                  "strict": true
+                }
+              ],
+              "diagnostics": []
+            }
+          }
+        },
+        {
+          "kind": "field",
+          "rgba_frames_identical": true,
+          "timing_identical": true,
+          "scientific_evidence_identical": true,
+          "variants": {
+            "accepted-main": {
+              "frames": [
+                "3304b8568deac729ec20d125754dd630bc80552c5db5c53270347087e8bbb10f",
+                "e0b55a269c30081bcfeafe910e622971ce968a3eb5eecffc4c8b485759b49122"
+              ],
+              "timing_sha256": "bf3dd32c35a0838f065fdc0f63694581494031b40b9e05e4aeded34f01e5dd3f",
+              "evidence": [
+                {
+                  "async_workers": [
+                    false,
+                    false,
+                    false
+                  ],
+                  "backend": "forward_plus",
+                  "camera": [
+                    2.727663278579712,
+                    1.9725677967071533,
+                    3.4912497997283936
+                  ],
+                  "field": {
+                    "channel": "psi_imag",
+                    "lod": 1,
+                    "opacity": [
+                      0.15,
+                      0.85,
+                      0.4
+                    ],
+                    "range": [
+                      -0.5,
+                      1.0
+                    ],
+                    "sha256": "0fcc397b2eabc524b575f119819535e1aae427427ad0362ec84090af8600e9e1",
+                    "texture_sha256": "c8b92e7c22d511aea6c7f9aa176763305eef59871e31949278b8992470c93143"
+                  },
+                  "legends_visible": false,
+                  "strict": true
+                },
+                {
+                  "async_workers": [
+                    false,
+                    false,
+                    false
+                  ],
+                  "backend": "forward_plus",
+                  "camera": [
+                    2.796938180923462,
+                    1.9725677967071533,
+                    3.436002016067505
+                  ],
+                  "field": {
+                    "channel": "psi_imag",
+                    "lod": 1,
+                    "opacity": [
+                      0.15,
+                      0.85,
+                      0.4
+                    ],
+                    "range": [
+                      -0.5,
+                      1.0
+                    ],
+                    "sha256": "c46f2b0954c98d32cfe9a6136a363567c9cab6c2f9b7c7a7fa67c69d571722fc",
+                    "texture_sha256": "639b2adf6b1c628e0e6366e48d65831293c04e36f559c374ba5327ef10cc2702"
+                  },
+                  "legends_visible": false,
+                  "strict": true
+                }
+              ],
+              "diagnostics": []
+            },
+            "candidate": {
+              "frames": [
+                "3304b8568deac729ec20d125754dd630bc80552c5db5c53270347087e8bbb10f",
+                "e0b55a269c30081bcfeafe910e622971ce968a3eb5eecffc4c8b485759b49122"
+              ],
+              "timing_sha256": "bf3dd32c35a0838f065fdc0f63694581494031b40b9e05e4aeded34f01e5dd3f",
+              "evidence": [
+                {
+                  "async_workers": [
+                    false,
+                    false,
+                    false
+                  ],
+                  "backend": "forward_plus",
+                  "camera": [
+                    2.727663278579712,
+                    1.9725677967071533,
+                    3.4912497997283936
+                  ],
+                  "field": {
+                    "channel": "psi_imag",
+                    "lod": 1,
+                    "opacity": [
+                      0.15,
+                      0.85,
+                      0.4
+                    ],
+                    "range": [
+                      -0.5,
+                      1.0
+                    ],
+                    "sha256": "0fcc397b2eabc524b575f119819535e1aae427427ad0362ec84090af8600e9e1",
+                    "texture_sha256": "c8b92e7c22d511aea6c7f9aa176763305eef59871e31949278b8992470c93143"
+                  },
+                  "legends_visible": false,
+                  "strict": true
+                },
+                {
+                  "async_workers": [
+                    false,
+                    false,
+                    false
+                  ],
+                  "backend": "forward_plus",
+                  "camera": [
+                    2.796938180923462,
+                    1.9725677967071533,
+                    3.436002016067505
+                  ],
+                  "field": {
+                    "channel": "psi_imag",
+                    "lod": 1,
+                    "opacity": [
+                      0.15,
+                      0.85,
+                      0.4
+                    ],
+                    "range": [
+                      -0.5,
+                      1.0
+                    ],
+                    "sha256": "c46f2b0954c98d32cfe9a6136a363567c9cab6c2f9b7c7a7fa67c69d571722fc",
+                    "texture_sha256": "639b2adf6b1c628e0e6366e48d65831293c04e36f559c374ba5327ef10cc2702"
+                  },
+                  "legends_visible": false,
+                  "strict": true
+                }
+              ],
+              "diagnostics": []
+            }
+          }
+        },
+        {
+          "kind": "mesh",
+          "rgba_frames_identical": true,
+          "timing_identical": true,
+          "scientific_evidence_identical": true,
+          "variants": {
+            "accepted-main": {
+              "frames": [
+                "490c6d79c2408acca9a09bca7e12b97f7744f88aa1e1baa5fe43d817470fa594",
+                "7ffc08fa6445e90304a53a8acd5700c881aaa8c7ca09e9d5a811ec2311a8d585"
+              ],
+              "timing_sha256": "040f6b33d115e18a53c4eed3efb1ab284e54a7011de73de3016271e085fe2b76",
+              "evidence": [
+                {
+                  "async_workers": [
+                    false,
+                    false,
+                    false
+                  ],
+                  "backend": "forward_plus",
+                  "camera": [
+                    2.22712779045105,
+                    1.6105948686599731,
+                    2.8505935668945312
+                  ],
+                  "legends_visible": false,
+                  "mesh": {
+                    "positions": [
+                      [
+                        -1.0,
+                        -1.0,
+                        0.1875
+                      ],
+                      [
+                        1.0,
+                        -1.0,
+                        0.1875
+                      ],
+                      [
+                        0.0,
+                        1.0,
+                        0.1875
+                      ]
+                    ],
+                    "triangles": [
+                      0,
+                      2,
+                      1
+                    ]
+                  },
+                  "strict": true
+                },
+                {
+                  "async_workers": [
+                    false,
+                    false,
+                    false
+                  ],
+                  "backend": "forward_plus",
+                  "camera": [
+                    2.2836904525756836,
+                    1.6105948686599731,
+                    2.805483818054199
+                  ],
+                  "legends_visible": false,
+                  "mesh": {
+                    "positions": [
+                      [
+                        -1.0,
+                        -1.0,
+                        0.25
+                      ],
+                      [
+                        1.0,
+                        -1.0,
+                        0.25
+                      ],
+                      [
+                        0.0,
+                        1.0,
+                        0.25
+                      ]
+                    ],
+                    "triangles": [
+                      0,
+                      2,
+                      1
+                    ]
+                  },
+                  "strict": true
+                }
+              ],
+              "diagnostics": []
+            },
+            "candidate": {
+              "frames": [
+                "490c6d79c2408acca9a09bca7e12b97f7744f88aa1e1baa5fe43d817470fa594",
+                "7ffc08fa6445e90304a53a8acd5700c881aaa8c7ca09e9d5a811ec2311a8d585"
+              ],
+              "timing_sha256": "040f6b33d115e18a53c4eed3efb1ab284e54a7011de73de3016271e085fe2b76",
+              "evidence": [
+                {
+                  "async_workers": [
+                    false,
+                    false,
+                    false
+                  ],
+                  "backend": "forward_plus",
+                  "camera": [
+                    2.22712779045105,
+                    1.6105948686599731,
+                    2.8505935668945312
+                  ],
+                  "legends_visible": false,
+                  "mesh": {
+                    "positions": [
+                      [
+                        -1.0,
+                        -1.0,
+                        0.1875
+                      ],
+                      [
+                        1.0,
+                        -1.0,
+                        0.1875
+                      ],
+                      [
+                        0.0,
+                        1.0,
+                        0.1875
+                      ]
+                    ],
+                    "triangles": [
+                      0,
+                      2,
+                      1
+                    ]
+                  },
+                  "strict": true
+                },
+                {
+                  "async_workers": [
+                    false,
+                    false,
+                    false
+                  ],
+                  "backend": "forward_plus",
+                  "camera": [
+                    2.2836904525756836,
+                    1.6105948686599731,
+                    2.805483818054199
+                  ],
+                  "legends_visible": false,
+                  "mesh": {
+                    "positions": [
+                      [
+                        -1.0,
+                        -1.0,
+                        0.25
+                      ],
+                      [
+                        1.0,
+                        -1.0,
+                        0.25
+                      ],
+                      [
+                        0.0,
+                        1.0,
+                        0.25
+                      ]
+                    ],
+                    "triangles": [
+                      0,
+                      2,
+                      1
+                    ]
+                  },
+                  "strict": true
+                }
+              ],
+              "diagnostics": []
+            }
+          }
+        },
+        {
+          "kind": "mixed",
+          "rgba_frames_identical": true,
+          "timing_identical": true,
+          "scientific_evidence_identical": true,
+          "variants": {
+            "accepted-main": {
+              "frames": [
+                "e893d8ba68c48343774b9d5792e0c66719bb17d1e46dcb74ae272fd399fb7338",
+                "6984ddcd49d7a4b2a1fa18a4077536c623f1dcd533ff719f40cd723e251b5338"
+              ],
+              "timing_sha256": "d1636acd3863b2729e558cfc27dff92ea31d04f92539fde310222e04a15b0173",
+              "evidence": [
+                {
+                  "async_workers": [
+                    false,
+                    false,
+                    false
+                  ],
+                  "backend": "forward_plus",
+                  "camera": [
+                    2.727663278579712,
+                    1.9725677967071533,
+                    3.4912497997283936
+                  ],
+                  "field": {
+                    "channel": "psi_imag",
+                    "lod": 1,
+                    "opacity": [
+                      0.15,
+                      0.85,
+                      0.4
+                    ],
+                    "range": [
+                      -0.5,
+                      1.0
+                    ],
+                    "sha256": "0fcc397b2eabc524b575f119819535e1aae427427ad0362ec84090af8600e9e1",
+                    "texture_sha256": "c8b92e7c22d511aea6c7f9aa176763305eef59871e31949278b8992470c93143"
+                  },
+                  "legends_visible": false,
+                  "mesh": {
+                    "positions": [
+                      [
+                        -1.0,
+                        -1.0,
+                        0.1875
+                      ],
+                      [
+                        1.0,
+                        -1.0,
+                        0.1875
+                      ],
+                      [
+                        0.0,
+                        1.0,
+                        0.1875
+                      ]
+                    ],
+                    "triangles": [
+                      0,
+                      2,
+                      1
+                    ]
+                  },
+                  "p": {
+                    "ids": [
+                      "10",
+                      "20"
+                    ],
+                    "positions": [
+                      [
+                        -0.25,
+                        0.0,
+                        0.0
+                      ],
+                      [
+                        1.75,
+                        0.0,
+                        0.0
+                      ]
+                    ]
+                  },
+                  "strict": true
+                },
+                {
+                  "async_workers": [
+                    false,
+                    false,
+                    false
+                  ],
+                  "backend": "forward_plus",
+                  "camera": [
+                    2.796938180923462,
+                    1.9725677967071533,
+                    3.436002016067505
+                  ],
+                  "field": {
+                    "channel": "psi_imag",
+                    "lod": 1,
+                    "opacity": [
+                      0.15,
+                      0.85,
+                      0.4
+                    ],
+                    "range": [
+                      -0.5,
+                      1.0
+                    ],
+                    "sha256": "c46f2b0954c98d32cfe9a6136a363567c9cab6c2f9b7c7a7fa67c69d571722fc",
+                    "texture_sha256": "639b2adf6b1c628e0e6366e48d65831293c04e36f559c374ba5327ef10cc2702"
+                  },
+                  "legends_visible": false,
+                  "mesh": {
+                    "positions": [
+                      [
+                        -1.0,
+                        -1.0,
+                        0.25
+                      ],
+                      [
+                        1.0,
+                        -1.0,
+                        0.25
+                      ],
+                      [
+                        0.0,
+                        1.0,
+                        0.25
+                      ]
+                    ],
+                    "triangles": [
+                      0,
+                      2,
+                      1
+                    ]
+                  },
+                  "p": {
+                    "ids": [
+                      "10",
+                      "20"
+                    ],
+                    "positions": [
+                      [
+                        0.0,
+                        0.0,
+                        0.0
+                      ],
+                      [
+                        2.0,
+                        0.0,
+                        0.0
+                      ]
+                    ]
+                  },
+                  "strict": true
+                }
+              ],
+              "diagnostics": []
+            },
+            "candidate": {
+              "frames": [
+                "e893d8ba68c48343774b9d5792e0c66719bb17d1e46dcb74ae272fd399fb7338",
+                "6984ddcd49d7a4b2a1fa18a4077536c623f1dcd533ff719f40cd723e251b5338"
+              ],
+              "timing_sha256": "d1636acd3863b2729e558cfc27dff92ea31d04f92539fde310222e04a15b0173",
+              "evidence": [
+                {
+                  "async_workers": [
+                    false,
+                    false,
+                    false
+                  ],
+                  "backend": "forward_plus",
+                  "camera": [
+                    2.727663278579712,
+                    1.9725677967071533,
+                    3.4912497997283936
+                  ],
+                  "field": {
+                    "channel": "psi_imag",
+                    "lod": 1,
+                    "opacity": [
+                      0.15,
+                      0.85,
+                      0.4
+                    ],
+                    "range": [
+                      -0.5,
+                      1.0
+                    ],
+                    "sha256": "0fcc397b2eabc524b575f119819535e1aae427427ad0362ec84090af8600e9e1",
+                    "texture_sha256": "c8b92e7c22d511aea6c7f9aa176763305eef59871e31949278b8992470c93143"
+                  },
+                  "legends_visible": false,
+                  "mesh": {
+                    "positions": [
+                      [
+                        -1.0,
+                        -1.0,
+                        0.1875
+                      ],
+                      [
+                        1.0,
+                        -1.0,
+                        0.1875
+                      ],
+                      [
+                        0.0,
+                        1.0,
+                        0.1875
+                      ]
+                    ],
+                    "triangles": [
+                      0,
+                      2,
+                      1
+                    ]
+                  },
+                  "p": {
+                    "ids": [
+                      "10",
+                      "20"
+                    ],
+                    "positions": [
+                      [
+                        -0.25,
+                        0.0,
+                        0.0
+                      ],
+                      [
+                        1.75,
+                        0.0,
+                        0.0
+                      ]
+                    ]
+                  },
+                  "strict": true
+                },
+                {
+                  "async_workers": [
+                    false,
+                    false,
+                    false
+                  ],
+                  "backend": "forward_plus",
+                  "camera": [
+                    2.796938180923462,
+                    1.9725677967071533,
+                    3.436002016067505
+                  ],
+                  "field": {
+                    "channel": "psi_imag",
+                    "lod": 1,
+                    "opacity": [
+                      0.15,
+                      0.85,
+                      0.4
+                    ],
+                    "range": [
+                      -0.5,
+                      1.0
+                    ],
+                    "sha256": "c46f2b0954c98d32cfe9a6136a363567c9cab6c2f9b7c7a7fa67c69d571722fc",
+                    "texture_sha256": "639b2adf6b1c628e0e6366e48d65831293c04e36f559c374ba5327ef10cc2702"
+                  },
+                  "legends_visible": false,
+                  "mesh": {
+                    "positions": [
+                      [
+                        -1.0,
+                        -1.0,
+                        0.25
+                      ],
+                      [
+                        1.0,
+                        -1.0,
+                        0.25
+                      ],
+                      [
+                        0.0,
+                        1.0,
+                        0.25
+                      ]
+                    ],
+                    "triangles": [
+                      0,
+                      2,
+                      1
+                    ]
+                  },
+                  "p": {
+                    "ids": [
+                      "10",
+                      "20"
+                    ],
+                    "positions": [
+                      [
+                        0.0,
+                        0.0,
+                        0.0
+                      ],
+                      [
+                        2.0,
+                        0.0,
+                        0.0
+                      ]
+                    ]
+                  },
+                  "strict": true
+                }
+              ],
+              "diagnostics": []
+            }
+          }
+        }
+      ]
+    },
+    {
+      "renderer": "gl_compatibility",
+      "setup_checks": 40,
+      "comparisons": [
+        {
+          "kind": "particles",
+          "rgba_frames_identical": true,
+          "timing_identical": true,
+          "scientific_evidence_identical": true,
+          "variants": {
+            "accepted-main": {
+              "frames": [
+                "40a40ababb353946eda4af2adef1790eb09867773649d6c4509bf0160243046d",
+                "e61892a6ea60e349e7d245aec6d82e8e90efcc690b2a452fc937bbd53569f507"
+              ],
+              "timing_sha256": "0426b11991483be6d578597f1e15aac68096b9b98c4d91b84891c35ad4c10e71",
+              "evidence": [
+                {
+                  "async_workers": [
+                    false,
+                    false,
+                    false
+                  ],
+                  "backend": "gl_compatibility",
+                  "camera": [
+                    1.574817180633545,
+                    1.1388626098632812,
+                    2.015674114227295
+                  ],
+                  "legends_visible": false,
+                  "p": {
+                    "ids": [
+                      "10",
+                      "20"
+                    ],
+                    "positions": [
+                      [
+                        -0.25,
+                        0.0,
+                        0.0
+                      ],
+                      [
+                        1.75,
+                        0.0,
+                        0.0
+                      ]
+                    ]
+                  },
+                  "strict": true
+                },
+                {
+                  "async_workers": [
+                    false,
+                    false,
+                    false
+                  ],
+                  "backend": "gl_compatibility",
+                  "camera": [
+                    1.614812970161438,
+                    1.1388626098632812,
+                    1.9837766885757446
+                  ],
+                  "legends_visible": false,
+                  "p": {
+                    "ids": [
+                      "10",
+                      "20"
+                    ],
+                    "positions": [
+                      [
+                        0.0,
+                        0.0,
+                        0.0
+                      ],
+                      [
+                        2.0,
+                        0.0,
+                        0.0
+                      ]
+                    ]
+                  },
+                  "strict": true
+                }
+              ],
+              "diagnostics": []
+            },
+            "candidate": {
+              "frames": [
+                "40a40ababb353946eda4af2adef1790eb09867773649d6c4509bf0160243046d",
+                "e61892a6ea60e349e7d245aec6d82e8e90efcc690b2a452fc937bbd53569f507"
+              ],
+              "timing_sha256": "0426b11991483be6d578597f1e15aac68096b9b98c4d91b84891c35ad4c10e71",
+              "evidence": [
+                {
+                  "async_workers": [
+                    false,
+                    false,
+                    false
+                  ],
+                  "backend": "gl_compatibility",
+                  "camera": [
+                    1.574817180633545,
+                    1.1388626098632812,
+                    2.015674114227295
+                  ],
+                  "legends_visible": false,
+                  "p": {
+                    "ids": [
+                      "10",
+                      "20"
+                    ],
+                    "positions": [
+                      [
+                        -0.25,
+                        0.0,
+                        0.0
+                      ],
+                      [
+                        1.75,
+                        0.0,
+                        0.0
+                      ]
+                    ]
+                  },
+                  "strict": true
+                },
+                {
+                  "async_workers": [
+                    false,
+                    false,
+                    false
+                  ],
+                  "backend": "gl_compatibility",
+                  "camera": [
+                    1.614812970161438,
+                    1.1388626098632812,
+                    1.9837766885757446
+                  ],
+                  "legends_visible": false,
+                  "p": {
+                    "ids": [
+                      "10",
+                      "20"
+                    ],
+                    "positions": [
+                      [
+                        0.0,
+                        0.0,
+                        0.0
+                      ],
+                      [
+                        2.0,
+                        0.0,
+                        0.0
+                      ]
+                    ]
+                  },
+                  "strict": true
+                }
+              ],
+              "diagnostics": []
+            }
+          }
+        },
+        {
+          "kind": "field",
+          "rgba_frames_identical": true,
+          "timing_identical": true,
+          "scientific_evidence_identical": true,
+          "variants": {
+            "accepted-main": {
+              "frames": [
+                "cd327d56b134c315701ae50ce297711d1de17b6cf14c379a205daca52cdf9037",
+                "0ab9e8e038413916fe19e577b6751f91df65107b005f78a9f8751e2ebde8b61a"
+              ],
+              "timing_sha256": "ac2aebf40d046994ffbef5c587ec01d361571a0ce89911836410d81111e7de60",
+              "evidence": [
+                {
+                  "async_workers": [
+                    false,
+                    false,
+                    false
+                  ],
+                  "backend": "gl_compatibility",
+                  "camera": [
+                    2.727663278579712,
+                    1.9725677967071533,
+                    3.4912497997283936
+                  ],
+                  "field": {
+                    "channel": "psi_imag",
+                    "lod": 1,
+                    "opacity": [
+                      0.15,
+                      0.85,
+                      0.4
+                    ],
+                    "range": [
+                      -0.5,
+                      1.0
+                    ],
+                    "sha256": "0fcc397b2eabc524b575f119819535e1aae427427ad0362ec84090af8600e9e1"
+                  },
+                  "legends_visible": false,
+                  "strict": true
+                },
+                {
+                  "async_workers": [
+                    false,
+                    false,
+                    false
+                  ],
+                  "backend": "gl_compatibility",
+                  "camera": [
+                    2.796938180923462,
+                    1.9725677967071533,
+                    3.436002016067505
+                  ],
+                  "field": {
+                    "channel": "psi_imag",
+                    "lod": 1,
+                    "opacity": [
+                      0.15,
+                      0.85,
+                      0.4
+                    ],
+                    "range": [
+                      -0.5,
+                      1.0
+                    ],
+                    "sha256": "c46f2b0954c98d32cfe9a6136a363567c9cab6c2f9b7c7a7fa67c69d571722fc"
+                  },
+                  "legends_visible": false,
+                  "strict": true
+                }
+              ],
+              "diagnostics": []
+            },
+            "candidate": {
+              "frames": [
+                "cd327d56b134c315701ae50ce297711d1de17b6cf14c379a205daca52cdf9037",
+                "0ab9e8e038413916fe19e577b6751f91df65107b005f78a9f8751e2ebde8b61a"
+              ],
+              "timing_sha256": "ac2aebf40d046994ffbef5c587ec01d361571a0ce89911836410d81111e7de60",
+              "evidence": [
+                {
+                  "async_workers": [
+                    false,
+                    false,
+                    false
+                  ],
+                  "backend": "gl_compatibility",
+                  "camera": [
+                    2.727663278579712,
+                    1.9725677967071533,
+                    3.4912497997283936
+                  ],
+                  "field": {
+                    "channel": "psi_imag",
+                    "lod": 1,
+                    "opacity": [
+                      0.15,
+                      0.85,
+                      0.4
+                    ],
+                    "range": [
+                      -0.5,
+                      1.0
+                    ],
+                    "sha256": "0fcc397b2eabc524b575f119819535e1aae427427ad0362ec84090af8600e9e1"
+                  },
+                  "legends_visible": false,
+                  "strict": true
+                },
+                {
+                  "async_workers": [
+                    false,
+                    false,
+                    false
+                  ],
+                  "backend": "gl_compatibility",
+                  "camera": [
+                    2.796938180923462,
+                    1.9725677967071533,
+                    3.436002016067505
+                  ],
+                  "field": {
+                    "channel": "psi_imag",
+                    "lod": 1,
+                    "opacity": [
+                      0.15,
+                      0.85,
+                      0.4
+                    ],
+                    "range": [
+                      -0.5,
+                      1.0
+                    ],
+                    "sha256": "c46f2b0954c98d32cfe9a6136a363567c9cab6c2f9b7c7a7fa67c69d571722fc"
+                  },
+                  "legends_visible": false,
+                  "strict": true
+                }
+              ],
+              "diagnostics": []
+            }
+          }
+        },
+        {
+          "kind": "mesh",
+          "rgba_frames_identical": true,
+          "timing_identical": true,
+          "scientific_evidence_identical": true,
+          "variants": {
+            "accepted-main": {
+              "frames": [
+                "0345d0928e63a71ee8e528b70c0a6650b67c856b349ed0786a5ba6feff08b170",
+                "9d12d92ed8d39cabdf0ff74ba6fed42a317b1eb5681c795443f9abddc16ffcbd"
+              ],
+              "timing_sha256": "040f6b33d115e18a53c4eed3efb1ab284e54a7011de73de3016271e085fe2b76",
+              "evidence": [
+                {
+                  "async_workers": [
+                    false,
+                    false,
+                    false
+                  ],
+                  "backend": "gl_compatibility",
+                  "camera": [
+                    2.22712779045105,
+                    1.6105948686599731,
+                    2.8505935668945312
+                  ],
+                  "legends_visible": false,
+                  "mesh": {
+                    "positions": [
+                      [
+                        -1.0,
+                        -1.0,
+                        0.1875
+                      ],
+                      [
+                        1.0,
+                        -1.0,
+                        0.1875
+                      ],
+                      [
+                        0.0,
+                        1.0,
+                        0.1875
+                      ]
+                    ],
+                    "triangles": [
+                      0,
+                      2,
+                      1
+                    ]
+                  },
+                  "strict": true
+                },
+                {
+                  "async_workers": [
+                    false,
+                    false,
+                    false
+                  ],
+                  "backend": "gl_compatibility",
+                  "camera": [
+                    2.2836904525756836,
+                    1.6105948686599731,
+                    2.805483818054199
+                  ],
+                  "legends_visible": false,
+                  "mesh": {
+                    "positions": [
+                      [
+                        -1.0,
+                        -1.0,
+                        0.25
+                      ],
+                      [
+                        1.0,
+                        -1.0,
+                        0.25
+                      ],
+                      [
+                        0.0,
+                        1.0,
+                        0.25
+                      ]
+                    ],
+                    "triangles": [
+                      0,
+                      2,
+                      1
+                    ]
+                  },
+                  "strict": true
+                }
+              ],
+              "diagnostics": []
+            },
+            "candidate": {
+              "frames": [
+                "0345d0928e63a71ee8e528b70c0a6650b67c856b349ed0786a5ba6feff08b170",
+                "9d12d92ed8d39cabdf0ff74ba6fed42a317b1eb5681c795443f9abddc16ffcbd"
+              ],
+              "timing_sha256": "040f6b33d115e18a53c4eed3efb1ab284e54a7011de73de3016271e085fe2b76",
+              "evidence": [
+                {
+                  "async_workers": [
+                    false,
+                    false,
+                    false
+                  ],
+                  "backend": "gl_compatibility",
+                  "camera": [
+                    2.22712779045105,
+                    1.6105948686599731,
+                    2.8505935668945312
+                  ],
+                  "legends_visible": false,
+                  "mesh": {
+                    "positions": [
+                      [
+                        -1.0,
+                        -1.0,
+                        0.1875
+                      ],
+                      [
+                        1.0,
+                        -1.0,
+                        0.1875
+                      ],
+                      [
+                        0.0,
+                        1.0,
+                        0.1875
+                      ]
+                    ],
+                    "triangles": [
+                      0,
+                      2,
+                      1
+                    ]
+                  },
+                  "strict": true
+                },
+                {
+                  "async_workers": [
+                    false,
+                    false,
+                    false
+                  ],
+                  "backend": "gl_compatibility",
+                  "camera": [
+                    2.2836904525756836,
+                    1.6105948686599731,
+                    2.805483818054199
+                  ],
+                  "legends_visible": false,
+                  "mesh": {
+                    "positions": [
+                      [
+                        -1.0,
+                        -1.0,
+                        0.25
+                      ],
+                      [
+                        1.0,
+                        -1.0,
+                        0.25
+                      ],
+                      [
+                        0.0,
+                        1.0,
+                        0.25
+                      ]
+                    ],
+                    "triangles": [
+                      0,
+                      2,
+                      1
+                    ]
+                  },
+                  "strict": true
+                }
+              ],
+              "diagnostics": []
+            }
+          }
+        },
+        {
+          "kind": "mixed",
+          "rgba_frames_identical": true,
+          "timing_identical": true,
+          "scientific_evidence_identical": true,
+          "variants": {
+            "accepted-main": {
+              "frames": [
+                "88d8a7c256c17853f00292761f9519ca7b0e6d86653cee779d09c9f8b3c0bd89",
+                "0ba6f98e921439f78f0f3ebeae3a0ef99549e1b533b051640d7e7b35fd759ecc"
+              ],
+              "timing_sha256": "a00ac82a1dfd0bc9cd102ca8a7304f72b16a51f3183da57828b2229499e80023",
+              "evidence": [
+                {
+                  "async_workers": [
+                    false,
+                    false,
+                    false
+                  ],
+                  "backend": "gl_compatibility",
+                  "camera": [
+                    2.727663278579712,
+                    1.9725677967071533,
+                    3.4912497997283936
+                  ],
+                  "field": {
+                    "channel": "psi_imag",
+                    "lod": 1,
+                    "opacity": [
+                      0.15,
+                      0.85,
+                      0.4
+                    ],
+                    "range": [
+                      -0.5,
+                      1.0
+                    ],
+                    "sha256": "0fcc397b2eabc524b575f119819535e1aae427427ad0362ec84090af8600e9e1"
+                  },
+                  "legends_visible": false,
+                  "mesh": {
+                    "positions": [
+                      [
+                        -1.0,
+                        -1.0,
+                        0.1875
+                      ],
+                      [
+                        1.0,
+                        -1.0,
+                        0.1875
+                      ],
+                      [
+                        0.0,
+                        1.0,
+                        0.1875
+                      ]
+                    ],
+                    "triangles": [
+                      0,
+                      2,
+                      1
+                    ]
+                  },
+                  "p": {
+                    "ids": [
+                      "10",
+                      "20"
+                    ],
+                    "positions": [
+                      [
+                        -0.25,
+                        0.0,
+                        0.0
+                      ],
+                      [
+                        1.75,
+                        0.0,
+                        0.0
+                      ]
+                    ]
+                  },
+                  "strict": true
+                },
+                {
+                  "async_workers": [
+                    false,
+                    false,
+                    false
+                  ],
+                  "backend": "gl_compatibility",
+                  "camera": [
+                    2.796938180923462,
+                    1.9725677967071533,
+                    3.436002016067505
+                  ],
+                  "field": {
+                    "channel": "psi_imag",
+                    "lod": 1,
+                    "opacity": [
+                      0.15,
+                      0.85,
+                      0.4
+                    ],
+                    "range": [
+                      -0.5,
+                      1.0
+                    ],
+                    "sha256": "c46f2b0954c98d32cfe9a6136a363567c9cab6c2f9b7c7a7fa67c69d571722fc"
+                  },
+                  "legends_visible": false,
+                  "mesh": {
+                    "positions": [
+                      [
+                        -1.0,
+                        -1.0,
+                        0.25
+                      ],
+                      [
+                        1.0,
+                        -1.0,
+                        0.25
+                      ],
+                      [
+                        0.0,
+                        1.0,
+                        0.25
+                      ]
+                    ],
+                    "triangles": [
+                      0,
+                      2,
+                      1
+                    ]
+                  },
+                  "p": {
+                    "ids": [
+                      "10",
+                      "20"
+                    ],
+                    "positions": [
+                      [
+                        0.0,
+                        0.0,
+                        0.0
+                      ],
+                      [
+                        2.0,
+                        0.0,
+                        0.0
+                      ]
+                    ]
+                  },
+                  "strict": true
+                }
+              ],
+              "diagnostics": []
+            },
+            "candidate": {
+              "frames": [
+                "88d8a7c256c17853f00292761f9519ca7b0e6d86653cee779d09c9f8b3c0bd89",
+                "0ba6f98e921439f78f0f3ebeae3a0ef99549e1b533b051640d7e7b35fd759ecc"
+              ],
+              "timing_sha256": "a00ac82a1dfd0bc9cd102ca8a7304f72b16a51f3183da57828b2229499e80023",
+              "evidence": [
+                {
+                  "async_workers": [
+                    false,
+                    false,
+                    false
+                  ],
+                  "backend": "gl_compatibility",
+                  "camera": [
+                    2.727663278579712,
+                    1.9725677967071533,
+                    3.4912497997283936
+                  ],
+                  "field": {
+                    "channel": "psi_imag",
+                    "lod": 1,
+                    "opacity": [
+                      0.15,
+                      0.85,
+                      0.4
+                    ],
+                    "range": [
+                      -0.5,
+                      1.0
+                    ],
+                    "sha256": "0fcc397b2eabc524b575f119819535e1aae427427ad0362ec84090af8600e9e1"
+                  },
+                  "legends_visible": false,
+                  "mesh": {
+                    "positions": [
+                      [
+                        -1.0,
+                        -1.0,
+                        0.1875
+                      ],
+                      [
+                        1.0,
+                        -1.0,
+                        0.1875
+                      ],
+                      [
+                        0.0,
+                        1.0,
+                        0.1875
+                      ]
+                    ],
+                    "triangles": [
+                      0,
+                      2,
+                      1
+                    ]
+                  },
+                  "p": {
+                    "ids": [
+                      "10",
+                      "20"
+                    ],
+                    "positions": [
+                      [
+                        -0.25,
+                        0.0,
+                        0.0
+                      ],
+                      [
+                        1.75,
+                        0.0,
+                        0.0
+                      ]
+                    ]
+                  },
+                  "strict": true
+                },
+                {
+                  "async_workers": [
+                    false,
+                    false,
+                    false
+                  ],
+                  "backend": "gl_compatibility",
+                  "camera": [
+                    2.796938180923462,
+                    1.9725677967071533,
+                    3.436002016067505
+                  ],
+                  "field": {
+                    "channel": "psi_imag",
+                    "lod": 1,
+                    "opacity": [
+                      0.15,
+                      0.85,
+                      0.4
+                    ],
+                    "range": [
+                      -0.5,
+                      1.0
+                    ],
+                    "sha256": "c46f2b0954c98d32cfe9a6136a363567c9cab6c2f9b7c7a7fa67c69d571722fc"
+                  },
+                  "legends_visible": false,
+                  "mesh": {
+                    "positions": [
+                      [
+                        -1.0,
+                        -1.0,
+                        0.25
+                      ],
+                      [
+                        1.0,
+                        -1.0,
+                        0.25
+                      ],
+                      [
+                        0.0,
+                        1.0,
+                        0.25
+                      ]
+                    ],
+                    "triangles": [
+                      0,
+                      2,
+                      1
+                    ]
+                  },
+                  "p": {
+                    "ids": [
+                      "10",
+                      "20"
+                    ],
+                    "positions": [
+                      [
+                        0.0,
+                        0.0,
+                        0.0
+                      ],
+                      [
+                        2.0,
+                        0.0,
+                        0.0
+                      ]
+                    ]
+                  },
+                  "strict": true
+                }
+              ],
+              "diagnostics": []
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "strict_source_records": 22,
+  "source_sha256_unchanged": {
+    "particles": "9dcee2bca1182e7aacacf4eadb4178f3c1ff1e67cffde03cf05c7ab6e5831369",
+    "field": "e2f03246b6db4d983f3d6322f01bb9fada5963bb51fb5c9c1c2738ad296b4ba0",
+    "mesh": "41235337f003fe1b4270a5bf357f17e865bcc7f35bbf94b9bf345ab3fa3f9ae0",
+    "mixed": "9859dda19059e84fad3e19f93abb973444b72c7e3345133a76053a91a830d98e"
+  },
+  "interactive_preferences_present": true,
+  "matched_frames": 16,
+  "scope": "Scientific exports without UI. Included application menu pixels intentionally reflect the new Edit menu."
+}

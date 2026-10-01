@@ -51,6 +51,14 @@ func invoke(menu_name: String, command: String) -> void:
 	var popup: PopupMenu = menu.get_popup()
 	check(popup.visible, menu_name + " menu opened through revealed toolbar")
 	var entry: Dictionary = shell.commands[command]
+	if entry.popup != popup:
+		for index in popup.item_count:
+			var child := popup.get_item_submenu(index)
+			if not child.is_empty() and popup.get_node(child) == entry.popup:
+				popup.set_focused_item(index); key(KEY_RIGHT, popup); await settle()
+				popup = entry.popup
+				check(popup.visible, "Preferences submenu opens through keyboard")
+				break
 	check(entry.popup == popup and not popup.is_item_disabled(entry.index), command + " is enabled in production menu")
 	popup.set_focused_item(entry.index); key(KEY_ENTER, popup); await settle()
 func run() -> void:
@@ -99,9 +107,9 @@ func run() -> void:
 	await invoke("View", "global_effects")
 	check(viewer.tools_ui.window.visible and viewer.tools_ui.current == "Global effects", "View global-effects form also opens in Fullscreen")
 	viewer.tools_ui.close(); await settle()
-	await invoke("Help", "shortcuts")
-	check(shell.details.visible and shell.details.title == "Shortcuts", "Informational dialog opens through Fullscreen menu")
-	shell.details.hide(); await settle()
+	await invoke("Edit", "keyboard_shortcuts")
+	check(shell.editing_shortcuts(), "Keyboard Shortcuts opens through Fullscreen menu")
+	shell.shortcuts_editor.dismiss(); await settle()
 	await invoke("File", "details")
 	check(shell.details.visible and shell.details.title == "Status details" and shell.detail_text.text.contains(viewer.capture_path), "File Details retains source/status access in Fullscreen")
 	check(shell.edge_reveal.popup_active(viewer), "Details protects edge reveal while open")

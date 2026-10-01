@@ -78,7 +78,7 @@ func _process(delta: float) -> void:
 	if states.top.pinned and states.right.pinned and states.bottom.pinned: return
 	var point := get_viewport().get_mouse_position()
 	var inside := pointer_inside and get_window().has_focus() and get_viewport().get_visible_rect().has_point(point)
-	var busy: bool = popup_active(shell.viewer) or Input.get_mouse_button_mask() != 0 or shell.viewer.resizing_panel
+	var busy: bool = shell.editing_shortcuts() or popup_active(shell.viewer) or Input.get_mouse_button_mask() != 0 or shell.viewer.resizing_panel
 	tick(delta, point, inside, busy)
 
 func tick(delta: float, point: Vector2, inside: bool, busy: bool) -> void:

@@ -1,0 +1,83 @@
+{
+  "checks": 158,
+  "source_sha256_unchanged": "a004e995c2a4e58c98463dda4ccc1edeb9e8b08eb87e8560463c12ebb4fe7211",
+  "renderer": "gl_compatibility",
+  "packaged": true,
+  "fresh_process_restart": true,
+  "known_engine_cleanup_diagnostics": {
+    "native": {
+      "compatibility_texture_cleanup": [],
+      "packaged_window_cleanup": [
+        "ERROR: Attempt to disconnect a nonexistent connection from 'root:<Window#24612177239>'. Signal: 'focus_entered', callable: ''.\n   at: _disconnect (core/object/object.cpp:1644)\n",
+        "ERROR: Attempt to disconnect a nonexistent connection from 'root:<Window#24612177239>'. Signal: 'tree_exited', callable: ''.\n   at: _disconnect (core/object/object.cpp:1644)\n"
+      ]
+    },
+    "restart": {
+      "compatibility_texture_cleanup": [
+        "ERROR: Texture with GL ID of 93: leaked 349524 bytes.\n   at: ~Utilities (drivers/gles3/storage/utilities.cpp:82)\n",
+        "ERROR: Texture with GL ID of 112: leaked 349524 bytes.\n   at: ~Utilities (drivers/gles3/storage/utilities.cpp:82)\n"
+      ],
+      "packaged_window_cleanup": []
+    }
+  },
+  "reports": [
+    {
+      "checks": 153,
+      "display_driver": "X11",
+      "executable": "/tmp/wavez-shortcuts-labels-compat-package/wavez.x86_64",
+      "failures": [],
+      "layouts": [
+        {
+          "logical": "(1440.0, 900.0)",
+          "panel": "[P: (400.0, 170.0), S: (640.0, 560.0)]",
+          "scale": 1.0,
+          "scroll_height": 453.0,
+          "window": "(1440, 900)"
+        },
+        {
+          "logical": "(970.0, 600.0)",
+          "panel": "[P: (165.0, 20.0), S: (640.0, 560.0)]",
+          "scale": 1.0,
+          "scroll_height": 453.0,
+          "window": "(970, 600)"
+        },
+        {
+          "logical": "(640.0, 480.0)",
+          "panel": "[P: (16.0, 16.0), S: (608.0, 448.0)]",
+          "scale": 1.0,
+          "scroll_height": 341.0,
+          "window": "(640, 480)"
+        },
+        {
+          "logical": "(1280.0, 697.0)",
+          "panel": "[P: (320.0, 68.5), S: (640.0, 560.0)]",
+          "scale": 2.0,
+          "scroll_height": 453.0,
+          "window": "(2560, 1394)"
+        },
+        {
+          "logical": "(1024.0, 557.6)",
+          "panel": "[P: (192.0, 16.0), S: (640.0, 525.6)]",
+          "scale": 2.5,
+          "scroll_height": 418.0,
+          "window": "(2560, 1394)"
+        }
+      ],
+      "packaged": true,
+      "preference_path": "user://keyboard_shortcuts.cfg",
+      "renderer": "gl_compatibility",
+      "restart": false
+    },
+    {
+      "checks": 5,
+      "display_driver": "X11",
+      "executable": "/tmp/wavez-shortcuts-labels-compat-package/wavez.x86_64",
+      "failures": [],
+      "layouts": [],
+      "packaged": true,
+      "preference_path": "user://keyboard_shortcuts.cfg",
+      "renderer": "gl_compatibility",
+      "restart": true
+    }
+  ]
+}

@@ -553,17 +553,21 @@ func _update_hud_profiled() -> void:
 		hud.text = "WAVEZ • %s\nFrame %d / %d  ·  t = %.5f\n%s\n%s" % [generic_reader.metadata.get("simulation_name", capture_path.get_file()), current_index + 1, frame_count, committed_sample.get("requested_time",frame_a.sim_time), population, _sample_label()]
 
 func _input(event: InputEvent) -> void:
+	# A release over any chrome must still end a viewport drag, including preferences.
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
+		dragging = false
+		resizing_panel = false
+	if shell != null and shell.editing_shortcuts():
+		if shell.shortcuts_editor.handle_input(event): get_viewport().set_input_as_handled()
+		return
 	# Recovery precedes GUI, busy-inspection and selection input handling.
 	if shell != null and shell.immersive and event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_ESCAPE:
 		shell.exit_immersive()
 		get_viewport().set_input_as_handled()
 		return
-	# A release over chrome must still end a drag that started in the viewport.
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
-		dragging = false
-		resizing_panel = false
 
 func _unhandled_input(event: InputEvent) -> void:
+	if shell != null and shell.editing_shortcuts(): return
 	if inspection_busy: return
 	var editor := get_viewport().gui_get_focus_owner()
 	if event is InputEventKey and (editor is LineEdit or editor is TextEdit or editor is SpinBox): return
@@ -593,17 +597,45 @@ func _unhandled_input(event: InputEvent) -> void:
 		pitch -= d.y * 0.006
 		_update_camera()
 	elif event is InputEventKey and event.pressed and not event.echo:
-		match event.keycode:
-			KEY_LEFT: _step_frame(-1)
-			KEY_RIGHT: _step_frame(1)
-			KEY_SPACE: _toggle_playback()
-			KEY_O: orbit_enabled = not orbit_enabled; inspection_paused = false; _sync_control_state()
-			KEY_T: _toggle_trails()
-			KEY_F: _focus_activity()
-			KEY_V: _set_point_rendering(not clean_view)
-			KEY_P: _save_image()
-			KEY_F11: _toggle_fullscreen()
-			KEY_R: _reset_camera()
+		var action: String = shell.shortcuts.match_action(event)
+		if not action.is_empty():
+			_dispatch_shortcut(action)
+			get_viewport().set_input_as_handled()
+
+func _dispatch_shortcut(action: String) -> void:
+	match action:
+		"reset_camera": _reset_camera()
+		"auto_orbit": _toggle_auto_orbit()
+		"free_camera": _toggle_free_camera()
+		"frame_scene": _focus_activity()
+		"navigate": shell.navigation.get_child(2).show_popup()
+		"play_pause":
+			if generic_reader != null: _toggle_playback()
+		"previous_sample":
+			if generic_reader != null: _step_frame(-1)
+		"next_sample":
+			if generic_reader != null: _step_frame(1)
+		"loop_playback":
+			if generic_reader != null: shell.transport.toggle_loop()
+		"open_capture": shell.invoke_shortcut_command("open")
+		"export_video": shell.invoke_shortcut_command("video")
+		"save_image": _save_image()
+		"derive_range": shell.invoke_shortcut_command("tool:Derive range")
+		"mapping": shell.invoke_shortcut_command("tool:Mapping")
+		"recorded_history": _toggle_trails()
+		"point_rendering": _set_point_rendering(not clean_view)
+		"fullscreen", "fullscreen_alternate": shell.invoke_shortcut_command("fullscreen")
+		"pin_top", "pin_right", "pin_bottom":
+			var side := action.trim_prefix("pin_")
+			shell.edge_reveal.set_pinned(side, not shell.edge_reveal.states[side].pinned)
+		"next_category": shell.cycle_category(1)
+		"previous_category": shell.cycle_category(-1)
+
+func _toggle_auto_orbit() -> void:
+	orbit_enabled = not orbit_enabled; inspection_paused = false; _sync_control_state()
+
+func _toggle_free_camera() -> void:
+	free_camera = not free_camera; orbit_enabled = not free_camera; _sync_control_state()
 
 func _reset_camera() -> void:
 	if shell != null: shell.dismiss_orbit_editor()
@@ -1041,6 +1073,7 @@ func _step_frame(direction: int) -> void:
 	_timeline_changed(clampi(current_index + direction, 0, maxi(0, frame_count - 1)))
 
 func _move_free_camera(delta: float) -> void:
+	if shell != null and shell.editing_shortcuts(): return
 	if not free_camera or get_viewport().gui_get_focus_owner() != null: return
 	var move := Vector3(float(Input.is_physical_key_pressed(KEY_D)) - float(Input.is_physical_key_pressed(KEY_A)), float(Input.is_physical_key_pressed(KEY_E)) - float(Input.is_physical_key_pressed(KEY_Q)), float(Input.is_physical_key_pressed(KEY_S)) - float(Input.is_physical_key_pressed(KEY_W)))
 	if move == Vector3.ZERO:return
