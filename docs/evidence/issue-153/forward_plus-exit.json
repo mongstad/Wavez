@@ -1,0 +1,49 @@
+{
+  "renderer": "forward_plus",
+  "runs": [
+    {
+      "mode": "windowed",
+      "work": "idle",
+      "exit_code": 0,
+      "teardown": true,
+      "cancelled": false
+    },
+    {
+      "mode": "windowed",
+      "work": "active",
+      "exit_code": 0,
+      "teardown": true,
+      "cancelled": true
+    },
+    {
+      "mode": "maximized",
+      "work": "idle",
+      "exit_code": 0,
+      "teardown": true,
+      "cancelled": false
+    },
+    {
+      "mode": "maximized",
+      "work": "active",
+      "exit_code": 0,
+      "teardown": true,
+      "cancelled": true
+    },
+    {
+      "mode": "fullscreen",
+      "work": "idle",
+      "exit_code": 0,
+      "teardown": true,
+      "cancelled": false
+    },
+    {
+      "mode": "fullscreen",
+      "work": "active",
+      "exit_code": 0,
+      "teardown": true,
+      "cancelled": true
+    }
+  ],
+  "source_hash_unchanged": "fc70da0732a818522ba2c5a400551cdf1ce5d6d7ff606fad699cc4f9b4f1c98d",
+  "failures": []
+}

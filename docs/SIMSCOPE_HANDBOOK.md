@@ -22,6 +22,13 @@ Earlier documents sometimes append new checkpoints above obsolete scope tables. 
 
 ## Viewer shell
 
+**File → Exit** is the final File-menu command, below a separator. It is available
+with or without a capture and uses the same shutdown function as the window's
+close button. Normal reader, preparation, analysis and export cleanup runs;
+active export workers receive the existing graceful cancellation request.
+The current close path has no additional application-exit confirmation.
+In Fullscreen, reveal the top bar to access File.
+
 The accepted [issue-41 shell](UX3_SHELL.md) hosts the
 [issue-42 persistent transport](UX3_TRANSPORT.md). The
 [issue-43 status and Jobs surface](UX3_STATUS.md) is owner-merged.

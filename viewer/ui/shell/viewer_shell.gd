@@ -446,6 +446,8 @@ func build_menus(row: HBoxContainer) -> void:
 	command(export_menu,"Image",viewer.tools_ui.open.bind("Image"),"image")
 	command(export_menu,"Video",func():viewer.video_dialog.open(),"video")
 	command(export_menu,"Data",viewer.tools_ui.open.bind("Data"),"data")
+	file.add_separator()
+	command(file,"Exit",func(): window_chrome.request_close(),"exit")
 	var view: PopupMenu = menus.View.get_popup()
 	var window_menu := submenu(view,"Window")
 	command(window_menu,"Fullscreen",viewer._toggle_fullscreen,"fullscreen",true)
@@ -497,7 +499,7 @@ func refresh_commands() -> void:
 	var particles: bool = loaded and viewer.scene_layers != null and not viewer.scene_layers.particle_id.is_empty()
 	for key in commands:
 		var entry: Dictionary = commands[key]
-		var enabled: bool = loaded or key in ["open","details","fullscreen","shortcuts","handbook","about"]
+		var enabled: bool = loaded or key in ["open","details","fullscreen","shortcuts","handbook","about","exit"]
 		if key in ["probe","tool:Quick setup","tool:Clipping","tool:Isosurface","tool:Source probe"]: enabled = fields
 		if key == "tool:Mapping": enabled = particles
 		if key in ["tool:Slice","tool:Derive range"]: enabled = fields or particles
