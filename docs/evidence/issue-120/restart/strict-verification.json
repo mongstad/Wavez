@@ -1,0 +1,33 @@
+{
+  "captures": 12,
+  "records": 80,
+  "per_capture": {
+    "forward_plus/field.ssc": 5,
+    "forward_plus/large.ssc": 5,
+    "forward_plus/mesh.ssc": 5,
+    "forward_plus/mixed.ssc": 15,
+    "forward_plus/particles.ssc": 5,
+    "forward_plus/small.ssc": 5,
+    "gl_compatibility/field.ssc": 5,
+    "gl_compatibility/large.ssc": 5,
+    "gl_compatibility/mesh.ssc": 5,
+    "gl_compatibility/mixed.ssc": 15,
+    "gl_compatibility/particles.ssc": 5,
+    "gl_compatibility/small.ssc": 5
+  },
+  "sha256": {
+    "forward_plus/field.ssc": "86cde3e712595eb7192ed1c48bd59ac36d9e57df4e83e7461f462afa9db67964",
+    "forward_plus/large.ssc": "a1d1e85cf0f0567fbcca660bbf31601166c3639775fcef66ca9aec35c8f5cd54",
+    "forward_plus/mesh.ssc": "af1f5910f03a76b8bcd5ee039ebf6bb9798acb65664c37fceead83cfdc311b8b",
+    "forward_plus/mixed.ssc": "68d74a44dd1f555d849b526a5ff3b0825bca6670a0e787813e2baedf30628ffd",
+    "forward_plus/particles.ssc": "4e18dd72d517e2a3f038626b6063fd288d262479953a6be68af9ead38227648c",
+    "forward_plus/small.ssc": "bff1867300ff4f76c3dd088baa8c0dd1d87d85564a3000c878df3b9c8bfe791c",
+    "gl_compatibility/field.ssc": "547edaac8912bbaa50c440347417bf2df533294db7cf0b7e7a78bcbfa5081c6e",
+    "gl_compatibility/large.ssc": "c3a1a4fc6e5f2f7c7a18abb9a76f4afbb4cce3c4f17d32c2718320f267e5f0f1",
+    "gl_compatibility/mesh.ssc": "880b1d34f5c24546a08b8a1808ce83133e0e33988bc96c1f878d1bf5ea3e9bf2",
+    "gl_compatibility/mixed.ssc": "a1e390af132640e9a71e601231956072dc62271be1c33324aa5cb4d8d08b379e",
+    "gl_compatibility/particles.ssc": "6b160eb3bd43745a37c84bcddc94de701caf71840c2dc1f4e5555cea9500b685",
+    "gl_compatibility/small.ssc": "2c10a7fa593cbb2f2870b3a369c9130e6ec25251f0f44e79a0cde0675a203916"
+  },
+  "failures": []
+}

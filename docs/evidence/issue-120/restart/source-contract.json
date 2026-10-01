@@ -1,0 +1,24 @@
+{
+  "baseline": "1a607740876736fdff34a25ca18ef395d33a4fe7",
+  "protected_files_equal_to_main": 175,
+  "protected_paths": [
+    "viewer/layers",
+    "viewer/data",
+    "viewer/video",
+    "viewer/scene/visual_state.gd",
+    "viewer/scene/view_preset.gd",
+    "viewer/scene/inspection_state.gd"
+  ],
+  "unchanged_camera_and_pacing_functions": {
+    "_process": "13e99e0538817bedb9622c4188130b774174e255a6993e195eff890f5ccb3b75",
+    "_process_profiled": "3c7c75fd51a47bde3539ef1ffe9cd6a41f9235a767464cd724ad1571ba0a5bce",
+    "_update_render_pacing": "084effa71197428f125ed665b9b3dc7c718f7e3dd16b53f3a87ca5f38e4f74cb",
+    "_restore_render_pacing": "e6a920428fec991e616307f5c6bfaacc6e198ffeb7426b14d83f9dc54d2a28f5",
+    "_input": "aeec41729fd1c9e60e4df0255a8d4e06943893b97640f5ce669ac5032eece81b",
+    "_unhandled_input": "17c039c497c590d685d5e2021353d38ab4f2d83a41d1df1383aec6bdc11ad2e7",
+    "_move_free_camera": "ab58a88e7a87966b1e509e2e1a1b849b0ba064b3f71ae6742190839f23a7225e",
+    "_update_camera": "e426e0d494663d6019c3f0813bb9613d2ab5ab782b123f95f5886f48f4b79d46"
+  },
+  "main_only_changes": "Six editor-dismissal calls at open/reset/frame/PNG entry points",
+  "persistent_custom_camera_references": false
+}

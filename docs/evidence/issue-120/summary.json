@@ -1,0 +1,168 @@
+{
+  "issue": 120,
+  "baseline": "1a607740876736fdff34a25ca18ef395d33a4fe7",
+  "candidate_version": "v0.1.0.12",
+  "owner_acceptance": "pending",
+  "platform": "Linux, Godot 4.7.2, NVIDIA RTX 3070 Ti / driver 615.71.09",
+  "renderers": {
+    "forward_plus": {
+      "orbit_checks": 438,
+      "custom_camera_exports": [
+        {
+          "camera": "locked",
+          "overlay": false,
+          "complete": true
+        },
+        {
+          "camera": "locked",
+          "overlay": true,
+          "complete": true
+        },
+        {
+          "camera": "orbit",
+          "overlay": false,
+          "complete": true
+        },
+        {
+          "camera": "orbit",
+          "overlay": true,
+          "complete": true
+        }
+      ],
+      "regressions": {
+        "camera_tumble": 13044,
+        "view_preset": 838,
+        "viewer_shell": 667,
+        "edge_reveal": 210,
+        "render_pacing": 290,
+        "idle_phases": 34,
+        "idle_draws": {
+          "field_after_orbit": 0,
+          "field_channel": 0,
+          "field_free_camera_stationary": 0,
+          "field_paused_again": 0,
+          "field_performance": 0,
+          "field_ready": 0,
+          "field_resized": 0,
+          "field_seek": 0,
+          "field_zero_speed_orbit": 0,
+          "mesh_after_orbit": 0,
+          "mesh_free_camera_stationary": 0,
+          "mesh_paused_again": 0,
+          "mesh_performance": 0,
+          "mesh_ready": 0,
+          "mesh_resized": 0,
+          "mesh_seek": 0,
+          "mesh_zero_speed_orbit": 0,
+          "mixed_after_orbit": 0,
+          "mixed_channel": 0,
+          "mixed_free_camera_stationary": 0,
+          "mixed_paused_again": 0,
+          "mixed_performance": 0,
+          "mixed_ready": 0,
+          "mixed_resized": 0,
+          "mixed_seek": 0,
+          "mixed_zero_speed_orbit": 0,
+          "particles_after_orbit": 0,
+          "particles_free_camera_stationary": 0,
+          "particles_paused_again": 0,
+          "particles_performance": 0,
+          "particles_ready": 0,
+          "particles_resized": 0,
+          "particles_seek": 0,
+          "particles_zero_speed_orbit": 0
+        },
+        "idle_same_pixels": true,
+        "video_current": 235
+      },
+      "complete_source_hashes_unchanged": true
+    },
+    "gl_compatibility": {
+      "orbit_checks": 438,
+      "custom_camera_exports": [
+        {
+          "camera": "locked",
+          "overlay": false,
+          "complete": true
+        },
+        {
+          "camera": "locked",
+          "overlay": true,
+          "complete": true
+        },
+        {
+          "camera": "orbit",
+          "overlay": false,
+          "complete": true
+        },
+        {
+          "camera": "orbit",
+          "overlay": true,
+          "complete": true
+        }
+      ],
+      "regressions": {
+        "camera_tumble": 13044,
+        "view_preset": 778,
+        "viewer_shell": 667,
+        "edge_reveal": 210,
+        "render_pacing": 290,
+        "idle_phases": 34,
+        "idle_draws": {
+          "field_after_orbit": 0,
+          "field_channel": 0,
+          "field_free_camera_stationary": 0,
+          "field_paused_again": 0,
+          "field_performance": 0,
+          "field_ready": 0,
+          "field_resized": 0,
+          "field_seek": 0,
+          "field_zero_speed_orbit": 0,
+          "mesh_after_orbit": 0,
+          "mesh_free_camera_stationary": 0,
+          "mesh_paused_again": 0,
+          "mesh_performance": 0,
+          "mesh_ready": 0,
+          "mesh_resized": 0,
+          "mesh_seek": 0,
+          "mesh_zero_speed_orbit": 0,
+          "mixed_after_orbit": 0,
+          "mixed_channel": 0,
+          "mixed_free_camera_stationary": 0,
+          "mixed_paused_again": 0,
+          "mixed_performance": 1,
+          "mixed_ready": 0,
+          "mixed_resized": 0,
+          "mixed_seek": 0,
+          "mixed_zero_speed_orbit": 0,
+          "particles_after_orbit": 0,
+          "particles_free_camera_stationary": 0,
+          "particles_paused_again": 0,
+          "particles_performance": 0,
+          "particles_ready": 0,
+          "particles_resized": 0,
+          "particles_seek": 0,
+          "particles_zero_speed_orbit": 0
+        },
+        "idle_same_pixels": false,
+        "video_current": 225
+      },
+      "complete_source_hashes_unchanged": true
+    }
+  },
+  "python_version_tests": 2,
+  "limitations": [
+    "Synthetic fixtures only; no production capture or scientific simulation rerun.",
+    "No physical 4K/KDE-scale, other GPU/platform or long-session ergonomics validation.",
+    "No accepted-main pixel differential run; existing deterministic video regression and draft/committed PNG equality passed.",
+    "Owner must assess interaction feel and accept the implementation."
+  ],
+  "development_failures": [
+    "Initial sandbox import could not create local sockets/write global editor settings; final isolated native import passed.",
+    "An unsupported numeric formatting token and sparse-versus-explicit false legend entries were corrected in guide/test code.",
+    "Two early Compatibility test runs logged texture leaks during multi-viewer teardown; isolated the offline test viewport and explicitly drew teardown. Final native logs are clean.",
+    "An idle-draw wait stalled a development run; it was terminated and the test now explicitly requests the required draw.",
+    "The initial first-use PNG picker test sent P only to the pre-GUI handler; the corrected test exercises the production screenshot action and passes."
+  ],
+  "validation_assertions": 31374
+}

@@ -4,6 +4,18 @@ const ThemeSource = preload("res://ui/theme/simscope_theme.gd")
 const About = preload("res://ui/about/about_dialog.gd")
 const WORKSPACES = ["Particles", "Fields", "Meshes"]
 var viewer
+var orbit_editor
+
+func edit_orbit_center() -> void:
+	if viewer.offline_instance or viewer.inspection_busy: return
+	if orbit_editor == null:
+		orbit_editor = preload("res://ui/shell/orbit_center_editor.gd").new()
+		add_child(orbit_editor); orbit_editor.setup(viewer)
+	orbit_editor.open()
+
+func dismiss_orbit_editor() -> void:
+	if orbit_editor != null: orbit_editor.dismiss()
+
 var legend_available := Vector2.ZERO
 var layer_legends
 var particle_legend_panel: Panel
@@ -103,13 +115,14 @@ func setup(owner_viewer) -> void:
 	var navigate := MenuButton.new(); navigate.flat = false; navigate.icon = icon("view"); navigate.tooltip_text = "Navigate [Alt+N]"; navigate.custom_minimum_size.y = 32; navigation.add_child(navigate); decorate_menu(navigate)
 	var nav_key := InputEventKey.new(); nav_key.keycode = KEY_N; nav_key.alt_pressed = true
 	navigate.shortcut = Shortcut.new(); navigate.shortcut.events = [nav_key]
-	var modes := navigate.get_popup(); modes.add_check_item("Free camera"); modes.add_check_item("Auto orbit"); modes.add_item("Orbit speed")
+	var modes := navigate.get_popup(); modes.add_check_item("Free camera"); modes.add_check_item("Auto orbit"); modes.add_item("Orbit speed"); modes.add_item("Edit orbit center…")
 	navigate.about_to_popup.connect(func(): modes.set_item_checked(0, viewer.free_camera); modes.set_item_checked(1, viewer.orbit_enabled))
 	modes.id_pressed.connect(func(id):
 		if id == 0:
 			viewer.free_camera = not viewer.free_camera; viewer.orbit_enabled = not viewer.free_camera
 		elif id == 1: viewer.orbit_enabled = not viewer.orbit_enabled; viewer.inspection_paused = false
-		else: viewer.tools_ui.open("Camera")
+		elif id == 2: viewer.tools_ui.open("Camera")
+		else: edit_orbit_center()
 		viewer._sync_control_state())
 	window_chrome = preload("res://ui/shell/window_chrome.gd").new(); add_child(window_chrome); window_chrome.setup(self, row)
 	empty = VBoxContainer.new(); add_child(empty)

@@ -1,0 +1,153 @@
+{
+  "baseline": [
+    {
+      "renderer": "forward_plus",
+      "suite": "camera_tumble",
+      "code": 0,
+      "tail": "Camera tumble: 13044 checks PASS (forward_plus); capture hashes unchanged\n"
+    },
+    {
+      "renderer": "forward_plus",
+      "suite": "render_pacing",
+      "code": 0,
+      "tail": "Render pacing: 290 checks PASS (forward_plus)\n"
+    },
+    {
+      "renderer": "forward_plus",
+      "suite": "field_session",
+      "code": 0,
+      "tail": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\nVulkan 1.4.351 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3070 Ti\n\nFIELD SESSION: 342 checks, 0 failures\n\n"
+    },
+    {
+      "renderer": "forward_plus",
+      "suite": "viewer_status",
+      "code": 0,
+      "tail": "Status: 257 checks PASS (forward_plus); sources unchanged\n"
+    },
+    {
+      "renderer": "gl_compatibility",
+      "suite": "camera_tumble",
+      "code": 0,
+      "tail": "Camera tumble: 13044 checks PASS (gl_compatibility); capture hashes unchanged\n"
+    },
+    {
+      "renderer": "gl_compatibility",
+      "suite": "render_pacing",
+      "code": 0,
+      "tail": "Render pacing: 290 checks PASS (gl_compatibility)\n"
+    },
+    {
+      "renderer": "gl_compatibility",
+      "suite": "field_session",
+      "code": 0,
+      "tail": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\nOpenGL API 3.3.0 NVIDIA 615.71.09 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 3070 Ti\n\nFIELD SESSION: 332 checks, 0 failures\n\n"
+    },
+    {
+      "renderer": "gl_compatibility",
+      "suite": "viewer_status",
+      "code": 0,
+      "tail": "Status: 257 checks PASS (gl_compatibility); sources unchanged\n"
+    }
+  ],
+  "candidate": [
+    {
+      "renderer": "forward_plus",
+      "suite": "camera_tumble",
+      "code": 0,
+      "tail": "Camera tumble: 13044 checks PASS (forward_plus); capture hashes unchanged\n"
+    },
+    {
+      "renderer": "forward_plus",
+      "suite": "render_pacing",
+      "code": 0,
+      "tail": "Render pacing: 290 checks PASS (forward_plus)\n"
+    },
+    {
+      "renderer": "forward_plus",
+      "suite": "field_session",
+      "code": 0,
+      "tail": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\nVulkan 1.4.351 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3070 Ti\n\nFIELD SESSION: 342 checks, 0 failures\n\n"
+    },
+    {
+      "renderer": "forward_plus",
+      "suite": "viewer_status",
+      "code": 0,
+      "tail": "Status: 257 checks PASS (forward_plus); sources unchanged\n"
+    },
+    {
+      "renderer": "forward_plus",
+      "suite": "viewer_shell",
+      "code": 0,
+      "tail": "Viewer shell: 667 checks PASS (forward_plus); source hashes unchanged\n",
+      "rerun": "candidate-forward_plus-viewer_shell-final"
+    },
+    {
+      "renderer": "forward_plus",
+      "suite": "edge_reveal",
+      "code": 0,
+      "tail": "Edge reveal: 210 checks PASS (forward_plus); sources unchanged\n"
+    },
+    {
+      "renderer": "forward_plus",
+      "suite": "view_preset",
+      "code": 0,
+      "tail": "Preset: 826 PASS (forward_plus)\n"
+    },
+    {
+      "renderer": "gl_compatibility",
+      "suite": "camera_tumble",
+      "code": 0,
+      "tail": "Camera tumble: 13044 checks PASS (gl_compatibility); capture hashes unchanged\n"
+    },
+    {
+      "renderer": "gl_compatibility",
+      "suite": "render_pacing",
+      "code": 0,
+      "tail": "Render pacing: 290 checks PASS (gl_compatibility)\n"
+    },
+    {
+      "renderer": "gl_compatibility",
+      "suite": "field_session",
+      "code": 0,
+      "tail": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\nOpenGL API 3.3.0 NVIDIA 615.71.09 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 3070 Ti\n\nFIELD SESSION: 332 checks, 0 failures\n\n"
+    },
+    {
+      "renderer": "gl_compatibility",
+      "suite": "viewer_status",
+      "code": 0,
+      "tail": "Status: 257 checks PASS (gl_compatibility); sources unchanged\n"
+    },
+    {
+      "renderer": "gl_compatibility",
+      "suite": "viewer_shell",
+      "code": 0,
+      "tail": "Viewer shell: 667 checks PASS (gl_compatibility); source hashes unchanged\n"
+    },
+    {
+      "renderer": "gl_compatibility",
+      "suite": "edge_reveal",
+      "code": 0,
+      "tail": "Edge reveal: 210 checks PASS (gl_compatibility); sources unchanged\n"
+    },
+    {
+      "renderer": "gl_compatibility",
+      "suite": "view_preset",
+      "code": 0,
+      "tail": "Preset: 766 PASS (gl_compatibility)\n"
+    }
+  ],
+  "known_encoder_cleanup_diagnostics": {
+    "baseline/forward_plus": 2,
+    "baseline/gl_compatibility": 2,
+    "candidate/forward_plus": 2,
+    "candidate/gl_compatibility": 2
+  },
+  "initial_test_harness_failures": [
+    "First import required an explicit String type for a dynamically obtained LineEdit value; fixed before native execution.",
+    "First synthetic scale fixture lacked required stable vertex_id; fixed.",
+    "First reference probe incorrectly required full-timeline particle cache coverage; stopped and corrected to compare actual accepted-main coverage.",
+    "First Forward+ shell wrapper referenced Navigate in the main-menu-only contract; removed that unnecessary test edit and reran successfully.",
+    "Compatibility environment-based bright fixtures stayed dark (six brightness assertions failed). Final contrast test uses an explicit test-only white backing behind the projected gizmo, verifies brightness by pixels, and leaves production rendering untouched."
+  ],
+  "sandbox_import_note": "One sandboxed import reported blocked local socket creation; final native import outside that sandbox passed without errors."
+}

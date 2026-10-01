@@ -35,9 +35,20 @@ PR #142 at `b33e9a8`. Capture and video file-dialog preferences (#50) were
 owner-merged in PR #144 at `61f6a78`, accepted build 9.
 The violet visual-system slice (#143) was owner-merged in PR #145 at `d23f431`,
 accepted build 10. Its [review reports](UX5_STYLE_SLICE.md) and Round 1–4 evidence
-retain their original review-time wording. Current authorized work is #147,
-the sole Ready item when selected on 2026-09-30: [residual UI cleanup](UX5_CLEANUP.md),
-**pending owner review**, candidate build 11. Particle Filters retain membership
+retain their original review-time wording. Residual UI cleanup (#147) was
+owner-merged in PR #148 at `1a60774`, accepted build 11. Its
+[review report](UX5_CLEANUP.md) retains its original review-time wording.
+Current authorized work is the owner-requested restart of #120 against its revised
+2026-09-30 description: [edit the existing orbit center/radius](ORBIT_CENTER.md),
+**pending owner UX review** in PR #152, candidate build 12. Navigate → Edit orbit
+center… opens a temporary XYZ/radius editor. Apply changes the existing target
+and distance; Cancel discards the draft. Normal orbit, wheel zoom, Free-camera
+movement, Auto Orbit, playback, preparation and pacing keep their accepted-main
+implementations. The previous [custom-orbit report](CUSTOM_ORBIT.md) and its
+original evidence are historical records of the superseded attempt, not current
+usage or validation guidance.
+
+Particle Filters retain membership
 semantics with violet checkboxes; immediate boolean controls share violet switches,
 including rebuilt Fields/Meshes and Tools controls. **File → Details…** opens the
 existing source/status surface, retaining full paths and diagnostics. The top Source

@@ -365,6 +365,7 @@ func _open_from_picker(path: String) -> void:
 	_open_capture(path)
 
 func _show_open_dialog() -> void:
+	shell.dismiss_orbit_editor()
 	open_dialog.popup_centered_ratio(0.78)
 
 func _toggle_overlay() -> void:
@@ -605,6 +606,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			KEY_R: _reset_camera()
 
 func _reset_camera() -> void:
+	if shell != null: shell.dismiss_orbit_editor()
 	camera_target = Vector3.ZERO; yaw = deg_to_rad(38.0); pitch = deg_to_rad(24.0); camera_distance = maxf(30.0, half_extent * 2.8); _update_camera()
 
 func _update_camera() -> void:
@@ -714,6 +716,7 @@ func _build_guides() -> void:
 	_sync_visuals()
 
 func _focus_activity() -> void:
+	if shell != null: shell.dismiss_orbit_editor()
 	if scene_layers != null:scene_layers.frame_scene();return
 	if frame_a == null: return
 	var high := _robust_high(frame_a.intensity)
@@ -735,6 +738,7 @@ func _focus_activity() -> void:
 	_update_camera()
 
 func _save_image() -> void:
+	shell.dismiss_orbit_editor()
 	if screenshot_pending or screenshot_saving: return
 	if screenshot_directory.is_empty():
 		if screenshot_dialog == null:
@@ -1057,6 +1061,7 @@ func _apply_preset(name: String) -> void:
 	_restyle()
 
 func _open_scene(path: String) -> void:
+	shell.dismiss_orbit_editor()
 	# Interactive display validates structure; offline exports retain payload SHA checks.
 	# Full-capture integrity verification is the separate tools/verify_ssc.py workflow.
 	var reader = preload("res://layers/scene_reader.gd").new(offline_instance)
@@ -1712,6 +1717,7 @@ func _load_scientific_inspection(path: String) -> void:
 	status_label.text = "Restored scientific inspection; playback paused." if problem.is_empty() else problem
 
 func _capture_inspection_png(path: String, with_state: bool) -> Error:
+	shell.dismiss_orbit_editor()
 	if with_state and selection_controller != null and not selection_controller.state.definitions.is_empty():return await selection_controller.temporal.durable.capture_to(path)
 	if inspection_busy: return ERR_BUSY
 	if with_state and frame_a == null: return ERR_UNAVAILABLE

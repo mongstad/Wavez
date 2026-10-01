@@ -215,6 +215,26 @@ Wheel zoom, free-camera WASD/Q/E movement, F (Frame scene), R (reset) and the
 chosen orbit center retain their previous roles. O toggles automatic world-Y
 orbit independently; manual dragging temporarily suspends it.
 
+**Navigate → Edit orbit center…** opens a temporary world-space XYZ/radius
+editor. Drag the labeled axis endpoints or enter coordinates; change the draft
+radius with its −/+ buttons or wheel over the radius controls (Shift: fine).
+**Place ahead** positions the draft along the current view direction. **Apply**
+sets the existing orbit target and distance and removes the guide; **Cancel**
+discards the draft. Ordinary viewport drag, wheel, Free-camera movement and Auto
+Orbit retain their existing behavior during and after editing. Numeric focus
+retains the usual keyboard-input protection. Viewport navigation performed during
+editing remains navigation; Cancel only discards the proposal.
+
+**Hide controls / Show controls** collapses the coordinate rows to make room for
+the gizmo. Setup starts collapsed in windows shorter than 720 pixels. Apply and
+Cancel remain visible.
+
+The draft radius supports 0.000001–1e15 world units. Ordinary wheel zoom still
+uses its existing 8–500 bounds and factors; outside that interval its next step
+can jump to the existing bound. Reset/Frame replace the target normally and
+close the draft. Screenshot capture also closes it; saved presets/video jobs
+contain only the accepted camera. See [orbit-center usage and validation](ORBIT_CENTER.md).
+
 Recipes retain the existing yaw, pitch, target, distance and full transform
 fields. They can save pole and upside-down orientations without a new schema.
 Deterministic video still rotates the saved camera about world Y using video
