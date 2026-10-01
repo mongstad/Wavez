@@ -3,8 +3,9 @@
 Issue #175 adds **Edit → Preferences → Keyboard Shortcuts**, replacing the Help
 shortcut list with a compact custom violet editor. Captured bindings are staged;
 duplicates unbind their previous action, Cancel discards edits, and Apply saves
-and activates them immediately. Apply stays disabled until the draft differs from
-the active bindings, including after reverting all edits. Preferences remain
+and activates them immediately while keeping the editor open. A shell-styled X
+silently discards unapplied edits and closes the editor. Apply stays disabled until
+the draft differs from the active bindings, including after reverting all edits. Preferences remain
 outside scientific/session and export state. Candidate build 17 is **pending owner review**. See
 [behavior, validation and owner checks](KEYBOARD_SHORTCUTS.md). Earlier review-time
 reports and evidence below retain their original wording.

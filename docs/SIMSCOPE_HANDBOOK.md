@@ -86,9 +86,10 @@ interaction boundaries and owner review steps.
 **Edit → Preferences → Keyboard Shortcuts** opens the compact violet shortcut
 editor; Help no longer contains a static shortcut list. Select a binding and
 press a key combination to stage it. Reusing a binding immediately unbinds its
-previous action in the draft. Apply saves and activates changes, then closes;
-Cancel or dismissal discards them. Escape cancels a listening field first, and
-Tab/Shift+Tab navigate the editor. Clear and Reset Defaults also remain staged.
+previous action in the draft. Apply saves and activates changes while keeping
+the editor open, then disables until another edit. Cancel, the shell-styled X,
+or dismissal silently discards only unapplied edits. Escape cancels a listening
+field first, and Tab/Shift+Tab navigate the editor. Clear and Reset Defaults also remain staged.
 The application profile retains these preferences across restarts, separately
 from captures, recipes, presets and video output. See
 [defaults, action routes and owner checks](KEYBOARD_SHORTCUTS.md).

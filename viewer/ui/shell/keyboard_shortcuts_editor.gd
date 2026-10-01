@@ -11,6 +11,7 @@ var notice: Label
 var footer: HBoxContainer
 var cancel: Button
 var apply_button: Button
+var close_button: Button
 var previous_focus: WeakRef
 var reset: Button
 var focus_order: Array[Control] = []
@@ -27,7 +28,13 @@ func setup(owner_shell) -> void:
 	panel = PanelContainer.new(); add_child(panel)
 	panel.add_theme_stylebox_override("panel", theme.flat_box(&"surface.1", 20, 16, 6))
 	var box := VBoxContainer.new(); box.add_theme_constant_override("separation", 10); panel.add_child(box)
-	var title := Label.new(); title.text = "Keyboard Shortcuts"; title.theme_type_variation = "PanelTitle"; box.add_child(title)
+	var header := HBoxContainer.new(); box.add_child(header)
+	var title := Label.new(); title.text = "Keyboard Shortcuts"; title.theme_type_variation = "PanelTitle"
+	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL; header.add_child(title)
+	close_button = shell.button(header, "", dismiss)
+	close_button.tooltip_text = "Close Keyboard Shortcuts"; close_button.custom_minimum_size = Vector2(32, 32)
+	close_button.theme_type_variation = "IconAction"; close_button.icon = theme.chrome_icon("close")
+	shell.style_slice.animate_buttons(close_button)
 	scroller = ScrollContainer.new(); scroller.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	scroller.size_flags_vertical = Control.SIZE_EXPAND_FILL; scroller.follow_focus = true; box.add_child(scroller)
 	var list := VBoxContainer.new(); list.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -82,7 +89,9 @@ func commit() -> void:
 		notice.text = "Could not save shortcuts: " + error_string(error) + ". Current bindings are unchanged."
 		notice.show(); fit.call_deferred()
 		return
-	shell.refresh_shortcut_hints(); dismiss()
+	shell.refresh_shortcut_hints()
+	staged = shell.shortcuts.active.duplicate(); listening = ""; notice.hide(); refresh_rows()
+	if apply_button.has_focus(): cancel.grab_focus()
 
 func start_capture(action: String) -> void:
 	listening = action; notice.hide(); refresh_rows()
@@ -93,7 +102,7 @@ func clear_binding(action: String) -> void:
 
 func refresh_rows() -> void:
 	apply_button.disabled = staged == shell.shortcuts.active
-	focus_order.clear()
+	focus_order.assign([close_button])
 	for action in rows:
 		var row: Dictionary = rows[action]
 		row.key.text = "Press a key…" if action == listening else Bindings.text(staged[action])

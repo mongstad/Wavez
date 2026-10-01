@@ -31,8 +31,12 @@ There is no warning or confirmation. **Apply** is disabled until the draft diffe
 from the active map, and disables again if all edits are reverted. Starting capture,
 recapturing the current binding, or resetting an already-default map does not enable
 it. Disabled Apply is skipped during keyboard navigation. **Apply** validates,
-saves and activates the map, updates shortcut hints, then closes the editor. **Cancel** or dismissal
-discards all edits. A save failure keeps the editor open and the active map intact.
+saves and activates the map and updates shortcut hints **without closing the
+editor**. The applied map becomes the new clean draft and Apply disables until
+another edit. The top-right **X** uses the main shell's close icon and control
+styling. **Cancel**, X or dismissal silently discards only edits made since the
+last successful Apply; already applied bindings stay active and saved. A save
+failure keeps the editor open and the active map intact.
 Viewport actions and free-camera movement cannot run through this modal editor.
 Existing text-entry, selection and busy-inspection guards remain authoritative.
 
@@ -100,6 +104,8 @@ test changes no owner preferences. No engine binaries/templates or generated
 packages are committed. Results and limitations are recorded in
 [issue evidence](evidence/issue-175/README.md). The subsequent Apply-state review
 change has its own [validation evidence](evidence/issue-175/apply-review/README.md).
+The later X/keep-open review change is recorded
+[separately](evidence/issue-175/dialog-review/README.md).
 
 ## Owner verification before acceptance
 
@@ -112,8 +118,10 @@ change has its own [validation evidence](evidence/issue-175/apply-review/README.
 2. With Reset Camera bound to R, assign R to Frame Scene. Verify Reset Camera
    immediately says Unbound without a warning. Capture Ctrl+Shift+R for Reset
    Camera, then Cancel. Confirm the previously active bindings still work.
-3. Repeat the two edits and Apply. With a capture open, verify R frames the scene
-   and Ctrl+Shift+R resets it. Restart Wavez with the same profile and verify both
+3. Repeat the two edits and Apply. Verify the dialog stays open with Apply disabled;
+   edit/apply a different action, then make an unapplied change and close with X.
+   There must be no warning, and the last applied map must remain intact. With a
+   capture open, verify R frames the scene and Ctrl+Shift+R resets it. Restart Wavez with the same profile and verify both
    bindings and the unbound row persist. Clear a binding, Apply and restart again.
 4. During capture, press Escape once: keep the editor open and retain the draft.
    Press Escape again: close and discard the draft. Use Tab/Shift+Tab and Enter
