@@ -6,12 +6,12 @@ Open scene.ssc in the native viewer; GUIDE.md in the new output gives the oracle
 import argparse,csv,hashlib,json,math
 from pathlib import Path
 import numpy as np
-from simscope_export import SceneCapture
-from simscope_export.analysis import SourceSnapshot,AnalysisError,selectors as S
-from simscope_export.analysis.jobs import execute
-from simscope_export.analysis.member_assets import MemberAssets
-from simscope_export.analysis.result_store import ResultCache
-from simscope_export.analysis.recipes import pack
+from wavez_export import SceneCapture
+from wavez_export.analysis import SourceSnapshot,AnalysisError,selectors as S
+from wavez_export.analysis.jobs import execute
+from wavez_export.analysis.member_assets import MemberAssets
+from wavez_export.analysis.result_store import ResultCache
+from wavez_export.analysis.recipes import pack
 
 
 def create(path):
@@ -76,7 +76,7 @@ def main():
     assert hashlib.sha256(tracer_path.read_bytes()).hexdigest()==tracer_hash
     assert hashlib.sha256(path.read_bytes()).hexdigest()==digest and hashlib.sha256(diagnostic.read_bytes()).hexdigest()==csv_hash
     (out/'selections.json').write_text(json.dumps(pack(dict(source=identity,definitions=[cohort,region,field,lower],tracer_source=tracer_identity,tracer_definitions=[tracer_roi])),indent=2)+'\n')
-    (out/'demo.json').write_text(json.dumps(dict(kind='simscope-g4-synthetic-demo',source=identity,tracer_source=tracer_identity,tracer_field_integral_refusal=refusal,exports=outputs,oracles=dict(field_mass_kg=288,lower_cylinder_mass_kg=144,field_samples=5,particle_times=[0,.5,1.5,3],recorded_velocity_m_s=1,diagnostic_period_seconds=2),source_unchanged=True),indent=2)+'\n')
+    (out/'demo.json').write_text(json.dumps(dict(kind='wavez-g4-synthetic-demo',source=identity,tracer_source=tracer_identity,tracer_field_integral_refusal=refusal,exports=outputs,oracles=dict(field_mass_kg=288,lower_cylinder_mass_kg=144,field_samples=5,particle_times=[0,.5,1.5,3],recorded_velocity_m_s=1,diagnostic_period_seconds=2),source_unchanged=True),indent=2)+'\n')
     (out/'GUIDE.md').write_text('''# Synthetic G4 walkthrough
 
 Open `scene.ssc`, choose **Selections → Use current capture**, and inspect object `p`.

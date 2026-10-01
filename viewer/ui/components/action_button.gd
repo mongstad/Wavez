@@ -1,7 +1,7 @@
 extends VBoxContainer
 ## Presentation-only action intent. An unavailable reason is visible outside the disabled button.
 signal invoked(action_id: StringName)
-const T = preload("res://ui/theme/simscope_tokens.tres")
+const T = preload("res://ui/theme/wavez_tokens.tres")
 var action_id: StringName
 var button := preload("res://ui/components/tooltip_button.gd").new()
 var reason := Label.new()

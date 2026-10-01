@@ -3,9 +3,9 @@ requires = ["setuptools>=61"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "simscope-export"
+name = "wavez-export"
 version = "3.0.0"
-description = "NumPy-first streamed particle, mesh and uniform-grid captures for SimScope"
+description = "NumPy-first streamed particle, mesh and uniform-grid captures for Wavez"
 readme = "README.md"
 license = {file = "LICENSE"}
 requires-python = ">=3.10"
@@ -16,4 +16,4 @@ analysis = ["scikit-image>=0.26,<0.27; python_version >= '3.11'"]
 zstd = ["backports.zstd>=1.0; python_version < '3.14'"]
 
 [tool.setuptools.packages.find]
-include = ["simscope_export*"]
+include = ["wavez_export*"]

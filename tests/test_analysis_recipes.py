@@ -2,13 +2,13 @@ import copy,hashlib,json,struct,tempfile,unittest
 from pathlib import Path
 import numpy as np
 import zlib
-from simscope_export.analysis import SourceSnapshot,AnalysisError
-from simscope_export.analysis import selectors as S
-from simscope_export.analysis.recipes import pack,unpack
-from simscope_export.analysis.native_analysis import run
-from simscope_export.analysis.jobs import execute
-from simscope_export.analysis.result_store import ResultCache
-from simscope_export.analysis.member_assets import MemberAssets
+from wavez_export.analysis import SourceSnapshot,AnalysisError
+from wavez_export.analysis import selectors as S
+from wavez_export.analysis.recipes import pack,unpack
+from wavez_export.analysis.native_analysis import run
+from wavez_export.analysis.jobs import execute
+from wavez_export.analysis.result_store import ResultCache
+from wavez_export.analysis.member_assets import MemberAssets
 from tests.g4.fixtures import scene,HIGH_ID
 
 

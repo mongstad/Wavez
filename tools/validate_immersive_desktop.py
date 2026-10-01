@@ -36,24 +36,24 @@ def main():
     source_hash = digest()
     qdbus = shutil.which('qdbus6') or shutil.which('qdbus') or '/usr/lib64/qt6/bin/qdbus'
     conn = Gio.bus_get_sync(Gio.BusType.SESSION, None)
-    service = 'org.simscope.FullscreenReview'
+    service = 'org.wavez.FullscreenReview'
     conn.call_sync('org.freedesktop.DBus', '/org/freedesktop/DBus', 'org.freedesktop.DBus',
                    'RequestName', GLib.Variant('(su)', (service, 4)), None, Gio.DBusCallFlags.NONE, -1, None)
-    xml = '<node><interface name="org.simscope.Review"><method name="Record"><arg type="s" direction="in"/></method></interface></node>'
+    xml = '<node><interface name="org.wavez.Review"><method name="Record"><arg type="s" direction="in"/></method></interface></node>'
     received = []
     def record(_c, _s, _p, _i, _m, values, invocation):
         received.append(json.loads(values.unpack()[0])); invocation.return_value(None)
     registration = conn.register_object('/Review', Gio.DBusNodeInfo.new_for_xml(xml).interfaces[0], record, None, None)
     def dbus(path, *args):
         return subprocess.check_output([qdbus, 'org.kde.KWin', path, *args], text=True).strip()
-    plugin = 'simscope-issue46-review'
+    plugin = 'wavez-issue46-review'
     def kwin(pid, leave=False):
         received.clear()
         script = out / 'kwin-probe.js'
         script.write_text('function rect(r) { return {x:r.x,y:r.y,width:r.width,height:r.height}; }\n'
             'var windows=workspace.windowList().filter(function(w) { return w.pid === ' + str(pid) + '; });\n'
             + ('windows.forEach(function(w) { w.fullScreen=false; });\n' if leave else '')
-            + 'callDBus("' + service + '","/Review","org.simscope.Review","Record",JSON.stringify(windows.map(function(w) { return {pid:w.pid,active:w.active,fullscreen:w.fullScreen,frame:rect(w.frameGeometry),client:rect(w.clientGeometry),screen:rect(w.output.geometry)}; })));\n')
+            + 'callDBus("' + service + '","/Review","org.wavez.Review","Record",JSON.stringify(windows.map(function(w) { return {pid:w.pid,active:w.active,fullscreen:w.fullScreen,frame:rect(w.frameGeometry),client:rect(w.clientGeometry),screen:rect(w.output.geometry)}; })));\n')
         script_id = dbus('/Scripting', 'loadScript', str(script), plugin)
         try:
             dbus('/Scripting/Script' + script_id, 'run')

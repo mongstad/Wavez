@@ -2,8 +2,8 @@ from decimal import Decimal,localcontext
 import unittest
 import numpy as np
 
-from simscope_export.analysis import AnalysisError,Context
-from simscope_export.analysis.reductions import statistics
+from wavez_export.analysis import AnalysisError,Context
+from wavez_export.analysis.reductions import statistics
 
 
 class ReductionTests(unittest.TestCase):

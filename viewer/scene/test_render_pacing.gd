@@ -40,7 +40,7 @@ func idle(view, label: String, stable_ui := true) -> void:
 	check(retained == picture(),label+" retained image equals forced full-quality render")
 func run() -> void:
 	output = OS.get_cmdline_user_args()[0]
-	root.title = "SimScope #118 automated regression"
+	root.title = "WAVEZ #118 automated regression"
 	var initial_mode := OS.low_processor_usage_mode;var initial_fps := Engine.max_fps
 	OS.low_processor_usage_mode = false;Engine.max_fps = 0
 	for kind in ["particles","field","mesh","mixed"]:

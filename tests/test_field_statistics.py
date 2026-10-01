@@ -7,9 +7,9 @@ import unittest
 
 import numpy as np
 
-from simscope_export import SceneCapture, SceneReader
-from simscope_export import scene, storage
-from simscope_export.field_statistics import summarize, validate, verify
+from wavez_export import SceneCapture, SceneReader
+from wavez_export import scene, storage
+from wavez_export.field_statistics import summarize, validate, verify
 from tools.verify_ssc import verify as verify_capture
 
 

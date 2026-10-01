@@ -10,8 +10,14 @@ config_version=5
 
 [application]
 
-config/name="SimScope"
-config/version="v0.1.0.13"
+config/name="WAVEZ"
+; Preserve the existing Godot app_userdata directory and picker preferences.
+config/use_custom_user_dir=true
+config/custom_user_dir_name="godot/app_userdata/SimScope"
+config/custom_user_dir_name.windows="Godot/app_userdata/SimScope"
+config/custom_user_dir_name.macos="Godot/app_userdata/SimScope"
+config/icon="res://ui/about/wavez-logo-dark.png"
+config/version="v0.1.0.14"
 run/main_scene="res://Main.tscn"
 config/features=PackedStringArray("4.7")
 

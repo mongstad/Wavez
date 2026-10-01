@@ -31,7 +31,7 @@ def main():
         with (project / "project.godot").open("a") as settings:
             settings.write('\n[autoload]\nAboutValidation="*res://ui/about/test_about.gd"\n')
         (project / "export_presets.cfg").write_text('[preset.0]\nname="About validation"\nplatform="Linux"\nrunnable=true\nexport_filter="all_resources"\ninclude_filter=""\nexclude_filter=""\nscript_export_mode=2\n[preset.0.options]\nbinary_format/architecture="x86_64"\nbinary_format/embed_pck=false\n')
-        executable = out / "simscope.x86_64"
+        executable = out / "wavez.x86_64"
         for label, options in [("import", ["--editor", "--import", "--quit"]), ("export", ["--export-release", "About validation", str(executable)])]:
             result = subprocess.run([args.godot, "--headless", "--path", str(project), *options], capture_output=True, text=True, timeout=120)
             log = result.stdout + result.stderr; (out / (label + ".log")).write_text(log)

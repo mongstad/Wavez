@@ -9,4 +9,4 @@ func _init() -> void:
 func configure(severity: String, text: String) -> void:
 	assert(severity in ["info", "success", "warning", "error"])
 	label.text = text
-	symbol.texture = preload("res://ui/theme/simscope_dark.tres").icon_named("check" if severity == "success" else severity, StringName("state." + severity))
+	symbol.texture = preload("res://ui/theme/wavez_dark.tres").icon_named("check" if severity == "success" else severity, StringName("state." + severity))

@@ -6,7 +6,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "viewer/ui/about/notices.tres"
 SOURCES = {
-    "SimScope — PolyForm Noncommercial 1.0.0": "LICENSE",
+    "WAVEZ — PolyForm Noncommercial 1.0.0": "LICENSE",
     "Third-party inventory": "THIRD_PARTY_LICENSES.md",
     "Branding": "TRADEMARKS.md",
     "Colormap notices": "viewer/COLORMAPS_LICENSE.txt",

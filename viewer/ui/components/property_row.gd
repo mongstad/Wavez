@@ -1,6 +1,6 @@
 extends VBoxContainer
 ## Layout only; conversion/validation belongs to the supplied editor.
-const T = preload("res://ui/theme/simscope_tokens.tres")
+const T = preload("res://ui/theme/wavez_tokens.tres")
 var line := BoxContainer.new()
 var label := Label.new()
 var field := HBoxContainer.new()

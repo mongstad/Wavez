@@ -2,7 +2,7 @@
 import hashlib
 import struct
 import numpy as np
-from simscope_export import SceneCapture
+from wavez_export import SceneCapture
 
 
 def arrays(index):

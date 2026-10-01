@@ -1,8 +1,8 @@
 from types import SimpleNamespace
 import unittest
 
-from simscope_export.analysis import AnalysisError
-from simscope_export.analysis.channel_semantics import declaration,physical_mass_policy,position_unit,quotient_unit
+from wavez_export.analysis import AnalysisError
+from wavez_export.analysis.channel_semantics import declaration,physical_mass_policy,position_unit,quotient_unit
 
 
 class ChannelSemanticsTests(unittest.TestCase):

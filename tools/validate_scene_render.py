@@ -10,11 +10,11 @@ def main():
         r=subprocess.run(command,cwd=ROOT,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True,timeout=180);(out/(name+'.log')).write_text(r.stdout);print(r.stdout,flush=True)
         if r.returncode or 'ERROR:' in r.stdout:raise RuntimeError(name+' failed')
     for script in ['main.gd','layers/test_scene_validation.gd']:
-        run('parse-'+Path(script).stem,[a.godot,'--headless','--path','viewer','--log-file','/tmp/simscope-g3-parse.log','--script',script,'--check-only'])
+        run('parse-'+Path(script).stem,[a.godot,'--headless','--path','viewer','--log-file','/tmp/wavez-g3-parse.log','--script',script,'--check-only'])
     for renderer in ['forward_plus','gl_compatibility']:
-        run('gpu-'+renderer,[a.godot,'--path','viewer','--rendering-method',renderer,'--audio-driver','Dummy','--log-file','/tmp/simscope-g3-'+renderer+'.log','--script','layers/test_scene_validation.gd','--','--scene-fixture='+str(out)])
+        run('gpu-'+renderer,[a.godot,'--path','viewer','--rendering-method',renderer,'--audio-driver','Dummy','--log-file','/tmp/wavez-g3-'+renderer+'.log','--script','layers/test_scene_validation.gd','--','--scene-fixture='+str(out)])
     job=json.loads((out/'video-check/job.json').read_text());directory=Path(tempfile.mkdtemp(prefix='video-final-',dir=out));job['output_path']=str(directory/'scene.mp4');(directory/'job.json').write_text(json.dumps(job))
-    run('video-final',[a.godot,'--path','viewer','--resolution','640x640','--audio-driver','Dummy','--log-file','/tmp/simscope-g3-video-final.log','--','--simscope-render-job='+str(directory/'job.json')])
+    run('video-final',[a.godot,'--path','viewer','--resolution','640x640','--audio-driver','Dummy','--log-file','/tmp/wavez-g3-video-final.log','--','--wavez-render-job='+str(directory/'job.json')])
     rows=[json.loads(s) for s in (directory/'timing.jsonl').read_text().splitlines()]
     assert [r['capture_time'] for r in rows]==[.5,.75,1.,1.25]
     for r in rows:

@@ -1,1 +1,1 @@
-"""SimScope regression tests and deterministic integration fixtures."""
+"""WAVEZ regression tests and deterministic integration fixtures."""

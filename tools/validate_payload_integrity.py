@@ -11,7 +11,7 @@ import numpy as np
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from simscope_export import SceneCapture, SceneReader, codec
+from wavez_export import SceneCapture, SceneReader, codec
 from tests.scene_mutation import rewrite
 from tools.verify_ssc import verify
 

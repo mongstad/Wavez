@@ -38,7 +38,7 @@ func _ready() -> void:
 func _configure_window() -> void:
 	# Godot cannot hide its main window after startup. Keep the real GPU display
 	# connection but minimize this noninteractive worker and remove focusability.
-	get_tree().root.title = "SimScope export worker"
+	get_tree().root.title = "WAVEZ export worker"
 	get_tree().root.unfocusable = true
 	get_tree().root.mode = Window.MODE_MINIMIZED
 
@@ -65,7 +65,7 @@ func finish(stage: String, message: String, code: int) -> void:
 	if trace != null: trace.close()
 	if encoder_log != null: encoder_log.close()
 	status(stage, message)
-	print("SimScope export: " + message)
+	print("WAVEZ export: " + message)
 	get_tree().quit(code)
 
 func _run() -> void:

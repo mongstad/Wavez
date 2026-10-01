@@ -1,6 +1,6 @@
 extends SceneTree
 const Timeline = preload("res://ui/shell/prepared_timeline.gd")
-const ThemeSource = preload("res://ui/theme/simscope_theme.gd")
+const ThemeSource = preload("res://ui/theme/wavez_theme.gd")
 var checks := 0
 var failures := []
 var rows := []

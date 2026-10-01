@@ -1,4 +1,4 @@
-"""Read the authoritative SimScope application identity without starting Godot."""
+"""Read the authoritative WAVEZ application identity without starting Godot."""
 import argparse
 import configparser
 import json
@@ -17,7 +17,7 @@ def read_version(project: Path = PROJECT) -> dict[str, str]:
         config.read_string("[header]\n" + project.read_text(encoding="utf-8"))
         value = json.loads(config["application"]["config/version"])
     except (OSError, configparser.Error, KeyError, ValueError) as error:
-        raise ValueError(f"Cannot read SimScope application/config/version from {project}: {error}") from error
+        raise ValueError(f"Cannot read WAVEZ application/config/version from {project}: {error}") from error
     match = PATTERN.fullmatch(value) if isinstance(value, str) else None
     if match is None:
         raise ValueError("Invalid application/config/version: expected vMAJOR.MINOR.PATCH.BUILD with canonical non-negative release numbers and a positive BUILD")

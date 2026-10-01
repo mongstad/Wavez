@@ -12,8 +12,8 @@ from urllib.parse import unquote
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from simscope_export.analysis import SourceSnapshot
-from simscope_export.analysis import channel_semantics as semantics
+from wavez_export.analysis import SourceSnapshot
+from wavez_export.analysis import channel_semantics as semantics
 
 
 def validate():
@@ -38,7 +38,7 @@ def validate():
         doc = (ROOT / name).read_text()
         code = re.search(r"```python\n(.*?)```", doc.split(marker, 1)[1], re.S)[1]
         previous = Path.cwd()
-        with tempfile.TemporaryDirectory(prefix="simscope-doc-") as directory:
+        with tempfile.TemporaryDirectory(prefix="wavez-doc-") as directory:
             os.chdir(directory)
             try:
                 exec(compile(code, name, "exec"), {})

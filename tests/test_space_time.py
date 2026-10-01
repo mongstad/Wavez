@@ -1,11 +1,11 @@
 import hashlib,math,tempfile,unittest
 from pathlib import Path
 import numpy as np
-from simscope_export import SceneCapture
-from simscope_export.analysis import SourceSnapshot,Context,AnalysisError
-from simscope_export.analysis.space_time import run
-from simscope_export.analysis.result_store import ResultCache
-from simscope_export.analysis import selectors as S
+from wavez_export import SceneCapture
+from wavez_export.analysis import SourceSnapshot,Context,AnalysisError
+from wavez_export.analysis.space_time import run
+from wavez_export.analysis.result_store import ResultCache
+from wavez_export.analysis import selectors as S
 from tests.g4.fixtures import scene
 
 
@@ -99,7 +99,7 @@ class SpaceTimeTests(unittest.TestCase):
             self.assertEqual(peak*.25,t)
         support=self.cache.page(ref,kind='support',offset=63,limit=1)['rows'][0]
         self.assertTrue(support['gap_from_previous'])
-        from simscope_export.analysis.heatmap_preview import preview,DTYPE
+        from wavez_export.analysis.heatmap_preview import preview,DTYPE
         preview_data=preview(self.cache,dict(result=ref,width=21,height=64),Context())
         self.assertEqual([r['first_time'] for r in preview_data['native_rows']],['0','0.25','1','2.5','4'])
         self.assertEqual([r['row'] for r in preview_data['native_rows']],[0,4,16,40,63])

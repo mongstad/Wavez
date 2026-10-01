@@ -5,9 +5,9 @@ import unittest
 
 import numpy as np
 
-from simscope_export import SceneCapture,SceneReader
-from simscope_export.analysis import SourceSnapshot
-from simscope_export.codec import MAX_CHUNK
+from wavez_export import SceneCapture,SceneReader
+from wavez_export.analysis import SourceSnapshot
+from wavez_export.codec import MAX_CHUNK
 
 
 class SceneChunkTests(unittest.TestCase):

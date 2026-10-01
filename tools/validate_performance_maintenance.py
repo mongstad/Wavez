@@ -5,7 +5,7 @@ import numpy as np
 from validate_scene_playback import prepare
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
-from simscope_export import SceneCapture
+from wavez_export import SceneCapture
 
 def run(godot,viewer,script,out,args,renderer='headless',timeout=180):
     cmd=[godot,'--path',str(viewer),'--audio-driver','Dummy','--log-file',str(out.with_suffix('.godot.log'))]

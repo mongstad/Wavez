@@ -2,7 +2,7 @@
 import argparse,json,os,resource,subprocess,sys,time
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
-from simscope_export import SceneCapture,SceneReader
+from wavez_export import SceneCapture,SceneReader
 OUT=ROOT/'results/g3'
 
 def run(mode):

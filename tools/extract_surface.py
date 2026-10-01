@@ -4,7 +4,7 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
 import numpy as np
-from simscope_export import SceneReader, SceneCapture
+from wavez_export import SceneReader, SceneCapture
 ALGORITHM='skimage-lewiner-0.26/source-f32/no-smoothing/no-decimation/v2'
 MAX_VERTICES=1_000_000;MAX_TRIANGLES=2_000_000
 

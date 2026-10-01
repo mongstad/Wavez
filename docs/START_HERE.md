@@ -12,4 +12,4 @@ and are not product dependencies. See [repository boundaries](REPOSITORY_BOUNDAR
 
 G0–G4 are implemented and accepted. G5/G6 require separate authorization and have
 not started. New work targets `.ssc` / SIMSCP4 under the
-[capture format policy](CAPTURE_FORMAT_POLICY.md). SimScope is the final name.
+[capture format policy](CAPTURE_FORMAT_POLICY.md). Wavez is the final name.

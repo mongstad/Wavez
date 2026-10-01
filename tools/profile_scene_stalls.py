@@ -89,7 +89,7 @@ def main():
     if not math.isfinite(args.seconds) or not 0.5<=args.seconds<=20:parser.error('seconds must be 0.5..20 per case')
     if not math.isfinite(args.start_time):parser.error('start-time must be finite')
     sys.path.insert(0,str(ROOT))
-    from simscope_export import SceneReader
+    from wavez_export import SceneReader
     source=args.capture.resolve();stamp=source.stat()
     with SceneReader(source,cache_bytes=0) as reader:
         if not reader.times or args.start_time<reader.times[0] or args.start_time+2*args.seconds>reader.times[-1]:

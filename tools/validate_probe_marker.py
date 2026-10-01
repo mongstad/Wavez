@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 import numpy as np
 from PIL import Image
-from simscope_export import SceneCapture
+from wavez_export import SceneCapture
 
 
 def main():
@@ -56,7 +56,7 @@ def main():
                    camera_mode='locked', quality='high', keep_frames=True, ffmpeg_path=ffmpeg)
         path = directory/'job.json'
         path.write_text(json.dumps(job))
-        run('video-'+name, command+['--fixed-fps', '4', '--disable-vsync', '--', '--simscope-render-job='+str(path)])
+        run('video-'+name, command+['--fixed-fps', '4', '--disable-vsync', '--', '--wavez-render-job='+str(path)])
         assert json.loads((directory/'progress.json').read_text())['stage'] == 'complete'
         frames = sorted((directory/'frames').glob('*.png'))
         assert len(frames) == 4

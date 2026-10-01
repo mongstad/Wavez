@@ -1,0 +1,107 @@
+{
+  "baseline": "d6e4bd8e19e8c5e187c6a7c263c9bacdcd80bdbe",
+  "candidate_version": "v0.1.0.14",
+  "date": "2026-10-01",
+  "owner_acceptance": "pending",
+  "environment": {
+    "os": "Linux",
+    "godot": "4.7.2",
+    "gpu": "NVIDIA GeForce RTX 3070 Ti",
+    "driver": "615.71.09"
+  },
+  "python_tests": {
+    "passed": 216,
+    "failures": 0
+  },
+  "checks": {
+    "branding_ui_and_user_data": {
+      "forward_plus": 4460,
+      "gl_compatibility": 4460
+    },
+    "about": {
+      "forward_plus": 98,
+      "gl_compatibility": 98,
+      "linux_release_forward_plus": 98
+    },
+    "violet_cleanup": {
+      "forward_plus": 1099,
+      "gl_compatibility": 1099
+    },
+    "viewer_shell": {
+      "forward_plus": 673,
+      "gl_compatibility": 673
+    },
+    "view_preset": {
+      "forward_plus": 826,
+      "gl_compatibility": 766
+    },
+    "file_dialogs": {
+      "forward_plus_wayland": 90,
+      "gl_compatibility_x11": 90
+    },
+    "video_current": {
+      "forward_plus": 235,
+      "gl_compatibility": 225
+    },
+    "render_pacing": {
+      "forward_plus": 290,
+      "gl_compatibility": 290
+    },
+    "exit_menu_native_processes": {
+      "forward_plus": 6,
+      "gl_compatibility": 6
+    },
+    "baseline_output_comparison": {
+      "passed": 70,
+      "failures": 0
+    },
+    "cross_version_strict_capture_checks": {
+      "old_writer_new_reader_records": 11,
+      "new_writer_old_reader_records": 11
+    },
+    "scientific_python_modules_byte_identical": 38
+  },
+  "packaging": {
+    "python_wheel": "wavez_export-3.0.0-py3-none-any.whl",
+    "isolated_import": "PASS",
+    "linux_executable": "wavez.x86_64",
+    "linux_resources": "wavez.pck",
+    "binaries_committed": false
+  },
+  "known_failures": [
+    {
+      "suite": "g4_render",
+      "renderers": [
+        "forward_plus",
+        "gl_compatibility"
+      ],
+      "passed_checks_before_failure": 41,
+      "failed_check": "restored frame and ordinary PNG capture reproduce exact clip pixels",
+      "accepted_main_reproduction": true,
+      "comparison": "Clean video frames match accepted main exactly; replay pixels below the renamed top command bar match exactly."
+    },
+    {
+      "suite": "file_dialogs",
+      "renderer": "gl_compatibility",
+      "display": "wayland",
+      "outcome": "90-second process shutdown timeout after passing phase assertions; two candidate attempts and accepted-main reproduction. X11 completes all seven processes."
+    },
+    {
+      "suite": "file_dialogs",
+      "renderer": "gl_compatibility",
+      "display": "x11",
+      "outcome": "90 checks pass; 12 already-recognized GL texture-cleanup diagnostics across seven processes retained in logs, within the established per-process limit."
+    }
+  ],
+  "not_run": [
+    "Windows/macOS native launch and packaging",
+    "self-contained and non-desktop data-directory behavior",
+    "full production-scale capture rerun",
+    "repository rename (owner deferred)"
+  ],
+  "raw_runs": [
+    "/tmp/wavez-validation-native",
+    "/tmp/wavez-validation-followup",
+    "/tmp/wavez-validation-final"
+  ]
+}

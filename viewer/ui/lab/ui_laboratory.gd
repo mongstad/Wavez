@@ -1,7 +1,7 @@
 extends PanelContainer
 ## Development-only, capture-free showcase. Not referenced by Main.tscn or production scripts.
-const T = preload("res://ui/theme/simscope_tokens.tres")
-const DARK = preload("res://ui/theme/simscope_dark.tres")
+const T = preload("res://ui/theme/wavez_tokens.tres")
+const DARK = preload("res://ui/theme/wavez_dark.tres")
 const Scale = preload("res://ui/theme/ui_scale.gd")
 const Action = preload("res://ui/components/action_button.gd")
 const Number = preload("res://ui/components/number_field.gd")
@@ -23,7 +23,7 @@ var dialog
 func _ready() -> void:
 	theme = DARK; theme_type_variation = &"AtmosphericSurface"
 	if manage_window:
-		get_window().title = "SimScope · UI Laboratory · Midnight Scientific"
+		get_window().title = "WAVEZ · UI Laboratory · Midnight Scientific"
 		Scale.apply(get_window(), 1.0)
 	var layout := VBoxContainer.new(); add_child(layout)
 	var header := HFlowContainer.new(); layout.add_child(header)
@@ -33,7 +33,7 @@ func _ready() -> void:
 		mark.custom_minimum_size = Vector2(4, 16)
 		mark.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 		mark.mouse_filter = Control.MOUSE_FILTER_IGNORE; header.add_child(mark)
-	var title := label("SimScope / UI Laboratory", &"ApplicationTitle")
+	var title := label("WAVEZ / UI Laboratory", &"ApplicationTitle")
 	title.autowrap_mode = TextServer.AUTOWRAP_OFF; header.add_child(title)
 	var subtitle := label("Midnight Scientific · UX2", &"SecondaryLabel")
 	subtitle.autowrap_mode = TextServer.AUTOWRAP_OFF; header.add_child(subtitle)

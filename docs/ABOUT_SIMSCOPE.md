@@ -1,5 +1,9 @@
 # About SimScope — issue #96
 
+Current branding is **Help → About WAVEZ**, with the approved dark artwork.
+See [the migration guide](BRANDING_MIGRATION.md). The original review report below
+retains its historical product name and validation results.
+
 Current #147 update: About uses the owner-supplied violet logo without changing
 its layout, identity reader, notices or links. See [asset provenance](../viewer/ui/about/README.md)
 and [the cleanup contract](UX5_CLEANUP.md). The original #96 report below is historical.

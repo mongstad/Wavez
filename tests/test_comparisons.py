@@ -2,10 +2,10 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from simscope_export.analysis import SourceSnapshot,Context,AnalysisError
-from simscope_export.analysis.diagnostics import run as import_csv
-from simscope_export.analysis.comparisons import run
-from simscope_export.analysis.result_store import ResultCache
+from wavez_export.analysis import SourceSnapshot,Context,AnalysisError
+from wavez_export.analysis.diagnostics import run as import_csv
+from wavez_export.analysis.comparisons import run
+from wavez_export.analysis.result_store import ResultCache
 from tests.g4.fixtures import scene
 
 
@@ -78,8 +78,8 @@ class ComparisonTests(unittest.TestCase):
         self.assertEqual(support[1]["left"]["evaluation"]["native_results"][1]["native_time"]["text"],"1")
 
     def native(self,source,identity,channel="position",object="p"):
-        from simscope_export.analysis import selectors as S
-        from simscope_export.analysis.native_analysis import run as native
+        from wavez_export.analysis import selectors as S
+        from wavez_export.analysis.native_analysis import run as native
         d=S.define(source,dict(object=object,kind="particle_ids" if object=="p" else "mesh_vertices",selector=dict(ids=[str(identity)])))
         spec=dict(channel=channel)
         if channel=="position":spec["component"]=0 if object=="p" else 2
@@ -111,8 +111,8 @@ class ComparisonTests(unittest.TestCase):
 
     def test_second_source_mutation_during_finish_rolls_back_publication(self):
         from unittest.mock import patch
-        from simscope_export.analysis.jobs import execute
-        from simscope_export.analysis.result_store import ResultWriter
+        from wavez_export.analysis.jobs import execute
+        from wavez_export.analysis.result_store import ResultWriter
         a=self.data(self.source,"a",[0,1],[2,3]);b=self.data(self.other,"b",[0,1],[1,2]);original=ResultWriter.finish
         def finish(writer):
             ref=original(writer)

@@ -30,15 +30,15 @@ def main():
     capture = scene(out / 'scene.ssc')
     digest = hashlib.sha256(capture.read_bytes()).hexdigest()
     conn = Gio.bus_get_sync(Gio.BusType.SESSION, None)
-    service = 'org.simscope.ChromeReview'
+    service = 'org.wavez.ChromeReview'
     conn.call_sync('org.freedesktop.DBus', '/org/freedesktop/DBus', 'org.freedesktop.DBus', 'RequestName', GLib.Variant('(su)', (service, 4)), None, Gio.DBusCallFlags.NONE, -1, None)
     received = []
-    xml = '<node><interface name="org.simscope.Review"><method name="Record"><arg type="s" direction="in"/></method></interface></node>'
+    xml = '<node><interface name="org.wavez.Review"><method name="Record"><arg type="s" direction="in"/></method></interface></node>'
     def record(_c, _s, _p, _i, _m, values, invocation):
         received.append(json.loads(values.unpack()[0])); invocation.return_value(None)
     registration = conn.register_object('/Review', Gio.DBusNodeInfo.new_for_xml(xml).interfaces[0], record, None, None)
     qdbus = shutil.which('qdbus6') or '/usr/lib64/qt6/bin/qdbus'
-    plugin = 'simscope-143-chrome-review'
+    plugin = 'wavez-143-chrome-review'
     def dbus(path, *parameters):
         return subprocess.check_output([qdbus, 'org.kde.KWin', path, *parameters], text=True).strip()
     def probe(pid, action=''):
@@ -48,7 +48,7 @@ def main():
         script.write_text('function rect(r){return {x:r.x,y:r.y,width:r.width,height:r.height};}\n'
             'var windows=workspace.windowList().filter(function(w){return w.pid===' + str(pid) + ';});\n'
             'windows.forEach(function(w){' + mutation + '});\n'
-            'callDBus("' + service + '","/Review","org.simscope.Review","Record",JSON.stringify(windows.map(function(w){return {pid:w.pid,active:w.active,fullscreen:w.fullScreen,minimized:w.minimized,resizable:w.resizeable,noBorder:w.noBorder,frame:rect(w.frameGeometry),client:rect(w.clientGeometry),screen:rect(w.output.geometry)};})));\n')
+            'callDBus("' + service + '","/Review","org.wavez.Review","Record",JSON.stringify(windows.map(function(w){return {pid:w.pid,active:w.active,fullscreen:w.fullScreen,minimized:w.minimized,resizable:w.resizeable,noBorder:w.noBorder,frame:rect(w.frameGeometry),client:rect(w.clientGeometry),screen:rect(w.output.geometry)};})));\n')
         identifier = dbus('/Scripting', 'loadScript', str(script), plugin)
         try:
             dbus('/Scripting/Script' + identifier, 'run')

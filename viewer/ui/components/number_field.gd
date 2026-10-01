@@ -6,7 +6,7 @@ signal draft_changed(text: String)
 signal validation_changed(message: String)
 enum Kind { SCIENTIFIC, EXACT_INTEGER }
 const FloatText = preload("res://ui/components/float64_text.gd")
-const T = preload("res://ui/theme/simscope_tokens.tres")
+const T = preload("res://ui/theme/wavez_tokens.tres")
 var kind: Kind = Kind.SCIENTIFIC
 var minimum: float = -INF
 var maximum: float = INF

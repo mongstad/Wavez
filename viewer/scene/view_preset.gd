@@ -91,7 +91,7 @@ static func valid(value, rule, viewer) -> bool:
 static func prepare(viewer, recipe) -> Dictionary:
 	var result := {"error":"","skipped":[],"settings":{}}
 	if not recipe is Dictionary or recipe.get("kind") != KIND or recipe.get("version") != VERSION or not recipe.get("settings") is Dictionary:
-		result.error = "Choose a SimScope view preset (version 1). Inspection bundles are not view presets.";return result
+		result.error = "Choose a WAVEZ view preset (version 1). Inspection bundles are not view presets.";return result
 	var rules := schemas()
 	var model: Dictionary = snapshot(viewer).settings
 	# Validate every known value before changing any live state, even for absent layers.

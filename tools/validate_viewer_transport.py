@@ -8,7 +8,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from tests.g4.fixtures import scene
-from simscope_export import SceneCapture
+from wavez_export import SceneCapture
 
 
 def main():

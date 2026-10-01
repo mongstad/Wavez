@@ -3,9 +3,9 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from simscope_export.analysis import SourceSnapshot,AnalysisError,Context
-from simscope_export.analysis.diagnostics import run,Input,mapping
-from simscope_export.analysis.result_store import ResultCache
+from wavez_export.analysis import SourceSnapshot,AnalysisError,Context
+from wavez_export.analysis.diagnostics import run,Input,mapping
+from wavez_export.analysis.result_store import ResultCache
 from tests.g4.fixtures import scene
 
 
@@ -70,8 +70,8 @@ class DiagnosticTests(unittest.TestCase):
 
     def test_period_job_uses_full_diagnostic_rows_and_keeps_window_evidence(self):
         import numpy as np
-        from simscope_export.analysis.period_jobs import run as period_job
-        from simscope_export.analysis.plot_preview import preview
+        from wavez_export.analysis.period_jobs import run as period_job
+        from wavez_export.analysis.plot_preview import preview
         times=np.arange(0,8,.02)
         self.path.write_text("time,value,id\n"+"".join(f"{t:.17g},{np.sin(2*np.pi*t):.17g},7\n" for t in times))
         imported=run(self.source,self.args,self.cache)

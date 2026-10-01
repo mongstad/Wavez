@@ -1,1 +1,1 @@
-"""Runnable SimScope export examples."""
+"""Runnable WAVEZ export examples."""

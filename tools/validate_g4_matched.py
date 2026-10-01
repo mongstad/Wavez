@@ -5,7 +5,7 @@ ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
 import numpy as np
 from PIL import Image
 from tests.g4.fixtures import traveling_pulse
-from simscope_export.analysis.recipes import unpack
+from wavez_export.analysis.recipes import unpack
 
 
 def main():

@@ -14,13 +14,13 @@ for name in ("OPENBLAS_NUM_THREADS", "OMP_NUM_THREADS", "MKL_NUM_THREADS"):
     os.environ[name] = "1"
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from simscope_export.analysis.contracts import AnalysisError, Context, SharedBudget, MAX_CONTROL, MIB
-from simscope_export.analysis.jobs import execute, validate_request, BACKGROUND_OPERATIONS, SOURCE_RESULT_OPERATIONS
-from simscope_export.analysis.memo import VerificationMemo
-from simscope_export.analysis.member_assets import MemberAssets
-from simscope_export.analysis.result_store import ResultCache,references_in as result_references
-from simscope_export.analysis import native_analysis
-from simscope_export.analysis import diagnostics,period_jobs,plot_preview,picking,derived,selection_jobs,comparisons,scheduled_series,linked_plots,space_time,heatmap_preview,input_provenance,atomic_output,export_results,recipes
+from wavez_export.analysis.contracts import AnalysisError, Context, SharedBudget, MAX_CONTROL, MIB
+from wavez_export.analysis.jobs import execute, validate_request, BACKGROUND_OPERATIONS, SOURCE_RESULT_OPERATIONS
+from wavez_export.analysis.memo import VerificationMemo
+from wavez_export.analysis.member_assets import MemberAssets
+from wavez_export.analysis.result_store import ResultCache,references_in as result_references
+from wavez_export.analysis import native_analysis
+from wavez_export.analysis import diagnostics,period_jobs,plot_preview,picking,derived,selection_jobs,comparisons,scheduled_series,linked_plots,space_time,heatmap_preview,input_provenance,atomic_output,export_results,recipes
 
 
 def memory():
@@ -84,7 +84,7 @@ class Worker:
         self.interactive_checked=0.;self.pool=None;self.recent_result=None
         self.pressure_pauses=0;self.pressure_seconds=0.
         code=hashlib.sha256()
-        for path in sorted(list((ROOT/"simscope_export"/"analysis").glob("*.py"))+list((ROOT/"simscope_export").glob("*.py"))):
+        for path in sorted(list((ROOT/"wavez_export"/"analysis").glob("*.py"))+list((ROOT/"wavez_export").glob("*.py"))):
             code.update(str(path.relative_to(ROOT)).encode());code.update(path.read_bytes())
         code.update(Path(__file__).read_bytes())
         self.provenance=dict(analysis_code_sha256=code.hexdigest(),worker="tools/analyze_selection.py",policy="private file transport; one computation at a time")

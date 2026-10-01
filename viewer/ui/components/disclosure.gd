@@ -1,6 +1,6 @@
 extends VBoxContainer
 signal expansion_requested(section_id: StringName, expanded: bool)
-const ThemeFactory = preload("res://ui/theme/simscope_theme.gd")
+const ThemeFactory = preload("res://ui/theme/wavez_theme.gd")
 var section_id: StringName
 var header := Button.new()
 var body: Control
@@ -20,7 +20,7 @@ func configure(id: StringName, title: String, content: Control) -> void:
 
 func set_expanded(value: bool) -> void:
 	expanded = value; header.set_pressed_no_signal(value)
-	var ui_theme = preload("res://ui/theme/simscope_dark.tres")
+	var ui_theme = preload("res://ui/theme/wavez_dark.tres")
 	header.icon = ui_theme.icon_named("chevron_down" if value else "chevron_right")
 	if body != null:
 		var focused := get_viewport().gui_get_focus_owner() if is_inside_tree() else null

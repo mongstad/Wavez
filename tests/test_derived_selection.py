@@ -7,11 +7,11 @@ import unittest
 
 import numpy as np
 
-from simscope_export import SceneCapture
-from simscope_export.analysis import SourceSnapshot,AnalysisError
-from simscope_export.analysis.derived import dispatch
-from simscope_export.analysis.jobs import dispatch as query
-from simscope_export.analysis.contracts import parse_float_token
+from wavez_export import SceneCapture
+from wavez_export.analysis import SourceSnapshot,AnalysisError
+from wavez_export.analysis.derived import dispatch
+from wavez_export.analysis.jobs import dispatch as query
+from wavez_export.analysis.contracts import parse_float_token
 from tests.test_picking import camera
 from tools.extract_surface import ALGORITHM
 

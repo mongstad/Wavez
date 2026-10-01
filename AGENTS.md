@@ -1,6 +1,6 @@
-# SimScope development
+# Wavez development
 
-SimScope is the final project name. This directory is the sole authoritative root.
+WAVEZ is the application brand; use Wavez in ordinary prose. This directory is the sole authoritative root.
 Read README.md, docs/CURRENT_STATUS.md and CONTRIBUTING.md before making changes.
 
 - Preserve accepted G0–G4 behavior. Post-G4 maintenance is authorized; G5/G6 and web/dashboard work require separate authorization.

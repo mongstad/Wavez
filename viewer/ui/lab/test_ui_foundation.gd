@@ -1,8 +1,8 @@
 extends SceneTree
 const Lab = preload("res://ui/lab/ui_laboratory.gd")
 const Number = preload("res://ui/components/number_field.gd")
-const ThemeFactory = preload("res://ui/theme/simscope_theme.gd")
-const T = preload("res://ui/theme/simscope_tokens.tres")
+const ThemeFactory = preload("res://ui/theme/wavez_theme.gd")
+const T = preload("res://ui/theme/wavez_tokens.tres")
 const Scale = preload("res://ui/theme/ui_scale.gd")
 var out := ""
 var checks: Array = []

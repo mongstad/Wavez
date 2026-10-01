@@ -1,6 +1,8 @@
-# SimScope
+# WAVEZ
 
-SimScope is a NumPy-first scientific capture and Godot visualization platform for
+![WAVEZ](docs/branding/wavez-banner-dark.png)
+
+Wavez is a NumPy-first scientific capture and Godot visualization platform for
 particles, meshes and uniform-grid scalar fields. New integrations use
 `SceneCapture` / `SceneReader` and the SIMSCP4 (`.ssc`) capture format.
 
@@ -17,16 +19,20 @@ in PR #64. The [UX4 design](docs/UX4_DESIGN.md) was owner-merged in PR #72.
 The [category simulation panel](docs/UX4_PANEL.md) was owner-merged in PR #75.
 [Focused scientific tools](docs/UX4_TOOLS.md) are pending owner review under #69.
 
+The project was renamed from SimScope under #155. See the
+[branding migration](docs/BRANDING_MIGRATION.md) for Python import changes,
+retained compatibility identifiers, and the owner-managed repository rename.
+
 Start with:
 
 - [Quickstart](QUICKSTART.md)
 - [Edit orbit center and radius](docs/ORBIT_CENTER.md)
 - [Current status](docs/CURRENT_STATUS.md)
 - [Violet UI cleanup and owner checks](docs/UX5_CLEANUP.md)
-- [Application version and build policy](docs/VERSIONING.md) — view the identity in Help → About SimScope
+- [Application version and build policy](docs/VERSIONING.md) — view the identity in Help → About WAVEZ
 - [Pinned edge reveal and Fullscreen](docs/WINDOW_EDGE_REVEAL.md)
 - [Portable view presets](docs/VIEW_PRESETS.md)
-- [SimScope handbook](docs/SIMSCOPE_HANDBOOK.md)
+- [Wavez handbook](docs/SIMSCOPE_HANDBOOK.md)
 - [Python API](SIMSCOPE_API.md)
 - [Capture format](G3_FORMAT.md)
 - [Simulation integration guide](docs/SIMULATION_INTEGRATION_GUIDE.md)
@@ -34,7 +40,7 @@ Start with:
 
 Repository layout:
 
-- `simscope_export/` — installable capture/analysis library
+- `wavez_export/` — installable capture/analysis library
 - `viewer/` — Godot viewer and native regression tests
 - `examples/` — small repository-owned examples
 - `tests/` — Python regression tests
@@ -47,8 +53,8 @@ are intentionally outside this repository. See
 
 ## Licensing
 
-Original SimScope material in this repository is offered under the
-[PolyForm Noncommercial License 1.0.0](LICENSE). SimScope is source-available,
+Original Wavez material in this repository is offered under the
+[PolyForm Noncommercial License 1.0.0](LICENSE). Wavez is source-available,
 not OSI-approved open-source software. Commercial use is not granted by that
 license and requires a separate written agreement with the rights holder.
 

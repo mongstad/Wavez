@@ -1,0 +1,474 @@
+{
+  "checks": 70,
+  "failures": [],
+  "results": [
+    {
+      "renderer": "forward_plus",
+      "case": "budget/timing.jsonl",
+      "kind": "timing",
+      "equal": true
+    },
+    {
+      "renderer": "forward_plus",
+      "case": "corrupt/timing.jsonl",
+      "kind": "timing",
+      "equal": true
+    },
+    {
+      "renderer": "forward_plus",
+      "case": "field/timing.jsonl",
+      "kind": "timing",
+      "equal": true
+    },
+    {
+      "renderer": "forward_plus",
+      "case": "late/timing.jsonl",
+      "kind": "timing",
+      "equal": true
+    },
+    {
+      "renderer": "forward_plus",
+      "case": "late-particles/timing.jsonl",
+      "kind": "timing",
+      "equal": true
+    },
+    {
+      "renderer": "forward_plus",
+      "case": "mesh/timing.jsonl",
+      "kind": "timing",
+      "equal": true
+    },
+    {
+      "renderer": "forward_plus",
+      "case": "mixed/timing.jsonl",
+      "kind": "timing",
+      "equal": true
+    },
+    {
+      "renderer": "forward_plus",
+      "case": "mixed-repeat/timing.jsonl",
+      "kind": "timing",
+      "equal": true
+    },
+    {
+      "renderer": "forward_plus",
+      "case": "mixed-ui/timing.jsonl",
+      "kind": "timing",
+      "equal": true
+    },
+    {
+      "renderer": "forward_plus",
+      "case": "overflow/timing.jsonl",
+      "kind": "timing",
+      "equal": true
+    },
+    {
+      "renderer": "forward_plus",
+      "case": "particles/timing.jsonl",
+      "kind": "timing",
+      "equal": true
+    },
+    {
+      "renderer": "forward_plus",
+      "case": "corrupt/frames/frame00000000.png",
+      "kind": "pixels",
+      "region": "whole frame",
+      "equal": true
+    },
+    {
+      "renderer": "forward_plus",
+      "case": "field/frames/frame00000000.png",
+      "kind": "pixels",
+      "region": "whole frame",
+      "equal": true
+    },
+    {
+      "renderer": "forward_plus",
+      "case": "field/frames/frame00000001.png",
+      "kind": "pixels",
+      "region": "whole frame",
+      "equal": true
+    },
+    {
+      "renderer": "forward_plus",
+      "case": "late/frames/frame00000000.png",
+      "kind": "pixels",
+      "region": "whole frame",
+      "equal": true
+    },
+    {
+      "renderer": "forward_plus",
+      "case": "late/frames/frame00000001.png",
+      "kind": "pixels",
+      "region": "whole frame",
+      "equal": true
+    },
+    {
+      "renderer": "forward_plus",
+      "case": "late-particles/frames/frame00000000.png",
+      "kind": "pixels",
+      "region": "whole frame",
+      "equal": true
+    },
+    {
+      "renderer": "forward_plus",
+      "case": "late-particles/frames/frame00000001.png",
+      "kind": "pixels",
+      "region": "whole frame",
+      "equal": true
+    },
+    {
+      "renderer": "forward_plus",
+      "case": "mesh/frames/frame00000000.png",
+      "kind": "pixels",
+      "region": "whole frame",
+      "equal": true
+    },
+    {
+      "renderer": "forward_plus",
+      "case": "mesh/frames/frame00000001.png",
+      "kind": "pixels",
+      "region": "whole frame",
+      "equal": true
+    },
+    {
+      "renderer": "forward_plus",
+      "case": "mixed/frames/frame00000000.png",
+      "kind": "pixels",
+      "region": "whole frame",
+      "equal": true
+    },
+    {
+      "renderer": "forward_plus",
+      "case": "mixed/frames/frame00000001.png",
+      "kind": "pixels",
+      "region": "whole frame",
+      "equal": true
+    },
+    {
+      "renderer": "forward_plus",
+      "case": "mixed-repeat/frames/frame00000000.png",
+      "kind": "pixels",
+      "region": "whole frame",
+      "equal": true
+    },
+    {
+      "renderer": "forward_plus",
+      "case": "mixed-repeat/frames/frame00000001.png",
+      "kind": "pixels",
+      "region": "whole frame",
+      "equal": true
+    },
+    {
+      "renderer": "forward_plus",
+      "case": "mixed-ui/frames/frame00000000.png",
+      "kind": "pixels",
+      "region": "below top command bar",
+      "equal": true
+    },
+    {
+      "renderer": "forward_plus",
+      "case": "mixed-ui/frames/frame00000001.png",
+      "kind": "pixels",
+      "region": "below top command bar",
+      "equal": true
+    },
+    {
+      "renderer": "forward_plus",
+      "case": "particles/frames/frame00000000.png",
+      "kind": "pixels",
+      "region": "whole frame",
+      "equal": true
+    },
+    {
+      "renderer": "forward_plus",
+      "case": "particles/frames/frame00000001.png",
+      "kind": "pixels",
+      "region": "whole frame",
+      "equal": true
+    },
+    {
+      "renderer": "forward_plus",
+      "case": "g4/delayed/frames/frame00000000.png",
+      "kind": "pixels",
+      "region": "whole frame",
+      "equal": true
+    },
+    {
+      "renderer": "forward_plus",
+      "case": "g4/delayed/frames/frame00000001.png",
+      "kind": "pixels",
+      "region": "whole frame",
+      "equal": true
+    },
+    {
+      "renderer": "forward_plus",
+      "case": "g4/delayed/frames/frame00000002.png",
+      "kind": "pixels",
+      "region": "whole frame",
+      "equal": true
+    },
+    {
+      "renderer": "forward_plus",
+      "case": "g4/normal/frames/frame00000000.png",
+      "kind": "pixels",
+      "region": "whole frame",
+      "equal": true
+    },
+    {
+      "renderer": "forward_plus",
+      "case": "g4/normal/frames/frame00000001.png",
+      "kind": "pixels",
+      "region": "whole frame",
+      "equal": true
+    },
+    {
+      "renderer": "forward_plus",
+      "case": "g4/normal/frames/frame00000002.png",
+      "kind": "pixels",
+      "region": "whole frame",
+      "equal": true
+    },
+    {
+      "renderer": "forward_plus",
+      "case": "g4/replayed.png",
+      "kind": "pixels",
+      "region": "below top command bar",
+      "equal": true
+    },
+    {
+      "renderer": "gl_compatibility",
+      "case": "budget/timing.jsonl",
+      "kind": "timing",
+      "equal": true
+    },
+    {
+      "renderer": "gl_compatibility",
+      "case": "corrupt/timing.jsonl",
+      "kind": "timing",
+      "equal": true
+    },
+    {
+      "renderer": "gl_compatibility",
+      "case": "field/timing.jsonl",
+      "kind": "timing",
+      "equal": true
+    },
+    {
+      "renderer": "gl_compatibility",
+      "case": "late/timing.jsonl",
+      "kind": "timing",
+      "equal": true
+    },
+    {
+      "renderer": "gl_compatibility",
+      "case": "late-particles/timing.jsonl",
+      "kind": "timing",
+      "equal": true
+    },
+    {
+      "renderer": "gl_compatibility",
+      "case": "mesh/timing.jsonl",
+      "kind": "timing",
+      "equal": true
+    },
+    {
+      "renderer": "gl_compatibility",
+      "case": "mixed/timing.jsonl",
+      "kind": "timing",
+      "equal": true
+    },
+    {
+      "renderer": "gl_compatibility",
+      "case": "mixed-repeat/timing.jsonl",
+      "kind": "timing",
+      "equal": true
+    },
+    {
+      "renderer": "gl_compatibility",
+      "case": "mixed-ui/timing.jsonl",
+      "kind": "timing",
+      "equal": true
+    },
+    {
+      "renderer": "gl_compatibility",
+      "case": "overflow/timing.jsonl",
+      "kind": "timing",
+      "equal": true
+    },
+    {
+      "renderer": "gl_compatibility",
+      "case": "particles/timing.jsonl",
+      "kind": "timing",
+      "equal": true
+    },
+    {
+      "renderer": "gl_compatibility",
+      "case": "corrupt/frames/frame00000000.png",
+      "kind": "pixels",
+      "region": "whole frame",
+      "equal": true
+    },
+    {
+      "renderer": "gl_compatibility",
+      "case": "field/frames/frame00000000.png",
+      "kind": "pixels",
+      "region": "whole frame",
+      "equal": true
+    },
+    {
+      "renderer": "gl_compatibility",
+      "case": "field/frames/frame00000001.png",
+      "kind": "pixels",
+      "region": "whole frame",
+      "equal": true
+    },
+    {
+      "renderer": "gl_compatibility",
+      "case": "late/frames/frame00000000.png",
+      "kind": "pixels",
+      "region": "whole frame",
+      "equal": true
+    },
+    {
+      "renderer": "gl_compatibility",
+      "case": "late/frames/frame00000001.png",
+      "kind": "pixels",
+      "region": "whole frame",
+      "equal": true
+    },
+    {
+      "renderer": "gl_compatibility",
+      "case": "late-particles/frames/frame00000000.png",
+      "kind": "pixels",
+      "region": "whole frame",
+      "equal": true
+    },
+    {
+      "renderer": "gl_compatibility",
+      "case": "late-particles/frames/frame00000001.png",
+      "kind": "pixels",
+      "region": "whole frame",
+      "equal": true
+    },
+    {
+      "renderer": "gl_compatibility",
+      "case": "mesh/frames/frame00000000.png",
+      "kind": "pixels",
+      "region": "whole frame",
+      "equal": true
+    },
+    {
+      "renderer": "gl_compatibility",
+      "case": "mesh/frames/frame00000001.png",
+      "kind": "pixels",
+      "region": "whole frame",
+      "equal": true
+    },
+    {
+      "renderer": "gl_compatibility",
+      "case": "mixed/frames/frame00000000.png",
+      "kind": "pixels",
+      "region": "whole frame",
+      "equal": true
+    },
+    {
+      "renderer": "gl_compatibility",
+      "case": "mixed/frames/frame00000001.png",
+      "kind": "pixels",
+      "region": "whole frame",
+      "equal": true
+    },
+    {
+      "renderer": "gl_compatibility",
+      "case": "mixed-repeat/frames/frame00000000.png",
+      "kind": "pixels",
+      "region": "whole frame",
+      "equal": true
+    },
+    {
+      "renderer": "gl_compatibility",
+      "case": "mixed-repeat/frames/frame00000001.png",
+      "kind": "pixels",
+      "region": "whole frame",
+      "equal": true
+    },
+    {
+      "renderer": "gl_compatibility",
+      "case": "mixed-ui/frames/frame00000000.png",
+      "kind": "pixels",
+      "region": "below top command bar",
+      "equal": true
+    },
+    {
+      "renderer": "gl_compatibility",
+      "case": "mixed-ui/frames/frame00000001.png",
+      "kind": "pixels",
+      "region": "below top command bar",
+      "equal": true
+    },
+    {
+      "renderer": "gl_compatibility",
+      "case": "particles/frames/frame00000000.png",
+      "kind": "pixels",
+      "region": "whole frame",
+      "equal": true
+    },
+    {
+      "renderer": "gl_compatibility",
+      "case": "particles/frames/frame00000001.png",
+      "kind": "pixels",
+      "region": "whole frame",
+      "equal": true
+    },
+    {
+      "renderer": "gl_compatibility",
+      "case": "g4/delayed/frames/frame00000000.png",
+      "kind": "pixels",
+      "region": "whole frame",
+      "equal": true
+    },
+    {
+      "renderer": "gl_compatibility",
+      "case": "g4/delayed/frames/frame00000001.png",
+      "kind": "pixels",
+      "region": "whole frame",
+      "equal": true
+    },
+    {
+      "renderer": "gl_compatibility",
+      "case": "g4/delayed/frames/frame00000002.png",
+      "kind": "pixels",
+      "region": "whole frame",
+      "equal": true
+    },
+    {
+      "renderer": "gl_compatibility",
+      "case": "g4/normal/frames/frame00000000.png",
+      "kind": "pixels",
+      "region": "whole frame",
+      "equal": true
+    },
+    {
+      "renderer": "gl_compatibility",
+      "case": "g4/normal/frames/frame00000001.png",
+      "kind": "pixels",
+      "region": "whole frame",
+      "equal": true
+    },
+    {
+      "renderer": "gl_compatibility",
+      "case": "g4/normal/frames/frame00000002.png",
+      "kind": "pixels",
+      "region": "whole frame",
+      "equal": true
+    },
+    {
+      "renderer": "gl_compatibility",
+      "case": "g4/replayed.png",
+      "kind": "pixels",
+      "region": "below top command bar",
+      "equal": true
+    }
+  ]
+}

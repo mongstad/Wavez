@@ -5,13 +5,13 @@ import unittest
 from decimal import Decimal
 import numpy as np
 
-from simscope_export import SceneCapture
+from wavez_export import SceneCapture
 
-from simscope_export.analysis import SourceSnapshot,Context,AnalysisError
-from simscope_export.analysis.contracts import SharedBudget,MIB
-from simscope_export.analysis import selectors as S
-from simscope_export.analysis.native_analysis import run
-from simscope_export.analysis.result_store import ResultCache
+from wavez_export.analysis import SourceSnapshot,Context,AnalysisError
+from wavez_export.analysis.contracts import SharedBudget,MIB
+from wavez_export.analysis import selectors as S
+from wavez_export.analysis.native_analysis import run
+from wavez_export.analysis.result_store import ResultCache
 from tests.g4.fixtures import scene,HIGH_ID
 
 

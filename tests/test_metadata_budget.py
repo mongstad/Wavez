@@ -1,8 +1,8 @@
 import tempfile
 import unittest
 from pathlib import Path
-from simscope_export import SceneReader, MetadataCapacityError
-from simscope_export.analysis import Context, SourceSnapshot
+from wavez_export import SceneReader, MetadataCapacityError
+from wavez_export.analysis import Context, SourceSnapshot
 from tests.metadata_fixture import generate, arrays
 
 

@@ -1,8 +1,8 @@
 import unittest
 import numpy as np
 
-from simscope_export.analysis import AnalysisError,Context
-from simscope_export.analysis.periods import analyze,autocorrelation,peaks
+from wavez_export.analysis import AnalysisError,Context
+from wavez_export.analysis.periods import analyze,autocorrelation,peaks
 
 
 class PeriodTests(unittest.TestCase):

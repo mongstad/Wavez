@@ -13,7 +13,7 @@ import subprocess
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE_PATHS = ("viewer", "simscope_export", "examples", "tests")
+SOURCE_PATHS = ("viewer", "wavez_export", "examples", "tests")
 
 
 def write(path, value):

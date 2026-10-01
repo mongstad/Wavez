@@ -8,9 +8,9 @@ import time
 import unittest
 
 from tests.g4.fixtures import scene,HIGH_ID
-from simscope_export.analysis.contracts import float_token, parse_float_token
-from simscope_export.analysis import SourceSnapshot
-from simscope_export.analysis import selectors as S
+from wavez_export.analysis.contracts import float_token, parse_float_token
+from wavez_export.analysis import SourceSnapshot
+from wavez_export.analysis import selectors as S
 
 ROOT=Path(__file__).resolve().parents[1]
 

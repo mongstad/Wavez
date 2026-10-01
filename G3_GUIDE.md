@@ -68,7 +68,7 @@ the optional surface-extraction extra.
 
 ```python
 import numpy as np
-from simscope_export import SceneCapture, SceneReader
+from wavez_export import SceneCapture, SceneReader
 
 # Array is z,y,x with x fastest. Origin is the first sample, not the box corner.
 z, y, x = np.meshgrid(np.arange(8), np.arange(6), np.arange(10), indexing="ij")

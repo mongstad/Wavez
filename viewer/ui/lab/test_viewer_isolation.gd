@@ -30,7 +30,7 @@ func run() -> void:
 	var original_project_theme = ProjectSettings.get_setting("gui/theme/custom", "")
 	var original_main = ProjectSettings.get_setting("application/run/main_scene")
 	Profile.enabled = true; Profile.reset()
-	var theme = load("res://ui/theme/simscope_theme.gd").new()
+	var theme = load("res://ui/theme/wavez_theme.gd").new()
 	var viewport := SubViewport.new(); viewport.size = Vector2i(1440, 900); viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
 	root.add_child(viewport)
 	var lab = load("res://ui/lab/ui_laboratory.gd").new(); lab.manage_window = false; viewport.add_child(lab)
@@ -39,7 +39,7 @@ func run() -> void:
 	# Exercise presentation state and rebuild the optional resource, without attaching it to Viewer.
 	lab.tabs.current_tab = 1; lab.specimens.scientific.editor.text = "2e-20"; lab.specimens.scientific.commit()
 	lab.specimens.disclosure.set_expanded(false)
-	theme = load("res://ui/theme/simscope_theme.gd").new()
+	theme = load("res://ui/theme/wavez_theme.gd").new()
 	lab.theme = theme
 	await settle()
 	var activity := Profile.report(); Profile.enabled = false

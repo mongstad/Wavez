@@ -1,7 +1,7 @@
 extends Window
 ## Explicit theme/window boundary; fixed title/actions, scrolling body; close != application cancel.
 signal action_requested(action_id: StringName)
-const T = preload("res://ui/theme/simscope_tokens.tres")
+const T = preload("res://ui/theme/wavez_tokens.tres")
 var panel := PanelContainer.new()
 var layout := VBoxContainer.new()
 var heading := Label.new()
@@ -12,7 +12,7 @@ var return_focus: Control
 
 func _init() -> void:
 	visible = false; transient = true; exclusive = true
-	theme = preload("res://ui/theme/simscope_dark.tres")
+	theme = preload("res://ui/theme/wavez_dark.tres")
 	panel.theme_type_variation = &"PopupSurface"; add_child(panel)
 	panel.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	panel.add_child(layout); layout.add_child(heading); layout.add_child(scroll); layout.add_child(actions)

@@ -1,8 +1,8 @@
 from decimal import Decimal
 import unittest
 from tests import test_comparisons as fixtures
-from simscope_export.analysis.linked_plots import run
-from simscope_export.analysis import AnalysisError
+from wavez_export.analysis.linked_plots import run
+from wavez_export.analysis import AnalysisError
 
 
 class LinkedTests(unittest.TestCase):

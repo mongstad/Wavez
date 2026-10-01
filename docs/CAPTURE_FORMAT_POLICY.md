@@ -24,4 +24,4 @@ SSC version 4, scene inspection v2, G4 inspection v3 and render jobs v1/v2 are
 separate versioned contracts. Existing recipes tied to old capture identities need
 recreation for newly exported captures; recipes are not relabeled automatically.
 External research simulations must update their integrations to the current API;
-they impose no runtime compatibility requirement on SimScope.
+they impose no runtime compatibility requirement on Wavez.

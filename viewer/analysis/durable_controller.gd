@@ -21,7 +21,7 @@ func setup(controller) -> void:
 	temporal = controller;viewer = temporal.viewer;panel = viewer._section("Analysis export and state")
 	status = Label.new();status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART;panel.add_child(status)
 	status.text = "Export complete values or save the view with selections and analysis."
-	folder_name = field("New folder name","simscope-analysis")
+	folder_name = field("New folder name","wavez-analysis")
 	quota = field("Output limit (MiB)","256")
 	cpu_limit = field("CPU time limit (seconds)","120");wall_limit = field("Elapsed time limit (seconds)","150")
 	include_members = viewer._check(panel,"Include selection members",true,func(_v):pass)

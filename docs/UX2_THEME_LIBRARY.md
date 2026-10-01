@@ -76,8 +76,8 @@ A fresh checkout requires Godot's normal asset import before running scripts. En
 
 ## Theme and token ownership
 
-- [simscope_tokens.gd](../viewer/ui/theme/simscope_tokens.gd) defines the typed token schema and accepted defaults. [simscope_tokens.tres](../viewer/ui/theme/simscope_tokens.tres) is its canonical instance; it deliberately contains no duplicate values.
-- [simscope_theme.gd](../viewer/ui/theme/simscope_theme.gd) derives StyleBoxes, native control items and semantic type variations. [simscope_dark.tres](../viewer/ui/theme/simscope_dark.tres) is the loadable Theme entry point. Edit tokens/builder, not a serialized copy of generated styles. Consumers treat this shared resource as immutable; build a new instance for an isolated preview.
+- [wavez_tokens.gd](../viewer/ui/theme/wavez_tokens.gd) defines the typed token schema and accepted defaults. [wavez_tokens.tres](../viewer/ui/theme/wavez_tokens.tres) is its canonical instance; it deliberately contains no duplicate values.
+- [wavez_theme.gd](../viewer/ui/theme/wavez_theme.gd) derives StyleBoxes, native control items and semantic type variations. [wavez_dark.tres](../viewer/ui/theme/wavez_dark.tres) is the loadable Theme entry point. Edit tokens/builder, not a serialized copy of generated styles. Consumers treat this shared resource as immutable; build a new instance for an isolated preview.
 - [ui_scale.gd](../viewer/ui/theme/ui_scale.gd) applies scale **once** at an explicitly owned Window. Fonts, padding and component minimums remain logical units. Do not also multiply tokens or `Control.scale`. Laboratory SubViewports use their own logical size override, without modifying export viewport conventions.
 - [SVG icons](../viewer/ui/icons/) use Godot's DPITexture importer, preserving SVG source in imported resources and re-rasterizing for the active viewport. The builder caches color-mapped icon resources. No OS symbol font or emoji supplies commands. [Godot DPITexture documentation](https://docs.godotengine.org/en/stable/classes/class_dpitexture.html) describes this per-viewport behavior; the API is marked experimental, so revalidate on an engine upgrade.
 - The existing Godot fallback sans remains the body face. FontVariation's 0.5 emboldening supplies heading emphasis without another sans font. [DejaVu Sans Mono 2.37](../viewer/ui/fonts/DejaVuSansMono.ttf) is bundled for numeric roles, with its [original notices](../viewer/ui/fonts/LICENSE-DejaVu.txt). No system substitution is needed.
@@ -89,7 +89,7 @@ const Action = preload("res://ui/components/action_button.gd")
 const Number = preload("res://ui/components/number_field.gd")
 
 func build_example(parent: Control) -> void:
-    parent.theme = preload("res://ui/theme/simscope_dark.tres")
+    parent.theme = preload("res://ui/theme/wavez_dark.tres")
     var action = Action.new()
     action.configure(&"example.apply", "Apply example", &"PrimaryButton")
     parent.add_child(action)

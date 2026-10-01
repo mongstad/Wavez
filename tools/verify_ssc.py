@@ -4,9 +4,9 @@ from pathlib import Path
 import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from simscope_export import SceneReader, MetadataCapacityError
-from simscope_export.metadata_budget import DEFAULT_METADATA_BYTES
-from simscope_export.field_statistics import verify as verify_statistics
+from wavez_export import SceneReader, MetadataCapacityError
+from wavez_export.metadata_budget import DEFAULT_METADATA_BYTES
+from wavez_export.field_statistics import verify as verify_statistics
 
 
 def verify(path, *, metadata_bytes=DEFAULT_METADATA_BYTES):

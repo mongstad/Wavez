@@ -1,6 +1,6 @@
 # Development checkpoints
 
-SimScope is the final name. Keep the project root unversioned. Git is the authoritative
+WAVEZ is the application brand; use Wavez in ordinary prose. Keep the project root unversioned. Git is the authoritative
 history; preserve existing commits and use meaningful completed checkpoints, not trivial
 per-edit commits. Push accepted checkpoints to the private origin. Never commit secrets,
 local environments, raw scientific datasets, generated captures or profiling output.

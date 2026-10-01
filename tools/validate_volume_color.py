@@ -11,7 +11,7 @@ import numpy as np
 from PIL import Image
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from simscope_export import SceneCapture, SceneReader
+from wavez_export import SceneCapture, SceneReader
 from tools.validate_volume_opacity import run_native, digest
 
 
@@ -53,7 +53,7 @@ def main():
     export=out/'export';export.mkdir();state=json.loads((out/'export-state.json').read_text())
     render=dict(version=1,capture_path=str(source),state=state,start_time=row['time'],end_time=row['time'],fps=4,playback_rate=1.,width=960,height=640,output_path=str(export/'color.mp4'),camera_mode='locked',orbit_speed=0.,quality='high',keep_frames=True,inspection_sidecars=True,ffmpeg_path=ffmpeg)
     (export/'job.json').write_text(json.dumps(render))
-    run_native(base+['--fixed-fps','4','--disable-vsync','--','--simscope-render-job='+str(export/'job.json')],export,env)
+    run_native(base+['--fixed-fps','4','--disable-vsync','--','--wavez-render-job='+str(export/'job.json')],export,env)
     assert json.loads((export/'progress.json').read_text())['stage']=='complete'
     assert np.array_equal(np.asarray(Image.open(out/'density-percentile.png')),np.asarray(Image.open(export/'frames/frame00000000.png')))
     sidecar=json.loads((export/'inspection-00000000.json').read_text())
@@ -62,7 +62,7 @@ def main():
     if not a.real_capture:
         failed=out/'invalid-export';failed.mkdir();bad=render.copy();bad.update(state=json.loads((out/'invalid-export-state.json').read_text()),start_time=2.,end_time=2.,output_path=str(failed/'invalid.mp4'))
         (failed/'job.json').write_text(json.dumps(bad))
-        result=subprocess.run(base+['--','--simscope-render-job='+str(failed/'job.json')],cwd=ROOT,env=env,text=True,capture_output=True,timeout=120)
+        result=subprocess.run(base+['--','--wavez-render-job='+str(failed/'job.json')],cwd=ROOT,env=env,text=True,capture_output=True,timeout=120)
         (failed/'native.log').write_text(result.stdout+result.stderr)
         progress=json.loads((failed/'progress.json').read_text())
         assert result.returncode!=0 and progress['stage']=='failed' and 'Log color unavailable' in progress['message']

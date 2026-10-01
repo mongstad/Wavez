@@ -8,8 +8,8 @@ var frames: Array = []
 var checked_ms := -1000
 var generation := -1
 var axis_signature := ""
-var field_color := preload("res://ui/theme/simscope_tokens.tres").color(&"accent.primary")
-var scene_color := preload("res://ui/theme/simscope_tokens.tres").color(&"identity.teal")
+var field_color := preload("res://ui/theme/wavez_tokens.tres").color(&"accent.primary")
+var scene_color := preload("res://ui/theme/wavez_tokens.tres").color(&"identity.teal")
 var overlay: Control
 
 class CoverageOverlay extends Control:

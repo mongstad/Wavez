@@ -1,6 +1,6 @@
 # Capture format and API
 
-For new layered work, use **SIMSCP4 with a `.ssc` suffix** and explicit `SceneCapture` / `SceneReader`. This is a current overview, backed by the [G3 wire contract](<../G3_FORMAT.md>) and [implementation](<../simscope_export/scene.py>). The [public API](../SIMSCOPE_API.md) documents the modern entry points.
+For new layered work, use **SIMSCP4 with a `.ssc` suffix** and explicit `SceneCapture` / `SceneReader`. This is a current overview, backed by the [G3 wire contract](<../G3_FORMAT.md>) and [implementation](<../wavez_export/scene.py>). The [public API](../SIMSCOPE_API.md) documents the modern entry points.
 The [capture format policy](CAPTURE_FORMAT_POLICY.md) defines the sole supported
 capture generation. Readers verify SIMSCP4 magic and version independently of
 suffix; new files should use `.ssc`.
@@ -14,7 +14,7 @@ suffix; new files should use `.ssc`.
 ## Current Python interface
 
 ```python
-from simscope_export import SceneCapture, SceneReader
+from wavez_export import SceneCapture, SceneReader
 
 # Parent exists; path must not already exist.
 capture = SceneCapture(path, objects=objects, metadata=metadata,

@@ -5,11 +5,11 @@ import unittest
 
 import numpy as np
 
-from simscope_export import SceneCapture
-from simscope_export.analysis import AnalysisError,Context,SourceSnapshot
-from simscope_export.analysis.contracts import parse_float_token
-from simscope_export.analysis import selectors as S
-from simscope_export.analysis.selection_jobs import dispatch
+from wavez_export import SceneCapture
+from wavez_export.analysis import AnalysisError,Context,SourceSnapshot
+from wavez_export.analysis.contracts import parse_float_token
+from wavez_export.analysis import selectors as S
+from wavez_export.analysis.selection_jobs import dispatch
 from tests.g4.fixtures import scene,HIGH_ID
 
 

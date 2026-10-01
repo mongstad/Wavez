@@ -41,10 +41,18 @@ owner-merged in PR #148 at `1a60774`, accepted build 11. Its
 Repositioning the existing orbit center/radius (#120) was owner-merged in PR #152
 at `f82a939`, accepted build 12. Its [review report](ORBIT_CENTER.md) and earlier
 custom-orbit report/evidence retain their historical review-time wording.
-Current authorized work is #153, the sole Ready issue when selected on 2026-10-01:
-[File → Exit](EXIT_MENU.md), **pending owner review**, candidate build 13. Exit is
-available with or without a capture and shares the window close button's normal
-shutdown function; existing worker/job cleanup is unchanged.
+File → Exit (#153) was owner-merged in PR #154 at `d6e4bd8`, accepted build 13.
+Its [review report](EXIT_MENU.md) retains its original review-time wording.
+Current authorized work is #155, the sole Ready issue when selected on 2026-10-01:
+[WAVEZ branding migration](BRANDING_MIGRATION.md), **pending owner review**,
+candidate build 14. The application is WAVEZ (Wavez in ordinary prose).
+Current Python imports use `wavez_export`; capture/schema identifiers and saved
+preferences retain their established contracts. The owner will rename the GitHub
+repository after this task; existing URLs and the local checkout path remain valid.
+
+The historical checkpoints below retain the product name used at the time.
+For current branding, package names and commands, use the migration guide,
+[handbook](SIMSCOPE_HANDBOOK.md), and [Python API](../SIMSCOPE_API.md).
 
 Particle Filters retain membership
 semantics with violet checkboxes; immediate boolean controls share violet switches,
