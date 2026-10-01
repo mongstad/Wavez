@@ -22,6 +22,9 @@ Earlier documents sometimes append new checkpoints above obsolete scope tables. 
 
 ## Viewer shell
 
+With no capture loaded, the viewport shows a centered **Open capture** button.
+Click it to open the existing capture picker, or use **File → Open capture**.
+
 Open **Help → About WAVEZ → Documentation** to reach the repository README
 and its guidance links. The in-app Handbook surface has been removed; this
 repository handbook remains available as a documentation file. The separate
