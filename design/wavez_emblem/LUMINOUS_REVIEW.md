@@ -1,3 +1,5 @@
+> Historical #162 checkpoint, superseded on 2026-10-01. The contained orb remains a useful standalone model; its application-chrome integration was not accepted and has been removed. See [current experiment status](README.md). Approval requests and future-work statements below describe this earlier checkpoint only.
+
 # Wavez luminous orb — #162 refinement checkpoint
 
 **Current review candidate:** `wavez_emblem.contained-luminous.review.blend`,

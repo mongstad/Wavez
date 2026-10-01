@@ -1,0 +1,54 @@
+{
+  "source_sha256": "02a5ba022d37f87d572ef142f71c51fd2cec486b2ac6a0f51847303f272097ca",
+  "source_bytes": 1702240,
+  "vertices": 60816,
+  "triangles": 65768,
+  "maximum_radius": 1.0142,
+  "finite": true,
+  "degenerate_triangles": 0,
+  "action": "Wavez_Drift",
+  "poses": [
+    {
+      "frame": 1,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "frame": 73,
+      "rotation": [
+        4.2748239107403566e-18,
+        0.0,
+        0.20943951606750488
+      ]
+    },
+    {
+      "frame": 145,
+      "rotation": [
+        -8.549647821480713e-18,
+        0.0,
+        2.5648941810080915e-17
+      ]
+    },
+    {
+      "frame": 217,
+      "rotation": [
+        1.2824470905040457e-17,
+        0.0,
+        -0.20943951606750488
+      ]
+    },
+    {
+      "frame": 289,
+      "rotation": [
+        -1.7099295642961426e-17,
+        0.0,
+        -5.129788362016183e-17
+      ]
+    }
+  ],
+  "libraries": 0,
+  "external_images": []
+}
