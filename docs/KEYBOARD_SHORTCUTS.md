@@ -27,8 +27,11 @@ editable. Window-manager-reserved combinations may be intercepted before Wavez
 receives them.
 
 Assigning a duplicate immediately unbinds the previous row in the **draft**.
-There is no warning or confirmation. **Apply** validates, saves and activates the
-map, updates shortcut hints, then closes the editor. **Cancel** or dismissal
+There is no warning or confirmation. **Apply** is disabled until the draft differs
+from the active map, and disables again if all edits are reverted. Starting capture,
+recapturing the current binding, or resetting an already-default map does not enable
+it. Disabled Apply is skipped during keyboard navigation. **Apply** validates,
+saves and activates the map, updates shortcut hints, then closes the editor. **Cancel** or dismissal
 discards all edits. A save failure keeps the editor open and the active map intact.
 Viewport actions and free-camera movement cannot run through this modal editor.
 Existing text-entry, selection and busy-inspection guards remain authoritative.
@@ -95,7 +98,8 @@ with a validation-only autoload. Both source and packaged runs use an isolated
 profile and a second application process to verify persisted preferences. The
 test changes no owner preferences. No engine binaries/templates or generated
 packages are committed. Results and limitations are recorded in
-[issue evidence](evidence/issue-175/README.md).
+[issue evidence](evidence/issue-175/README.md). The subsequent Apply-state review
+change has its own [validation evidence](evidence/issue-175/apply-review/README.md).
 
 ## Owner verification before acceptance
 
@@ -103,6 +107,8 @@ packages are committed. Results and limitations are recorded in
    and Edit → Preferences → Keyboard Shortcuts opens the custom editor. Review
    labels, grouped rows, violet surfaces, focus ring, fixed Cancel/Apply footer
    and scroll feel at normal KDE scaling, physical 4K and a 970 × 600 window.
+   Apply must start disabled, enable after an actual binding change, and disable
+   again when all changes are reverted. Tab/Shift+Tab must skip disabled Apply.
 2. With Reset Camera bound to R, assign R to Frame Scene. Verify Reset Camera
    immediately says Unbound without a warning. Capture Ctrl+Shift+R for Reset
    Camera, then Cancel. Confirm the previously active bindings still work.

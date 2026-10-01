@@ -53,7 +53,7 @@ func setup(owner_shell) -> void:
 	reset.pressed.connect(func(): staged = Bindings.defaults(); listening = ""; notice.hide(); refresh_rows())
 	var space := Control.new(); space.size_flags_horizontal = Control.SIZE_EXPAND_FILL; footer.add_child(space)
 	cancel = Button.new(); cancel.text = "Cancel"; cancel.pressed.connect(dismiss); footer.add_child(cancel)
-	apply_button = Button.new(); apply_button.text = "Apply"; apply_button.theme_type_variation = "PrimaryButton"
+	apply_button = Button.new(); apply_button.text = "Apply"; apply_button.theme_type_variation = "PrimaryButton"; apply_button.disabled = true
 	apply_button.pressed.connect(commit); footer.add_child(apply_button)
 	get_window().size_changed.connect(fit.call_deferred)
 	hide()
@@ -76,6 +76,7 @@ func dismiss() -> void:
 	previous_focus = null
 
 func commit() -> void:
+	if apply_button.disabled: return
 	var error: Error = shell.shortcuts.apply(staged)
 	if error != OK:
 		notice.text = "Could not save shortcuts: " + error_string(error) + ". Current bindings are unchanged."
@@ -91,6 +92,7 @@ func clear_binding(action: String) -> void:
 	listening = ""; staged[action] = 0; notice.hide(); refresh_rows()
 
 func refresh_rows() -> void:
+	apply_button.disabled = staged == shell.shortcuts.active
 	focus_order.clear()
 	for action in rows:
 		var row: Dictionary = rows[action]
@@ -104,7 +106,8 @@ func refresh_rows() -> void:
 		row.clear.disabled = staged[action] == 0
 		focus_order.append(row.key)
 		if not row.clear.disabled: focus_order.append(row.clear)
-	focus_order.append_array([reset, cancel, apply_button])
+	focus_order.append_array([reset, cancel])
+	if not apply_button.disabled: focus_order.append(apply_button)
 	for index in focus_order.size():
 		var control: Control = focus_order[index]
 		var previous := control.get_path_to(focus_order[posmod(index - 1, focus_order.size())])
