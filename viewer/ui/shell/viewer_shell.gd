@@ -524,7 +524,7 @@ func build_menus(row: HBoxContainer) -> void:
 	for title in ["Temporal","Space time","Diagnostics","Compare","Matched runs","Period","Bookmarks","Results"]: command(analysis,title,viewer.tools_ui.open.bind(title),"tool:"+title)
 	for title in ["Mapping","Derive range","Slice","Clipping","Isosurface","Source probe","Performance","Geometry"]: command(tools,title,viewer.tools_ui.open.bind(title),"tool:"+title)
 	var help: PopupMenu = menus.Help.get_popup()
-	command(help,"About WAVEZ",func():
+	command(help,"About",func():
 		var focus := get_viewport().gui_get_focus_owner()
 		if focus != null:previous_focus = weakref(focus)
 		about.open(),"about")

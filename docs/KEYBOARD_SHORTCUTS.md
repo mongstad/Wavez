@@ -8,7 +8,7 @@ based on accepted `main` `0496d12` (owner-merged PR #174).
 ## Editing and persistence
 
 Open **Edit → Preferences → Keyboard Shortcuts**, with or without a capture.
-Help contains About WAVEZ; its old static Shortcuts list is removed.
+Help contains About; its old static Shortcuts list is removed.
 The editor is a custom in-canvas Control with the accepted violet theme, a
 640 × 560 logical-pixel maximum panel, a scrolling list and fixed footer.
 The title leads directly into the list, with no permanent instructions above the

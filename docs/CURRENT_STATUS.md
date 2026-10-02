@@ -1,5 +1,9 @@
 # Current status
 
+Issue #179 changes the Help menu label to **About**, preserving the existing
+About WAVEZ dialog title, content and route. Candidate build 20 is **pending owner
+review**. See [validation and owner checks](evidence/issue-179/README.md).
+
 Issue #176 now restores square outer surfaces after owner feedback. The visible
 shell uses its original styles; custom dialogs have square outer corners. The
 About seam fix remains, and its upper-right X shares the shell's close-button

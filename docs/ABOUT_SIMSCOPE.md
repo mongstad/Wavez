@@ -1,6 +1,7 @@
 # About SimScope — issue #96
 
-Current branding is **Help → About WAVEZ**, with the approved dark artwork.
+Current menu entry is **Help → About**; the dialog title remains **About WAVEZ**,
+with the approved dark artwork.
 See [the migration guide](BRANDING_MIGRATION.md). The original review report below
 retains its historical product name and validation results.
 

@@ -25,7 +25,7 @@ Earlier documents sometimes append new checkpoints above obsolete scope tables. 
 With no capture loaded, the viewport shows a centered **Open capture** button.
 Click it to open the existing capture picker, or use **File → Open capture**.
 
-Open **Help → About WAVEZ → Documentation** to reach the repository README
+Open **Help → About → Documentation** to reach the repository README
 and its guidance links. The in-app Handbook surface has been removed; this
 repository handbook remains available as a documentation file. The separate
 repository link and **Licenses and notices** remain in About.
@@ -46,7 +46,7 @@ source details. State opens Save/Load view preset directly in the platform file 
 Export routes to PNG, video and numerical export. View and the viewport buttons
 provide frame/reset, panel visibility and fullscreen.
 
-**Help → About WAVEZ** shows the full application version, owner logo,
+**Help → About** shows the full application version, owner logo,
 copyright, licensing summary and GitHub link. **Licenses and notices** provides
 the full packaged project and third-party notices without an internet connection.
 About replaces the temporary standalone Version entry and works without a capture;
