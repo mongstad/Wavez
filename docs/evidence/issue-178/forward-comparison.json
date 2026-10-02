@@ -1,0 +1,34 @@
+{
+  "renderer": "forward_plus",
+  "packaged": false,
+  "checks": {
+    "reference": 38,
+    "candidate": 44
+  },
+  "exact_scene_pixel_comparisons": {
+    "empty-1440-1.0": 1858560,
+    "empty-3840-2.0": 7434240,
+    "empty-3840-2.5": 11616000,
+    "particles-cinematic": 1858560,
+    "particles-scientific": 1858560,
+    "field-cinematic": 1858560,
+    "field-scientific": 1858560,
+    "mesh-cinematic": 1858560,
+    "mesh-scientific": 1858560,
+    "mixed-cinematic": 1858560,
+    "mixed-scientific": 1858560
+  },
+  "idle": {
+    "reference": {
+      "callbacks": 173,
+      "draws": 173,
+      "same_pixels": true
+    },
+    "candidate": {
+      "callbacks": 173,
+      "draws": 173,
+      "same_pixels": true
+    }
+  },
+  "failures": []
+}

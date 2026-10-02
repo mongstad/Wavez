@@ -1,0 +1,297 @@
+{
+  "bytes": 2053,
+  "checks": 754,
+  "failures": [],
+  "fields": {
+    "kind": "simscope-view-preset",
+    "settings": {
+      "camera": {
+        "far": 1000.0,
+        "fov": 55.0,
+        "keep_aspect": 1,
+        "near": 0.0500000007450581
+      },
+      "environment": {
+        "background_color": [
+          0.00100000004749745,
+          0.00100000004749745,
+          0.0031999999191612,
+          1.0
+        ],
+        "background_mode": 2,
+        "fog_density": 0.0199999995529652,
+        "fog_enabled": true,
+        "glow_bloom": 0.239999994635582,
+        "glow_enabled": true,
+        "glow_intensity": 1.35000002384186,
+        "glow_strength": 1.54999995231628,
+        "tonemap_exposure": 1.0,
+        "tonemap_mode": 3,
+        "tonemap_white": 1.0
+      },
+      "mesh": {
+        "colormap": "viridis",
+        "legend": false,
+        "lower": -2.0,
+        "upper": 2.0,
+        "wireframe": true
+      },
+      "particles": {
+        "clamp_map": true,
+        "colormap_name": "plasma",
+        "cyclic": false,
+        "invert_map": false,
+        "logarithmic": false,
+        "manual_max": 1.0,
+        "manual_min": 0.0,
+        "normalization_mode": "frame",
+        "show_legend": true
+      },
+      "quality": {
+        "msaa_3d": 0,
+        "scaling_3d_scale": 1.0,
+        "screen_space_aa": 0,
+        "use_debanding": false,
+        "use_taa": false
+      },
+      "view": {
+        "brightness_scale": 1.0,
+        "camera_distance": 9.0,
+        "camera_target": [
+          2.0,
+          3.0,
+          4.0
+        ],
+        "camera_transform": [
+          [
+            0.877582550048828,
+            0.0,
+            -0.479425549507141
+          ],
+          [
+            0.0952471494674683,
+            0.9800665974617,
+            0.174348741769791
+          ],
+          [
+            0.469868957996368,
+            -0.198669329285622,
+            0.860089361667633
+          ],
+          [
+            6.22882080078125,
+            1.21197605133057,
+            11.7408046722412
+          ]
+        ],
+        "clean_view": false,
+        "exposure": 1.7,
+        "free_camera": false,
+        "gamma": 1.0,
+        "orbit_enabled": false,
+        "orbit_speed": 0.08,
+        "pitch": -0.2,
+        "point_scale": 1.25,
+        "yaw": 0.5
+      },
+      "volume": {
+        "colormap": "viridis",
+        "legend": true,
+        "lower": 0.1,
+        "normalization": "linear",
+        "opacity": 0.7,
+        "opacity_lower": 0.2,
+        "opacity_mode": "magnitude",
+        "opacity_upper": 4.0,
+        "step": 0.75,
+        "upper": 5.0
+      }
+    },
+    "version": 1
+  },
+  "file_selected_callback_ms": 2.429,
+  "frame_gaps_ms": [
+    0.62,
+    5.33,
+    6.793,
+    6.946,
+    13.435,
+    0.633,
+    6.843,
+    6.968,
+    6.565,
+    14.086,
+    0.967,
+    6.157,
+    7.386,
+    7.475,
+    13.332,
+    0.942,
+    6.717,
+    7.015,
+    7.049,
+    13.496,
+    0.613,
+    5.788,
+    6.956,
+    6.988,
+    13.097,
+    1.321,
+    6.623,
+    7.036,
+    7.231,
+    14.405,
+    0.725,
+    5.732,
+    6.922,
+    6.926,
+    13.682,
+    0.662,
+    6.561,
+    6.979,
+    6.85,
+    15.423,
+    0.791,
+    4.747,
+    6.915,
+    6.936,
+    15.032,
+    0.771,
+    4.975,
+    7.132,
+    6.72,
+    15.1,
+    0.713,
+    5.105,
+    6.886,
+    6.916,
+    15.415,
+    0.641,
+    4.817,
+    6.92,
+    6.933,
+    88.672,
+    0.633,
+    1.067,
+    6.842,
+    6.986,
+    73.486,
+    1.067,
+    1.802,
+    6.948,
+    6.951,
+    36.942,
+    0.816,
+    3.936,
+    6.957,
+    6.919,
+    20.268,
+    0.239,
+    6.591,
+    6.923,
+    6.878,
+    10.643,
+    3.16,
+    6.913,
+    6.92,
+    6.88,
+    6.925,
+    6.868,
+    28.309,
+    0.163,
+    6.357,
+    6.885,
+    6.911,
+    10.196,
+    3.581,
+    6.927,
+    6.883,
+    6.91
+  ],
+  "memory_static": 85723704,
+  "production": false,
+  "renderer": "gl_compatibility",
+  "timings": [
+    {
+      "five_frames_ms": 24.173,
+      "load_apply_ms": 13.573,
+      "save_callback_ms": 0.181,
+      "save_total_ms": 0.181
+    },
+    {
+      "five_frames_ms": 22.138,
+      "load_apply_ms": 11.366,
+      "save_callback_ms": 0.23,
+      "save_total_ms": 0.23
+    },
+    {
+      "five_frames_ms": 23.115,
+      "load_apply_ms": 11.847,
+      "save_callback_ms": 0.235,
+      "save_total_ms": 0.235
+    },
+    {
+      "five_frames_ms": 22.88,
+      "load_apply_ms": 11.25,
+      "save_callback_ms": 0.215,
+      "save_total_ms": 0.215
+    },
+    {
+      "five_frames_ms": 21.635,
+      "load_apply_ms": 11.303,
+      "save_callback_ms": 0.2,
+      "save_total_ms": 0.2
+    },
+    {
+      "five_frames_ms": 23.461,
+      "load_apply_ms": 10.936,
+      "save_callback_ms": 0.209,
+      "save_total_ms": 0.209
+    },
+    {
+      "five_frames_ms": 21.82,
+      "load_apply_ms": 11.895,
+      "save_callback_ms": 0.264,
+      "save_total_ms": 0.264
+    },
+    {
+      "five_frames_ms": 22.31,
+      "load_apply_ms": 11.475,
+      "save_callback_ms": 0.211,
+      "save_total_ms": 0.211
+    },
+    {
+      "five_frames_ms": 20.864,
+      "load_apply_ms": 12.537,
+      "save_callback_ms": 0.327,
+      "save_total_ms": 0.327
+    },
+    {
+      "five_frames_ms": 21.159,
+      "load_apply_ms": 12.153,
+      "save_callback_ms": 0.383,
+      "save_total_ms": 0.383
+    },
+    {
+      "five_frames_ms": 21.253,
+      "load_apply_ms": 12.341,
+      "save_callback_ms": 0.246,
+      "save_total_ms": 0.246
+    },
+    {
+      "five_frames_ms": 20.721,
+      "load_apply_ms": 12.615,
+      "save_callback_ms": 0.248,
+      "save_total_ms": 0.248
+    }
+  ],
+  "source_hashes_unchanged": {
+    "particles.ssc": "e1207ebba291085dd61a82eeb6a785a861675fa91376ef2295fa56b02c502a02",
+    "different.ssc": "079e9a8c53303d7ced8ede3c6ab49f646a7204ad6385d18e1c2d2b72265c681d",
+    "scene.ssc": "fdaeb98864066f3f7d75d1e6b35944ac8c93327f3a5f7bfb392cdb99aa117481"
+  },
+  "production_stat_unchanged": false,
+  "rss_peak": 299151360,
+  "cpu_seconds": 1.52,
+  "total_seconds": 2.4108844510010385
+}

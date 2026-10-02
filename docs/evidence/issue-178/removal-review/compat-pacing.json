@@ -1,0 +1,182 @@
+{
+  "checks": 290,
+  "failures": [],
+  "phases": {
+    "field_after_orbit": {
+      "callbacks": 175,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "field_channel": {
+      "callbacks": 175,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "field_free_camera_stationary": {
+      "callbacks": 175,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "field_paused_again": {
+      "callbacks": 175,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "field_performance": {
+      "callbacks": 175,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "field_ready": {
+      "callbacks": 174,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "field_resized": {
+      "callbacks": 174,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "field_seek": {
+      "callbacks": 174,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "field_zero_speed_orbit": {
+      "callbacks": 175,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "mesh_after_orbit": {
+      "callbacks": 176,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "mesh_free_camera_stationary": {
+      "callbacks": 175,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "mesh_paused_again": {
+      "callbacks": 175,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "mesh_performance": {
+      "callbacks": 175,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "mesh_ready": {
+      "callbacks": 175,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "mesh_resized": {
+      "callbacks": 174,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "mesh_seek": {
+      "callbacks": 175,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "mesh_zero_speed_orbit": {
+      "callbacks": 175,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "mixed_after_orbit": {
+      "callbacks": 176,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "mixed_channel": {
+      "callbacks": 175,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "mixed_free_camera_stationary": {
+      "callbacks": 175,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "mixed_paused_again": {
+      "callbacks": 175,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "mixed_performance": {
+      "callbacks": 175,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "mixed_ready": {
+      "callbacks": 173,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "mixed_resized": {
+      "callbacks": 175,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "mixed_seek": {
+      "callbacks": 174,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "mixed_zero_speed_orbit": {
+      "callbacks": 175,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "particles_after_orbit": {
+      "callbacks": 175,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "particles_free_camera_stationary": {
+      "callbacks": 175,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "particles_paused_again": {
+      "callbacks": 175,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "particles_performance": {
+      "callbacks": 175,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "particles_ready": {
+      "callbacks": 173,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "particles_resized": {
+      "callbacks": 174,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "particles_seek": {
+      "callbacks": 175,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "particles_zero_speed_orbit": {
+      "callbacks": 176,
+      "draws": 0,
+      "same_pixels": true
+    }
+  },
+  "source_hashes_unchanged": {
+    "mixed.ssc": "d5de92537e0ba42e46e5bc8aaa4d22c12ea24d352f035755a3952977f296df3b",
+    "mesh.ssc": "cda7a7ab4ad672adfe494efbaa377cdb21eabd223aa6dd6431aef0736576dd6d",
+    "field.ssc": "c30545e4c2b4b5cea7682d8582a53c631932025576757e09739e9074f121809a",
+    "particles.ssc": "123236340066efae9e213041dc46ee8646877690e9f1456ee2e30bb012bf4723"
+  }
+}

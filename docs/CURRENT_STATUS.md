@@ -1,5 +1,10 @@
 # Current status
 
+Issue #178 removes the decorative starfield entirely, including loaded scenes,
+visual/preset state and export settings. The cinematic sky and scientific layer
+renderers remain. Candidate build 21 is
+**pending owner review**. See [source trace, comparisons and owner checks](evidence/issue-178/removal-review/README.md).
+
 Issue #179 changes the Help menu label to **About**, preserving the existing
 About WAVEZ dialog title, content and route. Candidate build 20 is **pending owner
 review**. See [validation and owner checks](evidence/issue-179/README.md).

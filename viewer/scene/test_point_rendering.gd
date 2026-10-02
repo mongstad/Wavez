@@ -14,7 +14,7 @@ func check(ok: bool, label: String) -> void:
 func presentation(viewer) -> Dictionary:
 	var state := VisualState.snapshot(viewer)
 	return {"environment":state.environment, "background_color":viewer.environment.background_color,
-		"starfield":state.starfield_visible, "preset":state.preset,
+		"preset":state.preset,
 		"exposure":viewer.exposure, "bloom_editable":viewer.glow_slider.editable}
 
 func run() -> void:
@@ -26,7 +26,7 @@ func run() -> void:
 	for preset in ["Scientific", "Cinematic"]:
 		viewer._apply_preset(preset)
 		check(viewer.environment.glow_enabled == (preset == "Cinematic"), preset + " preset bloom")
-		check(viewer.starfield.visible == (preset == "Cinematic"), preset + " preset backdrop")
+		check(viewer.environment.background_mode == (Environment.BG_SKY if preset == "Cinematic" else Environment.BG_COLOR), preset + " preset backdrop")
 		viewer.environment.glow_intensity = 0.73
 		viewer.environment.tonemap_exposure = 1.27
 		viewer.exposure = 1.61
