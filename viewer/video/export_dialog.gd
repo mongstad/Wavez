@@ -253,7 +253,6 @@ func start_export() -> void:
 		var clean := rendering.selected == 2
 		job.state.clean_view = clean
 		job.state.preset = "Scientific" if clean else "Cinematic"
-		job.state.starfield_visible = not clean
 		job.state.environment.glow_enabled = not clean
 		job.state.environment.fog_enabled = not clean
 		job.state.environment.background_mode = Environment.BG_COLOR if clean else Environment.BG_SKY

@@ -115,8 +115,6 @@ var overlay_visible := true
 var shell
 var _timeline_guard := false
 var environment: Environment
-var starfield: MultiMeshInstance3D
-var capture_starfield: Node3D
 var guide_mesh := MeshInstance3D.new()
 var visual_panel: PanelContainer
 var camera_target := Vector3.ZERO
@@ -160,7 +158,6 @@ func _ready() -> void:
 		file_dialog_preferences = preload("res://ui/file_dialog_preferences.gd").new()
 		add_child(file_dialog_preferences)
 	_build_world()
-	_build_starfield()
 	_build_particles()
 	_build_ui()
 	_build_visual_ui()
@@ -210,74 +207,6 @@ func _build_world() -> void:
 	camera.far = 1000.0
 	add_child(camera)
 
-
-func _star_material() -> ShaderMaterial:
-	var shader := Shader.new()
-	shader.code = """
-shader_type spatial;
-render_mode unshaded, cull_disabled, depth_draw_never, blend_add;
-
-varying vec4 particle_data;
-
-void vertex() {
-    particle_data = INSTANCE_CUSTOM;
-    float scale = length(MODEL_MATRIX[0].xyz);
-    MODELVIEW_MATRIX = VIEW_MATRIX * mat4(
-        vec4(INV_VIEW_MATRIX[0].xyz * scale, 0.0),
-        vec4(INV_VIEW_MATRIX[1].xyz * scale, 0.0),
-        vec4(INV_VIEW_MATRIX[2].xyz * scale, 0.0), MODEL_MATRIX[3]);
-}
-
-void fragment() {
-    vec2 uv = UV * 2.0 - 1.0;
-    float r2 = dot(uv, uv);
-    if (r2 > 1.0) {
-        discard;
-    }
-    float glow = exp(-3.5 * r2);
-    vec3 c = particle_data.rgb * (0.22 + 1.6 * glow);
-    ALBEDO = c;
-    EMISSION = c * (0.8 + 3.0 * glow);
-    ALPHA = particle_data.a * glow;
-}
-"""
-	var mat := ShaderMaterial.new()
-	mat.shader = shader
-	return mat
-
-func _build_starfield() -> void:
-	var mesh := QuadMesh.new()
-	mesh.size = Vector2(0.28, 0.28)
-	mesh.material = _star_material()
-
-	var mm := MultiMesh.new()
-	mm.transform_format = MultiMesh.TRANSFORM_3D
-	mm.use_custom_data = true
-	mm.mesh = mesh
-	var star_count: int = 2400
-	mm.instance_count = star_count
-
-	var rng := RandomNumberGenerator.new()
-	rng.seed = 5800813
-	var shell_r: float = 420.0
-	for i in range(star_count):
-		var dir := Vector3(rng.randf_range(-1.0, 1.0), rng.randf_range(-1.0, 1.0), rng.randf_range(-1.0, 1.0)).normalized()
-		var p := dir * rng.randf_range(shell_r * 0.68, shell_r)
-		var s := rng.randf_range(0.18, 1.00)
-		var temp_t: float = rng.randf()
-		var col := Color.from_hsv(lerpf(0.56, 0.16, pow(temp_t, 1.35)), rng.randf_range(0.08, 0.32), rng.randf_range(0.6, 1.0), rng.randf_range(0.10, 0.35))
-		mm.set_instance_transform(i, Transform3D(Basis().scaled(Vector3.ONE * s), p))
-		mm.set_instance_custom_data(i, col)
-
-	var inst := MultiMeshInstance3D.new()
-	inst.multimesh = mm
-	# Keep the accepted loaded-capture decoration, but exclude it from startup.
-	# Parent visibility cannot be overridden by clean-view or saved starfield state.
-	capture_starfield = Node3D.new()
-	capture_starfield.visible = false
-	add_child(capture_starfield)
-	capture_starfield.add_child(inst)
-	starfield = inst
 
 func _particle_material() -> ShaderMaterial:
 	var shader := Shader.new()
@@ -733,7 +662,6 @@ func _set_clean(value: bool) -> void:
 	environment.background_mode = Environment.BG_COLOR if value else Environment.BG_SKY
 	environment.glow_enabled = not value
 	environment.fog_enabled = not value
-	starfield.visible = not value
 	glow_slider.editable = not value
 	status_label.text = "Scientific view — decorative backdrop and bloom disabled." if value else "Cinematic view — artistic backdrop, halos and bloom enabled."
 
@@ -1113,7 +1041,6 @@ func _open_scene(path: String) -> void:
 	generic_reader = reader;reader_generation = reader.generation
 	reader.configure_cache(decoded_cache_mib*1048576,false)
 	capture = reader.file;capture_path = path;frame_count = reader.frames.size()
-	capture_starfield.show()
 	frame_a = null;frame_b = null;current_index = 0;phase = 0;history.clear();hidden_types.clear();channel_signature = ""
 	color_channel = "fixed";size_channel = "fixed";brightness_channel = "fixed"
 	current_mm.instance_count = 0

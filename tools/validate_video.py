@@ -129,7 +129,7 @@ def main():
     p,j=job_for('1080p 60fps',fps=60);movie(p,j)
     p,j=job_for('slow render repeat',test_frame_delay_ms=25);slow=movie(p,j)
     check(baseline==slow,'identical samples and camera transforms despite per-frame delays')
-    scientific=copy.deepcopy(state);scientific.update(clean_view=True,starfield_visible=False)
+    scientific=copy.deepcopy(state);scientific.update(clean_view=True)
     scientific['environment'].update(glow_enabled=False,fog_enabled=False,background_mode=1)
     p,j=job_for('4K scientific',width=3840,height=2160,end_time=.2,state=scientific);traces=movie(p,j)
     check(all(t['clean_view'] and not t['overlays'] and t['colormap']=='inferno' and t['color_channel']=='temperature' for t in traces),'scientific appearance, mapping and overlays reproduced')

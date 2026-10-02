@@ -23,7 +23,8 @@ Earlier documents sometimes append new checkpoints above obsolete scope tables. 
 ## Viewer shell
 
 With no capture loaded, the viewport retains its cinematic sky without decorative
-star specks and shows a centered **Open capture** button.
+star specks and shows a centered **Open capture** button. Decorative stars have
+also been removed from loaded scenes and exports; scientific particles remain.
 Click it to open the existing capture picker, or use **File → Open capture**.
 
 Open **Help → About → Documentation** to reach the repository README

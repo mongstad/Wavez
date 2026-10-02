@@ -14,7 +14,6 @@ static func snapshot(viewer) -> Dictionary:
 	state.camera = {"fov":viewer.camera.fov, "near":viewer.camera.near, "far":viewer.camera.far, "keep_aspect":viewer.camera.keep_aspect}
 	state.hidden_types = viewer.hidden_types.keys()
 	state.guide_visible = viewer.guide_mesh.visible
-	state.starfield_visible = viewer.starfield.visible
 	state.preset = viewer.selected_preset
 	state.sliders = {}
 	for name in viewer.visual_sliders: state.sliders[name] = viewer.visual_sliders[name].value
@@ -49,7 +48,6 @@ static func apply(viewer, state: Dictionary) -> void:
 	viewer.hidden_types.clear()
 	for value in state.get("hidden_types", []): viewer.hidden_types[int(value)] = true
 	viewer.guide_mesh.visible = state.get("guide_visible", false)
-	viewer.starfield.visible = state.get("starfield_visible", not viewer.clean_view)
 	for key in state.get("environment", {}): viewer.environment.set(key, state.environment[key])
 	viewer.glow_slider.editable = viewer.environment.glow_enabled
 	for key in state.get("viewport", {}): viewer.get_viewport().set(key, state.viewport[key])

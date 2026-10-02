@@ -1,0 +1,62 @@
+{
+	"checks": 37,
+	"display_driver": "Wayland",
+	"environment": {
+		"background_mode": 2,
+		"fog_density": 0.000899999984540045,
+		"fog_enabled": true,
+		"glow_bloom": 0.239999994635582,
+		"glow_enabled": true,
+		"glow_intensity": 1.35000002384186,
+		"glow_strength": 1.54999995231628,
+		"tonemap_exposure": 1.0,
+		"tonemap_mode": 3,
+		"tonemap_white": 1.0
+	},
+	"failures": [],
+	"idle": {
+		"callbacks": 173,
+		"draws": 173,
+		"same_pixels": true
+	},
+	"layouts": [
+		{
+			"actual": "(1440, 900)",
+			"scale": 1.0
+		},
+		{
+			"actual": "(3840, 2160)",
+			"scale": 2.0
+		},
+		{
+			"actual": "(3840, 2160)",
+			"scale": 2.5
+		}
+	],
+	"loaded": {
+		"field": {
+			"camera": "[X: (0.788011, 0.0, -0.615662), Y: (-0.250412, 0.913545, -0.320513), Z: (0.562435, 0.406737, 0.719884), O: (9.978738, 7.14713, 12.84219)]",
+			"clock": 0.0,
+			"records": 5
+		},
+		"mesh": {
+			"camera": "[X: (0.788011, 0.0, -0.615662), Y: (-0.250412, 0.913545, -0.320513), Z: (0.562435, 0.406737, 0.719884), O: (4.015012, 4.403542, 5.638981)]",
+			"clock": 0.0,
+			"records": 5
+		},
+		"mixed": {
+			"camera": "[X: (0.788011, 0.0, -0.615662), Y: (-0.250412, 0.913545, -0.320513), Z: (0.562435, 0.406737, 0.719884), O: (9.978738, 7.14713, 12.84219)]",
+			"clock": 0.0,
+			"records": 15
+		},
+		"particles": {
+			"camera": "[X: (0.788011, 0.0, -0.615662), Y: (-0.250412, 0.913545, -0.320513), Z: (0.562435, 0.406737, 0.719884), O: (4.015012, 4.403542, 5.638981)]",
+			"clock": 0.0,
+			"records": 5
+		}
+	},
+	"packaged": false,
+	"reference": true,
+	"renderer": "forward_plus",
+	"sky_shader": "\nshader_type sky;\nvoid sky() {\n    vec3 d = normalize(EYEDIR);\n    float belt = exp(-pow((d.y + 0.24*d.x) * 5.0, 2.0));\n    float cloud = 0.5 + 0.20*sin(d.x*17.0 + sin(d.z*13.0)) + 0.16*sin(d.z*29.0+d.y*9.0);\n    float dust = 0.6 + 0.4*sin(d.z*22.0+sin(d.x*31.0));\n    COLOR = vec3(0.001, 0.002, 0.006) + belt*cloud*mix(vec3(0.012,0.022,0.043),vec3(0.032,0.014,0.048),dust);\n}\n"
+}

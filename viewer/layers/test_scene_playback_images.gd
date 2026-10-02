@@ -12,7 +12,7 @@ func render(asynchronous: bool, vp: SubViewport) -> Dictionary:
 	view.capture_path = base.path_join("ids.ssc");view.scene_prebuffer_enabled = asynchronous;view.scene_hidden_fast_path = asynchronous
 	view.playing = false;view.orbit_enabled = false
 	vp.add_child(view);view.set_process(false)
-	view._set_clean(false);view.environment.glow_enabled = false;view.environment.fog_enabled = false;view.starfield.visible = false
+	view._set_clean(false);view.environment.glow_enabled = false;view.environment.fog_enabled = false
 	view.overlay_visible = false;view.overlay_panel.visible = false;view.shell.hide();view.resize_handle.visible = false;view.show_legend = false
 	view.color_channel = "scalar";view.size_channel = "visual_size";view.brightness_channel = "visual_brightness"
 	view.trails_enabled = true;view.normalization_mode = "symmetric";view.auto_range = true;view._update_colormap()

@@ -10,7 +10,7 @@ const VIEW := {
 	"brightness_scale":[0.0,5.0], "gamma":[0.2,3.0],
 	"orbit_enabled":true, "orbit_speed":[-0.5,0.5], "free_camera":true,
 	"yaw":[-1e9,1e9], "pitch":[-1e9,1e9], "camera_distance":[0.000001,1e15],
-	"camera_target":"vec3", "camera_transform":"transform", "starfield_visible":true
+	"camera_target":"vec3", "camera_transform":"transform"
 }
 const PARTICLES := {
 	"colormap_name":"colormap", "normalization_mode":["frame","symmetric","manual"],
@@ -45,7 +45,6 @@ static func snapshot(viewer) -> Dictionary:
 			"camera_transform":
 				var t: Transform3D = viewer.camera.transform
 				groups.view[key] = [Visual.vec(t.basis.x),Visual.vec(t.basis.y),Visual.vec(t.basis.z),Visual.vec(t.origin)]
-			"starfield_visible":groups.view[key] = viewer.starfield.visible
 			_:groups.view[key] = viewer.get(key)
 	for key in PARTICLES:groups.particles[key] = viewer.get(key)
 	# An interval's resolved numeric bounds are portable; its source/time provenance is not.
@@ -139,7 +138,6 @@ static func apply(viewer, recipe) -> Dictionary:
 		match key:
 			"camera_target":viewer.camera_target = Visual.vector(value)
 			"camera_transform":viewer.camera.transform = Transform3D(Basis(Visual.vector(value[0]),Visual.vector(value[1]),Visual.vector(value[2])),Visual.vector(value[3]))
-			"starfield_visible":viewer.starfield.visible = value
 			_:viewer.set(key,value)
 	for key in s.get("particles",{}):viewer.set(key,s.particles[key])
 	if s.has("particles"):
