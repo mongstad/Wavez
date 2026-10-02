@@ -25,11 +25,13 @@ keyboard protection. Cancel does not undo deliberate viewport navigation while
 the editor was open. There is no persistent custom camera mode, alternate zoom,
 Free-camera movement model, or serialization field.
 
-Normal wheel zoom still uses the existing factors (0.90 up, 1.11 down) and bounds
-(8 on wheel-up, 500 on wheel-down). A radius outside those bounds remains valid,
-but the next ordinary wheel step can jump to that existing bound. The editor
-shows this limitation explicitly. Frame Scene and Reset Camera retain their
-accepted meanings and close the proposal. Escape retains fullscreen recovery.
+Normal wheel zoom uses a 10% inward step and its exact reciprocal outward.
+Fractional wheel input is proportional, and one event is capped at one notch.
+Limits use the last framed scene bounding radius and camera near/far planes;
+a custom radius outside those limits moves progressively toward them and never
+snaps to a fixed world-unit bound. Frame Scene refreshes the bound and retains
+its accepted target/orientation meaning; Reset and Frame close the proposal.
+Escape retains fullscreen recovery. See [zoom validation](evidence/issue-187/README.md).
 
 **Hide controls / Show controls** collapses the coordinate rows to make room for
 the gizmo. Setup starts collapsed in windows shorter than 720 pixels. Apply and

@@ -1,0 +1,11 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.351 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3070 Ti
+
+libdecor-gtk-WARNING: Failed to initialize GTK
+Failed to load plugin 'libdecor-gtk.so': failed to init
+SCRIPT ERROR: Parse Error: Could not preload resource script "res://ui/shell/test_wheel_zoom.gd".
+          at: GDScript::reload (res://ui/shell/run_wheel_zoom_tests.gd:3)
+SCRIPT ERROR: Parse Error: Could not resolve script "res://ui/shell/test_wheel_zoom.gd".
+          at: GDScript::reload (res://ui/shell/run_wheel_zoom_tests.gd:3)
+ERROR: Failed to load script "res://ui/shell/run_wheel_zoom_tests.gd" with error "Parse error".
+   at: load (modules/gdscript/gdscript_resource_format.cpp:46)

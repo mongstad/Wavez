@@ -65,7 +65,7 @@ func fixture_tests(viewer, kind: String) -> void:
 	viewer.yaw = .6; viewer.pitch = deg_to_rad(120); viewer._update_camera()
 	var distance: float = viewer.camera_distance
 	wheel(viewer, MOUSE_BUTTON_WHEEL_UP)
-	check(is_equal_approx(viewer.camera_distance,maxf(8,distance*.9)) and viewer.camera_target == target, kind + " wheel zoom retains center")
+	check(is_equal_approx(viewer.camera_distance,minf(distance,maxf(maxf(viewer.camera.near*2,viewer.half_extent+viewer.camera.near),distance*.9))) and viewer.camera_target == target, kind + " wheel zoom retains center")
 	var before_pan: Transform3D = viewer.camera.transform
 	viewer.free_camera = true
 	var focused := root.gui_get_focus_owner()

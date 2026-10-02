@@ -1,5 +1,10 @@
 # Current status
 
+Issue #187 fixes mouse-wheel zoom snapping small/large scenes to fixed 8/500
+world-unit limits. Progressive reciprocal zoom now uses scene bounds and camera
+clip planes, preserves custom orbit state and honors fractional input. Candidate
+build 22 is **pending owner review**. See [reproduction, validation and owner checks](evidence/issue-187/README.md).
+
 Issue #178 removes the decorative starfield entirely, including loaded scenes,
 visual/preset state and export settings. The cinematic sky and scientific layer
 renderers remain. Candidate build 21 is
