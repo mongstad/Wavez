@@ -1,4 +1,4 @@
-"""Render outer corners, flush About seams and native mode transitions in source/Linux packages."""
+"""Verify revised square surfaces, flush About seams and shared close controls in source/Linux packages."""
 import argparse
 import json
 import os
@@ -8,7 +8,13 @@ import re
 import subprocess
 
 def run(command, output, label, env, known_packaged_window_cleanup=False, wayland=False):
-    process = subprocess.run(command, capture_output=True, text=True, env=env, timeout=160)
+    try:
+        process = subprocess.run(command, capture_output=True, text=True, env=env, timeout=160)
+    except subprocess.TimeoutExpired as failure:
+        def decoded(value):
+            return value.decode(errors="replace") if isinstance(value, bytes) else (value or "")
+        (output / f'{label}.log').write_text(decoded(failure.stdout) + decoded(failure.stderr))
+        raise
     log = process.stdout + process.stderr
     (output / f'{label}.log').write_text(log)
     checked = log

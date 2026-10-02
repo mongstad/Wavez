@@ -233,6 +233,15 @@ func button(parent: Node, title: String, action: Callable, icon_id := "") -> But
 	control.pressed.connect(action); parent.add_child(control)
 	return control
 
+func close_action(parent: Node, action: Callable, tooltip: String) -> Button:
+	var control := button(parent, "", action, "close")
+	control.custom_minimum_size = Vector2(32, 32)
+	control.theme_type_variation = "IconAction"; control.tooltip_text = tooltip
+	if style_slice != null:
+		control.icon = style_slice.theme.chrome_icon("close")
+		style_slice.animate_buttons(control)
+	return control
+
 func menu(parent: Node, title: String, icon_id: String, entries: Array, action: Callable) -> void:
 	var control := MenuButton.new(); control.flat = false; control.text = title; control.icon = icon(icon_id); control.custom_minimum_size.y = 32
 	parent.add_child(control); decorate_menu(control); menus[title] = control

@@ -1,64 +1,43 @@
-# Restrained outer corners
+# Square outer surfaces and About close control
 
-Issue #176 proposes the accepted About reference radius of **six logical pixels**
-for Wavez-owned outer dialog surfaces and visible normal-window shell chrome.
-Candidate build `v0.1.0.19` is pending owner review.
+Issue #176 now requires square outer corners. The owner rejected the initial
+rounded treatment after observing corner bleed/flicker. Candidate build
+`v0.1.0.19` keeps that single PR build increment and is pending owner review.
 
-`wavez_theme.gd` owns `OUTER_RADIUS` and the shared embedded-dialog body style.
-Embedded Window decoration owns the outer header corners; the body joins the
-header with square top corners and no duplicated top border. This fixes the
-About header/body seam wedges without rounding that internal boundary.
-Existing content, dimensions, focus and action semantics remain authoritative.
+The visible shell uses its original tonal top bar and square status surface in
+all window modes. Rounded texture generation and mode-dependent style swapping
+have been removed. Custom dialog, Window and popup outer styles have zero corner
+radius; the shortcut editor is square and the orbit editor uses its original
+static tonal surface. Nested buttons retain their existing control styling.
+The scientific viewport remains rectangular and its controllers are unchanged.
 
-| Surface | Treatment |
-|---|---|
-| About, Details, confirmations, video/Jobs and other themed AcceptDialog bodies | Square header join; six-pixel outer bottom corners; Window owns outer top corners |
-| Tools window body and reusable DialogShell | Shared body primitive; flush header join, outer bottom corners |
-| Keyboard Shortcuts | One six-pixel outer surface, same accepted padding and fixed footer |
-| Orbit center editor | Static rounded tonal surface, same padding and editor behavior |
-| Seek popup | Existing six-pixel outer PopupPanel treatment retained |
-| Main top bar / bottom status | Only outer top / bottom corners round in normal windowed mode |
-| Maximized / fullscreen shell | Cached square styles; flush screen edges |
-| Scientific viewport and shell/viewport internal joins | Rectangular; no mask, clip, resize, projection or output change |
+The shared dialog body keeps a flush header join without a duplicated top border.
+About uses one square body containing its header and existing scrollable content,
+so there is no separate decorated-header boundary to expose black wedges.
+Its upper-right X, the shell X and shortcut-editor X use `close_action`: the same
+32 × 32 IconAction button, close icon, state styles and hover animation. About's
+header supports dragging; X dismisses About without quitting Wavez. Footer Close,
+Escape, notices, links and viewport fitting retain their behavior. Its former
+32-pixel decorated header is included in the body size.
 
-The shell treatment is on the **visible Wavez chrome surfaces**, not an OS window
-shape/desktop transparency mechanism. The compositor retains its rectangular
-native window bounds and existing resize grips. A tiny cached texture preserves
-the top bar's tonal surface; cached styles swap only when native mode changes.
-There is no new shader, animation or per-frame texture generation. Hidden chrome
-exposes the unchanged rectangular scientific viewport; it is never rounded to
-simulate an OS-shaped window.
-
-#161 remains open and is a separate dialog revamp. Its coordination is conditional
-on landing first, so this issue consumes the current shared styles and #175 editor;
-it does not redesign forms, sizes, controls or File/Tools routing. Real OS-owned
-filesystem dialogs retain their existing platform behavior. Nested controls,
-panels and viewport boundaries are not given new radius styling.
-
-[Validation and limitations](evidence/issue-176/README.md) include native Wayland,
-actual 3840 × 2160 rendered windows at scales 2.0/2.5, Linux release packages,
-KDE window transitions and accepted-main scientific/performance comparisons.
-Physical 4K monitor/compositor scaling and real pointer resize/drag remain owner checks.
+[Revision validation and limitations](evidence/issue-176/revision-1/README.md)
+records both renderers, source and Linux packages, seam/corner pixel checks and
+existing interaction regressions. The earlier evidence directory is preserved
+as a historical record of the unaccepted rounded implementation.
 
 ## Owner verification before acceptance
 
-1. Launch candidate build 19 on Forward+ and Compatibility, including Linux
-   release packages. In a normal window, inspect the outer top-bar and bottom
-   status corners; internal viewport joins must stay square.
-2. Open Help → About WAVEZ and inspect both header/body seam edges closely.
-   No black wedges, transparent slivers or notches should remain. Open its
-   notices view, File → Details, Tools → Mapping/Diagnostics, video export and
-   Jobs; confirm continuous outer surfaces and unchanged content/actions.
-3. Open Edit → Preferences → Keyboard Shortcuts and Navigate → Edit orbit
-   center. Check consistent restrained corners, focus, scrolling, Apply/Cancel,
-   content padding and footer visibility at 970 × 600 and normal sizes.
-4. Drag/resize the normal window using its existing edges. Double-click blank
-   top-bar space or use Maximize, then restore; maximize must sit flush. Minimize
-   and restore. Enter Fullscreen and press Escape; no corner gaps or lost pin state.
-5. Repeat on physical 4K KDE at your normal compositor scale and mixed monitors
-   if used. The automated 4K images exercise rendered window size/content scale,
-   not physical monitor configuration.
-6. Open a capture, play/pause, seek, switch field channels and export a clip;
-   confirm scientific content remains rectangular and behaves as before.
+1. Inspect square shell and dialog outer edges in normal, maximized and fullscreen
+   modes on both renderers. Move, resize and restore windows; look for bleed or
+   edge flicker on your physical displays.
+2. Open About. Inspect both sides of the header/body join and compare its X with
+   the shell X while idle, hovered, focused and pressed. Drag its header and
+   dismiss with X, footer Close and Escape. Check notices and links.
+3. Open Keyboard Shortcuts, orbit center, Details, Tools, video export and Jobs;
+   check square outer surfaces and existing scrolling, actions and footer bounds.
+4. Repeat on physical 4K KDE with your normal compositor scale and mixed monitors
+   if used. Automated 3840 × 2160 windows do not establish physical monitor behavior.
+5. Open a capture, play/pause, seek, switch channels and export a clip; scientific
+   content must remain rectangular and behave as before.
 
-Owner review controls acceptance and merge. No later Ready issue is authorized here.
+Owner review controls acceptance and merge. No next issue is authorized here.

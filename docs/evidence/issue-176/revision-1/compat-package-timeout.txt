@@ -1,0 +1,6 @@
+First Compatibility package attempt completed 184 assertions with no assertion failures,
+but subprocess.run timed out after 160 seconds before returning. It is NOT a suite PASS.
+Command: /tmp/issue176-revision-package-compat/wavez.x86_64 --rendering-method gl_compatibility --display-driver wayland --audio-driver Dummy --resolution 1440x900 -- --rounded-output=/tmp/issue176-revision-package-compat
+The original wrapper did not save stdout/stderr on TimeoutExpired. The wrapper now saves
+them before rethrowing; the separate fresh-package retry passed. No specific timeout
+cause has been established. The retained assertion report does not prove clean shutdown.
