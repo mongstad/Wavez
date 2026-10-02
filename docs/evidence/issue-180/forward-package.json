@@ -1,0 +1,80 @@
+{
+  "checks": 213,
+  "source_sha256_unchanged": "7e2448f09823c3f770c34e92895c02286c7e6ec55054e6880e4dff7589811c64",
+  "renderer": "forward_plus",
+  "packaged": true,
+  "fresh_process_restart": true,
+  "known_engine_cleanup_diagnostics": {
+    "native": {
+      "compatibility_texture_cleanup": [],
+      "packaged_window_cleanup": [
+        "ERROR: Attempt to disconnect a nonexistent connection from 'root:<Window#36507223388>'. Signal: 'focus_entered', callable: ''.\n   at: _disconnect (core/object/object.cpp:1644)\n",
+        "ERROR: Attempt to disconnect a nonexistent connection from 'root:<Window#36507223388>'. Signal: 'tree_exited', callable: ''.\n   at: _disconnect (core/object/object.cpp:1644)\n"
+      ]
+    },
+    "restart": {
+      "compatibility_texture_cleanup": [],
+      "packaged_window_cleanup": []
+    }
+  },
+  "reports": [
+    {
+      "checks": 208,
+      "display_driver": "X11",
+      "executable": "/tmp/issue180-package-forward/wavez.x86_64",
+      "failures": [],
+      "layouts": [
+        {
+          "logical": "(1440.0, 900.0)",
+          "panel": "[P: (400.0, 170.0), S: (640.0, 560.0)]",
+          "scale": 1.0,
+          "scroll_height": 444.0,
+          "window": "(1440, 900)"
+        },
+        {
+          "logical": "(970.0, 600.0)",
+          "panel": "[P: (165.0, 20.0), S: (640.0, 560.0)]",
+          "scale": 1.0,
+          "scroll_height": 444.0,
+          "window": "(970, 600)"
+        },
+        {
+          "logical": "(640.0, 480.0)",
+          "panel": "[P: (16.0, 16.0), S: (608.0, 448.0)]",
+          "scale": 1.0,
+          "scroll_height": 332.0,
+          "window": "(640, 480)"
+        },
+        {
+          "logical": "(1280.0, 697.0)",
+          "panel": "[P: (320.0, 68.5), S: (640.0, 560.0)]",
+          "scale": 2.0,
+          "scroll_height": 444.0,
+          "window": "(2560, 1394)"
+        },
+        {
+          "logical": "(1024.0, 557.6)",
+          "panel": "[P: (192.0, 16.0), S: (640.0, 525.6)]",
+          "scale": 2.5,
+          "scroll_height": 409.0,
+          "window": "(2560, 1394)"
+        }
+      ],
+      "packaged": true,
+      "preference_path": "user://keyboard_shortcuts.cfg",
+      "renderer": "forward_plus",
+      "restart": false
+    },
+    {
+      "checks": 5,
+      "display_driver": "X11",
+      "executable": "/tmp/issue180-package-forward/wavez.x86_64",
+      "failures": [],
+      "layouts": [],
+      "packaged": true,
+      "preference_path": "user://keyboard_shortcuts.cfg",
+      "renderer": "forward_plus",
+      "restart": true
+    }
+  ]
+}

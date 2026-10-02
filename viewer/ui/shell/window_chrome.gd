@@ -32,9 +32,8 @@ func setup(owner_shell, row: HBoxContainer) -> void:
 	for cursor in [Control.CURSOR_FDIAGSIZE, Control.CURSOR_VSIZE, Control.CURSOR_BDIAGSIZE, Control.CURSOR_HSIZE, Control.CURSOR_HSIZE, Control.CURSOR_BDIAGSIZE, Control.CURSOR_VSIZE, Control.CURSOR_FDIAGSIZE]:
 		var grip := Control.new(); grip.mouse_default_cursor_shape = cursor
 		grip.z_index = 10; shell.add_child(grip); grips.append(grip)
-	# Blank bar areas and the brand are the custom title/drag surface.
+	# Blank bar areas remain the custom title/drag surface.
 	shell.bar.gui_input.connect(title_input)
-	shell.brand.gui_input.connect(title_input)
 	shell.title_drag.gui_input.connect(title_input)
 	refresh()
 

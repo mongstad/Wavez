@@ -1,5 +1,12 @@
 # Current status
 
+Issue #180 removes the visible WAVEZ label from the main shell top bar.
+Frame scene, Reset camera and Navigate now start at the existing left margin;
+menus, pin/window controls and blank-area window dragging retain their paths.
+Candidate build 18 is **pending owner review**. Both renderers and Linux release
+packages passed existing regressions; physical 4K/KDE review remains required.
+See [validation and exact owner checks](evidence/issue-180/README.md).
+
 Issue #175 adds **Edit → Preferences → Keyboard Shortcuts**, replacing the Help
 shortcut list with a compact custom violet editor. Captured bindings are staged;
 duplicates unbind their previous action, Cancel discards edits, and Apply saves

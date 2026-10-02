@@ -1,0 +1,112 @@
+{
+  "checks": 659,
+  "failures": [],
+  "layouts": [
+    {
+      "bar": "(1440.0, 48.0)",
+      "dock": "[P: (1080.0, 48.0), S: (360.0, 748.0)]",
+      "logical": "(1440, 900)",
+      "scale": 1.0
+    },
+    {
+      "bar": "(1920.0, 48.0)",
+      "dock": "[P: (1560.0, 48.0), S: (360.0, 928.0)]",
+      "logical": "(1920, 1080)",
+      "scale": 1.0
+    },
+    {
+      "bar": "(1024.0, 48.0)",
+      "dock": "[P: (704.0, 48.0), S: (320.0, 448.0)]",
+      "logical": "(1024, 640)",
+      "scale": 1.0
+    },
+    {
+      "bar": "(1024.0, 48.0)",
+      "dock": "[P: (704.0, 48.0), S: (320.0, 448.0)]",
+      "logical": "(1024, 640)",
+      "scale": 1.25
+    },
+    {
+      "bar": "(1024.0, 48.0)",
+      "dock": "[P: (704.0, 48.0), S: (320.0, 448.0)]",
+      "logical": "(1024, 640)",
+      "scale": 1.5
+    },
+    {
+      "bar": "(1024.0, 48.0)",
+      "dock": "[P: (704.0, 48.0), S: (320.0, 448.0)]",
+      "logical": "(1024, 640)",
+      "scale": 2.0
+    }
+  ],
+  "menu_tree": [
+    "File",
+    "  Open capture",
+    "  Details\u2026",
+    "  State",
+    "    Copy state",
+    "    Save view preset\u2026",
+    "    Load view preset\u2026",
+    "    Save analysis",
+    "    Load analysis",
+    "    Resolve input",
+    "  Export",
+    "    Image",
+    "    Video",
+    "    Data",
+    "  Exit",
+    "Edit",
+    "  Preferences",
+    "    Keyboard Shortcuts",
+    "View",
+    "  Window",
+    "    Fullscreen",
+    "  Global effects",
+    "  Probe marker",
+    "  Guides",
+    "    Grid and axes",
+    "    Domain",
+    "    Data bounds",
+    "    Absorber",
+    "    Imposed regions",
+    "  Viewing preset",
+    "    Cinematic",
+    "    Scientific",
+    "    Temperature",
+    "    Density",
+    "    Velocity",
+    "    Minimal",
+    "Tools",
+    "  Selection",
+    "  Analysis",
+    "    Temporal",
+    "    Space time",
+    "    Diagnostics",
+    "    Compare",
+    "    Matched runs",
+    "    Period",
+    "    Bookmarks",
+    "    Results",
+    "  Mapping",
+    "  Derive range",
+    "  Slice",
+    "  Clipping",
+    "  Isosurface",
+    "  Source probe",
+    "  Performance",
+    "  Geometry",
+    "Help",
+    "  About WAVEZ"
+  ],
+  "renderer": "gl_compatibility",
+  "shell_scientific_activity": {
+    "counters": {},
+    "stages": {}
+  },
+  "menu_contract_matches": true,
+  "source_hashes_unchanged": {
+    "invalid.ssc": "85b88a0128bebf2b8c2c6e7b9030e49cbbb83f2f60ec834420eaade3db477d90",
+    "replacement.ssc": "0f4aefdea6fd33e2cc77baf297aae57a606cac067df06ea61e52e73a8de03479",
+    "scene.ssc": "2f88f48e2aa302ede6987ca3bf2a77d5548c33e6dd0eaf3bcd0d6d309292c51e"
+  }
+}
