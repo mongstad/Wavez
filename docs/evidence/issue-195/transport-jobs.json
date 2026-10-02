@@ -1,0 +1,79 @@
+[
+  {
+    "renderer": "forward_plus",
+    "job": {
+      "capture": "/absolute/path/to/cavity_collapse_torus_channels_240s.ssc",
+      "output": "/absolute/path/to/fresh-output/raw.json",
+      "screenshots": true,
+      "cases": [
+        {
+          "name": "fixed-full",
+          "seconds": 240,
+          "start": 0,
+          "channel": ""
+        },
+        {
+          "name": "radius-full",
+          "seconds": 240,
+          "start": 0,
+          "channel": "radius"
+        }
+      ]
+    }
+  },
+  {
+    "renderer": "gl_compatibility",
+    "job": {
+      "capture": "/absolute/path/to/cavity_collapse_torus_channels_240s.ssc",
+      "output": "/absolute/path/to/fresh-output/raw.json",
+      "screenshots": true,
+      "cases": [
+        {
+          "name": "fixed",
+          "seconds": 90,
+          "start": 0,
+          "channel": ""
+        },
+        {
+          "name": "radius",
+          "seconds": 90,
+          "start": 0,
+          "channel": "radius"
+        },
+        {
+          "name": "reverse",
+          "seconds": 40,
+          "start": 200,
+          "rate": -1,
+          "channel": "radius"
+        },
+        {
+          "name": "quarter-speed",
+          "seconds": 40,
+          "start": 10,
+          "rate": 0.25,
+          "channel": "radius"
+        },
+        {
+          "name": "z-height",
+          "seconds": 40,
+          "start": 40,
+          "channel": "z_height"
+        },
+        {
+          "name": "twist-phase",
+          "seconds": 40,
+          "start": 80,
+          "channel": "twist_phase"
+        },
+        {
+          "name": "fullscreen",
+          "seconds": 40,
+          "start": 120,
+          "channel": "radius",
+          "fullscreen": true
+        }
+      ]
+    }
+  }
+]

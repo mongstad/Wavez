@@ -1,0 +1,114 @@
+diff --git a/viewer/layers/mesh_buffer.gd b/viewer/layers/mesh_buffer.gd
+--- a/viewer/layers/mesh_buffer.gd
++++ b/viewer/layers/mesh_buffer.gd
+@@ -28,0 +29,2 @@
++var pipeline_stages := {}
++var pair_times: Array = []
+@@ -56,0 +59 @@
++	result.pipeline_stages = pipeline_stages.duplicate();result.pair_times = pair_times.duplicate()
+@@ -93 +96 @@
+-			var began := Time.get_ticks_usec();var result := {};var memory := _memory_headroom()
++			var began := Time.get_ticks_usec();var result := {};var stages := {};var memory := _memory_headroom()
+@@ -108 +111,3 @@
+-						result = Prepare.pair(job.object,a,b,job.state,job.budget,job.colors,self)
++						for sample in [a,b]:
++							for name in sample.get("timings",{}):stages[name] = stages.get(name,0.0)+sample.timings[name]
++						result = Prepare.pair(job.object,a,b,job.state,job.budget,job.colors,self,stages)
+@@ -124 +129,4 @@
+-			worker_ms += (Time.get_ticks_usec()-began)/1000.0;working_key = "";in_flight_bytes = 0
++			var elapsed := (Time.get_ticks_usec()-began)/1000.0
++			for name in stages:pipeline_stages[name] = pipeline_stages.get(name,0.0)+stages[name]
++			if pair_times.size() < 4096:pair_times.append(elapsed)
++			worker_ms += elapsed;working_key = "";in_flight_bytes = 0
+@@ -130,0 +139 @@
++	var tick := Time.get_ticks_usec();var stages := {}
+@@ -131,0 +141 @@
++	tick = Prepare.stage(stages,"descriptor_commit_validation",tick)
+@@ -135,0 +146,2 @@
++	stages.merge(decoded.timings)
++	tick = Time.get_ticks_usec()
+@@ -140,0 +153 @@
++	tick = Prepare.stage(stages,"stable_id_validation",tick)
+@@ -145 +158,2 @@
+-	return {"time":entry.time,"count":count,"channels":decoded.channels,"components":decoded.components,"shapes":decoded.shapes,"associations":decoded.associations,"geometry":entry.descriptor.geometry,"has_ids":false,"identity_map":null,"source_index":entry.index,"sequence":entry.sequence,"decoded_bytes":decoded.reserve}
++	Prepare.stage(stages,"topology_validation",tick)
++	return {"timings":stages,"time":entry.time,"count":count,"channels":decoded.channels,"components":decoded.components,"shapes":decoded.shapes,"associations":decoded.associations,"geometry":entry.descriptor.geometry,"has_ids":false,"identity_map":null,"source_index":entry.index,"sequence":entry.sequence,"decoded_bytes":decoded.reserve}
+diff --git a/viewer/layers/mesh_prepare.gd b/viewer/layers/mesh_prepare.gd
+--- a/viewer/layers/mesh_prepare.gd
++++ b/viewer/layers/mesh_prepare.gd
+@@ -5 +5,2 @@
+-static func prepare(obj: Dictionary, a: Dictionary, b: Dictionary, alpha: float, state: Dictionary, budget: int, colors: Array, cancel = null) -> Dictionary:
++static func prepare(obj: Dictionary, a: Dictionary, b: Dictionary, alpha: float, state: Dictionary, budget: int, colors: Array, cancel = null, timings: Dictionary = {}) -> Dictionary:
++	var tick := Time.get_ticks_usec()
+@@ -13,0 +15 @@
++	tick = stage(timings,"pair_validation",tick)
+@@ -20,0 +23 @@
++	tick = stage(timings,"position_conversion",tick)
+@@ -32,0 +36 @@
++	tick = stage(timings,"normal_generation",tick)
+@@ -41,0 +46 @@
++	tick = stage(timings,"scalar_colors",tick)
+@@ -51,0 +57 @@
++	tick = stage(timings,"face_expansion",tick)
+@@ -57,0 +64 @@
++	tick = stage(timings,"index_packing",tick)
+@@ -65,0 +73 @@
++	stage(timings,"array_packing",tick)
+@@ -73,2 +81,3 @@
+-static func pair(obj: Dictionary, a: Dictionary, b: Dictionary, state: Dictionary, budget: int, colors: Array, cancel = null) -> Dictionary:
+-	var result := prepare(obj,a,a,0.0,state,budget,colors,cancel)
++static func pair(obj: Dictionary, a: Dictionary, b: Dictionary, state: Dictionary, budget: int, colors: Array, cancel = null, timings: Dictionary = {}) -> Dictionary:
++	var result := prepare(obj,a,a,0.0,state,budget,colors,cancel,timings)
++	var tick := Time.get_ticks_usec()
+@@ -77,0 +87 @@
++	tick = stage(timings,"pair_validation",tick)
+@@ -85,0 +96 @@
++	tick = stage(timings,"next_positions_bounds",tick)
+@@ -96,0 +108 @@
++	tick = stage(timings,"morph_delta",tick)
+@@ -100,0 +113 @@
++	stage(timings,"morph_packing",tick)
+@@ -101,0 +115,5 @@
++
++static func stage(timings: Dictionary, name: String, since: int) -> int:
++	var now := Time.get_ticks_usec()
++	timings[name] = timings.get(name,0.0)+(now-since)/1000.0
++	return now
+diff --git a/viewer/layers/profile_mesh_pipeline.gd b/viewer/layers/profile_mesh_pipeline.gd
+new file mode 100644
+--- /dev/null
++++ b/viewer/layers/profile_mesh_pipeline.gd
+@@ -0,0 +1,33 @@
++extends SceneTree
++## Saturated rolling-window production benchmark, separate from interactive rate.
++const Viewer = preload("res://main.gd")
++const Buffer = preload("res://layers/mesh_buffer.gd")
++const Job = preload("res://video/render_job.gd")
++func _initialize() -> void:run.call_deferred()
++func run() -> void:
++	var config := {}
++	for arg in OS.get_cmdline_user_args():
++		if arg.begins_with("--mesh-pipeline-job="):config = JSON.parse_string(FileAccess.get_file_as_string(arg.trim_prefix("--mesh-pipeline-job=")))
++	var view = Viewer.new();view.capture_path = config.capture;view.playing = false;view.orbit_enabled = false
++	root.add_child(view);view.set_process(false)
++	var control = view.scene_layers.mesh_playback
++	control.worker.close();control.worker = Buffer.new();control.worker.start();control.invalidate()
++	var id: String = view.scene_layers.states.keys()[0]
++	view.scene_layers.states[id].channel = config.get("channel","")
++	var count := int(config.get("pairs",100));var first := int(config.get("first",100))
++	var began := Time.get_ticks_usec();var consumed := 0;var max_bytes := 0;var max_flight := 0
++	var limit_s := float(config.get("timeout",180))
++	while consumed < count and (Time.get_ticks_usec()-began)/1000000.0 < limit_s:
++		var time: float = view.generic_reader.samples[id][first+consumed].time+.00000001
++		var plan: Dictionary = control.update_budget(time,view.scene_layers.mesh_budget())
++		control.worker.request(plan.signature,plan.jobs,control.cpu_limit)
++		while not control.worker.get_frame(plan.targets[0].key).is_empty():
++			consumed += 1;break
++		var status: Dictionary = control.worker.status()
++		max_bytes = maxi(max_bytes,int(status.bytes));max_flight = maxi(max_flight,int(status.in_flight_bytes))
++		await process_frame
++	var seconds := (Time.get_ticks_usec()-began)/1000000.0
++	var report := {"config":config,"seconds":seconds,"consumed":consumed,"pairs_per_second":consumed/seconds,
++		"cache":control.worker.status(),"max_bytes":max_bytes,"max_in_flight":max_flight,"cpu_limit":control.cpu_limit}
++	Job.write_json(config.output,report);print("PIPELINE ",consumed," pairs / ",seconds," s = ",consumed/seconds," pairs/s")
++	view.free();await process_frame;quit(0 if consumed == count else 1)
