@@ -1,0 +1,7 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+RACE generation settle_ms=27.556
+RACE seek settle_ms=34.519
+RACE shrink settle_ms=20.644
+RACE source settle_ms=55.188
+FIELD PARALLEL: 1800 checks, 0 failures

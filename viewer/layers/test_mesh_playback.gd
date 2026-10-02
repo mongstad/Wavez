@@ -130,10 +130,11 @@ func run() -> void:
 	view.playing = true;view.scene_layers.tick(.1);view.playing = false
 	while controller.buffering:controller.pump();await process_frame
 	check(is_equal_approx(view.requested_time,2.95),"reverse loop clock exact")
-	controller.cpu_limit = 1;controller.request_signature = ""
+	controller.budget_memory_override = {"safe_cache_bytes":0,"available_physical":0,"reserve":0};controller.budget_checked = -1000
 	check(not view.scene_layers.sample(view.requested_time,true).has("pending"),"resident mesh usable under reduced CPU budget")
 	check(controller.staged.is_empty(),"budget refusal releases future GPU stage")
 	# A preview refusal must release the surface without dropping source values.
+	controller.budget_memory_override.clear();controller.budget_signature = ""
 	view.scene_layers.gpu_budget_mib = 0
 	check(await sample(view,1.31,true),"GPU refusal still commits scientific sample")
 	check(view.scene_layers.views.surface.mesh == null and view.scene_layers.views.surface.gpu_bytes == 0,"GPU budget reduction releases resident surface")

@@ -16,7 +16,10 @@ var jobs: Array = []
 var prepared := {}
 var order: Array[String] = []
 var used := 0
-var limit := 128*Memory.MIB
+var limit := 0
+var in_flight_bytes := 0
+var peak_in_flight_bytes := 0
+var pressure_failures := {}
 var error := ""
 var failures := {}
 var completed := 0
@@ -32,7 +35,9 @@ func close() -> void:
 	if thread.is_started():thread.wait_to_finish()
 func request(next_token: String, next_jobs: Array, bytes: int) -> void:
 	mutex.lock()
-	if token != next_token:failures.clear()
+	if token != next_token:failures.clear();pressure_failures.clear()
+	for key in pressure_failures:failures.erase(key)
+	pressure_failures.clear()
 	token = next_token;jobs = next_jobs;limit = bytes;error = ""
 	for old in failures.keys():
 		if not jobs.any(func(job):return job.key == old):failures.erase(old)
@@ -40,7 +45,7 @@ func request(next_token: String, next_jobs: Array, bytes: int) -> void:
 func cancel() -> void:
 	mutex.lock();token += "!";jobs = [];mutex.unlock();wake.post()
 func stopped() -> bool:
-	mutex.lock();var stop := closing or token != working_token or not jobs.any(func(job):return job.key == working_key);mutex.unlock();return stop
+	mutex.lock();var stop := closing or token != working_token or in_flight_bytes > limit or not jobs.any(func(job):return job.key == working_key);mutex.unlock();return stop
 func get_frame(key: String) -> Dictionary:
 	mutex.lock();var value: Dictionary = prepared.get(key,{})
 	if value.get("token") != token:value = {}
@@ -48,7 +53,7 @@ func get_frame(key: String) -> Dictionary:
 	mutex.unlock();return value
 func status() -> Dictionary:
 	mutex.lock()
-	var result := {"bytes":used,"limit":limit,"frames":prepared.size(),"completed":completed,"cancelled":cancelled,"evictions":evictions,"worker_ms":worker_ms,"worker_thread":worker_thread,"active":not working_key.is_empty(),"error":error,"failures":failures.duplicate(),"test_barrier_waiting":at_barrier}
+	var result := {"bytes":used,"limit":limit,"in_flight_bytes":in_flight_bytes,"peak_in_flight_bytes":peak_in_flight_bytes,"requested_jobs":jobs.size(),"pressure_failures":pressure_failures.size(),"frames":prepared.size(),"completed":completed,"cancelled":cancelled,"evictions":evictions,"worker_ms":worker_ms,"worker_thread":worker_thread,"active":not working_key.is_empty(),"error":error,"failures":failures.duplicate(),"test_barrier_waiting":at_barrier}
 	result.ready_keys = []
 	for key in prepared:
 		if prepared[key].token == token:result.ready_keys.append(key)
@@ -68,9 +73,13 @@ func _next() -> Dictionary:
 	mutex.lock();var next := {}
 	if not closing:
 		for job in jobs:
+			if int(job.charge) > limit:
+				failures[job.key] = "Mesh frame exceeds the CPU preparation cache allowance.";pressure_failures[job.key] = true;continue
 			if not failures.has(job.key) and (not prepared.has(job.key) or prepared[job.key].token != token):
-				next = job;working_key = job.key;working_token = token;break
+				next = job;working_key = job.key;working_token = token;in_flight_bytes = job.charge;peak_in_flight_bytes = maxi(peak_in_flight_bytes,in_flight_bytes);break
 	mutex.unlock();return next
+func _memory_headroom() -> Dictionary:
+	return Memory.memory_headroom()
 func _run() -> void:
 	mutex.lock();worker_thread = OS.get_thread_caller_id();mutex.unlock()
 	while true:
@@ -81,11 +90,11 @@ func _run() -> void:
 		while true:
 			var job := _next()
 			if job.is_empty():break
-			var began := Time.get_ticks_usec();var result := {};var memory := Memory.memory_headroom()
-			if memory.available_physical < memory.reserve+job.charge*3:
-				result = {"error":"Mesh preparation paused to preserve physical RAM headroom."}
+			var began := Time.get_ticks_usec();var result := {};var memory := _memory_headroom()
+			if memory.available_physical < memory.reserve+int(job.get("other_reservation",0))+job.charge*3:
+				result = {"error":"Mesh CPU preparation paused: insufficient physical RAM headroom. Free RAM or hide a mesh layer.","memory_pressure":true}
 			elif Stamp.read(job.path) != job.stamp:result = {"error":"Mesh source changed; waiting for refresh."}
-			elif not _prune(job.charge,job.key):result = {"error":"Mesh frame exceeds the preparation budget."}
+			elif not _prune(job.charge,job.key):result = {"error":"Mesh frame exceeds the CPU preparation cache allowance."}
 			else:
 				var file := FileAccess.open(job.path,FileAccess.READ)
 				if file == null:result = {"error":"Cannot open mesh source."}
@@ -107,14 +116,16 @@ func _run() -> void:
 			var obsolete := stopped()
 			mutex.lock()
 			if obsolete or token != working_token or closing:cancelled += 1
-			elif result.has("error"):failures[job.key] = result.error
-			elif not result.is_empty():
+			elif result.has("error"):
+				failures[job.key] = result.error
+				if result.get("memory_pressure",false):pressure_failures[job.key] = true
+			elif not result.is_empty() and used+int(job.charge) <= limit:
 				result.token = working_token;result.bytes = job.charge;prepared[job.key] = result;order.append(job.key);used += job.charge;completed += 1
-			worker_ms += (Time.get_ticks_usec()-began)/1000.0;working_key = ""
+			worker_ms += (Time.get_ticks_usec()-began)/1000.0;working_key = "";in_flight_bytes = 0
 			var failed := not error.is_empty()
 			mutex.unlock();result = {}
 			if failed:break
-	prepared.clear();order.clear()
+	mutex.lock();prepared.clear();order.clear();used = 0;in_flight_bytes = 0;working_key = "";mutex.unlock()
 
 func _decode(file: FileAccess, entry: Dictionary, obj: Dictionary) -> Dictionary:
 	entry = Reader.materialize(file,entry,obj)

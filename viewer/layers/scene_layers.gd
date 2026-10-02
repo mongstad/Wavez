@@ -155,6 +155,8 @@ func _sample_profiled(time: float, asynchronous: bool, force_particles: bool) ->
 			active_views += 1
 			if states[id].get("isosurface",false):active_views += 1
 	layer_budget = gpu_budget_mib*1048576/maxi(1,active_views)
+	# Establish mesh demand before the field cache reserves remaining RAM.
+	if asynchronous and mesh_playback != null and mesh_playback.active():mesh_playback.update_budget(time,mesh_budget())
 	var fields := {}
 	if asynchronous and field_playback != null and field_playback.active():
 		fields = field_playback.acquire(time,field_budget())

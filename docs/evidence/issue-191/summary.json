@@ -1,0 +1,447 @@
+{
+  "baseline_commit": "cbe46ec31a5bd5f46f473683e7dd8de6581ee368",
+  "candidate_version": "v0.1.0.23",
+  "source": {
+    "filename": "cavity_collapse_torus_channels_240s.ssc",
+    "bytes": 4093738157,
+    "sha256": "fa64ef312dec6d3cf55a45b197c0a4963e1fc21ef7eac25937b58739bc1b27c3",
+    "samples": {
+      "collapse_surface": 2401
+    },
+    "arrays": [
+      {
+        "name": "position",
+        "dtype": "f4",
+        "shape": [
+          65536.0,
+          3.0
+        ],
+        "association": "vertex"
+      },
+      {
+        "name": "triangles",
+        "dtype": "u4",
+        "shape": [
+          130050.0,
+          3.0
+        ],
+        "association": "topology"
+      },
+      {
+        "name": "vertex_id",
+        "dtype": "i8",
+        "shape": [
+          65536.0
+        ],
+        "association": "vertex"
+      },
+      {
+        "name": "radius",
+        "dtype": "f4",
+        "shape": [
+          65536.0
+        ],
+        "association": "vertex"
+      },
+      {
+        "name": "z_height",
+        "dtype": "f4",
+        "shape": [
+          65536.0
+        ],
+        "association": "vertex"
+      },
+      {
+        "name": "twist_phase",
+        "dtype": "f4",
+        "shape": [
+          65536.0
+        ],
+        "association": "vertex"
+      }
+    ]
+  },
+  "baseline": {
+    "cpu_limit_bytes": 134217728,
+    "target_charge_bytes": 214653520,
+    "required_bytes": 429307040,
+    "error": "Visible meshes exceed the safe preparation budget; hide a layer or reduce the preview budget.",
+    "memory": {
+      "available_physical": 36288339968,
+      "physical": 50404560896,
+      "process_peak_rss": 199204864,
+      "process_rss": 199204864,
+      "process_swap": 0,
+      "renderer_reserve": 268435456,
+      "reserve": 1780572282,
+      "safe_cache_bytes": 20161824358,
+      "system_reserve": 1512136826
+    }
+  },
+  "runs": {
+    "final-forward": {
+      "checks": 174,
+      "failures": [],
+      "packaged": false,
+      "renderer": "forward_plus",
+      "application_version": "v0.1.0.23",
+      "callbacks": {
+        "count": 1187,
+        "max_ms": 18.283,
+        "over_50_ms": 0,
+        "p95_ms": 3.224,
+        "p99_ms": 15.175
+      },
+      "close_ms": 1,
+      "system_swap_io_delta": {
+        "pswpin": 0,
+        "pswpout": 0
+      },
+      "source_sha256_unchanged": "fa64ef312dec6d3cf55a45b197c0a4963e1fc21ef7eac25937b58739bc1b27c3",
+      "known_engine_diagnostics": [
+        "libdecor-gtk-WARNING: Failed to initialize GTK\nFailed to load plugin 'libdecor-gtk.so': failed to init\n"
+      ],
+      "opening_cpu_limit_bytes": 1073267600,
+      "opening_budget": {
+        "cpu_limit": 1073267600,
+        "current_memory": {
+          "available_physical": 35495436288,
+          "physical": 50404560896,
+          "process_peak_rss": 857858048,
+          "process_rss": 857858048,
+          "process_swap": 0,
+          "renderer_reserve": 268435456,
+          "reserve": 1780572282,
+          "safe_cache_bytes": 20161824358,
+          "system_reserve": 1512136826
+        },
+        "current_reservations": {
+          "field_working": 0,
+          "particle_decoded": 0,
+          "particle_prepared": 0,
+          "particle_working": 0,
+          "scene_cache": 264773608
+        },
+        "current_reserved_other_bytes": 264773608,
+        "memory": {
+          "available_physical": 35577802752,
+          "physical": 50404560896,
+          "process_peak_rss": 770433024,
+          "process_rss": 770433024,
+          "process_swap": 0,
+          "renderer_reserve": 268435456,
+          "reserve": 1780572282,
+          "safe_cache_bytes": 20161824358,
+          "system_reserve": 1512136826
+        },
+        "remaining_safe_bytes": 19897050750,
+        "required_bytes": 429307040,
+        "reservations": {
+          "field_working": 0,
+          "particle_decoded": 0,
+          "particle_prepared": 0,
+          "particle_working": 0,
+          "scene_cache": 264773608
+        },
+        "reserved_other_bytes": 264773608,
+        "target_bytes": 214653520,
+        "window_bytes": 1073267600
+      },
+      "max_snapshot_cache_bytes": 1073267600,
+      "max_snapshot_requested_jobs": 5,
+      "peak_in_flight_bytes": 214653520,
+      "peak_process_rss": 887320576,
+      "min_available_physical": 35435700224,
+      "max_process_swap": 0
+    },
+    "final-compat": {
+      "checks": 174,
+      "failures": [],
+      "packaged": false,
+      "renderer": "gl_compatibility",
+      "application_version": "v0.1.0.23",
+      "callbacks": {
+        "count": 1061,
+        "max_ms": 12.569,
+        "over_50_ms": 0,
+        "p95_ms": 3.424,
+        "p99_ms": 10.708
+      },
+      "close_ms": 1,
+      "system_swap_io_delta": {
+        "pswpin": 0,
+        "pswpout": 0
+      },
+      "source_sha256_unchanged": "fa64ef312dec6d3cf55a45b197c0a4963e1fc21ef7eac25937b58739bc1b27c3",
+      "known_engine_diagnostics": [
+        "libdecor-gtk-WARNING: Failed to initialize GTK\nFailed to load plugin 'libdecor-gtk.so': failed to init\n"
+      ],
+      "opening_cpu_limit_bytes": 1073267600,
+      "opening_budget": {
+        "cpu_limit": 1073267600,
+        "current_memory": {
+          "available_physical": 35772022784,
+          "physical": 50404560896,
+          "process_peak_rss": 432914432,
+          "process_rss": 432914432,
+          "process_swap": 0,
+          "renderer_reserve": 268435456,
+          "reserve": 1780572282,
+          "safe_cache_bytes": 20161824358,
+          "system_reserve": 1512136826
+        },
+        "current_reservations": {
+          "field_working": 0,
+          "particle_decoded": 0,
+          "particle_prepared": 0,
+          "particle_working": 0,
+          "scene_cache": 264773608
+        },
+        "current_reserved_other_bytes": 264773608,
+        "memory": {
+          "available_physical": 35865739264,
+          "physical": 50404560896,
+          "process_peak_rss": 335867904,
+          "process_rss": 335867904,
+          "process_swap": 0,
+          "renderer_reserve": 268435456,
+          "reserve": 1780572282,
+          "safe_cache_bytes": 20161824358,
+          "system_reserve": 1512136826
+        },
+        "remaining_safe_bytes": 19897050750,
+        "required_bytes": 429307040,
+        "reservations": {
+          "field_working": 0,
+          "particle_decoded": 0,
+          "particle_prepared": 0,
+          "particle_working": 0,
+          "scene_cache": 264773608
+        },
+        "reserved_other_bytes": 264773608,
+        "target_bytes": 214653520,
+        "window_bytes": 1073267600
+      },
+      "max_snapshot_cache_bytes": 1073267600,
+      "max_snapshot_requested_jobs": 5,
+      "peak_in_flight_bytes": 214653520,
+      "peak_process_rss": 477736960,
+      "min_available_physical": 35755520000,
+      "max_process_swap": 0
+    },
+    "final-package-forward": {
+      "checks": 174,
+      "failures": [],
+      "packaged": true,
+      "renderer": "forward_plus",
+      "application_version": "v0.1.0.23",
+      "callbacks": {
+        "count": 956,
+        "max_ms": 16.941,
+        "over_50_ms": 0,
+        "p95_ms": 3.424,
+        "p99_ms": 14.644
+      },
+      "close_ms": 0,
+      "system_swap_io_delta": {
+        "pswpin": 0,
+        "pswpout": 0
+      },
+      "source_sha256_unchanged": "fa64ef312dec6d3cf55a45b197c0a4963e1fc21ef7eac25937b58739bc1b27c3",
+      "known_engine_diagnostics": [
+        "libdecor-gtk-WARNING: Failed to initialize GTK\nFailed to load plugin 'libdecor-gtk.so': failed to init\n"
+      ],
+      "opening_cpu_limit_bytes": 1073267600,
+      "opening_budget": {
+        "cpu_limit": 1073267600,
+        "current_memory": {
+          "available_physical": 35142619136,
+          "physical": 50404560896,
+          "process_peak_rss": 863133696,
+          "process_rss": 863133696,
+          "process_swap": 0,
+          "renderer_reserve": 268435456,
+          "reserve": 1780572282,
+          "safe_cache_bytes": 20161824358,
+          "system_reserve": 1512136826
+        },
+        "current_reservations": {
+          "field_working": 0,
+          "particle_decoded": 0,
+          "particle_prepared": 0,
+          "particle_working": 0,
+          "scene_cache": 264773608
+        },
+        "current_reserved_other_bytes": 264773608,
+        "memory": {
+          "available_physical": 35262971904,
+          "physical": 50404560896,
+          "process_peak_rss": 769806336,
+          "process_rss": 769806336,
+          "process_swap": 0,
+          "renderer_reserve": 268435456,
+          "reserve": 1780572282,
+          "safe_cache_bytes": 20161824358,
+          "system_reserve": 1512136826
+        },
+        "remaining_safe_bytes": 19897050750,
+        "required_bytes": 429307040,
+        "reservations": {
+          "field_working": 0,
+          "particle_decoded": 0,
+          "particle_prepared": 0,
+          "particle_working": 0,
+          "scene_cache": 264773608
+        },
+        "reserved_other_bytes": 264773608,
+        "target_bytes": 214653520,
+        "window_bytes": 1073267600
+      },
+      "max_snapshot_cache_bytes": 1073267600,
+      "max_snapshot_requested_jobs": 5,
+      "peak_in_flight_bytes": 214653520,
+      "peak_process_rss": 883265536,
+      "min_available_physical": 35129675776,
+      "max_process_swap": 0
+    },
+    "final-package-compat": {
+      "checks": 174,
+      "failures": [],
+      "packaged": true,
+      "renderer": "gl_compatibility",
+      "application_version": "v0.1.0.23",
+      "callbacks": {
+        "count": 865,
+        "max_ms": 12.853,
+        "over_50_ms": 0,
+        "p95_ms": 3.652,
+        "p99_ms": 10.272
+      },
+      "close_ms": 0,
+      "system_swap_io_delta": {
+        "pswpin": 0,
+        "pswpout": 0
+      },
+      "source_sha256_unchanged": "fa64ef312dec6d3cf55a45b197c0a4963e1fc21ef7eac25937b58739bc1b27c3",
+      "known_engine_diagnostics": [
+        "libdecor-gtk-WARNING: Failed to initialize GTK\nFailed to load plugin 'libdecor-gtk.so': failed to init\n"
+      ],
+      "opening_cpu_limit_bytes": 1073267600,
+      "opening_budget": {
+        "cpu_limit": 1073267600,
+        "current_memory": {
+          "available_physical": 35193548800,
+          "physical": 50404560896,
+          "process_peak_rss": 422555648,
+          "process_rss": 422555648,
+          "process_swap": 0,
+          "renderer_reserve": 268435456,
+          "reserve": 1780572282,
+          "safe_cache_bytes": 20161824358,
+          "system_reserve": 1512136826
+        },
+        "current_reservations": {
+          "field_working": 0,
+          "particle_decoded": 0,
+          "particle_prepared": 0,
+          "particle_working": 0,
+          "scene_cache": 264773608
+        },
+        "current_reserved_other_bytes": 264773608,
+        "memory": {
+          "available_physical": 35289300992,
+          "physical": 50404560896,
+          "process_peak_rss": 306040832,
+          "process_rss": 306040832,
+          "process_swap": 0,
+          "renderer_reserve": 268435456,
+          "reserve": 1780572282,
+          "safe_cache_bytes": 20161824358,
+          "system_reserve": 1512136826
+        },
+        "remaining_safe_bytes": 19897050750,
+        "required_bytes": 429307040,
+        "reservations": {
+          "field_working": 0,
+          "particle_decoded": 0,
+          "particle_prepared": 0,
+          "particle_working": 0,
+          "scene_cache": 264773608
+        },
+        "reserved_other_bytes": 264773608,
+        "target_bytes": 214653520,
+        "window_bytes": 1073267600
+      },
+      "max_snapshot_cache_bytes": 1073267600,
+      "max_snapshot_requested_jobs": 5,
+      "peak_in_flight_bytes": 214653520,
+      "peak_process_rss": 445259776,
+      "min_available_physical": 35191255040,
+      "max_process_swap": 0
+    }
+  },
+  "regressions": {
+    "mesh_headless": {
+      "checks": 2731,
+      "failures": 0
+    },
+    "mesh_forward_plus": {
+      "checks": 3001,
+      "failures": 0
+    },
+    "mesh_compatibility": {
+      "checks": 3001,
+      "failures": 0
+    },
+    "field_budget_forward_plus": {
+      "checks": 56,
+      "failures": 0
+    },
+    "field_budget_compatibility": {
+      "checks": 56,
+      "failures": 0
+    },
+    "particle_playback_headless": {
+      "checks": 2457,
+      "failures": 0
+    },
+    "rolling_field_cache_headless": {
+      "checks": 81,
+      "failures": 0
+    },
+    "field_parallel_headless": {
+      "checks": 1800,
+      "failures": 0
+    },
+    "field_concurrency_headless": {
+      "checks": 109,
+      "failures": 0
+    },
+    "maintenance_headless": {
+      "checks": 66,
+      "failures": 0
+    },
+    "application_version_python": {
+      "tests": 2,
+      "failures": 0
+    },
+    "lifecycle_headless": {
+      "checks": 51,
+      "failures": 1,
+      "baseline_same_failure": true,
+      "failure": "incomplete append cannot publish a source timestamp"
+    }
+  },
+  "tested_source_sha256": {
+    "viewer/layers/mesh_playback.gd": "f81d310cae05cc6d769038ad483cce0f007615b9810b5f243a8ac1e839fa2bd2",
+    "viewer/layers/mesh_buffer.gd": "f23a7732caa0cc3daa81ad83a30a6acfae250bc0d1199132c6e54699acff84f0",
+    "viewer/layers/field_playback.gd": "2cf87ffe5d8ff0585fd0c3461a163489f10bc2e6317b060ad1db939d65ca2ca4",
+    "viewer/layers/scene_layers.gd": "ab43f17f68aaa308b89650ea85e84c4733fb90baaa0968ab684ed6acf7f24a34",
+    "viewer/layers/test_mesh_budget.gd": "1dccb36eb96fd11479aabd93b2ef1b3543996ec184fe09050e5ef8ca4e654f27",
+    "viewer/layers/run_mesh_budget_tests.gd": "a46b6f6f2eff6fb80e47abfbbf653d40e4f0dc2f93cb73c9ec740a63c6c62077",
+    "viewer/layers/test_mesh_playback.gd": "977f033d04d881d32dc272fd1d4d07164c968a30ec399f731716d4d756555e24",
+    "viewer/project.godot": "e01d8b84966a64cc5a9ae8dcba4d805795d2bcabb42ef000c00ba16b67e0ea07",
+    "tools/validate_mesh_budget.py": "90c2b88b7792eba8ecd93e9f2c6b57fa71b49c60f5d3ebdec2086c116dfe1e60"
+  },
+  "packaged_scripts_match_reviewed_source": true
+}
