@@ -4,4 +4,3 @@ Failed to load plugin 'libdecor-gtk.so': failed to init
 WARNING: Failed to load cached shader, recompiling.
      at: _load_from_cache (drivers/gles3/shader_gles3.cpp:615)
 OpenGL API 3.3.0 NVIDIA 615.71.09 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 3070 Ti
-
