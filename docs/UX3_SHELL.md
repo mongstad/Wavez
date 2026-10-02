@@ -9,6 +9,15 @@ review evidence remain unchanged.
 
 ## Implemented behavior
 
+Current top-bar refinement under #180 (pending owner review): the visible
+application-name label is removed. The camera controls start at the existing
+12-pixel left margin, followed by the flexible window-drag area and command menus.
+Blank bar areas still support native drag and double-click maximize/restore.
+Application name, About content and branding assets retain their existing paths.
+[Validation and owner checks](evidence/issue-180/README.md) record both renderers,
+Linux packages and the physical 4K/KDE review limitation. The original shell
+checkpoint description below retains its historical wording.
+
 - 48-logical-pixel Midnight Scientific command bar with 32-pixel controls:
   SimScope, Open…, capture/source details, State, Export, View and Help.
 - State opens the existing **Capture / Export** or **Analysis export and state**

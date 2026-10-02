@@ -73,7 +73,6 @@ var layer_legends
 var particle_legend_panel: Panel
 var transport
 var status_ui
-var brand: Label
 var title_drag: Control
 var window_chrome
 var bar: PanelContainer
@@ -127,10 +126,6 @@ func setup(owner_viewer) -> void:
 	for side in ["left", "right"]: margin.add_theme_constant_override("margin_"+side, 12)
 	for side in ["top", "bottom"]: margin.add_theme_constant_override("margin_"+side, 8)
 	var row := HBoxContainer.new(); row.add_theme_constant_override("separation", 8); margin.add_child(row)
-	brand = Label.new(); brand.name = "WavezBrand"; brand.text = "WAVEZ"
-	brand.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	brand.tooltip_text = "WAVEZ · Drag to move window · Double-click to maximize/restore"
-	brand.mouse_filter = Control.MOUSE_FILTER_STOP; row.add_child(brand)
 	title_drag = Control.new(); title_drag.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	title_drag.tooltip_text = "Drag to move window · Double-click to maximize/restore"; row.add_child(title_drag)
 	edge_reveal = preload("res://ui/shell/edge_reveal.gd").new()
@@ -161,7 +156,7 @@ func setup(owner_viewer) -> void:
 	content.add_child(adapter); content.add_child(viewer.inspector_box)
 	particle_empty = Label.new();particle_empty.text = "No particles";content.add_child(particle_empty)
 	navigation = HBoxContainer.new(); row.add_child(navigation)
-	row.move_child(navigation, brand.get_index()+1)
+	row.move_child(navigation, 0)
 	var frame_action := button(navigation, "", viewer._focus_activity, "frame"); frame_action.tooltip_text = "Frame scene [F]"
 	var reset_action := button(navigation, "", viewer._reset_camera, "reset"); reset_action.tooltip_text = "Reset camera [R]"
 	var navigate := MenuButton.new(); navigate.flat = false; navigate.icon = icon("view"); navigate.tooltip_text = "Navigate [Alt+N]"; navigate.custom_minimum_size.y = 32; navigation.add_child(navigate); decorate_menu(navigate)
