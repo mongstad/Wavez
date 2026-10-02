@@ -1,20 +1,17 @@
 # Current status
 
-Issue #193 investigates mesh cache coverage and timer progression on the real
-256 × 256 cavity capture. The CPU preparation window is represented on the shared
-timeline, but is very short; sustained pair preparation is slower than 1× demand
-on the measured host. Repeated short holds explain the slow committed timer
-despite high render cadence. See the [investigation, measurements and proposed
-follow-up boundary](evidence/issue-193/README.md). This PR adds opt-in measurement
-tools and a report; playback behavior is unchanged. Candidate build 24 is
-**pending owner review**; any behavioral fix requires separate owner approval.
+Issue #195 adds a bounded CPU worker pool, decoded endpoint reuse and exact-match
+stable-topology reuse for sustained mesh playback. The pool adapts to CPU capacity
+and live RAM, preserves the four-pair future window, and keeps GPU uploads on the
+main thread. Candidate build 25 is **pending owner review**. See the updated
+[mesh preparation policy](MESH_PREPARATION_BUDGET.md) and
+[measurements, validation and owner checks](evidence/issue-195/README.md).
 
-Issue #191 replaces the mesh preparation hard cap with a workload-bounded,
-physical-RAM-based CPU allowance, shared reservations and explicit RAM diagnostics.
-The 256 × 256, 2401-sample cavity capture now prepares on the validation host;
-GPU quotas and scientific source limits remain separate. Candidate build 23 is
-**pending owner review**. See [mesh preparation policy](MESH_PREPARATION_BUDGET.md)
-and [validation, limitations and owner checks](evidence/issue-191/README.md).
+The accepted #193 investigation established CPU underproduction on the cavity
+capture and motivated this change; its [historical measurements](evidence/issue-193/README.md)
+remain unchanged. The #191 [RAM admission evidence](evidence/issue-191/README.md)
+also remains a historical record; the current policy adds a separate endpoint
+cache share and accounts for concurrent work.
 
 Issue #187 fixes mouse-wheel zoom snapping small/large scenes to fixed 8/500
 world-unit limits. Progressive reciprocal zoom now uses scene bounds and camera

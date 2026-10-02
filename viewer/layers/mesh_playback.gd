@@ -50,13 +50,13 @@ func _job(id: String, index: int, budget: int) -> Dictionary:
 		if array.name == "triangles":indices = maxi(indices,int(array.shape[0])*3)
 	var charge := int(entry.decoded)+int(next.decoded)+vertices*200+indices*160+65536
 	var key := "%s/%s/%s/%s/%s" % [id,entry.sequence,next.sequence,budget,JSON.stringify(state)]
-	return {"key":key,"id":id,"entry":entry.duplicate(true),"next":next.duplicate(true),"object":obj,"state":state.duplicate(true),"colors":viewer.colormaps[state.colormap],"budget":budget,"charge":charge,"path":layers.reader.source_path,"stamp":layers.reader.source_stamp}
+	return {"key":key,"id":id,"entry":entry.duplicate(true),"next":next.duplicate(true),"object":obj,"state":state.duplicate(true),"colors":viewer.colormaps[state.colormap],"budget":budget,"charge":charge,"generation":layers.reader.generation,"path":layers.reader.source_path,"stamp":layers.reader.source_stamp}
 static func preparation_budget(target_bytes: int, window_bytes: int, memory: Dictionary, reserved: int) -> Dictionary:
-	# One cache share, two shares for active/staged references and decode/upload
-	# scratch, and one unused share. Never use swap or reserve an entire capture.
+	# Separate pair and endpoint cache shares, two shares for active/staged
+	# references and decode/upload scratch, and one unused share. Never use swap or reserve an entire capture.
 	var remaining := maxi(0,int(memory.safe_cache_bytes)-reserved)
 	var required := target_bytes*2
-	return {"cpu_limit":mini(maxi(required,window_bytes),remaining/4),"required_bytes":required,
+	return {"cpu_limit":mini(maxi(required,window_bytes),remaining/5),"required_bytes":required,
 		"target_bytes":target_bytes,"window_bytes":window_bytes,"reserved_other_bytes":reserved,
 		"remaining_safe_bytes":remaining,"memory":memory.duplicate()}
 func other_reservations() -> Dictionary:
@@ -74,9 +74,9 @@ func other_reservations() -> Dictionary:
 		reservations.field_working = int(status.largest_job_charge)*3*int(status.worker_count)
 	return reservations
 func reservation_bytes() -> int:
-	# Charge the whole cache + two working shares. Charges overestimate actual
+	# Charge both caches + two working shares. Charges overestimate actual
 	# residency, so do not credit them as physical pages when reserving for fields.
-	return cpu_limit*3
+	return cpu_limit*4
 func update_budget(time: float, budget: int) -> Dictionary:
 	var plan := _jobs(time,budget)
 	var target_bytes := 0;var window_bytes := 0;var largest := 0
@@ -194,4 +194,4 @@ func _update_ui() -> void:
 	if error.is_empty():error = status.error
 	if is_instance_valid(label):label.text = ("Mesh CPU preparation blocked" if not error.is_empty() else ("Preparing meshes…" if buffering else "Mesh prefetch ready"))+" • %.1f / %.1f MiB CPU cache • %.1f MiB in flight\n" % [status.bytes/float(Memory.MIB),cpu_limit/float(Memory.MIB),status.in_flight_bytes/float(Memory.MIB)]+error
 	if is_instance_valid(viewer.play_button):viewer.play_button.disabled = (buffering or layers.is_buffering()) and not viewer.playing
-func profile_report() -> Dictionary:return {"enabled":enabled,"buffering":buffering,"cache":worker.status(),"budget":budget_report,"cpu_limit":cpu_limit,"reserved_mesh_bytes":reservation_bytes(),"gpu_uploads":uploads,"staged_meshes":staged.size(),"error":error}
+func profile_report() -> Dictionary:return {"enabled":enabled,"buffering":buffering,"cache":worker.status(true),"budget":budget_report,"cpu_limit":cpu_limit,"reserved_mesh_bytes":reservation_bytes(),"gpu_uploads":uploads,"staged_meshes":staged.size(),"error":error}

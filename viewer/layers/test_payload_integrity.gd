@@ -1,5 +1,8 @@
 extends "res://layers/test_scene_playback.gd"
 const Reader = preload("res://layers/scene_reader.gd")
+const MeshSource = preload("res://layers/mesh_source.gd")
+class NeverCancelled extends RefCounted:
+	func stopped() -> bool:return false
 
 func run() -> void:
 	out = OS.get_cmdline_user_args()[0]
@@ -13,6 +16,11 @@ func run() -> void:
 			for name in fixture.rows[i].channels:
 				check(Hash.digest(data.channels[name].to_byte_array()) == fixture.rows[i].channels[name],"Exact typed scientific bytes: "+name)
 		check(reader.cache.used <= reader.cache.limit,"Decoded cache bounded")
+		if fixture.kind == "mesh":
+			var source := FileAccess.open(out.path_join(fixture.file),FileAccess.READ)
+			var first := MeshSource.decode(source,reader.samples.object[0],reader.objects.object,NeverCancelled.new(),{})
+			var next := MeshSource.decode(source,reader.samples.object[1],reader.objects.object,NeverCancelled.new(),first.topology)
+			check(next.get("topology_reused",false),"Exact validated topology is reused for adjacent mesh endpoints")
 		reader.close()
 	for row in fixtures.cases:
 		var reader := Reader.new(false);var opened := reader.open(out.path_join(row.file))
@@ -22,6 +30,11 @@ func run() -> void:
 		var data := reader.read_sample("object",3)
 		check((not data.is_empty()) == row.readable,"Fast corruption semantics: "+row.file)
 		if not row.readable:check(reader.error.contains("object sample 3 (record 3)"),"Contextual failure: "+row.file)
+		if row.kind == "mesh" and row.fault in ["bad_id","triangle"]:
+			var source := FileAccess.open(out.path_join(row.file),FileAccess.READ)
+			var valid := MeshSource.decode(source,reader.samples.object[0],reader.objects.object,NeverCancelled.new(),{})
+			var invalid := MeshSource.decode(source,reader.samples.object[3],reader.objects.object,NeverCancelled.new(),valid.topology)
+			check(invalid.has("error") and invalid.error.contains("object sample 3 (record 3)"),"Cached topology cannot bypass changed ID/index validation: "+row.file)
 		reader.close()
 		if row.readable:
 			var strict := Reader.new()

@@ -14,7 +14,8 @@ def distribution(values):
         return {}
     return {"count": len(ordered), "mean": statistics.mean(ordered),
             "p50": statistics.median(ordered),
-            "p95": ordered[math.ceil(len(ordered) * .95) - 1], "max": ordered[-1]}
+            "p95": ordered[math.ceil(len(ordered) * .95) - 1],
+            "p99": ordered[math.ceil(len(ordered) * .99) - 1], "max": ordered[-1]}
 
 
 def summarize(case):
@@ -49,6 +50,13 @@ def summarize(case):
         holds.append(wall - hold_start)  # Last interval is right-censored.
     advanced = rows[-1]["committed"] - start
     draws = case["draws"]
+    runway = []
+    for row in rows:
+        distance = 0.0
+        for lo, hi in row["coverage"]["scene"]:
+            if lo <= row["committed"] <= hi:
+                distance = row["committed"] - lo if case["physical_rate"] < 0 else hi - row["committed"]
+        runway.append(distance)
     return {
         "name": case["case"]["name"], "start": start, "wall_s": wall,
         "committed_end": rows[-1]["committed"], "recorded_per_wall_second": advanced / wall,
@@ -71,6 +79,15 @@ def summarize(case):
         "final_ready_pairs": len(rows[-1]["ready_sequences"]),
         "peak_in_flight_bytes": max(r["in_flight_bytes"] for r in rows),
         "coverage_span_seconds": distribution(spans),
+        "directional_ready_runway_seconds": distribution(runway),
+        "peak_decoded_bytes": max(r.get("decoded_bytes", 0) for r in rows),
+        "peak_decoded_samples": max(r.get("decoded_samples", 0) for r in rows),
+        "peak_active_jobs": max(r.get("active_jobs", 0) for r in rows),
+        "pipeline_phase_ms_per_completed_pair": {
+            key: (value - before.get("pipeline_stages", {}).get(key, 0)) / completed
+            for key, value in after.get("pipeline_stages", {}).items()} if completed else {},
+        "peak_sampled_rss_bytes": max((s["memory"]["process_rss"] for s in case.get("memory_samples", [])), default=0),
+        "peak_sampled_swap_bytes": max((s["memory"]["process_swap"] for s in case.get("memory_samples", [])), default=0),
         "first_row": rows[0], "last_row": rows[-1],
         "cache_failures": after["failures"], "pressure_failures": after["pressure_failures"],
         "errors": case["errors"], "profile": case["profile"], "memory_after": case.get("memory_after"),
