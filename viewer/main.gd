@@ -519,11 +519,11 @@ func _unhandled_input(event: InputEvent) -> void:
 			dragging = mouse_button.pressed
 			last_mouse = mouse_button.position
 		elif mouse_button.pressed and mouse_button.button_index == MOUSE_BUTTON_WHEEL_UP:
-			camera_distance = maxf(8.0, camera_distance * 0.90)
-			_update_camera()
+			_zoom_camera(mouse_button, true)
+			get_viewport().set_input_as_handled()
 		elif mouse_button.pressed and mouse_button.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-			camera_distance = minf(500.0, camera_distance * 1.11)
-			_update_camera()
+			_zoom_camera(mouse_button, false)
+			get_viewport().set_input_as_handled()
 	elif event is InputEventMouseMotion and dragging:
 		var mouse_event: InputEventMouseMotion = event as InputEventMouseMotion
 		var d: Vector2 = mouse_event.position - last_mouse
@@ -536,6 +536,17 @@ func _unhandled_input(event: InputEvent) -> void:
 		if not action.is_empty():
 			_dispatch_shortcut(action)
 			get_viewport().set_input_as_handled()
+
+func _zoom_camera(event: InputEventMouseButton, inward: bool) -> void:
+	if not is_finite(camera_distance) or camera_distance <= 0 or not is_finite(event.factor) or event.factor <= 0: return
+	# A fractional wheel event is fractional zoom; one event is at most one notch.
+	var step := pow(0.90, minf(event.factor, 1.0))
+	# Framing's bounding-sphere radius is in the same world units as the camera.
+	var minimum := maxf(camera.near * 2.0, half_extent + camera.near)
+	var maximum := maxf(minimum, camera.far - half_extent)
+	# Custom radii outside the limits must recover progressively, never snap.
+	camera_distance = minf(camera_distance, maxf(minimum, camera_distance * step)) if inward else maxf(camera_distance, minf(maximum, camera_distance / step))
+	_update_camera()
 
 func _dispatch_shortcut(action: String) -> void:
 	match action:

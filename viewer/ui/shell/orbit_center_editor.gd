@@ -99,7 +99,7 @@ func write_fields() -> void:
 	radius_input.text = str(radius); update_notice()
 
 func update_notice() -> void:
-	notice.text = "Normal wheel zoom retains its existing 8–500 bounds." if radius < 8 or radius > 500 else "Only Apply changes the orbit. Cancel discards this draft."
+	notice.text = "Only Apply changes the orbit. Cancel discards this draft."
 
 func adjust_radius(steps: float, fine: bool) -> void:
 	if not read_fields(): return

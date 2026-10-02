@@ -155,9 +155,9 @@ func camera_tests(view) -> void:
 		commit(view,proposal[0],proposal[1]); camera_trace.append(camera_state(view))
 		check(view.yaw == yaw and view.pitch == pitch and view.free_camera,"Apply preserves orientation and Free-camera setting")
 		var before: float = view.camera_distance
-		wheel(view,MOUSE_BUTTON_WHEEL_UP); check(is_equal_approx(view.camera_distance,maxf(8,before*.9)),"Ordinary wheel up retains existing bounds/factor")
+		wheel(view,MOUSE_BUTTON_WHEEL_UP); check(is_equal_approx(view.camera_distance,minf(before,maxf(maxf(view.camera.near*2,view.half_extent+view.camera.near),before*.9))),"Ordinary wheel up uses progressive scene-scale bounds")
 		camera_trace.append(camera_state(view)); before = view.camera_distance
-		wheel(view,MOUSE_BUTTON_WHEEL_DOWN); check(is_equal_approx(view.camera_distance,minf(500,before*1.11)),"Ordinary wheel down retains existing bounds/factor")
+		wheel(view,MOUSE_BUTTON_WHEEL_DOWN); check(is_equal_approx(view.camera_distance,maxf(before,minf(maxf(maxf(view.camera.near*2,view.half_extent+view.camera.near),view.camera.far-view.half_extent),before/.9))),"Ordinary wheel down uses progressive scene-scale bounds")
 		drag(view); camera_trace.append(camera_state(view)); free_move(view)
 		view.orbit_enabled = true; view.orbit_speed = .2; yaw = view.yaw
 		view.scene_layers.tick(.125)

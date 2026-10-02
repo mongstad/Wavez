@@ -257,9 +257,10 @@ editing remains navigation; Cancel only discards the proposal.
 the gizmo. Setup starts collapsed in windows shorter than 720 pixels. Apply and
 Cancel remain visible.
 
-The draft radius supports 0.000001–1e15 world units. Ordinary wheel zoom still
-uses its existing 8–500 bounds and factors; outside that interval its next step
-can jump to the existing bound. Reset/Frame replace the target normally and
+The draft radius supports 0.000001–1e15 world units. Ordinary wheel zoom uses
+10% inward steps and reciprocal outward steps, with scene-bound/clip-plane
+limits. Fractional input produces smaller steps; custom radii recover without
+snapping to fixed world-unit bounds. Reset/Frame replace the target normally and
 close the draft. Screenshot capture also closes it; saved presets/video jobs
 contain only the accepted camera. See [orbit-center usage and validation](ORBIT_CENTER.md).
 

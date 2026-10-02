@@ -1,0 +1,98 @@
+{
+  "cases": {
+    "cavity-collapse": {
+      "extent": 0.175498977303505,
+      "far": 1000.0,
+      "first_inward": 0.442257422804832,
+      "framed": 0.491397136449814,
+      "maximum": 999.824501022696,
+      "minimum": 0.225498978048563,
+      "near": 0.0500000007450581
+    },
+    "field": {
+      "extent": 6.49519062042236,
+      "far": 1000.0,
+      "first_inward": 16.3678803634644,
+      "framed": 18.1865337371826,
+      "maximum": 993.504809379578,
+      "minimum": 6.54519062116742,
+      "near": 0.0500000007450581
+    },
+    "large": {
+      "extent": 25495.09765625,
+      "far": 356931.375,
+      "first_inward": 64247.64609375,
+      "framed": 71386.2734375,
+      "maximum": 331436.27734375,
+      "minimum": 25495.1476562507,
+      "near": 0.0500000007450581
+    },
+    "mesh": {
+      "extent": 2.54950976371765,
+      "far": 1000.0,
+      "first_inward": 6.42476460456848,
+      "framed": 7.13862733840942,
+      "maximum": 997.450490236282,
+      "minimum": 2.59950976446271,
+      "near": 0.0500000007450581
+    },
+    "mixed": {
+      "extent": 6.49519062042236,
+      "far": 1000.0,
+      "first_inward": 16.3678803634644,
+      "framed": 18.1865337371826,
+      "maximum": 993.504809379578,
+      "minimum": 6.54519062116742,
+      "near": 0.0500000007450581
+    },
+    "particles": {
+      "extent": 2.54950976371765,
+      "far": 1000.0,
+      "first_inward": 6.42476460456848,
+      "framed": 7.13862733840942,
+      "maximum": 997.450490236282,
+      "minimum": 2.59950976446271,
+      "near": 0.0500000007450581
+    },
+    "small": {
+      "extent": 0.1,
+      "far": 1000.0,
+      "first_inward": 0.252,
+      "framed": 0.28,
+      "maximum": 999.9,
+      "minimum": 0.150000000745058,
+      "near": 0.0500000007450581
+    }
+  },
+  "checks": 160,
+  "display_driver": "Wayland",
+  "failures": [],
+  "layouts": [
+    {
+      "actual": "(1440, 900)",
+      "scale": 1.0
+    },
+    {
+      "actual": "(3840, 2160)",
+      "scale": 2.0
+    },
+    {
+      "actual": "(3840, 2160)",
+      "scale": 2.5
+    }
+  ],
+  "packaged": true,
+  "renderer": "forward_plus",
+  "source_hashes_unchanged": {
+    "/tmp/issue187-package-forward/large.ssc": "be97581161565a4d031976349c069b3843839d3f15a3b9c091cfce32260d28eb",
+    "/tmp/issue187-package-forward/small.ssc": "8f0dbbdfe1d5f2386bb0b9d1af696ca081d79e88c56a357904bc80c97c7de012",
+    "/tmp/issue187-package-forward/mixed.ssc": "dd24ae67d1c98e359102e140b5e0686ccc5b6f0e19f1a873cce869fb74b7a37d",
+    "/tmp/issue187-package-forward/mesh.ssc": "10d3601c7c981e516b6ef0f02962baeeda4b72c93803fd716636a3ba4b44e795",
+    "/tmp/issue187-package-forward/field.ssc": "8ca1a23c545bd22cd2148461baa7078dfc07e46261f2de5fac9f8fa0c9b217b4",
+    "/tmp/issue187-package-forward/particles.ssc": "9c260bd2d173b0f8e92d96f9e3f7a862f608bc0da438b9b9cb49edc46e3b520b",
+    "/home/Nozba/Codex/Wavez/cavity_collapse_mesh_wavez/cavity_collapse_torus_quick.ssc": "9215baf4e475256b254916f290b5c569d17553e944c4778b17b74eed0ba0b10e"
+  },
+  "known_engine_diagnostics": [
+    "libdecor-gtk-WARNING: Failed to initialize GTK\nFailed to load plugin 'libdecor-gtk.so': failed to init\n"
+  ]
+}

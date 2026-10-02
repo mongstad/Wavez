@@ -1,0 +1,182 @@
+{
+  "checks": 290,
+  "failures": [],
+  "phases": {
+    "field_after_orbit": {
+      "callbacks": 175,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "field_channel": {
+      "callbacks": 175,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "field_free_camera_stationary": {
+      "callbacks": 176,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "field_paused_again": {
+      "callbacks": 175,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "field_performance": {
+      "callbacks": 175,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "field_ready": {
+      "callbacks": 174,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "field_resized": {
+      "callbacks": 176,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "field_seek": {
+      "callbacks": 175,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "field_zero_speed_orbit": {
+      "callbacks": 176,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "mesh_after_orbit": {
+      "callbacks": 176,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "mesh_free_camera_stationary": {
+      "callbacks": 176,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "mesh_paused_again": {
+      "callbacks": 175,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "mesh_performance": {
+      "callbacks": 175,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "mesh_ready": {
+      "callbacks": 175,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "mesh_resized": {
+      "callbacks": 174,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "mesh_seek": {
+      "callbacks": 175,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "mesh_zero_speed_orbit": {
+      "callbacks": 175,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "mixed_after_orbit": {
+      "callbacks": 176,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "mixed_channel": {
+      "callbacks": 174,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "mixed_free_camera_stationary": {
+      "callbacks": 176,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "mixed_paused_again": {
+      "callbacks": 175,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "mixed_performance": {
+      "callbacks": 175,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "mixed_ready": {
+      "callbacks": 174,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "mixed_resized": {
+      "callbacks": 176,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "mixed_seek": {
+      "callbacks": 174,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "mixed_zero_speed_orbit": {
+      "callbacks": 175,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "particles_after_orbit": {
+      "callbacks": 176,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "particles_free_camera_stationary": {
+      "callbacks": 176,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "particles_paused_again": {
+      "callbacks": 174,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "particles_performance": {
+      "callbacks": 175,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "particles_ready": {
+      "callbacks": 173,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "particles_resized": {
+      "callbacks": 174,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "particles_seek": {
+      "callbacks": 175,
+      "draws": 0,
+      "same_pixels": true
+    },
+    "particles_zero_speed_orbit": {
+      "callbacks": 175,
+      "draws": 0,
+      "same_pixels": true
+    }
+  },
+  "source_hashes_unchanged": {
+    "mixed.ssc": "3357e5acbb4a398bf97447b858c113478d20fac49a4bd8c5962d37fbb192207b",
+    "mesh.ssc": "fa5116f48cd46307024c9f46985610c13c83ea2677afc91a58fb2e59543f57e5",
+    "field.ssc": "1b94c2cf87b547b5723d8dbc708c3929b567ed64fe59e179a37c21dd6872754e",
+    "particles.ssc": "e7eb1325263adeb7379acf19bd2a0519ccd5a0c2ea3a4b1d3986a664a514ba12"
+  }
+}
