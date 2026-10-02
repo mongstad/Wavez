@@ -26,7 +26,7 @@ func setup(owner_shell) -> void:
 	shade.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	shade.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT); add_child(shade)
 	panel = PanelContainer.new(); add_child(panel)
-	panel.add_theme_stylebox_override("panel", theme.flat_box(&"surface.1", 20, 16, 6))
+	panel.add_theme_stylebox_override("panel", theme.flat_box(&"surface.1", 20, 16, theme.OUTER_RADIUS))
 	var box := VBoxContainer.new(); box.add_theme_constant_override("separation", 10); panel.add_child(box)
 	var header := HBoxContainer.new(); box.add_child(header)
 	var title := Label.new(); title.text = "Keyboard Shortcuts"; title.theme_type_variation = "PanelTitle"

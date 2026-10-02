@@ -26,7 +26,7 @@ func setup(owner_viewer) -> void:
 	var canvas := CanvasLayer.new(); canvas.layer = 0; add_child(canvas)
 	guide.editor = self; canvas.add_child(guide); guide.hide()
 	panel = PanelContainer.new(); panel.mouse_filter = Control.MOUSE_FILTER_STOP
-	panel.add_theme_stylebox_override("panel",theme.tonal_surface(12,10)); add_child(panel)
+	panel.add_theme_stylebox_override("panel",theme.rounded_tonal_surface(true,true,12,10)); add_child(panel)
 	var box := VBoxContainer.new(); box.add_theme_constant_override("separation",8); panel.add_child(box)
 	var header := HBoxContainer.new(); box.add_child(header)
 	var title := Label.new(); title.text = "Edit orbit center and radius"; title.size_flags_horizontal = Control.SIZE_EXPAND_FILL; header.add_child(title)

@@ -14,6 +14,7 @@ const PALETTE = {
 	&"surface.lit": Color("192133"), &"surface.shade": Color("101623"),
 }
 var shell_icons := {}
+var rounded_tones := {}
 
 func c(key: StringName) -> Color:
 	return PALETTE[key] if PALETTE.has(key) else TOKENS.color(key)
@@ -31,6 +32,29 @@ func tonal_surface(x := 0, y := 0) -> StyleBoxTexture:
 	texture.width = 16; texture.height = 128
 	texture.fill_from = Vector2.ZERO; texture.fill_to = Vector2(0, 1)
 	var style := StyleBoxTexture.new(); style.texture = texture
+	style.content_margin_left = x; style.content_margin_right = x
+	style.content_margin_top = y; style.content_margin_bottom = y
+	return style
+
+func rounded_tonal_surface(top: bool, bottom: bool, x := 0, y := 0) -> StyleBoxTexture:
+	# A tiny cached nine-patch: corners stay six logical pixels at any size.
+	# Only outer chrome surfaces use this alpha; the scientific viewport is untouched.
+	var key := str(top) + str(bottom)
+	if not rounded_tones.has(key):
+		var image := Image.create(16, 128, false, Image.FORMAT_RGBA8)
+		for row in 128:
+			for col in 16:
+				var color := c(&"surface.lit").lerp(c(&"surface.shade"), float(row)/127.0)
+				var point := Vector2(col+.5, row+.5)
+				var center := Vector2(clampf(point.x, OUTER_RADIUS, 16-OUTER_RADIUS), point.y)
+				if top and point.y < OUTER_RADIUS: center.y = OUTER_RADIUS
+				elif bottom and point.y > 128-OUTER_RADIUS: center.y = 128-OUTER_RADIUS
+				color.a = clampf(OUTER_RADIUS + .5 - point.distance_to(center), 0, 1)
+				image.set_pixel(col, row, color)
+		rounded_tones[key] = ImageTexture.create_from_image(image)
+	var style := StyleBoxTexture.new(); style.texture = rounded_tones[key]
+	style.texture_margin_left = OUTER_RADIUS; style.texture_margin_right = OUTER_RADIUS
+	style.texture_margin_top = OUTER_RADIUS; style.texture_margin_bottom = OUTER_RADIUS
 	style.content_margin_left = x; style.content_margin_right = x
 	style.content_margin_top = y; style.content_margin_bottom = y
 	return style
@@ -117,8 +141,10 @@ func _init() -> void:
 		set_icon(pair[0] + "_disabled", "PopupMenu", icon_named(pair[1], &"text.disabled"))
 	set_stylebox("panel", "TooltipPanel", flat_box(&"surface.3", 12, 8, 6))
 	set_stylebox("panel", "PopupPanel", flat_box(&"surface.3", 16, 14, 6))
-	set_stylebox("panel", "AcceptDialog", flat_box(&"surface.3", 24, 20, 6))
-	var dialog_border := flat_box(&"surface.3", 12, 12, 6)
+	var body := dialog_body(&"surface.3", &"border.subtle", 24, 20)
+	body.set_border_width_all(0)
+	set_stylebox("panel", "AcceptDialog", body)
+	var dialog_border := flat_box(&"surface.3", 12, 12, OUTER_RADIUS)
 	dialog_border.expand_margin_top = 32
 	dialog_border.shadow_color = Color(0, 0, 0, .25); dialog_border.shadow_size = 6
 	set_stylebox("embedded_border", "Window", dialog_border)

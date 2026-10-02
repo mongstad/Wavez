@@ -10,6 +10,11 @@ var grips: Array[Control] = []
 var minimized_from := -1
 var minimized_immersive := false
 var minimize_lost_focus := false
+var rounded_mode := -1
+var rounded_bar: StyleBoxTexture
+var square_bar: StyleBoxTexture
+var rounded_status: StyleBoxFlat
+var square_status: StyleBoxFlat
 
 func setup(owner_shell, row: HBoxContainer) -> void:
 	shell = owner_shell
@@ -39,6 +44,19 @@ func setup(owner_shell, row: HBoxContainer) -> void:
 
 func refresh() -> void:
 	if shell.style_slice == null: return
+	# Swap cached styles only on native mode transitions, never on every frame.
+	var mode := get_window().mode
+	if mode != rounded_mode:
+		rounded_mode = mode
+		var theme = shell.style_slice.theme
+		if rounded_bar == null:
+			rounded_bar = theme.rounded_tonal_surface(true, false)
+			square_bar = theme.tonal_surface()
+			rounded_status = theme.flat_box(&"surface.shade", 0, 0, theme.OUTER_RADIUS)
+			rounded_status.corner_radius_top_left = 0; rounded_status.corner_radius_top_right = 0
+			square_status = theme.flat_box(&"surface.shade", 0, 0, 0)
+		shell.bar.add_theme_stylebox_override("panel", rounded_bar if mode == Window.MODE_WINDOWED else square_bar)
+		shell.status_ui.add_theme_stylebox_override("panel", rounded_status if mode == Window.MODE_WINDOWED else square_status)
 	var extent: Vector2 = shell.get_viewport().get_visible_rect().size
 	var rectangles := [Rect2(0,0,GRIP,GRIP), Rect2(GRIP,0,extent.x-GRIP*2,GRIP), Rect2(extent.x-GRIP,0,GRIP,GRIP), Rect2(0,GRIP,GRIP,extent.y-GRIP*2), Rect2(extent.x-GRIP,GRIP,GRIP,extent.y-GRIP*2), Rect2(0,extent.y-GRIP,GRIP,GRIP), Rect2(GRIP,extent.y-GRIP,extent.x-GRIP*2,GRIP), Rect2(extent.x-GRIP,extent.y-GRIP,GRIP,GRIP)]
 	for i in grips.size():

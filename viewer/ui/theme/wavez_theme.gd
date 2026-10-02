@@ -3,6 +3,7 @@ extends Theme
 ## Derived at load time: edit tokens/builder, never a second serialized style palette.
 const TOKENS = preload("res://ui/theme/wavez_tokens.tres")
 const MONO = preload("res://ui/fonts/DejaVuSansMono.ttf")
+const OUTER_RADIUS := 6 # Accepted About outer-corner reference.
 var _icons: Dictionary = {}
 
 func c(key: StringName) -> Color: return TOKENS.color(key)
@@ -16,6 +17,13 @@ func box(fill: StringName, border: StringName = &"border.subtle", pad_x: int = 1
 	style.content_margin_left = pad_x; style.content_margin_right = pad_x
 	style.content_margin_top = pad_y; style.content_margin_bottom = pad_y
 	style.anti_aliasing = true
+	return style
+
+func dialog_body(fill: StringName, border: StringName, x: int, y: int) -> StyleBoxFlat:
+	# Embedded Window owns the outer header corners; the body joins it squarely.
+	var style := box(fill, border, x, y, OUTER_RADIUS)
+	style.corner_radius_top_left = 0; style.corner_radius_top_right = 0
+	style.border_width_top = 0
 	return style
 
 func atmosphere() -> StyleBoxTexture:
@@ -228,8 +236,8 @@ func _init() -> void:
 	set_icon("checked", "PopupMenu", icon_named("check", &"selection.text")); set_icon("submenu", "PopupMenu", icon_named("chevron_right"))
 	set_stylebox("panel", "TooltipPanel", box(&"surface.3", &"border.control", 12, 8, 6))
 	set_color("font_color", "TooltipLabel", c(&"text.primary")); set_font_size("font_size", "TooltipLabel", TOKENS.help_size)
-	set_stylebox("panel", "AcceptDialog", box(&"surface.3", &"border.control", 24, 24, 6))
-	var window_border := box(&"surface.3", &"border.control", 12, 12, 6)
+	set_stylebox("panel", "AcceptDialog", dialog_body(&"surface.3", &"border.control", 24, 24))
+	var window_border := box(&"surface.3", &"border.control", 12, 12, OUTER_RADIUS)
 	window_border.expand_margin_top = 32
 	set_stylebox("embedded_border", "Window", window_border)
 	set_stylebox("embedded_unfocused_border", "Window", window_border)

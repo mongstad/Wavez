@@ -1,5 +1,11 @@
 # Current status
 
+Issue #176 shares the About six-pixel outer radius across current custom dialog
+surfaces, fixes the About header/body seam, and rounds visible shell chrome only
+in normal windowed mode. Internal scientific viewport joins stay square; cached
+styles suppress shell rounding when maximized/fullscreen. Candidate build 19 is
+**pending owner review**. See [behavior, evidence and owner checks](ROUNDED_SURFACES.md).
+
 Issue #180 removes the visible WAVEZ label from the main shell top bar.
 Frame scene, Reset camera and Navigate now start at the existing left margin;
 menus, pin/window controls and blank-area window dragging retain their paths.
