@@ -1,0 +1,34 @@
+{
+  "accepted_base": "991a55abf14869f6df1424f6563d7485c70a689f",
+  "source": {
+    "path": "/home/Nozba/Downloads/cavity_collapse_mesh_wavez/cavity_collapse_torus_channels_240s.ssc",
+    "bytes": 4093738157,
+    "sha256": "fa64ef312dec6d3cf55a45b197c0a4963e1fc21ef7eac25937b58739bc1b27c3",
+    "matches_issue_191": true,
+    "strict_records_verified": 2401
+  },
+  "measurement_build": "v0.1.0.23",
+  "candidate_build": "v0.1.0.24",
+  "camera_audit": {
+    "active": "/root/@Node3D@2/@Camera3D@5",
+    "current_scene": "<Object#null>",
+    "distance": 0.5024327278137207,
+    "observed": "/root/@Node3D@2/@Camera3D@5",
+    "root_children": "[@Node3D@2:<Node3D#87409295566>, @Node@1903:<Node#252128010638>]"
+  },
+  "final_harness_sha256": {
+    "viewer/layers/profile_mesh_transport.gd": "23b1b5ebdd4835b3122e4d9a2526b6cb0d005227e405c09af858925a1cba1501",
+    "tools/summarize_mesh_transport.py": "54c5c0eb1d62caeb53e6f0d2d7c2527aca0b0253aa4ed7558e656639787a495e"
+  },
+  "validation": {
+    "godot_final_import": "passed without ERROR/WARNING/SCRIPT ERROR",
+    "version_unittest": {
+      "tests": 2,
+      "failures": 0
+    },
+    "python_compile": "passed",
+    "git_diff_check": "passed",
+    "recorded_timer_observations": 29071,
+    "timer_mismatches": 0
+  }
+}

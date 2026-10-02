@@ -1,0 +1,3271 @@
+[
+  {
+    "raw_path": "/tmp/issue193-forward/raw.json",
+    "raw_sha256": "3f2a3f059108aefd11014e2f7476ef17f1b2937fa92ca74a1151e2a6243c61dc",
+    "config": {
+      "capture": "/home/Nozba/Downloads/cavity_collapse_mesh_wavez/cavity_collapse_torus_channels_240s.ssc",
+      "cases": [
+        {
+          "name": "forward",
+          "seconds": 35.0,
+          "start": 0.0
+        }
+      ],
+      "output": "/tmp/issue193-forward/raw.json",
+      "screenshots": true
+    },
+    "device": "NVIDIA GeForce RTX 3070 Ti",
+    "display": "Wayland",
+    "first": 0.0,
+    "godot": {
+      "build": "official",
+      "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+      "hex": 263938,
+      "major": 4,
+      "minor": 7,
+      "patch": 2,
+      "status": "stable",
+      "string": "4.7.2-stable (official)",
+      "timestamp": 0
+    },
+    "initial_state": {
+      "channel": "",
+      "colormap": "viridis",
+      "lower": -2.0,
+      "upper": 2.0,
+      "visible": true,
+      "wireframe": false
+    },
+    "last": 240.0,
+    "memory": {
+      "available_physical": 34290208768,
+      "physical": 50404560896,
+      "process_peak_rss": 807964672,
+      "process_rss": 807964672,
+      "process_swap": 0,
+      "renderer_reserve": 268435456,
+      "reserve": 1780572282,
+      "safe_cache_bytes": 20161824358,
+      "system_reserve": 1512136826
+    },
+    "renderer": "forward_plus",
+    "source_samples": 2401,
+    "version": "v0.1.0.23",
+    "cases": [
+      {
+        "name": "forward",
+        "start": 0.0,
+        "wall_s": 34.990379,
+        "committed_end": 17.290453646919524,
+        "recorded_per_wall_second": 0.4941487957852507,
+        "physical_rate": 1.0,
+        "draw_callbacks_per_second": 140.61008027378043,
+        "draw_interval_ms": {
+          "count": 4919,
+          "mean": 7.110855051839805,
+          "p50": 6.937999999998112,
+          "p95": 7.911999999999253,
+          "max": 30.105999999999966
+        },
+        "process_callbacks": 4921,
+        "process_delta_s": 35.005992,
+        "main_callback_ms": {
+          "count": 4921,
+          "mean": 2.2211629750050803,
+          "p50": 2.398,
+          "p95": 3.656,
+          "max": 17.574
+        },
+        "commits_per_second": 14.261063019637485,
+        "worker_completed": 168,
+        "worker_pairs_per_second": 4.801319814226648,
+        "worker_ms_per_completed_pair": 206.6390357142857,
+        "decode_ms_per_completed_pair": null,
+        "decode_calls_delta": 0,
+        "holds": {
+          "count": 167,
+          "mean": 0.11345288023952085,
+          "p50": 0.11117399999999833,
+          "p95": 0.13899100000000075,
+          "max": 0.15963499999999975
+        },
+        "hold_observed_s": 18.946630999999982,
+        "hold_method": "Consecutive callbacks with a wait reason and no committed-clock change; final hold may be partial",
+        "timer_interval_s": {
+          "count": 16,
+          "mean": 2.066051375,
+          "p50": 2.0559394999999983,
+          "p95": 2.1112729999999997,
+          "max": 2.1112729999999997
+        },
+        "timer_mismatches": 0,
+        "status_counts": {
+          "Playing": 4904,
+          "Ready": 17
+        },
+        "peak_cache_bytes": 1073267600,
+        "cpu_limit": 1073267600,
+        "peak_staged": 1,
+        "peak_ready_pairs": 5,
+        "final_ready_pairs": 1,
+        "peak_in_flight_bytes": 214653520,
+        "coverage_span_seconds": {
+          "count": 4921,
+          "mean": 0.10642323277358423,
+          "p50": 0.10000166669444477,
+          "p95": 0.1000016666944461,
+          "max": 0.5000083334722246
+        },
+        "first_row": {
+          "active": false,
+          "alpha": 0.0,
+          "buffering": false,
+          "cache_bytes": 1073267600,
+          "callback_ms": 0.256,
+          "committed": 0.0,
+          "committed_before": 0.0,
+          "completed": 5,
+          "coverage": {
+            "fields": [],
+            "scene": [
+              [
+                0.0,
+                0.5000083334722246
+              ]
+            ]
+          },
+          "coverage_checked_ms": 4852,
+          "delta_s": 0.00689,
+          "grabber_width": 12,
+          "in_flight_bytes": 0,
+          "index": 0,
+          "pending": null,
+          "ready_sequences": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "requested": 0.00689,
+          "requested_before": 0.0,
+          "slider": 0.0,
+          "staged": 1,
+          "status": "Ready",
+          "timeline_width": 818.0,
+          "timer": "00:00",
+          "uploads": 2,
+          "wait": "",
+          "wall_s": 0.006616,
+          "worker_ms": 1070.25
+        },
+        "last_row": {
+          "active": true,
+          "alpha": 0.9016547269207464,
+          "buffering": true,
+          "cache_bytes": 214653520,
+          "callback_ms": 2.654,
+          "committed": 17.290453646919524,
+          "committed_before": 17.290453646919524,
+          "completed": 173,
+          "coverage": {
+            "fields": [],
+            "scene": [
+              [
+                17.200286671444523,
+                17.30028833813897
+              ]
+            ]
+          },
+          "coverage_checked_ms": 39881,
+          "delta_s": 0.007194,
+          "grabber_width": 12,
+          "in_flight_bytes": 214653520,
+          "index": 172,
+          "pending": 17.327074313586184,
+          "ready_sequences": [
+            172
+          ],
+          "requested": 17.290453646919524,
+          "requested_before": 17.290453646919524,
+          "slider": 172.0,
+          "staged": 0,
+          "status": "Playing",
+          "timeline_width": 818.0,
+          "timer": "00:17",
+          "uploads": 173,
+          "wait": "Required mesh content",
+          "wall_s": 34.987628,
+          "worker_ms": 35785.608
+        },
+        "cache_failures": {},
+        "pressure_failures": 0,
+        "errors": [
+          "",
+          ""
+        ],
+        "profile": {
+          "counters": {
+            "g3_display_samples": 500,
+            "g3_tail_polls": 35
+          },
+          "stages": {
+            "g3_layer_refresh": {
+              "count": 3263,
+              "max_ms": 6.337,
+              "mean_ms": 2.1903542752068605,
+              "p50_ms": 2.165,
+              "p95_ms": 2.529,
+              "samples_collected": 3263,
+              "total_ms": 7147.125999999986
+            },
+            "g3_mesh_gpu_stage": {
+              "count": 171,
+              "max_ms": 8.057,
+              "mean_ms": 6.0555614035087695,
+              "p50_ms": 6.002,
+              "p95_ms": 6.483,
+              "samples_collected": 171,
+              "total_ms": 1035.5009999999995
+            },
+            "g3_reader_refresh": {
+              "count": 3263,
+              "max_ms": 6.331,
+              "mean_ms": 2.1845519460619016,
+              "p50_ms": 2.16,
+              "p95_ms": 2.521,
+              "samples_collected": 3263,
+              "total_ms": 7128.192999999985
+            },
+            "g3_sample": {
+              "count": 3228,
+              "max_ms": 17.522,
+              "mean_ms": 3.1914324659231688,
+              "p50_ms": 2.476,
+              "p95_ms": 14.105,
+              "samples_collected": 3228,
+              "total_ms": 10301.943999999989
+            },
+            "g3_source_stamp": {
+              "count": 3263,
+              "max_ms": 6.323,
+              "mean_ms": 2.1763361936867907,
+              "p50_ms": 2.152,
+              "p95_ms": 2.511,
+              "samples_collected": 3263,
+              "total_ms": 7101.3849999999975
+            },
+            "g3_tail_poll": {
+              "count": 35,
+              "max_ms": 2.618,
+              "mean_ms": 2.2349142857142854,
+              "p50_ms": 2.227,
+              "p95_ms": 2.54,
+              "samples_collected": 35,
+              "total_ms": 78.222
+            },
+            "g3_tick": {
+              "count": 4921,
+              "max_ms": 17.561,
+              "mean_ms": 2.209895549685022,
+              "p50_ms": 2.388,
+              "p95_ms": 3.644,
+              "samples_collected": 4921,
+              "total_ms": 10874.895999999993
+            },
+            "hud_cpu": {
+              "count": 499,
+              "max_ms": 0.071,
+              "mean_ms": 0.022951903807615213,
+              "p50_ms": 0.022,
+              "p95_ms": 0.029,
+              "samples_collected": 499,
+              "total_ms": 11.452999999999992
+            },
+            "interpolation_submission_inclusive": {
+              "count": 499,
+              "max_ms": 0.062,
+              "mean_ms": 0.016555110220440893,
+              "p50_ms": 0.016,
+              "p95_ms": 0.019,
+              "samples_collected": 499,
+              "total_ms": 8.261000000000005
+            },
+            "process_inclusive": {
+              "count": 4921,
+              "max_ms": 17.566,
+              "mean_ms": 2.2145131070920554,
+              "p50_ms": 2.392,
+              "p95_ms": 3.649,
+              "samples_collected": 4921,
+              "total_ms": 10897.619000000004
+            }
+          }
+        },
+        "memory_after": null
+      }
+    ]
+  },
+  {
+    "raw_path": "/tmp/issue193-forward-extra/raw.json",
+    "raw_sha256": "944467c61ba02313ac7e946d9475bd7bd132d1a392559102c0ae2596954c4a65",
+    "config": {
+      "capture": "/home/Nozba/Downloads/cavity_collapse_mesh_wavez/cavity_collapse_torus_channels_240s.ssc",
+      "cases": [
+        {
+          "name": "quarter-speed",
+          "rate": 0.25,
+          "seconds": 12.0,
+          "start": 20.0
+        },
+        {
+          "name": "reverse",
+          "rate": -1.0,
+          "seconds": 15.0,
+          "start": 120.0
+        },
+        {
+          "channel": "radius",
+          "name": "scalar",
+          "seconds": 15.0,
+          "start": 40.0
+        },
+        {
+          "fullscreen": true,
+          "name": "fullscreen",
+          "seconds": 15.0,
+          "start": 60.0
+        }
+      ],
+      "output": "/tmp/issue193-forward-extra/raw.json",
+      "screenshots": true
+    },
+    "device": "NVIDIA GeForce RTX 3070 Ti",
+    "display": "Wayland",
+    "first": 0.0,
+    "godot": {
+      "build": "official",
+      "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+      "hex": 263938,
+      "major": 4,
+      "minor": 7,
+      "patch": 2,
+      "status": "stable",
+      "string": "4.7.2-stable (official)",
+      "timestamp": 0
+    },
+    "initial_state": {
+      "channel": "",
+      "colormap": "viridis",
+      "lower": -2.0,
+      "upper": 2.0,
+      "visible": true,
+      "wireframe": false
+    },
+    "last": 240.0,
+    "memory": {
+      "available_physical": 34308919296,
+      "physical": 50404560896,
+      "process_peak_rss": 809037824,
+      "process_rss": 809037824,
+      "process_swap": 0,
+      "renderer_reserve": 268435456,
+      "reserve": 1780572282,
+      "safe_cache_bytes": 20161824358,
+      "system_reserve": 1512136826
+    },
+    "renderer": "forward_plus",
+    "source_samples": 2401,
+    "version": "v0.1.0.23",
+    "cases": [
+      {
+        "name": "quarter-speed",
+        "start": 20.0,
+        "wall_s": 12.016025,
+        "committed_end": 23.001022222221486,
+        "recorded_per_wall_second": 0.24975166265229026,
+        "physical_rate": 0.25,
+        "draw_callbacks_per_second": 143.55828986707334,
+        "draw_interval_ms": {
+          "count": 1724,
+          "mean": 6.952859048723898,
+          "p50": 6.936500000000123,
+          "p95": 10.38700000000059,
+          "max": 27.605
+        },
+        "process_callbacks": 1726,
+        "process_delta_s": 12.004088888888889,
+        "main_callback_ms": {
+          "count": 1726,
+          "mean": 1.139665121668598,
+          "p50": 0.215,
+          "p95": 3.59,
+          "max": 19.373
+        },
+        "commits_per_second": 29.959990928780524,
+        "worker_completed": 30,
+        "worker_pairs_per_second": 2.49666591073171,
+        "worker_ms_per_completed_pair": 209.72506666666675,
+        "decode_ms_per_completed_pair": null,
+        "decode_calls_delta": 0,
+        "holds": {},
+        "hold_observed_s": 0,
+        "hold_method": "Consecutive callbacks with a wait reason and no committed-clock change; final hold may be partial",
+        "timer_interval_s": {
+          "count": 2,
+          "mean": 3.9964670000000004,
+          "p50": 3.9964670000000004,
+          "p95": 4.005382000000001,
+          "max": 4.005382000000001
+        },
+        "timer_mismatches": 0,
+        "status_counts": {
+          "Playing": 1706,
+          "Ready": 20
+        },
+        "peak_cache_bytes": 1073267600,
+        "cpu_limit": 1073267600,
+        "peak_staged": 1,
+        "peak_ready_pairs": 5,
+        "final_ready_pairs": 4,
+        "peak_in_flight_bytes": 214653520,
+        "coverage_span_seconds": {
+          "count": 1726,
+          "mean": 0.44925430101316716,
+          "p50": 0.4000066667777844,
+          "p95": 0.500008333472227,
+          "max": 0.5000083334722305
+        },
+        "first_row": {
+          "active": false,
+          "alpha": 0.9966666666666957,
+          "buffering": false,
+          "cache_bytes": 1073267600,
+          "callback_ms": 0.254,
+          "committed": 20.0,
+          "committed_before": 20.0,
+          "completed": 5,
+          "coverage": {
+            "fields": [],
+            "scene": [
+              [
+                19.900331672194536,
+                20.400340005666763
+              ]
+            ]
+          },
+          "coverage_checked_ms": 4879,
+          "delta_s": 0.006896,
+          "grabber_width": 12,
+          "in_flight_bytes": 0,
+          "index": 199,
+          "pending": null,
+          "ready_sequences": [
+            199,
+            200,
+            201,
+            202,
+            203
+          ],
+          "requested": 20.001724,
+          "requested_before": 20.0,
+          "slider": 199.0,
+          "staged": 1,
+          "status": "Ready",
+          "timeline_width": 810.0,
+          "timer": "00:20",
+          "uploads": 2,
+          "wait": "",
+          "wall_s": 0.006571,
+          "worker_ms": 1084.328
+        },
+        "last_row": {
+          "active": true,
+          "alpha": 0.0063887185111511854,
+          "buffering": false,
+          "cache_bytes": 858614080,
+          "callback_ms": 19.373,
+          "committed": 23.001022222221486,
+          "committed_before": 22.992341666665933,
+          "completed": 35,
+          "coverage": {
+            "fields": [],
+            "scene": [
+              [
+                22.900381673027887,
+                23.40039000650011
+              ]
+            ]
+          },
+          "coverage_checked_ms": 17030,
+          "delta_s": 0.006944444444444445,
+          "grabber_width": 12,
+          "in_flight_bytes": 214653520,
+          "index": 230,
+          "pending": null,
+          "ready_sequences": [
+            230,
+            231,
+            232,
+            233
+          ],
+          "requested": 23.001022222221486,
+          "requested_before": 22.999286111110376,
+          "slider": 230.0,
+          "staged": 1,
+          "status": "Playing",
+          "timeline_width": 810.0,
+          "timer": "00:23",
+          "uploads": 33,
+          "wait": "",
+          "wall_s": 11.996237,
+          "worker_ms": 7376.080000000003
+        },
+        "cache_failures": {},
+        "pressure_failures": 0,
+        "errors": [
+          "",
+          ""
+        ],
+        "profile": {
+          "counters": {
+            "g3_display_samples": 360,
+            "g3_tail_polls": 12
+          },
+          "stages": {
+            "g3_layer_refresh": {
+              "count": 372,
+              "max_ms": 2.908,
+              "mean_ms": 2.3491989247311826,
+              "p50_ms": 2.342,
+              "p95_ms": 2.624,
+              "samples_collected": 372,
+              "total_ms": 873.9019999999999
+            },
+            "g3_mesh_gpu_stage": {
+              "count": 31,
+              "max_ms": 7.545,
+              "mean_ms": 6.286645161290324,
+              "p50_ms": 6.138,
+              "p95_ms": 7.538,
+              "samples_collected": 31,
+              "total_ms": 194.88600000000005
+            },
+            "g3_reader_refresh": {
+              "count": 372,
+              "max_ms": 2.902,
+              "mean_ms": 2.3423279569892483,
+              "p50_ms": 2.335,
+              "p95_ms": 2.617,
+              "samples_collected": 372,
+              "total_ms": 871.3460000000005
+            },
+            "g3_sample": {
+              "count": 360,
+              "max_ms": 19.175,
+              "mean_ms": 4.348491666666664,
+              "p50_ms": 3.188,
+              "p95_ms": 16.897,
+              "samples_collected": 360,
+              "total_ms": 1565.456999999999
+            },
+            "g3_source_stamp": {
+              "count": 372,
+              "max_ms": 2.891,
+              "mean_ms": 2.333118279569891,
+              "p50_ms": 2.327,
+              "p95_ms": 2.607,
+              "samples_collected": 372,
+              "total_ms": 867.9199999999995
+            },
+            "g3_tail_poll": {
+              "count": 12,
+              "max_ms": 2.635,
+              "mean_ms": 2.3008333333333333,
+              "p50_ms": 2.295,
+              "p95_ms": 2.635,
+              "samples_collected": 12,
+              "total_ms": 27.61
+            },
+            "g3_tick": {
+              "count": 1726,
+              "max_ms": 19.357,
+              "mean_ms": 1.1283528389339503,
+              "p50_ms": 0.203,
+              "p95_ms": 3.581,
+              "samples_collected": 1726,
+              "total_ms": 1947.5369999999982
+            },
+            "hud_cpu": {
+              "count": 360,
+              "max_ms": 0.035,
+              "mean_ms": 0.02131388888888885,
+              "p50_ms": 0.021,
+              "p95_ms": 0.026,
+              "samples_collected": 360,
+              "total_ms": 7.672999999999986
+            },
+            "interpolation_submission_inclusive": {
+              "count": 360,
+              "max_ms": 0.03,
+              "mean_ms": 0.014249999999999974,
+              "p50_ms": 0.014,
+              "p95_ms": 0.018,
+              "samples_collected": 360,
+              "total_ms": 5.129999999999991
+            },
+            "process_inclusive": {
+              "count": 1726,
+              "max_ms": 19.364,
+              "mean_ms": 1.133139629200464,
+              "p50_ms": 0.208,
+              "p95_ms": 3.584,
+              "samples_collected": 1726,
+              "total_ms": 1955.7990000000011
+            }
+          }
+        },
+        "memory_after": null
+      },
+      {
+        "name": "reverse",
+        "start": 120.0,
+        "wall_s": 15.016401,
+        "committed_end": 112.40527506926588,
+        "recorded_per_wall_second": -0.5057619952167045,
+        "physical_rate": -1.0,
+        "draw_callbacks_per_second": 140.3132481611273,
+        "draw_interval_ms": {
+          "count": 2106,
+          "mean": 7.125873694207028,
+          "p50": 6.94099999999942,
+          "p95": 10.851999999999862,
+          "max": 29.776000000000025
+        },
+        "process_callbacks": 2108,
+        "process_delta_s": 15.002777777777778,
+        "main_callback_ms": {
+          "count": 2108,
+          "mean": 2.212278937381404,
+          "p50": 2.3735,
+          "p95": 3.976,
+          "max": 18.134
+        },
+        "commits_per_second": 14.71724150147562,
+        "worker_completed": 71,
+        "worker_pairs_per_second": 4.728163559297597,
+        "worker_ms_per_completed_pair": 208.48404225352115,
+        "decode_ms_per_completed_pair": null,
+        "decode_calls_delta": 0,
+        "holds": {
+          "count": 69,
+          "mean": 0.11264818840579705,
+          "p50": 0.11119500000000038,
+          "p95": 0.13937100000000058,
+          "max": 0.15278500000000017
+        },
+        "hold_observed_s": 7.772724999999996,
+        "hold_method": "Consecutive callbacks with a wait reason and no committed-clock change; final hold may be partial",
+        "timer_interval_s": {
+          "count": 7,
+          "mean": 1.9794117142857142,
+          "p50": 2.091239999999999,
+          "p95": 2.1061449999999997,
+          "max": 2.1061449999999997
+        },
+        "timer_mismatches": 0,
+        "status_counts": {
+          "Playing": 2108
+        },
+        "peak_cache_bytes": 1073267600,
+        "cpu_limit": 1073267600,
+        "peak_staged": 1,
+        "peak_ready_pairs": 5,
+        "final_ready_pairs": 1,
+        "peak_in_flight_bytes": 214653520,
+        "coverage_span_seconds": {
+          "count": 2108,
+          "mean": 0.11375901173305468,
+          "p50": 0.100001666694439,
+          "p95": 0.2000033333888922,
+          "max": 0.5000083334722234
+        },
+        "first_row": {
+          "active": false,
+          "alpha": 0.9800000000000313,
+          "buffering": false,
+          "cache_bytes": 1073267600,
+          "callback_ms": 0.207,
+          "committed": 120.0,
+          "committed_before": 120.0,
+          "completed": 40,
+          "coverage": {
+            "fields": [],
+            "scene": [
+              [
+                119.50199169986166,
+                120.00200003333389
+              ]
+            ]
+          },
+          "coverage_checked_ms": 20236,
+          "delta_s": 0.006944444444444445,
+          "grabber_width": 12,
+          "in_flight_bytes": 0,
+          "index": 1199,
+          "pending": null,
+          "ready_sequences": [
+            1199,
+            1198,
+            1197,
+            1196,
+            1195
+          ],
+          "requested": 119.99305555555556,
+          "requested_before": 120.0,
+          "slider": 1199.0,
+          "staged": 1,
+          "status": "Playing",
+          "timeline_width": 818.0,
+          "timer": "02:00",
+          "uploads": 35,
+          "wait": "",
+          "wall_s": 0.006615,
+          "worker_ms": 8546.355000000003
+        },
+        "last_row": {
+          "active": true,
+          "alpha": 0.034016480147235385,
+          "buffering": false,
+          "cache_bytes": 214653520,
+          "callback_ms": 0.181,
+          "committed": 112.40527506926588,
+          "committed_before": 112.40527506926588,
+          "completed": 111,
+          "coverage": {
+            "fields": [],
+            "scene": [
+              [
+                112.40187336455608,
+                112.50187503125052
+              ]
+            ]
+          },
+          "coverage_checked_ms": 35323,
+          "delta_s": 0.007142857142857143,
+          "grabber_width": 12,
+          "in_flight_bytes": 214653520,
+          "index": 1124,
+          "pending": null,
+          "ready_sequences": [
+            1124
+          ],
+          "requested": 112.38384649783733,
+          "requested_before": 112.39098935498018,
+          "slider": 1124.0,
+          "staged": 0,
+          "status": "Playing",
+          "timeline_width": 818.0,
+          "timer": "01:52",
+          "uploads": 109,
+          "wait": "",
+          "wall_s": 15.016148,
+          "worker_ms": 23348.722000000005
+        },
+        "cache_failures": {},
+        "pressure_failures": 0,
+        "errors": [
+          "",
+          ""
+        ],
+        "profile": {
+          "counters": {
+            "g3_display_samples": 221,
+            "g3_tail_polls": 15
+          },
+          "stages": {
+            "g3_layer_refresh": {
+              "count": 1354,
+              "max_ms": 2.762,
+              "mean_ms": 2.1784313146233387,
+              "p50_ms": 2.14,
+              "p95_ms": 2.534,
+              "samples_collected": 1354,
+              "total_ms": 2949.5960000000005
+            },
+            "g3_mesh_gpu_stage": {
+              "count": 74,
+              "max_ms": 8.135,
+              "mean_ms": 6.26035135135135,
+              "p50_ms": 6.146,
+              "p95_ms": 6.875,
+              "samples_collected": 74,
+              "total_ms": 463.2659999999999
+            },
+            "g3_reader_refresh": {
+              "count": 1354,
+              "max_ms": 2.754,
+              "mean_ms": 2.172539143279171,
+              "p50_ms": 2.134,
+              "p95_ms": 2.525,
+              "samples_collected": 1354,
+              "total_ms": 2941.6179999999977
+            },
+            "g3_sample": {
+              "count": 1339,
+              "max_ms": 18.085,
+              "mean_ms": 3.27373487677371,
+              "p50_ms": 2.459,
+              "p95_ms": 14.616,
+              "samples_collected": 1339,
+              "total_ms": 4383.530999999997
+            },
+            "g3_source_stamp": {
+              "count": 1354,
+              "max_ms": 2.741,
+              "mean_ms": 2.164396602658787,
+              "p50_ms": 2.127,
+              "p95_ms": 2.515,
+              "samples_collected": 1354,
+              "total_ms": 2930.5929999999976
+            },
+            "g3_tail_poll": {
+              "count": 15,
+              "max_ms": 2.63,
+              "mean_ms": 2.2962,
+              "p50_ms": 2.292,
+              "p95_ms": 2.63,
+              "samples_collected": 15,
+              "total_ms": 34.443
+            },
+            "g3_tick": {
+              "count": 2108,
+              "max_ms": 18.122,
+              "mean_ms": 2.2010355787476255,
+              "p50_ms": 2.364,
+              "p95_ms": 3.965,
+              "samples_collected": 2108,
+              "total_ms": 4639.782999999995
+            },
+            "hud_cpu": {
+              "count": 221,
+              "max_ms": 0.124,
+              "mean_ms": 0.02333936651583708,
+              "p50_ms": 0.022,
+              "p95_ms": 0.028,
+              "samples_collected": 221,
+              "total_ms": 5.157999999999995
+            },
+            "interpolation_submission_inclusive": {
+              "count": 221,
+              "max_ms": 0.032,
+              "mean_ms": 0.016524886877828018,
+              "p50_ms": 0.016,
+              "p95_ms": 0.019,
+              "samples_collected": 221,
+              "total_ms": 3.651999999999992
+            },
+            "process_inclusive": {
+              "count": 2108,
+              "max_ms": 18.126,
+              "mean_ms": 2.205571157495258,
+              "p50_ms": 2.368,
+              "p95_ms": 3.969,
+              "samples_collected": 2108,
+              "total_ms": 4649.344000000004
+            }
+          }
+        },
+        "memory_after": null
+      },
+      {
+        "name": "scalar",
+        "start": 40.0,
+        "wall_s": 15.034334,
+        "committed_end": 46.472510028377954,
+        "recorded_per_wall_second": 0.4305152478572017,
+        "physical_rate": 1.0,
+        "draw_callbacks_per_second": 143.00600212819538,
+        "draw_interval_ms": {
+          "count": 2149,
+          "mean": 6.986491391344811,
+          "p50": 6.9390000000000285,
+          "p95": 13.729999999999798,
+          "max": 27.979000000000198
+        },
+        "process_callbacks": 2151,
+        "process_delta_s": 15.0066763968254,
+        "main_callback_ms": {
+          "count": 2151,
+          "mean": 2.2207973035797304,
+          "p50": 2.406,
+          "p95": 3.7,
+          "max": 17.636
+        },
+        "commits_per_second": 12.438196464173272,
+        "worker_completed": 61,
+        "worker_pairs_per_second": 4.057379595265078,
+        "worker_ms_per_completed_pair": 243.17139344262287,
+        "decode_ms_per_completed_pair": null,
+        "decode_calls_delta": 0,
+        "holds": {
+          "count": 60,
+          "mean": 0.14883464999999993,
+          "p50": 0.14598199999999972,
+          "p95": 0.18064199999999975,
+          "max": 0.19044600000000056
+        },
+        "hold_observed_s": 8.930078999999996,
+        "hold_method": "Consecutive callbacks with a wait reason and no committed-clock change; final hold may be partial",
+        "timer_interval_s": {
+          "count": 5,
+          "mean": 2.434646,
+          "p50": 2.431064000000001,
+          "p95": 2.4726549999999996,
+          "max": 2.4726549999999996
+        },
+        "timer_mismatches": 0,
+        "status_counts": {
+          "Playing": 2131,
+          "Ready": 20
+        },
+        "peak_cache_bytes": 1073267600,
+        "cpu_limit": 1073267600,
+        "peak_staged": 1,
+        "peak_ready_pairs": 5,
+        "final_ready_pairs": 1,
+        "peak_in_flight_bytes": 214653520,
+        "coverage_span_seconds": {
+          "count": 2151,
+          "mean": 0.11120594455281856,
+          "p50": 0.1000016666944461,
+          "p95": 0.1000016666944532,
+          "max": 0.5000083334722234
+        },
+        "first_row": {
+          "active": false,
+          "alpha": 0.9933333333333911,
+          "buffering": false,
+          "cache_bytes": 1073267600,
+          "callback_ms": 0.216,
+          "committed": 40.0,
+          "committed_before": 40.0,
+          "completed": 117,
+          "coverage": {
+            "fields": [],
+            "scene": [
+              [
+                39.90066501108352,
+                40.40067334455574
+              ]
+            ]
+          },
+          "coverage_checked_ms": 38763,
+          "delta_s": 0.006944,
+          "grabber_width": 12,
+          "in_flight_bytes": 0,
+          "index": 399,
+          "pending": null,
+          "ready_sequences": [
+            399,
+            400,
+            401,
+            402,
+            403
+          ],
+          "requested": 40.006944,
+          "requested_before": 40.0,
+          "slider": 399.0,
+          "staged": 1,
+          "status": "Ready",
+          "timeline_width": 818.0,
+          "timer": "00:40",
+          "uploads": 111,
+          "wait": "",
+          "wall_s": 0.004114,
+          "worker_ms": 24806.342000000004
+        },
+        "last_row": {
+          "active": true,
+          "alpha": 0.7173548654414731,
+          "buffering": true,
+          "cache_bytes": 214653520,
+          "callback_ms": 2.444,
+          "committed": 46.472510028377954,
+          "committed_before": 46.472510028377954,
+          "completed": 178,
+          "coverage": {
+            "fields": [],
+            "scene": [
+              [
+                46.40077334622244,
+                46.50077501291688
+              ]
+            ]
+          },
+          "coverage_checked_ms": 53816,
+          "delta_s": 0.006944444444444445,
+          "grabber_width": 12,
+          "in_flight_bytes": 214653520,
+          "index": 464,
+          "pending": 46.50723225060017,
+          "ready_sequences": [
+            464
+          ],
+          "requested": 46.472510028377954,
+          "requested_before": 46.472510028377954,
+          "slider": 464.0,
+          "staged": 0,
+          "status": "Playing",
+          "timeline_width": 818.0,
+          "timer": "00:46",
+          "uploads": 175,
+          "wait": "Required mesh content",
+          "wall_s": 15.020427,
+          "worker_ms": 39639.797
+        },
+        "cache_failures": {},
+        "pressure_failures": 0,
+        "errors": [
+          "",
+          ""
+        ],
+        "profile": {
+          "counters": {
+            "g3_display_samples": 188,
+            "g3_tail_polls": 14
+          },
+          "stages": {
+            "g3_layer_refresh": {
+              "count": 1481,
+              "max_ms": 3.981,
+              "mean_ms": 2.181377447670496,
+              "p50_ms": 2.157,
+              "p95_ms": 2.502,
+              "samples_collected": 1481,
+              "total_ms": 3230.6200000000044
+            },
+            "g3_mesh_gpu_stage": {
+              "count": 64,
+              "max_ms": 6.928,
+              "mean_ms": 6.252906249999999,
+              "p50_ms": 6.203,
+              "p95_ms": 6.688,
+              "samples_collected": 64,
+              "total_ms": 400.1859999999999
+            },
+            "g3_reader_refresh": {
+              "count": 1481,
+              "max_ms": 3.974,
+              "mean_ms": 2.1757683997299098,
+              "p50_ms": 2.152,
+              "p95_ms": 2.495,
+              "samples_collected": 1481,
+              "total_ms": 3222.3129999999965
+            },
+            "g3_sample": {
+              "count": 1467,
+              "max_ms": 15.886,
+              "mean_ms": 3.0840047716428063,
+              "p50_ms": 2.467,
+              "p95_ms": 3.631,
+              "samples_collected": 1467,
+              "total_ms": 4524.234999999997
+            },
+            "g3_source_stamp": {
+              "count": 1481,
+              "max_ms": 3.964,
+              "mean_ms": 2.167766374071575,
+              "p50_ms": 2.144,
+              "p95_ms": 2.485,
+              "samples_collected": 1481,
+              "total_ms": 3210.4620000000027
+            },
+            "g3_tail_poll": {
+              "count": 14,
+              "max_ms": 2.463,
+              "mean_ms": 2.2078571428571427,
+              "p50_ms": 2.168,
+              "p95_ms": 2.463,
+              "samples_collected": 14,
+              "total_ms": 30.91
+            },
+            "g3_tick": {
+              "count": 2151,
+              "max_ms": 17.622,
+              "mean_ms": 2.2097828916782927,
+              "p50_ms": 2.396,
+              "p95_ms": 3.69,
+              "samples_collected": 2151,
+              "total_ms": 4753.243000000008
+            },
+            "hud_cpu": {
+              "count": 187,
+              "max_ms": 0.141,
+              "mean_ms": 0.02390909090909089,
+              "p50_ms": 0.023,
+              "p95_ms": 0.029,
+              "samples_collected": 187,
+              "total_ms": 4.4709999999999965
+            },
+            "interpolation_submission_inclusive": {
+              "count": 187,
+              "max_ms": 0.031,
+              "mean_ms": 0.016352941176470563,
+              "p50_ms": 0.016,
+              "p95_ms": 0.019,
+              "samples_collected": 187,
+              "total_ms": 3.0579999999999954
+            },
+            "process_inclusive": {
+              "count": 2151,
+              "max_ms": 17.628,
+              "mean_ms": 2.2142612738261267,
+              "p50_ms": 2.399,
+              "p95_ms": 3.694,
+              "samples_collected": 2151,
+              "total_ms": 4762.875999999998
+            }
+          }
+        },
+        "memory_after": null
+      },
+      {
+        "name": "fullscreen",
+        "start": 60.0,
+        "wall_s": 15.013462,
+        "committed_end": 66.47594703944108,
+        "recorded_per_wall_second": 0.43134268694596095,
+        "physical_rate": 1.0,
+        "draw_callbacks_per_second": 142.8051704530241,
+        "draw_interval_ms": {
+          "count": 2143,
+          "mean": 7.001449836677555,
+          "p50": 6.946000000000119,
+          "p95": 13.75700000000002,
+          "max": 27.660000000000018
+        },
+        "process_callbacks": 2145,
+        "process_delta_s": 15.00596711111111,
+        "main_callback_ms": {
+          "count": 2145,
+          "mean": 2.255675058275058,
+          "p50": 2.449,
+          "p95": 3.818,
+          "max": 16.98
+        },
+        "commits_per_second": 12.455488281117306,
+        "worker_completed": 61,
+        "worker_pairs_per_second": 4.063020241433987,
+        "worker_ms_per_completed_pair": 244.7324918032794,
+        "decode_ms_per_completed_pair": null,
+        "decode_calls_delta": 0,
+        "holds": {
+          "count": 59,
+          "mean": 0.15142159322033902,
+          "p50": 0.1459520000000012,
+          "p95": 0.1876310000000001,
+          "max": 0.18838199999999983
+        },
+        "hold_observed_s": 8.933874000000001,
+        "hold_method": "Consecutive callbacks with a wait reason and no committed-clock change; final hold may be partial",
+        "timer_interval_s": {
+          "count": 5,
+          "mean": 2.4505863999999997,
+          "p50": 2.449858999999999,
+          "p95": 2.461068,
+          "max": 2.461068
+        },
+        "timer_mismatches": 0,
+        "status_counts": {
+          "Playing": 2145
+        },
+        "peak_cache_bytes": 1073267600,
+        "cpu_limit": 1073267600,
+        "peak_staged": 1,
+        "peak_ready_pairs": 5,
+        "final_ready_pairs": 1,
+        "peak_in_flight_bytes": 214653520,
+        "coverage_span_seconds": {
+          "count": 2145,
+          "mean": 0.11230956413376095,
+          "p50": 0.100001666694439,
+          "p95": 0.2000033333888922,
+          "max": 0.5000083334722234
+        },
+        "first_row": {
+          "active": false,
+          "alpha": 0.9900000000000163,
+          "buffering": false,
+          "cache_bytes": 1073267600,
+          "callback_ms": 0.203,
+          "committed": 60.0,
+          "committed_before": 60.0,
+          "completed": 184,
+          "coverage": {
+            "fields": [],
+            "scene": [
+              [
+                59.9009983499725,
+                60.40100668344472
+              ]
+            ]
+          },
+          "coverage_checked_ms": 57233,
+          "delta_s": 0.006944,
+          "grabber_width": 12,
+          "in_flight_bytes": 0,
+          "index": 599,
+          "pending": null,
+          "ready_sequences": [
+            599,
+            600,
+            601,
+            602,
+            603
+          ],
+          "requested": 60.006944,
+          "requested_before": 60.0,
+          "slider": 599.0,
+          "staged": 1,
+          "status": "Playing",
+          "timeline_width": 1930.0,
+          "timer": "01:00",
+          "uploads": 177,
+          "wait": "",
+          "wall_s": 0.006624,
+          "worker_ms": 41237.525
+        },
+        "last_row": {
+          "active": true,
+          "alpha": 0.7483910699043167,
+          "buffering": false,
+          "cache_bytes": 214653520,
+          "callback_ms": 0.266,
+          "committed": 66.47594703944108,
+          "committed_before": 66.47594703944108,
+          "completed": 245,
+          "coverage": {
+            "fields": [],
+            "scene": [
+              [
+                66.30110501841696,
+                66.40110668511142
+              ]
+            ]
+          },
+          "coverage_checked_ms": 72102,
+          "delta_s": 0.006944444444444445,
+          "grabber_width": 12,
+          "in_flight_bytes": 214653520,
+          "index": 664,
+          "pending": null,
+          "ready_sequences": [
+            664
+          ],
+          "requested": 66.48289148388552,
+          "requested_before": 66.47594703944108,
+          "slider": 664.0,
+          "staged": 0,
+          "status": "Playing",
+          "timeline_width": 1930.0,
+          "timer": "01:06",
+          "uploads": 241,
+          "wait": "",
+          "wall_s": 15.013121,
+          "worker_ms": 56166.207000000046
+        },
+        "cache_failures": {},
+        "pressure_failures": 0,
+        "errors": [
+          "",
+          ""
+        ],
+        "profile": {
+          "counters": {
+            "g3_display_samples": 187,
+            "g3_tail_polls": 15
+          },
+          "stages": {
+            "g3_layer_refresh": {
+              "count": 1484,
+              "max_ms": 3.809,
+              "mean_ms": 2.212621293800542,
+              "p50_ms": 2.186,
+              "p95_ms": 2.561,
+              "samples_collected": 1484,
+              "total_ms": 3283.5300000000047
+            },
+            "g3_mesh_gpu_stage": {
+              "count": 64,
+              "max_ms": 6.649,
+              "mean_ms": 6.149265624999999,
+              "p50_ms": 6.107,
+              "p95_ms": 6.532,
+              "samples_collected": 64,
+              "total_ms": 393.55299999999994
+            },
+            "g3_reader_refresh": {
+              "count": 1484,
+              "max_ms": 3.798,
+              "mean_ms": 2.206950134770887,
+              "p50_ms": 2.181,
+              "p95_ms": 2.554,
+              "samples_collected": 1484,
+              "total_ms": 3275.113999999996
+            },
+            "g3_sample": {
+              "count": 1469,
+              "max_ms": 16.743,
+              "mean_ms": 3.12499659632403,
+              "p50_ms": 2.496,
+              "p95_ms": 3.744,
+              "samples_collected": 1469,
+              "total_ms": 4590.62
+            },
+            "g3_source_stamp": {
+              "count": 1484,
+              "max_ms": 3.783,
+              "mean_ms": 2.1989905660377365,
+              "p50_ms": 2.174,
+              "p95_ms": 2.543,
+              "samples_collected": 1484,
+              "total_ms": 3263.302000000001
+            },
+            "g3_tail_poll": {
+              "count": 15,
+              "max_ms": 2.697,
+              "mean_ms": 2.2396000000000003,
+              "p50_ms": 2.184,
+              "p95_ms": 2.697,
+              "samples_collected": 15,
+              "total_ms": 33.594
+            },
+            "g3_tick": {
+              "count": 2145,
+              "max_ms": 16.97,
+              "mean_ms": 2.244759440559437,
+              "p50_ms": 2.438,
+              "p95_ms": 3.806,
+              "samples_collected": 2145,
+              "total_ms": 4815.008999999993
+            },
+            "hud_cpu": {
+              "count": 187,
+              "max_ms": 0.035,
+              "mean_ms": 0.023053475935828842,
+              "p50_ms": 0.023,
+              "p95_ms": 0.029,
+              "samples_collected": 187,
+              "total_ms": 4.310999999999994
+            },
+            "interpolation_submission_inclusive": {
+              "count": 187,
+              "max_ms": 0.053,
+              "mean_ms": 0.01652941176470585,
+              "p50_ms": 0.016,
+              "p95_ms": 0.019,
+              "samples_collected": 187,
+              "total_ms": 3.0909999999999944
+            },
+            "process_inclusive": {
+              "count": 2145,
+              "max_ms": 16.974,
+              "mean_ms": 2.249179487179489,
+              "p50_ms": 2.441,
+              "p95_ms": 3.81,
+              "samples_collected": 2145,
+              "total_ms": 4824.490000000004
+            }
+          }
+        },
+        "memory_after": null
+      }
+    ]
+  },
+  {
+    "raw_path": "/tmp/issue193-compat/raw.json",
+    "raw_sha256": "8df855bb1a581bd96b80182f0144bdbfd2a43f6140b596f9f068c43c4b6e09f7",
+    "config": {
+      "capture": "/home/Nozba/Downloads/cavity_collapse_mesh_wavez/cavity_collapse_torus_channels_240s.ssc",
+      "cases": [
+        {
+          "name": "forward",
+          "seconds": 35.0,
+          "start": 0.0
+        },
+        {
+          "name": "quarter-speed",
+          "rate": 0.25,
+          "seconds": 12.0,
+          "start": 20.0
+        },
+        {
+          "name": "reverse",
+          "rate": -1.0,
+          "seconds": 15.0,
+          "start": 120.0
+        },
+        {
+          "channel": "radius",
+          "name": "scalar",
+          "seconds": 15.0,
+          "start": 40.0
+        },
+        {
+          "fullscreen": true,
+          "name": "fullscreen",
+          "seconds": 15.0,
+          "start": 60.0
+        }
+      ],
+      "output": "/tmp/issue193-compat/raw.json",
+      "screenshots": true
+    },
+    "device": "NVIDIA GeForce RTX 3070 Ti",
+    "display": "Wayland",
+    "first": 0.0,
+    "godot": {
+      "build": "official",
+      "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+      "hex": 263938,
+      "major": 4,
+      "minor": 7,
+      "patch": 2,
+      "status": "stable",
+      "string": "4.7.2-stable (official)",
+      "timestamp": 0
+    },
+    "initial_state": {
+      "channel": "",
+      "colormap": "viridis",
+      "lower": -2.0,
+      "upper": 2.0,
+      "visible": true,
+      "wireframe": false
+    },
+    "last": 240.0,
+    "memory": {
+      "available_physical": 34547945472,
+      "physical": 50404560896,
+      "process_peak_rss": 368828416,
+      "process_rss": 368828416,
+      "process_swap": 0,
+      "renderer_reserve": 268435456,
+      "reserve": 1780572282,
+      "safe_cache_bytes": 20161824358,
+      "system_reserve": 1512136826
+    },
+    "renderer": "gl_compatibility",
+    "source_samples": 2401,
+    "version": "v0.1.0.23",
+    "cases": [
+      {
+        "name": "forward",
+        "start": 0.0,
+        "wall_s": 35.001583,
+        "committed_end": 17.29807867484358,
+        "recorded_per_wall_second": 0.4942084669382977,
+        "physical_rate": 1.0,
+        "draw_callbacks_per_second": 124.85149600233797,
+        "draw_interval_ms": {
+          "count": 4369,
+          "mean": 8.007605401693752,
+          "p50": 6.965999999998473,
+          "p95": 16.6610000000027,
+          "max": 28.304999999996028
+        },
+        "process_callbacks": 4371,
+        "process_delta_s": 35.00206133333333,
+        "main_callback_ms": {
+          "count": 4371,
+          "mean": 2.1533770304278197,
+          "p50": 2.405,
+          "p95": 3.709,
+          "max": 12.325
+        },
+        "commits_per_second": 14.256498056102206,
+        "worker_completed": 168,
+        "worker_pairs_per_second": 4.799782912675693,
+        "worker_ms_per_completed_pair": 206.99818452380947,
+        "decode_ms_per_completed_pair": null,
+        "decode_calls_delta": 0,
+        "holds": {
+          "count": 167,
+          "mean": 0.10862986227544909,
+          "p50": 0.10433000000000092,
+          "p95": 0.138933999999999,
+          "max": 0.15909800000000018
+        },
+        "hold_observed_s": 18.141187,
+        "hold_method": "Consecutive callbacks with a wait reason and no committed-clock change; final hold may be partial",
+        "timer_interval_s": {
+          "count": 16,
+          "mean": 2.07025475,
+          "p50": 2.0698550000000004,
+          "p95": 2.0917309999999993,
+          "max": 2.0917309999999993
+        },
+        "timer_mismatches": 0,
+        "status_counts": {
+          "Playing": 4357,
+          "Ready": 14
+        },
+        "peak_cache_bytes": 1073267600,
+        "cpu_limit": 1073267600,
+        "peak_staged": 1,
+        "peak_ready_pairs": 5,
+        "final_ready_pairs": 1,
+        "peak_in_flight_bytes": 214653520,
+        "coverage_span_seconds": {
+          "count": 4371,
+          "mean": 0.10608733206637865,
+          "p50": 0.10000166669444477,
+          "p95": 0.1000016666944461,
+          "max": 0.5000083334722246
+        },
+        "first_row": {
+          "active": false,
+          "alpha": 0.0,
+          "buffering": false,
+          "cache_bytes": 1073267600,
+          "callback_ms": 0.306,
+          "committed": 0.0,
+          "committed_before": 0.0,
+          "completed": 5,
+          "coverage": {
+            "fields": [],
+            "scene": [
+              [
+                0.0,
+                0.5000083334722246
+              ]
+            ]
+          },
+          "coverage_checked_ms": 4739,
+          "delta_s": 0.007194,
+          "grabber_width": 12,
+          "in_flight_bytes": 0,
+          "index": 0,
+          "pending": null,
+          "ready_sequences": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "requested": 0.007194,
+          "requested_before": 0.0,
+          "slider": 0.0,
+          "staged": 1,
+          "status": "Ready",
+          "timeline_width": 818.0,
+          "timer": "00:00",
+          "uploads": 2,
+          "wait": "",
+          "wall_s": 0.006628,
+          "worker_ms": 1061.615
+        },
+        "last_row": {
+          "active": true,
+          "alpha": 0.9779037353233265,
+          "buffering": true,
+          "cache_bytes": 214653520,
+          "callback_ms": 2.798,
+          "committed": 17.29807867484358,
+          "committed_before": 17.29807867484358,
+          "completed": 173,
+          "coverage": {
+            "fields": [],
+            "scene": [
+              [
+                17.100285004750077,
+                17.200286671444523
+              ]
+            ]
+          },
+          "coverage_checked_ms": 39698,
+          "delta_s": 0.006997999999999998,
+          "grabber_width": 12,
+          "in_flight_bytes": 214653520,
+          "index": 172,
+          "pending": 17.331412008176912,
+          "ready_sequences": [
+            172
+          ],
+          "requested": 17.29807867484358,
+          "requested_before": 17.29807867484358,
+          "slider": 172.0,
+          "staged": 0,
+          "status": "Playing",
+          "timeline_width": 818.0,
+          "timer": "00:17",
+          "uploads": 173,
+          "wait": "Required mesh content",
+          "wall_s": 34.998694,
+          "worker_ms": 35837.30999999999
+        },
+        "cache_failures": {},
+        "pressure_failures": 0,
+        "errors": [
+          "",
+          ""
+        ],
+        "profile": {
+          "counters": {
+            "g3_display_samples": 500,
+            "g3_tail_polls": 35
+          },
+          "stages": {
+            "g3_layer_refresh": {
+              "count": 3016,
+              "max_ms": 3.859,
+              "mean_ms": 2.1853822944297123,
+              "p50_ms": 2.158,
+              "p95_ms": 2.523,
+              "samples_collected": 3016,
+              "total_ms": 6591.113000000012
+            },
+            "g3_mesh_gpu_stage": {
+              "count": 171,
+              "max_ms": 7.781,
+              "mean_ms": 5.985725146198833,
+              "p50_ms": 5.946,
+              "p95_ms": 6.497,
+              "samples_collected": 171,
+              "total_ms": 1023.5590000000004
+            },
+            "g3_reader_refresh": {
+              "count": 3016,
+              "max_ms": 3.855,
+              "mean_ms": 2.1796133952254637,
+              "p50_ms": 2.152,
+              "p95_ms": 2.515,
+              "samples_collected": 3016,
+              "total_ms": 6573.713999999999
+            },
+            "g3_sample": {
+              "count": 2981,
+              "max_ms": 12.251,
+              "mean_ms": 2.9641402214022214,
+              "p50_ms": 2.473,
+              "p95_ms": 9.473,
+              "samples_collected": 2981,
+              "total_ms": 8836.102000000023
+            },
+            "g3_source_stamp": {
+              "count": 3016,
+              "max_ms": 3.845,
+              "mean_ms": 2.171148872679041,
+              "p50_ms": 2.145,
+              "p95_ms": 2.505,
+              "samples_collected": 3016,
+              "total_ms": 6548.184999999989
+            },
+            "g3_tail_poll": {
+              "count": 35,
+              "max_ms": 2.756,
+              "mean_ms": 2.299742857142857,
+              "p50_ms": 2.24,
+              "p95_ms": 2.754,
+              "samples_collected": 35,
+              "total_ms": 80.49099999999999
+            },
+            "g3_tick": {
+              "count": 4371,
+              "max_ms": 12.3,
+              "mean_ms": 2.1414369709448544,
+              "p50_ms": 2.394,
+              "p95_ms": 3.696,
+              "samples_collected": 4371,
+              "total_ms": 9360.220999999958
+            },
+            "hud_cpu": {
+              "count": 499,
+              "max_ms": 0.035,
+              "mean_ms": 0.022432865731462876,
+              "p50_ms": 0.022,
+              "p95_ms": 0.027,
+              "samples_collected": 499,
+              "total_ms": 11.193999999999976
+            },
+            "interpolation_submission_inclusive": {
+              "count": 499,
+              "max_ms": 0.063,
+              "mean_ms": 0.01636673346693386,
+              "p50_ms": 0.016,
+              "p95_ms": 0.019,
+              "samples_collected": 499,
+              "total_ms": 8.166999999999996
+            },
+            "process_inclusive": {
+              "count": 4371,
+              "max_ms": 12.316,
+              "mean_ms": 2.146305422100207,
+              "p50_ms": 2.398,
+              "p95_ms": 3.701,
+              "samples_collected": 4371,
+              "total_ms": 9381.501000000006
+            }
+          }
+        },
+        "memory_after": null
+      },
+      {
+        "name": "quarter-speed",
+        "start": 20.0,
+        "wall_s": 12.032069,
+        "committed_end": 23.001650964285698,
+        "recorded_per_wall_second": 0.24947089019234334,
+        "physical_rate": 0.25,
+        "draw_callbacks_per_second": 129.73662301969844,
+        "draw_interval_ms": {
+          "count": 1560,
+          "mean": 7.69604423076923,
+          "p50": 6.961999999999996,
+          "p95": 16.428000000000054,
+          "max": 22.223999999999577
+        },
+        "process_callbacks": 1562,
+        "process_delta_s": 12.006603857142856,
+        "main_callback_ms": {
+          "count": 1562,
+          "mean": 1.1248201024327784,
+          "p50": 0.226,
+          "p95": 3.69,
+          "max": 13.262
+        },
+        "commits_per_second": 29.920041183274463,
+        "worker_completed": 30,
+        "worker_pairs_per_second": 2.493336765272872,
+        "worker_ms_per_completed_pair": 209.26863333333313,
+        "decode_ms_per_completed_pair": null,
+        "decode_calls_delta": 0,
+        "holds": {},
+        "hold_observed_s": 0,
+        "hold_method": "Consecutive callbacks with a wait reason and no committed-clock change; final hold may be partial",
+        "timer_interval_s": {
+          "count": 2,
+          "mean": 4.0074055,
+          "p50": 4.0074055,
+          "p95": 4.009255,
+          "max": 4.009255
+        },
+        "timer_mismatches": 0,
+        "status_counts": {
+          "Playing": 1557,
+          "Ready": 5
+        },
+        "peak_cache_bytes": 1073267600,
+        "cpu_limit": 1073267600,
+        "peak_staged": 1,
+        "peak_ready_pairs": 5,
+        "final_ready_pairs": 4,
+        "peak_in_flight_bytes": 214653520,
+        "coverage_span_seconds": {
+          "count": 1562,
+          "mean": 0.4482148966247179,
+          "p50": 0.4000066667777844,
+          "p95": 0.500008333472227,
+          "max": 0.5000083334722305
+        },
+        "first_row": {
+          "active": false,
+          "alpha": 0.9966666666666957,
+          "buffering": false,
+          "cache_bytes": 1073267600,
+          "callback_ms": 0.213,
+          "committed": 20.0,
+          "committed_before": 20.0,
+          "completed": 179,
+          "coverage": {
+            "fields": [],
+            "scene": [
+              [
+                19.900331672194536,
+                20.400340005666763
+              ]
+            ]
+          },
+          "coverage_checked_ms": 43047,
+          "delta_s": 0.007194,
+          "grabber_width": 12,
+          "in_flight_bytes": 0,
+          "index": 199,
+          "pending": null,
+          "ready_sequences": [
+            199,
+            200,
+            201,
+            202,
+            203
+          ],
+          "requested": 20.0017985,
+          "requested_before": 20.0,
+          "slider": 199.0,
+          "staged": 1,
+          "status": "Ready",
+          "timeline_width": 810.0,
+          "timer": "00:20",
+          "uploads": 175,
+          "wait": "",
+          "wall_s": 0.007013,
+          "worker_ms": 37144.97999999999
+        },
+        "last_row": {
+          "active": true,
+          "alpha": 0.012676034362924145,
+          "buffering": false,
+          "cache_bytes": 858614080,
+          "callback_ms": 10.446,
+          "committed": 23.001650964285698,
+          "committed_before": 22.99270333333332,
+          "completed": 209,
+          "coverage": {
+            "fields": [],
+            "scene": [
+              [
+                22.900381673027887,
+                23.40039000650011
+              ]
+            ]
+          },
+          "coverage_checked_ms": 55204,
+          "delta_s": 0.007142857142857143,
+          "grabber_width": 12,
+          "in_flight_bytes": 214653520,
+          "index": 230,
+          "pending": null,
+          "ready_sequences": [
+            230,
+            231,
+            232,
+            233
+          ],
+          "requested": 23.001650964285698,
+          "requested_before": 22.999865249999985,
+          "slider": 230.0,
+          "staged": 1,
+          "status": "Playing",
+          "timeline_width": 810.0,
+          "timer": "00:23",
+          "uploads": 206,
+          "wait": "",
+          "wall_s": 12.021258,
+          "worker_ms": 43423.03899999998
+        },
+        "cache_failures": {},
+        "pressure_failures": 0,
+        "errors": [
+          "",
+          ""
+        ],
+        "profile": {
+          "counters": {
+            "g3_display_samples": 360,
+            "g3_tail_polls": 12
+          },
+          "stages": {
+            "g3_layer_refresh": {
+              "count": 372,
+              "max_ms": 3.254,
+              "mean_ms": 2.36718010752688,
+              "p50_ms": 2.377,
+              "p95_ms": 2.636,
+              "samples_collected": 372,
+              "total_ms": 880.5909999999994
+            },
+            "g3_mesh_gpu_stage": {
+              "count": 31,
+              "max_ms": 7.382,
+              "mean_ms": 6.041548387096773,
+              "p50_ms": 5.838,
+              "p95_ms": 7.358,
+              "samples_collected": 31,
+              "total_ms": 187.28799999999995
+            },
+            "g3_reader_refresh": {
+              "count": 372,
+              "max_ms": 3.24,
+              "mean_ms": 2.3599596774193534,
+              "p50_ms": 2.37,
+              "p95_ms": 2.627,
+              "samples_collected": 372,
+              "total_ms": 877.9049999999995
+            },
+            "g3_sample": {
+              "count": 360,
+              "max_ms": 11.764,
+              "mean_ms": 3.808313888888886,
+              "p50_ms": 3.235,
+              "p95_ms": 9.978,
+              "samples_collected": 360,
+              "total_ms": 1370.992999999999
+            },
+            "g3_source_stamp": {
+              "count": 372,
+              "max_ms": 3.219,
+              "mean_ms": 2.349798387096773,
+              "p50_ms": 2.359,
+              "p95_ms": 2.617,
+              "samples_collected": 372,
+              "total_ms": 874.1249999999997
+            },
+            "g3_tail_poll": {
+              "count": 12,
+              "max_ms": 3.264,
+              "mean_ms": 2.376583333333333,
+              "p50_ms": 2.319,
+              "p95_ms": 3.264,
+              "samples_collected": 12,
+              "total_ms": 28.518999999999995
+            },
+            "g3_tick": {
+              "count": 1562,
+              "max_ms": 13.25,
+              "mean_ms": 1.1117970550576186,
+              "p50_ms": 0.212,
+              "p95_ms": 3.676,
+              "samples_collected": 1562,
+              "total_ms": 1736.6270000000004
+            },
+            "hud_cpu": {
+              "count": 360,
+              "max_ms": 0.038,
+              "mean_ms": 0.022141666666666626,
+              "p50_ms": 0.022,
+              "p95_ms": 0.028,
+              "samples_collected": 360,
+              "total_ms": 7.970999999999985
+            },
+            "interpolation_submission_inclusive": {
+              "count": 360,
+              "max_ms": 0.025,
+              "mean_ms": 0.014424999999999964,
+              "p50_ms": 0.015,
+              "p95_ms": 0.019,
+              "samples_collected": 360,
+              "total_ms": 5.192999999999987
+            },
+            "process_inclusive": {
+              "count": 1562,
+              "max_ms": 13.255,
+              "mean_ms": 1.1173143405889856,
+              "p50_ms": 0.219,
+              "p95_ms": 3.681,
+              "samples_collected": 1562,
+              "total_ms": 1745.2449999999956
+            }
+          }
+        },
+        "memory_after": null
+      },
+      {
+        "name": "reverse",
+        "start": 120.0,
+        "wall_s": 15.002361,
+        "committed_end": 112.3761685074544,
+        "recorded_per_wall_second": -0.5081754460211699,
+        "physical_rate": -1.0,
+        "draw_callbacks_per_second": 123.98048547158677,
+        "draw_interval_ms": {
+          "count": 1859,
+          "mean": 8.064084454007531,
+          "p50": 7.004000000000232,
+          "p95": 17.249999999998877,
+          "max": 29.806999999999917
+        },
+        "process_callbacks": 1861,
+        "process_delta_s": 15.001259878787879,
+        "main_callback_ms": {
+          "count": 1861,
+          "mean": 2.196697474476088,
+          "p50": 2.447,
+          "p95": 4.064,
+          "max": 12.197
+        },
+        "commits_per_second": 14.664358496639295,
+        "worker_completed": 72,
+        "worker_pairs_per_second": 4.799244598900133,
+        "worker_ms_per_completed_pair": 206.5674027777776,
+        "decode_ms_per_completed_pair": null,
+        "decode_calls_delta": 0,
+        "holds": {
+          "count": 70,
+          "mean": 0.11097648571428564,
+          "p50": 0.11108550000000061,
+          "p95": 0.14581200000000027,
+          "max": 0.14653399999999905
+        },
+        "hold_observed_s": 7.768353999999995,
+        "hold_method": "Consecutive callbacks with a wait reason and no committed-clock change; final hold may be partial",
+        "timer_interval_s": {
+          "count": 7,
+          "mean": 1.95829,
+          "p50": 2.055694000000001,
+          "p95": 2.1191519999999997,
+          "max": 2.1191519999999997
+        },
+        "timer_mismatches": 0,
+        "status_counts": {
+          "Playing": 1845,
+          "Ready": 16
+        },
+        "peak_cache_bytes": 1073267600,
+        "cpu_limit": 1073267600,
+        "peak_staged": 1,
+        "peak_ready_pairs": 5,
+        "final_ready_pairs": 1,
+        "peak_in_flight_bytes": 214653520,
+        "coverage_span_seconds": {
+          "count": 1861,
+          "mean": 0.11327432208054272,
+          "p50": 0.100001666694439,
+          "p95": 0.2000033333888922,
+          "max": 0.5000083334722234
+        },
+        "first_row": {
+          "active": false,
+          "alpha": 0.9800000000000313,
+          "buffering": false,
+          "cache_bytes": 1073267600,
+          "callback_ms": 0.214,
+          "committed": 120.0,
+          "committed_before": 120.0,
+          "completed": 214,
+          "coverage": {
+            "fields": [],
+            "scene": [
+              [
+                119.50199169986166,
+                120.00200003333389
+              ]
+            ]
+          },
+          "coverage_checked_ms": 58491,
+          "delta_s": 0.007194,
+          "grabber_width": 12,
+          "in_flight_bytes": 0,
+          "index": 1199,
+          "pending": null,
+          "ready_sequences": [
+            1199,
+            1198,
+            1197,
+            1196,
+            1195
+          ],
+          "requested": 119.992806,
+          "requested_before": 120.0,
+          "slider": 1199.0,
+          "staged": 1,
+          "status": "Ready",
+          "timeline_width": 818.0,
+          "timer": "02:00",
+          "uploads": 208,
+          "wait": "",
+          "wall_s": 0.00653,
+          "worker_ms": 44637.42499999999
+        },
+        "last_row": {
+          "active": true,
+          "alpha": 0.7429557131260047,
+          "buffering": false,
+          "cache_bytes": 214653520,
+          "callback_ms": 0.221,
+          "committed": 112.3761685074544,
+          "committed_before": 112.3761685074544,
+          "completed": 286,
+          "coverage": {
+            "fields": [],
+            "scene": [
+              [
+                112.40187336455608,
+                112.50187503125052
+              ]
+            ]
+          },
+          "coverage_checked_ms": 73507,
+          "delta_s": 0.008333333333333333,
+          "grabber_width": 12,
+          "in_flight_bytes": 214653520,
+          "index": 1123,
+          "pending": null,
+          "ready_sequences": [
+            1123
+          ],
+          "requested": 112.3602594165453,
+          "requested_before": 112.36859274987864,
+          "slider": 1123.0,
+          "staged": 0,
+          "status": "Playing",
+          "timeline_width": 818.0,
+          "timer": "01:52",
+          "uploads": 283,
+          "wait": "",
+          "wall_s": 15.002051,
+          "worker_ms": 59510.27799999998
+        },
+        "cache_failures": {},
+        "pressure_failures": 0,
+        "errors": [
+          "",
+          ""
+        ],
+        "profile": {
+          "counters": {
+            "g3_display_samples": 220,
+            "g3_tail_polls": 15
+          },
+          "stages": {
+            "g3_layer_refresh": {
+              "count": 1259,
+              "max_ms": 2.796,
+              "mean_ms": 2.2094201747418594,
+              "p50_ms": 2.187,
+              "p95_ms": 2.519,
+              "samples_collected": 1259,
+              "total_ms": 2781.6600000000008
+            },
+            "g3_mesh_gpu_stage": {
+              "count": 75,
+              "max_ms": 6.756,
+              "mean_ms": 5.995813333333333,
+              "p50_ms": 5.912,
+              "p95_ms": 6.611,
+              "samples_collected": 75,
+              "total_ms": 449.68600000000004
+            },
+            "g3_reader_refresh": {
+              "count": 1259,
+              "max_ms": 2.78,
+              "mean_ms": 2.203390786338362,
+              "p50_ms": 2.182,
+              "p95_ms": 2.512,
+              "samples_collected": 1259,
+              "total_ms": 2774.0689999999977
+            },
+            "g3_sample": {
+              "count": 1244,
+              "max_ms": 12.145,
+              "mean_ms": 3.0720771704180074,
+              "p50_ms": 2.504,
+              "p95_ms": 9.845,
+              "samples_collected": 1244,
+              "total_ms": 3821.664000000001
+            },
+            "g3_source_stamp": {
+              "count": 1259,
+              "max_ms": 2.767,
+              "mean_ms": 2.1944725972994426,
+              "p50_ms": 2.174,
+              "p95_ms": 2.497,
+              "samples_collected": 1259,
+              "total_ms": 2762.840999999998
+            },
+            "g3_tail_poll": {
+              "count": 15,
+              "max_ms": 2.662,
+              "mean_ms": 2.347666666666667,
+              "p50_ms": 2.286,
+              "p95_ms": 2.662,
+              "samples_collected": 15,
+              "total_ms": 35.215
+            },
+            "g3_tick": {
+              "count": 1861,
+              "max_ms": 12.182,
+              "mean_ms": 2.1840709296077434,
+              "p50_ms": 2.436,
+              "p95_ms": 4.052,
+              "samples_collected": 1861,
+              "total_ms": 4064.5560000000105
+            },
+            "hud_cpu": {
+              "count": 220,
+              "max_ms": 0.034,
+              "mean_ms": 0.02234999999999995,
+              "p50_ms": 0.022,
+              "p95_ms": 0.026,
+              "samples_collected": 220,
+              "total_ms": 4.916999999999989
+            },
+            "interpolation_submission_inclusive": {
+              "count": 220,
+              "max_ms": 0.073,
+              "mean_ms": 0.01653636363636361,
+              "p50_ms": 0.016,
+              "p95_ms": 0.019,
+              "samples_collected": 220,
+              "total_ms": 3.637999999999994
+            },
+            "process_inclusive": {
+              "count": 1861,
+              "max_ms": 12.188,
+              "mean_ms": 2.1892154755507782,
+              "p50_ms": 2.44,
+              "p95_ms": 4.058,
+              "samples_collected": 1861,
+              "total_ms": 4074.1299999999983
+            }
+          }
+        },
+        "memory_after": null
+      },
+      {
+        "name": "scalar",
+        "start": 40.0,
+        "wall_s": 15.003463,
+        "committed_end": 46.44878719913403,
+        "recorded_per_wall_second": 0.4298199155177729,
+        "physical_rate": 1.0,
+        "draw_callbacks_per_second": 125.63766111863642,
+        "draw_interval_ms": {
+          "count": 1884,
+          "mean": 7.955456475583865,
+          "p50": 6.981999999999822,
+          "p95": 16.957000000001443,
+          "max": 30.726999999999727
+        },
+        "process_callbacks": 1886,
+        "process_delta_s": 15.003247666666667,
+        "main_callback_ms": {
+          "count": 1886,
+          "mean": 2.2333706256627783,
+          "p50": 2.4379999999999997,
+          "p95": 3.755,
+          "max": 12.255
+        },
+        "commits_per_second": 12.397137914093566,
+        "worker_completed": 61,
+        "worker_pairs_per_second": 4.065728025589825,
+        "worker_ms_per_completed_pair": 244.80919672131108,
+        "decode_ms_per_completed_pair": null,
+        "decode_calls_delta": 0,
+        "holds": {
+          "count": 60,
+          "mean": 0.14667248333333321,
+          "p50": 0.14591600000000005,
+          "p95": 0.17365500000000011,
+          "max": 0.194426
+        },
+        "hold_observed_s": 8.800348999999994,
+        "hold_method": "Consecutive callbacks with a wait reason and no committed-clock change; final hold may be partial",
+        "timer_interval_s": {
+          "count": 5,
+          "mean": 2.4471226,
+          "p50": 2.445460999999999,
+          "p95": 2.4669300000000005,
+          "max": 2.4669300000000005
+        },
+        "timer_mismatches": 0,
+        "status_counts": {
+          "Playing": 1877,
+          "Ready": 9
+        },
+        "peak_cache_bytes": 1073267600,
+        "cpu_limit": 1073267600,
+        "peak_staged": 1,
+        "peak_ready_pairs": 5,
+        "final_ready_pairs": 1,
+        "peak_in_flight_bytes": 214653520,
+        "coverage_span_seconds": {
+          "count": 1886,
+          "mean": 0.10938676478825066,
+          "p50": 0.1000016666944461,
+          "p95": 0.1000016666944532,
+          "max": 0.5000083334722234
+        },
+        "first_row": {
+          "active": false,
+          "alpha": 0.9933333333333911,
+          "buffering": false,
+          "cache_bytes": 1073267600,
+          "callback_ms": 0.232,
+          "committed": 40.0,
+          "committed_before": 40.0,
+          "completed": 292,
+          "coverage": {
+            "fields": [],
+            "scene": [
+              [
+                39.90066501108352,
+                40.40067334455574
+              ]
+            ]
+          },
+          "coverage_checked_ms": 77088,
+          "delta_s": 0.007194,
+          "grabber_width": 12,
+          "in_flight_bytes": 0,
+          "index": 399,
+          "pending": null,
+          "ready_sequences": [
+            399,
+            400,
+            401,
+            402,
+            403
+          ],
+          "requested": 40.007194,
+          "requested_before": 40.0,
+          "slider": 399.0,
+          "staged": 1,
+          "status": "Ready",
+          "timeline_width": 818.0,
+          "timer": "00:40",
+          "uploads": 285,
+          "wait": "",
+          "wall_s": 0.006579,
+          "worker_ms": 60954.648999999976
+        },
+        "last_row": {
+          "active": true,
+          "alpha": 0.48013052680712337,
+          "buffering": false,
+          "cache_bytes": 214653520,
+          "callback_ms": 0.202,
+          "committed": 46.44878719913403,
+          "committed_before": 46.44878719913403,
+          "completed": 353,
+          "coverage": {
+            "fields": [],
+            "scene": [
+              [
+                46.300771679528,
+                46.40077334622244
+              ]
+            ]
+          },
+          "coverage_checked_ms": 91906,
+          "delta_s": 0.007958296296295835,
+          "grabber_width": 12,
+          "in_flight_bytes": 214653520,
+          "index": 464,
+          "pending": null,
+          "ready_sequences": [
+            464
+          ],
+          "requested": 46.46415290283773,
+          "requested_before": 46.45619460654144,
+          "slider": 464.0,
+          "staged": 0,
+          "status": "Playing",
+          "timeline_width": 818.0,
+          "timer": "00:46",
+          "uploads": 349,
+          "wait": "",
+          "wall_s": 15.00318,
+          "worker_ms": 75888.00999999995
+        },
+        "cache_failures": {},
+        "pressure_failures": 0,
+        "errors": [
+          "",
+          ""
+        ],
+        "profile": {
+          "counters": {
+            "g3_display_samples": 186,
+            "g3_tail_polls": 15
+          },
+          "stages": {
+            "g3_layer_refresh": {
+              "count": 1385,
+              "max_ms": 5.468,
+              "mean_ms": 2.1914007220216583,
+              "p50_ms": 2.163,
+              "p95_ms": 2.526,
+              "samples_collected": 1385,
+              "total_ms": 3035.0899999999965
+            },
+            "g3_mesh_gpu_stage": {
+              "count": 64,
+              "max_ms": 7.847,
+              "mean_ms": 6.0242031250000005,
+              "p50_ms": 5.977,
+              "p95_ms": 6.249,
+              "samples_collected": 64,
+              "total_ms": 385.54900000000004
+            },
+            "g3_reader_refresh": {
+              "count": 1385,
+              "max_ms": 5.459,
+              "mean_ms": 2.185644043321299,
+              "p50_ms": 2.157,
+              "p95_ms": 2.518,
+              "samples_collected": 1385,
+              "total_ms": 3027.1169999999993
+            },
+            "g3_sample": {
+              "count": 1370,
+              "max_ms": 12.207,
+              "mean_ms": 2.9079437956204397,
+              "p50_ms": 2.477,
+              "p95_ms": 3.72,
+              "samples_collected": 1370,
+              "total_ms": 3983.883000000002
+            },
+            "g3_source_stamp": {
+              "count": 1385,
+              "max_ms": 5.447,
+              "mean_ms": 2.1771263537906154,
+              "p50_ms": 2.149,
+              "p95_ms": 2.507,
+              "samples_collected": 1385,
+              "total_ms": 3015.3200000000024
+            },
+            "g3_tail_poll": {
+              "count": 15,
+              "max_ms": 2.532,
+              "mean_ms": 2.2714000000000003,
+              "p50_ms": 2.299,
+              "p95_ms": 2.532,
+              "samples_collected": 15,
+              "total_ms": 34.071000000000005
+            },
+            "g3_tick": {
+              "count": 1886,
+              "max_ms": 12.242,
+              "mean_ms": 2.2213472958642666,
+              "p50_ms": 2.428,
+              "p95_ms": 3.744,
+              "samples_collected": 1886,
+              "total_ms": 4189.461000000007
+            },
+            "hud_cpu": {
+              "count": 186,
+              "max_ms": 0.046,
+              "mean_ms": 0.02277419354838707,
+              "p50_ms": 0.022,
+              "p95_ms": 0.027,
+              "samples_collected": 186,
+              "total_ms": 4.235999999999995
+            },
+            "interpolation_submission_inclusive": {
+              "count": 186,
+              "max_ms": 0.028,
+              "mean_ms": 0.016274193548387064,
+              "p50_ms": 0.016,
+              "p95_ms": 0.019,
+              "samples_collected": 186,
+              "total_ms": 3.026999999999994
+            },
+            "process_inclusive": {
+              "count": 1886,
+              "max_ms": 12.248,
+              "mean_ms": 2.2261611876988345,
+              "p50_ms": 2.432,
+              "p95_ms": 3.749,
+              "samples_collected": 1886,
+              "total_ms": 4198.540000000002
+            }
+          }
+        },
+        "memory_after": null
+      },
+      {
+        "name": "fullscreen",
+        "start": 60.0,
+        "wall_s": 14.994326,
+        "committed_end": 66.38121026214549,
+        "recorded_per_wall_second": 0.4255749983123941,
+        "physical_rate": 1.0,
+        "draw_callbacks_per_second": 135.25116100583648,
+        "draw_interval_ms": {
+          "count": 2027,
+          "mean": 7.389566354218056,
+          "p50": 6.935999999999609,
+          "p95": 16.496000000000066,
+          "max": 29.961000000000126
+        },
+        "process_callbacks": 2029,
+        "process_delta_s": 15.002035592592593,
+        "main_callback_ms": {
+          "count": 2029,
+          "mean": 2.1433592902907836,
+          "p50": 2.436,
+          "p95": 3.789,
+          "max": 12.093
+        },
+        "commits_per_second": 12.404692281600388,
+        "worker_completed": 60,
+        "worker_pairs_per_second": 4.001513639225932,
+        "worker_ms_per_completed_pair": 245.58935000000153,
+        "decode_ms_per_completed_pair": null,
+        "decode_calls_delta": 0,
+        "holds": {
+          "count": 60,
+          "mean": 0.14862271666666663,
+          "p50": 0.148466,
+          "p95": 0.17810200000000087,
+          "max": 0.18094199999999994
+        },
+        "hold_observed_s": 8.917362999999998,
+        "hold_method": "Consecutive callbacks with a wait reason and no committed-clock change; final hold may be partial",
+        "timer_interval_s": {
+          "count": 5,
+          "mean": 2.426184,
+          "p50": 2.4599900000000003,
+          "p95": 2.4675650000000005,
+          "max": 2.4675650000000005
+        },
+        "timer_mismatches": 0,
+        "status_counts": {
+          "Playing": 2029
+        },
+        "peak_cache_bytes": 1073267600,
+        "cpu_limit": 1073267600,
+        "peak_staged": 1,
+        "peak_ready_pairs": 5,
+        "final_ready_pairs": 1,
+        "peak_in_flight_bytes": 214653520,
+        "coverage_span_seconds": {
+          "count": 2029,
+          "mean": 0.10902103830858202,
+          "p50": 0.1000016666944461,
+          "p95": 0.1000016666944532,
+          "max": 0.5000083334722234
+        },
+        "first_row": {
+          "active": false,
+          "alpha": 0.9900000000000163,
+          "buffering": false,
+          "cache_bytes": 1073267600,
+          "callback_ms": 0.211,
+          "committed": 60.0,
+          "committed_before": 60.0,
+          "completed": 359,
+          "coverage": {
+            "fields": [],
+            "scene": [
+              [
+                59.9009983499725,
+                60.40100668344472
+              ]
+            ]
+          },
+          "coverage_checked_ms": 95604,
+          "delta_s": 0.007194,
+          "grabber_width": 12,
+          "in_flight_bytes": 0,
+          "index": 599,
+          "pending": null,
+          "ready_sequences": [
+            599,
+            600,
+            601,
+            602,
+            603
+          ],
+          "requested": 60.007194,
+          "requested_before": 60.0,
+          "slider": 599.0,
+          "staged": 1,
+          "status": "Playing",
+          "timeline_width": 1930.0,
+          "timer": "01:00",
+          "uploads": 351,
+          "wait": "",
+          "wall_s": 0.006635,
+          "worker_ms": 77447.08299999996
+        },
+        "last_row": {
+          "active": true,
+          "alpha": 0.8010390864112289,
+          "buffering": true,
+          "cache_bytes": 214653520,
+          "callback_ms": 2.587,
+          "committed": 66.38121026214549,
+          "committed_before": 66.38121026214549,
+          "completed": 419,
+          "coverage": {
+            "fields": [],
+            "scene": [
+              [
+                66.30110501841696,
+                66.40110668511142
+              ]
+            ]
+          },
+          "coverage_checked_ms": 110439,
+          "delta_s": 0.007407407407407407,
+          "grabber_width": 12,
+          "in_flight_bytes": 214653520,
+          "index": 663,
+          "pending": 66.41083989177514,
+          "ready_sequences": [
+            663
+          ],
+          "requested": 66.38121026214549,
+          "requested_before": 66.38121026214549,
+          "slider": 663.0,
+          "staged": 0,
+          "status": "Playing",
+          "timeline_width": 1930.0,
+          "timer": "01:06",
+          "uploads": 414,
+          "wait": "Required mesh content",
+          "wall_s": 14.991657,
+          "worker_ms": 92182.44400000005
+        },
+        "cache_failures": {},
+        "pressure_failures": 0,
+        "errors": [
+          "",
+          ""
+        ],
+        "profile": {
+          "counters": {
+            "g3_display_samples": 187,
+            "g3_tail_polls": 15
+          },
+          "stages": {
+            "g3_layer_refresh": {
+              "count": 1438,
+              "max_ms": 3.028,
+              "mean_ms": 2.185364394993045,
+              "p50_ms": 2.164,
+              "p95_ms": 2.495,
+              "samples_collected": 1438,
+              "total_ms": 3142.5539999999987
+            },
+            "g3_mesh_gpu_stage": {
+              "count": 63,
+              "max_ms": 6.654,
+              "mean_ms": 5.8925238095238095,
+              "p50_ms": 5.841,
+              "p95_ms": 6.393,
+              "samples_collected": 63,
+              "total_ms": 371.229
+            },
+            "g3_reader_refresh": {
+              "count": 1438,
+              "max_ms": 3.02,
+              "mean_ms": 2.179803198887343,
+              "p50_ms": 2.159,
+              "p95_ms": 2.489,
+              "samples_collected": 1438,
+              "total_ms": 3134.557
+            },
+            "g3_sample": {
+              "count": 1423,
+              "max_ms": 10.82,
+              "mean_ms": 2.884530569219963,
+              "p50_ms": 2.477,
+              "p95_ms": 3.662,
+              "samples_collected": 1423,
+              "total_ms": 4104.687000000007
+            },
+            "g3_source_stamp": {
+              "count": 1438,
+              "max_ms": 3.008,
+              "mean_ms": 2.1715222531293445,
+              "p50_ms": 2.151,
+              "p95_ms": 2.478,
+              "samples_collected": 1438,
+              "total_ms": 3122.648999999997
+            },
+            "g3_tail_poll": {
+              "count": 15,
+              "max_ms": 2.559,
+              "mean_ms": 2.256266666666667,
+              "p50_ms": 2.258,
+              "p95_ms": 2.559,
+              "samples_collected": 15,
+              "total_ms": 33.844
+            },
+            "g3_tick": {
+              "count": 2029,
+              "max_ms": 12.079,
+              "mean_ms": 2.13217693445047,
+              "p50_ms": 2.425,
+              "p95_ms": 3.777,
+              "samples_collected": 2029,
+              "total_ms": 4326.187000000004
+            },
+            "hud_cpu": {
+              "count": 186,
+              "max_ms": 0.036,
+              "mean_ms": 0.022758064516129002,
+              "p50_ms": 0.023,
+              "p95_ms": 0.027,
+              "samples_collected": 186,
+              "total_ms": 4.232999999999994
+            },
+            "interpolation_submission_inclusive": {
+              "count": 186,
+              "max_ms": 0.045,
+              "mean_ms": 0.01659139784946235,
+              "p50_ms": 0.016,
+              "p95_ms": 0.019,
+              "samples_collected": 186,
+              "total_ms": 3.0859999999999967
+            },
+            "process_inclusive": {
+              "count": 2029,
+              "max_ms": 12.084,
+              "mean_ms": 2.1367220305569234,
+              "p50_ms": 2.429,
+              "p95_ms": 3.782,
+              "samples_collected": 2029,
+              "total_ms": 4335.408999999998
+            }
+          }
+        },
+        "memory_after": null
+      }
+    ]
+  },
+  {
+    "raw_path": "/tmp/issue193-decode/raw.json",
+    "raw_sha256": "dfce8ba3315cdbd6ff36da93543dc94659a4883295e7f350b1a239dae2e785d9",
+    "config": {
+      "capture": "/home/Nozba/Downloads/cavity_collapse_mesh_wavez/cavity_collapse_torus_channels_240s.ssc",
+      "cases": [
+        {
+          "channel": "radius",
+          "name": "decode-attribution",
+          "seconds": 15.0,
+          "start": 80.0
+        }
+      ],
+      "decode_probe": true,
+      "output": "/tmp/issue193-decode/raw.json"
+    },
+    "device": "NVIDIA GeForce RTX 3070 Ti",
+    "display": "Wayland",
+    "first": 0.0,
+    "godot": {
+      "build": "official",
+      "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+      "hex": 263938,
+      "major": 4,
+      "minor": 7,
+      "patch": 2,
+      "status": "stable",
+      "string": "4.7.2-stable (official)",
+      "timestamp": 0
+    },
+    "initial_state": {
+      "channel": "",
+      "colormap": "viridis",
+      "lower": -2.0,
+      "upper": 2.0,
+      "visible": true,
+      "wireframe": false
+    },
+    "last": 240.0,
+    "memory": {
+      "available_physical": 34175909888,
+      "physical": 50404560896,
+      "process_peak_rss": 809553920,
+      "process_rss": 809553920,
+      "process_swap": 0,
+      "renderer_reserve": 268435456,
+      "reserve": 1780572282,
+      "safe_cache_bytes": 20161824358,
+      "system_reserve": 1512136826
+    },
+    "renderer": "forward_plus",
+    "source_samples": 2401,
+    "version": "v0.1.0.23",
+    "cases": [
+      {
+        "name": "decode-attribution",
+        "start": 80.0,
+        "wall_s": 15.009812,
+        "committed_end": 86.41506707936324,
+        "recorded_per_wall_second": 0.42739156755349367,
+        "physical_rate": 1.0,
+        "draw_callbacks_per_second": 143.77262020337096,
+        "draw_interval_ms": {
+          "count": 2157,
+          "mean": 6.947251274918869,
+          "p50": 6.939000000000917,
+          "p95": 13.379999999999725,
+          "max": 27.426000000000172
+        },
+        "process_callbacks": 2159,
+        "process_delta_s": 15.00203288888889,
+        "main_callback_ms": {
+          "count": 2159,
+          "mean": 2.2158346456692914,
+          "p50": 2.386,
+          "p95": 3.756,
+          "max": 16.904
+        },
+        "commits_per_second": 12.32527096275423,
+        "worker_completed": 61,
+        "worker_pairs_per_second": 4.064008263394638,
+        "worker_ms_per_completed_pair": 245.49080327868856,
+        "decode_ms_per_completed_pair": 95.93698360655739,
+        "decode_calls_delta": 122,
+        "holds": {
+          "count": 59,
+          "mean": 0.1531868813559322,
+          "p50": 0.15211500000000022,
+          "p95": 0.18752100000000027,
+          "max": 0.19440600000000008
+        },
+        "hold_observed_s": 9.038025999999999,
+        "hold_method": "Consecutive callbacks with a wait reason and no committed-clock change; final hold may be partial",
+        "timer_interval_s": {
+          "count": 5,
+          "mean": 2.4546678,
+          "p50": 2.4397540000000006,
+          "p95": 2.493063,
+          "max": 2.493063
+        },
+        "timer_mismatches": 0,
+        "status_counts": {
+          "Playing": 2151,
+          "Ready": 8
+        },
+        "peak_cache_bytes": 1073267600,
+        "cpu_limit": 1073267600,
+        "peak_staged": 1,
+        "peak_ready_pairs": 5,
+        "final_ready_pairs": 1,
+        "peak_in_flight_bytes": 214653520,
+        "coverage_span_seconds": {
+          "count": 2159,
+          "mean": 0.11329507954359087,
+          "p50": 0.100001666694439,
+          "p95": 0.2000033333888922,
+          "max": 0.5000083334722092
+        },
+        "first_row": {
+          "active": false,
+          "alpha": 0.9866666666667804,
+          "buffering": false,
+          "cache_bytes": 1073267600,
+          "callback_ms": 0.231,
+          "committed": 80.0,
+          "committed_before": 80.0,
+          "completed": 5,
+          "coverage": {
+            "fields": [],
+            "scene": [
+              [
+                79.90133168886149,
+                80.4013400223337
+              ]
+            ]
+          },
+          "coverage_checked_ms": 5101,
+          "delta_s": 0.0069,
+          "grabber_width": 12,
+          "in_flight_bytes": 0,
+          "index": 799,
+          "pending": null,
+          "ready_sequences": [
+            799,
+            800,
+            801,
+            802,
+            803
+          ],
+          "requested": 80.0069,
+          "requested_before": 80.0,
+          "slider": 799.0,
+          "staged": 1,
+          "status": "Ready",
+          "timeline_width": 818.0,
+          "timer": "01:20",
+          "uploads": 2,
+          "wait": "",
+          "wall_s": 0.006516,
+          "worker_ms": 1257.021
+        },
+        "last_row": {
+          "active": true,
+          "alpha": 0.1362682824525585,
+          "buffering": false,
+          "cache_bytes": 214653520,
+          "callback_ms": 15.072,
+          "committed": 86.41506707936324,
+          "committed_before": 86.38034485714103,
+          "completed": 66,
+          "coverage": {
+            "fields": [],
+            "scene": [
+              [
+                86.30143835730595,
+                86.4014400240004
+              ]
+            ]
+          },
+          "coverage_checked_ms": 19925,
+          "delta_s": 0.006944444444444445,
+          "grabber_width": 12,
+          "in_flight_bytes": 214653520,
+          "index": 864,
+          "pending": null,
+          "ready_sequences": [
+            864
+          ],
+          "requested": 86.42201152380768,
+          "requested_before": 86.38034485714103,
+          "slider": 864.0,
+          "staged": 0,
+          "status": "Playing",
+          "timeline_width": 818.0,
+          "timer": "01:26",
+          "uploads": 66,
+          "wait": "",
+          "wall_s": 14.994562,
+          "worker_ms": 16231.960000000003
+        },
+        "cache_failures": {},
+        "pressure_failures": 0,
+        "errors": [
+          "",
+          ""
+        ],
+        "profile": {
+          "counters": {
+            "g3_display_samples": 185,
+            "g3_tail_polls": 15
+          },
+          "stages": {
+            "g3_layer_refresh": {
+              "count": 1495,
+              "max_ms": 5.318,
+              "mean_ms": 2.1612749163879563,
+              "p50_ms": 2.133,
+              "p95_ms": 2.475,
+              "samples_collected": 1495,
+              "total_ms": 3231.1059999999948
+            },
+            "g3_mesh_gpu_stage": {
+              "count": 64,
+              "max_ms": 8.088,
+              "mean_ms": 6.123374999999999,
+              "p50_ms": 6.041,
+              "p95_ms": 6.508,
+              "samples_collected": 64,
+              "total_ms": 391.89599999999996
+            },
+            "g3_reader_refresh": {
+              "count": 1495,
+              "max_ms": 5.312,
+              "mean_ms": 2.155730434782606,
+              "p50_ms": 2.127,
+              "p95_ms": 2.467,
+              "samples_collected": 1495,
+              "total_ms": 3222.8169999999964
+            },
+            "g3_sample": {
+              "count": 1480,
+              "max_ms": 16.856,
+              "mean_ms": 3.054903378378379,
+              "p50_ms": 2.443,
+              "p95_ms": 3.668,
+              "samples_collected": 1480,
+              "total_ms": 4521.257000000001
+            },
+            "g3_source_stamp": {
+              "count": 1495,
+              "max_ms": 5.302,
+              "mean_ms": 2.1476488294314384,
+              "p50_ms": 2.119,
+              "p95_ms": 2.456,
+              "samples_collected": 1495,
+              "total_ms": 3210.7350000000006
+            },
+            "g3_tail_poll": {
+              "count": 15,
+              "max_ms": 2.535,
+              "mean_ms": 2.2046,
+              "p50_ms": 2.146,
+              "p95_ms": 2.535,
+              "samples_collected": 15,
+              "total_ms": 33.069
+            },
+            "g3_tick": {
+              "count": 2159,
+              "max_ms": 16.891,
+              "mean_ms": 2.20472301991663,
+              "p50_ms": 2.375,
+              "p95_ms": 3.747,
+              "samples_collected": 2159,
+              "total_ms": 4759.997000000005
+            },
+            "hud_cpu": {
+              "count": 185,
+              "max_ms": 0.033,
+              "mean_ms": 0.022345945945945904,
+              "p50_ms": 0.022,
+              "p95_ms": 0.026,
+              "samples_collected": 185,
+              "total_ms": 4.133999999999992
+            },
+            "interpolation_submission_inclusive": {
+              "count": 185,
+              "max_ms": 0.023,
+              "mean_ms": 0.016659459459459427,
+              "p50_ms": 0.017,
+              "p95_ms": 0.019,
+              "samples_collected": 185,
+              "total_ms": 3.081999999999994
+            },
+            "process_inclusive": {
+              "count": 2159,
+              "max_ms": 16.897,
+              "mean_ms": 2.209201945345069,
+              "p50_ms": 2.38,
+              "p95_ms": 3.751,
+              "samples_collected": 2159,
+              "total_ms": 4769.667000000004
+            }
+          }
+        },
+        "memory_after": {
+          "available_physical": 34150481920,
+          "physical": 50404560896,
+          "process_peak_rss": 910671872,
+          "process_rss": 910671872,
+          "process_swap": 0,
+          "renderer_reserve": 268435456,
+          "reserve": 1780572282,
+          "safe_cache_bytes": 20161824358,
+          "system_reserve": 1512136826
+        }
+      }
+    ]
+  },
+  {
+    "raw_path": "/tmp/issue193-final-smoke/raw.json",
+    "raw_sha256": "94e7bb29ce131926bdb6df49dda090006b3384541f24e6aab255f2fc984aef16",
+    "camera": {
+      "active": "/root/@Node3D@2/@Camera3D@5",
+      "current_scene": "<Object#null>",
+      "distance": 0.5024327278137207,
+      "observed": "/root/@Node3D@2/@Camera3D@5",
+      "root_children": "[@Node3D@2:<Node3D#87543514868>, @Node@1903:<Node#252312560015>]"
+    },
+    "config": {
+      "capture": "/home/Nozba/Downloads/cavity_collapse_mesh_wavez/cavity_collapse_torus_channels_240s.ssc",
+      "cases": [
+        {
+          "channel": "radius",
+          "name": "profile-disabled",
+          "seconds": 15.0,
+          "start": 40.0
+        }
+      ],
+      "output": "/tmp/issue193-final-smoke/raw.json",
+      "profile": false,
+      "screenshots": true
+    },
+    "device": "NVIDIA GeForce RTX 3070 Ti",
+    "display": "Wayland",
+    "first": 0.0,
+    "godot": {
+      "build": "official",
+      "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+      "hex": 263938,
+      "major": 4,
+      "minor": 7,
+      "patch": 2,
+      "status": "stable",
+      "string": "4.7.2-stable (official)",
+      "timestamp": 0
+    },
+    "initial_state": {
+      "channel": "",
+      "colormap": "viridis",
+      "lower": -2.0,
+      "upper": 2.0,
+      "visible": true,
+      "wireframe": false
+    },
+    "last": 240.0,
+    "memory": {
+      "available_physical": 34345992192,
+      "physical": 50404560896,
+      "process_peak_rss": 807849984,
+      "process_rss": 807849984,
+      "process_swap": 0,
+      "renderer_reserve": 268435456,
+      "reserve": 1780572282,
+      "safe_cache_bytes": 20161824358,
+      "system_reserve": 1512136826
+    },
+    "renderer": "forward_plus",
+    "source_samples": 2401,
+    "version": "v0.1.0.24",
+    "cases": [
+      {
+        "name": "profile-disabled",
+        "start": 40.0,
+        "wall_s": 14.981042,
+        "committed_end": 46.369977965847994,
+        "recorded_per_wall_second": 0.4252025971122699,
+        "physical_rate": 1.0,
+        "draw_callbacks_per_second": 143.58146783114285,
+        "draw_interval_ms": {
+          "count": 2150,
+          "mean": 6.962325581395349,
+          "p50": 6.940000000000168,
+          "p95": 13.261999999999219,
+          "max": 29.36399999999928
+        },
+        "process_callbacks": 2152,
+        "process_delta_s": 15.001153333333333,
+        "main_callback_ms": {
+          "count": 2152,
+          "mean": 2.225919144981413,
+          "p50": 2.389,
+          "p95": 3.766,
+          "max": 16.562
+        },
+        "commits_per_second": 12.282189716843462,
+        "worker_completed": 60,
+        "worker_pairs_per_second": 4.005061864188085,
+        "worker_ms_per_completed_pair": 247.7925500000001,
+        "decode_ms_per_completed_pair": null,
+        "decode_calls_delta": 0,
+        "holds": {
+          "count": 60,
+          "mean": 0.15056106666666658,
+          "p50": 0.1528265000000002,
+          "p95": 0.18061300000000013,
+          "max": 0.18747299999999978
+        },
+        "hold_observed_s": 9.033663999999995,
+        "hold_method": "Consecutive callbacks with a wait reason and no committed-clock change; final hold may be partial",
+        "timer_interval_s": {
+          "count": 5,
+          "mean": 2.4768786,
+          "p50": 2.473604,
+          "p95": 2.492908999999999,
+          "max": 2.492908999999999
+        },
+        "timer_mismatches": 0,
+        "status_counts": {
+          "Playing": 2144,
+          "Ready": 8
+        },
+        "peak_cache_bytes": 1073267600,
+        "cpu_limit": 1073267600,
+        "peak_staged": 1,
+        "peak_ready_pairs": 5,
+        "final_ready_pairs": 1,
+        "peak_in_flight_bytes": 214653520,
+        "coverage_span_seconds": {
+          "count": 2152,
+          "mean": 0.11194424491957175,
+          "p50": 0.1000016666944461,
+          "p95": 0.1000016666944532,
+          "max": 0.5000083334722234
+        },
+        "first_row": {
+          "active": false,
+          "alpha": 0.9933333333333911,
+          "buffering": false,
+          "cache_bytes": 1073267600,
+          "callback_ms": 0.205,
+          "committed": 40.0,
+          "committed_before": 40.0,
+          "completed": 5,
+          "coverage": {
+            "fields": [],
+            "scene": [
+              [
+                39.90066501108352,
+                40.40067334455574
+              ]
+            ]
+          },
+          "coverage_checked_ms": 5040,
+          "delta_s": 0.006901,
+          "grabber_width": 12,
+          "in_flight_bytes": 0,
+          "index": 399,
+          "pending": null,
+          "ready_sequences": [
+            399,
+            400,
+            401,
+            402,
+            403
+          ],
+          "requested": 40.006901,
+          "requested_before": 40.0,
+          "slider": 399.0,
+          "staged": 1,
+          "status": "Ready",
+          "timeline_width": 818.0,
+          "timer": "00:40",
+          "uploads": 2,
+          "wait": "",
+          "wall_s": 0.006652,
+          "worker_ms": 1276.9470000000001
+        },
+        "last_row": {
+          "active": true,
+          "alpha": 0.6920513288189524,
+          "buffering": true,
+          "cache_bytes": 214653520,
+          "callback_ms": 2.599,
+          "committed": 46.369977965847994,
+          "committed_before": 46.369977965847994,
+          "completed": 65,
+          "coverage": {
+            "fields": [],
+            "scene": [
+              [
+                46.20077001283355,
+                46.300771679528
+              ]
+            ]
+          },
+          "coverage_checked_ms": 19868,
+          "delta_s": 0.006944,
+          "grabber_width": 12,
+          "in_flight_bytes": 214653520,
+          "index": 463,
+          "pending": 46.40469796584798,
+          "ready_sequences": [
+            463
+          ],
+          "requested": 46.369977965847994,
+          "requested_before": 46.369977965847994,
+          "slider": 463.0,
+          "staged": 0,
+          "status": "Playing",
+          "timeline_width": 818.0,
+          "timer": "00:46",
+          "uploads": 65,
+          "wait": "Required mesh content",
+          "wall_s": 14.978362,
+          "worker_ms": 16144.500000000005
+        },
+        "cache_failures": {},
+        "pressure_failures": 0,
+        "errors": [
+          "",
+          ""
+        ],
+        "profile": {
+          "counters": {},
+          "stages": {}
+        },
+        "memory_after": {
+          "available_physical": 34288631808,
+          "physical": 50404560896,
+          "process_peak_rss": 909635584,
+          "process_rss": 909635584,
+          "process_swap": 0,
+          "renderer_reserve": 268435456,
+          "reserve": 1780572282,
+          "safe_cache_bytes": 20161824358,
+          "system_reserve": 1512136826
+        }
+      }
+    ]
+  }
+]

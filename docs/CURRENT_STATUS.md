@@ -1,5 +1,14 @@
 # Current status
 
+Issue #193 investigates mesh cache coverage and timer progression on the real
+256 × 256 cavity capture. The CPU preparation window is represented on the shared
+timeline, but is very short; sustained pair preparation is slower than 1× demand
+on the measured host. Repeated short holds explain the slow committed timer
+despite high render cadence. See the [investigation, measurements and proposed
+follow-up boundary](evidence/issue-193/README.md). This PR adds opt-in measurement
+tools and a report; playback behavior is unchanged. Candidate build 24 is
+**pending owner review**; any behavioral fix requires separate owner approval.
+
 Issue #191 replaces the mesh preparation hard cap with a workload-bounded,
 physical-RAM-based CPU allowance, shared reservations and explicit RAM diagnostics.
 The 256 × 256, 2401-sample cavity capture now prepares on the validation host;

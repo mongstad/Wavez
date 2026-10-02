@@ -1,0 +1,10 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+libdecor-gtk-WARNING: Failed to initialize GTK
+Failed to load plugin 'libdecor-gtk.so': failed to init
+OpenGL API 3.3.0 NVIDIA 615.71.09 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 3070 Ti
+
+TRANSPORT CASE forward wall=35.001583 committed=17.2980786748436
+TRANSPORT CASE quarter-speed wall=12.032069 committed=23.0016509642857
+TRANSPORT CASE reverse wall=15.002361 committed=112.376168507454
+TRANSPORT CASE scalar wall=15.003463 committed=46.448787199134
+TRANSPORT CASE fullscreen wall=14.994326 committed=66.3812102621455
