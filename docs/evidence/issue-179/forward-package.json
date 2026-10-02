@@ -1,0 +1,48 @@
+{
+  "architecture": "x86_64",
+  "checks": 118,
+  "failures": [],
+  "help": [
+    "About"
+  ],
+  "layouts": [
+    {
+      "actual_viewport": "(1440, 900)",
+      "dialog": "(580, 592)",
+      "viewport": "(1440, 900)"
+    },
+    {
+      "actual_viewport": "(1920, 1080)",
+      "dialog": "(580, 592)",
+      "viewport": "(1920, 1080)"
+    },
+    {
+      "actual_viewport": "(800, 600)",
+      "dialog": "(580, 536)",
+      "viewport": "(800, 600)"
+    },
+    {
+      "actual_viewport": "(480, 480)",
+      "dialog": "(432, 416)",
+      "viewport": "(480, 480)"
+    }
+  ],
+  "notice_sha256": {
+    "Branding": "31ad6692481b54941fbf1bf2a1696a04bb82754eb376050709222d9a3604afe1",
+    "Colormap notices": "dbb9ad7495a83b0f2f48c94b06e23020587d82f8d1492dcb717fb1ebc2f86c18",
+    "DejaVu font notices": "7a083b136e64d064794c3419751e5c7dd10d2f64c108fe5ba161eae5e5958a93",
+    "Godot Engine \u2014 MIT License": "b0435e3b3e4e55238f05f4b306f30524a1b2e20147810d436eaa554fa6855c80",
+    "Godot third-party notices": "1288215255d0a55623f7726ef90772926449514cb230abb76dc2a86c9a5d72dd",
+    "Third-party inventory": "e52e765e8989c50daa008786e10afa9df34b5bb2758f1a16c26dcb1c89164325",
+    "WAVEZ \u2014 PolyForm Noncommercial 1.0.0": "5860dd2f08b9377907a33ef714527a9a74b6e12b688bd3f87797b57754d45981"
+  },
+  "renderer": "forward_plus",
+  "runtime": "4.7.2-stable (official)",
+  "version": {
+    "build": "20",
+    "full": "v0.1.0.20",
+    "release": "v0.1.0"
+  },
+  "source_unchanged_sha256": "49b472b673b98a6de39c976b079200e14bb396b1a90e9328dc27c35fb2c1a403",
+  "packaged": true
+}

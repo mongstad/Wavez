@@ -3,7 +3,7 @@
 Issue #131 established the application identity (owner-merged in PR #132). The sole
 mutable source is `application/config/version` in
 [`viewer/project.godot`](../viewer/project.godot). Godot runtime and exported
-project settings consume that value. Help → About WAVEZ displays the identity
+project settings consume that value. Help → About displays the identity
 with or without a capture. #96 consolidates the temporary Version menu into About;
 version ownership and the numbering convention are unchanged.
 
@@ -85,12 +85,12 @@ Run the Python metadata/CLI contract checks with:
 python -m unittest tests.test_application_version
 ```
 
-The existing `tools/validate_viewer_shell.py` suite exercises Help → About WAVEZ,
+The existing `tools/validate_viewer_shell.py` suite exercises Help → About,
 changes the live source setting, checks explicit missing/malformed fallback and
 restores it before continuing existing viewer regressions. Both supported renderers
 must pass. Source metadata changes need no duplicate manual UI edit.
 
-Owner verification: open Help → About WAVEZ before and after opening a capture;
+Owner verification: open Help → About before and after opening a capture;
 check the full four-component identity against the project setting.
 Check ordinary startup, capture opening and playback. Review the initial numbering
 and future merge/release convention before accepting this issue.
