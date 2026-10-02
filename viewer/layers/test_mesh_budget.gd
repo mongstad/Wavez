@@ -7,9 +7,11 @@ const Hash = preload("res://data/capture_index.gd")
 const Job = preload("res://video/render_job.gd")
 class ConstrainedWorker extends "res://layers/mesh_buffer.gd":
 	var pressure := true
+	var available_above_reserve := -1
 	func _memory_headroom() -> Dictionary:
 		var memory := super._memory_headroom()
 		if pressure:memory.available_physical = memory.reserve
+		elif available_above_reserve >= 0:memory.available_physical = memory.reserve+available_above_reserve
 		return memory
 var checks := 0
 var failures: Array[String] = []
@@ -27,11 +29,11 @@ func policy_checks() -> void:
 	var large := Policy.preparation_budget(charge,5*charge,{"safe_cache_bytes":20*1024*Memory.MIB},256*Memory.MIB)
 	var medium := Policy.preparation_budget(charge,5*charge,{"safe_cache_bytes":3*1024*Memory.MIB},256*Memory.MIB)
 	var small := Policy.preparation_budget(charge,5*charge,{"safe_cache_bytes":1024*Memory.MIB},256*Memory.MIB)
-	check(large.cpu_limit == 5*charge and medium.cpu_limit == 704*Memory.MIB,"Physical headroom scales cache until the five-pair workload ceiling")
+	check(large.cpu_limit == 5*charge and medium.cpu_limit == (2816*Memory.MIB)/5,"Physical headroom scales cache until the five-pair workload ceiling")
 	check(large.cpu_limit > medium.cpu_limit and medium.cpu_limit > small.cpu_limit,"Lower RAM monotonically lowers admission")
-	check(small.cpu_limit == 192*Memory.MIB and small.cpu_limit < small.required_bytes,"Low-memory current/staged pair refused deterministically")
+	check(small.cpu_limit == (768*Memory.MIB)/5 and small.cpu_limit < small.required_bytes,"Low-memory current/staged pair refused deterministically")
 	check(large.required_bytes == charge*2,"Current/staged headroom explicit")
-	check(large.cpu_limit*4 <= large.remaining_safe_bytes,"Working shares and unused fourth share preserved")
+	check(large.cpu_limit*5 <= large.remaining_safe_bytes,"Both caches, working shares and unused fifth share preserved")
 	check(Policy.preparation_budget(charge,5*charge,{"safe_cache_bytes":0},0).cpu_limit == 0,"Unknown physical headroom refuses")
 	check(Policy.preparation_budget(charge,5*charge,{"safe_cache_bytes":1024*Memory.MIB},2*1024*Memory.MIB).cpu_limit == 0,"Other reservations cannot overcommit")
 	check(Policy.preparation_budget(0,0,{"safe_cache_bytes":20*1024*Memory.MIB},0).cpu_limit == 0,"Hidden meshes reserve no cache")
@@ -56,7 +58,7 @@ func idle(worker) -> bool:
 	var began := Time.get_ticks_msec()
 	while Time.get_ticks_msec()-began < 30000:
 		var status: Dictionary = worker.status()
-		if not status.active and (status.frames == status.requested_jobs or not status.failures.is_empty() or status.requested_jobs == 0):return true
+		if not status.active and (status.ready_keys.size() == status.requested_jobs and status.requested_jobs > 0 or not status.failures.is_empty() or (status.requested_jobs == 0 and status.frames == 0 and status.decoded_samples == 0)):return true
 		await get_tree().process_frame
 	return false
 func barrier(worker) -> bool:
@@ -68,9 +70,11 @@ func barrier(worker) -> bool:
 func invariant(control) -> void:
 	var status: Dictionary = control.worker.status()
 	check(status.bytes <= status.limit,"Mesh CPU cache stays within admitted allowance")
+	check(status.decoded_bytes <= status.decoded_limit and status.decoded_samples <= status.requested_jobs*2,"Endpoint cache stays within its byte and demand bounds")
+	check(status.active_jobs <= status.worker_count and status.worker_count <= 4,"CPU pool stays bounded")
 	check(status.requested_jobs <= 5 and status.frames <= 5,"No timeline-length prefetch or decoded retention")
 	check(control.staged.size() <= 1,"One future GPU stage")
-	check(status.in_flight_bytes <= status.peak_in_flight_bytes,"Single worker in-flight charge explicit")
+	check(status.in_flight_bytes <= status.peak_in_flight_bytes,"Pool in-flight charge explicit")
 	memory_samples.append(Memory.memory_headroom())
 func screenshot(view, name: String) -> void:
 	if DisplayServer.get_name() == "headless":return
@@ -103,6 +107,69 @@ func worker_checks(control, target: Dictionary) -> void:
 	report.close_ms = Time.get_ticks_msec()-began
 	check(active and report.close_ms < 2000,"Close joins active high-resolution preparation within two seconds")
 	check(worker.status().bytes == 0 and worker.status().in_flight_bytes == 0,"Close releases CPU preparation ownership")
+func pool_checks(control, id: String) -> void:
+	var worker = control.Buffer.new();worker.worker_count = 4;worker.start()
+	var jobs: Array = [];var allowance := 0
+	for index in range(100,105):
+		var job: Dictionary = control._job(id,index,256*Memory.MIB)
+		jobs.append(job);allowance += int(job.charge)
+	worker.request("fixed",jobs,allowance)
+	check(await idle(worker),"Four-lane rolling window finishes")
+	var fixed: Dictionary = worker.status(true)
+	check(fixed.decoded == 6 and fixed.frames == 5,"Five adjacent pairs decode exactly six endpoints")
+	check(fixed.peak_active > 1 and fixed.peak_active <= 4,"Independent CPU lanes overlap within their bound")
+	check(fixed.topology_reuses >= 2,"Later endpoints reuse only matching validated topology")
+	check(fixed.bytes+fixed.in_flight_bytes <= allowance and fixed.decoded_bytes <= allowance,"Pair and endpoint cache shares stay bounded")
+	var selected: Array = []
+	for original in jobs:
+		var job: Dictionary = original.duplicate(true);job.state.channel = "radius";job.key += "/radius";selected.append(job)
+	worker.request("radius",selected,allowance)
+	check(await idle(worker),"Channel change rebuilds prepared pairs")
+	var scalar: Dictionary = worker.status(true)
+	check(scalar.decoded == fixed.decoded and scalar.completed == 10,"Channel change reuses decoded geometry without stale colors")
+	var frame: Dictionary = worker.get_frame(selected[0].key)
+	check(frame.has("arrays"),"Scalar pair contains display arrays")
+	if not frame.has("arrays"):worker.close();return
+	var colors: PackedColorArray = frame.arrays[Mesh.ARRAY_COLOR]
+	var expected := PackedColorArray()
+	for value in frame.a.channels.radius:expected.append(preload("res://layers/mesh_prepare.gd").scalar_color(value,selected[0].state,selected[0].colors))
+	check(colors == expected,"Packed scalar palette exactly matches the scalar-color reference")
+	var recolored: Array = []
+	for original in selected:
+		var job: Dictionary = original.duplicate(true);job.state.colormap = "plasma"
+		job.colors = control.viewer.colormaps.plasma;job.key += "/plasma";recolored.append(job)
+	worker.request("plasma",recolored,allowance)
+	check(await idle(worker),"Colormap change rebuilds prepared colors")
+	check(worker.status().decoded == 6,"Colormap change retains validated endpoints")
+	var recolored_frame: Dictionary = worker.get_frame(recolored[0].key)
+	check(recolored_frame.has("arrays"),"Recolored pair contains display arrays")
+	if not recolored_frame.has("arrays"):worker.close();return
+	expected = PackedColorArray()
+	for value in recolored_frame.a.channels.radius:expected.append(preload("res://layers/mesh_prepare.gd").scalar_color(value,recolored[0].state,recolored[0].colors))
+	check(recolored_frame.arrays[Mesh.ARRAY_COLOR] == expected and expected != colors,"New palette matches reference and replaces prior colors")
+	var gate := Semaphore.new();worker.test_barrier = gate
+	worker.request("pending",jobs,allowance)
+	check(await barrier(worker),"Generation change begins with multiple old tasks pending")
+	var fresh: Array = []
+	for original in jobs:
+		var job: Dictionary = original.duplicate(true);job.generation += 1;fresh.append(job)
+	worker.request("new-generation",fresh,allowance);worker.test_barrier = null;gate.post()
+	check(await idle(worker),"Replacement generation drains and finishes")
+	var renewed: Dictionary = worker.status(true)
+	check(renewed.decoded == 12 and renewed.cancelled > 0,"New source generation invalidates endpoint reuse and old publication")
+	check(worker.get_frame(jobs[0].key).token == "new-generation","Only current-generation pair becomes visible")
+	worker.cancel()
+	check(await idle(worker),"Pool cancellation drains")
+	check(worker.status().bytes == 0 and worker.status().decoded_bytes == 0,"Cancellation releases both cache shares")
+	worker.close()
+	check(worker.threads.is_empty() and worker.status().in_flight_bytes == 0,"Close joins every CPU lane")
+	var limited := ConstrainedWorker.new();limited.pressure = false;limited.worker_count = 4
+	limited.available_above_reserve = allowance+jobs[0].charge*3;limited.start()
+	limited.request("one-memory-lane",jobs,allowance)
+	check(await idle(limited),"RAM-constrained pool still makes progress")
+	check(limited.status().active_limit == 1 and limited.status().peak_active == 1,"RAM headroom contracts four configured lanes to one")
+	limited.close()
+	report.pool = {"fixed":fixed,"radius":scalar,"new_generation":renewed}
 func run() -> void:
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--mesh-budget-job="):config = JSON.parse_string(FileAccess.get_file_as_string(arg.trim_prefix("--mesh-budget-job=")))
@@ -151,9 +218,26 @@ func run() -> void:
 		check((view.requested_time-started)*direction > .5,"Forward/reverse playback advances the committed clock")
 		invariant(control)
 	# Rapid seeks supersede pending work without queuing a timeline.
+	var scrub_started := Time.get_ticks_usec()
 	for index in [100,2000,4,1800,1200]:check(view.scene_layers.seek(entries[index].time),"Scrub target accepted")
 	check(await sample(view,entries[1200].time),"Latest scrub target commits")
+	report.scrub_ms = (Time.get_ticks_usec()-scrub_started)/1000.0
 	check(view.scene_layers.current[id].a.source_index == 1200,"Latest source sample wins")
+	report.channel_switch_ms = {}
+	for channel in ["radius","z_height","twist_phase",""]:
+		view.scene_layers.states[id].channel = channel
+		var channel_started := Time.get_ticks_usec()
+		check(await sample(view,entries[1200].time),"Channel switch commits "+channel)
+		report.channel_switch_ms[channel if not channel.is_empty() else "fixed"] = (Time.get_ticks_usec()-channel_started)/1000.0
+	# Dispatch through the production viewport while an uncached seek occupies lanes.
+	view.scene_layers.seek(entries[2200].time)
+	var camera_before: float = view.camera_distance
+	var input_started := Time.get_ticks_usec()
+	var wheel := InputEventMouseButton.new();wheel.button_index = MOUSE_BUTTON_WHEEL_UP
+	wheel.pressed = true;wheel.position = Vector2(600,400);root.push_input(wheel,true)
+	report.input_dispatch_ms = (Time.get_ticks_usec()-input_started)/1000.0
+	check(is_equal_approx(view.camera_distance,camera_before*.9),"Camera input remains responsive during uncached mesh preparation")
+	check(await sample(view,entries[2200].time),"Preparation completes after camera input")
 	view.scene_layers.states[id].visible = false
 	check(await sample(view,entries[1500].time),"Hidden mesh playback needs no payload")
 	check(await idle(control.worker) and control.worker.status().bytes == 0 and control.cpu_limit == 0,"Hide releases CPU cache and reservation")
@@ -186,6 +270,7 @@ func run() -> void:
 		for i in 12:await get_tree().process_frame
 		check(await sample(view,entries[1801].time) and not view.shell.immersive,"Windowed playback restored")
 	await worker_checks(control,targets[0])
+	await pool_checks(control,id)
 	invariant(control);report.final = control.profile_report()
 	view.free();await get_tree().process_frame
 	# Field admission consumes the actual mesh reservation, with both workers active.
@@ -194,7 +279,7 @@ func run() -> void:
 	control = view.scene_layers.mesh_playback
 	var fields = view.scene_layers.field_playback
 	check(control.reservation_bytes() > 256*Memory.MIB and fields.other_reservations().mesh_cache_and_working == control.reservation_bytes(),"Field cache honors adaptive mesh allocation")
-	check(control.reservation_bytes() == control.cpu_limit*3,"Mesh reservation includes cache and two working shares")
+	check(control.reservation_bytes() == control.cpu_limit*4,"Mesh reservation includes both caches and two working shares")
 	check(fields.worker.status().bytes <= fields.worker.status().limit,"Field cache remains bounded")
 	var particles = view.scene_layers.playback
 	check(particles.worker.status().prepared_bytes <= particles.prepared_limit and particles.worker.status().decoded_bytes <= particles.decoded_limit,"Particle caches remain bounded")

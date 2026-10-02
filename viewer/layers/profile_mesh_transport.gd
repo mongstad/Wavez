@@ -1,22 +1,9 @@
 extends SceneTree
-## Opt-in, read-only observations of the ordinary interactive loop for #193.
+## Opt-in, read-only observations of the ordinary interactive loop.
 ## Run with -- --mesh-transport-job=/absolute/path/job.json; never force ticks.
 const Job = preload("res://video/render_job.gd")
 const Profile = preload("res://scene/playback_profile.gd")
 const Memory = preload("res://layers/playback_buffer.gd")
-class DecodeProbe extends "res://layers/mesh_buffer.gd":
-	var decode_ms := 0.0
-	var decode_calls := 0
-	func _decode(file: FileAccess, entry: Dictionary, obj: Dictionary) -> Dictionary:
-		var began := Time.get_ticks_usec()
-		var result := super._decode(file,entry,obj)
-		var elapsed := (Time.get_ticks_usec()-began)/1000.0
-		mutex.lock();decode_ms += elapsed;decode_calls += 1;mutex.unlock()
-		return result
-	func status() -> Dictionary:
-		var result := super.status()
-		mutex.lock();result.decode_ms = decode_ms;result.decode_calls = decode_calls;mutex.unlock()
-		return result
 class ObservedViewer extends "res://main.gd":
 	var measuring := false
 	var tick := {}
@@ -34,6 +21,8 @@ class Observer extends Node:
 	var rows: Array = []
 	var draws: Array = []
 	var start_us := 0
+	var memory_samples: Array = []
+	var memory_second := -1
 	var id := ""
 	func draw() -> void:
 		if view.measuring:draws.append((Time.get_ticks_usec()-start_us)/1000000.0)
@@ -41,6 +30,9 @@ class Observer extends Node:
 		if not view.measuring or view.tick.is_empty():return
 		var control = view.scene_layers.mesh_playback
 		var cache: Dictionary = control.worker.status()
+		var elapsed := (Time.get_ticks_usec()-start_us)/1000000.0
+		if int(elapsed) != memory_second:
+			memory_second = int(elapsed);memory_samples.append({"wall_s":elapsed,"memory":Memory.memory_headroom()})
 		var layer = view.scene_layers.views[id]
 		var ready: Array = []
 		for key in cache.ready_keys:ready.append(int(key.split("/")[1]))
@@ -53,7 +45,7 @@ class Observer extends Node:
 			"timer":view.shell.transport.displayed.text,"slider":view.timeline.value,
 			"coverage":view.timeline.coverage.duplicate(true),"coverage_checked_ms":view.timeline.checked_ms,
 			"timeline_width":view.timeline.size.x,"grabber_width":view.timeline.get_theme_icon("grabber").get_width(),
-			"ready_sequences":ready,"cache_bytes":cache.bytes,"in_flight_bytes":cache.in_flight_bytes,
+			"ready_sequences":ready,"cache_bytes":cache.bytes,"decoded_bytes":cache.decoded_bytes,"decoded_samples":cache.decoded_samples,"active_jobs":cache.active_jobs,"active_limit":cache.active_limit,"in_flight_bytes":cache.in_flight_bytes,
 			"completed":cache.completed,"worker_ms":cache.worker_ms,"active":cache.active,
 			"staged":control.staged.size(),"uploads":control.uploads})
 func _initialize() -> void:run.call_deferred()
@@ -65,11 +57,6 @@ func run() -> void:
 	var view := ObservedViewer.new();view.capture_path = config.capture;view.playing = false;view.orbit_enabled = false
 	root.add_child(view)
 	if view.scene_layers == null or view.committed_sample.is_empty():push_error("Capture did not open");view.free();quit(1);return
-	# Separate attribution run only; default measurements use the product worker.
-	if config.get("decode_probe",false):
-		var control = view.scene_layers.mesh_playback
-		control.worker.close();control.worker = DecodeProbe.new();control.invalidate()
-		if control.worker.start() != OK:push_error("Cannot start decode probe");view.free();quit(1);return
 	var id: String = view.scene_layers.states.keys()[0]
 	var observer := Observer.new();observer.view = view;observer.id = id;observer.process_priority = 100
 	root.add_child(observer);RenderingServer.frame_post_draw.connect(observer.draw)
@@ -91,10 +78,10 @@ func run() -> void:
 		if view.scene_layers.is_buffering():push_error("Seek did not settle");view.free();observer.free();quit(1);return
 		await create_timer(float(case.get("warmup",3)),true,false,true).timeout
 		var before: Dictionary = view.scene_layers.mesh_playback.profile_report()
-		if case.has("channel") and not view.scene_layers.current[id].a.channels.has(case.channel):
+		if case.has("channel") and not str(case.channel).is_empty() and not view.scene_layers.current[id].a.channels.has(case.channel):
 			push_error("Unknown scalar channel");view.free();observer.free();quit(1);return
 		view.display_accum = 0
-		observer.rows.clear();observer.draws.clear();observer.start_us = Time.get_ticks_usec()
+		observer.rows.clear();observer.draws.clear();observer.memory_samples.clear();observer.memory_second = -1;observer.start_us = Time.get_ticks_usec()
 		Profile.reset();Profile.enabled = bool(config.get("profile",true))
 		view.measuring = true;view._toggle_playback()
 		await create_timer(float(case.seconds),true,false,true).timeout
@@ -104,7 +91,7 @@ func run() -> void:
 			"profile":Profile.report(),"rows":observer.rows.duplicate(),"draws":observer.draws.duplicate(),
 			"errors":[view.scene_layers.error,view.scene_layers.mesh_playback.error],"root_size":[root.size.x,root.size.y],
 			"physical_rate":view.physical_rate,"max_fps":Engine.max_fps,"time_scale":Engine.time_scale,
-			"memory_after":Memory.memory_headroom()}
+			"memory_samples":observer.memory_samples.duplicate(),"memory_after":Memory.memory_headroom()}
 		report.cases.append(result)
 		Job.write_json(config.output,report)
 		print("TRANSPORT CASE ",case.name," wall=",wall_s," committed=",view.committed_sample.requested_time)
