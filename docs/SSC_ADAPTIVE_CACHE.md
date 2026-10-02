@@ -12,6 +12,10 @@ pool preparing ahead from the playhead. Issue #109's
 and in-flight allowances in these operational sections; issue #111 adds
 [dynamic concurrency](DYNAMIC_FIELD_PREPARATION.md). Issue #106 adds
 [pressure-driven reclamation and prepared-range playback](ROLLING_PLAYBACK_CACHE.md).
+Issue #191 adds [adaptive mesh preparation](MESH_PREPARATION_BUDGET.md). Field
+admission now subtracts the mesh cache and working allowance established before
+field preparation, replacing its former fixed mesh reservation. Particle policy,
+field concurrency and scientific sampling remain unchanged.
 The #102 measurements
 below retain their original scope and review-time wording. **Automatic** is the default in
 Performance. It fills as much useful forward coverage as safely fits in current

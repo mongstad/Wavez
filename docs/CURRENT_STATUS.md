@@ -1,5 +1,12 @@
 # Current status
 
+Issue #191 replaces the mesh preparation hard cap with a workload-bounded,
+physical-RAM-based CPU allowance, shared reservations and explicit RAM diagnostics.
+The 256 × 256, 2401-sample cavity capture now prepares on the validation host;
+GPU quotas and scientific source limits remain separate. Candidate build 23 is
+**pending owner review**. See [mesh preparation policy](MESH_PREPARATION_BUDGET.md)
+and [validation, limitations and owner checks](evidence/issue-191/README.md).
+
 Issue #187 fixes mouse-wheel zoom snapping small/large scenes to fixed 8/500
 world-unit limits. Progressive reciprocal zoom now uses scene bounds and camera
 clip planes, preserves custom orbit state and honors fractional input. Candidate

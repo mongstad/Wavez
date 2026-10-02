@@ -175,8 +175,8 @@ func other_reservations() -> Dictionary:
 		reservations.particle_decoded = maxi(0,layers.playback.decoded_limit-int(status.decoded_bytes))
 		reservations.particle_prepared = maxi(0,layers.playback.prepared_limit-int(status.prepared_bytes))
 		reservations.particle_working = int(layers.playback.estimates.get("largest_pair",0))*2
-	# Mesh preparation retains its existing cache + working-space reservation.
-	if layers.mesh_playback != null and layers.mesh_playback.enabled:reservations.mesh_cache_and_working = maxi(0,256*Memory.MIB-int(layers.mesh_playback.worker.status().bytes))
+	# Mesh cache and active/in-flight reservations follow its admitted workload.
+	if layers.mesh_playback != null and layers.mesh_playback.enabled:reservations.mesh_cache_and_working = layers.mesh_playback.reservation_bytes()
 	return reservations
 func _job(id: String, index: int, budget: int) -> Dictionary:
 	var entry: Dictionary = layers.reader.samples[id][index]

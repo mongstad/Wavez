@@ -1,0 +1,9 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+ERROR: incomplete append cannot publish a source timestamp
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://layers/test_scene_playback.gd:11)
+       [1] run (res://layers/test_scene_playback_lifecycle.gd:102)
+       [2] sample (res://layers/test_scene_playback.gd:29)
+G3 PLAYBACK LIFECYCLE: 51 checks, 1 failures
