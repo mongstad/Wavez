@@ -1,5 +1,9 @@
 # Current status
 
+Issue #178 removes decorative star specks from the no-capture viewport while
+preserving the cinematic sky and loaded-capture rendering. Candidate build 21 is
+**pending owner review**. See [source trace, comparisons and owner checks](evidence/issue-178/README.md).
+
 Issue #179 changes the Help menu label to **About**, preserving the existing
 About WAVEZ dialog title, content and route. Candidate build 20 is **pending owner
 review**. See [validation and owner checks](evidence/issue-179/README.md).

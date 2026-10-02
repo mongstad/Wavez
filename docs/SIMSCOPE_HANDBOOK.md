@@ -22,7 +22,8 @@ Earlier documents sometimes append new checkpoints above obsolete scope tables. 
 
 ## Viewer shell
 
-With no capture loaded, the viewport shows a centered **Open capture** button.
+With no capture loaded, the viewport retains its cinematic sky without decorative
+star specks and shows a centered **Open capture** button.
 Click it to open the existing capture picker, or use **File → Open capture**.
 
 Open **Help → About → Documentation** to reach the repository README

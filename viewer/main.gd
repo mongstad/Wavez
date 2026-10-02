@@ -116,6 +116,7 @@ var shell
 var _timeline_guard := false
 var environment: Environment
 var starfield: MultiMeshInstance3D
+var capture_starfield: Node3D
 var guide_mesh := MeshInstance3D.new()
 var visual_panel: PanelContainer
 var camera_target := Vector3.ZERO
@@ -270,7 +271,12 @@ func _build_starfield() -> void:
 
 	var inst := MultiMeshInstance3D.new()
 	inst.multimesh = mm
-	add_child(inst)
+	# Keep the accepted loaded-capture decoration, but exclude it from startup.
+	# Parent visibility cannot be overridden by clean-view or saved starfield state.
+	capture_starfield = Node3D.new()
+	capture_starfield.visible = false
+	add_child(capture_starfield)
+	capture_starfield.add_child(inst)
 	starfield = inst
 
 func _particle_material() -> ShaderMaterial:
@@ -1107,6 +1113,7 @@ func _open_scene(path: String) -> void:
 	generic_reader = reader;reader_generation = reader.generation
 	reader.configure_cache(decoded_cache_mib*1048576,false)
 	capture = reader.file;capture_path = path;frame_count = reader.frames.size()
+	capture_starfield.show()
 	frame_a = null;frame_b = null;current_index = 0;phase = 0;history.clear();hidden_types.clear();channel_signature = ""
 	color_channel = "fixed";size_channel = "fixed";brightness_channel = "fixed"
 	current_mm.instance_count = 0

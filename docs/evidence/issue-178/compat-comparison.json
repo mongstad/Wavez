@@ -1,0 +1,34 @@
+{
+  "renderer": "gl_compatibility",
+  "packaged": false,
+  "checks": {
+    "reference": 38,
+    "candidate": 44
+  },
+  "exact_scene_pixel_comparisons": {
+    "empty-1440-1.0": 2478080,
+    "empty-3840-2.0": 9912320,
+    "empty-3840-2.5": 15488000,
+    "particles-cinematic": 2478080,
+    "particles-scientific": 2478080,
+    "field-cinematic": 2478080,
+    "field-scientific": 2478080,
+    "mesh-cinematic": 2478080,
+    "mesh-scientific": 2478080,
+    "mixed-cinematic": 2478080,
+    "mixed-scientific": 2478080
+  },
+  "idle": {
+    "reference": {
+      "callbacks": 173,
+      "draws": 173,
+      "same_pixels": true
+    },
+    "candidate": {
+      "callbacks": 173,
+      "draws": 173,
+      "same_pixels": true
+    }
+  },
+  "failures": []
+}
