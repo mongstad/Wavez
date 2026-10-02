@@ -1,0 +1,37 @@
+{
+  "checks": 100,
+  "display_driver": "Wayland",
+  "executable": "/home/Nozba/Codex/Wavez/Godot_v4.7.2-stable_linux.x86_64",
+  "failures": [],
+  "layouts": [
+    {
+      "actual": "(1440, 900)",
+      "logical": "(1440.0, 900.0)",
+      "requested": "(1440, 900)",
+      "scale": 1.0
+    },
+    {
+      "actual": "(970, 600)",
+      "logical": "(970.0, 600.0)",
+      "requested": "(970, 600)",
+      "scale": 1.0
+    },
+    {
+      "actual": "(3840, 2160)",
+      "logical": "(1920.0, 1080.0)",
+      "requested": "(3840, 2160)",
+      "scale": 2.0
+    },
+    {
+      "actual": "(3840, 2160)",
+      "logical": "(1536.0, 864.0)",
+      "requested": "(3840, 2160)",
+      "scale": 2.5
+    }
+  ],
+  "packaged": false,
+  "renderer": "forward_plus",
+  "known_engine_cleanup_diagnostics": [
+    "libdecor-gtk-WARNING: Failed to initialize GTK\nFailed to load plugin 'libdecor-gtk.so': failed to init\n"
+  ]
+}

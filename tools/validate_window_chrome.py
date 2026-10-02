@@ -94,7 +94,9 @@ def main():
                 # plus the native Window.borderless assertion establish no chrome.
                 if stage['restore']:
                     reference = next(item['kwin'] for item in reports if item['stage'] == stage['restore'])
-                    assert native['frame'] == reference['frame'], (label, native, reference)
+                    # KWin Wayland round-trips can differ by floating-point epsilon.
+                    assert all(abs(native['frame'][key]-reference['frame'][key]) < 1e-6
+                               for key in reference['frame']), (label, native, reference)
                 if not native['minimized']:
                     assert native['active'], 'Test window lost focus; refuse capture of another application'
                 if label in ['restored', 'maximized', 'max-fullscreen', 'restore-button']:

@@ -18,6 +18,13 @@ func box(fill: StringName, border: StringName = &"border.subtle", pad_x: int = 1
 	style.anti_aliasing = true
 	return style
 
+func dialog_body(fill: StringName, border: StringName, x: int, y: int) -> StyleBoxFlat:
+	# Square outer surface and flush embedded header join; no overlapping top border.
+	var style := box(fill, border, x, y, 0)
+	style.corner_radius_top_left = 0; style.corner_radius_top_right = 0
+	style.border_width_top = 0
+	return style
+
 func atmosphere() -> StyleBoxTexture:
 	# One immutable texture: no shader time, animation or per-frame regeneration.
 	var gradient := Gradient.new()
@@ -162,7 +169,7 @@ func _init() -> void:
 	set_stylebox("panel", "AppSurface", box(&"surface.0", &"surface.0", 24, 24, 0))
 	set_stylebox("panel", "PropertyGroup", box(&"surface.1", &"border.subtle", 12, 12, 0))
 	set_stylebox("panel", "RaisedPanel", box(&"surface.2", &"border.subtle", 12, 12, 4))
-	set_stylebox("panel", "PopupSurface", box(&"surface.3", &"border.control", 24, 24, 6))
+	set_stylebox("panel", "PopupSurface", box(&"surface.3", &"border.control", 24, 24, 0))
 	for type in ["HSeparator", "VSeparator"]:
 		var line := StyleBoxLine.new(); line.color = c(&"border.subtle"); line.thickness = 1; line.vertical = type == "VSeparator"
 		set_stylebox("separator", type, line); set_constant("separation", type, TOKENS.spacing[1])
@@ -228,8 +235,8 @@ func _init() -> void:
 	set_icon("checked", "PopupMenu", icon_named("check", &"selection.text")); set_icon("submenu", "PopupMenu", icon_named("chevron_right"))
 	set_stylebox("panel", "TooltipPanel", box(&"surface.3", &"border.control", 12, 8, 6))
 	set_color("font_color", "TooltipLabel", c(&"text.primary")); set_font_size("font_size", "TooltipLabel", TOKENS.help_size)
-	set_stylebox("panel", "AcceptDialog", box(&"surface.3", &"border.control", 24, 24, 6))
-	var window_border := box(&"surface.3", &"border.control", 12, 12, 6)
+	set_stylebox("panel", "AcceptDialog", dialog_body(&"surface.3", &"border.control", 24, 24))
+	var window_border := box(&"surface.3", &"border.control", 12, 12, 0)
 	window_border.expand_margin_top = 32
 	set_stylebox("embedded_border", "Window", window_border)
 	set_stylebox("embedded_unfocused_border", "Window", window_border)

@@ -1,5 +1,11 @@
 # Current status
 
+Issue #176 now restores square outer surfaces after owner feedback. The visible
+shell uses its original styles; custom dialogs have square outer corners. The
+About seam fix remains, and its upper-right X shares the shell's close-button
+primitive, icon, size, state styles and hover handling. Candidate build 19 is
+**pending owner review**. See [behavior, revised evidence and owner checks](ROUNDED_SURFACES.md).
+
 Issue #180 removes the visible WAVEZ label from the main shell top bar.
 Frame scene, Reset camera and Navigate now start at the existing left margin;
 menus, pin/window controls and blank-area window dragging retain their paths.

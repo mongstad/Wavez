@@ -54,6 +54,7 @@ func install(shell) -> void:
 	shell.transport.seek_dialog.theme = theme
 	shell.details.theme = theme
 	shell.about.theme = theme
+	animate_buttons(shell.about)
 	# Representative dialog/confirmation surfaces, not broad Tools/Jobs propagation.
 	shell.status_ui.jobs_dialog.theme = shell.theme
 	style_dropdowns(shell.viewer)

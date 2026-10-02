@@ -18,21 +18,32 @@ var documentation: LinkButton
 var github: LinkButton
 var licenses: Button
 var scroller: ScrollContainer
+var header: HBoxContainer
+var close_button: Button
+var header_dragging := false
 
 func _ready() -> void:
 	title = "About WAVEZ"
+	# One square body with a real shell close Button, rather than native decoration.
+	borderless = true
+	var body := VBoxContainer.new(); body.add_theme_constant_override("separation", 8); add_child(body)
+	header = HBoxContainer.new(); body.add_child(header)
+	var caption := Label.new(); caption.text = title; caption.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	header.add_child(caption); caption.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	header.mouse_filter = Control.MOUSE_FILTER_STOP; header.gui_input.connect(header_input)
+	close_button = get_parent().close_action(header, func(): hide(); close_requested.emit(), "Close About WAVEZ")
 	get_ok_button().text = "Close"
 	scroller = ScrollContainer.new(); scroller.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
-	add_child(scroller)
+	scroller.size_flags_vertical = Control.SIZE_EXPAND_FILL; body.add_child(scroller)
 	var margin := MarginContainer.new(); margin.size_flags_horizontal = Control.SIZE_EXPAND_FILL; scroller.add_child(margin)
 	for side in ["left","right","top","bottom"]:margin.add_theme_constant_override("margin_"+side,8)
 	var content := VBoxContainer.new(); content.add_theme_constant_override("separation",12); margin.add_child(content)
 	overview = VBoxContainer.new(); overview.add_theme_constant_override("separation",10); content.add_child(overview)
-	var header := HBoxContainer.new(); header.add_theme_constant_override("separation",16); overview.add_child(header)
+	var logo_row := HBoxContainer.new(); logo_row.add_theme_constant_override("separation",16); overview.add_child(logo_row)
 	logo = TextureRect.new(); logo.texture = Logo; logo.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	logo.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED; logo.custom_minimum_size = Vector2(112,112)
-	logo.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS; header.add_child(logo)
-	var heading := VBoxContainer.new(); heading.size_flags_horizontal = Control.SIZE_EXPAND_FILL; header.add_child(heading)
+	logo.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS; logo_row.add_child(logo)
+	var heading := VBoxContainer.new(); heading.size_flags_horizontal = Control.SIZE_EXPAND_FILL; logo_row.add_child(heading)
 	heading.alignment = BoxContainer.ALIGNMENT_CENTER
 	identity = paragraph(heading,""); identity.add_theme_font_size_override("font_size",22)
 	paragraph(heading,"Scientific capture, playback and analysis for particles, meshes and scalar fields.")
@@ -64,16 +75,20 @@ func paragraph(parent: Control, text: String) -> Label:
 	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL; parent.add_child(label); return label
 
 func open() -> void:
+	var surface: StyleBoxFlat = get_theme_stylebox("panel", "AcceptDialog").duplicate()
+	surface.content_margin_left = 12; surface.content_margin_right = 12
+	surface.content_margin_top = 8
+	add_theme_stylebox_override("panel", surface)
 	identity.text = Version.details()
 	runtime.text = "Runtime: Godot %s · %s %s" % [Engine.get_version_info().string,OS.get_name(),Engine.get_architecture_name()]
 	browser_error.hide(); show_overview()
 	var available := get_parent().get_viewport().get_visible_rect().size
-	popup_centered(Vector2i(Vector2(580,560).min(available-Vector2(48,64)).max(Vector2(280,240))))
+	popup_centered(Vector2i(Vector2(580,592).min(available-Vector2(48,64)).max(Vector2(280,240))))
 
 func fit_to_viewport() -> void:
 	if not visible:return
 	var available := get_parent().get_viewport().get_visible_rect().size
-	size = Vector2i(Vector2(580,560).min(available-Vector2(48,64)).max(Vector2(280,240)))
+	size = Vector2i(Vector2(580,592).min(available-Vector2(48,64)).max(Vector2(280,240)))
 	position = Vector2i((available-Vector2(size))*.5)
 
 func show_overview() -> void:
@@ -108,3 +123,11 @@ func reveal_browser_error() -> void:
 	await get_tree().process_frame
 	await get_tree().process_frame
 	if visible and browser_error.visible:scroller.ensure_control_visible(browser_error)
+
+func header_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		header_dragging = event.pressed
+		if event.pressed and not is_embedded() and DisplayServer.has_feature(DisplayServer.FEATURE_WINDOW_DRAG):
+			DisplayServer.window_start_drag(get_window_id())
+	elif event is InputEventMouseMotion and header_dragging and is_embedded():
+		position += Vector2i(event.relative)

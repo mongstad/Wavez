@@ -116,9 +116,11 @@ func _init() -> void:
 		set_icon(pair[0], "PopupMenu", icon_named(pair[1], pair[2]))
 		set_icon(pair[0] + "_disabled", "PopupMenu", icon_named(pair[1], &"text.disabled"))
 	set_stylebox("panel", "TooltipPanel", flat_box(&"surface.3", 12, 8, 6))
-	set_stylebox("panel", "PopupPanel", flat_box(&"surface.3", 16, 14, 6))
-	set_stylebox("panel", "AcceptDialog", flat_box(&"surface.3", 24, 20, 6))
-	var dialog_border := flat_box(&"surface.3", 12, 12, 6)
+	set_stylebox("panel", "PopupPanel", flat_box(&"surface.3", 16, 14, 0))
+	var body := dialog_body(&"surface.3", &"border.subtle", 24, 20)
+	body.set_border_width_all(0)
+	set_stylebox("panel", "AcceptDialog", body)
+	var dialog_border := flat_box(&"surface.3", 12, 12, 0)
 	dialog_border.expand_margin_top = 32
 	dialog_border.shadow_color = Color(0, 0, 0, .25); dialog_border.shadow_size = 6
 	set_stylebox("embedded_border", "Window", dialog_border)

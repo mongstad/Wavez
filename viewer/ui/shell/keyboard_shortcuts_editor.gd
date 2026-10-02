@@ -26,15 +26,12 @@ func setup(owner_shell) -> void:
 	shade.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	shade.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT); add_child(shade)
 	panel = PanelContainer.new(); add_child(panel)
-	panel.add_theme_stylebox_override("panel", theme.flat_box(&"surface.1", 20, 16, 6))
+	panel.add_theme_stylebox_override("panel", theme.flat_box(&"surface.1", 20, 16, 0))
 	var box := VBoxContainer.new(); box.add_theme_constant_override("separation", 10); panel.add_child(box)
 	var header := HBoxContainer.new(); box.add_child(header)
 	var title := Label.new(); title.text = "Keyboard Shortcuts"; title.theme_type_variation = "PanelTitle"
 	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL; header.add_child(title)
-	close_button = shell.button(header, "", dismiss)
-	close_button.tooltip_text = "Close Keyboard Shortcuts"; close_button.custom_minimum_size = Vector2(32, 32)
-	close_button.theme_type_variation = "IconAction"; close_button.icon = theme.chrome_icon("close")
-	shell.style_slice.animate_buttons(close_button)
+	close_button = shell.close_action(header, dismiss, "Close Keyboard Shortcuts")
 	scroller = ScrollContainer.new(); scroller.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	scroller.size_flags_vertical = Control.SIZE_EXPAND_FILL; scroller.follow_focus = true; box.add_child(scroller)
 	var list := VBoxContainer.new(); list.size_flags_horizontal = Control.SIZE_EXPAND_FILL

@@ -13,7 +13,9 @@ var return_focus: Control
 func _init() -> void:
 	visible = false; transient = true; exclusive = true
 	theme = preload("res://ui/theme/wavez_dark.tres")
-	panel.theme_type_variation = &"PopupSurface"; add_child(panel)
+	panel.theme_type_variation = &"PopupSurface"
+	panel.add_theme_stylebox_override("panel", theme.dialog_body(&"surface.3", &"border.control", 24, 24))
+	add_child(panel)
 	panel.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	panel.add_child(layout); layout.add_child(heading); layout.add_child(scroll); layout.add_child(actions)
 	heading.theme_type_variation = &"PanelTitle"

@@ -102,7 +102,7 @@ func open(title: String) -> void:
 	window.title = title
 	refresh_context()
 	window.theme = viewer.shell.theme
-	surface.add_theme_stylebox_override("panel",viewer.shell.theme.box(&"surface.1", &"border.subtle",0,0,0))
+	surface.add_theme_stylebox_override("panel",viewer.shell.theme.dialog_body(&"surface.1", &"border.subtle",0,0))
 	var extent: Vector2 = viewer.get_viewport().get_visible_rect().size
 	var desired := Vector2i(440,240) if title == "Global effects" else Vector2i(600,720)
 	window.popup_centered(Vector2i(minf(desired.x,extent.x-32),minf(desired.y,extent.y-64)))

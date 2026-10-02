@@ -1,0 +1,77 @@
+{
+  "checks": 213,
+  "source_sha256_unchanged": "c64e13a75693f5dbed9d9dac2ead475bda7c7b671203f09ce82f03e0bd7930c2",
+  "renderer": "forward_plus",
+  "packaged": false,
+  "fresh_process_restart": true,
+  "known_engine_cleanup_diagnostics": {
+    "native": {
+      "compatibility_texture_cleanup": [],
+      "packaged_window_cleanup": []
+    },
+    "restart": {
+      "compatibility_texture_cleanup": [],
+      "packaged_window_cleanup": []
+    }
+  },
+  "reports": [
+    {
+      "checks": 208,
+      "display_driver": "X11",
+      "executable": "/home/Nozba/Codex/Wavez/Godot_v4.7.2-stable_linux.x86_64",
+      "failures": [],
+      "layouts": [
+        {
+          "logical": "(1440.0, 900.0)",
+          "panel": "[P: (400.0, 170.0), S: (640.0, 560.0)]",
+          "scale": 1.0,
+          "scroll_height": 444.0,
+          "window": "(1440, 900)"
+        },
+        {
+          "logical": "(970.0, 600.0)",
+          "panel": "[P: (165.0, 20.0), S: (640.0, 560.0)]",
+          "scale": 1.0,
+          "scroll_height": 444.0,
+          "window": "(970, 600)"
+        },
+        {
+          "logical": "(640.0, 480.0)",
+          "panel": "[P: (16.0, 16.0), S: (608.0, 448.0)]",
+          "scale": 1.0,
+          "scroll_height": 332.0,
+          "window": "(640, 480)"
+        },
+        {
+          "logical": "(1280.0, 697.0)",
+          "panel": "[P: (320.0, 68.5), S: (640.0, 560.0)]",
+          "scale": 2.0,
+          "scroll_height": 444.0,
+          "window": "(2560, 1394)"
+        },
+        {
+          "logical": "(1024.0, 557.6)",
+          "panel": "[P: (192.0, 16.0), S: (640.0, 525.6)]",
+          "scale": 2.5,
+          "scroll_height": 409.0,
+          "window": "(2560, 1394)"
+        }
+      ],
+      "packaged": false,
+      "preference_path": "user://keyboard_shortcuts.cfg",
+      "renderer": "forward_plus",
+      "restart": false
+    },
+    {
+      "checks": 5,
+      "display_driver": "X11",
+      "executable": "/home/Nozba/Codex/Wavez/Godot_v4.7.2-stable_linux.x86_64",
+      "failures": [],
+      "layouts": [],
+      "packaged": false,
+      "preference_path": "user://keyboard_shortcuts.cfg",
+      "renderer": "forward_plus",
+      "restart": true
+    }
+  ]
+}
