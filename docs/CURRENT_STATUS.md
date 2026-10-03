@@ -1,5 +1,12 @@
 # Current status
 
+Issue #158 reduces application-owned work during continuous native window
+resize: empty startup now stops recurring 3D redraw, and the shell applies
+the latest native size once per frame. Loaded playback and scientific data
+paths are unchanged. Candidate build 28 is **pending owner review**; the
+[resize diagnosis, measurements and validation](evidence/issue-158/README.md)
+separate owner-operated baseline traces from automated candidate runs.
+
 Issue #201 changes a clean viewer's navigation defaults to **Free camera on**
 and **Auto orbit off**. Both remain available through Navigate and the existing
 editable shortcut actions; O still toggles Auto Orbit, while Free Camera starts

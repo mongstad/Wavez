@@ -1,6 +1,7 @@
 extends Node
 ## Compositor-owned movement/resizing: never synthesize native window coordinates.
 const GRIP := 6.0
+const ResizeProfile = preload("res://ui/shell/resize_profile.gd")
 var shell
 var start_drag: Callable = DisplayServer.window_start_drag
 var start_resize: Callable = DisplayServer.window_start_resize
@@ -25,7 +26,8 @@ func setup(owner_shell, row: HBoxContainer) -> void:
 		set_process_input(false); return
 	get_window().borderless = true
 	get_window().min_size = Vector2i(970, 600)
-	get_window().size_changed.connect(refresh)
+	# The shell's coalesced viewport layout also refreshes these grips and icons.
+	# Avoid a second full chrome refresh for every native configure event.
 	get_window().focus_entered.connect(restore_minimized)
 	get_window().focus_exited.connect(func():
 		if minimized_from >= 0: minimize_lost_focus = true)
@@ -39,6 +41,7 @@ func setup(owner_shell, row: HBoxContainer) -> void:
 
 func refresh() -> void:
 	if shell.style_slice == null: return
+	var profile_started := ResizeProfile.stamp()
 	var extent: Vector2 = shell.get_viewport().get_visible_rect().size
 	var rectangles := [Rect2(0,0,GRIP,GRIP), Rect2(GRIP,0,extent.x-GRIP*2,GRIP), Rect2(extent.x-GRIP,0,GRIP,GRIP), Rect2(0,GRIP,GRIP,extent.y-GRIP*2), Rect2(extent.x-GRIP,GRIP,GRIP,extent.y-GRIP*2), Rect2(0,extent.y-GRIP,GRIP,GRIP), Rect2(GRIP,extent.y-GRIP,extent.x-GRIP*2,GRIP), Rect2(extent.x-GRIP,extent.y-GRIP,GRIP,GRIP)]
 	for i in grips.size():
@@ -50,6 +53,7 @@ func refresh() -> void:
 		var id: String = action.get_meta("chrome_icon")
 		if action == maximize_button: id = "restore" if maximized else "maximize"
 		action.icon = shell.style_slice.theme.chrome_icon(id)
+	ResizeProfile.record("chrome_refresh", profile_started)
 
 func toggle_maximize() -> void:
 	if shell.immersive: shell.exit_immersive()

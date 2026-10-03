@@ -1,5 +1,12 @@
 # Retained evidence
 
+## Continuous native resize — issue #158, pending owner review
+
+[Diagnosis, native measurements and owner checks](evidence/issue-158/README.md)
+and the [compact result data](evidence/issue-158/summary.json)
+cover empty, paused and playing resize, the supplied torus, both renderers,
+post-resize seek/channel recovery, KDE window modes and packaged Linux builds.
+
 ## Residual violet UI cleanup — issue #147, pending owner review
 
 [Current behavior and owner checks](UX5_CLEANUP.md) and
