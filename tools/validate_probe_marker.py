@@ -25,7 +25,7 @@ def main():
     out.mkdir(parents=True, exist_ok=False)
     ffmpeg = shutil.which('ffmpeg')
     assert ffmpeg and shutil.which('ffprobe'), 'FFmpeg and ffprobe required'
-    source = out/'volume.ssc'
+    source = out/'volume.wvz'
     with SceneCapture(source, objects=[dict(id='field', kind='volume', units='u', identity='grid')], compression='none') as writer:
         z, y, x = np.indices((5, 5, 5))
         for t in [0., 1.]:

@@ -6,7 +6,7 @@ func run() -> void:
 	var started := Time.get_ticks_usec();var view = make_view(source,true)
 	var control = view.scene_layers.field_playback
 	view.physical_rate = speed;view.scene_loop_playback = false;view.playing = true;control.begin_session()
-	var report := {"mode":OS.get_environment("SIMSCOPE_FIELD_WORKERS"),"speed":speed,"open_seconds":(Time.get_ticks_usec()-started)/1000000.0,"timeline":[],"scientific":[],"callbacks":[],"draws":[],"playback_draws":[],"advancing_draws":[],"playback_callbacks":[],"field_presentations_ms":[],"cpu_runway_holds":0,"cpu_runway_seconds":0.0,"checks":0,"failures":[]}
+	var report := {"mode":OS.get_environment("WAVEZ_FIELD_WORKERS"),"speed":speed,"open_seconds":(Time.get_ticks_usec()-started)/1000000.0,"timeline":[],"scientific":[],"callbacks":[],"draws":[],"playback_draws":[],"advancing_draws":[],"playback_callbacks":[],"field_presentations_ms":[],"cpu_runway_holds":0,"cpu_runway_seconds":0.0,"checks":0,"failures":[]}
 	var ready_at := 0;var first_time: float = view.requested_time;var previous := Time.get_ticks_usec();var next_log := previous
 	var field_waits := 0;var particle_waits := 0;var field_seconds := 0.0;var particle_seconds := 0.0
 	var last_field := false;var last_particle := false;var seen := {};var oracles := {}

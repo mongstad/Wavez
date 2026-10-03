@@ -19,9 +19,9 @@ def rewrite(path, change):
         payload = bytearray(payload)
         change(seq, record, desc, payload)
         encoded = storage.dumps(desc)
-        header = storage.FRAME.pack(b'FRM4', len(encoded), len(payload), record['decoded'], record['time'],
+        header = storage.FRAME.pack(b'FRM1', len(encoded), len(payload), record['decoded'], record['time'],
                                     objects.index(record['object']), len(desc['arrays']), seq, hashlib.sha256(encoded).digest())
-        output += header + encoded + payload + storage.COMMIT.pack(b'COMMIT4\0', seq, hashlib.sha256(header+encoded).digest())
+        output += header + encoded + payload + storage.COMMIT.pack(b'COMMIT1\0', seq, hashlib.sha256(header+encoded).digest())
     path.write_bytes(output)
 
 

@@ -17,7 +17,7 @@ from wavez_export.analysis import selectors as S
 class MemberAssetTests(unittest.TestCase):
     def setUp(self):
         self.tmp=tempfile.TemporaryDirectory();self.root=Path(self.tmp.name)
-        self.path=self.root/"source.ssc"
+        self.path=self.root/"source.wvz"
         self.ids=np.arange(4096,dtype="i8")+2**53+1;self.ids[-1]=2**63-1
         positions=np.column_stack((np.arange(len(self.ids))*.001,np.zeros((len(self.ids),2))))
         with SceneCapture(self.path,objects=[dict(id="p",kind="particles",units="m",identity="persistent_i8")]) as writer:
@@ -100,7 +100,7 @@ class MemberAssetTests(unittest.TestCase):
         with SourceSnapshot(self.path,assets=self.store) as source:
             with self.assertRaisesRegex(AnalysisError,"association limit"):
                 S.define(source,dict(object="p",kind="particle_ids",selector=dict(ids_asset=ref)))
-        path=self.root/"large-anonymous.ssc"
+        path=self.root/"large-anonymous.wvz"
         with SceneCapture(path,objects=[dict(id="p",kind="particles",identity="anonymous",units="m")]) as writer:
             writer.add_particles("p",0,np.zeros((len(values),3),dtype="f4"))
         with SourceSnapshot(path,assets=self.store) as source:
@@ -159,7 +159,7 @@ class MemberAssetTests(unittest.TestCase):
             with SourceSnapshot(self.path,context=Context(memory_bytes=2*1048576),assets=reopened) as source:S.validate(source,definition)
 
     def test_anonymous_row_asset_remains_record_local(self):
-        path=self.root/"anonymous.ssc"
+        path=self.root/"anonymous.wvz"
         with SceneCapture(path,objects=[dict(id="p",kind="particles",units="m",identity="anonymous")]) as writer:
             writer.add_particles("p",0,np.zeros((128,3)))
             writer.add_particles("p",1,np.zeros((128,3)))
@@ -171,7 +171,7 @@ class MemberAssetTests(unittest.TestCase):
             self.assertEqual((r["selected"],r["present"],r["reason"]),(128,0,"sample_local"))
 
     def test_grid_address_asset_retains_xyz_and_source_row_order(self):
-        path=self.root/"grid.ssc"
+        path=self.root/"grid.wvz"
         with SceneCapture(path,objects=[dict(id="v",kind="volume",units="m")]) as writer:
             writer.add_volume("v",0,{"value":np.ones((3,4,9))},origin=[0,0,0],spacing=[1,1,1])
         with SourceSnapshot(path,assets=self.store) as source:

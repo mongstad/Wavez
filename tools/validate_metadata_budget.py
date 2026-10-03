@@ -13,7 +13,7 @@ sys.path.insert(0, str(ROOT))
 from wavez_export import SceneReader, MetadataCapacityError
 from wavez_export.analysis import SourceSnapshot, Context, AnalysisError
 from tests.metadata_fixture import generate
-from tools.verify_ssc import verify
+from tools.verify_wvz import verify
 
 
 def main():
@@ -23,7 +23,7 @@ def main():
     args = parser.parse_args()
     out = args.output_dir.resolve()
     out.mkdir(parents=True, exist_ok=False)
-    path = out/'long.ssc'
+    path = out/'long.wvz'
     report = generate(path)
     (out/'fixture.json').write_text(json.dumps(report, indent=2))
     before = hashlib.sha256(path.read_bytes()).hexdigest()
@@ -39,7 +39,7 @@ def main():
     assert context.used == 0
     report['analysis_peak'] = context.peak
     for kind in ('descriptor', 'commit', 'payload'):
-        corrupted = out/(kind+'.ssc')
+        corrupted = out/(kind+'.wvz')
         shutil.copyfile(path, corrupted)
         with corrupted.open('r+b') as f:
             offset = report['last'][kind]+(16 if kind == 'commit' else 0)
@@ -50,7 +50,7 @@ def main():
         except ValueError as exc:
             assert 'checksum' in str(exc).lower(), str(exc)
         else:raise AssertionError(kind+' corruption was accepted')
-    oversized = out/'oversized.ssc'
+    oversized = out/'oversized.wvz'
     shutil.copyfile(path, oversized)
     with oversized.open('r+b') as f:
         f.seek(report['last']['header']+4);f.write(struct.pack('<I', 4*1024**2+1))

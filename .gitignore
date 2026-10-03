@@ -7,7 +7,7 @@ venv/
 env/
 .godot/
 # Script/shader .uid sidecars are source metadata and must be committed.
-.simscope-*/
+.wavez-*/
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
@@ -17,7 +17,7 @@ mplcache/
 build/
 dist/
 results/
-*.ssc
+*.wvz
 *.vbc
 *.npz
 *.npy
@@ -51,7 +51,7 @@ Thumbs.db
 *~
 # Small regression captures, if deliberately added, must live here.
 !tests/fixtures/*.vbc
-!tests/fixtures/*.ssc
+!tests/fixtures/*.wvz
 
 # Product boundary: external simulations and research work stay outside this checkout.
 /scientific/

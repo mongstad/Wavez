@@ -19,7 +19,7 @@ def main():
     args = parser.parse_args()
     output = args.output_dir.resolve()
     output.mkdir(parents=True, exist_ok=False)
-    source = scene(output / 'scene.ssc')
+    source = scene(output / 'scene.wvz')
     digest = hashlib.sha256(source.read_bytes()).hexdigest()
     rendering = ['--headless'] if args.renderer == 'headless' else ['--rendering-method', args.renderer]
     command = [args.godot, '--path', str(ROOT / 'viewer'), *rendering,

@@ -25,7 +25,7 @@ func run() -> void:
 	create_timer(180).timeout.connect(func():push_error("Focused tools timeout");quit(1))
 	viewer = Viewer.new();viewer.scene_prebuffer_enabled = false;root.add_child(viewer);viewer.set_process(false)
 	check(not viewer.tools_ui.window.visible,"Tools start hidden")
-	viewer._open_capture(output.path_join("mixed.ssc"));viewer.playing = false;viewer.orbit_enabled = false
+	viewer._open_capture(output.path_join("mixed.wvz"));viewer.playing = false;viewer.orbit_enabled = false
 	await settle()
 	var tools = viewer.tools_ui;var layers = viewer.scene_layers;var selection = viewer.selection_controller;var temporal = selection.temporal
 	var snapshot := Visual.snapshot(viewer);var objects: Dictionary = layers.selected_objects.duplicate();var source: Dictionary = selection.source.duplicate()
@@ -110,7 +110,7 @@ func run() -> void:
 			if title in ["Selection","Temporal","Matched runs","Source probe","Performance"]:
 				tools.window.get_texture().get_image().save_png(output.path_join(title.to_lower().replace(" ","-")+"-"+str(size.x)+".png"))
 			tools.close()
-	viewer.scene_prebuffer_enabled = true;viewer._open_capture(output.path_join("mixed.ssc"));viewer.set_process(true);viewer.playing = false
+	viewer.scene_prebuffer_enabled = true;viewer._open_capture(output.path_join("mixed.wvz"));viewer.set_process(true);viewer.playing = false
 	root.size = Vector2i(1440,900);await settle()
 	tools.open("Performance");await settle()
 	check(viewer.scene_layers.playback.enabled and viewer.scene_layers.field_playback.enabled and viewer.scene_layers.mesh_playback.enabled,"Performance exposes normal particle field and mesh preparation owners")

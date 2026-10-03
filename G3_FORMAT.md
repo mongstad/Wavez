@@ -1,24 +1,24 @@
-# SIMSCP4 layered capture contract
+# WAVEZ Scene Format (WVZ1) wire contract
 
-Implemented in the authoritative `SimScope` repository. `SceneCapture` / `SceneReader` are
+Implemented in the authoritative `WAVEZ` repository. `SceneCapture` / `SceneReader` are
 the supported writer/reader APIs. See [G3_REPORT.md](G3_REPORT.md) for historical
 acceptance, [G3_GUIDE.md](G3_GUIDE.md) for examples and the
 [current capture policy](docs/CAPTURE_FORMAT_POLICY.md) for the native-only contract.
 
 ## Wire and scientific data
 
-All numbers on disk are little-endian. Prefix `<8sII>` is magic `SIMSCP4\0`,
-version 4, metadata byte length, then at most 1 MiB UTF-8 JSON. Metadata has version,
+All numbers on disk are little-endian. Prefix `<8sII>` is magic `WVZ1\0\0\0\0`,
+unsigned version 1, metadata byte length, then at most 1 MiB UTF-8 JSON. Metadata has version 1,
 a hexadecimal UUID and 1–16 unique objects. Each object declares `id`, `kind`
 (particles/mesh/volume), `units`, `space: viewer_world`, `static`, and affine
 `data_to_world` (row-major 3×4). The writer supplies identity transform/static=false
 when omitted. Required unknown kinds fail; this version has no optional-kind skip.
 Additional descriptive metadata, including channel units/provenance, is retained.
 
-One record per object sample uses `<4sIQQdIIQ32s>` (80 bytes): `FRM4`, descriptor
+One record per object sample uses `<4sIQQdIIQ32s>` (80 bytes): `FRM1`, descriptor
 length, stored bytes, decoded bytes, exact float64 timestamp, object-table index,
 array count, global sequence, descriptor SHA-256. Descriptor JSON contains `geometry`
-and `arrays`. Payload follows. The 48-byte `<8sQ32s>` commit has `COMMIT4\0`, sequence,
+and `arrays`. Payload follows. The 48-byte `<8sQ32s>` commit has `COMMIT1\0`, sequence,
 and SHA-256(header + descriptor). No footer is needed. Object timestamps strictly
 increase; records for different objects can be interleaved independently. A static
 object has one sample. Incomplete trailing records remain unavailable; corruption
@@ -52,8 +52,8 @@ being detected during playback. Strict readers check payload SHA; the explicit v
 recomputes every summary against source values. Statistics do not replace the
 source arrays used for inspection, percentiles or analysis.
 
-This is a clean format break. The runtime supports only SIMSCP4 and refuses older
-magic/version values. Package 3.0.0 updates writer, reader, analysis and generated
+This is a clean format break. The runtime supports only WVZ1 `.wvz` files and refuses older
+magic/version values or an obsolete suffix. Package 4.0.0 updates writer, reader, analysis and generated
 fixtures together. No legacy reader or runtime fallback is shipped. Historical
 G3 reports describe their original version, not this contract. See the
 [decision and measurements](docs/SSC_ACCELERATION.md) and the
@@ -106,7 +106,7 @@ Explicit static geometry is reusable throughout the scene. Grid geometry changes
 replace textures discretely. No temporal grid interpolation or reconstructed field
 from sparse particles is implied. Particle-only captures say fields are unavailable.
 
-SIMSCP4 uses version-2 inspection recipes with actual layer manifests and layer
+WVZ1 uses version-2 inspection recipes with actual layer manifests and layer
 visual state. Version-1 particle recipes remain supported. Restore validates source
 identity, channel/state schema and referenced samples before applying state. A recipe
 can refuse an appended source when new samples alter the formerly held bracket;
@@ -157,7 +157,7 @@ is optional; export/reading/slicing require no scikit-image.
 |---|---|
 | Decoded object sample | 256 MiB total across its channels |
 | Chunk / descriptor | 4 MiB raw chunk; stored ≤ raw + 64 KiB; 4 MiB descriptor |
-| Reader metadata | Configurable memory admission; one million records per reader; no aggregate descriptor export ceiling ([policy](docs/SSC_METADATA_BUDGET.md)) |
+| Reader metadata | Configurable memory admission; one million records per reader; no aggregate descriptor export ceiling ([policy](docs/WAVEZ_METADATA_BUDGET.md)) |
 | Arrays per sample | 256 |
 | Grid | Each dimension 2–512, also subject to sample-byte ceiling |
 | Mesh | 1 million vertices; 2 million triangles |
@@ -176,9 +176,8 @@ memory. Measurements include actual process and engine usage. Worker peak RSS us
 Linux VmHWM because `ru_maxrss` can retain the launcher's pre-exec fork peak.
 
 G3 layer reads are synchronous and bounded; the accepted particle-only reader/prefetch
-path remains intact. Godot `.sidx3.json` indexes are disposable and checked against
-actual record headers/descriptors/commits. Python v3 scans directly; it does not share
-those indexes. `.simscope-cache/surfaces/` and job results can be deleted and rebuilt.
+path remains intact. Godot builds a bounded in-memory header index and materializes
+requested descriptors without a sidecar index. Python scans descriptors directly. `.wavez-cache/surfaces/` and job results can be deleted and rebuilt.
 Cache disk size is not automatically capped. Writer flush commits support interrupted
 file recovery; writer resume, per-sample fsync and background archival queues remain
 outside this version. GPU/CuPy contention was not tested.

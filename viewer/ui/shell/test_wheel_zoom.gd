@@ -175,7 +175,7 @@ func run() -> void:
 	view.set_process(false); view.playing = false; view.orbit_enabled = false; OS.low_processor_usage_mode = false
 	await settle()
 	for name in ["particles","field","mesh","mixed","small","large"]:
-		view._open_capture(output.path_join(name+".ssc")); view.playing = false; view.orbit_enabled = false
+		view._open_capture(output.path_join(name+".wvz")); view.playing = false; view.orbit_enabled = false
 		check(view._shell_open_error.is_empty(),name+" capture opens")
 		await ready(view); await verify(view,name)
 	if not external.is_empty():

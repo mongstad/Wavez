@@ -1,4 +1,4 @@
-"""Native UX3 shell geometry, routing, state and lifecycle checks on tiny SSC fixtures."""
+"""Native UX3 shell geometry, routing, state and lifecycle checks on tiny WVZ1 fixtures."""
 import argparse
 import hashlib
 import json
@@ -19,10 +19,10 @@ def main():
     args = parser.parse_args()
     output = args.output_dir.resolve()
     output.mkdir(parents=True, exist_ok=False)
-    for name in ['scene.ssc', 'replacement.ssc']:
+    for name in ['scene.wvz', 'replacement.wvz']:
         scene(output / name)
-    (output / 'invalid.ssc').write_bytes(b'not a SIMSCP4 capture')
-    hashes = {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in output.glob('*.ssc')}
+    (output / 'invalid.wvz').write_bytes(b'not a WVZ1 capture')
+    hashes = {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in output.glob('*.wvz')}
     command = [args.godot, '--path', str(ROOT / 'viewer'), '--rendering-method', args.renderer,
                '--audio-driver', 'Dummy', '--resolution', '1440x900', '--log-file', str(output / 'godot.log'),
                '--script', 'ui/shell/test_viewer_shell.gd', '--', '--shell-output=' + str(output)]
@@ -46,7 +46,7 @@ def main():
     contract[contract.index('  Fullscreen'):contract.index('  Fullscreen')+1] = ['  Window', '    Fullscreen']
     assert report['menu_tree'] == contract, 'Runtime menu hierarchy differs from accepted UX4 contract'
     report['menu_contract_matches'] = True
-    assert hashes == {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in output.glob('*.ssc')}
+    assert hashes == {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in output.glob('*.wvz')}
     report['source_hashes_unchanged'] = hashes
     (output / 'shell-report.json').write_text(json.dumps(report, indent=2) + '\n')
     print(f'Viewer shell: {report["checks"]} checks PASS ({args.renderer}); source hashes unchanged')

@@ -47,7 +47,7 @@ static func snapshot(temporal, bundled_results: bool) -> Dictionary:
 	var source: Dictionary = temporal.selections.source.duplicate(true)
 	if viewer.scene_layers == null or not source.has("sha256") or viewer.committed_sample.is_empty():return {}
 	var old_source := source.duplicate(true);old_source.erase("uuid");old_source.erase("complete_records");old_source.complete_frames = viewer.frame_count
-	var base := {"kind":"simscope-inspection","version":2,"source":old_source,"visual":Visual.snapshot(viewer),"sample":viewer.committed_sample.duplicate(true),"frame_index":viewer.current_index,"alpha":viewer.phase,"history_indices":viewer.history.map(func(frame):return frame.source_index),"layers":viewer.scene_layers.layer_samples.duplicate(true),"selections":[]}
+	var base := {"kind":"wavez-inspection","version":2,"source":old_source,"visual":Visual.snapshot(viewer),"sample":viewer.committed_sample.duplicate(true),"frame_index":viewer.current_index,"alpha":viewer.phase,"history_indices":viewer.history.map(func(frame):return frame.source_index),"layers":viewer.scene_layers.layer_samples.duplicate(true),"selections":[]}
 	var summaries: Array = temporal.summaries.duplicate(true)
 	for summary in summaries:summary.erase("charged_bytes")
 	var bookmarks: Array = temporal.diagnostics.bookmarks.duplicate(true)
@@ -56,7 +56,7 @@ static func snapshot(temporal, bundled_results: bool) -> Dictionary:
 	var analysis := {"summaries":summaries,"current":temporal.current_result,"left":temporal.diagnostics.left,"right":temporal.diagnostics.right,"bindings":temporal.diagnostics.bindings,"bookmarks":bookmarks,"layout":{"series":series,"member_address":temporal.member_address.text,"plot_bins":512,"heatmap_width":128,"heatmap_height":64}}
 	var payload := {"base":base,"selections":temporal.selections.state.snapshot(),"analysis":analysis}
 	var results := {};var members := {};references(payload,results,members)
-	return {"kind":"simscope-inspection","version":3,"source":source,"payload":pack(payload),"members":members.values(),"results":results.values(),"bundled_results":bundled_results}
+	return {"kind":"wavez-inspection","version":3,"source":source,"payload":pack(payload),"members":members.values(),"results":results.values(),"bundled_results":bundled_results}
 
 static func scene_snapshot(temporal) -> Dictionary:
 	var recipe := snapshot(temporal,false)

@@ -41,7 +41,7 @@ func run() -> void:
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--timeline-fixture="):out = arg.trim_prefix("--timeline-fixture=")
 	config = JSON.parse_string(FileAccess.get_file_as_string(out.path_join("config.json")))
-	var live := out.path_join("live.ssc")
+	var live := out.path_join("live.wvz")
 	write_prefix(live,int(config.initial_end),false)
 	var viewer = load("res://main.gd").new();viewer.capture_path = live;viewer.playing = false;viewer.orbit_enabled = false
 	root.add_child(viewer);viewer.set_process(false)

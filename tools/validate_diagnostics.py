@@ -9,7 +9,7 @@ from tests.g4.fixtures import scene
 def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--godot',required=True);p.add_argument('--output-dir',type=Path,required=True);p.add_argument('--renderer',choices=['headless','gl_compatibility','forward_plus'],default='headless');args=p.parse_args()
     out=args.output_dir.resolve();out.mkdir(parents=True,exist_ok=False)
-    scene(out/'run-a.ssc');scene(out/'run-b.ssc')
+    scene(out/'run-a.wvz');scene(out/'run-b.wvz')
     (out/'a.csv').write_text('time,value\n0,2\n0.5,4\n1.5,6\n3,8\n')
     (out/'b.csv').write_text('time,value\n10,1\n10.5,2\n11.5,3\n13,4\n')
     (out/'period.csv').write_text('time,value\n'+''.join(f'{i*.01:.17g},{math.sin(2*math.pi*i*.01):.17g}\n' for i in range(601)))

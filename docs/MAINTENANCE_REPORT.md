@@ -22,7 +22,7 @@ Package version remains `1.0.0`. The original 15 untracked layer UID files are p
 
 ## Documentation audit
 
-The [public Python API](../SIMSCOPE_API.md) now exposes `SceneCapture` and
+The [public Python API](../WAVEZ_API.md) now exposes `SceneCapture` and
 `SceneReader`, per-object sample indexes, exact bracket tuples, identity audits,
 source probes, source types, writer refusal/recovery, dependencies and limits.
 Retired signatures/examples are outside the supported source snapshot.

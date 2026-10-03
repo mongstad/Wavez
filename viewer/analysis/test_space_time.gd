@@ -22,7 +22,7 @@ func run() -> void:
 		if arg.begins_with("--space-time-fixture="):out = arg.trim_prefix("--space-time-fixture=")
 	if out.is_empty():quit(1);return
 	var viewer := Viewer.new();viewer.offline_instance = true;root.add_child(viewer);await process_frame
-	viewer._open_capture(out.path_join("pulse.ssc"));viewer.playing = false;viewer.orbit_enabled = false
+	viewer._open_capture(out.path_join("pulse.wvz"));viewer.playing = false;viewer.orbit_enabled = false
 	var control = viewer.selection_controller;var temporal = control.temporal;var spatial = temporal.space_time
 	control.bind_source();check(await wait_worker(control),"pulse capture bound asynchronously")
 	control.target.select(1);temporal.start_time.text = "0";temporal.end_time.text = "4";temporal.max_gap.text = "1"

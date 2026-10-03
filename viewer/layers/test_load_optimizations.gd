@@ -38,7 +38,7 @@ func run() -> void:
 		for j in range(random.randi_range(0,24)):value += String.chr(random.randi_range(1,127))
 		parity(value)
 	var out := OS.get_cmdline_user_args()[0]
-	var reader := Reader.new();check(reader.open(out.path_join("identity.ssc")),"Open identity fixture")
+	var reader := Reader.new();check(reader.open(out.path_join("identity.wvz")),"Open identity fixture")
 	var previous := {};var worker := Worker.new()
 	for index in range(4):
 		reader.describe("p",index)

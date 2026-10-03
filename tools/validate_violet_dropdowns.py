@@ -18,9 +18,9 @@ def main():
     parser.add_argument('--renderer', choices=['forward_plus', 'gl_compatibility'], default='forward_plus')
     args = parser.parse_args()
     out = args.output_dir.resolve(); out.mkdir(parents=True, exist_ok=False)
-    fixture(out / 'mixed.ssc', ['particles', 'volume', 'mesh'])
-    fixture(out / 'particles.ssc', ['particles'])
-    hashes = {path.name: hashlib.sha256(path.read_bytes()).hexdigest() for path in out.glob('*.ssc')}
+    fixture(out / 'mixed.wvz', ['particles', 'volume', 'mesh'])
+    fixture(out / 'particles.wvz', ['particles'])
+    hashes = {path.name: hashlib.sha256(path.read_bytes()).hexdigest() for path in out.glob('*.wvz')}
     result = subprocess.run([
         args.godot, '--path', str(ROOT / 'viewer'), '--rendering-method', args.renderer,
         '--resolution', '1440x900', '--audio-driver', 'Dummy', '--log-file', str(out / 'godot.log'),
@@ -31,7 +31,7 @@ def main():
         raise RuntimeError(f'Dropdown regression failed: {out / "native.log"}')
     report = json.loads((out / 'report.json').read_text())
     assert not report['failures'], report['failures']
-    assert hashes == {path.name: hashlib.sha256(path.read_bytes()).hexdigest() for path in out.glob('*.ssc')}
+    assert hashes == {path.name: hashlib.sha256(path.read_bytes()).hexdigest() for path in out.glob('*.wvz')}
     report['source_hashes_unchanged'] = hashes
     (out / 'report.json').write_text(json.dumps(report, indent=2) + '\n')
     print(f'Violet dropdowns: {report["checks"]} PASS ({args.renderer}); complete sources unchanged')

@@ -168,7 +168,7 @@ func math_tests(viewer) -> void:
 		check(before.basis.y.dot(viewer.camera.basis.y) > .999, "Continuous diagonal drag at pole " + str(degrees))
 
 func fixture_tests(viewer, kind: String) -> void:
-	viewer._open_capture(output.path_join(kind + ".ssc")); viewer.playing = false; viewer.orbit_enabled = false
+	viewer._open_capture(output.path_join(kind + ".wvz")); viewer.playing = false; viewer.orbit_enabled = false
 	check(viewer.frame_count == 2, kind + " fixture opened")
 	viewer._seek_time(.5)
 	manual_orbit_tests(viewer, kind)

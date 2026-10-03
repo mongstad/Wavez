@@ -169,7 +169,7 @@ func run() -> void:
 	create_timer(110).timeout.connect(func(): push_error("Dropdown test timeout"); quit(1))
 	viewer = Viewer.new(); viewer.scene_prebuffer_enabled = false
 	root.add_child(viewer); viewer.set_process(false)
-	viewer._open_capture(output.path_join("mixed.ssc")); viewer.playing = false; viewer.orbit_enabled = false
+	viewer._open_capture(output.path_join("mixed.wvz")); viewer.playing = false; viewer.orbit_enabled = false
 	viewer.shell.edge_reveal.set_process(false)
 	await ready(); await settle()
 	var sample: Dictionary = viewer.committed_sample.duplicate(true)
@@ -198,7 +198,7 @@ func run() -> void:
 	context.get_popup().set_focused_item(0); key(KEY_DOWN, context.get_popup()); key(KEY_ENTER, context.get_popup()); await settle()
 	check(viewer.scene_layers.selected_objects.mesh == "mesh1", "Native object dropdown routes to existing scene context")
 	unchanged(before, "Object context dropdown")
-	viewer._open_capture(output.path_join("particles.ssc")); viewer.playing = false; await ready(); await settle()
+	viewer._open_capture(output.path_join("particles.wvz")); viewer.playing = false; await ready(); await settle()
 	audit("capture replacement")
 	for index in [1, 2]:
 		viewer.shell.select_workspace(index); await settle()

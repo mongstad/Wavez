@@ -45,8 +45,8 @@ def main():
     scenes = {"particles": ["particles"], "fields": ["volume"], "meshes": ["mesh"],
               "mixed": ["particles", "volume", "mesh"]}
     for name, kinds in scenes.items():
-        fixture(out / f"{name}.ssc", kinds)
-    hashes = {path.name: hashlib.sha256(path.read_bytes()).hexdigest() for path in out.glob("*.ssc")}
+        fixture(out / f"{name}.wvz", kinds)
+    hashes = {path.name: hashlib.sha256(path.read_bytes()).hexdigest() for path in out.glob("*.wvz")}
     env = os.environ.copy()
     env["XDG_CONFIG_HOME"] = str(out / "config")
     # Exports use externally installed templates, while runtime preferences use an isolated profile.
@@ -72,7 +72,7 @@ def main():
     reports = [json.loads((out / name).read_text()) for name in ["report.json", "restart-report.json"]]
     assert all(not report["failures"] for report in reports)
     assert all(report["packaged"] == args.export for report in reports)
-    assert {path.name: hashlib.sha256(path.read_bytes()).hexdigest() for path in out.glob("*.ssc")} == hashes
+    assert {path.name: hashlib.sha256(path.read_bytes()).hexdigest() for path in out.glob("*.wvz")} == hashes
     result = dict(checks=sum(report["checks"] for report in reports), source_sha256_unchanged=hashes,
                   renderer=args.renderer, packaged=args.export, fresh_process_restart=True,
                   known_engine_cleanup_diagnostics={"native": native_cleanup, "restart": cleanup}, reports=reports)

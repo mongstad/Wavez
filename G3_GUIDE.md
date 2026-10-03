@@ -1,14 +1,14 @@
 # G3 quick guide
 
-Work in the authoritative `SimScope` repository. Bulk historical material is in the external backup.
+Work in the authoritative `WAVEZ` repository. Bulk historical material is in the external backup.
 Generate a small analytic field, explicit-ID tracers, a deforming mesh and declared
 demonstration guides. Captures are not shipped in Git. These are synthetic data,
-not a reconstruction from a real tracer capture. New work targets `.ssc` / SIMSCP4
+not a reconstruction from a real tracer capture. New work targets `.wvz` / WVZ1
 under the [capture format policy](docs/CAPTURE_FORMAT_POLICY.md).
 
 ```bash
 python -m examples.scene_demo --small
-/path/to/godot --path viewer -- --capture="$PWD/results/g3/small.ssc"
+/path/to/godot --path viewer -- --capture="$PWD/results/g3/small.wvz"
 ```
 
 Use **Scene layers → Settings** for visibility, scalar channel, range, colormap,
@@ -73,7 +73,7 @@ from wavez_export import SceneCapture, SceneReader
 # Array is z,y,x with x fastest. Origin is the first sample, not the box corner.
 z, y, x = np.meshgrid(np.arange(8), np.arange(6), np.arange(10), indexing="ij")
 field = (x + 2*y + 3*z).astype("f8")
-with SceneCapture("new-scene.ssc", objects=[
+with SceneCapture("new-scene.wvz", objects=[
     dict(id="field", kind="volume", units="scalar units"),
     dict(id="tracers", kind="particles", units="world units", identity="persistent_i8"),
 ], metadata=dict(time_unit="s", position_unit="world units",
@@ -86,7 +86,7 @@ with SceneCapture("new-scene.ssc", objects=[
     capture.add_particles("tracers", 0.25,
                           np.array([[2, 2, 3]], dtype="f4"), ids=np.array([123], dtype="i8"))
 
-with SceneReader("new-scene.ssc") as reader:
+with SceneReader("new-scene.wvz") as reader:
     print(reader.probe("field", 0, "value", [1.5, 4, 4.5]))  # 6
 ```
 
@@ -114,7 +114,7 @@ loading, and requires an axis/geometry mapping. Example mapping alongside `raw.n
 ```
 
 ```bash
-python tools/import_grid_npz.py mapping.json imported.ssc --compression zstd
+python tools/import_grid_npz.py mapping.json imported.wvz --compression zstd
 ```
 
 `axes="xyz"` explicitly transposes existing Nx,Ny,Nz data into z,y,x. Use `zyx`

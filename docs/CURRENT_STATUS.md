@@ -1,10 +1,14 @@
 # Current status
 
-Issue #182 has a revised [clean-break format identity proposal](FORMAT_IDENTITY_PROPOSAL.md)
-for `.wvz` / WAVEZ Scene Format / `WVZ1`. The owner has ruled out legacy reading,
-aliases and conversion; the exact wire proposal awaits review. The accepted
-writer, readers and viewer still use `.ssc` / SIMSCP4 until a separate
-implementation is approved.
+Issue #182's [clean-break design](FORMAT_IDENTITY_PROPOSAL.md) was owner-merged
+in PR #213. Issue #215 implements **WAVEZ Scene Format** (`.wvz`, WVZ1) on its
+issue branch as candidate build 31, pending owner review. The writer, Python
+analysis, native viewer, current tools and examples use WVZ1 only. The
+[current format policy](CAPTURE_FORMAT_POLICY.md) defines the approved wire
+identity and intentional alpha break. Historical reports below retain their
+original format claims and test results. See the
+[WVZ1 implementation validation](WVZ1_IMPLEMENTATION_VALIDATION.md) for the
+real Python simulation artifact, native/package checks and owner steps.
 
 Issue #202 selects **Meshes** in the Simulation panel after a successful
 mesh-only file load. Mixed scenes retain the selected category, and explicit
@@ -158,7 +162,7 @@ repository after this task; existing URLs and the local checkout path remain val
 
 The historical checkpoints below retain the product name used at the time.
 For current branding, package names and commands, use the migration guide,
-[handbook](SIMSCOPE_HANDBOOK.md), and [Python API](../SIMSCOPE_API.md).
+[handbook](WAVEZ_HANDBOOK.md), and [Python API](../WAVEZ_API.md).
 
 Particle Filters retain membership
 semantics with violet checkboxes; immediate boolean controls share violet switches,
@@ -191,7 +195,7 @@ options. Compatible channel changes reuse validated source arrays. SIMSCP4 requi
 contiguous array chunks; package 3.0.0 refuses old capture formats without fallbacks.
 The external S0 run stopped on the previous format's descriptor ceiling. Its exact
 recorded prefix now needs 2.70 MB of descriptor charge rather than 33.55 MB.
-The inherited aggregate export ceiling is now removed; [reader metadata budgets](SSC_METADATA_BUDGET.md)
+The inherited aggregate export ceiling is now removed; [reader metadata budgets](WAVEZ_METADATA_BUDGET.md)
 separate resource admission from SIMSCP4 validity. Above-boundary native/Python
 validation preserves per-record limits, checksums and scientific values.
 Strict 33.3 ms pacing and indefinitely uninterrupted playback when decoding is
@@ -201,18 +205,18 @@ indexes bounded record headers and loads the first visible scene; requested
 records are validated and decoded on demand or within bounded background windows.
 Automatic particle preparation no longer preloads the full timeline or gates the
 first usable scene. Exact identity-map reuse and native descriptor predicates
-remain from the initial profiling change. Comprehensive verification is explicit
-through `python tools/verify_ssc.py CAPTURE.ssc`.
+remain from the initial profiling change. Comprehensive verification for current
+WVZ1 files is explicit through `python tools/verify_wvz.py SCENE.wvz`.
 Historical reports and evidence retain their original review-time wording.
 
 As of **2026-09-20**, including G4 and PERF-001/002 maintenance reviewed and accepted by the user. Scientific simulations were not rerun. Historical results identify their recorded checkpoints. PERF-003 mesh maintenance was also reviewed and accepted by the owner on 2026-09-13; implementation checkpoint `7974c78`.
 
 | Area | Current state |
 |---|---|
-| Authoritative viewer/exporter | `SimScope/` |
-| Repository boundary | SimScope product code/docs/tests only; scientific simulations and research data are external |
-| Preferred new capture workflow | Explicit `SceneCapture` / `SceneReader`, **SIMSCP4**, normally `.ssc` |
-| Capture contract | SIMSCP4 / `.ssc` only; package 3.0.0, clean format break under #102 |
+| Authoritative viewer/exporter | `Wavez/` |
+| Repository boundary | Wavez product code/docs/tests only; scientific simulations and research data are external |
+| Preferred new scene workflow | Explicit `SceneCapture` / `SceneReader`, WAVEZ Scene Format (`.wvz`) |
+| Scene contract | WVZ1 only; package 4.0.0, candidate build 31 under #215 |
 | G0–G3 | Implemented: inspection, bounded storage/cache, typed identities, independent particle/mesh/volume layers, rendering and export |
 | Latest maintenance | PERF-003: bounded mesh preparation/prefetch and GPU position interpolation complete; reviewed and accepted by the owner (2026-09-13). [Mesh maintenance report](MESH_PLAYBACK_MAINTENANCE_REPORT.md). PERF-001/002 remain accepted: [report](PERFORMANCE_MAINTENANCE_REPORT.md). |
 | G4 | Implemented through G4f; A01–A23 PASS for declared fixtures and measured workloads. Accepted by the user. [Report](../G4_REPORT.md), [acceptance ledger](G4_ACCEPTANCE.md), [guide](G4_GUIDE.md). |
@@ -229,7 +233,9 @@ Representative external captures informed G3 timeline/playback validation. Scien
 
 ## Capture contract cleanup — accepted
 
-Older capture writers/readers and public API entry points were retired before the UX milestones. The active product contract is SIMSCP4 / `.ssc` only; replacement coverage uses repository-owned native scenes and synthetic fixtures.
+At this earlier checkpoint, older capture writers/readers and public API entry
+points had been retired in favor of SIMSCP4 / `.ssc`. Issue #215 supersedes
+that format identity; this paragraph records the earlier accepted state.
 
 ## UX1 and UX2 — accepted; UX3 final integration pending review
 
@@ -429,7 +435,7 @@ later issue is included. Implementation remains pending owner review.
 
 ## Current limits
 
-G3 permits at most one particle object per capture and supports one translucent volume and one derived isosurface at a time; multiple meshes and slices are supported. Interactive particle, field and mesh CPU preparation is asynchronous in the accepted maintenance implementation; field textures and mesh surfaces are staged on the main thread. Stable mesh positions interpolate on the GPU, while scalar colors hold the earlier source sample. Initial opening and explicit scientific inspection/export retain synchronous work. Mesh inspection positions and deformed normals are materialized on demand; rendering remains unshaded. Source arrays and probes retain scientific precision, while GPU previews use float32 and may reduce resolution; isosurfaces are explicitly approximate. Budgets are separate allocation limits, not a whole-process memory guarantee. The earlier full G3 demo completed about 19.2 samples/s; neither that result nor the new particle controls establish universal 30 FPS performance. Concurrent CuPy simulation/viewer performance has not been validated. Detailed contracts and measurements are in the [handbook](SIMSCOPE_HANDBOOK.md) and [format/API guide](CAPTURE_FORMAT_AND_API.md).
+G3 permits at most one particle object per capture and supports one translucent volume and one derived isosurface at a time; multiple meshes and slices are supported. Interactive particle, field and mesh CPU preparation is asynchronous in the accepted maintenance implementation; field textures and mesh surfaces are staged on the main thread. Stable mesh positions interpolate on the GPU, while scalar colors hold the earlier source sample. Initial opening and explicit scientific inspection/export retain synchronous work. Mesh inspection positions and deformed normals are materialized on demand; rendering remains unshaded. Source arrays and probes retain scientific precision, while GPU previews use float32 and may reduce resolution; isosurfaces are explicitly approximate. Budgets are separate allocation limits, not a whole-process memory guarantee. The earlier full G3 demo completed about 19.2 samples/s; neither that result nor the new particle controls establish universal 30 FPS performance. Concurrent CuPy simulation/viewer performance has not been validated. Detailed contracts and measurements are in the [handbook](WAVEZ_HANDBOOK.md) and [format/API guide](CAPTURE_FORMAT_AND_API.md).
 
 No AMR, general vector-basis transformation, reconstruction of exact fields from tracers, arbitrary transparent-volume compositing, background archive queue, writer resume, or per-record fsync is implemented. Existing inspection recipes and deterministic export are implemented; do not confuse these with the future G5 control service.
 
@@ -467,7 +473,7 @@ Track third-party licensing in [THIRD_PARTY_LICENSES.md](../THIRD_PARTY_LICENSES
 
 ## Repository baseline
 
-The current repository is a fresh source snapshot with prior development Git history intentionally archived outside this repository. Scientific simulations, raw captures and research projects remain external. SIMSCP4 is the only supported capture format for new work. See [repository boundaries](REPOSITORY_BOUNDARY.md), [capture policy](CAPTURE_FORMAT_POLICY.md), [evidence](EVIDENCE_INDEX.md), and [provenance](../PROVENANCE.md).
+The current repository is a fresh source snapshot with prior development Git history intentionally archived outside this repository. Scientific simulations, raw captures and research projects remain external. WVZ1 is the sole current scene format. See [repository boundaries](REPOSITORY_BOUNDARY.md), [format policy](CAPTURE_FORMAT_POLICY.md), [evidence](EVIDENCE_INDEX.md), and [provenance](../PROVENANCE.md).
 
 ## UX-IA-001 / UX-IA-002 — design baseline merged
 

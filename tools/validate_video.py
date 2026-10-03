@@ -40,10 +40,10 @@ def main():
         record('PASS: '+description)
     def command(extra):
         return [args.godot,'--path',str(ROOT/'viewer'),'--resolution','640x360','--audio-driver','Dummy','--rendering-method',args.renderer]+extra
-    with SceneCapture(base/'fixture.ssc',objects=[dict(id='particles',kind='particles',units='u',identity='persistent_i8')],metadata={'simulation_name':'Video timing fixture'}) as c:
+    with SceneCapture(base/'fixture.wvz',objects=[dict(id='particles',kind='particles',units='u',identity='persistent_i8')],metadata={'simulation_name':'Video timing fixture'}) as c:
         for t in np.linspace(0,1,11):
             c.add_particles("particles",t,[[-2+t*4,0,0],[0,1+t,0],[1,0,-1]],ids=[0,1,2],temperature=np.array([100,200,300],dtype="f4"),visual_size=np.full(3,.7,dtype="f4"),particle_type=np.array([0,1,0],dtype="u4"))
-    with SceneCapture(base/'variable fixture.ssc',objects=[dict(id='particles',kind='particles',units='u',identity='anonymous')]) as c:
+    with SceneCapture(base/'variable fixture.wvz',objects=[dict(id='particles',kind='particles',units='u',identity='anonymous')]) as c:
         c.add_particles("particles",0,np.array([[0,0,0],[1,0,0]],dtype="f4"),temperature=np.array([1,2],dtype="f4"))
         c.add_particles("particles",.1,np.array([[0,0,0],[1,0,0],[2,0,0]],dtype="f4"),temperature=np.array([1,2,3],dtype="f4"))
         c.add_particles("particles",.2,np.array([[0,1,0],[1,1,0],[2,1,0]],dtype="f4"),density=np.array([1,2,3],dtype="f4"))
@@ -53,10 +53,10 @@ def main():
     state=json.loads((base/'state.json').read_text())
     state['overlay_visible']=False
     state['trails_enabled']=False
-    capture_hash=hashlib.sha256((base/'fixture.ssc').read_bytes()).hexdigest()
+    capture_hash=hashlib.sha256((base/'fixture.wvz').read_bytes()).hexdigest()
     def job_for(name,**changes):
         directory=run/name;directory.mkdir()
-        job=dict(version=1,capture_path=str(base/'fixture.ssc'),start_time=.1,end_time=.6,
+        job=dict(version=1,capture_path=str(base/'fixture.wvz'),start_time=.1,end_time=.6,
                  fps=30,playback_rate=1.,width=1920,height=1080,output_path=str(directory/'result with spaces.mp4'),
                  state=copy.deepcopy(state),camera_mode='orbit',orbit_speed=.2,quality='high',keep_frames=True,ffmpeg_path=ffmpeg)
         job.update(changes)
@@ -104,7 +104,7 @@ def main():
         check(hashlib.sha256((p.parent/'frames/frame00000000.png').read_bytes()).hexdigest()!=first_frames[0],'UI inclusion changes rendered pixels')
         p,j=job_for('appearance workspace',end_time=.2,state=ui_state,presentation=dict(workspace=1,scroll=0,remaining=True));movie(p,j)
         check(hashlib.sha256((p.parent/'frames/frame00000000.png').read_bytes()).hexdigest()!=first_frames[0],'accepted workspace and remaining preference reach rendered UI')
-        check(hashlib.sha256((base/'fixture.ssc').read_bytes()).hexdigest()==capture_hash,'source capture bytes unchanged')
+        check(hashlib.sha256((base/'fixture.wvz').read_bytes()).hexdigest()==capture_hash,'source capture bytes unchanged')
         record('ALL OVERLAY UI TESTS PASSED\nArtifacts: '+str(run))
         return
     if args.continuation:
@@ -122,7 +122,7 @@ def main():
         process,stream=launch(p,j);finish(process,stream,p,'failed')
         p,j=job_for('overflowing frame count',playback_rate=1e-300)
         process,stream=launch(p,j);finish(process,stream,p,'failed')
-        check(hashlib.sha256((base/'fixture.ssc').read_bytes()).hexdigest()==capture_hash,'source capture bytes unchanged')
+        check(hashlib.sha256((base/'fixture.wvz').read_bytes()).hexdigest()==capture_hash,'source capture bytes unchanged')
         record('ALL CONTINUATION ACCEPTANCE TESTS PASSED\nArtifacts: '+str(run))
         return
     p,j=job_for('1080p 30fps');baseline=movie(p,j)
@@ -168,7 +168,7 @@ def main():
     check(len(list((p.parent/'frames').glob('*.png')))==3 and (p.parent/'encoded.partial.mp4').exists() and not Path(j['output_path']).exists(),'interrupted encoding preserves frames and isolates partial MP4')
     p,j=job_for('cleanup success',keep_frames=False,end_time=.2);movie(p,j)
     check(not (p.parent/'frames').exists() and Path(j['output_path']).stat().st_size>0,'PNG cleanup only after verified final MP4')
-    check(hashlib.sha256((base/'fixture.ssc').read_bytes()).hexdigest()==capture_hash,'source capture bytes unchanged')
+    check(hashlib.sha256((base/'fixture.wvz').read_bytes()).hexdigest()==capture_hash,'source capture bytes unchanged')
     record('ALL VIDEO ACCEPTANCE TESTS PASSED\nArtifacts: '+str(run))
 
 if __name__=='__main__':main()

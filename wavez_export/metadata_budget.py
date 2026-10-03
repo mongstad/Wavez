@@ -1,4 +1,4 @@
-"""Reader resource admission, independent of SIMSCP4 wire validity.
+"""Reader resource admission, independent of WVZ1 wire validity.
 
 Charges cover owned Python objects, index bookkeeping and bounded JSON scratch.
 They are allocation estimates, not a whole-process RSS or allocator guarantee.

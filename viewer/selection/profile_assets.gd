@@ -24,7 +24,7 @@ func run() -> void:
 	var config: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(out.path_join("config.json")))
 	var viewer := Viewer.new();viewer.offline_instance = true;root.add_child(viewer)
 	await process_frame
-	viewer._open_capture(out.path_join("fixture.ssc"));viewer.playing = false;viewer.orbit_enabled = false
+	viewer._open_capture(out.path_join("fixture.wvz"));viewer.playing = false;viewer.orbit_enabled = false
 	var control = viewer.selection_controller
 	control.jobs.completed.connect(func(result):worker_results.append({"metrics":result.metrics,"memory":result.memory,"memo":result.get("verification_memo",{}),"assets":result.get("member_assets",{})}))
 	Profile.reset();Profile.enabled = true;Profile.trace_enabled = true

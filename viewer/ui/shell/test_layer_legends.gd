@@ -16,7 +16,7 @@ func run() -> void:
 	output = OS.get_cmdline_user_args()[0]
 	viewer = Viewer.new(); viewer.scene_prebuffer_enabled = false; root.add_child(viewer); viewer.set_process(false)
 	await settle()
-	viewer._open_capture(output.path_join("mixed.ssc")); viewer.playing = false; viewer.orbit_enabled = false
+	viewer._open_capture(output.path_join("mixed.wvz")); viewer.playing = false; viewer.orbit_enabled = false
 	var layers = viewer.scene_layers
 	viewer.color_channel = "value"; viewer.colormap_name = "plasma"; viewer._update_colormap(); viewer._restyle()
 	for id in ["mesh0","mesh1"]: layers.states[id].channel = "value"

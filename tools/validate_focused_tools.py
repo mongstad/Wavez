@@ -20,10 +20,10 @@ def main():
     p.add_argument('--renderer', choices=['gl_compatibility','forward_plus'], default='gl_compatibility')
     args = p.parse_args()
     out = args.output_dir.resolve(); out.mkdir(parents=True, exist_ok=False)
-    fixture(out/'mixed.ssc', ['particles','volume','mesh'])
-    fixture(out/'fields.ssc', ['volume'])
-    fixture(out/'particles.ssc', ['particles'])
-    hashes = {f.name:hashlib.sha256(f.read_bytes()).hexdigest() for f in out.glob('*.ssc')}
+    fixture(out/'mixed.wvz', ['particles','volume','mesh'])
+    fixture(out/'fields.wvz', ['volume'])
+    fixture(out/'particles.wvz', ['particles'])
+    hashes = {f.name:hashlib.sha256(f.read_bytes()).hexdigest() for f in out.glob('*.wvz')}
     run = subprocess.run([args.godot, '--path', str(ROOT/'viewer'), '--rendering-method', args.renderer,
                           '--audio-driver','Dummy','--resolution','1440x900', '--script',
                           'ui/shell/test_focused_tools.gd','--',str(out)], text=True,
@@ -33,7 +33,7 @@ def main():
         raise RuntimeError(f'Focused tool regression failed: {out}/native.log')
     report = json.loads((out/'report.json').read_text())
     assert not report['failures'],report['failures']
-    assert hashes == {f.name:hashlib.sha256(f.read_bytes()).hexdigest() for f in out.glob('*.ssc')}
+    assert hashes == {f.name:hashlib.sha256(f.read_bytes()).hexdigest() for f in out.glob('*.wvz')}
     report['source_hashes_unchanged'] = hashes
     (out/'report.json').write_text(json.dumps(report,indent=2)+'\n')
     print(f'Focused tools: {report["checks"]} PASS ({args.renderer}); sources unchanged')

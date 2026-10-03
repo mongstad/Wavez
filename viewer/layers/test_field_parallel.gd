@@ -34,7 +34,7 @@ func accounting(worker) -> void:
 	worker.mutex.unlock()
 func run() -> void:
 	out = OS.get_cmdline_user_args()[0]
-	var reader := Reader.new(false);check(reader.open(out.path_join("session.ssc")),"Fixture opens")
+	var reader := Reader.new(false);check(reader.open(out.path_join("session.wvz")),"Fixture opens")
 	var oracle: Array = JSON.parse_string(FileAccess.get_file_as_string(out.path_join("oracle.json")))
 	var gpu: Array = JSON.parse_string(FileAccess.get_file_as_string(out.path_join("gpu-oracle.json")))
 	for count in [1,2,3,4]:

@@ -1,7 +1,7 @@
 # Wavez Python API
 
-**New integrations use `SceneCapture` and `SceneReader`, writing `.ssc` files in
-SIMSCP4 format.** This reference follows [the current source](wavez_export/scene.py).
+**New integrations use `SceneCapture` and `SceneReader`, writing `.wvz` files in
+WVZ1 format.** This reference follows [the current source](wavez_export/scene.py).
 Install `wavez-export` from this repository; import it as `wavez_export`.
 See [Quickstart](QUICKSTART.md) for dependencies and the native viewer.
 
@@ -31,7 +31,7 @@ committed prefix and choose a new destination.
 
 Volume statistics are mandatory and computed once during export. The current
 viewer consumes them after structural validation/decoding; no legacy reader or optional summary
-fallback is included. `tools/verify_ssc.py` recomputes summaries. Source arrays,
+fallback is included. `tools/verify_wvz.py` recomputes summaries. Source arrays,
 timestamps and precision are unchanged. See [format decisions](docs/SSC_ACCELERATION.md)
 and the [complete capture-policy inventory](docs/SSC_CAPTURE_PARAMETERS.md).
 Interactive playback skips payload SHA recomputation; readable corruption may
@@ -87,7 +87,7 @@ retains file order; `reader.times` is the sorted union of times.
 decoded arrays. Insufficient capacity raises `MetadataCapacityError` (exported
 from `wavez_export`, subclass of `MemoryError`), not an invalid-format error.
 Close/refusal releases owned index state; refresh re-admits it. There is no
-aggregate descriptor-byte export limit. See [reader budgets](docs/SSC_METADATA_BUDGET.md)
+aggregate descriptor-byte export limit. See [reader budgets](docs/WAVEZ_METADATA_BUDGET.md)
 for accounting, native configuration and analysis job limits.
 
 `bracket` returns `(a, b, alpha, status)` or `None`. It reports source indices and
@@ -112,7 +112,7 @@ analysis/export; it does not change `SceneReader` into a public selective reader
 
 ## Minimal executable example
 
-Run in a directory where `example.ssc` does not exist:
+Run in a directory where `example.wvz` does not exist:
 
 ```python
 import numpy as np
@@ -131,19 +131,19 @@ metadata = dict(
 )
 xyz = np.array([[0., 0., 0.], [1., 0., 0.]], dtype="f8")
 ids = np.array([7, 9007199254740993], dtype="i8")
-with SceneCapture("example.ssc", objects=objects, metadata=metadata) as capture:
+with SceneCapture("example.wvz", objects=objects, metadata=metadata) as capture:
     capture.add_particles("particles", 0., xyz, ids=ids)
     capture.add_volume("field", 0., {"rho": np.full((2, 2, 2), 2., dtype="f8")},
                        origin=[0, 0, 0], spacing=[1, 1, 1], centering="cell")
     capture.add_particles("particles", 0.5, xyz + [0.5, 0, 0], ids=ids)
-with SceneReader("example.ssc") as reader:
+with SceneReader("example.wvz") as reader:
     assert reader.audit_identity()
     assert reader.read_sample("particles", 1)["particle_id"].tolist() == ids.tolist()
     assert reader.probe("field", 0, "rho", [0.5, 0.5, 0.5]) == 2.0
     assert reader.bracket("field", 0.5) == (0, 0, 0.0, "held")
 ```
 
-Open with `godot --path viewer -- --capture=/absolute/path/example.ssc`.
+Open with `godot --path viewer -- --capture=/absolute/path/example.wvz`.
 [Mesh/field integration examples](docs/SIMULATION_INTEGRATION_GUIDE.md) and
 `python -m examples.g4_demo --output NEW_DIRECTORY` cover more workflows.
 
@@ -169,10 +169,10 @@ interfaces, not a public command service. G5 is not implemented.
 
 ## Supported package contract
 
-Package **3.0.0** exports `SceneCapture` and `SceneReader` for SIMSCP4 scenes.
+Package **4.0.0** exports `SceneCapture` and `SceneReader` for WVZ1 scenes.
 Capture magic/version, explicit object declarations and source dtypes determine
 validity. No particle-only writer/reader or implicit conversion API is exported.
 Use the [native integration guide](docs/SIMULATION_INTEGRATION_GUIDE.md) for
 engine callbacks and [capture policy](docs/CAPTURE_FORMAT_POLICY.md) for the
-supported contract. Package 3.0.0 records the intentional breaking change to a
-SIMSCP4-only public API.
+supported contract. Package 4.0.0 records the intentional breaking change to a
+WVZ1-only public API.

@@ -29,7 +29,7 @@ func run() -> void:
 	check(Policy.capacity(swapped,2*gib,0,0) == Policy.capacity({"available_physical":8*gib,"reserve":gib},gib,0,0),"Swapped pages are excluded from owned physical credit")
 	check(memory.available_physical > 0 and memory.physical > 0,"Physical capacity detected")
 	if OS.get_name() == "Linux":check(memory.process_rss > 0 and memory.process_peak_rss >= memory.process_rss,"Linux process telemetry reads tab-separated status")
-	var view = make_view(directory.path_join("session.ssc"),true)
+	var view = make_view(directory.path_join("session.wvz"),true)
 	var control = view.scene_layers.field_playback
 	check(control.scope_choice.selected == 0 and control.worker.status().session.get("automatic",false),"Opening starts automatic preparation without Play or Performance")
 	# Reinitialize with a small capacity so this short fixture behaves like a long capture.

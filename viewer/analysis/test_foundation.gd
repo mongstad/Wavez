@@ -47,7 +47,7 @@ func run() -> void:
 	check(not Sampling.mesh_compatible({"identity":"stable_topology"},a,b),"changed mesh holds")
 	var jobs := Jobs.new();root.add_child(jobs)
 	check(jobs.start(out.path_join("workers")),"worker starts within headroom")
-	var source := {"path":out.path_join("fixture.ssc")}
+	var source := {"path":out.path_join("fixture.wvz")}
 	var began := Time.get_ticks_usec()
 	var token := jobs.request(source,"describe",{},1,1)
 	request_ms = (Time.get_ticks_usec()-began)/1000.0

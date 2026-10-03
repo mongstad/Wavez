@@ -13,14 +13,14 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from wavez_export import SceneCapture, SceneReader, codec
 from tests.scene_mutation import rewrite
-from tools.verify_ssc import verify
+from tools.verify_wvz import verify
 
 
 def fixtures(out):
     cases = [];oracles = [];strict = []
     for compression in ('none', 'zstd'):
         for kind in ('volume', 'particles', 'mesh'):
-            name = f'{kind}-{compression}';path = out/(name+'.ssc')
+            name = f'{kind}-{compression}';path = out/(name+'.wvz')
             obj = dict(id='object', kind=kind, units='u')
             if kind == 'particles':obj['identity'] = 'persistent_i8'
             if kind == 'mesh':obj['identity'] = 'stable_topology'
@@ -45,7 +45,7 @@ def fixtures(out):
                 if fault == 'decode' and compression != 'zstd':continue
                 if fault == 'bad_id' and kind == 'volume':continue
                 if fault == 'triangle' and kind != 'mesh':continue
-                target = out/(name+'-'+fault+'.ssc');shutil.copyfile(path, target)
+                target = out/(name+'-'+fault+'.wvz');shutil.copyfile(path, target)
                 def change(seq, record, desc, payload):
                     if seq != 3:return
                     array = desc['arrays'][0]
@@ -94,11 +94,12 @@ def fixtures(out):
                 else:raise AssertionError('Strict verifier accepted '+target.name)
                 cases.append(dict(file=target.name, kind=kind, fault=fault, readable=fault in ('sha_only', 'stored_hash', 'raw_hash')))
     # Native malformed metadata is rejected before any payload operation.
-    raw = bytearray((out/'volume-none.ssc').read_bytes());raw[16] = ord('[')
-    (out/'bad-metadata.ssc').write_bytes(raw)
+    raw = bytearray((out/'volume-none.wvz').read_bytes());raw[16] = ord('[')
+    (out/'bad-metadata.wvz').write_bytes(raw)
     # Same content under a different name/directory has identical semantics.
-    (out/'moved').mkdir();shutil.copyfile(out/'volume-zstd.ssc', out/'moved/renamed.data')
-    shutil.copyfile(out/'volume-none.ssc', out/'working.ssc')
+    (out/'moved').mkdir();shutil.copyfile(out/'volume-zstd.wvz', out/'moved/renamed.wvz')
+    shutil.copyfile(out/'volume-zstd.wvz', out/'moved/renamed.data')
+    shutil.copyfile(out/'volume-none.wvz', out/'working.wvz')
     report = dict(cases=cases, oracles=oracles, strict_rejections=strict)
     (out/'fixtures.json').write_text(json.dumps(report, indent=2)+'\n')
     return report
@@ -110,7 +111,7 @@ def main():
     p.add_argument('--renderer', choices=['headless', 'forward_plus', 'gl_compatibility'], default='headless')
     a = p.parse_args();out = a.output_dir.resolve();out.mkdir(parents=True, exist_ok=False)
     report = fixtures(out)
-    hashes = {str(f):hashlib.sha256(f.read_bytes()).hexdigest() for f in out.rglob('*.ssc') if f.name != 'working.ssc'}
+    hashes = {str(f):hashlib.sha256(f.read_bytes()).hexdigest() for f in out.rglob('*.wvz') if f.name != 'working.wvz'}
     command = [a.godot, '--path', str(ROOT/'viewer'), '--audio-driver', 'Dummy']
     command += ['--headless'] if a.renderer == 'headless' else ['--rendering-method', a.renderer, '--resolution', '960x640']
     command += ['--script', 'layers/test_payload_integrity.gd', '--', str(out)]

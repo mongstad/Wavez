@@ -30,9 +30,9 @@ def validate():
                     missing.append(dict(document=name, target=target))
     examples = []
     cases = [
-        ("SIMSCOPE_API.md", "## Minimal executable example", "example.ssc", "rho", "m", "kg/m^3"),
-        ("docs/SIMULATION_INTEGRATION_GUIDE.md", "## Small native example", "example.ssc", "density", "m", "amplitude squared"),
-        ("G3_GUIDE.md", "## Write actual data", "new-scene.ssc", "value", "world units", "scalar units"),
+        ("WAVEZ_API.md", "## Minimal executable example", "example.wvz", "rho", "m", "kg/m^3"),
+        ("docs/SIMULATION_INTEGRATION_GUIDE.md", "## Small native example", "example.wvz", "density", "m", "amplitude squared"),
+        ("G3_GUIDE.md", "## Write actual data", "new-scene.wvz", "value", "world units", "scalar units"),
     ]
     for name, marker, capture, channel, position_unit, channel_unit in cases:
         doc = (ROOT / name).read_text()

@@ -31,8 +31,8 @@ def main():
     reports = {}
     for name, project in projects:
         folder = out/name; folder.mkdir(); fixtures(folder)
-        (folder/'invalid.ssc').write_bytes(b'not a SIMSCP4 capture')
-        before = {x.name: hashlib.sha256(x.read_bytes()).hexdigest() for x in folder.glob('*.ssc')}
+        (folder/'invalid.wvz').write_bytes(b'not a WVZ1 capture')
+        before = {x.name: hashlib.sha256(x.read_bytes()).hexdigest() for x in folder.glob('*.wvz')}
         env = os.environ.copy(); env['XDG_CONFIG_HOME'] = str(folder/'config')
         if a.export:
             exported = folder/'export-source'; shutil.copytree(project/'viewer', exported, ignore=shutil.ignore_patterns('.godot'))
@@ -53,7 +53,7 @@ def main():
         report = json.loads((folder/'empty-report.json').read_text())
         assert not report['failures'], report['failures']
         assert report['packaged'] == a.export
-        assert before == {x.name: hashlib.sha256(x.read_bytes()).hexdigest() for x in folder.glob('*.ssc')}
+        assert before == {x.name: hashlib.sha256(x.read_bytes()).hexdigest() for x in folder.glob('*.wvz')}
         report.update(source_hashes_unchanged=before, known_engine_diagnostics=diagnostics)
         (folder/'validation.json').write_text(json.dumps(report, indent=2)+'\n'); reports[name] = report
     comparisons = {}

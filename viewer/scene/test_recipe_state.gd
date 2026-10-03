@@ -122,7 +122,7 @@ func run() -> void:
 	create_timer(120).timeout.connect(func():push_error("Recipe state regression timed out");quit(1))
 	var viewer = load("res://main.gd").new()
 	viewer.offline_instance = true;root.add_child(viewer);viewer.set_process(false)
-	viewer._open_capture(output.path_join("scene.ssc"));viewer.playing = false
+	viewer._open_capture(output.path_join("scene.wvz"));viewer.playing = false
 	await process_frame
 	var source_hash := FileAccess.get_sha256(viewer.capture_path)
 	var canonical := Visual.snapshot(viewer)

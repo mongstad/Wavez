@@ -20,7 +20,7 @@ class SourceFoundationTests(unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         self.root = Path(self.temp.name)
-        self.path = scene(self.root/"fixture.ssc")
+        self.path = scene(self.root/"fixture.wvz")
         self.before = hashlib.sha256(self.path.read_bytes()).hexdigest()
 
     def tearDown(self):
@@ -106,7 +106,7 @@ class SourceFoundationTests(unittest.TestCase):
         self.assertEqual(probe_array(a,g,transform,[0,0,0])["reason"],"nonfinite_support")
 
     def test_none_zstd_and_existing_reader_parity(self):
-        compressed=scene(self.root/"compressed.ssc","zstd")
+        compressed=scene(self.root/"compressed.wvz","zstd")
         for path in [self.path,compressed]:
             with SourceSnapshot(path) as s, SceneReader(path) as old:
                 for oid in s.objects:
@@ -124,13 +124,13 @@ class SourceFoundationTests(unittest.TestCase):
             self.assertEqual(len(s.samples["p"]),2)
             self.assertEqual(len(s.samples["field"]),1)
             self.assertEqual(source_bracket(s,"p",4)["a"],1)
-        partial=self.root/"partial.ssc"
+        partial=self.root/"partial.wvz"
         partial.write_bytes(self.path.read_bytes()[:end+25])
         with SourceSnapshot(partial) as s:self.assertEqual(s.committed_end,end)
         with self.assertRaises(ValueError):SourceSnapshot(partial,committed_bytes=str(end+25))
 
     def test_append_is_verified_but_never_extends(self):
-        live=self.root/"live.ssc"
+        live=self.root/"live.wvz"
         with SourceSnapshot(self.path) as source:end=source.samples["p"][1]["end"]
         live.write_bytes(self.path.read_bytes()[:end])
         with SourceSnapshot(live) as s:
@@ -166,7 +166,7 @@ class SourceFoundationTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError,"checksum"):s.read_sample("p",0)
 
     def test_external_identity_reuse_is_not_certified_by_seek(self):
-        p=self.root/"invalid.ssc"
+        p=self.root/"invalid.wvz"
         with SceneCapture(p,objects=[dict(id="particles",kind="particles",units="u",identity="persistent_i8")]) as w:
             for i,ids in enumerate([[5,10],[10,11],[11,12]]):w.add_particles("particles",i,np.zeros((2,3),dtype="f8"),ids=ids)
         rewrite(p,lambda seq,r,d,payload:set_ids(seq,r,d,payload,[11,5]) if seq==2 else None)
@@ -192,7 +192,7 @@ class SourceFoundationTests(unittest.TestCase):
         self.assertEqual(ctx.used,0)
 
     def test_anonymous_source_without_inferred_identity(self):
-        p=self.root/"anonymous.ssc"
+        p=self.root/"anonymous.wvz"
         with SceneCapture(p,objects=[dict(id="particles",kind="particles",units="u",identity="anonymous")]) as w:
             for t in [0,1,2]:w.add_particles("particles",t,np.array([[t,2,3]],dtype="f4"))
         with SourceSnapshot(p) as s,SceneReader(p) as reader:
@@ -204,7 +204,7 @@ class SourceFoundationTests(unittest.TestCase):
         with self.assertRaises(AnalysisError):bracket([{"time":1},{"time":0}],.5)
 
     def test_empty_formats_and_static_before_timestamp(self):
-        p=self.root/"empty.ssc"
+        p=self.root/"empty.wvz"
         with SceneCapture(p,objects=[dict(id="particles",kind="particles",units="u",identity="anonymous")]):pass
         with SourceSnapshot(p) as s:self.assertEqual(s.record_count,0)
         static=bracket([{"time":5}],-10,static=True)

@@ -129,7 +129,7 @@ class MemberAssets:
     def set_owner(self,pid):
         birth=process_birth(pid)
         if birth is None:raise AnalysisError("invalid_asset","Member store owner is not alive")
-        owner=dict(version=1,kind="simscope-member-cache",pid=pid,birth=birth)
+        owner=dict(version=1,kind="wavez-member-cache",pid=pid,birth=birth)
         temporary=self.root/"owner.json.tmp";temporary.write_text(json.dumps(owner))
         os.replace(temporary,self.root/"owner.json")
 
@@ -150,7 +150,7 @@ class MemberAssets:
             try:
                 if owner.is_symlink() or owner.stat().st_size>4096:continue
                 info=json.loads(owner.read_text())
-                if set(info)!={"version","kind","pid","birth"} or info["version"]!=1 or info["kind"]!="simscope-member-cache" or type(info["pid"]) is not int or info["pid"]<=0 or not isinstance(info["birth"],str):continue
+                if set(info)!={"version","kind","pid","birth"} or info["version"]!=1 or info["kind"]!="wavez-member-cache" or type(info["pid"]) is not int or info["pid"]<=0 or not isinstance(info["birth"],str):continue
                 if process_birth(info["pid"])==info["birth"]:continue
                 # Result ownership follows the same live viewer identity. Keep
                 # ownership evidence if unknown result files prevent cleanup.

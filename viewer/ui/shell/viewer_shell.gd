@@ -307,7 +307,7 @@ func show_source() -> void:
 func source_details() -> String:
 	if viewer.generic_reader == null: return "No capture loaded."
 	var lines := [viewer.capture_path, viewer.hud.text,
-		"SIMSCP4 • %d layer samples" % viewer.generic_reader.records.size(), viewer.cache_label.text]
+		"WVZ1 • %d layer samples" % viewer.generic_reader.records.size(), viewer.cache_label.text]
 	var layers = viewer.scene_layers
 	if layers != null:
 		for id in layers.labels:

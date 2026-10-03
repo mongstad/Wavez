@@ -18,7 +18,7 @@ def main():
     parser.add_argument("--output-dir",type=Path,required=True)
     parser.add_argument("--renderer",choices=["headless","gl_compatibility","forward_plus"],default="headless")
     args=parser.parse_args();out=args.output_dir.resolve();out.mkdir(parents=True,exist_ok=False)
-    path=scene(out/"fixture.ssc");before=hashlib.sha256(path.read_bytes()).hexdigest()
+    path=scene(out/"fixture.wvz");before=hashlib.sha256(path.read_bytes()).hexdigest()
     command=[args.godot,"--path",str(ROOT/"viewer"),"--audio-driver","Dummy","--log-file",str(out/"godot.log")]
     command += ["--headless"] if args.renderer=="headless" else ["--rendering-method",args.renderer,"--resolution","1100x820"]
     command += ["--script","analysis/test_temporal.gd","--","--temporal-fixture="+str(out)]

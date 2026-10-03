@@ -29,7 +29,7 @@ var encoding_began := 0
 
 func _ready() -> void:
 	began = Time.get_ticks_msec()
-	Profile.enabled = OS.get_environment("SIMSCOPE_VIDEO_PROFILE") == "1"
+	Profile.enabled = OS.get_environment("WAVEZ_VIDEO_PROFILE") == "1"
 	get_tree().auto_accept_quit = false
 	RenderingServer.render_loop_enabled = false # Offline frames own their draw calls.
 	_configure_window()

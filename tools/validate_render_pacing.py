@@ -17,7 +17,7 @@ def fixtures(out):
         if name in ('particles','mixed'):objects.append(dict(id='p',kind='particles',identity='persistent_i8',units='m'))
         if name in ('field','mixed'):objects.append(dict(id='field',kind='volume',units='m'))
         if name in ('mesh','mixed'):objects.append(dict(id='mesh',kind='mesh',identity='stable_topology',units='m'))
-        with SceneCapture(out/(name+'.ssc'), objects=objects, compression='none') as writer:
+        with SceneCapture(out/(name+'.wvz'), objects=objects, compression='none') as writer:
             for time in (0.,.5,1.,1.5,2.):
                 points = np.array([[-2,0,0],[2,0,0],[0,3,1]], dtype='f8')+[0,0,time]
                 if name in ('particles','mixed'):writer.add_particles('p',time,points,ids=np.array([7,9007199254740993,2**63-1],dtype='i8'))
@@ -33,13 +33,13 @@ def main():
     p.add_argument('--output-dir',type=Path,required=True)
     p.add_argument('--renderer',choices=['forward_plus','gl_compatibility'],default='forward_plus')
     a=p.parse_args();out=a.output_dir.resolve();out.mkdir(parents=True,exist_ok=False);fixtures(out)
-    hashes={path.name:hashlib.sha256(path.read_bytes()).hexdigest() for path in out.glob('*.ssc')}
+    hashes={path.name:hashlib.sha256(path.read_bytes()).hexdigest() for path in out.glob('*.wvz')}
     result=subprocess.run([a.godot,'--path',str(ROOT/'viewer'),'--rendering-method',a.renderer,'--resolution','960x640','--log-file',str(out/'live.log'),
                            '--audio-driver','Dummy','--script','scene/test_render_pacing.gd','--',str(out)],capture_output=True,text=True,timeout=180)
     log=result.stdout+result.stderr;(out/'native.log').write_text(log)
     assert result.returncode==0 and 'ERROR:' not in log and 'RENDER PACING:' in log,log[-6000:]
     report=json.loads((out/'report.json').read_text());assert not report['failures'],report['failures']
-    assert hashes=={path.name:hashlib.sha256(path.read_bytes()).hexdigest() for path in out.glob('*.ssc')}
+    assert hashes=={path.name:hashlib.sha256(path.read_bytes()).hexdigest() for path in out.glob('*.wvz')}
     report['source_hashes_unchanged']=hashes;(out/'report.json').write_text(json.dumps(report,indent=2)+'\n')
     print(f'Render pacing: {report["checks"]} checks PASS ({a.renderer})')
 

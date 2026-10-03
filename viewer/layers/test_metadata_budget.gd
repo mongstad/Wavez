@@ -9,18 +9,18 @@ func check(ok: bool, label: String) -> void:
 func _initialize() -> void:
 	var directory := OS.get_cmdline_user_args()[0]
 	var report: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(directory.path_join("fixture.json")))
-	var path := directory.path_join("long.ssc")
-	var previous_env := OS.get_environment("SIMSCOPE_METADATA_BUDGET_MIB")
-	OS.set_environment("SIMSCOPE_METADATA_BUDGET_MIB","1")
+	var path := directory.path_join("long.wvz")
+	var previous_env := OS.get_environment("WAVEZ_METADATA_BUDGET_MIB")
+	OS.set_environment("WAVEZ_METADATA_BUDGET_MIB","1")
 	var configured := Reader.new()
 	check(configured.metadata_limit == 1048576 and not configured.open(path) and configured.error_code == "metadata_capacity", "Environment configures reader admission")
-	OS.set_environment("SIMSCOPE_METADATA_BUDGET_MIB","invalid")
+	OS.set_environment("WAVEZ_METADATA_BUDGET_MIB","invalid")
 	configured = Reader.new()
 	check(not configured.open(path) and configured.error_code == "metadata_capacity", "Invalid configuration cannot disable admission")
-	OS.set_environment("SIMSCOPE_METADATA_BUDGET_MIB","8192")
+	OS.set_environment("WAVEZ_METADATA_BUDGET_MIB","8192")
 	configured = Reader.new()
 	check(configured.metadata_limit == 8192*1048576, "A larger native budget is configurable")
-	OS.set_environment("SIMSCOPE_METADATA_BUDGET_MIB",previous_env)
+	OS.set_environment("WAVEZ_METADATA_BUDGET_MIB",previous_env)
 	var reader := Reader.new()
 	reader.metadata_limit = 128
 	check(not reader.open(path) and reader.error_code == "metadata_capacity", "Small metadata budget gives a capacity error")
@@ -47,9 +47,9 @@ func _initialize() -> void:
 	reader.metadata_limit = reserved
 	check(reader.open(path) and reader.metadata_reserved == reserved, "Exact budget boundary admits reproducibly")
 	for kind in ["descriptor","commit","payload"]:
-		check(reader.open(directory.path_join(kind+".ssc")), "Lazy open defers corruption validation: "+kind)
+		check(reader.open(directory.path_join(kind+".wvz")), "Lazy open defers corruption validation: "+kind)
 		check(reader.read_sample("field",int(report.records)-1).is_empty() and reader.error.contains("checksum") and reader.error_code != "metadata_capacity", "Corruption remains distinct from capacity: "+kind)
-	check(not reader.open(directory.path_join("oversized.ssc")) and reader.error_code != "metadata_capacity", "Per-record descriptor ceiling still refuses before parsing")
+	check(not reader.open(directory.path_join("oversized.wvz")) and reader.error_code != "metadata_capacity", "Per-record descriptor ceiling still refuses before parsing")
 	reader.close()
 	check(reader.metadata_reserved == 0 and reader.records.is_empty(), "Close releases metadata")
 	var result := {"checks":checks,"failures":failures,"metadata_reserved":reserved,"metadata_limit":Reader.DEFAULT_METADATA_BYTES,"records":report.records}

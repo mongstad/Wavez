@@ -1,4 +1,4 @@
-"""Version 4: independently committed, lossless particle/mesh/grid samples."""
+"""WVZ1: independently committed, lossless particle/mesh/grid samples."""
 import hashlib,json,math,os,re,struct,tempfile,uuid
 from collections import OrderedDict
 from pathlib import Path
@@ -7,7 +7,7 @@ from . import codec
 from . import storage
 from . import field_statistics
 from .metadata_budget import MetadataBudget, MetadataCapacityError, DEFAULT_METADATA_BYTES, MAX_READER_RECORDS
-MAGIC=b'SIMSCP4\0'
+MAGIC=b'WVZ1\0\0\0\0'
 PREFIX=struct.Struct('<8sII')
 FRAME=storage.FRAME
 COMMIT=storage.COMMIT
@@ -22,7 +22,7 @@ def affine(value):
 
 
 def metadata_valid(meta):
-    if not isinstance(meta,dict) or meta.get('version')!=4 or not re.fullmatch('[a-f0-9]{32}',str(meta.get('uuid',''))): raise ValueError('Unsupported scene metadata/version')
+    if not isinstance(meta,dict) or meta.get('version')!=1 or not re.fullmatch('[a-f0-9]{32}',str(meta.get('uuid',''))): raise ValueError('Unsupported scene metadata/version')
     objects=meta.get('objects');names=set()
     if not isinstance(objects,list) or not 1<=len(objects)<=16: raise ValueError('Object table limit')
     for obj in objects:
@@ -103,17 +103,18 @@ def schema_valid(obj,desc,stored,decoded):
 
 class SceneCapture:
     def __init__(self,path,*,objects,metadata=None,compression='none',compression_level=1):
+        if Path(path).suffix != '.wvz':raise ValueError('WAVEZ Scene Format requires a .wvz path')
         if compression not in ('none','zstd'):raise ValueError('Unknown compression')
         if compression=='zstd':codec.zstd_module()
         self.codec=int(compression=='zstd');self.level=compression_level
         if type(self.level) is not int or not 1<=self.level<=6:raise ValueError('Compression level 1..6 required')
-        self.metadata=dict(metadata or {},version=4,uuid=uuid.uuid4().hex,objects=[])
+        self.metadata=dict(metadata or {},version=1,uuid=uuid.uuid4().hex,objects=[])
         for obj in objects:
             o=dict(space='viewer_world',static=False,data_to_world=IDENTITY.copy());o.update(obj)
             self.metadata['objects'].append(o)
         metadata_valid(self.metadata);raw=storage.dumps(self.metadata)
         if len(raw)>1048576:raise ValueError('Metadata limit')
-        self.file=Path(path).open('xb');self.file.write(PREFIX.pack(MAGIC,4,len(raw))+raw);self.file.flush()
+        self.file=Path(path).open('xb');self.file.write(PREFIX.pack(MAGIC,1,len(raw))+raw);self.file.flush()
         self.seq=0;self.last={};self.failed=False;self.histories={}
     def _add(self,object_id,time,arrays,associations,geometry):
         if self.failed or self.file.closed:raise ValueError('Closed or failed writer')
@@ -151,11 +152,11 @@ class SceneCapture:
             desc=dict(geometry=geometry,arrays=specs);schema_valid(obj,desc,stored,total);d=storage.dumps(desc)
             if len(d)>storage.MAX_DESC:raise ValueError('Record descriptor ceiling')
             if ordered is not None:self.histories.setdefault(object_id,storage.IdentityHistory()).advance(ordered)
-            h=FRAME.pack(b'FRM4',len(d),stored,total,time,index,len(specs),self.seq,hashlib.sha256(d).digest())
+            h=FRAME.pack(b'FRM1',len(d),stored,total,time,index,len(specs),self.seq,hashlib.sha256(d).digest())
             try:
                 self.file.write(h);self.file.write(d);payload.seek(0)
                 while block:=payload.read(codec.MAX_CHUNK):self.file.write(block)
-                self.file.write(COMMIT.pack(b'COMMIT4\0',self.seq,hashlib.sha256(h+d).digest()));self.file.flush()
+                self.file.write(COMMIT.pack(b'COMMIT1\0',self.seq,hashlib.sha256(h+d).digest()));self.file.flush()
             except Exception:self.failed=True;raise
         self.last[index]=time;self.seq+=1
     def add_particles(self,object_id,time,positions,*,ids=None,**channels):
@@ -181,6 +182,7 @@ class SceneCapture:
 
 class SceneReader:
     def __init__(self,path,*,strict=True,cache_bytes=256*1024*1024,metadata_bytes=DEFAULT_METADATA_BYTES):
+        if Path(path).suffix != '.wvz':raise ValueError('WAVEZ Scene Format requires a .wvz path')
         self.metadata_budget=MetadataBudget(metadata_bytes)
         self.path=Path(path);self.file=self.path.open('rb');self.cache=OrderedDict();self.used=0;self.limit=cache_bytes;self.records=[];self.source_stamp=self._stamp()
         try:self._scan(strict)
@@ -198,7 +200,7 @@ class SceneReader:
         prefix=self.file.read(16)
         if len(prefix)!=16:raise ValueError('Incomplete scene prefix')
         magic,version,n=PREFIX.unpack(prefix)
-        if magic!=MAGIC or version!=4 or n>1048576:raise ValueError('Unsupported scene format/version')
+        if magic!=MAGIC or version!=1 or n>1048576:raise ValueError('Unsupported scene format/version')
         reservation=self.metadata_budget.reserve(n)
         self.metadata=json.loads(self.file.read(n));metadata_valid(self.metadata);self.objects={o['id']:o for o in self.metadata['objects']};self.samples={key:[] for key in self.objects}
         self.metadata_budget.retain(reservation,self.metadata)
@@ -208,7 +210,7 @@ class SceneReader:
                 if strict:raise ValueError('Incomplete scene record')
                 break
             self.file.seek(offset);h=self.file.read(80);tag,dlen,stored,decoded,time,oi,narrays,seq,digest=FRAME.unpack(h)
-            if tag!=b'FRM4' or dlen>storage.MAX_DESC or stored>MAX_SAMPLE+64*1024*1024 or decoded>MAX_SAMPLE or oi>=len(self.objects) or not math.isfinite(time) or seq!=len(self.records) or not 1<=narrays<=256:raise ValueError('Scene header/allocation limit')
+            if tag!=b'FRM1' or dlen>storage.MAX_DESC or stored>MAX_SAMPLE+64*1024*1024 or decoded>MAX_SAMPLE or oi>=len(self.objects) or not math.isfinite(time) or seq!=len(self.records) or not 1<=narrays<=256:raise ValueError('Scene header/allocation limit')
             size=128+dlen+stored
             if size>end-offset:
                 if strict:raise ValueError('Incomplete scene payload/commit')
@@ -222,7 +224,7 @@ class SceneReader:
             desc=json.loads(raw);schema_valid(obj,desc,stored,decoded)
             if len(desc['arrays'])!=narrays:raise ValueError('Array count')
             self.file.seek(offset+size-48)
-            if COMMIT.unpack(self.file.read(48))!=(b'COMMIT4\0',seq,hashlib.sha256(h+raw).digest()):raise ValueError('Commit checksum')
+            if COMMIT.unpack(self.file.read(48))!=(b'COMMIT1\0',seq,hashlib.sha256(h+raw).digest()):raise ValueError('Commit checksum')
             record=dict(time=time,object=obj['id'],offset=offset+80+dlen,end=offset+size,decoded=decoded,descriptor=desc,sequence=seq)
             self.metadata_budget.retain(reservation,record)
             self.records.append(record);self.samples[obj['id']].append(record);last[oi]=time;offset+=size

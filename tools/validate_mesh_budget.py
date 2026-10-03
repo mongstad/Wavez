@@ -85,9 +85,9 @@ def main():
     out = args.output_dir.resolve(); out.mkdir(parents=True, exist_ok=False)
     capture = args.capture.resolve(); before = digest(capture)
     key, expected = oracle(capture)
-    mixed_fixture(capture, out / 'mixed.ssc')
+    mixed_fixture(capture, out / 'mixed.wvz')
     version = re.search(r'config/version="([^"]+)"', (ROOT / "viewer" / "project.godot").read_text()).group(1)
-    config = dict(application_version=version, capture=str(capture), object_id=key, oracle=expected, output=str(out), mixed=str(out / 'mixed.ssc'))
+    config = dict(application_version=version, capture=str(capture), object_id=key, oracle=expected, output=str(out), mixed=str(out / 'mixed.wvz'))
     job = out / 'job.json'; job.write_text(json.dumps(config, indent=2))
     env = os.environ.copy(); env['XDG_CONFIG_HOME'] = str(out / 'config')
     if args.export:

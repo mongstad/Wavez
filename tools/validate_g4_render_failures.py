@@ -15,9 +15,9 @@ def main():
         if not value:raise AssertionError(label)
     try:
         for label in ('append','quota','mutation','cancel'):
-            directory=root/label;directory.mkdir();full=traveling_pulse(directory/'complete.ssc')
+            directory=root/label;directory.mkdir();full=traveling_pulse(directory/'complete.wvz')
             with SourceSnapshot(full) as source:extent=source.samples['p'][2]['end']
-            raw=full.read_bytes();live=directory/'pulse.ssc';live.write_bytes(raw[:extent]);pinned_hash=hashlib.sha256(live.read_bytes()).hexdigest()
+            raw=full.read_bytes();live=directory/'pulse.wvz';live.write_bytes(raw[:extent]);pinned_hash=hashlib.sha256(live.read_bytes()).hexdigest()
             setup=[args.godot,'--headless','--path',str(ROOT/'viewer'),'--log-file',str(directory/'setup-godot.log'),'--script','analysis/test_render_state.gd','--','--g4-render-fixture='+str(directory)]
             result=subprocess.run(setup,cwd=ROOT,text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,timeout=60);(directory/'setup.log').write_text(result.stdout)
             check(result.returncode==0 and 'ERROR:' not in result.stdout,label+' portable pinned setup')

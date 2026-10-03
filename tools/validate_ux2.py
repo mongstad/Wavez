@@ -112,11 +112,11 @@ def main():
                       else dict(status="NOT_REQUESTED", reason="Archived UX2 history is not part of this repository"))
         run("import", [args.godot, "--headless", "--path", "viewer", "--editor", "--import"])
         for module, name in [("examples.scene_demo", "scene"), ("examples.identity_demo", "identity")]:
-            run(name, [sys.executable, "-m", module] + (["--small"] if name == "scene" else []) + ["--output", str(out / (name + ".ssc"))])
+            run(name, [sys.executable, "-m", module] + (["--small"] if name == "scene" else []) + ["--output", str(out / (name + ".wvz"))])
         native = [args.godot, "--path", "viewer", "--rendering-method", args.renderer, "--script"]
         run("native", native + ["res://ui/lab/test_ui_foundation.gd", "--", f"--ux2-output={out / 'native'}"])
-        run("isolation", native + ["res://ui/lab/test_viewer_isolation.gd", "--", f"--ux2-output={out / 'isolation'}", f"--ux2-fixture={out / 'scene.ssc'}"])
-        run("hud", native + ["res://scene/test_hud_layout.gd", "--", f"--hud-output={out / 'hud'}", f"--hud-fixture={out / 'identity.ssc'}"])
+        run("isolation", native + ["res://ui/lab/test_viewer_isolation.gd", "--", f"--ux2-output={out / 'isolation'}", f"--ux2-fixture={out / 'scene.wvz'}"])
+        run("hud", native + ["res://scene/test_hud_layout.gd", "--", f"--hud-output={out / 'hud'}", f"--hud-fixture={out / 'identity.wvz'}"])
         write(out / "source-invariance.json", source_invariance(before))
         write(out / "historical-source-invariance.json", historical)
         native_result = json.loads((out / "native/validation.json").read_text())

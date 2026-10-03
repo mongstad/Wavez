@@ -34,11 +34,11 @@ def main():
     for name, project in [('reference', args.reference_root), ('candidate', ROOT)]:
         folder = out/name; folder.mkdir(); fixtures(folder)
         for label, scale in [('small', .001), ('large', 10000.)]:
-            with SceneCapture(folder/(label+'.ssc'), objects=[dict(id='mesh', kind='mesh', identity='stable_topology', units='m')], compression='none') as writer:
+            with SceneCapture(folder/(label+'.wvz'), objects=[dict(id='mesh', kind='mesh', identity='stable_topology', units='m')], compression='none') as writer:
                 for time in (0., .5, 1., 1.5, 2.):
                     points = (np.array([[-2, 0, 0], [2, 0, 0], [0, 3, 1]], dtype='f8')+[0, 0, time])*scale
                     writer.add_mesh('mesh', time, points, np.array([[0, 1, 2]]), vertex_channels=dict(vertex_id=np.array([7,8,9], dtype='i8')))
-        hashes = {p.name: digest(p) for p in folder.glob('*.ssc')}
+        hashes = {p.name: digest(p) for p in folder.glob('*.wvz')}
         command = [args.godot, '--path', str(project/'viewer'), '--rendering-method', args.renderer,
                    '--audio-driver', 'Dummy', '--resolution', '1440x900', '--log-file', str(folder/'live.log')]
         result = subprocess.run(command+['--script', 'ui/shell/test_orbit_center.gd', '--', str(folder)]+(['--reference'] if name == 'reference' else []), capture_output=True, text=True, timeout=210)
@@ -59,7 +59,7 @@ def main():
             frames = sorted((job_folder/'frames').glob('*.png'))
             assert len(frames) == 2 and (job_folder/'movie.mp4').stat().st_size > 0
             runs.append(dict(implementation=name, mode=mode, frames=len(frames), exit_code=result.returncode))
-        assert hashes == {p.name: digest(p) for p in folder.glob('*.ssc')}
+        assert hashes == {p.name: digest(p) for p in folder.glob('*.wvz')}
         reports[name]['source_hashes_unchanged'] = hashes
     reference = reports['reference']; candidate = reports['candidate']
     assert reference['camera_trace'] == candidate['camera_trace'], 'Camera behavior differs from main'

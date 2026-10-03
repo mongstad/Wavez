@@ -2,9 +2,10 @@
 
 ## Current contract and G4 extension
 
-G0–G4 are implemented and accepted. The original version-1 job contract and
-historical validation below remain applicable to that path. G4 adds **render job
-v2** and **inspection recipe v3** without changing SIMSCP4 capture bytes. Current
+G0–G4 are implemented and accepted. Current video jobs require WVZ1 `.wvz`
+sources and `wavez-export-source` identities. The original version-1 job
+contract and historical validation below describe their earlier builds. G4 adds **render job
+v2** and **inspection recipe v3** while retaining scientific payload semantics. Current
 code is in `viewer/video/` and `viewer/analysis/`; see [G4 schemas](docs/G4_SCHEMAS.md)
 and [the G4 guide](docs/G4_GUIDE.md#save-restore-and-export).
 
@@ -242,7 +243,7 @@ FFmpeg is launched with nonblocking pipes; stderr is saved to `ffmpeg.log` and
 shown on failure. Process status/exit handling follows Godot's
 [OS process API](https://docs.godotengine.org/en/stable/classes/class_os.html).
 
-Each export creates a unique hidden `.simscope-export-…` directory **beside the
+Each export creates a unique hidden `.wavez-export-…` directory **beside the
 selected MP4** so frame storage and final publication share the output filesystem:
 
 ```text
@@ -296,7 +297,7 @@ The viewer launches the equivalent of:
 ```bash
 godot --path /absolute/path/Wavez/viewer --resolution 640x360 \
   --fixed-fps 30 --disable-vsync --audio-driver Dummy -- \
-  --wavez-render-job='/absolute/path/.simscope-export-ID/job.json'
+  --wavez-render-job='/absolute/path/.wavez-export-ID/job.json'
 ```
 
 A retained job can be copied into a new directory and edited for automation; use
@@ -362,7 +363,7 @@ See [INSPECTION_STATE.md](INSPECTION_STATE.md) for the state and geometry contra
 
 ### Source changes during export (G2a)
 
-Ordinary exports bind SIMSCP4/version, capture UUID, metadata SHA-256, the ordered
+Ordinary exports bind WVZ1/version, scene UUID, metadata SHA-256, the ordered
 80-byte record-header fingerprint, indexed committed extent/record/frame counts,
 and the existing local filesystem stamp (device, inode, size, nanosecond mtime and
 ctime). Path is only a locator. Startup never reads/hashes the complete payload

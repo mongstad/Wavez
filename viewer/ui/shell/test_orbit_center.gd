@@ -206,7 +206,7 @@ func run() -> void:
 	output = OS.get_cmdline_user_args()[0]; reference = "--reference" in OS.get_cmdline_user_args()
 	create_timer(180).timeout.connect(func(): push_error("Orbit center test timeout"); quit(1))
 	for kind in ["particles","field","mesh","mixed","small","large"]:
-		var view = Viewer.new(); view.playing = false; view.orbit_enabled = false; view.capture_path = output.path_join(kind+".ssc")
+		var view = Viewer.new(); view.playing = false; view.orbit_enabled = false; view.capture_path = output.path_join(kind+".wvz")
 		root.add_child(view); view.set_process(false)
 		await fixture(view,kind)
 		view.free(); await process_frame

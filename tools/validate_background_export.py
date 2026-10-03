@@ -13,14 +13,14 @@ ROOT = Path(__file__).resolve().parents[1]
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--godot', required=True)
-    parser.add_argument('--fixture-dir', type=Path, required=True, help='Completed validate_video.py output containing fixture.ssc and state.json')
+    parser.add_argument('--fixture-dir', type=Path, required=True, help='Completed validate_video.py output containing fixture.wvz and state.json')
     parser.add_argument('--output-dir', type=Path, required=True)
     parser.add_argument('--renderer', choices=['forward_plus', 'gl_compatibility'], default='forward_plus')
     parser.add_argument('--baseline-project', type=Path, help='Optional unmodified main viewer checkout for output comparison')
     args = parser.parse_args()
     out = args.output_dir.resolve(); out.mkdir(parents=True, exist_ok=False)
     fixture = args.fixture_dir.resolve()
-    source = fixture/'fixture.ssc'
+    source = fixture/'fixture.wvz'
     digest = hashlib.sha256(source.read_bytes()).hexdigest()
     state = json.loads((fixture/'state.json').read_text());state['overlay_visible'] = False
     env = os.environ.copy();env.update(XDG_DATA_HOME=str(out/'userdata'), XDG_CONFIG_HOME=str(out/'config'))

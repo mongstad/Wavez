@@ -4,7 +4,7 @@ func run() -> void:
 	out = OS.get_cmdline_user_args()[0]
 	for kind in ["particles","volume","mesh"]:
 		for fault in ["chunk_bounds","descriptor","commit","shape","header"]:
-			var path := out.path_join(kind+"-"+fault+".ssc")
+			var path := out.path_join(kind+"-"+fault+".wvz")
 			var reader := Reader.new()
 			if fault == "header":
 				check(not reader.open(path),kind+" unsafe fixed-header allocation rejected at open")
@@ -42,7 +42,7 @@ func run() -> void:
 			check(await sample(view,4,true),"seek past rejected sample recovers")
 			view.free();await process_frame
 	# A later schema is discovered only when used, including explicit recipe restore.
-	var source := out.path_join("channels.ssc")
+	var source := out.path_join("channels.wvz")
 	var reference = await make_schema_view(source,false)
 	check(await sample(reference,5,false),"later schema reference")
 	reference.scene_layers.states.field.channel = "later";reference.scene_layers.resample()
@@ -60,7 +60,7 @@ func run() -> void:
 	for i in view.scene_layers.probe_channel_choice.item_count:channels.append(view.scene_layers.probe_channel_choice.get_item_text(i))
 	check(channels.has("later"),"worker-discovered channel remains in probe choices")
 	view.free();await process_frame
-	view = load("res://main.gd").new();view.capture_path = out.path_join("hidden.ssc");view.playing = false
+	view = load("res://main.gd").new();view.capture_path = out.path_join("hidden.wvz");view.playing = false
 	root.add_child(view);view.set_process(false)
 	await settle_draw()
 	check(not view.committed_sample.is_empty() and view.scene_layers.error.is_empty(),"malformed hidden layer does not block first display")

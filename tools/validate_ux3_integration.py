@@ -1,4 +1,4 @@
-"""Read-only UX3 workflow and bounded native measurements on a mixed SSC source.
+"""Read-only UX3 workflow and bounded native measurements on a mixed WVZ1 source.
 
 Without --capture, creates a tiny fixture. No scientific solver is invoked.
 The paired cases vary only dock visibility, not renderer or scientific settings.
@@ -28,7 +28,7 @@ def main():
     parser.add_argument("--renderer", choices=["forward_plus", "gl_compatibility"], default="forward_plus")
     args = parser.parse_args()
     out = args.output_dir.resolve(); out.mkdir(parents=True, exist_ok=False)
-    source = args.capture.resolve() if args.capture else scene(out / "scene.ssc")
+    source = args.capture.resolve() if args.capture else scene(out / "scene.wvz")
     before = digest(source)
     command = [args.godot, "--path", str(ROOT / "viewer"), "--rendering-method", args.renderer,
                "--resolution", "1440x900", "--audio-driver", "Dummy", "--disable-vsync", "--max-fps", "60",

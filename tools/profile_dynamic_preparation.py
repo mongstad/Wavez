@@ -27,7 +27,7 @@ def main():
     cmd += ['--script', 'layers/profile_dynamic_actions.gd' if a.actions else 'layers/profile_dynamic_preparation.gd', '--', str(source), str(out/'result.json'), str(a.speed), str(a.seconds)]
     telemetry = [];started = time.monotonic()
     with (out/'native.log').open('w') as log:
-        process = subprocess.Popen(cmd, stdout=log, stderr=subprocess.STDOUT, env=dict(os.environ, SIMSCOPE_FIELD_WORKERS=a.workers))
+        process = subprocess.Popen(cmd, stdout=log, stderr=subprocess.STDOUT, env=dict(os.environ, WAVEZ_FIELD_WORKERS=a.workers))
         while process.poll() is None:
             if time.monotonic()-started > 1000:
                 process.kill();process.wait();raise TimeoutError('Native profile')

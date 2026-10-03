@@ -41,7 +41,7 @@ func run() -> void:
 	viewer = Viewer.new(); viewer.scene_prebuffer_enabled = false; root.add_child(viewer); viewer.set_process(false)
 	var shell = viewer.shell; var ui = shell.transport
 	ui.open_seek(); check(not ui.seek_dialog.visible and ui.rate.disabled, "Empty capture cannot seek or change speed")
-	viewer._open_capture(output.path_join("scene.ssc")); viewer.playing = false; viewer.orbit_enabled = false
+	viewer._open_capture(output.path_join("scene.wvz")); viewer.playing = false; viewer.orbit_enabled = false
 	await ready(); await settle()
 	check(root.borderless and not root.unresizable, "Interactive window is borderless and resizable")
 	check(shell.bar.is_ancestor_of(shell.navigation), "Camera actions integrated in top bar")
@@ -155,14 +155,14 @@ func run() -> void:
 		check(action.is_visible_in_tree() and action.size.x >= 32 and action.get_global_rect().position.x >= 0 and action.get_global_rect().end.x <= 1024, "Every native window action remains usable in compact layout")
 		check(visible_ink(root.get_texture().get_image(), action), "Every compact window-action glyph is rendered")
 	# Offset origin and long formatted time map back to unchanged source units.
-	viewer._open_capture(output.path_join("clock.ssc")); viewer.playing = false; await ready()
+	viewer._open_capture(output.path_join("clock.wvz")); viewer.playing = false; await ready()
 	ui.open_seek(); await settle(); ui.seek_dialog.editor.text = "01:00"; key(KEY_ENTER, ui.seek_dialog); await settle(); await ready()
 	check(viewer.committed_sample.requested_time == 160.0, "Formatted elapsed time maps to nonzero scientific origin")
 	ui.open_seek(); await settle(); ui.seek_dialog.editor.text = "01:00:00"; key(KEY_ENTER, ui.seek_dialog); await settle(); await ready()
 	check(viewer.committed_sample.requested_time == 3700.0, "Hour format maps to established source seek")
 	ui.open_seek(); await settle(); var exact: Dictionary = viewer.committed_sample.duplicate(true); key(KEY_ENTER, ui.seek_dialog); await settle(); await ready()
 	check(viewer.committed_sample == exact, "Unchanged formatted prefill preserves exact clock")
-	ui.open_seek(); viewer._open_capture(output.path_join("scene.ssc")); await ready()
+	ui.open_seek(); viewer._open_capture(output.path_join("scene.wvz")); await ready()
 	check(not ui.seek_dialog.visible, "Capture replacement dismisses stale popover")
 	var file := FileAccess.open(output.path_join("report.json"), FileAccess.WRITE)
 	file.store_string(JSON.stringify({"checks":checks,"failures":failures,"renderer":RenderingServer.get_current_rendering_method(),"compact_chrome":chrome_geometry}, "\t")); file.close()

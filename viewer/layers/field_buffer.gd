@@ -6,7 +6,7 @@ const Stamp = preload("res://data/source_stamp.gd")
 const Memory = preload("res://layers/playback_buffer.gd")
 const Work = preload("res://layers/field_work.gd")
 var worker_count := default_worker_count()
-var automatic_workers := not OS.get_environment("SIMSCOPE_FIELD_WORKERS") in ["1","2","3","4"]
+var automatic_workers := not OS.get_environment("WAVEZ_FIELD_WORKERS") in ["1","2","3","4"]
 var active_limit := 1
 var pressure_events := 0
 var rates := {} # Busy batch wall time and successful publications, by lane count.
@@ -60,7 +60,7 @@ var read_keys: Array[String] = []
 var test_barrier: Semaphore
 var at_barrier := false
 static func default_worker_count() -> int:
-	var configured := OS.get_environment("SIMSCOPE_FIELD_WORKERS")
+	var configured := OS.get_environment("WAVEZ_FIELD_WORKERS")
 	if configured in ["1","2","3","4"]:return int(configured)
 	return clampi(OS.get_processor_count()-2,1,4)
 func start() -> Error:

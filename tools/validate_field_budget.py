@@ -26,7 +26,7 @@ def main():
     args = parser.parse_args()
     out = args.output_dir.resolve()
     out.mkdir(parents=True, exist_ok=True)
-    capture = out / 'large.ssc'
+    capture = out / 'large.wvz'
     if capture.exists():
         parser.error('Use a fresh output directory; existing captures are preserved')
     values = np.linspace(.1, 1, 192**3, dtype='f4').reshape(192, 192, 192)
@@ -41,7 +41,7 @@ def main():
             writer.add_volume('field', time, channels, origin=[0, 0, 0], spacing=[1, 1, 1])
             frames.append({key: hashlib.sha256(value.tobytes()).hexdigest() for key, value in channels.items()})
     (out / 'oracle.json').write_text(json.dumps(frames))
-    multiple = out / 'multiple.ssc'
+    multiple = out / 'multiple.wvz'
     with SceneCapture(multiple, objects=[dict(id=name, kind='volume', units='m')
                                         for name in ['a', 'b']]) as writer:
         for time in range(2):

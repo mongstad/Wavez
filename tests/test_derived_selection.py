@@ -19,7 +19,7 @@ from tools.extract_surface import ALGORITHM
 class DerivedSelectionTests(unittest.TestCase):
     def setUp(self):
         self.tmp=tempfile.TemporaryDirectory();self.root=Path(self.tmp.name)
-        self.path=self.root/"source.ssc"
+        self.path=self.root/"source.wvz"
         self.values=np.indices((2,2,2))[0].astype("f8")
         with SceneCapture(self.path,objects=[dict(id="grid",kind="volume",units="m")]) as writer:
             for t in [0.,1.]:writer.add_volume("grid",t,{"value":self.values},origin=[-1,-1,-1],spacing=[2,2,1])
@@ -27,7 +27,7 @@ class DerivedSelectionTests(unittest.TestCase):
         self.provenance=dict(source_sha256=self.source.sha256,committed_bytes=str(self.source.committed_end),object="grid",channel="value",source_time=0.,
             geometry=self.source.samples["grid"][0]["descriptor"]["geometry"],data_to_world=self.source.objects["grid"]["data_to_world"],threshold=.5,algorithm=ALGORITHM,
             precision="source converted to float32 for Lewiner extraction; storage unchanged",invalid_policy="omit any cell with a nonfinite corner",smoothing=False,decimation=False)
-        path=self.root/"artifact.ssc"
+        path=self.root/"artifact.wvz"
         self.z=float(np.float32(-.49999994))
         with SceneCapture(path,objects=[dict(id="isosurface",kind="mesh",identity="none",units="m",static=True)],metadata=dict(provenance=self.provenance)) as writer:
             writer.add_mesh("isosurface",0,np.array([[-1,-1,self.z],[1,-1,self.z],[0,1,self.z]],dtype="f4"),[[0,1,2]])
@@ -77,7 +77,7 @@ class DerivedSelectionTests(unittest.TestCase):
     @unittest.skipUnless(importlib.util.find_spec("skimage"),"Optional G3 extraction dependency unavailable")
     def test_actual_sphere_extraction_is_inspected_without_material_identity(self):
         from tools.extract_surface import extract
-        path=self.root/"sphere.ssc"
+        path=self.root/"sphere.wvz"
         z,y,x=np.indices((12,12,12));field=(x-5.5)**2+(y-5.5)**2+(z-5.5)**2
         with SceneCapture(path,objects=[dict(id="grid",kind="volume",units="m")]) as writer:
             writer.add_volume("grid",0,{"value":field.astype("f8")},origin=[-5.5,-5.5,-5.5],spacing=[1,1,1])

@@ -11,7 +11,7 @@ func run() -> void:
 	if DisplayServer.get_name()=="headless":quit(1);return
 	create_timer(150).timeout.connect(func():push_error("Profile watchdog expired");quit(1))
 	base = ProjectSettings.globalize_path("res://../results/g3")
-	var source := base.path_join("scene-demo.ssc")
+	var source := base.path_join("scene-demo.wvz")
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--capture="):source = arg.trim_prefix("--capture=")
 	view = load("res://main.gd").new();view.capture_path = source;view.playing = false;view.orbit_enabled = false

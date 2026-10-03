@@ -13,11 +13,8 @@ func settle() -> void:
 	for i in 8: await process_frame
 	await RenderingServer.frame_post_draw
 func text_check(value: String, label: String) -> void:
-	var reviewed := value
-	# Repository URLs, diagnostic knobs and the physical checkout are intentionally retained.
-	for allowed in ["github.com/mongstad/SimScope", "SIMSCOPE_METADATA_BUDGET_MIB", "SIMSCOPE_FIELD_WORKERS", "SIMSCOPE_VIDEO_PROFILE", ProjectSettings.globalize_path("res://").trim_suffix("/"), output]:
-		reviewed = reviewed.replace(allowed, "")
-	check(not reviewed.to_lower().contains("simscope"), label + ": " + value)
+	var reviewed := value.to_lower()
+	check(not reviewed.contains("simscope") and not reviewed.contains("simscp") and not reviewed.contains(".ssc"), label + ": " + value)
 func scan(node: Node) -> void:
 	for property in node.get_property_list():
 		if property.name in ["text", "title", "tooltip_text"]:
@@ -36,12 +33,11 @@ func run() -> void:
 	await settle()
 	check(ProjectSettings.get_setting("application/config/name") == "WAVEZ", "Application name")
 	check(root.title == "WAVEZ", "Native window title")
-	check(viewer.shell.brand.text == "WAVEZ", "Shell wordmark")
 	check(ProjectSettings.get_setting("application/config/icon") == "res://ui/about/wavez-logo-dark.png", "Approved dark application icon")
 	scan(viewer); picture(root, "empty")
-	viewer._open_capture(output.path_join("scene.ssc")); viewer.playing = false; viewer.orbit_enabled = false
+	viewer._open_capture(output.path_join("scene.wvz")); viewer.playing = false; viewer.orbit_enabled = false
 	await settle()
-	check(viewer.generic_reader != null, "SSC opens")
+	check(viewer.generic_reader != null, "WVZ1 opens")
 	viewer.shell.about.open(); await settle(); scan(viewer); picture(viewer.shell.about, "about"); viewer.shell.about.hide()
 	for title in viewer.shell.menus:
 		var menu: PopupMenu = viewer.shell.menus[title].get_popup()

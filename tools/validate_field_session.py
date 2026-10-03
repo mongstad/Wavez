@@ -12,7 +12,7 @@ from wavez_export import SceneCapture
 
 
 def fixture(out):
-    source = out / 'session.ssc'
+    source = out / 'session.wvz'
     oracle = []
     gpu_oracle = []
     with SceneCapture(source, objects=[dict(id='field', kind='volume', units='m')], compression='zstd') as writer:
@@ -25,12 +25,15 @@ def fixture(out):
             gpu_oracle.append({k: hashlib.sha256(v.astype('f4').tobytes()).hexdigest() for k, v in channels.items()})
     (out / 'oracle.json').write_text(json.dumps(oracle))
     (out / 'gpu-oracle.json').write_text(json.dumps(gpu_oracle))
-    with SceneCapture(out/'late.ssc', objects=[dict(id='p', kind='particles', identity='anonymous', units='m'),
+    with SceneCapture(out/'late.wvz', objects=[dict(id='p', kind='particles', identity='anonymous', units='m'),
                                               dict(id='field', kind='volume', units='u')]) as writer:
         for t in (0., 2.):writer.add_particles('p', t, np.zeros((1, 3), dtype='f4'))
         for t in (.4, .8, 1.2):writer.add_volume('field', t, dict(rho=np.ones((2, 2, 2), dtype='f4')), origin=[0]*3, spacing=[1]*3)
     old_prefix = bytearray(source.read_bytes()); old_prefix[:8] = b'SIMSCP3\0'; old_prefix[8:12] = (3).to_bytes(4, 'little')
-    (out/'unsupported-v3.ssc').write_bytes(old_prefix)
+    (out/'unsupported-v3.wvz').write_bytes(old_prefix)
+    old_prefix = bytearray(source.read_bytes()); old_prefix[:8] = b'SIMSCP4\0'; old_prefix[8:12] = (4).to_bytes(4, 'little')
+    (out/'unsupported-v4.wvz').write_bytes(old_prefix)
+    (out/'obsolete-suffix.ssc').write_bytes(source.read_bytes())
     return source
 
 

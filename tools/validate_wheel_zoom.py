@@ -1,4 +1,4 @@
-"""Wheel zoom and manual camera orbit on SSC layers, external mesh and Linux packages."""
+"""Wheel zoom and manual camera orbit on WVZ1 layers, external mesh and Linux packages."""
 import argparse
 import hashlib
 import json
@@ -28,11 +28,11 @@ def main():
     a = p.parse_args(); out = a.output_dir.resolve(); out.mkdir(parents=True, exist_ok=False)
     fixtures(out)
     for name, scale in [('small',.001),('large',10000.)]:
-        with SceneCapture(out/(name+'.ssc'), objects=[dict(id='mesh',kind='mesh',identity='stable_topology',units='m')],compression='none') as writer:
+        with SceneCapture(out/(name+'.wvz'), objects=[dict(id='mesh',kind='mesh',identity='stable_topology',units='m')],compression='none') as writer:
             for time in [0.,.5,1.]:
                 points = (np.array([[-2,0,0],[2,0,0],[0,3,1]],dtype='f8')+[0,0,time])*scale
                 writer.add_mesh('mesh',time,points,np.array([[0,1,2]]),vertex_channels=dict(vertex_id=np.array([7,8,9],dtype='i8')))
-    sources = list(out.glob('*.ssc')) + ([a.capture.resolve()] if a.capture else [])
+    sources = list(out.glob('*.wvz')) + ([a.capture.resolve()] if a.capture else [])
     before = {str(p):digest(p) for p in sources}
     env = os.environ.copy(); env['XDG_CONFIG_HOME'] = str(out/'config')
     if a.export:

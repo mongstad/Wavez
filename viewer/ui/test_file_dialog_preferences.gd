@@ -57,7 +57,7 @@ func run() -> void:
 			dialog.access = FileDialog.ACCESS_FILESYSTEM
 			dialog.file_mode = mode
 			root.add_child(dialog)
-			var path := directory("capture") + "scene.ssc" if mode == FileDialog.FILE_MODE_OPEN_FILE else directory("export") + "baseline.mp4"
+			var path := directory("capture") + "scene.wvz" if mode == FileDialog.FILE_MODE_OPEN_FILE else directory("export") + "baseline.mp4"
 			await select_path(dialog, path)
 			check(FileDialog.get_recent_list().has(path.get_base_dir()+"/"), "Unmodified Godot records Recent in mode " + str(mode))
 			dialog.free()
@@ -72,7 +72,7 @@ func run() -> void:
 	check(capture.title == "Open capture" and not capture.mode_overrides_title, "Capture title")
 	check(video.title == "Export video" and not video.mode_overrides_title, "Video title")
 	check(not capture.use_native_dialog and not video.use_native_dialog, "Accepted built-in picker implementation retained")
-	check(capture.filters == PackedStringArray(["*.ssc ; WAVEZ scene (SIMSCP4)"]), "Capture filter retained")
+	check(capture.filters == PackedStringArray(["*.wvz ; WAVEZ Scene Format"]), "Single current WAVEZ Scene Format filter")
 	check(video.filters == PackedStringArray(["*.mp4 ; H.264 MP4"]), "Export filter retained")
 	check(video.overwrite_warning_enabled, "Overwrite confirmation retained")
 	if phase == "capture_add":
@@ -81,8 +81,8 @@ func run() -> void:
 		check(FileDialog.get_favorite_list().has(directory("capture")), "Capture Favorite added through built-in button")
 		var saved := ConfigFile.new()
 		check(saved.load("user://file_dialog_preferences.cfg") == OK and saved.get_value("navigation", "favorites") == FileDialog.get_favorite_list(), "Closing picker persists Favorites before application exit")
-		await select_path(capture, directory("capture") + "scene.ssc")
-		check(viewer._shell_open_error.is_empty() and viewer.capture_path.ends_with("scene.ssc"), "Representative capture opens")
+		await select_path(capture, directory("capture") + "scene.wvz")
+		check(viewer._shell_open_error.is_empty() and viewer.capture_path.ends_with("scene.wvz"), "Representative capture opens")
 		check(FileDialog.get_recent_list() == PackedStringArray([directory("capture")]), "Successful capture directory recorded")
 		await show_dialog(capture, directory("capture"))
 		if DisplayServer.get_name() != "headless" and RenderingServer.get_current_rendering_method() == "forward_plus":
@@ -90,24 +90,24 @@ func run() -> void:
 			root.get_texture().get_image().save_png(output.path_join("capture-dialog.png"))
 		await cancel(capture)
 		var before := FileDialog.get_recent_list()
-		await select_path(capture, directory("invalid") + "missing.ssc")
+		await select_path(capture, directory("invalid") + "missing.wvz")
 		check(capture.visible and FileDialog.get_recent_list() == before, "Missing file keeps picker usable without false history")
 		await cancel(capture)
 		await show_dialog(capture, directory("cancelled")); await cancel(capture)
 		check(FileDialog.get_recent_list() == before, "Capture cancellation does not add Recent")
-		await select_path(capture, directory("invalid") + "invalid.ssc")
+		await select_path(capture, directory("invalid") + "invalid.wvz")
 		check(not viewer._shell_open_error.is_empty(), "Corrupt capture rejected")
 		check(FileDialog.get_recent_list() == before, "Failed capture does not add or reorder Recent")
 		viewer.inspection_busy = true
-		await select_path(capture, directory("other") + "scene.ssc")
+		await select_path(capture, directory("other") + "scene.wvz")
 		check(viewer._shell_open_error.contains("busy") and FileDialog.get_recent_list() == before, "Busy open rejected without recording history")
 		viewer.inspection_busy = false
-		await select_path(capture, directory("other") + "scene.ssc")
+		await select_path(capture, directory("other") + "scene.wvz")
 		check(viewer._shell_open_error.is_empty() and not viewer.shell.open_error.visible, "Successful retry preserves error recovery")
 		check(FileDialog.get_recent_list() == PackedStringArray([directory("other"), directory("capture")]), "Recent is most-recent-first")
 		# A typed absolute filename can differ from the browser's current directory.
 		await show_dialog(capture, directory("cancelled"))
-		capture.get_line_edit().text = directory("capture") + "scene.ssc"
+		capture.get_line_edit().text = directory("capture") + "scene.wvz"
 		capture.get_ok_button().pressed.emit(); await settle()
 		check(FileDialog.get_recent_list() == PackedStringArray([directory("capture"), directory("other")]), "History uses actual selected directory and deduplicates")
 	elif phase == "capture_remove":

@@ -1,7 +1,7 @@
 extends SceneTree
 func _initialize() -> void: run.call_deferred()
 func run() -> void:
-	var viewer = load("res://main.gd").new();viewer.capture_path = ProjectSettings.globalize_path("res://../results/g3/small.ssc");viewer.playing = false;viewer.orbit_enabled = false
+	var viewer = load("res://main.gd").new();viewer.capture_path = ProjectSettings.globalize_path("res://../results/g3/small.wvz");viewer.playing = false;viewer.orbit_enabled = false
 	root.add_child(viewer);viewer.set_process(false)
 	if viewer.frame_a == null:push_error(viewer.status_label.text);quit(1);return
 	viewer._set_clean(true);viewer.environment.tonemap_mode = Environment.TONE_MAPPER_LINEAR

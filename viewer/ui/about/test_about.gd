@@ -61,7 +61,7 @@ func run() -> void:
 	check(dialog.identity.text.begins_with("WAVEZ version unavailable."),"Missing version has an explicit fallback")
 	ProjectSettings.set_setting(Version.SETTING,source_version)
 	dialog.hide()
-	viewer._open_capture(output.path_join("scene.ssc")); viewer.playing = false; viewer.orbit_enabled = false
+	viewer._open_capture(output.path_join("scene.wvz")); viewer.playing = false; viewer.orbit_enabled = false
 	await settle()
 	check(viewer.generic_reader != null,"Synthetic capture opens normally")
 	var layouts := []

@@ -22,7 +22,7 @@ func run() -> void:
 		if arg.begins_with("--diagnostics-fixture="):out = arg.trim_prefix("--diagnostics-fixture=")
 	if out.is_empty():quit(1);return
 	var viewer := Viewer.new();viewer.offline_instance = true;root.add_child(viewer);await process_frame
-	viewer._open_capture(out.path_join("run-a.ssc"));viewer.playing = false;viewer.orbit_enabled = false
+	viewer._open_capture(out.path_join("run-a.wvz"));viewer.playing = false;viewer.orbit_enabled = false
 	var control = viewer.selection_controller;var temporal = control.temporal;var diagnostics = temporal.diagnostics
 	control.bind_source();check(await wait_worker(control),"first run bound")
 	diagnostics.csv_path.text = out.path_join("a.csv");diagnostics.csv_units.text = "s";diagnostics.csv_value_units.text = "K";diagnostics.import_csv()
@@ -38,7 +38,7 @@ func run() -> void:
 	var token: Dictionary = diagnostics.bookmarks[0].raw_time
 	check(PackedFloat64Array([float(token.text)]).to_byte_array().hex_encode()==token.f64_le_hex,"bookmark decimal and binary time agree")
 	var previous_source: Dictionary = control.source.duplicate(true)
-	viewer._open_capture(out.path_join("run-b.ssc"));viewer.playing = false;control.bind_source();check(await wait_worker(control),"second run bound after source switch")
+	viewer._open_capture(out.path_join("run-b.wvz"));viewer.playing = false;control.bind_source();check(await wait_worker(control),"second run bound after source switch")
 	check(temporal.summaries.size()==1 and temporal.summaries[0].source==previous_source,"historical result retains first run identity")
 	diagnostics.csv_path.text = out.path_join("b.csv");diagnostics.import_csv();check(await wait_worker(control),"second run CSV imported")
 	diagnostics.time_offset.text = "10";diagnostics.offset_origin.text = "manual second-run start";diagnostics.bind_side("right")

@@ -19,7 +19,7 @@ func run() -> void:
 	var viewport := SubViewport.new();viewport.size = Vector2i(640,480)
 	viewport.size_2d_override = Vector2i(1440,1080);viewport.size_2d_override_stretch = true
 	viewport.own_world_3d = true;viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS;root.add_child(viewport)
-	var viewer = Viewer.new();viewer.offline_instance = true;viewer.capture_path = output.path_join("volume.ssc");viewport.add_child(viewer);viewer.set_process(false)
+	var viewer = Viewer.new();viewer.offline_instance = true;viewer.capture_path = output.path_join("volume.wvz");viewport.add_child(viewer);viewer.set_process(false)
 	viewer.playing = false;viewer.orbit_enabled = false;viewer._apply_preset("Scientific")
 	viewer.overlay_visible = false;viewer.overlay_panel.hide();viewer.shell.prepare_export({});viewer.scene_layers.frame_scene()
 	var layers = viewer.scene_layers
@@ -68,7 +68,7 @@ func run() -> void:
 	check(not layers.probe_marker.visible and layers.probe_label.text == "Unavailable","Invalid probe cannot restore stale cross")
 	layers.probe_spins[0].value = 0;layers.probe_selected_volume()
 	check(layers.probe_marker.visible,"Valid probe recovers visibility")
-	viewer._open_capture(output.path_join("volume.ssc"))
+	viewer._open_capture(output.path_join("volume.wvz"))
 	check(viewer.scene_layers.probe_marker_enabled and not is_instance_valid(viewer.scene_layers.probe_marker) and viewer.scene_layers.probe_label.text.is_empty(),"Reopening starts a fresh probe session")
 	Job.write_json(output.path_join("probe-report.json"),{"checks":checks,"failures":failures,"renderer":RenderingServer.get_current_rendering_method()})
 	viewport.queue_free();await process_frame

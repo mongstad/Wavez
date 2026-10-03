@@ -72,7 +72,7 @@ There is no duplicated version literal to synchronize in scripts, UI or a separa
 manifest. Godot carries the normal project setting into exports; custom non-resource
 files/export inclusion filters are unnecessary. No packaging or release automation
 is introduced. The application identity is separate from the Python exporter
-package's existing compatibility version and from the SIMSCP4 file-format version.
+package's semantic version and from the WVZ1 file-format version.
 
 ## Validation and owner verification
 

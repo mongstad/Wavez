@@ -53,9 +53,9 @@ func run() -> void:
 	Profile.reset();check(Profile.trace_rows.is_empty() and Profile.trace_dropped==0,"reset clears bounded trace")
 	Profile.trace_capacity = 32768
 	for hidden in [true,false]:
-		var plain := sequence(base.path_join("fixture.ssc"),0,hidden)
-		var summary := sequence(base.path_join("fixture.ssc"),1,hidden)
-		var traced := sequence(base.path_join("fixture.ssc"),2,hidden)
+		var plain := sequence(base.path_join("fixture.wvz"),0,hidden)
+		var summary := sequence(base.path_join("fixture.wvz"),1,hidden)
+		var traced := sequence(base.path_join("fixture.wvz"),2,hidden)
 		check(plain==summary,"summary leaves all sampled values/times/buffers unchanged hidden="+str(hidden))
 		check(plain==traced,"trace leaves all sampled values/times/buffers unchanged hidden="+str(hidden))
 	Profile.enabled = false;Profile.trace_enabled = false

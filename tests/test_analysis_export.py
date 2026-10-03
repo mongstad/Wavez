@@ -18,7 +18,7 @@ from tests.g4.fixtures import scene,HIGH_ID
 
 class ExportTests(unittest.TestCase):
     def setUp(self):
-        self.tmp=tempfile.TemporaryDirectory();self.root=Path(self.tmp.name);self.path=scene(self.root/'source.ssc')
+        self.tmp=tempfile.TemporaryDirectory();self.root=Path(self.tmp.name);self.path=scene(self.root/'source.wvz')
         self.assets=MemberAssets(self.root/'owner'/'members');self.cache=ResultCache(self.root/'owner'/'results');self.source=SourceSnapshot(self.path,assets=self.assets)
         self.original=hashlib.sha256(self.path.read_bytes()).hexdigest()
         self.selection=S.define(self.source,dict(object='p',kind='particle_ids',selector=dict(ids=[str(HIGH_ID),str(2**63-1)])))
@@ -81,7 +81,7 @@ class ExportTests(unittest.TestCase):
         return dict(source=source.identity(),result=ref,series=dict(selection_key=name,channel='value',component='',statistic='supplied_diagnostic',member_key=''),time=dict(units='s',reference='manual'),value=dict(units='K',reference='manual'))
 
     def test_transitive_comparison_input_changes_are_detected(self):
-        other=SourceSnapshot(scene(self.root/'other.ssc'))
+        other=SourceSnapshot(scene(self.root/'other.wvz'))
         try:
             left=self.csv_binding(self.source,'left',[1,2]);right=self.csv_binding(other,'right',[2,3])
             comparison=compare(self.source,dict(left=left,right=right,operation='difference',join=dict(mode='exact')),self.cache)['result']

@@ -12,7 +12,7 @@ from tests.g4.fixtures import scene
 class MemoTests(unittest.TestCase):
     def test_prefix_digest_reuse_requires_exact_file_stamp_and_extent(self):
         with tempfile.TemporaryDirectory() as directory:
-            path=scene(Path(directory)/"fixture.ssc");memo=VerificationMemo()
+            path=scene(Path(directory)/"fixture.wvz");memo=VerificationMemo()
             with SourceSnapshot(path,memo=memo) as source:
                 cold=source.context.read_bytes;ref=source.identity()
                 prefix=source.samples["p"][1]["end"];payload=source.samples["p"][0]["offset"]
@@ -30,7 +30,7 @@ class MemoTests(unittest.TestCase):
 
     def test_repeated_epoch_skips_payload_but_revalidates_source(self):
         with tempfile.TemporaryDirectory() as directory:
-            path=scene(Path(directory)/"fixture.ssc");memo=VerificationMemo()
+            path=scene(Path(directory)/"fixture.wvz");memo=VerificationMemo()
             with SourceSnapshot(path,memo=memo) as source:
                 self.assertEqual(epoch(source,"mesh",3)["first_index"],2)
                 before=source.context.decoded_bytes
@@ -45,7 +45,7 @@ class MemoTests(unittest.TestCase):
 
     def test_audit_coverage_reuse_is_bound_to_full_prefix(self):
         with tempfile.TemporaryDirectory() as directory:
-            path=scene(Path(directory)/"fixture.ssc");memo=VerificationMemo()
+            path=scene(Path(directory)/"fixture.wvz");memo=VerificationMemo()
             with SourceSnapshot(path,memo=memo) as source:
                 result=source.audit_identity("p",2)
                 self.assertEqual(result["through_index"],2)
@@ -69,7 +69,7 @@ class MemoTests(unittest.TestCase):
 
     def test_memo_reservation_is_part_of_admission(self):
         with tempfile.TemporaryDirectory() as directory:
-            path=scene(Path(directory)/"fixture.ssc");context=Context(memory_bytes=1048576)
+            path=scene(Path(directory)/"fixture.wvz");context=Context(memory_bytes=1048576)
             with self.assertRaisesRegex(AnalysisError,"memory budget"):
                 SourceSnapshot(path,context=context,memo=VerificationMemo())
             self.assertEqual(context.used,0)

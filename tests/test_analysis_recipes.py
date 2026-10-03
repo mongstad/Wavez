@@ -14,18 +14,18 @@ from tests.g4.fixtures import scene,HIGH_ID
 
 class RecipeTests(unittest.TestCase):
     def setUp(self):
-        self.tmp=tempfile.TemporaryDirectory();self.root=Path(self.tmp.name);self.path=scene(self.root/'source.ssc')
+        self.tmp=tempfile.TemporaryDirectory();self.root=Path(self.tmp.name);self.path=scene(self.root/'source.wvz')
         self.assets=MemberAssets(self.root/'owner'/'members');self.cache=ResultCache(self.root/'owner'/'results');self.source=SourceSnapshot(self.path,assets=self.assets)
         self.digest=hashlib.sha256(self.path.read_bytes()).hexdigest()
         self.selection=S.define(self.source,dict(key='exact',object='p',kind='particle_ids',selector=dict(ids=[str(HIGH_ID),str(2**63-1)])))
         self.request=dict(selections=[self.selection],mode='trace',range=dict(axis='native_time',start=0.,end=3.),channels=[dict(channel='value')])
         self.result=run(self.source,self.request,self.cache)['result']
         source={k:v for k,v in self.source.identity().items() if k not in ('uuid','complete_records')}|dict(complete_frames=8)
-        base=dict(kind='simscope-inspection',version=2,source=source,visual={},sample=dict(requested_time=.5000000000000001),frame_index=1,alpha=.00000000000000011102230246251565,history_indices=[],layers=[],selections=[])
+        base=dict(kind='wavez-inspection',version=2,source=source,visual={},sample=dict(requested_time=.5000000000000001),frame_index=1,alpha=.00000000000000011102230246251565,history_indices=[],layers=[],selections=[])
         selection=dict(version=1,revision=1,active='exact',definitions=[self.selection],groups=[dict(key='group-1',name='Group',revision=1,members=[dict(key='exact',revision=1)])],overlay=dict(visible=True,show_hidden=False,maximum=256))
         summary=dict(result=self.result,request=self.request,operation='analyze',source=self.source.identity(),rows=8,label='Trace',selection_revision=1)
         analysis=dict(summaries=[summary],current=self.result,left={},right={},bindings=[],bookmarks=[],layout=dict(series={},member_address='',plot_bins=512,heatmap_width=128,heatmap_height=64))
-        self.recipe=dict(kind='simscope-inspection',version=3,source=self.source.identity(),payload=pack(dict(base=base,selections=selection,analysis=analysis)),members=[],results=[self.result],bundled_results=True)
+        self.recipe=dict(kind='wavez-inspection',version=3,source=self.source.identity(),payload=pack(dict(base=base,selections=selection,analysis=analysis)),members=[],results=[self.result],bundled_results=True)
 
     def tearDown(self):
         self.source.close();self.assertEqual(self.source.context.used,0);self.assertEqual(hashlib.sha256(self.path.read_bytes()).hexdigest(),self.digest);self.tmp.cleanup()
@@ -58,6 +58,8 @@ class RecipeTests(unittest.TestCase):
         cases=[]
         bad=copy.deepcopy(self.recipe);bad['execute']='anything';cases.append(bad)
         bad=copy.deepcopy(self.recipe);bad['source']['uuid']='changed';cases.append(bad)
+        bad=copy.deepcopy(self.recipe);bad['source']['format']='SIMSCP4';cases.append(bad)
+        bad=copy.deepcopy(self.recipe);bad['kind']='simscope-inspection';cases.append(bad)
         bad=copy.deepcopy(self.recipe);payload=unpack(bad['payload']);payload['base']['version']=1;bad['payload']=pack(payload);cases.append(bad)
         bad=copy.deepcopy(self.recipe);bad['payload']['selections']['groups'][0]['members'][0]['revision']=2;cases.append(bad)
         bad=copy.deepcopy(self.recipe);bad['payload']['analysis']['summaries'][0]['request']['guess_clock']=True;cases.append(bad)
@@ -82,7 +84,7 @@ class RecipeTests(unittest.TestCase):
         with self.assertRaises(AnalysisError):self.load(assets=assets,cache=cache)
 
     def test_unopened_bookmark_source_refuses_without_read(self):
-        payload=unpack(self.recipe['payload']);ref=dict(self.source.identity(),path=str(self.root/'never-opened.ssc'))
+        payload=unpack(self.recipe['payload']);ref=dict(self.source.identity(),path=str(self.root/'never-opened.wvz'))
         payload['analysis']['bookmarks']=[dict(label='Manual',source=ref,raw_time=dict(text='0',f64_le_hex='0000000000000000'),visual={})]
         self.recipe['payload']=pack(payload)
         with self.assertRaisesRegex(AnalysisError,'Open/select'):self.save()

@@ -17,13 +17,13 @@ func run() -> void:
 		if arg == "--render-pair":render_pair = true
 	if folder.is_empty():fail("Missing fixture");return
 	var viewer := Viewer.new();viewer.offline_instance = true;root.add_child(viewer);await process_frame
-	viewer._open_capture(folder.path_join("left-input/pulse.ssc"));viewer.playing = false;viewer.orbit_enabled = false
+	viewer._open_capture(folder.path_join("left-input/pulse.wvz"));viewer.playing = false;viewer.orbit_enabled = false
 	var control = viewer.selection_controller;control.bind_source()
 	if not await wait_jobs(control):fail(control.status.text);return
 	var temporal = control.temporal
 	temporal.durable.load_from(folder.path_join("left-input/recipe.inspection/inspection.json"))
 	if not await wait_jobs(control) or not temporal.durable.last_recipe.get("restored",false):fail(temporal.durable.status.text);return
-	temporal.durable.remember_path(folder.path_join("right-input/pulse.ssc"))
+	temporal.durable.remember_path(folder.path_join("right-input/pulse.wvz"))
 	var matched = temporal.matched
 	for n in range(2):
 		var side: Dictionary = matched.sides[n]

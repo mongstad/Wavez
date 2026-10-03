@@ -1,7 +1,7 @@
 """Explicit simulator-owned identities, reordered rows and particle birth/death.
 
 Run from the project root: python examples/identity_demo.py
-Open results/identity-demo.ssc, choose Physical time and enable Recorded History.
+Open results/identity-demo.wvz, choose Physical time and enable Recorded History.
 """
 from pathlib import Path
 import sys
@@ -13,7 +13,7 @@ from wavez_export import SceneCapture
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--output',type=Path,default=Path(__file__).resolve().parents[1]/'results/identity-demo.ssc')
+    parser.add_argument('--output',type=Path,default=Path(__file__).resolve().parents[1]/'results/identity-demo.wvz')
     output=parser.parse_args().output
     output.parent.mkdir(parents=True,exist_ok=True)
     # These keys are assigned to simulated lifetimes, independent of row order.

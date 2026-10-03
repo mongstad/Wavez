@@ -30,7 +30,7 @@ func run() -> void:
 	if out.is_empty():quit(1);return
 	var viewer := Viewer.new();viewer.offline_instance = true;root.add_child(viewer)
 	await process_frame
-	viewer._open_capture(out.path_join("fixture.ssc"));viewer.playing = false;viewer.orbit_enabled = false
+	viewer._open_capture(out.path_join("fixture.wvz"));viewer.playing = false;viewer.orbit_enabled = false
 	var control = viewer.selection_controller
 	check(control.source.is_empty() and control.jobs.worker_pid<0,"idle viewer starts no analysis worker")
 	control.bind_source()

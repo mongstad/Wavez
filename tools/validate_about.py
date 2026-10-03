@@ -24,7 +24,7 @@ def main():
     args = parser.parse_args()
     assert OUTPUT.read_text(encoding="utf-8") == resource_text(), "Packaged notices must match canonical sources"
     out = args.output_dir.resolve(); out.mkdir(parents=True, exist_ok=False)
-    capture = scene(out / "scene.ssc")
+    capture = scene(out / "scene.wvz")
     digest = hashlib.sha256(capture.read_bytes()).hexdigest()
     if args.export:
         project = out / "export-source"; shutil.copytree(ROOT / "viewer", project, ignore=shutil.ignore_patterns(".godot"))

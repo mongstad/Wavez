@@ -86,7 +86,7 @@ func run() -> void:
 		if arg.begins_with("--mesh-playback-job="):job = JSON.parse_string(FileAccess.get_file_as_string(arg.trim_prefix("--mesh-playback-job=")))
 	out = job.fixtures
 	for name in ["stable","changing","anonymous","mixed","empty"]:
-		var view = make_view(out.path_join(name+".ssc"),true);var reference = make_view(out.path_join(name+".ssc"),false)
+		var view = make_view(out.path_join(name+".wvz"),true);var reference = make_view(out.path_join(name+".wvz"),false)
 		check(view.scene_layers.mesh_playback.enabled,"mesh-only/mixed worker enabled "+name)
 		for channel in ["","value","stress"]:
 			for wire in [false,true]:
@@ -100,7 +100,7 @@ func run() -> void:
 		check(controller.worker.status().bytes <= controller.cpu_limit,"bounded CPU cache")
 		check(controller.staged.size()<=2,"bounded future GPU staging")
 		view.free();reference.free();await process_frame
-	var view = make_view(out.path_join("stable.ssc"),true)
+	var view = make_view(out.path_join("stable.wvz"),true)
 	var controller = view.scene_layers.mesh_playback;var worker = controller.worker
 	check(await sample(view,0.0,true),"startup ready")
 	# Freeze publication deterministically; an uncached seek cannot advance source state.
@@ -147,11 +147,11 @@ func run() -> void:
 	check(refused.has("error") and bad.channels.position[0] == 1e100,"float32 overflow refuses without mutating source")
 	view.free();await process_frame
 	# Source replacement while a result is waiting must cancel publication and clear display.
-	var path := out.path_join("live.ssc");var file := FileAccess.open(path,FileAccess.WRITE);file.store_buffer(FileAccess.get_file_as_bytes(out.path_join("stable.ssc")));file.close()
+	var path := out.path_join("live.wvz");var file := FileAccess.open(path,FileAccess.WRITE);file.store_buffer(FileAccess.get_file_as_bytes(out.path_join("stable.wvz")));file.close()
 	view = make_view(path,true);controller = view.scene_layers.mesh_playback;worker = controller.worker
 	gate = Semaphore.new();worker.test_barrier = gate;controller.invalidate();view.scene_layers.views.surface.clear()
 	view.scene_layers.seek(2.3);check(await gate_ready(worker),"source-change barrier reached")
-	file = FileAccess.open(path,FileAccess.WRITE);file.store_buffer(FileAccess.get_file_as_bytes(out.path_join("mixed.ssc")));file.close()
+	file = FileAccess.open(path,FileAccess.WRITE);file.store_buffer(FileAccess.get_file_as_bytes(out.path_join("mixed.wvz")));file.close()
 	check(not view.scene_layers.refresh() and view.frame_a == null and view.scene_layers.views.surface.mesh == null,"source replacement clears stale display")
 	worker.test_barrier = null;gate.post();view.free();await process_frame
 	if job.has("capture"):
@@ -171,7 +171,7 @@ func run() -> void:
 				compare_mesh(view,reference,"04B/"+channel+"/"+str(time))
 		view.free();reference.free();await process_frame
 	if DisplayServer.get_name() != "headless":
-		await render_compare(out.path_join("stable.ssc"),false)
+		await render_compare(out.path_join("stable.wvz"),false)
 		if job.has("capture"):await render_compare(job.capture,true)
 	# Let deferred renderer resource destruction finish before checking process teardown.
 	for i in range(4):await process_frame

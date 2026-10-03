@@ -44,7 +44,7 @@ def extract(job):
         if obj['kind']!='volume' or row['end']>extent:raise ValueError('Grid sample outside pinned extent')
         provenance=dict(source_sha256=source_hash,committed_bytes=str(extent),object=obj['id'],channel=job['channel'],source_time=row['time'],geometry=g,data_to_world=obj['data_to_world'],threshold=threshold,algorithm=ALGORITHM,precision='source converted to float32 for Lewiner extraction; storage unchanged',invalid_policy='omit any cell with a nonfinite corner',smoothing=False,decimation=False)
         signature=hashlib.sha256(json.dumps(provenance,sort_keys=True,separators=(',',':')).encode()).hexdigest()
-        cache=Path(job['cache']);cache.mkdir(parents=True,exist_ok=True);mesh_path=cache/(signature+'.ssc');meta_path=cache/(signature+'.json')
+        cache=Path(job['cache']);cache.mkdir(parents=True,exist_ok=True);mesh_path=cache/(signature+'.wvz');meta_path=cache/(signature+'.json')
         if mesh_path.exists() and meta_path.exists():
             try:
                 result=json.loads(meta_path.read_text())
@@ -78,7 +78,7 @@ def extract(job):
         else:vertices=np.empty((0,3),dtype='f4');faces=np.empty((0,3),dtype='u4')
         if len(vertices)>MAX_VERTICES or len(faces)>MAX_TRIANGLES:raise ValueError('Isosurface output ceiling')
         reader._unchanged()
-        temp=cache/(signature+'.tmp-'+uuid.uuid4().hex+'.ssc')
+        temp=cache/(signature+'.tmp-'+uuid.uuid4().hex+'.wvz')
         with SceneCapture(temp,objects=[dict(id='isosurface',kind='mesh',units=obj['units'],identity='none',static=True,data_to_world=obj['data_to_world'])],metadata={'provenance':provenance}) as writer:writer.add_mesh('isosurface',row['time'],vertices,faces)
         os.replace(temp,mesh_path)
         result=dict(signature=signature,path=str(mesh_path),sha256=digest(mesh_path),provenance=provenance,vertices=len(vertices),triangles=len(faces),active_cells=active,cache_hit=False,seconds=time.perf_counter()-began,**memory())

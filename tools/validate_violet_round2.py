@@ -20,11 +20,11 @@ def main():
     args = parser.parse_args()
     out = args.output_dir.resolve()
     out.mkdir(parents=True, exist_ok=False)
-    scene(out / 'scene.ssc')
-    with SceneCapture(out / 'clock.ssc', objects=[dict(id='p', kind='particles', units='m', identity='persistent_i8')], metadata={'time_unit': 's'}) as capture:
+    scene(out / 'scene.wvz')
+    with SceneCapture(out / 'clock.wvz', objects=[dict(id='p', kind='particles', units='m', identity='persistent_i8')], metadata={'time_unit': 's'}) as capture:
         for time in [100.0, 160.0, 220.0, 3800.0]:
             capture.add_particles('p', time, [[0., 0., 0.]], ids=[1])
-    hashes = {path.name: hashlib.sha256(path.read_bytes()).hexdigest() for path in out.glob('*.ssc')}
+    hashes = {path.name: hashlib.sha256(path.read_bytes()).hexdigest() for path in out.glob('*.wvz')}
     command = [
         args.godot, '--path', str(ROOT / 'viewer'), '--rendering-method', args.renderer,
         '--resolution', '1440x900', '--audio-driver', 'Dummy', '--script', 'ui/shell/test_violet_round2.gd', '--', str(out),
@@ -41,7 +41,7 @@ def main():
         raise RuntimeError(f'Round 2 failed; see {out / "godot.log"}')
     report = json.loads((out / 'report.json').read_text())
     assert not report['failures'], report['failures']
-    assert hashes == {path.name: hashlib.sha256(path.read_bytes()).hexdigest() for path in out.glob('*.ssc')}
+    assert hashes == {path.name: hashlib.sha256(path.read_bytes()).hexdigest() for path in out.glob('*.wvz')}
     report['source_hashes_unchanged'] = hashes
     (out / 'report.json').write_text(json.dumps(report, indent=2) + '\n')
     print(f'Round 2: {report["checks"]} checks PASS ({args.renderer}); sources unchanged')

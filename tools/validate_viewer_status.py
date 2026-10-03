@@ -23,8 +23,8 @@ def main():
     p.add_argument('--renderer', choices=['forward_plus', 'gl_compatibility'], default='forward_plus')
     a = p.parse_args()
     out = a.output_dir.resolve(); out.mkdir(parents=True, exist_ok=False)
-    source = scene(out / 'scene.ssc')
-    fields = out / 'fields.ssc'
+    source = scene(out / 'scene.wvz')
+    fields = out / 'fields.wvz'
     with SceneCapture(fields, objects=[dict(id='field', kind='volume', units='u')]) as capture:
         for i in range(20):
             data = np.full((16,16,16), 1+i/20, dtype='f4')

@@ -196,8 +196,8 @@ Help hierarchy: visible label/unit/state first; one actionable sentence or toolt
 second; keyboard-accessible focused details third; deep handbook anchor fourth.
 Essential errors, clipping, unavailable samples, busy/cancelled actions and missing
 prerequisites are visible status, never tooltip-only. Examples link to
-[rendering](SIMSCOPE_HANDBOOK.md#inspection-and-rendering),
-[time](SIMSCOPE_HANDBOOK.md#scenes-layers-and-time) and
+[rendering](WAVEZ_HANDBOOK.md#inspection-and-rendering),
+[time](WAVEZ_HANDBOOK.md#scenes-layers-and-time) and
 [recipe ownership](../INSPECTION_STATE.md#recipe-ownership-and-restore-behavior).
 
 This uses progressive disclosure and reduced memory burden as supporting design

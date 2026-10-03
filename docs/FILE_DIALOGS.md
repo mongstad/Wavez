@@ -1,5 +1,10 @@
 # Capture and video file dialogs
 
+Current WAVEZ opens WAVEZ Scene Format `*.wvz` through the single scene file
+filter. The #50 report below records its original `.ssc` picker and review
+steps; those are historical, not current supported file types. See the
+[current format policy](CAPTURE_FORMAT_POLICY.md).
+
 Issue #50 is implemented for owner review, with candidate build **v0.1.0.9**.
 
 File → Open capture… opens **Open capture**. Video export → Browse… opens

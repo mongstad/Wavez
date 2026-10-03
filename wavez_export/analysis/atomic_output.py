@@ -31,7 +31,7 @@ class Output:
         self.status('in_progress');context.stage_publication(self)
 
     def status(self,state,reason=None):
-        payload=encoded(dict(kind='simscope-export-staging',version=1,completion=state,destination=str(self.target),reason=reason))
+        payload=encoded(dict(kind='wavez-export-staging',version=1,completion=state,destination=str(self.target),reason=reason))
         path=self.stage/'status.json';temporary=self.stage/'status.json.tmp'
         with temporary.open('wb') as file:file.write(payload);file.flush();os.fsync(file.fileno())
         os.replace(temporary,path)

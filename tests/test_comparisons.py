@@ -12,7 +12,7 @@ from tests.g4.fixtures import scene
 class ComparisonTests(unittest.TestCase):
     def setUp(self):
         self.tmp=tempfile.TemporaryDirectory();self.root=Path(self.tmp.name)
-        self.source=SourceSnapshot(scene(self.root/"run_a.ssc"));self.other=SourceSnapshot(scene(self.root/"run_b.ssc"))
+        self.source=SourceSnapshot(scene(self.root/"run_a.wvz"));self.other=SourceSnapshot(scene(self.root/"run_b.wvz"))
         self.cache=ResultCache(self.root/"owner"/"results")
 
     def tearDown(self):
