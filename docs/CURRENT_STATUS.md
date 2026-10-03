@@ -1,5 +1,11 @@
 # Current status
 
+Issue #182 has a revised [clean-break format identity proposal](FORMAT_IDENTITY_PROPOSAL.md)
+for `.wvz` / WAVEZ Scene Format / `WVZ1`. The owner has ruled out legacy reading,
+aliases and conversion; the exact wire proposal awaits review. The accepted
+writer, readers and viewer still use `.ssc` / SIMSCP4 until a separate
+implementation is approved.
+
 Issue #202 selects **Meshes** in the Simulation panel after a successful
 mesh-only file load. Mixed scenes retain the selected category, and explicit
 video-export workspace state remains authoritative. Candidate build 30 is
