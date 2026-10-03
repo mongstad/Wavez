@@ -83,7 +83,7 @@ var frame_a: FrameData
 var frame_b: FrameData
 var history: Array[FrameData] = []
 
-var playing := true
+var playing := false
 var phase := 0.0
 var display_accum := 0.0
 var mode := 0 # Reserved visual-state field in existing native recipes; no display dispatch.
@@ -384,8 +384,7 @@ func _update_render_pacing() -> void:
 	# changes. Intentional paused orbit still draws, with bounded presentation
 	# demand. Neither policy changes the recorded clock or camera speed.
 	var camera_animating := orbit_enabled and not _camera_dragging() and orbit_speed != 0.0
-	# Startup has no capture even though the transport's default play intent is
-	# true. Treat only an opened source as active playback for render pacing.
+	# Only an opened, explicitly playing source needs continuous render pacing.
 	var active_playback := playing and generic_reader != null
 	OS.low_processor_usage_mode = bool(_previous_low_processor_mode) or (not active_playback and not camera_animating)
 	var frame_cap := _previous_max_fps
@@ -1135,6 +1134,9 @@ func _open_scene(path: String) -> void:
 	_reset_inspection_source()
 	if generic_reader != null: generic_reader.close()
 	generic_reader = reader;reader_generation = reader.generation
+	# A successful open replaces any prior transport intent. The initial sample
+	# and shared preparation scheduler remain active while its clock is paused.
+	playing = false
 	reader.configure_cache(decoded_cache_mib*1048576,false)
 	capture = reader.file;capture_path = path;frame_count = reader.frames.size()
 	frame_a = null;frame_b = null;current_index = 0;phase = 0;history.clear();hidden_types.clear();channel_signature = ""
@@ -1157,9 +1159,7 @@ func _open_scene(path: String) -> void:
 	scene_layers.playback._update_ui()
 	_update_hud()
 	# Large captures build useful coverage before the owner's first Play. The
-	# automatic worker continues while paused; no interval entry is required.
-	if playing and scene_layers.field_playback.partial_initial_window():_toggle_playback()
-	if playing:scene_layers.field_playback.begin_session()
+	# shared automatic workers continue while paused without an interval entry.
 
 func _frame_from_data(data: Dictionary, index: int) -> FrameData:
 	var decode_started := Profile.begin()

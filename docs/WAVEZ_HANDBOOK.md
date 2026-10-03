@@ -164,6 +164,11 @@ that request. Independent layer source times and held/interpolated/unavailable
 states remain in Scene layers; they are not the common displayed clock.
 
 Recorded time is the only playback clock; there is no playback-mode selector.
+Opening a scene presents its first recorded sample with playback paused. The
+clock remains there until Play is pressed. Automatic particle, field and mesh
+preparation starts in the background while paused, including eligible layers in
+mixed scenes; the prepared timeline and cache diagnostics show actual resident
+coverage. Play uses that coverage when its existing readiness rules permit.
 **Playback speed ×** uses 1× = 1 recorded unit per playback second. 0.5× halves
 and 2× doubles progression. Negative speed reverses, zero holds, and Loop wraps
 the recorded interval. Sample indices remain navigation/lookup positions, not
@@ -427,7 +432,10 @@ prepared lead control Play. Moving the playhead reuses overlapping preparations 
 redirects missing work. Memory pressure reclaims eligible history before new
 allocation is refused; current/staged samples and in-flight ownership stay protected.
 A reasonable history allowance is retained when capacity permits. Pausing keeps
-Automatic preparation active.
+Automatic preparation active. A pause or elapsed idle time alone does not evict
+prepared data; the existing source/configuration invalidation and physical RAM
+admission policies still apply. Loading another scene closes the old workers and
+releases their cache ownership.
 
 **Selected interval (advanced)** and **From current position (advanced)** prepare
 an explicit bounded interval before playback. It starts at the interval boundary

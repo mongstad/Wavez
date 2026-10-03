@@ -32,6 +32,7 @@ Start with:
 - [Manual camera orbit](docs/MANUAL_CAMERA_ORBIT.md)
 - [Edit orbit center and radius](docs/ORBIT_CENTER.md)
 - [Current status](docs/CURRENT_STATUS.md)
+- [Paused opening and automatic preparation](docs/PAUSED_PREPARATION.md)
 - [File and Tools dialog layout](docs/DIALOG_COHERENCE.md)
 - [Viewport-only video export](docs/VIDEO_VIEWPORT_EXPORT.md)
 - [Violet UI cleanup and owner checks](docs/UX5_CLEANUP.md)

@@ -12,7 +12,9 @@ python -m examples.scene_demo --small
 godot --path viewer
 ```
 
-Open `results/g3/small.wvz` in the viewer. Optional surface extraction uses scikit-image;
+Open `results/g3/small.wvz` in the viewer. The first sample appears paused while
+bounded preparation starts automatically; press **Play** when ready to advance
+recorded time. Optional surface extraction uses scikit-image;
 Zstandard uses the standard library on Python 3.14+ or the declared backport.
 Use `SceneCapture` for all new integrations; see [integration](docs/SIMULATION_INTEGRATION_GUIDE.md)
 and [public API](WAVEZ_API.md). G4 selections and analysis
