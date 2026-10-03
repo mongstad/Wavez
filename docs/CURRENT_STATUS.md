@@ -1,5 +1,9 @@
 # Current status
 
+Issue #182 has a [format identity and compatibility proposal](FORMAT_IDENTITY_PROPOSAL.md)
+for the preferred `.wvz` / WAVEZ Scene Format / `WVZ1` direction. It is pending
+owner review; the accepted writer, readers and viewer still use `.ssc` / SIMSCP4.
+
 Issue #202 selects **Meshes** in the Simulation panel after a successful
 mesh-only file load. Mixed scenes retain the selected category, and explicit
 video-export workspace state remains authoritative. Candidate build 30 is
