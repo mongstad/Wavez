@@ -1,0 +1,38 @@
+{
+	"checks": 28,
+	"failures": [],
+	"observations": [
+		{
+			"paused_clock": 0.0,
+			"prepared": {
+				"field": 1,
+				"mesh": -1,
+				"particles": -1
+			},
+			"retained": {
+				"field": 3,
+				"mesh": -1,
+				"particles": -1
+			},
+			"scene": "large-field",
+			"waited_seconds": 2.0
+		},
+		{
+			"paused_clock": 0.0,
+			"prepared": {
+				"field": -1,
+				"mesh": 1,
+				"particles": -1
+			},
+			"retained": {
+				"field": -1,
+				"mesh": 4,
+				"particles": -1
+			},
+			"scene": "large-mesh",
+			"waited_seconds": 2.0
+		}
+	],
+	"packaged": false,
+	"renderer": "forward_plus"
+}

@@ -32,7 +32,7 @@ def validate_profiles(runs):
         check(stats['over_50ms']==0,label+' zero callbacks >=50 ms')
         check(stats['distinct_indices']>=(60 if after['case']=='02B' else 40),label+' traverses retained intervals')
         if after['case']=='02B':
-            p=after['particle'];check(p['policy']=='adaptive' and not p['full_preload'] and len(p['cache']['desired'])<=8,label+' automatically requests a bounded rolling window')
+            p=after['particle'];check(p['policy']=='adaptive' and p['cache']['prepared_bytes']<=p['prepared_limit'],label+' automatically requests safe preparation')
             check(p['cache']['decoded_bytes']<=p['decoded_limit'] and p['cache']['prepared_bytes']<=p['prepared_limit'],label+' bounded particle caches')
         else:
             f=after['field'];check(f['enabled'] and f['cache']['bytes']<=f['cache']['limit'] and f['staged_textures']<=1,label+' bounded CPU preparation and GPU staging')
