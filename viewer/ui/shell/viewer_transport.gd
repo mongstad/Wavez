@@ -4,6 +4,7 @@ const SeekPopover = preload("res://ui/shell/time_seek_popover.gd")
 const SPEEDS = [.25, .5, .75, 1.0, 1.5, 2.0, 3.0, 4.0]
 const SPEED_LABELS = ["0.25×", "0.5×", "0.75×", "1×", "1.5×", "2×", "3×", "4×"]
 const FloatText = preload("res://ui/components/float64_text.gd")
+const ResizeProfile = preload("res://ui/shell/resize_profile.gd")
 var viewer
 var shell
 var rows: VBoxContainer
@@ -93,7 +94,7 @@ func setup(owner_shell) -> void:
 	loop = CheckButton.new(); loop.text = "Loop"; loop.tooltip_text = "Loop recorded interval"; loop.size_flags_vertical = Control.SIZE_SHRINK_CENTER; options.add_child(loop)
 	loop.toggled.connect(set_loop)
 	_build_seek()
-	minimum_size_changed.connect(shell.layout.call_deferred)
+	minimum_size_changed.connect(shell.request_layout)
 	refresh()
 
 func theme_box() -> StyleBox:
@@ -150,6 +151,10 @@ func pending_time():
 	return null
 
 func _process(_delta: float) -> void:
+	# Empty startup has no transport clock or source-dependent state to poll.
+	# Repeatedly assigning the same controls marks the Canvas dirty and forces
+	# the entire 3D viewport to redraw even in low-processor mode.
+	if viewer == null or (viewer.generic_reader == null and not shell.loading): return
 	refresh()
 
 func refresh() -> void:
@@ -229,10 +234,12 @@ func playback_timing() -> Dictionary:
 	return {"elapsed":elapsed,"total":total,"remaining":maxf(0,total-elapsed)}
 
 func layout(width: float, bottom: float) -> float:
+	var profile_started := ResizeProfile.stamp()
 	var narrow := width < 1200
 	if options.get_parent() != (secondary if narrow else primary): options.reparent(secondary if narrow else primary)
 	secondary.visible = narrow; compact = narrow
 	rows.add_theme_constant_override("separation",16 if narrow else 8)
 	var height := maxf(104 if narrow else 64, rows.get_combined_minimum_size().y+8)
 	position = Vector2(0,bottom-height); size = Vector2(width,height)
+	ResizeProfile.record("transport_layout", profile_started)
 	return height

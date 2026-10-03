@@ -1,0 +1,207 @@
+{
+  "issue": 158,
+  "environment": {
+    "desktop": "KDE Wayland",
+    "godot": "4.7.2",
+    "gpu": "NVIDIA RTX 3070 Ti"
+  },
+  "owner_before_change": {
+    "empty": {
+      "active_seconds": 3,
+      "native_size_events": 1210,
+      "peak_size_events_per_second": 562,
+      "max_callback_gap_ms": 81.433
+    },
+    "loaded": {
+      "active_seconds": 24,
+      "native_size_events": 7205,
+      "peak_size_events_per_second": 740,
+      "max_callback_gap_ms": 223.592
+    },
+    "whole_gpu_peak_mib": 6548.0
+  },
+  "candidate": {
+    "forward_plus": [
+      {
+        "phase": "empty",
+        "native_size_events": 1046,
+        "shell_layout_calls": 253,
+        "draws": 252,
+        "max_callback_gap_ms": 22.305,
+        "committed_time": null,
+        "buffering": false,
+        "scene_error": "",
+        "camera_unchanged": true,
+        "records_unchanged": true
+      },
+      {
+        "phase": "paused",
+        "native_size_events": 1042,
+        "shell_layout_calls": 215,
+        "draws": 215,
+        "max_callback_gap_ms": 26.457,
+        "committed_time": 0.0,
+        "buffering": false,
+        "scene_error": "",
+        "camera_unchanged": true,
+        "records_unchanged": true
+      },
+      {
+        "phase": "playing",
+        "native_size_events": 1044,
+        "shell_layout_calls": 42,
+        "draws": 42,
+        "max_callback_gap_ms": 119.789,
+        "committed_time": 4.86402711111111,
+        "buffering": false,
+        "scene_error": "",
+        "camera_unchanged": true,
+        "records_unchanged": true
+      },
+      {
+        "phase": "playing_idle",
+        "native_size_events": 0,
+        "shell_layout_calls": 0,
+        "draws": 83,
+        "max_callback_gap_ms": 51.302,
+        "committed_time": 9.0814697777778,
+        "buffering": false,
+        "scene_error": "",
+        "camera_unchanged": true,
+        "records_unchanged": true
+      },
+      {
+        "phase": "recovered",
+        "native_size_events": 0,
+        "shell_layout_calls": 0,
+        "draws": 0,
+        "max_callback_gap_ms": 6.958,
+        "committed_time": 9.0814697777778,
+        "buffering": false,
+        "scene_error": "",
+        "camera_unchanged": true,
+        "records_unchanged": true
+      }
+    ],
+    "compatibility": [
+      {
+        "phase": "empty",
+        "native_size_events": 1042,
+        "shell_layout_calls": 426,
+        "draws": 426,
+        "max_callback_gap_ms": 12.227,
+        "committed_time": null,
+        "buffering": false,
+        "scene_error": "",
+        "camera_unchanged": true,
+        "records_unchanged": true
+      },
+      {
+        "phase": "paused",
+        "native_size_events": 1045,
+        "shell_layout_calls": 425,
+        "draws": 424,
+        "max_callback_gap_ms": 19.336,
+        "committed_time": 0.0,
+        "buffering": false,
+        "scene_error": "",
+        "camera_unchanged": true,
+        "records_unchanged": true
+      },
+      {
+        "phase": "playing",
+        "native_size_events": 1040,
+        "shell_layout_calls": 53,
+        "draws": 53,
+        "max_callback_gap_ms": 79.432,
+        "committed_time": 4.77763928571428,
+        "buffering": false,
+        "scene_error": "",
+        "camera_unchanged": true,
+        "records_unchanged": true
+      },
+      {
+        "phase": "playing_idle",
+        "native_size_events": 0,
+        "shell_layout_calls": 0,
+        "draws": 79,
+        "max_callback_gap_ms": 55.568,
+        "committed_time": 8.97109166666665,
+        "buffering": false,
+        "scene_error": "",
+        "camera_unchanged": true,
+        "records_unchanged": true
+      },
+      {
+        "phase": "recovered",
+        "native_size_events": 0,
+        "shell_layout_calls": 0,
+        "draws": 0,
+        "max_callback_gap_ms": 8.802,
+        "committed_time": 8.97109166666665,
+        "buffering": false,
+        "scene_error": "",
+        "camera_unchanged": true,
+        "records_unchanged": true
+      }
+    ],
+    "generated_multichannel_post_resize": {
+      "camera_unchanged": true,
+      "channel_available": true,
+      "channel_prepared": true,
+      "channel_selected": true,
+      "scene_error_free": true,
+      "seek_accepted": true,
+      "seek_committed": true,
+      "source_unchanged": true
+    },
+    "large_torus_post_resize_forward_plus": {
+      "camera_unchanged": true,
+      "channel_available": false,
+      "scene_error_free": true,
+      "seek_accepted": true,
+      "seek_committed": true,
+      "source_unchanged": true
+    },
+    "large_torus_post_resize_compatibility": {
+      "camera_unchanged": true,
+      "channel_available": false,
+      "scene_error_free": true,
+      "seek_accepted": true,
+      "seek_committed": true,
+      "source_unchanged": true
+    }
+  },
+  "packaged_linux": {
+    "forward_plus": {
+      "checks": 44,
+      "idle_draws": 0,
+      "failures": []
+    },
+    "compatibility": {
+      "checks": 44,
+      "idle_draws": 0,
+      "failures": []
+    }
+  },
+  "window_chrome": {
+    "forward_plus": {
+      "stages": 18,
+      "checks": 76
+    },
+    "compatibility": {
+      "stages": 18,
+      "checks": 76
+    }
+  },
+  "viewer_shell": {
+    "forward_plus": {
+      "checks": 659,
+      "failures": []
+    },
+    "compatibility": {
+      "checks": 659,
+      "failures": []
+    }
+  }
+}

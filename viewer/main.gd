@@ -172,6 +172,11 @@ func _ready() -> void:
 	_build_particles()
 	_build_ui()
 	_build_visual_ui()
+	if not offline_instance and OS.has_environment("WAVEZ_RESIZE_PROFILE_OUTPUT"):
+		var monitor = preload("res://ui/shell/native_resize_monitor.gd").new()
+		monitor.viewer = self
+		monitor.path = OS.get_environment("WAVEZ_RESIZE_PROFILE_OUTPUT")
+		add_child(monitor)
 	_build_guides()
 	_update_camera()
 	get_window().focus_exited.connect(func(): manual_orbit_dragging = false)
@@ -299,7 +304,7 @@ func _build_ui() -> void:
 	# Neutral dock owns the retained canonical controls pending UX4 migration.
 	overlay_panel.get_parent().move_child(overlay_panel, -1)
 	overlay_panel.get_parent().move_child(resize_handle, -1)
-	get_viewport().size_changed.connect(shell.layout)
+	get_viewport().size_changed.connect(shell.request_layout)
 	if offline_instance:
 		set_process_unhandled_input(false)
 		shell.prepare_export({})
@@ -379,9 +384,12 @@ func _update_render_pacing() -> void:
 	# changes. Intentional paused orbit still draws, with bounded presentation
 	# demand. Neither policy changes the recorded clock or camera speed.
 	var camera_animating := orbit_enabled and not _camera_dragging() and orbit_speed != 0.0
-	OS.low_processor_usage_mode = bool(_previous_low_processor_mode) or (not playing and not camera_animating)
+	# Startup has no capture even though the transport's default play intent is
+	# true. Treat only an opened source as active playback for render pacing.
+	var active_playback := playing and generic_reader != null
+	OS.low_processor_usage_mode = bool(_previous_low_processor_mode) or (not active_playback and not camera_animating)
 	var frame_cap := _previous_max_fps
-	if not playing and camera_animating:
+	if not active_playback and camera_animating:
 		frame_cap = mini(frame_cap,PAUSED_ORBIT_MAX_FPS) if frame_cap > 0 else PAUSED_ORBIT_MAX_FPS
 	Engine.max_fps = frame_cap
 

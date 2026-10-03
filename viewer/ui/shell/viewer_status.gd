@@ -1,5 +1,6 @@
 extends PanelContainer
 ## Read-only shell composition of existing controllers; no worker polling or file I/O.
+const ResizeProfile = preload("res://ui/shell/resize_profile.gd")
 var shell
 var viewer
 var badge
@@ -257,6 +258,8 @@ func show_status() -> void:
 	shell.show_details("Status details", "\n".join(lines))
 
 func layout(width: float, bottom: float) -> float:
+	var profile_started := ResizeProfile.stamp()
 	var height := maxf(40,get_combined_minimum_size().y)
 	position = Vector2(0,bottom-height); size = Vector2(width,height)
+	ResizeProfile.record("status_layout", profile_started)
 	return height

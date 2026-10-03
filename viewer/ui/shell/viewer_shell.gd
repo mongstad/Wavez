@@ -2,6 +2,7 @@ extends Control
 ## Presentation-only adapter. Controllers and the root scientific viewport retain ownership.
 const ThemeSource = preload("res://ui/theme/wavez_theme.gd")
 const About = preload("res://ui/about/about_dialog.gd")
+const ResizeProfile = preload("res://ui/shell/resize_profile.gd")
 const WORKSPACES = ["Particles", "Fields", "Meshes"]
 var viewer
 var orbit_editor
@@ -102,6 +103,7 @@ var compact := false
 var has_layout := false
 var scroll_position := 0
 var changing_layout := false
+var layout_queued := false
 # Session-only presentation state; never change serialized scientific visibility.
 var immersive := false
 var immersive_hint: Label
@@ -320,6 +322,7 @@ func restore_focus() -> void:
 
 func refresh() -> void:
 	if menus.is_empty(): return
+	var profile_started := ResizeProfile.stamp()
 	var loaded: bool = viewer.generic_reader != null
 	refresh_commands()
 	refresh_shortcut_hints()
@@ -330,6 +333,7 @@ func refresh() -> void:
 	particle_empty.visible = loaded and workspace == 0 and not has_particles
 	adapter.visible = loaded and workspace != 0
 	if viewer.scene_layers != null: viewer.scene_layers.show_category(workspace)
+	ResizeProfile.record("shell_refresh", profile_started)
 
 func begin_open() -> void:
 	loading = true; refresh()
@@ -360,8 +364,22 @@ func resize_input(event: InputEvent) -> void:
 		viewer.panel_width = clampf(viewer.panel_width - event.relative.x, 320, minf(560, size.x - 650))
 		layout()
 
+func request_layout() -> void:
+	# A native drag can deliver hundreds of sizes between drawn frames. Use
+	# the latest viewport size once per frame, including after the last event.
+	if layout_queued: return
+	layout_queued = true
+	_flush_requested_layout.call_deferred()
+
+func _flush_requested_layout() -> void:
+	if not layout_queued: return
+	layout_queued = false
+	layout()
+
 func layout() -> void:
 	if changing_layout or dock == null: return
+	layout_queued = false
+	var profile_started := ResizeProfile.stamp()
 	changing_layout = true
 	var extent := get_viewport().get_visible_rect().size
 	size = extent
@@ -390,6 +408,7 @@ func layout() -> void:
 	if window_chrome != null: window_chrome.refresh()
 	refresh()
 	changing_layout = false
+	ResizeProfile.record("shell_layout_inclusive", profile_started)
 
 func layout_legend(available: Vector2) -> void:
 	if viewer.colorbar == null or viewer.legend == null: return
