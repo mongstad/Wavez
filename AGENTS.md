@@ -17,6 +17,28 @@ Read README.md, docs/CURRENT_STATUS.md and CONTRIBUTING.md before making changes
 - Inspect staged content, sizes and secrets before committing. Never commit credentials, environments, caches, captures or large scientific results. Preserve useful history.
 - Keep external simulations and research projects outside this repository. Use synthetic fixtures or explicit external paths for optional integration tests. Do not duplicate exporters.
 - Validate relevant changes with small generated fixtures; avoid production scientific reruns for housekeeping.
+
+### Risk-based validation
+
+Validation scope must be proportional to the change and its plausible blast radius. Do not run the full application regression suite automatically for every issue.
+
+- **Small/local UI or text changes:** run focused tests for the modified component and its immediate interaction paths only.
+- **Subsystem changes:** run the affected subsystem tests plus directly connected integration boundaries.
+- **Cross-cutting runtime changes:** run broader regressions covering the systems plausibly affected.
+- **Scientific format, reader/writer, rendering architecture, playback/cache core, or release-critical changes:** use comprehensive validation appropriate to the affected contracts, including renderer/package checks where relevant.
+
+Prefer the **smallest test set that provides strong evidence for the actual change**.
+
+Do not run unrelated camera, playback, field, mesh, video, analysis, packaging, or scientific-integrity suites merely because they exist.
+
+Expand validation when a focused test reveals a regression, the changed code is shared by multiple subsystems, or investigation demonstrates a wider blast radius.
+
+Examples:
+
+- Changing file-dialog wording/filtering → file-dialog/open/cancel/filter tests and packaged/native integration where relevant; **not** the full playback/rendering suite.
+- Changing button spacing → focused UI/layout checks.
+- Changing camera-state code → camera/navigation tests and directly affected persistence/export paths.
+- Changing WVZ1 reader/writer → comprehensive scientific-format/integrity/runtime validation.
 - At the end of an authorized issue, report the branch, commit(s), files changed, validation performed, failures/skips, known limitations and pull-request state, then STOP and await owner review unless explicitly instructed otherwise.
 - Preserve third-party licensing boundaries. Do not vendor, copy, commit, or redistribute third-party tools, executables, runtimes, libraries, fonts, datasets, or other assets unless the repository explicitly documents them as bundled and their license obligations have been reviewed. In particular, dependencies listed in THIRD_PARTY_LICENSES.md as external/not vendored — including Godot Engine and FFmpeg — must remain externally installed and must not be added to the repository. If implementation appears to require bundling a new third-party component, STOP and request owner review before adding it.
 
