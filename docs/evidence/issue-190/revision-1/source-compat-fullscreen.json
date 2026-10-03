@@ -1,0 +1,88 @@
+{
+  "cases": {
+    "field": {
+      "extent": 6.49519062042236,
+      "far": 1000.0,
+      "first_inward": 16.3678803634644,
+      "framed": 18.1865337371826,
+      "maximum": 993.504809379578,
+      "minimum": 6.54519062116742,
+      "near": 0.0500000007450581
+    },
+    "large": {
+      "extent": 25495.09765625,
+      "far": 356931.375,
+      "first_inward": 64247.64609375,
+      "framed": 71386.2734375,
+      "maximum": 331436.27734375,
+      "minimum": 25495.1476562507,
+      "near": 0.0500000007450581
+    },
+    "mesh": {
+      "extent": 2.54950976371765,
+      "far": 1000.0,
+      "first_inward": 6.42476460456848,
+      "framed": 7.13862733840942,
+      "maximum": 997.450490236282,
+      "minimum": 2.59950976446271,
+      "near": 0.0500000007450581
+    },
+    "mixed": {
+      "extent": 6.49519062042236,
+      "far": 1000.0,
+      "first_inward": 16.3678803634644,
+      "framed": 18.1865337371826,
+      "maximum": 993.504809379578,
+      "minimum": 6.54519062116742,
+      "near": 0.0500000007450581
+    },
+    "particles": {
+      "extent": 2.54950976371765,
+      "far": 1000.0,
+      "first_inward": 6.42476460456848,
+      "framed": 7.13862733840942,
+      "maximum": 997.450490236282,
+      "minimum": 2.59950976446271,
+      "near": 0.0500000007450581
+    },
+    "small": {
+      "extent": 0.1,
+      "far": 1000.0,
+      "first_inward": 0.252,
+      "framed": 0.28,
+      "maximum": 999.9,
+      "minimum": 0.150000000745058,
+      "near": 0.0500000007450581
+    }
+  },
+  "checks": 222,
+  "display_driver": "Wayland",
+  "failures": [],
+  "layouts": [
+    {
+      "actual": "(1440, 900)",
+      "scale": 1.0
+    },
+    {
+      "actual": "(3840, 2160)",
+      "scale": 2.0
+    },
+    {
+      "actual": "(3840, 2160)",
+      "scale": 2.5
+    }
+  ],
+  "packaged": false,
+  "renderer": "gl_compatibility",
+  "source_hashes_unchanged": {
+    "/tmp/wavez-190-yaw-final-compat-source-synthetic/large.ssc": "81317c8fd99eeafeceadf770bc38b2ec51aba5cf0a8dc8b40cc156d4240a2f3d",
+    "/tmp/wavez-190-yaw-final-compat-source-synthetic/small.ssc": "5c79643f7c68fd156496005fbb38191dd5b367af42cd798fdcd22b89527873a9",
+    "/tmp/wavez-190-yaw-final-compat-source-synthetic/mixed.ssc": "fcdc4d11418f4123c49f602bdeb34bd964308c22ad2de4119a6e538ee421698e",
+    "/tmp/wavez-190-yaw-final-compat-source-synthetic/mesh.ssc": "a13263938ebfe154212e5989462903e4eb3de66006a11225e40637f129c99f7c",
+    "/tmp/wavez-190-yaw-final-compat-source-synthetic/field.ssc": "f159078a27d0258ee40f2f49e5d7823c21440d335e176e61988f456b81b30723",
+    "/tmp/wavez-190-yaw-final-compat-source-synthetic/particles.ssc": "dfce6b06c42645432abede56bbb519b2533830f333995838ca99c29887f58a3e"
+  },
+  "known_engine_diagnostics": [
+    "libdecor-gtk-WARNING: Failed to initialize GTK\nFailed to load plugin 'libdecor-gtk.so': failed to init\n"
+  ]
+}

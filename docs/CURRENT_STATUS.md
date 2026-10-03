@@ -1,9 +1,20 @@
 # Current status
 
+Issue #190 adds right-drag sideways camera orbit about the camera's screen-up
+axis captured at each right-button press. Vertical right-drag motion is ignored;
+left-drag can establish a new orientation and orbit plane before the next press.
+The gesture works across particle, volume, mesh and mixed scenes without selecting
+an object. Its angular sensitivity changes smoothly with camera distance and
+viewport size; left-drag tumble, zoom, Frame Scene and Auto Orbit retain their
+existing roles. Candidate build 26 is **pending owner review**. See
+[usage and owner checks](MANUAL_CAMERA_ORBIT.md) and the
+[revised validation](evidence/issue-190/revision-2/README.md). The first two
+review-time reports remain historical records of their candidates.
+
 Issue #195 adds a bounded CPU worker pool, decoded endpoint reuse and exact-match
 stable-topology reuse for sustained mesh playback. The pool adapts to CPU capacity
 and live RAM, preserves the four-pair future window, and keeps GPU uploads on the
-main thread. Candidate build 25 is **pending owner review**. See the updated
+main thread. Build 25 was owner-merged in PR #196. See the updated
 [mesh preparation policy](MESH_PREPARATION_BUDGET.md) and
 [measurements, validation and owner checks](evidence/issue-195/README.md).
 

@@ -44,6 +44,7 @@ static func apply(viewer, state: Dictionary) -> void:
 	viewer.camera_target = vector(state.camera_target)
 	var a: Array = state.camera_transform
 	viewer.camera.transform = Transform3D(Basis(vector(a[0]), vector(a[1]), vector(a[2])), vector(a[3]))
+	viewer._adopt_camera_basis()
 	for key in state.camera: viewer.camera.set(key, state.camera[key])
 	viewer.hidden_types.clear()
 	for value in state.get("hidden_types", []): viewer.hidden_types[int(value)] = true

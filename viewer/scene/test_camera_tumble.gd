@@ -25,6 +25,117 @@ func wheel(viewer, button: MouseButton) -> void:
 	var event := InputEventMouseButton.new(); event.button_index = button; event.pressed = true
 	viewer._unhandled_input(event)
 
+func manual_orbit(viewer, movement: Vector2) -> void:
+	var view_up: Vector3 = viewer.camera.basis.y.normalized()
+	var press := InputEventMouseButton.new()
+	press.button_index = MOUSE_BUTTON_RIGHT; press.pressed = true; press.position = Vector2(480, 320)
+	viewer._unhandled_input(press)
+	check(viewer.manual_orbit_dragging, "Right press in viewport begins manual orbit")
+	check(viewer.manual_orbit_axis.distance_to(view_up) < .00001, "Right press captures current screen-up in world space")
+	var motion := InputEventMouseMotion.new(); motion.position = press.position + movement
+	viewer._input(motion)
+	check(viewer.manual_orbit_axis.distance_to(view_up) < .00001, "Right-drag orbit axis stays fixed while held")
+	var release := InputEventMouseButton.new()
+	release.button_index = MOUSE_BUTTON_RIGHT; release.position = Vector2(0, 0)
+	viewer._input(release)
+	check(not viewer.manual_orbit_dragging, "Right release over chrome ends manual orbit")
+
+func manual_orbit_tests(viewer, kind: String) -> void:
+	viewer.orbit_enabled = false
+	viewer.dragging = false
+	viewer._reset_camera()
+	viewer.camera_target = Vector3(2, -1, 3)
+	viewer.camera_distance = 40
+	viewer.half_extent = 12
+	viewer.yaw = .4; viewer.pitch = .2; viewer._update_camera()
+	drag(viewer, Vector2(70, -120))
+	var target: Vector3 = viewer.camera_target
+	var radius: float = viewer.camera_distance
+	var sample: Dictionary = viewer.committed_sample.duplicate(true)
+	var initial_yaw: float = viewer.yaw
+	var initial_pitch: float = viewer.pitch
+	var initial: Transform3D = viewer.camera.transform
+	var first_axis: Vector3 = initial.basis.y.normalized()
+	check(absf(first_axis.dot(Vector3.UP)) < .8, kind + " left tumble establishes a non-world-aligned first orbit axis")
+	var sensitivity: float = viewer._manual_orbit_sensitivity()
+	manual_orbit(viewer, Vector2(80, -60))
+	var expected_basis := (Basis(first_axis, -80 * sensitivity) * initial.basis).orthonormalized()
+	var expected := Transform3D(expected_basis, target + expected_basis.z * radius)
+	check(close_transform(viewer.camera.transform, expected) and viewer.yaw == initial_yaw and viewer.pitch == initial_pitch, kind + " diagonal right drag follows captured view-up, not world Y")
+	check(viewer.camera.position.distance_to(target + (Basis(Vector3.UP, -80 * sensitivity) * initial.basis).z * radius) > .01, kind + " non-world-aligned orbit differs from rejected world-Y path")
+	check(viewer.camera_target == target and viewer.camera_distance == radius and absf(viewer.camera.position.distance_to(target)-radius) < .0001, kind + " orbit preserves center and radius")
+	check(viewer.camera.basis.y.distance_to(first_axis) < .00001 and viewer.camera.basis.z.dot((viewer.camera.position-target).normalized()) > .99999, kind + " right orbit keeps captured screen-up and looks at center")
+	check(viewer.committed_sample == sample, kind + " orbit leaves committed scientific sample untouched")
+	var before_vertical: Transform3D = viewer.camera.transform
+	var yaw_before_vertical: float = viewer.yaw
+	manual_orbit(viewer, Vector2(0, 150))
+	check(viewer.yaw == yaw_before_vertical and viewer.pitch == initial_pitch and viewer.camera.transform == before_vertical, kind + " vertical-only right drag leaves the camera unchanged")
+	var circle_pixels: float = TAU / sensitivity
+	for direction in [-1.0, 1.0]:
+		var start: Transform3D = viewer.camera.transform
+		var circle_axis: Vector3 = start.basis.y.normalized()
+		var circle_press := InputEventMouseButton.new()
+		circle_press.button_index = MOUSE_BUTTON_RIGHT; circle_press.pressed = true; circle_press.position = Vector2(480, 320)
+		viewer._unhandled_input(circle_press)
+		check(viewer.manual_orbit_axis.distance_to(circle_axis) < .00001, kind + " full-circle drag captures current view-up")
+		for step in range(1, 73):
+			var circle_motion := InputEventMouseMotion.new()
+			circle_motion.position = circle_press.position + Vector2(direction * circle_pixels * step / 72.0, 120.0 * step / 72.0)
+			viewer._input(circle_motion)
+			check(viewer.pitch == initial_pitch and viewer.yaw == initial_yaw and viewer.camera_target == target and viewer.camera_distance == radius and absf(viewer.camera.position.distance_to(target)-radius) < .0001 and viewer.camera.basis.y.distance_to(circle_axis) < .00001 and viewer.camera.basis.z.dot((viewer.camera.position-target).normalized()) > .99999, kind + " full-circle orbit keeps captured axis, center, radius and aim at step " + str(step) + " direction " + str(direction))
+			if step == 36:
+				check((start.origin-target).normalized().dot((viewer.camera.position-target).normalized()) < -.999, kind + " half-circle reaches opposite side in direction " + str(direction))
+		circle_press.pressed = false; viewer._input(circle_press)
+		check(close_transform(start, viewer.camera.transform), kind + " full view-up revolution returns to starting view without roll in direction " + str(direction))
+	check(viewer.committed_sample == sample, kind + " full-circle orbit leaves committed scientific sample untouched")
+	var before_left: Transform3D = viewer.camera.transform
+	drag(viewer, Vector2(120, -100))
+	var left_expected_basis := (Basis(Vector3.UP, -120 * .006) * before_left.basis * Basis(Vector3.RIGHT, -100 * .006)).orthonormalized()
+	check(close_transform(viewer.camera.transform, Transform3D(left_expected_basis, target + left_expected_basis.z * radius)), kind + " existing left tumble continues smoothly from right-orbit view")
+	var second: Transform3D = viewer.camera.transform
+	var second_axis: Vector3 = second.basis.y.normalized()
+	check(second_axis.distance_to(first_axis) > .3 and absf(second_axis.dot(Vector3.UP)) < .9, kind + " second left tumble establishes a different non-world orbit axis")
+	var second_sensitivity: float = viewer._manual_orbit_sensitivity()
+	manual_orbit(viewer, Vector2(-55, 95))
+	var second_expected_basis := (Basis(second_axis, 55 * second_sensitivity) * second.basis).orthonormalized()
+	check(close_transform(viewer.camera.transform, Transform3D(second_expected_basis, target + second_expected_basis.z * radius)) and viewer.camera.basis.y.distance_to(second_axis) < .00001, kind + " next right press uses newly captured view-up axis")
+	var saved_view: Dictionary = Visual.snapshot(viewer)
+	var before_restore: Transform3D = viewer.camera.transform
+	Visual.apply(viewer, saved_view)
+	viewer._update_camera()
+	check(close_transform(before_restore, viewer.camera.transform), kind + " saved view restores arbitrary right-orbit basis without snap")
+	var orbit_recipe := output.path_join(kind + "-view-up-recipe.json")
+	check(viewer._save_inspection(orbit_recipe) == OK, kind + " save view-relative orbit recipe")
+	viewer._reset_camera()
+	check(viewer._load_inspection(orbit_recipe).is_empty(), kind + " reload view-relative orbit recipe")
+	viewer._update_camera()
+	check(close_transform(before_restore, viewer.camera.transform), kind + " reloaded view-relative orbit continues without snap")
+	var stopped: Transform3D = viewer.camera.transform
+	var stray := InputEventMouseMotion.new(); stray.position = Vector2(700, 500); viewer._input(stray)
+	check(viewer.camera.transform == stopped, kind + " released right drag does not move camera")
+	viewer.camera_distance = 3; var close_sensitivity: float = viewer._manual_orbit_sensitivity()
+	viewer.camera_distance = 400; var far_sensitivity: float = viewer._manual_orbit_sensitivity()
+	check(close_sensitivity < sensitivity and sensitivity < far_sensitivity and close_sensitivity > 0, kind + " smooth distance response gives close precision and distant reach")
+	viewer.camera_distance = radius; viewer._update_camera()
+	wheel(viewer, MOUSE_BUTTON_WHEEL_UP)
+	check(viewer.camera_target == target and viewer.camera_distance < radius, kind + " wheel zoom composes with manual orbit")
+	var after_zoom: float = viewer.camera_distance
+	manual_orbit(viewer, Vector2(-35, 25))
+	check(viewer.camera_distance == after_zoom and viewer.camera_target == target, kind + " orbit after zoom preserves zoom state")
+	viewer.orbit_enabled = true; viewer.orbit_speed = .2
+	var press := InputEventMouseButton.new(); press.button_index = MOUSE_BUTTON_RIGHT; press.pressed = true; press.position = Vector2(480, 320)
+	viewer._unhandled_input(press)
+	var held_yaw: float = viewer.yaw
+	var held_view: Transform3D = viewer.camera.transform
+	viewer.scene_layers.tick(.1)
+	check(viewer.yaw == held_yaw and viewer.camera.transform == held_view, kind + " right drag temporarily suspends Auto Orbit")
+	press.pressed = false; viewer._input(press)
+	viewer.scene_layers.tick(.1)
+	check(is_equal_approx(viewer.yaw, held_yaw + .02) and close_transform(viewer.camera.transform, Transform3D(Basis(Vector3.UP, .02) * held_view.basis, target + Basis(Vector3.UP, .02) * (held_view.origin-target))), kind + " Auto Orbit resumes from current view after release")
+	viewer.orbit_enabled = false
+	viewer._focus_activity()
+	check(viewer.camera_target.is_finite() and viewer.camera_distance > 0, kind + " Frame Scene works after manual orbit")
+
 func math_tests(viewer) -> void:
 	viewer.camera_target = Vector3(3, -2, 7); viewer.camera_distance = 32
 	# Independent legacy reference: look_at is well-defined inside the old range.
@@ -60,6 +171,7 @@ func fixture_tests(viewer, kind: String) -> void:
 	viewer._open_capture(output.path_join(kind + ".ssc")); viewer.playing = false; viewer.orbit_enabled = false
 	check(viewer.frame_count == 2, kind + " fixture opened")
 	viewer._seek_time(.5)
+	manual_orbit_tests(viewer, kind)
 	var sample: Dictionary = viewer.committed_sample.duplicate(true)
 	var target: Vector3 = viewer.camera_target
 	viewer.yaw = .6; viewer.pitch = deg_to_rad(120); viewer._update_camera()
@@ -120,7 +232,7 @@ func run() -> void:
 	create_timer(120).timeout.connect(func():push_error("Camera test timed out");quit(1))
 	var viewer = Viewer.new(); viewer.offline_instance = true; root.add_child(viewer); viewer.set_process(false)
 	math_tests(viewer)
-	for kind in ["particles", "volume", "mesh"]: await fixture_tests(viewer,kind)
+	for kind in ["particles", "volume", "mesh", "mixed"]: await fixture_tests(viewer,kind)
 	var file := FileAccess.open(output.path_join("camera-report.json"),FileAccess.WRITE)
 	file.store_string(JSON.stringify({"checks":checks,"failures":failures,"renderer":RenderingServer.get_current_rendering_method()},"\t")); file.close()
 	viewer.queue_free(); await process_frame

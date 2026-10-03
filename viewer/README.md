@@ -26,11 +26,16 @@ with the dock hidden. Details exposes readiness diagnostics; Jobs reopens existi
 operations, exposes supported cancellation and retains output/failure details.
 
 F1 hides/restores the resizable dock and legend; Space pauses; Left/Right
-steps; mouse drag tumbles continuously through full revolutions in either direction;
-wheel zooms; F11 toggles fullscreen, hiding the top command bar until exit; maximized windows keep the bar. F frames the scene and R resets the camera.
-Horizontal drag retains world-Y yaw; vertical drag carries the camera up axis
-through the poles, allowing upside-down views without a snap. Auto orbit (O)
-remains a separate world-Y rotation and pauses while dragging. Open… opens
+steps; left-drag tumbles continuously through full revolutions in either direction;
+right-drag moves the camera sideways around the current target about the
+screen-up axis captured at press time, with distance-aware angular sensitivity
+and no response to vertical pointer motion, regardless of scene type or Auto
+Orbit state;
+wheel zooms; F11 toggles fullscreen, hiding the top command bar until exit;
+maximized windows keep the bar. F frames the scene and R resets the camera.
+For left-drag, horizontal motion retains world-Y yaw and vertical motion carries
+the camera up axis through the poles, allowing upside-down views without a snap.
+Auto orbit (O) remains a separate world-Y rotation and pauses while dragging. Open… opens
 files. Show panels and Exit fullscreen provide mouse recovery. Scalar colormaps use the bundled lookup data described in
 [COLORMAPS_LICENSE.txt](COLORMAPS_LICENSE.txt).
 

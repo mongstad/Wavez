@@ -97,6 +97,17 @@ var pitch := deg_to_rad(24.0)
 var camera_distance := 112.0
 var dragging := false
 var last_mouse := Vector2.ZERO
+var manual_orbit_dragging := false
+var manual_orbit_last_mouse := Vector2.ZERO
+var manual_orbit_axis := Vector3.UP
+var manual_orbit_start_basis := Basis.IDENTITY
+var manual_orbit_angle := 0.0
+# A view-up orbit can introduce orientation outside the two legacy yaw/pitch
+# angles. Keep its camera basis through zoom, framing, tumble and Auto Orbit.
+var camera_orbit_basis := Basis.IDENTITY
+var camera_orbit_basis_active := false
+var camera_orbit_basis_yaw := deg_to_rad(38.0)
+var camera_orbit_basis_pitch := deg_to_rad(24.0)
 
 var current_instance: MultiMeshInstance3D
 var current_mm: MultiMesh
@@ -163,6 +174,7 @@ func _ready() -> void:
 	_build_visual_ui()
 	_build_guides()
 	_update_camera()
+	get_window().focus_exited.connect(func(): manual_orbit_dragging = false)
 
 	var args := OS.get_cmdline_user_args()
 	if offline_instance: args = PackedStringArray()
@@ -366,7 +378,7 @@ func _update_render_pacing() -> void:
 	# Godot still processes input, workers and UI; it draws when render state
 	# changes. Intentional paused orbit still draws, with bounded presentation
 	# demand. Neither policy changes the recorded clock or camera speed.
-	var camera_animating := orbit_enabled and not dragging and orbit_speed != 0.0
+	var camera_animating := orbit_enabled and not _camera_dragging() and orbit_speed != 0.0
 	OS.low_processor_usage_mode = bool(_previous_low_processor_mode) or (not playing and not camera_animating)
 	var frame_cap := _previous_max_fps
 	if not playing and camera_animating:
@@ -385,7 +397,7 @@ func _process_profiled(delta: float) -> void:
 		scene_layers.tick(delta)
 		return
 	_move_free_camera(delta)
-	if orbit_enabled and not dragging and orbit_speed != 0.0:
+	if orbit_enabled and not _camera_dragging() and orbit_speed != 0.0:
 		yaw += delta * orbit_speed
 		_update_camera()
 
@@ -492,8 +504,18 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
 		dragging = false
 		resizing_panel = false
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and not event.pressed:
+		manual_orbit_dragging = false
 	if shell != null and shell.editing_shortcuts():
+		manual_orbit_dragging = false
 		if shell.shortcuts_editor.handle_input(event): get_viewport().set_input_as_handled()
+		return
+	if inspection_busy: manual_orbit_dragging = false
+	if event is InputEventMouseMotion and manual_orbit_dragging:
+		var movement: Vector2 = event.position - manual_orbit_last_mouse
+		manual_orbit_last_mouse = event.position
+		_orbit_camera_horizontally(movement.x, _manual_orbit_sensitivity())
+		get_viewport().set_input_as_handled()
 		return
 	# Recovery precedes GUI, busy-inspection and selection input handling.
 	if shell != null and shell.immersive and event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_ESCAPE:
@@ -516,8 +538,16 @@ func _unhandled_input(event: InputEvent) -> void:
 			if mouse_button.pressed:
 				var focused := get_viewport().gui_get_focus_owner()
 				if focused != null: focused.release_focus()
+				manual_orbit_dragging = false
 			dragging = mouse_button.pressed
 			last_mouse = mouse_button.position
+		elif mouse_button.button_index == MOUSE_BUTTON_RIGHT and mouse_button.pressed and shell.edge_reveal.is_viewport_point(mouse_button.position) and not dragging:
+			manual_orbit_dragging = true
+			manual_orbit_last_mouse = mouse_button.position
+			manual_orbit_axis = camera.basis.y.normalized()
+			manual_orbit_start_basis = camera.basis.orthonormalized()
+			manual_orbit_angle = 0.0
+			get_viewport().set_input_as_handled()
 		elif mouse_button.pressed and mouse_button.button_index == MOUSE_BUTTON_WHEEL_UP:
 			_zoom_camera(mouse_button, true)
 			get_viewport().set_input_as_handled()
@@ -528,14 +558,39 @@ func _unhandled_input(event: InputEvent) -> void:
 		var mouse_event: InputEventMouseMotion = event as InputEventMouseMotion
 		var d: Vector2 = mouse_event.position - last_mouse
 		last_mouse = mouse_event.position
-		yaw -= d.x * 0.006
-		pitch -= d.y * 0.006
-		_update_camera()
+		_orbit_camera_by_drag(d, 0.006)
 	elif event is InputEventKey and event.pressed and not event.echo:
 		var action: String = shell.shortcuts.match_action(event)
 		if not action.is_empty():
 			_dispatch_shortcut(action)
 			get_viewport().set_input_as_handled()
+
+func _camera_dragging() -> bool:
+	return dragging or manual_orbit_dragging
+
+func _manual_orbit_sensitivity() -> float:
+	# A half-turn over the shorter viewport span at a framed radius. The smooth
+	# distance response gives close inspection finer angular control without a
+	# mode switch, while distant views retain useful travel per drag.
+	var size := get_viewport().get_visible_rect().size
+	var span := maxf(480.0, minf(size.x, size.y))
+	var ratio := camera_distance / maxf(half_extent, camera.near)
+	return PI / span * (0.2 + 1.6 * ratio / (ratio + 3.5))
+
+func _orbit_camera_by_drag(movement: Vector2, sensitivity: float) -> void:
+	if movement == Vector2.ZERO: return
+	yaw -= movement.x * sensitivity
+	pitch -= movement.y * sensitivity
+	_update_camera()
+
+func _orbit_camera_horizontally(horizontal_delta: float, sensitivity: float) -> void:
+	if horizontal_delta == 0.0: return
+	manual_orbit_angle -= horizontal_delta * sensitivity
+	camera_orbit_basis = (Basis(manual_orbit_axis, manual_orbit_angle) * manual_orbit_start_basis).orthonormalized()
+	camera_orbit_basis_active = true
+	camera_orbit_basis_yaw = yaw
+	camera_orbit_basis_pitch = pitch
+	_update_camera()
 
 func _zoom_camera(event: InputEventMouseButton, inward: bool) -> void:
 	if not is_finite(camera_distance) or camera_distance <= 0 or not is_finite(event.factor) or event.factor <= 0: return
@@ -585,14 +640,33 @@ func _toggle_free_camera() -> void:
 
 func _reset_camera() -> void:
 	if shell != null: shell.dismiss_orbit_editor()
+	camera_orbit_basis_active = false
 	camera_target = Vector3.ZERO; yaw = deg_to_rad(38.0); pitch = deg_to_rad(24.0); camera_distance = maxf(30.0, half_extent * 2.8); _update_camera()
+
+func _adopt_camera_basis() -> void:
+	# Saved visual states already contain the full camera transform. Restore its
+	# orientation as the live basis when yaw/pitch alone cannot express it.
+	camera_orbit_basis = camera.basis
+	camera_orbit_basis_active = not camera_orbit_basis.is_equal_approx(Basis(Vector3.UP, yaw) * Basis(Vector3.RIGHT, -pitch))
+	camera_orbit_basis_yaw = yaw
+	camera_orbit_basis_pitch = pitch
 
 func _update_camera() -> void:
 	# Carry the camera up axis through the poles instead of reconstructing it
 	# from world-up (look_at becomes singular at +/-90 degrees and flips beyond).
-	# This is the existing yaw/pitch orbit with continuous orientation; keeping
-	# those angles also preserves recipe fields and independent world-Y auto orbit.
-	var orientation := Basis(Vector3.UP, yaw) * Basis(Vector3.RIGHT, -pitch)
+	# Before a view-up orbit this is the existing yaw/pitch orbit. Thereafter,
+	# changes to those angles apply incrementally to the current camera basis.
+	var orientation: Basis
+	if camera_orbit_basis_active:
+		var yaw_delta: float = yaw - camera_orbit_basis_yaw
+		var pitch_delta: float = pitch - camera_orbit_basis_pitch
+		if yaw_delta != 0.0 or pitch_delta != 0.0:
+			camera_orbit_basis = (Basis(Vector3.UP, yaw_delta) * camera_orbit_basis * Basis(Vector3.RIGHT, -pitch_delta)).orthonormalized()
+		orientation = camera_orbit_basis
+	else:
+		orientation = Basis(Vector3.UP, yaw) * Basis(Vector3.RIGHT, -pitch)
+	camera_orbit_basis_yaw = yaw
+	camera_orbit_basis_pitch = pitch
 	camera.transform = Transform3D(orientation, camera_target + orientation.z * camera_distance)
 
 func _comma(v: Variant) -> String:

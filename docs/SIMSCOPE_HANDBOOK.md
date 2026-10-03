@@ -234,11 +234,16 @@ may still have a separate taskbar entry on KDE/Wayland.
 
 ## Camera inspection
 
-Mouse drag supports continuous yaw/pitch revolutions with no pitch clamp.
-Horizontal motion rotates about world Y; vertical motion rotates about the
-camera's yawed right axis. The camera up axis follows the tumble, including
-upside-down views, without a world-up flip at either pole. This preserves the
-existing two-axis orbit convention; it does not introduce a separate roll control.
+Left-drag supports continuous yaw/pitch revolutions with no pitch clamp.
+Right-drag in the viewport orbits sideways about the camera's current screen-up
+axis, captured at right-button press. It keeps that axis, the target and camera
+radius fixed during the drag; vertical pointer motion does nothing. A new press
+captures a new axis after any left-drag tumble. It works without Auto Orbit or
+an active layer selection, and gives finer angular movement when zoomed close.
+A right drag temporarily suspends Auto Orbit; it resumes on release.
+During left-drag tumble, horizontal motion rotates about world Y and vertical
+motion rotates about the current camera right axis. The camera up axis follows
+that tumble, including upside-down views, without a world-up flip at either pole.
 Wheel zoom, free-camera WASD/Q/E movement, F (Frame scene), R (reset) and the
 chosen orbit center retain their previous roles. O toggles automatic world-Y
 orbit independently; manual dragging temporarily suspends it.
