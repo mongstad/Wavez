@@ -26,7 +26,9 @@ with the dock hidden. Details exposes readiness diagnostics; Jobs reopens existi
 operations, exposes supported cancellation and retains output/failure details.
 
 F1 hides/restores the resizable dock and legend; Space pauses; Left/Right
-steps; mouse drag tumbles continuously through full revolutions in either direction;
+steps; left-drag tumbles continuously through full revolutions in either direction;
+right-drag manually orbits the camera around the current target with distance-aware
+angular sensitivity, including when Auto Orbit is off and regardless of scene type;
 wheel zooms; F11 toggles fullscreen, hiding the top command bar until exit; maximized windows keep the bar. F frames the scene and R resets the camera.
 Horizontal drag retains world-Y yaw; vertical drag carries the camera up axis
 through the poles, allowing upside-down views without a snap. Auto orbit (O)

@@ -1,4 +1,4 @@
-"""Progressive wheel zoom on all SSC layers, external mesh and Linux packages."""
+"""Wheel zoom and manual camera orbit on SSC layers, external mesh and Linux packages."""
 import argparse
 import hashlib
 import json

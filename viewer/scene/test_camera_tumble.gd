@@ -25,6 +25,60 @@ func wheel(viewer, button: MouseButton) -> void:
 	var event := InputEventMouseButton.new(); event.button_index = button; event.pressed = true
 	viewer._unhandled_input(event)
 
+func manual_orbit(viewer, movement: Vector2) -> void:
+	var press := InputEventMouseButton.new()
+	press.button_index = MOUSE_BUTTON_RIGHT; press.pressed = true; press.position = Vector2(480, 320)
+	viewer._unhandled_input(press)
+	check(viewer.manual_orbit_dragging, "Right press in viewport begins manual orbit")
+	var motion := InputEventMouseMotion.new(); motion.position = press.position + movement
+	viewer._input(motion)
+	var release := InputEventMouseButton.new()
+	release.button_index = MOUSE_BUTTON_RIGHT; release.position = Vector2(0, 0)
+	viewer._input(release)
+	check(not viewer.manual_orbit_dragging, "Right release over chrome ends manual orbit")
+
+func manual_orbit_tests(viewer, kind: String) -> void:
+	viewer.orbit_enabled = false
+	viewer.dragging = false
+	viewer.camera_target = Vector3(2, -1, 3)
+	viewer.camera_distance = 40
+	viewer.half_extent = 12
+	viewer.yaw = .4; viewer.pitch = .2; viewer._update_camera()
+	var target: Vector3 = viewer.camera_target
+	var radius: float = viewer.camera_distance
+	var sample: Dictionary = viewer.committed_sample.duplicate(true)
+	var initial_yaw: float = viewer.yaw
+	var initial_pitch: float = viewer.pitch
+	var sensitivity: float = viewer._manual_orbit_sensitivity()
+	manual_orbit(viewer, Vector2(80, -60))
+	check(is_equal_approx(viewer.yaw, initial_yaw - 80*sensitivity) and is_equal_approx(viewer.pitch, initial_pitch + 60*sensitivity), kind + " right drag follows shared yaw and pitch")
+	check(viewer.camera_target == target and viewer.camera_distance == radius and absf(viewer.camera.position.distance_to(target)-radius) < .0001, kind + " orbit preserves center and radius")
+	check(viewer.committed_sample == sample, kind + " orbit leaves committed scientific sample untouched")
+	var stopped: Transform3D = viewer.camera.transform
+	var stray := InputEventMouseMotion.new(); stray.position = Vector2(700, 500); viewer._input(stray)
+	check(viewer.camera.transform == stopped, kind + " released right drag does not move camera")
+	viewer.camera_distance = 3; var close_sensitivity: float = viewer._manual_orbit_sensitivity()
+	viewer.camera_distance = 400; var far_sensitivity: float = viewer._manual_orbit_sensitivity()
+	check(close_sensitivity < sensitivity and sensitivity < far_sensitivity and close_sensitivity > 0, kind + " smooth distance response gives close precision and distant reach")
+	viewer.camera_distance = radius; viewer._update_camera()
+	wheel(viewer, MOUSE_BUTTON_WHEEL_UP)
+	check(viewer.camera_target == target and viewer.camera_distance < radius, kind + " wheel zoom composes with manual orbit")
+	var after_zoom: float = viewer.camera_distance
+	manual_orbit(viewer, Vector2(-35, 25))
+	check(viewer.camera_distance == after_zoom and viewer.camera_target == target, kind + " orbit after zoom preserves zoom state")
+	viewer.orbit_enabled = true; viewer.orbit_speed = .2
+	var press := InputEventMouseButton.new(); press.button_index = MOUSE_BUTTON_RIGHT; press.pressed = true; press.position = Vector2(480, 320)
+	viewer._unhandled_input(press)
+	var held_yaw: float = viewer.yaw
+	viewer.scene_layers.tick(.1)
+	check(viewer.yaw == held_yaw, kind + " right drag temporarily suspends Auto Orbit")
+	press.pressed = false; viewer._input(press)
+	viewer.scene_layers.tick(.1)
+	check(is_equal_approx(viewer.yaw, held_yaw + .02), kind + " Auto Orbit resumes after release")
+	viewer.orbit_enabled = false
+	viewer._focus_activity()
+	check(viewer.camera_target.is_finite() and viewer.camera_distance > 0, kind + " Frame Scene works after manual orbit")
+
 func math_tests(viewer) -> void:
 	viewer.camera_target = Vector3(3, -2, 7); viewer.camera_distance = 32
 	# Independent legacy reference: look_at is well-defined inside the old range.
@@ -60,6 +114,7 @@ func fixture_tests(viewer, kind: String) -> void:
 	viewer._open_capture(output.path_join(kind + ".ssc")); viewer.playing = false; viewer.orbit_enabled = false
 	check(viewer.frame_count == 2, kind + " fixture opened")
 	viewer._seek_time(.5)
+	manual_orbit_tests(viewer, kind)
 	var sample: Dictionary = viewer.committed_sample.duplicate(true)
 	var target: Vector3 = viewer.camera_target
 	viewer.yaw = .6; viewer.pitch = deg_to_rad(120); viewer._update_camera()
@@ -120,7 +175,7 @@ func run() -> void:
 	create_timer(120).timeout.connect(func():push_error("Camera test timed out");quit(1))
 	var viewer = Viewer.new(); viewer.offline_instance = true; root.add_child(viewer); viewer.set_process(false)
 	math_tests(viewer)
-	for kind in ["particles", "volume", "mesh"]: await fixture_tests(viewer,kind)
+	for kind in ["particles", "volume", "mesh", "mixed"]: await fixture_tests(viewer,kind)
 	var file := FileAccess.open(output.path_join("camera-report.json"),FileAccess.WRITE)
 	file.store_string(JSON.stringify({"checks":checks,"failures":failures,"renderer":RenderingServer.get_current_rendering_method()},"\t")); file.close()
 	viewer.queue_free(); await process_frame
