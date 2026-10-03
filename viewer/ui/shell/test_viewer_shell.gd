@@ -139,9 +139,9 @@ func run() -> void:
 	check(viewer.tools_ui.current == "Data", "Numerical export routes to existing controller")
 	activate(shell,"image"); await settle()
 	check(viewer.tools_ui.current == "Image", "Image menu reaches existing sidecar option")
-	var save := preload("res://analysis/ui_controls.gd").button(viewer.tools_ui.form("Image"),"Image")
+	var save: Button = viewer.tools_ui.find_button(viewer.tools_ui.footers["Image"],"Save image…")
 	save.pressed.emit(); await settle()
-	check(viewer.screenshot_dialog.visible and viewer.screenshot_pending, "PNG action routes to canonical folder picker")
+	check(viewer.screenshot_dialog.use_native_dialog and viewer.screenshot_pending, "PNG action routes to native folder picker")
 	viewer.screenshot_dialog.canceled.emit(); viewer.screenshot_dialog.hide(); viewer.tools_ui.close()
 	check(not viewer.screenshot_pending and viewer.screenshot_directory.is_empty(), "PNG cancel retains existing session semantics")
 	activate(shell,"keyboard_shortcuts"); await settle()
@@ -180,7 +180,7 @@ func run() -> void:
 	viewer.tools_ui.durable_controls.Data.pressed.emit(); await settle()
 	var picker: FileDialog
 	for child in temporal.durable.get_children():
-		if child is FileDialog and child.visible: picker = child
+		if child is FileDialog and child.use_native_dialog: picker = child
 	check(picker != null,"Data action opens existing destination picker")
 	if picker != null:
 		picker.dir_selected.emit(output); picker.hide()

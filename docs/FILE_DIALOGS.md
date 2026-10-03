@@ -6,8 +6,12 @@ File**, and its sole format filter is **WAVEZ Scene Format** (`*.wvz`). The
 desktop environment owns native bookmarks, Recent locations, navigation,
 accessibility, Open and Cancel behavior. Godot falls back to its built-in
 FileDialog on display servers without a native picker; its saved navigation
-lists continue to work there. Video export retains its existing built-in
-picker and shared Godot navigation preferences. See the
+lists continue to work there. Issue #161 extends native selection to video MP4,
+image-folder, geometry-override, diagnostic-data, inspection-state and other
+genuine File/Tools filesystem pickers. Wavez-owned configuration and analysis
+forms remain custom themed surfaces. Godot's navigation preferences continue
+to serve built-in fallback pickers; the desktop owns native picker navigation.
+See the [current dialog inventory](DIALOG_COHERENCE.md) and the
 [current format policy](CAPTURE_FORMAT_POLICY.md).
 The [issue #181 validation record](evidence/issue-181/README.md) separates
 automated checks from physical desktop review.

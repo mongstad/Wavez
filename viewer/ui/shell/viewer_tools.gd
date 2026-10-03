@@ -22,6 +22,11 @@ var storage: Control
 var surface: PanelContainer
 var window: Window
 var content: VBoxContainer
+var heading: Label
+var scroller: ScrollContainer
+var close_button: Button
+var done_button: Button
+var actions_row: HBoxContainer
 var forms := {}
 var scroll_positions := {}
 var current := ""
@@ -46,22 +51,33 @@ var selection_context: VBoxContainer
 func setup(owner_viewer, canvas: CanvasLayer) -> void:
 	viewer = owner_viewer
 	storage = Control.new(); storage.hide(); canvas.add_child(storage)
-	window = Window.new(); window.title = "Tools"; window.transient = true
+	window = Window.new(); window.title = "Tools"; window.transient = true; window.borderless = true
 	# A plain Window starts visible; hide before entering the tree to prevent a launch popup.
 	window.hide()
-	window.min_size = Vector2i(320,240); window.size = Vector2i(520,600)
+	window.min_size = Vector2i(320,240); window.size = Vector2i(440,240)
 	window.close_requested.connect(close); canvas.add_child(window)
+	window.window_input.connect(func(event: InputEvent):
+		if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE: close())
 	surface = PanelContainer.new(); window.add_child(surface); surface.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	var margin := MarginContainer.new(); surface.add_child(margin)
-	for side in ["left","right","top","bottom"]: margin.add_theme_constant_override("margin_"+side,12)
-	var box := VBoxContainer.new(); margin.add_child(box)
-	context = Label.new(); context.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; box.add_child(context)
-	var scroll := ScrollContainer.new(); scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED; box.add_child(scroll)
-	content = VBoxContainer.new(); content.size_flags_horizontal = Control.SIZE_EXPAND_FILL; scroll.add_child(content)
-	notice = Label.new(); notice.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; box.add_child(notice)
+	for side in ["left","right","top","bottom"]: margin.add_theme_constant_override("margin_"+side,16)
+	var box := VBoxContainer.new(); box.add_theme_constant_override("separation",10); margin.add_child(box)
+	var header := HBoxContainer.new(); box.add_child(header)
+	heading = Label.new(); heading.theme_type_variation = "PanelTitle"; heading.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	heading.mouse_filter = Control.MOUSE_FILTER_IGNORE; header.add_child(heading)
+	close_button = Button.new(); close_button.text = "×"; close_button.tooltip_text = "Close"; close_button.custom_minimum_size = Vector2(32,32)
+	close_button.theme_type_variation = "IconAction"; close_button.pressed.connect(close); header.add_child(close_button)
+	header.gui_input.connect(func(event: InputEvent):
+		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed and not window.is_embedded() and DisplayServer.has_feature(DisplayServer.FEATURE_WINDOW_DRAG):
+			DisplayServer.window_start_drag(window.get_window_id()))
+	context = Label.new(); context.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; context.hide(); box.add_child(context)
+	scroller = ScrollContainer.new(); scroller.size_flags_vertical = Control.SIZE_EXPAND_FILL; scroller.follow_focus = true
+	scroller.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED; box.add_child(scroller)
+	content = VBoxContainer.new(); content.size_flags_horizontal = Control.SIZE_EXPAND_FILL; scroller.add_child(content)
+	notice = Label.new(); notice.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; notice.theme_type_variation = "HelpLabel"; notice.hide(); box.add_child(notice)
 	footer = VBoxContainer.new(); box.add_child(footer)
-	var close_button := Button.new(); close_button.text = "Close"; close_button.pressed.connect(close); box.add_child(close_button)
+	actions_row = HBoxContainer.new(); actions_row.alignment = BoxContainer.ALIGNMENT_END; box.add_child(actions_row)
+	done_button = Button.new(); done_button.text = "Close"; done_button.theme_type_variation = "SecondaryButton"; done_button.pressed.connect(close); actions_row.add_child(done_button)
 
 func form(title: String) -> VBoxContainer:
 	if not forms.has(title):
@@ -93,19 +109,32 @@ func open(title: String) -> void:
 			control.reparent(body); body.move_child(control,0)
 	body.reparent(content); body.show()
 	if footers.has(title):footers[title].reparent(footer)
+	if footers.has(title):
+		done_button.reparent(footers[title]); actions_row.hide()
+	else:
+		done_button.reparent(actions_row); actions_row.show()
 	share_analysis(title)
 	shorten_copy(body)
 	shorten_copy(footer)
 	Layout.fit(body)
 	Layout.fit(footer)
+	for row in footer.get_children():
+		for action in row.get_children():
+			if action is Button: action.clip_text = false
 	content.get_parent().set_deferred("scroll_vertical",scroll_positions.get(title,0))
 	window.title = title
+	heading.text = title
 	refresh_context()
-	window.theme = viewer.shell.theme
-	surface.add_theme_stylebox_override("panel",viewer.shell.theme.dialog_body(&"surface.1", &"border.subtle",0,0))
+	window.theme = viewer.shell.style_slice.theme
+	close_button.icon = viewer.shell.style_slice.theme.chrome_icon("close"); close_button.text = ""
+	surface.add_theme_stylebox_override("panel",viewer.shell.style_slice.theme.flat_box(&"surface.1",0,0,0))
 	var extent: Vector2 = viewer.get_viewport().get_visible_rect().size
-	var desired := Vector2i(440,240) if title == "Global effects" else Vector2i(600,720)
-	window.popup_centered(Vector2i(minf(desired.x,extent.x-32),minf(desired.y,extent.y-64)))
+	var width := 440 if title in ["Mapping","Diagnostics","Slice","Clipping","Source probe","Geometry","Camera","Global effects"] else 560
+	var content_height := body.get_combined_minimum_size().y
+	var footer_height := footer.get_combined_minimum_size().y
+	var chrome_height := 32 + 32 + 32 + 30 + footer_height
+	var desired := Vector2i(width,clampi(ceili(content_height + chrome_height),240,620))
+	window.popup_centered(Vector2i(minf(desired.x,extent.x-32),minf(desired.y,extent.y-32)))
 	refresh_context()
 
 func reversed_shared() -> Array:
@@ -150,9 +179,16 @@ func finish_static() -> void:
 	for pair in [["members",temporal.durable.include_members],["results",temporal.durable.bundle_results]]:
 		pair[1].reparent(state_body); durable_controls[pair[0]] = pair[1]
 	durable_controls.shared = shared
+	for title in ["Data","Save analysis","Load analysis"]:
+		var row := HBoxContainer.new(); row.alignment = BoxContainer.ALIGNMENT_END
+		row.add_theme_constant_override("separation",8); storage.add_child(row)
+		var action: Button = durable_controls[title]; action.reparent(row)
+		action.theme_type_variation = "PrimaryButton"
+		footers[title] = row
 	for title in ["Mapping","Derive range","Slice","Clipping","Isosurface","Source probe","Performance","Geometry","Camera"]: form(title)
 
 	compose_tasks()
+	action_footer("Image",["Save image…"])
 
 func shorten_copy(parent: Node) -> void:
 	for child in parent.get_children():
@@ -163,25 +199,18 @@ func shorten_copy(parent: Node) -> void:
 
 func refresh_context() -> void:
 	if not window.visible: return
-	var source: String = viewer.capture_path.get_file() if viewer.generic_reader != null else "No capture"
-	context.text = "All simulation content" if current == "Global effects" else source
-	var selection = viewer.selection_controller;var temporal = selection.temporal
-	if current in ["Selection","Temporal","Space time","Bookmarks"]:
-		var target = selection.target
-		var object: String = target.get_item_text(target.selected) if target.selected >= 0 else "Unbound"
-		context.text = str(selection.source.get("path","Unbound source")).get_file()+" · "+object
-		if current in ["Temporal","Space time"]:context.text += "\n"+temporal.channel.text+" · "+temporal.start_time.text+" to "+temporal.end_time.text
-	elif current in ["Results","Compare","Period"]:
-		context.text = str(temporal.current_source.get("path","No result source")).get_file()
-		if temporal.series_list.selected >= 0:context.text += " · "+temporal.series_list.get_item_text(temporal.series_list.selected)
-	elif current == "Matched runs":
-		context.text = "Left: "+str(temporal.matched.sides[0].path).get_file()+" · Right: "+str(temporal.matched.sides[1].path).get_file()
+	# Source identity belongs to Details, Diagnostics, or the export result.
+	context.hide()
 
 func action_footer(title: String, labels: Array) -> void:
-	var body := form(title); var actions := HBoxContainer.new();storage.add_child(actions)
-	for text in labels:
+	var body := form(title); var actions := HBoxContainer.new();actions.add_theme_constant_override("separation",8);storage.add_child(actions)
+	for index in labels.size():
+		var text: String = labels[index]
 		var button := find_button(body,text)
-		if button != null:button.reparent(actions);button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		if button != null:
+			button.reparent(actions);button.size_flags_horizontal = Control.SIZE_SHRINK_END
+			button.theme_type_variation = "PrimaryButton" if index == 0 else "SecondaryButton"
+	actions.alignment = BoxContainer.ALIGNMENT_END
 	if actions.get_child_count() > 0:footers[title] = actions
 	else:actions.free()
 
@@ -220,6 +249,12 @@ func compose_tasks() -> void:
 			"Space time":["Run space-time analysis","Show space-time plot"],"Diagnostics":["Import diagnostic CSV"],
 			"Compare":["Compare left and right"],"Period":["Estimate period in selected range"],"Matched runs":["Prepare matched views…","Render matched views","Cancel matched views"]}.get(title,[]))
 		Layout.grouped_pages(form(title),{"Selection":"Source and gestures","Temporal":"Request","Matched runs":"Sources and output"}.get(title,"Task"))
+	# Diagnostics opens on its actionable import form instead of an empty Task page.
+	for child in form("Diagnostics").get_children():
+		if child is OptionButton and child.has_meta("tool_pages"):
+			for index in child.item_count:
+				if child.get_item_text(index).contains("Import CSV"):
+					child.select(index); child.item_selected.emit(index); break
 	selection_context = Layout.page(storage)
 	move_input(selection.name_input,selection_context);selection.selections.reparent(selection_context)
 	for child in form("Selection").get_children():
@@ -315,7 +350,11 @@ func _process(_delta: float) -> void:
 	var selection = viewer.selection_controller
 	var temporal = selection.temporal
 	var statuses := {"Selection":selection.status,"Temporal":temporal.status,"Space time":temporal.space_time.status,"Matched runs":temporal.matched.status,"Diagnostics":temporal.diagnostics.status,"Compare":temporal.diagnostics.status,"Period":temporal.diagnostics.status,"Bookmarks":temporal.diagnostics.status}
-	notice.text = statuses[current].text if statuses.has(current) else viewer.status_label.text
+	var status: String = statuses[current].text if statuses.has(current) else ""
+	# Empty and introductory copy should not become a permanent duplicate footer.
+	var introductory := status.begins_with("Import a diagnostic CSV") or status.begins_with("Choose a selection")
+	notice.text = status
+	notice.visible = not status.is_empty() and not introductory
 	if viewer.scene_layers != null:
 		viewer.scene_layers.refresh_probe_stamp()
 

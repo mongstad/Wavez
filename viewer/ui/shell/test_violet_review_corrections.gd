@@ -97,7 +97,7 @@ func run() -> void:
 		check(tools.window.visible and tools.current == title and tools.forms[title].is_visible_in_tree(), title + " tool visibly opens from Fullscreen menu")
 		check(tools.window.size.x >= 320 and tools.window.size.y >= 240 and tools.window.position.y >= 0, title + " has usable Fullscreen bounds")
 		check(shell.edge_reveal.popup_active(viewer), title + " protects edge reveal while dialog is open")
-		var close_button: Button = tools.footer.get_parent().get_child(tools.footer.get_index() + 1)
+		var close_button: Button = tools.done_button
 		close_button.grab_focus()
 		check(close_button.has_focus(), title + " dialog accepts keyboard focus")
 		opened.append({"tool":title,"native_mode":root.mode,"embedded":tools.window.is_embedded(),"size":str(tools.window.size)})

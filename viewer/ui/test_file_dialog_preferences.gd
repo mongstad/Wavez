@@ -71,7 +71,7 @@ func run() -> void:
 	var video: FileDialog = viewer.video_dialog.save_dialog
 	check(capture.title == "Open File" and not capture.mode_overrides_title, "Native file-open title")
 	check(video.title == "Export video" and not video.mode_overrides_title, "Video title")
-	check(capture.use_native_dialog and not video.use_native_dialog, "Native scene picker and existing video picker configured")
+	check(capture.use_native_dialog and video.use_native_dialog, "Scene and video pickers request native desktop integration")
 	if DisplayServer.get_name() != "headless":
 		check(DisplayServer.has_feature(DisplayServer.FEATURE_NATIVE_DIALOG_FILE), "Desktop supports native file dialog")
 	check(capture.filters == PackedStringArray(["*.wvz ; WAVEZ Scene Format"]), "Single current WAVEZ Scene Format filter")
@@ -91,6 +91,7 @@ func run() -> void:
 	# The navigation-preference regression drives Godot's embedded controls.
 	# Native desktop bookmarks and Recent belong to the OS picker.
 	capture.use_native_dialog = false
+	video.use_native_dialog = false
 	if phase == "capture_add":
 		check(FileDialog.get_recent_list().is_empty() and FileDialog.get_favorite_list().is_empty(), "Fresh process starts without navigation history")
 		await toggle_favorite(capture, directory("capture"))

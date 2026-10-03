@@ -1,5 +1,12 @@
 # Current status
 
+Issue #161 gives File and Tools application-owned dialogs a compact Wavez
+surface, consistent actions and scrolling, and removes repeated loaded-scene
+identity from tool headings. Genuine filesystem selection uses the native
+desktop picker where supported. The accepted #181 Open File picker and its
+WVZ1 filter remain unchanged. Candidate build 33 awaits owner visual review;
+see the [route inventory, dimensions and screenshots](DIALOG_COHERENCE.md).
+
 Issue #182's [clean-break design](FORMAT_IDENTITY_PROPOSAL.md) was owner-merged
 in PR #213. Issue #215's **WAVEZ Scene Format** (`.wvz`, WVZ1) implementation
 was owner-merged in PR #216 as build 31. The writer, Python
@@ -10,10 +17,10 @@ original format claims and test results. See the
 [WVZ1 implementation validation](WVZ1_IMPLEMENTATION_VALIDATION.md) for the
 real Python simulation artifact, native/package checks and owner steps.
 
-Issue #181 opens WVZ1 scene files through the desktop's native picker where
+Owner-merged issue #181 opens WVZ1 scene files through the desktop's native picker where
 supported, using **Open File** and **WAVEZ Scene Format** (`*.wvz`) in the
 file-open flow. The built-in picker remains Godot's fallback; video export
-keeps its existing picker. Candidate build 32 awaits owner review. See the
+kept its existing picker at that review checkpoint. Build 32 was accepted in PR #218. See the
 [current dialog behavior](FILE_DIALOGS.md) and [issue validation](evidence/issue-181/README.md).
 
 Issue #202 selects **Meshes** in the Simulation panel after a successful

@@ -46,6 +46,7 @@ func choose_export() -> void:
 	if temporal.current_result.is_empty():status.text = "Select a complete numerical result first.";return
 	if not folder_name.text.is_valid_filename():status.text = "Choose a valid new folder name.";return
 	var dialog := FileDialog.new();dialog.file_mode = FileDialog.FILE_MODE_OPEN_DIR;dialog.access = FileDialog.ACCESS_FILESYSTEM;dialog.title = "Choose parent directory for the new numerical export"
+	dialog.use_native_dialog = true;dialog.mode_overrides_title = false
 	add_child(dialog);dialog.dir_selected.connect(func(parent):export_to(parent.path_join(folder_name.text));dialog.queue_free())
 	dialog.canceled.connect(dialog.queue_free);dialog.popup_centered_ratio(.7)
 
@@ -83,11 +84,13 @@ func fingerprint() -> String:
 
 func choose_input() -> void:
 	var dialog := FileDialog.new();dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE;dialog.access = FileDialog.ACCESS_FILESYSTEM;dialog.title = "Locate a referenced capture, CSV or surface"
+	dialog.use_native_dialog = true;dialog.mode_overrides_title = false
 	add_child(dialog);dialog.file_selected.connect(func(path):remember_path(path);status.text = "Referenced input selected: "+path;dialog.queue_free());dialog.canceled.connect(dialog.queue_free);dialog.popup_centered_ratio(.7)
 
 func choose_save() -> void:
 	if not folder_name.text.is_valid_filename():status.text = "Choose a valid new bundle folder name.";return
 	var dialog := FileDialog.new();dialog.file_mode = FileDialog.FILE_MODE_OPEN_DIR;dialog.access = FileDialog.ACCESS_FILESYSTEM;dialog.title = "Choose parent for the new recipe bundle"
+	dialog.use_native_dialog = true;dialog.mode_overrides_title = false
 	add_child(dialog);dialog.dir_selected.connect(func(parent):save_to(parent.path_join(folder_name.text+".inspection"));dialog.queue_free());dialog.canceled.connect(dialog.queue_free);dialog.popup_centered_ratio(.7)
 
 func save_to(destination: String, scene_only := false, output_quota := -1) -> void:
@@ -102,6 +105,7 @@ func save_to(destination: String, scene_only := false, output_quota := -1) -> vo
 
 func choose_load() -> void:
 	var dialog := FileDialog.new();dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE;dialog.access = FileDialog.ACCESS_FILESYSTEM;dialog.title = "Load G4 inspection or frame state";dialog.filters = PackedStringArray(["*.json ; G4 inspection or frame state"])
+	dialog.use_native_dialog = true;dialog.mode_overrides_title = false
 	add_child(dialog);dialog.file_selected.connect(func(path):load_from(path);dialog.queue_free());dialog.canceled.connect(dialog.queue_free);dialog.popup_centered_ratio(.7)
 
 func load_from(path: String) -> void:
