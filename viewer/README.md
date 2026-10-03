@@ -37,7 +37,9 @@ For left-drag, horizontal motion retains world-Y yaw and vertical motion carries
 the camera up axis through the poles, allowing upside-down views without a snap.
 On a clean launch Free camera is enabled and Auto orbit is disabled; O toggles
 Auto orbit, and Free Camera is an unbound editable shortcut action under
-Edit → Preferences → Keyboard Shortcuts. Auto orbit remains a separate world-Y
+Edit → Preferences → Keyboard Shortcuts. Each toggle leaves the other mode
+unchanged, and assigning an existing key transfers it to one action.
+Auto orbit remains a separate world-Y
 rotation and pauses while dragging. Open… opens
 files. Show panels and Exit fullscreen provide mouse recovery. Scalar colormaps use the bundled lookup data described in
 [COLORMAPS_LICENSE.txt](COLORMAPS_LICENSE.txt).

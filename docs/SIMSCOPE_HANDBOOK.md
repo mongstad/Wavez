@@ -241,6 +241,11 @@ and starts unbound. Opening a capture or resetting the camera preserves the
 current navigation modes. A loaded view preset may explicitly restore either
 mode; an inspection recipe restores its saved Auto orbit setting, while Free
 camera is session-only. Shortcut preferences store bindings, not mode states.
+The two toggles are independent: Free camera never changes Auto orbit, and
+Auto orbit never changes Free camera or clears an inspection pause. If F is
+assigned to Free Camera, its prior Frame Scene binding becomes Unbound; one
+key event invokes one action. The Navigate menu uses the same independent
+toggles.
 
 Left-drag supports continuous yaw/pitch revolutions with no pitch clamp.
 Right-drag in the viewport orbits sideways about the camera's current screen-up

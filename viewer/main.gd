@@ -633,10 +633,10 @@ func _dispatch_shortcut(action: String) -> void:
 		"previous_category": shell.cycle_category(-1)
 
 func _toggle_auto_orbit() -> void:
-	orbit_enabled = not orbit_enabled; inspection_paused = false; _sync_control_state()
+	orbit_enabled = not orbit_enabled; _sync_control_state()
 
 func _toggle_free_camera() -> void:
-	free_camera = not free_camera; orbit_enabled = not free_camera; _sync_control_state()
+	free_camera = not free_camera; _sync_control_state()
 
 func _reset_camera() -> void:
 	if shell != null: shell.dismiss_orbit_editor()
