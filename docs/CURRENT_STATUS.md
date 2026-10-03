@@ -1,9 +1,17 @@
 # Current status
 
-Issue #198 confines video frames to the scientific viewport and enabled
-viewport legends. The Video Export dialog remains authoritative for rendering
+Issue #204 opens a successful scene paused at its first recorded sample.
+Automatic particle, field and mesh preparation continues through the shared
+bounded scheduler while the clock stays still; valid prepared coverage remains
+resident during pauses unless source/configuration changes or resource limits
+require eviction. Candidate build 35 awaits owner review. See the
+[playback and cache contract](WAVEZ_HANDBOOK.md) and
+[focused validation and owner checks](PAUSED_PREPARATION.md).
+
+Owner-merged issue #198 confines video frames to the scientific viewport and
+enabled viewport legends. The Video Export dialog remains authoritative for rendering
 preset, overlays, camera, timing, resolution and other job settings; shell
-controls stay outside the frame. Candidate build 34 awaits owner review. See
+controls stay outside the frame. Build 34 was accepted in PR #225. See
 the [current export contract](../VIDEO_EXPORT.md) and
 [viewport composition evidence](VIDEO_VIEWPORT_EXPORT.md).
 
