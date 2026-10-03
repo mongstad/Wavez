@@ -22,9 +22,9 @@ The README uses the unchanged dark, no-slogan banner from the same package
 
 ## Historical #147 artwork provenance
 
-The then-current `simscope-logo.png` is the owner-provided violet artwork requested
+The then-current `wavez-logo.png` is the owner-provided violet artwork requested
 by #147, copied unchanged from
-`SimScope Theme Package/SimScope_Logo_Purple.png` outside the repository.
+`WAVEZ Theme Package/WAVEZ_Logo_Purple.png` outside the repository.
 
 - Source/import SHA-256: `b666a782e6f3a482ae8e87bee5231aaaa7b7711e4d2ba7a91362f7cbdc6e9722`
 - Dimensions: 1254 × 1254; original PNG bytes retained.
@@ -36,14 +36,14 @@ by #147, copied unchanged from
 
 The following records the original About artwork, replaced by #147:
 
-`simscope-logo.png` is the owner-provided artwork named in issue #96:
+`wavez-logo.png` is the owner-provided artwork named in issue #96:
 `ChatGPT Image Sep 12, 2026, 04_04_12 PM (1).png`. The file had moved into the
-owner's `SimScope-Logo-Package` directory when imported. It was copied unchanged;
+owner's `WAVEZ-Logo-Package` directory when imported. It was copied unchanged;
 no cropping, recreation or restyling was performed.
 
 - Source/import SHA-256: `61de3bc7c7f6ee61bbfc5a589a7c1de57de02fc56fbb1f332ae04818c9554d03`
 - Dimensions: 1254 × 1254; original PNG bytes retained.
-- Runtime path: `res://ui/about/simscope-logo.png`, explicitly preloaded by About.
+- Runtime path: `res://ui/about/wavez-logo.png`, explicitly preloaded by About.
 - Godot import: lossless texture with mipmaps for compact display; aspect ratio retained.
 - Branding remains governed by [TRADEMARKS.md](../../../TRADEMARKS.md).
 

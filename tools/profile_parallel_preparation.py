@@ -49,7 +49,7 @@ def main():
     command += ['--script', 'layers/profile_parallel_preparation.gd', '--', str(source), str(out/'result.json'), str(a.samples), str(a.first), str(a.cache_mib), str(a.play_seconds), json.dumps(a.speeds)]
     telemetry = [];started = time.monotonic();phase = 'startup';position = 0
     with (out/'native.log').open('w') as log:
-        process = subprocess.Popen(command, stdout=log, stderr=subprocess.STDOUT, env=dict(os.environ, SIMSCOPE_FIELD_WORKERS=str(a.workers)))
+        process = subprocess.Popen(command, stdout=log, stderr=subprocess.STDOUT, env=dict(os.environ, WAVEZ_FIELD_WORKERS=str(a.workers)))
         while process.poll() is None:
             if time.monotonic()-started > 1800:
                 process.kill();process.wait();raise TimeoutError('Native benchmark')

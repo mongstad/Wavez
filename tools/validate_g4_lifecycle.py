@@ -10,7 +10,7 @@ from wavez_export.analysis import SourceSnapshot,selectors as S
 def main():
     parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--output-dir',type=Path,required=True);parser.add_argument('--cycles',type=int,default=30);args=parser.parse_args()
     if not 10<=args.cycles<=100:parser.error('Use 10–100 lifecycle cycles')
-    out=args.output_dir.resolve();out.mkdir(parents=True,exist_ok=False);path=out/'long.ssc';checks=[];samples=[];process=None;worker=None;serial=0
+    out=args.output_dir.resolve();out.mkdir(parents=True,exist_ok=False);path=out/'long.wvz';checks=[];samples=[];process=None;worker=None;serial=0
     with SceneCapture(path,objects=[dict(id='p',kind='particles',units='m',identity='persistent_i8')],metadata=dict(time_unit='s',position_unit='m'),compression='zstd') as writer:
         ids=np.arange(64,dtype='i8')+2**53+1
         for n in range(512):

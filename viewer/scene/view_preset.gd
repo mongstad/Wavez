@@ -1,6 +1,6 @@
 extends RefCounted
 ## Portable presentation only. Never resolves a source, sample, selection or result.
-const KIND := "simscope-view-preset"
+const KIND := "wavez-view-preset"
 const VERSION := 1
 const MAX_BYTES := 65536
 const Visual = preload("res://scene/visual_state.gd")

@@ -47,7 +47,7 @@ func start(cache_root := "") -> bool:
 	var headroom := Buffer.memory_headroom()
 	if headroom.available_physical < headroom.reserve+memory_bytes+256*1048576:
 		error = "Analysis paused to preserve physical RAM headroom.";failed.emit(error);return false
-	var base: String = cache_root if not cache_root.is_empty() else ProjectSettings.globalize_path("res://../.simscope-cache/analysis-workers")
+	var base: String = cache_root if not cache_root.is_empty() else ProjectSettings.globalize_path("res://../.wavez-cache/analysis-workers")
 	directory = base.path_join("%d-%d" % [OS.get_process_id(),Time.get_ticks_usec()])
 	if DirAccess.make_dir_recursive_absolute(directory) != OK:
 		error = "Cannot create private analysis job directory.";failed.emit(error);return false

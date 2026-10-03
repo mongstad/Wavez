@@ -267,7 +267,7 @@ func start_export() -> void:
 	last_progress = {}
 	launch_ticks = Time.get_ticks_msec()
 	progress_ticks = launch_ticks
-	var name := ".simscope-export-%d-%d" % [Time.get_unix_time_from_system(), Time.get_ticks_usec()]
+	var name := ".wavez-export-%d-%d" % [Time.get_unix_time_from_system(), Time.get_ticks_usec()]
 	active_directory = job.output_path.get_base_dir().path_join(name)
 	active_job_path = active_directory.path_join("job.json")
 	if DirAccess.make_dir_recursive_absolute(active_directory) != OK:

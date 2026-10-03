@@ -1,4 +1,4 @@
-"""SIMSCP4 summaries, contiguous fields and bounded refusal."""
+"""WVZ1 summaries, contiguous fields and bounded refusal."""
 import hashlib
 from pathlib import Path
 import struct
@@ -10,7 +10,7 @@ import numpy as np
 from wavez_export import SceneCapture, SceneReader
 from wavez_export import scene, storage
 from wavez_export.field_statistics import summarize, validate, verify
-from tools.verify_ssc import verify as verify_capture
+from tools.verify_wvz import verify as verify_capture
 
 
 class FieldStatisticsTests(unittest.TestCase):
@@ -50,10 +50,10 @@ class FieldStatisticsTests(unittest.TestCase):
 
     def test_mandatory_summary_and_exact_bits(self):
         with tempfile.TemporaryDirectory() as directory:
-            path = Path(directory)/'capture.ssc'; values = self.fixture(path)
+            path = Path(directory)/'capture.wvz'; values = self.fixture(path)
             self.assertEqual(verify_capture(path), 4)
             with SceneReader(path) as reader:
-                self.assertEqual(reader.metadata['version'], 4)
+                self.assertEqual(reader.metadata['version'], 1)
                 self.assertIn('statistics_v1', reader.records[0]['descriptor']['arrays'][0])
                 self.assertEqual(reader.read_sample('field', 0)['exact'].tobytes(), values.tobytes())
                 desc = reader.records[0]['descriptor']; spec = desc['arrays'][0]
@@ -65,7 +65,7 @@ class FieldStatisticsTests(unittest.TestCase):
 
     def test_writer_and_verifier_reject_forged_summary(self):
         with tempfile.TemporaryDirectory() as directory:
-            path = Path(directory)/'capture.ssc'; self.fixture(path)
+            path = Path(directory)/'capture.wvz'; self.fixture(path)
             self.assertEqual(verify_capture(path), 4)
             raw = path.read_bytes(); start = 16+scene.PREFIX.unpack(raw[:16])[2]
             header = list(scene.FRAME.unpack(raw[start:start+80])); dlen = header[1]
@@ -75,7 +75,7 @@ class FieldStatisticsTests(unittest.TestCase):
             data = storage.dumps(desc); header[1] = len(data); header[-1] = hashlib.sha256(data).digest()
             h = scene.FRAME.pack(*header); end = start+128+dlen+header[2]
             path.write_bytes(raw[:start]+h+data+raw[start+80+dlen:end-48]+
-                             scene.COMMIT.pack(b'COMMIT4\0', 0, hashlib.sha256(h+data).digest())+raw[end:])
+                             scene.COMMIT.pack(b'COMMIT1\0', 0, hashlib.sha256(h+data).digest())+raw[end:])
             with self.assertRaisesRegex(ValueError, 'differs from source'):verify_capture(path)
 
 

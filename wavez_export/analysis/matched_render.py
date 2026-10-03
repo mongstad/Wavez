@@ -124,7 +124,7 @@ def run(source,arguments,cache,*,provenance=None):
             if any(descriptions[0][part][k]!=descriptions[1][part][k] for k in ('units','reference')):raise AnalysisError('incompatible_units','Both runs must declare the same common units and reference')
         output=Output(arguments['destination'],common['quota_bytes'],source.context)
         try:
-            comparison=dict(kind='simscope-matched-render',version=1,inputs=descriptions,common=common,frames=frames,provenance=provenance or {},selection_correspondence='explicit source-scoped lists; no automatic ID match',coordinate_policy='same declared viewer_world origin/axes/units; original object transforms unchanged',sampling='independent source brackets; scalar hold; position interpolation only where provided by G2/G3',legend='shared mapped bounds and units in comparison.json; native per-source legends suppressed')
+            comparison=dict(kind='wavez-matched-render',version=1,inputs=descriptions,common=common,frames=frames,provenance=provenance or {},selection_correspondence='explicit source-scoped lists; no automatic ID match',coordinate_policy='same declared viewer_world origin/axes/units; original object transforms unchanged',sampling='independent source brackets; scalar hold; position interpolation only where provided by G2/G3',legend='shared mapped bounds and units in comparison.json; native per-source legends suppressed')
             paths=[]
             for side,(recipe,timing,_) in zip(('left','right'),inputs):
                 initial_bytes=output.used

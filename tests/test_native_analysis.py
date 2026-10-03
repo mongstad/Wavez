@@ -18,7 +18,7 @@ from tests.g4.fixtures import scene,HIGH_ID
 class NativeTests(unittest.TestCase):
     def setUp(self):
         self.tmp=tempfile.TemporaryDirectory();self.root=Path(self.tmp.name)
-        self.path=scene(self.root/"capture.ssc");self.digest=hashlib.sha256(self.path.read_bytes()).hexdigest()
+        self.path=scene(self.root/"capture.wvz");self.digest=hashlib.sha256(self.path.read_bytes()).hexdigest()
         self.context=Context();self.source=SourceSnapshot(self.path,context=self.context)
         self.cache=ResultCache(self.root/"worker"/"results")
         self.ids=S.define(self.source,dict(object="p",kind="particle_ids",selector=dict(ids=["7",str(HIGH_ID),str(2**63-1)])))
@@ -127,7 +127,7 @@ class NativeTests(unittest.TestCase):
         self.assertEqual([r["value"] for r in rows if r["statistic"]=="mean"],["2"]*3)
 
     def test_interval_velocity_cancels_large_affine_translation(self):
-        path=self.root/"offset.ssc"
+        path=self.root/"offset.wvz"
         with SceneCapture(path,objects=[dict(id="p",kind="mesh",identity="stable_topology",units="m",data_to_world=[2,0,0,1e18,0,1,0,0,0,0,1,0])],metadata=dict(time_unit="s")) as writer:
             for t in (0,1):writer.add_mesh("p",t,np.array([[float(t),0,0],[float(t),1,0],[float(t),0,1]],dtype="f8"),[[0,1,2]],vertex_channels=dict(vertex_id=np.array([7,8,9],dtype="i8"),velocity=np.tile([9.,0,0],(3,1))))
         with SourceSnapshot(path) as source:
@@ -138,7 +138,7 @@ class NativeTests(unittest.TestCase):
         self.assertEqual([r["value"] for r in rows],["2","0","0"])
 
     def test_mesh_point_magnitude_follows_vector_interpolation(self):
-        path=self.root/"vector.ssc"
+        path=self.root/"vector.wvz"
         with SceneCapture(path,objects=[dict(id="mesh",kind="mesh",identity="none",static=True,units="m")]) as writer:
             writer.add_mesh("mesh",0,np.array([[0.,0,0],[1,0,0],[0,1,0]]),[[0,1,2]],vertex_channels=dict(velocity=np.array([[1.,0,0],[-1,0,0],[0,0,0]])))
         with SourceSnapshot(path) as source:

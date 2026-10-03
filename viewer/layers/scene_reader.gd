@@ -28,7 +28,7 @@ var records: Array[Dictionary] = []
 var frames: Array[Dictionary] = [] # union clock; never scientific particle samples
 var cache := Cache.new()
 var cache_dir := ""
-var format := "SIMSCP4"
+var format := "WVZ1"
 var generation := 0
 var scan_offset := 0
 var trusted := false
@@ -41,14 +41,14 @@ var last_index_ms := 0.0
 var _verify_payloads := true
 func _init(verify_payloads := true) -> void:
 	_verify_payloads = verify_payloads
-	var configured := OS.get_environment("SIMSCOPE_METADATA_BUDGET_MIB")
+	var configured := OS.get_environment("WAVEZ_METADATA_BUDGET_MIB")
 	if not configured.is_empty():
 		metadata_limit = int(configured)*1048576 if configured.is_valid_int() and int(configured) > 0 and int(configured) <= 8796093022207 else 0
 func admit_metadata(wire_bytes: int) -> bool:
 	var charge := wire_bytes*METADATA_FACTOR+RECORD_OVERHEAD
 	if metadata_limit <= 0 or charge > metadata_limit-metadata_reserved:
 		error_code = "metadata_capacity"
-		return fail("Reader metadata capacity exceeded: need %d bytes, budget %d. Increase SIMSCOPE_METADATA_BUDGET_MIB or metadata_limit; capture validity is unchanged." % [metadata_reserved+charge,metadata_limit])
+		return fail("Reader metadata capacity exceeded: need %d bytes, budget %d. Increase WAVEZ_METADATA_BUDGET_MIB or metadata_limit; capture validity is unchanged." % [metadata_reserved+charge,metadata_limit])
 	metadata_reserved += charge
 	return true
 func clear_metadata() -> void:
@@ -67,8 +67,9 @@ func configure_cache(bytes: int, _prefetch: bool) -> void: cache.configure(bytes
 func status() -> String: return "Synchronous layer reads • %s • %.1f / %.0f MiB • %d hits • last index %.0f ms" % [index_state,cache.used/1048576.0,cache.limit/1048576.0,cache.hits,last_index_ms]
 func open(path: String) -> bool:
 	source_path = ProjectSettings.globalize_path(path).simplify_path()
+	if source_path.get_extension() != "wvz":return fail("WAVEZ Scene Format requires a .wvz file.")
 	trusted = Stamp.supported(source_path)
-	cache_dir = ProjectSettings.globalize_path("res://../.simscope-cache")
+	cache_dir = ProjectSettings.globalize_path("res://../.wavez-cache")
 	return reload_source()
 func refresh() -> bool:
 	var started := Profile.begin()
@@ -96,15 +97,16 @@ func reload_source() -> bool:
 	return result
 func _reload_source_profiled() -> bool:
 	generation += 1;cache.clear();clear_metadata();error = "";error_code = ""
+	if source_path.get_extension() != "wvz":return fail("WAVEZ Scene Format requires a .wvz file.")
 	var metadata_started := Profile.begin()
 	var before := _source_stamp_profiled()
 	file = FileAccess.open(source_path,FileAccess.READ)
 	if file == null or file.get_length() < 16: return fail("Incomplete scene prefix.")
 	var prefix := file.get_buffer(16);var size := prefix.decode_u32(12)
-	if prefix.slice(0,8) != "SIMSCP4".to_utf8_buffer()+PackedByteArray([0]) or prefix.decode_u32(8) != 4 or size > 1048576 or size > file.get_length()-16: return fail("Unsupported scene version/header.")
+	if prefix.slice(0,8) != "WVZ1".to_utf8_buffer()+PackedByteArray([0,0,0,0]) or prefix.decode_u32(8) != 1 or size > 1048576 or size > file.get_length()-16: return fail("Unsupported scene version/header.")
 	if not admit_metadata(size):return false
 	var raw := file.get_buffer(size);var parsed = Hash.parse_json(raw.get_string_from_utf8())
-	if not parsed is Dictionary or parsed.get("version") != 4 or not Index.valid_hex(parsed.get("uuid"),32) or not parsed.get("objects") is Array or parsed.objects.is_empty() or parsed.objects.size() > 16: return fail("Invalid scene metadata/object table.")
+	if not parsed is Dictionary or parsed.get("version") != 1 or not Index.valid_hex(parsed.get("uuid"),32) or not parsed.get("objects") is Array or parsed.objects.is_empty() or parsed.objects.size() > 16: return fail("Invalid scene metadata/object table.")
 	metadata = parsed
 	var pattern := RegEx.new();pattern.compile("^[a-z][a-z0-9_]*$")
 	var particle_objects := 0
@@ -133,7 +135,7 @@ func _reload_source_profiled() -> bool:
 		if end-offset < 80: break
 		file.seek(offset);var h := file.get_buffer(80)
 		var dlen := h.decode_u32(4);var stored := h.decode_u64(8);var decoded := h.decode_u64(16);var time := h.decode_double(24);var oi := h.decode_u32(32);var n := h.decode_u32(36);var seq := h.decode_u64(40)
-		if h.slice(0,4).get_string_from_ascii() != "FRM4" or dlen > 4*1048576 or stored < 0 or stored > MAX_SAMPLE+64*1048576 or decoded < 0 or decoded > MAX_SAMPLE or oi >= metadata.objects.size() or seq != records.size() or n < 1 or n > 256 or not is_finite(time): return fail("Scene header/allocation ceiling.")
+		if h.slice(0,4).get_string_from_ascii() != "FRM1" or dlen > 4*1048576 or stored < 0 or stored > MAX_SAMPLE+64*1048576 or decoded < 0 or decoded > MAX_SAMPLE or oi >= metadata.objects.size() or seq != records.size() or n < 1 or n > 256 or not is_finite(time): return fail("Scene header/allocation ceiling.")
 		if 128+dlen+stored > end-offset: break
 		if seq >= 1000000:
 			error_code = "metadata_capacity"
@@ -172,7 +174,7 @@ static func materialize(source: FileAccess, entry: Dictionary, obj: Dictionary) 
 	if not problem.is_empty():return {"error":record_error(entry,problem)}
 	if desc.arrays.size() != entry.array_count:return {"error":record_error(entry,"Array count mismatch.")}
 	source.seek(entry.end-48);var trailer := source.get_buffer(48);var proof := h.duplicate();proof.append_array(d)
-	if trailer.slice(0,8) != "COMMIT4".to_utf8_buffer()+PackedByteArray([0]) or trailer.decode_u64(8) != entry.sequence or trailer.slice(16).hex_encode() != Hash.digest(proof):return {"error":record_error(entry,"Commit checksum mismatch.")}
+	if trailer.slice(0,8) != "COMMIT1".to_utf8_buffer()+PackedByteArray([0]) or trailer.decode_u64(8) != entry.sequence or trailer.slice(16).hex_encode() != Hash.digest(proof):return {"error":record_error(entry,"Commit checksum mismatch.")}
 	var result := entry.duplicate();result.descriptor = desc
 	return result
 func describe(id: String, index: int) -> Dictionary:

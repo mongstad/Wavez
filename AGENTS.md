@@ -4,7 +4,7 @@ WAVEZ is the application brand; use Wavez in ordinary prose. This directory is t
 Read README.md, docs/CURRENT_STATUS.md and CONTRIBUTING.md before making changes.
 
 - Preserve accepted G0–G4 behavior. Post-G4 maintenance is authorized; G5/G6 and web/dashboard work require separate authorization.
-- Support SIMSCP4 / SceneCapture / SceneReader only; see docs/CAPTURE_FORMAT_POLICY.md. Do not restore retired capture APIs.
+- Support WVZ1 / SceneCapture / SceneReader only; see docs/CAPTURE_FORMAT_POLICY.md. Do not restore retired capture APIs.
 - Backward compatibility is not a project requirement unless the owner explicitly states otherwise for a specific issue or interface. Prefer clean current architecture over legacy support, compatibility shims, fallback parsers, migration layers, or preserving retired behavior. If a change would break existing files, APIs, formats, recipes, or workflows, document the break clearly and update the current writer/reader/tests/docs together. Do not add backward-compatibility complexity proactively. Separate one-time migration/conversion tooling may be proposed when old data has clear value, but it is not required by default.
 - GitHub Issues, milestones and the Wavez Development project are the authoritative operational work queue. Work only on an issue that has been explicitly placed in a state that authorizes implementation; do not start unrelated issues opportunistically.
 - For each authorized issue, create a dedicated branch from the current `main` baseline before making code or documentation changes. Prefer names such as `issue-<number>-<short-slug>`. Keep one issue per branch unless the owner explicitly approves a combined change.

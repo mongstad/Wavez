@@ -27,7 +27,7 @@ func run() -> void:
 	root.title = "WAVEZ #143 visual slice validation"
 	viewer = Viewer.new(); viewer.scene_prebuffer_enabled = false
 	root.add_child(viewer); viewer.set_process(false)
-	viewer._open_capture(output.path_join("scene.ssc")); viewer.playing = false; viewer.orbit_enabled = false
+	viewer._open_capture(output.path_join("scene.wvz")); viewer.playing = false; viewer.orbit_enabled = false
 	var shell = viewer.shell
 	var theme = shell.style_slice.theme
 	var legacy := Legacy.new()

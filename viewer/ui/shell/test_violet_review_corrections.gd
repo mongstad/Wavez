@@ -67,7 +67,7 @@ func run() -> void:
 	var shell = viewer.shell; var ui = shell.transport
 	shell.edge_reveal.set_process(false)
 	check(shell.status_ui.find_child("CaptureFilename",true,false) == null, "Empty capture has no passive filename")
-	viewer._open_capture(output.path_join("scene.ssc")); viewer.playing = false; viewer.orbit_enabled = false
+	viewer._open_capture(output.path_join("scene.wvz")); viewer.playing = false; viewer.orbit_enabled = false
 	await ready(); await settle()
 	var scientific: Dictionary = Visual.snapshot(viewer)
 	var sample: Dictionary = viewer.committed_sample.duplicate(true)
@@ -121,7 +121,7 @@ func run() -> void:
 	key(KEY_F11); await settle()
 	check(not shell.immersive and shell.edge_reveal.states == saved_edges, "Exit restores all original edge/pin/timer states after Tools and temporary pin")
 	# Whole-second clocks stay identical before playback, while playing and paused.
-	viewer._open_capture(output.path_join("clock.ssc")); viewer.playing = false; await ready()
+	viewer._open_capture(output.path_join("clock.wvz")); viewer.playing = false; await ready()
 	check(ui.displayed.text == "00:00", "Capture with nonzero precise origin starts at 00:00")
 	viewer._seek_time(205.875); await ready()
 	for playing in [false, true, false]:

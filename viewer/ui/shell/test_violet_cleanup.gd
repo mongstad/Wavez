@@ -156,11 +156,11 @@ func run() -> void:
 	viewer.shell.commands.details.popup.id_pressed.emit(viewer.shell.commands.details.index); await settle()
 	check(viewer.shell.detail_text.text.contains("No capture loaded."),"Existing empty-capture Details")
 	viewer.shell.details.hide()
-	viewer._open_capture(output.path_join("mixed.ssc"));viewer.playing = false;viewer.orbit_enabled = false
+	viewer._open_capture(output.path_join("mixed.wvz"));viewer.playing = false;viewer.orbit_enabled = false
 	await ready();await settle();audit("mixed capture")
 	await details();await filter_interaction();audit("saved visual-state rebuild")
 	await switches();audit("visual recipe rebuild");await about()
-	viewer._open_capture(output.path_join("particles.ssc"));viewer.playing = false;await ready();await settle()
+	viewer._open_capture(output.path_join("particles.wvz"));viewer.playing = false;await ready();await settle()
 	audit("capture replacement")
 	viewer.free();await process_frame
 	var file := FileAccess.open(output.path_join("report.json"),FileAccess.WRITE)

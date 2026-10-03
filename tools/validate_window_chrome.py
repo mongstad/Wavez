@@ -27,7 +27,7 @@ def main():
     parser.add_argument('--display-driver', choices=['wayland', 'x11'], default='wayland')
     args = parser.parse_args()
     out = args.output_dir.resolve(); out.mkdir(parents=True, exist_ok=False)
-    capture = scene(out / 'scene.ssc')
+    capture = scene(out / 'scene.wvz')
     digest = hashlib.sha256(capture.read_bytes()).hexdigest()
     conn = Gio.bus_get_sync(Gio.BusType.SESSION, None)
     service = 'org.wavez.ChromeReview'

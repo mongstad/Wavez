@@ -44,7 +44,7 @@ func run() -> void:
 	var initial_mode := OS.low_processor_usage_mode;var initial_fps := Engine.max_fps
 	OS.low_processor_usage_mode = false;Engine.max_fps = 0
 	for kind in ["particles","field","mesh","mixed"]:
-		var view = Viewer.new();view.playing = false;view.orbit_enabled = false;view.capture_path = output.path_join(kind+".ssc")
+		var view = Viewer.new();view.playing = false;view.orbit_enabled = false;view.capture_path = output.path_join(kind+".wvz")
 		root.add_child(view);await ready(view)
 		check(view.generic_reader != null,kind+" opens")
 		await idle(view,kind+"_ready")

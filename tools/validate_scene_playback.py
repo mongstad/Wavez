@@ -1,4 +1,4 @@
-"""Generate adversarial SIMSCP4 fixtures and validate asynchronous playback semantics."""
+"""Generate adversarial WVZ1 fixtures and validate asynchronous playback semantics."""
 import argparse,json,subprocess,sys
 from pathlib import Path
 import numpy as np
@@ -9,7 +9,7 @@ from wavez_export import SceneCapture
 def prepare(out):
     out.mkdir(parents=True,exist_ok=True)
     for name,persistent,compression in [('ids',True,'none'),('anonymous',False,'none'),('zstd',True,'zstd')]:
-        path=out/(name+'.ssc')
+        path=out/(name+'.wvz')
         objects=[dict(id='particles',kind='particles',units='u',identity='persistent_i8' if persistent else 'anonymous'),dict(id='field',kind='volume',units='u')]
         path.unlink(missing_ok=True)
         with SceneCapture(path,objects=objects,compression=compression) as writer:
@@ -28,19 +28,19 @@ def prepare(out):
                 colors=np.column_stack([x,np.ones(n)*.5,np.ones(n)*.8,np.ones(n)*.7])
                 fields=dict(scalar=x-0.25,opacity=np.array([1,0,float('nan')][:n],dtype='f8'),particle_type=(ids%3).astype('u4'),visual_color=colors,visual_size=x+.2,visual_brightness=x+.3,velocity=np.column_stack([x,x*2,x*3]))
                 writer.add_particles('particles',time,pos,ids=ids if persistent else None,**fields)
-    (out/'delayed.ssc').unlink(missing_ok=True)
-    with SceneCapture(out/'delayed.ssc',objects=[dict(id='particles',kind='particles',units='u',identity='persistent_i8'),dict(id='field',kind='volume',units='u')]) as w:
+    (out/'delayed.wvz').unlink(missing_ok=True)
+    with SceneCapture(out/'delayed.wvz',objects=[dict(id='particles',kind='particles',units='u',identity='persistent_i8'),dict(id='field',kind='volume',units='u')]) as w:
         w.add_volume('field',0,{'rho':np.ones((2,2,2),dtype='f4')},origin=[0,0,0],spacing=[1,1,1])
         w.add_particles('particles',1,[[1.,0.,0.]],ids=[7])
         w.add_particles('particles',2,[[2.,0.,0.]],ids=[7])
-    (out/'replacement.ssc').unlink(missing_ok=True)
-    with SceneCapture(out/'replacement.ssc',objects=[dict(id='field',kind='volume',units='u')]) as w:
+    (out/'replacement.wvz').unlink(missing_ok=True)
+    with SceneCapture(out/'replacement.wvz',objects=[dict(id='field',kind='volume',units='u')]) as w:
         for t in [0,1]:w.add_volume('field',t,{'rho':np.ones((2,2,2),dtype='f8')},origin=[0,0,0],spacing=[1,1,1])
     from wavez_export import SceneReader
-    with SceneReader(out/'ids.ssc') as reader:
+    with SceneReader(out/'ids.wvz') as reader:
         initial_end=max(r['end'] for r in reader.records if r['time']<=.5)
-        (out/'live-config.json').write_text(json.dumps({'initial_end':initial_end,'final_end':(out/'ids.ssc').stat().st_size},indent=2))
-    (out/'config.json').write_text(json.dumps(dict(ids=str(out/'ids.ssc'),anonymous=str(out/'anonymous.ssc')),indent=2))
+        (out/'live-config.json').write_text(json.dumps({'initial_end':initial_end,'final_end':(out/'ids.wvz').stat().st_size},indent=2))
+    (out/'config.json').write_text(json.dumps(dict(ids=str(out/'ids.wvz'),anonymous=str(out/'anonymous.wvz')),indent=2))
 
 def main():
     p=argparse.ArgumentParser(description=__doc__)

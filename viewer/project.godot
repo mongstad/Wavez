@@ -11,14 +11,14 @@ config_version=5
 [application]
 
 config/name="WAVEZ"
-config/version="v0.1.0.30"
+config/version="v0.1.0.31"
 run/main_scene="res://Main.tscn"
 config/use_custom_user_dir=true
-config/custom_user_dir_name="godot/app_userdata/SimScope"
+config/custom_user_dir_name="godot/app_userdata/WAVEZ"
 config/features=PackedStringArray("4.7")
 config/icon="res://ui/about/wavez-logo-dark.png"
-config/custom_user_dir_name.windows="Godot/app_userdata/SimScope"
-config/custom_user_dir_name.macos="Godot/app_userdata/SimScope"
+config/custom_user_dir_name.windows="Godot/app_userdata/WAVEZ"
+config/custom_user_dir_name.macos="Godot/app_userdata/WAVEZ"
 
 [display]
 

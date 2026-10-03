@@ -1,4 +1,5 @@
-"""Supported capture boundary and bounded refusal, independent of file suffix."""
+"""WVZ1 wire identity, current path boundary, and bounded refusal."""
+import json
 from pathlib import Path
 import struct
 import tempfile
@@ -14,7 +15,7 @@ from wavez_export.analysis import AnalysisError, Context, SourceSnapshot
 class SceneContractTests(unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
-        self.path = Path(self.temp.name) / 'capture.ssc'
+        self.path = Path(self.temp.name) / 'capture.wvz'
         with SceneCapture(self.path, objects=[dict(id='p', kind='particles', units='m', identity='persistent_i8')]) as writer:
             for t in [0., 1.]:
                 writer.add_particles('p', t, np.array([[t, 0., 0.]]), ids=[2**63-1])
@@ -23,8 +24,20 @@ class SceneContractTests(unittest.TestCase):
     def tearDown(self):
         self.temp.cleanup()
 
-    def test_retired_magic_is_refused_even_with_native_suffix(self):
-        for magic in [b'VBCOSM1\0', b'SIMSCP1\0', b'SIMSCP2\0', b'SIMSCP3\0']:
+    def test_exact_wvz1_wire_envelope_and_record_tags(self):
+        self.assertEqual(scene.PREFIX.size, 16)
+        self.assertEqual(scene.FRAME.size, 80)
+        self.assertEqual(scene.COMMIT.size, 48)
+        self.assertEqual(self.raw[:16], scene.PREFIX.pack(b'WVZ1\0\0\0\0', 1,
+                                                           struct.unpack_from('<I', self.raw, 12)[0]))
+        start = 16 + struct.unpack_from('<I', self.raw, 12)[0]
+        self.assertEqual(json.loads(self.raw[16:start])['version'], 1)
+        tag, dlen, stored, *_ = scene.FRAME.unpack_from(self.raw, start)
+        self.assertEqual(tag, b'FRM1')
+        self.assertEqual(scene.COMMIT.unpack_from(self.raw, start + 80 + dlen + stored)[0], b'COMMIT1\0')
+
+    def test_retired_magic_is_refused_even_with_current_suffix(self):
+        for magic in [b'VBCOSM1\0', b'SIMSCP1\0', b'SIMSCP2\0', b'SIMSCP3\0', b'SIMSCP4\0']:
             with self.subTest(magic=magic):
                 self.path.write_bytes(magic + self.raw[8:])
                 for strict in [True, False]:
@@ -36,15 +49,22 @@ class SceneContractTests(unittest.TestCase):
                 self.assertEqual(error.exception.code, 'unsupported_format')
                 self.assertEqual(context.used, 0)
 
-    def test_native_reader_checks_magic_and_version_not_just_suffix(self):
-        renamed = self.path.with_suffix('.capture')
+    def test_suffix_and_version_are_both_required(self):
+        renamed = self.path.with_suffix('.ssc')
         renamed.write_bytes(self.raw)
-        with SceneReader(renamed) as reader:
-            self.assertEqual(reader.read_sample('p', 1)['particle_id'][0], 2**63-1)
+        with self.assertRaisesRegex(ValueError, r'requires a \.wvz path'):
+            SceneReader(renamed)
+        with self.assertRaisesRegex(AnalysisError, r'requires a \.wvz path'):
+            SourceSnapshot(renamed)
+        with self.assertRaisesRegex(ValueError, r'requires a \.wvz path'):
+            SceneCapture(renamed.with_name('new.ssc'), objects=[dict(id='p', kind='particles', units='m', identity='anonymous')])
         wrong = bytearray(self.raw)
-        struct.pack_into('<I', wrong, 8, 2)
+        struct.pack_into('<I', wrong, 8, 4)
         self.path.write_bytes(wrong)
         with self.assertRaisesRegex(ValueError, 'Unsupported scene format'):
+            SceneReader(self.path)
+        self.path.write_bytes(self.raw.replace(b'"version":1', b'"version":4', 1))
+        with self.assertRaisesRegex(ValueError, 'Unsupported scene metadata/version'):
             SceneReader(self.path)
 
     def test_descriptor_ceiling_refuses_before_reading_payload(self):
@@ -113,7 +133,7 @@ class SceneContractTests(unittest.TestCase):
         reader.close()
 
     def test_writer_keeps_individual_descriptor_limit_and_committed_prefix(self):
-        path = self.path.with_name('wide.ssc')
+        path = self.path.with_name('wide.wvz')
         with SceneCapture(path, objects=[dict(id='p', kind='particles', units='m', identity='anonymous')]) as writer:
             before = writer.file.tell()
             with self.assertRaisesRegex(ValueError, 'Record descriptor ceiling'):

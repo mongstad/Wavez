@@ -19,7 +19,7 @@ def camera():
 
 class PickingTests(unittest.TestCase):
     def setUp(self):
-        self.tmp=tempfile.TemporaryDirectory();self.path=Path(self.tmp.name)/"pick.ssc"
+        self.tmp=tempfile.TemporaryDirectory();self.path=Path(self.tmp.name)/"pick.wvz"
         with SceneCapture(self.path,objects=[dict(id="p",kind="particles",units="m",identity="persistent_i8"),
                          dict(id="mesh",kind="mesh",units="m",static=True,identity="none"),dict(id="grid",kind="volume",units="m")]) as w:
             w.add_particles("p",0,[[0.,0,-4],[0.,0,-2],[.5,0,-2],[0,0,2]],ids=[2**53+1,7,9,11],
@@ -132,7 +132,7 @@ class PickingTests(unittest.TestCase):
         self.assertEqual(sample.arrays['visual_color'][0,0],1e-30)
 
     def test_anonymous_pick_is_sample_local_without_inferred_identity(self):
-        path=Path(self.tmp.name)/"anonymous.ssc"
+        path=Path(self.tmp.name)/"anonymous.wvz"
         with SceneCapture(path,objects=[dict(id="particles",kind="particles",units="u",identity="anonymous")]) as writer:
             for t in [0.,1.]:writer.add_particles("particles",t,np.array([[0,0,-2],[1,0,-2]],dtype="f4"))
         with SourceSnapshot(path) as source:

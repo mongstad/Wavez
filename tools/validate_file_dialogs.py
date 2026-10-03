@@ -1,4 +1,4 @@
-"""Exercise Godot dialog controls and cross-process navigation persistence on tiny SSCs."""
+"""Exercise Godot dialog controls and navigation persistence on tiny WVZ1 scenes."""
 import argparse
 import hashlib
 import json
@@ -25,10 +25,10 @@ def main():
     for name in ['capture', 'other', 'export', 'cancelled', 'invalid']:
         (output / name).mkdir()
     for name in ['capture', 'other']:
-        scene(output / name / 'scene.ssc')
-    (output / 'invalid' / 'invalid.ssc').write_bytes(b'not a SIMSCP4 capture')
+        scene(output / name / 'scene.wvz')
+    (output / 'invalid' / 'invalid.wvz').write_bytes(b'not a WVZ1 capture')
     (output / 'cancelled' / 'existing.mp4').write_bytes(b'existing destination sentinel')
-    hashes = {str(p.relative_to(output)): hashlib.sha256(p.read_bytes()).hexdigest() for p in output.rglob('*.ssc')}
+    hashes = {str(p.relative_to(output)): hashlib.sha256(p.read_bytes()).hexdigest() for p in output.rglob('*.wvz')}
     env = dict(os.environ, XDG_DATA_HOME=str(output / 'user-data'), XDG_CONFIG_HOME=str(output / 'config'), LANG='C.UTF-8')
     if args.display_driver == "wayland":
         env["GDK_BACKEND"] = "wayland"
@@ -53,7 +53,7 @@ def main():
         report['known_baseline_gl_cleanup_diagnostics'] = known_cleanup
         assert not report['failures'], report
         reports.append(report)
-    assert hashes == {str(p.relative_to(output)): hashlib.sha256(p.read_bytes()).hexdigest() for p in output.rglob('*.ssc')}
+    assert hashes == {str(p.relative_to(output)): hashlib.sha256(p.read_bytes()).hexdigest() for p in output.rglob('*.wvz')}
     summary = {'phases': reports, 'checks': sum(r['checks'] for r in reports), 'source_hashes_unchanged': hashes}
     (output / 'summary.json').write_text(json.dumps(summary, indent=2) + '\n')
     print('Known baseline GL cleanup diagnostics:', sum(len(r['known_baseline_gl_cleanup_diagnostics']) for r in reports))

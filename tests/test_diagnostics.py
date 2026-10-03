@@ -12,7 +12,7 @@ from tests.g4.fixtures import scene
 class DiagnosticTests(unittest.TestCase):
     def setUp(self):
         self.tmp=tempfile.TemporaryDirectory();self.root=Path(self.tmp.name)
-        self.capture=scene(self.root/"capture.ssc");self.source=SourceSnapshot(self.capture)
+        self.capture=scene(self.root/"capture.wvz");self.source=SourceSnapshot(self.capture)
         self.cache=ResultCache(self.root/"owner"/"results");self.path=self.root/"diagnostic.csv"
         self.args=dict(path=str(self.path),key="supplied",time_column="time",time_units="s",values=[dict(column="value",dtype="f8",units="K"),dict(column="id",dtype="i8",units="1",semantic="identifier")],delimiter=",")
 

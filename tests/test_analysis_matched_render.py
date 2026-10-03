@@ -13,16 +13,16 @@ class MatchedRenderTests(unittest.TestCase):
     def setUp(self):
         self.tmp=tempfile.TemporaryDirectory();self.root=Path(self.tmp.name)
         self.assets=MemberAssets(self.root/'owner/members');self.cache=ResultCache(self.root/'owner/results')
-        self.paths=[traveling_pulse(self.root/(side+'.ssc'),time_scale=1 if side=='left' else 2,time_offset=0 if side=='left' else 10) for side in ('left','right')]
+        self.paths=[traveling_pulse(self.root/(side+'.wvz'),time_scale=1 if side=='left' else 2,time_offset=0 if side=='left' else 10) for side in ('left','right')]
         self.hashes=[hashlib.sha256(p.read_bytes()).hexdigest() for p in self.paths]
         self.camera=dict(camera_transform=[[1,0,0],[0,1,0],[0,0,1],[1,0,8]],camera_target=[1,0,0],camera=dict(fov=45,near=.01,far=100,keep_aspect=1),camera_distance=8,yaw=0,pitch=0)
         self.inputs=[]
         for n,path in enumerate(self.paths):
             with SourceSnapshot(path,assets=self.assets) as source:
                 definition=S.define(source,dict(key='endpoints',object='p',kind='particle_ids',selector=dict(ids=['0','40'])))
-                base=dict(kind='simscope-inspection',version=2,source={k:v for k,v in source.identity().items() if k not in ('uuid','complete_records')}|dict(complete_frames=8),visual=copy.deepcopy(self.camera),sample=dict(requested_time=0 if n==0 else 10),frame_index=0,alpha=0,history_indices=[],layers=[],selections=[])
+                base=dict(kind='wavez-inspection',version=2,source={k:v for k,v in source.identity().items() if k not in ('uuid','complete_records')}|dict(complete_frames=8),visual=copy.deepcopy(self.camera),sample=dict(requested_time=0 if n==0 else 10),frame_index=0,alpha=0,history_indices=[],layers=[],selections=[])
                 payload=dict(base=base,selections=dict(version=1,revision=1,active='endpoints',definitions=[definition],groups=[],overlay=dict(visible=True,show_hidden=True,maximum=256)),analysis=dict(summaries=[],current={},left={},right={},bindings=[],bookmarks=[],layout=dict(series={},member_address='',plot_bins=512,heatmap_width=128,heatmap_height=64)))
-                recipe=dict(kind='simscope-inspection',version=3,source=source.identity(),payload=pack(payload),members=[],results=[],bundled_results=True)
+                recipe=dict(kind='wavez-inspection',version=3,source=source.identity(),payload=pack(payload),members=[],results=[],bundled_results=True)
                 folder=self.root/('recipe-'+str(n));folder.mkdir();file=folder/'inspection.json';file.write_text(json.dumps(recipe))
                 self.inputs.append(dict(source=source.identity(),recipe_path=str(file),recipe_sha256=hashlib.sha256(file.read_bytes()).hexdigest(),selection_keys=['endpoints'],object='p',channel='value',time=pack(dict(units='s',reference='common physical origin',scale=1. if n==0 else .5,offset=0. if n==0 else 5.)),value=pack(dict(units='unknown',reference='scalar',scale=1. if n==0 else 2.,offset=0. if n==0 else 1.))))
         self.common=dict(camera=self.camera,coordinates=dict(units='m',reference='same origin and Cartesian axes'),range=[0.,1.],colormap='viridis',timing=dict(start_time=0.,end_time=.75,fps=4,playback_rate=1.),width=640,height=360,quality='high',quota_bytes=256*1024**2)

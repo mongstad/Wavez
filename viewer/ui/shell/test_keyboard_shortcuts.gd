@@ -233,7 +233,7 @@ func run() -> void:
 	viewer.open_dialog.hide(); await settle()
 	trigger(shell,"navigate"); await settle(); check(shell.navigation.get_child(2).get_popup().visible, "Remapped Navigate opens existing menu")
 	shell.navigation.get_child(2).get_popup().hide(); await settle()
-	viewer._open_capture(output.path_join("mixed.ssc")); viewer.playing = false; viewer.orbit_enabled = false
+	viewer._open_capture(output.path_join("mixed.wvz")); viewer.playing = false; viewer.orbit_enabled = false
 	await wait_ready(viewer); await settle()
 	check(viewer.generic_reader != null, "Mixed particles/fields/meshes fixture opens")
 	trigger(shell,"play_pause"); check(viewer.playing, "Play Pause invokes existing transport toggle")
@@ -365,7 +365,7 @@ func run() -> void:
 	check(malformed.active.auto_orbit == KEY_O and malformed.active.fullscreen == KEY_F11, "Invalid stored values preserve safe defaults")
 	viewer.orbit_enabled = false; viewer.free_camera = true
 	for kind in ["particles", "fields", "meshes", "mixed"]:
-		viewer._open_capture(output.path_join(kind + ".ssc")); viewer.playing = false
+		viewer._open_capture(output.path_join(kind + ".wvz")); viewer.playing = false
 		await wait_ready(viewer)
 		check(viewer.generic_reader != null and not viewer.orbit_enabled and viewer.free_camera, kind + " scene opening preserves navigation defaults")
 		check(not Visual.snapshot(viewer).orbit_enabled and Preset.snapshot(viewer).settings.view.free_camera, kind + " scene snapshots expose the intended navigation state")

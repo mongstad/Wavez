@@ -451,7 +451,7 @@ func check_playback_status(viewer, config: Dictionary) -> void:
 	ui.refresh();check(not ui.readiness.contains("%"),"Planning does not misrepresent prepared progress")
 	fields.worker.mutex.lock();fields.worker.session = saved;fields.worker.mutex.unlock()
 	fields.scope_choice.select(0);viewer.playing = false;fields.cancel_session()
-	viewer._open_capture(output.path_join("missing.ssc"));ui.refresh()
+	viewer._open_capture(output.path_join("missing.wvz"));ui.refresh()
 	check(ui.failures.has("Open capture"),"Actual missing-file failure remains available")
 	viewer._open_capture(config.source);viewer.playing = false;await ready(viewer)
 	check(ui.readiness == "Ready" and not ui.failures.has("Open capture"),"Valid open recovers readiness and clears its load failure")

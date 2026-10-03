@@ -17,7 +17,7 @@ def main():
     p.add_argument('--output-dir', required=True, type=Path)
     p.add_argument('--renderer', required=True, choices=['forward_plus', 'gl_compatibility'])
     a = p.parse_args(); out = a.output_dir.resolve(); out.mkdir(parents=True, exist_ok=False)
-    source = out/'scene.ssc'; scene(source); before = hashlib.sha256(source.read_bytes()).hexdigest()
+    source = out/'scene.wvz'; scene(source); before = hashlib.sha256(source.read_bytes()).hexdigest()
     runs = []
     for mode in ['windowed', 'maximized', 'fullscreen']:
         for work in ['idle', 'active']:

@@ -50,7 +50,7 @@ def run(source,arguments,cache,*,provenance=None):
                     path,_shape,size=source.assets.path(ref)
                     artifact=output.copy('members/'+ref['sha256']+'.i8',path,ref['sha256'],size)
                     assets.append(dict(reference=ref,artifact=artifact))
-            final=dict(kind='simscope-numerical-export',version=1,completion='complete',result=reference,source=source.identity(),row_count=manifest['row_count'],support_count=manifest['support_count'],
+            final=dict(kind='wavez-numerical-export',version=1,completion='complete',result=reference,source=source.identity(),row_count=manifest['row_count'],support_count=manifest['support_count'],
                        values=values,support=support,provenance_graph=graph,members=assets,external_members=asset_refs if not members else [],requires_external_member_assets=bool(asset_refs and not members),
                        columns=[dict(name=name,type='string',interpretation='exact decimal identity; import as text' if name=='entity_id' else 'float64 bit identity (little endian)' if name.endswith('f64_le_hex') else 'locale-independent numerical text, label or explicit status') for name in COLUMNS],
                        scientific_values='Full requested source-derived rows; not plot/GPU previews. Blank numerical cells are unavailable and have explicit reasons; source nonfinite tokens remain explicit.',

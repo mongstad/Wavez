@@ -1,4 +1,4 @@
-"""Verify old/new user-data identity and inspect live WAVEZ shell surfaces."""
+"""Verify the clean WAVEZ user-data break and inspect live shell surfaces."""
 import argparse
 import hashlib
 import json
@@ -21,11 +21,9 @@ func _initialize():
         cfg.set_value("navigation", "recent", PackedStringArray([args[2]]))
         assert(cfg.save(path) == OK)
     else:
-        assert(cfg.load(path) == OK)
-        assert(cfg.get_value("navigation", "favorites") == PackedStringArray([args[2]]))
-        assert(cfg.get_value("navigation", "recent") == PackedStringArray([args[2]]))
+        assert(not FileAccess.file_exists(path))
     var file = FileAccess.open(args[1], FileAccess.WRITE)
-    file.store_string(JSON.stringify({"user_data_dir":OS.get_user_data_dir(), "preferences_sha256":FileAccess.get_sha256(path)}))
+    file.store_string(JSON.stringify({"user_data_dir":OS.get_user_data_dir(), "preferences_present":FileAccess.file_exists(path)}))
     file.close()
     quit()
 '''
@@ -40,7 +38,7 @@ def main():
     out = a.output_dir.resolve(); out.mkdir(parents=True, exist_ok=False)
     env = dict(os.environ, XDG_DATA_HOME=str(out/'data'), XDG_CONFIG_HOME=str(out/'config'))
     legacy = out/'legacy'; legacy.mkdir()
-    # Same native runtime and OS resolve the accepted project's actual old directory.
+    # The historical project setting resolves the former directory on this OS.
     (legacy/'project.godot').write_text(subprocess.check_output(
         ['git', 'show', 'd6e4bd8:viewer/project.godot'], cwd=ROOT, text=True))
     probe = out/'probe.gd'; probe.write_text(PROBE)
@@ -51,15 +49,16 @@ def main():
     for label, project, mode in [('old', legacy, 'seed'), ('new', ROOT/'viewer', 'read')]:
         run(label, [a.godot, '--headless', '--path', str(project), '--script', str(probe), '--', mode, str(out/(label+'.json')), str(out)+'/'])
     old = json.loads((out/'old.json').read_text()); new = json.loads((out/'new.json').read_text())
-    assert old == new, 'Renaming must retain the actual directory and existing preferences byte-for-byte'
-    source = scene(out/'scene.ssc'); digest = hashlib.sha256(source.read_bytes()).hexdigest()
+    assert old['preferences_present'] and not new['preferences_present']
+    assert old['user_data_dir'] != new['user_data_dir'] and Path(new['user_data_dir']).name == 'WAVEZ'
+    source = scene(out/'scene.wvz'); digest = hashlib.sha256(source.read_bytes()).hexdigest()
     run('surfaces', [a.godot, '--path', str(ROOT/'viewer'), '--rendering-method', a.renderer,
         '--audio-driver', 'Dummy', '--resolution', '1440x900', '--script', 'ui/test_branding.gd', '--', str(out)])
     report = json.loads((out/'report.json').read_text())
     assert not report['failures'] and hashlib.sha256(source.read_bytes()).hexdigest() == digest
-    report.update(old_new_preferences=old, source_sha256=digest)
+    report.update(user_data_break={'old': old, 'new': new}, source_sha256=digest)
     (out/'report.json').write_text(json.dumps(report, indent=2)+'\n')
-    print(f'Branding: {report["checks"]} UI checks PASS ({a.renderer}); old/new user data and preference bytes identical')
+    print(f'Branding: {report["checks"]} UI checks PASS ({a.renderer}); old preferences are not imported')
 
 
 if __name__ == '__main__':

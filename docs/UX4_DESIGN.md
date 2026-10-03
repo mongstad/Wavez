@@ -145,7 +145,7 @@ Help
   Slice explicitly selects particle or field mode; Clipping and Isosurface are
   field-only. Source probe explicitly binds a field, independently of Object.
 - **Help:** Shortcuts replaces Navigation help. Handbook opens the existing
-  [handbook](SIMSCOPE_HANDBOOK.md). About is deferred until implemented, with no
+  [handbook](WAVEZ_HANDBOOK.md). About is deferred until implemented, with no
   placeholder menu item. Source details remain on the capture-name affordance,
   never in Help. Capture/source names may contain source-provided punctuation.
 

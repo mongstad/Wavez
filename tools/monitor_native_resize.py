@@ -1,7 +1,7 @@
 """Launch the real Wavez viewer with opt-in manual resize and desktop telemetry.
 
 The owner uses the normal viewer. Write a phase label to output/phase.txt to
-mark intervals, and create output/stop when finished. No SSC file is changed.
+mark intervals, and create output/stop when finished. No WVZ1 file is changed.
 """
 import argparse
 import json

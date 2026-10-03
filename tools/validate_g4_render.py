@@ -10,7 +10,7 @@ from wavez_export.analysis.recipes import unpack,pack
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--godot',required=True);parser.add_argument('--output-dir',required=True,type=Path);parser.add_argument('--renderer',choices=['gl_compatibility','forward_plus'],required=True);args=parser.parse_args()
-    root=args.output_dir.resolve();root.mkdir(parents=True,exist_ok=False);source=traveling_pulse(root/'pulse.ssc');digest=hashlib.sha256(source.read_bytes()).hexdigest();runs=[];checks=[]
+    root=args.output_dir.resolve();root.mkdir(parents=True,exist_ok=False);source=traveling_pulse(root/'pulse.wvz');digest=hashlib.sha256(source.read_bytes()).hexdigest();runs=[];checks=[]
     def run(command,directory):
         start=time.monotonic();result=subprocess.run(command,cwd=ROOT,text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,timeout=180)
         (directory/'stdout.log').write_text(result.stdout);runs.append(dict(command=command,exit_code=result.returncode,seconds=time.monotonic()-start))

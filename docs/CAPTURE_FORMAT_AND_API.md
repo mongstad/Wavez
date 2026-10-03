@@ -1,15 +1,14 @@
 # Capture format and API
 
-For new layered work, use **SIMSCP4 with a `.ssc` suffix** and explicit `SceneCapture` / `SceneReader`. This is a current overview, backed by the [G3 wire contract](<../G3_FORMAT.md>) and [implementation](<../wavez_export/scene.py>). The [public API](../SIMSCOPE_API.md) documents the modern entry points.
+For new layered work, use **WAVEZ Scene Format (`.wvz`, WVZ1)** and explicit `SceneCapture` / `SceneReader`. This is a current overview, backed by the [G3 wire contract](<../G3_FORMAT.md>) and [implementation](<../wavez_export/scene.py>). The [public API](../WAVEZ_API.md) documents the modern entry points.
 The [capture format policy](CAPTURE_FORMAT_POLICY.md) defines the sole supported
-capture generation. Readers verify SIMSCP4 magic and version independently of
-suffix; new files should use `.ssc`.
+capture generation. Readers require both `.wvz` and the exact WVZ1 magic and versions.
 
 ## Format and entry points
 
 | Format | Purpose | Python entry points |
 |---|---|---|
-| SIMSCP4 | Independently timed particle, mesh and volume objects | `SceneCapture`; `SceneReader` |
+| WVZ1 | Independently timed particle, mesh and volume objects | `SceneCapture`; `SceneReader` |
 
 ## Current Python interface
 
@@ -42,28 +41,28 @@ Scene metadata contains a generated capture UUID and 1–16 uniquely named objec
 
 Particle positions are already in viewer world, so their object affine must be identity. Mesh and grid transforms are invertible finite row-major 3×4 affines. Units are explicit declarations; no scientific conversion is inferred. G4 recognizes
 `time_unit`, `position_unit` and `channel_metadata[object_id][channel]`; see the
-[public API metadata reference](../SIMSCOPE_API.md#metadata-and-g4-analysis). Grid shape is zyx, origin/spacing are xyz, arrays are C-order with x fastest, and origin means first sample. All volume channels in a sample share geometry. A changed grid geometry is a discrete sample transition.
+[public API metadata reference](../WAVEZ_API.md#metadata-and-g4-analysis). Grid shape is zyx, origin/spacing are xyz, arrays are C-order with x fastest, and origin means first sample. All volume channels in a sample share geometry. A changed grid geometry is a discrete sample transition.
 
-Typed SIMSCP4 arrays support `f4`, `f8`, `u4`, `i8`. Positions must be finite floating arrays; indices and IDs have their specific integer contracts. Scalar data retain their supported source values, including signed zeros and nonfinite payloads where permitted; renderers mark unavailable/invalid values explicitly. Arbitrary complex arrays are not a native channel type: export named components. Do not normalize or cast scientific fields merely to match a GPU preview.
+Typed WVZ1 arrays support `f4`, `f8`, `u4`, `i8`. Positions must be finite floating arrays; indices and IDs have their specific integer contracts. Scalar data retain their supported source values, including signed zeros and nonfinite payloads where permitted; renderers mark unavailable/invalid values explicitly. Arbitrary complex arrays are not a native channel type: export named components. Do not normalize or cast scientific fields merely to match a GPU preview.
 
 Persistent particle identity requires explicit nonnegative int64 IDs, unique within each record and never reused after disappearance. The namespace includes capture/object identity. Mesh `stable_topology` requires explicit `vertex_id`; interpolation requires compatible ordered IDs and triangles. Anonymous particles and identity-free/changed meshes are held. Full identity history is checked by `audit_identity()`; a random-access sample read alone is not a full lifetime audit. Exact int64 IDs are represented as decimal strings where JSON precision would otherwise be unsafe.
 
-## SIMSCP4 storage and recovery
+## WVZ1 storage and recovery
 
-The little-endian prefix `<8sII>` contains `SIMSCP4\0`, version 4 and JSON metadata length. Each record has an 80-byte `<4sIQQdIIQ32s>` header with `FRM4`, descriptor and payload lengths, physical time, object index, array count, sequence and descriptor SHA-256. Array descriptors identify type, association and chunks. A 48-byte `<8sQ32s>` `COMMIT4\0` trailer commits the sequence and hash of header/descriptor. Chunks carry independent stored/raw SHA-256 checks; the descriptor/commit hash is not a replacement for payload checks. Interactive playback retains structural/descriptor/commit validation and bounded decoding but skips payload SHA comparisons. Readable scientific corruption can remain undetected there. Python analysis/readers and offline export retain strict payload checks; [explicit verification](PLAYBACK_INTEGRITY.md) checks the whole capture.
+The little-endian prefix `<8sII>` contains `WVZ1\0\0\0\0`, unsigned version 1 and JSON metadata length; metadata JSON has version 1. Each record has an 80-byte `<4sIQQdIIQ32s>` header with `FRM1`, descriptor and payload lengths, physical time, object index, array count, sequence and descriptor SHA-256. Array descriptors identify type, association and chunks. A 48-byte `<8sQ32s>` `COMMIT1\0` trailer commits the sequence and hash of header/descriptor. Chunks carry independent stored/raw SHA-256 checks; the descriptor/commit hash is not a replacement for payload checks. Interactive playback retains structural/descriptor/commit validation and bounded decoding but skips payload SHA comparisons. Readable scientific corruption can remain undetected there. Python analysis/readers and offline export retain strict payload checks; [explicit verification](PLAYBACK_INTEGRITY.md) checks the whole capture.
 
 All arrays use canonical contiguous chunks of 4 MiB except the final remainder; grids are zyx C-order, x fastest. Mandatory exact volume statistics replace repeated display scans. Codec 0 is uncompressed (default); codec 1 is Zstandard, default level 1. Supported writer levels are 1–6. Compression is lossless and optional; unavailable requested codecs fail explicitly. No lossy “scientific compression” is implied.
 
 A complete record becomes visible only after its commit. There is no required closing footer. An incomplete trailing record can be withheld in live/non-strict reads while earlier committed records remain available; detected corruption is an error, not a fabricated frame. Python `SceneReader(path, strict=False)` and `refresh(strict=False)` permit a growing committed prefix but still check payload SHA. Reopening/refreshing validates source changes; same path does not establish same source identity.
 
-Writes are synchronous with bounded backpressure. There is no archive background queue, writer resume or per-record fsync guarantee. Flush/commit visibility is not a promise of power-loss durability. The v3 writer opens exclusively and refuses an existing destination; choose a fresh destination for each export.
+Writes are synchronous with bounded backpressure. There is no archive background queue, writer resume or per-record fsync guarantee. Flush/commit visibility is not a promise of power-loss durability. The WVZ1 writer opens exclusively and refuses an existing destination; choose a fresh destination for each export.
 
 ## Live time, indexes and provenance
 
 The viewer's timeline combines committed times from every layer. The live-slider maintenance updates its index range as the union changes. Physical-time seeks still sample layers independently. Volumes/scalars remain held; no denser field cadence or field interpolation is invented by dragging a slider.
 
 Inspection and indexes distinguish source identity from convenience caches. The
-native SIMSCP4 reader builds a bounded header index and materializes requested
+native WVZ1 reader builds a bounded header index and materializes requested
 descriptors; it neither reads nor writes a disposable descriptor sidecar. Python
 scans descriptors directly. Pinned scientific analysis/export also uses the
 committed-prefix identity. A cache is never the authoritative scientific source,
@@ -80,7 +79,7 @@ a changed source cannot silently become a different reproducible inspection. The
 
 Per-record constraints remain format contracts. Aggregate metadata admission is
 a reader resource policy, not an export or wire-size ceiling. See
-[configuration, accounting and resource errors](SSC_METADATA_BUDGET.md).
+[configuration, accounting and resource errors](WAVEZ_METADATA_BUDGET.md).
 These budgets are not a whole-process memory estimate. MiB/GiB mean binary units.
 
 | Resource | Limit/default |

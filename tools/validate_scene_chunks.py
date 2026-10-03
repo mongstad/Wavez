@@ -14,7 +14,7 @@ def main():
     locations=[0,1,524287,524288,524289,1048575,1048576,count*3-1]
     expected=[];hashes={}
     for codec in ("none","zstd"):
-        path=out/(codec+".ssc")
+        path=out/(codec+".wvz")
         with SceneCapture(path,objects=[dict(id="p",kind="particles",units="m",identity="anonymous")],compression=codec) as writer:
             writer.add_particles("p",0,p,velocity=v);writer.add_particles("p",1,p[::-1],velocity=v[::-1])
         hashes[str(path)]=hashlib.sha256(path.read_bytes()).hexdigest()

@@ -19,7 +19,7 @@ def main():
     args = parser.parse_args()
     out = args.output_dir.resolve()
     out.mkdir(parents=True, exist_ok=False)
-    source = out / 'scene.ssc'
+    source = out / 'scene.wvz'
     scene(source)
     digest = hashlib.sha256(source.read_bytes()).hexdigest()
     result = subprocess.run([

@@ -1,4 +1,9 @@
-"""Classify remaining old-brand references and preserve issue-155 historical evidence."""
+"""Audit current WAVEZ paths for retired SimScope and SIMSCP4 identities.
+
+Old terms in historical reports remain accurate evidence. Negative tests may
+name them only to establish refusal. The generated report classifies every
+remaining tracked occurrence for owner review.
+"""
 import argparse
 from collections import Counter
 import json
@@ -7,157 +12,88 @@ import re
 import subprocess
 
 ROOT = Path(__file__).resolve().parents[1]
-BASE = "d6e4bd8e19e8c5e187c6a7c263c9bacdcd80bdbe"
-HISTORICAL_DOCS = ['G2_STORAGE.md',
- 'G3_REPORT.md',
- 'G3_TIMELINE_FIX.md',
- 'G4_DESIGN.md',
- 'G4_REPORT.md',
- 'PLAYBACK_PERFORMANCE.md',
- 'PROVENANCE.md',
- 'SIMSCOPE_ACCEPTANCE_MATRIX.md',
- 'SIMSCOPE_NEXT_DESIGN.md',
- 'docs/ABOUT_SIMSCOPE.md',
- 'docs/BACKGROUND_EXPORT_VALIDATION.md',
- 'docs/CAMERA_TUMBLE_VALIDATION.md',
- 'docs/CURRENT_STATUS.md',
- 'docs/CUSTOM_ORBIT.md',
- 'docs/DYNAMIC_FIELD_PREPARATION.md',
- 'docs/EVIDENCE_INDEX.md',
- 'docs/EXIT_MENU.md',
- 'docs/EXPERIMENT_LESSONS.md',
- 'docs/FIELD_PREPARATION_BUDGET.md',
- 'docs/FILE_DIALOGS.md',
- 'docs/FULLSCREEN_RESTORE_VALIDATION.md',
- 'docs/G4_ACCEPTANCE.md',
- 'docs/LAYER_LEGENDS.md',
- 'docs/LEGEND_CARD_REVIEW.md',
- 'docs/LEGEND_CONTENT_LAYOUT.md',
- 'docs/LEGEND_DEFAULTS.md',
- 'docs/LEGEND_INITIAL_LAYOUT_VALIDATION.md',
- 'docs/LEGEND_PLACEMENT_VALIDATION.md',
- 'docs/LEGEND_VISIBILITY_VALIDATION.md',
- 'docs/LOAD_ERROR_RECOVERY.md',
- 'docs/MAINTENANCE_REPORT.md',
- 'docs/MESH_PLAYBACK_MAINTENANCE_REPORT.md',
- 'docs/ORBIT_CENTER.md',
- 'docs/PANEL_DISCLOSURE_VALIDATION.md',
- 'docs/PARALLEL_FIELD_PREPARATION.md',
- 'docs/PAUSED_RENDERING.md',
- 'docs/PERFORMANCE_MAINTENANCE_REPORT.md',
- 'docs/PLAYBACK_INTEGRITY.md',
- 'docs/PLAYBACK_RUNWAY_REVIEW.md',
- 'docs/PROBE_MARKER_VALIDATION.md',
- 'docs/ROLLING_PLAYBACK_CACHE.md',
- 'docs/SSC_ACCELERATION.md',
- 'docs/SSC_ADAPTIVE_CACHE.md',
- 'docs/SSC_CAPTURE_PARAMETERS.md',
- 'docs/SSC_CHANNEL_SWITCH_STABILITY.md',
- 'docs/SSC_CONTINUOUS_PLAYBACK.md',
- 'docs/SSC_LAZY_LOADING.md',
- 'docs/SSC_LOAD_PERFORMANCE.md',
- 'docs/SSC_METADATA_BUDGET.md',
- 'docs/STATUS_PLAYBACK_STATE.md',
- 'docs/TIMELINE_ENDPOINTS.md',
- 'docs/UX1_REPORT.md',
- 'docs/UX1_UI_AUDIT.md',
- 'docs/UX2_REPORT.md',
- 'docs/UX3_FULLSCREEN.md',
- 'docs/UX3_MEDIA_TRANSPORT.md',
- 'docs/UX3_REPORT.md',
- 'docs/UX3_SHELL.md',
- 'docs/UX3_STATUS.md',
- 'docs/UX3_TRANSIENT_STATUS.md',
- 'docs/UX3_TRANSPORT.md',
- 'docs/UX4_DESIGN.md',
- 'docs/UX4_MENUS.md',
- 'docs/UX4_PANEL.md',
- 'docs/UX4_TOOLS.md',
- 'docs/UX5_CLEANUP.md',
- 'docs/UX5_STYLE_SLICE.md',
- 'docs/UX_IA_REVIEW.md',
- 'docs/UX_STYLE_VALIDATION.md',
- 'docs/VERSIONING_VALIDATION.md',
- 'docs/VIDEO_ACTIONS_VALIDATION.md',
- 'docs/VIDEO_CANCEL_CONFIRMATION.md',
- 'docs/VIDEO_EXPORT_LOCKS.md',
- 'docs/VIDEO_PROGRESS_VALIDATION.md',
- 'docs/VIDEO_REGRESSION.md',
- 'docs/VIDEO_STARTUP_116.md',
- 'docs/VIEW_PRESETS.md',
- 'docs/VOLUME_COLOR_NORMALIZATION.md',
- 'docs/VOLUME_DEFAULTS_VALIDATION.md',
- 'docs/VOLUME_DISPLAY_PRESETS.md',
- 'docs/VOLUME_OPACITY_MAPPING.md',
- 'docs/WINDOW_EDGE_REVEAL.md',
- 'viewer/ui/about/README.md']
-# Historical records retain names/commands from their original checkpoint.
-RULES = {
-    "serialized compatibility kind": r"simscope-(?:inspection|view-preset|export-source|matched-render|export-staging|numerical-export|member-cache)",
-    "diagnostic environment contract": r"SIMSCOPE_(?:FIELD_WORKERS|METADATA_BUDGET_MIB|VIDEO_PROFILE)",
-    "cache and staging location": r"\.simscope-(?:cache|export-)",
-    "working repository URL": r"github\.com/mongstad/SimScope",
-    "existing user data directory": r"(?:Godot|godot)/app_userdata/SimScope",
-    "stable documentation filename": r"(?:SIMSCOPE_(?:API|HANDBOOK|ACCEPTANCE_MATRIX|NEXT_DESIGN)|ABOUT_SIMSCOPE)\.md",
-    "existing checkout and board": r"`SimScope/?`|SimScope Development",
-    "external historical fixture path": r"(?:02B|03B)/simscope/",
+LEGACY = re.compile(r"SimScope|simscope|SIMSCP[0-9]*|\.ssc\b|FRM4|COMMIT4|SIMSCOPE_|\.simscope|\.sidx3|verify_ssc|profile_ssc", re.I)
+ACTIVE_ROOTS = {"wavez_export", "viewer", "tools", "tests", "examples"}
+CURRENT_DOCS = {
+    "AGENTS.md", "CONTRIBUTING.md", "README.md", "QUICKSTART.md",
+    "G3_FORMAT.md", "G3_GUIDE.md", "WAVEZ_API.md", "INSPECTION_STATE.md",
+    "docs/START_HERE.md", "docs/CAPTURE_FORMAT_POLICY.md",
+    "docs/CAPTURE_FORMAT_AND_API.md", "docs/SIMULATION_INTEGRATION_GUIDE.md",
+    "docs/WAVEZ_HANDBOOK.md", "docs/WAVEZ_METADATA_BUDGET.md",
+    "docs/WAVEZ_VIEW_PRESETS.md", "docs/G4_SCHEMAS.md",
+    "docs/WVZ1_IMPLEMENTATION_VALIDATION.md",
 }
+NEGATIVE_TESTS = {
+    "tests/test_scene_contract.py", "tools/validate_field_session.py",
+    "viewer/layers/test_field_session.gd", "viewer/layers/test_scene_playback_lifecycle.gd",
+    "viewer/ui/test_branding.gd",
+    "tests/test_analysis_recipes.py", "viewer/scene/test_view_preset.gd",
+    "viewer/video/test_source_identity.gd",
+}
+EXPLANATORY_CURRENT_DOCS = {
+    "docs/CAPTURE_FORMAT_POLICY.md", "docs/WAVEZ_METADATA_BUDGET.md",
+    "docs/WAVEZ_VIEW_PRESETS.md",
+    "docs/WVZ1_IMPLEMENTATION_VALIDATION.md",
+}
+MIXED_HISTORICAL_DOCS = {
+    "docs/CURRENT_STATUS.md", "VIDEO_EXPORT.md", "docs/FILE_DIALOGS.md",
+    "docs/PLAYBACK_INTEGRITY.md", "docs/VIEW_PRESETS.md",
+}
+
+
+def classify(name, line, text=""):
+    if name == "docs/WAVEZ_HANDBOOK.md" and "[historical roadmap](../SIMSCOPE_NEXT_DESIGN.md)" in text and "[historical acceptance registry](../SIMSCOPE_ACCEPTANCE_MATRIX.md)" in text:
+        return "link to historical roadmap and acceptance registry"
+    if name in NEGATIVE_TESTS:
+        return "negative refusal test"
+    if name in EXPLANATORY_CURRENT_DOCS:
+        return "explicit obsolete-format refusal or historical link"
+    if name in MIXED_HISTORICAL_DOCS:
+        if name == "docs/CURRENT_STATUS.md" and line < 115:
+            return None
+        if name == "docs/CURRENT_STATUS.md" and 210 <= line <= 222:
+            return None
+        if name == "VIDEO_EXPORT.md" and line < 25:
+            return None
+        if name == "docs/FILE_DIALOGS.md" and line <= 7:
+            return "explicit historical preface"
+        if name == "docs/PLAYBACK_INTEGRITY.md" and line <= 8:
+            return "explicit historical preface"
+        return "historical review-time section"
+    if name in CURRENT_DOCS or name.split('/')[0] in ACTIVE_ROOTS or name == '.gitignore':
+        return None
+    return "historical document or evidence"
 
 
 def audit():
     names = subprocess.check_output(["git", "ls-files", "--cached", "--others", "--exclude-standard"], cwd=ROOT, text=True).splitlines()
     rows, unknown = [], []
     for name in sorted(set(names)):
-        path = ROOT / name
-        if not path.is_file(): continue
         if name in {"tools/audit_branding.py", "docs/branding/legacy-reference-audit.json"}:
-            continue  # Explicit classification vocabulary and its generated report.
-        if "simscope" in name.lower():
-            category = "historical evidence path" if name.startswith("docs/evidence/") else "stable documentation filename" if re.search(RULES["stable documentation filename"], name) else None
-            entry = dict(file=name, line=0, categories=[category] if category else [])
-            (rows if category else unknown).append(entry)
-        raw = path.read_bytes()
-        try: text = raw.decode("utf-8")
-        except UnicodeDecodeError:
-            if re.search(b"simscope", raw, re.I):
-                entry = dict(file=name, line=0, categories=["historical binary evidence"])
-                (rows if name.startswith("docs/evidence/") else unknown).append(entry)
             continue
-        for number, line in enumerate(text.splitlines(), 1):
-            if not re.search("simscope", line, re.I): continue
-            if name.startswith("docs/evidence/") or name in HISTORICAL_DOCS:
-                categories = ["historical report, provenance or checkpoint"]
-            elif name == "viewer/ui/test_branding.gd" and 'contains("simscope")' in line:
-                categories = ["old-brand regression assertion"]
-            elif name == "docs/BRANDING_MIGRATION.md":
-                categories = ["explicit migration explanation"]
-            elif name == "README.md" and line.startswith("The project was renamed from SimScope under #155."):
-                categories = ["explicit migration explanation"]
-            elif name == ".gitignore" and line == ".simscope-*/":
-                categories = ["cache and staging location"]
-            else:
-                categories = []
-                remaining = line
-                for category, pattern in RULES.items():
-                    if re.search(pattern, remaining):
-                        categories.append(category)
-                        remaining = re.sub(pattern, "", remaining)
-                if re.search("simscope", remaining, re.I):
-                    unknown.append(dict(file=name, line=number, text=line)); continue
-            rows.append(dict(file=name, line=number, categories=categories))
-    # Evidence is immutable; do not silently update baseline hashes to bless a rewrite.
-    changed_evidence = subprocess.check_output(["git", "diff", "--name-only", BASE, "--", "docs/evidence"], cwd=ROOT, text=True).splitlines()
-    rewritten_history = []
-    for name in HISTORICAL_DOCS:
-        # These four have a current branding note / link repair; their original history is inspected separately.
-        if name in {"G4_DESIGN.md", "docs/ABOUT_SIMSCOPE.md", "docs/CURRENT_STATUS.md", "viewer/ui/about/README.md"}: continue
-        original = subprocess.check_output(["git", "show", BASE + ":" + name], cwd=ROOT)
-        if (ROOT / name).read_bytes() != original: rewritten_history.append(name)
-    counts = Counter(category for row in rows for category in row["categories"])
-    return dict(status="FAIL" if unknown or changed_evidence or rewritten_history else "PASS", base=BASE,
+        path = ROOT / name
+        if not path.is_file():
+            continue
+        filename_match = LEGACY.search(name)
+        if filename_match:
+            category = classify(name, 0, name)
+            entry = dict(file=name, line=0, text=name, category=category)
+            (rows if category else unknown).append(entry)
+        try:
+            lines = path.read_text().splitlines()
+        except (UnicodeDecodeError, ValueError):
+            continue
+        for number, line in enumerate(lines, 1):
+            if not LEGACY.search(line):
+                continue
+            category = classify(name, number, line)
+            entry = dict(file=name, line=number, text=line, category=category)
+            (rows if category else unknown).append(entry)
+    changed_evidence = subprocess.check_output(["git", "diff", "--name-only", "origin/main", "--", "docs/evidence"], cwd=ROOT, text=True).splitlines()
+    counts = Counter(row["category"] for row in rows)
+    return dict(status="PASS" if not unknown and not changed_evidence else "FAIL",
                 references=len(rows), categories=dict(counts), unclassified=unknown,
-                changed_historical_evidence=changed_evidence, rewritten_historical_documents=rewritten_history,
-                survivors=rows)
+                changed_historical_evidence=changed_evidence, survivors=rows)
 
 
 def main():

@@ -16,7 +16,7 @@ from tests.g4.fixtures import scene,HIGH_ID
 class SelectionTests(unittest.TestCase):
     def setUp(self):
         self.temp=tempfile.TemporaryDirectory();self.root=Path(self.temp.name)
-        self.path=scene(self.root/"scene.ssc");self.digest=hashlib.sha256(self.path.read_bytes()).hexdigest()
+        self.path=scene(self.root/"scene.wvz");self.digest=hashlib.sha256(self.path.read_bytes()).hexdigest()
         self.source=SourceSnapshot(self.path)
 
     def tearDown(self):
@@ -53,7 +53,7 @@ class SelectionTests(unittest.TestCase):
         self.assertEqual(self.resolve(d,0)["present"],1)
 
     def test_anonymous_roi_freezes_rows_not_identity(self):
-        path=self.root/"anonymous.ssc"
+        path=self.root/"anonymous.wvz"
         with SceneCapture(path,objects=[dict(id="p",kind="particles",units="m",identity="anonymous")]) as w:
             w.add_particles("p",0,[[0.,0,0],[2.,0,0]])
             w.add_particles("p",1,[[2.,0,0],[0.,0,0]])

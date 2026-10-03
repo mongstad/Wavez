@@ -54,29 +54,30 @@ func run() -> void:
 		else:check(view.scene_layers.error.contains("object sample 3 (record 3)"),"Worker contextual refusal: "+row.file+" "+view.scene_layers.error)
 		view.free();await process_frame
 	var reader := Reader.new(false)
-	check(not reader.open(out.path_join("bad-metadata.ssc")),"Malformed metadata rejected")
-	check(reader.open(out.path_join("moved/renamed.data")),"Renamed capture does not need a trust entry")
+	check(not reader.open(out.path_join("bad-metadata.wvz")),"Malformed metadata rejected")
+	check(not reader.open(out.path_join("moved/renamed.data")) and reader.error.contains("requires a .wvz"),"Obsolete suffix is refused")
+	check(reader.open(out.path_join("moved/renamed.wvz")),"Renamed WVZ1 scene does not need a trust entry")
 	check(not reader.read_sample("object",3).is_empty(),"Renamed valid content reads")
 	reader.close()
 	var offline = load("res://main.gd").new()
-	offline.offline_instance = true;offline.playing = false;offline.capture_path = out.path_join("volume-none-sha_only.ssc")
+	offline.offline_instance = true;offline.playing = false;offline.capture_path = out.path_join("volume-none-sha_only.wvz")
 	root.add_child(offline);offline.set_process(false)
 	check(not offline.scene_layers.use_async(),"Offline rendering keeps synchronous strict reads")
 	check(offline.scene_layers.sample(.31).is_empty() and offline.scene_layers.error.contains("checksum"),"Offline rendering rejects payload-only corruption")
 	await process_frame
 	if DisplayServer.get_name() != "headless":await RenderingServer.frame_post_draw
 	offline.free();await process_frame
-	var working := out.path_join("working.ssc")
+	var working := out.path_join("working.wvz")
 	check(reader.open(working),"Mutable disposable source opens")
 	var before := reader.read_sample("object",3);var generation := reader.generation
 	var file := FileAccess.open(working,FileAccess.WRITE)
-	file.store_buffer(FileAccess.get_file_as_bytes(out.path_join("volume-none-sha_only.ssc")));file.close()
+	file.store_buffer(FileAccess.get_file_as_bytes(out.path_join("volume-none-sha_only.wvz")));file.close()
 	var after := reader.read_sample("object",3)
 	check(reader.generation > generation and not after.is_empty(),"Same-path mutation invalidates cached source generation")
 	check(before.channels.rho.to_byte_array() != after.channels.rho.to_byte_array(),"Same path does not preserve old cached content")
 	reader.close()
 	# Hold a field worker just before publication, mutate the source and ensure it refuses.
-	file = FileAccess.open(working,FileAccess.WRITE);file.store_buffer(FileAccess.get_file_as_bytes(out.path_join("volume-none.ssc")));file.close()
+	file = FileAccess.open(working,FileAccess.WRITE);file.store_buffer(FileAccess.get_file_as_bytes(out.path_join("volume-none.wvz")));file.close()
 	var view = make_view(working,true);var control = view.scene_layers.field_playback
 	control.request(.31,view.scene_layers.field_budget())
 	var job: Dictionary = control.automatic_jobs[0].duplicate(true)
@@ -88,7 +89,7 @@ func run() -> void:
 	var began := Time.get_ticks_msec()
 	while not worker.status().test_barrier_waiting and Time.get_ticks_msec()-began < 5000:await process_frame
 	check(worker.status().test_barrier_waiting,"Mutation overlaps in-flight preparation")
-	file = FileAccess.open(working,FileAccess.WRITE);file.store_buffer(FileAccess.get_file_as_bytes(out.path_join("volume-none-sha_only.ssc")));file.close()
+	file = FileAccess.open(working,FileAccess.WRITE);file.store_buffer(FileAccess.get_file_as_bytes(out.path_join("volume-none-sha_only.wvz")));file.close()
 	worker.test_barrier = null;gate.post()
 	began = Time.get_ticks_msec()
 	while worker.status().failures.is_empty() and Time.get_ticks_msec()-began < 5000:await process_frame

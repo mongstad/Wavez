@@ -1,4 +1,4 @@
-"""Required SIMSCP4 statistics_v1: exact counts and binary float64 extrema."""
+"""Required WVZ1 statistics_v1: exact counts and binary float64 extrema."""
 import math
 import re
 import struct

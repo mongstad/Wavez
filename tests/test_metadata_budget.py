@@ -9,7 +9,7 @@ from tests.metadata_fixture import generate, arrays
 class LongDescriptorCaptureTests(unittest.TestCase):
     def test_real_writer_crosses_old_boundary_without_changing_science(self):
         with tempfile.TemporaryDirectory() as directory:
-            path = Path(directory)/'long.ssc'
+            path = Path(directory)/'long.wvz'
             report = generate(path)
             self.assertGreater(report['aggregate_descriptor_charge'], 32*1024**2)
             with SceneReader(path, cache_bytes=0) as reader:

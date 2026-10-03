@@ -1,4 +1,4 @@
-"""Focused continuous camera regression using tiny native SIMSCP4 fixtures."""
+"""Focused continuous camera regression using tiny native WVZ1 fixtures."""
 import argparse
 import hashlib
 import json
@@ -22,7 +22,7 @@ def main():
     out = args.output_dir.resolve()
     out.mkdir(parents=True, exist_ok=False)
     for kind in ['particles', 'volume', 'mesh']:
-        with SceneCapture(out / (kind + '.ssc'), objects=[dict(id='object', kind=kind, units='demo units', identity='persistent_i8' if kind == 'particles' else 'stable_topology' if kind == 'mesh' else 'grid')], compression='none') as writer:
+        with SceneCapture(out / (kind + '.wvz'), objects=[dict(id='object', kind=kind, units='demo units', identity='persistent_i8' if kind == 'particles' else 'stable_topology' if kind == 'mesh' else 'grid')], compression='none') as writer:
             for t in [0., 1.]:
                 points = np.array([[-2., 0., 0.], [2., 0., 0.], [0., 3., 1.]]) + [0, 0, t]
                 if kind == 'particles':
@@ -39,7 +39,7 @@ def main():
                         if np.dot(np.cross(b-a,c-a), (a+b+c)/3-vertices.mean(axis=0)) < 0:
                             face[1],face[2] = face[2],face[1]
                     writer.add_mesh('object', t, vertices, faces, vertex_channels=dict(vertex_id=np.arange(4, dtype='i8')))
-    with SceneCapture(out / 'mixed.ssc', objects=[
+    with SceneCapture(out / 'mixed.wvz', objects=[
         dict(id='particles', kind='particles', units='demo units', identity='persistent_i8'),
         dict(id='volume', kind='volume', units='demo units', identity='grid'),
         dict(id='mesh', kind='mesh', units='demo units', identity='stable_topology'),
@@ -56,7 +56,7 @@ def main():
                 if np.dot(np.cross(b-a, c-a), (a+b+c)/3-vertices.mean(axis=0)) < 0:
                     face[1], face[2] = face[2], face[1]
             writer.add_mesh('mesh', t, vertices, faces, vertex_channels=dict(vertex_id=np.arange(4, dtype='i8')))
-    hashes = {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in out.glob('*.ssc')}
+    hashes = {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in out.glob('*.wvz')}
     env = os.environ.copy()
     env.update(XDG_DATA_HOME=str(out/'userdata'), XDG_CONFIG_HOME=str(out/'config'))
     def run(name, command):
@@ -68,7 +68,7 @@ def main():
     run('import', [args.godot, '--headless', '--path', 'viewer', '--editor', '--import'])
     renderer = ['--headless'] if args.renderer == 'headless' else ['--rendering-method', args.renderer]
     run('camera', [args.godot, '--path', 'viewer', *renderer, '--resolution', '960x640', '--audio-driver', 'Dummy', '--script', 'res://scene/test_camera_tumble.gd', '--', '--camera-output='+str(out)])
-    assert hashes == {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in out.glob('*.ssc')}, 'Capture bytes changed'
+    assert hashes == {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in out.glob('*.wvz')}, 'Capture bytes changed'
     report = json.loads((out/'camera-report.json').read_text())
     assert not report['failures'], report
     report['source_hashes_unchanged'] = hashes

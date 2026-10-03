@@ -23,7 +23,7 @@ def main():
     p.add_argument('--real-capture', type=Path)
     a = p.parse_args();out = a.output_dir.resolve();out.mkdir(parents=True,exist_ok=False)
     env=os.environ.copy();env.update(XDG_DATA_HOME=str(out/'userdata'),XDG_CONFIG_HOME=str(out/'config'))
-    source=out/'color.ssc'
+    source=out/'color.wvz'
     if a.real_capture:source=a.real_capture.resolve()
     else:
         z,y,x=np.meshgrid(*([np.linspace(-2,2,17)]*3),indexing='ij')

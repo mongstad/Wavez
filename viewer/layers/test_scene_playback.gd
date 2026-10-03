@@ -41,8 +41,8 @@ func run() -> void:
 		if arg.begins_with("--playback-fixture="):out = arg.trim_prefix("--playback-fixture=")
 	if out.is_empty():push_error("Missing fixture");quit(1);return
 	for name in ["ids","anonymous","zstd"]:
-		var reference = make_view(out.path_join(name+".ssc"),false)
-		var buffered = make_view(out.path_join(name+".ssc"),true)
+		var reference = make_view(out.path_join(name+".wvz"),false)
+		var buffered = make_view(out.path_join(name+".wvz"),true)
 		check(buffered.scene_layers.playback.enabled,"real CPU worker enabled "+name)
 		for mapping in ["fixed","scalar","visual_color","velocity_magnitude","log_scalar","cyclic_scalar"]:
 			for view in [reference,buffered]:

@@ -17,7 +17,7 @@ func policy_checks() -> void:
 func run() -> void:
 	policy_checks()
 	var directory := OS.get_cmdline_user_args()[0]
-	var view = make_view(directory.path_join("large.ssc"),true)
+	var view = make_view(directory.path_join("large.wvz"),true)
 	var playback = view.scene_layers.field_playback
 	var targets: Array = playback.request(1.0,view.scene_layers.field_budget())
 	var report := {"memory":playback.Memory.memory_headroom(),"targets":targets.map(func(j):return {"charge":j.charge,"decoded":j.entry.decoded,"preview_budget":j.budget}),"cpu_limit":playback.cpu_limit,"error":playback.error}
@@ -76,7 +76,7 @@ func run() -> void:
 		while isolated.status().active and Time.get_ticks_msec()-began<10000:await process_frame
 		check(isolated.status().bytes == 0 and isolated.status().cancelled > 0,"Reduced budget cancels in-flight allocation publication")
 		isolated.close()
-		var multi = make_view(directory.path_join("multiple.ssc"),true)
+		var multi = make_view(directory.path_join("multiple.wvz"),true)
 		for state in multi.scene_layers.states.values():state.visible = true;state.volume = false;state.slice = true
 		var fields = multi.scene_layers.field_playback
 		var combined: Array = fields.request(1.0,multi.scene_layers.field_budget())

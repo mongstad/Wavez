@@ -2,7 +2,7 @@ extends RefCounted
 # Local export binding, not a whole-file integrity certificate or a trust cache.
 const Stamp = preload("res://data/source_stamp.gd")
 const Profile = preload("res://scene/playback_profile.gd")
-const KIND := "simscope-export-source"
+const KIND := "wavez-export-source"
 static func is_local(value: Dictionary) -> bool: return value.get("kind") == KIND
 static func capture(reader) -> Dictionary:
 	if reader == null or not reader.index_valid or not reader.trusted or reader.source_stamp.is_empty():return {}
@@ -10,7 +10,7 @@ static func capture(reader) -> Dictionary:
 	var hash := HashingContext.new();hash.start(HashingContext.HASH_SHA256)
 	for record in reader.records:hash.update(record.raw_header)
 	Profile.count("video_identity_header_bytes",reader.records.size()*80)
-	var result := {"kind":KIND,"version":1,"format":"SIMSCP4","path":reader.source_path,
+	var result := {"kind":KIND,"version":1,"format":"WVZ1","path":reader.source_path,
 		"uuid":reader.metadata.uuid,"header_sha256":reader.header.sha256,"record_headers_sha256":hash.finish().hex_encode(),
 		"committed_bytes":str(reader.scan_offset),"complete_records":reader.records.size(),"complete_frames":reader.frames.size(),
 		"stamp":reader.source_stamp.duplicate()}

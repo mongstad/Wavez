@@ -40,7 +40,7 @@ double representation produced by Godot's JSON parser; IDs still require strings
 Source metadata now shares the enclosing `memory_bytes` allocation pool rather
 than a fixed 33 MiB cumulative-read cap. An internal `SourceSnapshot(metadata_bytes=...)`
 can additionally restrict metadata; exhaustion is `memory_limit`. See
-[reader accounting](SSC_METADATA_BUDGET.md).
+[reader accounting](WAVEZ_METADATA_BUDGET.md).
 
 Budgets have `memory_bytes`, `wall_seconds`,
 `cpu_seconds`; omitted fields use the approved defaults.
@@ -265,7 +265,7 @@ No user source or existing destination is modified.
 
 ## Inspection version 3 and rendering
 
-The envelope is `{kind:"simscope-inspection",version:3,source,payload,members,
+The envelope is `{kind:"wavez-inspection",version:3,source,payload,members,
 results,bundled_results}`. `payload` contains `base` (nested native scene v2
 visual/sample snapshot), `selections` (version-1 selection state), and `analysis`.
 Analysis stores at most 64 named result/request summaries, the current result,

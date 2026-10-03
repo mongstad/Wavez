@@ -6,7 +6,7 @@ from wavez_export import SceneCapture,SceneReader
 OUT=ROOT/'results/g3'
 
 def run(mode):
-    source=OUT/'scene-demo.ssc';target=OUT/('benchmark-'+mode+'.ssc');began=time.perf_counter();raw=0;records=0
+    source=OUT/'scene-demo.wvz';target=OUT/('benchmark-'+mode+'.wvz');began=time.perf_counter();raw=0;records=0
     if mode in ('none','zstd'):
         if target.exists():target.unlink() # this tool's own disposable benchmark outputs only
         with SceneReader(source,cache_bytes=0) as r,SceneCapture(target,objects=r.metadata['objects'],metadata={'simulation_name':'G3 benchmark'},compression=mode) as w:
@@ -15,7 +15,7 @@ def run(mode):
                 spec={v['name']:v['association'] for v in row['descriptor']['arrays']};w._add(id,row['time'],a,spec,row['descriptor']['geometry'])
         size=target.stat().st_size
     else:
-        source=OUT/('benchmark-'+mode.removeprefix('read-')+'.ssc');size=source.stat().st_size
+        source=OUT/('benchmark-'+mode.removeprefix('read-')+'.wvz');size=source.stat().st_size
         with SceneReader(source,cache_bytes=0) as r:
             for id in r.objects:
                 for i in range(len(r.samples[id])):

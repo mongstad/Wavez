@@ -18,7 +18,7 @@ def main():
     args = parser.parse_args()
     out = args.output_dir.resolve()
     out.mkdir(parents=True, exist_ok=False)
-    source = out / 'identity.ssc'
+    source = out / 'identity.wvz'
     large = 9007199254740993
     cases = [[0, large, 9223372036854775807], [0, large, 9223372036854775807],
              [9223372036854775807, large, 0], [4, large, 0]]

@@ -16,7 +16,7 @@ func run() -> void:
 	var args := OS.get_cmdline_user_args(); output = args[0]
 	create_timer(30).timeout.connect(func(): push_error("Exit timeout"); quit(1))
 	var view := ObservedViewer.new(); view.evidence = output.path_join("closed.json")
-	view.capture_path = args[1] if args[3] == "active" else output.path_join("no-capture.ssc")
+	view.capture_path = args[1] if args[3] == "active" else output.path_join("no-capture.wvz")
 	view.playing = false; view.orbit_enabled = false; root.add_child(view)
 	if args[2] == "fullscreen": view._toggle_fullscreen(); view.shell.edge_reveal.states.top.visible = true; view.shell.layout()
 	elif args[2] == "maximized": root.mode = Window.MODE_MAXIMIZED

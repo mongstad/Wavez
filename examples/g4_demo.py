@@ -1,7 +1,7 @@
 """Self-contained synthetic G4 selections, native traces, field mass and diagnostics.
 
 Run: python -m examples.g4_demo --output results/g4-demo
-Open scene.ssc in the native viewer; GUIDE.md in the new output gives the oracles.
+Open scene.wvz in the native viewer; GUIDE.md in the new output gives the oracles.
 """
 import argparse,csv,hashlib,json,math
 from pathlib import Path
@@ -32,7 +32,7 @@ def create(path):
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--output',type=Path,required=True);args=parser.parse_args();out=args.output.resolve();out.mkdir(parents=True,exist_ok=False)
-    path=create(out/'scene.ssc');digest=hashlib.sha256(path.read_bytes()).hexdigest();assets=MemberAssets(out/'private/members');cache=ResultCache(out/'private/results');outputs=[];serial=0
+    path=create(out/'scene.wvz');digest=hashlib.sha256(path.read_bytes()).hexdigest();assets=MemberAssets(out/'private/members');cache=ResultCache(out/'private/results');outputs=[];serial=0
     with SourceSnapshot(path,assets=assets) as source:
         identity=source.identity()
         cohort=S.define(source,dict(key='cohort',name='Exact persistent cohort',object='p',kind='particle_ids',selector=dict(ids=['7',str(2**53+1)])))
@@ -63,7 +63,7 @@ def main():
     period=run('estimate_period',dict(result=supplied,series=dict(selection_key='supplied',channel='oscillation',component='',statistic='supplied_diagnostic',member_key=''),window=[0,12],options=dict(method='peak_spacing',detrend='mean',lag_range=[1,3],min_separation=1,prominence=.5)))['result'];export('period',period)
     candidates=[row for row in cache.page(period)['rows'] if row['statistic']=='exploratory_period']
     assert candidates and all(float(row['value'])==2 and row['value_status']=='exploratory_candidate' for row in candidates)
-    tracer_path=out/'tracer-only.ssc'
+    tracer_path=out/'tracer-only.wvz'
     with SceneCapture(tracer_path,objects=[dict(id='p',kind='particles',identity='persistent_i8',units='m')],metadata=dict(time_unit='s',position_unit='m',channel_metadata=dict(p=dict(rho=dict(units='kg/m^3'))))) as writer:
         for t in [0,.5,1.5,3]:writer.add_particles('p',t,np.array([[.25+t,2,0],[.75+t,2,0],[1.25+t,2,0]]),ids=[7,8,9],rho=np.full(3,2.))
     tracer_hash=hashlib.sha256(tracer_path.read_bytes()).hexdigest()
@@ -79,7 +79,7 @@ def main():
     (out/'demo.json').write_text(json.dumps(dict(kind='wavez-g4-synthetic-demo',source=identity,tracer_source=tracer_identity,tracer_field_integral_refusal=refusal,exports=outputs,oracles=dict(field_mass_kg=288,lower_cylinder_mass_kg=144,field_samples=5,particle_times=[0,.5,1.5,3],recorded_velocity_m_s=1,diagnostic_period_seconds=2),source_unchanged=True),indent=2)+'\n')
     (out/'GUIDE.md').write_text('''# Synthetic G4 walkthrough
 
-Open `scene.ssc`, choose **Selections → Use current capture**, and inspect object `p`.
+Open `scene.wvz`, choose **Selections → Use current capture**, and inspect object `p`.
 Create the exact ID cohort `7,9007199254740993` or the box from (-1,-1,-1) to (1,1,1).
 The cohort follows supplied IDs; the spatial box reevaluates membership. ID 7 is
 absent at 1.5 s and the large ID is absent at 3 s. No missing member becomes zero.
@@ -94,7 +94,7 @@ stable explicit vertex IDs 11–13. Use a source probe or a line space-time requ
 on `signal` to inspect the field at its own cadence.
 
 The lower-cylinder ROI has axis (1.5,2,-1.5) → (1.5,2,1.5), radius 3 m.
-It includes the 12 lower cells: discrete mass is 144 kg. `tracer-only.ssc` has
+It includes the 12 lower cells: discrete mass is 144 kg. `tracer-only.wvz` has
 supplied density samples and no grid. Its exact field-mass request is explicitly
 refused; `tracer-estimate` contains only labeled sampled means at native times.
 

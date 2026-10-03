@@ -1,4 +1,4 @@
-"""Compare actual SIMSCP4 callback transitions with bounded CPU preparation."""
+"""Compare actual WVZ1 callback transitions with bounded CPU preparation."""
 import argparse,hashlib,json,shutil,statistics,subprocess
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]

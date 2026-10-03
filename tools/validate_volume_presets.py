@@ -25,7 +25,7 @@ def main():
     args = parser.parse_args()
     out = args.output_dir.resolve()
     out.mkdir(parents=True, exist_ok=False)
-    source = args.real_capture.resolve() if args.real_capture else out / 'presets.ssc'
+    source = args.real_capture.resolve() if args.real_capture else out / 'presets.wvz'
     if not args.real_capture:
         z, y, x = np.meshgrid(*([np.linspace(-2, 2, 33)] * 3), indexing='ij')
         positive = np.exp(-((x-0.8)**2+y*y+z*z)*4)

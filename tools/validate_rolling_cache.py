@@ -17,7 +17,7 @@ def main():
     out.mkdir(parents=True, exist_ok=False)
     source = fixture(out)
     before = hashlib.sha256(source.read_bytes()).hexdigest()
-    with SceneCapture(out/'mixed.ssc', objects=[dict(id='p', kind='particles', identity='anonymous', units='m'), dict(id='field', kind='volume', units='m')]) as writer:
+    with SceneCapture(out/'mixed.wvz', objects=[dict(id='p', kind='particles', identity='anonymous', units='m'), dict(id='field', kind='volume', units='m')]) as writer:
         for t in (0., .01, .02, .03, .04, .05, .06, .07, .08, .5, 1., 2.):
             writer.add_particles('p', t, np.zeros((2, 3), dtype='f4'))
         for t in (0., 1., 2.):

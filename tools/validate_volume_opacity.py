@@ -81,7 +81,7 @@ def main():
     args = parser.parse_args()
     out = args.output_dir.resolve()
     out.mkdir(parents=True, exist_ok=False)
-    source = out / 'opacity.ssc'
+    source = out / 'opacity.wvz'
     z, y, x = np.meshgrid(*([np.linspace(-2, 2, 33)] * 3), indexing='ij')
     positive = np.exp(-((x-1)**2+y*y+z*z)*4)
     negative = np.exp(-((x+1)**2+y*y+z*z)*4)

@@ -42,7 +42,7 @@ func run():
 	var args = OS.get_cmdline_user_args();output = args[0]
 	var production: String = args[1] if args.size()>1 else ""
 	view = load("res://main.gd").new();view.scene_prebuffer_enabled = false;root.add_child(view);view.set_process(false)
-	view._open_capture(output.path_join("scene.ssc") if production.is_empty() else production);view.playing = false;view.orbit_enabled = false
+	view._open_capture(output.path_join("scene.wvz") if production.is_empty() else production);view.playing = false;view.orbit_enabled = false
 	await settle();check(view.generic_reader != null,"capture opens")
 	configure()
 	view.playing = true # main processing is disabled; check transport intent survives
@@ -96,6 +96,9 @@ func run():
 		check(not text.contains('"'+forbidden+'"'),"no source/shell field "+forbidden)
 	var stored = JSON.parse_string(text)
 	var stable := Visual.snapshot(view);before = protected()
+	var obsolete: Dictionary = stored.duplicate(true);obsolete.kind = "simscope-view-preset"
+	write_text(output.path_join("bad.json"),JSON.stringify(obsolete))
+	check(not view._load_inspection(output.path_join("bad.json")).is_empty(),"Old preset kind is refused")
 	write_text(output.path_join("bad.json"),'{"kind":"broken"}')
 	check(not view._load_inspection(output.path_join("bad.json")).is_empty(),"malformed preset reported")
 	var bad: Dictionary = stored.duplicate(true);bad.settings.view.exposure = "wrong type"
@@ -120,13 +123,13 @@ func run():
 	var result := Preset.apply(view,extra)
 	check(result.error.is_empty() and result.skipped.size() >= 2,"unsupported optional settings skipped with diagnostics")
 	if production.is_empty():
-		view._open_capture(output.path_join("scene.ssc"));await settle()
+		view._open_capture(output.path_join("scene.wvz"));await settle()
 		check(view._load_inspection(path).is_empty(),"same capture after reopen")
-		view._open_capture(output.path_join("different.ssc"));await settle();before = protected()
+		view._open_capture(output.path_join("different.wvz"));await settle();before = protected()
 		check(view._load_inspection(path).is_empty(),"different compatible object/channel names load")
 		check(protected() == before,"different capture identifiers/time remain unchanged")
 		check(view.scene_layers.states.vacuum_field.colormap == stored.settings.volume.colormap and is_equal_approx(view.scene_layers.states.vacuum_field.opacity,.7),"portable volume settings apply to current selection")
-		view._open_capture(output.path_join("particles.ssc"));await settle()
+		view._open_capture(output.path_join("particles.wvz"));await settle()
 		check(view._load_inspection(path).is_empty() and view.status_label.text.contains("Skipped"),"absent optional volume/mesh skipped")
 	# A native/platform file dialog is the sole recipe UI. Exercise callback and cancellation.
 	var was := protected()

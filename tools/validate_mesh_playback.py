@@ -1,4 +1,4 @@
-"""Synthetic mesh worker/lifecycle/render regression; optional retained SIMSCP4 input, no solver."""
+"""Synthetic mesh worker/lifecycle/render regression; optional retained WVZ1 input, no solver."""
 import argparse, hashlib, json, os, subprocess, sys
 from pathlib import Path
 import numpy as np
@@ -16,7 +16,7 @@ def fixtures(out):
         objects = [dict(id='surface', kind='mesh', units='m', identity='none' if name=='anonymous' else 'stable_topology')]
         if name == 'mixed':
             objects += [dict(id='reflected',kind='mesh',units='m',identity='stable_topology',static=True,data_to_world=[-1,0,0,4,0,1,0,0,0,0,1,0]),dict(id='particles',kind='particles',units='m',identity='persistent_i8'),dict(id='field',kind='volume',units='m')]
-        with SceneCapture(out/(name+'.ssc'), objects=objects, compression='zstd') as w:
+        with SceneCapture(out/(name+'.wvz'), objects=objects, compression='zstd') as w:
             for i,t in enumerate([0,.7,1.9,3.0]):
                 p=positions.copy();p[:,2]=t*.2*p[:,0]**2
                 tri=triangles.copy();vid=ids.copy()

@@ -69,7 +69,7 @@ func run() -> void:
 	await capture("01-empty")
 	view._show_open_dialog();await capture("02-open-dialog")
 	view.open_dialog.hide()
-	view._open_capture(out.path_join("scene.ssc"))
+	view._open_capture(out.path_join("scene.wvz"))
 	var began := Time.get_ticks_msec()
 	while view.scene_layers.is_buffering() and Time.get_ticks_msec()-began < 15000:
 		view.scene_layers.tick(0.0);await process_frame
@@ -146,7 +146,7 @@ func run() -> void:
 	high.size_2d_override = Vector2i(1440,810);high.size_2d_override_stretch = true
 	high.render_target_update_mode = SubViewport.UPDATE_ALWAYS;root.add_child(high)
 	var original = view
-	view = Viewer.new();view.capture_path = out.path_join("scene.ssc");view.playing = false;view.orbit_enabled = false;view.scene_prebuffer_enabled = false
+	view = Viewer.new();view.capture_path = out.path_join("scene.wvz");view.playing = false;view.orbit_enabled = false;view.scene_prebuffer_enabled = false
 	high.add_child(view);view.set_process(false);view.set_process_unhandled_input(false)
 	await capture("14-4k-scaled-target",high)
 	view.free();high.queue_free();view = original

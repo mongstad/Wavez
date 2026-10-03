@@ -33,7 +33,7 @@ def main():
     parser.add_argument('--corner', action='store_true', help='Drag the bottom-right corner diagonally (requires --pointer)')
     parser.add_argument('--top-right', action='store_true', help='Drag the top-right corner inward (requires --pointer)')
     parser.add_argument('--oscillate', action='store_true', help='Reverse diagonal direction every 100 pointer steps for sustained high-rate resize')
-    parser.add_argument('--capture', type=Path, help='Read-only external SSC source (default: small synthetic fixture)')
+    parser.add_argument('--capture', type=Path, help='Read-only external WVZ1 source (default: small synthetic fixture)')
     parser.add_argument('--telemetry', action='store_true', help='Sample process, KWin and whole-device NVIDIA load')
     parser.add_argument('--size', default='1440x900', help='Native starting window size, WIDTHxHEIGHT')
     parser.add_argument('--empty-only', action='store_true', help='Profile the empty viewer without loading a capture')
@@ -51,7 +51,7 @@ def main():
     initial_width, initial_height = map(int, args.size.lower().split('x'))
     out = args.output_dir.resolve()
     out.mkdir(parents=True, exist_ok=False)
-    capture = args.capture.resolve() if args.capture else scene(out / 'scene.ssc')
+    capture = args.capture.resolve() if args.capture else scene(out / 'scene.wvz')
     with capture.open('rb') as stream:
         source_hash = hashlib.file_digest(stream, 'sha256').hexdigest()
     source = {'path': str(capture), 'bytes': capture.stat().st_size, 'sha256': source_hash}
@@ -269,7 +269,7 @@ def main():
                     assert post['channel_available'], 'Synthetic fixture must test a channel switch'
             with capture.open('rb') as stream:
                 source['unchanged'] = hashlib.file_digest(stream, 'sha256').hexdigest() == source_hash
-            assert source['unchanged'], 'SSC source changed during validation'
+            assert source['unchanged'], 'WVZ1 source changed during validation'
             (out / 'source.json').write_text(json.dumps(source, indent=2) + '\n')
             for row in report:
                 layouts = row['ui_profile'].get('shell_layout_inclusive', {}).get('calls', 0)

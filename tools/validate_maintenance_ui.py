@@ -7,7 +7,7 @@ from examples.g4_demo import create
 def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--godot',required=True);p.add_argument('--output-dir',required=True,type=Path)
     p.add_argument('--renderer',choices=['headless','gl_compatibility','forward_plus'],default='headless');p.add_argument('--resolution',choices=['1440x900','3840x2160'],default='1440x900');a=p.parse_args()
-    out=a.output_dir.resolve();out.mkdir(parents=True,exist_ok=False);source=create(out/'scene.ssc');digest=hashlib.sha256(source.read_bytes()).hexdigest()
+    out=a.output_dir.resolve();out.mkdir(parents=True,exist_ok=False);source=create(out/'scene.wvz');digest=hashlib.sha256(source.read_bytes()).hexdigest()
     cmd=[a.godot,'--path',str(ROOT/'viewer'),'--audio-driver','Dummy','--log-file',str(out/'godot.log')]
     cmd+=['--headless'] if a.renderer=='headless' else ['--rendering-method',a.renderer,'--resolution',a.resolution]
     cmd+=['--script','analysis/test_maintenance_ui.gd','--','--maintenance-fixture='+str(out),'--maintenance-resolution='+a.resolution]

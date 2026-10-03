@@ -21,7 +21,7 @@ func attach(dialog: FileDialog, capture_open := false) -> void:
 		dialog.about_to_popup.connect(func():
 			_capture_recent_before = FileDialog.get_recent_list()
 			_capture_pending = true)
-		# Godot records the directory before file_selected, before SSC validation.
+		# Godot records the directory before file_selected, before WVZ1 validation.
 		# Connect before the loader so even its asynchronous busy display sees only
 		# approved history. Successful loading commits the actual selected directory.
 		dialog.file_selected.connect(func(_path: String):

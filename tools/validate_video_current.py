@@ -1,4 +1,4 @@
-"""Issue #116: current SIMSCP4 layers, export clocks, strict reads and GPU evidence."""
+"""Issue #116: current WVZ1 layers, export clocks, strict reads and GPU evidence."""
 import argparse
 import bisect
 import hashlib
@@ -28,7 +28,7 @@ def fixtures(out):
     for name, selected in [('particles', objects[:1]), ('late-particles', objects[:1]), ('field', objects[1:2]),
                            ('mesh', objects[2:]), ('mixed', objects), ('late', objects[1:2]),
                            ('overflow', objects[1:2]), ('budget', objects[2:])]:
-        with SceneCapture(out / (name + '.ssc'), objects=selected) as writer:
+        with SceneCapture(out / (name + '.wvz'), objects=selected) as writer:
             for obj in selected:
                 if obj['kind'] == 'particles':
                     for t in ([0., .5, 1., 2.] if name == 'late-particles' else [0., 1., 2.]):
@@ -54,11 +54,11 @@ def fixtures(out):
                             vertex_id=np.arange(len(positions), dtype='i8'),
                             scalar=np.full(len(positions), .25 + t/8, dtype='f4')))
     # Keep descriptors/commit valid; mutate a readable payload in a later sample.
-    source = out/'field.ssc'
+    source = out/'field.wvz'
     with SceneReader(source) as reader:
         offset = reader.samples['field'][2]['offset']
     raw = bytearray(source.read_bytes());raw[offset] ^= 1
-    (out/'corrupt.ssc').write_bytes(raw)
+    (out/'corrupt.wvz').write_bytes(raw)
 
 
 def main():
@@ -97,7 +97,7 @@ def main():
         runs.append(result)
         check('ERROR:' not in (folder/'native.log').read_text(), folder.name+': clean native log')
         return result
-    before = {str(p): digest(p) for p in out.glob('*.ssc')}
+    before = {str(p): digest(p) for p in out.glob('*.wvz')}
     if args.production:
         print('Hashing complete production capture before export…', flush=True)
         before[str(args.production)] = digest(args.production)
@@ -116,7 +116,7 @@ def main():
             folder = out/name;folder.mkdir()
             state = json.loads((out/(kind+'-state.json')).read_text())
             state['overlay_visible'] = name == 'mixed-ui'
-            source = args.production if name == 'production' else out/((name if name == 'corrupt' else kind)+'.ssc')
+            source = args.production if name == 'production' else out/((name if name == 'corrupt' else kind)+'.wvz')
             job = dict(version=1, capture_path=str(source), state=state, start_time=.75, end_time=1.25,
                        fps=4, playback_rate=1., width=960, height=540, output_path=str(folder/'result.mp4'),
                        camera_mode='orbit', orbit_speed=.08, quality='high', keep_frames=True,

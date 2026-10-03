@@ -21,11 +21,11 @@ def main():
     args = parser.parse_args()
     out = args.output_dir.resolve()
     out.mkdir(parents=True, exist_ok=False)
-    scene(out / 'scene.ssc')
-    with SceneCapture(out / 'clock.ssc', objects=[dict(id='p', kind='particles', units='m', identity='persistent_i8')]) as capture:
+    scene(out / 'scene.wvz')
+    with SceneCapture(out / 'clock.wvz', objects=[dict(id='p', kind='particles', units='m', identity='persistent_i8')]) as capture:
         for time in [100.125, 205.875, 3800.625]:
             capture.add_particles('p', time, [[0., 0., 0.]], ids=[1])
-    hashes = {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in out.glob('*.ssc')}
+    hashes = {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in out.glob('*.wvz')}
     command = [args.godot, '--path', str(ROOT / 'viewer'), '--rendering-method', args.renderer,
                '--resolution', '1440x900', '--audio-driver', 'Dummy', '--script',
                'ui/shell/test_violet_review_corrections.gd']
@@ -45,7 +45,7 @@ def main():
         raise RuntimeError(f'Review corrections failed: {out / "godot.log"}')
     report = json.loads((out / 'report.json').read_text())
     assert not report['failures'], report['failures']
-    assert hashes == {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in out.glob('*.ssc')}
+    assert hashes == {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in out.glob('*.wvz')}
     report.update(source_hashes_unchanged=hashes, requested_display_driver=args.display_driver or 'default',
                   known_libdecor_gtk_startup_warning=startup_warning in log)
     (out / 'report.json').write_text(json.dumps(report, indent=2) + '\n')

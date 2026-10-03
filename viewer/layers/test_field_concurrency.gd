@@ -83,7 +83,7 @@ func startup_checks(control, view) -> void:
 func run() -> void:
 	policy_checks()
 	out = OS.get_cmdline_user_args()[0]
-	var reader := Reader.new(false);check(reader.open(out.path_join("session.ssc")),"Synthetic fixture opens")
+	var reader := Reader.new(false);check(reader.open(out.path_join("session.wvz")),"Synthetic fixture opens")
 	var worker := Buffer.new();worker.worker_count = 4;worker.automatic_workers = true;worker.start()
 	var gate := Semaphore.new();worker.test_barrier = gate
 	worker.request("initial",jobs_for(reader),32*MIB,true)
@@ -106,7 +106,7 @@ func run() -> void:
 		var frame := worker.get_frame(str(index)+"signed")
 		for name in oracle[index]:check(Hash.digest(frame.sample.channels[name].to_byte_array()) == oracle[index][name],"Resizing preserves every source value")
 	worker.close();reader.close();check(worker.status().in_flight_bytes == 0 and worker.status().bytes == 0,"Close drains scaled pool")
-	var view = make_view(out.path_join("session.ssc"),true)
+	var view = make_view(out.path_join("session.wvz"),true)
 	var control = view.scene_layers.field_playback
 	check(await ready(control.worker),"GPU-wait case has a prepared CPU window")
 	startup_checks(control,view)

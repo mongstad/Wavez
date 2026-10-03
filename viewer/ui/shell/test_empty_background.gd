@@ -62,7 +62,7 @@ func run() -> void:
 		if reference: view.get("starfield").hide()
 	check(sky_code == view.environment.sky.sky_material.shader.code and environment_before == Visual.snapshot(view).environment,"Sky shader and atmosphere unchanged")
 	root.content_scale_factor = 1; root.size = Vector2i(1440,900); await settle()
-	view._open_capture(output.path_join("invalid.ssc")); await settle(); view.shell.details.hide(); await settle()
+	view._open_capture(output.path_join("invalid.wvz")); await settle(); view.shell.details.hide(); await settle()
 	check(view.scene_layers == null and ((view.get("starfield") == null if not reference else not view.get("starfield").is_visible_in_tree())),"Failed capture open does not expose stars")
 	view._set_clean(true); view._set_clean(false); await settle()
 	if reference: view.get("starfield").hide(); await settle()
@@ -75,7 +75,7 @@ func run() -> void:
 	check(OS.low_processor_usage_mode and idle.same_pixels,"Empty startup retains pacing policy and stable pixels")
 	view.set_process(false); OS.low_processor_usage_mode = false
 	for kind in ["particles","field","mesh","mixed"]:
-		view._open_capture(output.path_join(kind+".ssc")); view.playing = false; view.orbit_enabled = false; await ready(view)
+		view._open_capture(output.path_join(kind+".wvz")); view.playing = false; view.orbit_enabled = false; await ready(view)
 		view._set_clean(false); await settle()
 		if reference: view.get("starfield").hide(); await settle()
 		check((view.get("starfield") == null if not reference else not view.get("starfield").is_visible_in_tree()),kind+" has no decorative stars in Cinematic mode")

@@ -2,7 +2,7 @@
 
 **Wavez owns capture/storage/viewer mechanics. The simulation owns scientific meaning and declares its data truthfully.** Use native `SceneCapture` for new layered integrations. The adapter supplies objects, NumPy arrays, geometry and provenance directly; normal integration requires no manually authored mapping JSON.
 
-Install and import the authoritative `SimScope` Python package; record its Git revision for provenance. [Current API](CAPTURE_FORMAT_AND_API.md) defines storage limits and compatibility; [source implementation](<../wavez_export/scene.py>) is the callable contract.
+Install and import the authoritative `WAVEZ` Python package; record its Git revision for provenance. [Current API](CAPTURE_FORMAT_AND_API.md) defines storage limits and compatibility; [source implementation](<../wavez_export/scene.py>) is the callable contract.
 
 ## Before connecting the writer
 
@@ -10,7 +10,7 @@ Declare the source coordinate system, units, axis order and sample geometry; sta
 
 Supply host arrays in supported types: float32/64, uint32 or int64 as appropriate. Complex arrays must be exported as explicitly named real component channels. Preserve source precision for scientific field channels. Copy data from a GPU when necessary without writing back into the solver or consuming its random stream. Preflight total channels, staging copies, compression and viewer limits before allocating a large grid.
 
-Objects require unique IDs, a kind and units. Current SIMSCP4 supports at most one particle object per capture (up to 16 total objects). Particle objects must explicitly choose `anonymous` or `persistent_i8`; mesh objects choose `none` or `stable_topology`. A volume requires origin, spacing and centering with each field sample. Record the model/version, parameter/configuration hash, source revision/hash, seed and seed interpretation, solver boundary conditions, channel formulas, coordinate transformation, precision, cadence policy and dependency versions in capture/run provenance. Metadata is descriptive, not a substitute for retaining executable sources and scientific configuration.
+Objects require unique IDs, a kind and units. Current WVZ1 supports at most one particle object per capture (up to 16 total objects). Particle objects must explicitly choose `anonymous` or `persistent_i8`; mesh objects choose `none` or `stable_topology`. A volume requires origin, spacing and centering with each field sample. Record the model/version, parameter/configuration hash, source revision/hash, seed and seed interpretation, solver boundary conditions, channel formulas, coordinate transformation, precision, cadence policy and dependency versions in capture/run provenance. Metadata is descriptive, not a substitute for retaining executable sources and scientific configuration.
 
 Units should be meaningful declarations such as simulation length, field amplitude or mass. If a unit is unknown, label it unknown/arbitrary and explain the limitation. Never invent mass from marker count, physical boundaries from particle extent, IDs from row order, vector transformations from scalar labels, or a true field from probes.
 
@@ -40,7 +40,7 @@ The common coordinate, units, cadence and provenance rules above apply to each r
 | D. Complex scalar field | As C; export real and imaginary components with explicit names/formulas | Density `real²+imag²`, phase if meaningful; density units are amplitude squared | Store original complex field in NPZ when useful. Do not silently discard phase, normalize amplitudes, relabel components as vectors or average complex values to obtain density. |
 | E. Field plus persistent tracers | One C/D volume and one B particle object, each on its own cadence | Interpolated source observables at tracer positions, alive/status flags; documented tracer estimator | Grid and particles must align after their declared transforms. Tracers sample a field; their count/brightness is not a field integral without an actual weight definition. |
 | F. Mesh / stable-topology deformation | A `mesh` object; finite vertex positions and uint32 triangle indices | Vertex/face channels; normals; `stable_topology` requires explicit int64 `vertex_id` in vertex channels | For interpolation, ordered vertex IDs and topology must agree. Remeshed/derived surfaces use `identity="none"` and held geometry. Uniform-grid metadata is not applicable; transform vertices/normals consistently. |
-| G. External engine | Extract engine time and positions into A or B | Velocity/mass only if supplied by engine; persistent IDs only under a verified lifetime policy | Declare engine units, frame and coordinate transform. Engine array index/hash is not automatically a valid unrecycled identity. Native SIMSCP4 is preferred for new layered work. |
+| G. External engine | Extract engine time and positions into A or B | Velocity/mass only if supplied by engine; persistent IDs only under a verified lifetime policy | Declare engine units, frame and coordinate transform. Engine array index/hash is not automatically a valid unrecycled identity. Native WVZ1 is preferred for new layered work. |
 
 For A/B/G, save scientific engine state separately if a capture omits restart variables. For C/D/E, archive full precision fields at scientific times while exporting fields often enough for inspection. For F, archive any topology/material state needed by the simulation; a displayed mesh alone may not be a restart. All patterns need provenance and actual timestamps even if only one layer is present.
 
@@ -64,7 +64,7 @@ triangles = np.array([[0, 1, 2]], dtype="u4")
 vertex_ids = np.array([10, 20, 30], dtype="i8")
 psi_zyx = np.ones((4, 4, 4), dtype="c16") * (1 + 2j)
 
-with SceneCapture("example.ssc", objects=objects,
+with SceneCapture("example.wvz", objects=objects,
                   metadata={"purpose": "documented array example",
                             "time_unit": "s", "position_unit": "m",
                             "channel_metadata": {
@@ -85,12 +85,12 @@ with SceneCapture("example.ssc", objects=objects,
                  "density": psi_zyx.real**2 + psi_zyx.imag**2},
                 origin=[0, 0, 0], spacing=[1, 1, 1], centering="node")
 
-with SceneCapture("anonymous.ssc", objects=[
+with SceneCapture("anonymous.wvz", objects=[
         dict(id="points", kind="particles", units="m", identity="anonymous")]) as capture:
     capture.add_particles("points", 0.0, xyz)
     capture.add_particles("points", 1.0, xyz + [1, 0, 0])
 
-with SceneReader("example.ssc") as reader:
+with SceneReader("example.wvz") as reader:
     reader.audit_identity()
     assert reader.probe("field", 0, "density", [0.5, 0.5, 0.5]) == 5.0
     assert reader.read_sample("field", 0)["psi_real"].dtype == np.dtype("f8")
@@ -100,12 +100,12 @@ G4 recognizes the exact metadata keys used above: `time_unit`, `position_unit`,
 and `channel_metadata[object_id][channel]`. Arbitrary metadata aliases are not
 unit declarations for analysis. This example declares amplitude-squared density,
 not physical mass density; it cannot claim kilograms. See
-[scientific metadata](../SIMSCOPE_API.md#metadata-and-g4-analysis) for explicit
+[scientific metadata](../WAVEZ_API.md#metadata-and-g4-analysis) for explicit
 physical declarations and [G4 schemas](G4_SCHEMAS.md) for integral constraints.
 
 At requested t=0.5, the particles/mesh have exact samples and the field is held at t=0. At t=0.25, persistent particle positions can interpolate; scalar density stays at t=0. The separate anonymous capture holds its point samples. The field is not temporally interpolated. `SceneReader.bracket()` reports source brackets; it does not itself implement the viewer's identity-aware interpolated geometry.
 
-Open the result with Godot from `SimScope` using `godot --path viewer -- --capture=/absolute/path/example.ssc`. Use the installed Godot executable if it is not named `godot` on PATH. Inspect declared guides and source times before assessing the image. The [analytic scene example](<../examples/scene_demo.py>) and [G3 usage evidence](<../G3_GUIDE.md>) cover more rendering options.
+Open the result with Godot from `WAVEZ` using `godot --path viewer -- --capture=/absolute/path/example.wvz`. Use the installed Godot executable if it is not named `godot` on PATH. Inspect declared guides and source times before assessing the image. The [analytic scene example](<../examples/scene_demo.py>) and [G3 usage evidence](<../G3_GUIDE.md>) cover more rendering options.
 
 ## External-engine boundary
 

@@ -1,4 +1,4 @@
-"""Rendered regression for live SIMSCP4 union-clock slider extent.
+"""Rendered regression for live WVZ1 union-clock slider extent.
 
 Optionally replay committed prefixes of a real layered capture, without writing
 to that source. The native test appends bytes only to disposable fixture copies.
@@ -13,7 +13,7 @@ from wavez_export import SceneCapture, SceneReader
 
 def prepare(out, source=None):
     if source is None:
-        source = out / 'cadence.ssc'
+        source = out / 'cadence.wvz'
         source.unlink(missing_ok=True)
         with SceneCapture(source, objects=[
             dict(id='particles', kind='particles', units='u', identity='persistent_i8'),
@@ -36,14 +36,14 @@ def prepare(out, source=None):
         times = sorted(set(r['time'] for r in retained))
         particle_times = [r['time'] for r in retained if r['object']==particle]
         volume_times = [r['time'] for r in retained if r['object']==volume]
-    complete = out/'complete.ssc'
+    complete = out/'complete.wvz'
     with Path(source).open('rb') as src, complete.open('wb') as dst:
         remaining = final_end
         while remaining:
             block=src.read(min(8*1024**2,remaining));dst.write(block);remaining-=len(block)
     config = dict(source=str(Path(source).resolve()), complete=str(complete), initial_end=initial_end,
                   times=times, requested=requested, particle=particle, volume=volume,
-                  particle_times=particle_times, volume_times=volume_times, analytic=source.name=='cadence.ssc')
+                  particle_times=particle_times, volume_times=volume_times, analytic=source.name=='cadence.wvz')
     (out/'config.json').write_text(json.dumps(config,indent=2))
 
 

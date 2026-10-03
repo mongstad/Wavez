@@ -11,7 +11,7 @@ from tests.g4.fixtures import scene
 
 class SpaceTimeTests(unittest.TestCase):
     def setUp(self):
-        self.tmp=tempfile.TemporaryDirectory();self.root=Path(self.tmp.name);self.path=scene(self.root/'fixture.ssc');self.source=SourceSnapshot(self.path)
+        self.tmp=tempfile.TemporaryDirectory();self.root=Path(self.tmp.name);self.path=scene(self.root/'fixture.wvz');self.source=SourceSnapshot(self.path)
         self.digest=hashlib.sha256(self.path.read_bytes()).hexdigest();self.cache=ResultCache(self.root/'owner'/'results')
 
     def tearDown(self):
@@ -38,7 +38,7 @@ class SpaceTimeTests(unittest.TestCase):
         args['reducer']='mean';rows,_,_,_=self.evaluate(args);self.assertEqual([float(r['value']) for r in rows],[2]*3)
 
     def test_tracer_bins_counts_mean_and_declared_weighted_estimate(self):
-        path=self.root/'tracers.ssc'
+        path=self.root/'tracers.wvz'
         with SceneCapture(path,objects=[dict(id='p',kind='particles',identity='persistent_i8',units='m')],metadata=dict(time_unit='s')) as writer:
             writer.add_particles('p',0,np.array([[0.,0,0],[.5,0,0],[1,0,0],[1.5,0,0],[2,0,0]]),ids=np.arange(5,dtype='i8'),value=np.array([1.,3.,5.,7.,9.]),weight=np.array([2.,2.,2.,2.,2.]))
         args=dict(object='p',mode='tracer_bins',range=dict(axis='native_time',start=0,end=0),spatial=dict(start=[0,0,0],end=[2,0,0],bins=2,space='viewer_world',units='m'))
@@ -53,7 +53,7 @@ class SpaceTimeTests(unittest.TestCase):
             rows,_,_,_=self.evaluate(args,source);self.assertEqual([float(r['value']) for r in rows],[8,42])
 
     def test_invalid_corner_and_missing_channel_never_become_zero(self):
-        path=self.root/'invalid.ssc';grid=np.ones((2,2,2));grid[1,1,1]=np.nan
+        path=self.root/'invalid.wvz';grid=np.ones((2,2,2));grid[1,1,1]=np.nan
         with SceneCapture(path,objects=[dict(id='f',kind='volume',units='unknown')]) as writer:writer.add_volume('f',0,dict(value=grid),origin=[0,0,0],spacing=[1,1,1],centering='node')
         args=dict(object='f',mode='grid_line',channel=dict(channel='value'),range=dict(axis='native_time',start=0,end=0),spatial=dict(start=[-.5,0,0],end=[.5,0,0],bins=1,space='data_local',units='unknown'))
         with SourceSnapshot(path) as source:
@@ -61,7 +61,7 @@ class SpaceTimeTests(unittest.TestCase):
             args['channel']['channel']='missing';rows,_,_,_=self.evaluate(args,source);self.assertEqual(rows[0]['reason'],'missing_channel')
 
     def test_cell_slab_and_grid_channel_named_position_keep_source_semantics(self):
-        path=self.root/'cell.ssc'
+        path=self.root/'cell.wvz'
         with SceneCapture(path,objects=[dict(id='f',kind='volume',units='K',data_to_world=[-2,0,0,10,0,1,0,0,0,0,1,0])],metadata=dict(position_unit='m',channel_metadata=dict(f=dict(position=dict(units='K'))))) as writer:
             writer.add_volume('f',0,dict(position=np.full((2,2,2),2.)),origin=[0,0,0],spacing=[1,1,1],centering='cell')
         args=dict(object='f',mode='grid_slab',channel=dict(channel='position'),reducer='integral',range=dict(axis='native_time',start=0,end=0),spatial=dict(start=[-.5,0,0],end=[1.5,0,0],bins=2,space='data_local',units='m',slab=dict(shape='slab',center=[.5,.5,.5],normal=[0,0,1],tangent=[1,0,0],width=3,height=3,thickness=3)))
@@ -71,7 +71,7 @@ class SpaceTimeTests(unittest.TestCase):
         self.assertEqual([r['selected_support'] for r in support],[4,4]);self.assertEqual(support[0]['world_cell_volume']['text'],'2')
 
     def test_invalid_sampling_weights_cannot_be_a_complete_estimate(self):
-        path=self.root/'weights.ssc'
+        path=self.root/'weights.wvz'
         with SceneCapture(path,objects=[dict(id='p',kind='particles',identity='persistent_i8',units='m')]) as writer:
             writer.add_particles('p',0,np.array([[.25,0,0],[.75,0,0],[1.25,0,0],[1.75,0,0]]),ids=np.arange(4,dtype='i8'),value=np.array([2.,4.,6.,8.]),weight=np.array([1.,np.nan,-1.,1.]))
         args=dict(object='p',mode='tracer_bins',reducer='weighted_estimate',channel=dict(channel='value'),weight=dict(channel='weight',override=dict(quantity='sampling_weight')),sampling_population='Declared synthetic sampling population',range=dict(axis='native_time',start=0,end=0),spatial=dict(start=[0,0,0],end=[2,0,0],bins=2,space='viewer_world',units='m'))
@@ -87,7 +87,7 @@ class SpaceTimeTests(unittest.TestCase):
         with self.assertRaises(AnalysisError):self.evaluate(args)
 
     def test_traveling_pulse_peak_follows_recorded_irregular_times(self):
-        path=self.root/'pulse.ssc';times=[0,.25,1,2.5,4]
+        path=self.root/'pulse.wvz';times=[0,.25,1,2.5,4]
         with SceneCapture(path,objects=[dict(id='f',kind='volume',units='unknown')],metadata=dict(time_unit='s',position_unit='m')) as writer:
             for t in times:
                 x=np.arange(21)*.25;profile=np.exp(-((x-t)/.25)**2);writer.add_volume('f',t,dict(value=np.tile(profile,(2,2,1))),origin=[0,0,0],spacing=[.25,1,1],centering='node')

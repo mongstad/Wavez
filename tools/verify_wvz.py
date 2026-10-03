@@ -1,4 +1,4 @@
-"""Explicit, read-only whole-capture SSC verification (never part of viewer startup)."""
+"""Explicit, read-only whole-scene WVZ1 verification (never part of viewer startup)."""
 import argparse
 from pathlib import Path
 import sys

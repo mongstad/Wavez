@@ -43,7 +43,7 @@ static func validate(job: Dictionary) -> String:
 		if job.has("exact_state") and ExactState.unpack(job.exact_state) != job.state:return "Exact render state differs."
 		if job.has("comparison"):
 			var comparison = ExactState.unpack(job.comparison)
-			if not comparison is Dictionary or comparison.get("kind") != "simscope-matched-render" or comparison.get("version") != 1 or comparison.get("side") not in ["left","right"] or not comparison.get("common") is Dictionary or not comparison.common.get("timing") is Dictionary:return "Invalid matched comparison metadata."
+			if not comparison is Dictionary or comparison.get("kind") != "wavez-matched-render" or comparison.get("version") != 1 or comparison.get("side") not in ["left","right"] or not comparison.get("common") is Dictionary or not comparison.common.get("timing") is Dictionary:return "Invalid matched comparison metadata."
 			var problem := validate_comparison(job,comparison)
 			if not problem.is_empty():return problem
 		return ""

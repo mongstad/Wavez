@@ -18,27 +18,27 @@ def main():
     args = parser.parse_args()
     out = args.output_dir.resolve();out.mkdir(parents=True, exist_ok=False)
     fixtures(out)
-    shutil.copyfile(out/'field.ssc', out/'field-copy.ssc')
+    shutil.copyfile(out/'field.wvz', out/'field-copy.wvz')
     checks = [];runs = []
     def check(ok, label):
         checks.append(dict(ok=bool(ok),label=label));print(('PASS: ' if ok else 'FAIL: ')+label,flush=True)
     command = [args.godot,'--path',str(ROOT/'viewer'),'--audio-driver','Dummy','--rendering-method','forward_plus','--resolution','960x640']
-    environment = dict(os.environ, SIMSCOPE_VIDEO_PROFILE='1')
+    environment = dict(os.environ, WAVEZ_VIDEO_PROFILE='1')
     result = subprocess.run(command+['--headless','--log-file',str(out/'identity.log'),'--script','video/test_source_identity.gd','--',str(out)],env=environment,capture_output=True,text=True,timeout=30)
     checks.extend(json.loads((out/'identity-checks.json').read_text())['checks'])
     check(result.returncode == 0 and 'SCRIPT ERROR' not in result.stdout+result.stderr,'Identity unit process passes')
     for name, changes, mutation in [
         ('normal',dict(sidecars=True),None),
-        ('used-corruption',dict(source=str(out/'corrupt.ssc')),None),
-        ('unused-corruption',dict(source=str(out/'corrupt.ssc'),start=0.,end=.1),None),
+        ('used-corruption',dict(source=str(out/'corrupt.wvz')),None),
+        ('unused-corruption',dict(source=str(out/'corrupt.wvz'),start=0.,end=.1),None),
         ('cancel-loading',dict(cancel_stage='loading'),None),
         ('mutate-rendering',{},'rendering'),
         ('mutate-encoding',{},'encoding'),
     ]:
         folder=out/name;folder.mkdir()
-        source=out/'field.ssc'
+        source=out/'field.wvz'
         if mutation:
-            source=folder/'source.ssc';shutil.copyfile(out/'field.ssc',source)
+            source=folder/'source.wvz';shutil.copyfile(out/'field.wvz',source)
         config=dict(source=str(source),start=.75,end=1.75,width=640,height=360,fps=60,rate=1.,**{})
         config.update(changes);(folder/'config.json').write_text(json.dumps(config))
         source=Path(config['source']);before=hashlib.file_digest(source.open('rb'),'sha256').hexdigest()
@@ -49,7 +49,7 @@ def main():
                 while process.poll() is None:
                     if time.monotonic()-began>120:raise TimeoutError(name)
                     if mutation and not changed:
-                        files=list(folder.glob('.simscope-export-*/progress.json'))
+                        files=list(folder.glob('.wavez-export-*/progress.json'))
                         if files:
                             try:progress=json.loads(files[0].read_text())
                             except (ValueError,OSError):progress={}
@@ -76,7 +76,7 @@ def main():
         if name.startswith('cancel'):check(report['cancel_to_exit_ms']<2000,name+': worker exits within two seconds')
         directory=Path(report['directory'])
         job=json.loads((directory/'job.json').read_text())
-        check(job['source']['kind']=='simscope-export-source' and 'sha256' not in job['source'],name+': UI sends metadata identity, no whole-prefix hash')
+        check(job['source']['kind']=='wavez-export-source' and 'sha256' not in job['source'],name+': UI sends metadata identity, no whole-prefix hash')
         if name=='normal':
             sidecar=json.loads((directory/'inspection-00000000.json').read_text())
             check(sidecar['source']==job['source'],name+': sidecar reuses binding without another full hash')

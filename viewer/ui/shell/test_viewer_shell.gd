@@ -82,15 +82,15 @@ func run() -> void:
 	check(viewer.generic_reader == null, "Picker cancel does not open source")
 	shell.begin_open(); shell.status_ui.refresh(); check(shell.status_ui.readiness == "Preparing…" and not shell.empty.visible, "Unknown loading progress represented without percentage")
 	picture("opening")
-	viewer._open_capture(output.path_join("scene.ssc")); viewer.playing = false; viewer.orbit_enabled = false
+	viewer._open_capture(output.path_join("scene.wvz")); viewer.playing = false; viewer.orbit_enabled = false
 	await settle()
-	check(viewer.generic_reader != null and viewer.frame_count > 0, "Current SSC opens in production shell")
+	check(viewer.generic_reader != null and viewer.frame_count > 0, "Current WVZ1 opens in production shell")
 	check(not shell.empty.visible and viewer.inspector_box.visible, "Successful open reveals retained inspector")
 	check(not viewer.tools_ui.window.visible,"Opening a capture does not open Tools")
 	var prior_reader = viewer.generic_reader
 	var prior_sample: Dictionary = viewer.committed_sample.duplicate(true)
 	var before := science(viewer)
-	viewer._open_capture(output.path_join("invalid.ssc"))
+	viewer._open_capture(output.path_join("invalid.wvz"))
 	check(viewer.generic_reader == prior_reader and viewer.committed_sample == prior_sample and science(viewer) == before, "Failed replacement retains prior usable scene")
 	check(shell.open_error.visible and not shell.error_details.is_empty(), "Open error remains reachable outside scroll")
 	viewer.status_label.text = "Unrelated later information"; viewer._update_hud()
@@ -162,7 +162,7 @@ func run() -> void:
 	var serial_before: int = control.jobs.serial
 	check(viewer._save_inspection(output.path_join("with-selection.json")) == OK,"Portable save with a real scientific selection")
 	check(control.jobs.serial == serial_before and control.state.snapshot() == selected_before,"Portable save never packages or changes selections")
-	check(viewer._read_small_json(output.path_join("with-selection.json")).kind == "simscope-view-preset","Selection does not change ordinary recipe format")
+	check(viewer._read_small_json(output.path_join("with-selection.json")).kind == "wavez-view-preset","Selection does not change ordinary recipe format")
 	control.temporal.durable.save_to(output.path_join("analysis.inspection"), true)
 	check(await wait_jobs(control) and control.temporal.durable.last_recipe.has("path"), "Production v3 save through canonical worker")
 	control.temporal.durable.load_from(output.path_join("analysis.inspection/inspection.json"))
@@ -249,7 +249,7 @@ func run() -> void:
 	viewer.panel_width = 360; shell.layout()
 	# Replacement still invalidates source-bound state through the existing lifecycle.
 	viewer.scene_prebuffer_enabled = true
-	viewer._open_capture(output.path_join("replacement.ssc")); await settle()
+	viewer._open_capture(output.path_join("replacement.wvz")); await settle()
 	check(viewer.tools_ui.form("Performance").is_ancestor_of(viewer.scene_layers.performance_panel),"Replaced-source budgets live only in Performance")
 	for worker in [viewer.scene_layers.field_playback,viewer.scene_layers.mesh_playback]:
 		if worker.enabled: check(viewer.scene_layers.performance_panel.is_ancestor_of(worker.label),"Preparation metrics remain in Performance")
@@ -354,7 +354,7 @@ func menu_checks(viewer) -> void:
 		check(not controls.status.visible,"Color explanation does not occupy panel: " + id)
 		check(controls.indicator.text in ["⚠ Color clipping","⚠ Color unavailable"],"Color exception indicator is concise")
 	shell.commands.details.popup.id_pressed.emit(shell.commands.details.index)
-	check(shell.details.visible and shell.detail_text.text.contains(viewer.hud.text) and shell.detail_text.text.contains("SIMSCP4"),"Existing status Details preserves capture and interpolation information")
+	check(shell.details.visible and shell.detail_text.text.contains(viewer.hud.text) and shell.detail_text.text.contains("WVZ1"),"Existing status Details preserves capture and interpolation information")
 	for id in viewer.scene_layers.labels:
 		check(shell.detail_text.text.contains(viewer.scene_layers.labels[id].tooltip_text),"Details preserves exact layer metadata: " + id)
 	for id in viewer.scene_layers.color_controls:
@@ -423,7 +423,7 @@ func load_error_recovery_checks(viewer) -> void:
 	var shell = viewer.shell
 	var status = shell.status_ui
 	status.acknowledge()
-	viewer._open_capture(output.path_join("invalid.ssc")); await settle()
+	viewer._open_capture(output.path_join("invalid.wvz")); await settle()
 	var problem: String = shell.error_details
 	check(not problem.is_empty() and shell.open_error.visible and status.failures.get("Open capture") == problem,"Failed load exposes actionable banner and status diagnostic")
 	status.show_status()
@@ -432,20 +432,20 @@ func load_error_recovery_checks(viewer) -> void:
 	viewer._show_open_dialog(); viewer.open_dialog.canceled.emit(); viewer.open_dialog.hide()
 	check(shell.open_error.visible and status.failures.get("Open capture") == problem,"Cancelling the picker retains the unresolved load error")
 	viewer.inspection_busy = true
-	viewer._open_capture(output.path_join("scene.ssc")); viewer.inspection_busy = false
+	viewer._open_capture(output.path_join("scene.wvz")); viewer.inspection_busy = false
 	check(shell.error_details.contains("Inspection is busy") and status.failures.get("Open capture") == shell.error_details,"Rejected retry replaces the load diagnostic rather than clearing it")
 	status.remember("Video export","Retained export failure")
-	viewer._open_capture(output.path_join("scene.ssc")); await settle(); status.refresh()
+	viewer._open_capture(output.path_join("scene.wvz")); await settle(); status.refresh()
 	check(not shell.open_error.visible and shell.error_details.is_empty(),"Successful load clears the previous banner and stored load details")
 	check(not status.failures.has("Open capture"),"Successful load removes the stale status-bar load failure")
 	check(status.failures.get("Video export") == "Retained export failure" and status.badge.label.text.contains("Failed"),"Successful load preserves unrelated failure reporting")
 	status.show_status()
 	check(not shell.detail_text.text.contains("Open capture — Failed") and shell.detail_text.text.contains("Retained export failure"),"Current status details omit stale load failure but keep unrelated diagnostics")
 	shell.details.hide(); status.acknowledge()
-	viewer._open_capture(output.path_join("invalid.ssc")); await settle()
+	viewer._open_capture(output.path_join("invalid.wvz")); await settle()
 	check(shell.open_error.visible and status.failures.has("Open capture"),"A new invalid load after recovery is still reported")
 	picture("load-error-current")
-	viewer._open_capture(output.path_join("replacement.ssc")); await settle(); status.refresh()
+	viewer._open_capture(output.path_join("replacement.wvz")); await settle(); status.refresh()
 	check(not shell.open_error.visible and status.failures.is_empty() and not status.badge.label.text.contains("Failed"),"Second successful load restores normal current status without acknowledgement")
-	check(status.badge.label.text == status.readiness and viewer.capture_path.ends_with("replacement.ssc"),"Recovered status belongs to the newly loaded capture")
+	check(status.badge.label.text == status.readiness and viewer.capture_path.ends_with("replacement.wvz"),"Recovered status belongs to the newly loaded capture")
 	picture("load-error-recovered")

@@ -7,7 +7,7 @@ func run() -> void:
 	if DisplayServer.get_name() == "headless": push_error("Requires actual UI layout/rendering");quit(1);return
 	var baseline := "--baseline" in OS.get_cmdline_user_args()
 	var viewer = load("res://main.gd").new()
-	viewer.capture_path = ProjectSettings.globalize_path("res://../results/identity-demo.ssc")
+	viewer.capture_path = ProjectSettings.globalize_path("res://../results/identity-demo.wvz")
 	var out := ProjectSettings.globalize_path("res://../results/hud-fix")
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--hud-fixture="):viewer.capture_path = arg.trim_prefix("--hud-fixture=")

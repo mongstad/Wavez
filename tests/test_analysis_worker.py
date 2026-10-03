@@ -19,7 +19,7 @@ class WorkerTests(unittest.TestCase):
     def setUp(self):
         self.tmp=tempfile.TemporaryDirectory()
         self.root=Path(self.tmp.name)
-        self.capture=scene(self.root/"capture.ssc")
+        self.capture=scene(self.root/"capture.wvz")
         self.jobs=self.root/"worker";self.jobs.mkdir()
         self.write("lease.json",{"owner":os.getpid()})
         self.process=None

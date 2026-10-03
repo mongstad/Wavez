@@ -11,8 +11,8 @@ func gate_ready(worker) -> bool:
 func run() -> void:
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--playback-fixture="):out = arg.trim_prefix("--playback-fixture=")
-	var view = make_view(out.path_join("zstd.ssc"),true)
-	var reference = make_view(out.path_join("zstd.ssc"),false)
+	var view = make_view(out.path_join("zstd.wvz"),true)
+	var reference = make_view(out.path_join("zstd.wvz"),false)
 	var control := Policy.new()
 	var entries: Array = view.generic_reader.samples.particles
 	control._budgets(entries,{"trails":false},{"safe_cache_bytes":16*1024*Memory.MIB})
@@ -75,7 +75,7 @@ func run() -> void:
 	check(not view.scene_layers.current.has("field"),"hidden field has no sampled payload")
 	view.free();reference.free();await process_frame
 	# Field-only physical-time underflow also pauses analysis and Play.
-	view = make_view(out.path_join("field.ssc"),true)
+	view = make_view(out.path_join("field.wvz"),true)
 	fields = view.scene_layers.field_playback;worker = fields.worker
 	check(not view.scene_layers.playback.enabled and fields.enabled,"field-only capture enables independent preparation")
 	check(await wait_field(view,0.0),"field-only startup ready")
@@ -107,15 +107,15 @@ func run() -> void:
 	check(fields.capacity_wait and fields.automatic_jobs.is_empty() and fields.staged.size() <= 1,"automatic refusal stops CPU preparation with bounded GPU staging")
 	view.free();await process_frame
 	# Source changes during a gated field publication must not publish stale arrays.
-	var path := out.path_join("field-live.ssc")
-	var original := FileAccess.get_file_as_bytes(out.path_join("field.ssc"))
+	var path := out.path_join("field-live.wvz")
+	var original := FileAccess.get_file_as_bytes(out.path_join("field.wvz"))
 	var file := FileAccess.open(path,FileAccess.WRITE);file.store_buffer(original);file.close()
 	view = make_view(path,true);fields = view.scene_layers.field_playback;worker = fields.worker
 	gate = Semaphore.new();worker.test_barrier = gate;fields.invalidate();view.scene_layers.views.field.key = ""
 	check(view.scene_layers.seek(3.25),"source-change request accepted")
 	check(await gate_ready(worker),"source-change worker reached barrier")
 	# Replacement is valid but has a different object table and capture identity.
-	file = FileAccess.open(path,FileAccess.WRITE);file.store_buffer(FileAccess.get_file_as_bytes(out.path_join("ids.ssc")));file.close()
+	file = FileAccess.open(path,FileAccess.WRITE);file.store_buffer(FileAccess.get_file_as_bytes(out.path_join("ids.wvz")));file.close()
 	check(not view.scene_layers.refresh(),"source replacement requires reopen")
 	check(view.frame_a==null and view.scene_layers.views.field.texture==null,"source replacement releases stale field and clock")
 	worker.test_barrier = null;gate.post()

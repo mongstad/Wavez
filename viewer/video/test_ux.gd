@@ -14,7 +14,7 @@ func run() -> void:
 		if arg.begins_with("--video-fixture="):fixture = arg.trim_prefix("--video-fixture=")
 	if fixture.is_empty():push_error("Missing --video-fixture");quit(1);return
 	var viewer = load("res://main.gd").new()
-	viewer.capture_path = fixture.path_join("fixture.ssc")
+	viewer.capture_path = fixture.path_join("fixture.wvz")
 	viewer.scene_prebuffer_enabled = false;viewer.playing = false;viewer.orbit_enabled = false
 	root.add_child(viewer)
 	viewer.set_process(false)
@@ -134,7 +134,7 @@ func run() -> void:
 	check(viewer.video_dialog.settings().start_time == viewer.video_dialog.opened_current, "current-position range uses captured sample time")
 	viewer.video_dialog.hide()
 	# The exported schema/count transition uses the same held-frame policy.
-	viewer._open_capture(fixture.path_join("variable fixture.ssc"))
+	viewer._open_capture(fixture.path_join("variable fixture.wvz"))
 	var variable_track := Timeline.new()
 	check(variable_track.build(viewer), "variable-count export index builds")
 	variable_track.sample(.05)
@@ -149,7 +149,7 @@ func run() -> void:
 		viewer.video_dialog.hide()
 	viewer.physical_rate = 1.0
 	# Exercise the actual UI-to-child-process launch and verify the parent stays alive.
-	viewer._open_capture(fixture.path_join("fixture.ssc"))
+	viewer._open_capture(fixture.path_join("fixture.wvz"))
 	viewer.playing = false
 	viewer.video_dialog.open()
 	viewer.video_dialog.range_choice.select(2)
@@ -188,7 +188,7 @@ func check_export_shell(source) -> void:
 	for current in [false,true]: # Repeat the same production path; no retired UI baseline.
 		var vp := SubViewport.new(); vp.size = Vector2i(1440,810); vp.own_world_3d = true; vp.render_target_update_mode = SubViewport.UPDATE_ALWAYS; root.add_child(vp)
 		var view = load("res://main.gd").new(); view.offline_instance = true
-		view.capture_path = fixture.path_join("fixture.ssc"); vp.add_child(view); view.set_process(false)
+		view.capture_path = fixture.path_join("fixture.wvz"); vp.add_child(view); view.set_process(false)
 		Job.apply(view,state); view.playing = false; view.orbit_enabled = false
 		check(view.shell != null,"Export uses the production shell component")
 		view.shell.prepare_export({"workspace":1,"scroll":0,"remaining":true})

@@ -17,7 +17,7 @@ func run() -> void:
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--playback-fixture="):out = arg.trim_prefix("--playback-fixture=")
 	if out.is_empty():push_error("Missing fixture");quit(1);return
-	var view = make_view(out.path_join("ids.ssc"),true)
+	var view = make_view(out.path_join("ids.wvz"),true)
 	check(view.play_button.disabled,"style change waits only for its newly requested pair")
 	check(await await_ready(view),"automatic startup completes safe preparation")
 	check(not view.play_button.disabled and view.requested_time==0,"startup enables Play with unchanged source time")
@@ -64,17 +64,17 @@ func run() -> void:
 	var retained_reader = view.generic_reader
 	var retained_generation: int = view.capture_generation
 	for magic in ["VBCOSM1","SIMSCP1","SIMSCP2"]:
-		var retired := FileAccess.get_file_as_bytes(out.path_join("ids.ssc"))
+		var retired := FileAccess.get_file_as_bytes(out.path_join("ids.wvz"))
 		for i in range(7):retired[i] = magic.unicode_at(i)
-		write_source(out.path_join("unsupported.ssc"),retired)
-		view._open_capture(out.path_join("unsupported.ssc"))
+		write_source(out.path_join("unsupported.wvz"),retired)
+		view._open_capture(out.path_join("unsupported.wvz"))
 		check(view.generic_reader==retained_reader and view.capture_generation==retained_generation and view.play_button.disabled,"unsupported magic cannot replace or cancel a buffering scene: "+magic)
 		check("Unsupported scene" in view.status_label.text,"unsupported magic reports a format error: "+magic)
-	view._open_capture(out.path_join("missing.ssc"))
+	view._open_capture(out.path_join("missing.wvz"))
 	check(view.generic_reader==retained_reader and view.capture_generation==retained_generation,"missing source preserves the open scene")
 	var replaced_worker = view.scene_layers.playback.worker
 	var old_generation: int = view.capture_generation
-	view._open_capture(out.path_join("replacement.ssc"));view.set_process(false)
+	view._open_capture(out.path_join("replacement.wvz"));view.set_process(false)
 	check(not replaced_worker.thread.is_started(),"scene replacement joins the previous preparation worker")
 	check(not view.play_button.disabled and view.scene_layers!=null and view.scene_layers.particle_id.is_empty(),"opening supported field scene during buffering restores Play")
 	check(view.capture_generation>old_generation and view.requested_time==0 and view.current_mm.instance_count==0,"replacement commits only the new source generation")
@@ -83,7 +83,7 @@ func run() -> void:
 	if view.scene_layers.is_buffering():await await_ready(view)
 	check(is_equal_approx(view.requested_time,.6),"replacement field scene resumes playback")
 	view.free()
-	view = make_view(out.path_join("delayed.ssc"),true)
+	view = make_view(out.path_join("delayed.wvz"),true)
 	check(view._seek_time(.25),"UI seek accepts union time before particles exist")
 	check(await await_ready(view) and view.requested_time==.25,"unavailable particle seek retains requested layer time")
 	check(await sample(view,.75,true),"layers can sample before particles exist")
@@ -93,9 +93,9 @@ func run() -> void:
 	view.scene_layers.tick(.3)
 	check(await await_ready(view) and is_equal_approx(view.requested_time,1.15),"first available particle pair prepares and commits")
 	view.free()
-	var full := FileAccess.get_file_as_bytes(out.path_join("ids.ssc"))
+	var full := FileAccess.get_file_as_bytes(out.path_join("ids.wvz"))
 	var config = JSON.parse_string(FileAccess.get_file_as_string(out.path_join("live-config.json")))
-	var live := out.path_join("lifecycle-live.ssc")
+	var live := out.path_join("lifecycle-live.wvz")
 	write_source(live,full.slice(0,config.initial_end))
 	view = make_view(live,true);check(await await_ready(view),"live prefix prepares")
 	write_source(live,full.slice(0,int(config.initial_end)+40))
@@ -115,7 +115,7 @@ func run() -> void:
 	gate = Semaphore.new();worker.test_barrier = gate;view.manual_max += 1
 	check(view.scene_layers.seek(3.125),"prepare across pending replacement")
 	at_gate = await await_gate(worker);check(at_gate,"replacement test reached worker barrier")
-	write_source(live,FileAccess.get_file_as_bytes(out.path_join("anonymous.ssc")))
+	write_source(live,FileAccess.get_file_as_bytes(out.path_join("anonymous.wvz")))
 	check(not view.scene_layers.refresh(),"changed capture header requires reopen")
 	check(view.frame_a==null and view.current_mm.instance_count==0,"replacement clears prior scientific display")
 	worker.test_barrier = null;gate.post()

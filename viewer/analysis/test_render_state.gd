@@ -19,7 +19,7 @@ func run() -> void:
 	if out.is_empty():quit(1);return
 	if not sidecar.is_empty():root.content_scale_size = Vector2i(1440,810);root.size = Vector2i(640,360)
 	var viewer := Viewer.new();viewer.offline_instance = true;root.add_child(viewer);await process_frame
-	viewer._open_capture(out.path_join("pulse.ssc"));viewer.playing = false;viewer.orbit_enabled = false
+	viewer._open_capture(out.path_join("pulse.wvz"));viewer.playing = false;viewer.orbit_enabled = false
 	var control = viewer.selection_controller
 	control.bind_source()
 	if not await wait_jobs(control):push_error(control.status.text);quit(1);return
@@ -27,6 +27,7 @@ func run() -> void:
 		control.temporal.durable.load_from(sidecar)
 		if not await wait_jobs(control) or not control.temporal.durable.last_recipe.get("restored",false):push_error("Frame restore: "+control.temporal.status.text+" / "+control.temporal.durable.status.text);quit(1);return
 		if control._time() != .25 or control.state.definitions.size()!=1:push_error("Frame time/selection did not restore");quit(1);return
+		viewer.shell.prepare_export({})
 		if await viewer._capture_inspection_png(out.path_join("replayed.png"),true) != OK:push_error("PNG capture: "+control.temporal.durable.status.text);quit(1);return
 		viewer.queue_free();await process_frame;quit();return
 	control._request("define_selection",{"key":"endpoints","object":"p","kind":"particle_ids","selector":{"ids":["0","40"]}})

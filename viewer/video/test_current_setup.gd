@@ -9,11 +9,11 @@ func run() -> void:
 		if name == "production" and not FileAccess.file_exists(directory.path_join("production-path.txt")):continue
 		var view = load("res://main.gd").new()
 		view.scene_prebuffer_enabled = false;view.playing = false;view.orbit_enabled = false
-		view.capture_path = FileAccess.get_file_as_string(directory.path_join("production-path.txt")) if name == "production" else directory.path_join(name+".ssc")
+		view.capture_path = FileAccess.get_file_as_string(directory.path_join("production-path.txt")) if name == "production" else directory.path_join(name+".wvz")
 		root.add_child(view);view.set_process(false)
 		await process_frame
 		RenderingServer.force_draw(false)
-		check(view.frame_a != null,name+": current viewer opens SIMSCP4")
+		check(view.frame_a != null,name+": current viewer opens WVZ1")
 		view._apply_preset("Scientific")
 		var time := .1 if name == "production" else .75
 		view.scene_layers.sample(time)

@@ -17,7 +17,7 @@ class SceneChunkTests(unittest.TestCase):
         velocity=(position.astype("f8")+1e-8)/3
         with tempfile.TemporaryDirectory() as temporary:
             for compression in ("none","zstd"):
-                path=Path(temporary)/(compression+".ssc")
+                path=Path(temporary)/(compression+".wvz")
                 with SceneCapture(path,objects=[dict(id="p",kind="particles",identity="anonymous",units="m")],compression=compression) as writer:
                     writer.add_particles("p",0,position,velocity=velocity)
                     writer.add_particles("p",1,position[::-1],velocity=velocity[::-1])
@@ -42,7 +42,7 @@ class SceneChunkTests(unittest.TestCase):
                 values=np.arange(np.prod(shape),dtype=dtype).reshape(shape)/7
                 values[0,0,:4]=[np.nan,np.inf,-np.inf,-0.]
                 for compression in ('none','zstd'):
-                    path=Path(directory)/f'{dtype}-{compression}.ssc'
+                    path=Path(directory)/f'{dtype}-{compression}.wvz'
                     with SceneCapture(path,objects=[dict(id='f',kind='volume',units='m')],compression=compression) as writer:
                         writer.add_volume('f',0,dict(value=values),origin=[0]*3,spacing=[1]*3)
                     with SceneReader(path) as reader,SourceSnapshot(path) as source:

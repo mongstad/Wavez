@@ -4,7 +4,7 @@
 
 Wavez is a NumPy-first scientific capture and Godot visualization platform for
 particles, meshes and uniform-grid scalar fields. New integrations use
-`SceneCapture` / `SceneReader` and the SIMSCP4 (`.ssc`) capture format.
+`SceneCapture` / `SceneReader` and WAVEZ Scene Format (`.wvz`, WVZ1).
 
 G0–G4 are implemented and accepted. The current viewer includes deterministic
 video export, scientific inspection/analysis, bounded playback preparation, and
@@ -19,9 +19,9 @@ in PR #64. The [UX4 design](docs/UX4_DESIGN.md) was owner-merged in PR #72.
 The [category simulation panel](docs/UX4_PANEL.md) was owner-merged in PR #75.
 [Focused scientific tools](docs/UX4_TOOLS.md) are pending owner review under #69.
 
-The project was renamed from SimScope under #155. See the
-[branding migration](docs/BRANDING_MIGRATION.md) for Python import changes,
-retained compatibility identifiers, and the owner-managed repository rename.
+The historical [branding migration](docs/BRANDING_MIGRATION.md) records the
+earlier product rename. The [current format policy](docs/CAPTURE_FORMAT_POLICY.md)
+defines the WVZ1-only workflow.
 
 Start with:
 
@@ -33,12 +33,16 @@ Start with:
 - [Violet UI cleanup and owner checks](docs/UX5_CLEANUP.md)
 - [Application version and build policy](docs/VERSIONING.md) — view the identity in Help → About
 - [Pinned edge reveal and Fullscreen](docs/WINDOW_EDGE_REVEAL.md)
-- [Portable view presets](docs/VIEW_PRESETS.md)
-- [Wavez handbook](docs/SIMSCOPE_HANDBOOK.md)
-- [Python API](SIMSCOPE_API.md)
+- [Portable view presets](docs/WAVEZ_VIEW_PRESETS.md)
+- [Wavez handbook](docs/WAVEZ_HANDBOOK.md)
+- [Python API](WAVEZ_API.md)
 - [Capture format](G3_FORMAT.md)
 - [Simulation integration guide](docs/SIMULATION_INTEGRATION_GUIDE.md)
-- [UX implementation plan](UX_IMPLEMENTATION_PLAN.md)
+- [WVZ1 implementation validation and owner checks](docs/WVZ1_IMPLEMENTATION_VALIDATION.md)
+
+The [UX implementation plan](UX_IMPLEMENTATION_PLAN.md) and retained validation
+reports describe their original development checkpoints. Their old capture names
+and commands are historical; use the current guides above for WVZ1 workflows.
 
 Repository layout:
 
@@ -46,7 +50,7 @@ Repository layout:
 - `viewer/` — Godot viewer and native regression tests
 - `examples/` — small repository-owned examples
 - `tests/` — Python regression tests
-- `tools/` — validation, profiling and conversion tools
+- `tools/` — validation, profiling and external-input adapters
 - `docs/` — current specifications, guides and accepted milestone reports
 
 Scientific simulations, generated captures, benchmark payloads and research data

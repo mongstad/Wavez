@@ -47,7 +47,7 @@ func run() -> void:
 		var viewport := SubViewport.new();viewport.size = resolution;viewport.own_world_3d = true
 		viewport.size_2d_override = Vector2i(1440,810);viewport.size_2d_override_stretch = true
 		viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS;root.add_child(viewport);surface = viewport
-	var view := Viewer.new();view.capture_path = out.path_join("scene.ssc");view.playing = false;view.orbit_enabled = false;surface.add_child(view);view.set_process(false)
+	var view := Viewer.new();view.capture_path = out.path_join("scene.wvz");view.playing = false;view.orbit_enabled = false;surface.add_child(view);view.set_process(false)
 	view._set_clean(true);view.color_channel = "fixed";view._restyle();view._update_hud()
 	await settle_style(view)
 	check(not view.legend.visible and view.legend.text.is_empty() and not view.colorbar.visible,"fixed color has no orphan legend")
@@ -81,7 +81,7 @@ func run() -> void:
 	check(Job.snapshot(view)==before and control.members_input.text==members,"Switching task sections changes no saved scientific or visual settings")
 	check("incomplete" in temporal.finite_subtotal.tooltip_text and not temporal.finite_subtotal.tooltip_text.is_empty(),"incomplete subtotal meaning remains visible")
 	check(not temporal.diagnostics.join.tooltip_text.is_empty() and not temporal.matched.common.coordinate_reference.tooltip_text.is_empty(),"clock and coordinate assumptions remain explained")
-	check(view.open_dialog.filters[0].begins_with("*.ssc"),"modern capture picker is first")
+	check(view.open_dialog.filters[0].begins_with("*.wvz"),"modern capture picker is first")
 	await capture("legend-fixed")
 	var names := ["Selections","Temporal analysis","Diagnostics and comparisons","Space-time analysis","Analysis export and state","Matched runs"]
 	var layouts: Array = []

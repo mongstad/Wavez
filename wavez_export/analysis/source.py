@@ -111,6 +111,8 @@ class SourceSnapshot:
 
     def __init__(self, path, *, committed_bytes=None, sha256=None, context=None, memo=None, assets=None, metadata_bytes=None):
         self.path = Path(path).absolute()
+        if self.path.suffix != ".wvz":
+            raise AnalysisError("unsupported_format", "WAVEZ Scene Format requires a .wvz path")
         self.context = context or Context()
         self.raw = self.path.open("rb")
         self.charge = 0
@@ -139,11 +141,11 @@ class SourceSnapshot:
                 raise AnalysisError("source_extent", "Invalid or truncated committed extent")
             self.file = _BoundedFile(self.raw, extent, self.context)
             magic = self.file.read(8)
-            if magic != b"SIMSCP4\0":
-                raise AnalysisError("unsupported_format", "Only SIMSCP4 scene captures are supported")
+            if magic != b"WVZ1\0\0\0\0":
+                raise AnalysisError("unsupported_format", "Only WVZ1 WAVEZ Scene Format files are supported")
             self.file.seek(0)
             index = _SceneIndex(self, committed_bytes is not None)
-            self.format = "SIMSCP4"
+            self.format = "WVZ1"
             self.metadata = index.metadata
             self.objects = index.objects
             self.samples = index.samples

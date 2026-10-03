@@ -34,9 +34,9 @@ func run() -> void:
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--scene-fixture="):base = arg.trim_prefix("--scene-fixture=")
 	vp = SubViewport.new();vp.size = Vector2i(512,512);vp.own_world_3d = true;vp.render_target_update_mode = SubViewport.UPDATE_DISABLED;root.add_child(vp)
-	view = load("res://main.gd").new();view.offline_instance = true;view.capture_path = base.path_join("small.ssc");vp.add_child(view)
-	setup_capture("small.ssc")
-	check(view.frame_a != null and view.frame_count == 9,"SIMSCP4 opens with independent union clock")
+	view = load("res://main.gd").new();view.offline_instance = true;view.capture_path = base.path_join("small.wvz");vp.add_child(view)
+	setup_capture("small.wvz")
+	check(view.frame_a != null and view.frame_count == 9,"WVZ1 opens with independent union clock")
 	view.scene_layers.sample(.55)
 	check(view.committed_sample.layers[0].status == "interpolated by ID" and view.committed_sample.layers[1].status == "interpolated" and view.committed_sample.layers[2].source_time == 0,"I14 independent particle / mesh / held volume times")
 	check(view.frame_a.ids[0]>=9007199254740993,"Exact >2^53 particle IDs survive scene reader")
@@ -64,7 +64,7 @@ func run() -> void:
 	view.scene_layers.request_iso("density");check(await view.scene_layers.wait_for_surface() and view.scene_layers.iso_result.cache_hit,"V13 repeat request validates cache")
 	view.scene_layers.states.density.isosurface = false;view.scene_layers.resample()
 	check(view.scene_layers.iso_node.gpu_bytes == 0,"V07/V13 hidden derived surface releases its GPU buffers")
-	setup_capture("cadence.ssc")
+	setup_capture("cadence.wvz")
 	check(view.scene_layers.layer_samples[1].status == "static" and view.scene_layers.layer_samples[2].status == "unavailable","I14 static mesh available before its timestamp; dynamic grid unavailable before first sample")
 	view.scene_layers.sample(2)
 	check(view.committed_sample.positions == "held (no IDs)","Anonymous G3 particles hold without inferred row identity")
@@ -81,7 +81,7 @@ func run() -> void:
 	view.scene_layers.sample(0)
 	check(not view.scene_layers.views.a.quad.visible and view.scene_layers.views.a.texture == null,"V08 seek before availability releases stale volume texture")
 	# Independent source-coordinate slice and probe checks.
-	setup_capture("affine.ssc")
+	setup_capture("affine.wvz")
 	var grid = view.scene_layers.views.field
 	check(absf(grid.probe(Vector3(5.2,22.15,22.2))-28.15)<.00003,"V01/V04 noncubic affine trilinear probe")
 	view.scene_layers.sample(2);check(grid.grid_size == Vector3(10,7,4) and grid.data.geometry.centering == "cell","V08 shape/spacing/centering replace resources")
@@ -105,14 +105,14 @@ func run() -> void:
 		slice_errors[label] = {"max_color_error":error,"samples":samples};check(samples>10 and error < .025,"V03/V04 "+label+" rendered slice matches independent source probe")
 		img.save_png(base.path_join("slice-"+label+".png"))
 	evidence.slices = slice_errors
-	setup_capture("tiny.ssc");view.colormaps.gray = gray
+	setup_capture("tiny.wvz");view.colormaps.gray = gray
 	s = view.scene_layers.states.field;s.volume = false;s.slice = true;s.colormap = "gray";s.lower = 0;s.upper = 7e-24;view.scene_layers.resample();camera_at(Vector3(0,0,4),Vector3.ZERO)
 	var tiny := await draw()
 	check(absf(tiny.get_pixel(256,256).r-.5)<.025,"V03 tiny scientific ranges are not flattened by a display epsilon")
 	var input: LineEdit = view.scene_layers._scalar_input(view.scene_layers.panel,"test numeric",1e-24,func(_v):return true)
 	check(absf(input.text.to_float()/1e-24-1)<1e-15,"Scientific range entry preserves small values without spin-box rounding");input.queue_free()
 	# Actual homogeneous optical depth, geometry occlusion and camera-inside tests.
-	setup_capture("slab.ssc");view.colormaps.gray = gray
+	setup_capture("slab.wvz");view.colormaps.gray = gray
 	s = view.scene_layers.states.field;s.lower = 0;s.upper = 1;s.colormap = "gray";s.opacity = .5;s.slice = false;s.volume = true
 	camera_at(Vector3(0,0,4),Vector3.ZERO)
 	var slab: Array = []
@@ -131,7 +131,7 @@ func run() -> void:
 	var black := StandardMaterial3D.new();black.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED;black.albedo_color = Color.BLACK;occluder.material_override = black;view.add_child(occluder)
 	var blocked := await draw();check(blocked.get_pixel(256,256).r < .02,"V06 opaque geometry occludes volume rays");occluder.queue_free();await process_frame
 	# Budget fallback leaves original probes unchanged.
-	setup_capture("scene-demo.ssc");view.scene_layers.states.surface.visible = false;view.scene_layers.gpu_budget_mib = 1;view.scene_layers.resample()
+	setup_capture("scene-demo.wvz");view.scene_layers.states.surface.visible = false;view.scene_layers.gpu_budget_mib = 1;view.scene_layers.resample()
 	grid = view.scene_layers.views.density
 	check(grid.lod>1 and grid.gpu_bytes<=1048576,"V07 GPU budget forces labeled display LOD")
 	var before = grid.probe(Vector3(0,0,0));view.scene_layers.gpu_budget_mib = 256;view.scene_layers.resample()

@@ -19,8 +19,8 @@ def main():
     p.add_argument('--real-capture', type=Path)
     a = p.parse_args()
     out = a.output_dir.resolve(); out.mkdir(parents=True, exist_ok=False)
-    source = scene(out / 'scene.ssc')
-    offset = out/'offset.ssc'; single = out/'single.ssc'
+    source = scene(out / 'scene.wvz')
+    offset = out/'offset.wvz'; single = out/'single.wvz'
     for path, times in [(offset, [100.0, 100.25, 102.0]), (single, [72.5])]:
         with SceneCapture(path, objects=[dict(id='p', kind='particles', units='m', identity='persistent_i8')], metadata={'time_unit': 'ms'}) as writer:
             for t in times: writer.add_particles('p', t, [[0., 0., 0.]], ids=[1])

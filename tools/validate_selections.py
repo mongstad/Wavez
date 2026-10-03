@@ -19,7 +19,7 @@ def main():
     parser.add_argument("--renderer",choices=["headless","gl_compatibility","forward_plus"],default="headless")
     parser.add_argument("--derived",action="store_true",help="Also exercise a real G3 extracted artifact (requires optional scikit-image)")
     args=parser.parse_args();out=args.output_dir.resolve();out.mkdir(parents=True,exist_ok=False)
-    path=scene(out/"fixture.ssc");before=hashlib.sha256(path.read_bytes()).hexdigest()
+    path=scene(out/"fixture.wvz");before=hashlib.sha256(path.read_bytes()).hexdigest()
     if args.derived:
         from tools.extract_surface import extract
         result=extract(dict(source=str(path),extent=path.stat().st_size,sha256=before,object="field",index=0,channel="value",threshold=14.,cache=str(out/"surface")))

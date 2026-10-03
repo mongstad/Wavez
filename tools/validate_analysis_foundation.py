@@ -20,7 +20,7 @@ def main():
     p.add_argument("--godot",required=True)
     p.add_argument("--output-dir",type=Path,required=True)
     a=p.parse_args();out=a.output_dir.resolve();out.mkdir(parents=True,exist_ok=False)
-    source=scene(out/"fixture.ssc")
+    source=scene(out/"fixture.wvz")
     before=hashlib.sha256(source.read_bytes()).hexdigest()
     cases=[]
     for times,static in [([0,.1,1.],False),([1,3],False),([5],True),([],False)]:

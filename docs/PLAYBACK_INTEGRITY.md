@@ -1,5 +1,11 @@
 # Playback validation and explicit integrity verification
 
+For current WVZ1 `.wvz` files, run
+`python tools/verify_wvz.py /absolute/path/scene.wvz` from the repository root.
+The #107 measurements and commands below describe their original SIMSCP4 test
+build and remain historical evidence. The current viewer keeps the same
+structural versus payload-integrity distinction.
+
 Issue #107 separates interactive decoding from cryptographic payload verification.
 Implementation and measurements are pending owner review. SIMSCP4, exporter
 settings, scientific arrays and #103's cache retention/admission policy are unchanged.

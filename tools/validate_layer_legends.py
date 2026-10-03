@@ -22,8 +22,8 @@ def main():
     args = parser.parse_args()
     out = args.output_dir.resolve()
     out.mkdir(parents=True, exist_ok=False)
-    fixture(out / 'mixed.ssc', ['particles', 'volume', 'mesh'])
-    source = out / 'mixed.ssc'
+    fixture(out / 'mixed.wvz', ['particles', 'volume', 'mesh'])
+    source = out / 'mixed.wvz'
     digest = hashlib.sha256(source.read_bytes()).hexdigest()
     result = subprocess.run([args.godot, '--path', str(ROOT / 'viewer'), '--rendering-method', args.renderer,
                              '--audio-driver', 'Dummy', '--resolution', '1440x900', '--script',

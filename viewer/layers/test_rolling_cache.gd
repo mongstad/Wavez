@@ -81,7 +81,7 @@ func shrink_during_publication(control) -> void:
 
 func run() -> void:
 	var directory := OS.get_cmdline_user_args()[0]
-	var view = make_view(directory.path_join("session.ssc"),true)
+	var view = make_view(directory.path_join("session.wvz"),true)
 	var control = view.scene_layers.field_playback
 	check(await settle(view,0),"Small capture becomes wholly prepared")
 	check(control.worker.status().frames == 20,"Whole-run readiness preserved for a fitting capture")
@@ -151,7 +151,7 @@ func run() -> void:
 	var final: Dictionary = control.profile_report()
 	var worker = control.worker;view.free();await process_frame
 	check(worker.status().bytes == 0 and worker.status().in_flight_bytes == 0,"Teardown releases prepared and active ownership")
-	var mixed = make_view(directory.path_join("mixed.ssc"),true)
+	var mixed = make_view(directory.path_join("mixed.wvz"),true)
 	check(await sample(mixed,0,true) and await settle(mixed,0),"Mixed independent clocks become ready")
 	mixed.timeline.refresh(mixed,true)
 	check(mixed.timeline.coverage.fields == [[0.0,2.0]],"Small field timeline is fully prepared")

@@ -19,7 +19,7 @@ def torus(n=32,m=16,radius=8.,tube=2.):
 
 def main():
     a=argparse.ArgumentParser(description=__doc__);a.add_argument('--small',action='store_true');a.add_argument('--output',type=Path);args=a.parse_args()
-    out=args.output or ROOT/'results/g3'/('small.ssc' if args.small else 'scene-demo.ssc');out.parent.mkdir(parents=True,exist_ok=True)
+    out=args.output or ROOT/'results/g3'/('small.wvz' if args.small else 'scene-demo.wvz');out.parent.mkdir(parents=True,exist_ok=True)
     if out.exists():raise SystemExit('Choose a new output; demo does not overwrite captures')
     n=32 if args.small else 128;count=64 if args.small else 100000
     objects=[dict(id='particles',kind='particles',units='demo units',identity='persistent_i8'),dict(id='surface',kind='mesh',units='demo units',identity='stable_topology'),dict(id='density',kind='volume',units='density units',channels={'rho':{'units':'density units'},'signed':{'units':'demo units'}})]

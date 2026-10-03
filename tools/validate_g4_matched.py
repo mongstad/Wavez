@@ -20,7 +20,7 @@ def main():
     try:
         hashes=[]
         for n,label in enumerate(('left-input','right-input')):
-            directory=root/label;directory.mkdir();source=traveling_pulse(directory/'pulse.ssc',time_scale=1 if n==0 else 2,time_offset=0 if n==0 else 10);hashes.append(hashlib.sha256(source.read_bytes()).hexdigest())
+            directory=root/label;directory.mkdir();source=traveling_pulse(directory/'pulse.wvz',time_scale=1 if n==0 else 2,time_offset=0 if n==0 else 10);hashes.append(hashlib.sha256(source.read_bytes()).hexdigest())
             run([args.godot,'--headless','--path',str(ROOT/'viewer'),'--log-file',str(directory/'godot.log'),'--script','analysis/test_render_state.gd','--','--g4-render-fixture='+str(directory),'--g4-render-visible'],directory/'stdout.log')
         run([args.godot,'--path',str(ROOT/'viewer'),'--rendering-method',args.renderer,'--resolution','640x360','--audio-driver','Dummy','--log-file',str(root/'native.log'),'--script','analysis/test_matched_render.gd','--','--matched-fixture='+str(root),'--render-pair'],root/'stdout.log')
         prepared=json.loads((root/'prepared.json').read_text());comparison=unpack(json.loads(Path(prepared['path']).read_text()))
@@ -49,7 +49,7 @@ def main():
             else:check((directory/'timing.jsonl').stat().st_mtime_ns>first_finished,'right rendering follows left completion')
         check(pids[0]!=pids[1],'separate sequential scene renderers')
         check(all(np.array_equal(a,b) for a,b in zip(*images)),'matched physical geometry reproduces identical PNG pixels across raw clocks')
-        for n,label in enumerate(('left-input','right-input')):check(hashlib.sha256((root/label/'pulse.ssc').read_bytes()).hexdigest()==hashes[n],label+' source unchanged')
+        for n,label in enumerate(('left-input','right-input')):check(hashlib.sha256((root/label/'pulse.wvz').read_bytes()).hexdigest()==hashes[n],label+' source unchanged')
         report.update(status='PASS',image_inspection_required=True)
     except BaseException as exc:report.update(status='FAIL',error=type(exc).__name__+': '+str(exc));raise
     finally:(root/'report.json').write_text(json.dumps(report,indent=2)+'\n')

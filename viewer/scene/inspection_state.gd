@@ -27,7 +27,7 @@ static func digest(path: String, extent: int) -> String:
 static func identity(viewer) -> Dictionary:
 	if viewer.generic_reader == null: return {}
 	var extent: int = viewer.generic_reader.scan_offset
-	return {"path":viewer.capture_path,"committed_bytes":str(extent),"sha256":digest(viewer.capture_path,extent),"format":"SIMSCP4", "complete_frames":viewer.frame_count}
+	return {"path":viewer.capture_path,"committed_bytes":str(extent),"sha256":digest(viewer.capture_path,extent),"format":"WVZ1", "complete_frames":viewer.frame_count}
 
 static func snapshot(viewer, source: Dictionary = {}) -> Dictionary:
 	if viewer.scene_layers != null and not viewer.scene_layers.ensure_particle_data():return {}
@@ -46,7 +46,7 @@ static func snapshot(viewer, source: Dictionary = {}) -> Dictionary:
 	var sample: Dictionary = viewer.committed_sample.duplicate(true)
 	var values = viewer._scalar_channels(viewer.frame_a).get(viewer.color_channel,[])
 	var valid: bool = is_finite(viewer.range_min) and is_finite(viewer.range_max) and viewer.range_min <= viewer.range_max
-	var result := {"kind":"simscope-inspection","version":VERSION,"source":resolved_source,
+	var result := {"kind":"wavez-inspection","version":VERSION,"source":resolved_source,
 		"visual":visual,"sample":sample,"frame_index":viewer.current_index,"alpha":viewer.phase,"history_indices":viewer.history.map(func(frame): return frame.source_index),
 		"layers":[{"id":"particles","kind":"particles","visible":viewer.particle_layer_visible,"sampling":sample,"identity_policy":"explicit persistent int64 IDs" if viewer._has_particle_ids() else "anonymous; sample-and-hold; no trails or identity selections", "display_lod":"all recorded particles; no downsampling"}],
 		"normalization":{"mode":viewer._effective_normalization(),"bounds":[viewer.range_min,viewer.range_max] if valid else null,"statistics":Normalization.statistics(values,Vector2(viewer.range_min,viewer.range_max),viewer.logarithmic),"scalar_policy":"sample-and-hold"},
@@ -128,13 +128,13 @@ static func restore(viewer, recipe: Dictionary) -> String:
 
 static func restore_scene(viewer, recipe: Dictionary) -> String:
 	if viewer.inspection_busy:return "An inspection capture is in progress."
-	if viewer.scene_layers == null or recipe.get("kind") != "simscope-inspection":return "Open the SIMSCP4 scene first."
+	if viewer.scene_layers == null or recipe.get("kind") != "wavez-inspection":return "Open the WVZ1 scene first."
 	if not recipe.get("source") is Dictionary or not recipe.get("visual") is Dictionary or not recipe.get("sample") is Dictionary:return "Missing scene inspection state."
 	var source: Dictionary = recipe.source
 	if preload("res://video/source_identity.gd").is_local(source):
 		if not preload("res://video/source_identity.gd").matches(viewer.generic_reader,source):return "Local export source changed; no state applied."
 	else:
-		if not source.get("committed_bytes") is String or not source.committed_bytes.is_valid_int() or not source.get("sha256") is String or source.get("format") != "SIMSCP4":return "Invalid scene source identity."
+		if not source.get("committed_bytes") is String or not source.committed_bytes.is_valid_int() or not source.get("sha256") is String or source.get("format") != "WVZ1":return "Invalid scene source identity."
 		if digest(viewer.capture_path,int(source.committed_bytes)) != source.sha256:return "Scene source identity mismatch; no state applied."
 	if not recipe.get("layers") is Array or recipe.layers.size() != viewer.generic_reader.objects.size():return "Scene layer manifest differs."
 	var seen := {}

@@ -1,15 +1,15 @@
 # Native scene inspection
 
 Ordinary State → Save/Load view preset uses the separate [portable presentation
-contract](docs/VIEW_PRESETS.md). This document describes retained scientific
+contract](docs/WAVEZ_VIEW_PRESETS.md). This document describes retained scientific
 inspection/sidecar and analysis-bundle APIs, not the ordinary preset workflow.
 
-Inspection operates on SIMSCP4 particles, meshes and scalar fields with independent
+Inspection operates on WVZ1 particles, meshes and scalar fields with independent
 source clocks. Scene recipes use version 2; G4 durable inspection uses version 3
 with exact selections, groups, analysis results, bookmarks and source provenance.
 These state versions are independent of the capture format. See
 [G4 schemas](docs/G4_SCHEMAS.md), [the G4 guide](docs/G4_GUIDE.md) and
-[the handbook](docs/SIMSCOPE_HANDBOOK.md).
+[the handbook](docs/WAVEZ_HANDBOOK.md).
 
 Playback uses recorded time only. Recipes retain the exact signed `physical_rate`;
 `time_mode`, `playback_fps` and the index-rate slider are no longer state fields.
@@ -19,9 +19,9 @@ indices remain available for navigation and exact lookup.
 ## Try a native scene
 
 ```sh
-python -m examples.scene_demo --small --output results/inspection-scene.ssc
+python -m examples.scene_demo --small --output results/inspection-scene.wvz
 # Use a fresh output filename on later runs.
-godot --path viewer -- --capture=/absolute/path/to/results/inspection-scene.ssc
+godot --path viewer -- --capture=/absolute/path/to/results/inspection-scene.wvz
 ```
 
 Pause, seek a physical time, select a particle mapping or field slice, and inspect
@@ -161,7 +161,7 @@ the maintained regression tools and reports; retired formats are not current gui
 
 ### Local video frame state (#116)
 
-Ordinary video-export sidecars use `source.kind = "simscope-export-source"` with
+Ordinary video-export sidecars use `source.kind = "wavez-export-source"` with
 UUID/header fingerprints, committed extent/counts and a high-resolution local
 filesystem stamp. They restore only against the same unchanged local source;
 they do not require a whole-source payload hash. This avoids an implicit extra

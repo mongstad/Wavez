@@ -74,9 +74,11 @@ func run() -> void:
 	var directory := OS.get_cmdline_user_args()[0]
 	var Reader = preload("res://layers/scene_reader.gd")
 	var unsupported = Reader.new()
-	check(not unsupported.open(directory.path_join("unsupported-v3.ssc")) and unsupported.error.contains("Unsupported scene version"),"SIMSCP3 prefix refuses without a fallback parser")
+	check(not unsupported.open(directory.path_join("unsupported-v3.wvz")) and unsupported.error.contains("Unsupported scene version"),"SIMSCP3 prefix refuses without a fallback parser")
+	check(not unsupported.open(directory.path_join("unsupported-v4.wvz")) and unsupported.error.contains("Unsupported scene version"),"Renamed SIMSCP4 bytes refuse")
+	check(not unsupported.open(directory.path_join("obsolete-suffix.ssc")) and unsupported.error.contains("requires a .wvz"),"WVZ1 bytes under obsolete suffix refuse")
 	unsupported.close()
-	var required = Reader.new();check(required.open(directory.path_join("session.ssc")),"SIMSCP4 opens")
+	var required = Reader.new();check(required.open(directory.path_join("session.wvz")),"WVZ1 opens")
 	var description: Dictionary = required.describe("field",0).duplicate(true)
 	var record: Dictionary = required.samples.field[0]
 	description.arrays[0].erase("statistics_v1")
@@ -101,7 +103,7 @@ func run() -> void:
 		var cap := FieldBuffer.session_capacity({"available_physical":available,"reserve":2*gib},0,gib,gib/8)
 		check(cap>=0 and cap<=maxi(0,available-3*gib),"Available RAM and combined reservations constrain capacity")
 		check(FieldBuffer.session_capacity({"available_physical":available,"reserve":2*gib},gib,gib,gib/8)>=cap,"Resident cache credited once")
-	var view = load("res://main.gd").new();view.capture_path = directory.path_join("session.ssc");view.playing = false;view.orbit_enabled = false
+	var view = load("res://main.gd").new();view.capture_path = directory.path_join("session.wvz");view.playing = false;view.orbit_enabled = false
 	root.add_child(view);view.set_process(false)
 	await process_frame
 	var control = view.scene_layers.field_playback
@@ -206,13 +208,13 @@ func run() -> void:
 	view.free();await process_frame
 	check(worker.status().bytes == 0 and worker.status().frames == 0,"Closing releases all retained CPU preparations")
 	# Small-capture autoplay waits for its admitted automatic window.
-	var autoplay = load("res://main.gd").new();autoplay.capture_path = directory.path_join("session.ssc");autoplay.orbit_enabled = false
+	var autoplay = load("res://main.gd").new();autoplay.capture_path = directory.path_join("session.wvz");autoplay.orbit_enabled = false
 	root.add_child(autoplay);autoplay.set_process(false)
 	check(autoplay.playing and autoplay.scene_layers.field_playback.worker.status().session.get("automatic",false),"Autoplay uses automatic preparation")
 	check(await session_ready(autoplay),"Unmeasured autoplay prepares its admitted automatic window")
 	check(await sample(autoplay,.1,true),"Automatic target is ready")
 	autoplay.free();await process_frame
-	var late = load("res://main.gd").new();late.capture_path = directory.path_join("late.ssc");late.playing = false;late.orbit_enabled = false
+	var late = load("res://main.gd").new();late.capture_path = directory.path_join("late.wvz");late.playing = false;late.orbit_enabled = false
 	root.add_child(late);late.set_process(false);await process_frame
 	var late_control = late.scene_layers.field_playback
 	late_control.range_start.value = 1e-9

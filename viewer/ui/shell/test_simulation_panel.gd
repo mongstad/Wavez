@@ -34,7 +34,7 @@ func disclosures() -> Dictionary:
 
 func check_session_disclosures() -> void:
 	for title in disclosures():check(not disclosures()[title],"Fresh session starts collapsed: "+title)
-	viewer._open_capture(output.path_join("mixed.ssc"));viewer.playing = false
+	viewer._open_capture(output.path_join("mixed.wvz"));viewer.playing = false
 	for title in disclosures():check(not disclosures()[title],"First mixed capture starts collapsed: "+title)
 	viewer.section_buttons.Rendering.button_pressed = true
 	viewer.section_buttons["Advanced • Size / Brightness"].button_pressed = true
@@ -56,21 +56,21 @@ func check_session_disclosures() -> void:
 	viewer.section_buttons.Rendering.button_pressed = false
 	Visual.apply(viewer,saved)
 	check(disclosures() == chosen,"Explicit particle recipe disclosure is honored")
-	viewer._open_capture(output.path_join("mixed-replacement.ssc"));viewer.playing = false
+	viewer._open_capture(output.path_join("mixed-replacement.wvz"));viewer.playing = false
 	check(disclosures() == chosen,"Different capture with matching logical groups preserves choices")
-	viewer._open_capture(output.path_join("particles.ssc"));viewer.playing = false
+	viewer._open_capture(output.path_join("particles.wvz"));viewer.playing = false
 	for title in disclosures():check(disclosures()[title] == chosen[title],"Particle disclosure survives missing layers: "+title)
-	viewer._open_capture(output.path_join("mixed.ssc"));viewer.playing = false
+	viewer._open_capture(output.path_join("mixed.wvz"));viewer.playing = false
 	check(disclosures() == chosen,"Layer disclosures survive absence and reintroduction in session")
-	viewer._open_capture(output.path_join("fields.ssc"));viewer.playing = false
+	viewer._open_capture(output.path_join("fields.wvz"));viewer.playing = false
 	for title in disclosures():check(disclosures()[title] == chosen[title],"Field-only replacement preserves matching choices: "+title)
-	viewer._open_capture(output.path_join("mixed.ssc"));viewer.playing = false
+	viewer._open_capture(output.path_join("mixed.wvz"));viewer.playing = false
 	check(disclosures() == chosen,"Replacement after object selection preserves per-object disclosures")
 
 func check_new_file_focus() -> void:
 	var shell = viewer.shell
 	shell.select_workspace(0)
-	viewer._open_capture(output.path_join("meshes.ssc")); await settle()
+	viewer._open_capture(output.path_join("meshes.wvz")); await settle()
 	var layers = viewer.scene_layers
 	check(shell.WORKSPACES[2] == "Meshes" and shell.workspace == 2 and shell.chooser.selected == 2, "Mesh-only open focuses the Meshes category")
 	check(shell.adapter.visible and layers.category_pages.mesh.is_visible_in_tree() and layers.object_choices.mesh.item_count == 2 and layers.selected_objects.mesh == "mesh0", "Mesh-only controls and first object are immediately visible")
@@ -85,19 +85,19 @@ func check_new_file_focus() -> void:
 	shell.refresh()
 	check(shell.workspace == 2, "Changing object visibility does not select another category")
 	shell.select_workspace(1)
-	viewer._open_capture(output.path_join("meshes.ssc"))
+	viewer._open_capture(output.path_join("meshes.wvz"))
 	check(shell.workspace == 2, "Reopening a mesh-only file focuses Meshes again")
 	shell.select_workspace(0)
-	viewer._open_capture(output.path_join("particles.ssc"))
+	viewer._open_capture(output.path_join("particles.wvz"))
 	check(shell.workspace == 0 and viewer.inspector_box.visible, "Particle-only open retains the selected Particles category")
 	shell.select_workspace(1)
-	viewer._open_capture(output.path_join("fields.ssc"))
+	viewer._open_capture(output.path_join("fields.wvz"))
 	check(shell.workspace == 1 and viewer.scene_layers.category_pages.volume.visible, "Field-only open retains the selected Fields category")
 	shell.select_workspace(2)
-	viewer._open_capture(output.path_join("mixed.ssc"))
+	viewer._open_capture(output.path_join("mixed.wvz"))
 	check(shell.workspace == 2, "Mixed scene preserves the previously selected Meshes category")
 	shell.select_workspace(0)
-	viewer._open_capture(output.path_join("mixed-replacement.ssc"))
+	viewer._open_capture(output.path_join("mixed-replacement.wvz"))
 	check(shell.workspace == 0, "Mixed replacement preserves the previously selected Particles category")
 	shell.select_workspace(0)
 
@@ -107,7 +107,7 @@ func run() -> void:
 	viewer = Viewer.new();viewer.scene_prebuffer_enabled = false;root.add_child(viewer);viewer.set_process(false)
 	check_session_disclosures()
 	await check_new_file_focus()
-	viewer._open_capture(output.path_join("mixed.ssc"));viewer.playing = false;viewer.orbit_enabled = false
+	viewer._open_capture(output.path_join("mixed.wvz"));viewer.playing = false;viewer.orbit_enabled = false
 	await settle()
 	var shell = viewer.shell;var layers = viewer.scene_layers
 	check(shell.WORKSPACES == ["Particles","Fields","Meshes"],"Exact simulation categories")
@@ -204,9 +204,9 @@ func run() -> void:
 	check(layers.selected_objects == {"volume":"volume1","mesh":"mesh1"} and not layers.panel_groups["volume1/Opacity"].button_pressed,"Restore preserves session object choices and disclosure states")
 	check(Visual.snapshot(viewer) == before,"Recipe restore retains exact values and legacy keys")
 	# Missing categories show an empty context, never another category's controls.
-	viewer._open_capture(output.path_join("particles.ssc"));layers = viewer.scene_layers
+	viewer._open_capture(output.path_join("particles.wvz"));layers = viewer.scene_layers
 	check(layers.object_choices.volume.disabled and layers.object_choices.mesh.disabled,"Absent field/mesh selectors disabled")
-	viewer._open_capture(output.path_join("fields.ssc"));layers = viewer.scene_layers
+	viewer._open_capture(output.path_join("fields.wvz"));layers = viewer.scene_layers
 	shell.select_workspace(0);await settle()
 	check(not viewer.inspector_box.visible,"Field-only capture does not show particle controls")
 	check(layers.object_choices.mesh.disabled,"Field-only capture has no mesh controls")

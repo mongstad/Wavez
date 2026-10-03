@@ -23,7 +23,7 @@ def main():
     out=args.output_dir.resolve();out.mkdir(parents=True,exist_ok=False)
     ids=np.arange(args.count,dtype="i8")+2**53+1;ids[-1]=2**63-1
     row=np.arange(args.count);positions=np.column_stack((row%1000*.1,row//1000*.1,np.zeros(args.count)))
-    path=out/"fixture.ssc"
+    path=out/"fixture.wvz"
     with SceneCapture(path,objects=[dict(id="p",kind="particles",units="m",identity="persistent_i8")]) as writer:
         writer.add_particles("p",0,positions,ids=ids)
         writer.add_particles("p",1,positions[::-1]+[1.,0,0],ids=ids[::-1])

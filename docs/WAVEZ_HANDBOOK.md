@@ -1,6 +1,6 @@
 # Wavez handbook
 
-Wavez is a scientific capture viewer with a Python export layer and a Godot desktop viewer. Its job is to preserve declared data and make representation choices inspectable. A visually persuasive image is not a substitute for a numerical field, a conservation check or a declared boundary. The current implementation is `SimScope/`; see [current status](CURRENT_STATUS.md) for accepted scope and [evidence](EVIDENCE_INDEX.md) for measurements.
+Wavez is a scientific capture viewer with a Python export layer and a Godot desktop viewer. Its job is to preserve declared data and make representation choices inspectable. A visually persuasive image is not a substitute for a numerical field, a conservation check or a declared boundary. The current implementation is `WAVEZ/`; see [current status](CURRENT_STATUS.md) for accepted scope and [evidence](EVIDENCE_INDEX.md) for measurements.
 
 ## Architecture and development history
 
@@ -58,7 +58,7 @@ provide frame/reset, panel visibility and fullscreen.
 copyright, licensing summary and GitHub link. **Licenses and notices** provides
 the full packaged project and third-party notices without an internet connection.
 About replaces the temporary standalone Version entry and works without a capture;
-see [About behavior and validation](ABOUT_SIMSCOPE.md) and [version policy](VERSIONING.md).
+see [About behavior](../viewer/ui/about/README.md) and [version policy](VERSIONING.md).
 
 Scene retains the existing inspector. Appearance, Selection and Analysis provide
 links into the same controls; choosing a workspace never binds a scientific
@@ -295,7 +295,7 @@ time. See [UI-003 validation](CAMERA_TUMBLE_VALIDATION.md) for coverage and limi
 
 ## Scenes, layers and time
 
-SIMSCP4 describes named particle, mesh and volume objects, with at most one particle object and 16 total objects in the current implementation. Each has declared units, geometry/transform semantics, identity policy where relevant, and its own samples. A static object has one reusable sample. The scene timeline is the sorted union of committed timestamps, while layer sampling is independent. A field does not acquire a new scientific sample merely because particles were saved.
+WVZ1 describes named particle, mesh and volume objects, with at most one particle object and 16 total objects in the current implementation. Each has declared units, geometry/transform semantics, identity policy where relevant, and its own samples. A static object has one reusable sample. The scene timeline is the sorted union of committed timestamps, while layer sampling is independent. A field does not acquire a new scientific sample merely because particles were saved.
 
 | Situation at requested physical time | Display/sample behavior |
 |---|---|
@@ -411,11 +411,11 @@ time. Play restores the previous frame cap. Scientific samples, field resolution
 rendering settings and deterministic exports are unchanged by this policy.
 See [paused rendering](PAUSED_RENDERING.md) for measured behavior and limits.
 
-Typed SIMSCP4 channels preserve supported source bytes with optional lossless Zstandard. Compression is a storage choice, not a promise of faster playback. Normal viewer opening checks the format, object metadata and bounded fixed-size record headers, then loads the initial visible samples. It does not parse every future descriptor or build/write a full descriptor index. Requested reads retain descriptor/commit hashes, schema/bounds checks and bounded decoding, including background lookahead. Interactive playback skips stored/raw payload SHA comparisons. Readable payload corruption can therefore display incorrect scientific values without an error, including in native source probes. Run the [explicit integrity verifier](PLAYBACK_INTEGRITY.md) to check the whole capture. Python readers/analysis and offline video export retain strict payload checks. Decoded LRUs and source-generation checks still invalidate changed sources; file paths/stamps are not proof of integrity. No legacy format or sidecar reader is included.
+Typed WVZ1 channels preserve supported source bytes with optional lossless Zstandard. Compression is a storage choice, not a promise of faster playback. Normal viewer opening checks the format, object metadata and bounded fixed-size record headers, then loads the initial visible samples. It does not parse every future descriptor or build/write a full descriptor index. Requested reads retain descriptor/commit hashes, schema/bounds checks and bounded decoding, including background lookahead. Interactive playback skips stored/raw payload SHA comparisons. Readable payload corruption can therefore display incorrect scientific values without an error, including in native source probes. Run the [explicit integrity verifier](PLAYBACK_INTEGRITY.md) to check the whole capture. Python readers/analysis and offline video export retain strict payload checks. Decoded LRUs and source-generation checks still invalidate changed sources; file paths/stamps are not proof of integrity. No legacy format or sidecar reader is included.
 
 The scene inspector's **Particle playback buffer** separates decoded sample RAM, prepared pair RAM and current GPU resources. **Automatic (safe RAM)** uses a rolling cache capped at 2 GiB and safe physical-RAM headroom, with up to eight requested pairs including the current pair. Opening presents the initial scene immediately after its required samples are ready; controls do not wait for background preparation. Uncached seeks retain the previous committed scene and wait only for the requested samples. Rapid seeks replace obsolete work; reverse playback and **Loop recorded interval** reorder the bounded window. Loop defaults off. Hidden particles skip preparation unless a guide, inspection or reveal needs their data.
 
-Manual RAM choices also use rolling caches. The old explicit full-preload policy maps to automatic rolling preparation. Every choice remains subject to the RAM guard. Budget reductions reclaim resident caches even when no new decode is needed. Diagnostics report resident pairs and buffered source duration, rather than completion of the whole capture. A malformed requested record is rejected with its object, zero-based sample index and record sequence; playback pauses and the error advises reopening or re-exporting. A bad future prefetch does not block a valid current sample. Whole-capture verification is a separate, read-only diagnostic: `python tools/verify_ssc.py /path/to/capture.ssc`. It reads and verifies all records and may take time; it is never invoked by normal viewer opening. See [lazy loading](SSC_LAZY_LOADING.md) for timings and limitations.
+Manual RAM choices also use rolling caches. The old explicit full-preload policy maps to automatic rolling preparation. Every choice remains subject to the RAM guard. Budget reductions reclaim resident caches even when no new decode is needed. Diagnostics report resident pairs and buffered source duration, rather than completion of the whole capture. A malformed requested record is rejected with its object, zero-based sample index and record sequence; playback pauses and the error advises reopening or re-exporting. A bad future prefetch does not block a valid current sample. Whole-capture verification is a separate, read-only diagnostic: `python tools/verify_wvz.py /path/to/capture.wvz`. It reads and verifies all records and may take time; it is never invoked by normal viewer opening. See [lazy loading](SSC_LAZY_LOADING.md) for timings and limitations.
 
 Historical explicit-preload evidence on the 48 GB workstation: a retained 100k-particle capture prepared 81 pairs in 13.3 seconds, enabled Play after 0.78 seconds and used about 2.50 GiB process RSS. An isolated probe measured 18.67 MiB of retained Godot allocations per decoded 100k-particle sample and another 7.27 MiB per prepared pair without trails. Conservative cache charges are larger and count shared references again. CPU preparation does not create GPU resources for every cached pair.
 
@@ -439,7 +439,7 @@ All source channels and selected-channel display planes are retained within
 combined cache/worker reservations and OS/renderer headroom. Repeat playback and
 seeks reuse them. Compatible channel changes reuse validated arrays and statistics,
 replacing only selected-channel planes. GPU staging remains current plus one future
-texture per field. SIMSCP4 is the only supported capture format. See
+texture per field. WVZ1 is the only supported capture format. See
 [rolling playback](ROLLING_PLAYBACK_CACHE.md) for current validation and limits;
 [continuous playback](SSC_CONTINUOUS_PLAYBACK.md) retains historical evidence.
 
@@ -449,7 +449,7 @@ is the default: unset or `auto` selects a pool capped at logical CPUs minus two,
 clamped to 1–4, and starts at two active lanes (one when capped there). It measures
 production rate and prepared lead, increases concurrency when needed, and backs
 off for memory, swap or sustained presentation pressure. Idle lanes sleep.
-Set `SIMSCOPE_FIELD_WORKERS=1`, `2`, `3` or `4` before launching for a fixed
+Set `WAVEZ_FIELD_WORKERS=1`, `2`, `3` or `4` before launching for a fixed
 diagnostic cap; live physical admission still may allow fewer jobs. Other values
 use Auto. All-channel source reuse and adaptive cache semantics remain intact.
 
@@ -487,7 +487,7 @@ selections remain numerically usable. [The guide](G4_GUIDE.md) distinguishes sou
 traces, weighted statistics, field integrals, tracer estimates and exploratory periods.
 G5 local control/optional MCP and G6 events/broader adapters/release work are
 **NOT IMPLEMENTED and NOT STARTED**. No web/dashboard work is authorized.
-New development targets `.ssc` / SIMSCP4 under the
+New development targets `.wvz` / WVZ1 under the
 [capture format policy](CAPTURE_FORMAT_POLICY.md). The
-[roadmap](../SIMSCOPE_NEXT_DESIGN.md) and [acceptance registry](../SIMSCOPE_ACCEPTANCE_MATRIX.md)
+[historical roadmap](../SIMSCOPE_NEXT_DESIGN.md) and [historical acceptance registry](../SIMSCOPE_ACCEPTANCE_MATRIX.md)
 do not independently authorize future milestones.

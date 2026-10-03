@@ -1,4 +1,4 @@
-"""Read-only native SSC startup profile with source integrity and optional playback checks."""
+"""Read-only native WVZ1 startup profile with source integrity and optional playback checks."""
 import argparse
 import hashlib
 import json

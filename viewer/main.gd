@@ -1,7 +1,7 @@
 extends Node3D
 
 # WAVEZ
-# Godot 4 scientific viewer for SIMSCP4 particle, mesh and volume scenes.
+# Godot 4 scientific viewer for WVZ1 particle, mesh and volume scenes.
 #
 # The renderer is observational only. It never feeds information back into the
 # Python/CuPy simulation.
@@ -64,7 +64,7 @@ var held_positions_ready := false
 var generic_reader # Native SceneReader; name retained for current scene tools.
 var scene_layers
 var selection_controller
-# SIMSCP4-only controls; retained synchronous mode supports export and comparisons.
+# WVZ1-only controls; retained synchronous mode supports export and comparisons.
 var scene_prebuffer_enabled := true
 var scene_hidden_fast_path := true
 var scene_loop_playback := false
@@ -189,7 +189,7 @@ func _ready() -> void:
 	if FileAccess.file_exists(capture_path):
 		_open_capture(capture_path)
 	else:
-		status_label.text = "No capture loaded. Open a SIMSCP4 scene (.ssc)."
+		status_label.text = "No scene loaded. Open a WAVEZ Scene Format file (.wvz)."
 	for arg in args:
 		if arg.begins_with("--inspection="): _load_scientific_inspection(arg.trim_prefix("--inspection="))
 		if arg.begins_with("--view-preset="): _load_inspection(arg.trim_prefix("--view-preset="))
@@ -1078,7 +1078,7 @@ func _build_inspector_controls() -> void:
 	open_dialog = FileDialog.new()
 	open_dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE
 	open_dialog.access = FileDialog.ACCESS_FILESYSTEM
-	open_dialog.filters = PackedStringArray(["*.ssc ; WAVEZ scene (SIMSCP4)"])
+	open_dialog.filters = PackedStringArray(["*.wvz ; WAVEZ Scene Format"])
 	open_dialog.mode_overrides_title = false
 	open_dialog.title = "Open capture"
 	if file_dialog_preferences != null:
@@ -1123,7 +1123,7 @@ func _apply_preset(name: String) -> void:
 func _open_scene(path: String) -> void:
 	shell.dismiss_orbit_editor()
 	# Interactive display validates structure; offline exports retain payload SHA checks.
-	# Full-capture integrity verification is the separate tools/verify_ssc.py workflow.
+	# Full-capture integrity verification is the separate tools/verify_wvz.py workflow.
 	var reader = preload("res://layers/scene_reader.gd").new(offline_instance)
 	if offline_instance:reader.cancellation = offline_cancel
 	if not reader.open(path):
@@ -1148,7 +1148,7 @@ func _open_scene(path: String) -> void:
 	scene_layers.frame_scene()
 	_build_guides();_apply_geometry();_update_camera();_sync_visuals();_sync_inspection_controls()
 	shell.focus_mesh_only_scene()
-	status_label.text = "Loaded %s • SIMSCP4 • %d layer samples" % [path.get_file(),reader.records.size()]
+	status_label.text = "Loaded %s • WAVEZ Scene Format (WVZ1) • %d layer samples" % [path.get_file(),reader.records.size()]
 	# The synchronous initial sample is already usable; its rolling request was
 	# submitted by sample(). Background preparation must not gate interaction.
 	scene_layers.playback._update_ui()

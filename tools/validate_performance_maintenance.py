@@ -5,7 +5,7 @@ import numpy as np
 from validate_scene_playback import prepare
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
-from wavez_export import SceneCapture
+from wavez_export import SceneCapture, SceneReader
 
 def run(godot,viewer,script,out,args,renderer='headless',timeout=180):
     cmd=[godot,'--path',str(viewer),'--audio-driver','Dummy','--log-file',str(out.with_suffix('.godot.log'))]
@@ -42,13 +42,20 @@ def validate_profiles(runs):
 
 def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--godot',required=True);p.add_argument('--output-dir',type=Path,required=True)
-    p.add_argument('--renderer',default='headless',choices=['headless','gl_compatibility','forward_plus']);p.add_argument('--baseline-viewer',type=Path);p.add_argument('--benchmark-root',type=Path)
+    p.add_argument('--renderer',default='headless',choices=['headless','gl_compatibility','forward_plus']);p.add_argument('--baseline-viewer',type=Path)
+    p.add_argument('--particle-scene',type=Path);p.add_argument('--field-scene',type=Path)
     a=p.parse_args();out=a.output_dir.resolve();out.mkdir(parents=True,exist_ok=True)
-    if a.benchmark_root:
-        if not a.baseline_viewer or a.renderer=='headless':p.error('Retained profiling requires --baseline-viewer and a real --renderer')
+    if a.particle_scene or a.field_scene:
+        if not a.baseline_viewer or a.renderer=='headless' or not a.particle_scene or not a.field_scene:
+            p.error('Profile comparison requires both WVZ1 scenes, --baseline-viewer and a real --renderer')
         runs=[];sources={}
-        for case,relative,seconds in [('02B','02_PySPH_DamBreak/frozen/02B/simscope/dam_break.ssc',16),('03B','03_FiPy_FieldTransport/frozen/03B/simscope/field.ssc',12)]:
-            capture=(a.benchmark_root/'benchmarks'/relative).resolve();sources[str(capture)]=hashlib.sha256(capture.read_bytes()).hexdigest()
+        for case,capture,seconds in [('02B',a.particle_scene,16),('03B',a.field_scene,12)]:
+            capture=capture.resolve()
+            with SceneReader(capture, strict=True, cache_bytes=0) as reader:
+                expected = 'particles' if case == '02B' else 'volume'
+                if not any(obj['kind'] == expected for obj in reader.objects.values()):
+                    p.error(f'{case} requires a WVZ1 {expected} scene')
+            sources[str(capture)]=hashlib.sha256(capture.read_bytes()).hexdigest()
             for cache in ([256] if case=='02B' else [0,256]):
                 for mode,viewer in [('before',a.baseline_viewer.resolve()),('after',ROOT/'viewer')]:
                     result=out/f'{case}-{cache}-{mode}.json';job=result.with_suffix('.job.json');job.write_text(json.dumps(dict(case=case,capture=str(capture),cache_mib=cache,seconds=seconds,output=str(result))))
@@ -60,7 +67,7 @@ def main():
         assert all(c['passed'] for c in checks), checks
     else:
         fixtures=out/'fixtures';prepare(fixtures)
-        path=fixtures/'field.ssc';path.unlink(missing_ok=True)
+        path=fixtures/'field.wvz';path.unlink(missing_ok=True)
         with SceneCapture(path,objects=[dict(id='field',kind='volume',units='u')],compression='zstd') as w:
             for t in [0,1.25,3.25,4]:w.add_volume('field',t,{'rho':np.full((4,4,4),t+1,dtype='f8')},origin=[0,0,0],spacing=[1,1,1])
         for script in ['test_performance_maintenance','test_scene_playback_lifecycle']:
