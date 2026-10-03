@@ -1,5 +1,10 @@
 # Current status
 
+Issue #202 selects **Meshes** in the Simulation panel after a successful
+mesh-only file load. Mixed scenes retain the selected category, and explicit
+video-export workspace state remains authoritative. Candidate build 30 is
+pending owner review.
+
 Issue #158 reduces application-owned work during continuous native window
 resize: empty startup now stops recurring 3D redraw, and the shell applies
 the latest native size once per frame. Loaded playback and scientific data

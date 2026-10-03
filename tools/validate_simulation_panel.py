@@ -46,6 +46,7 @@ def main():
     fixture(out/'mixed.ssc', ['particles','volume','mesh'])
     fixture(out/'mixed-replacement.ssc', ['particles','volume','mesh'])
     fixture(out/'fields.ssc', ['volume'])
+    fixture(out/'meshes.ssc', ['mesh'])
     fixture(out/'particles.ssc', ['particles'])
     hashes = {f.name:hashlib.sha256(f.read_bytes()).hexdigest() for f in out.glob('*.ssc')}
     run = subprocess.run([args.godot, '--path', str(ROOT/'viewer'), '--rendering-method', args.renderer,

@@ -27,6 +27,12 @@ star specks and shows a centered **Open capture** button. Decorative stars have
 also been removed from loaded scenes and exports; scientific particles remain.
 Click it to open the existing capture picker, or use **File → Open file…**.
 
+The right-hand Simulation panel uses Particles, Fields and Meshes categories.
+Opening a mesh-only file selects Meshes immediately, showing its object selector
+and controls. Other file types retain the currently selected category; changing
+an object's visibility does not change it. An explicit video-export workspace
+selection remains authoritative for that export.
+
 Open **Help → About → Documentation** to reach the repository README
 and its guidance links. The in-app Handbook surface has been removed; this
 repository handbook remains available as a documentation file. The separate
