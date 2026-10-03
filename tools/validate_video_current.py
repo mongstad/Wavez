@@ -67,7 +67,11 @@ def main():
     parser.add_argument('--output-dir', required=True, type=Path)
     parser.add_argument('--renderer', required=True, choices=['forward_plus', 'gl_compatibility'])
     parser.add_argument('--production', type=Path)
+    parser.add_argument('--viewport-composition', action='store_true', help='Focused particle, field, mesh and mixed viewport export matrix')
+    parser.add_argument('--packaged-binary', type=Path, help='Run matching viewport jobs through this standalone Linux executable')
     args = parser.parse_args()
+    if args.packaged_binary and not args.viewport_composition:
+        parser.error('--packaged-binary requires --viewport-composition')
     out = args.output_dir.resolve();out.mkdir(parents=True, exist_ok=False)
     fixtures(out)
     checks = [];runs = []
@@ -109,13 +113,21 @@ def main():
         cases = [('particles', 'complete'), ('late-particles', 'complete'), ('field', 'complete'), ('mesh', 'complete'), ('mixed', 'complete'),
                  ('mixed-repeat', 'complete'), ('mixed-ui', 'complete'), ('late', 'complete'),
                  ('overflow', 'failed'), ('budget', 'failed'), ('corrupt', 'failed')]
+        if args.viewport_composition:
+            cases = [(name, 'complete') for name in ['particles', 'particles-overlay', 'field', 'field-overlay',
+                                                     'mesh', 'mesh-overlay', 'mixed', 'mixed-ui', 'mixed-repeat']]
         if args.production: cases.append(('production', 'complete'))
         images = {}
         for name, expected in cases:
-            kind = 'mixed' if name.startswith('mixed') else ('field' if name == 'corrupt' else name)
+            kind = 'mixed' if name.startswith('mixed') else ('field' if name == 'corrupt' else name.removesuffix('-overlay'))
             folder = out/name;folder.mkdir()
             state = json.loads((out/(kind+'-state.json')).read_text())
-            state['overlay_visible'] = name == 'mixed-ui'
+            state['overlay_visible'] = name == 'mixed-ui' or name.endswith('-overlay')
+            if name.endswith('-overlay'):
+                state['show_legend'] = True
+                scene = state.get('scene', {})
+                for layer in scene.get('layers', {}):
+                    scene['legend_visibility'][layer] = True
             source = args.production if name == 'production' else out/((name if name == 'corrupt' else kind)+'.wvz')
             job = dict(version=1, capture_path=str(source), state=state, start_time=.75, end_time=1.25,
                        fps=4, playback_rate=1., width=960, height=540, output_path=str(folder/'result.mp4'),
@@ -149,7 +161,8 @@ def main():
                 t = job['start_time']+n/job['fps']
                 check(frame['strict'] and not any(frame['async_workers']), name+f'/{n}: strict bounded synchronous offline path')
                 check(frame['backend'] == args.renderer, name+f'/{n}: requested backend')
-                check(frame['legends_visible'] == (name == 'mixed-ui'), name+f'/{n}: explicit scientific legend gate')
+                check(not any(frame['chrome_visible']), name+f'/{n}: shell, status, dock and resize controls stay outside frame')
+                check(frame['legends_visible'] == state['overlay_visible'], name+f'/{n}: explicit scientific legend gate')
                 initial = np.array(state['camera_transform'][3]);target = np.array(state['camera_target'])
                 angle = .08*n/job['fps'];c, s = np.cos(angle), np.sin(angle)
                 expected_camera = target+np.array([[c,0,s],[0,1,0],[-s,0,c]])@(initial-target)
@@ -180,7 +193,40 @@ def main():
             if name == 'mixed-repeat':
                 check(images['mixed'] == images[name], 'same-backend delayed mixed export has identical pixels')
                 check((out/'mixed/timing.jsonl').read_bytes() == (folder/'timing.jsonl').read_bytes(), 'delayed mixed timing manifest identical')
-            if name == 'mixed-ui': check(images[name] != images['mixed'], 'production UI and legends affect pixels')
+            if name == 'mixed-ui' or name.endswith('-overlay'):
+                check(images[name] != images[kind], name+': enabled viewport legends affect pixels')
+                on = np.frombuffer(images[name][0], dtype=np.uint8).reshape(job['height'], job['width'], 3)
+                off = np.frombuffer(images[kind][0], dtype=np.uint8).reshape(job['height'], job['width'], 3)
+                changed = np.any(on != off, axis=2)
+                check(changed.any() and not changed[:min(40, job['height']//10), :].any() and not changed[:, :job['width']//2].any(),
+                      name+': no top bar or left-side shell pixels enter the video')
+        if args.packaged_binary:
+            binary = args.packaged_binary.resolve()
+            check(binary.is_file(), 'standalone Linux package exists')
+            for name in ['particles-overlay', 'field-overlay', 'mesh-overlay', 'mixed', 'mixed-ui']:
+                source_folder = out/name
+                folder = out/('packaged-'+name);folder.mkdir()
+                job = json.loads((source_folder/'job.json').read_text())
+                job['output_path'] = str(folder/'result.mp4')
+                job_path = folder/'job.json';job_path.write_text(json.dumps(job))
+                cmd = [str(binary), '--audio-driver', 'Dummy', '--rendering-method', args.renderer,
+                       '--resolution', '960x640', '--disable-vsync', '--', '--wavez-render-job='+str(job_path)]
+                started = time.monotonic()
+                result = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, timeout=180)
+                (folder/'native.log').write_text(result.stdout)
+                runs.append(dict(name=folder.name,exit_code=result.returncode,seconds=time.monotonic()-started))
+                check(result.returncode == 0 and 'ERROR:' not in result.stdout and 'SCRIPT ERROR:' not in result.stdout,
+                      name+': packaged worker exits cleanly')
+                progress = json.loads((folder/'progress.json').read_text())
+                check(progress['stage'] == 'complete', name+': packaged MP4 completes')
+                probe = json.loads(subprocess.check_output(['ffprobe','-v','error','-select_streams','v:0',
+                    '-show_entries','stream=width,height,nb_frames,avg_frame_rate','-of','json',job['output_path']]))['streams'][0]
+                check((probe['width'],probe['height'],int(probe['nb_frames']),probe['avg_frame_rate']) == (960,540,2,'4/1'),
+                      name+': packaged MP4 dimensions, count and FPS')
+                rendered = [Image.open(f).convert('RGB').tobytes() for f in sorted((folder/'frames').glob('*.png'))]
+                check(rendered == images[name], name+': packaged viewport pixels match the development worker')
+                check((folder/'timing.jsonl').read_bytes() == (source_folder/'timing.jsonl').read_bytes(),
+                      name+': packaged timing and camera trace match development')
         for path, checksum in before.items(): check(digest(Path(path)) == checksum, Path(path).name+': source bytes unchanged')
     except BaseException as exc:
         report['error'] = type(exc).__name__+': '+str(exc)

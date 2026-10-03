@@ -109,8 +109,8 @@ func _ready() -> void:
 	camera_mode = choice("Camera", ["Current camera locked", "Current camera + orbit"])
 	orbit = number("Orbit • radians / video second", .08, -10, 10, .001)
 	rendering = choice("Rendering", ["Current state", "Cinematic preset", "Scientific preset"])
-	overlays = check("Overlays", "Include viewer overlays")
-	overlays.tooltip_text = "Include the current shell UI and enabled layer legends. Independent scientific guides and markers retain their settings; desktop fullscreen is not exported."
+	overlays = check("Overlays", "Include enabled viewport legends")
+	overlays.tooltip_text = "Include enabled particle, field and mesh viewport legends. Application controls are never exported; independent scientific guides and markers retain their settings."
 	trails = check("Trails", "Include recorded history")
 	trails.tooltip_text = "Scientific rendering suppresses trails, matching the interactive viewer."
 	quality = choice("H.264 quality", ["High • CRF 18", "Balanced • CRF 21", "Compact • CRF 25"])
@@ -249,6 +249,22 @@ func settings() -> Dictionary:
 		end_time = timeline.times[-1]
 	return {"version":1, "capture_path":ProjectSettings.globalize_path(viewer.capture_path), "start_time":start_time, "end_time":end_time, "start_frame":timeline.bracket(start_time).get("a",-1), "end_frame":timeline.bracket(end_time).get("a",-1), "fps":int(fps.value), "width":int(width.value), "height":int(height.value), "playback_rate":rate.value, "output_path":output.text, "camera_mode":"orbit" if camera_mode.selected else "locked", "orbit_speed":orbit.value, "quality":["high","balanced","compact"][quality.selected], "keep_frames":keep.button_pressed, "inspection_sidecars":inspection_sidecars.button_pressed, "ffmpeg_path":ffmpeg, "rendering_method":RenderingServer.get_current_rendering_method()}
 
+func configured_job() -> Dictionary:
+	# The dialog chooses rendering state; the worker chooses the viewport boundary.
+	var job := settings()
+	job.state = Job.snapshot(viewer)
+	if viewer.shell != null: job.presentation = viewer.shell.export_state()
+	if rendering.selected > 0:
+		var clean := rendering.selected == 2
+		job.state.clean_view = clean
+		job.state.preset = "Scientific" if clean else "Cinematic"
+		job.state.environment.glow_enabled = not clean
+		job.state.environment.fog_enabled = not clean
+		job.state.environment.background_mode = Environment.BG_COLOR if clean else Environment.BG_SKY
+	job.state.overlay_visible = overlays.button_pressed
+	job.state.trails_enabled = trails.button_pressed
+	return job
+
 func update_estimate() -> void:
 	if estimate == null: return
 	var start_time: float = start.value
@@ -265,9 +281,7 @@ func update_estimate() -> void:
 
 func start_export() -> void:
 	if pid > 0 or preparing or timeline == null: return
-	var job := settings()
-	job.state = Job.snapshot(viewer)
-	if viewer.shell != null: job.presentation = viewer.shell.export_state()
+	var job := configured_job()
 	var with_selections: bool = viewer.selection_controller != null and not viewer.selection_controller.state.definitions.is_empty()
 	if with_selections:
 		var recipe := preload("res://analysis/inspection_v3.gd").scene_snapshot(viewer.selection_controller.temporal)
@@ -280,15 +294,6 @@ func start_export() -> void:
 		if job.source.is_empty():
 			message.text = "Cannot bind export to an unchanged local source. Reopen the capture; reliable high-resolution source stamps are required."
 			return
-	if rendering.selected > 0:
-		var clean := rendering.selected == 2
-		job.state.clean_view = clean
-		job.state.preset = "Scientific" if clean else "Cinematic"
-		job.state.environment.glow_enabled = not clean
-		job.state.environment.fog_enabled = not clean
-		job.state.environment.background_mode = Environment.BG_COLOR if clean else Environment.BG_SKY
-	job.state.overlay_visible = overlays.button_pressed
-	job.state.trails_enabled = trails.button_pressed
 	var invalid := Job.validate(job)
 	if invalid.is_empty() and (job.start_time < timeline.times[0] or job.end_time > timeline.times[-1]): invalid = "Range must be within the capture's timestamps."
 	if not invalid.is_empty():

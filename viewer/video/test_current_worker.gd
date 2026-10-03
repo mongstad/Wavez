@@ -9,7 +9,10 @@ class ObservedWorker extends Worker:
 		var layers = viewer.scene_layers
 		var row := {"backend":RenderingServer.get_current_rendering_method(),"strict":viewer.generic_reader._verify_payloads,
 			"async_workers":[layers.playback.enabled,layers.field_playback.enabled,layers.mesh_playback.enabled],
-			"camera":Job.vec(viewer.camera.position),"legends_visible":viewer.legend.is_visible_in_tree()}
+			"camera":Job.vec(viewer.camera.position),"legends_visible":viewer.legend.is_visible_in_tree(),
+			"chrome_visible":[viewer.shell.is_visible_in_tree(),viewer.shell.bar.is_visible_in_tree(),
+				viewer.shell.bottom_strip.is_visible_in_tree(),viewer.shell.status_ui.is_visible_in_tree(),
+				viewer.overlay_panel.is_visible_in_tree(),viewer.resize_handle.is_visible_in_tree()]}
 		for id in layers.current:
 			if layers.reader.objects[id].kind == "particles":
 				var positions: Array = []
