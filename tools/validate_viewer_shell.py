@@ -39,6 +39,7 @@ def main():
     contract.insert(contract.index('  Probe marker'), '  Global effects')  # #68: global Bloom destination
     contract.insert(contract.index('  Handbook') + 1, '  About')  # Current Help menu label after #164.
     contract = [line.replace('Save scene', 'Save view preset…').replace('Load scene', 'Load view preset…') for line in contract]
+    contract = [line.replace('  Open capture', '  Open file…') for line in contract]  # #188 File menu label only
     contract = [line for line in contract if line not in ['  Panels', '  Immersive', '  Quick setup', '  Handbook']]
     contract.remove('  Shortcuts')  # #175 editable application preferences
     contract[contract.index('View'):contract.index('View')] = ['Edit', '  Preferences', '    Keyboard Shortcuts']

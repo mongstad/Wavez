@@ -25,7 +25,7 @@ Earlier documents sometimes append new checkpoints above obsolete scope tables. 
 With no capture loaded, the viewport retains its cinematic sky without decorative
 star specks and shows a centered **Open capture** button. Decorative stars have
 also been removed from loaded scenes and exports; scientific particles remain.
-Click it to open the existing capture picker, or use **File → Open capture**.
+Click it to open the existing capture picker, or use **File → Open file…**.
 
 Open **Help → About → Documentation** to reach the repository README
 and its guidance links. The in-app Handbook surface has been removed; this

@@ -510,7 +510,7 @@ func build_menus(row: HBoxContainer) -> void:
 		menu(row,entry[0],entry[1],[],func(_id):pass)
 		menus[entry[0]].about_to_popup.connect(refresh_commands)
 	var file: PopupMenu = menus.File.get_popup()
-	command(file,"Open capture",viewer._show_open_dialog,"open")
+	command(file,"Open file…",viewer._show_open_dialog,"open")
 	command(file,"Details…",func(): status_ui.show_status(),"details")
 	var state := submenu(file,"State")
 	command(state,"Copy state",viewer._copy_inspection_state,"copy")
