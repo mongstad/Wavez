@@ -2,6 +2,7 @@ extends Node
 const Viewer = preload("res://main.gd")
 const Bindings = preload("res://ui/keyboard_shortcuts.gd")
 const Visual = preload("res://scene/visual_state.gd")
+const Preset = preload("res://scene/view_preset.gd")
 var output := ""
 var restart := false
 var checks := 0
@@ -55,6 +56,7 @@ func run() -> void:
 		viewer = Viewer.new(); viewer.scene_prebuffer_enabled = false; root.add_child(viewer)
 	viewer.set_process(false)
 	var shell = viewer.shell
+	check(not viewer.orbit_enabled and viewer.free_camera, "Fresh viewer starts with Auto Orbit off and Free Camera on")
 	if restart:
 		var saved: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(output.path_join("saved-map.json")))
 		for action in saved: saved[action] = int(saved[action]) # JSON numbers decode as floats.
@@ -69,6 +71,20 @@ func run() -> void:
 		offline.free()
 		finish(viewer); return
 	check(shell.shortcuts.active == Bindings.defaults(), "New profile preserves accepted default shortcuts")
+	check(shell.shortcuts.active.auto_orbit == KEY_O and shell.shortcuts.active.free_camera == 0, "Existing Auto Orbit and Free Camera bindings retain O and Unbound defaults")
+	var navigation_actions := {"auto_orbit":0, "free_camera":0}
+	for action in Bindings.ACTIONS:
+		if navigation_actions.has(action[0]): navigation_actions[action[0]] += 1
+	check(navigation_actions.auto_orbit == 1 and navigation_actions.free_camera == 1, "Navigation actions appear once each in the editable catalog")
+	var modes: PopupMenu = shell.navigation.get_child(2).get_popup()
+	shell.navigation.get_child(2).about_to_popup.emit()
+	check(modes.is_item_checked(0) and not modes.is_item_checked(1), "Navigate checks reflect the startup modes")
+	trigger(shell,"auto_orbit")
+	check(viewer.orbit_enabled and viewer.free_camera, "Default O toggles Auto Orbit on while Free Camera remains on")
+	trigger(shell,"auto_orbit")
+	check(not viewer.orbit_enabled and viewer.free_camera, "Default O toggles Auto Orbit back off")
+	viewer._reset_camera()
+	check(not viewer.orbit_enabled and viewer.free_camera, "Reset Camera preserves the chosen navigation modes")
 	check(unique(shell.shortcuts.active), "Defaults contain no duplicates")
 	check(shell.shortcuts.active.navigate == (KEY_N | KEY_MASK_ALT), "Navigate retains Alt+N default")
 	check(shell.shortcuts.active.fullscreen_alternate == (KEY_F11 | KEY_MASK_SHIFT), "Documented Shift+F11 alternate remains explicit and editable")
@@ -90,6 +106,7 @@ func run() -> void:
 		check(dialog.close_button.get_theme_stylebox(state) == shell_close.get_theme_stylebox(state), "Dialog X shares shell close styling: " + state)
 	check(dialog.close_button.has_meta("violet_motion") and dialog.focus_order.has(dialog.close_button), "Dialog X shares shell hover treatment and is keyboard navigable")
 	check(dialog.rows.size() == Bindings.ACTIONS.size(), "Every supported action has a key capture row")
+	check(dialog.rows.has("auto_orbit") and dialog.rows.has("free_camera"), "Both navigation toggles are present under Edit Preferences Keyboard Shortcuts")
 	check(dialog.footer.is_ancestor_of(dialog.cancel) and dialog.footer.is_ancestor_of(dialog.apply_button) and not dialog.scroller.is_ancestor_of(dialog.footer), "Cancel and Apply remain in fixed footer")
 	check(dialog.apply_button.theme_type_variation == "PrimaryButton", "Apply is the primary action")
 	check(dialog.apply_button.disabled and not dialog.focus_order.has(dialog.apply_button), "Apply starts disabled and is excluded from keyboard traversal")
@@ -173,9 +190,9 @@ func run() -> void:
 	viewer.orbit_enabled = false; trigger(shell,"auto_orbit")
 	check(viewer.orbit_enabled and not viewer.inspection_paused, "Remapped Auto Orbit uses accepted toggle")
 	trigger(shell,"auto_orbit"); check(not viewer.orbit_enabled, "Auto Orbit toggles back")
-	viewer.free_camera = false; trigger(shell,"free_camera")
-	check(viewer.free_camera and not viewer.orbit_enabled, "Free Camera uses Navigate mode semantics")
-	trigger(shell,"free_camera"); check(not viewer.free_camera and viewer.orbit_enabled, "Free Camera restores orbit mode through same path")
+	viewer.free_camera = true; trigger(shell,"free_camera")
+	check(not viewer.free_camera and viewer.orbit_enabled, "Free Camera shortcut toggles the new ON default to OFF through Navigate")
+	trigger(shell,"free_camera"); check(viewer.free_camera and not viewer.orbit_enabled, "Free Camera shortcut toggles back ON through Navigate")
 	viewer.orbit_enabled = false
 	trigger(shell,"open_capture"); await settle(); check(viewer.open_dialog.visible, "Open Capture opens authoritative picker")
 	viewer.open_dialog.hide(); await settle()
@@ -227,8 +244,12 @@ func run() -> void:
 	check(is_equal_approx(viewer.yaw,1.7), "Busy inspection suppresses remapped actions")
 	if DisplayServer.get_name() != "headless":
 		var edges: Dictionary = shell.edge_reveal.states.duplicate(true)
+		viewer.orbit_enabled = false; viewer.free_camera = true
 		trigger(shell,"fullscreen"); await get_tree().create_timer(.35).timeout; await settle()
-		check(shell.immersive, "Remapped Fullscreen invokes existing shell path")
+		check(shell.immersive and not viewer.orbit_enabled and viewer.free_camera, "Fullscreen preserves default navigation state")
+		trigger(shell,"auto_orbit"); trigger(shell,"auto_orbit")
+		trigger(shell,"free_camera"); trigger(shell,"free_camera")
+		check(not viewer.orbit_enabled and viewer.free_camera, "Both navigation shortcuts toggle through Fullscreen and restore the starting modes")
 		shell.edit_shortcuts(); dialog.start_capture("frame_scene"); key(KEY_ESCAPE)
 		check(shell.immersive and dialog.visible, "Capture Escape does not exit underlying Fullscreen")
 		key(KEY_ESCAPE); check(shell.immersive and not dialog.visible, "Editor dismissal preserves Fullscreen")
@@ -260,6 +281,7 @@ func run() -> void:
 		check(root.gui_get_focus_owner() == dialog.cancel, "Unchanged Shift Tab wraps to Cancel " + str(layout))
 		dialog.reset.pressed.emit()
 		check(not dialog.apply_button.disabled, "Reset Defaults enables Apply when active map differs " + str(layout))
+		check(dialog.staged.auto_orbit == KEY_O and dialog.staged.free_camera == 0, "Reset Defaults retains O and Unbound for navigation " + str(layout))
 		dialog.apply_button.grab_focus(); key(KEY_TAB); await settle()
 		check(root.gui_get_focus_owner() == dialog.close_button, "Edited footer Tab wraps to X " + str(layout))
 		key(KEY_TAB); await settle()
@@ -289,6 +311,22 @@ func run() -> void:
 	config.set_value("shortcuts","auto_orbit","bad value"); config.set_value("shortcuts","fullscreen",KEY_ESCAPE); config.save(malformed.storage_path)
 	check(malformed.load_preferences() == OK and unique(malformed.active) and malformed.active.reset_camera == 0 and malformed.active.frame_scene == KEY_R, "Manually edited profile resolves duplicates deterministically")
 	check(malformed.active.auto_orbit == KEY_O and malformed.active.fullscreen == KEY_F11, "Invalid stored values preserve safe defaults")
+	viewer.orbit_enabled = false; viewer.free_camera = true
+	for kind in ["particles", "fields", "meshes", "mixed"]:
+		viewer._open_capture(output.path_join(kind + ".ssc")); viewer.playing = false
+		await wait_ready(viewer)
+		check(viewer.generic_reader != null and not viewer.orbit_enabled and viewer.free_camera, kind + " scene opening preserves navigation defaults")
+		check(not Visual.snapshot(viewer).orbit_enabled and Preset.snapshot(viewer).settings.view.free_camera, kind + " scene snapshots expose the intended navigation state")
+	var saved := Preset.snapshot(viewer)
+	saved.settings.view.orbit_enabled = true; saved.settings.view.free_camera = false
+	check(Preset.apply(viewer, saved).error.is_empty() and viewer.orbit_enabled and not viewer.free_camera, "Explicit view preset overrides both application defaults")
+	var partial := Preset.snapshot(viewer)
+	partial.settings.view.erase("orbit_enabled"); partial.settings.view.erase("free_camera")
+	check(Preset.apply(viewer, partial).error.is_empty() and viewer.orbit_enabled and not viewer.free_camera, "Preset omitting navigation modes preserves current intentional state")
+	var visual := Visual.snapshot(viewer)
+	visual.orbit_enabled = false
+	Visual.apply(viewer, visual)
+	check(not viewer.orbit_enabled and not viewer.free_camera, "Explicit recipe orbit state restores while session-only Free Camera remains untouched")
 	finish(viewer)
 
 func trigger_without_focus_release(shell, action: String) -> void: key(shell.shortcuts.active[action])

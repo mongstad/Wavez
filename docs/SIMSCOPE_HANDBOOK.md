@@ -234,6 +234,14 @@ may still have a separate taskbar entry on KDE/Wayland.
 
 ## Camera inspection
 
+On a clean launch, **Free camera** is on and **Auto orbit** is off. Navigate
+shows both current states. The existing O shortcut toggles Auto orbit; Free
+Camera has an editable action in **Edit → Preferences → Keyboard Shortcuts**
+and starts unbound. Opening a capture or resetting the camera preserves the
+current navigation modes. A loaded view preset may explicitly restore either
+mode; an inspection recipe restores its saved Auto orbit setting, while Free
+camera is session-only. Shortcut preferences store bindings, not mode states.
+
 Left-drag supports continuous yaw/pitch revolutions with no pitch clamp.
 Right-drag in the viewport orbits sideways about the camera's current screen-up
 axis, captured at right-button press. It keeps that axis, the target and camera

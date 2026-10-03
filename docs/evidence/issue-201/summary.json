@@ -1,0 +1,71 @@
+{
+  "issue": 201,
+  "candidate_version": "v0.1.0.27",
+  "accepted_main_at_selection": "d5e187391c1c822fc66f17f4639c1388e5598861",
+  "shortcut_and_navigation_runs": [
+    {
+      "run": "headless-final2",
+      "renderer": "headless",
+      "packaged": false,
+      "checks_passed": 233,
+      "fresh_process_restart": true,
+      "failures": 0,
+      "known_compatibility_texture_cleanup_messages": 0,
+      "known_packaged_window_cleanup_messages": 0
+    },
+    {
+      "run": "forward-final2",
+      "renderer": "forward_plus",
+      "packaged": false,
+      "checks_passed": 239,
+      "fresh_process_restart": true,
+      "failures": 0,
+      "known_compatibility_texture_cleanup_messages": 0,
+      "known_packaged_window_cleanup_messages": 0
+    },
+    {
+      "run": "compat-final2",
+      "renderer": "gl_compatibility",
+      "packaged": false,
+      "checks_passed": 239,
+      "fresh_process_restart": true,
+      "failures": 0,
+      "known_compatibility_texture_cleanup_messages": 2,
+      "known_packaged_window_cleanup_messages": 0
+    },
+    {
+      "run": "forward-package-final2",
+      "renderer": "forward_plus",
+      "packaged": true,
+      "checks_passed": 239,
+      "fresh_process_restart": true,
+      "failures": 0,
+      "known_compatibility_texture_cleanup_messages": 0,
+      "known_packaged_window_cleanup_messages": 2
+    },
+    {
+      "run": "compat-package-final2",
+      "renderer": "gl_compatibility",
+      "packaged": true,
+      "checks_passed": 239,
+      "fresh_process_restart": true,
+      "failures": 0,
+      "known_compatibility_texture_cleanup_messages": 2,
+      "known_packaged_window_cleanup_messages": 2
+    }
+  ],
+  "fixture_sha256_unchanged": {
+    "mixed.ssc": "7b77b4ed6e627499e3be6b078d12cdc6ab6733a1800dce7646b579869599d42d",
+    "meshes.ssc": "02d503a448434af49706953fa8d2add5d6c5b9be015f6d640a198045dced855a",
+    "fields.ssc": "b6c1acd28d4fed8d5974a393f88d6b303dc1551a147ed9e3d301b0623846d759",
+    "particles.ssc": "abf30489442767cae06f55684a7fe1f38fa745ac6bf97865e6b9eb74ca51aa2d"
+  },
+  "camera_tumble_headless_checks_passed": 13798,
+  "wheel_manual_orbit_native_checks_passed": {
+    "forward_plus": 258,
+    "gl_compatibility": 258
+  },
+  "view_preset_headless_checks_passed": 814,
+  "recipe_state_headless_checks_passed": 2663,
+  "application_version_unittest_checks_passed": 2
+}

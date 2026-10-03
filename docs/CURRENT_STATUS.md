@@ -1,5 +1,14 @@
 # Current status
 
+Issue #201 changes a clean viewer's navigation defaults to **Free camera on**
+and **Auto orbit off**. Both remain available through Navigate and the existing
+editable shortcut actions; O still toggles Auto Orbit, while Free Camera starts
+unbound. Opening a scene and Reset Camera retain the current navigation modes.
+An explicit view preset can restore both modes; an inspection recipe restores
+its saved Auto Orbit state while Free Camera remains session-only. Candidate
+build 27 is **pending owner review**. See the
+[navigation default validation](evidence/issue-201/README.md).
+
 Issue #190 adds right-drag sideways camera orbit about the camera's screen-up
 axis captured at each right-button press. Vertical right-drag motion is ignored;
 left-drag can establish a new orientation and orbit plane before the next press.
