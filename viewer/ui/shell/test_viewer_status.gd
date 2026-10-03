@@ -233,8 +233,8 @@ func run():
 	frame_rate.select(1);frame_rate.item_selected.emit(1)
 	video.width.value = 128;video.height.value = 128
 	video.range_choice.select(2);video.update_range();video.start.value = 0;video.end.value = 6
-	await settle(); video.get_child(0).ensure_control_visible(video.close_button); await settle()
-	check(Rect2(Vector2.ZERO,Vector2(video.size)).encloses(video.close_button.get_global_rect()),"Idle action row reachable by scrolling")
+	await settle()
+	check(Rect2(Vector2.ZERO,Vector2(video.size)).encloses(video.close_button.get_global_rect()),"Idle action row stays visible below scrolling settings")
 	video.get_texture().get_image().save_png(output.path_join("export-idle.png"))
 	var idle_secondary_x: float = video.close_button.position.x
 	var idle_row_width: float = video.close_button.get_parent().size.x
@@ -246,8 +246,8 @@ func run():
 	check(video.settings() == running_settings,"Late file-picker callback cannot mutate active configuration")
 	check(pid > 0 and ui.active_count == 1,"UI launch is counted as one running video job")
 	check(video.start_button.text == "Cancel export" and not video.start_button.disabled and not video.background_button.disabled,"Running export switches primary action and enables background")
-	await settle(); video.get_child(0).ensure_control_visible(video.background_button); await settle()
-	check(Rect2(Vector2.ZERO,Vector2(video.size)).encloses(video.background_button.get_global_rect()),"Running action row reachable by scrolling")
+	await settle()
+	check(Rect2(Vector2.ZERO,Vector2(video.size)).encloses(video.background_button.get_global_rect()),"Running action row stays visible below scrolling settings")
 	check(video.background_button.position.x == idle_secondary_x and video.background_button.get_parent().size.x == idle_row_width,"Action row keeps secondary position and width across launch")
 	video.get_texture().get_image().save_png(output.path_join("export-running.png"))
 	video.background_button.pressed.emit()
@@ -281,7 +281,7 @@ func run():
 	viewer.shell.details.hide()
 	check(ui.active_count == 0 and FileAccess.file_exists(output.path_join("complete.mp4")),"Completion clears active count and retains output")
 	check(FileAccess.get_sha256(video.active_job_path) == job_hash,"Running job configuration is immutable through completion")
-	ui.reopen_video(); await settle();video.get_child(0).ensure_control_visible(video.close_button);await settle()
+	ui.reopen_video(); await settle()
 	video.get_texture().get_image().save_png(output.path_join("export-complete.png"))
 	video.close_button.pressed.emit();check(not video.visible,"Successful terminal Cancel dismisses the dialog")
 	var terminal: Dictionary = video.job_status.duplicate(true)

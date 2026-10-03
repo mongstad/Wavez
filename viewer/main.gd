@@ -802,9 +802,11 @@ func _save_image() -> void:
 	if screenshot_directory.is_empty():
 		if screenshot_dialog == null:
 			screenshot_dialog = FileDialog.new()
-			screenshot_dialog.title = "Choose screenshot folder (this session)"
+			screenshot_dialog.title = "Choose image folder"
 			screenshot_dialog.file_mode = FileDialog.FILE_MODE_OPEN_DIR
 			screenshot_dialog.access = FileDialog.ACCESS_FILESYSTEM
+			screenshot_dialog.use_native_dialog = true
+			screenshot_dialog.mode_overrides_title = false
 			screenshot_dialog.dir_selected.connect(_screenshot_directory_selected)
 			screenshot_dialog.canceled.connect(func(): screenshot_pending = false)
 			add_child(screenshot_dialog)
@@ -1068,7 +1070,7 @@ func _build_inspector_controls() -> void:
 	selection_controller = preload("res://selection/selection_controller.gd").new()
 	add_child(selection_controller);selection_controller.setup(self)
 	var export_box := _section("Capture / Export")
-	_button(export_box, "Image", _save_image)
+	_button(export_box, "Save image…", _save_image)
 	_check(export_box,"PNG inspection JSON sidecar",false,func(v: bool): screenshot_sidecar = v).text = "Inspection sidecar"
 	video_dialog = preload("res://video/export_dialog.gd").new()
 	video_dialog.viewer = self
@@ -1657,6 +1659,8 @@ func _build_geometry_ui() -> void:
 		if geometry_dialog == null:
 			geometry_dialog = FileDialog.new(); geometry_dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE; geometry_dialog.access = FileDialog.ACCESS_FILESYSTEM
 			geometry_dialog.filters = PackedStringArray(["*.json ; Explicit geometry override"])
+			geometry_dialog.use_native_dialog = true
+			geometry_dialog.mode_overrides_title = false; geometry_dialog.title = "Load geometry override"
 			geometry_dialog.file_selected.connect(_load_geometry_override); add_child(geometry_dialog)
 		geometry_dialog.popup_centered_ratio(.65))
 	_button(panel,"Clear geometry override",func(): geometry_override.clear(); _apply_geometry())

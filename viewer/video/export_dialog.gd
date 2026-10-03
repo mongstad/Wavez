@@ -50,23 +50,39 @@ var settings_locked := false
 var setting_states: Array[Dictionary] = []
 var cancel_confirmation: ConfirmationDialog
 var pending_cancel_directory := ""
+var surface: PanelContainer
+var header_close: Button
 
 func _ready() -> void:
 	title = "WAVEZ • Export Video"
 	visible = false
-	size = Vector2i(760, 800)
-	min_size = Vector2i(600, 500)
+	borderless = true
+	size = Vector2i(700, 650)
+	min_size = Vector2i(560, 360)
 	close_requested.connect(hide)
+	window_input.connect(func(event: InputEvent):
+		if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE: hide())
+	surface = PanelContainer.new(); add_child(surface); surface.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	var margin := MarginContainer.new(); surface.add_child(margin)
+	for side in ["left","right","top","bottom"]: margin.add_theme_constant_override("margin_"+side,16)
+	var box := VBoxContainer.new(); box.add_theme_constant_override("separation",10); margin.add_child(box)
+	var header := HBoxContainer.new(); box.add_child(header)
+	var heading := Label.new(); heading.text = "Export Video"; heading.theme_type_variation = "PanelTitle"
+	heading.size_flags_horizontal = Control.SIZE_EXPAND_FILL; heading.mouse_filter = Control.MOUSE_FILTER_IGNORE; header.add_child(heading)
+	header_close = Button.new(); header_close.theme_type_variation = "IconAction"; header_close.tooltip_text = "Close video export"
+	header_close.custom_minimum_size = Vector2(32,32); header_close.pressed.connect(hide); header.add_child(header_close)
+	header.gui_input.connect(func(event: InputEvent):
+		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed and not is_embedded() and DisplayServer.has_feature(DisplayServer.FEATURE_WINDOW_DRAG):
+			DisplayServer.window_start_drag(get_window_id()))
 	var scroll := ScrollContainer.new()
-	scroll.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	add_child(scroll)
-	var box := VBoxContainer.new()
-	box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	scroll.add_child(box)
+	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL; scroll.follow_focus = true
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED; box.add_child(scroll)
+	var form := VBoxContainer.new(); form.size_flags_horizontal = Control.SIZE_EXPAND_FILL; scroll.add_child(form)
 	fields = GridContainer.new()
 	fields.columns = 2
 	fields.add_theme_constant_override("h_separation", 16)
-	box.add_child(fields)
+	fields.add_theme_constant_override("v_separation",8)
+	form.add_child(fields)
 	range_choice = choice("Range", ["Entire capture", "Current position to end", "Custom start/end"])
 	start = number("Start • capture time", 0, -1e30, 1e30, .0001)
 	end = number("End • capture time (exclusive)", 1, -1e30, 1e30, .0001)
@@ -109,6 +125,7 @@ func _ready() -> void:
 	save_dialog = FileDialog.new()
 	save_dialog.file_mode = FileDialog.FILE_MODE_SAVE_FILE
 	save_dialog.access = FileDialog.ACCESS_FILESYSTEM
+	save_dialog.use_native_dialog = true
 	save_dialog.filters = PackedStringArray(["*.mp4 ; H.264 MP4"])
 	save_dialog.mode_overrides_title = false
 	save_dialog.title = "Export video"
@@ -122,28 +139,36 @@ func _ready() -> void:
 	estimate = Label.new(); estimate.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; box.add_child(estimate)
 	message = Label.new(); message.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; box.add_child(message)
 	progress = ProgressBar.new(); progress.min_value = 0; progress.max_value = 100; box.add_child(progress)
-	var buttons := HBoxContainer.new(); box.add_child(buttons)
-	start_button = Button.new(); buttons.add_child(start_button)
+	var buttons := HBoxContainer.new(); buttons.alignment = BoxContainer.ALIGNMENT_END; box.add_child(buttons)
+	start_button = Button.new(); start_button.theme_type_variation = "PrimaryButton"; buttons.add_child(start_button)
 	start_button.pressed.connect(func():
 		if pid > 0 or preparing: request_cancel_export()
 		else: start_export())
-	background_button = Button.new(); background_button.text = "Run in background"; buttons.add_child(background_button)
+	background_button = Button.new(); background_button.text = "Run in background"; background_button.theme_type_variation = "SecondaryButton"; buttons.add_child(background_button)
 	background_button.pressed.connect(func():
 		if pid > 0 or preparing: hide())
-	close_button = Button.new(); close_button.text = "Cancel"; buttons.add_child(close_button)
+	close_button = Button.new(); close_button.text = "Cancel"; close_button.theme_type_variation = "SecondaryButton"; buttons.add_child(close_button)
 	close_button.tooltip_text = "Close this dialog."
 	close_button.pressed.connect(hide)
 	# The mutually exclusive secondary actions share the same width/position.
 	var secondary_width := maxf(background_button.get_combined_minimum_size().x,close_button.get_combined_minimum_size().x)
-	background_button.custom_minimum_size.x = secondary_width
-	close_button.custom_minimum_size.x = secondary_width
+	background_button.custom_minimum_size.x = maxf(180,secondary_width)
+	close_button.custom_minimum_size.x = maxf(180,secondary_width)
 	start_button.text = "Cancel export"
-	start_button.custom_minimum_size.x = start_button.get_combined_minimum_size().x
+	start_button.custom_minimum_size.x = maxf(140,start_button.get_combined_minimum_size().x)
 	cancel_confirmation = ConfirmationDialog.new()
 	cancel_confirmation.title = "Cancel video export?"
-	cancel_confirmation.dialog_text = "The current export will stop. Completed frames and temporary files may be retained."
+	cancel_confirmation.borderless = true
+	cancel_confirmation.dialog_text = "Cancel video export?\nThe current export will stop.\nCompleted frames and temporary files may be retained."
 	cancel_confirmation.ok_button_text = "Yes"
 	cancel_confirmation.cancel_button_text = "No"
+	var confirmation_actions: HBoxContainer = cancel_confirmation.get_ok_button().get_parent()
+	confirmation_actions.alignment = BoxContainer.ALIGNMENT_END
+	confirmation_actions.add_theme_constant_override("separation",2)
+	for child in confirmation_actions.get_children():
+		if child is Control and not child is Button: child.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+	cancel_confirmation.get_ok_button().theme_type_variation = "DestructiveButton"
+	cancel_confirmation.get_cancel_button().theme_type_variation = "SecondaryButton"
 	cancel_confirmation.dialog_hide_on_ok = false
 	cancel_confirmation.confirmed.connect(_confirm_cancel_export)
 	cancel_confirmation.close_requested.connect(cancel_confirmation.hide)
@@ -174,7 +199,13 @@ func check(label: String, text: String) -> CheckButton:
 	return control
 
 func open() -> void:
-	popup_centered()
+	if viewer.shell != null:
+		theme = viewer.shell.style_slice.theme
+		surface.add_theme_stylebox_override("panel",viewer.shell.style_slice.theme.flat_box(&"surface.1",0,0,0))
+		header_close.icon = viewer.shell.style_slice.theme.chrome_icon("close")
+		cancel_confirmation.theme = theme
+	var available: Vector2 = viewer.get_viewport().get_visible_rect().size - Vector2(32,32)
+	popup_centered(Vector2i(Vector2(700,650).min(available)))
 	if pid > 0 or preparing:
 		_sync_action_buttons(); return
 	timeline = Timeline.new()
@@ -316,6 +347,7 @@ func start_export() -> void:
 func _sync_action_buttons() -> void:
 	var active := pid > 0 or preparing
 	start_button.text = "Cancel export" if active else "Start Export"
+	start_button.theme_type_variation = "DestructiveButton" if active else "PrimaryButton"
 	start_button.disabled = not can_cancel_export() if active else not can_start
 	if cancel_confirmation != null and (not can_cancel_export() or pending_cancel_directory != active_directory):
 		cancel_confirmation.hide()

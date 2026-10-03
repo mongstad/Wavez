@@ -55,6 +55,7 @@ func setup(control) -> void:
 
 func choose_recipe(side: Dictionary) -> void:
 	var dialog := FileDialog.new();dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE;dialog.access = FileDialog.ACCESS_FILESYSTEM;dialog.filters = PackedStringArray(["*.json ; G4 inspection"])
+	dialog.use_native_dialog = true;dialog.mode_overrides_title = false;dialog.title = "Load inspection"
 	add_child(dialog);dialog.file_selected.connect(func(path):select_recipe(side,path);dialog.queue_free());dialog.canceled.connect(dialog.queue_free);dialog.popup_centered_ratio(.7)
 
 func select_recipe(side: Dictionary, path: String) -> bool:
@@ -72,6 +73,7 @@ func select_recipe(side: Dictionary, path: String) -> bool:
 func choose_prepare() -> void:
 	if not common.folder.text.is_valid_filename():status.text = "Choose a new comparison folder name.";return
 	var dialog := FileDialog.new();dialog.file_mode = FileDialog.FILE_MODE_OPEN_DIR;dialog.access = FileDialog.ACCESS_FILESYSTEM
+	dialog.use_native_dialog = true;dialog.mode_overrides_title = false;dialog.title = "Choose comparison folder"
 	add_child(dialog);dialog.dir_selected.connect(func(parent):prepare_to(parent.path_join(common.folder.text));dialog.queue_free());dialog.canceled.connect(dialog.queue_free);dialog.popup_centered_ratio(.7)
 
 func prepare_to(destination: String) -> void:

@@ -90,6 +90,8 @@ var error_text: Label
 var error_details := ""
 var details: AcceptDialog
 var detail_text: TextEdit
+var detail_heading: Label
+var detail_close: Button
 var about: AcceptDialog
 var particle_empty: Label
 var adapter: VBoxContainer
@@ -182,8 +184,21 @@ func setup(owner_viewer) -> void:
 		open_error.hide()
 		if status_ui != null: status_ui.failures.erase("Open file"); status_ui.refresh(), "close")
 	open_error.hide()
-	details = AcceptDialog.new(); details.title = "Source details"; details.theme = theme; add_child(details)
-	detail_text = TextEdit.new(); detail_text.editable = false; detail_text.wrap_mode = TextEdit.LINE_WRAPPING_BOUNDARY; detail_text.custom_minimum_size = Vector2(480, 220); details.add_child(detail_text)
+	details = AcceptDialog.new(); details.title = "Source details"; details.borderless = true; add_child(details)
+	var detail_body := VBoxContainer.new(); detail_body.add_theme_constant_override("separation",8); details.add_child(detail_body)
+	var detail_header := HBoxContainer.new(); detail_body.add_child(detail_header)
+	detail_heading = Label.new(); detail_heading.theme_type_variation = "PanelTitle"; detail_heading.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	detail_heading.mouse_filter = Control.MOUSE_FILTER_IGNORE; detail_header.add_child(detail_heading)
+	detail_close = Button.new(); detail_close.theme_type_variation = "IconAction"; detail_close.tooltip_text = "Close details"
+	detail_close.custom_minimum_size = Vector2(32,32); detail_close.pressed.connect(func(): details.hide(); restore_focus()); detail_header.add_child(detail_close)
+	detail_header.gui_input.connect(func(event: InputEvent):
+		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed and not details.is_embedded() and DisplayServer.has_feature(DisplayServer.FEATURE_WINDOW_DRAG):
+			DisplayServer.window_start_drag(details.get_window_id()))
+	detail_text = TextEdit.new(); detail_text.editable = false; detail_text.wrap_mode = TextEdit.LINE_WRAPPING_BOUNDARY; detail_text.custom_minimum_size = Vector2(480, 220); detail_body.add_child(detail_text)
+	details.get_ok_button().hide()
+	var detail_actions := HBoxContainer.new(); detail_actions.alignment = BoxContainer.ALIGNMENT_END; detail_body.add_child(detail_actions)
+	var detail_done := Button.new(); detail_done.text = "Close"; detail_done.theme_type_variation = "SecondaryButton"
+	detail_done.pressed.connect(func(): details.hide(); restore_focus()); detail_actions.add_child(detail_done)
 	details.close_requested.connect(restore_focus); details.confirmed.connect(restore_focus)
 	about = About.new(); about.theme = theme; add_child(about)
 	about.close_requested.connect(restore_focus); about.confirmed.connect(restore_focus)
@@ -322,7 +337,11 @@ func source_details() -> String:
 func show_details(title: String, text: String) -> void:
 	var focus := get_viewport().gui_get_focus_owner()
 	if focus != null: previous_focus = weakref(focus)
-	details.title = title; detail_text.text = text; details.popup_centered()
+	details.theme = style_slice.theme
+	detail_close.icon = style_slice.theme.chrome_icon("close")
+	details.title = title; detail_heading.text = title; detail_text.text = text
+	var available := get_viewport().get_visible_rect().size - Vector2(32,32)
+	details.popup_centered(Vector2i(Vector2(560,360).min(available)))
 
 func restore_focus() -> void:
 	if previous_focus != null:

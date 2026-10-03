@@ -84,7 +84,7 @@ func run() -> void:
 	await show_section("Rendering");await capture("05-transport")
 	await show_section("Capture / Export");await capture("06-export-actions")
 	view.video_dialog.open();await capture("07-video-dialog")
-	view.video_dialog.get_child(0).ensure_control_visible(view.video_dialog.start_button)
+	# The export actions stay fixed below the scrolling settings.
 	await capture("07-video-actions")
 	view.video_dialog.hide()
 	view._show_recipe_dialog(true);await capture("08-recipe-dialog")

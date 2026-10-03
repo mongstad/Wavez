@@ -113,6 +113,7 @@ func field(label: String, initial: String) -> LineEdit:
 
 func choose_csv() -> void:
 	var dialog := FileDialog.new();dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE;dialog.access = FileDialog.ACCESS_FILESYSTEM;dialog.filters = PackedStringArray(["*.csv,*.tsv ; Diagnostic data"])
+	dialog.use_native_dialog = true;dialog.mode_overrides_title = false;dialog.title = "Import diagnostic data"
 	add_child(dialog);dialog.file_selected.connect(func(path):csv_path.text = path;dialog.queue_free())
 	dialog.canceled.connect(dialog.queue_free);dialog.popup_centered_ratio(.7)
 

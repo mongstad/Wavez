@@ -30,6 +30,7 @@ Start with:
 - [Manual camera orbit](docs/MANUAL_CAMERA_ORBIT.md)
 - [Edit orbit center and radius](docs/ORBIT_CENTER.md)
 - [Current status](docs/CURRENT_STATUS.md)
+- [File and Tools dialog layout](docs/DIALOG_COHERENCE.md)
 - [Violet UI cleanup and owner checks](docs/UX5_CLEANUP.md)
 - [Application version and build policy](docs/VERSIONING.md) — view the identity in Help → About
 - [Pinned edge reveal and Fullscreen](docs/WINDOW_EDGE_REVEAL.md)

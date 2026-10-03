@@ -38,7 +38,9 @@ func run() -> void:
 		shell.viewer.section_buttons[group].button_pressed = true
 		check(viewer.sections[group].theme == theme, group + " uses scoped review theme")
 	check(viewer.sections["Advanced • Size / Brightness"].theme == null, "Advanced remains outside review slice")
-	check(viewer.tools_ui.window.theme != theme and shell.status_ui.jobs_dialog.theme != theme, "Tools and Jobs remain outside Round 2 slice")
+	viewer.tools_ui.open("Mapping")
+	check(viewer.tools_ui.window.theme == theme and shell.status_ui.jobs_dialog.theme != theme, "Current Tools surface shares the violet theme; Jobs remains outside the earlier slice")
+	viewer.tools_ui.close()
 	check(shell.transport.seek_dialog.theme == theme and shell.details.theme == theme and shell.about.theme == theme, "Representative popover and informational dialogs share the slice theme")
 	check(viewer.legend.theme == shell.theme, "Scientific legend retains accepted theme")
 	check(viewer.timeline.field_color == legacy.c(&"accent.primary") and viewer.timeline.scene_color == legacy.c(&"identity.teal"), "Readiness overlay keeps accepted blue/teal meaning")
