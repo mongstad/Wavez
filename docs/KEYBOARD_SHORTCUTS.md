@@ -70,7 +70,7 @@ movement keys, focus navigation, and Escape recovery retain their existing roles
 | Play Pause | Space | Viewer transport toggle |
 | Previous Sample / Next Sample | Left / Right | Viewer frame stepping |
 | Loop Playback | Unbound | Transport's existing loop callback |
-| Open Capture | Unbound | File's capture picker |
+| Open File | Unbound | File's scene picker |
 | Export Video | Unbound | File's existing export dialog |
 | Save Image | P | Existing screenshot folder/save flow |
 | Derive Range / Mapping | Unbound | Existing Tools commands and source eligibility |
@@ -132,7 +132,7 @@ The later X/keep-open review change is recorded
    Press Escape again: close and discard the draft. Use Tab/Shift+Tab and Enter
    to edit rows and reach Apply/Cancel, including the last row. Check Meta/Super
    combinations that KDE delivers to the application.
-5. Bind and exercise Open Capture, Export Video, Free Camera, Auto Orbit,
+5. Bind and exercise Open File, Export Video, Free Camera, Auto Orbit,
    Play Pause, Frame Scene, Derive Range and Mapping. Confirm the existing picker,
    export, camera, transport and Tools behavior, including ineligible source
    actions and text/numeric input protection. Bind Loop Playback and compare it

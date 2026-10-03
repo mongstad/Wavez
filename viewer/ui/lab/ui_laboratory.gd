@@ -89,7 +89,7 @@ func _controls() -> void:
 	var grid := page("Controls")
 	var buttons := group(grid, "Actions & states")
 	var actions := flow(buttons)
-	action(actions, "open", "Open capture…", &"PrimaryButton")
+	action(actions, "open", "Open File…", &"PrimaryButton")
 	action(actions, "save", "Save recipe…")
 	action(actions, "delete", "Remove selection", &"DestructiveButton")
 	var state_row := flow(buttons)
@@ -106,7 +106,7 @@ func _controls() -> void:
 	buttons.add_child(label("Hover and press controls; keyboard focus remains visible independently of selection.", &"HelpLabel"))
 	var menu := MenuButton.new(); menu.text = "Example menu…"; buttons.add_child(menu)
 	menu.get_popup().theme = DARK
-	menu.get_popup().add_item("Open capture…"); menu.get_popup().add_check_item("Show guides"); menu.get_popup().set_item_checked(1, true)
+	menu.get_popup().add_item("Open File…"); menu.get_popup().add_check_item("Show guides"); menu.get_popup().set_item_checked(1, true)
 	menu.get_popup().add_separator(); menu.get_popup().add_item("Export unavailable"); menu.get_popup().set_item_disabled(3, true)
 	menu.get_popup().id_pressed.connect(func(id: int): event_label.text = "Menu intent: %d" % id)
 	specimens.menu = menu

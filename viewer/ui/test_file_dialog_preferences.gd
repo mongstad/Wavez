@@ -69,12 +69,28 @@ func run() -> void:
 	await settle()
 	var capture: FileDialog = viewer.open_dialog
 	var video: FileDialog = viewer.video_dialog.save_dialog
-	check(capture.title == "Open capture" and not capture.mode_overrides_title, "Capture title")
+	check(capture.title == "Open File" and not capture.mode_overrides_title, "Native file-open title")
 	check(video.title == "Export video" and not video.mode_overrides_title, "Video title")
-	check(not capture.use_native_dialog and not video.use_native_dialog, "Accepted built-in picker implementation retained")
+	check(capture.use_native_dialog and not video.use_native_dialog, "Native scene picker and existing video picker configured")
+	if DisplayServer.get_name() != "headless":
+		check(DisplayServer.has_feature(DisplayServer.FEATURE_NATIVE_DIALOG_FILE), "Desktop supports native file dialog")
 	check(capture.filters == PackedStringArray(["*.wvz ; WAVEZ Scene Format"]), "Single current WAVEZ Scene Format filter")
 	check(video.filters == PackedStringArray(["*.mp4 ; H.264 MP4"]), "Export filter retained")
 	check(video.overwrite_warning_enabled, "Overwrite confirmation retained")
+	if phase == "native":
+		var opened := [false]
+		capture.about_to_popup.connect(func(): opened[0] = true)
+		await show_dialog(capture, directory("capture"))
+		check(opened[0] and viewer.generic_reader == null, "Native scene picker requests a popup without loading a file")
+		capture.hide()
+		await settle()
+		check(viewer.generic_reader == null, "Dismissing native picker leaves the scene unchanged")
+		viewer.free()
+		finish()
+		return
+	# The navigation-preference regression drives Godot's embedded controls.
+	# Native desktop bookmarks and Recent belong to the OS picker.
+	capture.use_native_dialog = false
 	if phase == "capture_add":
 		check(FileDialog.get_recent_list().is_empty() and FileDialog.get_favorite_list().is_empty(), "Fresh process starts without navigation history")
 		await toggle_favorite(capture, directory("capture"))

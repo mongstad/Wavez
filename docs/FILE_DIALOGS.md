@@ -1,9 +1,19 @@
-# Capture and video file dialogs
+# Scene and video file dialogs
 
-Current WAVEZ opens WAVEZ Scene Format `*.wvz` through the single scene file
-filter. The #50 report below records its original `.ssc` picker and review
-steps; those are historical, not current supported file types. See the
+Current WAVEZ opens WAVEZ Scene Format `*.wvz` through the desktop's native
+file picker when the display server supports it. The window title is **Open
+File**, and its sole format filter is **WAVEZ Scene Format** (`*.wvz`). The
+desktop environment owns native bookmarks, Recent locations, navigation,
+accessibility, Open and Cancel behavior. Godot falls back to its built-in
+FileDialog on display servers without a native picker; its saved navigation
+lists continue to work there. Video export retains its existing built-in
+picker and shared Godot navigation preferences. See the
 [current format policy](CAPTURE_FORMAT_POLICY.md).
+The [issue #181 validation record](evidence/issue-181/README.md) separates
+automated checks from physical desktop review.
+
+The #50 report below records its original `.ssc` picker and review steps;
+those are historical, not current supported file types.
 
 Issue #50 is implemented for owner review, with candidate build **v0.1.0.9**.
 

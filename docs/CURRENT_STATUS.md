@@ -1,14 +1,20 @@
 # Current status
 
 Issue #182's [clean-break design](FORMAT_IDENTITY_PROPOSAL.md) was owner-merged
-in PR #213. Issue #215 implements **WAVEZ Scene Format** (`.wvz`, WVZ1) on its
-issue branch as candidate build 31, pending owner review. The writer, Python
+in PR #213. Issue #215's **WAVEZ Scene Format** (`.wvz`, WVZ1) implementation
+was owner-merged in PR #216 as build 31. The writer, Python
 analysis, native viewer, current tools and examples use WVZ1 only. The
 [current format policy](CAPTURE_FORMAT_POLICY.md) defines the approved wire
 identity and intentional alpha break. Historical reports below retain their
 original format claims and test results. See the
 [WVZ1 implementation validation](WVZ1_IMPLEMENTATION_VALIDATION.md) for the
 real Python simulation artifact, native/package checks and owner steps.
+
+Issue #181 opens WVZ1 scene files through the desktop's native picker where
+supported, using **Open File** and **WAVEZ Scene Format** (`*.wvz`) in the
+file-open flow. The built-in picker remains Godot's fallback; video export
+keeps its existing picker. Candidate build 32 awaits owner review. See the
+[current dialog behavior](FILE_DIALOGS.md) and [issue validation](evidence/issue-181/README.md).
 
 Issue #202 selects **Meshes** in the Simulation panel after a successful
 mesh-only file load. Mixed scenes retain the selected category, and explicit

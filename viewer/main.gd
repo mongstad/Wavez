@@ -344,7 +344,7 @@ var _shell_open_error := ""
 func _open_capture_profiled(path: String) -> void:
 	_shell_open_error = ""
 	if inspection_busy:
-		_shell_open_error = "Inspection is busy. Try opening the capture again when it finishes."
+		_shell_open_error = "Inspection is busy. Try opening the file again when it finishes."
 		return
 	_open_scene(path)
 
@@ -1079,8 +1079,9 @@ func _build_inspector_controls() -> void:
 	open_dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE
 	open_dialog.access = FileDialog.ACCESS_FILESYSTEM
 	open_dialog.filters = PackedStringArray(["*.wvz ; WAVEZ Scene Format"])
+	open_dialog.use_native_dialog = true
 	open_dialog.mode_overrides_title = false
-	open_dialog.title = "Open capture"
+	open_dialog.title = "Open File"
 	if file_dialog_preferences != null:
 		file_dialog_preferences.attach(open_dialog, true)
 	open_dialog.file_selected.connect(_open_from_picker)
