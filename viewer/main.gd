@@ -89,7 +89,7 @@ var display_accum := 0.0
 var mode := 0 # Reserved visual-state field in existing native recipes; no display dispatch.
 var observer_scale := 1.0e28
 var trails_enabled := false
-var orbit_enabled := true
+var orbit_enabled := false
 
 var camera: Camera3D
 var yaw := deg_to_rad(38.0)
@@ -633,10 +633,10 @@ func _dispatch_shortcut(action: String) -> void:
 		"previous_category": shell.cycle_category(-1)
 
 func _toggle_auto_orbit() -> void:
-	orbit_enabled = not orbit_enabled; inspection_paused = false; _sync_control_state()
+	orbit_enabled = not orbit_enabled; _sync_control_state()
 
 func _toggle_free_camera() -> void:
-	free_camera = not free_camera; orbit_enabled = not free_camera; _sync_control_state()
+	free_camera = not free_camera; _sync_control_state()
 
 func _reset_camera() -> void:
 	if shell != null: shell.dismiss_orbit_editor()
@@ -874,7 +874,7 @@ var hidden_types: Dictionary = {}
 var brightness_scale := 1.0
 var gamma := 1.0
 var orbit_speed := 0.08
-var free_camera := false
+var free_camera := true
 var panel_width := 340.0
 var resizing_panel := false
 var resize_handle: Control

@@ -1,0 +1,69 @@
+{
+  "issue": 201,
+  "review_revision": 1,
+  "candidate_version": "v0.1.0.27",
+  "shortcut_and_navigation_runs": [
+    {
+      "run": "headless",
+      "renderer": "headless",
+      "packaged": false,
+      "checks_passed": 268,
+      "fresh_process_restart": true,
+      "failures": 0,
+      "known_compatibility_texture_cleanup_messages": 0,
+      "known_packaged_window_cleanup_messages": 0
+    },
+    {
+      "run": "forward",
+      "renderer": "forward_plus",
+      "packaged": false,
+      "checks_passed": 274,
+      "fresh_process_restart": true,
+      "failures": 0,
+      "known_compatibility_texture_cleanup_messages": 0,
+      "known_packaged_window_cleanup_messages": 0
+    },
+    {
+      "run": "compat",
+      "renderer": "gl_compatibility",
+      "packaged": false,
+      "checks_passed": 274,
+      "fresh_process_restart": true,
+      "failures": 0,
+      "known_compatibility_texture_cleanup_messages": 2,
+      "known_packaged_window_cleanup_messages": 0
+    },
+    {
+      "run": "forward-package",
+      "renderer": "forward_plus",
+      "packaged": true,
+      "checks_passed": 274,
+      "fresh_process_restart": true,
+      "failures": 0,
+      "known_compatibility_texture_cleanup_messages": 0,
+      "known_packaged_window_cleanup_messages": 2
+    },
+    {
+      "run": "compat-package",
+      "renderer": "gl_compatibility",
+      "packaged": true,
+      "checks_passed": 274,
+      "fresh_process_restart": true,
+      "failures": 0,
+      "known_compatibility_texture_cleanup_messages": 2,
+      "known_packaged_window_cleanup_messages": 2
+    }
+  ],
+  "fixture_sha256_unchanged": {
+    "mixed.ssc": "a78b33e9b1fff368f0f651bc3acd00242d5531a1b5add35d3af8547f0f905db1",
+    "meshes.ssc": "7c1ed39844a24826ac3a569c9453bbc33dfeb60b28523301691189f8322424fe",
+    "fields.ssc": "efe39619ffcd7528d88f1bf76ca65a8588550e0825a6de4db563ebf937e0266f",
+    "particles.ssc": "3f02a06e64ef1a4378cce3073d0c7633d08a91cdd0053484e3d90a7b8899be82"
+  },
+  "camera_tumble_headless_checks_passed": 13798,
+  "wheel_manual_orbit_native_checks_passed": {
+    "forward_plus": 258,
+    "gl_compatibility": 258
+  },
+  "recipe_state_headless_checks_passed": 2663
+}
