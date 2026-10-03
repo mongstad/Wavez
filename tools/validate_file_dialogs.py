@@ -33,7 +33,7 @@ def main():
     if args.display_driver == "wayland":
         env["GDK_BACKEND"] = "wayland"
     reports = []
-    for phase in ['baseline', 'capture_add', 'capture_remove', 'export_add', 'export_remove', 'stale', 'stale_reload']:
+    for phase in ['baseline', 'native', 'capture_add', 'capture_remove', 'export_add', 'export_remove', 'stale', 'stale_reload']:
         command = [args.godot, '--path', str(ROOT / 'viewer'), '--display-driver', args.display_driver,
                    '--rendering-method', args.renderer, '--audio-driver', 'Dummy', '--resolution', '1440x900',
                    '--log-file', str(output / f'{phase}-godot.log'),
@@ -57,7 +57,7 @@ def main():
     summary = {'phases': reports, 'checks': sum(r['checks'] for r in reports), 'source_hashes_unchanged': hashes}
     (output / 'summary.json').write_text(json.dumps(summary, indent=2) + '\n')
     print('Known baseline GL cleanup diagnostics:', sum(len(r['known_baseline_gl_cleanup_diagnostics']) for r in reports))
-    print(f'File dialogs: {summary["checks"]} checks PASS ({args.renderer}, {args.display_driver}, seven processes)')
+    print(f'File dialogs: {summary["checks"]} checks PASS ({args.renderer}, {args.display_driver}, eight processes)')
 
 
 if __name__ == '__main__':

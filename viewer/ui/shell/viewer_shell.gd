@@ -172,15 +172,15 @@ func setup(owner_viewer) -> void:
 		viewer._sync_control_state())
 	window_chrome = preload("res://ui/shell/window_chrome.gd").new(); add_child(window_chrome); window_chrome.setup(self, row)
 	empty = VBoxContainer.new(); add_child(empty)
-	button(empty, "Open capture", viewer._show_open_dialog, "open").theme_type_variation = "PrimaryButton"
+	button(empty, "Open File", viewer._show_open_dialog, "open").theme_type_variation = "PrimaryButton"
 	open_error = PanelContainer.new(); add_child(open_error)
 	var error_row := HBoxContainer.new(); open_error.add_child(error_row)
-	error_text = Label.new(); error_text.text = "Capture could not be opened"; error_text.add_theme_color_override("font_color", theme.c(&"state.error")); error_row.add_child(error_text)
+	error_text = Label.new(); error_text.text = "File could not be opened"; error_text.add_theme_color_override("font_color", theme.c(&"state.error")); error_row.add_child(error_text)
 	button(error_row, "Details…", func(): show_details("Open failed", error_details), "warning")
 	button(error_row, "Choose another…", viewer._show_open_dialog, "open")
 	button(error_row, "Dismiss", func():
 		open_error.hide()
-		if status_ui != null: status_ui.failures.erase("Open capture"); status_ui.refresh(), "close")
+		if status_ui != null: status_ui.failures.erase("Open file"); status_ui.refresh(), "close")
 	open_error.hide()
 	details = AcceptDialog.new(); details.title = "Source details"; details.theme = theme; add_child(details)
 	detail_text = TextEdit.new(); detail_text.editable = false; detail_text.wrap_mode = TextEdit.LINE_WRAPPING_BOUNDARY; detail_text.custom_minimum_size = Vector2(480, 220); details.add_child(detail_text)
@@ -353,11 +353,11 @@ func finish_open(problem: String) -> void:
 	preload("res://analysis/ui_controls.gd").fit(viewer.inspector_box)
 	if not problem.is_empty():
 		error_details = problem; open_error.show()
-		if status_ui != null: status_ui.remember("Open capture",problem)
+		if status_ui != null: status_ui.remember("Open file",problem)
 	else:
 		# Only the failed-open diagnostic is superseded by a successful load.
 		error_details = ""; open_error.hide()
-		if status_ui != null: status_ui.failures.erase("Open capture")
+		if status_ui != null: status_ui.failures.erase("Open file")
 	if status_ui != null: status_ui.refresh()
 	refresh()
 

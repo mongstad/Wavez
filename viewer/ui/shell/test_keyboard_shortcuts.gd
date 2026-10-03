@@ -89,6 +89,8 @@ func run() -> void:
 		viewer = Viewer.new(); viewer.scene_prebuffer_enabled = false; root.add_child(viewer)
 	viewer.set_process(false)
 	var shell = viewer.shell
+	check(Bindings.ACTIONS.any(func(action): return action[0] == "open_capture" and action[1] == "Open File"), "Open shortcut has current visible label")
+	check(viewer.open_dialog.use_native_dialog and viewer.open_dialog.title == "Open File", "Open route keeps native scene picker configured")
 	check(not viewer.orbit_enabled and viewer.free_camera, "Fresh viewer starts with Auto Orbit off and Free Camera on")
 	if restart:
 		var saved: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(output.path_join("saved-map.json")))
@@ -229,7 +231,8 @@ func run() -> void:
 	check(not viewer.free_camera and not viewer.orbit_enabled, "Free Camera shortcut turns OFF without enabling Auto Orbit")
 	trigger(shell,"free_camera"); check(viewer.free_camera and not viewer.orbit_enabled, "Free Camera shortcut turns ON without enabling Auto Orbit")
 	viewer.orbit_enabled = false
-	trigger(shell,"open_capture"); await settle(); check(viewer.open_dialog.visible, "Open Capture opens authoritative picker")
+	viewer.open_dialog.use_native_dialog = false # Scripted activation uses the embedded control.
+	trigger(shell,"open_capture"); await settle(); check(viewer.open_dialog.visible, "Open File opens authoritative picker")
 	viewer.open_dialog.hide(); await settle()
 	trigger(shell,"navigate"); await settle(); check(shell.navigation.get_child(2).get_popup().visible, "Remapped Navigate opens existing menu")
 	shell.navigation.get_child(2).get_popup().hide(); await settle()

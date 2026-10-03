@@ -12,7 +12,7 @@ const ACTIONS := [
 	["previous_sample", "Previous Sample", "Playback", KEY_LEFT],
 	["next_sample", "Next Sample", "Playback", KEY_RIGHT],
 	["loop_playback", "Loop Playback", "Playback", 0],
-	["open_capture", "Open Capture", "File", 0],
+	["open_capture", "Open File", "File", 0],
 	["export_video", "Export Video", "File", 0],
 	["save_image", "Save Image", "File", KEY_P],
 	["derive_range", "Derive Range", "Tools", 0],

@@ -23,9 +23,11 @@ Earlier documents sometimes append new checkpoints above obsolete scope tables. 
 ## Viewer shell
 
 With no capture loaded, the viewport retains its cinematic sky without decorative
-star specks and shows a centered **Open capture** button. Decorative stars have
+star specks and shows a centered **Open File** button. Decorative stars have
 also been removed from loaded scenes and exports; scientific particles remain.
-Click it to open the existing capture picker, or use **File → Open file…**.
+Click it to open the desktop's native file picker, or use **File → Open file…**.
+The picker accepts WAVEZ Scene Format (`*.wvz`) files. Its Open, Cancel,
+bookmarks and Recent behavior follow the desktop environment.
 
 The right-hand Simulation panel uses Particles, Fields and Meshes categories.
 Opening a mesh-only file selects Meshes immediately, showing its object selector
