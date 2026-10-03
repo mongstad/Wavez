@@ -27,9 +27,10 @@ operations, exposes supported cancellation and retains output/failure details.
 
 F1 hides/restores the resizable dock and legend; Space pauses; Left/Right
 steps; left-drag tumbles continuously through full revolutions in either direction;
-right-drag moves the camera horizontally about world Y around the current target
-with distance-aware angular sensitivity, preserving pitch and ignoring vertical
-pointer motion even when Auto Orbit is off and regardless of scene type;
+right-drag moves the camera sideways around the current target about the
+screen-up axis captured at press time, with distance-aware angular sensitivity
+and no response to vertical pointer motion, regardless of scene type or Auto
+Orbit state;
 wheel zooms; F11 toggles fullscreen, hiding the top command bar until exit;
 maximized windows keep the bar. F frames the scene and R resets the camera.
 For left-drag, horizontal motion retains world-Y yaw and vertical motion carries

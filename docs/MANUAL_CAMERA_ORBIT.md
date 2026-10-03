@@ -1,17 +1,21 @@
 # Manual camera orbit (#190)
 
 Hold the right mouse button and drag inside the viewport to move the camera
-around the current framed scene target on a horizontal orbit about world Y.
-Horizontal motion changes yaw continuously through a full circle; vertical
-motion is ignored. The camera keeps its current elevation and looks at the
-target throughout. Release the button to stop. The Navigate control also shows
+sideways around the current framed scene target **relative to the view on
+screen**. On each right-button press, the camera's current screen-up direction
+is captured in world space and held as that drag's orbit axis. Horizontal
+pointer motion carries the camera around that axis continuously through a full
+circle. Vertical motion is ignored. Release to end the gesture; the next press
+captures a new axis from the then-current view. The Navigate control also shows
 this gesture in its tooltip.
 
-This uses the existing camera target, radius, yaw and pitch. It works with
+This uses the existing camera target, radius and full camera orientation. It works with
 particles, volumes, meshes and mixed scenes without selecting a layer or object.
-The target, radius, viewing elevation, zoom level, scientific geometry and
-playback state stay the same during pure orbit. Left-drag retains its existing
-two-axis, fixed-sensitivity tumble.
+The target, radius, screen-up direction, zoom level, scientific geometry and
+playback state stay the same during pure orbit. World-space elevation may change
+when the captured view-up axis is tilted relative to world Y. Left-drag retains
+its existing two-axis, fixed-sensitivity tumble and can establish a different
+orientation before the next right drag.
 The wheel zooms along the current view direction; F frames the scene again.
 
 The right-drag angular step uses pointer travel relative to the shorter viewport
@@ -22,14 +26,15 @@ automatic motion resumes on release. Losing window focus ends the drag.
 
 ## Owner verification
 
-1. Open the cavity-collapse torus and press F. With Auto Orbit off, right-drag
-   left and right to travel around the torus, including its opposite side and a
-   full return to the starting view. Look through its throat from several sides.
-   Confirm the mesh stays fixed, the camera's distance and elevation do not drift,
-   and the view does not progressively tilt or turn upside down.
+1. Open the cavity-collapse torus and press F. Use left-drag to tumble to an
+   obviously arbitrary orientation that does not align with world Y. Release
+   left, then right-drag left and right around the torus, including its opposite
+   side and a full return to the starting view. Confirm the mesh stays fixed,
+   camera radius does not drift and the screen-up direction does not roll.
 2. Right-drag vertically, then diagonally. Vertical-only motion should leave the
-   view unchanged; diagonal motion should produce only horizontal orbit. Confirm
-   left-drag still tumbles freely in both axes.
+   view unchanged; diagonal motion should use only horizontal travel. Release
+   right, tumble to a completely different orientation with left-drag, then
+   right-drag again. The new orbit plane should match the newly visible view.
 3. Zoom near a surface and into the throat; repeat the same pointer travel.
    Check fine control there, then zoom far out and check useful angular travel.
 4. Zoom before and after right-dragging, press F, then repeat with Auto Orbit on.
@@ -39,4 +44,4 @@ automatic motion resumes on release. Losing window focus ends the drag.
    existing left-drag, wheel and selection-tool controls in Forward+ and
    Compatibility. Assess physical KDE/Wayland mouse feel on the owner display.
 
-Implementation and validation evidence: [issue #190 revision report](evidence/issue-190/revision-1/README.md).
+Implementation and validation evidence: [issue #190 revision 2 report](evidence/issue-190/revision-2/README.md).

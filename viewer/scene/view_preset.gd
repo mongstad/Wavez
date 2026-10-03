@@ -139,6 +139,7 @@ static func apply(viewer, recipe) -> Dictionary:
 			"camera_target":viewer.camera_target = Visual.vector(value)
 			"camera_transform":viewer.camera.transform = Transform3D(Basis(Visual.vector(value[0]),Visual.vector(value[1]),Visual.vector(value[2])),Visual.vector(value[3]))
 			_:viewer.set(key,value)
+	if s.get("view",{}).has("camera_transform"): viewer._adopt_camera_basis()
 	for key in s.get("particles",{}):viewer.set(key,s.particles[key])
 	if s.has("particles"):
 		viewer.auto_range = viewer.normalization_mode in ["frame","symmetric"]

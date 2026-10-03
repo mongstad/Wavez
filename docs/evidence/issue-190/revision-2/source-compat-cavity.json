@@ -1,0 +1,98 @@
+{
+  "cases": {
+    "cavity-collapse": {
+      "extent": 0.175498977303505,
+      "far": 1000.0,
+      "first_inward": 0.442257422804832,
+      "framed": 0.491397136449814,
+      "maximum": 999.824501022696,
+      "minimum": 0.225498978048563,
+      "near": 0.0500000007450581
+    },
+    "field": {
+      "extent": 6.49519062042236,
+      "far": 1000.0,
+      "first_inward": 16.3678803634644,
+      "framed": 18.1865337371826,
+      "maximum": 993.504809379578,
+      "minimum": 6.54519062116742,
+      "near": 0.0500000007450581
+    },
+    "large": {
+      "extent": 25495.09765625,
+      "far": 356931.375,
+      "first_inward": 64247.64609375,
+      "framed": 71386.2734375,
+      "maximum": 331436.27734375,
+      "minimum": 25495.1476562507,
+      "near": 0.0500000007450581
+    },
+    "mesh": {
+      "extent": 2.54950976371765,
+      "far": 1000.0,
+      "first_inward": 6.42476460456848,
+      "framed": 7.13862733840942,
+      "maximum": 997.450490236282,
+      "minimum": 2.59950976446271,
+      "near": 0.0500000007450581
+    },
+    "mixed": {
+      "extent": 6.49519062042236,
+      "far": 1000.0,
+      "first_inward": 16.3678803634644,
+      "framed": 18.1865337371826,
+      "maximum": 993.504809379578,
+      "minimum": 6.54519062116742,
+      "near": 0.0500000007450581
+    },
+    "particles": {
+      "extent": 2.54950976371765,
+      "far": 1000.0,
+      "first_inward": 6.42476460456848,
+      "framed": 7.13862733840942,
+      "maximum": 997.450490236282,
+      "minimum": 2.59950976446271,
+      "near": 0.0500000007450581
+    },
+    "small": {
+      "extent": 0.1,
+      "far": 1000.0,
+      "first_inward": 0.252,
+      "framed": 0.28,
+      "maximum": 999.9,
+      "minimum": 0.150000000745058,
+      "near": 0.0500000007450581
+    }
+  },
+  "checks": 281,
+  "display_driver": "Wayland",
+  "failures": [],
+  "layouts": [
+    {
+      "actual": "(1440, 900)",
+      "scale": 1.0
+    },
+    {
+      "actual": "(3840, 2160)",
+      "scale": 2.0
+    },
+    {
+      "actual": "(3840, 2160)",
+      "scale": 2.5
+    }
+  ],
+  "packaged": false,
+  "renderer": "gl_compatibility",
+  "source_hashes_unchanged": {
+    "/tmp/wavez-190-view-up-restored-compat-cavity/large.ssc": "7b5308d8ca639f8d26735d2d1b002aa2bb5e200d925bc5f7743c1faa126442a6",
+    "/tmp/wavez-190-view-up-restored-compat-cavity/small.ssc": "ef69821e14ac6f933d20860746a5837eea663391da26aa4e76b5b2361eda9ecb",
+    "/tmp/wavez-190-view-up-restored-compat-cavity/mixed.ssc": "e09d3ffaf733b1491e5e181335fa0371da35dff70bf5cbf4bc4947b660cfcdfe",
+    "/tmp/wavez-190-view-up-restored-compat-cavity/mesh.ssc": "583442c264964344ddff3b72aef67c0a908da7c121b6af628df509cf6ed71e70",
+    "/tmp/wavez-190-view-up-restored-compat-cavity/field.ssc": "c21f2229e8b7ce310ab19e3f243f55de2647714c0ce99babe802ca7a56bbf492",
+    "/tmp/wavez-190-view-up-restored-compat-cavity/particles.ssc": "cbc19d140fd265b6486751be73459f5b4f1482bc31da17ec618b080ea16ad952",
+    "/home/Nozba/Codex/Wavez/cavity_collapse_mesh_wavez/cavity_collapse_torus_quick.ssc": "9215baf4e475256b254916f290b5c569d17553e944c4778b17b74eed0ba0b10e"
+  },
+  "known_engine_diagnostics": [
+    "libdecor-gtk-WARNING: Failed to initialize GTK\nFailed to load plugin 'libdecor-gtk.so': failed to init\n"
+  ]
+}

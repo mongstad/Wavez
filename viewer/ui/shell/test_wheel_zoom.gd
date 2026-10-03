@@ -13,6 +13,9 @@ func _ready() -> void: run.call_deferred()
 func check(ok: bool, label: String) -> void:
 	checks += 1
 	if not ok: failures.append(label); push_error(label)
+func close_transform(a: Transform3D, b: Transform3D) -> bool:
+	var position_tolerance := maxf(.0001, maxf(a.origin.length(), b.origin.length()) * .000001)
+	return a.origin.distance_to(b.origin) < position_tolerance and a.basis.x.distance_to(b.basis.x) < .00001 and a.basis.y.distance_to(b.basis.y) < .00001 and a.basis.z.distance_to(b.basis.z) < .00001
 func settle() -> void:
 	for i in 8: await get_tree().process_frame
 	RenderingServer.force_draw(false)
@@ -28,16 +31,7 @@ func wheel(view, inward: bool, factor := 1.0, pressed := true) -> void:
 	event.button_index = MOUSE_BUTTON_WHEEL_UP if inward else MOUSE_BUTTON_WHEEL_DOWN
 	event.pressed = pressed; event.factor = factor; event.position = Vector2(600,400)
 	view._unhandled_input(event)
-func orbit_dispatch(view, label: String) -> void:
-	var target: Vector3 = view.camera_target
-	var radius: float = view.camera_distance
-	var yaw: float = view.yaw
-	var pitch: float = view.pitch
-	var sample: Dictionary = view.committed_sample.duplicate(true)
-	var mesh_points: Dictionary = {}
-	for id in view.scene_layers.views:
-		var layer = view.scene_layers.views[id]
-		if layer is MeshView: mesh_points[id] = layer.source_positions.duplicate()
+func viewport_drag_point(view, label: String) -> Vector2:
 	var viewport_size: Vector2 = view.get_viewport().get_visible_rect().size
 	var point: Vector2 = viewport_size * .5
 	if not view.shell.edge_reveal.is_viewport_point(point):
@@ -47,13 +41,44 @@ func orbit_dispatch(view, label: String) -> void:
 				point = candidate
 				break
 	check(view.shell.edge_reveal.is_viewport_point(point), label + " has an unobstructed viewport drag point")
+	return point
+func left_tumble_dispatch(view, label: String) -> void:
+	var point: Vector2 = viewport_drag_point(view, label)
+	var start: Transform3D = view.camera.transform
+	var press := InputEventMouseButton.new()
+	press.button_index = MOUSE_BUTTON_LEFT; press.pressed = true; press.position = point
+	root.push_input(press, true)
+	check(view.dragging, label + " left press begins legacy tumble")
+	var motion := InputEventMouseMotion.new(); motion.position = point + Vector2(70, -100); motion.relative = Vector2(70, -100); motion.button_mask = MOUSE_BUTTON_MASK_LEFT
+	root.push_input(motion, true)
+	var expected_basis := Basis(Vector3.UP, -70 * .006) * start.basis * Basis(Vector3.RIGHT, -100 * .006)
+	check(close_transform(view.camera.transform, Transform3D(expected_basis, view.camera_target + expected_basis.z * view.camera_distance)), label + " left drag retains two-axis tumble")
+	var release := InputEventMouseButton.new(); release.button_index = MOUSE_BUTTON_LEFT; release.position = motion.position
+	root.push_input(release, true)
+	check(not view.dragging and absf(view.camera.basis.y.dot(Vector3.UP)) < .8, label + " left tumble ends in a non-world-aligned orientation")
+func orbit_dispatch(view, label: String) -> void:
+	var target: Vector3 = view.camera_target
+	var radius: float = view.camera_distance
+	var yaw: float = view.yaw
+	var pitch: float = view.pitch
+	var start: Transform3D = view.camera.transform
+	var view_up: Vector3 = start.basis.y.normalized()
+	var sensitivity: float = view._manual_orbit_sensitivity()
+	var sample: Dictionary = view.committed_sample.duplicate(true)
+	var mesh_points: Dictionary = {}
+	for id in view.scene_layers.views:
+		var layer = view.scene_layers.views[id]
+		if layer is MeshView: mesh_points[id] = layer.source_positions.duplicate()
+	var point: Vector2 = viewport_drag_point(view, label)
 	var press := InputEventMouseButton.new()
 	press.button_index = MOUSE_BUTTON_RIGHT; press.pressed = true; press.position = point
 	root.push_input(press, true)
-	check(view.manual_orbit_dragging, label + " viewport dispatch starts right-drag orbit")
+	check(view.manual_orbit_dragging and view.manual_orbit_axis.distance_to(view_up) < .00001, label + " right press captures current view-up axis")
 	var motion := InputEventMouseMotion.new(); motion.position = point + Vector2(80, 40); motion.relative = Vector2(80, 40); motion.button_mask = MOUSE_BUTTON_MASK_RIGHT
 	root.push_input(motion, true)
-	check(view.yaw != yaw and view.pitch == pitch and view.camera_target == target and is_equal_approx(view.camera_distance, radius), label + " right drag moves camera horizontally on same center, elevation and radius")
+	var expected_basis := (Basis(view_up, -80 * sensitivity) * start.basis).orthonormalized()
+	check(close_transform(view.camera.transform, Transform3D(expected_basis, target + expected_basis.z * radius)) and view.yaw == yaw and view.pitch == pitch and view.camera_target == target and view.camera_distance == radius, label + " right drag follows captured view-up at fixed center and radius")
+	check(view.camera.basis.y.distance_to(view_up) < .00001, label + " right drag does not progressively roll")
 	var after_horizontal: Transform3D = view.camera.transform
 	var after_yaw: float = view.yaw
 	motion.position = point + Vector2(80, 120); motion.relative = Vector2(0, 80)
@@ -75,8 +100,14 @@ func orbit_dispatch(view, label: String) -> void:
 		view.shell.select_workspace(previous_workspace)
 		check(view.camera_target == target and is_equal_approx(view.camera_distance, radius), "Category changes leave the manual orbit target and radius unchanged")
 func verify(view, label: String) -> void:
-	view._focus_activity(); await settle()
+	view._reset_camera(); view._focus_activity(); await settle()
+	left_tumble_dispatch(view, label)
 	await orbit_dispatch(view, label)
+	if label == "cavity-collapse":
+		var first_axis: Vector3 = view.camera.basis.y.normalized()
+		left_tumble_dispatch(view, label + " changed view")
+		check(view.camera.basis.y.normalized().distance_to(first_axis) > .3, label + " second left tumble establishes a new screen-up axis")
+		await orbit_dispatch(view, label + " changed view")
 	await settle()
 	var start: float = view.camera_distance
 	var target: Vector3 = view.camera_target

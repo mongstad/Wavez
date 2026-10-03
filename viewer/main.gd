@@ -99,6 +99,15 @@ var dragging := false
 var last_mouse := Vector2.ZERO
 var manual_orbit_dragging := false
 var manual_orbit_last_mouse := Vector2.ZERO
+var manual_orbit_axis := Vector3.UP
+var manual_orbit_start_basis := Basis.IDENTITY
+var manual_orbit_angle := 0.0
+# A view-up orbit can introduce orientation outside the two legacy yaw/pitch
+# angles. Keep its camera basis through zoom, framing, tumble and Auto Orbit.
+var camera_orbit_basis := Basis.IDENTITY
+var camera_orbit_basis_active := false
+var camera_orbit_basis_yaw := deg_to_rad(38.0)
+var camera_orbit_basis_pitch := deg_to_rad(24.0)
 
 var current_instance: MultiMeshInstance3D
 var current_mm: MultiMesh
@@ -535,6 +544,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		elif mouse_button.button_index == MOUSE_BUTTON_RIGHT and mouse_button.pressed and shell.edge_reveal.is_viewport_point(mouse_button.position) and not dragging:
 			manual_orbit_dragging = true
 			manual_orbit_last_mouse = mouse_button.position
+			manual_orbit_axis = camera.basis.y.normalized()
+			manual_orbit_start_basis = camera.basis.orthonormalized()
+			manual_orbit_angle = 0.0
 			get_viewport().set_input_as_handled()
 		elif mouse_button.pressed and mouse_button.button_index == MOUSE_BUTTON_WHEEL_UP:
 			_zoom_camera(mouse_button, true)
@@ -573,7 +585,11 @@ func _orbit_camera_by_drag(movement: Vector2, sensitivity: float) -> void:
 
 func _orbit_camera_horizontally(horizontal_delta: float, sensitivity: float) -> void:
 	if horizontal_delta == 0.0: return
-	yaw -= horizontal_delta * sensitivity
+	manual_orbit_angle -= horizontal_delta * sensitivity
+	camera_orbit_basis = (Basis(manual_orbit_axis, manual_orbit_angle) * manual_orbit_start_basis).orthonormalized()
+	camera_orbit_basis_active = true
+	camera_orbit_basis_yaw = yaw
+	camera_orbit_basis_pitch = pitch
 	_update_camera()
 
 func _zoom_camera(event: InputEventMouseButton, inward: bool) -> void:
@@ -624,14 +640,33 @@ func _toggle_free_camera() -> void:
 
 func _reset_camera() -> void:
 	if shell != null: shell.dismiss_orbit_editor()
+	camera_orbit_basis_active = false
 	camera_target = Vector3.ZERO; yaw = deg_to_rad(38.0); pitch = deg_to_rad(24.0); camera_distance = maxf(30.0, half_extent * 2.8); _update_camera()
+
+func _adopt_camera_basis() -> void:
+	# Saved visual states already contain the full camera transform. Restore its
+	# orientation as the live basis when yaw/pitch alone cannot express it.
+	camera_orbit_basis = camera.basis
+	camera_orbit_basis_active = not camera_orbit_basis.is_equal_approx(Basis(Vector3.UP, yaw) * Basis(Vector3.RIGHT, -pitch))
+	camera_orbit_basis_yaw = yaw
+	camera_orbit_basis_pitch = pitch
 
 func _update_camera() -> void:
 	# Carry the camera up axis through the poles instead of reconstructing it
 	# from world-up (look_at becomes singular at +/-90 degrees and flips beyond).
-	# This is the existing yaw/pitch orbit with continuous orientation; keeping
-	# those angles also preserves recipe fields and independent world-Y auto orbit.
-	var orientation := Basis(Vector3.UP, yaw) * Basis(Vector3.RIGHT, -pitch)
+	# Before a view-up orbit this is the existing yaw/pitch orbit. Thereafter,
+	# changes to those angles apply incrementally to the current camera basis.
+	var orientation: Basis
+	if camera_orbit_basis_active:
+		var yaw_delta: float = yaw - camera_orbit_basis_yaw
+		var pitch_delta: float = pitch - camera_orbit_basis_pitch
+		if yaw_delta != 0.0 or pitch_delta != 0.0:
+			camera_orbit_basis = (Basis(Vector3.UP, yaw_delta) * camera_orbit_basis * Basis(Vector3.RIGHT, -pitch_delta)).orthonormalized()
+		orientation = camera_orbit_basis
+	else:
+		orientation = Basis(Vector3.UP, yaw) * Basis(Vector3.RIGHT, -pitch)
+	camera_orbit_basis_yaw = yaw
+	camera_orbit_basis_pitch = pitch
 	camera.transform = Transform3D(orientation, camera_target + orientation.z * camera_distance)
 
 func _comma(v: Variant) -> String:
