@@ -67,11 +67,46 @@ func check_session_disclosures() -> void:
 	viewer._open_capture(output.path_join("mixed.ssc"));viewer.playing = false
 	check(disclosures() == chosen,"Replacement after object selection preserves per-object disclosures")
 
+func check_new_file_focus() -> void:
+	var shell = viewer.shell
+	shell.select_workspace(0)
+	viewer._open_capture(output.path_join("meshes.ssc")); await settle()
+	var layers = viewer.scene_layers
+	check(shell.WORKSPACES[2] == "Meshes" and shell.workspace == 2 and shell.chooser.selected == 2, "Mesh-only open focuses the Meshes category")
+	check(shell.adapter.visible and layers.category_pages.mesh.is_visible_in_tree() and layers.object_choices.mesh.item_count == 2 and layers.selected_objects.mesh == "mesh0", "Mesh-only controls and first object are immediately visible")
+	check(not shell.particle_empty.visible and not viewer.inspector_box.visible, "Mesh-only open does not select the empty Particles category")
+	if DisplayServer.get_name() != "headless":
+		await RenderingServer.frame_post_draw
+		root.get_texture().get_image().save_png(output.path_join("mesh-only-initial.png"))
+	var visual_state := Visual.snapshot(viewer)
+	Visual.apply(viewer,visual_state)
+	check(shell.workspace == 2 and viewer.scene_layers.category_pages.mesh.visible, "View preset round trip preserves the selected Meshes category")
+	layers.states.mesh0.visible = false
+	shell.refresh()
+	check(shell.workspace == 2, "Changing object visibility does not select another category")
+	shell.select_workspace(1)
+	viewer._open_capture(output.path_join("meshes.ssc"))
+	check(shell.workspace == 2, "Reopening a mesh-only file focuses Meshes again")
+	shell.select_workspace(0)
+	viewer._open_capture(output.path_join("particles.ssc"))
+	check(shell.workspace == 0 and viewer.inspector_box.visible, "Particle-only open retains the selected Particles category")
+	shell.select_workspace(1)
+	viewer._open_capture(output.path_join("fields.ssc"))
+	check(shell.workspace == 1 and viewer.scene_layers.category_pages.volume.visible, "Field-only open retains the selected Fields category")
+	shell.select_workspace(2)
+	viewer._open_capture(output.path_join("mixed.ssc"))
+	check(shell.workspace == 2, "Mixed scene preserves the previously selected Meshes category")
+	shell.select_workspace(0)
+	viewer._open_capture(output.path_join("mixed-replacement.ssc"))
+	check(shell.workspace == 0, "Mixed replacement preserves the previously selected Particles category")
+	shell.select_workspace(0)
+
 func run() -> void:
 	output = OS.get_cmdline_user_args()[0]
 	create_timer(120).timeout.connect(func():push_error("Panel test timeout");quit(1))
 	viewer = Viewer.new();viewer.scene_prebuffer_enabled = false;root.add_child(viewer);viewer.set_process(false)
 	check_session_disclosures()
+	await check_new_file_focus()
 	viewer._open_capture(output.path_join("mixed.ssc"));viewer.playing = false;viewer.orbit_enabled = false
 	await settle()
 	var shell = viewer.shell;var layers = viewer.scene_layers

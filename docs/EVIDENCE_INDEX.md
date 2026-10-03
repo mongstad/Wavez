@@ -1,5 +1,10 @@
 # Retained evidence
 
+## Mesh-only Simulation panel focus — issue #202, pending owner review
+
+[Behavior, renderer/package checks and owner steps](evidence/issue-202/README.md)
+include an [initial mesh-only screenshot](evidence/issue-202/mesh-only-initial-compatibility.png).
+
 ## Continuous native resize — issue #158, pending owner review
 
 [Diagnosis, native measurements and owner checks](evidence/issue-158/README.md)

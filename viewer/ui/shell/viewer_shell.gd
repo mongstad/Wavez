@@ -273,6 +273,16 @@ func select_workspace(index: int) -> void:
 	scroll.set_deferred("scroll_vertical",scroll_position if index == 0 else 0)
 	refresh()
 
+func focus_mesh_only_scene() -> void:
+	# A new interactive source with meshes and no other object kinds has one
+	# useful category. Export workers retain their explicit presentation state.
+	if viewer.offline_instance or viewer.generic_reader == null: return
+	var objects: Dictionary = viewer.generic_reader.objects
+	if objects.is_empty(): return
+	for object in objects.values():
+		if object.kind != "mesh": return
+	select_workspace(2)
+
 func show_section(section: String) -> void:
 	if viewer.tools_ui.SECTIONS.has(section):
 		viewer.tools_ui.open(viewer.tools_ui.SECTIONS[section]); return
