@@ -198,32 +198,31 @@ the 3D render target remains native resolution. Tests verified **3840×2160** in
 both PNG headers and the encoded MP4 via ffprobe on this workstation.
 
 The same particle shaders, colormap LUTs, camera projection, environment and
-quality settings are reused. **Include viewer overlays** now reuses the current
-production shell (issue #55, single construction path after #59): command bar, camera controls, right workspace dock,
-transport, status and Jobs. Workspace, scroll and total/remaining preference are
-captured when export starts; section and visual settings use the existing snapshot.
-The dock is included when this explicit checkbox is on, even if it was hidden on
-the desktop. The normal command bar is included regardless of desktop fullscreen
-or immersive state. No desktop exit/hint, tooltip, dialog, export progress window
-or screenshot toast is recorded.
+quality settings are reused. The **Video Export dialog** selects the rendering
+state: Current state retains its applicable live presentation; Cinematic and
+Scientific apply their defined export presets. Its range, rate, camera/orbit,
+resolution, FPS, trails, quality and temporary-output settings remain job
+settings. The viewport defines which content can enter the frame; it does not
+replace those selections with the current interactive viewer state.
 
-Application chrome and scientific overlays have different ownership. This existing
-checkbox gates enabled particle, field and mesh legends together with application UI;
-per-layer legend preferences and channel eligibility continue to apply. Turning it off does not
-turn off independently enabled scene guides, probe markers or selection annotations.
-No scientific overlay is enabled merely by constructing the shell. Independent
-legend controls are described in [Layer legends](docs/LAYER_LEGENDS.md). Overlay-off pixels are regression-tested
-against the earlier scientific-only path.
+The offline SubViewport now contains scientific scene content and eligible
+viewport legends only. **Include enabled viewport legends** gates particle,
+field and mesh legends according to their saved visibility and channel state;
+turning it off hides those legends even if the interactive viewer shows them.
+Independent scene guides, probe markers and selection annotations retain their
+own settings. The exported legends use the existing viewport text and color
+mapping, positioned against the full output frame. See [Layer legends](docs/LAYER_LEGENDS.md).
 
-Transport labels follow each committed output sample. The worker is not an
-interactive player: its Play button is paused, and status/Jobs describe its ready
-scene rather than the parent application's live jobs or wall-clock export progress.
-Playback-speed controls retain the captured viewer setting; the explicit video
-Playback rate still owns output timing. The shell uses the existing 1440-wide
-logical export canvas, scaled to the selected output size; 3D remains native
-resolution. Export overlays are not a screen recording, title or annotation editor.
-See [current overlay evidence and owner checks](docs/evidence/issue-55/README.md). Matching output aspect ratio preserves framing; changing
-aspect ratio follows Godot's camera keep-aspect setting.
+Menus, navigation controls, the right workspace dock, transport, timeline,
+status/Jobs, dialogs, desktop decorations and other application chrome remain
+outside the video on both overlay settings. Workspace, scroll and remaining-time
+preferences may still be present in an existing job record, but do not affect
+frame pixels. The existing 1440-wide logical canvas scales to the selected
+output dimensions while 3D renders at native resolution. Matching output
+aspect ratio preserves framing; a different aspect ratio follows the camera's
+keep-aspect setting. [Issue #55's overlay evidence](docs/evidence/issue-55/README.md)
+records the earlier production-shell composition and remains historical. See
+the [current viewport export evidence and owner checks](docs/VIDEO_VIEWPORT_EXPORT.md).
 
 Forward+/Vulkan was tested on the RTX 3070 Ti. A functioning graphics display
 connection is required by this installed build: `--headless` selects a dummy

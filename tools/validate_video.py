@@ -90,6 +90,7 @@ def main():
         return traces
     if args.overlay_ui:
         ui_state=copy.deepcopy(state);ui_state['overlay_visible']=True
+        ui_state['show_legend']=True
         presentation=dict(workspace=0,scroll=0,remaining=False)
         first_frames=None
         for name,width,height in [('overlay 1080p',1920,1080),('overlay repeat',1920,1080),('overlay 4K',3840,2160)]:
@@ -98,14 +99,47 @@ def main():
             hashes=[hashlib.sha256(f.read_bytes()).hexdigest() for f in sorted((p.parent/'frames').glob('*.png'))]
             check(all(t['overlays'] for t in traces),name+': explicit overlay included')
             if first_frames is None: first_frames=hashes
-            elif name=='overlay repeat':check(first_frames==hashes,'production UI repeated export pixels are deterministic')
-        p,j=job_for('overlay disabled',end_time=.2);traces=movie(p,j)
+            elif name=='overlay repeat':check(first_frames==hashes,'viewport legend repeated export pixels are deterministic')
+        hidden_state=copy.deepcopy(ui_state);hidden_state['overlay_visible']=False
+        p,j=job_for('overlay disabled',end_time=.2,state=hidden_state);traces=movie(p,j)
         check(not any(t['overlays'] for t in traces),'overlay disabled remains explicit')
-        check(hashlib.sha256((p.parent/'frames/frame00000000.png').read_bytes()).hexdigest()!=first_frames[0],'UI inclusion changes rendered pixels')
+        check(hashlib.sha256((p.parent/'frames/frame00000000.png').read_bytes()).hexdigest()!=first_frames[0],'enabled legend changes rendered pixels')
+        from PIL import Image
+        on=np.asarray(Image.open(run/'overlay 1080p'/'frames/frame00000000.png').convert('RGB'))
+        off=np.asarray(Image.open(p.parent/'frames/frame00000000.png').convert('RGB'))
+        changed=np.any(on!=off,axis=2)
+        check(changed.any() and not changed[:int(on.shape[0]*.6),:].any() and not changed[:,:int(on.shape[1]*.6)].any(),
+              'overlay pixels stay in the lower-right viewport legend area, without shell chrome')
         p,j=job_for('appearance workspace',end_time=.2,state=ui_state,presentation=dict(workspace=1,scroll=0,remaining=True));movie(p,j)
-        check(hashlib.sha256((p.parent/'frames/frame00000000.png').read_bytes()).hexdigest()!=first_frames[0],'accepted workspace and remaining preference reach rendered UI')
+        check(hashlib.sha256((p.parent/'frames/frame00000000.png').read_bytes()).hexdigest()==first_frames[0],
+              'shell workspace and duration preferences cannot enter the viewport frame')
+        choices=json.loads((base/'dialog-rendering-jobs.json').read_text())
+        rendered={}
+        for name in ['current','cinematic','scientific']:
+            chosen=choices[name]
+            p,j=job_for('render '+name,start_time=.1,end_time=.2,state=chosen['state'],
+                        width=chosen['width'],height=chosen['height'],fps=chosen['fps'],
+                        playback_rate=chosen['playback_rate'],camera_mode=chosen['camera_mode'],orbit_speed=chosen['orbit_speed'],
+                        quality=chosen['quality'],keep_frames=chosen['keep_frames'],inspection_sidecars=chosen['inspection_sidecars'])
+            traces=movie(p,j)
+            check(j['quality']=='compact' and j['keep_frames'] and j['inspection_sidecars'],
+                  name+': H.264 and temporary-output selections reach the worker job')
+            check(all(t['clean_view']==(name=='scientific') and not t['overlays'] for t in traces),
+                  name+': dialog rendering and overlay choices reach worker frames')
+            check(all(abs(t['capture_time']-(.1+n/24*.75))<1e-10 for n,t in enumerate(traces)),
+                  name+': dialog FPS and capture-time rate reach worker frames')
+            center=np.asarray(chosen['state']['camera_target'])
+            origin=np.asarray(chosen['state']['camera_transform'][3])
+            for n,t in enumerate(traces):
+                angle=chosen['orbit_speed']*n/chosen['fps']
+                c,s=math.cos(angle),math.sin(angle)
+                expected=center+np.array([[c,0,s],[0,1,0],[-s,0,c]])@(origin-center)
+                check(np.allclose(t['camera_origin'],expected,atol=1e-5),
+                      name+f'/{n}: dialog orbit rate reaches worker camera')
+            rendered[name]=hashlib.sha256((p.parent/'frames/frame00000000.png').read_bytes()).hexdigest()
+        check(len(set(rendered.values()))==3,'Current, Cinematic and Scientific dialog selections render distinct frames')
         check(hashlib.sha256((base/'fixture.wvz').read_bytes()).hexdigest()==capture_hash,'source capture bytes unchanged')
-        record('ALL OVERLAY UI TESTS PASSED\nArtifacts: '+str(run))
+        record('ALL VIEWPORT OVERLAY TESTS PASSED\nArtifacts: '+str(run))
         return
     if args.continuation:
         p,j=job_for('1440p 24fps',width=2560,height=1440,fps=24,end_time=.2);movie(p,j)

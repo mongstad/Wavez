@@ -32,12 +32,12 @@ func run() -> void:
 	check(viewer.history.is_empty() and viewer.trail_mms.all(func(mm): return mm.instance_count == 0), "disabled trails allocate no instances/history")
 	check(viewer.screenshot_directory.is_empty(), "screenshot folder starts empty")
 	viewer._save_image()
-	check(viewer.screenshot_pending and viewer.screenshot_dialog.visible, "first screenshot prompts for destination")
+	check(viewer.screenshot_pending and viewer.screenshot_dialog.use_native_dialog, "first screenshot requests native destination picker")
 	viewer.screenshot_dialog.hide()
 	viewer.screenshot_dialog.canceled.emit()
 	check(not viewer.screenshot_pending and viewer.screenshot_directory.is_empty() and viewer.screenshot_count == 0, "cancel creates no screenshot and chooses no fallback")
 	viewer._save_image()
-	check(viewer.screenshot_dialog.visible, "cancelled choice prompts again")
+	check(viewer.screenshot_pending and viewer.screenshot_dialog.use_native_dialog, "cancelled choice requests native picker again")
 	var folder := fixture.path_join("screenshots")
 	DirAccess.make_dir_recursive_absolute(folder)
 	var screenshots_before := DirAccess.get_files_at(folder).size()
@@ -59,7 +59,7 @@ func run() -> void:
 	second.playing = false; second.orbit_enabled = false
 	check(second.screenshot_directory.is_empty(), "new viewer session does not inherit screenshot folder")
 	second._save_image()
-	check(second.screenshot_dialog.visible, "new session prompts again")
+	check(second.screenshot_pending and second.screenshot_dialog.use_native_dialog, "new session requests its own native picker")
 	second.screenshot_dialog.hide()
 	# Let the new viewport finish its first draw before destroying its sky.
 	# Godot 4.7.2 Compatibility leaks sky-filter textures if this viewport is
@@ -157,10 +157,52 @@ func run() -> void:
 	viewer.video_dialog.start.value = .1
 	viewer.video_dialog.end.value = .7
 	viewer.video_dialog.rate.value = 1
+	var live_state: Dictionary = Job.snapshot(viewer)
+	viewer.clean_view = false
+	viewer.environment.glow_enabled = false
+	viewer.environment.fog_enabled = false
+	viewer.environment.background_mode = Environment.BG_COLOR
+	var dialog = viewer.video_dialog
+	dialog.camera_mode.select(1); dialog.orbit.value = .31
+	dialog.fps.value = 24; dialog.rate.value = .75
+	dialog.width.value = 640; dialog.height.value = 360
+	dialog.quality.select(2); dialog.keep.button_pressed = true; dialog.inspection_sidecars.button_pressed = true
+	dialog.trails.button_pressed = true; dialog.overlays.button_pressed = false
+	dialog.rendering.select(0)
+	var current: Dictionary = dialog.configured_job()
+	dialog.rendering.select(1)
+	var cinematic: Dictionary = dialog.configured_job()
+	dialog.rendering.select(2)
+	var scientific: Dictionary = dialog.configured_job()
+	check(not current.state.clean_view and not current.state.environment.glow_enabled and not current.state.environment.fog_enabled,
+		"Current state preserves selected live rendering without a preset substitution")
+	check(not cinematic.state.clean_view and cinematic.state.environment.glow_enabled and cinematic.state.environment.fog_enabled and cinematic.state.environment.background_mode == Environment.BG_SKY,
+		"Cinematic rendering selection reaches the job state")
+	check(scientific.state.clean_view and not scientific.state.environment.glow_enabled and not scientific.state.environment.fog_enabled and scientific.state.environment.background_mode == Environment.BG_COLOR,
+		"Scientific rendering selection reaches the job state")
+	for configured in [current, cinematic, scientific]:
+		check(configured.fps == 24 and is_equal_approx(configured.playback_rate,.75) and configured.width == 640 and configured.height == 360 and configured.camera_mode == "orbit" and is_equal_approx(configured.orbit_speed,.31),
+			"Rendering selection preserves dialog timing, resolution and camera settings: " + JSON.stringify([configured.fps,configured.playback_rate,configured.width,configured.height,configured.camera_mode,configured.orbit_speed]))
+		check(not configured.state.overlay_visible and configured.state.trails_enabled,
+			"Export overlay and trail choices override live shell and trail visibility")
+		check(is_equal_approx(configured.start_time,.1) and is_equal_approx(configured.end_time,.7) and configured.quality == "compact" and configured.keep_frames and configured.inspection_sidecars,
+			"Rendering selection preserves dialog range, H.264 quality and temporary-output choices")
+	dialog.overlays.button_pressed = true
+	check(dialog.configured_job().state.overlay_visible,"Enabling export overlays reaches the configured job")
+	Job.write_json(directory.path_join("dialog-rendering-jobs.json"), {"current":current,"cinematic":cinematic,"scientific":scientific})
+	Job.apply(viewer,live_state)
+	dialog.rendering.select(0); dialog.camera_mode.select(0)
+	dialog.fps.value = 30; dialog.rate.value = 1
+	dialog.width.value = 1920; dialog.height.value = 1080
+	dialog.quality.select(0); dialog.keep.button_pressed = false; dialog.inspection_sidecars.button_pressed = false
+	dialog.trails.button_pressed = viewer.trails_enabled; dialog.overlays.button_pressed = viewer.overlay_visible
 	viewer.video_dialog.output.text = directory.path_join("ui launch %d.mp4" % Time.get_ticks_usec())
 	var before_frame: int = viewer.current_index
 	viewer.video_dialog.start_export()
 	check(viewer.video_dialog.pid > 0, "UI launches separate render process")
+	var written_job: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(viewer.video_dialog.active_job_path))
+	check(written_job.state.overlay_visible == dialog.overlays.button_pressed and written_job.state.trails_enabled == dialog.trails.button_pressed,
+		"Actual UI launch writes export-specific overlay and trail choices to the worker job")
 	var launch := Job.launch_arguments(viewer.video_dialog.active_job_path,30)
 	check(not launch.has("--headless") and launch.has("--log-file"), "GPU worker retains persistent renderer diagnostics")
 	viewer._step_frame(1)
@@ -183,33 +225,35 @@ func run() -> void:
 
 func check_export_shell(source) -> void:
 	var state := Job.snapshot(source)
+	state.show_legend = true
+	state.color_channel = "temperature"
 	state.overlay_visible = false
 	var images: Array = []
-	for current in [false,true]: # Repeat the same production path; no retired UI baseline.
+	for current in [false,true]: # Repeat the same viewport-only production path.
 		var vp := SubViewport.new(); vp.size = Vector2i(1440,810); vp.own_world_3d = true; vp.render_target_update_mode = SubViewport.UPDATE_ALWAYS; root.add_child(vp)
 		var view = load("res://main.gd").new(); view.offline_instance = true
 		view.capture_path = fixture.path_join("fixture.wvz"); vp.add_child(view); view.set_process(false)
 		Job.apply(view,state); view.playing = false; view.orbit_enabled = false
 		check(view.shell != null,"Export uses the production shell component")
 		view.shell.prepare_export({"workspace":1,"scroll":0,"remaining":true})
-		check(not view.shell.visible and not view.overlay_panel.visible and not view.legend.visible,"Overlay off hides application chrome and its coupled legend")
+		check(not view.shell.visible and not view.overlay_panel.visible and not view.legend.visible,"Overlay off excludes shell chrome and legend")
 		for i in 4: await process_frame
 		RenderingServer.force_draw(false)
 		var image := vp.get_texture().get_image()
 		image.save_png(fixture.path_join("scientific-only-"+str(current)+".png"))
 		images.append(image.get_data())
 		if current:
-			view.overlay_visible = true; view.shell.refresh_export()
+			view.overlay_visible = true; view._update_particle_legend(); view.shell.refresh_export()
 			for i in 4: await process_frame
-			check(view.shell.bar.visible and view.shell.transport.is_visible_in_tree() and view.shell.status_ui.is_visible_in_tree(),"Export includes current command bar transport and status")
-			check(view.shell.workspace == 1 and view.shell.transport.show_remaining,"Export restores workspace and duration presentation")
-			check(not view.shell.fullscreen_button.visible and not view.shell.immersive_hint.visible and not view.video_dialog.visible,"Export excludes desktop recovery hints and export dialogs")
-			check(view.shell.bar.size.x == 1440 and view.overlay_panel.position.x > 1000,"Export uses full-width bar and current right dock")
-			check(view.overlay_panel.get_rect().end.y <= view.shell.transport.position.y,"Export dock does not overlap transport")
+			check(not view.shell.visible and not view.overlay_panel.visible and not view.resize_handle.visible,"Export overlay choice never includes shell, dock or resize chrome")
+			check(view.legend.is_visible_in_tree() and view.colorbar.is_visible_in_tree(),"Export overlay choice retains enabled scientific legend")
+			check(view.shell.workspace == 1 and view.shell.transport.show_remaining,"Export retains selected presentation state without showing shell")
+			check(not view.shell.immersive_hint.visible and not view.video_dialog.visible,"Export excludes desktop hints and export dialogs")
+			check(view.shell.legend_available == Vector2(1440,810),"Export legend uses full viewport bounds")
 			check(view.camera.transform == source.camera.transform,"Export shell retains camera framing")
-			vp.get_texture().get_image().save_png(fixture.path_join("export-shell.png"))
+			vp.get_texture().get_image().save_png(fixture.path_join("export-legend.png"))
 		vp.queue_free(); await process_frame
-	check(images[0] == images[1],"Repeated production-shell overlay-off pixels are identical")
+	check(images[0] == images[1],"Repeated viewport-only overlay-off pixels are identical")
 	var valid: Dictionary = source.video_dialog.settings(); valid.state = state
 	valid.output_path = fixture.path_join("valid-presentation.mp4")
 	check(Job.validate(valid).is_empty(),"Baseline export presentation job validates")

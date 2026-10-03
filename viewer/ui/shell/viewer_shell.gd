@@ -420,9 +420,11 @@ func layout() -> void:
 	# Preserve the root camera projection and export sampling. This is overlay chrome.
 	var too_narrow := extent.x < 970
 	if not viewer.offline_instance and not immersive: viewer.overlay_visible = edge_reveal.states.right.visible
-	var dock_visible: bool = viewer.overlay_visible if viewer.offline_instance else edge_reveal.states.right.visible
-	bar.visible = edge_reveal.states.top.visible
-	bottom_strip.visible = edge_reveal.states.bottom.visible
+	# The offline SubViewport is the video frame. Keep its scientific legends,
+	# but never reserve or render space for application controls.
+	var dock_visible: bool = false if viewer.offline_instance else edge_reveal.states.right.visible
+	bar.visible = not viewer.offline_instance and edge_reveal.states.top.visible
+	bottom_strip.visible = not viewer.offline_instance and edge_reveal.states.bottom.visible
 	var width := clampf(viewer.panel_width, 320, maxf(320, minf(560, extent.x - 650)))
 	if too_narrow: width = minf(560, extent.x)
 	var top := 48.0 if bar.visible else 0.0
@@ -531,8 +533,9 @@ func prepare_export(state: Dictionary) -> void:
 
 func refresh_export() -> void:
 	refresh(); transport.refresh(); status_ui.refresh(); layout()
-	visible = viewer.overlay_visible
-	# Scientific annotations remain outside the shell, with their existing gates.
+	# Export Overlays gates eligible scientific annotations, never shell chrome.
+	visible = false
+	# Legends are siblings of this shell and retain their own export gates.
 
 func build_menus(row: HBoxContainer) -> void:
 	for entry in [["File","open"],["Edit","view"],["View","view"],["Tools","analysis"],["Help","help"]]:

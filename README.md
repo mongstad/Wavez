@@ -15,6 +15,8 @@ and [persistent status and Jobs](docs/UX3_STATUS.md). Recorded-time playback,
 [immersive fullscreen](docs/UX3_FULLSCREEN.md) and production-shell video overlays
 are owner-merged, including final [UX3 integration validation](docs/UX3_REPORT.md)
 in PR #64. The [UX4 design](docs/UX4_DESIGN.md) was owner-merged in PR #72.
+The current candidate [video composition](docs/VIDEO_VIEWPORT_EXPORT.md) exports
+viewport science and enabled legends without application chrome.
 [UX4 command menus](docs/UX4_MENUS.md) were owner-merged in PR #73.
 The [category simulation panel](docs/UX4_PANEL.md) was owner-merged in PR #75.
 [Focused scientific tools](docs/UX4_TOOLS.md) are pending owner review under #69.
@@ -31,6 +33,7 @@ Start with:
 - [Edit orbit center and radius](docs/ORBIT_CENTER.md)
 - [Current status](docs/CURRENT_STATUS.md)
 - [File and Tools dialog layout](docs/DIALOG_COHERENCE.md)
+- [Viewport-only video export](docs/VIDEO_VIEWPORT_EXPORT.md)
 - [Violet UI cleanup and owner checks](docs/UX5_CLEANUP.md)
 - [Application version and build policy](docs/VERSIONING.md) — view the identity in Help → About
 - [Pinned edge reveal and Fullscreen](docs/WINDOW_EDGE_REVEAL.md)

@@ -1,10 +1,17 @@
 # Current status
 
-Issue #161 gives File and Tools application-owned dialogs a compact Wavez
+Issue #198 confines video frames to the scientific viewport and enabled
+viewport legends. The Video Export dialog remains authoritative for rendering
+preset, overlays, camera, timing, resolution and other job settings; shell
+controls stay outside the frame. Candidate build 34 awaits owner review. See
+the [current export contract](../VIDEO_EXPORT.md) and
+[viewport composition evidence](VIDEO_VIEWPORT_EXPORT.md).
+
+Owner-merged issue #161 gives File and Tools application-owned dialogs a compact Wavez
 surface, consistent actions and scrolling, and removes repeated loaded-scene
 identity from tool headings. Genuine filesystem selection uses the native
 desktop picker where supported. The accepted #181 Open File picker and its
-WVZ1 filter remain unchanged. Candidate build 33 awaits owner visual review;
+WVZ1 filter remain unchanged. Build 33 was accepted in PR #223;
 see the [route inventory, dimensions and screenshots](DIALOG_COHERENCE.md).
 
 Issue #182's [clean-break design](FORMAT_IDENTITY_PROPOSAL.md) was owner-merged
