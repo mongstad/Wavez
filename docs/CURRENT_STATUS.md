@@ -1,12 +1,14 @@
 # Current status
 
-Issue #190 adds right-drag manual camera orbit around the current scene target.
+Issue #190 adds right-drag horizontal camera orbit about world Y around the
+current scene target. Vertical right-drag motion leaves pitch unchanged.
 The gesture works across particle, volume, mesh and mixed scenes without selecting
 an object. Its angular sensitivity changes smoothly with camera distance and
 viewport size; left-drag tumble, zoom, Frame Scene and Auto Orbit retain their
 existing roles. Candidate build 26 is **pending owner review**. See
-[usage and owner checks](MANUAL_CAMERA_ORBIT.md). Historical review-time reports
-below retain their original wording.
+[usage and owner checks](MANUAL_CAMERA_ORBIT.md) and the
+[revised validation](evidence/issue-190/revision-1/README.md). The original
+review-time report remains a historical record of the first candidate.
 
 Issue #195 adds a bounded CPU worker pool, decoded endpoint reuse and exact-match
 stable-topology reuse for sustained mesh playback. The pool adapts to CPU capacity

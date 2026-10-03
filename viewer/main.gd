@@ -505,7 +505,7 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and manual_orbit_dragging:
 		var movement: Vector2 = event.position - manual_orbit_last_mouse
 		manual_orbit_last_mouse = event.position
-		_orbit_camera_by_drag(movement, _manual_orbit_sensitivity())
+		_orbit_camera_horizontally(movement.x, _manual_orbit_sensitivity())
 		get_viewport().set_input_as_handled()
 		return
 	# Recovery precedes GUI, busy-inspection and selection input handling.
@@ -569,6 +569,11 @@ func _orbit_camera_by_drag(movement: Vector2, sensitivity: float) -> void:
 	if movement == Vector2.ZERO: return
 	yaw -= movement.x * sensitivity
 	pitch -= movement.y * sensitivity
+	_update_camera()
+
+func _orbit_camera_horizontally(horizontal_delta: float, sensitivity: float) -> void:
+	if horizontal_delta == 0.0: return
+	yaw -= horizontal_delta * sensitivity
 	_update_camera()
 
 func _zoom_camera(event: InputEventMouseButton, inward: bool) -> void:

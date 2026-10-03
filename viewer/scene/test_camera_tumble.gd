@@ -51,9 +51,33 @@ func manual_orbit_tests(viewer, kind: String) -> void:
 	var initial_pitch: float = viewer.pitch
 	var sensitivity: float = viewer._manual_orbit_sensitivity()
 	manual_orbit(viewer, Vector2(80, -60))
-	check(is_equal_approx(viewer.yaw, initial_yaw - 80*sensitivity) and is_equal_approx(viewer.pitch, initial_pitch + 60*sensitivity), kind + " right drag follows shared yaw and pitch")
+	check(is_equal_approx(viewer.yaw, initial_yaw - 80*sensitivity) and viewer.pitch == initial_pitch, kind + " right drag changes yaw only despite vertical motion")
 	check(viewer.camera_target == target and viewer.camera_distance == radius and absf(viewer.camera.position.distance_to(target)-radius) < .0001, kind + " orbit preserves center and radius")
+	check(is_equal_approx(viewer.camera.position.y, target.y + radius * sin(initial_pitch)) and viewer.camera.basis.z.dot((viewer.camera.position-target).normalized()) > .99999, kind + " right orbit holds elevation and looks at center")
 	check(viewer.committed_sample == sample, kind + " orbit leaves committed scientific sample untouched")
+	var before_vertical: Transform3D = viewer.camera.transform
+	var yaw_before_vertical: float = viewer.yaw
+	manual_orbit(viewer, Vector2(0, 150))
+	check(viewer.yaw == yaw_before_vertical and viewer.pitch == initial_pitch and viewer.camera.transform == before_vertical, kind + " vertical-only right drag leaves the camera unchanged")
+	var circle_pixels: float = TAU / sensitivity
+	for direction in [-1.0, 1.0]:
+		var start: Transform3D = viewer.camera.transform
+		var starting_yaw: float = viewer.yaw
+		var start_horizontal := Vector2(start.origin.x-target.x, start.origin.z-target.z).normalized()
+		var circle_press := InputEventMouseButton.new()
+		circle_press.button_index = MOUSE_BUTTON_RIGHT; circle_press.pressed = true; circle_press.position = Vector2(480, 320)
+		viewer._unhandled_input(circle_press)
+		for step in range(1, 73):
+			var circle_motion := InputEventMouseMotion.new()
+			circle_motion.position = circle_press.position + Vector2(direction * circle_pixels * step / 72.0, 120.0 * step / 72.0)
+			viewer._input(circle_motion)
+			check(viewer.pitch == initial_pitch and viewer.camera_target == target and viewer.camera_distance == radius and absf(viewer.camera.position.distance_to(target)-radius) < .0001 and absf(viewer.camera.position.y-start.origin.y) < .0001 and viewer.camera.basis.z.dot((viewer.camera.position-target).normalized()) > .99999, kind + " full-circle orbit keeps elevation, center, radius and aim at step " + str(step) + " direction " + str(direction))
+			if step == 36:
+				var opposite_horizontal := Vector2(viewer.camera.position.x-target.x, viewer.camera.position.z-target.z).normalized()
+				check(start_horizontal.dot(opposite_horizontal) < -.999, kind + " half-circle reaches opposite side in direction " + str(direction))
+		circle_press.pressed = false; viewer._input(circle_press)
+		check(is_equal_approx(viewer.yaw, starting_yaw - direction * TAU) and close_transform(start, viewer.camera.transform), kind + " full horizontal revolution returns to starting view without tilt in direction " + str(direction))
+	check(viewer.committed_sample == sample, kind + " full-circle orbit leaves committed scientific sample untouched")
 	var stopped: Transform3D = viewer.camera.transform
 	var stray := InputEventMouseMotion.new(); stray.position = Vector2(700, 500); viewer._input(stray)
 	check(viewer.camera.transform == stopped, kind + " released right drag does not move camera")

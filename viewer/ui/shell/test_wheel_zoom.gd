@@ -32,19 +32,33 @@ func orbit_dispatch(view, label: String) -> void:
 	var target: Vector3 = view.camera_target
 	var radius: float = view.camera_distance
 	var yaw: float = view.yaw
+	var pitch: float = view.pitch
 	var sample: Dictionary = view.committed_sample.duplicate(true)
 	var mesh_points: Dictionary = {}
 	for id in view.scene_layers.views:
 		var layer = view.scene_layers.views[id]
 		if layer is MeshView: mesh_points[id] = layer.source_positions.duplicate()
-	var point: Vector2 = view.get_viewport().get_visible_rect().size * .5
+	var viewport_size: Vector2 = view.get_viewport().get_visible_rect().size
+	var point: Vector2 = viewport_size * .5
+	if not view.shell.edge_reveal.is_viewport_point(point):
+		for fraction in [.35, .25, .15]:
+			var candidate := Vector2(viewport_size.x * fraction, viewport_size.y * .5)
+			if view.shell.edge_reveal.is_viewport_point(candidate):
+				point = candidate
+				break
+	check(view.shell.edge_reveal.is_viewport_point(point), label + " has an unobstructed viewport drag point")
 	var press := InputEventMouseButton.new()
 	press.button_index = MOUSE_BUTTON_RIGHT; press.pressed = true; press.position = point
 	root.push_input(press, true)
 	check(view.manual_orbit_dragging, label + " viewport dispatch starts right-drag orbit")
 	var motion := InputEventMouseMotion.new(); motion.position = point + Vector2(80, 40); motion.relative = Vector2(80, 40); motion.button_mask = MOUSE_BUTTON_MASK_RIGHT
 	root.push_input(motion, true)
-	check(view.yaw != yaw and view.camera_target == target and is_equal_approx(view.camera_distance, radius), label + " right drag moves camera on same center and radius")
+	check(view.yaw != yaw and view.pitch == pitch and view.camera_target == target and is_equal_approx(view.camera_distance, radius), label + " right drag moves camera horizontally on same center, elevation and radius")
+	var after_horizontal: Transform3D = view.camera.transform
+	var after_yaw: float = view.yaw
+	motion.position = point + Vector2(80, 120); motion.relative = Vector2(0, 80)
+	root.push_input(motion, true)
+	check(view.yaw == after_yaw and view.pitch == pitch and view.camera.transform == after_horizontal, label + " vertical-only right motion does not tumble camera")
 	check(view.committed_sample == sample, label + " manual orbit preserves scientific time")
 	for id in mesh_points: check(view.scene_layers.views[id].source_positions == mesh_points[id], label + " manual orbit preserves mesh vertices")
 	if label == "cavity-collapse":
@@ -147,7 +161,7 @@ func run() -> void:
 			root.mode = mode; await settle(); var before: float = view.camera_distance
 			wheel(view,true); wheel(view,false)
 			check(is_equal_approx(view.camera_distance,before),"Window mode keeps progressive zoom "+str(mode))
-			if mode == Window.MODE_FULLSCREEN and external.is_empty(): await orbit_dispatch(view, "fullscreen")
+			if mode == Window.MODE_FULLSCREEN and external.is_empty(): await orbit_dispatch(view, "fullscreen " + str(layout[0]) + " scale " + str(layout[1]))
 		root.get_texture().get_image().save_png(output.path_join("zoom-"+str(layout[0].x)+"-"+str(layout[1])+".png"))
 	var report := {"checks":checks,"failures":failures,"cases":cases,"layouts":layouts,"renderer":RenderingServer.get_current_rendering_method(),"display_driver":DisplayServer.get_name(),"packaged":not OS.has_feature("editor")}
 	FileAccess.open(output.path_join("zoom-report.json"),FileAccess.WRITE).store_string(JSON.stringify(report,"\t"))

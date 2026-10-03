@@ -44,7 +44,7 @@ func refresh_shortcut_hints() -> void:
 	shortcut_hints_map = shortcuts.active.duplicate()
 	navigation.get_child(0).tooltip_text = "Frame scene" + shortcuts.hint("frame_scene")
 	navigation.get_child(1).tooltip_text = "Reset camera" + shortcuts.hint("reset_camera")
-	navigation.get_child(2).tooltip_text = "Navigate" + shortcuts.hint("navigate") + " · Right-drag the viewport to orbit the camera"
+	navigation.get_child(2).tooltip_text = "Navigate" + shortcuts.hint("navigate") + " · Right-drag the viewport to orbit horizontally"
 	for pair in [["fullscreen","fullscreen"],["open","open_capture"],["video","export_video"],["tool:Mapping","mapping"],["tool:Derive range","derive_range"]]:
 		var entry: Dictionary = commands[pair[0]]
 		var shortcut := Shortcut.new()
@@ -159,7 +159,7 @@ func setup(owner_viewer) -> void:
 	row.move_child(navigation, 0)
 	var frame_action := button(navigation, "", viewer._focus_activity, "frame"); frame_action.tooltip_text = "Frame scene [F]"
 	var reset_action := button(navigation, "", viewer._reset_camera, "reset"); reset_action.tooltip_text = "Reset camera [R]"
-	var navigate := MenuButton.new(); navigate.flat = false; navigate.icon = icon("view"); navigate.tooltip_text = "Navigate [Alt+N] · Right-drag the viewport to orbit the camera"; navigate.custom_minimum_size.y = 32; navigation.add_child(navigate); decorate_menu(navigate)
+	var navigate := MenuButton.new(); navigate.flat = false; navigate.icon = icon("view"); navigate.tooltip_text = "Navigate [Alt+N] · Right-drag the viewport to orbit horizontally"; navigate.custom_minimum_size.y = 32; navigation.add_child(navigate); decorate_menu(navigate)
 	var modes := navigate.get_popup(); modes.add_check_item("Free camera"); modes.add_check_item("Auto orbit"); modes.add_item("Orbit speed"); modes.add_item("Edit orbit center…")
 	navigate.about_to_popup.connect(func(): modes.set_item_checked(0, viewer.free_camera); modes.set_item_checked(1, viewer.orbit_enabled))
 	modes.id_pressed.connect(func(id):

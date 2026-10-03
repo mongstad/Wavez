@@ -38,9 +38,10 @@ styling. **Cancel**, X or dismissal silently discards only edits made since the
 last successful Apply; already applied bindings stay active and saved. A save
 failure keeps the editor open and the active map intact.
 Viewport actions and free-camera movement cannot run through this modal editor.
-Right-drag in the viewport manually orbits the camera around the current scene
-target. This mouse gesture has no editable key binding; its hint appears on the
-Navigate control. It works with Auto Orbit off and any visible scene type.
+Right-drag in the viewport orbits the camera horizontally about world Y around
+the current scene target. Vertical motion does not change pitch. This mouse
+gesture has no editable key binding; its hint appears on the Navigate control.
+It works with Auto Orbit off and any visible scene type.
 Existing text-entry, selection and busy-inspection guards remain authoritative.
 
 The separate ConfigFile at `user://keyboard_shortcuts.cfg`, section `shortcuts`,
