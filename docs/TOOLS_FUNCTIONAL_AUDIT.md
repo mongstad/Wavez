@@ -132,7 +132,7 @@ Results; there is no separate hidden comparison result store.
 | Compare: **Comparison** (left−right/left÷right), **Comparison times** (exact/common schedule), **Schedule start/step/samples**, **Compare** | Produces a named difference/ratio. Exact times leave unmatched support missing; a declared schedule evaluates only supported holds/position interpolation with native provenance. | Scientific result; A/B. Gate schedule fields to schedule mode. |
 | Compare: **Add current series to shared plot**, **Clear shared plot**, overlay | Displays up to 16 bound series on mapped axes, retaining each native clock/support. Clear affects plot bindings, not stored results. | Presentation/session; A. |
 | Period: **Selected result/Plot series**, **Start/End** through Temporal, **Period estimate method** (peak spacing/autocorrelation), **Detrend** (mean/linear), **Minimum/Maximum lag**, **Minimum peak separation/prominence**, **Use uniform sampling assumption**, **Hold-resampling step**, **Estimate**, **Edit range** | Exploratory estimate over a selected scalar series and Temporal range. Autocorrelation needs supported uniform sampling or explicit hold resampling; resampling does not create observations. Prominence is normalized-signal, not source-unit, magnitude. Edit range navigates to the Temporal request. | Scientific result plus navigation; A/B. Do not imply physical event detection. |
-| Bookmarks: **Name**, **Manual bookmarks**, **Save time and camera bookmark**, **Go to bookmark**, **Use bookmark as manual offset**, **Delete bookmark**, **Time mapping** | Saves exact source/time and a visual snapshot; Go validates the same source, pauses and seeks **time only**. The stored camera snapshot is not applied by Go. Offset copies saved time and origin into Compare; Time mapping opens Compare. | Session/recipe provenance; **C**. Current “time and camera” wording implies a camera restore that does not occur. Rename as a time bookmark or specify a separate camera restore in a future UX issue. |
+| Bookmarks: **Name**, **Manual bookmarks**, **Save time and camera bookmark**, **Go to bookmark**, **Use bookmark as manual offset**, **Delete bookmark**, **Time mapping** | Saves exact source/time and a visual snapshot; Go validates the same source, pauses and seeks **time only**. The stored camera snapshot is not applied by Go. Creation requires a pinned `Selections.source.sha256`, obtained through **Use current capture** even with no Selection definitions. Offset copies saved time and origin into Compare; Time mapping opens Compare. | Session/recipe provenance; **C**. Current “time and camera” wording implies a camera restore that does not occur. The Selection binding requirement is unnecessary for session timeline navigation; decouple it in a separate issue while preserving durable recipe identity checks. |
 
 ### Results and Matched runs
 
@@ -226,6 +226,55 @@ source path. No **F** classification was needed to describe present code
 behavior. Whether a particular external capture's declarations justify a
 physical interpretation still needs that source's metadata and the owner's
 domain judgment; this audit makes no such claim.
+
+### Owner review finding: bookmark seek and Selection memory
+
+The owner observed **Selections — Failed: Requested scientific workspace
+exceeds its memory budget** after a bookmark seek in `free_collapse.wvz` (mixed
+50,000 particles, 192³ volume). Playback was ready and reported its own
+particle/field cache. This is a *scientific worker request* error, not the
+playback cache's capacity message:
+
+1. [`diagnostics_controller.gd`](../viewer/analysis/diagnostics_controller.gd)
+   requires `temporal.selections.source.sha256` to create a bookmark. The user
+   must therefore run Selection's **Use current capture** first, even when no
+   selection membership is needed. **Go to bookmark** validates that same
+   pinned source, pauses and calls the viewer's time seek; it submits no
+   analysis request itself.
+2. [`selection_controller.gd`](../viewer/selection/selection_controller.gd)
+   watches committed time when at least one Selection definition exists. If a
+   visible definition's source bracket changes on seek, it can submit
+   `resolve_selections` to refresh markers and counts. With **zero** definitions,
+   that per-frame path returns immediately and cannot start such a request.
+3. [`selection_jobs.py`](../wavez_export/analysis/selection_jobs.py) reserves
+   `max(recorded grid-cell count) × 512 + 1 MiB` for a volume membership query
+   before loading the sample. At 192³ cells this is **3,457 MiB**, exceeding
+   the [`analysis_jobs.gd`](../viewer/analysis/analysis_jobs.gd) **512 MiB**
+   per-request ceiling. A bounded Selection location **Probe** returns before this
+   membership reservation; a volume ROI/grid membership does not. A 50,000
+   particle membership's analogous base reservation is about **25.4 MiB**.
+   The error text comes from [`Context.acquire`](../wavez_export/analysis/contracts.py),
+   so raising playback cache capacity would not resolve it. Raising the worker
+   ceiling blindly would weaken physical-memory safeguards.
+4. [`viewer_status.gd`](../viewer/ui/shell/viewer_status.gd) retains failure
+   messages until acknowledged. Its **Retained failures** display does not
+   timestamp the failing operation. The owner could not recall whether any
+   Selection definitions existed. Thus a seek-triggered volume query is a
+   plausible mechanism, **not a confirmed attribution** for this occurrence;
+   if the list was empty, the failure came from an earlier or different
+   foreground Selection request. This event's exact trigger remains **F**.
+
+Recommendation: session bookmarks should bind to the currently open capture
+and its committed timeline without requiring the Selection analysis source.
+Portable recipe export may still require a verified source hash and must keep
+its source-identity safeguards. Separately, large-grid Selection membership
+needs a bounded/tiled workspace design or an explicit size refusal before the
+request; changing that computation is outside this audit. A focused reproduction
+should clear retained failures, note the Selection list and active request, then
+seek with an empty list and with a visible 192³ volume ROI separately. A
+synthetic Context/selection-workspace check reproduced the **3,457 MiB versus
+512 MiB** refusal without reading the owner's capture. No live `free_collapse`
+scientific worker request was replayed in this audit.
 
 ## Evidence and limits
 
