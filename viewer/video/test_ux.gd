@@ -166,7 +166,7 @@ func run() -> void:
 	dialog.camera_mode.select(1); dialog.orbit.value = .31
 	dialog.fps.value = 24; dialog.rate.value = .75
 	dialog.width.value = 640; dialog.height.value = 360
-	dialog.quality.select(2); dialog.keep.button_pressed = true; dialog.inspection_sidecars.button_pressed = true
+	dialog.quality.select(2); dialog.inspection_sidecars.button_pressed = true
 	dialog.trails.button_pressed = true; dialog.overlays.button_pressed = false
 	dialog.rendering.select(0)
 	var current: Dictionary = dialog.configured_job()
@@ -185,7 +185,7 @@ func run() -> void:
 			"Rendering selection preserves dialog timing, resolution and camera settings: " + JSON.stringify([configured.fps,configured.playback_rate,configured.width,configured.height,configured.camera_mode,configured.orbit_speed]))
 		check(not configured.state.overlay_visible and configured.state.trails_enabled,
 			"Export overlay and trail choices override live shell and trail visibility")
-		check(is_equal_approx(configured.start_time,.1) and is_equal_approx(configured.end_time,.7) and configured.quality == "compact" and configured.keep_frames and configured.inspection_sidecars,
+		check(is_equal_approx(configured.start_time,.1) and is_equal_approx(configured.end_time,.7) and configured.quality == "compact" and not configured.keep_frames and configured.inspection_sidecars,
 			"Rendering selection preserves dialog range, H.264 quality and temporary-output choices")
 	dialog.overlays.button_pressed = true
 	check(dialog.configured_job().state.overlay_visible,"Enabling export overlays reaches the configured job")
@@ -194,7 +194,7 @@ func run() -> void:
 	dialog.rendering.select(0); dialog.camera_mode.select(0)
 	dialog.fps.value = 30; dialog.rate.value = 1
 	dialog.width.value = 1920; dialog.height.value = 1080
-	dialog.quality.select(0); dialog.keep.button_pressed = false; dialog.inspection_sidecars.button_pressed = false
+	dialog.quality.select(0); dialog.inspection_sidecars.button_pressed = false
 	dialog.trails.button_pressed = viewer.trails_enabled; dialog.overlays.button_pressed = viewer.overlay_visible
 	viewer.video_dialog.output.text = directory.path_join("ui launch %d.mp4" % Time.get_ticks_usec())
 	var before_frame: int = viewer.current_index

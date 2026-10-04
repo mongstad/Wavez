@@ -6,6 +6,10 @@ Export summary becomes Export status while a job is active or retained; long
 status details scroll within that area so the settings and actions remain
 reachable at the minimum dialog size. The cancellation confirmation asks only
 “Cancel video export?” with spaced Yes/No actions and No initially focused.
+The owner follow-up labels the existing simulation-time control Playback rate,
+removes duplicate paths from normal dialog status, automatically cleans PNGs
+after successful MP4 export, and places optional ordinary inspection JSON under
+collapsed Advanced. Selection-aware version-2 sidecars remain mandatory.
 Export timing, rendering and cancellation protocols are unchanged. See
 [the video export guide](../VIDEO_EXPORT.md).
 

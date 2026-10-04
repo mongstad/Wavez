@@ -8,6 +8,7 @@ const Job = preload("res://video/render_job.gd")
 const Timeline = preload("res://video/offline_timeline.gd")
 const ProgressDetails = preload("res://video/progress_details.gd")
 const TitledGroup = preload("res://ui/shell/titled_group.gd")
+const Disclosure = preload("res://ui/components/disclosure.gd")
 var viewer
 var timeline
 var range_choice: OptionButton
@@ -22,7 +23,6 @@ var orbit: SpinBox
 var rendering: OptionButton
 var overlays: CheckButton
 var trails: CheckButton
-var keep: CheckButton
 var inspection_sidecars: CheckButton
 var output: LineEdit
 var quality: OptionButton
@@ -42,6 +42,7 @@ var video_fields: GridContainer
 var camera_fields: GridContainer
 var presentation_fields: GridContainer
 var output_fields: GridContainer
+var inspection_advanced
 var summary_group
 var groups: Dictionary = {}
 var pid := -1
@@ -52,6 +53,7 @@ var opened_current := 0.0
 var ffmpeg := ""
 var g4_quota: SpinBox
 var preparing := false
+var active_selection_aware := false
 var preparation_cancelled := false
 var last_progress: Dictionary = {}
 var launch_ticks := 0
@@ -94,7 +96,8 @@ func _ready() -> void:
 	video_fields = group_rows(add_group(fields, "Video"))
 	camera_fields = group_rows(add_group(fields, "Camera"))
 	presentation_fields = group_rows(add_group(fields, "Presentation"))
-	output_fields = group_rows(add_group(fields, "Output"))
+	var output_group = add_group(fields, "Output")
+	output_fields = group_rows(output_group)
 	range_choice = choice("Mode", ["Full", "Current position to end", "Custom"], range_fields)
 	start = number("Start", 0, -1e30, 1e30, .0001, range_fields)
 	end = number("End", 1, -1e30, 1e30, .0001, range_fields)
@@ -118,8 +121,8 @@ func _ready() -> void:
 		fps.editable = i == 3
 		if i < 3: fps.value = [24,30,60][i]
 	)
-	rate = number("Capture time units / video second", 1, .000001, 1e12, .000001, video_fields)
-	rate.tooltip_text = "Uses recorded timestamps, not interactive frames/second. Output n samples start + n / FPS × rate."
+	rate = number("Playback rate", 1, .000001, 1e12, .000001, video_fields)
+	rate.tooltip_text = "Simulation-time units per exported video second. Lower values play slower and sample time more closely; higher values play faster."
 	camera_mode = choice("Camera", ["Current camera locked", "Current camera + orbit"], camera_fields)
 	orbit = number("Orbit • radians / video second", .08, -10, 10, .001, camera_fields)
 	rendering = choice("Rendering", ["Current state", "Cinematic preset", "Scientific preset"], presentation_fields)
@@ -128,14 +131,20 @@ func _ready() -> void:
 	trails = check("Trails", "Include recorded history", presentation_fields)
 	trails.tooltip_text = "Scientific rendering suppresses trails, matching the interactive viewer."
 	quality = choice("H.264 quality", ["High • CRF 18", "Balanced • CRF 21", "Compact • CRF 25"], output_fields)
-	keep = check("Temporary PNGs", "Keep after successful MP4 encoding", output_fields)
-	inspection_sidecars = check("Inspection records", "Save per-frame inspection JSON", output_fields)
 	g4_quota = number("G4 output quota • MiB",1024,1,65536,1, output_fields)
 	g4_quota.tooltip_text = "Selection-aware jobs reserve a finite total output ceiling, including PNGs, sidecars, recipe assets and encoding."
 	var label := Label.new(); label.text = "Output MP4"; output_fields.add_child(label)
 	var row := HBoxContainer.new(); output_fields.add_child(row)
 	output = LineEdit.new(); output.placeholder_text = "Choose output .mp4 path"; output.size_flags_horizontal = Control.SIZE_EXPAND_FILL; row.add_child(output)
 	var browse := Button.new(); browse.text = "Browse…"; row.add_child(browse)
+	inspection_advanced = Disclosure.new()
+	output_group.body.add_child(inspection_advanced)
+	var advanced_rows := GridContainer.new(); advanced_rows.columns = 2
+	advanced_rows.add_theme_constant_override("h_separation", 16)
+	inspection_advanced.configure(&"video.inspection", "Advanced", advanced_rows)
+	inspection_advanced.set_expanded(false)
+	inspection_sidecars = check("Inspection records", "Save per-frame inspection JSON", advanced_rows)
+	inspection_sidecars.tooltip_text = "Optional for ordinary exports. Selection-aware exports always save per-frame inspection records as provenance."
 	save_dialog = FileDialog.new()
 	save_dialog.file_mode = FileDialog.FILE_MODE_SAVE_FILE
 	save_dialog.access = FileDialog.ACCESS_FILESYSTEM
@@ -244,6 +253,7 @@ func open() -> void:
 		surface.add_theme_stylebox_override("panel",viewer.shell.style_slice.theme.flat_box(&"surface.1",0,0,0))
 		header_close.icon = viewer.shell.style_slice.theme.chrome_icon("close")
 		cancel_confirmation.theme = theme
+	_sync_inspection_advanced()
 	var available: Vector2 = viewer.get_viewport().get_visible_rect().size - Vector2(32,32)
 	popup_centered(Vector2i(Vector2(700,650).min(available)))
 	if pid > 0 or preparing:
@@ -295,7 +305,7 @@ func settings() -> Dictionary:
 	if range_choice.selected < 2:
 		start_time = timeline.times[0] if range_choice.selected == 0 else opened_current
 		end_time = timeline.times[-1]
-	return {"version":1, "capture_path":ProjectSettings.globalize_path(viewer.capture_path), "start_time":start_time, "end_time":end_time, "start_frame":timeline.bracket(start_time).get("a",-1), "end_frame":timeline.bracket(end_time).get("a",-1), "fps":int(fps.value), "width":int(width.value), "height":int(height.value), "playback_rate":rate.value, "output_path":output.text, "camera_mode":"orbit" if camera_mode.selected else "locked", "orbit_speed":orbit.value, "quality":["high","balanced","compact"][quality.selected], "keep_frames":keep.button_pressed, "inspection_sidecars":inspection_sidecars.button_pressed, "ffmpeg_path":ffmpeg, "rendering_method":RenderingServer.get_current_rendering_method()}
+	return {"version":1, "capture_path":ProjectSettings.globalize_path(viewer.capture_path), "start_time":start_time, "end_time":end_time, "start_frame":timeline.bracket(start_time).get("a",-1), "end_frame":timeline.bracket(end_time).get("a",-1), "fps":int(fps.value), "width":int(width.value), "height":int(height.value), "playback_rate":rate.value, "output_path":output.text, "camera_mode":"orbit" if camera_mode.selected else "locked", "orbit_speed":orbit.value, "quality":["high","balanced","compact"][quality.selected], "keep_frames":false, "inspection_sidecars":inspection_sidecars.button_pressed, "ffmpeg_path":ffmpeg, "rendering_method":RenderingServer.get_current_rendering_method()}
 
 func configured_job() -> Dictionary:
 	# The dialog chooses rendering state; the worker chooses the viewport boundary.
@@ -340,7 +350,8 @@ func start_export() -> void:
 		if not directory_error.is_empty():
 			message.text = "Video export destination is unavailable. Choose another location: " + directory_error
 			return
-	var with_selections: bool = viewer.selection_controller != null and not viewer.selection_controller.state.definitions.is_empty()
+	var with_selections := _selection_aware()
+	active_selection_aware = with_selections
 	if with_selections:
 		var recipe := preload("res://analysis/inspection_v3.gd").scene_snapshot(viewer.selection_controller.temporal)
 		if recipe.is_empty():message.text = "Bind the selection source before export.";return
@@ -383,7 +394,7 @@ func start_export() -> void:
 		if not durable.last_recipe.has("path"):
 			message.text = "Selection recipe preparation failed: "+durable.status.text
 			publish_job("failed", message.text);return
-		job.version = 2;job.inspection_path = durable.last_recipe.path;job.inspection_sha256 = durable.last_recipe.sha256;job.opened_paths = durable.opened_paths.duplicate();job.output_quota_bytes = str(int(g4_quota.value)*1048576)
+		job.version = 2;job.inspection_sidecars = true;job.inspection_path = durable.last_recipe.path;job.inspection_sha256 = durable.last_recipe.sha256;job.opened_paths = durable.opened_paths.duplicate();job.output_quota_bytes = str(int(g4_quota.value)*1048576)
 		job.exact_state = preload("res://analysis/inspection_v3.gd").pack(job.state)
 		job.exact_timing = preload("res://analysis/inspection_v3.gd").pack({"start_time":job.start_time,"end_time":job.end_time,"fps":job.fps,"playback_rate":job.playback_rate})
 		invalid = Job.validate(job)
@@ -469,12 +480,22 @@ func publish_job(stage: String, detail: String) -> void:
 	job_status = {"stage":stage, "detail":detail, "directory":active_directory, "job":active_job_path,
 		"output":active_output, "progress":last_progress.duplicate(true),
 		"elapsed_seconds":seconds, "snapshot_ticks":now, "progress_ticks":progress_ticks}
-	message.text = progress_details()
+	message.text = status_summary()
 	_sync_action_buttons()
 	job_changed.emit()
 
 func progress_details() -> String:
 	return ProgressDetails.format(job_status, Time.get_ticks_msec())
+
+func status_summary() -> String:
+	return ProgressDetails.format(job_status, Time.get_ticks_msec(), true)
+
+func _selection_aware() -> bool:
+	return viewer.selection_controller != null and not viewer.selection_controller.state.definitions.is_empty()
+
+func _sync_inspection_advanced() -> void:
+	if inspection_advanced != null:
+		inspection_advanced.visible = not (active_selection_aware if pid > 0 or preparing else _selection_aware())
 
 # User actions share this gate. Shutdown keeps using the cooperative request below.
 func can_cancel_export() -> bool:
@@ -511,6 +532,7 @@ func cancel_export() -> void:
 		publish_job("failed", message.text)
 
 func _process(delta: float) -> void:
+	if visible: _sync_inspection_advanced()
 	if pid <= 0: return
 	poll += delta
 	if poll < .2: return
@@ -531,7 +553,7 @@ func _process(delta: float) -> void:
 		publish_job(str(last_progress.get("stage", "failed")) if last_progress.get("stage", "") in ProgressDetails.TERMINAL else "failed", str(last_progress.get("message", "")) if last_progress.get("stage", "") in ProgressDetails.TERMINAL else message.text)
 		viewer.status_label.text = message.text
 	elif not job_status.is_empty():
-		message.text = progress_details()
+		message.text = status_summary()
 
 func _exit_tree() -> void:
 	# Closing the parent viewer requests a graceful worker/encoder shutdown.

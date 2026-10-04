@@ -128,7 +128,7 @@ func reopen_video() -> void:
 	# idle draft follows the current capture. Retain terminal diagnostics separately.
 	if video.preparing: video.popup_centered(); return
 	video.open()
-	if video.pid <= 0 and not video.start_button.disabled and not video.job_status.is_empty(): video.message.text = video.progress_details()
+	if video.pid <= 0 and not video.start_button.disabled and not video.job_status.is_empty(): video.message.text = video.status_summary()
 
 func reopen_analysis() -> void:
 	var operation: String = viewer.selection_controller.jobs.background_operation
