@@ -39,7 +39,7 @@ func setup(owner_shell) -> void:
 	jobs_button = shell.button(shell.transport.options, "Jobs (0)", open_jobs, "export")
 	jobs_button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	jobs_dialog = AcceptDialog.new(); jobs_dialog.title = "Jobs"; jobs_dialog.get_ok_button().text = "Close"; add_child(jobs_dialog)
-	var scroll := ScrollContainer.new(); scroll.custom_minimum_size = Vector2(600,260); jobs_dialog.add_child(scroll)
+	var scroll := ScrollContainer.new(); scroll.custom_minimum_size = Vector2(460,260); jobs_dialog.add_child(scroll)
 	var inset := MarginContainer.new(); inset.size_flags_horizontal = Control.SIZE_EXPAND_FILL; inset.add_theme_constant_override("margin_right",8); scroll.add_child(inset)
 	var content := VBoxContainer.new(); content.size_flags_horizontal = Control.SIZE_EXPAND_FILL; inset.add_child(content)
 	add_job(content,"Video export", reopen_video, func(): viewer.video_dialog.request_cancel_export())
@@ -50,7 +50,7 @@ func setup(owner_shell) -> void:
 		if viewer.scene_layers != null: viewer.scene_layers.cancel_iso())
 	var actions := HBoxContainer.new(); content.add_child(actions)
 	shell.button(actions,"Failure details…",show_status,"warning")
-	shell.button(actions,"Acknowledge failures",acknowledge,"close")
+	shell.detail_failure_action.pressed.connect(func(): acknowledge(); shell.details.hide())
 	jobs_dialog.visibility_changed.connect(func():
 		if not jobs_dialog.visible: jobs_button.grab_focus())
 	shell.details.visibility_changed.connect(func():
@@ -67,7 +67,7 @@ func setup(owner_shell) -> void:
 
 func add_job(parent: Node, title: String, reopen: Callable, cancel: Callable) -> void:
 	var row := HBoxContainer.new(); parent.add_child(row)
-	var label := Label.new(); label.text = title; label.theme_type_variation = "SectionTitle"; label.size_flags_horizontal = Control.SIZE_EXPAND_FILL; row.add_child(label)
+	var label := Label.new(); label.text = title; label.theme_type_variation = "SectionTitle"; label.custom_minimum_size.x = 160; row.add_child(label)
 	var open_button: Button = shell.button(row,"Open…",func(): jobs_dialog.hide(); reopen.call())
 	var details_button: Button = shell.button(row,"Details…",open_job_details.bind(title))
 	var cancel_button: Button = shell.button(row,"Cancel",cancel)
@@ -119,7 +119,7 @@ func reopen_analysis() -> void:
 	viewer.tools_ui.open(task)
 
 func open_jobs() -> void:
-	jobs_dialog.popup_centered(Vector2i(640,340)); refresh()
+	jobs_dialog.popup_centered(Vector2i(500,340)); refresh()
 
 func remember(owner: String, message: String) -> void:
 	if not message.is_empty(): failures[owner] = message
@@ -246,14 +246,17 @@ func update_jobs() -> void:
 func show_status() -> void:
 	live_details = ""
 	jobs_dialog.hide()
-	var lines := [readiness,readiness_detail]
-	for owner in failures: lines.append("\n"+owner+" — Failed\n"+str(failures[owner]))
+	var lines := []
+	if not failures.is_empty():
+		lines.append("Retained failures")
+		for owner in failures: lines.append(owner+" — Failed\n"+str(failures[owner]))
+	lines.append(readiness+"\n"+readiness_detail)
 	var layers = viewer.scene_layers
 	if layers != null:
 		for controller in [layers.playback,layers.field_playback,layers.mesh_playback]:
 			if is_instance_valid(controller.label): lines.append(controller.label.text)
-	lines.append("\nUse Jobs → Acknowledge failures to dismiss retained notices.\n\n"+shell.source_details())
-	shell.show_details("Status details", "\n".join(lines))
+	lines.append("\n"+shell.source_details())
+	shell.show_details("Status details", "\n".join(lines), not failures.is_empty())
 
 func layout(width: float, bottom: float) -> float:
 	var profile_started := ResizeProfile.stamp()

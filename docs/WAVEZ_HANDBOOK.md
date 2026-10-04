@@ -218,7 +218,8 @@ See [status presentation validation](STATUS_PLAYBACK_STATE.md).
 
 A separate **Failed — details** notice
 survives unrelated informational updates and successful work. **Details…** opens
-copyable diagnostics; **Jobs → Acknowledge failures** dismisses retained notices.
+copyable diagnostics; **Acknowledge failures** appears there when retained notices
+exist and dismisses those notices after review without cancelling jobs or results.
 Current unavailability remains visible until the underlying condition resolves.
 A successful capture load automatically clears the previous failed-open banner
 and its retained load diagnostic. Failed retries, picker cancellation and unrelated

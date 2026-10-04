@@ -29,6 +29,8 @@ func check_compact_job_rows(ui, context: String):
 		var row: HBoxContainer = job.open.get_parent()
 		var heading := row.get_child(0) as Label
 		check(row.get_child_count() == 4 and heading != null and heading.text == title and row.get_child(1) == job.open and row.get_child(2) == job.details and row.get_child(3) == job.cancel, context + ": " + title + " has only its heading and three actions")
+		var gap: float = job.open.get_global_rect().position.x - heading.get_global_rect().end.x
+		check(gap >= 0 and gap <= 16, context + ": " + title + " heading stays close to its actions")
 func locked_fields(node: Node) -> bool:
 	for child in node.get_children():
 		if child is SpinBox or child is LineEdit:
@@ -118,7 +120,7 @@ func run():
 	check(ui.readiness == "Ready" and not ui.failures.has("Open file"),"Successful open clears its load failure as accepted in #134")
 	viewer.status_label.text = "Unrelated information"; ui.refresh()
 	check(not ui.badge.label.text.contains("Failed"),"Unrelated status does not resurrect cleared load failure")
-	ui.show_status(); check(not viewer.shell.detail_text.text.contains("Test open failure"),"Recovered load diagnostic is cleared")
+	ui.show_status(); check(not viewer.shell.detail_text.text.contains("Test open failure") and not viewer.shell.detail_failure_action.visible,"Recovered load diagnostic and its acknowledgement action are cleared")
 	viewer.shell.details.hide(); ui.acknowledge(); check(ui.failures.is_empty(),"Explicit acknowledgement clears failure notice")
 	var layers = viewer.scene_layers
 	var fields = layers.field_playback
@@ -157,11 +159,17 @@ func run():
 	layers.mesh_playback.error = "Injected unavailable mesh diagnostic"; ui.refresh()
 	check(ui.readiness == "Unavailable" and ui.failures.has("Meshes"),"Typed readiness failure is visible and durable")
 	layers.mesh_playback.error = ""; ui.refresh(); check(ui.failures.has("Meshes"),"Recovery does not silently acknowledge failure")
-	ui.acknowledge()
+	ui.show_status(); check(viewer.shell.detail_failure_action.visible and viewer.shell.detail_text.text.begins_with("Retained failures\nMeshes — Failed\nInjected unavailable mesh diagnostic"), "Status details leads with the retained failure and its acknowledgement action")
+	await settle(); check(viewer.shell.details.visible, "Status details opens for failure review")
+	picture("status-failure-details")
+	viewer.shell.detail_failure_action.pressed.emit()
+	check(ui.failures.is_empty() and not viewer.shell.details.visible and not ui.badge.label.text.contains("Failed"), "Acknowledging in Status details clears retained notices without changing job state")
 	var jobs = viewer.selection_controller.jobs
 	jobs.background_failed.emit("Injected analysis worker failure"); ui.refresh()
 	check(ui.failures.has("Analysis"),"Existing analysis failure signal is durable")
-	ui.acknowledge()
+	ui.open_jobs(); ui.job_rows["Analysis"].details.pressed.emit()
+	check(not viewer.shell.detail_failure_action.visible, "Job Details does not show the global failure acknowledgement action")
+	viewer.shell.details.hide(); ui.acknowledge()
 	# Reuse real selection-worker launch, completion and existing cancellation callbacks.
 	var selection = viewer.selection_controller
 	selection.bind_source(); ui.refresh()
@@ -204,12 +212,16 @@ func run():
 		check(viewer.shell.details.visible and viewer.shell.detail_text.text.contains(viewer.capture_path),"File Details retains source access")
 		viewer.shell.details.hide(); await settle()
 		picture("loaded-"+str(dimensions.x))
-		ui.open_jobs(); await settle(); check(ui.jobs_dialog.size.x <= dimensions.x and ui.jobs_dialog.size.y <= dimensions.y,"Jobs dialog fits desktop")
+		ui.open_jobs(); await settle(); check(ui.jobs_dialog.size.x <= mini(dimensions.x,520) and ui.jobs_dialog.size.y <= dimensions.y,"Jobs dialog remains narrow and fits desktop")
 		check_compact_job_rows(ui, "Idle Jobs " + str(dimensions))
+		var has_acknowledge := false
+		for control in ui.jobs_dialog.find_children("*", "Button", true, false):
+			has_acknowledge = has_acknowledge or control.text == "Acknowledge failures"
+		check(not has_acknowledge, "Jobs overview has no failure acknowledgement action")
 		picture("jobs-"+str(dimensions.x)); ui.jobs_dialog.hide()
 	var jobs_scroll: ScrollContainer = ui.jobs_dialog.find_children("*", "ScrollContainer", true, false)[0]
 	jobs_scroll.custom_minimum_size.y = 100
-	ui.jobs_dialog.popup_centered(Vector2i(640,240)); await settle()
+	ui.jobs_dialog.popup_centered(Vector2i(500,240)); await settle()
 	var scrollbar := jobs_scroll.get_v_scroll_bar()
 	check(scrollbar.visible, "Compact Jobs rows still scroll when dialog height is constrained")
 	var cancel_edge: float = ui.job_rows["Video export"].cancel.get_global_rect().end.x
