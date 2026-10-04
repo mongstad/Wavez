@@ -91,7 +91,7 @@ func _ready() -> void:
 	fields.add_theme_constant_override("h_separation", 16)
 	fields.add_theme_constant_override("v_separation",8)
 	form.add_child(fields)
-	range_choice = choice("Range", ["Full", "Current position to end", "Custom start/end"], range_fields)
+	range_choice = choice("Range", ["Full", "Current position to end", "Custom"], range_fields)
 	start = number("Start", 0, -1e30, 1e30, .0001, range_fields)
 	end = number("End", 1, -1e30, 1e30, .0001, range_fields)
 	start.tooltip_text = "Recorded capture time."

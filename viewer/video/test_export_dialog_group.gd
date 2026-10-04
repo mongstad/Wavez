@@ -51,7 +51,7 @@ func run() -> void:
 	var group_style: StyleBoxFlat = dialog.range_group.get_theme_stylebox("panel")
 	check(group_style.border_width_left > 0 and group_style.border_width_top > 0, "Range, Start and End have a visible border")
 	check(dialog.range_fields.get_child_count() == 6 and dialog.range_fields.get_child(0).text == "Range" and dialog.range_fields.get_child(2).text == "Start" and dialog.range_fields.get_child(4).text == "End", "Range, Start and End share the group")
-	check(dialog.range_choice.get_item_text(0) == "Full" and dialog.range_choice.get_item_text(1) == "Current position to end", "Full range retains option index and current-position preset")
+	check(dialog.range_choice.get_item_text(0) == "Full" and dialog.range_choice.get_item_text(1) == "Current position to end" and dialog.range_choice.get_item_text(2) == "Custom", "Range labels retain their option indices")
 	check(dialog.end.tooltip_text.contains("exclusive"), "End tooltip preserves exclusive-end guidance")
 	check(not dialog.estimate.text.contains("Source:") and dialog.estimate.text.contains("Output:") and dialog.estimate.text.contains("Temporary storage:") and not dialog.estimate.text.contains("PNG budget"), "Estimate shows compact output and storage values")
 	check(dialog.estimate.text == "Output: 2.267 seconds • 68 frames\nTemporary storage: 0.53 GiB", "Estimate retains frame count and uncompressed storage calculation")
