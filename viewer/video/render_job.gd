@@ -141,5 +141,14 @@ static func find_ffmpeg() -> String:
 		if FileAccess.file_exists(candidate): return candidate
 	return ""
 
+static func ffmpeg_problem(path: String) -> String:
+	if path.is_empty() or not path.is_absolute_path() or not FileAccess.file_exists(path):
+		return "FFmpeg executable is unavailable: " + path
+	var output: Array = []
+	var result := OS.execute(path, PackedStringArray(["-version"]), output, true)
+	if result != 0 or output.is_empty() or not str(output[0]).to_lower().begins_with("ffmpeg version"):
+		return "The selected file could not run as FFmpeg: " + path
+	return ""
+
 static func launch_arguments(job_path: String, fps: int) -> PackedStringArray:
 	return PackedStringArray(["--path", ProjectSettings.globalize_path("res://"), "--resolution", "640x360", "--position", "0,0", "--fixed-fps", str(fps), "--disable-vsync", "--audio-driver", "Dummy", "--log-file", job_path.get_base_dir().path_join("renderer.log"), "--", "--wavez-render-job=" + job_path])

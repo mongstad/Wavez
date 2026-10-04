@@ -1,5 +1,11 @@
 # Retained evidence
 
+## File Locations preferences — issue #226, pending owner review
+
+[Focused checks, known limitations and normal/error native screenshots](evidence/issue-226/README.md)
+cover FFmpeg selection, export destinations, log location and retained picker
+behavior on candidate build 43.
+
 ## Mixed playback buffering — issue #232, pending owner review
 
 [Investigation, comparison traces and focused checks](evidence/issue-232/README.md)

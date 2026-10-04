@@ -8,6 +8,7 @@ import sys
 import shutil
 import time
 import re
+import shlex
 import numpy as np
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
@@ -32,9 +33,9 @@ def main():
     sources = [source, fields]
     hashes = {str(s): hashlib.sha256(s.read_bytes()).hexdigest() for s in sources}
     ffmpeg = shutil.which('ffmpeg'); assert ffmpeg
-    bad = out/'bad-ffmpeg'; bad.write_text('#!/bin/sh\nexit 1\n'); bad.chmod(0o755)
+    bad = out/'bad-ffmpeg'; bad.write_text('#!/bin/sh\nif [ "$1" = "-version" ]; then exec '+shlex.quote(ffmpeg)+' -version; fi\nexit 1\n'); bad.chmod(0o755)
     slow = out/'slow-ffmpeg'
-    slow.write_text('#!'+sys.executable+'\nimport os,sys\na=sys.argv[1:];a.insert(a.index("-i"),"-re")\nos.execv('+repr(ffmpeg)+',["ffmpeg"]+a)\n');slow.chmod(0o755)
+    slow.write_text('#!'+sys.executable+'\nimport os,sys\na=sys.argv[1:]\nif a == ["-version"]: os.execv('+repr(ffmpeg)+',["ffmpeg","-version"])\na.insert(a.index("-i"),"-re")\nos.execv('+repr(ffmpeg)+',["ffmpeg"]+a)\n');slow.chmod(0o755)
     (out/'config.json').write_text(json.dumps({'source': str(source), 'fields': str(fields), 'ffmpeg': ffmpeg, 'bad_ffmpeg': str(bad), 'slow_ffmpeg': str(slow)}))
     cmd = [a.godot]+([] if a.packaged else ['--path', str(ROOT/'viewer')])+['--rendering-method', a.renderer,
            '--log-file', str(out/'native.log'), '--audio-driver', 'Dummy', '--resolution', '1440x900', '--script', 'res://ui/shell/test_viewer_status.gd',

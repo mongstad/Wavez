@@ -1,10 +1,12 @@
 # Session troubleshooting logs
 
 Candidate build 42 creates a separate human-readable log for each interactive
-Wavez session in Godot's platform-specific `user://logs` directory. On Linux with
+Wavez session in Godot's platform-specific `user://logs` directory by default. On Linux with
 the current project setting, that is normally
 `~/.local/share/godot/app_userdata/WAVEZ/logs/`. The filename contains local date,
 time, process ID and a monotonic suffix, so two launches in one second stay distinct.
+Edit → Preferences → File Locations can set a custom log directory. That change
+applies to the next session; the current log stays at its original path.
 The log records the application version and a clean session end. The offline video
 render worker does not create an interactive action log.
 

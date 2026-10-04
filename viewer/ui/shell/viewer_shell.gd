@@ -8,6 +8,7 @@ var viewer
 var orbit_editor
 var shortcuts := preload("res://ui/keyboard_shortcuts.gd").new()
 var shortcuts_editor
+var file_locations_dialog
 var shortcut_hints_map := {}
 
 func edit_shortcuts() -> void:
@@ -17,6 +18,14 @@ func edit_shortcuts() -> void:
 		shortcuts_editor = preload("res://ui/shell/keyboard_shortcuts_editor.gd").new()
 		canvas.add_child(shortcuts_editor); shortcuts_editor.setup(self)
 	shortcuts_editor.open()
+
+func edit_file_locations() -> void:
+	if viewer.offline_instance: return
+	if file_locations_dialog == null:
+		file_locations_dialog = preload("res://ui/shell/file_locations_dialog.gd").new()
+		add_child(file_locations_dialog)
+		file_locations_dialog.setup(self)
+	file_locations_dialog.open()
 
 func editing_shortcuts() -> bool:
 	return shortcuts_editor != null and shortcuts_editor.visible
@@ -571,6 +580,7 @@ func build_menus(row: HBoxContainer) -> void:
 	command(file,"Exit",func(): window_chrome.request_close(),"exit")
 	var preferences := submenu(menus.Edit.get_popup(),"Preferences")
 	command(preferences,"Keyboard Shortcuts",edit_shortcuts,"keyboard_shortcuts")
+	command(preferences,"File Locations",edit_file_locations,"file_locations")
 	var view: PopupMenu = menus.View.get_popup()
 	var window_menu := submenu(view,"Window")
 	command(window_menu,"Fullscreen",viewer._toggle_fullscreen,"fullscreen",true)
@@ -618,7 +628,7 @@ func refresh_commands() -> void:
 	var particles: bool = loaded and viewer.scene_layers != null and not viewer.scene_layers.particle_id.is_empty()
 	for key in commands:
 		var entry: Dictionary = commands[key]
-		var enabled: bool = loaded or key in ["open","details","fullscreen","keyboard_shortcuts","about","exit"]
+		var enabled: bool = loaded or key in ["open","details","fullscreen","file_locations","keyboard_shortcuts","about","exit"]
 		if key in ["probe","tool:Clipping","tool:Isosurface","tool:Source probe"]: enabled = fields
 		if key == "tool:Mapping": enabled = particles
 		if key in ["tool:Slice","tool:Derive range"]: enabled = fields or particles

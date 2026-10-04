@@ -121,6 +121,7 @@ var status_label: Label
 var timeline: HSlider
 var open_dialog: FileDialog
 var file_dialog_preferences: Node
+var file_locations: Node
 var overlay_panel: PanelContainer
 var overlay_visible := true
 var shell
@@ -167,6 +168,8 @@ func _ready() -> void:
 				queue_free()
 				return
 	if not offline_instance:
+		file_locations = preload("res://ui/file_locations_preferences.gd").new()
+		add_child(file_locations)
 		session_log = preload("res://ui/session_log.gd").new()
 		add_child(session_log)
 		session_log.start(self)
@@ -810,6 +813,15 @@ func _focus_activity() -> void:
 func _save_image() -> void:
 	shell.dismiss_orbit_editor()
 	if screenshot_pending or screenshot_saving: return
+	var preferred: String = file_locations.settings.image_dir if file_locations != null else ""
+	if not preferred.is_empty():
+		await _write_screenshot(preferred)
+		return
+	if not screenshot_directory.is_empty():
+		var unavailable: String = preload("res://ui/file_locations_preferences.gd").directory_problem(screenshot_directory)
+		if not unavailable.is_empty():
+			_notify_screenshot("Image export folder is unavailable: " + unavailable)
+			screenshot_directory = ""
 	if screenshot_directory.is_empty():
 		if screenshot_dialog == null:
 			screenshot_dialog = FileDialog.new()
@@ -829,20 +841,28 @@ func _save_image() -> void:
 func _screenshot_directory_selected(path: String) -> void:
 	if not screenshot_pending: return
 	screenshot_pending = false
-	if not DirAccess.dir_exists_absolute(path):
-		_notify_screenshot("Screenshot folder is unavailable: " + path)
+	var problem: String = preload("res://ui/file_locations_preferences.gd").directory_problem(path)
+	if not problem.is_empty():
+		_notify_screenshot("Screenshot folder is unavailable: " + problem)
 		return
 	screenshot_directory = path
 	screenshot_saving = true
 	await get_tree().process_frame # Let the directory chooser disappear first.
 	await _write_screenshot()
 
-func _write_screenshot() -> void:
+func _write_screenshot(preferred: String = "") -> void:
 	screenshot_saving = true
+	var directory: String = preferred if not preferred.is_empty() else screenshot_directory
+	var problem: String = preload("res://ui/file_locations_preferences.gd").directory_problem(directory)
+	if not problem.is_empty():
+		screenshot_saving = false
+		if preferred.is_empty(): screenshot_directory = ""
+		_notify_screenshot(("Image export folder is unavailable: " if preferred.is_empty() else "Image export preference is unavailable. Change it in Edit → Preferences → File Locations: ") + problem)
+		return
 	if screenshot_notice != null: screenshot_notice.hide()
 	screenshot_count += 1
 	var stamp := Time.get_datetime_string_from_system().replace(":", "-")
-	var path := screenshot_directory.path_join("wavez-%s-%d-%04d.png" % [stamp, Time.get_ticks_usec(), screenshot_count])
+	var path := directory.path_join("wavez-%s-%d-%04d.png" % [stamp, Time.get_ticks_usec(), screenshot_count])
 	while FileAccess.file_exists(path): path = path.get_basename() + "-1.png"
 	var result: Error = await _capture_inspection_png(path,screenshot_sidecar)
 	screenshot_saving = false

@@ -135,7 +135,10 @@ func _ready() -> void:
 		if pid <= 0 and not preparing: output.text = path)
 	add_child(save_dialog)
 	browse.pressed.connect(func():
-		if pid <= 0 and not preparing: save_dialog.popup_centered_ratio(.8))
+		if pid <= 0 and not preparing:
+			var directory: String = output.text.get_base_dir() if output.text.is_absolute_path() else viewer.file_locations.settings.video_dir
+			if not directory.is_empty() and DirAccess.dir_exists_absolute(directory): save_dialog.current_dir = directory
+			save_dialog.popup_centered_ratio(.8))
 	estimate = Label.new(); estimate.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; box.add_child(estimate)
 	message = Label.new(); message.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; box.add_child(message)
 	progress = ProgressBar.new(); progress.min_value = 0; progress.max_value = 100; box.add_child(progress)
@@ -227,8 +230,16 @@ func open() -> void:
 	trails.button_pressed = viewer.trails_enabled
 	# Export is forward-only; initialize from canonical playback speed when positive.
 	rate.value = viewer.physical_rate if viewer.physical_rate > 0 else 1.0
-	ffmpeg = Job.find_ffmpeg()
-	message.text = "FFmpeg found. Export runs in a separate process." if not ffmpeg.is_empty() else "FFmpeg is missing. Export will retain the complete PNG sequence and encoding instructions."
+	ffmpeg = str(viewer.file_locations.ffmpeg_status().path)
+	message.text = ""
+	if output.text.is_empty() and not viewer.file_locations.settings.video_dir.is_empty():
+		var directory: String = viewer.file_locations.settings.video_dir
+		var stem: String = viewer.capture_path.get_file().get_basename()
+		var candidate := directory.path_join(stem + ".mp4")
+		var suffix := 2
+		while FileAccess.file_exists(candidate):
+			candidate = directory.path_join("%s-%d.mp4" % [stem, suffix]); suffix += 1
+		output.text = candidate
 	update_range()
 
 func update_range() -> void:
@@ -281,7 +292,17 @@ func update_estimate() -> void:
 
 func start_export() -> void:
 	if pid > 0 or preparing or timeline == null: return
+	var availability: Dictionary = viewer.file_locations.ffmpeg_status()
+	ffmpeg = str(availability.path)
+	if ffmpeg.is_empty():
+		message.text = "FFmpeg is required to encode MP4. Open Edit → Preferences → File Locations and choose a usable FFmpeg executable. " + str(availability.error)
+		return
 	var job := configured_job()
+	if job.output_path is String and job.output_path.is_absolute_path():
+		var directory_error: String = preload("res://ui/file_locations_preferences.gd").directory_problem(job.output_path.get_base_dir())
+		if not directory_error.is_empty():
+			message.text = "Video export destination is unavailable. Choose another location: " + directory_error
+			return
 	var with_selections: bool = viewer.selection_controller != null and not viewer.selection_controller.state.definitions.is_empty()
 	if with_selections:
 		var recipe := preload("res://analysis/inspection_v3.gd").scene_snapshot(viewer.selection_controller.temporal)

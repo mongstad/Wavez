@@ -72,7 +72,7 @@ movement keys, focus navigation, and Escape recovery retain their existing roles
 | Loop Playback | Unbound | Transport's existing loop callback |
 | Open File | Unbound | File's scene picker |
 | Export Video | Unbound | File's existing export dialog |
-| Save Image | P | Existing screenshot folder/save flow |
+| Save Image | P | Saves directly to the configured Image Exports directory; otherwise uses the native picker and current-session folder |
 | Derive Range / Mapping | Unbound | Existing Tools commands and source eligibility |
 | Recorded History / Point Rendering | T / V | Existing viewer toggles |
 | Fullscreen | F11 | Existing shell fullscreen command |
