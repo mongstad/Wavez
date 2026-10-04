@@ -6,6 +6,8 @@ var viewer
 var badge
 var jobs_button: Button
 var jobs_dialog: AcceptDialog
+var jobs_header_close: Button
+var jobs_footer_close: Button
 var job_rows := {}
 var failures := {} # Latest unacknowledged diagnostic per existing owner, not a job engine.
 var observed := {}
@@ -38,17 +40,34 @@ func setup(owner_shell) -> void:
 	badge.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	jobs_button = shell.button(shell.transport.options, "Jobs (0)", open_jobs, "export")
 	jobs_button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-	jobs_dialog = AcceptDialog.new(); jobs_dialog.title = "Jobs"; jobs_dialog.get_ok_button().text = "Close"; add_child(jobs_dialog)
-	var scroll := ScrollContainer.new(); scroll.custom_minimum_size = Vector2(460,220); jobs_dialog.add_child(scroll)
+	jobs_dialog = AcceptDialog.new(); jobs_dialog.title = "Jobs"; jobs_dialog.borderless = true; jobs_dialog.get_ok_button().hide(); add_child(jobs_dialog)
+	var body := VBoxContainer.new(); body.add_theme_constant_override("separation",10); jobs_dialog.add_child(body)
+	var header := HBoxContainer.new(); body.add_child(header)
+	var heading := Label.new(); heading.text = "Jobs"; heading.theme_type_variation = "PanelTitle"
+	heading.size_flags_horizontal = Control.SIZE_EXPAND_FILL; heading.mouse_filter = Control.MOUSE_FILTER_IGNORE; header.add_child(heading)
+	jobs_header_close = Button.new(); jobs_header_close.theme_type_variation = "IconAction"; jobs_header_close.tooltip_text = "Close Jobs"
+	jobs_header_close.custom_minimum_size = Vector2(32,32); jobs_header_close.pressed.connect(jobs_dialog.hide); header.add_child(jobs_header_close)
+	var scroll_space := MarginContainer.new(); scroll_space.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	scroll_space.add_theme_constant_override("margin_top",12); body.add_child(scroll_space)
+	var scroll := ScrollContainer.new(); scroll.custom_minimum_size = Vector2(460,220)
+	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL; scroll.follow_focus = true
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED; scroll_space.add_child(scroll)
 	var inset := MarginContainer.new(); inset.size_flags_horizontal = Control.SIZE_EXPAND_FILL; inset.add_theme_constant_override("margin_right",8); scroll.add_child(inset)
-	var content := VBoxContainer.new(); content.size_flags_horizontal = Control.SIZE_EXPAND_FILL; inset.add_child(content)
+	var content := VBoxContainer.new(); content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	content.add_theme_constant_override("separation",8); inset.add_child(content)
 	add_job(content,"Video export", reopen_video, func(): viewer.video_dialog.request_cancel_export())
 	add_job(content,"Selections", func(): shell.show_section("Selections"), func(): viewer.selection_controller.cancel_query(); selection_result = "Cancelled. Completed selections remain available.")
 	add_job(content,"Analysis", reopen_analysis, func(): viewer.selection_controller.temporal.cancel_analysis(); analysis_result = "Cancellation requested. Completed named results remain available.")
 	add_job(content,"Matched views", func(): shell.show_section("Matched runs"), func(): viewer.selection_controller.temporal.matched.cancel())
 	add_job(content,"Isosurface", func(): viewer.tools_ui.open("Isosurface"), func():
 		if viewer.scene_layers != null: viewer.scene_layers.cancel_iso())
+	var footer := HBoxContainer.new(); footer.alignment = BoxContainer.ALIGNMENT_END; body.add_child(footer)
+	jobs_footer_close = Button.new(); jobs_footer_close.text = "Close"; jobs_footer_close.theme_type_variation = "SecondaryButton"
+	jobs_footer_close.pressed.connect(jobs_dialog.hide); footer.add_child(jobs_footer_close)
 	shell.detail_failure_action.pressed.connect(func(): acknowledge(); shell.details.hide())
+	jobs_dialog.close_requested.connect(jobs_dialog.hide)
+	jobs_dialog.window_input.connect(func(event: InputEvent):
+		if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE: jobs_dialog.hide())
 	jobs_dialog.visibility_changed.connect(func():
 		if not jobs_dialog.visible: jobs_button.grab_focus())
 	shell.details.visibility_changed.connect(func():
@@ -64,11 +83,15 @@ func setup(owner_shell) -> void:
 	refresh()
 
 func add_job(parent: Node, title: String, reopen: Callable, cancel: Callable) -> void:
-	var row := HBoxContainer.new(); parent.add_child(row)
+	var row := HBoxContainer.new(); row.add_theme_constant_override("separation",8); parent.add_child(row)
 	var label := Label.new(); label.text = title; label.theme_type_variation = "SectionTitle"; label.custom_minimum_size.x = 160; row.add_child(label)
 	var open_button: Button = shell.button(row,"Open…",func(): jobs_dialog.hide(); reopen.call())
 	var details_button: Button = shell.button(row,"Details…",open_job_details.bind(title))
 	var cancel_button: Button = shell.button(row,"Cancel",cancel)
+	for action in [open_button, details_button, cancel_button]:
+		action.custom_minimum_size.x = 88
+		action.theme_type_variation = "SecondaryButton"
+		action.tooltip_text = ""
 	job_rows[title] = {"cancel":cancel_button,"open":open_button,"details":details_button,"detail":"","active":false,"identity":""}
 
 func open_job_details(title: String) -> void:
@@ -117,7 +140,12 @@ func reopen_analysis() -> void:
 	viewer.tools_ui.open(task)
 
 func open_jobs() -> void:
-	jobs_dialog.popup_centered(Vector2i(500,300)); refresh()
+	refresh(); jobs_dialog.popup_centered(Vector2i(520,320))
+	for title in ["Video export", "Selections", "Analysis", "Matched views", "Isosurface"]:
+		if not job_rows[title].open.disabled:
+			job_rows[title].open.grab_focus()
+			return
+	jobs_header_close.grab_focus()
 
 func remember(owner: String, message: String) -> void:
 	if not message.is_empty(): failures[owner] = message

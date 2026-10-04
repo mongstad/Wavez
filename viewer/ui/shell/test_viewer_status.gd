@@ -31,6 +31,12 @@ func check_compact_job_rows(ui, context: String):
 		check(row.get_child_count() == 4 and heading != null and heading.text == title and row.get_child(1) == job.open and row.get_child(2) == job.details and row.get_child(3) == job.cancel, context + ": " + title + " has only its heading and three actions")
 		var gap: float = job.open.get_global_rect().position.x - heading.get_global_rect().end.x
 		check(gap >= 0 and gap <= 16, context + ": " + title + " heading stays close to its actions")
+func check_job_header_clearance(ui, context: String):
+	var header: HBoxContainer = ui.jobs_header_close.get_parent()
+	var scroll: ScrollContainer = ui.jobs_dialog.find_children("*", "ScrollContainer", true, false)[0]
+	var first: Button = ui.job_rows["Video export"].open
+	check(first.get_global_rect().position.y - header.get_global_rect().end.y >= 20, context + ": first action clears the title row")
+	check(first.get_global_rect().position.y >= scroll.get_global_rect().position.y and first.get_global_rect().end.x <= scroll.get_global_rect().end.x - 8, context + ": first action stays inside the row viewport")
 func locked_fields(node: Node) -> bool:
 	for child in node.get_children():
 		if child is SpinBox or child is LineEdit:
@@ -113,6 +119,13 @@ func run():
 	check(viewer.video_dialog.start_button.disabled and viewer.video_dialog.background_button.disabled,"Unconfigured export cannot start or run in background")
 	var ui = viewer.shell.status_ui
 	ui.refresh(); check(ui.readiness == "No capture" and ui.active_count == 0,"Empty status and Jobs are persistent")
+	ui.open_jobs(); await settle()
+	check(ui.job_rows["Video export"].open.disabled and not ui.job_rows["Video export"].open.has_focus() and ui.job_rows["Selections"].open.has_focus(), "Empty Jobs focuses an enabled row action")
+	check_job_header_clearance(ui, "Empty Jobs")
+	for title in ["Video export", "Selections", "Analysis", "Matched views", "Isosurface"]:
+		var job: Dictionary = ui.job_rows[title]
+		check(job.open.tooltip_text.is_empty() and job.details.tooltip_text.is_empty() and job.cancel.tooltip_text.is_empty(), title + " actions do not cover the title with redundant tooltips")
+	picture("jobs-empty"); ui.jobs_dialog.hide()
 	viewer.shell.begin_open(); ui.refresh(); check(ui.readiness == "Preparing…","Opening has indeterminate preparation state")
 	viewer.shell.finish_open("Test open failure"); ui.refresh()
 	check(ui.failures.has("Open file"),"Open failure survives ending preparation")
@@ -221,12 +234,26 @@ func run():
 		viewer.shell.details.hide(); await settle()
 		picture("loaded-"+str(dimensions.x))
 		ui.open_jobs(); await settle(); check(ui.jobs_dialog.size.x <= mini(dimensions.x,520) and ui.jobs_dialog.size.y <= dimensions.y,"Jobs dialog remains narrow and fits desktop")
+		check_job_header_clearance(ui, "Loaded Jobs " + str(dimensions))
 		check_compact_job_rows(ui, "Idle Jobs " + str(dimensions))
 		var has_failure_action := false
 		for control in ui.jobs_dialog.find_children("*", "Button", true, false):
 			has_failure_action = has_failure_action or control.text in ["Failure details…", "Acknowledge failures"]
 		check(not has_failure_action, "Jobs overview has no failure controls outside job Details")
+		check(ui.jobs_dialog.borderless and not ui.jobs_dialog.get_ok_button().visible, "Jobs uses one borderless shell with custom close controls")
+		check(ui.jobs_header_close.icon != null and ui.jobs_header_close.theme_type_variation == "IconAction" and ui.jobs_footer_close.theme_type_variation == "SecondaryButton", "Jobs header and footer use shell action roles")
+		check(ui.job_rows["Video export"].open.has_focus(), "Opening Jobs focuses the first available action")
 		picture("jobs-"+str(dimensions.x)); ui.jobs_dialog.hide()
+	ui.open_jobs(); ui.jobs_header_close.pressed.emit(); await settle()
+	check(not ui.jobs_dialog.visible and ui.jobs_button.has_focus(), "Header close returns keyboard focus to Jobs")
+	ui.open_jobs(); ui.jobs_footer_close.pressed.emit(); await settle()
+	check(not ui.jobs_dialog.visible and ui.jobs_button.has_focus(), "Footer close returns keyboard focus to Jobs")
+	ui.open_jobs(); ui.jobs_dialog.close_requested.emit(); await settle()
+	check(not ui.jobs_dialog.visible and ui.jobs_button.has_focus(), "Window close returns keyboard focus to Jobs")
+	ui.open_jobs()
+	var escape := InputEventKey.new(); escape.pressed = true; escape.keycode = KEY_ESCAPE
+	ui.jobs_dialog.window_input.emit(escape); await settle()
+	check(not ui.jobs_dialog.visible and ui.jobs_button.has_focus(), "Escape dismisses Jobs and returns keyboard focus")
 	var jobs_scroll: ScrollContainer = ui.jobs_dialog.find_children("*", "ScrollContainer", true, false)[0]
 	jobs_scroll.custom_minimum_size.y = 100
 	ui.jobs_dialog.popup_centered(Vector2i(500,240)); await settle()

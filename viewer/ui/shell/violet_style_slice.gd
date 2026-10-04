@@ -55,8 +55,11 @@ func install(shell) -> void:
 	shell.details.theme = theme
 	shell.about.theme = theme
 	animate_buttons(shell.about)
-	# Representative dialog/confirmation surfaces, not broad Tools/Jobs propagation.
-	shell.status_ui.jobs_dialog.theme = shell.theme
+	# Jobs uses the same borderless surface, title and action roles as Video Export.
+	shell.status_ui.jobs_dialog.theme = theme
+	shell.status_ui.jobs_dialog.add_theme_stylebox_override("panel", theme.flat_box(&"surface.1",16,16,0))
+	shell.status_ui.jobs_header_close.icon = theme.chrome_icon("close")
+	animate_buttons(shell.status_ui.jobs_dialog)
 	style_dropdowns(shell.viewer)
 	style_booleans(shell.viewer)
 
@@ -90,7 +93,7 @@ func animate_buttons(node: Node) -> void:
 		if node.icon != null and node.icon.resource_path.begins_with("res://ui/shell/icons/"):
 			node.icon = theme.shell_icon(node.icon.resource_path.get_file().get_basename())
 	for child in node.get_children():
-		# Dialogs/Jobs are deferred until visual slice acceptance.
+		# Nested windows are styled separately by their owning surfaces.
 		if not child is Window: animate_buttons(child)
 
 func fade(control: Button, color: Color) -> void:
