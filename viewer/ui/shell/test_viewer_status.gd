@@ -23,6 +23,12 @@ func ready(viewer):
 	check(not viewer.scene_layers.is_buffering(),"Preparation completes")
 	viewer.shell.status_ui.refresh()
 func picture(name): root.get_texture().get_image().save_png(output.path_join(name+".png"))
+func check_compact_job_rows(ui, context: String):
+	for title in ["Video export", "Selections", "Analysis", "Matched views", "Isosurface"]:
+		var job: Dictionary = ui.job_rows[title]
+		var row: HBoxContainer = job.open.get_parent()
+		var heading := row.get_child(0) as Label
+		check(row.get_child_count() == 4 and heading != null and heading.text == title and row.get_child(1) == job.open and row.get_child(2) == job.details and row.get_child(3) == job.cancel, context + ": " + title + " has only its heading and three actions")
 func locked_fields(node: Node) -> bool:
 	for child in node.get_children():
 		if child is SpinBox or child is LineEdit:
@@ -199,8 +205,27 @@ func run():
 		viewer.shell.details.hide(); await settle()
 		picture("loaded-"+str(dimensions.x))
 		ui.open_jobs(); await settle(); check(ui.jobs_dialog.size.x <= dimensions.x and ui.jobs_dialog.size.y <= dimensions.y,"Jobs dialog fits desktop")
+		check_compact_job_rows(ui, "Idle Jobs " + str(dimensions))
 		picture("jobs-"+str(dimensions.x)); ui.jobs_dialog.hide()
+	var jobs_scroll: ScrollContainer = ui.jobs_dialog.find_children("*", "ScrollContainer", true, false)[0]
+	jobs_scroll.custom_minimum_size.y = 100
+	ui.jobs_dialog.popup_centered(Vector2i(640,240)); await settle()
+	var scrollbar := jobs_scroll.get_v_scroll_bar()
+	check(scrollbar.visible, "Compact Jobs rows still scroll when dialog height is constrained")
+	var cancel_edge: float = ui.job_rows["Video export"].cancel.get_global_rect().end.x
+	var scrollbar_edge: float = scrollbar.get_global_rect().position.x
+	var aligned := true
+	for title in ["Selections", "Analysis", "Matched views", "Isosurface"]:
+		aligned = aligned and is_equal_approx(ui.job_rows[title].cancel.get_global_rect().end.x, cancel_edge)
+	check(aligned and scrollbar_edge - cancel_edge >= 8.0, "Cancel column stays aligned with breathing room before a visible scrollbar")
+	picture("jobs-scrolled")
+	jobs_scroll.scroll_vertical = 40; await settle()
+	check(jobs_scroll.scroll_vertical > 0, "Compact Jobs overview retains vertical scrolling")
+	ui.jobs_dialog.hide(); jobs_scroll.custom_minimum_size.y = 260
 	root.size = Vector2i(1440,900); await settle()
+	ui.open_jobs(); ui.job_rows["Matched views"].details.pressed.emit()
+	check(viewer.shell.details.visible and viewer.shell.detail_text.text == ui.job_rows["Matched views"].detail, "Matched views explanation remains in Details")
+	viewer.shell.details.hide()
 	var video = configure_video(viewer,"complete",config.ffmpeg,6)
 	check(video.start_button.text == "Start Export" and not video.start_button.disabled and video.background_button.disabled,"Idle export has one Start action and disabled background action")
 	check(video.start_button.get_parent().get_child_count() == 3 and video.close_button.text == "Cancel" and video.background_button.text == "Run in background","Exactly three requested dialog actions")
@@ -256,12 +281,14 @@ func run():
 	check_active_export(video,"Jobs reopen")
 	check(video.settings() == running_settings and FileAccess.get_sha256(video.active_job_path) == job_hash,"Background/reopen and blocked picker preserve visible and worker configuration")
 	video.background_button.pressed.emit()
-	ui.open_jobs(); ui.job_rows["Video export"].details.pressed.emit()
+	ui.open_jobs(); await settle(); picture("jobs-active-video")
+	check_compact_job_rows(ui, "Active video Jobs")
+	ui.job_rows["Video export"].details.pressed.emit()
 	var initial_detail: String = viewer.shell.detail_text.text
 	deadline = Time.get_ticks_msec()+15000
 	while video.pid > 0 and video.last_progress.get("stage", "") != "rendering" and Time.get_ticks_msec()<deadline: await create_timer(.01).timeout
 	check(video.pid > 0 and viewer.shell.detail_text.text != initial_detail and ui.live_details == "Video export","Open active Details updates from real published export progress")
-	check(viewer.shell.detail_text.text == ui.job_rows["Video export"].detail,"Details and Jobs overview use the same progress snapshot")
+	check(viewer.shell.detail_text.text == ui.job_rows["Video export"].detail,"Details uses the retained progress snapshot")
 	check(viewer.shell.detail_text.text.begins_with("Rendering frame ") and viewer.shell.detail_text.text.contains("%)\nElapsed: "),"Real worker produces canonical progress and elapsed")
 	check(viewer.shell.detail_text.text.count(" / ") == 1 and viewer.shell.detail_text.text.count(video.active_directory) == 1,"Live Details has no duplicate frame count or directory")
 	deadline = Time.get_ticks_msec()+15000
@@ -323,7 +350,10 @@ func run():
 	video = configure_video(viewer,"failed-ffmpeg",config.bad_ffmpeg); video.start_export(); video.hide(); await wait_video(video); ui.refresh()
 	check(video.job_status.stage == "failed" and ui.failures.has("Video export"),"Encoding failure persists in Jobs and status")
 	viewer.status_label.text = "Another information message"; ui.refresh(); check(ui.failures.has("Video export"),"Unrelated update retains export failure")
-	ui.open_jobs(); await settle(); picture("jobs-failed"); ui.jobs_dialog.hide(); ui.acknowledge()
+	ui.open_jobs(); await settle(); picture("jobs-failed")
+	ui.job_rows["Video export"].details.pressed.emit()
+	check(viewer.shell.detail_text.text == ui.job_rows["Video export"].detail and viewer.shell.detail_text.text.contains("Failed"), "Failed export remains discoverable through Details")
+	viewer.shell.details.hide(); ui.acknowledge()
 	# Encoding uses real FFmpeg paced at input speed so the confirmation race is observable.
 	video = configure_video(viewer,"cancel-encoding",config.slow_ffmpeg,3);video.start_export()
 	deadline = Time.get_ticks_msec()+15000
