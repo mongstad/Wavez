@@ -39,17 +39,16 @@ func setup(owner_shell) -> void:
 	jobs_button = shell.button(shell.transport.options, "Jobs (0)", open_jobs, "export")
 	jobs_button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	jobs_dialog = AcceptDialog.new(); jobs_dialog.title = "Jobs"; jobs_dialog.get_ok_button().text = "Close"; add_child(jobs_dialog)
-	var scroll := ScrollContainer.new(); scroll.custom_minimum_size = Vector2(600,360); jobs_dialog.add_child(scroll)
-	var content := VBoxContainer.new(); content.size_flags_horizontal = Control.SIZE_EXPAND_FILL; scroll.add_child(content)
+	var scroll := ScrollContainer.new(); scroll.custom_minimum_size = Vector2(460,220); jobs_dialog.add_child(scroll)
+	var inset := MarginContainer.new(); inset.size_flags_horizontal = Control.SIZE_EXPAND_FILL; inset.add_theme_constant_override("margin_right",8); scroll.add_child(inset)
+	var content := VBoxContainer.new(); content.size_flags_horizontal = Control.SIZE_EXPAND_FILL; inset.add_child(content)
 	add_job(content,"Video export", reopen_video, func(): viewer.video_dialog.request_cancel_export())
 	add_job(content,"Selections", func(): shell.show_section("Selections"), func(): viewer.selection_controller.cancel_query(); selection_result = "Cancelled. Completed selections remain available.")
 	add_job(content,"Analysis", reopen_analysis, func(): viewer.selection_controller.temporal.cancel_analysis(); analysis_result = "Cancellation requested. Completed named results remain available.")
 	add_job(content,"Matched views", func(): shell.show_section("Matched runs"), func(): viewer.selection_controller.temporal.matched.cancel())
 	add_job(content,"Isosurface", func(): viewer.tools_ui.open("Isosurface"), func():
 		if viewer.scene_layers != null: viewer.scene_layers.cancel_iso())
-	var actions := HBoxContainer.new(); content.add_child(actions)
-	shell.button(actions,"Failure details…",show_status,"warning")
-	shell.button(actions,"Acknowledge failures",acknowledge,"close")
+	shell.detail_failure_action.pressed.connect(func(): acknowledge(); shell.details.hide())
 	jobs_dialog.visibility_changed.connect(func():
 		if not jobs_dialog.visible: jobs_button.grab_focus())
 	shell.details.visibility_changed.connect(func():
@@ -65,14 +64,12 @@ func setup(owner_shell) -> void:
 	refresh()
 
 func add_job(parent: Node, title: String, reopen: Callable, cancel: Callable) -> void:
-	var box := VBoxContainer.new(); parent.add_child(box)
-	var row := HBoxContainer.new(); box.add_child(row)
-	var label := Label.new(); label.text = title; label.theme_type_variation = "SectionTitle"; label.size_flags_horizontal = Control.SIZE_EXPAND_FILL; row.add_child(label)
+	var row := HBoxContainer.new(); parent.add_child(row)
+	var label := Label.new(); label.text = title; label.theme_type_variation = "SectionTitle"; label.custom_minimum_size.x = 160; row.add_child(label)
 	var open_button: Button = shell.button(row,"Open…",func(): jobs_dialog.hide(); reopen.call())
 	var details_button: Button = shell.button(row,"Details…",open_job_details.bind(title))
 	var cancel_button: Button = shell.button(row,"Cancel",cancel)
-	var text := Label.new(); text.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; text.custom_minimum_size.x = 550; box.add_child(text)
-	job_rows[title] = {"text":text,"cancel":cancel_button,"open":open_button,"details":details_button,"detail":"","active":false,"identity":""}
+	job_rows[title] = {"cancel":cancel_button,"open":open_button,"details":details_button,"detail":"","active":false,"identity":""}
 
 func open_job_details(title: String) -> void:
 	refresh(); jobs_dialog.hide()
@@ -120,7 +117,7 @@ func reopen_analysis() -> void:
 	viewer.tools_ui.open(task)
 
 func open_jobs() -> void:
-	jobs_dialog.popup_centered(Vector2i(640,440)); refresh()
+	jobs_dialog.popup_centered(Vector2i(500,300)); refresh()
 
 func remember(owner: String, message: String) -> void:
 	if not message.is_empty(): failures[owner] = message
@@ -214,9 +211,6 @@ func update_row(title: String, text: String, active: bool, cancellable: bool, av
 	var row: Dictionary = job_rows[title]
 	row.detail = text
 	row.active = active or cancellable; row.identity = identity
-	var concise: String = text.get_slice("\n",0)
-	if jobs_dialog.visible and row.text.text != concise: row.text.text = concise
-	row.text.tooltip_text = text
 	row.cancel.disabled = not cancellable; row.open.disabled = not available
 
 func update_jobs() -> void:
@@ -250,14 +244,17 @@ func update_jobs() -> void:
 func show_status() -> void:
 	live_details = ""
 	jobs_dialog.hide()
-	var lines := [readiness,readiness_detail]
-	for owner in failures: lines.append("\n"+owner+" — Failed\n"+str(failures[owner]))
+	var lines := []
+	if not failures.is_empty():
+		lines.append("Retained failures")
+		for owner in failures: lines.append(owner+" — Failed\n"+str(failures[owner]))
+	lines.append(readiness+"\n"+readiness_detail)
 	var layers = viewer.scene_layers
 	if layers != null:
 		for controller in [layers.playback,layers.field_playback,layers.mesh_playback]:
 			if is_instance_valid(controller.label): lines.append(controller.label.text)
-	lines.append("\nUse Jobs → Acknowledge failures to dismiss retained notices.\n\n"+shell.source_details())
-	shell.show_details("Status details", "\n".join(lines))
+	lines.append("\n"+shell.source_details())
+	shell.show_details("Status details", "\n".join(lines), not failures.is_empty())
 
 func layout(width: float, bottom: float) -> float:
 	var profile_started := ResizeProfile.stamp()

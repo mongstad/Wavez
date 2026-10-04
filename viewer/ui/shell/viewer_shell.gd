@@ -92,6 +92,7 @@ var details: AcceptDialog
 var detail_text: TextEdit
 var detail_heading: Label
 var detail_close: Button
+var detail_failure_action: Button
 var about: AcceptDialog
 var particle_empty: Label
 var adapter: VBoxContainer
@@ -198,6 +199,9 @@ func setup(owner_viewer) -> void:
 	detail_text = TextEdit.new(); detail_text.editable = false; detail_text.wrap_mode = TextEdit.LINE_WRAPPING_BOUNDARY; detail_text.custom_minimum_size = Vector2(480, 220); detail_body.add_child(detail_text)
 	details.get_ok_button().hide()
 	var detail_actions := HBoxContainer.new(); detail_actions.alignment = BoxContainer.ALIGNMENT_END; detail_body.add_child(detail_actions)
+	detail_failure_action = Button.new(); detail_failure_action.text = "Acknowledge failures"; detail_failure_action.theme_type_variation = "SecondaryButton"
+	detail_failure_action.tooltip_text = "Dismiss retained failure notices after reviewing them; jobs and results remain unchanged"
+	detail_failure_action.hide(); detail_actions.add_child(detail_failure_action)
 	var detail_done := Button.new(); detail_done.text = "Close"; detail_done.theme_type_variation = "SecondaryButton"
 	detail_done.pressed.connect(func(): details.hide(); restore_focus()); detail_actions.add_child(detail_done)
 	details.close_requested.connect(restore_focus); details.confirmed.connect(restore_focus)
@@ -335,12 +339,13 @@ func source_details() -> String:
 	lines.append("Current viewer message\n" + viewer.status_label.text)
 	return "\n\n".join(lines)
 
-func show_details(title: String, text: String) -> void:
+func show_details(title: String, text: String, show_failure_action := false) -> void:
 	var focus := get_viewport().gui_get_focus_owner()
 	if focus != null: previous_focus = weakref(focus)
 	details.theme = style_slice.theme
 	detail_close.icon = style_slice.theme.chrome_icon("close")
 	details.title = title; detail_heading.text = title; detail_text.text = text
+	detail_failure_action.visible = show_failure_action
 	var available := get_viewport().get_visible_rect().size - Vector2(32,32)
 	details.popup_centered(Vector2i(Vector2(560,360).min(available)))
 

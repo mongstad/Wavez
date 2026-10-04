@@ -217,8 +217,10 @@ are available through Details and the existing Performance controls.
 See [status presentation validation](STATUS_PLAYBACK_STATE.md).
 
 A separate **Failed — details** notice
-survives unrelated informational updates and successful work. **Details…** opens
-copyable diagnostics; **Jobs → Acknowledge failures** dismisses retained notices.
+survives unrelated informational updates and successful work. **File → Details…**
+opens copyable Status details with retained failures first. **Acknowledge
+failures** appears there when retained notices exist and dismisses those notices
+after review without cancelling jobs or results.
 Current unavailability remains visible until the underlying condition resolves.
 A successful capture load automatically clears the previous failed-open banner
 and its retained load diagnostic. Failed retries, picker cancellation and unrelated
@@ -230,6 +232,10 @@ Form validation remains beside its owning input; it is not a new global job.
 It remains reachable with the dock hidden and in interactive fullscreen. Open
 reopens the original video panel or the owning legacy form. Details exposes
 progress, output/intermediate directories and existing diagnostic information.
+The Jobs list shows compact category rows and their actions; progress, status and
+explanatory text appear in each row's Details… view instead of beneath the row.
+Aggregate failure notices are handled through File → Details… rather than a
+separate Jobs button.
 An open active-job Details view updates as progress is published, then retains
 the final state without following later jobs.
 Cancel delegates to the operation's existing cancellation behavior. Video export
