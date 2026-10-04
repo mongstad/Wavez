@@ -43,7 +43,7 @@ func run() -> void:
 		view.capture_path = output.path_join(name+".wvz")
 		view.orbit_enabled = false
 		root.add_child(view)
-		view.set_process(false)
+		view.set_process(false);view.set_process_input(false);view.set_process_unhandled_input(false)
 		check(not view.playing and is_equal_approx(view.requested_time,0.0), name+": opens paused at first recorded time")
 		check(view.committed_sample.get("requested_time",-1.0) == 0.0, name+": initial scene is presented")
 		check(kinds.all(func(kind):
@@ -110,6 +110,9 @@ func run() -> void:
 		check(view._seek_time(1.0),name+": paused seek is accepted")
 		check(await tick_until_ready(view,kinds,60000 if large else 12000) and is_equal_approx(view.requested_time,1.0),name+": paused seek reaches a prepared scene")
 		if name == "mixed":
+			var particle = view.scene_layers.playback
+			check(particle.field_priority and not particle.full_preload and particle.worker.status().desired.size() <= 8,"mixed scene preserves rolling particles for field runway")
+			check(particle.decoded_limit+particle.prepared_limit <= 2048*1048576,"mixed scene retains the existing particle reservation ceiling")
 			var previous = view.scene_layers
 			view.play_button.pressed.emit()
 			check(view.playing,"replacement begins while old source is playing")

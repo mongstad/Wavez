@@ -16,6 +16,11 @@ var context := {}
 var config_signature := ""
 var policy := "adaptive" # Existing key now selects automatically.
 var budget_target := -1
+var budget_checked := -1000
+var sizing_key := ""
+var sized := false
+var field_priority := false
+var memory_override := {} # Deterministic physical-pressure regression only.
 var memory_budget := {}
 var decoded_limit := 0
 var prepared_limit := 0
@@ -45,7 +50,7 @@ func build_ui(parent: Control) -> void:
 	for name in ["Automatic (safe RAM)","512 MiB RAM","2 GiB RAM","8 GiB RAM","16 GiB RAM"]:mode.add_item(name)
 	mode.selected = ["adaptive","512","2048","8192","16384"].find(policy)
 	mode.item_selected.connect(func(index: int):set_policy(["adaptive","512","2048","8192","16384"][index]))
-	mode.tooltip_text = "Prepare the requested pair and a bounded rolling window in the background. Manual RAM choices keep a rolling cache. GPU resources are limited to current particles and visible trails."
+	mode.tooltip_text = "Automatically prepare particle scenes to safe RAM capacity. Scenes with fields retain a rolling particle window to prioritize field preparation. Manual RAM choices keep a rolling cache. GPU resources remain limited to current particles and visible trails."
 	if viewer.shell == null: viewer._check(parent,"Loop recorded interval",viewer.scene_loop_playback,set_loop)
 	label = Label.new();label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART;parent.add_child(label)
 func set_loop(value: bool) -> void:
@@ -55,43 +60,67 @@ func settings() -> Dictionary:
 func set_policy(value: String) -> void:
 	policy = "adaptive" if value == "full" else value;budget_target = -1;config_signature = "";last_target = -1
 	if enabled:begin(viewer.requested_time,1)
-func _budgets(entries: Array, config: Dictionary, memory: Dictionary = {}, target := 0) -> void:
+func _budgets(entries: Array, config: Dictionary, memory: Dictionary = {}, target := 0, plan: Dictionary = {}) -> void:
 	window_pairs = 8
+	field_priority = layers != null and layers.field_playback != null and layers.field_playback.enabled
 	memory_budget = Buffer.memory_headroom() if memory.is_empty() else memory
-	# Size only the requested pair/history. A huge unrequested future record
-	# must not prevent the current valid scene from being played.
-	estimates = Buffer.estimate(entries.slice(maxi(0,target-5) if config.trails else target,mini(entries.size(),target+2)),config.trails)
-	# Other scene caches share the same host; do not promise their RAM to particles.
-	var other: int = layers.reader.cache.limit + 256*Buffer.MIB if layers != null else 0
+	var current := Buffer.estimate(entries.slice(maxi(0,target-5) if config.trails else target,mini(entries.size(),target+2)),config.trails)
+	estimates = current if plan.is_empty() else plan
+	var other: int = layers.reader.cache.limit+256*Buffer.MIB if layers != null else 0
+	if layers != null:
+		if layers.mesh_playback != null and layers.mesh_playback.enabled:other += layers.mesh_playback.reservation_bytes()
+		if layers.field_playback != null and layers.field_playback.enabled:
+			var field: Dictionary = layers.field_playback.worker.status()
+			other += int(field.largest_job_charge)*3*int(field.worker_count)
 	var safe := maxi(0,int(memory_budget.safe_cache_bytes)-other)
-	var transient: int = estimates.largest_pair*2
-	var total := mini(2048*Buffer.MIB,maxi(0,safe-transient))
+	var transient: int = (current.largest_pair if plan.is_empty() else int(plan.pair_estimates[target]))*2
+	var total := maxi(0,int((safe-transient)/1.05))
 	full_preload = false
-	budget_message = "On-demand playback with bounded background lookahead."
+	budget_message = "Sizing particle preparation in the background."
 	if policy not in ["adaptive","full"]:
-		total = mini(int(policy)*Buffer.MIB,maxi(0,safe-transient))
-		if total < int(policy)*Buffer.MIB:budget_message += " RAM budget reduced to preserve system headroom."
-	decoded_limit = total/2;prepared_limit = total-decoded_limit
-	# Reserve room for two still-displayed/previous pairs during cache turnover.
-	var capacity := maxi(1,int(prepared_limit/maxi(1,estimates.largest_pair))-2)
+		total = mini(int(policy)*Buffer.MIB,total)
+		budget_message = "Manual rolling cache."
+	elif field_priority:
+		total = mini(2048*Buffer.MIB,total)
+		budget_message = "Field preparation keeps RAM priority; particles use a rolling playhead window."
+	elif not plan.is_empty():
+		full_preload = plan.total <= total and int(plan.get("unresolved",0)) == 0
+		total = mini(total,int(plan.total))
+		budget_message = "Full-scene particle preparation fits safe RAM." if full_preload else "Bounded particle preparation: safe RAM limits the resident interval."
+	else:
+		# Only a short startup window is reserved before validated descriptor
+		# sizing arrives; large future records never block the current sample.
+		total = mini(total,int(current.largest_pair)*16)
+	var ratio := .3 if plan.is_empty() else float(plan.decoded_total)/maxi(1,int(plan.total))
+	if field_priority:ratio = .5
+	decoded_limit = int(total*ratio);prepared_limit = total-decoded_limit
+	if full_preload:decoded_limit = int(plan.decoded_total);prepared_limit = int(plan.prepared_total)
+	var capacity := maxi(1,int(prepared_limit/maxi(1,current.largest_pair))-2)
 	window_pairs = mini(8,capacity)
 func _context(time: float) -> bool:
 	var config := settings();var signature := JSON.stringify(config,"",true,true)
 	var point: Dictionary = layers.reader.bracket(layers.particle_id,time)
 	if point.is_empty():return false
 	var unchanged: bool = source_generation == layers.reader.generation and signature == config_signature
-	if unchanged and budget_target == point.a:return true
+	var next_key := str(layers.reader.generation)+JSON.stringify(layers.reader.source_stamp,"",true,true)+str(config.trails)
+	var plan := worker.preparation_estimate(next_key)
+	var now := Time.get_ticks_msec()
+	if unchanged and budget_target == point.a and sized == not plan.is_empty() and now-budget_checked < 1000:return not context.is_empty() and context.get("admitted",false)
 	if not layers.reader.samples.has(layers.particle_id):return false
 	var entries: Array = context.entries if unchanged and not context.is_empty() else layers.reader.samples[layers.particle_id].duplicate(true)
 	if entries.is_empty():return false
-	_budgets(entries,config,{},point.a)
-	if estimates.largest_pair > prepared_limit:
-		worker.cancel();context = {};last_target = -1
-		budget_message = "A particle pair exceeds the safe RAM budget; playback preparation is paused."
-		_update_ui();return false
+	_budgets(entries,config,memory_override,point.a,plan)
+	budget_checked = now;sizing_key = next_key;sized = not plan.is_empty()
+	var requested_cost: int = estimates.pair_estimates[point.a] if sized else estimates.largest_pair
 	source_generation = layers.reader.generation;config_signature = signature;budget_target = point.a;last_target = -1
 	var source_token := str(source_generation)+JSON.stringify(layers.reader.source_stamp,"",true,true)
-	context = {"source_token":source_token,"token":source_token+signature,"path":layers.reader.source_path,"stamp":layers.reader.source_stamp.duplicate(),"entries":entries,"object":layers.reader.objects[layers.particle_id].duplicate(true),"config":config,"decoded_limit":decoded_limit,"prepared_limit":prepared_limit,"full_preload":full_preload,"transient_estimate":estimates.largest_pair*2}
+	context = {"source_token":source_token,"token":source_token+signature,"path":layers.reader.source_path,"stamp":layers.reader.source_stamp.duplicate(),"entries":entries,"object":layers.reader.objects[layers.particle_id].duplicate(true),"config":config,"decoded_limit":decoded_limit,"prepared_limit":prepared_limit,"full_preload":full_preload,"transient_estimate":requested_cost*2,"sizing_key":"" if field_priority else sizing_key,"admitted":requested_cost <= prepared_limit}
+	if not context.admitted:
+		# Apply lower limits even when no new pair can be admitted. The worker
+		# can reclaim unpinned history without touching the displayed pair.
+		worker.request(context,[])
+		budget_message = "A particle pair exceeds the safe RAM budget; preparation is paused."
+		_update_ui();return false
 	return true
 func _request(time: float, force := false) -> bool:
 	if not enabled or not _context(time):return false
@@ -100,10 +129,28 @@ func _request(time: float, force := false) -> bool:
 	var target: int = bracket.a
 	if not force and last_target == target:return true
 	var indices: Array[int] = []
-	for offset in range(window_pairs):
-		var index := target+offset*direction
-		if viewer.scene_loop_playback:index = posmod(index,context.entries.size())
-		if index >= 0 and index < context.entries.size() and not indices.has(index):indices.append(index)
+	if sized and not field_priority and policy in ["adaptive","full"]:
+		# Contiguous forward/reverse runway first, then retained history. Budget
+		# each actual pair, rather than multiplying a fixed sample ceiling.
+		var candidates: Array[int] = []
+		for offset in range(context.entries.size()):
+			var index := target+offset*direction
+			if viewer.scene_loop_playback:index = posmod(index,context.entries.size())
+			if index >= 0 and index < context.entries.size():candidates.append(index)
+		if not viewer.scene_loop_playback:
+			for offset in range(1,context.entries.size()):
+				var index := target-offset*direction
+				if index >= 0 and index < context.entries.size():candidates.append(index)
+		var used: int = 0 if full_preload else int(estimates.pair_estimates[target])*2
+		for index in candidates:
+			var bytes: int = estimates.pair_estimates[index]
+			if used+bytes > prepared_limit and not indices.is_empty():break
+			indices.append(index);used += bytes
+	else:
+		for offset in range(window_pairs):
+			var index := target+offset*direction
+			if viewer.scene_loop_playback:index = posmod(index,context.entries.size())
+			if index >= 0 and index < context.entries.size() and not indices.has(index):indices.append(index)
 	last_target = target;worker.request(context,indices)
 	return true
 func begin(time: float, required := 1) -> void:
@@ -188,6 +235,14 @@ func pump() -> bool:
 		viewer.display_accum = 0
 	_update_ui(status)
 	return not buffering and (layers.field_playback == null or layers.field_playback.pump())
+func cache_detail(status: Dictionary = {}) -> String:
+	if status.is_empty():status = worker.status()
+	var count: int = context.get("entries",[]).size()
+	var complete: bool = count > 0 and int(status.prepared_pairs) == count
+	var preparation := "Full scene prepared." if complete else ("Preparing scene in the background." if status.worker_active else "Prepared interval retained.")
+	if status.get("pressure",false):preparation = "Preparation paused for physical RAM headroom."
+	return "Particles: %d / %d prepared intervals. %s\nResident cache accounting: %.1f MiB decoded + %.1f MiB prepared (shared arrays counted conservatively).\n%s" % [status.prepared_pairs,count,preparation,status.decoded_bytes/float(Buffer.MIB),status.prepared_bytes/float(Buffer.MIB),budget_message]
+
 func _update_ui(status: Dictionary = {}) -> void:
 	if not enabled:return
 	if status.is_empty():status = worker.status()
@@ -233,4 +288,4 @@ func commit(pair: Dictionary, point: Dictionary) -> void:
 		var upload := Profile.begin();mm.buffer = trail.buffer;Profile.end("g3_trail_gpu_submit",upload)
 	Profile.end("g3_prepared_pair_commit",started)
 func profile_report() -> Dictionary:
-	return {"cache":worker.status(),"events":worker_events.duplicate(true),"events_dropped":worker_event_drops,"decoded_limit":decoded_limit,"prepared_limit":prepared_limit,"policy":policy,"strategy":"full_preload" if full_preload else "rolling","memory":memory_budget,"full_preload":full_preload,"estimates":estimates,"budget_message":budget_message}
+	return {"cache":worker.status(),"events":worker_events.duplicate(true),"events_dropped":worker_event_drops,"decoded_limit":decoded_limit,"prepared_limit":prepared_limit,"policy":policy,"strategy":"full_preload" if full_preload else "rolling","memory":memory_budget,"full_preload":full_preload,"field_priority":field_priority,"estimates":estimates,"budget_message":budget_message}

@@ -30,34 +30,90 @@ var events: Array = []
 var events_dropped := 0
 var metrics := {"prepared_hits":0,"prepared_misses":0,"prepared_evictions":0,"cancelled":0,"completed":0,"decoded_hits":0,"decoded_misses":0,"decoded_bytes":0,"prepared_bytes":0,"decoded_samples":0,"worker_active":false,"error":""}
 var test_barrier: Semaphore
+var sizing_key := ""
+var sizing := {}
+var memory_override := {} # Deterministic physical-pressure regression only.
+
+func _memory_headroom() -> Dictionary:
+	return memory_headroom() if memory_override.is_empty() else memory_override
+
+func preparation_estimate(key: String) -> Dictionary:
+	mutex.lock();var result: Dictionary = sizing if key == sizing_key else {};mutex.unlock()
+	return result
 
 static func memory_headroom() -> Dictionary:
 	return preload("res://layers/playback_memory.gd").snapshot()
 
-static func estimate(entries: Array, trails: bool) -> Dictionary:
-	var samples: Array[int] = []
-	for entry in entries:
-		var ids: bool = entry.get("identity","") == "persistent_i8"
-		var count := mini(1000000 if ids else 10000000,int(entry.decoded)/(20 if ids else 12));var scalars: int = entry.get("array_count",256) if entry.descriptor.is_empty() else 0
-		for array in entry.descriptor.get("arrays",[]):
-			if array.name == "position":count = int(array.shape[0])
-			if array.name == "particle_id":ids = true
-			scalars += 1
-		# f8/u4 conversion, immutable identity table and display arrays included.
-		samples.append(int(entry.decoded)*2+count*(180 if ids else 20)+8192+scalars*512)
-	var pairs: Array[int] = []
-	for i in range(entries.size()):
-		var count := mini(10000000,int(entries[i].decoded)/12)
-		for array in entries[i].descriptor.get("arrays",[]):
-			if array.name == "position":count = int(array.shape[0])
-		var cost := samples[i]+(samples[i+1] if i+1<samples.size() else 0)+count*76+16384
+static func sample_estimate(entry: Dictionary) -> Dictionary:
+	var ids: bool = entry.get("identity","") == "persistent_i8"
+	var count := mini(1000000 if ids else 10000000,int(entry.decoded)/(20 if ids else 12))
+	if entry.descriptor.is_empty():
+		# Unresolved records remain conservative; never infer particle count from
+		# a channel-rich payload once validated shapes are available.
+		return {"count":count,"bytes":int(entry.decoded)*2+count*(180 if ids else 20)+8192+int(entry.get("array_count",256))*512}
+	var arrays: Array = entry.descriptor.arrays
+	var bytes := 5120+arrays.size()*256
+	var velocity := false
+	for array in arrays:
+		if array.name == "position":count = int(array.shape[0])
+		if array.name == "particle_id":ids = true
+		if array.name == "velocity" and array.shape.size() == 2 and int(array.shape[1]) == 3:velocity = true
+		var elements := 1
+		for dimension in array.shape:elements *= int(dimension)
+		bytes += elements*(4 if array.dtype == "f4" else 8)
+	# Same retained charge as Typed.read + Prepare.frame, including u4 -> f8,
+	# immutable identity lookup and the derived velocity magnitude.
+	bytes += count*((160 if ids else 0)+(20 if velocity else 16))
+	return {"count":count,"bytes":bytes}
+
+static func estimate_costs(costs: Array, trails: bool) -> Dictionary:
+	var samples: Array[int] = [];var pairs: Array[int] = []
+	for cost in costs:samples.append(cost.bytes)
+	for i in range(costs.size()):
+		var count: int = costs[i].count
+		# 76 bytes covers style, sizes and both ID match arrays, including
+		# anonymous samples where these arrays can be smaller.
+		var cost: int = samples[i]+(samples[i+1] if i+1<samples.size() else 0)+count*76+8192
 		if trails:
-			for j in range(maxi(0,i-5),i):cost += samples[j]+count*64
+			for j in range(maxi(0,i-5),i):cost += samples[j]+int(costs[j].count)*64
 		pairs.append(cost)
 	var decoded_total := 0;var prepared_total := 0;var largest := 0
 	for bytes in samples:decoded_total += bytes
 	for bytes in pairs:prepared_total += bytes;largest = maxi(largest,bytes)
 	return {"decoded_total":decoded_total,"prepared_total":prepared_total,"total":decoded_total+prepared_total,"largest_pair":largest,"sample_estimates":samples,"pair_estimates":pairs}
+
+static func estimate(entries: Array, trails: bool) -> Dictionary:
+	var costs: Array = []
+	for entry in entries:costs.append(sample_estimate(entry))
+	return estimate_costs(costs,trails)
+
+func _size_capture() -> void:
+	mutex.lock()
+	var job := context
+	var key: String = job.get("sizing_key","")
+	var needed: bool = not desired.is_empty() and not key.is_empty() and key != sizing_key
+	mutex.unlock()
+	if not needed:return
+	var memory := _memory_headroom()
+	# Bound temporary descriptor parsing/cost-table space before scanning.
+	if int(memory.available_physical) < int(memory.reserve)+32*MIB+job.entries.size()*1024:return
+	var file := FileAccess.open(job.path,FileAccess.READ)
+	if file == null or not _source_matches(job):return
+	var costs: Array = [];var unresolved := 0
+	for entry in job.entries:
+		mutex.lock();var cancelled: bool = closing or context.get("sizing_key","") != key or desired.is_empty();mutex.unlock()
+		if cancelled:return
+		var resolved := Reader.materialize(file,entry,job.object)
+		# Invalid future records must never prevent a valid requested pair.
+		# Retain a conservative bound; normal requested decoding reports faults.
+		if resolved.has("error"):resolved = entry;unresolved += 1
+		costs.append(sample_estimate(resolved))
+	if not _source_matches(job):return
+	var result := estimate_costs(costs,job.config.trails)
+	result.unresolved = unresolved
+	mutex.lock()
+	if context.get("sizing_key","") == key:sizing = result;sizing_key = key
+	mutex.unlock()
 
 func start() -> Error:
 	return thread.start(_run,Thread.PRIORITY_LOW)
@@ -70,7 +126,7 @@ func request(next_context: Dictionary, indices: Array[int]) -> void:
 	context = next_context;token = context.token;desired = indices
 	for old in failures.keys():
 		if not indices.has(old):failures.erase(old)
-	metrics.error = ""
+	metrics.error = "";metrics.pressure = false
 	mutex.unlock();wake.post()
 func cancel() -> void:
 	mutex.lock();desired = [];mutex.unlock();wake.post()
@@ -181,20 +237,24 @@ func _run() -> void:
 			mutex.lock()
 			metrics.decoded_bytes = decoded.used;metrics.decoded_samples = decoded.entries.size()
 			if not fits and limits.token == token and limits.prepared_limit == context.prepared_limit:
-				metrics.error = "Prepared pair exceeds the available playback budget; choose a larger safe budget.";desired = []
+				metrics.pressure = true;desired = []
 			mutex.unlock()
 		while true:
 			var job := _next_job()
-			if job.is_empty():break
+			if job.is_empty():
+				_size_capture();break
 			var index := working_index;var started := Time.get_ticks_usec();timings = {}
 			if decoded_source != job.source_token:decoded.clear();decoded_source = job.source_token
 			decoded.configure(job.decoded_limit)
 			_prune(job,0,index)
 			var outcome := {}
-			var memory := memory_headroom()
-			var ahead := estimate(job.entries.slice(maxi(0,index-5) if job.config.trails else index,mini(job.entries.size(),index+2)),job.config.trails)
-			if memory.available_physical < memory.reserve+ahead.largest_pair*2:
-				outcome = {"error":"Playback preparation paused to preserve physical RAM headroom."}
+			var memory := _memory_headroom()
+			var plan := preparation_estimate(job.get("sizing_key",""))
+			var scratch: int = int(plan.pair_estimates[index])*2 if not plan.is_empty() else int(estimate(job.entries.slice(maxi(0,index-5) if job.config.trails else index,mini(job.entries.size(),index+2)),job.config.trails).largest_pair)*2
+			if memory.available_physical < memory.reserve+scratch:
+				mutex.lock();metrics.pressure = true;metrics.worker_active = false;working_index = -1;mutex.unlock()
+				_size_capture()
+				break
 			elif _source_matches(job):
 				var file := FileAccess.open(job.path,FileAccess.READ)
 				if file != null:
@@ -219,7 +279,8 @@ func _run() -> void:
 			if not outcome.is_empty() and not outcome.has("error") and not _source_matches(job):outcome = {"error":"Playback source changed during preparation."}
 			var cancelled := stopped()
 			if not cancelled and not outcome.is_empty() and not outcome.has("error"):
-				if not _prune(job,outcome.bytes,index):outcome = {"error":"Prepared pair exceeds the available playback budget; choose a larger safe budget."}
+				mutex.lock();var latest: Dictionary = context;mutex.unlock()
+				if not _prune(latest,outcome.bytes,index):outcome = {"error":"Prepared pair exceeds the available playback budget; choose a larger safe budget."}
 			mutex.lock()
 			cancelled = cancelled or working_token != token or not desired.has(index) or closing
 			if cancelled:metrics.cancelled += 1

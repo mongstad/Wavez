@@ -1,10 +1,17 @@
 # Current status
 
+Issue #229 restores automatic particle caching to safe whole-scene or bounded
+capacity, with worker-side descriptor sizing and resident cache details in the
+Ready tooltip. Initial interaction remains available while background preparation
+continues. Scenes containing fields preserve the smaller rolling particle window
+so fields retain RAM priority. Candidate build 36 is pending owner review. See the
+[particle cache policy, production measurements and owner checks](PARTICLE_CACHE_CAPACITY.md).
+
 Issue #204 opens a successful scene paused at its first recorded sample.
 Automatic particle, field and mesh preparation continues through the shared
 bounded scheduler while the clock stays still; valid prepared coverage remains
 resident during pauses unless source/configuration changes or resource limits
-require eviction. Candidate build 35 awaits owner review. See the
+require eviction. See the
 [playback and cache contract](WAVEZ_HANDBOOK.md) and
 [focused validation and owner checks](PAUSED_PREPARATION.md).
 

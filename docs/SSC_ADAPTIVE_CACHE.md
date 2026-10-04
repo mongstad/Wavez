@@ -78,8 +78,11 @@ already reduce available physical RAM and are not subtracted again.
 
 Field capacity is `max(0, (available + physical owned credit - system reserve -
 renderer reserve - pending other allocations - transient allowance) / 1.05)`.
-The normal automatic field cache has no fixed GiB ceiling. Existing particle and
-mesh workload limits remain. A controller-only `cache_cap_bytes` ceiling exists
+The normal automatic field cache has no fixed GiB ceiling. Scenes with fields
+retain the smaller rolling particle window to preserve field capacity.
+[Particle preparation](PARTICLE_CACHE_CAPACITY.md) can fill safe whole-scene or
+bounded coverage in scenes without fields; mesh workload limits remain.
+A controller-only `cache_cap_bytes` ceiling exists
 for focused tests; zero is the product default. It changes cache coverage only.
 
 Admission uses conservative fixed-header charges before a descriptor is needed.
