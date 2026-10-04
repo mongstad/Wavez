@@ -34,6 +34,8 @@ var close_button: Button
 var can_start := false
 var save_dialog: FileDialog
 var fields: GridContainer
+var range_group: PanelContainer
+var range_fields: GridContainer
 var pid := -1
 var active_directory := ""
 var active_job_path := ""
@@ -78,14 +80,22 @@ func _ready() -> void:
 	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL; scroll.follow_focus = true
 	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED; box.add_child(scroll)
 	var form := VBoxContainer.new(); form.size_flags_horizontal = Control.SIZE_EXPAND_FILL; scroll.add_child(form)
+	form.add_theme_constant_override("separation", 8)
+	range_group = PanelContainer.new(); range_group.size_flags_horizontal = Control.SIZE_EXPAND_FILL; form.add_child(range_group)
+	range_fields = GridContainer.new(); range_fields.columns = 2
+	range_fields.add_theme_constant_override("h_separation", 16)
+	range_fields.add_theme_constant_override("v_separation", 6)
+	range_group.add_child(range_fields)
 	fields = GridContainer.new()
 	fields.columns = 2
 	fields.add_theme_constant_override("h_separation", 16)
 	fields.add_theme_constant_override("v_separation",8)
 	form.add_child(fields)
-	range_choice = choice("Range", ["Entire capture", "Current position to end", "Custom start/end"])
-	start = number("Start • capture time", 0, -1e30, 1e30, .0001)
-	end = number("End • capture time (exclusive)", 1, -1e30, 1e30, .0001)
+	range_choice = choice("Range", ["Full", "Current position to end", "Custom start/end"], range_fields)
+	start = number("Start", 0, -1e30, 1e30, .0001, range_fields)
+	end = number("End", 1, -1e30, 1e30, .0001, range_fields)
+	start.tooltip_text = "Recorded capture time."
+	end.tooltip_text = "End time is exclusive; a still exports one frame."
 	range_choice.item_selected.connect(func(_i: int): update_range())
 	var resolution := choice("Resolution", ["1920 × 1080", "2560 × 1440", "3840 × 2160", "Custom"])
 	width = number("Width", 1920, 64, 8192, 2)
@@ -183,17 +193,19 @@ func _ready() -> void:
 	_sync_action_buttons()
 	for spin in [start, end, width, height, fps, rate]: spin.value_changed.connect(func(_v: float): update_estimate())
 
-func choice(label: String, options: Array) -> OptionButton:
-	var text := Label.new(); text.text = label; fields.add_child(text)
+func choice(label: String, options: Array, target: GridContainer = null) -> OptionButton:
+	if target == null: target = fields
+	var text := Label.new(); text.text = label; target.add_child(text)
 	var option := OptionButton.new(); option.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	for item in options: option.add_item(item)
-	fields.add_child(option)
+	target.add_child(option)
 	return option
 
-func number(label: String, initial: float, low: float, high: float, step_value: float) -> SpinBox:
-	var text := Label.new(); text.text = label; fields.add_child(text)
+func number(label: String, initial: float, low: float, high: float, step_value: float, target: GridContainer = null) -> SpinBox:
+	if target == null: target = fields
+	var text := Label.new(); text.text = label; target.add_child(text)
 	var spin := SpinBox.new(); spin.min_value = low; spin.max_value = high; spin.step = step_value; spin.value = initial
-	fields.add_child(spin)
+	target.add_child(spin)
 	return spin
 
 func check(label: String, text: String) -> CheckButton:
@@ -205,6 +217,7 @@ func open() -> void:
 	if viewer.shell != null:
 		theme = viewer.shell.style_slice.theme
 		surface.add_theme_stylebox_override("panel",viewer.shell.style_slice.theme.flat_box(&"surface.1",0,0,0))
+		range_group.add_theme_stylebox_override("panel", theme.box(&"surface.1", &"border.control", 10, 6))
 		header_close.icon = viewer.shell.style_slice.theme.chrome_icon("close")
 		cancel_confirmation.theme = theme
 	var available: Vector2 = viewer.get_viewport().get_visible_rect().size - Vector2(32,32)
@@ -288,7 +301,7 @@ func update_estimate() -> void:
 		return
 	var count := Job.frame_total({"start_time":start_time, "end_time":end_time, "fps":fps.value, "playback_rate":rate.value})
 	var gib := float(count) * width.value * height.value * 4 / pow(1024, 3)
-	estimate.text = "Source: %d committed samples\nOutput: %.3f seconds • %d frames\nTemporary PNG budget: up to approximately %.2f GiB before compression, plus MP4. End is exclusive; a still exports one frame." % [timeline.times.size() if timeline != null else 0, count/fps.value, count, gib]
+	estimate.text = "Output: %.3f seconds • %d frames\nTemporary storage: %.2f GiB" % [count/fps.value, count, gib]
 
 func start_export() -> void:
 	if pid > 0 or preparing or timeline == null: return
@@ -388,6 +401,7 @@ func _sync_settings(active: bool) -> void:
 	settings_locked = active
 	if active:
 		save_dialog.hide()
+		_lock_fields(range_fields)
 		_lock_fields(fields)
 	else:
 		# Restore each control's idle policy (e.g. preset dimensions remain read-only).

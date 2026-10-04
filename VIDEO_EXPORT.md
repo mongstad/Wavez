@@ -25,14 +25,20 @@ unstarted and outside this contract.
 ## Using Export Video
 
 Open a capture and set its appearance/camera, then choose **File → Export →
-Video**. Choose entire capture, current position to end, or custom start/end
-in recorded capture-time units. Select 1080p, 1440p, 4K, or even custom dimensions;
+Video**. The bordered Range group offers **Full**, current position to end, or
+custom start/end in recorded capture-time units. Its **Start** and **End**
+fields retain exact source endpoints for the presets; the End tooltip explains
+that the endpoint is exclusive and a still exports one frame. Select 1080p,
+1440p, 4K, or even custom dimensions;
 24/30/60 or custom integer FPS; and capture-time units per video second.
 
 Choose current camera locked or orbit, current rendering state or a cinematic /
 scientific override, overlays, trails, H.264 quality, and a new `.mp4` output path.
-The dialog estimates video duration, exact output-frame count and approximate
-uncompressed temporary storage (actual PNG size depends on image content).
+The dialog shows video duration, exact output-frame count and a compact
+**Temporary storage** estimate for uncompressed frames (actual PNG size depends
+on image content). The source sample count and successful FFmpeg discovery are
+not shown; missing FFmpeg still produces an actionable error when Start Export
+is pressed.
 Click **Start Export**. A second Godot process renders and encodes the video.
 The worker keeps a real GPU display connection but minimizes its noninteractive
 window and makes it unfocusable. It no longer needs a visible debug window to
