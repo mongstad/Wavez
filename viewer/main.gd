@@ -663,7 +663,11 @@ func _toggle_free_camera() -> void:
 func _reset_camera() -> void:
 	if shell != null: shell.dismiss_orbit_editor()
 	camera_orbit_basis_active = false
-	camera_target = Vector3.ZERO; yaw = deg_to_rad(38.0); pitch = deg_to_rad(24.0); camera_distance = maxf(30.0, half_extent * 2.8); _update_camera()
+	yaw = deg_to_rad(38.0); pitch = deg_to_rad(24.0)
+	# Frame Scene owns the bounds for every layer type. Reset uses those same
+	# current-scene bounds, but restores the default orientation first.
+	if scene_layers != null and scene_layers.frame_scene(): return
+	camera_target = Vector3.ZERO; camera_distance = maxf(30.0, half_extent * 2.8); _update_camera()
 
 func _adopt_camera_basis() -> void:
 	# Saved visual states already contain the full camera transform. Restore its

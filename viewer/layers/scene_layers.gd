@@ -825,7 +825,7 @@ func particle_frame_at_union(index: int):
 	var frame = viewer.FrameData.new();frame.sim_time = time;frame.channels = {"position":PackedFloat32Array()};frame.components = {"position":3}
 	return frame
 
-func frame_scene() -> void:
+func frame_scene() -> bool:
 	var low := Vector3(INF,INF,INF);var high := Vector3(-INF,-INF,-INF)
 	if viewer.frame_a != null:
 		for p in viewer.frame_a.positions:
@@ -836,13 +836,24 @@ func frame_scene() -> void:
 			for x in [grid.bounds_min.x,grid.bounds_max.x]:
 				for y in [grid.bounds_min.y,grid.bounds_max.y]:
 					for z in [grid.bounds_min.z,grid.bounds_max.z]:
-						var p: Vector3 = tx*Vector3(x,y,z);low = low.min(p);high = high.max(p)
+						var p: Vector3 = tx*Vector3(x,y,z)
+						if p.is_finite():low = low.min(p);high = high.max(p)
 		elif views[id] is MeshView:
 			for point in views[id].source_positions:
-				var p: Vector3 = views[id].transform*point;low = low.min(p);high = high.max(p)
-	if not low.is_finite() or not high.is_finite():return
-	viewer.camera_target = (low+high)*.5;viewer.half_extent = maxf((high-low).length()*.5,.1)
-	viewer.camera_distance = viewer.half_extent*2.8;viewer.camera.far = maxf(1000,viewer.camera_distance*5);viewer._update_camera()
+				var p: Vector3 = views[id].transform*point
+				if p.is_finite():low = low.min(p);high = high.max(p)
+	if not low.is_finite() or not high.is_finite():return false
+	var radius: float = (high-low).length()*.5
+	if not is_finite(radius):return false
+	viewer.camera_target = low+(high-low)*.5
+	viewer.half_extent = maxf(radius,.0001)
+	viewer.camera_distance = viewer.half_extent*2.8
+	# A fixed 0.1 extent / 0.05 near plane makes small scenes tiny or clipped.
+	# Ordinary scene scales retain their prior near/far values.
+	viewer.camera.near = minf(.05,maxf(.000001,viewer.half_extent*.1))
+	viewer.camera.far = maxf(1000*minf(1,viewer.half_extent),viewer.camera_distance*5)
+	viewer._update_camera()
+	return true
 
 func _set_color_normalization(id: String, mode: String) -> bool:
 	var candidate: Dictionary = states[id].duplicate(true);candidate.color_mapping.normalization = mode

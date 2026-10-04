@@ -282,8 +282,12 @@ A right drag temporarily suspends Auto Orbit; it resumes on release.
 During left-drag tumble, horizontal motion rotates about world Y and vertical
 motion rotates about the current camera right axis. The camera up axis follows
 that tumble, including upside-down views, without a world-up flip at either pole.
-Wheel zoom, free-camera WASD/Q/E movement, F (Frame scene), R (reset) and the
-chosen orbit center retain their previous roles. O toggles automatic world-Y
+F (Frame Scene) recomputes a center and radius from the current particles,
+fields and meshes while keeping the camera's orientation. R (Reset Camera)
+uses the same current-scene bounds but restores the default yaw/pitch and clears
+the view-relative orbit basis. Both leave scientific coordinates and the Free
+Camera / Auto Orbit modes alone. Wheel zoom and free-camera WASD/Q/E movement
+continue from either framed view. O toggles automatic world-Y
 orbit independently; manual dragging temporarily suspends it.
 
 **Navigate → Edit orbit center…** opens a temporary world-space XYZ/radius

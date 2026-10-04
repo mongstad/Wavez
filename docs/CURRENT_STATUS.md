@@ -1,5 +1,11 @@
 # Current status
 
+Issue #211 restores Reset Camera to the current scene bounds in candidate build
+46. It returns to the default orientation while centering and sizing the camera
+for the loaded particles, fields and meshes; Frame Scene still preserves the
+current orientation. Small scenes receive scale-appropriate clipping planes.
+See [camera reset behavior and owner checks](CAMERA_RESET.md).
+
 Issue #220 renames the Video Export Range option from “Custom start/end” to
 “Custom” in candidate build 45. The option index, Start/End editability and
 custom-range timing are unchanged. See [the video export guide](../VIDEO_EXPORT.md).
