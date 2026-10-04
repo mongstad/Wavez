@@ -1,5 +1,12 @@
 # Current status
 
+Issue #224 audits every current Tools route, its controls, source eligibility,
+scientific or presentation effect, and recommended classification. Candidate
+build 41 changes documentation only; it removes no tools and changes no
+analysis behavior. See the [live Tools functional audit](TOOLS_FUNCTIONAL_AUDIT.md)
+for the route inventory, wording findings, focused evidence, limits and owner
+checks. This candidate awaits owner review.
+
 Issue #232 compares mixed playback before/after #230. On the supplied production
 capture, temporary 2× holds came from the existing field refill gate while
 particles were ready. Candidate build 37 corrects the Buffering wait reason;
