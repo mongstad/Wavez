@@ -26,7 +26,7 @@ unstarted and outside this contract.
 
 Open a capture and set its appearance/camera, then choose **File → Export →
 Video**. The bordered Range group offers **Full**, current position to end, or
-custom start/end in recorded capture-time units. Its **Start** and **End**
+**Custom** in recorded capture-time units. Its **Start** and **End**
 fields retain exact source endpoints for the presets; the End tooltip explains
 that the endpoint is exclusive and a still exports one frame. Select 1080p,
 1440p, 4K, or even custom dimensions;
