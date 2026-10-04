@@ -3,7 +3,9 @@
 Issue #226 adds Edit → Preferences → File Locations in candidate build 43.
 FFmpeg defaults to runtime PATH detection, with an explicit validated custom
 executable option. Video, image and session-log directories can be configured;
-missing FFmpeg stops an MP4 request before rendering. See [File Locations](FILE_LOCATIONS.md)
+Save Image writes directly to a configured image folder and otherwise retains
+the native picker with a session-only folder choice.
+Missing FFmpeg stops an MP4 request before rendering. See [File Locations](FILE_LOCATIONS.md)
 for defaults, persistence and owner checks.
 
 Issue #242 adds a per-session, bounded local troubleshooting log in candidate

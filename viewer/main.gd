@@ -813,6 +813,10 @@ func _focus_activity() -> void:
 func _save_image() -> void:
 	shell.dismiss_orbit_editor()
 	if screenshot_pending or screenshot_saving: return
+	var preferred: String = file_locations.settings.image_dir if file_locations != null else ""
+	if not preferred.is_empty():
+		await _write_screenshot(preferred)
+		return
 	if not screenshot_directory.is_empty():
 		var unavailable: String = preload("res://ui/file_locations_preferences.gd").directory_problem(screenshot_directory)
 		if not unavailable.is_empty():
@@ -829,11 +833,6 @@ func _save_image() -> void:
 			screenshot_dialog.dir_selected.connect(_screenshot_directory_selected)
 			screenshot_dialog.canceled.connect(func(): screenshot_pending = false)
 			add_child(screenshot_dialog)
-		if file_locations != null and not file_locations.settings.image_dir.is_empty():
-			var preferred: String = file_locations.settings.image_dir
-			var problem: String = preload("res://ui/file_locations_preferences.gd").directory_problem(preferred)
-			if problem.is_empty(): screenshot_dialog.current_dir = preferred
-			else: _notify_screenshot("Image export preference is unavailable: " + problem)
 		screenshot_pending = true
 		screenshot_dialog.popup_centered_ratio(.65)
 		return
@@ -851,18 +850,19 @@ func _screenshot_directory_selected(path: String) -> void:
 	await get_tree().process_frame # Let the directory chooser disappear first.
 	await _write_screenshot()
 
-func _write_screenshot() -> void:
+func _write_screenshot(preferred: String = "") -> void:
 	screenshot_saving = true
-	var problem: String = preload("res://ui/file_locations_preferences.gd").directory_problem(screenshot_directory)
+	var directory: String = preferred if not preferred.is_empty() else screenshot_directory
+	var problem: String = preload("res://ui/file_locations_preferences.gd").directory_problem(directory)
 	if not problem.is_empty():
 		screenshot_saving = false
-		screenshot_directory = ""
-		_notify_screenshot("Image export folder is unavailable: " + problem)
+		if preferred.is_empty(): screenshot_directory = ""
+		_notify_screenshot(("Image export folder is unavailable: " if preferred.is_empty() else "Image export preference is unavailable. Change it in Edit → Preferences → File Locations: ") + problem)
 		return
 	if screenshot_notice != null: screenshot_notice.hide()
 	screenshot_count += 1
 	var stamp := Time.get_datetime_string_from_system().replace(":", "-")
-	var path := screenshot_directory.path_join("wavez-%s-%d-%04d.png" % [stamp, Time.get_ticks_usec(), screenshot_count])
+	var path := directory.path_join("wavez-%s-%d-%04d.png" % [stamp, Time.get_ticks_usec(), screenshot_count])
 	while FileAccess.file_exists(path): path = path.get_basename() + "-1.png"
 	var result: Error = await _capture_inspection_png(path,screenshot_sidecar)
 	screenshot_saving = false
