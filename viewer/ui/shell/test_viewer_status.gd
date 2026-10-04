@@ -69,6 +69,8 @@ func configure_video(viewer, name: String, encoder: String, end_time := .2):
 	video.start.value = 0; video.end.value = end_time; video.rate.value = 1
 	video.width.value = 128; video.height.value = 128; video.fps.value = 30
 	video.overlays.button_pressed = false; video.output.text = output.path_join(name+".mp4"); video.ffmpeg = encoder
+	viewer.file_locations.settings.ffmpeg_mode = "custom"
+	viewer.file_locations.settings.ffmpeg_path = encoder
 	return video
 
 func check_video_details():
@@ -391,9 +393,12 @@ func run():
 	check(video.pid == pid and FileAccess.file_exists(video.active_directory.path_join("cancel")) and video.job_status.stage == "cancelling","Primary running action requests canonical cancellation without starting another job")
 	video.hide(); await wait_video(video)
 	check(video.job_status.stage == "cancelled","Primary cancellation follows worker acknowledgement")
-	video = configure_video(viewer,"missing-ffmpeg",""); video.start_export(); video.hide(); await wait_video(video)
-	check(video.job_status.stage == "frames_ready","Missing FFmpeg retains PNG sequence")
-	check(FileAccess.file_exists(video.active_directory.path_join("frames/frame00000000.png")),"Recoverable PNG output exists")
+	video = configure_video(viewer,"missing-ffmpeg","")
+	var prior_directory: String = video.active_directory
+	video.start_export()
+	check(video.pid <= 0 and video.active_directory == prior_directory,"Missing FFmpeg starts no renderer or temporary directory")
+	check(video.message.text.contains("FFmpeg is required") and video.message.text.contains("File Locations"),"Missing FFmpeg gives an actionable preference route")
+	video.hide()
 	video = configure_video(viewer,"failed-ffmpeg",config.bad_ffmpeg); video.start_export(); video.hide(); await wait_video(video); ui.refresh()
 	check(video.job_status.stage == "failed" and ui.failures.has("Video export"),"Encoding failure persists in Jobs and status")
 	viewer.status_label.text = "Another information message"; ui.refresh(); check(ui.failures.has("Video export"),"Unrelated update retains export failure")

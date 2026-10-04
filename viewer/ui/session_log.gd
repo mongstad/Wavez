@@ -19,7 +19,7 @@ var committed_text := {}
 func start(owner) -> void:
 	viewer = owner
 	if level == DISABLED: return
-	var directory := ProjectSettings.globalize_path("user://logs")
+	var directory: String = viewer.file_locations.log_directory() if viewer.file_locations != null else ProjectSettings.globalize_path("user://logs")
 	if DirAccess.make_dir_recursive_absolute(directory) != OK: return
 	var stamp := Time.get_datetime_string_from_system().replace("T", "_").replace(":", "-")
 	path = directory.path_join("wavez-%s-%013d-%d-%016d.log" % [stamp, int(Time.get_unix_time_from_system() * 1000.0), OS.get_process_id(), Time.get_ticks_usec()])
