@@ -1,0 +1,167 @@
+{
+  "path": "/home/Nozba/Downloads/VB_FreeCollapse_v0_2/runs_free_collapse_v0_2/S0_20261004_013659_785112/free_collapse.wvz",
+  "bytes": 54283866848,
+  "mtime_ns": 1791072133360725266,
+  "ctime_ns": 1791072133360725266,
+  "objects": {
+    "particles": {
+      "kind": "particles",
+      "count": 150,
+      "first_time": 0.0,
+      "last_time": 74.5,
+      "decoded_bytes": 4200000,
+      "arrays": [
+        {
+          "name": "position",
+          "dtype": "f4",
+          "shape": [
+            50000,
+            3
+          ]
+        },
+        {
+          "name": "velocity",
+          "dtype": "f4",
+          "shape": [
+            50000,
+            3
+          ]
+        },
+        {
+          "name": "density",
+          "dtype": "f4",
+          "shape": [
+            50000
+          ]
+        },
+        {
+          "name": "phase",
+          "dtype": "f4",
+          "shape": [
+            50000
+          ]
+        },
+        {
+          "name": "radius",
+          "dtype": "f4",
+          "shape": [
+            50000
+          ]
+        },
+        {
+          "name": "current_magnitude",
+          "dtype": "f4",
+          "shape": [
+            50000
+          ]
+        },
+        {
+          "name": "radial_velocity",
+          "dtype": "f4",
+          "shape": [
+            50000
+          ]
+        },
+        {
+          "name": "wave_vphi",
+          "dtype": "f4",
+          "shape": [
+            50000
+          ]
+        },
+        {
+          "name": "specific_wave_lz",
+          "dtype": "f4",
+          "shape": [
+            50000
+          ]
+        },
+        {
+          "name": "color_value",
+          "dtype": "f4",
+          "shape": [
+            50000
+          ]
+        },
+        {
+          "name": "visual_brightness",
+          "dtype": "f4",
+          "shape": [
+            50000
+          ]
+        },
+        {
+          "name": "opacity",
+          "dtype": "f4",
+          "shape": [
+            50000
+          ]
+        },
+        {
+          "name": "alive",
+          "dtype": "f4",
+          "shape": [
+            50000
+          ]
+        },
+        {
+          "name": "particle_type",
+          "dtype": "u4",
+          "shape": [
+            50000
+          ]
+        },
+        {
+          "name": "sponge_gamma",
+          "dtype": "f4",
+          "shape": [
+            50000
+          ]
+        },
+        {
+          "name": "particle_id",
+          "dtype": "i8",
+          "shape": [
+            50000
+          ]
+        }
+      ]
+    },
+    "field": {
+      "kind": "volume",
+      "count": 746,
+      "first_time": 0.0,
+      "last_time": 74.5,
+      "decoded_bytes": 84934656,
+      "arrays": [
+        {
+          "name": "density",
+          "dtype": "f4",
+          "shape": [
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "name": "real",
+          "dtype": "f4",
+          "shape": [
+            192,
+            192,
+            192
+          ]
+        },
+        {
+          "name": "imag",
+          "dtype": "f4",
+          "shape": [
+            192,
+            192,
+            192
+          ]
+        }
+      ]
+    }
+  }
+}

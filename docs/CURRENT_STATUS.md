@@ -1,10 +1,16 @@
 # Current status
 
+Issue #232 compares mixed playback before/after #230. On the supplied production
+capture, temporary 2× holds came from the existing field refill gate while
+particles were ready. Candidate build 37 corrects the Buffering wait reason;
+cache policies and worker scheduling are unchanged. See the
+[mixed playback investigation and owner checks](MIXED_PLAYBACK_BUFFERING.md).
+
 Issue #229 restores automatic particle caching to safe whole-scene or bounded
 capacity, with worker-side descriptor sizing and resident cache details in the
 Ready tooltip. Initial interaction remains available while background preparation
 continues. Scenes containing fields preserve the smaller rolling particle window
-so fields retain RAM priority. Candidate build 36 is pending owner review. See the
+so fields retain RAM priority. Build 36 was owner-merged in PR #230. See the
 [particle cache policy, production measurements and owner checks](PARTICLE_CACHE_CAPACITY.md).
 
 Issue #204 opens a successful scene paused at its first recorded sample.

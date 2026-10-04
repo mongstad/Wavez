@@ -1,0 +1,56 @@
+{
+  "candidate": "v0.1.0.37",
+  "baseline": "3df35ee4b175b512ebabd60aae39e0d55b5a3a62",
+  "maintenance": {
+    "headless": {
+      "checks": 70,
+      "failures": 0
+    },
+    "forward_plus": {
+      "checks": 70,
+      "failures": 0
+    },
+    "gl_compatibility": {
+      "checks": 70,
+      "failures": 0
+    }
+  },
+  "baseline_new_regression": {
+    "checks": 70,
+    "failures": 2,
+    "expected_failures": [
+      "mixed field hold reports the field controller rather than ready particles",
+      "Buffering tooltip names the actual mixed-scene blocker"
+    ]
+  },
+  "scene_playback": {
+    "renderer": "headless",
+    "checks": 2457,
+    "failures": 0
+  },
+  "particle_cache": {
+    "renderer": "headless",
+    "packaged": false,
+    "exit_code": 0,
+    "checks": 38,
+    "failures": [],
+    "source_sha256": "d93d7cb0c8344415bea2622bbc3025fe7fa83aa75d35774a5930f8deded9392a",
+    "source_unchanged": true
+  },
+  "version_unittest": {
+    "tests": 2,
+    "failures": 0
+  },
+  "profiler_smoke": {
+    "playhead_reached_end": true,
+    "source_metadata_unchanged": true,
+    "errors": [],
+    "holds": [],
+    "renderer": "forward_plus",
+    "speed": 2.0,
+    "completion_criterion": "Requested playhead reached end; committed presentation may lag one display step."
+  },
+  "production_source_metadata_unchanged": true,
+  "production_payload_hash_performed": false,
+  "packaged_test_performed": false
+}
