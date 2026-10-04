@@ -1,5 +1,13 @@
 # Current status
 
+Issue #221 groups the Video Export Range, Start and End controls inside a
+compact bordered section in candidate build 44. The Full preset and concise
+Start/End labels replace the older wording; the exclusive-end explanation is
+available on End's tooltip. The estimate keeps output duration/frame count and
+shows a compact Temporary storage value. Range timing and FFmpeg admission are
+unchanged. The separate #220 Custom-label issue has not landed, so its current
+selector wording remains in place. See [the video export guide](../VIDEO_EXPORT.md).
+
 Issue #226 adds Edit → Preferences → File Locations in candidate build 43.
 FFmpeg defaults to runtime PATH detection, with an explicit validated custom
 executable option. Video, image and session-log directories can be configured;
