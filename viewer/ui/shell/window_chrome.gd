@@ -58,9 +58,11 @@ func refresh() -> void:
 func toggle_maximize() -> void:
 	if shell.immersive: shell.exit_immersive()
 	get_window().mode = Window.MODE_WINDOWED if get_window().mode == Window.MODE_MAXIMIZED else Window.MODE_MAXIMIZED
+	if shell.viewer.session_log != null: shell.viewer.session_log.record("UI", "Window.Restore" if get_window().mode == Window.MODE_WINDOWED else "Window.Maximize")
 	refresh.call_deferred()
 
 func minimize() -> void:
+	if shell.viewer.session_log != null: shell.viewer.session_log.record("UI", "Window.Minimize")
 	# Wayland has no minimized-state acknowledgement. Godot's request also
 	# unsets maximization; restore the preceding mode on the actual focus event.
 	minimized_immersive = shell.immersive
@@ -110,4 +112,5 @@ func _input(event: InputEvent) -> void:
 
 func request_close() -> void:
 	# File → Exit and the window close button share normal SceneTree teardown.
+	if shell.viewer.session_log != null: shell.viewer.session_log.record("UI", "Window.Close", true)
 	get_tree().quit()

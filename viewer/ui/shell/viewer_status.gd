@@ -11,6 +11,7 @@ var jobs_footer_close: Button
 var job_rows := {}
 var failures := {} # Latest unacknowledged diagnostic per existing owner, not a job engine.
 var observed := {}
+var last_video_stage := ""
 var analysis_progress := ""
 var analysis_request := ""
 var analysis_result := "No analysis job in this session."
@@ -77,8 +78,12 @@ func setup(owner_shell) -> void:
 	var jobs = viewer.selection_controller.jobs
 	jobs.failed.connect(func(message): selection_result = message; remember("Selections",message))
 	jobs.background_failed.connect(func(message): analysis_result = message; remember("Analysis",message))
-	jobs.completed.connect(func(_result): selection_result = "Complete. See Selections for the current result.")
-	jobs.background_completed.connect(func(_result): analysis_result = "Complete. Open the owning form for results and output details.")
+	jobs.completed.connect(func(_result):
+		selection_result = "Complete. See Selections for the current result."
+		if viewer.session_log != null: viewer.session_log.record("JOB", "Selections completed: " + jobs.current_id, true))
+	jobs.background_completed.connect(func(_result):
+		analysis_result = "Complete. Open the owning form for results and output details."
+		if viewer.session_log != null: viewer.session_log.record("JOB", "Analysis completed: " + jobs.background_operation, true))
 	jobs.background_progress.connect(func(value): analysis_progress = "%s: %s / %s" % [str(value.get("stage","Working")).replace("_"," "),value.get("completed",0),value.get("total",0)])
 	refresh()
 
@@ -148,7 +153,9 @@ func open_jobs() -> void:
 	jobs_header_close.grab_focus()
 
 func remember(owner: String, message: String) -> void:
-	if not message.is_empty(): failures[owner] = message
+	if not message.is_empty():
+		failures[owner] = message
+		if viewer.session_log != null: viewer.session_log.failure(owner, message)
 
 func observe(owner: String, message: String) -> void:
 	if observed.get(owner,"") != message:
@@ -162,6 +169,10 @@ func acknowledge() -> void:
 
 func video_changed() -> void:
 	var job: Dictionary = viewer.video_dialog.job_status
+	var stage: String = str(job.get("stage", ""))
+	if stage != last_video_stage and not stage.is_empty() and viewer.session_log != null:
+		viewer.session_log.record("JOB", "Video export %s: %s" % [stage, str(job.get("detail", ""))], true)
+	last_video_stage = stage
 	if job.get("stage") == "failed": remember("Video export", str(job.get("detail","Export failed"))+"\n"+str(job.get("directory","")))
 	refresh()
 

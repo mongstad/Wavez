@@ -768,9 +768,11 @@ func _start_iso() -> void:
 	preload("res://video/render_job.gd").write_json(iso_directory.path_join("job.json"),job)
 	iso_pid = OS.create_process("/usr/bin/env",PackedStringArray(["OPENBLAS_NUM_THREADS=1","OMP_NUM_THREADS=1","python3",ProjectSettings.globalize_path("res://../tools/extract_surface.py"),"--job",iso_directory.path_join("job.json")]),false)
 	if iso_pid <= 0:iso_error = "Could not start Python extraction worker.";iso_finished_target = iso_target
+	elif viewer.session_log != null: viewer.session_log.record("JOB", "Isosurface started: object=%s channel=%s threshold=%s" % [iso_id, states[iso_id].channel, str(states[iso_id].threshold)], true)
 	iso_status.text = "Extracting source level set…"
 
 func cancel_iso() -> void:
+	if iso_pid > 0 and viewer.session_log != null: viewer.session_log.record("JOB", "Isosurface cancelled", true)
 	iso_request_serial += 1
 	if iso_pid>0 and OS.is_process_running(iso_pid):OS.kill(iso_pid)
 	iso_pid = -1
@@ -797,6 +799,7 @@ func _poll_iso() -> void:
 	iso_result = result
 	if result.cache_hit:iso_cache_hits += 1
 	iso_status.text = "%d vertices / %d triangles • %s\nChosen level set; no material identity" % [result.vertices,result.triangles,"cached" if result.cache_hit else "extracted"]
+	if viewer.session_log != null: viewer.session_log.record("JOB", "Isosurface completed: vertices=%d triangles=%d" % [result.vertices, result.triangles], true)
 	viewer.committed_sample.isosurface = result.provenance.duplicate(true)
 func wait_for_surface() -> bool:
 	var queued := Time.get_ticks_msec()

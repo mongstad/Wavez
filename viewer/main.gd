@@ -124,6 +124,7 @@ var file_dialog_preferences: Node
 var overlay_panel: PanelContainer
 var overlay_visible := true
 var shell
+var session_log
 var _timeline_guard := false
 var environment: Environment
 var guide_mesh := MeshInstance3D.new()
@@ -166,6 +167,9 @@ func _ready() -> void:
 				queue_free()
 				return
 	if not offline_instance:
+		session_log = preload("res://ui/session_log.gd").new()
+		add_child(session_log)
+		session_log.start(self)
 		file_dialog_preferences = preload("res://ui/file_dialog_preferences.gd").new()
 		add_child(file_dialog_preferences)
 	_build_world()
@@ -332,10 +336,14 @@ func _toggle_fullscreen() -> void:
 
 func _open_capture(path: String) -> void:
 	if shell != null: shell.begin_open()
+	var previous_path := capture_path
 	var started := Profile.begin()
 	_open_capture_profiled(path)
 	Profile.end("open_inclusive",started)
 	if shell != null: shell.finish_open(_shell_open_error)
+	if session_log != null and _shell_open_error.is_empty() and not previous_path.is_empty() and previous_path != capture_path:
+		session_log.record("FILE", "Close capture: filename=%s path=%s" % [previous_path.get_file(), ProjectSettings.globalize_path(previous_path)], true)
+	if session_log != null: session_log.source_opened(ProjectSettings.globalize_path(path), _shell_open_error.is_empty())
 	if _shell_open_error.is_empty() and file_dialog_preferences != null:
 		file_dialog_preferences.capture_opened(path)
 
@@ -488,6 +496,9 @@ func _toggle_trails() -> void:
 func _timeline_changed(value: float) -> void:
 	if _timeline_guard or capture == null:
 		return
+	if session_log != null and (shell == null or shell.transport == null or not shell.transport.dragging_index):
+		session_log.last_seek_target = generic_reader.frames[int(value)].time if int(value) >= 0 and int(value) < generic_reader.frames.size() else NAN
+		session_log.record("PLAYBACK", "Seek sample: %d → %d" % [current_index + 1, int(value) + 1], true)
 	_seek_frame(int(value))
 
 func _seek_frame(index: int) -> void:
@@ -569,6 +580,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif event is InputEventKey and event.pressed and not event.echo:
 		var action: String = shell.shortcuts.match_action(event)
 		if not action.is_empty():
+			if session_log != null: session_log.record("UI", "Shortcut: " + action)
 			_dispatch_shortcut(action)
 			get_viewport().set_input_as_handled()
 
@@ -1093,6 +1105,7 @@ func _build_inspector_controls() -> void:
 func _toggle_playback() -> void:
 	if not playing and scene_layers != null and scene_layers.is_buffering():return
 	playing = not playing;inspection_paused = false
+	if session_log != null: session_log.record("PLAYBACK", "Play" if playing else "Pause", true)
 	if scene_layers != null and scene_layers.field_playback != null:
 		if playing:scene_layers.field_playback.begin_session()
 		else:scene_layers.field_playback.cancel_session()
@@ -1493,10 +1506,13 @@ func _ensure_timeline() -> bool:
 
 func _seek_time(time: float) -> bool:
 	if inspection_busy: return false
+	var previous := requested_time
 	if scene_layers != null:
 		if not scene_layers.refresh() or generic_reader.frames.is_empty() or not is_finite(time) or time < generic_reader.frames[0].time or time > generic_reader.frames[-1].time:return false
 		playing = false
-		return scene_layers.seek(time)
+		var sought: bool = scene_layers.seek(time)
+		if sought and session_log != null: session_log.seek(previous, time)
+		return sought
 	if not _ensure_timeline():
 		status_label.text = shared_timeline.error
 		return false
@@ -1506,6 +1522,7 @@ func _seek_time(time: float) -> bool:
 	playing = false
 	var point: Dictionary = shared_timeline.sample(time)
 	_sync_inspection_controls()
+	if not point.is_empty() and session_log != null: session_log.seek(previous, time)
 	return not point.is_empty()
 
 func _commit_sample(alpha: float) -> void:

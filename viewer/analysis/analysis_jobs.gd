@@ -72,6 +72,7 @@ func request(source: Dictionary, operation: String, arguments: Dictionary, sourc
 	if not _write("request.json",job):
 		error = "Invalid or oversized analysis request.";pending = false;failed.emit(error);return ""
 	pending = true;error = ""
+	_log("JOB", "Selections started: operation=%s id=%s budget_mib=%d" % [operation, current_id, memory_bytes / 1048576])
 	return current_id
 
 func request_background(source: Dictionary, operation: String, arguments: Dictionary, source_revision: int, selection_version: int, analysis_version: int, budget_override: Dictionary = {}) -> String:
@@ -85,10 +86,12 @@ func request_background(source: Dictionary, operation: String, arguments: Dictio
 	if not _write("background_request.json",job):
 		error = "Invalid or oversized interval request.";background_pending = false;background_failed.emit(error);return ""
 	background_pending = true;background_cancel_id = "";error = ""
+	_log("JOB", "Analysis started: operation=%s id=%s budget_mib=%d" % [operation, background_id, memory_bytes / 1048576])
 	return background_id
 
 func cancel_background() -> void:
 	if background_pending and not background_id.is_empty():
+		_log("JOB", "Analysis cancellation requested: " + background_id)
 		_write("background_cancel.json",{"id":background_id})
 		background_cancel_id = background_id;background_cancel_time = Time.get_ticks_msec()/1000.0
 	background_pending = false;background_id = ""
@@ -98,6 +101,7 @@ func busy() -> bool:
 
 func cancel() -> void:
 	if pending and not current_id.is_empty():
+		_log("JOB", "Selections cancellation requested: " + current_id)
 		_write("cancel.json",{"id":current_id})
 		if foreground_cancel_id.is_empty():foreground_cancel_id = current_id;foreground_cancel_time = Time.get_ticks_msec()/1000.0
 	pending = false;current_id = "";serial += 1
@@ -188,3 +192,7 @@ func _read(name: String) -> Dictionary:
 	if file == null or file.get_length() > MAX_CONTROL: return {}
 	var result = JSON.parse_string(file.get_as_text())
 	return result if result is Dictionary else {}
+
+func _log(category: String, message: String) -> void:
+	if is_instance_valid(playback_owner) and playback_owner.session_log != null:
+		playback_owner.session_log.record(category, message, true)

@@ -81,11 +81,17 @@ func dismiss() -> void:
 
 func commit() -> void:
 	if apply_button.disabled: return
+	var changed: Array[String] = []
+	for action in staged:
+		if staged[action] != shell.shortcuts.active.get(action, 0): changed.append(action)
 	var error: Error = shell.shortcuts.apply(staged)
 	if error != OK:
 		notice.text = "Could not save shortcuts: " + error_string(error) + ". Current bindings are unchanged."
 		notice.show(); fit.call_deferred()
 		return
+	if shell.viewer.session_log != null:
+		for action in changed:
+			shell.viewer.session_log.record("CONTROL", "Shortcut %s = %s" % [action, Bindings.text(shell.shortcuts.active[action])])
 	shell.refresh_shortcut_hints()
 	staged = shell.shortcuts.active.duplicate(); listening = ""; notice.hide(); refresh_rows()
 	if apply_button.has_focus(): cancel.grab_focus()
