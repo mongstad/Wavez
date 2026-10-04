@@ -168,6 +168,8 @@ func setup(owner_viewer) -> void:
 	var navigate := MenuButton.new(); navigate.flat = false; navigate.icon = icon("view"); navigate.tooltip_text = "Navigate [Alt+N] · Right-drag to orbit sideways from the current view"; navigate.custom_minimum_size.y = 32; navigation.add_child(navigate); decorate_menu(navigate)
 	var modes := navigate.get_popup(); modes.add_check_item("Free camera"); modes.add_check_item("Auto orbit"); modes.add_item("Orbit speed"); modes.add_item("Edit orbit center…")
 	navigate.about_to_popup.connect(func(): modes.set_item_checked(0, viewer.free_camera); modes.set_item_checked(1, viewer.orbit_enabled))
+	navigate.about_to_popup.connect(func():
+		if viewer.session_log != null: viewer.session_log.record("MENU", "Navigate opened"))
 	modes.id_pressed.connect(func(id):
 		if id == 0: viewer._toggle_free_camera()
 		elif id == 1: viewer._toggle_auto_orbit()
@@ -267,6 +269,8 @@ func close_action(parent: Node, action: Callable, tooltip: String) -> Button:
 func menu(parent: Node, title: String, icon_id: String, entries: Array, action: Callable) -> void:
 	var control := MenuButton.new(); control.flat = false; control.text = title; control.icon = icon(icon_id); control.custom_minimum_size.y = 32
 	parent.add_child(control); decorate_menu(control); menus[title] = control
+	control.about_to_popup.connect(func():
+		if viewer.session_log != null: viewer.session_log.record("MENU", title + " opened"))
 	for entry in entries: control.get_popup().add_item(entry)
 	control.get_popup().id_pressed.connect(action)
 
@@ -284,6 +288,7 @@ func decorate_menu(control: MenuButton) -> void:
 func select_workspace(index: int) -> void:
 	if workspace == 0 and scroll != null: scroll_position = scroll.scroll_vertical
 	index = clampi(index,0,WORKSPACES.size()-1)
+	if index != workspace and viewer.session_log != null: viewer.session_log.record("UI", "Simulation category = " + WORKSPACES[index])
 	workspace = index
 	chooser.select(index)
 	for i in tab_buttons.size(): tab_buttons[i].theme_type_variation = "SelectedButton" if i == index else "SecondaryButton"
@@ -470,6 +475,7 @@ func reposition_legend() -> void:
 
 func enter_immersive() -> void:
 	if immersive: return
+	if viewer.session_log != null: viewer.session_log.record("UI", "Window.Fullscreen")
 	transport.seek_dialog.hide()
 	immersive_mode = DisplayServer.window_get_mode()
 	var focused := get_viewport().gui_get_focus_owner()
@@ -496,6 +502,7 @@ func enter_immersive() -> void:
 
 func exit_immersive(restore_native := true) -> void:
 	if not immersive: return
+	if viewer.session_log != null: viewer.session_log.record("UI", "Window.Exit fullscreen")
 	immersive = false
 	edge_reveal.states = immersive_edges.duplicate(true)
 	immersive_edges.clear()
@@ -587,7 +594,7 @@ func build_menus(row: HBoxContainer) -> void:
 		about.open(),"about")
 
 func submenu(parent: PopupMenu, title: String) -> PopupMenu:
-	var popup := PopupMenu.new(); popup.name = title.replace(" ",""); parent.add_child(popup)
+	var popup := PopupMenu.new(); popup.name = title.replace(" ",""); popup.set_meta("wavez_menu_label", title); parent.add_child(popup)
 	parent.add_submenu_item(title,popup.name)
 	return popup
 

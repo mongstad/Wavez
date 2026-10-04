@@ -35,6 +35,7 @@ Start with:
 - [Paused opening and automatic preparation](docs/PAUSED_PREPARATION.md)
 - [File and Tools dialog layout](docs/DIALOG_COHERENCE.md)
 - [Current Tools functional audit](docs/TOOLS_FUNCTIONAL_AUDIT.md)
+- [Session action and error logs](docs/SESSION_LOGGING.md)
 - [Viewport-only video export](docs/VIDEO_VIEWPORT_EXPORT.md)
 - [Violet UI cleanup and owner checks](docs/UX5_CLEANUP.md)
 - [Application version and build policy](docs/VERSIONING.md) — view the identity in Help → About

@@ -71,7 +71,14 @@ func setup(owner_shell) -> void:
 	index_hint.add_theme_stylebox_override("normal", shell.theme.box(&"surface.1", &"border.subtle", 4, 6, 4))
 	index_hint.hide()
 	viewer.timeline.drag_started.connect(func(): dragging_index = true; update_index_hint())
-	viewer.timeline.drag_ended.connect(func(_changed): dragging_index = false; update_index_hint())
+	viewer.timeline.drag_ended.connect(func(changed):
+		dragging_index = false
+		update_index_hint()
+		if changed and viewer.session_log != null and viewer.generic_reader != null:
+			var index := clampi(int(viewer.timeline.value), 0, viewer.generic_reader.frames.size() - 1)
+			var target: float = viewer.generic_reader.frames[index].time
+			viewer.session_log.last_seek_target = target
+			viewer.session_log.record("PLAYBACK", "Scrub committed: sample=%d t=%.5f" % [index + 1, target], true))
 	viewer.timeline.value_changed.connect(func(_value): update_index_hint())
 	duration = shell.button(progress,"—",func(): show_remaining = not show_remaining; refresh())
 	duration.custom_minimum_size = Vector2(48,24); duration.theme_type_variation = "CompactButton"; duration.flat = true
@@ -89,7 +96,9 @@ func setup(owner_shell) -> void:
 	rate.fit_to_longest_item = false; rate.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	progress.add_child(rate)
 	for title in SPEED_LABELS: rate.add_item(title)
-	rate.item_selected.connect(func(index): viewer.physical_rate = SPEEDS[index] * NORMAL_RECORDED_RATE)
+	rate.item_selected.connect(func(index):
+		viewer.physical_rate = SPEEDS[index] * NORMAL_RECORDED_RATE
+		if viewer.session_log != null: viewer.session_log.record("PLAYBACK", "Speed = " + SPEED_LABELS[index], true))
 	options = HBoxContainer.new(); options.add_theme_constant_override("separation",8); primary.add_child(options)
 	loop = CheckButton.new(); loop.text = "Loop"; loop.tooltip_text = "Loop recorded interval"; loop.size_flags_vertical = Control.SIZE_SHRINK_CENTER; options.add_child(loop)
 	loop.toggled.connect(set_loop)
@@ -101,6 +110,7 @@ func theme_box() -> StyleBox:
 	return shell.theme.box(&"surface.1", &"border.subtle", 0, 0, 0)
 
 func set_loop(value: bool) -> void:
+	if viewer.session_log != null: viewer.session_log.record("PLAYBACK", "Loop = " + str(value))
 	if viewer.scene_layers != null and viewer.scene_layers.playback.enabled: viewer.scene_layers.playback.set_loop(value)
 	else: viewer.scene_loop_playback = value
 
@@ -133,12 +143,15 @@ func open_seek(anchor: Control = null) -> void:
 
 func submit_seek() -> void:
 	if source_generation != viewer.capture_generation:
+		if viewer.session_log != null: viewer.session_log.warning("Seek rejected: capture changed")
 		seek_dialog.show_error("Capture changed. Reopen seek."); return
 	var candidate: Dictionary = seek_dialog.source_target()
 	if candidate.has("error"):
+		if viewer.session_log != null: viewer.session_log.warning("Seek rejected: " + str(candidate.error))
 		seek_dialog.show_error(candidate.error); return
 	reset_requested()
 	if not viewer._seek_time(candidate.value):
+		if viewer.session_log != null: viewer.session_log.warning("Seek unavailable: target=" + str(candidate.value))
 		seek_dialog.show_error("Seek unavailable. Check the recorded interval and inspection state."); return
 	seek_dialog.hide(); refresh()
 

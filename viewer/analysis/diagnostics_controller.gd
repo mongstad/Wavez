@@ -199,6 +199,7 @@ func bookmark() -> void:
 	if temporal.summary_charge+charge > 24*1048576:status.text = "Saved bookmarks and analysis requests reached the memory budget.";return
 	saved.charged_bytes = charge;temporal.summary_charge += charge;bookmarks.append(saved)
 	bookmark_list.add_item("%s • %s" % [label_input.text,token.text])
+	if viewer.session_log != null: viewer.session_log.record("ANALYSIS", "Bookmark saved: %s t=%s" % [label_input.text, token.text])
 
 func delete_bookmark() -> void:
 	if bookmark_list.selected < 0:return
@@ -209,6 +210,7 @@ func seek_bookmark() -> void:
 	if bookmark_list.selected < 0:return
 	var saved: Dictionary = bookmarks[bookmark_list.selected]
 	if saved.source != temporal.selections.source:status.text = "Open and bind the bookmark's exact source before seeking.";return
+	if viewer.session_log != null: viewer.session_log.record("ANALYSIS", "Go to bookmark: %s" % str(saved.label))
 	viewer.playing = false;viewer._seek_time(preload("res://scene/source_sampling.gd").exact_float(saved.raw_time).value)
 
 func bookmark_offset() -> void:

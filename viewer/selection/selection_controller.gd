@@ -170,6 +170,7 @@ func bind_source() -> void:
 	if not state.definitions.is_empty() and source.get("committed_bytes") != str(extent):
 		status.text = "Selections reference an earlier capture snapshot. Save or delete them before using newer samples.";return
 	source = {"path":ProjectSettings.globalize_path(viewer.capture_path),"committed_bytes":str(extent)}
+	if viewer.session_log != null: viewer.session_log.record("SELECTION", "Source binding requested: filename=%s path=%s" % [source.path.get_file(), source.path], true)
 	temporal.durable.remember_path(source.path)
 	_request("describe",{})
 
@@ -205,6 +206,7 @@ func _completed_profiled(result: Dictionary) -> void:
 	if completed_operation == "result_page":temporal.receive_page(result);return
 	if completed_operation == "describe":
 		source = result.source;target.clear();objects.clear()
+		if viewer.session_log != null: viewer.session_log.record("SELECTION", "Source bound: filename=%s path=%s" % [str(source.path).get_file(), source.path], true)
 		for item in result.data.objects:
 			objects[item.object.id] = item;target.add_item(item.object.id+" • "+item.object.kind)
 			target.set_item_metadata(target.item_count-1,item.object.id)
