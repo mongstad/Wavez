@@ -149,6 +149,7 @@ func setup(owner_viewer) -> void:
 	chooser = OptionButton.new(); chooser.custom_minimum_size.y = 32; dock_box.add_child(chooser)
 	for i in WORKSPACES.size():
 		var tab := button(tabs, WORKSPACES[i], select_workspace.bind(i))
+		tab.tooltip_text = ""
 		tab.size_flags_horizontal = Control.SIZE_EXPAND_FILL; tab_buttons.append(tab)
 		chooser.add_item(WORKSPACES[i])
 	chooser.item_selected.connect(select_workspace)

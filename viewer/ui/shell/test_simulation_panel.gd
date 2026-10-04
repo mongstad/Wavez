@@ -111,6 +111,9 @@ func run() -> void:
 	await settle()
 	var shell = viewer.shell;var layers = viewer.scene_layers
 	check(shell.WORKSPACES == ["Particles","Fields","Meshes"],"Exact simulation categories")
+	for index in shell.WORKSPACES.size():
+		var tab: Button = shell.tab_buttons[index]
+		check(tab.text == shell.WORKSPACES[index] and tab.tooltip_text.is_empty(), "Category tab keeps its label without a redundant tooltip: " + tab.text)
 	check(layers.object_choices.volume.item_count == 2 and layers.object_choices.mesh.item_count == 2,"Both fields and meshes have independent object selectors")
 	var before := Visual.snapshot(viewer);var sample: Dictionary = viewer.committed_sample.duplicate(true)
 	var source: Dictionary = viewer.selection_controller.source.duplicate(true)

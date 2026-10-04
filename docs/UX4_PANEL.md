@@ -23,6 +23,8 @@ analysis/selection/probe state, change channels or submit work. Objects and grou
 expansion are session presentation state. Recipe restoration preserves them while
 rebuilding the existing field/mesh controls. Opening a replacement capture creates
 fresh object choices for that source. Missing categories show concise empty states.
+The three category tabs have no tooltip that repeats their visible names; useful
+explanatory tooltips on other controls remain available.
 
 | Category/group | Frequent controls retained |
 |---|---|
