@@ -226,7 +226,20 @@ func run():
 		for control in ui.jobs_dialog.find_children("*", "Button", true, false):
 			has_failure_action = has_failure_action or control.text in ["Failure details…", "Acknowledge failures"]
 		check(not has_failure_action, "Jobs overview has no failure controls outside job Details")
+		check(ui.jobs_dialog.borderless and not ui.jobs_dialog.get_ok_button().visible, "Jobs uses one borderless shell with custom close controls")
+		check(ui.jobs_header_close.icon != null and ui.jobs_header_close.theme_type_variation == "IconAction" and ui.jobs_footer_close.theme_type_variation == "SecondaryButton", "Jobs header and footer use shell action roles")
+		check(ui.job_rows["Video export"].open.has_focus(), "Opening Jobs focuses the first available action")
 		picture("jobs-"+str(dimensions.x)); ui.jobs_dialog.hide()
+	ui.open_jobs(); ui.jobs_header_close.pressed.emit(); await settle()
+	check(not ui.jobs_dialog.visible and ui.jobs_button.has_focus(), "Header close returns keyboard focus to Jobs")
+	ui.open_jobs(); ui.jobs_footer_close.pressed.emit(); await settle()
+	check(not ui.jobs_dialog.visible and ui.jobs_button.has_focus(), "Footer close returns keyboard focus to Jobs")
+	ui.open_jobs(); ui.jobs_dialog.close_requested.emit(); await settle()
+	check(not ui.jobs_dialog.visible and ui.jobs_button.has_focus(), "Window close returns keyboard focus to Jobs")
+	ui.open_jobs()
+	var escape := InputEventKey.new(); escape.pressed = true; escape.keycode = KEY_ESCAPE
+	ui.jobs_dialog.window_input.emit(escape); await settle()
+	check(not ui.jobs_dialog.visible and ui.jobs_button.has_focus(), "Escape dismisses Jobs and returns keyboard focus")
 	var jobs_scroll: ScrollContainer = ui.jobs_dialog.find_children("*", "ScrollContainer", true, false)[0]
 	jobs_scroll.custom_minimum_size.y = 100
 	ui.jobs_dialog.popup_centered(Vector2i(500,240)); await settle()
