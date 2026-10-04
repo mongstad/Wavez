@@ -39,7 +39,7 @@ func setup(owner_shell) -> void:
 	jobs_button = shell.button(shell.transport.options, "Jobs (0)", open_jobs, "export")
 	jobs_button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	jobs_dialog = AcceptDialog.new(); jobs_dialog.title = "Jobs"; jobs_dialog.get_ok_button().text = "Close"; add_child(jobs_dialog)
-	var scroll := ScrollContainer.new(); scroll.custom_minimum_size = Vector2(460,260); jobs_dialog.add_child(scroll)
+	var scroll := ScrollContainer.new(); scroll.custom_minimum_size = Vector2(460,220); jobs_dialog.add_child(scroll)
 	var inset := MarginContainer.new(); inset.size_flags_horizontal = Control.SIZE_EXPAND_FILL; inset.add_theme_constant_override("margin_right",8); scroll.add_child(inset)
 	var content := VBoxContainer.new(); content.size_flags_horizontal = Control.SIZE_EXPAND_FILL; inset.add_child(content)
 	add_job(content,"Video export", reopen_video, func(): viewer.video_dialog.request_cancel_export())
@@ -48,8 +48,6 @@ func setup(owner_shell) -> void:
 	add_job(content,"Matched views", func(): shell.show_section("Matched runs"), func(): viewer.selection_controller.temporal.matched.cancel())
 	add_job(content,"Isosurface", func(): viewer.tools_ui.open("Isosurface"), func():
 		if viewer.scene_layers != null: viewer.scene_layers.cancel_iso())
-	var actions := HBoxContainer.new(); content.add_child(actions)
-	shell.button(actions,"Failure details…",show_status,"warning")
 	shell.detail_failure_action.pressed.connect(func(): acknowledge(); shell.details.hide())
 	jobs_dialog.visibility_changed.connect(func():
 		if not jobs_dialog.visible: jobs_button.grab_focus())
@@ -119,7 +117,7 @@ func reopen_analysis() -> void:
 	viewer.tools_ui.open(task)
 
 func open_jobs() -> void:
-	jobs_dialog.popup_centered(Vector2i(500,340)); refresh()
+	jobs_dialog.popup_centered(Vector2i(500,300)); refresh()
 
 func remember(owner: String, message: String) -> void:
 	if not message.is_empty(): failures[owner] = message

@@ -159,7 +159,15 @@ func run():
 	layers.mesh_playback.error = "Injected unavailable mesh diagnostic"; ui.refresh()
 	check(ui.readiness == "Unavailable" and ui.failures.has("Meshes"),"Typed readiness failure is visible and durable")
 	layers.mesh_playback.error = ""; ui.refresh(); check(ui.failures.has("Meshes"),"Recovery does not silently acknowledge failure")
-	ui.show_status(); check(viewer.shell.detail_failure_action.visible and viewer.shell.detail_text.text.begins_with("Retained failures\nMeshes — Failed\nInjected unavailable mesh diagnostic"), "Status details leads with the retained failure and its acknowledgement action")
+	ui.open_jobs(); await settle()
+	check(ui.jobs_dialog.visible, "Jobs can open while a retained failure is present")
+	var failure_button_in_jobs := false
+	for control in ui.jobs_dialog.find_children("*", "Button", true, false):
+		failure_button_in_jobs = failure_button_in_jobs or control.text == "Failure details…"
+	check(not failure_button_in_jobs and ui.jobs_button.text.contains("!"), "Retained failure is signalled without a misleading Jobs details button")
+	ui.jobs_dialog.hide()
+	viewer.shell.commands.details.popup.id_pressed.emit(viewer.shell.commands.details.index)
+	check(viewer.shell.detail_failure_action.visible and viewer.shell.detail_text.text.begins_with("Retained failures\nMeshes — Failed\nInjected unavailable mesh diagnostic"), "File Details leads with the retained failure and its acknowledgement action")
 	await settle(); check(viewer.shell.details.visible, "Status details opens for failure review")
 	picture("status-failure-details")
 	viewer.shell.detail_failure_action.pressed.emit()
@@ -214,10 +222,10 @@ func run():
 		picture("loaded-"+str(dimensions.x))
 		ui.open_jobs(); await settle(); check(ui.jobs_dialog.size.x <= mini(dimensions.x,520) and ui.jobs_dialog.size.y <= dimensions.y,"Jobs dialog remains narrow and fits desktop")
 		check_compact_job_rows(ui, "Idle Jobs " + str(dimensions))
-		var has_acknowledge := false
+		var has_failure_action := false
 		for control in ui.jobs_dialog.find_children("*", "Button", true, false):
-			has_acknowledge = has_acknowledge or control.text == "Acknowledge failures"
-		check(not has_acknowledge, "Jobs overview has no failure acknowledgement action")
+			has_failure_action = has_failure_action or control.text in ["Failure details…", "Acknowledge failures"]
+		check(not has_failure_action, "Jobs overview has no failure controls outside job Details")
 		picture("jobs-"+str(dimensions.x)); ui.jobs_dialog.hide()
 	var jobs_scroll: ScrollContainer = ui.jobs_dialog.find_children("*", "ScrollContainer", true, false)[0]
 	jobs_scroll.custom_minimum_size.y = 100
@@ -233,7 +241,7 @@ func run():
 	picture("jobs-scrolled")
 	jobs_scroll.scroll_vertical = 40; await settle()
 	check(jobs_scroll.scroll_vertical > 0, "Compact Jobs overview retains vertical scrolling")
-	ui.jobs_dialog.hide(); jobs_scroll.custom_minimum_size.y = 260
+	ui.jobs_dialog.hide(); jobs_scroll.custom_minimum_size.y = 220
 	root.size = Vector2i(1440,900); await settle()
 	ui.open_jobs(); ui.job_rows["Matched views"].details.pressed.emit()
 	check(viewer.shell.details.visible and viewer.shell.detail_text.text == ui.job_rows["Matched views"].detail, "Matched views explanation remains in Details")
