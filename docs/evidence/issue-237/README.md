@@ -19,3 +19,13 @@ Screenshots came from the native Forward+ validation run on Linux. They are gene
 - `python -m unittest tests.test_application_version`: 2 tests passed. `python tools/application_version.py --json` reported build 40. `git diff --check` passed.
 
 The existing native display harness ran; a standalone packaged build was not made for this local Jobs presentation change. Physical pointer hover, desktop scaling, and longer live sessions remain for owner review.
+
+## Owner correction: first-row clearance
+
+The owner found that the first row's control area appeared to intrude into the title region in an empty Jobs view. The scroll area now starts 22 px below the header, and opening Jobs focuses the first enabled Open action instead of the disabled Video export action. Row button tooltips were removed because their labels already identify the actions and a hover popup can overlap the compact header. Job ownership and callbacks did not change.
+
+- [Corrected empty Jobs](revision-2/jobs-empty.png): disabled Video export Open is unfocused; Selections Open is focused below the header.
+- [Corrected 1024×640 Jobs](revision-2/jobs-idle-1024.png): all rows and the footer remain inside the dialog.
+- [Corrected constrained-height Jobs](revision-2/jobs-scrollbar.png): the first row clears the header while vertical scrolling remains available.
+
+Native `tools/validate_viewer_status.py` passed **322 checks in Forward+** and **322 checks in Compatibility** on the correction. The added checks cover first-row bounds and title clearance in empty and loaded views, enabled-action focus in the empty view, and absence of redundant row tooltips. Synthetic source hashes were unchanged. The earlier screenshots and results above remain the initial review record.

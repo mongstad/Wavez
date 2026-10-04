@@ -237,6 +237,9 @@ explanatory text appear in each row's Details… view instead of beneath the row
 Its borderless panel follows the Video Export dialog's title, close control,
 surface, button styles and compact spacing. The header close, footer Close and
 window close all dismiss the overview without cancelling work.
+The first row clears the title, and keyboard focus starts on the first enabled
+Open action; disabled actions do not gain focus. Row buttons have no redundant
+hover tooltips.
 Aggregate failure notices are handled through File → Details… rather than a
 separate Jobs button.
 An open active-job Details view updates as progress is published, then retains

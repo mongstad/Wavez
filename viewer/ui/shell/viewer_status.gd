@@ -47,9 +47,11 @@ func setup(owner_shell) -> void:
 	heading.size_flags_horizontal = Control.SIZE_EXPAND_FILL; heading.mouse_filter = Control.MOUSE_FILTER_IGNORE; header.add_child(heading)
 	jobs_header_close = Button.new(); jobs_header_close.theme_type_variation = "IconAction"; jobs_header_close.tooltip_text = "Close Jobs"
 	jobs_header_close.custom_minimum_size = Vector2(32,32); jobs_header_close.pressed.connect(jobs_dialog.hide); header.add_child(jobs_header_close)
+	var scroll_space := MarginContainer.new(); scroll_space.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	scroll_space.add_theme_constant_override("margin_top",12); body.add_child(scroll_space)
 	var scroll := ScrollContainer.new(); scroll.custom_minimum_size = Vector2(460,220)
 	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL; scroll.follow_focus = true
-	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED; body.add_child(scroll)
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED; scroll_space.add_child(scroll)
 	var inset := MarginContainer.new(); inset.size_flags_horizontal = Control.SIZE_EXPAND_FILL; inset.add_theme_constant_override("margin_right",8); scroll.add_child(inset)
 	var content := VBoxContainer.new(); content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	content.add_theme_constant_override("separation",8); inset.add_child(content)
@@ -89,6 +91,7 @@ func add_job(parent: Node, title: String, reopen: Callable, cancel: Callable) ->
 	for action in [open_button, details_button, cancel_button]:
 		action.custom_minimum_size.x = 88
 		action.theme_type_variation = "SecondaryButton"
+		action.tooltip_text = ""
 	job_rows[title] = {"cancel":cancel_button,"open":open_button,"details":details_button,"detail":"","active":false,"identity":""}
 
 func open_job_details(title: String) -> void:
@@ -137,8 +140,12 @@ func reopen_analysis() -> void:
 	viewer.tools_ui.open(task)
 
 func open_jobs() -> void:
-	jobs_dialog.popup_centered(Vector2i(520,320)); refresh()
-	job_rows["Video export"].open.grab_focus()
+	refresh(); jobs_dialog.popup_centered(Vector2i(520,320))
+	for title in ["Video export", "Selections", "Analysis", "Matched views", "Isosurface"]:
+		if not job_rows[title].open.disabled:
+			job_rows[title].open.grab_focus()
+			return
+	jobs_header_close.grab_focus()
 
 func remember(owner: String, message: String) -> void:
 	if not message.is_empty(): failures[owner] = message
