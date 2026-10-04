@@ -31,6 +31,11 @@ func run() -> void:
 	var dialog = viewer.shell.file_locations_dialog
 	if dialog == null: check(false, "File Locations command is available without a capture"); quit(1); return
 	check(dialog.visible and dialog.title.contains("File Locations"), "Preferences route opens File Locations")
+	await process_frame
+	dialog.ffmpeg_path.grab_focus(); await process_frame
+	check(dialog.size.y >= 390, "File Locations has room for all rows and a notice")
+	check(dialog.ffmpeg_path.get_global_rect().position.y >= dialog.content_scroll.get_global_rect().position.y + 4, "FFmpeg focus border is inset from the scroll edge")
+	check(not dialog.content_scroll.get_v_scroll_bar().visible and dialog.fields.log_dir.get_global_rect().end.y <= dialog.content_scroll.get_global_rect().end.y, "all normal rows fit without a vertical scrollbar")
 	if DisplayServer.get_name() != "headless":
 		await RenderingServer.frame_post_draw
 		dialog.get_texture().get_image().save_png(output.path_join("file-locations.png"))
@@ -101,6 +106,11 @@ func run() -> void:
 	editor._selected_ffmpeg(output.path_join("missing ffmpeg"))
 	editor.commit()
 	check(editor.notice.visible and locations.settings.ffmpeg_mode == "auto", "invalid custom executable cannot replace saved Auto-detect mode")
+	await process_frame
+	check(not editor.content_scroll.get_v_scroll_bar().visible and editor.fields.log_dir.get_global_rect().end.y <= editor.content_scroll.get_global_rect().end.y, "error notice leaves every row visible without a vertical scrollbar")
+	if DisplayServer.get_name() != "headless":
+		await RenderingServer.frame_post_draw
+		editor.get_texture().get_image().save_png(output.path_join("file-locations-error.png"))
 	editor.dismiss()
 	DirAccess.remove_absolute(video_dir)
 	video.output.text = video_dir.path_join("result.mp4")

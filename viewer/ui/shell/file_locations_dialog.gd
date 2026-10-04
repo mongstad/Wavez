@@ -2,6 +2,7 @@ extends Window
 ## Edit → Preferences → File Locations. Drafts are committed together on Apply.
 const Locations = preload("res://ui/file_locations_preferences.gd")
 const Job = preload("res://video/render_job.gd")
+const DIALOG_SIZE := Vector2i(740, 390)
 var shell
 var draft: Dictionary = {}
 var fields: Dictionary = {}
@@ -13,13 +14,14 @@ var apply_button: Button
 var reset_button: Button
 var pickers: Dictionary = {}
 var previous_focus: WeakRef
+var content_scroll: ScrollContainer
 
 func setup(owner_shell) -> void:
 	shell = owner_shell
 	title = "WAVEZ • File Locations"
 	borderless = true
-	min_size = Vector2i(560, 280)
-	size = Vector2i(740, 310)
+	min_size = Vector2i(560, 390)
+	size = DIALOG_SIZE
 	visible = false
 	theme = shell.style_slice.theme
 	close_requested.connect(dismiss)
@@ -35,10 +37,14 @@ func setup(owner_shell) -> void:
 	var heading := Label.new(); heading.text = "File Locations"; heading.theme_type_variation = "PanelTitle"
 	heading.size_flags_horizontal = Control.SIZE_EXPAND_FILL; header.add_child(heading)
 	shell.close_action(header, dismiss, "Close File Locations")
-	var scroll := ScrollContainer.new(); scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED; scroll.follow_focus = true; column.add_child(scroll)
+	content_scroll = ScrollContainer.new(); content_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	content_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED; content_scroll.follow_focus = true; column.add_child(content_scroll)
+	var rows_margin := MarginContainer.new(); rows_margin.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	rows_margin.add_theme_constant_override("margin_top", 6)
+	rows_margin.add_theme_constant_override("margin_bottom", 4)
+	content_scroll.add_child(rows_margin)
 	var rows := VBoxContainer.new(); rows.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	rows.add_theme_constant_override("separation", 8); scroll.add_child(rows)
+	rows.add_theme_constant_override("separation", 8); rows_margin.add_child(rows)
 	var ffmpeg_row := _row(rows, "FFmpeg")
 	mode_choice = OptionButton.new(); mode_choice.custom_minimum_size.x = 132
 	mode_choice.add_item("Auto-detect"); mode_choice.add_item("Custom"); ffmpeg_row.add_child(mode_choice)
@@ -94,7 +100,7 @@ func open() -> void:
 	draft = shell.viewer.file_locations.snapshot()
 	_refresh()
 	var available: Vector2 = shell.viewer.get_viewport().get_visible_rect().size - Vector2(32, 32)
-	popup_centered(Vector2i(Vector2(740, 310).min(available)))
+	popup_centered(Vector2i(Vector2(DIALOG_SIZE).min(available)))
 
 func dismiss() -> void:
 	for picker in pickers.values(): picker.hide()
