@@ -1,6 +1,10 @@
 extends "res://layers/test_scene_playback.gd"
 const Memory = preload("res://layers/playback_buffer.gd")
 const Policy = preload("res://layers/particle_playback.gd")
+func make_view(path: String, asynchronous: bool):
+	var view = super.make_view(path,asynchronous)
+	view.set_process_input(false);view.set_process_unhandled_input(false)
+	return view
 func wait_field(view, time: float) -> bool:return await sample(view,time,true)
 func gate_ready(worker) -> bool:
 	var began := Time.get_ticks_msec()
@@ -62,6 +66,15 @@ func run() -> void:
 	var waiting := await gate_ready(worker)
 	check(waiting,"field worker publication barrier reached")
 	check(view.committed_sample==before,"unprepared seek retains committed state")
+	var particles = view.scene_layers.playback
+	check(not particles.buffering and not particles.worker.get_pair(particles.last_target,false).is_empty(),"mixed field wait already has its required particle pair")
+	view.playing = true;fields.begin_session()
+	view.scene_layers.tick(.05);await create_timer(.45).timeout;view.scene_layers.tick(.05)
+	view.shell.status_ui.refresh()
+	check(view.scene_layers.transport_wait_reason == "Required field content or startup coverage","mixed field hold reports the field controller rather than ready particles")
+	check(view.shell.status_ui.readiness == "Buffering" and view.shell.status_ui.readiness_detail.begins_with("Required field content or startup coverage is holding playback."),"Buffering tooltip names the actual mixed-scene blocker")
+	check(view.committed_sample==before and view.playing,"field hold preserves the clock and resumes without toggling Play")
+	view.playing = false;fields.cancel_session()
 	check(view.scene_layers.seek(.2),"new seek supersedes pending request")
 	worker.test_barrier = null;gate.post()
 	check(await wait_field(view,.2) and view.requested_time==.2,"latest request commits after cancellation")

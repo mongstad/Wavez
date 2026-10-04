@@ -352,7 +352,7 @@ func _tick_profiled(delta: float) -> void:
 		viewer.tail_poll = 0;refresh()
 		Profile.count("g3_tail_polls")
 		Profile.end("g3_tail_poll",poll_started)
-	if playback != null and playback.enabled and use_async() and not playback.pump():transport_wait_reason = "Required particle content";_poll_iso();return
+	if playback != null and playback.enabled and use_async() and not playback.pump():transport_wait_reason = playback.wait_reason;_poll_iso();return
 	if field_playback != null and not field_playback.pump():transport_wait_reason = "Required field content or startup coverage";_poll_iso();return
 	if mesh_playback != null and not mesh_playback.pump():transport_wait_reason = "Required mesh content";_poll_iso();return
 	if viewer.frame_a == null:return

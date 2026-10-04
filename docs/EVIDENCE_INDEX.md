@@ -1,5 +1,12 @@
 # Retained evidence
 
+## Mixed playback buffering — issue #232, pending owner review
+
+[Investigation, comparison traces and focused checks](evidence/issue-232/README.md)
+compare pre/post-#230 paused cache fill followed by 2× playback. They identify the
+existing field refill gate, correct its misleading particle wait reason, and
+retain pressure results and unresolved memory/throughput limitations.
+
 ## Mesh-only Simulation panel focus — issue #202, pending owner review
 
 [Behavior, renderer/package checks and owner steps](evidence/issue-202/README.md)

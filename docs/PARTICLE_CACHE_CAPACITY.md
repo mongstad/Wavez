@@ -24,6 +24,10 @@ A particle-only recording has no competing field runway. Automatic mode can cach
 its whole prepared representation when it fits the safe budget. File size alone
 never decides whether either kind of cache fits.
 
+Temporary holds at 2× can also come from the existing field refill gate while
+particles remain ready. See the [mixed playback investigation](MIXED_PLAYBACK_BUFFERING.md)
+for the matched pre/post-#230 comparison and worker/memory observations.
+
 ## Admission and scheduling
 
 The initial requested pair and a short lookahead retain the lazy opening path.

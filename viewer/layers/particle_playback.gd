@@ -30,6 +30,7 @@ var estimates := {}
 var label: Label
 var mode: OptionButton
 var readiness_error := ""
+var wait_reason := "Required particle content"
 var last_ui := ""
 var active_pair := {}
 var hidden := false
@@ -203,6 +204,7 @@ func _depth(status: Dictionary) -> int:
 		ready += 1
 	return ready
 func pump() -> bool:
+	wait_reason = "Required particle content"
 	if not enabled:return true
 	var target_time: float = float(pending_time) if pending_time != null else viewer.requested_time
 	if layers.reader.bracket(layers.particle_id,target_time).is_empty():
@@ -234,7 +236,13 @@ func pump() -> bool:
 		if result.has("pending"):_update_ui(status);return false
 		viewer.display_accum = 0
 	_update_ui(status)
-	return not buffering and (layers.field_playback == null or layers.field_playback.pump())
+	if buffering:return false
+	if layers.field_playback != null and not layers.field_playback.pump():
+		# Field startup/refill can hold a mixed scene whose particles are ready.
+		# Preserve a particle wait if the field pump requested a missing pair.
+		if not buffering:wait_reason = "Required field content or startup coverage"
+		return false
+	return true
 func cache_detail(status: Dictionary = {}) -> String:
 	if status.is_empty():status = worker.status()
 	var count: int = context.get("entries",[]).size()

@@ -1,0 +1,9 @@
+{
+  "renderer": "headless",
+  "packaged": false,
+  "exit_code": 0,
+  "checks": 38,
+  "failures": [],
+  "source_sha256": "d93d7cb0c8344415bea2622bbc3025fe7fa83aa75d35774a5930f8deded9392a",
+  "source_unchanged": true
+}
