@@ -36,6 +36,7 @@ func run() -> void:
 		if kind == "mixed":
 			for event in ["Tools → Selection opened", "Tools → Analysis → Bookmarks", "Source bound", "Bookmark saved", "Go to bookmark", "Seek:", "Selections: Requested scientific workspace exceeds its memory budget", "analysis_budget_mib=512", "last_seek_target=0.00000", "Selections cancellation requested", "Seek rejected", "Speed =", "Video export starting", "Simulation category = Fields", "Pointer tool = Orbit", "Close capture:"]:
 				check(content.contains(event), "mixed event: " + event)
+			check(content.count("CONTROL   Viewer → Colormap = turbo") == 1 and not content.contains("MENU      turbo"), "dropdown choice has one labeled control entry")
 			check(not content.contains("Draft intermediate"), "uncommitted text is not logged")
 			check(not content.contains("per-frame"), "no frame telemetry")
 			check(content.split("\n").size() < 120, "mixed workflow remains concise")
@@ -68,6 +69,14 @@ func run() -> void:
 
 func exercise_mixed(viewer) -> void:
 	var logger = viewer.session_log
+	var colormap := OptionButton.new()
+	colormap.name = "Colormap"
+	colormap.add_item("turbo")
+	viewer.add_child(colormap)
+	logger._observe_tree(colormap)
+	colormap.get_popup().id_pressed.emit(0)
+	colormap.item_selected.emit(0)
+	colormap.queue_free()
 	viewer.shell.tab_buttons[1].pressed.emit()
 	viewer.shell.tab_buttons[0].pressed.emit()
 	viewer.tools_ui.open("Selection")

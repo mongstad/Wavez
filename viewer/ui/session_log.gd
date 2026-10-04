@@ -191,6 +191,7 @@ func _menu_item(id: int, popup: PopupMenu) -> void:
 	if popup.has_meta("wavez_menu_label"): parts.push_front(str(popup.get_meta("wavez_menu_label")))
 	var ancestor: Node = popup.get_parent()
 	while ancestor != null and ancestor != viewer:
+		if ancestor is OptionButton: return # OptionButton.item_selected logs the same choice with its control label.
 		if ancestor is PopupMenu and ancestor.has_meta("wavez_menu_label"): parts.push_front(str(ancestor.get_meta("wavez_menu_label")))
 		elif ancestor is MenuButton: parts.push_front(ancestor.text)
 		ancestor = ancestor.get_parent()

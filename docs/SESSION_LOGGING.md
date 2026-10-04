@@ -13,6 +13,8 @@ to **Minimal** (lifecycle, file, jobs, key playback and errors) or **Disabled** 
 future preference; this issue adds no settings UI. Common buttons, toggles,
 dropdowns, committed text/numeric values, menus, tabs, window actions, Tools
 routes, shortcuts, source binding, bookmarks, playback and jobs are recorded.
+Dropdown choices appear once as labeled `CONTROL` entries; `MENU` identifies
+commands chosen from application menus.
 Slider motion is coalesced into effective values; the playback clock and video
 progress are never logged frame by frame. Text is recorded on submit or focus
 loss, not per keystroke. Password fields and controls named for credentials are
