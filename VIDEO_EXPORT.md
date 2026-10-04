@@ -25,20 +25,38 @@ unstarted and outside this contract.
 ## Using Export Video
 
 Open a capture and set its appearance/camera, then choose **File → Export →
-Video**. The bordered Range group offers **Full**, current position to end, or
-**Custom** in recorded capture-time units. Its **Start** and **End**
+Video**. Settings are arranged in titled **Range**, **Video**, **Camera**,
+**Presentation** and **Output** groups. Range **Mode** offers **Full**, current
+position to end, or **Custom** in recorded capture-time units. Its **Start** and **End**
 fields retain exact source endpoints for the presets; the End tooltip explains
 that the endpoint is exclusive and a still exports one frame. Select 1080p,
 1440p, 4K, or even custom dimensions;
-24/30/60 or custom integer FPS; and capture-time units per video second.
+24/30/60 or custom integer FPS. **Playback rate** is simulation-time units
+per second of exported video: lower values play more slowly and sample time
+more closely, while higher values play faster. The numeric timing is unchanged.
 
 Choose current camera locked or orbit, current rendering state or a cinematic /
 scientific override, overlays, trails, H.264 quality, and a new `.mp4` output path.
-The dialog shows video duration, exact output-frame count and a compact
-**Temporary storage** estimate for uncompressed frames (actual PNG size depends
-on image content). The source sample count and successful FFmpeg discovery are
-not shown; missing FFmpeg still produces an actionable error when Start Export
-is pressed.
+The lower **Export summary** shows video duration, exact output-frame count and
+a compact **Temporary storage** estimate for uncompressed frames (actual PNG
+size depends on image content). During a job or with retained job status it
+becomes **Export status**. Long status text scrolls within that lower area,
+while settings scroll independently. During normal rendering and after success,
+the status omits the destination already shown under **Output MP4** and the
+temporary directory. Failures, cancellation and FFmpeg-unavailable recovery
+show the working directory; **Jobs → Video export → Details** retains both
+paths for diagnosis. The source sample count and successful
+FFmpeg discovery are not shown; missing FFmpeg still produces an actionable
+error when Start Export is pressed.
+
+Successful dialog exports remove temporary PNG frames after publishing the MP4.
+Failure, cancellation and FFmpeg-unavailable states retain frames and other
+intermediates for recovery. Ordinary exports can optionally save per-frame
+inspection JSON from the collapsed **Advanced** section in Output. Selection-aware
+version-2 exports always write these per-frame inspection records as provenance;
+the optional control is hidden when selections are present. Those JSON records
+remain in the job directory after successful PNG cleanup and retain the PNG
+identity with `retained_after_encode:false`.
 Click **Start Export**. A second Godot process renders and encodes the video.
 The worker keeps a real GPU display connection but minimizes its noninteractive
 window and makes it unfocusable. It no longer needs a visible debug window to
@@ -76,7 +94,7 @@ The job directory retains `progress.json`,
 cancel request fails, the dialog reports the worker PID and retained job path.
 
 **Jobs → Video export → Details** and the export dialog share one progress
-summary, for example `Rendering frame 3000 / 12000 (25%)`. The integer percentage
+calculation, for example `Rendering frame 3000 / 12000 (25%)`. The integer percentage
 uses the actual rendered frame count. Separate **Elapsed** and **Estimated
 remaining** lines use `hh:mm:ss`; elapsed advances between worker updates.
 The approximate remaining time uses observed frames and elapsed wall time and

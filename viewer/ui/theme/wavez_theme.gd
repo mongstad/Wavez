@@ -163,11 +163,12 @@ func _init() -> void:
 	for type in ["HBoxContainer", "VBoxContainer"]: set_constant("separation", type, TOKENS.spacing[1])
 	for type in ["HFlowContainer", "VFlowContainer", "GridContainer"]:
 		set_constant("h_separation", type, TOKENS.spacing[1]); set_constant("v_separation", type, TOKENS.spacing[1])
-	for role in ["AppSurface", "AtmosphericSurface", "PropertyGroup", "RaisedPanel", "PopupSurface"]: set_type_variation(role, "PanelContainer")
+	for role in ["AppSurface", "AtmosphericSurface", "PropertyGroup", "TitledGroup", "RaisedPanel", "PopupSurface"]: set_type_variation(role, "PanelContainer")
 	set_stylebox("panel", "PanelContainer", box(&"surface.1", &"border.subtle", 12, 12, 0))
 	set_stylebox("panel", "AtmosphericSurface", atmosphere())
 	set_stylebox("panel", "AppSurface", box(&"surface.0", &"surface.0", 24, 24, 0))
 	set_stylebox("panel", "PropertyGroup", box(&"surface.1", &"border.subtle", 12, 12, 0))
+	set_stylebox("panel", "TitledGroup", box(&"surface.1", &"border.subtle", 10, 6, 0))
 	set_stylebox("panel", "RaisedPanel", box(&"surface.2", &"border.subtle", 12, 12, 4))
 	set_stylebox("panel", "PopupSurface", box(&"surface.3", &"border.control", 24, 24, 0))
 	for type in ["HSeparator", "VSeparator"]:

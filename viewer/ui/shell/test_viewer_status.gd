@@ -46,15 +46,15 @@ func locked_fields(node: Node) -> bool:
 		elif not locked_fields(child):return false
 	return true
 func setting_choice(video, label: String) -> OptionButton:
-	for i in range(video.fields.get_child_count()-1):
-		var node = video.fields.get_child(i)
-		if node is Label and node.text == label:return video.fields.get_child(i+1)
+	for i in range(video.video_fields.get_child_count()-1):
+		var node = video.video_fields.get_child(i)
+		if node is Label and node.text == label:return video.video_fields.get_child(i+1)
 	return null
 func check_active_export(video, label: String):
 	check(locked_fields(video.fields),label+": every setting, including Browse, is locked")
 	check(not video.close_button.visible and video.background_button.visible and not video.background_button.disabled,label+": only background dismiss action is visible")
 func check_idle_export(video, label: String):
-	check(video.output.editable and video.rate.editable and not video.range_choice.disabled and not video.quality.disabled and not video.keep.disabled and video.g4_quota.editable,label+": settings editable again")
+	check(video.output.editable and video.rate.editable and not video.range_choice.disabled and not video.quality.disabled and not video.inspection_sidecars.disabled and video.g4_quota.editable,label+": settings editable again")
 	check(video.start.editable and video.end.editable and not video.width.editable and not video.height.editable and not video.fps.editable,label+": custom range and preset dimension/FPS policies restored")
 	check(video.close_button.visible and not video.background_button.visible,label+": dismiss restored, background hidden")
 func wait_video(video):
@@ -82,6 +82,8 @@ func check_video_details():
 	check(text.contains("Elapsed: 00:01:40\nEstimated remaining: 00:05:00\n"),"Elapsed and estimated remaining use separate hh:mm:ss lines")
 	check(text.count("3000 / 12000") == 1 and text.count("/exports/movie.mp4") == 1 and text.count("/exports/job") == 1,"No duplicate progress or equivalent paths")
 	check(text.contains("Output: /exports/movie.mp4") and text.contains("Temporary files: /exports/job"),"Both paths are labeled")
+	var dialog_text := ProgressDetails.format(snapshot,1000,true)
+	check(dialog_text.begins_with("Rendering frame 3000 / 12000") and not dialog_text.contains("/exports/movie.mp4") and not dialog_text.contains("/exports/job"),"Dialog rendering status omits destination and working-directory paths")
 	text = ProgressDetails.format(snapshot,3000)
 	check(text.contains("Elapsed: 00:01:42") and text.contains("Estimated remaining: 00:05:06"),"Published snapshot advances elapsed and ETA between worker updates")
 	text = ProgressDetails.format(snapshot,12000)
@@ -94,12 +96,16 @@ func check_video_details():
 		if stage in ["failed","cancelled"]:
 			check(text == ProgressDetails.format(snapshot,999000),"Terminal time is frozen for "+stage)
 			check(text.contains("Diagnostic retained in [Temporary files]") and text.count("/exports/job") == 1,"Terminal diagnostic preserved with one labeled directory")
+			check(ProgressDetails.format(snapshot,3000,true).contains("Temporary files: /exports/job") and not ProgressDetails.format(snapshot,3000,true).contains("Output: /exports/movie.mp4"),"Dialog "+stage+" status retains actionable working-directory path only")
 	for stage in ["complete","frames_ready"]:
 		snapshot.stage = stage; snapshot.progress.current_frame = 12000
 		text = ProgressDetails.format(snapshot,3000)
 		check(text.contains("12000 / 12000 frames rendered (100%)") and text.contains("Estimated remaining: 00:00:00"),"Completed frame count and zero remainder for "+stage)
 		check(text == ProgressDetails.format(snapshot,999000),"Stable completed time for "+stage)
 	check(text.contains("FFmpeg unavailable"),"Frames-ready is distinguished from saved MP4")
+	check(ProgressDetails.format(snapshot,3000,true).contains("Temporary files: /exports/job") and not ProgressDetails.format(snapshot,3000,true).contains("Output: /exports/movie.mp4"),"Dialog FFmpeg recovery status retains working-directory path only")
+	snapshot.stage = "complete"
+	check(not ProgressDetails.format(snapshot,3000,true).contains("/exports/"),"Dialog successful status omits completed output and temporary paths")
 	snapshot.stage = "rendering"; snapshot.elapsed_seconds = 0
 	for count in [0,1]:
 		snapshot.progress.current_frame = count
@@ -340,6 +346,7 @@ func run():
 	check(viewer.shell.detail_text.text == ui.job_rows["Video export"].detail,"Details uses the retained progress snapshot")
 	check(viewer.shell.detail_text.text.begins_with("Rendering frame ") and viewer.shell.detail_text.text.contains("%)\nElapsed: "),"Real worker produces canonical progress and elapsed")
 	check(viewer.shell.detail_text.text.count(" / ") == 1 and viewer.shell.detail_text.text.count(video.active_directory) == 1,"Live Details has no duplicate frame count or directory")
+	check(not video.message.text.contains("Output: ") and not video.message.text.contains(video.active_directory),"Dialog rendering status omits paths retained in Jobs Details")
 	deadline = Time.get_ticks_msec()+15000
 	while video.pid > 0 and not viewer.shell.detail_text.text.contains("Estimated remaining: 00:") and Time.get_ticks_msec()<deadline: await create_timer(.01).timeout
 	check(video.pid > 0 and viewer.shell.detail_text.text.contains("Estimated remaining: 00:"),"Live Details acquires a render ETA from real worker progress")
@@ -347,6 +354,7 @@ func run():
 	root.mode = Window.MODE_MINIMIZED
 	await wait_video(video)
 	check(root.mode == Window.MODE_MINIMIZED and video.job_status.stage == "complete","Export completes while main viewer minimized and panel hidden")
+	check(not DirAccess.dir_exists_absolute(video.active_directory.path_join("frames")),"Successful dialog export removes temporary PNG frames")
 	root.mode = Window.MODE_WINDOWED; await settle(); ui.refresh()
 	check(ui.live_details.is_empty() and viewer.shell.detail_text.text.begins_with("Complete"),"Details publishes terminal completion and stops following")
 	var completed_detail: String = viewer.shell.detail_text.text

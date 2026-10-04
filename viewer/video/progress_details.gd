@@ -6,7 +6,7 @@ static func duration(seconds: float) -> String:
 	var whole := int(maxf(0, seconds))
 	return "%02d:%02d:%02d" % [whole / 3600, (whole / 60) % 60, whole % 60]
 
-static func format(state: Dictionary, now: int) -> String:
+static func format(state: Dictionary, now: int, for_dialog := false) -> String:
 	if state.is_empty(): return "No video export in this session."
 	var stage := str(state.get("stage", "starting"))
 	var data: Dictionary = state.get("progress", {})
@@ -44,7 +44,10 @@ static func format(state: Dictionary, now: int) -> String:
 		if not detail.is_empty(): lines.append(detail)
 	elif stage == "frames_ready": lines.append("FFmpeg unavailable. PNG frames and encoding instructions retained.")
 	elif stage == "cancelling": lines.append("Cancellation requested; waiting for worker acknowledgement.")
-	for entry in [["Output", "output"], ["Temporary files", "directory"]]:
+	var paths := [["Output", "output"], ["Temporary files", "directory"]]
+	if for_dialog:
+		paths = [["Temporary files", "directory"]] if stage in ["failed", "cancelled", "frames_ready"] else []
+	for entry in paths:
 		var path := str(state.get(entry[1], ""))
 		if not path.is_empty(): lines.append(entry[0] + ": " + path)
 	return "\n".join(lines)

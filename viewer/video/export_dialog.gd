@@ -7,6 +7,8 @@ var active_output := ""
 const Job = preload("res://video/render_job.gd")
 const Timeline = preload("res://video/offline_timeline.gd")
 const ProgressDetails = preload("res://video/progress_details.gd")
+const TitledGroup = preload("res://ui/shell/titled_group.gd")
+const Disclosure = preload("res://ui/components/disclosure.gd")
 var viewer
 var timeline
 var range_choice: OptionButton
@@ -21,21 +23,28 @@ var orbit: SpinBox
 var rendering: OptionButton
 var overlays: CheckButton
 var trails: CheckButton
-var keep: CheckButton
 var inspection_sidecars: CheckButton
 var output: LineEdit
 var quality: OptionButton
 var estimate: Label
 var progress: ProgressBar
 var message: Label
+var status_scroll: ScrollContainer
 var start_button: Button
 var background_button: Button
 var close_button: Button
 var can_start := false
 var save_dialog: FileDialog
-var fields: GridContainer
-var range_group: PanelContainer
+var fields: VBoxContainer
+var range_group
 var range_fields: GridContainer
+var video_fields: GridContainer
+var camera_fields: GridContainer
+var presentation_fields: GridContainer
+var output_fields: GridContainer
+var inspection_advanced
+var summary_group
+var groups: Dictionary = {}
 var pid := -1
 var active_directory := ""
 var active_job_path := ""
@@ -44,6 +53,7 @@ var opened_current := 0.0
 var ffmpeg := ""
 var g4_quota: SpinBox
 var preparing := false
+var active_selection_aware := false
 var preparation_cancelled := false
 var last_progress: Dictionary = {}
 var launch_ticks := 0
@@ -79,59 +89,62 @@ func _ready() -> void:
 	var scroll := ScrollContainer.new()
 	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL; scroll.follow_focus = true
 	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED; box.add_child(scroll)
-	var form := VBoxContainer.new(); form.size_flags_horizontal = Control.SIZE_EXPAND_FILL; scroll.add_child(form)
-	form.add_theme_constant_override("separation", 8)
-	range_group = PanelContainer.new(); range_group.size_flags_horizontal = Control.SIZE_EXPAND_FILL; form.add_child(range_group)
-	range_fields = GridContainer.new(); range_fields.columns = 2
-	range_fields.add_theme_constant_override("h_separation", 16)
-	range_fields.add_theme_constant_override("v_separation", 6)
-	range_group.add_child(range_fields)
-	fields = GridContainer.new()
-	fields.columns = 2
-	fields.add_theme_constant_override("h_separation", 16)
-	fields.add_theme_constant_override("v_separation",8)
-	form.add_child(fields)
-	range_choice = choice("Range", ["Full", "Current position to end", "Custom"], range_fields)
+	fields = VBoxContainer.new(); fields.size_flags_horizontal = Control.SIZE_EXPAND_FILL; scroll.add_child(fields)
+	fields.add_theme_constant_override("separation", 8)
+	range_group = add_group(fields, "Range")
+	range_fields = group_rows(range_group)
+	video_fields = group_rows(add_group(fields, "Video"))
+	camera_fields = group_rows(add_group(fields, "Camera"))
+	presentation_fields = group_rows(add_group(fields, "Presentation"))
+	var output_group = add_group(fields, "Output")
+	output_fields = group_rows(output_group)
+	range_choice = choice("Mode", ["Full", "Current position to end", "Custom"], range_fields)
 	start = number("Start", 0, -1e30, 1e30, .0001, range_fields)
 	end = number("End", 1, -1e30, 1e30, .0001, range_fields)
 	start.tooltip_text = "Recorded capture time."
 	end.tooltip_text = "End time is exclusive; a still exports one frame."
 	range_choice.item_selected.connect(func(_i: int): update_range())
-	var resolution := choice("Resolution", ["1920 × 1080", "2560 × 1440", "3840 × 2160", "Custom"])
-	width = number("Width", 1920, 64, 8192, 2)
-	height = number("Height", 1080, 64, 8192, 2)
+	var resolution := choice("Resolution", ["1920 × 1080", "2560 × 1440", "3840 × 2160", "Custom"], video_fields)
+	width = number("Width", 1920, 64, 8192, 2, video_fields)
+	height = number("Height", 1080, 64, 8192, 2, video_fields)
 	width.editable = false; height.editable = false
 	resolution.item_selected.connect(func(i: int):
 		width.editable = i == 3; height.editable = i == 3
 		if i < 3:
 			width.value = [1920,2560,3840][i]; height.value = [1080,1440,2160][i]
 	)
-	var fps_choice := choice("Frame rate", ["24 FPS", "30 FPS", "60 FPS", "Custom"])
+	var fps_choice := choice("Frame rate", ["24 FPS", "30 FPS", "60 FPS", "Custom"], video_fields)
 	fps_choice.select(1)
-	fps = number("Output FPS", 30, 1, 240, 1)
+	fps = number("Output FPS", 30, 1, 240, 1, video_fields)
 	fps.editable = false
 	fps_choice.item_selected.connect(func(i: int):
 		fps.editable = i == 3
 		if i < 3: fps.value = [24,30,60][i]
 	)
-	rate = number("Capture time units / video second", 1, .000001, 1e12, .000001)
-	rate.tooltip_text = "Uses recorded timestamps, not interactive frames/second. Output n samples start + n / FPS × rate."
-	camera_mode = choice("Camera", ["Current camera locked", "Current camera + orbit"])
-	orbit = number("Orbit • radians / video second", .08, -10, 10, .001)
-	rendering = choice("Rendering", ["Current state", "Cinematic preset", "Scientific preset"])
-	overlays = check("Overlays", "Include enabled viewport legends")
+	rate = number("Playback rate", 1, .000001, 1e12, .000001, video_fields)
+	rate.tooltip_text = "Simulation-time units per exported video second. Lower values play slower and sample time more closely; higher values play faster."
+	camera_mode = choice("Camera", ["Current camera locked", "Current camera + orbit"], camera_fields)
+	orbit = number("Orbit • radians / video second", .08, -10, 10, .001, camera_fields)
+	rendering = choice("Rendering", ["Current state", "Cinematic preset", "Scientific preset"], presentation_fields)
+	overlays = check("Overlays", "Include enabled viewport legends", presentation_fields)
 	overlays.tooltip_text = "Include enabled particle, field and mesh viewport legends. Application controls are never exported; independent scientific guides and markers retain their settings."
-	trails = check("Trails", "Include recorded history")
+	trails = check("Trails", "Include recorded history", presentation_fields)
 	trails.tooltip_text = "Scientific rendering suppresses trails, matching the interactive viewer."
-	quality = choice("H.264 quality", ["High • CRF 18", "Balanced • CRF 21", "Compact • CRF 25"])
-	keep = check("Temporary PNGs", "Keep after successful MP4 encoding")
-	inspection_sidecars = check("Inspection records", "Save per-frame inspection JSON")
-	g4_quota = number("G4 output quota • MiB",1024,1,65536,1)
+	quality = choice("H.264 quality", ["High • CRF 18", "Balanced • CRF 21", "Compact • CRF 25"], output_fields)
+	g4_quota = number("G4 output quota • MiB",1024,1,65536,1, output_fields)
 	g4_quota.tooltip_text = "Selection-aware jobs reserve a finite total output ceiling, including PNGs, sidecars, recipe assets and encoding."
-	var label := Label.new(); label.text = "Output MP4"; fields.add_child(label)
-	var row := HBoxContainer.new(); fields.add_child(row)
+	var label := Label.new(); label.text = "Output MP4"; output_fields.add_child(label)
+	var row := HBoxContainer.new(); output_fields.add_child(row)
 	output = LineEdit.new(); output.placeholder_text = "Choose output .mp4 path"; output.size_flags_horizontal = Control.SIZE_EXPAND_FILL; row.add_child(output)
 	var browse := Button.new(); browse.text = "Browse…"; row.add_child(browse)
+	inspection_advanced = Disclosure.new()
+	output_group.body.add_child(inspection_advanced)
+	var advanced_rows := GridContainer.new(); advanced_rows.columns = 2
+	advanced_rows.add_theme_constant_override("h_separation", 16)
+	inspection_advanced.configure(&"video.inspection", "Advanced", advanced_rows)
+	inspection_advanced.set_expanded(false)
+	inspection_sidecars = check("Inspection records", "Save per-frame inspection JSON", advanced_rows)
+	inspection_sidecars.tooltip_text = "Optional for ordinary exports. Selection-aware exports always save per-frame inspection records as provenance."
 	save_dialog = FileDialog.new()
 	save_dialog.file_mode = FileDialog.FILE_MODE_SAVE_FILE
 	save_dialog.access = FileDialog.ACCESS_FILESYSTEM
@@ -149,9 +162,16 @@ func _ready() -> void:
 			var directory: String = output.text.get_base_dir() if output.text.is_absolute_path() else viewer.file_locations.settings.video_dir
 			if not directory.is_empty() and DirAccess.dir_exists_absolute(directory): save_dialog.current_dir = directory
 			save_dialog.popup_centered_ratio(.8))
-	estimate = Label.new(); estimate.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; box.add_child(estimate)
-	message = Label.new(); message.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; box.add_child(message)
-	progress = ProgressBar.new(); progress.min_value = 0; progress.max_value = 100; box.add_child(progress)
+	summary_group = add_group(box, "Export summary")
+	estimate = Label.new(); estimate.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; summary_group.body.add_child(estimate)
+	message = Label.new(); message.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	message.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	summary_group.body.add_child(message)
+	status_scroll = ScrollContainer.new()
+	status_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	status_scroll.visible = false
+	summary_group.body.add_child(status_scroll)
+	progress = ProgressBar.new(); progress.min_value = 0; progress.max_value = 100; summary_group.body.add_child(progress)
 	var buttons := HBoxContainer.new(); buttons.alignment = BoxContainer.ALIGNMENT_END; box.add_child(buttons)
 	start_button = Button.new(); start_button.theme_type_variation = "PrimaryButton"; buttons.add_child(start_button)
 	start_button.pressed.connect(func():
@@ -161,7 +181,6 @@ func _ready() -> void:
 	background_button.pressed.connect(func():
 		if pid > 0 or preparing: hide())
 	close_button = Button.new(); close_button.text = "Cancel"; close_button.theme_type_variation = "SecondaryButton"; buttons.add_child(close_button)
-	close_button.tooltip_text = "Close this dialog."
 	close_button.pressed.connect(hide)
 	# The mutually exclusive secondary actions share the same width/position.
 	var secondary_width := maxf(background_button.get_combined_minimum_size().x,close_button.get_combined_minimum_size().x)
@@ -170,16 +189,18 @@ func _ready() -> void:
 	start_button.text = "Cancel export"
 	start_button.custom_minimum_size.x = maxf(140,start_button.get_combined_minimum_size().x)
 	cancel_confirmation = ConfirmationDialog.new()
-	cancel_confirmation.title = "Cancel video export?"
+	cancel_confirmation.title = ""
 	cancel_confirmation.borderless = true
-	cancel_confirmation.dialog_text = "Cancel video export?\nThe current export will stop.\nCompleted frames and temporary files may be retained."
+	cancel_confirmation.dialog_text = "Cancel video export?"
 	cancel_confirmation.ok_button_text = "Yes"
 	cancel_confirmation.cancel_button_text = "No"
 	var confirmation_actions: HBoxContainer = cancel_confirmation.get_ok_button().get_parent()
 	confirmation_actions.alignment = BoxContainer.ALIGNMENT_END
-	confirmation_actions.add_theme_constant_override("separation",2)
+	confirmation_actions.add_theme_constant_override("separation",16)
+	confirmation_actions.custom_minimum_size = Vector2(256, 0)
 	for child in confirmation_actions.get_children():
-		if child is Control and not child is Button: child.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+		if child is Button: child.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		elif child is Control: child.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
 	cancel_confirmation.get_ok_button().theme_type_variation = "DestructiveButton"
 	cancel_confirmation.get_cancel_button().theme_type_variation = "SecondaryButton"
 	cancel_confirmation.dialog_hide_on_ok = false
@@ -189,37 +210,50 @@ func _ready() -> void:
 		if not cancel_confirmation.visible: pending_cancel_directory = "")
 	visibility_changed.connect(func():
 		if not visible: cancel_confirmation.hide())
+	size_changed.connect(_layout_status)
 	add_child(cancel_confirmation)
 	_sync_action_buttons()
 	for spin in [start, end, width, height, fps, rate]: spin.value_changed.connect(func(_v: float): update_estimate())
 
-func choice(label: String, options: Array, target: GridContainer = null) -> OptionButton:
-	if target == null: target = fields
+func add_group(parent: VBoxContainer, title: String):
+	var group = TitledGroup.new(title)
+	parent.add_child(group)
+	groups[title] = group
+	return group
+
+func group_rows(group) -> GridContainer:
+	var rows := GridContainer.new()
+	rows.columns = 2
+	rows.add_theme_constant_override("h_separation", 16)
+	rows.add_theme_constant_override("v_separation", 6)
+	group.body.add_child(rows)
+	return rows
+
+func choice(label: String, options: Array, target: GridContainer) -> OptionButton:
 	var text := Label.new(); text.text = label; target.add_child(text)
 	var option := OptionButton.new(); option.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	for item in options: option.add_item(item)
 	target.add_child(option)
 	return option
 
-func number(label: String, initial: float, low: float, high: float, step_value: float, target: GridContainer = null) -> SpinBox:
-	if target == null: target = fields
+func number(label: String, initial: float, low: float, high: float, step_value: float, target: GridContainer) -> SpinBox:
 	var text := Label.new(); text.text = label; target.add_child(text)
 	var spin := SpinBox.new(); spin.min_value = low; spin.max_value = high; spin.step = step_value; spin.value = initial
 	target.add_child(spin)
 	return spin
 
-func check(label: String, text: String) -> CheckButton:
-	var name_label := Label.new(); name_label.text = label; fields.add_child(name_label)
-	var control := CheckButton.new(); control.text = text; fields.add_child(control)
+func check(label: String, text: String, target: GridContainer) -> CheckButton:
+	var name_label := Label.new(); name_label.text = label; target.add_child(name_label)
+	var control := CheckButton.new(); control.text = text; target.add_child(control)
 	return control
 
 func open() -> void:
 	if viewer.shell != null:
 		theme = viewer.shell.style_slice.theme
 		surface.add_theme_stylebox_override("panel",viewer.shell.style_slice.theme.flat_box(&"surface.1",0,0,0))
-		range_group.add_theme_stylebox_override("panel", theme.box(&"surface.1", &"border.control", 10, 6))
 		header_close.icon = viewer.shell.style_slice.theme.chrome_icon("close")
 		cancel_confirmation.theme = theme
+	_sync_inspection_advanced()
 	var available: Vector2 = viewer.get_viewport().get_visible_rect().size - Vector2(32,32)
 	popup_centered(Vector2i(Vector2(700,650).min(available)))
 	if pid > 0 or preparing:
@@ -271,7 +305,7 @@ func settings() -> Dictionary:
 	if range_choice.selected < 2:
 		start_time = timeline.times[0] if range_choice.selected == 0 else opened_current
 		end_time = timeline.times[-1]
-	return {"version":1, "capture_path":ProjectSettings.globalize_path(viewer.capture_path), "start_time":start_time, "end_time":end_time, "start_frame":timeline.bracket(start_time).get("a",-1), "end_frame":timeline.bracket(end_time).get("a",-1), "fps":int(fps.value), "width":int(width.value), "height":int(height.value), "playback_rate":rate.value, "output_path":output.text, "camera_mode":"orbit" if camera_mode.selected else "locked", "orbit_speed":orbit.value, "quality":["high","balanced","compact"][quality.selected], "keep_frames":keep.button_pressed, "inspection_sidecars":inspection_sidecars.button_pressed, "ffmpeg_path":ffmpeg, "rendering_method":RenderingServer.get_current_rendering_method()}
+	return {"version":1, "capture_path":ProjectSettings.globalize_path(viewer.capture_path), "start_time":start_time, "end_time":end_time, "start_frame":timeline.bracket(start_time).get("a",-1), "end_frame":timeline.bracket(end_time).get("a",-1), "fps":int(fps.value), "width":int(width.value), "height":int(height.value), "playback_rate":rate.value, "output_path":output.text, "camera_mode":"orbit" if camera_mode.selected else "locked", "orbit_speed":orbit.value, "quality":["high","balanced","compact"][quality.selected], "keep_frames":false, "inspection_sidecars":inspection_sidecars.button_pressed, "ffmpeg_path":ffmpeg, "rendering_method":RenderingServer.get_current_rendering_method()}
 
 func configured_job() -> Dictionary:
 	# The dialog chooses rendering state; the worker chooses the viewport boundary.
@@ -316,7 +350,8 @@ func start_export() -> void:
 		if not directory_error.is_empty():
 			message.text = "Video export destination is unavailable. Choose another location: " + directory_error
 			return
-	var with_selections: bool = viewer.selection_controller != null and not viewer.selection_controller.state.definitions.is_empty()
+	var with_selections := _selection_aware()
+	active_selection_aware = with_selections
 	if with_selections:
 		var recipe := preload("res://analysis/inspection_v3.gd").scene_snapshot(viewer.selection_controller.temporal)
 		if recipe.is_empty():message.text = "Bind the selection source before export.";return
@@ -359,7 +394,7 @@ func start_export() -> void:
 		if not durable.last_recipe.has("path"):
 			message.text = "Selection recipe preparation failed: "+durable.status.text
 			publish_job("failed", message.text);return
-		job.version = 2;job.inspection_path = durable.last_recipe.path;job.inspection_sha256 = durable.last_recipe.sha256;job.opened_paths = durable.opened_paths.duplicate();job.output_quota_bytes = str(int(g4_quota.value)*1048576)
+		job.version = 2;job.inspection_sidecars = true;job.inspection_path = durable.last_recipe.path;job.inspection_sha256 = durable.last_recipe.sha256;job.opened_paths = durable.opened_paths.duplicate();job.output_quota_bytes = str(int(g4_quota.value)*1048576)
 		job.exact_state = preload("res://analysis/inspection_v3.gd").pack(job.state)
 		job.exact_timing = preload("res://analysis/inspection_v3.gd").pack({"start_time":job.start_time,"end_time":job.end_time,"fps":job.fps,"playback_rate":job.playback_rate})
 		invalid = Job.validate(job)
@@ -394,14 +429,30 @@ func _sync_action_buttons() -> void:
 	background_button.disabled = not active
 	background_button.visible = active
 	close_button.visible = not active
+	var has_status := active or not job_status.is_empty()
+	summary_group.set_title("Export status" if has_status else "Export summary")
+	estimate.visible = not has_status
+	progress.visible = has_status
+	if has_status:
+		if message.get_parent() != status_scroll: message.reparent(status_scroll)
+		status_scroll.visible = true
+		_layout_status()
+	else:
+		if message.get_parent() != summary_group.body:
+			message.reparent(summary_group.body)
+			summary_group.body.move_child(message, 1)
+		status_scroll.visible = false
 	_sync_settings(active)
+
+func _layout_status() -> void:
+	if status_scroll != null:
+		status_scroll.custom_minimum_size.y = clampf(size.y * 0.22, 72, 140)
 
 func _sync_settings(active: bool) -> void:
 	if settings_locked == active:return
 	settings_locked = active
 	if active:
 		save_dialog.hide()
-		_lock_fields(range_fields)
 		_lock_fields(fields)
 	else:
 		# Restore each control's idle policy (e.g. preset dimensions remain read-only).
@@ -429,12 +480,22 @@ func publish_job(stage: String, detail: String) -> void:
 	job_status = {"stage":stage, "detail":detail, "directory":active_directory, "job":active_job_path,
 		"output":active_output, "progress":last_progress.duplicate(true),
 		"elapsed_seconds":seconds, "snapshot_ticks":now, "progress_ticks":progress_ticks}
-	message.text = progress_details()
+	message.text = status_summary()
 	_sync_action_buttons()
 	job_changed.emit()
 
 func progress_details() -> String:
 	return ProgressDetails.format(job_status, Time.get_ticks_msec())
+
+func status_summary() -> String:
+	return ProgressDetails.format(job_status, Time.get_ticks_msec(), true)
+
+func _selection_aware() -> bool:
+	return viewer.selection_controller != null and not viewer.selection_controller.state.definitions.is_empty()
+
+func _sync_inspection_advanced() -> void:
+	if inspection_advanced != null:
+		inspection_advanced.visible = not (active_selection_aware if pid > 0 or preparing else _selection_aware())
 
 # User actions share this gate. Shutdown keeps using the cooperative request below.
 func can_cancel_export() -> bool:
@@ -471,6 +532,7 @@ func cancel_export() -> void:
 		publish_job("failed", message.text)
 
 func _process(delta: float) -> void:
+	if visible: _sync_inspection_advanced()
 	if pid <= 0: return
 	poll += delta
 	if poll < .2: return
@@ -491,7 +553,7 @@ func _process(delta: float) -> void:
 		publish_job(str(last_progress.get("stage", "failed")) if last_progress.get("stage", "") in ProgressDetails.TERMINAL else "failed", str(last_progress.get("message", "")) if last_progress.get("stage", "") in ProgressDetails.TERMINAL else message.text)
 		viewer.status_label.text = message.text
 	elif not job_status.is_empty():
-		message.text = progress_details()
+		message.text = status_summary()
 
 func _exit_tree() -> void:
 	# Closing the parent viewer requests a graceful worker/encoder shutdown.
