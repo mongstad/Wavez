@@ -1,5 +1,14 @@
 # Current status
 
+Issue #248 arranges Video Export settings into titled Range, Video, Camera,
+Presentation and Output groups in candidate build 47. The separate lower
+Export summary becomes Export status while a job is active or retained; long
+status details scroll within that area so the settings and actions remain
+reachable at the minimum dialog size. The cancellation confirmation asks only
+“Cancel video export?” with spaced Yes/No actions and No initially focused.
+Export timing, rendering and cancellation protocols are unchanged. See
+[the video export guide](../VIDEO_EXPORT.md).
+
 Issue #211 restores Reset Camera to the current scene bounds in candidate build
 46. It returns to the default orientation while centering and sizing the camera
 for the loaded particles, fields and meshes; Frame Scene still preserves the

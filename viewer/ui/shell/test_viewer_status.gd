@@ -46,9 +46,9 @@ func locked_fields(node: Node) -> bool:
 		elif not locked_fields(child):return false
 	return true
 func setting_choice(video, label: String) -> OptionButton:
-	for i in range(video.fields.get_child_count()-1):
-		var node = video.fields.get_child(i)
-		if node is Label and node.text == label:return video.fields.get_child(i+1)
+	for i in range(video.video_fields.get_child_count()-1):
+		var node = video.video_fields.get_child(i)
+		if node is Label and node.text == label:return video.video_fields.get_child(i+1)
 	return null
 func check_active_export(video, label: String):
 	check(locked_fields(video.fields),label+": every setting, including Browse, is locked")

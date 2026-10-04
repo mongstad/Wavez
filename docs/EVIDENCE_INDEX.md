@@ -1,5 +1,11 @@
 # Retained evidence
 
+## Video Export dialog groups — issue #248, pending owner review
+
+[Native screenshots and focused validation](evidence/issue-248/README.md)
+cover the titled configuration groups, idle and active summaries, compact
+scrolling and the concise cancellation confirmation on candidate build 47.
+
 ## File Locations preferences — issue #226, pending owner review
 
 [Focused checks, known limitations and normal/error native screenshots](evidence/issue-226/README.md)
