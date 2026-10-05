@@ -5,6 +5,7 @@ const Visual = preload("res://scene/visual_state.gd")
 const Preset = preload("res://scene/view_preset.gd")
 var output := ""
 var restart := false
+var speed_only := false
 var checks := 0
 var failures: Array[String] = []
 var layouts: Array = []
@@ -35,6 +36,17 @@ func unique(map: Dictionary) -> bool:
 		if seen.has(value): return false
 		seen[value] = true
 	return true
+func speed_move(viewer) -> void:
+	release_focus()
+	var before: Transform3D = viewer.camera.transform
+	var target: Vector3 = viewer.camera_target
+	var expected: float = .1 * maxf(1, viewer.camera_distance * .5) * viewer.free_camera_speed_scale
+	var event := InputEventKey.new(); event.physical_keycode = KEY_W; event.pressed = true
+	Input.parse_input_event(event); Input.flush_buffered_events()
+	viewer._move_free_camera(.1)
+	event = event.duplicate(); event.pressed = false
+	Input.parse_input_event(event); Input.flush_buffered_events()
+	check(is_equal_approx(viewer.camera.position.distance_to(before.origin), expected) and viewer.camera_target != target and viewer.camera.basis.is_equal_approx(before.basis), "Adjusted speed controls packaged and source camera translation without rotating the view")
 func navigation_review(viewer, shell, label: String) -> void:
 	check(shell.shortcuts.active.free_camera == KEY_F and shell.shortcuts.active.auto_orbit == KEY_O and shell.shortcuts.active.frame_scene == KEY_R and shell.shortcuts.active.reset_camera == 0 and unique(shell.shortcuts.active), label + " F and O have distinct unique owners")
 	var f_event := InputEventKey.new(); f_event.keycode = KEY_F; f_event.pressed = true
@@ -77,10 +89,56 @@ func wait_ready(viewer) -> void:
 		await get_tree().create_timer(.01).timeout
 	check(false, "Fixture preparation completes")
 
+func speed_shortcut_review(viewer, shell) -> void:
+	if restart:
+		var saved: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(output.path_join("saved-map.json")))
+		for action in saved: saved[action] = int(saved[action])
+		check(shell.shortcuts.active == saved and unique(saved), "Fresh process restores both rebound speed keys without conflicts")
+		var rate: float = viewer.free_camera_speed_scale
+		trigger(shell, "increase_camera_speed")
+		check(is_equal_approx(viewer.free_camera_speed_scale, rate * 1.05), "Restarted increase key adjusts movement speed")
+		trigger(shell, "decrease_camera_speed")
+		check(is_equal_approx(viewer.free_camera_speed_scale, rate * 1.05 * .95), "Restarted decrease key adjusts movement speed")
+		speed_move(viewer)
+		return
+	check(shell.shortcuts.active.increase_camera_speed == KEY_PLUS and shell.shortcuts.active.decrease_camera_speed == KEY_MINUS, "Fresh profile uses logical + and - defaults")
+	shell.edit_shortcuts(); await settle()
+	var dialog = shell.shortcuts_editor
+	check(dialog.visible and dialog.rows.has("increase_camera_speed") and dialog.rows.has("decrease_camera_speed"), "Both speed actions appear in the existing editor")
+	check(dialog.rows.increase_camera_speed.label.text == "Increase Camera Movement Speed" and dialog.rows.decrease_camera_speed.label.text == "Decrease Camera Movement Speed", "Speed row labels explain their actions")
+	dialog.start_capture("increase_camera_speed")
+	var us_plus := InputEventKey.new(); us_plus.keycode = KEY_EQUAL; us_plus.unicode = KEY_PLUS; us_plus.shift_pressed = true; us_plus.pressed = true
+	root.push_input(us_plus)
+	us_plus = us_plus.duplicate(); us_plus.pressed = false; root.push_input(us_plus)
+	check(dialog.staged.increase_camera_speed == KEY_PLUS and dialog.apply_button.disabled, "US Shift+= captures logical + without changing the default")
+	dialog.start_capture("increase_camera_speed"); key(KEY_F6)
+	dialog.start_capture("decrease_camera_speed"); key(KEY_F6)
+	check(dialog.staged.increase_camera_speed == 0 and dialog.staged.decrease_camera_speed == KEY_F6 and unique(dialog.staged), "Speed key conflict unbinds the prior draft owner")
+	dialog.cancel.pressed.emit(); await settle()
+	check(not dialog.visible and shell.shortcuts.active == Bindings.defaults() and not FileAccess.file_exists(shell.shortcuts.storage_path), "Cancel discards both staged speed edits")
+	shell.edit_shortcuts()
+	dialog.start_capture("increase_camera_speed"); key(KEY_F6)
+	dialog.start_capture("decrease_camera_speed"); key(KEY_F7)
+	dialog.apply_button.pressed.emit(); await settle()
+	check(dialog.visible and dialog.apply_button.disabled and shell.shortcuts.active.increase_camera_speed == KEY_F6 and shell.shortcuts.active.decrease_camera_speed == KEY_F7 and unique(shell.shortcuts.active), "Apply persists and activates both rebound speed actions")
+	dialog.reset.pressed.emit()
+	check(dialog.staged.increase_camera_speed == KEY_PLUS and dialog.staged.decrease_camera_speed == KEY_MINUS and not dialog.apply_button.disabled, "Reset Defaults stages both logical speed keys")
+	dialog.cancel.pressed.emit(); await settle()
+	check(shell.shortcuts.active.increase_camera_speed == KEY_F6 and shell.shortcuts.active.decrease_camera_speed == KEY_F7, "Cancel after Apply keeps the persisted rebound keys")
+	var rate: float = viewer.free_camera_speed_scale
+	trigger(shell, "increase_camera_speed")
+	check(is_equal_approx(viewer.free_camera_speed_scale, rate * 1.05), "Applied increase key works immediately")
+	trigger(shell, "decrease_camera_speed")
+	check(is_equal_approx(viewer.free_camera_speed_scale, rate * 1.05 * .95), "Applied decrease key works immediately")
+	speed_move(viewer)
+	var file := FileAccess.open(output.path_join("saved-map.json"), FileAccess.WRITE)
+	file.store_string(JSON.stringify(shell.shortcuts.active)); file.close()
+
 func run() -> void:
 	for argument in OS.get_cmdline_user_args():
 		if argument.begins_with("--shortcut-output="): output = argument.trim_prefix("--shortcut-output=")
 		if argument == "--shortcut-restart": restart = true
+		if argument == "--shortcut-speed-only": speed_only = true
 	if output.is_empty(): queue_free(); return
 	get_tree().create_timer(120).timeout.connect(func(): push_error("Shortcut tests timed out"); get_tree().quit(1))
 	await get_tree().process_frame
@@ -89,6 +147,9 @@ func run() -> void:
 		viewer = Viewer.new(); viewer.scene_prebuffer_enabled = false; root.add_child(viewer)
 	viewer.set_process(false)
 	var shell = viewer.shell
+	if speed_only:
+		await speed_shortcut_review(viewer, shell)
+		finish(viewer); return
 	check(Bindings.ACTIONS.any(func(action): return action[0] == "open_capture" and action[1] == "Open File"), "Open shortcut has current visible label")
 	check(viewer.open_dialog.use_native_dialog and viewer.open_dialog.title == "Open File", "Open route keeps native scene picker configured")
 	check(not viewer.orbit_enabled and viewer.free_camera, "Fresh viewer starts with Auto Orbit off and Free Camera on")
@@ -98,6 +159,11 @@ func run() -> void:
 		check(shell.shortcuts.active == saved, "Fresh application process restores every saved and unbound binding")
 		check(unique(shell.shortcuts.active), "Restart has no duplicate bindings")
 		check(shell.shortcuts.active.reset_camera == 0 and shell.shortcuts.active.frame_scene == KEY_R, "Duplicate transfer survives restart")
+		var restart_speed: float = viewer.free_camera_speed_scale
+		trigger(shell, "increase_camera_speed")
+		check(is_equal_approx(viewer.free_camera_speed_scale, restart_speed * 1.05), "Persisted increase shortcut works after restart")
+		trigger(shell, "decrease_camera_speed")
+		check(is_equal_approx(viewer.free_camera_speed_scale, restart_speed * 1.05 * .95), "Persisted decrease shortcut works after restart")
 		navigation_review(viewer, shell, "Restart")
 		viewer.yaw = 1.7; viewer._update_camera(); var before: Transform3D = viewer.camera.transform
 		trigger(shell, "frame_scene")
@@ -108,6 +174,7 @@ func run() -> void:
 		finish(viewer); return
 	check(shell.shortcuts.active == Bindings.defaults(), "New profile preserves accepted default shortcuts")
 	check(shell.shortcuts.active.auto_orbit == KEY_O and shell.shortcuts.active.free_camera == 0, "Existing Auto Orbit and Free Camera bindings retain O and Unbound defaults")
+	check(shell.shortcuts.active.increase_camera_speed == KEY_PLUS and shell.shortcuts.active.decrease_camera_speed == KEY_MINUS, "Movement speed defaults are logical + and -")
 	var navigation_actions := {"auto_orbit":0, "free_camera":0}
 	for action in Bindings.ACTIONS:
 		if navigation_actions.has(action[0]): navigation_actions[action[0]] += 1
@@ -143,6 +210,7 @@ func run() -> void:
 	check(dialog.close_button.has_meta("violet_motion") and dialog.focus_order.has(dialog.close_button), "Dialog X shares shell hover treatment and is keyboard navigable")
 	check(dialog.rows.size() == Bindings.ACTIONS.size(), "Every supported action has a key capture row")
 	check(dialog.rows.has("auto_orbit") and dialog.rows.has("free_camera"), "Both navigation toggles are present under Edit Preferences Keyboard Shortcuts")
+	check(dialog.rows.has("increase_camera_speed") and dialog.rows.has("decrease_camera_speed") and dialog.rows.increase_camera_speed.label.text == "Increase Camera Movement Speed" and dialog.rows.decrease_camera_speed.label.text == "Decrease Camera Movement Speed", "Both speed controls are discoverable in Keyboard Shortcuts")
 	check(dialog.footer.is_ancestor_of(dialog.cancel) and dialog.footer.is_ancestor_of(dialog.apply_button) and not dialog.scroller.is_ancestor_of(dialog.footer), "Cancel and Apply remain in fixed footer")
 	check(dialog.apply_button.theme_type_variation == "PrimaryButton", "Apply is the primary action")
 	check(dialog.apply_button.disabled and not dialog.focus_order.has(dialog.apply_button), "Apply starts disabled and is excluded from keyboard traversal")
@@ -155,6 +223,16 @@ func run() -> void:
 	check(dialog.rows.export_video.key.tooltip_text.contains("Open a compatible capture") and not dialog.rows.export_video.key.disabled, "Unavailable source action explains requirements while binding stays editable")
 	picture("shortcuts-overview")
 	var original: Dictionary = shell.shortcuts.active.duplicate()
+	dialog.start_capture("increase_camera_speed")
+	var us_plus := InputEventKey.new(); us_plus.keycode = KEY_EQUAL; us_plus.unicode = KEY_PLUS; us_plus.shift_pressed = true; us_plus.pressed = true
+	root.push_input(us_plus)
+	us_plus = us_plus.duplicate(); us_plus.pressed = false; root.push_input(us_plus)
+	check(dialog.staged.increase_camera_speed == KEY_PLUS and dialog.apply_button.disabled, "US Shift+= captures the same logical + default as Nordic +")
+	dialog.start_capture("increase_camera_speed"); key(KEY_F6)
+	dialog.start_capture("decrease_camera_speed"); key(KEY_F6)
+	check(dialog.staged.increase_camera_speed == 0 and dialog.staged.decrease_camera_speed == KEY_F6 and unique(dialog.staged), "Speed shortcut conflict transfers ownership in the draft")
+	dialog.reset.pressed.emit()
+	check(dialog.apply_button.disabled and dialog.staged.increase_camera_speed == KEY_PLUS and dialog.staged.decrease_camera_speed == KEY_MINUS, "Reset Defaults restores both speed keys")
 	dialog.rows.reset_camera.key.grab_focus(); key(KEY_ENTER); await settle()
 	check(dialog.listening == "reset_camera", "Focused binding button enters capture through keyboard activation")
 	check(dialog.apply_button.disabled, "Entering key capture does not enable Apply")
@@ -210,6 +288,13 @@ func run() -> void:
 	check(dialog.staged == shell.shortcuts.active and dialog.apply_button.disabled and dialog.listening.is_empty(), "Apply establishes a clean draft and disables Apply while keeping editor open")
 	check(root.gui_get_focus_owner() == dialog.cancel, "Keyboard Apply moves focus to enabled Cancel when Apply disables")
 	var applied: Dictionary = shell.shortcuts.active.duplicate()
+	var active_speed: float = viewer.free_camera_speed_scale
+	dialog.cancel.pressed.emit(); await settle()
+	trigger(shell, "increase_camera_speed")
+	check(is_equal_approx(viewer.free_camera_speed_scale, active_speed * 1.05), "Rebound increase shortcut takes effect after Apply")
+	trigger(shell, "decrease_camera_speed")
+	check(is_equal_approx(viewer.free_camera_speed_scale, active_speed * 1.05 * .95), "Rebound decrease shortcut takes effect after Apply")
+	shell.edit_shortcuts()
 	dialog.clear_binding("save_image"); dialog.apply_button.pressed.emit(); await settle()
 	check(dialog.visible and shell.shortcuts.active.save_image == 0 and dialog.apply_button.disabled, "A second Apply saves another edit without closing the editor")
 	dialog.start_capture("save_image"); key(applied.save_image); dialog.apply_button.pressed.emit(); await settle()

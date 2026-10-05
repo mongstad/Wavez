@@ -18,7 +18,7 @@ def main():
     parser.add_argument('--godot', required=True)
     parser.add_argument('--output-dir', required=True, type=Path)
     parser.add_argument('--renderer', choices=['headless', 'forward_plus', 'gl_compatibility'], default='headless')
-    parser.add_argument('--suite', choices=['tumble', 'auto-orbit'], default='tumble')
+    parser.add_argument('--suite', choices=['tumble', 'auto-orbit', 'speed'], default='tumble')
     parser.add_argument('--capture', type=Path, help='Optional real WVZ1 smoke scene for the Auto Orbit suite')
     args = parser.parse_args()
     if args.capture and args.suite != 'auto-orbit':
@@ -73,7 +73,7 @@ def main():
             raise RuntimeError(log[-6000:])
     run('import', [args.godot, '--headless', '--path', 'viewer', '--editor', '--import'])
     renderer = ['--headless'] if args.renderer == 'headless' else ['--rendering-method', args.renderer]
-    script = 'test_auto_orbit.gd' if args.suite == 'auto-orbit' else 'test_camera_tumble.gd'
+    script = {'auto-orbit': 'test_auto_orbit.gd', 'speed': 'test_free_camera_speed.gd', 'tumble': 'test_camera_tumble.gd'}[args.suite]
     command = [args.godot, '--path', 'viewer', *renderer, '--resolution', '960x640', '--audio-driver', 'Dummy', '--script', 'res://scene/' + script, '--', '--camera-output='+str(out)]
     if capture:
         command.append('--camera-capture='+str(capture))

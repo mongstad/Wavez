@@ -1,5 +1,11 @@
 # Current status
 
+Issue #200 lowers the default Free Camera translation rate by 30% and adds
+editable `+`/`-` speed shortcuts. Each press changes the current rate by 5%; a
+held key repeats on a controlled 200 ms cadence within bounded limits. Camera
+direction, mouse/orbit interactions and scientific transforms are unchanged.
+Candidate build 49 is pending owner review. See [Free Camera speed](FREE_CAMERA_SPEED.md).
+
 Issue #234 uses Auto Orbit as a navigation mode. With Auto Orbit on,
 W/A/S/D/Q/E immediately turns it off and applies the same keypress as ordinary
 Free Camera movement. Edit Orbit Center temporarily suspends orbit; Apply starts
