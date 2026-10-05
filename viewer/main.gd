@@ -1916,9 +1916,14 @@ func _capture_inspection_png(path: String, with_state: bool, viewport_only: bool
 # scientific legends live beside the shell and stay in the captured viewport.
 func _save_image_viewport() -> Image:
 	var extent := get_viewport().get_visible_rect().size
-	var top: float = shell.bar.get_global_rect().end.y if shell.bar.visible else 0.0
-	var bottom: float = shell.transport.get_global_rect().position.y if shell.bottom_strip.visible else extent.y
-	var right: float = resize_handle.get_global_rect().position.x if shell.dock.visible else extent.x
+	# Edge-reveal owns fullscreen visibility. A Control may retain its local
+	# visible flag or old windowed rect while its immersive surface is hidden.
+	var top_visible: bool = shell.edge_reveal.states.top.visible and shell.bar.is_visible_in_tree()
+	var bottom_visible: bool = shell.edge_reveal.states.bottom.visible and shell.bottom_strip.is_visible_in_tree()
+	var right_visible: bool = shell.edge_reveal.states.right.visible and shell.dock.is_visible_in_tree()
+	var top: float = shell.bar.get_global_rect().end.y if top_visible else 0.0
+	var bottom: float = shell.transport.get_global_rect().position.y if bottom_visible else extent.y
+	var right: float = resize_handle.get_global_rect().position.x if right_visible else extent.x
 	right = clampf(right,0.0,extent.x)
 	bottom = clampf(bottom,top,extent.y)
 	if right <= 0.0 or bottom <= top: return null
@@ -1927,8 +1932,11 @@ func _save_image_viewport() -> Image:
 	visible_area.size = Vector2(right,bottom-top)
 	var hidden: Array[CanvasItem] = []
 	var orbit_guide: Control = shell.orbit_editor.guide if shell.orbit_editor != null else null
-	for item in [shell,overlay_panel,resize_handle,screenshot_notice,orbit_guide]:
-		if item != null and item.visible:
+	var orbit_panel: Control = shell.orbit_editor.panel if shell.orbit_editor != null else null
+	# Keep the shell and its edge-reveal/input state in the tree. The bar, dock,
+	# handle and bottom strips are already outside the crop when visible.
+	for item in [shell.empty,shell.open_error,shell.immersive_hint,overlay_panel,screenshot_notice,orbit_panel,orbit_guide,shell.shortcuts_editor]:
+		if item != null and item.is_visible_in_tree():
 			hidden.append(item)
 			item.hide()
 	var windows: Array[Window] = []
@@ -1945,7 +1953,14 @@ func _save_image_viewport() -> Image:
 
 func _collect_embedded_windows(parent: Node, found: Array[Window]) -> void:
 	for child in parent.get_children():
-		if child is Window and child.visible and child.is_embedded(): found.append(child)
+		if child is Window and child.visible and child.is_embedded():
+			var ancestor := child.get_parent()
+			var shown := true
+			while ancestor != null and ancestor != self:
+				if ancestor is CanvasItem and not ancestor.is_visible_in_tree(): shown = false; break
+				if ancestor is Window and not ancestor.visible: shown = false; break
+				ancestor = ancestor.get_parent()
+			if shown: found.append(child)
 		_collect_embedded_windows(child,found)
 
 func _inspection_frame_fingerprint() -> String:

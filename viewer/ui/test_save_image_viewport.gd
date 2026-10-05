@@ -136,11 +136,69 @@ func one(kind: String) -> void:
 	view.queue_free(); await process_frame
 	RenderingServer.force_draw(false); await process_frame
 
+func fullscreen_capture() -> void:
+	var view = Viewer.new()
+	root.add_child(view)
+	view._open_capture(output.path_join("particles.wvz"))
+	view.playing = false; view.orbit_enabled = false; view.set_process(false)
+	await ready(view)
+	var directory := output.path_join("fullscreen")
+	DirAccess.make_dir_recursive_absolute(directory)
+	view.file_locations.settings.image_dir = directory
+	view.shell.enter_immersive()
+	await create_timer(.4).timeout
+	var extent: Vector2i = Vector2i(root.get_visible_rect().size)
+	Input.warp_mouse(Vector2(extent)*0.5)
+	check(view.shell.immersive and DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN, "Native fullscreen is active")
+	check(not view.shell.bar.is_visible_in_tree() and not view.shell.dock.is_visible_in_tree()
+		and not view.shell.bottom_strip.is_visible_in_tree(), "Fullscreen scientific viewport has all chrome hidden")
+	# Reproduce stale child-local visibility under a hidden shell. The old crop
+	# subtracted the windowed bar/dock/strips even though none was on screen.
+	view.shell.hide()
+	view.shell.bar.show(); view.shell.dock.show(); view.shell.bottom_strip.show()
+	check(view._save_image_viewport().get_size() == extent and not view.shell.visible,
+		"Hidden fullscreen chrome never contributes stale crop boundaries")
+	view.shell.show(); view.shell.layout()
+	var before := {"immersive":view.shell.immersive,"shell":view.shell.visible,
+		"edges":view.shell.edge_reveal.states.duplicate(true),"popup":view.shell.edge_reveal.popup_active(view),
+		"bar":view.shell.bar.visible,"dock":view.shell.dock.visible,"bottom":view.shell.bottom_strip.visible,
+		"focus":root.gui_get_focus_owner()}
+	var visual := Visual.snapshot(view)
+	var world: Transform3D = view.scene_layers.transform
+	var key := InputEventKey.new(); key.keycode = KEY_P; key.pressed = true
+	root.push_input(key)
+	key = key.duplicate(); key.pressed = false; root.push_input(key)
+	for frame in 180:
+		if view.screenshot_count == 1 and not view.screenshot_saving: break
+		await process_frame
+	check(view.screenshot_count == 1 and not view.screenshot_saving, "Fullscreen Save Image shortcut completes")
+	var image_path := ""
+	for file in DirAccess.get_files_at(directory):
+		if file.ends_with(".png"): image_path = directory.path_join(file)
+	if image_path.is_empty(): check(false,"Fullscreen shortcut writes a PNG")
+	else: check(Image.load_from_file(image_path).get_size() == extent, "Hidden-chrome fullscreen PNG uses the full viewport resolution")
+	var after := {"immersive":view.shell.immersive,"shell":view.shell.visible,
+		"edges":view.shell.edge_reveal.states.duplicate(true),"popup":view.shell.edge_reveal.popup_active(view),
+		"bar":view.shell.bar.visible,"dock":view.shell.dock.visible,"bottom":view.shell.bottom_strip.visible,
+		"focus":root.gui_get_focus_owner()}
+	check(after == before, "Save Image preserves immersive, edge-reveal, popup and focus state")
+	check(Visual.snapshot(view) == visual and view.scene_layers.transform == world, "Fullscreen Save Image preserves visual and scientific state")
+	var center := Vector2(extent)*0.5
+	check(view.shell.edge_reveal.is_viewport_point(center), "Viewport accepts a double-click immediately after Save Image")
+	var click := InputEventMouseButton.new()
+	click.button_index = MOUSE_BUTTON_LEFT; click.pressed = true; click.double_click = true; click.position = center
+	root.push_input(click)
+	await process_frame
+	check(not view.shell.immersive, "Viewport double-click exits fullscreen immediately after Save Image")
+	view.queue_free(); await process_frame
+	RenderingServer.force_draw(false); await process_frame
+
 func run() -> void:
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--save-image-output="): output = arg.trim_prefix("--save-image-output=")
 	if output.is_empty(): quit(1); return
 	for kind in ["particles","fields","meshes","mixed"]: await one(kind)
+	await fullscreen_capture()
 	var report := {"checks":checks,"failures":failures,"renderer":RenderingServer.get_current_rendering_method()}
 	var file := FileAccess.open(output.path_join("report.json"),FileAccess.WRITE)
 	file.store_string(JSON.stringify(report,"  ")); file.close()

@@ -5,13 +5,15 @@ viewport presentation. The PNG uses the live camera and renderer, current layer
 visibility and styling, and eligible scientific legends. Its boundaries are the
 visible scene area between the top bar, bottom transport/status strips and the
 Simulation dock when those controls are shown. The camera projection is not
-reframed for the crop.
+reframed for the crop. In fullscreen with all chrome hidden, the PNG uses the
+entire visible fullscreen viewport; hidden controls retain no crop footprint.
 
 Application chrome, including Tools, dialogs, notifications and the Edit Orbit
 Center gizmo, is excluded. Capture leaves the camera, playback, source data,
 scientific transforms and open editor state in place. If the inspection sidecar
 option is enabled, its image dimensions and hash refer to the cropped PNG;
 selection-aware saves use the same crop and verified bundle workflow.
+Fullscreen edge-reveal and double-click navigation remain active after saving.
 
 The File Locations preference still writes directly to a configured Image
 Exports folder. Without one, Save Image uses the native folder picker and reuses
@@ -34,3 +36,7 @@ error instead of choosing another destination.
    configured folder and check the error.
 5. With the inspection sidecar option enabled, check that a selected-particle
    save publishes its PNG and inspection bundle with the cropped image size.
+6. Enter fullscreen with its chrome hidden and save via shortcut. Confirm the
+   PNG matches the full fullscreen viewport resolution, then double-click the
+   viewport to exit fullscreen immediately. Check that edge-reveal pins and
+   popup/focus behavior are unchanged by the save.
