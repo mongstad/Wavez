@@ -1,5 +1,5 @@
 extends Control
-## Transient editor for the two existing orbit parameters. Never moves the camera until Apply.
+## Transient editor for the existing orbit parameters. Draft values commit only on Apply.
 var viewer
 var center := Vector3.ZERO
 var radius := 1.0
@@ -16,6 +16,7 @@ var drag_mouse := Vector2.ZERO
 var drag_direction := Vector2.ZERO
 var drag_units := 0.0
 var last_view: Array = []
+var pre_edit_camera: Dictionary = {}
 
 func setup(owner_viewer) -> void:
 	viewer = owner_viewer
@@ -64,8 +65,24 @@ func setup(owner_viewer) -> void:
 	hide(); set_process(false); set_process_input(false)
 
 func open() -> void:
-	if viewer.offline_instance or viewer.inspection_busy: return
+	if viewer.offline_instance or viewer.inspection_busy or visible: return
+	pre_edit_camera = {
+		"transform": viewer.camera.transform,
+		"target": viewer.camera_target,
+		"distance": viewer.camera_distance,
+		"yaw": viewer.yaw,
+		"pitch": viewer.pitch,
+		"orbit_enabled": viewer.orbit_enabled,
+		"free_camera": viewer.free_camera,
+		"orbit_basis": viewer.camera_orbit_basis,
+		"orbit_basis_active": viewer.camera_orbit_basis_active,
+		"orbit_basis_yaw": viewer.camera_orbit_basis_yaw,
+		"orbit_basis_pitch": viewer.camera_orbit_basis_pitch,
+	}
 	center = viewer.camera_target; radius = viewer.camera_distance; drag_axis = -1
+	viewer.orbit_enabled = false
+	viewer.free_camera = true
+	viewer._sync_control_state()
 	write_fields(); last_view.clear(); show(); guide.show(); show_details(get_viewport_rect().size.y >= 720)
 	set_process(true); set_process_input(true); refresh()
 	var focus := get_viewport().gui_get_focus_owner()
@@ -76,10 +93,25 @@ func show_details(expanded: bool) -> void:
 	details_toggle.text = "Hide controls" if expanded else "Show controls"
 	refresh()
 
-func dismiss() -> void:
+func dismiss(restore_camera := true) -> void:
+	if not visible: return
 	drag_axis = -1; hide(); guide.hide(); set_process(false); set_process_input(false)
 	var focus := get_viewport().gui_get_focus_owner()
 	if focus != null and is_ancestor_of(focus): focus.release_focus()
+	if restore_camera and not pre_edit_camera.is_empty():
+		viewer.camera_target = pre_edit_camera.target
+		viewer.camera_distance = pre_edit_camera.distance
+		viewer.yaw = pre_edit_camera.yaw
+		viewer.pitch = pre_edit_camera.pitch
+		viewer.camera_orbit_basis = pre_edit_camera.orbit_basis
+		viewer.camera_orbit_basis_active = pre_edit_camera.orbit_basis_active
+		viewer.camera_orbit_basis_yaw = pre_edit_camera.orbit_basis_yaw
+		viewer.camera_orbit_basis_pitch = pre_edit_camera.orbit_basis_pitch
+		viewer.camera.transform = pre_edit_camera.transform
+		viewer.orbit_enabled = pre_edit_camera.orbit_enabled
+		viewer.free_camera = pre_edit_camera.free_camera
+	pre_edit_camera.clear()
+	viewer._sync_control_state()
 
 func read_fields() -> bool:
 	if not visible: return false
@@ -99,7 +131,7 @@ func write_fields() -> void:
 	radius_input.text = str(radius); update_notice()
 
 func update_notice() -> void:
-	notice.text = "Only Apply changes the orbit. Cancel discards this draft."
+	notice.text = "Apply starts Auto Orbit at this center. Cancel restores the previous view."
 
 func adjust_radius(steps: float, fine: bool) -> void:
 	if not read_fields(): return
@@ -121,7 +153,9 @@ func commit() -> void:
 	viewer.camera_target = center
 	viewer.camera_distance = radius
 	viewer._update_camera()
-	dismiss()
+	dismiss(false)
+	viewer.orbit_enabled = true
+	viewer._sync_control_state()
 
 func refresh() -> void:
 	if not visible: return

@@ -1,10 +1,12 @@
 # Edit the existing orbit center and radius (#120)
 
-Status: revised-description restart, pending owner UX review in PR #152.
+Historical status: revised-description candidate in PR #152.
 Accepted baseline: `1a607740876736fdff34a25ca18ef395d33a4fe7` (build 11).
-Candidate: build 12. This document is the current usage and validation reference.
+Candidate: build 12. This document records that candidate's usage and validation.
 The earlier `CUSTOM_ORBIT.md` and its original evidence remain unchanged historical
-records of the superseded implementation.
+records of the superseded implementation. The usage, architecture and validation
+below describe the historical #120 candidate. For the current #234 editor mode,
+Apply/Cancel behavior and owner checks, see [Auto Orbit](AUTO_ORBIT.md).
 
 ## Use
 

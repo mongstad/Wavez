@@ -1,65 +1,72 @@
-# Auto Orbit around the scene target (#234)
+# Auto Orbit and Free Camera (#234)
 
-Auto Orbit moves the camera around the accepted world-space `camera_target`.
-The camera orientation and `camera_distance` set its orbit pose. The scene root,
-scientific coordinates and capture data do not receive an orbit transform.
-Left-button tumble and right-button view-relative orbit keep their existing
-gestures; either drag suspends automatic motion until release.
+Free Camera movement is active on a clean launch. W/S moves along the camera's
+forward axis, A/D along its lateral axis, and Q/E along its vertical axis. These
+keys translate the camera view without applying a transform to scene roots,
+scientific coordinates, or capture data.
 
-While Auto Orbit is on, Free Camera W/S changes the camera-to-target radius
-without moving `camera_target`. Near the target, inward movement stops before
-crossing it; a smaller radius deliberately set through Edit Orbit Center is
-retained without an outward snap. Free Camera A/D and Q/E retain their accepted
-side/up translation, which pans the orbit target with the camera. With Auto
-Orbit off, all Free Camera axes retain their prior translation behavior.
-Wheel zoom uses the same radius. Edit Orbit Center changes the accepted target
-and radius; Frame Scene and Reset Camera recalculate them from the current scene.
-Disabling or re-enabling Auto Orbit leaves the camera at its current pose.
+Auto Orbit moves the camera around the current world-space `camera_target`. It
+keeps the existing orientation, target, and positive `camera_distance` camera
+representation. While Auto Orbit is on, free-camera translation is suspended.
+Pressing any W/A/S/D/Q/E key turns Auto Orbit off and applies that key's normal
+free-camera movement on the **same** process tick. Turning Auto Orbit back on
+starts from the current camera pose without a snap. Auto Orbit's rotation stops
+while a manual LMB or RMB drag is held and resumes on release. LMB free tumble,
+RMB view-relative orbit, and wheel zoom retain their accepted behavior in both
+modes.
 
-## Source trace
+**Navigate → Edit orbit center…** temporarily turns Auto Orbit off and enables
+Free Camera movement for placement. The proposed target and radius remain draft
+values until Apply. **Apply** commits the world-space target and radius and
+immediately starts Auto Orbit there. **Cancel** restores the complete camera and
+navigation state from before the editor opened, including whether Auto Orbit
+was on. Numeric text focus keeps the normal movement-key protection.
 
-`scene_layers.tick()` advances automatic yaw, then `_update_camera()` assigns
-`camera.transform` from the current orientation, `camera_target` and
-`camera_distance`. The pivot is already in world space; Auto Orbit does not
-write to a scene or layer transform. Before this correction,
-`_move_free_camera()` translated `camera_target` by the full camera-local
-movement vector, including W/S. Because `_update_camera()` then placed the
-camera at the same radius from the newly translated target, forward/back
-movement carried the pivot with the camera. Manual right-button orbit already
-uses the authoritative target and radius. This correction changes only the
-W/S path while Auto Orbit is enabled.
+Frame Scene and Reset Camera retain their existing framing behavior. Navigation
+and Auto Orbit affect the camera, never scientific/world transforms.
+
+## Implementation boundary
+
+`scene_layers.tick()` calls `_move_free_camera()` before advancing automatic
+yaw. The movement function switches modes as soon as it finds a movement key,
+then uses the existing Free Camera translation path. The rest of the camera
+representation and the manual mouse gestures remain in place. The editor saves
+the pre-edit pose and mode, uses a temporary placement mode, and either restores
+the saved state or commits the new target and starts Auto Orbit.
+
+The previous #234 candidate let W/S change the radius while Auto Orbit stayed
+on. Its validation counts describe that earlier behavior and are retained in
+PR history; they do not validate this revision.
 
 ## Focused validation
 
-The `tools/validate_camera_tumble.py --suite auto-orbit` regression uses tiny
-particle, volume, mesh and mixed WVZ1 fixtures. For each, it checks LMB →
-Auto Orbit → off, RMB → Auto Orbit → RMB, wheel zoom, W/S while orbiting, an
-edited target, Reset/Frame → Auto Orbit, and repeated off/on transitions.
-It checks camera travel and aim against the world-space target, stable world
-roots and particle transforms, unchanged committed sample and byte-identical
-fixture captures. The connected camera tumble suite exercises the existing
-drag, zoom, free movement, reset, recipe and video-camera paths.
+`tools/validate_camera_tumble.py --suite auto-orbit` covers particle, volume,
+mesh, and mixed WVZ1 fixtures plus an optional real mesh capture. It checks
+default Free Camera movement, automatic orbit motion, immediate exit and
+camera-relative translation for all six movement keys, editor Apply/Cancel from
+both starting modes, LMB/RMB/wheel, and stable scientific/world transforms.
+The connected camera tumble suite checks the existing manual camera behavior.
+The runner verifies that fixture and optional real capture bytes do not change.
 
-Final candidate results: 161 checks passed headless and 161 in native Forward+
-with the small real cavity-collapse mesh capture; 156 checks passed in native
-Compatibility. The connected camera tumble suite passed 13,798 headless checks
-and 13,814 Compatibility checks. Two application-version tests, the version
-CLI and `git diff --check` passed. Fixture and real-capture hashes were unchanged.
-The reported large particle/field capture was not available for this run; the
-owner's visual check below remains important for subjective orbit feel.
+Revision results: 368 Auto Orbit checks passed in each of headless, native
+Forward+, and native Compatibility with the small real cavity-collapse mesh
+capture. The connected camera tumble suite passed 13,798 checks headless and
+13,814 in native Compatibility. Both application-version tests, the version
+CLI (`v0.1.0.48`), and `git diff --check` passed. Fixture and real-capture
+SHA-256 hashes were unchanged. The reported large particle/field capture was
+not available for this run; its visual feel remains an owner check.
 
 ## Owner verification
 
-1. Open the reported large particle/field scene, choose **Frame Scene**, turn
-   on Auto Orbit and hold W, then S. The camera should approach and retreat
-   while continuing around the same scene center. The dataset must not swing
-   around a moving viewport pivot.
-2. Turn Auto Orbit off and on repeatedly. Check that the resulting camera pose
-   never snaps. Tumble with LMB, orbit with RMB, and zoom before and after the
-   toggles. A held drag should pause automatic motion.
-3. Use **Edit Orbit Center** to choose an obviously off-center world coordinate.
-   Orbit and move W/S again. Then use **Frame Scene** and **Reset Camera** and
-   confirm both restore their established framing/orientation behavior.
-4. Repeat with particle-only, field-only, mesh-only and mixed scenes. Confirm
-   scientific object coordinates and playback samples remain unchanged by
-   camera navigation. Check native Forward+ and Compatibility presentation.
+1. Open a particle, field, or mesh scene. Turn Auto Orbit on, then press each
+   movement key. The first press should stop Auto Orbit and move the camera in
+   the expected camera-relative direction. Turn orbit back on to check pose
+   continuity.
+2. Tumble with LMB, orbit with RMB, and zoom with the wheel before and after
+   the mode transition. A held drag should suspend automatic motion.
+3. Open Edit Orbit Center first with Auto Orbit on and then off. Navigate while
+   placing the guide. Cancel each time to recover the exact previous view and
+   mode. Apply a visibly off-center target and confirm orbit starts immediately
+   around that target.
+4. Check native Forward+ and Compatibility views. Scientific object coordinates
+   and playback content should remain unchanged by camera navigation.
