@@ -266,11 +266,11 @@ and starts unbound. Opening a capture or resetting the camera preserves the
 current navigation modes. A loaded view preset may explicitly restore either
 mode; an inspection recipe restores its saved Auto orbit setting, while Free
 camera is session-only. Shortcut preferences store bindings, not mode states.
-The two toggles are independent: Free camera never changes Auto orbit, and
-Auto orbit never changes Free camera or clears an inspection pause. If F is
-assigned to Free Camera, its prior Frame Scene binding becomes Unbound; one
-key event invokes one action. The Navigate menu uses the same independent
-toggles.
+The Navigate menu retains both toggles. While Auto orbit is on, free-camera
+translation pauses. Any W/A/S/D/Q/E key turns Auto orbit off and applies that
+keypress as normal free-camera movement immediately, even if Free camera was
+previously toggled off. If F is assigned to Free Camera, its prior Frame Scene
+binding becomes Unbound; one key event invokes one action.
 
 Left-drag supports continuous yaw/pitch revolutions with no pitch clamp.
 Right-drag in the viewport orbits sideways about the camera's current screen-up
@@ -287,18 +287,20 @@ fields and meshes while keeping the camera's orientation. R (Reset Camera)
 uses the same current-scene bounds but restores the default yaw/pitch and clears
 the view-relative orbit basis. Both leave scientific coordinates and the Free
 Camera / Auto Orbit modes alone. Wheel zoom and free-camera WASD/Q/E movement
-continue from either framed view. O toggles automatic world-Y
-orbit independently; manual dragging temporarily suspends it.
+continue from either framed view. O toggles automatic world-Y orbit; manual
+dragging temporarily suspends its motion. A movement key exits Auto Orbit before
+translating the camera on that same press. See [Auto Orbit](AUTO_ORBIT.md).
 
 **Navigate → Edit orbit center…** opens a temporary world-space XYZ/radius
 editor. Drag the labeled axis endpoints or enter coordinates; change the draft
 radius with its −/+ buttons or wheel over the radius controls (Shift: fine).
 **Place ahead** positions the draft along the current view direction. **Apply**
-sets the existing orbit target and distance and removes the guide; **Cancel**
-discards the draft. Ordinary viewport drag, wheel, Free-camera movement and Auto
-Orbit retain their existing behavior during and after editing. Numeric focus
-retains the usual keyboard-input protection. Viewport navigation performed during
-editing remains navigation; Cancel only discards the proposal.
+sets the existing orbit target and distance, removes the guide, and immediately
+starts Auto Orbit there. Opening the editor suspends Auto Orbit and enables
+Free Camera movement for placement. **Cancel** restores the complete camera and
+navigation state from before editing, including the prior Auto Orbit state.
+Ordinary LMB/RMB drag and wheel remain available. Numeric focus retains the
+usual keyboard-input protection.
 
 **Hide controls / Show controls** collapses the coordinate rows to make room for
 the gizmo. Setup starts collapsed in windows shorter than 720 pixels. Apply and

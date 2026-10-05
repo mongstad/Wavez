@@ -1,0 +1,72 @@
+# Auto Orbit and Free Camera (#234)
+
+Free Camera movement is active on a clean launch. W/S moves along the camera's
+forward axis, A/D along its lateral axis, and Q/E along its vertical axis. These
+keys translate the camera view without applying a transform to scene roots,
+scientific coordinates, or capture data.
+
+Auto Orbit moves the camera around the current world-space `camera_target`. It
+keeps the existing orientation, target, and positive `camera_distance` camera
+representation. While Auto Orbit is on, free-camera translation is suspended.
+Pressing any W/A/S/D/Q/E key turns Auto Orbit off and applies that key's normal
+free-camera movement on the **same** process tick. Turning Auto Orbit back on
+starts from the current camera pose without a snap. Auto Orbit's rotation stops
+while a manual LMB or RMB drag is held and resumes on release. LMB free tumble,
+RMB view-relative orbit, and wheel zoom retain their accepted behavior in both
+modes.
+
+**Navigate → Edit orbit center…** temporarily turns Auto Orbit off and enables
+Free Camera movement for placement. The proposed target and radius remain draft
+values until Apply. **Apply** commits the world-space target and radius and
+immediately starts Auto Orbit there. **Cancel** restores the complete camera and
+navigation state from before the editor opened, including whether Auto Orbit
+was on. Numeric text focus keeps the normal movement-key protection.
+
+Frame Scene and Reset Camera retain their existing framing behavior. Navigation
+and Auto Orbit affect the camera, never scientific/world transforms.
+
+## Implementation boundary
+
+`scene_layers.tick()` calls `_move_free_camera()` before advancing automatic
+yaw. The movement function switches modes as soon as it finds a movement key,
+then uses the existing Free Camera translation path. The rest of the camera
+representation and the manual mouse gestures remain in place. The editor saves
+the pre-edit pose and mode, uses a temporary placement mode, and either restores
+the saved state or commits the new target and starts Auto Orbit.
+
+The previous #234 candidate let W/S change the radius while Auto Orbit stayed
+on. Its validation counts describe that earlier behavior and are retained in
+PR history; they do not validate this revision.
+
+## Focused validation
+
+`tools/validate_camera_tumble.py --suite auto-orbit` covers particle, volume,
+mesh, and mixed WVZ1 fixtures plus an optional real mesh capture. It checks
+default Free Camera movement, automatic orbit motion, immediate exit and
+camera-relative translation for all six movement keys, editor Apply/Cancel from
+both starting modes, LMB/RMB/wheel, and stable scientific/world transforms.
+The connected camera tumble suite checks the existing manual camera behavior.
+The runner verifies that fixture and optional real capture bytes do not change.
+
+Revision results: 368 Auto Orbit checks passed in each of headless, native
+Forward+, and native Compatibility with the small real cavity-collapse mesh
+capture. The connected camera tumble suite passed 13,798 checks headless and
+13,814 in native Compatibility. Both application-version tests, the version
+CLI (`v0.1.0.48`), and `git diff --check` passed. Fixture and real-capture
+SHA-256 hashes were unchanged. The reported large particle/field capture was
+not available for this run; its visual feel remains an owner check.
+
+## Owner verification
+
+1. Open a particle, field, or mesh scene. Turn Auto Orbit on, then press each
+   movement key. The first press should stop Auto Orbit and move the camera in
+   the expected camera-relative direction. Turn orbit back on to check pose
+   continuity.
+2. Tumble with LMB, orbit with RMB, and zoom with the wheel before and after
+   the mode transition. A held drag should suspend automatic motion.
+3. Open Edit Orbit Center first with Auto Orbit on and then off. Navigate while
+   placing the guide. Cancel each time to recover the exact previous view and
+   mode. Apply a visibly off-center target and confirm orbit starts immediately
+   around that target.
+4. Check native Forward+ and Compatibility views. Scientific object coordinates
+   and playback content should remain unchanged by camera navigation.

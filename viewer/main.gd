@@ -655,9 +655,11 @@ func _dispatch_shortcut(action: String) -> void:
 		"previous_category": shell.cycle_category(-1)
 
 func _toggle_auto_orbit() -> void:
+	if shell != null and shell.orbit_editor != null and shell.orbit_editor.visible: return
 	orbit_enabled = not orbit_enabled; _sync_control_state()
 
 func _toggle_free_camera() -> void:
+	if shell != null and shell.orbit_editor != null and shell.orbit_editor.visible: return
 	free_camera = not free_camera; _sync_control_state()
 
 func _reset_camera() -> void:
@@ -1140,9 +1142,15 @@ func _step_frame(direction: int) -> void:
 
 func _move_free_camera(delta: float) -> void:
 	if shell != null and shell.editing_shortcuts(): return
-	if not free_camera or get_viewport().gui_get_focus_owner() != null: return
+	if get_viewport().gui_get_focus_owner() != null: return
 	var move := Vector3(float(Input.is_physical_key_pressed(KEY_D)) - float(Input.is_physical_key_pressed(KEY_A)), float(Input.is_physical_key_pressed(KEY_E)) - float(Input.is_physical_key_pressed(KEY_Q)), float(Input.is_physical_key_pressed(KEY_S)) - float(Input.is_physical_key_pressed(KEY_W)))
 	if move == Vector3.ZERO:return
+	if orbit_enabled:
+		# A movement key exits Auto Orbit and moves on this same process tick.
+		orbit_enabled = false
+		free_camera = true
+		_sync_control_state()
+	if not free_camera: return
 	camera_target += camera.global_basis * move * delta * maxf(1, camera_distance * .5)
 	_update_camera()
 
