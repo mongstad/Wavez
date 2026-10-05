@@ -18,7 +18,11 @@ def main():
     parser.add_argument('--godot', required=True)
     parser.add_argument('--output-dir', required=True, type=Path)
     parser.add_argument('--renderer', choices=['headless', 'forward_plus', 'gl_compatibility'], default='headless')
+    parser.add_argument('--suite', choices=['tumble', 'auto-orbit'], default='tumble')
+    parser.add_argument('--capture', type=Path, help='Optional real WVZ1 smoke scene for the Auto Orbit suite')
     args = parser.parse_args()
+    if args.capture and args.suite != 'auto-orbit':
+        parser.error('--capture requires --suite auto-orbit')
     out = args.output_dir.resolve()
     out.mkdir(parents=True, exist_ok=False)
     for kind in ['particles', 'volume', 'mesh']:
@@ -57,6 +61,8 @@ def main():
                     face[1], face[2] = face[2], face[1]
             writer.add_mesh('mesh', t, vertices, faces, vertex_channels=dict(vertex_id=np.arange(4, dtype='i8')))
     hashes = {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in out.glob('*.wvz')}
+    capture = args.capture.resolve() if args.capture else None
+    capture_hash = hashlib.sha256(capture.read_bytes()).hexdigest() if capture else None
     env = os.environ.copy()
     env.update(XDG_DATA_HOME=str(out/'userdata'), XDG_CONFIG_HOME=str(out/'config'))
     def run(name, command):
@@ -67,13 +73,21 @@ def main():
             raise RuntimeError(log[-6000:])
     run('import', [args.godot, '--headless', '--path', 'viewer', '--editor', '--import'])
     renderer = ['--headless'] if args.renderer == 'headless' else ['--rendering-method', args.renderer]
-    run('camera', [args.godot, '--path', 'viewer', *renderer, '--resolution', '960x640', '--audio-driver', 'Dummy', '--script', 'res://scene/test_camera_tumble.gd', '--', '--camera-output='+str(out)])
+    script = 'test_auto_orbit.gd' if args.suite == 'auto-orbit' else 'test_camera_tumble.gd'
+    command = [args.godot, '--path', 'viewer', *renderer, '--resolution', '960x640', '--audio-driver', 'Dummy', '--script', 'res://scene/' + script, '--', '--camera-output='+str(out)]
+    if capture:
+        command.append('--camera-capture='+str(capture))
+    run('camera', command)
     assert hashes == {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in out.glob('*.wvz')}, 'Capture bytes changed'
+    if capture:
+        assert hashlib.sha256(capture.read_bytes()).hexdigest() == capture_hash, 'Real capture bytes changed'
     report = json.loads((out/'camera-report.json').read_text())
     assert not report['failures'], report
     report['source_hashes_unchanged'] = hashes
+    if capture:
+        report['real_capture'] = {'path': str(capture), 'sha256': capture_hash}
     (out/'camera-report.json').write_text(json.dumps(report, indent=2)+'\n')
-    print(f'Camera tumble: {report["checks"]} checks PASS ({args.renderer}); capture hashes unchanged')
+    print(f'Camera {args.suite}: {report["checks"]} checks PASS ({args.renderer}); capture hashes unchanged')
 
 
 if __name__ == '__main__':

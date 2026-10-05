@@ -1143,7 +1143,15 @@ func _move_free_camera(delta: float) -> void:
 	if not free_camera or get_viewport().gui_get_focus_owner() != null: return
 	var move := Vector3(float(Input.is_physical_key_pressed(KEY_D)) - float(Input.is_physical_key_pressed(KEY_A)), float(Input.is_physical_key_pressed(KEY_E)) - float(Input.is_physical_key_pressed(KEY_Q)), float(Input.is_physical_key_pressed(KEY_S)) - float(Input.is_physical_key_pressed(KEY_W)))
 	if move == Vector3.ZERO:return
-	camera_target += camera.global_basis * move * delta * maxf(1, camera_distance * .5)
+	var distance: float = delta * maxf(1, camera_distance * .5)
+	if orbit_enabled:
+		# Forward/back moves the camera along its view axis while the world-space
+		# orbit target stays put. Side/up translation keeps its existing pan behavior.
+		var minimum: float = minf(camera_distance, maxf(0.000001, camera.near * 2.0))
+		camera_distance = maxf(minimum, camera_distance + move.z * distance)
+		camera_target += camera.global_basis * Vector3(move.x, move.y, 0.0) * distance
+	else:
+		camera_target += camera.global_basis * move * distance
 	_update_camera()
 
 func _apply_preset(name: String) -> void:

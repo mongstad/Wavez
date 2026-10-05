@@ -1,5 +1,11 @@
 # Current status
 
+Issue #234 keeps Auto Orbit centered on the accepted world-space orbit target
+when Free Camera moves forward or backward. That motion changes the camera's
+orbit radius; the camera moves around the target and the scientific scene stays
+in world coordinates. Candidate build 48 is pending owner review. See the
+[Auto Orbit behavior and owner checks](AUTO_ORBIT.md).
+
 Issue #248 arranges Video Export settings into titled Range, Video, Camera,
 Presentation and Output groups in candidate build 47. The separate lower
 Export summary becomes Export status while a job is active or retained; long

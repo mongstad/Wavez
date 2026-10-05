@@ -288,7 +288,10 @@ uses the same current-scene bounds but restores the default yaw/pitch and clears
 the view-relative orbit basis. Both leave scientific coordinates and the Free
 Camera / Auto Orbit modes alone. Wheel zoom and free-camera WASD/Q/E movement
 continue from either framed view. O toggles automatic world-Y
-orbit independently; manual dragging temporarily suspends it.
+orbit independently; manual dragging temporarily suspends it. With Auto Orbit
+on, Free Camera forward/back changes the camera-to-target radius while the
+world-space orbit center stays fixed. Side/up movement keeps its established
+translation behavior. See [Auto Orbit](AUTO_ORBIT.md).
 
 **Navigate → Edit orbit center…** opens a temporary world-space XYZ/radius
 editor. Drag the labeled axis endpoints or enter coordinates; change the draft
