@@ -65,6 +65,8 @@ movement keys, focus navigation, and Escape recovery retain their existing roles
 | Reset Camera | R | Viewer camera reset |
 | Auto Orbit | O | Viewer orbit toggle shared with Navigate |
 | Free Camera | Unbound | Navigate camera-mode toggle |
+| Increase Camera Movement Speed | + | Free-camera translation rate, 5% per step |
+| Decrease Camera Movement Speed | - | Free-camera translation rate, 5% per step |
 | Frame Scene | F | Viewer scene framing |
 | Navigate | Alt+N | Existing Navigate menu |
 | Play Pause | Space | Viewer transport toggle |
@@ -82,6 +84,12 @@ movement keys, focus navigation, and Escape recovery retain their existing roles
 
 Actions without an accepted shortcut start Unbound to avoid inventing defaults.
 Modifiers match exactly, so assigning Ctrl+R is independent of assigning R.
+For unmodified printable `+` and `-`, binding uses the produced character:
+Shift+= on a US layout and a dedicated `+` on a Nordic layout resolve to the
+same default action. The editor captures and displays that logical `+` binding.
+Both speed actions can be rebound, cleared, applied, cancelled and reset like
+the other rows. Holding either key repeats 5% adjustments at a controlled
+200 ms interval; OS key echo does not add steps.
 Both fullscreen defaults are explicit rows and can independently be reassigned
 or cleared; there is no hidden hardcoded fullscreen alias. Escape remains recovery.
 Menu shortcut columns are display-only: the viewer owns one dispatch path with

@@ -6,6 +6,8 @@ const ACTIONS := [
 	["reset_camera", "Reset Camera", "Navigation", KEY_R],
 	["auto_orbit", "Auto Orbit", "Navigation", KEY_O],
 	["free_camera", "Free Camera", "Navigation", 0],
+	["increase_camera_speed", "Increase Camera Movement Speed", "Navigation", KEY_PLUS],
+	["decrease_camera_speed", "Decrease Camera Movement Speed", "Navigation", KEY_MINUS],
 	["frame_scene", "Frame Scene", "Navigation", KEY_F],
 	["navigate", "Navigate", "Navigation", KEY_N | KEY_MASK_ALT],
 	["play_pause", "Play Pause", "Playback", KEY_SPACE],
@@ -44,6 +46,12 @@ static func valid_binding(value: Variant) -> bool:
 	return code not in [0, KEY_ESCAPE, KEY_TAB, KEY_BACKTAB, KEY_SHIFT, KEY_CTRL, KEY_ALT, KEY_META] and not OS.get_keycode_string(code).is_empty()
 
 static func binding(event: InputEventKey) -> int:
+	# Bind the produced +/- character, not a US physical key position. On a US
+	# layout '+' is Shift+=; on Nordic layouts it may have its own key. Normalize
+	# unmodified printable +/- so capture, conflict handling and runtime agree.
+	if event.keycode != 0 and not (event.ctrl_pressed or event.alt_pressed or event.meta_pressed):
+		if event.unicode == KEY_PLUS or (event.unicode == 0 and event.keycode == KEY_EQUAL and event.shift_pressed): return KEY_PLUS
+		if event.unicode == KEY_MINUS: return KEY_MINUS
 	var value := int(event.get_keycode_with_modifiers())
 	return value if valid_binding(value) and event.keycode != 0 else 0
 

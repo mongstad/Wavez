@@ -187,6 +187,7 @@ func _ready() -> void:
 	_build_guides()
 	_update_camera()
 	get_window().focus_exited.connect(func(): manual_orbit_dragging = false)
+	get_window().focus_exited.connect(_clear_camera_speed_hold)
 
 	var args := OS.get_cmdline_user_args()
 	if offline_instance: args = PackedStringArray()
@@ -410,6 +411,7 @@ func _restore_render_pacing() -> void:
 	_previous_low_processor_mode = null
 
 func _process_profiled(delta: float) -> void:
+	_update_camera_speed_repeat(Time.get_ticks_msec())
 	if offline_instance or inspection_busy or inspection_paused: return
 	if scene_layers != null:
 		scene_layers.tick(delta)
@@ -521,6 +523,7 @@ func _update_hud_profiled() -> void:
 		hud.text = "WAVEZ • %s\nFrame %d / %d  ·  t = %.5f\n%s\n%s" % [generic_reader.metadata.get("simulation_name", capture_path.get_file()), current_index + 1, frame_count, committed_sample.get("requested_time",frame_a.sim_time), population, _sample_label()]
 
 func _input(event: InputEvent) -> void:
+	if event is InputEventKey and not event.pressed: _release_camera_speed_key(event)
 	# A release over any chrome must still end a viewport drag, including preferences.
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
 		dragging = false
@@ -585,6 +588,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		if not action.is_empty():
 			if session_log != null: session_log.record("UI", "Shortcut: " + action)
 			_dispatch_shortcut(action)
+			if action in ["increase_camera_speed", "decrease_camera_speed"]: _start_camera_speed_hold(action, event)
 			get_viewport().set_input_as_handled()
 
 func _camera_dragging() -> bool:
@@ -630,6 +634,7 @@ func _dispatch_shortcut(action: String) -> void:
 		"reset_camera": _reset_camera()
 		"auto_orbit": _toggle_auto_orbit()
 		"free_camera": _toggle_free_camera()
+		"increase_camera_speed", "decrease_camera_speed": _adjust_camera_speed(action)
 		"frame_scene": _focus_activity()
 		"navigate": shell.navigation.get_child(2).show_popup()
 		"play_pause":
@@ -922,6 +927,15 @@ var brightness_scale := 1.0
 var gamma := 1.0
 var orbit_speed := 0.08
 var free_camera := true
+const MIN_FREE_CAMERA_SPEED := 0.1
+const MAX_FREE_CAMERA_SPEED := 4.0
+const CAMERA_SPEED_REPEAT_MSEC := 200
+var free_camera_speed_scale := 0.7
+var camera_speed_hold_action := ""
+var camera_speed_hold_keycode := 0
+var camera_speed_hold_physical_keycode := 0
+var camera_speed_hold_modifiers := 0
+var camera_speed_next_repeat_msec := 0
 var panel_width := 340.0
 var resizing_panel := false
 var resize_handle: Control
@@ -1151,8 +1165,41 @@ func _move_free_camera(delta: float) -> void:
 		free_camera = true
 		_sync_control_state()
 	if not free_camera: return
-	camera_target += camera.global_basis * move * delta * maxf(1, camera_distance * .5)
+	camera_target += camera.global_basis * move * delta * maxf(1, camera_distance * .5) * free_camera_speed_scale
 	_update_camera()
+
+func _adjust_camera_speed(action: String) -> void:
+	var factor := 1.05 if action == "increase_camera_speed" else 0.95
+	free_camera_speed_scale = clampf(free_camera_speed_scale * factor, MIN_FREE_CAMERA_SPEED, MAX_FREE_CAMERA_SPEED)
+
+func _start_camera_speed_hold(action: String, event: InputEventKey) -> void:
+	camera_speed_hold_action = action
+	camera_speed_hold_keycode = event.keycode
+	camera_speed_hold_physical_keycode = event.physical_keycode
+	camera_speed_hold_modifiers = event.get_keycode_with_modifiers() & (KEY_MASK_CTRL | KEY_MASK_SHIFT | KEY_MASK_ALT | KEY_MASK_META)
+	camera_speed_next_repeat_msec = Time.get_ticks_msec() + CAMERA_SPEED_REPEAT_MSEC
+
+func _clear_camera_speed_hold() -> void:
+	camera_speed_hold_action = ""
+	camera_speed_hold_keycode = 0
+	camera_speed_hold_physical_keycode = 0
+	camera_speed_hold_modifiers = 0
+	camera_speed_next_repeat_msec = 0
+
+func _release_camera_speed_key(event: InputEventKey) -> void:
+	if camera_speed_hold_action.is_empty(): return
+	var primary_released := event.physical_keycode == camera_speed_hold_physical_keycode if camera_speed_hold_physical_keycode != 0 and event.physical_keycode != 0 else event.keycode == camera_speed_hold_keycode
+	var modifier_released := (event.keycode == KEY_SHIFT and bool(camera_speed_hold_modifiers & KEY_MASK_SHIFT)) or (event.keycode == KEY_CTRL and bool(camera_speed_hold_modifiers & KEY_MASK_CTRL)) or (event.keycode == KEY_ALT and bool(camera_speed_hold_modifiers & KEY_MASK_ALT)) or (event.keycode == KEY_META and bool(camera_speed_hold_modifiers & KEY_MASK_META))
+	if primary_released or modifier_released: _clear_camera_speed_hold()
+
+func _update_camera_speed_repeat(now_msec: int) -> void:
+	if camera_speed_hold_action.is_empty(): return
+	if offline_instance or inspection_busy or inspection_paused or (shell != null and shell.editing_shortcuts()) or get_viewport().gui_get_focus_owner() != null:
+		_clear_camera_speed_hold()
+		return
+	if now_msec < camera_speed_next_repeat_msec: return
+	_adjust_camera_speed(camera_speed_hold_action)
+	camera_speed_next_repeat_msec = now_msec + CAMERA_SPEED_REPEAT_MSEC
 
 func _apply_preset(name: String) -> void:
 	selected_preset = name

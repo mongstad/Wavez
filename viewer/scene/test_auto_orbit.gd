@@ -77,7 +77,7 @@ func movement_transition(viewer, kind: String, keycode: Key) -> void:
 	var target: Vector3 = viewer.camera_target
 	var radius: float = viewer.camera_distance
 	var yaw: float = viewer.yaw
-	var shift: Vector3 = before.basis * local_move(keycode) * .1 * maxf(1, radius * .5)
+	var shift: Vector3 = before.basis * local_move(keycode) * .1 * maxf(1, radius * .5) * viewer.free_camera_speed_scale
 	move_key(viewer, keycode, .1)
 	var label := kind + " / " + OS.get_keycode_string(keycode)
 	check(not viewer.orbit_enabled and viewer.free_camera, label + " exits Auto Orbit on first movement press")

@@ -187,7 +187,7 @@ func fixture_tests(viewer, kind: String) -> void:
 	viewer._move_free_camera(.1)
 	key = key.duplicate(); key.pressed = false; Input.parse_input_event(key); Input.flush_buffered_events()
 	viewer.free_camera = false
-	var shift: Vector3 = before_pan.basis.x * .1 * maxf(1,viewer.camera_distance*.5)
+	var shift: Vector3 = before_pan.basis.x * .1 * maxf(1,viewer.camera_distance*.5) * viewer.free_camera_speed_scale
 	check(viewer.camera_target.distance_to(target + shift) < .0001 and viewer.camera.position.distance_to(before_pan.origin + shift) < .0001, kind + " pan follows inverted camera right without changing orbit radius")
 	var orientation: Basis = viewer.camera.basis
 	press(viewer,KEY_F)
