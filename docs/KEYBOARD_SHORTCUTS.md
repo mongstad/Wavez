@@ -38,11 +38,11 @@ styling. **Cancel**, X or dismissal silently discards only edits made since the
 last successful Apply; already applied bindings stay active and saved. A save
 failure keeps the editor open and the active map intact.
 Viewport actions and free-camera movement cannot run through this modal editor.
-Right-drag in the viewport orbits sideways about the camera's screen-up axis
-captured at press time, around the current scene target. Vertical motion does
-nothing; a new right press captures the then-current view. This mouse
-gesture has no editable key binding; its hint appears on the Navigate control.
-It works with Auto Orbit off and any visible scene type.
+Right-drag steers the camera heading in place on both mouse axes. The separate
+Orbit Camera Left/Right shortcuts perform held horizontal orbit around the
+current target, relative to the view's screen-up axis. Both start Unbound under
+Navigation. RMB or either orbit key immediately disables Auto Orbit. The
+Navigate hint points to these roles; see [camera navigation](MANUAL_CAMERA_ORBIT.md).
 Existing text-entry, selection and busy-inspection guards remain authoritative.
 
 The separate ConfigFile at `user://keyboard_shortcuts.cfg`, section `shortcuts`,
@@ -67,6 +67,7 @@ movement keys, focus navigation, and Escape recovery retain their existing roles
 | Free Camera | Unbound | Navigate camera-mode toggle |
 | Increase Camera Movement Speed | + | Free-camera translation rate, 10% per step |
 | Decrease Camera Movement Speed | - | Free-camera translation rate, 10% per step |
+| Orbit Camera Left / Orbit Camera Right | Unbound | Held view-relative horizontal orbit around the current navigation target |
 | Frame Scene | F | Viewer scene framing |
 | Navigate | Alt+N | Existing Navigate menu |
 | Play Pause | Space | Viewer transport toggle |

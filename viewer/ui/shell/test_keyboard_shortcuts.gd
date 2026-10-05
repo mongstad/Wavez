@@ -6,6 +6,7 @@ const Preset = preload("res://scene/view_preset.gd")
 var output := ""
 var restart := false
 var speed_only := false
+var orbit_only := false
 var checks := 0
 var failures: Array[String] = []
 var layouts: Array = []
@@ -134,11 +135,67 @@ func speed_shortcut_review(viewer, shell) -> void:
 	var file := FileAccess.open(output.path_join("saved-map.json"), FileAccess.WRITE)
 	file.store_string(JSON.stringify(shell.shortcuts.active)); file.close()
 
+func orbit_shortcut_move(viewer, action: String) -> void:
+	release_focus()
+	viewer.orbit_enabled = true
+	var before: Transform3D = viewer.camera.transform
+	var target: Vector3 = viewer.camera_target
+	var radius: float = viewer.camera_distance
+	var speed: float = viewer.free_camera_speed_scale
+	var event: InputEventKey = viewer.shell.shortcuts.event_for(action); event.pressed = true
+	root.push_input(event)
+	check(not viewer.orbit_enabled and viewer.manual_orbit_keys.has(action),action+": native key dispatch takes control immediately")
+	viewer._update_manual_orbit(.1)
+	var angle: float = viewer.MANUAL_ORBIT_RATE*.1 * (-1 if action == "orbit_camera_left" else 1)
+	var expected := (Basis(before.basis.y.normalized(),angle)*before.basis).orthonormalized()
+	check(viewer.camera.basis.is_equal_approx(expected) and viewer.camera_target == target and viewer.camera_distance == radius and viewer.free_camera_speed_scale == speed,action+": applied binding performs view-relative orbit only")
+	event = event.duplicate(); event.pressed = false; root.push_input(event)
+	check(viewer.manual_orbit_keys.is_empty(),action+": native key release stops the hold")
+
+func orbit_shortcut_review(viewer, shell) -> void:
+	if restart:
+		var saved: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(output.path_join("saved-map.json")))
+		for action in saved: saved[action] = int(saved[action])
+		check(shell.shortcuts.active == saved and unique(saved),"Fresh process restores both orbit bindings without conflicts")
+		for action in ["orbit_camera_left","orbit_camera_right"]: orbit_shortcut_move(viewer,action)
+		return
+	check(shell.shortcuts.active == Bindings.defaults() and shell.shortcuts.active.orbit_camera_left == 0 and shell.shortcuts.active.orbit_camera_right == 0,"Both orbit actions start Unbound without changing existing defaults")
+	for action in Bindings.ACTIONS:
+		if action[0] in ["orbit_camera_left","orbit_camera_right"]: check(action[2] == "Navigation","Orbit action uses authoritative Navigation category")
+	shell.edit_shortcuts(); await settle()
+	var dialog = shell.shortcuts_editor
+	check(dialog.rows.orbit_camera_left.label.text == "Orbit Camera Left" and dialog.rows.orbit_camera_right.label.text == "Orbit Camera Right","Both orbit labels appear in the existing editor")
+	check(dialog.rows.orbit_camera_left.key.text == "Unbound" and dialog.rows.orbit_camera_right.key.text == "Unbound","Visible orbit binding labels start Unbound")
+	dialog.start_capture("orbit_camera_left"); key(KEY_F6)
+	dialog.start_capture("orbit_camera_right"); key(KEY_F6)
+	check(dialog.staged.orbit_camera_left == 0 and dialog.staged.orbit_camera_right == KEY_F6 and unique(dialog.staged),"Orbit conflict transfers the draft binding to its last owner")
+	dialog.cancel.pressed.emit(); await settle()
+	check(not dialog.visible and shell.shortcuts.active == Bindings.defaults() and not FileAccess.file_exists(shell.shortcuts.storage_path),"Cancel discards orbit edits without writing preferences")
+	shell.edit_shortcuts()
+	dialog.start_capture("orbit_camera_left"); key(KEY_F6)
+	dialog.start_capture("orbit_camera_right"); key(KEY_F7)
+	dialog.apply_button.pressed.emit(); await settle()
+	check(dialog.visible and dialog.apply_button.disabled and shell.shortcuts.active.orbit_camera_left == KEY_F6 and shell.shortcuts.active.orbit_camera_right == KEY_F7,"Apply persists and activates both orbit keys while keeping the editor open")
+	var before: Transform3D = viewer.camera.transform
+	key(KEY_F6); viewer._update_manual_orbit(.1)
+	check(viewer.camera.transform == before and viewer.manual_orbit_keys.is_empty(),"Modal editor blocks orbit navigation after Apply")
+	picture("orbit-shortcuts")
+	dialog.rows.orbit_camera_left.clear.pressed.emit()
+	check(dialog.staged.orbit_camera_left == 0 and not dialog.apply_button.disabled,"Clear stages an Unbound orbit action")
+	dialog.reset.pressed.emit()
+	check(dialog.staged.orbit_camera_left == 0 and dialog.staged.orbit_camera_right == 0,"Reset Defaults stages both orbit actions as Unbound")
+	dialog.cancel.pressed.emit(); await settle()
+	check(shell.shortcuts.active.orbit_camera_left == KEY_F6 and shell.shortcuts.active.orbit_camera_right == KEY_F7,"Cancel after Apply preserves saved orbit keys")
+	for action in ["orbit_camera_left","orbit_camera_right"]: orbit_shortcut_move(viewer,action)
+	var saved := FileAccess.open(output.path_join("saved-map.json"),FileAccess.WRITE)
+	saved.store_string(JSON.stringify(shell.shortcuts.active)); saved.close()
+
 func run() -> void:
 	for argument in OS.get_cmdline_user_args():
 		if argument.begins_with("--shortcut-output="): output = argument.trim_prefix("--shortcut-output=")
 		if argument == "--shortcut-restart": restart = true
 		if argument == "--shortcut-speed-only": speed_only = true
+		if argument == "--shortcut-orbit-only": orbit_only = true
 	if output.is_empty(): queue_free(); return
 	get_tree().create_timer(120).timeout.connect(func(): push_error("Shortcut tests timed out"); get_tree().quit(1))
 	await get_tree().process_frame
@@ -149,6 +206,9 @@ func run() -> void:
 	var shell = viewer.shell
 	if speed_only:
 		await speed_shortcut_review(viewer, shell)
+		finish(viewer); return
+	if orbit_only:
+		await orbit_shortcut_review(viewer, shell)
 		finish(viewer); return
 	check(Bindings.ACTIONS.any(func(action): return action[0] == "open_capture" and action[1] == "Open File"), "Open shortcut has current visible label")
 	check(viewer.open_dialog.use_native_dialog and viewer.open_dialog.title == "Open File", "Open route keeps native scene picker configured")

@@ -116,11 +116,13 @@ func mouse_and_wheel(viewer, kind: String) -> void:
 	var press := InputEventMouseButton.new(); press.button_index = MOUSE_BUTTON_RIGHT; press.pressed = true; press.position = Vector2(480, 320)
 	viewer._unhandled_input(press)
 	before = viewer.camera.transform; viewer.scene_layers.tick(.1)
-	check(close_pose(before, viewer.camera.transform) and viewer.orbit_enabled, kind + " held RMB suspends automatic motion")
+	check(close_pose(before, viewer.camera.transform) and not viewer.orbit_enabled, kind + " RMB immediately takes manual control without a press snap")
 	press.pressed = false; viewer._input(press)
 	before = viewer.camera.transform; drag_right(viewer)
-	check(viewer.orbit_enabled and not close_pose(before, viewer.camera.transform), kind + " RMB remains available in Auto Orbit")
-	check_orbit(viewer, target, kind + " RMB keeps the accepted world target")
+	check(not viewer.orbit_enabled and viewer.camera.position == before.origin and not viewer.camera.basis.is_equal_approx(before.basis), kind + " RMB steers in place after leaving Auto Orbit")
+	target = viewer.camera_target
+	check_orbit(viewer, target, kind + " RMB synchronizes the target without changing radius")
+	viewer._toggle_auto_orbit()
 	var radius: float = viewer.camera_distance
 	wheel_in(viewer)
 	check(viewer.orbit_enabled and viewer.camera_distance < radius, kind + " wheel zoom retains Auto Orbit")

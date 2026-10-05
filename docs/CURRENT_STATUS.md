@@ -1,5 +1,11 @@
 # Current status
 
+Issue #258 separates RMB free-look steering from held view-relative orbit in
+candidate build 52. RMB changes heading in place; Orbit Camera Left/Right are
+configurable Navigation shortcuts, Unbound by default. Either input immediately
+disables Auto Orbit. Translation speed, LMB, wheel and scientific transforms keep
+their accepted behavior. See [camera steering and orbit](MANUAL_CAMERA_ORBIT.md).
+
 Issue #253 makes Save Image capture the visible scientific viewport in candidate
 build 51. It retains the live camera framing and eligible scientific legends,
 while excluding the top bar, Simulation dock, transport/status strips, Tools,

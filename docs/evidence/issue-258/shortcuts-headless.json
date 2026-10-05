@@ -1,0 +1,46 @@
+{
+  "checks": 25,
+  "source_sha256_unchanged": {
+    "mixed.wvz": "d5d413720a2f4c03ca13d5e7abe168739dd0058c44010f11758965b680013fae",
+    "meshes.wvz": "4bf6addaee39102cfb8e2dab1951bf4abe30dd807bdfb8da896e497147ce2585",
+    "fields.wvz": "f7d0856b0c7f14aa51a5a241ad33131facd357beac35fe61c627ee0157502142",
+    "particles.wvz": "98c60359032c8f8ec60b3ff6c942d50a51abdffe7afeb81aff074fb302340b31"
+  },
+  "renderer": "headless",
+  "packaged": false,
+  "fresh_process_restart": true,
+  "known_engine_cleanup_diagnostics": {
+    "native": {
+      "compatibility_texture_cleanup": [],
+      "packaged_window_cleanup": []
+    },
+    "restart": {
+      "compatibility_texture_cleanup": [],
+      "packaged_window_cleanup": []
+    }
+  },
+  "reports": [
+    {
+      "checks": 18,
+      "display_driver": "headless",
+      "executable": "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+      "failures": [],
+      "layouts": [],
+      "packaged": false,
+      "preference_path": "user://keyboard_shortcuts.cfg",
+      "renderer": "forward_plus",
+      "restart": false
+    },
+    {
+      "checks": 7,
+      "display_driver": "headless",
+      "executable": "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+      "failures": [],
+      "layouts": [],
+      "packaged": false,
+      "preference_path": "user://keyboard_shortcuts.cfg",
+      "renderer": "forward_plus",
+      "restart": true
+    }
+  ]
+}
