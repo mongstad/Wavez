@@ -1,5 +1,12 @@
 # Current status
 
+Issue #253 makes Save Image capture the visible scientific viewport in candidate
+build 51. It retains the live camera framing and eligible scientific legends,
+while excluding the top bar, Simulation dock, transport/status strips, Tools,
+dialogs and orbit-center gizmo. The configured folder, native picker, shortcut
+and optional inspection sidecars keep their existing routes. See
+[Save Image](IMAGE_EXPORT.md) for behavior and owner checks.
+
 Issue #256 retunes Free Camera speed adjustment to 10% per `+`/`-` step,
 with a 0.02–2.5 multiplier range. The 0.7 default, 200 ms hold cadence,
 shortcut behavior, camera interactions and scientific transforms remain as

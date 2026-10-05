@@ -822,7 +822,6 @@ func _focus_activity() -> void:
 	_update_camera()
 
 func _save_image() -> void:
-	shell.dismiss_orbit_editor()
 	if screenshot_pending or screenshot_saving: return
 	var preferred: String = file_locations.settings.image_dir if file_locations != null else ""
 	if not preferred.is_empty():
@@ -875,7 +874,7 @@ func _write_screenshot(preferred: String = "") -> void:
 	var stamp := Time.get_datetime_string_from_system().replace(":", "-")
 	var path := directory.path_join("wavez-%s-%d-%04d.png" % [stamp, Time.get_ticks_usec(), screenshot_count])
 	while FileAccess.file_exists(path): path = path.get_basename() + "-1.png"
-	var result: Error = await _capture_inspection_png(path,screenshot_sidecar)
+	var result: Error = await _capture_inspection_png(path,screenshot_sidecar,true)
 	screenshot_saving = false
 	_notify_screenshot("Saved " + path if result == OK else "Could not save PNG: " + path)
 
@@ -1878,9 +1877,9 @@ func _load_scientific_inspection(path: String) -> void:
 	var problem := Inspection.restore(self,recipe)
 	status_label.text = "Restored scientific inspection; playback paused." if problem.is_empty() else problem
 
-func _capture_inspection_png(path: String, with_state: bool) -> Error:
-	shell.dismiss_orbit_editor()
-	if with_state and selection_controller != null and not selection_controller.state.definitions.is_empty():return await selection_controller.temporal.durable.capture_to(path)
+func _capture_inspection_png(path: String, with_state: bool, viewport_only: bool = false) -> Error:
+	if not viewport_only: shell.dismiss_orbit_editor()
+	if with_state and selection_controller != null and not selection_controller.state.definitions.is_empty():return await selection_controller.temporal.durable.capture_to(path,viewport_only)
 	if inspection_busy: return ERR_BUSY
 	if with_state and frame_a == null: return ERR_UNAVAILABLE
 	if scene_layers != null:
@@ -1902,7 +1901,8 @@ func _capture_inspection_png(path: String, with_state: bool) -> Error:
 		await RenderingServer.frame_post_draw
 		if before == _inspection_frame_fingerprint(): stable = true; break
 	if not stable: inspection_busy = false; return ERR_BUSY
-	var image := get_viewport().get_texture().get_image()
+	var image := _save_image_viewport() if viewport_only else get_viewport().get_texture().get_image()
+	if image == null or image.is_empty(): inspection_busy = false; return ERR_CANT_CREATE
 	var state := Inspection.snapshot(self) if with_state else {}
 	if with_state and state.is_empty(): inspection_busy = false; return ERR_BUSY
 	var result := image.save_png(path)
@@ -1911,6 +1911,42 @@ func _capture_inspection_png(path: String, with_state: bool) -> Error:
 		result = preload("res://video/render_job.gd").write_json(path.get_basename()+".json",state)
 	inspection_busy = false
 	return result
+
+# Read the current renderer and camera, excluding only application chrome. The
+# scientific legends live beside the shell and stay in the captured viewport.
+func _save_image_viewport() -> Image:
+	var extent := get_viewport().get_visible_rect().size
+	var top: float = shell.bar.get_global_rect().end.y if shell.bar.visible else 0.0
+	var bottom: float = shell.transport.get_global_rect().position.y if shell.bottom_strip.visible else extent.y
+	var right: float = resize_handle.get_global_rect().position.x if shell.dock.visible else extent.x
+	right = clampf(right,0.0,extent.x)
+	bottom = clampf(bottom,top,extent.y)
+	if right <= 0.0 or bottom <= top: return null
+	var visible_area := Rect2(Vector2.ZERO,extent)
+	visible_area.position = Vector2(0,top)
+	visible_area.size = Vector2(right,bottom-top)
+	var hidden: Array[CanvasItem] = []
+	var orbit_guide: Control = shell.orbit_editor.guide if shell.orbit_editor != null else null
+	for item in [shell,overlay_panel,resize_handle,screenshot_notice,orbit_guide]:
+		if item != null and item.visible:
+			hidden.append(item)
+			item.hide()
+	var windows: Array[Window] = []
+	_collect_embedded_windows(self,windows)
+	for window in windows: window.hide()
+	RenderingServer.force_draw(false)
+	var image := get_viewport().get_texture().get_image()
+	for window in windows: window.show()
+	for item in hidden: item.show()
+	if image == null or image.is_empty(): return null
+	var scale := Vector2(image.get_size()) / extent
+	var crop := Rect2i(Vector2i(visible_area.position*scale),Vector2i(visible_area.size*scale))
+	return image.get_region(crop)
+
+func _collect_embedded_windows(parent: Node, found: Array[Window]) -> void:
+	for child in parent.get_children():
+		if child is Window and child.visible and child.is_embedded(): found.append(child)
+		_collect_embedded_windows(child,found)
 
 func _inspection_frame_fingerprint() -> String:
 	return JSON.stringify([VisualState.snapshot(self),committed_sample,selection_controller.state.snapshot() if selection_controller != null and not selection_controller.state.definitions.is_empty() else {}],"",true,true)
