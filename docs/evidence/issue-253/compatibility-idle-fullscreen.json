@@ -1,0 +1,119 @@
+{
+  "captures": [
+    {
+      "busy": false,
+      "case": "shortcut",
+      "dimensions": [
+        2560,
+        1440
+      ],
+      "draws": 3,
+      "elapsed_ms": 187,
+      "saving": false
+    },
+    {
+      "busy": false,
+      "case": "menu",
+      "dimensions": [
+        2560,
+        1440
+      ],
+      "draws": 3,
+      "elapsed_ms": 187,
+      "saving": false
+    },
+    {
+      "busy": false,
+      "case": "all-edges",
+      "dimensions": [
+        2560,
+        1440
+      ],
+      "draws": 3,
+      "elapsed_ms": 174,
+      "saving": false
+    },
+    {
+      "busy": false,
+      "case": "failed-readback",
+      "dimensions": [],
+      "draws": 3,
+      "elapsed_ms": 41,
+      "saving": false
+    },
+    {
+      "busy": false,
+      "case": "durable-shortcut",
+      "dimensions": [
+        2560,
+        1440
+      ],
+      "draws": 3,
+      "elapsed_ms": 242,
+      "saving": false
+    },
+    {
+      "busy": false,
+      "case": "durable-failed-readback",
+      "dimensions": [],
+      "draws": 2,
+      "elapsed_ms": 30,
+      "saving": false
+    }
+  ],
+  "checks": 56,
+  "display_driver": "Wayland",
+  "failures": [],
+  "idle_samples": [
+    {
+      "case": "shortcut",
+      "draws": 0,
+      "low_processor": true,
+      "process_frames": 87,
+      "viewer_processing": true
+    },
+    {
+      "case": "menu",
+      "draws": 0,
+      "low_processor": true,
+      "process_frames": 87,
+      "viewer_processing": true
+    },
+    {
+      "case": "all-edges",
+      "draws": 0,
+      "low_processor": true,
+      "process_frames": 86,
+      "viewer_processing": true
+    },
+    {
+      "case": "failed-readback",
+      "draws": 0,
+      "low_processor": true,
+      "process_frames": 82,
+      "viewer_processing": true
+    },
+    {
+      "case": "durable-shortcut",
+      "draws": 0,
+      "low_processor": true,
+      "process_frames": 87,
+      "viewer_processing": true
+    },
+    {
+      "case": "durable-failed-readback",
+      "draws": 0,
+      "low_processor": true,
+      "process_frames": 82,
+      "viewer_processing": true
+    }
+  ],
+  "physical_owner_verification": "pending",
+  "renderer": "gl_compatibility",
+  "source_hashes_unchanged": {
+    "mixed.wvz": "72841db5ba89fbfcc302f2717440c90092f37837c38ea278b9aeafd15349594a",
+    "meshes.wvz": "54d2a76764250a777baa9794c08e2e34b89c0065667a0816b062497540b6cba5",
+    "fields.wvz": "9da8ac17e1b380188e76cce1dbe7f00d9f6b15c907750b2b5b5e75b61717559c",
+    "particles.wvz": "c6d504441f9b65fb672f2e59436533ceb324b050e741360405f30ef8fd5058c2"
+  }
+}

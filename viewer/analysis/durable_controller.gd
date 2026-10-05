@@ -128,8 +128,8 @@ func recompute() -> void:
 	var saved: Dictionary = temporal.summaries[index]
 	temporal.submit(saved.operation,saved.request.duplicate(true),saved.source.duplicate(true),saved.label+" recomputed")
 
-func capture_to(path: String) -> Error:
-	viewer.shell.dismiss_orbit_editor()
+func capture_to(path: String, viewport_only: bool = false) -> Error:
+	if not viewport_only: viewer.shell.dismiss_orbit_editor()
 	if viewer.inspection_busy:return ERR_BUSY
 	if FileAccess.file_exists(path) or DirAccess.dir_exists_absolute(path):status.text = "Choose a new PNG filename.";return ERR_ALREADY_EXISTS
 	var destination := path.get_basename()+".inspection"
@@ -141,10 +141,12 @@ func capture_to(path: String) -> Error:
 	for attempt in range(8):
 		if not await temporal.selections.await_committed_overlay():viewer.inspection_busy = false;status.text = "Exact selection overlay was unavailable; no PNG published.";return ERR_BUSY
 		var before := fingerprint()
-		await get_tree().process_frame;await RenderingServer.frame_post_draw
+		await get_tree().process_frame
+		# A paused low-processor viewer need not schedule another frame itself.
+		RenderingServer.force_draw(false)
 		if before == fingerprint():stable = true;break
 	if not stable:viewer.inspection_busy = false;return ERR_BUSY
-	var image: Image = viewer.get_viewport().get_texture().get_image()
+	var image: Image = viewer._save_image_viewport() if viewport_only else viewer.get_viewport().get_texture().get_image()
 	if image == null or image.is_empty():viewer.inspection_busy = false;return ERR_CANT_CREATE
 	var recipe := State.snapshot(temporal,true);var payload: Dictionary = State.unpack(recipe.payload)
 	payload.base.render = {"selection_frame":temporal.selections.frame_evidence(),"backend":RenderingServer.get_current_rendering_method(),"dimensions":[image.get_width(),image.get_height()]};recipe.payload = State.pack(payload)
