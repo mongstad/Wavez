@@ -927,8 +927,8 @@ var brightness_scale := 1.0
 var gamma := 1.0
 var orbit_speed := 0.08
 var free_camera := true
-const MIN_FREE_CAMERA_SPEED := 0.1
-const MAX_FREE_CAMERA_SPEED := 4.0
+const MIN_FREE_CAMERA_SPEED := 0.02
+const MAX_FREE_CAMERA_SPEED := 2.5
 const CAMERA_SPEED_REPEAT_MSEC := 200
 var free_camera_speed_scale := 0.7
 var camera_speed_hold_action := ""
@@ -1169,7 +1169,7 @@ func _move_free_camera(delta: float) -> void:
 	_update_camera()
 
 func _adjust_camera_speed(action: String) -> void:
-	var factor := 1.05 if action == "increase_camera_speed" else 0.95
+	var factor := 1.10 if action == "increase_camera_speed" else 0.90
 	free_camera_speed_scale = clampf(free_camera_speed_scale * factor, MIN_FREE_CAMERA_SPEED, MAX_FREE_CAMERA_SPEED)
 
 func _start_camera_speed_hold(action: String, event: InputEventKey) -> void:

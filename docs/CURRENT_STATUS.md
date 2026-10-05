@@ -1,5 +1,11 @@
 # Current status
 
+Issue #256 retunes Free Camera speed adjustment to 10% per `+`/`-` step,
+with a 0.02–2.5 multiplier range. The 0.7 default, 200 ms hold cadence,
+shortcut behavior, camera interactions and scientific transforms remain as
+accepted in #200. Candidate build 50 is pending owner review. See
+[Free Camera speed](FREE_CAMERA_SPEED.md).
+
 Issue #200 lowers the default Free Camera translation rate by 30% and adds
 editable `+`/`-` speed shortcuts. Each press changes the current rate by 5%; a
 held key repeats on a controlled 200 ms cadence within bounded limits. Camera

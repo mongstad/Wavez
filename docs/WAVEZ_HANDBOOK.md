@@ -292,7 +292,7 @@ dragging temporarily suspends its motion. A movement key exits Auto Orbit before
 translating the camera on that same press. See [Auto Orbit](AUTO_ORBIT.md).
 
 Free Camera translation starts at 70% of the earlier movement rate. Press `+`
-or `-` to change the current rate by 5%; holding a key repeats at most once every
+or `-` to change the current rate by 10%; holding a key repeats at most once every
 200 ms. The controls are editable under **Edit → Preferences → Keyboard
 Shortcuts**. They change translation rate only, so camera orientation, orbit,
 mouse navigation, wheel zoom and scientific coordinates keep their behavior.
