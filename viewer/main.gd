@@ -1898,7 +1898,9 @@ func _capture_inspection_png(path: String, with_state: bool, viewport_only: bool
 		_update_hud()
 		var before := _inspection_frame_fingerprint()
 		await get_tree().process_frame
-		await RenderingServer.frame_post_draw
+		# Paused low-processor mode may have no draw scheduled. Own this draw;
+		# waiting for frame_post_draw can otherwise stall until a window event.
+		RenderingServer.force_draw(false)
 		if before == _inspection_frame_fingerprint(): stable = true; break
 	if not stable: inspection_busy = false; return ERR_BUSY
 	var image := _save_image_viewport() if viewport_only else get_viewport().get_texture().get_image()
@@ -1916,11 +1918,11 @@ func _capture_inspection_png(path: String, with_state: bool, viewport_only: bool
 # scientific legends live beside the shell and stay in the captured viewport.
 func _save_image_viewport() -> Image:
 	var extent := get_viewport().get_visible_rect().size
-	# Edge-reveal owns fullscreen visibility. A Control may retain its local
-	# visible flag or old windowed rect while its immersive surface is hidden.
-	var top_visible: bool = shell.edge_reveal.states.top.visible and shell.bar.is_visible_in_tree()
-	var bottom_visible: bool = shell.edge_reveal.states.bottom.visible and shell.bottom_strip.is_visible_in_tree()
-	var right_visible: bool = shell.edge_reveal.states.right.visible and shell.dock.is_visible_in_tree()
+	# Fullscreen composition is independent of the controls used to invoke Save
+	# Image. Only windowed mode reserves crop space for visible chrome.
+	var top_visible: bool = not shell.immersive and shell.edge_reveal.states.top.visible and shell.bar.is_visible_in_tree()
+	var bottom_visible: bool = not shell.immersive and shell.edge_reveal.states.bottom.visible and shell.bottom_strip.is_visible_in_tree()
+	var right_visible: bool = not shell.immersive and shell.edge_reveal.states.right.visible and shell.dock.is_visible_in_tree()
 	var top: float = shell.bar.get_global_rect().end.y if top_visible else 0.0
 	var bottom: float = shell.transport.get_global_rect().position.y if bottom_visible else extent.y
 	var right: float = resize_handle.get_global_rect().position.x if right_visible else extent.x
@@ -1933,19 +1935,32 @@ func _save_image_viewport() -> Image:
 	var hidden: Array[CanvasItem] = []
 	var orbit_guide: Control = shell.orbit_editor.guide if shell.orbit_editor != null else null
 	var orbit_panel: Control = shell.orbit_editor.panel if shell.orbit_editor != null else null
-	# Keep the shell and its edge-reveal/input state in the tree. The bar, dock,
-	# handle and bottom strips are already outside the crop when visible.
-	for item in [shell.empty,shell.open_error,shell.immersive_hint,overlay_panel,screenshot_notice,orbit_panel,orbit_guide,shell.shortcuts_editor]:
+	# Collect popups and focus before hiding their parent chrome. Keep the shell
+	# itself visible so edge-reveal and input ownership do not change.
+	var windows: Array[Window] = []
+	_collect_embedded_windows(self,windows)
+	var focused: Array[Control] = []
+	for viewport in [get_viewport()] + windows:
+		var control: Control = viewport.gui_get_focus_owner()
+		if control != null: focused.append(control)
+	for window in windows: window.hide()
+	var chrome := [shell.empty,shell.open_error,shell.immersive_hint,overlay_panel,screenshot_notice,orbit_panel,orbit_guide,shell.shortcuts_editor]
+	var legend_available: Vector2 = shell.legend_available
+	if shell.immersive:
+		chrome.append_array([shell.bar,shell.dock,resize_handle,shell.bottom_strip])
+		# Revealing a dock/transport must not shift scientific legends in exports.
+		shell.layout_legend(extent)
+	for item in chrome:
 		if item != null and item.is_visible_in_tree():
 			hidden.append(item)
 			item.hide()
-	var windows: Array[Window] = []
-	_collect_embedded_windows(self,windows)
-	for window in windows: window.hide()
 	RenderingServer.force_draw(false)
 	var image := get_viewport().get_texture().get_image()
-	for window in windows: window.show()
 	for item in hidden: item.show()
+	if shell.immersive: shell.layout_legend(legend_available)
+	for window in windows: window.show()
+	for control in focused:
+		if control.is_visible_in_tree(): control.grab_focus()
 	if image == null or image.is_empty(): return null
 	var scale := Vector2(image.get_size()) / extent
 	var crop := Rect2i(Vector2i(visible_area.position*scale),Vector2i(visible_area.size*scale))

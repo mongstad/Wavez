@@ -15,6 +15,9 @@ def main():
     parser.add_argument('--godot', required=True)
     parser.add_argument('--output-dir', required=True, type=Path)
     parser.add_argument('--renderer', choices=['gl_compatibility', 'forward_plus'], required=True)
+    parser.add_argument('--display-driver', choices=['wayland', 'x11'])
+    parser.add_argument('--idle-fullscreen', action='store_true',
+                        help='Require live low-processor zero-draw idle before fullscreen captures')
     args = parser.parse_args()
     out = args.output_dir.resolve()
     out.mkdir(parents=True, exist_ok=False)
@@ -22,9 +25,11 @@ def main():
                         ('meshes', ['mesh']), ('mixed', ['particles', 'volume', 'mesh'])]:
         fixture(out / f'{name}.wvz', kinds)
     sources = {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in out.glob('*.wvz')}
-    run = subprocess.run([args.godot, '--path', str(ROOT / 'viewer'),
+    display = ['--display-driver', args.display_driver] if args.display_driver else []
+    script = 'ui/test_save_image_idle.gd' if args.idle_fullscreen else 'ui/test_save_image_viewport.gd'
+    run = subprocess.run([args.godot, '--path', str(ROOT / 'viewer'), *display,
                           '--rendering-method', args.renderer, '--audio-driver', 'Dummy',
-                          '--resolution', '1440x900', '--script', 'ui/test_save_image_viewport.gd',
+                          '--resolution', '1440x900', '--script', script,
                           '--', '--save-image-output=' + str(out)],
                          text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, timeout=150)
     (out / 'native.log').write_text(run.stdout)
@@ -33,6 +38,8 @@ def main():
     report = json.loads((out / 'report.json').read_text())
     assert not report['failures'], report['failures']
     assert sources == {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in out.glob('*.wvz')}
+    report['source_hashes_unchanged'] = sources
+    (out / 'report.json').write_text(json.dumps(report, indent=2) + '\n')
     print(f'Save Image: {report["checks"]} PASS ({args.renderer}); source hashes unchanged')
 
 

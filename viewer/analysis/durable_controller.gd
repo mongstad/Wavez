@@ -141,7 +141,9 @@ func capture_to(path: String, viewport_only: bool = false) -> Error:
 	for attempt in range(8):
 		if not await temporal.selections.await_committed_overlay():viewer.inspection_busy = false;status.text = "Exact selection overlay was unavailable; no PNG published.";return ERR_BUSY
 		var before := fingerprint()
-		await get_tree().process_frame;await RenderingServer.frame_post_draw
+		await get_tree().process_frame
+		# A paused low-processor viewer need not schedule another frame itself.
+		RenderingServer.force_draw(false)
 		if before == fingerprint():stable = true;break
 	if not stable:viewer.inspection_busy = false;return ERR_BUSY
 	var image: Image = viewer._save_image_viewport() if viewport_only else viewer.get_viewport().get_texture().get_image()
