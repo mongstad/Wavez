@@ -79,11 +79,11 @@ func verify(view, name: String, path := "") -> void:
 	view.manual_orbit_start_basis = view.camera.basis
 	view.manual_orbit_angle = 0.0
 	view._orbit_camera_horizontally(80.0, .006)
-	check(view.camera_orbit_basis_active, name + " RMB orbit basis is active")
+	check(view.camera_orbit_basis_active, name + " view-relative orbit basis is active")
 	view.orbit_enabled = true; view.free_camera = true
 	check(move_free_camera(view), name + " Free Camera key translates camera before reset")
 	view._reset_camera()
-	check(visible(view, positions) and not view.camera_orbit_basis_active, name + " recovers after RMB orbit and Free Camera translation")
+	check(visible(view, positions) and not view.camera_orbit_basis_active, name + " recovers after view-relative orbit and Free Camera translation")
 	check(view.orbit_enabled and view.free_camera, name + " reset preserves navigation modes")
 	check(view.camera.transform.is_finite() and view.camera_target.is_finite() and is_finite(view.camera_distance) and view.camera_distance > 0, name + " reset camera is finite")
 	var radius: float = view.camera_distance

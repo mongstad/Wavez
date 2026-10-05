@@ -1,47 +1,70 @@
-# Manual camera orbit (#190)
+# Free-look steering and manual camera orbit (#258)
 
-Hold the right mouse button and drag inside the viewport to move the camera
-sideways around the current framed scene target **relative to the view on
-screen**. On each right-button press, the camera's current screen-up direction
-is captured in world space and held as that drag's orbit axis. Horizontal
-pointer motion carries the camera around that axis continuously through a full
-circle. Vertical motion is ignored. Release to end the gesture; the next press
-captures a new axis from the then-current view. The Navigate control also shows
-this gesture in its tooltip.
+Free Camera starts enabled. W/S translate forward/backward, A/D strafe and Q/E
+move vertically in the camera's current basis. Geometry has no collision barrier.
 
-This uses the existing camera target, radius and full camera orientation. It works with
-particles, volumes, meshes and mixed scenes without selecting a layer or object.
-The target, radius, screen-up direction, zoom level, scientific geometry and
-playback state stay the same during pure orbit. World-space elevation may change
-when the captured view-up axis is tilted relative to world Y. Left-drag retains
-its existing two-axis, fixed-sensitivity tumble and can establish a different
-orientation before the next right drag.
-The wheel zooms along the current view direction; F frames the scene again.
+Hold **RMB** in the viewport and move the mouse to steer in place. Horizontal
+motion turns the heading left/right; vertical motion looks up/down. Both axes
+follow the current view, including tilted or upside-down views. The camera
+position and radius stay fixed. Releasing RMB, losing window focus, opening
+Keyboard Shortcuts or starting an inspection capture ends the gesture.
+RMB uses a fixed `0.003` radians per pixel, independent of translation speed.
 
-The right-drag angular step uses pointer travel relative to the shorter viewport
-dimension. Its distance response is smooth: close views move more finely, while
-distant views cover more angle per drag. It has no separate camera mode or saved
-preference. With Auto Orbit enabled, a held right drag pauses automatic yaw;
-automatic motion resumes on release. Losing window focus ends the drag.
+**Orbit Camera Left** and **Orbit Camera Right** move the camera around its
+current navigation target. Both start **Unbound** in **Edit → Preferences →
+Keyboard Shortcuts**, under Navigation. Rebind, conflict transfer, Apply,
+Cancel, Clear, Reset Defaults and restart persistence use the existing editor.
+Existing default bindings are unchanged.
+
+Hold an orbit key to travel left or right around the camera's screen-up axis,
+which is captured at the start of that orbit. This is the view-relative
+horizontal orbit previously assigned to RMB. Target, radius and the captured
+up axis stay fixed; world-space elevation can change when the view is tilted.
+The rate is **90°/second**, independent of frame rate, translation speed, zoom
+and Auto Orbit speed. Release stops immediately. Opposite orbit keys cancel;
+releasing one resumes the other from the current view. Focus loss, a changed
+modifier chord, text-entry focus, Keyboard Shortcuts or a busy inspection
+capture ends a held shortcut. Mouse dragging takes priority over held orbit keys.
+
+RMB or an orbit key immediately disables Auto Orbit and applies manual control
+on that same input. Auto Orbit remains off after release until explicitly
+re-enabled. W/A/S/D/Q/E retains its accepted immediate transition to Free Camera.
+LMB keeps its existing two-axis tumble and sensitivity; it still temporarily
+suspends Auto Orbit while held. Wheel zoom and the `+`/`-` translation-speed
+controls keep their accepted behavior.
+
+## Camera-state synchronization
+
+The existing target/radius/full-basis representation is retained. RMB changes
+the full camera basis at the current position, then places the navigation target
+one existing radius ahead along the new viewing direction. As with Free Camera
+translation, this changes a navigation reference, never scientific coordinates.
+It keeps later orbit, wheel, framing and state restoration continuous without a
+broader camera rewrite. A manually chosen target can be set again through
+**Edit orbit center…**; Apply starts Auto Orbit there and Cancel restores the
+complete pre-edit state. Frame Scene retains the heading; Reset Camera restores
+the default orientation and current scene framing.
 
 ## Owner verification
 
-1. Open the cavity-collapse torus and press F. Use left-drag to tumble to an
-   obviously arbitrary orientation that does not align with world Y. Release
-   left, then right-drag left and right around the torus, including its opposite
-   side and a full return to the starting view. Confirm the mesh stays fixed,
-   camera radius does not drift and the screen-up direction does not roll.
-2. Right-drag vertically, then diagonally. Vertical-only motion should leave the
-   view unchanged; diagonal motion should use only horizontal travel. Release
-   right, tumble to a completely different orientation with left-drag, then
-   right-drag again. The new orbit plane should match the newly visible view.
-3. Zoom near a surface and into the throat; repeat the same pointer travel.
-   Check fine control there, then zoom far out and check useful angular travel.
-4. Zoom before and after right-dragging, press F, then repeat with Auto Orbit on.
-   Automatic motion should pause only while the right button is held.
-5. Repeat with particle-only, volume-only and mixed scenes, including changes to
-   the selected Simulation-panel category. Check playback, fullscreen and the
-   existing left-drag, wheel and selection-tool controls in Forward+ and
-   Compatibility. Assess physical KDE/Wayland mouse feel on the owner display.
+1. In representative particle, field, mesh and mixed captures, steer with RMB
+   horizontally and vertically, including near/inside geometry and tilted views.
+   The camera must turn in place without a press/release snap. Release RMB and
+   confirm subsequent pointer motion does nothing.
+2. Fly with W/S while steering toward a filament, field feature, mesh surface or
+   through a toroidal cavity. Check A/D and Q/E remain camera-relative, with no
+   collision or center barrier. Try both ends of the `+`/`-` speed range; steering
+   sensitivity must stay the same.
+3. Bind the orbit actions to convenient unused keys. Hold each, make a full
+   revolution about a chosen target, and repeat after an arbitrary LMB tumble.
+   Check opposite directions, key release, stable target/radius and screen-up.
+   Test conflict transfer, Cancel, Apply, Reset Defaults and restart persistence.
+4. Enable Auto Orbit, then steer with RMB or press either orbit key. The first
+   input must take manual control; release must leave Auto Orbit off. Check LMB,
+   wheel, Frame Scene, Reset Camera and orbit-center Apply/Cancel afterward.
+5. Repeat in fullscreen and in both renderers. Assess physical mouse/key feel on
+   KDE/Wayland. Scientific objects and playback state must remain unchanged.
 
-Implementation and validation evidence: [issue #190 revision 2 report](evidence/issue-190/revision-2/README.md).
+Current evidence: [issue #258](evidence/issue-258/README.md).
+The earlier RMB-orbit design and its results remain in the historical
+[issue #190 revision 2 report](evidence/issue-190/revision-2/README.md).

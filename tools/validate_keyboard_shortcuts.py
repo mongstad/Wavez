@@ -40,7 +40,9 @@ def main():
     parser.add_argument("--output-dir", required=True, type=Path)
     parser.add_argument("--renderer", choices=["forward_plus", "gl_compatibility", "headless"], default="forward_plus")
     parser.add_argument("--export", action="store_true")
-    parser.add_argument("--speed-only", action="store_true", help="Validate only the new movement-speed shortcut paths")
+    focused = parser.add_mutually_exclusive_group()
+    focused.add_argument("--speed-only", action="store_true", help="Validate only the movement-speed shortcut paths")
+    focused.add_argument("--orbit-only", action="store_true", help="Validate only the manual-orbit shortcut paths")
     args = parser.parse_args()
     out = args.output_dir.resolve(); out.mkdir(parents=True, exist_ok=False)
     scenes = {"particles": ["particles"], "fields": ["volume"], "meshes": ["mesh"],
@@ -69,6 +71,8 @@ def main():
     command += ["--", "--shortcut-output=" + str(out)]
     if args.speed_only:
         command.append("--shortcut-speed-only")
+    if args.orbit_only:
+        command.append("--shortcut-orbit-only")
     native_cleanup = run(command, out, "native", env, known_packaged_window_cleanup=args.export)
     cleanup = run(command + ["--shortcut-restart"], out, "restart", env,
                   known_compatibility_cleanup=2 if args.renderer == "gl_compatibility" else 0)
@@ -80,7 +84,7 @@ def main():
                   renderer=args.renderer, packaged=args.export, fresh_process_restart=True,
                   known_engine_cleanup_diagnostics={"native": native_cleanup, "restart": cleanup}, reports=reports)
     (out / "validation.json").write_text(json.dumps(result, indent=2) + "\n")
-    print(f'Keyboard Shortcuts{" speed" if args.speed_only else ""}: {result["checks"]} PASS ({args.renderer}, packaged={args.export}); restart and source hash verified')
+    print(f'Keyboard Shortcuts{" speed" if args.speed_only else " orbit" if args.orbit_only else ""}: {result["checks"]} PASS ({args.renderer}, packaged={args.export}); restart and source hash verified')
 
 
 if __name__ == "__main__":

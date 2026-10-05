@@ -63,35 +63,29 @@ func orbit_dispatch(view, label: String) -> void:
 	var pitch: float = view.pitch
 	var start: Transform3D = view.camera.transform
 	var view_up: Vector3 = start.basis.y.normalized()
-	var sensitivity: float = view._manual_orbit_sensitivity()
+	var angle: float = view.MANUAL_ORBIT_RATE * .2
 	var sample: Dictionary = view.committed_sample.duplicate(true)
 	var mesh_points: Dictionary = {}
 	for id in view.scene_layers.views:
 		var layer = view.scene_layers.views[id]
 		if layer is MeshView: mesh_points[id] = layer.source_positions.duplicate()
-	var point: Vector2 = viewport_drag_point(view, label)
-	var press := InputEventMouseButton.new()
-	press.button_index = MOUSE_BUTTON_RIGHT; press.pressed = true; press.position = point
-	root.push_input(press, true)
-	check(view.manual_orbit_dragging and view.manual_orbit_axis.distance_to(view_up) < .00001, label + " right press captures current view-up axis")
-	var motion := InputEventMouseMotion.new(); motion.position = point + Vector2(80, 40); motion.relative = Vector2(80, 40); motion.button_mask = MOUSE_BUTTON_MASK_RIGHT
-	root.push_input(motion, true)
-	var expected_basis := (Basis(view_up, -80 * sensitivity) * start.basis).orthonormalized()
-	check(close_transform(view.camera.transform, Transform3D(expected_basis, target + expected_basis.z * radius)) and view.yaw == yaw and view.pitch == pitch and view.camera_target == target and view.camera_distance == radius, label + " right drag follows captured view-up at fixed center and radius")
-	check(view.camera.basis.y.distance_to(view_up) < .00001, label + " right drag does not progressively roll")
-	var after_horizontal: Transform3D = view.camera.transform
-	var after_yaw: float = view.yaw
-	motion.position = point + Vector2(80, 120); motion.relative = Vector2(0, 80)
-	root.push_input(motion, true)
-	check(view.yaw == after_yaw and view.pitch == pitch and view.camera.transform == after_horizontal, label + " vertical-only right motion does not tumble camera")
+	var focus := root.gui_get_focus_owner()
+	if focus != null: focus.release_focus()
+	view.shell.shortcuts.active.orbit_camera_left = KEY_F6
+	var press := InputEventKey.new(); press.keycode = KEY_F6; press.pressed = true
+	root.push_input(press)
+	view._update_manual_orbit(.2)
+	check(not view.manual_orbit_keys.is_empty() and view.manual_orbit_axis.distance_to(view_up) < .00001, label + " orbit key captures current view-up axis")
+	var expected_basis := (Basis(view_up, -angle) * start.basis).orthonormalized()
+	check(close_transform(view.camera.transform, Transform3D(expected_basis, target + expected_basis.z * radius)) and view.yaw == yaw and view.pitch == pitch and view.camera_target == target and view.camera_distance == radius, label + " orbit key follows captured view-up at fixed center and radius")
+	check(view.camera.basis.y.distance_to(view_up) < .00001, label + " orbit key does not progressively roll")
 	check(view.committed_sample == sample, label + " manual orbit preserves scientific time")
 	for id in mesh_points: check(view.scene_layers.views[id].source_positions == mesh_points[id], label + " manual orbit preserves mesh vertices")
 	if label == "cavity-collapse":
 		await settle()
 		check(root.get_texture().get_image().save_png(output.path_join("cavity-manual-orbit.png")) == OK, "Cavity manual orbit screenshot saved")
-	var release := InputEventMouseButton.new(); release.button_index = MOUSE_BUTTON_RIGHT; release.position = Vector2(2, 2)
-	root.push_input(release, true)
-	check(not view.manual_orbit_dragging, label + " release over chrome ends right drag")
+	press.pressed = false; root.push_input(press)
+	check(view.manual_orbit_keys.is_empty(), label + " key release ends manual orbit")
 	if label == "mixed":
 		var previous_workspace: int = view.shell.workspace
 		for category in 3:

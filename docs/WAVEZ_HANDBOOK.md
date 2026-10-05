@@ -273,12 +273,15 @@ previously toggled off. If F is assigned to Free Camera, its prior Frame Scene
 binding becomes Unbound; one key event invokes one action.
 
 Left-drag supports continuous yaw/pitch revolutions with no pitch clamp.
-Right-drag in the viewport orbits sideways about the camera's current screen-up
-axis, captured at right-button press. It keeps that axis, the target and camera
-radius fixed during the drag; vertical pointer motion does nothing. A new press
-captures a new axis after any left-drag tumble. It works without Auto Orbit or
-an active layer selection, and gives finer angular movement when zoomed close.
-A right drag temporarily suspends Auto Orbit; it resumes on release.
+Right-drag steers the camera heading in place on both axes, independent of
+translation speed. Orbit Camera Left/Right, Unbound by default in Keyboard
+Shortcuts, provide held horizontal orbit about the current target and the
+screen-up axis captured at the start of the orbit. The keys preserve target and
+radius and turn at 90°/second regardless of frame rate or translation speed.
+RMB or either orbit key immediately disables Auto Orbit until explicitly
+re-enabled. Steering synchronizes the navigation target one existing radius
+ahead along the new heading without moving the camera or scientific geometry.
+See [camera navigation](MANUAL_CAMERA_ORBIT.md) for interaction and owner checks.
 During left-drag tumble, horizontal motion rotates about world Y and vertical
 motion rotates about the current camera right axis. The camera up axis follows
 that tumble, including upside-down views, without a world-up flip at either pole.

@@ -11,9 +11,10 @@ representation. While Auto Orbit is on, free-camera translation is suspended.
 Pressing any W/A/S/D/Q/E key turns Auto Orbit off and applies that key's normal
 free-camera movement on the **same** process tick. Turning Auto Orbit back on
 starts from the current camera pose without a snap. Auto Orbit's rotation stops
-while a manual LMB or RMB drag is held and resumes on release. LMB free tumble,
-RMB view-relative orbit, and wheel zoom retain their accepted behavior in both
-modes.
+while LMB tumble is held and resumes on release. RMB free-look and the held
+Orbit Camera Left/Right shortcuts immediately disable Auto Orbit and apply
+manual control on the same input; releasing them leaves Auto Orbit off. Wheel
+zoom retains its accepted behavior. See [steering and orbit](MANUAL_CAMERA_ORBIT.md).
 
 **Navigate → Edit orbit center…** temporarily turns Auto Orbit off and enables
 Free Camera movement for placement. The proposed target and radius remain draft
@@ -30,7 +31,9 @@ and Auto Orbit affect the camera, never scientific/world transforms.
 `scene_layers.tick()` calls `_move_free_camera()` before advancing automatic
 yaw. The movement function switches modes as soon as it finds a movement key,
 then uses the existing Free Camera translation path. The rest of the camera
-representation and the manual mouse gestures remain in place. The editor saves
+representation remains in place. Issue #258 adds in-place RMB steering through
+full-basis/target synchronization and moves view-relative orbit to held keys.
+The editor saves
 the pre-edit pose and mode, uses a temporary placement mode, and either restores
 the saved state or commits the new target and starts Auto Orbit.
 
@@ -38,7 +41,7 @@ The previous #234 candidate let W/S change the radius while Auto Orbit stayed
 on. Its validation counts describe that earlier behavior and are retained in
 PR history; they do not validate this revision.
 
-## Focused validation
+## Historical #234 validation
 
 `tools/validate_camera_tumble.py --suite auto-orbit` covers particle, volume,
 mesh, and mixed WVZ1 fixtures plus an optional real mesh capture. It checks
@@ -62,8 +65,9 @@ not available for this run; its visual feel remains an owner check.
    movement key. The first press should stop Auto Orbit and move the camera in
    the expected camera-relative direction. Turn orbit back on to check pose
    continuity.
-2. Tumble with LMB, orbit with RMB, and zoom with the wheel before and after
-   the mode transition. A held drag should suspend automatic motion.
+2. Tumble with LMB, steer with RMB, orbit with the configured left/right keys,
+   and zoom with the wheel before and after the mode transition. LMB temporarily
+   suspends Auto Orbit; RMB and orbit keys disable it until re-enabled.
 3. Open Edit Orbit Center first with Auto Orbit on and then off. Navigate while
    placing the guide. Cancel each time to recover the exact previous view and
    mode. Apply a visibly off-center target and confirm orbit starts immediately

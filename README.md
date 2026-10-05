@@ -29,7 +29,7 @@ Start with:
 
 - [Quickstart](QUICKSTART.md)
 - [Editable Keyboard Shortcuts](docs/KEYBOARD_SHORTCUTS.md)
-- [Manual camera orbit](docs/MANUAL_CAMERA_ORBIT.md)
+- [Free-look steering and manual camera orbit](docs/MANUAL_CAMERA_ORBIT.md)
 - [Auto Orbit](docs/AUTO_ORBIT.md)
 - [Free Camera speed](docs/FREE_CAMERA_SPEED.md)
 - [Edit orbit center and radius](docs/ORBIT_CENTER.md)

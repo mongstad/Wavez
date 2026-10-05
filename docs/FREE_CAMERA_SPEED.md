@@ -22,8 +22,8 @@ physical-key behavior. Godot's [key-event contract](https://docs.godotengine.org
 distinguishes layout-aware keycodes and produced Unicode characters from US
 physical key positions.
 
-Speed adjustment changes free-camera translation only. LMB tumble, RMB orbit,
-wheel zoom, Frame Scene, Reset Camera, Auto Orbit, orbit-center editing,
+Speed adjustment changes free-camera translation only. LMB tumble, RMB steering,
+manual orbit angular rate, wheel zoom, Frame Scene, Reset Camera, Auto Orbit, orbit-center editing,
 scientific/world transforms, and playback do not use this multiplier.
 
 The #256 tuning changes only those two bounds and per-step factors. It keeps

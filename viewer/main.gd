@@ -9,6 +9,8 @@ extends Node3D
 const TRAIL_LAYERS := 5
 const DISPLAY_HZ := 30.0
 const PAUSED_ORBIT_MAX_FPS := 60
+const FREE_LOOK_SENSITIVITY := 0.003 # radians per mouse pixel; translation-independent
+const MANUAL_ORBIT_RATE := PI / 2.0 # radians per second; translation-independent
 const Profile = preload("res://scene/playback_profile.gd")
 const Normalization = preload("res://scene/normalization.gd")
 const Geometry = preload("res://scene/geometry.gd")
@@ -97,8 +99,10 @@ var pitch := deg_to_rad(24.0)
 var camera_distance := 112.0
 var dragging := false
 var last_mouse := Vector2.ZERO
-var manual_orbit_dragging := false
-var manual_orbit_last_mouse := Vector2.ZERO
+var free_look_dragging := false
+var free_look_last_mouse := Vector2.ZERO
+var manual_orbit_keys := {}
+var manual_orbit_direction := 0.0
 var manual_orbit_axis := Vector3.UP
 var manual_orbit_start_basis := Basis.IDENTITY
 var manual_orbit_angle := 0.0
@@ -186,7 +190,7 @@ func _ready() -> void:
 		add_child(monitor)
 	_build_guides()
 	_update_camera()
-	get_window().focus_exited.connect(func(): manual_orbit_dragging = false)
+	get_window().focus_exited.connect(_clear_manual_navigation)
 	get_window().focus_exited.connect(_clear_camera_speed_hold)
 
 	var args := OS.get_cmdline_user_args()
@@ -381,6 +385,7 @@ func _read_frame_profiled(index: int) -> FrameData:
 
 func _process(delta: float) -> void:
 	_update_render_pacing()
+	_update_manual_orbit(delta)
 	var started := Profile.begin()
 	_process_profiled(delta)
 	Profile.end("process_inclusive",started)
@@ -524,21 +529,22 @@ func _update_hud_profiled() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and not event.pressed: _release_camera_speed_key(event)
+	if event is InputEventKey: _release_manual_orbit_key(event)
 	# A release over any chrome must still end a viewport drag, including preferences.
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
 		dragging = false
 		resizing_panel = false
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and not event.pressed:
-		manual_orbit_dragging = false
+		free_look_dragging = false
 	if shell != null and shell.editing_shortcuts():
-		manual_orbit_dragging = false
+		_clear_manual_navigation()
 		if shell.shortcuts_editor.handle_input(event): get_viewport().set_input_as_handled()
 		return
-	if inspection_busy: manual_orbit_dragging = false
-	if event is InputEventMouseMotion and manual_orbit_dragging:
-		var movement: Vector2 = event.position - manual_orbit_last_mouse
-		manual_orbit_last_mouse = event.position
-		_orbit_camera_horizontally(movement.x, _manual_orbit_sensitivity())
+	if inspection_busy: _clear_manual_navigation()
+	if event is InputEventMouseMotion and free_look_dragging:
+		var movement: Vector2 = event.position - free_look_last_mouse
+		free_look_last_mouse = event.position
+		_steer_camera(movement)
 		get_viewport().set_input_as_handled()
 		return
 	# Recovery precedes GUI, busy-inspection and selection input handling.
@@ -562,15 +568,16 @@ func _unhandled_input(event: InputEvent) -> void:
 			if mouse_button.pressed:
 				var focused := get_viewport().gui_get_focus_owner()
 				if focused != null: focused.release_focus()
-				manual_orbit_dragging = false
+				_clear_manual_navigation()
 			dragging = mouse_button.pressed
 			last_mouse = mouse_button.position
 		elif mouse_button.button_index == MOUSE_BUTTON_RIGHT and mouse_button.pressed and shell.edge_reveal.is_viewport_point(mouse_button.position) and not dragging:
-			manual_orbit_dragging = true
-			manual_orbit_last_mouse = mouse_button.position
-			manual_orbit_axis = camera.basis.y.normalized()
-			manual_orbit_start_basis = camera.basis.orthonormalized()
-			manual_orbit_angle = 0.0
+			var focused := get_viewport().gui_get_focus_owner()
+			if focused != null: focused.release_focus()
+			_clear_manual_navigation()
+			_take_manual_camera_control()
+			free_look_dragging = true
+			free_look_last_mouse = mouse_button.position
 			get_viewport().set_input_as_handled()
 		elif mouse_button.pressed and mouse_button.button_index == MOUSE_BUTTON_WHEEL_UP:
 			_zoom_camera(mouse_button, true)
@@ -587,21 +594,63 @@ func _unhandled_input(event: InputEvent) -> void:
 		var action: String = shell.shortcuts.match_action(event)
 		if not action.is_empty():
 			if session_log != null: session_log.record("UI", "Shortcut: " + action)
-			_dispatch_shortcut(action)
+			_dispatch_shortcut(action, event)
 			if action in ["increase_camera_speed", "decrease_camera_speed"]: _start_camera_speed_hold(action, event)
 			get_viewport().set_input_as_handled()
 
 func _camera_dragging() -> bool:
-	return dragging or manual_orbit_dragging
+	return dragging or free_look_dragging
 
-func _manual_orbit_sensitivity() -> float:
-	# A half-turn over the shorter viewport span at a framed radius. The smooth
-	# distance response gives close inspection finer angular control without a
-	# mode switch, while distant views retain useful travel per drag.
-	var size := get_viewport().get_visible_rect().size
-	var span := maxf(480.0, minf(size.x, size.y))
-	var ratio := camera_distance / maxf(half_extent, camera.near)
-	return PI / span * (0.2 + 1.6 * ratio / (ratio + 3.5))
+func _take_manual_camera_control() -> void:
+	if not orbit_enabled: return
+	orbit_enabled = false
+	free_camera = true
+	_sync_control_state()
+
+func _steer_camera(movement: Vector2) -> void:
+	if movement == Vector2.ZERO: return
+	_take_manual_camera_control()
+	# Use local view axes through poles and rolled views. Preserve the exact
+	# position/radius and synchronize the existing target-based representation.
+	camera.basis = (camera.basis * Basis(Vector3.UP, -movement.x * FREE_LOOK_SENSITIVITY) * Basis(Vector3.RIGHT, -movement.y * FREE_LOOK_SENSITIVITY)).orthonormalized()
+	camera_target = camera.position - camera.basis.z * camera_distance
+	_adopt_camera_basis()
+
+func _clear_manual_navigation() -> void:
+	free_look_dragging = false
+	manual_orbit_keys.clear()
+	manual_orbit_direction = 0.0
+
+func _start_manual_orbit(action: String, event: InputEventKey) -> void:
+	if _camera_dragging() or get_viewport().gui_get_focus_owner() != null: return
+	_take_manual_camera_control()
+	manual_orbit_keys[action] = event.duplicate()
+
+func _release_manual_orbit_key(event: InputEventKey) -> void:
+	if event.keycode in [KEY_SHIFT, KEY_CTRL, KEY_ALT, KEY_META]:
+		manual_orbit_keys.clear() # A changed chord is no longer the held shortcut.
+	elif not event.pressed:
+		for action in manual_orbit_keys.keys():
+			var held: InputEventKey = manual_orbit_keys[action]
+			var same_key := event.physical_keycode == held.physical_keycode if event.physical_keycode != 0 and held.physical_keycode != 0 else event.keycode == held.keycode
+			if same_key: manual_orbit_keys.erase(action)
+	if manual_orbit_keys.is_empty(): manual_orbit_direction = 0.0
+
+func _update_manual_orbit(delta: float) -> void:
+	if manual_orbit_keys.is_empty(): return
+	if offline_instance or inspection_busy or inspection_paused or _camera_dragging() or shell.editing_shortcuts() or get_viewport().gui_get_focus_owner() != null:
+		_clear_manual_navigation(); return
+	for action in manual_orbit_keys.keys():
+		if shell.shortcuts.active[action] != shell.shortcuts.binding(manual_orbit_keys[action]): manual_orbit_keys.erase(action)
+	var direction := float(manual_orbit_keys.has("orbit_camera_left")) - float(manual_orbit_keys.has("orbit_camera_right"))
+	if direction != manual_orbit_direction:
+		manual_orbit_axis = camera.basis.y.normalized()
+		manual_orbit_start_basis = camera.basis.orthonormalized()
+		manual_orbit_angle = 0.0
+		manual_orbit_direction = direction
+	if direction != 0.0:
+		_take_manual_camera_control()
+		_orbit_camera_horizontally(direction * delta, MANUAL_ORBIT_RATE)
 
 func _orbit_camera_by_drag(movement: Vector2, sensitivity: float) -> void:
 	if movement == Vector2.ZERO: return
@@ -629,12 +678,14 @@ func _zoom_camera(event: InputEventMouseButton, inward: bool) -> void:
 	camera_distance = minf(camera_distance, maxf(minimum, camera_distance * step)) if inward else maxf(camera_distance, minf(maximum, camera_distance / step))
 	_update_camera()
 
-func _dispatch_shortcut(action: String) -> void:
+func _dispatch_shortcut(action: String, event: InputEventKey = null) -> void:
 	match action:
 		"reset_camera": _reset_camera()
 		"auto_orbit": _toggle_auto_orbit()
 		"free_camera": _toggle_free_camera()
 		"increase_camera_speed", "decrease_camera_speed": _adjust_camera_speed(action)
+		"orbit_camera_left", "orbit_camera_right":
+			if event != null: _start_manual_orbit(action, event)
 		"frame_scene": _focus_activity()
 		"navigate": shell.navigation.get_child(2).show_popup()
 		"play_pause":
@@ -668,6 +719,7 @@ func _toggle_free_camera() -> void:
 	free_camera = not free_camera; _sync_control_state()
 
 func _reset_camera() -> void:
+	_clear_manual_navigation()
 	if shell != null: shell.dismiss_orbit_editor()
 	camera_orbit_basis_active = false
 	yaw = deg_to_rad(38.0); pitch = deg_to_rad(24.0)
@@ -800,6 +852,7 @@ func _build_guides() -> void:
 	_sync_visuals()
 
 func _focus_activity() -> void:
+	_clear_manual_navigation()
 	if shell != null: shell.dismiss_orbit_editor()
 	if scene_layers != null:scene_layers.frame_scene();return
 	if frame_a == null: return

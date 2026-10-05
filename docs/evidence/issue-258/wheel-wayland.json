@@ -1,0 +1,88 @@
+{
+  "cases": {
+    "field": {
+      "extent": 6.49519062042236,
+      "far": 1000.0,
+      "first_inward": 16.3678803634644,
+      "framed": 18.1865337371826,
+      "maximum": 993.504809379578,
+      "minimum": 6.54519062116742,
+      "near": 0.0500000007450581
+    },
+    "large": {
+      "extent": 25495.09765625,
+      "far": 356931.375,
+      "first_inward": 64247.64609375,
+      "framed": 71386.2734375,
+      "maximum": 331436.27734375,
+      "minimum": 25495.1476562507,
+      "near": 0.0500000007450581
+    },
+    "mesh": {
+      "extent": 2.54950976371765,
+      "far": 1000.0,
+      "first_inward": 6.42476460456848,
+      "framed": 7.13862733840942,
+      "maximum": 997.450490236282,
+      "minimum": 2.59950976446271,
+      "near": 0.0500000007450581
+    },
+    "mixed": {
+      "extent": 6.49519062042236,
+      "far": 1000.0,
+      "first_inward": 16.3678803634644,
+      "framed": 18.1865337371826,
+      "maximum": 993.504809379578,
+      "minimum": 6.54519062116742,
+      "near": 0.0500000007450581
+    },
+    "particles": {
+      "extent": 2.54950976371765,
+      "far": 1000.0,
+      "first_inward": 6.42476460456848,
+      "framed": 7.13862733840942,
+      "maximum": 997.450490236282,
+      "minimum": 2.59950976446271,
+      "near": 0.0500000007450581
+    },
+    "small": {
+      "extent": 0.00254950975067914,
+      "far": 2.54950976371765,
+      "first_inward": 0.00642476457171142,
+      "framed": 0.00713862730190158,
+      "maximum": 2.54696025396697,
+      "minimum": 0.00280446073156781,
+      "near": 0.00025495098088868
+    }
+  },
+  "checks": 234,
+  "display_driver": "Wayland",
+  "failures": [],
+  "layouts": [
+    {
+      "actual": "(1440, 900)",
+      "scale": 1.0
+    },
+    {
+      "actual": "(3840, 2160)",
+      "scale": 2.0
+    },
+    {
+      "actual": "(3840, 2160)",
+      "scale": 2.5
+    }
+  ],
+  "packaged": false,
+  "renderer": "forward_plus",
+  "source_hashes_unchanged": {
+    "/tmp/wavez258-wheel-wayland/large.wvz": "6b97bc0883349b1ec39b722cdafffb7d50395e91a6fd50fbf8805abd4a4890d7",
+    "/tmp/wavez258-wheel-wayland/small.wvz": "f6060b000ca72e32fcf98fbb969b83e4eaad54ac9ab3833568bd0d68557c6be4",
+    "/tmp/wavez258-wheel-wayland/mixed.wvz": "5fec8667490f6588dde9c318d96b01839e56f0748c944c42d0b3085768b4f258",
+    "/tmp/wavez258-wheel-wayland/mesh.wvz": "97f5595027abe1afd3fd935f8eafa5c6311276da15d28de25a6d568e007bf8a0",
+    "/tmp/wavez258-wheel-wayland/field.wvz": "555217bd8994f15bf3af4f32015fd620f7c001b642ce7d2b0491f5de5191bb82",
+    "/tmp/wavez258-wheel-wayland/particles.wvz": "20c3203cad6c40cf960aaaa6bae352b587e8ad99f702a0b29f8867dc90e1e808"
+  },
+  "known_engine_diagnostics": [
+    "libdecor-gtk-WARNING: Failed to initialize GTK\nFailed to load plugin 'libdecor-gtk.so': failed to init\n"
+  ]
+}
