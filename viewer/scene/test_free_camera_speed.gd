@@ -1,5 +1,5 @@
 extends SceneTree
-## Focused speed, key-layout and camera invariants for issue #200.
+## Focused speed, key-layout and camera invariants for issues #200 and #256.
 const Viewer = preload("res://main.gd")
 const Bindings = preload("res://ui/keyboard_shortcuts.gd")
 var output := ""
@@ -50,31 +50,31 @@ func shortcut_and_repeat(viewer) -> void:
 	check(Bindings.binding(us_plus) == KEY_PLUS and shortcuts.match_action(us_plus) == "increase_camera_speed", "Shift+= producing + resolves on US layouts")
 	check(Bindings.binding(minus) == KEY_MINUS and shortcuts.match_action(minus) == "decrease_camera_speed", "Logical - resolves without a physical US position")
 	press_speed(viewer, us_plus)
-	check(near(viewer.free_camera_speed_scale, .7 * 1.05) and viewer.camera_speed_hold_action == "increase_camera_speed", "First + press applies exactly 5% immediately")
+	check(near(viewer.free_camera_speed_scale, .7 * 1.10) and viewer.camera_speed_hold_action == "increase_camera_speed", "First + press applies exactly 10% immediately")
 	var first: int = viewer.camera_speed_next_repeat_msec
 	viewer._update_camera_speed_repeat(first - 1)
-	check(near(viewer.free_camera_speed_scale, .7 * 1.05), "Hold does not adjust before 200 ms")
+	check(near(viewer.free_camera_speed_scale, .7 * 1.10), "Hold does not adjust before 200 ms")
 	var echo: InputEventKey = us_plus.duplicate(); echo.echo = true
 	viewer._unhandled_input(echo)
-	check(near(viewer.free_camera_speed_scale, .7 * 1.05), "OS echo does not bypass the controlled cadence")
+	check(near(viewer.free_camera_speed_scale, .7 * 1.10), "OS echo does not bypass the controlled cadence")
 	viewer._update_camera_speed_repeat(first)
-	check(near(viewer.free_camera_speed_scale, .7 * pow(1.05, 2)) and viewer.camera_speed_next_repeat_msec == first + 200, "Held + applies one 5% step at 200 ms")
+	check(near(viewer.free_camera_speed_scale, .7 * pow(1.10, 2)) and viewer.camera_speed_next_repeat_msec == first + 200, "Held + applies one 10% step at 200 ms")
 	viewer._update_camera_speed_repeat(first + 199)
-	check(near(viewer.free_camera_speed_scale, .7 * pow(1.05, 2)), "No extra step between repeat boundaries")
+	check(near(viewer.free_camera_speed_scale, .7 * pow(1.10, 2)), "No extra step between repeat boundaries")
 	viewer._update_camera_speed_repeat(first + 400)
-	check(near(viewer.free_camera_speed_scale, .7 * pow(1.05, 3)) and viewer.camera_speed_next_repeat_msec == first + 600, "Delayed frame applies one controlled step without catch-up burst")
+	check(near(viewer.free_camera_speed_scale, .7 * pow(1.10, 3)) and viewer.camera_speed_next_repeat_msec == first + 600, "Delayed frame applies one controlled step without catch-up burst")
 	var before: float = viewer.free_camera_speed_scale
 	release_speed(viewer, us_plus)
 	viewer._update_camera_speed_repeat(first + 1000)
 	check(viewer.camera_speed_hold_action.is_empty() and near(viewer.free_camera_speed_scale, before), "Key release stops repeats immediately")
 	press_speed(viewer, minus)
-	check(near(viewer.free_camera_speed_scale, before * .95), "First - press decreases current speed by exactly 5%")
+	check(near(viewer.free_camera_speed_scale, before * .90), "First - press decreases current speed by exactly 10%")
 	var minus_next: int = viewer.camera_speed_next_repeat_msec
 	viewer._update_camera_speed_repeat(minus_next)
-	check(near(viewer.free_camera_speed_scale, before * pow(.95, 2)), "Held - repeats at 200 ms")
+	check(near(viewer.free_camera_speed_scale, before * pow(.90, 2)), "Held - repeats at 200 ms")
 	release_speed(viewer, minus)
 	press_speed(viewer, nordic_plus)
-	check(near(viewer.free_camera_speed_scale, before * pow(.95, 2) * 1.05), "Dedicated + applies the same step")
+	check(near(viewer.free_camera_speed_scale, before * pow(.90, 2) * 1.10), "Dedicated + applies the same step")
 	release_speed(viewer, nordic_plus)
 	var old: Dictionary = shortcuts.active.duplicate()
 	var rebound: Dictionary = old.duplicate()
@@ -86,15 +86,15 @@ func shortcut_and_repeat(viewer) -> void:
 	check(near(viewer.free_camera_speed_scale, speed_before), "Default + stops acting after rebound")
 	var plus_rebound := key(KEY_F6)
 	press_speed(viewer, plus_rebound)
-	check(near(viewer.free_camera_speed_scale, speed_before * 1.05), "Rebound increase acts immediately")
+	check(near(viewer.free_camera_speed_scale, speed_before * 1.10), "Rebound increase acts immediately")
 	viewer._update_camera_speed_repeat(viewer.camera_speed_next_repeat_msec)
-	check(near(viewer.free_camera_speed_scale, speed_before * pow(1.05, 2)), "Rebound increase holds at the same controlled cadence")
+	check(near(viewer.free_camera_speed_scale, speed_before * pow(1.10, 2)), "Rebound increase holds at the same controlled cadence")
 	release_speed(viewer, plus_rebound)
 	var minus_rebound := key(KEY_F7)
 	press_speed(viewer, minus_rebound)
-	check(near(viewer.free_camera_speed_scale, speed_before * pow(1.05, 2) * .95), "Rebound decrease acts immediately")
+	check(near(viewer.free_camera_speed_scale, speed_before * pow(1.10, 2) * .90), "Rebound decrease acts immediately")
 	viewer._update_camera_speed_repeat(viewer.camera_speed_next_repeat_msec)
-	check(near(viewer.free_camera_speed_scale, speed_before * pow(1.05, 2) * pow(.95, 2)), "Rebound decrease holds at the same controlled cadence")
+	check(near(viewer.free_camera_speed_scale, speed_before * pow(1.10, 2) * pow(.90, 2)), "Rebound decrease holds at the same controlled cadence")
 	release_speed(viewer, minus_rebound)
 	shortcuts.active = old
 	viewer.free_camera_speed_scale = .7
@@ -102,6 +102,16 @@ func shortcut_and_repeat(viewer) -> void:
 	check(near(viewer.free_camera_speed_scale, viewer.MAX_FREE_CAMERA_SPEED) and is_finite(viewer.free_camera_speed_scale), "Repeated + stops at finite upper bound")
 	for step in 300: viewer._adjust_camera_speed("decrease_camera_speed")
 	check(near(viewer.free_camera_speed_scale, viewer.MIN_FREE_CAMERA_SPEED) and viewer.free_camera_speed_scale > 0, "Repeated - stops at positive lower bound")
+	viewer.free_camera_speed_scale = viewer.MAX_FREE_CAMERA_SPEED - .01
+	viewer._adjust_camera_speed("increase_camera_speed")
+	check(near(viewer.free_camera_speed_scale, 2.5), "Near-ceiling + clamps without overshoot")
+	viewer._adjust_camera_speed("increase_camera_speed")
+	check(near(viewer.free_camera_speed_scale, 2.5), "Further + stays at the ceiling")
+	viewer.free_camera_speed_scale = viewer.MIN_FREE_CAMERA_SPEED + .001
+	viewer._adjust_camera_speed("decrease_camera_speed")
+	check(near(viewer.free_camera_speed_scale, .02), "Near-floor - clamps without undershoot")
+	viewer._adjust_camera_speed("decrease_camera_speed")
+	check(near(viewer.free_camera_speed_scale, .02), "Further - stays at the floor")
 	viewer.free_camera_speed_scale = .7
 	press_speed(viewer, us_plus)
 	var shifted_speed: float = viewer.free_camera_speed_scale
@@ -137,11 +147,11 @@ func fixture_navigation(viewer, kind: String) -> void:
 	var before: Vector3 = viewer.camera.position
 	press_speed(viewer, key(KEY_PLUS, KEY_PLUS)); release_speed(viewer, key(KEY_PLUS, KEY_PLUS))
 	move(viewer, KEY_W, .1)
-	check(near(viewer.camera.position.distance_to(before), old_rate * .7 * 1.05), kind + " + affects the next movement immediately")
+	check(near(viewer.camera.position.distance_to(before), old_rate * .7 * 1.10), kind + " + affects the next movement immediately")
 	before = viewer.camera.position
 	press_speed(viewer, key(KEY_MINUS, KEY_MINUS)); release_speed(viewer, key(KEY_MINUS, KEY_MINUS))
 	move(viewer, KEY_W, .1)
-	check(near(viewer.camera.position.distance_to(before), old_rate * .7 * 1.05 * .95), kind + " - affects the next movement immediately")
+	check(near(viewer.camera.position.distance_to(before), old_rate * .7 * 1.10 * .90), kind + " - affects the next movement immediately")
 	viewer.orbit_enabled = true
 	before = viewer.camera.position
 	press_speed(viewer, key(KEY_PLUS, KEY_PLUS)); release_speed(viewer, key(KEY_PLUS, KEY_PLUS))
@@ -157,11 +167,11 @@ func fullscreen_navigation(viewer) -> void:
 	viewer.free_camera_speed_scale = .7
 	var plus := key(KEY_PLUS, KEY_PLUS)
 	press_speed(viewer, plus); release_speed(viewer, plus)
-	check(near(viewer.free_camera_speed_scale, .735), "Normal window accepts speed shortcut")
+	check(near(viewer.free_camera_speed_scale, .77), "Normal window accepts speed shortcut")
 	viewer._toggle_fullscreen()
 	check(viewer.shell.immersive, "Fullscreen inspection mode opens")
 	press_speed(viewer, plus); release_speed(viewer, plus)
-	check(near(viewer.free_camera_speed_scale, .735 * 1.05), "Fullscreen inspection mode accepts speed shortcut")
+	check(near(viewer.free_camera_speed_scale, .77 * 1.10), "Fullscreen inspection mode accepts speed shortcut")
 	viewer._toggle_fullscreen()
 	check(not viewer.shell.immersive, "Normal window restores after fullscreen check")
 

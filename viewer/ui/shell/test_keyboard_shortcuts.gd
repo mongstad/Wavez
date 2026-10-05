@@ -96,9 +96,9 @@ func speed_shortcut_review(viewer, shell) -> void:
 		check(shell.shortcuts.active == saved and unique(saved), "Fresh process restores both rebound speed keys without conflicts")
 		var rate: float = viewer.free_camera_speed_scale
 		trigger(shell, "increase_camera_speed")
-		check(is_equal_approx(viewer.free_camera_speed_scale, rate * 1.05), "Restarted increase key adjusts movement speed")
+		check(is_equal_approx(viewer.free_camera_speed_scale, rate * 1.10), "Restarted increase key adjusts movement speed")
 		trigger(shell, "decrease_camera_speed")
-		check(is_equal_approx(viewer.free_camera_speed_scale, rate * 1.05 * .95), "Restarted decrease key adjusts movement speed")
+		check(is_equal_approx(viewer.free_camera_speed_scale, rate * 1.10 * .90), "Restarted decrease key adjusts movement speed")
 		speed_move(viewer)
 		return
 	check(shell.shortcuts.active.increase_camera_speed == KEY_PLUS and shell.shortcuts.active.decrease_camera_speed == KEY_MINUS, "Fresh profile uses logical + and - defaults")
@@ -127,9 +127,9 @@ func speed_shortcut_review(viewer, shell) -> void:
 	check(shell.shortcuts.active.increase_camera_speed == KEY_F6 and shell.shortcuts.active.decrease_camera_speed == KEY_F7, "Cancel after Apply keeps the persisted rebound keys")
 	var rate: float = viewer.free_camera_speed_scale
 	trigger(shell, "increase_camera_speed")
-	check(is_equal_approx(viewer.free_camera_speed_scale, rate * 1.05), "Applied increase key works immediately")
+	check(is_equal_approx(viewer.free_camera_speed_scale, rate * 1.10), "Applied increase key works immediately")
 	trigger(shell, "decrease_camera_speed")
-	check(is_equal_approx(viewer.free_camera_speed_scale, rate * 1.05 * .95), "Applied decrease key works immediately")
+	check(is_equal_approx(viewer.free_camera_speed_scale, rate * 1.10 * .90), "Applied decrease key works immediately")
 	speed_move(viewer)
 	var file := FileAccess.open(output.path_join("saved-map.json"), FileAccess.WRITE)
 	file.store_string(JSON.stringify(shell.shortcuts.active)); file.close()
@@ -161,9 +161,9 @@ func run() -> void:
 		check(shell.shortcuts.active.reset_camera == 0 and shell.shortcuts.active.frame_scene == KEY_R, "Duplicate transfer survives restart")
 		var restart_speed: float = viewer.free_camera_speed_scale
 		trigger(shell, "increase_camera_speed")
-		check(is_equal_approx(viewer.free_camera_speed_scale, restart_speed * 1.05), "Persisted increase shortcut works after restart")
+		check(is_equal_approx(viewer.free_camera_speed_scale, restart_speed * 1.10), "Persisted increase shortcut works after restart")
 		trigger(shell, "decrease_camera_speed")
-		check(is_equal_approx(viewer.free_camera_speed_scale, restart_speed * 1.05 * .95), "Persisted decrease shortcut works after restart")
+		check(is_equal_approx(viewer.free_camera_speed_scale, restart_speed * 1.10 * .90), "Persisted decrease shortcut works after restart")
 		navigation_review(viewer, shell, "Restart")
 		viewer.yaw = 1.7; viewer._update_camera(); var before: Transform3D = viewer.camera.transform
 		trigger(shell, "frame_scene")
@@ -291,9 +291,9 @@ func run() -> void:
 	var active_speed: float = viewer.free_camera_speed_scale
 	dialog.cancel.pressed.emit(); await settle()
 	trigger(shell, "increase_camera_speed")
-	check(is_equal_approx(viewer.free_camera_speed_scale, active_speed * 1.05), "Rebound increase shortcut takes effect after Apply")
+	check(is_equal_approx(viewer.free_camera_speed_scale, active_speed * 1.10), "Rebound increase shortcut takes effect after Apply")
 	trigger(shell, "decrease_camera_speed")
-	check(is_equal_approx(viewer.free_camera_speed_scale, active_speed * 1.05 * .95), "Rebound decrease shortcut takes effect after Apply")
+	check(is_equal_approx(viewer.free_camera_speed_scale, active_speed * 1.10 * .90), "Rebound decrease shortcut takes effect after Apply")
 	shell.edit_shortcuts()
 	dialog.clear_binding("save_image"); dialog.apply_button.pressed.emit(); await settle()
 	check(dialog.visible and shell.shortcuts.active.save_image == 0 and dialog.apply_button.disabled, "A second Apply saves another edit without closing the editor")

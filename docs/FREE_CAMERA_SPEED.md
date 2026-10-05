@@ -1,13 +1,13 @@
-# Free Camera movement speed (#200)
+# Free Camera movement speed (#200, #256)
 
 Free Camera translation starts at **70%** of the accepted build 48 rate. Its
 existing movement formula and camera-relative W/A/S/D/Q/E directions are
 unchanged; one session-only speed multiplier scales the resulting translation.
-The multiplier starts at `0.7` and stays between `0.1` and `4.0` times the
+The multiplier starts at `0.7` and stays between `0.02` and `2.5` times the
 former rate. These bounds preserve close-range control and faster traversal.
 
-Press `+` to multiply the current rate by `1.05`, or `-` to multiply it by
-`0.95`. The first step occurs on the initial press. Holding the key applies
+Press `+` to multiply the current rate by `1.10`, or `-` to multiply it by
+`0.90`. The first step occurs on the initial press. Holding the key applies
 another step no sooner than every **200 ms**, at most once per processed frame.
 OS key-repeat events add no extra steps; release, focus loss, or opening the
 shortcut editor stops the hold. The next free-camera translation uses the new
@@ -25,6 +25,48 @@ physical key positions.
 Speed adjustment changes free-camera translation only. LMB tumble, RMB orbit,
 wheel zoom, Frame Scene, Reset Camera, Auto Orbit, orbit-center editing,
 scientific/world transforms, and playback do not use this multiplier.
+
+The #256 tuning changes only those two bounds and per-step factors. It keeps
+the #200 default, key handling, repeat cadence, and translation-only path.
+
+## Issue #256 candidate validation
+
+The focused speed suite passed **97 headless** checks and **101 checks each**
+in native Forward+ and Compatibility. It covered the unchanged `0.7` default,
+10% single taps and holds, 200 ms throttling, release and focus loss, the new
+0.02/2.5 bounds without overshoot, rebound keys, normal and fullscreen modes,
+and unchanged camera/world transforms in particle, field, mesh and mixed scenes.
+Generated WVZ1 fixture hashes remained unchanged.
+
+The focused Keyboard Shortcuts path passed **16 checks each** headless,
+Forward+ and Compatibility, including conflict handling, Apply/Cancel/Reset,
+rebound actions and fresh-process persistence. The connected Auto Orbit suite
+passed **364 checks each** headless and Forward+, covering W/A/S/D/Q/E,
+LMB/RMB, wheel and orbit transitions. The directly affected broader Keyboard
+Shortcuts suite passed **283 headless** checks, including restart. Two
+application-version tests, the `v0.1.0.50` CLI and whitespace checks passed.
+
+The physical Nordic keyboard, a Linux package, and a real production capture
+were not rerun for #256; the shortcut mapping, packaging path and scientific
+scene handling are unchanged from #200. No unrelated full-suite run was made.
+
+## Issue #256 owner verification
+
+1. In a particle, field, mesh and mixed scene, confirm the default Free Camera
+   pace still matches accepted build 49. Tap `+` or `-` once and check that
+   each step is clearly more noticeable than before. Hold either key, then
+   release it to confirm the deliberate 200 ms cadence stops immediately.
+2. Step down to the new fine-control floor and up to the reduced ceiling. Check
+   that further presses stay at the bound, both in a normal window and fullscreen.
+3. Confirm the Nordic `+`/`-` keys and rebound shortcuts after restart. Check
+   W/A/S/D/Q/E, LMB/RMB, wheel, Auto Orbit and Edit Orbit Center while moving
+   among the scene types. Scientific objects and playback should keep their
+   world state.
+
+---
+
+The original #200 validation and owner-verification record below is retained
+as a historical build 49 checkpoint; its 5% figures describe that checkpoint.
 
 ## Focused validation
 
