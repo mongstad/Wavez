@@ -1,4 +1,13 @@
-# Keyboard Shortcuts — issue #175
+# Keyboard Shortcuts
+
+Current issue #255 proposes build `v0.1.0.57`: the Keyboard Shortcuts window
+shows no tooltips on binding buttons, Clear controls, action labels, category
+headings, footer actions or the close control. Visible row names, key names and
+focus styling remain. Shortcut editing, persistence and the explanatory
+tooltips elsewhere in Wavez are unchanged. See the
+[focused review evidence](evidence/issue-255/README.md).
+
+## Original #175 implementation record
 
 Candidate build 17, pending owner review. Selected from the sole Ready item on
 the Wavez Development board on 2026-10-02. The existing owner-linked branch is
@@ -22,9 +31,9 @@ Modifier keys alone are ignored. Escape cancels that capture operation; another
 Escape closes the editor and discards the draft. Tab/Shift+Tab stay reserved for
 focus traversal. Keyboard focus remains inside the editor, and following a row
 scrolls it into view. Clear unbinds a row; Reset Defaults stages the accepted map.
-Unavailable source actions explain their requirements in tooltips and remain
-editable. Window-manager-reserved combinations may be intercepted before Wavez
-receives them.
+Unavailable source actions remain editable and visually muted, without
+shortcut-window tooltips. Window-manager-reserved combinations may be
+intercepted before Wavez receives them.
 
 Assigning a duplicate immediately unbinds the previous row in the **draft**.
 There is no warning or confirmation. **Apply** is disabled until the draft differs
@@ -121,7 +130,17 @@ change has its own [validation evidence](evidence/issue-175/apply-review/README.
 The later X/keep-open review change is recorded
 [separately](evidence/issue-175/dialog-review/README.md).
 
-## Owner verification before acceptance
+## Owner verification for issue #255
+
+1. Hover every visible binding button, Clear button, row label, category
+   heading, Reset Defaults, Cancel, Apply and X. Scroll to later rows and
+   repeat: no tooltip should appear anywhere in this window.
+2. Rebind, clear, resolve a duplicate, Apply, Cancel and Reset Defaults. Restart
+   Wavez and confirm saved bindings load correctly.
+3. Hover Frame Scene or Reset Camera in the main shell. Their explanatory
+   tooltips should still appear outside the Keyboard Shortcuts window.
+
+## Original #175 owner verification record
 
 1. Launch build 17 on the normal owner profile. Check Help has only About WAVEZ,
    and Edit → Preferences → Keyboard Shortcuts opens the custom editor. Review

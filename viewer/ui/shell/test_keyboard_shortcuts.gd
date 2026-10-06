@@ -7,6 +7,7 @@ var output := ""
 var restart := false
 var speed_only := false
 var orbit_only := false
+var tooltip_only := false
 var checks := 0
 var failures: Array[String] = []
 var layouts: Array = []
@@ -83,6 +84,34 @@ func navigation_review(viewer, shell, label: String) -> void:
 	check(modes.is_item_checked(0) and not modes.is_item_checked(1), label + " Navigate checks reflect the independent final states")
 func picture(name: String) -> void:
 	if DisplayServer.get_name() != "headless": root.get_texture().get_image().save_png(output.path_join(name + ".png"))
+func check_no_dialog_tooltips(dialog, context: String) -> void:
+	var controls: Array = [dialog]
+	controls.append_array(dialog.find_children("*", "Control", true, false))
+	var offenders: Array[String] = []
+	for control in controls:
+		if not control.tooltip_text.is_empty(): offenders.append(str(control.get_path()))
+	check(controls.size() >= Bindings.ACTIONS.size() * 4 and offenders.is_empty(), context + ": all shortcut rows, headings, footer and close controls have no tooltip text " + str(offenders))
+func tooltip_review(shell) -> void:
+	shell.edit_shortcuts(); await settle()
+	var dialog = shell.shortcuts_editor
+	check(dialog.visible and dialog.rows.size() == Bindings.ACTIONS.size(), "Keyboard Shortcuts opens with every action")
+	check_no_dialog_tooltips(dialog, "Initial dialog")
+	check(not shell.navigation.get_child(1).tooltip_text.is_empty(), "Outside Reset Camera control keeps its tooltip")
+	if DisplayServer.get_name() != "headless":
+		Input.warp_mouse(dialog.rows.reset_camera.key.get_global_rect().get_center())
+		await get_tree().create_timer(.7).timeout
+		picture("shortcuts-hover-no-tooltip")
+	dialog.start_capture("reset_camera"); check_no_dialog_tooltips(dialog, "Listening for a key")
+	key(KEY_ESCAPE)
+	dialog.clear_binding("reset_camera"); check_no_dialog_tooltips(dialog, "After Clear")
+	dialog.start_capture("frame_scene"); key(KEY_R)
+	check(dialog.staged.reset_camera == 0 and dialog.staged.frame_scene == KEY_R, "Conflicting key transfers in draft")
+	check_no_dialog_tooltips(dialog, "After key transfer")
+	dialog.reset.pressed.emit(); check_no_dialog_tooltips(dialog, "After Reset Defaults")
+	dialog.rows.previous_category.key.grab_focus(); await settle()
+	check(dialog.scroller.scroll_vertical > 0, "Last shortcut scrolls into view")
+	check_no_dialog_tooltips(dialog, "After scrolling")
+	dialog.dismiss()
 func wait_ready(viewer) -> void:
 	for i in 1000:
 		viewer.scene_layers.tick(.01)
@@ -196,6 +225,7 @@ func run() -> void:
 		if argument == "--shortcut-restart": restart = true
 		if argument == "--shortcut-speed-only": speed_only = true
 		if argument == "--shortcut-orbit-only": orbit_only = true
+		if argument == "--shortcut-tooltip-only": tooltip_only = true
 	if output.is_empty(): queue_free(); return
 	get_tree().create_timer(120).timeout.connect(func(): push_error("Shortcut tests timed out"); get_tree().quit(1))
 	await get_tree().process_frame
@@ -204,6 +234,9 @@ func run() -> void:
 		viewer = Viewer.new(); viewer.scene_prebuffer_enabled = false; root.add_child(viewer)
 	viewer.set_process(false)
 	var shell = viewer.shell
+	if tooltip_only:
+		await tooltip_review(shell)
+		finish(viewer); return
 	if speed_only:
 		await speed_shortcut_review(viewer, shell)
 		finish(viewer); return
@@ -217,6 +250,9 @@ func run() -> void:
 		var saved: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(output.path_join("saved-map.json")))
 		for action in saved: saved[action] = int(saved[action]) # JSON numbers decode as floats.
 		check(shell.shortcuts.active == saved, "Fresh application process restores every saved and unbound binding")
+		shell.edit_shortcuts(); await settle()
+		check_no_dialog_tooltips(shell.shortcuts_editor, "Restarted editor")
+		shell.shortcuts_editor.dismiss()
 		check(unique(shell.shortcuts.active), "Restart has no duplicate bindings")
 		check(shell.shortcuts.active.reset_camera == 0 and shell.shortcuts.active.frame_scene == KEY_R, "Duplicate transfer survives restart")
 		var restart_speed: float = viewer.free_camera_speed_scale
@@ -274,13 +310,14 @@ func run() -> void:
 	check(dialog.footer.is_ancestor_of(dialog.cancel) and dialog.footer.is_ancestor_of(dialog.apply_button) and not dialog.scroller.is_ancestor_of(dialog.footer), "Cancel and Apply remain in fixed footer")
 	check(dialog.apply_button.theme_type_variation == "PrimaryButton", "Apply is the primary action")
 	check(dialog.apply_button.disabled and not dialog.focus_order.has(dialog.apply_button), "Apply starts disabled and is excluded from keyboard traversal")
+	check_no_dialog_tooltips(dialog, "Initial editor")
 	dialog.apply_button.pressed.emit()
 	check(dialog.visible and not FileAccess.file_exists(shell.shortcuts.storage_path), "Unchanged draft cannot apply, close or create preferences")
 	dialog.reset.pressed.emit()
 	check(dialog.apply_button.disabled, "Reset Defaults leaves Apply disabled when defaults are already active")
 	check(not dialog.notice.visible and dialog.notice.custom_minimum_size.y == 0, "No permanent footer instructions or reserved helper-text space")
 	check(dialog.scroller.get_index() == 1, "Title leads directly into list without top instruction text")
-	check(dialog.rows.export_video.key.tooltip_text.contains("Open a compatible capture") and not dialog.rows.export_video.key.disabled, "Unavailable source action explains requirements while binding stays editable")
+	check(not dialog.rows.export_video.key.disabled, "Unavailable source action remains editable without a tooltip")
 	picture("shortcuts-overview")
 	var original: Dictionary = shell.shortcuts.active.duplicate()
 	dialog.start_capture("increase_camera_speed")
@@ -301,6 +338,7 @@ func run() -> void:
 	check(dialog.apply_button.disabled, "Capturing the current binding leaves Apply disabled")
 	dialog.clear_binding("reset_camera")
 	check(not dialog.apply_button.disabled, "Clearing a bound action enables Apply")
+	check_no_dialog_tooltips(dialog, "After Clear")
 	dialog.start_capture("reset_camera"); key(KEY_R)
 	check(dialog.apply_button.disabled, "Restoring the original binding disables Apply again")
 	viewer.yaw = 1.7; viewer._update_camera(); key(KEY_R)
@@ -311,6 +349,7 @@ func run() -> void:
 	check(not viewer.dragging and not viewer.resizing_panel, "Mouse release over modal editor still ends existing viewport drag")
 	dialog.start_capture("frame_scene"); key(KEY_R); await settle()
 	check(dialog.staged.frame_scene == KEY_R and dialog.staged.reset_camera == 0, "Duplicate capture immediately unbinds previous action without confirmation")
+	check_no_dialog_tooltips(dialog, "After duplicate transfer")
 	check(unique(dialog.staged) and shell.shortcuts.active == original, "Duplicate resolution is staged and active bindings remain intact")
 	check(not dialog.apply_button.disabled, "Duplicate transfer enables Apply")
 	dialog.start_capture("frame_scene"); key(KEY_F); dialog.start_capture("reset_camera"); key(KEY_R)
@@ -464,6 +503,7 @@ func run() -> void:
 		check(root.gui_get_focus_owner() == dialog.cancel, "Unchanged Shift Tab wraps to Cancel " + str(layout))
 		dialog.reset.pressed.emit()
 		check(not dialog.apply_button.disabled, "Reset Defaults enables Apply when active map differs " + str(layout))
+		check_no_dialog_tooltips(dialog, "After Reset Defaults " + str(layout))
 		check(dialog.staged.auto_orbit == KEY_O and dialog.staged.free_camera == 0, "Reset Defaults retains O and Unbound for navigation " + str(layout))
 		dialog.apply_button.grab_focus(); key(KEY_TAB); await settle()
 		check(root.gui_get_focus_owner() == dialog.close_button, "Edited footer Tab wraps to X " + str(layout))
@@ -474,6 +514,7 @@ func run() -> void:
 		check(root.gui_get_focus_owner() == dialog.apply_button, "Shift Tab wraps back to footer " + str(layout))
 		dialog.rows.previous_category.key.grab_focus(); await settle()
 		check(dialog.scroller.scroll_vertical > 0 and dialog.scroller.get_global_rect().intersects(dialog.rows.previous_category.key.get_global_rect()), "Focus scrolls last action into view " + str(layout))
+		check_no_dialog_tooltips(dialog, "Scrolled to last row " + str(layout))
 		picture("shortcuts-"+str(layout[0].x)+"-"+str(layout[0].y)+"-"+str(layout[1]))
 		layouts.append({"window":str(root.size),"scale":root.content_scale_factor,"logical":str(extent),"panel":str(dialog.panel.get_global_rect()),"scroll_height":dialog.scroller.size.y})
 		dialog.dismiss()
@@ -487,6 +528,7 @@ func run() -> void:
 	check(dialog.visible and shell.shortcuts.active == prior and dialog.notice.text.contains("Could not save"), "Failed persistence keeps dialog open and prior active bindings intact")
 	shell.shortcuts.storage_path = path; dialog.commit(); await settle()
 	check(dialog.visible and dialog.apply_button.disabled and not dialog.notice.visible and dialog.staged == shell.shortcuts.active, "Successful save retry clears error and keeps a clean editor open")
+	check_no_dialog_tooltips(dialog, "After Apply")
 	check(shell.shortcuts.active.reset_camera == 0 and shell.shortcuts.active.frame_scene == KEY_R, "Final Apply stores transferred duplicate and explicit Unbound")
 	dialog.reset.pressed.emit(); dialog.commit()
 	check(shell.shortcuts.active.frame_scene == KEY_F and shell.shortcuts.active.free_camera == 0, "Reset Defaults restores F to Frame Scene before owner reproduction")

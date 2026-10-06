@@ -1,9 +1,16 @@
 # Current status
 
+Issue #255 makes Edit → Preferences → Keyboard Shortcuts a tooltip-free window
+in candidate build 57. Binding buttons, Clear controls, labels, headings,
+footer actions and the close control use their visible text and focus state;
+tooltips elsewhere in Wavez remain available. Shortcut capture, conflict,
+Apply/Cancel, persistence and focus behavior are unchanged. See
+[Keyboard Shortcuts](KEYBOARD_SHORTCUTS.md).
+
 Issue #251 keeps the first Jobs row below the measured title/header area with
 8 px of container spacing and 16 px inside the scroll viewport so the first
 Open… focus ring is fully visible. The row order, actions, focus and scrolling
-stay as accepted in #237/#217/#219. Candidate build 56 awaits owner review. See
+stay as accepted in #237/#217/#219. Build 56 was owner-merged in PR #267. See
 [Jobs layout and owner checks](JOBS_LAYOUT.md).
 
 Issue #205 keeps the Cinematic background fixed to viewport coordinates as the
