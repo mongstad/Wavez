@@ -1,8 +1,9 @@
 # Current status
 
 Issue #251 keeps the first Jobs row below the measured title/header area with
-32 px of container spacing. The row order, actions, focus and scrolling stay
-as accepted in #237/#217/#219. Candidate build 56 awaits owner review. See
+8 px of container spacing and 16 px inside the scroll viewport so the first
+Open… focus ring is fully visible. The row order, actions, focus and scrolling
+stay as accepted in #237/#217/#219. Candidate build 56 awaits owner review. See
 [Jobs layout and owner checks](JOBS_LAYOUT.md).
 
 Issue #205 keeps the Cinematic background fixed to viewport coordinates as the

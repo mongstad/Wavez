@@ -25,3 +25,13 @@ and export inputs are small generated fixtures, not production data.
 
 Physical pointer hover, alternate desktop scaling and extended sessions remain
 for owner review. No packaged executable was built for this local layout change.
+
+## Owner correction: first focused Open… outline
+
+The owner supplied a closer screenshot showing that the first Open… button's
+focus outline was clipped at the scroll viewport's top edge. The initial 32 px
+header-to-viewport gap above did not address that edge and made the title area
+look too tall. The follow-up uses 8 px between header and viewport, then 16 px
+inside the viewport. It checks the focused button's distance from the clipping
+boundary. [Revised screenshots and validation](revision-2/README.md)
+record this correction; the initial evidence above remains unchanged.

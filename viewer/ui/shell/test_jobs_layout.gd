@@ -23,13 +23,14 @@ func picture(name: String) -> void:
 	if not output.is_empty():
 		root.get_texture().get_image().save_png(output.path_join(name + ".png"))
 
-func check_layout(ui, context: String) -> void:
+func check_layout(ui, context: String, active_video := false) -> void:
 	var header: HBoxContainer = ui.jobs_header_close.get_parent()
 	var scroll: ScrollContainer = ui.jobs_dialog.find_children("*", "ScrollContainer", true, false)[0]
 	var first_row: HBoxContainer = ui.job_rows["Video export"].open.get_parent()
 	var clearance: float = first_row.get_global_rect().position.y - header.get_global_rect().end.y
-	check(clearance >= 30 and clearance <= 34, context + ": full first row follows the measured header with 32 px clearance")
-	check(first_row.get_global_rect().position.y >= scroll.get_global_rect().position.y, context + ": first row is inside its viewport")
+	check(clearance >= 22 and clearance <= 26, context + ": full first row follows the measured header and viewport inset")
+	check(first_row.get_global_rect().position.y - scroll.get_global_rect().position.y >= 12, context + ": first row clears the clipped viewport edge")
+	check(ui.job_rows["Video export"].open.get_global_rect().position.y - scroll.get_global_rect().position.y >= 12, context + ": first Open focus ring has visible top clearance")
 	check((header.get_child(0) as Label).text == "Jobs" and ui.jobs_header_close.is_visible_in_tree(), context + ": title and header close remain visible")
 	check(Rect2(Vector2.ZERO, Vector2(ui.jobs_dialog.size)).encloses(ui.jobs_footer_close.get_global_rect()), context + ": footer Close stays inside the dialog")
 	var previous_bottom := -INF
@@ -46,7 +47,7 @@ func check_layout(ui, context: String) -> void:
 		if cancel_edge > -INF:
 			check(is_equal_approx(job.cancel.get_global_rect().end.x, cancel_edge), context + ": " + title + " Cancel column aligns")
 		cancel_edge = job.cancel.get_global_rect().end.x
-	check(ui.job_rows["Video export"].cancel.disabled, context + ": idle Video export Cancel remains disabled")
+	check(ui.job_rows["Video export"].cancel.disabled != active_video, context + ": Video export Cancel keeps its expected state")
 	if scroll.get_v_scroll_bar().visible:
 		check(scroll.get_v_scroll_bar().get_global_rect().position.x - cancel_edge >= 8, context + ": Cancel clears the scrollbar")
 
@@ -71,9 +72,7 @@ func run() -> void:
 	video.preparing = true; video.job_status = {"stage":"preparing", "detail":"Preparing export"}
 	ui.open_jobs(); await settle()
 	check(not ui.job_rows["Video export"].open.disabled and not ui.job_rows["Video export"].cancel.disabled and ui.job_rows["Video export"].open.has_focus(), "Preparing video keeps Open, Cancel and first-action focus")
-	var header: HBoxContainer = ui.jobs_header_close.get_parent()
-	var first: HBoxContainer = ui.job_rows["Video export"].open.get_parent()
-	check(first.get_global_rect().position.y - header.get_global_rect().end.y >= 30, "Preparing video row clears the header")
+	check_layout(ui, "Preparing video", true)
 	picture("jobs-preparing-video")
 	ui.jobs_dialog.hide(); video.preparing = false; video.job_status.clear(); ui.refresh()
 	var scroll: ScrollContainer = ui.jobs_dialog.find_children("*", "ScrollContainer", true, false)[0]
