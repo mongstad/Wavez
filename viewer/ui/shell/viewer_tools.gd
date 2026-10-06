@@ -116,6 +116,15 @@ func open(title: String) -> void:
 	else:
 		done_button.reparent(actions_row); actions_row.show()
 	share_analysis(title)
+	var scroll: ScrollContainer = content.get_parent()
+	if title == "Performance":
+		# Focus boxes extend beyond editor bounds; reserve space inside the clip.
+		var padding := StyleBoxEmpty.new()
+		for side in ["left", "top", "right", "bottom"]: padding.set("content_margin_" + side, 8)
+		scroll.add_theme_stylebox_override("panel", padding)
+		performance_rows(body)
+	else:
+		scroll.remove_theme_stylebox_override("panel")
 	shorten_copy(body)
 	shorten_copy(footer)
 	Layout.fit(body)
@@ -137,7 +146,19 @@ func open(title: String) -> void:
 	var chrome_height := 32 + 32 + 32 + 30 + footer_height
 	var desired := Vector2i(width,clampi(ceili(content_height + chrome_height),240,620))
 	window.popup_centered(Vector2i(minf(desired.x,extent.x-32),minf(desired.y,extent.y-32)))
+	if title == "Performance": fit_performance.call_deferred()
 	refresh_context()
+
+func fit_performance() -> void:
+	# Measure after row layout/wrapping settles, rather than retaining stale minima.
+	await get_tree().process_frame
+	await get_tree().process_frame
+	if not window.visible or current != "Performance": return
+	var scroll: ScrollContainer = content.get_parent()
+	var chrome := window.size.y - scroll.size.y
+	var height := form("Performance").get_combined_minimum_size().y + chrome + scroll.get_theme_stylebox("panel").get_minimum_size().y
+	var extent: Vector2 = viewer.get_viewport().get_visible_rect().size
+	window.size.y = clampi(ceili(height), window.min_size.y, mini(620, int(extent.y) - 32))
 
 func reversed_shared() -> Array:
 	var controls := shared_diagnostics.duplicate(); controls.reverse(); return controls
@@ -302,8 +323,31 @@ func compose_tasks() -> void:
 		for child in form(title).get_children():child.reparent(body)
 		particle_tools[title] = body
 	# Performance budgets have distinct ownership; labels are not a process ceiling.
+	# Keep reader measurements available to File Details without inline diagnostics.
+	viewer.cache_label.reparent(storage); viewer.cache_label.hide()
 	var cache_title := Layout.label(form("Performance"),"Decoded cache");form("Performance").move_child(cache_title,0)
 	for title in ["Mapping","Geometry","Performance"]:Layout.fit(form(title))
+
+func performance_rows(parent: Node) -> void:
+	# Reuse existing controls and callbacks, including source-rebuilt layer forms.
+	if parent is VBoxContainer:
+		var children := parent.get_children()
+		for i in range(children.size() - 1):
+			var caption = children[i]
+			var editor = children[i + 1]
+			if caption is Label and (editor is SpinBox or editor is OptionButton) and caption.get_parent() == parent and editor.get_parent() == parent:
+				var row := HBoxContainer.new()
+				parent.add_child(row); parent.move_child(row, caption.get_index())
+				caption.reparent(row); editor.reparent(row)
+	for child in parent.get_children():
+		if child is HBoxContainer and child.get_child_count() == 2:
+			var caption = child.get_child(0)
+			var editor = child.get_child(1)
+			if caption is Label and (editor is SpinBox or editor is OptionButton):
+				caption.custom_minimum_size.x = 140
+				caption.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+				editor.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		performance_rows(child)
 
 func selection_shape() -> void:
 	var c = viewer.selection_controller;var k: int = c.kind.selected

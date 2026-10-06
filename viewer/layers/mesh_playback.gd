@@ -29,6 +29,8 @@ func setup(owner) -> void:
 	if enabled and worker.start() != OK:enabled = false
 	if enabled:
 		label = Label.new();label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART;layers.performance_panel.add_child(label)
+		# Retain the updated diagnostic text without exposing internal cache telemetry.
+		label.hide()
 func close() -> void:worker.close();staged.clear();cpu_limit = 0;budget_report.clear()
 func invalidate() -> void:
 	worker.cancel();token = "";request_signature = "";budget_signature = "";staged.clear();buffering = false;pending_time = null;error = ""
