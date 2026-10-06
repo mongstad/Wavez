@@ -1,5 +1,11 @@
 # Current status
 
+Issue #222 presents Performance labels beside their existing budget and
+preparation editors in candidate build 61. Decoded-cache diagnostics move off
+the normal form while remaining available in File → Details. Clear decoded
+cache and all budget callbacks retain their existing behavior. See
+[Performance dialog](PERFORMANCE_DIALOG.md) for validation and owner checks.
+
 Issue #271 adds resting-pin violet title and section-header accents through
 the shared theme in candidate build 60. Keyboard Shortcuts, Video Export and
 existing shared dialog/panel headings inherit the treatment; layout, controls,

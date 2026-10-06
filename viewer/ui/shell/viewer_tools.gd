@@ -116,6 +116,7 @@ func open(title: String) -> void:
 	else:
 		done_button.reparent(actions_row); actions_row.show()
 	share_analysis(title)
+	if title == "Performance": performance_rows(body)
 	shorten_copy(body)
 	shorten_copy(footer)
 	Layout.fit(body)
@@ -302,8 +303,31 @@ func compose_tasks() -> void:
 		for child in form(title).get_children():child.reparent(body)
 		particle_tools[title] = body
 	# Performance budgets have distinct ownership; labels are not a process ceiling.
+	# Keep reader measurements available to File Details without inline diagnostics.
+	viewer.cache_label.reparent(storage); viewer.cache_label.hide()
 	var cache_title := Layout.label(form("Performance"),"Decoded cache");form("Performance").move_child(cache_title,0)
 	for title in ["Mapping","Geometry","Performance"]:Layout.fit(form(title))
+
+func performance_rows(parent: Node) -> void:
+	# Reuse existing controls and callbacks, including source-rebuilt layer forms.
+	if parent is VBoxContainer:
+		var children := parent.get_children()
+		for i in range(children.size() - 1):
+			var caption = children[i]
+			var editor = children[i + 1]
+			if caption is Label and (editor is SpinBox or editor is OptionButton) and caption.get_parent() == parent and editor.get_parent() == parent:
+				var row := HBoxContainer.new()
+				parent.add_child(row); parent.move_child(row, caption.get_index())
+				caption.reparent(row); editor.reparent(row)
+	for child in parent.get_children():
+		if child is HBoxContainer and child.get_child_count() == 2:
+			var caption = child.get_child(0)
+			var editor = child.get_child(1)
+			if caption is Label and (editor is SpinBox or editor is OptionButton):
+				caption.custom_minimum_size.x = 140
+				caption.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+				editor.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		performance_rows(child)
 
 func selection_shape() -> void:
 	var c = viewer.selection_controller;var k: int = c.kind.selected

@@ -39,6 +39,7 @@ Start with:
 - [Paused opening and automatic preparation](docs/PAUSED_PREPARATION.md)
 - [Dialog title and section hierarchy](docs/DIALOG_HIERARCHY.md)
 - [File and Tools dialog layout](docs/DIALOG_COHERENCE.md)
+- [Performance dialog](docs/PERFORMANCE_DIALOG.md)
 - [Current Tools functional audit](docs/TOOLS_FUNCTIONAL_AUDIT.md)
 - [Session action and error logs](docs/SESSION_LOGGING.md)
 - [File Locations preferences](docs/FILE_LOCATIONS.md)
