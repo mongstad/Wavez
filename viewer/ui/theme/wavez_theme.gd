@@ -118,6 +118,8 @@ func _init() -> void:
 		set_type_variation(role, "Label")
 	for pair in [["ApplicationTitle", TOKENS.title_size], ["PanelTitle", TOKENS.panel_size], ["SectionTitle", TOKENS.body_size]]:
 		set_font_size("font_size", pair[0], pair[1]); set_font("font", pair[0], semibold)
+	set_color("font_color", "PanelTitle", c(&"text.title"))
+	set_color("font_color", "SectionTitle", c(&"text.section"))
 	set_font("font", "SectionHeader", semibold)
 	for role in ["HelpLabel", "StatusLabel"]: set_font_size("font_size", role, TOKENS.help_size)
 	for role in ["PropertyLabel", "SecondaryLabel"]: set_color("font_color", role, c(&"text.secondary"))
@@ -243,7 +245,7 @@ func _init() -> void:
 	set_stylebox("embedded_unfocused_border", "Window", window_border)
 	set_constant("title_height", "Window", 32)
 	set_icon("close", "Window", icon_named("close")); set_icon("close_pressed", "Window", icon_named("close"))
-	set_color("title_color", "Window", c(&"text.primary"))
+	set_color("title_color", "Window", c(&"text.title"))
 	set_font_size("title_font_size", "Window", TOKENS.panel_size)
 	for severity in ["info", "success", "warning", "error"]:
 		var role: String = severity.capitalize() + "Message"

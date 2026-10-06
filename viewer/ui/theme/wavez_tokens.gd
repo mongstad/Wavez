@@ -9,6 +9,8 @@ extends Resource
 	&"surface.hover": Color("2c3c54"), &"surface.pressed": Color("354862"),
 	&"text.primary": Color("e6eaf0"), &"text.secondary": Color("b9c1cc"),
 	&"text.muted": Color("9aa5b3"), &"text.disabled": Color("737c89"),
+	# Quiet hierarchy cues; independent of interaction and semantic colors.
+	&"text.title": Color("c3bde2"), &"text.section": Color("aaa6c5"),
 	&"text.numeric": Color("e6eaf0"), &"border.subtle": Color("465b76"),
 	&"border.control": Color("798fae"), &"focus.ring": Color("a8c9ff"),
 	&"accent.primary": Color("8cb8ff"), &"accent.foreground": Color("142035"),
