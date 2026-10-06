@@ -1,0 +1,59 @@
+{
+  "summary": null,
+  "cases": [
+    {
+      "case": "windowed-active-menu",
+      "closed.json": {
+        "cancel_requested": false,
+        "job_directory": "/tmp/wavez-124-package-forward/lifecycle/windowed-active-menu/.wavez-export-1791318626-2155787",
+        "normal_teardown": true
+      },
+      "native.txt": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\nVulkan 1.4.351 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3070 Ti\n\nERROR: `--path` was specified on the command line, but this Godot binary was compiled without support for path overrides. Aborting.\nTo be able to use it, use the `disable_path_overrides=no` SCons option when compiling Godot.\n\n   at: setup (main/main.cpp:1782)\nERROR: Export is active at exit\n   at: push_error (core/variant/variant_utility.cpp:1023)\n   GDScript backtrace (most recent call first):\n       [0] require (res://review_exit.gd:17)\n       [1] run (res://review_exit.gd:38)\n"
+    },
+    {
+      "case": "windowed-idle-button",
+      "before.json": {
+        "exit_enabled": true,
+        "job_directory": "",
+        "mode": "windowed",
+        "work": "idle"
+      },
+      "closed.json": {
+        "cancel_requested": false,
+        "job_directory": "",
+        "normal_teardown": true
+      },
+      "native.txt": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\nVulkan 1.4.351 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3070 Ti\n\n"
+    },
+    {
+      "case": "windowed-idle-menu",
+      "before.json": {
+        "exit_enabled": true,
+        "job_directory": "",
+        "mode": "windowed",
+        "work": "idle"
+      },
+      "closed.json": {
+        "cancel_requested": false,
+        "job_directory": "",
+        "normal_teardown": true
+      },
+      "native.txt": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\nVulkan 1.4.351 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3070 Ti\n\n"
+    },
+    {
+      "case": "windowed-idle-native",
+      "before.json": {
+        "exit_enabled": true,
+        "job_directory": "",
+        "mode": "windowed",
+        "work": "idle"
+      },
+      "closed.json": {
+        "cancel_requested": false,
+        "job_directory": "",
+        "normal_teardown": true
+      },
+      "native.txt": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\nVulkan 1.4.351 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3070 Ti\n\n"
+    }
+  ]
+}

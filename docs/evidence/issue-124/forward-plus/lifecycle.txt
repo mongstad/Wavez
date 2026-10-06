@@ -1,0 +1,1 @@
+Application exit: 10 native process cases PASS (forward_plus), including 5 graceful worker cancellations

@@ -1,0 +1,277 @@
+{
+  "summary": {
+    "renderer": "forward_plus",
+    "packaged": false,
+    "runs": [
+      {
+        "mode": "windowed",
+        "work": "idle",
+        "route": "menu",
+        "exit_code": 0,
+        "teardown": true,
+        "cancelled": false
+      },
+      {
+        "mode": "windowed",
+        "work": "idle",
+        "route": "button",
+        "exit_code": 0,
+        "teardown": true,
+        "cancelled": false
+      },
+      {
+        "mode": "windowed",
+        "work": "idle",
+        "route": "native",
+        "exit_code": 0,
+        "teardown": true,
+        "cancelled": false
+      },
+      {
+        "mode": "windowed",
+        "work": "active",
+        "route": "menu",
+        "exit_code": 0,
+        "teardown": true,
+        "cancelled": true
+      },
+      {
+        "mode": "windowed",
+        "work": "active",
+        "route": "button",
+        "exit_code": 0,
+        "teardown": true,
+        "cancelled": true
+      },
+      {
+        "mode": "windowed",
+        "work": "active",
+        "route": "native",
+        "exit_code": 0,
+        "teardown": true,
+        "cancelled": true
+      },
+      {
+        "mode": "maximized",
+        "work": "idle",
+        "route": "menu",
+        "exit_code": 0,
+        "teardown": true,
+        "cancelled": false
+      },
+      {
+        "mode": "maximized",
+        "work": "active",
+        "route": "menu",
+        "exit_code": 0,
+        "teardown": true,
+        "cancelled": true
+      },
+      {
+        "mode": "fullscreen",
+        "work": "idle",
+        "route": "menu",
+        "exit_code": 0,
+        "teardown": true,
+        "cancelled": false
+      },
+      {
+        "mode": "fullscreen",
+        "work": "active",
+        "route": "menu",
+        "exit_code": 0,
+        "teardown": true,
+        "cancelled": true
+      }
+    ],
+    "source_hash_unchanged": "d2c82c4e3829b58650d8d300808a249f6419a94b30595fc89fc199c77de37bb0",
+    "failures": []
+  },
+  "cases": [
+    {
+      "case": "fullscreen-active-menu",
+      "before.json": {
+        "exit_enabled": true,
+        "job_directory": "/tmp/wavez-124-forward-r2/lifecycle/fullscreen-active-menu/.wavez-export-1791318457-2312977",
+        "mode": "fullscreen",
+        "work": "active"
+      },
+      "closed.json": {
+        "cancel_requested": true,
+        "job_directory": "/tmp/wavez-124-forward-r2/lifecycle/fullscreen-active-menu/.wavez-export-1791318457-2312977",
+        "normal_teardown": true
+      },
+      "confirmation.json": {
+        "background_reopened": true,
+        "cancel_retained_worker": true,
+        "renderer_pid": 330607,
+        "route": "menu",
+        "safe_default": true
+      },
+      "native.txt": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\nVulkan 1.4.351 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3070 Ti\n\nGodot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\nVulkan 1.4.351 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3070 Ti\n\nWAVEZ export: Export cancelled during source preparation.\n"
+    },
+    {
+      "case": "fullscreen-idle-menu",
+      "before.json": {
+        "exit_enabled": true,
+        "job_directory": "",
+        "mode": "fullscreen",
+        "work": "idle"
+      },
+      "closed.json": {
+        "cancel_requested": false,
+        "job_directory": "",
+        "normal_teardown": true
+      },
+      "native.txt": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\nVulkan 1.4.351 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3070 Ti\n\n"
+    },
+    {
+      "case": "maximized-active-menu",
+      "before.json": {
+        "exit_enabled": true,
+        "job_directory": "/tmp/wavez-124-forward-r2/lifecycle/maximized-active-menu/.wavez-export-1791318449-2364760",
+        "mode": "maximized",
+        "work": "active"
+      },
+      "closed.json": {
+        "cancel_requested": true,
+        "job_directory": "/tmp/wavez-124-forward-r2/lifecycle/maximized-active-menu/.wavez-export-1791318449-2364760",
+        "normal_teardown": true
+      },
+      "confirmation.json": {
+        "background_reopened": true,
+        "cancel_retained_worker": true,
+        "renderer_pid": 330357,
+        "route": "menu",
+        "safe_default": true
+      },
+      "native.txt": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\nVulkan 1.4.351 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3070 Ti\n\nGodot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\nVulkan 1.4.351 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3070 Ti\n\nWAVEZ export: Export cancelled during source preparation.\n"
+    },
+    {
+      "case": "maximized-idle-menu",
+      "before.json": {
+        "exit_enabled": true,
+        "job_directory": "",
+        "mode": "maximized",
+        "work": "idle"
+      },
+      "closed.json": {
+        "cancel_requested": false,
+        "job_directory": "",
+        "normal_teardown": true
+      },
+      "native.txt": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\nVulkan 1.4.351 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3070 Ti\n\n"
+    },
+    {
+      "case": "windowed-active-button",
+      "before.json": {
+        "exit_enabled": true,
+        "job_directory": "/tmp/wavez-124-forward-r2/lifecycle/windowed-active-button/.wavez-export-1791318436-2398801",
+        "mode": "windowed",
+        "work": "active"
+      },
+      "closed.json": {
+        "cancel_requested": true,
+        "job_directory": "/tmp/wavez-124-forward-r2/lifecycle/windowed-active-button/.wavez-export-1791318436-2398801",
+        "normal_teardown": true
+      },
+      "confirmation.json": {
+        "background_reopened": true,
+        "cancel_retained_worker": true,
+        "renderer_pid": 329904,
+        "route": "button",
+        "safe_default": true
+      },
+      "native.txt": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\nVulkan 1.4.351 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3070 Ti\n\nGodot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\nVulkan 1.4.351 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3070 Ti\n\nWAVEZ export: Export cancelled during source preparation.\n"
+    },
+    {
+      "case": "windowed-active-menu",
+      "before.json": {
+        "exit_enabled": true,
+        "job_directory": "/tmp/wavez-124-forward-r2/lifecycle/windowed-active-menu/.wavez-export-1791318431-2358607",
+        "mode": "windowed",
+        "work": "active"
+      },
+      "closed.json": {
+        "cancel_requested": true,
+        "job_directory": "/tmp/wavez-124-forward-r2/lifecycle/windowed-active-menu/.wavez-export-1791318431-2358607",
+        "normal_teardown": true
+      },
+      "confirmation.json": {
+        "background_reopened": true,
+        "cancel_retained_worker": true,
+        "renderer_pid": 329700,
+        "route": "menu",
+        "safe_default": true
+      },
+      "native.txt": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\nVulkan 1.4.351 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3070 Ti\n\nGodot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\nVulkan 1.4.351 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3070 Ti\n\nWAVEZ export: Export cancelled during source preparation.\n"
+    },
+    {
+      "case": "windowed-active-native",
+      "before.json": {
+        "exit_enabled": true,
+        "job_directory": "/tmp/wavez-124-forward-r2/lifecycle/windowed-active-native/.wavez-export-1791318441-2409376",
+        "mode": "windowed",
+        "work": "active"
+      },
+      "closed.json": {
+        "cancel_requested": true,
+        "job_directory": "/tmp/wavez-124-forward-r2/lifecycle/windowed-active-native/.wavez-export-1791318441-2409376",
+        "normal_teardown": true
+      },
+      "confirmation.json": {
+        "background_reopened": true,
+        "cancel_retained_worker": true,
+        "renderer_pid": 330109,
+        "route": "native",
+        "safe_default": true
+      },
+      "native.txt": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\nVulkan 1.4.351 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3070 Ti\n\nGodot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\nVulkan 1.4.351 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3070 Ti\n\nWAVEZ export: Export cancelled during source preparation.\n"
+    },
+    {
+      "case": "windowed-idle-button",
+      "before.json": {
+        "exit_enabled": true,
+        "job_directory": "",
+        "mode": "windowed",
+        "work": "idle"
+      },
+      "closed.json": {
+        "cancel_requested": false,
+        "job_directory": "",
+        "normal_teardown": true
+      },
+      "native.txt": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\nVulkan 1.4.351 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3070 Ti\n\n"
+    },
+    {
+      "case": "windowed-idle-menu",
+      "before.json": {
+        "exit_enabled": true,
+        "job_directory": "",
+        "mode": "windowed",
+        "work": "idle"
+      },
+      "closed.json": {
+        "cancel_requested": false,
+        "job_directory": "",
+        "normal_teardown": true
+      },
+      "native.txt": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\nVulkan 1.4.351 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3070 Ti\n\n"
+    },
+    {
+      "case": "windowed-idle-native",
+      "before.json": {
+        "exit_enabled": true,
+        "job_directory": "",
+        "mode": "windowed",
+        "work": "idle"
+      },
+      "closed.json": {
+        "cancel_requested": false,
+        "job_directory": "",
+        "normal_teardown": true
+      },
+      "native.txt": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\nVulkan 1.4.351 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3070 Ti\n\n"
+    }
+  ]
+}

@@ -1,5 +1,12 @@
 # Current status
 
+Issue #124 warns before application exit when any shared Jobs row is active in
+candidate build 66, pending owner review. File → Exit, chrome close and native
+close share a compact Exit WAVEZ/Cancel dialog with Cancel focused by default.
+Dismissal leaves work running; confirmed exit preserves existing teardown and
+cancellation. See [exiting with active jobs](EXIT_WITH_ACTIVE_JOBS.md) and
+[focused evidence](evidence/issue-124/README.md).
+
 Issue #146 adds live visible-order Tab/Shift+Tab traversal in candidate build 65,
 pending owner review. Hiding a focused region advances beyond its entire control
 group; revealing it does not steal focus. Dynamic Simulation content, Fullscreen,

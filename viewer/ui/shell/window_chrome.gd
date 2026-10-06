@@ -11,6 +11,7 @@ var grips: Array[Control] = []
 var minimized_from := -1
 var minimized_immersive := false
 var minimize_lost_focus := false
+var exit_confirmation
 
 func setup(owner_shell, row: HBoxContainer) -> void:
 	shell = owner_shell
@@ -24,6 +25,8 @@ func setup(owner_shell, row: HBoxContainer) -> void:
 		action.custom_minimum_size = Vector2(32, 32); action.theme_type_variation = "IconAction"
 	if shell.viewer.offline_instance:
 		set_process_input(false); return
+	get_tree().auto_accept_quit = false
+	get_window().close_requested.connect(request_close)
 	get_window().borderless = true
 	get_window().min_size = Vector2i(970, 600)
 	# The shell's coalesced viewport layout also refreshes these grips and icons.
@@ -111,6 +114,17 @@ func _input(event: InputEvent) -> void:
 			get_viewport().set_input_as_handled()
 
 func request_close() -> void:
-	# File → Exit and the window close button share normal SceneTree teardown.
+	if exit_confirmation != null and exit_confirmation.visible: return
+	if shell.status_ui.has_active_jobs():
+		if exit_confirmation == null:
+			exit_confirmation = preload("res://ui/shell/exit_confirmation.gd").new()
+			add_child(exit_confirmation); exit_confirmation.setup(shell)
+			exit_confirmation.exit_requested.connect(close_application)
+		exit_confirmation.open()
+		return
+	close_application()
+
+func close_application() -> void:
+	# File → Exit, chrome X and native close share the existing SceneTree teardown.
 	if shell.viewer.session_log != null: shell.viewer.session_log.record("UI", "Window.Close", true)
 	get_tree().quit()

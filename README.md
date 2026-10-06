@@ -30,6 +30,7 @@ Start with:
 - [Quickstart](QUICKSTART.md)
 - [Editable Keyboard Shortcuts](docs/KEYBOARD_SHORTCUTS.md)
 - [Visibility-aware keyboard focus](docs/FOCUS_NAVIGATION.md)
+- [Exiting with active jobs](docs/EXIT_WITH_ACTIVE_JOBS.md)
 - [Free-look steering and manual camera orbit](docs/MANUAL_CAMERA_ORBIT.md)
 - [Viewport cursor visibility](docs/VIEWPORT_CURSOR.md)
 - [Screen-fixed cinematic background](docs/CINEMATIC_BACKGROUND.md)

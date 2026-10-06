@@ -47,9 +47,13 @@ repository link and **Licenses and notices** remain in About.
 
 **File → Exit** is the final File-menu command, below a separator. It is available
 with or without a capture and uses the same shutdown function as the window's
-close button. Normal reader, preparation, analysis and export cleanup runs;
-active export workers receive the existing graceful cancellation request.
-The current close path has no additional application-exit confirmation.
+close button and native Window close request. If a shared Jobs operation is
+active, a confirmation offers **Exit WAVEZ** and **Cancel**, with Cancel focused
+by default. Cancel, Escape and dismissal leave the viewer and jobs running.
+Without active work, exit is immediate. Confirmed exit runs normal reader,
+preparation, analysis and export cleanup; active export workers receive their
+existing graceful cancellation request. Closing a job/details form does not
+trigger application exit. See [the exit contract](EXIT_WITH_ACTIVE_JOBS.md).
 In Fullscreen, reveal the top bar to access File.
 
 The accepted [issue-41 shell](UX3_SHELL.md) hosts the

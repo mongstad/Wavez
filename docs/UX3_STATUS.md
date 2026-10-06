@@ -1,5 +1,11 @@
 # UX3 persistent status and Jobs — issue #43
 
+Issue #124 adds [application-exit confirmation](EXIT_WITH_ACTIVE_JOBS.md) in
+candidate build 66. The exit gate reads the existing active Jobs rows; it does
+not introduce job tracking or change per-job cancellation. Cancelling/dismissing
+the prompt leaves work running, while confirmed exit uses existing teardown.
+The original implementation and review records below remain historical.
+
 Current #147 update: **File → Details…** opens the existing status/source dialog.
 The persistent status Details button and passive capture filename are removed;
 readiness, Jobs and retained diagnostics keep their existing ownership. See
