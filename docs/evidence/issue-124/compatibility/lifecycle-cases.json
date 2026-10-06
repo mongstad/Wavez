@@ -1,0 +1,277 @@
+{
+  "summary": {
+    "renderer": "gl_compatibility",
+    "packaged": false,
+    "runs": [
+      {
+        "mode": "windowed",
+        "work": "idle",
+        "route": "menu",
+        "exit_code": 0,
+        "teardown": true,
+        "cancelled": false
+      },
+      {
+        "mode": "windowed",
+        "work": "idle",
+        "route": "button",
+        "exit_code": 0,
+        "teardown": true,
+        "cancelled": false
+      },
+      {
+        "mode": "windowed",
+        "work": "idle",
+        "route": "native",
+        "exit_code": 0,
+        "teardown": true,
+        "cancelled": false
+      },
+      {
+        "mode": "windowed",
+        "work": "active",
+        "route": "menu",
+        "exit_code": 0,
+        "teardown": true,
+        "cancelled": true
+      },
+      {
+        "mode": "windowed",
+        "work": "active",
+        "route": "button",
+        "exit_code": 0,
+        "teardown": true,
+        "cancelled": true
+      },
+      {
+        "mode": "windowed",
+        "work": "active",
+        "route": "native",
+        "exit_code": 0,
+        "teardown": true,
+        "cancelled": true
+      },
+      {
+        "mode": "maximized",
+        "work": "idle",
+        "route": "menu",
+        "exit_code": 0,
+        "teardown": true,
+        "cancelled": false
+      },
+      {
+        "mode": "maximized",
+        "work": "active",
+        "route": "menu",
+        "exit_code": 0,
+        "teardown": true,
+        "cancelled": true
+      },
+      {
+        "mode": "fullscreen",
+        "work": "idle",
+        "route": "menu",
+        "exit_code": 0,
+        "teardown": true,
+        "cancelled": false
+      },
+      {
+        "mode": "fullscreen",
+        "work": "active",
+        "route": "menu",
+        "exit_code": 0,
+        "teardown": true,
+        "cancelled": true
+      }
+    ],
+    "source_hash_unchanged": "cf4a05bb2b89635b1d81924a59a3208bd6161819e2b08f0f9313c062cc9bf1a1",
+    "failures": []
+  },
+  "cases": [
+    {
+      "case": "fullscreen-active-menu",
+      "before.json": {
+        "exit_enabled": true,
+        "job_directory": "/tmp/wavez-124-compatibility/lifecycle/fullscreen-active-menu/.wavez-export-1791318506-2237426",
+        "mode": "fullscreen",
+        "work": "active"
+      },
+      "closed.json": {
+        "cancel_requested": true,
+        "job_directory": "/tmp/wavez-124-compatibility/lifecycle/fullscreen-active-menu/.wavez-export-1791318506-2237426",
+        "normal_teardown": true
+      },
+      "confirmation.json": {
+        "background_reopened": true,
+        "cancel_retained_worker": true,
+        "renderer_pid": 331978,
+        "route": "menu",
+        "safe_default": true
+      },
+      "native.txt": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\nOpenGL API 3.3.0 NVIDIA 615.71.09 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 3070 Ti\n\nGodot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\nOpenGL API 3.3.0 NVIDIA 615.71.09 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 3070 Ti\n\nWAVEZ export: Export cancelled during source preparation.\n"
+    },
+    {
+      "case": "fullscreen-idle-menu",
+      "before.json": {
+        "exit_enabled": true,
+        "job_directory": "",
+        "mode": "fullscreen",
+        "work": "idle"
+      },
+      "closed.json": {
+        "cancel_requested": false,
+        "job_directory": "",
+        "normal_teardown": true
+      },
+      "native.txt": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\nOpenGL API 3.3.0 NVIDIA 615.71.09 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 3070 Ti\n\n"
+    },
+    {
+      "case": "maximized-active-menu",
+      "before.json": {
+        "exit_enabled": true,
+        "job_directory": "/tmp/wavez-124-compatibility/lifecycle/maximized-active-menu/.wavez-export-1791318500-2127243",
+        "mode": "maximized",
+        "work": "active"
+      },
+      "closed.json": {
+        "cancel_requested": true,
+        "job_directory": "/tmp/wavez-124-compatibility/lifecycle/maximized-active-menu/.wavez-export-1791318500-2127243",
+        "normal_teardown": true
+      },
+      "confirmation.json": {
+        "background_reopened": true,
+        "cancel_retained_worker": true,
+        "renderer_pid": 331758,
+        "route": "menu",
+        "safe_default": true
+      },
+      "native.txt": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\nOpenGL API 3.3.0 NVIDIA 615.71.09 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 3070 Ti\n\nGodot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\nOpenGL API 3.3.0 NVIDIA 615.71.09 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 3070 Ti\n\nWAVEZ export: Export cancelled during source preparation.\n"
+    },
+    {
+      "case": "maximized-idle-menu",
+      "before.json": {
+        "exit_enabled": true,
+        "job_directory": "",
+        "mode": "maximized",
+        "work": "idle"
+      },
+      "closed.json": {
+        "cancel_requested": false,
+        "job_directory": "",
+        "normal_teardown": true
+      },
+      "native.txt": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\nOpenGL API 3.3.0 NVIDIA 615.71.09 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 3070 Ti\n\n"
+    },
+    {
+      "case": "windowed-active-button",
+      "before.json": {
+        "exit_enabled": true,
+        "job_directory": "/tmp/wavez-124-compatibility/lifecycle/windowed-active-button/.wavez-export-1791318489-2119646",
+        "mode": "windowed",
+        "work": "active"
+      },
+      "closed.json": {
+        "cancel_requested": true,
+        "job_directory": "/tmp/wavez-124-compatibility/lifecycle/windowed-active-button/.wavez-export-1791318489-2119646",
+        "normal_teardown": true
+      },
+      "confirmation.json": {
+        "background_reopened": true,
+        "cancel_retained_worker": true,
+        "renderer_pid": 331354,
+        "route": "button",
+        "safe_default": true
+      },
+      "native.txt": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\nOpenGL API 3.3.0 NVIDIA 615.71.09 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 3070 Ti\n\nGodot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\nOpenGL API 3.3.0 NVIDIA 615.71.09 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 3070 Ti\n\nWAVEZ export: Export cancelled during source preparation.\n"
+    },
+    {
+      "case": "windowed-active-menu",
+      "before.json": {
+        "exit_enabled": true,
+        "job_directory": "/tmp/wavez-124-compatibility/lifecycle/windowed-active-menu/.wavez-export-1791318485-2164002",
+        "mode": "windowed",
+        "work": "active"
+      },
+      "closed.json": {
+        "cancel_requested": true,
+        "job_directory": "/tmp/wavez-124-compatibility/lifecycle/windowed-active-menu/.wavez-export-1791318485-2164002",
+        "normal_teardown": true
+      },
+      "confirmation.json": {
+        "background_reopened": true,
+        "cancel_retained_worker": true,
+        "renderer_pid": 331172,
+        "route": "menu",
+        "safe_default": true
+      },
+      "native.txt": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\nOpenGL API 3.3.0 NVIDIA 615.71.09 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 3070 Ti\n\nGodot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\nOpenGL API 3.3.0 NVIDIA 615.71.09 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 3070 Ti\n\nWAVEZ export: Export cancelled during source preparation.\n"
+    },
+    {
+      "case": "windowed-active-native",
+      "before.json": {
+        "exit_enabled": true,
+        "job_directory": "/tmp/wavez-124-compatibility/lifecycle/windowed-active-native/.wavez-export-1791318493-2143248",
+        "mode": "windowed",
+        "work": "active"
+      },
+      "closed.json": {
+        "cancel_requested": true,
+        "job_directory": "/tmp/wavez-124-compatibility/lifecycle/windowed-active-native/.wavez-export-1791318493-2143248",
+        "normal_teardown": true
+      },
+      "confirmation.json": {
+        "background_reopened": true,
+        "cancel_retained_worker": true,
+        "renderer_pid": 331533,
+        "route": "native",
+        "safe_default": true
+      },
+      "native.txt": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\nOpenGL API 3.3.0 NVIDIA 615.71.09 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 3070 Ti\n\nGodot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\nOpenGL API 3.3.0 NVIDIA 615.71.09 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 3070 Ti\n\nWAVEZ export: Export cancelled during source preparation.\n"
+    },
+    {
+      "case": "windowed-idle-button",
+      "before.json": {
+        "exit_enabled": true,
+        "job_directory": "",
+        "mode": "windowed",
+        "work": "idle"
+      },
+      "closed.json": {
+        "cancel_requested": false,
+        "job_directory": "",
+        "normal_teardown": true
+      },
+      "native.txt": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\nOpenGL API 3.3.0 NVIDIA 615.71.09 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 3070 Ti\n\n"
+    },
+    {
+      "case": "windowed-idle-menu",
+      "before.json": {
+        "exit_enabled": true,
+        "job_directory": "",
+        "mode": "windowed",
+        "work": "idle"
+      },
+      "closed.json": {
+        "cancel_requested": false,
+        "job_directory": "",
+        "normal_teardown": true
+      },
+      "native.txt": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\nOpenGL API 3.3.0 NVIDIA 615.71.09 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 3070 Ti\n\n"
+    },
+    {
+      "case": "windowed-idle-native",
+      "before.json": {
+        "exit_enabled": true,
+        "job_directory": "",
+        "mode": "windowed",
+        "work": "idle"
+      },
+      "closed.json": {
+        "cancel_requested": false,
+        "job_directory": "",
+        "normal_teardown": true
+      },
+      "native.txt": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\nOpenGL API 3.3.0 NVIDIA 615.71.09 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 3070 Ti\n\n"
+    }
+  ]
+}

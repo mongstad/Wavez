@@ -1,0 +1,95 @@
+{
+  "checks": 183,
+  "failures": [],
+  "renderer": "gl_compatibility",
+  "packaged": false,
+  "source_sha256_unchanged": "3dd0a9c31840f48b80732f1b7f6ca15bc63f0db5b4695af2244fa6ccedd901db",
+  "lifecycle": {
+    "renderer": "gl_compatibility",
+    "packaged": false,
+    "runs": [
+      {
+        "mode": "windowed",
+        "work": "idle",
+        "route": "menu",
+        "exit_code": 0,
+        "teardown": true,
+        "cancelled": false
+      },
+      {
+        "mode": "windowed",
+        "work": "idle",
+        "route": "button",
+        "exit_code": 0,
+        "teardown": true,
+        "cancelled": false
+      },
+      {
+        "mode": "windowed",
+        "work": "idle",
+        "route": "native",
+        "exit_code": 0,
+        "teardown": true,
+        "cancelled": false
+      },
+      {
+        "mode": "windowed",
+        "work": "active",
+        "route": "menu",
+        "exit_code": 0,
+        "teardown": true,
+        "cancelled": true
+      },
+      {
+        "mode": "windowed",
+        "work": "active",
+        "route": "button",
+        "exit_code": 0,
+        "teardown": true,
+        "cancelled": true
+      },
+      {
+        "mode": "windowed",
+        "work": "active",
+        "route": "native",
+        "exit_code": 0,
+        "teardown": true,
+        "cancelled": true
+      },
+      {
+        "mode": "maximized",
+        "work": "idle",
+        "route": "menu",
+        "exit_code": 0,
+        "teardown": true,
+        "cancelled": false
+      },
+      {
+        "mode": "maximized",
+        "work": "active",
+        "route": "menu",
+        "exit_code": 0,
+        "teardown": true,
+        "cancelled": true
+      },
+      {
+        "mode": "fullscreen",
+        "work": "idle",
+        "route": "menu",
+        "exit_code": 0,
+        "teardown": true,
+        "cancelled": false
+      },
+      {
+        "mode": "fullscreen",
+        "work": "active",
+        "route": "menu",
+        "exit_code": 0,
+        "teardown": true,
+        "cancelled": true
+      }
+    ],
+    "source_hash_unchanged": "cf4a05bb2b89635b1d81924a59a3208bd6161819e2b08f0f9313c062cc9bf1a1",
+    "failures": []
+  }
+}

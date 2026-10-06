@@ -284,6 +284,11 @@ func update_jobs() -> void:
 	if jobs_button.text != caption: jobs_button.text = caption
 	jobs_button.tooltip_text = "Reopen jobs, progress, cancellation and retained output details" + ("\nVideo export: "+str(state.get("stage","Preparing")) if video.pid > 0 or video.preparing else "")
 
+func has_active_jobs() -> bool:
+	# Read the same live owners and active rows as Jobs, including cancellation ack.
+	update_jobs()
+	return job_rows.values().any(func(row): return row.active)
+
 func show_status() -> void:
 	live_details = ""
 	jobs_dialog.hide()

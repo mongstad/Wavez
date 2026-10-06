@@ -40,4 +40,26 @@ func run() -> void:
 	RenderingServer.force_draw(false)
 	if args[3] == "idle" and args[2] == "windowed": root.get_texture().get_image().save_png(output.path_join("menu.png"))
 	Job.write_json(output.path_join("before.json"),{"mode":args[2],"work":args[3],"job_directory":view.job_directory,"exit_enabled":not file.is_item_disabled(last)})
-	file.id_pressed.emit(file.get_item_id(last))
+	var route := args[4] if args.size()>4 else "menu"
+	if route == "button":
+		file.hide();view.shell.window_chrome.actions.get_child(2).pressed.emit()
+	elif route == "native":
+		file.hide()
+		if not require(root.close_requested.is_connected(view.shell.window_chrome.request_close),"Native Window close is connected to the application exit gate"):return
+		root.close_requested.emit()
+	else:file.id_pressed.emit(file.get_item_id(last))
+	if args[3] == "active":
+		for i in 4:await process_frame
+		var dialog = view.shell.window_chrome.exit_confirmation
+		if not require(dialog != null and dialog.visible and dialog.cancel_button.has_focus(),"Active export exits through safe confirmation"):return
+		if not require(OS.is_process_running(view.video_dialog.pid) and not FileAccess.file_exists(view.job_directory.path_join("cancel")),"Prompt itself does not cancel worker"):return
+		dialog.cancel_button.pressed.emit()
+		for i in 4:await process_frame
+		if not require(not dialog.visible and OS.is_process_running(view.video_dialog.pid) and not FileAccess.file_exists(view.job_directory.path_join("cancel")),"Cancel retains live worker"):return
+		view.shell.status_ui.open_jobs();view.shell.status_ui.job_rows["Video export"].open.pressed.emit()
+		if not require(view.video_dialog.visible and view.shell.status_ui.has_active_jobs(),"Backgrounded/reopened export remains authoritative active work"):return
+		view.video_dialog.hide();view.shell.window_chrome.request_close()
+		for i in 4:await process_frame
+		if not require(dialog.visible,"Reopened/backgrounded work still warns on exit"):return
+		Job.write_json(output.path_join("confirmation.json"),{"route":route,"safe_default":true,"cancel_retained_worker":true,"background_reopened":true,"renderer_pid":view.video_dialog.pid})
+		dialog.exit_button.pressed.emit()

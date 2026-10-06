@@ -1,0 +1,50 @@
+{
+  "summary": null,
+  "cases": [
+    {
+      "case": "windowed-idle-button",
+      "before.json": {
+        "exit_enabled": true,
+        "job_directory": "",
+        "mode": "windowed",
+        "work": "idle"
+      },
+      "closed.json": {
+        "cancel_requested": false,
+        "job_directory": "",
+        "normal_teardown": true
+      },
+      "native.txt": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\nVulkan 1.4.351 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3070 Ti\n\n"
+    },
+    {
+      "case": "windowed-idle-menu",
+      "before.json": {
+        "exit_enabled": true,
+        "job_directory": "",
+        "mode": "windowed",
+        "work": "idle"
+      },
+      "closed.json": {
+        "cancel_requested": false,
+        "job_directory": "",
+        "normal_teardown": true
+      },
+      "native.txt": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\nVulkan 1.4.351 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3070 Ti\n\n"
+    },
+    {
+      "case": "windowed-idle-native",
+      "before.json": {
+        "exit_enabled": true,
+        "job_directory": "",
+        "mode": "windowed",
+        "work": "idle"
+      },
+      "closed.json": {
+        "cancel_requested": false,
+        "job_directory": "",
+        "normal_teardown": true
+      },
+      "native.txt": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\nVulkan 1.4.351 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3070 Ti\n\nERROR: Exit timeout\n   at: push_error (core/variant/variant_utility.cpp:1023)\n   GDScript backtrace (most recent call first):\n       [0] <anonymous lambda> (res://ui/shell/test_exit_menu.gd:17)\n"
+    }
+  ]
+}
