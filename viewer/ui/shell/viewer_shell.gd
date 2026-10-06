@@ -13,6 +13,7 @@ var shortcut_hints_map := {}
 
 func edit_shortcuts() -> void:
 	if viewer.offline_instance: return
+	viewer._clear_manual_navigation()
 	if shortcuts_editor == null:
 		var canvas := CanvasLayer.new(); canvas.layer = 20; add_child(canvas)
 		shortcuts_editor = preload("res://ui/shell/keyboard_shortcuts_editor.gd").new()
@@ -21,6 +22,7 @@ func edit_shortcuts() -> void:
 
 func edit_file_locations() -> void:
 	if viewer.offline_instance: return
+	viewer._clear_manual_navigation()
 	if file_locations_dialog == null:
 		file_locations_dialog = preload("res://ui/shell/file_locations_dialog.gd").new()
 		add_child(file_locations_dialog)
@@ -31,6 +33,7 @@ func editing_shortcuts() -> bool:
 	return shortcuts_editor != null and shortcuts_editor.visible
 
 func invoke_shortcut_command(key: String) -> void:
+	viewer._clear_manual_navigation()
 	refresh_commands()
 	var entry: Dictionary = commands[key]
 	if not entry.popup.is_item_disabled(entry.index): entry.popup.id_pressed.emit(entry.index)
@@ -70,6 +73,7 @@ func refresh_shortcut_hints() -> void:
 
 func edit_orbit_center() -> void:
 	if viewer.offline_instance or viewer.inspection_busy: return
+	viewer._clear_manual_navigation()
 	if orbit_editor == null:
 		orbit_editor = preload("res://ui/shell/orbit_center_editor.gd").new()
 		add_child(orbit_editor); orbit_editor.setup(viewer)
@@ -176,7 +180,7 @@ func setup(owner_viewer) -> void:
 	var reset_action := button(navigation, "", viewer._reset_camera, "reset"); reset_action.tooltip_text = "Reset camera [R]"
 	var navigate := MenuButton.new(); navigate.flat = false; navigate.icon = icon("view"); navigate.tooltip_text = "Navigate [Alt+N] · Right-drag to steer; orbit keys in Keyboard Shortcuts"; navigate.custom_minimum_size.y = 32; navigation.add_child(navigate); decorate_menu(navigate)
 	var modes := navigate.get_popup(); modes.add_check_item("Free camera"); modes.add_check_item("Auto orbit"); modes.add_item("Orbit speed"); modes.add_item("Edit orbit center…")
-	navigate.about_to_popup.connect(func(): modes.set_item_checked(0, viewer.free_camera); modes.set_item_checked(1, viewer.orbit_enabled))
+	navigate.about_to_popup.connect(func(): viewer._clear_manual_navigation(); modes.set_item_checked(0, viewer.free_camera); modes.set_item_checked(1, viewer.orbit_enabled))
 	navigate.about_to_popup.connect(func():
 		if viewer.session_log != null: viewer.session_log.record("MENU", "Navigate opened"))
 	modes.id_pressed.connect(func(id):
@@ -278,6 +282,7 @@ func close_action(parent: Node, action: Callable, tooltip: String) -> Button:
 func menu(parent: Node, title: String, icon_id: String, entries: Array, action: Callable) -> void:
 	var control := MenuButton.new(); control.flat = false; control.text = title; control.icon = icon(icon_id); control.custom_minimum_size.y = 32
 	parent.add_child(control); decorate_menu(control); menus[title] = control
+	control.about_to_popup.connect(viewer._clear_manual_navigation)
 	control.about_to_popup.connect(func():
 		if viewer.session_log != null: viewer.session_log.record("MENU", title + " opened"))
 	for entry in entries: control.get_popup().add_item(entry)
@@ -484,6 +489,7 @@ func reposition_legend() -> void:
 
 func enter_immersive() -> void:
 	if immersive: return
+	viewer._clear_manual_navigation()
 	if viewer.session_log != null: viewer.session_log.record("UI", "Window.Fullscreen")
 	transport.seek_dialog.hide()
 	immersive_mode = DisplayServer.window_get_mode()
@@ -511,6 +517,7 @@ func enter_immersive() -> void:
 
 func exit_immersive(restore_native := true) -> void:
 	if not immersive: return
+	viewer._clear_manual_navigation()
 	if viewer.session_log != null: viewer.session_log.record("UI", "Window.Exit fullscreen")
 	immersive = false
 	edge_reveal.states = immersive_edges.duplicate(true)
