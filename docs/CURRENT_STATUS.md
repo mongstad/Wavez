@@ -1,5 +1,12 @@
 # Current status
 
+Issue #277 binds the elapsed clock's native Label focus style to the accepted
+violet ring in candidate build 64. Enter, Escape and outside-click seek dismissal
+now retain the same rendered outline; focus restoration, time, typography and
+transport layout keep their existing behavior. See
+[playback clock focus](UX5_STYLE_SLICE.md#elapsed-clock-focus) and
+[rendered focus evidence](evidence/issue-277/README.md).
+
 Issue #275 removes hover tooltips only from elapsed and total/remaining playback
 clocks in candidate build 63. Seek, toggle, focus, shared typography and transport
 layout retain their accepted behavior; other transport tooltips remain available.

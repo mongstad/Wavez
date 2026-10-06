@@ -360,6 +360,19 @@ remain available, including the seek editor's existing tooltip.
 [Focused hover/input evidence and owner checks](evidence/issue-275/README.md)
 cover native hover, mouse/keyboard interaction and normal/compact layouts.
 
+### Elapsed clock focus
+
+Issue #277 gives only the elapsed Label an explicit native `focus` style from
+the existing violet theme's `focus()` builder in candidate build 64, pending
+owner review. The existing focus-enter/exit treatment still handles ordinary
+mouse focus; the native focus style now uses the same ring when Seek Time
+returns focus after Enter, Escape or outside-click dismissal. No global focus
+color, typography, spacing, seek parsing or focus-restoration behavior changes.
+Moving focus elsewhere clears the elapsed outline normally; total/remaining
+retains its accepted button styling.
+[Baseline and candidate pixel/input checks](evidence/issue-277/README.md) compare
+normal and compact layouts across repeated open/close cycles.
+
 ### Whole-second seek clock
 
 Current, total, remaining and delayed requested time share the same completed-

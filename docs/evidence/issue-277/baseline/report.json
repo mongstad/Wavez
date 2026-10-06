@@ -1,0 +1,99 @@
+{
+	"checks": 114,
+	"failures": [
+		"Rendered elapsed border is accepted violet: enter-1440-0",
+		"Rendered elapsed border is accepted violet: escape-1440-0",
+		"Rendered elapsed border is accepted violet: outside-1440-0",
+		"Rendered elapsed border is accepted violet: enter-1440-1",
+		"Rendered elapsed border is accepted violet: escape-1440-1",
+		"Rendered elapsed border is accepted violet: outside-1440-1",
+		"Rendered elapsed border is accepted violet: enter-1024-0",
+		"Rendered elapsed border is accepted violet: escape-1024-0",
+		"Rendered elapsed border is accepted violet: outside-1024-0",
+		"Rendered elapsed border is accepted violet: enter-1024-1",
+		"Rendered elapsed border is accepted violet: escape-1024-1",
+		"Rendered elapsed border is accepted violet: outside-1024-1"
+	],
+	"rendered_borders": [
+		{
+			"neutral_pixels": 0,
+			"state": "mouse-focused-1440",
+			"violet_pixels": 64
+		},
+		{
+			"neutral_pixels": 64,
+			"state": "enter-1440-0",
+			"violet_pixels": 0
+		},
+		{
+			"neutral_pixels": 64,
+			"state": "escape-1440-0",
+			"violet_pixels": 0
+		},
+		{
+			"neutral_pixels": 64,
+			"state": "outside-1440-0",
+			"violet_pixels": 0
+		},
+		{
+			"neutral_pixels": 64,
+			"state": "enter-1440-1",
+			"violet_pixels": 0
+		},
+		{
+			"neutral_pixels": 64,
+			"state": "escape-1440-1",
+			"violet_pixels": 0
+		},
+		{
+			"neutral_pixels": 64,
+			"state": "outside-1440-1",
+			"violet_pixels": 0
+		},
+		{
+			"neutral_pixels": 0,
+			"state": "refocused-1440",
+			"violet_pixels": 64
+		},
+		{
+			"neutral_pixels": 0,
+			"state": "mouse-focused-1024",
+			"violet_pixels": 64
+		},
+		{
+			"neutral_pixels": 64,
+			"state": "enter-1024-0",
+			"violet_pixels": 0
+		},
+		{
+			"neutral_pixels": 64,
+			"state": "escape-1024-0",
+			"violet_pixels": 0
+		},
+		{
+			"neutral_pixels": 64,
+			"state": "outside-1024-0",
+			"violet_pixels": 0
+		},
+		{
+			"neutral_pixels": 64,
+			"state": "enter-1024-1",
+			"violet_pixels": 0
+		},
+		{
+			"neutral_pixels": 64,
+			"state": "escape-1024-1",
+			"violet_pixels": 0
+		},
+		{
+			"neutral_pixels": 64,
+			"state": "outside-1024-1",
+			"violet_pixels": 0
+		},
+		{
+			"neutral_pixels": 0,
+			"state": "refocused-1024",
+			"violet_pixels": 64
+		}
+	]
+}
