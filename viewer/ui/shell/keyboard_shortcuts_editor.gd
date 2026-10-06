@@ -31,7 +31,7 @@ func setup(owner_shell) -> void:
 	var header := HBoxContainer.new(); box.add_child(header)
 	var title := Label.new(); title.text = "Keyboard Shortcuts"; title.theme_type_variation = "PanelTitle"
 	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL; header.add_child(title)
-	close_button = shell.close_action(header, dismiss, "Close Keyboard Shortcuts")
+	close_button = shell.close_action(header, dismiss, "")
 	scroller = ScrollContainer.new(); scroller.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	scroller.size_flags_vertical = Control.SIZE_EXPAND_FILL; scroller.follow_focus = true; box.add_child(scroller)
 	var list := VBoxContainer.new(); list.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -44,12 +44,12 @@ func setup(owner_shell) -> void:
 			heading.add_theme_color_override("font_color", theme.c(&"text.secondary")); list.add_child(heading)
 		var row := HBoxContainer.new(); row.add_theme_constant_override("separation", 8); list.add_child(row)
 		var label := Label.new(); label.text = action[1]; label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		label.clip_text = true; label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS; label.tooltip_text = action[1]; row.add_child(label)
+		label.clip_text = true; label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS; row.add_child(label)
 		var key := Button.new(); key.custom_minimum_size = Vector2(152, 32); key.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 		key.theme_type_variation = "SecondaryButton"; key.pressed.connect(start_capture.bind(action[0])); row.add_child(key)
 		var clear := Button.new(); clear.text = "Clear"; clear.custom_minimum_size.y = 32
-		clear.tooltip_text = "Unbind " + action[1]; clear.pressed.connect(clear_binding.bind(action[0])); row.add_child(clear)
-		rows[action[0]] = {"key":key, "clear":clear, "label":label, "name":action[1]}
+		clear.pressed.connect(clear_binding.bind(action[0])); row.add_child(clear)
+		rows[action[0]] = {"key":key, "clear":clear, "label":label}
 	notice = Label.new(); notice.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	notice.theme_type_variation = "PropertyLabel"; box.add_child(notice); notice.hide()
 	footer = HBoxContainer.new(); footer.add_theme_constant_override("separation", 8); box.add_child(footer)
@@ -110,10 +110,7 @@ func refresh_rows() -> void:
 		var row: Dictionary = rows[action]
 		row.key.text = "Press a key…" if action == listening else Bindings.text(staged[action])
 		row.key.theme_type_variation = "SelectedButton" if action == listening else "SecondaryButton"
-		row.key.tooltip_text = "Edit " + row.name + ": " + Bindings.text(staged[action])
 		var context: String = shell.shortcut_context(action)
-		row.label.tooltip_text = row.name + ("\n" + context if not context.is_empty() else "")
-		if not context.is_empty(): row.key.tooltip_text += "\n" + context + " Binding remains editable."
 		row.label.add_theme_color_override("font_color", theme.c(&"text.primary" if context.is_empty() else &"text.secondary"))
 		row.clear.disabled = staged[action] == 0
 		focus_order.append(row.key)

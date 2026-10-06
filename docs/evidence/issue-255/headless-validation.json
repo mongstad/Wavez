@@ -1,0 +1,82 @@
+{
+  "checks": 300,
+  "source_sha256_unchanged": {
+    "mixed.wvz": "a0cce0e0dac35837a25d0a2b59369e3c675330e49361c3e7a89603253ad93807",
+    "meshes.wvz": "a7d9bc933df8df88a6e1409a1a4ea708f7a52e0c3827564230a92c3d95281b7c",
+    "fields.wvz": "f08f1c91e4d5db388bf392f113f8df1614aaac8b95f06ad37455639f4785f6b8",
+    "particles.wvz": "a717b31985c50e5c5d1751b439d25b55b065e242d6f1539b31c970665f0666a0"
+  },
+  "renderer": "headless",
+  "packaged": false,
+  "fresh_process_restart": true,
+  "known_engine_cleanup_diagnostics": {
+    "native": {
+      "compatibility_texture_cleanup": [],
+      "packaged_window_cleanup": []
+    },
+    "restart": {
+      "compatibility_texture_cleanup": [],
+      "packaged_window_cleanup": []
+    }
+  },
+  "reports": [
+    {
+      "checks": 274,
+      "display_driver": "headless",
+      "executable": "/home/Nozba/Codex/Wavez/Godot_v4.7.2-stable_linux.x86_64",
+      "failures": [],
+      "layouts": [
+        {
+          "logical": "(1440.0, 900.0)",
+          "panel": "[P: (400.0, 170.0), S: (640.0, 560.0)]",
+          "scale": 1.0,
+          "scroll_height": 444.0,
+          "window": "(1440, 900)"
+        },
+        {
+          "logical": "(970.0, 600.0)",
+          "panel": "[P: (165.0, 20.0), S: (640.0, 560.0)]",
+          "scale": 1.0,
+          "scroll_height": 444.0,
+          "window": "(970, 600)"
+        },
+        {
+          "logical": "(640.0, 480.0)",
+          "panel": "[P: (16.0, 16.0), S: (608.0, 448.0)]",
+          "scale": 1.0,
+          "scroll_height": 332.0,
+          "window": "(640, 480)"
+        },
+        {
+          "logical": "(1920.0, 1080.0)",
+          "panel": "[P: (640.0, 260.0), S: (640.0, 560.0)]",
+          "scale": 2.0,
+          "scroll_height": 444.0,
+          "window": "(3840, 2160)"
+        },
+        {
+          "logical": "(1536.0, 864.0)",
+          "panel": "[P: (448.0, 152.0), S: (640.0, 560.0)]",
+          "scale": 2.5,
+          "scroll_height": 444.0,
+          "window": "(3840, 2160)"
+        }
+      ],
+      "packaged": false,
+      "preference_path": "user://keyboard_shortcuts.cfg",
+      "renderer": "forward_plus",
+      "restart": false
+    },
+    {
+      "checks": 26,
+      "display_driver": "headless",
+      "executable": "/home/Nozba/Codex/Wavez/Godot_v4.7.2-stable_linux.x86_64",
+      "failures": [],
+      "layouts": [],
+      "packaged": false,
+      "preference_path": "user://keyboard_shortcuts.cfg",
+      "renderer": "forward_plus",
+      "restart": true
+    }
+  ]
+}
