@@ -10,7 +10,7 @@ extends Resource
 	&"text.primary": Color("e6eaf0"), &"text.secondary": Color("b9c1cc"),
 	&"text.muted": Color("9aa5b3"), &"text.disabled": Color("737c89"),
 	# Distinct violet hierarchy cues; independent of interaction and semantic colors.
-	&"text.title": Color("c5a6ff"), &"text.section": Color("aa91df"),
+	&"text.title": Color("7270d8"), &"text.section": Color("7270d8"),
 	&"text.numeric": Color("e6eaf0"), &"border.subtle": Color("465b76"),
 	&"border.control": Color("798fae"), &"focus.ring": Color("a8c9ff"),
 	&"accent.primary": Color("8cb8ff"), &"accent.foreground": Color("142035"),

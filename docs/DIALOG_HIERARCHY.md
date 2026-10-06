@@ -1,13 +1,16 @@
 # Dialog title and section hierarchy
 
 Issue #271 proposes a shared hierarchy treatment in candidate **v0.1.0.60**,
-pending owner visual review. Dialog/panel titles use clear lavender `#c5a6ff`;
-titled-group/category headers use the slightly quieter violet `#aa91df` in the same hue family.
+pending owner visual review. Dialog/panel titles and titled-group/category
+headers use `#7270d8`, matching the pinned panel icon in its resting state.
+Existing font size and weight distinguish the title from section headers.
 
 The shared tokens `text.title` and `text.section` live in
 `viewer/ui/theme/wavez_tokens.gd`. The theme builder assigns them to
 `PanelTitle.font_color`, `Window.title_color` and `SectionTitle.font_color`.
-The production violet theme inherits these assignments. Existing shared
+The production violet theme resolves both hierarchy tokens to `accent.primary`,
+the same source as `PinAction.icon_pressed_color`; the hover/focus color is
+not used for headings. Existing shared
 headings in Keyboard Shortcuts, Video Export, File Details, File Locations,
 Tools and Jobs inherit them without per-dialog colors. Future forms using
 these variations or the reusable titled group receive the same hierarchy.
@@ -18,7 +21,7 @@ spacing, group order, borders, hover/focus/selection, disabled text, tooltip
 behavior and operational/scientific colors are unchanged. Section-header
 buttons/disclosures retain their existing interaction styling.
 
-[Revised evidence and screenshots](evidence/issue-271/revision-2/README.md) cover normal,
+[Revised evidence and screenshots](evidence/issue-271/revision-3/README.md) cover normal,
 compact and simulated high scaling. Physical 4K and mixed-DPI acceptance remains
 an owner check.
 

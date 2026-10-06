@@ -16,6 +16,8 @@ const PALETTE = {
 var shell_icons := {}
 
 func c(key: StringName) -> Color:
+	# Shared hierarchy ink matches the resting pinned icon, never its hover color.
+	if key in [&"text.title", &"text.section"]: return PALETTE[&"accent.primary"]
 	return PALETTE[key] if PALETTE.has(key) else TOKENS.color(key)
 
 func flat_box(fill: StringName, x := 12, y := 6, radius := 4) -> StyleBoxFlat:
