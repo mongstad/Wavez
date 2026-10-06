@@ -1,5 +1,13 @@
 # Current status
 
+Issue #146 adds live visible-order Tab/Shift+Tab traversal in candidate build 65,
+pending owner review. Hiding a focused region advances beyond its entire control
+group; revealing it does not steal focus. Dynamic Simulation content, Fullscreen,
+menus, dialogs and in-canvas editors share the policy. Existing edge timing,
+scientific controls, playback and theme styles retain their behavior. See
+[keyboard focus navigation](FOCUS_NAVIGATION.md) and
+[focused validation](evidence/issue-146/README.md).
+
 Issue #277 binds the elapsed clock's native Label focus style to the accepted
 violet ring in candidate build 64. Enter, Escape and outside-click seek dismissal
 now retain the same rendered outline; focus restoration, time, typography and

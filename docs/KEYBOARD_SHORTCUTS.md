@@ -1,5 +1,12 @@
 # Keyboard Shortcuts
 
+Issue #146 applies [visible-order focus traversal](FOCUS_NAVIGATION.md) inside
+this in-canvas editor in candidate build 65. Tab/Shift+Tab remain contained in
+the visible editor and skip disabled Apply. During binding capture the existing
+reserved Tab/Escape rules take precedence. Dismissal restores an eligible
+initiator or advances beyond its hidden region; Apply/Cancel persistence remains
+unchanged.
+
 Issue #259 groups the scrolling shortcut rows into Navigation, Playback, File,
 Tools and Interface sections in candidate build `v0.1.0.59`. Each section uses
 the shared titled-group surface also used by Video Export. The catalog's category

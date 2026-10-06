@@ -1,5 +1,12 @@
 # Pinned edge reveal and Fullscreen
 
+Issue #146 adds [visibility-aware keyboard focus](FOCUS_NAVIGATION.md) in
+candidate build 65. Hidden surfaces leave the Tab order; hiding a focused
+surface hands focus past that entire region, and revealing it never pulls focus
+back. Fullscreen uses the actual visible state and retains current eligible
+focus through responsive layout restoration. The timings and protection below
+remain unchanged. The original #117 review record follows unchanged.
+
 Issue #117, pending owner UX review. This supersedes the user-facing visibility
 and fullscreen portions of the earlier UX3/UX4 contracts. Historical reports,
 measurements and review wording are retained. Candidate application build: `v0.1.0.8`.
