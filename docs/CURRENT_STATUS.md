@@ -3,7 +3,8 @@
 Issue #222 presents Performance labels beside their existing budget and
 preparation editors in candidate build 61. Decoded-cache diagnostics move off
 the normal form while remaining available in File → Details. Clear decoded
-cache and all budget callbacks retain their existing behavior. See
+cache and all budget callbacks retain their existing behavior. Mesh-prefetch
+telemetry stays internal, and the dialog fits its visible content. See
 [Performance dialog](PERFORMANCE_DIALOG.md) for validation and owner checks.
 
 Issue #271 adds resting-pin violet title and section-header accents through

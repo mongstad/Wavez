@@ -5,12 +5,15 @@ candidate **v0.1.0.61**, pending owner review. Decoded cache, GPU budget and
 available particle/field preparation selectors place each label beside its
 existing editor. Labels share a 140 px column; editors fill the remaining width.
 Long labels wrap within their column and long forms scroll at minimum width.
+The window measures visible content after layout settles; a mesh-only form
+opens at 560 × 240 instead of retaining unused vertical space.
 Clear decoded cache remains directly below its budget row.
 
 The verbose decoded-cache reader sentence is absent from the normal form. Its
 label/state still updates and **File → Details** retains the reader's status,
-cache usage, hits and index timing. Particle/field/mesh preparation status remains
-on the Performance form. Budgets, units, defaults, callbacks, clear behavior and
+cache usage, hits and index timing. Particle/field preparation status remains on the Performance form. Mesh-prefetch
+telemetry is hidden while its diagnostic label, worker measurements and state
+continue to update internally. Budgets, units, defaults, callbacks, clear behavior and
 scientific preparation/allocation/eviction logic are unchanged.
 
 The local presentation helper reuses the original widgets and signals. It runs
@@ -18,7 +21,7 @@ when Performance opens, so controls rebuilt for a newly loaded source receive
 rows too; repeated opening does not replace or duplicate editors. Other Tools
 forms keep their existing presentation.
 
-[Focused evidence](evidence/issue-222/README.md) includes normal/minimum and 1.5×
+[Focused evidence](evidence/issue-222/revision-2/README.md) includes normal/minimum and 1.5×
 scaling screenshots, budget-edit and cache-clear checks, diagnostic retention
 and source reload. Physical mixed-DPI/4K and other OSes remain owner checks.
 

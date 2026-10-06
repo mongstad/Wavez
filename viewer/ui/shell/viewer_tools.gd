@@ -138,7 +138,19 @@ func open(title: String) -> void:
 	var chrome_height := 32 + 32 + 32 + 30 + footer_height
 	var desired := Vector2i(width,clampi(ceili(content_height + chrome_height),240,620))
 	window.popup_centered(Vector2i(minf(desired.x,extent.x-32),minf(desired.y,extent.y-32)))
+	if title == "Performance": fit_performance.call_deferred()
 	refresh_context()
+
+func fit_performance() -> void:
+	# Measure after row layout/wrapping settles, rather than retaining stale minima.
+	await get_tree().process_frame
+	await get_tree().process_frame
+	if not window.visible or current != "Performance": return
+	var scroll: ScrollContainer = content.get_parent()
+	var chrome := window.size.y - scroll.size.y
+	var height := form("Performance").get_combined_minimum_size().y + chrome
+	var extent: Vector2 = viewer.get_viewport().get_visible_rect().size
+	window.size.y = clampi(ceili(height), window.min_size.y, mini(620, int(extent.y) - 32))
 
 func reversed_shared() -> Array:
 	var controls := shared_diagnostics.duplicate(); controls.reverse(); return controls
