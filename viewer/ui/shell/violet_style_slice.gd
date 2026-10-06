@@ -50,6 +50,8 @@ func install(shell) -> void:
 	shell.viewer.timeline.add_theme_stylebox_override("slider", track)
 	for action in shell.transport.actions.get_children(): action.theme_type_variation = "IconAction"
 	shell.transport.displayed.theme_type_variation = "NumericValue"
+	# Label can draw its native focus style after a popup restores focus.
+	shell.transport.displayed.add_theme_stylebox_override("focus", theme.focus())
 	# Label and CompactButton must resolve the same numeric font and size.
 	for readout in [shell.transport.displayed, shell.transport.duration]:
 		readout.add_theme_font_override("font", theme.get_font("font", "NumericValue"))
