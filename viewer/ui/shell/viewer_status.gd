@@ -43,16 +43,17 @@ func setup(owner_shell) -> void:
 	jobs_button.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	jobs_dialog = AcceptDialog.new(); jobs_dialog.title = "Jobs"; jobs_dialog.borderless = true; jobs_dialog.get_ok_button().hide(); add_child(jobs_dialog)
 	var body := VBoxContainer.new(); body.add_theme_constant_override("separation",10); jobs_dialog.add_child(body)
-	var header := HBoxContainer.new(); body.add_child(header)
+	# Keep the list below the measured header height, including its focus/chrome area.
+	var header_and_list := VBoxContainer.new(); header_and_list.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	header_and_list.add_theme_constant_override("separation",32); body.add_child(header_and_list)
+	var header := HBoxContainer.new(); header_and_list.add_child(header)
 	var heading := Label.new(); heading.text = "Jobs"; heading.theme_type_variation = "PanelTitle"
 	heading.size_flags_horizontal = Control.SIZE_EXPAND_FILL; heading.mouse_filter = Control.MOUSE_FILTER_IGNORE; header.add_child(heading)
 	jobs_header_close = Button.new(); jobs_header_close.theme_type_variation = "IconAction"; jobs_header_close.tooltip_text = "Close Jobs"
 	jobs_header_close.custom_minimum_size = Vector2(32,32); jobs_header_close.pressed.connect(jobs_dialog.hide); header.add_child(jobs_header_close)
-	var scroll_space := MarginContainer.new(); scroll_space.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	scroll_space.add_theme_constant_override("margin_top",12); body.add_child(scroll_space)
 	var scroll := ScrollContainer.new(); scroll.custom_minimum_size = Vector2(460,220)
 	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL; scroll.follow_focus = true
-	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED; scroll_space.add_child(scroll)
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED; header_and_list.add_child(scroll)
 	var inset := MarginContainer.new(); inset.size_flags_horizontal = Control.SIZE_EXPAND_FILL; inset.add_theme_constant_override("margin_right",8); scroll.add_child(inset)
 	var content := VBoxContainer.new(); content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	content.add_theme_constant_override("separation",8); inset.add_child(content)
