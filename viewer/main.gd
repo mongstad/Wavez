@@ -9,6 +9,7 @@ extends Node3D
 const TRAIL_LAYERS := 5
 const DISPLAY_HZ := 30.0
 const PAUSED_ORBIT_MAX_FPS := 60
+const DEFAULT_CAMERA_FOV := 55.0
 const CURSOR_IDLE_MSEC := 2500
 const FREE_LOOK_SENSITIVITY := 0.003 # radians per mouse pixel; translation-independent
 const MANUAL_ORBIT_RATE := PI / 2.0 # radians per second; translation-independent
@@ -236,7 +237,7 @@ func _build_world() -> void:
 	add_child(world_env)
 
 	camera = Camera3D.new()
-	camera.fov = 55.0
+	camera.fov = DEFAULT_CAMERA_FOV
 	camera.near = 0.05
 	camera.far = 1000.0
 	add_child(camera)
@@ -815,8 +816,19 @@ func _build_backdrop(env: Environment) -> void:
 	var shader := Shader.new()
 	shader.code = """
 shader_type sky;
+uniform vec3 presentation_right;
+uniform vec3 presentation_up;
+uniform vec3 presentation_back;
+uniform float presentation_aspect = 1.0;
+uniform float presentation_tan_half_fov = 0.5;
 void sky() {
     vec3 d = normalize(EYEDIR);
+    if (!AT_CUBEMAP_PASS) {
+        vec2 screen = vec2(SCREEN_UV.x * 2.0 - 1.0, 1.0 - SCREEN_UV.y * 2.0);
+        vec3 ray = normalize(vec3(screen.x * presentation_aspect * presentation_tan_half_fov,
+                                  screen.y * presentation_tan_half_fov, -1.0));
+        d = normalize(presentation_right * ray.x + presentation_up * ray.y + presentation_back * ray.z);
+    }
     float belt = exp(-pow((d.y + 0.24*d.x) * 5.0, 2.0));
     float cloud = 0.5 + 0.20*sin(d.x*17.0 + sin(d.z*13.0)) + 0.16*sin(d.z*29.0+d.y*9.0);
     float dust = 0.6 + 0.4*sin(d.z*22.0+sin(d.x*31.0));
@@ -825,10 +837,24 @@ void sky() {
 """
 	var mat := ShaderMaterial.new()
 	mat.shader = shader
+	# Reproduce the accepted default view's sky on the screen, independent of
+	# later scientific camera movement. The cubemap keeps its world-space ray.
+	var reference := Basis(Vector3.UP, yaw) * Basis(Vector3.RIGHT, -pitch)
+	mat.set_shader_parameter("presentation_right", reference.x)
+	mat.set_shader_parameter("presentation_up", reference.y)
+	mat.set_shader_parameter("presentation_back", reference.z)
+	mat.set_shader_parameter("presentation_tan_half_fov", tan(deg_to_rad(DEFAULT_CAMERA_FOV) * 0.5))
 	var sky := Sky.new()
 	sky.sky_material = mat
 	env.sky = sky
 	env.background_mode = Environment.BG_SKY
+	get_viewport().size_changed.connect(_update_backdrop_aspect)
+	_update_backdrop_aspect()
+
+func _update_backdrop_aspect() -> void:
+	var size := get_viewport().get_visible_rect().size
+	if size.y > 0.0:
+		(environment.sky.sky_material as ShaderMaterial).set_shader_parameter("presentation_aspect", size.x / size.y)
 
 func _visual_slider(parent: VBoxContainer, title: String, low: float, high: float, initial: float, action: Callable) -> HSlider:
 	var label := Label.new()

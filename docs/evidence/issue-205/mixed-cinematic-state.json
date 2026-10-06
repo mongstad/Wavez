@@ -1,0 +1,180 @@
+{
+	"auto_range": true,
+	"brightness_channel": "fixed",
+	"brightness_scale": 1.0,
+	"camera": {
+		"far": 1000.0,
+		"fov": 55.0,
+		"keep_aspect": 1,
+		"near": 0.05000000074505806
+	},
+	"camera_distance": 18.186533737182614,
+	"camera_target": [
+		-0.25,
+		-0.25,
+		-0.25
+	],
+	"camera_transform": [
+		[
+			0.7880107760429382,
+			0.0,
+			-0.6156615018844604
+		],
+		[
+			-0.25041210651397705,
+			0.9135454297065735,
+			-0.3205128610134125
+		],
+		[
+			0.562434732913971,
+			0.4067366421222687,
+			0.7198836207389832
+		],
+		[
+			9.978737831115723,
+			7.147129535675049,
+			12.84218692779541
+		]
+	],
+	"channel_preferences": {},
+	"clamp_map": true,
+	"clean_view": false,
+	"color_channel": "fixed",
+	"colormap_name": "viridis",
+	"cyclic": false,
+	"environment": {
+		"background_mode": 2,
+		"fog_density": 0.0008999999845400453,
+		"fog_enabled": true,
+		"glow_bloom": 0.23999999463558197,
+		"glow_enabled": true,
+		"glow_intensity": 1.350000023841858,
+		"glow_strength": 1.5499999523162842,
+		"tonemap_exposure": 1.0,
+		"tonemap_mode": 3,
+		"tonemap_white": 1.0
+	},
+	"exposure": 0.65,
+	"gamma": 1.0,
+	"geometry_override": {},
+	"guide_visibility": {
+		"absorber": false,
+		"data": false,
+		"domain": false,
+		"imposed": false
+	},
+	"guide_visible": false,
+	"hidden_types": [],
+	"intensity_floor": 0.08,
+	"invert_map": false,
+	"logarithmic": false,
+	"manual_max": 1.0,
+	"manual_min": 0.0,
+	"mode": 0,
+	"normalization_mode": "frame",
+	"observer_scale": 1e+28,
+	"orbit_enabled": false,
+	"orbit_speed": 0.08,
+	"overlay_visible": true,
+	"panel_width": 320.0,
+	"particle_layer_visible": true,
+	"physical_rate": 1.0,
+	"pitch": 0.4188790204786391,
+	"point_scale": 1.8,
+	"preset": "Cinematic",
+	"range_interval": {},
+	"scene": {
+		"gpu_budget_mib": 256,
+		"layers": {
+			"field": {
+				"channel": "density",
+				"clip": false,
+				"clip_distance": 0.0,
+				"clip_normal": [
+					1.0,
+					0.0,
+					0.0
+				],
+				"color_mapping": {
+					"normalization": "linear",
+					"percentile_high": 99.0,
+					"percentile_low": 1.0,
+					"policy": "manual",
+					"source_channel": "",
+					"source_time": 0.0
+				},
+				"colormap": "viridis",
+				"isosurface": false,
+				"lower": 0.0,
+				"opacity": 0.25,
+				"opacity_mapping": {
+					"lower": 0.0,
+					"mode": "linear",
+					"upper": 1.0
+				},
+				"slice": false,
+				"slice_distance": 0.0,
+				"slice_normal": [
+					0.0,
+					0.0,
+					1.0
+				],
+				"step": 0.5,
+				"threshold": 0.5,
+				"upper": 1.0,
+				"visible": true,
+				"volume": true
+			},
+			"mesh": {
+				"channel": "",
+				"colormap": "viridis",
+				"lower": -2.0,
+				"upper": 2.0,
+				"visible": true,
+				"wireframe": false
+			}
+		},
+		"legend_visibility": {}
+	},
+	"sections": {
+		"Advanced • Post-processing": false,
+		"Advanced • Size / Brightness": false,
+		"Analysis export and state": false,
+		"Camera": false,
+		"Capture / Export": false,
+		"Color Mapping": false,
+		"Data cache": false,
+		"Diagnostics and comparisons": false,
+		"Geometry / Guides": false,
+		"Matched runs": false,
+		"Particle Filters": false,
+		"Rendering": false,
+		"Selections": false,
+		"Space-time analysis": false,
+		"Temporal analysis": false,
+		"Trails": false
+	},
+	"show_legend": false,
+	"size_channel": "fixed",
+	"slice_enabled": false,
+	"slice_x": 0.0,
+	"sliders": {
+		"Bloom": 1.3599999999999999,
+		"Brightness": 1.0,
+		"Exposure": 0.64,
+		"Gamma": 1.012,
+		"Intensity cutoff": 0.08,
+		"Orbit speed • radians / second": 0.07999999999999996,
+		"Particle size": 1.838,
+		"Slice position • box fraction": 0.0
+	},
+	"trails_enabled": false,
+	"viewport": {
+		"msaa_3d": 0,
+		"scaling_3d_scale": 1.0,
+		"screen_space_aa": 0,
+		"use_debanding": false,
+		"use_taa": false
+	},
+	"yaw": 0.6632251157578453
+}
