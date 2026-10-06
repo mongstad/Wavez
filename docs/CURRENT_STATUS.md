@@ -1,7 +1,14 @@
 # Current status
 
+Issue #210 selects the initial Simulation category from a successfully loaded
+source's declared object kinds in candidate build 58: Particles takes priority,
+then Fields, then Meshes. Reloads no longer retain an unrelated file's tab.
+Visibility and object selection do not trigger later tab changes; explicit
+offline video-export workspace state retains precedence. See
+[Simulation panel behavior and owner checks](UX4_PANEL.md).
+
 Issue #255 makes Edit → Preferences → Keyboard Shortcuts a tooltip-free window
-in candidate build 57. Binding buttons, Clear controls, labels, headings,
+in owner-merged build 57 (PR #268). Binding buttons, Clear controls, labels, headings,
 footer actions and the close control use their visible text and focus state;
 tooltips elsewhere in Wavez remain available. Shortcut capture, conflict,
 Apply/Cancel, persistence and focus behavior are unchanged. See
@@ -171,10 +178,10 @@ file-open flow. The built-in picker remains Godot's fallback; video export
 kept its existing picker at that review checkpoint. Build 32 was accepted in PR #218. See the
 [current dialog behavior](FILE_DIALOGS.md) and [issue validation](evidence/issue-181/README.md).
 
-Issue #202 selects **Meshes** in the Simulation panel after a successful
-mesh-only file load. Mixed scenes retain the selected category, and explicit
-video-export workspace state remains authoritative. Candidate build 30 is
-pending owner review.
+Issue #202 established **Meshes** focus after a successful mesh-only file load
+in owner-merged build 30 (PR #209). Issue #210 now generalizes the initial
+category policy for all object-kind combinations. The original #202 evidence
+remains a record of that earlier review state.
 
 Issue #158 reduces application-owned work during continuous native window
 resize: empty startup now stops recurring 3D redraw, and the shell applies

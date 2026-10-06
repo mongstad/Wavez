@@ -1,0 +1,70 @@
+{
+  "checks": 205,
+  "runs": {
+    "source-forward_plus": {
+      "checks": 49,
+      "display_driver": "X11",
+      "failures": [],
+      "offline": false,
+      "packaged": false,
+      "renderer": "forward_plus"
+    },
+    "source-gl_compatibility": {
+      "checks": 49,
+      "display_driver": "X11",
+      "failures": [],
+      "offline": false,
+      "packaged": false,
+      "renderer": "gl_compatibility"
+    },
+    "package-forward_plus": {
+      "checks": 49,
+      "display_driver": "X11",
+      "failures": [],
+      "offline": false,
+      "packaged": true,
+      "renderer": "forward_plus"
+    },
+    "package-gl_compatibility": {
+      "checks": 49,
+      "display_driver": "X11",
+      "failures": [],
+      "offline": false,
+      "packaged": true,
+      "renderer": "gl_compatibility"
+    },
+    "source-offline": {
+      "checks": 3,
+      "display_driver": "headless",
+      "failures": [],
+      "offline": true,
+      "packaged": false,
+      "renderer": "forward_plus"
+    },
+    "real-0": {
+      "checks": 3,
+      "display_driver": "headless",
+      "failures": [],
+      "offline": false,
+      "packaged": false,
+      "renderer": "forward_plus"
+    },
+    "real-1": {
+      "checks": 3,
+      "display_driver": "headless",
+      "failures": [],
+      "offline": false,
+      "packaged": false,
+      "renderer": "forward_plus"
+    }
+  },
+  "source_sha256_unchanged": {
+    "mixed.wvz": "677b1523a642d0af92553a9701d1791c6ab8b21c9722bdc228caa4d1fc17caff",
+    "field-meshes.wvz": "df8c46b1c6961161c524c24b7c7da8d5830f2e64da30fda1e1020466baebfa4f",
+    "particle-meshes.wvz": "9ae182a2b1f3fd06eebc12ce49cc6cf4b31b14a365d6c9bf46abfdff16a5f009",
+    "particle-fields.wvz": "f954e9f9c43818c4536706c1497860f698e1f20458908ab21843e3e970038825",
+    "meshes.wvz": "b4f2c30771e7cb463048fe5aba3bd2ec2cd164a899d7008ba9e7aa51c736ee63",
+    "fields.wvz": "6531201226b8d5b8955004a0b711177cae8c3fd6f107fe067add997b9f3c6f6c",
+    "particles.wvz": "f8ad4c5a95d756a0ec1540eefd3ecf32458ae77dfe50968f055b371076d6da9b"
+  }
+}

@@ -26,6 +26,17 @@ fresh object choices for that source. Missing categories show concise empty stat
 The three category tabs have no tooltip that repeats their visible names; useful
 explanatory tooltips on other controls remain available.
 
+On a successful new interactive file load, the initial category follows the
+source object's declared kinds in **Particles → Fields → Meshes** priority order.
+It is chosen anew even if the previous file had another tab selected. A
+particle-containing source opens on Particles; without particles, a source with
+fields opens on Fields; only a mesh-only source opens on Meshes. The matching
+object selector and controls are available immediately. Later changes to
+visibility, selected object, playback or cache state do not switch the tab.
+Explicit offline video-export workspace selection remains authoritative, and
+applying a view preset after load retains its existing presentation behavior.
+See the [issue #210 validation and owner checks](evidence/issue-210/README.md).
+
 | Category/group | Frequent controls retained |
 |---|---|
 | Particles / Rendering | Particle size, Brightness, Point rendering |

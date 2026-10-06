@@ -32,10 +32,13 @@ The picker accepts WAVEZ Scene Format (`*.wvz`) files. Its Open, Cancel,
 bookmarks and Recent behavior follow the desktop environment.
 
 The right-hand Simulation panel uses Particles, Fields and Meshes categories.
-Opening a mesh-only file selects Meshes immediately, showing its object selector
-and controls. Other file types retain the currently selected category; changing
-an object's visibility does not change it. An explicit video-export workspace
-selection remains authoritative for that export.
+Opening a new file selects the first category present in its declared source
+objects, in **Particles → Fields → Meshes** priority order. A particle-containing
+file therefore opens on Particles; a file with fields but no particles opens on
+Fields; a mesh-only file opens on Meshes. The selected category's controls appear
+as soon as the load completes. Changing object visibility or selection afterward
+does not change categories. An explicit video-export workspace selection remains
+authoritative for that export.
 
 Open **Help → About → Documentation** to reach the repository README
 and its guidance links. The in-app Handbook surface has been removed; this
