@@ -1,5 +1,11 @@
 # Current status
 
+Issue #259 groups the Keyboard Shortcuts rows into titled Navigation, Playback,
+File, Tools and Interface sections in candidate build 59. Groups come from the
+authoritative action categories and scroll above the fixed footer; binding,
+focus, persistence and the tooltip-free #255 behavior remain unchanged. See
+[Keyboard Shortcuts](KEYBOARD_SHORTCUTS.md).
+
 Issue #210 selects the initial Simulation category from a successfully loaded
 source's declared object kinds in candidate build 58: Particles takes priority,
 then Fields, then Meshes. Reloads no longer retain an unrelated file's tab.
