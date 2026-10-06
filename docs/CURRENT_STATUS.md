@@ -1,5 +1,11 @@
 # Current status
 
+Issue #156 gives elapsed and total/remaining transport clocks the same explicit
+NumericValue font and size in candidate build 62. Seek, duration toggle, clock
+formatting and desktop/compact layout retain their behavior. See the
+[shared playback typography](UX5_STYLE_SLICE.md#playback-clock-typography) and
+[focused evidence](evidence/issue-156/README.md).
+
 Issue #222 presents Performance labels beside their existing budget and
 preparation editors in candidate build 61. Decoded-cache diagnostics move off
 the normal form while remaining available in File → Details. Clear decoded

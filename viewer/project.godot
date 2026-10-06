@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="WAVEZ"
-config/version="v0.1.0.61"
+config/version="v0.1.0.62"
 run/main_scene="res://Main.tscn"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="godot/app_userdata/WAVEZ"
