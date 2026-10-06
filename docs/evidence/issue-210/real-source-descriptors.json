@@ -1,0 +1,32 @@
+[
+  {
+    "filename": "cavity_collapse_torus_quick.wvz",
+    "file_bytes": 1695107,
+    "objects": [
+      {
+        "id": "collapse_surface",
+        "kind": "mesh"
+      }
+    ],
+    "source_times": 37,
+    "records": 37,
+    "payloads_decoded": false
+  },
+  {
+    "filename": "toroidal_throat_flow.wvz",
+    "file_bytes": 3965658054,
+    "objects": [
+      {
+        "id": "particles",
+        "kind": "particles"
+      },
+      {
+        "id": "field",
+        "kind": "volume"
+      }
+    ],
+    "source_times": 361,
+    "records": 422,
+    "payloads_decoded": false
+  }
+]

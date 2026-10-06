@@ -1,0 +1,8 @@
+{
+  "checks": 3,
+  "display_driver": "headless",
+  "failures": [],
+  "offline": false,
+  "packaged": false,
+  "renderer": "forward_plus"
+}

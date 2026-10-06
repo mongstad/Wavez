@@ -1369,7 +1369,7 @@ func _open_scene(path: String) -> void:
 		_shell_open_error = scene_layers.error;status_label.text = _shell_open_error;return
 	scene_layers.frame_scene()
 	_build_guides();_apply_geometry();_update_camera();_sync_visuals();_sync_inspection_controls()
-	shell.focus_mesh_only_scene()
+	shell.select_initial_scene_category()
 	status_label.text = "Loaded %s • WAVEZ Scene Format (WVZ1) • %d layer samples" % [path.get_file(),reader.records.size()]
 	# The synchronous initial sample is already usable; its rolling request was
 	# submitted by sample(). Background preparation must not gate interaction.

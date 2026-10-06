@@ -95,10 +95,10 @@ func check_new_file_focus() -> void:
 	check(shell.workspace == 1 and viewer.scene_layers.category_pages.volume.visible, "Field-only open retains the selected Fields category")
 	shell.select_workspace(2)
 	viewer._open_capture(output.path_join("mixed.wvz"))
-	check(shell.workspace == 2, "Mixed scene preserves the previously selected Meshes category")
+	check(shell.workspace == 0, "Mixed scene selects Particles instead of the previous Meshes category")
 	shell.select_workspace(0)
 	viewer._open_capture(output.path_join("mixed-replacement.wvz"))
-	check(shell.workspace == 0, "Mixed replacement preserves the previously selected Particles category")
+	check(shell.workspace == 0, "Mixed replacement selects Particles from its source kinds")
 	shell.select_workspace(0)
 
 func run() -> void:

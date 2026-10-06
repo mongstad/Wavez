@@ -48,6 +48,9 @@ def main():
     fixture(out/'fields.wvz', ['volume'])
     fixture(out/'meshes.wvz', ['mesh'])
     fixture(out/'particles.wvz', ['particles'])
+    fixture(out/'particle-fields.wvz', ['particles','volume'])
+    fixture(out/'particle-meshes.wvz', ['particles','mesh'])
+    fixture(out/'field-meshes.wvz', ['volume','mesh'])
     hashes = {f.name:hashlib.sha256(f.read_bytes()).hexdigest() for f in out.glob('*.wvz')}
     run = subprocess.run([args.godot, '--path', str(ROOT/'viewer'), '--rendering-method', args.renderer,
                           '--audio-driver','Dummy','--resolution','1440x900', '--script',

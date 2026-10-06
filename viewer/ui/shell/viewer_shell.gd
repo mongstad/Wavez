@@ -312,15 +312,19 @@ func select_workspace(index: int) -> void:
 	scroll.set_deferred("scroll_vertical",scroll_position if index == 0 else 0)
 	refresh()
 
-func focus_mesh_only_scene() -> void:
-	# A new interactive source with meshes and no other object kinds has one
-	# useful category. Export workers retain their explicit presentation state.
+func select_initial_scene_category() -> void:
+	# A successful interactive load chooses from declared source kinds, regardless
+	# of the previous tab or current visibility. Export workers retain their
+	# explicit presentation state.
 	if viewer.offline_instance or viewer.generic_reader == null: return
 	var objects: Dictionary = viewer.generic_reader.objects
-	if objects.is_empty(): return
+	var kinds := {}
 	for object in objects.values():
-		if object.kind != "mesh": return
-	select_workspace(2)
+		kinds[object.kind] = true
+	for kind in ["particles", "volume", "mesh"]:
+		if kinds.has(kind):
+			select_workspace(["particles", "volume", "mesh"].find(kind))
+			return
 
 func show_section(section: String) -> void:
 	if viewer.tools_ui.SECTIONS.has(section):

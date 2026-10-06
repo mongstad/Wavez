@@ -1,5 +1,11 @@
 # Retained evidence
 
+## Initial Simulation category — issue #210, pending owner review
+
+[Seven source combinations, renderer/package validation and owner steps](evidence/issue-210/README.md)
+cover the initial-category priority and explicit-state precedence proposed in
+build 58. Earlier #202 evidence below remains unchanged as a historical record.
+
 ## Video Export dialog groups — issue #248, pending owner review
 
 [Native screenshots and focused validation](evidence/issue-248/README.md)
