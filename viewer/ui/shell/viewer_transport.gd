@@ -81,6 +81,7 @@ func setup(owner_shell) -> void:
 			viewer.session_log.record("PLAYBACK", "Scrub committed: sample=%d t=%.5f" % [index + 1, target], true))
 	viewer.timeline.value_changed.connect(func(_value): update_index_hint())
 	duration = shell.button(progress,"—",func(): show_remaining = not show_remaining; refresh())
+	duration.tooltip_text = ""
 	duration.custom_minimum_size = Vector2(48,24); duration.theme_type_variation = "CompactButton"; duration.flat = true
 	duration.alignment = HORIZONTAL_ALIGNMENT_LEFT
 	for state in ["normal","hover","pressed","disabled"]:
@@ -185,10 +186,8 @@ func refresh() -> void:
 	var clock = viewer.committed_sample.get("requested_time")
 	var timing := playback_timing()
 	displayed.text = format_duration(timing.elapsed) if loaded else "—"
-	displayed.tooltip_text = "Double-click to seek · Elapsed playback at 1× · MM:SS or HH:MM:SS"
 	duration.text = format_duration(timing.remaining,true) if show_remaining else format_duration(timing.total)
 	if not loaded: duration.text = "—"
-	duration.tooltip_text = ("Remaining duration; click for total" if show_remaining else "Total duration; click for remaining") + ". Nominal playback seconds at 1×; buffering and speed do not change the interval."
 	var pending = pending_time()
 	refresh_requested(pending,clock,Time.get_ticks_msec())
 	var value: float = viewer.physical_rate
