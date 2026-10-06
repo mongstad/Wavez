@@ -14,8 +14,10 @@ immediately. It returns at the same pointer position on release. Focus loss,
 opening menus or dialogs, inspection capture, leaving fullscreen and any manual
 navigation cleanup also restore it. This uses hidden cursor mode, so mouse
 movement continues to steer without pointer capture, warping or recentering.
-LMB, wheel, orbit shortcuts and Free Camera translation do not hide the cursor.
-General idle cursor hiding is a separate issue (#261).
+LMB, wheel, orbit shortcuts and Free Camera translation do not immediately hide
+the cursor. The [general viewport inactivity rule](VIEWPORT_CURSOR.md) can hide
+it after 2.5 seconds without mouse interaction. Active RMB steering always
+keeps it hidden; release restores the pointer and restarts the idle interval.
 
 **Orbit Camera Left** and **Orbit Camera Right** move the camera around its
 current navigation target. Both start **Unbound** in **Edit → Preferences →
