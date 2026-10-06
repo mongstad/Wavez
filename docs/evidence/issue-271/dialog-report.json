@@ -1,0 +1,237 @@
+{
+  "checks": 118,
+  "failures": [],
+  "measurements": [
+    {
+      "after": [
+        560,
+        620
+      ],
+      "before": [
+        600,
+        720
+      ],
+      "title": "Selection"
+    },
+    {
+      "after": [
+        560,
+        620
+      ],
+      "before": [
+        600,
+        720
+      ],
+      "title": "Temporal"
+    },
+    {
+      "after": [
+        560,
+        620
+      ],
+      "before": [
+        600,
+        720
+      ],
+      "title": "Space time"
+    },
+    {
+      "after": [
+        440,
+        620
+      ],
+      "before": [
+        600,
+        720
+      ],
+      "title": "Diagnostics"
+    },
+    {
+      "after": [
+        560,
+        620
+      ],
+      "before": [
+        600,
+        720
+      ],
+      "title": "Compare"
+    },
+    {
+      "after": [
+        560,
+        620
+      ],
+      "before": [
+        600,
+        720
+      ],
+      "title": "Matched runs"
+    },
+    {
+      "after": [
+        560,
+        620
+      ],
+      "before": [
+        600,
+        720
+      ],
+      "title": "Period"
+    },
+    {
+      "after": [
+        560,
+        464
+      ],
+      "before": [
+        600,
+        720
+      ],
+      "title": "Bookmarks"
+    },
+    {
+      "after": [
+        560,
+        620
+      ],
+      "before": [
+        600,
+        720
+      ],
+      "title": "Results"
+    },
+    {
+      "after": [
+        440,
+        240
+      ],
+      "before": [
+        600,
+        720
+      ],
+      "title": "Mapping"
+    },
+    {
+      "after": [
+        560,
+        384
+      ],
+      "before": [
+        600,
+        720
+      ],
+      "title": "Derive range"
+    },
+    {
+      "after": [
+        440,
+        247
+      ],
+      "before": [
+        600,
+        720
+      ],
+      "title": "Slice"
+    },
+    {
+      "after": [
+        440,
+        620
+      ],
+      "before": [
+        600,
+        720
+      ],
+      "title": "Clipping"
+    },
+    {
+      "after": [
+        560,
+        620
+      ],
+      "before": [
+        600,
+        720
+      ],
+      "title": "Isosurface"
+    },
+    {
+      "after": [
+        440,
+        578
+      ],
+      "before": [
+        600,
+        720
+      ],
+      "title": "Source probe"
+    },
+    {
+      "after": [
+        560,
+        620
+      ],
+      "before": [
+        600,
+        720
+      ],
+      "title": "Performance"
+    },
+    {
+      "after": [
+        440,
+        620
+      ],
+      "before": [
+        600,
+        720
+      ],
+      "title": "Geometry"
+    },
+    {
+      "after": [
+        560,
+        240
+      ],
+      "before": [
+        600,
+        720
+      ],
+      "title": "Image"
+    },
+    {
+      "after": [
+        560,
+        620
+      ],
+      "before": [
+        600,
+        720
+      ],
+      "title": "Data"
+    },
+    {
+      "after": [
+        560,
+        506
+      ],
+      "before": [
+        600,
+        720
+      ],
+      "title": "Save analysis"
+    },
+    {
+      "after": [
+        560,
+        466
+      ],
+      "before": [
+        600,
+        720
+      ],
+      "title": "Load analysis"
+    }
+  ]
+}

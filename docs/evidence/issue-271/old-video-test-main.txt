@@ -1,0 +1,93 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.351 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3070 Ti
+
+SCRIPT ERROR: Invalid call. Nonexistent function '_clear_manual_navigation' in base 'Node (FakeViewer)'.
+          at: open (res://video/export_dialog.gd:251)
+          GDScript backtrace (most recent call first):
+              [0] open (res://video/export_dialog.gd:251)
+              [1] run (res://video/test_export_dialog_group.gd:63)
+ERROR: FAIL: Titled groups have a subtle themed border
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://video/test_export_dialog_group.gd:43)
+       [1] run (res://video/test_export_dialog_group.gd:67)
+PASS: Five setting groups and one separate summary group
+PASS: Range uses the reusable titled group
+PASS: Video uses the reusable titled group
+PASS: Camera uses the reusable titled group
+PASS: Presentation uses the reusable titled group
+PASS: Output uses the reusable titled group
+PASS: Export summary uses the reusable titled group
+PASS: Mode, Start and End share the titled Range group
+PASS: Controls remain inside their five functional groups
+PASS: Optional ordinary inspection records start inside collapsed Advanced
+PASS: Mandatory selection-aware inspection records have no optional toggle
+PASS: Optional ordinary inspection control returns without selections
+PASS: Active selection-aware job keeps mandatory provenance control hidden even if live selections change
+PASS: Playback rate label explains the unchanged time-unit semantics
+PASS: Estimate, status and progress share the lower summary
+PASS: Range labels retain their option indices
+PASS: End tooltip preserves exclusive-end guidance
+ERROR: FAIL: Estimate shows compact output and storage values
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://video/test_export_dialog_group.gd:43)
+       [1] run (res://video/test_export_dialog_group.gd:86)
+ERROR: FAIL: Estimate retains frame count and uncompressed storage calculation
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://video/test_export_dialog_group.gd:43)
+       [1] run (res://video/test_export_dialog_group.gd:87)
+PASS: Idle summary shows estimate without inactive progress
+PASS: Available-state notice does not announce FFmpeg success
+PASS: Idle Cancel has no redundant tooltip
+ERROR: FAIL: Range group stays inside scroll area at (700, 650)
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://video/test_export_dialog_group.gd:43)
+       [1] run (res://video/test_export_dialog_group.gd:97)
+ERROR: FAIL: Range group clears title bar at (700, 650)
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://video/test_export_dialog_group.gd:43)
+       [1] run (res://video/test_export_dialog_group.gd:98)
+ERROR: FAIL: Summary stays above actions at (700, 650)
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://video/test_export_dialog_group.gd:43)
+       [1] run (res://video/test_export_dialog_group.gd:99)
+PASS: Range group stays inside scroll area at (560, 360)
+ERROR: FAIL: Range group clears title bar at (560, 360)
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://video/test_export_dialog_group.gd:43)
+       [1] run (res://video/test_export_dialog_group.gd:98)
+ERROR: FAIL: Summary stays above actions at (560, 360)
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://video/test_export_dialog_group.gd:43)
+       [1] run (res://video/test_export_dialog_group.gd:99)
+ERROR: FAIL: Output group can be reached at minimum dialog size
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://video/test_export_dialog_group.gd:43)
+       [1] run (res://video/test_export_dialog_group.gd:103)
+ERROR: FAIL: Expanded Advanced reveals optional inspection records below its header
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://video/test_export_dialog_group.gd:43)
+       [1] run (res://video/test_export_dialog_group.gd:113)
+ERROR: FAIL: Tab moves keyboard focus from the first setting
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://video/test_export_dialog_group.gd:43)
+       [1] run (res://video/test_export_dialog_group.gd:124)
+SCRIPT ERROR: Invalid access to property or key 'times' on a base object of type 'Nil'.
+          at: settings (res://video/export_dialog.gd:307)
+          GDScript backtrace (most recent call first):
+              [0] settings (res://video/export_dialog.gd:307)
+              [1] run (res://video/test_export_dialog_group.gd:127)
+SCRIPT ERROR: Invalid access to property or key 'start_time' on a base object of type 'Dictionary'.
+          at: run (res://video/test_export_dialog_group.gd:128)
+          GDScript backtrace (most recent call first):
+              [0] run (res://video/test_export_dialog_group.gd:128)

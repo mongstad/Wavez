@@ -1,0 +1,21 @@
+{
+  "changed_theme_colors": [
+    "PanelTitle:font_color",
+    "SectionTitle:font_color",
+    "Window:title_color"
+  ],
+  "checks": 79,
+  "failures": [],
+  "layouts": [
+    {
+      "actual_window": "(1440, 900)",
+      "requested_scale": 1.0,
+      "viewport": "(1440.0, 900.0)"
+    },
+    {
+      "actual_window": "(2560, 1394)",
+      "requested_scale": 2.0,
+      "viewport": "(5120.0, 2788.0)"
+    }
+  ]
+}

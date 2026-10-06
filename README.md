@@ -37,6 +37,7 @@ Start with:
 - [Edit orbit center and radius](docs/ORBIT_CENTER.md)
 - [Current status](docs/CURRENT_STATUS.md)
 - [Paused opening and automatic preparation](docs/PAUSED_PREPARATION.md)
+- [Dialog title and section hierarchy](docs/DIALOG_HIERARCHY.md)
 - [File and Tools dialog layout](docs/DIALOG_COHERENCE.md)
 - [Current Tools functional audit](docs/TOOLS_FUNCTIONAL_AUDIT.md)
 - [Session action and error logs](docs/SESSION_LOGGING.md)

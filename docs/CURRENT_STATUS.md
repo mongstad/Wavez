@@ -1,5 +1,11 @@
 # Current status
 
+Issue #271 adds resting-pin violet title and section-header accents through
+the shared theme in candidate build 60. Keyboard Shortcuts, Video Export and
+existing shared dialog/panel headings inherit the treatment; layout, controls,
+focus, disabled text and semantic/scientific colors retain their existing styles.
+See [dialog hierarchy](DIALOG_HIERARCHY.md) for evidence and owner checks.
+
 Issue #259 groups the Keyboard Shortcuts rows into titled Navigation, Playback,
 File, Tools and Interface sections in candidate build 59. Groups come from the
 authoritative action categories and scroll above the fixed footer; binding,
