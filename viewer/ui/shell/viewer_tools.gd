@@ -116,7 +116,15 @@ func open(title: String) -> void:
 	else:
 		done_button.reparent(actions_row); actions_row.show()
 	share_analysis(title)
-	if title == "Performance": performance_rows(body)
+	var scroll: ScrollContainer = content.get_parent()
+	if title == "Performance":
+		# Focus boxes extend beyond editor bounds; reserve space inside the clip.
+		var padding := StyleBoxEmpty.new()
+		for side in ["left", "top", "right", "bottom"]: padding.set("content_margin_" + side, 8)
+		scroll.add_theme_stylebox_override("panel", padding)
+		performance_rows(body)
+	else:
+		scroll.remove_theme_stylebox_override("panel")
 	shorten_copy(body)
 	shorten_copy(footer)
 	Layout.fit(body)
@@ -148,7 +156,7 @@ func fit_performance() -> void:
 	if not window.visible or current != "Performance": return
 	var scroll: ScrollContainer = content.get_parent()
 	var chrome := window.size.y - scroll.size.y
-	var height := form("Performance").get_combined_minimum_size().y + chrome
+	var height := form("Performance").get_combined_minimum_size().y + chrome + scroll.get_theme_stylebox("panel").get_minimum_size().y
 	var extent: Vector2 = viewer.get_viewport().get_visible_rect().size
 	window.size.y = clampi(ceili(height), window.min_size.y, mini(620, int(extent.y) - 32))
 

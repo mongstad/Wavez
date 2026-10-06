@@ -6,8 +6,10 @@ available particle/field preparation selectors place each label beside its
 existing editor. Labels share a 140 px column; editors fill the remaining width.
 Long labels wrap within their column and long forms scroll at minimum width.
 The window measures visible content after layout settles; a mesh-only form
-opens at 560 × 240 instead of retaining unused vertical space.
-Clear decoded cache remains directly below its budget row.
+opens at 560 × 254 instead of retaining unused vertical space.
+Clear decoded cache remains directly below its budget row. The Performance
+scroll surface reserves 8 px on each side for focus outlines, and its fitted
+height includes that padding.
 
 The verbose decoded-cache reader sentence is absent from the normal form. Its
 label/state still updates and **File → Details** retains the reader's status,
@@ -21,7 +23,7 @@ when Performance opens, so controls rebuilt for a newly loaded source receive
 rows too; repeated opening does not replace or duplicate editors. Other Tools
 forms keep their existing presentation.
 
-[Focused evidence](evidence/issue-222/revision-2/README.md) includes normal/minimum and 1.5×
+[Focused evidence](evidence/issue-222/revision-3/README.md) includes normal/minimum and 1.5×
 scaling screenshots, budget-edit and cache-clear checks, diagnostic retention
 and source reload. Physical mixed-DPI/4K and other OSes remain owner checks.
 
