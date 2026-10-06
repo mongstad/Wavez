@@ -1,0 +1,24 @@
+{
+  "checks": 260,
+  "failures": [],
+  "layouts": [
+    {
+      "transport": "[P: (0.0, 796.0), S: (1440.0, 64.0)]",
+      "window": "(1440, 900)"
+    },
+    {
+      "transport": "[P: (0.0, 496.0), S: (1024.0, 104.0)]",
+      "window": "(1024, 640)"
+    }
+  ],
+  "refresh_activity": {
+    "counters": {},
+    "stages": {}
+  },
+  "request_delay_observed_ms": 459,
+  "source_hashes_unchanged": {
+    "/tmp/wavez-156-compatibility/scene.wvz": "a2f9a080e541e7eda5e39dbb50b4f45ba22447a0535412ef53351fb1e38ffbfe",
+    "/tmp/wavez-156-compatibility/offset.wvz": "98ff4ce029a8b08aaea2a161e9fbf69b53f607dfc8bbb2f5a506d310f461e7be",
+    "/tmp/wavez-156-compatibility/single.wvz": "bc9e1dc880092436fcc9f84be43e9a39b26d3a054390b275dcd5304802c62745"
+  }
+}

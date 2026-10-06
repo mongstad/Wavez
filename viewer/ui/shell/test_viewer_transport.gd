@@ -31,6 +31,8 @@ func run():
 	var config: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(output.path_join("config.json")))
 	var viewer = Viewer.new(); viewer.playing = false; viewer.orbit_enabled = false; root.add_child(viewer); viewer.set_process(false)
 	var ui = viewer.shell.transport
+	check(ui.displayed.get_theme_font("font") == ui.duration.get_theme_font("font"),"Both playback readouts resolve the same font resource")
+	check(ui.displayed.get_theme_font_size("font_size") == ui.duration.get_theme_font_size("font_size") and ui.duration.get_theme_font_size("font_size") == viewer.shell.style_slice.theme.get_font_size("font_size","NumericValue"),"Both playback readouts use the shared numeric size")
 	for row in [[0.0,"00:00"],[0.04,"00:00"],[43.7,"00:43"],[59.9,"00:59"],[59.94,"00:59"],[59.96,"00:59"],[60.0,"01:00"],[72.4,"01:12"],[763.6,"12:43"],[3599.9,"59:59"],[3599.94,"59:59"],[3599.96,"59:59"],[3600.0,"01:00:00"],[3867.3,"01:04:27"],[36000.0,"10:00:00"]]:
 		check(ui.format_duration(row[0]) == row[1],"Whole-clock duration formatting: "+str(row[0]))
 		check(ui.format_duration(row[0],true) == ("-"+row[1] if row[1] != "00:00" else "00:00"),"Remaining formatting and zero: "+str(row[0]))
@@ -186,6 +188,7 @@ func run():
 				picture("pending-layout-"+str(dimensions.x))
 		controller.buffering = prior_buffering; controller.pending_time = prior_pending; ui.refresh()
 		layouts.append({"window":str(dimensions),"transport":str(ui.get_rect())}); picture("loaded-"+str(dimensions.x))
+		await typography_layouts(ui, dimensions.x)
 	viewer._toggle_fullscreen(); await settle()
 	check(viewer.shell.immersive and not ui.is_visible_in_tree() and not viewer.shell.status_ui.is_visible_in_tree(),"Fullscreen hides combined media strip")
 	viewer._toggle_fullscreen(); await settle()
@@ -199,6 +202,18 @@ func run():
 	file.store_string(JSON.stringify({"checks":checks,"failures":failures,"layouts":layouts,"request_delay_observed_ms":request_delay_observed_ms,"refresh_activity":activity},"\t")); file.close()
 	viewer.free(); await process_frame
 	print("TRANSPORT: %d checks, %d failures" % [checks,failures.size()]); quit(0 if failures.is_empty() else 1)
+
+func typography_layouts(ui, width: int):
+	# Presentation-only long clocks: real seek/toggle/timing are covered above.
+	var processing: bool = ui.is_processing(); ui.set_process(false)
+	for pair in [["00:00","00:06"],["01:45","12:43"],["01:04:27","10:00:00"],["01:04:27","-08:55:33"]]:
+		ui.displayed.text = pair[0]; ui.duration.text = pair[1]
+		await settle(); ui.shell.layout(); await settle()
+		check(ui.displayed.get_global_rect().end.x < ui.viewer.timeline.global_position.x and ui.viewer.timeline.get_global_rect().end.x < ui.duration.global_position.x,"Clock widths preserve slider clearance: "+str(pair)+" at "+str(width))
+		check(ui.duration.get_global_rect().end.x <= ui.rate.global_position.x and ui.rate.get_global_rect().end.x <= ui.get_global_rect().end.x,"Long clocks leave speed control inside transport at "+str(width))
+		check(ui.size.y == (64 if width == 1440 else 104),"Shared typography preserves transport height at "+str(width))
+		picture("typography-"+str(width)+"-"+str(pair[1]).replace(":","-"))
+	ui.set_process(processing); ui.refresh(); await settle()
 
 func media_checks(viewer, ui, config):
 	go(ui,"0"); await ready(viewer); ui.refresh()

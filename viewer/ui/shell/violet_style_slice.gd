@@ -50,7 +50,10 @@ func install(shell) -> void:
 	shell.viewer.timeline.add_theme_stylebox_override("slider", track)
 	for action in shell.transport.actions.get_children(): action.theme_type_variation = "IconAction"
 	shell.transport.displayed.theme_type_variation = "NumericValue"
-	shell.transport.duration.add_theme_font_override("font", theme.MONO)
+	# Label and CompactButton must resolve the same numeric font and size.
+	for readout in [shell.transport.displayed, shell.transport.duration]:
+		readout.add_theme_font_override("font", theme.get_font("font", "NumericValue"))
+		readout.add_theme_font_size_override("font_size", theme.get_font_size("font_size", "NumericValue"))
 	shell.transport.seek_dialog.theme = theme
 	shell.details.theme = theme
 	shell.about.theme = theme

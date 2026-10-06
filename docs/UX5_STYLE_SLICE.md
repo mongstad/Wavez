@@ -340,6 +340,18 @@ and Slice position consume those resources directly, including widgets hosted
 in deferred Tools forms. Ranges, increments, values, mappings and callbacks are
 unchanged. Tools/Jobs and remaining form content await broad propagation.
 
+### Playback clock typography
+
+Issue #156 applies the shared `NumericValue` font resource and font size to
+both primary transport readouts in one loop in `violet_style_slice.gd`. Elapsed
+remains a seekable Label; total/remaining remains a CompactButton with its
+existing toggle and state styling. Both use the same regular DejaVu Sans Mono
+font and numeric-size token, including negative remaining and hour-long clocks.
+No timing, formatting, margins, alignment or transport-height rules change.
+Candidate build 62 is pending owner review;
+[renderer/layout evidence and owner checks](evidence/issue-156/README.md) cover
+the two readouts and their immediate transport interactions.
+
 ### Whole-second seek clock
 
 Current, total, remaining and delayed requested time share the same completed-
