@@ -1,6 +1,6 @@
 # Current status
 
-Issue #271 adds restrained lavender title and section-header accents through
+Issue #271 adds clearly distinguishable lavender title and section-header accents through
 the shared theme in candidate build 60. Keyboard Shortcuts, Video Export and
 existing shared dialog/panel headings inherit the treatment; layout, controls,
 focus, disabled text and semantic/scientific colors retain their existing styles.

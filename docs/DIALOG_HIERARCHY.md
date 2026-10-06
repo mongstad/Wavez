@@ -1,8 +1,8 @@
 # Dialog title and section hierarchy
 
 Issue #271 proposes a shared hierarchy treatment in candidate **v0.1.0.60**,
-pending owner visual review. Dialog/panel titles use soft lavender `#c3bde2`;
-titled-group/category headers use the quieter `#aaa6c5` in the same hue family.
+pending owner visual review. Dialog/panel titles use clear lavender `#c5a6ff`;
+titled-group/category headers use the slightly quieter violet `#aa91df` in the same hue family.
 
 The shared tokens `text.title` and `text.section` live in
 `viewer/ui/theme/wavez_tokens.gd`. The theme builder assigns them to
@@ -18,7 +18,7 @@ spacing, group order, borders, hover/focus/selection, disabled text, tooltip
 behavior and operational/scientific colors are unchanged. Section-header
 buttons/disclosures retain their existing interaction styling.
 
-[Focused evidence and screenshots](evidence/issue-271/README.md) cover normal,
+[Revised evidence and screenshots](evidence/issue-271/revision-2/README.md) cover normal,
 compact and simulated high scaling. Physical 4K and mixed-DPI acceptance remains
 an owner check.
 
@@ -27,7 +27,7 @@ an owner check.
 1. Open **Edit → Preferences → Keyboard Shortcuts** at the normal size and at
    970 × 600 or smaller. Compare title, Navigation/Playback/File/Tools/Interface
    headers, ordinary labels and disabled Clear/Apply text. Scroll through every
-   category and judge whether the accents help scanning without looking bright.
+   category and judge whether the accents make the hierarchy immediately visible while keeping row labels neutral.
 2. Tab between rows and categories, hover binding/Clear buttons, start a key
    capture, cancel with Escape, and confirm focus/selection remain distinct.
    Check the fixed footer and tooltip-free behavior.
