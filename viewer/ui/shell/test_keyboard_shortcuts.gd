@@ -8,6 +8,7 @@ var restart := false
 var speed_only := false
 var orbit_only := false
 var tooltip_only := false
+var group_only := false
 var checks := 0
 var failures: Array[String] = []
 var layouts: Array = []
@@ -91,6 +92,45 @@ func check_no_dialog_tooltips(dialog, context: String) -> void:
 	for control in controls:
 		if not control.tooltip_text.is_empty(): offenders.append(str(control.get_path()))
 	check(controls.size() >= Bindings.ACTIONS.size() * 4 and offenders.is_empty(), context + ": all shortcut rows, headings, footer and close controls have no tooltip text " + str(offenders))
+func check_groups(dialog) -> void:
+	var expected := {}
+	for action in Bindings.ACTIONS:
+		if not expected.has(action[2]): expected[action[2]] = []
+		expected[action[2]].append(action[0])
+	check(dialog.groups.keys() == expected.keys(), "One titled section per catalog category, in first-use order")
+	var seen := {}
+	for category in expected:
+		var group = dialog.groups[category]
+		check(group.theme_type_variation == "TitledGroup" and group.title_label.text == category and dialog.scroller.is_ancestor_of(group), category + " uses the shared scrolling titled group")
+		check(group.body.get_child_count() == expected[category].size(), category + " has exactly its catalog actions")
+		for index in expected[category].size():
+			var id: String = expected[category][index]
+			var row: HBoxContainer = dialog.rows[id].key.get_parent()
+			check(row.get_parent() == group.body and row.get_index() == index and not seen.has(id), id + " appears once under its catalog category in catalog order")
+			seen[id] = true
+	check(seen.size() == Bindings.ACTIONS.size(), "Every catalog action appears in exactly one group")
+func group_review(shell) -> void:
+	root.min_size = Vector2i.ZERO
+	for layout in [Vector2i(1440, 900), Vector2i(970, 600), Vector2i(640, 480)]:
+		root.size = layout; await settle(); shell.layout()
+		shell.edit_shortcuts(); await settle()
+		var dialog = shell.shortcuts_editor
+		dialog.fit(); await settle()
+		check_groups(dialog)
+		check_no_dialog_tooltips(dialog, "Grouped layout " + str(layout))
+		check(dialog.panel.get_global_rect().encloses(dialog.scroller.get_global_rect()) and dialog.panel.get_global_rect().encloses(dialog.footer.get_global_rect()), "Scroll viewport and fixed footer fit inside grouped dialog " + str(layout))
+		check(dialog.scroller.get_v_scroll_bar().max_value > dialog.scroller.size.y and dialog.scroller.get_global_rect().encloses(dialog.rows.reset_camera.key.get_global_rect()), "Groups scroll and first row is fully visible " + str(layout))
+		picture("grouped-" + str(layout.x) + "x" + str(layout.y))
+		dialog.rows.navigate.key.grab_focus(); key(KEY_TAB); key(KEY_TAB); await settle()
+		check(root.gui_get_focus_owner() == dialog.rows.play_pause.key, "Keyboard focus crosses Navigation to Playback " + str(layout))
+		dialog.rows.previous_category.key.grab_focus(); await settle()
+		check(dialog.scroller.scroll_vertical > 0 and dialog.scroller.get_global_rect().grow(-4).encloses(dialog.rows.previous_category.key.get_global_rect()), "Last grouped focus outline clears the scroll edge " + str(layout))
+		picture("grouped-scrolled-" + str(layout.x) + "x" + str(layout.y))
+		dialog.start_capture("open_capture"); key(KEY_R)
+		check(dialog.staged.open_capture == KEY_R and dialog.staged.reset_camera == 0, "Cross-category conflict transfers Navigation binding to File " + str(layout))
+		dialog.reset.pressed.emit()
+		check(dialog.apply_button.disabled and dialog.staged == shell.shortcuts.active, "Reset restores unchanged bindings " + str(layout))
+		dialog.dismiss()
 func tooltip_review(shell) -> void:
 	shell.edit_shortcuts(); await settle()
 	var dialog = shell.shortcuts_editor
@@ -226,6 +266,7 @@ func run() -> void:
 		if argument == "--shortcut-speed-only": speed_only = true
 		if argument == "--shortcut-orbit-only": orbit_only = true
 		if argument == "--shortcut-tooltip-only": tooltip_only = true
+		if argument == "--shortcut-group-only": group_only = true
 	if output.is_empty(): queue_free(); return
 	get_tree().create_timer(120).timeout.connect(func(): push_error("Shortcut tests timed out"); get_tree().quit(1))
 	await get_tree().process_frame
@@ -234,6 +275,9 @@ func run() -> void:
 		viewer = Viewer.new(); viewer.scene_prebuffer_enabled = false; root.add_child(viewer)
 	viewer.set_process(false)
 	var shell = viewer.shell
+	if group_only:
+		await group_review(shell)
+		finish(viewer); return
 	if tooltip_only:
 		await tooltip_review(shell)
 		finish(viewer); return
@@ -305,6 +349,7 @@ func run() -> void:
 		check(dialog.close_button.get_theme_stylebox(state) == shell_close.get_theme_stylebox(state), "Dialog X shares shell close styling: " + state)
 	check(dialog.close_button.has_meta("violet_motion") and dialog.focus_order.has(dialog.close_button), "Dialog X shares shell hover treatment and is keyboard navigable")
 	check(dialog.rows.size() == Bindings.ACTIONS.size(), "Every supported action has a key capture row")
+	check_groups(dialog)
 	check(dialog.rows.has("auto_orbit") and dialog.rows.has("free_camera"), "Both navigation toggles are present under Edit Preferences Keyboard Shortcuts")
 	check(dialog.rows.has("increase_camera_speed") and dialog.rows.has("decrease_camera_speed") and dialog.rows.increase_camera_speed.label.text == "Increase Camera Movement Speed" and dialog.rows.decrease_camera_speed.label.text == "Decrease Camera Movement Speed", "Both speed controls are discoverable in Keyboard Shortcuts")
 	check(dialog.footer.is_ancestor_of(dialog.cancel) and dialog.footer.is_ancestor_of(dialog.apply_button) and not dialog.scroller.is_ancestor_of(dialog.footer), "Cancel and Apply remain in fixed footer")
@@ -352,6 +397,10 @@ func run() -> void:
 	check_no_dialog_tooltips(dialog, "After duplicate transfer")
 	check(unique(dialog.staged) and shell.shortcuts.active == original, "Duplicate resolution is staged and active bindings remain intact")
 	check(not dialog.apply_button.disabled, "Duplicate transfer enables Apply")
+	dialog.start_capture("open_capture"); key(KEY_R)
+	check(dialog.staged.open_capture == KEY_R and dialog.staged.frame_scene == 0 and unique(dialog.staged), "Conflict transfers a binding from Navigation to File")
+	dialog.reset.pressed.emit()
+	check(dialog.apply_button.disabled and dialog.staged == original, "Reset Defaults restores the original map after cross-group transfer")
 	dialog.start_capture("frame_scene"); key(KEY_F); dialog.start_capture("reset_camera"); key(KEY_R)
 	check(dialog.apply_button.disabled, "Reverting every duplicate-transfer change disables Apply")
 	dialog.start_capture("frame_scene"); key(KEY_R)
@@ -490,6 +539,7 @@ func run() -> void:
 		check(dialog.panel.size.y <= 560.5 and dialog.scroller.size.y > 80, "Compact capped height leaves usable scroll region " + str(layout))
 		check(dialog.panel.get_global_rect().encloses(dialog.footer.get_global_rect()), "Fixed footer stays inside panel " + str(layout))
 		check(dialog.scroller.get_v_scroll_bar().max_value > dialog.scroller.size.y, "Long list scrolls at " + str(layout))
+		check(dialog.scroller.get_global_rect().encloses(dialog.rows.reset_camera.key.get_global_rect()), "First grouped shortcut is unclipped " + str(layout))
 		var field: Button = dialog.rows.reset_camera.key
 		field.grab_focus(); key(KEY_TAB); await settle()
 		check(dialog.is_ancestor_of(root.gui_get_focus_owner()), "Tab stays within modal editor " + str(layout))
@@ -513,7 +563,7 @@ func run() -> void:
 		key(KEY_TAB | KEY_MASK_SHIFT); await settle()
 		check(root.gui_get_focus_owner() == dialog.apply_button, "Shift Tab wraps back to footer " + str(layout))
 		dialog.rows.previous_category.key.grab_focus(); await settle()
-		check(dialog.scroller.scroll_vertical > 0 and dialog.scroller.get_global_rect().intersects(dialog.rows.previous_category.key.get_global_rect()), "Focus scrolls last action into view " + str(layout))
+		check(dialog.scroller.scroll_vertical > 0 and dialog.scroller.get_global_rect().grow(-4).encloses(dialog.rows.previous_category.key.get_global_rect()), "Focus scrolls last grouped action clear of the edge " + str(layout))
 		check_no_dialog_tooltips(dialog, "Scrolled to last row " + str(layout))
 		picture("shortcuts-"+str(layout[0].x)+"-"+str(layout[0].y)+"-"+str(layout[1]))
 		layouts.append({"window":str(root.size),"scale":root.content_scale_factor,"logical":str(extent),"panel":str(dialog.panel.get_global_rect()),"scroll_height":dialog.scroller.size.y})

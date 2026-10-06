@@ -1,11 +1,17 @@
 # Keyboard Shortcuts
 
-Current issue #255 proposes build `v0.1.0.57`: the Keyboard Shortcuts window
-shows no tooltips on binding buttons, Clear controls, action labels, category
-headings, footer actions or the close control. Visible row names, key names and
-focus styling remain. Shortcut editing, persistence and the explanatory
-tooltips elsewhere in Wavez are unchanged. See the
-[focused review evidence](evidence/issue-255/README.md).
+Issue #259 groups the scrolling shortcut rows into Navigation, Playback, File,
+Tools and Interface sections in candidate build `v0.1.0.59`. Each section uses
+the shared titled-group surface also used by Video Export. The catalog's category
+field decides placement, so a new action using an existing category joins that
+section without a dialog-specific mapping. Rows stay in catalog order within
+each group; the footer remains fixed below the scrolling sections.
+See the [focused #259 validation and owner checks](evidence/issue-259/README.md).
+
+Owner-merged issue #255 (build 57, PR #268) keeps the entire Keyboard Shortcuts
+window tooltip-free. Visible row names, key names and focus styling remain.
+Shortcut editing, persistence and explanatory tooltips elsewhere in Wavez are
+unchanged. See the [historical #255 evidence](evidence/issue-255/README.md).
 
 ## Original #175 implementation record
 

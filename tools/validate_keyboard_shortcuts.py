@@ -43,6 +43,7 @@ def main():
     focused = parser.add_mutually_exclusive_group()
     focused.add_argument("--speed-only", action="store_true", help="Validate only the movement-speed shortcut paths")
     focused.add_argument("--orbit-only", action="store_true", help="Validate only the manual-orbit shortcut paths")
+    focused.add_argument("--group-only", action="store_true", help="Validate grouped shortcut layout and its immediate interactions")
     args = parser.parse_args()
     out = args.output_dir.resolve(); out.mkdir(parents=True, exist_ok=False)
     scenes = {"particles": ["particles"], "fields": ["volume"], "meshes": ["mesh"],
@@ -73,6 +74,8 @@ def main():
         command.append("--shortcut-speed-only")
     if args.orbit_only:
         command.append("--shortcut-orbit-only")
+    if args.group_only:
+        command.append("--shortcut-group-only")
     native_cleanup = run(command, out, "native", env, known_packaged_window_cleanup=args.export)
     cleanup = run(command + ["--shortcut-restart"], out, "restart", env,
                   known_compatibility_cleanup=2 if args.renderer == "gl_compatibility" else 0)
@@ -84,7 +87,8 @@ def main():
                   renderer=args.renderer, packaged=args.export, fresh_process_restart=True,
                   known_engine_cleanup_diagnostics={"native": native_cleanup, "restart": cleanup}, reports=reports)
     (out / "validation.json").write_text(json.dumps(result, indent=2) + "\n")
-    print(f'Keyboard Shortcuts{" speed" if args.speed_only else " orbit" if args.orbit_only else ""}: {result["checks"]} PASS ({args.renderer}, packaged={args.export}); restart and source hash verified')
+    mode = " speed" if args.speed_only else " orbit" if args.orbit_only else " groups" if args.group_only else ""
+    print(f'Keyboard Shortcuts{mode}: {result["checks"]} PASS ({args.renderer}, packaged={args.export}); restart and source hash verified')
 
 
 if __name__ == "__main__":

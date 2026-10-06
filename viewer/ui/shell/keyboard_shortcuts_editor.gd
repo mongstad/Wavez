@@ -1,12 +1,14 @@
 extends Control
-## Flat modal preferences surface; all edits remain local until Apply succeeds.
+## Modal preferences surface; all edits remain local until Apply succeeds.
 const Bindings = preload("res://ui/keyboard_shortcuts.gd")
+const TitledGroup = preload("res://ui/shell/titled_group.gd")
 var shell
 var staged := {}
 var listening := ""
 var panel: PanelContainer
 var scroller: ScrollContainer
 var rows := {}
+var groups := {}
 var notice: Label
 var footer: HBoxContainer
 var cancel: Button
@@ -35,20 +37,23 @@ func setup(owner_shell) -> void:
 	scroller = ScrollContainer.new(); scroller.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	scroller.size_flags_vertical = Control.SIZE_EXPAND_FILL; scroller.follow_focus = true; box.add_child(scroller)
 	var list := VBoxContainer.new(); list.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	list.add_theme_constant_override("separation", 4); scroller.add_child(list)
-	var group := ""
+	list.add_theme_constant_override("separation", 10); scroller.add_child(list)
 	for action in Bindings.ACTIONS:
-		if action[2] != group:
-			group = action[2]
-			var heading := Label.new(); heading.text = group; heading.theme_type_variation = "PropertyLabel"
-			heading.add_theme_color_override("font_color", theme.c(&"text.secondary")); list.add_child(heading)
-		var row := HBoxContainer.new(); row.add_theme_constant_override("separation", 8); list.add_child(row)
+		var category: String = action[2]
+		if not groups.has(category):
+			var group = TitledGroup.new(category)
+			group.body.add_theme_constant_override("separation", 4)
+			list.add_child(group)
+			groups[category] = group
+		var row := HBoxContainer.new(); row.add_theme_constant_override("separation", 8); groups[category].body.add_child(row)
 		var label := Label.new(); label.text = action[1]; label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		label.clip_text = true; label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS; row.add_child(label)
 		var key := Button.new(); key.custom_minimum_size = Vector2(152, 32); key.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 		key.theme_type_variation = "SecondaryButton"; key.pressed.connect(start_capture.bind(action[0])); row.add_child(key)
+		key.focus_entered.connect(_keep_focus_outline_visible.bind(key))
 		var clear := Button.new(); clear.text = "Clear"; clear.custom_minimum_size.y = 32
 		clear.pressed.connect(clear_binding.bind(action[0])); row.add_child(clear)
+		clear.focus_entered.connect(_keep_focus_outline_visible.bind(clear))
 		rows[action[0]] = {"key":key, "clear":clear, "label":label}
 	notice = Label.new(); notice.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	notice.theme_type_variation = "PropertyLabel"; box.add_child(notice); notice.hide()
@@ -61,6 +66,17 @@ func setup(owner_shell) -> void:
 	apply_button.pressed.connect(commit); footer.add_child(apply_button)
 	get_window().size_changed.connect(fit.call_deferred)
 	hide()
+
+func _keep_focus_outline_visible(control: Control) -> void:
+	# ScrollContainer follows the control rect, which can leave its focus outline clipped.
+	await get_tree().process_frame
+	if not is_instance_valid(control) or not control.has_focus() or not visible: return
+	var viewport := scroller.get_global_rect().grow(-4)
+	var focused := control.get_global_rect()
+	if focused.end.y > viewport.end.y:
+		scroller.scroll_vertical += ceili(focused.end.y - viewport.end.y)
+	elif focused.position.y < viewport.position.y:
+		scroller.scroll_vertical -= ceili(viewport.position.y - focused.position.y)
 
 func open() -> void:
 	var focused := get_viewport().gui_get_focus_owner()
