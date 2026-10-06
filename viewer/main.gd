@@ -329,6 +329,7 @@ func _open_from_picker(path: String) -> void:
 	_open_capture(path)
 
 func _show_open_dialog() -> void:
+	_clear_manual_navigation()
 	shell.dismiss_orbit_editor()
 	open_dialog.popup_centered_ratio(0.78)
 
@@ -339,6 +340,7 @@ func _toggle_overlay() -> void:
 
 func _toggle_fullscreen() -> void:
 	if shell == null: return
+	_clear_manual_navigation()
 	if shell.immersive: shell.exit_immersive()
 	else: shell.enter_immersive()
 
@@ -534,8 +536,10 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
 		dragging = false
 		resizing_panel = false
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed and free_look_dragging:
+		_clear_manual_navigation()
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and not event.pressed:
-		free_look_dragging = false
+		_set_free_look_dragging(false)
 	if shell != null and shell.editing_shortcuts():
 		_clear_manual_navigation()
 		if shell.shortcuts_editor.handle_input(event): get_viewport().set_input_as_handled()
@@ -576,7 +580,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			if focused != null: focused.release_focus()
 			_clear_manual_navigation()
 			_take_manual_camera_control()
-			free_look_dragging = true
+			_set_free_look_dragging(true)
 			free_look_last_mouse = mouse_button.position
 			get_viewport().set_input_as_handled()
 		elif mouse_button.pressed and mouse_button.button_index == MOUSE_BUTTON_WHEEL_UP:
@@ -617,9 +621,16 @@ func _steer_camera(movement: Vector2) -> void:
 	_adopt_camera_basis()
 
 func _clear_manual_navigation() -> void:
-	free_look_dragging = false
+	_set_free_look_dragging(false)
 	manual_orbit_keys.clear()
 	manual_orbit_direction = 0.0
+
+func _set_free_look_dragging(active: bool) -> void:
+	if free_look_dragging == active: return
+	free_look_dragging = active
+	# Hidden preserves the pointer location and still delivers normal motion.
+	# Confined/captured modes would change the free-look interaction contract.
+	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN if active else Input.MOUSE_MODE_VISIBLE
 
 func _start_manual_orbit(action: String, event: InputEventKey) -> void:
 	if _camera_dragging() or get_viewport().gui_get_focus_owner() != null: return
@@ -876,6 +887,7 @@ func _focus_activity() -> void:
 
 func _save_image() -> void:
 	if screenshot_pending or screenshot_saving: return
+	_clear_manual_navigation()
 	var preferred: String = file_locations.settings.image_dir if file_locations != null else ""
 	if not preferred.is_empty():
 		await _write_screenshot(preferred)
@@ -1870,6 +1882,7 @@ func _copy_inspection_state() -> void:
 
 func _show_recipe_dialog(saving: bool) -> void:
 	if generic_reader == null: status_label.text = "Open a capture first."; return
+	_clear_manual_navigation()
 	if recipe_dialog == null:
 		recipe_dialog = FileDialog.new(); recipe_dialog.access = FileDialog.ACCESS_FILESYSTEM
 		recipe_dialog.use_native_dialog = true
@@ -1931,6 +1944,7 @@ func _load_scientific_inspection(path: String) -> void:
 	status_label.text = "Restored scientific inspection; playback paused." if problem.is_empty() else problem
 
 func _capture_inspection_png(path: String, with_state: bool, viewport_only: bool = false) -> Error:
+	_clear_manual_navigation()
 	if not viewport_only: shell.dismiss_orbit_editor()
 	if with_state and selection_controller != null and not selection_controller.state.definitions.is_empty():return await selection_controller.temporal.durable.capture_to(path,viewport_only)
 	if inspection_busy: return ERR_BUSY
@@ -2045,6 +2059,7 @@ func _sync_generic_source() -> bool:
 	return scene_layers.refresh() if scene_layers != null else false
 
 func _exit_tree() -> void:
+	_set_free_look_dragging(false)
 	_restore_render_pacing()
 	if scene_layers != null:scene_layers.close()
 	if generic_reader != null: generic_reader.close()

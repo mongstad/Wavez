@@ -1,5 +1,12 @@
 # Current status
 
+Issue #263 hides the pointer immediately while RMB free-look steers in the
+scientific viewport, then restores it at the same position on release. Focus
+loss, menus, dialogs, inspection capture and fullscreen transitions also end
+the hidden-cursor gesture. Other navigation controls retain a visible pointer.
+Candidate build 53 is pending owner review. See
+[camera steering and orbit](MANUAL_CAMERA_ORBIT.md).
+
 Issue #258 separates RMB free-look steering from held view-relative orbit in
 candidate build 52. RMB changes heading in place; Orbit Camera Left/Right are
 configurable Navigation shortcuts, Unbound by default. Either input immediately

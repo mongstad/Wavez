@@ -93,6 +93,7 @@ func close(recover_focus := true) -> void:
 		if is_instance_valid(control) and control.is_visible_in_tree(): control.grab_focus()
 
 func open(title: String) -> void:
+	viewer._clear_manual_navigation()
 	if viewer.session_log != null: viewer.session_log.record("UI", "Tools → " + title + " opened")
 	var focused: Control = viewer.get_viewport().gui_get_focus_owner()
 	if focused != null: previous_focus = weakref(focused)

@@ -9,6 +9,13 @@ follow the current view, including tilted or upside-down views. The camera
 position and radius stay fixed. Releasing RMB, losing window focus, opening
 Keyboard Shortcuts or starting an inspection capture ends the gesture.
 RMB uses a fixed `0.003` radians per pixel, independent of translation speed.
+While RMB steering is active in the scientific viewport, the cursor hides
+immediately. It returns at the same pointer position on release. Focus loss,
+opening menus or dialogs, inspection capture, leaving fullscreen and any manual
+navigation cleanup also restore it. This uses hidden cursor mode, so mouse
+movement continues to steer without pointer capture, warping or recentering.
+LMB, wheel, orbit shortcuts and Free Camera translation do not hide the cursor.
+General idle cursor hiding is a separate issue (#261).
 
 **Orbit Camera Left** and **Orbit Camera Right** move the camera around its
 current navigation target. Both start **Unbound** in **Edit → Preferences →
@@ -64,7 +71,13 @@ the default orientation and current scene framing.
    wheel, Frame Scene, Reset Camera and orbit-center Apply/Cancel afterward.
 5. Repeat in fullscreen and in both renderers. Assess physical mouse/key feel on
    KDE/Wayland. Scientific objects and playback state must remain unchanged.
+6. While steering with RMB, confirm the cursor hides on press and returns on
+   release without moving position. Try opening a menu, Keyboard Shortcuts and
+   a Tools dialog, then alt-tab and leave fullscreen while RMB is held; the
+   cursor must return immediately. LMB, wheel, orbit keys and W/S/A/D/Q/E alone
+   must leave it visible. Double-click fullscreen must still work afterward.
 
 Current evidence: [issue #258](evidence/issue-258/README.md).
+Cursor-specific evidence: [issue #263](evidence/issue-263/README.md).
 The earlier RMB-orbit design and its results remain in the historical
 [issue #190 revision 2 report](evidence/issue-190/revision-2/README.md).

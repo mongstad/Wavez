@@ -1,0 +1,11 @@
+{
+  "checks": 1713,
+  "failures": [],
+  "renderer": "gl_compatibility",
+  "source_hashes_unchanged": {
+    "mixed.wvz": "777f335b59fa425408dfdc7ae9bb2b49335938fbf3e7c9717f86f448ce59d96c",
+    "mesh.wvz": "5112f6774a3600eb1620071a59c3ddf277d3d6fb34477bb5580dc5035a0e37a3",
+    "volume.wvz": "7e3f9454b310f1bc490de3ced6457f505ceca232ff640e9e149ec984ad9f3eba",
+    "particles.wvz": "f667f9e9b6afeea1e4ed87a341fcd52daee66435026aeb408722bc93e4818995"
+  }
+}

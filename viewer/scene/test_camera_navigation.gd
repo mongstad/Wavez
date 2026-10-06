@@ -196,14 +196,71 @@ func live_hold(view) -> void:
 func viewport_mouse_dispatch(view) -> void:
 	focus_none()
 	var before: Transform3D = view.camera.transform
+	var pointer_before := DisplayServer.mouse_get_position()
+	check(Input.mouse_mode == Input.MOUSE_MODE_VISIBLE,"Cursor starts visible before viewport navigation")
 	var press := InputEventMouseButton.new(); press.button_index = MOUSE_BUTTON_RIGHT; press.pressed = true; press.position = Vector2(400,300)
 	root.push_input(press,true)
-	check(view.free_look_dragging and view.camera.transform == before,"Viewport RMB dispatch starts steering without a press snap")
+	check(view.free_look_dragging and Input.mouse_mode == Input.MOUSE_MODE_HIDDEN and view.camera.transform == before,"Viewport RMB press hides cursor without a camera snap")
 	var motion := InputEventMouseMotion.new(); motion.position = press.position+Vector2(30,20); motion.relative = Vector2(30,20); motion.button_mask = MOUSE_BUTTON_MASK_RIGHT
 	root.push_input(motion,true)
-	check(view.camera.position == before.origin and not view.camera.basis.is_equal_approx(before.basis),"Viewport mouse dispatch changes heading without translation")
+	check(Input.mouse_mode == Input.MOUSE_MODE_HIDDEN and view.camera.position == before.origin and not view.camera.basis.is_equal_approx(before.basis),"Hidden cursor keeps normal steering without translation")
 	press.pressed = false; press.position = Vector2.ZERO; root.push_input(press,true)
-	check(not view.free_look_dragging,"Viewport mouse release over chrome stops steering")
+	check(not view.free_look_dragging and Input.mouse_mode == Input.MOUSE_MODE_VISIBLE,"Viewport RMB release over chrome restores cursor immediately")
+	check(DisplayServer.mouse_get_position() == pointer_before,"RMB hide and restore never warp the pointer")
+
+func cursor_interruptions(view) -> void:
+	focus_none()
+	check(Input.mouse_mode == Input.MOUSE_MODE_VISIBLE,"Viewport hover alone leaves cursor visible")
+	mouse(view,MOUSE_BUTTON_LEFT,true)
+	check(Input.mouse_mode == Input.MOUSE_MODE_VISIBLE,"LMB alone leaves cursor visible")
+	mouse(view,MOUSE_BUTTON_LEFT,false)
+	var wheel := InputEventMouseButton.new(); wheel.button_index = MOUSE_BUTTON_WHEEL_UP; wheel.pressed = true; wheel.factor = 1.0
+	view._unhandled_input(wheel)
+	check(Input.mouse_mode == Input.MOUSE_MODE_VISIBLE,"Wheel zoom leaves cursor visible")
+	orbit_key(view,"orbit_camera_left",true)
+	check(Input.mouse_mode == Input.MOUSE_MODE_VISIBLE,"Held orbit shortcut leaves cursor visible")
+	orbit_key(view,"orbit_camera_left",false)
+	var move := InputEventKey.new(); move.physical_keycode = KEY_W; move.pressed = true
+	view._unhandled_input(move)
+	check(Input.mouse_mode == Input.MOUSE_MODE_VISIBLE,"Free Camera translation key leaves cursor visible")
+	move.pressed = false; view._input(move)
+	for reason in ["focus", "menu", "shortcuts", "tools", "fullscreen"]:
+		mouse(view,MOUSE_BUTTON_RIGHT,true)
+		check(view.free_look_dragging and (DisplayServer.get_name() == "headless" or Input.mouse_mode == Input.MOUSE_MODE_HIDDEN),"RMB starts hidden-cursor steering before " + reason)
+		match reason:
+			"focus": view.get_window().focus_exited.emit()
+			"menu": view.shell.menus.File.about_to_popup.emit()
+			"shortcuts": view.shell.edit_shortcuts(); view.shell.shortcuts_editor.dismiss()
+			"tools": view.tools_ui.open("Camera"); view.tools_ui.close()
+			"fullscreen": view.shell.exit_immersive() if view.shell.immersive else view.shell.enter_immersive()
+		check(not view.free_look_dragging and Input.mouse_mode == Input.MOUSE_MODE_VISIBLE,reason + " ends steering and restores cursor")
+	if view.shell.immersive: view.shell.exit_immersive()
+	mouse(view,MOUSE_BUTTON_RIGHT,true)
+	view.inspection_busy = true
+	var motion := InputEventMouseMotion.new(); motion.position = Vector2(410,310); view._input(motion)
+	check(not view.free_look_dragging and Input.mouse_mode == Input.MOUSE_MODE_VISIBLE,"Busy inspection ends steering and restores cursor")
+	view.inspection_busy = false
+	mouse(view,MOUSE_BUTTON_RIGHT,true)
+	view._clear_manual_navigation()
+	check(not view.free_look_dragging and Input.mouse_mode == Input.MOUSE_MODE_VISIBLE,"Manual navigation cleanup restores cursor")
+	mouse(view,MOUSE_BUTTON_RIGHT,true)
+	var left_press := InputEventMouseButton.new(); left_press.button_index = MOUSE_BUTTON_LEFT; left_press.pressed = true; left_press.position = Vector2(10,10)
+	view._input(left_press)
+	check(not view.free_look_dragging and Input.mouse_mode == Input.MOUSE_MODE_VISIBLE,"LMB press on chrome interrupts RMB and restores cursor")
+	left_press.pressed = false; view._input(left_press)
+	if DisplayServer.get_name() != "headless":
+		view.shell.enter_immersive()
+		mouse(view,MOUSE_BUTTON_RIGHT,true)
+		check(view.free_look_dragging and Input.mouse_mode == Input.MOUSE_MODE_HIDDEN,"Fullscreen RMB hides cursor")
+		view.shell.exit_immersive()
+		check(not view.free_look_dragging and Input.mouse_mode == Input.MOUSE_MODE_VISIBLE,"Leaving fullscreen during RMB restores cursor")
+		view.shell.enter_immersive()
+		mouse(view,MOUSE_BUTTON_RIGHT,true)
+		mouse(view,MOUSE_BUTTON_RIGHT,false)
+		check(Input.mouse_mode == Input.MOUSE_MODE_VISIBLE,"Fullscreen RMB release restores cursor")
+		var double_click := InputEventMouseButton.new(); double_click.button_index = MOUSE_BUTTON_LEFT; double_click.pressed = true; double_click.double_click = true; double_click.position = Vector2(400,300)
+		view._unhandled_input(double_click)
+		check(not view.shell.immersive and Input.mouse_mode == Input.MOUSE_MODE_VISIBLE,"Double-click exits fullscreen after RMB steering with cursor visible")
 
 func run() -> void:
 	for arg in OS.get_cmdline_user_args():
@@ -226,6 +283,7 @@ func run() -> void:
 		viewport_mouse_dispatch(view)
 		check(view.shell.immersive,"Navigation preserves fullscreen")
 		view.shell.exit_immersive()
+	cursor_interruptions(view)
 	var file := FileAccess.open(output.path_join("camera-report.json"),FileAccess.WRITE)
 	file.store_string(JSON.stringify({"checks":checks,"failures":failures,"renderer":RenderingServer.get_current_rendering_method()},"\t")); file.close()
 	view.queue_free(); await process_frame

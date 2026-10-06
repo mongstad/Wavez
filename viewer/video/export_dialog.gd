@@ -248,6 +248,7 @@ func check(label: String, text: String, target: GridContainer) -> CheckButton:
 	return control
 
 func open() -> void:
+	viewer._clear_manual_navigation()
 	if viewer.shell != null:
 		theme = viewer.shell.style_slice.theme
 		surface.add_theme_stylebox_override("panel",viewer.shell.style_slice.theme.flat_box(&"surface.1",0,0,0))
