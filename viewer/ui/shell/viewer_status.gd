@@ -145,6 +145,7 @@ func reopen_analysis() -> void:
 	viewer.tools_ui.open(task)
 
 func open_jobs() -> void:
+	viewer._cursor_idle_reset()
 	refresh(); jobs_dialog.popup_centered(Vector2i(520,320))
 	for title in ["Video export", "Selections", "Analysis", "Matched views", "Isosurface"]:
 		if not job_rows[title].open.disabled:

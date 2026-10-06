@@ -359,6 +359,7 @@ func source_details() -> String:
 	return "\n\n".join(lines)
 
 func show_details(title: String, text: String, show_failure_action := false) -> void:
+	viewer._cursor_idle_reset()
 	var focus := get_viewport().gui_get_focus_owner()
 	if focus != null: previous_focus = weakref(focus)
 	details.theme = style_slice.theme

@@ -1,10 +1,17 @@
 # Current status
 
+Issue #261 hides the pointer after 2.5 seconds without mouse interaction in
+the scientific viewport. Any mouse interaction or entry into application
+chrome restores it at the same position; dialogs, focus loss and fullscreen
+exit also restore it. Held mouse interactions never auto-hide. RMB free-look's
+immediate hide from #263 takes precedence while steering is active. Candidate
+build 54 is pending owner review. See [viewport cursor behavior](VIEWPORT_CURSOR.md).
+
 Issue #263 hides the pointer immediately while RMB free-look steers in the
 scientific viewport, then restores it at the same position on release. Focus
 loss, menus, dialogs, inspection capture and fullscreen transitions also end
 the hidden-cursor gesture. Other navigation controls retain a visible pointer.
-Candidate build 53 is pending owner review. See
+Build 53 was owner-merged in PR #264. See
 [camera steering and orbit](MANUAL_CAMERA_ORBIT.md).
 
 Issue #258 separates RMB free-look steering from held view-relative orbit in

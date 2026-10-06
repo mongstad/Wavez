@@ -9,6 +9,7 @@ extends Node3D
 const TRAIL_LAYERS := 5
 const DISPLAY_HZ := 30.0
 const PAUSED_ORBIT_MAX_FPS := 60
+const CURSOR_IDLE_MSEC := 2500
 const FREE_LOOK_SENSITIVITY := 0.003 # radians per mouse pixel; translation-independent
 const MANUAL_ORBIT_RATE := PI / 2.0 # radians per second; translation-independent
 const Profile = preload("res://scene/playback_profile.gd")
@@ -101,6 +102,8 @@ var dragging := false
 var last_mouse := Vector2.ZERO
 var free_look_dragging := false
 var free_look_last_mouse := Vector2.ZERO
+var cursor_idle_hidden := false
+var cursor_last_activity_msec := 0
 var manual_orbit_keys := {}
 var manual_orbit_direction := 0.0
 var manual_orbit_axis := Vector3.UP
@@ -190,8 +193,10 @@ func _ready() -> void:
 		add_child(monitor)
 	_build_guides()
 	_update_camera()
+	_cursor_idle_reset()
 	get_window().focus_exited.connect(_clear_manual_navigation)
 	get_window().focus_exited.connect(_clear_camera_speed_hold)
+	get_window().mouse_exited.connect(_cursor_idle_reset)
 
 	var args := OS.get_cmdline_user_args()
 	if offline_instance: args = PackedStringArray()
@@ -387,6 +392,7 @@ func _read_frame_profiled(index: int) -> FrameData:
 
 func _process(delta: float) -> void:
 	_update_render_pacing()
+	if not offline_instance: _cursor_idle_tick(Time.get_ticks_msec(), _cursor_idle_eligible())
 	_update_manual_orbit(delta)
 	var started := Profile.begin()
 	_process_profiled(delta)
@@ -530,6 +536,8 @@ func _update_hud_profiled() -> void:
 		hud.text = "WAVEZ • %s\nFrame %d / %d  ·  t = %.5f\n%s\n%s" % [generic_reader.metadata.get("simulation_name", capture_path.get_file()), current_index + 1, frame_count, committed_sample.get("requested_time",frame_a.sim_time), population, _sample_label()]
 
 func _input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion or event is InputEventMouseButton:
+		_cursor_idle_reset()
 	if event is InputEventKey and not event.pressed: _release_camera_speed_key(event)
 	if event is InputEventKey: _release_manual_orbit_key(event)
 	# A release over any chrome must still end a viewport drag, including preferences.
@@ -626,11 +634,38 @@ func _clear_manual_navigation() -> void:
 	manual_orbit_direction = 0.0
 
 func _set_free_look_dragging(active: bool) -> void:
-	if free_look_dragging == active: return
 	free_look_dragging = active
-	# Hidden preserves the pointer location and still delivers normal motion.
-	# Confined/captured modes would change the free-look interaction contract.
-	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN if active else Input.MOUSE_MODE_VISIBLE
+	_cursor_idle_reset()
+
+func _cursor_idle_reset(now_msec: int = -1) -> void:
+	cursor_last_activity_msec = Time.get_ticks_msec() if now_msec < 0 else now_msec
+	cursor_idle_hidden = false
+	_sync_cursor_mode()
+
+func _sync_cursor_mode() -> void:
+	if offline_instance: return
+	# Hidden mode preserves the pointer position and normal mouse-motion input.
+	# RMB steering takes precedence over the general inactivity rule.
+	var desired := Input.MOUSE_MODE_HIDDEN if free_look_dragging or cursor_idle_hidden else Input.MOUSE_MODE_VISIBLE
+	if Input.mouse_mode != desired: Input.mouse_mode = desired
+
+func _cursor_idle_eligible() -> bool:
+	if offline_instance or shell == null or shell.edge_reveal == null or inspection_busy: return false
+	var point := get_viewport().get_mouse_position()
+	return get_window().has_focus() and shell.edge_reveal.pointer_inside and _cursor_viewport_point(point) and not dragging and not resizing_panel and Input.get_mouse_button_mask() == 0
+
+func _cursor_viewport_point(point: Vector2) -> bool:
+	# These two modal editors are Controls rather than Window popups.
+	if shell.editing_shortcuts() or (shell.orbit_editor != null and shell.orbit_editor.visible): return false
+	return get_viewport().get_visible_rect().has_point(point) and shell.edge_reveal.is_viewport_point(point)
+
+func _cursor_idle_tick(now_msec: int, eligible: bool) -> void:
+	if free_look_dragging or not eligible:
+		_cursor_idle_reset(now_msec)
+		return
+	if not cursor_idle_hidden and now_msec - cursor_last_activity_msec >= CURSOR_IDLE_MSEC:
+		cursor_idle_hidden = true
+		_sync_cursor_mode()
 
 func _start_manual_orbit(action: String, event: InputEventKey) -> void:
 	if _camera_dragging() or get_viewport().gui_get_focus_owner() != null: return
