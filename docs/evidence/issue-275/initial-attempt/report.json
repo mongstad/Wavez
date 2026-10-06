@@ -1,0 +1,17 @@
+{
+	"checks": 54,
+	"failures": [
+		"total-hover: tooltip contract",
+		"total-hover: visible hover popup",
+		"remaining-hover: tooltip contract",
+		"remaining-hover: visible hover popup",
+		"duration-focus-1440: tooltip contract",
+		"duration-focus-1440: visible hover popup",
+		"Refresh/toggle remains tooltip-free (1440, 900)",
+		"Refresh/toggle remains tooltip-free (1440, 900)",
+		"duration-focus-1024: tooltip contract",
+		"duration-focus-1024: visible hover popup",
+		"Refresh/toggle remains tooltip-free (1024, 640)",
+		"Refresh/toggle remains tooltip-free (1024, 640)"
+	]
+}

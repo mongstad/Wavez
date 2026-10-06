@@ -1,5 +1,11 @@
 # Current status
 
+Issue #275 removes hover tooltips only from elapsed and total/remaining playback
+clocks in candidate build 63. Seek, toggle, focus, shared typography and transport
+layout retain their accepted behavior; other transport tooltips remain available.
+See [playback typography](UX5_STYLE_SLICE.md#playback-clock-typography) and
+[focused hover/input evidence](evidence/issue-275/README.md).
+
 Issue #156 gives elapsed and total/remaining transport clocks the same explicit
 NumericValue font and size in candidate build 62. Seek, duration toggle, clock
 formatting and desktop/compact layout retain their behavior. See the

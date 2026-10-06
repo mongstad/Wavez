@@ -348,9 +348,17 @@ remains a seekable Label; total/remaining remains a CompactButton with its
 existing toggle and state styling. Both use the same regular DejaVu Sans Mono
 font and numeric-size token, including negative remaining and hour-long clocks.
 No timing, formatting, margins, alignment or transport-height rules change.
-Candidate build 62 is pending owner review;
-[renderer/layout evidence and owner checks](evidence/issue-156/README.md) cover
-the two readouts and their immediate transport interactions.
+This typography was owner-merged in build 62 (PR #274);
+[renderer/layout evidence](evidence/issue-156/README.md) records that checkpoint.
+
+Issue #275 removes hover tooltips from these two primary clocks only in candidate
+build 63, pending owner review. The duration button clears the shared
+constructor's default tooltip at creation; refresh no longer assigns explanatory text to
+either clock. Double-click/keyboard seek, total/remaining toggling, focus, typography
+and layout stay unchanged. Play, timeline, Loop and other intentional tooltips
+remain available, including the seek editor's existing tooltip.
+[Focused hover/input evidence and owner checks](evidence/issue-275/README.md)
+cover native hover, mouse/keyboard interaction and normal/compact layouts.
 
 ### Whole-second seek clock
 

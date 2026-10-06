@@ -67,7 +67,7 @@ func run():
 		go(ui,ui.FloatText.format_value(time)); await ready(viewer)
 		check(viewer.committed_sample.requested_time == time,"Go commits exact or fractional target " + str(time))
 		check(ui.requested.text.is_empty() and ui.displayed.text == ui.format_duration(time),"Elapsed playback uses whole seconds from precise committed sample")
-		check(not ui.displayed.tooltip_text.contains(ui.FloatText.format_value(time)),"Normal elapsed tooltip does not expose raw decimal source timing")
+		check(ui.displayed.get_tooltip().is_empty() and ui.duration.get_tooltip().is_empty(),"Committed clocks remain tooltip-free")
 	check(viewer.scene_layers.current.field.a.time == 1,"Sparse field holds independent source time at fractional seek")
 	for index in [0,viewer.frame_count-1]:
 		viewer.timeline.value = index;await ready(viewer);ui.refresh()
@@ -252,7 +252,7 @@ func media_checks(viewer, ui, config):
 		check(ui.displayed.text == ui.duration.text,"Offset/single-sample capture ends at total")
 		ui.duration.pressed.emit(); check(ui.duration.text == "00:00","Offset/single-sample remaining reaches zero")
 		ui.duration.pressed.emit()
-		check(ui.displayed.tooltip_text.contains("MM:SS") and not ui.displayed.tooltip_text.contains(" ms"),"Offset source units do not change the elapsed-clock representation")
+		check(ui.displayed.get_tooltip().is_empty() and ui.displayed.text == ui.format_duration(ui.playback_timing().elapsed), "Offset source units retain a tooltip-free whole-clock readout")
 	viewer._open_capture(config.source); viewer.playing = false; await ready(viewer)
 
 func delay_checks(viewer, ui):
