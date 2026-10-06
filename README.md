@@ -31,6 +31,7 @@ Start with:
 - [Editable Keyboard Shortcuts](docs/KEYBOARD_SHORTCUTS.md)
 - [Free-look steering and manual camera orbit](docs/MANUAL_CAMERA_ORBIT.md)
 - [Viewport cursor visibility](docs/VIEWPORT_CURSOR.md)
+- [Screen-fixed cinematic background](docs/CINEMATIC_BACKGROUND.md)
 - [Auto Orbit](docs/AUTO_ORBIT.md)
 - [Free Camera speed](docs/FREE_CAMERA_SPEED.md)
 - [Edit orbit center and radius](docs/ORBIT_CENTER.md)

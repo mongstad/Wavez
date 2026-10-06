@@ -1,0 +1,1144 @@
+{
+  "renderer": "forward_plus",
+  "checks": [
+    {
+      "ok": true,
+      "label": "wavez-205-video-forward: clean native log"
+    },
+    {
+      "ok": true,
+      "label": "particles: current viewer opens WVZ1"
+    },
+    {
+      "ok": true,
+      "label": "particles: File / Export / Video opens current dialog"
+    },
+    {
+      "ok": true,
+      "label": "particles: current-position export uses committed scene clock"
+    },
+    {
+      "ok": true,
+      "label": "particles: uncommitted target does not change export start"
+    },
+    {
+      "ok": true,
+      "label": "particles: missing committed sample refuses export"
+    },
+    {
+      "ok": true,
+      "label": "late-particles: current viewer opens WVZ1"
+    },
+    {
+      "ok": true,
+      "label": "late-particles: File / Export / Video opens current dialog"
+    },
+    {
+      "ok": true,
+      "label": "late-particles: current-position export uses committed scene clock"
+    },
+    {
+      "ok": true,
+      "label": "late-particles: uncommitted target does not change export start"
+    },
+    {
+      "ok": true,
+      "label": "late-particles: missing committed sample refuses export"
+    },
+    {
+      "ok": true,
+      "label": "field: current viewer opens WVZ1"
+    },
+    {
+      "ok": true,
+      "label": "field: File / Export / Video opens current dialog"
+    },
+    {
+      "ok": true,
+      "label": "field: current-position export uses committed scene clock"
+    },
+    {
+      "ok": true,
+      "label": "field: uncommitted target does not change export start"
+    },
+    {
+      "ok": true,
+      "label": "field: missing committed sample refuses export"
+    },
+    {
+      "ok": true,
+      "label": "mesh: current viewer opens WVZ1"
+    },
+    {
+      "ok": true,
+      "label": "mesh: File / Export / Video opens current dialog"
+    },
+    {
+      "ok": true,
+      "label": "mesh: current-position export uses committed scene clock"
+    },
+    {
+      "ok": true,
+      "label": "mesh: uncommitted target does not change export start"
+    },
+    {
+      "ok": true,
+      "label": "mesh: missing committed sample refuses export"
+    },
+    {
+      "ok": true,
+      "label": "mixed: current viewer opens WVZ1"
+    },
+    {
+      "ok": true,
+      "label": "mixed: File / Export / Video opens current dialog"
+    },
+    {
+      "ok": true,
+      "label": "mixed: current-position export uses committed scene clock"
+    },
+    {
+      "ok": true,
+      "label": "mixed: uncommitted target does not change export start"
+    },
+    {
+      "ok": true,
+      "label": "mixed: missing committed sample refuses export"
+    },
+    {
+      "ok": true,
+      "label": "late: current viewer opens WVZ1"
+    },
+    {
+      "ok": true,
+      "label": "late: File / Export / Video opens current dialog"
+    },
+    {
+      "ok": true,
+      "label": "late: current-position export uses committed scene clock"
+    },
+    {
+      "ok": true,
+      "label": "late: uncommitted target does not change export start"
+    },
+    {
+      "ok": true,
+      "label": "late: missing committed sample refuses export"
+    },
+    {
+      "ok": true,
+      "label": "overflow: current viewer opens WVZ1"
+    },
+    {
+      "ok": true,
+      "label": "overflow: File / Export / Video opens current dialog"
+    },
+    {
+      "ok": true,
+      "label": "overflow: current-position export uses committed scene clock"
+    },
+    {
+      "ok": true,
+      "label": "overflow: uncommitted target does not change export start"
+    },
+    {
+      "ok": true,
+      "label": "overflow: missing committed sample refuses export"
+    },
+    {
+      "ok": true,
+      "label": "budget: current viewer opens WVZ1"
+    },
+    {
+      "ok": true,
+      "label": "budget: File / Export / Video opens current dialog"
+    },
+    {
+      "ok": true,
+      "label": "budget: current-position export uses committed scene clock"
+    },
+    {
+      "ok": true,
+      "label": "budget: uncommitted target does not change export start"
+    },
+    {
+      "ok": true,
+      "label": "budget: missing committed sample refuses export"
+    },
+    {
+      "ok": true,
+      "label": "particles: clean native log"
+    },
+    {
+      "ok": true,
+      "label": "particles: complete (got complete)"
+    },
+    {
+      "ok": true,
+      "label": "particles: successful worker exit"
+    },
+    {
+      "ok": true,
+      "label": "particles: MP4 dimensions/count/FPS"
+    },
+    {
+      "ok": true,
+      "label": "particles: half-open output times within JSON decimal precision"
+    },
+    {
+      "ok": true,
+      "label": "particles/0: strict bounded synchronous offline path"
+    },
+    {
+      "ok": true,
+      "label": "particles/0: requested backend"
+    },
+    {
+      "ok": true,
+      "label": "particles/0: shell, status, dock and resize controls stay outside frame"
+    },
+    {
+      "ok": true,
+      "label": "particles/0: explicit scientific legend gate"
+    },
+    {
+      "ok": true,
+      "label": "particles/0: deterministic orbit"
+    },
+    {
+      "ok": true,
+      "label": "particles/0: requested particle mapping survives start-time restore"
+    },
+    {
+      "ok": true,
+      "label": "particles/0: exact IDs and interpolated particle positions"
+    },
+    {
+      "ok": true,
+      "label": "particles/1: strict bounded synchronous offline path"
+    },
+    {
+      "ok": true,
+      "label": "particles/1: requested backend"
+    },
+    {
+      "ok": true,
+      "label": "particles/1: shell, status, dock and resize controls stay outside frame"
+    },
+    {
+      "ok": true,
+      "label": "particles/1: explicit scientific legend gate"
+    },
+    {
+      "ok": true,
+      "label": "particles/1: deterministic orbit"
+    },
+    {
+      "ok": true,
+      "label": "particles/1: requested particle mapping survives start-time restore"
+    },
+    {
+      "ok": true,
+      "label": "particles/1: exact IDs and interpolated particle positions"
+    },
+    {
+      "ok": true,
+      "label": "particles: nonempty rendered image"
+    },
+    {
+      "ok": true,
+      "label": "particles-overlay: clean native log"
+    },
+    {
+      "ok": true,
+      "label": "particles-overlay: complete (got complete)"
+    },
+    {
+      "ok": true,
+      "label": "particles-overlay: successful worker exit"
+    },
+    {
+      "ok": true,
+      "label": "particles-overlay: MP4 dimensions/count/FPS"
+    },
+    {
+      "ok": true,
+      "label": "particles-overlay: half-open output times within JSON decimal precision"
+    },
+    {
+      "ok": true,
+      "label": "particles-overlay/0: strict bounded synchronous offline path"
+    },
+    {
+      "ok": true,
+      "label": "particles-overlay/0: requested backend"
+    },
+    {
+      "ok": true,
+      "label": "particles-overlay/0: shell, status, dock and resize controls stay outside frame"
+    },
+    {
+      "ok": true,
+      "label": "particles-overlay/0: explicit scientific legend gate"
+    },
+    {
+      "ok": true,
+      "label": "particles-overlay/0: deterministic orbit"
+    },
+    {
+      "ok": true,
+      "label": "particles-overlay/0: requested particle mapping survives start-time restore"
+    },
+    {
+      "ok": true,
+      "label": "particles-overlay/0: exact IDs and interpolated particle positions"
+    },
+    {
+      "ok": true,
+      "label": "particles-overlay/1: strict bounded synchronous offline path"
+    },
+    {
+      "ok": true,
+      "label": "particles-overlay/1: requested backend"
+    },
+    {
+      "ok": true,
+      "label": "particles-overlay/1: shell, status, dock and resize controls stay outside frame"
+    },
+    {
+      "ok": true,
+      "label": "particles-overlay/1: explicit scientific legend gate"
+    },
+    {
+      "ok": true,
+      "label": "particles-overlay/1: deterministic orbit"
+    },
+    {
+      "ok": true,
+      "label": "particles-overlay/1: requested particle mapping survives start-time restore"
+    },
+    {
+      "ok": true,
+      "label": "particles-overlay/1: exact IDs and interpolated particle positions"
+    },
+    {
+      "ok": true,
+      "label": "particles-overlay: nonempty rendered image"
+    },
+    {
+      "ok": true,
+      "label": "particles-overlay: enabled viewport legends affect pixels"
+    },
+    {
+      "ok": true,
+      "label": "particles-overlay: no top bar or left-side shell pixels enter the video"
+    },
+    {
+      "ok": true,
+      "label": "field: clean native log"
+    },
+    {
+      "ok": true,
+      "label": "field: complete (got complete)"
+    },
+    {
+      "ok": true,
+      "label": "field: successful worker exit"
+    },
+    {
+      "ok": true,
+      "label": "field: MP4 dimensions/count/FPS"
+    },
+    {
+      "ok": true,
+      "label": "field: half-open output times within JSON decimal precision"
+    },
+    {
+      "ok": true,
+      "label": "field/0: strict bounded synchronous offline path"
+    },
+    {
+      "ok": true,
+      "label": "field/0: requested backend"
+    },
+    {
+      "ok": true,
+      "label": "field/0: shell, status, dock and resize controls stay outside frame"
+    },
+    {
+      "ok": true,
+      "label": "field/0: explicit scientific legend gate"
+    },
+    {
+      "ok": true,
+      "label": "field/0: deterministic orbit"
+    },
+    {
+      "ok": true,
+      "label": "field/0: selected exact float64 source channel"
+    },
+    {
+      "ok": true,
+      "label": "field/0: exact uploaded float32 plane bytes"
+    },
+    {
+      "ok": true,
+      "label": "field/0: full field and requested transfer state"
+    },
+    {
+      "ok": true,
+      "label": "field/1: strict bounded synchronous offline path"
+    },
+    {
+      "ok": true,
+      "label": "field/1: requested backend"
+    },
+    {
+      "ok": true,
+      "label": "field/1: shell, status, dock and resize controls stay outside frame"
+    },
+    {
+      "ok": true,
+      "label": "field/1: explicit scientific legend gate"
+    },
+    {
+      "ok": true,
+      "label": "field/1: deterministic orbit"
+    },
+    {
+      "ok": true,
+      "label": "field/1: selected exact float64 source channel"
+    },
+    {
+      "ok": true,
+      "label": "field/1: exact uploaded float32 plane bytes"
+    },
+    {
+      "ok": true,
+      "label": "field/1: full field and requested transfer state"
+    },
+    {
+      "ok": true,
+      "label": "field: nonempty rendered image"
+    },
+    {
+      "ok": true,
+      "label": "field-overlay: clean native log"
+    },
+    {
+      "ok": true,
+      "label": "field-overlay: complete (got complete)"
+    },
+    {
+      "ok": true,
+      "label": "field-overlay: successful worker exit"
+    },
+    {
+      "ok": true,
+      "label": "field-overlay: MP4 dimensions/count/FPS"
+    },
+    {
+      "ok": true,
+      "label": "field-overlay: half-open output times within JSON decimal precision"
+    },
+    {
+      "ok": true,
+      "label": "field-overlay/0: strict bounded synchronous offline path"
+    },
+    {
+      "ok": true,
+      "label": "field-overlay/0: requested backend"
+    },
+    {
+      "ok": true,
+      "label": "field-overlay/0: shell, status, dock and resize controls stay outside frame"
+    },
+    {
+      "ok": true,
+      "label": "field-overlay/0: explicit scientific legend gate"
+    },
+    {
+      "ok": true,
+      "label": "field-overlay/0: deterministic orbit"
+    },
+    {
+      "ok": true,
+      "label": "field-overlay/0: selected exact float64 source channel"
+    },
+    {
+      "ok": true,
+      "label": "field-overlay/0: exact uploaded float32 plane bytes"
+    },
+    {
+      "ok": true,
+      "label": "field-overlay/0: full field and requested transfer state"
+    },
+    {
+      "ok": true,
+      "label": "field-overlay/1: strict bounded synchronous offline path"
+    },
+    {
+      "ok": true,
+      "label": "field-overlay/1: requested backend"
+    },
+    {
+      "ok": true,
+      "label": "field-overlay/1: shell, status, dock and resize controls stay outside frame"
+    },
+    {
+      "ok": true,
+      "label": "field-overlay/1: explicit scientific legend gate"
+    },
+    {
+      "ok": true,
+      "label": "field-overlay/1: deterministic orbit"
+    },
+    {
+      "ok": true,
+      "label": "field-overlay/1: selected exact float64 source channel"
+    },
+    {
+      "ok": true,
+      "label": "field-overlay/1: exact uploaded float32 plane bytes"
+    },
+    {
+      "ok": true,
+      "label": "field-overlay/1: full field and requested transfer state"
+    },
+    {
+      "ok": true,
+      "label": "field-overlay: nonempty rendered image"
+    },
+    {
+      "ok": true,
+      "label": "field-overlay: enabled viewport legends affect pixels"
+    },
+    {
+      "ok": true,
+      "label": "field-overlay: no top bar or left-side shell pixels enter the video"
+    },
+    {
+      "ok": true,
+      "label": "mesh: clean native log"
+    },
+    {
+      "ok": true,
+      "label": "mesh: complete (got complete)"
+    },
+    {
+      "ok": true,
+      "label": "mesh: successful worker exit"
+    },
+    {
+      "ok": true,
+      "label": "mesh: MP4 dimensions/count/FPS"
+    },
+    {
+      "ok": true,
+      "label": "mesh: half-open output times within JSON decimal precision"
+    },
+    {
+      "ok": true,
+      "label": "mesh/0: strict bounded synchronous offline path"
+    },
+    {
+      "ok": true,
+      "label": "mesh/0: requested backend"
+    },
+    {
+      "ok": true,
+      "label": "mesh/0: shell, status, dock and resize controls stay outside frame"
+    },
+    {
+      "ok": true,
+      "label": "mesh/0: explicit scientific legend gate"
+    },
+    {
+      "ok": true,
+      "label": "mesh/0: deterministic orbit"
+    },
+    {
+      "ok": true,
+      "label": "mesh/0: mesh interpolation and display winding"
+    },
+    {
+      "ok": true,
+      "label": "mesh/1: strict bounded synchronous offline path"
+    },
+    {
+      "ok": true,
+      "label": "mesh/1: requested backend"
+    },
+    {
+      "ok": true,
+      "label": "mesh/1: shell, status, dock and resize controls stay outside frame"
+    },
+    {
+      "ok": true,
+      "label": "mesh/1: explicit scientific legend gate"
+    },
+    {
+      "ok": true,
+      "label": "mesh/1: deterministic orbit"
+    },
+    {
+      "ok": true,
+      "label": "mesh/1: mesh interpolation and display winding"
+    },
+    {
+      "ok": true,
+      "label": "mesh: nonempty rendered image"
+    },
+    {
+      "ok": true,
+      "label": "mesh-overlay: clean native log"
+    },
+    {
+      "ok": true,
+      "label": "mesh-overlay: complete (got complete)"
+    },
+    {
+      "ok": true,
+      "label": "mesh-overlay: successful worker exit"
+    },
+    {
+      "ok": true,
+      "label": "mesh-overlay: MP4 dimensions/count/FPS"
+    },
+    {
+      "ok": true,
+      "label": "mesh-overlay: half-open output times within JSON decimal precision"
+    },
+    {
+      "ok": true,
+      "label": "mesh-overlay/0: strict bounded synchronous offline path"
+    },
+    {
+      "ok": true,
+      "label": "mesh-overlay/0: requested backend"
+    },
+    {
+      "ok": true,
+      "label": "mesh-overlay/0: shell, status, dock and resize controls stay outside frame"
+    },
+    {
+      "ok": true,
+      "label": "mesh-overlay/0: explicit scientific legend gate"
+    },
+    {
+      "ok": true,
+      "label": "mesh-overlay/0: deterministic orbit"
+    },
+    {
+      "ok": true,
+      "label": "mesh-overlay/0: mesh interpolation and display winding"
+    },
+    {
+      "ok": true,
+      "label": "mesh-overlay/1: strict bounded synchronous offline path"
+    },
+    {
+      "ok": true,
+      "label": "mesh-overlay/1: requested backend"
+    },
+    {
+      "ok": true,
+      "label": "mesh-overlay/1: shell, status, dock and resize controls stay outside frame"
+    },
+    {
+      "ok": true,
+      "label": "mesh-overlay/1: explicit scientific legend gate"
+    },
+    {
+      "ok": true,
+      "label": "mesh-overlay/1: deterministic orbit"
+    },
+    {
+      "ok": true,
+      "label": "mesh-overlay/1: mesh interpolation and display winding"
+    },
+    {
+      "ok": true,
+      "label": "mesh-overlay: nonempty rendered image"
+    },
+    {
+      "ok": true,
+      "label": "mesh-overlay: enabled viewport legends affect pixels"
+    },
+    {
+      "ok": true,
+      "label": "mesh-overlay: no top bar or left-side shell pixels enter the video"
+    },
+    {
+      "ok": true,
+      "label": "mixed: clean native log"
+    },
+    {
+      "ok": true,
+      "label": "mixed: complete (got complete)"
+    },
+    {
+      "ok": true,
+      "label": "mixed: successful worker exit"
+    },
+    {
+      "ok": true,
+      "label": "mixed: MP4 dimensions/count/FPS"
+    },
+    {
+      "ok": true,
+      "label": "mixed: half-open output times within JSON decimal precision"
+    },
+    {
+      "ok": true,
+      "label": "mixed/0: strict bounded synchronous offline path"
+    },
+    {
+      "ok": true,
+      "label": "mixed/0: requested backend"
+    },
+    {
+      "ok": true,
+      "label": "mixed/0: shell, status, dock and resize controls stay outside frame"
+    },
+    {
+      "ok": true,
+      "label": "mixed/0: explicit scientific legend gate"
+    },
+    {
+      "ok": true,
+      "label": "mixed/0: deterministic orbit"
+    },
+    {
+      "ok": true,
+      "label": "mixed/0: requested particle mapping survives start-time restore"
+    },
+    {
+      "ok": true,
+      "label": "mixed/0: exact IDs and interpolated particle positions"
+    },
+    {
+      "ok": true,
+      "label": "mixed/0: mesh interpolation and display winding"
+    },
+    {
+      "ok": true,
+      "label": "mixed/0: selected exact float64 source channel"
+    },
+    {
+      "ok": true,
+      "label": "mixed/0: exact uploaded float32 plane bytes"
+    },
+    {
+      "ok": true,
+      "label": "mixed/0: full field and requested transfer state"
+    },
+    {
+      "ok": true,
+      "label": "mixed/1: strict bounded synchronous offline path"
+    },
+    {
+      "ok": true,
+      "label": "mixed/1: requested backend"
+    },
+    {
+      "ok": true,
+      "label": "mixed/1: shell, status, dock and resize controls stay outside frame"
+    },
+    {
+      "ok": true,
+      "label": "mixed/1: explicit scientific legend gate"
+    },
+    {
+      "ok": true,
+      "label": "mixed/1: deterministic orbit"
+    },
+    {
+      "ok": true,
+      "label": "mixed/1: requested particle mapping survives start-time restore"
+    },
+    {
+      "ok": true,
+      "label": "mixed/1: exact IDs and interpolated particle positions"
+    },
+    {
+      "ok": true,
+      "label": "mixed/1: mesh interpolation and display winding"
+    },
+    {
+      "ok": true,
+      "label": "mixed/1: selected exact float64 source channel"
+    },
+    {
+      "ok": true,
+      "label": "mixed/1: exact uploaded float32 plane bytes"
+    },
+    {
+      "ok": true,
+      "label": "mixed/1: full field and requested transfer state"
+    },
+    {
+      "ok": true,
+      "label": "mixed: nonempty rendered image"
+    },
+    {
+      "ok": true,
+      "label": "mixed-ui: clean native log"
+    },
+    {
+      "ok": true,
+      "label": "mixed-ui: complete (got complete)"
+    },
+    {
+      "ok": true,
+      "label": "mixed-ui: successful worker exit"
+    },
+    {
+      "ok": true,
+      "label": "mixed-ui: MP4 dimensions/count/FPS"
+    },
+    {
+      "ok": true,
+      "label": "mixed-ui: half-open output times within JSON decimal precision"
+    },
+    {
+      "ok": true,
+      "label": "mixed-ui/0: strict bounded synchronous offline path"
+    },
+    {
+      "ok": true,
+      "label": "mixed-ui/0: requested backend"
+    },
+    {
+      "ok": true,
+      "label": "mixed-ui/0: shell, status, dock and resize controls stay outside frame"
+    },
+    {
+      "ok": true,
+      "label": "mixed-ui/0: explicit scientific legend gate"
+    },
+    {
+      "ok": true,
+      "label": "mixed-ui/0: deterministic orbit"
+    },
+    {
+      "ok": true,
+      "label": "mixed-ui/0: requested particle mapping survives start-time restore"
+    },
+    {
+      "ok": true,
+      "label": "mixed-ui/0: exact IDs and interpolated particle positions"
+    },
+    {
+      "ok": true,
+      "label": "mixed-ui/0: mesh interpolation and display winding"
+    },
+    {
+      "ok": true,
+      "label": "mixed-ui/0: selected exact float64 source channel"
+    },
+    {
+      "ok": true,
+      "label": "mixed-ui/0: exact uploaded float32 plane bytes"
+    },
+    {
+      "ok": true,
+      "label": "mixed-ui/0: full field and requested transfer state"
+    },
+    {
+      "ok": true,
+      "label": "mixed-ui/1: strict bounded synchronous offline path"
+    },
+    {
+      "ok": true,
+      "label": "mixed-ui/1: requested backend"
+    },
+    {
+      "ok": true,
+      "label": "mixed-ui/1: shell, status, dock and resize controls stay outside frame"
+    },
+    {
+      "ok": true,
+      "label": "mixed-ui/1: explicit scientific legend gate"
+    },
+    {
+      "ok": true,
+      "label": "mixed-ui/1: deterministic orbit"
+    },
+    {
+      "ok": true,
+      "label": "mixed-ui/1: requested particle mapping survives start-time restore"
+    },
+    {
+      "ok": true,
+      "label": "mixed-ui/1: exact IDs and interpolated particle positions"
+    },
+    {
+      "ok": true,
+      "label": "mixed-ui/1: mesh interpolation and display winding"
+    },
+    {
+      "ok": true,
+      "label": "mixed-ui/1: selected exact float64 source channel"
+    },
+    {
+      "ok": true,
+      "label": "mixed-ui/1: exact uploaded float32 plane bytes"
+    },
+    {
+      "ok": true,
+      "label": "mixed-ui/1: full field and requested transfer state"
+    },
+    {
+      "ok": true,
+      "label": "mixed-ui: nonempty rendered image"
+    },
+    {
+      "ok": true,
+      "label": "mixed-ui: enabled viewport legends affect pixels"
+    },
+    {
+      "ok": true,
+      "label": "mixed-ui: no top bar or left-side shell pixels enter the video"
+    },
+    {
+      "ok": true,
+      "label": "mixed-repeat: clean native log"
+    },
+    {
+      "ok": true,
+      "label": "mixed-repeat: complete (got complete)"
+    },
+    {
+      "ok": true,
+      "label": "mixed-repeat: successful worker exit"
+    },
+    {
+      "ok": true,
+      "label": "mixed-repeat: MP4 dimensions/count/FPS"
+    },
+    {
+      "ok": true,
+      "label": "mixed-repeat: half-open output times within JSON decimal precision"
+    },
+    {
+      "ok": true,
+      "label": "mixed-repeat/0: strict bounded synchronous offline path"
+    },
+    {
+      "ok": true,
+      "label": "mixed-repeat/0: requested backend"
+    },
+    {
+      "ok": true,
+      "label": "mixed-repeat/0: shell, status, dock and resize controls stay outside frame"
+    },
+    {
+      "ok": true,
+      "label": "mixed-repeat/0: explicit scientific legend gate"
+    },
+    {
+      "ok": true,
+      "label": "mixed-repeat/0: deterministic orbit"
+    },
+    {
+      "ok": true,
+      "label": "mixed-repeat/0: requested particle mapping survives start-time restore"
+    },
+    {
+      "ok": true,
+      "label": "mixed-repeat/0: exact IDs and interpolated particle positions"
+    },
+    {
+      "ok": true,
+      "label": "mixed-repeat/0: mesh interpolation and display winding"
+    },
+    {
+      "ok": true,
+      "label": "mixed-repeat/0: selected exact float64 source channel"
+    },
+    {
+      "ok": true,
+      "label": "mixed-repeat/0: exact uploaded float32 plane bytes"
+    },
+    {
+      "ok": true,
+      "label": "mixed-repeat/0: full field and requested transfer state"
+    },
+    {
+      "ok": true,
+      "label": "mixed-repeat/1: strict bounded synchronous offline path"
+    },
+    {
+      "ok": true,
+      "label": "mixed-repeat/1: requested backend"
+    },
+    {
+      "ok": true,
+      "label": "mixed-repeat/1: shell, status, dock and resize controls stay outside frame"
+    },
+    {
+      "ok": true,
+      "label": "mixed-repeat/1: explicit scientific legend gate"
+    },
+    {
+      "ok": true,
+      "label": "mixed-repeat/1: deterministic orbit"
+    },
+    {
+      "ok": true,
+      "label": "mixed-repeat/1: requested particle mapping survives start-time restore"
+    },
+    {
+      "ok": true,
+      "label": "mixed-repeat/1: exact IDs and interpolated particle positions"
+    },
+    {
+      "ok": true,
+      "label": "mixed-repeat/1: mesh interpolation and display winding"
+    },
+    {
+      "ok": true,
+      "label": "mixed-repeat/1: selected exact float64 source channel"
+    },
+    {
+      "ok": true,
+      "label": "mixed-repeat/1: exact uploaded float32 plane bytes"
+    },
+    {
+      "ok": true,
+      "label": "mixed-repeat/1: full field and requested transfer state"
+    },
+    {
+      "ok": true,
+      "label": "mixed-repeat: nonempty rendered image"
+    },
+    {
+      "ok": true,
+      "label": "same-backend delayed mixed export has identical pixels"
+    },
+    {
+      "ok": true,
+      "label": "delayed mixed timing manifest identical"
+    },
+    {
+      "ok": true,
+      "label": "corrupt.wvz: source bytes unchanged"
+    },
+    {
+      "ok": true,
+      "label": "budget.wvz: source bytes unchanged"
+    },
+    {
+      "ok": true,
+      "label": "overflow.wvz: source bytes unchanged"
+    },
+    {
+      "ok": true,
+      "label": "late.wvz: source bytes unchanged"
+    },
+    {
+      "ok": true,
+      "label": "mixed.wvz: source bytes unchanged"
+    },
+    {
+      "ok": true,
+      "label": "mesh.wvz: source bytes unchanged"
+    },
+    {
+      "ok": true,
+      "label": "field.wvz: source bytes unchanged"
+    },
+    {
+      "ok": true,
+      "label": "late-particles.wvz: source bytes unchanged"
+    },
+    {
+      "ok": true,
+      "label": "particles.wvz: source bytes unchanged"
+    }
+  ],
+  "runs": [
+    {
+      "name": "wavez-205-video-forward",
+      "exit_code": 0,
+      "seconds": 7.840565145000255,
+      "peak_rss_kib": 782996,
+      "peak_swap_kib": 0
+    },
+    {
+      "name": "particles",
+      "exit_code": 0,
+      "seconds": 2.5127130529999704,
+      "peak_rss_kib": 655056,
+      "peak_swap_kib": 0,
+      "frames_per_second_including_startup_and_encode": 0.795952405951076
+    },
+    {
+      "name": "particles-overlay",
+      "exit_code": 0,
+      "seconds": 2.664005301000543,
+      "peak_rss_kib": 656580,
+      "peak_swap_kib": 0,
+      "frames_per_second_including_startup_and_encode": 0.7507492568610291
+    },
+    {
+      "name": "field",
+      "exit_code": 0,
+      "seconds": 2.7135545979999733,
+      "peak_rss_kib": 670552,
+      "peak_swap_kib": 0,
+      "frames_per_second_including_startup_and_encode": 0.737040633519628
+    },
+    {
+      "name": "field-overlay",
+      "exit_code": 0,
+      "seconds": 2.6135709619993577,
+      "peak_rss_kib": 672180,
+      "peak_swap_kib": 0,
+      "frames_per_second_including_startup_and_encode": 0.7652365399981405
+    },
+    {
+      "name": "mesh",
+      "exit_code": 0,
+      "seconds": 2.613520561000769,
+      "peak_rss_kib": 667728,
+      "peak_swap_kib": 0,
+      "frames_per_second_including_startup_and_encode": 0.7652512973665531
+    },
+    {
+      "name": "mesh-overlay",
+      "exit_code": 0,
+      "seconds": 2.76455866500055,
+      "peak_rss_kib": 669076,
+      "peak_swap_kib": 0,
+      "frames_per_second_including_startup_and_encode": 0.7234427778003409
+    },
+    {
+      "name": "mixed",
+      "exit_code": 0,
+      "seconds": 2.864455490000182,
+      "peak_rss_kib": 685092,
+      "peak_swap_kib": 0,
+      "frames_per_second_including_startup_and_encode": 0.6982129786907154
+    },
+    {
+      "name": "mixed-ui",
+      "exit_code": 0,
+      "seconds": 2.8653049720005583,
+      "peak_rss_kib": 686280,
+      "peak_swap_kib": 0,
+      "frames_per_second_including_startup_and_encode": 0.6980059782619225
+    },
+    {
+      "name": "mixed-repeat",
+      "exit_code": 0,
+      "seconds": 2.864955077000559,
+      "peak_rss_kib": 684988,
+      "peak_swap_kib": 0,
+      "frames_per_second_including_startup_and_encode": 0.6980912252536551
+    }
+  ],
+  "failures": 0,
+  "status": "PASS"
+}

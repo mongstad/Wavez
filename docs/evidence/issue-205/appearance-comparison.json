@@ -1,0 +1,12 @@
+{
+  "accepted_main_commit": "d5e536e140013d5e0bea66fe8b38e50d074231cd",
+  "renderer": "forward_plus",
+  "image_size": [
+    960,
+    640
+  ],
+  "pixels_total": 614400,
+  "pixels_changed": 2,
+  "largest_channel_difference": 1,
+  "mean_absolute_channel_difference": 1.0850694444444444e-06
+}

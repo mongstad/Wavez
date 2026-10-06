@@ -1,11 +1,18 @@
 # Current status
 
+Issue #205 keeps the Cinematic background fixed to viewport coordinates as the
+scientific camera tumbles, orbits, translates, zooms or resets. Its existing
+gradient and procedural cloud/dust pattern remain; particle, field and mesh
+camera behavior is unchanged. The same presentation appears in viewport-only
+video exports. Candidate build 55 awaits owner review. See
+[cinematic background behavior and owner checks](CINEMATIC_BACKGROUND.md).
+
 Issue #261 hides the pointer after 2.5 seconds without mouse interaction in
 the scientific viewport. Any mouse interaction or entry into application
 chrome restores it at the same position; dialogs, focus loss and fullscreen
 exit also restore it. Held mouse interactions never auto-hide. RMB free-look's
-immediate hide from #263 takes precedence while steering is active. Candidate
-build 54 is pending owner review. See [viewport cursor behavior](VIEWPORT_CURSOR.md).
+immediate hide from #263 takes precedence while steering is active. Build 54
+was owner-merged in PR #265. See [viewport cursor behavior](VIEWPORT_CURSOR.md).
 
 Issue #263 hides the pointer immediately while RMB free-look steers in the
 scientific viewport, then restores it at the same position on release. Focus

@@ -1,0 +1,70 @@
+{
+  "forward_plus": {
+    "job": {
+      "camera_mode": "orbit",
+      "orbit_speed": 2.4,
+      "start_time": 0.75,
+      "end_time": 1.25,
+      "fps": 4,
+      "source": "synthetic mixed WVZ1",
+      "state": "live Cinematic state snapshot from final Forward+ harness"
+    },
+    "progress": "complete",
+    "frame_count": 2,
+    "ffprobe": {
+      "width": 960,
+      "height": 540,
+      "avg_frame_rate": "4/1",
+      "nb_frames": "2"
+    },
+    "four_64px_corners_equal": true,
+    "pixels_changed_between_frames": 148833,
+    "camera_positions": [
+      [
+        9.978737831115723,
+        7.147129535675049,
+        12.84218692779541
+      ],
+      [
+        15.58454704284668,
+        7.147129535675049,
+        4.7798686027526855
+      ]
+    ],
+    "native_log_clean": true
+  },
+  "gl_compatibility": {
+    "job": {
+      "camera_mode": "orbit",
+      "orbit_speed": 2.4,
+      "start_time": 0.75,
+      "end_time": 1.25,
+      "fps": 4,
+      "source": "synthetic mixed WVZ1",
+      "state": "live Cinematic state snapshot from final Forward+ harness"
+    },
+    "progress": "complete",
+    "frame_count": 2,
+    "ffprobe": {
+      "width": 960,
+      "height": 540,
+      "avg_frame_rate": "4/1",
+      "nb_frames": "2"
+    },
+    "four_64px_corners_equal": true,
+    "pixels_changed_between_frames": 75922,
+    "camera_positions": [
+      [
+        9.978737831115723,
+        7.147129535675049,
+        12.84218692779541
+      ],
+      [
+        15.58454704284668,
+        7.147129535675049,
+        4.7798686027526855
+      ]
+    ],
+    "native_log_clean": true
+  }
+}

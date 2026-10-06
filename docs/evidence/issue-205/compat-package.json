@@ -1,0 +1,22 @@
+{
+  "checks": 65,
+  "failures": [],
+  "packaged": true,
+  "phases": {
+    "layouts": [
+      "960x640",
+      "1920x1080",
+      "3840x2160"
+    ]
+  },
+  "renderer": "gl_compatibility",
+  "source_hashes_unchanged": {
+    "mixed.wvz": "85d55b6a037ab74504fa553847e120bfd2f77aeddae8538fe26f20793a8bdf47",
+    "mesh.wvz": "ec40f1a16a6415fac8b1a8119b39281d5270517a6256e1fa52be6f19b7913c77",
+    "field.wvz": "a760a87ffe08492a239b0a97f4172dcc0c0cadb1ba14039aa18e66301a895528",
+    "particles.wvz": "6b9bb58aee9d3c3e59effba7c597f993b10d3ee2e004448a1937edd808f5e69e"
+  },
+  "known_engine_diagnostics": [
+    "libdecor-gtk-WARNING: Failed to initialize GTK\nFailed to load plugin 'libdecor-gtk.so': failed to init\n"
+  ]
+}

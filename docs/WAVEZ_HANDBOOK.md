@@ -22,8 +22,10 @@ Earlier documents sometimes append new checkpoints above obsolete scope tables. 
 
 ## Viewer shell
 
-With no capture loaded, the viewport retains its cinematic sky without decorative
-star specks and shows a centered **Open File** button. Decorative stars have
+With no capture loaded, the viewport retains its screen-fixed cinematic sky
+without decorative star specks and shows a centered **Open File** button. The
+sky remains fixed as the scientific camera moves; see the
+[cinematic background guide](CINEMATIC_BACKGROUND.md). Decorative stars have
 also been removed from loaded scenes and exports; scientific particles remain.
 Click it to open the desktop's native file picker, or use **File → Open file…**.
 The picker accepts WAVEZ Scene Format (`*.wvz`) files. Its Open, Cancel,

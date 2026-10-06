@@ -228,6 +228,9 @@ Scientific apply their defined export presets. Its range, rate, camera/orbit,
 resolution, FPS, trails, quality and temporary-output settings remain job
 settings. The viewport defines which content can enter the frame; it does not
 replace those selections with the current interactive viewer state.
+When the selected state includes the Cinematic sky, its gradient remains fixed
+to the output frame as the export camera orbits. See the
+[cinematic background guide](docs/CINEMATIC_BACKGROUND.md).
 
 The offline SubViewport now contains scientific scene content and eligible
 viewport legends only. **Include enabled viewport legends** gates particle,
