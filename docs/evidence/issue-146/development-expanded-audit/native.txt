@@ -1,0 +1,22 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.351 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3070 Ti
+
+ERROR: Unavailable focused Play advances to next eligible action
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://ui/shell/test_focus_navigation.gd:14)
+       [1] run (res://ui/shell/test_focus_navigation.gd:156)
+       [2] settle (res://ui/shell/test_focus_navigation.gd:16)
+ERROR: Tab remains available for shortcut binding capture
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://ui/shell/test_focus_navigation.gd:14)
+       [1] run (res://ui/shell/test_focus_navigation.gd:181)
+       [2] settle (res://ui/shell/test_focus_navigation.gd:16)
+ERROR: Shortcut Escape discards unapplied binding and restores initiator
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://ui/shell/test_focus_navigation.gd:14)
+       [1] run (res://ui/shell/test_focus_navigation.gd:182)
+       [2] settle (res://ui/shell/test_focus_navigation.gd:16)
+FOCUS NAVIGATION: 1495 checks, 3 failures

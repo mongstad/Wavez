@@ -18,6 +18,7 @@ func edit_shortcuts() -> void:
 		var canvas := CanvasLayer.new(); canvas.layer = 20; add_child(canvas)
 		shortcuts_editor = preload("res://ui/shell/keyboard_shortcuts_editor.gd").new()
 		canvas.add_child(shortcuts_editor); shortcuts_editor.setup(self)
+	if focus_navigation != null: focus_navigation.begin_overlay(shortcuts_editor)
 	shortcuts_editor.open()
 
 func edit_file_locations() -> void:
@@ -77,6 +78,7 @@ func edit_orbit_center() -> void:
 	if orbit_editor == null:
 		orbit_editor = preload("res://ui/shell/orbit_center_editor.gd").new()
 		add_child(orbit_editor); orbit_editor.setup(viewer)
+	if focus_navigation != null: focus_navigation.begin_overlay(orbit_editor)
 	orbit_editor.open()
 
 func dismiss_orbit_editor() -> void:
@@ -130,6 +132,7 @@ var immersive_focus: WeakRef
 var immersive_edges := {}
 var immersive_chrome := {}
 var style_slice
+var focus_navigation
 
 func setup(owner_viewer) -> void:
 	viewer = owner_viewer
@@ -259,6 +262,9 @@ func setup(owner_viewer) -> void:
 	refresh()
 	layout()
 	layout.call_deferred()
+	if not viewer.offline_instance:
+		focus_navigation = preload("res://ui/shell/focus_navigation.gd").new()
+		add_child(focus_navigation); focus_navigation.setup(self)
 
 func icon(id: String) -> Texture2D:
 	return load("res://ui/shell/icons/" + id + ".svg")
@@ -289,6 +295,7 @@ func menu(parent: Node, title: String, icon_id: String, entries: Array, action: 
 	control.get_popup().id_pressed.connect(action)
 
 func decorate_menu(control: MenuButton) -> void:
+	control.focus_mode = Control.FOCUS_ALL
 	for state in ["normal", "hover", "pressed", "disabled"]:
 		var style: StyleBox = theme.get_stylebox(state, "MenuButton").duplicate()
 		style.content_margin_right += 20
@@ -377,7 +384,7 @@ func restore_focus() -> void:
 	if previous_focus != null:
 		var control = previous_focus.get_ref()
 		if is_instance_valid(control) and control.is_visible_in_tree(): control.grab_focus(); return
-	navigation.get_child(0).grab_focus()
+	if navigation.get_child(0).is_visible_in_tree(): navigation.get_child(0).grab_focus()
 
 func refresh() -> void:
 	if menus.is_empty(): return
@@ -522,6 +529,7 @@ func enter_immersive() -> void:
 
 func exit_immersive(restore_native := true) -> void:
 	if not immersive: return
+	var current_focus := get_viewport().gui_get_focus_owner()
 	viewer._clear_manual_navigation()
 	if viewer.session_log != null: viewer.session_log.record("UI", "Window.Exit fullscreen")
 	immersive = false
@@ -537,7 +545,9 @@ func exit_immersive(restore_native := true) -> void:
 	refresh()
 	layout()
 	# Configure events subsequently lay out the restored native window size.
-	if immersive_focus != null:
+	if is_instance_valid(current_focus) and current_focus.is_visible_in_tree():
+		current_focus.grab_focus()
+	elif immersive_focus != null and get_viewport().gui_get_focus_owner() == null:
 		var focused = immersive_focus.get_ref()
 		if is_instance_valid(focused) and focused.is_visible_in_tree(): focused.grab_focus()
 	immersive_focus = null
