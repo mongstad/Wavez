@@ -1,5 +1,12 @@
 # Current status
 
+Issue #295 prevents initial-sample open failures from leaving a duplicate Scene
+notice in candidate build 75, pending owner review. A subsequent successful WVZ
+open clears its active load-error presentation while independent diagnostics,
+Jobs and session history remain retained. The pre-existing late-load rollback
+limitation is documented separately. See [load-error recovery](LOAD_ERROR_STATUS_RECOVERY.md)
+and [focused evidence](evidence/issue-295/README.md).
+
 Issue #32 gives the source-probe marker an orchid core and navy outline in
 candidate build 74, pending owner review. Pixel-width strokes keep the original
 world center/arm lengths readable across sparse/dense particles and bright/dark

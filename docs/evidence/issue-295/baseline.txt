@@ -1,0 +1,6 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+REPRO invalid banner=Incomplete scene prefix. failures={ "Open file": "Incomplete scene prefix." } badge=No capture   •   Failed — details
+REPRO valid banner= failures={  } badge=Ready
+REPRO duplicate banner=p sample 0 (record 0): Negative or duplicate particle ID. Reopen or re-export the capture. failures={ "Open file": "p sample 0 (record 0): Negative or duplicate particle ID. Reopen or re-export the capture.", "Scene": "p sample 0 (record 0): Negative or duplicate particle ID. Reopen or re-export the capture." } badge=Unavailable   •   Failed — details
+REPRO valid banner= failures={ "Scene": "p sample 0 (record 0): Negative or duplicate particle ID. Reopen or re-export the capture." } badge=Ready   •   Failed — details

@@ -245,8 +245,10 @@ failures** appears there when retained notices exist and dismisses those notices
 after review without cancelling jobs or results.
 Current unavailability remains visible until the underlying condition resolves.
 A successful capture load automatically clears the previous failed-open banner
-and its retained load diagnostic. Failed retries, picker cancellation and unrelated
-updates do not clear it; other job failures remain retained. The failed-open
+and its retained load diagnostic, including the matching initial-sample Scene
+message. This clears active presentation only; [load-error recovery](LOAD_ERROR_STATUS_RECOVERY.md)
+describes the pre-existing late-sample rollback limitation. Failed retries, picker
+cancellation and unrelated updates do not clear it; other job failures remain retained. The failed-open
 Dismiss action acknowledges that open failure only.
 Form validation remains beside its owning input; it is not a new global job.
 

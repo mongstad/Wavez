@@ -164,6 +164,9 @@ func remember(owner: String, message: String) -> void:
 func observe(owner: String, message: String) -> void:
 	if observed.get(owner,"") != message:
 		observed[owner] = message
+		# Initial-sample failures also appear on Scene. The open attempt owns
+		# that diagnostic, so a successful retry must not leave a second notice.
+		if owner == "Scene" and not message.is_empty() and message == failures.get("Open file"): return
 		remember(owner,message)
 
 func acknowledge() -> void:
