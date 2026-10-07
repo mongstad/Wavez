@@ -48,6 +48,7 @@ Start with:
 - [File Locations preferences](docs/FILE_LOCATIONS.md)
 - [Video export from Linux release builds](docs/PACKAGED_VIDEO_EXPORT.md)
 - [Volume opacity in legend overlays](docs/VOLUME_LEGEND_OPACITY.md)
+- [Source-probe marker visibility and styling](docs/PROBE_MARKER_VISIBILITY.md)
 - [Viewport-only video export](docs/VIDEO_VIEWPORT_EXPORT.md)
 - [Violet UI cleanup and owner checks](docs/UX5_CLEANUP.md)
 - [Application version and build policy](docs/VERSIONING.md) — view the identity in Help → About

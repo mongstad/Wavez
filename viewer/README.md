@@ -44,10 +44,12 @@ rotation and pauses while dragging. Open… opens
 files. Show panels and Exit fullscreen provide mouse recovery. Scalar colormaps use the bundled lookup data described in
 [COLORMAPS_LICENSE.txt](COLORMAPS_LICENSE.txt).
 
-In **Scene layers → Source probe**, **Show probe marker** hides/restores the
-last valid volume-probe cross without clearing coordinates or the result. It
+The volume source-probe cross uses an orchid stroke with a dark navy outline,
+independent of scientific colormaps. **View → Probe marker** hides/restores the
+last valid cross without clearing coordinates or the result. It
 stays hidden through playback/seeks and recipe loads. Screenshots reflect the
 switch; recipes and deterministic video exclude this session-only marker.
+See [marker styling and owner checks](../docs/PROBE_MARKER_VISIBILITY.md).
 
 Core rendering runs in Godot. G4 numerical analysis requires Python and NumPy;
 optional isosurface extraction additionally requires scikit-image. Forward+

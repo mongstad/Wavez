@@ -57,7 +57,7 @@ var iso_result := {}
 var iso_debounce := 0.0
 var identity_generation := -1
 var source_identity := {}
-var probe_marker: MeshInstance3D
+var probe_marker: Node3D
 var probe_marker_enabled := true
 var probe_marker_valid := false
 var performance_panel: VBoxContainer
@@ -642,10 +642,9 @@ func probe_selected_volume() -> void:
 	probe_stamp = {"capture":reader.source_path,"uuid":reader.metadata.uuid,"extent":reader.scan_offset,"object":selected_volume,"channel":probe_channel,"position":position,"key":view.key,"time":view.data.get("time")}
 
 	if not is_instance_valid(probe_marker):
-		probe_marker = MeshInstance3D.new();probe_marker.name = "SourceProbeMarker";add_child(probe_marker)
-	var lines := PackedVector3Array()
-	for axis in [Vector3.RIGHT,Vector3.UP,Vector3.BACK]:lines.append_array(PackedVector3Array([position-axis*.35,position+axis*.35]))
-	probe_marker.mesh = preload("res://scene/geometry.gd").lines(lines,Color.WHITE)
+		probe_marker = preload("res://layers/probe_marker.gd").new();probe_marker.name = "SourceProbeMarker";add_child(probe_marker)
+		probe_marker.setup(viewer.camera)
+	probe_marker.set_point(position)
 	probe_marker_valid = value != null;set_probe_marker_enabled(probe_marker_enabled)
 	probe_label.tooltip_text = "The chosen channel must be present in the prepared field sample, and coordinates must fall inside its finite source support. Probe does not prepare hidden fields or change display channels."
 	probe_label.text = "Unavailable" if value == null else "%s = %s %s" % [probe_channel,JSON.stringify(value,"",true,true),reader.objects[selected_volume].units]

@@ -32,7 +32,7 @@ func run() -> void:
 	check(layers.probe_marker.name == "SourceProbeMarker" and layers.probe_marker.get_parent() == layers,"Identified source-probe owner")
 	check(layers.probe_marker.visible and layers.probe_label.text.begins_with("value = ") and layers.probe_label.text.trim_prefix("value = ").to_float() == 12.0,"Explicit affine field probe equals source oracle")
 	var result: String = layers.probe_label.text
-	var mesh = layers.probe_marker.mesh
+	var vertices = layers.probe_marker.vertices.duplicate()
 	var scientific: Dictionary = viewer.committed_sample.duplicate(true)
 	var values = layers.views.field.data.channels.value.duplicate()
 	var shown: Image = await shot(viewer,"shown")
@@ -40,10 +40,10 @@ func run() -> void:
 	Job.write_json(output.path_join("shown-state.json"),Job.snapshot(viewer))
 	for repeat in 3:
 		layers.set_probe_marker_enabled(false)
-		check(not layers.probe_marker.visible and layers.probe_label.text == result and layers.probe_marker.mesh == mesh,"Hide retains last result and geometry")
+		check(not layers.probe_marker.visible and layers.probe_label.text == result and layers.probe_marker.vertices == vertices,"Hide retains last result and geometry")
 		check(layers.views.field.probe(Vector3.ZERO) == 12.0 and layers.views.field.data.channels.value == values and viewer.committed_sample == scientific,"Visibility leaves source and sampling untouched")
 		layers.set_probe_marker_enabled(true)
-		check(layers.probe_marker.visible and layers.probe_marker.mesh == mesh,"Restore same marker without re-probing")
+		check(layers.probe_marker.visible and layers.probe_marker.vertices == vertices,"Restore same marker without re-probing")
 	layers.set_probe_marker_enabled(false)
 	var hidden: Image = await shot(viewer,"hidden")
 	check(hidden.get_data() == baseline.get_data(),"Hidden screenshot equals marker-free baseline")
