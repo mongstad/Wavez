@@ -1,0 +1,17 @@
+{
+  "reference_sha256": {
+    "scene.wvz": "e64b242323c6d2494c4a93b29f47e35d1146b5fb6926d907f62bf5dab7fdd0d1",
+    "mixed.wvz": "b6703f799228363d6d12c9fb1b73464987231f9f5ef577418841677e56166d48"
+  },
+  "postrun_sha256": {
+    "selection-forward": {
+      "scene.wvz": "e64b242323c6d2494c4a93b29f47e35d1146b5fb6926d907f62bf5dab7fdd0d1",
+      "mixed.wvz": "b6703f799228363d6d12c9fb1b73464987231f9f5ef577418841677e56166d48"
+    },
+    "selection-compatibility": {
+      "scene.wvz": "e64b242323c6d2494c4a93b29f47e35d1146b5fb6926d907f62bf5dab7fdd0d1",
+      "mixed.wvz": "b6703f799228363d6d12c9fb1b73464987231f9f5ef577418841677e56166d48"
+    }
+  },
+  "unchanged": true
+}

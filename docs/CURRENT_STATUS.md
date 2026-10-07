@@ -1,5 +1,13 @@
 # Current status
 
+Issue #291 selects editable numeric/text contents when direct editing begins in
+candidate build 73, pending owner review. The shared focus manager configures
+Godot's native focus-entry selection for LineEdit and SpinBox text editors;
+subsequent caret/substring editing and existing commit/cancel callbacks remain
+available. Read-only fields retain their behavior. See
+[editable value focus](EDITABLE_VALUE_FOCUS.md) and
+[focused evidence](evidence/issue-291/README.md).
+
 Issue #281 adds the applied opacity strength and ramp to volume legend cards
 in candidate build 72, pending owner review. Slice-only cards identify opaque
 slices; particle/mesh legends and rendering behavior retain their contracts.

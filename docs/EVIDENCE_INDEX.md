@@ -1,5 +1,7 @@
 # Retained evidence
 
+- [Issue #291 — Editable value focus](evidence/issue-291/README.md): native focus-entry replacement, deliberate partial editing, read-only/SpinBox behavior and both renderer focus regressions.
+
 - [Issue #281 — Volume legend opacity](evidence/issue-281/README.md): applied renderer uniforms, compact cards, unchanged particle/mesh legends and overlay video frames.
 
 - [Issue #288 — Violet pins in every state](evidence/issue-288/hover-revision/README.md): owner-requested constant hover/focus ink; the [initial review evidence](evidence/issue-288/README.md) is preserved.

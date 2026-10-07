@@ -113,6 +113,14 @@ The application profile retains these preferences across restarts, separately
 from captures, recipes, presets and video output. See
 [defaults, action routes and owner checks](KEYBOARD_SHORTCUTS.md).
 
+Editable numeric and text values select their contents when you enter text
+editing by clicking, Tab/Shift+Tab or editor/dialog focus restoration. Typing
+replaces the selected value. A second click, arrows, dragging or Shift+Arrow
+lets you edit a smaller part; selection is not repeatedly restored while you
+edit. SpinBox arrows/wheel and each editor's existing Enter/Apply/Cancel behavior
+remain available. Read-only values keep their existing behavior. See
+[editable value focus](EDITABLE_VALUE_FOCUS.md).
+
 ## Color legends
 
 Legends start hidden: particle **Show legend** is unchecked at application

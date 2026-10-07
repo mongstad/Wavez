@@ -95,6 +95,9 @@ func snapshot(control: Control, scope: Window) -> Dictionary:
 	return {"control":weakref(control), "control_id":control.get_instance_id(), "scope":weakref(scope), "order":order, "ids":ids, "ancestors":ancestors}
 
 func focus_changed(control: Control, scope: Window) -> void:
+	# Configure native focus-entry selection before LineEdit begins editing.
+	# This also covers SpinBox's editor and controls whose editability changes.
+	if control is LineEdit: control.select_all_on_focus = control.editable and control.selecting_enabled
 	if control != null and eligible(control, scope): positions[scope.get_instance_id()] = snapshot(control, scope)
 
 func hidden_region(position: Dictionary, fallback: Node) -> Node:
