@@ -35,6 +35,10 @@ that the endpoint is exclusive and a still exports one frame. Select 1080p,
 per second of exported video: lower values play more slowly and sample time
 more closely, while higher values play faster. The numeric timing is unchanged.
 
+Enabled volume legends include the applied opacity strength and ramp, or identify
+opaque slices. The existing **Overlays** control gates those cards with the other
+legends; see [volume legend opacity](docs/VOLUME_LEGEND_OPACITY.md).
+
 Choose current camera locked or orbit, current rendering state or a cinematic /
 scientific override, overlays, trails, H.264 quality, and a new `.mp4` output path.
 **Browse…** opens an MP4 save dialog with the current output filename, or a

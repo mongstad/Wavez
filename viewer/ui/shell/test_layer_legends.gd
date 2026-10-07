@@ -45,7 +45,7 @@ func run() -> void:
 	for id in collection.entries:
 		var text: String = collection.entries[id].label.text
 		check(text.contains("Object: "+id) and text.contains("Channel: ") and text.contains("Colormap: ") and text.contains("Color range: ") and text.contains("(linear)"),"Explicit labeled content for "+id)
-		check(collection.entries[id].label.get_line_count() == 2 and collection.entries[id].card.size.y <= 80,"Two-row compact card for "+id)
+		check(collection.entries[id].label.get_line_count() == (3 if id.begins_with("volume") else 2) and collection.entries[id].card.size.y <= (110 if id.begins_with("volume") else 80),"Compact volume-opacity / unchanged mesh card for "+id)
 	check(viewer.legend.get_line_count() == 3 and viewer.legend.text.contains("Range policy: Automatic • per frame"),"Particle policy remains distinct in a compact third row")
 	check(collection.stack.get_theme_constant("separation") == 6,"Subtle six-pixel card spacing")
 	for id in collection.entries:
@@ -56,6 +56,34 @@ func run() -> void:
 	layout_evidence.field_card_height = collection.entries.volume0.card.size.y
 	layout_evidence.particle_card_height = viewer.shell.particle_legend_panel.size.y
 	check(collection.entries.volume0.bar.texture == layers.lut("coolwarm"), "Legend uses layer colormap LUT")
+	var volume = layers.views.volume0
+	var original_mesh: String = collection.entries.mesh0.label.text
+	var original_particle: String = viewer.legend.text
+	check(collection.entries.volume1.label.text.ends_with("Opacity: opaque slice"), "Slice-only legend does not claim unused volume strength")
+	for strength in [0.0, 0.18, 2.5]:
+		layers.panel_controls.volume0.strength.value = strength
+		check(float(volume.material.get_shader_parameter("opacity")) == strength, "Opacity control applies renderer uniform immediately")
+		check(collection.entries.volume0.label.text.contains("Opacity: strength " + str(strength)), "Legend follows strength immediately: " + str(strength))
+		check(collection.entries.mesh0.label.text == original_mesh and viewer.legend.text == original_particle, "Opacity does not change mesh/particle legends")
+	layers.panel_controls.volume0.strength.value = 0.18
+	for mode in ["linear", "magnitude"]:
+		layers.opacity_controls.volume0.mode.select(layers.Opacity.MODES.find(mode))
+		layers.opacity_controls.volume0.mode.item_selected.emit(layers.Opacity.MODES.find(mode))
+		layers._set_opacity_mapping("volume0", "lower", 0.1)
+		layers._set_opacity_mapping("volume0", "upper", 2.0)
+		check(volume.material.get_shader_parameter("opacity_lower") == 0.1 and volume.material.get_shader_parameter("opacity_upper") == 2.0, "Ramp thresholds match the applied renderer uniforms")
+		check(collection.entries.volume0.label.text.contains(mode + " [0.1 → 2.0]"), "Effective ramp mode and thresholds are explicit: " + mode)
+	# The legend must read applied uniforms, rather than a second state copy.
+	volume.material.set_shader_parameter("opacity", 0.37)
+	collection.sync()
+	check(layers.states.volume0.opacity == 0.18 and collection.entries.volume0.label.text.contains("strength 0.37"), "Legend reads the actual applied renderer strength")
+	layers.resample()
+	check(collection.entries.volume0.label.text.contains("strength 0.18"), "Resampling restores the authoritative renderer/legend match")
+	layers.states.volume0.slice = true; layers.resample()
+	check(collection.entries.volume0.label.text.ends_with("opaque slice"), "Combined volume/slice legend identifies opaque slice too")
+	layers.states.volume0.slice = false; layers.resample()
+	check(collection.entries.volume0.label.text.contains("magnitude [0.1 → 2.0]"), "Volume ramp remains explicit after slice is hidden")
+
 	check(collection.size.y <= viewer.shell.legend_available.y*.4+1, "Collection height bounded")
 	collection.ensure_control_visible(collection.entries.mesh1.card); await settle()
 	check(collection.scroll_vertical > 0 if collection.stack.size.y > collection.size.y else collection.scroll_vertical == 0, "Compact stack scrolls only when content exceeds available height")
@@ -67,11 +95,14 @@ func run() -> void:
 	var keys := {}; for id in layers.views: keys[id] = layers.views[id].key
 	layers.panel_controls.volume0.legend.button_pressed = false
 	check(not collection.entries.has("volume0") and collection.entries.size() == 3 and viewer.legend.visible, "Field toggle independent")
+	var opacity_hidden: String = str(volume.material.get_shader_parameter("opacity"))
+	var expected_opacity: String = collection._opacity_text(volume)
 	check(layers.states == state and viewer.committed_sample == sample, "Legend toggle changes no render settings or sample")
 	for id in keys: check(layers.views[id].key == keys[id], "Legend toggle preserves prepared layer " + id)
 	var saved := Visual.snapshot(viewer)
 	FileAccess.open(output.path_join("state.json"),FileAccess.WRITE).store_string(JSON.stringify(saved))
 	layers.panel_controls.volume0.legend.button_pressed = true
+	check(collection.entries.volume0.label.text.contains("strength " + opacity_hidden), "Reenabled volume legend retains current renderer strength")
 	viewer.show_legend = false; viewer._update_particle_legend()
 	check(not viewer.legend.visible and collection.entries.size() == 4, "Particle toggle independent")
 	check(not viewer.shell.particle_legend_panel.visible, "Particle card follows legend visibility")
@@ -92,9 +123,11 @@ func run() -> void:
 	check(not collection.entries.has("volume0"), "Unavailable logarithmic field has no misleading legend")
 	layers.states.volume0.color_mapping.normalization = "linear"; layers.resample(); await settle()
 	check("0.1 → 2.0" in collection.entries.volume0.label.text, "Legend follows changed active display bounds")
+	check(collection.entries.volume0.label.text.ends_with(expected_opacity), "Color range change preserves independent opacity reporting")
 	layers.states.volume0.channel = "other";layers.states.volume0.colormap = "plasma"
 	layers.states.volume0.color_mapping.normalization = "log";layers.resample();await settle()
 	check(collection.entries.volume0.label.text.contains("Channel: other") and collection.entries.volume0.label.text.contains("Colormap: plasma") and collection.entries.volume0.label.text.contains("(log)"),"Valid logarithmic channel and changed colormap update labeled content")
+	check(collection.entries.volume0.label.text.ends_with(expected_opacity), "Channel and colormap changes preserve current opacity reporting")
 	check(layers.object_choices.volume.get_item_text(0).contains("volume0") and collection.entries.volume0.label.text.contains("Object: volume0"),"Legend object terminology agrees with panel selector")
 	layers.states.volume0.channel = "value";layers.states.volume0.colormap = "coolwarm"
 	layers.states.volume0.color_mapping.normalization = "linear";layers.resample();await settle()
@@ -106,10 +139,15 @@ func run() -> void:
 	viewer.cyclic = false;viewer._update_particle_legend()
 	for dimensions in [Vector2i(1024,640),Vector2i(1440,900)]:
 		root.size = dimensions;await settle();viewer.shell.layout();await settle()
+		check(collection.entries.volume0.label.get_visible_line_count() == collection.entries.volume0.label.get_line_count(), "Opacity row is not clipped at " + str(dimensions))
+		await RenderingServer.frame_post_draw
+		root.get_texture().get_image().save_png(output.path_join("opacity-"+str(dimensions.x)+".png"))
 		check(collection.get_rect().position.x >= 0 and collection.get_rect().end.x <= viewer.shell.legend_available.x-12+1,"Stack width stays within viewport at "+str(dimensions))
 		check(viewer.shell.particle_legend_panel.get_rect().end.y <= viewer.shell.transport.position.y-12+1,"Compact particle card clears transport at "+str(dimensions))
 		collection.ensure_control_visible(collection.entries.mesh1.card);await settle()
 		check(collection.scroll_vertical > 0,"Overflow is scrollable at "+str(dimensions))
+		await RenderingServer.frame_post_draw
+		root.get_texture().get_image().save_png(output.path_join("scrolled-"+str(dimensions.x)+".png"))
 		collection.scroll_vertical = 0
 	for panels in [false,true]:
 		if viewer.overlay_visible != panels: viewer._toggle_overlay()
@@ -130,7 +168,7 @@ func run() -> void:
 	check(not viewer.legend.visible and collection.entries.has("volume0"), "Hidden particle layer has no legend")
 	await settle()
 	check(is_equal_approx(collection.entries.volume0.card.size.x,viewer.shell.particle_legend_panel.size.x),"Single layer retains matching card width without scrollbar")
-	check(collection.entries.size() == 1 and collection.size.y <= 80,"Single field remains a compact two-row card")
+	check(collection.entries.size() == 1 and collection.size.y <= 110,"Single field remains a compact three-row opacity card")
 	var compact_height: float = collection.size.y
 	var compact_bottom: float = collection.get_rect().end.y
 	var original: String = collection.entries.volume0.label.text
@@ -146,6 +184,19 @@ func run() -> void:
 	viewer.overlay_visible = true; viewer._update_particle_legend()
 	check(collection.visible, "Video overlay-on gate restores enabled legends")
 	viewer.offline_instance = false
+	viewer._open_capture(output.path_join("particles-only.wvz")); await settle()
+	viewer.particle_layer_visible = true; viewer.show_legend = true
+	viewer.color_channel = "value"; viewer._restyle(); await settle()
+	check(viewer.legend.visible and collection.entries.is_empty(), "Particle-only scene retains its existing legend")
+	check(not viewer.legend.text.contains("Opacity:") and viewer.legend.get_line_count() == 3, "Particle-only legend content remains unchanged")
+	viewer._open_capture(output.path_join("meshes-only.wvz")); await settle()
+	layers = viewer.scene_layers
+	for id in ["mesh0", "mesh1"]:
+		layers.states[id].channel = "value"; layers.legend_visibility[id] = true
+	layers.resample(); await settle()
+	check(collection.entries.size() == 2, "Mesh-only scene retains both existing legends")
+	for id in collection.entries:
+		check(not collection.entries[id].label.text.contains("Opacity:") and collection.entries[id].label.get_line_count() == 2, "Mesh-only legend content remains unchanged: " + id)
 	var report := {"checks":checks,"failures":failures,"layout":layout_evidence}
 	FileAccess.open(output.path_join("report.json"),FileAccess.WRITE).store_string(JSON.stringify(report))
 	print("LAYER LEGENDS: ",checks," checks; ",failures.size()," failures")

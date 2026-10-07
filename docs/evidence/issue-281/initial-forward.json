@@ -1,0 +1,1 @@
+{"checks":97,"failures":["Effective ramp mode and thresholds are explicit: linear","Effective ramp mode and thresholds are explicit: magnitude","Volume ramp remains explicit after slice is hidden"],"layout":{"field_card_height":98.0,"field_card_width":476.0,"particle_card_height":96.0,"particle_card_width":476.0}}

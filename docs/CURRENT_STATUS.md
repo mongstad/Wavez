@@ -1,5 +1,12 @@
 # Current status
 
+Issue #281 adds the applied opacity strength and ramp to volume legend cards
+in candidate build 72, pending owner review. Slice-only cards identify opaque
+slices; particle/mesh legends and rendering behavior retain their contracts.
+Enabled screenshot/video legends include the new row. See
+[volume legend opacity](VOLUME_LEGEND_OPACITY.md) and
+[focused evidence](evidence/issue-281/README.md).
+
 Issue #288 keeps the top, right and bottom pins violet (`#7270d8`) in both
 resting states in candidate build 71, pending owner review. State remains
 visible through upright/tilted glyph orientation; the unpinned glyph is also
