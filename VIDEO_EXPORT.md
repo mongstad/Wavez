@@ -37,6 +37,16 @@ more closely, while higher values play faster. The numeric timing is unchanged.
 
 Choose current camera locked or orbit, current rendering state or a cinematic /
 scientific override, overlays, trails, H.264 quality, and a new `.mp4` output path.
+**Browse…** opens an MP4 save dialog with the current output filename, or a
+capture-based `.mp4` suggestion on first use. The native desktop request offers
+only **H.264 MP4**, preventing filename typing from selecting an All files
+filter. Selecting an extensionless name appends `.mp4`; the chosen absolute
+directory and filename populate **Output MP4**. Cancel leaves the previous
+output untouched. Directory-only and relative picker returns are ignored;
+manually entered invalid paths still receive the existing absolute-MP4 error.
+The built-in fallback resets its MP4 filter on each Browse. Other file pickers
+retain their existing behavior.
+
 The lower **Export summary** shows video duration, exact output-frame count and
 a compact **Temporary storage** estimate for uncompressed frames (actual PNG
 size depends on image content). During a job or with retained job status it

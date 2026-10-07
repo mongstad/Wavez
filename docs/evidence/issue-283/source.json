@@ -1,0 +1,133 @@
+{
+	"checks": [
+		{
+			"label": "Expected development or packaged executable",
+			"ok": true
+		},
+		{
+			"label": "Packaged parent uses release template",
+			"ok": true
+		},
+		{
+			"label": "Video Export ready on fresh launch",
+			"ok": true
+		},
+		{
+			"label": "Fresh preferences have no output path",
+			"ok": true
+		},
+		{
+			"label": "Capture picker still native",
+			"ok": true
+		},
+		{
+			"label": "Only MP4 is passed to native API",
+			"ok": true
+		},
+		{
+			"label": "Browse opens save dialog 0",
+			"ok": true
+		},
+		{
+			"label": "Browse seeds current filename 0",
+			"ok": true
+		},
+		{
+			"label": "Filename control found",
+			"ok": true
+		},
+		{
+			"label": "Typing preserves embedded MP4 filter 0",
+			"ok": true
+		},
+		{
+			"label": "MP4 filter control found",
+			"ok": true
+		},
+		{
+			"label": "Directory, filename and extension round trip 0",
+			"ok": true
+		},
+		{
+			"label": "Start Export launches immediately 0",
+			"ok": true
+		},
+		{
+			"label": "Real short export completes 0",
+			"ok": true
+		},
+		{
+			"label": "Browse opens save dialog 1",
+			"ok": true
+		},
+		{
+			"label": "Browse seeds current filename 1",
+			"ok": true
+		},
+		{
+			"label": "Filename control found",
+			"ok": true
+		},
+		{
+			"label": "Typing preserves embedded MP4 filter 1",
+			"ok": true
+		},
+		{
+			"label": "MP4 filter control found",
+			"ok": true
+		},
+		{
+			"label": "Directory, filename and extension round trip 1",
+			"ok": true
+		},
+		{
+			"label": "Start Export launches immediately 1",
+			"ok": true
+		},
+		{
+			"label": "Real short export completes 1",
+			"ok": true
+		},
+		{
+			"label": "Browse Cancel preserves previous output",
+			"ok": true
+		},
+		{
+			"label": "Native Cancel preserves previous output",
+			"ok": true
+		},
+		{
+			"label": "Native directory/relative/empty return rejected: /tmp/wavez-issue-283/review/source",
+			"ok": true
+		},
+		{
+			"label": "Native directory/relative/empty return rejected: /tmp/wavez-issue-283/review/source/",
+			"ok": true
+		},
+		{
+			"label": "Native directory/relative/empty return rejected: relative",
+			"ok": true
+		},
+		{
+			"label": "Native directory/relative/empty return rejected: ",
+			"ok": true
+		},
+		{
+			"label": "Native extensionless callback appends MP4",
+			"ok": true
+		},
+		{
+			"label": "Native explicit MP4 callback retained",
+			"ok": true
+		},
+		{
+			"label": "Strict validation retained: relative.mp4",
+			"ok": true
+		},
+		{
+			"label": "Strict validation retained: /tmp/wavez-issue-283/review/source/wrong.txt",
+			"ok": true
+		}
+	],
+	"native_typing": "Not automated; embedded typing and native callback edges only"
+}

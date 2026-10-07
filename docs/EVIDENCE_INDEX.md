@@ -1,5 +1,7 @@
 # Retained evidence
 
+- [Issue #283 — Video Export MP4 filter and output path](evidence/issue-283/README.md): source/release Browse and short-export checks, native picker inspection, and manual-review limits.
+
 ## Tooltip-free panel pins — issue #284, pending owner review
 
 [Native hover, activation, reveal and Fullscreen evidence](evidence/issue-284/README.md)
