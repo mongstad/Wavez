@@ -1,5 +1,13 @@
 # Current status
 
+Issue #32 gives the source-probe marker an orchid core and navy outline in
+candidate build 74, pending owner review. Pixel-width strokes keep the original
+world center/arm lengths readable across sparse/dense particles and bright/dark
+field colormaps. The existing session visibility, source sampling, screenshot
+inclusion and deterministic-video exclusion retain their contracts. See
+[marker behavior](PROBE_MARKER_VISIBILITY.md) and
+[focused evidence](evidence/issue-32/README.md).
+
 Issue #291 selects editable numeric/text contents when direct editing begins in
 candidate build 73, pending owner review. The shared focus manager configures
 Godot's native focus-entry selection for LineEdit and SpinBox text editors;

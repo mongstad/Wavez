@@ -1,0 +1,21 @@
+{
+  "native_checks": 105,
+  "native_failures": 0,
+  "pixel_assertion": "cinematic-dense marker has insufficient contrast",
+  "required_strong_contrast_pixels": 101,
+  "measured": {
+    "orchid": {
+      "changed_pixels": 1132,
+      "strong_contrast_pixels": 85
+    },
+    "cyan": {
+      "changed_pixels": 1210,
+      "strong_contrast_pixels": 86
+    },
+    "gold": {
+      "changed_pixels": 644,
+      "strong_contrast_pixels": 0
+    }
+  },
+  "disposition": "Abandoned spatial material; final annotation draws after 3D post-processing."
+}

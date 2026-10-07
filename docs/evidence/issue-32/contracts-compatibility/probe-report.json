@@ -1,0 +1,7 @@
+{
+  "checks": 33,
+  "failures": [],
+  "renderer": "gl_compatibility",
+  "video": "Two four-frame MP4s PASS; identical frames/timing; marker-free baseline match",
+  "source_sha256_unchanged": "6227c6d50c277e47f737669896e492603ca1c781308db353c0597c03a76431e1"
+}

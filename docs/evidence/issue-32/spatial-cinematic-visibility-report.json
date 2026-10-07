@@ -1,0 +1,94 @@
+{
+	"cases": [
+		{
+			"name": "empty",
+			"particles": 0,
+			"viewport": [
+				960,
+				640
+			]
+		},
+		{
+			"name": "sparse",
+			"particles": 80,
+			"viewport": [
+				960,
+				640
+			]
+		},
+		{
+			"name": "dense-white",
+			"particles": 20000,
+			"viewport": [
+				960,
+				640
+			]
+		},
+		{
+			"name": "viridis-dark",
+			"particles": 0,
+			"viewport": [
+				960,
+				640
+			]
+		},
+		{
+			"name": "viridis-bright",
+			"particles": 0,
+			"viewport": [
+				960,
+				640
+			]
+		},
+		{
+			"name": "plasma-mid",
+			"particles": 0,
+			"viewport": [
+				960,
+				640
+			]
+		},
+		{
+			"name": "coolwarm-blue",
+			"particles": 0,
+			"viewport": [
+				960,
+				640
+			]
+		},
+		{
+			"name": "coolwarm-white",
+			"particles": 0,
+			"viewport": [
+				960,
+				640
+			]
+		},
+		{
+			"name": "coolwarm-red",
+			"particles": 0,
+			"viewport": [
+				960,
+				640
+			]
+		},
+		{
+			"name": "turbo-structure",
+			"particles": 20000,
+			"viewport": [
+				960,
+				640
+			]
+		},
+		{
+			"name": "cinematic-dense",
+			"particles": 20000,
+			"viewport": [
+				960,
+				640
+			]
+		}
+	],
+	"checks": 105,
+	"failures": []
+}

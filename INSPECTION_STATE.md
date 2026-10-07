@@ -104,8 +104,8 @@ probe target/coordinates/last result/marker visibility and layer-settings disclo
 unsaved selection/query drafts, and export destinations/limits. Recipes also do
 not own window/fullscreen state, input focus or scroll positions. Source probe
 text/markers represent the last explicit probe; loading a recipe does not run a
-new probe. Rebuilt layer controls preserve that session context. The **Show probe
-marker** switch hides only the source-probe cross; screenshots include it only
+new probe. Rebuilt layer controls preserve that session context. **View → Probe
+marker** hides only the source-probe cross; screenshots include it only
 when shown. PNG sidecars/recipes do not serialize this session-only marker or
 its visibility, and deterministic video workers do not include it. Reopening a
 capture starts a fresh probe session with visibility enabled but no marker until

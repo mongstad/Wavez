@@ -1,0 +1,300 @@
+{
+  "cases": [
+    {
+      "name": "empty",
+      "particles": 0,
+      "viewport": [
+        960,
+        640
+      ]
+    },
+    {
+      "name": "sparse",
+      "particles": 80,
+      "viewport": [
+        960,
+        640
+      ]
+    },
+    {
+      "name": "dense-white",
+      "particles": 20000,
+      "viewport": [
+        960,
+        640
+      ]
+    },
+    {
+      "name": "viridis-dark",
+      "particles": 0,
+      "viewport": [
+        960,
+        640
+      ]
+    },
+    {
+      "name": "viridis-bright",
+      "particles": 0,
+      "viewport": [
+        960,
+        640
+      ]
+    },
+    {
+      "name": "plasma-mid",
+      "particles": 0,
+      "viewport": [
+        960,
+        640
+      ]
+    },
+    {
+      "name": "coolwarm-blue",
+      "particles": 0,
+      "viewport": [
+        960,
+        640
+      ]
+    },
+    {
+      "name": "coolwarm-white",
+      "particles": 0,
+      "viewport": [
+        960,
+        640
+      ]
+    },
+    {
+      "name": "coolwarm-red",
+      "particles": 0,
+      "viewport": [
+        960,
+        640
+      ]
+    },
+    {
+      "name": "turbo-structure",
+      "particles": 20000,
+      "viewport": [
+        960,
+        640
+      ]
+    }
+  ],
+  "checks": 94,
+  "failures": [],
+  "pixel_cases": [
+    {
+      "case": "empty",
+      "treatments": {
+        "legacy": {
+          "changed_pixels": 126,
+          "strong_contrast_pixels": 126
+        },
+        "orchid": {
+          "changed_pixels": 784,
+          "strong_contrast_pixels": 624
+        },
+        "cyan": {
+          "changed_pixels": 784,
+          "strong_contrast_pixels": 624
+        },
+        "gold": {
+          "changed_pixels": 784,
+          "strong_contrast_pixels": 606
+        }
+      }
+    },
+    {
+      "case": "sparse",
+      "treatments": {
+        "legacy": {
+          "changed_pixels": 126,
+          "strong_contrast_pixels": 126
+        },
+        "orchid": {
+          "changed_pixels": 785,
+          "strong_contrast_pixels": 624
+        },
+        "cyan": {
+          "changed_pixels": 785,
+          "strong_contrast_pixels": 625
+        },
+        "gold": {
+          "changed_pixels": 785,
+          "strong_contrast_pixels": 612
+        }
+      }
+    },
+    {
+      "case": "dense-white",
+      "treatments": {
+        "legacy": {
+          "changed_pixels": 0,
+          "strong_contrast_pixels": 0
+        },
+        "orchid": {
+          "changed_pixels": 745,
+          "strong_contrast_pixels": 725
+        },
+        "cyan": {
+          "changed_pixels": 745,
+          "strong_contrast_pixels": 725
+        },
+        "gold": {
+          "changed_pixels": 745,
+          "strong_contrast_pixels": 725
+        }
+      }
+    },
+    {
+      "case": "viridis-dark",
+      "treatments": {
+        "legacy": {
+          "changed_pixels": 0,
+          "strong_contrast_pixels": 0
+        },
+        "orchid": {
+          "changed_pixels": 803,
+          "strong_contrast_pixels": 747
+        },
+        "cyan": {
+          "changed_pixels": 803,
+          "strong_contrast_pixels": 760
+        },
+        "gold": {
+          "changed_pixels": 803,
+          "strong_contrast_pixels": 760
+        }
+      }
+    },
+    {
+      "case": "viridis-bright",
+      "treatments": {
+        "legacy": {
+          "changed_pixels": 0,
+          "strong_contrast_pixels": 0
+        },
+        "orchid": {
+          "changed_pixels": 805,
+          "strong_contrast_pixels": 758
+        },
+        "cyan": {
+          "changed_pixels": 805,
+          "strong_contrast_pixels": 758
+        },
+        "gold": {
+          "changed_pixels": 805,
+          "strong_contrast_pixels": 647
+        }
+      }
+    },
+    {
+      "case": "plasma-mid",
+      "treatments": {
+        "legacy": {
+          "changed_pixels": 0,
+          "strong_contrast_pixels": 0
+        },
+        "orchid": {
+          "changed_pixels": 805,
+          "strong_contrast_pixels": 772
+        },
+        "cyan": {
+          "changed_pixels": 805,
+          "strong_contrast_pixels": 772
+        },
+        "gold": {
+          "changed_pixels": 805,
+          "strong_contrast_pixels": 772
+        }
+      }
+    },
+    {
+      "case": "coolwarm-blue",
+      "treatments": {
+        "legacy": {
+          "changed_pixels": 0,
+          "strong_contrast_pixels": 0
+        },
+        "orchid": {
+          "changed_pixels": 805,
+          "strong_contrast_pixels": 772
+        },
+        "cyan": {
+          "changed_pixels": 805,
+          "strong_contrast_pixels": 711
+        },
+        "gold": {
+          "changed_pixels": 805,
+          "strong_contrast_pixels": 772
+        }
+      }
+    },
+    {
+      "case": "coolwarm-white",
+      "treatments": {
+        "legacy": {
+          "changed_pixels": 0,
+          "strong_contrast_pixels": 0
+        },
+        "orchid": {
+          "changed_pixels": 797,
+          "strong_contrast_pixels": 757
+        },
+        "cyan": {
+          "changed_pixels": 797,
+          "strong_contrast_pixels": 757
+        },
+        "gold": {
+          "changed_pixels": 797,
+          "strong_contrast_pixels": 757
+        }
+      }
+    },
+    {
+      "case": "coolwarm-red",
+      "treatments": {
+        "legacy": {
+          "changed_pixels": 0,
+          "strong_contrast_pixels": 0
+        },
+        "orchid": {
+          "changed_pixels": 805,
+          "strong_contrast_pixels": 772
+        },
+        "cyan": {
+          "changed_pixels": 805,
+          "strong_contrast_pixels": 772
+        },
+        "gold": {
+          "changed_pixels": 805,
+          "strong_contrast_pixels": 772
+        }
+      }
+    },
+    {
+      "case": "turbo-structure",
+      "treatments": {
+        "legacy": {
+          "changed_pixels": 1,
+          "strong_contrast_pixels": 0
+        },
+        "orchid": {
+          "changed_pixels": 803,
+          "strong_contrast_pixels": 771
+        },
+        "cyan": {
+          "changed_pixels": 803,
+          "strong_contrast_pixels": 751
+        },
+        "gold": {
+          "changed_pixels": 803,
+          "strong_contrast_pixels": 575
+        }
+      }
+    }
+  ],
+  "source_sha256_unchanged": "9fde71b380b9664dbc0ea37483c4150d53cbf8585a660e33253f4c1256cf69e4",
+  "comparison": "Per renderer only; RGB delta thresholds are visibility evidence, not calibrated color."
+}
