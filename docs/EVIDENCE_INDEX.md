@@ -1,5 +1,9 @@
 # Retained evidence
 
+## Tooltip-free panel pins — issue #284, pending owner review
+
+[Native hover, activation, reveal and Fullscreen evidence](evidence/issue-284/README.md)
+
 ## Video Export ETA — issue #285, pending owner review
 
 [Focused presentation, live Details and development/Linux release checks](evidence/issue-285/README.md)

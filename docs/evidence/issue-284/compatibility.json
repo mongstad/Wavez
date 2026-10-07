@@ -1,0 +1,10 @@
+{
+	"checks": 276,
+	"dwell_seconds": 0.5,
+	"failures": [],
+	"grace_seconds": 0.35,
+	"hover_wait_seconds": 0.8,
+	"method": "Existing native hover/click/key helpers; deterministic edge tick; actual Fullscreen mode",
+	"renderer": "gl_compatibility",
+	"tooltip_delay_seconds": 0.5
+}

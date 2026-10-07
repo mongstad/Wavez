@@ -1,5 +1,12 @@
 # Current status
 
+Issue #284 removes hover tooltips from all three panel pin controls in candidate
+build 69, pending owner review. One shared pin update clears tooltip text in
+both pin states, including edge reveal and Fullscreen restoration. Pin actions,
+icons/styles, focus, timings and other tooltips retain their existing behavior.
+See [pin behavior](WINDOW_EDGE_REVEAL.md) and
+[focused evidence](evidence/issue-284/README.md).
+
 Issue #285 stabilizes the Video Export dialog and Jobs Details render ETA in
 candidate build 68, pending owner review. One shared presentation estimator
 smooths observed frame costs over five seconds and limits visible ETA updates

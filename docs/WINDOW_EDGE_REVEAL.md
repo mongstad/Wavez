@@ -1,5 +1,12 @@
 # Pinned edge reveal and Fullscreen
 
+Issue #284 makes the top, right and bottom panel pins tooltip-free in candidate
+build `v0.1.0.69`, pending owner review. Both pinned and unpinned icons have no
+hover tooltip, including after edge reveal, responsive layout and Fullscreen
+restoration. Pin actions, icons/state colors, focus/traversal, dwell/grace timing
+and session pin state retain their existing behavior. Other intentional tooltips
+remain available. See [focused hover/input evidence and owner checks](evidence/issue-284/README.md).
+
 Issue #146 adds [visibility-aware keyboard focus](FOCUS_NAVIGATION.md) in
 candidate build 65. Hidden surfaces leave the Tab order; hiding a focused
 surface hands focus past that entire region, and revealing it never pulls focus
