@@ -1,5 +1,9 @@
 # Retained evidence
 
+## Video Export ETA — issue #285, pending owner review
+
+[Focused presentation, live Details and development/Linux release checks](evidence/issue-285/README.md)
+
 ## Linux release video export — issue #93, pending owner review
 
 [Reproduced release failure, source/package renderer matrix and owner checks](evidence/issue-93/README.md)

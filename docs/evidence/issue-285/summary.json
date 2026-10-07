@@ -1,0 +1,63 @@
+{
+  "issue": 285,
+  "branch": "285-ux-video-stabilize-estimated-time-remaining-updates-in-video-export-details",
+  "accepted_main": "a39d9cace43fe05e88465817253b51b6097a8586",
+  "candidate_version": "v0.1.0.68",
+  "owner_acceptance": "pending review",
+  "environment": "Linux native GPU, Godot 4.7.2, NVIDIA RTX 3070 Ti, external FFmpeg/Python/NumPy",
+  "matrix": [
+    {
+      "mode": "source-long",
+      "gdscript_checks": 52728,
+      "python_checks": 33,
+      "failures": 0,
+      "complete_ms": 210760,
+      "known_encoder_cleanup_diagnostics": 4
+    },
+    {
+      "mode": "release-long",
+      "gdscript_checks": 52718,
+      "python_checks": 33,
+      "failures": 0,
+      "complete_ms": 210493,
+      "known_encoder_cleanup_diagnostics": 4
+    },
+    {
+      "mode": "source-compatibility",
+      "gdscript_checks": 52601,
+      "python_checks": 33,
+      "failures": 0,
+      "complete_ms": 6307,
+      "known_encoder_cleanup_diagnostics": 4
+    },
+    {
+      "mode": "release-compatibility",
+      "gdscript_checks": 52597,
+      "python_checks": 33,
+      "failures": 0,
+      "complete_ms": 5984,
+      "known_encoder_cleanup_diagnostics": 4
+    }
+  ],
+  "final_headless_snapshot_checks": 13124,
+  "final_headless_failures": 0,
+  "presentation_measurements": {
+    "0.01": {
+      "after_seconds": 260,
+      "before_seconds": 550
+    },
+    "0.1": {
+      "after_seconds": 894,
+      "before_seconds": 550
+    },
+    "fast_publications": {
+      "minimum_interval_ms": 500,
+      "raw_changes": 247,
+      "snapshots": 6000,
+      "visible_changes": 89
+    }
+  },
+  "version_tests": 2,
+  "known_encoder_cleanup": "Accepted-main PID cleanup diagnostic retained; four occurrences per matrix (two engine events duplicated in parent/worker logs).",
+  "soak_method": "Externally pace the production child with SIGSTOP/CONT between frame publications; release changes parent entry and uses dialog subclass for existing test delay, unchanged Main.tscn and worker."
+}

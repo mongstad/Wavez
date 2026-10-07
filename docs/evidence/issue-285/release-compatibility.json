@@ -1,0 +1,334 @@
+{
+  "renderer": "gl_compatibility",
+  "packaged": true,
+  "version": "v0.1.0.68",
+  "cases": [
+    {
+      "name": "complete",
+      "checks": 13190,
+      "failures": [],
+      "known_encoder_cleanup_diagnostics": 0,
+      "measurements": {
+        "0.01": {
+          "after_seconds": 260,
+          "before_seconds": 550
+        },
+        "0.1": {
+          "after_seconds": 894,
+          "before_seconds": 550
+        },
+        "fast_publications": {
+          "minimum_interval_ms": 500,
+          "raw_changes": 247,
+          "snapshots": 6000,
+          "visible_changes": 89
+        },
+        "integration": {
+          "details": "Complete \u2014 8 / 8 frames rendered (100%)\nElapsed: 00:00:03\nEstimated remaining: 00:00:00\nOutput: /tmp/wavez-issue-285/release-compatibility/complete/result.mp4\nTemporary files: /tmp/wavez-issue-285/release-compatibility/complete/.wavez-export-1791395250-3079993",
+          "directory": "/tmp/wavez-issue-285/release-compatibility/complete/.wavez-export-1791395250-3079993",
+          "eta_changes": [],
+          "progress": {
+            "current_frame": 8.0,
+            "elapsed_seconds": 3.733,
+            "encoder_pid": -1.0,
+            "intermediate_directory": "/tmp/wavez-issue-285/release-compatibility/complete/.wavez-export-1791395250-3079993",
+            "message": "Saved /tmp/wavez-issue-285/release-compatibility/complete/result.mp4",
+            "output_path": "/tmp/wavez-issue-285/release-compatibility/complete/result.mp4",
+            "renderer_pid": 125435.0,
+            "stage": "complete",
+            "total_frames": 8.0
+          },
+          "runtime_ms": 5984,
+          "stages": [
+            "starting",
+            "loading",
+            "ready",
+            "encoding",
+            "complete"
+          ]
+        }
+      }
+    },
+    {
+      "name": "cancel-render",
+      "checks": 13136,
+      "failures": [],
+      "known_encoder_cleanup_diagnostics": 0,
+      "measurements": {
+        "0.01": {
+          "after_seconds": 260,
+          "before_seconds": 550
+        },
+        "0.1": {
+          "after_seconds": 894,
+          "before_seconds": 550
+        },
+        "fast_publications": {
+          "minimum_interval_ms": 500,
+          "raw_changes": 247,
+          "snapshots": 6000,
+          "visible_changes": 89
+        },
+        "integration": {
+          "details": "Cancelled \u2014 7 / 120 frames rendered (5%)\nElapsed: 00:00:00\nEstimated remaining: Unavailable\nExport cancelled. Completed PNG frames retained in [Temporary files]/frames\nOutput: /tmp/wavez-issue-285/release-compatibility/cancel-render/result.mp4\nTemporary files: /tmp/wavez-issue-285/release-compatibility/cancel-render/.wavez-export-1791395258-1892842",
+          "directory": "/tmp/wavez-issue-285/release-compatibility/cancel-render/.wavez-export-1791395258-1892842",
+          "eta_changes": [
+            {
+              "ticks": 3570,
+              "value": "Estimated remaining: Waiting for render progress"
+            }
+          ],
+          "progress": {
+            "current_frame": 7.0,
+            "elapsed_seconds": 0.624,
+            "encoder_pid": -1.0,
+            "intermediate_directory": "/tmp/wavez-issue-285/release-compatibility/cancel-render/.wavez-export-1791395258-1892842",
+            "message": "Export cancelled. Completed PNG frames retained in /tmp/wavez-issue-285/release-compatibility/cancel-render/.wavez-export-1791395258-1892842/frames",
+            "output_path": "/tmp/wavez-issue-285/release-compatibility/cancel-render/result.mp4",
+            "renderer_pid": 127986.0,
+            "stage": "cancelled",
+            "total_frames": 120.0
+          },
+          "runtime_ms": 2670,
+          "stages": [
+            "starting",
+            "loading",
+            "ready",
+            "rendering",
+            "cancelling"
+          ]
+        }
+      }
+    },
+    {
+      "name": "cancel-encoder",
+      "checks": 13136,
+      "failures": [],
+      "known_encoder_cleanup_diagnostics": 4,
+      "measurements": {
+        "0.01": {
+          "after_seconds": 260,
+          "before_seconds": 550
+        },
+        "0.1": {
+          "after_seconds": 894,
+          "before_seconds": 550
+        },
+        "fast_publications": {
+          "minimum_interval_ms": 500,
+          "raw_changes": 247,
+          "snapshots": 6000,
+          "visible_changes": 89
+        },
+        "integration": {
+          "details": "Cancelled \u2014 8 / 8 frames rendered (100%)\nElapsed: 00:00:00\nEstimated remaining: Unavailable\nEncoding cancelled. PNGs and partial MP4 retained in [Temporary files]\nOutput: /tmp/wavez-issue-285/release-compatibility/cancel-encoder/result.mp4\nTemporary files: /tmp/wavez-issue-285/release-compatibility/cancel-encoder/.wavez-export-1791395263-1920307",
+          "directory": "/tmp/wavez-issue-285/release-compatibility/cancel-encoder/.wavez-export-1791395263-1920307",
+          "eta_changes": [],
+          "progress": {
+            "current_frame": 8.0,
+            "elapsed_seconds": 0.607,
+            "encoder_pid": 128515.0,
+            "intermediate_directory": "/tmp/wavez-issue-285/release-compatibility/cancel-encoder/.wavez-export-1791395263-1920307",
+            "message": "Encoding cancelled. PNGs and partial MP4 retained in /tmp/wavez-issue-285/release-compatibility/cancel-encoder/.wavez-export-1791395263-1920307",
+            "output_path": "/tmp/wavez-issue-285/release-compatibility/cancel-encoder/result.mp4",
+            "renderer_pid": 128307.0,
+            "stage": "cancelled",
+            "total_frames": 8.0
+          },
+          "runtime_ms": 2676,
+          "stages": [
+            "starting",
+            "loading",
+            "ready",
+            "encoding",
+            "cancelling"
+          ]
+        }
+      }
+    },
+    {
+      "name": "failed-encoder",
+      "checks": 13135,
+      "failures": [],
+      "known_encoder_cleanup_diagnostics": 0,
+      "measurements": {
+        "0.01": {
+          "after_seconds": 260,
+          "before_seconds": 550
+        },
+        "0.1": {
+          "after_seconds": 894,
+          "before_seconds": 550
+        },
+        "fast_publications": {
+          "minimum_interval_ms": 500,
+          "raw_changes": 247,
+          "snapshots": 6000,
+          "visible_changes": 89
+        },
+        "integration": {
+          "details": "Failed \u2014 8 / 8 frames rendered (100%)\nElapsed: 00:00:00\nEstimated remaining: Unavailable\nFFmpeg failed (exit 1), or produced no valid output. \nPNGs and any partial MP4 retained in [Temporary files]\nOutput: /tmp/wavez-issue-285/release-compatibility/failed-encoder/result.mp4\nTemporary files: /tmp/wavez-issue-285/release-compatibility/failed-encoder/.wavez-export-1791395268-1943821",
+          "directory": "/tmp/wavez-issue-285/release-compatibility/failed-encoder/.wavez-export-1791395268-1943821",
+          "eta_changes": [
+            {
+              "ticks": 3446,
+              "value": "Estimated remaining: Waiting for render progress"
+            }
+          ],
+          "progress": {
+            "current_frame": 8.0,
+            "elapsed_seconds": 0.542,
+            "encoder_pid": -1.0,
+            "intermediate_directory": "/tmp/wavez-issue-285/release-compatibility/failed-encoder/.wavez-export-1791395268-1943821",
+            "message": "FFmpeg failed (exit 1), or produced no valid output. \nPNGs and any partial MP4 retained in /tmp/wavez-issue-285/release-compatibility/failed-encoder/.wavez-export-1791395268-1943821",
+            "output_path": "/tmp/wavez-issue-285/release-compatibility/failed-encoder/result.mp4",
+            "renderer_pid": 128690.0,
+            "stage": "failed",
+            "total_frames": 8.0
+          },
+          "runtime_ms": 2503,
+          "stages": [
+            "starting",
+            "loading",
+            "rendering",
+            "failed"
+          ]
+        }
+      }
+    }
+  ],
+  "validation": [
+    {
+      "ok": true,
+      "label": "complete: clean parent exit apart from accepted encoder teardown diagnostic"
+    },
+    {
+      "ok": true,
+      "label": "complete: worker has only accepted teardown diagnostics"
+    },
+    {
+      "ok": true,
+      "label": "complete: all focused GDScript checks pass"
+    },
+    {
+      "ok": true,
+      "label": "complete: frame count/percentage track each observed snapshot"
+    },
+    {
+      "ok": true,
+      "label": "complete: live elapsed never trails worker elapsed"
+    },
+    {
+      "ok": true,
+      "label": "complete: terminal elapsed retains exact worker value"
+    },
+    {
+      "ok": true,
+      "label": "complete: deterministic capture/video frame timing unchanged"
+    },
+    {
+      "ok": true,
+      "label": "complete: FFprobe verifies exact MP4 output"
+    },
+    {
+      "ok": true,
+      "label": "complete: real encoding stage was observed"
+    },
+    {
+      "ok": true,
+      "label": "cancel-render: clean parent exit apart from accepted encoder teardown diagnostic"
+    },
+    {
+      "ok": true,
+      "label": "cancel-render: worker has only accepted teardown diagnostics"
+    },
+    {
+      "ok": true,
+      "label": "cancel-render: all focused GDScript checks pass"
+    },
+    {
+      "ok": true,
+      "label": "cancel-render: frame count/percentage track each observed snapshot"
+    },
+    {
+      "ok": true,
+      "label": "cancel-render: live elapsed never trails worker elapsed"
+    },
+    {
+      "ok": true,
+      "label": "cancel-render: terminal elapsed retains exact worker value"
+    },
+    {
+      "ok": true,
+      "label": "cancel-render: deterministic capture/video frame timing unchanged"
+    },
+    {
+      "ok": true,
+      "label": "cancel-render: cooperative cancellation acknowledged"
+    },
+    {
+      "ok": true,
+      "label": "cancel-encoder: clean parent exit apart from accepted encoder teardown diagnostic"
+    },
+    {
+      "ok": true,
+      "label": "cancel-encoder: worker has only accepted teardown diagnostics"
+    },
+    {
+      "ok": true,
+      "label": "cancel-encoder: all focused GDScript checks pass"
+    },
+    {
+      "ok": true,
+      "label": "cancel-encoder: frame count/percentage track each observed snapshot"
+    },
+    {
+      "ok": true,
+      "label": "cancel-encoder: live elapsed never trails worker elapsed"
+    },
+    {
+      "ok": true,
+      "label": "cancel-encoder: terminal elapsed retains exact worker value"
+    },
+    {
+      "ok": true,
+      "label": "cancel-encoder: deterministic capture/video frame timing unchanged"
+    },
+    {
+      "ok": true,
+      "label": "cancel-encoder: cooperative cancellation acknowledged"
+    },
+    {
+      "ok": true,
+      "label": "failed-encoder: clean parent exit apart from accepted encoder teardown diagnostic"
+    },
+    {
+      "ok": true,
+      "label": "failed-encoder: worker has only accepted teardown diagnostics"
+    },
+    {
+      "ok": true,
+      "label": "failed-encoder: all focused GDScript checks pass"
+    },
+    {
+      "ok": true,
+      "label": "failed-encoder: frame count/percentage track each observed snapshot"
+    },
+    {
+      "ok": true,
+      "label": "failed-encoder: live elapsed never trails worker elapsed"
+    },
+    {
+      "ok": true,
+      "label": "failed-encoder: terminal elapsed retains exact worker value"
+    },
+    {
+      "ok": true,
+      "label": "failed-encoder: deterministic capture/video frame timing unchanged"
+    },
+    {
+      "ok": true,
+      "label": "Source WVZ1 bytes unchanged"
+    }
+  ]
+}

@@ -1,0 +1,819 @@
+{
+  "renderer": "forward_plus",
+  "packaged": false,
+  "version": "v0.1.0.68",
+  "cases": [
+    {
+      "name": "complete",
+      "checks": 13311,
+      "failures": [],
+      "known_encoder_cleanup_diagnostics": 0,
+      "measurements": {
+        "0.01": {
+          "after_seconds": 260,
+          "before_seconds": 550
+        },
+        "0.1": {
+          "after_seconds": 894,
+          "before_seconds": 550
+        },
+        "fast_publications": {
+          "minimum_interval_ms": 500,
+          "raw_changes": 247,
+          "snapshots": 6000,
+          "visible_changes": 89
+        },
+        "integration": {
+          "details": "Complete \u2014 120 / 120 frames rendered (100%)\nElapsed: 00:03:27\nEstimated remaining: 00:00:00\nOutput: /tmp/wavez-issue-285/source-long/complete/result.mp4\nTemporary files: /tmp/wavez-issue-285/source-long/complete/.wavez-export-1791395134-2982165",
+          "directory": "/tmp/wavez-issue-285/source-long/complete/.wavez-export-1791395134-2982165",
+          "eta_changes": [
+            {
+              "ticks": 5486,
+              "value": "Estimated remaining: Waiting for render progress"
+            },
+            {
+              "ticks": 7254,
+              "value": "Estimated remaining: 00:02:19"
+            },
+            {
+              "ticks": 8909,
+              "value": "Estimated remaining: 00:02:36"
+            },
+            {
+              "ticks": 11120,
+              "value": "Estimated remaining: 00:02:47"
+            },
+            {
+              "ticks": 12736,
+              "value": "Estimated remaining: 00:02:54"
+            },
+            {
+              "ticks": 14323,
+              "value": "Estimated remaining: 00:02:59"
+            },
+            {
+              "ticks": 15924,
+              "value": "Estimated remaining: 00:03:02"
+            },
+            {
+              "ticks": 18015,
+              "value": "Estimated remaining: 00:03:03"
+            },
+            {
+              "ticks": 19622,
+              "value": "Estimated remaining: 00:03:04"
+            },
+            {
+              "ticks": 22931,
+              "value": "Estimated remaining: 00:03:03"
+            },
+            {
+              "ticks": 24533,
+              "value": "Estimated remaining: 00:03:02"
+            },
+            {
+              "ticks": 26133,
+              "value": "Estimated remaining: 00:03:01"
+            },
+            {
+              "ticks": 27679,
+              "value": "Estimated remaining: 00:03:00"
+            },
+            {
+              "ticks": 29887,
+              "value": "Estimated remaining: 00:02:58"
+            },
+            {
+              "ticks": 31543,
+              "value": "Estimated remaining: 00:02:57"
+            },
+            {
+              "ticks": 33199,
+              "value": "Estimated remaining: 00:02:55"
+            },
+            {
+              "ticks": 34800,
+              "value": "Estimated remaining: 00:02:54"
+            },
+            {
+              "ticks": 36456,
+              "value": "Estimated remaining: 00:02:52"
+            },
+            {
+              "ticks": 38111,
+              "value": "Estimated remaining: 00:02:50"
+            },
+            {
+              "ticks": 39657,
+              "value": "Estimated remaining: 00:02:49"
+            },
+            {
+              "ticks": 41313,
+              "value": "Estimated remaining: 00:02:47"
+            },
+            {
+              "ticks": 43521,
+              "value": "Estimated remaining: 00:02:45"
+            },
+            {
+              "ticks": 45177,
+              "value": "Estimated remaining: 00:02:44"
+            },
+            {
+              "ticks": 46781,
+              "value": "Estimated remaining: 00:02:42"
+            },
+            {
+              "ticks": 48434,
+              "value": "Estimated remaining: 00:02:40"
+            },
+            {
+              "ticks": 49979,
+              "value": "Estimated remaining: 00:02:39"
+            },
+            {
+              "ticks": 51580,
+              "value": "Estimated remaining: 00:02:37"
+            },
+            {
+              "ticks": 53678,
+              "value": "Estimated remaining: 00:02:35"
+            },
+            {
+              "ticks": 55279,
+              "value": "Estimated remaining: 00:02:33"
+            },
+            {
+              "ticks": 56935,
+              "value": "Estimated remaining: 00:02:32"
+            },
+            {
+              "ticks": 58591,
+              "value": "Estimated remaining: 00:02:30"
+            },
+            {
+              "ticks": 60247,
+              "value": "Estimated remaining: 00:02:29"
+            },
+            {
+              "ticks": 61903,
+              "value": "Estimated remaining: 00:02:27"
+            },
+            {
+              "ticks": 64000,
+              "value": "Estimated remaining: 00:02:25"
+            },
+            {
+              "ticks": 65656,
+              "value": "Estimated remaining: 00:02:23"
+            },
+            {
+              "ticks": 67312,
+              "value": "Estimated remaining: 00:02:22"
+            },
+            {
+              "ticks": 68968,
+              "value": "Estimated remaining: 00:02:20"
+            },
+            {
+              "ticks": 70624,
+              "value": "Estimated remaining: 00:02:18"
+            },
+            {
+              "ticks": 72280,
+              "value": "Estimated remaining: 00:02:17"
+            },
+            {
+              "ticks": 73881,
+              "value": "Estimated remaining: 00:02:15"
+            },
+            {
+              "ticks": 75482,
+              "value": "Estimated remaining: 00:02:13"
+            },
+            {
+              "ticks": 77138,
+              "value": "Estimated remaining: 00:02:11"
+            },
+            {
+              "ticks": 78794,
+              "value": "Estimated remaining: 00:02:10"
+            },
+            {
+              "ticks": 80450,
+              "value": "Estimated remaining: 00:02:08"
+            },
+            {
+              "ticks": 82106,
+              "value": "Estimated remaining: 00:02:06"
+            },
+            {
+              "ticks": 83762,
+              "value": "Estimated remaining: 00:02:04"
+            },
+            {
+              "ticks": 85970,
+              "value": "Estimated remaining: 00:02:03"
+            },
+            {
+              "ticks": 87516,
+              "value": "Estimated remaining: 00:02:01"
+            },
+            {
+              "ticks": 89172,
+              "value": "Estimated remaining: 00:01:59"
+            },
+            {
+              "ticks": 90828,
+              "value": "Estimated remaining: 00:01:58"
+            },
+            {
+              "ticks": 92483,
+              "value": "Estimated remaining: 00:01:56"
+            },
+            {
+              "ticks": 94139,
+              "value": "Estimated remaining: 00:01:54"
+            },
+            {
+              "ticks": 95795,
+              "value": "Estimated remaining: 00:01:53"
+            },
+            {
+              "ticks": 97452,
+              "value": "Estimated remaining: 00:01:51"
+            },
+            {
+              "ticks": 99604,
+              "value": "Estimated remaining: 00:01:49"
+            },
+            {
+              "ticks": 101205,
+              "value": "Estimated remaining: 00:01:48"
+            },
+            {
+              "ticks": 102861,
+              "value": "Estimated remaining: 00:01:46"
+            },
+            {
+              "ticks": 104517,
+              "value": "Estimated remaining: 00:01:44"
+            },
+            {
+              "ticks": 106173,
+              "value": "Estimated remaining: 00:01:42"
+            },
+            {
+              "ticks": 107829,
+              "value": "Estimated remaining: 00:01:41"
+            },
+            {
+              "ticks": 109485,
+              "value": "Estimated remaining: 00:01:39"
+            },
+            {
+              "ticks": 111031,
+              "value": "Estimated remaining: 00:01:37"
+            },
+            {
+              "ticks": 112631,
+              "value": "Estimated remaining: 00:01:36"
+            },
+            {
+              "ticks": 114839,
+              "value": "Estimated remaining: 00:01:34"
+            },
+            {
+              "ticks": 116496,
+              "value": "Estimated remaining: 00:01:32"
+            },
+            {
+              "ticks": 118148,
+              "value": "Estimated remaining: 00:01:31"
+            },
+            {
+              "ticks": 119696,
+              "value": "Estimated remaining: 00:01:29"
+            },
+            {
+              "ticks": 121352,
+              "value": "Estimated remaining: 00:01:27"
+            },
+            {
+              "ticks": 123008,
+              "value": "Estimated remaining: 00:01:25"
+            },
+            {
+              "ticks": 124664,
+              "value": "Estimated remaining: 00:01:24"
+            },
+            {
+              "ticks": 126309,
+              "value": "Estimated remaining: 00:01:22"
+            },
+            {
+              "ticks": 128407,
+              "value": "Estimated remaining: 00:01:20"
+            },
+            {
+              "ticks": 129952,
+              "value": "Estimated remaining: 00:01:19"
+            },
+            {
+              "ticks": 131553,
+              "value": "Estimated remaining: 00:01:17"
+            },
+            {
+              "ticks": 133206,
+              "value": "Estimated remaining: 00:01:15"
+            },
+            {
+              "ticks": 135307,
+              "value": "Estimated remaining: 00:01:14"
+            },
+            {
+              "ticks": 136904,
+              "value": "Estimated remaining: 00:01:12"
+            },
+            {
+              "ticks": 138508,
+              "value": "Estimated remaining: 00:01:10"
+            },
+            {
+              "ticks": 140108,
+              "value": "Estimated remaining: 00:01:09"
+            },
+            {
+              "ticks": 141764,
+              "value": "Estimated remaining: 00:01:07"
+            },
+            {
+              "ticks": 143310,
+              "value": "Estimated remaining: 00:01:05"
+            },
+            {
+              "ticks": 145518,
+              "value": "Estimated remaining: 00:01:03"
+            },
+            {
+              "ticks": 147174,
+              "value": "Estimated remaining: 00:01:02"
+            },
+            {
+              "ticks": 148830,
+              "value": "Estimated remaining: 00:01:00"
+            },
+            {
+              "ticks": 150486,
+              "value": "Estimated remaining: 00:00:58"
+            },
+            {
+              "ticks": 152142,
+              "value": "Estimated remaining: 00:00:57"
+            },
+            {
+              "ticks": 153798,
+              "value": "Estimated remaining: 00:00:55"
+            },
+            {
+              "ticks": 155399,
+              "value": "Estimated remaining: 00:00:53"
+            },
+            {
+              "ticks": 157000,
+              "value": "Estimated remaining: 00:00:51"
+            },
+            {
+              "ticks": 158656,
+              "value": "Estimated remaining: 00:00:50"
+            },
+            {
+              "ticks": 160864,
+              "value": "Estimated remaining: 00:00:48"
+            },
+            {
+              "ticks": 162468,
+              "value": "Estimated remaining: 00:00:46"
+            },
+            {
+              "ticks": 164120,
+              "value": "Estimated remaining: 00:00:45"
+            },
+            {
+              "ticks": 165721,
+              "value": "Estimated remaining: 00:00:43"
+            },
+            {
+              "ticks": 167377,
+              "value": "Estimated remaining: 00:00:41"
+            },
+            {
+              "ticks": 169033,
+              "value": "Estimated remaining: 00:00:40"
+            },
+            {
+              "ticks": 170689,
+              "value": "Estimated remaining: 00:00:38"
+            },
+            {
+              "ticks": 172345,
+              "value": "Estimated remaining: 00:00:36"
+            },
+            {
+              "ticks": 174001,
+              "value": "Estimated remaining: 00:00:35"
+            },
+            {
+              "ticks": 175657,
+              "value": "Estimated remaining: 00:00:33"
+            },
+            {
+              "ticks": 177313,
+              "value": "Estimated remaining: 00:00:31"
+            },
+            {
+              "ticks": 179411,
+              "value": "Estimated remaining: 00:00:29"
+            },
+            {
+              "ticks": 181067,
+              "value": "Estimated remaining: 00:00:28"
+            },
+            {
+              "ticks": 182723,
+              "value": "Estimated remaining: 00:00:26"
+            },
+            {
+              "ticks": 184379,
+              "value": "Estimated remaining: 00:00:24"
+            },
+            {
+              "ticks": 186035,
+              "value": "Estimated remaining: 00:00:23"
+            },
+            {
+              "ticks": 187691,
+              "value": "Estimated remaining: 00:00:21"
+            },
+            {
+              "ticks": 189292,
+              "value": "Estimated remaining: 00:00:19"
+            },
+            {
+              "ticks": 190893,
+              "value": "Estimated remaining: 00:00:18"
+            },
+            {
+              "ticks": 192548,
+              "value": "Estimated remaining: 00:00:16"
+            },
+            {
+              "ticks": 194204,
+              "value": "Estimated remaining: 00:00:14"
+            },
+            {
+              "ticks": 196412,
+              "value": "Estimated remaining: 00:00:12"
+            },
+            {
+              "ticks": 198068,
+              "value": "Estimated remaining: 00:00:11"
+            },
+            {
+              "ticks": 199724,
+              "value": "Estimated remaining: 00:00:09"
+            },
+            {
+              "ticks": 201380,
+              "value": "Estimated remaining: 00:00:07"
+            },
+            {
+              "ticks": 202926,
+              "value": "Estimated remaining: 00:00:06"
+            },
+            {
+              "ticks": 204582,
+              "value": "Estimated remaining: 00:00:04"
+            },
+            {
+              "ticks": 206238,
+              "value": "Estimated remaining: 00:00:02"
+            },
+            {
+              "ticks": 207784,
+              "value": "Estimated remaining: Waiting for render progress"
+            }
+          ],
+          "progress": {
+            "current_frame": 120.0,
+            "elapsed_seconds": 207.848,
+            "encoder_pid": -1.0,
+            "intermediate_directory": "/tmp/wavez-issue-285/source-long/complete/.wavez-export-1791395134-2982165",
+            "message": "Saved /tmp/wavez-issue-285/source-long/complete/result.mp4",
+            "output_path": "/tmp/wavez-issue-285/source-long/complete/result.mp4",
+            "renderer_pid": 119678.0,
+            "stage": "complete",
+            "total_frames": 120.0
+          },
+          "runtime_ms": 210760,
+          "stages": [
+            "starting",
+            "loading",
+            "ready",
+            "rendering",
+            "encoding",
+            "complete"
+          ]
+        }
+      }
+    },
+    {
+      "name": "cancel-render",
+      "checks": 13139,
+      "failures": [],
+      "known_encoder_cleanup_diagnostics": 0,
+      "measurements": {
+        "0.01": {
+          "after_seconds": 260,
+          "before_seconds": 550
+        },
+        "0.1": {
+          "after_seconds": 894,
+          "before_seconds": 550
+        },
+        "fast_publications": {
+          "minimum_interval_ms": 500,
+          "raw_changes": 247,
+          "snapshots": 6000,
+          "visible_changes": 89
+        },
+        "integration": {
+          "details": "Cancelled \u2014 4 / 120 frames rendered (3%)\nElapsed: 00:00:00\nEstimated remaining: Unavailable\nExport cancelled. Completed PNG frames retained in [Temporary files]/frames\nOutput: /tmp/wavez-issue-285/source-long/cancel-render/result.mp4\nTemporary files: /tmp/wavez-issue-285/source-long/cancel-render/.wavez-export-1791395348-2597135",
+          "directory": "/tmp/wavez-issue-285/source-long/cancel-render/.wavez-export-1791395348-2597135",
+          "eta_changes": [
+            {
+              "ticks": 4884,
+              "value": "Estimated remaining: Waiting for render progress"
+            }
+          ],
+          "progress": {
+            "current_frame": 4.0,
+            "elapsed_seconds": 0.669,
+            "encoder_pid": -1.0,
+            "intermediate_directory": "/tmp/wavez-issue-285/source-long/cancel-render/.wavez-export-1791395348-2597135",
+            "message": "Export cancelled. Completed PNG frames retained in /tmp/wavez-issue-285/source-long/cancel-render/.wavez-export-1791395348-2597135/frames",
+            "output_path": "/tmp/wavez-issue-285/source-long/cancel-render/result.mp4",
+            "renderer_pid": 132550.0,
+            "stage": "cancelled",
+            "total_frames": 120.0
+          },
+          "runtime_ms": 3304,
+          "stages": [
+            "starting",
+            "loading",
+            "ready",
+            "rendering",
+            "cancelling"
+          ]
+        }
+      }
+    },
+    {
+      "name": "cancel-encoder",
+      "checks": 13140,
+      "failures": [],
+      "known_encoder_cleanup_diagnostics": 4,
+      "measurements": {
+        "0.01": {
+          "after_seconds": 260,
+          "before_seconds": 550
+        },
+        "0.1": {
+          "after_seconds": 894,
+          "before_seconds": 550
+        },
+        "fast_publications": {
+          "minimum_interval_ms": 500,
+          "raw_changes": 247,
+          "snapshots": 6000,
+          "visible_changes": 89
+        },
+        "integration": {
+          "details": "Cancelled \u2014 8 / 8 frames rendered (100%)\nElapsed: 00:00:00\nEstimated remaining: Unavailable\nEncoding cancelled. PNGs and partial MP4 retained in [Temporary files]\nOutput: /tmp/wavez-issue-285/source-long/cancel-encoder/result.mp4\nTemporary files: /tmp/wavez-issue-285/source-long/cancel-encoder/.wavez-export-1791395354-2567156",
+          "directory": "/tmp/wavez-issue-285/source-long/cancel-encoder/.wavez-export-1791395354-2567156",
+          "eta_changes": [
+            {
+              "ticks": 4852,
+              "value": "Estimated remaining: Waiting for render progress"
+            }
+          ],
+          "progress": {
+            "current_frame": 8.0,
+            "elapsed_seconds": 0.877,
+            "encoder_pid": 135184.0,
+            "intermediate_directory": "/tmp/wavez-issue-285/source-long/cancel-encoder/.wavez-export-1791395354-2567156",
+            "message": "Encoding cancelled. PNGs and partial MP4 retained in /tmp/wavez-issue-285/source-long/cancel-encoder/.wavez-export-1791395354-2567156",
+            "output_path": "/tmp/wavez-issue-285/source-long/cancel-encoder/result.mp4",
+            "renderer_pid": 134835.0,
+            "stage": "cancelled",
+            "total_frames": 8.0
+          },
+          "runtime_ms": 3556,
+          "stages": [
+            "starting",
+            "loading",
+            "ready",
+            "rendering",
+            "encoding",
+            "cancelling"
+          ]
+        }
+      }
+    },
+    {
+      "name": "failed-encoder",
+      "checks": 13138,
+      "failures": [],
+      "known_encoder_cleanup_diagnostics": 0,
+      "measurements": {
+        "0.01": {
+          "after_seconds": 260,
+          "before_seconds": 550
+        },
+        "0.1": {
+          "after_seconds": 894,
+          "before_seconds": 550
+        },
+        "fast_publications": {
+          "minimum_interval_ms": 500,
+          "raw_changes": 247,
+          "snapshots": 6000,
+          "visible_changes": 89
+        },
+        "integration": {
+          "details": "Failed \u2014 8 / 8 frames rendered (100%)\nElapsed: 00:00:00\nEstimated remaining: Unavailable\nFFmpeg failed (exit 1), or produced no valid output. \nPNGs and any partial MP4 retained in [Temporary files]\nOutput: /tmp/wavez-issue-285/source-long/failed-encoder/result.mp4\nTemporary files: /tmp/wavez-issue-285/source-long/failed-encoder/.wavez-export-1791395361-2689922",
+          "directory": "/tmp/wavez-issue-285/source-long/failed-encoder/.wavez-export-1791395361-2689922",
+          "eta_changes": [
+            {
+              "ticks": 4977,
+              "value": "Estimated remaining: Waiting for render progress"
+            }
+          ],
+          "progress": {
+            "current_frame": 8.0,
+            "elapsed_seconds": 0.76,
+            "encoder_pid": -1.0,
+            "intermediate_directory": "/tmp/wavez-issue-285/source-long/failed-encoder/.wavez-export-1791395361-2689922",
+            "message": "FFmpeg failed (exit 1), or produced no valid output. \nPNGs and any partial MP4 retained in /tmp/wavez-issue-285/source-long/failed-encoder/.wavez-export-1791395361-2689922",
+            "output_path": "/tmp/wavez-issue-285/source-long/failed-encoder/result.mp4",
+            "renderer_pid": 135495.0,
+            "stage": "failed",
+            "total_frames": 8.0
+          },
+          "runtime_ms": 3332,
+          "stages": [
+            "starting",
+            "loading",
+            "ready",
+            "rendering",
+            "failed"
+          ]
+        }
+      }
+    }
+  ],
+  "validation": [
+    {
+      "ok": true,
+      "label": "complete: clean parent exit apart from accepted encoder teardown diagnostic"
+    },
+    {
+      "ok": true,
+      "label": "complete: worker has only accepted teardown diagnostics"
+    },
+    {
+      "ok": true,
+      "label": "complete: all focused GDScript checks pass"
+    },
+    {
+      "ok": true,
+      "label": "complete: frame count/percentage track each observed snapshot"
+    },
+    {
+      "ok": true,
+      "label": "complete: live elapsed never trails worker elapsed"
+    },
+    {
+      "ok": true,
+      "label": "complete: terminal elapsed retains exact worker value"
+    },
+    {
+      "ok": true,
+      "label": "complete: deterministic capture/video frame timing unchanged"
+    },
+    {
+      "ok": true,
+      "label": "complete: FFprobe verifies exact MP4 output"
+    },
+    {
+      "ok": true,
+      "label": "complete: real encoding stage was observed"
+    },
+    {
+      "ok": true,
+      "label": "cancel-render: clean parent exit apart from accepted encoder teardown diagnostic"
+    },
+    {
+      "ok": true,
+      "label": "cancel-render: worker has only accepted teardown diagnostics"
+    },
+    {
+      "ok": true,
+      "label": "cancel-render: all focused GDScript checks pass"
+    },
+    {
+      "ok": true,
+      "label": "cancel-render: frame count/percentage track each observed snapshot"
+    },
+    {
+      "ok": true,
+      "label": "cancel-render: live elapsed never trails worker elapsed"
+    },
+    {
+      "ok": true,
+      "label": "cancel-render: terminal elapsed retains exact worker value"
+    },
+    {
+      "ok": true,
+      "label": "cancel-render: deterministic capture/video frame timing unchanged"
+    },
+    {
+      "ok": true,
+      "label": "cancel-render: cooperative cancellation acknowledged"
+    },
+    {
+      "ok": true,
+      "label": "cancel-encoder: clean parent exit apart from accepted encoder teardown diagnostic"
+    },
+    {
+      "ok": true,
+      "label": "cancel-encoder: worker has only accepted teardown diagnostics"
+    },
+    {
+      "ok": true,
+      "label": "cancel-encoder: all focused GDScript checks pass"
+    },
+    {
+      "ok": true,
+      "label": "cancel-encoder: frame count/percentage track each observed snapshot"
+    },
+    {
+      "ok": true,
+      "label": "cancel-encoder: live elapsed never trails worker elapsed"
+    },
+    {
+      "ok": true,
+      "label": "cancel-encoder: terminal elapsed retains exact worker value"
+    },
+    {
+      "ok": true,
+      "label": "cancel-encoder: deterministic capture/video frame timing unchanged"
+    },
+    {
+      "ok": true,
+      "label": "cancel-encoder: cooperative cancellation acknowledged"
+    },
+    {
+      "ok": true,
+      "label": "failed-encoder: clean parent exit apart from accepted encoder teardown diagnostic"
+    },
+    {
+      "ok": true,
+      "label": "failed-encoder: worker has only accepted teardown diagnostics"
+    },
+    {
+      "ok": true,
+      "label": "failed-encoder: all focused GDScript checks pass"
+    },
+    {
+      "ok": true,
+      "label": "failed-encoder: frame count/percentage track each observed snapshot"
+    },
+    {
+      "ok": true,
+      "label": "failed-encoder: live elapsed never trails worker elapsed"
+    },
+    {
+      "ok": true,
+      "label": "failed-encoder: terminal elapsed retains exact worker value"
+    },
+    {
+      "ok": true,
+      "label": "failed-encoder: deterministic capture/video frame timing unchanged"
+    },
+    {
+      "ok": true,
+      "label": "Source WVZ1 bytes unchanged"
+    }
+  ]
+}

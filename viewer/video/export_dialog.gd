@@ -7,6 +7,7 @@ var active_output := ""
 const Job = preload("res://video/render_job.gd")
 const Timeline = preload("res://video/offline_timeline.gd")
 const ProgressDetails = preload("res://video/progress_details.gd")
+var progress_presentation := ProgressDetails.new()
 const TitledGroup = preload("res://ui/shell/titled_group.gd")
 const Disclosure = preload("res://ui/components/disclosure.gd")
 var viewer
@@ -485,15 +486,19 @@ func publish_job(stage: String, detail: String) -> void:
 	job_status = {"stage":stage, "detail":detail, "directory":active_directory, "job":active_job_path,
 		"output":active_output, "progress":last_progress.duplicate(true),
 		"elapsed_seconds":seconds, "snapshot_ticks":now, "progress_ticks":progress_ticks}
-	message.text = status_summary()
+	_update_status_summary()
 	_sync_action_buttons()
 	job_changed.emit()
 
 func progress_details() -> String:
-	return ProgressDetails.format(job_status, Time.get_ticks_msec())
+	return progress_presentation.present(job_status, Time.get_ticks_msec())
 
 func status_summary() -> String:
-	return ProgressDetails.format(job_status, Time.get_ticks_msec(), true)
+	return progress_presentation.present(job_status, Time.get_ticks_msec(), true)
+
+func _update_status_summary() -> void:
+	var text := status_summary()
+	if message.text != text: message.text = text
 
 func _selection_aware() -> bool:
 	return viewer.selection_controller != null and not viewer.selection_controller.state.definitions.is_empty()
@@ -558,7 +563,7 @@ func _process(delta: float) -> void:
 		publish_job(str(last_progress.get("stage", "failed")) if last_progress.get("stage", "") in ProgressDetails.TERMINAL else "failed", str(last_progress.get("message", "")) if last_progress.get("stage", "") in ProgressDetails.TERMINAL else message.text)
 		viewer.status_label.text = message.text
 	elif not job_status.is_empty():
-		message.text = status_summary()
+		_update_status_summary()
 
 func _exit_tree() -> void:
 	# Closing the parent viewer requests a graceful worker/encoder shutdown.

@@ -97,9 +97,16 @@ cancel request fails, the dialog reports the worker PID and retained job path.
 calculation, for example `Rendering frame 3000 / 12000 (25%)`. The integer percentage
 uses the actual rendered frame count. Separate **Elapsed** and **Estimated
 remaining** lines use `hh:mm:ss`; elapsed advances between worker updates.
-The approximate remaining time uses observed frames and elapsed wall time and
-covers rendering only, not encoding. It appears after at least two frames and
-one second. A gap longer than the greater of ten seconds or three observed
+The approximate remaining time uses completed-frame snapshots, with recent
+seconds-per-frame observations smoothed over a five-second time window. The
+shared dialog/Details estimate refreshes at most twice per second and keeps the
+same text when the displayed whole-second value is unchanged; it does not rise
+between identical worker snapshots. Frame counts and live elapsed retain their
+existing refresh behavior. The estimate covers rendering only, not encoding,
+and appears after at least two frames and one observed second. New jobs reset
+the estimate; stage transitions clear it immediately. This presentation uses
+existing refresh calls, with no additional timer or worker polling. See
+[ETA validation and owner checks](docs/VIDEO_ETA.md). A gap longer than the greater of ten seconds or three observed
 average frame durations suppresses the estimate without declaring worker failure.
 Starting/loading, encoding, cancelling, failed and cancelled states have no ETA.
 Completed video or retained complete PNG sequences show zero remaining; terminal
