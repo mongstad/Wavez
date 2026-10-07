@@ -1,0 +1,14 @@
+{
+  "exit_code": 1,
+  "progress": {
+    "current_frame": 0,
+    "elapsed_seconds": 0.385,
+    "encoder_pid": -1,
+    "intermediate_directory": "/tmp/wavez-issue-93/baseline-selection",
+    "message": "Selection recipe could not be verified/restored: Export complete values or save the view with selections and analysis.",
+    "output_path": "/tmp/wavez-issue-93/baseline-selection/result.mp4",
+    "renderer_pid": 60088,
+    "stage": "failed",
+    "total_frames": 2
+  }
+}

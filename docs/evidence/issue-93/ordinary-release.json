@@ -1,0 +1,117 @@
+{
+  "checks": [
+    {
+      "ok": true,
+      "label": "forward_plus ordinary Main scene starts and exits cleanly"
+    },
+    {
+      "ok": true,
+      "label": "gl_compatibility ordinary Main scene starts and exits cleanly"
+    },
+    {
+      "ok": true,
+      "label": "particles-off ordinary release worker exits cleanly"
+    },
+    {
+      "ok": true,
+      "label": "particles-off release executable/resources/renderer"
+    },
+    {
+      "ok": true,
+      "label": "particles-off expected terminal state"
+    },
+    {
+      "ok": true,
+      "label": "particles-off unchanged source bytes"
+    },
+    {
+      "ok": true,
+      "label": "particles-off valid MP4 dimensions/FPS/frame count"
+    },
+    {
+      "ok": true,
+      "label": "particles-off ordinary release pixels match development"
+    },
+    {
+      "ok": true,
+      "label": "particles-off exact sample/time/camera trace match"
+    },
+    {
+      "ok": true,
+      "label": "mixed-on ordinary release worker exits cleanly"
+    },
+    {
+      "ok": true,
+      "label": "mixed-on release executable/resources/renderer"
+    },
+    {
+      "ok": true,
+      "label": "mixed-on expected terminal state"
+    },
+    {
+      "ok": true,
+      "label": "mixed-on unchanged source bytes"
+    },
+    {
+      "ok": true,
+      "label": "mixed-on valid MP4 dimensions/FPS/frame count"
+    },
+    {
+      "ok": true,
+      "label": "mixed-on ordinary release pixels match development"
+    },
+    {
+      "ok": true,
+      "label": "mixed-on exact sample/time/camera trace match"
+    },
+    {
+      "ok": true,
+      "label": "selection ordinary release worker exits cleanly"
+    },
+    {
+      "ok": true,
+      "label": "selection release executable/resources/renderer"
+    },
+    {
+      "ok": true,
+      "label": "selection expected terminal state"
+    },
+    {
+      "ok": true,
+      "label": "selection unchanged source bytes"
+    },
+    {
+      "ok": true,
+      "label": "selection valid MP4 dimensions/FPS/frame count"
+    },
+    {
+      "ok": true,
+      "label": "selection ordinary release pixels match development"
+    },
+    {
+      "ok": true,
+      "label": "selection exact sample/time/camera trace match"
+    },
+    {
+      "ok": true,
+      "label": "missing-ffmpeg ordinary release worker exits cleanly"
+    },
+    {
+      "ok": true,
+      "label": "missing-ffmpeg release executable/resources/renderer"
+    },
+    {
+      "ok": true,
+      "label": "missing-ffmpeg expected terminal state"
+    },
+    {
+      "ok": true,
+      "label": "missing-ffmpeg unchanged source bytes"
+    },
+    {
+      "ok": true,
+      "label": "missing-ffmpeg recoverable frames and encoding instructions"
+    }
+  ],
+  "failures": 0
+}

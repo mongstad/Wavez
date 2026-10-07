@@ -1,5 +1,11 @@
 # Retained evidence
 
+## Linux release video export — issue #93, pending owner review
+
+[Reproduced release failure, source/package renderer matrix and owner checks](evidence/issue-93/README.md)
+cover path-override removal, packaged first-party analysis resources, unchanged
+pixels/timing, lifecycle/encoder failure behavior and launch diagnostics in build 67.
+
 ## Initial Simulation category — issue #210, pending owner review
 
 [Seven source combinations, renderer/package validation and owner steps](evidence/issue-210/README.md)

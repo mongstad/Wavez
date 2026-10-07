@@ -1,0 +1,103 @@
+{
+  "accepted_main": "56b3caa5ba2926d451259dcb866152ceb144a8e3",
+  "candidate_version": "v0.1.0.67",
+  "matrices": [
+    {
+      "name": "final-source-forward",
+      "checks": 224,
+      "failures": 0,
+      "cases": 10,
+      "known_encoder_cleanup_log_occurrences": 4
+    },
+    {
+      "name": "final-source-compatibility-corrected",
+      "checks": 224,
+      "failures": 0,
+      "cases": 10,
+      "known_encoder_cleanup_log_occurrences": 4
+    },
+    {
+      "name": "final-release-forward",
+      "checks": 264,
+      "failures": 0,
+      "cases": 11,
+      "known_encoder_cleanup_log_occurrences": 4
+    },
+    {
+      "name": "final-release-compatibility",
+      "checks": 264,
+      "failures": 0,
+      "cases": 11,
+      "known_encoder_cleanup_log_occurrences": 4
+    }
+  ],
+  "total_matrix_checks": 976,
+  "ordinary_release_checks": 28,
+  "selection_inspection_audit": [
+    {
+      "name": "final-source-forward",
+      "frame": 0,
+      "exact_id_10_preserved": true,
+      "version": 3,
+      "kind": "wavez-inspection",
+      "source_format": "WVZ1"
+    },
+    {
+      "name": "final-source-forward",
+      "frame": 1,
+      "exact_id_10_preserved": true,
+      "version": 3,
+      "kind": "wavez-inspection",
+      "source_format": "WVZ1"
+    },
+    {
+      "name": "final-source-compatibility-corrected",
+      "frame": 0,
+      "exact_id_10_preserved": true,
+      "version": 3,
+      "kind": "wavez-inspection",
+      "source_format": "WVZ1"
+    },
+    {
+      "name": "final-source-compatibility-corrected",
+      "frame": 1,
+      "exact_id_10_preserved": true,
+      "version": 3,
+      "kind": "wavez-inspection",
+      "source_format": "WVZ1"
+    },
+    {
+      "name": "final-release-forward",
+      "frame": 0,
+      "exact_id_10_preserved": true,
+      "version": 3,
+      "kind": "wavez-inspection",
+      "source_format": "WVZ1"
+    },
+    {
+      "name": "final-release-forward",
+      "frame": 1,
+      "exact_id_10_preserved": true,
+      "version": 3,
+      "kind": "wavez-inspection",
+      "source_format": "WVZ1"
+    },
+    {
+      "name": "final-release-compatibility",
+      "frame": 0,
+      "exact_id_10_preserved": true,
+      "version": 3,
+      "kind": "wavez-inspection",
+      "source_format": "WVZ1"
+    },
+    {
+      "name": "final-release-compatibility",
+      "frame": 1,
+      "exact_id_10_preserved": true,
+      "version": 3,
+      "kind": "wavez-inspection",
+      "source_format": "WVZ1"
+    }
+  ],
+  "python_application_version_tests": 2
+}

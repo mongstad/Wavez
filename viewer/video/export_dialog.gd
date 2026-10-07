@@ -407,6 +407,10 @@ func start_export() -> void:
 	var args := Job.launch_arguments(active_job_path, job.fps)
 	# Rendering backend must match the interactive appearance.
 	args.insert(0, str(job.rendering_method)); args.insert(0, "--rendering-method")
+	if Job.write_json(active_directory.path_join("launch.json"), {"executable":OS.get_executable_path(), "arguments":Array(args), "packaged":not OS.has_feature("editor"), "rendering_method":job.rendering_method}) != OK:
+		message.text = "Cannot write render-launch diagnostics. Job retained: " + active_job_path
+		publish_job("failed", message.text)
+		return
 	pid = OS.create_process(OS.get_executable_path(), args)
 	if pid <= 0:
 		message.text = "Could not start Godot render process. Job retained: " + active_job_path

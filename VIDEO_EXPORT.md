@@ -154,6 +154,12 @@ overlay/section state, environment properties and viewport quality settings.
 No physics runs; capture access is read-only. Indexing freezes the available
 complete frames for that job instead of live-tailing the capture.
 
+For standalone Linux release builds, use the [packaged video guide](docs/PACKAGED_VIDEO_EXPORT.md).
+The parent starts its own executable without a project-path override. Selection-aware
+exports use Wavez-owned Python resources packaged by `tools/package_linux.py`;
+Python/NumPy and FFmpeg remain external. Each UI launch retains `launch.json`,
+and worker metrics record the actual executable, renderer and user arguments.
+
 ## Current SIMSCP4 regression baseline (#116)
 
 [Current audit and validation](docs/VIDEO_REGRESSION.md) cover development-checkout
@@ -274,6 +280,7 @@ selected MP4** so frame storage and final publication share the output filesyste
 
 ```text
 job.json                 complete reproducible job description
+launch.json              UI launch executable, arguments and renderer
 progress.json            atomically replaced status for the interactive viewer
 frames/frame00000000.png lossless rendered sequence
 timing.jsonl            one sample/camera record per output frame
