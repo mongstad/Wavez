@@ -151,4 +151,10 @@ static func ffmpeg_problem(path: String) -> String:
 	return ""
 
 static func launch_arguments(job_path: String, fps: int) -> PackedStringArray:
-	return PackedStringArray(["--path", ProjectSettings.globalize_path("res://"), "--resolution", "640x360", "--position", "0,0", "--fixed-fps", str(fps), "--disable-vsync", "--audio-driver", "Dummy", "--log-file", job_path.get_base_dir().path_join("renderer.log"), "--", "--wavez-render-job=" + job_path])
+	var args := PackedStringArray()
+	# Official export templates reject path overrides. The standalone executable
+	# opens its own PCK; only the development engine needs a project directory.
+	if OS.has_feature("editor"):
+		args.append_array(["--path", ProjectSettings.globalize_path("res://")])
+	args.append_array(["--resolution", "640x360", "--position", "0,0", "--fixed-fps", str(fps), "--disable-vsync", "--audio-driver", "Dummy", "--log-file", job_path.get_base_dir().path_join("renderer.log"), "--", "--wavez-render-job=" + job_path])
+	return args

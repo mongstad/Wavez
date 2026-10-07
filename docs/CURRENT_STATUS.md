@@ -1,5 +1,12 @@
 # Current status
 
+Issue #93 enables the existing video worker in Linux release packages in candidate
+build 67, pending owner review. Export templates launch their own PCK without a
+project-path override; selection-aware export uses packaged first-party Python
+sources with external Python/NumPy. Launch/worker diagnostics retain actual
+executable, renderer and arguments. See [packaged video export](PACKAGED_VIDEO_EXPORT.md)
+and [focused evidence](evidence/issue-93/README.md).
+
 Issue #124 warns before application exit when any shared Jobs row is active in
 candidate build 66, pending owner review. File → Exit, chrome close and native
 close share a compact Exit WAVEZ/Cancel dialog with Cancel focused by default.

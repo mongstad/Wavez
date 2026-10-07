@@ -1,0 +1,22 @@
+{
+  "command": [
+    "/tmp/wavez-issue-93/baseline/WAVEZ.x86_64",
+    "--path",
+    "/tmp/wavez-issue-93/baseline",
+    "--rendering-method",
+    "gl_compatibility",
+    "--audio-driver",
+    "Dummy",
+    "--fixed-fps",
+    "4",
+    "--disable-vsync",
+    "--log-file",
+    "/tmp/wavez-issue-93/baseline-worker/renderer.log",
+    "--",
+    "--wavez-render-job=/tmp/wavez-issue-93/baseline-worker/job.json"
+  ],
+  "exit_code": 1,
+  "progress_exists": false,
+  "renderer_log_exists": false,
+  "accepted_main": "56b3caa5ba2926d451259dcb866152ceb144a8e3"
+}

@@ -45,6 +45,7 @@ Start with:
 - [Current Tools functional audit](docs/TOOLS_FUNCTIONAL_AUDIT.md)
 - [Session action and error logs](docs/SESSION_LOGGING.md)
 - [File Locations preferences](docs/FILE_LOCATIONS.md)
+- [Video export from Linux release builds](docs/PACKAGED_VIDEO_EXPORT.md)
 - [Viewport-only video export](docs/VIDEO_VIEWPORT_EXPORT.md)
 - [Violet UI cleanup and owner checks](docs/UX5_CLEANUP.md)
 - [Application version and build policy](docs/VERSIONING.md) — view the identity in Help → About

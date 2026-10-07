@@ -9,6 +9,7 @@ const MAX_CONTROL := 1048576
 const Buffer = preload("res://layers/playback_buffer.gd")
 const Profile = preload("res://scene/playback_profile.gd")
 var directory := ""
+var packaged_runtime_files: Array[String] = []
 var member_directory := ""
 var worker_pid := -1
 var serial := 0
@@ -47,14 +48,19 @@ func start(cache_root := "") -> bool:
 	var headroom := Buffer.memory_headroom()
 	if headroom.available_physical < headroom.reserve+memory_bytes+256*1048576:
 		error = "Analysis paused to preserve physical RAM headroom.";failed.emit(error);return false
-	var base: String = cache_root if not cache_root.is_empty() else ProjectSettings.globalize_path("res://../.wavez-cache/analysis-workers")
+	var default_root := "res://../.wavez-cache/analysis-workers" if OS.has_feature("editor") else "user://analysis-workers"
+	var base: String = cache_root if not cache_root.is_empty() else ProjectSettings.globalize_path(default_root)
 	directory = base.path_join("%d-%d" % [OS.get_process_id(),Time.get_ticks_usec()])
 	if DirAccess.make_dir_recursive_absolute(directory) != OK:
 		error = "Cannot create private analysis job directory.";failed.emit(error);return false
 	_write("lease.json",{"owner":OS.get_process_id()})
 	if member_directory.is_empty():member_directory = directory.path_join("members")
-	var script := ProjectSettings.globalize_path("res://../tools/analyze_selection.py")
-	worker_pid = OS.create_process("/usr/bin/env",PackedStringArray(["python3",script,"--directory",directory,"--owner-pid",str(OS.get_process_id()),"--assets-root",member_directory]),false)
+	var runtime := preload("res://analysis/packaged_runtime.gd").prepare(directory)
+	if not runtime.error.is_empty():
+		error = runtime.error;failed.emit(error);return false
+	var script: String = runtime.script
+	packaged_runtime_files.assign(runtime.get("files",[]))
+	worker_pid = OS.create_process("/usr/bin/env",PackedStringArray(["python3","-B",script,"--directory",directory,"--owner-pid",str(OS.get_process_id()),"--assets-root",member_directory]),false)
 	worker_ready = false;error = "";last_result = {}
 	playback_pressure = false;foreground_cancel_id = ""
 	if worker_pid <= 0:
@@ -114,6 +120,8 @@ func shutdown() -> void:
 	worker_pid = -1;worker_ready = false;set_process(false)
 	# Transport is a fixed set of small files. Never recurse through user paths.
 	if not directory.is_empty():
+		preload("res://analysis/packaged_runtime.gd").cleanup(packaged_runtime_files,directory)
+		packaged_runtime_files.clear()
 		for name in ["lease.json","request.json","cancel.json","close","ready.json","result.json","progress.json","stopped.json","background_request.json","background_cancel.json","background_result.json","background_progress.json","playback_pressure.json"]:
 			for suffix in ["", ".tmp"]:
 				var path: String = directory.path_join(name+suffix)

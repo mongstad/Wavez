@@ -1,0 +1,8 @@
+ERROR: The process 36165 does not exist or is not a child of the calling process.
+   at: _check_pid_is_running (drivers/unix/os_unix.cpp:863)
+ERROR: The process 36165 does not exist or is not a child of the calling process.
+   at: _check_pid_is_running (drivers/unix/os_unix.cpp:863)
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 615.71.09 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 3070 Ti
+
+WAVEZ export: Encoding cancelled. PNGs and partial MP4 retained in /tmp/wavez-issue-93/baseline-encoder

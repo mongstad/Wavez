@@ -29,6 +29,7 @@ var encoding_began := 0
 
 func _ready() -> void:
 	began = Time.get_ticks_msec()
+	metrics.runtime = {"executable":OS.get_executable_path(), "packaged":not OS.has_feature("editor"), "release":OS.has_feature("release"), "rendering_method":RenderingServer.get_current_rendering_method(), "arguments":Array(OS.get_cmdline_user_args())}
 	Profile.enabled = OS.get_environment("WAVEZ_VIDEO_PROFILE") == "1"
 	get_tree().auto_accept_quit = false
 	RenderingServer.render_loop_enabled = false # Offline frames own their draw calls.
