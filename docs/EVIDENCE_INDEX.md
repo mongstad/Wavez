@@ -1,6 +1,6 @@
 # Retained evidence
 
-- [Issue #288 — Violet pins in both resting states](evidence/issue-288/README.md): focused palette, native input, normal/compact and Fullscreen checks.
+- [Issue #288 — Violet pins in every state](evidence/issue-288/hover-revision/README.md): owner-requested constant hover/focus ink; the [initial review evidence](evidence/issue-288/README.md) is preserved.
 
 - [Issue #283 — Video Export MP4 filter and output path](evidence/issue-283/README.md): source/release Browse and short-export checks, native picker inspection, and manual-review limits.
 

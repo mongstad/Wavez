@@ -1,0 +1,103 @@
+{
+	"checks": 196,
+	"colors": {
+		"1024-bottom-false": {
+			"disabled": "7270d8",
+			"focus": "7270d8",
+			"hover": "7270d8",
+			"hover_pressed": "7270d8",
+			"normal": "7270d8",
+			"pressed": "7270d8"
+		},
+		"1024-bottom-true": {
+			"disabled": "7270d8",
+			"focus": "7270d8",
+			"hover": "7270d8",
+			"hover_pressed": "7270d8",
+			"normal": "7270d8",
+			"pressed": "7270d8"
+		},
+		"1024-right-false": {
+			"disabled": "7270d8",
+			"focus": "7270d8",
+			"hover": "7270d8",
+			"hover_pressed": "7270d8",
+			"normal": "7270d8",
+			"pressed": "7270d8"
+		},
+		"1024-right-true": {
+			"disabled": "7270d8",
+			"focus": "7270d8",
+			"hover": "7270d8",
+			"hover_pressed": "7270d8",
+			"normal": "7270d8",
+			"pressed": "7270d8"
+		},
+		"1024-top-false": {
+			"disabled": "7270d8",
+			"focus": "7270d8",
+			"hover": "7270d8",
+			"hover_pressed": "7270d8",
+			"normal": "7270d8",
+			"pressed": "7270d8"
+		},
+		"1024-top-true": {
+			"disabled": "7270d8",
+			"focus": "7270d8",
+			"hover": "7270d8",
+			"hover_pressed": "7270d8",
+			"normal": "7270d8",
+			"pressed": "7270d8"
+		},
+		"1440-bottom-false": {
+			"disabled": "7270d8",
+			"focus": "7270d8",
+			"hover": "7270d8",
+			"hover_pressed": "7270d8",
+			"normal": "7270d8",
+			"pressed": "7270d8"
+		},
+		"1440-bottom-true": {
+			"disabled": "7270d8",
+			"focus": "7270d8",
+			"hover": "7270d8",
+			"hover_pressed": "7270d8",
+			"normal": "7270d8",
+			"pressed": "7270d8"
+		},
+		"1440-right-false": {
+			"disabled": "7270d8",
+			"focus": "7270d8",
+			"hover": "7270d8",
+			"hover_pressed": "7270d8",
+			"normal": "7270d8",
+			"pressed": "7270d8"
+		},
+		"1440-right-true": {
+			"disabled": "7270d8",
+			"focus": "7270d8",
+			"hover": "7270d8",
+			"hover_pressed": "7270d8",
+			"normal": "7270d8",
+			"pressed": "7270d8"
+		},
+		"1440-top-false": {
+			"disabled": "7270d8",
+			"focus": "7270d8",
+			"hover": "7270d8",
+			"hover_pressed": "7270d8",
+			"normal": "7270d8",
+			"pressed": "7270d8"
+		},
+		"1440-top-true": {
+			"disabled": "7270d8",
+			"focus": "7270d8",
+			"hover": "7270d8",
+			"hover_pressed": "7270d8",
+			"normal": "7270d8",
+			"pressed": "7270d8"
+		}
+	},
+	"failures": [],
+	"renderer": "gl_compatibility"
+}

@@ -3,10 +3,12 @@
 Issue #288 keeps all three pin icons at resting violet `#7270d8` in both
 pinned and unpinned states in candidate `v0.1.0.71`, pending owner review.
 Both glyphs are filled; the existing upright pinned and tilted unpinned
-orientations continue to distinguish states. Hover/focus feedback, muted disabled ink, tooltip-free pins, dwell/grace
-timing and Fullscreen restoration retain their existing behavior. Other shell
+orientations continue to distinguish states. Per owner review, pin ink stays
+violet during hover, press, focus, focus loss and disabled states too. Button
+background/focus feedback, tooltip-free pins, dwell/grace timing and Fullscreen
+restoration retain their existing behavior. Other shell
 icons and title/section colors are unchanged. See
-[focused color/input evidence](evidence/issue-288/README.md). References to
+[focused color/input evidence](evidence/issue-288/hover-revision/README.md). References to
 outlined unpinned artwork in the retained #117 record describe its earlier build.
 
 Issue #284 makes the top, right and bottom panel pins tooltip-free in candidate
