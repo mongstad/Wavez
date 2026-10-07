@@ -1,0 +1,23 @@
+{
+  "candidate": "v0.1.0.71",
+  "baseline_main": "c5706124ac3bc1e7de2063778fbf3d1ea03564f1",
+  "forward_checks": 372,
+  "compatibility_checks": 372,
+  "failures": 0,
+  "baseline_checks": 360,
+  "resting_theme_ink": "7270d8",
+  "other_inks_unchanged": {
+    "hover": "e5eaf2",
+    "focus": "e5eaf2",
+    "hover_pressed": "9695f5",
+    "disabled": "748096"
+  },
+  "unpinned_fill": "Owner requested; only SVG group fill attribute changed; paths, strokes, bounds and 40-degree rotation unchanged",
+  "application_version_tests": 2,
+  "godot_import": "PASS",
+  "skipped": [
+    "Linux release package",
+    "physical pointer dwell feel",
+    "mixed DPI / 4K"
+  ]
+}

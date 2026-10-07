@@ -1,0 +1,109 @@
+{
+	"baseline": true,
+	"checks": 360,
+	"colors": {
+		"fullscreen-from-1024-bottom": {
+			"disabled": "748096",
+			"focus": "e5eaf2",
+			"hover": "e5eaf2",
+			"hover_pressed": "9695f5",
+			"normal": "a5b2c6",
+			"pressed": "7270d8"
+		},
+		"fullscreen-from-1024-right": {
+			"disabled": "748096",
+			"focus": "e5eaf2",
+			"hover": "e5eaf2",
+			"hover_pressed": "9695f5",
+			"normal": "a5b2c6",
+			"pressed": "7270d8"
+		},
+		"fullscreen-from-1024-top": {
+			"disabled": "748096",
+			"focus": "e5eaf2",
+			"hover": "e5eaf2",
+			"hover_pressed": "9695f5",
+			"normal": "a5b2c6",
+			"pressed": "7270d8"
+		},
+		"fullscreen-from-1440-bottom": {
+			"disabled": "748096",
+			"focus": "e5eaf2",
+			"hover": "e5eaf2",
+			"hover_pressed": "9695f5",
+			"normal": "a5b2c6",
+			"pressed": "7270d8"
+		},
+		"fullscreen-from-1440-right": {
+			"disabled": "748096",
+			"focus": "e5eaf2",
+			"hover": "e5eaf2",
+			"hover_pressed": "9695f5",
+			"normal": "a5b2c6",
+			"pressed": "7270d8"
+		},
+		"fullscreen-from-1440-top": {
+			"disabled": "748096",
+			"focus": "e5eaf2",
+			"hover": "e5eaf2",
+			"hover_pressed": "9695f5",
+			"normal": "a5b2c6",
+			"pressed": "7270d8"
+		},
+		"window-1024-bottom": {
+			"disabled": "748096",
+			"focus": "e5eaf2",
+			"hover": "e5eaf2",
+			"hover_pressed": "9695f5",
+			"normal": "a5b2c6",
+			"pressed": "7270d8"
+		},
+		"window-1024-right": {
+			"disabled": "748096",
+			"focus": "e5eaf2",
+			"hover": "e5eaf2",
+			"hover_pressed": "9695f5",
+			"normal": "a5b2c6",
+			"pressed": "7270d8"
+		},
+		"window-1024-top": {
+			"disabled": "748096",
+			"focus": "e5eaf2",
+			"hover": "e5eaf2",
+			"hover_pressed": "9695f5",
+			"normal": "a5b2c6",
+			"pressed": "7270d8"
+		},
+		"window-1440-bottom": {
+			"disabled": "748096",
+			"focus": "e5eaf2",
+			"hover": "e5eaf2",
+			"hover_pressed": "9695f5",
+			"normal": "a5b2c6",
+			"pressed": "7270d8"
+		},
+		"window-1440-right": {
+			"disabled": "748096",
+			"focus": "e5eaf2",
+			"hover": "e5eaf2",
+			"hover_pressed": "9695f5",
+			"normal": "a5b2c6",
+			"pressed": "7270d8"
+		},
+		"window-1440-top": {
+			"disabled": "748096",
+			"focus": "e5eaf2",
+			"hover": "e5eaf2",
+			"hover_pressed": "9695f5",
+			"normal": "a5b2c6",
+			"pressed": "7270d8"
+		}
+	},
+	"dwell_seconds": 0.5,
+	"failures": [],
+	"grace_seconds": 0.35,
+	"hover_wait_seconds": 0.8,
+	"method": "Existing native hover/click/key helpers; deterministic edge tick; actual Fullscreen mode",
+	"renderer": "gl_compatibility",
+	"tooltip_delay_seconds": 0.5
+}

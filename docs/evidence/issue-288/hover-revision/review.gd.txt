@@ -1,0 +1,44 @@
+extends "res://ui/shell/test_transport_tooltips.gd"
+var colors := {}
+func away():
+ var motion:=InputEventMouseMotion.new();motion.position=Vector2(300,250);root.push_input(motion);await settle()
+func capture(name: String):
+ root.get_texture().get_image().save_png(output.path_join(name+".png"))
+func run():
+ output=OS.get_cmdline_user_args()[0]
+ viewer=Viewer.new();root.add_child(viewer);viewer.set_process(false);await settle()
+ var edge=viewer.shell.edge_reveal;edge.set_process(false)
+ var theme=viewer.shell.style_slice.theme
+ for dimensions in [Vector2i(1440,900),Vector2i(1024,640)]:
+  root.size=dimensions;await settle();viewer.shell.layout();await settle()
+  for side in ["top","right","bottom"]:
+   var pin: Button=edge.pins[side]
+   for pinned in [true,false]:
+    var label: String=str(dimensions.x)+"-"+side+"-"+str(pinned)
+    edge.set_pinned(side,pinned);await away();pin.release_focus();await settle()
+    var ink: Dictionary={}
+    for state in ["normal","pressed","hover","hover_pressed","focus","disabled"]:
+     ink[state]=pin.get_theme_color("icon_"+state+"_color").to_html(false)
+     check(ink[state]=="7270d8",label+": "+state+" stays violet")
+    colors[label]=ink
+    check(pin.get_draw_mode()==(BaseButton.DRAW_PRESSED if pinned else BaseButton.DRAW_NORMAL),label+": resting draw state")
+    await hover(pin,false,label+"-hover")
+    check(pin.get_draw_mode()==(BaseButton.DRAW_HOVER_PRESSED if pinned else BaseButton.DRAW_HOVER),label+": hover draw state")
+    if dimensions.x==1440 and side=="right":capture("hover-"+str(pinned))
+    await away();pin.grab_focus();await settle()
+    check(pin.has_focus(),label+": focus acquired")
+    if dimensions.x==1440 and side=="right":capture("focus-"+str(pinned))
+    pin.release_focus();await settle();check(not pin.has_focus(),label+": focus lost")
+    pin.disabled=true;await settle()
+    check(pin.get_draw_mode()==BaseButton.DRAW_DISABLED,label+": disabled draw state")
+    click(pin);await settle();check(edge.states[side].pinned==pinned,label+": disabled cannot toggle")
+    if dimensions.x==1440 and side=="right":capture("disabled-"+str(pinned))
+    pin.disabled=false;await away()
+    click(pin);await settle();check(edge.states[side].pinned!=pinned,label+": enabled click toggles")
+    edge.set_pinned(side,true);await away()
+ check(theme.get_color("icon_normal_color","IconAction")==theme.c(&"text.secondary"),"Other icons retain neutral resting ink")
+ check(theme.get_color("icon_hover_color","IconAction")==theme.c(&"text.primary"),"Other icons retain hover ink")
+ check(theme.get_color("font_color","SectionTitle")==Color("7270d8"),"Section hierarchy retains violet")
+ check(theme.get_color("font_color","PanelTitle")==Color("7270d8"),"Title hierarchy retains violet")
+ FileAccess.open(output.path_join("report.json"),FileAccess.WRITE).store_string(JSON.stringify({"checks":checks,"failures":failures,"colors":colors,"renderer":RenderingServer.get_current_rendering_method()},"\t"))
+ viewer.free();await process_frame;print("PIN INK: %d checks, %d failures"%[checks,failures.size()]);quit(0 if failures.is_empty() else 1)
