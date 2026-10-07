@@ -1,0 +1,166 @@
+extends "res://ui/shell/test_focus_navigation.gd"
+class MouseState:
+	extends Node
+	func _input(event: InputEvent):
+		if event.device == 9001: get_viewport().set_input_as_handled()
+var areas: Array = []
+func send_key(code: Key, window: Window, ctrl := false, shift := false, unicode_value := 0):
+	var event := InputEventKey.new(); event.keycode = code; event.pressed = true
+	event.ctrl_pressed = ctrl; event.shift_pressed = shift; event.unicode = unicode_value; event.window_id = window.get_window_id()
+	window.window_input.emit(event)
+	if window.visible: window.push_input(event)
+	var release := event.duplicate(); release.pressed = false
+	if window.visible: window.push_input(release)
+func text_key(text: String, window: Window):
+	for character in text: send_key(KEY_NONE, window, false, false, character.unicode_at(0))
+func mouse(point: Vector2, window: Window, pressed: bool, button := MOUSE_BUTTON_LEFT):
+	if window.get_node_or_null("MouseState") == null:
+		var blocker = MouseState.new(); blocker.name = "MouseState"; window.add_child(blocker)
+	var event := InputEventMouseButton.new(); event.position = point; event.global_position = point
+	event.button_index = button; event.pressed = pressed; event.window_id = window.get_window_id()
+	# Update global button state without dispatching the dialog-local coordinates twice.
+	var state := event.duplicate(); state.device = 9001
+	if window.is_embedded(): state.position += Vector2(window.position); state.global_position = state.position
+	Input.parse_input_event(state); Input.flush_buffered_events()
+	window.push_input(event)
+func mouse_click(point: Vector2, window: Window, button := MOUSE_BUTTON_LEFT):
+	mouse(point,window,true,button); await settle(); mouse(point,window,false,button); await settle()
+func picture(name: String, window: Window):
+	await settle(); await RenderingServer.frame_post_draw
+	window.get_texture().get_image().save_png(output.path_join(name+".png"))
+func reveal(editor: LineEdit):
+	var parent := editor.get_parent()
+	while parent != null:
+		if parent is ScrollContainer: parent.ensure_control_visible(editor)
+		parent = parent.get_parent()
+	await settle()
+func matrix(editor: LineEdit, name: String):
+	var window: Window = editor.get_window()
+	var original_text := editor.text
+	if editor.text.is_empty(): editor.text = "123.45"
+	var initial := editor.text
+	if editor.get_parent() is SpinBox:
+		initial = initial.trim_prefix(editor.get_parent().prefix).trim_suffix(editor.get_parent().suffix).strip_edges()
+	await reveal(editor)
+	var available: Array = nav.chain(window); var index := available.find(editor)
+	check(index >= 0,name+": editor in existing focus order")
+	if index < 0: editor.text = original_text; return
+	available[posmod(index-1,available.size())].grab_focus(); await settle()
+	if available.size() == 1: editor.release_focus()
+	send_key(KEY_TAB,window); await settle()
+	check(window.gui_get_focus_owner() == editor and editor.get_selected_text() == initial,name+": Tab selects full value")
+	send_key(KEY_TAB,window); await settle();send_key(KEY_TAB,window,false,true);await settle()
+	check(window.gui_get_focus_owner() == editor and editor.get_selected_text() == initial,name+": Shift+Tab selects full value")
+	available[posmod(index-1,available.size())].grab_focus();await reveal(editor)
+	editor.release_focus();await settle()
+	await mouse_click(editor.get_global_rect().get_center(),window);await settle()
+	check(window.gui_get_focus_owner() == editor and editor.get_selected_text() == initial,name+": first mouse focus selects full value")
+	await picture(name,window)
+	text_key("7",window);await settle()
+	check(editor.text == "7",name+": first typed character replaces full value")
+	editor.text = initial
+	await mouse_click(editor.get_global_rect().get_center(),window);await settle()
+	check(not editor.has_selection(),name+": second click positions caret")
+	var column := editor.caret_column
+	text_key("8",window);await settle()
+	check(editor.text == initial.insert(column,"8"),name+": partial insertion at chosen caret")
+	editor.text = initial;editor.select_all();send_key(KEY_RIGHT,window);await settle()
+	check(not editor.has_selection(),name+": arrow releases selection")
+	editor.grab_focus();nav.reconcile();await settle()
+	check(not editor.has_selection(),name+": repeated focus/reconcile does not reselect")
+	editor.text = original_text
+	areas.append(name)
+func partial_matrix(editor: LineEdit):
+	var window: Window = editor.get_window();var initial := editor.text
+	editor.text = "123.45";editor.grab_focus();editor.select_all()
+	send_key(KEY_LEFT,window);send_key(KEY_RIGHT,window);send_key(KEY_RIGHT,window,false,true);await settle()
+	check(editor.get_selected_text() == "2","Shift+Arrow selects a substring")
+	text_key("9",window);await settle();check(editor.text == "193.45","Typing replaces only Shift+Arrow substring")
+	editor.text = "123.45";editor.deselect();editor.caret_column = 0
+	var font := editor.get_theme_font("font");var font_size := editor.get_theme_font_size("font_size")
+	var start := editor.get_global_rect().position+Vector2(editor.get_theme_stylebox("normal").content_margin_left+font.get_string_size("1",HORIZONTAL_ALIGNMENT_LEFT,-1,font_size).x,editor.size.y*.5)
+	var finish := start+Vector2(font.get_string_size("23",HORIZONTAL_ALIGNMENT_LEFT,-1,font_size).x,0)
+	mouse(start,window,true); await settle()
+	var motion := InputEventMouseMotion.new();motion.position = finish;motion.global_position = finish;motion.relative = finish-start;motion.button_mask = MOUSE_BUTTON_MASK_LEFT;window.push_input(motion); await settle()
+	mouse(finish,window,false);await settle()
+	check(editor.get_selected_text() == "23","Mouse drag selects substring")
+	text_key("8",window);await settle();check(editor.text == "18.45","Typing replaces only dragged substring")
+	send_key(KEY_A,window,true);await settle();check(editor.get_selected_text() == editor.text,"Explicit Ctrl+A still selects all")
+	var clipboard := DisplayServer.clipboard_get()
+	send_key(KEY_C,window,true);await settle();check(DisplayServer.clipboard_get() == "18.45","Ctrl+C copies selection")
+	DisplayServer.clipboard_set("321.75");send_key(KEY_V,window,true);await settle();check(editor.text == "321.75","Ctrl+V replaces selection")
+	DisplayServer.clipboard_set(clipboard);editor.text = initial
+func run():
+	output = OS.get_cmdline_user_args()[0]
+	viewer = Viewer.new();root.add_child(viewer);viewer.set_process(false)
+	shell = viewer.shell;nav = shell.focus_navigation;shell.edge_reveal.set_process(false)
+	var blocker = MouseState.new();blocker.name = "MouseState";root.add_child(blocker)
+	viewer._open_capture(output.path_join("scene.wvz"));viewer.playing = false;viewer.orbit_enabled = false;await ready()
+	viewer.color_channel = "value";viewer._set_normalization("manual");viewer._sync_control_state()
+	shell.select_workspace(0);viewer.sections["Color Mapping"].show();await settle()
+	await matrix(viewer.manual_spins[0].get_line_edit(),"simulation")
+	var state := science();var camera: Transform3D = viewer.camera.transform;var sample: Dictionary = viewer.committed_sample.duplicate(true)
+	for title in ["Performance","Source probe","Selection","Diagnostics","Space time","Matched runs","Data"]:
+		viewer.tools_ui.open(title);await settle()
+		var editors: Array = nav.chain(viewer.tools_ui.window).filter(func(control):return control is LineEdit)
+		check(not editors.is_empty(),title+": editable value exists")
+		if not editors.is_empty(): await matrix(editors[0],title.to_lower().replace(" ","-"))
+		viewer.tools_ui.close();await settle()
+	viewer.video_dialog.open();await settle();var video = viewer.video_dialog
+	video.range_choice.select(2);video.range_choice.item_selected.emit(2);await settle()
+	await matrix(video.start.get_line_edit(),"video-numeric")
+	await matrix(video.output,"video-path")
+	check(not video.width.editable,"Read-only preset SpinBox remains unconfigured")
+	video.width.get_line_edit().grab_focus();await settle()
+	check(not video.width.get_line_edit().has_selection(),"Read-only preset SpinBox has no automatic selection")
+	var spin: SpinBox = video.rate;await reveal(spin.get_line_edit());var original_value := spin.value
+	spin.get_line_edit().grab_focus();await settle();text_key("2",video);await settle();send_key(KEY_ENTER,video);await settle()
+	check(is_equal_approx(spin.value,2.0),"SpinBox Enter retains numeric commit")
+	spin.value = original_value;video.close_button.grab_focus();await reveal(spin.get_line_edit())
+	var arrow_point := spin.get_global_rect().end-Vector2(5,spin.size.y*.75)
+	await mouse_click(arrow_point,video);await settle()
+	check(is_equal_approx(spin.value,original_value+spin.step),"SpinBox arrow increments by existing step")
+	check(not spin.get_line_edit().has_selection(),"SpinBox arrow does not select text for replacement")
+	spin.value = original_value;spin.get_line_edit().grab_focus();send_key(KEY_RIGHT,video);await settle()
+	await mouse_click(spin.get_line_edit().get_global_rect().get_center(),video,MOUSE_BUTTON_WHEEL_UP);await settle()
+	check(is_equal_approx(spin.value,original_value+spin.step),"SpinBox wheel retains increment behavior")
+	spin.value = original_value;video.hide();await settle()
+	shell.transport.open_seek();await settle();var seek = shell.transport.seek_dialog
+	check(seek.editor.get_selected_text() == seek.editor.text,"Seek programmatic open selects contents")
+	await matrix(seek.editor,"seek")
+	seek.editor.text = "bad";send_key(KEY_ENTER,seek);await settle();check(seek.visible and seek.error_label.visible,"Seek Enter retains invalid-input validation")
+	send_key(KEY_ESCAPE,seek);await settle();check(not seek.visible and viewer.committed_sample == sample,"Seek Escape cancels without seeking")
+	shell.edit_file_locations();await settle();var locations = shell.file_locations_dialog
+	await matrix(locations.fields.video_dir,"file-locations")
+	await partial_matrix(locations.fields.video_dir)
+	locations.ffmpeg_path.grab_focus();await settle()
+	check(not locations.ffmpeg_path.select_all_on_focus and not locations.ffmpeg_path.has_selection(),"Read-only FFmpeg path retains normal selection behavior")
+	send_key(KEY_ESCAPE,locations);await settle();check(not locations.visible,"File Locations Escape discards drafts")
+	shell.edit_orbit_center();await settle();var orbit = shell.orbit_editor;orbit.show_details(true);await settle()
+	await matrix(orbit.coordinates[0],"orbit-coordinate")
+	await matrix(orbit.radius_input,"orbit-radius")
+	orbit.radius_input.text = "invalid";send_key(KEY_ENTER,root);await settle();check(orbit.visible and orbit.notice.text.contains("finite"),"Orbit Enter retains numeric validation")
+	orbit.dismiss();await settle();check(viewer.camera.transform == camera,"Orbit dismissal restores unchanged camera")
+	viewer.manual_spins[0].get_line_edit().grab_focus();await settle()
+	viewer.tools_ui.open("Performance");await settle();viewer.tools_ui.close();await settle()
+	var restored: LineEdit = viewer.manual_spins[0].get_line_edit()
+	check(root.gui_get_focus_owner() == restored and restored.get_selected_text() == restored.text,"Dialog restoration selects active value once")
+	send_key(KEY_RIGHT,root);await settle();nav.reconcile();await settle();check(not restored.has_selection(),"Restoration never repeatedly selects after caret intent")
+	for dimensions in [Vector2i(1440,900),Vector2i(1024,640)]:
+		root.size = dimensions;await settle();shell.layout();await settle();await reveal(restored)
+		restored.release_focus();restored.grab_focus();await picture("simulation-"+str(dimensions.x),root)
+	check(science() == state and viewer.committed_sample == sample and viewer.camera.transform == camera and not viewer.playing,"Focus/edit drafts preserve accepted scientific state, sample, camera and playback")
+	viewer.scene_prebuffer_enabled = false
+	viewer._open_capture(output.path_join("mixed.wvz"));await ready()
+	var layers = viewer.scene_layers;shell.select_workspace(1)
+	layers.panel_groups["volume0/Color Mapping"].button_pressed = true
+	layers.panel_groups["volume0/Opacity"].button_pressed = true;await settle()
+	var volume_state := science()
+	await matrix(layers.panel_controls.volume0.lower,"volume-color-bound")
+	await matrix(layers.opacity_controls.volume0.lower,"volume-opacity-bound")
+	await matrix(layers.panel_controls.volume0.strength.get_line_edit(),"volume-strength")
+	check(science() == volume_state,"Volume numeric editor focus/drafts leave scientific settings unchanged")
+	check(not nav.is_processing(),"Focus policy has no frame polling")
+	FileAccess.open(output.path_join("report.json"),FileAccess.WRITE).store_string(JSON.stringify({"checks":checks,"failures":failures,"areas":areas}))
+	print("SELECT ON FOCUS: ",checks," checks; ",failures.size()," failures")
+	viewer.free();await settle();quit(0 if failures.is_empty() else 1)

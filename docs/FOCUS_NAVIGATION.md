@@ -1,5 +1,10 @@
 # Keyboard focus navigation
 
+Issue #291 extends the shared focus-entry policy in candidate build 73, pending
+owner review: editable numeric/text values select their contents on entry into
+direct editing. Native caret/substring interaction and read-only fields retain
+their behavior. See [editable value focus](EDITABLE_VALUE_FOCUS.md).
+
 Issue #146 introduces visibility-aware keyboard traversal in candidate build
 `v0.1.0.65`, pending owner review. [Validation and owner checks](evidence/issue-146/README.md)
 record the tested states and remaining desktop review.
