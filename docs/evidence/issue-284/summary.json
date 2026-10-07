@@ -1,0 +1,41 @@
+{
+  "issue": 284,
+  "title": "UX-PINS \u2014 Remove tooltips from all panel pin controls",
+  "branch": "284-ux-pins-remove-tooltips-from-all-panel-pin-controls",
+  "base": "db198dc0b81060505f612bd33a04054a86174003",
+  "candidate_version": "v0.1.0.69",
+  "ready_position": 1,
+  "owner_review": "pending",
+  "environment": "Linux native GPU, Godot 4.7.2, NVIDIA RTX 3070 Ti",
+  "validation": {
+    "forward_plus": {
+      "checks": 276,
+      "failures": 0
+    },
+    "gl_compatibility": {
+      "checks": 276,
+      "failures": 0
+    },
+    "version_tests": 2,
+    "hover_wait_seconds": 0.8,
+    "tooltip_delay_seconds": 0.5,
+    "sizes": [
+      {
+        "width": 1440,
+        "height": 900
+      },
+      {
+        "width": 1024,
+        "height": 640
+      }
+    ],
+    "fullscreen": "Native Fullscreen entered/exited from each size, hidden/unpinned initial state and exact pin/timer restoration verified"
+  },
+  "baseline": {
+    "checks": 276,
+    "failures": 60,
+    "pin_tooltip_assertion_failures": 48,
+    "tab_expectation_failures_with_tooltips_present": 12
+  },
+  "scope": "One shared tooltip assignment; existing hover/click/key helpers, temporary pin-only review driver outside repository; no new permanent test suite."
+}
