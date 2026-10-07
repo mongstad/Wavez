@@ -1,5 +1,12 @@
 # Current status
 
+Issue #285 stabilizes the Video Export dialog and Jobs Details render ETA in
+candidate build 68, pending owner review. One shared presentation estimator
+smooths observed frame costs over five seconds and limits visible ETA updates
+to twice per second. Frame counts, elapsed time, worker/progress protocol,
+cancellation and encoding retain their existing behavior. See
+[video ETA](VIDEO_ETA.md) and [focused evidence](evidence/issue-285/README.md).
+
 Issue #93 enables the existing video worker in Linux release packages in candidate
 build 67, pending owner review. Export templates launch their own PCK without a
 project-path override; selection-aware export uses packaged first-party Python

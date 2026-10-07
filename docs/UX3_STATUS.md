@@ -63,7 +63,10 @@ polling or worker ownership is added.
 Video Details uses the export dialog's shared presentation formatter: one
 frame/percentage line, separate elapsed and approximate render-only remaining
 time, and labeled Output/Temporary files paths. The existing 5 Hz refresh advances
-wall time from the published snapshot; no additional file polling is used.
+elapsed time from the published snapshot. The shared render ETA smooths observed
+frame costs over five seconds and caches its display for 500 ms; unchanged values
+retain their text. Stage changes bypass that cadence. No additional timer or file
+polling is used; see [ETA validation](VIDEO_ETA.md).
 See [video progress semantics](../VIDEO_EXPORT.md) for initial, stale-progress,
 encoding and terminal states.
 Cancellation acknowledgement, parent shutdown, overwrite refusal, separate

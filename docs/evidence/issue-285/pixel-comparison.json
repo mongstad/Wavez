@@ -1,0 +1,15 @@
+{
+  "results": [
+    {
+      "path": "/tmp/wavez-issue-285/source-long/complete/result.mp4",
+      "decoded_sha256": "5ce5fa0bb37513256655fabea1b64adae5d6a36a5df4e2e73ee54ab5a251b019",
+      "bytes": 20736000
+    },
+    {
+      "path": "/tmp/wavez-issue-285/release-long/complete/result.mp4",
+      "decoded_sha256": "5ce5fa0bb37513256655fabea1b64adae5d6a36a5df4e2e73ee54ab5a251b019",
+      "bytes": 20736000
+    }
+  ],
+  "identical_pixels": true
+}
