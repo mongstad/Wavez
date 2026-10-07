@@ -35,6 +35,7 @@ var start_button: Button
 var background_button: Button
 var close_button: Button
 var can_start := false
+var native_save_pending := false
 var save_dialog: FileDialog
 var fields: VBoxContainer
 var range_group
@@ -156,13 +157,10 @@ func _ready() -> void:
 	if viewer.file_dialog_preferences != null:
 		viewer.file_dialog_preferences.attach(save_dialog)
 	save_dialog.file_selected.connect(func(path: String):
-		if pid <= 0 and not preparing: output.text = path)
+		_accept_output_path(path))
 	add_child(save_dialog)
-	browse.pressed.connect(func():
-		if pid <= 0 and not preparing:
-			var directory: String = output.text.get_base_dir() if output.text.is_absolute_path() else viewer.file_locations.settings.video_dir
-			if not directory.is_empty() and DirAccess.dir_exists_absolute(directory): save_dialog.current_dir = directory
-			save_dialog.popup_centered_ratio(.8))
+	browse.pressed.connect(browse_output)
+
 	summary_group = add_group(box, "Export summary")
 	estimate = Label.new(); estimate.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; summary_group.body.add_child(estimate)
 	message = Label.new(); message.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -215,6 +213,46 @@ func _ready() -> void:
 	add_child(cancel_confirmation)
 	_sync_action_buttons()
 	for spin in [start, end, width, height, fps, rate]: spin.value_changed.connect(func(_v: float): update_estimate())
+
+func browse_output() -> void:
+	if pid > 0 or preparing or native_save_pending: return
+	var directory: String = output.text.get_base_dir() if output.text.is_absolute_path() else viewer.file_locations.settings.video_dir
+	if not directory.is_empty() and DirAccess.dir_exists_absolute(directory): save_dialog.current_dir = directory
+	var filename := output.text.get_file()
+	if filename.is_empty(): filename = viewer.capture_path.get_file().get_basename() + ".mp4"
+	if filename == ".mp4": filename = "video.mp4"
+	if filename.get_extension().is_empty(): filename += ".mp4"
+	save_dialog.current_file = filename
+	# Reset the embedded fallback too, after a previous All Files selection.
+	save_dialog.clear_filters()
+	save_dialog.filters = PackedStringArray(["*.mp4 ; H.264 MP4"])
+	if save_dialog.use_native_dialog and DisplayServer.has_feature(DisplayServer.FEATURE_NATIVE_DIALOG_FILE):
+		# FileDialog adds All Files to processed_filters. KDE switches to that
+		# filter while typing extensionless names. Send only our MP4 filter.
+		native_save_pending = true
+		var error := DisplayServer.file_dialog_show(save_dialog.title, save_dialog.current_dir,
+			filename, save_dialog.show_hidden_files, DisplayServer.FILE_DIALOG_MODE_SAVE_FILE,
+			save_dialog.filters, _native_output_selected, get_window_id())
+		if error == OK: return
+		native_save_pending = false
+	save_dialog.use_native_dialog = false
+	save_dialog.popup_centered_ratio(.8)
+
+func _native_output_selected(selected: bool, paths: PackedStringArray, _filter: int) -> void:
+	native_save_pending = false
+	if selected and paths.size() == 1:
+		save_dialog.current_path = paths[0]
+		save_dialog.file_selected.emit(paths[0])
+	else:
+		save_dialog.canceled.emit()
+
+func _accept_output_path(path: String) -> void:
+	if pid > 0 or preparing: return
+	# Native backends may return the typed name without its filtered extension.
+	# Never turn a directory (including a trailing slash) into an output file.
+	if not path.is_absolute_path() or path.get_file().is_empty() or DirAccess.dir_exists_absolute(path): return
+	if path.get_extension().is_empty(): path += ".mp4"
+	output.text = path
 
 func add_group(parent: VBoxContainer, title: String):
 	var group = TitledGroup.new(title)

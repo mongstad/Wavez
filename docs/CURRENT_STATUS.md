@@ -1,5 +1,12 @@
 # Current status
 
+Issue #283 fixes the Video Export Browse MP4 filter and output-path round trip
+in candidate build 70, pending owner review. The native request offers only
+MP4, Browse seeds the filename, and extensionless selections gain `.mp4`.
+Cancel preserves the prior output; strict output validation remains in place.
+See [video usage](../VIDEO_EXPORT.md#using-export-video) and
+[focused evidence](evidence/issue-283/README.md).
+
 Issue #284 removes hover tooltips from all three panel pin controls in candidate
 build 69, pending owner review. One shared pin update clears tooltip text in
 both pin states, including edge reveal and Fullscreen restoration. Pin actions,

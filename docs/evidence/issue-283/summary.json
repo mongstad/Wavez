@@ -1,0 +1,31 @@
+{
+  "candidate": "v0.1.0.70",
+  "baseline": "f09fb529ef9f9d683263d6c1a96a5a57c7811e64",
+  "source_checks": 32,
+  "release_checks": 32,
+  "failures": 0,
+  "exports": {
+    "count": 4,
+    "codec": "h264",
+    "width": 320,
+    "height": 180,
+    "frames_each": 2
+  },
+  "fixture_unchanged": true,
+  "fixture_sha256": "501c56e8807a13d9adcf596af30e57cf428d97e281e1c24aa88b371062016e30",
+  "native_inspection": "Actual KDE popup captured in source and release; filename typing/save not automated",
+  "native_callback_edges": "Injected",
+  "typing_round_trip_exports": "Real embedded FileDialog through production Browse and Start Export; no direct output assignment before exports",
+  "clean_parent_logs": true,
+  "application_version_tests": 2,
+  "godot_import": "PASS",
+  "renderer": "Forward+",
+  "godot": "4.7.2.stable.ed1daf0bf",
+  "release_native_probe": {
+    "file": "particles.mp4",
+    "filters": [
+      "*.mp4 ; H.264 MP4"
+    ],
+    "pending": true
+  }
+}
