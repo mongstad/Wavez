@@ -44,6 +44,7 @@ Start with:
 - [File and Tools dialog layout](docs/DIALOG_COHERENCE.md)
 - [Performance dialog](docs/PERFORMANCE_DIALOG.md)
 - [Current Tools functional audit](docs/TOOLS_FUNCTIONAL_AUDIT.md)
+- [Successful-open error recovery](docs/LOAD_ERROR_STATUS_RECOVERY.md)
 - [Session action and error logs](docs/SESSION_LOGGING.md)
 - [File Locations preferences](docs/FILE_LOCATIONS.md)
 - [Video export from Linux release builds](docs/PACKAGED_VIDEO_EXPORT.md)

@@ -1,0 +1,173 @@
+{
+  "cases": [
+    {
+      "badge": "No capture   \u2022   Failed \u2014 details",
+      "case": "normal-empty-prefix-failure",
+      "failures": {
+        "Open file": "Unsupported scene version/header."
+      },
+      "problem": "Unsupported scene version/header."
+    },
+    {
+      "badge": "Ready",
+      "case": "normal-empty-recovered",
+      "failures": {}
+    },
+    {
+      "badge": "Ready   \u2022   Failed \u2014 details",
+      "case": "normal-replacement-failure",
+      "failures": {
+        "Open file": "Unsupported scene version/header."
+      },
+      "problem": "Unsupported scene version/header."
+    },
+    {
+      "badge": "Ready",
+      "case": "normal-replacement-recovered",
+      "failures": {}
+    },
+    {
+      "badge": "Ready   \u2022   Failed \u2014 details",
+      "case": "normal-unsupported.txt",
+      "failures": {
+        "Open file": "WAVEZ Scene Format requires a .wvz file."
+      },
+      "problem": "WAVEZ Scene Format requires a .wvz file."
+    },
+    {
+      "badge": "Ready",
+      "case": "normal-unsupported.txt-recovered",
+      "failures": {}
+    },
+    {
+      "badge": "Ready   \u2022   Failed \u2014 details",
+      "case": "normal-invalid.wvz",
+      "failures": {
+        "Open file": "Unsupported scene version/header."
+      },
+      "problem": "Unsupported scene version/header."
+    },
+    {
+      "badge": "Ready",
+      "case": "normal-invalid.wvz-recovered",
+      "failures": {}
+    },
+    {
+      "badge": "Unavailable   \u2022   Failed \u2014 details",
+      "case": "normal-duplicate.wvz",
+      "failures": {
+        "Open file": "p sample 0 (record 0): Negative or duplicate particle ID. Reopen or re-export the capture."
+      },
+      "problem": "p sample 0 (record 0): Negative or duplicate particle ID. Reopen or re-export the capture."
+    },
+    {
+      "badge": "Ready",
+      "case": "normal-duplicate.wvz-recovered",
+      "failures": {}
+    },
+    {
+      "badge": "Unavailable   \u2022   Failed \u2014 details",
+      "case": "normal-failure-with-unrelated-owners",
+      "failures": {
+        "Open file": "p sample 0 (record 0): Negative or duplicate particle ID. Reopen or re-export the capture."
+      },
+      "problem": "p sample 0 (record 0): Negative or duplicate particle ID. Reopen or re-export the capture."
+    },
+    {
+      "badge": "No capture   \u2022   Failed \u2014 details",
+      "case": "compact-empty-prefix-failure",
+      "failures": {
+        "Open file": "Unsupported scene version/header."
+      },
+      "problem": "Unsupported scene version/header."
+    },
+    {
+      "badge": "Ready",
+      "case": "compact-empty-recovered",
+      "failures": {}
+    },
+    {
+      "badge": "Ready   \u2022   Failed \u2014 details",
+      "case": "compact-replacement-failure",
+      "failures": {
+        "Open file": "Unsupported scene version/header."
+      },
+      "problem": "Unsupported scene version/header."
+    },
+    {
+      "badge": "Ready",
+      "case": "compact-replacement-recovered",
+      "failures": {}
+    },
+    {
+      "badge": "Ready   \u2022   Failed \u2014 details",
+      "case": "compact-unsupported.txt",
+      "failures": {
+        "Open file": "WAVEZ Scene Format requires a .wvz file."
+      },
+      "problem": "WAVEZ Scene Format requires a .wvz file."
+    },
+    {
+      "badge": "Ready",
+      "case": "compact-unsupported.txt-recovered",
+      "failures": {}
+    },
+    {
+      "badge": "Ready   \u2022   Failed \u2014 details",
+      "case": "compact-invalid.wvz",
+      "failures": {
+        "Open file": "Unsupported scene version/header."
+      },
+      "problem": "Unsupported scene version/header."
+    },
+    {
+      "badge": "Ready",
+      "case": "compact-invalid.wvz-recovered",
+      "failures": {}
+    },
+    {
+      "badge": "Unavailable   \u2022   Failed \u2014 details",
+      "case": "compact-duplicate.wvz",
+      "failures": {
+        "Open file": "p sample 0 (record 0): Negative or duplicate particle ID. Reopen or re-export the capture."
+      },
+      "problem": "p sample 0 (record 0): Negative or duplicate particle ID. Reopen or re-export the capture."
+    },
+    {
+      "badge": "Ready",
+      "case": "compact-duplicate.wvz-recovered",
+      "failures": {}
+    },
+    {
+      "badge": "Unavailable   \u2022   Failed \u2014 details",
+      "case": "compact-failure-with-unrelated-owners",
+      "failures": {
+        "Open file": "p sample 0 (record 0): Negative or duplicate particle ID. Reopen or re-export the capture."
+      },
+      "problem": "p sample 0 (record 0): Negative or duplicate particle ID. Reopen or re-export the capture."
+    }
+  ],
+  "checks": 176,
+  "failures": [],
+  "layouts": [
+    "1440x900",
+    "1024x640"
+  ],
+  "renderer": "gl_compatibility",
+  "process_exit_code": 0,
+  "source_hashes_before": {
+    "scene.wvz": "b8df9cff287abd1ed8eaf1cbdc8bcd4ba117e913449c30d03b78e92620049a18",
+    "replacement.wvz": "dfc917ea91dd8f0952b60ce81d1ebe1832eaebab86678096b591180c28482da7",
+    "invalid.wvz": "e3cf75369dee49d3dab18b121e18827380b1620f57be32d3e6c336b9e18aecbd",
+    "duplicate.wvz": "e7423d517684ca5a823f282c32dbf3c53259d7f62fbefb5cfe47bbcb1c640e8c",
+    "unsupported.txt": "92f5de25f3630da7d3efb1b6720dec2bbac15e1536f0fc3cf613b9ed85e46f69"
+  },
+  "source_hashes_after": {
+    "scene.wvz": "b8df9cff287abd1ed8eaf1cbdc8bcd4ba117e913449c30d03b78e92620049a18",
+    "replacement.wvz": "dfc917ea91dd8f0952b60ce81d1ebe1832eaebab86678096b591180c28482da7",
+    "invalid.wvz": "e3cf75369dee49d3dab18b121e18827380b1620f57be32d3e6c336b9e18aecbd",
+    "duplicate.wvz": "e7423d517684ca5a823f282c32dbf3c53259d7f62fbefb5cfe47bbcb1c640e8c",
+    "unsupported.txt": "92f5de25f3630da7d3efb1b6720dec2bbac15e1536f0fc3cf613b9ed85e46f69"
+  },
+  "source_hashes_unchanged": true
+}

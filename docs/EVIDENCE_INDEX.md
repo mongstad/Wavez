@@ -1,5 +1,7 @@
 # Retained evidence
 
+- [Issue #295 — Superseded load-error recovery](evidence/issue-295/README.md): reproduced duplicate Scene/Open file ownership, recovery/icon/details checks, unrelated Jobs/diagnostics, both native renderers and normal/compact layouts.
+
 - [Issue #32 — Source-probe marker visibility](evidence/issue-32/README.md): color-treatment comparison, sparse/dense native scenes, field colormaps, visibility/state/PNG contracts and deterministic-video exclusion in both renderers.
 
 - [Issue #291 — Editable value focus](evidence/issue-291/README.md): native focus-entry replacement, deliberate partial editing, read-only/SpinBox behavior and both renderer focus regressions.
