@@ -1,0 +1,87 @@
+extends "res://ui/shell/test_transport_tooltips.gd"
+# Temporary review: reuse the accepted native hover/click/key helpers, pins only.
+var evidence := {}
+var baseline := false
+var colors := {}
+func move_away():
+	var motion := InputEventMouseMotion.new();motion.position = Vector2(300,250);root.push_input(motion)
+	await settle()
+func review_region(edge, side: String, label: String):
+	var pin: Button = edge.pins[side]
+	edge.set_pinned(side,true);await settle()
+	await move_away();pin.release_focus();await settle()
+	var theme = viewer.shell.style_slice.theme
+	var values := {}
+	for state in ["normal","pressed","hover","hover_pressed","focus","disabled"]:
+		values[state] = pin.get_theme_color("icon_"+state+"_color").to_html(false)
+	colors[label] = values
+	check(values.normal == (theme.c(&"text.secondary").to_html(false) if baseline else "7270d8"),label+": resting unpinned ink")
+	check(values.pressed == "7270d8",label+": resting pinned ink")
+	check(values.hover == theme.c(&"text.primary").to_html(false) and values.focus == theme.c(&"text.primary").to_html(false),label+": accepted unpinned hover/focus ink")
+	check(values.hover_pressed == theme.c(&"focus.ring").to_html(false),label+": accepted pinned hover ink")
+	check(values.disabled == theme.c(&"text.disabled").to_html(false),label+": muted disabled ink")
+	check(theme.c(&"text.title") == Color("7270d8") and theme.c(&"text.section") == Color("7270d8"),label+": hierarchy ink unchanged")
+	check(theme.get_color("icon_normal_color","IconAction") == theme.c(&"text.secondary"),label+": unrelated icon ink unchanged")
+	if label == "window-1440-top":root.get_texture().get_image().save_png(output.path_join("normal-pinned.png"))
+	var icon = pin.icon
+	var styles: Array = []
+	for state in ["normal","hover","pressed","hover_pressed","disabled","focus"]:styles.append(pin.get_theme_stylebox(state))
+	check(pin.toggle_mode and pin.button_pressed and pin.focus_mode == Control.FOCUS_ALL,label+": toggle and keyboard eligibility retained")
+	await hover(pin,false,label+"-pinned")
+	click(pin);await settle()
+	check(not edge.states[side].pinned and edge.states[side].visible and pin.icon != icon,label+": mouse unpin retains grace and changes icon")
+	await move_away();pin.release_focus();edge.keyboard_navigation = false
+	edge.tick(.34,Vector2(300,250),false,false)
+	check(edge.states[side].visible,label+": 0.34-second grace holds")
+	edge.tick(.02,Vector2(300,250),false,false)
+	check(not edge.states[side].visible,label+": auto-hide after grace")
+	var point: Vector2 = {"top":Vector2(500,1),"right":Vector2(root.size.x-1,300),"bottom":Vector2(500,root.size.y-1)}[side]
+	edge.tick(.49,point,true,false)
+	check(not edge.states[side].visible,label+": reveal waits for dwell")
+	edge.tick(.02,point,true,false);await settle()
+	check(edge.states[side].visible and not pin.button_pressed,label+": edge reveals same unpinned control")
+	await move_away();pin.release_focus();await settle()
+	await hover(pin,false,label+"-unpinned")
+	await move_away();await settle()
+	colors[label]["unpinned_draw_mode"] = pin.get_draw_mode()
+	check(pin.get_draw_mode()==BaseButton.DRAW_NORMAL,label+": screenshot uses resting unpinned state")
+	if label in ["window-1440-top","window-1440-right","window-1440-bottom","window-1024-right","fullscreen-from-1440-bottom"]:root.get_texture().get_image().save_png(output.path_join(label+"-unpinned.png"))
+	pin.grab_focus();await settle()
+	check(pin.has_focus() and pin in viewer.shell.focus_navigation.chain(root),label+": pin enters live focus order")
+	key(KEY_ENTER);await settle()
+	check(edge.states[side].pinned and pin.button_pressed and pin.icon == icon,label+": Enter repins using original icon")
+	var order: Array = viewer.shell.focus_navigation.chain(root)
+	var expected: Control = order[(order.find(pin)+1)%order.size()]
+	key(KEY_TAB);await settle()
+	check(expected.has_focus(),label+": Tab follows current visual order; expected="+str(expected.get_path())+" actual="+str(root.gui_get_focus_owner().get_path() if root.gui_get_focus_owner()!=null else "none"))
+	for i in styles.size():check(styles[i] == pin.get_theme_stylebox(["normal","hover","pressed","hover_pressed","disabled","focus"][i]),label+": style resource unchanged "+str(i))
+	await move_away();edge.keyboard_navigation = false
+func run():
+	output = OS.get_cmdline_user_args()[0]
+	baseline = OS.get_cmdline_user_args().has("baseline")
+	viewer = Viewer.new();root.add_child(viewer);viewer.set_process(false)
+	viewer.playing = false;viewer.orbit_enabled = false
+	await settle()
+	var shell = viewer.shell
+	var edge = shell.edge_reveal;edge.set_process(false)
+	var saved: Dictionary = edge.states.duplicate(true)
+	check(not shell.export_state().has("pins"),"Session pin state stays outside export presentation")
+	for dimensions in [Vector2i(1440,900),Vector2i(1024,640)]:
+		root.size = dimensions;await settle();shell.layout();await settle()
+		for side in ["top","right","bottom"]:await review_region(edge,side,"window-"+str(dimensions.x)+"-"+side)
+		await hover(shell.transport.loop,true,"window-"+str(dimensions.x)+"-loop-intentional")
+		await move_away()
+		for side in edge.states:edge.set_pinned(side,true)
+		var before: Dictionary = edge.states.duplicate(true)
+		viewer._toggle_fullscreen();await create_timer(.4).timeout
+		check(shell.immersive and DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN,"Native Fullscreen entered from "+str(dimensions))
+		for side in edge.states:check(not edge.states[side].pinned and not edge.states[side].visible,"Fullscreen starts hidden/unpinned "+side)
+		for side in ["top","right","bottom"]:await review_region(edge,side,"fullscreen-from-"+str(dimensions.x)+"-"+side)
+		await hover(shell.transport.loop,true,"fullscreen-from-"+str(dimensions.x)+"-loop-intentional")
+		await move_away();viewer._toggle_fullscreen();await create_timer(.4).timeout
+		check(not shell.immersive and edge.states == before,"Fullscreen restores exact prior pin/timer state from "+str(dimensions))
+	check(edge.states == saved,"Original session state restored")
+	var report := {"checks":checks,"failures":failures,"colors":colors,"baseline":baseline,"renderer":RenderingServer.get_current_rendering_method(),"hover_wait_seconds":.8,"tooltip_delay_seconds":ProjectSettings.get_setting("gui/timers/tooltip_delay_sec",.5),"dwell_seconds":edge.DWELL,"grace_seconds":edge.GRACE,"method":"Existing native hover/click/key helpers; deterministic edge tick; actual Fullscreen mode"}
+	FileAccess.open(output.path_join("report.json"),FileAccess.WRITE).store_string(JSON.stringify(report,"\t"))
+	viewer.free();await process_frame
+	print("PINS: %d checks, %d failures" % [checks,failures.size()]);quit(0 if failures.is_empty() else 1)

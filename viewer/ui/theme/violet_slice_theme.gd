@@ -77,7 +77,7 @@ func _init() -> void:
 	set_stylebox("focus", "PanelDisclosure", focus())
 	set_color("icon_pressed_color", "PanelDisclosure", c(&"accent.primary"))
 	set_color("icon_hover_pressed_color", "PanelDisclosure", c(&"focus.ring"))
-	# Pins carry their state in silhouette and ink, including when toggled on.
+	# Pins carry their state in silhouette; both resting states use the accent.
 	set_type_variation("PinAction", "IconAction")
 	for state in ["normal", "pressed", "disabled", "hover", "hover_pressed"]:
 		var pin := flat_box(&"surface.hover", 8, 6)
@@ -86,7 +86,7 @@ func _init() -> void:
 	set_stylebox("focus", "PinAction", focus())
 	set_color("icon_pressed_color", "PinAction", c(&"accent.primary"))
 	set_color("icon_hover_pressed_color", "PinAction", c(&"focus.ring"))
-	set_color("icon_normal_color", "PinAction", c(&"text.secondary"))
+	set_color("icon_normal_color", "PinAction", c(&"accent.primary"))
 	set_stylebox("normal", "LineEdit", flat_box(&"surface.2"))
 	set_stylebox("read_only", "LineEdit", flat_box(&"surface.1"))
 	var invalid := flat_box(&"surface.2"); invalid.border_width_bottom = 1; invalid.border_color = c(&"state.error")

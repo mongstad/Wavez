@@ -1,5 +1,13 @@
 # Current status
 
+Issue #288 keeps the top, right and bottom pins violet (`#7270d8`) in both
+resting states in candidate build 71, pending owner review. State remains
+visible through upright/tilted glyph orientation; the unpinned glyph is also
+filled violet per owner direction. Interaction colors and pin
+behavior retain their existing contracts. See
+[pin behavior](WINDOW_EDGE_REVEAL.md) and
+[focused evidence](evidence/issue-288/README.md).
+
 Issue #283 fixes the Video Export Browse MP4 filter and output-path round trip
 in candidate build 70, pending owner review. The native request offers only
 MP4, Browse seeds the filename, and extensionless selections gain `.mp4`.

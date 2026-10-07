@@ -1,0 +1,121 @@
+{
+	"baseline": false,
+	"checks": 372,
+	"colors": {
+		"fullscreen-from-1024-bottom": {
+			"disabled": "748096",
+			"focus": "e5eaf2",
+			"hover": "e5eaf2",
+			"hover_pressed": "9695f5",
+			"normal": "7270d8",
+			"pressed": "7270d8",
+			"unpinned_draw_mode": 0
+		},
+		"fullscreen-from-1024-right": {
+			"disabled": "748096",
+			"focus": "e5eaf2",
+			"hover": "e5eaf2",
+			"hover_pressed": "9695f5",
+			"normal": "7270d8",
+			"pressed": "7270d8",
+			"unpinned_draw_mode": 0
+		},
+		"fullscreen-from-1024-top": {
+			"disabled": "748096",
+			"focus": "e5eaf2",
+			"hover": "e5eaf2",
+			"hover_pressed": "9695f5",
+			"normal": "7270d8",
+			"pressed": "7270d8",
+			"unpinned_draw_mode": 0
+		},
+		"fullscreen-from-1440-bottom": {
+			"disabled": "748096",
+			"focus": "e5eaf2",
+			"hover": "e5eaf2",
+			"hover_pressed": "9695f5",
+			"normal": "7270d8",
+			"pressed": "7270d8",
+			"unpinned_draw_mode": 0
+		},
+		"fullscreen-from-1440-right": {
+			"disabled": "748096",
+			"focus": "e5eaf2",
+			"hover": "e5eaf2",
+			"hover_pressed": "9695f5",
+			"normal": "7270d8",
+			"pressed": "7270d8",
+			"unpinned_draw_mode": 0
+		},
+		"fullscreen-from-1440-top": {
+			"disabled": "748096",
+			"focus": "e5eaf2",
+			"hover": "e5eaf2",
+			"hover_pressed": "9695f5",
+			"normal": "7270d8",
+			"pressed": "7270d8",
+			"unpinned_draw_mode": 0
+		},
+		"window-1024-bottom": {
+			"disabled": "748096",
+			"focus": "e5eaf2",
+			"hover": "e5eaf2",
+			"hover_pressed": "9695f5",
+			"normal": "7270d8",
+			"pressed": "7270d8",
+			"unpinned_draw_mode": 0
+		},
+		"window-1024-right": {
+			"disabled": "748096",
+			"focus": "e5eaf2",
+			"hover": "e5eaf2",
+			"hover_pressed": "9695f5",
+			"normal": "7270d8",
+			"pressed": "7270d8",
+			"unpinned_draw_mode": 0
+		},
+		"window-1024-top": {
+			"disabled": "748096",
+			"focus": "e5eaf2",
+			"hover": "e5eaf2",
+			"hover_pressed": "9695f5",
+			"normal": "7270d8",
+			"pressed": "7270d8",
+			"unpinned_draw_mode": 0
+		},
+		"window-1440-bottom": {
+			"disabled": "748096",
+			"focus": "e5eaf2",
+			"hover": "e5eaf2",
+			"hover_pressed": "9695f5",
+			"normal": "7270d8",
+			"pressed": "7270d8",
+			"unpinned_draw_mode": 0
+		},
+		"window-1440-right": {
+			"disabled": "748096",
+			"focus": "e5eaf2",
+			"hover": "e5eaf2",
+			"hover_pressed": "9695f5",
+			"normal": "7270d8",
+			"pressed": "7270d8",
+			"unpinned_draw_mode": 0
+		},
+		"window-1440-top": {
+			"disabled": "748096",
+			"focus": "e5eaf2",
+			"hover": "e5eaf2",
+			"hover_pressed": "9695f5",
+			"normal": "7270d8",
+			"pressed": "7270d8",
+			"unpinned_draw_mode": 0
+		}
+	},
+	"dwell_seconds": 0.5,
+	"failures": [],
+	"grace_seconds": 0.35,
+	"hover_wait_seconds": 0.8,
+	"method": "Existing native hover/click/key helpers; deterministic edge tick; actual Fullscreen mode",
+	"renderer": "forward_plus",
+	"tooltip_delay_seconds": 0.5
+}
