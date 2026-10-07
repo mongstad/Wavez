@@ -129,8 +129,13 @@ log or cyclic mapping; particle legends also show **Range policy** using the sam
 wording as the panel. These are the existing effective display bounds, not a new
 normalization calculation.
 
-Two text columns keep ordinary field/mesh legends to two rows. Particle range
-policy occupies a third row. Long values wrap without reducing the font size.
+Volume legends add **Opacity** strength, ramp mode and thresholds from the applied
+renderer uniforms. Slice-only legends identify **opaque slice**; combined views
+also include that qualifier. Strength is display extinction per world unit,
+not uniform pixel alpha. See [volume legend opacity](VOLUME_LEGEND_OPACITY.md).
+
+Two text columns keep ordinary mesh legends to two rows. Volume opacity and
+particle range policy each occupy a third row. Long values wrap without reducing the font size.
 Cards share a width of up to 476 logical pixels including padding. Overflow
 scrollbars sit outside the cards on the left, preserving aligned edges.
 Cards stack above the playback controls with six-pixel gaps, grow upward, and

@@ -23,6 +23,8 @@ def main():
     out = args.output_dir.resolve()
     out.mkdir(parents=True, exist_ok=False)
     fixture(out / 'mixed.wvz', ['particles', 'volume', 'mesh'])
+    fixture(out / 'particles-only.wvz', ['particles'])
+    fixture(out / 'meshes-only.wvz', ['mesh'])
     source = out / 'mixed.wvz'
     digest = hashlib.sha256(source.read_bytes()).hexdigest()
     result = subprocess.run([args.godot, '--path', str(ROOT / 'viewer'), '--rendering-method', args.renderer,

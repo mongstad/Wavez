@@ -1,0 +1,61 @@
+{
+  "issue": 281,
+  "version": "0.1.0.72",
+  "status": "pending owner review",
+  "accepted_main": "3f966be835b6b2df4d0c20173684b3d1df555701",
+  "branch": "281-ux-legend-show-volume-opacity-state-in-the-legend-overlay",
+  "validation": {
+    "forward_plus": {
+      "checks": 106,
+      "failures": []
+    },
+    "gl_compatibility": {
+      "checks": 106,
+      "failures": []
+    },
+    "application_version_tests": 2,
+    "python_compile": "PASS",
+    "warm_unrestricted_import": "PASS",
+    "diff_check": "PASS",
+    "video_exports": 4,
+    "video_format": "H.264, 1440x900, one frame each, overlays on/off per renderer",
+    "source_sha256_unchanged_per_run": true
+  },
+  "initial_failure": {
+    "checks": 97,
+    "failed_assertions": 3,
+    "cause": "Test expected threshold text 2 instead of actual Godot string 2.0; corrected assertions and added applied-uniform checks."
+  },
+  "import_diagnostics": [
+    "Initial import recreated five known untracked cache UIDs.",
+    "Sandboxed warm retry could not create editor sockets; unchanged unrestricted import completed without errors or warnings."
+  ],
+  "layout": {
+    "volume_card": [
+      476,
+      98
+    ],
+    "particle_card": [
+      476,
+      96
+    ],
+    "screenshots": [
+      [
+        1440,
+        900
+      ],
+      [
+        1024,
+        640
+      ]
+    ],
+    "overflow": "Existing bounded scroll container; not all cards visible simultaneously."
+  },
+  "not_run": [
+    "Linux release package",
+    "Physical-display and mixed-DPI/4K checks",
+    "Long captures",
+    "Unrelated full application and scientific payload suites"
+  ],
+  "owner_acceptance": false
+}

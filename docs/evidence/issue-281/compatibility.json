@@ -1,0 +1,15 @@
+{
+  "checks": 106,
+  "failures": [],
+  "layout": {
+    "field_card_height": 98.0,
+    "field_card_width": 476.0,
+    "particle_card_height": 96.0,
+    "particle_card_width": 476.0
+  },
+  "one_frame_exports": {
+    "True": "3058ade24853c3b37d0118205d8a051d6cb8fc05c55f3f6c68cfffb09d1e4b96",
+    "False": "87f9ea62194a4e3f74690d323273ce3d309a9966bb1a06b2a39cf40dcd298afc"
+  },
+  "source_sha256_unchanged": "fd16f5f9b2cb802c6ce90f380761b09767cc981fcad8187976dd94f97804c2e3"
+}

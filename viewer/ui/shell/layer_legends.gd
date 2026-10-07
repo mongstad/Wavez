@@ -57,12 +57,24 @@ func sync() -> void:
 			entry.bar.texture = layers.lut(state.colormap)
 			var mapping: String = layers.ColorMapping.resolve(state).normalization if info.kind == "volume" else "linear"
 			entry.label.text = LegendText.content(id,state.channel,state.colormap,"%s → %s" % [str(state.lower),str(state.upper)],mapping)
+			if info.kind == "volume": entry.label.text += "\n" + _opacity_text(view)
 			entry.card.tooltip_text = entry.label.text
 	for id in entries.keys():
 		if not active.has(id):
 			stack.remove_child(entries[id].card); entries[id].card.queue_free(); entries.erase(id)
 	visible = not entries.is_empty() and not (viewer.offline_instance and not viewer.overlay_visible)
 	arrange()
+
+func _opacity_text(view) -> String:
+	# Report the uniforms already applied to the renderer, without legend state.
+	if not view.quad.visible: return "Opacity: opaque slice"
+	var material: ShaderMaterial = view.material
+	var mode := "magnitude" if material.get_shader_parameter("opacity_magnitude") else "linear"
+	var text := "Opacity: strength %s • %s [%s → %s]" % [
+		str(maxf(float(material.get_shader_parameter("opacity")), 0.0)), mode,
+		str(material.get_shader_parameter("opacity_lower")), str(material.get_shader_parameter("opacity_upper"))]
+	if view.slice.visible: text += " • opaque slice"
+	return text
 
 func place(bounds: Vector2, particle_top: float) -> void:
 	available = bounds; bottom = particle_top
