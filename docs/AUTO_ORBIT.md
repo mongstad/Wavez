@@ -5,16 +5,23 @@ forward axis, A/D along its lateral axis, and Q/E along its vertical axis. These
 keys translate the camera view without applying a transform to scene roots,
 scientific coordinates, or capture data.
 
-Auto Orbit moves the camera around the current world-space `camera_target`. It
-keeps the existing orientation, target, and positive `camera_distance` camera
-representation. While Auto Orbit is on, free-camera translation is suspended.
+Auto Orbit physically moves the camera on a circle around the current world-space
+`camera_target`, at the selected `camera_distance`. Apply (or enabling Auto Orbit)
+captures the current camera's up axis as the circle's normal. This defines an
+equatorial plane through the chosen center, with no initial orientation snap.
+The axis and plane remain fixed during automatic motion; the camera keeps looking
+at the center with that same up direction. Scientific objects stay in their world
+coordinates and recorded-time playback continues normally.
+While Auto Orbit is on, free-camera translation is suspended.
 Pressing any W/A/S/D/Q/E key turns Auto Orbit off and applies that key's normal
 free-camera movement on the **same** process tick. Turning Auto Orbit back on
 starts from the current camera pose without a snap. Auto Orbit's rotation stops
-while LMB tumble is held and resumes on release. RMB free-look and the held
+while LMB tumble is held and resumes from the deliberately changed view on release,
+using that view's up axis. RMB free-look and the held
 Orbit Camera Left/Right shortcuts immediately disable Auto Orbit and apply
 manual control on the same input; releasing them leaves Auto Orbit off. Wheel
-zoom retains its accepted behavior. See [steering and orbit](MANUAL_CAMERA_ORBIT.md).
+zoom changes the camera radius without changing the automatic orbit plane.
+See [steering and orbit](MANUAL_CAMERA_ORBIT.md).
 
 **Navigate → Edit orbit center…** temporarily turns Auto Orbit off and enables
 Free Camera movement for placement. The [view-relative handles](ORBIT_CENTER_VIEW.md)
@@ -25,7 +32,8 @@ leaves draft XYZ/radius exact. The shaded radius and persistent world references
 remain visible over dense fields. Handles and numeric edits remain active while locked.
 The proposed target and radius remain draft values until Apply. **Apply** commits
 the world-space target and radius, retains the full current camera basis and
-immediately starts Auto Orbit there. **Cancel** restores the complete camera and
+establishes its equatorial plane and immediately starts Auto Orbit there.
+**Cancel** restores the complete camera and
 navigation state from before the editor opened, including whether Auto Orbit
 was on. Numeric text focus keeps the normal movement-key protection.
 
@@ -34,14 +42,26 @@ and Auto Orbit affect the camera, never scientific/world transforms.
 
 ## Implementation boundary
 
-`scene_layers.tick()` calls `_move_free_camera()` before advancing automatic
-yaw. The movement function switches modes as soon as it finds a movement key,
+`scene_layers.tick()` calls `_move_free_camera()` before `_advance_auto_orbit()`.
+The movement function switches modes as soon as it finds a movement key,
 then uses the existing Free Camera translation path. The rest of the camera
 representation remains in place. Issue #258 adds in-place RMB steering through
 full-basis/target synchronization and moves view-relative orbit to held keys.
 The editor saves
 the pre-edit pose and mode, uses a temporary placement mode, and either restores
 the saved state or commits the new target and starts Auto Orbit.
+Automatic poses are calculated from a captured full basis and accumulated angular
+phase, rather than repeatedly rotating around world Y. The same helper drives
+the empty-view fallback. Manual tumble, Frame/Reset and restored full camera
+state establish a fresh plane on resume; zoom keeps the existing plane. A cancelled
+placement session restores the suspended orbit's original plane and phase.
+Existing camera/target/radius serialization reconstructs the plane on restoration;
+no new preset or scientific format is required. Deterministic video retains its
+separate configured world-Y rotation contract.
+
+The [PR #301 equatorial refinement evidence](evidence/issue-212/equator-refinement/README.md)
+records the pre-change polar in-place roll, asymmetric stationary references,
+physical camera traces and evolving particle/mesh/field playback comparisons.
 
 The previous #234 candidate let W/S change the radius while Auto Orbit stayed
 on. Its validation counts describe that earlier behavior and are retained in
@@ -77,6 +97,8 @@ not available for this run; its visual feel remains an owner check.
 3. Open Edit Orbit Center first with Auto Orbit on and then off. Navigate while
    placing the guide. Cancel each time to recover the exact previous view and
    mode. Apply a visibly off-center target and confirm orbit starts immediately
-   around that target.
+   around that target. Place the center on an off-center phi lobe and set a close
+   radius. Apply, then watch the camera circle it with the lobe centered and
+   fixed world axes changing perspective. Repeat from a vertical or rolled view.
 4. Check native Forward+ and Compatibility views. Scientific object coordinates
    and playback content should remain unchanged by camera navigation.

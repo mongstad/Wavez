@@ -215,6 +215,7 @@ func commit() -> void:
 	viewer.camera_distance = radius
 	position_locked = false
 	viewer._update_camera()
+	viewer._capture_auto_orbit_frame()
 	dismiss(false)
 	viewer.orbit_enabled = true
 	viewer._sync_control_state()

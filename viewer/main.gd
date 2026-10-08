@@ -116,6 +116,13 @@ var camera_orbit_basis := Basis.IDENTITY
 var camera_orbit_basis_active := false
 var camera_orbit_basis_yaw := deg_to_rad(38.0)
 var camera_orbit_basis_pitch := deg_to_rad(24.0)
+# Auto Orbit's equator is the view-up plane captured on Apply/enable. Build
+# each pose from that reference instead of accumulating world-Y rotations.
+var auto_orbit_axis := Vector3.UP
+var auto_orbit_reference := Basis.IDENTITY
+var auto_orbit_angle := 0.0
+var auto_orbit_last_basis := Basis.IDENTITY
+var auto_orbit_frame_valid := false
 
 var current_instance: MultiMeshInstance3D
 var current_mm: MultiMesh
@@ -431,9 +438,7 @@ func _process_profiled(delta: float) -> void:
 		scene_layers.tick(delta)
 		return
 	_move_free_camera(delta)
-	if orbit_enabled and not _camera_dragging() and orbit_speed != 0.0:
-		yaw += delta * orbit_speed
-		_update_camera()
+	_advance_auto_orbit(delta)
 
 func _render_current(alpha: float) -> void:
 	var started := Profile.begin()
@@ -769,7 +774,30 @@ func _toggle_invert_y_axis() -> void:
 
 func _toggle_auto_orbit() -> void:
 	if shell != null and shell.orbit_editor != null and shell.orbit_editor.visible: return
-	orbit_enabled = not orbit_enabled; _sync_control_state()
+	orbit_enabled = not orbit_enabled
+	if orbit_enabled: _capture_auto_orbit_frame()
+	_sync_control_state()
+
+func _capture_auto_orbit_frame() -> void:
+	auto_orbit_reference = camera.basis.orthonormalized()
+	auto_orbit_axis = auto_orbit_reference.y
+	auto_orbit_angle = 0.0
+	auto_orbit_last_basis = camera.basis
+	auto_orbit_frame_valid = true
+
+func _advance_auto_orbit(delta: float) -> void:
+	if not orbit_enabled or _camera_dragging() or orbit_speed == 0.0 or delta == 0.0: return
+	# Deliberate tumble/reset/restored view establishes a new plane on resume.
+	# Zoom leaves the axis unchanged. Cancel restores the prior basis, so its
+	# suspended orbit resumes the original reference without phase drift.
+	if not auto_orbit_frame_valid or camera.basis != auto_orbit_last_basis:
+		_capture_auto_orbit_frame()
+	auto_orbit_angle = wrapf(auto_orbit_angle+delta*orbit_speed,-PI,PI)
+	camera_orbit_basis = (Basis(auto_orbit_axis,auto_orbit_angle)*auto_orbit_reference).orthonormalized()
+	camera_orbit_basis_active = true
+	camera_orbit_basis_yaw = yaw; camera_orbit_basis_pitch = pitch
+	_update_camera()
+	auto_orbit_last_basis = camera.basis
 
 func _toggle_free_camera() -> void:
 	if shell != null and shell.orbit_editor != null and shell.orbit_editor.visible: return

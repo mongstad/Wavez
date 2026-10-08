@@ -1,0 +1,14 @@
+{
+  "unfinished_fixture_generation": "Stable topology fixture initially omitted required vertex_id; corrected before importing or running Godot.",
+  "first_completed_driver": {
+    "checks": 7072,
+    "failures": [
+      "field: recorded scientific content evolves during Auto Orbit false",
+      "field: recorded scientific content evolves during Auto Orbit true"
+    ],
+    "reason": "At nominal t=1 the accumulated time was just below the field sample boundary, correctly holding sample zero. Extended both on/off replay sequences to t=1.2."
+  },
+  "source_audit": "Initial expected call text omitted 0.0 and a space; corrected the literal and rechecked the unchanged-byte proof.",
+  "final_results": "See final reports; no production change was made for these harness corrections.",
+  "version_test_runner": "pytest is not installed; the repository tests use unittest. Ran them with python -m unittest tests.test_application_version (2 PASS)."
+}

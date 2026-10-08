@@ -1,0 +1,11 @@
+{
+  "checks": 1393,
+  "failures": [
+    "Real process loop advances the held orbit shortcut"
+  ],
+  "renderer": "forward_plus",
+  "status": "FAIL",
+  "returncode": 1,
+  "baseline_commit": "6bd497d60c75c435f38cdffe1dd87d8cdd56bc97",
+  "same_failure_reproduced_on_accepted_main": true
+}

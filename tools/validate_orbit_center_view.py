@@ -44,6 +44,42 @@ def dense_fixture(out):
         writer.add_volume("field", 0., dict(density=density), origin=[-8.,-8.,-8.], spacing=[16./31]*3)
 
 
+def equator_fixtures(out):
+    # Asymmetric three-lobe phi field and L-shaped solid, with a second set
+    # whose recorded values evolve. All object coordinate frames stay fixed.
+    z, y, x = np.indices((32, 32, 32))
+    x, y, z = (v*.35-4 for v in (x, y, z))
+    phi = (np.exp(-((x-2)**2+(y-1)**2+(z+1)**2)/.8)
+           + .65*np.exp(-((x+1)**2+(y+1)**2+z*z)/1.4)
+           + .4*np.exp(-((x-1)**2+(y-3)**2+(z-2)**2)/.5))
+    vertices, triangles = [], []
+    for low, high in (([-1,-1,-1], [2,-.4,-.4]), ([-1,-1,-1], [-.4,1.6,-.4])):
+        base = len(vertices)
+        vertices.extend([[a,b,c] for a in (low[0],high[0]) for b in (low[1],high[1]) for c in (low[2],high[2])])
+        triangles.extend([[base+a,base+b,base+c] for a,b,c in
+                          ((0,1,3),(0,3,2),(4,6,7),(4,7,5),(0,4,5),(0,5,1),
+                           (2,3,7),(2,7,6),(0,2,6),(0,6,4),(1,5,7),(1,7,3))])
+    vertices = np.asarray(vertices, dtype="f8") + [2,1,-1]
+    rng = np.random.default_rng(212)
+    points = np.concatenate([rng.normal(c, .15, (40,3)) for c in ([2,1,-1],[-1,-1,0],[1,3,2])])
+    for kind in ("particles", "field", "mesh", "mixed"):
+        objects = [dict(id=id, kind=type, units="m", **identity) for id,type,identity in
+                   (("p","particles",dict(identity="persistent_i8")), ("field","volume",{}),
+                    ("mesh","mesh",dict(identity="stable_topology")))
+                   if kind == "mixed" or kind == dict(p="particles",field="field",mesh="mesh")[id]]
+        for evolving in (False, True):
+            with SceneCapture(out / f"equator-{kind}-{'evolving' if evolving else 'stationary'}.wvz",
+                              objects=objects, compression="none") as writer:
+                for time in (0.,1.,2.):
+                    change = time if evolving else 0.
+                    if kind in ("particles","mixed"):
+                        writer.add_particles("p",time,points+[.4*change,0,0],ids=np.arange(len(points),dtype="i8"))
+                    if kind in ("mesh","mixed"):
+                        writer.add_mesh("mesh",time,vertices+[0,.2*change,0],np.asarray(triangles),vertex_channels=dict(vertex_id=np.arange(len(vertices),dtype="i8")))
+                    if kind in ("field","mixed"):
+                        writer.add_volume("field",time,dict(phi=(phi*(1+.25*change)).astype("f8")),origin=[-4]*3,spacing=[.35]*3)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--godot", required=True, help="External Godot executable or exported Linux executable")
@@ -54,12 +90,15 @@ def main():
     parser.add_argument("--export", action="store_true", help="Build a temporary release validation package with a test entry scene")
     parser.add_argument("--baseline-probe", action="store_true")
     parser.add_argument("--lock-refinement", action="store_true", help="Run the owner-requested locked placement and shaded-guide refinement")
+    parser.add_argument("--equator-refinement", action="store_true", help="Check a stable Apply-time equator, asymmetric world references and evolving playback")
     args = parser.parse_args()
     if args.export and args.packaged: parser.error("Choose --export or an existing --packaged validation executable")
+    if args.lock_refinement and args.equator_refinement: parser.error("Choose one refinement driver")
     out = args.output_dir.resolve(); out.mkdir(parents=True, exist_ok=False)
     fixtures(out)
     if args.lock_refinement: dense_fixture(out)
-    driver = "test_orbit_center_lock.gd" if args.lock_refinement else "test_orbit_center_view.gd"
+    if args.equator_refinement: equator_fixtures(out)
+    driver = "test_orbit_center_equator.gd" if args.equator_refinement else ("test_orbit_center_lock.gd" if args.lock_refinement else "test_orbit_center_view.gd")
     hashes = {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in out.glob("*.wvz")}
     env = dict(os.environ, XDG_CONFIG_HOME=str(out / "config"), XDG_DATA_HOME=str(out / "userdata"))
     executable = args.godot
@@ -68,7 +107,7 @@ def main():
         project = out / "export-source"
         inventory = stage(project)
         script = (project / "ui/shell" / driver).read_text()
-        if args.lock_refinement:
+        if args.lock_refinement or args.equator_refinement:
             parent = (project / "ui/shell/test_orbit_center_view.gd").read_text()
             # Inline the existing helpers; the refinement supplies its own run.
             script = parent[:parent.index("func run() -> void:")] + script.split("\n", 1)[1]

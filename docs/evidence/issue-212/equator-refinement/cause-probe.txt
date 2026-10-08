@@ -1,0 +1,24 @@
+extends "res://ui/shell/test_orbit_center_view.gd"
+func run() -> void:
+	var view = Viewer.new(); root.add_child(view); view.set_process(false)
+	view.orbit_enabled = false; view.camera_target = Vector3(2,1,-1); view.camera_distance = 8.
+	var object := MeshInstance3D.new(); object.mesh = PrismMesh.new(); object.position = Vector3(2.7,1.2,-1.4); view.add_child(object)
+	var references := Node3D.new(); view.add_child(references)
+	var poses: Array = []
+	for pitch_angle in [.75,PI/2]:
+		view.yaw = .4; view.pitch = pitch_angle; view.camera_orbit_basis_active = false; view._update_camera()
+		view.shell.edit_orbit_center(); view.shell.orbit_editor.commit()
+		var initial: Transform3D = view.camera.transform
+		var axis: Vector3 = initial.basis.y; var radial: Vector3 = initial.basis.z
+		var center: Vector3 = view.camera_target; var radius: float = view.camera_distance
+		var object_pose := object.transform; var references_pose := references.transform; var root_pose: Transform3D = view.transform
+		view._process_profiled(1./view.orbit_speed)
+		var offset: Vector3 = view.camera.position-center
+		check(object.transform == object_pose and references.transform == references_pose and view.transform == root_pose,"Auto Orbit leaves object and world/reference transforms exact")
+		check(view.camera_target == center and is_equal_approx(offset.length(),radius),"Auto Orbit retains world center and radial distance")
+		check(view.camera.basis.z.dot(offset.normalized()) > .99999,"Current camera still looks toward chosen center")
+		poses.append({"pitch":pitch_angle,"center":str(center),"radius":radius,"camera_displacement":view.camera.position.distance_to(initial.origin),"plane_error_world_units":absf(offset.dot(axis)),"up_axis_change":view.camera.basis.y.distance_to(axis),"initial_camera":str(initial),"result_camera":str(view.camera.transform),"world_transforms_unchanged":object.transform == object_pose and references.transform == references_pose,"looks_at_center":view.camera.basis.z.dot(offset.normalized())})
+		view.orbit_enabled = false
+	var report := {"source_commit":"f5411c4253e7cc3d5da01a301dc879e6f44aee89","checks":checks,"failures":failures,"cases":poses}
+	var file := FileAccess.open("/tmp/wavez-212-equator/cause/report.json",FileAccess.WRITE); file.store_string(JSON.stringify(report,"\t")); file.close()
+	print(JSON.stringify(report)); view.queue_free(); await process_frame; quit(0 if failures.is_empty() else 1)

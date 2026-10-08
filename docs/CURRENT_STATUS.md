@@ -4,8 +4,10 @@ Accepted baseline: **v0.1.0.77**, `6bd497d60c75c435f38cdffe1dd87d8cdd56bc97`,
 owner-merged PR #300. The repository's application identity is
 `viewer/project.godot` → `application/config/version`; see [version policy](VERSIONING.md).
 Issue #212 proposes view-relative Auto Orbit center placement with a position
-lock, shaded radius and persistent world references, and candidate build
-78 for owner review. Scientific payloads and repository visibility are unchanged.
+lock, shaded radius and persistent world references. PR #301 also refines Auto
+Orbit to physically circle the chosen world center at the selected radius, on a
+stable equator established at Apply. Candidate build 78 remains for owner review.
+Scientific payloads and repository visibility are unchanged.
 
 The GitHub Issues and Wavez Development Project are the operational queue. Work
 requires a Ready issue (or explicit owner authorization), the correct branch/base
@@ -30,6 +32,8 @@ The [Auto Orbit center editor](ORBIT_CENTER_VIEW.md) uses captured-view handles
 while keeping numeric XYZ and the stored center in world space.
 Its temporary position lock anchors navigation around the editable draft;
 shaded radius and world references remain visible during placement in dense fields.
+After Apply the camera keeps the chosen center in view as it travels around it;
+the scene's source/world transforms stay fixed and recorded playback continues.
 
 Scientific inspection/analysis operates on original typed source arrays and
 object-native clocks. Exact IDs, anonymous row limits, topology epochs, units,

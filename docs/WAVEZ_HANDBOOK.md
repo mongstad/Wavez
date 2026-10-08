@@ -311,8 +311,11 @@ fields and meshes while keeping the camera's orientation. R (Reset Camera)
 uses the same current-scene bounds but restores the default yaw/pitch and clears
 the view-relative orbit basis. Both leave scientific coordinates and the Free
 Camera / Auto Orbit modes alone. Wheel zoom and free-camera WASD/Q/E movement
-continue from either framed view. O toggles automatic world-Y orbit; manual
-dragging temporarily suspends its motion. A movement key exits Auto Orbit before
+continue from either framed view. O toggles automatic orbit on a plane through
+the chosen center, normal to the view's up axis at enable/Apply. The camera circles
+at the selected radius while looking toward the center. LMB dragging temporarily
+suspends its motion and establishes a fresh plane from the changed view on release.
+A movement key exits Auto Orbit before
 translating the camera on that same press. See [Auto Orbit](AUTO_ORBIT.md).
 
 Free Camera translation starts at 70% of the earlier movement rate. Press `+`
@@ -328,8 +331,10 @@ world XYZ coordinates; see [view-relative placement](ORBIT_CENTER_VIEW.md). Chan
 radius with its −/+ buttons or wheel over the radius controls (Shift: fine).
 **Place ahead** positions the draft along the current view direction. **Apply**
 sets the existing orbit target and distance, retains the full current camera
-basis, removes the guide, and immediately
-starts Auto Orbit there. Opening the editor suspends Auto Orbit and enables
+basis, removes the guide, and immediately starts Auto Orbit on that view's stable
+equator. The selected world center stays fixed while the camera travels around it;
+scientific transforms and recorded playback retain their behavior.
+Opening the editor suspends Auto Orbit and enables
 Free Camera movement for placement. **Cancel** restores the complete camera and
 navigation state from before editing, including the prior Auto Orbit state.
 Ordinary LMB/RMB drag and wheel remain available. Numeric focus retains the

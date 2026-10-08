@@ -39,8 +39,9 @@ handles use separate screen endpoints with the same captured world directions.
 
 Opening temporarily suspends Auto Orbit and enables Free Camera placement.
 **Apply** commits the world-space target/radius, retains the full current camera
-basis (including any placement navigation), then resumes the existing Auto Orbit
-around the chosen target. Camera position becomes the new target plus the retained
+basis (including any placement navigation), then establishes Auto Orbit's stable
+equator from that view's up axis. The camera physically circles the chosen target
+at the selected radius and keeps looking toward it. Camera position becomes the new target plus the retained
 camera-back direction times the radius. Reopening and applying unchanged values
 does not snap or accumulate rounding drift.
 
@@ -50,9 +51,10 @@ Hide/Show controls keeps the existing compact layout behavior. Handles covered b
 chrome or outside the usable viewport cannot receive a drag; use Place ahead,
 Hide controls or numeric world coordinates when needed.
 
-This edits Auto Orbit placement only. LMB tumble and its inversion preference,
-RMB in-place steering, held orbit hotkeys, wheel zoom, Free Camera, the existing
-Auto Orbit movement and scientific geometry retain their contracts. #212's original
+The placement workflow and subsequent automatic camera circle share the chosen
+world center. LMB tumble and its inversion preference, RMB in-place steering,
+held orbit hotkeys, wheel zoom, Free Camera, shortcuts and scientific geometry
+retain their contracts. #212's original
 description named the old #190 RMB orbit; owner clarification preserves the
 current [#258 steering/hotkeys](MANUAL_CAMERA_ORBIT.md).
 
@@ -65,7 +67,9 @@ The earlier [#120 editor report](ORBIT_CENTER.md) remains historical.
 
 ## Focused validation and owner checks
 
-The [lock refinement evidence](evidence/issue-212/lock-refinement/README.md) records
+The [equatorial orbit evidence](evidence/issue-212/equator-refinement/README.md) records
+the subsequent PR #301 camera-motion refinement. The
+[lock refinement evidence](evidence/issue-212/lock-refinement/README.md) records
 the owner-requested revision. The [initial issue evidence](evidence/issue-212/README.md) records exact results, baseline
 reproduction, intermediate failures, native/package checks and limitations.
 The focused runner generates eight tiny WVZ1 captures and injects events only
@@ -86,6 +90,9 @@ hashes, full camera state, draft serialization and scientific transforms are che
 Connected navigation and Auto Orbit suites cover the unchanged immediate paths.
 Add `--lock-refinement` for the locked-navigation matrix, dense 32³ field,
 close-up/side views, collapsed controls and large-radius interior/exterior.
+Add `--equator-refinement` for Apply-time plane/radius/center checks, tilted,
+rolled and polar views, asymmetric stationary captures with fixed world axes,
+and recorded playback with automatic camera motion on/off.
 
 Before acceptance:
 
