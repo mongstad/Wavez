@@ -6,6 +6,8 @@ Use [current status](CURRENT_STATUS.md) for supported contracts and boundaries.
 [The documentation audit](documentation-audit/README.md) records retired paths;
 Git permalinks preserve their original context.
 
+- [Issue #212 — View-relative Auto Orbit center](evidence/issue-212/README.md): captured-view handles, absolute world coordinates, full-basis Apply and exact Cancel, four scene types/scales/modes, native and release-package matrices, unchanged RMB steering and explicit baseline navigation failures.
+
 - [Issue #214 — LMB vertical inversion preference](evidence/issue-214/README.md): inline On/Off and editable hotkey, staged/reset/restart behavior, continuous tumble and unchanged navigation in both source renderers and the same Linux package.
 
 - [Issue #295 — Superseded load-error recovery](evidence/issue-295/README.md): reproduced duplicate Scene/Open file ownership, recovery/icon/details checks, unrelated Jobs/diagnostics, both native renderers and normal/compact layouts.

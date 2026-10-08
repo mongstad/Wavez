@@ -17,8 +17,10 @@ manual control on the same input; releasing them leaves Auto Orbit off. Wheel
 zoom retains its accepted behavior. See [steering and orbit](MANUAL_CAMERA_ORBIT.md).
 
 **Navigate → Edit orbit center…** temporarily turns Auto Orbit off and enables
-Free Camera movement for placement. The proposed target and radius remain draft
-values until Apply. **Apply** commits the world-space target and radius and
+Free Camera movement for placement. The [view-relative handles](ORBIT_CENTER_VIEW.md)
+use the orientation captured at entry; numeric XYZ stay absolute world coordinates.
+The proposed target and radius remain draft values until Apply. **Apply** commits
+the world-space target and radius, retains the full current camera basis and
 immediately starts Auto Orbit there. **Cancel** restores the complete camera and
 navigation state from before the editor opened, including whether Auto Orbit
 was on. Numeric text focus keeps the normal movement-key protection.

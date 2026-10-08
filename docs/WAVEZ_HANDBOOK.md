@@ -323,10 +323,12 @@ mouse navigation, wheel zoom and scientific coordinates keep their behavior.
 See [Free Camera speed](FREE_CAMERA_SPEED.md).
 
 **Navigate → Edit orbit center…** opens a temporary world-space XYZ/radius
-editor. Drag the labeled axis endpoints or enter coordinates; change the draft
+editor. Drag the captured-view **Right / Up / Toward** endpoints or enter absolute
+world XYZ coordinates; see [view-relative placement](ORBIT_CENTER_VIEW.md). Change the draft
 radius with its −/+ buttons or wheel over the radius controls (Shift: fine).
 **Place ahead** positions the draft along the current view direction. **Apply**
-sets the existing orbit target and distance, removes the guide, and immediately
+sets the existing orbit target and distance, retains the full current camera
+basis, removes the guide, and immediately
 starts Auto Orbit there. Opening the editor suspends Auto Orbit and enables
 Free Camera movement for placement. **Cancel** restores the complete camera and
 navigation state from before editing, including the prior Auto Orbit state.

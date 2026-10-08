@@ -15,6 +15,10 @@ var drag_origin := Vector3.ZERO
 var drag_mouse := Vector2.ZERO
 var drag_direction := Vector2.ZERO
 var drag_units := 0.0
+var edit_basis := Basis.IDENTITY
+var drag_world_direction := Vector3.ZERO
+var written_text: Array[String] = []
+var written_values: Array[float] = []
 var last_view: Array = []
 var pre_edit_camera: Dictionary = {}
 
@@ -34,7 +38,7 @@ func setup(owner_viewer) -> void:
 	details_toggle = Button.new(); header.add_child(details_toggle)
 	details = VBoxContainer.new(); details.add_theme_constant_override("separation",8); box.add_child(details)
 	details_toggle.pressed.connect(func(): show_details(not details.visible))
-	var hint := Label.new(); hint.text = "Drag X / Y / Z handles or enter coordinates."; hint.add_theme_font_size_override("font_size",13); details.add_child(hint)
+	var hint := Label.new(); hint.text = "Drag view axes. Numeric X / Y / Z are world coordinates."; hint.add_theme_font_size_override("font_size",13); details.add_child(hint)
 	var row := HBoxContainer.new(); row.add_theme_constant_override("separation",8); details.add_child(row)
 	for axis in 3:
 		var label := Label.new(); label.text = ["X","Y","Z"][axis]; label.modulate = guide.COLORS[axis]; row.add_child(label)
@@ -80,6 +84,7 @@ func open() -> void:
 		"orbit_basis_pitch": viewer.camera_orbit_basis_pitch,
 	}
 	center = viewer.camera_target; radius = viewer.camera_distance; drag_axis = -1
+	edit_basis = viewer.camera.basis.orthonormalized()
 	viewer.orbit_enabled = false
 	viewer.free_camera = true
 	viewer._sync_control_state()
@@ -116,17 +121,24 @@ func dismiss(restore_camera := true) -> void:
 func read_fields() -> bool:
 	if not visible: return false
 	var values: Array[float] = []
-	for input in coordinates + [radius_input]:
+	var fields: Array = coordinates + [radius_input]
+	for index in fields.size():
+		var input: LineEdit = fields[index]
 		var text: String = input.text.strip_edges()
 		if not text.is_valid_float() or not is_finite(text.to_float()) or absf(text.to_float()) > 1e15:
 			notice.text = "Enter finite coordinates and radius (maximum magnitude 1e15)."; return false
-		values.append(text.to_float())
+		# Display strings may be rounded. Untouched fields retain their exact draft
+		# values, including when another coordinate/radius was edited.
+		values.append(written_values[index] if text == written_text[index] else text.to_float())
 	if values[3] < 0.000001:
 		notice.text = "Radius must be at least 0.000001."; return false
 	center = Vector3(values[0],values[1],values[2]); radius = values[3]
 	update_notice(); refresh(); return true
 
 func write_fields() -> void:
+	written_values.assign([center.x, center.y, center.z, radius])
+	written_text.clear()
+	for value in written_values: written_text.append(str(value))
 	for axis in 3: coordinates[axis].text = str(center[axis])
 	radius_input.text = str(radius); update_notice()
 
@@ -150,6 +162,12 @@ func place_ahead() -> void:
 
 func commit() -> void:
 	if not read_fields() or viewer.inspection_busy: return
+	# Commit from the actual placement view, retaining its complete basis. This
+	# also covers navigation performed while the editor was open.
+	viewer.camera_orbit_basis = viewer.camera.basis
+	viewer.camera_orbit_basis_active = true
+	viewer.camera_orbit_basis_yaw = viewer.yaw
+	viewer.camera_orbit_basis_pitch = viewer.pitch
 	viewer.camera_target = center
 	viewer.camera_distance = radius
 	viewer._update_camera()
@@ -184,10 +202,11 @@ func _input(event: InputEvent) -> void:
 				if not handle.is_empty() and event.position.distance_to(handle.end) <= 14:
 					drag_axis = axis; drag_origin = center; drag_mouse = event.position
 					drag_direction = handle.direction; drag_units = handle.units
+					drag_world_direction = edit_basis[axis]
 					var focus := get_viewport().gui_get_focus_owner()
 					if focus != null: focus.release_focus()
 					get_viewport().set_input_as_handled(); break
 	elif event is InputEventMouseMotion and drag_axis >= 0:
 		center = drag_origin
-		center[drag_axis] += (event.position-drag_mouse).dot(drag_direction)*drag_units
+		center += drag_world_direction*(event.position-drag_mouse).dot(drag_direction)*drag_units
 		write_fields(); refresh(); get_viewport().set_input_as_handled()

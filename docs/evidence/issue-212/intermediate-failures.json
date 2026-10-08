@@ -1,0 +1,24 @@
+[
+  {
+    "run": "headless-final",
+    "checks": 3408,
+    "failures": 1760,
+    "reason": "Typed-array assignment mismatch in field reader; cascaded assertions. Fixed.",
+    "source_hashes_unchanged": true
+  },
+  {
+    "run": "headless-revision-2",
+    "checks": 3472,
+    "failures": 64,
+    "reason": "Post-steering test clicked a projected handle outside the usable viewport; use Place ahead before that gesture. Fixed.",
+    "source_hashes_unchanged": true
+  },
+  {
+    "run": "initial sandbox imports",
+    "reason": "Local editor sockets were unavailable; rerun with required access. Five unrelated UID cache warnings recreated incidental sidecars."
+  },
+  {
+    "run": "initial production-template --script attempts",
+    "reason": "Release template ignored the test driver; no report, explicitly stopped. Superseded by completed release validation-entry runs. Not passing evidence."
+  }
+]

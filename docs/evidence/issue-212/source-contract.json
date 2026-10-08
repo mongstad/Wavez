@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "baseline": "6bd497d60c75c435f38cdffe1dd87d8cdd56bc97",
+  "protected_files_unchanged": 1914,
+  "main_camera_and_input_code_unchanged": true,
+  "protected_roots": [
+    "wavez_export",
+    "viewer/layers",
+    "viewer/data",
+    "viewer/scene",
+    "viewer/video",
+    "viewer/analysis",
+    "docs/evidence"
+  ]
+}

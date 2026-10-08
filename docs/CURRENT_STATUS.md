@@ -1,10 +1,10 @@
 # Current status
 
-Accepted baseline: **v0.1.0.76**, `ca220d30163d4a76efd652933c8c963a564c315d`,
-owner-merged PR #298. The repository's application identity is
+Accepted baseline: **v0.1.0.77**, `6bd497d60c75c435f38cdffe1dd87d8cdd56bc97`,
+owner-merged PR #300. The repository's application identity is
 `viewer/project.godot` → `application/config/version`; see [version policy](VERSIONING.md).
-Issue #299 proposes documentation cleanup and candidate build 77 for owner review.
-It does not change runtime behavior, scientific payloads or repository visibility.
+Issue #212 proposes view-relative Auto Orbit center placement and candidate build
+78 for owner review. Scientific payloads and repository visibility are unchanged.
 
 The GitHub Issues and Wavez Development Project are the operational queue. Work
 requires a Ready issue (or explicit owner authorization), the correct branch/base
@@ -25,6 +25,8 @@ reveal. Opening presents the first usable sample paused while bounded preparatio
 continues. Preferences include editable shortcuts, LMB-only vertical inversion,
 File Locations and performance preparation controls. Current RMB free-look
 steering remains independent of LMB inversion and held target-relative orbit.
+The [Auto Orbit center editor](ORBIT_CENTER_VIEW.md) uses captured-view handles
+while keeping numeric XYZ and the stored center in world space.
 
 Scientific inspection/analysis operates on original typed source arrays and
 object-native clocks. Exact IDs, anonymous row limits, topology epochs, units,

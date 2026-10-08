@@ -87,9 +87,10 @@ func editor_tests(view, kind: String) -> void:
 		root.push_input(motion,true)
 		button = button.duplicate(); button.pressed = false; button.position = editor.panel.global_position+Vector2(10,10); root.push_input(button,true)
 		check(editor.drag_axis == -1,"Handle release over chrome ends drag")
-		check(editor.center[axis] > before[axis],"Handle moves world axis "+str(axis))
+		var movement: Vector3 = editor.edit_basis.inverse()*(editor.center-before)
+		check(movement[axis] > 0,"Handle moves captured view axis "+str(axis))
 		for other in 3:
-			if other != axis: check(editor.center[other] == before[other],"Other coordinate unchanged")
+			if other != axis: check(absf(movement[other]) < .0001,"Other view coordinate unchanged")
 		check(camera_state(view) == original,"XYZ drag never moves accepted camera")
 	fields(editor,Vector3(1300,-100,3439),12)
 	var radius: float = editor.radius
