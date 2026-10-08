@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "reference_commit": "48b5383667fc9b8d7636281cca9f4fd87257eb0c",
+  "protected_files_unchanged": 1967,
+  "protected_roots": [
+    "wavez_export",
+    "viewer/layers",
+    "viewer/data",
+    "viewer/scene",
+    "viewer/video",
+    "viewer/analysis",
+    "docs/evidence",
+    "docs/documentation-audit"
+  ],
+  "main_camera_hook": "Five-line guarded branch in _update_camera, active only while the visible editor position lock is on",
+  "scientific_world_code_unchanged": true,
+  "initial_issue_212_evidence_unchanged": true,
+  "candidate_version": "v0.1.0.78",
+  "accepted_main": "6bd497d60c75c435f38cdffe1dd87d8cdd56bc97",
+  "accepted_scientific_files_unchanged": 326
+}

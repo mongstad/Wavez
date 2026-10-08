@@ -1,0 +1,21 @@
+extends "res://ui/shell/test_orbit_center_view.gd"
+func run() -> void:
+	var view = Viewer.new(); root.add_child(view); view.set_process(false)
+	view.orbit_enabled = false; view.camera_target = Vector3.ZERO; view.camera_distance = 12.; view._update_camera()
+	view.shell.edit_orbit_center(); var editor = view.shell.orbit_editor
+	var draft: Vector3 = editor.center; var radius: float = editor.radius
+	var before: Transform3D = view.camera.transform
+	steer(view,Vector2(150,-90))
+	var pivot_after_rmb: Vector3 = view.camera_target
+	var distance_before: float = view.camera.position.distance_to(draft)
+	view._orbit_camera_by_drag(Vector2(80,60),.006)
+	var distance_after: float = view.camera.position.distance_to(draft)
+	check(editor.center == draft and editor.radius == radius,"Draft world position/radius remain fixed during RMB and LMB")
+	check(pivot_after_rmb != draft,"RMB correctly updates camera navigation target away from draft")
+	check(not is_equal_approx(distance_before,distance_after),"Following LMB orbits the navigation target rather than the draft center")
+	view.camera_target += view.camera.basis*Vector3(2,1,-3); view._update_camera()
+	check(editor.center == draft and editor.radius == radius,"Free-camera translation leaves draft world values fixed")
+	var report := {"checks":checks,"failures":failures,"draft_center":str(draft),"draft_radius":radius,"navigation_pivot_after_rmb":str(pivot_after_rmb),"distance_to_draft_before_lmb":distance_before,"distance_to_draft_after_lmb":distance_after,"camera_before":str(before),"camera_after":str(view.camera.transform),"source_commit":"48b5383667fc9b8d7636281cca9f4fd87257eb0c"}
+	var file := FileAccess.open("/tmp/wavez-212-review/cause/report.json",FileAccess.WRITE); file.store_string(JSON.stringify(report,"\t")); file.close()
+	editor.dismiss(); view.queue_free(); await process_frame
+	print(JSON.stringify(report)); quit(0 if failures.is_empty() else 1)

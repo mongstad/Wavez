@@ -335,9 +335,18 @@ navigation state from before editing, including the prior Auto Orbit state.
 Ordinary LMB/RMB drag and wheel remain available. Numeric focus retains the
 usual keyboard-input protection.
 
+**Lock Position** keeps orbit/zoom anchored to the draft when inspecting from
+multiple viewpoints, without moving the camera on lock/unlock. RMB still steers
+in place and Free Camera translates; navigation keeps draft world XYZ and radius
+unchanged. Handles and numeric controls continue to edit the locked draft.
+The shaded radius surface, world X/Y/Z rings/diameters and persistent coordinate
+readout provide spatial references even over dense fields. From inside a large
+radius, move backward to bring its outer boundary into view.
+
 **Hide controls / Show controls** collapses the coordinate rows to make room for
 the gizmo. Setup starts collapsed in windows shorter than 720 pixels. Apply and
 Cancel remain visible.
+Lock Position and the world XYZ/radius readout also remain visible when collapsed.
 
 The draft radius supports 0.000001–1e15 world units. Ordinary wheel zoom uses
 10% inward steps and reciprocal outward steps, with scene-bound/clip-plane

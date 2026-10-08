@@ -1,0 +1,9 @@
+{
+  "checks": 1393,
+  "failures": [
+    "Real process loop advances the held orbit shortcut"
+  ],
+  "renderer": "forward_plus",
+  "status": "FAIL",
+  "baseline_comparison": "Identical single held-orbit process-loop failure on accepted main 6bd497d and candidate"
+}

@@ -809,7 +809,10 @@ func _update_camera() -> void:
 		orientation = Basis(Vector3.UP, yaw) * Basis(Vector3.RIGHT, -pitch)
 	camera_orbit_basis_yaw = yaw
 	camera_orbit_basis_pitch = pitch
-	camera.transform = Transform3D(orientation, camera_target + orientation.z * camera_distance)
+	if shell != null and shell.orbit_editor != null and shell.orbit_editor.visible and shell.orbit_editor.position_locked:
+		camera.transform = shell.orbit_editor.locked_navigation(orientation)
+	else:
+		camera.transform = Transform3D(orientation, camera_target + orientation.z * camera_distance)
 
 func _comma(v: Variant) -> String:
 	var s := str(v)

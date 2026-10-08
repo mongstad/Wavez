@@ -1,0 +1,12 @@
+{
+  "checks": 364,
+  "failures": [],
+  "renderer": "forward_plus",
+  "source_hashes_unchanged": {
+    "mixed.wvz": "5e9c2f3603d7a77aebad8b3d391b7a8d1e3b20fb0361aff50cecb90ca33ca0c4",
+    "mesh.wvz": "566822689747601146b7977db7865e1d6ba5038e7544e6d855ac0be9176821ce",
+    "volume.wvz": "f7272b7afdf00e0c5544cb35a689d0a2064d83c95760860cc6cf9443f88a10b3",
+    "particles.wvz": "ef74c12bbb936537fb1539fcebec1c818fcc0b4a18faa58952ef79b55c756eae"
+  },
+  "status": "PASS"
+}

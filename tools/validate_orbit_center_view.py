@@ -37,6 +37,13 @@ def fixtures(out):
                         writer.add_mesh("mesh", time, points, np.array([[0,1,2]]), vertex_channels=dict(vertex_id=np.array([7,8,9], dtype="i8")))
 
 
+def dense_fixture(out):
+    z, y, x = np.indices((32, 32, 32))
+    density = (.6 + .2*np.sin(x*.4) + .1*np.cos(y*.3) + .1*np.sin(z*.5)).astype("f8")
+    with SceneCapture(out / "dense-field.wvz", objects=[dict(id="field", kind="volume", units="m")], compression="none") as writer:
+        writer.add_volume("field", 0., dict(density=density), origin=[-8.,-8.,-8.], spacing=[16./31]*3)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--godot", required=True, help="External Godot executable or exported Linux executable")
@@ -46,10 +53,13 @@ def main():
     parser.add_argument("--packaged", action="store_true")
     parser.add_argument("--export", action="store_true", help="Build a temporary release validation package with a test entry scene")
     parser.add_argument("--baseline-probe", action="store_true")
+    parser.add_argument("--lock-refinement", action="store_true", help="Run the owner-requested locked placement and shaded-guide refinement")
     args = parser.parse_args()
     if args.export and args.packaged: parser.error("Choose --export or an existing --packaged validation executable")
     out = args.output_dir.resolve(); out.mkdir(parents=True, exist_ok=False)
     fixtures(out)
+    if args.lock_refinement: dense_fixture(out)
+    driver = "test_orbit_center_lock.gd" if args.lock_refinement else "test_orbit_center_view.gd"
     hashes = {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in out.glob("*.wvz")}
     env = dict(os.environ, XDG_CONFIG_HOME=str(out / "config"), XDG_DATA_HOME=str(out / "userdata"))
     executable = args.godot
@@ -57,7 +67,11 @@ def main():
     if args.export:
         project = out / "export-source"
         inventory = stage(project)
-        script = (project / "ui/shell/test_orbit_center_view.gd").read_text()
+        script = (project / "ui/shell" / driver).read_text()
+        if args.lock_refinement:
+            parent = (project / "ui/shell/test_orbit_center_view.gd").read_text()
+            # Inline the existing helpers; the refinement supplies its own run.
+            script = parent[:parent.index("func run() -> void:")] + script.split("\n", 1)[1]
         script = script.replace("extends SceneTree", "extends Node\nvar root: Window:\n\tget: return get_tree().root\nvar process_frame: Signal:\n\tget: return get_tree().process_frame")
         script = script.replace("func _initialize()", "func _ready()").replace("create_timer(", "get_tree().create_timer(").replace("quit(", "get_tree().quit(")
         (project / "ui/shell/orbit_center_view_entry.gd").write_text(script)
@@ -86,7 +100,7 @@ def main():
             raise RuntimeError(f"Unresolved import warnings: {out}")
     command += ["--headless"] if args.renderer == "headless" else ["--rendering-method", args.renderer]
     command += ["--resolution", "1440x900", "--audio-driver", "Dummy"]
-    if not args.packaged: command += ["--script", "res://ui/shell/test_orbit_center_view.gd"]
+    if not args.packaged: command += ["--script", "res://ui/shell/" + driver]
     command += ["--", "--orbit-view-output=" + str(out)]
     if args.baseline_probe: command.append("--baseline-probe")
     result = subprocess.run(command, env=env, capture_output=True, text=True, timeout=210)

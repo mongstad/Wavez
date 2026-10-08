@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "captures": 9,
+  "records": 25,
+  "verified_records": {
+    "dense-field.wvz": 1,
+    "field-large.wvz": 2,
+    "field-small.wvz": 2,
+    "mesh-large.wvz": 2,
+    "mesh-small.wvz": 2,
+    "mixed-large.wvz": 6,
+    "mixed-small.wvz": 6,
+    "particles-large.wvz": 2,
+    "particles-small.wvz": 2
+  }
+}
