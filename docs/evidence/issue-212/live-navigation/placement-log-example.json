@@ -1,0 +1,184 @@
+{
+  "camera_basis": [
+    [
+      0.9227352738380432,
+      0.08842645585536957,
+      -0.37515392899513245
+    ],
+    [
+      -0.14827409386634827,
+      0.979861855506897,
+      -0.13373716175556183
+    ],
+    [
+      0.35577309131622314,
+      0.17902959883213043,
+      0.9172644019126892
+    ]
+  ],
+  "camera_distance": 60.0,
+  "camera_position": [
+    95.87638092041016,
+    -56.40824890136719,
+    -184.13414001464844
+  ],
+  "camera_target": [
+    74.52999877929688,
+    -67.1500244140625,
+    -239.1699981689453
+  ],
+  "capture_path": "/tmp/wavez-212-placement-log-forward/world-field.wvz",
+  "center": [
+    74.52999877929688,
+    -67.1500244140625,
+    -239.17001342773438
+  ],
+  "committed_time": 0.0,
+  "content_scale_factor": 1.0,
+  "edit_basis": [
+    [
+      0.9227352738380432,
+      0.08842645585536957,
+      -0.37515392899513245
+    ],
+    [
+      -0.14827409386634827,
+      0.979861855506897,
+      -0.13373716175556183
+    ],
+    [
+      0.35577309131622314,
+      0.17902959883213043,
+      0.9172644019126892
+    ]
+  ],
+  "event": "place_ahead",
+  "far": 20000.0,
+  "field": {
+    "id": "field",
+    "presentation": {
+      "channel": "density",
+      "clip": false,
+      "clip_distance": 0.0,
+      "clip_normal": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "color_mapping": {
+        "normalization": "linear",
+        "percentile_high": 99.0,
+        "percentile_low": 1.0,
+        "policy": "manual",
+        "source_channel": "",
+        "source_time": 0.0
+      },
+      "colormap": "viridis",
+      "isosurface": false,
+      "lower": 0.0,
+      "opacity": 0.25,
+      "opacity_mapping": {
+        "lower": 0.0,
+        "mode": "linear",
+        "upper": 1.0
+      },
+      "slice": false,
+      "slice_distance": 0.0,
+      "slice_normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "step": 0.5,
+      "threshold": 0.5,
+      "upper": 1.0,
+      "visible": true,
+      "volume": true
+    },
+    "source_indices": [
+      0
+    ],
+    "source_time": 0.0
+  },
+  "fov": 55.0,
+  "free_camera": true,
+  "free_camera_speed_scale": 0.7,
+  "frustum_offset": [
+    0.0,
+    0.0
+  ],
+  "h_offset": 0.0,
+  "keep_aspect": 1,
+  "navigation_distance": 60.0,
+  "near": 0.05000000074505806,
+  "orbit_basis": [
+    [
+      0.9227352142333984,
+      0.08842644840478897,
+      -0.37515389919281006
+    ],
+    [
+      -0.14827406406402588,
+      0.9798617959022522,
+      -0.13373716175556183
+    ],
+    [
+      0.35577306151390076,
+      0.17902958393096924,
+      0.9172643423080444
+    ]
+  ],
+  "orbit_basis_active": true,
+  "orbit_basis_pitch": 0.4188790204786391,
+  "orbit_basis_yaw": 0.6632251157578453,
+  "orbit_enabled": false,
+  "particle_source_indices": [],
+  "pitch": 0.4188790204786391,
+  "placement_depth": 60.0,
+  "playing": false,
+  "previous_center": [
+    74.52999877929688,
+    -67.1500244140625,
+    -239.1699981689453
+  ],
+  "projection": 0,
+  "projection_columns": [
+    [
+      1.2006138563156128,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      1.9209821224212646,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      -1.0000051259994507,
+      -1.0
+    ],
+    [
+      0.0,
+      0.0,
+      -0.10000025480985641,
+      0.0
+    ]
+  ],
+  "radius": 12.0,
+  "renderer": "forward_plus",
+  "requested_time": 0.0,
+  "sample": 1,
+  "schema": 1,
+  "size": 1.0,
+  "v_offset": 0.0,
+  "viewport_size": [
+    1440.0,
+    900.0
+  ],
+  "window_mode": 0,
+  "yaw": 0.6632251157578453
+}

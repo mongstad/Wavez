@@ -113,6 +113,7 @@ func open() -> void:
 	set_process(true); set_process_input(true); refresh()
 	var focus := get_viewport().gui_get_focus_owner()
 	if focus != null: focus.release_focus()
+	record_placement("open",center)
 
 func show_details(expanded: bool) -> void:
 	details.visible = expanded
@@ -201,6 +202,7 @@ func radius_event(event: InputEvent) -> void:
 
 func place_ahead() -> void:
 	if not read_fields(): return
+	var previous_center := center
 	# The visible distance determines the point on this ray. Reusing the old
 	# center's current view depth made repeated clicks depend on navigation history.
 	var camera: Camera3D = viewer.camera
@@ -210,6 +212,54 @@ func place_ahead() -> void:
 	# ordinary numeric-edit focus protection when the user has not placed yet.
 	var focus := get_viewport().gui_get_focus_owner()
 	if focus != null and is_ancestor_of(focus): focus.release_focus()
+	record_placement("place_ahead",previous_center)
+
+func record_placement(action: String, previous_center: Vector3) -> void:
+	# One bounded event per open/placement, never per navigation frame. Keep enough
+	# precision to reconstruct the owner's ray instead of guessing from UI text.
+	if viewer.session_log == null: return
+	var camera: Camera3D = viewer.camera
+	var projection := camera.get_camera_projection()
+	var columns: Array = []
+	for column in [projection.x,projection.y,projection.z,projection.w]:
+		columns.append([column.x,column.y,column.z,column.w])
+	var extent := camera.get_viewport().get_visible_rect().size
+	var record := {
+		"event":action,"schema":1,"capture_path":viewer.capture_path,
+		"requested_time":viewer.requested_time,"sample":viewer.current_index+1,"playing":viewer.playing,
+		"committed_time":viewer.committed_sample.get("requested_time"),
+		"particle_source_indices":viewer.committed_sample.get("source_indices",[]),
+		"renderer":RenderingServer.get_current_rendering_method(),"free_camera_speed_scale":viewer.free_camera_speed_scale,
+		"camera_position":vector_record(camera.global_position),"camera_basis":basis_record(camera.global_basis),
+		"projection_columns":columns,"projection":camera.projection,"fov":camera.fov,"size":camera.size,
+		"near":camera.near,"far":camera.far,"keep_aspect":camera.keep_aspect,
+		"h_offset":camera.h_offset,"v_offset":camera.v_offset,
+		"frustum_offset":[camera.frustum_offset.x,camera.frustum_offset.y],
+		"viewport_size":[extent.x,extent.y],"content_scale_factor":get_window().content_scale_factor,
+		"window_mode":get_window().mode,"center":vector_record(center),"previous_center":vector_record(previous_center),
+		"radius":radius,"placement_depth":placement_depth,"navigation_distance":navigation_distance,
+		"camera_target":vector_record(viewer.camera_target),"camera_distance":viewer.camera_distance,
+		"yaw":viewer.yaw,"pitch":viewer.pitch,"orbit_basis":basis_record(viewer.camera_orbit_basis),
+		"orbit_basis_active":viewer.camera_orbit_basis_active,"orbit_basis_yaw":viewer.camera_orbit_basis_yaw,
+		"orbit_basis_pitch":viewer.camera_orbit_basis_pitch,"edit_basis":basis_record(edit_basis),
+		"free_camera":viewer.free_camera,"orbit_enabled":viewer.orbit_enabled,
+	}
+	# The selected field's small presentation dictionary has no scientific arrays.
+	# Preserve its channel/clip/slice settings and committed clock as well as the ray.
+	var field_id: String = viewer.scene_layers.selected_volume
+	if viewer.scene_layers.states.has(field_id):
+		record.field = {"id":field_id,"presentation":viewer.scene_layers.states[field_id].duplicate(true)}
+		for layer in viewer.committed_sample.get("layers",[]):
+			if layer.id == field_id:
+				record.field.source_time = layer.source_time
+				record.field.source_indices = layer.source_indices
+	viewer.session_log.record("ORBIT",JSON.stringify(record,"",true,true))
+
+func vector_record(value: Vector3) -> Array:
+	return [value.x,value.y,value.z]
+
+func basis_record(value: Basis) -> Array:
+	return [vector_record(value.x),vector_record(value.y),vector_record(value.z)]
 
 func commit() -> void:
 	if not read_fields() or viewer.inspection_busy: return

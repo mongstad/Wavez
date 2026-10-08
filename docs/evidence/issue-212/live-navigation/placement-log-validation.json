@@ -1,0 +1,35 @@
+{
+  "revision": "diagnostic follow-up to 1c80ddc",
+  "production_change": "bounded event logging only; no navigation/render/placement behavior change",
+  "headless_checks": 2125,
+  "native_forward_checks": 2213,
+  "failures": 0,
+  "event_count": 44,
+  "open_events": 18,
+  "place_ahead_events": 26,
+  "all_events_parse_as_json": true,
+  "max_json_characters": 2401,
+  "session_log_line_limit": 8192,
+  "max_placed_center_ray_reconstruction_error_world_units": 0.0,
+  "field_events_with_committed_source_indices": 28,
+  "new_compatibility_or_package_run": false,
+  "owner_report_resolved": false,
+  "runs": {
+    "headless": {
+      "local_report": "/tmp/wavez-212-placement-log-headless-final/orbit-world-report.json",
+      "sha256": "2d119bab7b23257743993a07d0c1f535c01327614afdf83b09a5e4c2ee9a40e4",
+      "checks": 2125,
+      "returncode": 0,
+      "source_hashes_unchanged": true,
+      "runtime_diagnostics": []
+    },
+    "forward_plus": {
+      "local_report": "/tmp/wavez-212-placement-log-forward/orbit-world-report.json",
+      "sha256": "ce5b13766d88337963482cf205127481bb54bb44c0d5b1fee78e8a65bf837ddb",
+      "checks": 2213,
+      "returncode": 0,
+      "source_hashes_unchanged": true,
+      "runtime_diagnostics": []
+    }
+  }
+}

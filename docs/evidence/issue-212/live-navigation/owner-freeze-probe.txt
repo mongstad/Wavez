@@ -1,0 +1,24 @@
+from pathlib import Path
+import sys,json,hashlib
+sys.path.insert(0,'/home/Nozba/Codex/Wavez/Wavez')
+from wavez_export import SceneReader,SceneCapture
+source=Path('/home/Nozba/Downloads/VB_FreeCollapse_v0_2/runs_free_collapse_v0_2/S0_20261004_005538_117820/free_collapse.wvz')
+out=Path('/tmp/wavez-212-live-owner/frozen-t30.5.wvz')
+stamp=source.stat(); hashes={};bounds={}
+with SceneReader(source) as reader:
+ with SceneCapture(out,objects=list(reader.objects.values()),metadata={'simulation_name':'Diagnostic frozen copy: owner sample t=30.5'},compression='none') as writer:
+  for ident,obj in reader.objects.items():
+   index=next(i for i,s in enumerate(reader.samples[ident]) if s['time']==30.5)
+   a=reader.read_sample(ident,index)
+   hashes[ident]={name:hashlib.sha256(value.tobytes()).hexdigest() for name,value in a.items()}
+   if obj['kind']=='particles':
+    bounds[ident]=[a['position'].min(axis=0).tolist(),a['position'].max(axis=0).tolist()]
+    writer.add_particles(ident,30.5,a['position'],ids=a['particle_id'],**{k:v for k,v in a.items() if k not in ('position','particle_id')})
+   else:
+    g=reader.samples[ident][index]['descriptor']['geometry'];writer.add_volume(ident,30.5,a,origin=g['origin'],spacing=g['spacing'],centering=g['centering'])
+with SceneReader(out) as reader:
+ observed={ident:{name:hashlib.sha256(value.tobytes()).hexdigest() for name,value in reader.read_sample(ident,0).items()} for ident in reader.objects}
+assert observed==hashes
+assert (source.stat().st_size,source.stat().st_mtime_ns)==(stamp.st_size,stamp.st_mtime_ns)
+(out.parent/'copy-provenance.json').write_text(json.dumps({'source':str(source),'source_size':stamp.st_size,'source_mtime_ns':stamp.st_mtime_ns,'source_unchanged':True,'sample_time':30.5,'all_sample_arrays_byte_identical':True,'sha256':hashes,'particle_bounds':bounds,'diagnostic_copy':str(out)},indent=2)+'\n')
+print('Frozen t=30.5 copy verified: all arrays byte-identical, source unchanged; particle bounds',bounds)

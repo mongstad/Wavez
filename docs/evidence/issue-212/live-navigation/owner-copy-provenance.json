@@ -1,0 +1,48 @@
+{
+  "source": "/home/Nozba/Downloads/VB_FreeCollapse_v0_2/runs_free_collapse_v0_2/S0_20261004_005538_117820/free_collapse.wvz",
+  "source_size": 12129159153,
+  "source_mtime_ns": 1791069636165186547,
+  "source_unchanged": true,
+  "sample_time": 30.5,
+  "all_sample_arrays_byte_identical": true,
+  "sha256": {
+    "particles": {
+      "position": "d944384b6669aa08e128a4494dd01563e770b2eaabc73d253ffdd15f66ca90ba",
+      "velocity": "4654639975647ce9ea40def8f32033e6de5fee77331e707393d75824e8e35b82",
+      "density": "cf5d873b8d735211a7ecd8a1d43bc231d1ec1e19906b4aa3af018efc638fcd90",
+      "phase": "c60b5be301bc5bd4d00984d75c360e772dd5f53b3e6a564a9cd592d837d606b2",
+      "radius": "cf7f20b7f1bc6bf5a849acd1ed6bf9a3db8cb2a1a72da1cc6f3cf792a5df44e9",
+      "current_magnitude": "81fa047f0f46100b30e7a8a7e4fe209787151b96520e3053136b55df076b033a",
+      "radial_velocity": "475a73988ad31ff6f4980dce06fa6d08024e877e52bbbfe608543cb6a9a6c199",
+      "wave_vphi": "bc1ee533c43c4283cd562311e93550ab1385aa99073361657af4b8ae6c918398",
+      "specific_wave_lz": "ad0ef72a7418c7383a56975b0d12105192fa1edfe2ac2d0890baf5fe844ce6df",
+      "color_value": "cf5d873b8d735211a7ecd8a1d43bc231d1ec1e19906b4aa3af018efc638fcd90",
+      "visual_brightness": "d430d6e68d9f9a7a160e2513d96164082973d7d4b5919d1f7677c472eefcbd8f",
+      "opacity": "e39ea7bb7e8273334c99e3085d14003cf5579a83e1cccfd22d652f2dde7098ce",
+      "alive": "7cb5e31f1e9664b86ee75aa5b6bf9f871aa4f3fd18d2a6642dd96ca47d9a02bf",
+      "particle_type": "35b64081a2092ae0242b12c717086ee164a4542595933722bc7b882fe1119adf",
+      "sponge_gamma": "4cbbd9be0cba685835755f827758705db5a413c5494c34262cd25946a73e7582",
+      "particle_id": "33236cc6bd19fa6b89e06d441d3fcd8eb37dc8540f6a4f2b627b20af10894a41"
+    },
+    "field": {
+      "density": "a952ee6df8511c8ccef585383cf0ca6c7b07bae16c2b42276347affcbf9a33b2",
+      "real": "f2d53ec0dc7fdcf7ab00fa1d6d1211644a3d7b76a7449590c7d248ccef688bf1",
+      "imag": "341f2e64123af1145b2137dcc8f4a95e06fdd3bb03a5e3399d8db78474c347b6"
+    }
+  },
+  "particle_bounds": {
+    "particles": [
+      [
+        -30.433128356933594,
+        -30.392658233642578,
+        -30.375995635986328
+      ],
+      [
+        30.221567153930664,
+        30.316171646118164,
+        30.265676498413086
+      ]
+    ]
+  },
+  "diagnostic_copy": "/tmp/wavez-212-live-owner/frozen-t30.5.wvz"
+}

@@ -14,8 +14,16 @@ focus that blocked immediate WASD/QE movement. Place ahead now uses an explicit
 editor focus after placement. The depth is initially seeded from the opening
 view and can be edited; it does not automatically identify a scientific feature.
 PR #301 also refines Auto Orbit to physically circle the chosen world center at
-the selected radius, on a stable equator established at Apply. Candidate build 78
-remains for owner review.
+the selected radius, on a stable equator established at Apply. **Owner review
+still fails:** the owner reports apparent movement during WASD/QE after Place
+ahead while the XYZ readout stays fixed. The
+[continuous-navigation follow-up](evidence/issue-212/live-navigation/README.md)
+found no sphere rendering lag in a synthetic scene or a frozen copy of the
+owner's sample, but did not reconstruct the owner's missing camera pose.
+Editor open and successful placement now record precise camera/draft state in
+the existing session log to capture the next occurrence. This is diagnostic
+instrumentation, not a further movement fix. Candidate build 78 remains open
+for investigation and owner review.
 Scientific payloads and repository visibility are unchanged.
 
 The GitHub Issues and Wavez Development Project are the operational queue. Work

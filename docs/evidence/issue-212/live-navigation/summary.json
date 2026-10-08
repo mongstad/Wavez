@@ -1,0 +1,26 @@
+{
+  "synthetic": {
+    "rendered_frames": 28,
+    "place_clicks": 1,
+    "max_current_camera_mask_mismatches": 0,
+    "max_previous_camera_mask_mismatches": 341,
+    "max_camera_projection_error_px": 0.0,
+    "all_full_camera_transforms_equal": true,
+    "draft_center_and_radius_unchanged": true,
+    "all_rendered_sphere_origins_equal_draft": true,
+    "committed_field_unchanged": true,
+    "original_report_sha256": "4267941a703484226950251504f703eba677620d1e73b957457f7706543f42c4"
+  },
+  "owner-frozen": {
+    "rendered_frames": 27,
+    "place_clicks": 1,
+    "max_current_camera_mask_mismatches": 0,
+    "max_previous_camera_mask_mismatches": 1056,
+    "max_camera_projection_error_px": 0.0,
+    "all_full_camera_transforms_equal": true,
+    "draft_center_and_radius_unchanged": true,
+    "all_rendered_sphere_origins_equal_draft": true,
+    "committed_field_unchanged": true,
+    "original_report_sha256": "a8b7388bf690bc1878ab34c6cb3a9d248e48a964261c637c35eb8894358a051b"
+  }
+}

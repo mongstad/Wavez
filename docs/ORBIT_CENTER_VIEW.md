@@ -79,6 +79,19 @@ The earlier [#120 editor report](ORBIT_CENTER.md) remains historical.
 
 ## Focused validation and owner checks
 
+The owner reports that the sphere still appears to move during WASD/QE after
+Place ahead while World XYZ stays fixed. The
+[continuous-navigation follow-up](evidence/issue-212/live-navigation/README.md)
+checks actual rendered frames during held-key motion, including a stationary
+copy of the owner's sample. Those runs found no sphere drift or camera lag;
+the owner's exact failing view has not been reconstructed and remains unresolved.
+The existing verbose session log now records an `ORBIT` JSON event on editor
+open and successful Place ahead: full-precision camera pose/projection,
+navigation state, draft center/radius/depth, previous center, capture and sample.
+There is no per-frame logging. On the next occurrence, retain the session log;
+a second Place ahead click after navigation records the previous anchor and
+the new camera ray without requiring manual transcription of the readout.
+
 The [world-placement investigation](evidence/issue-212/world-placement/README.md)
 records two reproducible causes: Place ahead silently reused a depth inherited
 from navigation, and the clicked button retained focus and blocked immediate
