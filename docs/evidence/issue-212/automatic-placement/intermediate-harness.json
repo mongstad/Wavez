@@ -1,0 +1,31 @@
+{
+  "initial_checks": 1278,
+  "initial_failures": [
+    "particles / small / normal: placement anchor does not enter serialized presentation state",
+    "particles / large / normal: placement anchor does not enter serialized presentation state",
+    "field / small / normal: placement anchor does not enter serialized presentation state",
+    "field / large / normal: placement anchor does not enter serialized presentation state",
+    "mesh / small / normal: placement anchor does not enter serialized presentation state",
+    "mesh / large / normal: placement anchor does not enter serialized presentation state",
+    "mixed / small / normal: placement anchor does not enter serialized presentation state",
+    "mixed / large / normal: placement anchor does not enter serialized presentation state",
+    "particles / small / fullscreen: placement anchor does not enter serialized presentation state",
+    "particles / large / fullscreen: placement anchor does not enter serialized presentation state",
+    "field / small / fullscreen: placement anchor does not enter serialized presentation state",
+    "field / large / fullscreen: placement anchor does not enter serialized presentation state",
+    "mesh / small / fullscreen: placement anchor does not enter serialized presentation state",
+    "mesh / large / fullscreen: placement anchor does not enter serialized presentation state",
+    "mixed / small / fullscreen: placement anchor does not enter serialized presentation state",
+    "mixed / large / fullscreen: placement anchor does not enter serialized presentation state"
+  ],
+  "diagnosis": "Exact snapshot comparison straddled a navigation calculation. Only ordinary camera target/origin changed by floating-point rounding; full basis, draft XYZ/radius and scientific state stayed unchanged. Existing placement navigation math is byte-identical after removing comments and renaming the function.",
+  "correction": "Compare the exact serialized snapshot before/after explicit draft XYZ/radius edits with no intervening camera calculation. Keep the approximate no-snap pose assertion and exact Cancel/source checks.",
+  "final_checks": 1278,
+  "final_failures": [],
+  "diagnostic_examples": [
+    "SNAPSHOT DIAGNOSTIC particles / small / normal camera_target: [0.0042051775381, 0.00113809015602, 0.00076265633106] -> [0.00420517707244, 0.00113809062168, 0.00076265633106]",
+    "SNAPSHOT DIAGNOSTIC particles / small / normal camera_transform: [[0.99451857805252, -0.0018099877052, 0.1045443341136], [-0.00552514614537, 0.99754357337952, 0.06983068585396], [-0.10441391915083, -0.07002554088831, 0.99206560850143], [-0.00331262452528, -0.00390374846756, 0.07219137996435]] -> [[0.99451857805252, -0.0018099877052, 0.1045443341136], [-0.00552514614537, 0.99754357337952, 0.06983068585396], [-0.10441391915083, -0.07002554088831, 0.99206560850143], [-0.00331262499094, -0.0039037480019, 0.07219137996435]]",
+    "SNAPSHOT DIAGNOSTIC particles / large / normal camera_target: [420.517761230469, 113.809051513672, 76.265625] -> [420.517700195312, 113.809112548828, 76.265625]",
+    "SNAPSHOT DIAGNOSTIC particles / large / normal camera_transform: [[0.99451857805252, -0.0018099877052, 0.1045443341136], [-0.00552514614537, 0.99754357337952, 0.06983068585396], [-0.10441391915083, -0.07002554088831, 0.99206560850143], [-331.262451171875, -390.374847412109, 7219.13818359375]] -> [[0.99451857805252, -0.0018099877052, 0.1045443341136], [-0.00552514614537, 0.99754357337952, 0.06983068585396], [-0.10441391915083, -0.07002554088831, 0.99206560850143], [-331.262512207031, -390.374786376953, 7219.13818359375]]"
+  ]
+}

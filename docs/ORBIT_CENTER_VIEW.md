@@ -18,15 +18,15 @@ placement handles. The stored center remains a world-space point.
 - Radius controls keep their existing 25% coarse / 2% Shift steps and bounds.
   The accepted radius stays unchanged unless edited.
 
-Turn on **Lock Position** to inspect the chosen draft from several viewpoints.
-Locking and unlocking leave the current camera pose unchanged. While locked,
-LMB tumble and held orbit shortcuts rotate the actual camera offset around the
-draft center; wheel zoom approaches or retreats from that center. **RMB remains
+The draft stays fixed in world space while you inspect it from several viewpoints.
+LMB tumble and held orbit shortcuts automatically rotate the actual camera offset
+around the draft center; wheel zoom approaches or retreats from that center. **RMB remains
 in-place steering**, and W/A/S/D/Q/E remain Free Camera translation. Navigation
 never changes the draft's world XYZ or radius. Handles, numeric XYZ/radius,
-radius buttons and **Place ahead** remain explicit edits while locked. Editing
-the center updates the anchor for subsequent navigation. The lock starts Off
-for each session and ends on Apply or Cancel; it is temporary placement state.
+radius buttons and **Place ahead** remain explicit edits during placement. Editing
+the center updates the anchor for subsequent navigation. Opening leaves the camera
+pose unchanged. The temporary placement anchor ends on Apply or Cancel; there is
+no Lock Position toggle or separate lock state.
 
 The radius now has a solid shaded surface, a bright rim and world-aligned rings
 and X/Y/Z diameters. It is drawn as an annotation over the field so dense volumes
@@ -67,8 +67,10 @@ The earlier [#120 editor report](ORBIT_CENTER.md) remains historical.
 
 ## Focused validation and owner checks
 
-The [equatorial orbit evidence](evidence/issue-212/equator-refinement/README.md) records
-the subsequent PR #301 camera-motion refinement. The
+The [automatic placement evidence](evidence/issue-212/automatic-placement/README.md)
+records the owner's removal of the lock toggle while preserving the anchored
+inspection workflow. The [equatorial orbit evidence](evidence/issue-212/equator-refinement/README.md) records
+the preceding PR #301 camera-motion refinement. The
 [lock refinement evidence](evidence/issue-212/lock-refinement/README.md) records
 the owner-requested revision. The [initial issue evidence](evidence/issue-212/README.md) records exact results, baseline
 reproduction, intermediate failures, native/package checks and limitations.
@@ -88,7 +90,7 @@ production Viewer/resources. `--packaged` reruns an already built validation
 executable; production release templates do not run a `--script` test driver. Fixture/source
 hashes, full camera state, draft serialization and scientific transforms are checked.
 Connected navigation and Auto Orbit suites cover the unchanged immediate paths.
-Add `--lock-refinement` for the locked-navigation matrix, dense 32³ field,
+Add `--placement-refinement` for the automatic placement matrix, dense 32³ field,
 close-up/side views, collapsed controls and large-radius interior/exterior.
 Add `--equator-refinement` for Apply-time plane/radius/center checks, tilted,
 rolled and polar views, asymmetric stationary captures with fixed world axes,
@@ -107,10 +109,10 @@ Before acceptance:
 4. Check RMB still steers in place and held orbit hotkeys follow the resulting
    view-up. Repeat normal/fullscreen, both renderers, Linux package, small/large
    scene scales and physical mouse feel. Scientific objects must remain unchanged.
-5. Zoom into a dense 3D field, place the center, and turn on **Lock Position**.
+5. Zoom into a dense 3D field and use **Place ahead** or XYZ handles to place the center.
    Steer with RMB, then tumble/orbit, zoom and translate around it. Compare the
    persistent world XYZ/radius before and after navigation. Drag each handle and
-   edit numeric XYZ/radius while locked; only those explicit edits change the draft.
+   edit numeric XYZ/radius; only those explicit edits change the draft.
 6. Inspect from several viewpoints and from inside/outside a large radius.
    Check the shaded surface, bright boundary, world reference rings and readout
    in normal/Fullscreen and with controls hidden. Apply retains the current full

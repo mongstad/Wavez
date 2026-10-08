@@ -26,10 +26,10 @@ See [steering and orbit](MANUAL_CAMERA_ORBIT.md).
 **Navigate → Edit orbit center…** temporarily turns Auto Orbit off and enables
 Free Camera movement for placement. The [view-relative handles](ORBIT_CENTER_VIEW.md)
 use the orientation captured at entry; numeric XYZ stay absolute world coordinates.
-**Lock Position** anchors placement orbit/zoom to the draft without a camera
-snap. RMB steering and Free Camera translation remain available; camera motion
+Placement orbit/zoom automatically uses the draft as its pivot without a camera
+snap or lock toggle. RMB steering and Free Camera translation remain available; camera motion
 leaves draft XYZ/radius exact. The shaded radius and persistent world references
-remain visible over dense fields. Handles and numeric edits remain active while locked.
+remain visible over dense fields. Handles and numeric edits remain active during placement.
 The proposed target and radius remain draft values until Apply. **Apply** commits
 the world-space target and radius, retains the full current camera basis and
 establishes its equatorial plane and immediately starts Auto Orbit there.

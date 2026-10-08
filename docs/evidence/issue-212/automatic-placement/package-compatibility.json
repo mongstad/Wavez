@@ -1,0 +1,54 @@
+{
+  "cases": [
+    "particles / small / normal",
+    "particles / large / normal",
+    "field / small / normal",
+    "field / large / normal",
+    "mesh / small / normal",
+    "mesh / large / normal",
+    "mixed / small / normal",
+    "mixed / large / normal",
+    "particles / small / fullscreen",
+    "particles / large / fullscreen",
+    "field / small / fullscreen",
+    "field / large / fullscreen",
+    "mesh / small / fullscreen",
+    "mesh / large / fullscreen",
+    "mixed / small / fullscreen",
+    "mixed / large / fullscreen"
+  ],
+  "checks": 1290,
+  "failures": [],
+  "refinement": "anchored placement",
+  "renderer": "gl_compatibility",
+  "shading": [
+    {
+      "distinct_shades": 2240,
+      "mode": "normal",
+      "opaque_sampled_pixels": 5247
+    },
+    {
+      "distinct_shades": 4028,
+      "mode": "fullscreen",
+      "opaque_sampled_pixels": 13421
+    }
+  ],
+  "returncode": 0,
+  "source_hashes_unchanged": true,
+  "source_sha256": {
+    "dense-field.wvz": "51a96eb705cf5c5fc81fa71a0d479679eaf85221cfb9cc4b05c3e6e41d3794a7",
+    "mixed-large.wvz": "f10385dadea976a4d032211e3f03b7bc76a31a7d78f0d6c44bd1c7b03ce08e9c",
+    "mixed-small.wvz": "031041866b3d7f58daa6bd833937995a2c6d8785c5d79ba99d13ae45fd1f2566",
+    "mesh-large.wvz": "54403d7a8f00e8d50fb41586eacac4d5be4da1ea34b3320290a6be7b1293d845",
+    "mesh-small.wvz": "cce07daf7402b2201e114457c26adbf4b1d111622d7358d7ffc6fe4db14b9bec",
+    "field-large.wvz": "5da66f57f0ceb0fc2b0d002ff18688a3883f12e89bb8e8e0a2ae25200b173337",
+    "field-small.wvz": "5a47ebea83ad1623a88f4134847e3c04ebda1b43ba4ea65a599b33ffcc3e5948",
+    "particles-large.wvz": "394c5177199ad1f444ed3ffa45140f51c4820d89d0fb2f4efbd0b83d0aee4171",
+    "particles-small.wvz": "2ecbe8514ebf48b704020b9e7c4f92941512a230dfc91e4c3c1c4a04dca20182"
+  },
+  "import_attempts": [],
+  "packaged": true,
+  "package_build": null,
+  "diagnostics": [],
+  "status": "PASS"
+}

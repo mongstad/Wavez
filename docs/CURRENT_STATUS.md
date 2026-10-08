@@ -3,8 +3,10 @@
 Accepted baseline: **v0.1.0.77**, `6bd497d60c75c435f38cdffe1dd87d8cdd56bc97`,
 owner-merged PR #300. The repository's application identity is
 `viewer/project.godot` → `application/config/version`; see [version policy](VERSIONING.md).
-Issue #212 proposes view-relative Auto Orbit center placement with a position
-lock, shaded radius and persistent world references. PR #301 also refines Auto
+Issue #212 proposes view-relative Auto Orbit center placement with automatic
+inspection anchoring, shaded radius and persistent world references. The draft
+stays fixed in world space and is moved only by explicit placement edits; the
+owner-requested Lock Position toggle has been removed. PR #301 also refines Auto
 Orbit to physically circle the chosen world center at the selected radius, on a
 stable equator established at Apply. Candidate build 78 remains for owner review.
 Scientific payloads and repository visibility are unchanged.
@@ -30,7 +32,7 @@ File Locations and performance preparation controls. Current RMB free-look
 steering remains independent of LMB inversion and held target-relative orbit.
 The [Auto Orbit center editor](ORBIT_CENTER_VIEW.md) uses captured-view handles
 while keeping numeric XYZ and the stored center in world space.
-Its temporary position lock anchors navigation around the editable draft;
+During placement, orbit and zoom automatically use the editable draft as their pivot;
 shaded radius and world references remain visible during placement in dense fields.
 After Apply the camera keeps the chosen center in view as it travels around it;
 the scene's source/world transforms stay fixed and recorded playback continues.

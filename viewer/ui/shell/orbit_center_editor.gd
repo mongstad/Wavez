@@ -21,8 +21,6 @@ var written_text: Array[String] = []
 var written_values: Array[float] = []
 var last_view: Array = []
 var pre_edit_camera: Dictionary = {}
-var position_locked := false
-var lock_position: CheckButton
 var position_readout: Label
 var reference_panel: PanelContainer
 var navigation_distance := 1.0
@@ -43,9 +41,6 @@ func setup(owner_viewer) -> void:
 	details_toggle = Button.new(); header.add_child(details_toggle)
 	details = VBoxContainer.new(); details.add_theme_constant_override("separation",8); box.add_child(details)
 	details_toggle.pressed.connect(func(): show_details(not details.visible))
-	lock_position = CheckButton.new(); lock_position.text = "Lock Position"
-	lock_position.tooltip_text = "Anchor camera orbit and zoom to the draft center. RMB still steers in place; Free Camera can move around it. Handles and world coordinates remain editable."
-	lock_position.toggled.connect(set_position_locked)
 	position_readout = Label.new(); position_readout.add_theme_font_size_override("font_size",12); position_readout.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	reference_panel = PanelContainer.new(); reference_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	reference_panel.add_theme_stylebox_override("panel",theme.tonal_surface(10,8)); add_child(reference_panel); reference_panel.add_child(position_readout)
@@ -73,7 +68,6 @@ func setup(owner_viewer) -> void:
 	var actions := HBoxContainer.new(); box.add_child(actions)
 	var place := Button.new(); place.text = "Place ahead"; place.tooltip_text = "Place the draft center one draft radius along the current view direction. The camera stays unchanged."
 	place.pressed.connect(place_ahead); actions.add_child(place)
-	actions.add_child(lock_position)
 	var space := Control.new(); space.size_flags_horizontal = Control.SIZE_EXPAND_FILL; actions.add_child(space)
 	var cancel := Button.new(); cancel.text = "Cancel"; cancel.pressed.connect(dismiss); actions.add_child(cancel)
 	var apply := Button.new(); apply.text = "Apply"; apply.theme_type_variation = "PrimaryButton"; apply.pressed.connect(commit); actions.add_child(apply)
@@ -96,7 +90,7 @@ func open() -> void:
 		"orbit_basis_pitch": viewer.camera_orbit_basis_pitch,
 	}
 	center = viewer.camera_target; radius = viewer.camera_distance; drag_axis = -1
-	position_locked = false; lock_position.set_pressed_no_signal(false)
+	navigation_distance = viewer.camera_distance
 	edit_basis = viewer.camera.basis.orthonormalized()
 	viewer.orbit_enabled = false
 	viewer.free_camera = true
@@ -114,7 +108,6 @@ func show_details(expanded: bool) -> void:
 func dismiss(restore_camera := true) -> void:
 	if not visible: return
 	drag_axis = -1; hide(); guide.hide(); set_process(false); set_process_input(false)
-	position_locked = false; lock_position.set_pressed_no_signal(false)
 	var focus := get_viewport().gui_get_focus_owner()
 	if focus != null and is_ancestor_of(focus): focus.release_focus()
 	if restore_camera and not pre_edit_camera.is_empty():
@@ -162,22 +155,12 @@ func update_notice() -> void:
 
 func update_position_readout() -> void:
 	var inside: bool = viewer.camera.position.distance_to(center) < radius
-	position_readout.text = "World XYZ:  %s  ·  %s  ·  %s\nRadius: %s  ·  %s%s" % [str(center.x),str(center.y),str(center.z),str(radius),"Position locked" if position_locked else "Position unlocked","  ·  Inside radius volume" if inside else ""]
+	position_readout.text = "World XYZ:  %s  ·  %s  ·  %s\nRadius: %s%s" % [str(center.x),str(center.y),str(center.z),str(radius),"  ·  Inside radius volume" if inside else ""]
 
-func set_position_locked(locked: bool) -> void:
-	if not read_fields():
-		lock_position.set_pressed_no_signal(position_locked); return
-	position_locked = locked; lock_position.set_pressed_no_signal(locked)
-	navigation_distance = viewer.camera_distance
-	drag_axis = -1
-	var focus := get_viewport().gui_get_focus_owner()
-	if focus != null: focus.release_focus()
-	update_notice(); refresh()
-
-func locked_navigation(orientation: Basis) -> Transform3D:
+func placement_navigation(orientation: Basis) -> Transform3D:
 	# Draft and camera navigation are separate state. RMB updates the ordinary
 	# target; Free Camera translates it. Rotate/zoom the actual placement pose
-	# about the locked draft without snapping an off-axis camera onto its z axis.
+	# about the world-space draft without snapping an off-axis camera onto its z axis.
 	var camera: Camera3D = viewer.camera
 	var old_target := camera.position-camera.basis.z*navigation_distance
 	var translation: Vector3 = viewer.camera_target-old_target
@@ -213,10 +196,11 @@ func commit() -> void:
 	viewer.camera_orbit_basis_pitch = viewer.pitch
 	viewer.camera_target = center
 	viewer.camera_distance = radius
-	position_locked = false
+	# End placement before updating the accepted target/radius; Apply uses the
+	# ordinary camera path, rather than the temporary draft-navigation pivot.
+	dismiss(false)
 	viewer._update_camera()
 	viewer._capture_auto_orbit_frame()
-	dismiss(false)
 	viewer.orbit_enabled = true
 	viewer._sync_control_state()
 

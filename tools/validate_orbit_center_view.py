@@ -89,16 +89,16 @@ def main():
     parser.add_argument("--packaged", action="store_true")
     parser.add_argument("--export", action="store_true", help="Build a temporary release validation package with a test entry scene")
     parser.add_argument("--baseline-probe", action="store_true")
-    parser.add_argument("--lock-refinement", action="store_true", help="Run the owner-requested locked placement and shaded-guide refinement")
+    parser.add_argument("--placement-refinement", action="store_true", help="Run the automatic placement anchor and shaded-guide refinement")
     parser.add_argument("--equator-refinement", action="store_true", help="Check a stable Apply-time equator, asymmetric world references and evolving playback")
     args = parser.parse_args()
     if args.export and args.packaged: parser.error("Choose --export or an existing --packaged validation executable")
-    if args.lock_refinement and args.equator_refinement: parser.error("Choose one refinement driver")
+    if args.placement_refinement and args.equator_refinement: parser.error("Choose one refinement driver")
     out = args.output_dir.resolve(); out.mkdir(parents=True, exist_ok=False)
     fixtures(out)
-    if args.lock_refinement: dense_fixture(out)
+    if args.placement_refinement: dense_fixture(out)
     if args.equator_refinement: equator_fixtures(out)
-    driver = "test_orbit_center_equator.gd" if args.equator_refinement else ("test_orbit_center_lock.gd" if args.lock_refinement else "test_orbit_center_view.gd")
+    driver = "test_orbit_center_equator.gd" if args.equator_refinement else ("test_orbit_center_placement.gd" if args.placement_refinement else "test_orbit_center_view.gd")
     hashes = {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in out.glob("*.wvz")}
     env = dict(os.environ, XDG_CONFIG_HOME=str(out / "config"), XDG_DATA_HOME=str(out / "userdata"))
     executable = args.godot
@@ -107,7 +107,7 @@ def main():
         project = out / "export-source"
         inventory = stage(project)
         script = (project / "ui/shell" / driver).read_text()
-        if args.lock_refinement or args.equator_refinement:
+        if args.placement_refinement or args.equator_refinement:
             parent = (project / "ui/shell/test_orbit_center_view.gd").read_text()
             # Inline the existing helpers; the refinement supplies its own run.
             script = parent[:parent.index("func run() -> void:")] + script.split("\n", 1)[1]

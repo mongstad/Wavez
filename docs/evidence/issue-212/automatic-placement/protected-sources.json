@@ -1,0 +1,35 @@
+{
+  "status": "PASS",
+  "base_commit": "3aef86738ca44e50ff6cd1411587dac420e9e8f7",
+  "checked_file_count": 1968,
+  "roots": [
+    "wavez_export/",
+    "viewer/layers/",
+    "viewer/native/",
+    "viewer/shaders/",
+    "viewer/video/",
+    "docs/evidence/",
+    "docs/documentation-audit/"
+  ],
+  "changed_files": [],
+  "inventory_sha256": "ba80dd80632beacef0acfd0e43ae16696ab1cba1003f4c2816a87e357a6742c3",
+  "critical_source_sha256": {
+    "viewer/ui/shell/orbit_center_guide.gd": "74c658d2cd0d40dfb48c6f9689a193298aad2ddb9d847bef08c72b1a4e9c9bc0",
+    "viewer/ui/shell/orbit_radius.gdshader": "b2a03dc0e0784a85d589207e87bc88fce6955c37b21ed2d9c9d9803c77eb3264",
+    "viewer/ui/keyboard_shortcuts.gd": "7ac6b62fd5f58b4d4ced50310b2a32c01451b270c3dc4f281f19690b5a897d0f",
+    "viewer/ui/shell/keyboard_shortcuts_editor.gd": "9dbe3465db0e8288c45c2c80c607666eb415d5b8b5bd2aac7213a0c743543b7f",
+    "viewer/scene/visual_state.gd": "385dc0f5b667090704cc89341c1720f82a1ee73283f228a9f7e5f9e86e19c279",
+    "viewer/project.godot": "d4ff3067249eaf76db3890dcb14f5f8c01b5060378892a9f037a6d665c39a46b"
+  },
+  "unchanged_main_functions": {
+    "_advance_auto_orbit": true,
+    "_capture_auto_orbit_frame": true,
+    "_steer_camera": true,
+    "_move_free_camera": true,
+    "_update_manual_orbit": true,
+    "_orbit_camera_by_drag": true,
+    "_zoom_camera": true
+  },
+  "historical_evidence_count": 1717,
+  "placement_navigation_math_unchanged": true
+}

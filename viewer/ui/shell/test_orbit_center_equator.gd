@@ -32,7 +32,6 @@ func place(view, basis: Basis, radius: float) -> void:
 	view.orbit_enabled = false
 	view.camera.basis = basis; view._adopt_camera_basis()
 	view.shell.edit_orbit_center(); var editor = view.shell.orbit_editor
-	editor.set_position_locked(true)
 	fields(editor,Vector3(2,1,-1),radius); editor.commit()
 	check(view.camera.basis.is_equal_approx(basis) and view.orbit_enabled, "Apply retains full view and starts orbit")
 
