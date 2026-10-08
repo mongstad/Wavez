@@ -1,0 +1,25 @@
+extends "res://ui/shell/test_orbit_center_view.gd"
+func run() -> void:
+	output = "/tmp/wavez-212-place-ahead"
+	var view = Viewer.new(); root.add_child(view); view.set_process(false)
+	view._open_capture("/tmp/wavez-212-automatic/equator/equator-field-stationary.wvz"); view.playing = false; await ready(view)
+	view.orbit_enabled = false; view.camera_target = Vector3(2,1,-1); view.camera_distance = 8.; view._update_camera()
+	view.shell.edit_orbit_center(); var editor = view.shell.orbit_editor
+	fields(editor,Vector3(2,1,-1),.6)
+	await screenshot("cause-before")
+	var pose: Transform3D = view.camera.transform; var radius: float = editor.radius
+	var depth_before: float = -(view.camera.global_transform.affine_inverse()*editor.center).z
+	var size_before: float = view.camera.unproject_position(editor.center+view.camera.basis.x*radius).distance_to(view.camera.unproject_position(editor.center))
+	var button: Button
+	for node in editor.panel.get_child(0).get_children()[-1].get_children():
+		if node is Button and node.text == "Place ahead": button = node
+	var press := InputEventMouseButton.new(); press.button_index = MOUSE_BUTTON_LEFT; press.pressed = true; press.position = button.get_global_rect().get_center()
+	root.push_input(press,true); press = press.duplicate(); press.pressed = false; root.push_input(press,true)
+	await screenshot("cause-after")
+	var depth_after: float = -(view.camera.global_transform.affine_inverse()*editor.center).z
+	var size_after: float = view.camera.unproject_position(editor.center+view.camera.basis.x*radius).distance_to(view.camera.unproject_position(editor.center))
+	check(view.camera.transform == pose and editor.radius == radius,"Place ahead leaves exact camera pose and numeric radius unchanged")
+	var report := {"source_commit":"2418284795aad9f3670e67fc2f9eb7594d9bf3fc","checks":checks,"failures":failures,"radius":radius,"depth_before":depth_before,"depth_after":depth_after,"projected_radius_before":size_before,"projected_radius_after":size_after}
+	var file := FileAccess.open(output.path_join("cause.json"),FileAccess.WRITE); file.store_string(JSON.stringify(report,"\t")); file.close()
+	view.queue_free(); for frame in 3: await process_frame
+	print(JSON.stringify(report)); quit(0 if failures.is_empty() else 1)

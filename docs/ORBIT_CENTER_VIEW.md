@@ -12,9 +12,11 @@ placement handles. The stored center remains a world-space point.
 - Numeric **X / Y / Z** remain absolute world coordinates. Changing one field
   preserves the exact values of untouched fields; displayed rounding does not
   change a draft on Apply. The coordinates are not camera-space values.
-- **Place ahead** places the draft one draft radius along the current camera's
+- **Place ahead** places the draft at its current view depth along the camera's
   forward direction. It does not move the accepted camera or reset the handle
-  reference frame.
+  reference frame or change the radius. Keeping placement depth independent of
+  radius avoids an apparent size reset. If the center is behind/too near the
+  camera, placement uses the current navigation distance instead.
 - Radius controls keep their existing 25% coarse / 2% Shift steps and bounds.
   The accepted radius stays unchanged unless edited.
 
@@ -67,6 +69,9 @@ The earlier [#120 editor report](ORBIT_CENTER.md) remains historical.
 
 ## Focused validation and owner checks
 
+The [Place ahead evidence](evidence/issue-212/place-ahead/README.md) diagnoses the
+radius-dependent depth jump and checks real camera movement around a placed world
+reference, retaining its exact XYZ/radius while its screen projection changes.
 The [automatic placement evidence](evidence/issue-212/automatic-placement/README.md)
 records the owner's removal of the lock toggle while preserving the anchored
 inspection workflow. The [equatorial orbit evidence](evidence/issue-212/equator-refinement/README.md) records

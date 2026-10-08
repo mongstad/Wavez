@@ -14,6 +14,8 @@ Git permalinks preserve their original context.
 
 - [Issue #212 / PR #301 — Automatic placement anchoring](evidence/issue-212/automatic-placement/README.md): owner-requested removal of the Lock Position toggle, automatic draft pivot for inspection, preserved Place ahead/XYZ/radius controls and Apply/Cancel. Earlier review evidence remains historical.
 
+- [Issue #212 / PR #301 — Place ahead depth and world-position inspection](evidence/issue-212/place-ahead/README.md): reproduced apparent radius reset from radius-dependent placement depth, independent depth/radius placement and actual camera movement around a stationary world reference.
+
 - [Issue #214 — LMB vertical inversion preference](evidence/issue-214/README.md): inline On/Off and editable hotkey, staged/reset/restart behavior, continuous tumble and unchanged navigation in both source renderers and the same Linux package.
 
 - [Issue #295 — Superseded load-error recovery](evidence/issue-295/README.md): reproduced duplicate Scene/Open file ownership, recovery/icon/details checks, unrelated Jobs/diagnostics, both native renderers and normal/compact layouts.

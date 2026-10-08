@@ -1,0 +1,920 @@
+{
+  "cases": [
+    "particles / small / normal",
+    "particles / large / normal",
+    "field / small / normal",
+    "field / large / normal",
+    "mesh / small / normal",
+    "mesh / large / normal",
+    "mixed / small / normal",
+    "mixed / large / normal",
+    "particles / small / fullscreen",
+    "particles / large / fullscreen",
+    "field / small / fullscreen",
+    "field / large / fullscreen",
+    "mesh / small / fullscreen",
+    "mesh / large / fullscreen",
+    "mixed / small / fullscreen",
+    "mixed / large / fullscreen"
+  ],
+  "checks": 1934,
+  "failures": [],
+  "placed_world_reference": [
+    {
+      "camera_travel": 0.111818253993988,
+      "case": "particles / small / normal",
+      "key": "A",
+      "radius": 0.006,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(2062.506, 450.0)",
+      "world_xyz": "(0.0012, -0.0008, 0.0004)"
+    },
+    {
+      "camera_travel": 0.029038779437542,
+      "case": "particles / small / normal",
+      "key": "D",
+      "radius": 0.006,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1713.862, 449.9999)",
+      "world_xyz": "(0.0012, -0.0008, 0.0004)"
+    },
+    {
+      "camera_travel": 0.0289765112102032,
+      "case": "particles / small / normal",
+      "key": "W",
+      "radius": 0.006,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(2383.233, 449.9998)",
+      "world_xyz": "(0.0012, -0.0008, 0.0004)"
+    },
+    {
+      "camera_travel": 0.0286533255130053,
+      "case": "particles / small / normal",
+      "key": "S",
+      "radius": 0.006,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1718.343, 449.9999)",
+      "world_xyz": "(0.0012, -0.0008, 0.0004)"
+    },
+    {
+      "camera_travel": 0.0279999990016222,
+      "case": "particles / small / normal",
+      "key": "Q",
+      "radius": 0.006,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1718.343, 112.3123)",
+      "world_xyz": "(0.0012, -0.0008, 0.0004)"
+    },
+    {
+      "camera_travel": 0.0280000101774931,
+      "case": "particles / small / normal",
+      "key": "E",
+      "radius": 0.006,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1718.344, 450.0)",
+      "world_xyz": "(0.0012, -0.0008, 0.0004)"
+    },
+    {
+      "camera_travel": 205.340225219727,
+      "case": "particles / large / normal",
+      "key": "A",
+      "radius": 600.0,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(744.6534, 450.0)",
+      "world_xyz": "(120.0, -80.0, 40.0)"
+    },
+    {
+      "camera_travel": 104.329193115234,
+      "case": "particles / large / normal",
+      "key": "D",
+      "radius": 600.0,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(732.1275, 450.0)",
+      "world_xyz": "(120.0, -80.0, 40.0)"
+    },
+    {
+      "camera_travel": 104.776214599609,
+      "case": "particles / large / normal",
+      "key": "W",
+      "radius": 600.0,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(732.3068, 450.0)",
+      "world_xyz": "(120.0, -80.0, 40.0)"
+    },
+    {
+      "camera_travel": 104.628791809082,
+      "case": "particles / large / normal",
+      "key": "S",
+      "radius": 600.0,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(732.1281, 449.9999)",
+      "world_xyz": "(120.0, -80.0, 40.0)"
+    },
+    {
+      "camera_travel": 104.935523986816,
+      "case": "particles / large / normal",
+      "key": "Q",
+      "radius": 600.0,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(732.1282, 437.401)",
+      "world_xyz": "(120.0, -80.0, 40.0)"
+    },
+    {
+      "camera_travel": 105.00008392334,
+      "case": "particles / large / normal",
+      "key": "E",
+      "radius": 600.0,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(732.1285, 450.0077)",
+      "world_xyz": "(120.0, -80.0, 40.0)"
+    },
+    {
+      "camera_travel": 0.064886748790741,
+      "case": "field / small / normal",
+      "key": "A",
+      "radius": 0.006,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1499.04, 450.0)",
+      "world_xyz": "(0.0012, -0.0008, 0.0004)"
+    },
+    {
+      "camera_travel": 0.0289799924939871,
+      "case": "field / small / normal",
+      "key": "D",
+      "radius": 0.006,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1151.102, 450.0)",
+      "world_xyz": "(0.0012, -0.0008, 0.0004)"
+    },
+    {
+      "camera_travel": 0.0289807133376598,
+      "case": "field / small / normal",
+      "key": "W",
+      "radius": 0.006,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1441.522, 449.9999)",
+      "world_xyz": "(0.0012, -0.0008, 0.0004)"
+    },
+    {
+      "camera_travel": 0.0289771817624569,
+      "case": "field / small / normal",
+      "key": "S",
+      "radius": 0.006,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1151.123, 449.9999)",
+      "world_xyz": "(0.0012, -0.0008, 0.0004)"
+    },
+    {
+      "camera_travel": 0.0289792995899916,
+      "case": "field / small / normal",
+      "key": "Q",
+      "radius": 0.006,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1151.123, 102.0531)",
+      "world_xyz": "(0.0012, -0.0008, 0.0004)"
+    },
+    {
+      "camera_travel": 0.0289758052676916,
+      "case": "field / small / normal",
+      "key": "E",
+      "radius": 0.006,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1151.124, 449.958)",
+      "world_xyz": "(0.0012, -0.0008, 0.0004)"
+    },
+    {
+      "camera_travel": 245.286499023438,
+      "case": "field / large / normal",
+      "key": "A",
+      "radius": 600.0,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(749.4494, 450.0)",
+      "world_xyz": "(120.0, -80.0, 40.0)"
+    },
+    {
+      "camera_travel": 102.559860229492,
+      "case": "field / large / normal",
+      "key": "D",
+      "radius": 600.0,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(737.136, 450.0)",
+      "world_xyz": "(120.0, -80.0, 40.0)"
+    },
+    {
+      "camera_travel": 106.684692382812,
+      "case": "field / large / normal",
+      "key": "W",
+      "radius": 600.0,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(737.3939, 450.0)",
+      "world_xyz": "(120.0, -80.0, 40.0)"
+    },
+    {
+      "camera_travel": 104.32852935791,
+      "case": "field / large / normal",
+      "key": "S",
+      "radius": 600.0,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(737.1419, 450.0)",
+      "world_xyz": "(120.0, -80.0, 40.0)"
+    },
+    {
+      "camera_travel": 100.799942016602,
+      "case": "field / large / normal",
+      "key": "Q",
+      "radius": 600.0,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(737.142, 437.8938)",
+      "world_xyz": "(120.0, -80.0, 40.0)"
+    },
+    {
+      "camera_travel": 100.799896240234,
+      "case": "field / large / normal",
+      "key": "E",
+      "radius": 600.0,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(737.1423, 449.9999)",
+      "world_xyz": "(120.0, -80.0, 40.0)"
+    },
+    {
+      "camera_travel": 0.0642355158925056,
+      "case": "mesh / small / normal",
+      "key": "A",
+      "radius": 0.006,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1491.221, 450.0)",
+      "world_xyz": "(0.0012, -0.0008, 0.0004)"
+    },
+    {
+      "camera_travel": 0.0286830440163612,
+      "case": "mesh / small / normal",
+      "key": "D",
+      "radius": 0.006,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1146.848, 450.0)",
+      "world_xyz": "(0.0012, -0.0008, 0.0004)"
+    },
+    {
+      "camera_travel": 0.0291666835546494,
+      "case": "mesh / small / normal",
+      "key": "W",
+      "radius": 0.006,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1437.504, 449.9999)",
+      "world_xyz": "(0.0012, -0.0008, 0.0004)"
+    },
+    {
+      "camera_travel": 0.029166653752327,
+      "case": "mesh / small / normal",
+      "key": "S",
+      "radius": 0.006,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1146.849, 449.9999)",
+      "world_xyz": "(0.0012, -0.0008, 0.0004)"
+    },
+    {
+      "camera_travel": 0.029166666790843,
+      "case": "mesh / small / normal",
+      "key": "Q",
+      "radius": 0.006,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1146.849, 99.8204)",
+      "world_xyz": "(0.0012, -0.0008, 0.0004)"
+    },
+    {
+      "camera_travel": 0.0291666705161333,
+      "case": "mesh / small / normal",
+      "key": "E",
+      "radius": 0.006,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1146.849, 450.0)",
+      "world_xyz": "(0.0012, -0.0008, 0.0004)"
+    },
+    {
+      "camera_travel": 201.519943237305,
+      "case": "mesh / large / normal",
+      "key": "A",
+      "radius": 600.0,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(744.1948, 450.0)",
+      "world_xyz": "(120.0, -80.0, 40.0)"
+    },
+    {
+      "camera_travel": 93.5202026367188,
+      "case": "mesh / large / normal",
+      "key": "D",
+      "radius": 600.0,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(732.9666, 450.0)",
+      "world_xyz": "(120.0, -80.0, 40.0)"
+    },
+    {
+      "camera_travel": 105.102668762207,
+      "case": "mesh / large / normal",
+      "key": "W",
+      "radius": 600.0,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(733.1589, 450.0)",
+      "world_xyz": "(120.0, -80.0, 40.0)"
+    },
+    {
+      "camera_travel": 104.997169494629,
+      "case": "mesh / large / normal",
+      "key": "S",
+      "radius": 600.0,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(732.9672, 450.0)",
+      "world_xyz": "(120.0, -80.0, 40.0)"
+    },
+    {
+      "camera_travel": 105.000228881836,
+      "case": "mesh / large / normal",
+      "key": "Q",
+      "radius": 600.0,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(732.9673, 437.3933)",
+      "world_xyz": "(120.0, -80.0, 40.0)"
+    },
+    {
+      "camera_travel": 105.000144958496,
+      "case": "mesh / large / normal",
+      "key": "E",
+      "radius": 600.0,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(732.9675, 449.9999)",
+      "world_xyz": "(120.0, -80.0, 40.0)"
+    },
+    {
+      "camera_travel": 0.0637080445885658,
+      "case": "mixed / small / normal",
+      "key": "A",
+      "radius": 0.006,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1484.888, 450.0)",
+      "world_xyz": "(0.0012, -0.0008, 0.0004)"
+    },
+    {
+      "camera_travel": 0.0314016789197922,
+      "case": "mixed / small / normal",
+      "key": "D",
+      "radius": 0.006,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1107.875, 450.0)",
+      "world_xyz": "(0.0012, -0.0008, 0.0004)"
+    },
+    {
+      "camera_travel": 0.0289688166230917,
+      "case": "mixed / small / normal",
+      "key": "W",
+      "radius": 0.006,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1368.995, 450.0)",
+      "world_xyz": "(0.0012, -0.0008, 0.0004)"
+    },
+    {
+      "camera_travel": 0.0289988908916712,
+      "case": "mixed / small / normal",
+      "key": "S",
+      "radius": 0.006,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1107.713, 450.0)",
+      "world_xyz": "(0.0012, -0.0008, 0.0004)"
+    },
+    {
+      "camera_travel": 0.029166666790843,
+      "case": "mixed / small / normal",
+      "key": "Q",
+      "radius": 0.006,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1107.714, 99.96674)",
+      "world_xyz": "(0.0012, -0.0008, 0.0004)"
+    },
+    {
+      "camera_travel": 0.0291666705161333,
+      "case": "mixed / small / normal",
+      "key": "E",
+      "radius": 0.006,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1107.714, 450.0)",
+      "world_xyz": "(0.0012, -0.0008, 0.0004)"
+    },
+    {
+      "camera_travel": 224.598510742188,
+      "case": "mixed / large / normal",
+      "key": "A",
+      "radius": 600.0,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(746.9656, 450.0)",
+      "world_xyz": "(120.0, -80.0, 40.0)"
+    },
+    {
+      "camera_travel": 217.198181152344,
+      "case": "mixed / large / normal",
+      "key": "D",
+      "radius": 600.0,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(720.8885, 450.0)",
+      "world_xyz": "(120.0, -80.0, 40.0)"
+    },
+    {
+      "camera_travel": 110.402008056641,
+      "case": "mixed / large / normal",
+      "key": "W",
+      "radius": 600.0,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(720.9025, 450.0)",
+      "world_xyz": "(120.0, -80.0, 40.0)"
+    },
+    {
+      "camera_travel": 110.797012329102,
+      "case": "mixed / large / normal",
+      "key": "S",
+      "radius": 600.0,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(720.8887, 449.9999)",
+      "world_xyz": "(120.0, -80.0, 40.0)"
+    },
+    {
+      "camera_travel": 104.300201416016,
+      "case": "mixed / large / normal",
+      "key": "Q",
+      "radius": 600.0,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(720.8889, 437.4782)",
+      "world_xyz": "(120.0, -80.0, 40.0)"
+    },
+    {
+      "camera_travel": 100.799865722656,
+      "case": "mixed / large / normal",
+      "key": "E",
+      "radius": 600.0,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(720.8892, 449.5797)",
+      "world_xyz": "(120.0, -80.0, 40.0)"
+    },
+    {
+      "camera_travel": 0.0355485826730728,
+      "case": "particles / small / fullscreen",
+      "key": "A",
+      "radius": 0.006,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1962.882, 720.0)",
+      "world_xyz": "(0.0012, -0.0008, 0.0004)"
+    },
+    {
+      "camera_travel": 0.0271249916404486,
+      "case": "particles / small / fullscreen",
+      "key": "D",
+      "radius": 0.006,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1441.816, 720.0)",
+      "world_xyz": "(0.0012, -0.0008, 0.0004)"
+    },
+    {
+      "camera_travel": 0.0262500215321779,
+      "case": "particles / small / fullscreen",
+      "key": "W",
+      "radius": 0.006,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1534.661, 719.9999)",
+      "world_xyz": "(0.0012, -0.0008, 0.0004)"
+    },
+    {
+      "camera_travel": 0.0278235729783773,
+      "case": "particles / small / fullscreen",
+      "key": "S",
+      "radius": 0.006,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1438.355, 719.9999)",
+      "world_xyz": "(0.0012, -0.0008, 0.0004)"
+    },
+    {
+      "camera_travel": 0.0289471782743931,
+      "case": "particles / small / fullscreen",
+      "key": "Q",
+      "radius": 0.006,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1438.356, 175.8222)",
+      "world_xyz": "(0.0012, -0.0008, 0.0004)"
+    },
+    {
+      "camera_travel": 0.0293895862996578,
+      "case": "particles / small / fullscreen",
+      "key": "E",
+      "radius": 0.006,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1438.356, 728.3168)",
+      "world_xyz": "(0.0012, -0.0008, 0.0004)"
+    },
+    {
+      "camera_travel": 93.0633316040039,
+      "case": "particles / large / fullscreen",
+      "key": "A",
+      "radius": 600.0,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1297.877, 720.0)",
+      "world_xyz": "(120.0, -80.0, 40.0)"
+    },
+    {
+      "camera_travel": 83.9982757568359,
+      "case": "particles / large / fullscreen",
+      "key": "D",
+      "radius": 600.0,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1281.741, 720.0)",
+      "world_xyz": "(120.0, -80.0, 40.0)"
+    },
+    {
+      "camera_travel": 105.036125183105,
+      "case": "particles / large / fullscreen",
+      "key": "W",
+      "radius": 600.0,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1281.767, 720.0)",
+      "world_xyz": "(120.0, -80.0, 40.0)"
+    },
+    {
+      "camera_travel": 105.012985229492,
+      "case": "particles / large / fullscreen",
+      "key": "S",
+      "radius": 600.0,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1281.742, 720.0)",
+      "world_xyz": "(120.0, -80.0, 40.0)"
+    },
+    {
+      "camera_travel": 105.307060241699,
+      "case": "particles / large / fullscreen",
+      "key": "Q",
+      "radius": 600.0,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1281.742, 699.7706)",
+      "world_xyz": "(120.0, -80.0, 40.0)"
+    },
+    {
+      "camera_travel": 104.862640380859,
+      "case": "particles / large / fullscreen",
+      "key": "E",
+      "radius": 600.0,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1281.743, 719.9146)",
+      "world_xyz": "(120.0, -80.0, 40.0)"
+    },
+    {
+      "camera_travel": 0.0324261151254177,
+      "case": "field / small / fullscreen",
+      "key": "A",
+      "radius": 0.006,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1902.9, 720.0)",
+      "world_xyz": "(0.0012, -0.0008, 0.0004)"
+    },
+    {
+      "camera_travel": 0.0279999990016222,
+      "case": "field / small / fullscreen",
+      "key": "D",
+      "radius": 0.006,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1365.025, 719.9999)",
+      "world_xyz": "(0.0012, -0.0008, 0.0004)"
+    },
+    {
+      "camera_travel": 0.02884491533041,
+      "case": "field / small / fullscreen",
+      "key": "W",
+      "radius": 0.006,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1421.856, 719.9999)",
+      "world_xyz": "(0.0012, -0.0008, 0.0004)"
+    },
+    {
+      "camera_travel": 0.0291666463017464,
+      "case": "field / small / fullscreen",
+      "key": "S",
+      "radius": 0.006,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1364.647, 719.9999)",
+      "world_xyz": "(0.0012, -0.0008, 0.0004)"
+    },
+    {
+      "camera_travel": 0.0291666612029076,
+      "case": "field / small / fullscreen",
+      "key": "Q",
+      "radius": 0.006,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1364.648, 162.2054)",
+      "world_xyz": "(0.0012, -0.0008, 0.0004)"
+    },
+    {
+      "camera_travel": 0.0291666742414236,
+      "case": "field / small / fullscreen",
+      "key": "E",
+      "radius": 0.006,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1364.648, 720.0002)",
+      "world_xyz": "(0.0012, -0.0008, 0.0004)"
+    },
+    {
+      "camera_travel": 121.300437927246,
+      "case": "field / large / fullscreen",
+      "key": "A",
+      "radius": 600.0,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1303.302, 720.0)",
+      "world_xyz": "(120.0, -80.0, 40.0)"
+    },
+    {
+      "camera_travel": 100.797958374023,
+      "case": "field / large / fullscreen",
+      "key": "D",
+      "radius": 600.0,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1283.938, 719.9999)",
+      "world_xyz": "(120.0, -80.0, 40.0)"
+    },
+    {
+      "camera_travel": 104.976013183594,
+      "case": "field / large / fullscreen",
+      "key": "W",
+      "radius": 600.0,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1283.997, 720.0)",
+      "world_xyz": "(120.0, -80.0, 40.0)"
+    },
+    {
+      "camera_travel": 104.997169494629,
+      "case": "field / large / fullscreen",
+      "key": "S",
+      "radius": 600.0,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1283.939, 719.9999)",
+      "world_xyz": "(120.0, -80.0, 40.0)"
+    },
+    {
+      "camera_travel": 105.000228881836,
+      "case": "field / large / fullscreen",
+      "key": "Q",
+      "radius": 600.0,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1283.939, 699.8297)",
+      "world_xyz": "(120.0, -80.0, 40.0)"
+    },
+    {
+      "camera_travel": 105.000144958496,
+      "case": "field / large / fullscreen",
+      "key": "E",
+      "radius": 600.0,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1283.94, 719.9999)",
+      "world_xyz": "(120.0, -80.0, 40.0)"
+    },
+    {
+      "camera_travel": 0.0366235747933388,
+      "case": "mesh / small / fullscreen",
+      "key": "A",
+      "radius": 0.006,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1983.533, 720.0)",
+      "world_xyz": "(0.0012, -0.0008, 0.0004)"
+    },
+    {
+      "camera_travel": 0.0291707031428814,
+      "case": "mesh / small / fullscreen",
+      "key": "D",
+      "radius": 0.006,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1423.168, 719.9999)",
+      "world_xyz": "(0.0012, -0.0008, 0.0004)"
+    },
+    {
+      "camera_travel": 0.0291666835546494,
+      "case": "mesh / small / fullscreen",
+      "key": "W",
+      "radius": 0.006,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1520.657, 719.9999)",
+      "world_xyz": "(0.0012, -0.0008, 0.0004)"
+    },
+    {
+      "camera_travel": 0.0291666463017464,
+      "case": "mesh / small / fullscreen",
+      "key": "S",
+      "radius": 0.006,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1423.169, 719.9999)",
+      "world_xyz": "(0.0012, -0.0008, 0.0004)"
+    },
+    {
+      "camera_travel": 0.0291666649281979,
+      "case": "mesh / small / fullscreen",
+      "key": "Q",
+      "radius": 0.006,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1423.169, 159.7125)",
+      "world_xyz": "(0.0012, -0.0008, 0.0004)"
+    },
+    {
+      "camera_travel": 0.0291666742414236,
+      "case": "mesh / small / fullscreen",
+      "key": "E",
+      "radius": 0.006,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1423.169, 720.0001)",
+      "world_xyz": "(0.0012, -0.0008, 0.0004)"
+    },
+    {
+      "camera_travel": 108.159568786621,
+      "case": "mesh / large / fullscreen",
+      "key": "A",
+      "radius": 600.0,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1300.777, 720.0)",
+      "world_xyz": "(120.0, -80.0, 40.0)"
+    },
+    {
+      "camera_travel": 105.04207611084,
+      "case": "mesh / large / fullscreen",
+      "key": "D",
+      "radius": 600.0,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1280.599, 720.0)",
+      "world_xyz": "(120.0, -80.0, 40.0)"
+    },
+    {
+      "camera_travel": 100.801559448242,
+      "case": "mesh / large / fullscreen",
+      "key": "W",
+      "radius": 600.0,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1280.608, 719.9999)",
+      "world_xyz": "(120.0, -80.0, 40.0)"
+    },
+    {
+      "camera_travel": 100.796401977539,
+      "case": "mesh / large / fullscreen",
+      "key": "S",
+      "radius": 600.0,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1280.599, 719.9999)",
+      "world_xyz": "(120.0, -80.0, 40.0)"
+    },
+    {
+      "camera_travel": 100.79988861084,
+      "case": "mesh / large / fullscreen",
+      "key": "Q",
+      "radius": 600.0,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1280.6, 700.6364)",
+      "world_xyz": "(120.0, -80.0, 40.0)"
+    },
+    {
+      "camera_travel": 100.799896240234,
+      "case": "mesh / large / fullscreen",
+      "key": "E",
+      "radius": 600.0,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1280.6, 719.9999)",
+      "world_xyz": "(120.0, -80.0, 40.0)"
+    },
+    {
+      "camera_travel": 0.0339375697076321,
+      "case": "mixed / small / fullscreen",
+      "key": "A",
+      "radius": 0.006,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1931.935, 720.0)",
+      "world_xyz": "(0.0012, -0.0008, 0.0004)"
+    },
+    {
+      "camera_travel": 0.0266318749636412,
+      "case": "mixed / small / fullscreen",
+      "key": "D",
+      "radius": 0.006,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1420.341, 720.0)",
+      "world_xyz": "(0.0012, -0.0008, 0.0004)"
+    },
+    {
+      "camera_travel": 0.0275720842182636,
+      "case": "mixed / small / fullscreen",
+      "key": "W",
+      "radius": 0.006,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1507.438, 720.0)",
+      "world_xyz": "(0.0012, -0.0008, 0.0004)"
+    },
+    {
+      "camera_travel": 0.027999971061945,
+      "case": "mixed / small / fullscreen",
+      "key": "S",
+      "radius": 0.006,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1419.512, 720.0)",
+      "world_xyz": "(0.0012, -0.0008, 0.0004)"
+    },
+    {
+      "camera_travel": 0.0280000008642673,
+      "case": "mixed / small / fullscreen",
+      "key": "Q",
+      "radius": 0.006,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1419.513, 185.3021)",
+      "world_xyz": "(0.0012, -0.0008, 0.0004)"
+    },
+    {
+      "camera_travel": 0.0280000101774931,
+      "case": "mixed / small / fullscreen",
+      "key": "E",
+      "radius": 0.006,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1419.513, 720.0001)",
+      "world_xyz": "(0.0012, -0.0008, 0.0004)"
+    },
+    {
+      "camera_travel": 476.038848876953,
+      "case": "mixed / large / fullscreen",
+      "key": "A",
+      "radius": 600.0,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1371.446, 720.0)",
+      "world_xyz": "(120.0, -80.0, 40.0)"
+    },
+    {
+      "camera_travel": 468.078308105469,
+      "case": "mixed / large / fullscreen",
+      "key": "D",
+      "radius": 600.0,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1281.529, 720.0)",
+      "world_xyz": "(120.0, -80.0, 40.0)"
+    },
+    {
+      "camera_travel": 104.957626342773,
+      "case": "mixed / large / fullscreen",
+      "key": "W",
+      "radius": 600.0,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1281.552, 719.9999)",
+      "world_xyz": "(120.0, -80.0, 40.0)"
+    },
+    {
+      "camera_travel": 104.970863342285,
+      "case": "mixed / large / fullscreen",
+      "key": "S",
+      "radius": 600.0,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1281.53, 719.9999)",
+      "world_xyz": "(120.0, -80.0, 40.0)"
+    },
+    {
+      "camera_travel": 105.000228881836,
+      "case": "mixed / large / fullscreen",
+      "key": "Q",
+      "radius": 600.0,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1281.53, 699.8296)",
+      "world_xyz": "(120.0, -80.0, 40.0)"
+    },
+    {
+      "camera_travel": 105.000144958496,
+      "case": "mixed / large / fullscreen",
+      "key": "E",
+      "radius": 600.0,
+      "reference_pixel_error": 0.0,
+      "screen_position": "(1281.53, 719.9999)",
+      "world_xyz": "(120.0, -80.0, 40.0)"
+    }
+  ],
+  "refinement": "anchored placement",
+  "renderer": "gl_compatibility",
+  "shading": [
+    {
+      "distinct_shades": 2240,
+      "mode": "normal",
+      "opaque_sampled_pixels": 5247
+    },
+    {
+      "distinct_shades": 4028,
+      "mode": "fullscreen",
+      "opaque_sampled_pixels": 13421
+    }
+  ],
+  "returncode": 0,
+  "source_hashes_unchanged": true,
+  "source_sha256": {
+    "dense-field.wvz": "ee17881d56af8d91a0527e253d340dadfb0d59afd898c5b135da2464b5e521d9",
+    "mixed-large.wvz": "49c16be90f943d8e3de3cd950312062e014db94bfa6727e3af4721ec59fc3264",
+    "mixed-small.wvz": "ef2e2990c28645a707822b6eb3905255681b1b2438b8b3c4468e4ab1ed36ece3",
+    "mesh-large.wvz": "cc18ce51e576d6e299a87606ba7dada5201e2cc82c705ba220e2a027d31ed9e1",
+    "mesh-small.wvz": "eac011a8c32041958ab3f657c2e590a7593eec76cc06c0c223e268a581acb968",
+    "field-large.wvz": "4eb018d2298b577953d31b2be0b0cc1e5a6e1e4648d5de20021153cece4eca67",
+    "field-small.wvz": "9fc34162777fbc3c4df81920cf1d137769d57dfbfa0c008d29b152baed490ede",
+    "particles-large.wvz": "b885c9514f8ab9af79e4e11f2e8f4ccf9664f95105b94de966e40aeb6919485c",
+    "particles-small.wvz": "bfbd532b1f8fcaec438968c8519c5201f48d1f051c5541f443a1f78b2ec26295"
+  },
+  "import_attempts": [],
+  "packaged": true,
+  "package_build": null,
+  "diagnostics": [],
+  "status": "PASS"
+}

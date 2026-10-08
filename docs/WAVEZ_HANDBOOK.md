@@ -329,7 +329,9 @@ See [Free Camera speed](FREE_CAMERA_SPEED.md).
 editor. Drag the captured-view **Right / Up / Toward** endpoints or enter absolute
 world XYZ coordinates; see [view-relative placement](ORBIT_CENTER_VIEW.md). Change the draft
 radius with its −/+ buttons or wheel over the radius controls (Shift: fine).
-**Place ahead** positions the draft along the current view direction. **Apply**
+**Place ahead** positions the draft along the current view direction at its existing
+view depth, preserving its radius and apparent size. The placed world center stays
+fixed during camera navigation; only explicit placement edits move it. **Apply**
 sets the existing orbit target and distance, retains the full current camera
 basis, removes the guide, and immediately starts Auto Orbit on that view's stable
 equator. The selected world center stays fixed while the camera travels around it;

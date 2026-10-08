@@ -1,6 +1,59 @@
 extends "res://ui/shell/test_orbit_center_view.gd"
 ## Owner review simplification: automatic draft anchor during placement.
 var shading: Array = []
+var inspection: Array = []
+
+func place_and_inspect(view, label: String, scale: float, capture: bool) -> void:
+	focus_none(); view.orbit_enabled = false; view.playing = false
+	var saved := state(view); var scientific := world(view); var sample: Dictionary = view.committed_sample.duplicate(true)
+	view.camera_target = Vector3(.12,-.08,.04)*scale; view.camera_distance = 7.2*scale; view._update_camera()
+	view.shell.edit_orbit_center(); var editor = view.shell.orbit_editor
+	fields(editor,view.camera_target+view.camera.basis.x*.4*scale,.6*scale)
+	var pose: Transform3D = view.camera.transform; var radius: float = editor.radius
+	var depth: float = -(view.camera.global_transform.affine_inverse()*editor.center).z
+	var projected_radius: float = view.camera.unproject_position(editor.center+view.camera.basis.x*radius).distance_to(view.camera.unproject_position(editor.center))
+	var button: Button
+	for node in editor.panel.get_child(0).get_children()[-1].get_children():
+		if node is Button and node.text == "Place ahead": button = node
+	var press := InputEventMouseButton.new(); press.button_index = MOUSE_BUTTON_LEFT; press.pressed = true; press.position = button.get_global_rect().get_center()
+	root.push_input(press,true); press = press.duplicate(); press.pressed = false; root.push_input(press,true)
+	await process_frame
+	focus_none()
+	check(view.camera.transform == pose and editor.radius == radius,label+": actual Place ahead click preserves exact camera and edited radius")
+	check(is_equal_approx(-(view.camera.global_transform.affine_inverse()*editor.center).z,depth),label+": actual Place ahead click preserves placement depth independently of radius")
+	var size_after: float = view.camera.unproject_position(editor.center+view.camera.basis.x*radius).distance_to(view.camera.unproject_position(editor.center))
+	check(is_equal_approx(size_after,projected_radius),label+": Place ahead preserves projected radius instead of resetting apparent size")
+	var chosen: Vector3 = editor.center
+	var reference := MeshInstance3D.new(); var mesh := BoxMesh.new(); mesh.size = Vector3(.12,.2,.3)*scale; reference.mesh = mesh
+	reference.position = chosen; view.add_child(reference)
+	var material := StandardMaterial3D.new(); material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED; material.albedo_color = Color.WHITE; reference.material_override = material
+	var reference_pose := reference.global_transform
+	if capture: await screenshot("placed-"+label.get_slice(" / ",2))
+	for keycode in [KEY_A,KEY_D,KEY_W,KEY_S,KEY_Q,KEY_E]:
+		focus_none(); var before: Vector3 = view.camera.global_position
+		var event := InputEventKey.new(); event.physical_keycode = keycode; event.pressed = true
+		Input.parse_input_event(event); Input.flush_buffered_events(); view.set_process(true)
+		for frame in 6: await process_frame
+		view.set_process(false); event = event.duplicate(); event.pressed = false; Input.parse_input_event(event); Input.flush_buffered_events()
+		editor.refresh(); await process_frame
+		check(view.camera.global_position != before,label+": real process loop moves the camera under "+OS.get_keycode_string(keycode))
+		check(editor.center == chosen and editor.radius == radius,label+": placed world center and radius remain exact under "+OS.get_keycode_string(keycode))
+		check(reference.global_transform == reference_pose and editor.guide.sphere.global_position == reference.global_position,label+": rendered gizmo stays coincident with stationary world reference")
+		var point: Vector2 = editor.guide.surface_camera.unproject_position(editor.guide.sphere.global_position)
+		var reference_point: Vector2 = view.camera.unproject_position(reference.global_position)
+		check(point.distance_to(reference_point) < .001,label+": annotation and scientific world projection remain aligned")
+		inspection.append({"case":label,"key":OS.get_keycode_string(keycode),"world_xyz":str(editor.center),"radius":radius,"camera_travel":view.camera.global_position.distance_to(before),"screen_position":str(point),"reference_pixel_error":point.distance_to(reference_point)})
+		if capture and keycode == KEY_A: await screenshot("inspect-after-A-"+label.get_slice(" / ",2))
+	fields(editor,view.camera.global_position+view.camera.global_basis.z*scale,radius)
+	editor.place_ahead()
+	check(editor.radius == radius and editor.center.is_equal_approx(view.camera.global_position-view.camera.global_basis.z*maxf(view.camera_distance,view.camera.near*2.0)),label+": a center behind the camera uses navigation depth without changing radius")
+	editor.dismiss(); reference.queue_free(); await process_frame
+	for node in scientific: check(node.transform == scientific[node],label+": placement inspection preserves scientific transform "+node.name)
+	check(view.committed_sample == sample,label+": placement inspection preserves the paused scientific sample")
+	# Restore the original view after this additional inspection exercise.
+	view.camera_target = saved.target; view.camera_distance = saved.radius; view.camera.transform = saved.pose
+	view.yaw = saved.yaw; view.pitch = saved.pitch; view.camera_orbit_basis = saved.basis; view.camera_orbit_basis_active = saved.active
+	view.camera_orbit_basis_yaw = saved.basis_yaw; view.camera_orbit_basis_pitch = saved.basis_pitch; view.free_camera = saved.free
 
 func tumble(view, movement: Vector2) -> void:
 	var press := InputEventMouseButton.new(); press.button_index = MOUSE_BUTTON_LEFT; press.pressed = true; press.position = Vector2(80,180)
@@ -69,8 +122,9 @@ func placement_exercise(view, label: String, scale: float) -> void:
 	check(editor.position_readout.is_visible_in_tree() and editor.position_readout.text.contains(str(draft.x)),label+": world XYZ/radius remain visible with controls hidden")
 	pose = view.camera.transform; view._update_camera()
 	check(view.camera.transform.is_equal_approx(pose),label+": unchanged placement update retains camera pose")
+	var depth: float = -(view.camera.global_transform.affine_inverse()*editor.center).z
 	editor.place_ahead()
-	check(editor.visible and editor.center.is_equal_approx(view.camera.position-view.camera.basis.z*radius),label+": Place ahead remains an explicit draft edit while anchored")
+	check(editor.visible and editor.radius == radius and editor.center.is_equal_approx(view.camera.global_position-view.camera.global_basis.z*depth),label+": Place ahead preserves radius and depth while explicitly placing the center")
 	draft = editor.center; basis = view.camera.basis; editor.commit()
 	check(view.camera_target == draft and view.camera_distance == radius and view.camera.basis == basis and view.orbit_enabled,label+": anchored Apply retains current basis and commits exact draft radius")
 	check(not editor.visible and editor.guide.surface.render_target_update_mode == SubViewport.UPDATE_DISABLED,label+": Apply disables transient shading viewport")
@@ -133,10 +187,11 @@ func run() -> void:
 			for scale_name in ["small","large"]:
 				view._open_capture(output.path_join(kind+"-"+scale_name+".wvz")); view.playing = false; await ready(view)
 				await placement_exercise(view,kind+" / "+scale_name+" / "+mode,.01 if scale_name == "small" else 1000.)
+				await place_and_inspect(view,kind+" / "+scale_name+" / "+mode,.01 if scale_name == "small" else 1000.,kind == "mixed" and scale_name == "large")
 		await dense_views(view,mode)
 		if mode == "fullscreen": view.shell.exit_immersive()
 	for frame in 3: await process_frame
-	var report := {"checks":checks,"failures":failures,"cases":cases,"renderer":RenderingServer.get_current_rendering_method(),"refinement":"anchored placement","shading":shading}
+	var report := {"checks":checks,"failures":failures,"cases":cases,"renderer":RenderingServer.get_current_rendering_method(),"refinement":"anchored placement","shading":shading,"placed_world_reference":inspection}
 	var file := FileAccess.open(output.path_join("orbit-view-report.json"),FileAccess.WRITE); file.store_string(JSON.stringify(report,"\t")); file.close()
 	view.queue_free(); await process_frame
 	print("ORBIT CENTER PLACEMENT: %d checks, %d failures" % [checks,failures.size()]); quit(0 if failures.is_empty() else 1)

@@ -6,9 +6,11 @@ owner-merged PR #300. The repository's application identity is
 Issue #212 proposes view-relative Auto Orbit center placement with automatic
 inspection anchoring, shaded radius and persistent world references. The draft
 stays fixed in world space and is moved only by explicit placement edits; the
-owner-requested Lock Position toggle has been removed. PR #301 also refines Auto
-Orbit to physically circle the chosen world center at the selected radius, on a
-stable equator established at Apply. Candidate build 78 remains for owner review.
+owner-requested Lock Position toggle has been removed. Place ahead preserves
+placement depth independently of radius, avoiding the apparent size reset.
+PR #301 also refines Auto Orbit to physically circle the chosen world center at
+the selected radius, on a stable equator established at Apply. Candidate build 78
+remains for owner review.
 Scientific payloads and repository visibility are unchanged.
 
 The GitHub Issues and Wavez Development Project are the operational queue. Work

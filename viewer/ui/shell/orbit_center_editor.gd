@@ -66,7 +66,7 @@ func setup(owner_viewer) -> void:
 	var fine := Label.new(); fine.text = "Wheel here · Shift: fine"; fine.add_theme_font_size_override("font_size",12); radius_row.add_child(fine)
 	notice = Label.new(); notice.add_theme_font_size_override("font_size",12); details.add_child(notice)
 	var actions := HBoxContainer.new(); box.add_child(actions)
-	var place := Button.new(); place.text = "Place ahead"; place.tooltip_text = "Place the draft center one draft radius along the current view direction. The camera stays unchanged."
+	var place := Button.new(); place.text = "Place ahead"; place.tooltip_text = "Place the draft center straight ahead at its current view depth. Radius and camera stay unchanged."
 	place.pressed.connect(place_ahead); actions.add_child(place)
 	var space := Control.new(); space.size_flags_horizontal = Control.SIZE_EXPAND_FILL; actions.add_child(space)
 	var cancel := Button.new(); cancel.text = "Cancel"; cancel.pressed.connect(dismiss); actions.add_child(cancel)
@@ -183,7 +183,13 @@ func radius_event(event: InputEvent) -> void:
 
 func place_ahead() -> void:
 	if not read_fields(): return
-	center = viewer.camera.position-viewer.camera.basis.z*radius
+	# Placement depth is independent of orbit radius. Using radius here moves
+	# the center toward/away from the camera and makes each click appear to resize it.
+	var camera: Camera3D = viewer.camera
+	var depth: float = -(camera.global_transform.affine_inverse()*center).z
+	if not is_finite(depth) or depth <= camera.near:
+		depth = maxf(navigation_distance,camera.near*2.0)
+	center = camera.global_position-camera.global_basis.z*depth
 	write_fields(); refresh()
 
 func commit() -> void:

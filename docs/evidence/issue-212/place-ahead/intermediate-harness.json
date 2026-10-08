@@ -1,0 +1,23 @@
+{
+  "initial_checks": 1886,
+  "initial_failures": [
+    "particles / large / normal: real process loop moves the camera under A",
+    "field / small / normal: real process loop moves the camera under A",
+    "field / large / normal: real process loop moves the camera under A",
+    "mesh / small / normal: real process loop moves the camera under A",
+    "mesh / large / normal: real process loop moves the camera under A",
+    "mixed / small / normal: real process loop moves the camera under A",
+    "mixed / large / normal: real process loop moves the camera under A",
+    "particles / small / fullscreen: real process loop moves the camera under A",
+    "particles / large / fullscreen: real process loop moves the camera under A",
+    "field / small / fullscreen: real process loop moves the camera under A",
+    "field / large / fullscreen: real process loop moves the camera under A",
+    "mesh / small / fullscreen: real process loop moves the camera under A",
+    "mesh / large / fullscreen: real process loop moves the camera under A",
+    "mixed / small / fullscreen: real process loop moves the camera under A",
+    "mixed / large / fullscreen: real process loop moves the camera under A"
+  ],
+  "diagnosis": "The new real-click harness started its first movement key before the button focus transition completed. Wait one frame after the click, then release GUI focus before testing free translation; actual camera-motion assertions remain active.",
+  "final_checks": 1918,
+  "final_failures": []
+}
