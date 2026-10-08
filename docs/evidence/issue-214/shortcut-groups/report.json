@@ -1,0 +1,11 @@
+{
+	"checks": 141,
+	"display_driver": "X11",
+	"executable": "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+	"failures": [],
+	"layouts": [],
+	"packaged": false,
+	"preference_path": "user://keyboard_shortcuts.cfg",
+	"renderer": "forward_plus",
+	"restart": false
+}

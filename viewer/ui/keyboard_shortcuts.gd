@@ -6,6 +6,7 @@ const ACTIONS := [
 	["reset_camera", "Reset Camera", "Navigation", KEY_R],
 	["auto_orbit", "Auto Orbit", "Navigation", KEY_O],
 	["free_camera", "Free Camera", "Navigation", 0],
+	["toggle_invert_y_axis", "Toggle Invert Y Axis", "Navigation", 0],
 	["increase_camera_speed", "Increase Camera Movement Speed", "Navigation", KEY_PLUS],
 	["decrease_camera_speed", "Decrease Camera Movement Speed", "Navigation", KEY_MINUS],
 	["orbit_camera_left", "Orbit Camera Left", "Navigation", 0],
@@ -33,6 +34,7 @@ const ACTIONS := [
 ]
 var storage_path := PATH
 var active := defaults()
+var invert_y_axis := false
 
 static func defaults() -> Dictionary:
 	var result := {}
@@ -90,14 +92,19 @@ func load_preferences() -> Error:
 	for action in ACTIONS:
 		saved[action[0]] = config.get_value("shortcuts", action[0], action[3])
 	active = normalized(saved)
+	var inverted: Variant = config.get_value("navigation", "invert_y_axis", false)
+	invert_y_axis = inverted if inverted is bool else false
 	return OK
 
-func apply(map: Dictionary) -> Error:
+func apply(map: Dictionary, inverted: Variant = null) -> Error:
+	if inverted != null and not inverted is bool: return ERR_INVALID_DATA
 	for action in ACTIONS:
 		if not map.has(action[0]) or not valid_binding(map[action[0]]): return ERR_INVALID_DATA
 	var candidate := normalized(map)
+	var candidate_inversion: bool = invert_y_axis if inverted == null else inverted
 	var config := ConfigFile.new()
 	for action in ACTIONS: config.set_value("shortcuts", action[0], candidate[action[0]])
+	config.set_value("navigation", "invert_y_axis", candidate_inversion)
 	# Do not activate a map that could not be persisted; keep the prior file intact.
 	var temporary := storage_path + ".tmp"
 	var error := config.save(temporary)
@@ -107,6 +114,7 @@ func apply(map: Dictionary) -> Error:
 		DirAccess.remove_absolute(temporary)
 		return error
 	active = candidate
+	invert_y_axis = candidate_inversion
 	return OK
 
 func match_action(event: InputEventKey) -> String:

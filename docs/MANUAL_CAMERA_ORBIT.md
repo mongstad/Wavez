@@ -39,8 +39,10 @@ RMB or an orbit key immediately disables Auto Orbit and applies manual control
 on that same input. Auto Orbit remains off after release until explicitly
 re-enabled. W/A/S/D/Q/E retains its accepted immediate transition to Free Camera.
 LMB keeps its existing two-axis tumble and sensitivity; it still temporarily
-suspends Auto Orbit while held. Wheel zoom and the `+`/`-` translation-speed
-controls keep their accepted behavior.
+suspends Auto Orbit while held. The [Invert Y Axis preference](LMB_Y_INVERSION.md)
+reverses only LMB vertical drag when enabled, with an On/Off toggle and hotkey
+in Keyboard Shortcuts. RMB steering remains unchanged. Wheel zoom and the `+`/`-`
+translation-speed controls keep their accepted behavior.
 
 ## Camera-state synchronization
 

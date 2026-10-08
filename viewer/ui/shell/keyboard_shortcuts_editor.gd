@@ -4,6 +4,7 @@ const Bindings = preload("res://ui/keyboard_shortcuts.gd")
 const TitledGroup = preload("res://ui/shell/titled_group.gd")
 var shell
 var staged := {}
+var staged_invert_y_axis := false
 var listening := ""
 var panel: PanelContainer
 var scroller: ScrollContainer
@@ -16,6 +17,7 @@ var apply_button: Button
 var close_button: Button
 var previous_focus: WeakRef
 var reset: Button
+var invert_y_toggle: CheckButton
 var focus_order: Array[Control] = []
 
 func setup(owner_shell) -> void:
@@ -48,6 +50,11 @@ func setup(owner_shell) -> void:
 		var row := HBoxContainer.new(); row.add_theme_constant_override("separation", 8); groups[category].body.add_child(row)
 		var label := Label.new(); label.text = action[1]; label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		label.clip_text = true; label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS; row.add_child(label)
+		if action[0] == "toggle_invert_y_axis":
+			invert_y_toggle = CheckButton.new(); invert_y_toggle.name = "InvertYAxis"
+			invert_y_toggle.custom_minimum_size.y = 32; row.add_child(invert_y_toggle)
+			invert_y_toggle.toggled.connect(func(value): staged_invert_y_axis = value; refresh_rows())
+			invert_y_toggle.focus_entered.connect(_keep_focus_outline_visible.bind(invert_y_toggle))
 		var key := Button.new(); key.custom_minimum_size = Vector2(152, 32); key.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
 		key.theme_type_variation = "SecondaryButton"; key.pressed.connect(start_capture.bind(action[0])); row.add_child(key)
 		key.focus_entered.connect(_keep_focus_outline_visible.bind(key))
@@ -59,7 +66,7 @@ func setup(owner_shell) -> void:
 	notice.theme_type_variation = "PropertyLabel"; box.add_child(notice); notice.hide()
 	footer = HBoxContainer.new(); footer.add_theme_constant_override("separation", 8); box.add_child(footer)
 	reset = Button.new(); reset.text = "Reset Defaults"; footer.add_child(reset)
-	reset.pressed.connect(func(): staged = Bindings.defaults(); listening = ""; notice.hide(); refresh_rows())
+	reset.pressed.connect(func(): staged = Bindings.defaults(); staged_invert_y_axis = false; listening = ""; notice.hide(); refresh_rows())
 	var space := Control.new(); space.size_flags_horizontal = Control.SIZE_EXPAND_FILL; footer.add_child(space)
 	cancel = Button.new(); cancel.text = "Cancel"; cancel.pressed.connect(dismiss); footer.add_child(cancel)
 	apply_button = Button.new(); apply_button.text = "Apply"; apply_button.theme_type_variation = "PrimaryButton"; apply_button.disabled = true
@@ -82,6 +89,7 @@ func open() -> void:
 	var focused := get_viewport().gui_get_focus_owner()
 	previous_focus = weakref(focused) if focused != null else null
 	staged = shell.shortcuts.active.duplicate(); listening = ""
+	staged_invert_y_axis = shell.shortcuts.invert_y_axis
 	notice.hide()
 	refresh_rows(); scroller.scroll_vertical = 0; show(); fit(); fit.call_deferred()
 	rows.reset_camera.key.grab_focus()
@@ -100,12 +108,14 @@ func commit() -> void:
 	var changed: Array[String] = []
 	for action in staged:
 		if staged[action] != shell.shortcuts.active.get(action, 0): changed.append(action)
-	var error: Error = shell.shortcuts.apply(staged)
+	var inversion_changed: bool = staged_invert_y_axis != shell.shortcuts.invert_y_axis
+	var error: Error = shell.shortcuts.apply(staged, staged_invert_y_axis)
 	if error != OK:
 		notice.text = "Could not save shortcuts: " + error_string(error) + ". Current bindings are unchanged."
 		notice.show(); fit.call_deferred()
 		return
 	if shell.viewer.session_log != null:
+		if inversion_changed: shell.viewer.session_log.record("CONTROL", "Invert Y Axis = %s" % shell.shortcuts.invert_y_axis)
 		for action in changed:
 			shell.viewer.session_log.record("CONTROL", "Shortcut %s = %s" % [action, Bindings.text(shell.shortcuts.active[action])])
 	shell.refresh_shortcut_hints()
@@ -120,7 +130,9 @@ func clear_binding(action: String) -> void:
 	listening = ""; staged[action] = 0; notice.hide(); refresh_rows()
 
 func refresh_rows() -> void:
-	apply_button.disabled = staged == shell.shortcuts.active
+	apply_button.disabled = staged == shell.shortcuts.active and staged_invert_y_axis == shell.shortcuts.invert_y_axis
+	invert_y_toggle.set_pressed_no_signal(staged_invert_y_axis)
+	invert_y_toggle.text = "On" if staged_invert_y_axis else "Off"
 	focus_order.assign([close_button])
 	for action in rows:
 		var row: Dictionary = rows[action]
@@ -129,6 +141,7 @@ func refresh_rows() -> void:
 		var context: String = shell.shortcut_context(action)
 		row.label.add_theme_color_override("font_color", theme.c(&"text.primary" if context.is_empty() else &"text.secondary"))
 		row.clear.disabled = staged[action] == 0
+		if action == "toggle_invert_y_axis": focus_order.append(invert_y_toggle)
 		focus_order.append(row.key)
 		if not row.clear.disabled: focus_order.append(row.clear)
 	focus_order.append_array([reset, cancel])

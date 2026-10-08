@@ -1,0 +1,53 @@
+{
+  "checks": 2504,
+  "reports": [
+    {
+      "checks": 2501,
+      "failures": [],
+      "layouts": [
+        {
+          "name": "normal",
+          "panel_rect": "[P: (400.0, 170.0), S: (640.0, 560.0)]",
+          "toggle_rect": "[P: (682.0, 366.0), S: (86.0, 32.0)]"
+        },
+        {
+          "name": "compact",
+          "panel_rect": "[P: (192.0, 40.0), S: (640.0, 560.0)]",
+          "toggle_rect": "[P: (474.0, 236.0), S: (86.0, 32.0)]"
+        }
+      ],
+      "packaged": false,
+      "renderer": "forward_plus",
+      "restart": false
+    },
+    {
+      "checks": 3,
+      "failures": [],
+      "layouts": [],
+      "packaged": false,
+      "renderer": "forward_plus",
+      "restart": true
+    }
+  ],
+  "renderer": "headless",
+  "packaged": false,
+  "fresh_process_restart": true,
+  "source_hashes_unchanged": {
+    "mixed.wvz": "32beca123aed93418f5bbc8881ba9ba2b59a0bee94513c32ebfde2a1ca9ed778",
+    "meshes.wvz": "33c2b583d2eb0bd4466e245e8021eb309e416e8698828effa6a52106cb8193a9",
+    "fields.wvz": "8275f37892628e663a72e9ee92ae38118f680e114a4104ad41147aa6ac3b85c1",
+    "particles.wvz": "5c31291db3e7a443c4263629333659af02566604ffc945cd3ab6c8556340c5f4"
+  },
+  "accepted_main_navigation_functions_unchanged": [
+    "_input",
+    "_unhandled_input",
+    "_steer_camera",
+    "_orbit_camera_horizontally",
+    "_move_free_camera",
+    "_zoom_camera",
+    "_update_camera",
+    "_reset_camera",
+    "_toggle_auto_orbit",
+    "_focus_activity"
+  ]
+}

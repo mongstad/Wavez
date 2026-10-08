@@ -702,7 +702,7 @@ func _update_manual_orbit(delta: float) -> void:
 func _orbit_camera_by_drag(movement: Vector2, sensitivity: float) -> void:
 	if movement == Vector2.ZERO: return
 	yaw -= movement.x * sensitivity
-	pitch -= movement.y * sensitivity
+	pitch -= movement.y * sensitivity * (-1.0 if shell.shortcuts.invert_y_axis else 1.0)
 	_update_camera()
 
 func _orbit_camera_horizontally(horizontal_delta: float, sensitivity: float) -> void:
@@ -730,6 +730,7 @@ func _dispatch_shortcut(action: String, event: InputEventKey = null) -> void:
 		"reset_camera": _reset_camera()
 		"auto_orbit": _toggle_auto_orbit()
 		"free_camera": _toggle_free_camera()
+		"toggle_invert_y_axis": _toggle_invert_y_axis()
 		"increase_camera_speed", "decrease_camera_speed": _adjust_camera_speed(action)
 		"orbit_camera_left", "orbit_camera_right":
 			if event != null: _start_manual_orbit(action, event)
@@ -756,6 +757,15 @@ func _dispatch_shortcut(action: String, event: InputEventKey = null) -> void:
 			shell.edge_reveal.set_pinned(side, not shell.edge_reveal.states[side].pinned)
 		"next_category": shell.cycle_category(1)
 		"previous_category": shell.cycle_category(-1)
+
+func _toggle_invert_y_axis() -> void:
+	var error: Error = shell.shortcuts.apply(shell.shortcuts.active, not shell.shortcuts.invert_y_axis)
+	if error != OK:
+		var problem := "Could not save Invert Y Axis: " + error_string(error) + ". Current preference is unchanged."
+		if session_log != null: session_log.failure("Navigation preferences", problem)
+		shell.show_details("Navigation preference", problem)
+		return
+	if session_log != null: session_log.record("CONTROL", "Invert Y Axis = %s" % shell.shortcuts.invert_y_axis)
 
 func _toggle_auto_orbit() -> void:
 	if shell != null and shell.orbit_editor != null and shell.orbit_editor.visible: return

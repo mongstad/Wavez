@@ -1,5 +1,12 @@
 # Current status
 
+Issue #214 adds an On/Off LMB vertical-inversion preference beside its editable
+Toggle Invert Y Axis hotkey in Keyboard Shortcuts, candidate build 76, pending
+owner review. Apply/Cancel/reset and restart persistence share the existing
+preference transaction. Current #258 RMB steering and scientific/world state
+retain their behavior. See [LMB inversion](LMB_Y_INVERSION.md) and
+[source/package evidence](evidence/issue-214/README.md).
+
 Issue #295 prevents initial-sample open failures from leaving a duplicate Scene
 notice in candidate build 75, pending owner review. A subsequent successful WVZ
 open clears its active load-error presentation while independent diagnostics,
