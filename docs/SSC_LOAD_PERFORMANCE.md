@@ -1,3 +1,9 @@
+> Historical SIMSCP/SSC operating and measurement record. The original content
+> below retains its run context; those formats/commands are retired. Current WVZ1
+> work uses the [format/API guide](CAPTURE_FORMAT_AND_API.md),
+> [reader metadata contract](WAVEZ_METADATA_BUDGET.md), and
+> [current playback/preparation links](CURRENT_STATUS.md#current-sources-of-truth).
+
 # SSC loading and preparation profile
 
 Issue #100 / PERF-FIELD-005, top Ready verified 2026-09-25. Pending owner review.

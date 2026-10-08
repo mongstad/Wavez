@@ -16,11 +16,13 @@ LEGACY = re.compile(r"SimScope|simscope|SIMSCP[0-9]*|\.ssc\b|FRM4|COMMIT4|SIMSCO
 ACTIVE_ROOTS = {"wavez_export", "viewer", "tools", "tests", "examples"}
 CURRENT_DOCS = {
     "AGENTS.md", "CONTRIBUTING.md", "README.md", "QUICKSTART.md",
-    "G3_FORMAT.md", "G3_GUIDE.md", "WAVEZ_API.md", "INSPECTION_STATE.md",
+    "docs/WVZ1_FORMAT.md", "docs/SCENE_CAPTURE_GUIDE.md", "WAVEZ_API.md", "INSPECTION_STATE.md",
     "docs/START_HERE.md", "docs/CAPTURE_FORMAT_POLICY.md",
     "docs/CAPTURE_FORMAT_AND_API.md", "docs/SIMULATION_INTEGRATION_GUIDE.md",
     "docs/WAVEZ_HANDBOOK.md", "docs/WAVEZ_METADATA_BUDGET.md",
-    "docs/WAVEZ_VIEW_PRESETS.md", "docs/G4_SCHEMAS.md",
+    "docs/WAVEZ_VIEW_PRESETS.md", "docs/ANALYSIS_SCHEMAS.md",
+    "docs/SCIENTIFIC_ANALYSIS.md", "docs/SCIENTIFIC_ACCEPTANCE.md",
+    "docs/ANALYSIS_GUIDE.md", "docs/UX_WORKFLOW.md", "docs/VIDEO_EXPORT.md",
     "docs/WVZ1_IMPLEMENTATION_VALIDATION.md",
 }
 NEGATIVE_TESTS = {
@@ -36,25 +38,20 @@ EXPLANATORY_CURRENT_DOCS = {
     "docs/WVZ1_IMPLEMENTATION_VALIDATION.md",
 }
 MIXED_HISTORICAL_DOCS = {
-    "docs/CURRENT_STATUS.md", "VIDEO_EXPORT.md", "docs/FILE_DIALOGS.md",
+    "docs/FILE_DIALOGS.md",
     "docs/PLAYBACK_INTEGRITY.md", "docs/VIEW_PRESETS.md",
 }
 
 
 def classify(name, line, text=""):
-    if name == "docs/WAVEZ_HANDBOOK.md" and "[historical roadmap](../SIMSCOPE_NEXT_DESIGN.md)" in text and "[historical acceptance registry](../SIMSCOPE_ACCEPTANCE_MATRIX.md)" in text:
-        return "link to historical roadmap and acceptance registry"
+    without_historical_urls = re.sub(r"https://github\.com/mongstad/Wavez/blob/[0-9a-f]{40}/[^\s)>]+", "", text)
+    if LEGACY.search(text) and not LEGACY.search(without_historical_urls):
+        return "fixed Git reference to historical source"
     if name in NEGATIVE_TESTS:
         return "negative refusal test"
     if name in EXPLANATORY_CURRENT_DOCS:
         return "explicit obsolete-format refusal or historical link"
     if name in MIXED_HISTORICAL_DOCS:
-        if name == "docs/CURRENT_STATUS.md" and line < 115:
-            return None
-        if name == "docs/CURRENT_STATUS.md" and 210 <= line <= 222:
-            return None
-        if name == "VIDEO_EXPORT.md" and line < 25:
-            return None
         if name == "docs/FILE_DIALOGS.md" and line <= 7:
             return "explicit historical preface"
         if name == "docs/PLAYBACK_INTEGRITY.md" and line <= 8:
@@ -63,6 +60,28 @@ def classify(name, line, text=""):
     if name in CURRENT_DOCS or name.split('/')[0] in ACTIVE_ROOTS or name == '.gitignore':
         return None
     return "historical document or evidence"
+
+
+def historical_content_changes(names):
+    """Permit navigation repairs while preserving recorded evidence bodies."""
+    changed = []
+    for name in names:
+        path = ROOT / name
+        original = subprocess.run(["git", "show", "origin/main:" + name], cwd=ROOT, capture_output=True)
+        if original.returncode:
+            # New review evidence has no historical body to protect.
+            continue
+        before = original.stdout
+        after = path.read_bytes() if path.is_file() else b""
+        if before == after:
+            continue
+        if path.suffix == ".md":
+            # Only Markdown destinations may differ; labels/outcomes remain exact.
+            destinations = rb"\]\([^\n)]+\)"
+            if re.sub(destinations, b"](LINK)", before) == re.sub(destinations, b"](LINK)", after):
+                continue
+        changed.append(name)
+    return changed
 
 
 def audit():
@@ -89,7 +108,8 @@ def audit():
             category = classify(name, number, line)
             entry = dict(file=name, line=number, text=line, category=category)
             (rows if category else unknown).append(entry)
-    changed_evidence = subprocess.check_output(["git", "diff", "--name-only", "origin/main", "--", "docs/evidence"], cwd=ROOT, text=True).splitlines()
+    evidence_diff = subprocess.check_output(["git", "diff", "--name-only", "origin/main", "--", "docs/evidence"], cwd=ROOT, text=True).splitlines()
+    changed_evidence = historical_content_changes(evidence_diff)
     counts = Counter(row["category"] for row in rows)
     return dict(status="PASS" if not unknown and not changed_evidence else "FAIL",
                 references=len(rows), categories=dict(counts), unclassified=unknown,

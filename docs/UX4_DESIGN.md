@@ -22,7 +22,7 @@ Their scientific, source, state and controller constraints still apply. The
 Consume the accepted [UX3 shell](UX3_SHELL.md), [transport](UX3_TRANSPORT.md),
 [media timing](UX3_MEDIA_TRANSPORT.md), [status and Jobs](UX3_STATUS.md),
 [fullscreen](UX3_FULLSCREEN.md), [production ownership](UX3_UI_OWNERSHIP.md)
-and [export overlay behavior](../VIDEO_EXPORT.md). Midnight Scientific tokens,
+and [export overlay behavior](VIDEO_EXPORT.md). Midnight Scientific tokens,
 source names and **Population counts** terminology remain unchanged.
 
 Only documentation is delivered by #66. No controls, callbacks, defaults, schemas,

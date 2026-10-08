@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "application_version": "v0.1.0.77",
+  "version_tests": 2,
+  "about_notices": "PASS",
+  "python_compilation": "PASS",
+  "small_scene_strict_wvz1_records": 14,
+  "small_analysis_strict_wvz1_records": 11,
+  "warm_import": "completed without warnings or errors",
+  "unrun": [
+    "GUI or physical input",
+    "Forward+/Compatibility rendering",
+    "exported Linux binary",
+    "other operating systems",
+    "large research captures",
+    "long playback",
+    "video encoding",
+    "unrelated application suites",
+    "external web-link fetching"
+  ]
+}

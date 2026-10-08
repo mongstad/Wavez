@@ -4,7 +4,7 @@
 and are not product dependencies. See [repository boundaries](REPOSITORY_BOUNDARY.md).
 
 - [Current status](CURRENT_STATUS.md) and [handbook](WAVEZ_HANDBOOK.md)
-- [Selections and temporal analysis](G4_GUIDE.md) and [public Python API](../WAVEZ_API.md)
+- [Selections and temporal analysis](ANALYSIS_GUIDE.md) and [public Python API](../WAVEZ_API.md)
 - [Portable view presets](WAVEZ_VIEW_PRESETS.md)
 - [Integration guide](SIMULATION_INTEGRATION_GUIDE.md) and [capture API](CAPTURE_FORMAT_AND_API.md)
 - [Capture policy](CAPTURE_FORMAT_POLICY.md) and [repository boundaries](REPOSITORY_BOUNDARY.md)

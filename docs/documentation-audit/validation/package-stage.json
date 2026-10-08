@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "kind": "Linux release resource staging; not an exported binary run",
+  "first_party_files": 40,
+  "resources_match_accepted_main": true,
+  "archive_hash": "6879e24cc34fa8b2a38c8336f836b01c19ffb001299207ca70bca438add5e7d6",
+  "external_dependencies_not_vendored": true
+}

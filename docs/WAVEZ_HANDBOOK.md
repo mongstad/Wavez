@@ -2,23 +2,14 @@
 
 Wavez is a scientific capture viewer with a Python export layer and a Godot desktop viewer. Its job is to preserve declared data and make representation choices inspectable. A visually persuasive image is not a substitute for a numerical field, a conservation check or a declared boundary. The current implementation is `WAVEZ/`; see [current status](CURRENT_STATUS.md) for accepted scope and [evidence](EVIDENCE_INDEX.md) for measurements.
 
-## Architecture and development history
+## Supported contracts
 
-The simulation advances its own state. Python exporters serialize samples into captures without owning the simulation's equations, units or physical interpretation. The Godot viewer reads committed samples, prepares display buffers and applies camera, mapping and layer settings. Rendering, inspection recipes and deterministic video use the same sampling and visual-state contracts. G4 numerical analysis runs on a bounded private Python worker using NumPy. Optional
-full-grid isosurface extraction also uses scikit-image. Compression and external
-engines have separate availability requirements.
-
-| Stage | Delivered purpose | Evidence |
-|---|---|---|
-| G0 | Audit the particle viewer, compatibility, source preservation and real workload | [Historical state audit](CURRENT_STATUS.md) |
-| G1 | Scientific particle inspection: signed/phase mapping, declared guides, physical-time inspection and recipes | [Inspection contract](<../INSPECTION_STATE.md>) |
-| G2a / G2b | Bounded storage/index/cache and real playback work; typed lossless storage, explicit IDs, optional Zstandard | [Historical G2 storage report](<../G2_STORAGE.md>) |
-| G3 | Native scenes with independently sampled particles, meshes and scalar grids; volume/slice/probe/surface rendering and export | [G3 acceptance](<../G3_REPORT.md>) |
-| G3 maintenance | Refresh the live timeline's range as committed union timestamps change | Covered by current native timeline regression tests |
-| G3 playback | Hidden-particle fast path, asynchronous preparation, startup/seek buffering and bounded RAM policies | [Performance maintenance](PERFORMANCE_MAINTENANCE_REPORT.md) |
-| G4 | Selections, native-clock analysis, diagnostics, space-time plots, durable exports and matched runs | [G4 guide](G4_GUIDE.md), [accepted gate](G4_ACCEPTANCE.md) |
-
-Earlier documents sometimes append new checkpoints above obsolete scope tables. This handbook and [current status](CURRENT_STATUS.md) resolve that chronology; a historical “G3 future” paragraph is not current truth.
+New capture integrations use [SceneCapture / SceneReader](../WAVEZ_API.md) and
+[WVZ1](WVZ1_FORMAT.md). The [scene examples](SCENE_CAPTURE_GUIDE.md),
+[scientific analysis guide](ANALYSIS_GUIDE.md), [analysis contract](SCIENTIFIC_ANALYSIS.md)
+and [inspection schemas](ANALYSIS_SCHEMAS.md) describe current behavior.
+[Current status](CURRENT_STATUS.md) records the accepted baseline and boundaries;
+[historical evidence](EVIDENCE_INDEX.md) retains the original verification scope.
 
 ## Viewer shell
 
@@ -56,10 +47,10 @@ existing graceful cancellation request. Closing a job/details form does not
 trigger application exit. See [the exit contract](EXIT_WITH_ACTIVE_JOBS.md).
 In Fullscreen, reveal the top bar to access File.
 
-The accepted [issue-41 shell](UX3_SHELL.md) hosts the
-[issue-42 persistent transport](UX3_TRANSPORT.md). The
-[issue-43 status and Jobs surface](UX3_STATUS.md) is owner-merged.
-[Issue-49 media timing](UX3_MEDIA_TRANSPORT.md) is pending owner review.
+The [production shell](UX3_SHELL.md) hosts the
+[persistent transport](UX3_TRANSPORT.md) and
+[status and Jobs surface](UX3_STATUS.md).
+[Recorded-time media timing](UX3_MEDIA_TRANSPORT.md) controls playback presentation.
 Use Open… in the command bar or empty view. Click the capture name for copyable
 source details. State opens Save/Load view preset directly in the platform file picker; analysis bundles remain separate;
 Export routes to PNG, video and numerical export. View and the viewport buttons
@@ -468,7 +459,7 @@ platform.
 
 For output frame `n`, requested capture time is `start + n × playback_rate / fps`; video time is `n / fps`. The interval is `[start,end)`, with a single frame for a zero-length interval. Samples use the same identity/held policies as inspection. Camera orbits advance by video time, not wall-clock render delays. Source identity and committed extent are pinned; unsupported source changes fail. Optional per-frame state survives successful PNG cleanup.
 
-PNG sequences can be encoded with FFmpeg/H.264. Missing FFmpeg leaves useful PNGs; errors/cancellation retain recoverable job artifacts. Publication refuses overwriting an existing output. Timing is deterministic, while pixel identity across GPUs/drivers is not guaranteed. Full timing, cancellation, output and recovery details: [video contract](<../VIDEO_EXPORT.md>).
+PNG sequences can be encoded with FFmpeg/H.264. Missing FFmpeg leaves useful PNGs; errors/cancellation retain recoverable job artifacts. Publication refuses overwriting an existing output. Timing is deterministic, while pixel identity across GPUs/drivers is not guaranteed. Full timing, cancellation, output and recovery details: [video contract](<VIDEO_EXPORT.md>).
 
 ## Storage and performance
 
@@ -550,17 +541,17 @@ Earlier checkpoints measured a real ~100k-particle capture at roughly 11.8–11.
 
 Budgeted decoded arrays, caches, graphics buffers, temporary transforms and worker memory are separate. They do not sum to a strict process RSS/VRAM ceiling, and the G3 surface cache has no automatic global disk cap. G4 has separate finite
 worker, preview, exact-member and export quotas, including a 2 GiB default disposable
-result cache; see [G4 schemas](G4_SCHEMAS.md). [Format/API limits](CAPTURE_FORMAT_AND_API.md) are the integration preflight reference. No simultaneous heavy CuPy/viewer contention benchmark has been accepted.
+result cache; see [G4 schemas](ANALYSIS_SCHEMAS.md). [Format/API limits](CAPTURE_FORMAT_AND_API.md) are the integration preflight reference. No simultaneous heavy CuPy/viewer contention benchmark has been accepted.
 
 ## Roadmap boundary
 
 G0–G4 are implemented and accepted. G4 reads scientific source values, keeps
 independent native clocks explicit and preserves exact identities; hidden or clipped
-selections remain numerically usable. [The guide](G4_GUIDE.md) distinguishes source
+selections remain numerically usable. [The guide](ANALYSIS_GUIDE.md) distinguishes source
 traces, weighted statistics, field integrals, tracer estimates and exploratory periods.
 G5 local control/optional MCP and G6 events/broader adapters/release work are
 **NOT IMPLEMENTED and NOT STARTED**. No web/dashboard work is authorized.
 New development targets `.wvz` / WVZ1 under the
 [capture format policy](CAPTURE_FORMAT_POLICY.md). The
-[historical roadmap](../SIMSCOPE_NEXT_DESIGN.md) and [historical acceptance registry](../SIMSCOPE_ACCEPTANCE_MATRIX.md)
+[current scientific acceptance registry](SCIENTIFIC_ACCEPTANCE.md) and [UX workflow](UX_WORKFLOW.md)
 do not independently authorize future milestones.

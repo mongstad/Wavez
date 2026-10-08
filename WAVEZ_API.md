@@ -57,7 +57,7 @@ See [explicit integrity verification](docs/PLAYBACK_INTEGRITY.md).
 | Compression | `none` (default) or lossless `zstd`, level 1–6. Python 3.14 has native Zstandard; older Python uses the optional backport. |
 
 The all-channel decoded sample limit is 256 MiB, with additional geometry,
-identity, chunk and index limits in [G3_FORMAT.md](G3_FORMAT.md) and the
+identity, chunk and index limits in [G3_FORMAT.md](docs/WVZ1_FORMAT.md) and the
 [format overview](docs/CAPTURE_FORMAT_AND_API.md). Nonfinite scientific channel
 values remain explicit where supported; positions must be finite. Scalar numeric
 broadcasting and implicit channel aliases are not part of `SceneCapture`.
@@ -160,10 +160,10 @@ G4 never infers physical mass from a channel name or tracer density.
 as arbitrary metadata but are **not** substitutes for those G4 declarations.
 `channel_descriptors` belongs to the existing particle display/range metadata;
 it is separate from G4 scientific channel declarations. See
-[G4 schemas](docs/G4_SCHEMAS.md) for exact metadata and result provenance.
+[G4 schemas](docs/ANALYSIS_SCHEMAS.md) for exact metadata and result provenance.
 
 Selections, statistics, traces, CSV diagnostics, comparisons, inspection recipes
-and exports are described in [the G4 guide](docs/G4_GUIDE.md).
+and exports are described in [the G4 guide](docs/ANALYSIS_GUIDE.md).
 `wavez_export.analysis` and `tools/analyze_selection.py` are internal worker
 interfaces, not a public command service. G5 is not implemented.
 

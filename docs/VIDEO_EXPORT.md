@@ -1,15 +1,14 @@
 # Wavez deterministic video export
 
-## Current contract and G4 extension
+## Source, inspection and selection ownership
 
-G0–G4 are implemented and accepted. Current video jobs require WVZ1 `.wvz`
-sources and `wavez-export-source` identities. The original version-1 job
-contract and historical validation below describe their earlier builds. G4 adds **render job
-v2** and **inspection recipe v3** while retaining scientific payload semantics. Current
-code is in `viewer/video/` and `viewer/analysis/`; see [G4 schemas](docs/G4_SCHEMAS.md)
-and [the G4 guide](docs/G4_GUIDE.md#save-restore-and-export).
+Current video jobs require WVZ1 `.wvz` sources and `wavez-export-source`
+identities. Ordinary jobs use version 1; selection-aware jobs use version 2 and
+inspection recipe v3. Current code is in `viewer/video/` and `viewer/analysis/`;
+see [analysis schemas](ANALYSIS_SCHEMAS.md) and
+[the analysis guide](ANALYSIS_GUIDE.md#save-restore-and-export).
 
-G4 jobs pin the committed source prefix, exact selection members, sampling state
+Selection-aware jobs pin the committed source prefix, exact selection members, sampling state
 and highlight settings, then await sample/selection/surface barriers before each
 frame. Later appends stay outside that prefix; mutation, replacement and truncation
 refuse. PNG/state bundles and per-frame sidecars retain source IDs, units, native
@@ -18,9 +17,8 @@ portable jobs with explicit time/value mappings and a comparison manifest; they
 render sequentially and do not register or rescale geometry. Render and numerical
 export quotas are finite. Export never measures values from GPU colors.
 
-The following implementation investigation and acceptance measurements describe
-their recorded checkpoints, not new post-G4 tests. G5 control/service work is
-unstarted and outside this contract.
+Historical measurements are linked as review records; they do not establish a
+new renderer/platform guarantee. Network/control services remain outside scope.
 
 ## Using Export Video
 
@@ -37,7 +35,7 @@ more closely, while higher values play faster. The numeric timing is unchanged.
 
 Enabled volume legends include the applied opacity strength and ramp, or identify
 opaque slices. The existing **Overlays** control gates those cards with the other
-legends; see [volume legend opacity](docs/VOLUME_LEGEND_OPACITY.md).
+legends; see [volume legend opacity](VOLUME_LEGEND_OPACITY.md).
 
 Choose current camera locked or orbit, current rendering state or a cinematic /
 scientific override, overlays, trails, H.264 quality, and a new `.mp4` output path.
@@ -101,8 +99,8 @@ the existing background analysis job before any renderer is launched. Controls
 remain locked until preparation ends or the worker exits; a terminal-looking
 progress message alone does not release an active worker's configuration. Closing
 the parent viewer still requests cancellation through the existing protocol.
-See [the #125 validation and owner checks](docs/VIDEO_EXPORT_LOCKS.md) and
-[confirmation validation](docs/VIDEO_CANCEL_CONFIRMATION.md).
+See [the #125 validation and owner checks](VIDEO_EXPORT_LOCKS.md) and
+[confirmation validation](VIDEO_CANCEL_CONFIRMATION.md).
 The job directory retains `progress.json`,
 `renderer.log` (UI-launched workers) and `ffmpeg.log` for diagnosis. If writing the
 cancel request fails, the dialog reports the worker PID and retained job path.
@@ -120,7 +118,7 @@ existing refresh behavior. The estimate covers rendering only, not encoding,
 and appears after at least two frames and one observed second. New jobs reset
 the estimate; stage transitions clear it immediately. This presentation uses
 existing refresh calls, with no additional timer or worker polling. See
-[ETA validation and owner checks](docs/VIDEO_ETA.md). A gap longer than the greater of ten seconds or three observed
+[ETA validation and owner checks](VIDEO_ETA.md). A gap longer than the greater of ten seconds or three observed
 average frame durations suppresses the estimate without declaring worker failure.
 Starting/loading, encoding, cancelling, failed and cancelled states have no ETA.
 Completed video or retained complete PNG sequences show zero remaining; terminal
@@ -136,10 +134,9 @@ suppresses trails even if their checkbox is enabled, as in the normal viewer.
 
 ## Architecture and installed Godot capabilities
 
-Audited `main.gd`, `capture_reader.gd`, `project.godot`, existing docs and regression
-tests before changes. The interactive viewer uses frames/second and realtime
-camera motion; those update paths are disabled in the render instance. The
-existing 1440×900 canvas-items window stretch configuration remains unchanged.
+The worker uses the same scene reader and scientific state with offline timing.
+Interactive playback/preparation and realtime camera motion are disabled in the
+render instance. The output SubViewport owns the requested image dimensions.
 
 The installed engine is Godot **4.7.2-stable**, hash
 `ed1daf0bf001b61586d9930840f2f1394092c079`. Its CLI supports `--write-movie` and
@@ -175,17 +172,17 @@ overlay/section state, environment properties and viewport quality settings.
 No physics runs; capture access is read-only. Indexing freezes the available
 complete frames for that job instead of live-tailing the capture.
 
-For standalone Linux release builds, use the [packaged video guide](docs/PACKAGED_VIDEO_EXPORT.md).
+For standalone Linux release builds, use the [packaged video guide](PACKAGED_VIDEO_EXPORT.md).
 The parent starts its own executable without a project-path override. Selection-aware
 exports use Wavez-owned Python resources packaged by `tools/package_linux.py`;
 Python/NumPy and FFmpeg remain external. Each UI launch retains `launch.json`,
 and worker metrics record the actual executable, renderer and user arguments.
 
-## Current SIMSCP4 regression baseline (#116)
+## Offline sampling and validation
 
-[Current audit and validation](docs/VIDEO_REGRESSION.md) cover development-checkout
-exports after the SIMSCP4, caching, preparation and production-UI changes. Earlier
-measurements below retain their historical scope.
+[The #116 audit and validation](VIDEO_REGRESSION.md) records its historical
+development-checkout baseline. [Linux package evidence](PACKAGED_VIDEO_EXPORT.md)
+covers its later launch/resource paths; neither report is a new test run here.
 
 The worker resolves the source sample/schema at the requested export start before
 restoring appearance. A particle or field channel introduced later in a capture
@@ -198,7 +195,7 @@ Offline readers retain strict payload checks for records they read. The worker
 uses the current synchronous scene sampler and bounded decoded cache; interactive
 preparation workers and startup gates are disabled. This does not prepare the
 whole capture or change its bytes, clocks, channel precision or cache architecture.
-Explicit whole-capture verification remains `python tools/verify_ssc.py CAPTURE.ssc`.
+Explicit whole-capture verification remains `python tools/verify_wvz.py CAPTURE.wvz`.
 
 ## Exact timing semantics
 
@@ -257,7 +254,7 @@ settings. The viewport defines which content can enter the frame; it does not
 replace those selections with the current interactive viewer state.
 When the selected state includes the Cinematic sky, its gradient remains fixed
 to the output frame as the export camera orbits. See the
-[cinematic background guide](docs/CINEMATIC_BACKGROUND.md).
+[cinematic background guide](CINEMATIC_BACKGROUND.md).
 
 The offline SubViewport now contains scientific scene content and eligible
 viewport legends only. **Include enabled viewport legends** gates particle,
@@ -265,7 +262,7 @@ field and mesh legends according to their saved visibility and channel state;
 turning it off hides those legends even if the interactive viewer shows them.
 Independent scene guides, probe markers and selection annotations retain their
 own settings. The exported legends use the existing viewport text and color
-mapping, positioned against the full output frame. See [Layer legends](docs/LAYER_LEGENDS.md).
+mapping, positioned against the full output frame. See [Layer legends](LAYER_LEGENDS.md).
 
 Menus, navigation controls, the right workspace dock, transport, timeline,
 status/Jobs, dialogs, desktop decorations and other application chrome remain
@@ -274,9 +271,9 @@ preferences may still be present in an existing job record, but do not affect
 frame pixels. The existing 1440-wide logical canvas scales to the selected
 output dimensions while 3D renders at native resolution. Matching output
 aspect ratio preserves framing; a different aspect ratio follows the camera's
-keep-aspect setting. [Issue #55's overlay evidence](docs/evidence/issue-55/README.md)
+keep-aspect setting. [Issue #55's overlay evidence](evidence/issue-55/README.md)
 records the earlier production-shell composition and remains historical. See
-the [current viewport export evidence and owner checks](docs/VIDEO_VIEWPORT_EXPORT.md).
+the [current viewport export evidence and owner checks](VIDEO_VIEWPORT_EXPORT.md).
 
 Forward+/Vulkan was tested on the RTX 3070 Ti. A functioning graphics display
 connection is required by this installed build: `--headless` selects a dummy
@@ -355,8 +352,8 @@ godot --path /absolute/path/Wavez/viewer --resolution 640x360 \
 ```
 
 A retained job can be copied into a new directory and edited for automation; use
-a fresh output filename and empty frame directory. Version must remain 1. Do not
-add `--write-movie` to this worker command: it would record the small process
+a fresh output filename and empty frame directory. Preserve its recorded job version and source identity fields; selection-aware
+jobs require their version-2 fields. Do not add `--write-movie` to this worker command: it would record the small process
 window and setup iterations, not the export SubViewport.
 
 For comparison, the installed Movie Maker PNG probe used:
@@ -366,11 +363,11 @@ godot --path /tmp/wavez-movie-probe --script probe.gd \
   --resolution 96x64 --write-movie probe.png --fixed-fps 30 --quit-after 2
 ```
 
-Run the rendered acceptance suite from any directory:
+Run focused rendered checks from the repository root:
 
 ```bash
 python tools/validate_video.py --godot /path/to/Godot
-# Focused follow-up coverage (includes the complete UX suite):
+# Extended continuation coverage, only when the changed export path requires it:
 python tools/validate_video.py --godot /path/to/Godot --continuation
 ```
 
@@ -389,22 +386,21 @@ uniqueness, publication conflicts, malformed paths and frame-count overflow.
 
 The native Python regressions run with `python -m unittest discover -s tests`.
 Run the screenshot/export suite with `python tools/validate_video.py --godot /path/to/godot --output-dir results/check-video`. Desktop access/app-data permissions are needed when launching
-Godot from a sandbox. Exported executable packaging and non-Linux platforms have
-not been acceptance-tested in this task.
+Godot from a sandbox. See [the Linux package guide](PACKAGED_VIDEO_EXPORT.md) for packaged launch checks.
+Other OSes require separate validation; historical tests do not certify them.
 
-## Screenshot and trail UX changes
+## Image and recorded history ownership
 
-The first Save PNG (P) action each application session asks for a directory.
-Cancelling saves nothing and does not select a fallback. After selection, later
-screenshots use that directory, with unique timestamped filenames and a visible
-saved-path confirmation. The directory is never persisted to configuration.
+[Save Image](IMAGE_EXPORT.md) describes the current composition and configured
+Image Exports/session-folder ownership. It is separate from the offline video
+range, resolution and output settings.
 
-Recorded History (T) starts disabled. Presets do not turn it on. Disabled trails
-retain no history and allocate no trail instances; T and the checkbox still
-explicitly enable them when persistent IDs are present. Anonymous captures disable
-these controls. Scientific mode suppresses trails as before.
+Recorded History starts disabled. Presets do not turn it on. Disabled history
+allocates no trail instances; the configured shortcut and checkbox enable it
+explicitly when persistent IDs are present. Anonymous captures disable these
+controls. Scientific mode suppresses trails. No trail inference creates IDs.
 
-## v1.0.3 inspection extension
+## Ordinary job inspection and source binding
 
 Ordinary UI-launched jobs bind local source identity and committed extent (see
 below), and use the shared
@@ -413,9 +409,9 @@ remain inspectable in index mode but cannot be physically interpolated/exported.
 The optional per-frame inspection JSON checkbox writes reproducible state records
 in the job directory. Records retain image hashes if successful PNG cleanup is
 requested. Existing end-exclusive timing and version-1 job compatibility remain.
-See [INSPECTION_STATE.md](INSPECTION_STATE.md) for the state and geometry contracts.
+See [INSPECTION_STATE.md](../INSPECTION_STATE.md) for the state and geometry contracts.
 
-### Source changes during export (G2a)
+### Source changes during export
 
 Ordinary exports bind WVZ1/version, scene UUID, metadata SHA-256, the ordered
 80-byte record-header fingerprint, indexed committed extent/record/frame counts,
@@ -433,7 +429,7 @@ path-only identity. This is a current platform limitation.
 This identity is a mutation binding, **not** a whole-capture integrity certificate.
 Every record actually decoded offline still validates descriptors, commit proofs,
 bounds, codecs, structure, stored-chunk and decoded-chunk SHA-256. Unused corrupt
-payloads need not block an unrelated clip. Use `tools/verify_ssc.py` explicitly to
+payloads need not block an unrelated clip. Use `tools/verify_wvz.py` explicitly to
 verify all records. Normal video inspection sidecars reuse the same local binding;
 restore requires that same unchanged source inode. They are not portable
 whole-source certificates. Explicit portable inspection/selection recipes retain
@@ -447,6 +443,6 @@ particle-ID batches, between explicit prefix-hash chunks, and at rendering/encod
 boundaries. Individual codec/hash calls, field preparation, draw/readback and PNG
 writes remain bounded synchronous operations. Parent-close requests the same
 worker cancellation. `metrics.json` separates snapshot/worker identity, opening,
-sampling, readback, PNG and encoding timings. `SIMSCOPE_VIDEO_PROFILE=1` adds bounded
+sampling, readback, PNG and encoding timings. `WAVEZ_VIDEO_PROFILE=1` adds bounded
 strict-read/I/O/hash/decode counters; those nested timings overlap sampling/opening.
-See [the startup regression evidence](docs/VIDEO_STARTUP_116.md).
+See [the startup regression evidence](VIDEO_STARTUP_116.md).

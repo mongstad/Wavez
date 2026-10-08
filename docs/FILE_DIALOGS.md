@@ -21,7 +21,7 @@ save request, passing only the configured MP4 filter. This avoids FileDialog's
 automatically added All files option, which KDE may select as filenames are
 typed. The existing FileDialog remains the embedded fallback and selection
 signal surface. Native navigation and overwrite confirmation still belong to
-the desktop. See [current video usage](../VIDEO_EXPORT.md#using-export-video)
+the desktop. See [current video usage](VIDEO_EXPORT.md#using-export-video)
 and [focused evidence](evidence/issue-283/README.md).
 
 The #50 report below records its original `.ssc` picker and review steps;

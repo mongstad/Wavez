@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "missing_file_detection": true,
+  "missing_heading_detection": true,
+  "duplicate_heading_anchor": true,
+  "fenced_heading_excluded": true,
+  "current_obsolete_branding_rejected": true,
+  "historical_url_does_not_mask_active_branding": true
+}

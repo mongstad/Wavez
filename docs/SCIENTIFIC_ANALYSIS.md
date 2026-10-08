@@ -1,73 +1,48 @@
-# G4 — selections and temporal analysis
+# Scientific selection and analysis contract
 
-> Implementation status: G4a–G4f completed, A01–A23 gate PASS for declared
-> fixtures/workloads. See [final report](G4_REPORT.md) and
-> [acceptance ledger](docs/G4_ACCEPTANCE.md). The approved design and its original
-> pre-implementation audit below remain the contract and historical context.
-> The user accepted G4; G5/G6 have not started.
+This is the living behavioral contract for source-data selection, numerical
+analysis and reproducible inspection. The accepted implementation is in
+`wavez_export/analysis/`, `viewer/analysis/` and `tools/analyze_selection.py`.
+[Schemas and resource limits](ANALYSIS_SCHEMAS.md) specify the private interchange;
+[the user guide](ANALYSIS_GUIDE.md) describes current Tools routes.
+[Scientific acceptance criteria](SCIENTIFIC_ACCEPTANCE.md) preserve the criterion
+IDs and independent oracles. [The original G4 ledger](G4_ACCEPTANCE.md) records its
+historical tests and limits; this document does not claim new runtime validation.
 
-**Status:** Approved implementation contract, 2026-09-12. The user authorized
-G4a–G4f after a separate documentation-consolidation commit is pushed. This
-approval does not claim implementation or passing tests; canonical progress is
-tracked in docs/CURRENT_STATUS.md and docs/EVIDENCE_INDEX.md.
-No G5 service, web work, external simulation work or capture-format change is proposed here.
+## 1. Scope
 
-**Reviewed source:** `10ee69767449f6385060a74a0008db80b3ffe5d0` in the authoritative
-`SimScope/` repository, on `main`. Tracked files were clean at review start; 15
-untracked `viewer/layers/*.gd.uid` files were present and are outside this change.
-The user reports manually verifying G0–G3 after consolidation. This review inspected
-source and documentation; it does not claim new runtime or rendered test results.
+A selection describes what to measure independently of whether it is drawn.
+Requests bind it to an immutable committed source extent, source channels,
+object-native clocks and explicit numerical policies. Renderers consume bounded
+highlight/plot previews and never supply scientific values for analysis.
 
-## 1. Decision and scope
+Supported work includes exact particle cohorts, anonymous sample-local rows,
+mesh object/vertex/face inspection, grid probes and regions, named selections and
+groups, statistics/traces, diagnostic CSV, space-time views, exploratory period
+estimates, matched comparisons and durable numerical/inspection export.
+Automatic event detection, network control and new solver integration require
+separate owner authorization; see [current boundaries](CURRENT_STATUS.md).
 
-Build G4 as a source-data selection and analysis service with a small Godot UI.
-A selection is a versioned description of **what to measure**, independent of
-whether it is currently drawn. An analysis request binds that description to an
-immutable committed source extent, channels, native sample clocks and explicit
-numerical policies. Renderers consume bounded highlight/plot previews; they never
-provide the scientific values used by analysis.
+## 2. Sources and ownership
 
-G4 includes persistent particle cohorts, sample-local anonymous selections, mesh
-object/vertex/face inspection, source-grid probes and spatial regions, multiple
-named selections/groups, source statistics and temporal traces, diagnostic CSV,
-space-time views, exploratory period estimates, matched comparisons, and saved
-state/CSV export. Regional statistics are already required by roadmap §9 and
-acceptance A02–A07; they are not an additional simulation-analysis project.
+Only [WVZ1](WVZ1_FORMAT.md) `.wvz` captures are supported. `SceneCapture` and
+`SceneReader` own typed source arrays, UUID/object identity, record framing and
+checksums. The Python `SourceSnapshot` adapter pins a committed prefix and reads
+selected arrays under the request budget. Object names are namespaces, not
+proof of physical bodies. No selection changes source channels, metadata,
+simulation state, coordinates or committed records.
 
-Keep all A01–A10 goals. Clarify their G2/G3 semantics and add missing regression
-cases; do not drop period estimation or matched comparison just to shorten G4.
-Automatic event detection remains G6. G4 is delivered in reviewable slices G4a–G4f
-below; an early slice does not by itself satisfy the full G4 gate.
+The union timeline is navigation; each object's native records are observations.
+Explicit particle IDs support position interpolation under the wire contract;
+scalars/categories/phase and volumes hold. Mesh interpolation requires identical
+ordered vertex IDs and triangle arrays. Anonymous rows acquire no inferred
+identity. Random access reports identity audit coverage instead of certifying
+unread lifetimes.
 
-## 2. Reconciliation with the current implementation
-
-The source wins when historical prose differs. References below identify existing
-code; proposed filenames in §10 are deliberately separate.
-
-| Subject | Verified current behavior and G4 consequence |
-|---|---|
-| Roadmap/status | [SIMSCOPE_NEXT_DESIGN.md](SIMSCOPE_NEXT_DESIGN.md) is a roadmap. [docs/CURRENT_STATUS.md](docs/CURRENT_STATUS.md) is the consolidated status; do not recreate removed `IMPLEMENTATION_STATUS.md`/`NEXT_ACTIONS.md` files or development copies. |
-| API/format | [WAVEZ_API.md](WAVEZ_API.md) primarily documents frozen v1/v2 APIs. New layered work uses `SceneCapture`/`SceneReader` in [scene.py](wavez_export/scene.py), as described in [G3_FORMAT.md](G3_FORMAT.md), [G3_GUIDE.md](G3_GUIDE.md) and [the current API guide](docs/CAPTURE_FORMAT_AND_API.md). No new SIMSCP magic is needed. |
-| Object identity | SIMSCP3 has a UUID and 1–16 objects, at most one particle object. Particle transforms must be identity; mesh/grid transforms are explicit affine maps. A layer/object identifier is a dataset namespace, not proof of a material body. |
-| Particles | [G3_FORMAT.md](G3_FORMAT.md) and `SceneCapture` / `SceneReader` in [scene.py](wavez_export/scene.py) require exact nonnegative int64 IDs for persistent identity and reject invalid/recycled identity histories. Anonymous data holds and cannot acquire inferred identity. |
-| Random access | Per-sample decoding checks uniqueness/range; it cannot certify unread lifetimes. Python `validate_identity_history()` / `SceneReader.audit_identity()` perform history audits. G4 must expose audit coverage rather than claim that a successful random seek proves continuity. |
-| Time | [scene_reader.gd](viewer/layers/scene_reader.gd) `bracket`, [timeline_sampler.gd](viewer/scene/timeline_sampler.gd), and [scene_layers.gd](viewer/layers/scene_layers.gd) `sample` distinguish the union navigation clock from each object's records. Python `SceneReader.bracket` locates records; it does not implement rendered interpolation. |
-| Sampling | Shared-ID particle positions interpolate; unmatched earlier IDs hold until the next record; births/deaths occur at records. All scalar, categorical and phase channels hold. Mesh interpolation additionally requires identical ordered vertex IDs and triangle arrays. Volumes hold. G4 must not activate the roadmap's formerly proposed optional scalar interpolation. |
-| Meshes | [mesh_view.gd](viewer/layers/mesh_view.gd) may expand face colors and reverse triangle winding for rendering. Neither expanded row numbers nor GPU triangle numbers are source identities. There is no reserved persistent face-ID contract. |
-| Grid/probe | `SceneReader.probe` and [grid_view.gd](viewer/layers/grid_view.gd) use source arrays with trilinear spatial sampling, cell/node bounds and invalid-corner refusal. Python coordinates are float64; Godot `Vector3` coordinates here are float32. GPU LOD never determines a probe's value. |
-| Derived surfaces | [extract_surface.py](tools/extract_surface.py) uses full source grids but explicitly casts algorithm input to float32. Outputs have identity `none`, algorithm/provenance and cache hashes. A level set is not a material boundary. |
-| Playback | [particle_prepare.gd](viewer/layers/particle_prepare.gd), [playback_buffer.gd](viewer/layers/playback_buffer.gd), and [particle_playback.gd](viewer/layers/particle_playback.gd) prepare particles asynchronously. Hidden-particle playback skips payloads. Visible fields/meshes and explicit inspection still have synchronous paths; G4 must not route interval scans through those UI callbacks. |
-| Scientific values | `_frame_from_data` and `_scalar_channels` in [main.gd](viewer/main.gd) retain source channels but also create float32 display positions/velocity magnitudes. Prepared display scalars are rendering helpers. G4 reductions and derived velocity magnitude must start from typed source channels. |
-| Filters | Current particle filters hide types; mapping can also hide invalid/out-of-range markers. These are not a general selection-query language. Current `Normalization.statistics` and `_freeze_interval` are display-range helpers, not a temporal analysis engine. In SIMSCP3, traversing union frames can revisit held particle samples. |
-| Recipes | [INSPECTION_STATE.md](INSPECTION_STATE.md) is the historical G1 particle contract. Current [inspection_state.gd](viewer/scene/inspection_state.gd) writes v1 for particle captures and v2 for SIMSCP3, and both restore paths reject nonempty `selections`. Layer visual state and deterministic export already exist. |
-| Export | [visual_state.gd](viewer/scene/visual_state.gd), [render_job.gd](viewer/video/render_job.gd), and [render_worker.gd](viewer/video/render_worker.gd) share state, pin extent and sample before drawing. Source-prefix SHA-256 hashing is bounded but synchronous. Reuse the contract and move G4-triggered long work off the UI. |
-| Reader costs | Both v3 `read_sample` implementations currently decode all arrays in an object sample. Python scans its own index and rejects a changed source stamp, including append, until refresh. The Godot reader has `pin_extent`; Python needs a tested bounded-prefix read view for G4. Selective arrays/bricks are new work, not an assumed API. |
-
-Keep G0–G3 bytes, limits, validation and writer defaults. Preserve anonymous hold,
-trails off at startup, screenshot destination session behavior, union-index slider
-semantics, one active translucent volume/derived surface, and deterministic video's
-existing half-open time interval. No selection changes source channels, metadata,
-simulation state or committed records.
+GPU positions/scalars/LOD are display helpers. Source probes and reductions use
+original typed arrays, with declared spatial interpolation and precision.
+Selections have their own worker, revisions and quotas; display filters,
+visibility and playback preparation remain independent.
 
 ## 3. Selection model and scientific meaning
 
@@ -79,7 +54,7 @@ keys and revisions identify saved requests.
 
 | Field | Contract |
 |---|---|
-| Source/object | Source reference, format, UUID when present, object ID and kind. A saved request also binds committed bytes and prefix SHA-256. Legacy references use the prefix identity, never a fabricated UUID implying physical identity. |
+| Source/object | Source reference, format, UUID when present, object ID and kind. A saved request also binds committed bytes and prefix SHA-256. The UUID and prefix identity never imply physical identity. |
 | Entity/association | One of `particle_ids`, `sample_rows`, `mesh_object`, `mesh_vertices`, `mesh_faces`, `mesh_point`, `grid_samples`, `probe`, `roi`, `derived_surface`. Association is explicit: particle/vertex/face/grid sample/location. |
 | Selector | Exact ID strings, sample-local indices, a coordinate/geometry predicate, or a derived-artifact reference. No arbitrary code, expression evaluation or metadata-triggered execution. |
 | Time policy | `fixed_cohort`, `sample_local`, `spatial_each_sample`, `fixed_location`, `topology_epoch`, or `static`. Availability is resolved per source record, not remembered from the last visited frame. |
@@ -265,7 +240,7 @@ continuous measured interval. Missing channels at a record are gaps; never carry
 an old channel forward past a record that lacks it. Preserve NaN/Inf distinction
 in value status and excluded counts; unavailable aggregates are null, not zero.
 
-Legacy duplicate/reverse timestamps retain record-index plots and raw times.
+Diagnostic CSV duplicate/reverse timestamps retain record-index plots and raw times.
 Physical-time linking, velocity derivation, period estimation and aligned
 arithmetic are unavailable on those axes; never silently sort or coalesce them.
 Source intervals for statistics are inclusive recorded endpoints, explicitly
@@ -406,7 +381,7 @@ without a defined vector basis.
 
 Diagnostic CSV is an explicit local import with selected time column, value
 columns, units, run/source binding and optional missing interval/max-gap mapping.
-It is a separate read-only series, not a fourth SIMSCP3 object kind. Hash CSV
+It is a separate read-only series, not a fourth WVZ1 object kind. Hash CSV
 bytes and mapping, preserve row order/raw times and missing cells, reject malformed
 rows with line numbers. Nonmonotonic/duplicate axes are index-only as above.
 No arbitrary delimiter guessing that changes values, executable formulas, or
@@ -468,8 +443,8 @@ scikit-image extraction dependency remains optional and is not required for basi
 G4 selection/statistics/plots. If Python/NumPy is unavailable, viewing still works
 and G4 analysis reports the missing capability.
 
-Introduce tested source-only adapters for `CaptureReader` and `SceneReader`, with
-read-only committed-prefix views and channel-selective access. The G4 worker must
+Use the source-only `SourceSnapshot` adapter with read-only committed-prefix
+views and channel-selective access. The G4 worker must
 not share a mutable seek handle with Godot or call `scene_layers.sample` to perform
 an interval analysis. Retain all descriptor/shape/allocation checks, mandatory
 identity/topology validation and requested-chunk checksums. Selective reads cannot
@@ -477,13 +452,13 @@ claim a full payload audit; retain an explicit full-audit mode. Cell/node region
 work may initially assemble one bounded source channel; sparse probe brick reads
 must include all interpolation support and preserve G3's invalid-corner rule.
 
-Both languages need a source-sampling contract independent of rendering. Extract
-the existing Godot bracket/ID/mesh-compatibility policy into a small pure service
-used by selection highlights and current sampling. Mirror that contract in Python
+Both languages use a source-sampling contract independent of rendering. The
+Godot bracket/ID/mesh-compatibility helper is used by selection highlights and
+current sampling. Mirror that contract in Python
 with cross-language golden cases, not two independently evolving interpretations.
 Do not rewrite `main.gd` or the G2 codec to introduce the boundary.
 
-G4a must add Python extent pinning before using it on live captures. A view ends
+Python extent pinning applies before analysis of live captures. A view ends
 at an exact committed record, never refreshes itself into newer records, verifies
 source UUID/prefix identity, and rejects replacement, truncation or changed prefix.
 Append is accepted only if the pinned prefix remains verified; otherwise fail
@@ -530,18 +505,23 @@ measured frame budget. Surface extraction and heavy analysis serialize by defaul
 to avoid doubling peak memory; playback preparation has priority. Opening another
 capture cannot leave an orphan worker or publish old geometry.
 
-### 7.3 Initial budgets to validate, not measured promises
+### 7.3 Resource admission
 
-| Resource | Proposed default/ceiling and response |
-|---|---|
-| Definitions/control | 1 MiB recipe/control JSON retained; at most 256 selections, 64 groups, 256 members/group, 64 predicate terms, 2,048 lasso vertices. Oversized requests fail before allocation. |
-| Materialized members | Up to 1m exact IDs per object as G2; up to 10m anonymous rows as source limits allow. Aggregate selection-member storage capped at 64 MiB of packed entries; duplication counts. UI lists are paged. Large sets use hashed sidecar blobs, not JSON expansion. |
-| Source data | Existing 256 MiB/sample, 4 MiB/chunk and index ceilings unchanged. Worker decoded cache defaults to 64 MiB and can be zero. One sample's needed arrays plus bounded scratch at a time for reductions; two endpoints only for a requested interpolation. |
-| Worker working memory | 512 MiB charged arrays/cache/scratch by default, 1 GiB opt-in ceiling subject to physical headroom. Preflight all copies, masks, sort indices, ID maps and output chunks; refuse jobs that do not fit. Process RSS is measured separately from this charge. Use a provisional 2 GiB process-address-space guard only after runtime preflight; report failures rather than raising it silently. |
-| Viewer result memory | 64 MiB including summaries, paged results and pick structures. At most 16 plotted series and 2,048 preview bins/series; a heatmap at most 1024×512 preview pixels with validity metadata. Preserve gaps/extrema during preview reduction. |
-| GPU overlays | At most 16 MiB within the existing scene GPU budget, with deterministic thinning of highlight geometry if needed. No budget increase or change to underlying volume quality without an explicit reported allocation decision. |
-| Result disk | Default 2 GiB disposable G4 cache and 256 MiB in-flight temporary quota. Stream completed result chunks within a reserved output quota; preflight expected rows/bytes/free space. Explicit export may use a larger declared quota. Evict only unpinned G4-owned cache entries; never source captures, recipes or user exports. |
-| Execution | One active worker request; default 120 s CPU/150 s wall deadline for interactive analyses. Longer explicit batch exports declare a finite deadline/row limit and progress. No unbounded automatic full-run jobs. |
+The exact protocol and allocation limits live in [ANALYSIS_SCHEMAS.md](ANALYSIS_SCHEMAS.md),
+with worker enforcement in `wavez_export/analysis/`. Admission counts retained
+arrays, copies, masks, sort indices, ID maps, output chunks and source metadata.
+Refuse an oversized request; never reduce its scientific population silently.
+Allocation charges and OS process RSS are separate measurements.
+
+| Resource | Current boundary |
+| --- | --- |
+| Definitions/control | 1 MiB control/recipe JSON; bounded selections, groups, predicates and lasso vertices. Validate before allocation. |
+| Exact members | Packed, hashed integer assets; 64 MiB and 512-file ceiling. Large sets remain complete and UI lists are paged. |
+| Source samples | Wire limits remain 256 MiB/sample and 4 MiB raw chunks. Metadata shares the request workspace; see [reader accounting](WAVEZ_METADATA_BUDGET.md). |
+| Worker | 512 MiB default charged workspace; explicit finite CPU/wall deadlines. Runtime address-space guarding follows the current worker preflight. |
+| Viewer/plots | Separate 64 MiB result and 16 MiB overlay allowances; at most 16 series and 2,048 plot bins/series. Inline space-time previews and full spatial requests admit at most 16,384 pixels/bins respectively. |
+| Result disk | Default 2 GiB private disposable cache, 256 MiB result admission and free headroom; 8,192-file ceiling. Only unpinned application-owned cache entries may be evicted. |
+| Export | Explicit finite output quota, including frames, sidecars and assets. Numerical/export limits are documented in the schemas; captures and user exports are never cache-eviction targets. |
 
 Execution deadlines are per request, including checkpointed jobs. A persistent
 process's cumulative OS CPU limit is not a per-request timer: measure request CPU
@@ -556,9 +536,9 @@ escape and never open a source path just because a recipe mentions it. Copy
 Inspection State reports whether referenced assets are required and is not called
 self-contained in that case. Small selections remain inline.
 
-Accounting must include coexistence with G3's default 2 GiB decoded/prepared particle
-cache charge, 512 MiB visible source-pair limit, source-reader LRU, GPU replacement
-resources and process overhead. Do not simply add independent “safe” budgets.
+Accounting must include coexistence with the current [playback preparation](ROLLING_PLAYBACK_CACHE.md)
+reservations, visible source pairs, source-reader LRU, GPU replacement resources
+and process overhead. Do not simply add independent “safe” budgets.
 Reserve analysis headroom before starting a worker job, throttle analysis during
 playback buffer underflow, and refuse oversized analysis rather than degrade the
 scientific population. A 256³ f8 channel is 128 MiB; a value copy, masks and an
@@ -625,13 +605,12 @@ during a request fails; appends never extend a pinned job's interval.
 
 ### 8.2 Inspection recipes and deterministic rendering
 
-Introduce **inspection version 3** for selection/analysis-capable saved state,
-independent of the SIMSCP3 capture version. Continue reading v1 particle and v2
-scene recipes unchanged. Do not reinterpret nonempty selections in old recipes
-that previously rejected them, and do not insert new required fields into old
-visual-state shapes. Introduce a versioned render-job extension/new job version
-when selection overlays are requested; continue accepting version-1 jobs with
-their current defaults and timing behavior.
+**Inspection version 3** stores selection/analysis-capable saved state independently
+of the WVZ1 capture version. Existing v1 particle and v2 scene inspections retain
+their supported field semantics, subject to the current WVZ1 source boundary.
+Selection-aware render jobs use version 2; ordinary version-1 jobs retain their
+current defaults and timing. Current source-kind identifiers and validation live
+in [the inspection contract](../INSPECTION_STATE.md) and [schemas](ANALYSIS_SCHEMAS.md).
 
 The v3 envelope stores existing visual/sample/source state plus selection schema,
 definitions/groups/active selection, overlay settings, plot requests/layout/axis
@@ -659,11 +638,12 @@ arrives first. Hidden selections can have scientific results without forcing
 interactive hidden-particle display preparation. Plot panels are exported
 explicitly; ordinary scene video does not automatically start a full-run analysis.
 
-## 9. Acceptance clarification and proposed fixtures
+## 9. Scientific acceptance and fixtures
 
-[SIMSCOPE_ACCEPTANCE_MATRIX.md](SIMSCOPE_ACCEPTANCE_MATRIX.md) remains the test-ID
-registry. Its G4 section is clarified alongside this document. All G4 cases are
-**NOT RUN**; no implementation is claimed. A01–A10 retain their original purpose:
+[SCIENTIFIC_ACCEPTANCE.md](SCIENTIFIC_ACCEPTANCE.md) is the criterion registry.
+The original [G4 ledger](G4_ACCEPTANCE.md) records the accepted A01–A23 gate for
+its declared fixtures and workstation measurements. A future change runs the
+criteria relevant to its responsibilities; this document grants no new work.
 
 | Existing criterion | Why clarification is needed |
 |---|---|
@@ -672,22 +652,22 @@ registry. Its G4 section is clarified alongside this document. All G4 cases are
 | A03 | G3 supplies actual grids; distinguish a source discrete integral from exact continuum mass and require physical semantics/units. |
 | A04 | G3 supports both node and cell centering plus affine transforms; “voxel inclusion” alone is ambiguous. |
 | A05 | Preserve weighted-statistic intent; specify associations, invalid support and source/reduction precision. |
-| A06 | CSV is not a SIMSCP3 layer kind; import it as a separate explicit clock without changing the format. |
+| A06 | CSV is not a WVZ1 layer kind; import it as a separate explicit clock without changing the format. |
 | A07 | Grid and tracer sources have distinct space-time meanings; native nonuniform times and coverage must survive plotting. |
 | A08 | Preserve exploratory estimation. Automated detection/bookmark generation is G6, consistent with roadmap §11; no removal from G4. |
 | A09 | Preserve matched runs; source-scoped IDs and independently timed layers require explicit selection/time correspondence. Sequential matched rendering reuses G3 and avoids a new multi-scene renderer. |
 | A10 | Unchanged read-only requirement. Include new result/state paths in its exercise. |
 
-Add deterministic generators under proposed `tests/g4/` and
-`tools/make_selection_fixtures.py`; generated bytes/results go into disposable
-`results/g4/` or temporary directories. Proposed fixtures, not files created by
-this planning change:
+Small deterministic fixtures under `tests/g4/`, `examples/g4_demo.py` and the
+focused `tools/validate_*` scripts exercise these oracles. Generated captures and
+results go to temporary directories or ignored `results/`, never into Git.
+The fixture labels below retain the accepted independent-oracle definitions.
 
 | Fixture | Oracle and principal cases |
 |---|---|
 | F01 identity/cadence | Three to eight particles at nonuniform times, shuffled rows, births/deaths, empty sample, IDs around 2^24/2^53/2^63−1; analytic positions and held scalars. Interleave volume times and a late static mesh. Test every endpoint, midpoint, reverse/random seek and after-layer-end hold. A01/A02/A11/A15. |
 | F02 invalid lifetime | Reuse existing G2 mutation helpers to construct independently committed external duplicate/reappearing IDs; writers must still refuse them. A short random seek can inspect a valid record with unaudited status; full-prefix history must report reuse and break longitudinal claims. A11. |
-| F03 anonymous/legacy | VBCOSM1, SIMSCP1 and anonymous v2/v3 with reordered equal counts, count changes, missing channels and duplicate/reverse legacy times. Only sample-local picks and Eulerian statistics; no inferred history or physical-time sorting. A12/A15/A22. |
+| F03 anonymous/time axes | Anonymous WVZ1 objects with reordered equal counts, count changes and missing channels, plus diagnostic CSV duplicate/reverse times. Only sample-local picks and Eulerian statistics; no inferred history or physical-time sorting. A12/A15/A22. |
 | F04 mesh epochs | Static no-ID mesh; deforming stable-ID mesh; reordered IDs with same connectivity; changed connectivity; topology A→B→A; face/vertex channels with different hand values and reflected transform. Face picks map source rows; no epoch resurrection; ID traces survive permissible reorder while geometry holds. A13. |
 | F05 field/probe/ROI | Noncubic f8 analytic linear field and constant field, node/cell centering, anisotropic spacing, off-center origin, rotation/shear/reflection. Whole-grid integrals equal known discrete volume; cell-boundary, cylinder/slab inclusion, invalid/zero-weight corners, geometry change and out-of-domain probes have hand-computed results. A03/A04/A07/A14. |
 | F06 precision/weights | f8 values distinct after f4 rounding; large coordinate offsets with small motion, cancellation `[1e16,1,-1e16]`, all-zero/constant/invalid data, exact large integer scalars, signed values, phase seam, negative/zero/nonfinite weights and missing channels. Independent f64/decimal reference values, recorded tolerances and null/count semantics. A05/A16. |
@@ -701,7 +681,7 @@ The G4 demo uses synthetic particles plus a direct field and a lower-cylinder RO
 a small supplied diagnostic CSV, native traces and a traveling-pulse space-time
 plot. Repeat the exact-integral request on a tracer-only fixture and show refusal.
 External scientific data may be used as optional read-only validation when explicitly selected;
-it is not required to complete G4 and no scientific simulation rerun belongs in this plan.
+it is not required to complete G4 and no scientific simulation rerun belongs in this contract.
 
 One F05 hand oracle uses source shape `(Nz,Ny,Nx)=(2,3,4)`, spacing
 `(0.5,2,3)`, affine determinant magnitude `2`, and constant value `2`.
@@ -717,107 +697,16 @@ Test integer identity and unmodified source bytes exactly. A small actual-render
 test separately validates picking/highlight/plot labels and saved image state on
 Compatibility and Forward+; headless parsing cannot satisfy it.
 
-## 10. Implementation breakdown and recommended order
+Performance review separates idle analysis, selection overlays, ID traces, large
+ROI scans, CSV export and analysis-plus-playback. Record p50/p95/max callbacks,
+callbacks at least 50 ms, request/ready/cancel latency, worker CPU, cache charges,
+viewer/worker RSS, disk quota and GPU usage where available. Include cold/warm
+caches, visibility, mesh transitions and rapid seeks. The original accepted
+100k-particle comparison used a no-unexplained-regression-above-10% target;
+its measured result is workload-specific. Interval decode/hash/reduction must not
+move into UI callbacks, and cache/worker growth must remain bounded across loops.
 
-Module names below are proposals. Keep contracts small and avoid a new framework.
-
-| Slice | Concrete work / likely files | Exit evidence |
-|---|---|---|
-| **G4a — source and request foundation** | Add `simscope_export/analysis/` source adapters, sample-status/request models, pinned-prefix reading and selective source-array access; pure sampler/mesh compatibility helper under `viewer/scene/`; `viewer/analysis/analysis_jobs.gd` and `tools/analyze_selection.py` worker lifecycle. Extract only needed existing functions; preserve readers' validation. Implement golden F01–F06 sampling/audit/precision contracts before UI. | A11–A16/A19/A22 source and race tests; selective/full read parity; append/replacement safety; requests never decode/reduce on UI. |
-| **G4b — definitions, picking and groups** | `viewer/selection/selection_state.gd`, selection UI and bounded highlight renderer; source query/epoch/pick resolution in analysis package. Click/rectangle/lasso, typed filters, all four ROI shapes, probes, mesh scopes, explicit cohort freeze and groups. | F01–F07/F11; A01/A02/A11–A14/A17/A23; verify rendered picking and large-selection limits. |
-| **G4c — numerical traces and regions** | Source entity histories/velocity, per-channel/weighted statistics, quantiles with preflight, particle ROI summaries and node/cell field quadrature, mesh association statistics; streaming typed result store and bounded native-clock plot view. | A02–A05/A10/A15/A16, analytic ROI results, independent clocks and missing channels; compare f4 preview versus f8 source. |
-| **G4d — diagnostics and temporal comparisons** | CSV binding/import, linked native plots, line/slab space-time grids, tracer estimates, manual bookmarks/time offsets, multi-selection/run comparison, exploratory peak intervals/autocorrelation. Sequential matched scene jobs reuse the current renderer. | A06–A09/A15; F08 plus same-ID/different-source comparison and missing-data refusal. |
-| **G4e — durable state and export** | Inspection v3/assets and compatible render-job extension; shared snapshot/validate/apply path; CSV+manifest export, full-result pagination, fixed-extent overlay barriers, matched PNG/short clips. Evolve `inspection_state.gd`, `visual_state.gd`, `render_job.gd`, `render_worker.gd` with explicit version branches. | A09/A10/A18–A20/A23; full state/number round trip and source hashes; old recipes/jobs remain accepted. |
-| **G4f — measured gate and handoff** | Synthetic end-to-end demo, targeted UI polish for selection/status clarity, quota/lifecycle profiling, regression orchestration and documentation updates. No unrelated visual redesign. | All G4 acceptance rows accounted for; renderer evidence and measured resource report; G0–G3 regression results and remaining limitations. |
-
-Recommended order is G4a → G4b → G4c → G4d → G4e → G4f. Define the v3 descriptor
-and export row schemas in G4a even though their UI/durable integration finishes
-in G4e. Deliver source worker plus a small numeric query first, then persistent
-particle selection and one probe as the first end-to-end path; expand entity
-types only after the same contracts pass. Do not implement plots on top of the
-current render scalar cache and attempt to repair provenance later.
-
-## 11. Regression and performance gates
-
-During implementation run focused new tests at each slice, then existing checks
-appropriate to changed responsibilities. Existing entry points inspected in this
-review (these commands are **not run by this documentation-only task**):
-
-```bash
-python -m unittest discover -s tests -v
-python tools/validate_scene.py
-python tools/regression_g3.py --godot /path/to/godot
-python tools/validate_scene_render.py --godot /path/to/godot
-python tools/validate_video.py --godot /path/to/godot --continuation
-python tools/validate_scene_playback.py --godot /path/to/godot --output-dir results/g4/playback --renderer headless
-python tools/validate_scene_timeline.py --godot /path/to/godot --label g4 --renderer gl_compatibility
-```
-
-At the final gate repeat relevant playback/selection/render cases on both actual
-renderers. `regression_g3.py` does not replace all newer playback lifecycle,
-stall-profile and video equality tests. Include
-`viewer/layers/test_scene_playback_lifecycle.gd`, the existing
-`tools/profile_scene_playback.py` harness and `tools/validate_scene_playback_video.py`
-with generated jobs and an explicit pre-G4 baseline viewer. Adapt test manifests
-to available synthetic captures; do not silently depend on external results or
-reintroduce copied historical viewer trees into the repository.
-
-Measure idle G4 disabled, selected overlay only, active single-ID trace, large
-ROI scan, CSV export and scan-plus-playback separately. Include hidden/visible
-particles, held fields, mesh transitions, warm/cold application caches and rapid
-random seeks. Report p50/p95/max UI callbacks, ≥50 ms callbacks, request/ready/cancel
-latency, worker CPU, decoded/prepared cache charge, viewer plus worker RSS/peak,
-disk quota and measured GPU usage where available. Source counts/channels,
-hardware/backend/resolution, effects, intervals and exact revisions accompany
-every measurement.
-
-Retain the roadmap's no unexplained >10% regression target for the audited 100k
-particle workload. Compare G4 idle to the consolidated G3 baseline and active
-analysis to a declared bounded workload; report contention rather than claiming
-universal frame rates. No unbounded memory growth across a long eviction-heavy
-seek/open/close/export loop. New UI callback stalls from analysis decode, hashing,
-sorting or bulk result publication block G4 acceptance. Legitimate buffering is
-shown with requested versus committed time, never hidden by relabeling pixels.
-
-Principal risks and mitigations:
-
-| Risk | Required design response |
-|---|---|
-| Prefix hash and Python full scan on large captures | Worker-only validation with progress/cancel, validated extent cache and compact index; do not trade integrity for speed. Measure cold/warm separately. |
-| Full sample read for one trace | Selective arrays/ID support first; brick-local probes later within G4 where needed. Instrument decoded bytes, not only elapsed time. |
-| ID maps, epoch audits and exact quantiles | Packed representations, bounded audit coverage, preflight sort/mask copies and refusal. No O(particles × times) resident dictionaries. |
-| Multiple independent cache budgets | Admission control against combined live allocations/headroom, one heavy analysis/extraction at a time, no extra VRAM copies of scientific arrays. |
-| Python worker competes with playback | One numeric thread, priority/backpressure, pause analysis during buffer starvation; no inherited simulation workloads. |
-| Plot/selection result explosion | Stream full data, page tables, bound plot bins and IPC, reserve disk quota. Never omit records silently. |
-| GPU/float32 placement precision | Float64 source calculations; distinguish picked camera precision from typed source coordinates; reject unrepresentable highlights without losing numeric results. |
-| Restore/export races | Pin source/selection revisions, validate before mutation, deterministic barriers, discard stale results and test worker failure. |
-
-## 12. Explicit deferred scope and review boundary
-
-**G5:** authenticated local control endpoint, capability/path authorization,
-multi-client command arbitration, optional MCP bridge, recipe command orchestration
-and general automated batches, trusted plugin lifecycle. G4's internal request
-schema is an extension point, not a listening service or public API promise.
-Existing recipe save/load and selection reproducibility stay in G4.
-
-**G6:** automatic event detection, threshold/peak/flux/absorber alarms, automatic
-event bookmarks and bounce alignment, scientific adapter expansion and external
-simulation equivalence studies, broad optional import backends and release-wide
-packaging/long-session validation. G4 exploratory period estimates, manual
-bookmarks, explicit CSV import and matched comparisons are not deferred to G6.
-
-**Beyond G4, without promising a later gate:** inferred trajectories/ID remapping,
-material tracking on remeshed or extracted surfaces, temporal field/phase
-interpolation, arbitrary vector-basis conversion, flow-following probes, exact
-partial-cell ROI clipping, moving-surface flux, vorticity or conservation claims,
-AMR/unstructured fields, general mesh solid-volume integrals, automatic tracer
-field reconstruction, simultaneous multi-scene rendering, and uncapped all-capture
-analytics. These need explicit contracts and evidence before scheduling.
-
-The user has authorized G4a–G4f, with a separate documentation-consolidation
-commit pushed before code begins. Continue through those slices while their
-required gates pass. Stop for review if an approved scientific/architectural
-contract is unsatisfiable, source integrity/resource bounds cannot be preserved,
-a G0–G3 guarantee would be weakened, or a required criterion needs G5/G6 scope.
-No G5/G6 implementation, web/dashboard, solver change or unrelated visual
-enhancement is authorized. Stop after the full G4 gate for the final handoff.
+The historical implementation sequencing and deferred roadmap are retained in
+[the accepted baseline](https://github.com/mongstad/Wavez/blob/ca220d30163d4a76efd652933c8c963a564c315d/G4_DESIGN.md).
+They are not current work authorization. Regression/performance selection follows
+[AGENTS.md](../AGENTS.md) and the live issue scope.

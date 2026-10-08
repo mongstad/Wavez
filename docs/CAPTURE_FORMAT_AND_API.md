@@ -1,6 +1,6 @@
 # Capture format and API
 
-For new layered work, use **WAVEZ Scene Format (`.wvz`, WVZ1)** and explicit `SceneCapture` / `SceneReader`. This is a current overview, backed by the [G3 wire contract](<../G3_FORMAT.md>) and [implementation](<../wavez_export/scene.py>). The [public API](../WAVEZ_API.md) documents the modern entry points.
+For new layered work, use **WAVEZ Scene Format (`.wvz`, WVZ1)** and explicit `SceneCapture` / `SceneReader`. This is a current overview, backed by the [G3 wire contract](<WVZ1_FORMAT.md>) and [implementation](<../wavez_export/scene.py>). The [public API](../WAVEZ_API.md) documents the modern entry points.
 The [capture format policy](CAPTURE_FORMAT_POLICY.md) defines the sole supported
 capture generation. Readers require both `.wvz` and the exact WVZ1 magic and versions.
 
@@ -73,7 +73,7 @@ v2 layer/v1 particle contracts, which remain readable. V3 recipes and render job
 pin the committed source prefix: later appends are excluded, while replacement,
 mutation or truncation refuses. Older recipes can reject an append that changes a
 previously held bracket. Pinned video jobs wait for required surface/sample preparation;
-a changed source cannot silently become a different reproducible inspection. The [inspection contract](<../INSPECTION_STATE.md>), [G3 specification](<../G3_FORMAT.md>) and [video contract](<../VIDEO_EXPORT.md>) retain the detailed versioned provenance schemas.
+a changed source cannot silently become a different reproducible inspection. The [inspection contract](<../INSPECTION_STATE.md>), [G3 specification](<WVZ1_FORMAT.md>) and [video contract](<VIDEO_EXPORT.md>) retain the detailed versioned provenance schemas.
 
 ## Limits and budgets
 
@@ -102,13 +102,13 @@ These budgets are not a whole-process memory estimate. MiB/GiB mean binary units
 
 The GPU layer budget excludes some particle/framebuffer/driver allocations; replacement can temporarily overlap buffers. Decoded arrays, transform staging, worker memory, caches and GPU buffers have distinct lifetimes. The G3 surface cache has no automatic global disk cap. G4 numerical results have
 a separate bounded disposable cache (2 GiB default), finite export quotas and
-separate exact-member asset limits; see [G4 budgets](G4_SCHEMAS.md). Large simultaneous solver/viewer allocations require separate preflight; acceptance does not certify CuPy concurrency.
+separate exact-member asset limits; see [G4 budgets](ANALYSIS_SCHEMAS.md). Large simultaneous solver/viewer allocations require separate preflight; acceptance does not certify CuPy concurrency.
 
 ## Exact source versus displayed representation
 
 Source probes use full stored grids and spatial interpolation. Python/G4 worker
 probe coordinates use float64; the G3 Godot world-coordinate readout uses float32. A probe readout is not a guarantee of last-bit equivalence to an arbitrary source coordinate supplied with more precision.
 
-GPU volumes use float32 and may downsample to endpoint-aligned power-of-two LOD before shader interpolation. Source arrays and probe accuracy are not reduced to that LOD. Marching cubes uses full source resolution but a documented float32 algorithm, with no smoothing/decimation; its surface is approximate and has no persistent material IDs. Nonfinite-corner cells are omitted. Layer limitations include one translucent volume and one derived surface, with bounded ray steps and no empty-space acceleration. Low-level extraction/ray contracts are in [G3_FORMAT.md](<../G3_FORMAT.md>).
+GPU volumes use float32 and may downsample to endpoint-aligned power-of-two LOD before shader interpolation. Source arrays and probe accuracy are not reduced to that LOD. Marching cubes uses full source resolution but a documented float32 algorithm, with no smoothing/decimation; its surface is approximate and has no persistent material IDs. Nonfinite-corner cells are omitted. Layer limitations include one translucent volume and one derived surface, with bounded ray steps and no empty-space acceleration. Low-level extraction/ray contracts are in [G3_FORMAT.md](<WVZ1_FORMAT.md>).
 
 The distinction between stored values, spatial interpolation, temporal holds, GPU conversion and geometric approximation must remain explicit in future APIs and sidecars.

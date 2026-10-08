@@ -1,3 +1,8 @@
+> Historical About/branding implementation record. See the
+> [current About resources](../viewer/ui/about/README.md) for the live WAVEZ
+> identity, links and packaged notices. Original names/validation below remain
+> truthful provenance.
+
 # About SimScope — issue #96
 
 Current menu entry is **Help → About**; the dialog title remains **About WAVEZ**,

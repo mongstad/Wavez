@@ -77,7 +77,7 @@ background-job engine, decoder, cache policy or worker is introduced. The existi
 `panel_width` and `overlay_visible` recipe fields remain readable; rendered dock
 geometry is constrained by available space. Crossing the compact breakpoint
 chooses its 320/360 default. The video worker now reuses this shell under the explicit
-[export overlay contract](../VIDEO_EXPORT.md), independently of desktop visibility. The original shell issue did not implement #42–44; #42 now extends it as linked above.
+[export overlay contract](VIDEO_EXPORT.md), independently of desktop visibility. The original shell issue did not implement #42–44; #42 now extends it as linked above.
 The [#44 report](UX3_REPORT.md) validates the combined shell. UX4, Settings,
 new legends and other backlog polish remain separate.
 

@@ -79,7 +79,7 @@ def main():
     (out/'demo.json').write_text(json.dumps(dict(kind='wavez-g4-synthetic-demo',source=identity,tracer_source=tracer_identity,tracer_field_integral_refusal=refusal,exports=outputs,oracles=dict(field_mass_kg=288,lower_cylinder_mass_kg=144,field_samples=5,particle_times=[0,.5,1.5,3],recorded_velocity_m_s=1,diagnostic_period_seconds=2),source_unchanged=True),indent=2)+'\n')
     (out/'GUIDE.md').write_text('''# Synthetic G4 walkthrough
 
-Open `scene.wvz`, choose **Selections → Use current capture**, and inspect object `p`.
+Open `scene.wvz`, choose **Tools → Selection**, then **Use current capture**, and inspect object `p`.
 Create the exact ID cohort `7,9007199254740993` or the box from (-1,-1,-1) to (1,1,1).
 The cohort follows supplied IDs; the spatial box reevaluates membership. ID 7 is
 absent at 1.5 s and the large ID is absent at 3 s. No missing member becomes zero.

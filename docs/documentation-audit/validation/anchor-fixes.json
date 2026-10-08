@@ -1,0 +1,16 @@
+[
+  {
+    "document": "docs/UX2_REPORT.md",
+    "target": "docs/UX2_THEME_LIBRARY.md",
+    "missing_anchor": "metrics-and-proposed-adjustments-for-review",
+    "baseline": "ca220d30163d4a76efd652933c8c963a564c315d",
+    "fixed": true
+  },
+  {
+    "document": "docs/evidence/issue-175/README.md",
+    "target": "docs/KEYBOARD_SHORTCUTS.md",
+    "missing_anchor": "owner-verification-before-acceptance",
+    "baseline": "ca220d30163d4a76efd652933c8c963a564c315d",
+    "fixed": true
+  }
+]

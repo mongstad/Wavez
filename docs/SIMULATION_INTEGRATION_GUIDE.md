@@ -101,11 +101,11 @@ and `channel_metadata[object_id][channel]`. Arbitrary metadata aliases are not
 unit declarations for analysis. This example declares amplitude-squared density,
 not physical mass density; it cannot claim kilograms. See
 [scientific metadata](../WAVEZ_API.md#metadata-and-g4-analysis) for explicit
-physical declarations and [G4 schemas](G4_SCHEMAS.md) for integral constraints.
+physical declarations and [G4 schemas](ANALYSIS_SCHEMAS.md) for integral constraints.
 
 At requested t=0.5, the particles/mesh have exact samples and the field is held at t=0. At t=0.25, persistent particle positions can interpolate; scalar density stays at t=0. The separate anonymous capture holds its point samples. The field is not temporally interpolated. `SceneReader.bracket()` reports source brackets; it does not itself implement the viewer's identity-aware interpolated geometry.
 
-Open the result with Godot from `WAVEZ` using `godot --path viewer -- --capture=/absolute/path/example.wvz`. Use the installed Godot executable if it is not named `godot` on PATH. Inspect declared guides and source times before assessing the image. The [analytic scene example](<../examples/scene_demo.py>) and [G3 usage evidence](<../G3_GUIDE.md>) cover more rendering options.
+Open the result with Godot from `WAVEZ` using `godot --path viewer -- --capture=/absolute/path/example.wvz`. Use the installed Godot executable if it is not named `godot` on PATH. Inspect declared guides and source times before assessing the image. The [analytic scene example](<../examples/scene_demo.py>) and [G3 usage evidence](<SCENE_CAPTURE_GUIDE.md>) cover more rendering options.
 
 ## External-engine boundary
 

@@ -1,3 +1,9 @@
+> Historical SIMSCP/SSC operating and measurement record. The original content
+> below retains its run context; those formats/commands are retired. Current WVZ1
+> work uses the [format/API guide](CAPTURE_FORMAT_AND_API.md),
+> [reader metadata contract](WAVEZ_METADATA_BUDGET.md), and
+> [current playback/preparation links](CURRENT_STATUS.md#current-sources-of-truth).
+
 # PR #101 channel-switch stability triage
 
 The reported failure is a regression in PR #101's full-field preparation

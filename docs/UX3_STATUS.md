@@ -31,7 +31,7 @@ including its outside expansion; normal, hover and focus states fit in the strip
 The scientific viewport, projection, rendering, sampling and clocks are unchanged.
 Offline viewers construct the same production shell after #55/#59. Their automatic
 presentation processing is disabled; the video worker refreshes it explicitly
-after committed samples under the [export overlay contract](../VIDEO_EXPORT.md).
+after committed samples under the [export overlay contract](VIDEO_EXPORT.md).
 
 Status reads existing open/loading, particle/field/mesh readiness and committed
 layer availability. No capture, Preparing…, Ready and Unavailable are distinct.
@@ -67,7 +67,7 @@ elapsed time from the published snapshot. The shared render ETA smooths observed
 frame costs over five seconds and caches its display for 500 ms; unchanged values
 retain their text. Stage changes bypass that cadence. No additional timer or file
 polling is used; see [ETA validation](VIDEO_ETA.md).
-See [video progress semantics](../VIDEO_EXPORT.md) for initial, stale-progress,
+See [video progress semantics](VIDEO_EXPORT.md) for initial, stale-progress,
 encoding and terminal states.
 Cancellation acknowledgement, parent shutdown, overwrite refusal, separate
 worker architecture and FFmpeg recovery are unchanged. The worker taskbar entry

@@ -27,7 +27,7 @@ on wall-clock scheduling. The existing worker remains the sole render-job owner.
 
 ## Defined overlay contract
 
-See [VIDEO_EXPORT.md](../../../VIDEO_EXPORT.md#4k-and-rendering-quality).
+See [VIDEO_EXPORT.md](https://github.com/mongstad/Wavez/blob/ca220d30163d4a76efd652933c8c963a564c315d/VIDEO_EXPORT.md#4k-and-rendering-quality).
 
 - **On:** current command bar, camera controls, right dock/workspace, transport,
   status and Jobs; existing section/visual settings plus the captured workspace

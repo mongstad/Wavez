@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "wheel": "wavez_export-4.0.0-py3-none-any.whl",
+  "sha256": "9c88dcc466f361487af261340c391d15bfc39fd3ed096d315a64f0c4e23f010a",
+  "installed_in_temporary_target": true,
+  "python_source_files_unchanged": 38,
+  "examples": [
+    {
+      "document": "WAVEZ_API.md",
+      "status": "PASS",
+      "wvz1": true,
+      "source_unchanged": true
+    },
+    {
+      "document": "docs/SIMULATION_INTEGRATION_GUIDE.md",
+      "status": "PASS",
+      "wvz1": true,
+      "source_unchanged": true
+    },
+    {
+      "document": "docs/SCENE_CAPTURE_GUIDE.md",
+      "status": "PASS",
+      "wvz1": true,
+      "source_unchanged": true
+    }
+  ]
+}
