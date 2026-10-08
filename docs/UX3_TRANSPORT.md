@@ -32,7 +32,7 @@ constructs its canonical buttons and slider, bound to the existing controllers a
 readiness state. Issue #59 removes the hidden inspector Seek/rate form and its
 obsolete presentation snapshot entries. Retired mode/index-rate controls remain
 absent. Offline export uses this same transport under the explicit
-[export visibility contract](../VIDEO_EXPORT.md), with refresh after committed
+[export visibility contract](VIDEO_EXPORT.md), with refresh after committed
 samples. See the [ownership audit and UX4 handoff](UX3_UI_OWNERSHIP.md).
 
 The slider selects sorted union timestamp indices. Equal slider distances do not

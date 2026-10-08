@@ -1,9 +1,12 @@
-# G4 internal interchange
+# Analysis and inspection interchange schemas
 
-Source and selection schemas are implemented through G4b, including exact member
-assets and derived-artifact inspection. Native numerical jobs and result storage are implemented in G4c; native plots are connected to the viewer. Comparisons/space-time are implemented. G4e numerical export and inspection v3 are implemented; selection-aware single-scene PNG/video is implemented; matched rendering follows. See [the checkpoint report](../G4_REPORT.md).
-The governing semantics and limits remain [G4_DESIGN.md](../G4_DESIGN.md).
-These are private file/message formats, with no executable expressions or service.
+These private file/message formats implement selections, source-native numerical
+jobs, diagnostics/comparisons, space-time plots, durable numerical export,
+inspection v3 and selection-aware PNG/video, including matched rendering.
+They carry no executable expressions or service endpoint. Governing behavioral
+semantics are in [the scientific contract](SCIENTIFIC_ANALYSIS.md).
+The current implementation lives in `wavez_export/analysis/`, `viewer/analysis/`
+and `viewer/video/`; historical slice evidence is in [the G4 ledger](G4_ACCEPTANCE.md).
 
 ## Exact primitives and source identity
 
@@ -58,7 +61,7 @@ terminate stale work. This is not a public command API.
 
 ## Selection definition version 1
 
-The v3 recipe selection block will contain `version: 1`, `revision`, `active`,
+The v3 recipe selection block contains `version: 1`, `revision`, `active`,
 `definitions`, `groups`, and `overlay`. Each definition has `key`, `revision`,
 `name`, `source`, `object`, `kind`, `association`, `time_policy`, `selector`,
 `coordinates`, `predicate`, `creation`, `missing_policy`, and `display`.

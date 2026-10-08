@@ -6,7 +6,7 @@ the native viewer, video export and current tools read it. Public file entry
 points require a `.wvz` path and validate the exact WVZ1 bytes. The 16-byte
 little-endian prefix is `<8sII>` with magic `b'WVZ1\0\0\0\0'`, unsigned version
 1 and metadata length; metadata JSON version is 1. Records use `FRM1` and
-`COMMIT1\0`. See the [wire contract](../G3_FORMAT.md) and [Python API](../WAVEZ_API.md).
+`COMMIT1\0`. See the [wire contract](WVZ1_FORMAT.md) and [Python API](../WAVEZ_API.md).
 
 The alpha-stage migration is a clean break. Old `.ssc` data, SIMSCP4 signatures,
 old source pins and retired SimScope serialized kinds are refused. Renaming a

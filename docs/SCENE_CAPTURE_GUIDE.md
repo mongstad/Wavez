@@ -1,17 +1,16 @@
-# G3 quick guide
+# Scene capture and rendering examples
 
-Work in the authoritative `WAVEZ` repository. Bulk historical material is in the external backup.
-Generate a small analytic field, explicit-ID tracers, a deforming mesh and declared
+Work in the authoritative `WAVEZ` repository. Generate a small analytic field, explicit-ID tracers, a deforming mesh and declared
 demonstration guides. Captures are not shipped in Git. These are synthetic data,
 not a reconstruction from a real tracer capture. New work targets `.wvz` / WVZ1
-under the [capture format policy](docs/CAPTURE_FORMAT_POLICY.md).
+under the [capture format policy](CAPTURE_FORMAT_POLICY.md).
 
 ```bash
 python -m examples.scene_demo --small
 /path/to/godot --path viewer -- --capture="$PWD/results/g3/small.wvz"
 ```
 
-Use **Scene layers → Settings** for visibility, scalar channel, range, colormap,
+Use the **Simulation → Particles / Fields / Meshes** controls for visibility, scalar channel, range, colormap,
 volume opacity mapping/strength/step, slice orientation/distance, clipping and
 isosurface threshold. Volume color ranges and opacity thresholds are independent.
 For signed fields, choose **Magnitude • absolute scalar**, a non-negative
@@ -20,7 +19,7 @@ below the zero threshold are transparent; the full threshold reaches the selecte
 **Opacity / world unit** strength, not necessarily an opaque pixel. Use a symmetric
 color range and a diverging colormap to distinguish sign. This is an explicit
 display choice; it changes neither source values nor probes. Fresh views use
-linear opacity thresholds 0–1. See [volume mapping](docs/VOLUME_OPACITY_MAPPING.md)
+linear opacity thresholds 0–1. See [volume mapping](VOLUME_OPACITY_MAPPING.md)
 for the exact formula, persistence and legacy recipe behavior.
 
 Volume color bounds remain fixed across playback. Edit them manually, or use
@@ -30,7 +29,7 @@ are explicit display choices; clipping and the source finite range are disclosed
 beside the controls. **Logarithmic color** requires positive bounds and positive
 finite source values; invalid samples are unavailable rather than silently
 remapped. **Reset color • linear 0–1** preserves opacity settings. See
-[volume normalization](docs/VOLUME_COLOR_NORMALIZATION.md) for policy, limits and
+[volume normalization](VOLUME_COLOR_NORMALIZATION.md) for policy, limits and
 validation, including the distinction between frozen and interval-derived bounds.
 For explicit starting views, select **Dense core**, **Faint structure** or
 **Signed field**, then **Apply volume display preset from sample**. Dense core
@@ -39,7 +38,7 @@ opacity. Faint structure uses the displayed percentile entries (set them
 explicitly, for example 1 and 99); both its color and opacity can saturate cores.
 These opt-in actions freeze explicit color/opacity settings, preserve strength
 and ray step, and leave manual controls available. They do not change particles
-or the scene Viewing preset. See [display presets](docs/VOLUME_DISPLAY_PRESETS.md)
+or the scene Viewing preset. See [display presets](VOLUME_DISPLAY_PRESETS.md)
 for exact settings, evidence and limitations. Expand **What do these controls
 change?** for the distinction between the five display concerns.
 
@@ -60,8 +59,8 @@ targets the tested Linux Python runtime. NumPy capture writing/reading and Godot
 meshes, volumes, slices/probes work without this extra. Missing dependencies produce
 an extraction error while the rest of the viewer remains usable.
 
-G4 adds selections, full-source numerical analysis and durable result export;
-see the [G4 guide](docs/G4_GUIDE.md). Its Python/NumPy worker does not require
+Selections, full-source numerical analysis and durable result export are described
+in the [analysis guide](ANALYSIS_GUIDE.md). Its Python/NumPy worker does not require
 the optional surface-extraction extra.
 
 ## Write actual data
@@ -95,7 +94,7 @@ for optional lossless compression. Add a mesh with `add_mesh(id, time, positions
 triangles, vertex_channels=..., face_channels=...)`. Positions are float Nx3;
 triangle indices are integers Mx3. For fixed-topology animation declare
 `identity="stable_topology"` and provide explicit int64 `vertex_id` in vertex_channels.
-No IDs means held samples. Read [G3_FORMAT.md](G3_FORMAT.md) for precise limits.
+No IDs means held samples. Read [the wire contract](WVZ1_FORMAT.md) for precise limits.
 
 ## Import saved NPZ grids explicitly
 

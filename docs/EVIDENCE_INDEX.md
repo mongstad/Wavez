@@ -1,5 +1,11 @@
 # Retained evidence
 
+These are historical review-time records. Their pending/accepted wording and old
+format/source names describe the recorded checkpoint, not current Project state.
+Use [current status](CURRENT_STATUS.md) for supported contracts and boundaries.
+[The documentation audit](documentation-audit/README.md) records retired paths;
+Git permalinks preserve their original context.
+
 - [Issue #214 — LMB vertical inversion preference](evidence/issue-214/README.md): inline On/Off and editable hotkey, staged/reset/restart behavior, continuous tumble and unchanged navigation in both source renderers and the same Linux package.
 
 - [Issue #295 — Superseded load-error recovery](evidence/issue-295/README.md): reproduced duplicate Scene/Open file ownership, recovery/icon/details checks, unrelated Jobs/diagnostics, both native renderers and normal/compact layouts.
@@ -164,8 +170,8 @@ Earlier slice entries below retain their checkpoint-specific pending status.
 Historical measurements are not new validation. Raw datasets, plots, trace logs and archive
 packages were removed during consolidation and remain in the user’s external backup.
 
-- [G3 contract](../G3_FORMAT.md) and [implementation report](../G3_REPORT.md).
-- [G4 implementation checkpoints](../G4_REPORT.md), [G4a source/protocol evidence](evidence/g4a/foundation.json). Historical slice evidence; final G4 acceptance is recorded above.
+- [G3 contract](WVZ1_FORMAT.md) and [implementation report](https://github.com/mongstad/Wavez/blob/ca220d30163d4a76efd652933c8c963a564c315d/G3_REPORT.md).
+- [G4 implementation checkpoints](https://github.com/mongstad/Wavez/blob/ca220d30163d4a76efd652933c8c963a564c315d/G4_REPORT.md), [G4a source/protocol evidence](evidence/g4a/foundation.json). Historical slice evidence; final G4 acceptance is recorded above.
 - [Initial G4b selection evidence](evidence/g4b-initial/selection.json): numerical/picking tests and the initial viewer path on both renderers; G4b remains in progress.
 - [G4c native backend evidence](evidence/g4c/native-backend.json): 158 Python tests; full G4 and plot/render integration pending.
 - [G4c temporal viewer evidence](evidence/g4c/temporal-viewer.json): native plots/full tables on both renderers, 163 Python tests, 2,457 G3 playback checks; whole G4 gate pending.

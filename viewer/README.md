@@ -10,12 +10,11 @@ godot --path viewer -- --capture=/absolute/file.wvz
 ```
 
 See the [Quickstart](../QUICKSTART.md), [Python API](../WAVEZ_API.md),
-[scene format](../G3_FORMAT.md), [G4 guide](../docs/G4_GUIDE.md), and
+[scene format](../docs/WVZ1_FORMAT.md), [analysis guide](../docs/ANALYSIS_GUIDE.md), and
 [capture format policy](../docs/CAPTURE_FORMAT_POLICY.md).
 
-The [production shell](../docs/UX3_SHELL.md) adds Open, State, Export, View and
-Help above one right-hand dock. Scene retains the inspector; the other workspaces
-provide entry points to its existing control groups. The
+The [production shell](../docs/UX3_SHELL.md) hosts command menus, a right-hand
+Particles / Fields / Meshes Simulation panel and focused Tools. The
 [persistent transport](../docs/UX3_TRANSPORT.md) keeps playback, union sample index,
 elapsed/total/remaining playback time, Seek…, Playback speed and Loop below
 the viewport. Playback uses recorded time only. [Media timing](../docs/UX3_MEDIA_TRANSPORT.md) is nominal at 1×; exact
@@ -25,13 +24,13 @@ The [40-pixel status line and Jobs action](../docs/UX3_STATUS.md) remain availab
 with the dock hidden. Details exposes readiness diagnostics; Jobs reopens existing
 operations, exposes supported cancellation and retains output/failure details.
 
-F1 hides/restores the resizable dock and legend; Space pauses; Left/Right
-steps; left-drag tumbles continuously through full revolutions in either direction;
-right-drag steers the camera heading in place on both axes under the accepted
-#258 controls. Held Orbit Camera Left/Right keys provide target-relative
-horizontal orbit about the current screen-up axis, across all scene types;
-wheel zooms; F11 toggles fullscreen, hiding the top command bar until exit;
-maximized windows keep the bar. F frames the scene and R resets the camera.
+Space pauses; Left/Right steps; left-drag tumbles continuously through full
+revolutions in either direction. Right-drag steers the camera heading in place
+on both axes. Held Orbit Camera Left/Right keys provide target-relative horizontal
+orbit about the current screen-up axis. Wheel zooms; F11 toggles Fullscreen,
+with edge reveal providing access to temporarily unpinned controls. Esc exits;
+normal-window pin preferences restore. F1 has no panel-hide action. F frames the
+scene and R resets the camera. Bindings are editable in Keyboard Shortcuts.
 The [Invert Y Axis preference](../docs/LMB_Y_INVERSION.md) in Keyboard Shortcuts
 adds a persistent On/Off toggle beside its hotkey field. It reverses only the
 vertical LMB component; current RMB steering remains unchanged.

@@ -110,5 +110,5 @@ review of compactness, focus/capture feel, labels, duplicate transfer and the
 saved profile remains required; automated PASS is not acceptance.
 
 Exact hands-on steps and defaults are in
-[Keyboard Shortcuts](../../KEYBOARD_SHORTCUTS.md#owner-verification-before-acceptance).
+[Keyboard Shortcuts](../../KEYBOARD_SHORTCUTS.md#original-175-owner-verification-record).
 No later issue, merge, auto-merge or board-completion action is authorized here.

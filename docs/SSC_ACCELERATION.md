@@ -1,3 +1,9 @@
+> Historical SIMSCP/SSC operating and measurement record. The original content
+> below retains its run context; those formats/commands are retired. Current WVZ1
+> work uses the [format/API guide](CAPTURE_FORMAT_AND_API.md),
+> [reader metadata contract](WAVEZ_METADATA_BUDGET.md), and
+> [current playback/preparation links](CURRENT_STATUS.md#current-sources-of-truth).
+
 # SSC generation and preparation investigation — issue #102
 
 Pending owner review; baseline is owner-merged PR #101, `573c097`.
@@ -33,7 +39,7 @@ be re-exported to use this branch. A separate converter is not part of #102.
 
 ## Wire layout and implementation
 
-See [the complete wire contract](../G3_FORMAT.md). SIMSCP4 retains independently
+See [the complete wire contract](https://github.com/mongstad/Wavez/blob/ca220d30163d4a76efd652933c8c963a564c315d/G3_FORMAT.md). SIMSCP4 retains independently
 committed object records: 16-byte prefix plus bounded JSON metadata, 80-byte fixed
 record header, descriptor, payload and 48-byte commit. The new magic, prefix/
 metadata version and record/commit tags explicitly identify version 4. Timestamps

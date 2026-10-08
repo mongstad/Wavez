@@ -1,7 +1,7 @@
 # Selections and temporal analysis
 
-G4 operates on immutable source values and explicit capture identities. Open a
-capture, then choose **Selections → Use current capture**. The worker pins its
+Scientific analysis operates on immutable source values and explicit capture identities. Open a
+capture, then choose **Tools → Selection**, then **Use current capture**. The worker pins its
 committed bytes and checksum. New appended samples require a deliberate new
 binding; they do not silently extend a saved analysis or render job.
 
@@ -138,7 +138,7 @@ check; disk headroom is not a reservation against other applications.
 
 ```bash
 python -m examples.g4_demo --output results/g4-demo
-godot --path viewer -- --capture=/absolute/path/to/results/g4-demo/scene.ssc
+godot --path viewer -- --capture=/absolute/path/to/results/g4-demo/scene.wvz
 ```
 
 The new output includes `GUIDE.md`, supplied diagnostic CSV, exact selection
@@ -146,8 +146,8 @@ definitions and eight complete numerical exports. The independent field-mass ora
 is 288 kg at five native times; the lower-cylinder ROI contains 144 kg. The
 tracer-only fixture refuses an original-field mass integral and exports labeled
 sample means. The supplied diagnostic period is 2 seconds.
-See [the acceptance registry](../SIMSCOPE_ACCEPTANCE_MATRIX.md),
-[schemas](G4_SCHEMAS.md) and [checkpoint report](../G4_REPORT.md).
+See [the acceptance registry](SCIENTIFIC_ACCEPTANCE.md),
+[schemas](ANALYSIS_SCHEMAS.md) and [historical gate](G4_ACCEPTANCE.md).
 
 G5 local control/services/command orchestration and G6 automatic event detection
 remain deferred. Web dashboards, external solver work and unrelated visual changes

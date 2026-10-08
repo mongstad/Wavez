@@ -46,7 +46,7 @@ Review the following implementation decisions before freezing UX2:
 5. Immediate native state changes are retained in UX2. The proposed 80/60 ms motion tokens are present but not animated; adjacent-tooltip timing and reduced-motion preferences remain later interaction work. This is an explicit review adjustment, not a claim that those motion details are implemented.
 6. The tested Godot decimal parser disagrees with **137/300** independent float64 references, including valid subnormals turning into zero and halfway mantissas rounding incorrectly. The new field uses a bounded integer-limb decimal-to-binary64 parser with ties-to-even, validated against all 300 references. It refuses overlong/non-finite/overflow/underflow-to-zero drafts; no production parser is replaced.
 
-Details and usage contracts are in the [theme guide](UX2_THEME_LIBRARY.md#metrics-and-proposed-adjustments-for-review); individual numeric mismatches and corrected reference checks are retained in [validation evidence](evidence/ux2/validation.json).
+Details and usage contracts are in the [theme guide](UX2_THEME_LIBRARY.md#accepted-ux2-metrics-and-implementation-adjustments); individual numeric mismatches and corrected reference checks are retained in [validation evidence](evidence/ux2/validation.json).
 
 ## Validation performed
 

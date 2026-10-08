@@ -1,3 +1,9 @@
+> Historical SIMSCP/SSC operating and measurement record. The original content
+> below retains its run context; those formats/commands are retired. Current WVZ1
+> work uses the [format/API guide](CAPTURE_FORMAT_AND_API.md),
+> [reader metadata contract](WAVEZ_METADATA_BUDGET.md), and
+> [current playback/preparation links](CURRENT_STATUS.md#current-sources-of-truth).
+
 # SSC capture fidelity and parameter inventory — #102
 
 The measurement boundary is **simulation fidelity → capture/export policy → SSC

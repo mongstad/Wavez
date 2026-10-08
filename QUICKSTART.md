@@ -18,7 +18,7 @@ recorded time. Optional surface extraction uses scikit-image;
 Zstandard uses the standard library on Python 3.14+ or the declared backport.
 Use `SceneCapture` for all new integrations; see [integration](docs/SIMULATION_INTEGRATION_GUIDE.md)
 and [public API](WAVEZ_API.md). G4 selections and analysis
-use Python/NumPy; follow [the G4 guide](docs/G4_GUIDE.md) or generate its synthetic
+use Python/NumPy; follow [the G4 guide](docs/ANALYSIS_GUIDE.md) or generate its synthetic
 walkthrough with `python -m examples.g4_demo --output results/g4-demo`.
 
 Wavez does not require any scientific-simulation checkout. Optional external

@@ -8,7 +8,7 @@ Inspection operates on WVZ1 particles, meshes and scalar fields with independent
 source clocks. Scene recipes use version 2; G4 durable inspection uses version 3
 with exact selections, groups, analysis results, bookmarks and source provenance.
 These state versions are independent of the capture format. See
-[G4 schemas](docs/G4_SCHEMAS.md), [the G4 guide](docs/G4_GUIDE.md) and
+[G4 schemas](docs/ANALYSIS_SCHEMAS.md), [the G4 guide](docs/ANALYSIS_GUIDE.md) and
 [the handbook](docs/WAVEZ_HANDBOOK.md).
 
 Playback uses recorded time only. Recipes retain the exact signed `physical_rate`;
@@ -166,4 +166,4 @@ UUID/header fingerprints, committed extent/counts and a high-resolution local
 filesystem stamp. They restore only against the same unchanged local source;
 they do not require a whole-source payload hash. This avoids an implicit extra
 100+ GiB pass when frame JSON is enabled. Explicit portable inspection recipes
-retain their existing SHA-256 contract. See [VIDEO_EXPORT.md](VIDEO_EXPORT.md).
+retain their existing SHA-256 contract. See [VIDEO_EXPORT.md](docs/VIDEO_EXPORT.md).

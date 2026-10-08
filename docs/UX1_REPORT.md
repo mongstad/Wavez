@@ -35,7 +35,7 @@ New audit-only tooling: [audit_ux1.gd](../tools/audit_ux1.gd) and [summarize_ux1
 
 New retained evidence: `docs/evidence/ux1/` contains the evidence guide, inventory/summary, palette calculations, baseline file hashes, native logs/HUD geometry, documentation validation, repository review and 15 PNGs. Generated `.ssc` fixtures and bulky per-state output stay ignored under `results/ux1/`.
 
-Updated navigation/status: [README](../README.md), [current status](CURRENT_STATUS.md), [evidence index](EVIDENCE_INDEX.md), [UX milestone table](../UX_IMPLEMENTATION_PLAN.md). The [handbook](WAVEZ_HANDBOOK.md#recipes-png-and-deterministic-video) corrects a stale recipe-support sentence to the existing native v2 scene / v3 G4 contract. The historical retirement report and frozen evidence were not rewritten.
+Updated navigation/status: [README](../README.md), [current status](CURRENT_STATUS.md), [evidence index](EVIDENCE_INDEX.md), [UX milestone table](https://github.com/mongstad/Wavez/blob/ca220d30163d4a76efd652933c8c963a564c315d/UX_IMPLEMENTATION_PLAN.md). The [handbook](WAVEZ_HANDBOOK.md#recipes-png-and-deterministic-video) corrects a stale recipe-support sentence to the existing native v2 scene / v3 G4 contract. The historical retirement report and frozen evidence were not rewritten.
 
 ## Behavior changed and preserved
 

@@ -6,23 +6,12 @@ Wavez is a NumPy-first scientific capture and Godot visualization platform for
 particles, meshes and uniform-grid scalar fields. New integrations use
 `SceneCapture` / `SceneReader` and WAVEZ Scene Format (`.wvz`, WVZ1).
 
-G0–G4 are implemented and accepted. The current viewer includes deterministic
-video export, scientific inspection/analysis, bounded playback preparation, and
-particle/mesh/volume rendering. UX1 and UX2 are accepted. The accepted UX3
-[production shell](docs/UX3_SHELL.md) now hosts the [persistent transport](docs/UX3_TRANSPORT.md)
-and [persistent status and Jobs](docs/UX3_STATUS.md). Recorded-time playback,
-[media timing](docs/UX3_MEDIA_TRANSPORT.md), [delayed seek feedback](docs/UX3_TRANSIENT_STATUS.md),
-[immersive fullscreen](docs/UX3_FULLSCREEN.md) and production-shell video overlays
-are owner-merged, including final [UX3 integration validation](docs/UX3_REPORT.md)
-in PR #64. The [UX4 design](docs/UX4_DESIGN.md) was owner-merged in PR #72.
-The current candidate [video composition](docs/VIDEO_VIEWPORT_EXPORT.md) exports
-viewport science and enabled legends without application chrome.
-[UX4 command menus](docs/UX4_MENUS.md) were owner-merged in PR #73.
-The [category simulation panel](docs/UX4_PANEL.md) was owner-merged in PR #75.
-[Focused scientific tools](docs/UX4_TOOLS.md) are pending owner review under #69.
-
-The historical [branding migration](docs/BRANDING_MIGRATION.md) records the
-earlier product rename. The [current format policy](docs/CAPTURE_FORMAT_POLICY.md)
+The current viewer provides deterministic video export, scientific
+inspection/analysis, bounded playback preparation and particle/mesh/volume
+rendering. The production shell includes recorded-time playback, status/Jobs,
+Fullscreen, command menus, a category Simulation panel and focused Tools.
+See [current status](docs/CURRENT_STATUS.md) for the accepted baseline, supported
+contracts and scope boundaries. The [format policy](docs/CAPTURE_FORMAT_POLICY.md)
 defines the WVZ1-only workflow.
 
 Start with:
@@ -58,13 +47,17 @@ Start with:
 - [Portable view presets](docs/WAVEZ_VIEW_PRESETS.md)
 - [Wavez handbook](docs/WAVEZ_HANDBOOK.md)
 - [Python API](WAVEZ_API.md)
-- [Capture format](G3_FORMAT.md)
+- [Capture format](docs/WVZ1_FORMAT.md)
 - [Simulation integration guide](docs/SIMULATION_INTEGRATION_GUIDE.md)
 - [WVZ1 implementation validation and owner checks](docs/WVZ1_IMPLEMENTATION_VALIDATION.md)
 
-The [UX implementation plan](UX_IMPLEMENTATION_PLAN.md) and retained validation
-reports describe their original development checkpoints. Their old capture names
-and commands are historical; use the current guides above for WVZ1 workflows.
+The [UX workflow](docs/UX_WORKFLOW.md) defines presentation/review boundaries.
+[Retained evidence](docs/EVIDENCE_INDEX.md) describes original development
+checkpoints; their old capture names and commands remain historical. Use the
+current guides above for supported workflows.
+
+The [documentation audit](docs/documentation-audit/README.md) records the cleanup
+and stable contract locations ahead of the separate public README and onboarding work.
 
 Repository layout:
 
@@ -73,7 +66,7 @@ Repository layout:
 - `examples/` — small repository-owned examples
 - `tests/` — Python regression tests
 - `tools/` — validation, profiling and external-input adapters
-- `docs/` — current specifications, guides and accepted milestone reports
+- `docs/` — current specifications/guides and retained review evidence
 
 Scientific simulations, generated captures, benchmark payloads and research data
 are intentionally outside this repository. See

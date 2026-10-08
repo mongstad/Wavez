@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "unchanged_historical_artifacts": 1586,
+  "markdown_destination_repairs": [
+    "docs/evidence/issue-175/README.md",
+    "docs/evidence/issue-55/README.md"
+  ],
+  "historical_bodies_preserved": true,
+  "legal_and_agent_instructions_unchanged": true,
+  "source_import": "warm final import has no warnings/errors",
+  "generated_walkthrough_route": "Tools \u2192 Selection \u2192 Use current capture"
+}

@@ -1,7 +1,7 @@
 # Wavez design system — Midnight Scientific
 
 **Current design specification, reconciled by issue #8.** UX1/UX2 and issues
-#5–#7 are accepted. The [UX plan](../UX_IMPLEMENTATION_PLAN.md) governs milestone
+#5–#7 are accepted. The [UX plan](UX_WORKFLOW.md) governs milestone
 scope; this document specifies tokens and design rules; the
 [theme library](UX2_THEME_LIBRARY.md) documents implemented primitives. The
 original [UI audit](UX1_UI_AUDIT.md), milestone reports and their evidence remain

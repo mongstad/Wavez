@@ -1,3 +1,8 @@
+> Historical UX1 preservation inventory, based on its retired capture baseline.
+> Current validation selection follows [AGENTS.md](../AGENTS.md),
+> [scientific acceptance](SCIENTIFIC_ACCEPTANCE.md) and the authorized issue.
+> Original cases below retain their historical meaning.
+
 # UX1 — Regression-sensitive workflows
 
 These are gates for future UX changes, grounded in the accepted SIMSCP3 / `.ssc` product. They are **not a claim that UX1 reran the full release suite**. UX1's actual validation is recorded in the [report](UX1_REPORT.md). See [audit risks](UX1_UI_AUDIT.md#coupling-and-technical-risk-inventory) and [component contracts](UX1_DESIGN_SYSTEM.md#component-and-state-architecture).

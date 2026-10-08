@@ -62,7 +62,7 @@ PNG retains its existing **current visible viewport** behavior and sidecar/state
 semantics. A PNG taken during the three-second hint includes that hint; wait for
 it to disappear for a clean view. Entering immersive does not rewrite the saved
 scientific presentation, add recipe fields, or change offline video/numerical
-export behavior. Video UI inclusion follows the explicit [export overlay contract](../VIDEO_EXPORT.md),
+export behavior. Video UI inclusion follows the explicit [export overlay contract](VIDEO_EXPORT.md),
 which reuses the production shell independently of desktop visibility.
 Fullscreen is session-only and is not a new export preset.
 

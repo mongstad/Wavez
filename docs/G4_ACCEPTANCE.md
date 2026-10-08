@@ -1,8 +1,8 @@
 # G4 acceptance ledger
 
 **Implementation gate: PASS, 2026-09-12; subsequently reviewed and accepted by the user.** G4a–G4f follow
-the approved [design](../G4_DESIGN.md). This table uses the canonical
-[A01–A23 registry](../SIMSCOPE_ACCEPTANCE_MATRIX.md); no test ID or scientific
+the approved [design](https://github.com/mongstad/Wavez/blob/ca220d30163d4a76efd652933c8c963a564c315d/G4_DESIGN.md). This table uses the canonical
+[A01–A23 registry](https://github.com/mongstad/Wavez/blob/ca220d30163d4a76efd652933c8c963a564c315d/SIMSCOPE_ACCEPTANCE_MATRIX.md); no test ID or scientific
 requirement was dropped. Earlier checkpoint evidence remains historical.
 
 Python paths below are relative to `tests/`. Native checks are real Godot tests;

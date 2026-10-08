@@ -1,9 +1,9 @@
 # WAVEZ Scene Format (WVZ1) wire contract
 
-Implemented in the authoritative `WAVEZ` repository. `SceneCapture` / `SceneReader` are
-the supported writer/reader APIs. See [G3_REPORT.md](G3_REPORT.md) for historical
-acceptance, [G3_GUIDE.md](G3_GUIDE.md) for examples and the
-[current capture policy](docs/CAPTURE_FORMAT_POLICY.md) for the native-only contract.
+This is the canonical supported wire and sampling contract. `SceneCapture` /
+`SceneReader` are the current writer/reader APIs. See the [scene examples](SCENE_CAPTURE_GUIDE.md),
+[format policy](CAPTURE_FORMAT_POLICY.md), [Python API](../WAVEZ_API.md), and
+[WVZ1 validation record](WVZ1_IMPLEMENTATION_VALIDATION.md).
 
 ## Wire and scientific data
 
@@ -38,7 +38,7 @@ which contains the remainder. Empty arrays have no chunks. Grid arrays are C-ord
 origin/shape fields. Readers reject noncanonical chunks, validate byte totals and
 descriptor/commit proofs, then concatenate source bytes. Interactive playback skips
 payload SHA comparisons; strict readers and explicit verification retain them.
-See [playback versus integrity verification](docs/PLAYBACK_INTEGRITY.md).
+See [playback versus integrity verification](PLAYBACK_INTEGRITY.md).
 
 Every volume array requires `statistics_v1` with exactly `minimum`, `maximum`,
 `finite`, `nonfinite`, `nonpositive`. Counts are nonnegative integers; finite +
@@ -56,8 +56,8 @@ This is a clean format break. The runtime supports only WVZ1 `.wvz` files and re
 magic/version values or an obsolete suffix. Package 4.0.0 updates writer, reader, analysis and generated
 fixtures together. No legacy reader or runtime fallback is shipped. Historical
 G3 reports describe their original version, not this contract. See the
-[decision and measurements](docs/SSC_ACCELERATION.md) and the
-[capture parameter inventory](docs/SSC_CAPTURE_PARAMETERS.md).
+[decision and measurements](SSC_ACCELERATION.md) and the
+[capture parameter inventory](SSC_CAPTURE_PARAMETERS.md).
 
 ## Geometry and identity
 
@@ -157,7 +157,7 @@ is optional; export/reading/slicing require no scikit-image.
 |---|---|
 | Decoded object sample | 256 MiB total across its channels |
 | Chunk / descriptor | 4 MiB raw chunk; stored ≤ raw + 64 KiB; 4 MiB descriptor |
-| Reader metadata | Configurable memory admission; one million records per reader; no aggregate descriptor export ceiling ([policy](docs/WAVEZ_METADATA_BUDGET.md)) |
+| Reader metadata | Configurable memory admission; one million records per reader; no aggregate descriptor export ceiling ([policy](WAVEZ_METADATA_BUDGET.md)) |
 | Arrays per sample | 256 |
 | Grid | Each dimension 2–512, also subject to sample-byte ceiling |
 | Mesh | 1 million vertices; 2 million triangles |

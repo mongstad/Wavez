@@ -3,7 +3,7 @@
 **Design proposal, pending owner review. No production migration is authorized.**
 Reviewed baseline: `68e3b5abb548d2e95ba5ae5b8e57e03d652de502` (2026-09-20).
 Issue #14 was confirmed Ready in **Pre-UX3/UX4 — Validation & Maintenance** when
-work began. Its revised brief is design-only. [Roadmap](../UX_IMPLEMENTATION_PLAN.md) controls authorization;
+work began. Its revised brief is design-only. [Roadmap](UX_WORKFLOW.md) controls authorization;
 [design system](UX1_DESIGN_SYSTEM.md) controls tokens; [UX2 library](UX2_THEME_LIBRARY.md)
 supplies implemented primitives. This proposal elaborates the existing one-dock
 hierarchy. It does not supersede those authorities or accept UX3/UX4.
