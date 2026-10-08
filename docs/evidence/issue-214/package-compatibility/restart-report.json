@@ -1,0 +1,8 @@
+{
+	"checks": 3,
+	"failures": [],
+	"layouts": [],
+	"packaged": true,
+	"renderer": "gl_compatibility",
+	"restart": true
+}

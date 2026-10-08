@@ -29,6 +29,7 @@ Start with:
 
 - [Quickstart](QUICKSTART.md)
 - [Editable Keyboard Shortcuts](docs/KEYBOARD_SHORTCUTS.md)
+- [LMB vertical-axis preference](docs/LMB_Y_INVERSION.md)
 - [Visibility-aware keyboard focus](docs/FOCUS_NAVIGATION.md)
 - [Editable value focus and replacement](docs/EDITABLE_VALUE_FOCUS.md)
 - [Exiting with active jobs](docs/EXIT_WITH_ACTIVE_JOBS.md)

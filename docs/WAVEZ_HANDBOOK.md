@@ -102,6 +102,12 @@ Selection tools keep priority over viewport clicks. Camera interaction and playb
 continue. See [edge reveal and fullscreen](WINDOW_EDGE_REVEAL.md) for validation,
 interaction boundaries and owner review steps.
 
+**Toggle Invert Y Axis** in Keyboard Shortcuts has an On/Off toggle beside its
+hotkey field under Navigation. Apply saves the selected LMB-only vertical
+response and hotkey; Cancel/X/Escape discard drafts. Reset Defaults stages Off
+and Unbound. The saved choice survives restart and leaves current RMB steering
+unchanged. See [LMB vertical-axis preference](LMB_Y_INVERSION.md).
+
 **Edit → Preferences → Keyboard Shortcuts** opens the compact violet shortcut
 editor; Help no longer contains a static shortcut list. Select a binding and
 press a key combination to stage it. Reusing a binding immediately unbinds its

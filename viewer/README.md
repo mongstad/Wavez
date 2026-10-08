@@ -27,12 +27,15 @@ operations, exposes supported cancellation and retains output/failure details.
 
 F1 hides/restores the resizable dock and legend; Space pauses; Left/Right
 steps; left-drag tumbles continuously through full revolutions in either direction;
-right-drag moves the camera sideways around the current target about the
-screen-up axis captured at press time, with distance-aware angular sensitivity
-and no response to vertical pointer motion, regardless of scene type or Auto
-Orbit state;
+right-drag steers the camera heading in place on both axes under the accepted
+#258 controls. Held Orbit Camera Left/Right keys provide target-relative
+horizontal orbit about the current screen-up axis, across all scene types;
 wheel zooms; F11 toggles fullscreen, hiding the top command bar until exit;
 maximized windows keep the bar. F frames the scene and R resets the camera.
+The [Invert Y Axis preference](../docs/LMB_Y_INVERSION.md) in Keyboard Shortcuts
+adds a persistent On/Off toggle beside its hotkey field. It reverses only the
+vertical LMB component; current RMB steering remains unchanged.
+
 For left-drag, horizontal motion retains world-Y yaw and vertical motion carries
 the camera up axis through the poles, allowing upside-down views without a snap.
 On a clean launch Free camera is enabled and Auto orbit is disabled; O toggles

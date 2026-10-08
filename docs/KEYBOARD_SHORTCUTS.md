@@ -1,5 +1,11 @@
 # Keyboard Shortcuts
 
+Issue #214 adds **Toggle Invert Y Axis** under Navigation in candidate build 76.
+Its row includes an On/Off toggle beside the editable hotkey; Apply saves both,
+Cancel/X/Escape discard drafts, and Reset Defaults stages Off plus Unbound.
+The assigned key toggles the saved LMB-only preference directly. See
+[LMB vertical-axis preference](LMB_Y_INVERSION.md) for behavior and owner checks.
+
 Issue #146 applies [visible-order focus traversal](FOCUS_NAVIGATION.md) inside
 this in-canvas editor in candidate build 65. Tab/Shift+Tab remain contained in
 the visible editor and skip disabled Apply. During binding capture the existing
@@ -87,6 +93,7 @@ movement keys, focus navigation, and Escape recovery retain their existing roles
 | Reset Camera | R | Viewer camera reset |
 | Auto Orbit | O | Viewer orbit toggle shared with Navigate |
 | Free Camera | Unbound | Navigate camera-mode toggle |
+| Toggle Invert Y Axis | Unbound; preference Off | Persistent LMB-only vertical inversion |
 | Increase Camera Movement Speed | + | Free-camera translation rate, 10% per step |
 | Decrease Camera Movement Speed | - | Free-camera translation rate, 10% per step |
 | Orbit Camera Left / Orbit Camera Right | Unbound | Held view-relative horizontal orbit around the current navigation target |
