@@ -1,0 +1,14 @@
+{
+  "baseline": "782caa2ad28675845332fd57f742a82457e318da",
+  "tracked_paths_checked": 2402,
+  "changed_paths": [
+    "viewer/ui/shell/orbit_center_editor.gd",
+    "viewer/ui/shell/test_orbit_center_placement.gd"
+  ],
+  "unchanged_paths": 2400,
+  "historical_evidence_unchanged": true,
+  "scientific_camera_guide_unchanged": true,
+  "production_changes": [
+    "viewer/ui/shell/orbit_center_editor.gd"
+  ]
+}

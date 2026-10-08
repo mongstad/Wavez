@@ -16,6 +16,8 @@ Git permalinks preserve their original context.
 
 - [Issue #212 / PR #301 — Place ahead depth and world-position inspection](evidence/issue-212/place-ahead/README.md): reproduced apparent radius reset from radius-dependent placement depth, independent depth/radius placement and actual camera movement around a stationary world reference.
 
+- [Issue #212 / PR #301 — World-placement root-cause investigation](evidence/issue-212/world-placement/README.md): hidden depth inherited from navigation and blocked immediate movement from button focus; explicit depth and focus release, pre-existing transformed scientific landmarks, camera/projection round trips, and bounded owner-capture metadata/log correlation. Earlier review evidence remains historical; owner acceptance is pending.
+
 - [Issue #214 — LMB vertical inversion preference](evidence/issue-214/README.md): inline On/Off and editable hotkey, staged/reset/restart behavior, continuous tumble and unchanged navigation in both source renderers and the same Linux package.
 
 - [Issue #295 — Superseded load-error recovery](evidence/issue-295/README.md): reproduced duplicate Scene/Open file ownership, recovery/icon/details checks, unrelated Jobs/diagnostics, both native renderers and normal/compact layouts.

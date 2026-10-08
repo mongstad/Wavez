@@ -6,8 +6,13 @@ owner-merged PR #300. The repository's application identity is
 Issue #212 proposes view-relative Auto Orbit center placement with automatic
 inspection anchoring, shaded radius and persistent world references. The draft
 stays fixed in world space and is moved only by explicit placement edits; the
-owner-requested Lock Position toggle has been removed. Place ahead preserves
-placement depth independently of radius, avoiding the apparent size reset.
+owner-requested Lock Position toggle has been removed. The
+[world-placement investigation](evidence/issue-212/world-placement/README.md)
+reproduced a hidden placement-depth dependency and a clicked button retaining
+focus that blocked immediate WASD/QE movement. Place ahead now uses an explicit
+**Depth**, retained through navigation and radius/XYZ edits, and releases
+editor focus after placement. The depth is initially seeded from the opening
+view and can be edited; it does not automatically identify a scientific feature.
 PR #301 also refines Auto Orbit to physically circle the chosen world center at
 the selected radius, on a stable equator established at Apply. Candidate build 78
 remains for owner review.
@@ -36,6 +41,9 @@ The [Auto Orbit center editor](ORBIT_CENTER_VIEW.md) uses captured-view handles
 while keeping numeric XYZ and the stored center in world space.
 During placement, orbit and zoom automatically use the editable draft as their pivot;
 shaded radius and world references remain visible during placement in dense fields.
+**Depth** remains visible with the editor controls collapsed, and changing
+it alone does not move the draft. The current investigation compares rendered
+positions with pre-existing scientific landmarks and camera pose round trips.
 After Apply the camera keeps the chosen center in view as it travels around it;
 the scene's source/world transforms stay fixed and recorded playback continues.
 

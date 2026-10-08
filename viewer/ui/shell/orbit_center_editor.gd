@@ -1,5 +1,6 @@
 extends Control
 ## Transient editor for the existing orbit parameters. Draft values commit only on Apply.
+const APPLY_HINT := "Apply starts Auto Orbit at this center. Cancel restores the previous view."
 var viewer
 var center := Vector3.ZERO
 var radius := 1.0
@@ -8,6 +9,8 @@ var details: VBoxContainer
 var details_toggle: Button
 var coordinates: Array[LineEdit] = []
 var radius_input: LineEdit
+var depth_input: LineEdit
+var placement_depth := 1.0
 var notice: Label
 var guide: Control
 var drag_axis := -1
@@ -64,10 +67,16 @@ func setup(owner_viewer) -> void:
 		button.pressed.connect(func(): adjust_radius(direction,Input.is_key_pressed(KEY_SHIFT)))
 		button.gui_input.connect(radius_event)
 	var fine := Label.new(); fine.text = "Wheel here · Shift: fine"; fine.add_theme_font_size_override("font_size",12); radius_row.add_child(fine)
-	notice = Label.new(); notice.add_theme_font_size_override("font_size",12); details.add_child(notice)
+	notice = Label.new(); notice.add_theme_font_size_override("font_size",12); box.add_child(notice)
 	var actions := HBoxContainer.new(); box.add_child(actions)
-	var place := Button.new(); place.text = "Place ahead"; place.tooltip_text = "Place the draft center straight ahead at its current view depth. Radius and camera stay unchanged."
+	var place := Button.new(); place.text = "Place ahead"; place.tooltip_text = "Place the draft center straight ahead at Depth in world units. Radius and camera stay unchanged."
 	place.pressed.connect(place_ahead); actions.add_child(place)
+	# Keep the next placement's distance beside its action, also when collapsed.
+	var depth_label := Label.new(); depth_label.text = "Depth"; actions.add_child(depth_label)
+	depth_input = LineEdit.new(); depth_input.custom_minimum_size.x = 115; actions.add_child(depth_input)
+	depth_input.tooltip_text = "Distance in world units along the current camera's forward direction, used when you click Place ahead. Navigation does not change this value."
+	depth_label.tooltip_text = "Placement depth in world units ahead of the camera."
+	depth_input.text_submitted.connect(func(_value): read_fields()); depth_input.focus_exited.connect(read_fields)
 	var space := Control.new(); space.size_flags_horizontal = Control.SIZE_EXPAND_FILL; actions.add_child(space)
 	var cancel := Button.new(); cancel.text = "Cancel"; cancel.pressed.connect(dismiss); actions.add_child(cancel)
 	var apply := Button.new(); apply.text = "Apply"; apply.theme_type_variation = "PrimaryButton"; apply.pressed.connect(commit); actions.add_child(apply)
@@ -91,6 +100,11 @@ func open() -> void:
 	}
 	center = viewer.camera_target; radius = viewer.camera_distance; drag_axis = -1
 	navigation_distance = viewer.camera_distance
+	# Seed once from the opening view, then keep this explicit distance independent
+	# of camera navigation, draft XYZ and radius until the user edits it.
+	placement_depth = -(viewer.camera.global_transform.affine_inverse()*center).z
+	if not is_finite(placement_depth) or placement_depth <= viewer.camera.near:
+		placement_depth = maxf(navigation_distance,viewer.camera.near*2.0)
 	edit_basis = viewer.camera.basis.orthonormalized()
 	viewer.orbit_enabled = false
 	viewer.free_camera = true
@@ -102,6 +116,7 @@ func open() -> void:
 
 func show_details(expanded: bool) -> void:
 	details.visible = expanded
+	notice.visible = expanded or notice.text != APPLY_HINT
 	details_toggle.text = "Hide controls" if expanded else "Show controls"
 	refresh()
 
@@ -128,29 +143,32 @@ func dismiss(restore_camera := true) -> void:
 func read_fields() -> bool:
 	if not visible: return false
 	var values: Array[float] = []
-	var fields: Array = coordinates + [radius_input]
+	var fields: Array = coordinates + [radius_input,depth_input]
 	for index in fields.size():
 		var input: LineEdit = fields[index]
 		var text: String = input.text.strip_edges()
 		if not text.is_valid_float() or not is_finite(text.to_float()) or absf(text.to_float()) > 1e15:
-			notice.text = "Enter finite coordinates and radius (maximum magnitude 1e15)."; return false
+			notice.text = "Enter finite coordinates, radius and depth (maximum magnitude 1e15)."; notice.show(); return false
 		# Display strings may be rounded. Untouched fields retain their exact draft
 		# values, including when another coordinate/radius was edited.
 		values.append(written_values[index] if text == written_text[index] else text.to_float())
 	if values[3] < 0.000001:
-		notice.text = "Radius must be at least 0.000001."; return false
-	center = Vector3(values[0],values[1],values[2]); radius = values[3]
+		notice.text = "Radius must be at least 0.000001."; notice.show(); return false
+	if values[4] <= viewer.camera.near:
+		notice.text = "Placement depth must be greater than %s world units (near clip)." % str(viewer.camera.near); notice.show(); return false
+	center = Vector3(values[0],values[1],values[2]); radius = values[3]; placement_depth = values[4]
 	update_notice(); refresh(); return true
 
 func write_fields() -> void:
-	written_values.assign([center.x, center.y, center.z, radius])
+	written_values.assign([center.x, center.y, center.z, radius, placement_depth])
 	written_text.clear()
 	for value in written_values: written_text.append(str(value))
 	for axis in 3: coordinates[axis].text = str(center[axis])
-	radius_input.text = str(radius); update_notice()
+	radius_input.text = str(radius); depth_input.text = str(placement_depth); update_notice()
 
 func update_notice() -> void:
-	notice.text = "Apply starts Auto Orbit at this center. Cancel restores the previous view."
+	notice.text = APPLY_HINT
+	notice.visible = details.visible
 	update_position_readout()
 
 func update_position_readout() -> void:
@@ -183,14 +201,15 @@ func radius_event(event: InputEvent) -> void:
 
 func place_ahead() -> void:
 	if not read_fields(): return
-	# Placement depth is independent of orbit radius. Using radius here moves
-	# the center toward/away from the camera and makes each click appear to resize it.
+	# The visible distance determines the point on this ray. Reusing the old
+	# center's current view depth made repeated clicks depend on navigation history.
 	var camera: Camera3D = viewer.camera
-	var depth: float = -(camera.global_transform.affine_inverse()*center).z
-	if not is_finite(depth) or depth <= camera.near:
-		depth = maxf(navigation_distance,camera.near*2.0)
-	center = camera.global_position-camera.global_basis.z*depth
+	center = camera.global_position-camera.global_basis.z*placement_depth
 	write_fields(); refresh()
+	# A successful placement returns keyboard navigation to the viewport. Keep
+	# ordinary numeric-edit focus protection when the user has not placed yet.
+	var focus := get_viewport().gui_get_focus_owner()
+	if focus != null and is_ancestor_of(focus): focus.release_focus()
 
 func commit() -> void:
 	if not read_fields() or viewer.inspection_busy: return

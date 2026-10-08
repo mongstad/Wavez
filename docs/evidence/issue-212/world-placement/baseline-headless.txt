@@ -1,0 +1,13 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+ORBIT WORLD: 1819 checks, 2 failures
+ERROR: Actual Place ahead click permits immediate W navigation without test focus clearing
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://ui/shell/test_orbit_center_view.gd:14)
+       [1] depth_experiment (res://ui/shell/test_orbit_center_world.gd:157)
+ERROR: Actual Place ahead click permits immediate W navigation without test focus clearing
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://ui/shell/test_orbit_center_view.gd:14)
+       [1] depth_experiment (res://ui/shell/test_orbit_center_world.gd:157)

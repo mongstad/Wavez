@@ -1,0 +1,22 @@
+{
+  "harness_setup": [
+    "Initial fixture generator omitted explicit mesh vertex_id; fixed before baseline runs.",
+    "Restricted editor TCP listener required authorized native import or skip-import with existing cache.",
+    "Close-up wheel checks now respect existing minimum scene radius instead of requiring a blocked inward move.",
+    "Input tests select unobstructed viewport positions and await control layout; invalid near-boundary uses exactly representable 0.125."
+  ],
+  "candidate_layout": {
+    "initial_retained_placement_failures": 28,
+    "cause": "Separate depth row covered handles in compact control layout. Moved depth into existing action row; retained placement then passes1918 checks."
+  },
+  "prior_candidate_harness_failures": 21,
+  "baseline_expected_failures": [
+    "Actual Place ahead button retains focus and blocks immediate W, twice."
+  ],
+  "final_baseline": "baseline-headless.json and baseline-forward.json retain exactly2 genuine focus failures; depth mismatch is measured independently.",
+  "candidate_native_layout_race": {
+    "failures": 1,
+    "cause": "Synthetic click sent to old fullscreen position outside restored normal window; actual button pressed signal count was zero. Harness now waits for stable layout and asserts each click emitted exactly one signal. Final baseline rerun on original editor confirms two genuine clicked-focus failures."
+  },
+  "render_mask_regression": "Final comparison bounded by occupied sphere coverage (<=2 mismatches and <3%), not whole viewport area."
+}

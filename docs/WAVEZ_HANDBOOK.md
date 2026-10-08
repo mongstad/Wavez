@@ -329,9 +329,16 @@ See [Free Camera speed](FREE_CAMERA_SPEED.md).
 editor. Drag the captured-view **Right / Up / Toward** endpoints or enter absolute
 world XYZ coordinates; see [view-relative placement](ORBIT_CENTER_VIEW.md). Change the draft
 radius with its −/+ buttons or wheel over the radius controls (Shift: fine).
-**Place ahead** positions the draft along the current view direction at its existing
-view depth, preserving its radius and apparent size. The placed world center stays
-fixed during camera navigation; only explicit placement edits move it. **Apply**
+**Depth** shows the distance in world units along the current camera's
+forward direction for the next **Place ahead** click. Its initial value comes
+from the opening view's existing target depth; adjust it to choose a point
+inside the structure you are inspecting. It stays unchanged during navigation
+and XYZ/radius edits. Changing depth alone does not move the draft, and Place
+ahead does not automatically pick a scientific feature. Clicking Place ahead
+uses the displayed depth while preserving the camera pose and radius, then
+returns keyboard navigation to the viewport. The placed world center stays
+fixed relative to stationary scientific structures during camera navigation;
+only explicit placement edits move it. **Apply**
 sets the existing orbit target and distance, retains the full current camera
 basis, removes the guide, and immediately starts Auto Orbit on that view's stable
 equator. The selected world center stays fixed while the camera travels around it;
@@ -352,16 +359,19 @@ readout provide spatial references even over dense fields. From inside a large
 radius, move backward to bring its outer boundary into view.
 
 **Hide controls / Show controls** collapses the coordinate rows to make room for
-the gizmo. Setup starts collapsed in windows shorter than 720 pixels. Apply and
-Cancel remain visible.
+the gizmo. Setup starts collapsed in windows shorter than 720 pixels. **Depth**,
+Place ahead, Apply and Cancel remain visible.
 The world XYZ/radius readout also remains visible when collapsed.
 
-The draft radius supports 0.000001–1e15 world units. Ordinary wheel zoom uses
+The draft radius supports 0.000001–1e15 world units. **Depth** must be
+greater than the camera's near clip plane and at most 1e15 world units.
+Ordinary wheel zoom uses
 10% inward steps and reciprocal outward steps, with scene-bound/clip-plane
 limits. Fractional input produces smaller steps; custom radii recover without
 snapping to fixed world-unit bounds. Reset/Frame replace the target normally and
 close the draft. Screenshot capture also closes it; saved presets/video jobs
-contain only the accepted camera. See [orbit-center usage and validation](ORBIT_CENTER.md).
+contain only the accepted camera. See [orbit-center usage and validation](ORBIT_CENTER_VIEW.md)
+and the [world-placement investigation](evidence/issue-212/world-placement/README.md).
 
 Recipes retain the existing yaw, pitch, target, distance and full transform
 fields. They can save pole and upside-down orientations without a new schema.

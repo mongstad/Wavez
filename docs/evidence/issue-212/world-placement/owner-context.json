@@ -1,0 +1,498 @@
+{
+  "scope": "Bounded read-only metadata inspection. No scientific payload bytes read, copied, modified, or verified. Header/descriptor/commit checks establish metadata consistency only, not full capture integrity.",
+  "screenshot_association": "Both exact paths are confirmed by local session logs as captures used during orbit-center editing. The owner tentatively named the first source. The supplied screenshot coordinates cannot uniquely establish its capture/session; source association remains inferred, not confirmed.",
+  "sources": [
+    {
+      "capture_path": "/home/Nozba/Downloads/VB_FreeCollapse_v0_2/runs_free_collapse_v0_2/S0_20261004_005538_117820/free_collapse.wvz",
+      "capture_byte_size": 12129159153,
+      "capture_mtime_ns": 1791069636165186547,
+      "unchanged_during_read": true,
+      "metadata_sha256": "3b677e4dc50c828fa452787f06a13ac3f451ca17dc6f2b73b7285e4cd4fa31c0",
+      "objects": [
+        {
+          "space": "viewer_world",
+          "static": false,
+          "data_to_world": [
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "id": "particles",
+          "kind": "particles",
+          "units": "simulation units",
+          "identity": "persistent_i8"
+        },
+        {
+          "space": "viewer_world",
+          "static": false,
+          "data_to_world": [
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "id": "field",
+          "kind": "volume",
+          "units": "simulation units"
+        }
+      ],
+      "sample_counts": {
+        "field": 161,
+        "particles": 161
+      },
+      "time_ranges": {
+        "field": [
+          0.0,
+          80.0
+        ],
+        "particles": [
+          0.0,
+          80.0
+        ]
+      },
+      "volume_geometries": [
+        {
+          "geometry": {
+            "centering": "cell",
+            "origin": [
+              -47.75,
+              -47.75,
+              -47.75
+            ],
+            "shape": [
+              192,
+              192,
+              192
+            ],
+            "spacing": [
+              0.5,
+              0.5,
+              0.5
+            ]
+          },
+          "sample_count": 161
+        }
+      ],
+      "headers_descriptors_and_commits_verified": 322,
+      "metadata_bytes_read_including_prefix_and_commit_records": 1773714,
+      "payload_bytes_read": 0,
+      "scan_end_offset": 12129159153,
+      "all_volume_frames_same_geometry": true,
+      "geometry_sidecar_path": "/home/Nozba/Downloads/VB_FreeCollapse_v0_2/runs_free_collapse_v0_2/S0_20261004_005538_117820/geometry.json",
+      "geometry_sidecar_domain": {
+        "min": [
+          -48.0,
+          -48.0,
+          -48.0
+        ],
+        "max": [
+          48.0,
+          48.0,
+          48.0
+        ]
+      },
+      "geometry_sidecar_line_references": {
+        "world_space": "3-4",
+        "domain": "5-16",
+        "grid": "17-34"
+      },
+      "volume_world_bounds": {
+        "minimum": [
+          -48.0,
+          -48.0,
+          -48.0
+        ],
+        "maximum": [
+          48.0,
+          48.0,
+          48.0
+        ],
+        "derivation": "Identity data_to_world; cell-grid sample centers origin=(-47.75,-47.75,-47.75), spacing=(0.5,0.5,0.5), dimensions=(192,192,192). Bounds at index -0.5 and 191.5 give [-48,48] on every axis."
+      },
+      "log_path": "/home/Nozba/Documents/Logs/Wavez/wavez-2026-10-09_00-08-54-1791497334297-302871-0000000001580300.log",
+      "log_byte_size": 8060,
+      "selected_log_lines": [
+        {
+          "line": 54,
+          "text": "2026-10-09 00:12:29.307  FILE      File selected: /home/Nozba/Downloads/VB_FreeCollapse_v0_2/runs_free_collapse_v0_2/S0_20261004_005538_117820/free_collapse.wvz"
+        },
+        {
+          "line": 57,
+          "text": "2026-10-09 00:12:31.748  FILE      Open capture: filename=free_collapse.wvz path=/home/Nozba/Downloads/VB_FreeCollapse_v0_2/runs_free_collapse_v0_2/S0_20261004_005538_117820/free_collapse.wvz result=ready"
+        },
+        {
+          "line": 63,
+          "text": "2026-10-09 00:12:44.963  UI        Simulation category = Fields"
+        },
+        {
+          "line": 70,
+          "text": "2026-10-09 00:12:51.477  CONTROL   Viewer \u2192 Channel = real"
+        },
+        {
+          "line": 78,
+          "text": "2026-10-09 00:13:27.498  UI        Shortcut: play_pause"
+        },
+        {
+          "line": 79,
+          "text": "2026-10-09 00:13:27.498  PLAYBACK  Pause"
+        },
+        {
+          "line": 88,
+          "text": "2026-10-09 00:13:50.150  CONTROL   Viewer \u2192 Channel = imag"
+        },
+        {
+          "line": 89,
+          "text": "2026-10-09 00:14:01.688  MENU      Navigate opened"
+        },
+        {
+          "line": 90,
+          "text": "2026-10-09 00:14:02.907  MENU       \u2192 Edit orbit center\u2026"
+        },
+        {
+          "line": 91,
+          "text": "2026-10-09 00:14:09.026  CONTROL   Viewer \u2192 Place ahead"
+        },
+        {
+          "line": 92,
+          "text": "2026-10-09 00:14:20.175  CONTROL   Viewer \u2192 Place ahead"
+        },
+        {
+          "line": 93,
+          "text": "2026-10-09 00:14:24.428  CONTROL   Viewer \u2192 Radius = 15"
+        },
+        {
+          "line": 94,
+          "text": "2026-10-09 00:15:03.676  CONTROL   Viewer \u2192 Radius = 20"
+        },
+        {
+          "line": 95,
+          "text": "2026-10-09 00:15:07.930  CONTROL   Viewer \u2192 Radius = 50"
+        },
+        {
+          "line": 96,
+          "text": "2026-10-09 00:15:18.178  CONTROL   Viewer \u2192 Radius = 100"
+        },
+        {
+          "line": 111,
+          "text": "2026-10-09 00:16:26.760  MENU       \u2192 Edit orbit center\u2026"
+        },
+        {
+          "line": 112,
+          "text": "2026-10-09 00:16:31.790  CONTROL   Viewer \u2192 Radius = 50"
+        },
+        {
+          "line": 113,
+          "text": "2026-10-09 00:16:39.449  CONTROL   Viewer \u2192 Place ahead"
+        },
+        {
+          "line": 114,
+          "text": "2026-10-09 00:16:44.749  CONTROL   Viewer \u2192 Place ahead"
+        },
+        {
+          "line": 115,
+          "text": "2026-10-09 00:16:50.322  CONTROL   Viewer \u2192 Radius = 10"
+        },
+        {
+          "line": 116,
+          "text": "2026-10-09 00:17:54.646  CONTROL   Viewer \u2192 Place ahead"
+        },
+        {
+          "line": 117,
+          "text": "2026-10-09 00:17:58.257  CONTROL   Viewer \u2192 Radius = 50"
+        },
+        {
+          "line": 118,
+          "text": "2026-10-09 00:18:43.810  CONTROL   Viewer \u2192 Radius = 10"
+        },
+        {
+          "line": 119,
+          "text": "2026-10-09 00:18:48.073  CONTROL   Viewer \u2192 Radius = 0.005"
+        },
+        {
+          "line": 122,
+          "text": "2026-10-09 00:19:17.604  FILE      Close capture: filename=free_collapse.wvz path=/home/Nozba/Downloads/VB_FreeCollapse_v0_2/runs_free_collapse_v0_2/S0_20261004_005538_117820/free_collapse.wvz"
+        }
+      ]
+    },
+    {
+      "capture_path": "/home/Nozba/Downloads/VB_FreeCollapse_v0_2/runs_free_collapse_v0_2/S0_20261004_013659_785112/free_collapse.wvz",
+      "capture_byte_size": 54283866848,
+      "capture_mtime_ns": 1791072133360725266,
+      "unchanged_during_read": true,
+      "metadata_sha256": "9913dcdc49344db63a24cf54e97c3c2d70e6d2ff8d2f79a6465381738d2d403a",
+      "objects": [
+        {
+          "space": "viewer_world",
+          "static": false,
+          "data_to_world": [
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "id": "particles",
+          "kind": "particles",
+          "units": "simulation units",
+          "identity": "persistent_i8"
+        },
+        {
+          "space": "viewer_world",
+          "static": false,
+          "data_to_world": [
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "id": "field",
+          "kind": "volume",
+          "units": "simulation units"
+        }
+      ],
+      "sample_counts": {
+        "field": 746,
+        "particles": 150
+      },
+      "time_ranges": {
+        "field": [
+          0.0,
+          74.5
+        ],
+        "particles": [
+          0.0,
+          74.5
+        ]
+      },
+      "volume_geometries": [
+        {
+          "geometry": {
+            "centering": "cell",
+            "origin": [
+              -47.75,
+              -47.75,
+              -47.75
+            ],
+            "shape": [
+              192,
+              192,
+              192
+            ],
+            "spacing": [
+              0.5,
+              0.5,
+              0.5
+            ]
+          },
+          "sample_count": 746
+        }
+      ],
+      "headers_descriptors_and_commits_verified": 896,
+      "metadata_bytes_read_including_prefix_and_commit_records": 5107277,
+      "payload_bytes_read": 0,
+      "scan_end_offset": 54283866848,
+      "all_volume_frames_same_geometry": true,
+      "geometry_sidecar_path": "/home/Nozba/Downloads/VB_FreeCollapse_v0_2/runs_free_collapse_v0_2/S0_20261004_013659_785112/geometry.json",
+      "geometry_sidecar_domain": {
+        "min": [
+          -48.0,
+          -48.0,
+          -48.0
+        ],
+        "max": [
+          48.0,
+          48.0,
+          48.0
+        ]
+      },
+      "geometry_sidecar_line_references": {
+        "world_space": "3-4",
+        "domain": "5-16",
+        "grid": "17-34"
+      },
+      "volume_world_bounds": {
+        "minimum": [
+          -48.0,
+          -48.0,
+          -48.0
+        ],
+        "maximum": [
+          48.0,
+          48.0,
+          48.0
+        ],
+        "derivation": "Identity data_to_world; cell-grid sample centers origin=(-47.75,-47.75,-47.75), spacing=(0.5,0.5,0.5), dimensions=(192,192,192). Bounds at index -0.5 and 191.5 give [-48,48] on every axis."
+      },
+      "log_path": "/home/Nozba/Documents/Logs/Wavez/wavez-2026-10-09_00-36-59-1791499019626-345773-0000000001539843.log",
+      "log_byte_size": 2613,
+      "selected_log_lines": [
+        {
+          "line": 1,
+          "text": "2026-10-09 00:36:59.627  APP       WAVEZ v0.1.0.78 started"
+        },
+        {
+          "line": 10,
+          "text": "2026-10-09 00:37:20.495  FILE      File selected: /home/Nozba/Downloads/VB_FreeCollapse_v0_2/runs_free_collapse_v0_2/S0_20261004_013659_785112/free_collapse.wvz"
+        },
+        {
+          "line": 12,
+          "text": "2026-10-09 00:37:21.207  FILE      Open capture: filename=free_collapse.wvz path=/home/Nozba/Downloads/VB_FreeCollapse_v0_2/runs_free_collapse_v0_2/S0_20261004_013659_785112/free_collapse.wvz result=ready"
+        },
+        {
+          "line": 14,
+          "text": "2026-10-09 00:37:34.691  UI        Simulation category = Fields"
+        },
+        {
+          "line": 18,
+          "text": "2026-10-09 00:37:40.381  CONTROL   Viewer \u2192 Channel = real"
+        },
+        {
+          "line": 19,
+          "text": "2026-10-09 00:37:58.217  UI        Shortcut: play_pause"
+        },
+        {
+          "line": 20,
+          "text": "2026-10-09 00:37:58.217  PLAYBACK  Pause"
+        },
+        {
+          "line": 21,
+          "text": "2026-10-09 00:38:00.601  MENU      Navigate opened"
+        },
+        {
+          "line": 22,
+          "text": "2026-10-09 00:38:01.943  MENU       \u2192 Edit orbit center\u2026"
+        },
+        {
+          "line": 23,
+          "text": "2026-10-09 00:38:05.000  CONTROL   Viewer \u2192 \u2212"
+        },
+        {
+          "line": 24,
+          "text": "2026-10-09 00:38:06.324  CONTROL   Viewer \u2192 \u2212"
+        },
+        {
+          "line": 25,
+          "text": "2026-10-09 00:38:06.517  CONTROL   Viewer \u2192 \u2212"
+        },
+        {
+          "line": 26,
+          "text": "2026-10-09 00:38:07.235  CONTROL   Viewer \u2192 \u2212"
+        },
+        {
+          "line": 27,
+          "text": "2026-10-09 00:38:13.914  CONTROL   Viewer \u2192 Place ahead"
+        },
+        {
+          "line": 28,
+          "text": "2026-10-09 00:38:34.579  CONTROL   Viewer \u2192 Place ahead"
+        },
+        {
+          "line": 29,
+          "text": "2026-10-09 00:38:43.373  CONTROL   Viewer \u2192 Place ahead"
+        },
+        {
+          "line": 30,
+          "text": "2026-10-09 00:39:02.131  CONTROL   Viewer \u2192 Place ahead"
+        },
+        {
+          "line": 33,
+          "text": "2026-10-09 00:43:27.376  FILE      Close capture: filename=free_collapse.wvz path=/home/Nozba/Downloads/VB_FreeCollapse_v0_2/runs_free_collapse_v0_2/S0_20261004_013659_785112/free_collapse.wvz"
+        }
+      ]
+    }
+  ],
+  "reported_screenshot_geometry": {
+    "center_xyz": [
+      74.53,
+      -67.15,
+      -239.17
+    ],
+    "radius": 34.07,
+    "values": "Approximate values supplied in user task; exact screenshot values/pose unavailable.",
+    "sphere_aabb_min": [
+      40.46,
+      -101.22,
+      -273.24
+    ],
+    "sphere_aabb_max": [
+      108.6,
+      -33.08,
+      -205.1
+    ],
+    "inside_either_volume_domain": false,
+    "closest_volume_domain_point": [
+      48,
+      -48,
+      -48
+    ],
+    "center_to_domain_distance": 193.9498190254376,
+    "sphere_to_domain_minimum_gap": 159.8798190254376,
+    "z_axis_gap_from_sphere_to_domain": 157.1,
+    "camera_world_position": null,
+    "camera_full_basis": null,
+    "camera_target": null,
+    "placement_depth": null,
+    "reason_pose_unknown": "Session logger records actions, not camera pose, draft coordinate changes from handles or Place ahead results. No screenshot pose/scene snapshot was attached. Exact projection/ray cannot be reconstructed from XYZ and radius alone."
+  },
+  "radius_corroboration": {
+    "inference_only": true,
+    "explanation": "Latest session logs four coarse radius-minus clicks. For the metadata-confirmed [-48,48]^3 domain, the ordinary zoom minimum is half_extent+near=sqrt(3)*48+0.05. Four /1.25 steps give 34.0739845, matching the approximate screenshot 34.07. This corroborates, but does not establish, association with the later session. Particle extent and unknown prior navigation may affect the exact initial distance.",
+    "field_bounds_half_extent": 83.13843876330611,
+    "near_plane": 0.05,
+    "minimum_zoom_from_field_bounds": 83.18843876330611,
+    "radius_after_four_coarse_minus": 34.073984517450185
+  },
+  "implementation_references": {
+    "grid_transform": "viewer/layers/field_prepare.gd:21",
+    "grid_cell_bounds": "viewer/layers/grid_view.gd:59-61",
+    "frame_scene_world_bounds": "viewer/layers/scene_layers.gd:827-855",
+    "zoom_minimum": "viewer/main.gd:722-730",
+    "free_translation_preserves_navigation_distance": "viewer/main.gd:1323-1335",
+    "editor_initial_center_radius_depth_dependency": "viewer/ui/shell/orbit_center_editor.gd:77-99",
+    "old_place_ahead_depth_dependency": "viewer/ui/shell/orbit_center_editor.gd:184-193",
+    "annotation_world_and_camera": "viewer/ui/shell/orbit_center_guide.gd:15-35",
+    "prior_test_reference_created_at_result": "viewer/ui/shell/test_orbit_center_placement.gd:26-29",
+    "logger_action_only": "viewer/ui/session_log.gd:113-140"
+  },
+  "recommended_minimal_correction": {
+    "control": "Explicit positive Ahead distance / Placement depth, in world units, measured along the current camera forward ray.",
+    "initialization": "Initialize once when editor opens from a valid positive initial camera-forward depth or camera distance. Show it before Place ahead.",
+    "navigation": "Never recompute the stored placement depth during WASD/QE, RMB, LMB, wheel zoom, handle editing, numeric XYZ/radius editing or radius steps.",
+    "edit_semantics": "Editing the depth changes only the next Place ahead action. It does not implicitly move the current draft. Place ahead uses camera global position minus normalized camera global Z times this stored depth.",
+    "visibility": "Prefer keeping depth beside Place ahead so it remains visible when Show controls is collapsed; tooltip names world units and next-click behavior.",
+    "why": "Removes hidden old-draft-depth and behind-camera navigation-distance fallback. Existing shaded annotation, world center, radius, handles and camera pivot remain unchanged.",
+    "limits": "Does not pick scientific surfaces or infer the intended feature. The user must choose the depth or adjust world XYZ/handles. Opaque scientific volumes cannot provide a unique feature depth from a ray without a separate picking policy."
+  }
+}

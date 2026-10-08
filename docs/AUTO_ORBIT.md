@@ -26,6 +26,13 @@ See [steering and orbit](MANUAL_CAMERA_ORBIT.md).
 **Navigate → Edit orbit center…** temporarily turns Auto Orbit off and enables
 Free Camera movement for placement. The [view-relative handles](ORBIT_CENTER_VIEW.md)
 use the orientation captured at entry; numeric XYZ stay absolute world coordinates.
+**Depth** shows the distance in world units used by **Place ahead**
+along the current camera's forward ray. It is seeded once from the opening view
+and stays unchanged during navigation or radius/XYZ editing. Adjust it for the
+feature you want to place within; this action does not automatically pick a
+scientific feature. Changing depth alone leaves the draft in place until the
+next Place ahead click. Successful placement releases editor focus, allowing
+W/A/S/D/Q/E movement immediately after the click.
 Placement orbit/zoom automatically uses the draft as its pivot without a camera
 snap or lock toggle. RMB steering and Free Camera translation remain available; camera motion
 leaves draft XYZ/radius exact. The shaded radius and persistent world references
@@ -62,6 +69,9 @@ separate configured world-Y rotation contract.
 The [PR #301 equatorial refinement evidence](evidence/issue-212/equator-refinement/README.md)
 records the pre-change polar in-place roll, asymmetric stationary references,
 physical camera traces and evolving particle/mesh/field playback comparisons.
+The [world-placement investigation](evidence/issue-212/world-placement/README.md)
+records the later hidden-depth and button-focus defects, their local editor
+correction, and comparisons against pre-existing scientific landmarks.
 
 The previous #234 candidate let W/S change the radius while Auto Orbit stayed
 on. Its validation counts describe that earlier behavior and are retained in

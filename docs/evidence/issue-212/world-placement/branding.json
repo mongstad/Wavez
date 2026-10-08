@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "references": 2585,
+  "categories": {
+    "historical document or evidence": 2540,
+    "explicit obsolete-format refusal or historical link": 10,
+    "historical review-time section": 16,
+    "fixed Git reference to historical source": 2,
+    "explicit historical preface": 1,
+    "negative refusal test": 16
+  },
+  "unclassified": [],
+  "changed_historical_evidence": []
+}

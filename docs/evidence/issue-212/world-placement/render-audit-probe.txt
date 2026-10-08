@@ -1,0 +1,79 @@
+extends SceneTree
+const Viewer = preload("res://main.gd")
+var out := "/tmp/issue212-render-audit"
+var rows: Array = []
+var failed: Array = []
+var view
+var editor
+func _initialize(): run.call_deferred()
+func vec(v): return [v.x,v.y,v.z]
+func rect(r): return [r.position.x,r.position.y,r.end.x,r.end.y]
+func mask(im: Image) -> Rect2:
+	var low := Vector2(INF,INF); var high := Vector2(-INF,-INF)
+	for y in im.get_height():
+		for x in im.get_width():
+			if im.get_pixel(x,y).a > .5:
+				low = low.min(Vector2(x,y)); high = high.max(Vector2(x,y))
+	return Rect2(low,high-low)
+func expected() -> Rect2:
+	var low := Vector2(INF,INF); var high := Vector2(-INF,-INF)
+	var points: PackedVector3Array = editor.guide.sphere.mesh.get_mesh_arrays()[Mesh.ARRAY_VERTEX]
+	for point in points:
+		var p: Vector2 = view.camera.unproject_position(editor.guide.sphere.global_transform*point)
+		low = low.min(p); high = high.max(p)
+	return Rect2(low,high-low)
+func measure(label: String, save := false) -> Image:
+	var im: Image = editor.guide.surface.get_texture().get_image()
+	var actual := mask(im); var target := expected()
+	var factor: Vector2 = root.get_visible_rect().size / Vector2(editor.guide.surface.size)
+	actual = Rect2(actual.position*factor,actual.size*factor)
+	var err := maxf(actual.position.distance_to(target.position),actual.end.distance_to(target.end))
+	var p: Vector2 = view.camera.unproject_position(editor.center)
+	var q: Vector2 = editor.guide.surface_camera.unproject_position(editor.guide.sphere.global_position)*factor
+	rows.append({"label":label,"logical_size":str(root.get_visible_rect().size),"surface_size":str(editor.guide.surface.size),"camera":vec(view.camera.global_position),"center":vec(editor.center),"actual_mask_bbox":rect(actual),"main_projection_bbox":rect(target),"bbox_error_px":err,"camera_projected_center":str(p),"surface_projected_center":str(q),"projection_error_px":p.distance_to(q),"sphere_transform":str(editor.guide.sphere.global_transform),"projection":str(view.camera.get_camera_projection()),"annotation_projection":str(editor.guide.surface_camera.get_camera_projection())})
+	if err > 3.0 or p.distance_to(q) > .25: failed.append(label+": render mismatch "+str(err))
+	if save:
+		im.save_png(out.path_join(label+"-sphere.png"))
+		root.get_texture().get_image().save_png(out.path_join(label+"-composite.png"))
+	return im
+func settle():
+	for i in 3: await process_frame
+	await RenderingServer.frame_post_draw
+func run():
+	for a in OS.get_cmdline_user_args():
+		if a.begins_with("--out="): out = a.trim_prefix("--out=")
+	view = Viewer.new(); root.add_child(view); view.set_process(false)
+	view.orbit_enabled = false; view.free_camera = true
+	view.camera_target = Vector3(74.53,-67.15,-239.17); view.camera_distance = 170.
+	view.yaw = .34; view.pitch = -.17; view._update_camera()
+	view.shell.edit_orbit_center(); editor = view.shell.orbit_editor
+	editor.center = Vector3(74.53,-67.15,-239.17); editor.radius = 34.07; editor.write_fields(); editor.refresh()
+	# Fixed asymmetric scientific reference markers precede all camera motion.
+	for p in [editor.center+Vector3(-55,-14,12),editor.center+Vector3(28,52,-37)]:
+		var marker := MeshInstance3D.new(); var mesh := BoxMesh.new(); mesh.size=Vector3(8,15,22); marker.mesh=mesh; marker.position=p
+		var mat := StandardMaterial3D.new(); mat.shading_mode=BaseMaterial3D.SHADING_MODE_UNSHADED; mat.albedo_color=Color.CYAN; marker.material_override=mat; view.add_child(marker)
+	var original: Transform3D = view.camera.transform; var original_target: Vector3 = view.camera_target
+	for layout in ["normal","fullscreen","scale15"]:
+		if layout == "fullscreen": view.shell.enter_immersive()
+		if layout == "scale15": view.shell.exit_immersive(); root.content_scale_factor=1.5
+		await settle()
+		var first: Image = measure(layout+"-before",true)
+		for d in [Vector3(27,-9,0),Vector3(-20,12,50),Vector3(-7,-3,-50)]:
+			view.camera_target += d; view._update_camera(); await settle(); measure(layout+"-translate"+str(rows.size()))
+		view._steer_camera(Vector2(25,10)); await settle(); measure(layout+"-steer")
+		view.camera.transform=original; view.camera_target=original_target; view._adopt_camera_basis(); editor.refresh(); await settle()
+		var last: Image = measure(layout+"-roundtrip",true)
+		var identical := first.get_data()==last.get_data(); rows.append({"label":layout+"-roundtrip-pixels","identical_surface_pixels":identical})
+		if not identical: failed.append(layout+": returned pose pixels differ")
+	root.content_scale_factor=1.0; await settle()
+	for distance in [90.,350.]:
+		view.camera.position=editor.center+original.basis.z*distance; view.camera_target=view.camera.position-view.camera.basis.z*view.camera_distance; editor.refresh(); await settle(); measure("distance-"+str(distance),true)
+	view.camera.transform=original;view.camera_target=original_target;view._adopt_camera_basis();editor.refresh();await settle()
+	var key:=InputEventKey.new(); key.physical_keycode=KEY_A; key.pressed=true; Input.parse_input_event(key); Input.flush_buffered_events(); view.set_process(true)
+	for frame in 8:
+		await RenderingServer.frame_post_draw
+		measure("live-process-"+str(frame))
+	key=key.duplicate();key.pressed=false;Input.parse_input_event(key);Input.flush_buffered_events();view.set_process(false)
+	var f=FileAccess.open(out.path_join("report.json"),FileAccess.WRITE);f.store_string(JSON.stringify({"renderer":RenderingServer.get_current_rendering_method(),"rows":rows,"failures":failed},"\t"));f.close()
+	view.queue_free();for i in 3: await process_frame
+	print("RENDER PROBE ",rows.size()," rows ",failed.size()," failures");quit(0 if failed.is_empty() else 1)

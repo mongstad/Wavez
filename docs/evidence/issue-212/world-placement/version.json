@@ -1,0 +1,11 @@
+{
+  "tests": 2,
+  "status": "PASS",
+  "candidate": {
+    "full": "v0.1.0.78",
+    "release": "v0.1.0",
+    "build": "78"
+  },
+  "accepted_main": "6bd497d60c75c435f38cdffe1dd87d8cdd56bc97",
+  "candidate_build_unchanged": true
+}

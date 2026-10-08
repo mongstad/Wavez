@@ -46,7 +46,7 @@ func place_and_inspect(view, label: String, scale: float, capture: bool) -> void
 		if capture and keycode == KEY_A: await screenshot("inspect-after-A-"+label.get_slice(" / ",2))
 	fields(editor,view.camera.global_position+view.camera.global_basis.z*scale,radius)
 	editor.place_ahead()
-	check(editor.radius == radius and editor.center.is_equal_approx(view.camera.global_position-view.camera.global_basis.z*maxf(view.camera_distance,view.camera.near*2.0)),label+": a center behind the camera uses navigation depth without changing radius")
+	check(editor.radius == radius and editor.center.is_equal_approx(view.camera.global_position-view.camera.global_basis.z*editor.placement_depth),label+": a center behind the camera still uses explicit placement depth without changing radius")
 	editor.dismiss(); reference.queue_free(); await process_frame
 	for node in scientific: check(node.transform == scientific[node],label+": placement inspection preserves scientific transform "+node.name)
 	check(view.committed_sample == sample,label+": placement inspection preserves the paused scientific sample")
@@ -122,9 +122,9 @@ func placement_exercise(view, label: String, scale: float) -> void:
 	check(editor.position_readout.is_visible_in_tree() and editor.position_readout.text.contains(str(draft.x)),label+": world XYZ/radius remain visible with controls hidden")
 	pose = view.camera.transform; view._update_camera()
 	check(view.camera.transform.is_equal_approx(pose),label+": unchanged placement update retains camera pose")
-	var depth: float = -(view.camera.global_transform.affine_inverse()*editor.center).z
+	var depth: float = editor.placement_depth
 	editor.place_ahead()
-	check(editor.visible and editor.radius == radius and editor.center.is_equal_approx(view.camera.global_position-view.camera.global_basis.z*depth),label+": Place ahead preserves radius and depth while explicitly placing the center")
+	check(editor.visible and editor.radius == radius and editor.center.is_equal_approx(view.camera.global_position-view.camera.global_basis.z*depth),label+": Place ahead preserves radius and uses the explicit placement depth")
 	draft = editor.center; basis = view.camera.basis; editor.commit()
 	check(view.camera_target == draft and view.camera_distance == radius and view.camera.basis == basis and view.orbit_enabled,label+": anchored Apply retains current basis and commits exact draft radius")
 	check(not editor.visible and editor.guide.surface.render_target_update_mode == SubViewport.UPDATE_DISABLED,label+": Apply disables transient shading viewport")
