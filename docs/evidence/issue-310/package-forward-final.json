@@ -1,0 +1,20 @@
+{
+  "cycle": {
+    "checks": 61772,
+    "failures": [],
+    "renderer": "forward_plus"
+  },
+  "restart-light": {
+    "checks": 4,
+    "failures": [],
+    "renderer": "forward_plus"
+  },
+  "restart-dark": {
+    "checks": 2,
+    "failures": [],
+    "renderer": "forward_plus"
+  },
+  "packaged": true,
+  "status": "UI assertions completed; strict cycle wrapper rejected shutdown diagnostics",
+  "restart_status": "clean"
+}

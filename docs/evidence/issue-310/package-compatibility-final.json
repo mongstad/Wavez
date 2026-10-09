@@ -1,0 +1,20 @@
+{
+  "cycle": {
+    "checks": 61772,
+    "failures": [],
+    "renderer": "gl_compatibility"
+  },
+  "restart-light": {
+    "checks": 4,
+    "failures": [],
+    "renderer": "gl_compatibility"
+  },
+  "restart-dark": {
+    "checks": 2,
+    "failures": [],
+    "renderer": "gl_compatibility"
+  },
+  "packaged": true,
+  "status": "UI assertions completed; strict cycle wrapper rejected shutdown diagnostics",
+  "restart_status": "clean"
+}

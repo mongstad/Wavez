@@ -7,6 +7,7 @@ import argparse
 import hashlib
 import json
 import os
+import re
 from pathlib import Path
 import subprocess
 import sys
@@ -16,6 +17,33 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from tools.validate_simulation_panel import fixture
 from tools.package_linux import stage, build
+
+
+def palette_review():
+    """Contrast arithmetic for the changed semantic roles, not an accessibility certification."""
+    colors = dict(re.findall(r'&"([^"]+)": Color\("([0-9a-f]+)"\)',
+                             (ROOT / 'viewer/ui/theme/light_palette.gd').read_text()))
+    def luminance(value):
+        channels = [int(value[i:i+2], 16) / 255 for i in (0, 2, 4)]
+        return sum(weight * (channel / 12.92 if channel <= .04045 else ((channel + .055) / 1.055) ** 2.4)
+                   for weight, channel in zip((.2126, .7152, .0722), channels))
+    pairs = []
+    surfaces = ['surface.0', 'surface.1', 'surface.2', 'surface.3', 'surface.lit', 'surface.shade']
+    for foreground in ['text.primary', 'text.secondary', 'text.muted', 'text.title', 'text.section']:
+        pairs.extend((foreground, background, 4.5) for background in surfaces)
+    for foreground in ['text.primary', 'text.secondary', 'selection.text', 'state.success', 'state.warning', 'state.error', 'state.info']:
+        pairs.extend((foreground, background, 4.5) for background in surfaces + ['surface.hover', 'surface.pressed', 'selection.fill'])
+    for foreground in ['text.disabled', 'focus.ring']:
+        pairs.extend((foreground, background, 3.0) for background in surfaces + ['surface.hover', 'surface.pressed', 'selection.fill'])
+    pairs.extend(('border.control', background, 3.0) for background in surfaces)
+    pairs.extend([('accent.foreground', 'accent.primary', 4.5), ('accent.primary', 'surface.3', 4.5)])
+    result = []
+    for foreground, background, minimum in pairs:
+        a, b = sorted((luminance(colors[foreground]), luminance(colors[background])))
+        ratio = (b + .05) / (a + .05)
+        assert ratio >= minimum, (foreground, background, ratio, minimum)
+        result.append(dict(foreground=foreground, background=background, ratio=ratio, minimum=minimum))
+    return result
 
 
 def test_package(godot, output):
@@ -69,6 +97,7 @@ def main():
     assert hashlib.sha256((out / 'mixed.wvz').read_bytes()).hexdigest() == digest
     reports['source_sha256_unchanged'] = digest
     reports['packaged'] = args.package
+    reports['palette_review'] = palette_review()
     (out / 'summary.json').write_text(json.dumps(reports, indent=2) + '\n')
     print(f'Application theme: {sum(reports[p]["checks"] for p in ["cycle", "restart-light", "restart-dark"])} PASS ({args.renderer}, package={args.package})')
 
