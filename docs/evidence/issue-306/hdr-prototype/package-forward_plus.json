@@ -1,0 +1,2673 @@
+{
+  "checks": 683,
+  "device": "NVIDIA GeForce RTX 3070 Ti",
+  "gate_failures": [],
+  "gate_passed": true,
+  "godot": "4.7.2-stable (official)",
+  "harness_failures": [],
+  "renderer": "forward_plus",
+  "samples": [
+    {
+      "actual": [
+        9.995698928833008e-05,
+        9.995698928833008e-05,
+        9.995698928833008e-05
+      ],
+      "canvas_control": [
+        9.995698928833008e-05,
+        9.995698928833008e-05,
+        9.995698928833008e-05
+      ],
+      "canvas_format": 14,
+      "expected": [
+        9.999999747378752e-05,
+        9.999999747378752e-05,
+        9.999999747378752e-05
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "opaque"
+    },
+    {
+      "actual": [
+        9.995698928833008e-05,
+        4.9948692321777344e-05,
+        2.4974346160888672e-05
+      ],
+      "canvas_control": [
+        9.995698928833008e-05,
+        4.9948692321777344e-05,
+        2.4974346160888672e-05
+      ],
+      "canvas_format": 14,
+      "expected": [
+        9.999999747378752e-05,
+        4.999999873689376e-05,
+        2.499999936844688e-05
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "opaque"
+    },
+    {
+      "actual": [
+        0.00099945068359375,
+        0.00099945068359375,
+        0.00099945068359375
+      ],
+      "canvas_control": [
+        0.00099945068359375,
+        0.00099945068359375,
+        0.00099945068359375
+      ],
+      "canvas_format": 14,
+      "expected": [
+        0.0010000000474974513,
+        0.0010000000474974513,
+        0.0010000000474974513
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "opaque"
+    },
+    {
+      "actual": [
+        0.00099945068359375,
+        0.000499725341796875,
+        0.0002498626708984375
+      ],
+      "canvas_control": [
+        0.00099945068359375,
+        0.000499725341796875,
+        0.0002498626708984375
+      ],
+      "canvas_format": 14,
+      "expected": [
+        0.0010000000474974513,
+        0.0005000000237487257,
+        0.0002500000118743628
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "opaque"
+    },
+    {
+      "actual": [
+        0.0099945068359375,
+        0.0099945068359375,
+        0.0099945068359375
+      ],
+      "canvas_control": [
+        0.0099945068359375,
+        0.0099945068359375,
+        0.0099945068359375
+      ],
+      "canvas_format": 14,
+      "expected": [
+        0.009999999776482582,
+        0.009999999776482582,
+        0.009999999776482582
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "opaque"
+    },
+    {
+      "actual": [
+        0.0099945068359375,
+        0.00499725341796875,
+        0.002498626708984375
+      ],
+      "canvas_control": [
+        0.0099945068359375,
+        0.00499725341796875,
+        0.002498626708984375
+      ],
+      "canvas_format": 14,
+      "expected": [
+        0.009999999776482582,
+        0.004999999888241291,
+        0.0024999999441206455
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "opaque"
+    },
+    {
+      "actual": [
+        0.0625,
+        0.0625,
+        0.0625
+      ],
+      "canvas_control": [
+        0.0625,
+        0.0625,
+        0.0625
+      ],
+      "canvas_format": 14,
+      "expected": [
+        0.0625,
+        0.0625,
+        0.0625
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "opaque"
+    },
+    {
+      "actual": [
+        0.0625,
+        0.03125,
+        0.015625
+      ],
+      "canvas_control": [
+        0.0625,
+        0.03125,
+        0.015625
+      ],
+      "canvas_format": 14,
+      "expected": [
+        0.0625,
+        0.03125,
+        0.015625
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "opaque"
+    },
+    {
+      "actual": [
+        0.125,
+        0.125,
+        0.125
+      ],
+      "canvas_control": [
+        0.125,
+        0.125,
+        0.125
+      ],
+      "canvas_format": 14,
+      "expected": [
+        0.125,
+        0.125,
+        0.125
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "opaque"
+    },
+    {
+      "actual": [
+        0.125,
+        0.0625,
+        0.03125
+      ],
+      "canvas_control": [
+        0.125,
+        0.0625,
+        0.03125
+      ],
+      "canvas_format": 14,
+      "expected": [
+        0.125,
+        0.0625,
+        0.03125
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "opaque"
+    },
+    {
+      "actual": [
+        0.25,
+        0.25,
+        0.25
+      ],
+      "canvas_control": [
+        0.25,
+        0.25,
+        0.25
+      ],
+      "canvas_format": 14,
+      "expected": [
+        0.25,
+        0.25,
+        0.25
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "opaque"
+    },
+    {
+      "actual": [
+        0.25,
+        0.125,
+        0.0625
+      ],
+      "canvas_control": [
+        0.25,
+        0.125,
+        0.0625
+      ],
+      "canvas_format": 14,
+      "expected": [
+        0.25,
+        0.125,
+        0.0625
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "opaque"
+    },
+    {
+      "actual": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "canvas_control": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "canvas_format": 14,
+      "expected": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "opaque"
+    },
+    {
+      "actual": [
+        0.5,
+        0.25,
+        0.125
+      ],
+      "canvas_control": [
+        0.5,
+        0.25,
+        0.125
+      ],
+      "canvas_format": 14,
+      "expected": [
+        0.5,
+        0.25,
+        0.125
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "opaque"
+    },
+    {
+      "actual": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "canvas_control": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "canvas_format": 14,
+      "expected": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "opaque"
+    },
+    {
+      "actual": [
+        1.0,
+        0.5,
+        0.25
+      ],
+      "canvas_control": [
+        1.0,
+        0.5,
+        0.25
+      ],
+      "canvas_format": 14,
+      "expected": [
+        1.0,
+        0.5,
+        0.25
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "opaque"
+    },
+    {
+      "actual": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "canvas_control": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "canvas_format": 14,
+      "expected": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": true,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "opaque"
+    },
+    {
+      "actual": [
+        2.0,
+        1.0,
+        0.5
+      ],
+      "canvas_control": [
+        2.0,
+        1.0,
+        0.5
+      ],
+      "canvas_format": 14,
+      "expected": [
+        2.0,
+        1.0,
+        0.5
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "opaque"
+    },
+    {
+      "actual": [
+        4.0,
+        4.0,
+        4.0
+      ],
+      "canvas_control": [
+        4.0,
+        4.0,
+        4.0
+      ],
+      "canvas_format": 14,
+      "expected": [
+        4.0,
+        4.0,
+        4.0
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": true,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "opaque"
+    },
+    {
+      "actual": [
+        4.0,
+        2.0,
+        1.0
+      ],
+      "canvas_control": [
+        4.0,
+        2.0,
+        1.0
+      ],
+      "canvas_format": 14,
+      "expected": [
+        4.0,
+        2.0,
+        1.0
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "opaque"
+    },
+    {
+      "actual": [
+        8.0,
+        8.0,
+        8.0
+      ],
+      "canvas_control": [
+        8.0,
+        8.0,
+        8.0
+      ],
+      "canvas_format": 14,
+      "expected": [
+        8.0,
+        8.0,
+        8.0
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": true,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "opaque"
+    },
+    {
+      "actual": [
+        8.0,
+        4.0,
+        2.0
+      ],
+      "canvas_control": [
+        8.0,
+        4.0,
+        2.0
+      ],
+      "canvas_format": 14,
+      "expected": [
+        8.0,
+        4.0,
+        2.0
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": true,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "opaque"
+    },
+    {
+      "actual": [
+        9.995698928833008e-05,
+        9.995698928833008e-05,
+        9.995698928833008e-05
+      ],
+      "canvas_control": [
+        9.995698928833008e-05,
+        9.995698928833008e-05,
+        9.995698928833008e-05
+      ],
+      "canvas_format": 14,
+      "expected": [
+        9.999999747378752e-05,
+        9.999999747378752e-05,
+        9.999999747378752e-05
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 15,
+      "variant": "transparent"
+    },
+    {
+      "actual": [
+        9.995698928833008e-05,
+        4.9948692321777344e-05,
+        2.4974346160888672e-05
+      ],
+      "canvas_control": [
+        9.995698928833008e-05,
+        4.9948692321777344e-05,
+        2.4974346160888672e-05
+      ],
+      "canvas_format": 14,
+      "expected": [
+        9.999999747378752e-05,
+        4.999999873689376e-05,
+        2.499999936844688e-05
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 15,
+      "variant": "transparent"
+    },
+    {
+      "actual": [
+        0.00099945068359375,
+        0.00099945068359375,
+        0.00099945068359375
+      ],
+      "canvas_control": [
+        0.00099945068359375,
+        0.00099945068359375,
+        0.00099945068359375
+      ],
+      "canvas_format": 14,
+      "expected": [
+        0.0010000000474974513,
+        0.0010000000474974513,
+        0.0010000000474974513
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 15,
+      "variant": "transparent"
+    },
+    {
+      "actual": [
+        0.00099945068359375,
+        0.000499725341796875,
+        0.0002498626708984375
+      ],
+      "canvas_control": [
+        0.00099945068359375,
+        0.000499725341796875,
+        0.0002498626708984375
+      ],
+      "canvas_format": 14,
+      "expected": [
+        0.0010000000474974513,
+        0.0005000000237487257,
+        0.0002500000118743628
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 15,
+      "variant": "transparent"
+    },
+    {
+      "actual": [
+        0.0099945068359375,
+        0.0099945068359375,
+        0.0099945068359375
+      ],
+      "canvas_control": [
+        0.0099945068359375,
+        0.0099945068359375,
+        0.0099945068359375
+      ],
+      "canvas_format": 14,
+      "expected": [
+        0.009999999776482582,
+        0.009999999776482582,
+        0.009999999776482582
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 15,
+      "variant": "transparent"
+    },
+    {
+      "actual": [
+        0.0099945068359375,
+        0.00499725341796875,
+        0.002498626708984375
+      ],
+      "canvas_control": [
+        0.0099945068359375,
+        0.00499725341796875,
+        0.002498626708984375
+      ],
+      "canvas_format": 14,
+      "expected": [
+        0.009999999776482582,
+        0.004999999888241291,
+        0.0024999999441206455
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 15,
+      "variant": "transparent"
+    },
+    {
+      "actual": [
+        0.0625,
+        0.0625,
+        0.0625
+      ],
+      "canvas_control": [
+        0.0625,
+        0.0625,
+        0.0625
+      ],
+      "canvas_format": 14,
+      "expected": [
+        0.0625,
+        0.0625,
+        0.0625
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 15,
+      "variant": "transparent"
+    },
+    {
+      "actual": [
+        0.0625,
+        0.03125,
+        0.015625
+      ],
+      "canvas_control": [
+        0.0625,
+        0.03125,
+        0.015625
+      ],
+      "canvas_format": 14,
+      "expected": [
+        0.0625,
+        0.03125,
+        0.015625
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 15,
+      "variant": "transparent"
+    },
+    {
+      "actual": [
+        0.125,
+        0.125,
+        0.125
+      ],
+      "canvas_control": [
+        0.125,
+        0.125,
+        0.125
+      ],
+      "canvas_format": 14,
+      "expected": [
+        0.125,
+        0.125,
+        0.125
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 15,
+      "variant": "transparent"
+    },
+    {
+      "actual": [
+        0.125,
+        0.0625,
+        0.03125
+      ],
+      "canvas_control": [
+        0.125,
+        0.0625,
+        0.03125
+      ],
+      "canvas_format": 14,
+      "expected": [
+        0.125,
+        0.0625,
+        0.03125
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 15,
+      "variant": "transparent"
+    },
+    {
+      "actual": [
+        0.25,
+        0.25,
+        0.25
+      ],
+      "canvas_control": [
+        0.25,
+        0.25,
+        0.25
+      ],
+      "canvas_format": 14,
+      "expected": [
+        0.25,
+        0.25,
+        0.25
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 15,
+      "variant": "transparent"
+    },
+    {
+      "actual": [
+        0.25,
+        0.125,
+        0.0625
+      ],
+      "canvas_control": [
+        0.25,
+        0.125,
+        0.0625
+      ],
+      "canvas_format": 14,
+      "expected": [
+        0.25,
+        0.125,
+        0.0625
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 15,
+      "variant": "transparent"
+    },
+    {
+      "actual": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "canvas_control": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "canvas_format": 14,
+      "expected": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 15,
+      "variant": "transparent"
+    },
+    {
+      "actual": [
+        0.5,
+        0.25,
+        0.125
+      ],
+      "canvas_control": [
+        0.5,
+        0.25,
+        0.125
+      ],
+      "canvas_format": 14,
+      "expected": [
+        0.5,
+        0.25,
+        0.125
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 15,
+      "variant": "transparent"
+    },
+    {
+      "actual": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "canvas_control": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "canvas_format": 14,
+      "expected": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 15,
+      "variant": "transparent"
+    },
+    {
+      "actual": [
+        1.0,
+        0.5,
+        0.25
+      ],
+      "canvas_control": [
+        1.0,
+        0.5,
+        0.25
+      ],
+      "canvas_format": 14,
+      "expected": [
+        1.0,
+        0.5,
+        0.25
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 15,
+      "variant": "transparent"
+    },
+    {
+      "actual": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "canvas_control": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "canvas_format": 14,
+      "expected": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": true,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 15,
+      "variant": "transparent"
+    },
+    {
+      "actual": [
+        2.0,
+        1.0,
+        0.5
+      ],
+      "canvas_control": [
+        2.0,
+        1.0,
+        0.5
+      ],
+      "canvas_format": 14,
+      "expected": [
+        2.0,
+        1.0,
+        0.5
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 15,
+      "variant": "transparent"
+    },
+    {
+      "actual": [
+        4.0,
+        4.0,
+        4.0
+      ],
+      "canvas_control": [
+        4.0,
+        4.0,
+        4.0
+      ],
+      "canvas_format": 14,
+      "expected": [
+        4.0,
+        4.0,
+        4.0
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": true,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 15,
+      "variant": "transparent"
+    },
+    {
+      "actual": [
+        4.0,
+        2.0,
+        1.0
+      ],
+      "canvas_control": [
+        4.0,
+        2.0,
+        1.0
+      ],
+      "canvas_format": 14,
+      "expected": [
+        4.0,
+        2.0,
+        1.0
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 15,
+      "variant": "transparent"
+    },
+    {
+      "actual": [
+        8.0,
+        8.0,
+        8.0
+      ],
+      "canvas_control": [
+        8.0,
+        8.0,
+        8.0
+      ],
+      "canvas_format": 14,
+      "expected": [
+        8.0,
+        8.0,
+        8.0
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": true,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 15,
+      "variant": "transparent"
+    },
+    {
+      "actual": [
+        8.0,
+        4.0,
+        2.0
+      ],
+      "canvas_control": [
+        8.0,
+        4.0,
+        2.0
+      ],
+      "canvas_format": 14,
+      "expected": [
+        8.0,
+        4.0,
+        2.0
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": true,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 15,
+      "variant": "transparent"
+    },
+    {
+      "actual": [
+        9.995698928833008e-05,
+        9.995698928833008e-05,
+        9.995698928833008e-05
+      ],
+      "canvas_control": [
+        9.995698928833008e-05,
+        9.995698928833008e-05,
+        9.995698928833008e-05
+      ],
+      "canvas_format": 14,
+      "expected": [
+        9.999999747378752e-05,
+        9.999999747378752e-05,
+        9.999999747378752e-05
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "glow_zero"
+    },
+    {
+      "actual": [
+        9.995698928833008e-05,
+        4.9948692321777344e-05,
+        2.4974346160888672e-05
+      ],
+      "canvas_control": [
+        9.995698928833008e-05,
+        4.9948692321777344e-05,
+        2.4974346160888672e-05
+      ],
+      "canvas_format": 14,
+      "expected": [
+        9.999999747378752e-05,
+        4.999999873689376e-05,
+        2.499999936844688e-05
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "glow_zero"
+    },
+    {
+      "actual": [
+        0.00099945068359375,
+        0.00099945068359375,
+        0.00099945068359375
+      ],
+      "canvas_control": [
+        0.00099945068359375,
+        0.00099945068359375,
+        0.00099945068359375
+      ],
+      "canvas_format": 14,
+      "expected": [
+        0.0010000000474974513,
+        0.0010000000474974513,
+        0.0010000000474974513
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "glow_zero"
+    },
+    {
+      "actual": [
+        0.00099945068359375,
+        0.000499725341796875,
+        0.0002498626708984375
+      ],
+      "canvas_control": [
+        0.00099945068359375,
+        0.000499725341796875,
+        0.0002498626708984375
+      ],
+      "canvas_format": 14,
+      "expected": [
+        0.0010000000474974513,
+        0.0005000000237487257,
+        0.0002500000118743628
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "glow_zero"
+    },
+    {
+      "actual": [
+        0.0099945068359375,
+        0.0099945068359375,
+        0.0099945068359375
+      ],
+      "canvas_control": [
+        0.0099945068359375,
+        0.0099945068359375,
+        0.0099945068359375
+      ],
+      "canvas_format": 14,
+      "expected": [
+        0.009999999776482582,
+        0.009999999776482582,
+        0.009999999776482582
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "glow_zero"
+    },
+    {
+      "actual": [
+        0.0099945068359375,
+        0.00499725341796875,
+        0.002498626708984375
+      ],
+      "canvas_control": [
+        0.0099945068359375,
+        0.00499725341796875,
+        0.002498626708984375
+      ],
+      "canvas_format": 14,
+      "expected": [
+        0.009999999776482582,
+        0.004999999888241291,
+        0.0024999999441206455
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "glow_zero"
+    },
+    {
+      "actual": [
+        0.0625,
+        0.0625,
+        0.0625
+      ],
+      "canvas_control": [
+        0.0625,
+        0.0625,
+        0.0625
+      ],
+      "canvas_format": 14,
+      "expected": [
+        0.0625,
+        0.0625,
+        0.0625
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "glow_zero"
+    },
+    {
+      "actual": [
+        0.0625,
+        0.03125,
+        0.015625
+      ],
+      "canvas_control": [
+        0.0625,
+        0.03125,
+        0.015625
+      ],
+      "canvas_format": 14,
+      "expected": [
+        0.0625,
+        0.03125,
+        0.015625
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "glow_zero"
+    },
+    {
+      "actual": [
+        0.125,
+        0.125,
+        0.125
+      ],
+      "canvas_control": [
+        0.125,
+        0.125,
+        0.125
+      ],
+      "canvas_format": 14,
+      "expected": [
+        0.125,
+        0.125,
+        0.125
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "glow_zero"
+    },
+    {
+      "actual": [
+        0.125,
+        0.0625,
+        0.03125
+      ],
+      "canvas_control": [
+        0.125,
+        0.0625,
+        0.03125
+      ],
+      "canvas_format": 14,
+      "expected": [
+        0.125,
+        0.0625,
+        0.03125
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "glow_zero"
+    },
+    {
+      "actual": [
+        0.25,
+        0.25,
+        0.25
+      ],
+      "canvas_control": [
+        0.25,
+        0.25,
+        0.25
+      ],
+      "canvas_format": 14,
+      "expected": [
+        0.25,
+        0.25,
+        0.25
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "glow_zero"
+    },
+    {
+      "actual": [
+        0.25,
+        0.125,
+        0.0625
+      ],
+      "canvas_control": [
+        0.25,
+        0.125,
+        0.0625
+      ],
+      "canvas_format": 14,
+      "expected": [
+        0.25,
+        0.125,
+        0.0625
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "glow_zero"
+    },
+    {
+      "actual": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "canvas_control": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "canvas_format": 14,
+      "expected": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "glow_zero"
+    },
+    {
+      "actual": [
+        0.5,
+        0.25,
+        0.125
+      ],
+      "canvas_control": [
+        0.5,
+        0.25,
+        0.125
+      ],
+      "canvas_format": 14,
+      "expected": [
+        0.5,
+        0.25,
+        0.125
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "glow_zero"
+    },
+    {
+      "actual": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "canvas_control": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "canvas_format": 14,
+      "expected": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "glow_zero"
+    },
+    {
+      "actual": [
+        1.0,
+        0.5,
+        0.25
+      ],
+      "canvas_control": [
+        1.0,
+        0.5,
+        0.25
+      ],
+      "canvas_format": 14,
+      "expected": [
+        1.0,
+        0.5,
+        0.25
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "glow_zero"
+    },
+    {
+      "actual": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "canvas_control": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "canvas_format": 14,
+      "expected": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": true,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "glow_zero"
+    },
+    {
+      "actual": [
+        2.0,
+        1.0,
+        0.5
+      ],
+      "canvas_control": [
+        2.0,
+        1.0,
+        0.5
+      ],
+      "canvas_format": 14,
+      "expected": [
+        2.0,
+        1.0,
+        0.5
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "glow_zero"
+    },
+    {
+      "actual": [
+        4.0,
+        4.0,
+        4.0
+      ],
+      "canvas_control": [
+        4.0,
+        4.0,
+        4.0
+      ],
+      "canvas_format": 14,
+      "expected": [
+        4.0,
+        4.0,
+        4.0
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": true,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "glow_zero"
+    },
+    {
+      "actual": [
+        4.0,
+        2.0,
+        1.0
+      ],
+      "canvas_control": [
+        4.0,
+        2.0,
+        1.0
+      ],
+      "canvas_format": 14,
+      "expected": [
+        4.0,
+        2.0,
+        1.0
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "glow_zero"
+    },
+    {
+      "actual": [
+        8.0,
+        8.0,
+        8.0
+      ],
+      "canvas_control": [
+        8.0,
+        8.0,
+        8.0
+      ],
+      "canvas_format": 14,
+      "expected": [
+        8.0,
+        8.0,
+        8.0
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": true,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "glow_zero"
+    },
+    {
+      "actual": [
+        8.0,
+        4.0,
+        2.0
+      ],
+      "canvas_control": [
+        8.0,
+        4.0,
+        2.0
+      ],
+      "canvas_format": 14,
+      "expected": [
+        8.0,
+        4.0,
+        2.0
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": true,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "glow_zero"
+    },
+    {
+      "actual": [
+        9.995698928833008e-05,
+        9.995698928833008e-05,
+        9.995698928833008e-05
+      ],
+      "canvas_control": [
+        9.995698928833008e-05,
+        9.995698928833008e-05,
+        9.995698928833008e-05
+      ],
+      "canvas_format": 14,
+      "expected": [
+        9.999999747378752e-05,
+        9.999999747378752e-05,
+        9.999999747378752e-05
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "shaded_emission"
+    },
+    {
+      "actual": [
+        9.995698928833008e-05,
+        4.9948692321777344e-05,
+        2.4974346160888672e-05
+      ],
+      "canvas_control": [
+        9.995698928833008e-05,
+        4.9948692321777344e-05,
+        2.4974346160888672e-05
+      ],
+      "canvas_format": 14,
+      "expected": [
+        9.999999747378752e-05,
+        4.999999873689376e-05,
+        2.499999936844688e-05
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "shaded_emission"
+    },
+    {
+      "actual": [
+        0.00099945068359375,
+        0.00099945068359375,
+        0.00099945068359375
+      ],
+      "canvas_control": [
+        0.00099945068359375,
+        0.00099945068359375,
+        0.00099945068359375
+      ],
+      "canvas_format": 14,
+      "expected": [
+        0.0010000000474974513,
+        0.0010000000474974513,
+        0.0010000000474974513
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "shaded_emission"
+    },
+    {
+      "actual": [
+        0.00099945068359375,
+        0.000499725341796875,
+        0.0002498626708984375
+      ],
+      "canvas_control": [
+        0.00099945068359375,
+        0.000499725341796875,
+        0.0002498626708984375
+      ],
+      "canvas_format": 14,
+      "expected": [
+        0.0010000000474974513,
+        0.0005000000237487257,
+        0.0002500000118743628
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "shaded_emission"
+    },
+    {
+      "actual": [
+        0.0099945068359375,
+        0.0099945068359375,
+        0.0099945068359375
+      ],
+      "canvas_control": [
+        0.0099945068359375,
+        0.0099945068359375,
+        0.0099945068359375
+      ],
+      "canvas_format": 14,
+      "expected": [
+        0.009999999776482582,
+        0.009999999776482582,
+        0.009999999776482582
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "shaded_emission"
+    },
+    {
+      "actual": [
+        0.0099945068359375,
+        0.00499725341796875,
+        0.002498626708984375
+      ],
+      "canvas_control": [
+        0.0099945068359375,
+        0.00499725341796875,
+        0.002498626708984375
+      ],
+      "canvas_format": 14,
+      "expected": [
+        0.009999999776482582,
+        0.004999999888241291,
+        0.0024999999441206455
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "shaded_emission"
+    },
+    {
+      "actual": [
+        0.0625,
+        0.0625,
+        0.0625
+      ],
+      "canvas_control": [
+        0.0625,
+        0.0625,
+        0.0625
+      ],
+      "canvas_format": 14,
+      "expected": [
+        0.0625,
+        0.0625,
+        0.0625
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "shaded_emission"
+    },
+    {
+      "actual": [
+        0.0625,
+        0.03125,
+        0.015625
+      ],
+      "canvas_control": [
+        0.0625,
+        0.03125,
+        0.015625
+      ],
+      "canvas_format": 14,
+      "expected": [
+        0.0625,
+        0.03125,
+        0.015625
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "shaded_emission"
+    },
+    {
+      "actual": [
+        0.125,
+        0.125,
+        0.125
+      ],
+      "canvas_control": [
+        0.125,
+        0.125,
+        0.125
+      ],
+      "canvas_format": 14,
+      "expected": [
+        0.125,
+        0.125,
+        0.125
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "shaded_emission"
+    },
+    {
+      "actual": [
+        0.125,
+        0.0625,
+        0.03125
+      ],
+      "canvas_control": [
+        0.125,
+        0.0625,
+        0.03125
+      ],
+      "canvas_format": 14,
+      "expected": [
+        0.125,
+        0.0625,
+        0.03125
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "shaded_emission"
+    },
+    {
+      "actual": [
+        0.25,
+        0.25,
+        0.25
+      ],
+      "canvas_control": [
+        0.25,
+        0.25,
+        0.25
+      ],
+      "canvas_format": 14,
+      "expected": [
+        0.25,
+        0.25,
+        0.25
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "shaded_emission"
+    },
+    {
+      "actual": [
+        0.25,
+        0.125,
+        0.0625
+      ],
+      "canvas_control": [
+        0.25,
+        0.125,
+        0.0625
+      ],
+      "canvas_format": 14,
+      "expected": [
+        0.25,
+        0.125,
+        0.0625
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "shaded_emission"
+    },
+    {
+      "actual": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "canvas_control": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "canvas_format": 14,
+      "expected": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "shaded_emission"
+    },
+    {
+      "actual": [
+        0.5,
+        0.25,
+        0.125
+      ],
+      "canvas_control": [
+        0.5,
+        0.25,
+        0.125
+      ],
+      "canvas_format": 14,
+      "expected": [
+        0.5,
+        0.25,
+        0.125
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "shaded_emission"
+    },
+    {
+      "actual": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "canvas_control": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "canvas_format": 14,
+      "expected": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "shaded_emission"
+    },
+    {
+      "actual": [
+        1.0,
+        0.5,
+        0.25
+      ],
+      "canvas_control": [
+        1.0,
+        0.5,
+        0.25
+      ],
+      "canvas_format": 14,
+      "expected": [
+        1.0,
+        0.5,
+        0.25
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "shaded_emission"
+    },
+    {
+      "actual": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "canvas_control": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "canvas_format": 14,
+      "expected": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": true,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "shaded_emission"
+    },
+    {
+      "actual": [
+        2.0,
+        1.0,
+        0.5
+      ],
+      "canvas_control": [
+        2.0,
+        1.0,
+        0.5
+      ],
+      "canvas_format": 14,
+      "expected": [
+        2.0,
+        1.0,
+        0.5
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "shaded_emission"
+    },
+    {
+      "actual": [
+        4.0,
+        4.0,
+        4.0
+      ],
+      "canvas_control": [
+        4.0,
+        4.0,
+        4.0
+      ],
+      "canvas_format": 14,
+      "expected": [
+        4.0,
+        4.0,
+        4.0
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": true,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "shaded_emission"
+    },
+    {
+      "actual": [
+        4.0,
+        2.0,
+        1.0
+      ],
+      "canvas_control": [
+        4.0,
+        2.0,
+        1.0
+      ],
+      "canvas_format": 14,
+      "expected": [
+        4.0,
+        2.0,
+        1.0
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "shaded_emission"
+    },
+    {
+      "actual": [
+        8.0,
+        8.0,
+        8.0
+      ],
+      "canvas_control": [
+        8.0,
+        8.0,
+        8.0
+      ],
+      "canvas_format": 14,
+      "expected": [
+        8.0,
+        8.0,
+        8.0
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": true,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "shaded_emission"
+    },
+    {
+      "actual": [
+        8.0,
+        4.0,
+        2.0
+      ],
+      "canvas_control": [
+        8.0,
+        4.0,
+        2.0
+      ],
+      "canvas_format": 14,
+      "expected": [
+        8.0,
+        4.0,
+        2.0
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": true,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "shaded_emission"
+    },
+    {
+      "actual": [
+        9.995698928833008e-05,
+        9.995698928833008e-05,
+        9.995698928833008e-05
+      ],
+      "canvas_control": [
+        9.995698928833008e-05,
+        9.995698928833008e-05,
+        9.995698928833008e-05
+      ],
+      "canvas_format": 14,
+      "expected": [
+        9.999999747378752e-05,
+        9.999999747378752e-05,
+        9.999999747378752e-05
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "unshaded_emission_3"
+    },
+    {
+      "actual": [
+        9.995698928833008e-05,
+        4.9948692321777344e-05,
+        2.4974346160888672e-05
+      ],
+      "canvas_control": [
+        9.995698928833008e-05,
+        4.9948692321777344e-05,
+        2.4974346160888672e-05
+      ],
+      "canvas_format": 14,
+      "expected": [
+        9.999999747378752e-05,
+        4.999999873689376e-05,
+        2.499999936844688e-05
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "unshaded_emission_3"
+    },
+    {
+      "actual": [
+        0.00099945068359375,
+        0.00099945068359375,
+        0.00099945068359375
+      ],
+      "canvas_control": [
+        0.00099945068359375,
+        0.00099945068359375,
+        0.00099945068359375
+      ],
+      "canvas_format": 14,
+      "expected": [
+        0.0010000000474974513,
+        0.0010000000474974513,
+        0.0010000000474974513
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "unshaded_emission_3"
+    },
+    {
+      "actual": [
+        0.00099945068359375,
+        0.000499725341796875,
+        0.0002498626708984375
+      ],
+      "canvas_control": [
+        0.00099945068359375,
+        0.000499725341796875,
+        0.0002498626708984375
+      ],
+      "canvas_format": 14,
+      "expected": [
+        0.0010000000474974513,
+        0.0005000000237487257,
+        0.0002500000118743628
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "unshaded_emission_3"
+    },
+    {
+      "actual": [
+        0.0099945068359375,
+        0.0099945068359375,
+        0.0099945068359375
+      ],
+      "canvas_control": [
+        0.0099945068359375,
+        0.0099945068359375,
+        0.0099945068359375
+      ],
+      "canvas_format": 14,
+      "expected": [
+        0.009999999776482582,
+        0.009999999776482582,
+        0.009999999776482582
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "unshaded_emission_3"
+    },
+    {
+      "actual": [
+        0.0099945068359375,
+        0.00499725341796875,
+        0.002498626708984375
+      ],
+      "canvas_control": [
+        0.0099945068359375,
+        0.00499725341796875,
+        0.002498626708984375
+      ],
+      "canvas_format": 14,
+      "expected": [
+        0.009999999776482582,
+        0.004999999888241291,
+        0.0024999999441206455
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "unshaded_emission_3"
+    },
+    {
+      "actual": [
+        0.0625,
+        0.0625,
+        0.0625
+      ],
+      "canvas_control": [
+        0.0625,
+        0.0625,
+        0.0625
+      ],
+      "canvas_format": 14,
+      "expected": [
+        0.0625,
+        0.0625,
+        0.0625
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "unshaded_emission_3"
+    },
+    {
+      "actual": [
+        0.0625,
+        0.03125,
+        0.015625
+      ],
+      "canvas_control": [
+        0.0625,
+        0.03125,
+        0.015625
+      ],
+      "canvas_format": 14,
+      "expected": [
+        0.0625,
+        0.03125,
+        0.015625
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "unshaded_emission_3"
+    },
+    {
+      "actual": [
+        0.125,
+        0.125,
+        0.125
+      ],
+      "canvas_control": [
+        0.125,
+        0.125,
+        0.125
+      ],
+      "canvas_format": 14,
+      "expected": [
+        0.125,
+        0.125,
+        0.125
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "unshaded_emission_3"
+    },
+    {
+      "actual": [
+        0.125,
+        0.0625,
+        0.03125
+      ],
+      "canvas_control": [
+        0.125,
+        0.0625,
+        0.03125
+      ],
+      "canvas_format": 14,
+      "expected": [
+        0.125,
+        0.0625,
+        0.03125
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "unshaded_emission_3"
+    },
+    {
+      "actual": [
+        0.25,
+        0.25,
+        0.25
+      ],
+      "canvas_control": [
+        0.25,
+        0.25,
+        0.25
+      ],
+      "canvas_format": 14,
+      "expected": [
+        0.25,
+        0.25,
+        0.25
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "unshaded_emission_3"
+    },
+    {
+      "actual": [
+        0.25,
+        0.125,
+        0.0625
+      ],
+      "canvas_control": [
+        0.25,
+        0.125,
+        0.0625
+      ],
+      "canvas_format": 14,
+      "expected": [
+        0.25,
+        0.125,
+        0.0625
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "unshaded_emission_3"
+    },
+    {
+      "actual": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "canvas_control": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "canvas_format": 14,
+      "expected": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "unshaded_emission_3"
+    },
+    {
+      "actual": [
+        0.5,
+        0.25,
+        0.125
+      ],
+      "canvas_control": [
+        0.5,
+        0.25,
+        0.125
+      ],
+      "canvas_format": 14,
+      "expected": [
+        0.5,
+        0.25,
+        0.125
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "unshaded_emission_3"
+    },
+    {
+      "actual": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "canvas_control": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "canvas_format": 14,
+      "expected": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "unshaded_emission_3"
+    },
+    {
+      "actual": [
+        1.0,
+        0.5,
+        0.25
+      ],
+      "canvas_control": [
+        1.0,
+        0.5,
+        0.25
+      ],
+      "canvas_format": 14,
+      "expected": [
+        1.0,
+        0.5,
+        0.25
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "unshaded_emission_3"
+    },
+    {
+      "actual": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "canvas_control": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "canvas_format": 14,
+      "expected": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": true,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "unshaded_emission_3"
+    },
+    {
+      "actual": [
+        2.0,
+        1.0,
+        0.5
+      ],
+      "canvas_control": [
+        2.0,
+        1.0,
+        0.5
+      ],
+      "canvas_format": 14,
+      "expected": [
+        2.0,
+        1.0,
+        0.5
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "unshaded_emission_3"
+    },
+    {
+      "actual": [
+        4.0,
+        4.0,
+        4.0
+      ],
+      "canvas_control": [
+        4.0,
+        4.0,
+        4.0
+      ],
+      "canvas_format": 14,
+      "expected": [
+        4.0,
+        4.0,
+        4.0
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": true,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "unshaded_emission_3"
+    },
+    {
+      "actual": [
+        4.0,
+        2.0,
+        1.0
+      ],
+      "canvas_control": [
+        4.0,
+        2.0,
+        1.0
+      ],
+      "canvas_format": 14,
+      "expected": [
+        4.0,
+        2.0,
+        1.0
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": false,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "unshaded_emission_3"
+    },
+    {
+      "actual": [
+        8.0,
+        8.0,
+        8.0
+      ],
+      "canvas_control": [
+        8.0,
+        8.0,
+        8.0
+      ],
+      "canvas_format": 14,
+      "expected": [
+        8.0,
+        8.0,
+        8.0
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": true,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "unshaded_emission_3"
+    },
+    {
+      "actual": [
+        8.0,
+        4.0,
+        2.0
+      ],
+      "canvas_control": [
+        8.0,
+        4.0,
+        2.0
+      ],
+      "canvas_format": 14,
+      "expected": [
+        8.0,
+        4.0,
+        2.0
+      ],
+      "gpu_linear": true,
+      "gpu_over_one": true,
+      "gpu_positive": true,
+      "linear": true,
+      "source_format": 14,
+      "variant": "unshaded_emission_3"
+    }
+  ],
+  "scope": "first HDR source gate only; no production renderer/UI/state change",
+  "size": [
+    64,
+    64
+  ],
+  "packaged": true,
+  "native_exit": 0,
+  "prototype_sha256": "f42ce52d242f6283872c89599cfa65b591e2dfc369f9c7f23c2b79e45460ca72",
+  "engine_version": "4.7.2.stable.official.ed1daf0bf",
+  "native_command": [
+    "/home/Nozba/Codex/Wavez/bloom-306/hdr-package-forward_plus/WAVEZ.x86_64",
+    "--rendering-method",
+    "forward_plus",
+    "--audio-driver",
+    "Dummy",
+    "--disable-vsync",
+    "--resolution",
+    "192x128",
+    "--",
+    "/home/Nozba/Codex/Wavez/bloom-306/hdr-package-forward_plus/report.json"
+  ],
+  "production_integration": false
+}

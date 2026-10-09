@@ -1,0 +1,55 @@
+{
+  "issue": 306,
+  "date": "2026-10-09",
+  "owner_policy": "Approved isolated-pass prototype and opt-in mapped-color Fields/Meshes Bloom, both default 0; Particle target 1.35",
+  "production_integration": false,
+  "gate": "Unclipped linear 3D source buffers consumed by 2D HDR GPU pass",
+  "runs": {
+    "source-forward_plus": {
+      "checks": 683,
+      "harness_failures": [],
+      "samples": 110,
+      "gate_passed": true,
+      "gate_failures": 0,
+      "samples_with_zero_channel": 0,
+      "native_exit": 0,
+      "prototype_sha256": "f42ce52d242f6283872c89599cfa65b591e2dfc369f9c7f23c2b79e45460ca72"
+    },
+    "source-gl_compatibility": {
+      "checks": 683,
+      "harness_failures": [],
+      "samples": 110,
+      "gate_passed": false,
+      "gate_failures": 90,
+      "samples_with_zero_channel": 36,
+      "native_exit": 1,
+      "prototype_sha256": "f42ce52d242f6283872c89599cfa65b591e2dfc369f9c7f23c2b79e45460ca72"
+    },
+    "package-forward_plus": {
+      "checks": 683,
+      "harness_failures": [],
+      "samples": 110,
+      "gate_passed": true,
+      "gate_failures": 0,
+      "samples_with_zero_channel": 0,
+      "native_exit": 0,
+      "prototype_sha256": "f42ce52d242f6283872c89599cfa65b591e2dfc369f9c7f23c2b79e45460ca72"
+    },
+    "package-gl_compatibility": {
+      "checks": 683,
+      "harness_failures": [],
+      "samples": 110,
+      "gate_passed": false,
+      "gate_failures": 90,
+      "samples_with_zero_channel": 36,
+      "native_exit": 1,
+      "prototype_sha256": "f42ce52d242f6283872c89599cfa65b591e2dfc369f9c7f23c2b79e45460ca72"
+    }
+  },
+  "source_package_samples_equal": {
+    "forward_plus": true,
+    "gl_compatibility": true
+  },
+  "observation_checks": 2732,
+  "version_tests": 2
+}

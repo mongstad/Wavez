@@ -4,11 +4,14 @@ Accepted baseline for the #306 investigation: **v0.1.0.79**,
 `65fd8fae15a1b8dd37c75eca3a197d75003ee4ee`, owner-merged PR #304.
 The repository's application identity is
 `viewer/project.godot` → `application/config/version`; see [version policy](VERSIONING.md).
-Issue #306 proposes candidate build 80 with a baseline Bloom investigation and
-an [independent category Bloom architecture proposal](CATEGORY_BLOOM_PROPOSAL.md).
-Architecture/artistic-policy approval is pending; independent Bloom and category
-controls are not implemented. Dark/Light chrome and official theme-specific About
-artwork are in the accepted baseline; see [application themes](APPLICATION_THEMES.md).
+Issue #306 proposes candidate build 80. The owner approved the isolated-pass
+prototype and opt-in mapped-color Fields/Meshes Bloom, both default 0. The
+[first HDR source gate](CATEGORY_BLOOM_PROTOTYPE.md) passes on Forward+ but fails
+on Compatibility in source/release validation packages; production integration
+awaits a renderer-scope decision under the approved proposal's stop boundary.
+Independent Bloom and category controls are not implemented. Dark/Light chrome
+and official theme-specific About artwork are in the accepted baseline; see
+[application themes](APPLICATION_THEMES.md).
 
 The GitHub Issues and Wavez Development Project are the operational queue. Work
 requires a Ready issue (or explicit owner authorization), the correct branch/base

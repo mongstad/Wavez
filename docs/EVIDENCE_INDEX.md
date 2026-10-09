@@ -6,7 +6,9 @@ Use [current status](CURRENT_STATUS.md) for supported contracts and boundaries.
 [The documentation audit](documentation-audit/README.md) records retired paths;
 Git permalinks preserve their original context.
 
-- [Issue #306 — category Bloom investigation](evidence/issue-306/README.md): accepted global-control source/package matrix, mixed-scene pixel comparisons, baseline telemetry and architecture approval boundary; independent Bloom unimplemented.
+- [Issue #306 — HDR source prototype](evidence/issue-306/hdr-prototype/README.md): approved-policy checkpoint, GPU/CPU source-color tests and source/release comparisons; Forward+ first gate passes, Compatibility fails; production integration held for renderer direction.
+
+- [Issue #306 — category Bloom investigation](evidence/issue-306/README.md): initial accepted global-control source/package matrix, mixed-scene pixel comparisons, baseline telemetry and architecture approval boundary; historical pre-approval checkpoint.
 
 - [Issue #289 — Dark and Light application themes](evidence/issue-289/README.md): palette-only chrome, official About artwork, geometry/scientific-pixel comparisons, source/package restart matrix and owner review limits.
 

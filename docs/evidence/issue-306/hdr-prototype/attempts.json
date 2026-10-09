@@ -1,0 +1,16 @@
+{
+  "exploratory_attempts": [
+    {
+      "result": "Black output from first emission-only unshaded probe; not used as architecture evidence. Replaced with explicit current camera and ALBEDO source."
+    },
+    {
+      "result": "Formal probe initially failed parsing: Variant-valued expected vector needed an explicit Vector3 type; corrected before native measurement."
+    },
+    {
+      "result": "First formal Compatibility run incorrectly recognized only half-float Image enums; corrected to accept both float32 and float16 readback formats. GPU/CPU readings and 2D controls already agreed."
+    },
+    {
+      "result": "Sandbox editor import had TCP-bind errors and five unrelated cached UID warnings. Native import completed cleanly; incidental UIDs removed."
+    }
+  ]
+}

@@ -1,5 +1,12 @@
 # Independent category Bloom — issue #306 architecture proposal
 
+**Current checkpoint:** the owner approved the isolated-pass prototype and
+opt-in mapped-color Fields/Meshes policy on 2026-10-09. The [first HDR source
+gate](CATEGORY_BLOOM_PROTOTYPE.md) passes on Forward+ and fails on Compatibility;
+production integration is held for renderer direction. The original proposal
+below is preserved as the pre-approval review record, including its status and
+initial particle-emission interpretation, which the new measurements qualify.
+
 Status: **investigation complete; architecture and artistic policy await owner
 approval. Independent Bloom is not implemented.** This proposal is the review
 checkpoint required by [issue #306](https://github.com/mongstad/Wavez/issues/306)
