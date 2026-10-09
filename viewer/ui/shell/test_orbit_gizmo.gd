@@ -177,23 +177,36 @@ func scene(v, kind: String) -> void:
   check(e.center.distance_to(start+e.handle_basis[axis]*15*h.units)<maxf(.00001,radius*.0001),kind+" handle follows captured view axis "+str(axis))
   e.center=center;e.write_fields();e.refresh()
  e.dismiss();check(snapshot(v)==prior,kind+" Cancel restores entire pose and modes")
- v.shell.edit_orbit_center();e.center=center;e.radius=radius;e.write_fields();e.commit()
+ v.shell.edit_orbit_center();e.center=center+v.camera.basis.x*radius*2.;center=e.center;e.radius=radius;e.write_fields()
+ var apply_origin:Vector3=v.camera.global_position
+ var orbit_distance:float=apply_origin.distance_to(center)
+ e.commit()
+ check(v.camera.global_position==apply_origin,kind+" Apply never teleports observer")
+ check(is_equal_approx(v.camera_distance,orbit_distance) and not is_equal_approx(v.camera_distance,e.radius),kind+" observer distance independent of gizmo radius")
+ check(v.camera.basis.z.dot((apply_origin-center).normalized())>.99999,kind+" Apply faces off-axis chosen center")
  var applied:Transform3D=v.camera.transform;var up:Vector3=applied.basis.y
+ diagnostics.append({"scene":kind,"apply_origin":vector_array(apply_origin),"chosen_center":vector_array(center),"observer_orbit_distance":orbit_distance,"gizmo_radius":radius,"apply_position_delta":v.camera.global_position.distance_to(apply_origin)})
  for i in 120:
   v._advance_auto_orbit(TAU/(v.orbit_speed*120.))
+  if i==0:check(v.camera.position.distance_to(applied.origin)>orbit_distance*.01,kind+" observer immediately travels instead of turning in place")
   var radial:Vector3=v.camera.position-center
-  check(absf(radial.length()-radius)<maxf(.00001,radius*.00001),kind+" true orbit radius")
-  check(absf(radial.dot(up))<maxf(.00001,radius*.00001),kind+" true orbit equator")
+  check(absf(radial.length()-orbit_distance)<maxf(.00001,orbit_distance*.00001),kind+" true orbit radius")
+  check(absf(radial.dot(up))<maxf(.00001,orbit_distance*.00001),kind+" true orbit equator")
   check(radial.normalized().dot(v.camera.basis.z)>.99999,kind+" target in sight")
- check(v.camera.position.distance_to(applied.origin)<maxf(.00001,radius*.00001),kind+" full revolution returns pose")
+  if native and kind=="mixed" and i in [29,59,89,119]:
+   await settle()
+   root.get_texture().get_image().save_png(output.path_join("observer-orbit-%03d.png"%((i+1)*3)))
+ check(v.camera.position.distance_to(applied.origin)<maxf(.00001,orbit_distance*.00001),kind+" full revolution returns pose")
  for i in 3:
-  var before:=snapshot(v);v.shell.edit_orbit_center();e.commit()
+  var before:=snapshot(v);v.shell.edit_orbit_center()
+  check(e.radius==radius,kind+" reopening retains separate gizmo size")
+  e.commit()
   check(snapshot(v)==before,kind+" repeated unchanged Apply exact")
   before=snapshot(v);v.shell.edit_orbit_center();e.dismiss();check(snapshot(v)==before,kind+" repeated Cancel exact")
  v._seek_time(0.0)
  var source_time:float=v.committed_sample.get("requested_time",0.0)
  v.playing=true;v.scene_layers.tick(.25);v.playing=false
- check(v.committed_sample.get("requested_time",0.0)>source_time and v.camera_target==center and v.camera_distance==radius,kind+" source time advances independently of chosen orbit")
+ check(v.committed_sample.get("requested_time",0.0)>source_time and v.camera_target==center and v.camera_distance==orbit_distance,kind+" source time advances independently of chosen orbit")
  v.orbit_enabled=false
  for node in scientific:check(node.global_transform==scientific[node],kind+" scientific transform unchanged")
  if kind=="mixed":
@@ -221,6 +234,19 @@ func scene(v, kind: String) -> void:
   key(KEY_ESCAPE,true);key(KEY_ESCAPE,false)
   check(not e.visible and v.shell.immersive,"Escape cancels editor before fullscreen recovery")
   v.shell.exit_immersive();await settle()
+func directional_apply(v) -> void:
+ # Include look-at singularities and a target behind the starting view.
+ for direction in [Vector3.UP,Vector3.DOWN,Vector3.BACK,Vector3(1,2,-3).normalized()]:
+  v._reset_camera();v.shell.edit_orbit_center();var e=v.shell.orbit_editor
+  var position:Vector3=v.camera.position
+  e.center=position+v.camera.basis*direction*7.5;e.radius=.25;e.write_fields();e.commit()
+  check(v.camera.position==position and v.camera.basis.is_finite(),"directional Apply preserves observer position")
+  check(v.camera.basis.z.dot((position-e.center).normalized())>.99999,"directional Apply faces target without singularity")
+  var before:=snapshot(v);v.shell.edit_orbit_center();e.radius=2.5;e.write_fields();e.commit()
+  check(snapshot(v)==before,"changing only gizmo size does not alter observer orbit")
+  v.shell.edit_orbit_center();e.dismiss();check(snapshot(v)==before,"Cancel restores directional observer orbit")
+ v.orbit_enabled=false
+
 func run() -> void:
  for arg in OS.get_cmdline_user_args():
   if arg.begins_with("--gizmo-output="):output=arg.trim_prefix("--gizmo-output=")
@@ -230,7 +256,12 @@ func run() -> void:
  var v=Viewer.new();root.add_child(v);v.set_process(false)
  v.shell.edit_orbit_center()
  check(v.shell.orbit_editor.radius>0 and v.shell.orbit_editor.depth>0,"empty-scene finite positive fallback")
+ v.shell.orbit_editor.center=v.camera.global_position;v.shell.orbit_editor.write_fields()
+ var coincident_pose:Transform3D=v.camera.transform
+ v.shell.orbit_editor.commit()
+ check(v.shell.orbit_editor.visible and v.camera.transform==coincident_pose,"coincident center keeps editor open without teleport")
  v.shell.orbit_editor.dismiss()
+ directional_apply(v)
  for kind in ["particles","mesh","volume","mixed","small","large","lobes"]:await scene(v,kind)
  var f:=FileAccess.open(output.path_join("report.json"),FileAccess.WRITE);f.store_string(JSON.stringify({"checks":checks,"failures":failures,"pixels":pixels,"diagnostics":diagnostics},"\t"));f.close()
  v.queue_free();await settle();print("GIZMO: %d checks / %d failures"%[checks,failures.size()]);quit(0 if failures.is_empty() else 1)

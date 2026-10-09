@@ -17,9 +17,11 @@ manual control on the same input; releasing them leaves Auto Orbit off. Wheel
 zoom retains its accepted behavior. See [steering and orbit](MANUAL_CAMERA_ORBIT.md).
 
 **Navigate → Edit orbit center…** temporarily turns Auto Orbit off and enables
-Free Camera movement for placement. The proposed target and radius remain draft
-values until Apply. **Apply** commits the world-space target and radius and
-immediately starts Auto Orbit there. **Cancel** restores the complete camera and
+Free Camera movement for placement. The proposed center and gizmo size remain draft
+values until Apply. **Apply** keeps the observer at its current position, turns it
+toward the chosen center, and starts travelling around that center at the existing
+observer-to-center distance while continuously facing it. Gizmo radius is marker
+size only. See [the observer-orbit correction](evidence/issue-212/observer-orbit/README.md). **Cancel** restores the complete camera and
 navigation state from before the editor opened, including whether Auto Orbit
 was on. Numeric text focus keeps the normal movement-key protection.
 The #212 candidate adds independent world-unit placement depth, a scene-scaled

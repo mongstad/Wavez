@@ -13,7 +13,8 @@ opens that menu). The camera remains usable while the editor is open.
   center. An end-on axis has no usable screen projection; turn the camera to
   expose it or enter world coordinates. Thin XYZ references and the three
   great circles use the actual world radius.
-- **Radius** is independent of center and placement depth. Radius 1 means
+- **Gizmo radius** controls the marker size only, independently of camera orbit
+  distance, center, and placement depth. Radius 1 means
   exactly one viewer-world unit. The −/+ and wheel controls retain their
   25% coarse / 2% Shift fine steps. There is no scene-relative enlargement cap;
   the existing finite numeric range is 0.000001–1e15.
@@ -24,12 +25,19 @@ opens that menu). The camera remains usable while the editor is open.
 - Flying, steering, tumbling, orbiting, zooming, or changing camera speed never
   edits center, radius, or placement depth. The projection naturally moves on
   screen. There is no camera-follow or screen-lock mode.
-- **Apply** commits the exact center and radius, keeps the current view direction
-  and up axis, and positions the camera one radius behind the center. Auto Orbit
-  then travels around that center on the equator perpendicular to this up axis.
-  Repeated unchanged Apply does not reparse the display text or reposition the
-  camera. Intentional camera navigation retains the accepted controls; a changed
-  camera pose/target/radius invalidates the Apply-time automatic orbit plane.
+- **Apply** keeps the observer at the exact current position and turns the camera
+  to face the selected center. The distance from that position to the center
+  becomes the camera orbit radius; gizmo size does not set it. The observer then
+  continuously travels around that fixed center while facing it, like a spaceship
+  keeping its nose toward a planet. The closest usable current up direction defines
+  the fixed orbit plane; looking directly along the old up axis uses the current
+  right axis to avoid a singularity. Scientific objects stay stationary.
+  Repeated unchanged Apply preserves the exact pose and orbit distance. Changing
+  only gizmo size does not move or redirect an already-applied observer orbit.
+  When the observer is exactly at the center, Apply leaves the editor open and
+  asks the user to move away; it never chooses a replacement position.
+  Intentional camera navigation retains the accepted controls; a changed camera
+  pose/target/distance invalidates the Apply-time automatic orbit plane.
 - **Cancel**, **×**, and **Escape** restore the complete pre-edit camera pose,
   target, radius, orientation representation, and Auto Orbit / Free Camera modes.
   Escape dismisses this editor before fullscreen recovery. Another Escape retains
@@ -55,7 +63,8 @@ Depth starts at the forward projection of the bounds center from the current
 camera. If that center is behind/too close, it uses half the world diagonal.
 Depth is never less than `max(4 * near, 0.00001)`. Empty/degenerate geometry uses
 `max(4 * near, 1)` depth and 4% of that depth as radius. Reopening an applied orbit
-with its unchanged target/radius preserves the exact chosen values instead of
+with its unchanged target/orbit distance preserves the separate gizmo size and
+placement depth instead of
 reinitializing them.
 
 The shaded sphere is a unit `SphereMesh` (`radius=1`, `height=2`) scaled uniformly
@@ -84,6 +93,6 @@ Owner R/T mappings are preserved. There is no separate middle-button drag zoom
 handler in accepted `main`; wheel behavior is unchanged. Physical device mapping
 and the owner's middle-button workflow must be verified with the actual profile.
 
-See [the second-attempt evidence](evidence/issue-212/attempt-02/README.md) for
-measurements, renderer/package results, exceptions, and exact owner checks.
+See [the observer-orbit correction](evidence/issue-212/observer-orbit/README.md)
+for the current Apply contract and validation. The [second-attempt evidence](evidence/issue-212/attempt-02/README.md) records the earlier implementation and its measurements.
 Synthetic tests do not establish physical acceptance on a research-scale scene.

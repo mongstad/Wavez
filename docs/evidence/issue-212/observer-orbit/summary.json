@@ -1,0 +1,59 @@
+{
+  "candidate_version": "v0.1.0.78",
+  "previous_review_commit": "fb263695a67996520156a78bc63255c26497d215",
+  "owner_acceptance": "pending physical review",
+  "runs": {
+    "observer-headless": {
+      "checks": 2838,
+      "failures": [],
+      "pixel_comparisons": 0,
+      "max_pixel_edge_error": null,
+      "max_apply_position_delta": 0
+    },
+    "observer-native-gl_compatibility": {
+      "checks": 2899,
+      "failures": [],
+      "pixel_comparisons": 36,
+      "max_pixel_edge_error": 0,
+      "max_apply_position_delta": 0
+    },
+    "observer-package-gl_compatibility": {
+      "checks": 2899,
+      "failures": [],
+      "pixel_comparisons": 36,
+      "max_pixel_edge_error": 0,
+      "max_apply_position_delta": 0
+    },
+    "observer-native-forward_plus": {
+      "checks": 2899,
+      "failures": [],
+      "pixel_comparisons": 36,
+      "max_pixel_edge_error": 0,
+      "max_apply_position_delta": 0
+    },
+    "observer-package-forward_plus": {
+      "checks": 2899,
+      "failures": [],
+      "pixel_comparisons": 36,
+      "max_pixel_edge_error": 0,
+      "max_apply_position_delta": 0
+    },
+    "observer-auto-headless-clean": {
+      "checks": 372,
+      "failures": []
+    },
+    "observer-auto-gl_compatibility": {
+      "checks": 372,
+      "failures": []
+    },
+    "observer-auto-forward_plus": {
+      "checks": 372,
+      "failures": []
+    }
+  },
+  "not_repeated": [
+    "previous navigation baseline failure",
+    "previous large-scene clipping failure",
+    "unrelated full suites"
+  ]
+}

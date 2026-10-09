@@ -4,7 +4,8 @@ Accepted baseline: **v0.1.0.77**, `6bd497d60c75c435f38cdffe1dd87d8cdd56bc97`,
 owner-merged PR #300. The repository's application identity is
 `viewer/project.godot` → `application/config/version`; see [version policy](VERSIONING.md).
 Issue #212 proposes candidate build 78 for world-space orbit-center placement
-and an Apply-time equatorial orbit. See [the candidate contract](ORBIT_GIZMO.md).
+and an observer orbit starting at the current camera position, facing the chosen
+center without a teleport. Gizmo size is independent of camera orbit distance. See [the candidate contract](ORBIT_GIZMO.md).
 Owner physical acceptance remains required.
 
 The GitHub Issues and Wavez Development Project are the operational queue. Work

@@ -42,7 +42,7 @@ func setup(owner_viewer) -> void:
 	panel.add_theme_stylebox_override("panel",theme.tonal_surface(12,10)); add_child(panel)
 	var box := VBoxContainer.new(); box.add_theme_constant_override("separation",8); panel.add_child(box)
 	var header := HBoxContainer.new(); box.add_child(header)
-	var title := Label.new(); title.text = "Edit orbit center and radius"; title.size_flags_horizontal = Control.SIZE_EXPAND_FILL; header.add_child(title)
+	var title := Label.new(); title.text = "Edit orbit center"; title.size_flags_horizontal = Control.SIZE_EXPAND_FILL; header.add_child(title)
 	details_toggle = Button.new(); header.add_child(details_toggle)
 	var close := Button.new(); close.text = "×"; close.tooltip_text = "Cancel and restore the previous view"; close.pressed.connect(dismiss); header.add_child(close)
 	readout = Label.new(); readout.add_theme_font_size_override("font_size",12)
@@ -58,11 +58,11 @@ func setup(owner_viewer) -> void:
 		input.text_submitted.connect(func(_value): read_fields())
 		input.focus_exited.connect(read_fields)
 	var radius_row := HBoxContainer.new(); radius_row.add_theme_constant_override("separation",8); details.add_child(radius_row)
-	var radius_label := Label.new(); radius_label.text = "Radius"; radius_row.add_child(radius_label)
+	var radius_label := Label.new(); radius_label.text = "Gizmo radius"; radius_row.add_child(radius_label)
 	radius_input = LineEdit.new(); radius_input.custom_minimum_size.x = 115; radius_input.size_flags_horizontal = Control.SIZE_EXPAND_FILL; radius_row.add_child(radius_input)
 	radius_input.text_submitted.connect(func(_value): read_fields()); radius_input.focus_exited.connect(read_fields)
 	radius_input.gui_input.connect(radius_event)
-	radius_input.tooltip_text = "Wheel or −/+ changes the draft radius by 25%; Shift gives 2% steps."
+	radius_input.tooltip_text = "Gizmo size only; orbit distance comes from your camera position. Wheel or −/+ gives 25% steps; Shift gives 2%."
 	for direction in [-1,1]:
 		var button := Button.new(); button.text = "−" if direction < 0 else "+"; button.custom_minimum_size.x = 32
 		button.tooltip_text = radius_input.tooltip_text; radius_row.add_child(button)
@@ -165,7 +165,7 @@ func initialize_draft() -> void:
 	var camera: Camera3D = viewer.camera
 	# Reopening a committed orbit is an exact edit, including after automatic
 	# motion. It must not replace the chosen radius with a new default.
-	if not last_applied.is_empty() and viewer.camera_target == last_applied.center and viewer.camera_distance == last_applied.radius:
+	if not last_applied.is_empty() and viewer.camera_target == last_applied.center and viewer.camera_distance == last_applied.orbit_distance:
 		center = last_applied.center; radius = last_applied.radius; depth = last_applied.depth
 		return
 	var bounds := scene_bounds()
@@ -213,8 +213,8 @@ func display_number(value: float) -> String:
 	return String.num(value,clampi(5-int(floor(log(maxf(absf(value),0.000001))/log(10.0))),0,9))
 
 func update_notice() -> void:
-	readout.text = "World (%s, %s, %s) · Radius %s · Ahead depth %s" % [display_number(center.x),display_number(center.y),display_number(center.z),display_number(radius),display_number(depth)]
-	notice.text = "World units · Depth affects Place ahead only. Cancel restores the view."
+	readout.text = "World (%s, %s, %s) · Gizmo radius %s · Ahead depth %s" % [display_number(center.x),display_number(center.y),display_number(center.z),display_number(radius),display_number(depth)]
+	notice.text = "Apply flies around this center from here, always facing it. Cancel restores the view."
 
 func adjust_radius(steps: float, fine: bool) -> void:
 	if not read_fields(): return
@@ -236,16 +236,28 @@ func place_ahead() -> void:
 func commit() -> void:
 	if not read_fields() or viewer.inspection_busy: return
 	var camera: Camera3D = viewer.camera
-	var unchanged: bool = viewer.camera_target == center and viewer.camera_distance == radius
+	var radial: Vector3 = camera.global_position - center
+	var orbit_distance := radial.length()
+	if not is_finite(orbit_distance) or orbit_distance <= 0.0:
+		notice.text = "Move away from the center before applying an orbit."
+		return
+	# An unchanged re-Apply keeps the already coherent pose/distance exactly,
+	# rather than re-normalizing float32 vectors and accumulating drift.
+	var unchanged: bool = not applied_orbit.is_empty() and camera.transform == applied_orbit.pose and viewer.camera_target == center and viewer.camera_distance == applied_orbit.radius
 	if not unchanged:
-		# Preserve the current view direction and up: reposition along its back
-		# axis, then use its up axis for the chosen equatorial orbit.
+		var back := radial / orbit_distance
+		# Look at the target from HERE. Project the existing up axis onto the
+		# view plane; when looking along that axis, retain the old right axis.
+		var right := camera.global_basis.y.cross(back)
+		if right.length_squared() < 0.000001:
+			right = camera.global_basis.x - back * camera.global_basis.x.dot(back)
+		right = right.normalized()
+		camera.global_basis = Basis(right,back.cross(right).normalized(),back)
 		viewer.camera_target = center
-		viewer.camera_distance = radius
-		camera.global_position = center + camera.global_basis.z.normalized()*radius
+		viewer.camera_distance = orbit_distance
 		viewer._adopt_camera_basis()
-	applied_orbit = {"axis":camera.basis.y.normalized(),"basis":camera.basis,"angle":0.0,"pose":camera.transform,"center":center,"radius":radius}
-	last_applied = {"center":center,"radius":radius,"depth":depth}
+	applied_orbit = {"axis":camera.basis.y.normalized(),"basis":camera.basis,"angle":0.0,"pose":camera.transform,"center":center,"radius":viewer.camera_distance}
+	last_applied = {"center":center,"radius":radius,"depth":depth,"orbit_distance":viewer.camera_distance}
 	dismiss(false)
 	viewer.orbit_enabled = true
 	viewer._sync_control_state()
