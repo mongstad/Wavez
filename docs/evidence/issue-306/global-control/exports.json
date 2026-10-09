@@ -1,0 +1,611 @@
+{
+  "runs": [
+    {
+      "name": "accepted-forward_plus-Cinematic",
+      "pixel_hashes": [
+        "fb6c383778e5e62f69b7c481c300a43996a41aa720c0f7e4d25b6a3ae89d6639",
+        "627ac6a2c8bcdceba435453a5754e8c1fa3c45207830ab6d9c55ca1049d85b95",
+        "a7eee41619a33a6304a872f690b2853d03120abce53edef689d628ed35ec5879"
+      ],
+      "ffprobe": {
+        "width": 640,
+        "height": 360,
+        "avg_frame_rate": "4/1",
+        "nb_frames": "3"
+      },
+      "progress": {
+        "current_frame": 3,
+        "elapsed_seconds": 0.909,
+        "encoder_pid": -1,
+        "intermediate_directory": "/home/Nozba/Codex/Wavez/bloom-global-306/exports/accepted-forward_plus-Cinematic",
+        "message": "Saved /home/Nozba/Codex/Wavez/bloom-global-306/exports/accepted-forward_plus-Cinematic/result.mp4",
+        "output_path": "/home/Nozba/Codex/Wavez/bloom-global-306/exports/accepted-forward_plus-Cinematic/result.mp4",
+        "renderer_pid": 304956,
+        "stage": "complete",
+        "total_frames": 3
+      },
+      "metrics": {
+        "elapsed_ms": 909,
+        "encoding_ms": 152,
+        "first_frame_ms": 648,
+        "open_ms": 393.524,
+        "png_ms": 64.345,
+        "profile": {
+          "counters": {},
+          "stages": {}
+        },
+        "ready_ms": 478,
+        "render_readback_ms": 90.17899999999999,
+        "runtime": {
+          "arguments": [
+            "--wavez-render-job=/home/Nozba/Codex/Wavez/bloom-global-306/exports/accepted-forward_plus-Cinematic/job.json"
+          ],
+          "executable": "/home/Nozba/Codex/Wavez/Godot_v4.7.2-stable_linux.x86_64",
+          "packaged": false,
+          "release": false,
+          "rendering_method": "forward_plus"
+        },
+        "sample_ms": 62.283,
+        "snapshot_identity_ms": 0,
+        "worker_identity_ms": 4.239
+      }
+    },
+    {
+      "name": "candidate-forward_plus-Cinematic",
+      "pixel_hashes": [
+        "fb6c383778e5e62f69b7c481c300a43996a41aa720c0f7e4d25b6a3ae89d6639",
+        "627ac6a2c8bcdceba435453a5754e8c1fa3c45207830ab6d9c55ca1049d85b95",
+        "a7eee41619a33a6304a872f690b2853d03120abce53edef689d628ed35ec5879"
+      ],
+      "ffprobe": {
+        "width": 640,
+        "height": 360,
+        "avg_frame_rate": "4/1",
+        "nb_frames": "3"
+      },
+      "progress": {
+        "current_frame": 3,
+        "elapsed_seconds": 0.883,
+        "encoder_pid": -1,
+        "intermediate_directory": "/home/Nozba/Codex/Wavez/bloom-global-306/exports/candidate-forward_plus-Cinematic",
+        "message": "Saved /home/Nozba/Codex/Wavez/bloom-global-306/exports/candidate-forward_plus-Cinematic/result.mp4",
+        "output_path": "/home/Nozba/Codex/Wavez/bloom-global-306/exports/candidate-forward_plus-Cinematic/result.mp4",
+        "renderer_pid": 305313,
+        "stage": "complete",
+        "total_frames": 3
+      },
+      "metrics": {
+        "elapsed_ms": 883,
+        "encoding_ms": 145,
+        "first_frame_ms": 633,
+        "open_ms": 387.773,
+        "png_ms": 63.459,
+        "profile": {
+          "counters": {},
+          "stages": {}
+        },
+        "ready_ms": 468,
+        "render_readback_ms": 86.174,
+        "runtime": {
+          "arguments": [
+            "--wavez-render-job=/home/Nozba/Codex/Wavez/bloom-global-306/exports/candidate-forward_plus-Cinematic/job.json"
+          ],
+          "executable": "/home/Nozba/Codex/Wavez/Godot_v4.7.2-stable_linux.x86_64",
+          "packaged": false,
+          "release": false,
+          "rendering_method": "forward_plus"
+        },
+        "sample_ms": 60.006,
+        "snapshot_identity_ms": 0,
+        "worker_identity_ms": 4.224
+      }
+    },
+    {
+      "name": "package-forward_plus-Cinematic",
+      "pixel_hashes": [
+        "fb6c383778e5e62f69b7c481c300a43996a41aa720c0f7e4d25b6a3ae89d6639",
+        "627ac6a2c8bcdceba435453a5754e8c1fa3c45207830ab6d9c55ca1049d85b95",
+        "a7eee41619a33a6304a872f690b2853d03120abce53edef689d628ed35ec5879"
+      ],
+      "ffprobe": {
+        "width": 640,
+        "height": 360,
+        "avg_frame_rate": "4/1",
+        "nb_frames": "3"
+      },
+      "progress": {
+        "current_frame": 3,
+        "elapsed_seconds": 0.835,
+        "encoder_pid": -1,
+        "intermediate_directory": "/home/Nozba/Codex/Wavez/bloom-global-306/exports/package-forward_plus-Cinematic",
+        "message": "Saved /home/Nozba/Codex/Wavez/bloom-global-306/exports/package-forward_plus-Cinematic/result.mp4",
+        "output_path": "/home/Nozba/Codex/Wavez/bloom-global-306/exports/package-forward_plus-Cinematic/result.mp4",
+        "renderer_pid": 305660,
+        "stage": "complete",
+        "total_frames": 3
+      },
+      "metrics": {
+        "elapsed_ms": 835,
+        "encoding_ms": 142,
+        "first_frame_ms": 587,
+        "open_ms": 346.853,
+        "png_ms": 62.059,
+        "profile": {
+          "counters": {},
+          "stages": {}
+        },
+        "ready_ms": 420,
+        "render_readback_ms": 85.656,
+        "runtime": {
+          "arguments": [
+            "--wavez-render-job=/home/Nozba/Codex/Wavez/bloom-global-306/exports/package-forward_plus-Cinematic/job.json"
+          ],
+          "executable": "/home/Nozba/Codex/Wavez/bloom-global-306/exports/WAVEZ.x86_64",
+          "packaged": true,
+          "release": true,
+          "rendering_method": "forward_plus"
+        },
+        "sample_ms": 61.312,
+        "snapshot_identity_ms": 0,
+        "worker_identity_ms": 4.299
+      }
+    },
+    {
+      "name": "accepted-forward_plus-Scientific",
+      "pixel_hashes": [
+        "c28698a216866473d28a41dd7f5c20c19421ea9797ae590d3d1010ca54791c7c",
+        "27fb71756ab1eccb9d11a112550230e1ef08e2d71349a66f31f3f0698ed05473",
+        "15f79d7e19c3b1435064f7c2b7cb5dd3546330e1e154dff10022729c5479d98b"
+      ],
+      "ffprobe": {
+        "width": 640,
+        "height": 360,
+        "avg_frame_rate": "4/1",
+        "nb_frames": "3"
+      },
+      "progress": {
+        "current_frame": 3,
+        "elapsed_seconds": 0.815,
+        "encoder_pid": -1,
+        "intermediate_directory": "/home/Nozba/Codex/Wavez/bloom-global-306/exports/accepted-forward_plus-Scientific",
+        "message": "Saved /home/Nozba/Codex/Wavez/bloom-global-306/exports/accepted-forward_plus-Scientific/result.mp4",
+        "output_path": "/home/Nozba/Codex/Wavez/bloom-global-306/exports/accepted-forward_plus-Scientific/result.mp4",
+        "renderer_pid": 306000,
+        "stage": "complete",
+        "total_frames": 3
+      },
+      "metrics": {
+        "elapsed_ms": 815,
+        "encoding_ms": 131,
+        "first_frame_ms": 607,
+        "open_ms": 374.261,
+        "png_ms": 20.623,
+        "profile": {
+          "counters": {},
+          "stages": {}
+        },
+        "ready_ms": 456,
+        "render_readback_ms": 85.20700000000001,
+        "runtime": {
+          "arguments": [
+            "--wavez-render-job=/home/Nozba/Codex/Wavez/bloom-global-306/exports/accepted-forward_plus-Scientific/job.json"
+          ],
+          "executable": "/home/Nozba/Codex/Wavez/Godot_v4.7.2-stable_linux.x86_64",
+          "packaged": false,
+          "release": false,
+          "rendering_method": "forward_plus"
+        },
+        "sample_ms": 60.441,
+        "snapshot_identity_ms": 0,
+        "worker_identity_ms": 4.372
+      }
+    },
+    {
+      "name": "candidate-forward_plus-Scientific",
+      "pixel_hashes": [
+        "c28698a216866473d28a41dd7f5c20c19421ea9797ae590d3d1010ca54791c7c",
+        "27fb71756ab1eccb9d11a112550230e1ef08e2d71349a66f31f3f0698ed05473",
+        "15f79d7e19c3b1435064f7c2b7cb5dd3546330e1e154dff10022729c5479d98b"
+      ],
+      "ffprobe": {
+        "width": 640,
+        "height": 360,
+        "avg_frame_rate": "4/1",
+        "nb_frames": "3"
+      },
+      "progress": {
+        "current_frame": 3,
+        "elapsed_seconds": 0.827,
+        "encoder_pid": -1,
+        "intermediate_directory": "/home/Nozba/Codex/Wavez/bloom-global-306/exports/candidate-forward_plus-Scientific",
+        "message": "Saved /home/Nozba/Codex/Wavez/bloom-global-306/exports/candidate-forward_plus-Scientific/result.mp4",
+        "output_path": "/home/Nozba/Codex/Wavez/bloom-global-306/exports/candidate-forward_plus-Scientific/result.mp4",
+        "renderer_pid": 306324,
+        "stage": "complete",
+        "total_frames": 3
+      },
+      "metrics": {
+        "elapsed_ms": 827,
+        "encoding_ms": 128,
+        "first_frame_ms": 623,
+        "open_ms": 389.995,
+        "png_ms": 19.824,
+        "profile": {
+          "counters": {},
+          "stages": {}
+        },
+        "ready_ms": 471,
+        "render_readback_ms": 86.558,
+        "runtime": {
+          "arguments": [
+            "--wavez-render-job=/home/Nozba/Codex/Wavez/bloom-global-306/exports/candidate-forward_plus-Scientific/job.json"
+          ],
+          "executable": "/home/Nozba/Codex/Wavez/Godot_v4.7.2-stable_linux.x86_64",
+          "packaged": false,
+          "release": false,
+          "rendering_method": "forward_plus"
+        },
+        "sample_ms": 60.791999999999994,
+        "snapshot_identity_ms": 0,
+        "worker_identity_ms": 4.511
+      }
+    },
+    {
+      "name": "package-forward_plus-Scientific",
+      "pixel_hashes": [
+        "c28698a216866473d28a41dd7f5c20c19421ea9797ae590d3d1010ca54791c7c",
+        "27fb71756ab1eccb9d11a112550230e1ef08e2d71349a66f31f3f0698ed05473",
+        "15f79d7e19c3b1435064f7c2b7cb5dd3546330e1e154dff10022729c5479d98b"
+      ],
+      "ffprobe": {
+        "width": 640,
+        "height": 360,
+        "avg_frame_rate": "4/1",
+        "nb_frames": "3"
+      },
+      "progress": {
+        "current_frame": 3,
+        "elapsed_seconds": 0.791,
+        "encoder_pid": -1,
+        "intermediate_directory": "/home/Nozba/Codex/Wavez/bloom-global-306/exports/package-forward_plus-Scientific",
+        "message": "Saved /home/Nozba/Codex/Wavez/bloom-global-306/exports/package-forward_plus-Scientific/result.mp4",
+        "output_path": "/home/Nozba/Codex/Wavez/bloom-global-306/exports/package-forward_plus-Scientific/result.mp4",
+        "renderer_pid": 306644,
+        "stage": "complete",
+        "total_frames": 3
+      },
+      "metrics": {
+        "elapsed_ms": 791,
+        "encoding_ms": 126,
+        "first_frame_ms": 593,
+        "open_ms": 368.624,
+        "png_ms": 17.898,
+        "profile": {
+          "counters": {},
+          "stages": {}
+        },
+        "ready_ms": 440,
+        "render_readback_ms": 85.1,
+        "runtime": {
+          "arguments": [
+            "--wavez-render-job=/home/Nozba/Codex/Wavez/bloom-global-306/exports/package-forward_plus-Scientific/job.json"
+          ],
+          "executable": "/home/Nozba/Codex/Wavez/bloom-global-306/exports/WAVEZ.x86_64",
+          "packaged": true,
+          "release": true,
+          "rendering_method": "forward_plus"
+        },
+        "sample_ms": 58.885,
+        "snapshot_identity_ms": 0,
+        "worker_identity_ms": 4.042
+      }
+    },
+    {
+      "name": "accepted-gl_compatibility-Cinematic",
+      "pixel_hashes": [
+        "67aad16c810248588b74a4aa992c43f0280d9974086721dd19aca29753a92ba2",
+        "5bb888ec5bc70c170191a26bbfaa591b329b920892a630ba6e8b19533a309724",
+        "95356ed9bdaf7ede1ed38afa793f13d2837ad03a22d3c3beda064120e63fc5d1"
+      ],
+      "ffprobe": {
+        "width": 640,
+        "height": 360,
+        "avg_frame_rate": "4/1",
+        "nb_frames": "3"
+      },
+      "progress": {
+        "current_frame": 3,
+        "elapsed_seconds": 0.641,
+        "encoder_pid": -1,
+        "intermediate_directory": "/home/Nozba/Codex/Wavez/bloom-global-306/exports/accepted-gl_compatibility-Cinematic",
+        "message": "Saved /home/Nozba/Codex/Wavez/bloom-global-306/exports/accepted-gl_compatibility-Cinematic/result.mp4",
+        "output_path": "/home/Nozba/Codex/Wavez/bloom-global-306/exports/accepted-gl_compatibility-Cinematic/result.mp4",
+        "renderer_pid": 306960,
+        "stage": "complete",
+        "total_frames": 3
+      },
+      "metrics": {
+        "elapsed_ms": 640,
+        "encoding_ms": 108,
+        "first_frame_ms": 460,
+        "open_ms": 276.836,
+        "png_ms": 24.557,
+        "profile": {
+          "counters": {},
+          "stages": {}
+        },
+        "ready_ms": 355,
+        "render_readback_ms": 43.161,
+        "runtime": {
+          "arguments": [
+            "--wavez-render-job=/home/Nozba/Codex/Wavez/bloom-global-306/exports/accepted-gl_compatibility-Cinematic/job.json"
+          ],
+          "executable": "/home/Nozba/Codex/Wavez/Godot_v4.7.2-stable_linux.x86_64",
+          "packaged": false,
+          "release": false,
+          "rendering_method": "gl_compatibility"
+        },
+        "sample_ms": 50.675000000000004,
+        "snapshot_identity_ms": 0,
+        "worker_identity_ms": 4.209
+      }
+    },
+    {
+      "name": "candidate-gl_compatibility-Cinematic",
+      "pixel_hashes": [
+        "67aad16c810248588b74a4aa992c43f0280d9974086721dd19aca29753a92ba2",
+        "5bb888ec5bc70c170191a26bbfaa591b329b920892a630ba6e8b19533a309724",
+        "95356ed9bdaf7ede1ed38afa793f13d2837ad03a22d3c3beda064120e63fc5d1"
+      ],
+      "ffprobe": {
+        "width": 640,
+        "height": 360,
+        "avg_frame_rate": "4/1",
+        "nb_frames": "3"
+      },
+      "progress": {
+        "current_frame": 3,
+        "elapsed_seconds": 0.66,
+        "encoder_pid": -1,
+        "intermediate_directory": "/home/Nozba/Codex/Wavez/bloom-global-306/exports/candidate-gl_compatibility-Cinematic",
+        "message": "Saved /home/Nozba/Codex/Wavez/bloom-global-306/exports/candidate-gl_compatibility-Cinematic/result.mp4",
+        "output_path": "/home/Nozba/Codex/Wavez/bloom-global-306/exports/candidate-gl_compatibility-Cinematic/result.mp4",
+        "renderer_pid": 307260,
+        "stage": "complete",
+        "total_frames": 3
+      },
+      "metrics": {
+        "elapsed_ms": 660,
+        "encoding_ms": 112,
+        "first_frame_ms": 475,
+        "open_ms": 293.454,
+        "png_ms": 24.385000000000005,
+        "profile": {
+          "counters": {},
+          "stages": {}
+        },
+        "ready_ms": 372,
+        "render_readback_ms": 43.062999999999995,
+        "runtime": {
+          "arguments": [
+            "--wavez-render-job=/home/Nozba/Codex/Wavez/bloom-global-306/exports/candidate-gl_compatibility-Cinematic/job.json"
+          ],
+          "executable": "/home/Nozba/Codex/Wavez/Godot_v4.7.2-stable_linux.x86_64",
+          "packaged": false,
+          "release": false,
+          "rendering_method": "gl_compatibility"
+        },
+        "sample_ms": 50.657,
+        "snapshot_identity_ms": 0,
+        "worker_identity_ms": 4.243
+      }
+    },
+    {
+      "name": "package-gl_compatibility-Cinematic",
+      "pixel_hashes": [
+        "67aad16c810248588b74a4aa992c43f0280d9974086721dd19aca29753a92ba2",
+        "5bb888ec5bc70c170191a26bbfaa591b329b920892a630ba6e8b19533a309724",
+        "95356ed9bdaf7ede1ed38afa793f13d2837ad03a22d3c3beda064120e63fc5d1"
+      ],
+      "ffprobe": {
+        "width": 640,
+        "height": 360,
+        "avg_frame_rate": "4/1",
+        "nb_frames": "3"
+      },
+      "progress": {
+        "current_frame": 3,
+        "elapsed_seconds": 0.617,
+        "encoder_pid": -1,
+        "intermediate_directory": "/home/Nozba/Codex/Wavez/bloom-global-306/exports/package-gl_compatibility-Cinematic",
+        "message": "Saved /home/Nozba/Codex/Wavez/bloom-global-306/exports/package-gl_compatibility-Cinematic/result.mp4",
+        "output_path": "/home/Nozba/Codex/Wavez/bloom-global-306/exports/package-gl_compatibility-Cinematic/result.mp4",
+        "renderer_pid": 307562,
+        "stage": "complete",
+        "total_frames": 3
+      },
+      "metrics": {
+        "elapsed_ms": 617,
+        "encoding_ms": 117,
+        "first_frame_ms": 431,
+        "open_ms": 256.028,
+        "png_ms": 21.078999999999997,
+        "profile": {
+          "counters": {},
+          "stages": {}
+        },
+        "ready_ms": 328,
+        "render_readback_ms": 41.725,
+        "runtime": {
+          "arguments": [
+            "--wavez-render-job=/home/Nozba/Codex/Wavez/bloom-global-306/exports/package-gl_compatibility-Cinematic/job.json"
+          ],
+          "executable": "/home/Nozba/Codex/Wavez/bloom-global-306/exports/WAVEZ.x86_64",
+          "packaged": true,
+          "release": true,
+          "rendering_method": "gl_compatibility"
+        },
+        "sample_ms": 50.270999999999994,
+        "snapshot_identity_ms": 0,
+        "worker_identity_ms": 4.597
+      }
+    },
+    {
+      "name": "accepted-gl_compatibility-Scientific",
+      "pixel_hashes": [
+        "c27edd68349d9bdf285edae32245d8f7cea37380ec8f168b4d32270c02a54956",
+        "ab7467b8672f08850e293645390d0b9719738041ae5ab3a2b48acee207408659",
+        "d26f04d0a3462bb2dd5f343fbf98cd08ebc38ec43f835ece96fdcbcef77d457c"
+      ],
+      "ffprobe": {
+        "width": 640,
+        "height": 360,
+        "avg_frame_rate": "4/1",
+        "nb_frames": "3"
+      },
+      "progress": {
+        "current_frame": 3,
+        "elapsed_seconds": 0.652,
+        "encoder_pid": -1,
+        "intermediate_directory": "/home/Nozba/Codex/Wavez/bloom-global-306/exports/accepted-gl_compatibility-Scientific",
+        "message": "Saved /home/Nozba/Codex/Wavez/bloom-global-306/exports/accepted-gl_compatibility-Scientific/result.mp4",
+        "output_path": "/home/Nozba/Codex/Wavez/bloom-global-306/exports/accepted-gl_compatibility-Scientific/result.mp4",
+        "renderer_pid": 307865,
+        "stage": "complete",
+        "total_frames": 3
+      },
+      "metrics": {
+        "elapsed_ms": 652,
+        "encoding_ms": 112,
+        "first_frame_ms": 469,
+        "open_ms": 291.285,
+        "png_ms": 24.425,
+        "profile": {
+          "counters": {},
+          "stages": {}
+        },
+        "ready_ms": 369,
+        "render_readback_ms": 37.219,
+        "runtime": {
+          "arguments": [
+            "--wavez-render-job=/home/Nozba/Codex/Wavez/bloom-global-306/exports/accepted-gl_compatibility-Scientific/job.json"
+          ],
+          "executable": "/home/Nozba/Codex/Wavez/Godot_v4.7.2-stable_linux.x86_64",
+          "packaged": false,
+          "release": false,
+          "rendering_method": "gl_compatibility"
+        },
+        "sample_ms": 50.419,
+        "snapshot_identity_ms": 0,
+        "worker_identity_ms": 4.088
+      }
+    },
+    {
+      "name": "candidate-gl_compatibility-Scientific",
+      "pixel_hashes": [
+        "c27edd68349d9bdf285edae32245d8f7cea37380ec8f168b4d32270c02a54956",
+        "ab7467b8672f08850e293645390d0b9719738041ae5ab3a2b48acee207408659",
+        "d26f04d0a3462bb2dd5f343fbf98cd08ebc38ec43f835ece96fdcbcef77d457c"
+      ],
+      "ffprobe": {
+        "width": 640,
+        "height": 360,
+        "avg_frame_rate": "4/1",
+        "nb_frames": "3"
+      },
+      "progress": {
+        "current_frame": 3,
+        "elapsed_seconds": 0.647,
+        "encoder_pid": -1,
+        "intermediate_directory": "/home/Nozba/Codex/Wavez/bloom-global-306/exports/candidate-gl_compatibility-Scientific",
+        "message": "Saved /home/Nozba/Codex/Wavez/bloom-global-306/exports/candidate-gl_compatibility-Scientific/result.mp4",
+        "output_path": "/home/Nozba/Codex/Wavez/bloom-global-306/exports/candidate-gl_compatibility-Scientific/result.mp4",
+        "renderer_pid": 308163,
+        "stage": "complete",
+        "total_frames": 3
+      },
+      "metrics": {
+        "elapsed_ms": 647,
+        "encoding_ms": 111,
+        "first_frame_ms": 464,
+        "open_ms": 288.627,
+        "png_ms": 24.733,
+        "profile": {
+          "counters": {},
+          "stages": {}
+        },
+        "ready_ms": 367,
+        "render_readback_ms": 36.603,
+        "runtime": {
+          "arguments": [
+            "--wavez-render-job=/home/Nozba/Codex/Wavez/bloom-global-306/exports/candidate-gl_compatibility-Scientific/job.json"
+          ],
+          "executable": "/home/Nozba/Codex/Wavez/Godot_v4.7.2-stable_linux.x86_64",
+          "packaged": false,
+          "release": false,
+          "rendering_method": "gl_compatibility"
+        },
+        "sample_ms": 49.687,
+        "snapshot_identity_ms": 0,
+        "worker_identity_ms": 4.143
+      }
+    },
+    {
+      "name": "package-gl_compatibility-Scientific",
+      "pixel_hashes": [
+        "c27edd68349d9bdf285edae32245d8f7cea37380ec8f168b4d32270c02a54956",
+        "ab7467b8672f08850e293645390d0b9719738041ae5ab3a2b48acee207408659",
+        "d26f04d0a3462bb2dd5f343fbf98cd08ebc38ec43f835ece96fdcbcef77d457c"
+      ],
+      "ffprobe": {
+        "width": 640,
+        "height": 360,
+        "avg_frame_rate": "4/1",
+        "nb_frames": "3"
+      },
+      "progress": {
+        "current_frame": 3,
+        "elapsed_seconds": 0.616,
+        "encoder_pid": -1,
+        "intermediate_directory": "/home/Nozba/Codex/Wavez/bloom-global-306/exports/package-gl_compatibility-Scientific",
+        "message": "Saved /home/Nozba/Codex/Wavez/bloom-global-306/exports/package-gl_compatibility-Scientific/result.mp4",
+        "output_path": "/home/Nozba/Codex/Wavez/bloom-global-306/exports/package-gl_compatibility-Scientific/result.mp4",
+        "renderer_pid": 308465,
+        "stage": "complete",
+        "total_frames": 3
+      },
+      "metrics": {
+        "elapsed_ms": 616,
+        "encoding_ms": 115,
+        "first_frame_ms": 432,
+        "open_ms": 259.313,
+        "png_ms": 22.304000000000002,
+        "profile": {
+          "counters": {},
+          "stages": {}
+        },
+        "ready_ms": 333,
+        "render_readback_ms": 35.346999999999994,
+        "runtime": {
+          "arguments": [
+            "--wavez-render-job=/home/Nozba/Codex/Wavez/bloom-global-306/exports/package-gl_compatibility-Scientific/job.json"
+          ],
+          "executable": "/home/Nozba/Codex/Wavez/bloom-global-306/exports/WAVEZ.x86_64",
+          "packaged": true,
+          "release": true,
+          "rendering_method": "gl_compatibility"
+        },
+        "sample_ms": 50.393,
+        "snapshot_identity_ms": 0,
+        "worker_identity_ms": 4.343
+      }
+    }
+  ],
+  "source_sha256_unchanged": "43f731811acab38766ccd3133c43a8c9aea47645051d38b6466f70d2d26dc978",
+  "strict_verified_records": 9,
+  "all_accepted_candidate_package_pixels_identical": true,
+  "worker_sha256": "76cf3925925179cb0097983842e09d982165d3e8b04d344ebff9c6007ead510a",
+  "limitations": [
+    "640x360; 3 frames per job; v1 jobs; no long/4K or selection-aware v2 video matrix"
+  ]
+}

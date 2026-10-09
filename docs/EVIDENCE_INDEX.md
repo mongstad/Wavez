@@ -6,6 +6,8 @@ Use [current status](CURRENT_STATUS.md) for supported contracts and boundaries.
 [The documentation audit](documentation-audit/README.md) records retired paths;
 Git permalinks preserve their original context.
 
+- [Issue #306 — global Bloom control state](evidence/issue-306/global-control/README.md): native mouse/keyboard/drag checks, both renderers/themes, saved-state reproduction, exact accepted-main render/export comparisons and owner physical-review limits. Earlier independent-Bloom research stays frozen in [Draft PR #309](https://github.com/mongstad/Wavez/pull/309); it is superseded by the owner's scene-wide decision.
+
 - [Issue #289 — Dark and Light application themes](evidence/issue-289/README.md): palette-only chrome, official About artwork, geometry/scientific-pixel comparisons, source/package restart matrix and owner review limits.
 
 - [Issue #212 — observer orbit correction](evidence/issue-212/observer-orbit/README.md): Apply starts from the current observer position, faces the chosen center and derives camera orbit distance independently of gizmo size; current review behavior.

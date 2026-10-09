@@ -1,0 +1,62 @@
+{
+	"checks": 24,
+	"failures": [],
+	"observations": [
+		{
+			"case": "fields-dark-restored",
+			"editable": false,
+			"glow_enabled": false,
+			"menu_checked": "Scientific",
+			"preset": "Scientific"
+		},
+		{
+			"case": "fields-dark-selected-Cinematic",
+			"editable": true,
+			"glow_enabled": true,
+			"menu_checked": "Cinematic",
+			"preset": "Cinematic"
+		},
+		{
+			"case": "fields-light-restored",
+			"editable": false,
+			"glow_enabled": false,
+			"menu_checked": "Scientific",
+			"preset": "Scientific"
+		},
+		{
+			"case": "fields-light-selected-Cinematic",
+			"editable": true,
+			"glow_enabled": true,
+			"menu_checked": "Cinematic",
+			"preset": "Cinematic"
+		},
+		{
+			"case": "meshes-dark-restored",
+			"editable": false,
+			"glow_enabled": false,
+			"menu_checked": "Scientific",
+			"preset": "Scientific"
+		},
+		{
+			"case": "meshes-dark-selected-Cinematic",
+			"editable": true,
+			"glow_enabled": true,
+			"menu_checked": "Cinematic",
+			"preset": "Cinematic"
+		},
+		{
+			"case": "meshes-light-restored",
+			"editable": false,
+			"glow_enabled": false,
+			"menu_checked": "Scientific",
+			"preset": "Scientific"
+		},
+		{
+			"case": "meshes-light-selected-Cinematic",
+			"editable": true,
+			"glow_enabled": true,
+			"menu_checked": "Cinematic",
+			"preset": "Cinematic"
+		}
+	]
+}
