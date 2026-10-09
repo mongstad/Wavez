@@ -1,0 +1,11 @@
+{
+  "accepted_main": "407c35833c07a800f12e56aae1140ac08a822e63",
+  "renderer": "gl_compatibility",
+  "viewport": [
+    1440,
+    900
+  ],
+  "different_pixels": 0,
+  "accepted_png_sha256": "3152d0fc1c7b3c453fc968f07d635282027ae504517bae0e5f154cf028d4caaf",
+  "candidate_png_sha256": "3152d0fc1c7b3c453fc968f07d635282027ae504517bae0e5f154cf028d4caaf"
+}

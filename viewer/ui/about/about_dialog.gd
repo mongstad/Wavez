@@ -2,6 +2,7 @@ extends AcceptDialog
 ## Informational only: no capture, playback or scientific controller dependencies.
 const Version = preload("res://application_version.gd")
 const Notices = preload("res://ui/about/notices.tres")
+const LightLogo = preload("res://ui/about/wavez-logo-light.png")
 const Logo = preload("res://ui/about/wavez-logo-dark.png")
 const REPOSITORY := "https://github.com/mongstad/Wavez"
 const DOCUMENTATION := "https://github.com/mongstad/Wavez#readme"

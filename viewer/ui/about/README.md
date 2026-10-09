@@ -20,6 +20,22 @@ The README uses the unchanged dark, no-slogan banner from the same package
 `81426cb5a6b248a7f1948d86c911fb7147bd8f31dc53ded1d696b40edcd1b9e4`).
 [TRADEMARKS.md](../../../TRADEMARKS.md) governs both assets.
 
+## Light artwork (#289)
+
+`wavez-logo-light.png` is copied byte-for-byte from the owner-approved
+`Wavez_ThemeBranding/Light_Mode/Wavez_Square_Logo_No_Slogan_No_Border_White.png`
+in the real project folder outside the Git root. It is a 1254 × 1254 PNG,
+SHA-256 `fb48a4c75fb4c48800b21cad4541430611bccc83d46a4a580ff3d50bc39c8ddf`.
+The branding pack contains no separate license file; the existing owner branding
+policy in [TRADEMARKS.md](../../../TRADEMARKS.md) applies. The issue expressly
+authorizes this official artwork. It is not a new third-party dependency.
+
+About preloads both official images into the exported PCK and switches its
+texture with the local application theme. Both imports use lossless compression
+and mipmaps; the same 112 × 112 aspect-preserving control is retained. The dark
+logo and application icon remain unchanged. No absolute workstation path is used
+at runtime. See [application themes](../../../docs/APPLICATION_THEMES.md).
+
 ## Historical #147 artwork provenance
 
 The then-current `wavez-logo.png` is the owner-provided violet artwork requested

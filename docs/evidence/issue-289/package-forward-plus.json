@@ -1,0 +1,19 @@
+{
+  "cycle": {
+    "checks": 42879,
+    "failures": [],
+    "renderer": "forward_plus"
+  },
+  "restart-light": {
+    "checks": 4,
+    "failures": [],
+    "renderer": "forward_plus"
+  },
+  "restart-dark": {
+    "checks": 2,
+    "failures": [],
+    "renderer": "forward_plus"
+  },
+  "source_sha256_unchanged": "a8a72b5ab4350aa66b4a0d0474c76d694e4370e9c00c31f03b1e310e616facce",
+  "packaged": true
+}
