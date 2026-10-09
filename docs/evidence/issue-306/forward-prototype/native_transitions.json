@@ -1,0 +1,126 @@
+{
+  "benchmarks": [],
+  "cases": [],
+  "checks": 23,
+  "failures": [],
+  "pid": 273480,
+  "renderer": "forward_plus",
+  "transitions": [
+    {
+      "draw_readback_ms": 29.333,
+      "inventory": {},
+      "label": "initial-1080",
+      "pixel_sha256": "fddfcd9409dd15de96aa54ff937a913d8c29d2e24d8b20a4b4beb57d6ecc1e0a",
+      "prepare_and_layout_ms": 252.584,
+      "resolution": [
+        1920,
+        1080
+      ],
+      "time": 0.0,
+      "total_ready_ms": 281.917
+    },
+    {
+      "draw_readback_ms": 140.981,
+      "inventory": {},
+      "label": "resize-4K",
+      "pixel_sha256": "f8e7c43369f5bd6fca6e18af87d07fed4e79f67f534d2491594418311a52f17b",
+      "prepare_and_layout_ms": 255.335,
+      "resolution": [
+        3840,
+        2160
+      ],
+      "time": 0.0,
+      "total_ready_ms": 396.316
+    },
+    {
+      "draw_readback_ms": 32.353,
+      "inventory": {},
+      "label": "resize-1080",
+      "pixel_sha256": "fddfcd9409dd15de96aa54ff937a913d8c29d2e24d8b20a4b4beb57d6ecc1e0a",
+      "prepare_and_layout_ms": 247.525,
+      "resolution": [
+        1920,
+        1080
+      ],
+      "time": 0.0,
+      "total_ready_ms": 279.878
+    },
+    {
+      "draw_readback_ms": 26.11,
+      "inventory": {},
+      "label": "seek-025",
+      "pixel_sha256": "890056c687cee8260c634e5c7dea59746a573807f8293e636739eba1704b6d3a",
+      "prepare_and_layout_ms": 238.696,
+      "resolution": [
+        1920,
+        1080
+      ],
+      "time": 0.25,
+      "total_ready_ms": 264.806
+    },
+    {
+      "draw_readback_ms": 29.87,
+      "inventory": {},
+      "label": "seek-075",
+      "pixel_sha256": "c7ed50820c47746767395335c91e886962101e391c1d904b097705dbdc9c8810",
+      "prepare_and_layout_ms": 234.501,
+      "resolution": [
+        1920,
+        1080
+      ],
+      "time": 0.75,
+      "total_ready_ms": 264.371
+    },
+    {
+      "draw_readback_ms": 30.214,
+      "inventory": {},
+      "label": "seek-025-repeat",
+      "pixel_sha256": "890056c687cee8260c634e5c7dea59746a573807f8293e636739eba1704b6d3a",
+      "prepare_and_layout_ms": 152.063,
+      "resolution": [
+        1920,
+        1080
+      ],
+      "time": 0.25,
+      "total_ready_ms": 182.277
+    }
+  ],
+  "version": "v0.1.0.79",
+  "source_hashes_unchanged": {
+    "particles.wvz": "8bb0dbf3abb46cb439f3b2e1bbbd1fd1bac2e52706d869c1530ff96c5e7a33ce",
+    "separated.wvz": "4f63c954587673fb0f2a5eb041b44a163d141e63ad40752850f7d812120b96f3",
+    "overlap.wvz": "78f390cedc869a83b5ee8a935043d8614447d905e7565b379bdb3565966a96f7",
+    "occluded.wvz": "a173c82fd7e9da6b5747bc3f41c0771d3266806c7c9effc5906ee1057be5bf1b",
+    "slice.wvz": "a51ff68d23e7a0b1e8c121b339c5213126e19ed9331e2d4949671eeea260cf76",
+    "iso.wvz": "93e30f9edadbdddace32704217036dd3b8143b931859ca9c35fb56956dc73bfb",
+    "heavy.wvz": "bc31ceb33bed393778702d24fb5afe4819114c2fa86794864daa28f306b17edc"
+  },
+  "strict_verified_records": {
+    "particles.wvz": 3,
+    "separated.wvz": 9,
+    "overlap.wvz": 9,
+    "occluded.wvz": 9,
+    "slice.wvz": 9,
+    "iso.wvz": 9,
+    "heavy.wvz": 48
+  },
+  "device_telemetry_samples": 16,
+  "native_command": [
+    "/home/Nozba/Codex/Wavez/Godot_v4.7.2-stable_linux.x86_64",
+    "--path",
+    "/tmp/wavez-306-accepted-rct6mj6f/viewer",
+    "--script",
+    "res://scene/prototype_category_bloom_forward.gd",
+    "--rendering-method",
+    "forward_plus",
+    "--audio-driver",
+    "Dummy",
+    "--disable-vsync",
+    "--resolution",
+    "960x640",
+    "--",
+    "/home/Nozba/Codex/Wavez/bloom-306/accepted-native-transitions",
+    "transitions"
+  ],
+  "validation_package": false
+}

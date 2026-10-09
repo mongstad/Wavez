@@ -1,0 +1,161 @@
+{
+  "benchmarks": [],
+  "cases": [
+    {
+      "inventory": {
+        "active_categories": [
+          "particles",
+          "fields",
+          "meshes"
+        ],
+        "allocation_events": 5,
+        "explicit_color_depth_min_bytes": 36864000,
+        "generation": 1,
+        "private_viewports": 5,
+        "proxies": 7,
+        "release_events": 0,
+        "reservation_bytes": 127795200
+      },
+      "kernels": {
+        "fields": {
+          "maximum": [
+            0.0821533203125,
+            0.187255859375,
+            0.08184814453125
+          ],
+          "nonzero": 144712,
+          "sha256": "886d6815a06253ba832021ab220134782417bd0f2539ca585774d220d4b6f998",
+          "sum": [
+            364.89044189453125,
+            886.2296142578125,
+            1084.7149658203125
+          ]
+        },
+        "meshes": {
+          "maximum": [
+            0.415771484375,
+            0.4052734375,
+            0.1622314453125
+          ],
+          "nonzero": 107029,
+          "sha256": "728a70d2404e8836ac13c2e1aa7e3708181d2f2ecbef4fdc708d4e39fd76d115",
+          "sum": [
+            1827.7081298828125,
+            2927.91064453125,
+            1322.0697021484375
+          ]
+        },
+        "particles": {
+          "maximum": [
+            0.155517578125,
+            0.155517578125,
+            0.155517578125
+          ],
+          "nonzero": 118307,
+          "sha256": "272dfbc916e5531b6f2ef0474d678b939ea4ca51ea5084ed57313ccc448153d6",
+          "sum": [
+            1572.9781494140625,
+            1572.9781494140625,
+            1572.9781494140625
+          ]
+        }
+      },
+      "raw": {
+        "fields": {
+          "maximum": [
+            0.199462890625,
+            0.302978515625,
+            0.101318359375
+          ],
+          "nonzero": 56440,
+          "sha256": "fd0a80ea9bc76452f64c59862a91f1a6cbc2f6898ebc845a77f8a8adad9adc9e",
+          "sum": [
+            382.32122802734375,
+            928.4028930664062,
+            1135.9093017578125
+          ]
+        },
+        "meshes": {
+          "maximum": [
+            0.916015625,
+            0.74853515625,
+            0.262451171875
+          ],
+          "nonzero": 10302,
+          "sha256": "c02ae359b82db6f77979d988e2afc10e566c4838944aee24c722e2986cd77352",
+          "sum": [
+            1920.1402587890625,
+            3073.127197265625,
+            1385.8763427734375
+          ]
+        },
+        "particles": {
+          "maximum": [
+            1.0615234375,
+            1.0615234375,
+            1.0615234375
+          ],
+          "nonzero": 10732,
+          "sha256": "1e718975bd81c60237fd0cc2997574630625f9bd9cb8ebaf7a87d5a0d2af7ad4",
+          "sum": [
+            1668.6009521484375,
+            1668.6009521484375,
+            1668.6009521484375
+          ]
+        }
+      },
+      "reconstruction": {
+        "absolute_tolerance": 0.0002,
+        "failed_channels": 0,
+        "maximum_absolute_error": 0.00060272216796875,
+        "relative_tolerance": 0.01,
+        "rmse": 1.444561091390496e-05,
+        "tested_channels": 1843200
+      },
+      "scene": "overlap"
+    }
+  ],
+  "checks": 65,
+  "failures": [],
+  "pid": 280521,
+  "renderer": "forward_plus",
+  "transitions": [],
+  "version": "v0.1.0.80",
+  "source_hashes_unchanged": {
+    "particles.wvz": "8cdb18eee362d2ca074683483a646cbdd9f5ed340e62c531b1987e353e90a79e",
+    "separated.wvz": "afcb193d17385a971936e55df62081090842830b9f36893ecc33d9f983607f68",
+    "overlap.wvz": "199ba2a8445eee17304ea88732e75eafc141f826164354e925c726b98fcd4a1d",
+    "occluded.wvz": "46719be4dd91c6fbdf4f542dae47bc5f12cc86d190d2f2a2852c8f7cb6f8ea7f",
+    "heavy.wvz": "3f3be7fc33437ec1f271241a3bef976f6d9704cdb6b2362b49b5445c0e2d0939",
+    "slice.wvz": "617fa7ec60dc4da92522984a35ee77cc3f461b2033ebe1ec419f9b606bf7dcfa",
+    "iso.wvz": "80eeda18beece071a2344577a45e457ea52473b1938e9b0d873eba2d9e19c94a"
+  },
+  "strict_verified_records": {
+    "particles.wvz": 3,
+    "separated.wvz": 9,
+    "overlap.wvz": 9,
+    "occluded.wvz": 9,
+    "heavy.wvz": 48,
+    "slice.wvz": 9,
+    "iso.wvz": 9
+  },
+  "device_telemetry_samples": 15,
+  "native_command": [
+    "/home/Nozba/Codex/Wavez/Godot_v4.7.2-stable_linux.x86_64",
+    "--path",
+    "/home/Nozba/Codex/Wavez/Wavez/viewer",
+    "--script",
+    "res://scene/prototype_category_bloom_forward.gd",
+    "--rendering-method",
+    "forward_plus",
+    "--audio-driver",
+    "Dummy",
+    "--disable-vsync",
+    "--resolution",
+    "960x640",
+    "--",
+    "/home/Nozba/Codex/Wavez/bloom-306/forward-prototype",
+    "smoke"
+  ],
+  "validation_package": false
+}

@@ -1,0 +1,609 @@
+{
+  "benchmarks": [],
+  "cases": [
+    {
+      "inventory": {
+        "active_categories": [
+          "particles",
+          "fields",
+          "meshes"
+        ],
+        "allocation_events": 5,
+        "explicit_color_depth_min_bytes": 36864000,
+        "generation": 1,
+        "private_viewports": 5,
+        "proxies": 7,
+        "release_events": 0,
+        "reservation_bytes": 127795200
+      },
+      "kernels": {
+        "fields": {
+          "maximum": [
+            0.10247802734375,
+            0.2232666015625,
+            0.08331298828125
+          ],
+          "nonzero": 146216,
+          "sha256": "4dcdba67e3112d72199498569e22a3cf7a79a0f556efd9bbee75659b0409f732",
+          "sum": [
+            510.20013427734375,
+            1450.247802734375,
+            1551.02978515625
+          ]
+        },
+        "meshes": {
+          "maximum": [
+            0.447509765625,
+            0.43115234375,
+            0.1654052734375
+          ],
+          "nonzero": 107688,
+          "sha256": "4fc1f726d8b627481ca4ca1e03f6a8aabe6c72042f24c7f6986c3fd421fab479",
+          "sum": [
+            1970.66357421875,
+            3089.68115234375,
+            1374.497802734375
+          ]
+        },
+        "particles": {
+          "maximum": [
+            0.2685546875,
+            0.2685546875,
+            0.2685546875
+          ],
+          "nonzero": 122422,
+          "sha256": "018915e7b16d99cd1e4350898d0b368fcc4040cd6c109f6083016a32f708d474",
+          "sum": [
+            4023.77490234375,
+            4023.77490234375,
+            4023.77490234375
+          ]
+        }
+      },
+      "raw": {
+        "fields": {
+          "maximum": [
+            0.199462890625,
+            0.302978515625,
+            0.101318359375
+          ],
+          "nonzero": 56440,
+          "sha256": "499e543919daa2955d7eb8729bf58235f009090cfb65e3012afa14950af7d4b7",
+          "sum": [
+            534.2477416992188,
+            1518.581298828125,
+            1623.9224853515625
+          ]
+        },
+        "meshes": {
+          "maximum": [
+            0.97216796875,
+            0.79150390625,
+            0.263916015625
+          ],
+          "nonzero": 10404,
+          "sha256": "485c7dac88b876f794976d44e1302b7ff002d6b043abd12a264bf58ba2d4c34a",
+          "sum": [
+            2070.610595703125,
+            3243.12255859375,
+            1440.7796630859375
+          ]
+        },
+        "particles": {
+          "maximum": [
+            1.306640625,
+            1.306640625,
+            1.306640625
+          ],
+          "nonzero": 16886,
+          "sha256": "b1b3b4e19130e51bd34df3240d05c6894a717a61f9e7ebc66a0351c2d8561bc8",
+          "sum": [
+            4287.755859375,
+            4287.755859375,
+            4287.755859375
+          ]
+        }
+      },
+      "reconstruction": {
+        "absolute_tolerance": 0.0002,
+        "failed_channels": 0,
+        "maximum_absolute_error": 0.0,
+        "relative_tolerance": 0.01,
+        "rmse": 0.0,
+        "tested_channels": 1843200
+      },
+      "scene": "separated"
+    },
+    {
+      "inventory": {
+        "active_categories": [
+          "particles",
+          "fields",
+          "meshes"
+        ],
+        "allocation_events": 5,
+        "explicit_color_depth_min_bytes": 36864000,
+        "generation": 1,
+        "private_viewports": 5,
+        "proxies": 7,
+        "release_events": 0,
+        "reservation_bytes": 127795200
+      },
+      "kernels": {
+        "fields": {
+          "maximum": [
+            0.0821533203125,
+            0.187255859375,
+            0.08184814453125
+          ],
+          "nonzero": 144712,
+          "sha256": "886d6815a06253ba832021ab220134782417bd0f2539ca585774d220d4b6f998",
+          "sum": [
+            364.89044189453125,
+            886.2296142578125,
+            1084.7149658203125
+          ]
+        },
+        "meshes": {
+          "maximum": [
+            0.415771484375,
+            0.4052734375,
+            0.1622314453125
+          ],
+          "nonzero": 107029,
+          "sha256": "728a70d2404e8836ac13c2e1aa7e3708181d2f2ecbef4fdc708d4e39fd76d115",
+          "sum": [
+            1827.7081298828125,
+            2927.91064453125,
+            1322.0697021484375
+          ]
+        },
+        "particles": {
+          "maximum": [
+            0.155517578125,
+            0.155517578125,
+            0.155517578125
+          ],
+          "nonzero": 118307,
+          "sha256": "272dfbc916e5531b6f2ef0474d678b939ea4ca51ea5084ed57313ccc448153d6",
+          "sum": [
+            1572.9781494140625,
+            1572.9781494140625,
+            1572.9781494140625
+          ]
+        }
+      },
+      "raw": {
+        "fields": {
+          "maximum": [
+            0.199462890625,
+            0.302978515625,
+            0.101318359375
+          ],
+          "nonzero": 56440,
+          "sha256": "fd0a80ea9bc76452f64c59862a91f1a6cbc2f6898ebc845a77f8a8adad9adc9e",
+          "sum": [
+            382.32122802734375,
+            928.4028930664062,
+            1135.9093017578125
+          ]
+        },
+        "meshes": {
+          "maximum": [
+            0.916015625,
+            0.74853515625,
+            0.262451171875
+          ],
+          "nonzero": 10302,
+          "sha256": "c02ae359b82db6f77979d988e2afc10e566c4838944aee24c722e2986cd77352",
+          "sum": [
+            1920.1402587890625,
+            3073.127197265625,
+            1385.8763427734375
+          ]
+        },
+        "particles": {
+          "maximum": [
+            1.0615234375,
+            1.0615234375,
+            1.0615234375
+          ],
+          "nonzero": 10732,
+          "sha256": "1e718975bd81c60237fd0cc2997574630625f9bd9cb8ebaf7a87d5a0d2af7ad4",
+          "sum": [
+            1668.6009521484375,
+            1668.6009521484375,
+            1668.6009521484375
+          ]
+        }
+      },
+      "reconstruction": {
+        "absolute_tolerance": 0.0002,
+        "failed_channels": 0,
+        "maximum_absolute_error": 0.00060272216796875,
+        "relative_tolerance": 0.01,
+        "rmse": 1.444561091390496e-05,
+        "tested_channels": 1843200
+      },
+      "scene": "overlap"
+    },
+    {
+      "inventory": {
+        "active_categories": [
+          "particles",
+          "fields",
+          "meshes"
+        ],
+        "allocation_events": 5,
+        "explicit_color_depth_min_bytes": 36864000,
+        "generation": 1,
+        "private_viewports": 5,
+        "proxies": 7,
+        "release_events": 0,
+        "reservation_bytes": 127795200
+      },
+      "kernels": {
+        "fields": {
+          "maximum": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "nonzero": 0,
+          "sha256": "0c660f2bd3eff3150dd0040789abe2291613b9af319df870203d4f77a4913a5f",
+          "sum": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "meshes": {
+          "maximum": [
+            0.74267578125,
+            0.63623046875,
+            0.2216796875
+          ],
+          "nonzero": 450848,
+          "sha256": "dce2e5c02036239b0ebc34be70468eea20171e5c7ae81c8fc323ce2cf251ab0e",
+          "sum": [
+            40769.3359375,
+            64027.703125,
+            28478.7734375
+          ]
+        },
+        "particles": {
+          "maximum": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "nonzero": 0,
+          "sha256": "0c660f2bd3eff3150dd0040789abe2291613b9af319df870203d4f77a4913a5f",
+          "sum": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "raw": {
+        "fields": {
+          "maximum": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "nonzero": 0,
+          "sha256": "0c660f2bd3eff3150dd0040789abe2291613b9af319df870203d4f77a4913a5f",
+          "sum": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "meshes": {
+          "maximum": [
+            0.97412109375,
+            0.79296875,
+            0.26416015625
+          ],
+          "nonzero": 215296,
+          "sha256": "b330b5b468c986a2d70c1e545062f5dc917763f549020138a7cded72b2044aa2",
+          "sum": [
+            42749.1484375,
+            67101.8046875,
+            29831.44140625
+          ]
+        },
+        "particles": {
+          "maximum": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "nonzero": 0,
+          "sha256": "0c660f2bd3eff3150dd0040789abe2291613b9af319df870203d4f77a4913a5f",
+          "sum": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "reconstruction": {
+        "absolute_tolerance": 0.0002,
+        "failed_channels": 0,
+        "maximum_absolute_error": 0.0,
+        "relative_tolerance": 0.01,
+        "rmse": 0.0,
+        "tested_channels": 1843200
+      },
+      "scene": "occluded"
+    },
+    {
+      "inventory": {
+        "active_categories": [
+          "particles",
+          "fields",
+          "meshes"
+        ],
+        "allocation_events": 5,
+        "explicit_color_depth_min_bytes": 36864000,
+        "generation": 1,
+        "private_viewports": 5,
+        "proxies": 7,
+        "release_events": 0,
+        "reservation_bytes": 127795200
+      },
+      "kernels": {
+        "fields": {
+          "maximum": [
+            0.41455078125,
+            0.55419921875,
+            0.2271728515625
+          ],
+          "nonzero": 180482,
+          "sha256": "02b9b68fd84a2d68d7c1cbf3883e41a81dfdb83832838105d7d9a612584ff928",
+          "sum": [
+            2343.64794921875,
+            3543.077392578125,
+            5479.123046875
+          ]
+        },
+        "meshes": {
+          "maximum": [
+            0.442626953125,
+            0.429443359375,
+            0.1651611328125
+          ],
+          "nonzero": 107261,
+          "sha256": "7cf0320a8e7ea0d11a3454381ba87c35f2be9095a0779bf8f7cfe798f6c509b9",
+          "sum": [
+            1933.2491455078125,
+            3054.37646484375,
+            1365.30224609375
+          ]
+        },
+        "particles": {
+          "maximum": [
+            0.0292205810546875,
+            0.0292205810546875,
+            0.0292205810546875
+          ],
+          "nonzero": 222660,
+          "sha256": "f719678487882b9c45d9ef3aa4febe27fe1d5a212f3d7f61a05aac1147d60d76",
+          "sum": [
+            855.06640625,
+            855.06640625,
+            855.06640625
+          ]
+        }
+      },
+      "raw": {
+        "fields": {
+          "maximum": [
+            0.9658203125,
+            0.79638671875,
+            0.26953125
+          ],
+          "nonzero": 32440,
+          "sha256": "f93a91b30b7db57681da3eedef39bdb5cca2c1aed67edf54f68fbaf61d47b45a",
+          "sum": [
+            2458.491455078125,
+            3715.611083984375,
+            5737.8193359375
+          ]
+        },
+        "meshes": {
+          "maximum": [
+            0.96533203125,
+            0.7890625,
+            0.263671875
+          ],
+          "nonzero": 10302,
+          "sha256": "e0eed5857e6e066df6d98994ee113f12f0d26133528e6fb0596906e1286a9ed9",
+          "sum": [
+            2031.3104248046875,
+            3206.15673828125,
+            1431.3197021484375
+          ]
+        },
+        "particles": {
+          "maximum": [
+            1.3017578125,
+            1.3017578125,
+            1.3017578125
+          ],
+          "nonzero": 12580,
+          "sha256": "5226d63af02eff9d131ea076a4865c969b5b09bdf34050ae4eefbf69983cded7",
+          "sum": [
+            921.8991088867188,
+            921.8991088867188,
+            921.8991088867188
+          ]
+        }
+      },
+      "reconstruction": {
+        "absolute_tolerance": 0.0002,
+        "failed_channels": 0,
+        "maximum_absolute_error": 0.0,
+        "relative_tolerance": 0.01,
+        "rmse": 0.0,
+        "tested_channels": 1843200
+      },
+      "scene": "slice"
+    },
+    {
+      "inventory": {
+        "active_categories": [
+          "particles",
+          "fields",
+          "meshes"
+        ],
+        "allocation_events": 5,
+        "explicit_color_depth_min_bytes": 36864000,
+        "generation": 1,
+        "private_viewports": 5,
+        "proxies": 7,
+        "release_events": 0,
+        "reservation_bytes": 127795200
+      },
+      "kernels": {
+        "fields": {
+          "maximum": [
+            0.04010009765625,
+            0.3037109375,
+            0.55419921875
+          ],
+          "nonzero": 89836,
+          "sha256": "d25983c144a383c46de0bd8bdc02af2696727e96e7af5b3747ea8f3654bea0fa",
+          "sum": [
+            211.04452514648438,
+            1597.9449462890625,
+            2915.401123046875
+          ]
+        },
+        "meshes": {
+          "maximum": [
+            0.442626953125,
+            0.429443359375,
+            0.1651611328125
+          ],
+          "nonzero": 107261,
+          "sha256": "7cf0320a8e7ea0d11a3454381ba87c35f2be9095a0779bf8f7cfe798f6c509b9",
+          "sum": [
+            1933.2491455078125,
+            3054.37646484375,
+            1365.30224609375
+          ]
+        },
+        "particles": {
+          "maximum": [
+            0.04290771484375,
+            0.04290771484375,
+            0.04290771484375
+          ],
+          "nonzero": 222728,
+          "sha256": "c6822779ace8a6ce20cb9f5a2e36911f19dfbf39bdc94a90006916aa8657d36f",
+          "sum": [
+            2260.95751953125,
+            2260.95751953125,
+            2260.95751953125
+          ]
+        }
+      },
+      "raw": {
+        "fields": {
+          "maximum": [
+            0.04931640625,
+            0.373291015625,
+            0.68115234375
+          ],
+          "nonzero": 4494,
+          "sha256": "2595aee38354751dbe241a3daef23036dfcf7c27daeda5c6b61647ca5a46bf43",
+          "sum": [
+            221.607666015625,
+            1677.4814453125,
+            3061.091796875
+          ]
+        },
+        "meshes": {
+          "maximum": [
+            0.96533203125,
+            0.7890625,
+            0.263671875
+          ],
+          "nonzero": 10302,
+          "sha256": "e0eed5857e6e066df6d98994ee113f12f0d26133528e6fb0596906e1286a9ed9",
+          "sum": [
+            2031.3104248046875,
+            3206.15673828125,
+            1431.3197021484375
+          ]
+        },
+        "particles": {
+          "maximum": [
+            1.3017578125,
+            1.3017578125,
+            1.3017578125
+          ],
+          "nonzero": 28470,
+          "sha256": "523bd577f4bafee4dba1d99490cdc965352952202847d7d4f26e78d1bb3bcdb6",
+          "sum": [
+            2439.3193359375,
+            2439.3193359375,
+            2439.3193359375
+          ]
+        }
+      },
+      "reconstruction": {
+        "absolute_tolerance": 0.0002,
+        "failed_channels": 0,
+        "maximum_absolute_error": 0.0,
+        "relative_tolerance": 0.01,
+        "rmse": 0.0,
+        "tested_channels": 1843200
+      },
+      "scene": "iso"
+    }
+  ],
+  "checks": 327,
+  "failures": [],
+  "pid": 267040,
+  "renderer": "forward_plus",
+  "transitions": [],
+  "version": "v0.1.0.80",
+  "source_hashes_unchanged": {
+    "particles.wvz": "1223b3eed7c7eefcc717af849ffe3ae861c515f0d9717440e59110ac286454b2",
+    "separated.wvz": "b9355668ccc59b3aaf04d82772d2032395fb4be81c2aa1524ff008a08ddf3ed1",
+    "overlap.wvz": "a3de0f11473fe67bcf1b4d39c1297c396fa14878828029862d0f4f90edab9fb3",
+    "occluded.wvz": "96e45e11d115e1172b6e9f88c3441e9a434d2da0b2b3e94f4325260ff7e1ebaf",
+    "slice.wvz": "0a9d9bdfc3cc22e44ca146361fb7b725b5094dd7258eb4064589dc812e3e606e",
+    "iso.wvz": "9537d1f384dc0ff6147d1f2ad108fce79531c816f82557546f11f0bf3854224a",
+    "heavy.wvz": "73d2bc6f38551ca2f2ae82e1a4fb7611d4e3b783bace99b7a1c1a15272cd2175"
+  },
+  "strict_verified_records": {
+    "particles.wvz": 3,
+    "separated.wvz": 9,
+    "overlap.wvz": 9,
+    "occluded.wvz": 9,
+    "slice.wvz": 9,
+    "iso.wvz": 9,
+    "heavy.wvz": 48
+  },
+  "device_telemetry_samples": 47,
+  "native_command": [
+    "/home/Nozba/Codex/Wavez/bloom-306/forward-package/validation-package/viewer/WAVEZ.x86_64",
+    "--rendering-method",
+    "forward_plus",
+    "--audio-driver",
+    "Dummy",
+    "--disable-vsync",
+    "--resolution",
+    "960x640",
+    "--",
+    "/home/Nozba/Codex/Wavez/bloom-306/forward-package",
+    "isolation"
+  ],
+  "validation_package": true
+}

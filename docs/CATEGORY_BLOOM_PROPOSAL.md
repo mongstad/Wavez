@@ -1,11 +1,12 @@
 # Independent category Bloom — issue #306 architecture proposal
 
-**Current checkpoint:** the owner approved the isolated-pass prototype and
-opt-in mapped-color Fields/Meshes policy on 2026-10-09. The [first HDR source
-gate](CATEGORY_BLOOM_PROTOTYPE.md) passes on Forward+ and fails on Compatibility;
-production integration is held for renderer direction. The original proposal
+**Current checkpoint:** the owner approved Forward+-only scope for the next
+bounded prototype on 2026-10-09. The [current results](CATEGORY_BLOOM_FORWARD_PROTOTYPE.md)
+prove tested isolation but recommend holding production integration for full
+Cinematic background fidelity and resource-budget review. Compatibility remains
+on its accepted native path. The original proposal
 below is preserved as the pre-approval review record, including its status and
-initial particle-emission interpretation, which the new measurements qualify.
+initial particle-emission interpretation, which the measurements qualify.
 
 Status: **investigation complete; architecture and artistic policy await owner
 approval. Independent Bloom is not implemented.** This proposal is the review

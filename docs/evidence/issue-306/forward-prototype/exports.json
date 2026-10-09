@@ -1,0 +1,448 @@
+{
+  "runs": [
+    {
+      "name": "prototype-forward_plus-Cinematic-1",
+      "pixel_hashes": [
+        "76a3c03797cc295c4135cc3d13b34920c6f6d7b511dfe9aad932188fd6a4ce2e",
+        "3133b4dfd5e2b31e76c254b8ad4f5abdf3fdea327b6362e9218448da282dc817",
+        "38e364b7e33afd42d9f555aa018327760704fc048518c9e54240b4454cf732d7"
+      ],
+      "ffprobe": {
+        "width": 640,
+        "height": 360,
+        "avg_frame_rate": "4/1",
+        "nb_frames": "3"
+      },
+      "metrics": {
+        "elapsed_ms": 1086,
+        "encoding_ms": 156,
+        "first_frame_ms": 843,
+        "open_ms": 470.395,
+        "png_ms": 43.076,
+        "profile": {
+          "counters": {},
+          "stages": {}
+        },
+        "ready_ms": 556,
+        "render_readback_ms": 11.405999999999999,
+        "runtime": {
+          "arguments": [
+            "--wavez-render-job=/home/Nozba/Codex/Wavez/bloom-306/export-prototype-final/prototype-forward_plus-Cinematic-1/job.json"
+          ],
+          "executable": "/home/Nozba/Codex/Wavez/Godot_v4.7.2-stable_linux.x86_64",
+          "packaged": false,
+          "release": false,
+          "rendering_method": "forward_plus"
+        },
+        "sample_ms": 52.568,
+        "snapshot_identity_ms": 0,
+        "worker_identity_ms": 5.024
+      }
+    },
+    {
+      "name": "prototype-forward_plus-Cinematic-2",
+      "pixel_hashes": [
+        "76a3c03797cc295c4135cc3d13b34920c6f6d7b511dfe9aad932188fd6a4ce2e",
+        "3133b4dfd5e2b31e76c254b8ad4f5abdf3fdea327b6362e9218448da282dc817",
+        "38e364b7e33afd42d9f555aa018327760704fc048518c9e54240b4454cf732d7"
+      ],
+      "ffprobe": {
+        "width": 640,
+        "height": 360,
+        "avg_frame_rate": "4/1",
+        "nb_frames": "3"
+      },
+      "metrics": {
+        "elapsed_ms": 946,
+        "encoding_ms": 139,
+        "first_frame_ms": 724,
+        "open_ms": 382.338,
+        "png_ms": 42.459,
+        "profile": {
+          "counters": {},
+          "stages": {}
+        },
+        "ready_ms": 466,
+        "render_readback_ms": 9.618,
+        "runtime": {
+          "arguments": [
+            "--wavez-render-job=/home/Nozba/Codex/Wavez/bloom-306/export-prototype-final/prototype-forward_plus-Cinematic-2/job.json"
+          ],
+          "executable": "/home/Nozba/Codex/Wavez/Godot_v4.7.2-stable_linux.x86_64",
+          "packaged": false,
+          "release": false,
+          "rendering_method": "forward_plus"
+        },
+        "sample_ms": 48.518,
+        "snapshot_identity_ms": 0,
+        "worker_identity_ms": 4.23
+      }
+    },
+    {
+      "name": "accepted-forward_plus-Scientific-1",
+      "pixel_hashes": [
+        "1da9f3ed56c6d6428694679c250d7d371608e4776011a4a96f1acd9950db0643",
+        "5487738af5d159bb3bbe6a7c1e7e202ed743c016deffcd2b9ff46912142cc270",
+        "7c9715a8edd033b5e1b24a282429a1edad8a631602e2dc10d21e666d471de175"
+      ],
+      "ffprobe": {
+        "width": 640,
+        "height": 360,
+        "avg_frame_rate": "4/1",
+        "nb_frames": "3"
+      },
+      "metrics": {
+        "elapsed_ms": 858,
+        "encoding_ms": 132,
+        "first_frame_ms": 648,
+        "open_ms": 404.94,
+        "png_ms": 19.979,
+        "profile": {
+          "counters": {},
+          "stages": {}
+        },
+        "ready_ms": 493,
+        "render_readback_ms": 87.056,
+        "runtime": {
+          "arguments": [
+            "--wavez-render-job=/home/Nozba/Codex/Wavez/bloom-306/export-prototype-final/accepted-forward_plus-Scientific-1/job.json"
+          ],
+          "executable": "/home/Nozba/Codex/Wavez/Godot_v4.7.2-stable_linux.x86_64",
+          "packaged": false,
+          "release": false,
+          "rendering_method": "forward_plus"
+        },
+        "sample_ms": 62.809,
+        "snapshot_identity_ms": 0,
+        "worker_identity_ms": 4.834
+      }
+    },
+    {
+      "name": "candidate-forward_plus-Scientific-1",
+      "pixel_hashes": [
+        "1da9f3ed56c6d6428694679c250d7d371608e4776011a4a96f1acd9950db0643",
+        "5487738af5d159bb3bbe6a7c1e7e202ed743c016deffcd2b9ff46912142cc270",
+        "7c9715a8edd033b5e1b24a282429a1edad8a631602e2dc10d21e666d471de175"
+      ],
+      "ffprobe": {
+        "width": 640,
+        "height": 360,
+        "avg_frame_rate": "4/1",
+        "nb_frames": "3"
+      },
+      "metrics": {
+        "elapsed_ms": 848,
+        "encoding_ms": 134,
+        "first_frame_ms": 639,
+        "open_ms": 404.036,
+        "png_ms": 18.589,
+        "profile": {
+          "counters": {},
+          "stages": {}
+        },
+        "ready_ms": 488,
+        "render_readback_ms": 85.81200000000001,
+        "runtime": {
+          "arguments": [
+            "--wavez-render-job=/home/Nozba/Codex/Wavez/bloom-306/export-prototype-final/candidate-forward_plus-Scientific-1/job.json"
+          ],
+          "executable": "/home/Nozba/Codex/Wavez/Godot_v4.7.2-stable_linux.x86_64",
+          "packaged": false,
+          "release": false,
+          "rendering_method": "forward_plus"
+        },
+        "sample_ms": 62.355,
+        "snapshot_identity_ms": 0,
+        "worker_identity_ms": 5.563
+      }
+    },
+    {
+      "name": "accepted-forward_plus-Cinematic-1",
+      "pixel_hashes": [
+        "61307d35aadea0bdeedba255f4b1a53f9a6e657017c1a96d3c8549d5015b35b8",
+        "6a6b92ec87ab73e69b1fedf7b203157f9a9ec4b61d63e6f02dc97e4e460f9986",
+        "4e8b1b1fe0ad4a3b40aa46aaf1d440dc711784f9e0e67fb3a514aa1a87ed0a42"
+      ],
+      "ffprobe": {
+        "width": 640,
+        "height": 360,
+        "avg_frame_rate": "4/1",
+        "nb_frames": "3"
+      },
+      "metrics": {
+        "elapsed_ms": 935,
+        "encoding_ms": 141,
+        "first_frame_ms": 686,
+        "open_ms": 415.775,
+        "png_ms": 55.751000000000005,
+        "profile": {
+          "counters": {},
+          "stages": {}
+        },
+        "ready_ms": 506,
+        "render_readback_ms": 98.509,
+        "runtime": {
+          "arguments": [
+            "--wavez-render-job=/home/Nozba/Codex/Wavez/bloom-306/export-prototype-final/accepted-forward_plus-Cinematic-1/job.json"
+          ],
+          "executable": "/home/Nozba/Codex/Wavez/Godot_v4.7.2-stable_linux.x86_64",
+          "packaged": false,
+          "release": false,
+          "rendering_method": "forward_plus"
+        },
+        "sample_ms": 66.265,
+        "snapshot_identity_ms": 0,
+        "worker_identity_ms": 7.149
+      }
+    },
+    {
+      "name": "candidate-forward_plus-Cinematic-1",
+      "pixel_hashes": [
+        "61307d35aadea0bdeedba255f4b1a53f9a6e657017c1a96d3c8549d5015b35b8",
+        "6a6b92ec87ab73e69b1fedf7b203157f9a9ec4b61d63e6f02dc97e4e460f9986",
+        "4e8b1b1fe0ad4a3b40aa46aaf1d440dc711784f9e0e67fb3a514aa1a87ed0a42"
+      ],
+      "ffprobe": {
+        "width": 640,
+        "height": 360,
+        "avg_frame_rate": "4/1",
+        "nb_frames": "3"
+      },
+      "metrics": {
+        "elapsed_ms": 887,
+        "encoding_ms": 144,
+        "first_frame_ms": 643,
+        "open_ms": 385.658,
+        "png_ms": 54.096999999999994,
+        "profile": {
+          "counters": {},
+          "stages": {}
+        },
+        "ready_ms": 469,
+        "render_readback_ms": 95.407,
+        "runtime": {
+          "arguments": [
+            "--wavez-render-job=/home/Nozba/Codex/Wavez/bloom-306/export-prototype-final/candidate-forward_plus-Cinematic-1/job.json"
+          ],
+          "executable": "/home/Nozba/Codex/Wavez/Godot_v4.7.2-stable_linux.x86_64",
+          "packaged": false,
+          "release": false,
+          "rendering_method": "forward_plus"
+        },
+        "sample_ms": 61.888000000000005,
+        "snapshot_identity_ms": 0,
+        "worker_identity_ms": 4.713
+      }
+    },
+    {
+      "name": "accepted-gl_compatibility-Scientific-1",
+      "pixel_hashes": [
+        "0b2daab83bfdc0d4809386d29a3b05a51149313dc999dd2929352eb07d3c49bc",
+        "f743343ae9d776d89cc9c258424fc37114cdd88c2f81279afe941eb23fb22862",
+        "7e28124192961794de6a34c1f2b5928f2bdf3311f62dcffe51e6b24adcc2b20e"
+      ],
+      "ffprobe": {
+        "width": 640,
+        "height": 360,
+        "avg_frame_rate": "4/1",
+        "nb_frames": "3"
+      },
+      "metrics": {
+        "elapsed_ms": 692,
+        "encoding_ms": 118,
+        "first_frame_ms": 499,
+        "open_ms": 309.593,
+        "png_ms": 23.261,
+        "profile": {
+          "counters": {},
+          "stages": {}
+        },
+        "ready_ms": 396,
+        "render_readback_ms": 38.797999999999995,
+        "runtime": {
+          "arguments": [
+            "--wavez-render-job=/home/Nozba/Codex/Wavez/bloom-306/export-prototype-final/accepted-gl_compatibility-Scientific-1/job.json"
+          ],
+          "executable": "/home/Nozba/Codex/Wavez/Godot_v4.7.2-stable_linux.x86_64",
+          "packaged": false,
+          "release": false,
+          "rendering_method": "gl_compatibility"
+        },
+        "sample_ms": 54.581,
+        "snapshot_identity_ms": 0,
+        "worker_identity_ms": 4.747
+      }
+    },
+    {
+      "name": "candidate-gl_compatibility-Scientific-1",
+      "pixel_hashes": [
+        "0b2daab83bfdc0d4809386d29a3b05a51149313dc999dd2929352eb07d3c49bc",
+        "f743343ae9d776d89cc9c258424fc37114cdd88c2f81279afe941eb23fb22862",
+        "7e28124192961794de6a34c1f2b5928f2bdf3311f62dcffe51e6b24adcc2b20e"
+      ],
+      "ffprobe": {
+        "width": 640,
+        "height": 360,
+        "avg_frame_rate": "4/1",
+        "nb_frames": "3"
+      },
+      "metrics": {
+        "elapsed_ms": 667,
+        "encoding_ms": 111,
+        "first_frame_ms": 485,
+        "open_ms": 307.976,
+        "png_ms": 23.21,
+        "profile": {
+          "counters": {},
+          "stages": {}
+        },
+        "ready_ms": 388,
+        "render_readback_ms": 36.867,
+        "runtime": {
+          "arguments": [
+            "--wavez-render-job=/home/Nozba/Codex/Wavez/bloom-306/export-prototype-final/candidate-gl_compatibility-Scientific-1/job.json"
+          ],
+          "executable": "/home/Nozba/Codex/Wavez/Godot_v4.7.2-stable_linux.x86_64",
+          "packaged": false,
+          "release": false,
+          "rendering_method": "gl_compatibility"
+        },
+        "sample_ms": 50.323,
+        "snapshot_identity_ms": 0,
+        "worker_identity_ms": 4.713
+      }
+    },
+    {
+      "name": "accepted-gl_compatibility-Cinematic-1",
+      "pixel_hashes": [
+        "f89a62d9e584e9e0ae8803195ee3b4be5d9db5b4c3d87bc497091815eb46d44e",
+        "01a60dc9f2e76694bac35a749ea7987cd2ac5fc248e4de1bb7629cded1bf7a7c",
+        "ae6e2ae2312dd37001df0d1b2286e899310b901bfd94ad0b1e5e9e2876de2f54"
+      ],
+      "ffprobe": {
+        "width": 640,
+        "height": 360,
+        "avg_frame_rate": "4/1",
+        "nb_frames": "3"
+      },
+      "metrics": {
+        "elapsed_ms": 835,
+        "encoding_ms": 156,
+        "first_frame_ms": 588,
+        "open_ms": 350.716,
+        "png_ms": 27.637999999999998,
+        "profile": {
+          "counters": {},
+          "stages": {}
+        },
+        "ready_ms": 447,
+        "render_readback_ms": 63.678,
+        "runtime": {
+          "arguments": [
+            "--wavez-render-job=/home/Nozba/Codex/Wavez/bloom-306/export-prototype-final/accepted-gl_compatibility-Cinematic-1/job.json"
+          ],
+          "executable": "/home/Nozba/Codex/Wavez/Godot_v4.7.2-stable_linux.x86_64",
+          "packaged": false,
+          "release": false,
+          "rendering_method": "gl_compatibility"
+        },
+        "sample_ms": 61.949999999999996,
+        "snapshot_identity_ms": 0,
+        "worker_identity_ms": 5.06
+      }
+    },
+    {
+      "name": "candidate-gl_compatibility-Cinematic-1",
+      "pixel_hashes": [
+        "f89a62d9e584e9e0ae8803195ee3b4be5d9db5b4c3d87bc497091815eb46d44e",
+        "01a60dc9f2e76694bac35a749ea7987cd2ac5fc248e4de1bb7629cded1bf7a7c",
+        "ae6e2ae2312dd37001df0d1b2286e899310b901bfd94ad0b1e5e9e2876de2f54"
+      ],
+      "ffprobe": {
+        "width": 640,
+        "height": 360,
+        "avg_frame_rate": "4/1",
+        "nb_frames": "3"
+      },
+      "metrics": {
+        "elapsed_ms": 682,
+        "encoding_ms": 111,
+        "first_frame_ms": 499,
+        "open_ms": 309.806,
+        "png_ms": 23.121,
+        "profile": {
+          "counters": {},
+          "stages": {}
+        },
+        "ready_ms": 391,
+        "render_readback_ms": 47.044999999999995,
+        "runtime": {
+          "arguments": [
+            "--wavez-render-job=/home/Nozba/Codex/Wavez/bloom-306/export-prototype-final/candidate-gl_compatibility-Cinematic-1/job.json"
+          ],
+          "executable": "/home/Nozba/Codex/Wavez/Godot_v4.7.2-stable_linux.x86_64",
+          "packaged": false,
+          "release": false,
+          "rendering_method": "gl_compatibility"
+        },
+        "sample_ms": 51.969,
+        "snapshot_identity_ms": 0,
+        "worker_identity_ms": 4.548
+      }
+    },
+    {
+      "name": "prototype-forward_plus-Scientific-1",
+      "pixel_hashes": [
+        "1da9f3ed56c6d6428694679c250d7d371608e4776011a4a96f1acd9950db0643",
+        "5487738af5d159bb3bbe6a7c1e7e202ed743c016deffcd2b9ff46912142cc270",
+        "7c9715a8edd033b5e1b24a282429a1edad8a631602e2dc10d21e666d471de175"
+      ],
+      "ffprobe": {
+        "width": 640,
+        "height": 360,
+        "avg_frame_rate": "4/1",
+        "nb_frames": "3"
+      },
+      "metrics": {
+        "elapsed_ms": 868,
+        "encoding_ms": 133,
+        "first_frame_ms": 656,
+        "open_ms": 421.044,
+        "png_ms": 19.553,
+        "profile": {
+          "counters": {},
+          "stages": {}
+        },
+        "ready_ms": 505,
+        "render_readback_ms": 86.42699999999999,
+        "runtime": {
+          "arguments": [
+            "--wavez-render-job=/home/Nozba/Codex/Wavez/bloom-306/export-prototype-final/prototype-forward_plus-Scientific-1/job.json"
+          ],
+          "executable": "/home/Nozba/Codex/Wavez/Godot_v4.7.2-stable_linux.x86_64",
+          "packaged": false,
+          "release": false,
+          "rendering_method": "forward_plus"
+        },
+        "sample_ms": 62.817,
+        "snapshot_identity_ms": 0,
+        "worker_identity_ms": 4.252
+      }
+    }
+  ],
+  "comparisons": [
+    "accepted/candidate forward_plus Cinematic: all three frames pixel-identical",
+    "accepted/candidate forward_plus Scientific: all three frames pixel-identical",
+    "accepted/candidate gl_compatibility Cinematic: all three frames pixel-identical",
+    "accepted/candidate gl_compatibility Scientific: all three frames pixel-identical"
+  ],
+  "deterministic_prototype_repeat": true,
+  "scientific_prototype_matches_accepted": true,
+  "strict_verified_records": 9,
+  "source_sha256_unchanged": "199ba2a8445eee17304ea88732e75eafc141f826164354e925c726b98fcd4a1d",
+  "production_worker_unchanged": true,
+  "prototype_worker_scope": "temporary project only; fixed experiment gains, no saved schema",
+  "limitations": [
+    "640x360, 3 frames per job; not 4K video, long video, cancellation, selection-aware v2 or production Bloom integration"
+  ]
+}

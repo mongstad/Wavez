@@ -1,0 +1,1308 @@
+{
+  "benchmarks": [
+    {
+      "buffer_bytes": 43931164,
+      "cpu_root_ms_median": 0.20000000298023224,
+      "decoded_cache_bytes": 175487456,
+      "elapsed_ms": 9241.588,
+      "frames": 60,
+      "gpu_ms_median": 7.534999847412109,
+      "gpu_ms_p95": 14.380000114440918,
+      "inventory": {},
+      "label": "accepted-native",
+      "moving_samples": true,
+      "resolution": [
+        1920,
+        1080
+      ],
+      "scene": "heavy",
+      "texture_bytes": 164454400,
+      "unix_end": 1791575758.899992,
+      "unix_start": 1791575749.658261,
+      "wall_ms_median": 149.135,
+      "wall_ms_p95": 206.785
+    },
+    {
+      "buffer_bytes": 41741964,
+      "cpu_root_ms_median": 0.09600000083446503,
+      "decoded_cache_bytes": 175487456,
+      "elapsed_ms": 363.279,
+      "frames": 90,
+      "gpu_ms_median": 3.2100000381469727,
+      "gpu_ms_p95": 6.682000160217285,
+      "inventory": {},
+      "label": "accepted-native-render-only",
+      "moving_samples": false,
+      "resolution": [
+        1920,
+        1080
+      ],
+      "scene": "heavy",
+      "texture_bytes": 156065792,
+      "unix_end": 1791575759.414922,
+      "unix_start": 1791575759.051639,
+      "wall_ms_median": 3.254,
+      "wall_ms_p95": 6.744
+    },
+    {
+      "buffer_bytes": 43931164,
+      "cpu_root_ms_median": 0.17900000512599945,
+      "decoded_cache_bytes": 175487456,
+      "elapsed_ms": 8600.499,
+      "frames": 60,
+      "gpu_ms_median": 11.243000030517578,
+      "gpu_ms_p95": 19.847000122070312,
+      "inventory": {},
+      "label": "native-no-glow",
+      "moving_samples": true,
+      "resolution": [
+        1920,
+        1080
+      ],
+      "scene": "heavy",
+      "texture_bytes": 164454400,
+      "unix_end": 1791575768.073046,
+      "unix_start": 1791575759.472411,
+      "wall_ms_median": 142.728,
+      "wall_ms_p95": 153.24
+    },
+    {
+      "buffer_bytes": 41741964,
+      "cpu_root_ms_median": 0.09099999815225601,
+      "decoded_cache_bytes": 175487456,
+      "elapsed_ms": 270.727,
+      "frames": 90,
+      "gpu_ms_median": 2.940000057220459,
+      "gpu_ms_p95": 3.2929999828338623,
+      "inventory": {},
+      "label": "native-no-glow-render-only",
+      "moving_samples": false,
+      "resolution": [
+        1920,
+        1080
+      ],
+      "scene": "heavy",
+      "texture_bytes": 156065792,
+      "unix_end": 1791575768.683096,
+      "unix_start": 1791575768.412368,
+      "wall_ms_median": 2.979,
+      "wall_ms_p95": 3.326
+    },
+    {
+      "buffer_bytes": 115052088,
+      "cpu_root_ms_median": 0.04899999871850014,
+      "decoded_cache_bytes": 175487456,
+      "elapsed_ms": 8596.315,
+      "frames": 60,
+      "gpu_ms_median": 20.048000007867813,
+      "gpu_ms_p95": 29.328999370336533,
+      "inventory": {
+        "active_categories": [
+          "particles"
+        ],
+        "allocation_events": 3,
+        "explicit_color_depth_min_bytes": 74649600,
+        "generation": 61,
+        "private_viewports": 3,
+        "proxies": 6,
+        "release_events": 0,
+        "reservation_bytes": 232243200
+      },
+      "label": "particle-default",
+      "moving_samples": true,
+      "resolution": [
+        1920,
+        1080
+      ],
+      "scene": "heavy",
+      "texture_bytes": 382031872,
+      "unix_end": 1791575777.587085,
+      "unix_start": 1791575768.990635,
+      "wall_ms_median": 142.978,
+      "wall_ms_p95": 153.557
+    },
+    {
+      "buffer_bytes": 112862632,
+      "cpu_root_ms_median": 0.04500000178813934,
+      "decoded_cache_bytes": 175487456,
+      "elapsed_ms": 643.279,
+      "frames": 90,
+      "gpu_ms_median": 6.182000115513802,
+      "gpu_ms_p95": 10.980999901890755,
+      "inventory": {
+        "active_categories": [
+          "particles"
+        ],
+        "allocation_events": 3,
+        "explicit_color_depth_min_bytes": 74649600,
+        "generation": 151,
+        "private_viewports": 3,
+        "proxies": 6,
+        "release_events": 0,
+        "reservation_bytes": 232243200
+      },
+      "label": "particle-default-render-only",
+      "moving_samples": false,
+      "resolution": [
+        1920,
+        1080
+      ],
+      "scene": "heavy",
+      "texture_bytes": 373643264,
+      "unix_end": 1791575778.341771,
+      "unix_start": 1791575777.698484,
+      "wall_ms_median": 6.213,
+      "wall_ms_p95": 6.94
+    },
+    {
+      "buffer_bytes": 162466248,
+      "cpu_root_ms_median": 0.04800000041723251,
+      "decoded_cache_bytes": 175487456,
+      "elapsed_ms": 8796.502,
+      "frames": 60,
+      "gpu_ms_median": 24.023000448942184,
+      "gpu_ms_p95": 33.93499952554703,
+      "inventory": {
+        "active_categories": [
+          "particles",
+          "fields",
+          "meshes"
+        ],
+        "allocation_events": 5,
+        "explicit_color_depth_min_bytes": 124416000,
+        "generation": 212,
+        "private_viewports": 5,
+        "proxies": 16,
+        "release_events": 0,
+        "reservation_bytes": 431308800
+      },
+      "label": "all-enabled",
+      "moving_samples": true,
+      "resolution": [
+        1920,
+        1080
+      ],
+      "scene": "heavy",
+      "texture_bytes": 569458688,
+      "unix_end": 1791575787.427962,
+      "unix_start": 1791575778.631322,
+      "wall_ms_median": 145.768,
+      "wall_ms_p95": 155.935
+    },
+    {
+      "buffer_bytes": 160276536,
+      "cpu_root_ms_median": 0.041999999433755875,
+      "decoded_cache_bytes": 175487456,
+      "elapsed_ms": 758.253,
+      "frames": 90,
+      "gpu_ms_median": 7.327000051736832,
+      "gpu_ms_p95": 25.598999500274658,
+      "inventory": {
+        "active_categories": [
+          "particles",
+          "fields",
+          "meshes"
+        ],
+        "allocation_events": 5,
+        "explicit_color_depth_min_bytes": 124416000,
+        "generation": 302,
+        "private_viewports": 5,
+        "proxies": 16,
+        "release_events": 0,
+        "reservation_bytes": 431308800
+      },
+      "label": "all-enabled-render-only",
+      "moving_samples": false,
+      "resolution": [
+        1920,
+        1080
+      ],
+      "scene": "heavy",
+      "texture_bytes": 561070080,
+      "unix_end": 1791575788.220306,
+      "unix_start": 1791575787.462043,
+      "wall_ms_median": 7.375,
+      "wall_ms_p95": 23.089
+    },
+    {
+      "buffer_bytes": 43931180,
+      "cpu_root_ms_median": 0.16899999976158142,
+      "decoded_cache_bytes": 175487456,
+      "elapsed_ms": 8603.296,
+      "frames": 60,
+      "gpu_ms_median": 10.600000381469727,
+      "gpu_ms_p95": 18.121000289916992,
+      "inventory": {
+        "active_categories": [],
+        "allocation_events": 5,
+        "explicit_color_depth_min_bytes": 0,
+        "generation": 363,
+        "private_viewports": 0,
+        "proxies": 0,
+        "release_events": 5,
+        "reservation_bytes": 0
+      },
+      "label": "all-zero",
+      "moving_samples": true,
+      "resolution": [
+        1920,
+        1080
+      ],
+      "scene": "heavy",
+      "texture_bytes": 164455424,
+      "unix_end": 1791575797.028515,
+      "unix_start": 1791575788.425085,
+      "wall_ms_median": 142.77,
+      "wall_ms_p95": 150.385
+    },
+    {
+      "buffer_bytes": 41741980,
+      "cpu_root_ms_median": 0.0729999989271164,
+      "decoded_cache_bytes": 175487456,
+      "elapsed_ms": 261.144,
+      "frames": 90,
+      "gpu_ms_median": 2.7890000343322754,
+      "gpu_ms_p95": 3.2699999809265137,
+      "inventory": {
+        "active_categories": [],
+        "allocation_events": 5,
+        "explicit_color_depth_min_bytes": 0,
+        "generation": 453,
+        "private_viewports": 0,
+        "proxies": 0,
+        "release_events": 5,
+        "reservation_bytes": 0
+      },
+      "label": "all-zero-render-only",
+      "moving_samples": false,
+      "resolution": [
+        1920,
+        1080
+      ],
+      "scene": "heavy",
+      "texture_bytes": 156066816,
+      "unix_end": 1791575797.489104,
+      "unix_start": 1791575797.227958,
+      "wall_ms_median": 2.829,
+      "wall_ms_p95": 3.337
+    },
+    {
+      "buffer_bytes": 43931180,
+      "cpu_root_ms_median": 0.16200000047683716,
+      "decoded_cache_bytes": 175487456,
+      "elapsed_ms": 8645.547,
+      "frames": 60,
+      "gpu_ms_median": 10.743000030517578,
+      "gpu_ms_p95": 17.176000595092773,
+      "inventory": {
+        "active_categories": [],
+        "allocation_events": 5,
+        "explicit_color_depth_min_bytes": 0,
+        "generation": 514,
+        "private_viewports": 0,
+        "proxies": 0,
+        "release_events": 5,
+        "reservation_bytes": 0
+      },
+      "label": "Scientific-bypass",
+      "moving_samples": true,
+      "resolution": [
+        1920,
+        1080
+      ],
+      "scene": "heavy",
+      "texture_bytes": 164455424,
+      "unix_end": 1791575806.241127,
+      "unix_start": 1791575797.595446,
+      "wall_ms_median": 143.392,
+      "wall_ms_p95": 155.209
+    },
+    {
+      "buffer_bytes": 41741980,
+      "cpu_root_ms_median": 0.0729999989271164,
+      "decoded_cache_bytes": 175487456,
+      "elapsed_ms": 313.216,
+      "frames": 90,
+      "gpu_ms_median": 2.8959999084472656,
+      "gpu_ms_p95": 5.4120001792907715,
+      "inventory": {
+        "active_categories": [],
+        "allocation_events": 5,
+        "explicit_color_depth_min_bytes": 0,
+        "generation": 604,
+        "private_viewports": 0,
+        "proxies": 0,
+        "release_events": 5,
+        "reservation_bytes": 0
+      },
+      "label": "Scientific-bypass-render-only",
+      "moving_samples": false,
+      "resolution": [
+        1920,
+        1080
+      ],
+      "scene": "heavy",
+      "texture_bytes": 156066816,
+      "unix_end": 1791575806.76219,
+      "unix_start": 1791575806.448972,
+      "wall_ms_median": 2.936,
+      "wall_ms_p95": 5.47
+    },
+    {
+      "buffer_bytes": 114433564,
+      "cpu_root_ms_median": 0.1860000044107437,
+      "decoded_cache_bytes": 175487456,
+      "elapsed_ms": 8671.062,
+      "frames": 60,
+      "gpu_ms_median": 23.31800079345703,
+      "gpu_ms_p95": 33.80099868774414,
+      "inventory": {},
+      "label": "accepted-native",
+      "moving_samples": true,
+      "resolution": [
+        3840,
+        2160
+      ],
+      "scene": "heavy",
+      "texture_bytes": 396451840,
+      "unix_end": 1791575815.96201,
+      "unix_start": 1791575807.290813,
+      "wall_ms_median": 142.741,
+      "wall_ms_p95": 154.586
+    },
+    {
+      "buffer_bytes": 112244364,
+      "cpu_root_ms_median": 0.1599999964237213,
+      "decoded_cache_bytes": 175487456,
+      "elapsed_ms": 949.925,
+      "frames": 90,
+      "gpu_ms_median": 10.246999740600586,
+      "gpu_ms_p95": 11.071999549865723,
+      "inventory": {},
+      "label": "accepted-native-render-only",
+      "moving_samples": false,
+      "resolution": [
+        3840,
+        2160
+      ],
+      "scene": "heavy",
+      "texture_bytes": 388063232,
+      "unix_end": 1791575817.268488,
+      "unix_start": 1791575816.31855,
+      "wall_ms_median": 10.423,
+      "wall_ms_p95": 11.393
+    },
+    {
+      "buffer_bytes": 114433564,
+      "cpu_root_ms_median": 0.17900000512599945,
+      "decoded_cache_bytes": 175487456,
+      "elapsed_ms": 8781.74,
+      "frames": 60,
+      "gpu_ms_median": 22.79199981689453,
+      "gpu_ms_p95": 29.541000366210938,
+      "inventory": {},
+      "label": "native-no-glow",
+      "moving_samples": true,
+      "resolution": [
+        3840,
+        2160
+      ],
+      "scene": "heavy",
+      "texture_bytes": 396451840,
+      "unix_end": 1791575826.23884,
+      "unix_start": 1791575817.456964,
+      "wall_ms_median": 145.675,
+      "wall_ms_p95": 156.286
+    },
+    {
+      "buffer_bytes": 112244364,
+      "cpu_root_ms_median": 0.12200000137090683,
+      "decoded_cache_bytes": 175487456,
+      "elapsed_ms": 831.372,
+      "frames": 90,
+      "gpu_ms_median": 9.017000198364258,
+      "gpu_ms_p95": 9.520000457763672,
+      "inventory": {},
+      "label": "native-no-glow-render-only",
+      "moving_samples": false,
+      "resolution": [
+        3840,
+        2160
+      ],
+      "scene": "heavy",
+      "texture_bytes": 388063232,
+      "unix_end": 1791575827.43926,
+      "unix_start": 1791575826.607877,
+      "wall_ms_median": 9.053,
+      "wall_ms_p95": 9.571
+    },
+    {
+      "buffer_bytes": 397061688,
+      "cpu_root_ms_median": 0.05000000074505806,
+      "decoded_cache_bytes": 175487456,
+      "elapsed_ms": 8668.684,
+      "frames": 60,
+      "gpu_ms_median": 33.37299954891205,
+      "gpu_ms_p95": 38.273998856544495,
+      "inventory": {
+        "active_categories": [
+          "particles"
+        ],
+        "allocation_events": 3,
+        "explicit_color_depth_min_bytes": 298598400,
+        "generation": 61,
+        "private_viewports": 3,
+        "proxies": 6,
+        "release_events": 0,
+        "reservation_bytes": 928972800
+      },
+      "label": "particle-default",
+      "moving_samples": true,
+      "resolution": [
+        3840,
+        2160
+      ],
+      "scene": "heavy",
+      "texture_bytes": 1214666752,
+      "unix_end": 1791575836.632289,
+      "unix_start": 1791575827.96347,
+      "wall_ms_median": 143.453,
+      "wall_ms_p95": 156.729
+    },
+    {
+      "buffer_bytes": 394872232,
+      "cpu_root_ms_median": 0.04899999871850014,
+      "decoded_cache_bytes": 175487456,
+      "elapsed_ms": 1891.893,
+      "frames": 90,
+      "gpu_ms_median": 20.8340003490448,
+      "gpu_ms_p95": 26.842999398708344,
+      "inventory": {
+        "active_categories": [
+          "particles"
+        ],
+        "allocation_events": 3,
+        "explicit_color_depth_min_bytes": 298598400,
+        "generation": 151,
+        "private_viewports": 3,
+        "proxies": 6,
+        "release_events": 0,
+        "reservation_bytes": 928972800
+      },
+      "label": "particle-default-render-only",
+      "moving_samples": false,
+      "resolution": [
+        3840,
+        2160
+      ],
+      "scene": "heavy",
+      "texture_bytes": 1206278144,
+      "unix_end": 1791575838.583245,
+      "unix_start": 1791575836.691324,
+      "wall_ms_median": 20.822,
+      "wall_ms_p95": 22.827
+    },
+    {
+      "buffer_bytes": 585480648,
+      "cpu_root_ms_median": 0.04800000041723251,
+      "decoded_cache_bytes": 175487456,
+      "elapsed_ms": 8718.242,
+      "frames": 60,
+      "gpu_ms_median": 30.645999670028687,
+      "gpu_ms_p95": 41.08899939060211,
+      "inventory": {
+        "active_categories": [
+          "particles",
+          "fields",
+          "meshes"
+        ],
+        "allocation_events": 5,
+        "explicit_color_depth_min_bytes": 497664000,
+        "generation": 212,
+        "private_viewports": 5,
+        "proxies": 16,
+        "release_events": 0,
+        "reservation_bytes": 1725235200
+      },
+      "label": "all-enabled",
+      "moving_samples": true,
+      "resolution": [
+        3840,
+        2160
+      ],
+      "scene": "heavy",
+      "texture_bytes": 1915240448,
+      "unix_end": 1791575847.740254,
+      "unix_start": 1791575839.021875,
+      "wall_ms_median": 144.451,
+      "wall_ms_p95": 154.704
+    },
+    {
+      "buffer_bytes": 583290936,
+      "cpu_root_ms_median": 0.04800000041723251,
+      "decoded_cache_bytes": 175487456,
+      "elapsed_ms": 2291.558,
+      "frames": 90,
+      "gpu_ms_median": 24.719000697135925,
+      "gpu_ms_p95": 42.245999813079834,
+      "inventory": {
+        "active_categories": [
+          "particles",
+          "fields",
+          "meshes"
+        ],
+        "allocation_events": 5,
+        "explicit_color_depth_min_bytes": 497664000,
+        "generation": 302,
+        "private_viewports": 5,
+        "proxies": 16,
+        "release_events": 0,
+        "reservation_bytes": 1725235200
+      },
+      "label": "all-enabled-render-only",
+      "moving_samples": false,
+      "resolution": [
+        3840,
+        2160
+      ],
+      "scene": "heavy",
+      "texture_bytes": 1906851840,
+      "unix_end": 1791575850.098858,
+      "unix_start": 1791575847.807265,
+      "wall_ms_median": 24.741,
+      "wall_ms_p95": 27.705
+    },
+    {
+      "buffer_bytes": 114433580,
+      "cpu_root_ms_median": 0.17299999296665192,
+      "decoded_cache_bytes": 175487456,
+      "elapsed_ms": 8660.697,
+      "frames": 60,
+      "gpu_ms_median": 24.937000274658203,
+      "gpu_ms_p95": 33.89099884033203,
+      "inventory": {
+        "active_categories": [],
+        "allocation_events": 5,
+        "explicit_color_depth_min_bytes": 0,
+        "generation": 363,
+        "private_viewports": 0,
+        "proxies": 0,
+        "release_events": 5,
+        "reservation_bytes": 0
+      },
+      "label": "all-zero",
+      "moving_samples": true,
+      "resolution": [
+        3840,
+        2160
+      ],
+      "scene": "heavy",
+      "texture_bytes": 396452864,
+      "unix_end": 1791575859.450679,
+      "unix_start": 1791575850.789846,
+      "wall_ms_median": 143.27,
+      "wall_ms_p95": 158.177
+    },
+    {
+      "buffer_bytes": 112244380,
+      "cpu_root_ms_median": 0.11900000274181366,
+      "decoded_cache_bytes": 175487456,
+      "elapsed_ms": 828.421,
+      "frames": 90,
+      "gpu_ms_median": 8.994999885559082,
+      "gpu_ms_p95": 9.418000221252441,
+      "inventory": {
+        "active_categories": [],
+        "allocation_events": 5,
+        "explicit_color_depth_min_bytes": 0,
+        "generation": 453,
+        "private_viewports": 0,
+        "proxies": 0,
+        "release_events": 5,
+        "reservation_bytes": 0
+      },
+      "label": "all-zero-render-only",
+      "moving_samples": false,
+      "resolution": [
+        3840,
+        2160
+      ],
+      "scene": "heavy",
+      "texture_bytes": 388064256,
+      "unix_end": 1791575860.644658,
+      "unix_start": 1791575859.816227,
+      "wall_ms_median": 9.026,
+      "wall_ms_p95": 9.457
+    },
+    {
+      "buffer_bytes": 114433580,
+      "cpu_root_ms_median": 0.16099999845027924,
+      "decoded_cache_bytes": 175487456,
+      "elapsed_ms": 9464.627,
+      "frames": 60,
+      "gpu_ms_median": 24.69300079345703,
+      "gpu_ms_p95": 40.4119987487793,
+      "inventory": {
+        "active_categories": [],
+        "allocation_events": 5,
+        "explicit_color_depth_min_bytes": 0,
+        "generation": 514,
+        "private_viewports": 0,
+        "proxies": 0,
+        "release_events": 5,
+        "reservation_bytes": 0
+      },
+      "label": "Scientific-bypass",
+      "moving_samples": true,
+      "resolution": [
+        3840,
+        2160
+      ],
+      "scene": "heavy",
+      "texture_bytes": 396452864,
+      "unix_end": 1791575870.319851,
+      "unix_start": 1791575860.855077,
+      "wall_ms_median": 140.922,
+      "wall_ms_p95": 283.511
+    },
+    {
+      "buffer_bytes": 112244380,
+      "cpu_root_ms_median": 0.07100000232458115,
+      "decoded_cache_bytes": 175487456,
+      "elapsed_ms": 806.409,
+      "frames": 90,
+      "gpu_ms_median": 8.437000274658203,
+      "gpu_ms_p95": 9.055000305175781,
+      "inventory": {
+        "active_categories": [],
+        "allocation_events": 5,
+        "explicit_color_depth_min_bytes": 0,
+        "generation": 604,
+        "private_viewports": 0,
+        "proxies": 0,
+        "release_events": 5,
+        "reservation_bytes": 0
+      },
+      "label": "Scientific-bypass-render-only",
+      "moving_samples": false,
+      "resolution": [
+        3840,
+        2160
+      ],
+      "scene": "heavy",
+      "texture_bytes": 388064256,
+      "unix_end": 1791575871.484724,
+      "unix_start": 1791575870.678305,
+      "wall_ms_median": 8.495,
+      "wall_ms_p95": 9.216
+    }
+  ],
+  "cases": [
+    {
+      "inventory": {
+        "active_categories": [
+          "particles",
+          "fields",
+          "meshes"
+        ],
+        "allocation_events": 5,
+        "explicit_color_depth_min_bytes": 36864000,
+        "generation": 1,
+        "private_viewports": 5,
+        "proxies": 7,
+        "release_events": 0,
+        "reservation_bytes": 127795200
+      },
+      "kernels": {
+        "fields": {
+          "maximum": [
+            0.10247802734375,
+            0.2232666015625,
+            0.08331298828125
+          ],
+          "nonzero": 146216,
+          "sha256": "4dcdba67e3112d72199498569e22a3cf7a79a0f556efd9bbee75659b0409f732",
+          "sum": [
+            510.20013427734375,
+            1450.247802734375,
+            1551.02978515625
+          ]
+        },
+        "meshes": {
+          "maximum": [
+            0.447509765625,
+            0.43115234375,
+            0.1654052734375
+          ],
+          "nonzero": 107688,
+          "sha256": "4fc1f726d8b627481ca4ca1e03f6a8aabe6c72042f24c7f6986c3fd421fab479",
+          "sum": [
+            1970.66357421875,
+            3089.68115234375,
+            1374.497802734375
+          ]
+        },
+        "particles": {
+          "maximum": [
+            0.2685546875,
+            0.2685546875,
+            0.2685546875
+          ],
+          "nonzero": 122422,
+          "sha256": "018915e7b16d99cd1e4350898d0b368fcc4040cd6c109f6083016a32f708d474",
+          "sum": [
+            4023.77490234375,
+            4023.77490234375,
+            4023.77490234375
+          ]
+        }
+      },
+      "raw": {
+        "fields": {
+          "maximum": [
+            0.199462890625,
+            0.302978515625,
+            0.101318359375
+          ],
+          "nonzero": 56440,
+          "sha256": "499e543919daa2955d7eb8729bf58235f009090cfb65e3012afa14950af7d4b7",
+          "sum": [
+            534.2477416992188,
+            1518.581298828125,
+            1623.9224853515625
+          ]
+        },
+        "meshes": {
+          "maximum": [
+            0.97216796875,
+            0.79150390625,
+            0.263916015625
+          ],
+          "nonzero": 10404,
+          "sha256": "485c7dac88b876f794976d44e1302b7ff002d6b043abd12a264bf58ba2d4c34a",
+          "sum": [
+            2070.610595703125,
+            3243.12255859375,
+            1440.7796630859375
+          ]
+        },
+        "particles": {
+          "maximum": [
+            1.306640625,
+            1.306640625,
+            1.306640625
+          ],
+          "nonzero": 16886,
+          "sha256": "b1b3b4e19130e51bd34df3240d05c6894a717a61f9e7ebc66a0351c2d8561bc8",
+          "sum": [
+            4287.755859375,
+            4287.755859375,
+            4287.755859375
+          ]
+        }
+      },
+      "reconstruction": {
+        "absolute_tolerance": 0.0002,
+        "failed_channels": 0,
+        "maximum_absolute_error": 0.0,
+        "relative_tolerance": 0.01,
+        "rmse": 0.0,
+        "tested_channels": 1843200
+      },
+      "scene": "separated"
+    },
+    {
+      "inventory": {
+        "active_categories": [
+          "particles",
+          "fields",
+          "meshes"
+        ],
+        "allocation_events": 5,
+        "explicit_color_depth_min_bytes": 36864000,
+        "generation": 1,
+        "private_viewports": 5,
+        "proxies": 7,
+        "release_events": 0,
+        "reservation_bytes": 127795200
+      },
+      "kernels": {
+        "fields": {
+          "maximum": [
+            0.0821533203125,
+            0.187255859375,
+            0.08184814453125
+          ],
+          "nonzero": 144712,
+          "sha256": "886d6815a06253ba832021ab220134782417bd0f2539ca585774d220d4b6f998",
+          "sum": [
+            364.89044189453125,
+            886.2296142578125,
+            1084.7149658203125
+          ]
+        },
+        "meshes": {
+          "maximum": [
+            0.415771484375,
+            0.4052734375,
+            0.1622314453125
+          ],
+          "nonzero": 107029,
+          "sha256": "728a70d2404e8836ac13c2e1aa7e3708181d2f2ecbef4fdc708d4e39fd76d115",
+          "sum": [
+            1827.7081298828125,
+            2927.91064453125,
+            1322.0697021484375
+          ]
+        },
+        "particles": {
+          "maximum": [
+            0.155517578125,
+            0.155517578125,
+            0.155517578125
+          ],
+          "nonzero": 118307,
+          "sha256": "272dfbc916e5531b6f2ef0474d678b939ea4ca51ea5084ed57313ccc448153d6",
+          "sum": [
+            1572.9781494140625,
+            1572.9781494140625,
+            1572.9781494140625
+          ]
+        }
+      },
+      "raw": {
+        "fields": {
+          "maximum": [
+            0.199462890625,
+            0.302978515625,
+            0.101318359375
+          ],
+          "nonzero": 56440,
+          "sha256": "fd0a80ea9bc76452f64c59862a91f1a6cbc2f6898ebc845a77f8a8adad9adc9e",
+          "sum": [
+            382.32122802734375,
+            928.4028930664062,
+            1135.9093017578125
+          ]
+        },
+        "meshes": {
+          "maximum": [
+            0.916015625,
+            0.74853515625,
+            0.262451171875
+          ],
+          "nonzero": 10302,
+          "sha256": "c02ae359b82db6f77979d988e2afc10e566c4838944aee24c722e2986cd77352",
+          "sum": [
+            1920.1402587890625,
+            3073.127197265625,
+            1385.8763427734375
+          ]
+        },
+        "particles": {
+          "maximum": [
+            1.0615234375,
+            1.0615234375,
+            1.0615234375
+          ],
+          "nonzero": 10732,
+          "sha256": "1e718975bd81c60237fd0cc2997574630625f9bd9cb8ebaf7a87d5a0d2af7ad4",
+          "sum": [
+            1668.6009521484375,
+            1668.6009521484375,
+            1668.6009521484375
+          ]
+        }
+      },
+      "reconstruction": {
+        "absolute_tolerance": 0.0002,
+        "failed_channels": 0,
+        "maximum_absolute_error": 0.00060272216796875,
+        "relative_tolerance": 0.01,
+        "rmse": 1.444561091390496e-05,
+        "tested_channels": 1843200
+      },
+      "scene": "overlap"
+    },
+    {
+      "inventory": {
+        "active_categories": [
+          "particles",
+          "fields",
+          "meshes"
+        ],
+        "allocation_events": 5,
+        "explicit_color_depth_min_bytes": 36864000,
+        "generation": 1,
+        "private_viewports": 5,
+        "proxies": 7,
+        "release_events": 0,
+        "reservation_bytes": 127795200
+      },
+      "kernels": {
+        "fields": {
+          "maximum": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "nonzero": 0,
+          "sha256": "0c660f2bd3eff3150dd0040789abe2291613b9af319df870203d4f77a4913a5f",
+          "sum": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "meshes": {
+          "maximum": [
+            0.74267578125,
+            0.63623046875,
+            0.2216796875
+          ],
+          "nonzero": 450848,
+          "sha256": "dce2e5c02036239b0ebc34be70468eea20171e5c7ae81c8fc323ce2cf251ab0e",
+          "sum": [
+            40769.3359375,
+            64027.703125,
+            28478.7734375
+          ]
+        },
+        "particles": {
+          "maximum": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "nonzero": 0,
+          "sha256": "0c660f2bd3eff3150dd0040789abe2291613b9af319df870203d4f77a4913a5f",
+          "sum": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "raw": {
+        "fields": {
+          "maximum": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "nonzero": 0,
+          "sha256": "0c660f2bd3eff3150dd0040789abe2291613b9af319df870203d4f77a4913a5f",
+          "sum": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "meshes": {
+          "maximum": [
+            0.97412109375,
+            0.79296875,
+            0.26416015625
+          ],
+          "nonzero": 215296,
+          "sha256": "b330b5b468c986a2d70c1e545062f5dc917763f549020138a7cded72b2044aa2",
+          "sum": [
+            42749.1484375,
+            67101.8046875,
+            29831.44140625
+          ]
+        },
+        "particles": {
+          "maximum": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "nonzero": 0,
+          "sha256": "0c660f2bd3eff3150dd0040789abe2291613b9af319df870203d4f77a4913a5f",
+          "sum": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "reconstruction": {
+        "absolute_tolerance": 0.0002,
+        "failed_channels": 0,
+        "maximum_absolute_error": 0.0,
+        "relative_tolerance": 0.01,
+        "rmse": 0.0,
+        "tested_channels": 1843200
+      },
+      "scene": "occluded"
+    },
+    {
+      "inventory": {
+        "active_categories": [
+          "particles",
+          "fields",
+          "meshes"
+        ],
+        "allocation_events": 5,
+        "explicit_color_depth_min_bytes": 36864000,
+        "generation": 1,
+        "private_viewports": 5,
+        "proxies": 7,
+        "release_events": 0,
+        "reservation_bytes": 127795200
+      },
+      "kernels": {
+        "fields": {
+          "maximum": [
+            0.41455078125,
+            0.55419921875,
+            0.2271728515625
+          ],
+          "nonzero": 180482,
+          "sha256": "02b9b68fd84a2d68d7c1cbf3883e41a81dfdb83832838105d7d9a612584ff928",
+          "sum": [
+            2343.64794921875,
+            3543.077392578125,
+            5479.123046875
+          ]
+        },
+        "meshes": {
+          "maximum": [
+            0.442626953125,
+            0.429443359375,
+            0.1651611328125
+          ],
+          "nonzero": 107261,
+          "sha256": "7cf0320a8e7ea0d11a3454381ba87c35f2be9095a0779bf8f7cfe798f6c509b9",
+          "sum": [
+            1933.2491455078125,
+            3054.37646484375,
+            1365.30224609375
+          ]
+        },
+        "particles": {
+          "maximum": [
+            0.0292205810546875,
+            0.0292205810546875,
+            0.0292205810546875
+          ],
+          "nonzero": 222660,
+          "sha256": "f719678487882b9c45d9ef3aa4febe27fe1d5a212f3d7f61a05aac1147d60d76",
+          "sum": [
+            855.06640625,
+            855.06640625,
+            855.06640625
+          ]
+        }
+      },
+      "raw": {
+        "fields": {
+          "maximum": [
+            0.9658203125,
+            0.79638671875,
+            0.26953125
+          ],
+          "nonzero": 32440,
+          "sha256": "f93a91b30b7db57681da3eedef39bdb5cca2c1aed67edf54f68fbaf61d47b45a",
+          "sum": [
+            2458.491455078125,
+            3715.611083984375,
+            5737.8193359375
+          ]
+        },
+        "meshes": {
+          "maximum": [
+            0.96533203125,
+            0.7890625,
+            0.263671875
+          ],
+          "nonzero": 10302,
+          "sha256": "e0eed5857e6e066df6d98994ee113f12f0d26133528e6fb0596906e1286a9ed9",
+          "sum": [
+            2031.3104248046875,
+            3206.15673828125,
+            1431.3197021484375
+          ]
+        },
+        "particles": {
+          "maximum": [
+            1.3017578125,
+            1.3017578125,
+            1.3017578125
+          ],
+          "nonzero": 12580,
+          "sha256": "5226d63af02eff9d131ea076a4865c969b5b09bdf34050ae4eefbf69983cded7",
+          "sum": [
+            921.8991088867188,
+            921.8991088867188,
+            921.8991088867188
+          ]
+        }
+      },
+      "reconstruction": {
+        "absolute_tolerance": 0.0002,
+        "failed_channels": 0,
+        "maximum_absolute_error": 0.0,
+        "relative_tolerance": 0.01,
+        "rmse": 0.0,
+        "tested_channels": 1843200
+      },
+      "scene": "slice"
+    },
+    {
+      "inventory": {
+        "active_categories": [
+          "particles",
+          "fields",
+          "meshes"
+        ],
+        "allocation_events": 5,
+        "explicit_color_depth_min_bytes": 36864000,
+        "generation": 1,
+        "private_viewports": 5,
+        "proxies": 7,
+        "release_events": 0,
+        "reservation_bytes": 127795200
+      },
+      "kernels": {
+        "fields": {
+          "maximum": [
+            0.04010009765625,
+            0.3037109375,
+            0.55419921875
+          ],
+          "nonzero": 89836,
+          "sha256": "d25983c144a383c46de0bd8bdc02af2696727e96e7af5b3747ea8f3654bea0fa",
+          "sum": [
+            211.04452514648438,
+            1597.9449462890625,
+            2915.401123046875
+          ]
+        },
+        "meshes": {
+          "maximum": [
+            0.442626953125,
+            0.429443359375,
+            0.1651611328125
+          ],
+          "nonzero": 107261,
+          "sha256": "7cf0320a8e7ea0d11a3454381ba87c35f2be9095a0779bf8f7cfe798f6c509b9",
+          "sum": [
+            1933.2491455078125,
+            3054.37646484375,
+            1365.30224609375
+          ]
+        },
+        "particles": {
+          "maximum": [
+            0.04290771484375,
+            0.04290771484375,
+            0.04290771484375
+          ],
+          "nonzero": 222728,
+          "sha256": "c6822779ace8a6ce20cb9f5a2e36911f19dfbf39bdc94a90006916aa8657d36f",
+          "sum": [
+            2260.95751953125,
+            2260.95751953125,
+            2260.95751953125
+          ]
+        }
+      },
+      "raw": {
+        "fields": {
+          "maximum": [
+            0.04931640625,
+            0.373291015625,
+            0.68115234375
+          ],
+          "nonzero": 4494,
+          "sha256": "2595aee38354751dbe241a3daef23036dfcf7c27daeda5c6b61647ca5a46bf43",
+          "sum": [
+            221.607666015625,
+            1677.4814453125,
+            3061.091796875
+          ]
+        },
+        "meshes": {
+          "maximum": [
+            0.96533203125,
+            0.7890625,
+            0.263671875
+          ],
+          "nonzero": 10302,
+          "sha256": "e0eed5857e6e066df6d98994ee113f12f0d26133528e6fb0596906e1286a9ed9",
+          "sum": [
+            2031.3104248046875,
+            3206.15673828125,
+            1431.3197021484375
+          ]
+        },
+        "particles": {
+          "maximum": [
+            1.3017578125,
+            1.3017578125,
+            1.3017578125
+          ],
+          "nonzero": 28470,
+          "sha256": "523bd577f4bafee4dba1d99490cdc965352952202847d7d4f26e78d1bb3bcdb6",
+          "sum": [
+            2439.3193359375,
+            2439.3193359375,
+            2439.3193359375
+          ]
+        }
+      },
+      "reconstruction": {
+        "absolute_tolerance": 0.0002,
+        "failed_channels": 0,
+        "maximum_absolute_error": 0.0,
+        "relative_tolerance": 0.01,
+        "rmse": 0.0,
+        "tested_channels": 1843200
+      },
+      "scene": "iso"
+    }
+  ],
+  "checks": 364,
+  "failures": [],
+  "pid": 232085,
+  "renderer": "forward_plus",
+  "version": "v0.1.0.80",
+  "source_hashes_unchanged": {
+    "particles.wvz": "8cdb18eee362d2ca074683483a646cbdd9f5ed340e62c531b1987e353e90a79e",
+    "separated.wvz": "afcb193d17385a971936e55df62081090842830b9f36893ecc33d9f983607f68",
+    "overlap.wvz": "199ba2a8445eee17304ea88732e75eafc141f826164354e925c726b98fcd4a1d",
+    "occluded.wvz": "46719be4dd91c6fbdf4f542dae47bc5f12cc86d190d2f2a2852c8f7cb6f8ea7f",
+    "heavy.wvz": "3f3be7fc33437ec1f271241a3bef976f6d9704cdb6b2362b49b5445c0e2d0939",
+    "slice.wvz": "617fa7ec60dc4da92522984a35ee77cc3f461b2033ebe1ec419f9b606bf7dcfa",
+    "iso.wvz": "80eeda18beece071a2344577a45e457ea52473b1938e9b0d873eba2d9e19c94a"
+  },
+  "strict_verified_records": {
+    "particles.wvz": 3,
+    "separated.wvz": 9,
+    "overlap.wvz": 9,
+    "occluded.wvz": 9,
+    "heavy.wvz": 48,
+    "slice.wvz": 9,
+    "iso.wvz": 9
+  },
+  "device_telemetry_samples": 360,
+  "native_command": [
+    "/home/Nozba/Codex/Wavez/Godot_v4.7.2-stable_linux.x86_64",
+    "--path",
+    "/home/Nozba/Codex/Wavez/Wavez/viewer",
+    "--script",
+    "res://scene/prototype_category_bloom_forward.gd",
+    "--rendering-method",
+    "forward_plus",
+    "--audio-driver",
+    "Dummy",
+    "--disable-vsync",
+    "--resolution",
+    "960x640",
+    "--",
+    "/home/Nozba/Codex/Wavez/bloom-306/forward-prototype",
+    "prototype"
+  ]
+}

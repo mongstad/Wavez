@@ -1,0 +1,204 @@
+{
+  "benchmarks": [],
+  "cases": [],
+  "checks": 33,
+  "failures": [],
+  "pid": 261211,
+  "renderer": "forward_plus",
+  "transitions": [
+    {
+      "draw_readback_ms": 32.084,
+      "inventory": {
+        "active_categories": [
+          "particles",
+          "fields",
+          "meshes"
+        ],
+        "allocation_events": 5,
+        "explicit_color_depth_min_bytes": 124416000,
+        "generation": 1,
+        "private_viewports": 5,
+        "proxies": 16,
+        "release_events": 0,
+        "reservation_bytes": 431308800
+      },
+      "label": "initial-1080",
+      "pixel_sha256": "419111b1b4f94464934b7739dd6a1a20869beceaca317be6600d71531b5852c0",
+      "prepare_and_layout_ms": 774.866,
+      "resolution": [
+        1920,
+        1080
+      ],
+      "time": 0.0,
+      "total_ready_ms": 806.95
+    },
+    {
+      "draw_readback_ms": 156.159,
+      "inventory": {
+        "active_categories": [
+          "particles",
+          "fields",
+          "meshes"
+        ],
+        "allocation_events": 10,
+        "explicit_color_depth_min_bytes": 497664000,
+        "generation": 2,
+        "private_viewports": 5,
+        "proxies": 16,
+        "release_events": 5,
+        "reservation_bytes": 1725235200
+      },
+      "label": "resize-4K",
+      "pixel_sha256": "99d4662fedf85f6f3ee4f209c20f96941ecee5bd6ac68e5732483756d1b15e9b",
+      "prepare_and_layout_ms": 346.309,
+      "resolution": [
+        3840,
+        2160
+      ],
+      "time": 0.0,
+      "total_ready_ms": 502.468
+    },
+    {
+      "draw_readback_ms": 37.029,
+      "inventory": {
+        "active_categories": [
+          "particles",
+          "fields",
+          "meshes"
+        ],
+        "allocation_events": 15,
+        "explicit_color_depth_min_bytes": 124416000,
+        "generation": 3,
+        "private_viewports": 5,
+        "proxies": 16,
+        "release_events": 10,
+        "reservation_bytes": 431308800
+      },
+      "label": "resize-1080",
+      "pixel_sha256": "419111b1b4f94464934b7739dd6a1a20869beceaca317be6600d71531b5852c0",
+      "prepare_and_layout_ms": 275.67,
+      "resolution": [
+        1920,
+        1080
+      ],
+      "time": 0.0,
+      "total_ready_ms": 312.699
+    },
+    {
+      "draw_readback_ms": 28.392,
+      "inventory": {
+        "active_categories": [
+          "particles",
+          "fields",
+          "meshes"
+        ],
+        "allocation_events": 15,
+        "explicit_color_depth_min_bytes": 124416000,
+        "generation": 4,
+        "private_viewports": 5,
+        "proxies": 16,
+        "release_events": 10,
+        "reservation_bytes": 431308800
+      },
+      "label": "seek-025",
+      "pixel_sha256": "85e47684996f7171fde6d95caba9b968dc35157afe2b3c2b0ec45814a913eef7",
+      "prepare_and_layout_ms": 235.486,
+      "resolution": [
+        1920,
+        1080
+      ],
+      "time": 0.25,
+      "total_ready_ms": 263.878
+    },
+    {
+      "draw_readback_ms": 29.611,
+      "inventory": {
+        "active_categories": [
+          "particles",
+          "fields",
+          "meshes"
+        ],
+        "allocation_events": 15,
+        "explicit_color_depth_min_bytes": 124416000,
+        "generation": 5,
+        "private_viewports": 5,
+        "proxies": 16,
+        "release_events": 10,
+        "reservation_bytes": 431308800
+      },
+      "label": "seek-075",
+      "pixel_sha256": "6d84374af7dd067cecaf4842317c236d7e9473af89f6b10ea489750b876677bc",
+      "prepare_and_layout_ms": 239.13,
+      "resolution": [
+        1920,
+        1080
+      ],
+      "time": 0.75,
+      "total_ready_ms": 268.741
+    },
+    {
+      "draw_readback_ms": 30.444,
+      "inventory": {
+        "active_categories": [
+          "particles",
+          "fields",
+          "meshes"
+        ],
+        "allocation_events": 15,
+        "explicit_color_depth_min_bytes": 124416000,
+        "generation": 6,
+        "private_viewports": 5,
+        "proxies": 16,
+        "release_events": 10,
+        "reservation_bytes": 431308800
+      },
+      "label": "seek-025-repeat",
+      "pixel_sha256": "85e47684996f7171fde6d95caba9b968dc35157afe2b3c2b0ec45814a913eef7",
+      "prepare_and_layout_ms": 148.875,
+      "resolution": [
+        1920,
+        1080
+      ],
+      "time": 0.25,
+      "total_ready_ms": 179.319
+    }
+  ],
+  "version": "v0.1.0.80",
+  "source_hashes_unchanged": {
+    "particles.wvz": "8cdb18eee362d2ca074683483a646cbdd9f5ed340e62c531b1987e353e90a79e",
+    "separated.wvz": "afcb193d17385a971936e55df62081090842830b9f36893ecc33d9f983607f68",
+    "overlap.wvz": "199ba2a8445eee17304ea88732e75eafc141f826164354e925c726b98fcd4a1d",
+    "occluded.wvz": "46719be4dd91c6fbdf4f542dae47bc5f12cc86d190d2f2a2852c8f7cb6f8ea7f",
+    "heavy.wvz": "3f3be7fc33437ec1f271241a3bef976f6d9704cdb6b2362b49b5445c0e2d0939",
+    "slice.wvz": "617fa7ec60dc4da92522984a35ee77cc3f461b2033ebe1ec419f9b606bf7dcfa",
+    "iso.wvz": "80eeda18beece071a2344577a45e457ea52473b1938e9b0d873eba2d9e19c94a"
+  },
+  "strict_verified_records": {
+    "particles.wvz": 3,
+    "separated.wvz": 9,
+    "overlap.wvz": 9,
+    "occluded.wvz": 9,
+    "heavy.wvz": 48,
+    "slice.wvz": 9,
+    "iso.wvz": 9
+  },
+  "device_telemetry_samples": 16,
+  "native_command": [
+    "/home/Nozba/Codex/Wavez/Godot_v4.7.2-stable_linux.x86_64",
+    "--path",
+    "/home/Nozba/Codex/Wavez/Wavez/viewer",
+    "--script",
+    "res://scene/prototype_category_bloom_forward.gd",
+    "--rendering-method",
+    "forward_plus",
+    "--audio-driver",
+    "Dummy",
+    "--disable-vsync",
+    "--resolution",
+    "960x640",
+    "--",
+    "/home/Nozba/Codex/Wavez/bloom-306/forward-prototype",
+    "transitions"
+  ],
+  "validation_package": false
+}

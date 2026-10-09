@@ -1,0 +1,25 @@
+{
+	"elapsed_ms": 835,
+	"encoding_ms": 156,
+	"first_frame_ms": 588,
+	"open_ms": 350.716,
+	"png_ms": 27.637999999999998,
+	"profile": {
+		"counters": {},
+		"stages": {}
+	},
+	"ready_ms": 447,
+	"render_readback_ms": 63.678,
+	"runtime": {
+		"arguments": [
+			"--wavez-render-job=/home/Nozba/Codex/Wavez/bloom-306/export-prototype-final/accepted-gl_compatibility-Cinematic-1/job.json"
+		],
+		"executable": "/home/Nozba/Codex/Wavez/Godot_v4.7.2-stable_linux.x86_64",
+		"packaged": false,
+		"release": false,
+		"rendering_method": "gl_compatibility"
+	},
+	"sample_ms": 61.949999999999996,
+	"snapshot_identity_ms": 0,
+	"worker_identity_ms": 5.06
+}

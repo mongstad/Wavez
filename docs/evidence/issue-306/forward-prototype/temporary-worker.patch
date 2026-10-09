@@ -1,0 +1,12 @@
+--- production/render_worker.gd
++++ temporary-prototype/render_worker.gd
+@@ -6,0 +7 @@
++var prototype_graph
+@@ -179,0 +181,4 @@
++	prototype_graph = preload("res://scene/bloom_prototype_graph.gd").new()
++	viewer.add_child(prototype_graph)
++	if not prototype_graph.attach(viewer):finish("failed",prototype_graph.error,1);return
++	prototype_graph.gains = Vector3(1.35,1,1)
+@@ -215,0 +221,2 @@
++		prototype_graph.invalidate()
++		if not prototype_graph.sync():finish("failed",prototype_graph.error,1);return

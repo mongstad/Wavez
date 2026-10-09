@@ -1,0 +1,12 @@
+--- candidate/transition-harness.gd
++++ temporary-accepted-main/native-transition-harness.gd
+@@ -199 +199 @@
+-	await load_scene("heavy");make_graph();graph.gains = Vector3(1.35,1,1)
++	await load_scene("heavy")
+@@ -207 +206,0 @@
+-		graph.invalidate();check(graph.sync(),step.label+" graph admits")
+@@ -216 +215 @@
+-		transitions.append({"label":step.label,"resolution":[step.size.x,step.size.y],"time":step.time,"prepare_and_layout_ms":(drawn-began)/1000.0,"draw_readback_ms":(ready-drawn)/1000.0,"total_ready_ms":(ready-began)/1000.0,"pixel_sha256":first,"inventory":graph.inventory()})
++		transitions.append({"label":step.label,"resolution":[step.size.x,step.size.y],"time":step.time,"prepare_and_layout_ms":(drawn-began)/1000.0,"draw_readback_ms":(ready-drawn)/1000.0,"total_ready_ms":(ready-began)/1000.0,"pixel_sha256":first,"inventory":{}})
+@@ -220 +218,0 @@
+-	await set_gains(Vector3.ZERO);check(graph.inventory().private_viewports == 0,"transition zero releases all private targets")

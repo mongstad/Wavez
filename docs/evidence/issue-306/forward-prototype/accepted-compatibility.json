@@ -1,0 +1,47 @@
+{
+  "benchmarks": [],
+  "cases": [],
+  "checks": 32,
+  "failures": [],
+  "pid": 265159,
+  "renderer": "gl_compatibility",
+  "transitions": [],
+  "version": "v0.1.0.79",
+  "source_hashes_unchanged": {
+    "particles.wvz": "8cdb18eee362d2ca074683483a646cbdd9f5ed340e62c531b1987e353e90a79e",
+    "separated.wvz": "afcb193d17385a971936e55df62081090842830b9f36893ecc33d9f983607f68",
+    "overlap.wvz": "199ba2a8445eee17304ea88732e75eafc141f826164354e925c726b98fcd4a1d",
+    "occluded.wvz": "46719be4dd91c6fbdf4f542dae47bc5f12cc86d190d2f2a2852c8f7cb6f8ea7f",
+    "slice.wvz": "617fa7ec60dc4da92522984a35ee77cc3f461b2033ebe1ec419f9b606bf7dcfa",
+    "iso.wvz": "80eeda18beece071a2344577a45e457ea52473b1938e9b0d873eba2d9e19c94a",
+    "heavy.wvz": "3f3be7fc33437ec1f271241a3bef976f6d9704cdb6b2362b49b5445c0e2d0939"
+  },
+  "strict_verified_records": {
+    "particles.wvz": 3,
+    "separated.wvz": 9,
+    "overlap.wvz": 9,
+    "occluded.wvz": 9,
+    "slice.wvz": 9,
+    "iso.wvz": 9,
+    "heavy.wvz": 48
+  },
+  "device_telemetry_samples": 13,
+  "native_command": [
+    "/home/Nozba/Codex/Wavez/Godot_v4.7.2-stable_linux.x86_64",
+    "--path",
+    "/tmp/wavez-306-accepted-rct6mj6f/viewer",
+    "--script",
+    "res://scene/prototype_category_bloom_forward.gd",
+    "--rendering-method",
+    "gl_compatibility",
+    "--audio-driver",
+    "Dummy",
+    "--disable-vsync",
+    "--resolution",
+    "960x640",
+    "--",
+    "/home/Nozba/Codex/Wavez/bloom-306/accepted-compatibility",
+    "baseline"
+  ],
+  "validation_package": false
+}

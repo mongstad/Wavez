@@ -1,0 +1,25 @@
+{
+	"elapsed_ms": 848,
+	"encoding_ms": 134,
+	"first_frame_ms": 639,
+	"open_ms": 404.036,
+	"png_ms": 18.589,
+	"profile": {
+		"counters": {},
+		"stages": {}
+	},
+	"ready_ms": 488,
+	"render_readback_ms": 85.81200000000001,
+	"runtime": {
+		"arguments": [
+			"--wavez-render-job=/home/Nozba/Codex/Wavez/bloom-306/export-prototype-final/candidate-forward_plus-Scientific-1/job.json"
+		],
+		"executable": "/home/Nozba/Codex/Wavez/Godot_v4.7.2-stable_linux.x86_64",
+		"packaged": false,
+		"release": false,
+		"rendering_method": "forward_plus"
+	},
+	"sample_ms": 62.355,
+	"snapshot_identity_ms": 0,
+	"worker_identity_ms": 5.563
+}

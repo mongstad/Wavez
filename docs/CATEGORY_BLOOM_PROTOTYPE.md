@@ -1,5 +1,12 @@
 # Category Bloom: first HDR prototype gate
 
+**Historical first-gate checkpoint.** The owner subsequently approved
+[Forward+-only scope](https://github.com/mongstad/Wavez/pull/309#issuecomment-6087574544).
+The [current bounded prototype report](CATEGORY_BLOOM_FORWARD_PROTOTYPE.md)
+contains category-isolation, performance and export evidence and the next review
+recommendation. The first-gate measurements and decision boundary below are
+preserved as their original checkpoint.
+
 On 2026-10-09 the owner approved the isolated-pass prototype and opt-in
 mapped-color Fields/Meshes Bloom, both defaulting to 0. The approved particle
 calibration target remains the accepted 1.35 setting. That policy approval is

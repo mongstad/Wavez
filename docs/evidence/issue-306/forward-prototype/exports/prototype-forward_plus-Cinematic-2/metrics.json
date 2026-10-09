@@ -1,0 +1,25 @@
+{
+	"elapsed_ms": 946,
+	"encoding_ms": 139,
+	"first_frame_ms": 724,
+	"open_ms": 382.338,
+	"png_ms": 42.459,
+	"profile": {
+		"counters": {},
+		"stages": {}
+	},
+	"ready_ms": 466,
+	"render_readback_ms": 9.618,
+	"runtime": {
+		"arguments": [
+			"--wavez-render-job=/home/Nozba/Codex/Wavez/bloom-306/export-prototype-final/prototype-forward_plus-Cinematic-2/job.json"
+		],
+		"executable": "/home/Nozba/Codex/Wavez/Godot_v4.7.2-stable_linux.x86_64",
+		"packaged": false,
+		"release": false,
+		"rendering_method": "forward_plus"
+	},
+	"sample_ms": 48.518,
+	"snapshot_identity_ms": 0,
+	"worker_identity_ms": 4.23
+}

@@ -1,0 +1,11 @@
+{
+	"current_frame": 3,
+	"elapsed_seconds": 0.946,
+	"encoder_pid": -1,
+	"intermediate_directory": "/home/Nozba/Codex/Wavez/bloom-306/export-prototype-final/prototype-forward_plus-Cinematic-2",
+	"message": "Saved /home/Nozba/Codex/Wavez/bloom-306/export-prototype-final/prototype-forward_plus-Cinematic-2/result.mp4",
+	"output_path": "/home/Nozba/Codex/Wavez/bloom-306/export-prototype-final/prototype-forward_plus-Cinematic-2/result.mp4",
+	"renderer_pid": 270058,
+	"stage": "complete",
+	"total_frames": 3
+}

@@ -4,12 +4,16 @@ Accepted baseline for the #306 investigation: **v0.1.0.79**,
 `65fd8fae15a1b8dd37c75eca3a197d75003ee4ee`, owner-merged PR #304.
 The repository's application identity is
 `viewer/project.godot` → `application/config/version`; see [version policy](VERSIONING.md).
-Issue #306 proposes candidate build 80. The owner approved the isolated-pass
-prototype and opt-in mapped-color Fields/Meshes Bloom, both default 0. The
-[first HDR source gate](CATEGORY_BLOOM_PROTOTYPE.md) passes on Forward+ but fails
-on Compatibility in source/release validation packages; production integration
-awaits a renderer-scope decision under the approved proposal's stop boundary.
-Independent Bloom and category controls are not implemented. Dark/Light chrome
+Issue #306 proposes candidate build 80. The owner approved a bounded
+Forward+-only independent Bloom prototype, with Particles 1.35 and opt-in
+mapped-color Fields/Meshes both 0. The [current prototype report](CATEGORY_BLOOM_FORWARD_PROTOTYPE.md)
+proves tested HDR category independence, visibility, Scientific bypass and
+bounded native image/video barriers. Full Cinematic background fidelity,
+4K resource costs and production admission remain unresolved; recommendation
+is to hold production integration for owner architecture review. Compatibility
+keeps its accepted renderer/scene Bloom behavior. Production category controls,
+saved state and export integration remain unimplemented. PR #309 stays Draft.
+Dark/Light chrome
 and official theme-specific About artwork are in the accepted baseline; see
 [application themes](APPLICATION_THEMES.md).
 

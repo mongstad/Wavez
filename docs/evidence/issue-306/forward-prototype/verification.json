@@ -1,0 +1,22 @@
+{
+  "primary_godot_observations": 875,
+  "post_import_smoke_observations": 65,
+  "total_godot_observations": 940,
+  "application_version_unit_tests_passed": 2,
+  "python_compilation_passed": true,
+  "warmed_native_editor_import_clean": true,
+  "production_files_byte_identical_to_accepted_main": {
+    "viewer/main.gd": "209f5b37b7c6295ef8324b06fe78ea8dba7eb0e6ad64aca0fb244f326afe287a",
+    "viewer/scene/visual_state.gd": "385dc0f5b667090704cc89341c1720f82a1ee73283f228a9f7e5f9e86e19c279",
+    "viewer/layers/scene_layers.gd": "aa39bf34096ace2922a6bb866b4bf9bb92c98c12eba77d53ac5244dbc516a776",
+    "viewer/layers/grid_view.gd": "8b85205d3f777c326b7bf245bf4194871c91c60e9449a8323c1ba7aae64b1bbd",
+    "viewer/layers/mesh_view.gd": "7a9beaf61f993bfb5e68b8c533450a0d128b240cb5cf7407c16bc0d82df66976",
+    "viewer/layers/volume.gdshader": "10e348979779a85a1b7e7b2078131ed285ba9934082c05d9c98612e2fa6fc6a0",
+    "viewer/layers/slice.gdshader": "e7f2499b7b9eeb0e72e10eb093b363d81b011e8d8d53f556091826b56daa6cd2",
+    "viewer/video/render_worker.gd": "76cf3925925179cb0097983842e09d982165d3e8b04d344ebff9c6007ead510a"
+  },
+  "experiments_sha256": {
+    "viewer/scene/bloom_prototype_graph.gd": "083ea792d607092fcad8c993189d67697c37442fd22ff541a93779f211585060",
+    "viewer/scene/prototype_category_bloom_forward.gd": "f4ebac78c153172f60ed33e9d302b7ae371633232902389066fd4386f383cead"
+  }
+}
