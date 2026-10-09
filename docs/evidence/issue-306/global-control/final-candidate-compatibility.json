@@ -1,0 +1,829 @@
+{
+  "baseline": false,
+  "checks": 298,
+  "controls": [
+    {
+      "before": 1.34,
+      "case": "particles dark Cinematic",
+      "drag": 1.2,
+      "keyboard": 1.3599999999999999,
+      "mouse": 0.38,
+      "state": {
+        "editable": true,
+        "enabled": true,
+        "intensity": 1.2000000476837158,
+        "points": false,
+        "preset": "Cinematic",
+        "slider": 1.2
+      }
+    },
+    {
+      "before": 1.34,
+      "case": "particles dark Scientific",
+      "drag": 1.34,
+      "keyboard": 1.34,
+      "mouse": 1.34,
+      "state": {
+        "editable": false,
+        "enabled": false,
+        "intensity": 1.340000033378601,
+        "points": true,
+        "preset": "Scientific",
+        "slider": 1.34
+      }
+    },
+    {
+      "before": 1.34,
+      "case": "particles dark Cinematic",
+      "drag": 1.2,
+      "keyboard": 1.3599999999999999,
+      "mouse": 0.38,
+      "state": {
+        "editable": true,
+        "enabled": true,
+        "intensity": 1.2000000476837158,
+        "points": false,
+        "preset": "Cinematic",
+        "slider": 1.2
+      }
+    },
+    {
+      "before": 1.34,
+      "case": "particles light Cinematic",
+      "drag": 1.2,
+      "keyboard": 1.3599999999999999,
+      "mouse": 0.38,
+      "state": {
+        "editable": true,
+        "enabled": true,
+        "intensity": 1.2000000476837158,
+        "points": false,
+        "preset": "Cinematic",
+        "slider": 1.2
+      }
+    },
+    {
+      "before": 1.34,
+      "case": "particles light Scientific",
+      "drag": 1.34,
+      "keyboard": 1.34,
+      "mouse": 1.34,
+      "state": {
+        "editable": false,
+        "enabled": false,
+        "intensity": 1.340000033378601,
+        "points": true,
+        "preset": "Scientific",
+        "slider": 1.34
+      }
+    },
+    {
+      "before": 1.34,
+      "case": "particles light Cinematic",
+      "drag": 1.2,
+      "keyboard": 1.3599999999999999,
+      "mouse": 0.38,
+      "state": {
+        "editable": true,
+        "enabled": true,
+        "intensity": 1.2000000476837158,
+        "points": false,
+        "preset": "Cinematic",
+        "slider": 1.2
+      }
+    },
+    {
+      "before": 0.8,
+      "case": "particles portable on",
+      "drag": 1.2,
+      "keyboard": 0.82,
+      "mouse": 0.38,
+      "state": {
+        "editable": true,
+        "enabled": true,
+        "intensity": 1.2000000476837158,
+        "points": false,
+        "preset": "Cinematic",
+        "slider": 1.2
+      }
+    },
+    {
+      "before": 1.34,
+      "case": "fields dark Cinematic",
+      "drag": 1.2,
+      "keyboard": 1.3599999999999999,
+      "mouse": 0.38,
+      "state": {
+        "editable": true,
+        "enabled": true,
+        "intensity": 1.2000000476837158,
+        "points": false,
+        "preset": "Cinematic",
+        "slider": 1.2
+      }
+    },
+    {
+      "before": 1.34,
+      "case": "fields dark Scientific",
+      "drag": 1.34,
+      "keyboard": 1.34,
+      "mouse": 1.34,
+      "state": {
+        "editable": false,
+        "enabled": false,
+        "intensity": 1.340000033378601,
+        "points": true,
+        "preset": "Scientific",
+        "slider": 1.34
+      }
+    },
+    {
+      "before": 1.34,
+      "case": "fields dark Cinematic",
+      "drag": 1.2,
+      "keyboard": 1.3599999999999999,
+      "mouse": 0.38,
+      "state": {
+        "editable": true,
+        "enabled": true,
+        "intensity": 1.2000000476837158,
+        "points": false,
+        "preset": "Cinematic",
+        "slider": 1.2
+      }
+    },
+    {
+      "before": 1.34,
+      "case": "fields light Cinematic",
+      "drag": 1.2,
+      "keyboard": 1.3599999999999999,
+      "mouse": 0.38,
+      "state": {
+        "editable": true,
+        "enabled": true,
+        "intensity": 1.2000000476837158,
+        "points": false,
+        "preset": "Cinematic",
+        "slider": 1.2
+      }
+    },
+    {
+      "before": 1.34,
+      "case": "fields light Scientific",
+      "drag": 1.34,
+      "keyboard": 1.34,
+      "mouse": 1.34,
+      "state": {
+        "editable": false,
+        "enabled": false,
+        "intensity": 1.340000033378601,
+        "points": true,
+        "preset": "Scientific",
+        "slider": 1.34
+      }
+    },
+    {
+      "before": 1.34,
+      "case": "fields light Cinematic",
+      "drag": 1.2,
+      "keyboard": 1.3599999999999999,
+      "mouse": 0.38,
+      "state": {
+        "editable": true,
+        "enabled": true,
+        "intensity": 1.2000000476837158,
+        "points": false,
+        "preset": "Cinematic",
+        "slider": 1.2
+      }
+    },
+    {
+      "before": 0.8,
+      "case": "fields portable on",
+      "drag": 1.2,
+      "keyboard": 0.82,
+      "mouse": 0.38,
+      "state": {
+        "editable": true,
+        "enabled": true,
+        "intensity": 1.2000000476837158,
+        "points": false,
+        "preset": "Cinematic",
+        "slider": 1.2
+      }
+    },
+    {
+      "before": 1.34,
+      "case": "meshes dark Cinematic",
+      "drag": 1.2,
+      "keyboard": 1.3599999999999999,
+      "mouse": 0.38,
+      "state": {
+        "editable": true,
+        "enabled": true,
+        "intensity": 1.2000000476837158,
+        "points": false,
+        "preset": "Cinematic",
+        "slider": 1.2
+      }
+    },
+    {
+      "before": 1.34,
+      "case": "meshes dark Scientific",
+      "drag": 1.34,
+      "keyboard": 1.34,
+      "mouse": 1.34,
+      "state": {
+        "editable": false,
+        "enabled": false,
+        "intensity": 1.340000033378601,
+        "points": true,
+        "preset": "Scientific",
+        "slider": 1.34
+      }
+    },
+    {
+      "before": 1.34,
+      "case": "meshes dark Cinematic",
+      "drag": 1.2,
+      "keyboard": 1.3599999999999999,
+      "mouse": 0.38,
+      "state": {
+        "editable": true,
+        "enabled": true,
+        "intensity": 1.2000000476837158,
+        "points": false,
+        "preset": "Cinematic",
+        "slider": 1.2
+      }
+    },
+    {
+      "before": 1.34,
+      "case": "meshes light Cinematic",
+      "drag": 1.2,
+      "keyboard": 1.3599999999999999,
+      "mouse": 0.38,
+      "state": {
+        "editable": true,
+        "enabled": true,
+        "intensity": 1.2000000476837158,
+        "points": false,
+        "preset": "Cinematic",
+        "slider": 1.2
+      }
+    },
+    {
+      "before": 1.34,
+      "case": "meshes light Scientific",
+      "drag": 1.34,
+      "keyboard": 1.34,
+      "mouse": 1.34,
+      "state": {
+        "editable": false,
+        "enabled": false,
+        "intensity": 1.340000033378601,
+        "points": true,
+        "preset": "Scientific",
+        "slider": 1.34
+      }
+    },
+    {
+      "before": 1.34,
+      "case": "meshes light Cinematic",
+      "drag": 1.2,
+      "keyboard": 1.3599999999999999,
+      "mouse": 0.38,
+      "state": {
+        "editable": true,
+        "enabled": true,
+        "intensity": 1.2000000476837158,
+        "points": false,
+        "preset": "Cinematic",
+        "slider": 1.2
+      }
+    },
+    {
+      "before": 0.8,
+      "case": "meshes portable on",
+      "drag": 1.2,
+      "keyboard": 0.82,
+      "mouse": 0.38,
+      "state": {
+        "editable": true,
+        "enabled": true,
+        "intensity": 1.2000000476837158,
+        "points": false,
+        "preset": "Cinematic",
+        "slider": 1.2
+      }
+    },
+    {
+      "before": 1.34,
+      "case": "mixed dark Cinematic",
+      "drag": 1.2,
+      "keyboard": 1.3599999999999999,
+      "mouse": 0.38,
+      "state": {
+        "editable": true,
+        "enabled": true,
+        "intensity": 1.2000000476837158,
+        "points": false,
+        "preset": "Cinematic",
+        "slider": 1.2
+      }
+    },
+    {
+      "before": 1.34,
+      "case": "mixed dark Scientific",
+      "drag": 1.34,
+      "keyboard": 1.34,
+      "mouse": 1.34,
+      "state": {
+        "editable": false,
+        "enabled": false,
+        "intensity": 1.340000033378601,
+        "points": true,
+        "preset": "Scientific",
+        "slider": 1.34
+      }
+    },
+    {
+      "before": 1.34,
+      "case": "mixed dark Cinematic",
+      "drag": 1.2,
+      "keyboard": 1.3599999999999999,
+      "mouse": 0.38,
+      "state": {
+        "editable": true,
+        "enabled": true,
+        "intensity": 1.2000000476837158,
+        "points": false,
+        "preset": "Cinematic",
+        "slider": 1.2
+      }
+    },
+    {
+      "before": 1.34,
+      "case": "mixed light Cinematic",
+      "drag": 1.2,
+      "keyboard": 1.3599999999999999,
+      "mouse": 0.38,
+      "state": {
+        "editable": true,
+        "enabled": true,
+        "intensity": 1.2000000476837158,
+        "points": false,
+        "preset": "Cinematic",
+        "slider": 1.2
+      }
+    },
+    {
+      "before": 1.34,
+      "case": "mixed light Scientific",
+      "drag": 1.34,
+      "keyboard": 1.34,
+      "mouse": 1.34,
+      "state": {
+        "editable": false,
+        "enabled": false,
+        "intensity": 1.340000033378601,
+        "points": true,
+        "preset": "Scientific",
+        "slider": 1.34
+      }
+    },
+    {
+      "before": 1.34,
+      "case": "mixed light Cinematic",
+      "drag": 1.2,
+      "keyboard": 1.3599999999999999,
+      "mouse": 0.38,
+      "state": {
+        "editable": true,
+        "enabled": true,
+        "intensity": 1.2000000476837158,
+        "points": false,
+        "preset": "Cinematic",
+        "slider": 1.2
+      }
+    },
+    {
+      "before": 0.8,
+      "case": "mixed portable on",
+      "drag": 1.2,
+      "keyboard": 0.82,
+      "mouse": 0.38,
+      "state": {
+        "editable": true,
+        "enabled": true,
+        "intensity": 1.2000000476837158,
+        "points": false,
+        "preset": "Cinematic",
+        "slider": 1.2
+      }
+    }
+  ],
+  "device": "NVIDIA GeForce RTX 3070 Ti",
+  "failures": [],
+  "render_cases": [
+    {
+      "preset": "Cinematic",
+      "regions": {
+        "particles": [
+          329,
+          340,
+          549,
+          560
+        ]
+      },
+      "scene": "particles"
+    },
+    {
+      "preset": "Scientific",
+      "regions": {
+        "particles": [
+          329,
+          340,
+          549,
+          560
+        ]
+      },
+      "scene": "particles"
+    },
+    {
+      "preset": "Cinematic",
+      "regions": {
+        "fields": [
+          610,
+          340,
+          830,
+          560
+        ]
+      },
+      "scene": "fields"
+    },
+    {
+      "preset": "Scientific",
+      "regions": {
+        "fields": [
+          610,
+          340,
+          830,
+          560
+        ]
+      },
+      "scene": "fields"
+    },
+    {
+      "preset": "Cinematic",
+      "regions": {
+        "meshes": [
+          890,
+          340,
+          1110,
+          560
+        ]
+      },
+      "scene": "meshes"
+    },
+    {
+      "preset": "Scientific",
+      "regions": {
+        "meshes": [
+          890,
+          340,
+          1110,
+          560
+        ]
+      },
+      "scene": "meshes"
+    },
+    {
+      "preset": "Cinematic",
+      "regions": {
+        "fields": [
+          610,
+          340,
+          830,
+          560
+        ],
+        "meshes": [
+          890,
+          340,
+          1110,
+          560
+        ],
+        "particles": [
+          329,
+          340,
+          549,
+          560
+        ]
+      },
+      "scene": "mixed"
+    },
+    {
+      "preset": "Scientific",
+      "regions": {
+        "fields": [
+          610,
+          340,
+          830,
+          560
+        ],
+        "meshes": [
+          890,
+          340,
+          1110,
+          560
+        ],
+        "particles": [
+          329,
+          340,
+          549,
+          560
+        ]
+      },
+      "scene": "mixed"
+    }
+  ],
+  "renderer": "gl_compatibility",
+  "resolution": [
+    1440,
+    900
+  ],
+  "restored": [
+    {
+      "case": "particles VisualState off",
+      "state": {
+        "editable": false,
+        "enabled": false,
+        "intensity": 0.800000011920929,
+        "points": false,
+        "preset": "Scientific",
+        "slider": 0.8
+      }
+    },
+    {
+      "case": "particles portable off",
+      "state": {
+        "editable": false,
+        "enabled": false,
+        "intensity": 0.800000011920929,
+        "points": true,
+        "preset": "Scientific",
+        "slider": 0.8
+      }
+    },
+    {
+      "case": "fields VisualState off",
+      "state": {
+        "editable": false,
+        "enabled": false,
+        "intensity": 0.800000011920929,
+        "points": false,
+        "preset": "Scientific",
+        "slider": 0.8
+      }
+    },
+    {
+      "case": "fields portable off",
+      "state": {
+        "editable": false,
+        "enabled": false,
+        "intensity": 0.800000011920929,
+        "points": true,
+        "preset": "Scientific",
+        "slider": 0.8
+      }
+    },
+    {
+      "case": "meshes VisualState off",
+      "state": {
+        "editable": false,
+        "enabled": false,
+        "intensity": 0.800000011920929,
+        "points": false,
+        "preset": "Scientific",
+        "slider": 0.8
+      }
+    },
+    {
+      "case": "meshes portable off",
+      "state": {
+        "editable": false,
+        "enabled": false,
+        "intensity": 0.800000011920929,
+        "points": true,
+        "preset": "Scientific",
+        "slider": 0.8
+      }
+    },
+    {
+      "case": "mixed VisualState off",
+      "state": {
+        "editable": false,
+        "enabled": false,
+        "intensity": 0.800000011920929,
+        "points": false,
+        "preset": "Scientific",
+        "slider": 0.8
+      }
+    },
+    {
+      "case": "mixed portable off",
+      "state": {
+        "editable": false,
+        "enabled": false,
+        "intensity": 0.800000011920929,
+        "points": true,
+        "preset": "Scientific",
+        "slider": 0.8
+      }
+    }
+  ],
+  "timings": [
+    {
+      "buffer_bytes": 29999408,
+      "cache_bytes": 13504,
+      "gpu_median_ms": 0.8240000009536743,
+      "gpu_p95_ms": 2.7079999446868896,
+      "scene": "particles",
+      "texture_bytes": 44036369,
+      "viewports": 0,
+      "wall_median_ms": 1.173
+    },
+    {
+      "buffer_bytes": 34256904,
+      "cache_bytes": 43400,
+      "gpu_median_ms": 1.190000057220459,
+      "gpu_p95_ms": 2.3299999237060547,
+      "scene": "fields",
+      "texture_bytes": 55536884,
+      "viewports": 0,
+      "wall_median_ms": 1.308
+    },
+    {
+      "buffer_bytes": 34252144,
+      "cache_bytes": 4216,
+      "gpu_median_ms": 1.0989999771118164,
+      "gpu_p95_ms": 2.4749999046325684,
+      "scene": "meshes",
+      "texture_bytes": 59678775,
+      "viewports": 0,
+      "wall_median_ms": 1.589
+    },
+    {
+      "buffer_bytes": 34260256,
+      "cache_bytes": 61120,
+      "gpu_median_ms": 0.8690000176429749,
+      "gpu_p95_ms": 2.944999933242798,
+      "scene": "mixed",
+      "texture_bytes": 70216892,
+      "viewports": 0,
+      "wall_median_ms": 1.114
+    }
+  ],
+  "source_hashes_unchanged": {
+    "particles.wvz": "ffad2caafe44d578eadee5b1f1c06dc7bdb2f794a3489f3e36c676981bd5fc92",
+    "fields.wvz": "d253e3f4d70bdea6a4892597c77e338ba541ec5ffae3f394fe7d6daef60f3d87",
+    "meshes.wvz": "d91199c948065151524696dc50b80252aa2234d6a516830b7f37230bd8e5d090",
+    "mixed.wvz": "2c0194c7f8fc419d841d476de8495c10ebdd9583ead91ebe40dcfa47858c33e9"
+  },
+  "packaged": false,
+  "comparisons": [
+    {
+      "scene": "particles",
+      "preset": "Cinematic",
+      "changed_pixels": 5366,
+      "mean_delta": 0.03217952674897119,
+      "max_delta": 15,
+      "regions": {
+        "particles": {
+          "changed_pixels": 5366,
+          "mean_delta": 0.8616666666666667,
+          "max_delta": 15
+        }
+      }
+    },
+    {
+      "scene": "particles",
+      "preset": "Scientific",
+      "changed_pixels": 0,
+      "mean_delta": 0.0,
+      "max_delta": 0,
+      "regions": {
+        "particles": {
+          "changed_pixels": 0,
+          "mean_delta": 0.0,
+          "max_delta": 0
+        }
+      }
+    },
+    {
+      "scene": "fields",
+      "preset": "Cinematic",
+      "changed_pixels": 15771,
+      "mean_delta": 0.0706766975308642,
+      "max_delta": 25,
+      "regions": {
+        "fields": {
+          "changed_pixels": 15771,
+          "mean_delta": 1.8925,
+          "max_delta": 25
+        }
+      }
+    },
+    {
+      "scene": "fields",
+      "preset": "Scientific",
+      "changed_pixels": 0,
+      "mean_delta": 0.0,
+      "max_delta": 0,
+      "regions": {
+        "fields": {
+          "changed_pixels": 0,
+          "mean_delta": 0.0,
+          "max_delta": 0
+        }
+      }
+    },
+    {
+      "scene": "meshes",
+      "preset": "Cinematic",
+      "changed_pixels": 22701,
+      "mean_delta": 0.29898482510288066,
+      "max_delta": 51,
+      "regions": {
+        "meshes": {
+          "changed_pixels": 22701,
+          "mean_delta": 8.005874655647382,
+          "max_delta": 51
+        }
+      }
+    },
+    {
+      "scene": "meshes",
+      "preset": "Scientific",
+      "changed_pixels": 0,
+      "mean_delta": 0.0,
+      "max_delta": 0,
+      "regions": {
+        "meshes": {
+          "changed_pixels": 0,
+          "mean_delta": 0.0,
+          "max_delta": 0
+        }
+      }
+    },
+    {
+      "scene": "mixed",
+      "preset": "Cinematic",
+      "changed_pixels": 48590,
+      "mean_delta": 0.4562962962962963,
+      "max_delta": 51,
+      "regions": {
+        "fields": {
+          "changed_pixels": 15771,
+          "mean_delta": 1.8925,
+          "max_delta": 25
+        },
+        "meshes": {
+          "changed_pixels": 22701,
+          "mean_delta": 8.005874655647382,
+          "max_delta": 51
+        },
+        "particles": {
+          "changed_pixels": 10118,
+          "mean_delta": 2.319807162534435,
+          "max_delta": 28
+        }
+      }
+    },
+    {
+      "scene": "mixed",
+      "preset": "Scientific",
+      "changed_pixels": 0,
+      "mean_delta": 0.0,
+      "max_delta": 0,
+      "regions": {
+        "fields": {
+          "changed_pixels": 0,
+          "mean_delta": 0.0,
+          "max_delta": 0
+        },
+        "meshes": {
+          "changed_pixels": 0,
+          "mean_delta": 0.0,
+          "max_delta": 0
+        },
+        "particles": {
+          "changed_pixels": 0,
+          "mean_delta": 0.0,
+          "max_delta": 0
+        }
+      }
+    }
+  ],
+  "godot": "4.7.2.stable.official.ed1daf0bf"
+}

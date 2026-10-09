@@ -50,7 +50,6 @@ static func apply(viewer, state: Dictionary) -> void:
 	for value in state.get("hidden_types", []): viewer.hidden_types[int(value)] = true
 	viewer.guide_mesh.visible = state.get("guide_visible", false)
 	for key in state.get("environment", {}): viewer.environment.set(key, state.environment[key])
-	viewer.glow_slider.editable = viewer.environment.glow_enabled
 	for key in state.get("viewport", {}): viewer.get_viewport().set(key, state.viewport[key])
 	for name in state.get("sections", {}):
 		if viewer.legacy_sections.has(name): viewer.legacy_sections[name] = state.sections[name]
@@ -66,6 +65,7 @@ static func apply(viewer, state: Dictionary) -> void:
 	for i in range(viewer.colormap_option.item_count):
 		if viewer.colormap_option.get_item_text(i) == viewer.colormap_name: viewer.colormap_option.select(i)
 	if state.get("preset", "") in viewer.VIEWING_PRESETS: viewer.selected_preset = state.preset
+	viewer._sync_bloom_control()
 	for name in state.get("sliders", {}):
 		if viewer.visual_sliders.has(name): viewer.visual_sliders[name].set_value_no_signal(state.sliders[name])
 	for i in range(viewer.manual_spins.size()): viewer.manual_spins[i].set_value_no_signal(viewer.manual_min if i == 0 else viewer.manual_max)
@@ -73,4 +73,3 @@ static func apply(viewer, state: Dictionary) -> void:
 	viewer._apply_geometry()
 	viewer._sync_inspection_controls()
 	if viewer.scene_layers != null and state.has("scene"):viewer.scene_layers.apply_state(state.scene)
-

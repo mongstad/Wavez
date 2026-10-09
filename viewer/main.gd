@@ -923,8 +923,15 @@ func _set_clean(value: bool) -> void:
 	environment.background_mode = Environment.BG_COLOR if value else Environment.BG_SKY
 	environment.glow_enabled = not value
 	environment.fog_enabled = not value
-	glow_slider.editable = not value
+	_sync_bloom_control()
 	status_label.text = "Scientific view — decorative backdrop and bloom disabled." if value else "Cinematic view — artistic backdrop, halos and bloom enabled."
+
+func _sync_bloom_control() -> void:
+	# Saved presentation settings own the pixels. Reconcile the preset label with
+	# their effective Bloom state without reapplying a preset's other effects.
+	if environment.glow_enabled: selected_preset = "Cinematic"
+	elif selected_preset == "Cinematic": selected_preset = "Scientific"
+	glow_slider.editable = environment.glow_enabled
 
 func _build_guides() -> void:
 	if guide_mesh.get_parent() == null:
@@ -1258,7 +1265,7 @@ func _build_inspector_controls() -> void:
 	_visual_slider(post, "Exposure", .05, 3, exposure, func(v: float): exposure = v; _sync_visuals())
 	_visual_slider(post, "Gamma", .2, 3, gamma, func(v: float): gamma = v; _sync_visuals())
 	glow_slider = _visual_slider(tools_ui.form("Global effects"), "Bloom", 0, 2, environment.glow_intensity, func(v: float): environment.glow_intensity = v)
-	glow_slider.tooltip_text = "Global environment effect shared by particles, fields and meshes. Availability follows the viewing preset and renderer."
+	glow_slider.tooltip_text = "Scene-wide Bloom. Cinematic enables this control; Scientific disables decorative Bloom. Visible glow depends on scene brightness."
 	_check(tools_ui.form("Slice"), "X slice • ±3 simulation units", false, func(v: bool): slice_enabled = v; _sync_visuals())
 	_visual_slider(tools_ui.form("Slice"), "Slice position • box fraction", -1, 1, 0, func(v: float): slice_x = v; _sync_visuals())
 	_build_geometry_ui()

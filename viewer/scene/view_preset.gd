@@ -163,7 +163,7 @@ static func apply(viewer, recipe) -> Dictionary:
 			state.color_mapping = preload("res://layers/volume_color.gd").DEFAULT.duplicate();state.color_mapping.normalization = data.normalization
 			state.opacity_mapping = {"mode":data.opacity_mode,"lower":data.opacity_lower,"upper":data.opacity_upper}
 		layers.sync_preset_controls(id)
-	viewer.glow_slider.editable = viewer.environment.glow_enabled
+	viewer._sync_bloom_control()
 	viewer._update_colormap();viewer._restyle()
 	var sliders := {"Exposure":"exposure","Particle size":"point_scale","Brightness":"brightness_scale","Gamma":"gamma","Orbit speed • radians / second":"orbit_speed"}
 	for title in sliders:

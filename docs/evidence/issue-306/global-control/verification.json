@@ -1,0 +1,35 @@
+{
+  "accepted_main": "65fd8fae15a1b8dd37c75eca3a197d75003ee4ee",
+  "candidate_build": "v0.1.0.80",
+  "branch": "issue-306-global-bloom-control",
+  "godot": "4.7.2.stable.official.ed1daf0bf",
+  "global_matrix_checks": 1788,
+  "menu_checks": 96,
+  "recipe_state_checks": 2663,
+  "portable_preset_checks": 815,
+  "point_rendering_checks": 60,
+  "total_completed_godot_checks": 5422,
+  "python_version_tests": 2,
+  "strict_fixture_records": 18,
+  "fixture_sha256": {
+    "particles.wvz": "11cb41f869d19e7009792f8ca6a4d594b360d4ed303f675b560974981ac34f90",
+    "fields.wvz": "fdc0b3dc865c1931289bb283585200a12bf68326fd664efc7d68213b2ceb8382",
+    "meshes.wvz": "4655a811994e3750cc5647a3a63f5f270a096812a9001200486e7f6f6d8b5dbe",
+    "mixed.wvz": "43f731811acab38766ccd3133c43a8c9aea47645051d38b6466f70d2d26dc978"
+  },
+  "native_video_jobs": 12,
+  "native_video_frames": 36,
+  "exact_render_png_pairs": 160,
+  "original_owner_capture_reproduction": "unavailable; owner elected physical verification",
+  "gui_input": "native Window.push_input click/drag/keyboard; connected Viewing preset menu signals",
+  "physical_hardware_input": false,
+  "protected_runtime_files_unchanged": 240,
+  "tested_code_sha256": {
+    "viewer/main.gd": "e77aece8f6518f527252be02849fc01231649a8ef09c648b3c11690380c4184a",
+    "viewer/scene/visual_state.gd": "f2eef523eb1c8a004537f6261fe7a9a8d7ac4e7746ed3ee8e9af3bcde43f10e1",
+    "viewer/scene/view_preset.gd": "f532ebb4889621c107dc0f00751014711669dca73fb13f2806c9fa998a0f0d20",
+    "viewer/project.godot": "107a31f79a572689db1481506d7cbca75b48bf3f34a6b940157836107d3aacec",
+    "viewer/scene/test_global_bloom.gd": "76212d0c8cfec57784232ce0df35d4ec018f8314a3a9f0f67c4c1bfd99cacb69",
+    "tools/validate_global_bloom.py": "df02d7a9b827cb73ec4861ab4ae09e14d1e3374c51c80653605591cfc0711b9b"
+  }
+}
