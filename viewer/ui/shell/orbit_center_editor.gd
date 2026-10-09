@@ -1,14 +1,26 @@
 extends Control
+const MeshView = preload("res://layers/mesh_view.gd")
+const GridView = preload("res://layers/grid_view.gd")
 ## Transient editor for the existing orbit parameters. Draft values commit only on Apply.
 var viewer
 var center := Vector3.ZERO
 var radius := 1.0
+var depth := 1.0
+var depth_input: LineEdit
+var place_button: Button
+var handle_basis := Basis.IDENTITY
+var displayed_fields: Array[String] = []
+# Only an explicit Apply owns this optional orbit plane. Ordinary navigation
+# keeps the accepted main path; a changed pose/target invalidates this orbit.
+var applied_orbit: Dictionary = {}
+var last_applied: Dictionary = {}
 var panel: PanelContainer
 var details: VBoxContainer
 var details_toggle: Button
 var coordinates: Array[LineEdit] = []
 var radius_input: LineEdit
 var notice: Label
+var readout: Label
 var guide: Control
 var drag_axis := -1
 var drag_origin := Vector3.ZERO
@@ -32,9 +44,12 @@ func setup(owner_viewer) -> void:
 	var header := HBoxContainer.new(); box.add_child(header)
 	var title := Label.new(); title.text = "Edit orbit center and radius"; title.size_flags_horizontal = Control.SIZE_EXPAND_FILL; header.add_child(title)
 	details_toggle = Button.new(); header.add_child(details_toggle)
+	var close := Button.new(); close.text = "×"; close.tooltip_text = "Cancel and restore the previous view"; close.pressed.connect(dismiss); header.add_child(close)
+	readout = Label.new(); readout.add_theme_font_size_override("font_size",12)
+	readout.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; box.add_child(readout)
 	details = VBoxContainer.new(); details.add_theme_constant_override("separation",8); box.add_child(details)
 	details_toggle.pressed.connect(func(): show_details(not details.visible))
-	var hint := Label.new(); hint.text = "Drag X / Y / Z handles or enter coordinates."; hint.add_theme_font_size_override("font_size",13); details.add_child(hint)
+	var hint := Label.new(); hint.text = "Drag Right / Up / Toward handles · coordinates are world X / Y / Z."; hint.add_theme_font_size_override("font_size",13); details.add_child(hint)
 	var row := HBoxContainer.new(); row.add_theme_constant_override("separation",8); details.add_child(row)
 	for axis in 3:
 		var label := Label.new(); label.text = ["X","Y","Z"][axis]; label.modulate = guide.COLORS[axis]; row.add_child(label)
@@ -54,10 +69,14 @@ func setup(owner_viewer) -> void:
 		button.pressed.connect(func(): adjust_radius(direction,Input.is_key_pressed(KEY_SHIFT)))
 		button.gui_input.connect(radius_event)
 	var fine := Label.new(); fine.text = "Wheel here · Shift: fine"; fine.add_theme_font_size_override("font_size",12); radius_row.add_child(fine)
+	var depth_row := HBoxContainer.new(); details.add_child(depth_row)
+	var depth_label := Label.new(); depth_label.text = "Place ahead depth (world units)"; depth_row.add_child(depth_label)
+	depth_input = LineEdit.new(); depth_input.custom_minimum_size.x = 120; depth_input.size_flags_horizontal = Control.SIZE_EXPAND_FILL; depth_row.add_child(depth_input)
+	depth_input.text_submitted.connect(func(_value): read_fields()); depth_input.focus_exited.connect(read_fields)
 	notice = Label.new(); notice.add_theme_font_size_override("font_size",12); details.add_child(notice)
 	var actions := HBoxContainer.new(); box.add_child(actions)
-	var place := Button.new(); place.text = "Place ahead"; place.tooltip_text = "Place the draft center one draft radius along the current view direction. The camera stays unchanged."
-	place.pressed.connect(place_ahead); actions.add_child(place)
+	place_button = Button.new(); place_button.text = "Place ahead"; place_button.tooltip_text = "Place at the explicit depth along the current view ray. Radius and camera stay unchanged."
+	place_button.pressed.connect(place_ahead); actions.add_child(place_button)
 	var space := Control.new(); space.size_flags_horizontal = Control.SIZE_EXPAND_FILL; actions.add_child(space)
 	var cancel := Button.new(); cancel.text = "Cancel"; cancel.pressed.connect(dismiss); actions.add_child(cancel)
 	var apply := Button.new(); apply.text = "Apply"; apply.theme_type_variation = "PrimaryButton"; apply.pressed.connect(commit); actions.add_child(apply)
@@ -78,8 +97,11 @@ func open() -> void:
 		"orbit_basis_active": viewer.camera_orbit_basis_active,
 		"orbit_basis_yaw": viewer.camera_orbit_basis_yaw,
 		"orbit_basis_pitch": viewer.camera_orbit_basis_pitch,
+		"applied_orbit": applied_orbit.duplicate(true),
 	}
-	center = viewer.camera_target; radius = viewer.camera_distance; drag_axis = -1
+	handle_basis = viewer.camera.global_basis.orthonormalized()
+	initialize_draft()
+	drag_axis = -1
 	viewer.orbit_enabled = false
 	viewer.free_camera = true
 	viewer._sync_control_state()
@@ -99,6 +121,7 @@ func dismiss(restore_camera := true) -> void:
 	var focus := get_viewport().gui_get_focus_owner()
 	if focus != null and is_ancestor_of(focus): focus.release_focus()
 	if restore_camera and not pre_edit_camera.is_empty():
+		applied_orbit = pre_edit_camera.applied_orbit
 		viewer.camera_target = pre_edit_camera.target
 		viewer.camera_distance = pre_edit_camera.distance
 		viewer.yaw = pre_edit_camera.yaw
@@ -113,25 +136,85 @@ func dismiss(restore_camera := true) -> void:
 	pre_edit_camera.clear()
 	viewer._sync_control_state()
 
+func scene_bounds() -> AABB:
+	# Read current displayed geometry in viewer-world coordinates. Particles are
+	# already viewer_world in WVZ1; mesh/grid transforms are not assumed identity.
+	var low := Vector3(INF,INF,INF); var high := Vector3(-INF,-INF,-INF)
+	if viewer.frame_a != null:
+		for point in viewer.frame_a.positions:
+			var p: Vector3 = viewer.current_instance.global_transform * point
+			if p.is_finite(): low = low.min(p); high = high.max(p)
+	if viewer.scene_layers != null:
+		for view in viewer.scene_layers.views.values():
+			if not view.visible: continue
+			if view is MeshView:
+				for point in view.source_positions:
+					var p: Vector3 = view.global_transform * point
+					if p.is_finite(): low = low.min(p); high = high.max(p)
+			elif view is GridView and not view.data.is_empty():
+				var tx: Transform3D = view.world_to_grid.affine_inverse()
+				for x in [view.bounds_min.x,view.bounds_max.x]:
+					for y in [view.bounds_min.y,view.bounds_max.y]:
+						for z in [view.bounds_min.z,view.bounds_max.z]:
+							var p: Vector3 = tx * Vector3(x,y,z)
+							if p.is_finite(): low = low.min(p); high = high.max(p)
+	if not low.is_finite() or not high.is_finite(): return AABB()
+	return AABB(low,high-low)
+
+func initialize_draft() -> void:
+	var camera: Camera3D = viewer.camera
+	# Reopening a committed orbit is an exact edit, including after automatic
+	# motion. It must not replace the chosen radius with a new default.
+	if not last_applied.is_empty() and viewer.camera_target == last_applied.center and viewer.camera_distance == last_applied.radius:
+		center = last_applied.center; radius = last_applied.radius; depth = last_applied.depth
+		return
+	var bounds := scene_bounds()
+	var extent := bounds.size.length()
+	var forward := -camera.global_basis.z.normalized()
+	var near_depth := maxf(camera.near * 4.0, 0.00001)
+	depth = maxf(near_depth, 1.0)
+	if extent > 0 and is_finite(extent):
+		var projected_depth := (bounds.get_center()-camera.global_position).dot(forward)
+		depth = maxf(near_depth, projected_depth if projected_depth > near_depth else extent * 0.5)
+		# 4% of world diagonal, further limited by the visible span at depth.
+		# This handles a close camera and disconnected/multiple-scale scenes.
+		var pixel_center := get_viewport_rect().size * 0.5
+		var span := camera.project_position(pixel_center+Vector2(0,get_viewport_rect().size.y*.5),depth).distance_to(camera.project_position(pixel_center,depth))
+		radius = maxf(0.000001, minf(extent * 0.04, span * 0.12))
+	else:
+		radius = maxf(0.000001, depth * 0.04)
+	center = camera.global_position + forward * depth
+
 func read_fields() -> bool:
 	if not visible: return false
-	var values: Array[float] = []
-	for input in coordinates + [radius_input]:
-		var text: String = input.text.strip_edges()
+	var inputs: Array = coordinates + [radius_input,depth_input]
+	var values: Array = [center.x,center.y,center.z,radius,depth]
+	for i in inputs.size():
+		# Formatting is presentation only: unchanged Apply never parses it back.
+		if inputs[i].text == displayed_fields[i]: continue
+		var text: String = inputs[i].text.strip_edges()
 		if not text.is_valid_float() or not is_finite(text.to_float()) or absf(text.to_float()) > 1e15:
-			notice.text = "Enter finite coordinates and radius (maximum magnitude 1e15)."; return false
-		values.append(text.to_float())
-	if values[3] < 0.000001:
-		notice.text = "Radius must be at least 0.000001."; return false
-	center = Vector3(values[0],values[1],values[2]); radius = values[3]
-	update_notice(); refresh(); return true
+			notice.text = "Enter finite world values (maximum magnitude 1e15)."; return false
+		values[i] = text.to_float()
+	if values[3] < 0.000001 or values[4] < 0.000001:
+		notice.text = "Radius and placement depth must be at least 0.000001."; return false
+	center = Vector3(values[0],values[1],values[2]); radius = values[3]; depth = values[4]
+	write_fields(); refresh(); return true
 
 func write_fields() -> void:
 	for axis in 3: coordinates[axis].text = str(center[axis])
-	radius_input.text = str(radius); update_notice()
+	radius_input.text = str(radius)
+	depth_input.text = str(depth)
+	displayed_fields.clear()
+	for input in coordinates + [radius_input,depth_input]: displayed_fields.append(input.text)
+	update_notice()
+
+func display_number(value: float) -> String:
+	return String.num(value,clampi(5-int(floor(log(maxf(absf(value),0.000001))/log(10.0))),0,9))
 
 func update_notice() -> void:
-	notice.text = "Apply starts Auto Orbit at this center. Cancel restores the previous view."
+	readout.text = "World (%s, %s, %s) · Radius %s · Ahead depth %s" % [display_number(center.x),display_number(center.y),display_number(center.z),display_number(radius),display_number(depth)]
+	notice.text = "World units · Depth affects Place ahead only. Cancel restores the view."
 
 func adjust_radius(steps: float, fine: bool) -> void:
 	if not read_fields(): return
@@ -145,17 +228,39 @@ func radius_event(event: InputEvent) -> void:
 
 func place_ahead() -> void:
 	if not read_fields(): return
-	center = viewer.camera.position-viewer.camera.basis.z*radius
+	center = viewer.camera.global_position-viewer.camera.global_basis.z.normalized()*depth
 	write_fields(); refresh()
+	var focus := get_viewport().gui_get_focus_owner()
+	if focus != null: focus.release_focus()
 
 func commit() -> void:
 	if not read_fields() or viewer.inspection_busy: return
-	viewer.camera_target = center
-	viewer.camera_distance = radius
-	viewer._update_camera()
+	var camera: Camera3D = viewer.camera
+	var unchanged: bool = viewer.camera_target == center and viewer.camera_distance == radius
+	if not unchanged:
+		# Preserve the current view direction and up: reposition along its back
+		# axis, then use its up axis for the chosen equatorial orbit.
+		viewer.camera_target = center
+		viewer.camera_distance = radius
+		camera.global_position = center + camera.global_basis.z.normalized()*radius
+		viewer._adopt_camera_basis()
+	applied_orbit = {"axis":camera.basis.y.normalized(),"basis":camera.basis,"angle":0.0,"pose":camera.transform,"center":center,"radius":radius}
+	last_applied = {"center":center,"radius":radius,"depth":depth}
 	dismiss(false)
 	viewer.orbit_enabled = true
 	viewer._sync_control_state()
+
+func advance_orbit(delta: float) -> bool:
+	if applied_orbit.is_empty(): return false
+	if viewer.camera.transform != applied_orbit.pose or viewer.camera_target != applied_orbit.center or viewer.camera_distance != applied_orbit.radius:
+		applied_orbit.clear(); return false
+	applied_orbit.angle = fmod(applied_orbit.angle + delta*viewer.orbit_speed, TAU)
+	var orientation: Basis = (Basis(applied_orbit.axis,applied_orbit.angle)*applied_orbit.basis).orthonormalized()
+	viewer.yaw += delta*viewer.orbit_speed
+	viewer.camera.transform = Transform3D(orientation,viewer.camera_target+orientation.z*viewer.camera_distance)
+	viewer._adopt_camera_basis()
+	applied_orbit.pose = viewer.camera.transform
+	return true
 
 func refresh() -> void:
 	if not visible: return
@@ -163,8 +268,12 @@ func refresh() -> void:
 	var right := extent.x; var bottom := extent.y
 	if viewer.shell.dock.is_visible_in_tree(): right = minf(right,viewer.shell.dock.get_global_rect().position.x)
 	if viewer.shell.transport.is_visible_in_tree(): bottom = minf(bottom,viewer.shell.transport.get_global_rect().position.y)
-	panel.size = Vector2(minf(520,right-24),0)
+	panel.size = Vector2(minf(600,right-24),0)
 	panel.position = Vector2(maxf(12,(right-panel.size.x)*0.5),maxf(60,bottom-panel.size.y-12))
+	if viewer.camera.global_position.distance_to(center) <= radius:
+		notice.text = "Camera inside sphere · surface hidden; world guides and values remain."
+	else: update_notice()
+	guide.sync_geometry()
 	guide.queue_redraw()
 
 func _process(_delta: float) -> void:
@@ -174,6 +283,8 @@ func _process(_delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if not visible: return
+	if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
+		dismiss(); get_viewport().set_input_as_handled(); return
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if not event.pressed:
 			if drag_axis >= 0: drag_axis = -1; get_viewport().set_input_as_handled()
@@ -189,5 +300,5 @@ func _input(event: InputEvent) -> void:
 					get_viewport().set_input_as_handled(); break
 	elif event is InputEventMouseMotion and drag_axis >= 0:
 		center = drag_origin
-		center[drag_axis] += (event.position-drag_mouse).dot(drag_direction)*drag_units
+		center += handle_basis[drag_axis]*(event.position-drag_mouse).dot(drag_direction)*drag_units
 		write_fields(); refresh(); get_viewport().set_input_as_handled()

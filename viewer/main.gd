@@ -432,8 +432,14 @@ func _process_profiled(delta: float) -> void:
 		return
 	_move_free_camera(delta)
 	if orbit_enabled and not _camera_dragging() and orbit_speed != 0.0:
-		yaw += delta * orbit_speed
-		_update_camera()
+		_advance_auto_orbit(delta)
+
+func _advance_auto_orbit(delta: float) -> void:
+	# Only an explicit editor Apply establishes a custom equator. The accepted
+	# navigation path is unchanged for every other camera state.
+	if shell != null and shell.orbit_editor != null and shell.orbit_editor.advance_orbit(delta): return
+	yaw += delta * orbit_speed
+	_update_camera()
 
 func _render_current(alpha: float) -> void:
 	var started := Profile.begin()
@@ -560,6 +566,8 @@ func _input(event: InputEvent) -> void:
 		_steer_camera(movement)
 		get_viewport().set_input_as_handled()
 		return
+	if shell != null and shell.orbit_editor != null and shell.orbit_editor.visible and event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
+		shell.orbit_editor.dismiss(); get_viewport().set_input_as_handled(); return
 	# Recovery precedes GUI, busy-inspection and selection input handling.
 	if shell != null and shell.immersive and event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_ESCAPE:
 		shell.exit_immersive()

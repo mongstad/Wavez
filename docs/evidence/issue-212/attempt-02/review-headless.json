@@ -1,0 +1,73 @@
+{
+  "checks": 2772,
+  "diagnostics": [
+    {
+      "bounds": "[P: (9.6, -7.3, 4.8), S: (6.799999, 2.6, 4.099999)]",
+      "center": "(13.0, -6.0, 6.850001)",
+      "depth": 11.6973304748535,
+      "radius": 0.334209480285645,
+      "scene": "particles",
+      "sphere_diameter_ratio": 0.08
+    },
+    {
+      "bounds": "[P: (9.6, -7.3, 4.8), S: (6.799999, 2.6, 4.099999)]",
+      "center": "(13.0, -6.0, 6.850001)",
+      "depth": 11.6973304748535,
+      "radius": 0.334209480285645,
+      "scene": "mesh",
+      "sphere_diameter_ratio": 0.08
+    },
+    {
+      "bounds": "[P: (7.299999, -9.759999, 0.8), S: (12.54, 5.939999, 9.239999)]",
+      "center": "(13.57, -6.79, 5.42)",
+      "depth": 23.3390007019043,
+      "radius": 0.66682861328125,
+      "scene": "volume",
+      "sphere_diameter_ratio": 0.08
+    },
+    {
+      "bounds": "[P: (7.299999, -9.759999, 0.8), S: (12.54, 5.939999, 9.239999)]",
+      "center": "(13.57, -6.79, 5.42)",
+      "depth": 23.3390007019043,
+      "radius": 0.66682861328125,
+      "scene": "mixed",
+      "sphere_diameter_ratio": 0.08
+    },
+    {
+      "bounds": "[P: (0.0073, -0.00976, 0.0008), S: (0.01254, 0.00594, 0.00924)]",
+      "center": "(0.01357, -0.00679, 0.00542)",
+      "depth": 0.0233389995992184,
+      "radius": 0.000666828602552414,
+      "scene": "small",
+      "sphere_diameter_ratio": 0.08
+    },
+    {
+      "bounds": "[P: (72999.99, -97600.02, 8000.0), S: (125400.0, 59400.0, 92400.0)]",
+      "center": "(135700.0, -67900.02, 54200.02)",
+      "depth": 233390.03125,
+      "radius": 6668.286875,
+      "scene": "large",
+      "sphere_diameter_ratio": 0.08
+    },
+    {
+      "bounds": "[P: (7.299999, -9.759999, 0.8), S: (107.7, 5.939999, 10.2)]",
+      "center": "(61.15001, -6.789993, 5.900017)",
+      "depth": 151.682830810547,
+      "radius": 4.33379547119141,
+      "scene": "lobes",
+      "sphere_diameter_ratio": 0.08
+    }
+  ],
+  "failures": [],
+  "pixels": [],
+  "source_hashes_unchanged": {
+    "lobes.wvz": "ef8526ce4d03e1952346ee48a89b0ebca4bb6b1a3605a38224e6b69af40dd74e",
+    "large.wvz": "e627113a860fbdef25b99212944985986908675113cde7ea6fb64237b045faa2",
+    "small.wvz": "895b6ef03fc460b5a64d94a4ac73daed2751f5f41049a97e139a47c97aafd79e",
+    "mixed.wvz": "aaa2f1f2ec771a5d774f45afbffccc6b36acec46d1f3b9639662d6c15fd97169",
+    "volume.wvz": "06262eec8b9b5c76a0a650bc641fa19df6c9d74546fcf1d70cb9b7d8bf8d4447",
+    "mesh.wvz": "1d7454e06ffac5abf096313735cee4c877ada5278b0cb11ab8cb3acddd2c13a8",
+    "particles.wvz": "18c17e74465afe5cd7eca5ae4d7f53a8bcb6cce5172ab93be181cbb26515688e"
+  },
+  "packaged": false
+}

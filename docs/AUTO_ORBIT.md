@@ -22,6 +22,9 @@ values until Apply. **Apply** commits the world-space target and radius and
 immediately starts Auto Orbit there. **Cancel** restores the complete camera and
 navigation state from before the editor opened, including whether Auto Orbit
 was on. Numeric text focus keeps the normal movement-key protection.
+The #212 candidate adds independent world-unit placement depth, a scene-scaled
+shaded gizmo, and an Apply-time equatorial orbit. See [Orbit-center placement](ORBIT_GIZMO.md)
+for the current candidate contract and review limitations.
 
 Frame Scene and Reset Camera retain their existing framing behavior. Navigation
 and Auto Orbit affect the camera, never scientific/world transforms.
