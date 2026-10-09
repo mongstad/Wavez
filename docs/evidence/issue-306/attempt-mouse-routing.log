@@ -1,0 +1,28 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.351 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3070 Ti
+
+BLOOM BASELINE: 109 checks, 4 failures
+ERROR: particles Cinematic mouse availability
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/investigate_category_bloom.gd:17)
+       [1] input_probe (res://scene/investigate_category_bloom.gd:78)
+       [2] settle (res://scene/investigate_category_bloom.gd:21)
+ERROR: fields Cinematic mouse availability
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/investigate_category_bloom.gd:17)
+       [1] input_probe (res://scene/investigate_category_bloom.gd:78)
+       [2] settle (res://scene/investigate_category_bloom.gd:21)
+ERROR: meshes Cinematic mouse availability
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/investigate_category_bloom.gd:17)
+       [1] input_probe (res://scene/investigate_category_bloom.gd:78)
+       [2] settle (res://scene/investigate_category_bloom.gd:21)
+ERROR: mixed Cinematic mouse availability
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/investigate_category_bloom.gd:17)
+       [1] input_probe (res://scene/investigate_category_bloom.gd:78)
+       [2] settle (res://scene/investigate_category_bloom.gd:21)

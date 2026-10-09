@@ -1,0 +1,377 @@
+{
+  "status": "BASELINE OBSERVATION PASS; ARCHITECTURE APPROVAL REQUIRED; FEATURE UNIMPLEMENTED",
+  "baseline_commit": "65fd8fae15a1b8dd37c75eca3a197d75003ee4ee",
+  "baseline_build": "v0.1.0.79",
+  "candidate_build": "v0.1.0.80",
+  "date": "2026-10-09",
+  "device": "NVIDIA GeForce RTX 3070 Ti",
+  "godot": "4.7.2.stable.official.ed1daf0bf",
+  "runs": {
+    "source-forward-plus": {
+      "checks": 109,
+      "failures": [],
+      "packaged": false,
+      "renderer": "forward_plus",
+      "resolution": [
+        970,
+        640
+      ],
+      "mixed_cinematic_intensity_2_timing": {
+        "decoded_cache_bytes": 61120,
+        "draw_calls": 3,
+        "engine_buffer_bytes": 19283248,
+        "engine_texture_bytes": 99675136,
+        "frames": 45,
+        "gpu_ms_median": 1.0299999713897705,
+        "gpu_ms_p95": 2.2820000648498535,
+        "objects": 3,
+        "render_cpu_ms_median": 0.050999999046325684,
+        "wall_ms_median": 1.287
+      },
+      "capture_hashes_unchanged": {
+        "particles.wvz": "8ea2f9d398673092d86e86ceb3576007958669b10a92c8468088d0de0f1d83cc",
+        "fields.wvz": "2b238121dd5cee5e22281bc5047cf28d15a90b8cd260525544c6f9372478df1e",
+        "meshes.wvz": "4f39f43e4ed912dae0db8949fbc2e5557602aef6a8fcad634772249597655355",
+        "mixed.wvz": "eee7c8cbb3ab3293afd79120a0d6da44d1f469ccdd53b31e60a58ad26b69bdef"
+      }
+    },
+    "source-compatibility": {
+      "checks": 109,
+      "failures": [],
+      "packaged": false,
+      "renderer": "gl_compatibility",
+      "resolution": [
+        970,
+        640
+      ],
+      "mixed_cinematic_intensity_2_timing": {
+        "decoded_cache_bytes": 61120,
+        "draw_calls": 3,
+        "engine_buffer_bytes": 32125228,
+        "engine_texture_bytes": 48796692,
+        "frames": 45,
+        "gpu_ms_median": 0.5899999737739563,
+        "gpu_ms_p95": 1.5859999656677246,
+        "objects": 3,
+        "render_cpu_ms_median": 0.18400000035762787,
+        "wall_ms_median": 0.725
+      },
+      "capture_hashes_unchanged": {
+        "particles.wvz": "a2730ce47dfd3298c74b8ba63205b4bfdd830ca76cd06f0a8d3bc565deeac0c9",
+        "fields.wvz": "65ce5faec88ce78d243028828fe527fdc48494564be2e28d0b5efed7d2a6c8cd",
+        "meshes.wvz": "f6ce0b67a93df7a12f23457650ef09341e0c1bb1d85b59873babfed8c769a8aa",
+        "mixed.wvz": "2651a662a4c88d56141f80502510165c597ef98d219da3a1c78b36e4f4409e7f"
+      }
+    },
+    "package-forward-plus": {
+      "checks": 109,
+      "failures": [],
+      "packaged": true,
+      "renderer": "forward_plus",
+      "resolution": [
+        970,
+        640
+      ],
+      "mixed_cinematic_intensity_2_timing": {
+        "decoded_cache_bytes": 61120,
+        "draw_calls": 3,
+        "engine_buffer_bytes": 19283248,
+        "engine_texture_bytes": 99675136,
+        "frames": 45,
+        "gpu_ms_median": 1.0299999713897705,
+        "gpu_ms_p95": 2.2090001106262207,
+        "objects": 3,
+        "render_cpu_ms_median": 0.04699999839067459,
+        "wall_ms_median": 1.315
+      },
+      "capture_hashes_unchanged": {
+        "particles.wvz": "531d1cedc1b8def74ae0a93e167d953251ca48cb50ca53733df2e8e6e7253a96",
+        "fields.wvz": "52dd6492b7333b8a0f2bc79dbf5ccbb58db83bf7248452de3dfaf697b9b22085",
+        "meshes.wvz": "7a74aabbb4a2e028ef65929d6adf4e81c3f6865705ca0cff7f8aa19ce0b9f488",
+        "mixed.wvz": "86ec758da1f224443d6f1ba85dadaceec7a52a493e25fe7fa6ed1478073ea754"
+      }
+    },
+    "package-compatibility": {
+      "checks": 109,
+      "failures": [],
+      "packaged": true,
+      "renderer": "gl_compatibility",
+      "resolution": [
+        970,
+        640
+      ],
+      "mixed_cinematic_intensity_2_timing": {
+        "decoded_cache_bytes": 61120,
+        "draw_calls": 3,
+        "engine_buffer_bytes": 32125228,
+        "engine_texture_bytes": 48796692,
+        "frames": 45,
+        "gpu_ms_median": 0.17299999296665192,
+        "gpu_ms_p95": 0.20399999618530273,
+        "objects": 3,
+        "render_cpu_ms_median": 0.17000000178813934,
+        "wall_ms_median": 0.36
+      },
+      "capture_hashes_unchanged": {
+        "particles.wvz": "6a3ed44a684dba853a3191d7e519e10eebe2014d3554f7042f0df4ec0f789378",
+        "fields.wvz": "b4cfa24f72c5419385ef90b8c1f92ae64579a184b10a48ed53394e6beb492534",
+        "meshes.wvz": "7b5cb7906791f082b86906254f2c3fd2b88ca44de439a88d67f2798fcd3d2d50",
+        "mixed.wvz": "7b7eaf6f13f78d108fb9a7391256545d938bc08b1df8c3fdaaa24e9269424614"
+      }
+    }
+  },
+  "source_package_pixel_comparisons": {
+    "source-forward-plus": {
+      "fields-Cinematic-default.png": {
+        "changed_pixels": 0,
+        "mean_absolute_channel_delta": 0.0,
+        "max_channel_delta": 0
+      },
+      "fields-Cinematic-high.png": {
+        "changed_pixels": 0,
+        "mean_absolute_channel_delta": 0.0,
+        "max_channel_delta": 0
+      },
+      "fields-Cinematic-zero.png": {
+        "changed_pixels": 0,
+        "mean_absolute_channel_delta": 0.0,
+        "max_channel_delta": 0
+      },
+      "fields-Scientific-default.png": {
+        "changed_pixels": 0,
+        "mean_absolute_channel_delta": 0.0,
+        "max_channel_delta": 0
+      },
+      "fields-Scientific-high.png": {
+        "changed_pixels": 0,
+        "mean_absolute_channel_delta": 0.0,
+        "max_channel_delta": 0
+      },
+      "fields-Scientific-zero.png": {
+        "changed_pixels": 0,
+        "mean_absolute_channel_delta": 0.0,
+        "max_channel_delta": 0
+      },
+      "meshes-Cinematic-default.png": {
+        "changed_pixels": 0,
+        "mean_absolute_channel_delta": 0.0,
+        "max_channel_delta": 0
+      },
+      "meshes-Cinematic-high.png": {
+        "changed_pixels": 0,
+        "mean_absolute_channel_delta": 0.0,
+        "max_channel_delta": 0
+      },
+      "meshes-Cinematic-zero.png": {
+        "changed_pixels": 0,
+        "mean_absolute_channel_delta": 0.0,
+        "max_channel_delta": 0
+      },
+      "meshes-Scientific-default.png": {
+        "changed_pixels": 0,
+        "mean_absolute_channel_delta": 0.0,
+        "max_channel_delta": 0
+      },
+      "meshes-Scientific-high.png": {
+        "changed_pixels": 0,
+        "mean_absolute_channel_delta": 0.0,
+        "max_channel_delta": 0
+      },
+      "meshes-Scientific-zero.png": {
+        "changed_pixels": 0,
+        "mean_absolute_channel_delta": 0.0,
+        "max_channel_delta": 0
+      },
+      "mixed-Cinematic-default.png": {
+        "changed_pixels": 0,
+        "mean_absolute_channel_delta": 0.0,
+        "max_channel_delta": 0
+      },
+      "mixed-Cinematic-high.png": {
+        "changed_pixels": 0,
+        "mean_absolute_channel_delta": 0.0,
+        "max_channel_delta": 0
+      },
+      "mixed-Cinematic-zero.png": {
+        "changed_pixels": 0,
+        "mean_absolute_channel_delta": 0.0,
+        "max_channel_delta": 0
+      },
+      "mixed-Scientific-default.png": {
+        "changed_pixels": 0,
+        "mean_absolute_channel_delta": 0.0,
+        "max_channel_delta": 0
+      },
+      "mixed-Scientific-high.png": {
+        "changed_pixels": 0,
+        "mean_absolute_channel_delta": 0.0,
+        "max_channel_delta": 0
+      },
+      "mixed-Scientific-zero.png": {
+        "changed_pixels": 0,
+        "mean_absolute_channel_delta": 0.0,
+        "max_channel_delta": 0
+      },
+      "particles-Cinematic-default.png": {
+        "changed_pixels": 0,
+        "mean_absolute_channel_delta": 0.0,
+        "max_channel_delta": 0
+      },
+      "particles-Cinematic-high.png": {
+        "changed_pixels": 0,
+        "mean_absolute_channel_delta": 0.0,
+        "max_channel_delta": 0
+      },
+      "particles-Cinematic-zero.png": {
+        "changed_pixels": 0,
+        "mean_absolute_channel_delta": 0.0,
+        "max_channel_delta": 0
+      },
+      "particles-Scientific-default.png": {
+        "changed_pixels": 0,
+        "mean_absolute_channel_delta": 0.0,
+        "max_channel_delta": 0
+      },
+      "particles-Scientific-high.png": {
+        "changed_pixels": 0,
+        "mean_absolute_channel_delta": 0.0,
+        "max_channel_delta": 0
+      },
+      "particles-Scientific-zero.png": {
+        "changed_pixels": 0,
+        "mean_absolute_channel_delta": 0.0,
+        "max_channel_delta": 0
+      }
+    },
+    "source-compatibility": {
+      "fields-Cinematic-default.png": {
+        "changed_pixels": 0,
+        "mean_absolute_channel_delta": 0.0,
+        "max_channel_delta": 0
+      },
+      "fields-Cinematic-high.png": {
+        "changed_pixels": 0,
+        "mean_absolute_channel_delta": 0.0,
+        "max_channel_delta": 0
+      },
+      "fields-Cinematic-zero.png": {
+        "changed_pixels": 0,
+        "mean_absolute_channel_delta": 0.0,
+        "max_channel_delta": 0
+      },
+      "fields-Scientific-default.png": {
+        "changed_pixels": 0,
+        "mean_absolute_channel_delta": 0.0,
+        "max_channel_delta": 0
+      },
+      "fields-Scientific-high.png": {
+        "changed_pixels": 0,
+        "mean_absolute_channel_delta": 0.0,
+        "max_channel_delta": 0
+      },
+      "fields-Scientific-zero.png": {
+        "changed_pixels": 0,
+        "mean_absolute_channel_delta": 0.0,
+        "max_channel_delta": 0
+      },
+      "meshes-Cinematic-default.png": {
+        "changed_pixels": 0,
+        "mean_absolute_channel_delta": 0.0,
+        "max_channel_delta": 0
+      },
+      "meshes-Cinematic-high.png": {
+        "changed_pixels": 0,
+        "mean_absolute_channel_delta": 0.0,
+        "max_channel_delta": 0
+      },
+      "meshes-Cinematic-zero.png": {
+        "changed_pixels": 0,
+        "mean_absolute_channel_delta": 0.0,
+        "max_channel_delta": 0
+      },
+      "meshes-Scientific-default.png": {
+        "changed_pixels": 0,
+        "mean_absolute_channel_delta": 0.0,
+        "max_channel_delta": 0
+      },
+      "meshes-Scientific-high.png": {
+        "changed_pixels": 0,
+        "mean_absolute_channel_delta": 0.0,
+        "max_channel_delta": 0
+      },
+      "meshes-Scientific-zero.png": {
+        "changed_pixels": 0,
+        "mean_absolute_channel_delta": 0.0,
+        "max_channel_delta": 0
+      },
+      "mixed-Cinematic-default.png": {
+        "changed_pixels": 0,
+        "mean_absolute_channel_delta": 0.0,
+        "max_channel_delta": 0
+      },
+      "mixed-Cinematic-high.png": {
+        "changed_pixels": 0,
+        "mean_absolute_channel_delta": 0.0,
+        "max_channel_delta": 0
+      },
+      "mixed-Cinematic-zero.png": {
+        "changed_pixels": 0,
+        "mean_absolute_channel_delta": 0.0,
+        "max_channel_delta": 0
+      },
+      "mixed-Scientific-default.png": {
+        "changed_pixels": 0,
+        "mean_absolute_channel_delta": 0.0,
+        "max_channel_delta": 0
+      },
+      "mixed-Scientific-high.png": {
+        "changed_pixels": 0,
+        "mean_absolute_channel_delta": 0.0,
+        "max_channel_delta": 0
+      },
+      "mixed-Scientific-zero.png": {
+        "changed_pixels": 0,
+        "mean_absolute_channel_delta": 0.0,
+        "max_channel_delta": 0
+      },
+      "particles-Cinematic-default.png": {
+        "changed_pixels": 0,
+        "mean_absolute_channel_delta": 0.0,
+        "max_channel_delta": 0
+      },
+      "particles-Cinematic-high.png": {
+        "changed_pixels": 0,
+        "mean_absolute_channel_delta": 0.0,
+        "max_channel_delta": 0
+      },
+      "particles-Cinematic-zero.png": {
+        "changed_pixels": 0,
+        "mean_absolute_channel_delta": 0.0,
+        "max_channel_delta": 0
+      },
+      "particles-Scientific-default.png": {
+        "changed_pixels": 0,
+        "mean_absolute_channel_delta": 0.0,
+        "max_channel_delta": 0
+      },
+      "particles-Scientific-high.png": {
+        "changed_pixels": 0,
+        "mean_absolute_channel_delta": 0.0,
+        "max_channel_delta": 0
+      },
+      "particles-Scientific-zero.png": {
+        "changed_pixels": 0,
+        "mean_absolute_channel_delta": 0.0,
+        "max_channel_delta": 0
+      }
+    }
+  },
+  "limitations": [
+    "Original owner capture/recipe/interaction sequence unavailable; disabled Cinematic category control not reproduced.",
+    "No independent Bloom implementation or prototype: isolation, occlusion, extra passes/VRAM/frame-time/cache costs remain unvalidated.",
+    "Native synthetic mouse/keyboard events target the actual embedded dialog viewport; physical input not tested.",
+    "Validation-entry release packages use production resources, not a distribution approval.",
+    "PNG snapshots only; ordinary image export and real deterministic-video export not exercised.",
+    "No heavy workload, overlapping category/slice/isosurface/wireframe fixtures, playback soak, 4K/mixed-DPI, other GPU or OS tests."
+  ]
+}

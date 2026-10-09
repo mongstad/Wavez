@@ -1,0 +1,971 @@
+{
+  "baseline_only": true,
+  "cases": [
+    {
+      "name": "particles-Cinematic",
+      "preset": "Cinematic",
+      "readings": {
+        "default": {
+          "clean_view": false,
+          "editable": true,
+          "glow_enabled": true,
+          "intensity": 1.350000023841858,
+          "preset": "Cinematic",
+          "slider": 1.3599999999999999
+        },
+        "high": {
+          "clean_view": false,
+          "editable": true,
+          "glow_enabled": true,
+          "intensity": 2.0,
+          "preset": "Cinematic",
+          "slider": 2.0
+        },
+        "zero": {
+          "clean_view": false,
+          "editable": true,
+          "glow_enabled": true,
+          "intensity": 0.0,
+          "preset": "Cinematic",
+          "slider": 0.0
+        }
+      },
+      "regions": {
+        "fields": [
+          405,
+          225,
+          565,
+          415
+        ],
+        "meshes": [
+          604,
+          225,
+          764,
+          415
+        ],
+        "particles": [
+          205,
+          225,
+          365,
+          415
+        ]
+      },
+      "resolution": [
+        970,
+        640
+      ],
+      "scene": "particles",
+      "timing": {
+        "decoded_cache_bytes": 13504,
+        "draw_calls": 1,
+        "engine_buffer_bytes": 8692760,
+        "engine_texture_bytes": 28743521,
+        "frames": 45,
+        "gpu_ms_median": 0.1340000033378601,
+        "gpu_ms_p95": 0.13600000739097595,
+        "objects": 1,
+        "render_cpu_ms_median": 0.1459999978542328,
+        "wall_ms_median": 0.365
+      }
+    },
+    {
+      "name": "particles-Scientific",
+      "preset": "Scientific",
+      "readings": {
+        "default": {
+          "clean_view": true,
+          "editable": false,
+          "glow_enabled": false,
+          "intensity": 1.350000023841858,
+          "preset": "Scientific",
+          "slider": 1.3599999999999999
+        },
+        "high": {
+          "clean_view": true,
+          "editable": false,
+          "glow_enabled": false,
+          "intensity": 2.0,
+          "preset": "Scientific",
+          "slider": 2.0
+        },
+        "zero": {
+          "clean_view": true,
+          "editable": false,
+          "glow_enabled": false,
+          "intensity": 0.0,
+          "preset": "Scientific",
+          "slider": 0.0
+        }
+      },
+      "regions": {
+        "fields": [
+          405,
+          225,
+          565,
+          415
+        ],
+        "meshes": [
+          604,
+          225,
+          764,
+          415
+        ],
+        "particles": [
+          205,
+          225,
+          365,
+          415
+        ]
+      },
+      "resolution": [
+        970,
+        640
+      ],
+      "scene": "particles",
+      "timing": {
+        "decoded_cache_bytes": 13504,
+        "draw_calls": 1,
+        "engine_buffer_bytes": 8692760,
+        "engine_texture_bytes": 23777121,
+        "frames": 45,
+        "gpu_ms_median": 0.03400000184774399,
+        "gpu_ms_p95": 0.035999998450279236,
+        "objects": 1,
+        "render_cpu_ms_median": 0.06400000303983688,
+        "wall_ms_median": 0.282
+      }
+    },
+    {
+      "name": "fields-Cinematic",
+      "preset": "Cinematic",
+      "readings": {
+        "default": {
+          "clean_view": false,
+          "editable": true,
+          "glow_enabled": true,
+          "intensity": 1.350000023841858,
+          "preset": "Cinematic",
+          "slider": 1.3599999999999999
+        },
+        "high": {
+          "clean_view": false,
+          "editable": true,
+          "glow_enabled": true,
+          "intensity": 2.0,
+          "preset": "Cinematic",
+          "slider": 2.0
+        },
+        "zero": {
+          "clean_view": false,
+          "editable": true,
+          "glow_enabled": true,
+          "intensity": 0.0,
+          "preset": "Cinematic",
+          "slider": 0.0
+        }
+      },
+      "regions": {
+        "fields": [
+          405,
+          225,
+          565,
+          415
+        ],
+        "meshes": [
+          604,
+          225,
+          764,
+          415
+        ],
+        "particles": [
+          205,
+          225,
+          365,
+          415
+        ]
+      },
+      "resolution": [
+        970,
+        640
+      ],
+      "scene": "fields",
+      "timing": {
+        "decoded_cache_bytes": 43400,
+        "draw_calls": 1,
+        "engine_buffer_bytes": 27861600,
+        "engine_texture_bytes": 36912876,
+        "frames": 45,
+        "gpu_ms_median": 0.5040000081062317,
+        "gpu_ms_p95": 1.6100000143051147,
+        "objects": 2,
+        "render_cpu_ms_median": 0.1679999977350235,
+        "wall_ms_median": 0.62
+      }
+    },
+    {
+      "name": "fields-Scientific",
+      "preset": "Scientific",
+      "readings": {
+        "default": {
+          "clean_view": true,
+          "editable": false,
+          "glow_enabled": false,
+          "intensity": 1.350000023841858,
+          "preset": "Scientific",
+          "slider": 1.3599999999999999
+        },
+        "high": {
+          "clean_view": true,
+          "editable": false,
+          "glow_enabled": false,
+          "intensity": 2.0,
+          "preset": "Scientific",
+          "slider": 2.0
+        },
+        "zero": {
+          "clean_view": true,
+          "editable": false,
+          "glow_enabled": false,
+          "intensity": 0.0,
+          "preset": "Scientific",
+          "slider": 0.0
+        }
+      },
+      "regions": {
+        "fields": [
+          405,
+          225,
+          565,
+          415
+        ],
+        "meshes": [
+          604,
+          225,
+          764,
+          415
+        ],
+        "particles": [
+          205,
+          225,
+          365,
+          415
+        ]
+      },
+      "resolution": [
+        970,
+        640
+      ],
+      "scene": "fields",
+      "timing": {
+        "decoded_cache_bytes": 43400,
+        "draw_calls": 1,
+        "engine_buffer_bytes": 27861600,
+        "engine_texture_bytes": 34043620,
+        "frames": 45,
+        "gpu_ms_median": 0.20800000429153442,
+        "gpu_ms_p95": 0.3109999895095825,
+        "objects": 2,
+        "render_cpu_ms_median": 0.09300000220537186,
+        "wall_ms_median": 0.323
+      }
+    },
+    {
+      "name": "meshes-Cinematic",
+      "preset": "Cinematic",
+      "readings": {
+        "default": {
+          "clean_view": false,
+          "editable": true,
+          "glow_enabled": true,
+          "intensity": 1.350000023841858,
+          "preset": "Cinematic",
+          "slider": 1.3599999999999999
+        },
+        "high": {
+          "clean_view": false,
+          "editable": true,
+          "glow_enabled": true,
+          "intensity": 2.0,
+          "preset": "Cinematic",
+          "slider": 2.0
+        },
+        "zero": {
+          "clean_view": false,
+          "editable": true,
+          "glow_enabled": true,
+          "intensity": 0.0,
+          "preset": "Cinematic",
+          "slider": 0.0
+        }
+      },
+      "regions": {
+        "fields": [
+          405,
+          225,
+          565,
+          415
+        ],
+        "meshes": [
+          604,
+          225,
+          764,
+          415
+        ],
+        "particles": [
+          205,
+          225,
+          365,
+          415
+        ]
+      },
+      "resolution": [
+        970,
+        640
+      ],
+      "scene": "meshes",
+      "timing": {
+        "decoded_cache_bytes": 4216,
+        "draw_calls": 1,
+        "engine_buffer_bytes": 32117116,
+        "engine_texture_bytes": 39995095,
+        "frames": 45,
+        "gpu_ms_median": 0.6639999747276306,
+        "gpu_ms_p95": 2.927999973297119,
+        "objects": 2,
+        "render_cpu_ms_median": 0.1469999998807907,
+        "wall_ms_median": 1.102
+      }
+    },
+    {
+      "name": "meshes-Scientific",
+      "preset": "Scientific",
+      "readings": {
+        "default": {
+          "clean_view": true,
+          "editable": false,
+          "glow_enabled": false,
+          "intensity": 1.350000023841858,
+          "preset": "Scientific",
+          "slider": 1.3599999999999999
+        },
+        "high": {
+          "clean_view": true,
+          "editable": false,
+          "glow_enabled": false,
+          "intensity": 2.0,
+          "preset": "Scientific",
+          "slider": 2.0
+        },
+        "zero": {
+          "clean_view": true,
+          "editable": false,
+          "glow_enabled": false,
+          "intensity": 0.0,
+          "preset": "Scientific",
+          "slider": 0.0
+        }
+      },
+      "regions": {
+        "fields": [
+          405,
+          225,
+          565,
+          415
+        ],
+        "meshes": [
+          604,
+          225,
+          764,
+          415
+        ],
+        "particles": [
+          205,
+          225,
+          365,
+          415
+        ]
+      },
+      "resolution": [
+        970,
+        640
+      ],
+      "scene": "meshes",
+      "timing": {
+        "decoded_cache_bytes": 4216,
+        "draw_calls": 1,
+        "engine_buffer_bytes": 32117116,
+        "engine_texture_bytes": 36426791,
+        "frames": 45,
+        "gpu_ms_median": 0.08900000154972076,
+        "gpu_ms_p95": 0.09700000286102295,
+        "objects": 2,
+        "render_cpu_ms_median": 0.0729999989271164,
+        "wall_ms_median": 0.281
+      }
+    },
+    {
+      "name": "mixed-Cinematic",
+      "preset": "Cinematic",
+      "readings": {
+        "default": {
+          "clean_view": false,
+          "editable": true,
+          "glow_enabled": true,
+          "intensity": 1.350000023841858,
+          "preset": "Cinematic",
+          "slider": 1.3599999999999999
+        },
+        "high": {
+          "clean_view": false,
+          "editable": true,
+          "glow_enabled": true,
+          "intensity": 2.0,
+          "preset": "Cinematic",
+          "slider": 2.0
+        },
+        "zero": {
+          "clean_view": false,
+          "editable": true,
+          "glow_enabled": true,
+          "intensity": 0.0,
+          "preset": "Cinematic",
+          "slider": 0.0
+        }
+      },
+      "regions": {
+        "fields": [
+          405,
+          225,
+          565,
+          415
+        ],
+        "meshes": [
+          604,
+          225,
+          764,
+          415
+        ],
+        "particles": [
+          205,
+          225,
+          365,
+          415
+        ]
+      },
+      "resolution": [
+        970,
+        640
+      ],
+      "scene": "mixed",
+      "timing": {
+        "decoded_cache_bytes": 61120,
+        "draw_calls": 3,
+        "engine_buffer_bytes": 32125228,
+        "engine_texture_bytes": 48796692,
+        "frames": 45,
+        "gpu_ms_median": 0.5899999737739563,
+        "gpu_ms_p95": 1.5859999656677246,
+        "objects": 3,
+        "render_cpu_ms_median": 0.18400000035762787,
+        "wall_ms_median": 0.725
+      }
+    },
+    {
+      "name": "mixed-Scientific",
+      "preset": "Scientific",
+      "readings": {
+        "default": {
+          "clean_view": true,
+          "editable": false,
+          "glow_enabled": false,
+          "intensity": 1.350000023841858,
+          "preset": "Scientific",
+          "slider": 1.3599999999999999
+        },
+        "high": {
+          "clean_view": true,
+          "editable": false,
+          "glow_enabled": false,
+          "intensity": 2.0,
+          "preset": "Scientific",
+          "slider": 2.0
+        },
+        "zero": {
+          "clean_view": true,
+          "editable": false,
+          "glow_enabled": false,
+          "intensity": 0.0,
+          "preset": "Scientific",
+          "slider": 0.0
+        }
+      },
+      "regions": {
+        "fields": [
+          405,
+          225,
+          565,
+          415
+        ],
+        "meshes": [
+          604,
+          225,
+          764,
+          415
+        ],
+        "particles": [
+          205,
+          225,
+          365,
+          415
+        ]
+      },
+      "resolution": [
+        970,
+        640
+      ],
+      "scene": "mixed",
+      "timing": {
+        "decoded_cache_bytes": 61120,
+        "draw_calls": 3,
+        "engine_buffer_bytes": 32125228,
+        "engine_texture_bytes": 47325532,
+        "frames": 45,
+        "gpu_ms_median": 0.2529999911785126,
+        "gpu_ms_p95": 0.9660000205039978,
+        "objects": 3,
+        "render_cpu_ms_median": 0.10700000077486038,
+        "wall_ms_median": 0.364
+      }
+    }
+  ],
+  "checks": 109,
+  "controls": [
+    {
+      "before": 1.3599999999999999,
+      "keyboard": 1.38,
+      "mouse": 0.38,
+      "preset": "Cinematic",
+      "scene": "particles",
+      "state": {
+        "clean_view": false,
+        "editable": true,
+        "glow_enabled": true,
+        "intensity": 0.3799999952316284,
+        "preset": "Cinematic",
+        "slider": 0.38
+      }
+    },
+    {
+      "before": 1.3599999999999999,
+      "keyboard": 1.3599999999999999,
+      "mouse": 1.3599999999999999,
+      "preset": "Scientific",
+      "scene": "particles",
+      "state": {
+        "clean_view": true,
+        "editable": false,
+        "glow_enabled": false,
+        "intensity": 1.3600000143051147,
+        "preset": "Scientific",
+        "slider": 1.3599999999999999
+      }
+    },
+    {
+      "before": 1.3599999999999999,
+      "keyboard": 1.38,
+      "mouse": 0.38,
+      "preset": "Cinematic",
+      "scene": "fields",
+      "state": {
+        "clean_view": false,
+        "editable": true,
+        "glow_enabled": true,
+        "intensity": 0.3799999952316284,
+        "preset": "Cinematic",
+        "slider": 0.38
+      }
+    },
+    {
+      "before": 1.3599999999999999,
+      "keyboard": 1.3599999999999999,
+      "mouse": 1.3599999999999999,
+      "preset": "Scientific",
+      "scene": "fields",
+      "state": {
+        "clean_view": true,
+        "editable": false,
+        "glow_enabled": false,
+        "intensity": 1.3600000143051147,
+        "preset": "Scientific",
+        "slider": 1.3599999999999999
+      }
+    },
+    {
+      "before": 1.3599999999999999,
+      "keyboard": 1.38,
+      "mouse": 0.38,
+      "preset": "Cinematic",
+      "scene": "meshes",
+      "state": {
+        "clean_view": false,
+        "editable": true,
+        "glow_enabled": true,
+        "intensity": 0.3799999952316284,
+        "preset": "Cinematic",
+        "slider": 0.38
+      }
+    },
+    {
+      "before": 1.3599999999999999,
+      "keyboard": 1.3599999999999999,
+      "mouse": 1.3599999999999999,
+      "preset": "Scientific",
+      "scene": "meshes",
+      "state": {
+        "clean_view": true,
+        "editable": false,
+        "glow_enabled": false,
+        "intensity": 1.3600000143051147,
+        "preset": "Scientific",
+        "slider": 1.3599999999999999
+      }
+    },
+    {
+      "before": 1.3599999999999999,
+      "keyboard": 1.38,
+      "mouse": 0.38,
+      "preset": "Cinematic",
+      "scene": "mixed",
+      "state": {
+        "clean_view": false,
+        "editable": true,
+        "glow_enabled": true,
+        "intensity": 0.3799999952316284,
+        "preset": "Cinematic",
+        "slider": 0.38
+      }
+    },
+    {
+      "before": 1.3599999999999999,
+      "keyboard": 1.3599999999999999,
+      "mouse": 1.3599999999999999,
+      "preset": "Scientific",
+      "scene": "mixed",
+      "state": {
+        "clean_view": true,
+        "editable": false,
+        "glow_enabled": false,
+        "intensity": 1.3600000143051147,
+        "preset": "Scientific",
+        "slider": 1.3599999999999999
+      }
+    }
+  ],
+  "device": "NVIDIA GeForce RTX 3070 Ti",
+  "failures": [],
+  "loads": [
+    {
+      "after": {
+        "clean_view": false,
+        "editable": true,
+        "glow_enabled": true,
+        "intensity": 1.350000023841858,
+        "preset": "Cinematic",
+        "slider": 1.3599999999999999
+      },
+      "before": {
+        "clean_view": false,
+        "editable": true,
+        "glow_enabled": true,
+        "intensity": 1.350000023841858,
+        "preset": "Cinematic",
+        "slider": 1.3599999999999999
+      },
+      "scene": "particles",
+      "workspace": 0
+    },
+    {
+      "after": {
+        "clean_view": false,
+        "editable": true,
+        "glow_enabled": true,
+        "intensity": 1.3600000143051147,
+        "preset": "Cinematic",
+        "slider": 1.3599999999999999
+      },
+      "before": {
+        "clean_view": false,
+        "editable": true,
+        "glow_enabled": true,
+        "intensity": 1.3600000143051147,
+        "preset": "Cinematic",
+        "slider": 1.3599999999999999
+      },
+      "scene": "fields",
+      "workspace": 1
+    },
+    {
+      "after": {
+        "clean_view": false,
+        "editable": true,
+        "glow_enabled": true,
+        "intensity": 1.3600000143051147,
+        "preset": "Cinematic",
+        "slider": 1.3599999999999999
+      },
+      "before": {
+        "clean_view": false,
+        "editable": true,
+        "glow_enabled": true,
+        "intensity": 1.3600000143051147,
+        "preset": "Cinematic",
+        "slider": 1.3599999999999999
+      },
+      "scene": "meshes",
+      "workspace": 2
+    },
+    {
+      "after": {
+        "clean_view": false,
+        "editable": true,
+        "glow_enabled": true,
+        "intensity": 1.3600000143051147,
+        "preset": "Cinematic",
+        "slider": 1.3599999999999999
+      },
+      "before": {
+        "clean_view": false,
+        "editable": true,
+        "glow_enabled": true,
+        "intensity": 1.3600000143051147,
+        "preset": "Cinematic",
+        "slider": 1.3599999999999999
+      },
+      "scene": "mixed",
+      "workspace": 0
+    }
+  ],
+  "recipe_label_case": {
+    "clean_view": false,
+    "editable": false,
+    "glow_enabled": false,
+    "intensity": 1.3600000143051147,
+    "preset": "Cinematic",
+    "slider": 1.3599999999999999
+  },
+  "renderer": "gl_compatibility",
+  "resolution": [
+    970,
+    640
+  ],
+  "source_hashes_unchanged": {
+    "particles.wvz": "a2730ce47dfd3298c74b8ba63205b4bfdd830ca76cd06f0a8d3bc565deeac0c9",
+    "fields.wvz": "65ce5faec88ce78d243028828fe527fdc48494564be2e28d0b5efed7d2a6c8cd",
+    "meshes.wvz": "f6ce0b67a93df7a12f23457650ef09341e0c1bb1d85b59873babfed8c769a8aa",
+    "mixed.wvz": "2651a662a4c88d56141f80502510165c597ef98d219da3a1c78b36e4f4409e7f"
+  },
+  "packaged": false,
+  "godot": "4.7.2.stable.official.ed1daf0bf",
+  "pixel_comparisons": [
+    {
+      "name": "particles-Cinematic",
+      "full": {
+        "changed_pixels": 2596,
+        "mean_absolute_channel_delta": 0.03045264175257732,
+        "max_channel_delta": 15
+      },
+      "regions": {
+        "fields": {
+          "changed_pixels": 0,
+          "mean_absolute_channel_delta": 0.0,
+          "max_channel_delta": 0
+        },
+        "meshes": {
+          "changed_pixels": 0,
+          "mean_absolute_channel_delta": 0.0,
+          "max_channel_delta": 0
+        },
+        "particles": {
+          "changed_pixels": 2596,
+          "mean_absolute_channel_delta": 0.621875,
+          "max_channel_delta": 15
+        }
+      }
+    },
+    {
+      "name": "particles-Scientific",
+      "full": {
+        "changed_pixels": 0,
+        "mean_absolute_channel_delta": 0.0,
+        "max_channel_delta": 0
+      },
+      "regions": {
+        "fields": {
+          "changed_pixels": 0,
+          "mean_absolute_channel_delta": 0.0,
+          "max_channel_delta": 0
+        },
+        "meshes": {
+          "changed_pixels": 0,
+          "mean_absolute_channel_delta": 0.0,
+          "max_channel_delta": 0
+        },
+        "particles": {
+          "changed_pixels": 0,
+          "mean_absolute_channel_delta": 0.0,
+          "max_channel_delta": 0
+        }
+      }
+    },
+    {
+      "name": "fields-Cinematic",
+      "full": {
+        "changed_pixels": 7531,
+        "mean_absolute_channel_delta": 0.06872476374570446,
+        "max_channel_delta": 22
+      },
+      "regions": {
+        "fields": {
+          "changed_pixels": 7531,
+          "mean_absolute_channel_delta": 1.4034320175438597,
+          "max_channel_delta": 22
+        },
+        "meshes": {
+          "changed_pixels": 0,
+          "mean_absolute_channel_delta": 0.0,
+          "max_channel_delta": 0
+        },
+        "particles": {
+          "changed_pixels": 0,
+          "mean_absolute_channel_delta": 0.0,
+          "max_channel_delta": 0
+        }
+      }
+    },
+    {
+      "name": "fields-Scientific",
+      "full": {
+        "changed_pixels": 0,
+        "mean_absolute_channel_delta": 0.0,
+        "max_channel_delta": 0
+      },
+      "regions": {
+        "fields": {
+          "changed_pixels": 0,
+          "mean_absolute_channel_delta": 0.0,
+          "max_channel_delta": 0
+        },
+        "meshes": {
+          "changed_pixels": 0,
+          "mean_absolute_channel_delta": 0.0,
+          "max_channel_delta": 0
+        },
+        "particles": {
+          "changed_pixels": 0,
+          "mean_absolute_channel_delta": 0.0,
+          "max_channel_delta": 0
+        }
+      }
+    },
+    {
+      "name": "meshes-Cinematic",
+      "full": {
+        "changed_pixels": 12815,
+        "mean_absolute_channel_delta": 0.3125832259450172,
+        "max_channel_delta": 49
+      },
+      "regions": {
+        "fields": {
+          "changed_pixels": 0,
+          "mean_absolute_channel_delta": 0.0,
+          "max_channel_delta": 0
+        },
+        "meshes": {
+          "changed_pixels": 12815,
+          "mean_absolute_channel_delta": 6.38327850877193,
+          "max_channel_delta": 49
+        },
+        "particles": {
+          "changed_pixels": 0,
+          "mean_absolute_channel_delta": 0.0,
+          "max_channel_delta": 0
+        }
+      }
+    },
+    {
+      "name": "meshes-Scientific",
+      "full": {
+        "changed_pixels": 0,
+        "mean_absolute_channel_delta": 0.0,
+        "max_channel_delta": 0
+      },
+      "regions": {
+        "fields": {
+          "changed_pixels": 0,
+          "mean_absolute_channel_delta": 0.0,
+          "max_channel_delta": 0
+        },
+        "meshes": {
+          "changed_pixels": 0,
+          "mean_absolute_channel_delta": 0.0,
+          "max_channel_delta": 0
+        },
+        "particles": {
+          "changed_pixels": 0,
+          "mean_absolute_channel_delta": 0.0,
+          "max_channel_delta": 0
+        }
+      }
+    },
+    {
+      "name": "mixed-Cinematic",
+      "full": {
+        "changed_pixels": 22942,
+        "mean_absolute_channel_delta": 0.411760631443299,
+        "max_channel_delta": 49
+      },
+      "regions": {
+        "fields": {
+          "changed_pixels": 7531,
+          "mean_absolute_channel_delta": 1.4034320175438597,
+          "max_channel_delta": 22
+        },
+        "meshes": {
+          "changed_pixels": 12815,
+          "mean_absolute_channel_delta": 6.38327850877193,
+          "max_channel_delta": 49
+        },
+        "particles": {
+          "changed_pixels": 2596,
+          "mean_absolute_channel_delta": 0.621875,
+          "max_channel_delta": 15
+        }
+      }
+    },
+    {
+      "name": "mixed-Scientific",
+      "full": {
+        "changed_pixels": 0,
+        "mean_absolute_channel_delta": 0.0,
+        "max_channel_delta": 0
+      },
+      "regions": {
+        "fields": {
+          "changed_pixels": 0,
+          "mean_absolute_channel_delta": 0.0,
+          "max_channel_delta": 0
+        },
+        "meshes": {
+          "changed_pixels": 0,
+          "mean_absolute_channel_delta": 0.0,
+          "max_channel_delta": 0
+        },
+        "particles": {
+          "changed_pixels": 0,
+          "mean_absolute_channel_delta": 0.0,
+          "max_channel_delta": 0
+        }
+      }
+    }
+  ]
+}

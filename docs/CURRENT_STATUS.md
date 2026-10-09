@@ -1,11 +1,14 @@
 # Current status
 
-Accepted baseline: **v0.1.0.78**, `407c35833c07a800f12e56aae1140ac08a822e63`,
-owner-merged PR #302. The repository's application identity is
+Accepted baseline for the #306 investigation: **v0.1.0.79**,
+`65fd8fae15a1b8dd37c75eca3a197d75003ee4ee`, owner-merged PR #304.
+The repository's application identity is
 `viewer/project.godot` → `application/config/version`; see [version policy](VERSIONING.md).
-Issue #289 proposes candidate build 79 with locally persisted Dark/Light chrome
-and the official theme-specific About artwork. See [application themes](APPLICATION_THEMES.md).
-This candidate remains subject to owner review.
+Issue #306 proposes candidate build 80 with a baseline Bloom investigation and
+an [independent category Bloom architecture proposal](CATEGORY_BLOOM_PROPOSAL.md).
+Architecture/artistic-policy approval is pending; independent Bloom and category
+controls are not implemented. Dark/Light chrome and official theme-specific About
+artwork are in the accepted baseline; see [application themes](APPLICATION_THEMES.md).
 
 The GitHub Issues and Wavez Development Project are the operational queue. Work
 requires a Ready issue (or explicit owner authorization), the correct branch/base

@@ -6,6 +6,8 @@ Use [current status](CURRENT_STATUS.md) for supported contracts and boundaries.
 [The documentation audit](documentation-audit/README.md) records retired paths;
 Git permalinks preserve their original context.
 
+- [Issue #306 — category Bloom investigation](evidence/issue-306/README.md): accepted global-control source/package matrix, mixed-scene pixel comparisons, baseline telemetry and architecture approval boundary; independent Bloom unimplemented.
+
 - [Issue #289 — Dark and Light application themes](evidence/issue-289/README.md): palette-only chrome, official About artwork, geometry/scientific-pixel comparisons, source/package restart matrix and owner review limits.
 
 - [Issue #212 — observer orbit correction](evidence/issue-212/observer-orbit/README.md): Apply starts from the current observer position, faces the chosen center and derives camera orbit distance independently of gizmo size; current review behavior.
