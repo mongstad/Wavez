@@ -1,0 +1,24 @@
+{
+  "renderer": "gl_compatibility",
+  "status": "PASS",
+  "frames": [
+    {
+      "frame": 0,
+      "different_pixels": 0,
+      "light_png_sha256": "44b99e0181775e0e72fe1955e1f58c28cc8484e1840abf3991fb89eeb3435614",
+      "dark_png_sha256": "44b99e0181775e0e72fe1955e1f58c28cc8484e1840abf3991fb89eeb3435614"
+    },
+    {
+      "frame": 1,
+      "different_pixels": 0,
+      "light_png_sha256": "f422464e8fd995daa8dec7168dc83002cdc88aae5b8c312b87aa69f524c11c6e",
+      "dark_png_sha256": "f422464e8fd995daa8dec7168dc83002cdc88aae5b8c312b87aa69f524c11c6e"
+    },
+    {
+      "frame": 2,
+      "different_pixels": 0,
+      "light_png_sha256": "b1ebf4edda8178481e3993016c8842693bfe9fa051f2729b1fb733a0df1ed47c",
+      "dark_png_sha256": "b1ebf4edda8178481e3993016c8842693bfe9fa051f2729b1fb733a0df1ed47c"
+    }
+  ]
+}

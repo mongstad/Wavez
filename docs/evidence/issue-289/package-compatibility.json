@@ -1,0 +1,19 @@
+{
+  "cycle": {
+    "checks": 42879,
+    "failures": [],
+    "renderer": "gl_compatibility"
+  },
+  "restart-light": {
+    "checks": 4,
+    "failures": [],
+    "renderer": "gl_compatibility"
+  },
+  "restart-dark": {
+    "checks": 2,
+    "failures": [],
+    "renderer": "gl_compatibility"
+  },
+  "source_sha256_unchanged": "0a5d81b2f38a626f8561484ce9d0e2649896f6352d5dc33429527cc4dea52ec1",
+  "packaged": true
+}

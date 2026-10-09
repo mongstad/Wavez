@@ -4,11 +4,20 @@ extends Theme
 const TOKENS = preload("res://ui/theme/wavez_tokens.tres")
 const MONO = preload("res://ui/fonts/DejaVuSansMono.ttf")
 var _icons: Dictionary = {}
+var light_mode := false
+const LIGHT = preload("res://ui/theme/light_palette.gd")
 
-func c(key: StringName) -> Color: return TOKENS.color(key)
+func c(key: StringName) -> Color:
+	return LIGHT.COLORS[key] if light_mode else TOKENS.color(key)
+
+func set_light(value: bool) -> void:
+	light_mode = value
+	_icons.clear()
+	_init()
 
 func box(fill: StringName, border: StringName = &"border.subtle", pad_x: int = 12, pad_y: int = 6, radius: int = 4) -> StyleBoxFlat:
 	var style := StyleBoxFlat.new()
+	style.set_meta("wavez_light", light_mode)
 	style.bg_color = c(fill)
 	style.border_color = c(border)
 	style.set_border_width_all(TOKENS.border_width)
@@ -82,6 +91,15 @@ func _init() -> void:
 	default_font = ThemeDB.fallback_font
 	default_font_size = TOKENS.body_size
 	default_base_scale = 1.0
+	# These retained controls previously used the engine's light-on-dark ink.
+	# Own only their Light colors; keep their original fonts and metrics.
+	if light_mode:
+		_text("LinkButton")
+		set_color("font_color", "LinkButton", c(&"accent.primary"))
+		set_color("font_hover_color", "LinkButton", c(&"selection.text"))
+		set_color("default_color", "RichTextLabel", c(&"text.primary"))
+		set_color("font_selected_color", "RichTextLabel", c(&"selection.text"))
+		set_color("selection_color", "RichTextLabel", c(&"selection.fill"))
 	for type in ["Button", "OptionButton", "MenuButton", "CheckBox", "CheckButton"]: _button(type)
 	for role in ["SecondaryButton", "PrimaryButton", "DestructiveButton", "SelectedButton", "CompactButton", "IconAction", "SectionHeader"]:
 		set_type_variation(role, "Button")
@@ -248,6 +266,7 @@ func _init() -> void:
 	set_color("title_color", "Window", c(&"text.title"))
 	set_font_size("title_font_size", "Window", TOKENS.panel_size)
 	for severity in ["info", "success", "warning", "error"]:
+		set_icon("status_" + severity, "TextureRect", icon_named("check" if severity == "success" else severity, StringName("state." + severity)))
 		var role: String = severity.capitalize() + "Message"
 		set_type_variation(role, "PanelContainer")
 		var style := box(&"surface.2", &"border.subtle", 12, 8)

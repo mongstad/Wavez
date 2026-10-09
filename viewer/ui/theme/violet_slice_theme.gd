@@ -16,6 +16,7 @@ const PALETTE = {
 var shell_icons := {}
 
 func c(key: StringName) -> Color:
+	if light_mode: return LIGHT.COLORS[key]
 	# Shared hierarchy ink matches the resting pinned icon, never its hover color.
 	if key in [&"text.title", &"text.section"]: return PALETTE[&"accent.primary"]
 	return PALETTE[key] if PALETTE.has(key) else TOKENS.color(key)
@@ -33,6 +34,7 @@ func tonal_surface(x := 0, y := 0) -> StyleBoxTexture:
 	texture.width = 16; texture.height = 128
 	texture.fill_from = Vector2.ZERO; texture.fill_to = Vector2(0, 1)
 	var style := StyleBoxTexture.new(); style.texture = texture
+	style.set_meta("wavez_light", light_mode)
 	style.content_margin_left = x; style.content_margin_right = x
 	style.content_margin_top = y; style.content_margin_bottom = y
 	return style

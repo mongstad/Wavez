@@ -1,13 +1,11 @@
 # Current status
 
-Accepted baseline: **v0.1.0.77**, `6bd497d60c75c435f38cdffe1dd87d8cdd56bc97`,
-owner-merged PR #300. The repository's application identity is
+Accepted baseline: **v0.1.0.78**, `407c35833c07a800f12e56aae1140ac08a822e63`,
+owner-merged PR #302. The repository's application identity is
 `viewer/project.godot` → `application/config/version`; see [version policy](VERSIONING.md).
-Issue #212 proposes candidate build 78 for world-space orbit-center placement
-and an observer orbit starting at the current camera position, facing the chosen
-center without a teleport. Gizmo size is independent of camera orbit distance. Wheel zoom adjusts that
-distance in either direction without interrupting the chosen orbit. See [the candidate contract](ORBIT_GIZMO.md).
-Owner physical acceptance remains required.
+Issue #289 proposes candidate build 79 with locally persisted Dark/Light chrome
+and the official theme-specific About artwork. See [application themes](APPLICATION_THEMES.md).
+This candidate remains subject to owner review.
 
 The GitHub Issues and Wavez Development Project are the operational queue. Work
 requires a Ready issue (or explicit owner authorization), the correct branch/base

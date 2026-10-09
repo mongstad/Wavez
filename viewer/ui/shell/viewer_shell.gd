@@ -133,6 +133,7 @@ var immersive_edges := {}
 var immersive_chrome := {}
 var style_slice
 var focus_navigation
+var appearance
 
 func setup(owner_viewer) -> void:
 	viewer = owner_viewer
@@ -265,6 +266,8 @@ func setup(owner_viewer) -> void:
 	if not viewer.offline_instance:
 		focus_navigation = preload("res://ui/shell/focus_navigation.gd").new()
 		add_child(focus_navigation); focus_navigation.setup(self)
+		appearance = preload("res://ui/theme/application_theme.gd").new()
+		add_child(appearance); appearance.setup(self)
 
 func icon(id: String) -> Texture2D:
 	return load("res://ui/shell/icons/" + id + ".svg")
@@ -301,6 +304,7 @@ func decorate_menu(control: MenuButton) -> void:
 		style.content_margin_right += 20
 		control.add_theme_stylebox_override(state, style)
 	var arrow := TextureRect.new(); arrow.texture = preload("res://ui/icons/chevron_down.svg")
+	arrow.set_meta("chrome_icon", "chevron_down")
 	arrow.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	control.add_child(arrow)
 	arrow.set_anchors_and_offsets_preset(Control.PRESET_CENTER_RIGHT)
@@ -603,6 +607,9 @@ func build_menus(row: HBoxContainer) -> void:
 	var preferences := submenu(menus.Edit.get_popup(),"Preferences")
 	command(preferences,"Keyboard Shortcuts",edit_shortcuts,"keyboard_shortcuts")
 	command(preferences,"File Locations",edit_file_locations,"file_locations")
+	var theme_menu := submenu(preferences,"Theme")
+	command(theme_menu,"Dark",func():appearance.select(false),"theme_dark",true)
+	command(theme_menu,"Light",func():appearance.select(true),"theme_light",true)
 	var view: PopupMenu = menus.View.get_popup()
 	var window_menu := submenu(view,"Window")
 	command(window_menu,"Fullscreen",viewer._toggle_fullscreen,"fullscreen",true)
@@ -650,7 +657,7 @@ func refresh_commands() -> void:
 	var particles: bool = loaded and viewer.scene_layers != null and not viewer.scene_layers.particle_id.is_empty()
 	for key in commands:
 		var entry: Dictionary = commands[key]
-		var enabled: bool = loaded or key in ["open","details","fullscreen","file_locations","keyboard_shortcuts","about","exit"]
+		var enabled: bool = loaded or key in ["open","details","fullscreen","file_locations","keyboard_shortcuts","theme_dark","theme_light","about","exit"]
 		if key in ["probe","tool:Clipping","tool:Isosurface","tool:Source probe"]: enabled = fields
 		if key == "tool:Mapping": enabled = particles
 		if key in ["tool:Slice","tool:Derive range"]: enabled = fields or particles
@@ -661,7 +668,9 @@ func refresh_commands() -> void:
 		entry.popup.set_item_disabled(entry.index,not enabled)
 		entry.popup.set_item_tooltip(entry.index,"" if enabled else ("Open a compatible capture first" if not loaded else "Unavailable for the current source or state"))
 		var checked := false
-		if key == "fullscreen": checked = immersive
+		if key == "theme_dark": checked = appearance == null or not appearance.light
+		elif key == "theme_light": checked = appearance != null and appearance.light
+		elif key == "fullscreen": checked = immersive
 		elif key == "probe": checked = fields and viewer.scene_layers.probe_marker_enabled
 		elif key == "grid": checked = viewer.guide_mesh.visible
 		elif key.begins_with("guide:"):

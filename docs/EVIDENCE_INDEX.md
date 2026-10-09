@@ -6,6 +6,8 @@ Use [current status](CURRENT_STATUS.md) for supported contracts and boundaries.
 [The documentation audit](documentation-audit/README.md) records retired paths;
 Git permalinks preserve their original context.
 
+- [Issue #289 — Dark and Light application themes](evidence/issue-289/README.md): palette-only chrome, official About artwork, geometry/scientific-pixel comparisons, source/package restart matrix and owner review limits.
+
 - [Issue #212 — observer orbit correction](evidence/issue-212/observer-orbit/README.md): Apply starts from the current observer position, faces the chosen center and derives camera orbit distance independently of gizmo size; current review behavior.
 
 - [Issue #212 — world-space orbit gizmo, second attempt](evidence/issue-212/attempt-02/README.md): measured depth/scale coupling, independent world-unit placement, rendered landmark comparisons, live held-key frames, native/package matrix and explicit baseline limitations; pending owner physical review.
