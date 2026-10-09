@@ -6,6 +6,10 @@ Use [current status](CURRENT_STATUS.md) for supported contracts and boundaries.
 [The documentation audit](documentation-audit/README.md) records retired paths;
 Git permalinks preserve their original context.
 
+- [Issue #212 — observer orbit correction](evidence/issue-212/observer-orbit/README.md): Apply starts from the current observer position, faces the chosen center and derives camera orbit distance independently of gizmo size; current review behavior.
+
+- [Issue #212 — world-space orbit gizmo, second attempt](evidence/issue-212/attempt-02/README.md): measured depth/scale coupling, independent world-unit placement, rendered landmark comparisons, live held-key frames, native/package matrix and explicit baseline limitations; pending owner physical review.
+
 - [Issue #214 — LMB vertical inversion preference](evidence/issue-214/README.md): inline On/Off and editable hotkey, staged/reset/restart behavior, continuous tumble and unchanged navigation in both source renderers and the same Linux package.
 
 - [Issue #295 — Superseded load-error recovery](evidence/issue-295/README.md): reproduced duplicate Scene/Open file ownership, recovery/icon/details checks, unrelated Jobs/diagnostics, both native renderers and normal/compact layouts.
@@ -202,3 +206,8 @@ is opt-in; no production migration or UX3 work has begun.
 and [compact evidence](evidence/issue-102/summary.json) cover the clean SIMSCP4
 break, exact real-capture equivalence, preparation/switching and finite intervals.
 Older SSC reports above retain their original format, results and review state.
+
+## Issue #212 orbit zoom correction
+
+[Regression evidence](evidence/issue-212/orbit-zoom/README.md) records the
+zoom-out/zoom-in failure and correction while preserving the chosen orbit plane.

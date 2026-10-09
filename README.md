@@ -27,7 +27,7 @@ Start with:
 - [Screen-fixed cinematic background](docs/CINEMATIC_BACKGROUND.md)
 - [Auto Orbit](docs/AUTO_ORBIT.md)
 - [Free Camera speed](docs/FREE_CAMERA_SPEED.md)
-- [Edit orbit center and radius](docs/ORBIT_CENTER.md)
+- [Edit orbit center and radius](docs/ORBIT_GIZMO.md)
 - [Current status](docs/CURRENT_STATUS.md)
 - [Paused opening and automatic preparation](docs/PAUSED_PREPARATION.md)
 - [Dialog title and section hierarchy](docs/DIALOG_HIERARCHY.md)

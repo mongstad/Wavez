@@ -14,14 +14,20 @@ starts from the current camera pose without a snap. Auto Orbit's rotation stops
 while LMB tumble is held and resumes on release. RMB free-look and the held
 Orbit Camera Left/Right shortcuts immediately disable Auto Orbit and apply
 manual control on the same input; releasing them leaves Auto Orbit off. Wheel
-zoom retains its accepted behavior. See [steering and orbit](MANUAL_CAMERA_ORBIT.md).
+zoom keeps Auto Orbit active. After applying a chosen orbit center, it adjusts
+the orbit distance in either direction while preserving that center and plane. See [steering and orbit](MANUAL_CAMERA_ORBIT.md).
 
 **Navigate → Edit orbit center…** temporarily turns Auto Orbit off and enables
-Free Camera movement for placement. The proposed target and radius remain draft
-values until Apply. **Apply** commits the world-space target and radius and
-immediately starts Auto Orbit there. **Cancel** restores the complete camera and
+Free Camera movement for placement. The proposed center and gizmo size remain draft
+values until Apply. **Apply** keeps the observer at its current position, turns it
+toward the chosen center, and starts travelling around that center at the existing
+observer-to-center distance while continuously facing it. Gizmo radius is marker
+size only. See [the observer-orbit correction](evidence/issue-212/observer-orbit/README.md). **Cancel** restores the complete camera and
 navigation state from before the editor opened, including whether Auto Orbit
 was on. Numeric text focus keeps the normal movement-key protection.
+The #212 candidate adds independent world-unit placement depth, a scene-scaled
+shaded gizmo, and an Apply-time equatorial orbit. See [Orbit-center placement](ORBIT_GIZMO.md)
+for the current candidate contract and review limitations.
 
 Frame Scene and Reset Camera retain their existing framing behavior. Navigation
 and Auto Orbit affect the camera, never scientific/world transforms.

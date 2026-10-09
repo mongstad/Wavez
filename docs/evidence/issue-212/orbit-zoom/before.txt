@@ -1,0 +1,63 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+GIZMO: 2858 checks / 10 failures
+ERROR: observer wheel in returns below scene framing limit
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://ui/shell/test_orbit_gizmo.gd:15)
+       [1] observer_zoom (res://ui/shell/test_orbit_gizmo.gd:263)
+       [2] run (res://ui/shell/test_orbit_gizmo.gd:297)
+ERROR: wheel retains applied observer orbit
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://ui/shell/test_orbit_gizmo.gd:15)
+       [1] observer_zoom (res://ui/shell/test_orbit_gizmo.gd:265)
+       [2] run (res://ui/shell/test_orbit_gizmo.gd:297)
+ERROR: observer wheel in returns below scene framing limit
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://ui/shell/test_orbit_gizmo.gd:15)
+       [1] observer_zoom (res://ui/shell/test_orbit_gizmo.gd:263)
+       [2] run (res://ui/shell/test_orbit_gizmo.gd:297)
+ERROR: wheel retains applied observer orbit
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://ui/shell/test_orbit_gizmo.gd:15)
+       [1] observer_zoom (res://ui/shell/test_orbit_gizmo.gd:265)
+       [2] run (res://ui/shell/test_orbit_gizmo.gd:297)
+ERROR: wheel retains chosen target and tilted plane
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://ui/shell/test_orbit_gizmo.gd:15)
+       [1] observer_zoom (res://ui/shell/test_orbit_gizmo.gd:266)
+       [2] run (res://ui/shell/test_orbit_gizmo.gd:297)
+ERROR: observer wheel in returns below scene framing limit
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://ui/shell/test_orbit_gizmo.gd:15)
+       [1] observer_zoom (res://ui/shell/test_orbit_gizmo.gd:263)
+       [2] run (res://ui/shell/test_orbit_gizmo.gd:297)
+ERROR: wheel retains applied observer orbit
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://ui/shell/test_orbit_gizmo.gd:15)
+       [1] observer_zoom (res://ui/shell/test_orbit_gizmo.gd:265)
+       [2] run (res://ui/shell/test_orbit_gizmo.gd:297)
+ERROR: wheel retains chosen target and tilted plane
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://ui/shell/test_orbit_gizmo.gd:15)
+       [1] observer_zoom (res://ui/shell/test_orbit_gizmo.gd:266)
+       [2] run (res://ui/shell/test_orbit_gizmo.gd:297)
+ERROR: observer fractional wheel scale
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://ui/shell/test_orbit_gizmo.gd:15)
+       [1] observer_zoom (res://ui/shell/test_orbit_gizmo.gd:269)
+       [2] run (res://ui/shell/test_orbit_gizmo.gd:297)
+ERROR: observer zoom stops at near-plane clearance
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://ui/shell/test_orbit_gizmo.gd:15)
+       [1] observer_zoom (res://ui/shell/test_orbit_gizmo.gd:272)
+       [2] run (res://ui/shell/test_orbit_gizmo.gd:297)

@@ -154,9 +154,12 @@ func editor_transitions(viewer, kind: String) -> void:
 		move_key(viewer, KEY_E, .1)
 		var chosen := Vector3(21, -9, 6)
 		fields(editor, chosen, 27)
+		var apply_position: Vector3 = viewer.camera.position
+		var observer_distance := apply_position.distance_to(chosen)
 		editor.commit()
+		check(viewer.camera.position == apply_position and is_equal_approx(viewer.camera_distance,observer_distance), kind + " Apply starts at current observer position and distance")
 		check(not editor.visible and not editor.guide.visible and viewer.orbit_enabled and viewer.free_camera, kind + " Apply starts Auto Orbit from " + str(started_in_orbit))
-		check_orbit(viewer, chosen, kind + " Apply uses the new world target and radius")
+		check_orbit(viewer, chosen, kind + " Apply faces the new world target at observer distance")
 		var before: Transform3D = viewer.camera.transform
 		viewer.scene_layers.tick(.1)
 		check(viewer.camera.position.distance_to(before.origin) > .001 and viewer.camera_target == chosen, kind + " Apply orbits immediately around the new center")

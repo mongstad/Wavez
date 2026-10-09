@@ -1,0 +1,58 @@
+{
+  "_move_free_camera": {
+    "identical": true,
+    "sha256": "d1ab52db2d99e1d2b42aa8724db9f6c41adbbc34300b62647dcde5ceb77f3c6d"
+  },
+  "_steer_camera": {
+    "identical": true,
+    "sha256": "fa901b0519f127ba9199d39a4f01f5f4644c36c6e49ff6fad66c9b14bbd65ce4"
+  },
+  "_start_manual_orbit": {
+    "identical": true,
+    "sha256": "b19a5775e99138f86c94944f5a9c51ea20ba06e91fe4711064a6aca955cb549a"
+  },
+  "_release_manual_orbit_key": {
+    "identical": true,
+    "sha256": "0f7ff0a78c30280d9056ea47659cb6f5a514e608ff977d9e4790c353a8a2eb96"
+  },
+  "_update_manual_orbit": {
+    "identical": true,
+    "sha256": "2d2daf3953fe9b257540e6a774419f68c34d1ffe012655154eec713526761d58"
+  },
+  "_orbit_camera_by_drag": {
+    "identical": true,
+    "sha256": "ee9c2a6fce22cfe54f328a043ab9133e426b3665fb028c6d070b369e9e979aa2"
+  },
+  "_orbit_camera_horizontally": {
+    "identical": true,
+    "sha256": "914f6e858b3fae6b58339d61ec94f5f76580e464d9b4c4548869fa23e8978d25"
+  },
+  "_zoom_camera": {
+    "identical": true,
+    "sha256": "0e4b007f0aa69fbc84e59c1a1adbbd7ed5f8c8e37ea44a87ec735dc6171e3dd9"
+  },
+  "_adjust_camera_speed": {
+    "identical": true,
+    "sha256": "1ff4fbd3d70ed3b05bf16dd09e15fc71483fdebc8a96c8012878f84a041cf91d"
+  },
+  "_update_camera_speed_repeat": {
+    "identical": true,
+    "sha256": "8e6ffa4d6d1de6346c86bf8acc1843435483371c63e1b6236e9a8df3a70fdc3d"
+  },
+  "_build_backdrop": {
+    "identical": true,
+    "sha256": "249474c482392de7a9090f043c1ad15cb1c53a5db49021685c1e2bf7182906f9"
+  },
+  "_update_camera": {
+    "identical": true,
+    "sha256": "2c858e4da8840b66295829ede23d102f54af9572485e34929010cc1431aa3c00"
+  },
+  "_take_manual_camera_control": {
+    "identical": true,
+    "sha256": "da0d06ae93f7f4384d72de812e89a4dcbee249642af959fe45dd85d023e9ed0a"
+  },
+  "_unhandled_input": {
+    "identical": true,
+    "sha256": "cd4e77642940f9c8c56cfa42c511b04fe390ac69435526227b4e1af97a021701"
+  }
+}

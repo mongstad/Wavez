@@ -1,0 +1,98 @@
+{
+  "accepted_main": "6bd497d60c75c435f38cdffe1dd87d8cdd56bc97",
+  "candidate_version": "v0.1.0.78",
+  "branch": "212-ux-nav-make-edit-orbit-center-view-relative-Attempt_02",
+  "owner_acceptance": "pending physical review",
+  "runs": {
+    "review-headless": {
+      "checks": 2772,
+      "failures": [],
+      "pixel_comparisons": 0,
+      "max_pixel_edge_error": null
+    },
+    "review-native-gl_compatibility": {
+      "checks": 2833,
+      "failures": [],
+      "pixel_comparisons": 36,
+      "max_pixel_edge_error": 0
+    },
+    "review-package-gl_compatibility": {
+      "checks": 2833,
+      "failures": [],
+      "pixel_comparisons": 36,
+      "max_pixel_edge_error": 0
+    },
+    "review-native-forward_plus": {
+      "checks": 2833,
+      "failures": [],
+      "pixel_comparisons": 36,
+      "max_pixel_edge_error": 0
+    },
+    "review-package-forward_plus": {
+      "checks": 2833,
+      "failures": [],
+      "pixel_comparisons": 36,
+      "max_pixel_edge_error": 0
+    },
+    "navigation-main": {
+      "checks": 1393,
+      "failures": [
+        "Real process loop advances the held orbit shortcut"
+      ]
+    },
+    "navigation-candidate": {
+      "checks": 1393,
+      "failures": [
+        "Real process loop advances the held orbit shortcut"
+      ]
+    },
+    "nav-main-gl_compatibility": {
+      "checks": 1747,
+      "failures": [
+        "Real process loop advances the held orbit shortcut"
+      ]
+    },
+    "nav-candidate-gl_compatibility": {
+      "checks": 1747,
+      "failures": [
+        "Real process loop advances the held orbit shortcut"
+      ]
+    },
+    "nav-main-forward_plus": {
+      "checks": 1747,
+      "failures": [
+        "Real process loop advances the held orbit shortcut"
+      ]
+    },
+    "nav-candidate-forward_plus": {
+      "checks": 1747,
+      "failures": [
+        "Real process loop advances the held orbit shortcut"
+      ]
+    },
+    "auto-headless-2": {
+      "checks": 364,
+      "failures": []
+    },
+    "auto-gl_compatibility": {
+      "checks": 364,
+      "failures": []
+    },
+    "auto-forward_plus": {
+      "checks": 364,
+      "failures": []
+    },
+    "speed-headless": {
+      "checks": 97,
+      "failures": []
+    },
+    "precision-forward": {
+      "checks": 2833,
+      "failures": [],
+      "pixel_comparisons": 36,
+      "max_pixel_edge_error": 0
+    }
+  },
+  "large_scene_projection_override": "near=max(near,camera_distance*0.00001); accepted-main original clipping fails",
+  "physical_input_and_research_scene_acceptance": "not performed"
+}
