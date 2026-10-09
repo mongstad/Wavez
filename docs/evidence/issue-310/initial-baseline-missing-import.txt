@@ -1,0 +1,108 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.351 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3070 Ti
+
+ERROR: Cannot open file 'res://.godot/imported/chevron_down.svg-875c71aeff40e5f4ec1c7793762cc4cb.dpitex'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+ERROR: Failed loading resource: res://.godot/imported/chevron_down.svg-875c71aeff40e5f4ec1c7793762cc4cb.dpitex.
+   at: _load (core/io/resource_loader.cpp:317)
+ERROR: Failed loading resource: res://ui/icons/chevron_down.svg.
+   at: _load (core/io/resource_loader.cpp:317)
+SCRIPT ERROR: Parse Error: Could not preload resource file "res://ui/icons/chevron_down.svg".
+          at: GDScript::reload (res://ui/shell/viewer_shell.gd:306)
+ERROR: Cannot open file 'res://.godot/imported/chevron_right.svg-19baec992605a17496e6b099d415395c.dpitex'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+ERROR: Failed loading resource: res://.godot/imported/chevron_right.svg-19baec992605a17496e6b099d415395c.dpitex.
+   at: _load (core/io/resource_loader.cpp:317)
+ERROR: Failed loading resource: res://ui/icons/chevron_right.svg.
+   at: _load (core/io/resource_loader.cpp:317)
+ERROR: Cannot open file 'res://.godot/imported/chevron_down.svg-875c71aeff40e5f4ec1c7793762cc4cb.dpitex'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+ERROR: Failed loading resource: res://.godot/imported/chevron_down.svg-875c71aeff40e5f4ec1c7793762cc4cb.dpitex.
+   at: _load (core/io/resource_loader.cpp:317)
+ERROR: Failed loading resource: res://ui/icons/chevron_down.svg.
+   at: _load (core/io/resource_loader.cpp:317)
+SCRIPT ERROR: Parse Error: Could not preload resource file "res://ui/icons/chevron_right.svg".
+          at: GDScript::reload (res://ui/shell/panel_group.gd:4)
+SCRIPT ERROR: Parse Error: Could not preload resource file "res://ui/icons/chevron_down.svg".
+          at: GDScript::reload (res://ui/shell/panel_group.gd:5)
+ERROR: Cannot open file 'res://.godot/imported/DejaVuSansMono.ttf-ed5ec2ffe1c5cb7ad2ecbc8964ed63aa.fontdata'.
+   at: load (core/io/resource_format_binary.cpp:1156)
+ERROR: Failed loading resource: res://.godot/imported/DejaVuSansMono.ttf-ed5ec2ffe1c5cb7ad2ecbc8964ed63aa.fontdata.
+   at: _load (core/io/resource_loader.cpp:317)
+ERROR: Failed loading resource: res://ui/fonts/DejaVuSansMono.ttf.
+   at: _load (core/io/resource_loader.cpp:317)
+SCRIPT ERROR: Parse Error: Could not preload resource file "res://ui/fonts/DejaVuSansMono.ttf".
+          at: GDScript::reload (res://ui/theme/wavez_theme.gd:5)
+ERROR: Failed to load script "res://ui/theme/wavez_theme.gd" with error "Parse error".
+   at: load (modules/gdscript/gdscript_resource_format.cpp:46)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+          at: GDScript::reload (res://main.gd:0)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+          at: GDScript::reload (res://ui/theme/test_application_theme.gd:0)
+ERROR: Failed to load script "res://ui/theme/test_application_theme.gd" with error "Compilation failed".
+   at: load (modules/gdscript/gdscript_resource_format.cpp:46)
+SCRIPT ERROR: Invalid call. Nonexistent function 'create' in base 'GDScript'.
+          at: _section (res://main.gd:1112)
+          GDScript backtrace (most recent call first):
+              [0] _section (res://main.gd:1112)
+              [1] _build_inspector_controls (res://main.gd:1193)
+              [2] _build_ui (res://main.gd:318)
+              [3] _ready (res://main.gd:188)
+              [4] run (res://ui/theme/test_application_theme.gd:47)
+SCRIPT ERROR: Cannot call method 'add_child' on a null value.
+          at: _visual_slider (res://main.gd:883)
+          GDScript backtrace (most recent call first):
+              [0] _visual_slider (res://main.gd:883)
+              [1] _build_inspector_controls (res://main.gd:1194)
+              [2] _build_ui (res://main.gd:318)
+              [3] _ready (res://main.gd:188)
+              [4] run (res://ui/theme/test_application_theme.gd:47)
+SCRIPT ERROR: Cannot call method 'add_child' on a null value.
+          at: _visual_slider (res://main.gd:883)
+          GDScript backtrace (most recent call first):
+              [0] _visual_slider (res://main.gd:883)
+              [1] _build_inspector_controls (res://main.gd:1195)
+              [2] _build_ui (res://main.gd:318)
+              [3] _ready (res://main.gd:188)
+              [4] run (res://ui/theme/test_application_theme.gd:47)
+SCRIPT ERROR: Cannot call method 'add_child' on a null value.
+          at: _check (res://main.gd:1129)
+          GDScript backtrace (most recent call first):
+              [0] _check (res://main.gd:1129)
+              [1] _build_inspector_controls (res://main.gd:1196)
+              [2] _build_ui (res://main.gd:318)
+              [3] _ready (res://main.gd:188)
+              [4] run (res://ui/theme/test_application_theme.gd:47)
+SCRIPT ERROR: Invalid call. Nonexistent function 'create' in base 'GDScript'.
+          at: _section (res://main.gd:1112)
+          GDScript backtrace (most recent call first):
+              [0] _section (res://main.gd:1112)
+              [1] _build_inspector_controls (res://main.gd:1197)
+              [2] _build_ui (res://main.gd:318)
+              [3] _ready (res://main.gd:188)
+              [4] run (res://ui/theme/test_application_theme.gd:47)
+SCRIPT ERROR: Invalid call. Nonexistent function 'create' in base 'GDScript'.
+          at: _section (res://main.gd:1112)
+          GDScript backtrace (most recent call first):
+              [0] _section (res://main.gd:1112)
+              [1] _build_inspector_controls (res://main.gd:1198)
+              [2] _build_ui (res://main.gd:318)
+              [3] _ready (res://main.gd:188)
+              [4] run (res://ui/theme/test_application_theme.gd:47)
+SCRIPT ERROR: Cannot call method 'add_child' on a null value.
+          at: _build_inspector_controls (res://main.gd:1200)
+          GDScript backtrace (most recent call first):
+              [0] _build_inspector_controls (res://main.gd:1200)
+              [1] _build_ui (res://main.gd:318)
+              [2] _ready (res://main.gd:188)
+              [3] run (res://ui/theme/test_application_theme.gd:47)
+SCRIPT ERROR: Invalid call. Nonexistent function 'new' in base 'GDScript'.
+          at: _build_ui (res://main.gd:319)
+          GDScript backtrace (most recent call first):
+              [0] _build_ui (res://main.gd:319)
+              [1] _ready (res://main.gd:188)
+              [2] run (res://ui/theme/test_application_theme.gd:47)
+SCRIPT ERROR: Invalid access to property or key 'edge_reveal' on a base object of type 'Nil'.
+          at: run (res://ui/theme/test_application_theme.gd:48)
+          GDScript backtrace (most recent call first):
+              [0] run (res://ui/theme/test_application_theme.gd:48)

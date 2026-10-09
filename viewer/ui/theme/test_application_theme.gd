@@ -41,6 +41,47 @@ func cycle(label: String) -> void:
 	await switch(false)
 	compare(before,label+" Dark restored")
 	picture(label+"-dark")
+func review_states() -> void:
+	# Palette review at actual supported dimensions, including clipped/disabled states.
+	var shell = viewer.shell
+	for size in [Vector2i(1440,900), Vector2i(970,600)]:
+		root.size = size; await settle(); shell.layout(); await settle()
+		shell.select_workspace(0)
+		for title in viewer.section_buttons: viewer.section_buttons[title].button_pressed = true
+		await settle()
+		shell.scroll.scroll_vertical = 0; await settle()
+		await cycle("expanded-%dx%d" % [size.x,size.y])
+		shell.scroll.scroll_vertical = 100000; await settle()
+		check(shell.scroll.scroll_vertical > 0, "Expanded controls scroll at " + str(size))
+		await cycle("scrolled-%dx%d" % [size.x,size.y])
+		for title in viewer.section_buttons: viewer.section_buttons[title].button_pressed = false
+		shell.scroll.scroll_vertical = 0
+	root.size = Vector2i(1440,900); await settle(); shell.layout(); await settle()
+	viewer.tools_ui.open("Global effects"); await settle()
+	viewer.glow_slider.grab_focus(); await settle()
+	await cycle("global-focused")
+	viewer.tools_ui.close(false)
+	var popup: PopupMenu = shell.menus["View"].get_popup()
+	popup.popup(Rect2i(100,100,0,0)); popup.set_focused_item(0); await settle()
+	await cycle("view-menu-selected")
+	popup.hide()
+	viewer.section_buttons.Rendering.button_pressed = true; await settle()
+	var target: Button = viewer.section_buttons.Rendering
+	var motion := InputEventMouseMotion.new(); motion.position = target.get_global_rect().get_center()
+	root.push_input(motion); await create_timer(.12).timeout; await settle()
+	check(target.is_hovered(), "Native pointer highlights Rendering disclosure")
+	await cycle("disclosure-hover")
+	motion.position = Vector2(50,50); root.push_input(motion); await settle()
+	viewer.section_buttons.Rendering.button_pressed = false
+	var badge = shell.status_ui.badge
+	var status_processing: bool = shell.status_ui.is_processing()
+	shell.status_ui.set_process(false)
+	for severity in ["success", "warning", "error"]:
+		badge.configure(severity, "Palette review: " + severity); await settle()
+		await cycle("status-" + severity)
+	shell.status_ui.set_process(status_processing)
+	shell.status_ui.refresh()
+
 func run() -> void:
 	output = OS.get_cmdline_user_args()[0]
 	create_timer(180).timeout.connect(func():push_error("Theme audit timeout");quit(1))
@@ -86,6 +127,7 @@ func run() -> void:
 		root.size = Vector2i(1440,900);await settle()
 		for title in ["Mapping","Performance","Global effects","Source probe","Geometry","Data","Selection"]:
 			viewer.tools_ui.open(title);await settle();await cycle("tool-"+title.replace(" ","-"));viewer.tools_ui.close(false)
+		await review_states()
 		viewer.shell.status_ui.open_jobs();await settle();await cycle("jobs");viewer.shell.status_ui.jobs_dialog.hide()
 		viewer.shell.edit_shortcuts();await settle();await cycle("shortcuts");viewer.shell.shortcuts_editor.dismiss()
 		viewer.shell.edit_file_locations();await settle();await cycle("locations");viewer.shell.file_locations_dialog.dismiss()

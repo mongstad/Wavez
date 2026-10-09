@@ -7,8 +7,11 @@ reports a warning and uses Dark; a failed save leaves the active choice unchange
 This preference is not included in WVZ captures, portable view presets or export
 state. Offline rendering workers do not read it.
 
-Light uses the approved off-white, violet, periwinkle and deep-ink palette.
-The focus ring is a darker periwinkle (`#687BCE`) for contrast on off-white.
+Light uses cool light-gray surfaces with violet, periwinkle and deep-ink accents.
+The shell foundation is `#E6E8EF`, panel highlights are `#F0F1F5`, dialogs
+are `#ECEEF3`, and hover/selection uses lavender `#DDD5F0`. Controls retain
+a distinct gray fill. The primary violet accent remains `#7956C8`; muted ink,
+control borders, focus (`#596DBC`) and status colors are tuned for these surfaces.
 Success, warning and error retain separate green, amber and red roles. Dark keeps
 its original palette. About switches between the two official branding assets
 without restarting or reloading a capture.
@@ -27,5 +30,6 @@ palette while retaining its native widget metrics. Wavez does not change KDE's
 system appearance setting.
 
 Review evidence and known limitations are recorded in
-[issue #289 evidence](evidence/issue-289/README.md). Physical 4K/KDE scaling and
-owner interaction review remain required before acceptance.
+[original theme evidence](evidence/issue-289/README.md) and the
+[issue #310 palette review](evidence/issue-310/README.md). Physical 4K/KDE
+comfort, scaling and owner interaction review remain required for the new palette.

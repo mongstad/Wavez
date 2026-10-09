@@ -1,14 +1,13 @@
 # Current status
 
-Accepted baseline: **v0.1.0.79**, `65fd8fae15a1b8dd37c75eca3a197d75003ee4ee`,
-owner-merged PR #304. The repository's application identity is
+Accepted baseline: **v0.1.0.80**, `ceb3ba2796538ee99562f3ac5b0fd696cfbf7463`,
+owner-merged PR #311. The repository's application identity is
 `viewer/project.godot` → `application/config/version`; see [version policy](VERSIONING.md).
-Issue #306 proposes candidate build 80 with synchronized viewing-preset and
-global Bloom control state after saved-state restoration. The owner retained
-the existing scene-wide Bloom and superseded the independent-category research
-in Draft PR #309. See [global Bloom](GLOBAL_BLOOM.md) and
-[application themes](APPLICATION_THEMES.md). The fix remains subject to owner
-physical review; the original capture-specific report is unconfirmed.
+Issue #310 proposes candidate build 81 with a softer cool light-gray **Light**
+palette. It retains existing theme selection, persistence, geometry, official
+About artwork, Dark styling and scientific rendering. The palette remains
+subject to owner physical review. See [application themes](APPLICATION_THEMES.md)
+and [palette review evidence](evidence/issue-310/README.md).
 
 The GitHub Issues and Wavez Development Project are the operational queue. Work
 requires a Ready issue (or explicit owner authorization), the correct branch/base

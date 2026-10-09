@@ -1,5 +1,10 @@
 # Retained evidence
 
+Issue #310's [cool light-gray palette review](evidence/issue-310/README.md)
+compares candidate build 81 against owner-merged build 80. It retains full-size
+Light images, Dark/scientific pixel comparisons, source/package audits and
+explicit owner-review limits; prior theme/Bloom reports remain historical.
+
 These are historical review-time records. Their pending/accepted wording and old
 format/source names describe the recorded checkpoint, not current Project state.
 Use [current status](CURRENT_STATUS.md) for supported contracts and boundaries.
