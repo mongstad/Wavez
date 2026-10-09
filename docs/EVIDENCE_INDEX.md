@@ -206,3 +206,8 @@ is opt-in; no production migration or UX3 work has begun.
 and [compact evidence](evidence/issue-102/summary.json) cover the clean SIMSCP4
 break, exact real-capture equivalence, preparation/switching and finite intervals.
 Older SSC reports above retain their original format, results and review state.
+
+## Issue #212 orbit zoom correction
+
+[Regression evidence](evidence/issue-212/orbit-zoom/README.md) records the
+zoom-out/zoom-in failure and correction while preserving the chosen orbit plane.

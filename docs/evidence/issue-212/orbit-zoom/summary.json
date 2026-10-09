@@ -1,0 +1,101 @@
+{
+  "before": {
+    "checks": 2858,
+    "failures": [
+      "observer wheel in returns below scene framing limit",
+      "wheel retains applied observer orbit",
+      "observer wheel in returns below scene framing limit",
+      "wheel retains applied observer orbit",
+      "wheel retains chosen target and tilted plane",
+      "observer wheel in returns below scene framing limit",
+      "wheel retains applied observer orbit",
+      "wheel retains chosen target and tilted plane",
+      "observer fractional wheel scale",
+      "observer zoom stops at near-plane clearance"
+    ],
+    "rendered_landmark_comparisons": 0
+  },
+  "headless": {
+    "checks": 2858,
+    "failures": [],
+    "source_hashes_unchanged": {
+      "lobes.wvz": "e7b1602ed12155e34ab3270c2b9967ab04c29f100a07269e63b7e917aff11f85",
+      "large.wvz": "13c73bc3e767dda237ceb26ffe7f35ca0b62ab8647f4298b875cb46873b67c8e",
+      "small.wvz": "61a3d8231547ab4a33a9c1133b36d50fd46e4e516fa26750c03b8311cbfbe0a9",
+      "mixed.wvz": "74b893792812b1fad07f75901f572539e2c721e2c06bbf8999c2b448b686fe9f",
+      "volume.wvz": "0670ed067f2369fb5425f224be4c8807590b3620b87d589ed2cec7c090e99f19",
+      "mesh.wvz": "a4c95961c92fc4c30dd40af414772b8b42a9aa93bab0192ae6382ca815364a76",
+      "particles.wvz": "3ee78b16a443d9bca64cc9314ac12d4f8d38620e0ae92f451fe99778eaab2ea1"
+    },
+    "packaged": false,
+    "rendered_landmark_comparisons": 0
+  },
+  "gl": {
+    "checks": 2919,
+    "failures": [],
+    "source_hashes_unchanged": {
+      "lobes.wvz": "2d16d51c0f95099099a25f94c4e641e03954868d1ea3fc39f20d7e3fb66bf1dc",
+      "large.wvz": "fdb3b1042c0adda29eb0a3cc91f43961c24c51ae9ca20a82c4daa57c9f012f9e",
+      "small.wvz": "5915e03d1cc2bec66c7359ec6e012fbc1b7de1ce31f956253263593e00a497c9",
+      "mixed.wvz": "1154e7790ca55ca3b705bdea2c73a8fe03fff1480eff5e238dfccd870bd4ecad",
+      "volume.wvz": "dd45df7a80d5462df83c5fbbcb000a25dc162a2a1bc36177089615b2474caa6d",
+      "mesh.wvz": "5695be3e878e8a0dc4ed75f739ded462a52b6ba639d41c203d938c9162a54f75",
+      "particles.wvz": "d3a391f5438badf579bef46b73ed7db57385efd3204fe02ad6d97f72dcccf23c"
+    },
+    "packaged": false,
+    "rendered_landmark_comparisons": 36
+  },
+  "forward": {
+    "checks": 2919,
+    "failures": [],
+    "source_hashes_unchanged": {
+      "lobes.wvz": "d7c47a82e7688f41a9cd77dec0b6d720509bc143f4b271908671632989623a63",
+      "large.wvz": "8f30c6e391b6cce3849f7611198d79bdfbe53a94ee098b451d58d8858371c4c0",
+      "small.wvz": "20c76d1178686d6a49c26df0b051bbba08ece6bcfeb370622ee147214241a31f",
+      "mixed.wvz": "5003f201e8f3a20a941f111e27e6564f172df6046e3ece2cc490c9dc03e66efa",
+      "volume.wvz": "4071ab4ed6431f3dba15e7578d852d280998f96cbe7e2d909a4df24030265266",
+      "mesh.wvz": "ee8a04ff8a30c4ee2b8b60d7145aebc951c7fa98a9cbee6d45badbf26775fed6",
+      "particles.wvz": "682c4cd800d466234d178e769d22ee2c47c5f62ebceac5cdbee7254f87efa3ac"
+    },
+    "packaged": false,
+    "rendered_landmark_comparisons": 36
+  },
+  "package-gl": {
+    "checks": 2919,
+    "failures": [],
+    "source_hashes_unchanged": {
+      "lobes.wvz": "bfe703f98446110ab50026c6691ce4dac877fa5eefc5cb17e6d185e942d61eef",
+      "large.wvz": "d2c30b49d17b5e8889c58a03b5850e58a90cb0bda5ef4844bd03df5df09a2693",
+      "small.wvz": "ae19bb8dfdef3a889d7a474b00d96c8443e39b67d59f74943fd687286e6ad974",
+      "mixed.wvz": "44c2f2f5b5c82557a220aec4b4e496bbf28483df6f7fcb19e13d4b14397eb8ec",
+      "volume.wvz": "8953e2bab5b3ecba1c6e707ab0401819c3a80131626ebded681e712fa75a0822",
+      "mesh.wvz": "97d997b932c4e333d4e5d3a5b4caa6c42c3b3657e9919bcd535ee857e4409c9c",
+      "particles.wvz": "f2a2f5a7964262b69c1b9fbbd312e2e1eaed899804634e1dad24086565fa178c"
+    },
+    "packaged": true,
+    "package_hashes": {
+      "WAVEZ-review.x86_64": "d9f79ab89b5ae369aeed11c6052d402e8218cd503bf85b4a235f9c30c46a7c63",
+      "WAVEZ-review.pck": "f23b6c722296d25e7c9af05a33eda704d968918955ca9420dba3ecd22b047877"
+    },
+    "rendered_landmark_comparisons": 36
+  },
+  "package-forward": {
+    "checks": 2919,
+    "failures": [],
+    "source_hashes_unchanged": {
+      "lobes.wvz": "0b0c74cba8d0ca0ab065b4c69234c3e513abd87ab0c3a0fe36a9dd6ab43cb00f",
+      "large.wvz": "fcde8c0705b5c1d54d37f629ad13acbaca6a8c09649038276edc0e82c5003a10",
+      "small.wvz": "91944463af88afc4b0e2b068658ba72207af06e69d8f2937624d34e155397792",
+      "mixed.wvz": "cba21e96dd5ca735af6b75a0f38ece747423ad975674daaa4e452e78c5430f56",
+      "volume.wvz": "273c8856ce9d26b213786c0834542a51cb487f714c2bbaabb46d2aa759df951b",
+      "mesh.wvz": "d8a01a905da489dc8ce9761f2dde75ad138f9a2aedf4891a2337f39187fc08b1",
+      "particles.wvz": "202e393174284d091cb721ffe0c6a661b89be7e37ba8c4bbf152dfc1cb7e3f3c"
+    },
+    "packaged": true,
+    "package_hashes": {
+      "WAVEZ-review.x86_64": "d9f79ab89b5ae369aeed11c6052d402e8218cd503bf85b4a235f9c30c46a7c63",
+      "WAVEZ-review.pck": "f23b6c722296d25e7c9af05a33eda704d968918955ca9420dba3ecd22b047877"
+    },
+    "rendered_landmark_comparisons": 36
+  }
+}

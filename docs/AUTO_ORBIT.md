@@ -14,7 +14,8 @@ starts from the current camera pose without a snap. Auto Orbit's rotation stops
 while LMB tumble is held and resumes on release. RMB free-look and the held
 Orbit Camera Left/Right shortcuts immediately disable Auto Orbit and apply
 manual control on the same input; releasing them leaves Auto Orbit off. Wheel
-zoom retains its accepted behavior. See [steering and orbit](MANUAL_CAMERA_ORBIT.md).
+zoom keeps Auto Orbit active. After applying a chosen orbit center, it adjusts
+the orbit distance in either direction while preserving that center and plane. See [steering and orbit](MANUAL_CAMERA_ORBIT.md).
 
 **Navigate → Edit orbit center…** temporarily turns Auto Orbit off and enables
 Free Camera movement for placement. The proposed center and gizmo size remain draft

@@ -5,7 +5,8 @@ owner-merged PR #300. The repository's application identity is
 `viewer/project.godot` → `application/config/version`; see [version policy](VERSIONING.md).
 Issue #212 proposes candidate build 78 for world-space orbit-center placement
 and an observer orbit starting at the current camera position, facing the chosen
-center without a teleport. Gizmo size is independent of camera orbit distance. See [the candidate contract](ORBIT_GIZMO.md).
+center without a teleport. Gizmo size is independent of camera orbit distance. Wheel zoom adjusts that
+distance in either direction without interrupting the chosen orbit. See [the candidate contract](ORBIT_GIZMO.md).
 Owner physical acceptance remains required.
 
 The GitHub Issues and Wavez Development Project are the operational queue. Work

@@ -247,6 +247,38 @@ func directional_apply(v) -> void:
   v.shell.edit_orbit_center();e.dismiss();check(snapshot(v)==before,"Cancel restores directional observer orbit")
  v.orbit_enabled=false
 
+func observer_zoom(v) -> void:
+ v._reset_camera();v.shell.edit_orbit_center();var e=v.shell.orbit_editor
+ # Deliberately closer than the whole-scene framing radius, with a tilted plane.
+ e.center=v.camera.position+v.camera.basis*Vector3(1,2,-3).normalized()*v.camera.near*8.
+ e.write_fields();e.commit()
+ var target:Vector3=v.camera_target;var axis:Vector3=v.camera.basis.y
+ var initial:float=v.camera_distance
+ var wheel:=InputEventMouseButton.new();wheel.pressed=true;wheel.factor=1.
+ for cycle in 3:
+  wheel.button_index=MOUSE_BUTTON_WHEEL_DOWN;v._unhandled_input(wheel)
+  check(v.camera_distance>initial,"observer wheel out increases radius")
+  v._advance_auto_orbit(.1)
+  wheel.button_index=MOUSE_BUTTON_WHEEL_UP;v._unhandled_input(wheel)
+  check(is_equal_approx(v.camera_distance,initial),"observer wheel in returns below scene framing limit")
+  v._advance_auto_orbit(.1)
+  check(v.orbit_enabled and not e.applied_orbit.is_empty(),"wheel retains applied observer orbit")
+  check(v.camera_target==target and v.camera.basis.y.dot(axis)>.99999,"wheel retains chosen target and tilted plane")
+  check(v.camera.basis.z.dot((v.camera.position-target).normalized())>.99999,"zoomed orbit still faces center")
+ wheel.factor=.25;wheel.button_index=MOUSE_BUTTON_WHEEL_UP;v._unhandled_input(wheel)
+ check(is_equal_approx(v.camera_distance,initial*pow(.9,.25)),"observer fractional wheel scale")
+ wheel.factor=1.
+ for i in 40:v._unhandled_input(wheel);v._advance_auto_orbit(.01)
+ check(is_equal_approx(v.camera_distance,v.camera.near*2.),"observer zoom stops at near-plane clearance")
+ wheel.button_index=MOUSE_BUTTON_WHEEL_DOWN;v._unhandled_input(wheel)
+ check(v.camera_distance>v.camera.near*2.,"observer zoom reverses at near limit")
+ var marker:float=e.radius
+ v.shell.edit_orbit_center();check(e.radius==marker,"zoom retains separate marker size on reopen");e.dismiss()
+ v._take_manual_camera_control();v._steer_camera(Vector2(5,3))
+ v._advance_auto_orbit(.01)
+ check(e.applied_orbit.is_empty(),"manual steering still invalidates observer plane")
+ v.orbit_enabled=false
+
 func run() -> void:
  for arg in OS.get_cmdline_user_args():
   if arg.begins_with("--gizmo-output="):output=arg.trim_prefix("--gizmo-output=")
@@ -262,6 +294,7 @@ func run() -> void:
  check(v.shell.orbit_editor.visible and v.camera.transform==coincident_pose,"coincident center keeps editor open without teleport")
  v.shell.orbit_editor.dismiss()
  directional_apply(v)
+ observer_zoom(v)
  for kind in ["particles","mesh","volume","mixed","small","large","lobes"]:await scene(v,kind)
  var f:=FileAccess.open(output.path_join("report.json"),FileAccess.WRITE);f.store_string(JSON.stringify({"checks":checks,"failures":failures,"pixels":pixels,"diagnostics":diagnostics},"\t"));f.close()
  v.queue_free();await settle();print("GIZMO: %d checks / %d failures"%[checks,failures.size()]);quit(0 if failures.is_empty() else 1)

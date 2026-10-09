@@ -262,9 +262,27 @@ func commit() -> void:
 	viewer.orbit_enabled = true
 	viewer._sync_control_state()
 
+func matches_applied_orbit() -> bool:
+	return not applied_orbit.is_empty() and viewer.camera.transform == applied_orbit.pose and viewer.camera_target == applied_orbit.center and viewer.camera_distance == applied_orbit.radius
+
+func zoom_orbit(step: float, inward: bool) -> bool:
+	if not viewer.orbit_enabled or not matches_applied_orbit(): return false
+	# A chosen point can be inside the scene's framing sphere. Its orbit only
+	# needs camera clipping clearance, not clearance around the entire scene.
+	var minimum: float = viewer.camera.near * 2.0
+	var maximum: float = maxf(minimum, viewer.camera.far)
+	var distance: float = viewer.camera_distance
+	viewer.camera_distance = minf(distance, maxf(minimum, distance * step)) if inward else maxf(distance, minf(maximum, distance / step))
+	viewer._update_camera()
+	applied_orbit.radius = viewer.camera_distance
+	applied_orbit.pose = viewer.camera.transform
+	if not last_applied.is_empty() and last_applied.center == viewer.camera_target:
+		last_applied.orbit_distance = viewer.camera_distance
+	return true
+
 func advance_orbit(delta: float) -> bool:
 	if applied_orbit.is_empty(): return false
-	if viewer.camera.transform != applied_orbit.pose or viewer.camera_target != applied_orbit.center or viewer.camera_distance != applied_orbit.radius:
+	if not matches_applied_orbit():
 		applied_orbit.clear(); return false
 	applied_orbit.angle = fmod(applied_orbit.angle + delta*viewer.orbit_speed, TAU)
 	var orientation: Basis = (Basis(applied_orbit.axis,applied_orbit.angle)*applied_orbit.basis).orthonormalized()

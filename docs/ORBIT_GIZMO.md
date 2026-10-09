@@ -36,8 +36,12 @@ opens that menu). The camera remains usable while the editor is open.
   only gizmo size does not move or redirect an already-applied observer orbit.
   When the observer is exactly at the center, Apply leaves the editor open and
   asks the user to move away; it never chooses a replacement position.
-  Intentional camera navigation retains the accepted controls; a changed camera
-  pose/target/distance invalidates the Apply-time automatic orbit plane.
+  Wheel zoom changes orbit distance in either direction while retaining the chosen
+  center and plane. It uses twice the near clip as its inward limit, independently
+  of whole-scene bounds, and the far clip as its outward limit. Distances already
+  outside these limits recover progressively without snapping. Other intentional
+  camera navigation retains the accepted controls and invalidates the Apply-time
+  plane when it changes the camera pose/target/distance.
 - **Cancel**, **×**, and **Escape** restore the complete pre-edit camera pose,
   target, radius, orientation representation, and Auto Orbit / Free Camera modes.
   Escape dismisses this editor before fullscreen recovery. Another Escape retains
@@ -90,9 +94,11 @@ speed adjustment/persistence, cinematic background, and scientific transforms
 keep their accepted production functions. Default `R` remains Reset Camera;
 held Orbit Camera Left/Right are configurable and unbound in a fresh profile.
 Owner R/T mappings are preserved. There is no separate middle-button drag zoom
-handler in accepted `main`; wheel behavior is unchanged. Physical device mapping
+handler in accepted `main`; the applied observer orbit now has the wheel behavior
+described above. Other wheel navigation retains its existing framing limits. Physical device mapping
 and the owner's middle-button workflow must be verified with the actual profile.
 
-See [the observer-orbit correction](evidence/issue-212/observer-orbit/README.md)
+See [the orbit zoom correction](evidence/issue-212/orbit-zoom/README.md)
+for zoom reversal validation and [the observer-orbit correction](evidence/issue-212/observer-orbit/README.md)
 for the current Apply contract and validation. The [second-attempt evidence](evidence/issue-212/attempt-02/README.md) records the earlier implementation and its measurements.
 Synthetic tests do not establish physical acceptance on a research-scale scene.

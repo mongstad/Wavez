@@ -726,6 +726,7 @@ func _zoom_camera(event: InputEventMouseButton, inward: bool) -> void:
 	if not is_finite(camera_distance) or camera_distance <= 0 or not is_finite(event.factor) or event.factor <= 0: return
 	# A fractional wheel event is fractional zoom; one event is at most one notch.
 	var step := pow(0.90, minf(event.factor, 1.0))
+	if shell != null and shell.orbit_editor != null and shell.orbit_editor.zoom_orbit(step, inward): return
 	# Framing's bounding-sphere radius is in the same world units as the camera.
 	var minimum := maxf(camera.near * 2.0, half_extent + camera.near)
 	var maximum := maxf(minimum, camera.far - half_extent)
