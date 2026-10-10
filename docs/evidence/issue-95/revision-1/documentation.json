@@ -1,0 +1,22 @@
+{
+  "local_links_and_anchors": 34,
+  "errors": [],
+  "parts_II_III_byte_identical": true,
+  "four_examples_and_technical_contracts_unchanged": true,
+  "packaging_unchanged_embed_pck_false": true,
+  "candidate_version_unchanged": true,
+  "launch_order_and_linux_only_content": "passed",
+  "protected_file_sha256": {
+    "tools/package_linux.py": "385d5609a5c1604e4d3176053242248b46d8cc4db97b653e47c191f9effa8b03",
+    "viewer/project.godot": "da054893204e0ce5309c65a9d4d2881a9dd9a013856a507ddfb1160603d3b8bf",
+    "WAVEZ_API.md": "1cfd7df299e68a823cbc0c4cb680ae6b3e4fa66d5887562038709ae640e2e0ff",
+    "docs/WVZ1_FORMAT.md": "5418eb62381718d51f1b27cbb2350e594b8ff55458b815bcbdcf0aa48210f168",
+    "docs/SIMULATION_INTEGRATION_GUIDE.md": "6799b9bcf2b320c3fb9fc408902446e7124f61c71f8570367664453511670440",
+    "docs/CAPTURE_FORMAT_POLICY.md": "27cbeff1af0d3aeae0e31fa2bd2be4b17ac175c6f6809b3729190c5430209cea",
+    "docs/ROOT_WINDOW_SIGNALS.md": "1baa97ce9ec5ba9a16e36e31468e0dbcbb946f37291f3f2866c1b50071ff7321",
+    "examples/getting_started_particles.py": "5d46794c097b4a6bab01ef5b3000c5ae829ca9f1691a2c4ddffdad67059712e9",
+    "examples/getting_started_field.py": "25568a487c1490d0256d587415d71e51747aa000be3aa910ab74ecf0aac84f40",
+    "examples/getting_started_mesh.py": "c4dfd04dff29306b58cdf78705fddc0ed396d0f3a9b518a46a6c116d2530a0fa",
+    "examples/getting_started_combined.py": "de3d2ab29e925c23e5885233d1c25102782c47ab483038e0c653083eb7bf5c7d"
+  }
+}

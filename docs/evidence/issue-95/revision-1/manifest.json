@@ -1,0 +1,22 @@
+{
+  "documentation.json": {
+    "bytes": 1459,
+    "sha256": "aad0c892b6ee28bf6826603261d06ecf131d620b26d5ae65ffb43df860ff316a"
+  },
+  "desktop-launch.json": {
+    "bytes": 351,
+    "sha256": "58f2e90a4acb3ca209cd745530bcc1af2e2d8bf85bf83637fa328ab570698140"
+  },
+  "runtime.txt": {
+    "bytes": 153,
+    "sha256": "bc5b17b4fd9510fbf4b3f40f94a1dbd742095cf8b2b033bab053dd762eb9cced"
+  },
+  "session.txt": {
+    "bytes": 156,
+    "sha256": "b8df536b39771f628f040369ab29fcffc1ba3a878ce46fc32410a6c58a636964"
+  },
+  "README.md": {
+    "bytes": 3641,
+    "sha256": "fe93b90146cebfd9e77800c7d1ef528922e09b899a65d843389055fdc53c2b89"
+  }
+}

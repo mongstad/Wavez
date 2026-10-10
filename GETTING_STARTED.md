@@ -9,9 +9,33 @@ with the filename extension **`.wvz`**.
 
 ### Run the standalone viewer
 
-The verified standalone build is **Linux x86_64**, built with the Godot 4.7.2
-release template. Keep `WAVEZ.x86_64` and `WAVEZ.pck` in the same directory.
-If the executable permission is missing, restore it, then launch:
+The supported standalone release is **Linux x86_64**. Extract the package to a
+local folder, then open that folder in Dolphin or your Linux file manager.
+Keep both files, `WAVEZ.x86_64` and `WAVEZ.pck`, together in that folder.
+
+**Double-click `WAVEZ.x86_64` to launch Wavez.** If it is not marked executable,
+right-click it in Dolphin, choose **Properties → Permissions**, enable
+**Allow executing file as program**, and apply the change. Then open it again.
+File managers can use single-click opening or show a run confirmation according
+to their settings; use the normal open action and choose to run the executable.
+
+The packaged executable contains the Godot runtime. You do **not** need a
+separately installed Godot editor/engine, Python, NumPy or the source checkout
+to open an existing capture. You do need a graphical Linux desktop and working
+graphics drivers.
+
+Use **File → Open** to select a `.wvz` file. It opens at the first usable sample,
+paused, while preparation continues. Press **Play** to advance recorded time.
+The Simulation panel exposes **Particles**, **Fields** and **Meshes** according
+to the objects in the file.
+
+These instructions cover the current Linux x86_64 package. Minimum hardware
+requirements have not been established by this guide's validation.
+
+### Terminal launch (alternative)
+
+You can also launch from a terminal, for example to see startup messages.
+If needed, `chmod +x` enables the same executable permission:
 
 ```sh
 cd /path/to/wavez-linux
@@ -19,26 +43,12 @@ chmod +x WAVEZ.x86_64
 ./WAVEZ.x86_64
 ```
 
-The packaged executable contains the Godot runtime. You do **not** need a
-separately installed Godot editor/engine, Python, NumPy or the source checkout
-to open an existing capture. You do need a graphical Linux desktop and working
-graphics drivers. The normal renderer is Forward+; if your graphics hardware
-cannot run it, try Compatibility:
+The normal renderer is Forward+; if your graphics hardware cannot run it,
+try Compatibility from a terminal:
 
 ```sh
 ./WAVEZ.x86_64 --rendering-method gl_compatibility
 ```
-
-Use **File → Open** to select a `.wvz` file. It opens at the first usable sample,
-paused, while preparation continues. Press **Play** to advance recorded time.
-The Simulation panel exposes **Particles**, **Fields** and **Meshes** according
-to the objects in the file.
-
-This is a verified review-package workflow, not a public installer/download
-announcement. Windows, macOS, other Linux architectures and minimum hardware
-requirements have not been established by this guide's validation. The tested
-Linux release template has known Popup signal diagnostics during some menu/dialog
-interactions; see [the investigation](docs/ROOT_WINDOW_SIGNALS.md).
 
 ### Choose dependencies for the work you want to do
 
@@ -69,10 +79,8 @@ python -m pip install .
 python -c "from wavez_export import SceneCapture, SceneReader; print('Ready')"
 ```
 
-On Windows, the environment activation command is `.venv\Scripts\activate`
-in Command Prompt, or `.venv\Scripts\Activate.ps1` in PowerShell. These are Python
-environment commands; they do not establish Windows viewer support. If `python`
-is not your Python 3 executable, use its actual command or absolute path.
+If `python` is not your Python 3 executable, use its actual command or absolute
+path.
 
 Install extras only when needed, from the same checkout:
 
