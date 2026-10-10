@@ -13,7 +13,7 @@ func install(shell) -> void:
 	shell.dock.add_theme_stylebox_override("panel", theme.tonal_surface(14, 12))
 	var header = shell.edge_reveal.pins.right.get_parent()
 	header.theme = theme
-	header.get_child(0).theme_type_variation = "PanelTitle"
+	header.get_child(0).theme_type_variation = "SimulationTitle"
 	header.get_parent().add_theme_constant_override("separation", 10)
 	shell.tabs.theme = theme; shell.chooser.theme = theme
 	for group in ["Rendering", "Color Mapping"]:

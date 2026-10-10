@@ -1,0 +1,10 @@
+{
+  "WAVEZ.x86_64": {
+    "bytes": 73519416,
+    "sha256": "d9f79ab89b5ae369aeed11c6052d402e8218cd503bf85b4a235f9c30c46a7c63"
+  },
+  "WAVEZ.pck": {
+    "bytes": 9101528,
+    "sha256": "672aaa19f97030c80574583d1627bc44042cc973d1a8eb903c3703a9ddcb1e56"
+  }
+}
