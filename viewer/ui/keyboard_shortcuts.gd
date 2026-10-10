@@ -11,6 +11,8 @@ const ACTIONS := [
 	["decrease_camera_speed", "Decrease Camera Movement Speed", "Navigation", KEY_MINUS],
 	["orbit_camera_left", "Orbit Camera Left", "Navigation", 0],
 	["orbit_camera_right", "Orbit Camera Right", "Navigation", 0],
+	["roll_camera_left", "Roll Camera Left", "Navigation", 0],
+	["roll_camera_right", "Roll Camera Right", "Navigation", 0],
 	["frame_scene", "Frame Scene", "Navigation", KEY_F],
 	["navigate", "Navigate", "Navigation", KEY_N | KEY_MASK_ALT],
 	["play_pause", "Play Pause", "Playback", KEY_SPACE],

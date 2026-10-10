@@ -1,0 +1,415 @@
+{
+  "checks": 2709,
+  "renderer": "gl_compatibility",
+  "packaged": true,
+  "fresh_process_restart": true,
+  "source_sha256_unchanged": {
+    "mixed.wvz": "81c129e6291df97f24e22f330ddd51856902abe2e1d133a5731469d9a3798b3e",
+    "meshes.wvz": "c9553db840456a9d57c2ef8e39f7b7ebddf1600573dd708cee1d91ff9d912426",
+    "fields.wvz": "b21587cea19cee71a3999d32c847e69341c7ae19512ee6f90f0d4353b79c5163",
+    "particles.wvz": "180d5129d02dc3c48242d718b8abe2a79f76e6e9daef41b85a92da5ffb16da99"
+  },
+  "reports": [
+    {
+      "checks": 2707,
+      "display": "X11",
+      "failures": [],
+      "measurements": [
+        {
+          "action": "roll_camera_left",
+          "degrees": 90.0,
+          "forward_error": 1.46000971312787e-07,
+          "position_error": 0.0,
+          "scene": "particles",
+          "up": [
+            -0.76484215259552,
+            2.14647322138717e-08,
+            0.644217789173126
+          ]
+        },
+        {
+          "action": "roll_camera_left",
+          "degrees": 180.0,
+          "forward_error": 1.97686247815909e-07,
+          "position_error": 0.0,
+          "scene": "particles",
+          "up": [
+            0.583859503269196,
+            0.422618508338928,
+            0.693182289600372
+          ]
+        },
+        {
+          "action": "roll_camera_left",
+          "degrees": 360.0,
+          "forward_error": 5.04003025980637e-07,
+          "position_error": 0.0,
+          "scene": "particles",
+          "up": [
+            -0.583859503269196,
+            -0.422618806362152,
+            -0.693182170391083
+          ]
+        },
+        {
+          "action": "roll_camera_right",
+          "degrees": -90.0,
+          "forward_error": 1.07453800524127e-07,
+          "position_error": 0.0,
+          "scene": "particles",
+          "up": [
+            0.764842331409454,
+            1.96021247234057e-07,
+            -0.644217550754547
+          ]
+        },
+        {
+          "action": "roll_camera_right",
+          "degrees": -180.0,
+          "forward_error": 1.2287812012346e-07,
+          "position_error": 0.0,
+          "scene": "particles",
+          "up": [
+            0.583859145641327,
+            0.422618389129639,
+            0.693182706832886
+          ]
+        },
+        {
+          "action": "roll_camera_right",
+          "degrees": -360.0,
+          "forward_error": 9.42432194506182e-08,
+          "position_error": 0.0,
+          "scene": "particles",
+          "up": [
+            -0.583858966827393,
+            -0.422618329524994,
+            -0.693182826042175
+          ]
+        },
+        {
+          "action": "roll_camera_left",
+          "degrees": 90.0,
+          "forward_error": 1.46000971312787e-07,
+          "position_error": 0.0,
+          "scene": "fields",
+          "up": [
+            -0.76484215259552,
+            2.14647322138717e-08,
+            0.644217789173126
+          ]
+        },
+        {
+          "action": "roll_camera_left",
+          "degrees": 180.0,
+          "forward_error": 1.97686247815909e-07,
+          "position_error": 0.0,
+          "scene": "fields",
+          "up": [
+            0.583859503269196,
+            0.422618508338928,
+            0.693182289600372
+          ]
+        },
+        {
+          "action": "roll_camera_left",
+          "degrees": 360.0,
+          "forward_error": 5.04003025980637e-07,
+          "position_error": 0.0,
+          "scene": "fields",
+          "up": [
+            -0.583859503269196,
+            -0.422618806362152,
+            -0.693182170391083
+          ]
+        },
+        {
+          "action": "roll_camera_right",
+          "degrees": -90.0,
+          "forward_error": 1.07453800524127e-07,
+          "position_error": 0.0,
+          "scene": "fields",
+          "up": [
+            0.764842331409454,
+            1.96021247234057e-07,
+            -0.644217550754547
+          ]
+        },
+        {
+          "action": "roll_camera_right",
+          "degrees": -180.0,
+          "forward_error": 1.2287812012346e-07,
+          "position_error": 0.0,
+          "scene": "fields",
+          "up": [
+            0.583859145641327,
+            0.422618389129639,
+            0.693182706832886
+          ]
+        },
+        {
+          "action": "roll_camera_right",
+          "degrees": -360.0,
+          "forward_error": 9.42432194506182e-08,
+          "position_error": 0.0,
+          "scene": "fields",
+          "up": [
+            -0.583858966827393,
+            -0.422618329524994,
+            -0.693182826042175
+          ]
+        },
+        {
+          "action": "roll_camera_left",
+          "degrees": 90.0,
+          "forward_error": 1.46000971312787e-07,
+          "position_error": 0.0,
+          "scene": "meshes",
+          "up": [
+            -0.76484215259552,
+            2.14647322138717e-08,
+            0.644217789173126
+          ]
+        },
+        {
+          "action": "roll_camera_left",
+          "degrees": 180.0,
+          "forward_error": 1.97686247815909e-07,
+          "position_error": 0.0,
+          "scene": "meshes",
+          "up": [
+            0.583859503269196,
+            0.422618508338928,
+            0.693182289600372
+          ]
+        },
+        {
+          "action": "roll_camera_left",
+          "degrees": 360.0,
+          "forward_error": 5.04003025980637e-07,
+          "position_error": 0.0,
+          "scene": "meshes",
+          "up": [
+            -0.583859503269196,
+            -0.422618806362152,
+            -0.693182170391083
+          ]
+        },
+        {
+          "action": "roll_camera_right",
+          "degrees": -90.0,
+          "forward_error": 1.07453800524127e-07,
+          "position_error": 0.0,
+          "scene": "meshes",
+          "up": [
+            0.764842331409454,
+            1.96021247234057e-07,
+            -0.644217550754547
+          ]
+        },
+        {
+          "action": "roll_camera_right",
+          "degrees": -180.0,
+          "forward_error": 1.2287812012346e-07,
+          "position_error": 0.0,
+          "scene": "meshes",
+          "up": [
+            0.583859145641327,
+            0.422618389129639,
+            0.693182706832886
+          ]
+        },
+        {
+          "action": "roll_camera_right",
+          "degrees": -360.0,
+          "forward_error": 9.42432194506182e-08,
+          "position_error": 0.0,
+          "scene": "meshes",
+          "up": [
+            -0.583858966827393,
+            -0.422618329524994,
+            -0.693182826042175
+          ]
+        },
+        {
+          "action": "roll_camera_left",
+          "degrees": 90.0,
+          "forward_error": 1.46000971312787e-07,
+          "position_error": 0.0,
+          "scene": "mixed",
+          "up": [
+            -0.76484215259552,
+            2.14647322138717e-08,
+            0.644217789173126
+          ]
+        },
+        {
+          "action": "roll_camera_left",
+          "degrees": 180.0,
+          "forward_error": 1.97686247815909e-07,
+          "position_error": 0.0,
+          "scene": "mixed",
+          "up": [
+            0.583859503269196,
+            0.422618508338928,
+            0.693182289600372
+          ]
+        },
+        {
+          "action": "roll_camera_left",
+          "degrees": 360.0,
+          "forward_error": 5.04003025980637e-07,
+          "position_error": 0.0,
+          "scene": "mixed",
+          "up": [
+            -0.583859503269196,
+            -0.422618806362152,
+            -0.693182170391083
+          ]
+        },
+        {
+          "action": "roll_camera_right",
+          "degrees": -90.0,
+          "forward_error": 1.07453800524127e-07,
+          "position_error": 0.0,
+          "scene": "mixed",
+          "up": [
+            0.764842331409454,
+            1.96021247234057e-07,
+            -0.644217550754547
+          ]
+        },
+        {
+          "action": "roll_camera_right",
+          "degrees": -180.0,
+          "forward_error": 1.2287812012346e-07,
+          "position_error": 0.0,
+          "scene": "mixed",
+          "up": [
+            0.583859145641327,
+            0.422618389129639,
+            0.693182706832886
+          ]
+        },
+        {
+          "action": "roll_camera_right",
+          "degrees": -360.0,
+          "forward_error": 9.42432194506182e-08,
+          "position_error": 0.0,
+          "scene": "mixed",
+          "up": [
+            -0.583858966827393,
+            -0.422618329524994,
+            -0.693182826042175
+          ]
+        },
+        {
+          "action": "roll_camera_left",
+          "degrees": 90.0,
+          "forward_error": 1.46000971312787e-07,
+          "position_error": 0.0,
+          "scene": "fullscreen",
+          "up": [
+            -0.76484215259552,
+            2.14647322138717e-08,
+            0.644217789173126
+          ]
+        },
+        {
+          "action": "roll_camera_left",
+          "degrees": 180.0,
+          "forward_error": 1.97686247815909e-07,
+          "position_error": 0.0,
+          "scene": "fullscreen",
+          "up": [
+            0.583859503269196,
+            0.422618508338928,
+            0.693182289600372
+          ]
+        },
+        {
+          "action": "roll_camera_left",
+          "degrees": 360.0,
+          "forward_error": 5.04003025980637e-07,
+          "position_error": 0.0,
+          "scene": "fullscreen",
+          "up": [
+            -0.583859503269196,
+            -0.422618806362152,
+            -0.693182170391083
+          ]
+        },
+        {
+          "action": "roll_camera_right",
+          "degrees": -90.0,
+          "forward_error": 1.07453800524127e-07,
+          "position_error": 0.0,
+          "scene": "fullscreen",
+          "up": [
+            0.764842331409454,
+            1.96021247234057e-07,
+            -0.644217550754547
+          ]
+        },
+        {
+          "action": "roll_camera_right",
+          "degrees": -180.0,
+          "forward_error": 1.2287812012346e-07,
+          "position_error": 0.0,
+          "scene": "fullscreen",
+          "up": [
+            0.583859145641327,
+            0.422618389129639,
+            0.693182706832886
+          ]
+        },
+        {
+          "action": "roll_camera_right",
+          "degrees": -360.0,
+          "forward_error": 9.42432194506182e-08,
+          "position_error": 0.0,
+          "scene": "fullscreen",
+          "up": [
+            -0.583858966827393,
+            -0.422618329524994,
+            -0.693182826042175
+          ]
+        }
+      ],
+      "packaged": true,
+      "renderer": "gl_compatibility",
+      "restart": false
+    },
+    {
+      "checks": 2,
+      "display": "X11",
+      "failures": [],
+      "measurements": [],
+      "packaged": true,
+      "renderer": "gl_compatibility",
+      "restart": true
+    }
+  ],
+  "known_engine_cleanup_diagnostics": {
+    "roll": [
+      "ERROR: Texture with GL ID of 202: leaked 349524 bytes.\n   at: ~Utilities (drivers/gles3/storage/utilities.cpp:82)\n",
+      "ERROR: Texture with GL ID of 203: leaked 349524 bytes.\n   at: ~Utilities (drivers/gles3/storage/utilities.cpp:82)\n",
+      "ERROR: Texture with GL ID of 204: leaked 349524 bytes.\n   at: ~Utilities (drivers/gles3/storage/utilities.cpp:82)\n",
+      "ERROR: Texture with GL ID of 205: leaked 349524 bytes.\n   at: ~Utilities (drivers/gles3/storage/utilities.cpp:82)\n",
+      "ERROR: Texture with GL ID of 206: leaked 349524 bytes.\n   at: ~Utilities (drivers/gles3/storage/utilities.cpp:82)\n",
+      "ERROR: Texture with GL ID of 207: leaked 349524 bytes.\n   at: ~Utilities (drivers/gles3/storage/utilities.cpp:82)\n",
+      "ERROR: Texture with GL ID of 208: leaked 349524 bytes.\n   at: ~Utilities (drivers/gles3/storage/utilities.cpp:82)\n",
+      "ERROR: Texture with GL ID of 209: leaked 349524 bytes.\n   at: ~Utilities (drivers/gles3/storage/utilities.cpp:82)\n",
+      "ERROR: Texture with GL ID of 212: leaked 349524 bytes.\n   at: ~Utilities (drivers/gles3/storage/utilities.cpp:82)\n",
+      "ERROR: Texture with GL ID of 213: leaked 349524 bytes.\n   at: ~Utilities (drivers/gles3/storage/utilities.cpp:82)\n"
+    ],
+    "restart": [
+      "ERROR: Texture with GL ID of 53: leaked 349524 bytes.\n   at: ~Utilities (drivers/gles3/storage/utilities.cpp:82)\n",
+      "ERROR: Texture with GL ID of 54: leaked 349524 bytes.\n   at: ~Utilities (drivers/gles3/storage/utilities.cpp:82)\n"
+    ]
+  },
+  "artifacts": {
+    "WAVEZ.x86_64": "d9f79ab89b5ae369aeed11c6052d402e8218cd503bf85b4a235f9c30c46a7c63",
+    "WAVEZ.pck": "8bcbc3ce739489d3330c363f30d758d145e3837cc83089d843021ba4e00f2543"
+  }
+}

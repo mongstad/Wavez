@@ -1,5 +1,9 @@
 # Retained evidence
 
+Issue #331's [camera roll validation](evidence/issue-331/README.md) records candidate
+build 88, measured local-axis banking and connected navigation, source/package
+checks, shortcut restart persistence, native views and known teardown diagnostics.
+
 Issue #325's [dialog action audit](evidence/issue-325/README.md) records candidate
 build 87, unfocused Dark/Light before/after captures at normal and compact sizes,
 preserved interaction states, scoped dialog coverage and owner review steps.

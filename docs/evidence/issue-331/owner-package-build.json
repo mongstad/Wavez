@@ -1,0 +1,58 @@
+{
+  "version": {
+    "full": "v0.1.0.88",
+    "release": "v0.1.0",
+    "build": "88"
+  },
+  "godot": "4.7.2.stable.official.ed1daf0bf",
+  "first_party_python": {
+    "tools/analyze_selection.py": "9b4e83cffec42a5454771cbb2c0c00ca6bacd337b84db479f5d703c9730ca9e9",
+    "viewer/colormaps.json": "47bf4b9791753b36bd16b584729a7360341649ede50470a71f01e7482b6450f7",
+    "wavez_export/__init__.py": "fcfe9ceca522916033b399d119ea64ccf3a1ea8dfbf8984906e4527dbd94b017",
+    "wavez_export/analysis/__init__.py": "48dca038ee2510dfd2cc743e6048a747f3ae656f0a0e8733d90d08ea066b4778",
+    "wavez_export/analysis/atomic_output.py": "9047230023dad6304f2ed0757a4c8a14a0e9e404c21ef6fce88e87b7eb2bf2e3",
+    "wavez_export/analysis/channel_semantics.py": "a959c1b93c0665a003dacc776f7831ab59a991bcd7988caaf10389c7ba5b7b2d",
+    "wavez_export/analysis/comparisons.py": "d4e2539b51c705c078adc92e0a246abb989ed08e9379d0d4ac3fde4e213411bd",
+    "wavez_export/analysis/contracts.py": "0457373829d20d7d8bfa920bc9db170a0ef473fffc56a5374ddf09093ef3fbbb",
+    "wavez_export/analysis/derived.py": "f2cc8f194fb3bb77ab66af53d2899c2884536d1f923dfbc847e60409059c0ac4",
+    "wavez_export/analysis/diagnostics.py": "e9fdc6cb44bffe3f9689b923ef18aee68c268d7ee5330ac4cb87738e64b627a2",
+    "wavez_export/analysis/disk_quota.py": "3f53ef1e2f456d86b27b4c91d38db1f4dbb1dc5b6c1d86f043bda70bf47fd143",
+    "wavez_export/analysis/export_results.py": "dd838587f2992adde5876e8799daef5aac5449ff27dcbec847cc9e500c6eaa75",
+    "wavez_export/analysis/heatmap_preview.py": "f7c22065ff89f7503bd84f845893e7b3b4c2819214bb19d8fccee431548678be",
+    "wavez_export/analysis/input_provenance.py": "22a3656a85e928e327a7317348894065bc1ebd163b930aae812ba2fd2542b2a0",
+    "wavez_export/analysis/jobs.py": "160671152a97e4368868b51b4c72f9df8cfcc05d3c2c25be5cb719eb1b0ecc23",
+    "wavez_export/analysis/linked_plots.py": "7735c6e23f69b88b4b8a36a611e22f3a84248dd7b45c5786f98a002ccab9b8d7",
+    "wavez_export/analysis/matched_render.py": "f9693e5d81801b736ffe2c387b6d7d486102e942751d06dbc0ad5fa437dd0e71",
+    "wavez_export/analysis/member_assets.py": "c8d6d7ef61f85f291a09a2c7b5f9aea14b283ffc593f84df761cc40ca48b3cc8",
+    "wavez_export/analysis/memo.py": "a343cb134c2ee581835dd7b1a9934a4d7ad3e0613c11639b35d0ac26020bd6c4",
+    "wavez_export/analysis/native_analysis.py": "6f291ff0e91795591454cee968a2f669b974cc3f012170b5d9d9bb21ed3f5e90",
+    "wavez_export/analysis/period_jobs.py": "39c0b26ade32471da06ce7d0fb9f68932c705b4598f6a071c06e07a68f8a6d85",
+    "wavez_export/analysis/periods.py": "989e24667c7ed8315b6ea0d132fd0a7c75949bcb3e03489fb29b335e93134ebf",
+    "wavez_export/analysis/picking.py": "e6d0b2f640f67a5fe372925f06af5a112449567c2b219df948e7ac065325e167",
+    "wavez_export/analysis/plot_preview.py": "fe57cc073200be27bec23235159c4466c969cc1cdc9ec9472632a3486de0b263",
+    "wavez_export/analysis/quadrature.py": "b95363483f3a801756a8ece9911fff02c1e3eb1554d03b239d0a3f4683f2a025",
+    "wavez_export/analysis/recipes.py": "1b2effde58396215b0a13f37c2f88f9cae593de55acb320cbc5042dc05de8372",
+    "wavez_export/analysis/reductions.py": "c1002f3cc017978b69c8f5f8bb79fa9775cb778d2a1c213c17bc2086179b5956",
+    "wavez_export/analysis/result_store.py": "fdca2a0a7698fd9999726542a2ae002e0cc6c56c1e18ee2c4ec51122063a852a",
+    "wavez_export/analysis/sampling.py": "9b67046adac5ee2854fc87f4fc84f6ed4a4d2f785532d99db3b056508ca564b1",
+    "wavez_export/analysis/scheduled_series.py": "bf32db0ee75393ad06341202dc2d59576d36795aa925d1bfb771c1911e4532a6",
+    "wavez_export/analysis/selection_jobs.py": "9cac4567432b269128669514ef405f5be043547fff2c306520ff3b3b03530754",
+    "wavez_export/analysis/selectors.py": "e362c19e6407a64be93abc76a929148fbdd98bf31933abfdd265f6b08f40b2b1",
+    "wavez_export/analysis/series_input.py": "e6715fcd573df693415d83339cad2d8ee4c8f08154b22ce4a10f30f38bf8a8c9",
+    "wavez_export/analysis/source.py": "acf75fd779510f46bfe750974277d9663736f36eaacfeb3a8fe1193f21cefe3f",
+    "wavez_export/analysis/space_time.py": "cefe510a0e98eac86ea08ab42456fdadbb783f423824bf87cd01be74d4990864",
+    "wavez_export/codec.py": "0603df703602d57f7f184a5b8dcfda6d1ad43c6fac60f95525a1604671f25d11",
+    "wavez_export/field_statistics.py": "b9b1d6535e84ca1b5dd15ede82a9c36f73d840ccc00adaa40c80d3492a8c79c2",
+    "wavez_export/metadata_budget.py": "b0699482bcb1aee497c236b0de98e47e5c8f754dd56e9a5e33798a3a23fd971c",
+    "wavez_export/scene.py": "76afd84abee68cc8f1a343f8a065f6c974087f9373a3bf025dea06bcd7b3a83b",
+    "wavez_export/storage.py": "17fae943f6f4368b17bbdcab0d49cd84e74c046eea262441456eb03025f14efb"
+  },
+  "external_dependencies": [
+    "Python 3.10+ and NumPy for selection-aware export",
+    "FFmpeg for MP4 encoding"
+  ],
+  "artifacts": {
+    "WAVEZ.x86_64": "d9f79ab89b5ae369aeed11c6052d402e8218cd503bf85b4a235f9c30c46a7c63",
+    "WAVEZ.pck": "bfaf08b0653687d8f0a9452e8ed75b9d7159c043c99d198f0187e0eabfc4f029"
+  }
+}

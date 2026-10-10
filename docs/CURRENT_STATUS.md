@@ -1,12 +1,14 @@
 # Current status
 
-Accepted baseline: **v0.1.0.86**, `896e63ea470c07b2b32bddc4c2ea6160c025b2e5`,
-owner-merged PR #327. The repository's application identity is
+Accepted baseline: **v0.1.0.87**, `c33ff2b899330020871792757f5cbfffeedf35ac`,
+owner-merged PR #332. The repository's application identity is
 `viewer/project.godot` → `application/config/version`; see [version policy](VERSIONING.md).
-Issue #325 proposes candidate **v0.1.0.87**. Its [dialog action roles](DIALOG_ACTIONS.md)
-make neutral dialog actions recognizable when unfocused, preserving existing
-interaction states and excluding shell/panel/transport controls. See the
-[audit and current review evidence](evidence/issue-325/README.md).
+Issue #331 proposes candidate **v0.1.0.88**: independently configurable,
+initially Unbound Roll Camera Left/Right actions bank Free Camera around its
+local view axis while retaining scientific/world state. The full camera basis
+continues through movement, steering, framing and saved views; Reset Camera
+intentionally restores the default orientation. See [camera navigation](MANUAL_CAMERA_ORBIT.md)
+and the [current review evidence](evidence/issue-331/README.md).
 
 The GitHub Issues and Wavez Development Project are the operational queue. Work
 requires a Ready issue (or explicit owner authorization), the correct branch/base
@@ -27,6 +29,7 @@ reveal. Opening presents the first usable sample paused while bounded preparatio
 continues. Preferences include editable shortcuts, LMB-only vertical inversion,
 File Locations and performance preparation controls. Current RMB free-look
 steering remains independent of LMB inversion and held target-relative orbit.
+The #331 candidate adds held local-axis roll without changing existing defaults.
 
 Scientific inspection/analysis operates on original typed source arrays and
 object-native clocks. Exact IDs, anonymous row limits, topology epochs, units,

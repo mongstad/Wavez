@@ -303,6 +303,11 @@ RMB or either orbit key immediately disables Auto Orbit until explicitly
 re-enabled. Steering synchronizes the navigation target one existing radius
 ahead along the new heading without moving the camera or scientific geometry.
 See [camera navigation](MANUAL_CAMERA_ORBIT.md) for interaction and owner checks.
+The #331 candidate adds separately configurable Roll Camera Left/Right actions,
+also Unbound by default. Hold them in Free Camera to bank about the local view
+axis at 90°/second without changing position or forward direction. After banking,
+translation and RMB steering remain camera-relative; Frame Scene and saved views
+retain the orientation, while Reset Camera intentionally clears it.
 During left-drag tumble, horizontal motion rotates about world Y and vertical
 motion rotates about the current camera right axis. The camera up axis follows
 that tumble, including upside-down views, without a world-up flip at either pole.

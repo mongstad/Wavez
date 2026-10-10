@@ -1,0 +1,11 @@
+{
+  "viewer/main.gd": "500eb645c1a55388a06dfd332174e9537b105176f06bd15e25b4ba99c31e949c",
+  "viewer/project.godot": "cda537cfe5501ef451d0313cdfbc95c445358a8cb0c55da19c65dcb98b22a9a3",
+  "viewer/ui/keyboard_shortcuts.gd": "b390dfac4cb69e3d64367c4b100173079553dd4d31947142a84358e9478ee181",
+  "viewer/ui/shell/orbit_center_editor.gd": "259d56c6fb17c2201028ad90ef0ef3bc60d31dd05e91199620d94653ec513efc",
+  "viewer/scene/test_camera_roll.gd": "d936ec023cf72bcfacde05c0cda6295d7c3b24ebed7ada5cb4eedde5c7443467",
+  "viewer/scene/run_camera_roll_tests.gd": "bfa0ffabb8d3a5f545cd316bbe19c3e13b7faee0c5f7f4b75a94454a194a6a00",
+  "tools/validate_camera_roll.py": "602300b11d781f35f6fa450fc478fba2b9322cc7efcc70d34b3f4aea8c221a9b",
+  "viewer/scene/test_camera_navigation.gd": "8e3e06e26498fd03f6bfeda2e5c10d3b63d6caeb7bd5ffbe72a804bd64a30591",
+  "viewer/ui/shell/test_idle_render_pacing.gd": "913a2dd7b308a3ae864e13648aaa047e6e9fdc7b18242c074a2728040343255b"
+}

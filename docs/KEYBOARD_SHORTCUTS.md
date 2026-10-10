@@ -1,5 +1,11 @@
 # Keyboard Shortcuts
 
+Issue #331 adds **Roll Camera Left** and **Roll Camera Right** under Navigation
+in candidate build 88. Both default to Unbound and use the existing independent
+rebind, Clear, conflict transfer, Apply/Cancel and restart persistence path.
+Hold a bound key to bank Free Camera at 90°/second around its current view axis.
+See [camera navigation](MANUAL_CAMERA_ORBIT.md) for focus guards and owner checks.
+
 Issue #214 adds **Toggle Invert Y Axis** under Navigation in candidate build 76.
 Its row includes an On/Off toggle beside the editable hotkey; Apply saves both,
 Cancel/X/Escape discard drafts, and Reset Defaults stages Off plus Unbound.
@@ -97,6 +103,7 @@ movement keys, focus navigation, and Escape recovery retain their existing roles
 | Increase Camera Movement Speed | + | Free-camera translation rate, 10% per step |
 | Decrease Camera Movement Speed | - | Free-camera translation rate, 10% per step |
 | Orbit Camera Left / Orbit Camera Right | Unbound | Held view-relative horizontal orbit around the current navigation target |
+| Roll Camera Left / Roll Camera Right | Unbound | Held camera-local banking in Free Camera |
 | Frame Scene | F | Viewer scene framing |
 | Navigate | Alt+N | Existing Navigate menu |
 | Play Pause | Space | Viewer transport toggle |

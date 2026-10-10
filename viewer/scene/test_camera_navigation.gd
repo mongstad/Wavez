@@ -180,6 +180,8 @@ func guards(view) -> void:
 		check(view.manual_orbit_keys.is_empty() and view.camera.transform == before,command+": framing replaces an active hold without a stale orbit step")
 
 func live_hold(view) -> void:
+	# Let deferred recipe/editor work settle before measuring real process input.
+	for i in 4: await process_frame
 	focus_none(); view.inspection_paused = false
 	var start: Transform3D = view.camera.transform
 	var event: InputEventKey = view.shell.shortcuts.event_for("orbit_camera_left"); event.pressed = true
