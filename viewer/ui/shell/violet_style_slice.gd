@@ -2,6 +2,7 @@ extends RefCounted
 ## A bounded production slice for owner review; no controller or scientific state.
 const ThemeSource = preload("res://ui/theme/violet_slice_theme.gd")
 var theme := ThemeSource.new()
+var close_focus: StyleBox
 
 func install(shell) -> void:
 	for surface in [shell.bar, shell.transport, shell.status_ui]:
@@ -58,6 +59,7 @@ func install(shell) -> void:
 		readout.add_theme_font_size_override("font_size", theme.get_font_size("font_size", "NumericValue"))
 	shell.transport.seek_dialog.theme = theme
 	shell.details.theme = theme
+	style_close_action(shell.detail_close)
 	shell.about.theme = theme
 	animate_buttons(shell.about)
 	# Jobs uses the same borderless surface, title and action roles as Video Export.
@@ -65,6 +67,10 @@ func install(shell) -> void:
 	shell.status_ui.jobs_dialog.add_theme_stylebox_override("panel", theme.flat_box(&"surface.1",16,16,0))
 	shell.status_ui.jobs_header_close.icon = theme.chrome_icon("close")
 	animate_buttons(shell.status_ui.jobs_dialog)
+	# These dialogs are constructed before the shell; style their existing X
+	# controls once the shared chrome theme exists, without changing callbacks.
+	style_close_action(shell.viewer.tools_ui.close_button)
+	style_close_action(shell.viewer.video_dialog.header_close)
 	style_dropdowns(shell.viewer)
 	style_booleans(shell.viewer)
 
@@ -89,7 +95,22 @@ func style_dropdowns(node: Node) -> void:
 		node.theme = theme
 	for child in node.get_children(): style_dropdowns(child)
 
+func style_close_action(control: Button) -> void:
+	control.icon = theme.chrome_icon("close")
+	control.text = ""
+	control.custom_minimum_size = Vector2(32, 32)
+	control.theme_type_variation = "IconAction"
+	# Keep focus visible inside the shared close hit area. The generic input
+	# ring expands by four pixels and makes an auto-focused dialog X look larger.
+	if close_focus == null:
+		close_focus = theme.get_stylebox("focus", "IconAction").duplicate()
+		close_focus.set_expand_margin_all(0)
+	control.add_theme_stylebox_override("focus", close_focus)
+	animate_buttons(control)
+
 func animate_buttons(node: Node) -> void:
+	if node is Button and node.has_meta("shell_close") and not node.has_theme_stylebox_override("focus"):
+		style_close_action(node)
 	if node is Button and not node.has_meta("violet_motion"):
 		node.set_meta("violet_motion", true)
 		node.self_modulate = Color(.94, .94, .94)

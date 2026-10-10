@@ -84,6 +84,7 @@ func _ready() -> void:
 	var heading := Label.new(); heading.text = "Export Video"; heading.theme_type_variation = "PanelTitle"
 	heading.size_flags_horizontal = Control.SIZE_EXPAND_FILL; heading.mouse_filter = Control.MOUSE_FILTER_IGNORE; header.add_child(heading)
 	header_close = Button.new(); header_close.theme_type_variation = "IconAction"; header_close.tooltip_text = "Close video export"
+	header_close.set_meta("shell_close", true)
 	header_close.custom_minimum_size = Vector2(32,32); header_close.pressed.connect(hide); header.add_child(header_close)
 	header.gui_input.connect(func(event: InputEvent):
 		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed and not is_embedded() and DisplayServer.has_feature(DisplayServer.FEATURE_WINDOW_DRAG):

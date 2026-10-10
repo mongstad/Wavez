@@ -65,7 +65,7 @@ func setup(owner_viewer, canvas: CanvasLayer) -> void:
 	var header := HBoxContainer.new(); box.add_child(header)
 	heading = Label.new(); heading.theme_type_variation = "PanelTitle"; heading.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	heading.mouse_filter = Control.MOUSE_FILTER_IGNORE; header.add_child(heading)
-	close_button = Button.new(); close_button.text = "×"; close_button.tooltip_text = "Close"; close_button.custom_minimum_size = Vector2(32,32)
+	close_button = Button.new(); close_button.set_meta("shell_close", true); close_button.tooltip_text = "Close"; close_button.custom_minimum_size = Vector2(32,32)
 	close_button.theme_type_variation = "IconAction"; close_button.pressed.connect(close); header.add_child(close_button)
 	header.gui_input.connect(func(event: InputEvent):
 		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed and not window.is_embedded() and DisplayServer.has_feature(DisplayServer.FEATURE_WINDOW_DRAG):

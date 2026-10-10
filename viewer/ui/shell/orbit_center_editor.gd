@@ -44,7 +44,7 @@ func setup(owner_viewer) -> void:
 	var header := HBoxContainer.new(); box.add_child(header)
 	var title := Label.new(); title.text = "Edit orbit center"; title.size_flags_horizontal = Control.SIZE_EXPAND_FILL; header.add_child(title)
 	details_toggle = Button.new(); header.add_child(details_toggle)
-	var close := Button.new(); close.text = "×"; close.tooltip_text = "Cancel and restore the previous view"; close.pressed.connect(dismiss); header.add_child(close)
+	viewer.shell.close_action(header, dismiss, "Cancel and restore the previous view")
 	readout = Label.new(); readout.add_theme_font_size_override("font_size",12)
 	readout.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; box.add_child(readout)
 	details = VBoxContainer.new(); details.add_theme_constant_override("separation",8); box.add_child(details)

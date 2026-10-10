@@ -1,0 +1,51 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+DIALOG CLOSE: 759 checks; 8 failures
+ERROR: global-dark-1440: mouse hover
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://ui/shell/test_dialog_close.gd:15)
+       [1] tool_case (res://ui/shell/test_dialog_close.gd:85)
+       [2] settle (res://ui/shell/test_dialog_close.gd:18)
+ERROR: global-dark-1440: click dismisses and restores initiator
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://ui/shell/test_dialog_close.gd:15)
+       [1] tool_case (res://ui/shell/test_dialog_close.gd:88)
+       [2] settle (res://ui/shell/test_dialog_close.gd:18)
+ERROR: global-dark-970: mouse hover
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://ui/shell/test_dialog_close.gd:15)
+       [1] tool_case (res://ui/shell/test_dialog_close.gd:85)
+       [2] settle (res://ui/shell/test_dialog_close.gd:18)
+ERROR: global-dark-970: click dismisses and restores initiator
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://ui/shell/test_dialog_close.gd:15)
+       [1] tool_case (res://ui/shell/test_dialog_close.gd:88)
+       [2] settle (res://ui/shell/test_dialog_close.gd:18)
+ERROR: global-light-1440: mouse hover
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://ui/shell/test_dialog_close.gd:15)
+       [1] tool_case (res://ui/shell/test_dialog_close.gd:85)
+       [2] settle (res://ui/shell/test_dialog_close.gd:18)
+ERROR: global-light-1440: click dismisses and restores initiator
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://ui/shell/test_dialog_close.gd:15)
+       [1] tool_case (res://ui/shell/test_dialog_close.gd:88)
+       [2] settle (res://ui/shell/test_dialog_close.gd:18)
+ERROR: global-light-970: mouse hover
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://ui/shell/test_dialog_close.gd:15)
+       [1] tool_case (res://ui/shell/test_dialog_close.gd:85)
+       [2] settle (res://ui/shell/test_dialog_close.gd:18)
+ERROR: global-light-970: click dismisses and restores initiator
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://ui/shell/test_dialog_close.gd:15)
+       [1] tool_case (res://ui/shell/test_dialog_close.gd:88)
+       [2] settle (res://ui/shell/test_dialog_close.gd:18)
