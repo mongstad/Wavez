@@ -106,6 +106,8 @@ var free_look_last_mouse := Vector2.ZERO
 var cursor_idle_hidden := false
 var cursor_last_activity_msec := 0
 var manual_orbit_keys := {}
+var camera_roll_keys := {}
+var camera_vertical_keys := {}
 var manual_orbit_direction := 0.0
 var manual_orbit_axis := Vector3.UP
 var manual_orbit_start_basis := Basis.IDENTITY
@@ -395,6 +397,8 @@ func _process(delta: float) -> void:
 	_update_render_pacing()
 	if not offline_instance: _cursor_idle_tick(Time.get_ticks_msec(), _cursor_idle_eligible())
 	_update_manual_orbit(delta)
+	_update_camera_roll(delta)
+	_update_camera_vertical_keys()
 	var started := Profile.begin()
 	_process_profiled(delta)
 	Profile.end("process_inclusive",started)
@@ -409,7 +413,8 @@ func _update_render_pacing() -> void:
 	# Godot still processes input, workers and UI; it draws when render state
 	# changes. Intentional paused orbit still draws, with bounded presentation
 	# demand. Neither policy changes the recorded clock or camera speed.
-	var camera_animating := orbit_enabled and not _camera_dragging() and orbit_speed != 0.0
+	var rolling := free_camera and (camera_roll_keys.has("roll_camera_left") != camera_roll_keys.has("roll_camera_right"))
+	var camera_animating := rolling or (orbit_enabled and not _camera_dragging() and orbit_speed != 0.0)
 	# Only an opened, explicitly playing source needs continuous render pacing.
 	var active_playback := playing and generic_reader != null
 	OS.low_processor_usage_mode = bool(_previous_low_processor_mode) or (not active_playback and not camera_animating)
@@ -547,12 +552,14 @@ func _input(event: InputEvent) -> void:
 		_cursor_idle_reset()
 	if event is InputEventKey and not event.pressed: _release_camera_speed_key(event)
 	if event is InputEventKey: _release_manual_orbit_key(event)
+	if event is InputEventKey: _release_camera_roll_key(event)
+	if event is InputEventKey: _release_camera_vertical_key(event)
 	# A release over any chrome must still end a viewport drag, including preferences.
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
 		dragging = false
 		resizing_panel = false
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed and free_look_dragging:
-		_clear_manual_navigation()
+		_clear_manual_navigation(false)
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and not event.pressed:
 		_set_free_look_dragging(false)
 	if shell != null and shell.editing_shortcuts():
@@ -589,13 +596,13 @@ func _unhandled_input(event: InputEvent) -> void:
 			if mouse_button.pressed:
 				var focused := get_viewport().gui_get_focus_owner()
 				if focused != null: focused.release_focus()
-				_clear_manual_navigation()
+				_clear_manual_navigation(false)
 			dragging = mouse_button.pressed
 			last_mouse = mouse_button.position
 		elif mouse_button.button_index == MOUSE_BUTTON_RIGHT and mouse_button.pressed and shell.edge_reveal.is_viewport_point(mouse_button.position) and not dragging:
 			var focused := get_viewport().gui_get_focus_owner()
 			if focused != null: focused.release_focus()
-			_clear_manual_navigation()
+			_clear_manual_navigation(false)
 			_take_manual_camera_control()
 			_set_free_look_dragging(true)
 			free_look_last_mouse = mouse_button.position
@@ -637,10 +644,75 @@ func _steer_camera(movement: Vector2) -> void:
 	camera_target = camera.position - camera.basis.z * camera_distance
 	_adopt_camera_basis()
 
-func _clear_manual_navigation() -> void:
+func _clear_manual_navigation(clear_vertical: bool = true) -> void:
 	_set_free_look_dragging(false)
 	manual_orbit_keys.clear()
 	manual_orbit_direction = 0.0
+	camera_roll_keys.clear()
+	# Viewport mouse gestures retain held translation, like physical W/A/S/D.
+	# Focus loss, modal/recovery actions and capture replacement discard it.
+	if clear_vertical: camera_vertical_keys.clear()
+
+func _camera_vertical_input_allowed() -> bool:
+	return not (offline_instance or inspection_busy or inspection_paused or shell.editing_shortcuts() or get_viewport().gui_get_focus_owner() != null or (shell.orbit_editor != null and shell.orbit_editor.visible)) and (free_camera or orbit_enabled)
+
+func _start_camera_vertical_move(action: String, event: InputEventKey) -> void:
+	if _camera_vertical_input_allowed(): camera_vertical_keys[action] = event.duplicate()
+
+func _release_camera_vertical_key(event: InputEventKey) -> void:
+	if event.keycode in [KEY_SHIFT, KEY_CTRL, KEY_ALT, KEY_META]:
+		camera_vertical_keys.clear() # The held shortcut chord changed.
+	elif not event.pressed:
+		for action in camera_vertical_keys.keys():
+			var held: InputEventKey = camera_vertical_keys[action]
+			var same_key := event.physical_keycode == held.physical_keycode if event.physical_keycode != 0 and held.physical_keycode != 0 else event.keycode == held.keycode
+			if same_key: camera_vertical_keys.erase(action)
+
+func _update_camera_vertical_keys() -> void:
+	if camera_vertical_keys.is_empty(): return
+	if not _camera_vertical_input_allowed():
+		camera_vertical_keys.clear(); return
+	for action in camera_vertical_keys.keys():
+		if shell.shortcuts.active[action] != shell.shortcuts.binding(camera_vertical_keys[action]): camera_vertical_keys.erase(action)
+
+func _start_camera_roll(action: String, event: InputEventKey) -> void:
+	if offline_instance or inspection_busy or inspection_paused or _camera_dragging() or shell.editing_shortcuts() or get_viewport().gui_get_focus_owner() != null: return
+	if shell.orbit_editor != null and shell.orbit_editor.visible: return
+	# Match manual steering's Auto Orbit takeover, preserving Free Camera when
+	# Auto Orbit is already off. A disabled Free Camera does not accept roll.
+	_take_manual_camera_control()
+	if not free_camera: return
+	camera_roll_keys[action] = event.duplicate()
+
+func _release_camera_roll_key(event: InputEventKey) -> void:
+	if event.keycode in [KEY_SHIFT, KEY_CTRL, KEY_ALT, KEY_META]:
+		camera_roll_keys.clear()
+	elif not event.pressed:
+		for action in camera_roll_keys.keys():
+			var held: InputEventKey = camera_roll_keys[action]
+			var same_key := event.physical_keycode == held.physical_keycode if event.physical_keycode != 0 and held.physical_keycode != 0 else event.keycode == held.keycode
+			if same_key: camera_roll_keys.erase(action)
+
+func _update_camera_roll(delta: float) -> void:
+	if camera_roll_keys.is_empty(): return
+	if offline_instance or inspection_busy or inspection_paused or not free_camera or _camera_dragging() or shell.editing_shortcuts() or get_viewport().gui_get_focus_owner() != null or (shell.orbit_editor != null and shell.orbit_editor.visible):
+		camera_roll_keys.clear(); return
+	for action in camera_roll_keys.keys():
+		if shell.shortcuts.active[action] != shell.shortcuts.binding(camera_roll_keys[action]): camera_roll_keys.erase(action)
+	var direction := float(camera_roll_keys.has("roll_camera_left")) - float(camera_roll_keys.has("roll_camera_right"))
+	if direction == 0.0: return
+	_take_manual_camera_control()
+	# Camera-local +Z banks left: view-up moves toward view-left. Only the
+	# camera basis changes; its position, forward, target and radius stay fixed.
+	var previous_pose := camera.transform
+	camera.basis = (camera.basis * Basis(Vector3.BACK, direction * delta * deg_to_rad(float(shell.shortcuts.camera_roll_speed)))).orthonormalized()
+	_adopt_camera_basis()
+	if shell.orbit_editor != null: shell.orbit_editor.carry_camera_roll(previous_pose)
+	# A simultaneously held orbit retains its captured axis but must carry the
+	# new bank into its next incremental step instead of replaying an old basis.
+	if manual_orbit_direction != 0.0:
+		manual_orbit_start_basis = camera.basis
+		manual_orbit_angle = 0.0
 
 func _set_free_look_dragging(active: bool) -> void:
 	free_look_dragging = active
@@ -743,6 +815,10 @@ func _dispatch_shortcut(action: String, event: InputEventKey = null) -> void:
 		"increase_camera_speed", "decrease_camera_speed": _adjust_camera_speed(action)
 		"orbit_camera_left", "orbit_camera_right":
 			if event != null: _start_manual_orbit(action, event)
+		"roll_camera_left", "roll_camera_right":
+			if event != null: _start_camera_roll(action, event)
+		"move_camera_up", "move_camera_down":
+			if event != null: _start_camera_vertical_move(action, event)
 		"frame_scene": _focus_activity()
 		"navigate": shell.navigation.get_child(2).show_popup()
 		"play_pause":
@@ -1306,9 +1382,11 @@ func _step_frame(direction: int) -> void:
 	_timeline_changed(clampi(current_index + direction, 0, maxi(0, frame_count - 1)))
 
 func _move_free_camera(delta: float) -> void:
+	_update_camera_vertical_keys()
 	if shell != null and shell.editing_shortcuts(): return
 	if get_viewport().gui_get_focus_owner() != null: return
-	var move := Vector3(float(Input.is_physical_key_pressed(KEY_D)) - float(Input.is_physical_key_pressed(KEY_A)), float(Input.is_physical_key_pressed(KEY_E)) - float(Input.is_physical_key_pressed(KEY_Q)), float(Input.is_physical_key_pressed(KEY_S)) - float(Input.is_physical_key_pressed(KEY_W)))
+	var vertical := float(camera_vertical_keys.has("move_camera_up")) - float(camera_vertical_keys.has("move_camera_down"))
+	var move := Vector3(float(Input.is_physical_key_pressed(KEY_D)) - float(Input.is_physical_key_pressed(KEY_A)), vertical, float(Input.is_physical_key_pressed(KEY_S)) - float(Input.is_physical_key_pressed(KEY_W)))
 	if move == Vector3.ZERO:return
 	if orbit_enabled:
 		# A movement key exits Auto Orbit and moves on this same process tick.
@@ -1366,6 +1444,8 @@ func _apply_preset(name: String) -> void:
 	_restyle()
 
 func _open_scene(path: String) -> void:
+	camera_roll_keys.clear()
+	camera_vertical_keys.clear()
 	shell.dismiss_orbit_editor()
 	# Interactive display validates structure; offline exports retain payload SHA checks.
 	# Full-capture integrity verification is the separate tools/verify_wvz.py workflow.

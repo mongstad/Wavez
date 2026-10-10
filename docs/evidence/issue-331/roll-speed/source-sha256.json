@@ -1,0 +1,12 @@
+{
+  "viewer/main.gd": "b022255b301b5c7c5045a515dbacbdf79fc026a15693577dff2cb1a320839d86",
+  "viewer/ui/keyboard_shortcuts.gd": "5eabf5f138f81060da43a78706bda2c3bd03c97cec33f7a43435ad2f21e7455f",
+  "viewer/ui/shell/keyboard_shortcuts_editor.gd": "7166025e61350da1737c7e304450774c475fd98945ec95204256282a3cbbc8ba",
+  "viewer/ui/shell/orbit_center_editor.gd": "259d56c6fb17c2201028ad90ef0ef3bc60d31dd05e91199620d94653ec513efc",
+  "viewer/scene/test_camera_roll.gd": "a52108d2fdbf504b8c66e8f29b0028c464e79c71453ab854cf097c20ae72c89c",
+  "viewer/scene/run_camera_roll_tests.gd": "bfa0ffabb8d3a5f545cd316bbe19c3e13b7faee0c5f7f4b75a94454a194a6a00",
+  "viewer/ui/shell/test_keyboard_shortcuts.gd": "d510eadcbef24936729c888434af2d7dca4cd5efc348a1347b71fd023ffcba42",
+  "tools/validate_camera_roll.py": "602300b11d781f35f6fa450fc478fba2b9322cc7efcc70d34b3f4aea8c221a9b",
+  "tools/validate_keyboard_shortcuts.py": "a02dbe75e900698bdefd1d42cad9d81d0eea2326e98ed6c53677dc3009a5eb67",
+  "tools/validate_camera_tumble.py": "733b8c7748f2c952bb6bb86cf87e8eed1bafa918aa1c452964ed977343f3c9e5"
+}

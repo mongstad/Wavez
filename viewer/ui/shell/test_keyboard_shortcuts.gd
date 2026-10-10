@@ -102,11 +102,14 @@ func check_groups(dialog) -> void:
 	for category in expected:
 		var group = dialog.groups[category]
 		check(group.theme_type_variation == "TitledGroup" and group.title_label.text == category and dialog.scroller.is_ancestor_of(group), category + " uses the shared scrolling titled group")
-		check(group.body.get_child_count() == expected[category].size(), category + " has exactly its catalog actions")
+		var extra := 1 if category == "Navigation" else 0
+		check(group.body.get_child_count() == expected[category].size()+extra, category + " has its catalog actions and only the shared Navigation speed row")
+		var row_index := 0
 		for index in expected[category].size():
 			var id: String = expected[category][index]
 			var row: HBoxContainer = dialog.rows[id].key.get_parent()
-			check(row.get_parent() == group.body and row.get_index() == index and not seen.has(id), id + " appears once under its catalog category in catalog order")
+			check(row.get_parent() == group.body and row.get_index() == row_index and not seen.has(id), id + " appears once under its catalog category in catalog order")
+			row_index += 2 if id == "roll_camera_right" else 1
 			seen[id] = true
 	check(seen.size() == Bindings.ACTIONS.size(), "Every catalog action appears in exactly one group")
 func group_review(shell) -> void:

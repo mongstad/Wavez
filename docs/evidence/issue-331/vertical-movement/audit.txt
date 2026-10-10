@@ -1,0 +1,7 @@
+Final completed validation: {"auto-orbit-compatibility": 372, "auto-orbit-forward": 372, "auto-orbit-headless": 372, "headless": 2367, "navigation-compatibility": 1747, "navigation-forward": 1747, "navigation-headless": 1393, "package-compatibility": 2927, "package-forward": 2927, "shortcut-groups": 306, "source-compatibility": 2927, "source-forward": 2927}
+Total assertions/tests: 20386; zero assertion failures.
+Roll/movement assertions: 14075.
+Source and normal review package SHA-256 identity verified.
+Historical 82 initial and 103 roll-speed hashes verified unchanged.
+Evidence whitelist: Markdown, JSON reports, text logs, PNG screenshots; no presets, profiles, captures, binaries or caches.
+Largest evidence file: 180088 bytes.

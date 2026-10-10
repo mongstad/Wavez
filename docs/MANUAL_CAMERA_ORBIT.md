@@ -1,7 +1,15 @@
-# Free-look steering and manual camera orbit (#258)
+# Free-look steering, manual orbit and camera roll (#258, #331)
 
-Free Camera starts enabled. W/S translate forward/backward, A/D strafe and Q/E
-move vertically in the camera's current basis. Geometry has no collision barrier.
+Free Camera starts enabled. Physical W/S translate forward/backward and A/D strafe.
+**Move Camera Up** / **Move Camera Down** translate vertically in the camera's
+current basis, defaulting to logical **E** / **Q**. Their assignments are editable
+under Keyboard Shortcuts → Navigation. Geometry has no collision barrier.
+Assigning Q/E to roll transfers those keys away from vertical movement; Q/E then
+bank without translating. Rebind Up/Down to different keys for mixed flight/roll.
+Opposite movement keys cancel. Release, modifier changes, rebinding, focused
+controls, menus/dialogs, window focus loss and capture replacement discard held
+vertical movement. A stale hold does not resume after returning to the viewport.
+The movement formula, speed multiplier and rolled local axes are unchanged.
 
 Hold **RMB** in the viewport and move the mouse to steer in place. Horizontal
 motion turns the heading left/right; vertical motion looks up/down. Both axes
@@ -37,12 +45,47 @@ capture ends a held shortcut. Mouse dragging takes priority over held orbit keys
 
 RMB or an orbit key immediately disables Auto Orbit and applies manual control
 on that same input. Auto Orbit remains off after release until explicitly
-re-enabled. W/A/S/D/Q/E retains its accepted immediate transition to Free Camera.
+re-enabled. W/A/S/D and the configured vertical actions retain the immediate
+movement-tick transition to Free Camera (E/Q by default).
 LMB keeps its existing two-axis tumble and sensitivity; it still temporarily
 suspends Auto Orbit while held. The [Invert Y Axis preference](LMB_Y_INVERSION.md)
 reverses only LMB vertical drag when enabled, with an On/Off toggle and hotkey
 in Keyboard Shortcuts. RMB steering remains unchanged. Wheel zoom and the `+`/`-`
 translation-speed controls keep their accepted behavior.
+
+## Camera roll (#331 candidate)
+
+**Roll Camera Left** and **Roll Camera Right** are separately editable Navigation
+actions in Keyboard Shortcuts. Both start Unbound, preserving current shortcuts.
+With Free Camera enabled, hold either key to bank at **18°/second by default** about the
+camera's current local view axis. Left banks the camera up axis toward its left;
+right mirrors it. Position, forward direction, navigation target and radius stay
+fixed. Opposite keys cancel; releasing one resumes the other. The rate uses elapsed
+time and is independent of translation speed, zoom and Auto Orbit speed.
+The shared **Camera Roll Speed** slider below both assignments selects 5–90°/second
+in 1° increments; both directions always use that applied value. At the default,
+a quarter turn takes five seconds, a half turn ten and a full turn twenty.
+Apply saves speed and leaves Preferences open. Cancel/Escape/X discard drafts;
+Reset Defaults stages 18°/second. Reopening and application restart restore the
+saved value. Speed changes do not reassign keys or enter saved views/export state.
+
+Roll takes manual control from Auto Orbit using the existing steering transition
+and leaves Auto Orbit off after release. With Auto Orbit already off, roll does
+not enable a disabled Free Camera. Release, changed modifiers, window focus loss,
+focused controls, menus/dialogs, mouse dragging, inspection work, changed bindings
+and capture replacement stop a held roll. Mouse gestures retain their existing
+priority. After banking, W/A/S/D/Q/E translation and RMB steering use the rolled
+local axes. Simultaneously held manual orbit carries the new bank into its next
+step while retaining its captured orbit axis.
+Rolling after an orbit-center Apply also retains that Apply-time observer plane,
+center and radius; re-enabling Auto Orbit resumes from the banked basis.
+
+Frame Scene and reopening a capture retain the chosen orientation; Reset Camera
+intentionally restores the default heading. Portable view presets and image/video
+state already store the full transform, including bank. Offline workers ignore
+interactive key bindings. Camera roll never rotates scientific objects, world
+axes, source arrays or numerical exports. The cinematic backdrop stays fixed in
+screen coordinates while scene geometry banks.
 
 ## Camera-state synchronization
 
@@ -85,3 +128,35 @@ Current evidence: [issue #258](evidence/issue-258/README.md).
 Cursor-specific evidence: [issue #263](evidence/issue-263/README.md).
 The earlier RMB-orbit design and its results remain in the historical
 [issue #190 revision 2 report](evidence/issue-190/revision-2/README.md).
+
+## Roll owner verification (#331)
+
+1. In Keyboard Shortcuts, confirm both roll actions initially say Unbound.
+   Confirm one Camera Roll Speed slider below them, showing 18°/s on a fresh
+   profile, with 5/90 limits and 1° arrow-key increments. Bind unused keys, Apply,
+   close the editor, and hold each with Free Camera on for about five seconds.
+   Check smooth opposite banks, immediate release, 90°/180°/360° orientation,
+   stable position/heading and cancellation when both directions are held.
+2. After banking 90°, fly with W/A/S/D/Q/E and steer with RMB. Controls should
+   follow the banked camera axes. Check LMB tumble, wheel zoom, held orbit,
+   Auto Orbit takeover, Frame Scene, Reset Camera and orbit-center Apply/Cancel.
+3. Apply a different speed; reopen and restart to check its value and equal
+   left/right banking. Change speed alone and confirm assignments stay intact.
+   Cancel/Escape/X must discard speed drafts; Reset Defaults stages 18°/s and
+   applies only when requested. Rebind, Clear and transfer a conflicting key.
+   Test focus in text/numeric fields, the shortcut/orbit editors, menus and
+   alt-tab. No pending hold should resume after these interruptions or opening
+   another capture. Check Dark/Light and fullscreen.
+   Assign Q/E to roll: Up/Down should become Unbound and rolling must not move
+   vertically. Rebind Up/Down to other keys and check held camera-local movement,
+   opposite keys, release, mixed movement/roll and restart. Clear and Reset
+   Defaults must use the same draft workflow, restoring E-up/Q-down on Apply.
+4. Repeat in representative particle, field, mesh and mixed captures. Save/load
+   a banked view preset and review an image/video made with the fixed camera.
+   Scientific coordinates, time selection and numerical outputs should stay
+   unchanged. Assess physical key feel on the owner's KDE/Wayland setup.
+
+Current refinement evidence and practical limits:
+[issue #331 vertical movement](evidence/issue-331/vertical-movement/README.md).
+The [roll-speed report](evidence/issue-331/roll-speed/README.md) and
+[initial roll report](evidence/issue-331/README.md) are retained unchanged.

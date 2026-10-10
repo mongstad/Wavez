@@ -1,0 +1,15 @@
+extends SceneTree
+const Viewer = preload("res://main.gd")
+const Visual = preload("res://scene/visual_state.gd")
+func _initialize() -> void: run.call_deferred()
+func run() -> void:
+	var live = Viewer.new(); root.add_child(live); live.set_process(false)
+	for i in 5:
+		var offline = Viewer.new(); offline.offline_instance = true; root.add_child(offline); offline.set_process(false)
+		Visual.apply(offline,Visual.snapshot(live)); offline.queue_free()
+	for i in 4: await process_frame
+	RenderingServer.force_draw(false)
+	live.queue_free(); await process_frame
+	RenderingServer.force_draw(false); await process_frame
+	print("ACCEPTED MAIN: five export-style viewer lifecycles completed")
+	quit()

@@ -288,10 +288,11 @@ current navigation modes. A loaded view preset may explicitly restore either
 mode; an inspection recipe restores its saved Auto orbit setting, while Free
 camera is session-only. Shortcut preferences store bindings, not mode states.
 The Navigate menu retains both toggles. While Auto orbit is on, free-camera
-translation pauses. Any W/A/S/D/Q/E key turns Auto orbit off and applies that
+translation pauses. W/A/S/D or a configured vertical movement key (E/Q by default)
+turns Auto orbit off and applies that
 keypress as normal free-camera movement immediately, even if Free camera was
 previously toggled off. If F is assigned to Free Camera, its prior Frame Scene
-binding becomes Unbound; one key event invokes one action.
+binding becomes Unbound; one key event invokes one configurable action.
 
 Left-drag supports continuous yaw/pitch revolutions with no pitch clamp.
 Right-drag steers the camera heading in place on both axes, independent of
@@ -303,6 +304,23 @@ RMB or either orbit key immediately disables Auto Orbit until explicitly
 re-enabled. Steering synchronizes the navigation target one existing radius
 ahead along the new heading without moving the camera or scientific geometry.
 See [camera navigation](MANUAL_CAMERA_ORBIT.md) for interaction and owner checks.
+The #331 candidate adds separately configurable Roll Camera Left/Right actions,
+also Unbound by default. Hold them in Free Camera to bank about the local view
+axis at 18°/second by default without changing position or forward direction.
+The shared Camera Roll Speed slider below both shortcut assignments selects
+5–90°/second in 1° increments, equally for left and right. Apply saves/activates
+it; Cancel/Escape/X discard drafts and Reset Defaults stages 18°/second.
+The applied value persists across restarts. A default quarter turn takes five
+seconds. After banking,
+translation and RMB steering remain camera-relative; Frame Scene and saved views
+retain the orientation, while Reset Camera intentionally clears it.
+Move Camera Up/Down are also configurable under Navigation, defaulting to E/Q.
+Assigning those keys to roll unbinds vertical movement, so a Q/E roll cannot
+also translate the camera. Apply/Cancel/Escape/X, Clear, Reset Defaults and
+restart use the same shortcut workflow. W/A/S/D remain physical keys; the
+configured vertical actions use logical keys/modifiers and the existing held
+camera-local translation rate. Release, focus/modal interruption, rebinding and
+capture replacement discard pending vertical holds.
 During left-drag tumble, horizontal motion rotates about world Y and vertical
 motion rotates about the current camera right axis. The camera up axis follows
 that tumble, including upside-down views, without a world-up flip at either pole.
@@ -310,7 +328,7 @@ F (Frame Scene) recomputes a center and radius from the current particles,
 fields and meshes while keeping the camera's orientation. R (Reset Camera)
 uses the same current-scene bounds but restores the default yaw/pitch and clears
 the view-relative orbit basis. Both leave scientific coordinates and the Free
-Camera / Auto Orbit modes alone. Wheel zoom and free-camera WASD/Q/E movement
+Camera / Auto Orbit modes alone. Wheel zoom and free-camera movement
 continue from either framed view. O toggles automatic world-Y orbit; manual
 dragging temporarily suspends its motion. A movement key exits Auto Orbit before
 translating the camera on that same press. See [Auto Orbit](AUTO_ORBIT.md).

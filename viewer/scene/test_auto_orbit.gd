@@ -38,7 +38,7 @@ func check_world(poses: Dictionary, label: String) -> void:
 	for node in poses:
 		check(is_instance_valid(node) and node.global_transform == poses[node], label + ": " + node.name)
 func move_key(viewer, keycode: Key, delta: float) -> void:
-	var event := InputEventKey.new(); event.physical_keycode = keycode; event.pressed = true
+	var event := InputEventKey.new(); event.keycode = keycode; event.physical_keycode = keycode; event.pressed = true
 	Input.parse_input_event(event); Input.flush_buffered_events()
 	viewer.scene_layers.tick(delta)
 	event = event.duplicate(); event.pressed = false

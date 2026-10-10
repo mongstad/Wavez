@@ -22,7 +22,7 @@ func sample() -> int:
 func run() -> void:
 	var view = Viewer.new()
 	root.add_child(view)
-	check(view.generic_reader == null and view.playing, "Fresh viewer has no capture")
+	check(view.generic_reader == null and not view.playing, "Fresh viewer has no capture and is paused")
 	var empty_draws := await sample()
 	check(OS.low_processor_usage_mode and empty_draws <= 3, "Empty viewer draws only when its presentation changes")
 	view.orbit_enabled = true

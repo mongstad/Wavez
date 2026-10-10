@@ -5,6 +5,7 @@ const TitledGroup = preload("res://ui/shell/titled_group.gd")
 var shell
 var staged := {}
 var staged_invert_y_axis := false
+var staged_roll_speed := Bindings.DEFAULT_CAMERA_ROLL_SPEED
 var listening := ""
 var panel: PanelContainer
 var scroller: ScrollContainer
@@ -18,6 +19,8 @@ var close_button: Button
 var previous_focus: WeakRef
 var reset: Button
 var invert_y_toggle: CheckButton
+var roll_speed_slider: HSlider
+var roll_speed_value: Label
 var focus_order: Array[Control] = []
 
 func setup(owner_shell) -> void:
@@ -62,11 +65,23 @@ func setup(owner_shell) -> void:
 		clear.pressed.connect(clear_binding.bind(action[0])); row.add_child(clear)
 		clear.focus_entered.connect(_keep_focus_outline_visible.bind(clear))
 		rows[action[0]] = {"key":key, "clear":clear, "label":label}
+		if action[0] == "roll_camera_right":
+			var speed_row := HBoxContainer.new(); speed_row.add_theme_constant_override("separation", 8)
+			groups[category].body.add_child(speed_row)
+			var speed_label := Label.new(); speed_label.text = "Camera Roll Speed"
+			speed_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL; speed_label.clip_text = true; speed_row.add_child(speed_label)
+			roll_speed_slider = HSlider.new(); roll_speed_slider.name = "CameraRollSpeed"
+			roll_speed_slider.min_value = Bindings.MIN_CAMERA_ROLL_SPEED; roll_speed_slider.max_value = Bindings.MAX_CAMERA_ROLL_SPEED
+			roll_speed_slider.step = 1; roll_speed_slider.custom_minimum_size = Vector2(96, 32)
+			roll_speed_slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL; speed_row.add_child(roll_speed_slider)
+			roll_speed_slider.value_changed.connect(func(value): staged_roll_speed = int(value); listening = ""; notice.hide(); refresh_rows())
+			roll_speed_slider.focus_entered.connect(_keep_focus_outline_visible.bind(roll_speed_slider))
+			roll_speed_value = Label.new(); roll_speed_value.custom_minimum_size.x = 56; speed_row.add_child(roll_speed_value)
 	notice = Label.new(); notice.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	notice.theme_type_variation = "PropertyLabel"; box.add_child(notice); notice.hide()
 	footer = HBoxContainer.new(); footer.add_theme_constant_override("separation", 8); box.add_child(footer)
 	reset = Button.new(); reset.text = "Reset Defaults"; footer.add_child(reset)
-	reset.pressed.connect(func(): staged = Bindings.defaults(); staged_invert_y_axis = false; listening = ""; notice.hide(); refresh_rows())
+	reset.pressed.connect(func(): staged = Bindings.defaults(); staged_invert_y_axis = false; staged_roll_speed = Bindings.DEFAULT_CAMERA_ROLL_SPEED; listening = ""; notice.hide(); refresh_rows())
 	var space := Control.new(); space.size_flags_horizontal = Control.SIZE_EXPAND_FILL; footer.add_child(space)
 	cancel = Button.new(); cancel.text = "Cancel"; cancel.pressed.connect(dismiss); footer.add_child(cancel)
 	apply_button = Button.new(); apply_button.text = "Apply"; apply_button.theme_type_variation = "PrimaryButton"; apply_button.disabled = true
@@ -91,6 +106,7 @@ func open() -> void:
 	previous_focus = weakref(focused) if focused != null else null
 	staged = shell.shortcuts.active.duplicate(); listening = ""
 	staged_invert_y_axis = shell.shortcuts.invert_y_axis
+	staged_roll_speed = shell.shortcuts.camera_roll_speed
 	notice.hide()
 	refresh_rows(); scroller.scroll_vertical = 0; show(); fit(); fit.call_deferred()
 	rows.reset_camera.key.grab_focus()
@@ -110,13 +126,15 @@ func commit() -> void:
 	for action in staged:
 		if staged[action] != shell.shortcuts.active.get(action, 0): changed.append(action)
 	var inversion_changed: bool = staged_invert_y_axis != shell.shortcuts.invert_y_axis
-	var error: Error = shell.shortcuts.apply(staged, staged_invert_y_axis)
+	var speed_changed: bool = staged_roll_speed != shell.shortcuts.camera_roll_speed
+	var error: Error = shell.shortcuts.apply(staged, staged_invert_y_axis, staged_roll_speed)
 	if error != OK:
-		notice.text = "Could not save shortcuts: " + error_string(error) + ". Current bindings are unchanged."
+		notice.text = "Could not save preferences: " + error_string(error) + ". Current settings are unchanged."
 		notice.show(); fit.call_deferred()
 		return
 	if shell.viewer.session_log != null:
 		if inversion_changed: shell.viewer.session_log.record("CONTROL", "Invert Y Axis = %s" % shell.shortcuts.invert_y_axis)
+		if speed_changed: shell.viewer.session_log.record("CONTROL", "Camera Roll Speed = %d°/s" % shell.shortcuts.camera_roll_speed)
 		for action in changed:
 			shell.viewer.session_log.record("CONTROL", "Shortcut %s = %s" % [action, Bindings.text(shell.shortcuts.active[action])])
 	shell.refresh_shortcut_hints()
@@ -131,7 +149,9 @@ func clear_binding(action: String) -> void:
 	listening = ""; staged[action] = 0; notice.hide(); refresh_rows()
 
 func refresh_rows() -> void:
-	apply_button.disabled = staged == shell.shortcuts.active and staged_invert_y_axis == shell.shortcuts.invert_y_axis
+	apply_button.disabled = staged == shell.shortcuts.active and staged_invert_y_axis == shell.shortcuts.invert_y_axis and staged_roll_speed == shell.shortcuts.camera_roll_speed
+	roll_speed_slider.set_value_no_signal(staged_roll_speed)
+	roll_speed_value.text = "%d°/s" % staged_roll_speed
 	invert_y_toggle.set_pressed_no_signal(staged_invert_y_axis)
 	invert_y_toggle.text = "On" if staged_invert_y_axis else "Off"
 	focus_order.assign([close_button])
@@ -144,6 +164,7 @@ func refresh_rows() -> void:
 		if action == "toggle_invert_y_axis": focus_order.append(invert_y_toggle)
 		focus_order.append(row.key)
 		if not row.clear.disabled: focus_order.append(row.clear)
+		if action == "roll_camera_right": focus_order.append(roll_speed_slider)
 	focus_order.append_array([reset, cancel])
 	if not apply_button.disabled: focus_order.append(apply_button)
 	for index in focus_order.size():

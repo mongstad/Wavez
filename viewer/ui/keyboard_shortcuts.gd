@@ -2,6 +2,9 @@ extends RefCounted
 ## Application preferences only. No InputMap, scientific state or export serialization.
 const PATH := "user://keyboard_shortcuts.cfg"
 const MODIFIERS := KEY_MASK_CTRL | KEY_MASK_SHIFT | KEY_MASK_ALT | KEY_MASK_META
+const DEFAULT_CAMERA_ROLL_SPEED := 18
+const MIN_CAMERA_ROLL_SPEED := 5
+const MAX_CAMERA_ROLL_SPEED := 90
 const ACTIONS := [
 	["reset_camera", "Reset Camera", "Navigation", KEY_R],
 	["auto_orbit", "Auto Orbit", "Navigation", KEY_O],
@@ -9,8 +12,12 @@ const ACTIONS := [
 	["toggle_invert_y_axis", "Toggle Invert Y Axis", "Navigation", 0],
 	["increase_camera_speed", "Increase Camera Movement Speed", "Navigation", KEY_PLUS],
 	["decrease_camera_speed", "Decrease Camera Movement Speed", "Navigation", KEY_MINUS],
+	["move_camera_up", "Move Camera Up", "Navigation", KEY_E],
+	["move_camera_down", "Move Camera Down", "Navigation", KEY_Q],
 	["orbit_camera_left", "Orbit Camera Left", "Navigation", 0],
 	["orbit_camera_right", "Orbit Camera Right", "Navigation", 0],
+	["roll_camera_left", "Roll Camera Left", "Navigation", 0],
+	["roll_camera_right", "Roll Camera Right", "Navigation", 0],
 	["frame_scene", "Frame Scene", "Navigation", KEY_F],
 	["navigate", "Navigate", "Navigation", KEY_N | KEY_MASK_ALT],
 	["play_pause", "Play Pause", "Playback", KEY_SPACE],
@@ -35,6 +42,10 @@ const ACTIONS := [
 var storage_path := PATH
 var active := defaults()
 var invert_y_axis := false
+var camera_roll_speed := DEFAULT_CAMERA_ROLL_SPEED # degrees per second, shared by both directions
+
+static func valid_roll_speed(value: Variant) -> bool:
+	return value is int and value >= MIN_CAMERA_ROLL_SPEED and value <= MAX_CAMERA_ROLL_SPEED
 
 static func defaults() -> Dictionary:
 	var result := {}
@@ -74,12 +85,17 @@ static func normalized(map: Dictionary) -> Dictionary:
 	for action in ACTIONS:
 		var value: Variant = map.get(action[0], action[3])
 		if valid_binding(value): result[action[0]] = value
-	# Deterministic last catalog entry wins for a manually edited duplicate profile.
+	# Saved assignments take priority over missing-action defaults, so adding an
+	# action never steals an existing key. Explicit duplicates still use catalog order.
 	var seen := {}
 	for action in ACTIONS:
 		var value: int = result[action[0]]
 		if value == 0: continue
-		if seen.has(value): result[seen[value]] = 0
+		if seen.has(value):
+			var previous: String = seen[value]
+			if not (map.has(action[0]) and valid_binding(map[action[0]])) and map.has(previous) and valid_binding(map[previous]):
+				result[action[0]] = 0; continue
+			result[previous] = 0
 		seen[value] = action[0]
 	return result
 
@@ -90,21 +106,26 @@ func load_preferences() -> Error:
 	if error != OK: return error
 	var saved := {}
 	for action in ACTIONS:
-		saved[action[0]] = config.get_value("shortcuts", action[0], action[3])
+		if config.has_section_key("shortcuts", action[0]): saved[action[0]] = config.get_value("shortcuts", action[0])
 	active = normalized(saved)
 	var inverted: Variant = config.get_value("navigation", "invert_y_axis", false)
 	invert_y_axis = inverted if inverted is bool else false
+	var speed: Variant = config.get_value("navigation", "camera_roll_speed", DEFAULT_CAMERA_ROLL_SPEED)
+	camera_roll_speed = speed if valid_roll_speed(speed) else DEFAULT_CAMERA_ROLL_SPEED
 	return OK
 
-func apply(map: Dictionary, inverted: Variant = null) -> Error:
+func apply(map: Dictionary, inverted: Variant = null, roll_speed: Variant = null) -> Error:
 	if inverted != null and not inverted is bool: return ERR_INVALID_DATA
+	if roll_speed != null and not valid_roll_speed(roll_speed): return ERR_INVALID_DATA
 	for action in ACTIONS:
 		if not map.has(action[0]) or not valid_binding(map[action[0]]): return ERR_INVALID_DATA
 	var candidate := normalized(map)
 	var candidate_inversion: bool = invert_y_axis if inverted == null else inverted
+	var candidate_speed: int = camera_roll_speed if roll_speed == null else roll_speed
 	var config := ConfigFile.new()
 	for action in ACTIONS: config.set_value("shortcuts", action[0], candidate[action[0]])
 	config.set_value("navigation", "invert_y_axis", candidate_inversion)
+	config.set_value("navigation", "camera_roll_speed", candidate_speed)
 	# Do not activate a map that could not be persisted; keep the prior file intact.
 	var temporary := storage_path + ".tmp"
 	var error := config.save(temporary)
@@ -115,6 +136,7 @@ func apply(map: Dictionary, inverted: Variant = null) -> Error:
 		return error
 	active = candidate
 	invert_y_axis = candidate_inversion
+	camera_roll_speed = candidate_speed
 	return OK
 
 func match_action(event: InputEventKey) -> String:

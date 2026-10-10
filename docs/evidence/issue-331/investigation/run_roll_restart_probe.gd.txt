@@ -1,0 +1,3 @@
+extends SceneTree
+func _initialize() -> void:
+	root.add_child.call_deferred(preload("res://scene/roll_restart_node_probe.gd").new())

@@ -265,6 +265,14 @@ func commit() -> void:
 func matches_applied_orbit() -> bool:
 	return not applied_orbit.is_empty() and viewer.camera.transform == applied_orbit.pose and viewer.camera_target == applied_orbit.center and viewer.camera_distance == applied_orbit.radius
 
+func carry_camera_roll(previous_pose: Transform3D) -> void:
+	if applied_orbit.is_empty() or previous_pose != applied_orbit.pose or viewer.camera_target != applied_orbit.center or viewer.camera_distance != applied_orbit.radius: return
+	# Banking changes screen-up, not the Apply-time observer plane or orbit
+	# distance. Resume that plane from the banked basis without a horizon snap.
+	applied_orbit.basis = viewer.camera.basis
+	applied_orbit.angle = 0.0
+	applied_orbit.pose = viewer.camera.transform
+
 func zoom_orbit(step: float, inward: bool) -> bool:
 	if not viewer.orbit_enabled or not matches_applied_orbit(): return false
 	# A chosen point can be inside the scene's framing sphere. Its orbit only

@@ -1,0 +1,10 @@
+{
+	"checks": 9,
+	"display": "X11",
+	"failures": [],
+	"layouts": [],
+	"measurements": [],
+	"packaged": false,
+	"renderer": "gl_compatibility",
+	"restart": true
+}

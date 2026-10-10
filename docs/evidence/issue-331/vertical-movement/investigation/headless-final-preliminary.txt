@@ -1,0 +1,9 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+CAMERA ROLL: 2351 checks, 1 failures
+ERROR: Capture replacement discards vertical movement while E remains physically held
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:17)
+       [1] vertical_preferences (res://scene/test_camera_roll.gd:433)
+       [2] settle (res://scene/test_camera_roll.gd:20)

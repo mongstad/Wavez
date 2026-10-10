@@ -1,0 +1,8 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+CAMERA ROLL: 2346 checks, 0 failures
+SCRIPT ERROR: Invalid access to property or key 'control' on a base object of type 'Control (viewer_shell.gd)'.
+          at: vertical_preferences (res://scene/test_camera_roll.gd:429)
+          GDScript backtrace (most recent call first):
+              [0] vertical_preferences (res://scene/test_camera_roll.gd:429)
+              [1] settle (res://scene/test_camera_roll.gd:20)

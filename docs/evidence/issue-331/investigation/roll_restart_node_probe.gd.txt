@@ -1,0 +1,14 @@
+extends Node
+const Viewer = preload("res://main.gd")
+@onready var root: Window = get_tree().root
+func _ready() -> void: run.call_deferred()
+func run() -> void:
+	await get_tree().process_frame
+	var view = Viewer.new(); root.add_child(view); view.set_process(false)
+	for i in 60:
+		view.camera.basis = (view.camera.basis * Basis(Vector3.BACK,PI/120)).orthonormalized()
+		view._adopt_camera_basis()
+	view.queue_free(); await get_tree().process_frame
+	RenderingServer.force_draw(false); await get_tree().process_frame
+	print("ACCEPTED MAIN: banked Light-theme fresh-process node lifecycle completed")
+	get_tree().quit()

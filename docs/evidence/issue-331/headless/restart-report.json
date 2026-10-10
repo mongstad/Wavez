@@ -1,0 +1,9 @@
+{
+	"checks": 2,
+	"display": "headless",
+	"failures": [],
+	"measurements": [],
+	"packaged": false,
+	"renderer": "forward_plus",
+	"restart": true
+}

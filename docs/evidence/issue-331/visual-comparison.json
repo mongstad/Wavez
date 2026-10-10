@@ -1,0 +1,35 @@
+{
+  "90": {
+    "empty_backdrop_crop": [
+      80,
+      80,
+      320,
+      280
+    ],
+    "empty_backdrop_identical": true,
+    "pixels_changed": 96943,
+    "max_rgb_difference": 206
+  },
+  "180": {
+    "empty_backdrop_crop": [
+      80,
+      80,
+      320,
+      280
+    ],
+    "empty_backdrop_identical": true,
+    "pixels_changed": 107297,
+    "max_rgb_difference": 206
+  },
+  "360": {
+    "empty_backdrop_crop": [
+      80,
+      80,
+      320,
+      280
+    ],
+    "empty_backdrop_identical": true,
+    "pixels_changed": 92,
+    "max_rgb_difference": 1
+  }
+}
