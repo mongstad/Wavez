@@ -1,0 +1,8 @@
+{
+	"backend": "forward_plus",
+	"checks": 31,
+	"drawn": 5,
+	"failures": [],
+	"gpu_bytes": 12928,
+	"status": "Scene or camera changed during the gesture; repeat the pick on the current view."
+}

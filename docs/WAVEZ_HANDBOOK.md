@@ -22,6 +22,13 @@ Click it to open the desktop's native file picker, or use **File → Open file�
 The picker accepts WAVEZ Scene Format (`*.wvz`) files. Its Open, Cancel,
 bookmarks and Recent behavior follow the desktop environment.
 
+**File → Close File** unloads the capture while keeping the shell and launched
+video exports running. Viewer capture allocations become reclaimable; another
+file can be opened normally. Close File explains and refuses a close while an
+image capture, recipe preparation, selection/analysis job or matched-view job
+still depends on the session. Wait for completion and retry. See
+[the Close File contract](CLOSE_FILE.md).
+
 The right-hand Simulation panel uses Particles, Fields and Meshes categories.
 Opening a new file selects the first category present in its declared source
 objects, in **Particles → Fields → Meshes** priority order. A particle-containing

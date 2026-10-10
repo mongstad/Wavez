@@ -590,6 +590,7 @@ func build_menus(row: HBoxContainer) -> void:
 		menus[entry[0]].about_to_popup.connect(refresh_commands)
 	var file: PopupMenu = menus.File.get_popup()
 	command(file,"Open file…",viewer._show_open_dialog,"open")
+	command(file,"Close File",viewer._close_capture,"close_file")
 	command(file,"Details…",func(): status_ui.show_status(),"details")
 	var state := submenu(file,"State")
 	command(state,"Copy state",viewer._copy_inspection_state,"copy")
@@ -666,6 +667,7 @@ func refresh_commands() -> void:
 		if key.begins_with("preset:"): enabled = loaded and viewer.preset_available.get(key.trim_prefix("preset:"),true)
 		entry.popup.set_item_disabled(entry.index,not enabled)
 		entry.popup.set_item_tooltip(entry.index,"" if enabled else ("Open a compatible capture first" if not loaded else "Unavailable for the current source or state"))
+		if key == "close_file": entry.popup.set_item_tooltip(entry.index, "")
 		var checked := false
 		if key == "theme_dark": checked = appearance == null or not appearance.light
 		elif key == "theme_light": checked = appearance != null and appearance.light

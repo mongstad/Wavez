@@ -367,6 +367,63 @@ func _open_capture(path: String) -> void:
 
 var _shell_open_error := ""
 
+func _capture_close_problem() -> String:
+	# These owners reset with the capture. Retain the entire session until their
+	# completion callbacks and pinned assets no longer depend on that session.
+	if inspection_busy or screenshot_pending or screenshot_saving:
+		return "An image capture is using this scene. Wait for it to finish, then choose Close File again."
+	if video_dialog != null and video_dialog.preparing:
+		return "Video export is preparing its selection recipe. Wait for preparation to finish, then choose Close File again."
+	if selection_controller != null:
+		var jobs = selection_controller.jobs
+		if jobs.busy() or not jobs.foreground_cancel_id.is_empty():
+			return "A selection or analysis job is using this capture's session. Wait for it to finish, then choose Close File again. You can follow its progress in Jobs."
+		var matched = selection_controller.temporal.matched
+		if matched.preparing or matched.pid > 0:
+			return "Matched views are using this capture's session. Wait for them to finish, then choose Close File again. You can follow their progress in Jobs."
+	return ""
+
+func _close_capture() -> bool:
+	if generic_reader == null: return true
+	var problem := _capture_close_problem()
+	if not problem.is_empty():
+		shell.show_details("Close File unavailable", problem)
+		return false
+	var previous_path := capture_path
+	_clear_manual_navigation(); _clear_camera_speed_hold(); _cursor_idle_reset()
+	shell.dismiss_orbit_editor()
+	playing = false; orbit_enabled = false
+	tools_ui.close(false)
+	_reset_inspection_source()
+	generic_reader.close(); generic_reader = null; capture = null; capture_path = ""; reader_generation = -1
+	frame_a = null; frame_b = null; history.clear()
+	particle_count = 0; frame_count = 0; current_index = 0; phase = 0; display_accum = 0; tail_poll = 0
+	current_sizes.clear(); current_buffer.clear(); held_positions_ready = false
+	current_mm.instance_count = 0
+	for mm in trail_mms: mm.instance_count = 0
+	hidden_types.clear(); channel_signature = ""; trails_enabled = false
+	filter_values.clear(); filter_hidden_types.clear(); filter_source_generation = -1
+	color_channel = "fixed"; size_channel = "fixed"; brightness_channel = "fixed"
+	for option in [color_option, size_option, brightness_option]: _fill_options(option, ["fixed"], "fixed")
+	particle_layer_visible = true
+	video_dialog.can_start = false; video_dialog.timeline = null; video_dialog._sync_action_buttons()
+	for node in geometry_meshes.values(): node.mesh = null; node.hide()
+	geometry_label.text = "No capture loaded."
+	legend.hide(); colorbar.hide(); hud.text = ""
+	cache_label.text = "No scene loaded"
+	_timeline_guard = true; timeline.value = 0; _set_timeline_extent(); _timeline_guard = false
+	shell.transport.dragging_index = false; shell.transport.reset_requested(); shell.transport.refresh()
+	_refresh_mapping_options(); _sync_control_state()
+	shell.scroll_position = 0; shell.select_workspace(0); shell.finish_open("")
+	shell.request_layout()
+	shell.status_ui.refresh()
+	status_label.text = "No scene loaded. Open a WAVEZ Scene Format file (.wvz)."
+	# Launched render workers own serialized snapshots and independent readers.
+	# Keep their export Window, PID, job files and polling alive.
+	if session_log != null:
+		session_log.record("FILE", "Close capture: filename=%s path=%s" % [previous_path.get_file(), ProjectSettings.globalize_path(previous_path)], true)
+	return true
+
 func _open_capture_profiled(path: String) -> void:
 	_shell_open_error = ""
 	if inspection_busy:
