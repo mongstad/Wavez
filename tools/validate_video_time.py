@@ -48,7 +48,7 @@ def main():
     a = p.parse_args(); out = a.output.resolve();out.mkdir(parents=True, exist_ok=False)
     inputs = out / 'inputs';inputs.mkdir()
     sources = {}
-    for name, times in [('scene',[0.,210.]),('hours',[-1.125,3601.125]),('precise',[1.00000001,211.1234567890123])]:
+    for name, times in [('scene',[0.,210.]),('hours',[-1.125,3601.125]),('precise',[1.00000001,211.1234567890123]),('short',[-5.125,-4.375]),('still',[-2.5]),('tail',[0.,92.33])]:
         source = inputs / (name+'.wvz')
         with SceneCapture(source,objects=[dict(id='p',kind='particles',units='m',identity='persistent_i8')]) as writer:
             for i,t in enumerate(times):writer.add_particles('p',t,np.array([[-.5+i,0,0],[0,1,0]],'f8'),ids=[1,2],visual_size=np.array([.5,.5],'f4'))
@@ -67,13 +67,13 @@ def main():
         reports[name]=json.loads((folder/'report.json').read_text());assert not reports[name]['failures']
         print(name,reports[name]['checks'],'clean UI checks',flush=True)
     assert reports['before']['matrix']==reports['after']['matrix'], 'Dialog job settings/counts/sample boundaries changed'
-    # Render two short jobs through the unchanged production Main/worker boundary.
+    # Render three short jobs through the unchanged production Main/worker boundary.
     exports=[]
-    for case in ['fractional','full-fast']:
+    for case in ['fractional','full-fast','final-fraction']:
         outputs={}
         for name, project in [('before',a.baseline/'viewer'),('after',ROOT/'viewer')]:
             folder=out/(case+'-'+name);folder.mkdir()
-            job=json.loads((out/name/'export-settings.json').read_text())
+            job=json.loads((out/name/('tail-settings.json' if case=='final-fraction' else 'export-settings.json')).read_text())
             if case=='full-fast':job.update(start_time=0.,end_time=210.,fps=4,playback_rate=420.)
             job['output_path']=str(folder/'output.mp4')
             (folder/'job.json').write_text(json.dumps(job))
@@ -89,6 +89,8 @@ def main():
                 assert row['n']==i and row['video_time']==i/job['fps']
                 assert row['capture_time']==job['start_time']+i/job['fps']*job['playback_rate']
                 assert row['capture_time']<job['end_time']
+            if case=='final-fraction':
+                assert job['end_time']==92.33 and timing[-1]['capture_time']>92, 'Final partial second omitted'
             probe=json.loads(subprocess.check_output(['ffprobe','-v','error','-select_streams','v:0','-show_entries','stream=width,height,nb_frames,avg_frame_rate','-of','json',job['output_path']]))['streams'][0]
             assert (probe['width'],probe['height'],int(probe['nb_frames']),probe['avg_frame_rate'])==(320,180,expected,'4/1')
             images=[Image.open(f).tobytes() for f in sorted((folder/'frames').glob('*.png'))];assert len(images)==expected

@@ -1,0 +1,11 @@
+{
+	"current_frame": 2,
+	"elapsed_seconds": 0.544,
+	"encoder_pid": -1,
+	"intermediate_directory": "/tmp/wavez-323-review/range-general-source-forward/full-fast-before",
+	"message": "Saved /tmp/wavez-323-review/range-general-source-forward/full-fast-before/output.mp4",
+	"output_path": "/tmp/wavez-323-review/range-general-source-forward/full-fast-before/output.mp4",
+	"renderer_pid": 538380,
+	"stage": "complete",
+	"total_frames": 2
+}

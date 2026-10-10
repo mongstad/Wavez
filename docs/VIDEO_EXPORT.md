@@ -25,8 +25,8 @@ new renderer/platform guarantee. Network/control services remain outside scope.
 Open a capture and set its appearance/camera, then choose **File → Export →
 Video**. Settings are arranged in titled **Range**, **Video**, **Camera**,
 **Presentation** and **Output** groups. Range **Mode** offers **Full**, current
-position to end, or **Custom** in recorded capture-time units. Its **Start** and **End**
-rows show whole-second playback clocks (`MM:SS`, or `HH:MM:SS` beyond an hour)
+position to end, or **Custom** in elapsed simulation seconds, relative to the first
+recorded timestamp. Its **Start** and **End** rows show whole-second playback clocks (`MM:SS`, or `HH:MM:SS` beyond an hour)
 alongside whole-second numeric controls marked **s**, with one-second steps.
 For example, Custom Start **30 s** / **00:30** and End **60 s** / **01:00** at
 30 FPS and 1.0× give **Duration: 00:30 · 900 frames**.
@@ -34,25 +34,49 @@ For example, Custom Start **30 s** / **00:30** and End **60 s** / **01:00** at
 Whole-second controls are a projection, separate from the exact float64 export
 endpoints. Full/Current presets and existing Custom selections retain their
 timestamps when opened, refreshed, focused, or accepted with unchanged Enter/Tab.
-Fractional endpoints display the nearest whole second (ties toward the later
-second), marked **≈**, and a visible **Exact range** line shows the interval that
-will actually be exported. Tooltips also give the precise seconds. A range such
-as `[30.0003, 60.0003)` still exports that exact interval; the controls show
+Fractional elapsed endpoints display the nearest whole second (ties toward the later
+second), capped at the last whole second within the simulation duration. **≈**
+marks an approximate display, and a visible **Exact range** line shows the interval that
+will actually be exported. Tooltips also give the precise seconds. In a zero-origin
+capture, a range such as `[30.0003, 60.0003)` still exports that exact interval; the controls show
 **30 s** / **60 s**, clocks **≈00:30** / **≈01:00**, and the exact range is disclosed.
 
 In Custom mode, arrow buttons shift the selected exact endpoint by one second,
-retaining its fractional offset. Explicit keyboard edits choose an absolute
-whole-second endpoint; fractional numeric input rounds to the nearest second
-using the native control's rounding (ties toward the later second). Retyping a
+retaining its fractional offset until a boundary is reached. Steps use the original
+timestamp as an anchor, avoiding cumulative float64 rounding on reversal. Explicit
+keyboard edits choose a whole elapsed-second endpoint; fractional numeric input
+rounds to the nearest second (ties toward the later second). Retyping a
 whole number deliberately commits that number even when the displayed number was
-already the same. An unchanged field never performs this normalization. Existing
-bounds and end-before-start validation remain. Programmatic/restored ranges use
-`set_range_times(first, last)` to retain exact endpoints within those bounds.
-These are recorded source timestamps, including signed/offset clocks; playback's
-elapsed clock remains relative to the first sample. The End tooltip explains
-that the endpoint is exclusive and a still exports one frame. Select 1080p,
-1440p, 4K, or even custom dimensions;
-24/30/60 or custom integer FPS. **Playback rate** is simulation-time units
+already the same, with the final-second End rule below. An unchanged field never
+performs this normalization. Range bounds apply immediately on Enter/Tab, arrow edits, and restored ranges:
+**0 ≤ Start ≤ End ≤ simulation duration**. Start is limited by End, and End by
+Start. An out-of-range numeric draft rounds to a whole second, then selects the
+exact nearest valid boundary, including a fractional Start/End or final sample.
+For example, End 29 with exact Start 30.0003 becomes exactly 30.0003; equal
+endpoints retain the one-frame still convention. Invalid text keeps the previous
+valid endpoint. The whole-second projection never exceeds the simulation duration.
+For a subsecond simulation, both controls show 0; its fractional End remains
+visible in **Exact range**.
+
+Deliberately typing End's **final whole second**, or stepping End into that second,
+includes the remaining fraction through the exact last sample. For a 92.33-second
+simulation, End **92** selects exactly 92.33, shows **≈01:32**, and discloses
+**01:32.33** in **Exact range**. Export does not pad past the simulation boundary.
+For a subsecond simulation, explicitly entering End **0** includes its full
+remaining fraction. This rule applies only to edits: a previously selected exact
+End 92 stays 92 when opened/refreshed, and a restored range remains exact.
+Equal exact endpoints still export one frame.
+
+The exact model and `set_range_times(first, last)` API retain **recorded source
+timestamps**, with valid restored fractions preserved and invalid ranges clamped
+to source extent/order. The controls/clocks and **Exact range** line use elapsed
+seconds; tooltips disclose both exact elapsed seconds and recorded source times.
+A capture spanning recorded times -1.125 to 3601.125 therefore displays elapsed
+0 to 3602.25, without changing export timestamps. Typing elapsed 30 selects
+recorded time 28.875. Opening, refreshing or switching a valid existing selection
+to Custom does not round-trip the source timestamp through elapsed arithmetic.
+The End tooltip explains that the endpoint is exclusive and a still exports one
+frame. Select 1080p, 1440p, 4K, or custom dimensions; 24/30/60 or custom integer FPS. **Playback rate** is simulation-time units
 per second of exported video: lower values play more slowly and sample time
 more closely, while higher values play faster. Its **×** suffix identifies a speed
 multiplier. The numeric timing is unchanged.
@@ -63,7 +87,7 @@ frame count divided by FPS, including its final-frame convention. Fractional
 durations display up to milliseconds; **≈** marks rounding, and the tooltip gives
 the precise duration in seconds. Export processing time remains separate in job
 status. Summary/frame calculations always use the exact endpoint model.
-See [issue #323 precision refinement](evidence/issue-323/precision-refinement/README.md) for focused
+See [issue #323 range validation](evidence/issue-323/range-validation/README.md) for focused
 source/package comparisons and owner-review limits.
 
 Enabled volume legends include the applied opacity strength and ramp, or identify
