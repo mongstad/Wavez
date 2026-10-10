@@ -139,8 +139,8 @@ func about() -> void:
 		var dialog = shell.about
 		var available := root.get_visible_rect().size
 		check(Vector2(dialog.size).x <= available.x and Vector2(dialog.size).y <= available.y,"About fits logical viewport "+str(scenario))
-		check(dialog.logo.texture.get_size() == Vector2(1254,1254) and dialog.logo.texture_filter == CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS,"Full owner raster with mipmaps")
-		check(dialog.logo.stretch_mode == TextureRect.STRETCH_KEEP_ASPECT_CENTERED and dialog.logo.size.x == dialog.logo.size.y,"Logo retains square aspect without stretching")
+		check(dialog.logo.texture.get_size() == Vector2(2172,724) and dialog.logo.texture_filter == CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS,"Full owner banner with mipmaps")
+		check(dialog.logo.stretch_mode == TextureRect.STRETCH_KEEP_ASPECT_CENTERED,"Banner retains aspect without stretching")
 		picture("about-"+str(scenario[0].x)+"-scale-"+str(scenario[1]))
 		layouts.append({"requested":scenario[0],"scale":scenario[1],"actual":root.size,"logical":available})
 		dialog.hide()

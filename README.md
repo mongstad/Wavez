@@ -1,6 +1,6 @@
 # WAVEZ
 
-![WAVEZ](docs/branding/wavez-banner-dark.png)
+![WAVEZ](viewer/ui/about/Wavez_Banner_No_Slogan_No_Border_Dark.png)
 
 Wavez is a NumPy-first scientific capture and Godot visualization platform for
 particles, meshes and uniform-grid scalar fields. New integrations use

@@ -13,8 +13,13 @@ are `#ECEEF3`, and hover/selection uses lavender `#DDD5F0`. Controls retain
 a distinct gray fill. The primary violet accent remains `#7956C8`; muted ink,
 control borders, focus (`#596DBC`) and status colors are tuned for these surfaces.
 Success, warning and error retain separate green, amber and red roles. Dark keeps
-its original palette. About switches between the two official branding assets
-without restarting or reloading a capture.
+its original palette. About uses `Wavez_Banner_No_Slogan_No_Border_White.png` in
+Light and `Wavez_Banner_No_Slogan_No_Border_Dark.png` in Dark, switching immediately
+without restarting or reloading a capture. Both approved banners retain their
+original bytes, backgrounds and 3:1 proportions in a centered fit. The application
+icon stays the Dark square; the repository README always uses the Dark banner.
+See [About resource provenance](../viewer/ui/about/README.md) and
+[issue #318 review evidence](evidence/issue-318/README.md).
 
 The **Simulation** heading uses the existing pin `accent.primary` color in Light
 (`#7956C8`). Its dedicated `SimulationTitle` role inherits `PanelTitle` typography;

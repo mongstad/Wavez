@@ -1,0 +1,19 @@
+{
+  "assets": [
+    {
+      "theme": "Dark",
+      "filename": "Wavez_Banner_No_Slogan_No_Border_Dark.png",
+      "source_sha256": "81426cb5a6b248a7f1948d86c911fb7147bd8f31dc53ded1d696b40edcd1b9e4",
+      "committed_candidate_sha256": "81426cb5a6b248a7f1948d86c911fb7147bd8f31dc53ded1d696b40edcd1b9e4",
+      "size_bytes": 1147838
+    },
+    {
+      "theme": "Light",
+      "filename": "Wavez_Banner_No_Slogan_No_Border_White.png",
+      "source_sha256": "77b60b43c1d26e0d14b83c201475c30630774fbac80383705784e3257cd34800",
+      "committed_candidate_sha256": "77b60b43c1d26e0d14b83c201475c30630774fbac80383705784e3257cd34800",
+      "size_bytes": 1202367
+    }
+  ],
+  "readme_fixed_dark": true
+}
