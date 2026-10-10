@@ -138,8 +138,7 @@ func refresh_rows() -> void:
 		var row: Dictionary = rows[action]
 		row.key.text = "Press a key…" if action == listening else Bindings.text(staged[action])
 		row.key.theme_type_variation = "SelectedButton" if action == listening else "SecondaryButton"
-		var context: String = shell.shortcut_context(action)
-		row.label.add_theme_color_override("font_color", theme.c(&"text.primary" if context.is_empty() else &"text.secondary"))
+		row.label.add_theme_color_override("font_color", theme.c(&"text.primary"))
 		row.clear.disabled = staged[action] == 0
 		if action == "toggle_invert_y_axis": focus_order.append(invert_y_toggle)
 		focus_order.append(row.key)
