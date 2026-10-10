@@ -159,6 +159,8 @@ func _time() -> float:
 func reset_source() -> void:
 	if temporal != null:temporal.reset()
 	jobs.shutdown();source = {};objects.clear();state = State.new();overlay.clear()
+	last_resolution.clear(); requested_overlay_key = ""; pick_points.clear()
+	jobs.last_result.clear(); jobs.member_pins.clear()
 	selecting = false;gesture.show_polygon([]);gesture_context.clear()
 	operation = "";overlay_key = "";failed_overlay_key = "";tool.select(0);target.clear();selections.clear();group_list.clear()
 	status.text = "Choose Use current capture to begin.";set_process(false)

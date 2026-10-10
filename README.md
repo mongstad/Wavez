@@ -23,6 +23,7 @@ Start with:
 - [Visibility-aware keyboard focus](docs/FOCUS_NAVIGATION.md)
 - [Editable value focus and replacement](docs/EDITABLE_VALUE_FOCUS.md)
 - [Exiting with active jobs](docs/EXIT_WITH_ACTIVE_JOBS.md)
+- [Close File without interrupting exports](docs/CLOSE_FILE.md)
 - [Free-look steering and manual camera orbit](docs/MANUAL_CAMERA_ORBIT.md)
 - [Viewport cursor visibility](docs/VIEWPORT_CURSOR.md)
 - [Screen-fixed cinematic background](docs/CINEMATIC_BACKGROUND.md)

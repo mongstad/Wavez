@@ -1,0 +1,139 @@
+{
+  "source-headless": {
+    "checks": 164,
+    "runtime_failures": [],
+    "godot_exit_code": 0,
+    "validator_exit_code": 0,
+    "runtime_log_clean": true,
+    "video_comparison": {},
+    "numerical_outputs_identical": {
+      "values.csv": "f58f77b8ad9034550862d3e0c16fccc4e500db9deeea7857c11a78dfaf1b225e"
+    },
+    "error_messages": 0,
+    "package_artifacts": {}
+  },
+  "source-forward_plus": {
+    "checks": 229,
+    "runtime_failures": [],
+    "godot_exit_code": 0,
+    "validator_exit_code": 0,
+    "runtime_log_clean": true,
+    "video_comparison": {
+      "ordinary": {
+        "decoded_frames_and_timestamps_identical": true,
+        "framemd5_sha256": "50b034808e96250100f467bd8f83b9b6b7b1fe49f8f992e1e1cd2725ea183221",
+        "identical_inspection_sidecars": 6,
+        "regenerated_cohort_keys_normalized": false,
+        "timing_trace_byte_identical": true
+      },
+      "selected": {
+        "decoded_frames_and_timestamps_identical": true,
+        "framemd5_sha256": "c664668244cd3d2b9edb937974df554fd665ff3cbdf239a286fc2be1b72cc608",
+        "identical_inspection_sidecars": 6,
+        "regenerated_cohort_keys_normalized": true,
+        "timing_trace_byte_identical": true
+      }
+    },
+    "numerical_outputs_identical": {
+      "values.csv": "e19c7dd888b440b4a3e44cced83e2e95443ddfbc0b1a524df6a224ae9125fd0d"
+    },
+    "error_messages": 0,
+    "package_artifacts": {}
+  },
+  "source-gl_compatibility": {
+    "checks": 229,
+    "runtime_failures": [],
+    "godot_exit_code": 0,
+    "validator_exit_code": 0,
+    "runtime_log_clean": true,
+    "video_comparison": {
+      "ordinary": {
+        "decoded_frames_and_timestamps_identical": true,
+        "framemd5_sha256": "670303c75f495630a3ab67e120950179760b749ebc35ea25c2b42f934a84cd5c",
+        "identical_inspection_sidecars": 6,
+        "regenerated_cohort_keys_normalized": false,
+        "timing_trace_byte_identical": true
+      },
+      "selected": {
+        "decoded_frames_and_timestamps_identical": true,
+        "framemd5_sha256": "93f8b3bdf5d9819acee59b90c2e5ab7b89a815a98460f22a573b3b3cadaed7b3",
+        "identical_inspection_sidecars": 6,
+        "regenerated_cohort_keys_normalized": true,
+        "timing_trace_byte_identical": true
+      }
+    },
+    "numerical_outputs_identical": {
+      "values.csv": "8f32a3ad672cb2fad7348a10df80be04f9b39179eb9bd076c0f3efb5e87bdbad"
+    },
+    "error_messages": 0,
+    "package_artifacts": {}
+  },
+  "release-forward_plus": {
+    "checks": 229,
+    "runtime_failures": [],
+    "godot_exit_code": 0,
+    "validator_exit_code": 1,
+    "runtime_log_clean": false,
+    "video_comparison": {
+      "ordinary": {
+        "decoded_frames_and_timestamps_identical": true,
+        "framemd5_sha256": "50b034808e96250100f467bd8f83b9b6b7b1fe49f8f992e1e1cd2725ea183221",
+        "identical_inspection_sidecars": 6,
+        "regenerated_cohort_keys_normalized": false,
+        "timing_trace_byte_identical": true
+      },
+      "selected": {
+        "decoded_frames_and_timestamps_identical": true,
+        "framemd5_sha256": "c664668244cd3d2b9edb937974df554fd665ff3cbdf239a286fc2be1b72cc608",
+        "identical_inspection_sidecars": 6,
+        "regenerated_cohort_keys_normalized": true,
+        "timing_trace_byte_identical": true
+      }
+    },
+    "numerical_outputs_identical": {
+      "values.csv": "a1e2a6b5699e61f1982df529bab4de0ddef67b737104fb53d4e587c8d05f29d5"
+    },
+    "error_messages": 32,
+    "package_artifacts": {
+      "WAVEZ.x86_64": "d9f79ab89b5ae369aeed11c6052d402e8218cd503bf85b4a235f9c30c46a7c63",
+      "WAVEZ.pck": "a9712090956142f73550d13292a79275647caf05da0e07765129e9edf6ab2555"
+    }
+  },
+  "release-gl_compatibility": {
+    "checks": 229,
+    "runtime_failures": [],
+    "godot_exit_code": 0,
+    "validator_exit_code": 1,
+    "runtime_log_clean": false,
+    "video_comparison": {
+      "ordinary": {
+        "decoded_frames_and_timestamps_identical": true,
+        "framemd5_sha256": "670303c75f495630a3ab67e120950179760b749ebc35ea25c2b42f934a84cd5c",
+        "identical_inspection_sidecars": 6,
+        "regenerated_cohort_keys_normalized": false,
+        "timing_trace_byte_identical": true
+      },
+      "selected": {
+        "decoded_frames_and_timestamps_identical": true,
+        "framemd5_sha256": "93f8b3bdf5d9819acee59b90c2e5ab7b89a815a98460f22a573b3b3cadaed7b3",
+        "identical_inspection_sidecars": 6,
+        "regenerated_cohort_keys_normalized": true,
+        "timing_trace_byte_identical": true
+      }
+    },
+    "numerical_outputs_identical": {
+      "values.csv": "16defd9d60a6d70889df6b2dc36a92621564e161320fe178761b5c0a06d408f2"
+    },
+    "error_messages": 32,
+    "package_artifacts": {
+      "WAVEZ.x86_64": "d9f79ab89b5ae369aeed11c6052d402e8218cd503bf85b4a235f9c30c46a7c63",
+      "WAVEZ.pck": "802cac176316bd3d1d8139113e88ce6c553c5bbbd6b4eb7cffbf0e3650a7c143"
+    }
+  },
+  "production_files_sha256": {
+    "viewer/main.gd": "12a10fa3af4be75c6e75ad6b5c0791a9268cd99b4a95fd6f425a73313e0565d3",
+    "viewer/ui/shell/viewer_shell.gd": "f3070cd0a74fa4ff66432fbb1186d57024680cdadd45a0eb867faa082a1f8636",
+    "viewer/selection/selection_controller.gd": "6ccbf4df24fc2be690f2e0820ecfbf3b774b84ebad964eaf0e884e35947ac6f2",
+    "viewer/project.godot": "5fab6f681966889d006fdb56c94fd2efde9ee31a94abb60cc52571f9a45478a3"
+  }
+}
