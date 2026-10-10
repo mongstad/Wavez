@@ -12,11 +12,12 @@ const TitledGroup = preload("res://ui/shell/titled_group.gd")
 const Disclosure = preload("res://ui/components/disclosure.gd")
 const Clock = preload("res://ui/shell/time_seek_popover.gd")
 const FloatText = preload("res://ui/components/float64_text.gd")
+const TimeSpin = preload("res://video/export_time_spin.gd")
 var viewer
 var timeline
 var range_choice: OptionButton
-var start: SpinBox
-var end: SpinBox
+var start: TimeSpin
+var end: TimeSpin
 var start_clock: Label
 var end_clock: Label
 var width: SpinBox
@@ -32,6 +33,7 @@ var inspection_sidecars: CheckButton
 var output: LineEdit
 var quality: OptionButton
 var estimate: Label
+var precise_range: Label
 var progress: ProgressBar
 var message: Label
 var status_scroll: ScrollContainer
@@ -106,8 +108,8 @@ func _ready() -> void:
 	var output_group = add_group(fields, "Output")
 	output_fields = group_rows(output_group)
 	range_choice = choice("Mode", ["Full", "Current position to end", "Custom"], range_fields)
-	start = number("Start", 0, -1e30, 1e30, .0001, range_fields)
-	end = number("End", 1, -1e30, 1e30, .0001, range_fields)
+	start = number("Start", 0, -1e30, 1e30, 1, range_fields, TimeSpin.new()) as TimeSpin
+	end = number("End", 1, -1e30, 1e30, 1, range_fields, TimeSpin.new()) as TimeSpin
 	start_clock = time_readout(start)
 	end_clock = time_readout(end)
 	range_choice.item_selected.connect(func(_i: int): update_range())
@@ -169,6 +171,8 @@ func _ready() -> void:
 
 	summary_group = add_group(box, "Export summary")
 	estimate = Label.new(); estimate.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; summary_group.body.add_child(estimate)
+	precise_range = Label.new(); precise_range.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	summary_group.body.add_child(precise_range); precise_range.hide()
 	message = Label.new(); message.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	message.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	summary_group.body.add_child(message)
@@ -218,7 +222,8 @@ func _ready() -> void:
 	size_changed.connect(_layout_status)
 	add_child(cancel_confirmation)
 	_sync_action_buttons()
-	for spin in [start, end, width, height, fps, rate]: spin.value_changed.connect(func(_v: float): update_estimate())
+	for spin in [start, end]: spin.timestamp_changed.connect(func(_v: float): update_estimate())
+	for spin in [width, height, fps, rate]: spin.value_changed.connect(func(_v: float): update_estimate())
 
 func browse_output() -> void:
 	if pid > 0 or preparing or native_save_pending: return
@@ -281,9 +286,10 @@ func choice(label: String, options: Array, target: GridContainer) -> OptionButto
 	target.add_child(option)
 	return option
 
-func number(label: String, initial: float, low: float, high: float, step_value: float, target: GridContainer) -> SpinBox:
+func number(label: String, initial: float, low: float, high: float, step_value: float, target: GridContainer, spin: SpinBox = null) -> SpinBox:
 	var text := Label.new(); text.text = label; target.add_child(text)
-	var spin := SpinBox.new(); spin.min_value = low; spin.max_value = high; spin.step = step_value; spin.value = initial
+	if spin == null: spin = SpinBox.new()
+	spin.min_value = low; spin.max_value = high; spin.step = step_value; spin.value = initial
 	target.add_child(spin)
 	return spin
 
@@ -304,8 +310,9 @@ static func frame_count_text(count: int) -> String:
 	return text
 
 func update_time_readout(clock: Label, spin: SpinBox, value: float, exclusive := false) -> void:
-	clock.text = Clock.format_time(value, true)
-	var hint := "Recorded capture time. Enter decimal seconds, e.g. 210.125; the clock is a readout.\nExact time: %s s" % FloatText.format_value(value)
+	var displayed := TimeSpin.project_time(value)
+	clock.text = ("≈" if displayed != value else "") + Clock.format_time(displayed, true)
+	var hint := "Recorded capture time. Whole-second display, rounded to nearest second; ≈ marks a fractional endpoint.\nArrows shift the exact endpoint by 1 second. Editing seconds chooses a whole-second endpoint (fractional input rounds to nearest second). Unchanged Enter preserves the exact time.\nExact time: %s s" % FloatText.format_value(value)
 	if exclusive: hint += "\nEnd time is exclusive; a still exports one frame."
 	clock.tooltip_text = hint; spin.tooltip_text = hint
 
@@ -362,14 +369,18 @@ func update_range() -> void:
 	end.editable = range_choice.selected == 2
 	if timeline == null or timeline.times.is_empty(): return
 	if range_choice.selected < 2:
-		start.value = timeline.times[0] if range_choice.selected == 0 else opened_current
-		end.value = timeline.times[-1]
+		start.set_timestamp(timeline.times[0] if range_choice.selected == 0 else opened_current)
+		end.set_timestamp(timeline.times[-1])
 	update_estimate()
+
+func set_range_times(first: float, last: float) -> void:
+	# Exact programmatic/restored range; UI step must never quantize its model.
+	start.set_timestamp(first); end.set_timestamp(last); update_estimate()
 
 func settings() -> Dictionary:
 	# Preserve original float64 endpoints for non-custom ranges (no SpinBox rounding).
-	var start_time: float = start.value
-	var end_time: float = end.value
+	var start_time: float = start.timestamp
+	var end_time: float = end.timestamp
 	if range_choice.selected < 2:
 		start_time = timeline.times[0] if range_choice.selected == 0 else opened_current
 		end_time = timeline.times[-1]
@@ -393,13 +404,15 @@ func configured_job() -> Dictionary:
 
 func update_estimate() -> void:
 	if estimate == null: return
-	var start_time: float = start.value
-	var end_time: float = end.value
+	var start_time: float = start.timestamp
+	var end_time: float = end.timestamp
 	if timeline != null and not timeline.times.is_empty() and range_choice.selected < 2:
 		start_time = timeline.times[0] if range_choice.selected == 0 else opened_current
 		end_time = timeline.times[-1]
 	update_time_readout(start_clock, start, start_time)
 	update_time_readout(end_clock, end, end_time, true)
+	precise_range.text = "Exact range: %s → %s" % [Clock.format_time(start_time, true), Clock.format_time(end_time, true)]
+	precise_range.visible = job_status.is_empty() and pid <= 0 and not preparing and (start_time != roundf(start_time) or end_time != roundf(end_time))
 	if end_time < start_time:
 		estimate.text = "End time must be at or after start time."
 		return
@@ -507,6 +520,7 @@ func _sync_action_buttons() -> void:
 	var has_status := active or not job_status.is_empty()
 	summary_group.set_title("Export status" if has_status else "Export summary")
 	estimate.visible = not has_status
+	precise_range.visible = not has_status and (start.timestamp != roundf(start.timestamp) or end.timestamp != roundf(end.timestamp))
 	progress.visible = has_status
 	if has_status:
 		if message.get_parent() != status_scroll: message.reparent(status_scroll)

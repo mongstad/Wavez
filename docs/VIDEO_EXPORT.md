@@ -26,11 +26,28 @@ Open a capture and set its appearance/camera, then choose **File → Export →
 Video**. Settings are arranged in titled **Range**, **Video**, **Camera**,
 **Presentation** and **Output** groups. Range **Mode** offers **Full**, current
 position to end, or **Custom** in recorded capture-time units. Its **Start** and **End**
-rows show the playback clock convention (`MM:SS`, or `HH:MM:SS` beyond an hour),
-with fractional seconds when present, alongside the existing decimal-seconds
-editors marked **s**. In Custom mode, enter seconds such as `210.125`; the clock
-is a readout. Presets retain exact source endpoints even when the numeric editor
-shows fewer decimal places. The clock and tooltip expose that precise value.
+rows show whole-second playback clocks (`MM:SS`, or `HH:MM:SS` beyond an hour)
+alongside whole-second numeric controls marked **s**, with one-second steps.
+For example, Custom Start **30 s** / **00:30** and End **60 s** / **01:00** at
+30 FPS and 1.0× give **Duration: 00:30 · 900 frames**.
+
+Whole-second controls are a projection, separate from the exact float64 export
+endpoints. Full/Current presets and existing Custom selections retain their
+timestamps when opened, refreshed, focused, or accepted with unchanged Enter/Tab.
+Fractional endpoints display the nearest whole second (ties toward the later
+second), marked **≈**, and a visible **Exact range** line shows the interval that
+will actually be exported. Tooltips also give the precise seconds. A range such
+as `[30.0003, 60.0003)` still exports that exact interval; the controls show
+**30 s** / **60 s**, clocks **≈00:30** / **≈01:00**, and the exact range is disclosed.
+
+In Custom mode, arrow buttons shift the selected exact endpoint by one second,
+retaining its fractional offset. Explicit keyboard edits choose an absolute
+whole-second endpoint; fractional numeric input rounds to the nearest second
+using the native control's rounding (ties toward the later second). Retyping a
+whole number deliberately commits that number even when the displayed number was
+already the same. An unchanged field never performs this normalization. Existing
+bounds and end-before-start validation remain. Programmatic/restored ranges use
+`set_range_times(first, last)` to retain exact endpoints within those bounds.
 These are recorded source timestamps, including signed/offset clocks; playback's
 elapsed clock remains relative to the first sample. The End tooltip explains
 that the endpoint is exclusive and a still exports one frame. Select 1080p,
@@ -45,8 +62,8 @@ The summary shows video duration and frame count, for example **Duration: 03:30 
 frame count divided by FPS, including its final-frame convention. Fractional
 durations display up to milliseconds; **≈** marks rounding, and the tooltip gives
 the precise duration in seconds. Export processing time remains separate in job
-status. Custom entry retains the existing SpinBox precision and range validation.
-See [issue #323 review evidence](evidence/issue-323/README.md) for focused
+status. Summary/frame calculations always use the exact endpoint model.
+See [issue #323 precision refinement](evidence/issue-323/precision-refinement/README.md) for focused
 source/package comparisons and owner-review limits.
 
 Enabled volume legends include the applied opacity strength and ramp, or identify

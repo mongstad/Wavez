@@ -35,7 +35,7 @@ func run() -> void:
 	var menu: Dictionary = view.shell.commands.video;menu.popup.id_pressed.emit(menu.index)
 	var dialog = view.video_dialog
 	dialog.range_choice.select(2);dialog.update_range()
-	dialog.start.value = config.get("start",20.0);dialog.end.value = config.get("end",25.0)
+	dialog.set_range_times(config.get("start",20.0),config.get("end",25.0))
 	dialog.width.value = config.get("width",2560);dialog.height.value = config.get("height",1440)
 	dialog.fps.value = config.get("fps",60);dialog.rate.value = config.get("rate",.25)
 	dialog.camera_mode.select(1);dialog.orbit.value = .08;dialog.overlays.button_pressed = false

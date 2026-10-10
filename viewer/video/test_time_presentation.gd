@@ -25,17 +25,86 @@ func key(window: Window, code: Key):
 func edit(spin: SpinBox, value: String):
 	var input := spin.get_line_edit();input.grab_focus();input.edit()
 	await settle()
+	input.edit()
 	input.select_all()
 	for character in value:
 		var event := InputEventKey.new();event.unicode=character.unicode_at(0);event.pressed=true
 		spin.get_window().push_input(event)
 		event=event.duplicate();event.pressed=false;spin.get_window().push_input(event)
 	key(spin.get_window(),KEY_ENTER);await settle()
+func exact_range(dialog, first: float, last: float):
+	# Restored selections supported by the previous four-decimal editor.
+	if dialog.has_method("set_range_times"): dialog.set_range_times(snappedf(first,.0001),snappedf(last,.0001))
+	else: dialog.start.value=first;dialog.end.value=last;dialog.update_estimate()
+func arrow(spin: SpinBox, up: bool):
+	var rect := spin.get_global_rect()
+	var event := InputEventMouseButton.new();event.button_index=MOUSE_BUTTON_LEFT;event.pressed=true
+	event.position=Vector2(rect.end.x-8,rect.position.y+rect.size.y*(.25 if up else .75))
+	spin.get_window().push_input(event)
+	event=event.duplicate();event.pressed=false;spin.get_window().push_input(event)
+	await settle()
+func review_controls(dialog, source: String):
+	check(dialog.start.step==1 and dialog.end.step==1,"One-second control step: "+source)
+	check(dialog.start_clock.text=="00:30" and dialog.end_clock.text=="01:00","Whole clock endpoints: "+source)
+	check(dialog.estimate.text.begins_with("Duration: 00:30 · 900 frames"),"30–60 at 30 FPS / 1× is 900 frames")
+	check(dialog.rate.get_line_edit().text.contains("1.0") and dialog.rate.suffix=="×","Playback rate formatting retained")
+	var a: float=30.0003;var b: float=60.0003
+	dialog.set_range_times(a,b);await settle()
+	var saved: Dictionary=dialog.settings()
+	check(dialog.start.value==30 and dialog.end.value==60,"Fractional endpoints project to whole seconds")
+	check(dialog.start_clock.text=="≈00:30" and dialog.end_clock.text=="≈01:00" and dialog.precise_range.visible and dialog.precise_range.text.contains("00:30.0003") and dialog.precise_range.text.contains("01:00.0003"),"Exact fractional interval is visibly disclosed")
+	check(not dialog.start.get_line_edit().text.contains(".") and not dialog.end.get_line_edit().text.contains("."),"Time controls have no decimal places")
+	if source=="scene":picture("fractional-preserved")
+	if source=="scene":
+		for light in [false,true]:
+			viewer.shell.appearance.light=light;viewer.shell.appearance.apply();await settle()
+			for dimensions in [Vector2i(700,650),Vector2i(560,360)]:
+				dialog.size=dimensions;await settle()
+				check(dialog.precise_range.get_global_rect().end.y<=dialog.start_button.get_global_rect().position.y,"Exact fractional interval clears actions at "+str(dimensions))
+				check(dialog.precise_range.get_global_rect().end.x<=dialog.summary_group.get_global_rect().end.x,"Exact fractional interval wraps within summary")
+				picture("fractional-"+("light" if light else "dark")+"-"+str(dimensions.x))
+		dialog.size=Vector2i(700,650);await settle()
+	dialog.hide();dialog.open();await settle()
+	check(dialog.settings()==saved,"Opening Custom preserves exact selection and output settings")
+	dialog.start.get_line_edit().grab_focus();await settle();key(dialog,KEY_ENTER);await settle()
+	dialog.end.get_line_edit().grab_focus();await settle();key(dialog,KEY_TAB);await settle()
+	check(dialog.settings()==saved,"Unchanged Enter/Tab focus does not quantize endpoints")
+	await arrow(dialog.start,true)
+	check(dialog.settings().start_time==a+1 and dialog.settings().end_time==b,"Up arrow shifts only exact Start by one second")
+	await arrow(dialog.start,false)
+	check(dialog.settings()==saved,"Down arrow reverses Start step without losing its fraction")
+	await arrow(dialog.end,false)
+	check(dialog.settings().end_time==b-1 and dialog.settings().start_time==a,"Down arrow shifts only exact End by one second")
+	await arrow(dialog.end,true)
+	check(dialog.settings()==saved,"Up arrow reverses End step without losing its fraction")
+	await edit(dialog.start,"30");await edit(dialog.end,"60")
+	check(dialog.settings().start_time==30 and dialog.settings().end_time==60 and not dialog.precise_range.visible,"Explicit keyboard entry chooses whole seconds, including same displayed value")
+	await edit(dialog.start,"30.25");await edit(dialog.end,"60.25")
+	check(dialog.settings().start_time==30 and dialog.settings().end_time==60,"Explicit fractional keyboard entry rounds to nearest whole second")
+	await edit(dialog.start,"30.75");await edit(dialog.end,"60.75")
+	check(dialog.settings().start_time==31 and dialog.settings().end_time==61,"Fractional keyboard entry rounds upward only on explicit edit")
+	dialog.set_range_times(59.9999,60.0001);await settle()
+	check(dialog.settings().start_time==59.9999 and dialog.settings().end_time==60.0001 and Job.frame_total(dialog.settings())==1 and dialog.precise_range.visible,"Subsecond range crossing minute boundary is preserved, not collapsed")
+	dialog.set_range_times(-.125,.125);await settle()
+	var signed: Dictionary=dialog.settings()
+	check(dialog.start_clock.text=="≈00:00" and dialog.precise_range.text.contains("-00:00.125"),"Signed near-zero source clock remains explicit")
+	await arrow(dialog.start,true);await arrow(dialog.start,false)
+	check(dialog.settings()==signed,"Signed fractional increment reverses exactly")
+	await edit(dialog.start,"invalid")
+	check(dialog.settings()==signed,"Invalid keyboard entry does not normalize fractional time")
+	dialog.set_range_times(.5,2.5);await settle()
+	await arrow(dialog.start,false)
+	check(dialog.settings().start_time==-.5 and dialog.start.value==0 and dialog.start_clock.text=="≈00:00","Half-second tie steps consistently across zero")
+	await arrow(dialog.start,true)
+	check(dialog.settings().start_time==.5 and dialog.start.value==1,"Half-second tie step reverses without quantization")
+	dialog.set_range_times(-1e31,1e31)
+	check(dialog.settings().start_time==-1e30 and dialog.settings().end_time==1e30,"Programmatic Custom endpoints retain control bounds")
 func record(name: String, dialog):
 	var settings: Dictionary = dialog.settings()
 	matrix.append({"case":name,"settings":settings,"frames":Job.frame_total(settings),"first_sample":Job.sample_time(settings,0),"last_sample":Job.sample_time(settings,Job.frame_total(settings)-1)})
 	var data := {"start":FloatText.format_value(settings.start_time),"end":FloatText.format_value(settings.end_time),"rate":FloatText.format_value(settings.playback_rate),"summary":dialog.estimate.text}
 	if not baseline: data.merge({"start_clock":dialog.start_clock.text,"end_clock":dialog.end_clock.text,"start_hint":dialog.start.tooltip_text,"end_hint":dialog.end.tooltip_text})
+	if dialog.has_method("set_range_times"): data.precise_range=dialog.precise_range.text if dialog.precise_range.visible else ""
 	records[name]=data
 func run():
 	output=OS.get_cmdline_user_args()[0];baseline=OS.get_cmdline_user_args().size()>1
@@ -98,8 +167,15 @@ func run():
 		check(dialog.settings().start_time==current,"Current range uses committed source time: "+source)
 		record(source+"-current",dialog)
 		dialog.range_choice.select(2);dialog.update_range()
-		await edit(dialog.start,str(first+.125));await edit(dialog.end,str(first+.875))
-		check(is_equal_approx(dialog.start.value,first+.125) and is_equal_approx(dialog.end.value,first+.875),"Fractional seconds keyboard entry: "+source)
+		# Intentional whole-second edits agree with the previous precision model.
+		await edit(dialog.start,"30");await edit(dialog.end,"60")
+		check(dialog.settings().start_time==30 and dialog.settings().end_time==60,"Whole-second keyboard entry: "+source)
+		record(source+"-whole-keyboard",dialog)
+		if dialog.has_method("set_range_times"):
+			if source=="scene":picture("owner-30-60")
+			await review_controls(dialog,source)
+		exact_range(dialog,first+.125,first+.875)
+		await settle()
 		for speed in [.5,1.,2.5]:
 			dialog.rate.value=speed
 			for frequency in [24,30,60]:
@@ -110,12 +186,12 @@ func run():
 			picture("fractional-custom")
 			var job:Dictionary=dialog.configured_job();job.width=320;job.height=180;job.keep_frames=true;job.inspection_sidecars=false;job.ffmpeg_path="/usr/bin/ffmpeg"
 			Job.write_json(output.path_join("export-settings.json"),job)
-		dialog.end.value=dialog.start.value;dialog.update_estimate()
+		exact_range(dialog,dialog.settings().start_time,dialog.settings().start_time)
 		check(Job.frame_total(dialog.settings())==1,"Zero range still exports one frame")
 		record(source+"-still",dialog)
-		dialog.end.value=dialog.start.value-.1;dialog.update_estimate()
+		exact_range(dialog,dialog.settings().start_time,dialog.settings().start_time-.1)
 		check(dialog.estimate.text=="End time must be at or after start time.","Inverted range validation retained")
-		dialog.end.value=dialog.start.value+.75;dialog.preparing=true;dialog._sync_action_buttons()
+		exact_range(dialog,dialog.settings().start_time,dialog.settings().start_time+.75);dialog.preparing=true;dialog._sync_action_buttons()
 		check(not dialog.start.editable and not dialog.end.editable and dialog.range_choice.disabled,"Active export locks nested seconds editors")
 		dialog.preparing=false;dialog._sync_action_buttons()
 		check(dialog.start.editable and dialog.end.editable and not dialog.range_choice.disabled,"Idle custom range restores editor states")

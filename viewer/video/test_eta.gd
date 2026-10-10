@@ -123,7 +123,7 @@ func integration(config: Dictionary) -> void:
 	check(eta(dialog.message.text) == eta(text.text),"Dialog and actual Details show the same estimate")
 	view.shell.details.hide();dialog.preparing = false;dialog.job_status = {};dialog.active_job_path = ""
 	var menu: Dictionary = view.shell.commands.video;menu.popup.id_pressed.emit(menu.index)
-	dialog.range_choice.select(2);dialog.update_range();dialog.start.value = 0;dialog.end.value = 2
+	dialog.range_choice.select(2);dialog.update_range();dialog.set_range_times(0,2)
 	dialog.width.value = 320;dialog.height.value = 180;dialog.fps.value = 60 if config.get("long",false) or config.get("cancel","") == "rendering" else 4;dialog.rate.value = 1
 	dialog.overlays.button_pressed = false;dialog.inspection_sidecars.button_pressed = false
 	dialog.output.text = out.path_join("result.mp4")

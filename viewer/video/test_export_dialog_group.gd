@@ -130,11 +130,11 @@ func run() -> void:
 	var current: Dictionary = dialog.settings()
 	check(current.start_time == 2.25 and current.end_time == 3.375, "Current-position preset keeps its endpoints")
 	dialog.range_choice.select(2); dialog.update_range()
-	dialog.start.value = 2.25; dialog.end.value = 2.25
+	dialog.set_range_times(2.25,2.25)
 	check(dialog.start.editable and dialog.end.editable and Job.frame_total(dialog.settings()) == 1, "Custom still exports one frame")
-	dialog.end.value = 2.0
+	dialog.set_range_times(2.25,2.0)
 	check(dialog.estimate.text == "End time must be at or after start time.", "Invalid range keeps its validation message")
-	dialog.end.value = 3.0
+	dialog.set_range_times(2.25,3.0)
 	var resolution := option_for(dialog.video_fields, "Resolution")
 	var frame_rate := option_for(dialog.video_fields, "Frame rate")
 	resolution.select(2); resolution.item_selected.emit(2)
