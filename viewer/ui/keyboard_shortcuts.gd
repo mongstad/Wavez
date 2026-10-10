@@ -12,6 +12,8 @@ const ACTIONS := [
 	["toggle_invert_y_axis", "Toggle Invert Y Axis", "Navigation", 0],
 	["increase_camera_speed", "Increase Camera Movement Speed", "Navigation", KEY_PLUS],
 	["decrease_camera_speed", "Decrease Camera Movement Speed", "Navigation", KEY_MINUS],
+	["move_camera_up", "Move Camera Up", "Navigation", KEY_E],
+	["move_camera_down", "Move Camera Down", "Navigation", KEY_Q],
 	["orbit_camera_left", "Orbit Camera Left", "Navigation", 0],
 	["orbit_camera_right", "Orbit Camera Right", "Navigation", 0],
 	["roll_camera_left", "Roll Camera Left", "Navigation", 0],
@@ -83,12 +85,17 @@ static func normalized(map: Dictionary) -> Dictionary:
 	for action in ACTIONS:
 		var value: Variant = map.get(action[0], action[3])
 		if valid_binding(value): result[action[0]] = value
-	# Deterministic last catalog entry wins for a manually edited duplicate profile.
+	# Saved assignments take priority over missing-action defaults, so adding an
+	# action never steals an existing key. Explicit duplicates still use catalog order.
 	var seen := {}
 	for action in ACTIONS:
 		var value: int = result[action[0]]
 		if value == 0: continue
-		if seen.has(value): result[seen[value]] = 0
+		if seen.has(value):
+			var previous: String = seen[value]
+			if not (map.has(action[0]) and valid_binding(map[action[0]])) and map.has(previous) and valid_binding(map[previous]):
+				result[action[0]] = 0; continue
+			result[previous] = 0
 		seen[value] = action[0]
 	return result
 
@@ -99,7 +106,7 @@ func load_preferences() -> Error:
 	if error != OK: return error
 	var saved := {}
 	for action in ACTIONS:
-		saved[action[0]] = config.get_value("shortcuts", action[0], action[3])
+		if config.has_section_key("shortcuts", action[0]): saved[action[0]] = config.get_value("shortcuts", action[0])
 	active = normalized(saved)
 	var inverted: Variant = config.get_value("navigation", "invert_y_axis", false)
 	invert_y_axis = inverted if inverted is bool else false

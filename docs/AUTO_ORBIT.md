@@ -1,14 +1,15 @@
 # Auto Orbit and Free Camera (#234)
 
 Free Camera movement is active on a clean launch. W/S moves along the camera's
-forward axis, A/D along its lateral axis, and Q/E along its vertical axis. These
+forward axis, A/D along its lateral axis, and configured Move Camera Up/Down
+bindings (E/Q by default) along its vertical axis. These
 keys translate the camera view without applying a transform to scene roots,
 scientific coordinates, or capture data.
 
 Auto Orbit moves the camera around the current world-space `camera_target`. It
 keeps the existing orientation, target, and positive `camera_distance` camera
 representation. While Auto Orbit is on, free-camera translation is suspended.
-Pressing any W/A/S/D/Q/E key turns Auto Orbit off and applies that key's normal
+Pressing W/A/S/D or a configured vertical movement key turns Auto Orbit off and applies its normal
 free-camera movement on the **same** process tick. Turning Auto Orbit back on
 starts from the current camera pose without a snap. Auto Orbit's rotation stops
 while LMB tumble is held and resumes on release. RMB free-look and the held

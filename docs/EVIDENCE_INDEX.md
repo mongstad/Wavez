@@ -1,6 +1,9 @@
 # Retained evidence
 
-Issue #331's [roll-speed refinement](evidence/issue-331/roll-speed/README.md) records
+Issue #331's [vertical-movement refinement](evidence/issue-331/vertical-movement/README.md)
+records configurable E-up/Q-down, conflict transfer to Q/E roll without translation,
+held input recovery, persistence and preserved slow banking in build 88.
+The [roll-speed refinement](evidence/issue-331/roll-speed/README.md) records
 candidate build 88's shared 18°/second default, staged/persisted slider, five-second
 quarter turn and focused source/package, layout and navigation validation.
 The [initial camera roll validation](evidence/issue-331/README.md) is preserved as

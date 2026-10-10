@@ -68,7 +68,7 @@ func navigate(view, label: String) -> void:
 	# a long W flight through the former target/geometry with no collision gate.
 	for pair in [[KEY_W,Vector3.FORWARD],[KEY_S,Vector3.BACK],[KEY_A,Vector3.LEFT],[KEY_D,Vector3.RIGHT],[KEY_Q,Vector3.DOWN],[KEY_E,Vector3.UP]]:
 		var before: Transform3D = view.camera.transform
-		var event := InputEventKey.new(); event.physical_keycode = pair[0]; event.pressed = true
+		var event := InputEventKey.new(); event.keycode = pair[0]; event.physical_keycode = pair[0]; event.pressed = true
 		Input.parse_input_event(event); Input.flush_buffered_events()
 		view._move_free_camera(4.0)
 		event = event.duplicate(); event.pressed = false; Input.parse_input_event(event); Input.flush_buffered_events()

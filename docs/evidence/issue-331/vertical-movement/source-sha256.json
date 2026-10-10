@@ -1,0 +1,16 @@
+{
+  "viewer/main.gd": "b04c82394f37f11af89121f23269daf31358edd6c5e2454f596a07c32666d22d",
+  "viewer/ui/keyboard_shortcuts.gd": "1d6507c097e8d4dd1e6a573d76b7cd604dedf095514c28abf435cd58ed28df8c",
+  "viewer/ui/shell/keyboard_shortcuts_editor.gd": "7166025e61350da1737c7e304450774c475fd98945ec95204256282a3cbbc8ba",
+  "viewer/ui/shell/orbit_center_editor.gd": "259d56c6fb17c2201028ad90ef0ef3bc60d31dd05e91199620d94653ec513efc",
+  "viewer/scene/test_camera_roll.gd": "6207a9661f2d8015e8dd43f7abf9b667bd31eac7874d1de154348261820af451",
+  "viewer/scene/run_camera_roll_tests.gd": "bfa0ffabb8d3a5f545cd316bbe19c3e13b7faee0c5f7f4b75a94454a194a6a00",
+  "viewer/scene/test_camera_navigation.gd": "c2e0fd2eb32878bbd86f2208b846eb31eb8b63512aee485a9956bfd80c5c30cd",
+  "viewer/scene/test_auto_orbit.gd": "af15f06f8c51322951f05528d36fa8c30bb16bcfdad938a94c3e93876204544e",
+  "viewer/ui/shell/test_keyboard_shortcuts.gd": "d510eadcbef24936729c888434af2d7dca4cd5efc348a1347b71fd023ffcba42",
+  "viewer/project.godot": "cda537cfe5501ef451d0313cdfbc95c445358a8cb0c55da19c65dcb98b22a9a3",
+  "tools/validate_camera_roll.py": "602300b11d781f35f6fa450fc478fba2b9322cc7efcc70d34b3f4aea8c221a9b",
+  "tools/validate_camera_tumble.py": "733b8c7748f2c952bb6bb86cf87e8eed1bafa918aa1c452964ed977343f3c9e5",
+  "tools/validate_keyboard_shortcuts.py": "a02dbe75e900698bdefd1d42cad9d81d0eea2326e98ed6c53677dc3009a5eb67",
+  "tools/package_linux.py": "385d5609a5c1604e4d3176053242248b46d8cc4db97b653e47c191f9effa8b03"
+}

@@ -1,8 +1,13 @@
 # Free Camera movement speed (#200, #256)
 
 Free Camera translation starts at **70%** of the accepted build 48 rate. Its
-existing movement formula and camera-relative W/A/S/D/Q/E directions are
-unchanged; one session-only speed multiplier scales the resulting translation.
+existing movement formula and camera-relative directions are unchanged; one
+session-only speed multiplier scales the resulting translation. W/A/S/D remain
+physical keys. The #331 candidate exposes vertical movement as **Move Camera
+Up** (E) / **Move Camera Down** (Q) in Keyboard Shortcuts → Navigation, using the
+configured logical key and modifiers. Assigning Q/E to roll unbinds those
+vertical actions; no fixed Q/E movement poll remains. Held movement follows the
+current banked camera axes and stops on release, rebinding or input interruption.
 The multiplier starts at `0.7` and stays between `0.02` and `2.5` times the
 former rate. These bounds preserve close-range control and faster traversal.
 
@@ -17,8 +22,9 @@ Both actions appear under **Edit → Preferences → Keyboard Shortcuts** with
 default logical `+` and `-` bindings. The produced plus character resolves the
 same way on a dedicated Nordic `+` key and US Shift+=. The shortcut editor
 handles rebind, duplicate transfer, Apply, Cancel, Reset Defaults, persistence
-and restart through its existing machinery. Movement W/A/S/D/Q/E retains its
-physical-key behavior. Godot's [key-event contract](https://docs.godotengine.org/en/stable/classes/class_inputeventkey.html)
+and restart through its existing machinery. W/A/S/D retain physical-key behavior;
+vertical bindings follow the shared shortcut key/character conventions. Godot's
+[key-event contract](https://docs.godotengine.org/en/stable/classes/class_inputeventkey.html)
 distinguishes layout-aware keycodes and produced Unicode characters from US
 physical key positions.
 

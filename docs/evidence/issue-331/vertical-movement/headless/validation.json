@@ -1,0 +1,439 @@
+{
+  "checks": 2367,
+  "renderer": "headless",
+  "packaged": false,
+  "fresh_process_restart": true,
+  "source_sha256_unchanged": {
+    "mixed.wvz": "74547789c93400d08388de64f33fa06363e457c8b64a62bc8ac07a3cf31dcd45",
+    "meshes.wvz": "dc1cc92b503bd97bc54473d70d48c12f25d4bb8e8b5183536acfae95fa177c90",
+    "fields.wvz": "84ece47d4eb41dcc435a12a974e0b355c600a02888ba819aae73eab7a604f934",
+    "particles.wvz": "ecf6b0cdcfaa67aea092f6086b3f65b378ce9c5bcfb116077170f9d03465bf62"
+  },
+  "reports": [
+    {
+      "checks": 2358,
+      "display": "headless",
+      "failures": [],
+      "layouts": [
+        {
+          "logical": "(1440.0, 900.0)",
+          "panel": "[P: (400.0, 170.0), S: (640.0, 560.0)]",
+          "scale": 1.0,
+          "speed_row": "[P: (430.0, 636.0), S: (566.0, 32.0)]",
+          "theme": "Dark",
+          "value": "18\u00b0/s",
+          "window": "(1440, 900)"
+        },
+        {
+          "logical": "(970.0, 600.0)",
+          "panel": "[P: (165.0, 20.0), S: (640.0, 560.0)]",
+          "scale": 1.0,
+          "speed_row": "[P: (195.0, 486.0), S: (566.0, 32.0)]",
+          "theme": "Dark",
+          "value": "18\u00b0/s",
+          "window": "(970, 600)"
+        },
+        {
+          "logical": "(960.0, 600.0)",
+          "panel": "[P: (160.0, 20.0), S: (640.0, 560.0)]",
+          "scale": 2.0,
+          "speed_row": "[P: (190.0, 486.0), S: (566.0, 32.0)]",
+          "theme": "Dark",
+          "value": "18\u00b0/s",
+          "window": "(1920, 1200)"
+        },
+        {
+          "logical": "(1440.0, 900.0)",
+          "panel": "[P: (400.0, 170.0), S: (640.0, 560.0)]",
+          "scale": 1.0,
+          "speed_row": "[P: (430.0, 636.0), S: (566.0, 32.0)]",
+          "theme": "Light",
+          "value": "18\u00b0/s",
+          "window": "(1440, 900)"
+        },
+        {
+          "logical": "(970.0, 600.0)",
+          "panel": "[P: (165.0, 20.0), S: (640.0, 560.0)]",
+          "scale": 1.0,
+          "speed_row": "[P: (195.0, 486.0), S: (566.0, 32.0)]",
+          "theme": "Light",
+          "value": "18\u00b0/s",
+          "window": "(970, 600)"
+        },
+        {
+          "logical": "(960.0, 600.0)",
+          "panel": "[P: (160.0, 20.0), S: (640.0, 560.0)]",
+          "scale": 2.0,
+          "speed_row": "[P: (190.0, 486.0), S: (566.0, 32.0)]",
+          "theme": "Light",
+          "value": "18\u00b0/s",
+          "window": "(1920, 1200)"
+        }
+      ],
+      "measurements": [
+        {
+          "action": "roll_camera_left",
+          "degrees": 90.0,
+          "forward_error": 1.46000971312787e-07,
+          "position_error": 0.0,
+          "scene": "particles",
+          "seconds": 5.0,
+          "speed_degrees_per_second": 18,
+          "up": [
+            -0.76484215259552,
+            2.14647322138717e-08,
+            0.644217789173126
+          ]
+        },
+        {
+          "action": "roll_camera_left",
+          "degrees": 180.0,
+          "forward_error": 1.97686247815909e-07,
+          "position_error": 0.0,
+          "scene": "particles",
+          "seconds": 10.0,
+          "speed_degrees_per_second": 18,
+          "up": [
+            0.583859503269196,
+            0.422618508338928,
+            0.693182289600372
+          ]
+        },
+        {
+          "action": "roll_camera_left",
+          "degrees": 360.0,
+          "forward_error": 5.04003025980637e-07,
+          "position_error": 0.0,
+          "scene": "particles",
+          "seconds": 20.0,
+          "speed_degrees_per_second": 18,
+          "up": [
+            -0.583859503269196,
+            -0.422618806362152,
+            -0.693182170391083
+          ]
+        },
+        {
+          "action": "roll_camera_right",
+          "degrees": -90.0,
+          "forward_error": 1.07453800524127e-07,
+          "position_error": 0.0,
+          "scene": "particles",
+          "seconds": 5.0,
+          "speed_degrees_per_second": 18,
+          "up": [
+            0.764842331409454,
+            1.96021247234057e-07,
+            -0.644217550754547
+          ]
+        },
+        {
+          "action": "roll_camera_right",
+          "degrees": -180.0,
+          "forward_error": 1.2287812012346e-07,
+          "position_error": 0.0,
+          "scene": "particles",
+          "seconds": 10.0,
+          "speed_degrees_per_second": 18,
+          "up": [
+            0.583859145641327,
+            0.422618389129639,
+            0.693182706832886
+          ]
+        },
+        {
+          "action": "roll_camera_right",
+          "degrees": -360.0,
+          "forward_error": 9.42432194506182e-08,
+          "position_error": 0.0,
+          "scene": "particles",
+          "seconds": 20.0,
+          "speed_degrees_per_second": 18,
+          "up": [
+            -0.583858966827393,
+            -0.422618329524994,
+            -0.693182826042175
+          ]
+        },
+        {
+          "action": "roll_camera_left",
+          "degrees": 90.0,
+          "forward_error": 1.46000971312787e-07,
+          "position_error": 0.0,
+          "scene": "fields",
+          "seconds": 5.0,
+          "speed_degrees_per_second": 18,
+          "up": [
+            -0.76484215259552,
+            2.14647322138717e-08,
+            0.644217789173126
+          ]
+        },
+        {
+          "action": "roll_camera_left",
+          "degrees": 180.0,
+          "forward_error": 1.97686247815909e-07,
+          "position_error": 0.0,
+          "scene": "fields",
+          "seconds": 10.0,
+          "speed_degrees_per_second": 18,
+          "up": [
+            0.583859503269196,
+            0.422618508338928,
+            0.693182289600372
+          ]
+        },
+        {
+          "action": "roll_camera_left",
+          "degrees": 360.0,
+          "forward_error": 5.04003025980637e-07,
+          "position_error": 0.0,
+          "scene": "fields",
+          "seconds": 20.0,
+          "speed_degrees_per_second": 18,
+          "up": [
+            -0.583859503269196,
+            -0.422618806362152,
+            -0.693182170391083
+          ]
+        },
+        {
+          "action": "roll_camera_right",
+          "degrees": -90.0,
+          "forward_error": 1.07453800524127e-07,
+          "position_error": 0.0,
+          "scene": "fields",
+          "seconds": 5.0,
+          "speed_degrees_per_second": 18,
+          "up": [
+            0.764842331409454,
+            1.96021247234057e-07,
+            -0.644217550754547
+          ]
+        },
+        {
+          "action": "roll_camera_right",
+          "degrees": -180.0,
+          "forward_error": 1.2287812012346e-07,
+          "position_error": 0.0,
+          "scene": "fields",
+          "seconds": 10.0,
+          "speed_degrees_per_second": 18,
+          "up": [
+            0.583859145641327,
+            0.422618389129639,
+            0.693182706832886
+          ]
+        },
+        {
+          "action": "roll_camera_right",
+          "degrees": -360.0,
+          "forward_error": 9.42432194506182e-08,
+          "position_error": 0.0,
+          "scene": "fields",
+          "seconds": 20.0,
+          "speed_degrees_per_second": 18,
+          "up": [
+            -0.583858966827393,
+            -0.422618329524994,
+            -0.693182826042175
+          ]
+        },
+        {
+          "action": "roll_camera_left",
+          "degrees": 90.0,
+          "forward_error": 1.46000971312787e-07,
+          "position_error": 0.0,
+          "scene": "meshes",
+          "seconds": 5.0,
+          "speed_degrees_per_second": 18,
+          "up": [
+            -0.76484215259552,
+            2.14647322138717e-08,
+            0.644217789173126
+          ]
+        },
+        {
+          "action": "roll_camera_left",
+          "degrees": 180.0,
+          "forward_error": 1.97686247815909e-07,
+          "position_error": 0.0,
+          "scene": "meshes",
+          "seconds": 10.0,
+          "speed_degrees_per_second": 18,
+          "up": [
+            0.583859503269196,
+            0.422618508338928,
+            0.693182289600372
+          ]
+        },
+        {
+          "action": "roll_camera_left",
+          "degrees": 360.0,
+          "forward_error": 5.04003025980637e-07,
+          "position_error": 0.0,
+          "scene": "meshes",
+          "seconds": 20.0,
+          "speed_degrees_per_second": 18,
+          "up": [
+            -0.583859503269196,
+            -0.422618806362152,
+            -0.693182170391083
+          ]
+        },
+        {
+          "action": "roll_camera_right",
+          "degrees": -90.0,
+          "forward_error": 1.07453800524127e-07,
+          "position_error": 0.0,
+          "scene": "meshes",
+          "seconds": 5.0,
+          "speed_degrees_per_second": 18,
+          "up": [
+            0.764842331409454,
+            1.96021247234057e-07,
+            -0.644217550754547
+          ]
+        },
+        {
+          "action": "roll_camera_right",
+          "degrees": -180.0,
+          "forward_error": 1.2287812012346e-07,
+          "position_error": 0.0,
+          "scene": "meshes",
+          "seconds": 10.0,
+          "speed_degrees_per_second": 18,
+          "up": [
+            0.583859145641327,
+            0.422618389129639,
+            0.693182706832886
+          ]
+        },
+        {
+          "action": "roll_camera_right",
+          "degrees": -360.0,
+          "forward_error": 9.42432194506182e-08,
+          "position_error": 0.0,
+          "scene": "meshes",
+          "seconds": 20.0,
+          "speed_degrees_per_second": 18,
+          "up": [
+            -0.583858966827393,
+            -0.422618329524994,
+            -0.693182826042175
+          ]
+        },
+        {
+          "action": "roll_camera_left",
+          "degrees": 90.0,
+          "forward_error": 1.46000971312787e-07,
+          "position_error": 0.0,
+          "scene": "mixed",
+          "seconds": 5.0,
+          "speed_degrees_per_second": 18,
+          "up": [
+            -0.76484215259552,
+            2.14647322138717e-08,
+            0.644217789173126
+          ]
+        },
+        {
+          "action": "roll_camera_left",
+          "degrees": 180.0,
+          "forward_error": 1.97686247815909e-07,
+          "position_error": 0.0,
+          "scene": "mixed",
+          "seconds": 10.0,
+          "speed_degrees_per_second": 18,
+          "up": [
+            0.583859503269196,
+            0.422618508338928,
+            0.693182289600372
+          ]
+        },
+        {
+          "action": "roll_camera_left",
+          "degrees": 360.0,
+          "forward_error": 5.04003025980637e-07,
+          "position_error": 0.0,
+          "scene": "mixed",
+          "seconds": 20.0,
+          "speed_degrees_per_second": 18,
+          "up": [
+            -0.583859503269196,
+            -0.422618806362152,
+            -0.693182170391083
+          ]
+        },
+        {
+          "action": "roll_camera_right",
+          "degrees": -90.0,
+          "forward_error": 1.07453800524127e-07,
+          "position_error": 0.0,
+          "scene": "mixed",
+          "seconds": 5.0,
+          "speed_degrees_per_second": 18,
+          "up": [
+            0.764842331409454,
+            1.96021247234057e-07,
+            -0.644217550754547
+          ]
+        },
+        {
+          "action": "roll_camera_right",
+          "degrees": -180.0,
+          "forward_error": 1.2287812012346e-07,
+          "position_error": 0.0,
+          "scene": "mixed",
+          "seconds": 10.0,
+          "speed_degrees_per_second": 18,
+          "up": [
+            0.583859145641327,
+            0.422618389129639,
+            0.693182706832886
+          ]
+        },
+        {
+          "action": "roll_camera_right",
+          "degrees": -360.0,
+          "forward_error": 9.42432194506182e-08,
+          "position_error": 0.0,
+          "scene": "mixed",
+          "seconds": 20.0,
+          "speed_degrees_per_second": 18,
+          "up": [
+            -0.583858966827393,
+            -0.422618329524994,
+            -0.693182826042175
+          ]
+        },
+        {
+          "action": "roll_camera_left",
+          "degrees": 90.1307470121355,
+          "forward_error": 8.88589113401395e-07,
+          "position_error": 0.0,
+          "scene": "real-process",
+          "seconds": 5.023609,
+          "speed_degrees_per_second": 18
+        }
+      ],
+      "packaged": false,
+      "renderer": "forward_plus",
+      "restart": false
+    },
+    {
+      "checks": 9,
+      "display": "headless",
+      "failures": [],
+      "layouts": [],
+      "measurements": [],
+      "packaged": false,
+      "renderer": "forward_plus",
+      "restart": true
+    }
+  ],
+  "known_engine_cleanup_diagnostics": {
+    "roll": [],
+    "restart": []
+  }
+}

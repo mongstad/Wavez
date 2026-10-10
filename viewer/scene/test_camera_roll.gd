@@ -33,6 +33,9 @@ func held(view, action: String, seconds: float, frames: int = 60) -> void:
 	event.pressed = false; root.push_input(event)
 func same_pose(a: Transform3D, b: Transform3D) -> bool:
 	return a.origin.distance_to(b.origin) < .0001 and a.basis.is_equal_approx(b.basis)
+func movement_key(code: int, pressed: bool = true, physical: int = 0) -> void:
+	Input.parse_input_event(key(code,pressed,(code & KEY_CODE_MASK) if physical == 0 else physical))
+	Input.flush_buffered_events()
 func poses(view) -> Dictionary:
 	var result := {view:view.transform, view.scene_layers:view.scene_layers.transform, view.current_instance:view.current_instance.transform, view.guide_mesh:view.guide_mesh.transform}
 	for node in view.scene_layers.views.values(): result[node] = node.transform
@@ -300,6 +303,159 @@ func speed_preferences(view) -> void:
 			picture("speed-"+name.to_lower()+"-"+layout[2]); dialog.dismiss()
 	root.content_scale_factor = 1; root.size = Vector2i(1440,900); await settle(); shell.layout(); unfocus()
 
+func vertical_preferences(view) -> void:
+	var shell = view.shell
+	var prior: Dictionary = shell.shortcuts.active.duplicate()
+	view.inspection_paused = false; view.inspection_busy = false; view.free_camera = true; view.orbit_enabled = false
+	view._reset_camera(); unfocus()
+	check(prior.move_camera_up == KEY_E and prior.move_camera_down == KEY_Q,"Vertical defaults preserve E-up and Q-down")
+	check(Bindings.ACTIONS.filter(func(a): return a[0].begins_with("move_camera_")).size() == 2,"Only the two requested vertical movement actions are added")
+	# Measure translation along a banked camera's up axis, with the same speed formula.
+	view.camera.basis = (view.camera.basis * Basis(Vector3.BACK,deg_to_rad(75))).orthonormalized(); view._adopt_camera_basis()
+	view.camera_target = view.camera.position-view.camera.basis.z*view.camera_distance
+	var saved := Visual.snapshot(view)
+	for pair in [[KEY_E,1.0],[KEY_Q,-1.0]]:
+		for fps in [12,120]:
+			Visual.apply(view,saved); unfocus(); var before: Transform3D = view.camera.transform
+			movement_key(pair[0])
+			check(view.camera_vertical_keys.size() == 1,"Default vertical press starts exactly one held action: "+str(pair[0]))
+			for frame in fps: view._move_free_camera(1.0/fps)
+			movement_key(pair[0],false)
+			var shift: Vector3 = before.basis.y*pair[1]*maxf(1,view.camera_distance*.5)*view.free_camera_speed_scale
+			check(view.camera.position.distance_to(before.origin+shift) < .001 and view.camera.basis.is_equal_approx(before.basis),"Vertical held translation uses banked local up and elapsed-time speed at "+str(fps)+" Hz")
+			before = view.camera.transform; view._move_free_camera(.1)
+			check(view.camera.transform == before and view.camera_vertical_keys.is_empty(),"Vertical release stops immediately")
+	Visual.apply(view,saved); unfocus(); movement_key(KEY_E); movement_key(KEY_Q)
+	var before: Transform3D = view.camera.transform; view._move_free_camera(.1)
+	check(view.camera.transform == before,"Opposing vertical keys cancel")
+	movement_key(KEY_E,false); view._move_free_camera(.1)
+	check(view.camera.position != before.origin and view.camera_vertical_keys.has("move_camera_down"),"Releasing one vertical direction resumes the other")
+	movement_key(KEY_Q,false)
+	for code in [KEY_E,KEY_Q]:
+		view.free_camera = false; view.orbit_enabled = true; unfocus(); before = view.camera.transform
+		movement_key(code); view._move_free_camera(.1); movement_key(code,false)
+		check(not view.orbit_enabled and view.free_camera and view.camera.position != before.origin,"Vertical movement retains Auto Orbit takeover on the first movement tick")
+	view.free_camera = false; before = view.camera.transform; movement_key(KEY_E); view._move_free_camera(.1); movement_key(KEY_E,false)
+	check(view.camera.transform == before and view.camera_vertical_keys.is_empty(),"Vertical keys do not activate disabled Free Camera")
+	view.free_camera = true
+	shell.edit_shortcuts(); await settle(); var dialog = shell.shortcuts_editor
+	check(dialog.rows.move_camera_up.label.text == "Move Camera Up" and dialog.rows.move_camera_up.key.text == "E" and dialog.rows.move_camera_down.label.text == "Move Camera Down" and dialog.rows.move_camera_down.key.text == "Q","Both named default vertical rows are in the shortcut editor")
+	for dismissal in ["Cancel","Escape","Close"]:
+		dialog.start_capture("roll_camera_left"); movement_key(KEY_Q); movement_key(KEY_Q,false)
+		dialog.start_capture("roll_camera_right"); movement_key(KEY_E); movement_key(KEY_E,false)
+		check(dialog.staged.move_camera_up == 0 and dialog.staged.move_camera_down == 0 and shell.shortcuts.active == prior,"Q/E conflict transfer unbinds vertical actions only in the draft")
+		if dismissal == "Cancel": dialog.cancel.pressed.emit()
+		elif dismissal == "Close": dialog.close_button.pressed.emit()
+		else: root.push_input(key(KEY_ESCAPE)); root.push_input(key(KEY_ESCAPE,false))
+		check(shell.shortcuts.active == prior,dismissal+" discards vertical/roll binding drafts")
+		shell.edit_shortcuts(); await settle()
+	dialog.start_capture("roll_camera_left"); movement_key(KEY_Q); movement_key(KEY_Q,false)
+	dialog.start_capture("roll_camera_right"); movement_key(KEY_E); movement_key(KEY_E,false)
+	dialog.apply_button.pressed.emit()
+	check(dialog.visible and shell.shortcuts.active.move_camera_up == 0 and shell.shortcuts.active.move_camera_down == 0 and shell.shortcuts.active.roll_camera_left == KEY_Q and shell.shortcuts.active.roll_camera_right == KEY_E,"Apply activates Q/E roll and persists the conflicting vertical actions as Unbound")
+	for name in ["Dark","Light"]:
+		shell.appearance.select(name == "Light"); await settle(); dialog.roll_speed_slider.grab_focus(); await settle()
+		picture("vertical-qe-"+name.to_lower())
+	dialog.dismiss(); unfocus()
+	for code in [KEY_Q,KEY_E]:
+		before = view.camera.transform; var target: Vector3 = view.camera_target
+		movement_key(code)
+		check(Input.is_physical_key_pressed(code) and view.camera_vertical_keys.is_empty(),"Reassigned Q/E is physically held without a vertical action")
+		for frame in 60: view._update_camera_roll(1.0/60); view._move_free_camera(1.0/60)
+		movement_key(code,false)
+		check(view.camera.position == before.origin and view.camera_target == target and not view.camera.basis.is_equal_approx(before.basis),"Q/E roll alone never translates the camera")
+	# An existing saved Q/E roll profile without the new actions must also resolve uniquely.
+	var profile := Bindings.new(); profile.storage_path = output.path_join("vertical-profile.cfg")
+	var config := ConfigFile.new(); config.set_value("shortcuts","roll_camera_left",KEY_Q); config.set_value("shortcuts","roll_camera_right",KEY_E)
+	check(config.save(profile.storage_path) == OK and profile.load_preferences() == OK and profile.active.move_camera_up == 0 and profile.active.move_camera_down == 0,"Existing Q/E roll profile wins over newly introduced E/Q defaults without a dual binding")
+	config = ConfigFile.new(); config.set_value("shortcuts","reset_camera",KEY_Q); config.set_value("shortcuts","auto_orbit",KEY_E)
+	check(config.save(profile.storage_path) == OK and profile.load_preferences() == OK and profile.active.reset_camera == KEY_Q and profile.active.auto_orbit == KEY_E and profile.active.move_camera_up == 0 and profile.active.move_camera_down == 0,"New vertical defaults also preserve earlier saved Q/E assignments outside roll")
+	shell.edit_shortcuts(); dialog.reset.pressed.emit()
+	check(dialog.staged.move_camera_up == KEY_E and dialog.staged.move_camera_down == KEY_Q and dialog.staged.roll_camera_left == 0 and dialog.staged.roll_camera_right == 0,"Reset Defaults stages E-up/Q-down and Unbound rolls")
+	dialog.apply_button.pressed.emit(); dialog.dismiss()
+	check(shell.shortcuts.active == Bindings.defaults() and shell.shortcuts.camera_roll_speed == 18,"Applied defaults restore vertical bindings and preserve the slow roll default")
+	check(shell.shortcuts.apply(prior) == OK,"Restore independent roll bindings for connected tests")
+	shell.edit_shortcuts(); dialog.clear_binding("move_camera_up"); dialog.apply_button.pressed.emit(); dialog.dismiss(); unfocus()
+	before = view.camera.transform; movement_key(KEY_E); view._move_free_camera(.1); movement_key(KEY_E,false)
+	check(shell.shortcuts.active.move_camera_up == 0 and view.camera.transform == before,"Applied Clear disables the old E movement")
+	shell.edit_shortcuts(); dialog.start_capture("move_camera_up"); movement_key(KEY_F10); movement_key(KEY_F10,false)
+	dialog.start_capture("move_camera_down"); movement_key(KEY_F12); movement_key(KEY_F12,false)
+	dialog.apply_button.pressed.emit(); dialog.dismiss(); unfocus()
+	movement_key(KEY_F10); movement_key(KEY_F8); before = view.camera.transform
+	for frame in 12:
+		view._update_camera_roll(.01); var step: Transform3D = view.camera.transform
+		view._move_free_camera(.01)
+		var shift: Vector3 = step.basis.y*.01*maxf(1,view.camera_distance*.5)*view.free_camera_speed_scale
+		check(view.camera.position.distance_to(step.origin+shift) < .0001 and view.camera.basis.is_equal_approx(step.basis),"Mixed held roll/vertical movement follows the current banked local up")
+	movement_key(KEY_F8,false); movement_key(KEY_F10,false)
+	check(view.camera_vertical_keys.is_empty() and view.camera_roll_keys.is_empty(),"Mixed holds stop independently on release")
+	for button in [MOUSE_BUTTON_RIGHT,MOUSE_BUTTON_LEFT]:
+		movement_key(KEY_F10)
+		var mouse := InputEventMouseButton.new(); mouse.button_index = button; mouse.pressed = true; mouse.position = Vector2(400,300)
+		view._unhandled_input(mouse)
+		check(view.camera_vertical_keys.has("move_camera_up"),"Starting a viewport mouse gesture retains held vertical translation: "+str(button))
+		if button == MOUSE_BUTTON_RIGHT: view._steer_camera(Vector2(20,10))
+		before = view.camera.transform; view._move_free_camera(.1)
+		var shift: Vector3 = before.basis.y*.1*maxf(1,view.camera_distance*.5)*view.free_camera_speed_scale
+		check(view.camera.position.distance_to(before.origin+shift) < .0001 and view.camera.basis.is_equal_approx(before.basis),"Held vertical translation follows mouse-steered local axes without changing movement speed")
+		mouse.pressed = false; view._input(mouse); before = view.camera.transform; view._move_free_camera(.1)
+		check(view.camera.position != before.origin and view.camera_vertical_keys.has("move_camera_up"),"Mouse release retains an independently held vertical key")
+		movement_key(KEY_F10,false)
+	# Logical chords, Nordic printable +/- normalization, and physical release identity.
+	var custom: Dictionary = prior.duplicate(); Bindings.assign(custom,"move_camera_up",KEY_E | KEY_MASK_CTRL)
+	check(shell.shortcuts.apply(custom) == OK,"Apply modifier movement chord")
+	unfocus(); before = view.camera.transform; movement_key(KEY_E); view._move_free_camera(.1); movement_key(KEY_E,false)
+	check(view.camera.transform == before,"Unmodified E does not trigger a Ctrl+E binding")
+	movement_key(KEY_E | KEY_MASK_CTRL,true,KEY_Q); view._move_free_camera(.1)
+	check(view.camera.position != before.origin and view.camera_vertical_keys.has("move_camera_up"),"Logical Ctrl+E moves up even from a different physical key position")
+	root.push_input(key(KEY_CTRL,false)); before = view.camera.transform; view._move_free_camera(.1)
+	check(view.camera_vertical_keys.is_empty() and view.camera.transform == before,"Modifier release cancels the held movement chord")
+	movement_key(KEY_E | KEY_MASK_CTRL,false,KEY_Q)
+	Bindings.assign(custom,"move_camera_up",KEY_PLUS); check(shell.shortcuts.apply(custom) == OK,"Printable plus can be rebound from speed to vertical movement")
+	for us_layout in [false,true]:
+		var event := key(KEY_EQUAL if us_layout else KEY_PLUS,true,KEY_EQUAL if us_layout else KEY_PLUS)
+		event.unicode = KEY_PLUS; event.shift_pressed = us_layout
+		root.push_input(event); before = view.camera.transform; view._move_free_camera(.1)
+		check(view.camera.position != before.origin and view.camera_vertical_keys.has("move_camera_up"),"Nordic dedicated + / US Shift+= share logical movement dispatch: "+str(us_layout))
+		event.pressed = false; event.keycode = 0; root.push_input(event)
+		check(view.camera_vertical_keys.is_empty(),"Physical release stops a printable chord even without its logical keycode")
+	check(shell.shortcuts.apply(prior) == OK,"Restore E/Q movement and F8/F9 roll after layout checks")
+	unfocus(); movement_key(KEY_E); var rebound: Dictionary = prior.duplicate(); Bindings.assign(rebound,"move_camera_up",KEY_F10)
+	check(shell.shortcuts.apply(rebound) == OK,"Apply a rebind during a movement hold")
+	before = view.camera.transform; view._move_free_camera(.1)
+	check(view.camera_vertical_keys.is_empty() and view.camera.transform == before,"Rebinding ends stale movement even while the old physical key remains held")
+	movement_key(KEY_E,false); check(shell.shortcuts.apply(prior) == OK,"Restore E/Q after stale binding check")
+	for control in [LineEdit.new(),TextEdit.new(),SpinBox.new(),Button.new()]:
+		root.add_child(control); unfocus(); movement_key(KEY_E)
+		var editor: Control = control.get_line_edit() if control is SpinBox else control
+		editor.grab_focus(); before = view.camera.transform; view._move_free_camera(.1)
+		check(view.camera_vertical_keys.is_empty() and view.camera.transform == before,"Focused control cancels vertical movement: "+control.get_class())
+		editor.release_focus(); view._move_free_camera(.1)
+		check(view.camera.transform == before,"Leaving focus does not resume a stale vertical hold")
+		movement_key(KEY_E,false); control.free()
+	for guard in ["inspection_busy","inspection_paused","offline_instance"]:
+		unfocus(); movement_key(KEY_E); view.set(guard,true); before = view.camera.transform
+		view._process(.01); view.set(guard,false); view._move_free_camera(.1)
+		check(view.camera_vertical_keys.is_empty() and view.camera.transform == before,guard+" discards vertical holds before movement processing can resume")
+	unfocus(); movement_key(KEY_E); root.focus_exited.emit(); before = view.camera.transform; view._move_free_camera(.1)
+	check(view.camera_vertical_keys.is_empty() and view.camera.transform == before,"Window focus loss discards held vertical movement")
+	movement_key(KEY_E,false); movement_key(KEY_E); shell.edit_shortcuts(); dialog.dismiss(); unfocus(); before = view.camera.transform; view._move_free_camera(.1)
+	check(view.camera_vertical_keys.is_empty() and view.camera.transform == before,"Preferences dismissal does not resume an old vertical hold")
+	movement_key(KEY_E,false); movement_key(KEY_E); shell.edit_orbit_center(); shell.dismiss_orbit_editor(); unfocus(); before = view.camera.transform; view._move_free_camera(.1)
+	check(view.camera_vertical_keys.is_empty() and view.camera.transform == before,"Orbit editor dismissal does not resume an old vertical hold")
+	movement_key(KEY_E,false); movement_key(KEY_E); shell.navigation.get_child(2).about_to_popup.emit(); before = view.camera.transform; view._move_free_camera(.1)
+	check(view.camera_vertical_keys.is_empty() and view.camera.transform == before,"Menu opening discards held vertical movement")
+	movement_key(KEY_E,false); movement_key(KEY_E); view._open_capture(output.path_join("mixed.wvz")); await view.scene_layers.wait_for_surface(); view.inspection_paused = false; unfocus()
+	before = view.camera.transform; view._move_free_camera(.1)
+	check(view.camera_vertical_keys.is_empty() and view.camera.transform == before,"Capture replacement discards vertical movement while E remains physically held")
+	movement_key(KEY_E,false)
+	await settle(); unfocus(); movement_key(KEY_E); before = view.camera.transform; view.set_process(true); await get_tree().create_timer(.15).timeout
+	check(view.camera.position != before.origin and view.camera.basis.is_equal_approx(before.basis),"Actual process loop continuously translates along the configured vertical axis")
+	movement_key(KEY_E,false); before = view.camera.transform; await get_tree().create_timer(.1).timeout
+	check(view.camera.transform == before,"Actual process loop stops vertical movement on release")
+	view.set_process(false); view._restore_render_pacing(); view._clear_manual_navigation()
+	check(shell.shortcuts.apply(prior) == OK,"Restore original independent navigation profile after vertical regressions")
+
 func run() -> void:
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--roll-output="): output = arg.trim_prefix("--roll-output=")
@@ -311,18 +467,24 @@ func run() -> void:
 	if view == null: view = Viewer.new(); root.add_child(view)
 	view.set_process(false); view.scene_prebuffer_enabled = false
 	if restart:
-		check(view.shell.shortcuts.active.roll_camera_left == KEY_F8 and view.shell.shortcuts.active.roll_camera_right == KEY_F9,"Fresh process restores separate roll bindings")
+		check(view.shell.shortcuts.active.roll_camera_left == KEY_Q and view.shell.shortcuts.active.roll_camera_right == KEY_E,"Fresh process restores Q/E roll bindings without conflicting vertical actions")
+		check(view.shell.shortcuts.active.move_camera_up == KEY_F10 and view.shell.shortcuts.active.move_camera_down == KEY_F12,"Fresh process restores rebound vertical bindings")
 		check(view.shell.shortcuts.camera_roll_speed == 37,"Fresh process restores the applied shared speed")
 		view.shell.edit_shortcuts(); await settle()
 		check(view.shell.shortcuts_editor.roll_speed_slider.value == 37 and view.shell.shortcuts_editor.roll_speed_value.text == "37°/s","Restarted Preferences restores slider position and value")
 		view.shell.shortcuts_editor.dismiss()
 		unfocus(); view.inspection_paused = false; var before: Transform3D = view.camera.transform
 		held(view,"roll_camera_left",90.0/37); check(view.camera.basis.y.distance_to(-before.basis.x) < .00001,"Persisted roll binding uses restored speed after restart")
+		for pair in [[KEY_Q,0.0],[KEY_E,0.0],[KEY_F10,1.0],[KEY_F12,-1.0]]:
+			before = view.camera.transform; movement_key(pair[0]); view._move_free_camera(.1); movement_key(pair[0],false)
+			var shift: Vector3 = before.basis.y*pair[1]*.1*maxf(1,view.camera_distance*.5)*view.free_camera_speed_scale
+			check(view.camera.position.distance_to(before.origin+shift) < .0001,"Restarted profile uses only configured vertical keys: "+str(pair[0]))
 	else:
 		check(view.shell.shortcuts.active.roll_camera_left == 0 and view.shell.shortcuts.active.roll_camera_right == 0,"Fresh profile leaves both roll defaults Unbound")
 		check(Bindings.ACTIONS.filter(func(a): return a[0].begins_with("roll_camera_")).size() == 2,"Exactly two independent roll actions")
 		await shortcuts(view)
 		await speed_preferences(view)
+		await vertical_preferences(view)
 		for scene in ["particles","fields","meshes","mixed"]:
 			view._open_capture(output.path_join(scene+".wvz")); view.playing = false
 			check(await view.scene_layers.wait_for_surface(),scene+": fixture ready")
@@ -341,7 +503,10 @@ func run() -> void:
 				if angle == 0: initial_projection = projection-center
 				check((projection-center).distance_to(initial_projection.rotated(deg_to_rad(angle))) < .001,"Screen projection banks around fixed view axis: "+str(angle))
 				picture("bank-"+str(angle))
-		check(view.shell.shortcuts.apply(view.shell.shortcuts.active,null,37) == OK,"Persist nondefault speed for the separate restart process")
+		var persisted: Dictionary = view.shell.shortcuts.active.duplicate()
+		Bindings.assign(persisted,"roll_camera_left",KEY_Q); Bindings.assign(persisted,"roll_camera_right",KEY_E)
+		Bindings.assign(persisted,"move_camera_up",KEY_F10); Bindings.assign(persisted,"move_camera_down",KEY_F12)
+		check(view.shell.shortcuts.apply(persisted,null,37) == OK,"Persist Q/E roll, rebound vertical keys and nondefault speed for restart")
 	var report := {"checks":checks,"failures":failures,"measurements":measurements,"layouts":layouts,"renderer":RenderingServer.get_current_rendering_method(),"display":DisplayServer.get_name(),"packaged":OS.has_feature("template"),"restart":restart}
 	var file := FileAccess.open(output.path_join("restart-report.json" if restart else "roll-report.json"),FileAccess.WRITE); file.store_string(JSON.stringify(report,"\t")); file.close()
 	view._clear_manual_navigation(); view.queue_free(); await get_tree().process_frame

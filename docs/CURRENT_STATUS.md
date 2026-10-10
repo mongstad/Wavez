@@ -9,8 +9,11 @@ local view axis while retaining scientific/world state. A shared, persistent
 5–90°/second manual roll speed defaults to 18°/second and is staged through the
 Keyboard Shortcuts Preferences slider. The full camera basis
 continues through movement, steering, framing and saved views; Reset Camera
-intentionally restores the default orientation. See [camera navigation](MANUAL_CAMERA_ORBIT.md)
-and the [current review evidence](evidence/issue-331/roll-speed/README.md).
+intentionally restores the default orientation. Configurable Move Camera Up/Down
+default to E/Q and transfer conflicts with roll, replacing fixed vertical key
+polling while retaining physical W/A/S/D and the existing translation rate.
+See [camera navigation](MANUAL_CAMERA_ORBIT.md) and the
+[current review evidence](evidence/issue-331/vertical-movement/README.md).
 
 The GitHub Issues and Wavez Development Project are the operational queue. Work
 requires a Ready issue (or explicit owner authorization), the correct branch/base
