@@ -49,8 +49,7 @@ func setup(owner_shell) -> void:
 	var header := HBoxContainer.new(); header_and_list.add_child(header)
 	var heading := Label.new(); heading.text = "Jobs"; heading.theme_type_variation = "PanelTitle"
 	heading.size_flags_horizontal = Control.SIZE_EXPAND_FILL; heading.mouse_filter = Control.MOUSE_FILTER_IGNORE; header.add_child(heading)
-	jobs_header_close = Button.new(); jobs_header_close.theme_type_variation = "IconAction"; jobs_header_close.tooltip_text = "Close Jobs"
-	jobs_header_close.custom_minimum_size = Vector2(32,32); jobs_header_close.pressed.connect(jobs_dialog.hide); header.add_child(jobs_header_close)
+	jobs_header_close = shell.close_action(header, jobs_dialog.hide, "Close Jobs")
 	var scroll := ScrollContainer.new(); scroll.custom_minimum_size = Vector2(460,220)
 	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL; scroll.follow_focus = true
 	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED; header_and_list.add_child(scroll)

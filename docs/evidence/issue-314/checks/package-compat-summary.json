@@ -1,0 +1,10 @@
+{
+  "checks": 759,
+  "failures": [],
+  "renderer": "gl_compatibility",
+  "headless": false,
+  "packaged": true,
+  "baseline": false,
+  "source_sha256_unchanged": "7041fd95b7ed04de57821c1b1b23aba73cec2fcfbd8806bb90ad73b4d101f7b9",
+  "geometry_cases": 42
+}

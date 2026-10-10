@@ -210,8 +210,7 @@ func setup(owner_viewer) -> void:
 	var detail_header := HBoxContainer.new(); detail_body.add_child(detail_header)
 	detail_heading = Label.new(); detail_heading.theme_type_variation = "PanelTitle"; detail_heading.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	detail_heading.mouse_filter = Control.MOUSE_FILTER_IGNORE; detail_header.add_child(detail_heading)
-	detail_close = Button.new(); detail_close.theme_type_variation = "IconAction"; detail_close.tooltip_text = "Close details"
-	detail_close.custom_minimum_size = Vector2(32,32); detail_close.pressed.connect(func(): details.hide(); restore_focus()); detail_header.add_child(detail_close)
+	detail_close = close_action(detail_header, func(): details.hide(); restore_focus(), "Close details")
 	detail_header.gui_input.connect(func(event: InputEvent):
 		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed and not details.is_embedded() and DisplayServer.has_feature(DisplayServer.FEATURE_WINDOW_DRAG):
 			DisplayServer.window_start_drag(details.get_window_id()))
@@ -283,9 +282,9 @@ func close_action(parent: Node, action: Callable, tooltip: String) -> Button:
 	var control := button(parent, "", action, "close")
 	control.custom_minimum_size = Vector2(32, 32)
 	control.theme_type_variation = "IconAction"; control.tooltip_text = tooltip
+	control.set_meta("shell_close", true)
 	if style_slice != null:
-		control.icon = style_slice.theme.chrome_icon("close")
-		style_slice.animate_buttons(control)
+		style_slice.style_close_action(control)
 	return control
 
 func menu(parent: Node, title: String, icon_id: String, entries: Array, action: Callable) -> void:

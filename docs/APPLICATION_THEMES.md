@@ -16,6 +16,10 @@ Success, warning and error retain separate green, amber and red roles. Dark keep
 its original palette. About switches between the two official branding assets
 without restarting or reloading a capture.
 
+Wavez-owned top-right dialog X controls share the shell close glyph, hit area and
+state styling in both themes. Their visible keyboard focus stays inside the close
+hit area; see [dialog close controls](DIALOG_CLOSE_CONTROLS.md).
+
 Both variants use the existing base/violet theme builders and identical control
 metrics. Local presentation overrides retain their geometry and original dark
 resources. Theme changes and newly created or restyled controls trigger a

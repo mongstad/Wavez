@@ -1,0 +1,9 @@
+{
+  "checks": 755,
+  "failures": [],
+  "renderer": "forward_plus",
+  "headless": true,
+  "packaged": false,
+  "baseline": false,
+  "source_sha256_unchanged": "3d62802103fd5f664263814c8da02134e0f2554b23cbb4c4e0111c3af417f476"
+}

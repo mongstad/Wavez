@@ -32,6 +32,7 @@ Start with:
 - [Current status](docs/CURRENT_STATUS.md)
 - [Paused opening and automatic preparation](docs/PAUSED_PREPARATION.md)
 - [Dialog title and section hierarchy](docs/DIALOG_HIERARCHY.md)
+- [Shared dialog close controls](docs/DIALOG_CLOSE_CONTROLS.md)
 - [File and Tools dialog layout](docs/DIALOG_COHERENCE.md)
 - [Performance dialog](docs/PERFORMANCE_DIALOG.md)
 - [Current Tools functional audit](docs/TOOLS_FUNCTIONAL_AUDIT.md)
