@@ -16,6 +16,7 @@ defines the WVZ1-only workflow.
 
 Start with:
 
+- [Getting Started: installation, Python examples and technical reference](GETTING_STARTED.md)
 - [Quickstart](QUICKSTART.md)
 - [Dark and Light themes](docs/APPLICATION_THEMES.md)
 - [Editable Keyboard Shortcuts](docs/KEYBOARD_SHORTCUTS.md)

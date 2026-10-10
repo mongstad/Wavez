@@ -1,5 +1,9 @@
 # Quickstart
 
+For standalone installation and four small Python examples, start with
+[Getting Started](GETTING_STARTED.md). The commands below are for development
+from source.
+
 Run from the `WAVEZ` repository root with Python 3.11+ (the base library supports 3.10+)
 and Godot 4.7.2, the accepted viewer validation version.
 
