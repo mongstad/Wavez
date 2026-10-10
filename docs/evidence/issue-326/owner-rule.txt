@@ -1,0 +1,3 @@
+AGENTS.md exact sentence count: 1
+Never add tooltips to panels, controls, buttons, labels, or other UI elements unless the owner explicitly instructs you to add a tooltip for that specific element.
+Already present in accepted main; preserved without duplication.

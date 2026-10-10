@@ -1,0 +1,11 @@
+{
+	"current_frame": 4,
+	"elapsed_seconds": 0.579,
+	"encoder_pid": -1,
+	"intermediate_directory": "/tmp/wavez-326-package-final/fractional-before",
+	"message": "Saved /tmp/wavez-326-package-final/fractional-before/output.mp4",
+	"output_path": "/tmp/wavez-326-package-final/fractional-before/output.mp4",
+	"renderer_pid": 1799911,
+	"stage": "complete",
+	"total_frames": 4
+}

@@ -1,5 +1,9 @@
 # Retained evidence
 
+Issue #326's [Video Export tooltip review](evidence/issue-326/README.md) records
+native editor/arrow/clock/label hover checks in Dark/Light normal/compact layouts,
+exact accepted-main settings/export comparisons and the existing owner tooltip rule.
+
 Issue #331's [vertical-movement refinement](evidence/issue-331/vertical-movement/README.md)
 records configurable E-up/Q-down, conflict transfer to Q/E roll without translation,
 held input recovery, persistence and preserved slow banking in build 88.

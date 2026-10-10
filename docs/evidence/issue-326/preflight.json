@@ -1,0 +1,51 @@
+{
+  "ready": [
+    {
+      "number": 326,
+      "status": "Ready",
+      "title": "UX-VIDEO — Remove oversized time-control tooltips and prohibit unsolicited tooltips",
+      "url": "https://github.com/mongstad/Wavez/issues/326"
+    }
+  ],
+  "metadata": {
+    "data": {
+      "repository": {
+        "issue": {
+          "linkedBranches": {
+            "nodes": [
+              {
+                "ref": {
+                  "name": "326-ux-video-remove-oversized-time-control-tooltips-and-prohibit-unsolicited-tooltips",
+                  "target": {
+                    "oid": "d2b0bf453b2ae0d301decde2e22251316f482be0"
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "pullRequest": {
+          "state": "MERGED",
+          "mergedAt": "2026-10-10T20:38:16Z",
+          "mergeCommit": {
+            "oid": "d2b0bf453b2ae0d301decde2e22251316f482be0"
+          }
+        },
+        "predecessor": {
+          "state": "MERGED",
+          "mergedAt": "2026-10-10T12:01:54Z",
+          "mergeCommit": {
+            "oid": "7c005c8a59dba49d6764eea0ec75b02591e346af"
+          }
+        }
+      }
+    }
+  },
+  "accepted_version": "v0.1.0.90",
+  "candidate_version": "v0.1.0.91",
+  "initial_checkout_clean": true,
+  "initial_branch_equals_main": true,
+  "initial_main_equals_origin": true,
+  "predecessor_is_main_ancestor": true,
+  "initial_matching_prs": 0
+}

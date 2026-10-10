@@ -7,6 +7,7 @@ var checks := 0
 var failures: Array[String] = []
 var records := {}
 var matrix: Array = []
+var hover_records: Array = []
 var viewer
 var output: String
 var baseline := false
@@ -44,6 +45,57 @@ func arrow(spin: SpinBox, up: bool):
 	spin.get_window().push_input(event)
 	event=event.duplicate();event.pressed=false;spin.get_window().push_input(event)
 	await settle()
+func tooltip_labels(node: Node) -> Array:
+	var labels: Array = []
+	if node is Label and node.theme_type_variation == "TooltipLabel" and node.is_visible_in_tree(): labels.append(node.text)
+	for child in node.get_children(): labels.append_array(tooltip_labels(child))
+	return labels
+func hover_time(control: Control, point: Vector2, expected: Control, label: String, should_show := false):
+	var window := control.get_window()
+	var motion := InputEventMouseMotion.new(); motion.position = point
+	if window.is_embedded():
+		motion.position += Vector2(window.position)
+		root.warp_mouse(motion.position)
+		root.push_input(motion)
+	else:
+		window.warp_mouse(motion.position)
+		window.push_input(motion)
+	await create_timer(.8).timeout; await settle()
+	var hovered := window.gui_get_hovered_control()
+	check(hovered == expected if expected != null else hovered != null, label + ": native hover reaches target")
+	var chain: Array = []
+	var node: Node = control
+	var hints: Array = []
+	while node is Control:
+		chain.append({"class":node.get_class(),"hint":node.get_tooltip()})
+		if not node.get_tooltip().is_empty(): hints.append(node.get_tooltip())
+		node = node.get_parent()
+	var popups := tooltip_labels(root)
+	check(not hints.is_empty() if should_show else hints.is_empty(), label + ": editor/control/ancestor tooltip contract")
+	check(not popups.is_empty() if should_show else popups.is_empty(), label + ": visible delayed popup contract")
+	hover_records.append({"target":label,"hovered":hovered.get_class() if hovered != null else "none","ancestors":chain,"popups":popups})
+func review_time_hover(dialog, label: String):
+	var saved: Dictionary = dialog.settings()
+	var scroll: ScrollContainer = dialog.fields.get_parent()
+	for pair in [[dialog.start,dialog.start_clock,"Start"],[dialog.end,dialog.end_clock,"End"]]:
+		var spin: SpinBox = pair[0]; var clock: Label = pair[1]
+		var row := spin.get_parent()
+		var permanent: Label = row.get_parent().get_child(row.get_index()-1)
+		scroll.ensure_control_visible(spin); await settle()
+		check(permanent.text == pair[2] and permanent.is_visible_in_tree(), label + ": permanent " + pair[2] + " label")
+		check(scroll.get_global_rect().encloses(spin.get_global_rect()) and scroll.get_global_rect().encloses(clock.get_global_rect()) and scroll.get_global_rect().encloses(permanent.get_global_rect()),label + ": " + pair[2] + " targets are inside scroll viewport")
+		var rect := spin.get_global_rect()
+		await hover_time(spin.get_line_edit(),spin.get_line_edit().get_global_rect().get_center(),spin.get_line_edit(),label+"-"+pair[2]+"-editor")
+		await hover_time(spin,Vector2(rect.end.x-8,rect.position.y+rect.size.y*.25),spin,label+"-"+pair[2]+"-up")
+		await hover_time(spin,Vector2(rect.end.x-8,rect.position.y+rect.size.y*.75),spin,label+"-"+pair[2]+"-down")
+		await hover_time(clock,clock.get_global_rect().get_center(),null,label+"-"+pair[2]+"-clock")
+		await hover_time(permanent,permanent.get_global_rect().get_center(),null,label+"-"+pair[2]+"-label")
+	scroll.ensure_control_visible(dialog.range_choice); await settle()
+	await hover_time(dialog.range_choice,dialog.range_choice.get_global_rect().get_center(),dialog.range_choice,label+"-Mode")
+	check(dialog.settings() == saved, label + ": hover preserves exact range and job settings")
+	check(not dialog.rate.tooltip_text.is_empty() and not dialog.estimate.tooltip_text.is_empty(),label+": existing speed/summary tooltips retained")
+	scroll.ensure_control_visible(dialog.end); await settle()
+	picture("tooltip-free-"+label)
 func review_controls(dialog, source: String):
 	var first: float=dialog.timeline.times[0];var last: float=dialog.timeline.times[-1]
 	dialog.set_range_times(first+30,first+60);await settle()
@@ -58,6 +110,11 @@ func review_controls(dialog, source: String):
 	check(dialog.start_clock.text=="≈00:30" and dialog.end_clock.text=="≈01:00" and dialog.precise_range.visible and dialog.precise_range.text.contains("00:30.0003") and dialog.precise_range.text.contains("01:00.0003"),"Exact fractional interval is visibly disclosed")
 	check(not dialog.start.get_line_edit().text.contains(".") and not dialog.end.get_line_edit().text.contains("."),"Time controls have no decimal places")
 	if source=="scene":picture("fractional-preserved")
+	if source=="scene" and baseline:
+		await hover_time(dialog.start.get_line_edit(),dialog.start.get_line_edit().get_global_rect().get_center(),dialog.start.get_line_edit(),"accepted-Start-editor",true)
+		picture("accepted-time-tooltip")
+		var rect: Rect2 = dialog.start.get_global_rect()
+		await hover_time(dialog.start,Vector2(rect.end.x-8,rect.position.y+rect.size.y*.25),dialog.start,"accepted-Start-up",true)
 	if source=="scene":
 		for light in [false,true]:
 			viewer.shell.appearance.light=light;viewer.shell.appearance.apply();await settle()
@@ -66,6 +123,7 @@ func review_controls(dialog, source: String):
 				check(dialog.precise_range.get_global_rect().end.y<=dialog.start_button.get_global_rect().position.y,"Exact fractional interval clears actions at "+str(dimensions))
 				check(dialog.precise_range.get_global_rect().end.x<=dialog.summary_group.get_global_rect().end.x,"Exact fractional interval wraps within summary")
 				picture("fractional-"+("light" if light else "dark")+"-"+str(dimensions.x))
+				if not baseline: await review_time_hover(dialog,("light" if light else "dark")+"-"+str(dimensions.x))
 		dialog.size=Vector2i(700,650);await settle()
 	dialog.hide();dialog.open();await settle()
 	check(dialog.settings()==saved,"Opening Custom preserves exact selection and output settings")
@@ -200,7 +258,7 @@ func run():
 					scroll.scroll_vertical=0
 			dialog.size=Vector2i(700,650);await settle()
 		if not baseline and source=="precise":
-			check(dialog.start.tooltip_text.contains(FloatText.format_value(first)) and dialog.end.tooltip_text.contains(FloatText.format_value(last)),"Precise preset seconds remain visible in hints")
+			check(dialog.start.tooltip_text.is_empty() and dialog.end.tooltip_text.is_empty() and dialog.precise_range.visible,"Precise endpoints retain visible Exact range without tooltips")
 			picture("precise-endpoints")
 		if source=="hours":
 			await settle();picture("hour-plus")
@@ -211,7 +269,7 @@ func run():
 		dialog.range_choice.select(2);dialog.update_range()
 		# Intentional whole-second edits agree with the previous precision model.
 		await edit(dialog.start,"30");await edit(dialog.end,"60")
-		check(dialog.settings().start_time==(30.0 if baseline else first+30) and dialog.settings().end_time==(60.0 if baseline else first+60),"Whole-second keyboard entry maps to recorded source: "+source)
+		check(dialog.settings().start_time==(first+30 if dialog.has_method("set_range_times") else 30.0) and dialog.settings().end_time==(first+60 if dialog.has_method("set_range_times") else 60.0),"Whole-second keyboard entry maps to recorded source: "+source)
 		# Compare identical recorded intervals; the intentional elapsed-control mapping
 		# for offset sources is checked separately above.
 		exact_range(dialog,30,60)
@@ -235,7 +293,7 @@ func run():
 		check(Job.frame_total(dialog.settings())==1,"Zero range still exports one frame")
 		record(source+"-still",dialog)
 		exact_range(dialog,dialog.settings().start_time,dialog.settings().start_time-.1)
-		if baseline: check(dialog.estimate.text=="End time must be at or after start time.","Baseline rejected inverted range at export")
+		if not dialog.has_method("set_range_times"): check(dialog.estimate.text=="End time must be at or after start time.","Baseline rejected inverted range at export")
 		else: check(dialog.settings().end_time==dialog.settings().start_time,"Invalid restored End is constrained before export")
 		exact_range(dialog,dialog.settings().start_time,dialog.settings().start_time+.75);dialog.preparing=true;dialog._sync_action_buttons()
 		check(not dialog.start.editable and not dialog.end.editable and dialog.range_choice.disabled,"Active export locks nested seconds editors")
@@ -296,7 +354,7 @@ func run():
 			await edit(dialog.start,"-1")
 			check(dialog.settings().start_time==first,"Negative Start selects exact short origin: "+source)
 			picture(source+"-bounded");dialog.hide()
-	Job.write_json(output.path_join("report.json"),{"checks":checks,"failures":failures,"records":records,"matrix":matrix,"renderer":RenderingServer.get_current_rendering_method(),"baseline":baseline})
+	Job.write_json(output.path_join("report.json"),{"checks":checks,"failures":failures,"records":records,"matrix":matrix,"renderer":RenderingServer.get_current_rendering_method(),"baseline":baseline,"hover":hover_records})
 	viewer.queue_free();await process_frame;await process_frame
 	print("VIDEO TIME: ",checks," checks; ",failures.size()," failures")
 	quit(0 if failures.is_empty() else 1)

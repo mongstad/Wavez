@@ -1,0 +1,581 @@
+{
+  "renderer": "gl_compatibility",
+  "packaged": true,
+  "ui_checks": {
+    "before": 190,
+    "after": 383
+  },
+  "settings_matrix_pairs": 42,
+  "exports": [
+    {
+      "case": "fractional",
+      "frames": 4,
+      "timestamps": [
+        {
+          "a": 0,
+          "alpha": 0.000595238095238095,
+          "b": 1,
+          "camera_origin": [
+            0.630349636077881,
+            1.13664364814758,
+            1.12679612636566
+          ],
+          "capture_time": 0.125,
+          "clean_view": true,
+          "color_channel": "fixed",
+          "colormap": "viridis",
+          "guides": {
+            "absorber": false,
+            "data": false,
+            "domain": false,
+            "imposed": false
+          },
+          "height": 180,
+          "n": 0,
+          "normalization": {
+            "bounds": null,
+            "mode": "frame"
+          },
+          "overlays": true,
+          "sample": {
+            "alpha": 0.000595238095238095,
+            "layers": [
+              {
+                "display_lod": "all recorded particles",
+                "id": "p",
+                "kind": "particles",
+                "scalar_time": 0.0,
+                "source_indices": [
+                  0,
+                  1
+                ],
+                "source_time": 0.0,
+                "status": "interpolated by ID",
+                "units": "m",
+                "visible": true
+              }
+            ],
+            "missing_layers": [],
+            "positions": "interpolated by ID; unmatched held",
+            "requested_time": 0.125,
+            "scalar_time": 0.0,
+            "scalars": "held",
+            "source_indices": [
+              0,
+              1
+            ],
+            "source_times": [
+              0.0,
+              210.0
+            ],
+            "stale_layers": [],
+            "unavailable_channels": []
+          },
+          "trail_instances": 0,
+          "trails": false,
+          "video_time": 0.0,
+          "width": 320
+        },
+        {
+          "a": 0,
+          "alpha": 0.00148809523809524,
+          "b": 1,
+          "camera_origin": [
+            0.630349636077881,
+            1.13664364814758,
+            1.12679612636566
+          ],
+          "capture_time": 0.3125,
+          "clean_view": true,
+          "color_channel": "fixed",
+          "colormap": "viridis",
+          "guides": {
+            "absorber": false,
+            "data": false,
+            "domain": false,
+            "imposed": false
+          },
+          "height": 180,
+          "n": 1,
+          "normalization": {
+            "bounds": null,
+            "mode": "frame"
+          },
+          "overlays": true,
+          "sample": {
+            "alpha": 0.00148809523809524,
+            "layers": [
+              {
+                "display_lod": "all recorded particles",
+                "id": "p",
+                "kind": "particles",
+                "scalar_time": 0.0,
+                "source_indices": [
+                  0,
+                  1
+                ],
+                "source_time": 0.0,
+                "status": "interpolated by ID",
+                "units": "m",
+                "visible": true
+              }
+            ],
+            "missing_layers": [],
+            "positions": "interpolated by ID; unmatched held",
+            "requested_time": 0.3125,
+            "scalar_time": 0.0,
+            "scalars": "held",
+            "source_indices": [
+              0,
+              1
+            ],
+            "source_times": [
+              0.0,
+              210.0
+            ],
+            "stale_layers": [],
+            "unavailable_channels": []
+          },
+          "trail_instances": 0,
+          "trails": false,
+          "video_time": 0.25,
+          "width": 320
+        },
+        {
+          "a": 0,
+          "alpha": 0.00238095238095238,
+          "b": 1,
+          "camera_origin": [
+            0.630349636077881,
+            1.13664364814758,
+            1.12679612636566
+          ],
+          "capture_time": 0.5,
+          "clean_view": true,
+          "color_channel": "fixed",
+          "colormap": "viridis",
+          "guides": {
+            "absorber": false,
+            "data": false,
+            "domain": false,
+            "imposed": false
+          },
+          "height": 180,
+          "n": 2,
+          "normalization": {
+            "bounds": null,
+            "mode": "frame"
+          },
+          "overlays": true,
+          "sample": {
+            "alpha": 0.00238095238095238,
+            "layers": [
+              {
+                "display_lod": "all recorded particles",
+                "id": "p",
+                "kind": "particles",
+                "scalar_time": 0.0,
+                "source_indices": [
+                  0,
+                  1
+                ],
+                "source_time": 0.0,
+                "status": "interpolated by ID",
+                "units": "m",
+                "visible": true
+              }
+            ],
+            "missing_layers": [],
+            "positions": "interpolated by ID; unmatched held",
+            "requested_time": 0.5,
+            "scalar_time": 0.0,
+            "scalars": "held",
+            "source_indices": [
+              0,
+              1
+            ],
+            "source_times": [
+              0.0,
+              210.0
+            ],
+            "stale_layers": [],
+            "unavailable_channels": []
+          },
+          "trail_instances": 0,
+          "trails": false,
+          "video_time": 0.5,
+          "width": 320
+        },
+        {
+          "a": 0,
+          "alpha": 0.00327380952380952,
+          "b": 1,
+          "camera_origin": [
+            0.630349636077881,
+            1.13664364814758,
+            1.12679612636566
+          ],
+          "capture_time": 0.6875,
+          "clean_view": true,
+          "color_channel": "fixed",
+          "colormap": "viridis",
+          "guides": {
+            "absorber": false,
+            "data": false,
+            "domain": false,
+            "imposed": false
+          },
+          "height": 180,
+          "n": 3,
+          "normalization": {
+            "bounds": null,
+            "mode": "frame"
+          },
+          "overlays": true,
+          "sample": {
+            "alpha": 0.00327380952380952,
+            "layers": [
+              {
+                "display_lod": "all recorded particles",
+                "id": "p",
+                "kind": "particles",
+                "scalar_time": 0.0,
+                "source_indices": [
+                  0,
+                  1
+                ],
+                "source_time": 0.0,
+                "status": "interpolated by ID",
+                "units": "m",
+                "visible": true
+              }
+            ],
+            "missing_layers": [],
+            "positions": "interpolated by ID; unmatched held",
+            "requested_time": 0.6875,
+            "scalar_time": 0.0,
+            "scalars": "held",
+            "source_indices": [
+              0,
+              1
+            ],
+            "source_times": [
+              0.0,
+              210.0
+            ],
+            "stale_layers": [],
+            "unavailable_channels": []
+          },
+          "trail_instances": 0,
+          "trails": false,
+          "video_time": 0.75,
+          "width": 320
+        }
+      ],
+      "png_pixels_identical": true,
+      "decoded_mp4_pixels_identical": true,
+      "probe": {
+        "width": 320,
+        "height": 180,
+        "avg_frame_rate": "4/1",
+        "nb_frames": "4"
+      }
+    },
+    {
+      "case": "full-fast",
+      "frames": 2,
+      "timestamps": [
+        {
+          "a": 0,
+          "alpha": 0.0,
+          "b": 1,
+          "camera_origin": [
+            0.630349636077881,
+            1.13664364814758,
+            1.12679612636566
+          ],
+          "capture_time": 0.0,
+          "clean_view": true,
+          "color_channel": "fixed",
+          "colormap": "viridis",
+          "guides": {
+            "absorber": false,
+            "data": false,
+            "domain": false,
+            "imposed": false
+          },
+          "height": 180,
+          "n": 0,
+          "normalization": {
+            "bounds": null,
+            "mode": "frame"
+          },
+          "overlays": true,
+          "sample": {
+            "alpha": 0.0,
+            "layers": [
+              {
+                "display_lod": "all recorded particles",
+                "id": "p",
+                "kind": "particles",
+                "scalar_time": 0.0,
+                "source_indices": [
+                  0,
+                  0
+                ],
+                "source_time": 0.0,
+                "status": "exact",
+                "units": "m",
+                "visible": true
+              }
+            ],
+            "missing_layers": [],
+            "positions": "exact",
+            "requested_time": 0.0,
+            "scalar_time": 0.0,
+            "scalars": "exact",
+            "source_indices": [
+              0,
+              0
+            ],
+            "source_times": [
+              0.0,
+              0.0
+            ],
+            "stale_layers": [],
+            "unavailable_channels": []
+          },
+          "trail_instances": 0,
+          "trails": false,
+          "video_time": 0.0,
+          "width": 320
+        },
+        {
+          "a": 0,
+          "alpha": 0.5,
+          "b": 1,
+          "camera_origin": [
+            0.630349636077881,
+            1.13664364814758,
+            1.12679612636566
+          ],
+          "capture_time": 105.0,
+          "clean_view": true,
+          "color_channel": "fixed",
+          "colormap": "viridis",
+          "guides": {
+            "absorber": false,
+            "data": false,
+            "domain": false,
+            "imposed": false
+          },
+          "height": 180,
+          "n": 1,
+          "normalization": {
+            "bounds": null,
+            "mode": "frame"
+          },
+          "overlays": true,
+          "sample": {
+            "alpha": 0.5,
+            "layers": [
+              {
+                "display_lod": "all recorded particles",
+                "id": "p",
+                "kind": "particles",
+                "scalar_time": 0.0,
+                "source_indices": [
+                  0,
+                  1
+                ],
+                "source_time": 0.0,
+                "status": "interpolated by ID",
+                "units": "m",
+                "visible": true
+              }
+            ],
+            "missing_layers": [],
+            "positions": "interpolated by ID; unmatched held",
+            "requested_time": 105.0,
+            "scalar_time": 0.0,
+            "scalars": "held",
+            "source_indices": [
+              0,
+              1
+            ],
+            "source_times": [
+              0.0,
+              210.0
+            ],
+            "stale_layers": [],
+            "unavailable_channels": []
+          },
+          "trail_instances": 0,
+          "trails": false,
+          "video_time": 0.25,
+          "width": 320
+        }
+      ],
+      "png_pixels_identical": true,
+      "decoded_mp4_pixels_identical": true,
+      "probe": {
+        "width": 320,
+        "height": 180,
+        "avg_frame_rate": "4/1",
+        "nb_frames": "2"
+      }
+    },
+    {
+      "case": "final-fraction",
+      "frames": 2,
+      "timestamps": [
+        {
+          "a": 0,
+          "alpha": 0.995072024260804,
+          "b": 1,
+          "camera_origin": [
+            0.630349636077881,
+            1.13664364814758,
+            1.12679612636566
+          ],
+          "capture_time": 91.875,
+          "clean_view": true,
+          "color_channel": "fixed",
+          "colormap": "viridis",
+          "guides": {
+            "absorber": false,
+            "data": false,
+            "domain": false,
+            "imposed": false
+          },
+          "height": 180,
+          "n": 0,
+          "normalization": {
+            "bounds": null,
+            "mode": "frame"
+          },
+          "overlays": true,
+          "sample": {
+            "alpha": 0.995072024260804,
+            "layers": [
+              {
+                "display_lod": "all recorded particles",
+                "id": "p",
+                "kind": "particles",
+                "scalar_time": 0.0,
+                "source_indices": [
+                  0,
+                  1
+                ],
+                "source_time": 0.0,
+                "status": "interpolated by ID",
+                "units": "m",
+                "visible": true
+              }
+            ],
+            "missing_layers": [],
+            "positions": "interpolated by ID; unmatched held",
+            "requested_time": 91.875,
+            "scalar_time": 0.0,
+            "scalars": "held",
+            "source_indices": [
+              0,
+              1
+            ],
+            "source_times": [
+              0.0,
+              92.33
+            ],
+            "stale_layers": [],
+            "unavailable_channels": []
+          },
+          "trail_instances": 0,
+          "trails": false,
+          "video_time": 0.0,
+          "width": 320
+        },
+        {
+          "a": 0,
+          "alpha": 0.997779703238384,
+          "b": 1,
+          "camera_origin": [
+            0.630349636077881,
+            1.13664364814758,
+            1.12679612636566
+          ],
+          "capture_time": 92.125,
+          "clean_view": true,
+          "color_channel": "fixed",
+          "colormap": "viridis",
+          "guides": {
+            "absorber": false,
+            "data": false,
+            "domain": false,
+            "imposed": false
+          },
+          "height": 180,
+          "n": 1,
+          "normalization": {
+            "bounds": null,
+            "mode": "frame"
+          },
+          "overlays": true,
+          "sample": {
+            "alpha": 0.997779703238384,
+            "layers": [
+              {
+                "display_lod": "all recorded particles",
+                "id": "p",
+                "kind": "particles",
+                "scalar_time": 0.0,
+                "source_indices": [
+                  0,
+                  1
+                ],
+                "source_time": 0.0,
+                "status": "interpolated by ID",
+                "units": "m",
+                "visible": true
+              }
+            ],
+            "missing_layers": [],
+            "positions": "interpolated by ID; unmatched held",
+            "requested_time": 92.125,
+            "scalar_time": 0.0,
+            "scalars": "held",
+            "source_indices": [
+              0,
+              1
+            ],
+            "source_times": [
+              0.0,
+              92.33
+            ],
+            "stale_layers": [],
+            "unavailable_channels": []
+          },
+          "trail_instances": 0,
+          "trails": false,
+          "video_time": 0.25,
+          "width": 320
+        }
+      ],
+      "png_pixels_identical": true,
+      "decoded_mp4_pixels_identical": true,
+      "probe": {
+        "width": 320,
+        "height": 180,
+        "avg_frame_rate": "4/1",
+        "nb_frames": "2"
+      }
+    }
+  ],
+  "source_hashes_unchanged": {
+    "/tmp/wavez-326-package-final/inputs/scene.wvz": "787dd3b344998f002774d810d4171047dc65615594f3209a92b263f4d039b58b",
+    "/tmp/wavez-326-package-final/inputs/hours.wvz": "86af35e633458e8e1008349dffb796d8ebb303e42ee05b2ab77a766161b97ab6",
+    "/tmp/wavez-326-package-final/inputs/precise.wvz": "8ff1272d0e05346a1dda769ab3d9a538ceaa911c3144d2ef9787c6e63c7c0813",
+    "/tmp/wavez-326-package-final/inputs/short.wvz": "850ce4a55a5b72c4b56d2a6b7388958a29ade6ae4dd85eafa43692d9952ad400",
+    "/tmp/wavez-326-package-final/inputs/still.wvz": "bb2146915b9369d6186365cee6b6dbb3acd7c710859a976cb548c8c40f9c1ee6",
+    "/tmp/wavez-326-package-final/inputs/tail.wvz": "b192d6362bdc302916cee3976d2eb9544b055c5d332c6ba2c363a2d03c586d0f"
+  }
+}

@@ -82,7 +82,7 @@ func run() -> void:
 	check(dialog.rate.get_parent().get_child(dialog.rate.get_index() - 1).text == "Playback rate" and dialog.rate.tooltip_text.contains("Simulation-time units") and dialog.rate.tooltip_text.contains("Lower") and dialog.rate.tooltip_text.contains("higher"), "Playback rate label explains the unchanged time-unit semantics")
 	check(dialog.estimate.get_parent() == dialog.summary_group.body and dialog.message.get_parent() == dialog.summary_group.body and dialog.progress.get_parent() == dialog.summary_group.body, "Estimate, status and progress share the lower summary")
 	check(dialog.range_choice.get_item_text(0) == "Full" and dialog.range_choice.get_item_text(1) == "Current position to end" and dialog.range_choice.get_item_text(2) == "Custom", "Range labels retain their option indices")
-	check(dialog.end.tooltip_text.contains("exclusive"), "End tooltip preserves exclusive-end guidance")
+	check(dialog.start.tooltip_text.is_empty() and dialog.end.tooltip_text.is_empty(), "Start/End controls have no unsolicited tooltips")
 	check(not dialog.estimate.text.contains("Source:") and dialog.estimate.text.contains("Duration:") and dialog.estimate.text.contains("Temporary storage:") and not dialog.estimate.text.contains("PNG budget"), "Estimate shows compact output and storage values")
 	check(dialog.estimate.text == "Duration: ≈00:02.267 · 68 frames\nTemporary storage: 0.53 GiB", "Clock estimate retains frame count and uncompressed storage calculation")
 	check(dialog.estimate.visible and not dialog.progress.visible and dialog.summary_group.title_label.text == "Export summary", "Idle summary shows estimate without inactive progress")
