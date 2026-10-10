@@ -10,14 +10,15 @@ with the filename extension **`.wvz`**.
 ### Run the standalone viewer
 
 The supported standalone release is **Linux x86_64**. Extract the package to a
-local folder, then open that folder in Dolphin or your Linux file manager.
+local folder, then open that folder with your preferred Linux file manager.
 Keep both files, `WAVEZ.x86_64` and `WAVEZ.pck`, together in that folder.
 
-**Double-click `WAVEZ.x86_64` to launch Wavez.** If it is not marked executable,
-right-click it in Dolphin, choose **Properties → Permissions**, enable
-**Allow executing file as program**, and apply the change. Then open it again.
-File managers can use single-click opening or show a run confirmation according
-to their settings; use the normal open action and choose to run the executable.
+**Open/run `WAVEZ.x86_64` to launch Wavez.** Your file manager may use a
+single-click, a double-click or a confirmation prompt; use its normal open action
+and choose to run the executable if prompted. If execution permission is missing,
+you can enable it in the file's properties where your file manager provides that
+option. The labels and controls vary between Linux desktops. The `chmod +x` and
+terminal launch instructions below provide a reliable alternative.
 
 The packaged executable contains the Godot runtime. You do **not** need a
 separately installed Godot editor/engine, Python, NumPy or the source checkout
