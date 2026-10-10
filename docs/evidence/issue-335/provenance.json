@@ -1,0 +1,14 @@
+{
+  "issue": 335,
+  "ready_issue_count": 1,
+  "branch": "335-bug-lifecycle-investigate-packaged-root-window-signal-diagnostics-during-close-file-tests",
+  "accepted_main": "8a411646cf30441233a681af9ecb4ca325724d91",
+  "pre_close_baseline": "e41ae56d210ef57666282194e4312a0536fbdee6",
+  "candidate_version": "v0.1.0.90",
+  "unchanged_production_files": {
+    "viewer/main.gd": "12a10fa3af4be75c6e75ad6b5c0791a9268cd99b4a95fd6f425a73313e0565d3",
+    "viewer/ui/shell/viewer_shell.gd": "f3070cd0a74fa4ff66432fbb1186d57024680cdadd45a0eb867faa082a1f8636",
+    "viewer/selection/selection_controller.gd": "6ccbf4df24fc2be690f2e0820ecfbf3b774b84ebad964eaf0e884e35947ac6f2"
+  },
+  "historical_issue_329_evidence_unchanged": true
+}

@@ -1,0 +1,12 @@
+{
+  "application_version_unit_tests": {
+    "checks": 2,
+    "failures": 0
+  },
+  "python_compilation": "passed",
+  "main_build": 89,
+  "candidate_build": 90,
+  "initial_import": "sandbox local-socket errors and missing pre-existing resize UIDs; warmed import clean",
+  "temporary_instrumentation": "two indentation mistakes corrected before successful instrumentation",
+  "archive_source_initial": "failed startup without script-class cache; exact process stopped, archive imported, fresh run follows"
+}

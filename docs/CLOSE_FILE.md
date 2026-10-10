@@ -59,4 +59,7 @@ behavior. Close File never exits the application.
    when finished reviewing.
 
 See [review evidence](evidence/issue-329/README.md) for focused automated coverage
-and remaining physical/long-session checks. Owner acceptance remains pending.
+and remaining physical/long-session checks. PR #334 was owner-accepted and merged.
+The separate [Window signal investigation](ROOT_WINDOW_SIGNALS.md) explains the
+Linux release-template diagnostics; they can also occur when a Popup is hidden
+without closing a capture. The original review evidence remains historical.

@@ -1,0 +1,144 @@
+{
+  "mode": "workflow",
+  "runtime": "release",
+  "renderer": "forward_plus",
+  "command": [
+    "stdbuf",
+    "-oL",
+    "-eL",
+    "/tmp/wavez-335-final-workflow-release-forward_plus/WAVEZ.x86_64",
+    "--audio-driver",
+    "Dummy",
+    "--rendering-method",
+    "forward_plus",
+    "--resolution",
+    "1440x900",
+    "--",
+    "--signals-mode=workflow",
+    "--signals-output=/tmp/wavez-335-final-workflow-release-forward_plus"
+  ],
+  "process_exit_code": 0,
+  "source_sha256": {
+    "fields.wvz": "10361842314c5adbb381ca7649d27aadbcfc3683d3d6c679e1ce1717d76825ab",
+    "mixed.wvz": "c4c34ba04e87e97a8afe55d851ff9e3831431bb66e0c90fe543bed87886553ea"
+  },
+  "source_changed": false,
+  "source_files_sha256": {
+    "/home/Nozba/Codex/Wavez/Wavez/viewer/ui/shell/test_window_signals.gd": "fa863ee6b73b727801684a242c81df727f10783c534e2382057a32b13e3f436d",
+    "/home/Nozba/Codex/Wavez/Wavez/viewer/main.gd": "12a10fa3af4be75c6e75ad6b5c0791a9268cd99b4a95fd6f425a73313e0565d3",
+    "/home/Nozba/Codex/Wavez/Wavez/viewer/ui/shell/viewer_shell.gd": "f3070cd0a74fa4ff66432fbb1186d57024680cdadd45a0eb867faa082a1f8636",
+    "/home/Nozba/Codex/Wavez/Wavez/viewer/selection/selection_controller.gd": "6ccbf4df24fc2be690f2e0820ecfbf3b774b84ebad964eaf0e884e35947ac6f2",
+    "/home/Nozba/Codex/Wavez/Wavez/viewer/project.godot": "83968995c8c64b87499b34a1ee65df07c779139c2cfb4eb2847735a7d7915143"
+  },
+  "diagnostics": {
+    "classified": {
+      "disconnect": {
+        "focus_entered": 3,
+        "tree_exited": 3
+      },
+      "duplicate_connect": {
+        "focus_entered": 1,
+        "tree_exited": 1
+      }
+    },
+    "classified_total": 8,
+    "error_total": 8,
+    "warning_total": 0,
+    "script_error_total": 0
+  },
+  "report": {
+    "checks": 21,
+    "debug": false,
+    "display_server": "X11",
+    "editor": false,
+    "engine": {
+      "build": "official",
+      "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+      "hex": 263938,
+      "major": 4,
+      "minor": 7,
+      "patch": 2,
+      "status": "stable",
+      "string": "4.7.2-stable (official)",
+      "timestamp": 0
+    },
+    "executable": "/tmp/wavez-335-final-workflow-release-forward_plus/WAVEZ.x86_64",
+    "failures": [],
+    "mode": "workflow",
+    "orphans_before_exit": 0.0,
+    "renderer": "forward_plus",
+    "snapshots": [
+      {
+        "connections": {
+          "focus_entered": 1,
+          "tree_exited": 1
+        },
+        "embedded": true,
+        "phase": "seek shown 0",
+        "popup_class": "PopupPanel",
+        "popup_id": 224412048636,
+        "visible": true
+      },
+      {
+        "connections": {
+          "focus_entered": 1,
+          "tree_exited": 1
+        },
+        "embedded": true,
+        "phase": "seek hidden by Close File 0",
+        "popup_class": "PopupPanel",
+        "popup_id": 224412048636,
+        "visible": false
+      },
+      {
+        "connections": {
+          "focus_entered": 1,
+          "tree_exited": 1
+        },
+        "embedded": true,
+        "phase": "seek shown 1",
+        "popup_class": "PopupPanel",
+        "popup_id": 224412048636,
+        "visible": true
+      },
+      {
+        "connections": {
+          "focus_entered": 1,
+          "tree_exited": 1
+        },
+        "embedded": true,
+        "phase": "seek hidden by Close File 1",
+        "popup_class": "PopupPanel",
+        "popup_id": 224412048636,
+        "visible": false
+      },
+      {
+        "connections": {
+          "focus_entered": 1,
+          "tree_exited": 1
+        },
+        "embedded": true,
+        "phase": "production File shown 0",
+        "popup_class": "PopupMenu",
+        "popup_id": 204984031541,
+        "visible": true
+      },
+      {
+        "connections": {
+          "focus_entered": 1,
+          "tree_exited": 1
+        },
+        "embedded": true,
+        "phase": "production File hidden 0",
+        "popup_class": "PopupMenu",
+        "popup_id": 204984031541,
+        "visible": false
+      }
+    ]
+  },
+  "artifacts": {
+    "WAVEZ.x86_64": "d9f79ab89b5ae369aeed11c6052d402e8218cd503bf85b4a235f9c30c46a7c63",
+    "WAVEZ.pck": "8cc9d38b307696bb3ad7ef7468fdf06fa44425e3a40ec4ab8279ea41e88e4a92"
+  },
+  "strict_exit_code": 1
+}

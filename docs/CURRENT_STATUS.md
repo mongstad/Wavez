@@ -1,7 +1,7 @@
 # Current status
 
-Accepted baseline: **v0.1.0.88**, `e41ae56d210ef57666282194e4312a0536fbdee6`,
-owner-merged PR #333. The repository's application identity is
+Accepted baseline: **v0.1.0.89**, `8a411646cf30441233a681af9ecb4ca325724d91`,
+owner-merged PR #334. The repository's application identity is
 `viewer/project.godot` → `application/config/version`; see [version policy](VERSIONING.md).
 Issue #331 provides independently configurable,
 initially Unbound Roll Camera Left/Right actions bank Free Camera around its
@@ -15,12 +15,19 @@ polling while retaining physical W/A/S/D and the existing translation rate.
 See [camera navigation](MANUAL_CAMERA_ORBIT.md) and the
 [current review evidence](evidence/issue-331/vertical-movement/README.md).
 
-Issue #329 proposes candidate **v0.1.0.89**, based on accepted `main` at
-`e41ae56d210ef57666282194e4312a0536fbdee6` (owner-merged PR #333).
+Accepted issue #329 / PR #334 provides File → Close File.
 File → Close File returns to the empty viewer and releases capture-exclusive
 resources while launched video workers continue. Dependent image, selection,
 analysis and matched-view work safely blocks closing with an explanation.
 See [Close File](CLOSE_FILE.md) and [review evidence](evidence/issue-329/README.md).
+
+Issue #335 proposes candidate **v0.1.0.90** with focused diagnostic probes and
+documentation. The Linux Godot 4.7.2 release template reproduces the root-Window
+Popup signal errors independently of Wavez; source/debug runtimes clear the
+connections correctly. The existing Close File runtime and release packaging
+remain unchanged. Strict release validation still reports the errors and fails.
+See [Window signal diagnostics](ROOT_WINDOW_SIGNALS.md) and
+[investigation evidence](evidence/issue-335/README.md). Owner review is pending.
 
 The GitHub Issues and Wavez Development Project are the operational queue. Work
 requires a Ready issue (or explicit owner authorization), the correct branch/base

@@ -1,0 +1,97 @@
+ERROR: Attempt to disconnect a nonexistent connection from 'root:<Window#36507223388>'. Signal: 'focus_entered', callable: ''.
+   at: _disconnect (core/object/object.cpp:1644)
+ERROR: Attempt to disconnect a nonexistent connection from 'root:<Window#36507223388>'. Signal: 'tree_exited', callable: ''.
+   at: _disconnect (core/object/object.cpp:1644)
+ERROR: Signal 'focus_entered' is already connected to given callable '' in that object.
+   at: connect (core/object/object.cpp:1562)
+ERROR: Signal 'tree_exited' is already connected to given callable '' in that object.
+   at: connect (core/object/object.cpp:1562)
+ERROR: Attempt to disconnect a nonexistent connection from 'root:<Window#36507223388>'. Signal: 'focus_entered', callable: ''.
+   at: _disconnect (core/object/object.cpp:1644)
+ERROR: Attempt to disconnect a nonexistent connection from 'root:<Window#36507223388>'. Signal: 'tree_exited', callable: ''.
+   at: _disconnect (core/object/object.cpp:1644)
+ERROR: Signal 'focus_entered' is already connected to given callable '' in that object.
+   at: connect (core/object/object.cpp:1562)
+ERROR: Signal 'tree_exited' is already connected to given callable '' in that object.
+   at: connect (core/object/object.cpp:1562)
+ERROR: Attempt to disconnect a nonexistent connection from 'root:<Window#36507223388>'. Signal: 'focus_entered', callable: ''.
+   at: _disconnect (core/object/object.cpp:1644)
+ERROR: Attempt to disconnect a nonexistent connection from 'root:<Window#36507223388>'. Signal: 'tree_exited', callable: ''.
+   at: _disconnect (core/object/object.cpp:1644)
+ERROR: Signal 'focus_entered' is already connected to given callable '' in that object.
+   at: connect (core/object/object.cpp:1562)
+ERROR: Signal 'tree_exited' is already connected to given callable '' in that object.
+   at: connect (core/object/object.cpp:1562)
+ERROR: Attempt to disconnect a nonexistent connection from 'root:<Window#36507223388>'. Signal: 'focus_entered', callable: ''.
+   at: _disconnect (core/object/object.cpp:1644)
+ERROR: Attempt to disconnect a nonexistent connection from 'root:<Window#36507223388>'. Signal: 'tree_exited', callable: ''.
+   at: _disconnect (core/object/object.cpp:1644)
+ERROR: Signal 'focus_entered' is already connected to given callable '' in that object.
+   at: connect (core/object/object.cpp:1562)
+ERROR: Signal 'tree_exited' is already connected to given callable '' in that object.
+   at: connect (core/object/object.cpp:1562)
+ERROR: Attempt to disconnect a nonexistent connection from 'root:<Window#36507223388>'. Signal: 'focus_entered', callable: ''.
+   at: _disconnect (core/object/object.cpp:1644)
+ERROR: Attempt to disconnect a nonexistent connection from 'root:<Window#36507223388>'. Signal: 'tree_exited', callable: ''.
+   at: _disconnect (core/object/object.cpp:1644)
+ERROR: Signal 'focus_entered' is already connected to given callable '' in that object.
+   at: connect (core/object/object.cpp:1562)
+ERROR: Signal 'tree_exited' is already connected to given callable '' in that object.
+   at: connect (core/object/object.cpp:1562)
+ERROR: Attempt to disconnect a nonexistent connection from 'root:<Window#36507223388>'. Signal: 'focus_entered', callable: ''.
+   at: _disconnect (core/object/object.cpp:1644)
+ERROR: Attempt to disconnect a nonexistent connection from 'root:<Window#36507223388>'. Signal: 'tree_exited', callable: ''.
+   at: _disconnect (core/object/object.cpp:1644)
+ERROR: Signal 'focus_entered' is already connected to given callable '' in that object.
+   at: connect (core/object/object.cpp:1562)
+ERROR: Signal 'tree_exited' is already connected to given callable '' in that object.
+   at: connect (core/object/object.cpp:1562)
+ERROR: Attempt to disconnect a nonexistent connection from 'root:<Window#36507223388>'. Signal: 'focus_entered', callable: ''.
+   at: _disconnect (core/object/object.cpp:1644)
+ERROR: Attempt to disconnect a nonexistent connection from 'root:<Window#36507223388>'. Signal: 'tree_exited', callable: ''.
+   at: _disconnect (core/object/object.cpp:1644)
+ERROR: Signal 'focus_entered' is already connected to given callable '' in that object.
+   at: connect (core/object/object.cpp:1562)
+ERROR: Signal 'tree_exited' is already connected to given callable '' in that object.
+   at: connect (core/object/object.cpp:1562)
+ERROR: Attempt to disconnect a nonexistent connection from 'root:<Window#36507223388>'. Signal: 'focus_entered', callable: ''.
+   at: _disconnect (core/object/object.cpp:1644)
+ERROR: Attempt to disconnect a nonexistent connection from 'root:<Window#36507223388>'. Signal: 'tree_exited', callable: ''.
+   at: _disconnect (core/object/object.cpp:1644)
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.351 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3070 Ti
+
+WAVEZ export: Saved /tmp/wavez-335-instrument-run/ordinary-control.mp4
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.351 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3070 Ti
+
+WAVEZ export: Saved /tmp/wavez-335-instrument-run/ordinary-closed.mp4
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.351 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3070 Ti
+
+WAVEZ export: Saved /tmp/wavez-335-instrument-run/selected-control.mp4
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.351 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3070 Ti
+
+WAVEZ export: Saved /tmp/wavez-335-instrument-run/selected-closed.mp4
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.351 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3070 Ti
+
+WAVEZ export: Export cancelled before loading.
+ERROR: Attempt to disconnect a nonexistent connection from 'root:<Window#36507223388>'. Signal: 'focus_entered', callable: ''.
+   at: _disconnect (core/object/object.cpp:1644)
+ERROR: Attempt to disconnect a nonexistent connection from 'root:<Window#36507223388>'. Signal: 'tree_exited', callable: ''.
+   at: _disconnect (core/object/object.cpp:1644)
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.351 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3070 Ti
+
+CONNECTION SNAPSHOT before free orphans=0.0
+CONNECTION focus_entered id=36490446171 method= object=<SceneTree#36490446171> path=outside tree
+CONNECTION focus_entered id=226173655984 method=restore_minimized object=@Node@1615:<Node#226173655984> path=/root/@Node3D@2/@CanvasLayer@14/ViewerShell/@Node@1615
+CONNECTION focus_entered id=232247008510 method= object=TimeSeekPopover:<PopupPanel#232247008510> path=/root/@Node3D@2/@CanvasLayer@14/ViewerShell/@Control@1792/ViewerTransport/TimeSeekPopover
+CONNECTION focus_entered id=212818991415 method= object=@PopupMenu@1454:<PopupMenu#212818991415> path=/root/@Node3D@2/@CanvasLayer@14/ViewerShell/@PanelContainer@1440/@MarginContainer@1441/@HBoxContainer@1442/@MenuButton@1455/@PopupMenu@1454
+CONNECTION tree_exited id=232247008510 method= object=TimeSeekPopover:<PopupPanel#232247008510> path=/root/@Node3D@2/@CanvasLayer@14/ViewerShell/@Control@1792/ViewerTransport/TimeSeekPopover
+CONNECTION tree_exited id=212818991415 method= object=@PopupMenu@1454:<PopupMenu#212818991415> path=/root/@Node3D@2/@CanvasLayer@14/ViewerShell/@PanelContainer@1440/@MarginContainer@1441/@HBoxContainer@1442/@MenuButton@1455/@PopupMenu@1454
+CONNECTION SNAPSHOT after free orphans=0.0
+CONNECTION focus_entered id=36490446171 method= object=<SceneTree#36490446171> path=outside tree
+CLOSE FILE: 229 checks, 0 failures
