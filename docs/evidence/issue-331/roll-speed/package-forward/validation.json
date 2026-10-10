@@ -1,0 +1,527 @@
+{
+  "checks": 2832,
+  "renderer": "forward_plus",
+  "packaged": true,
+  "fresh_process_restart": true,
+  "source_sha256_unchanged": {
+    "mixed.wvz": "63fdc9eb17d1ad18127788186026d381a2df19f8d76a37334958b8abd9a6e746",
+    "meshes.wvz": "8352ea2c53673f7a81868510502bba9d5b56e52e1883952ba7ab0ba558ee5208",
+    "fields.wvz": "35fdbe59cd601db7d66750344c8bf29bd1d4f204759795fb5a9182a6b1fe824b",
+    "particles.wvz": "0ccc1833d7701bfc2abfc9333e780e3c5afca9e1353c2f2b9a7b6e107770df85"
+  },
+  "reports": [
+    {
+      "checks": 2828,
+      "display": "X11",
+      "failures": [],
+      "layouts": [
+        {
+          "logical": "(1440.0, 900.0)",
+          "panel": "[P: (400.0, 170.0), S: (640.0, 560.0)]",
+          "scale": 1.0,
+          "speed_row": "[P: (430.0, 618.0), S: (566.0, 32.0)]",
+          "theme": "Dark",
+          "value": "18\u00b0/s",
+          "window": "(1440, 900)"
+        },
+        {
+          "logical": "(970.0, 600.0)",
+          "panel": "[P: (165.0, 20.0), S: (640.0, 560.0)]",
+          "scale": 1.0,
+          "speed_row": "[P: (195.0, 468.0), S: (566.0, 32.0)]",
+          "theme": "Dark",
+          "value": "18\u00b0/s",
+          "window": "(970, 600)"
+        },
+        {
+          "logical": "(960.0, 600.0)",
+          "panel": "[P: (160.0, 20.0), S: (640.0, 560.0)]",
+          "scale": 2.0,
+          "speed_row": "[P: (190.0, 468.0), S: (566.0, 32.0)]",
+          "theme": "Dark",
+          "value": "18\u00b0/s",
+          "window": "(1920, 1200)"
+        },
+        {
+          "logical": "(1440.0, 900.0)",
+          "panel": "[P: (400.0, 170.0), S: (640.0, 560.0)]",
+          "scale": 1.0,
+          "speed_row": "[P: (430.0, 618.0), S: (566.0, 32.0)]",
+          "theme": "Light",
+          "value": "18\u00b0/s",
+          "window": "(1440, 900)"
+        },
+        {
+          "logical": "(970.0, 600.0)",
+          "panel": "[P: (165.0, 20.0), S: (640.0, 560.0)]",
+          "scale": 1.0,
+          "speed_row": "[P: (195.0, 468.0), S: (566.0, 32.0)]",
+          "theme": "Light",
+          "value": "18\u00b0/s",
+          "window": "(970, 600)"
+        },
+        {
+          "logical": "(960.0, 600.0)",
+          "panel": "[P: (160.0, 20.0), S: (640.0, 560.0)]",
+          "scale": 2.0,
+          "speed_row": "[P: (190.0, 468.0), S: (566.0, 32.0)]",
+          "theme": "Light",
+          "value": "18\u00b0/s",
+          "window": "(1920, 1200)"
+        }
+      ],
+      "measurements": [
+        {
+          "action": "roll_camera_left",
+          "degrees": 90.0,
+          "forward_error": 1.46000971312787e-07,
+          "position_error": 0.0,
+          "scene": "particles",
+          "seconds": 5.0,
+          "speed_degrees_per_second": 18,
+          "up": [
+            -0.76484215259552,
+            2.14647322138717e-08,
+            0.644217789173126
+          ]
+        },
+        {
+          "action": "roll_camera_left",
+          "degrees": 180.0,
+          "forward_error": 1.97686247815909e-07,
+          "position_error": 0.0,
+          "scene": "particles",
+          "seconds": 10.0,
+          "speed_degrees_per_second": 18,
+          "up": [
+            0.583859503269196,
+            0.422618508338928,
+            0.693182289600372
+          ]
+        },
+        {
+          "action": "roll_camera_left",
+          "degrees": 360.0,
+          "forward_error": 5.04003025980637e-07,
+          "position_error": 0.0,
+          "scene": "particles",
+          "seconds": 20.0,
+          "speed_degrees_per_second": 18,
+          "up": [
+            -0.583859503269196,
+            -0.422618806362152,
+            -0.693182170391083
+          ]
+        },
+        {
+          "action": "roll_camera_right",
+          "degrees": -90.0,
+          "forward_error": 1.07453800524127e-07,
+          "position_error": 0.0,
+          "scene": "particles",
+          "seconds": 5.0,
+          "speed_degrees_per_second": 18,
+          "up": [
+            0.764842331409454,
+            1.96021247234057e-07,
+            -0.644217550754547
+          ]
+        },
+        {
+          "action": "roll_camera_right",
+          "degrees": -180.0,
+          "forward_error": 1.2287812012346e-07,
+          "position_error": 0.0,
+          "scene": "particles",
+          "seconds": 10.0,
+          "speed_degrees_per_second": 18,
+          "up": [
+            0.583859145641327,
+            0.422618389129639,
+            0.693182706832886
+          ]
+        },
+        {
+          "action": "roll_camera_right",
+          "degrees": -360.0,
+          "forward_error": 9.42432194506182e-08,
+          "position_error": 0.0,
+          "scene": "particles",
+          "seconds": 20.0,
+          "speed_degrees_per_second": 18,
+          "up": [
+            -0.583858966827393,
+            -0.422618329524994,
+            -0.693182826042175
+          ]
+        },
+        {
+          "action": "roll_camera_left",
+          "degrees": 90.0,
+          "forward_error": 1.46000971312787e-07,
+          "position_error": 0.0,
+          "scene": "fields",
+          "seconds": 5.0,
+          "speed_degrees_per_second": 18,
+          "up": [
+            -0.76484215259552,
+            2.14647322138717e-08,
+            0.644217789173126
+          ]
+        },
+        {
+          "action": "roll_camera_left",
+          "degrees": 180.0,
+          "forward_error": 1.97686247815909e-07,
+          "position_error": 0.0,
+          "scene": "fields",
+          "seconds": 10.0,
+          "speed_degrees_per_second": 18,
+          "up": [
+            0.583859503269196,
+            0.422618508338928,
+            0.693182289600372
+          ]
+        },
+        {
+          "action": "roll_camera_left",
+          "degrees": 360.0,
+          "forward_error": 5.04003025980637e-07,
+          "position_error": 0.0,
+          "scene": "fields",
+          "seconds": 20.0,
+          "speed_degrees_per_second": 18,
+          "up": [
+            -0.583859503269196,
+            -0.422618806362152,
+            -0.693182170391083
+          ]
+        },
+        {
+          "action": "roll_camera_right",
+          "degrees": -90.0,
+          "forward_error": 1.07453800524127e-07,
+          "position_error": 0.0,
+          "scene": "fields",
+          "seconds": 5.0,
+          "speed_degrees_per_second": 18,
+          "up": [
+            0.764842331409454,
+            1.96021247234057e-07,
+            -0.644217550754547
+          ]
+        },
+        {
+          "action": "roll_camera_right",
+          "degrees": -180.0,
+          "forward_error": 1.2287812012346e-07,
+          "position_error": 0.0,
+          "scene": "fields",
+          "seconds": 10.0,
+          "speed_degrees_per_second": 18,
+          "up": [
+            0.583859145641327,
+            0.422618389129639,
+            0.693182706832886
+          ]
+        },
+        {
+          "action": "roll_camera_right",
+          "degrees": -360.0,
+          "forward_error": 9.42432194506182e-08,
+          "position_error": 0.0,
+          "scene": "fields",
+          "seconds": 20.0,
+          "speed_degrees_per_second": 18,
+          "up": [
+            -0.583858966827393,
+            -0.422618329524994,
+            -0.693182826042175
+          ]
+        },
+        {
+          "action": "roll_camera_left",
+          "degrees": 90.0,
+          "forward_error": 1.46000971312787e-07,
+          "position_error": 0.0,
+          "scene": "meshes",
+          "seconds": 5.0,
+          "speed_degrees_per_second": 18,
+          "up": [
+            -0.76484215259552,
+            2.14647322138717e-08,
+            0.644217789173126
+          ]
+        },
+        {
+          "action": "roll_camera_left",
+          "degrees": 180.0,
+          "forward_error": 1.97686247815909e-07,
+          "position_error": 0.0,
+          "scene": "meshes",
+          "seconds": 10.0,
+          "speed_degrees_per_second": 18,
+          "up": [
+            0.583859503269196,
+            0.422618508338928,
+            0.693182289600372
+          ]
+        },
+        {
+          "action": "roll_camera_left",
+          "degrees": 360.0,
+          "forward_error": 5.04003025980637e-07,
+          "position_error": 0.0,
+          "scene": "meshes",
+          "seconds": 20.0,
+          "speed_degrees_per_second": 18,
+          "up": [
+            -0.583859503269196,
+            -0.422618806362152,
+            -0.693182170391083
+          ]
+        },
+        {
+          "action": "roll_camera_right",
+          "degrees": -90.0,
+          "forward_error": 1.07453800524127e-07,
+          "position_error": 0.0,
+          "scene": "meshes",
+          "seconds": 5.0,
+          "speed_degrees_per_second": 18,
+          "up": [
+            0.764842331409454,
+            1.96021247234057e-07,
+            -0.644217550754547
+          ]
+        },
+        {
+          "action": "roll_camera_right",
+          "degrees": -180.0,
+          "forward_error": 1.2287812012346e-07,
+          "position_error": 0.0,
+          "scene": "meshes",
+          "seconds": 10.0,
+          "speed_degrees_per_second": 18,
+          "up": [
+            0.583859145641327,
+            0.422618389129639,
+            0.693182706832886
+          ]
+        },
+        {
+          "action": "roll_camera_right",
+          "degrees": -360.0,
+          "forward_error": 9.42432194506182e-08,
+          "position_error": 0.0,
+          "scene": "meshes",
+          "seconds": 20.0,
+          "speed_degrees_per_second": 18,
+          "up": [
+            -0.583858966827393,
+            -0.422618329524994,
+            -0.693182826042175
+          ]
+        },
+        {
+          "action": "roll_camera_left",
+          "degrees": 90.0,
+          "forward_error": 1.46000971312787e-07,
+          "position_error": 0.0,
+          "scene": "mixed",
+          "seconds": 5.0,
+          "speed_degrees_per_second": 18,
+          "up": [
+            -0.76484215259552,
+            2.14647322138717e-08,
+            0.644217789173126
+          ]
+        },
+        {
+          "action": "roll_camera_left",
+          "degrees": 180.0,
+          "forward_error": 1.97686247815909e-07,
+          "position_error": 0.0,
+          "scene": "mixed",
+          "seconds": 10.0,
+          "speed_degrees_per_second": 18,
+          "up": [
+            0.583859503269196,
+            0.422618508338928,
+            0.693182289600372
+          ]
+        },
+        {
+          "action": "roll_camera_left",
+          "degrees": 360.0,
+          "forward_error": 5.04003025980637e-07,
+          "position_error": 0.0,
+          "scene": "mixed",
+          "seconds": 20.0,
+          "speed_degrees_per_second": 18,
+          "up": [
+            -0.583859503269196,
+            -0.422618806362152,
+            -0.693182170391083
+          ]
+        },
+        {
+          "action": "roll_camera_right",
+          "degrees": -90.0,
+          "forward_error": 1.07453800524127e-07,
+          "position_error": 0.0,
+          "scene": "mixed",
+          "seconds": 5.0,
+          "speed_degrees_per_second": 18,
+          "up": [
+            0.764842331409454,
+            1.96021247234057e-07,
+            -0.644217550754547
+          ]
+        },
+        {
+          "action": "roll_camera_right",
+          "degrees": -180.0,
+          "forward_error": 1.2287812012346e-07,
+          "position_error": 0.0,
+          "scene": "mixed",
+          "seconds": 10.0,
+          "speed_degrees_per_second": 18,
+          "up": [
+            0.583859145641327,
+            0.422618389129639,
+            0.693182706832886
+          ]
+        },
+        {
+          "action": "roll_camera_right",
+          "degrees": -360.0,
+          "forward_error": 9.42432194506182e-08,
+          "position_error": 0.0,
+          "scene": "mixed",
+          "seconds": 20.0,
+          "speed_degrees_per_second": 18,
+          "up": [
+            -0.583858966827393,
+            -0.422618329524994,
+            -0.693182826042175
+          ]
+        },
+        {
+          "action": "roll_camera_left",
+          "degrees": 90.124201961588,
+          "forward_error": 2.99509622436744e-07,
+          "position_error": 0.0,
+          "scene": "real-process",
+          "seconds": 5.024743,
+          "speed_degrees_per_second": 18
+        },
+        {
+          "action": "roll_camera_left",
+          "degrees": 90.0,
+          "forward_error": 1.46000971312787e-07,
+          "position_error": 0.0,
+          "scene": "fullscreen",
+          "seconds": 5.0,
+          "speed_degrees_per_second": 18,
+          "up": [
+            -0.76484215259552,
+            2.14647322138717e-08,
+            0.644217789173126
+          ]
+        },
+        {
+          "action": "roll_camera_left",
+          "degrees": 180.0,
+          "forward_error": 1.97686247815909e-07,
+          "position_error": 0.0,
+          "scene": "fullscreen",
+          "seconds": 10.0,
+          "speed_degrees_per_second": 18,
+          "up": [
+            0.583859503269196,
+            0.422618508338928,
+            0.693182289600372
+          ]
+        },
+        {
+          "action": "roll_camera_left",
+          "degrees": 360.0,
+          "forward_error": 5.04003025980637e-07,
+          "position_error": 0.0,
+          "scene": "fullscreen",
+          "seconds": 20.0,
+          "speed_degrees_per_second": 18,
+          "up": [
+            -0.583859503269196,
+            -0.422618806362152,
+            -0.693182170391083
+          ]
+        },
+        {
+          "action": "roll_camera_right",
+          "degrees": -90.0,
+          "forward_error": 1.07453800524127e-07,
+          "position_error": 0.0,
+          "scene": "fullscreen",
+          "seconds": 5.0,
+          "speed_degrees_per_second": 18,
+          "up": [
+            0.764842331409454,
+            1.96021247234057e-07,
+            -0.644217550754547
+          ]
+        },
+        {
+          "action": "roll_camera_right",
+          "degrees": -180.0,
+          "forward_error": 1.2287812012346e-07,
+          "position_error": 0.0,
+          "scene": "fullscreen",
+          "seconds": 10.0,
+          "speed_degrees_per_second": 18,
+          "up": [
+            0.583859145641327,
+            0.422618389129639,
+            0.693182706832886
+          ]
+        },
+        {
+          "action": "roll_camera_right",
+          "degrees": -360.0,
+          "forward_error": 9.42432194506182e-08,
+          "position_error": 0.0,
+          "scene": "fullscreen",
+          "seconds": 20.0,
+          "speed_degrees_per_second": 18,
+          "up": [
+            -0.583858966827393,
+            -0.422618329524994,
+            -0.693182826042175
+          ]
+        }
+      ],
+      "packaged": true,
+      "renderer": "forward_plus",
+      "restart": false
+    },
+    {
+      "checks": 4,
+      "display": "X11",
+      "failures": [],
+      "layouts": [],
+      "measurements": [],
+      "packaged": true,
+      "renderer": "forward_plus",
+      "restart": true
+    }
+  ],
+  "known_engine_cleanup_diagnostics": {
+    "roll": [],
+    "restart": []
+  },
+  "artifacts": {
+    "WAVEZ.x86_64": "d9f79ab89b5ae369aeed11c6052d402e8218cd503bf85b4a235f9c30c46a7c63",
+    "WAVEZ.pck": "2f183066bdfde2d6dfa3ce20b8cd0d3b3f5bd83354fddd5b77ac9a75b6303952"
+  }
+}

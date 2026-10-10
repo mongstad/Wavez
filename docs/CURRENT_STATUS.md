@@ -5,10 +5,12 @@ owner-merged PR #332. The repository's application identity is
 `viewer/project.godot` → `application/config/version`; see [version policy](VERSIONING.md).
 Issue #331 proposes candidate **v0.1.0.88**: independently configurable,
 initially Unbound Roll Camera Left/Right actions bank Free Camera around its
-local view axis while retaining scientific/world state. The full camera basis
+local view axis while retaining scientific/world state. A shared, persistent
+5–90°/second manual roll speed defaults to 18°/second and is staged through the
+Keyboard Shortcuts Preferences slider. The full camera basis
 continues through movement, steering, framing and saved views; Reset Camera
 intentionally restores the default orientation. See [camera navigation](MANUAL_CAMERA_ORBIT.md)
-and the [current review evidence](evidence/issue-331/README.md).
+and the [current review evidence](evidence/issue-331/roll-speed/README.md).
 
 The GitHub Issues and Wavez Development Project are the operational queue. Work
 requires a Ready issue (or explicit owner authorization), the correct branch/base

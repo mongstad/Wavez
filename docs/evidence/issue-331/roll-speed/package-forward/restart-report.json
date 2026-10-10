@@ -1,0 +1,10 @@
+{
+	"checks": 4,
+	"display": "X11",
+	"failures": [],
+	"layouts": [],
+	"measurements": [],
+	"packaged": true,
+	"renderer": "forward_plus",
+	"restart": true
+}

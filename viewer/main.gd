@@ -13,7 +13,6 @@ const DEFAULT_CAMERA_FOV := 55.0
 const CURSOR_IDLE_MSEC := 2500
 const FREE_LOOK_SENSITIVITY := 0.003 # radians per mouse pixel; translation-independent
 const MANUAL_ORBIT_RATE := PI / 2.0 # radians per second; translation-independent
-const CAMERA_ROLL_RATE := PI / 2.0 # radians per second; matches manual orbit
 const Profile = preload("res://scene/playback_profile.gd")
 const Normalization = preload("res://scene/normalization.gd")
 const Geometry = preload("res://scene/geometry.gd")
@@ -678,7 +677,7 @@ func _update_camera_roll(delta: float) -> void:
 	# Camera-local +Z banks left: view-up moves toward view-left. Only the
 	# camera basis changes; its position, forward, target and radius stay fixed.
 	var previous_pose := camera.transform
-	camera.basis = (camera.basis * Basis(Vector3.BACK, direction * delta * CAMERA_ROLL_RATE)).orthonormalized()
+	camera.basis = (camera.basis * Basis(Vector3.BACK, direction * delta * deg_to_rad(float(shell.shortcuts.camera_roll_speed)))).orthonormalized()
 	_adopt_camera_basis()
 	if shell.orbit_editor != null: shell.orbit_editor.carry_camera_roll(previous_pose)
 	# A simultaneously held orbit retains its captured axis but must carry the

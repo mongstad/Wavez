@@ -48,11 +48,17 @@ translation-speed controls keep their accepted behavior.
 
 **Roll Camera Left** and **Roll Camera Right** are separately editable Navigation
 actions in Keyboard Shortcuts. Both start Unbound, preserving current shortcuts.
-With Free Camera enabled, hold either key to bank at **90°/second** about the
+With Free Camera enabled, hold either key to bank at **18°/second by default** about the
 camera's current local view axis. Left banks the camera up axis toward its left;
 right mirrors it. Position, forward direction, navigation target and radius stay
 fixed. Opposite keys cancel; releasing one resumes the other. The rate uses elapsed
 time and is independent of translation speed, zoom and Auto Orbit speed.
+The shared **Camera Roll Speed** slider below both assignments selects 5–90°/second
+in 1° increments; both directions always use that applied value. At the default,
+a quarter turn takes five seconds, a half turn ten and a full turn twenty.
+Apply saves speed and leaves Preferences open. Cancel/Escape/X discard drafts;
+Reset Defaults stages 18°/second. Reopening and application restart restore the
+saved value. Speed changes do not reassign keys or enter saved views/export state.
 
 Roll takes manual control from Auto Orbit using the existing steering transition
 and leaves Auto Orbit off after release. With Auto Orbit already off, roll does
@@ -117,13 +123,18 @@ The earlier RMB-orbit design and its results remain in the historical
 ## Roll owner verification (#331)
 
 1. In Keyboard Shortcuts, confirm both roll actions initially say Unbound.
-   Bind unused keys, Apply, close the editor, and hold each with Free Camera on.
+   Confirm one Camera Roll Speed slider below them, showing 18°/s on a fresh
+   profile, with 5/90 limits and 1° arrow-key increments. Bind unused keys, Apply,
+   close the editor, and hold each with Free Camera on for about five seconds.
    Check smooth opposite banks, immediate release, 90°/180°/360° orientation,
    stable position/heading and cancellation when both directions are held.
 2. After banking 90°, fly with W/A/S/D/Q/E and steer with RMB. Controls should
    follow the banked camera axes. Check LMB tumble, wheel zoom, held orbit,
    Auto Orbit takeover, Frame Scene, Reset Camera and orbit-center Apply/Cancel.
-3. Rebind, Clear, transfer a conflicting key, Cancel unapplied edits and restart.
+3. Apply a different speed; reopen and restart to check its value and equal
+   left/right banking. Change speed alone and confirm assignments stay intact.
+   Cancel/Escape/X must discard speed drafts; Reset Defaults stages 18°/s and
+   applies only when requested. Rebind, Clear and transfer a conflicting key.
    Test focus in text/numeric fields, the shortcut/orbit editors, menus and
    alt-tab. No pending hold should resume after these interruptions or opening
    another capture. Check Dark/Light and fullscreen.
@@ -132,4 +143,6 @@ The earlier RMB-orbit design and its results remain in the historical
    Scientific coordinates, time selection and numerical outputs should stay
    unchanged. Assess physical key feel on the owner's KDE/Wayland setup.
 
-Candidate evidence and practical limits: [issue #331](evidence/issue-331/README.md).
+Current refinement evidence and practical limits:
+[issue #331 roll speed](evidence/issue-331/roll-speed/README.md).
+The [initial roll report](evidence/issue-331/README.md) is retained unchanged.

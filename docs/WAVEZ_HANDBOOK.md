@@ -305,7 +305,12 @@ ahead along the new heading without moving the camera or scientific geometry.
 See [camera navigation](MANUAL_CAMERA_ORBIT.md) for interaction and owner checks.
 The #331 candidate adds separately configurable Roll Camera Left/Right actions,
 also Unbound by default. Hold them in Free Camera to bank about the local view
-axis at 90°/second without changing position or forward direction. After banking,
+axis at 18°/second by default without changing position or forward direction.
+The shared Camera Roll Speed slider below both shortcut assignments selects
+5–90°/second in 1° increments, equally for left and right. Apply saves/activates
+it; Cancel/Escape/X discard drafts and Reset Defaults stages 18°/second.
+The applied value persists across restarts. A default quarter turn takes five
+seconds. After banking,
 translation and RMB steering remain camera-relative; Frame Scene and saved views
 retain the orientation, while Reset Camera intentionally clears it.
 During left-drag tumble, horizontal motion rotates about world Y and vertical

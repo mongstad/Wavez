@@ -1,0 +1,3 @@
+Preliminary test script type check failed because GDScript could not infer the type of seconds in the speed matrix (test_camera_roll.gd:81). The headless-warm execution consequently timed out after 160 seconds without a completed report. The test declaration was corrected to an explicit float and check-only succeeded before the final runs.
+The first import regenerated four existing untracked resize-script UID files and reported warnings. An unchanged warm import succeeded. These temporary unrelated UID files are excluded from the commit.
+Earlier passing headless-final and forward runs preceded the added real five-second hold; the final-* runs above supersede them. No preliminary run is counted as final validation.

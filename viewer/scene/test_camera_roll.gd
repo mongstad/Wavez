@@ -8,6 +8,7 @@ var restart := false
 var checks := 0
 var failures: Array[String] = []
 var measurements: Array = []
+var layouts: Array = []
 @onready var root: Window = get_tree().root
 
 func _ready() -> void: run.call_deferred()
@@ -60,13 +61,13 @@ func angles(view, label: String) -> void:
 		check(view.camera.transform == start,label+": roll press does not jump")
 		var echo: InputEventKey = event.duplicate(); echo.echo = true; root.push_input(echo)
 		for step in 240:
-			view._update_camera_roll(1.0/60)
+			view._update_camera_roll(5.0/60)
 			check(view.camera.position == start.origin and view.camera.basis.z.distance_to(start.basis.z) < .00001 and absf(view.camera.basis.determinant()-1.0) < .00001,label+": fixed position/forward and orthonormal basis "+action)
 			if (step+1) in [60,120,240]:
 				var angle := sign * float(step+1) / 60 * PI / 2
 				var expected := (start.basis * Basis(Vector3.BACK,angle)).orthonormalized()
 				check(view.camera.basis.is_equal_approx(expected),label+": measured "+action+" angle "+str(rad_to_deg(angle)))
-				measurements.append({"scene":label,"action":action,"degrees":rad_to_deg(angle),"position_error":view.camera.position.distance_to(start.origin),"forward_error":view.camera.basis.z.distance_to(start.basis.z),"up":Visual.vec(view.camera.basis.y)})
+				measurements.append({"scene":label,"action":action,"seconds":float(step+1)*5/60,"degrees":rad_to_deg(angle),"speed_degrees_per_second":view.shell.shortcuts.camera_roll_speed,"position_error":view.camera.position.distance_to(start.origin),"forward_error":view.camera.basis.z.distance_to(start.basis.z),"up":Visual.vec(view.camera.basis.y)})
 		event.pressed = false; root.push_input(event)
 		check(same_pose(start,view.camera.transform),label+": 360 degree revolution returns to original orientation")
 		var stopped: Transform3D = view.camera.transform; view._update_camera_roll(.2)
@@ -75,9 +76,17 @@ func angles(view, label: String) -> void:
 	Visual.apply(view,saved); unfocus()
 	held(view,"roll_camera_left",1.0); held(view,"roll_camera_right",1.0)
 	check(same_pose(start,view.camera.transform),label+": opposing rolls undo one another")
-	for frames in [12,120]:
-		Visual.apply(view,saved); unfocus(); held(view,"roll_camera_left",1.0,frames)
-		check(view.camera.basis.y.distance_to(-start.basis.x) < .00001,label+": 90 degree bank uses elapsed time at "+str(frames)+" Hz")
+	for speed in [5,18,90]:
+		view.shell.shortcuts.camera_roll_speed = speed
+		var seconds: float = 90.0 / speed
+		for action in ["roll_camera_left","roll_camera_right"]:
+			for fps in [12,120]:
+				Visual.apply(view,saved); unfocus(); held(view,action,seconds,int(seconds*fps))
+				var up: Vector3 = -start.basis.x if action.ends_with("left") else start.basis.x
+				check(view.camera.basis.y.distance_to(up) < .00001,label+": equal quarter-turn speed "+str(speed)+"°/s "+action+" at "+str(fps)+" Hz in "+str(seconds)+" seconds")
+	view.shell.shortcuts.camera_roll_speed = Bindings.DEFAULT_CAMERA_ROLL_SPEED
+	Visual.apply(view,saved); unfocus(); held(view,"roll_camera_left",5.0)
+	check(view.camera.basis.y.distance_to(-start.basis.x) < .00001,label+": default 18°/s reaches 90° in exactly five elapsed seconds")
 	check(view.scene_layers.snapshot() == source_state and view.committed_sample == sample and not view.playing,label+": roll leaves scene presentation/source clocks and sample unchanged")
 	# Translation and steering must use the banked local axes.
 	for pair in [[KEY_W,Vector3.FORWARD],[KEY_S,Vector3.BACK],[KEY_A,Vector3.LEFT],[KEY_D,Vector3.RIGHT],[KEY_Q,Vector3.DOWN],[KEY_E,Vector3.UP]]:
@@ -113,7 +122,7 @@ func angles(view, label: String) -> void:
 	for i in 10:
 		var prior: Basis = view.camera.basis
 		view._update_manual_orbit(.01); view._update_camera_roll(.01)
-		check(view.camera.basis.is_equal_approx((Basis(axis,-.01*view.MANUAL_ORBIT_RATE)*prior*Basis(Vector3.BACK,.01*view.CAMERA_ROLL_RATE)).orthonormalized()),label+": simultaneous held orbit carries bank forward")
+		check(view.camera.basis.is_equal_approx((Basis(axis,-.01*view.MANUAL_ORBIT_RATE)*prior*Basis(Vector3.BACK,.01*deg_to_rad(float(view.shell.shortcuts.camera_roll_speed)))).orthonormalized()),label+": simultaneous held orbit carries bank forward")
 	root.push_input(key(KEY_F6,false)); root.push_input(key(KEY_F8,false))
 	view.shell.shortcuts.active.orbit_camera_left = 0; view.shell.shortcuts.active.orbit_camera_right = 0
 	for node in world: check(node.transform == world[node],label+": scientific/world transform unchanged: "+node.name)
@@ -184,6 +193,12 @@ func guards(view) -> void:
 	check(not view.camera.basis.is_equal_approx(before.basis) and view.camera.position.distance_to(before.origin) < .0001,"Actual process loop continuously banks in place")
 	root.push_input(key(KEY_F8,false)); before = view.camera.transform; await get_tree().create_timer(.1).timeout
 	check(view.camera.transform == before,"Actual process loop stops on release")
+	var started := Time.get_ticks_usec()
+	root.push_input(key(KEY_F8)); await get_tree().create_timer(5.0).timeout; root.push_input(key(KEY_F8,false))
+	var elapsed := float(Time.get_ticks_usec()-started)/1000000
+	var degrees := rad_to_deg(atan2(-before.basis.x.dot(view.camera.basis.y),before.basis.y.dot(view.camera.basis.y)))
+	check(absf(degrees-90) < 2 and absf(degrees-elapsed*18) < 2,"Real process loop reaches approximately 90° after a five-second default-speed hold")
+	measurements.append({"scene":"real-process","action":"roll_camera_left","seconds":elapsed,"degrees":degrees,"speed_degrees_per_second":18,"position_error":view.camera.position.distance_to(before.origin),"forward_error":view.camera.basis.z.distance_to(before.basis.z)})
 	view.set_process(false); view._restore_render_pacing()
 
 func shortcuts(view) -> void:
@@ -219,6 +234,72 @@ func shortcuts(view) -> void:
 	check(dialog.visible and shell.shortcuts.active.roll_camera_left == KEY_F8,"Failed persistence does not activate draft roll binding")
 	shell.shortcuts.storage_path = prior_path; dialog.cancel.pressed.emit(); unfocus()
 
+func speed_preferences(view) -> void:
+	var shell = view.shell
+	var applied: Dictionary = shell.shortcuts.active.duplicate()
+	check(shell.shortcuts.camera_roll_speed == 18,"Fresh default roll speed is 18°/s")
+	shell.edit_shortcuts(); await settle(); var dialog = shell.shortcuts_editor
+	var slider: HSlider = dialog.roll_speed_slider
+	check(slider.min_value == 5 and slider.max_value == 90 and slider.step == 1 and slider.value == 18 and dialog.roll_speed_value.text == "18°/s","Shared slider has correct bounds, increment, default and value display")
+	check(slider.get_parent().get_parent() == dialog.groups.Navigation.body and slider.get_parent().get_index() == dialog.rows.roll_camera_right.key.get_parent().get_index()+1,"One shared speed row follows both roll assignments in Navigation")
+	check(slider.tooltip_text.is_empty() and dialog.roll_speed_value.tooltip_text.is_empty(),"Roll speed adds no tooltips")
+	for value in [-10,5,18.4,90,150]:
+		slider.value = value
+		check(slider.value == clampi(roundi(value),5,90) and dialog.staged_roll_speed == int(slider.value),"Slider clamps and snaps to whole degrees: "+str(value))
+	slider.value = 18; slider.grab_focus(); await settle()
+	root.push_input(key(KEY_RIGHT)); root.push_input(key(KEY_RIGHT,false))
+	check(slider.value == 19 and dialog.staged_roll_speed == 19 and dialog.roll_speed_value.text == "19°/s","Right arrow edits slider by one degree without shortcut capture")
+	root.push_input(key(KEY_LEFT)); root.push_input(key(KEY_LEFT,false))
+	check(slider.value == 18 and dialog.staged == applied,"Left arrow reverses one increment without changing assignments")
+	slider.value = 37
+	check(shell.shortcuts.camera_roll_speed == 18 and not dialog.apply_button.disabled and dialog.staged == applied,"Speed draft enables Apply without activating or modifying keys")
+	dialog.apply_button.pressed.emit()
+	check(dialog.visible and dialog.apply_button.disabled and shell.shortcuts.camera_roll_speed == 37 and shell.shortcuts.active == applied,"Apply atomically activates speed, keeps keys and leaves dialog open")
+	var config := ConfigFile.new(); check(config.load(shell.shortcuts.storage_path) == OK and config.get_value("navigation","camera_roll_speed") == 37,"Applied speed is persisted as an integer preference")
+	for dismissal in ["Cancel","Escape","Close"]:
+		slider.value = 58
+		if dismissal == "Cancel": dialog.cancel.pressed.emit()
+		elif dismissal == "Close": dialog.close_button.pressed.emit()
+		else: root.push_input(key(KEY_ESCAPE)); root.push_input(key(KEY_ESCAPE,false))
+		check(not dialog.visible and shell.shortcuts.camera_roll_speed == 37 and shell.shortcuts.active == applied,dismissal+" discards unapplied speed and leaves keys unchanged")
+		shell.edit_shortcuts(); await settle()
+		check(slider.value == 37 and dialog.staged_roll_speed == 37 and dialog.apply_button.disabled,"Reopen restores applied slider position after "+dismissal)
+	dialog.reset.pressed.emit()
+	check(slider.value == 18 and dialog.staged_roll_speed == 18 and shell.shortcuts.camera_roll_speed == 37,"Reset Defaults stages 18°/s without applying")
+	dialog.cancel.pressed.emit(); shell.edit_shortcuts(); dialog.reset.pressed.emit(); dialog.apply_button.pressed.emit()
+	check(shell.shortcuts.camera_roll_speed == 18 and shell.shortcuts.active == Bindings.defaults(),"Applied Reset Defaults restores speed and catalog defaults")
+	check(shell.shortcuts.apply(applied) == OK and shell.shortcuts.camera_roll_speed == 18,"Binding-only apply preserves roll speed")
+	dialog.dismiss(); shell.edit_shortcuts(); slider.value = 44
+	var prior_path: String = shell.shortcuts.storage_path
+	shell.shortcuts.storage_path = output.path_join("missing/speed.cfg"); dialog.apply_button.pressed.emit()
+	check(dialog.visible and dialog.notice.visible and shell.shortcuts.camera_roll_speed == 18 and shell.shortcuts.active == applied,"Failed save does not activate draft speed or change assignments")
+	shell.shortcuts.storage_path = prior_path; dialog.cancel.pressed.emit()
+	for value in [4,91,18.5,"18",null]:
+		if value == null: continue # null means preserve the current preference in apply().
+		check(shell.shortcuts.apply(applied,null,value) == ERR_INVALID_DATA and shell.shortcuts.camera_roll_speed == 18 and shell.shortcuts.active == applied,"Invalid roll speed is rejected atomically: "+str(value))
+	var profile := Bindings.new(); profile.storage_path = output.path_join("speed-profile.cfg")
+	for value in [null,4,91,18.5,"18",37]:
+		var saved := ConfigFile.new()
+		if value != null: saved.set_value("navigation","camera_roll_speed",value)
+		check(saved.save(profile.storage_path) == OK and profile.load_preferences() == OK and profile.camera_roll_speed == (37 if value is int and value == 37 else 18),"Missing or invalid stored speed uses 18; valid speed restores: "+str(value))
+	for name in ["Dark","Light"]:
+		shell.appearance.select(name == "Light")
+		for layout in [[Vector2i(1440,900),1.0,"normal"],[Vector2i(960,600),1.0,"compact"],[Vector2i(1920,1200),2.0,"scale-2"]]:
+			root.content_scale_factor = layout[1]; root.size = layout[0]; await settle(); shell.layout()
+			shell.edit_shortcuts(); await settle(); slider.grab_focus(); await settle()
+			var extent := root.get_visible_rect().size
+			var panel: Rect2 = dialog.panel.get_global_rect()
+			var viewport: Rect2 = dialog.scroller.get_global_rect().grow(-4)
+			var row: Rect2 = slider.get_parent().get_global_rect()
+			check(Rect2(Vector2.ZERO,extent).encloses(panel) and viewport.encloses(slider.get_global_rect()) and row.end.x <= dialog.scroller.get_global_rect().end.x,name+" "+layout[2]+": panel, slider/focus and value fit the scroll viewport")
+			var label: Label = slider.get_parent().get_child(0)
+			for text_label in [label,dialog.roll_speed_value]:
+				check(text_label.get_theme_font("font").get_string_size(text_label.text,HORIZONTAL_ALIGNMENT_LEFT,-1,text_label.get_theme_font_size("font_size")).x <= text_label.size.x,name+" "+layout[2]+": roll-speed label/value are not clipped")
+			check(dialog.cancel.get_global_rect().position.y >= dialog.scroller.get_global_rect().end.y,name+" "+layout[2]+": fixed footer remains clear")
+			layouts.append({"theme":name,"window":str(root.size),"scale":root.content_scale_factor,"logical":str(extent),"panel":str(panel),"speed_row":str(row),"value":dialog.roll_speed_value.text})
+			picture("speed-"+name.to_lower()+"-"+layout[2]); dialog.dismiss()
+	root.content_scale_factor = 1; root.size = Vector2i(1440,900); await settle(); shell.layout(); unfocus()
+
 func run() -> void:
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--roll-output="): output = arg.trim_prefix("--roll-output=")
@@ -231,12 +312,17 @@ func run() -> void:
 	view.set_process(false); view.scene_prebuffer_enabled = false
 	if restart:
 		check(view.shell.shortcuts.active.roll_camera_left == KEY_F8 and view.shell.shortcuts.active.roll_camera_right == KEY_F9,"Fresh process restores separate roll bindings")
+		check(view.shell.shortcuts.camera_roll_speed == 37,"Fresh process restores the applied shared speed")
+		view.shell.edit_shortcuts(); await settle()
+		check(view.shell.shortcuts_editor.roll_speed_slider.value == 37 and view.shell.shortcuts_editor.roll_speed_value.text == "37°/s","Restarted Preferences restores slider position and value")
+		view.shell.shortcuts_editor.dismiss()
 		unfocus(); view.inspection_paused = false; var before: Transform3D = view.camera.transform
-		held(view,"roll_camera_left",1.0); check(view.camera.basis.y.distance_to(-before.basis.x) < .00001,"Persisted roll binding dispatches after restart")
+		held(view,"roll_camera_left",90.0/37); check(view.camera.basis.y.distance_to(-before.basis.x) < .00001,"Persisted roll binding uses restored speed after restart")
 	else:
 		check(view.shell.shortcuts.active.roll_camera_left == 0 and view.shell.shortcuts.active.roll_camera_right == 0,"Fresh profile leaves both roll defaults Unbound")
 		check(Bindings.ACTIONS.filter(func(a): return a[0].begins_with("roll_camera_")).size() == 2,"Exactly two independent roll actions")
 		await shortcuts(view)
+		await speed_preferences(view)
 		for scene in ["particles","fields","meshes","mixed"]:
 			view._open_capture(output.path_join(scene+".wvz")); view.playing = false
 			check(await view.scene_layers.wait_for_surface(),scene+": fixture ready")
@@ -249,13 +335,14 @@ func run() -> void:
 			var initial_projection: Vector2
 			for angle in [0,90,180,360]:
 				view._reset_camera(); view.camera_target = Vector3(.5,.5,.5); view.camera_distance = 5; view.yaw = 0; view.pitch = 0; view._update_camera()
-				held(view,"roll_camera_left",float(angle)/90); await settle()
+				held(view,"roll_camera_left",float(angle)/18); await settle()
 				var projection: Vector2 = view.camera.unproject_position(Vector3(.3,.9,0))
 				var center := root.get_visible_rect().size*.5
 				if angle == 0: initial_projection = projection-center
 				check((projection-center).distance_to(initial_projection.rotated(deg_to_rad(angle))) < .001,"Screen projection banks around fixed view axis: "+str(angle))
 				picture("bank-"+str(angle))
-	var report := {"checks":checks,"failures":failures,"measurements":measurements,"renderer":RenderingServer.get_current_rendering_method(),"display":DisplayServer.get_name(),"packaged":OS.has_feature("template"),"restart":restart}
+		check(view.shell.shortcuts.apply(view.shell.shortcuts.active,null,37) == OK,"Persist nondefault speed for the separate restart process")
+	var report := {"checks":checks,"failures":failures,"measurements":measurements,"layouts":layouts,"renderer":RenderingServer.get_current_rendering_method(),"display":DisplayServer.get_name(),"packaged":OS.has_feature("template"),"restart":restart}
 	var file := FileAccess.open(output.path_join("restart-report.json" if restart else "roll-report.json"),FileAccess.WRITE); file.store_string(JSON.stringify(report,"\t")); file.close()
 	view._clear_manual_navigation(); view.queue_free(); await get_tree().process_frame
 	# Flush queued native texture releases before the rendering server shuts down.

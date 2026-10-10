@@ -3,7 +3,14 @@
 Issue #331 adds **Roll Camera Left** and **Roll Camera Right** under Navigation
 in candidate build 88. Both default to Unbound and use the existing independent
 rebind, Clear, conflict transfer, Apply/Cancel and restart persistence path.
-Hold a bound key to bank Free Camera at 90°/second around its current view axis.
+Hold a bound key to bank Free Camera at **18°/second by default** around its current
+view axis. The shared **Camera Roll Speed** slider immediately below the two
+assignments selects **5–90°/second in 1° increments** and displays, for example,
+`18°/s`. It controls both directions equally and affects only manual banking.
+Apply saves/activates speed without changing key assignments or closing the
+editor; Cancel, Escape and X discard unapplied edits. Reset Defaults stages
+18°/second. Reopening or restarting restores the applied value from the
+application shortcut preferences, separate from captures, presets and exports.
 See [camera navigation](MANUAL_CAMERA_ORBIT.md) for focus guards and owner checks.
 
 Issue #214 adds **Toggle Invert Y Axis** under Navigation in candidate build 76.
