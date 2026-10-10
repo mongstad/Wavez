@@ -236,15 +236,27 @@ guide's [adapter acceptance checks](docs/SIMULATION_INTEGRATION_GUIDE.md#accepta
 
 ### A prompt for an AI coding assistant
 
+The canonical repository is [mongstad/Wavez](https://github.com/mongstad/Wavez).
+It is currently private: the URL alone does not give an external agent access.
+You may need to provide authorized repository access or the relevant documents
+and exporter source. Copy this prompt along with your simulation source:
+
+> Integrate my simulation with Wavez (https://github.com/mongstad/Wavez).
+> First check your workspace for the Wavez repository/docs and wavez_export
+> source. If absent, retrieve the relevant files through authorized repository
+> access. If inaccessible, ask me to supply the necessary docs and exporter
+> source rather than guessing; the repository is private and its URL alone
+> does not grant access.
+>
 > Read GETTING_STARTED.md Part III, WAVEZ_API.md, docs/WVZ1_FORMAT.md,
-> docs/SIMULATION_INTEGRATION_GUIDE.md and docs/CAPTURE_FORMAT_POLICY.md against
-> the current wavez_export source. Inspect the simulation source I provide.
-> Add WVZ1 capture output using SceneCapture without changing its numerical
-> behavior. Ask about unknown units, identities, axes or channel meanings.
-> Use actual solver times and explicit independent recording cadences. Keep
-> source precision and provenance, require a new output path, and validate a
-> small fixture with strict reading, identity auditing and viewer inspection.
-> Report changes, tests and remaining uncertainty for my review.
+> docs/SIMULATION_INTEGRATION_GUIDE.md and docs/CAPTURE_FORMAT_POLICY.md; verify
+> the current wavez_export APIs against source. Inspect the simulation code I
+> provide. Add SceneCapture WVZ1 output without changing numerical behavior.
+> Clarify unknown units, identities, axes and channel semantics. Use actual
+> solver times and independent recording cadences; preserve scientific precision
+> and provenance. Refuse overwrites. Test a small fixture with strict SceneReader
+> reading, audit_identity(), and viewer inspection when available. Report changes,
+> validation results, unavailable checks and uncertainties for my review.
 
 Review generated changes yourself, especially units, provenance, channel
 formulas, ID lifetime guarantees, time/cadence policies, coordinate transforms
