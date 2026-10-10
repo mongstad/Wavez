@@ -1,0 +1,32 @@
+{
+  "renderer": "forward_plus",
+  "packaged": true,
+  "checks": {
+    "before": 313,
+    "after": 2473
+  },
+  "contract_pairs": 978,
+  "normal_style_changes": 720,
+  "preserved_state_pixel_pairs": [
+    "dark-1024-video-disabled-target.png",
+    "dark-1024-video-hover-target.png",
+    "dark-1024-video-pressed-target.png",
+    "dark-1440-video-disabled-target.png",
+    "dark-1440-video-hover-target.png",
+    "dark-1440-video-pressed-target.png",
+    "light-1024-video-disabled-target.png",
+    "light-1024-video-hover-target.png",
+    "light-1024-video-pressed-target.png",
+    "light-1440-video-disabled-target.png",
+    "light-1440-video-hover-target.png",
+    "light-1440-video-pressed-target.png"
+  ],
+  "preserved_focus_ring_pixel_pairs": [
+    "dark-1024-video-focus-target.png",
+    "dark-1440-video-focus-target.png",
+    "light-1024-video-focus-target.png",
+    "light-1440-video-focus-target.png"
+  ],
+  "source_sha256": "d05093c58d96b56f678ec01673602f45feead7f79a1aafa571fca6879c5cae14",
+  "source_unchanged": true
+}

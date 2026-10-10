@@ -73,6 +73,8 @@ func install(shell) -> void:
 	style_close_action(shell.viewer.video_dialog.header_close)
 	style_dropdowns(shell.viewer)
 	style_booleans(shell.viewer)
+	for dialog in [shell.details, shell.about, shell.status_ui.jobs_dialog, shell.viewer.video_dialog, shell.viewer.video_dialog.cancel_confirmation]:
+		theme.style_dialog_actions(dialog)
 
 func style_booleans(node: Node) -> void:
 	# Bind only boolean widgets; forms, callbacks and semantic ownership stay intact.

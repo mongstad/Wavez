@@ -249,7 +249,7 @@ func run():
 			has_failure_action = has_failure_action or control.text in ["Failure details…", "Acknowledge failures"]
 		check(not has_failure_action, "Jobs overview has no failure controls outside job Details")
 		check(ui.jobs_dialog.borderless and not ui.jobs_dialog.get_ok_button().visible, "Jobs uses one borderless shell with custom close controls")
-		check(ui.jobs_header_close.icon != null and ui.jobs_header_close.theme_type_variation == "IconAction" and ui.jobs_footer_close.theme_type_variation == "SecondaryButton", "Jobs header and footer use shell action roles")
+		check(ui.jobs_header_close.icon != null and ui.jobs_header_close.theme_type_variation == "IconAction" and ui.jobs_footer_close.theme_type_variation == "DialogSecondaryButton", "Jobs header and footer use shell action roles")
 		check(ui.job_rows["Video export"].open.has_focus(), "Opening Jobs focuses the first available action")
 		picture("jobs-"+str(dimensions.x)); ui.jobs_dialog.hide()
 	ui.open_jobs(); ui.jobs_header_close.pressed.emit(); await settle()

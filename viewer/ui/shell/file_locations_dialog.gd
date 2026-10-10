@@ -72,6 +72,7 @@ func setup(owner_shell) -> void:
 	apply_button = Button.new(); apply_button.text = "Apply"; apply_button.theme_type_variation = "PrimaryButton"
 	apply_button.pressed.connect(commit); footer.add_child(apply_button)
 	_build_pickers()
+	theme.style_dialog_actions(self)
 
 func _row(parent: VBoxContainer, caption: String) -> HBoxContainer:
 	var row := HBoxContainer.new(); row.add_theme_constant_override("separation", 8); parent.add_child(row)

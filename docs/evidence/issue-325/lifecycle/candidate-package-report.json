@@ -1,0 +1,16 @@
+{
+	"activity": {
+		"counters": {},
+		"stages": {}
+	},
+	"checks": 324,
+	"failures": [
+		"Opening Jobs focuses the first available action",
+		"Opening Jobs focuses the first available action"
+	],
+	"parent_directory": "/tmp/wavez-325-review/status-package-wrapper-v2/.wavez-export-1791651978-28899108",
+	"standalone": true,
+	"timings": {
+		"refresh_1000_ms": 55.46
+	}
+}

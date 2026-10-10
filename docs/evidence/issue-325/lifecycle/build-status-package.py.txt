@@ -1,0 +1,30 @@
+from pathlib import Path
+import sys,tempfile,json
+sys.path.insert(0,'/home/Nozba/Codex/Wavez/Wavez')
+from tools.package_linux import stage,build
+out=Path('/tmp/wavez-325-review/status-wrapper');out.mkdir(exist_ok=True)
+if True:
+ project=out/'project';stage(project)
+ script=(project/'ui/shell/test_viewer_status.gd').read_text()
+ script=script.replace('extends SceneTree','extends Node\nvar root: Window:\n\tget: return get_tree().root\nvar process_frame: Signal:\n\tget: return get_tree().process_frame')
+ script=script.replace('func _initialize()', 'func _ready()').replace('create_timer(', 'get_tree().create_timer(').replace('quit(', 'get_tree().quit(')
+ (project/'status_review.gd').write_text(script)
+ entry='''extends Node
+func _ready():
+ for arg in OS.get_cmdline_user_args():
+  if arg.begins_with("--wavez-render-job="):
+   add_child(load("res://Main.tscn").instantiate());return
+ add_child(load("res://status_review.gd").new())
+'''
+ (project/'status_entry.gd').write_text(entry)
+ (project/'Review.tscn').write_text('[gd_scene load_steps=2 format=3]\n[ext_resource type="Script" path="res://status_entry.gd" id="1"]\n[node name="Review" type="Node"]\nscript = ExtResource("1")\n')
+ config=project/'project.godot';config.write_text(config.read_text().replace('res://Main.tscn','res://Review.tscn'))
+ try:
+  build('/home/Nozba/Codex/Wavez/Godot_v4.7.2-stable_linux.x86_64',project,out/'WAVEZ.x86_64',out/'build-logs')
+ except RuntimeError:
+  log=(out/'build-logs/import.log').read_text()
+  assert 'texture_2d_initialize (./servers/rendering/dummy/storage/texture_storage.h:85)' in log and 'SCRIPT ERROR:' not in log
+  (out/'build-logs/import-warmup.txt').write_text(log)
+  build('/home/Nozba/Codex/Wavez/Godot_v4.7.2-stable_linux.x86_64',project,out/'WAVEZ.x86_64',out/'build-logs')
+ (out/'entry.gd.txt').write_text(entry)
+ print(out/'WAVEZ.x86_64')

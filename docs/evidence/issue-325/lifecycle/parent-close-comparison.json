@@ -1,0 +1,14 @@
+[
+  {
+    "run": "status-baseline",
+    "parent_close_stage": "cancelled"
+  },
+  {
+    "run": "status-forward",
+    "parent_close_stage": "cancelled"
+  },
+  {
+    "run": "status-package-wrapper-v2",
+    "parent_close_stage": "cancelled"
+  }
+]

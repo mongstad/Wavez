@@ -273,3 +273,29 @@ func _init() -> void:
 		style.border_color = c(StringName("state." + severity)); style.border_width_left = 3
 		style.border_width_top = 0; style.border_width_right = 0; style.border_width_bottom = 0
 		set_stylebox("panel", role, style)
+	_dialog_action_styles()
+
+func _dialog_action_styles() -> void:
+	# Opt-in dialog roles change only the resting surface. All other states and
+	# metrics inherit the action's existing role, including keyboard focus.
+	for pair in [["DialogButton", "Button"], ["DialogSecondaryButton", "SecondaryButton"]]:
+		set_type_variation(pair[0], pair[1])
+		var normal: StyleBoxFlat = get_stylebox("normal", pair[1]).duplicate()
+		normal.bg_color = c(&"surface.2")
+		normal.border_color = c(&"border.control")
+		normal.set_border_width_all(TOKENS.border_width)
+		set_stylebox("normal", pair[0], normal)
+
+func style_dialog_actions(node: Node) -> void:
+	# Called only by dialog owners. Leave chrome, links, semantic actions,
+	# toggles/selectors and nested native file pickers in their existing roles.
+	if node is FileDialog: return
+	# AcceptDialog owns internal buttons outside its ordinary child traversal.
+	if node is AcceptDialog:
+		style_dialog_actions(node.get_ok_button())
+		if node is ConfirmationDialog: style_dialog_actions(node.get_cancel_button())
+	if node.get_class() == "Button":
+		if node.theme_type_variation == "": node.theme_type_variation = "DialogButton"
+		elif node.theme_type_variation == "SecondaryButton": node.theme_type_variation = "DialogSecondaryButton"
+	for child in node.get_children():
+		if not child is Window: style_dialog_actions(child)

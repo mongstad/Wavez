@@ -28,6 +28,7 @@ func setup(owner_shell) -> void:
 	cancel_button = Button.new(); cancel_button.text = "Cancel"
 	cancel_button.theme_type_variation = "SecondaryButton"; actions.add_child(cancel_button)
 	cancel_button.pressed.connect(hide)
+	theme.style_dialog_actions(self)
 
 func open() -> void:
 	popup_centered(Vector2i(480, 160))

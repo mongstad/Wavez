@@ -1,0 +1,185 @@
+{
+  "Bookmarks": [
+    "Save time and camera bookmark",
+    "Go to bookmark",
+    "Use bookmark as manual offset",
+    "Delete bookmark",
+    "Time mapping",
+    "Close"
+  ],
+  "Camera": [
+    "Close"
+  ],
+  "Clipping": [
+    "Close"
+  ],
+  "Compare": [
+    "Use current series as left",
+    "Use current series as right",
+    "Clear left and right",
+    "Common schedule settings",
+    "Add current series to shared plot",
+    "Clear shared plot",
+    "Results",
+    "Close"
+  ],
+  "Data": [
+    "Close"
+  ],
+  "Derive range": [
+    "Freeze symmetric",
+    "Freeze percentile",
+    "Reset color",
+    "Reset opacity",
+    "Freeze",
+    "Cancel",
+    "Close"
+  ],
+  "Diagnostics": [
+    "Choose CSV",
+    "Close"
+  ],
+  "Geometry": [
+    "Load override",
+    "Clear override",
+    "Close"
+  ],
+  "Global effects": [
+    "Close"
+  ],
+  "Image": [
+    "Close"
+  ],
+  "Isosurface": [
+    "Extract",
+    "Remove",
+    "Close"
+  ],
+  "Load analysis": [
+    "Close"
+  ],
+  "Mapping": [
+    "Close"
+  ],
+  "Matched runs": [
+    "Left recipe\u2026",
+    "Right recipe\u2026",
+    "Render",
+    "Cancel",
+    "Close"
+  ],
+  "Performance": [
+    "Clear decoded cache",
+    "Close"
+  ],
+  "Period": [
+    "Advanced \u2022 Sampling assumptions",
+    "Results",
+    "Edit range",
+    "Close"
+  ],
+  "Results": [
+    "Remove result",
+    "Show plot",
+    "First data page",
+    "Next data page",
+    "Recompute",
+    "Close"
+  ],
+  "Save analysis": [
+    "Close"
+  ],
+  "Selection": [
+    "Rename selection",
+    "Duplicate selection",
+    "Delete selection",
+    "Toggle highlight",
+    "Select generated surface",
+    "Save current members as cohort",
+    "Group selected entries",
+    "Rename group",
+    "Delete group",
+    "Save group union",
+    "Save group intersection",
+    "Use current capture",
+    "Cancel",
+    "Close"
+  ],
+  "Slice": [
+    "Close"
+  ],
+  "Source probe": [
+    "Probe",
+    "Close"
+  ],
+  "Space time": [
+    "Results",
+    "Use full layer range",
+    "Plot",
+    "Close"
+  ],
+  "Temporal": [
+    "Results",
+    "Use full layer range",
+    "Cancel",
+    "Close"
+  ],
+  "about": [
+    "Close",
+    "Licenses and notices",
+    "Back to About"
+  ],
+  "cancel-export": [
+    "No"
+  ],
+  "details": [
+    "OK",
+    "Acknowledge failures",
+    "Close"
+  ],
+  "exit": [
+    "Cancel"
+  ],
+  "jobs": [
+    "OK",
+    "Open\u2026",
+    "Details\u2026",
+    "Cancel",
+    "Close"
+  ],
+  "locations": [
+    "Browse\u2026",
+    "Reset Defaults",
+    "Cancel"
+  ],
+  "shortcuts": [
+    "R",
+    "Clear",
+    "O",
+    "Unbound",
+    "Plus",
+    "Minus",
+    "F",
+    "Alt+N",
+    "Space",
+    "Left",
+    "Right",
+    "P",
+    "T",
+    "V",
+    "F11",
+    "Shift+F11",
+    "Reset Defaults",
+    "Cancel"
+  ],
+  "video-active": [
+    "Browse\u2026",
+    "Run in background",
+    "Cancel"
+  ],
+  "video-idle": [
+    "Browse\u2026",
+    "Run in background",
+    "Cancel"
+  ]
+}
