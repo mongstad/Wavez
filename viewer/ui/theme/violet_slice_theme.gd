@@ -41,6 +41,10 @@ func tonal_surface(x := 0, y := 0) -> StyleBoxTexture:
 
 func _init() -> void:
 	super()
+	# The Simulation heading alone follows the existing pin accent in Light;
+	# inherit PanelTitle's typography and preserve its accepted Dark ink.
+	set_type_variation("SimulationTitle", "PanelTitle")
+	set_color("font_color", "SimulationTitle", c(&"accent.primary") if light_mode else c(&"text.title"))
 	# Parent builds typography, numeric inputs, semantic states and native widgets.
 	# Only this scoped Theme uses the palette above; no project-wide theme change.
 	for type in ["Button", "MenuButton", "SecondaryButton", "CompactButton", "IconAction", "SelectedButton", "SectionHeader", "CheckBox", "CheckButton", "OptionButton"]:

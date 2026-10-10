@@ -1,0 +1,291 @@
+{
+  "geometry_and_pin_contract_states": 14,
+  "keyboard_and_hover_states": 4,
+  "dark_pixel_identical": true,
+  "light_differences_only_heading": true,
+  "light_min_contrast": 4.6354707637338795,
+  "contrasts": [
+    {
+      "state": "dark-1440-pinned",
+      "background": "192133",
+      "ratio": 3.84541080327616
+    },
+    {
+      "state": "dark-1440-pinned",
+      "background": "192132",
+      "ratio": 3.8505542185199126
+    },
+    {
+      "state": "dark-1440-pinned",
+      "background": "192032",
+      "ratio": 3.8831020396399016
+    },
+    {
+      "state": "dark-1440-unpinned",
+      "background": "192133",
+      "ratio": 3.84541080327616
+    },
+    {
+      "state": "dark-1440-unpinned",
+      "background": "192132",
+      "ratio": 3.8505542185199126
+    },
+    {
+      "state": "dark-1440-unpinned",
+      "background": "192032",
+      "ratio": 3.8831020396399016
+    },
+    {
+      "state": "dark-3840-pinned",
+      "background": "192132",
+      "ratio": 3.8505542185199126
+    },
+    {
+      "state": "dark-3840-pinned",
+      "background": "192032",
+      "ratio": 3.8831020396399016
+    },
+    {
+      "state": "dark-3840-pinned",
+      "background": "182032",
+      "ratio": 3.8906084599218205
+    },
+    {
+      "state": "dark-3840-unpinned",
+      "background": "192132",
+      "ratio": 3.8505542185199126
+    },
+    {
+      "state": "dark-3840-unpinned",
+      "background": "192032",
+      "ratio": 3.8831020396399016
+    },
+    {
+      "state": "dark-3840-unpinned",
+      "background": "182032",
+      "ratio": 3.8906084599218205
+    },
+    {
+      "state": "dark-970-pinned",
+      "background": "192132",
+      "ratio": 3.8505542185199126
+    },
+    {
+      "state": "dark-970-pinned",
+      "background": "182032",
+      "ratio": 3.8906084599218205
+    },
+    {
+      "state": "dark-970-pinned",
+      "background": "182032",
+      "ratio": 3.8906084599218205
+    },
+    {
+      "state": "dark-970-unpinned",
+      "background": "192132",
+      "ratio": 3.8505542185199126
+    },
+    {
+      "state": "dark-970-unpinned",
+      "background": "182032",
+      "ratio": 3.8906084599218205
+    },
+    {
+      "state": "dark-970-unpinned",
+      "background": "182032",
+      "ratio": 3.8906084599218205
+    },
+    {
+      "state": "dark-reopened",
+      "background": "192133",
+      "ratio": 3.84541080327616
+    },
+    {
+      "state": "dark-reopened",
+      "background": "192132",
+      "ratio": 3.8505542185199126
+    },
+    {
+      "state": "dark-reopened",
+      "background": "192032",
+      "ratio": 3.8831020396399016
+    },
+    {
+      "state": "light-1440-pinned",
+      "background": "f0f1f5",
+      "ratio": 4.676991700038236
+    },
+    {
+      "state": "light-1440-pinned",
+      "background": "f0f1f5",
+      "ratio": 4.676991700038236
+    },
+    {
+      "state": "light-1440-pinned",
+      "background": "f0f1f5",
+      "ratio": 4.676991700038236
+    },
+    {
+      "state": "light-1440-unpinned",
+      "background": "f0f1f5",
+      "ratio": 4.676991700038236
+    },
+    {
+      "state": "light-1440-unpinned",
+      "background": "f0f1f5",
+      "ratio": 4.676991700038236
+    },
+    {
+      "state": "light-1440-unpinned",
+      "background": "f0f1f5",
+      "ratio": 4.676991700038236
+    },
+    {
+      "state": "light-3840-pinned",
+      "background": "f0f1f5",
+      "ratio": 4.676991700038236
+    },
+    {
+      "state": "light-3840-pinned",
+      "background": "f0f1f5",
+      "ratio": 4.676991700038236
+    },
+    {
+      "state": "light-3840-pinned",
+      "background": "eff0f5",
+      "ratio": 4.63853343739017
+    },
+    {
+      "state": "light-3840-unpinned",
+      "background": "f0f1f5",
+      "ratio": 4.676991700038236
+    },
+    {
+      "state": "light-3840-unpinned",
+      "background": "f0f1f5",
+      "ratio": 4.676991700038236
+    },
+    {
+      "state": "light-3840-unpinned",
+      "background": "eff0f5",
+      "ratio": 4.63853343739017
+    },
+    {
+      "state": "light-970-pinned",
+      "background": "f0f1f5",
+      "ratio": 4.676991700038236
+    },
+    {
+      "state": "light-970-pinned",
+      "background": "eff0f5",
+      "ratio": 4.63853343739017
+    },
+    {
+      "state": "light-970-pinned",
+      "background": "eff0f4",
+      "ratio": 4.6354707637338795
+    },
+    {
+      "state": "light-970-unpinned",
+      "background": "f0f1f5",
+      "ratio": 4.676991700038236
+    },
+    {
+      "state": "light-970-unpinned",
+      "background": "eff0f5",
+      "ratio": 4.63853343739017
+    },
+    {
+      "state": "light-970-unpinned",
+      "background": "eff0f4",
+      "ratio": 4.6354707637338795
+    },
+    {
+      "state": "light-reopened",
+      "background": "f0f1f5",
+      "ratio": 4.676991700038236
+    },
+    {
+      "state": "light-reopened",
+      "background": "f0f1f5",
+      "ratio": 4.676991700038236
+    },
+    {
+      "state": "light-reopened",
+      "background": "f0f1f5",
+      "ratio": 4.676991700038236
+    }
+  ],
+  "pixels": [
+    {
+      "state": "dark-1440-pinned",
+      "changed_pixels": 0,
+      "outside_heading": 0
+    },
+    {
+      "state": "dark-1440-unpinned",
+      "changed_pixels": 0,
+      "outside_heading": 0
+    },
+    {
+      "state": "dark-3840-pinned",
+      "changed_pixels": 0,
+      "outside_heading": 0
+    },
+    {
+      "state": "dark-3840-unpinned",
+      "changed_pixels": 0,
+      "outside_heading": 0
+    },
+    {
+      "state": "dark-970-pinned",
+      "changed_pixels": 0,
+      "outside_heading": 0
+    },
+    {
+      "state": "dark-970-unpinned",
+      "changed_pixels": 0,
+      "outside_heading": 0
+    },
+    {
+      "state": "dark-reopened",
+      "changed_pixels": 0,
+      "outside_heading": 0
+    },
+    {
+      "state": "light-1440-pinned",
+      "changed_pixels": 660,
+      "outside_heading": 0
+    },
+    {
+      "state": "light-1440-unpinned",
+      "changed_pixels": 660,
+      "outside_heading": 0
+    },
+    {
+      "state": "light-3840-pinned",
+      "changed_pixels": 2440,
+      "outside_heading": 0
+    },
+    {
+      "state": "light-3840-unpinned",
+      "changed_pixels": 2440,
+      "outside_heading": 0
+    },
+    {
+      "state": "light-970-pinned",
+      "changed_pixels": 649,
+      "outside_heading": 0
+    },
+    {
+      "state": "light-970-unpinned",
+      "changed_pixels": 649,
+      "outside_heading": 0
+    },
+    {
+      "state": "light-reopened",
+      "changed_pixels": 660,
+      "outside_heading": 0
+    }
+  ]
+}

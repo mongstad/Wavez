@@ -1,0 +1,250 @@
+{
+  "restart": {
+    "background_samples": [
+      "f0f1f5",
+      "f0f1f5",
+      "f0f1f5"
+    ],
+    "heading": {
+      "embolden": 0.5,
+      "focus_mode": 0,
+      "font": "Open Sans SemiBold",
+      "font_class": "FontVariation",
+      "font_size": 16,
+      "min": "(0.0, 0.0)",
+      "position": "(0.0, 4.0)",
+      "size": "(292.0, 23.0)",
+      "tooltip": ""
+    },
+    "heading_color": "7956c8",
+    "heading_pixel_rect": [
+      1094,
+      64,
+      1386,
+      87
+    ],
+    "light": true,
+    "other_title": "7050b8",
+    "pins": {
+      "bottom": {
+        "button_pressed": true,
+        "colors": {
+          "disabled": "7956c8",
+          "focus": "7956c8",
+          "hover": "7956c8",
+          "hover_pressed": "7956c8",
+          "normal": "7956c8",
+          "pressed": "7956c8"
+        },
+        "embolden": 0,
+        "focus_mode": 2,
+        "font": "Open Sans SemiBold",
+        "font_class": "FontFile",
+        "font_size": 14,
+        "icon_hash": 337290621,
+        "min": "(32.0, 32.0)",
+        "pinned": true,
+        "position": "(211.0, 0.0)",
+        "self_modulate": "f0f0f0ff",
+        "size": "(32.0, 32.0)",
+        "styles": {
+          "disabled": [
+            "ffffff00",
+            "d6d8e5ff",
+            0,
+            "(16.0, 12.0)",
+            0.0,
+            4
+          ],
+          "focus": [
+            "e6e8efff",
+            "596dbcff",
+            2,
+            "(0.0, 0.0)",
+            4.0,
+            6
+          ],
+          "hover": [
+            "ddd5f0ff",
+            "d6d8e5ff",
+            0,
+            "(16.0, 12.0)",
+            0.0,
+            4
+          ],
+          "hover_pressed": [
+            "ddd5f0ff",
+            "d6d8e5ff",
+            0,
+            "(16.0, 12.0)",
+            0.0,
+            4
+          ],
+          "normal": [
+            "ffffff00",
+            "d6d8e5ff",
+            0,
+            "(16.0, 12.0)",
+            0.0,
+            4
+          ],
+          "pressed": [
+            "ffffff00",
+            "d6d8e5ff",
+            0,
+            "(16.0, 12.0)",
+            0.0,
+            4
+          ]
+        },
+        "tooltip": ""
+      },
+      "right": {
+        "button_pressed": true,
+        "colors": {
+          "disabled": "7956c8",
+          "focus": "7956c8",
+          "hover": "7956c8",
+          "hover_pressed": "7956c8",
+          "normal": "7956c8",
+          "pressed": "7956c8"
+        },
+        "embolden": 0,
+        "focus_mode": 2,
+        "font": "Open Sans SemiBold",
+        "font_class": "FontFile",
+        "font_size": 14,
+        "icon_hash": 337290621,
+        "min": "(32.0, 32.0)",
+        "pinned": true,
+        "position": "(300.0, 0.0)",
+        "self_modulate": "f0f0f0ff",
+        "size": "(32.0, 32.0)",
+        "styles": {
+          "disabled": [
+            "ffffff00",
+            "d6d8e5ff",
+            0,
+            "(16.0, 12.0)",
+            0.0,
+            4
+          ],
+          "focus": [
+            "e6e8efff",
+            "596dbcff",
+            2,
+            "(0.0, 0.0)",
+            4.0,
+            6
+          ],
+          "hover": [
+            "ddd5f0ff",
+            "d6d8e5ff",
+            0,
+            "(16.0, 12.0)",
+            0.0,
+            4
+          ],
+          "hover_pressed": [
+            "ddd5f0ff",
+            "d6d8e5ff",
+            0,
+            "(16.0, 12.0)",
+            0.0,
+            4
+          ],
+          "normal": [
+            "ffffff00",
+            "d6d8e5ff",
+            0,
+            "(16.0, 12.0)",
+            0.0,
+            4
+          ],
+          "pressed": [
+            "ffffff00",
+            "d6d8e5ff",
+            0,
+            "(16.0, 12.0)",
+            0.0,
+            4
+          ]
+        },
+        "tooltip": ""
+      },
+      "top": {
+        "button_pressed": true,
+        "colors": {
+          "disabled": "7956c8",
+          "focus": "7956c8",
+          "hover": "7956c8",
+          "hover_pressed": "7956c8",
+          "normal": "7956c8",
+          "pressed": "7956c8"
+        },
+        "embolden": 0,
+        "focus_mode": 2,
+        "font": "Open Sans SemiBold",
+        "font_class": "FontFile",
+        "font_size": 14,
+        "icon_hash": 337290621,
+        "min": "(32.0, 32.0)",
+        "pinned": true,
+        "position": "(1280.0, 0.0)",
+        "self_modulate": "f0f0f0ff",
+        "size": "(32.0, 32.0)",
+        "styles": {
+          "disabled": [
+            "ffffff00",
+            "d6d8e5ff",
+            0,
+            "(16.0, 12.0)",
+            0.0,
+            4
+          ],
+          "focus": [
+            "e6e8efff",
+            "596dbcff",
+            2,
+            "(0.0, 0.0)",
+            4.0,
+            6
+          ],
+          "hover": [
+            "ddd5f0ff",
+            "d6d8e5ff",
+            0,
+            "(16.0, 12.0)",
+            0.0,
+            4
+          ],
+          "hover_pressed": [
+            "ddd5f0ff",
+            "d6d8e5ff",
+            0,
+            "(16.0, 12.0)",
+            0.0,
+            4
+          ],
+          "normal": [
+            "ffffff00",
+            "d6d8e5ff",
+            0,
+            "(16.0, 12.0)",
+            0.0,
+            4
+          ],
+          "pressed": [
+            "ffffff00",
+            "d6d8e5ff",
+            0,
+            "(16.0, 12.0)",
+            0.0,
+            4
+          ]
+        },
+        "tooltip": ""
+      }
+    }
+  }
+}

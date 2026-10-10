@@ -16,6 +16,15 @@ Success, warning and error retain separate green, amber and red roles. Dark keep
 its original palette. About switches between the two official branding assets
 without restarting or reloading a capture.
 
+The **Simulation** heading uses the existing pin `accent.primary` color in Light
+(`#7956C8`). Its dedicated `SimulationTitle` role inherits `PanelTitle` typography;
+other titles retain their existing ink. Pin colors, glyphs, state styling and hover
+motion are unchanged, and Dark keeps its existing `#7270D8` heading accent.
+The sampled Light heading background gives 4.64–4.68:1 contrast at normal, compact
+and simulated 2× layouts. This is slightly lower than the previous darker title
+ink; the change aligns the semantic accent while retaining readable contrast.
+See [issue #316 measurements and before/after evidence](evidence/issue-316/README.md).
+
 Wavez-owned top-right dialog X controls share the shell close glyph, hit area and
 state styling in both themes. Their visible keyboard focus stays inside the close
 hit area; see [dialog close controls](DIALOG_CLOSE_CONTROLS.md).
