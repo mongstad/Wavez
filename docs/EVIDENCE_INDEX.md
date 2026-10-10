@@ -1,5 +1,9 @@
 # Retained evidence
 
+Issue #320's [deeper-purple and cool-gray Light refinement](evidence/issue-320/README.md)
+records the approved shared heading/pin option, actual control-state contrast,
+source/package limits and physical owner-review steps for candidate build 85.
+
 Issue #310's [cool light-gray palette review](evidence/issue-310/README.md)
 compares candidate build 81 against owner-merged build 80. It retains full-size
 Light images, Dark/scientific pixel comparisons, source/package audits and

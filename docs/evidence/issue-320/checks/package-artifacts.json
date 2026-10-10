@@ -1,0 +1,22 @@
+{
+  "baseline-package-compat": {
+    "WAVEZ.pck": {
+      "bytes": 9784068,
+      "sha256": "f29cd557bd495f87bb0c7a5965ae6addb079a4a0434c4b38c945d8c77259470f"
+    },
+    "WAVEZ.x86_64": {
+      "bytes": 73519416,
+      "sha256": "d9f79ab89b5ae369aeed11c6052d402e8218cd503bf85b4a235f9c30c46a7c63"
+    }
+  },
+  "package-theme-compat": {
+    "WAVEZ.pck": {
+      "bytes": 9782124,
+      "sha256": "235ad7af441dc4fe9e3348fae84905d8ba412b4e8729bf831fcda1d7e27530d9"
+    },
+    "WAVEZ.x86_64": {
+      "bytes": 73519416,
+      "sha256": "d9f79ab89b5ae369aeed11c6052d402e8218cd503bf85b4a235f9c30c46a7c63"
+    }
+  }
+}
