@@ -147,6 +147,7 @@ func _init() -> void:
 	set_stylebox("normal", "TextEdit", flat_box(&"surface.1", 12, 10))
 	set_stylebox("read_only", "TextEdit", flat_box(&"surface.1", 12, 10))
 	set_color("font_readonly_color", "TextEdit", c(&"text.secondary"))
+	_dialog_action_styles()
 
 func svg_texture(source: String, tint: Color) -> DPITexture:
 	return DPITexture.create_from_string(source, 1.0, 1.0, {Color.WHITE: tint})

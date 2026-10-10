@@ -1,0 +1,32 @@
+{
+  "renderer": "gl_compatibility",
+  "packaged": true,
+  "checks": {
+    "before": 313,
+    "after": 2473
+  },
+  "contract_pairs": 978,
+  "normal_style_changes": 720,
+  "preserved_state_pixel_pairs": [
+    "dark-1024-video-disabled-target.png",
+    "dark-1024-video-hover-target.png",
+    "dark-1024-video-pressed-target.png",
+    "dark-1440-video-disabled-target.png",
+    "dark-1440-video-hover-target.png",
+    "dark-1440-video-pressed-target.png",
+    "light-1024-video-disabled-target.png",
+    "light-1024-video-hover-target.png",
+    "light-1024-video-pressed-target.png",
+    "light-1440-video-disabled-target.png",
+    "light-1440-video-hover-target.png",
+    "light-1440-video-pressed-target.png"
+  ],
+  "preserved_focus_ring_pixel_pairs": [
+    "dark-1024-video-focus-target.png",
+    "dark-1440-video-focus-target.png",
+    "light-1024-video-focus-target.png",
+    "light-1440-video-focus-target.png"
+  ],
+  "source_sha256": "627ee172cfd744fa550e017190272c30dc782aafc8eb6f2c7ee90a271ca7f8d2",
+  "source_unchanged": true
+}

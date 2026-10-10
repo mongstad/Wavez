@@ -1,5 +1,9 @@
 # Retained evidence
 
+Issue #325's [dialog action audit](evidence/issue-325/README.md) records candidate
+build 87, unfocused Dark/Light before/after captures at normal and compact sizes,
+preserved interaction states, scoped dialog coverage and owner review steps.
+
 Issue #323's [range validation refinement](evidence/issue-323/range-validation/README.md)
 records immediate source/ordering bounds, elapsed controls for offset timestamps,
 precise fractional endpoints, the general final-second remainder rule, and

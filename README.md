@@ -34,6 +34,7 @@ Start with:
 - [Dialog title and section hierarchy](docs/DIALOG_HIERARCHY.md)
 - [Shared dialog close controls](docs/DIALOG_CLOSE_CONTROLS.md)
 - [File and Tools dialog layout](docs/DIALOG_COHERENCE.md)
+- [Dialog action button appearance](docs/DIALOG_ACTIONS.md)
 - [Performance dialog](docs/PERFORMANCE_DIALOG.md)
 - [Current Tools functional audit](docs/TOOLS_FUNCTIONAL_AUDIT.md)
 - [Successful-open error recovery](docs/LOAD_ERROR_STATUS_RECOVERY.md)

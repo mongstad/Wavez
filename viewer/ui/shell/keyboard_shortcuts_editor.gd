@@ -72,6 +72,7 @@ func setup(owner_shell) -> void:
 	apply_button = Button.new(); apply_button.text = "Apply"; apply_button.theme_type_variation = "PrimaryButton"; apply_button.disabled = true
 	apply_button.pressed.connect(commit); footer.add_child(apply_button)
 	get_window().size_changed.connect(fit.call_deferred)
+	theme.style_dialog_actions(self)
 	hide()
 
 func _keep_focus_outline_visible(control: Control) -> void:
@@ -137,7 +138,7 @@ func refresh_rows() -> void:
 	for action in rows:
 		var row: Dictionary = rows[action]
 		row.key.text = "Press a key…" if action == listening else Bindings.text(staged[action])
-		row.key.theme_type_variation = "SelectedButton" if action == listening else "SecondaryButton"
+		row.key.theme_type_variation = "SelectedButton" if action == listening else "DialogSecondaryButton"
 		row.label.add_theme_color_override("font_color", theme.c(&"text.primary"))
 		row.clear.disabled = staged[action] == 0
 		if action == "toggle_invert_y_axis": focus_order.append(invert_y_toggle)

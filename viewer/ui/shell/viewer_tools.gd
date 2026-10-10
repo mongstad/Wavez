@@ -146,6 +146,7 @@ func open(title: String) -> void:
 	var chrome_height := 32 + 32 + 32 + 30 + footer_height
 	var desired := Vector2i(width,clampi(ceili(content_height + chrome_height),240,620))
 	window.popup_centered(Vector2i(minf(desired.x,extent.x-32),minf(desired.y,extent.y-32)))
+	window.theme.style_dialog_actions(window)
 	if title == "Performance": fit_performance.call_deferred()
 	refresh_context()
 

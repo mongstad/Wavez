@@ -1,0 +1,36 @@
+[
+  {
+    "name": "complete.mp4",
+    "decoded_rgb_sha256": "5331dd1561a89d16dbd30c459b909b88f5ac6745a2440cedd4863eb30ce4d541",
+    "decoded_pixels_identical": true,
+    "probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "width": 128,
+          "height": 128,
+          "avg_frame_rate": "30/1",
+          "nb_frames": "180"
+        }
+      ]
+    }
+  },
+  {
+    "name": "second-success.mp4",
+    "decoded_rgb_sha256": "75987d50e940324b33c0e3e24448dd8f9a79c9fbe592b8c8f6084bd6a0254de4",
+    "decoded_pixels_identical": true,
+    "probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "width": 128,
+          "height": 128,
+          "avg_frame_rate": "30/1",
+          "nb_frames": "1"
+        }
+      ]
+    }
+  }
+]

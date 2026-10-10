@@ -1,13 +1,12 @@
 # Current status
 
-Accepted baseline: **v0.1.0.80**, `ceb3ba2796538ee99562f3ac5b0fd696cfbf7463`,
-owner-merged PR #311. The repository's application identity is
+Accepted baseline: **v0.1.0.86**, `896e63ea470c07b2b32bddc4c2ea6160c025b2e5`,
+owner-merged PR #327. The repository's application identity is
 `viewer/project.godot` → `application/config/version`; see [version policy](VERSIONING.md).
-Issue #310 proposes candidate build 81 with a softer cool light-gray **Light**
-palette. It retains existing theme selection, persistence, geometry, official
-About artwork, Dark styling and scientific rendering. The palette remains
-subject to owner physical review. See [application themes](APPLICATION_THEMES.md)
-and [palette review evidence](evidence/issue-310/README.md).
+Issue #325 proposes candidate **v0.1.0.87**. Its [dialog action roles](DIALOG_ACTIONS.md)
+make neutral dialog actions recognizable when unfocused, preserving existing
+interaction states and excluding shell/panel/transport controls. See the
+[audit and current review evidence](evidence/issue-325/README.md).
 
 The GitHub Issues and Wavez Development Project are the operational queue. Work
 requires a Ready issue (or explicit owner authorization), the correct branch/base
