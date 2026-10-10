@@ -18,6 +18,7 @@ Read README.md, docs/CURRENT_STATUS.md and CONTRIBUTING.md before making changes
 - Inspect staged content, sizes and secrets before committing. Never commit credentials, environments, caches, captures or large scientific results. Preserve useful history.
 - Keep external simulations and research projects outside this repository. Use synthetic fixtures or explicit external paths for optional integration tests. Do not duplicate exporters.
 - Validate relevant changes with small generated fixtures; avoid production scientific reruns for housekeeping.
+- Never add tooltips to panels, controls, buttons, labels, or other UI elements unless the owner explicitly instructs you to add a tooltip for that specific element. Tooltips are opt-in; do not introduce unsolicited hints or explanations.
 
 ### Risk-based validation
 
