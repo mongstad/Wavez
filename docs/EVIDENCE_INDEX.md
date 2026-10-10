@@ -1,5 +1,9 @@
 # Retained evidence
 
+Issue #323's [Export Video clock review](evidence/issue-323/README.md) retains
+source/package screenshots, precise settings and output comparisons against
+accepted build 85, and owner-review limits for candidate build 86.
+
 Issue #320's [deeper-purple and cool-gray Light refinement](evidence/issue-320/README.md)
 records the approved shared heading/pin option, actual control-state contrast,
 source/package limits and physical owner-review steps for candidate build 85.

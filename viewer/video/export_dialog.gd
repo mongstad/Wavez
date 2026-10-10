@@ -10,11 +10,15 @@ const ProgressDetails = preload("res://video/progress_details.gd")
 var progress_presentation := ProgressDetails.new()
 const TitledGroup = preload("res://ui/shell/titled_group.gd")
 const Disclosure = preload("res://ui/components/disclosure.gd")
+const Clock = preload("res://ui/shell/time_seek_popover.gd")
+const FloatText = preload("res://ui/components/float64_text.gd")
 var viewer
 var timeline
 var range_choice: OptionButton
 var start: SpinBox
 var end: SpinBox
+var start_clock: Label
+var end_clock: Label
 var width: SpinBox
 var height: SpinBox
 var fps: SpinBox
@@ -104,8 +108,8 @@ func _ready() -> void:
 	range_choice = choice("Mode", ["Full", "Current position to end", "Custom"], range_fields)
 	start = number("Start", 0, -1e30, 1e30, .0001, range_fields)
 	end = number("End", 1, -1e30, 1e30, .0001, range_fields)
-	start.tooltip_text = "Recorded capture time."
-	end.tooltip_text = "End time is exclusive; a still exports one frame."
+	start_clock = time_readout(start)
+	end_clock = time_readout(end)
 	range_choice.item_selected.connect(func(_i: int): update_range())
 	var resolution := choice("Resolution", ["1920 × 1080", "2560 × 1440", "3840 × 2160", "Custom"], video_fields)
 	width = number("Width", 1920, 64, 8192, 2, video_fields)
@@ -125,6 +129,7 @@ func _ready() -> void:
 		if i < 3: fps.value = [24,30,60][i]
 	)
 	rate = number("Playback rate", 1, .000001, 1e12, .000001, video_fields)
+	rate.suffix = "×"
 	rate.tooltip_text = "Simulation-time units per exported video second. Lower values play slower and sample time more closely; higher values play faster."
 	camera_mode = choice("Camera", ["Current camera locked", "Current camera + orbit"], camera_fields)
 	orbit = number("Orbit • radians / video second", .08, -10, 10, .001, camera_fields)
@@ -282,6 +287,28 @@ func number(label: String, initial: float, low: float, high: float, step_value: 
 	target.add_child(spin)
 	return spin
 
+func time_readout(spin: SpinBox) -> Label:
+	var parent := spin.get_parent()
+	var index := spin.get_index()
+	var row := HBoxContainer.new(); row.add_theme_constant_override("separation", 12)
+	parent.add_child(row); parent.move_child(row, index)
+	var clock := Label.new(); clock.theme_type_variation = "NumericValue"
+	clock.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	clock.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART; row.add_child(clock)
+	spin.reparent(row); spin.custom_minimum_size.x = 140; spin.suffix = "s"
+	return clock
+
+static func frame_count_text(count: int) -> String:
+	var text := str(count)
+	for index in range(text.length() - 3, 0, -3): text = text.insert(index, ",")
+	return text
+
+func update_time_readout(clock: Label, spin: SpinBox, value: float, exclusive := false) -> void:
+	clock.text = Clock.format_time(value, true)
+	var hint := "Recorded capture time. Enter decimal seconds, e.g. 210.125; the clock is a readout.\nExact time: %s s" % FloatText.format_value(value)
+	if exclusive: hint += "\nEnd time is exclusive; a still exports one frame."
+	clock.tooltip_text = hint; spin.tooltip_text = hint
+
 func check(label: String, text: String, target: GridContainer) -> CheckButton:
 	var name_label := Label.new(); name_label.text = label; target.add_child(name_label)
 	var control := CheckButton.new(); control.text = text; target.add_child(control)
@@ -371,12 +398,15 @@ func update_estimate() -> void:
 	if timeline != null and not timeline.times.is_empty() and range_choice.selected < 2:
 		start_time = timeline.times[0] if range_choice.selected == 0 else opened_current
 		end_time = timeline.times[-1]
+	update_time_readout(start_clock, start, start_time)
+	update_time_readout(end_clock, end, end_time, true)
 	if end_time < start_time:
 		estimate.text = "End time must be at or after start time."
 		return
 	var count := Job.frame_total({"start_time":start_time, "end_time":end_time, "fps":fps.value, "playback_rate":rate.value})
 	var gib := float(count) * width.value * height.value * 4 / pow(1024, 3)
-	estimate.text = "Output: %.3f seconds • %d frames\nTemporary storage: %.2f GiB" % [count/fps.value, count, gib]
+	estimate.text = "Duration: %s · %s frames\nTemporary storage: %.2f GiB" % [Clock.format_time(count/fps.value, true, 3), frame_count_text(count), gib]
+	estimate.tooltip_text = "Video duration: %s seconds at %s×. Export processing time is reported separately in job status." % [FloatText.format_value(count/fps.value), FloatText.format_value(rate.value)]
 
 func start_export() -> void:
 	if pid > 0 or preparing or timeline == null: return

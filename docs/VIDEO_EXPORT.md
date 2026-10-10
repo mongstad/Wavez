@@ -26,12 +26,28 @@ Open a capture and set its appearance/camera, then choose **File → Export →
 Video**. Settings are arranged in titled **Range**, **Video**, **Camera**,
 **Presentation** and **Output** groups. Range **Mode** offers **Full**, current
 position to end, or **Custom** in recorded capture-time units. Its **Start** and **End**
-fields retain exact source endpoints for the presets; the End tooltip explains
+rows show the playback clock convention (`MM:SS`, or `HH:MM:SS` beyond an hour),
+with fractional seconds when present, alongside the existing decimal-seconds
+editors marked **s**. In Custom mode, enter seconds such as `210.125`; the clock
+is a readout. Presets retain exact source endpoints even when the numeric editor
+shows fewer decimal places. The clock and tooltip expose that precise value.
+These are recorded source timestamps, including signed/offset clocks; playback's
+elapsed clock remains relative to the first sample. The End tooltip explains
 that the endpoint is exclusive and a still exports one frame. Select 1080p,
 1440p, 4K, or even custom dimensions;
 24/30/60 or custom integer FPS. **Playback rate** is simulation-time units
 per second of exported video: lower values play more slowly and sample time
-more closely, while higher values play faster. The numeric timing is unchanged.
+more closely, while higher values play faster. Its **×** suffix identifies a speed
+multiplier. The numeric timing is unchanged.
+
+The summary shows video duration and frame count, for example **Duration: 03:30 ·
+6,300 frames** for 210 seconds at 30 FPS and 1×. Duration comes from the existing
+frame count divided by FPS, including its final-frame convention. Fractional
+durations display up to milliseconds; **≈** marks rounding, and the tooltip gives
+the precise duration in seconds. Export processing time remains separate in job
+status. Custom entry retains the existing SpinBox precision and range validation.
+See [issue #323 review evidence](evidence/issue-323/README.md) for focused
+source/package comparisons and owner-review limits.
 
 Enabled volume legends include the applied opacity strength and ramp, or identify
 opaque slices. The existing **Overlays** control gates those cards with the other

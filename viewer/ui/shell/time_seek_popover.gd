@@ -8,6 +8,7 @@ var end := 0.0
 var current := 0.0
 var initial_text := ""
 var return_focus: WeakRef
+const FloatText = preload("res://ui/components/float64_text.gd")
 
 func _init() -> void:
 	name = "TimeSeekPopover"
@@ -29,7 +30,26 @@ func _init() -> void:
 			var control = return_focus.get_ref()
 			if is_instance_valid(control) and control.is_visible_in_tree(): control.grab_focus())
 
-static func format_time(seconds: float) -> String:
+static func format_time(seconds: float, fractional := false, decimals := -1) -> String:
+	if fractional:
+		if not is_finite(seconds): return "—"
+		if decimals >= 0:
+			var scale := pow(10.0, decimals)
+			var rounded := roundf(seconds * scale) / scale
+			return ("≈" if rounded != seconds else "") + format_time(rounded, true)
+		var magnitude := absf(seconds)
+		var clock := format_time(magnitude)
+		var sign := "-" if seconds < 0 else ""
+		if magnitude == floorf(magnitude): return sign + clock
+		# Use the original decimal, avoiding subtraction noise at offset timestamps.
+		var decimal := FloatText.format_value(magnitude)
+		if decimal.contains("e"):
+			var parts := decimal.split("e")
+			var places := -int(parts[1])
+			# Keep extreme subsecond values readable without an unbounded clock label.
+			if places > 18: return sign + clock + " (%s s)" % FloatText.format_value(seconds)
+			decimal = "0." + "0".repeat(places - 1) + parts[0].replace(".", "")
+		return sign + clock + "." + decimal.get_slice(".", 1)
 	# Display completed seconds only; never round the scientific/source clock.
 	var whole := floorf(maxf(0, seconds))
 	if whole < 3600: return "%02d:%02d" % [int(whole / 60), int(fmod(whole, 60))]
