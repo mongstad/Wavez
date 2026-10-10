@@ -1,0 +1,71 @@
+{
+  "accepted_main": "ad19ed18481abc093f316fa43a24fb1c336a3de5",
+  "candidate_version": "v0.1.0.84",
+  "results": [
+    {
+      "run": "after-forward-dark",
+      "checks": 339,
+      "failures": 0,
+      "banner_states": 49,
+      "logical_fit_verified": true,
+      "source_unchanged_sha256": "e3392a3e8f61d81bcab91d4e78561a1b675bd4b57f732604ac9d6708d0cddd5b"
+    },
+    {
+      "run": "after-forward-light",
+      "checks": 339,
+      "failures": 0,
+      "banner_states": 49,
+      "logical_fit_verified": true,
+      "source_unchanged_sha256": "6814557374423eb95e4702af74bb2ae724d55215f2b9a7043cc52472a2d9aed2"
+    },
+    {
+      "run": "after-compat-dark",
+      "checks": 339,
+      "failures": 0,
+      "banner_states": 49,
+      "logical_fit_verified": true,
+      "source_unchanged_sha256": "0e4825ffb9fb58f6cc6ff11c9dfc3114f830d68f57c7e755de06481f51707dab"
+    },
+    {
+      "run": "after-compat-light",
+      "checks": 339,
+      "failures": 0,
+      "banner_states": 49,
+      "logical_fit_verified": true,
+      "source_unchanged_sha256": "043680fd1182a02680789348ecbad43e1cf478fa43d9ee441a78e9b5172bbb0c"
+    },
+    {
+      "run": "package-dark",
+      "checks": 339,
+      "failures": 0,
+      "banner_states": 49,
+      "logical_fit_verified": true,
+      "source_unchanged_sha256": "b5acf5d32bd0b95bdd184d2762bf9fc05dd057978229cef91dce2a726eaf9616"
+    },
+    {
+      "run": "package-light",
+      "checks": 339,
+      "failures": 0,
+      "banner_states": 49,
+      "logical_fit_verified": true,
+      "source_unchanged_sha256": "b5acf5d32bd0b95bdd184d2762bf9fc05dd057978229cef91dce2a726eaf9616"
+    }
+  ],
+  "package_artifact_sha256": {
+    "wavez.x86_64": "d9f79ab89b5ae369aeed11c6052d402e8218cd503bf85b4a235f9c30c46a7c63",
+    "wavez.pck": "faff92a9ba1177b0f6d1ea90de47b4191fc96608b2e2370d28c573e59015a893"
+  },
+  "focused_checks": {
+    "application_version_unittests": 2,
+    "notices_sync": "PASS",
+    "py_compile": "PASS",
+    "approved_assets_byte_identity": "PASS"
+  },
+  "limits": [
+    "Requested 3840x2160 window clamped to 2560x1394 by KDE; simulated 2x layout only",
+    "No physical 4K or mixed-DPI acceptance",
+    "Package exercised Compatibility only",
+    "No full unrelated application regression suites",
+    "No real browser link dispatch or browser-paint verification"
+  ]
+}

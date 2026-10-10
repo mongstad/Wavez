@@ -2,8 +2,8 @@ extends AcceptDialog
 ## Informational only: no capture, playback or scientific controller dependencies.
 const Version = preload("res://application_version.gd")
 const Notices = preload("res://ui/about/notices.tres")
-const LightLogo = preload("res://ui/about/wavez-logo-light.png")
-const Logo = preload("res://ui/about/wavez-logo-dark.png")
+const LightLogo = preload("res://ui/about/Wavez_Banner_No_Slogan_No_Border_White.png")
+const Logo = preload("res://ui/about/Wavez_Banner_No_Slogan_No_Border_Dark.png")
 const REPOSITORY := "https://github.com/mongstad/Wavez"
 const DOCUMENTATION := "https://github.com/mongstad/Wavez#readme"
 var url_opener: Callable = OS.shell_open
@@ -25,7 +25,7 @@ var header_dragging := false
 
 func _ready() -> void:
 	title = "About WAVEZ"
-	# One square body with a real shell close Button, rather than native decoration.
+	# A real shell close Button, rather than native decoration.
 	borderless = true
 	var body := VBoxContainer.new(); body.add_theme_constant_override("separation", 8); add_child(body)
 	header = HBoxContainer.new(); body.add_child(header)
@@ -42,7 +42,7 @@ func _ready() -> void:
 	overview = VBoxContainer.new(); overview.add_theme_constant_override("separation",10); content.add_child(overview)
 	var logo_row := HBoxContainer.new(); logo_row.add_theme_constant_override("separation",16); overview.add_child(logo_row)
 	logo = TextureRect.new(); logo.texture = Logo; logo.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	logo.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED; logo.custom_minimum_size = Vector2(112,112)
+	logo.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED; logo.custom_minimum_size = Vector2(216,112)
 	logo.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS; logo_row.add_child(logo)
 	var heading := VBoxContainer.new(); heading.size_flags_horizontal = Control.SIZE_EXPAND_FILL; logo_row.add_child(heading)
 	heading.alignment = BoxContainer.ALIGNMENT_CENTER

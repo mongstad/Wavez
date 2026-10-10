@@ -1,0 +1,54 @@
+[
+  {
+    "run": "after-forward-dark",
+    "checks": 339,
+    "failures": 0,
+    "banner_states": 49,
+    "logical_fit_verified": true,
+    "requested_scale": {
+      "actual_viewport": "(2560, 1394)",
+      "dialog": "(580, 592)",
+      "scale": 2.0,
+      "viewport": "(3840, 2160)"
+    }
+  },
+  {
+    "run": "after-forward-light",
+    "checks": 339,
+    "failures": 0,
+    "banner_states": 49,
+    "logical_fit_verified": true,
+    "requested_scale": {
+      "actual_viewport": "(2560, 1394)",
+      "dialog": "(580, 592)",
+      "scale": 2.0,
+      "viewport": "(3840, 2160)"
+    }
+  },
+  {
+    "run": "after-compat-dark",
+    "checks": 339,
+    "failures": 0,
+    "banner_states": 49,
+    "logical_fit_verified": true,
+    "requested_scale": {
+      "actual_viewport": "(2560, 1394)",
+      "dialog": "(580, 592)",
+      "scale": 2.0,
+      "viewport": "(3840, 2160)"
+    }
+  },
+  {
+    "run": "after-compat-light",
+    "checks": 339,
+    "failures": 0,
+    "banner_states": 49,
+    "logical_fit_verified": true,
+    "requested_scale": {
+      "actual_viewport": "(2560, 1394)",
+      "dialog": "(580, 592)",
+      "scale": 2.0,
+      "viewport": "(3840, 2160)"
+    }
+  }
+]

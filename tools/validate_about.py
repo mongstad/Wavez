@@ -21,6 +21,7 @@ def main():
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--renderer", choices=["forward_plus", "gl_compatibility", "headless"], default="forward_plus")
     parser.add_argument("--open-browser", action="store_true")
+    parser.add_argument("--expected-theme", choices=["Dark", "Light"], help="Check the preference restored by this fresh process")
     args = parser.parse_args()
     assert OUTPUT.read_text(encoding="utf-8") == resource_text(), "Packaged notices must match canonical sources"
     out = args.output_dir.resolve(); out.mkdir(parents=True, exist_ok=False)
@@ -45,6 +46,7 @@ def main():
     command += ["--headless"] if args.renderer == "headless" else ["--rendering-method", args.renderer, "--resolution", "1440x900"]
     command += ["--log-file", str(out / "godot.log"), "--", "--about-output=" + str(out)]
     if args.open_browser:command += ["--open-browser"]
+    if args.expected_theme:command += ["--expected-theme=" + args.expected_theme]
     result = subprocess.run(command, cwd=out, capture_output=True, text=True, timeout=120)
     log = result.stdout + result.stderr; (out / "native.log").write_text(log)
     assert result.returncode == 0 and "ERROR:" not in log, log[-5000:]

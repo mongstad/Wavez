@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://chp48m0dpnvhq"
-path="res://.godot/imported/wavez-logo-light.png-64b799960fbd11cacbea79f16bde7b49.ctex"
+uid="uid://dqk1yi84y7mps"
+path="res://.godot/imported/Wavez_Banner_No_Slogan_No_Border_Dark.png-e247f7c540de7b57847141021f55741e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/about/wavez-logo-light.png"
-dest_files=["res://.godot/imported/wavez-logo-light.png-64b799960fbd11cacbea79f16bde7b49.ctex"]
+source_file="res://ui/about/Wavez_Banner_No_Slogan_No_Border_Dark.png"
+dest_files=["res://.godot/imported/Wavez_Banner_No_Slogan_No_Border_Dark.png-e247f7c540de7b57847141021f55741e.ctex"]
 
 [params]
 

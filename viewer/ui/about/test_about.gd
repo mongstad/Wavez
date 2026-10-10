@@ -7,6 +7,7 @@ var failures: Array[String] = []
 var output := ""
 var report := {}
 var real_browser := false
+var expected_theme := ""
 
 @onready var root: Window = get_tree().root
 
@@ -25,10 +26,30 @@ func open_about(shell) -> void:
 	shell.refresh_commands()
 	shell.commands.about.popup.id_pressed.emit(shell.commands.about.index)
 
+func banner_check(shell, label: String) -> void:
+	var dialog = shell.about
+	var filename := "Wavez_Banner_No_Slogan_No_Border_White.png" if shell.appearance.light else "Wavez_Banner_No_Slogan_No_Border_Dark.png"
+	check(dialog.logo.texture.resource_path == "res://ui/about/"+filename, "Active theme selects exact approved banner: "+label)
+	check(dialog.logo.texture.get_size() == Vector2(2172,724), "Full 3:1 source banner is retained: "+label)
+	check(dialog.logo.stretch_mode == TextureRect.STRETCH_KEEP_ASPECT_CENTERED and dialog.logo.texture_filter == CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS, "Banner fits centered without stretching/cropping: "+label)
+	check(dialog.logo.size.x >= 216 and dialog.logo.size.y >= 112, "Banner has readable fitting space: "+label)
+	if not report.has("banners"): report.banners = []
+	report.banners.append({"state":label, "light":shell.appearance.light, "path":dialog.logo.texture.resource_path, "texture_size":str(dialog.logo.texture.get_size()), "control":str(dialog.logo.get_global_rect()), "dialog_size":str(dialog.size), "logical_viewport":str(root.get_visible_rect().size)})
+
+func banner_cycles(shell, label: String) -> void:
+	for theme in ["Light", "Dark", "Light", "Dark"]:
+		var command: Dictionary = shell.commands["theme_"+theme.to_lower()]
+		command.popup.id_pressed.emit(command.index); await settle()
+		banner_check(shell, label+"-live-"+theme)
+		picture(shell.about, label+"-"+theme.to_lower())
+		shell.about.hide(); open_about(shell); await settle()
+		banner_check(shell, label+"-reopened-"+theme)
+
 func run() -> void:
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--about-output="):output = arg.trim_prefix("--about-output=")
 		if arg == "--open-browser":real_browser = true
+		if arg.begins_with("--expected-theme="):expected_theme = arg.trim_prefix("--expected-theme=")
 	if output.is_empty():queue_free(); return
 	get_tree().create_timer(90).timeout.connect(func():push_error("About test timeout");get_tree().quit(1))
 	await get_tree().process_frame
@@ -46,7 +67,11 @@ func run() -> void:
 	open_about(shell); await settle()
 	check(dialog.visible and not shell.details.visible and dialog.title == "About WAVEZ","Help About opens the unchanged dedicated About surface without a capture")
 	check(dialog.identity.text == "WAVEZ "+Version.read().full,"About uses authoritative full identity")
-	check(dialog.logo.texture.get_size() == Vector2(1254,1254),"Unmodified owner logo is available as a packaged texture")
+	if not expected_theme.is_empty():check(shell.appearance.light == (expected_theme == "Light"), "Fresh process restores "+expected_theme)
+	banner_check(shell,"fresh-empty")
+	picture(dialog,"fresh-empty")
+	await banner_cycles(shell,"empty")
+	check(ProjectSettings.get_setting("application/config/icon") == "res://ui/about/wavez-logo-dark.png", "Application square icon is preserved")
 	check(dialog.logo.stretch_mode == TextureRect.STRETCH_KEEP_ASPECT_CENTERED,"Logo preserves aspect ratio")
 	var summary := ""
 	for child in dialog.overview.get_children():
@@ -69,12 +94,14 @@ func run() -> void:
 	# compact cases to reach their requested sizes instead of comparing a
 	# compositor-clamped viewport against an impossible 480x480 request.
 	root.min_size = Vector2i.ZERO
-	for dimensions in [Vector2i(1440,900),Vector2i(1920,1080),Vector2i(800,600),Vector2i(480,480)]:
-		root.content_scale_size = Vector2i.ZERO; root.content_scale_factor = 1; root.size = dimensions
+	for scenario in [[Vector2i(1440,900),1.0],[Vector2i(1920,1080),1.0],[Vector2i(800,600),1.0],[Vector2i(480,480),1.0],[Vector2i(3840,2160),2.0]]:
+		var dimensions: Vector2i = scenario[0]
+		root.content_scale_size = Vector2i.ZERO; root.content_scale_factor = scenario[1]; root.size = dimensions
 		await settle(); shell.layout(); await settle()
 		var before := Visual.snapshot(viewer); var committed: Dictionary = viewer.committed_sample.duplicate(true)
 		var requests: int = viewer.selection_controller.jobs.serial
 		open_about(shell); await settle()
+		await banner_cycles(shell,"loaded-%d-scale-%s" % [dimensions.x,scenario[1]])
 		check(dialog.visible and dialog.size.x <= dimensions.x and dialog.size.y <= dimensions.y,"About fits viewport "+str(dimensions))
 		if dimensions.x < 1440:
 			dialog.scroller.ensure_control_visible(dialog.documentation); await settle()
@@ -109,7 +136,8 @@ func run() -> void:
 		check(not dialog.visible,"Close dismisses About")
 		check(Visual.snapshot(viewer) == before and viewer.committed_sample == committed and not viewer.playing,"About leaves scientific/session state unchanged "+str(dimensions))
 		check(viewer.selection_controller.jobs.serial == requests,"About makes no analysis request")
-		layouts.append({"viewport":str(dimensions),"actual_viewport":str(root.size),"dialog":str(dialog.size)})
+		layouts.append({"viewport":str(dimensions),"scale":scenario[1],"actual_viewport":str(root.size),"dialog":str(dialog.size)})
+	root.content_scale_factor = 1; root.size = Vector2i(480,480); await settle()
 	open_about(shell); await settle()
 	var requested := []; var normal_opener: Callable = dialog.url_opener
 	var link_state := Visual.snapshot(viewer); var link_sample: Dictionary = viewer.committed_sample.duplicate(true)
@@ -133,6 +161,9 @@ func run() -> void:
 	escape.window_id = root.get_window_id() if dialog.is_embedded() else dialog.get_window_id()
 	Input.parse_input_event(escape); await settle()
 	check(not dialog.visible,"Escape dismisses About")
+	open_about(shell); await settle()
+	dialog.close_button.pressed.emit(); await settle()
+	check(not dialog.visible,"Shared top-right X dismisses About")
 	open_about(shell); await settle()
 	if real_browser:
 		report.browser_dispatches = []

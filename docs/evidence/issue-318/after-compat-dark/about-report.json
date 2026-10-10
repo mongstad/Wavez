@@ -1,0 +1,501 @@
+{
+  "architecture": "x86_64",
+  "banners": [
+    {
+      "control": "[P: (20.0, 56.0), S: (216.0, 112.0)]",
+      "dialog_size": "(580, 592)",
+      "light": false,
+      "logical_viewport": "(1440.0, 900.0)",
+      "path": "res://ui/about/Wavez_Banner_No_Slogan_No_Border_Dark.png",
+      "state": "fresh-empty",
+      "texture_size": "(2172.0, 724.0)"
+    },
+    {
+      "control": "[P: (20.0, 56.0), S: (216.0, 112.0)]",
+      "dialog_size": "(580, 592)",
+      "light": true,
+      "logical_viewport": "(1440.0, 900.0)",
+      "path": "res://ui/about/Wavez_Banner_No_Slogan_No_Border_White.png",
+      "state": "empty-live-Light",
+      "texture_size": "(2172.0, 724.0)"
+    },
+    {
+      "control": "[P: (20.0, 56.0), S: (216.0, 112.0)]",
+      "dialog_size": "(580, 592)",
+      "light": true,
+      "logical_viewport": "(1440.0, 900.0)",
+      "path": "res://ui/about/Wavez_Banner_No_Slogan_No_Border_White.png",
+      "state": "empty-reopened-Light",
+      "texture_size": "(2172.0, 724.0)"
+    },
+    {
+      "control": "[P: (20.0, 56.0), S: (216.0, 112.0)]",
+      "dialog_size": "(580, 592)",
+      "light": false,
+      "logical_viewport": "(1440.0, 900.0)",
+      "path": "res://ui/about/Wavez_Banner_No_Slogan_No_Border_Dark.png",
+      "state": "empty-live-Dark",
+      "texture_size": "(2172.0, 724.0)"
+    },
+    {
+      "control": "[P: (20.0, 56.0), S: (216.0, 112.0)]",
+      "dialog_size": "(580, 592)",
+      "light": false,
+      "logical_viewport": "(1440.0, 900.0)",
+      "path": "res://ui/about/Wavez_Banner_No_Slogan_No_Border_Dark.png",
+      "state": "empty-reopened-Dark",
+      "texture_size": "(2172.0, 724.0)"
+    },
+    {
+      "control": "[P: (20.0, 56.0), S: (216.0, 112.0)]",
+      "dialog_size": "(580, 592)",
+      "light": true,
+      "logical_viewport": "(1440.0, 900.0)",
+      "path": "res://ui/about/Wavez_Banner_No_Slogan_No_Border_White.png",
+      "state": "empty-live-Light",
+      "texture_size": "(2172.0, 724.0)"
+    },
+    {
+      "control": "[P: (20.0, 56.0), S: (216.0, 112.0)]",
+      "dialog_size": "(580, 592)",
+      "light": true,
+      "logical_viewport": "(1440.0, 900.0)",
+      "path": "res://ui/about/Wavez_Banner_No_Slogan_No_Border_White.png",
+      "state": "empty-reopened-Light",
+      "texture_size": "(2172.0, 724.0)"
+    },
+    {
+      "control": "[P: (20.0, 56.0), S: (216.0, 112.0)]",
+      "dialog_size": "(580, 592)",
+      "light": false,
+      "logical_viewport": "(1440.0, 900.0)",
+      "path": "res://ui/about/Wavez_Banner_No_Slogan_No_Border_Dark.png",
+      "state": "empty-live-Dark",
+      "texture_size": "(2172.0, 724.0)"
+    },
+    {
+      "control": "[P: (20.0, 56.0), S: (216.0, 112.0)]",
+      "dialog_size": "(580, 592)",
+      "light": false,
+      "logical_viewport": "(1440.0, 900.0)",
+      "path": "res://ui/about/Wavez_Banner_No_Slogan_No_Border_Dark.png",
+      "state": "empty-reopened-Dark",
+      "texture_size": "(2172.0, 724.0)"
+    },
+    {
+      "control": "[P: (20.0, 56.0), S: (216.0, 112.0)]",
+      "dialog_size": "(580, 592)",
+      "light": true,
+      "logical_viewport": "(1440.0, 900.0)",
+      "path": "res://ui/about/Wavez_Banner_No_Slogan_No_Border_White.png",
+      "state": "loaded-1440-scale-1.0-live-Light",
+      "texture_size": "(2172.0, 724.0)"
+    },
+    {
+      "control": "[P: (20.0, 56.0), S: (216.0, 112.0)]",
+      "dialog_size": "(580, 592)",
+      "light": true,
+      "logical_viewport": "(1440.0, 900.0)",
+      "path": "res://ui/about/Wavez_Banner_No_Slogan_No_Border_White.png",
+      "state": "loaded-1440-scale-1.0-reopened-Light",
+      "texture_size": "(2172.0, 724.0)"
+    },
+    {
+      "control": "[P: (20.0, 56.0), S: (216.0, 112.0)]",
+      "dialog_size": "(580, 592)",
+      "light": false,
+      "logical_viewport": "(1440.0, 900.0)",
+      "path": "res://ui/about/Wavez_Banner_No_Slogan_No_Border_Dark.png",
+      "state": "loaded-1440-scale-1.0-live-Dark",
+      "texture_size": "(2172.0, 724.0)"
+    },
+    {
+      "control": "[P: (20.0, 56.0), S: (216.0, 112.0)]",
+      "dialog_size": "(580, 592)",
+      "light": false,
+      "logical_viewport": "(1440.0, 900.0)",
+      "path": "res://ui/about/Wavez_Banner_No_Slogan_No_Border_Dark.png",
+      "state": "loaded-1440-scale-1.0-reopened-Dark",
+      "texture_size": "(2172.0, 724.0)"
+    },
+    {
+      "control": "[P: (20.0, 56.0), S: (216.0, 112.0)]",
+      "dialog_size": "(580, 592)",
+      "light": true,
+      "logical_viewport": "(1440.0, 900.0)",
+      "path": "res://ui/about/Wavez_Banner_No_Slogan_No_Border_White.png",
+      "state": "loaded-1440-scale-1.0-live-Light",
+      "texture_size": "(2172.0, 724.0)"
+    },
+    {
+      "control": "[P: (20.0, 56.0), S: (216.0, 112.0)]",
+      "dialog_size": "(580, 592)",
+      "light": true,
+      "logical_viewport": "(1440.0, 900.0)",
+      "path": "res://ui/about/Wavez_Banner_No_Slogan_No_Border_White.png",
+      "state": "loaded-1440-scale-1.0-reopened-Light",
+      "texture_size": "(2172.0, 724.0)"
+    },
+    {
+      "control": "[P: (20.0, 56.0), S: (216.0, 112.0)]",
+      "dialog_size": "(580, 592)",
+      "light": false,
+      "logical_viewport": "(1440.0, 900.0)",
+      "path": "res://ui/about/Wavez_Banner_No_Slogan_No_Border_Dark.png",
+      "state": "loaded-1440-scale-1.0-live-Dark",
+      "texture_size": "(2172.0, 724.0)"
+    },
+    {
+      "control": "[P: (20.0, 56.0), S: (216.0, 112.0)]",
+      "dialog_size": "(580, 592)",
+      "light": false,
+      "logical_viewport": "(1440.0, 900.0)",
+      "path": "res://ui/about/Wavez_Banner_No_Slogan_No_Border_Dark.png",
+      "state": "loaded-1440-scale-1.0-reopened-Dark",
+      "texture_size": "(2172.0, 724.0)"
+    },
+    {
+      "control": "[P: (20.0, 56.0), S: (216.0, 112.0)]",
+      "dialog_size": "(580, 592)",
+      "light": true,
+      "logical_viewport": "(1920.0, 1080.0)",
+      "path": "res://ui/about/Wavez_Banner_No_Slogan_No_Border_White.png",
+      "state": "loaded-1920-scale-1.0-live-Light",
+      "texture_size": "(2172.0, 724.0)"
+    },
+    {
+      "control": "[P: (20.0, 56.0), S: (216.0, 112.0)]",
+      "dialog_size": "(580, 592)",
+      "light": true,
+      "logical_viewport": "(1920.0, 1080.0)",
+      "path": "res://ui/about/Wavez_Banner_No_Slogan_No_Border_White.png",
+      "state": "loaded-1920-scale-1.0-reopened-Light",
+      "texture_size": "(2172.0, 724.0)"
+    },
+    {
+      "control": "[P: (20.0, 56.0), S: (216.0, 112.0)]",
+      "dialog_size": "(580, 592)",
+      "light": false,
+      "logical_viewport": "(1920.0, 1080.0)",
+      "path": "res://ui/about/Wavez_Banner_No_Slogan_No_Border_Dark.png",
+      "state": "loaded-1920-scale-1.0-live-Dark",
+      "texture_size": "(2172.0, 724.0)"
+    },
+    {
+      "control": "[P: (20.0, 56.0), S: (216.0, 112.0)]",
+      "dialog_size": "(580, 592)",
+      "light": false,
+      "logical_viewport": "(1920.0, 1080.0)",
+      "path": "res://ui/about/Wavez_Banner_No_Slogan_No_Border_Dark.png",
+      "state": "loaded-1920-scale-1.0-reopened-Dark",
+      "texture_size": "(2172.0, 724.0)"
+    },
+    {
+      "control": "[P: (20.0, 56.0), S: (216.0, 112.0)]",
+      "dialog_size": "(580, 592)",
+      "light": true,
+      "logical_viewport": "(1920.0, 1080.0)",
+      "path": "res://ui/about/Wavez_Banner_No_Slogan_No_Border_White.png",
+      "state": "loaded-1920-scale-1.0-live-Light",
+      "texture_size": "(2172.0, 724.0)"
+    },
+    {
+      "control": "[P: (20.0, 56.0), S: (216.0, 112.0)]",
+      "dialog_size": "(580, 592)",
+      "light": true,
+      "logical_viewport": "(1920.0, 1080.0)",
+      "path": "res://ui/about/Wavez_Banner_No_Slogan_No_Border_White.png",
+      "state": "loaded-1920-scale-1.0-reopened-Light",
+      "texture_size": "(2172.0, 724.0)"
+    },
+    {
+      "control": "[P: (20.0, 56.0), S: (216.0, 112.0)]",
+      "dialog_size": "(580, 592)",
+      "light": false,
+      "logical_viewport": "(1920.0, 1080.0)",
+      "path": "res://ui/about/Wavez_Banner_No_Slogan_No_Border_Dark.png",
+      "state": "loaded-1920-scale-1.0-live-Dark",
+      "texture_size": "(2172.0, 724.0)"
+    },
+    {
+      "control": "[P: (20.0, 56.0), S: (216.0, 112.0)]",
+      "dialog_size": "(580, 592)",
+      "light": false,
+      "logical_viewport": "(1920.0, 1080.0)",
+      "path": "res://ui/about/Wavez_Banner_No_Slogan_No_Border_Dark.png",
+      "state": "loaded-1920-scale-1.0-reopened-Dark",
+      "texture_size": "(2172.0, 724.0)"
+    },
+    {
+      "control": "[P: (20.0, 56.0), S: (216.0, 112.0)]",
+      "dialog_size": "(580, 536)",
+      "light": true,
+      "logical_viewport": "(800.0, 600.0)",
+      "path": "res://ui/about/Wavez_Banner_No_Slogan_No_Border_White.png",
+      "state": "loaded-800-scale-1.0-live-Light",
+      "texture_size": "(2172.0, 724.0)"
+    },
+    {
+      "control": "[P: (20.0, 56.0), S: (216.0, 112.0)]",
+      "dialog_size": "(580, 536)",
+      "light": true,
+      "logical_viewport": "(800.0, 600.0)",
+      "path": "res://ui/about/Wavez_Banner_No_Slogan_No_Border_White.png",
+      "state": "loaded-800-scale-1.0-reopened-Light",
+      "texture_size": "(2172.0, 724.0)"
+    },
+    {
+      "control": "[P: (20.0, 56.0), S: (216.0, 112.0)]",
+      "dialog_size": "(580, 536)",
+      "light": false,
+      "logical_viewport": "(800.0, 600.0)",
+      "path": "res://ui/about/Wavez_Banner_No_Slogan_No_Border_Dark.png",
+      "state": "loaded-800-scale-1.0-live-Dark",
+      "texture_size": "(2172.0, 724.0)"
+    },
+    {
+      "control": "[P: (20.0, 56.0), S: (216.0, 112.0)]",
+      "dialog_size": "(580, 536)",
+      "light": false,
+      "logical_viewport": "(800.0, 600.0)",
+      "path": "res://ui/about/Wavez_Banner_No_Slogan_No_Border_Dark.png",
+      "state": "loaded-800-scale-1.0-reopened-Dark",
+      "texture_size": "(2172.0, 724.0)"
+    },
+    {
+      "control": "[P: (20.0, 56.0), S: (216.0, 112.0)]",
+      "dialog_size": "(580, 536)",
+      "light": true,
+      "logical_viewport": "(800.0, 600.0)",
+      "path": "res://ui/about/Wavez_Banner_No_Slogan_No_Border_White.png",
+      "state": "loaded-800-scale-1.0-live-Light",
+      "texture_size": "(2172.0, 724.0)"
+    },
+    {
+      "control": "[P: (20.0, 56.0), S: (216.0, 112.0)]",
+      "dialog_size": "(580, 536)",
+      "light": true,
+      "logical_viewport": "(800.0, 600.0)",
+      "path": "res://ui/about/Wavez_Banner_No_Slogan_No_Border_White.png",
+      "state": "loaded-800-scale-1.0-reopened-Light",
+      "texture_size": "(2172.0, 724.0)"
+    },
+    {
+      "control": "[P: (20.0, 56.0), S: (216.0, 112.0)]",
+      "dialog_size": "(580, 536)",
+      "light": false,
+      "logical_viewport": "(800.0, 600.0)",
+      "path": "res://ui/about/Wavez_Banner_No_Slogan_No_Border_Dark.png",
+      "state": "loaded-800-scale-1.0-live-Dark",
+      "texture_size": "(2172.0, 724.0)"
+    },
+    {
+      "control": "[P: (20.0, 56.0), S: (216.0, 112.0)]",
+      "dialog_size": "(580, 536)",
+      "light": false,
+      "logical_viewport": "(800.0, 600.0)",
+      "path": "res://ui/about/Wavez_Banner_No_Slogan_No_Border_Dark.png",
+      "state": "loaded-800-scale-1.0-reopened-Dark",
+      "texture_size": "(2172.0, 724.0)"
+    },
+    {
+      "control": "[P: (20.0, 56.0), S: (216.0, 180.0)]",
+      "dialog_size": "(432, 416)",
+      "light": true,
+      "logical_viewport": "(480.0, 480.0)",
+      "path": "res://ui/about/Wavez_Banner_No_Slogan_No_Border_White.png",
+      "state": "loaded-480-scale-1.0-live-Light",
+      "texture_size": "(2172.0, 724.0)"
+    },
+    {
+      "control": "[P: (20.0, 56.0), S: (216.0, 180.0)]",
+      "dialog_size": "(432, 416)",
+      "light": true,
+      "logical_viewport": "(480.0, 480.0)",
+      "path": "res://ui/about/Wavez_Banner_No_Slogan_No_Border_White.png",
+      "state": "loaded-480-scale-1.0-reopened-Light",
+      "texture_size": "(2172.0, 724.0)"
+    },
+    {
+      "control": "[P: (20.0, 56.0), S: (216.0, 180.0)]",
+      "dialog_size": "(432, 416)",
+      "light": false,
+      "logical_viewport": "(480.0, 480.0)",
+      "path": "res://ui/about/Wavez_Banner_No_Slogan_No_Border_Dark.png",
+      "state": "loaded-480-scale-1.0-live-Dark",
+      "texture_size": "(2172.0, 724.0)"
+    },
+    {
+      "control": "[P: (20.0, 56.0), S: (216.0, 180.0)]",
+      "dialog_size": "(432, 416)",
+      "light": false,
+      "logical_viewport": "(480.0, 480.0)",
+      "path": "res://ui/about/Wavez_Banner_No_Slogan_No_Border_Dark.png",
+      "state": "loaded-480-scale-1.0-reopened-Dark",
+      "texture_size": "(2172.0, 724.0)"
+    },
+    {
+      "control": "[P: (20.0, 56.0), S: (216.0, 180.0)]",
+      "dialog_size": "(432, 416)",
+      "light": true,
+      "logical_viewport": "(480.0, 480.0)",
+      "path": "res://ui/about/Wavez_Banner_No_Slogan_No_Border_White.png",
+      "state": "loaded-480-scale-1.0-live-Light",
+      "texture_size": "(2172.0, 724.0)"
+    },
+    {
+      "control": "[P: (20.0, 56.0), S: (216.0, 180.0)]",
+      "dialog_size": "(432, 416)",
+      "light": true,
+      "logical_viewport": "(480.0, 480.0)",
+      "path": "res://ui/about/Wavez_Banner_No_Slogan_No_Border_White.png",
+      "state": "loaded-480-scale-1.0-reopened-Light",
+      "texture_size": "(2172.0, 724.0)"
+    },
+    {
+      "control": "[P: (20.0, 56.0), S: (216.0, 180.0)]",
+      "dialog_size": "(432, 416)",
+      "light": false,
+      "logical_viewport": "(480.0, 480.0)",
+      "path": "res://ui/about/Wavez_Banner_No_Slogan_No_Border_Dark.png",
+      "state": "loaded-480-scale-1.0-live-Dark",
+      "texture_size": "(2172.0, 724.0)"
+    },
+    {
+      "control": "[P: (20.0, 56.0), S: (216.0, 180.0)]",
+      "dialog_size": "(432, 416)",
+      "light": false,
+      "logical_viewport": "(480.0, 480.0)",
+      "path": "res://ui/about/Wavez_Banner_No_Slogan_No_Border_Dark.png",
+      "state": "loaded-480-scale-1.0-reopened-Dark",
+      "texture_size": "(2172.0, 724.0)"
+    },
+    {
+      "control": "[P: (20.0, 56.0), S: (216.0, 112.0)]",
+      "dialog_size": "(580, 592)",
+      "light": true,
+      "logical_viewport": "(1280.0, 697.0)",
+      "path": "res://ui/about/Wavez_Banner_No_Slogan_No_Border_White.png",
+      "state": "loaded-3840-scale-2.0-live-Light",
+      "texture_size": "(2172.0, 724.0)"
+    },
+    {
+      "control": "[P: (20.0, 56.0), S: (216.0, 112.0)]",
+      "dialog_size": "(580, 592)",
+      "light": true,
+      "logical_viewport": "(1280.0, 697.0)",
+      "path": "res://ui/about/Wavez_Banner_No_Slogan_No_Border_White.png",
+      "state": "loaded-3840-scale-2.0-reopened-Light",
+      "texture_size": "(2172.0, 724.0)"
+    },
+    {
+      "control": "[P: (20.0, 56.0), S: (216.0, 112.0)]",
+      "dialog_size": "(580, 592)",
+      "light": false,
+      "logical_viewport": "(1280.0, 697.0)",
+      "path": "res://ui/about/Wavez_Banner_No_Slogan_No_Border_Dark.png",
+      "state": "loaded-3840-scale-2.0-live-Dark",
+      "texture_size": "(2172.0, 724.0)"
+    },
+    {
+      "control": "[P: (20.0, 56.0), S: (216.0, 112.0)]",
+      "dialog_size": "(580, 592)",
+      "light": false,
+      "logical_viewport": "(1280.0, 697.0)",
+      "path": "res://ui/about/Wavez_Banner_No_Slogan_No_Border_Dark.png",
+      "state": "loaded-3840-scale-2.0-reopened-Dark",
+      "texture_size": "(2172.0, 724.0)"
+    },
+    {
+      "control": "[P: (20.0, 56.0), S: (216.0, 112.0)]",
+      "dialog_size": "(580, 592)",
+      "light": true,
+      "logical_viewport": "(1280.0, 697.0)",
+      "path": "res://ui/about/Wavez_Banner_No_Slogan_No_Border_White.png",
+      "state": "loaded-3840-scale-2.0-live-Light",
+      "texture_size": "(2172.0, 724.0)"
+    },
+    {
+      "control": "[P: (20.0, 56.0), S: (216.0, 112.0)]",
+      "dialog_size": "(580, 592)",
+      "light": true,
+      "logical_viewport": "(1280.0, 697.0)",
+      "path": "res://ui/about/Wavez_Banner_No_Slogan_No_Border_White.png",
+      "state": "loaded-3840-scale-2.0-reopened-Light",
+      "texture_size": "(2172.0, 724.0)"
+    },
+    {
+      "control": "[P: (20.0, 56.0), S: (216.0, 112.0)]",
+      "dialog_size": "(580, 592)",
+      "light": false,
+      "logical_viewport": "(1280.0, 697.0)",
+      "path": "res://ui/about/Wavez_Banner_No_Slogan_No_Border_Dark.png",
+      "state": "loaded-3840-scale-2.0-live-Dark",
+      "texture_size": "(2172.0, 724.0)"
+    },
+    {
+      "control": "[P: (20.0, 56.0), S: (216.0, 112.0)]",
+      "dialog_size": "(580, 592)",
+      "light": false,
+      "logical_viewport": "(1280.0, 697.0)",
+      "path": "res://ui/about/Wavez_Banner_No_Slogan_No_Border_Dark.png",
+      "state": "loaded-3840-scale-2.0-reopened-Dark",
+      "texture_size": "(2172.0, 724.0)"
+    }
+  ],
+  "checks": 339,
+  "failures": [],
+  "help": [
+    "About"
+  ],
+  "layouts": [
+    {
+      "actual_viewport": "(1440, 900)",
+      "dialog": "(580, 592)",
+      "scale": 1.0,
+      "viewport": "(1440, 900)"
+    },
+    {
+      "actual_viewport": "(1920, 1080)",
+      "dialog": "(580, 592)",
+      "scale": 1.0,
+      "viewport": "(1920, 1080)"
+    },
+    {
+      "actual_viewport": "(800, 600)",
+      "dialog": "(580, 536)",
+      "scale": 1.0,
+      "viewport": "(800, 600)"
+    },
+    {
+      "actual_viewport": "(480, 480)",
+      "dialog": "(432, 416)",
+      "scale": 1.0,
+      "viewport": "(480, 480)"
+    },
+    {
+      "actual_viewport": "(2560, 1394)",
+      "dialog": "(580, 592)",
+      "scale": 2.0,
+      "viewport": "(3840, 2160)"
+    }
+  ],
+  "notice_sha256": {
+    "Branding": "31ad6692481b54941fbf1bf2a1696a04bb82754eb376050709222d9a3604afe1",
+    "Colormap notices": "dbb9ad7495a83b0f2f48c94b06e23020587d82f8d1492dcb717fb1ebc2f86c18",
+    "DejaVu font notices": "7a083b136e64d064794c3419751e5c7dd10d2f64c108fe5ba161eae5e5958a93",
+    "Godot Engine \u2014 MIT License": "b0435e3b3e4e55238f05f4b306f30524a1b2e20147810d436eaa554fa6855c80",
+    "Godot third-party notices": "1288215255d0a55623f7726ef90772926449514cb230abb76dc2a86c9a5d72dd",
+    "Third-party inventory": "e52e765e8989c50daa008786e10afa9df34b5bb2758f1a16c26dcb1c89164325",
+    "WAVEZ \u2014 PolyForm Noncommercial 1.0.0": "5860dd2f08b9377907a33ef714527a9a74b6e12b688bd3f87797b57754d45981"
+  },
+  "renderer": "gl_compatibility",
+  "runtime": "4.7.2-stable (official)",
+  "version": {
+    "build": "84",
+    "full": "v0.1.0.84",
+    "release": "v0.1.0"
+  },
+  "source_unchanged_sha256": "0e4825ffb9fb58f6cc6ff11c9dfc3114f830d68f57c7e755de06481f51707dab",
+  "packaged": false
+}
