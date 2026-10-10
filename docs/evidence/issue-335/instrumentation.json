@@ -1,0 +1,8 @@
+{
+  "target": "ui/shell/test_close_file.gd in a temporary exact-harness export stage",
+  "replace_from": "view.queue_free(); await settle()",
+  "replace_to": "dump_connections(\"before free\"); view.queue_free(); await settle(); dump_connections(\"after free\")",
+  "append_gd": "\nfunc dump_connections(label: String) -> void:\n\tprint(\"CONNECTION SNAPSHOT \", label, \" orphans=\", Performance.get_monitor(Performance.OBJECT_ORPHAN_NODE_COUNT))\n\tfor sig in [\"focus_entered\", \"tree_exited\"]:\n\t\tfor con in get_tree().root.get_signal_connection_list(sig):\n\t\t\tvar c: Callable = con.callable\n\t\t\tvar obj = c.get_object()\n\t\t\tprint(\"CONNECTION \", sig, \" id=\", c.get_object_id(), \" method=\", c.get_method(), \" object=\", obj, \" path=\", obj.get_path() if obj is Node and obj.is_inside_tree() else \"outside tree\")\n",
+  "evidence": "instrumented-exact.log",
+  "purpose": "Observe native Popup targets before/after viewer free, without altering production or disconnecting signals"
+}

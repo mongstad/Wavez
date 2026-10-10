@@ -1,0 +1,82 @@
+{
+  "mode": "baseline-smoke",
+  "runtime": "source",
+  "renderer": "forward_plus",
+  "command": [
+    "stdbuf",
+    "-oL",
+    "-eL",
+    "/home/Nozba/Codex/Wavez/Godot_v4.7.2-stable_linux.x86_64",
+    "--path",
+    "/tmp/wavez-335-main-smoke-source/project",
+    "--audio-driver",
+    "Dummy",
+    "--rendering-method",
+    "forward_plus",
+    "--resolution",
+    "1440x900",
+    "--",
+    "--signals-mode=baseline-smoke",
+    "--signals-output=/tmp/wavez-335-main-smoke-source"
+  ],
+  "process_exit_code": 0,
+  "source_sha256": {
+    "fields.wvz": "92df81385173da3f0aad4a337a3fd10ff3ee8b3b39aa0aadb0890c6dd8d62821",
+    "mixed.wvz": "a1d4e51ee2e45c72710a4ef553b5e8e4f6325465814d50fbead2691bc5b844c3"
+  },
+  "source_changed": false,
+  "source_files_sha256": {
+    "/home/Nozba/Codex/Wavez/Wavez/viewer/ui/shell/test_window_signals.gd": "24e45a7441a37ed669a9f1d2d237a56d3b7c590b56479f83d77d89f958c8361d",
+    "/tmp/wavez-335-main/viewer/main.gd": "12a10fa3af4be75c6e75ad6b5c0791a9268cd99b4a95fd6f425a73313e0565d3",
+    "/tmp/wavez-335-main/viewer/ui/shell/viewer_shell.gd": "f3070cd0a74fa4ff66432fbb1186d57024680cdadd45a0eb867faa082a1f8636",
+    "/tmp/wavez-335-main/viewer/selection/selection_controller.gd": "6ccbf4df24fc2be690f2e0820ecfbf3b774b84ebad964eaf0e884e35947ac6f2",
+    "/tmp/wavez-335-main/viewer/project.godot": "5fab6f681966889d006fdb56c94fd2efde9ee31a94abb60cc52571f9a45478a3"
+  },
+  "diagnostics": {
+    "classified": {
+      "disconnect": {
+        "focus_entered": 0,
+        "tree_exited": 0
+      },
+      "duplicate_connect": {
+        "focus_entered": 0,
+        "tree_exited": 0
+      }
+    },
+    "classified_total": 0,
+    "error_total": 0,
+    "warning_total": 0,
+    "script_error_total": 0
+  },
+  "report": {
+    "checks": 11,
+    "failures": [],
+    "mode": "baseline-smoke",
+    "orphans_before_exit": 0.0,
+    "snapshots": [
+      {
+        "connections": {
+          "focus_entered": 1,
+          "tree_exited": 1
+        },
+        "embedded": true,
+        "phase": "production File shown 0",
+        "popup_class": "PopupMenu",
+        "popup_id": 212483447196,
+        "visible": true
+      },
+      {
+        "connections": {
+          "focus_entered": 0,
+          "tree_exited": 0
+        },
+        "embedded": true,
+        "phase": "production File hidden 0",
+        "popup_class": "PopupMenu",
+        "popup_id": 212483447196,
+        "visible": false
+      }
+    ]
+  },
+  "strict_exit_code": 0
+}

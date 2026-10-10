@@ -1,0 +1,1393 @@
+{
+  "checks": 229,
+  "renderer": "gl_compatibility",
+  "packaged": false,
+  "source_sha256_unchanged": {
+    "mixed.wvz": "69127c291c4eedfebc938228244fe1beae2c68d2be5397975dbd879d438bfe32",
+    "meshes.wvz": "1dcf901cb604bb18d6d378338db7ddf5ca20763cb521101a0e4f962e6e1a038f",
+    "fields.wvz": "d4c14db95afcc4cfbc8b2594d74192e01dec4e6772b69a86fbac7c6e9b6a8a80",
+    "particles.wvz": "13c15ca2504ffb9dc66dd2c60c8ef88067c50610e9dcad5097bfa09920398e96"
+  },
+  "numerical_outputs_identical": {
+    "values.csv": "ceb99a6e98bd82cbe0fffbae39dd9cc505275f4043594defa7634e3fa641b37c"
+  },
+  "video_comparison": {
+    "ordinary": {
+      "decoded_frames_and_timestamps_identical": true,
+      "framemd5_sha256": "670303c75f495630a3ab67e120950179760b749ebc35ea25c2b42f934a84cd5c",
+      "identical_inspection_sidecars": 6,
+      "regenerated_cohort_keys_normalized": false,
+      "timing_trace_byte_identical": true
+    },
+    "selected": {
+      "decoded_frames_and_timestamps_identical": true,
+      "framemd5_sha256": "93f8b3bdf5d9819acee59b90c2e5ab7b89a815a98460f22a573b3b3cadaed7b3",
+      "identical_inspection_sidecars": 6,
+      "regenerated_cohort_keys_normalized": true,
+      "timing_trace_byte_identical": true
+    }
+  },
+  "headless_video_skipped": false,
+  "report": {
+    "checks": 229,
+    "exports": [
+      {
+        "closed": false,
+        "directory": "/tmp/wavez-335-final-exact-source-gl_compatibility/.wavez-export-1791663777-9703719",
+        "job_sha256": "377d2ad378a0beaf52aeadfc6b7556c14bb2f910399feb124067cf2373bfcacf",
+        "name": "ordinary-control",
+        "selected": false,
+        "status": {
+          "detail": "Saved /tmp/wavez-335-final-exact-source-gl_compatibility/ordinary-control.mp4",
+          "directory": "/tmp/wavez-335-final-exact-source-gl_compatibility/.wavez-export-1791663777-9703719",
+          "elapsed_seconds": 0.707,
+          "job": "/tmp/wavez-335-final-exact-source-gl_compatibility/.wavez-export-1791663777-9703719/job.json",
+          "output": "/tmp/wavez-335-final-exact-source-gl_compatibility/ordinary-control.mp4",
+          "progress": {
+            "current_frame": 6.0,
+            "elapsed_seconds": 0.707,
+            "encoder_pid": -1.0,
+            "intermediate_directory": "/tmp/wavez-335-final-exact-source-gl_compatibility/.wavez-export-1791663777-9703719",
+            "message": "Saved /tmp/wavez-335-final-exact-source-gl_compatibility/ordinary-control.mp4",
+            "output_path": "/tmp/wavez-335-final-exact-source-gl_compatibility/ordinary-control.mp4",
+            "renderer_pid": 1770377.0,
+            "stage": "complete",
+            "total_frames": 6.0
+          },
+          "progress_ticks": 11762,
+          "snapshot_ticks": 11969,
+          "stage": "complete"
+        }
+      },
+      {
+        "closed": true,
+        "directory": "/tmp/wavez-335-final-exact-source-gl_compatibility/.wavez-export-1791663780-12805699",
+        "job_sha256": "ffe9c95738cdfc0d3a2ffc6490e99829842ec0a60a74719bf648c6f99c6f5b3d",
+        "name": "ordinary-closed",
+        "selected": false,
+        "status": {
+          "detail": "Saved /tmp/wavez-335-final-exact-source-gl_compatibility/ordinary-closed.mp4",
+          "directory": "/tmp/wavez-335-final-exact-source-gl_compatibility/.wavez-export-1791663780-12805699",
+          "elapsed_seconds": 0.704,
+          "job": "/tmp/wavez-335-final-exact-source-gl_compatibility/.wavez-export-1791663780-12805699/job.json",
+          "output": "/tmp/wavez-335-final-exact-source-gl_compatibility/ordinary-closed.mp4",
+          "progress": {
+            "current_frame": 6.0,
+            "elapsed_seconds": 0.704,
+            "encoder_pid": -1.0,
+            "intermediate_directory": "/tmp/wavez-335-final-exact-source-gl_compatibility/.wavez-export-1791663780-12805699",
+            "message": "Saved /tmp/wavez-335-final-exact-source-gl_compatibility/ordinary-closed.mp4",
+            "output_path": "/tmp/wavez-335-final-exact-source-gl_compatibility/ordinary-closed.mp4",
+            "renderer_pid": 1770898.0,
+            "stage": "complete",
+            "total_frames": 6.0
+          },
+          "progress_ticks": 14877,
+          "snapshot_ticks": 15084,
+          "stage": "complete"
+        }
+      },
+      {
+        "closed": false,
+        "directory": "/tmp/wavez-335-final-exact-source-gl_compatibility/.wavez-export-1791663783-16335396",
+        "job_sha256": "3337c4b7bcc9e79c3aeb8055eaf1d0ed820f7c7e3e9ceb1637f7f00d0fa09ca7",
+        "name": "selected-control",
+        "selected": true,
+        "status": {
+          "detail": "Saved /tmp/wavez-335-final-exact-source-gl_compatibility/selected-control.mp4",
+          "directory": "/tmp/wavez-335-final-exact-source-gl_compatibility/.wavez-export-1791663783-16335396",
+          "elapsed_seconds": 1.203,
+          "job": "/tmp/wavez-335-final-exact-source-gl_compatibility/.wavez-export-1791663783-16335396/job.json",
+          "output": "/tmp/wavez-335-final-exact-source-gl_compatibility/selected-control.mp4",
+          "progress": {
+            "current_frame": 6.0,
+            "elapsed_seconds": 1.203,
+            "encoder_pid": -1.0,
+            "intermediate_directory": "/tmp/wavez-335-final-exact-source-gl_compatibility/.wavez-export-1791663783-16335396",
+            "message": "Saved /tmp/wavez-335-final-exact-source-gl_compatibility/selected-control.mp4",
+            "output_path": "/tmp/wavez-335-final-exact-source-gl_compatibility/selected-control.mp4",
+            "renderer_pid": 1771412.0,
+            "stage": "complete",
+            "total_frames": 6.0
+          },
+          "progress_ticks": 19401,
+          "snapshot_ticks": 19608,
+          "stage": "complete"
+        }
+      },
+      {
+        "closed": true,
+        "directory": "/tmp/wavez-335-final-exact-source-gl_compatibility/.wavez-export-1791663788-20889721",
+        "job_sha256": "2cbabe192adede30a45227f1ef742cccf93d9cc7e866691fd840a5d65dacf856",
+        "name": "selected-closed",
+        "selected": true,
+        "status": {
+          "detail": "Saved /tmp/wavez-335-final-exact-source-gl_compatibility/selected-closed.mp4",
+          "directory": "/tmp/wavez-335-final-exact-source-gl_compatibility/.wavez-export-1791663788-20889721",
+          "elapsed_seconds": 1.191,
+          "job": "/tmp/wavez-335-final-exact-source-gl_compatibility/.wavez-export-1791663788-20889721/job.json",
+          "output": "/tmp/wavez-335-final-exact-source-gl_compatibility/selected-closed.mp4",
+          "progress": {
+            "current_frame": 6.0,
+            "elapsed_seconds": 1.191,
+            "encoder_pid": -1.0,
+            "intermediate_directory": "/tmp/wavez-335-final-exact-source-gl_compatibility/.wavez-export-1791663788-20889721",
+            "message": "Saved /tmp/wavez-335-final-exact-source-gl_compatibility/selected-closed.mp4",
+            "output_path": "/tmp/wavez-335-final-exact-source-gl_compatibility/selected-closed.mp4",
+            "renderer_pid": 1771924.0,
+            "stage": "complete",
+            "total_frames": 6.0
+          },
+          "progress_ticks": 23582,
+          "snapshot_ticks": 23792,
+          "stage": "complete"
+        }
+      }
+    ],
+    "failures": [],
+    "measurements": [
+      {
+        "after": {
+          "particle_buffer_bytes": 0,
+          "reader_cache_bytes": 0,
+          "reader_metadata_bytes": 0,
+          "static_memory": 93212695,
+          "video_memory": 47021671.0,
+          "workers_reclaimed": true
+        },
+        "capture": "particles",
+        "fields": {
+          "active": false,
+          "active_jobs": 0,
+          "active_limit": 1,
+          "automatic_workers": true,
+          "bytes": 0,
+          "cache_hits": 0,
+          "cancelled": 0,
+          "charges": {},
+          "completed": 0,
+          "error": "",
+          "evictions": 0,
+          "failures": {},
+          "frames": 0,
+          "in_flight_bytes": 0,
+          "largest_job_charge": 0,
+          "limit": 134217728,
+          "peak_active": 0,
+          "peak_in_flight_bytes": 0,
+          "pipeline_stages": {},
+          "pressure_events": 0,
+          "pressure_evictions": 0,
+          "rates": {},
+          "resident_bytes": 0,
+          "retained_limit": 0,
+          "retirement_reserve_bytes": 0,
+          "session": {},
+          "source_reuses": 0,
+          "test_barrier_waiting": false,
+          "worker_count": 4,
+          "worker_ms": 0.0,
+          "worker_thread": -1
+        },
+        "meshes": {
+          "active": false,
+          "active_jobs": 0,
+          "active_limit": 1,
+          "automatic_workers": true,
+          "bytes": 0,
+          "cancelled": 0,
+          "completed": 0,
+          "decoded": 0,
+          "decoded_bytes": 0,
+          "decoded_limit": 0,
+          "decoded_samples": 0,
+          "endpoint_hits": 0,
+          "error": "",
+          "evictions": 0,
+          "failures": {},
+          "frames": 0,
+          "in_flight_bytes": 0,
+          "lane_ms": {},
+          "limit": 0,
+          "peak_active": 0,
+          "peak_in_flight_bytes": 0,
+          "pipeline_stages": {},
+          "pressure_failures": 0,
+          "ready_keys": [],
+          "requested_jobs": 0,
+          "test_barrier_waiting": false,
+          "topology_reuses": 0,
+          "worker_count": 4,
+          "worker_ms": 0.0,
+          "worker_thread": -1
+        },
+        "particle_buffer_bytes": 128,
+        "particles": {
+          "cancelled": 0,
+          "completed": 2,
+          "decoded_bytes": 13184,
+          "decoded_hits": 1,
+          "decoded_misses": 2,
+          "decoded_samples": 2,
+          "desired": [
+            0,
+            1
+          ],
+          "error": "",
+          "failures": {},
+          "prepared_bytes": 36464,
+          "prepared_evictions": 0,
+          "prepared_hits": 0,
+          "prepared_misses": 0,
+          "prepared_pairs": 2,
+          "pressure": false,
+          "ready_indices": [
+            0,
+            1
+          ],
+          "trace_dropped": 0,
+          "worker_active": false,
+          "working_index": -1
+        },
+        "playback": false,
+        "reader_cache_bytes": 4512,
+        "reader_metadata_bytes": 187840,
+        "static_memory": 94861286,
+        "video_memory": 47100495.0
+      },
+      {
+        "after": {
+          "particle_buffer_bytes": 0,
+          "reader_cache_bytes": 0,
+          "reader_metadata_bytes": 0,
+          "static_memory": 97445047,
+          "video_memory": 54240213.0,
+          "workers_reclaimed": true
+        },
+        "capture": "fields",
+        "fields": {
+          "active": false,
+          "active_jobs": 0,
+          "active_limit": 2,
+          "automatic_workers": true,
+          "bytes": 131392,
+          "cache_hits": 1,
+          "cancelled": 0,
+          "charges": {
+            "volume0/0/value/134217728": 65696,
+            "volume0/2/value/134217728": 65696
+          },
+          "completed": 2,
+          "error": "",
+          "evictions": 0,
+          "failures": {},
+          "frames": 2,
+          "in_flight_bytes": 0,
+          "largest_job_charge": 65696,
+          "limit": 25340010734,
+          "peak_active": 2,
+          "peak_in_flight_bytes": 131392,
+          "pipeline_stages": {
+            "assembly": {
+              "count": 2,
+              "max_ms": 0.002,
+              "total_ms": 0.003
+            },
+            "conversion": {
+              "count": 2,
+              "max_ms": 0.005,
+              "total_ms": 0.01
+            },
+            "decompress": {
+              "count": 2,
+              "max_ms": 0.001,
+              "total_ms": 0.001
+            },
+            "file_io": {
+              "count": 2,
+              "max_ms": 0.024999999999999998,
+              "total_ms": 0.038
+            },
+            "plane_copies": {
+              "count": 2,
+              "max_ms": 0.005,
+              "total_ms": 0.01
+            },
+            "raw_hash": {
+              "count": 2,
+              "max_ms": 0.0,
+              "total_ms": 0.0
+            },
+            "statistics": {
+              "count": 2,
+              "max_ms": 0.001,
+              "total_ms": 0.002
+            },
+            "stored_hash": {
+              "count": 2,
+              "max_ms": 0.0,
+              "total_ms": 0.0
+            },
+            "typed_conversion": {
+              "count": 2,
+              "max_ms": 0.005,
+              "total_ms": 0.008
+            }
+          },
+          "pressure_events": 0,
+          "pressure_evictions": 0,
+          "rates": {
+            "2": {
+              "samples": 2,
+              "seconds": 0.009671
+            }
+          },
+          "resident_bytes": 8512,
+          "retained_limit": 0,
+          "retirement_reserve_bytes": 591264,
+          "session": {
+            "automatic": true,
+            "elapsed_ms": 9.684,
+            "failed": 0,
+            "next": 2,
+            "ready": 2,
+            "required_bytes": 25340010734,
+            "started_us": 2509496,
+            "state": "ready",
+            "total": 2
+          },
+          "source_reuses": 0,
+          "test_barrier_waiting": false,
+          "worker_count": 4,
+          "worker_ms": 4.339,
+          "worker_thread": 54
+        },
+        "meshes": {
+          "active": false,
+          "active_jobs": 0,
+          "active_limit": 1,
+          "automatic_workers": true,
+          "bytes": 0,
+          "cancelled": 0,
+          "completed": 0,
+          "decoded": 0,
+          "decoded_bytes": 0,
+          "decoded_limit": 0,
+          "decoded_samples": 0,
+          "endpoint_hits": 0,
+          "error": "",
+          "evictions": 0,
+          "failures": {},
+          "frames": 0,
+          "in_flight_bytes": 0,
+          "lane_ms": {},
+          "limit": 0,
+          "peak_active": 0,
+          "peak_in_flight_bytes": 0,
+          "pipeline_stages": {},
+          "pressure_failures": 0,
+          "ready_keys": [],
+          "requested_jobs": 0,
+          "test_barrier_waiting": false,
+          "topology_reuses": 0,
+          "worker_count": 4,
+          "worker_ms": 0.0,
+          "worker_thread": -1
+        },
+        "particle_buffer_bytes": 0,
+        "particles": {
+          "cancelled": 0,
+          "completed": 0,
+          "decoded_bytes": 0,
+          "decoded_hits": 0,
+          "decoded_misses": 0,
+          "decoded_samples": 0,
+          "desired": [],
+          "error": "",
+          "failures": {},
+          "prepared_bytes": 0,
+          "prepared_evictions": 0,
+          "prepared_hits": 0,
+          "prepared_misses": 0,
+          "prepared_pairs": 0,
+          "ready_indices": [],
+          "trace_dropped": 0,
+          "worker_active": false,
+          "working_index": -1
+        },
+        "playback": false,
+        "reader_cache_bytes": 4224,
+        "reader_metadata_bytes": 286208,
+        "static_memory": 104021265,
+        "video_memory": 54367934.0
+      },
+      {
+        "after": {
+          "particle_buffer_bytes": 0,
+          "reader_cache_bytes": 0,
+          "reader_metadata_bytes": 0,
+          "static_memory": 96053571,
+          "video_memory": 53541165.0,
+          "workers_reclaimed": true
+        },
+        "capture": "meshes",
+        "fields": {
+          "active": false,
+          "active_jobs": 0,
+          "active_limit": 1,
+          "automatic_workers": true,
+          "bytes": 0,
+          "cache_hits": 0,
+          "cancelled": 0,
+          "charges": {},
+          "completed": 0,
+          "error": "",
+          "evictions": 0,
+          "failures": {},
+          "frames": 0,
+          "in_flight_bytes": 0,
+          "largest_job_charge": 0,
+          "limit": 134217728,
+          "peak_active": 0,
+          "peak_in_flight_bytes": 0,
+          "pipeline_stages": {},
+          "pressure_events": 0,
+          "pressure_evictions": 0,
+          "rates": {},
+          "resident_bytes": 0,
+          "retained_limit": 0,
+          "retirement_reserve_bytes": 0,
+          "session": {},
+          "source_reuses": 0,
+          "test_barrier_waiting": false,
+          "worker_count": 4,
+          "worker_ms": 0.0,
+          "worker_thread": -1
+        },
+        "meshes": {
+          "active": false,
+          "active_jobs": 0,
+          "active_limit": 4,
+          "automatic_workers": true,
+          "bytes": 287488,
+          "cancelled": 0,
+          "completed": 4,
+          "decoded": 4,
+          "decoded_bytes": 83024,
+          "decoded_limit": 287488,
+          "decoded_samples": 4,
+          "endpoint_hits": 8,
+          "error": "",
+          "evictions": 0,
+          "failures": {},
+          "frames": 4,
+          "in_flight_bytes": 0,
+          "lane_ms": {
+            "0": 8.524000000000001,
+            "1": 8.636,
+            "2": 8.439,
+            "3": 8.268
+          },
+          "limit": 287488,
+          "peak_active": 4,
+          "peak_in_flight_bytes": 287488,
+          "pipeline_stages": {
+            "array_packing": 0.011000000000000003,
+            "assembly": 0.002,
+            "decompress": 0.005,
+            "descriptor_commit_validation": 0.352,
+            "endpoint_bounds": 0.015,
+            "face_expansion": 0.006,
+            "file_io": 0.059000000000000004,
+            "index_packing": 0.04700000000000001,
+            "normal_generation": 0.032999999999999995,
+            "pair_validation": 0.027,
+            "position_conversion": 0.023,
+            "raw_hash": 0.0,
+            "scalar_colors": 0.012000000000000002,
+            "stable_id_validation": 0.006,
+            "stored_hash": 0.0,
+            "topology_comparison": 0.01,
+            "topology_validation": 0.018000000000000002,
+            "typed_conversion": 0.023
+          },
+          "pressure_failures": 0,
+          "ready_keys": [
+            "mesh0/0/2/67108864/{\"channel\":\"\",\"colormap\":\"viridis\",\"lower\":-2.0,\"upper\":2.0,\"visible\":true,\"wireframe\":false}",
+            "mesh1/1/3/67108864/{\"channel\":\"\",\"colormap\":\"viridis\",\"lower\":-2.0,\"upper\":2.0,\"visible\":true,\"wireframe\":false}",
+            "mesh0/2/2/67108864/{\"channel\":\"\",\"colormap\":\"viridis\",\"lower\":-2.0,\"upper\":2.0,\"visible\":true,\"wireframe\":false}",
+            "mesh1/3/3/67108864/{\"channel\":\"\",\"colormap\":\"viridis\",\"lower\":-2.0,\"upper\":2.0,\"visible\":true,\"wireframe\":false}"
+          ],
+          "requested_jobs": 4,
+          "test_barrier_waiting": false,
+          "topology_reuses": 0,
+          "worker_count": 4,
+          "worker_ms": 33.867000000000004,
+          "worker_thread": 62
+        },
+        "particle_buffer_bytes": 0,
+        "particles": {
+          "cancelled": 0,
+          "completed": 0,
+          "decoded_bytes": 0,
+          "decoded_hits": 0,
+          "decoded_misses": 0,
+          "decoded_samples": 0,
+          "desired": [],
+          "error": "",
+          "failures": {},
+          "prepared_bytes": 0,
+          "prepared_evictions": 0,
+          "prepared_hits": 0,
+          "prepared_misses": 0,
+          "prepared_pairs": 0,
+          "ready_indices": [],
+          "trace_dropped": 0,
+          "worker_active": false,
+          "working_index": -1
+        },
+        "playback": false,
+        "reader_cache_bytes": 8408,
+        "reader_metadata_bytes": 283904,
+        "static_memory": 98997760,
+        "video_memory": 53643573.0
+      },
+      {
+        "after": {
+          "particle_buffer_bytes": 0,
+          "reader_cache_bytes": 0,
+          "reader_metadata_bytes": 0,
+          "static_memory": 96715311,
+          "video_memory": 53909601.0,
+          "workers_reclaimed": true
+        },
+        "capture": "mixed",
+        "fields": {
+          "active": false,
+          "active_jobs": 0,
+          "active_limit": 2,
+          "automatic_workers": true,
+          "bytes": 198048,
+          "cache_hits": 1,
+          "cancelled": 0,
+          "charges": {
+            "field/1/value/67108864": 66016,
+            "field/4/value/67108864": 66016,
+            "field/8/value/67108864": 66016
+          },
+          "completed": 3,
+          "error": "",
+          "evictions": 0,
+          "failures": {},
+          "frames": 3,
+          "in_flight_bytes": 0,
+          "largest_job_charge": 66016,
+          "limit": 23291855766,
+          "peak_active": 2,
+          "peak_in_flight_bytes": 132032,
+          "pipeline_stages": {
+            "assembly": {
+              "count": 3,
+              "max_ms": 0.001,
+              "total_ms": 0.002
+            },
+            "conversion": {
+              "count": 3,
+              "max_ms": 0.011,
+              "total_ms": 0.026
+            },
+            "decompress": {
+              "count": 3,
+              "max_ms": 0.001,
+              "total_ms": 0.001
+            },
+            "file_io": {
+              "count": 3,
+              "max_ms": 0.015,
+              "total_ms": 0.041999999999999996
+            },
+            "plane_copies": {
+              "count": 3,
+              "max_ms": 0.008,
+              "total_ms": 0.022
+            },
+            "raw_hash": {
+              "count": 3,
+              "max_ms": 0.0,
+              "total_ms": 0.0
+            },
+            "statistics": {
+              "count": 3,
+              "max_ms": 0.001,
+              "total_ms": 0.003
+            },
+            "stored_hash": {
+              "count": 3,
+              "max_ms": 0.0,
+              "total_ms": 0.0
+            },
+            "typed_conversion": {
+              "count": 3,
+              "max_ms": 0.005,
+              "total_ms": 0.012
+            }
+          },
+          "pressure_events": 0,
+          "pressure_evictions": 0,
+          "rates": {
+            "1": {
+              "samples": 1,
+              "seconds": 0.006529
+            },
+            "2": {
+              "samples": 2,
+              "seconds": 0.009826
+            }
+          },
+          "resident_bytes": 13728,
+          "retained_limit": 0,
+          "retirement_reserve_bytes": 594144,
+          "session": {
+            "automatic": true,
+            "failed": 0,
+            "next": 0,
+            "ready": 3,
+            "required_bytes": 23291855766,
+            "started_us": 3941143,
+            "state": "ready",
+            "total": 3
+          },
+          "source_reuses": 0,
+          "test_barrier_waiting": false,
+          "worker_count": 4,
+          "worker_ms": 6.289,
+          "worker_thread": 74
+        },
+        "meshes": {
+          "active": false,
+          "active_jobs": 0,
+          "active_limit": 4,
+          "automatic_workers": true,
+          "bytes": 294464,
+          "cancelled": 0,
+          "completed": 4,
+          "decoded": 4,
+          "decoded_bytes": 83248,
+          "decoded_limit": 294464,
+          "decoded_samples": 4,
+          "endpoint_hits": 8,
+          "error": "",
+          "evictions": 0,
+          "failures": {},
+          "frames": 4,
+          "in_flight_bytes": 0,
+          "lane_ms": {
+            "0": 9.399000000000001,
+            "1": 8.436,
+            "2": 8.738,
+            "3": 8.814
+          },
+          "limit": 294464,
+          "peak_active": 4,
+          "peak_in_flight_bytes": 294464,
+          "pipeline_stages": {
+            "array_packing": 0.010000000000000002,
+            "assembly": 0.002,
+            "decompress": 0.005,
+            "descriptor_commit_validation": 0.6579999999999999,
+            "endpoint_bounds": 0.013000000000000001,
+            "face_expansion": 0.005,
+            "file_io": 0.061,
+            "index_packing": 0.052000000000000005,
+            "morph_delta": 0.01,
+            "morph_packing": 0.003,
+            "next_positions_bounds": 0.006,
+            "normal_generation": 0.034,
+            "pair_validation": 0.043,
+            "position_conversion": 0.019000000000000003,
+            "raw_hash": 0.0,
+            "scalar_colors": 0.015000000000000003,
+            "stable_id_validation": 0.065,
+            "stored_hash": 0.0,
+            "topology_comparison": 0.009000000000000001,
+            "topology_validation": 0.023,
+            "typed_conversion": 0.024
+          },
+          "pressure_failures": 0,
+          "ready_keys": [
+            "mesh/9/10/67108864/{\"channel\":\"\",\"colormap\":\"viridis\",\"lower\":-2.0,\"upper\":2.0,\"visible\":true,\"wireframe\":false}",
+            "mesh/10/10/67108864/{\"channel\":\"\",\"colormap\":\"viridis\",\"lower\":-2.0,\"upper\":2.0,\"visible\":true,\"wireframe\":false}",
+            "mesh/2/6/67108864/{\"channel\":\"\",\"colormap\":\"viridis\",\"lower\":-2.0,\"upper\":2.0,\"visible\":true,\"wireframe\":false}",
+            "mesh/6/9/67108864/{\"channel\":\"\",\"colormap\":\"viridis\",\"lower\":-2.0,\"upper\":2.0,\"visible\":true,\"wireframe\":false}"
+          ],
+          "requested_jobs": 4,
+          "test_barrier_waiting": false,
+          "topology_reuses": 0,
+          "worker_count": 4,
+          "worker_ms": 35.387,
+          "worker_thread": 82
+        },
+        "particle_buffer_bytes": 128,
+        "particles": {
+          "cancelled": 0,
+          "completed": 4,
+          "decoded_bytes": 27616,
+          "decoded_hits": 3,
+          "decoded_misses": 4,
+          "decoded_samples": 4,
+          "desired": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "error": "",
+          "failures": {},
+          "prepared_bytes": 81704,
+          "prepared_evictions": 0,
+          "prepared_hits": 0,
+          "prepared_misses": 0,
+          "prepared_pairs": 4,
+          "pressure": false,
+          "ready_indices": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "trace_dropped": 0,
+          "worker_active": false,
+          "working_index": -1
+        },
+        "playback": false,
+        "reader_cache_bytes": 13276,
+        "reader_metadata_bytes": 1041216,
+        "static_memory": 102405299,
+        "video_memory": 54000106.0
+      },
+      {
+        "after": {
+          "particle_buffer_bytes": 0,
+          "reader_cache_bytes": 0,
+          "reader_metadata_bytes": 0,
+          "static_memory": 100264246,
+          "video_memory": 68383793.0,
+          "workers_reclaimed": true
+        },
+        "capture": "particles",
+        "fields": {
+          "active": false,
+          "active_jobs": 0,
+          "active_limit": 1,
+          "automatic_workers": true,
+          "bytes": 0,
+          "cache_hits": 0,
+          "cancelled": 0,
+          "charges": {},
+          "completed": 0,
+          "error": "",
+          "evictions": 0,
+          "failures": {},
+          "frames": 0,
+          "in_flight_bytes": 0,
+          "largest_job_charge": 0,
+          "limit": 134217728,
+          "peak_active": 0,
+          "peak_in_flight_bytes": 0,
+          "pipeline_stages": {},
+          "pressure_events": 0,
+          "pressure_evictions": 0,
+          "rates": {},
+          "resident_bytes": 0,
+          "retained_limit": 0,
+          "retirement_reserve_bytes": 0,
+          "session": {},
+          "source_reuses": 0,
+          "test_barrier_waiting": false,
+          "worker_count": 4,
+          "worker_ms": 0.0,
+          "worker_thread": -1
+        },
+        "meshes": {
+          "active": false,
+          "active_jobs": 0,
+          "active_limit": 1,
+          "automatic_workers": true,
+          "bytes": 0,
+          "cancelled": 0,
+          "completed": 0,
+          "decoded": 0,
+          "decoded_bytes": 0,
+          "decoded_limit": 0,
+          "decoded_samples": 0,
+          "endpoint_hits": 0,
+          "error": "",
+          "evictions": 0,
+          "failures": {},
+          "frames": 0,
+          "in_flight_bytes": 0,
+          "lane_ms": {},
+          "limit": 0,
+          "peak_active": 0,
+          "peak_in_flight_bytes": 0,
+          "pipeline_stages": {},
+          "pressure_failures": 0,
+          "ready_keys": [],
+          "requested_jobs": 0,
+          "test_barrier_waiting": false,
+          "topology_reuses": 0,
+          "worker_count": 4,
+          "worker_ms": 0.0,
+          "worker_thread": -1
+        },
+        "particle_buffer_bytes": 128,
+        "particles": {
+          "cancelled": 0,
+          "completed": 2,
+          "decoded_bytes": 13184,
+          "decoded_hits": 1,
+          "decoded_misses": 2,
+          "decoded_samples": 2,
+          "desired": [
+            0,
+            1
+          ],
+          "error": "",
+          "failures": {},
+          "prepared_bytes": 36464,
+          "prepared_evictions": 0,
+          "prepared_hits": 0,
+          "prepared_misses": 0,
+          "prepared_pairs": 2,
+          "pressure": false,
+          "ready_indices": [
+            0,
+            1
+          ],
+          "trace_dropped": 0,
+          "worker_active": false,
+          "working_index": -1
+        },
+        "playback": true,
+        "reader_cache_bytes": 4512,
+        "reader_metadata_bytes": 187840,
+        "static_memory": 101386937,
+        "video_memory": 66313957.0
+      },
+      {
+        "after": {
+          "particle_buffer_bytes": 0,
+          "reader_cache_bytes": 0,
+          "reader_metadata_bytes": 0,
+          "static_memory": 108219076,
+          "video_memory": 72570089.0,
+          "workers_reclaimed": true
+        },
+        "capture": "fields",
+        "fields": {
+          "active": false,
+          "active_jobs": 0,
+          "active_limit": 2,
+          "automatic_workers": true,
+          "bytes": 131392,
+          "cache_hits": 1,
+          "cancelled": 0,
+          "charges": {
+            "volume0/0/value/134217728": 65696,
+            "volume0/2/value/134217728": 65696
+          },
+          "completed": 2,
+          "error": "",
+          "evictions": 0,
+          "failures": {},
+          "frames": 2,
+          "in_flight_bytes": 0,
+          "largest_job_charge": 65696,
+          "limit": 25338017347,
+          "peak_active": 2,
+          "peak_in_flight_bytes": 131392,
+          "pipeline_stages": {
+            "assembly": {
+              "count": 2,
+              "max_ms": 0.001,
+              "total_ms": 0.001
+            },
+            "conversion": {
+              "count": 2,
+              "max_ms": 0.005,
+              "total_ms": 0.01
+            },
+            "decompress": {
+              "count": 2,
+              "max_ms": 0.0,
+              "total_ms": 0.0
+            },
+            "file_io": {
+              "count": 2,
+              "max_ms": 0.015,
+              "total_ms": 0.027
+            },
+            "plane_copies": {
+              "count": 2,
+              "max_ms": 0.005,
+              "total_ms": 0.009000000000000001
+            },
+            "raw_hash": {
+              "count": 2,
+              "max_ms": 0.0,
+              "total_ms": 0.0
+            },
+            "statistics": {
+              "count": 2,
+              "max_ms": 0.001,
+              "total_ms": 0.002
+            },
+            "stored_hash": {
+              "count": 2,
+              "max_ms": 0.0,
+              "total_ms": 0.0
+            },
+            "typed_conversion": {
+              "count": 2,
+              "max_ms": 0.004,
+              "total_ms": 0.007
+            }
+          },
+          "pressure_events": 0,
+          "pressure_evictions": 0,
+          "rates": {
+            "2": {
+              "samples": 2,
+              "seconds": 0.009773
+            }
+          },
+          "resident_bytes": 8512,
+          "retained_limit": 0,
+          "retirement_reserve_bytes": 591264,
+          "session": {
+            "automatic": true,
+            "elapsed_ms": 9.783,
+            "failed": 0,
+            "next": 2,
+            "ready": 2,
+            "required_bytes": 25338017347,
+            "started_us": 5090796,
+            "state": "ready",
+            "total": 2
+          },
+          "source_reuses": 0,
+          "test_barrier_waiting": false,
+          "worker_count": 4,
+          "worker_ms": 4.395,
+          "worker_thread": 94
+        },
+        "meshes": {
+          "active": false,
+          "active_jobs": 0,
+          "active_limit": 1,
+          "automatic_workers": true,
+          "bytes": 0,
+          "cancelled": 0,
+          "completed": 0,
+          "decoded": 0,
+          "decoded_bytes": 0,
+          "decoded_limit": 0,
+          "decoded_samples": 0,
+          "endpoint_hits": 0,
+          "error": "",
+          "evictions": 0,
+          "failures": {},
+          "frames": 0,
+          "in_flight_bytes": 0,
+          "lane_ms": {},
+          "limit": 0,
+          "peak_active": 0,
+          "peak_in_flight_bytes": 0,
+          "pipeline_stages": {},
+          "pressure_failures": 0,
+          "ready_keys": [],
+          "requested_jobs": 0,
+          "test_barrier_waiting": false,
+          "topology_reuses": 0,
+          "worker_count": 4,
+          "worker_ms": 0.0,
+          "worker_thread": -1
+        },
+        "particle_buffer_bytes": 0,
+        "particles": {
+          "cancelled": 0,
+          "completed": 0,
+          "decoded_bytes": 0,
+          "decoded_hits": 0,
+          "decoded_misses": 0,
+          "decoded_samples": 0,
+          "desired": [],
+          "error": "",
+          "failures": {},
+          "prepared_bytes": 0,
+          "prepared_evictions": 0,
+          "prepared_hits": 0,
+          "prepared_misses": 0,
+          "prepared_pairs": 0,
+          "ready_indices": [],
+          "trace_dropped": 0,
+          "worker_active": false,
+          "working_index": -1
+        },
+        "playback": true,
+        "reader_cache_bytes": 4224,
+        "reader_metadata_bytes": 286208,
+        "static_memory": 114808246,
+        "video_memory": 72716818.0
+      },
+      {
+        "after": {
+          "particle_buffer_bytes": 0,
+          "reader_cache_bytes": 0,
+          "reader_metadata_bytes": 0,
+          "static_memory": 112809398,
+          "video_memory": 81756857.0,
+          "workers_reclaimed": true
+        },
+        "capture": "meshes",
+        "fields": {
+          "active": false,
+          "active_jobs": 0,
+          "active_limit": 1,
+          "automatic_workers": true,
+          "bytes": 0,
+          "cache_hits": 0,
+          "cancelled": 0,
+          "charges": {},
+          "completed": 0,
+          "error": "",
+          "evictions": 0,
+          "failures": {},
+          "frames": 0,
+          "in_flight_bytes": 0,
+          "largest_job_charge": 0,
+          "limit": 134217728,
+          "peak_active": 0,
+          "peak_in_flight_bytes": 0,
+          "pipeline_stages": {},
+          "pressure_events": 0,
+          "pressure_evictions": 0,
+          "rates": {},
+          "resident_bytes": 0,
+          "retained_limit": 0,
+          "retirement_reserve_bytes": 0,
+          "session": {},
+          "source_reuses": 0,
+          "test_barrier_waiting": false,
+          "worker_count": 4,
+          "worker_ms": 0.0,
+          "worker_thread": -1
+        },
+        "meshes": {
+          "active": false,
+          "active_jobs": 0,
+          "active_limit": 4,
+          "automatic_workers": true,
+          "bytes": 287488,
+          "cancelled": 0,
+          "completed": 4,
+          "decoded": 4,
+          "decoded_bytes": 83024,
+          "decoded_limit": 287488,
+          "decoded_samples": 4,
+          "endpoint_hits": 8,
+          "error": "",
+          "evictions": 0,
+          "failures": {},
+          "frames": 4,
+          "in_flight_bytes": 0,
+          "lane_ms": {
+            "0": 8.620000000000001,
+            "1": 8.018,
+            "2": 8.488,
+            "3": 8.122
+          },
+          "limit": 287488,
+          "peak_active": 4,
+          "peak_in_flight_bytes": 287488,
+          "pipeline_stages": {
+            "array_packing": 0.010000000000000002,
+            "assembly": 0.002,
+            "decompress": 0.002,
+            "descriptor_commit_validation": 0.276,
+            "endpoint_bounds": 0.012,
+            "face_expansion": 0.001,
+            "file_io": 0.04499999999999999,
+            "index_packing": 0.04400000000000001,
+            "normal_generation": 0.031,
+            "pair_validation": 0.022,
+            "position_conversion": 0.019,
+            "raw_hash": 0.0,
+            "scalar_colors": 0.014,
+            "stable_id_validation": 0.005,
+            "stored_hash": 0.0,
+            "topology_comparison": 0.008,
+            "topology_validation": 0.015000000000000001,
+            "typed_conversion": 0.018
+          },
+          "pressure_failures": 0,
+          "ready_keys": [
+            "mesh0/0/2/67108864/{\"channel\":\"\",\"colormap\":\"viridis\",\"lower\":-2.0,\"upper\":2.0,\"visible\":true,\"wireframe\":false}",
+            "mesh1/1/3/67108864/{\"channel\":\"\",\"colormap\":\"viridis\",\"lower\":-2.0,\"upper\":2.0,\"visible\":true,\"wireframe\":false}",
+            "mesh0/2/2/67108864/{\"channel\":\"\",\"colormap\":\"viridis\",\"lower\":-2.0,\"upper\":2.0,\"visible\":true,\"wireframe\":false}",
+            "mesh1/3/3/67108864/{\"channel\":\"\",\"colormap\":\"viridis\",\"lower\":-2.0,\"upper\":2.0,\"visible\":true,\"wireframe\":false}"
+          ],
+          "requested_jobs": 4,
+          "test_barrier_waiting": false,
+          "topology_reuses": 0,
+          "worker_count": 4,
+          "worker_ms": 33.248,
+          "worker_thread": 102
+        },
+        "particle_buffer_bytes": 0,
+        "particles": {
+          "cancelled": 0,
+          "completed": 0,
+          "decoded_bytes": 0,
+          "decoded_hits": 0,
+          "decoded_misses": 0,
+          "decoded_samples": 0,
+          "desired": [],
+          "error": "",
+          "failures": {},
+          "prepared_bytes": 0,
+          "prepared_evictions": 0,
+          "prepared_hits": 0,
+          "prepared_misses": 0,
+          "prepared_pairs": 0,
+          "ready_indices": [],
+          "trace_dropped": 0,
+          "worker_active": false,
+          "working_index": -1
+        },
+        "playback": true,
+        "reader_cache_bytes": 8408,
+        "reader_metadata_bytes": 283904,
+        "static_memory": 115765591,
+        "video_memory": 81878273.0
+      },
+      {
+        "after": {
+          "particle_buffer_bytes": 0,
+          "reader_cache_bytes": 0,
+          "reader_metadata_bytes": 0,
+          "static_memory": 118923474,
+          "video_memory": 85271009.0,
+          "workers_reclaimed": true
+        },
+        "capture": "mixed",
+        "fields": {
+          "active": false,
+          "active_jobs": 0,
+          "active_limit": 2,
+          "automatic_workers": true,
+          "bytes": 198048,
+          "cache_hits": 1,
+          "cancelled": 0,
+          "charges": {
+            "field/1/value/67108864": 66016,
+            "field/4/value/67108864": 66016,
+            "field/8/value/67108864": 66016
+          },
+          "completed": 3,
+          "error": "",
+          "evictions": 0,
+          "failures": {},
+          "frames": 3,
+          "in_flight_bytes": 0,
+          "largest_job_charge": 66016,
+          "limit": 23297882738,
+          "peak_active": 2,
+          "peak_in_flight_bytes": 132032,
+          "pipeline_stages": {
+            "assembly": {
+              "count": 3,
+              "max_ms": 0.001,
+              "total_ms": 0.002
+            },
+            "conversion": {
+              "count": 3,
+              "max_ms": 0.01,
+              "total_ms": 0.025
+            },
+            "decompress": {
+              "count": 3,
+              "max_ms": 0.001,
+              "total_ms": 0.001
+            },
+            "file_io": {
+              "count": 3,
+              "max_ms": 0.015,
+              "total_ms": 0.043
+            },
+            "plane_copies": {
+              "count": 3,
+              "max_ms": 0.008,
+              "total_ms": 0.021
+            },
+            "raw_hash": {
+              "count": 3,
+              "max_ms": 0.0,
+              "total_ms": 0.0
+            },
+            "statistics": {
+              "count": 3,
+              "max_ms": 0.001,
+              "total_ms": 0.002
+            },
+            "stored_hash": {
+              "count": 3,
+              "max_ms": 0.0,
+              "total_ms": 0.0
+            },
+            "typed_conversion": {
+              "count": 3,
+              "max_ms": 0.004,
+              "total_ms": 0.009000000000000001
+            }
+          },
+          "pressure_events": 0,
+          "pressure_evictions": 0,
+          "rates": {
+            "1": {
+              "samples": 1,
+              "seconds": 0.00652
+            },
+            "2": {
+              "samples": 2,
+              "seconds": 0.009864
+            }
+          },
+          "resident_bytes": 13728,
+          "retained_limit": 0,
+          "retirement_reserve_bytes": 594144,
+          "session": {
+            "automatic": true,
+            "failed": 0,
+            "next": 0,
+            "ready": 3,
+            "required_bytes": 23297882738,
+            "started_us": 6749352,
+            "state": "ready",
+            "total": 3
+          },
+          "source_reuses": 0,
+          "test_barrier_waiting": false,
+          "worker_count": 4,
+          "worker_ms": 6.41,
+          "worker_thread": 114
+        },
+        "meshes": {
+          "active": false,
+          "active_jobs": 0,
+          "active_limit": 4,
+          "automatic_workers": true,
+          "bytes": 294464,
+          "cancelled": 0,
+          "completed": 4,
+          "decoded": 4,
+          "decoded_bytes": 83248,
+          "decoded_limit": 294464,
+          "decoded_samples": 4,
+          "endpoint_hits": 8,
+          "error": "",
+          "evictions": 0,
+          "failures": {},
+          "frames": 4,
+          "in_flight_bytes": 0,
+          "lane_ms": {
+            "0": 8.358,
+            "1": 8.82,
+            "2": 9.153,
+            "3": 9.296
+          },
+          "limit": 294464,
+          "peak_active": 4,
+          "peak_in_flight_bytes": 294464,
+          "pipeline_stages": {
+            "array_packing": 0.010000000000000002,
+            "assembly": 0.004,
+            "decompress": 0.007,
+            "descriptor_commit_validation": 0.638,
+            "endpoint_bounds": 0.011,
+            "face_expansion": 0.006,
+            "file_io": 0.067,
+            "index_packing": 0.043000000000000003,
+            "morph_delta": 0.007,
+            "morph_packing": 0.002,
+            "next_positions_bounds": 0.004,
+            "normal_generation": 0.03,
+            "pair_validation": 0.044000000000000004,
+            "position_conversion": 0.02,
+            "raw_hash": 0.0,
+            "scalar_colors": 0.012,
+            "stable_id_validation": 0.06,
+            "stored_hash": 0.0,
+            "topology_comparison": 0.01,
+            "topology_validation": 0.023,
+            "typed_conversion": 0.026000000000000002
+          },
+          "pressure_failures": 0,
+          "ready_keys": [
+            "mesh/2/6/67108864/{\"channel\":\"\",\"colormap\":\"viridis\",\"lower\":-2.0,\"upper\":2.0,\"visible\":true,\"wireframe\":false}",
+            "mesh/6/9/67108864/{\"channel\":\"\",\"colormap\":\"viridis\",\"lower\":-2.0,\"upper\":2.0,\"visible\":true,\"wireframe\":false}",
+            "mesh/9/10/67108864/{\"channel\":\"\",\"colormap\":\"viridis\",\"lower\":-2.0,\"upper\":2.0,\"visible\":true,\"wireframe\":false}",
+            "mesh/10/10/67108864/{\"channel\":\"\",\"colormap\":\"viridis\",\"lower\":-2.0,\"upper\":2.0,\"visible\":true,\"wireframe\":false}"
+          ],
+          "requested_jobs": 4,
+          "test_barrier_waiting": false,
+          "topology_reuses": 0,
+          "worker_count": 4,
+          "worker_ms": 35.627,
+          "worker_thread": 122
+        },
+        "particle_buffer_bytes": 128,
+        "particles": {
+          "cancelled": 0,
+          "completed": 4,
+          "decoded_bytes": 27616,
+          "decoded_hits": 3,
+          "decoded_misses": 4,
+          "decoded_samples": 4,
+          "desired": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "error": "",
+          "failures": {},
+          "prepared_bytes": 81704,
+          "prepared_evictions": 0,
+          "prepared_hits": 0,
+          "prepared_misses": 0,
+          "prepared_pairs": 4,
+          "pressure": false,
+          "ready_indices": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "trace_dropped": 0,
+          "worker_active": false,
+          "working_index": -1
+        },
+        "playback": true,
+        "reader_cache_bytes": 13276,
+        "reader_metadata_bytes": 1041216,
+        "static_memory": 124618514,
+        "video_memory": 85371018.0
+      }
+    ],
+    "packaged": false,
+    "renderer": "gl_compatibility"
+  },
+  "process_exit_code": 0,
+  "runtime_log_clean": true
+}

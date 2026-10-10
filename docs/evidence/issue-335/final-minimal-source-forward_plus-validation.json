@@ -1,0 +1,267 @@
+{
+  "mode": "minimal",
+  "runtime": "source",
+  "renderer": "forward_plus",
+  "command": [
+    "stdbuf",
+    "-oL",
+    "-eL",
+    "/home/Nozba/Codex/Wavez/Godot_v4.7.2-stable_linux.x86_64",
+    "--path",
+    "/tmp/wavez-335-final-minimal-source-forward_plus/project",
+    "--audio-driver",
+    "Dummy",
+    "--rendering-method",
+    "forward_plus",
+    "--resolution",
+    "1440x900",
+    "--",
+    "--signals-mode=minimal",
+    "--signals-output=/tmp/wavez-335-final-minimal-source-forward_plus"
+  ],
+  "process_exit_code": 0,
+  "source_sha256": {},
+  "source_changed": false,
+  "source_files_sha256": {
+    "/home/Nozba/Codex/Wavez/Wavez/viewer/ui/shell/test_window_signals.gd": "fa863ee6b73b727801684a242c81df727f10783c534e2382057a32b13e3f436d"
+  },
+  "diagnostics": {
+    "classified": {
+      "disconnect": {
+        "focus_entered": 0,
+        "tree_exited": 0
+      },
+      "duplicate_connect": {
+        "focus_entered": 0,
+        "tree_exited": 0
+      }
+    },
+    "classified_total": 0,
+    "error_total": 0,
+    "warning_total": 0,
+    "script_error_total": 0
+  },
+  "report": {
+    "checks": 18,
+    "debug": true,
+    "display_server": "X11",
+    "editor": true,
+    "engine": {
+      "build": "official",
+      "hash": "ed1daf0bf001b61586d9930840f2f1394092c079",
+      "hex": 263938,
+      "major": 4,
+      "minor": 7,
+      "patch": 2,
+      "status": "stable",
+      "string": "4.7.2-stable (official)",
+      "timestamp": 0
+    },
+    "executable": "/home/Nozba/Codex/Wavez/Godot_v4.7.2-stable_linux.x86_64",
+    "failures": [],
+    "mode": "minimal",
+    "orphans_before_exit": 0.0,
+    "renderer": "forward_plus",
+    "snapshots": [
+      {
+        "connections": {
+          "focus_entered": 1,
+          "tree_exited": 1
+        },
+        "embedded": true,
+        "phase": "standalone seek equivalent shown 0",
+        "popup_class": "PopupPanel",
+        "popup_id": 39476790742,
+        "visible": true
+      },
+      {
+        "connections": {
+          "focus_entered": 0,
+          "tree_exited": 0
+        },
+        "embedded": true,
+        "phase": "standalone seek equivalent hidden 0",
+        "popup_class": "PopupPanel",
+        "popup_id": 39476790742,
+        "visible": false
+      },
+      {
+        "connections": {
+          "focus_entered": 1,
+          "tree_exited": 1
+        },
+        "embedded": true,
+        "phase": "standalone seek equivalent shown 1",
+        "popup_class": "PopupPanel",
+        "popup_id": 39476790742,
+        "visible": true
+      },
+      {
+        "connections": {
+          "focus_entered": 0,
+          "tree_exited": 0
+        },
+        "embedded": true,
+        "phase": "standalone seek equivalent hidden 1",
+        "popup_class": "PopupPanel",
+        "popup_id": 39476790742,
+        "visible": false
+      },
+      {
+        "connections": {
+          "focus_entered": 1,
+          "tree_exited": 1
+        },
+        "embedded": true,
+        "phase": "standalone seek equivalent shown 2",
+        "popup_class": "PopupPanel",
+        "popup_id": 39476790742,
+        "visible": true
+      },
+      {
+        "connections": {
+          "focus_entered": 0,
+          "tree_exited": 0
+        },
+        "embedded": true,
+        "phase": "standalone seek equivalent hidden 2",
+        "popup_class": "PopupPanel",
+        "popup_id": 39476790742,
+        "visible": false
+      },
+      {
+        "connections": {
+          "focus_entered": 1,
+          "tree_exited": 1
+        },
+        "embedded": true,
+        "phase": "standalone seek equivalent shown 3",
+        "popup_class": "PopupPanel",
+        "popup_id": 39476790742,
+        "visible": true
+      },
+      {
+        "connections": {
+          "focus_entered": 0,
+          "tree_exited": 0
+        },
+        "embedded": true,
+        "phase": "standalone seek equivalent hidden 3",
+        "popup_class": "PopupPanel",
+        "popup_id": 39476790742,
+        "visible": false
+      },
+      {
+        "connections": {
+          "focus_entered": 1,
+          "tree_exited": 1
+        },
+        "embedded": true,
+        "phase": "standalone seek equivalent shown 4",
+        "popup_class": "PopupPanel",
+        "popup_id": 39476790742,
+        "visible": true
+      },
+      {
+        "connections": {
+          "focus_entered": 0,
+          "tree_exited": 0
+        },
+        "embedded": true,
+        "phase": "standalone seek equivalent hidden 4",
+        "popup_class": "PopupPanel",
+        "popup_id": 39476790742,
+        "visible": false
+      },
+      {
+        "connections": {
+          "focus_entered": 1,
+          "tree_exited": 1
+        },
+        "embedded": true,
+        "phase": "standalone seek equivalent shown 5",
+        "popup_class": "PopupPanel",
+        "popup_id": 39476790742,
+        "visible": true
+      },
+      {
+        "connections": {
+          "focus_entered": 0,
+          "tree_exited": 0
+        },
+        "embedded": true,
+        "phase": "standalone seek equivalent hidden 5",
+        "popup_class": "PopupPanel",
+        "popup_id": 39476790742,
+        "visible": false
+      },
+      {
+        "connections": {
+          "focus_entered": 1,
+          "tree_exited": 1
+        },
+        "embedded": true,
+        "phase": "standalone seek equivalent shown 6",
+        "popup_class": "PopupPanel",
+        "popup_id": 39476790742,
+        "visible": true
+      },
+      {
+        "connections": {
+          "focus_entered": 0,
+          "tree_exited": 0
+        },
+        "embedded": true,
+        "phase": "standalone seek equivalent hidden 6",
+        "popup_class": "PopupPanel",
+        "popup_id": 39476790742,
+        "visible": false
+      },
+      {
+        "connections": {
+          "focus_entered": 1,
+          "tree_exited": 1
+        },
+        "embedded": true,
+        "phase": "standalone seek equivalent shown 7",
+        "popup_class": "PopupPanel",
+        "popup_id": 39476790742,
+        "visible": true
+      },
+      {
+        "connections": {
+          "focus_entered": 0,
+          "tree_exited": 0
+        },
+        "embedded": true,
+        "phase": "standalone seek equivalent hidden 7",
+        "popup_class": "PopupPanel",
+        "popup_id": 39476790742,
+        "visible": false
+      },
+      {
+        "connections": {
+          "focus_entered": 1,
+          "tree_exited": 1
+        },
+        "embedded": true,
+        "phase": "standalone File equivalent shown 0",
+        "popup_class": "PopupMenu",
+        "popup_id": 40953185756,
+        "visible": true
+      },
+      {
+        "connections": {
+          "focus_entered": 0,
+          "tree_exited": 0
+        },
+        "embedded": true,
+        "phase": "standalone File equivalent hidden 0",
+        "popup_class": "PopupMenu",
+        "popup_id": 40953185756,
+        "visible": false
+      }
+    ]
+  },
+  "strict_exit_code": 0
+}

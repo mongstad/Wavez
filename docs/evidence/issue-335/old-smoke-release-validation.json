@@ -1,0 +1,84 @@
+{
+  "mode": "baseline-smoke",
+  "runtime": "release",
+  "renderer": "forward_plus",
+  "command": [
+    "stdbuf",
+    "-oL",
+    "-eL",
+    "/tmp/wavez-335-old-smoke-release/WAVEZ.x86_64",
+    "--audio-driver",
+    "Dummy",
+    "--rendering-method",
+    "forward_plus",
+    "--resolution",
+    "1440x900",
+    "--",
+    "--signals-mode=baseline-smoke",
+    "--signals-output=/tmp/wavez-335-old-smoke-release"
+  ],
+  "process_exit_code": 0,
+  "source_sha256": {
+    "fields.wvz": "9fbe0bdfc850a5838450b83e1269313375590cae454a4f6ed4c50520e68d92f7",
+    "mixed.wvz": "b274e4e3e174398cdcddd423b4ffbeec5d160a36d4e8fa3777311441dd1f3887"
+  },
+  "source_changed": false,
+  "source_files_sha256": {
+    "/home/Nozba/Codex/Wavez/Wavez/viewer/ui/shell/test_window_signals.gd": "24e45a7441a37ed669a9f1d2d237a56d3b7c590b56479f83d77d89f958c8361d",
+    "/tmp/close-329-baseline/viewer/main.gd": "b04c82394f37f11af89121f23269daf31358edd6c5e2454f596a07c32666d22d",
+    "/tmp/close-329-baseline/viewer/ui/shell/viewer_shell.gd": "0a604902507f62a7a894792c2b296b14abc2e229ba402e7a4bdd2db1c2702dbf",
+    "/tmp/close-329-baseline/viewer/selection/selection_controller.gd": "f61240f9d75ccd7aa99114f2eff5f3a515fec764560a1923be30d3fcb9e049a2",
+    "/tmp/close-329-baseline/viewer/project.godot": "cda537cfe5501ef451d0313cdfbc95c445358a8cb0c55da19c65dcb98b22a9a3"
+  },
+  "diagnostics": {
+    "classified": {
+      "disconnect": {
+        "focus_entered": 1,
+        "tree_exited": 1
+      },
+      "duplicate_connect": {
+        "focus_entered": 0,
+        "tree_exited": 0
+      }
+    },
+    "classified_total": 2,
+    "error_total": 2,
+    "warning_total": 0,
+    "script_error_total": 0
+  },
+  "report": {
+    "checks": 11,
+    "failures": [],
+    "mode": "baseline-smoke",
+    "orphans_before_exit": 0.0,
+    "snapshots": [
+      {
+        "connections": {
+          "focus_entered": 1,
+          "tree_exited": 1
+        },
+        "embedded": true,
+        "phase": "production File shown 0",
+        "popup_class": "PopupMenu",
+        "popup_id": 204984031541,
+        "visible": true
+      },
+      {
+        "connections": {
+          "focus_entered": 1,
+          "tree_exited": 1
+        },
+        "embedded": true,
+        "phase": "production File hidden 0",
+        "popup_class": "PopupMenu",
+        "popup_id": 204984031541,
+        "visible": false
+      }
+    ]
+  },
+  "artifacts": {
+    "WAVEZ.x86_64": "d9f79ab89b5ae369aeed11c6052d402e8218cd503bf85b4a235f9c30c46a7c63",
+    "WAVEZ.pck": "3f1faf3b87c2a7b3e97ab73f2e4ec471c1e68ec7fdb62d147117c273ad93c974"
+  },
+  "strict_exit_code": 1
+}

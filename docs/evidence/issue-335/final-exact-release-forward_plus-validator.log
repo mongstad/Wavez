@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/home/Nozba/Codex/Wavez/Wavez/tools/validate_close_file.py", line 115, in <module>
+    main()
+    ~~~~^^
+  File "/home/Nozba/Codex/Wavez/Wavez/tools/validate_close_file.py", line 110, in main
+    raise RuntimeError(f'Close File: {report["checks"]} runtime checks and export comparisons passed, but diagnostics prevent a clean run. See {out / "native.log"} and {out / "validation.json"}')
+RuntimeError: Close File: 229 runtime checks and export comparisons passed, but diagnostics prevent a clean run. See /tmp/wavez-335-final-exact-release-forward_plus/native.log and /tmp/wavez-335-final-exact-release-forward_plus/validation.json

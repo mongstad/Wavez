@@ -1,0 +1,34 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 615.71.09 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 3070 Ti
+
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+WINDOW SIGNALS: {"connections":{"focus_entered":1,"tree_exited":1},"embedded":true,"phase":"seek shown 0","popup_class":"PopupPanel","popup_id":207920045303,"visible":true}
+ERROR: Attempt to disconnect a nonexistent connection from 'root:<Window#24612177239>'. Signal: 'focus_entered', callable: ''.
+   at: _disconnect (core/object/object.cpp:1644)
+ERROR: Attempt to disconnect a nonexistent connection from 'root:<Window#24612177239>'. Signal: 'tree_exited', callable: ''.
+   at: _disconnect (core/object/object.cpp:1644)
+OpenGL API 3.3.0 NVIDIA 615.71.09 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 3070 Ti
+
+WINDOW SIGNALS: {"connections":{"focus_entered":1,"tree_exited":1},"embedded":true,"phase":"seek hidden by Close File 0","popup_class":"PopupPanel","popup_id":207920045303,"visible":false}
+WAVEZ export: Saved /tmp/wavez-335-final-workflow-release-gl_compatibility/video-0.mp4
+ERROR: Signal 'focus_entered' is already connected to given callable '' in that object.
+   at: connect (core/object/object.cpp:1562)
+ERROR: Signal 'tree_exited' is already connected to given callable '' in that object.
+   at: connect (core/object/object.cpp:1562)
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+WINDOW SIGNALS: {"connections":{"focus_entered":1,"tree_exited":1},"embedded":true,"phase":"seek shown 1","popup_class":"PopupPanel","popup_id":207920045303,"visible":true}
+ERROR: Attempt to disconnect a nonexistent connection from 'root:<Window#24612177239>'. Signal: 'focus_entered', callable: ''.
+   at: _disconnect (core/object/object.cpp:1644)
+ERROR: Attempt to disconnect a nonexistent connection from 'root:<Window#24612177239>'. Signal: 'tree_exited', callable: ''.
+   at: _disconnect (core/object/object.cpp:1644)
+OpenGL API 3.3.0 NVIDIA 615.71.09 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 3070 Ti
+
+WINDOW SIGNALS: {"connections":{"focus_entered":1,"tree_exited":1},"embedded":true,"phase":"seek hidden by Close File 1","popup_class":"PopupPanel","popup_id":207920045303,"visible":false}
+WAVEZ export: Saved /tmp/wavez-335-final-workflow-release-gl_compatibility/video-1.mp4
+WINDOW SIGNALS: {"connections":{"focus_entered":1,"tree_exited":1},"embedded":true,"phase":"production File shown 0","popup_class":"PopupMenu","popup_id":189129562416,"visible":true}
+ERROR: Attempt to disconnect a nonexistent connection from 'root:<Window#24612177239>'. Signal: 'focus_entered', callable: ''.
+   at: _disconnect (core/object/object.cpp:1644)
+ERROR: Attempt to disconnect a nonexistent connection from 'root:<Window#24612177239>'. Signal: 'tree_exited', callable: ''.
+   at: _disconnect (core/object/object.cpp:1644)
+WINDOW SIGNALS: {"connections":{"focus_entered":1,"tree_exited":1},"embedded":true,"phase":"production File hidden 0","popup_class":"PopupMenu","popup_id":189129562416,"visible":false}
+WINDOW SIGNALS: 21 functional checks, 0 failures; ordinary SceneTree exit follows

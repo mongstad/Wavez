@@ -113,3 +113,10 @@ Before acceptance:
 Other operating systems, public distribution, a machine with Godot physically
 uninstalled, long production exports and physical desktop interaction remain
 owner/platform checks. No passing automation constitutes owner acceptance.
+
+The installed Godot 4.7.2 Linux release template can emit root-Window
+`focus_entered` / `tree_exited` errors during embedded Popup show/hide. The
+[Window signal investigation](ROOT_WINDOW_SIGNALS.md) isolates this outside the
+exporter and explains counts, source/debug comparisons and remaining uncertainty.
+These diagnostics remain visible and prevent a clean strict-validation result;
+packaging continues to use the release template.

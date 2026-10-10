@@ -1,0 +1,627 @@
+{
+  "final-minimal-source-forward_plus": {
+    "functional_checks": 18,
+    "failures": [],
+    "process_exit_code": 0,
+    "strict_exit_code": 0,
+    "diagnostics": {
+      "classified": {
+        "disconnect": {
+          "focus_entered": 0,
+          "tree_exited": 0
+        },
+        "duplicate_connect": {
+          "focus_entered": 0,
+          "tree_exited": 0
+        }
+      },
+      "classified_total": 0,
+      "error_total": 0,
+      "warning_total": 0,
+      "script_error_total": 0
+    },
+    "renderer": "forward_plus",
+    "runtime": "source",
+    "video_comparison": {},
+    "numerical_outputs_identical": {},
+    "source_changed": false,
+    "orphans_before_exit": 0.0,
+    "artifacts": {}
+  },
+  "final-minimal-debug-forward_plus": {
+    "functional_checks": 18,
+    "failures": [],
+    "process_exit_code": 0,
+    "strict_exit_code": 0,
+    "diagnostics": {
+      "classified": {
+        "disconnect": {
+          "focus_entered": 0,
+          "tree_exited": 0
+        },
+        "duplicate_connect": {
+          "focus_entered": 0,
+          "tree_exited": 0
+        }
+      },
+      "classified_total": 0,
+      "error_total": 0,
+      "warning_total": 0,
+      "script_error_total": 0
+    },
+    "renderer": "forward_plus",
+    "runtime": "debug",
+    "video_comparison": {},
+    "numerical_outputs_identical": {},
+    "source_changed": false,
+    "orphans_before_exit": 0.0,
+    "artifacts": {
+      "WAVEZ.x86_64": "1a291d3d15e4180b60b0af96cf6458f11fe143636d76575ddf1e23d1a3f24f2e",
+      "WAVEZ.pck": "8c3a3bf7fcabd0884d2291db99ca4b326a365ebe58d7c1b1dc88bb7002c6e85b"
+    }
+  },
+  "final-minimal-release-forward_plus": {
+    "functional_checks": 18,
+    "failures": [],
+    "process_exit_code": 0,
+    "strict_exit_code": 1,
+    "diagnostics": {
+      "classified": {
+        "disconnect": {
+          "focus_entered": 9,
+          "tree_exited": 9
+        },
+        "duplicate_connect": {
+          "focus_entered": 7,
+          "tree_exited": 7
+        }
+      },
+      "classified_total": 32,
+      "error_total": 32,
+      "warning_total": 0,
+      "script_error_total": 0
+    },
+    "renderer": "forward_plus",
+    "runtime": "release",
+    "video_comparison": {},
+    "numerical_outputs_identical": {},
+    "source_changed": false,
+    "orphans_before_exit": 0.0,
+    "artifacts": {
+      "WAVEZ.x86_64": "d9f79ab89b5ae369aeed11c6052d402e8218cd503bf85b4a235f9c30c46a7c63",
+      "WAVEZ.pck": "dffd6f97dc949ce7c63b9717e9daf6bac05394eb41e9759190cc10c9ba81d86b"
+    }
+  },
+  "final-minimal-release-gl_compatibility": {
+    "functional_checks": 18,
+    "failures": [],
+    "process_exit_code": 0,
+    "strict_exit_code": 1,
+    "diagnostics": {
+      "classified": {
+        "disconnect": {
+          "focus_entered": 9,
+          "tree_exited": 9
+        },
+        "duplicate_connect": {
+          "focus_entered": 7,
+          "tree_exited": 7
+        }
+      },
+      "classified_total": 32,
+      "error_total": 32,
+      "warning_total": 0,
+      "script_error_total": 0
+    },
+    "renderer": "gl_compatibility",
+    "runtime": "release",
+    "video_comparison": {},
+    "numerical_outputs_identical": {},
+    "source_changed": false,
+    "orphans_before_exit": 0.0,
+    "artifacts": {
+      "WAVEZ.x86_64": "d9f79ab89b5ae369aeed11c6052d402e8218cd503bf85b4a235f9c30c46a7c63",
+      "WAVEZ.pck": "8e7bb64c06bbe9da0b16be75e3c8942b484b2a76274e830626001ae8a3adb112"
+    }
+  },
+  "final-workflow-source-forward_plus": {
+    "functional_checks": 21,
+    "failures": [],
+    "process_exit_code": 0,
+    "strict_exit_code": 0,
+    "diagnostics": {
+      "classified": {
+        "disconnect": {
+          "focus_entered": 0,
+          "tree_exited": 0
+        },
+        "duplicate_connect": {
+          "focus_entered": 0,
+          "tree_exited": 0
+        }
+      },
+      "classified_total": 0,
+      "error_total": 0,
+      "warning_total": 0,
+      "script_error_total": 0
+    },
+    "renderer": "forward_plus",
+    "runtime": "source",
+    "video_comparison": {},
+    "numerical_outputs_identical": {},
+    "source_changed": false,
+    "orphans_before_exit": 0.0,
+    "artifacts": {}
+  },
+  "final-workflow-release-forward_plus": {
+    "functional_checks": 21,
+    "failures": [],
+    "process_exit_code": 0,
+    "strict_exit_code": 1,
+    "diagnostics": {
+      "classified": {
+        "disconnect": {
+          "focus_entered": 3,
+          "tree_exited": 3
+        },
+        "duplicate_connect": {
+          "focus_entered": 1,
+          "tree_exited": 1
+        }
+      },
+      "classified_total": 8,
+      "error_total": 8,
+      "warning_total": 0,
+      "script_error_total": 0
+    },
+    "renderer": "forward_plus",
+    "runtime": "release",
+    "video_comparison": {},
+    "numerical_outputs_identical": {},
+    "source_changed": false,
+    "orphans_before_exit": 0.0,
+    "artifacts": {
+      "WAVEZ.x86_64": "d9f79ab89b5ae369aeed11c6052d402e8218cd503bf85b4a235f9c30c46a7c63",
+      "WAVEZ.pck": "8cc9d38b307696bb3ad7ef7468fdf06fa44425e3a40ec4ab8279ea41e88e4a92"
+    }
+  },
+  "final-workflow-source-gl_compatibility": {
+    "functional_checks": 21,
+    "failures": [],
+    "process_exit_code": 0,
+    "strict_exit_code": 0,
+    "diagnostics": {
+      "classified": {
+        "disconnect": {
+          "focus_entered": 0,
+          "tree_exited": 0
+        },
+        "duplicate_connect": {
+          "focus_entered": 0,
+          "tree_exited": 0
+        }
+      },
+      "classified_total": 0,
+      "error_total": 0,
+      "warning_total": 0,
+      "script_error_total": 0
+    },
+    "renderer": "gl_compatibility",
+    "runtime": "source",
+    "video_comparison": {},
+    "numerical_outputs_identical": {},
+    "source_changed": false,
+    "orphans_before_exit": 0.0,
+    "artifacts": {}
+  },
+  "final-workflow-release-gl_compatibility": {
+    "functional_checks": 21,
+    "failures": [],
+    "process_exit_code": 0,
+    "strict_exit_code": 1,
+    "diagnostics": {
+      "classified": {
+        "disconnect": {
+          "focus_entered": 3,
+          "tree_exited": 3
+        },
+        "duplicate_connect": {
+          "focus_entered": 1,
+          "tree_exited": 1
+        }
+      },
+      "classified_total": 8,
+      "error_total": 8,
+      "warning_total": 0,
+      "script_error_total": 0
+    },
+    "renderer": "gl_compatibility",
+    "runtime": "release",
+    "video_comparison": {},
+    "numerical_outputs_identical": {},
+    "source_changed": false,
+    "orphans_before_exit": 0.0,
+    "artifacts": {
+      "WAVEZ.x86_64": "d9f79ab89b5ae369aeed11c6052d402e8218cd503bf85b4a235f9c30c46a7c63",
+      "WAVEZ.pck": "5e724ff68f42b449aaff976124694656e5b048e593c54359febd48ad28622a7e"
+    }
+  },
+  "final-exact-source-forward_plus": {
+    "functional_checks": 229,
+    "failures": [],
+    "process_exit_code": 0,
+    "strict_exit_code": 0,
+    "diagnostics": {
+      "classified": {
+        "disconnect": {
+          "focus_entered": 0,
+          "tree_exited": 0
+        },
+        "duplicate_connect": {
+          "focus_entered": 0,
+          "tree_exited": 0
+        }
+      },
+      "classified_total": 0,
+      "error_total": 0,
+      "warning_total": 0,
+      "script_error_total": 0
+    },
+    "renderer": "forward_plus",
+    "runtime": "source",
+    "video_comparison": {
+      "ordinary": {
+        "decoded_frames_and_timestamps_identical": true,
+        "framemd5_sha256": "50b034808e96250100f467bd8f83b9b6b7b1fe49f8f992e1e1cd2725ea183221",
+        "identical_inspection_sidecars": 6,
+        "regenerated_cohort_keys_normalized": false,
+        "timing_trace_byte_identical": true
+      },
+      "selected": {
+        "decoded_frames_and_timestamps_identical": true,
+        "framemd5_sha256": "c664668244cd3d2b9edb937974df554fd665ff3cbdf239a286fc2be1b72cc608",
+        "identical_inspection_sidecars": 6,
+        "regenerated_cohort_keys_normalized": true,
+        "timing_trace_byte_identical": true
+      }
+    },
+    "numerical_outputs_identical": {
+      "values.csv": "40cfee424af0ab6474d4648ee4af457e25e0e4902b594bad3be49e267f7ebe4c"
+    },
+    "source_changed": false,
+    "orphans_before_exit": null,
+    "artifacts": {}
+  },
+  "final-exact-source-gl_compatibility": {
+    "functional_checks": 229,
+    "failures": [],
+    "process_exit_code": 0,
+    "strict_exit_code": 0,
+    "diagnostics": {
+      "classified": {
+        "disconnect": {
+          "focus_entered": 0,
+          "tree_exited": 0
+        },
+        "duplicate_connect": {
+          "focus_entered": 0,
+          "tree_exited": 0
+        }
+      },
+      "classified_total": 0,
+      "error_total": 0,
+      "warning_total": 0,
+      "script_error_total": 0
+    },
+    "renderer": "gl_compatibility",
+    "runtime": "source",
+    "video_comparison": {
+      "ordinary": {
+        "decoded_frames_and_timestamps_identical": true,
+        "framemd5_sha256": "670303c75f495630a3ab67e120950179760b749ebc35ea25c2b42f934a84cd5c",
+        "identical_inspection_sidecars": 6,
+        "regenerated_cohort_keys_normalized": false,
+        "timing_trace_byte_identical": true
+      },
+      "selected": {
+        "decoded_frames_and_timestamps_identical": true,
+        "framemd5_sha256": "93f8b3bdf5d9819acee59b90c2e5ab7b89a815a98460f22a573b3b3cadaed7b3",
+        "identical_inspection_sidecars": 6,
+        "regenerated_cohort_keys_normalized": true,
+        "timing_trace_byte_identical": true
+      }
+    },
+    "numerical_outputs_identical": {
+      "values.csv": "ceb99a6e98bd82cbe0fffbae39dd9cc505275f4043594defa7634e3fa641b37c"
+    },
+    "source_changed": false,
+    "orphans_before_exit": null,
+    "artifacts": {}
+  },
+  "final-exact-release-forward_plus": {
+    "functional_checks": 229,
+    "failures": [],
+    "process_exit_code": 0,
+    "strict_exit_code": 1,
+    "diagnostics": {
+      "classified": {
+        "disconnect": {
+          "focus_entered": 9,
+          "tree_exited": 9
+        },
+        "duplicate_connect": {
+          "focus_entered": 7,
+          "tree_exited": 7
+        }
+      },
+      "classified_total": 32,
+      "error_total": 32,
+      "warning_total": 0,
+      "script_error_total": 0
+    },
+    "renderer": "forward_plus",
+    "runtime": "release",
+    "video_comparison": {
+      "ordinary": {
+        "decoded_frames_and_timestamps_identical": true,
+        "framemd5_sha256": "50b034808e96250100f467bd8f83b9b6b7b1fe49f8f992e1e1cd2725ea183221",
+        "identical_inspection_sidecars": 6,
+        "regenerated_cohort_keys_normalized": false,
+        "timing_trace_byte_identical": true
+      },
+      "selected": {
+        "decoded_frames_and_timestamps_identical": true,
+        "framemd5_sha256": "c664668244cd3d2b9edb937974df554fd665ff3cbdf239a286fc2be1b72cc608",
+        "identical_inspection_sidecars": 6,
+        "regenerated_cohort_keys_normalized": true,
+        "timing_trace_byte_identical": true
+      }
+    },
+    "numerical_outputs_identical": {
+      "values.csv": "d0a6c1b0cc3737f951f8157ddd9dc3a88d1311a68aa858d4a36051c74975c7b0"
+    },
+    "source_changed": false,
+    "orphans_before_exit": null,
+    "artifacts": {
+      "WAVEZ.x86_64": "d9f79ab89b5ae369aeed11c6052d402e8218cd503bf85b4a235f9c30c46a7c63",
+      "WAVEZ.pck": "9a432a5939bd3b9c3154b0e0b29988a1d35acf082cfa5554520a12b657a2bf32"
+    }
+  },
+  "final-exact-release-gl_compatibility": {
+    "functional_checks": 229,
+    "failures": [],
+    "process_exit_code": 0,
+    "strict_exit_code": 1,
+    "diagnostics": {
+      "classified": {
+        "disconnect": {
+          "focus_entered": 9,
+          "tree_exited": 9
+        },
+        "duplicate_connect": {
+          "focus_entered": 7,
+          "tree_exited": 7
+        }
+      },
+      "classified_total": 32,
+      "error_total": 32,
+      "warning_total": 0,
+      "script_error_total": 0
+    },
+    "renderer": "gl_compatibility",
+    "runtime": "release",
+    "video_comparison": {
+      "ordinary": {
+        "decoded_frames_and_timestamps_identical": true,
+        "framemd5_sha256": "670303c75f495630a3ab67e120950179760b749ebc35ea25c2b42f934a84cd5c",
+        "identical_inspection_sidecars": 6,
+        "regenerated_cohort_keys_normalized": false,
+        "timing_trace_byte_identical": true
+      },
+      "selected": {
+        "decoded_frames_and_timestamps_identical": true,
+        "framemd5_sha256": "93f8b3bdf5d9819acee59b90c2e5ab7b89a815a98460f22a573b3b3cadaed7b3",
+        "identical_inspection_sidecars": 6,
+        "regenerated_cohort_keys_normalized": true,
+        "timing_trace_byte_identical": true
+      }
+    },
+    "numerical_outputs_identical": {
+      "values.csv": "12182d8534e131a6696b267223ddd5f8f35924ec406e01ae88c3b074326e673e"
+    },
+    "source_changed": false,
+    "orphans_before_exit": null,
+    "artifacts": {
+      "WAVEZ.x86_64": "d9f79ab89b5ae369aeed11c6052d402e8218cd503bf85b4a235f9c30c46a7c63",
+      "WAVEZ.pck": "80b10025f859736cf8eab45e6ac7c63d4a487854dd3a6c0dfd49548f15201f87"
+    }
+  },
+  "old-smoke-release": {
+    "functional_checks": 11,
+    "failures": [],
+    "process_exit_code": 0,
+    "strict_exit_code": 1,
+    "diagnostics": {
+      "classified": {
+        "disconnect": {
+          "focus_entered": 1,
+          "tree_exited": 1
+        },
+        "duplicate_connect": {
+          "focus_entered": 0,
+          "tree_exited": 0
+        }
+      },
+      "classified_total": 2,
+      "error_total": 2,
+      "warning_total": 0,
+      "script_error_total": 0
+    },
+    "renderer": "forward_plus",
+    "runtime": "release",
+    "video_comparison": {},
+    "numerical_outputs_identical": {},
+    "source_changed": false,
+    "orphans_before_exit": 0.0,
+    "artifacts": {
+      "WAVEZ.x86_64": "d9f79ab89b5ae369aeed11c6052d402e8218cd503bf85b4a235f9c30c46a7c63",
+      "WAVEZ.pck": "3f1faf3b87c2a7b3e97ab73f2e4ec471c1e68ec7fdb62d147117c273ad93c974"
+    }
+  },
+  "main-smoke-release": {
+    "functional_checks": 11,
+    "failures": [],
+    "process_exit_code": 0,
+    "strict_exit_code": 1,
+    "diagnostics": {
+      "classified": {
+        "disconnect": {
+          "focus_entered": 1,
+          "tree_exited": 1
+        },
+        "duplicate_connect": {
+          "focus_entered": 0,
+          "tree_exited": 0
+        }
+      },
+      "classified_total": 2,
+      "error_total": 2,
+      "warning_total": 0,
+      "script_error_total": 0
+    },
+    "renderer": "forward_plus",
+    "runtime": "release",
+    "video_comparison": {},
+    "numerical_outputs_identical": {},
+    "source_changed": false,
+    "orphans_before_exit": 0.0,
+    "artifacts": {
+      "WAVEZ.x86_64": "d9f79ab89b5ae369aeed11c6052d402e8218cd503bf85b4a235f9c30c46a7c63",
+      "WAVEZ.pck": "a488eb23aa3d6390fce66ecbfee387fd8626e7e63402f7cfdae8a776d7acb378"
+    }
+  },
+  "main-smoke-source": {
+    "functional_checks": 11,
+    "failures": [],
+    "process_exit_code": 0,
+    "strict_exit_code": 0,
+    "diagnostics": {
+      "classified": {
+        "disconnect": {
+          "focus_entered": 0,
+          "tree_exited": 0
+        },
+        "duplicate_connect": {
+          "focus_entered": 0,
+          "tree_exited": 0
+        }
+      },
+      "classified_total": 0,
+      "error_total": 0,
+      "warning_total": 0,
+      "script_error_total": 0
+    },
+    "renderer": "forward_plus",
+    "runtime": "source",
+    "video_comparison": {},
+    "numerical_outputs_identical": {},
+    "source_changed": false,
+    "orphans_before_exit": 0.0,
+    "artifacts": {}
+  },
+  "accepted-exact": {
+    "functional_checks": 229,
+    "failures": [],
+    "process_exit_code": 0,
+    "strict_exit_code": 1,
+    "diagnostics": {
+      "classified": {
+        "disconnect": {
+          "focus_entered": 9,
+          "tree_exited": 9
+        },
+        "duplicate_connect": {
+          "focus_entered": 7,
+          "tree_exited": 7
+        }
+      },
+      "classified_total": 32,
+      "error_total": 32,
+      "warning_total": 0,
+      "script_error_total": 0
+    },
+    "renderer": "forward_plus",
+    "runtime": "release",
+    "video_comparison": {
+      "ordinary": {
+        "decoded_frames_and_timestamps_identical": true,
+        "framemd5_sha256": "50b034808e96250100f467bd8f83b9b6b7b1fe49f8f992e1e1cd2725ea183221",
+        "identical_inspection_sidecars": 6,
+        "regenerated_cohort_keys_normalized": false,
+        "timing_trace_byte_identical": true
+      },
+      "selected": {
+        "decoded_frames_and_timestamps_identical": true,
+        "framemd5_sha256": "c664668244cd3d2b9edb937974df554fd665ff3cbdf239a286fc2be1b72cc608",
+        "identical_inspection_sidecars": 6,
+        "regenerated_cohort_keys_normalized": true,
+        "timing_trace_byte_identical": true
+      }
+    },
+    "numerical_outputs_identical": {
+      "values.csv": "ef392e47ae21ed9bebfa35d92e725c4a9a15b8a321902b8aec9be83f34ccc9f7"
+    },
+    "source_changed": false,
+    "orphans_before_exit": null,
+    "artifacts": {
+      "WAVEZ.x86_64": "d9f79ab89b5ae369aeed11c6052d402e8218cd503bf85b4a235f9c30c46a7c63",
+      "WAVEZ.pck": "2c0e57cf94378f75a0d14859054938c53517e71579a7631d618a8bc11cabf88a"
+    }
+  },
+  "accepted-source-exact-imported": {
+    "functional_checks": 229,
+    "failures": [],
+    "process_exit_code": 0,
+    "strict_exit_code": 0,
+    "diagnostics": {
+      "classified": {
+        "disconnect": {
+          "focus_entered": 0,
+          "tree_exited": 0
+        },
+        "duplicate_connect": {
+          "focus_entered": 0,
+          "tree_exited": 0
+        }
+      },
+      "classified_total": 0,
+      "error_total": 0,
+      "warning_total": 0,
+      "script_error_total": 0
+    },
+    "renderer": "forward_plus",
+    "runtime": "source",
+    "video_comparison": {
+      "ordinary": {
+        "decoded_frames_and_timestamps_identical": true,
+        "framemd5_sha256": "50b034808e96250100f467bd8f83b9b6b7b1fe49f8f992e1e1cd2725ea183221",
+        "identical_inspection_sidecars": 6,
+        "regenerated_cohort_keys_normalized": false,
+        "timing_trace_byte_identical": true
+      },
+      "selected": {
+        "decoded_frames_and_timestamps_identical": true,
+        "framemd5_sha256": "c664668244cd3d2b9edb937974df554fd665ff3cbdf239a286fc2be1b72cc608",
+        "identical_inspection_sidecars": 6,
+        "regenerated_cohort_keys_normalized": true,
+        "timing_trace_byte_identical": true
+      }
+    },
+    "numerical_outputs_identical": {
+      "values.csv": "83e4bc28acf3fb75c11d63056ded9b4729eb64aea9f8ce2d60a1d4397fa73b5e"
+    },
+    "source_changed": false,
+    "orphans_before_exit": null,
+    "artifacts": {}
+  }
+}
