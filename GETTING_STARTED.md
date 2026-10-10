@@ -68,6 +68,48 @@ The four examples below use only the base Python package and NumPy. They use
 uncompressed, lossless output. No simulation framework, GPU Python library,
 FFmpeg or scikit-image is needed to generate or view them.
 
+### Install FFmpeg (optional, for MP4 video export)
+
+[FFmpeg](https://ffmpeg.org/) is an external dependency for exporting MP4.
+You do not need it to open/play `.wvz` files or run the four Python examples.
+Wavez does not install it automatically. The official
+[download page](https://ffmpeg.org/download.html) links to distributor packages
+and builds; upstream provides source code rather than ready-made Linux binaries.
+
+**Debian/Ubuntu:** install from your distribution's enabled repositories:
+
+```sh
+sudo apt update && sudo apt install ffmpeg
+```
+
+On Ubuntu, the package is in **Universe**; enable that repository if needed.
+See Ubuntu's [package-management guide](https://ubuntu.com/server/docs/how-to/software/package-management/).
+
+**Fedora:** the distribution's
+[`ffmpeg-free` package](https://packages.fedoraproject.org/pkgs/ffmpeg/ffmpeg-free/)
+is codec-limited and may lack the H.264 encoder Wavez needs. A full codec-capable
+build may require [RPM Fusion](https://rpmfusion.org/Howto/Multimedia); follow its
+current instructions for your Fedora release, then check the encoder below.
+For other Linux distributions, use their package documentation or the official
+FFmpeg download page.
+
+Check your installation in a terminal:
+
+```sh
+ffmpeg -version
+ffprobe -version
+ffmpeg -hide_banner -encoders
+```
+
+Look for **`libx264`** in the encoder list: Wavez's MP4 export uses this H.264
+encoder, so another H.264 encoder or decoding support alone is insufficient.
+`ffprobe` inspects encoded files; Wavez launches `ffmpeg` for encoding.
+
+Wavez auto-detects `ffmpeg` on its process PATH. For a manually installed
+executable, open **Edit → Preferences → File Locations**, choose **Custom** in
+the **FFmpeg** row, **Browse…** to the executable and **Apply**. Run the checks
+for `ffmpeg` with that executable's full path if it differs from the one on PATH.
+
 ### Install the Python exporter
 
 Start in the root of your Wavez checkout, where `pyproject.toml` is located.
