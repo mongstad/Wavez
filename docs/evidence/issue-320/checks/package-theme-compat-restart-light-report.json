@@ -1,0 +1,5 @@
+{
+	"checks": 4,
+	"failures": [],
+	"renderer": "gl_compatibility"
+}

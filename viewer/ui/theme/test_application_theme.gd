@@ -109,6 +109,9 @@ func run() -> void:
 		while viewer.scene_layers.is_buffering() and Time.get_ticks_msec()<deadline:
 			viewer.scene_layers.tick(0);await process_frame
 		check(not viewer.scene_layers.is_buffering(),"Mixed fixture ready")
+		# Establish an actual committed sample before palette/scientific pixel comparisons.
+		var sample: Dictionary = viewer.scene_layers.sample(viewer.requested_time, false)
+		check(not sample.is_empty() and not viewer.scene_layers.current.is_empty(),"Mixed fixture committed for theme comparison")
 		viewer._sync_control_state();viewer.shell.refresh();await settle()
 		for size in [Vector2i(1440,900),Vector2i(1024,640)]:
 			root.size = size;await settle();viewer.shell.layout();await settle()

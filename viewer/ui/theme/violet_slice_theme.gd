@@ -41,7 +41,7 @@ func tonal_surface(x := 0, y := 0) -> StyleBoxTexture:
 
 func _init() -> void:
 	super()
-	# The Simulation heading alone follows the existing pin accent in Light;
+	# Simulation and pins share the owner-approved primary accent in Light;
 	# inherit PanelTitle's typography and preserve its accepted Dark ink.
 	set_type_variation("SimulationTitle", "PanelTitle")
 	set_color("font_color", "SimulationTitle", c(&"accent.primary") if light_mode else c(&"text.title"))
@@ -60,6 +60,8 @@ func _init() -> void:
 			style.content_margin_bottom = old.content_margin_bottom
 			if type in ["Button", "MenuButton", "IconAction", "CheckBox", "CheckButton"] and state in ["normal", "disabled"]: style.bg_color = Color.TRANSPARENT
 			if type == "CheckButton" and state == "pressed": style.bg_color = Color.TRANSPARENT
+			if light_mode and type == "OptionButton" and state != "disabled":
+				style.set_border_width_all(1); style.border_color = c(&"border.control")
 			set_stylebox(state, type, style)
 		for state in ["font_pressed_color", "font_hover_pressed_color", "icon_pressed_color", "icon_hover_pressed_color"]:
 			set_color(state, type, c(&"selection.text"))
@@ -81,6 +83,8 @@ func _init() -> void:
 		if state in ["normal", "pressed", "disabled"]: disclosure.bg_color = Color.TRANSPARENT
 		set_stylebox(state, "PanelDisclosure", disclosure)
 	set_stylebox("focus", "PanelDisclosure", focus())
+	if light_mode:
+		for state in ["font_color", "font_hover_color", "font_focus_color"]:set_color(state, "PanelDisclosure", c(&"text.section"))
 	set_color("icon_pressed_color", "PanelDisclosure", c(&"accent.primary"))
 	set_color("icon_hover_pressed_color", "PanelDisclosure", c(&"focus.ring"))
 	# Pins carry their state in silhouette; their ink stays violet in every state.
@@ -92,7 +96,9 @@ func _init() -> void:
 	set_stylebox("focus", "PinAction", focus())
 	for state in ["normal", "pressed", "hover", "hover_pressed", "focus", "disabled"]:
 		set_color("icon_" + state + "_color", "PinAction", c(&"accent.primary"))
-	set_stylebox("normal", "LineEdit", flat_box(&"surface.2"))
+	var input := flat_box(&"surface.2")
+	if light_mode: input.set_border_width_all(1); input.border_color = c(&"border.control")
+	set_stylebox("normal", "LineEdit", input)
 	set_stylebox("read_only", "LineEdit", flat_box(&"surface.1"))
 	var invalid := flat_box(&"surface.2"); invalid.border_width_bottom = 1; invalid.border_color = c(&"state.error")
 	for type in ["InvalidInput", "InvalidNumericInput"]: set_stylebox("normal", type, invalid)
@@ -101,11 +107,17 @@ func _init() -> void:
 		set_stylebox("grabber_area", type, flat_box(&"accent.primary", 2, 2, 2))
 		set_stylebox("grabber_area_highlight", type, flat_box(&"focus.ring", 2, 2, 2))
 		for pair in [["grabber", &"accent.primary"], ["grabber_highlight", &"focus.ring"], ["grabber_disabled", &"text.disabled"]]:
-			set_icon(pair[0], type, svg_texture('<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"><circle cx="6" cy="6" r="4" fill="#ffffff"/></svg>', c(pair[1])))
+			var source := '<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"><circle cx="6" cy="6" r="4" fill="#ffffff"/></svg>'
+			if light_mode:
+				var outline := ' stroke="#%s" stroke-width="1"' % c(&"accent.foreground").to_html(false) if pair[0] != "grabber_disabled" else ""
+				source = source.replace('fill="#ffffff"', 'fill="#%s"%s' % [c(pair[1]).to_html(false), outline])
+				set_icon(pair[0], type, DPITexture.create_from_string(source))
+			else: set_icon(pair[0], type, svg_texture(source, c(pair[1])))
 	for pair in [["checked", true], ["unchecked", false], ["checked_disabled", true], ["unchecked_disabled", false]]:
 		var disabled: bool = String(pair[0]).ends_with("disabled")
 		var track := c(&"border.control" if disabled else (&"accent.primary" if pair[1] else &"border.control"))
-		var knob := c(&"text.disabled" if disabled else &"text.primary")
+		# Light's deeper tracks need contrasting knobs to expose the switch state.
+		var knob := c(&"text.disabled" if disabled else (&"accent.foreground" if light_mode else &"text.primary"))
 		var source := '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="20"><rect x="1" y="2" width="30" height="16" rx="8" fill="#%s"/><circle cx="%s" cy="10" r="6" fill="#%s"/></svg>' % [track.to_html(false), "22" if pair[1] else "10", knob.to_html(false)]
 		set_icon(pair[0], "CheckButton", DPITexture.create_from_string(source))
 	set_constant("icon_max_width", "CheckButton", 32)
