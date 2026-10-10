@@ -1,0 +1,6 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+0.5 -> 1.0
+-0.5 -> 0.0
+30.5 -> 31.0
+-30.5 -> -30.0

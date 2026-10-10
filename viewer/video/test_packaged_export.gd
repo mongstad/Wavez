@@ -41,14 +41,14 @@ func run() -> void:
 	var menu: Dictionary = view.shell.commands.video;menu.popup.id_pressed.emit(menu.index)
 	var dialog = view.video_dialog
 	check(dialog.visible,"File / Export / Video opens production dialog")
-	dialog.range_choice.select(2);dialog.update_range();dialog.start.value = .75;dialog.end.value = 1.25
+	dialog.range_choice.select(2);dialog.update_range();dialog.set_range_times(.75,1.25)
 	dialog.width.value = 320;dialog.height.value = 180;dialog.fps.value = 4;dialog.rate.value = 1
 	dialog.overlays.button_pressed = config.get("overlays",false);dialog.inspection_sidecars.button_pressed = true
 	dialog.camera_mode.select(1 if config.get("orbit",false) else 0);dialog.orbit.value = .2
 	dialog.output.text = out.path_join("result.mp4")
 	view.file_locations.settings.ffmpeg_mode = "custom"
 	view.file_locations.settings.ffmpeg_path = config.get("ffmpeg","/usr/bin/ffmpeg")
-	if config.get("cancel","") in ["rendering","shutdown"]:dialog.end.value = 2;dialog.fps.value = 60;dialog.width.value = 960;dialog.height.value = 540
+	if config.get("cancel","") in ["rendering","shutdown"]:dialog.set_range_times(dialog.start.timestamp,2);dialog.fps.value = 60;dialog.width.value = 960;dialog.height.value = 540
 	if config.get("cancel","") == "encoding":dialog.fps.value = 60
 	await process_frame
 	var arguments := Job.launch_arguments(out.path_join("job.json"),4)

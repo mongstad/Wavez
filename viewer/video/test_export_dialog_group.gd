@@ -83,8 +83,8 @@ func run() -> void:
 	check(dialog.estimate.get_parent() == dialog.summary_group.body and dialog.message.get_parent() == dialog.summary_group.body and dialog.progress.get_parent() == dialog.summary_group.body, "Estimate, status and progress share the lower summary")
 	check(dialog.range_choice.get_item_text(0) == "Full" and dialog.range_choice.get_item_text(1) == "Current position to end" and dialog.range_choice.get_item_text(2) == "Custom", "Range labels retain their option indices")
 	check(dialog.end.tooltip_text.contains("exclusive"), "End tooltip preserves exclusive-end guidance")
-	check(not dialog.estimate.text.contains("Source:") and dialog.estimate.text.contains("Output:") and dialog.estimate.text.contains("Temporary storage:") and not dialog.estimate.text.contains("PNG budget"), "Estimate shows compact output and storage values")
-	check(dialog.estimate.text == "Output: 2.267 seconds • 68 frames\nTemporary storage: 0.53 GiB", "Estimate retains frame count and uncompressed storage calculation")
+	check(not dialog.estimate.text.contains("Source:") and dialog.estimate.text.contains("Duration:") and dialog.estimate.text.contains("Temporary storage:") and not dialog.estimate.text.contains("PNG budget"), "Estimate shows compact output and storage values")
+	check(dialog.estimate.text == "Duration: ≈00:02.267 · 68 frames\nTemporary storage: 0.53 GiB", "Clock estimate retains frame count and uncompressed storage calculation")
 	check(dialog.estimate.visible and not dialog.progress.visible and dialog.summary_group.title_label.text == "Export summary", "Idle summary shows estimate without inactive progress")
 	check(dialog.message.text.is_empty(), "Available-state notice does not announce FFmpeg success")
 	check(dialog.close_button.tooltip_text.is_empty(), "Idle Cancel has no redundant tooltip")
@@ -130,11 +130,11 @@ func run() -> void:
 	var current: Dictionary = dialog.settings()
 	check(current.start_time == 2.25 and current.end_time == 3.375, "Current-position preset keeps its endpoints")
 	dialog.range_choice.select(2); dialog.update_range()
-	dialog.start.value = 2.25; dialog.end.value = 2.25
+	dialog.set_range_times(2.25,2.25)
 	check(dialog.start.editable and dialog.end.editable and Job.frame_total(dialog.settings()) == 1, "Custom still exports one frame")
-	dialog.end.value = 2.0
+	dialog.set_range_times(2.25,2.0)
 	check(dialog.estimate.text == "End time must be at or after start time.", "Invalid range keeps its validation message")
-	dialog.end.value = 3.0
+	dialog.set_range_times(2.25,3.0)
 	var resolution := option_for(dialog.video_fields, "Resolution")
 	var frame_rate := option_for(dialog.video_fields, "Frame rate")
 	resolution.select(2); resolution.item_selected.emit(2)

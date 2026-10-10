@@ -1,5 +1,12 @@
 # Retained evidence
 
+Issue #323's [range validation refinement](evidence/issue-323/range-validation/README.md)
+records immediate source/ordering bounds, elapsed controls for offset timestamps,
+precise fractional endpoints, the general final-second remainder rule, and
+source/package output comparisons for build 86.
+Its [whole-second control review](evidence/issue-323/precision-refinement/README.md)
+and [initial clock review](evidence/issue-323/README.md) remain historical checkpoints.
+
 Issue #320's [deeper-purple and cool-gray Light refinement](evidence/issue-320/README.md)
 records the approved shared heading/pin option, actual control-state contrast,
 source/package limits and physical owner-review steps for candidate build 85.

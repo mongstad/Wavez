@@ -154,8 +154,7 @@ func run() -> void:
 	viewer.video_dialog.open()
 	viewer.video_dialog.range_choice.select(2)
 	viewer.video_dialog.update_range()
-	viewer.video_dialog.start.value = .1
-	viewer.video_dialog.end.value = .7
+	viewer.video_dialog.set_range_times(.1,.7)
 	viewer.video_dialog.rate.value = 1
 	var live_state: Dictionary = Job.snapshot(viewer)
 	viewer.clean_view = false

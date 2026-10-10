@@ -25,7 +25,7 @@ func run():
 	check(dialog.output.text.is_empty(),"Fresh preferences have no output path")
 	check(view.open_dialog.use_native_dialog,"Capture picker still native")
 	check(dialog.save_dialog.filters==PackedStringArray(["*.mp4 ; H.264 MP4"]),"Only MP4 is passed to native API")
-	dialog.range_choice.select(2);dialog.update_range();dialog.start.value=0;dialog.end.value=.5
+	dialog.range_choice.select(2);dialog.update_range();dialog.set_range_times(0,.5)
 	dialog.width.value=320;dialog.height.value=180;dialog.fps.value=4
 	dialog.ffmpeg="/usr/bin/ffmpeg"
 	if config.get("native_review",false):

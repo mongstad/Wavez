@@ -1,0 +1,26 @@
+{
+  "viewer/main.gd": {
+    "unchanged_from_pr_checkpoint": "9b716a3",
+    "sha256": "e77aece8f6518f527252be02849fc01231649a8ef09c648b3c11690380c4184a"
+  },
+  "viewer/ui/shell/viewer_transport.gd": {
+    "unchanged_from_pr_checkpoint": "9b716a3",
+    "sha256": "1545ba8e66bfc0a42a6f488d5b27f78ea95efcbb9f9f653184b9acb70364fd7d"
+  },
+  "viewer/ui/shell/time_seek_popover.gd": {
+    "unchanged_from_pr_checkpoint": "9b716a3",
+    "sha256": "07846effccf6e3178e05c76d8e7b3fd876f0d6faa8f984e4b27de3ea5d1f653d"
+  },
+  "viewer/video/render_job.gd": {
+    "unchanged_from_pr_checkpoint": "9b716a3",
+    "sha256": "5b152d0f612a59a41e4ed7f13bd6e0062ea249f5926aa91d80b16bc5fc3ff9ad"
+  },
+  "viewer/video/render_worker.gd": {
+    "unchanged_from_pr_checkpoint": "9b716a3",
+    "sha256": "76cf3925925179cb0097983842e09d982165d3e8b04d344ebff9c6007ead510a"
+  },
+  "viewer/scene/source_sampling.gd": {
+    "unchanged_from_pr_checkpoint": "9b716a3",
+    "sha256": "bf05eef16a765866285dc48693ec9d7a43f9f0d0de57050aecc6e5c2cae8ebe3"
+  }
+}
