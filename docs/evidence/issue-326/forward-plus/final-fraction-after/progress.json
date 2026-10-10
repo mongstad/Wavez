@@ -1,0 +1,11 @@
+{
+	"current_frame": 2,
+	"elapsed_seconds": 0.573,
+	"encoder_pid": -1,
+	"intermediate_directory": "/tmp/wavez-326-forward-final/final-fraction-after",
+	"message": "Saved /tmp/wavez-326-forward-final/final-fraction-after/output.mp4",
+	"output_path": "/tmp/wavez-326-forward-final/final-fraction-after/output.mp4",
+	"renderer_pid": 1798976,
+	"stage": "complete",
+	"total_frames": 2
+}

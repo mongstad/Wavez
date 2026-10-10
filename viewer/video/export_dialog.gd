@@ -310,13 +310,10 @@ static func frame_count_text(count: int) -> String:
 	for index in range(text.length() - 3, 0, -3): text = text.insert(index, ",")
 	return text
 
-func update_time_readout(clock: Label, spin: TimeSpin, time: float, exclusive := false) -> void:
+func update_time_readout(clock: Label, spin: TimeSpin, time: float) -> void:
 	var elapsed := time - spin.origin
 	var displayed := spin.projection(time)
 	clock.text = ("≈" if displayed != elapsed else "") + Clock.format_time(displayed, true)
-	var hint := "Elapsed simulation time, from 0 to %s s. Start cannot exceed End; End cannot precede Start.\nWhole-second controls; ≈ marks an approximate display. Arrows shift the exact endpoint by 1 second within the valid range. Explicit numeric edits round to a whole elapsed second, then clamp to the exact boundary. Unchanged Enter preserves the exact time.\nExact elapsed time: %s s\nRecorded capture time: %s s" % [FloatText.format_value(spin.duration), FloatText.format_value(elapsed), FloatText.format_value(time)]
-	if exclusive: hint += "\nEditing End to the final whole second includes the remaining fractional second. End is exclusive; a still exports one frame."
-	clock.tooltip_text = hint; spin.tooltip_text = hint
 
 func check(label: String, text: String, target: GridContainer) -> CheckButton:
 	var name_label := Label.new(); name_label.text = label; target.add_child(name_label)
@@ -427,7 +424,7 @@ func update_estimate() -> void:
 		start_time = timeline.times[0] if range_choice.selected == 0 else opened_current
 		end_time = timeline.times[-1]
 	update_time_readout(start_clock, start, start_time)
-	update_time_readout(end_clock, end, end_time, true)
+	update_time_readout(end_clock, end, end_time)
 	precise_range.text = "Exact range: %s → %s" % [Clock.format_time(start_time - start.origin, true), Clock.format_time(end_time - end.origin, true)]
 	precise_range.visible = job_status.is_empty() and pid <= 0 and not preparing and (start.projection(start_time) != start_time - start.origin or end.projection(end_time) != end_time - end.origin)
 	if end_time < start_time:

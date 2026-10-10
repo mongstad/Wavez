@@ -1,0 +1,20 @@
+{
+  "version": "v0.1.0.91",
+  "godot": "4.7.2.stable.official.ed1daf0bf",
+  "review_entry_scene": true,
+  "artifacts": {
+    "WAVEZ.x86_64": {
+      "bytes": 73519416,
+      "sha256": "d9f79ab89b5ae369aeed11c6052d402e8218cd503bf85b4a235f9c30c46a7c63"
+    },
+    "WAVEZ.pck": {
+      "bytes": 9888932,
+      "sha256": "59d27d504fbb39a3c80a6a3ab54bd0acc0d7b61897b178755ba06d4be60bca63"
+    }
+  },
+  "externally_installed": [
+    "Godot Engine",
+    "FFmpeg"
+  ],
+  "artifacts_not_committed": true
+}

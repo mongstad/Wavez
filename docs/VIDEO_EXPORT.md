@@ -70,13 +70,14 @@ Equal exact endpoints still export one frame.
 The exact model and `set_range_times(first, last)` API retain **recorded source
 timestamps**, with valid restored fractions preserved and invalid ranges clamped
 to source extent/order. The controls/clocks and **Exact range** line use elapsed
-seconds; tooltips disclose both exact elapsed seconds and recorded source times.
+seconds. Start/End editors, step arrows and clock readouts have no tooltips;
+precise fractional endpoints remain visible in the **Exact range** line.
 A capture spanning recorded times -1.125 to 3601.125 therefore displays elapsed
 0 to 3602.25, without changing export timestamps. Typing elapsed 30 selects
 recorded time 28.875. Opening, refreshing or switching a valid existing selection
 to Custom does not round-trip the source timestamp through elapsed arithmetic.
-The End tooltip explains that the endpoint is exclusive and a still exports one
-frame. Select 1080p, 1440p, 4K, or custom dimensions; 24/30/60 or custom integer FPS. **Playback rate** is simulation-time units
+End is exclusive; equal endpoints export one still frame. Select 1080p, 1440p,
+4K, or custom dimensions; 24/30/60 or custom integer FPS. **Playback rate** is simulation-time units
 per second of exported video: lower values play more slowly and sample time
 more closely, while higher values play faster. Its **×** suffix identifies a speed
 multiplier. The numeric timing is unchanged.

@@ -1,7 +1,7 @@
 # Current status
 
-Accepted baseline: **v0.1.0.89**, `8a411646cf30441233a681af9ecb4ca325724d91`,
-owner-merged PR #334. The repository's application identity is
+Accepted baseline: **v0.1.0.90**, `d2b0bf453b2ae0d301decde2e22251316f482be0`,
+owner-merged PR #336. The repository's application identity is
 `viewer/project.godot` → `application/config/version`; see [version policy](VERSIONING.md).
 Issue #331 provides independently configurable,
 initially Unbound Roll Camera Left/Right actions bank Free Camera around its
@@ -21,13 +21,20 @@ resources while launched video workers continue. Dependent image, selection,
 analysis and matched-view work safely blocks closing with an explanation.
 See [Close File](CLOSE_FILE.md) and [review evidence](evidence/issue-329/README.md).
 
-Issue #335 proposes candidate **v0.1.0.90** with focused diagnostic probes and
+Accepted issue #335 / PR #336 provides focused diagnostic probes and
 documentation. The Linux Godot 4.7.2 release template reproduces the root-Window
 Popup signal errors independently of Wavez; source/debug runtimes clear the
 connections correctly. The existing Close File runtime and release packaging
 remain unchanged. Strict release validation still reports the errors and fails.
 See [Window signal diagnostics](ROOT_WINDOW_SIGNALS.md) and
-[investigation evidence](evidence/issue-335/README.md). Owner review is pending.
+[investigation evidence](evidence/issue-335/README.md).
+
+Issue #326 proposes candidate **v0.1.0.91**: Video Export Start/End controls
+and clock readouts no longer generate oversized tooltips. Permanent labels,
+precise visible ranges and exact endpoint calculations remain unchanged. The
+existing AGENTS rule prohibits adding tooltips without an explicit instruction
+for the specific element. See [review evidence](evidence/issue-326/README.md).
+Owner review is pending.
 
 The GitHub Issues and Wavez Development Project are the operational queue. Work
 requires a Ready issue (or explicit owner authorization), the correct branch/base
