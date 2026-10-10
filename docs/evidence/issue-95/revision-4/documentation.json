@@ -1,0 +1,19 @@
+{
+  "comparison_commit": "89bb3c5158f8acd63b604adec42b88a9f54f8919",
+  "local_links_and_anchors": 34,
+  "errors": [],
+  "owner_section_requirements": "passed",
+  "outside_new_subsection_byte_identical": true,
+  "all_other_preexisting_tracked_files_byte_identical": 4087,
+  "shell_blocks_syntax_passed": 2,
+  "new_external_links": [
+    "https://ffmpeg.org/",
+    "https://ffmpeg.org/download.html",
+    "https://ubuntu.com/server/docs/how-to/software/package-management/",
+    "https://packages.fedoraproject.org/pkgs/ffmpeg/ffmpeg-free/",
+    "https://rpmfusion.org/Howto/Multimedia"
+  ],
+  "guide_sha256": "77fef49e86e336eea424cb57d8b611d7f6cb5f3ba0633082a80cc7aea9a83d5a",
+  "installation_commands_run": false,
+  "installation_limit": "Documentation checked against official package/apt sources; host already has RPM Fusion FFmpeg. No system packages changed. RPM Fusion/Fedora Quick Docs recipe pages returned anti-bot denial; no exact Fedora install command included."
+}

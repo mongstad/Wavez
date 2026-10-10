@@ -1,5 +1,10 @@
 # Retained evidence
 
+Issue #95's [Getting Started review](evidence/issue-95/README.md) records four
+runnable examples, strict source/identity/integrity checks, both source/release
+renderers and standalone launch with the checkout, external engine and Python
+executable hidden. It retains installation limits and owner review steps.
+
 Issue #326's [Video Export tooltip review](evidence/issue-326/README.md) records
 native editor/arrow/clock/label hover checks in Dark/Light normal/compact layouts,
 exact accepted-main settings/export comparisons and the existing owner tooltip rule.

@@ -1,7 +1,7 @@
 # Current status
 
-Accepted baseline: **v0.1.0.90**, `d2b0bf453b2ae0d301decde2e22251316f482be0`,
-owner-merged PR #336. The repository's application identity is
+Accepted baseline: **v0.1.0.91**, `3014e8a65e6eadd0ed0a0e509265fb97f8ecf1fb`,
+owner-merged PR #337. The repository's application identity is
 `viewer/project.godot` → `application/config/version`; see [version policy](VERSIONING.md).
 Issue #331 provides independently configurable,
 initially Unbound Roll Camera Left/Right actions bank Free Camera around its
@@ -29,12 +29,17 @@ remain unchanged. Strict release validation still reports the errors and fails.
 See [Window signal diagnostics](ROOT_WINDOW_SIGNALS.md) and
 [investigation evidence](evidence/issue-335/README.md).
 
-Issue #326 proposes candidate **v0.1.0.91**: Video Export Start/End controls
+Accepted issue #326 / PR #337: Video Export Start/End controls
 and clock readouts no longer generate oversized tooltips. Permanent labels,
 precise visible ranges and exact endpoint calculations remain unchanged. The
 existing AGENTS rule prohibits adding tooltips without an explicit instruction
 for the specific element. See [review evidence](evidence/issue-326/README.md).
-Owner review is pending.
+
+Issue #95 proposes candidate **v0.1.0.92**: a three-part
+[Getting Started guide](../GETTING_STARTED.md), four small standalone Python
+examples and focused source/value/viewer verification. Installation requirements
+distinguish Linux standalone viewing from Python generation and source development.
+See [review evidence](evidence/issue-95/README.md). Owner review is pending.
 
 The GitHub Issues and Wavez Development Project are the operational queue. Work
 requires a Ready issue (or explicit owner authorization), the correct branch/base
@@ -70,7 +75,7 @@ explicit sample/selection/surface/render barriers.
 | Responsibility | Contract / guide | Authoritative implementation |
 | --- | --- | --- |
 | Supported format and wire | [Policy](CAPTURE_FORMAT_POLICY.md), [WVZ1 wire](WVZ1_FORMAT.md) | `wavez_export/scene.py`, `viewer/layers/scene_reader.gd` |
-| Python capture API and integration | [API](../WAVEZ_API.md), [examples](SCENE_CAPTURE_GUIDE.md), [integration](SIMULATION_INTEGRATION_GUIDE.md), [Quickstart](../QUICKSTART.md) | `wavez_export/`, `examples/` |
+| Python capture API and integration | [Getting Started](../GETTING_STARTED.md), [API](../WAVEZ_API.md), [examples](SCENE_CAPTURE_GUIDE.md), [integration](SIMULATION_INTEGRATION_GUIDE.md), [Quickstart](../QUICKSTART.md) | `wavez_export/`, `examples/` |
 | Representation and scientific limits | [Format/API overview](CAPTURE_FORMAT_AND_API.md), [handbook](WAVEZ_HANDBOOK.md) | `viewer/layers/`, `viewer/scene/` |
 | Inspection and portable state | [Inspection](../INSPECTION_STATE.md), [view presets](WAVEZ_VIEW_PRESETS.md) | `viewer/scene/`, `viewer/analysis/inspection_v3.gd` |
 | Selection and numerical analysis | [Scientific contract](SCIENTIFIC_ANALYSIS.md), [schemas](ANALYSIS_SCHEMAS.md), [user guide](ANALYSIS_GUIDE.md), [acceptance criteria](SCIENTIFIC_ACCEPTANCE.md) | `wavez_export/analysis/`, `viewer/analysis/` |
@@ -116,10 +121,10 @@ paths/commands in frozen records are provenance and must not be used as current
 instructions. Retired documents remain accessible through their accepted Git
 permalinks. Current guides above govern supported workflows.
 
-[Public README #94](https://github.com/mongstad/Wavez/issues/94) and
-[Python getting-started #95](https://github.com/mongstad/Wavez/issues/95) remain
-separate issues. Preparing documentation does not authorize publication or
-repository administration changes.
+[Public README #94](https://github.com/mongstad/Wavez/issues/94) remains a separate
+issue from [Getting Started #95](https://github.com/mongstad/Wavez/issues/95).
+Preparing documentation does not authorize publication or repository
+administration changes.
 
 ## Licensing and release boundary
 

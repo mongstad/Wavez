@@ -1,0 +1,25 @@
+{
+  "captures": {
+    "particles": {
+      "records": 3,
+      "sha256": "60731cff7e220ee6a7da496d336c4fd220e8ed8a2859c70a1e88113039e1e35e",
+      "strict_integrity_identity_source_values_and_overwrite_refusal": "passed"
+    },
+    "field": {
+      "records": 3,
+      "sha256": "497ca078c0098364bd4bf4d0d2186bb2f3e8979725fee97e279d5a88efc9618c",
+      "strict_integrity_identity_source_values_and_overwrite_refusal": "passed"
+    },
+    "mesh": {
+      "records": 3,
+      "sha256": "8b6498228bf2540fac28bf4f018bfbc116c3dab544a9983d5c094dbbd3e02249",
+      "strict_integrity_identity_source_values_and_overwrite_refusal": "passed"
+    },
+    "combined": {
+      "records": 6,
+      "sha256": "e5f17bd6b6cbd58535b3558a0404d72adbc8231297d8e15ac3261abebf3187b7",
+      "strict_integrity_identity_source_values_and_overwrite_refusal": "passed"
+    }
+  },
+  "python": "Python 3.14.8"
+}

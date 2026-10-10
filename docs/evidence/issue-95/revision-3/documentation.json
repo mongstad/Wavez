@@ -1,0 +1,13 @@
+{
+  "comparison_commit": "1a648e0a2a7670b786932b8b6c446ce557f48727",
+  "local_links_and_anchors": 34,
+  "errors": [],
+  "prompt_word_count": 132,
+  "owner_prompt_requirements": "passed",
+  "outside_prompt_section_byte_identical": true,
+  "all_other_preexisting_tracked_files_byte_identical": 4084,
+  "repository_url": "https://github.com/mongstad/Wavez",
+  "repository_private_verified_via_gh": true,
+  "api_contract_review": "SceneCapture exclusive paths, strict SceneReader, audit_identity, source precision and independent solver-time recording cross-checked against current source and linked contracts",
+  "guide_sha256": "309438442045f8dff05ea504413333b7edd84ed59a117d4e6b34d7a22f7df7cb"
+}

@@ -1,0 +1,3 @@
+2026-10-11 00:02:20.175  APP       WAVEZ v0.1.0.92 started
+2026-10-11 00:02:20.635  UI        Window.Close
+2026-10-11 00:02:20.863  APP       Session ended

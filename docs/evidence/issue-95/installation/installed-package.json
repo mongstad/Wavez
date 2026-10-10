@@ -1,0 +1,8 @@
+{
+  "python": "3.14.8 (main, Oct  1 2026, 00:00:00) [GCC 16.2.1 20260819 (Red Hat 16.2.1-2)]",
+  "numpy": "2.5.4",
+  "wavez_export": "4.0.0",
+  "module_path": "/tmp/wavez-95-venv/lib64/python3.14/site-packages/wavez_export/__init__.py",
+  "command": "python -m venv /tmp/wavez-95-venv; /tmp/wavez-95-venv/bin/python -m pip install .",
+  "isolated_import_passed": true
+}

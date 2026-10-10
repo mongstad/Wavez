@@ -1,0 +1,81 @@
+{
+  "ffmpeg-version": {
+    "exit_code": 0,
+    "command": [
+      "ffmpeg",
+      "-version"
+    ]
+  },
+  "ffprobe-version": {
+    "exit_code": 0,
+    "command": [
+      "ffprobe",
+      "-version"
+    ]
+  },
+  "encoders": {
+    "exit_code": 0,
+    "command": [
+      "ffmpeg",
+      "-hide_banner",
+      "-encoders"
+    ]
+  },
+  "libx264_encoder": "V....D libx264              libx264 H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10 (codec h264)",
+  "encoding_smoke": {
+    "command": [
+      "ffmpeg",
+      "-nostdin",
+      "-n",
+      "-hide_banner",
+      "-loglevel",
+      "error",
+      "-framerate",
+      "30",
+      "-start_number",
+      "0",
+      "-i",
+      "/tmp/wavez-95-revision-4-runtime/frame%08d.png",
+      "-frames:v",
+      "2",
+      "-an",
+      "-c:v",
+      "libx264",
+      "-preset",
+      "slow",
+      "-crf",
+      "18",
+      "-pix_fmt",
+      "yuv420p",
+      "-movflags",
+      "+faststart",
+      "-progress",
+      "/tmp/wavez-95-revision-4-runtime/encoding-progress.txt",
+      "/tmp/wavez-95-revision-4-runtime/smoke.mp4"
+    ],
+    "exit_code": 0,
+    "ffprobe_command": [
+      "ffprobe",
+      "-v",
+      "error",
+      "-select_streams",
+      "v:0",
+      "-show_entries",
+      "stream=codec_name,pix_fmt,width,height,nb_frames",
+      "-of",
+      "json",
+      "/tmp/wavez-95-revision-4-runtime/smoke.mp4"
+    ],
+    "ffprobe_exit_code": 0,
+    "stream": {
+      "codec_name": "h264",
+      "width": 16,
+      "height": 16,
+      "pix_fmt": "yuv420p",
+      "nb_frames": "2"
+    },
+    "stderr_empty": true
+  },
+  "host": "Fedora Linux 44 x86_64; preinstalled FFmpeg/ffprobe 8.1.3",
+  "rpm_package": "ffmpeg 8.1.3-1.fc44: RPM Fusion"
+}

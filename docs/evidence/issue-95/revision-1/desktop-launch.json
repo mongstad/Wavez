@@ -1,0 +1,17 @@
+{
+  "kio_exit_code": 0,
+  "kio_output": "",
+  "native_window": {
+    "pid": 1826813,
+    "caption": "Godot",
+    "active": true,
+    "width": 1448,
+    "height": 932
+  },
+  "launch_route": "KDE KIO executable opening; no physical double-click injected",
+  "package_files": [
+    "WAVEZ.x86_64",
+    "WAVEZ.pck"
+  ],
+  "native_close_completed": true
+}

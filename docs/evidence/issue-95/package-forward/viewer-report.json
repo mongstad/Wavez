@@ -1,0 +1,708 @@
+{
+  "checks": 92,
+  "failures": [],
+  "packaged": true,
+  "renderer": "forward_plus",
+  "scenes": [
+    {
+      "clocks": [
+        {
+          "alpha": 0.5,
+          "layers": [
+            {
+              "display_lod": "all recorded particles",
+              "id": "points",
+              "kind": "particles",
+              "scalar_time": 0.0,
+              "source_indices": [
+                0,
+                1
+              ],
+              "source_time": 0.0,
+              "status": "interpolated by ID",
+              "units": "example length",
+              "visible": true
+            }
+          ],
+          "missing_layers": [],
+          "positions": "interpolated by ID; unmatched held",
+          "requested_time": 0.25,
+          "scalar_time": 0.0,
+          "scalars": "held",
+          "source_indices": [
+            0,
+            1
+          ],
+          "source_times": [
+            0.0,
+            0.5
+          ],
+          "stale_layers": [],
+          "unavailable_channels": []
+        },
+        {
+          "alpha": 0.0,
+          "layers": [
+            {
+              "display_lod": "all recorded particles",
+              "id": "points",
+              "kind": "particles",
+              "scalar_time": 0.5,
+              "source_indices": [
+                1,
+                1
+              ],
+              "source_time": 0.5,
+              "status": "exact",
+              "units": "example length",
+              "visible": true
+            }
+          ],
+          "missing_layers": [],
+          "positions": "exact",
+          "requested_time": 0.5,
+          "scalar_time": 0.5,
+          "scalars": "exact",
+          "source_indices": [
+            1,
+            1
+          ],
+          "source_times": [
+            0.5,
+            0.5
+          ],
+          "stale_layers": [],
+          "unavailable_channels": []
+        },
+        {
+          "alpha": 0.0,
+          "layers": [
+            {
+              "display_lod": "all recorded particles",
+              "id": "points",
+              "kind": "particles",
+              "scalar_time": 1.0,
+              "source_indices": [
+                2,
+                2
+              ],
+              "source_time": 1.0,
+              "status": "exact",
+              "units": "example length",
+              "visible": true
+            }
+          ],
+          "missing_layers": [],
+          "positions": "exact",
+          "requested_time": 1.0,
+          "scalar_time": 1.0,
+          "scalars": "exact",
+          "source_indices": [
+            2,
+            2
+          ],
+          "source_times": [
+            1.0,
+            1.0
+          ],
+          "stale_layers": [],
+          "unavailable_channels": []
+        }
+      ],
+      "name": "particles",
+      "visible_pixel_samples": {
+        "points": 1183
+      }
+    },
+    {
+      "clocks": [
+        {
+          "layers": [
+            {
+              "channel": "amplitude",
+              "color_bounds": [
+                0.0,
+                1.0
+              ],
+              "color_compositing": "Forward+ linear framebuffer",
+              "color_mapping": {
+                "normalization": "linear",
+                "percentile_high": 99.0,
+                "percentile_low": 1.0,
+                "policy": "manual",
+                "source_channel": "",
+                "source_time": 0.0
+              },
+              "color_source_statistics": {
+                "finite": 385.0,
+                "maximum": 1.0,
+                "minimum": 0.000710174388842549,
+                "nonfinite": 0.0,
+                "nonpositive": 0.0
+              },
+              "display_lod": "float32 / stride 1",
+              "effective_ray_step": "max(requested step, ray length / 1024); early alpha stop .995",
+              "geometry": {
+                "centering": "node",
+                "origin": [
+                  -1.0,
+                  -0.75,
+                  -0.5
+                ],
+                "shape": [
+                  5.0,
+                  7.0,
+                  11.0
+                ],
+                "spacing": [
+                  0.2,
+                  0.25,
+                  0.25
+                ]
+              },
+              "id": "field",
+              "kind": "volume",
+              "numeric_precision": "float64 source",
+              "opacity_mapping": {
+                "lower": 0.0,
+                "mode": "linear",
+                "upper": 1.0
+              },
+              "source_indices": [
+                0
+              ],
+              "source_time": 0.0,
+              "status": "held",
+              "units": "dimensionless",
+              "visible": true
+            }
+          ],
+          "requested_time": 0.25
+        },
+        {
+          "layers": [
+            {
+              "channel": "amplitude",
+              "color_bounds": [
+                0.0,
+                1.0
+              ],
+              "color_compositing": "Forward+ linear framebuffer",
+              "color_mapping": {
+                "normalization": "linear",
+                "percentile_high": 99.0,
+                "percentile_low": 1.0,
+                "policy": "manual",
+                "source_channel": "",
+                "source_time": 0.0
+              },
+              "color_source_statistics": {
+                "finite": 385.0,
+                "maximum": 0.990049833749168,
+                "minimum": 0.000195490260146975,
+                "nonfinite": 0.0,
+                "nonpositive": 0.0
+              },
+              "display_lod": "float32 / stride 1",
+              "effective_ray_step": "max(requested step, ray length / 1024); early alpha stop .995",
+              "geometry": {
+                "centering": "node",
+                "origin": [
+                  -1.0,
+                  -0.75,
+                  -0.5
+                ],
+                "shape": [
+                  5.0,
+                  7.0,
+                  11.0
+                ],
+                "spacing": [
+                  0.2,
+                  0.25,
+                  0.25
+                ]
+              },
+              "id": "field",
+              "kind": "volume",
+              "numeric_precision": "float64 source",
+              "opacity_mapping": {
+                "lower": 0.0,
+                "mode": "linear",
+                "upper": 1.0
+              },
+              "source_indices": [
+                1
+              ],
+              "source_time": 0.5,
+              "status": "exact",
+              "units": "dimensionless",
+              "visible": true
+            }
+          ],
+          "requested_time": 0.5
+        },
+        {
+          "layers": [
+            {
+              "channel": "amplitude",
+              "color_bounds": [
+                0.0,
+                1.0
+              ],
+              "color_compositing": "Forward+ linear framebuffer",
+              "color_mapping": {
+                "normalization": "linear",
+                "percentile_high": 99.0,
+                "percentile_low": 1.0,
+                "policy": "manual",
+                "source_channel": "",
+                "source_time": 0.0
+              },
+              "color_source_statistics": {
+                "finite": 385.0,
+                "maximum": 0.960789439152323,
+                "minimum": 0.000044948192913572,
+                "nonfinite": 0.0,
+                "nonpositive": 0.0
+              },
+              "display_lod": "float32 / stride 1",
+              "effective_ray_step": "max(requested step, ray length / 1024); early alpha stop .995",
+              "geometry": {
+                "centering": "node",
+                "origin": [
+                  -1.0,
+                  -0.75,
+                  -0.5
+                ],
+                "shape": [
+                  5.0,
+                  7.0,
+                  11.0
+                ],
+                "spacing": [
+                  0.2,
+                  0.25,
+                  0.25
+                ]
+              },
+              "id": "field",
+              "kind": "volume",
+              "numeric_precision": "float64 source",
+              "opacity_mapping": {
+                "lower": 0.0,
+                "mode": "linear",
+                "upper": 1.0
+              },
+              "source_indices": [
+                2
+              ],
+              "source_time": 1.0,
+              "status": "exact",
+              "units": "dimensionless",
+              "visible": true
+            }
+          ],
+          "requested_time": 1.0
+        }
+      ],
+      "name": "field",
+      "visible_pixel_samples": {
+        "field": 15473
+      }
+    },
+    {
+      "clocks": [
+        {
+          "layers": [
+            {
+              "channel": "",
+              "display_lod": "full mesh",
+              "id": "triangle",
+              "kind": "mesh",
+              "source_indices": [
+                0,
+                1
+              ],
+              "source_time": 0.0,
+              "status": "interpolated",
+              "units": "example length",
+              "visible": true
+            }
+          ],
+          "requested_time": 0.25
+        },
+        {
+          "layers": [
+            {
+              "channel": "",
+              "display_lod": "full mesh",
+              "id": "triangle",
+              "kind": "mesh",
+              "source_indices": [
+                1,
+                1
+              ],
+              "source_time": 0.5,
+              "status": "exact",
+              "units": "example length",
+              "visible": true
+            }
+          ],
+          "requested_time": 0.5
+        },
+        {
+          "layers": [
+            {
+              "channel": "",
+              "display_lod": "full mesh",
+              "id": "triangle",
+              "kind": "mesh",
+              "source_indices": [
+                2,
+                2
+              ],
+              "source_time": 1.0,
+              "status": "exact",
+              "units": "example length",
+              "visible": true
+            }
+          ],
+          "requested_time": 1.0
+        }
+      ],
+      "name": "mesh",
+      "visible_pixel_samples": {
+        "triangle": 13520
+      }
+    },
+    {
+      "clocks": [
+        {
+          "alpha": 0.5,
+          "layers": [
+            {
+              "display_lod": "all recorded particles",
+              "id": "points",
+              "kind": "particles",
+              "scalar_time": 0.0,
+              "source_indices": [
+                0,
+                1
+              ],
+              "source_time": 0.0,
+              "status": "interpolated by ID",
+              "units": "example length",
+              "visible": true
+            },
+            {
+              "channel": "amplitude",
+              "color_bounds": [
+                0.0,
+                1.0
+              ],
+              "color_compositing": "Forward+ linear framebuffer",
+              "color_mapping": {
+                "normalization": "linear",
+                "percentile_high": 99.0,
+                "percentile_low": 1.0,
+                "policy": "manual",
+                "source_channel": "",
+                "source_time": 0.0
+              },
+              "color_source_statistics": {
+                "finite": 385.0,
+                "maximum": 1.0,
+                "minimum": 0.000710174388842549,
+                "nonfinite": 0.0,
+                "nonpositive": 0.0
+              },
+              "display_lod": "float32 / stride 1",
+              "effective_ray_step": "max(requested step, ray length / 1024); early alpha stop .995",
+              "geometry": {
+                "centering": "node",
+                "origin": [
+                  -1.0,
+                  -0.75,
+                  -0.5
+                ],
+                "shape": [
+                  5.0,
+                  7.0,
+                  11.0
+                ],
+                "spacing": [
+                  0.2,
+                  0.25,
+                  0.25
+                ]
+              },
+              "id": "field",
+              "kind": "volume",
+              "numeric_precision": "float64 source",
+              "opacity_mapping": {
+                "lower": 0.0,
+                "mode": "linear",
+                "upper": 1.0
+              },
+              "source_indices": [
+                0
+              ],
+              "source_time": 0.0,
+              "status": "held",
+              "units": "dimensionless",
+              "visible": true
+            },
+            {
+              "channel": "",
+              "display_lod": "full mesh",
+              "id": "triangle",
+              "kind": "mesh",
+              "source_indices": [
+                0,
+                0
+              ],
+              "source_time": 0.0,
+              "status": "static",
+              "units": "example length",
+              "visible": true
+            }
+          ],
+          "missing_layers": [],
+          "positions": "interpolated by ID; unmatched held",
+          "requested_time": 0.25,
+          "scalar_time": 0.0,
+          "scalars": "held",
+          "source_indices": [
+            0,
+            1
+          ],
+          "source_times": [
+            0.0,
+            0.5
+          ],
+          "stale_layers": [],
+          "unavailable_channels": []
+        },
+        {
+          "alpha": 0.0,
+          "layers": [
+            {
+              "display_lod": "all recorded particles",
+              "id": "points",
+              "kind": "particles",
+              "scalar_time": 0.5,
+              "source_indices": [
+                1,
+                1
+              ],
+              "source_time": 0.5,
+              "status": "exact",
+              "units": "example length",
+              "visible": true
+            },
+            {
+              "channel": "amplitude",
+              "color_bounds": [
+                0.0,
+                1.0
+              ],
+              "color_compositing": "Forward+ linear framebuffer",
+              "color_mapping": {
+                "normalization": "linear",
+                "percentile_high": 99.0,
+                "percentile_low": 1.0,
+                "policy": "manual",
+                "source_channel": "",
+                "source_time": 0.0
+              },
+              "color_source_statistics": {
+                "finite": 385.0,
+                "maximum": 1.0,
+                "minimum": 0.000710174388842549,
+                "nonfinite": 0.0,
+                "nonpositive": 0.0
+              },
+              "display_lod": "float32 / stride 1",
+              "effective_ray_step": "max(requested step, ray length / 1024); early alpha stop .995",
+              "geometry": {
+                "centering": "node",
+                "origin": [
+                  -1.0,
+                  -0.75,
+                  -0.5
+                ],
+                "shape": [
+                  5.0,
+                  7.0,
+                  11.0
+                ],
+                "spacing": [
+                  0.2,
+                  0.25,
+                  0.25
+                ]
+              },
+              "id": "field",
+              "kind": "volume",
+              "numeric_precision": "float64 source",
+              "opacity_mapping": {
+                "lower": 0.0,
+                "mode": "linear",
+                "upper": 1.0
+              },
+              "source_indices": [
+                0
+              ],
+              "source_time": 0.0,
+              "status": "held",
+              "units": "dimensionless",
+              "visible": true
+            },
+            {
+              "channel": "",
+              "display_lod": "full mesh",
+              "id": "triangle",
+              "kind": "mesh",
+              "source_indices": [
+                0,
+                0
+              ],
+              "source_time": 0.0,
+              "status": "static",
+              "units": "example length",
+              "visible": true
+            }
+          ],
+          "missing_layers": [],
+          "positions": "exact",
+          "requested_time": 0.5,
+          "scalar_time": 0.5,
+          "scalars": "exact",
+          "source_indices": [
+            1,
+            1
+          ],
+          "source_times": [
+            0.5,
+            0.5
+          ],
+          "stale_layers": [],
+          "unavailable_channels": []
+        },
+        {
+          "alpha": 0.0,
+          "layers": [
+            {
+              "display_lod": "all recorded particles",
+              "id": "points",
+              "kind": "particles",
+              "scalar_time": 1.0,
+              "source_indices": [
+                2,
+                2
+              ],
+              "source_time": 1.0,
+              "status": "exact",
+              "units": "example length",
+              "visible": true
+            },
+            {
+              "channel": "amplitude",
+              "color_bounds": [
+                0.0,
+                1.0
+              ],
+              "color_compositing": "Forward+ linear framebuffer",
+              "color_mapping": {
+                "normalization": "linear",
+                "percentile_high": 99.0,
+                "percentile_low": 1.0,
+                "policy": "manual",
+                "source_channel": "",
+                "source_time": 0.0
+              },
+              "color_source_statistics": {
+                "finite": 385.0,
+                "maximum": 0.960789439152323,
+                "minimum": 0.000044948192913572,
+                "nonfinite": 0.0,
+                "nonpositive": 0.0
+              },
+              "display_lod": "float32 / stride 1",
+              "effective_ray_step": "max(requested step, ray length / 1024); early alpha stop .995",
+              "geometry": {
+                "centering": "node",
+                "origin": [
+                  -1.0,
+                  -0.75,
+                  -0.5
+                ],
+                "shape": [
+                  5.0,
+                  7.0,
+                  11.0
+                ],
+                "spacing": [
+                  0.2,
+                  0.25,
+                  0.25
+                ]
+              },
+              "id": "field",
+              "kind": "volume",
+              "numeric_precision": "float64 source",
+              "opacity_mapping": {
+                "lower": 0.0,
+                "mode": "linear",
+                "upper": 1.0
+              },
+              "source_indices": [
+                1
+              ],
+              "source_time": 1.0,
+              "status": "exact",
+              "units": "dimensionless",
+              "visible": true
+            },
+            {
+              "channel": "",
+              "display_lod": "full mesh",
+              "id": "triangle",
+              "kind": "mesh",
+              "source_indices": [
+                0,
+                0
+              ],
+              "source_time": 0.0,
+              "status": "static",
+              "units": "example length",
+              "visible": true
+            }
+          ],
+          "missing_layers": [],
+          "positions": "exact",
+          "requested_time": 1.0,
+          "scalar_time": 1.0,
+          "scalars": "exact",
+          "source_indices": [
+            2,
+            2
+          ],
+          "source_times": [
+            1.0,
+            1.0
+          ],
+          "stale_layers": [],
+          "unavailable_channels": []
+        }
+      ],
+      "name": "combined",
+      "visible_pixel_samples": {
+        "field": 10819,
+        "points": 417,
+        "triangle": 5875
+      }
+    }
+  ]
+}
