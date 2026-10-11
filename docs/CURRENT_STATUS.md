@@ -1,5 +1,15 @@
 # Current status
 
+Issue #367 proposes candidate **v0.1.0.98**, based on accepted **v0.1.0.97** /
+owner-merged PR #373 (`c3475573878e7535174b1229b24d35eb6ae82e79`): Particle size
+now permits **0.01–8**, retains default **1.8**, and provides logarithmic travel,
+an exact numeric readout and thumb-double-click entry with validation/cancellation.
+Portable presets and native visual state synchronize the same precise value.
+Scientific payloads, additive blending, brightness/exposure/color and renderer
+policy remain unchanged. Owner review is pending. See [usage, dense Vulkan
+measurements, visibility limits and review steps](PARTICLE_SIZE.md). Historical
+review-time records below and the #360 filtering report are preserved as written.
+
 Accepted baseline for this renderer-policy change: **v0.1.0.96**,
 `eacdae866b017700e0919b263fdfd04c0f65bc27`, owner-merged PR #370. The repository's application identity is
 `viewer/project.godot` → `application/config/version`; see [version policy](VERSIONING.md).

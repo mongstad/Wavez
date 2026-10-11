@@ -28,6 +28,7 @@ Start with:
 - [LMB vertical-axis preference](docs/LMB_Y_INVERSION.md)
 - [Visibility-aware keyboard focus](docs/FOCUS_NAVIGATION.md)
 - [Editable value focus and replacement](docs/EDITABLE_VALUE_FOCUS.md)
+- [Fine particle size and exact numeric entry](docs/PARTICLE_SIZE.md)
 - [Exiting with active jobs](docs/EXIT_WITH_ACTIVE_JOBS.md)
 - [Close File without interrupting exports](docs/CLOSE_FILE.md)
 - [Linux release Window signal diagnostics](docs/ROOT_WINDOW_SIGNALS.md)
