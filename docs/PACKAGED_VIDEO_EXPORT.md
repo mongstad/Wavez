@@ -5,7 +5,8 @@ samples to temporary PNGs and uses external FFmpeg to publish MP4. The workflow,
 job schema and dependencies are identical with zero, one or many selections.
 Camera/orbit, timing, render appearance, legends, Jobs/background, cancellation
 and PNG retention keep their existing contracts. Issue #340 removes automatic
-scientific recipe processing from this visual workflow; owner review is pending.
+scientific recipe processing and Selection/Analysis overlays from this visual
+workflow; owner review is pending.
 
 ## Build and run
 
@@ -86,14 +87,13 @@ python tools/validate_packaged_video.py --godot /absolute/path/to/Godot \
 Repeat using `gl_compatibility` and new output directories. The fixture generator
 uses Python/NumPy; export processes are run with a blocking `python3` executable
 on PATH so any unintended video analysis dependency fails visibly. Tests also
-compare visible-marker pixels against an ordinary export and require invisible
-selection definitions to produce identical pixels.
+require visible/hidden particle, mesh, field and combined selections, and a
+populated Analysis plot, to produce pixels and timing identical to an equivalent
+ordinary export. Optional visual records must also remain identical.
 
-Focused marker addressing and independent scientific workflows:
+Independent scientific workflows:
 
 ```sh
-python tools/validate_video_markers.py --godot /absolute/path/to/Godot \
-  --output-dir /tmp/video-markers --renderer forward_plus
 python tools/validate_selections.py --godot /absolute/path/to/Godot \
   --output-dir /tmp/independent-selections --renderer headless
 python tools/validate_g4_matched.py --godot /absolute/path/to/Godot \
@@ -124,10 +124,13 @@ Before acceptance:
 3. Repeat with a mixed capture and legends off/on. Use independent Selection to
    create particle, mesh and field selections with Python/NumPy installed. Export
    again with the same video settings and Python unavailable: no new scientific
-   worker, recipe directory, quota field or mandatory JSON should appear. Visible
-   markers follow native display elements; sample-scoped markers expire. Check
+   worker, recipe directory, quota field or mandatory JSON should appear. Selection
+   highlights and Analysis plots must be absent from the MP4, while the interactive
+   highlights/results remain available. Compare against the zero-selection clip:
+   the ordinary visualization and legends must be identical. Check
    **Output → Advanced → Save per-frame inspection JSON** explicitly and confirm
-   visual records are written only then. See [marker semantics](VIDEO_EXPORT.md).
+   visual records are written only then, with no scientific results. See
+   [the video boundary](VIDEO_EXPORT.md).
 4. Verify independent Selection/Temporal Analysis, inspection save/restore and
    numerical results with Python/NumPy installed. Matched Views retains its explicit
    scientific recipe contract.

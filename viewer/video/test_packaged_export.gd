@@ -43,14 +43,26 @@ func run() -> void:
 		for definition in definitions:
 			control._request("define_selection",definition)
 			check(await wait_analysis(control),"Independent Selection defines "+definition.key)
-		check(await control.await_committed_overlay(),"Existing visible markers resolve before video")
+		check(await control.await_committed_overlay(),"Interactive Selection highlights resolve before video")
 		check(control.state.definitions.size() == definitions.size(),"Particle/mesh/field definitions remain independent")
+	if not selected.is_empty():check(control.overlay.drawn > 0,"Interactive Selection still draws its highlights")
+	if config.get("analysis",false):
+		var temporal = control.temporal
+		temporal.mode.select(2);temporal.start_time.text = "0";temporal.end_time.text = "2"
+		temporal.run_analysis()
+		var analysis_deadline := Time.get_ticks_msec()+30000
+		while (control.jobs.background_pending or control.jobs.busy()) and Time.get_ticks_msec()<analysis_deadline:await create_timer(.01).timeout
+		check(not temporal.summaries.is_empty() and not temporal.current_result.is_empty(),"Independent Analysis produces a real result before video")
+		check(not temporal.plot.data.is_empty(),"Independent Analysis retains a populated plot")
+		view.tools_ui.open("Temporal")
 	if config.get("hidden",false):
 		control.state.overlay.visible = false;control.overlay.visible = false
 	# Make Python unusable after independent setup. Video must not request it.
 	control.set_process(false);control.jobs.shutdown()
 	OS.set_environment("PATH",config.video_path)
 	var selection_before: Dictionary = control.state.snapshot()
+	var analysis_before: Array = control.temporal.summaries.duplicate(true)
+	var overlay_before: bool = control.overlay.visible
 	var menu: Dictionary = view.shell.commands.video;menu.popup.id_pressed.emit(menu.index)
 	var dialog = view.video_dialog
 	check(dialog.visible,"File / Export / Video opens production dialog")
@@ -93,7 +105,7 @@ func run() -> void:
 	var job: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(dialog.active_job_path))
 	check(job.capture_path == config.source and job.capture_path.is_absolute_path() and job.output_path.is_absolute_path(),"Absolute source/job/output paths survive launch")
 	check(job.inspection_sidecars == config.get("sidecars",false),"Only the explicit checkbox controls inspection records")
-	check(job.version == 1 and not job.has("inspection_path") and not job.has("output_quota_bytes"),"Video uses the ordinary schema without scientific recipes or quota")
+	check(job.version == 1 and not job.has("inspection_path") and not job.has("output_quota_bytes") and not job.has("presentation_markers"),"Video uses the ordinary schema without scientific recipes, markers or quota")
 	dialog.background_button.pressed.emit()
 	check(not dialog.visible and dialog.pid == pid and not FileAccess.file_exists(directory.path_join("cancel")),"Run in background retains the original worker")
 	view.shell.status_ui.open_jobs();view.shell.status_ui.job_rows["Video export"].open.pressed.emit()
@@ -135,6 +147,7 @@ func run() -> void:
 	check(metrics.runtime.rendering_method == RenderingServer.get_current_rendering_method(),"Child renderer matches parent")
 	check(not config.packaged or metrics.runtime.release,"Child uses release resources")
 	check(control.jobs.worker_pid < 0 and control.state.snapshot() == selection_before,"Video starts no parent scientific worker and preserves selections")
+	check(control.overlay.visible == overlay_before and control.temporal.summaries == analysis_before,"Video preserves interactive highlights and Analysis results")
 	check(not DirAccess.dir_exists_absolute(directory.path_join("recipe.inspection")),"No portable recipe assets are created")
 	Job.write_json(out.path_join("observed.json"),{"stages":observed,"worker_pid":pid})
 	finish(dialog)

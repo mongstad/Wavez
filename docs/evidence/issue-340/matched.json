@@ -9,15 +9,15 @@
         "--path",
         "/home/Nozba/Codex/Wavez/Wavez/viewer",
         "--log-file",
-        "/tmp/wavez-340-matched/left-input/godot.log",
+        "/tmp/wavez-340-revised-matched/left-input/godot.log",
         "--script",
         "analysis/test_render_state.gd",
         "--",
-        "--g4-render-fixture=/tmp/wavez-340-matched/left-input",
+        "--g4-render-fixture=/tmp/wavez-340-revised-matched/left-input",
         "--g4-render-visible"
       ],
       "exit_code": 0,
-      "seconds": 1.5467499710002812
+      "seconds": 1.5520279930005927
     },
     {
       "command": [
@@ -26,15 +26,15 @@
         "--path",
         "/home/Nozba/Codex/Wavez/Wavez/viewer",
         "--log-file",
-        "/tmp/wavez-340-matched/right-input/godot.log",
+        "/tmp/wavez-340-revised-matched/right-input/godot.log",
         "--script",
         "analysis/test_render_state.gd",
         "--",
-        "--g4-render-fixture=/tmp/wavez-340-matched/right-input",
+        "--g4-render-fixture=/tmp/wavez-340-revised-matched/right-input",
         "--g4-render-visible"
       ],
       "exit_code": 0,
-      "seconds": 1.556674108000152
+      "seconds": 1.4499103180005477
     },
     {
       "command": [
@@ -48,15 +48,15 @@
         "--audio-driver",
         "Dummy",
         "--log-file",
-        "/tmp/wavez-340-matched/native.log",
+        "/tmp/wavez-340-revised-matched/native.log",
         "--script",
         "analysis/test_matched_render.gd",
         "--",
-        "--matched-fixture=/tmp/wavez-340-matched",
+        "--matched-fixture=/tmp/wavez-340-revised-matched",
         "--render-pair"
       ],
       "exit_code": 0,
-      "seconds": 7.848072339999817
+      "seconds": 8.27813977400001
     }
   ],
   "checks": [

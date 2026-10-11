@@ -8,17 +8,16 @@ start a scientific worker, evaluate membership, force inspection JSON, or impose
 selection-specific output quota. MP4 encoding needs external FFmpeg; Python/NumPy
 is required separately for scientific Selection/Analysis, not ordinary video.
 
-Existing resolved selection highlight previews are a bounded presentation subset (at most
-512 markers). The job carries their colors and source-element addresses, not
-selection definitions, ROIs, groups or scientific results. Persistent particle and
-mesh vertex IDs follow the existing native display interpolation/hold policy.
-Anonymous rows, face rows/points and grid sample addresses disappear outside
-their original sample. Fixed probes retain
-their world location, and derived markers require the same displayed artifact.
-Hidden-layer, clipping and Show hidden selection settings retain their display
-meaning. The worker does not discover new ROI members, expand the preview subset,
-or infer scientific membership from pixels. Disabled/unresolved highlight previews at
-Start Export are absent. Use independent Selection/Analysis for exact membership.
+Selection and Analysis state, markers, highlights and plot overlays are excluded
+from File → Export → Video. Visible or hidden scientific selections and populated
+analysis results must produce the same frames as the equivalent ordinary view.
+No fixed-marker snapshot or marker-following logic is used. This boundary applies
+even when **Include enabled viewport legends** is checked; ordinary particle,
+field and mesh legends keep their existing visibility and channel settings.
+Selection and Analysis remain available in the interactive application, including
+independent numerical results and saved scientific inspections. Their end-to-end
+scientific validation is incomplete; MP4 output does not present their overlays
+as verified scientific information.
 
 Tools → Matched Views remains a deliberate scientific workflow. Its version-2
 jobs pin portable inspection v3 recipes and await scientific selection barriers;
@@ -151,9 +150,9 @@ focus. Only **Yes** requests cancellation after the current frame, or stops
 FFmpeg during encoding. **No**, Escape or closing the confirmation leaves the
 export running. Jobs cancellation uses the same confirmation. Repeated clicks
 do not send duplicate requests; completed jobs do not prompt. **Run in background** hides
-the dialog and is visible only while an export is preparing or running. All
+the dialog and is visible only while an export is running. All
 configuration controls remain visible but read-only during that time, including
-output Browse and selection quotas. Reopening through File → Export → Video or
+output Browse. Reopening through File → Export → Video or
 Jobs preserves the locked configuration. A late file-picker result cannot change
 an active job's output path.
 
@@ -165,11 +164,9 @@ remain read-only until their corresponding Custom mode is selected. The two
 secondary actions occupy the same position/width to limit layout movement.
 **Cancel** dismisses the idle/terminal dialog only; it never cancels the job.
 
-During selection-recipe preparation, confirmed **Cancel export** requests cancellation of
-the existing background analysis job before any renderer is launched. Controls
-remain locked until preparation ends or the worker exits; a terminal-looking
-progress message alone does not release an active worker's configuration. Closing
-the parent viewer still requests cancellation through the existing protocol.
+Controls remain locked until the render worker exits; a terminal-looking progress
+message alone does not release an active worker's configuration. Closing the
+parent viewer still requests cancellation through the existing protocol.
 See [the #125 validation and owner checks](VIDEO_EXPORT_LOCKS.md) and
 [confirmation validation](VIDEO_CANCEL_CONFIRMATION.md).
 The job directory retains `progress.json`,
@@ -205,7 +202,8 @@ suppresses trails even if their checkbox is enabled, as in the normal viewer.
 
 ## Architecture and installed Godot capabilities
 
-The worker uses the same scene reader and scientific state with offline timing.
+The ordinary video worker uses the same scene reader and ordinary visualization
+settings with offline timing. Selection/Analysis state is excluded.
 Interactive playback/preparation and realtime camera motion are disabled in the
 render instance. The output SubViewport owns the requested image dimensions.
 
@@ -331,8 +329,8 @@ The offline SubViewport now contains scientific scene content and eligible
 viewport legends only. **Include enabled viewport legends** gates particle,
 field and mesh legends according to their saved visibility and channel state;
 turning it off hides those legends even if the interactive viewer shows them.
-Independent scene guides, probe markers and selection annotations retain their
-own settings. The exported legends use the existing viewport text and color
+Ordinary scene guides retain their own settings. Selection highlights and
+Analysis overlays are excluded regardless of the legends option. The exported legends use the existing viewport text and color
 mapping, positioned against the full output frame. See [Layer legends](LAYER_LEGENDS.md).
 
 Menus, navigation controls, the right workspace dock, transport, timeline,

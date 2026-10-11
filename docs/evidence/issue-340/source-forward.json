@@ -48,7 +48,7 @@
     },
     {
       "ok": true,
-      "label": "particles-off: Video uses the ordinary schema without scientific recipes or quota"
+      "label": "particles-off: Video uses the ordinary schema without scientific recipes, markers or quota"
     },
     {
       "ok": true,
@@ -104,6 +104,10 @@
     },
     {
       "ok": true,
+      "label": "particles-off: Video preserves interactive highlights and Analysis results"
+    },
+    {
+      "ok": true,
       "label": "particles-off: No portable recipe assets are created"
     },
     {
@@ -121,6 +125,10 @@
     {
       "ok": true,
       "label": "particles-off: optional visual records contain no scientific selection results"
+    },
+    {
+      "ok": true,
+      "label": "particles-off: no carried selection marker state in video trace"
     },
     {
       "ok": true,
@@ -172,7 +180,7 @@
     },
     {
       "ok": true,
-      "label": "particles-on: Video uses the ordinary schema without scientific recipes or quota"
+      "label": "particles-on: Video uses the ordinary schema without scientific recipes, markers or quota"
     },
     {
       "ok": true,
@@ -228,6 +236,10 @@
     },
     {
       "ok": true,
+      "label": "particles-on: Video preserves interactive highlights and Analysis results"
+    },
+    {
+      "ok": true,
       "label": "particles-on: No portable recipe assets are created"
     },
     {
@@ -248,7 +260,143 @@
     },
     {
       "ok": true,
+      "label": "particles-on: no carried selection marker state in video trace"
+    },
+    {
+      "ok": true,
       "label": "particles-on: unusable Python is never invoked by video"
+    },
+    {
+      "ok": true,
+      "label": "particles-legends: parent exits with only expected diagnostics"
+    },
+    {
+      "ok": true,
+      "label": "particles-legends: Production viewer opens WVZ1"
+    },
+    {
+      "ok": true,
+      "label": "particles-legends: Expected source or template executable"
+    },
+    {
+      "ok": true,
+      "label": "particles-legends: File / Export / Video opens production dialog"
+    },
+    {
+      "ok": true,
+      "label": "particles-legends: Advanced remains optional with zero/one/many selections"
+    },
+    {
+      "ok": true,
+      "label": "particles-legends: Only development passes a project path override"
+    },
+    {
+      "ok": true,
+      "label": "particles-legends: Start Export launches secondary process"
+    },
+    {
+      "ok": true,
+      "label": "particles-legends: Launch diagnostics identify the current executable"
+    },
+    {
+      "ok": true,
+      "label": "particles-legends: Correct launch arguments and renderer are retained"
+    },
+    {
+      "ok": true,
+      "label": "particles-legends: Absolute source/job/output paths survive launch"
+    },
+    {
+      "ok": true,
+      "label": "particles-legends: Only the explicit checkbox controls inspection records"
+    },
+    {
+      "ok": true,
+      "label": "particles-legends: Video uses the ordinary schema without scientific recipes, markers or quota"
+    },
+    {
+      "ok": true,
+      "label": "particles-legends: Run in background retains the original worker"
+    },
+    {
+      "ok": true,
+      "label": "particles-legends: Jobs reopens the same export"
+    },
+    {
+      "ok": true,
+      "label": "particles-legends: Worker terminates within timeout"
+    },
+    {
+      "ok": true,
+      "label": "particles-legends: Parent observes worker progress"
+    },
+    {
+      "ok": true,
+      "label": "particles-legends: Expected terminal state"
+    },
+    {
+      "ok": true,
+      "label": "particles-legends: Requested cancellation stage was observed"
+    },
+    {
+      "ok": true,
+      "label": "particles-legends: MP4 is published"
+    },
+    {
+      "ok": true,
+      "label": "particles-legends: Successful export cleans staged PNGs"
+    },
+    {
+      "ok": true,
+      "label": "particles-legends: Worker diagnostics are retained"
+    },
+    {
+      "ok": true,
+      "label": "particles-legends: Child uses the same packaged or development executable"
+    },
+    {
+      "ok": true,
+      "label": "particles-legends: Child renderer matches parent"
+    },
+    {
+      "ok": true,
+      "label": "particles-legends: Child uses release resources"
+    },
+    {
+      "ok": true,
+      "label": "particles-legends: Video starts no parent scientific worker and preserves selections"
+    },
+    {
+      "ok": true,
+      "label": "particles-legends: Video preserves interactive highlights and Analysis results"
+    },
+    {
+      "ok": true,
+      "label": "particles-legends: No portable recipe assets are created"
+    },
+    {
+      "ok": true,
+      "label": "particles-legends: clean worker log apart from retained known encoder cleanup diagnostic"
+    },
+    {
+      "ok": true,
+      "label": "particles-legends: ffprobe verifies H.264, resolution, FPS and two frames"
+    },
+    {
+      "ok": true,
+      "label": "particles-legends: inspection records only when explicitly requested"
+    },
+    {
+      "ok": true,
+      "label": "particles-legends: optional visual records contain no scientific selection results"
+    },
+    {
+      "ok": true,
+      "label": "particles-legends: no carried selection marker state in video trace"
+    },
+    {
+      "ok": true,
+      "label": "particles-legends: unusable Python is never invoked by video"
     },
     {
       "ok": true,
@@ -296,7 +444,7 @@
     },
     {
       "ok": true,
-      "label": "mixed-off: Video uses the ordinary schema without scientific recipes or quota"
+      "label": "mixed-off: Video uses the ordinary schema without scientific recipes, markers or quota"
     },
     {
       "ok": true,
@@ -352,6 +500,10 @@
     },
     {
       "ok": true,
+      "label": "mixed-off: Video preserves interactive highlights and Analysis results"
+    },
+    {
+      "ok": true,
       "label": "mixed-off: No portable recipe assets are created"
     },
     {
@@ -369,6 +521,10 @@
     {
       "ok": true,
       "label": "mixed-off: optional visual records contain no scientific selection results"
+    },
+    {
+      "ok": true,
+      "label": "mixed-off: no carried selection marker state in video trace"
     },
     {
       "ok": true,
@@ -420,7 +576,7 @@
     },
     {
       "ok": true,
-      "label": "mixed-on: Video uses the ordinary schema without scientific recipes or quota"
+      "label": "mixed-on: Video uses the ordinary schema without scientific recipes, markers or quota"
     },
     {
       "ok": true,
@@ -476,6 +632,10 @@
     },
     {
       "ok": true,
+      "label": "mixed-on: Video preserves interactive highlights and Analysis results"
+    },
+    {
+      "ok": true,
       "label": "mixed-on: No portable recipe assets are created"
     },
     {
@@ -493,6 +653,10 @@
     {
       "ok": true,
       "label": "mixed-on: optional visual records contain no scientific selection results"
+    },
+    {
+      "ok": true,
+      "label": "mixed-on: no carried selection marker state in video trace"
     },
     {
       "ok": true,
@@ -520,11 +684,15 @@
     },
     {
       "ok": true,
-      "label": "selection-particle: Existing visible markers resolve before video"
+      "label": "selection-particle: Interactive Selection highlights resolve before video"
     },
     {
       "ok": true,
       "label": "selection-particle: Particle/mesh/field definitions remain independent"
+    },
+    {
+      "ok": true,
+      "label": "selection-particle: Interactive Selection still draws its highlights"
     },
     {
       "ok": true,
@@ -560,7 +728,7 @@
     },
     {
       "ok": true,
-      "label": "selection-particle: Video uses the ordinary schema without scientific recipes or quota"
+      "label": "selection-particle: Video uses the ordinary schema without scientific recipes, markers or quota"
     },
     {
       "ok": true,
@@ -616,6 +784,10 @@
     },
     {
       "ok": true,
+      "label": "selection-particle: Video preserves interactive highlights and Analysis results"
+    },
+    {
+      "ok": true,
       "label": "selection-particle: No portable recipe assets are created"
     },
     {
@@ -636,7 +808,7 @@
     },
     {
       "ok": true,
-      "label": "selection-particle: particle marker follows displayed ID across sample brackets"
+      "label": "selection-particle: no carried selection marker state in video trace"
     },
     {
       "ok": true,
@@ -664,11 +836,15 @@
     },
     {
       "ok": true,
-      "label": "selection-hidden: Existing visible markers resolve before video"
+      "label": "selection-hidden: Interactive Selection highlights resolve before video"
     },
     {
       "ok": true,
       "label": "selection-hidden: Particle/mesh/field definitions remain independent"
+    },
+    {
+      "ok": true,
+      "label": "selection-hidden: Interactive Selection still draws its highlights"
     },
     {
       "ok": true,
@@ -704,7 +880,7 @@
     },
     {
       "ok": true,
-      "label": "selection-hidden: Video uses the ordinary schema without scientific recipes or quota"
+      "label": "selection-hidden: Video uses the ordinary schema without scientific recipes, markers or quota"
     },
     {
       "ok": true,
@@ -760,6 +936,10 @@
     },
     {
       "ok": true,
+      "label": "selection-hidden: Video preserves interactive highlights and Analysis results"
+    },
+    {
+      "ok": true,
       "label": "selection-hidden: No portable recipe assets are created"
     },
     {
@@ -777,6 +957,10 @@
     {
       "ok": true,
       "label": "selection-hidden: optional visual records contain no scientific selection results"
+    },
+    {
+      "ok": true,
+      "label": "selection-hidden: no carried selection marker state in video trace"
     },
     {
       "ok": true,
@@ -804,11 +988,15 @@
     },
     {
       "ok": true,
-      "label": "selection-mesh: Existing visible markers resolve before video"
+      "label": "selection-mesh: Interactive Selection highlights resolve before video"
     },
     {
       "ok": true,
       "label": "selection-mesh: Particle/mesh/field definitions remain independent"
+    },
+    {
+      "ok": true,
+      "label": "selection-mesh: Interactive Selection still draws its highlights"
     },
     {
       "ok": true,
@@ -844,7 +1032,7 @@
     },
     {
       "ok": true,
-      "label": "selection-mesh: Video uses the ordinary schema without scientific recipes or quota"
+      "label": "selection-mesh: Video uses the ordinary schema without scientific recipes, markers or quota"
     },
     {
       "ok": true,
@@ -900,6 +1088,10 @@
     },
     {
       "ok": true,
+      "label": "selection-mesh: Video preserves interactive highlights and Analysis results"
+    },
+    {
+      "ok": true,
       "label": "selection-mesh: No portable recipe assets are created"
     },
     {
@@ -920,7 +1112,7 @@
     },
     {
       "ok": true,
-      "label": "selection-mesh: mesh marker follows displayed source vertex"
+      "label": "selection-mesh: no carried selection marker state in video trace"
     },
     {
       "ok": true,
@@ -948,11 +1140,15 @@
     },
     {
       "ok": true,
-      "label": "selection-field: Existing visible markers resolve before video"
+      "label": "selection-field: Interactive Selection highlights resolve before video"
     },
     {
       "ok": true,
       "label": "selection-field: Particle/mesh/field definitions remain independent"
+    },
+    {
+      "ok": true,
+      "label": "selection-field: Interactive Selection still draws its highlights"
     },
     {
       "ok": true,
@@ -988,7 +1184,7 @@
     },
     {
       "ok": true,
-      "label": "selection-field: Video uses the ordinary schema without scientific recipes or quota"
+      "label": "selection-field: Video uses the ordinary schema without scientific recipes, markers or quota"
     },
     {
       "ok": true,
@@ -1044,6 +1240,10 @@
     },
     {
       "ok": true,
+      "label": "selection-field: Video preserves interactive highlights and Analysis results"
+    },
+    {
+      "ok": true,
       "label": "selection-field: No portable recipe assets are created"
     },
     {
@@ -1064,7 +1264,7 @@
     },
     {
       "ok": true,
-      "label": "selection-field: native grid address expires outside its source sample"
+      "label": "selection-field: no carried selection marker state in video trace"
     },
     {
       "ok": true,
@@ -1100,11 +1300,15 @@
     },
     {
       "ok": true,
-      "label": "selection-all: Existing visible markers resolve before video"
+      "label": "selection-all: Interactive Selection highlights resolve before video"
     },
     {
       "ok": true,
       "label": "selection-all: Particle/mesh/field definitions remain independent"
+    },
+    {
+      "ok": true,
+      "label": "selection-all: Interactive Selection still draws its highlights"
     },
     {
       "ok": true,
@@ -1140,7 +1344,7 @@
     },
     {
       "ok": true,
-      "label": "selection-all: Video uses the ordinary schema without scientific recipes or quota"
+      "label": "selection-all: Video uses the ordinary schema without scientific recipes, markers or quota"
     },
     {
       "ok": true,
@@ -1196,6 +1400,10 @@
     },
     {
       "ok": true,
+      "label": "selection-all: Video preserves interactive highlights and Analysis results"
+    },
+    {
+      "ok": true,
       "label": "selection-all: No portable recipe assets are created"
     },
     {
@@ -1216,15 +1424,7 @@
     },
     {
       "ok": true,
-      "label": "selection-all: particle marker follows displayed ID across sample brackets"
-    },
-    {
-      "ok": true,
-      "label": "selection-all: mesh marker follows displayed source vertex"
-    },
-    {
-      "ok": true,
-      "label": "selection-all: native grid address expires outside its source sample"
+      "label": "selection-all: no carried selection marker state in video trace"
     },
     {
       "ok": true,
@@ -1252,11 +1452,15 @@
     },
     {
       "ok": true,
-      "label": "selection-optional: Existing visible markers resolve before video"
+      "label": "selection-optional: Interactive Selection highlights resolve before video"
     },
     {
       "ok": true,
       "label": "selection-optional: Particle/mesh/field definitions remain independent"
+    },
+    {
+      "ok": true,
+      "label": "selection-optional: Interactive Selection still draws its highlights"
     },
     {
       "ok": true,
@@ -1292,7 +1496,7 @@
     },
     {
       "ok": true,
-      "label": "selection-optional: Video uses the ordinary schema without scientific recipes or quota"
+      "label": "selection-optional: Video uses the ordinary schema without scientific recipes, markers or quota"
     },
     {
       "ok": true,
@@ -1348,6 +1552,10 @@
     },
     {
       "ok": true,
+      "label": "selection-optional: Video preserves interactive highlights and Analysis results"
+    },
+    {
+      "ok": true,
       "label": "selection-optional: No portable recipe assets are created"
     },
     {
@@ -1368,7 +1576,7 @@
     },
     {
       "ok": true,
-      "label": "selection-optional: particle marker follows displayed ID across sample brackets"
+      "label": "selection-optional: no carried selection marker state in video trace"
     },
     {
       "ok": true,
@@ -1420,7 +1628,7 @@
     },
     {
       "ok": true,
-      "label": "ordinary-optional: Video uses the ordinary schema without scientific recipes or quota"
+      "label": "ordinary-optional: Video uses the ordinary schema without scientific recipes, markers or quota"
     },
     {
       "ok": true,
@@ -1476,6 +1684,10 @@
     },
     {
       "ok": true,
+      "label": "ordinary-optional: Video preserves interactive highlights and Analysis results"
+    },
+    {
+      "ok": true,
       "label": "ordinary-optional: No portable recipe assets are created"
     },
     {
@@ -1496,7 +1708,171 @@
     },
     {
       "ok": true,
+      "label": "ordinary-optional: no carried selection marker state in video trace"
+    },
+    {
+      "ok": true,
       "label": "ordinary-optional: unusable Python is never invoked by video"
+    },
+    {
+      "ok": true,
+      "label": "analysis-result: parent exits with only expected diagnostics"
+    },
+    {
+      "ok": true,
+      "label": "analysis-result: Production viewer opens WVZ1"
+    },
+    {
+      "ok": true,
+      "label": "analysis-result: Expected source or template executable"
+    },
+    {
+      "ok": true,
+      "label": "analysis-result: Independent Analysis binds without repository files"
+    },
+    {
+      "ok": true,
+      "label": "analysis-result: Independent Selection defines particle"
+    },
+    {
+      "ok": true,
+      "label": "analysis-result: Interactive Selection highlights resolve before video"
+    },
+    {
+      "ok": true,
+      "label": "analysis-result: Particle/mesh/field definitions remain independent"
+    },
+    {
+      "ok": true,
+      "label": "analysis-result: Interactive Selection still draws its highlights"
+    },
+    {
+      "ok": true,
+      "label": "analysis-result: Independent Analysis produces a real result before video"
+    },
+    {
+      "ok": true,
+      "label": "analysis-result: Independent Analysis retains a populated plot"
+    },
+    {
+      "ok": true,
+      "label": "analysis-result: File / Export / Video opens production dialog"
+    },
+    {
+      "ok": true,
+      "label": "analysis-result: Advanced remains optional with zero/one/many selections"
+    },
+    {
+      "ok": true,
+      "label": "analysis-result: Only development passes a project path override"
+    },
+    {
+      "ok": true,
+      "label": "analysis-result: Start Export launches secondary process"
+    },
+    {
+      "ok": true,
+      "label": "analysis-result: Launch diagnostics identify the current executable"
+    },
+    {
+      "ok": true,
+      "label": "analysis-result: Correct launch arguments and renderer are retained"
+    },
+    {
+      "ok": true,
+      "label": "analysis-result: Absolute source/job/output paths survive launch"
+    },
+    {
+      "ok": true,
+      "label": "analysis-result: Only the explicit checkbox controls inspection records"
+    },
+    {
+      "ok": true,
+      "label": "analysis-result: Video uses the ordinary schema without scientific recipes, markers or quota"
+    },
+    {
+      "ok": true,
+      "label": "analysis-result: Run in background retains the original worker"
+    },
+    {
+      "ok": true,
+      "label": "analysis-result: Jobs reopens the same export"
+    },
+    {
+      "ok": true,
+      "label": "analysis-result: Worker terminates within timeout"
+    },
+    {
+      "ok": true,
+      "label": "analysis-result: Parent observes worker progress"
+    },
+    {
+      "ok": true,
+      "label": "analysis-result: Expected terminal state"
+    },
+    {
+      "ok": true,
+      "label": "analysis-result: Requested cancellation stage was observed"
+    },
+    {
+      "ok": true,
+      "label": "analysis-result: MP4 is published"
+    },
+    {
+      "ok": true,
+      "label": "analysis-result: Successful export cleans staged PNGs"
+    },
+    {
+      "ok": true,
+      "label": "analysis-result: Worker diagnostics are retained"
+    },
+    {
+      "ok": true,
+      "label": "analysis-result: Child uses the same packaged or development executable"
+    },
+    {
+      "ok": true,
+      "label": "analysis-result: Child renderer matches parent"
+    },
+    {
+      "ok": true,
+      "label": "analysis-result: Child uses release resources"
+    },
+    {
+      "ok": true,
+      "label": "analysis-result: Video starts no parent scientific worker and preserves selections"
+    },
+    {
+      "ok": true,
+      "label": "analysis-result: Video preserves interactive highlights and Analysis results"
+    },
+    {
+      "ok": true,
+      "label": "analysis-result: No portable recipe assets are created"
+    },
+    {
+      "ok": true,
+      "label": "analysis-result: clean worker log apart from retained known encoder cleanup diagnostic"
+    },
+    {
+      "ok": true,
+      "label": "analysis-result: ffprobe verifies H.264, resolution, FPS and two frames"
+    },
+    {
+      "ok": true,
+      "label": "analysis-result: inspection records only when explicitly requested"
+    },
+    {
+      "ok": true,
+      "label": "analysis-result: optional visual records contain no scientific selection results"
+    },
+    {
+      "ok": true,
+      "label": "analysis-result: no carried selection marker state in video trace"
+    },
+    {
+      "ok": true,
+      "label": "analysis-result: unusable Python is never invoked by video"
     },
     {
       "ok": true,
@@ -1544,7 +1920,7 @@
     },
     {
       "ok": true,
-      "label": "cancel-rendering: Video uses the ordinary schema without scientific recipes or quota"
+      "label": "cancel-rendering: Video uses the ordinary schema without scientific recipes, markers or quota"
     },
     {
       "ok": true,
@@ -1604,6 +1980,10 @@
     },
     {
       "ok": true,
+      "label": "cancel-rendering: Video preserves interactive highlights and Analysis results"
+    },
+    {
+      "ok": true,
       "label": "cancel-rendering: No portable recipe assets are created"
     },
     {
@@ -1660,7 +2040,7 @@
     },
     {
       "ok": true,
-      "label": "cancel-encoding: Video uses the ordinary schema without scientific recipes or quota"
+      "label": "cancel-encoding: Video uses the ordinary schema without scientific recipes, markers or quota"
     },
     {
       "ok": true,
@@ -1720,6 +2100,10 @@
     },
     {
       "ok": true,
+      "label": "cancel-encoding: Video preserves interactive highlights and Analysis results"
+    },
+    {
+      "ok": true,
       "label": "cancel-encoding: No portable recipe assets are created"
     },
     {
@@ -1776,7 +2160,7 @@
     },
     {
       "ok": true,
-      "label": "failed-encoder: Video uses the ordinary schema without scientific recipes or quota"
+      "label": "failed-encoder: Video uses the ordinary schema without scientific recipes, markers or quota"
     },
     {
       "ok": true,
@@ -1829,6 +2213,10 @@
     {
       "ok": true,
       "label": "failed-encoder: Video starts no parent scientific worker and preserves selections"
+    },
+    {
+      "ok": true,
+      "label": "failed-encoder: Video preserves interactive highlights and Analysis results"
     },
     {
       "ok": true,
@@ -1920,7 +2308,7 @@
     },
     {
       "ok": true,
-      "label": "parent-shutdown: Video uses the ordinary schema without scientific recipes or quota"
+      "label": "parent-shutdown: Video uses the ordinary schema without scientific recipes, markers or quota"
     },
     {
       "ok": true,
@@ -1960,11 +2348,63 @@
     },
     {
       "ok": true,
-      "label": "Visible carried markers change exported pixels"
+      "label": "selection-particle: active Selection/Analysis does not change exported pixels"
     },
     {
       "ok": true,
-      "label": "Invisible selection definitions do not change video pixels"
+      "label": "selection-particle: scientific session state does not change camera/sample/timing"
+    },
+    {
+      "ok": true,
+      "label": "selection-hidden: active Selection/Analysis does not change exported pixels"
+    },
+    {
+      "ok": true,
+      "label": "selection-hidden: scientific session state does not change camera/sample/timing"
+    },
+    {
+      "ok": true,
+      "label": "selection-mesh: active Selection/Analysis does not change exported pixels"
+    },
+    {
+      "ok": true,
+      "label": "selection-mesh: scientific session state does not change camera/sample/timing"
+    },
+    {
+      "ok": true,
+      "label": "selection-field: active Selection/Analysis does not change exported pixels"
+    },
+    {
+      "ok": true,
+      "label": "selection-field: scientific session state does not change camera/sample/timing"
+    },
+    {
+      "ok": true,
+      "label": "selection-all: active Selection/Analysis does not change exported pixels"
+    },
+    {
+      "ok": true,
+      "label": "selection-all: scientific session state does not change camera/sample/timing"
+    },
+    {
+      "ok": true,
+      "label": "selection-optional: active Selection/Analysis does not change exported pixels"
+    },
+    {
+      "ok": true,
+      "label": "selection-optional: scientific session state does not change camera/sample/timing"
+    },
+    {
+      "ok": true,
+      "label": "selection-optional: optional records are independent of selections"
+    },
+    {
+      "ok": true,
+      "label": "analysis-result: active Selection/Analysis does not change exported pixels"
+    },
+    {
+      "ok": true,
+      "label": "analysis-result: scientific session state does not change camera/sample/timing"
     }
   ],
   "runs": [
@@ -2011,7 +2451,7 @@
           "ok": true
         },
         {
-          "label": "Video uses the ordinary schema without scientific recipes or quota",
+          "label": "Video uses the ordinary schema without scientific recipes, markers or quota",
           "ok": true
         },
         {
@@ -2067,20 +2507,24 @@
           "ok": true
         },
         {
+          "label": "Video preserves interactive highlights and Analysis results",
+          "ok": true
+        },
+        {
           "label": "No portable recipe assets are created",
           "ok": true
         }
       ],
-      "directory": "/tmp/wavez-340-final-source-forward/particles-off/.wavez-export-1791703902-2624004",
+      "directory": "/tmp/wavez-340-revised-source-forward/particles-off/.wavez-export-1791704846-2665796",
       "message": "Complete \u2014 2 / 2 frames rendered (100%)\nElapsed: 00:00:00\nEstimated remaining: 00:00:00",
       "progress": {
         "current_frame": 2.0,
-        "elapsed_seconds": 0.615,
+        "elapsed_seconds": 0.617,
         "encoder_pid": -1.0,
-        "intermediate_directory": "/tmp/wavez-340-final-source-forward/particles-off/.wavez-export-1791703902-2624004",
-        "message": "Saved /tmp/wavez-340-final-source-forward/particles-off/result.mp4",
-        "output_path": "/tmp/wavez-340-final-source-forward/particles-off/result.mp4",
-        "renderer_pid": 151711.0,
+        "intermediate_directory": "/tmp/wavez-340-revised-source-forward/particles-off/.wavez-export-1791704846-2665796",
+        "message": "Saved /tmp/wavez-340-revised-source-forward/particles-off/result.mp4",
+        "output_path": "/tmp/wavez-340-revised-source-forward/particles-off/result.mp4",
+        "renderer_pid": 194081.0,
         "stage": "complete",
         "total_frames": 2.0
       },
@@ -2130,7 +2574,7 @@
           "ok": true
         },
         {
-          "label": "Video uses the ordinary schema without scientific recipes or quota",
+          "label": "Video uses the ordinary schema without scientific recipes, markers or quota",
           "ok": true
         },
         {
@@ -2186,20 +2630,24 @@
           "ok": true
         },
         {
+          "label": "Video preserves interactive highlights and Analysis results",
+          "ok": true
+        },
+        {
           "label": "No portable recipe assets are created",
           "ok": true
         }
       ],
-      "directory": "/tmp/wavez-340-final-source-forward/particles-on/.wavez-export-1791703908-2367635",
+      "directory": "/tmp/wavez-340-revised-source-forward/particles-on/.wavez-export-1791704851-2415952",
       "message": "Complete \u2014 2 / 2 frames rendered (100%)\nElapsed: 00:00:00\nEstimated remaining: 00:00:00",
       "progress": {
         "current_frame": 2.0,
-        "elapsed_seconds": 0.557,
+        "elapsed_seconds": 0.588,
         "encoder_pid": -1.0,
-        "intermediate_directory": "/tmp/wavez-340-final-source-forward/particles-on/.wavez-export-1791703908-2367635",
-        "message": "Saved /tmp/wavez-340-final-source-forward/particles-on/result.mp4",
-        "output_path": "/tmp/wavez-340-final-source-forward/particles-on/result.mp4",
-        "renderer_pid": 152085.0,
+        "intermediate_directory": "/tmp/wavez-340-revised-source-forward/particles-on/.wavez-export-1791704851-2415952",
+        "message": "Saved /tmp/wavez-340-revised-source-forward/particles-on/result.mp4",
+        "output_path": "/tmp/wavez-340-revised-source-forward/particles-on/result.mp4",
+        "renderer_pid": 194901.0,
         "stage": "complete",
         "total_frames": 2.0
       },
@@ -2249,7 +2697,7 @@
           "ok": true
         },
         {
-          "label": "Video uses the ordinary schema without scientific recipes or quota",
+          "label": "Video uses the ordinary schema without scientific recipes, markers or quota",
           "ok": true
         },
         {
@@ -2305,20 +2753,147 @@
           "ok": true
         },
         {
+          "label": "Video preserves interactive highlights and Analysis results",
+          "ok": true
+        },
+        {
           "label": "No portable recipe assets are created",
           "ok": true
         }
       ],
-      "directory": "/tmp/wavez-340-final-source-forward/mixed-off/.wavez-export-1791703913-2585991",
+      "directory": "/tmp/wavez-340-revised-source-forward/particles-legends/.wavez-export-1791704857-2384450",
       "message": "Complete \u2014 2 / 2 frames rendered (100%)\nElapsed: 00:00:00\nEstimated remaining: 00:00:00",
       "progress": {
         "current_frame": 2.0,
-        "elapsed_seconds": 0.769,
+        "elapsed_seconds": 0.647,
         "encoder_pid": -1.0,
-        "intermediate_directory": "/tmp/wavez-340-final-source-forward/mixed-off/.wavez-export-1791703913-2585991",
-        "message": "Saved /tmp/wavez-340-final-source-forward/mixed-off/result.mp4",
-        "output_path": "/tmp/wavez-340-final-source-forward/mixed-off/result.mp4",
-        "renderer_pid": 152480.0,
+        "intermediate_directory": "/tmp/wavez-340-revised-source-forward/particles-legends/.wavez-export-1791704857-2384450",
+        "message": "Saved /tmp/wavez-340-revised-source-forward/particles-legends/result.mp4",
+        "output_path": "/tmp/wavez-340-revised-source-forward/particles-legends/result.mp4",
+        "renderer_pid": 195617.0,
+        "stage": "complete",
+        "total_frames": 2.0
+      },
+      "name": "particles-legends",
+      "known_encoder_cleanup_diagnostics": []
+    },
+    {
+      "checks": [
+        {
+          "label": "Production viewer opens WVZ1",
+          "ok": true
+        },
+        {
+          "label": "Expected source or template executable",
+          "ok": true
+        },
+        {
+          "label": "File / Export / Video opens production dialog",
+          "ok": true
+        },
+        {
+          "label": "Advanced remains optional with zero/one/many selections",
+          "ok": true
+        },
+        {
+          "label": "Only development passes a project path override",
+          "ok": true
+        },
+        {
+          "label": "Start Export launches secondary process",
+          "ok": true
+        },
+        {
+          "label": "Launch diagnostics identify the current executable",
+          "ok": true
+        },
+        {
+          "label": "Correct launch arguments and renderer are retained",
+          "ok": true
+        },
+        {
+          "label": "Absolute source/job/output paths survive launch",
+          "ok": true
+        },
+        {
+          "label": "Only the explicit checkbox controls inspection records",
+          "ok": true
+        },
+        {
+          "label": "Video uses the ordinary schema without scientific recipes, markers or quota",
+          "ok": true
+        },
+        {
+          "label": "Run in background retains the original worker",
+          "ok": true
+        },
+        {
+          "label": "Jobs reopens the same export",
+          "ok": true
+        },
+        {
+          "label": "Worker terminates within timeout",
+          "ok": true
+        },
+        {
+          "label": "Parent observes worker progress",
+          "ok": true
+        },
+        {
+          "label": "Expected terminal state",
+          "ok": true
+        },
+        {
+          "label": "Requested cancellation stage was observed",
+          "ok": true
+        },
+        {
+          "label": "MP4 is published",
+          "ok": true
+        },
+        {
+          "label": "Successful export cleans staged PNGs",
+          "ok": true
+        },
+        {
+          "label": "Worker diagnostics are retained",
+          "ok": true
+        },
+        {
+          "label": "Child uses the same packaged or development executable",
+          "ok": true
+        },
+        {
+          "label": "Child renderer matches parent",
+          "ok": true
+        },
+        {
+          "label": "Child uses release resources",
+          "ok": true
+        },
+        {
+          "label": "Video starts no parent scientific worker and preserves selections",
+          "ok": true
+        },
+        {
+          "label": "Video preserves interactive highlights and Analysis results",
+          "ok": true
+        },
+        {
+          "label": "No portable recipe assets are created",
+          "ok": true
+        }
+      ],
+      "directory": "/tmp/wavez-340-revised-source-forward/mixed-off/.wavez-export-1791704862-2651086",
+      "message": "Complete \u2014 2 / 2 frames rendered (100%)\nElapsed: 00:00:00\nEstimated remaining: 00:00:00",
+      "progress": {
+        "current_frame": 2.0,
+        "elapsed_seconds": 0.865,
+        "encoder_pid": -1.0,
+        "intermediate_directory": "/tmp/wavez-340-revised-source-forward/mixed-off/.wavez-export-1791704862-2651086",
+        "message": "Saved /tmp/wavez-340-revised-source-forward/mixed-off/result.mp4",
+        "output_path": "/tmp/wavez-340-revised-source-forward/mixed-off/result.mp4",
+        "renderer_pid": 196438.0,
         "stage": "complete",
         "total_frames": 2.0
       },
@@ -2368,7 +2943,7 @@
           "ok": true
         },
         {
-          "label": "Video uses the ordinary schema without scientific recipes or quota",
+          "label": "Video uses the ordinary schema without scientific recipes, markers or quota",
           "ok": true
         },
         {
@@ -2424,20 +2999,24 @@
           "ok": true
         },
         {
+          "label": "Video preserves interactive highlights and Analysis results",
+          "ok": true
+        },
+        {
           "label": "No portable recipe assets are created",
           "ok": true
         }
       ],
-      "directory": "/tmp/wavez-340-final-source-forward/mixed-on/.wavez-export-1791703919-2489320",
+      "directory": "/tmp/wavez-340-revised-source-forward/mixed-on/.wavez-export-1791704868-2697022",
       "message": "Complete \u2014 2 / 2 frames rendered (100%)\nElapsed: 00:00:00\nEstimated remaining: 00:00:00",
       "progress": {
         "current_frame": 2.0,
-        "elapsed_seconds": 0.8,
+        "elapsed_seconds": 0.838,
         "encoder_pid": -1.0,
-        "intermediate_directory": "/tmp/wavez-340-final-source-forward/mixed-on/.wavez-export-1791703919-2489320",
-        "message": "Saved /tmp/wavez-340-final-source-forward/mixed-on/result.mp4",
-        "output_path": "/tmp/wavez-340-final-source-forward/mixed-on/result.mp4",
-        "renderer_pid": 152925.0,
+        "intermediate_directory": "/tmp/wavez-340-revised-source-forward/mixed-on/.wavez-export-1791704868-2697022",
+        "message": "Saved /tmp/wavez-340-revised-source-forward/mixed-on/result.mp4",
+        "output_path": "/tmp/wavez-340-revised-source-forward/mixed-on/result.mp4",
+        "renderer_pid": 197470.0,
         "stage": "complete",
         "total_frames": 2.0
       },
@@ -2463,11 +3042,15 @@
           "ok": true
         },
         {
-          "label": "Existing visible markers resolve before video",
+          "label": "Interactive Selection highlights resolve before video",
           "ok": true
         },
         {
           "label": "Particle/mesh/field definitions remain independent",
+          "ok": true
+        },
+        {
+          "label": "Interactive Selection still draws its highlights",
           "ok": true
         },
         {
@@ -2503,7 +3086,7 @@
           "ok": true
         },
         {
-          "label": "Video uses the ordinary schema without scientific recipes or quota",
+          "label": "Video uses the ordinary schema without scientific recipes, markers or quota",
           "ok": true
         },
         {
@@ -2559,20 +3142,24 @@
           "ok": true
         },
         {
+          "label": "Video preserves interactive highlights and Analysis results",
+          "ok": true
+        },
+        {
           "label": "No portable recipe assets are created",
           "ok": true
         }
       ],
-      "directory": "/tmp/wavez-340-final-source-forward/selection-particle/.wavez-export-1791703925-3134703",
+      "directory": "/tmp/wavez-340-revised-source-forward/selection-particle/.wavez-export-1791704874-2880339",
       "message": "Complete \u2014 2 / 2 frames rendered (100%)\nElapsed: 00:00:00\nEstimated remaining: 00:00:00",
       "progress": {
         "current_frame": 2.0,
-        "elapsed_seconds": 0.573,
+        "elapsed_seconds": 0.629,
         "encoder_pid": -1.0,
-        "intermediate_directory": "/tmp/wavez-340-final-source-forward/selection-particle/.wavez-export-1791703925-3134703",
-        "message": "Saved /tmp/wavez-340-final-source-forward/selection-particle/result.mp4",
-        "output_path": "/tmp/wavez-340-final-source-forward/selection-particle/result.mp4",
-        "renderer_pid": 153345.0,
+        "intermediate_directory": "/tmp/wavez-340-revised-source-forward/selection-particle/.wavez-export-1791704874-2880339",
+        "message": "Saved /tmp/wavez-340-revised-source-forward/selection-particle/result.mp4",
+        "output_path": "/tmp/wavez-340-revised-source-forward/selection-particle/result.mp4",
+        "renderer_pid": 198804.0,
         "stage": "complete",
         "total_frames": 2.0
       },
@@ -2598,11 +3185,15 @@
           "ok": true
         },
         {
-          "label": "Existing visible markers resolve before video",
+          "label": "Interactive Selection highlights resolve before video",
           "ok": true
         },
         {
           "label": "Particle/mesh/field definitions remain independent",
+          "ok": true
+        },
+        {
+          "label": "Interactive Selection still draws its highlights",
           "ok": true
         },
         {
@@ -2638,7 +3229,7 @@
           "ok": true
         },
         {
-          "label": "Video uses the ordinary schema without scientific recipes or quota",
+          "label": "Video uses the ordinary schema without scientific recipes, markers or quota",
           "ok": true
         },
         {
@@ -2694,20 +3285,24 @@
           "ok": true
         },
         {
+          "label": "Video preserves interactive highlights and Analysis results",
+          "ok": true
+        },
+        {
           "label": "No portable recipe assets are created",
           "ok": true
         }
       ],
-      "directory": "/tmp/wavez-340-final-source-forward/selection-hidden/.wavez-export-1791703931-2731396",
+      "directory": "/tmp/wavez-340-revised-source-forward/selection-hidden/.wavez-export-1791704881-2843612",
       "message": "Complete \u2014 2 / 2 frames rendered (100%)\nElapsed: 00:00:00\nEstimated remaining: 00:00:00",
       "progress": {
         "current_frame": 2.0,
-        "elapsed_seconds": 0.57,
+        "elapsed_seconds": 0.623,
         "encoder_pid": -1.0,
-        "intermediate_directory": "/tmp/wavez-340-final-source-forward/selection-hidden/.wavez-export-1791703931-2731396",
-        "message": "Saved /tmp/wavez-340-final-source-forward/selection-hidden/result.mp4",
-        "output_path": "/tmp/wavez-340-final-source-forward/selection-hidden/result.mp4",
-        "renderer_pid": 153781.0,
+        "intermediate_directory": "/tmp/wavez-340-revised-source-forward/selection-hidden/.wavez-export-1791704881-2843612",
+        "message": "Saved /tmp/wavez-340-revised-source-forward/selection-hidden/result.mp4",
+        "output_path": "/tmp/wavez-340-revised-source-forward/selection-hidden/result.mp4",
+        "renderer_pid": 200361.0,
         "stage": "complete",
         "total_frames": 2.0
       },
@@ -2733,11 +3328,15 @@
           "ok": true
         },
         {
-          "label": "Existing visible markers resolve before video",
+          "label": "Interactive Selection highlights resolve before video",
           "ok": true
         },
         {
           "label": "Particle/mesh/field definitions remain independent",
+          "ok": true
+        },
+        {
+          "label": "Interactive Selection still draws its highlights",
           "ok": true
         },
         {
@@ -2773,7 +3372,7 @@
           "ok": true
         },
         {
-          "label": "Video uses the ordinary schema without scientific recipes or quota",
+          "label": "Video uses the ordinary schema without scientific recipes, markers or quota",
           "ok": true
         },
         {
@@ -2829,20 +3428,24 @@
           "ok": true
         },
         {
+          "label": "Video preserves interactive highlights and Analysis results",
+          "ok": true
+        },
+        {
           "label": "No portable recipe assets are created",
           "ok": true
         }
       ],
-      "directory": "/tmp/wavez-340-final-source-forward/selection-mesh/.wavez-export-1791703937-2969483",
+      "directory": "/tmp/wavez-340-revised-source-forward/selection-mesh/.wavez-export-1791704887-3215111",
       "message": "Complete \u2014 2 / 2 frames rendered (100%)\nElapsed: 00:00:00\nEstimated remaining: 00:00:00",
       "progress": {
         "current_frame": 2.0,
-        "elapsed_seconds": 0.774,
+        "elapsed_seconds": 0.86,
         "encoder_pid": -1.0,
-        "intermediate_directory": "/tmp/wavez-340-final-source-forward/selection-mesh/.wavez-export-1791703937-2969483",
-        "message": "Saved /tmp/wavez-340-final-source-forward/selection-mesh/result.mp4",
-        "output_path": "/tmp/wavez-340-final-source-forward/selection-mesh/result.mp4",
-        "renderer_pid": 154185.0,
+        "intermediate_directory": "/tmp/wavez-340-revised-source-forward/selection-mesh/.wavez-export-1791704887-3215111",
+        "message": "Saved /tmp/wavez-340-revised-source-forward/selection-mesh/result.mp4",
+        "output_path": "/tmp/wavez-340-revised-source-forward/selection-mesh/result.mp4",
+        "renderer_pid": 202200.0,
         "stage": "complete",
         "total_frames": 2.0
       },
@@ -2868,11 +3471,15 @@
           "ok": true
         },
         {
-          "label": "Existing visible markers resolve before video",
+          "label": "Interactive Selection highlights resolve before video",
           "ok": true
         },
         {
           "label": "Particle/mesh/field definitions remain independent",
+          "ok": true
+        },
+        {
+          "label": "Interactive Selection still draws its highlights",
           "ok": true
         },
         {
@@ -2908,7 +3515,7 @@
           "ok": true
         },
         {
-          "label": "Video uses the ordinary schema without scientific recipes or quota",
+          "label": "Video uses the ordinary schema without scientific recipes, markers or quota",
           "ok": true
         },
         {
@@ -2964,20 +3571,24 @@
           "ok": true
         },
         {
+          "label": "Video preserves interactive highlights and Analysis results",
+          "ok": true
+        },
+        {
           "label": "No portable recipe assets are created",
           "ok": true
         }
       ],
-      "directory": "/tmp/wavez-340-final-source-forward/selection-field/.wavez-export-1791703943-2947437",
+      "directory": "/tmp/wavez-340-revised-source-forward/selection-field/.wavez-export-1791704894-3162762",
       "message": "Complete \u2014 2 / 2 frames rendered (100%)\nElapsed: 00:00:00\nEstimated remaining: 00:00:00",
       "progress": {
         "current_frame": 2.0,
-        "elapsed_seconds": 0.754,
+        "elapsed_seconds": 0.766,
         "encoder_pid": -1.0,
-        "intermediate_directory": "/tmp/wavez-340-final-source-forward/selection-field/.wavez-export-1791703943-2947437",
-        "message": "Saved /tmp/wavez-340-final-source-forward/selection-field/result.mp4",
-        "output_path": "/tmp/wavez-340-final-source-forward/selection-field/result.mp4",
-        "renderer_pid": 154626.0,
+        "intermediate_directory": "/tmp/wavez-340-revised-source-forward/selection-field/.wavez-export-1791704894-3162762",
+        "message": "Saved /tmp/wavez-340-revised-source-forward/selection-field/result.mp4",
+        "output_path": "/tmp/wavez-340-revised-source-forward/selection-field/result.mp4",
+        "renderer_pid": 203899.0,
         "stage": "complete",
         "total_frames": 2.0
       },
@@ -3011,11 +3622,15 @@
           "ok": true
         },
         {
-          "label": "Existing visible markers resolve before video",
+          "label": "Interactive Selection highlights resolve before video",
           "ok": true
         },
         {
           "label": "Particle/mesh/field definitions remain independent",
+          "ok": true
+        },
+        {
+          "label": "Interactive Selection still draws its highlights",
           "ok": true
         },
         {
@@ -3051,7 +3666,7 @@
           "ok": true
         },
         {
-          "label": "Video uses the ordinary schema without scientific recipes or quota",
+          "label": "Video uses the ordinary schema without scientific recipes, markers or quota",
           "ok": true
         },
         {
@@ -3107,20 +3722,24 @@
           "ok": true
         },
         {
+          "label": "Video preserves interactive highlights and Analysis results",
+          "ok": true
+        },
+        {
           "label": "No portable recipe assets are created",
           "ok": true
         }
       ],
-      "directory": "/tmp/wavez-340-final-source-forward/selection-all/.wavez-export-1791703950-3100639",
+      "directory": "/tmp/wavez-340-revised-source-forward/selection-all/.wavez-export-1791704900-3299109",
       "message": "Complete \u2014 2 / 2 frames rendered (100%)\nElapsed: 00:00:00\nEstimated remaining: 00:00:00",
       "progress": {
         "current_frame": 2.0,
-        "elapsed_seconds": 0.762,
+        "elapsed_seconds": 0.802,
         "encoder_pid": -1.0,
-        "intermediate_directory": "/tmp/wavez-340-final-source-forward/selection-all/.wavez-export-1791703950-3100639",
-        "message": "Saved /tmp/wavez-340-final-source-forward/selection-all/result.mp4",
-        "output_path": "/tmp/wavez-340-final-source-forward/selection-all/result.mp4",
-        "renderer_pid": 155094.0,
+        "intermediate_directory": "/tmp/wavez-340-revised-source-forward/selection-all/.wavez-export-1791704900-3299109",
+        "message": "Saved /tmp/wavez-340-revised-source-forward/selection-all/result.mp4",
+        "output_path": "/tmp/wavez-340-revised-source-forward/selection-all/result.mp4",
+        "renderer_pid": 204949.0,
         "stage": "complete",
         "total_frames": 2.0
       },
@@ -3146,11 +3765,15 @@
           "ok": true
         },
         {
-          "label": "Existing visible markers resolve before video",
+          "label": "Interactive Selection highlights resolve before video",
           "ok": true
         },
         {
           "label": "Particle/mesh/field definitions remain independent",
+          "ok": true
+        },
+        {
+          "label": "Interactive Selection still draws its highlights",
           "ok": true
         },
         {
@@ -3186,7 +3809,7 @@
           "ok": true
         },
         {
-          "label": "Video uses the ordinary schema without scientific recipes or quota",
+          "label": "Video uses the ordinary schema without scientific recipes, markers or quota",
           "ok": true
         },
         {
@@ -3242,20 +3865,24 @@
           "ok": true
         },
         {
+          "label": "Video preserves interactive highlights and Analysis results",
+          "ok": true
+        },
+        {
           "label": "No portable recipe assets are created",
           "ok": true
         }
       ],
-      "directory": "/tmp/wavez-340-final-source-forward/selection-optional/.wavez-export-1791703956-2934904",
+      "directory": "/tmp/wavez-340-revised-source-forward/selection-optional/.wavez-export-1791704907-2854617",
       "message": "Complete \u2014 2 / 2 frames rendered (100%)\nElapsed: 00:00:00\nEstimated remaining: 00:00:00",
       "progress": {
         "current_frame": 2.0,
-        "elapsed_seconds": 0.593,
+        "elapsed_seconds": 0.606,
         "encoder_pid": -1.0,
-        "intermediate_directory": "/tmp/wavez-340-final-source-forward/selection-optional/.wavez-export-1791703956-2934904",
-        "message": "Saved /tmp/wavez-340-final-source-forward/selection-optional/result.mp4",
-        "output_path": "/tmp/wavez-340-final-source-forward/selection-optional/result.mp4",
-        "renderer_pid": 155506.0,
+        "intermediate_directory": "/tmp/wavez-340-revised-source-forward/selection-optional/.wavez-export-1791704907-2854617",
+        "message": "Saved /tmp/wavez-340-revised-source-forward/selection-optional/result.mp4",
+        "output_path": "/tmp/wavez-340-revised-source-forward/selection-optional/result.mp4",
+        "renderer_pid": 205748.0,
         "stage": "complete",
         "total_frames": 2.0
       },
@@ -3305,7 +3932,7 @@
           "ok": true
         },
         {
-          "label": "Video uses the ordinary schema without scientific recipes or quota",
+          "label": "Video uses the ordinary schema without scientific recipes, markers or quota",
           "ok": true
         },
         {
@@ -3361,24 +3988,179 @@
           "ok": true
         },
         {
+          "label": "Video preserves interactive highlights and Analysis results",
+          "ok": true
+        },
+        {
           "label": "No portable recipe assets are created",
           "ok": true
         }
       ],
-      "directory": "/tmp/wavez-340-final-source-forward/ordinary-optional/.wavez-export-1791703961-2398920",
+      "directory": "/tmp/wavez-340-revised-source-forward/ordinary-optional/.wavez-export-1791704912-2468904",
       "message": "Complete \u2014 2 / 2 frames rendered (100%)\nElapsed: 00:00:00\nEstimated remaining: 00:00:00",
       "progress": {
         "current_frame": 2.0,
-        "elapsed_seconds": 0.586,
+        "elapsed_seconds": 0.608,
         "encoder_pid": -1.0,
-        "intermediate_directory": "/tmp/wavez-340-final-source-forward/ordinary-optional/.wavez-export-1791703961-2398920",
-        "message": "Saved /tmp/wavez-340-final-source-forward/ordinary-optional/result.mp4",
-        "output_path": "/tmp/wavez-340-final-source-forward/ordinary-optional/result.mp4",
-        "renderer_pid": 155877.0,
+        "intermediate_directory": "/tmp/wavez-340-revised-source-forward/ordinary-optional/.wavez-export-1791704912-2468904",
+        "message": "Saved /tmp/wavez-340-revised-source-forward/ordinary-optional/result.mp4",
+        "output_path": "/tmp/wavez-340-revised-source-forward/ordinary-optional/result.mp4",
+        "renderer_pid": 206512.0,
         "stage": "complete",
         "total_frames": 2.0
       },
       "name": "ordinary-optional",
+      "known_encoder_cleanup_diagnostics": []
+    },
+    {
+      "checks": [
+        {
+          "label": "Production viewer opens WVZ1",
+          "ok": true
+        },
+        {
+          "label": "Expected source or template executable",
+          "ok": true
+        },
+        {
+          "label": "Independent Analysis binds without repository files",
+          "ok": true
+        },
+        {
+          "label": "Independent Selection defines particle",
+          "ok": true
+        },
+        {
+          "label": "Interactive Selection highlights resolve before video",
+          "ok": true
+        },
+        {
+          "label": "Particle/mesh/field definitions remain independent",
+          "ok": true
+        },
+        {
+          "label": "Interactive Selection still draws its highlights",
+          "ok": true
+        },
+        {
+          "label": "Independent Analysis produces a real result before video",
+          "ok": true
+        },
+        {
+          "label": "Independent Analysis retains a populated plot",
+          "ok": true
+        },
+        {
+          "label": "File / Export / Video opens production dialog",
+          "ok": true
+        },
+        {
+          "label": "Advanced remains optional with zero/one/many selections",
+          "ok": true
+        },
+        {
+          "label": "Only development passes a project path override",
+          "ok": true
+        },
+        {
+          "label": "Start Export launches secondary process",
+          "ok": true
+        },
+        {
+          "label": "Launch diagnostics identify the current executable",
+          "ok": true
+        },
+        {
+          "label": "Correct launch arguments and renderer are retained",
+          "ok": true
+        },
+        {
+          "label": "Absolute source/job/output paths survive launch",
+          "ok": true
+        },
+        {
+          "label": "Only the explicit checkbox controls inspection records",
+          "ok": true
+        },
+        {
+          "label": "Video uses the ordinary schema without scientific recipes, markers or quota",
+          "ok": true
+        },
+        {
+          "label": "Run in background retains the original worker",
+          "ok": true
+        },
+        {
+          "label": "Jobs reopens the same export",
+          "ok": true
+        },
+        {
+          "label": "Worker terminates within timeout",
+          "ok": true
+        },
+        {
+          "label": "Parent observes worker progress",
+          "ok": true
+        },
+        {
+          "label": "Expected terminal state",
+          "ok": true
+        },
+        {
+          "label": "Requested cancellation stage was observed",
+          "ok": true
+        },
+        {
+          "label": "MP4 is published",
+          "ok": true
+        },
+        {
+          "label": "Successful export cleans staged PNGs",
+          "ok": true
+        },
+        {
+          "label": "Worker diagnostics are retained",
+          "ok": true
+        },
+        {
+          "label": "Child uses the same packaged or development executable",
+          "ok": true
+        },
+        {
+          "label": "Child renderer matches parent",
+          "ok": true
+        },
+        {
+          "label": "Child uses release resources",
+          "ok": true
+        },
+        {
+          "label": "Video starts no parent scientific worker and preserves selections",
+          "ok": true
+        },
+        {
+          "label": "Video preserves interactive highlights and Analysis results",
+          "ok": true
+        },
+        {
+          "label": "No portable recipe assets are created",
+          "ok": true
+        }
+      ],
+      "directory": "/tmp/wavez-340-revised-source-forward/analysis-result/.wavez-export-1791704918-2953567",
+      "message": "Complete \u2014 2 / 2 frames rendered (100%)\nElapsed: 00:00:00\nEstimated remaining: 00:00:00",
+      "progress": {
+        "current_frame": 2.0,
+        "elapsed_seconds": 0.605,
+        "encoder_pid": -1.0,
+        "intermediate_directory": "/tmp/wavez-340-revised-source-forward/analysis-result/.wavez-export-1791704918-2953567",
+        "message": "Saved /tmp/wavez-340-revised-source-forward/analysis-result/result.mp4",
+        "output_path": "/tmp/wavez-340-revised-source-forward/analysis-result/result.mp4",
+        "renderer_pid": 207155.0,
+        "stage": "complete",
+        "total_frames": 2.0
+      },
+      "name": "analysis-result",
       "known_encoder_cleanup_diagnostics": []
     },
     {
@@ -3424,7 +4206,7 @@
           "ok": true
         },
         {
-          "label": "Video uses the ordinary schema without scientific recipes or quota",
+          "label": "Video uses the ordinary schema without scientific recipes, markers or quota",
           "ok": true
         },
         {
@@ -3484,20 +4266,24 @@
           "ok": true
         },
         {
+          "label": "Video preserves interactive highlights and Analysis results",
+          "ok": true
+        },
+        {
           "label": "No portable recipe assets are created",
           "ok": true
         }
       ],
-      "directory": "/tmp/wavez-340-final-source-forward/cancel-rendering/.wavez-export-1791703967-2364392",
-      "message": "Cancelled \u2014 4 / 75 frames rendered (5%)\nElapsed: 00:00:00\nEstimated remaining: Unavailable\nExport cancelled. Completed PNG frames retained in [Temporary files]/frames\nTemporary files: /tmp/wavez-340-final-source-forward/cancel-rendering/.wavez-export-1791703967-2364392",
+      "directory": "/tmp/wavez-340-revised-source-forward/cancel-rendering/.wavez-export-1791704924-2419931",
+      "message": "Cancelled \u2014 6 / 75 frames rendered (8%)\nElapsed: 00:00:00\nEstimated remaining: Unavailable\nExport cancelled during source preparation.\nTemporary files: /tmp/wavez-340-revised-source-forward/cancel-rendering/.wavez-export-1791704924-2419931",
       "progress": {
-        "current_frame": 4.0,
-        "elapsed_seconds": 0.593,
+        "current_frame": 6.0,
+        "elapsed_seconds": 0.627,
         "encoder_pid": -1.0,
-        "intermediate_directory": "/tmp/wavez-340-final-source-forward/cancel-rendering/.wavez-export-1791703967-2364392",
-        "message": "Export cancelled. Completed PNG frames retained in /tmp/wavez-340-final-source-forward/cancel-rendering/.wavez-export-1791703967-2364392/frames",
-        "output_path": "/tmp/wavez-340-final-source-forward/cancel-rendering/result.mp4",
-        "renderer_pid": 156315.0,
+        "intermediate_directory": "/tmp/wavez-340-revised-source-forward/cancel-rendering/.wavez-export-1791704924-2419931",
+        "message": "Export cancelled during source preparation.",
+        "output_path": "/tmp/wavez-340-revised-source-forward/cancel-rendering/result.mp4",
+        "renderer_pid": 208118.0,
         "stage": "cancelled",
         "total_frames": 75.0
       },
@@ -3547,7 +4333,7 @@
           "ok": true
         },
         {
-          "label": "Video uses the ordinary schema without scientific recipes or quota",
+          "label": "Video uses the ordinary schema without scientific recipes, markers or quota",
           "ok": true
         },
         {
@@ -3607,29 +4393,33 @@
           "ok": true
         },
         {
+          "label": "Video preserves interactive highlights and Analysis results",
+          "ok": true
+        },
+        {
           "label": "No portable recipe assets are created",
           "ok": true
         }
       ],
-      "directory": "/tmp/wavez-340-final-source-forward/cancel-encoding/.wavez-export-1791703972-2469868",
-      "message": "Cancelled \u2014 30 / 30 frames rendered (100%)\nElapsed: 00:00:01\nEstimated remaining: Unavailable\nEncoding cancelled. PNGs and partial MP4 retained in [Temporary files]\nTemporary files: /tmp/wavez-340-final-source-forward/cancel-encoding/.wavez-export-1791703972-2469868",
+      "directory": "/tmp/wavez-340-revised-source-forward/cancel-encoding/.wavez-export-1791704929-2435350",
+      "message": "Cancelled \u2014 30 / 30 frames rendered (100%)\nElapsed: 00:00:01\nEstimated remaining: Unavailable\nEncoding cancelled. PNGs and partial MP4 retained in [Temporary files]\nTemporary files: /tmp/wavez-340-revised-source-forward/cancel-encoding/.wavez-export-1791704929-2435350",
       "progress": {
         "current_frame": 30.0,
-        "elapsed_seconds": 1.154,
-        "encoder_pid": 158006.0,
-        "intermediate_directory": "/tmp/wavez-340-final-source-forward/cancel-encoding/.wavez-export-1791703972-2469868",
-        "message": "Encoding cancelled. PNGs and partial MP4 retained in /tmp/wavez-340-final-source-forward/cancel-encoding/.wavez-export-1791703972-2469868",
-        "output_path": "/tmp/wavez-340-final-source-forward/cancel-encoding/result.mp4",
-        "renderer_pid": 156866.0,
+        "elapsed_seconds": 1.162,
+        "encoder_pid": 209321.0,
+        "intermediate_directory": "/tmp/wavez-340-revised-source-forward/cancel-encoding/.wavez-export-1791704929-2435350",
+        "message": "Encoding cancelled. PNGs and partial MP4 retained in /tmp/wavez-340-revised-source-forward/cancel-encoding/.wavez-export-1791704929-2435350",
+        "output_path": "/tmp/wavez-340-revised-source-forward/cancel-encoding/result.mp4",
+        "renderer_pid": 208615.0,
         "stage": "cancelled",
         "total_frames": 30.0
       },
       "name": "cancel-encoding",
       "known_encoder_cleanup_diagnostics": [
-        "ERROR: The process 158006 does not exist or is not a child of the calling process.\n   at: _check_pid_is_running (drivers/unix/os_unix.cpp:863)\n   GDScript backtrace (most recent call first):\n       [0] finish (res://video/render_worker.gd:66)\n       [1] encode (res://video/render_worker.gd:351)\n",
-        "ERROR: The process 158006 does not exist or is not a child of the calling process.\n   at: _check_pid_is_running (drivers/unix/os_unix.cpp:863)\n   GDScript backtrace (most recent call first):\n       [0] _exit_tree (res://video/render_worker.gd:52)\n",
-        "ERROR: The process 158006 does not exist or is not a child of the calling process.\n   at: _check_pid_is_running (drivers/unix/os_unix.cpp:863)\n   GDScript backtrace (most recent call first):\n       [0] finish (res://video/render_worker.gd:66)\n       [1] encode (res://video/render_worker.gd:351)\n",
-        "ERROR: The process 158006 does not exist or is not a child of the calling process.\n   at: _check_pid_is_running (drivers/unix/os_unix.cpp:863)\n   GDScript backtrace (most recent call first):\n       [0] _exit_tree (res://video/render_worker.gd:52)\n"
+        "ERROR: The process 209321 does not exist or is not a child of the calling process.\n   at: _check_pid_is_running (drivers/unix/os_unix.cpp:863)\n   GDScript backtrace (most recent call first):\n       [0] finish (res://video/render_worker.gd:65)\n       [1] encode (res://video/render_worker.gd:347)\n",
+        "ERROR: The process 209321 does not exist or is not a child of the calling process.\n   at: _check_pid_is_running (drivers/unix/os_unix.cpp:863)\n   GDScript backtrace (most recent call first):\n       [0] _exit_tree (res://video/render_worker.gd:51)\n",
+        "ERROR: The process 209321 does not exist or is not a child of the calling process.\n   at: _check_pid_is_running (drivers/unix/os_unix.cpp:863)\n   GDScript backtrace (most recent call first):\n       [0] finish (res://video/render_worker.gd:65)\n       [1] encode (res://video/render_worker.gd:347)\n",
+        "ERROR: The process 209321 does not exist or is not a child of the calling process.\n   at: _check_pid_is_running (drivers/unix/os_unix.cpp:863)\n   GDScript backtrace (most recent call first):\n       [0] _exit_tree (res://video/render_worker.gd:51)\n"
       ]
     },
     {
@@ -3675,7 +4465,7 @@
           "ok": true
         },
         {
-          "label": "Video uses the ordinary schema without scientific recipes or quota",
+          "label": "Video uses the ordinary schema without scientific recipes, markers or quota",
           "ok": true
         },
         {
@@ -3731,20 +4521,24 @@
           "ok": true
         },
         {
+          "label": "Video preserves interactive highlights and Analysis results",
+          "ok": true
+        },
+        {
           "label": "No portable recipe assets are created",
           "ok": true
         }
       ],
-      "directory": "/tmp/wavez-340-final-source-forward/failed-encoder/.wavez-export-1791703978-2449076",
-      "message": "Failed \u2014 2 / 2 frames rendered (100%)\nElapsed: 00:00:00\nEstimated remaining: Unavailable\nFFmpeg failed (exit 1), or produced no valid output. \nPNGs and any partial MP4 retained in [Temporary files]\nTemporary files: /tmp/wavez-340-final-source-forward/failed-encoder/.wavez-export-1791703978-2449076",
+      "directory": "/tmp/wavez-340-revised-source-forward/failed-encoder/.wavez-export-1791704935-2373334",
+      "message": "Failed \u2014 2 / 2 frames rendered (100%)\nElapsed: 00:00:00\nEstimated remaining: Unavailable\nFFmpeg failed (exit 1), or produced no valid output. \nPNGs and any partial MP4 retained in [Temporary files]\nTemporary files: /tmp/wavez-340-revised-source-forward/failed-encoder/.wavez-export-1791704935-2373334",
       "progress": {
         "current_frame": 2.0,
-        "elapsed_seconds": 0.523,
+        "elapsed_seconds": 0.477,
         "encoder_pid": -1.0,
-        "intermediate_directory": "/tmp/wavez-340-final-source-forward/failed-encoder/.wavez-export-1791703978-2449076",
-        "message": "FFmpeg failed (exit 1), or produced no valid output. \nPNGs and any partial MP4 retained in /tmp/wavez-340-final-source-forward/failed-encoder/.wavez-export-1791703978-2449076",
-        "output_path": "/tmp/wavez-340-final-source-forward/failed-encoder/result.mp4",
-        "renderer_pid": 158602.0,
+        "intermediate_directory": "/tmp/wavez-340-revised-source-forward/failed-encoder/.wavez-export-1791704935-2373334",
+        "message": "FFmpeg failed (exit 1), or produced no valid output. \nPNGs and any partial MP4 retained in /tmp/wavez-340-revised-source-forward/failed-encoder/.wavez-export-1791704935-2373334",
+        "output_path": "/tmp/wavez-340-revised-source-forward/failed-encoder/result.mp4",
+        "renderer_pid": 210758.0,
         "stage": "failed",
         "total_frames": 2.0
       },
@@ -3827,7 +4621,7 @@
           "ok": true
         },
         {
-          "label": "Video uses the ordinary schema without scientific recipes or quota",
+          "label": "Video uses the ordinary schema without scientific recipes, markers or quota",
           "ok": true
         },
         {
@@ -3839,28 +4633,28 @@
           "ok": true
         }
       ],
-      "directory": "/tmp/wavez-340-final-source-forward/parent-shutdown/.wavez-export-1791703986-2553549",
+      "directory": "/tmp/wavez-340-revised-source-forward/parent-shutdown/.wavez-export-1791704942-2336882",
       "observed": [
         "loading",
         "ready",
         "rendering"
       ],
       "parent_shutdown": true,
-      "pid": 163033,
+      "pid": 211068,
       "name": "parent-shutdown",
       "known_encoder_cleanup_diagnostics": []
     }
   ],
   "source_hashes": {
-    "corrupt.wvz": "1b7d4ff3b198e75cd46b48ae6a928198fb4e303f8ba91f7f1fd6dce0271f0fba",
-    "budget.wvz": "57ab6c97bffaa959f8a1498b9668cf281b01e2f7d55f15a634a43ad9e9d6d530",
-    "overflow.wvz": "6b1e3e68cae37b5477f4b305b22eb6391b402b98c309990381910a9a570d6bb6",
-    "late.wvz": "f2124ee3fa2090e1961604077df8f0792463a4dc6ea3177dadd60ad45c2f5356",
-    "mixed.wvz": "9601ad65f2cdcc00f79c7bce3bf93a0a5d54ca64bc26e6e4c832699c804d328c",
-    "mesh.wvz": "0b75c69d4218a17fe63e4cc31dfe480ee32fd73f59ed28ec434089dec1695c27",
-    "field.wvz": "a13e72c5f2895ce37d986800e005ea3dc4c773c9dde4c06cc4bb442e7607f61c",
-    "late-particles.wvz": "6b0c90ff6c3498055d0fba8a82e380c2beb0a794fd9944e65d719643651919ec",
-    "particles.wvz": "94303c36158c063a78bfb52adef40ca8d48c69f40af02a3adbc508962be4977a"
+    "corrupt.wvz": "8b9c253d435eb44fab8260751319bd3fc7ac382acc60d8570ce42b62798b89a5",
+    "budget.wvz": "962ea177ee8ceed788e0f4361df6dbddb63b6afd42879e73a11c24fdf00ee171",
+    "overflow.wvz": "a7ab12d92c6d209ce26ae8d2d576e80169b5de43422f3d0a7af680ca213e1f95",
+    "late.wvz": "00f778f0f1bc891f9be416a16ee1b7e6a2875a1d2413b2c2afd005a64dfe57d2",
+    "mixed.wvz": "c7ed2c7b603f2bd5b932af185b8b5d02320342ed7961afd2e671045533dee58c",
+    "mesh.wvz": "656abb5ece01a20e7d675a0062f82d3f6dd0a033e95b541e6422d79e5a09ae9a",
+    "field.wvz": "7c7f063eca93ca6c811facede640f7915577942570c79ba59346afe4137f05c5",
+    "late-particles.wvz": "48cd1dd7fc278914f088d844af14256b73976ae1db63e82bd9938041b232290d",
+    "particles.wvz": "d33110c666ea9f16b14255f8fc53220675cf8269fa9a560eadfa2b7da7736a36"
   },
   "failures": 0
 }

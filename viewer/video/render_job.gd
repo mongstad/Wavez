@@ -17,9 +17,6 @@ static func sample_time(job: Dictionary, n: int) -> float:
 	return float(job.start_time) + float(n) / float(job.fps) * float(job.playback_rate)
 
 static func validate(job: Dictionary) -> String:
-	if job.has("presentation_markers"):
-		var problem := preload("res://video/presentation_markers.gd").validate(job.presentation_markers)
-		if not problem.is_empty(): return problem
 	if job.has("presentation"):
 		var presentation = job.presentation
 		if not presentation is Dictionary: return "Invalid export presentation."

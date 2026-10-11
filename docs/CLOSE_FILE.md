@@ -18,8 +18,8 @@ and graphics driver may retain memory; no immediate RSS or VRAM reduction is
 guaranteed. Capture and exported scientific bytes are unchanged.
 
 A launched video export continues through Close File,
-including when backgrounded. It owns its serialized camera/scene snapshot, pinned
-presentation markers and independent capture reader. Use **Jobs → Video export → Open…**
+including when backgrounded. It owns its serialized camera/ordinary visual state,
+pinned source extent and independent capture reader. Use **Jobs → Video export → Open…**
 or **Details…** to follow it after closing or opening another capture. Its own
 Cancel export action remains available. Closing does not send cancellation,
 replace job files or run application shutdown. An old idle video draft cannot

@@ -610,7 +610,8 @@ of the WVZ1 capture version. Existing v1 particle and v2 scene inspections retai
 their supported field semantics, subject to the current WVZ1 source boundary.
 Explicit Matched Views scientific render jobs use version 2. File → Export →
 Video always uses visual version-1 jobs, regardless of existing selections; it
-does not run scientific selection queries or require Python/NumPy. Current source-kind identifiers and validation live
+excludes Selection/Analysis overlays and does not run scientific selection
+queries or require Python/NumPy. Current source-kind identifiers and validation live
 in [the inspection contract](../INSPECTION_STATE.md) and [schemas](ANALYSIS_SCHEMAS.md).
 
 The v3 envelope stores existing visual/sample/source state plus selection schema,
@@ -637,9 +638,12 @@ then use the existing render completion barrier. Serialize the exact committed
 selection and source statuses with the frame. Never use whichever analysis reply
 arrives first. Hidden selections can have scientific results without forcing
 interactive hidden-particle display preparation. Plot panels are exported
-explicitly. Ordinary scene video carries only an already displayed bounded marker
-subset following native source display elements; it never evaluates membership,
-creates a portable recipe or starts Analysis. See [video](VIDEO_EXPORT.md).
+explicitly. File → Export → Video excludes all Selection highlights and Analysis
+overlays, irrespective of the current session state; it never evaluates membership,
+creates a portable recipe or starts Analysis. These features remain interactive
+and independent. Their end-to-end scientific validation is incomplete, so ordinary
+MP4 files contain supported visualization/presentation elements only. See
+[video](VIDEO_EXPORT.md).
 
 ## 9. Scientific acceptance and fixtures
 

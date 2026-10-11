@@ -17,6 +17,6 @@ test_unknown_fields_stale_group_and_source_refuse (tests.test_analysis_recipes.R
 test_unopened_bookmark_source_refuses_without_read (tests.test_analysis_recipes.RecipeTests.test_unopened_bookmark_source_refuses_without_read) ... ok
 
 ----------------------------------------------------------------------
-Ran 17 tests in 0.420s
+Ran 17 tests in 0.474s
 
 OK

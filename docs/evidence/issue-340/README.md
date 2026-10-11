@@ -1,146 +1,163 @@
-# Issue #340 — independent visual video and scientific workflows
+# Issue #340 — exclude scientific overlays from ordinary Video Export
 
-Candidate **v0.1.0.93**; owner review is pending. No merge, tag, release,
-publication, issue closure or Project transition is performed.
+Candidate **v0.1.0.93**, pending owner review. The owner revised this issue to
+exclude Selection and Analysis completely from File → Export → Video, including
+visual overlays. This supersedes the earlier marker-following direction.
+Nothing has been pushed, published, merged or marked accepted; no PR was created,
+issue closed, Project transition made, or later issue started. The latest owner
+instruction to keep this work local overrides the original push/PR step.
 
-Issue #340, **VIDEO-ARCH — Decouple scientific selections and inspection
-processing from MP4 export**, was the first and only Ready item in Wavez
-Development. Its GitHub-linked branch was already checked out and clean:
+The Ready issue is **#340 — VIDEO-ARCH — Decouple scientific selections and
+inspection processing from MP4 export**, on the exact existing issue-linked branch:
 `340-video-arch-decouple-scientific-selections-and-inspection-processing-from-mp4-exports`.
-HEAD, local/remote main and the issue branch initially matched accepted main
-`0843a778af37b30091b75d7a17840b024c9fc6e8`, owner-merged PR #339. GitHub showed
-that predecessor history was merged; origin was fetched/pruned, main was
-synchronized (`0 0`) and no completed previous local issue branch remained.
-These conditions were checked again before publication.
+The initial branch/main/origin baseline was `0843a778`, the owner's merged PR #339.
+Previous-work housekeeping found main synchronized and no completed previous
+local issue branch to delete. A final read-only PR/ref check found no PR for this
+branch and `main...origin/main` at `0 0`. Main remains unchanged.
 
-## Implementation and shared-code audit
+## Result and shared-code boundary
 
-File → Export → Video now always uses an ordinary version-1 visual job. Selection
-count never changes source binding, runtime dependencies, output quota, preparation
-or inspection-record policy. The automatic recipe gate, scientific preparation
-and its cancellation/status state, G4 quota control and hidden mandatory-record
-UI were removed. Video uses the same local mutation/extent binding for every job.
-The unchanged optional checkbox remains unchecked and available in Advanced.
-Optional records describe visual/sample state and PNG hashes, with no scientific
-selection results. Camera, timing, appearance, legends, render backend, external
-FFmpeg, background Jobs, retention and graceful cancellation keep their contracts.
+Ordinary Video Export always writes a visual version-1 job. Selection count,
+highlight visibility and Analysis results never choose its schema, source
+binding, dependencies, preparation, quota or inspection-record policy. The
+selection-aware gate, recipe creation/wait, scientific membership queries,
+mandatory v3 sidecars, G4 quota field and corresponding preparation/cancellation
+state were removed from this route. The existing Advanced checkbox is always
+available, unchecked by default, and writes ordinary visual/sample records only
+when explicitly requested. Video still uses external FFmpeg.
 
-The owner's clarification requires markers to follow source elements without
-scientific queries. The job carries only the existing resolved visual preview
-subset, at most 512 markers, with colors and native addresses. Particle/mesh IDs
-remain exact decimal int64 strings; positions use native display interpolation
-and holding. Anonymous rows, face/point rows and grid addresses expire outside
-their original sample. Probes retain world locations; derived markers require
-the same displayed artifact. Layer visibility, clipping and Show hidden selection
-retain their display meaning, including admitted native reads for hidden layers.
-No ROI membership is recomputed, no new members enter the carried preview and
-no membership claims are inferred from pixels. Disabled or unresolved previews
-are absent. Scientific arrays, definitions, ROIs, groups and results are unchanged.
+The earlier marker implementation and its dedicated validator/tests were removed
+entirely. Video jobs carry no resolved marker subset, selection definitions,
+ROIs, groups, results or analysis plots. The ordinary render instance disables
+its empty Selection controller's processing and clears/hides its overlay. This
+occurs only in the secondary ordinary-video process. The interactive application
+keeps its Selection highlights, definitions, Analysis plots/results and scientific
+persistence; no interactive feature was removed or disabled.
 
-Shared scientific facilities are retained deliberately:
+Normal particle/mesh/field visualization, camera/orbit, timeline sampling,
+ordinary legends and established presentation settings retain their contracts.
+Application panels and scientific overlays cannot enter the ordinary export.
+The owner's rationale is that Selection/Analysis have not completed end-to-end
+scientific validation; ordinary MP4 output must not imply their overlays are
+verified scientific information. Passing these checks establishes this software
+boundary, not scientific acceptance of those independent features.
 
-- `inspection_v3.gd` and `scene_snapshot()` are used by independent durable
-  scientific saving, including `durable_controller.gd`.
-- Tools → Matched Views explicitly prepares version-2 recipe jobs. Its exact
-  schema, recipe/source permissions, selection barriers, output quota and scientific
-  provenance remain in `render_job.gd` / `render_worker.gd`.
-- The analysis job protocol, member/result persistence and packaged first-party
-  Python archive serve independent Selection/Analysis and Matched Views. None were
-  deleted or replaced. Packaging metadata now states their dependencies separately.
-- Jobs and Close File no longer refer to retired video recipe preparation. Independent
-  Analysis remains visible while video runs. Test fixtures use owned child PIDs
-  for active-worker presentation rather than the removed preparation flag.
+The shared-code audit retained `inspection_v3.gd`, durable inspection/results,
+the scientific job protocol and packaged first-party Python archive. They serve
+independent scientific tools. Explicit Tools → Matched Views remains a separate
+scientific workflow using version-2 recipe jobs and its existing scientific
+rendering/provenance; it is not invoked by File → Export → Video. Shared worker
+and version-2 validation were not deleted, and its regression was rerun. Close
+File and Jobs now use launched-worker ownership instead of the removed video
+recipe-preparation state; independent Analysis remains visible while video runs.
 
-## Focused validation
+## Focused validation of the revised candidate
 
-Godot **4.7.2.stable.official.ed1daf0bf**, Linux, NVIDIA RTX 3070 Ti / driver
-615.71.09. All sources are tiny generated WVZ1 fixtures; no production simulation
-or scientific capture was rerun. Reports are copied without rewriting their contents.
+Godot **4.7.2.stable.official.ed1daf0bf**, Linux, the same workstation as the
+historical checkpoint. All captures are tiny generated WVZ1 fixtures. Reports
+are copied without editing their contents. No research simulation was rerun.
 
-| Check | Result and retained record |
+| Check | Exact result and evidence |
 | --- | --- |
-| Final source Forward+ video matrix | **491 checks, 0 failures**, [report](source-forward.json) |
-| Final source Compatibility video matrix | **491 checks, 0 failures**, [report](source-compatibility.json) |
-| Final release Forward+ matrix and source comparisons | **552 checks, 0 failures**, [report](release-forward.json) |
-| Final release Compatibility matrix and source comparisons | **552 checks, 0 failures**, [report](release-compatibility.json) |
-| Native marker addressing, headless / Forward+ | **38 checks each PASS**, [headless](markers-headless.json), [Forward+](markers-forward.json) |
-| Native marker addressing, Compatibility | **38 assertions pass**, strict result **FAIL** on the two baseline texture diagnostics below; [report](markers-compatibility.json), [log](markers-compatibility.log) |
-| Independent Selection integration | **31 checks, 0 failures**, [report](selection.json) |
-| Explicit scientific Matched Views | **50 checks PASS**, including exact frame membership, image hashes and matched pixels; [report](matched.json) |
-| Close File and live exports / numerical output | **225 checks, 0 failures**; ordinary and selected control/closed decoded frames, timing traces and optional records match; numerical CSV matches; [report](close-file.json) |
-| Video dialog layout and immediate interactions | **52 checks, 0 failures**, [log](dialog.log) |
-| Version, scientific recipes and matched-render Python regressions | **17 tests OK**, [log](python.log) |
-| Final import / Python compilation / diff whitespace | Godot import has no script/engine errors, [log](import.log); four modified/new Python tools compile; `git diff --check` passes |
-| Connected Jobs/status | Candidate **322 checks, 2 focus failures**; accepted main **324 checks, the same 2 focus failures**; [candidate](status-candidate.json), [baseline](status-accepted-main.json) |
+| Source Forward+ video matrix | **601 checks, 0 failures**, [report](source-forward.json) |
+| Source Compatibility video matrix | **601 checks, 0 failures**, [report](source-compatibility.json) |
+| Release Forward+ matrix / source comparison | **668 checks, 0 failures**, [report](release-forward.json) |
+| Release Compatibility matrix / source comparison | **668 checks, 0 failures**, [report](release-compatibility.json) |
+| Initial focused revised Compatibility matrix | **265 checks, 0 failures**, [report](focused-compatibility.json) |
+| Independent Selection | **31 checks, 0 failures**, [report](selection.json) |
+| Explicit independent Matched Views | **50 checks PASS**, [report](matched.json) |
+| Close File / live exports / numerical output | **225 checks PASS**, [report](close-file.json) |
+| Production export dialog / grouped controls | **52 checks, 0 failures**, [log](dialog.log) |
+| Version / scientific recipes / matched-render Python tests | **17 tests OK**, [log](python.log) |
+| Final native import / three modified Python tools / whitespace | No script or engine errors in [import](import.log); Python compilation and source/documentation whitespace checks pass (retained raw logs excluded) |
 
-The MP4 matrices cover particles and mixed particle/mesh/field sources; no
-selections, each source kind, multiple selections and disabled highlights;
-explicit optional records off/on; legends off/on and orbit; background/Jobs
-reopening; render/encode cancellation; missing and failing external FFmpeg;
-parent shutdown; and missing-PCK child startup failure. FFprobe checks H.264,
-320×180, FPS and frame count. Visible markers change decoded pixels; invisible
-selection definitions reproduce ordinary pixels exactly. Marker traces independently
-check particle motion across source brackets, mesh motion and native grid expiry.
-Every completed release clip has identical decoded pixels and timing/sample/camera
-trace to its source counterpart. Successful PNG cleanup and failed/cancelled
-retention are checked; no partial final MP4 is published.
+The video matrices exercise the production menu, dialog, Jobs and render child.
+Independent scientific workers first create visible particle/mesh/field/combined
+selections. The tests assert that interactive highlights are actually drawn.
+Another case creates a real Analysis result and populated plot, then opens its
+Temporal panel. Only after that setup, scientific workers are shut down, controller
+ticking is frozen in the test parent, and a failing `python3` wrapper is placed
+on PATH. Any attempted Python invocation writes a failure sentinel. No video
+case invokes it or creates recipe assets. Parent scientific state and overlay
+visibility remain unchanged after export.
 
-Release tests remove their staging checkout before execution, use an unrelated
-working directory containing another project, exclude the Godot editor from PATH
-and clear PYTHONPATH. Independent selections are created first through the actual
-scientific worker; that worker is then shut down and a failing `python3` wrapper
-is placed on PATH before starting video. Any attempted Python invocation writes
-a failure sentinel. No video case invokes it or creates recipe assets. Children
-use the packaged release executable/PCK and production Main scene. The parent
-entry alone is instrumented. The package's scientific archive remains available
-for the separate scientific setup; that archive is not a video dependency.
+Decoded H.264 frames from visible/hidden particle selections, mesh selections,
+field selections, combined selections and the populated Analysis case are
+**byte-identical to their equivalent zero-selection ordinary export**. Their
+camera/sample/timing traces are identical, with no carried marker field. Checked
+optional records also match the ordinary case exactly. Ordinary legends remain
+functional: legends off/on change pixels, and camera orbit remains exercised.
+All completed release clips match their source counterpart in decoded pixels
+and camera/sample/timing. FFprobe confirms H.264, 320×180, 4 FPS and two frames.
 
-## Failed attempts and limitations
+The matrices also cover rendering/encoding cancellation, Run in background,
+Jobs reopening, missing/failing FFmpeg, parent Exit cancellation, success PNG
+cleanup, failed/cancelled retention and missing-PCK startup refusal. No partial
+final MP4 is published. Close File control/closed videos, timing and optional
+records match; its independently checked numerical CSV remains byte-identical.
+Source hashes remain unchanged throughout. The independent Matched Views test
+checks membership, provenance/image hashes and aligned physical pixels.
 
-The retained [initial matrix](initial-source-failed.json) has nine failed checks:
-the first marker implementation used an incorrect object transform field for
-mesh/grid positions. The [initial mesh log](initial-mesh-failed.log) preserves the
-actual error. The field lookup was corrected to `data_to_world`; all subsequent
-source/release matrices above pass. Fixture corrections supplied the existing
-manual-navigation hook, respected current inverted-range clamping, replaced
-retired preparation flags, and waited for visible highlights before comparing
-Close File snapshots. An initial Close File Python comparison expected retired
-v3 scientific sidecars; it now compares ordinary visual records directly. These
-were not new production lifecycle changes.
+Release tests remove their staging project before execution, run from an
+unrelated directory containing another project, exclude the external Godot editor
+from PATH and clear PYTHONPATH. Only the test parent entry is instrumented;
+children dispatch through production Main in the release executable/PCK. The
+first-party scientific archive is retained for independent tools/setup and is
+not an ordinary-video dependency.
 
-Two strict checks remain unsuccessful and are not masked:
+A separate package with the normal production entry is available locally at
+`/home/Nozba/Codex/Wavez/video-340-review-revised/`. Keep its executable/PCK together.
+Its [build identity and hashes](review-package-build.json) identify v0.1.0.93.
+The earlier `/home/Nozba/Codex/Wavez/video-340-review/` package is superseded.
+[Actual Advanced with active selections](advanced-with-selections.png) and
+[compact dialog](dialog-compact.png) were visually inspected; records remain
+unchecked and no selection quota/control is present.
 
-1. The native marker-only Compatibility harness emits two **349,524-byte GL
-   texture teardown errors**, after all assertions pass. Final render flushes and
-   waits did not clear them. An unchanged accepted-main harness without the new
-   marker code reproduces both errors: [log](markers-accepted-main.log),
-   [exact harness](markers-accepted-main-harness.txt). Forward+ and the actual
-   Compatibility source/release MP4 matrices finish cleanly under their existing
-   encoder-diagnostic policy. This investigation establishes baseline reproduction,
-   not a complete diagnosis of the texture lifetime.
-2. Jobs focus checks fail twice at `Opening Jobs focuses the first available action`
-   on unchanged main and the candidate: [candidate log](status-candidate.log),
-   [baseline log](status-accepted-main.log). All other final status assertions pass;
-   this run is not reported as a clean full-suite pass. An earlier accidental
-   test-only field-state substitution was corrected before this final comparison.
+## Failures, limitations and historical preservation
 
-The inherited video harness explicitly records the known killed-encoder PID
-cleanup diagnostic. Each release report contains four log occurrences (parent /
-worker copies); only that expected pattern and the intentionally missing-PCK
-startup error are permitted. They remain visible. The earlier root-Window Popup
-signal investigation remains [historical evidence](../issue-335/README.md).
+A first sandboxed editor import reported socket/editor-settings permission errors:
+[original log](initial-import-sandbox.log). Repeating the same import with normal
+native access completed cleanly; no source repair was required.
 
-Other operating systems/hardware, physical input/KDE behavior, mixed DPI/4K,
-long research exports, large hidden-layer preview costs, and machine-wide removal
-of Python/Godot remain unverified. PATH blockers and staging removal prove the
-stated process boundaries, not physical uninstallation. Source mutation/integrity,
-playback/cache core and unrelated camera/analysis suites were not rerun because
-those implementations were unchanged. Numerical persistence and scientific
-membership were covered at the connected boundaries above.
+The inherited video harness preserves the killed-encoder PID cleanup diagnostic.
+Each full matrix contains four occurrences across parent/worker log copies. Only
+that exact expected pattern and the deliberately withheld-PCK startup error are
+allowed; other errors/warnings fail the checks. These reports do not claim that
+intentional failure-path logs are empty.
 
-## Reproduction and owner verification
+Earlier connected Jobs/status testing remains evidence for the unchanged status
+implementation: [candidate](superseded-marker-direction/status-candidate.json)
+has 322 checks with two focus failures, and [accepted main](superseded-marker-direction/status-accepted-main.json)
+has 324 with the same two failures, `Opening Jobs focuses the first available
+action`. This standalone focus suite was not repeated after the marker removal;
+the revised video matrices exercise actual Jobs reopening/cancellation. Owner
+physical focus verification is still recommended. The prior marker-only
+Compatibility teardown failure belongs to the removed harness, not a passing
+current-candidate check; its original reports remain retained.
 
-From the repository root, use a fresh directory for every command:
+Other operating systems/hardware, physical desktop input, mixed DPI/4K, long
+research clips and machine-wide removal of Python/Godot remain untested. PATH
+blocking and staging removal prove the stated process boundaries, not physical
+uninstallation. No new claim is made for optional isosurface extraction or its
+external dependencies. Unrelated playback/cache/camera/core suites were not
+rerun because their implementations did not change. The actual changed video
+and shared worker boundaries, independent science and numerical persistence
+were validated above. Full scientific end-to-end validation remains outside
+this issue and incomplete.
+
+The complete earlier local checkpoint `8192a00`, including all 26 original
+artifact hashes, is retained under [superseded marker direction](superseded-marker-direction/CONTEXT.md).
+Its original README/reports were preserved byte-for-byte, including two trailing
+spaces in raw status logs that a whole-branch whitespace check reports. Source
+and documentation diffs pass with raw logs excluded. The earlier artifacts describe the
+previous requirements and are not evidence for the revised candidate. All
+pre-existing historical issue evidence and review-time acceptance wording were
+preserved. Current video/package/onboarding/scientific-schema/Close File guides
+and status now describe the exclusion boundary.
+
+## Reproduction and exact owner verification
+
+Use fresh directories for every command, from the repository root:
 
 ```sh
 python tools/validate_packaged_video.py --godot /absolute/path/to/Godot \
@@ -148,39 +165,35 @@ python tools/validate_packaged_video.py --godot /absolute/path/to/Godot \
 python tools/validate_packaged_video.py --godot /absolute/path/to/Godot \
   --output-dir /tmp/review-release --renderer forward_plus --export \
   --compare-source /tmp/review-source
-python tools/validate_video_markers.py --godot /absolute/path/to/Godot \
-  --output-dir /tmp/review-markers --renderer forward_plus
 ```
 
-Repeat with Compatibility and fresh paths. Independent scientific checks and
-packaging instructions are in [the package guide](../../PACKAGED_VIDEO_EXPORT.md).
-A production-entry review package (not the instrumented test parent) is retained
-outside Git at `/home/Nozba/Codex/Wavez/video-340-review/`; [build identity / hashes](review-package-build.json).
-Keep its executable and PCK together.
+Repeat with `gl_compatibility` and fresh paths. Independent scientific checks
+are documented in [the package guide](../../PACKAGED_VIDEO_EXPORT.md).
 
-1. Launch that executable from an unrelated directory; check Help → About shows
-   v0.1.0.93. Select a usable external FFmpeg in File Locations if needed.
-2. Open a `.wvz`; export a short clip with zero selections and the checkbox off.
-   Verify MP4 playback, timing, camera, appearance and enabled legends.
-3. With Python/NumPy available, create particle, mesh and field selections in
-   Tools → Selection. Let their highlights appear. Export to a fresh filename:
-   the same options/Advanced control remain available, no G4 quota appears,
-   no recipe directory is generated and inspection JSON remains absent unless
-   explicitly checked. Persistent-ID markers must follow displayed source motion.
-   Sample-scoped marker expiry and the fixed preview subset are intentional.
-4. Check Advanced's inspection checkbox explicitly and repeat; inspect retained
-   visual records, without scientific selection results. Disable highlights and
-   confirm the original pixels return. [Actual all-selection Advanced state](advanced-with-selections.png)
-   and [compact dialog](dialog-compact.png) are retained for review.
-5. Verify independent Selection, Temporal/Space-time Analysis, inspection
-   save/restore, numerical result export and explicit Matched Views with their
-   scientific dependencies available.
-6. Start a longer small-fixture export, background it, reopen it via Jobs and
-   Close File while it runs. Cancel through the confirmation and verify no final
-   partial MP4. Repeat an encoder failure and parent Exit cancellation path.
-7. Review the explicit baseline diagnostics above and physically check focus,
-   actual research clips and desktop comfort before acceptance.
-
-Current video/package/scientific-schema/Close File/dependency guides and status
-were synchronized. All pre-existing review evidence, including historical pending
-review wording, was preserved. Checks passing do not constitute owner acceptance.
+1. Launch `/home/Nozba/Codex/Wavez/video-340-review-revised/WAVEZ.x86_64` from an
+   unrelated directory. Check Help → About is v0.1.0.93; configure external
+   FFmpeg in File Locations if needed.
+2. Open a capture, choose File → Export → Video and a short fixed range, locked
+   camera, Current state, fixed size/FPS/rate and fresh MP4 path. Leave Advanced
+   records unchecked. Check particle/mesh/field rendering, camera, timing and
+   legends in the resulting clip.
+3. With Python/NumPy available, create visible particle, mesh and field selections
+   in Tools → Selection, including a combined selection set. Run Temporal
+   Analysis → Population counts over the recorded interval and display its plot.
+   Export again to a new filename with exactly the same ordinary presentation
+   settings. The clip must match the baseline, contain no highlights/Analysis
+   overlays, start no video-related scientific work and generate no recipe or
+   mandatory JSON. Interactive highlights/results must remain available.
+4. Toggle Include enabled viewport legends: ordinary legends must follow this
+   option, while Selection/Analysis overlays remain excluded in both states.
+   Explicitly check Advanced → Save per-frame inspection JSON and repeat: only
+   then should ordinary visual records appear, with no scientific results.
+5. Confirm independent Selection, Analysis, numerical CSV export and scientific
+   inspection save/restore still work with their dependencies available. Explicit
+   Matched Views remains its separate scientific tool.
+6. Background a longer small-fixture export, reopen through Jobs, Close File
+   while it runs, and cancel via the confirmation. Check no partial final MP4.
+   Repeat during encoding, with failing FFmpeg, and through confirmed parent Exit.
+7. Physically verify Jobs focus and realistic clips on the owner's desktop before
+   acceptance. No push, PR creation, merge or publication follows without the
+   owner's next instruction.

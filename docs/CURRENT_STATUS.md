@@ -7,7 +7,7 @@ owner-merged PR #339. The repository's application identity is
 Issue #340 proposes candidate **v0.1.0.93**: File → Export → Video always uses
 visual version-1 jobs, external FFmpeg and explicitly optional visual records.
 Existing selections never trigger scientific recipe processing or Python/NumPy.
-Displayed markers follow native source elements without membership queries;
+Selection highlights and Analysis overlays are excluded from exported frames;
 Selection/Analysis, scientific persistence and explicit Matched Views remain
 independent. See [video](VIDEO_EXPORT.md), [packaging](PACKAGED_VIDEO_EXPORT.md)
 and [review evidence](evidence/issue-340/README.md). Owner review is pending.

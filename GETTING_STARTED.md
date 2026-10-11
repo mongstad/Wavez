@@ -64,8 +64,9 @@ try Compatibility from a terminal:
 | Run the viewer from source | External **Godot 4.7.2** (the tested engine), source checkout and graphics drivers |
 | Build the Linux package | Python, Godot and matching Linux export templates; see [packaging](docs/PACKAGED_VIDEO_EXPORT.md#build-and-run) |
 
-Video export carries already visible selection markers as visual presentation;
-it does not run scientific membership queries. Optional per-frame visual inspection
+Video export excludes all Selection highlights and Analysis overlays. Existing
+selections and analysis results do not change exported frames or trigger scientific
+membership queries. Optional per-frame visual inspection
 JSON is controlled only by **Output → Advanced**. Selection/Analysis, durable
 scientific inspection/results and explicitly requested Matched Views remain
 independent workflows requiring Python/NumPy. See [video export](docs/VIDEO_EXPORT.md).

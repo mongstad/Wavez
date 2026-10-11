@@ -116,6 +116,7 @@ def main():
     slow = output / 'slow ffmpeg'; slow.write_text('#!' + sys.executable + '\nimport os,sys,time\na=sys.argv[1:]\nif a == ["-version"]: os.execv(' + repr(ffmpeg) + ',["ffmpeg","-version"])\ntime.sleep(3)\nos.execv(' + repr(ffmpeg) + ',["ffmpeg"]+a)\n'); slow.chmod(0o755)
     cases = [
         ('particles-off', 'particles', {}), ('particles-on', 'particles', dict(overlays=True, orbit=True)),
+        ('particles-legends', 'particles', dict(overlays=True)),
         ('mixed-off', 'mixed', {}), ('mixed-on', 'mixed', dict(overlays=True)),
         ('selection-particle', 'particles', dict(selection='particle', overlays=True)),
         ('selection-hidden', 'particles', dict(selection='particle', overlays=True, hidden=True)),
@@ -124,6 +125,7 @@ def main():
         ('selection-all', 'mixed', dict(selection='all', overlays=True)),
         ('selection-optional', 'particles', dict(selection='particle', overlays=True, sidecars=True)),
         ('ordinary-optional', 'particles', dict(overlays=True, sidecars=True)),
+        ('analysis-result', 'particles', dict(selection='particle', analysis=True, overlays=True)),
         ('cancel-rendering', 'particles', dict(cancel='rendering', expected='cancelled')),
         ('cancel-encoding', 'particles', dict(cancel='encoding', expected='cancelled', ffmpeg=str(slow))),
         ('failed-encoder', 'particles', dict(expected='failed', ffmpeg=str(bad))),
@@ -192,13 +194,7 @@ def main():
             check(len(sidecars) == (2 if changes.get('sidecars',False) else 0), name + ': inspection records only when explicitly requested')
             check(all(json.loads(p.read_text()).get('version') == 2 and not json.loads(p.read_text()).get('selections') for p in sidecars), name + ': optional visual records contain no scientific selection results')
             timing = [json.loads(line) for line in (Path(report['directory'])/'timing.jsonl').read_text().splitlines()]
-            markers = [row['presentation_markers'] for row in timing]
-            if changes.get('selection') in ('particle','all') and not changes.get('hidden'):
-                check(all(any(p is not None and abs(p[0]-(-1+row['capture_time']))<1e-6 and p[1:]==[0,0] for p in row['presentation_markers']) for row in timing), name + ': particle marker follows displayed ID across sample brackets')
-            if changes.get('selection') in ('mesh','all'):
-                check(all(any(p is not None and abs(p[2]-row['capture_time']/4)<1e-6 and p[:2]==[1,-1] for p in row['presentation_markers']) for row in timing), name + ': mesh marker follows displayed source vertex')
-            if changes.get('selection') in ('field','all'):
-                check(any(p is not None for p in markers[0]) and (markers[1][-1] is None), name + ': native grid address expires outside its source sample')
+            check(all('presentation_markers' not in row for row in timing), name + ': no carried selection marker state in video trace')
         check(not python_calls.exists(), name + ': unusable Python is never invoked by video')
         print(name + ': ' + ('PASS' if all(c['ok'] for c in checks) else 'see failures'), flush=True)
     check(hashes == {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in inputs.glob('*.wvz')}, 'All synthetic source bytes unchanged')
@@ -206,13 +202,21 @@ def main():
         off, on = output / (kind + '-off/result.mp4'), output / (kind + '-on/result.mp4')
         if off.exists() and on.exists():
             check(decoded(off) != decoded(on), kind + ': enabled overlays/orbit affect exported pixels')
-    ordinary = output / 'ordinary-optional/result.mp4'
-    selected = output / 'selection-optional/result.mp4'
-    hidden = output / 'selection-hidden/result.mp4'
-    if ordinary.exists() and selected.exists():
-        check(decoded(ordinary) != decoded(selected), 'Visible carried markers change exported pixels')
-    if ordinary.exists() and hidden.exists():
-        check(decoded(ordinary) == decoded(hidden), 'Invisible selection definitions do not change video pixels')
+    for name, kind, changes in cases:
+        if not changes.get('selection'): continue
+        selected = output / name / 'result.mp4'
+        ordinary_name = ('ordinary-optional' if changes.get('sidecars') else 'particles-legends') if kind == 'particles' else 'mixed-on'
+        ordinary = output / ordinary_name / 'result.mp4'
+        if ordinary.exists() and selected.exists():
+            check(decoded(ordinary) == decoded(selected), name + ': active Selection/Analysis does not change exported pixels')
+            selected_report = json.loads((output / name / 'report.json').read_text())
+            ordinary_report = json.loads((output / ordinary_name / 'report.json').read_text())
+            selected_directory, ordinary_directory = Path(selected_report['directory']), Path(ordinary_report['directory'])
+            check((selected_directory / 'timing.jsonl').read_bytes() == (ordinary_directory / 'timing.jsonl').read_bytes(), name + ': scientific session state does not change camera/sample/timing')
+            if changes.get('sidecars'):
+                selected_records = [json.loads(p.read_text()) for p in sorted(selected_directory.glob('inspection-*.json'))]
+                ordinary_records = [json.loads(p.read_text()) for p in sorted(ordinary_directory.glob('inspection-*.json'))]
+                check(selected_records == ordinary_records, name + ': optional records are independent of selections')
     if args.compare_source:
         for report in reports:
             name = report['name']; movie = output / name / 'result.mp4'

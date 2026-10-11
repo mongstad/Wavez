@@ -134,7 +134,7 @@ func _ready() -> void:
 	orbit = number("Orbit • radians / video second", .08, -10, 10, .001, camera_fields)
 	rendering = choice("Rendering", ["Current state", "Cinematic preset", "Scientific preset"], presentation_fields)
 	overlays = check("Overlays", "Include enabled viewport legends", presentation_fields)
-	overlays.tooltip_text = "Include enabled particle, field and mesh viewport legends. Application controls are never exported; independent scientific guides and markers retain their settings."
+	overlays.tooltip_text = "Include enabled particle, field and mesh viewport legends. Application controls and Selection/Analysis overlays are never exported."
 	trails = check("Trails", "Include recorded history", presentation_fields)
 	trails.tooltip_text = "Scientific rendering suppresses trails, matching the interactive viewer."
 	quality = choice("H.264 quality", ["High • CRF 18", "Balanced • CRF 21", "Compact • CRF 25"], output_fields)
@@ -406,7 +406,6 @@ func configured_job() -> Dictionary:
 		job.state.environment.background_mode = Environment.BG_COLOR if clean else Environment.BG_SKY
 	job.state.overlay_visible = overlays.button_pressed
 	job.state.trails_enabled = trails.button_pressed
-	job.presentation_markers = preload("res://video/presentation_markers.gd").snapshot(viewer)
 	return job
 
 func update_estimate() -> void:

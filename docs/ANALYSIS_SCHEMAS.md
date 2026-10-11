@@ -4,7 +4,8 @@ These private file/message formats implement selections, source-native numerical
 jobs, diagnostics/comparisons, space-time plots, durable numerical export,
 inspection v3, scientific PNG bundles and explicitly requested Matched Views.
 File → Export → Video uses the independent visual version-1 job schema, even
-when selections exist; see [video export](VIDEO_EXPORT.md).
+when selections exist; Selection/Analysis state and overlays are excluded. See
+[video export](VIDEO_EXPORT.md).
 They carry no executable expressions or service endpoint. Governing behavioral
 semantics are in [the scientific contract](SCIENTIFIC_ANALYSIS.md).
 The current implementation lives in `wavez_export/analysis/`, `viewer/analysis/`
@@ -315,8 +316,10 @@ Version-2 render jobs are implemented. They retain the v1 fields and add
 and `exact_timing` (packed binary64 start/end/rate with integer FPS). The exact
 timing is authoritative when parsing JSON. Source extents are pinned before
 building the export timeline; the recipe is validated once, then each frame
-forces its exact source-selection resolution before drawing. Version-1 jobs
-retain their previous behavior.
+forces its exact source-selection resolution before drawing. This version-2
+path is used by explicit scientific Matched Views. File → Export → Video uses
+version-1 jobs, excludes Selection/Analysis overlays and never requests recipes
+or scientific membership.
 
 Per-frame v3 sidecars may specify `asset_directory:"recipe.inspection"`, a
 single child directory within the selected sidecar's directory. `base.render`
@@ -329,8 +332,8 @@ overwriting an existing destination. `save_recipe` accepts an explicit
 `image:{path}` only for this captured-image input; it never reads image paths
 merely from unvalidated recipe text.
 
-G4 scene video uses a scene-only recipe with selections and empty analysis
-results/layout: plotted data is not implicitly recomputed or filmed. Its finite
+Explicit scientific Matched Views use scene-only recipes with selections and
+empty analysis results/layout; this is independent of File → Export → Video. Their finite
 quota (1 MiB–64 GiB) includes frames, sidecars, assets and encoding. Conservative
 admission preserves 256 MiB free space; 8,192 files / 1,024 directories bound a
 job. The file-count ceiling is checked before rendering. These G4 bounds do not
