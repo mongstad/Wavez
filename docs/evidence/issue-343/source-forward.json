@@ -1,0 +1,40 @@
+{
+  "checks": 230,
+  "renderer": "forward_plus",
+  "packaged": false,
+  "fresh_process_restart": true,
+  "source_sha256_unchanged": {
+    "mixed.wvz": "d685997ecf92e9cd6ac4d567646379b1594612942251c67e4a9620fcb2c51fd3",
+    "meshes.wvz": "1561dad1f6215adff8c16f922c7cc675c1b7d9a0cc3964a070f959ca656989e1",
+    "fields.wvz": "c76fa96285b11e04277cc84a65cd61779dc128d0da067d08b2698c5cebb3e124",
+    "particles.wvz": "6a0fa5cfb00042be8320e1a217e5a8d407e42a29305b07fb3dc36afac3ae0564"
+  },
+  "reports": [
+    {
+      "checks": 221,
+      "display": "X11",
+      "failures": [],
+      "layouts": [],
+      "measurements": [],
+      "packaged": false,
+      "renderer": "forward_plus",
+      "restart": false
+    },
+    {
+      "checks": 9,
+      "display": "X11",
+      "failures": [],
+      "layouts": [],
+      "measurements": [],
+      "packaged": false,
+      "renderer": "forward_plus",
+      "restart": true
+    }
+  ],
+  "rmb_only": true,
+  "staging_removed": false,
+  "known_engine_cleanup_diagnostics": {
+    "roll": [],
+    "restart": []
+  }
+}

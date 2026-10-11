@@ -1,0 +1,40 @@
+{
+  "checks": 205,
+  "renderer": "headless",
+  "packaged": false,
+  "fresh_process_restart": true,
+  "source_sha256_unchanged": {
+    "mixed.wvz": "9ae3f977232b2ab78eb1dccfd4c9bfbe63b686e8775948d8940df06ac45b40a2",
+    "meshes.wvz": "5f4b0a288ba3791858727e45475e75dd4c4687defff1262c4390175b933f5a29",
+    "fields.wvz": "b18c906dae8ce5c4a7516a0a1af27fa0b78f929b84f2c361d1da8f06ea1c541e",
+    "particles.wvz": "8b021450bd54b2c99148b4b54c14ef3763018edd83fcf525a2b7035fe76783e3"
+  },
+  "reports": [
+    {
+      "checks": 196,
+      "display": "headless",
+      "failures": [],
+      "layouts": [],
+      "measurements": [],
+      "packaged": false,
+      "renderer": "forward_plus",
+      "restart": false
+    },
+    {
+      "checks": 9,
+      "display": "headless",
+      "failures": [],
+      "layouts": [],
+      "measurements": [],
+      "packaged": false,
+      "renderer": "forward_plus",
+      "restart": true
+    }
+  ],
+  "rmb_only": true,
+  "staging_removed": false,
+  "known_engine_cleanup_diagnostics": {
+    "roll": [],
+    "restart": []
+  }
+}

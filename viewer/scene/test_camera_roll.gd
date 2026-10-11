@@ -5,6 +5,7 @@ const Visual = preload("res://scene/visual_state.gd")
 const Bindings = preload("res://ui/keyboard_shortcuts.gd")
 var output := ""
 var restart := false
+var rmb_only := false
 var checks := 0
 var failures: Array[String] = []
 var measurements: Array = []
@@ -132,6 +133,161 @@ func angles(view, label: String) -> void:
 	if view.frame_a != null: check(view.frame_a.positions == points,label+": original scientific coordinates unchanged")
 	view._reset_camera(); check(not view.camera_orbit_basis_active,label+": intentional Reset Camera clears roll")
 
+func rmb_button(button: int = MOUSE_BUTTON_RIGHT, pressed: bool = true) -> void:
+	var event := InputEventMouseButton.new(); event.button_index = button; event.pressed = pressed
+	event.position = Vector2(400,300) if pressed else Vector2(0,0)
+	root.push_input(event)
+
+func rmb_motion(view, movement: Vector2) -> void:
+	var event := InputEventMouseMotion.new(); event.position = view.free_look_last_mouse + movement
+	root.push_input(event)
+
+func rmb_roll(view) -> void:
+	var shortcuts = view.shell.shortcuts
+	var prior: Dictionary = shortcuts.active.duplicate()
+	var prior_speed: int = shortcuts.camera_roll_speed
+	var profile: Dictionary = prior.duplicate()
+	Bindings.assign(profile,"roll_camera_left",KEY_F8); Bindings.assign(profile,"roll_camera_right",KEY_F9)
+	Bindings.assign(profile,"orbit_camera_left",KEY_F6)
+	check(shortcuts.apply(profile,null,18) == OK,"RMB: apply existing editable roll/orbit bindings without new defaults")
+	view._clear_manual_navigation(); unfocus(); view.inspection_paused = false; view.free_camera = true; view.orbit_enabled = false
+	view._reset_camera(); view.camera_target = Vector3(3,-2,7); view.camera_distance = 32
+	view.yaw = .7; view.pitch = deg_to_rad(115); view._update_camera()
+	var saved: Dictionary = Visual.snapshot(view)
+	var world := poses(view)
+	var scientific: Dictionary = view.scene_layers.snapshot().duplicate(true)
+	var sample: Dictionary = view.committed_sample.duplicate(true)
+	var points: PackedVector3Array = view.frame_a.positions.duplicate()
+	var speed: float = view.free_camera_speed_scale
+	for action in ["roll_camera_left","roll_camera_right"]:
+		var sign := 1.0 if action.ends_with("left") else -1.0
+		for roll_first in [false,true]:
+			for rate in [5,18,90]:
+				view._clear_manual_navigation(); Visual.apply(view,saved); unfocus()
+				shortcuts.camera_roll_speed = rate
+				var initial: Transform3D = view.camera.transform
+				var held_key: InputEventKey = shortcuts.event_for(action); held_key.pressed = true
+				if roll_first:root.push_input(held_key)
+				rmb_button()
+				if not roll_first:root.push_input(held_key)
+				var label := "RMB: %s roll-first=%s speed=%d" % [action,roll_first,rate]
+				check(view.free_look_dragging and view.camera_roll_keys.has(action) and view.camera.transform == initial,label+" starts both holds without a jump")
+				if DisplayServer.get_name() != "headless":check(Input.mouse_mode == Input.MOUSE_MODE_HIDDEN,label+" cursor stays hidden")
+				var expected: Basis = initial.basis
+				for dt in [.1,.05,.025]:
+					var motion := Vector2(17,-11)
+					view._update_camera_roll(dt)
+					expected = (expected * Basis(Vector3.BACK,sign*dt*deg_to_rad(float(rate)))).orthonormalized()
+					rmb_motion(view,motion)
+					expected = (expected * Basis(Vector3.UP,-motion.x*view.FREE_LOOK_SENSITIVITY) * Basis(Vector3.RIGHT,-motion.y*view.FREE_LOOK_SENSITIVITY)).orthonormalized()
+					check(view.camera.basis.is_equal_approx(expected) and view.camera.position == initial.origin,label+" composes measured roll and both steering axes at dt="+str(dt))
+					check(view.camera_target.distance_to(initial.origin-expected.z*view.camera_distance) < .00001 and view.camera_distance == saved.camera_distance,label+" keeps basis/target/radius synchronized")
+				var echo: InputEventKey = held_key.duplicate(); echo.echo = true; root.push_input(echo)
+				check(view.camera_roll_keys.size()==1,label+" key repeat cannot duplicate a hold")
+				held_key.pressed = false; root.push_input(held_key)
+				var stopped: Transform3D = view.camera.transform; view._update_camera_roll(.1)
+				check(view.camera.transform == stopped and view.camera_roll_keys.is_empty() and view.free_look_dragging,label+" key-up stops only roll")
+				rmb_motion(view,Vector2(9,5)); check(not view.camera.basis.is_equal_approx(stopped.basis),label+" steering continues after key-up")
+				held_key.pressed = true; root.push_input(held_key); rmb_button(MOUSE_BUTTON_RIGHT,false)
+				stopped = view.camera.transform; view._update_camera_roll(.1)
+				check(view.camera_roll_keys.has(action) and not view.free_look_dragging and view.camera.basis.is_equal_approx((stopped.basis*Basis(Vector3.BACK,sign*.1*deg_to_rad(float(rate)))).orthonormalized()),label+" RMB-up retains independent roll")
+				if DisplayServer.get_name() != "headless":check(Input.mouse_mode == Input.MOUSE_MODE_VISIBLE,label+" RMB-up restores cursor while roll continues")
+				held_key.pressed = false; root.push_input(held_key)
+	shortcuts.camera_roll_speed = 18
+	view._clear_manual_navigation(); Visual.apply(view,saved); unfocus(); rmb_button()
+	root.push_input(key(KEY_F8)); root.push_input(key(KEY_F9))
+	var before: Transform3D = view.camera.transform; view._update_camera_roll(.1)
+	check(view.camera.transform == before and view.camera_roll_keys.size()==2,"RMB: opposing held directions cancel")
+	rmb_motion(view,Vector2(20,10)); check(not view.camera.basis.is_equal_approx(before.basis),"RMB: opposing roll holds do not block steering")
+	before = view.camera.transform; root.push_input(key(KEY_F9,false)); view._update_camera_roll(.1)
+	check(view.camera.basis.is_equal_approx((before.basis*Basis(Vector3.BACK,deg_to_rad(1.8))).orthonormalized()),"RMB: releasing one direction resumes the other")
+	root.push_input(key(KEY_F8,false)); rmb_button(MOUSE_BUTTON_RIGHT,false)
+	root.push_input(key(KEY_F8)); before = view.camera.transform
+	for n in 6:
+		rmb_button(); view._update_camera_roll(.05); rmb_motion(view,Vector2(3,-2)); rmb_button(MOUSE_BUTTON_RIGHT,false)
+		check(view.camera_roll_keys.has("roll_camera_left") and not view.free_look_dragging,"RMB: repeated press/release preserves independently held roll "+str(n))
+	check(not view.camera.basis.is_equal_approx(before.basis),"RMB: repeated gestures keep accumulating roll/steering")
+	root.push_input(key(KEY_F8,false))
+	# LMB and held orbit retain their accepted priority and cleanup.
+	root.push_input(key(KEY_F6)); root.push_input(key(KEY_F8)); rmb_button()
+	check(view.manual_orbit_keys.is_empty() and view.camera_roll_keys.has("roll_camera_left"),"RMB: starting steering discards orbit while retaining roll")
+	root.push_input(key(KEY_F6)); check(view.manual_orbit_keys.is_empty(),"RMB: steering still blocks new held orbit")
+	root.push_input(key(KEY_F6,false)); rmb_button(MOUSE_BUTTON_LEFT)
+	before = view.camera.transform; view._update_camera_roll(.1)
+	check(view.dragging and not view.free_look_dragging and view.camera_roll_keys.is_empty() and view.camera.transform==before,"RMB: LMB takeover ends roll and free-look")
+	rmb_button(MOUSE_BUTTON_LEFT,false); root.push_input(key(KEY_F8,false))
+	view._clear_manual_navigation(); unfocus(); rmb_button(); root.push_input(key(KEY_F8))
+	for pair in [[KEY_W,Vector3.FORWARD],[KEY_S,Vector3.BACK],[KEY_A,Vector3.LEFT],[KEY_D,Vector3.RIGHT],[KEY_E,Vector3.UP],[KEY_Q,Vector3.DOWN]]:
+		movement_key(pair[0]); view._update_camera_roll(.1); before = view.camera.transform; view._move_free_camera(.1)
+		var shift: Vector3 = before.basis*pair[1]*.1*maxf(1,view.camera_distance*.5)*speed
+		check(view.camera.position.distance_to(before.origin+shift)<.0001 and view.camera.basis.is_equal_approx(before.basis),"RMB: combined roll/translation uses banked local axes "+str(pair[0]))
+		movement_key(pair[0],false)
+	root.push_input(key(KEY_PLUS)); root.push_input(key(KEY_PLUS,false))
+	before = view.camera.transform; view._update_camera_roll(.1)
+	check(view.free_camera_speed_scale>speed and view.camera.basis.is_equal_approx((before.basis*Basis(Vector3.BACK,deg_to_rad(1.8))).orthonormalized()),"RMB: translation speed shortcut still works without changing roll rate")
+	view.free_camera_speed_scale = speed; view._clear_manual_navigation()
+	for control in [LineEdit.new(),TextEdit.new(),SpinBox.new(),Button.new()]:
+		root.add_child(control); unfocus(); rmb_button(); root.push_input(key(KEY_F8))
+		var editor: Control = control.get_line_edit() if control is SpinBox else control
+		editor.grab_focus(); before = view.camera.transform; view._update_camera_roll(.1)
+		root.push_input(key(KEY_F9)); view._update_camera_roll(.1)
+		check(view.camera_roll_keys.is_empty() and view.camera.transform==before,"RMB: focused control suppresses existing/new roll "+control.get_class())
+		editor.release_focus(); view._update_camera_roll(.1)
+		check(view.camera.transform==before,"RMB: leaving focus cannot resume stale roll "+control.get_class())
+		control.free(); view._clear_manual_navigation()
+	for guard in ["inspection_busy","inspection_paused","offline_instance"]:
+		unfocus(); rmb_button(); root.push_input(key(KEY_F8)); view.set(guard,true); before = view.camera.transform; view._update_camera_roll(.1)
+		check(view.camera_roll_keys.is_empty() and view.camera.transform==before,"RMB: "+guard+" suppresses roll")
+		view.set(guard,false); view._clear_manual_navigation()
+	unfocus(); rmb_button(); root.push_input(key(KEY_F8)); root.focus_exited.emit(); before = view.camera.transform; view._update_camera_roll(.1)
+	check(not view.free_look_dragging and view.camera_roll_keys.is_empty() and view.camera.transform==before,"RMB: window focus loss clears both holds")
+	if DisplayServer.get_name() != "headless":check(Input.mouse_mode==Input.MOUSE_MODE_VISIBLE,"RMB: focus loss restores cursor")
+	for modal in ["preferences","menu","orbit"]:
+		unfocus(); rmb_button(); root.push_input(key(KEY_F8))
+		if modal=="preferences":view.shell.edit_shortcuts(); view.shell.shortcuts_editor.dismiss()
+		elif modal=="orbit":view.shell.edit_orbit_center(); view.shell.dismiss_orbit_editor()
+		else:view.shell.navigation.get_child(2).about_to_popup.emit()
+		unfocus(); before = view.camera.transform; view._update_camera_roll(.1)
+		check(view.camera_roll_keys.is_empty() and not view.free_look_dragging and view.camera.transform==before,"RMB: "+modal+" clears gestures without stale resume")
+	# Rebound modifier chords and physical-key release must use the existing path.
+	var rebound: Dictionary = profile.duplicate(); Bindings.assign(rebound,"roll_camera_left",KEY_F10|KEY_MASK_CTRL)
+	check(shortcuts.apply(rebound)==OK,"RMB: remap roll through existing conflict-transfer persistence")
+	unfocus(); rmb_button(); root.push_input(key(KEY_F8)); before = view.camera.transform; view._update_camera_roll(.1)
+	check(view.camera.transform==before,"RMB: old unbound roll key stays inactive")
+	root.push_input(key(KEY_F10|KEY_MASK_CTRL,true,KEY_F11)); view._update_camera_roll(.1)
+	check(view.camera_roll_keys.has("roll_camera_left") and not view.camera.basis.is_equal_approx(before.basis),"RMB: rebound logical chord rolls despite another physical key position")
+	root.push_input(key(KEY_F10|KEY_MASK_CTRL,false,KEY_F11)); before = view.camera.transform; view._update_camera_roll(.1)
+	check(view.camera_roll_keys.is_empty() and view.camera.transform==before,"RMB: physical release stops rebound roll")
+	root.push_input(key(KEY_F10|KEY_MASK_CTRL)); root.push_input(key(KEY_CTRL,false)); before = view.camera.transform; view._update_camera_roll(.1)
+	check(view.camera_roll_keys.is_empty() and view.camera.transform==before,"RMB: modifier release cancels a held roll chord")
+	root.push_input(key(KEY_F10|KEY_MASK_CTRL)); check(shortcuts.apply(profile)==OK,"RMB: rebind while held")
+	before = view.camera.transform; view._update_camera_roll(.1)
+	check(view.camera_roll_keys.is_empty() and view.camera.transform==before,"RMB: rebinding cannot resume a stale hold")
+	var results: Array[Basis] = []
+	for invert in [false,true]:
+		view._clear_manual_navigation(); Visual.apply(view,saved); unfocus(); shortcuts.invert_y_axis = invert
+		rmb_button(); root.push_input(key(KEY_F8)); view._update_camera_roll(.1); rmb_motion(view,Vector2(23,-31)); results.append(view.camera.basis)
+	check(results[0].is_equal_approx(results[1]),"RMB: invert-Y preference does not alter steering plus roll")
+	shortcuts.invert_y_axis = false; view._clear_manual_navigation(); unfocus()
+	view.orbit_enabled = true; before = view.camera.transform; rmb_button(); root.push_input(key(KEY_F8))
+	check(not view.orbit_enabled and view.free_camera and view.camera.transform==before,"RMB: Auto Orbit takeover remains immediate and jump-free")
+	view._update_camera_roll(.1); root.push_input(key(KEY_F8,false)); rmb_button(MOUSE_BUTTON_RIGHT,false)
+	check(not view.orbit_enabled,"RMB: releasing both controls leaves Auto Orbit off")
+	# Same roll contract without RMB, and actual event/process-loop coexistence.
+	before = view.camera.transform; root.push_input(key(KEY_F8)); view._update_camera_roll(.1); root.push_input(key(KEY_F8,false))
+	check(view.camera.basis.is_equal_approx((before.basis*Basis(Vector3.BACK,deg_to_rad(1.8))).orthonormalized()),"RMB: ordinary roll without a mouse hold is unchanged")
+	unfocus(); await settle(); rmb_button(); root.push_input(key(KEY_F8)); before = view.camera.transform
+	view.set_process(true); await get_tree().create_timer(.15).timeout
+	check(view.free_look_dragging and not view.camera.basis.is_equal_approx(before.basis) and view.camera.position==before.origin,"RMB: real process loop rolls continuously while steering is held")
+	before = view.camera.transform; rmb_motion(view,Vector2(20,10))
+	check(view.camera.basis.z.distance_to(before.basis.z)>.01,"RMB: real process loop still accepts two-axis mouse steering")
+	root.push_input(key(KEY_F8,false)); before = view.camera.transform; await get_tree().create_timer(.1).timeout
+	check(view.camera.transform==before and view.free_look_dragging,"RMB: real key-up stops roll promptly while steering remains held")
+	rmb_button(MOUSE_BUTTON_RIGHT,false); view.set_process(false); view._restore_render_pacing(); view._clear_manual_navigation()
+	for node in world:check(node.transform==world[node],"RMB: scientific/world transform unchanged "+node.name)
+	check(view.scene_layers.snapshot()==scientific and view.committed_sample==sample and view.frame_a.positions==points and not view.playing,"RMB: scientific coordinates, visual layer state, sample and playback stay unchanged")
+	check(shortcuts.apply(prior,null,prior_speed)==OK,"RMB: restore prior independent shortcut profile and speed")
+
 func guards(view) -> void:
 	unfocus(); view.free_camera = true; view.orbit_enabled = true
 	var before: Transform3D = view.camera.transform
@@ -147,7 +303,7 @@ func guards(view) -> void:
 	root.push_input(key(KEY_F9,false)); view._update_camera_roll(.1)
 	check(not view.camera.basis.is_equal_approx(before.basis),"Releasing one roll direction resumes the other")
 	root.push_input(key(KEY_F8,false))
-	for guard in ["inspection_busy","inspection_paused","offline_instance","dragging","free_look_dragging"]:
+	for guard in ["inspection_busy","inspection_paused","offline_instance","dragging"]:
 		root.push_input(key(KEY_F8)); view.set(guard,true); before = view.camera.transform; view._update_camera_roll(.1)
 		check(view.camera_roll_keys.is_empty() and view.camera.transform == before,guard+": held roll is suppressed")
 		view.set(guard,false)
@@ -460,6 +616,7 @@ func run() -> void:
 	for arg in OS.get_cmdline_user_args():
 		if arg.begins_with("--roll-output="): output = arg.trim_prefix("--roll-output=")
 		if arg == "--roll-restart": restart = true
+		if arg == "--rmb-roll-only": rmb_only = true
 	if output.is_empty(): queue_free(); return
 	get_tree().create_timer(120).timeout.connect(func(): push_error("Roll tests timed out"); get_tree().quit(1))
 	await get_tree().process_frame
@@ -482,27 +639,32 @@ func run() -> void:
 	else:
 		check(view.shell.shortcuts.active.roll_camera_left == 0 and view.shell.shortcuts.active.roll_camera_right == 0,"Fresh profile leaves both roll defaults Unbound")
 		check(Bindings.ACTIONS.filter(func(a): return a[0].begins_with("roll_camera_")).size() == 2,"Exactly two independent roll actions")
-		await shortcuts(view)
-		await speed_preferences(view)
-		await vertical_preferences(view)
-		for scene in ["particles","fields","meshes","mixed"]:
-			view._open_capture(output.path_join(scene+".wvz")); view.playing = false
-			check(await view.scene_layers.wait_for_surface(),scene+": fixture ready")
-			angles(view,scene)
-		await guards(view)
-		if DisplayServer.get_name() != "headless":
-			view.shell.enter_immersive(); await settle(); angles(view,"fullscreen")
-			view._reset_camera(); unfocus(); view.shell.exit_immersive(); await settle()
-			view.camera_target = Vector3(.5,.5,.5); view.camera_distance = 5; view.yaw = 0; view.pitch = 0; view._update_camera()
-			var initial_projection: Vector2
-			for angle in [0,90,180,360]:
-				view._reset_camera(); view.camera_target = Vector3(.5,.5,.5); view.camera_distance = 5; view.yaw = 0; view.pitch = 0; view._update_camera()
-				held(view,"roll_camera_left",float(angle)/18); await settle()
-				var projection: Vector2 = view.camera.unproject_position(Vector3(.3,.9,0))
-				var center := root.get_visible_rect().size*.5
-				if angle == 0: initial_projection = projection-center
-				check((projection-center).distance_to(initial_projection.rotated(deg_to_rad(angle))) < .001,"Screen projection banks around fixed view axis: "+str(angle))
-				picture("bank-"+str(angle))
+		if rmb_only:
+			view._open_capture(output.path_join("mixed.wvz")); view.playing = false
+			check(await view.scene_layers.wait_for_surface(),"RMB: mixed fixture ready")
+			await rmb_roll(view)
+		else:
+			await shortcuts(view)
+			await speed_preferences(view)
+			await vertical_preferences(view)
+			for scene in ["particles","fields","meshes","mixed"]:
+				view._open_capture(output.path_join(scene+".wvz")); view.playing = false
+				check(await view.scene_layers.wait_for_surface(),scene+": fixture ready")
+				angles(view,scene)
+			await guards(view)
+			if DisplayServer.get_name() != "headless":
+				view.shell.enter_immersive(); await settle(); angles(view,"fullscreen")
+				view._reset_camera(); unfocus(); view.shell.exit_immersive(); await settle()
+				view.camera_target = Vector3(.5,.5,.5); view.camera_distance = 5; view.yaw = 0; view.pitch = 0; view._update_camera()
+				var initial_projection: Vector2
+				for angle in [0,90,180,360]:
+					view._reset_camera(); view.camera_target = Vector3(.5,.5,.5); view.camera_distance = 5; view.yaw = 0; view.pitch = 0; view._update_camera()
+					held(view,"roll_camera_left",float(angle)/18); await settle()
+					var projection: Vector2 = view.camera.unproject_position(Vector3(.3,.9,0))
+					var center := root.get_visible_rect().size*.5
+					if angle == 0: initial_projection = projection-center
+					check((projection-center).distance_to(initial_projection.rotated(deg_to_rad(angle))) < .001,"Screen projection banks around fixed view axis: "+str(angle))
+					picture("bank-"+str(angle))
 		var persisted: Dictionary = view.shell.shortcuts.active.duplicate()
 		Bindings.assign(persisted,"roll_camera_left",KEY_Q); Bindings.assign(persisted,"roll_camera_right",KEY_E)
 		Bindings.assign(persisted,"move_camera_up",KEY_F10); Bindings.assign(persisted,"move_camera_down",KEY_F12)

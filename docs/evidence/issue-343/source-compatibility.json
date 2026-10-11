@@ -1,0 +1,40 @@
+{
+  "checks": 230,
+  "renderer": "gl_compatibility",
+  "packaged": false,
+  "fresh_process_restart": true,
+  "source_sha256_unchanged": {
+    "mixed.wvz": "62a9afb3c02f077d1dfaa0d55566374be456ccea4f23ad9d34a3ae78898310b4",
+    "meshes.wvz": "82318187c99a244b67cd37f936e8098d828be9bb3e6b7527d60269e98c0b753e",
+    "fields.wvz": "965ef306f1a316bbc03c6acde8b4d44367e9bf658e46c49a27788ecb47492ee5",
+    "particles.wvz": "78ec2160b93d73848a621f01beb87fd610640224df2eb0f9b6d907dace2cb763"
+  },
+  "reports": [
+    {
+      "checks": 221,
+      "display": "X11",
+      "failures": [],
+      "layouts": [],
+      "measurements": [],
+      "packaged": false,
+      "renderer": "gl_compatibility",
+      "restart": false
+    },
+    {
+      "checks": 9,
+      "display": "X11",
+      "failures": [],
+      "layouts": [],
+      "measurements": [],
+      "packaged": false,
+      "renderer": "gl_compatibility",
+      "restart": true
+    }
+  ],
+  "rmb_only": true,
+  "staging_removed": false,
+  "known_engine_cleanup_diagnostics": {
+    "roll": [],
+    "restart": []
+  }
+}

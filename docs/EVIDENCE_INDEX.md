@@ -1,5 +1,9 @@
 # Retained evidence
 
+Issue #343's [RMB/roll coexistence review](evidence/issue-343/README.md) records
+accepted-main reproduction, focused source/release input composition on both
+renderers, shortcut restart, and connected roll/navigation regressions.
+
 Issue #340's [video/scientific workflow separation review](evidence/issue-340/README.md)
 records source/release MP4 matrices on both renderers with Python blocked during
 video, identical ordinary/selected/Analysis-result pixels, explicit optional records, independent scientific

@@ -1,0 +1,722 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+CAMERA ROLL: 196 checks, 120 failures
+ERROR: RMB: roll_camera_left roll-first=false speed=5 starts both holds without a jump
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:174)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_left roll-first=false speed=5 composes measured roll and both steering axes at dt=0.1
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:183)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_left roll-first=false speed=5 keeps basis/target/radius synchronized
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:184)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_left roll-first=false speed=5 composes measured roll and both steering axes at dt=0.05
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:183)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_left roll-first=false speed=5 keeps basis/target/radius synchronized
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:184)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_left roll-first=false speed=5 composes measured roll and both steering axes at dt=0.025
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:183)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_left roll-first=false speed=5 keeps basis/target/radius synchronized
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:184)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_left roll-first=false speed=5 key repeat cannot duplicate a hold
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:186)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_left roll-first=false speed=5 RMB-up retains independent roll
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:193)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_left roll-first=false speed=18 starts both holds without a jump
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:174)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_left roll-first=false speed=18 composes measured roll and both steering axes at dt=0.1
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:183)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_left roll-first=false speed=18 keeps basis/target/radius synchronized
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:184)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_left roll-first=false speed=18 composes measured roll and both steering axes at dt=0.05
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:183)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_left roll-first=false speed=18 keeps basis/target/radius synchronized
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:184)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_left roll-first=false speed=18 composes measured roll and both steering axes at dt=0.025
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:183)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_left roll-first=false speed=18 keeps basis/target/radius synchronized
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:184)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_left roll-first=false speed=18 key repeat cannot duplicate a hold
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:186)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_left roll-first=false speed=18 RMB-up retains independent roll
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:193)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_left roll-first=false speed=90 starts both holds without a jump
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:174)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_left roll-first=false speed=90 composes measured roll and both steering axes at dt=0.1
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:183)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_left roll-first=false speed=90 keeps basis/target/radius synchronized
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:184)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_left roll-first=false speed=90 composes measured roll and both steering axes at dt=0.05
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:183)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_left roll-first=false speed=90 keeps basis/target/radius synchronized
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:184)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_left roll-first=false speed=90 composes measured roll and both steering axes at dt=0.025
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:183)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_left roll-first=false speed=90 keeps basis/target/radius synchronized
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:184)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_left roll-first=false speed=90 key repeat cannot duplicate a hold
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:186)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_left roll-first=false speed=90 RMB-up retains independent roll
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:193)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_left roll-first=true speed=5 starts both holds without a jump
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:174)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_left roll-first=true speed=5 composes measured roll and both steering axes at dt=0.1
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:183)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_left roll-first=true speed=5 keeps basis/target/radius synchronized
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:184)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_left roll-first=true speed=5 composes measured roll and both steering axes at dt=0.05
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:183)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_left roll-first=true speed=5 keeps basis/target/radius synchronized
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:184)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_left roll-first=true speed=5 composes measured roll and both steering axes at dt=0.025
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:183)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_left roll-first=true speed=5 keeps basis/target/radius synchronized
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:184)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_left roll-first=true speed=5 key repeat cannot duplicate a hold
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:186)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_left roll-first=true speed=5 RMB-up retains independent roll
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:193)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_left roll-first=true speed=18 starts both holds without a jump
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:174)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_left roll-first=true speed=18 composes measured roll and both steering axes at dt=0.1
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:183)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_left roll-first=true speed=18 keeps basis/target/radius synchronized
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:184)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_left roll-first=true speed=18 composes measured roll and both steering axes at dt=0.05
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:183)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_left roll-first=true speed=18 keeps basis/target/radius synchronized
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:184)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_left roll-first=true speed=18 composes measured roll and both steering axes at dt=0.025
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:183)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_left roll-first=true speed=18 keeps basis/target/radius synchronized
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:184)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_left roll-first=true speed=18 key repeat cannot duplicate a hold
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:186)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_left roll-first=true speed=18 RMB-up retains independent roll
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:193)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_left roll-first=true speed=90 starts both holds without a jump
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:174)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_left roll-first=true speed=90 composes measured roll and both steering axes at dt=0.1
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:183)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_left roll-first=true speed=90 keeps basis/target/radius synchronized
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:184)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_left roll-first=true speed=90 composes measured roll and both steering axes at dt=0.05
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:183)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_left roll-first=true speed=90 keeps basis/target/radius synchronized
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:184)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_left roll-first=true speed=90 composes measured roll and both steering axes at dt=0.025
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:183)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_left roll-first=true speed=90 keeps basis/target/radius synchronized
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:184)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_left roll-first=true speed=90 key repeat cannot duplicate a hold
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:186)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_left roll-first=true speed=90 RMB-up retains independent roll
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:193)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_right roll-first=false speed=5 starts both holds without a jump
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:174)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_right roll-first=false speed=5 composes measured roll and both steering axes at dt=0.1
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:183)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_right roll-first=false speed=5 keeps basis/target/radius synchronized
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:184)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_right roll-first=false speed=5 composes measured roll and both steering axes at dt=0.05
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:183)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_right roll-first=false speed=5 keeps basis/target/radius synchronized
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:184)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_right roll-first=false speed=5 composes measured roll and both steering axes at dt=0.025
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:183)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_right roll-first=false speed=5 keeps basis/target/radius synchronized
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:184)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_right roll-first=false speed=5 key repeat cannot duplicate a hold
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:186)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_right roll-first=false speed=5 RMB-up retains independent roll
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:193)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_right roll-first=false speed=18 starts both holds without a jump
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:174)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_right roll-first=false speed=18 composes measured roll and both steering axes at dt=0.1
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:183)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_right roll-first=false speed=18 keeps basis/target/radius synchronized
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:184)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_right roll-first=false speed=18 composes measured roll and both steering axes at dt=0.05
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:183)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_right roll-first=false speed=18 keeps basis/target/radius synchronized
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:184)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_right roll-first=false speed=18 composes measured roll and both steering axes at dt=0.025
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:183)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_right roll-first=false speed=18 keeps basis/target/radius synchronized
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:184)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_right roll-first=false speed=18 key repeat cannot duplicate a hold
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:186)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_right roll-first=false speed=18 RMB-up retains independent roll
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:193)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_right roll-first=false speed=90 starts both holds without a jump
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:174)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_right roll-first=false speed=90 composes measured roll and both steering axes at dt=0.1
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:183)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_right roll-first=false speed=90 keeps basis/target/radius synchronized
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:184)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_right roll-first=false speed=90 composes measured roll and both steering axes at dt=0.05
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:183)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_right roll-first=false speed=90 keeps basis/target/radius synchronized
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:184)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_right roll-first=false speed=90 composes measured roll and both steering axes at dt=0.025
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:183)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_right roll-first=false speed=90 keeps basis/target/radius synchronized
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:184)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_right roll-first=false speed=90 key repeat cannot duplicate a hold
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:186)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_right roll-first=false speed=90 RMB-up retains independent roll
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:193)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_right roll-first=true speed=5 starts both holds without a jump
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:174)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_right roll-first=true speed=5 composes measured roll and both steering axes at dt=0.1
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:183)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_right roll-first=true speed=5 keeps basis/target/radius synchronized
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:184)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_right roll-first=true speed=5 composes measured roll and both steering axes at dt=0.05
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:183)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_right roll-first=true speed=5 keeps basis/target/radius synchronized
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:184)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_right roll-first=true speed=5 composes measured roll and both steering axes at dt=0.025
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:183)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_right roll-first=true speed=5 keeps basis/target/radius synchronized
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:184)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_right roll-first=true speed=5 key repeat cannot duplicate a hold
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:186)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_right roll-first=true speed=5 RMB-up retains independent roll
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:193)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_right roll-first=true speed=18 starts both holds without a jump
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:174)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_right roll-first=true speed=18 composes measured roll and both steering axes at dt=0.1
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:183)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_right roll-first=true speed=18 keeps basis/target/radius synchronized
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:184)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_right roll-first=true speed=18 composes measured roll and both steering axes at dt=0.05
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:183)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_right roll-first=true speed=18 keeps basis/target/radius synchronized
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:184)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_right roll-first=true speed=18 composes measured roll and both steering axes at dt=0.025
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:183)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_right roll-first=true speed=18 keeps basis/target/radius synchronized
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:184)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_right roll-first=true speed=18 key repeat cannot duplicate a hold
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:186)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_right roll-first=true speed=18 RMB-up retains independent roll
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:193)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_right roll-first=true speed=90 starts both holds without a jump
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:174)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_right roll-first=true speed=90 composes measured roll and both steering axes at dt=0.1
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:183)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_right roll-first=true speed=90 keeps basis/target/radius synchronized
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:184)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_right roll-first=true speed=90 composes measured roll and both steering axes at dt=0.05
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:183)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_right roll-first=true speed=90 keeps basis/target/radius synchronized
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:184)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_right roll-first=true speed=90 composes measured roll and both steering axes at dt=0.025
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:183)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_right roll-first=true speed=90 keeps basis/target/radius synchronized
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:184)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_right roll-first=true speed=90 key repeat cannot duplicate a hold
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:186)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: roll_camera_right roll-first=true speed=90 RMB-up retains independent roll
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:193)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: opposing held directions cancel
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:200)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: releasing one direction resumes the other
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:203)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: repeated press/release preserves independently held roll 0
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:208)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: repeated press/release preserves independently held roll 1
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:208)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: repeated press/release preserves independently held roll 2
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:208)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: repeated press/release preserves independently held roll 3
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:208)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: repeated press/release preserves independently held roll 4
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:208)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: repeated press/release preserves independently held roll 5
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:208)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: starting steering discards orbit while retaining roll
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:213)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: translation speed shortcut still works without changing roll rate
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:227)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: rebound logical chord rolls despite another physical key position
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:258)
+       [2] run (res://scene/test_camera_roll.gd:645)
+ERROR: RMB: real process loop rolls continuously while steering is held
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://scene/test_camera_roll.gd:18)
+       [1] rmb_roll (res://scene/test_camera_roll.gd:281)

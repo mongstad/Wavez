@@ -1,0 +1,44 @@
+{
+  "checks": 230,
+  "renderer": "forward_plus",
+  "packaged": true,
+  "fresh_process_restart": true,
+  "source_sha256_unchanged": {
+    "mixed.wvz": "f62143df73c0d862f4fc73db48c5b79b33e752b875b61ea48e23f1a49bc8b03d",
+    "meshes.wvz": "106b872bd1ade4bf968ce4dce8de95b60edd03784dd3ca7923b45b2e2b3ca003",
+    "fields.wvz": "8483da2b081b8db8dfc872d43a5165dcc0a940e413d6580267c27349c540c44e",
+    "particles.wvz": "f3d710a934716b9b159fde3758035ff0f7169db683821a75d2e5f9f3e87a7179"
+  },
+  "reports": [
+    {
+      "checks": 221,
+      "display": "X11",
+      "failures": [],
+      "layouts": [],
+      "measurements": [],
+      "packaged": true,
+      "renderer": "forward_plus",
+      "restart": false
+    },
+    {
+      "checks": 9,
+      "display": "X11",
+      "failures": [],
+      "layouts": [],
+      "measurements": [],
+      "packaged": true,
+      "renderer": "forward_plus",
+      "restart": true
+    }
+  ],
+  "rmb_only": true,
+  "staging_removed": true,
+  "known_engine_cleanup_diagnostics": {
+    "roll": [],
+    "restart": []
+  },
+  "artifacts": {
+    "WAVEZ.x86_64": "d9f79ab89b5ae369aeed11c6052d402e8218cd503bf85b4a235f9c30c46a7c63",
+    "WAVEZ.pck": "2be9198e82d08463eb389d9656d1413684bd94f2b4cde201843abd4b3575c42f"
+  }
+}
