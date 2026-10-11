@@ -19,7 +19,7 @@ func run():
 	var slider := Timeline.new();host.add_child(slider)
 	slider.position = Vector2(32,40);slider.min_value = 0;slider.max_value = 10;slider.step = 1
 	slider.frames = [{"time":0.0},{"time":1.0},{"time":100.0}]
-	slider.coverage = {"fields":[[0.,100.]],"scene":[]}
+	slider.coverage = {"fields":[],"scene":[[0.,100.]]}
 	for factor in [1.0,1.25,1.5,2.0]:
 		host.scale = Vector2.ONE*factor
 		for width in [200.,600.]:
@@ -28,7 +28,7 @@ func run():
 				slider.set_value_no_signal(ratio*10);slider.release_focus();slider.overlay.queue_redraw();await settle()
 				var image := root.get_texture().get_image()
 				var origin := slider.get_global_transform_with_canvas()*Vector2.ZERO
-				var color: Color = slider.field_color
+				var color: Color = host.theme.c(&"accent.primary")
 				var y := roundi(origin.y+(slider.size.y*.5-4)*factor)
 				var pixels := []
 				for x in range(floori(origin.x-10*factor),ceili(origin.x+(width+10)*factor)):
@@ -42,7 +42,8 @@ func run():
 				# Full coverage must remain visible just inside both native track edges.
 				for edge in [origin.x+3*factor,origin.x+(width-3)*factor]:
 					var pixel := image.get_pixel(roundi(edge),roundi(origin.y+slider.size.y*.5*factor))
-					check(Vector3(pixel.r,pixel.g,pixel.b).distance_to(Vector3(color.r,color.g,color.b)) < .15,"Coverage reaches track edge")
+					var expected_color: Color = color if absf(edge-expected) < 5*factor else slider.scene_color
+					check(Vector3(pixel.r,pixel.g,pixel.b).distance_to(Vector3(expected_color.r,expected_color.g,expected_color.b)) < .15,"Coverage reaches track edge beneath dominant thumb")
 				if factor == 1.0 and width == 600.:image.get_region(Rect2i(16,24,640,48)).save_png(out.path_join("timeline-"+str(ratio)+".png"))
 	# Native pointer/keyboard handling uses the same full-width axis.
 	host.scale = Vector2.ONE;slider.size = Vector2(600,16);await settle()

@@ -205,14 +205,16 @@ for readiness before resuming.
 Numeric/text focus suppresses viewport shortcuts. Scientific inspection snapshots retain exact signed
 speed; obsolete mode/index-rate fields are removed without migration support.
 
-The playback slider contains a single buffered overlay. Blue shows resident
-preparations for the selected visible field channels; teal shows the intersection
-where all required visible-layer data is prepared. Dark gaps need preparation;
-a narrow gap can look like a black vertical line and disappears as its samples arrive.
-The overlay uses actual recorded source-time boundaries mapped to the slider's
-union-sample axis, so irregular timestamps remain aligned with seeking. Hover
-explains the colors. The native playhead remains on top. GPU staging can still
-briefly wait; this is cache coverage, not a frame-rate guarantee.
+The playback slider contains one teal prepared overlay: the intersection of
+resident preparations for all currently required visible layers. Field-only
+readiness is diagnostic information and is not painted on the track. Dark gaps
+need preparation. Source/configuration changes and eviction remove stale coverage.
+A detached diamond above a very short interval indicates its presence; its width
+does not represent cached duration. The track itself retains actual source-time
+boundaries on the union-sample axis, and the native playhead remains on top.
+There is no elapsed-progress fill. CPU readiness can still require GPU staging
+or the existing startup runway gate; it is not a frame-rate guarantee. See
+[prepared timeline semantics and owner checks](PREPARED_TIMELINE.md).
 
 The playback slider centres its circular playhead on the visible track endpoints;
 prepared coverage uses the same axis. See [endpoint validation](TIMELINE_ENDPOINTS.md).

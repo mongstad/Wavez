@@ -3,12 +3,11 @@ extends HSlider
 const Grid = preload("res://layers/grid_view.gd")
 const MeshView = preload("res://layers/mesh_view.gd")
 signal seek_requested
-var coverage := {"fields":[],"scene":[]}
+var coverage := {"fields":[],"scene":[],"end_ready":false}
 var frames: Array = []
-var checked_ms := -1000
+var readiness_snapshot := {}
 var generation := -1
 var axis_signature := ""
-var field_color := preload("res://ui/theme/wavez_tokens.tres").color(&"accent.primary")
 var scene_color := preload("res://ui/theme/wavez_tokens.tres").color(&"identity.teal")
 var overlay: Control
 
@@ -32,8 +31,9 @@ func _ready() -> void:
 	overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	resized.connect(func():overlay.queue_redraw())
 
-static func spans(rows: Array, ready: Dictionary, first: float, last: float) -> Array:
+static func spans(rows: Array, ready: Dictionary, first: float, last: float, is_static := false) -> Array:
 	var result: Array = []
+	if is_static:return [[first,last]] if ready.has(0) else []
 	# A layer has no presentation before its own first recorded sample.
 	if not rows.is_empty() and float(rows[0].time) > first:result.append([first,float(rows[0].time)])
 	for i in range(rows.size()):
@@ -64,19 +64,31 @@ static func axis_position(time: float, samples: Array) -> float:
 	return (lo+fraction)/(samples.size()-1)
 
 func refresh(viewer, force := false) -> void:
-	if not force and generation == viewer.capture_generation and Time.get_ticks_msec()-checked_ms < 200:return
-	checked_ms = Time.get_ticks_msec();generation = viewer.capture_generation
-	var next := {"fields":[],"scene":[]}
+	var next := {"fields":[],"scene":[],"end_ready":false}
 	frames = [] if viewer.generic_reader == null else viewer.generic_reader.frames
+	generation = viewer.capture_generation
 	var next_axis := str(generation)+str(frames.size())+str(viewer.generic_reader.generation if viewer.generic_reader != null else -1)
 	if not frames.is_empty() and viewer.scene_layers != null and not viewer.offline_instance:
 		var layers = viewer.scene_layers
+		var field = layers.field_playback;var particle = layers.playback;var mesh = layers.mesh_playback
+		# Query only publication metadata. Never request, pin, upload or prepare.
+		# Use the controllers' exact signatures so old source/channel/visibility
+		# keys cannot claim readiness before the next controller pump.
+		var fields: Dictionary = field.worker.status().charges if field.active() and field.token == field.readiness_signature(layers.field_budget()) and field.worker.token == field.token else {}
+		var meshes: Dictionary = mesh.worker.status() if mesh.active() and mesh.token == mesh.readiness_signature(layers.mesh_budget()) and mesh.worker.token == mesh.token else {}
+		var particles: Dictionary = {}
+		var config: String = JSON.stringify(particle.settings(),"",true,true)
+		var source_token := str(layers.reader.generation)+JSON.stringify(layers.reader.source_stamp,"",true,true)
+		if particle.enabled and config == particle.config_signature and particle.context.get("token","") == source_token+config and particle.worker.token == source_token+config:
+			particles = particle.worker.status()
+		var snapshot := {"axis":next_axis,"states":layers.states.duplicate(true),"particle_required":layers.particles_required(),"fields":fields,"meshes":meshes.get("ready_keys",[]),"particles":particles.get("ready_indices",[])}
+		# Residency/configuration changes bypass the former 200 ms stale window.
+		# Unchanged snapshots avoid walking the complete source sample tables.
+		if not force and snapshot == readiness_snapshot:return
+		readiness_snapshot = snapshot
 		var whole := [[float(frames[0].time),float(frames[-1].time)]]
 		next.scene = whole.duplicate(true);next.fields = whole.duplicate(true)
-		var has_fields := false;var has_layers := false
-		var fields: Dictionary = layers.field_playback.worker.status().charges if layers.field_playback.active() else {}
-		var particles: Dictionary = layers.playback.worker.status() if layers.playback.enabled else {}
-		var meshes: Dictionary = layers.mesh_playback.worker.status() if layers.mesh_playback.active() else {}
+		var has_fields := false;var has_layers := false;var end_ready := true
 		for id in layers.states:
 			if not layers.states[id].visible:continue
 			has_layers = true
@@ -92,36 +104,49 @@ func refresh(viewer, force := false) -> void:
 				for i in range(rows.size()):
 					var key := "%s/%s/%s/%s/%s" % [id,rows[i].sequence,rows[mini(i+1,rows.size()-1)].sequence,layers.mesh_budget(),JSON.stringify(layers.states[id])]
 					if keys.has(key):ready[i] = true
-			var ranges := spans(rows,ready,frames[0].time,frames[-1].time)
+			end_ready = end_ready and ready.has(0 if layers.reader.objects[id].static else rows.size()-1)
+			var ranges := spans(rows,ready,frames[0].time,frames[-1].time,layers.reader.objects[id].static)
 			next.scene = intersect(next.scene,ranges)
 			if layers.views.get(id) is Grid:next.fields = intersect(next.fields,ranges)
-		# Particles use their own controller and are not entries in layers.states.
 		if not layers.particle_id.is_empty() and layers.particles_required():
 			has_layers = true
 			var ready := {}
-			var config: String = JSON.stringify(layers.playback.settings(),"",true,true)
-			if config == layers.playback.config_signature and layers.playback.source_generation == layers.reader.generation:
-				for i in particles.get("ready_indices",[]):ready[i] = true
-			next.scene = intersect(next.scene,spans(layers.reader.samples[layers.particle_id],ready,frames[0].time,frames[-1].time))
+			for i in particles.get("ready_indices",[]):ready[i] = true
+			var rows: Array = layers.reader.samples[layers.particle_id]
+			end_ready = end_ready and ready.has(0 if layers.reader.objects[layers.particle_id].static else rows.size()-1)
+			next.scene = intersect(next.scene,spans(rows,ready,frames[0].time,frames[-1].time,layers.reader.objects[layers.particle_id].static))
 		if not has_fields:next.fields = []
 		if not has_layers:next.scene = []
+		next.end_ready = has_layers and end_ready
+	else:readiness_snapshot = {}
 	if coverage != next or axis_signature != next_axis:
 		coverage = next
 		axis_signature = next_axis
 		if is_instance_valid(overlay):overlay.queue_redraw()
 
-func draw_coverage(canvas: Control) -> void:
-	if frames.size() < 2:return
-	var grabber := get_theme_icon("grabber")
-	var inset := 0.0 if get_theme_constant("center_grabber") else grabber.get_width()*.5
+func coverage_geometry() -> Array:
+	var result: Array = []
+	if frames.size() < 2:return result
+	var inset := 0.0 if get_theme_constant("center_grabber") else get_theme_icon("grabber").get_width()*.5
 	var width := maxf(0,size.x-inset*2)
-	# One band behind the native groove and grabber. Teal overrides blue only
-	# where all visible layers are prepared; there is no second buffer bar.
-	for row in [["fields",field_color],["scene",scene_color]]:
-		for span in coverage[row[0]]:
-			var left := 0.0 if span[0] <= frames[0].time else inset+axis_position(span[0],frames)*width
-			var right := size.x if span[1] >= frames[-1].time else inset+axis_position(span[1],frames)*width
-			canvas.draw_line(Vector2(left,size.y*.5),Vector2(right,size.y*.5),row[1],4)
+	for span in coverage.scene:
+		if span[1] <= span[0]:continue
+		var left := 0.0 if span[0] <= frames[0].time else inset+axis_position(span[0],frames)*width
+		var right := size.x if span[1] >= frames[-1].time else inset+axis_position(span[1],frames)*width
+		if span[1] >= frames[-1].time and not coverage.get("end_ready",true):right = maxf(left,right-1.0)
+		result.append({"left":left,"right":right,"presence":right-left < 3.0})
+	return result
+
+func draw_coverage(canvas: Control) -> void:
+	if has_theme_color("prepared_scene"):scene_color = get_theme_color("prepared_scene")
+	# Only full required scene readiness has duration on the main track.
+	# A detached diamond above it marks subpixel presence, never extra duration.
+	for span in coverage_geometry():
+		canvas.draw_line(Vector2(span.left,size.y*.5),Vector2(span.right,size.y*.5),scene_color,4)
+		if span.presence:
+			var x := clampf((span.left+span.right)*.5,3,maxf(3,size.x-3))
+			var y := size.y*.5-10
+			canvas.draw_colored_polygon(PackedVector2Array([Vector2(x,y-3),Vector2(x+3,y),Vector2(x,y+3),Vector2(x-3,y)]),scene_color)
 
 func playhead_rect() -> Rect2:
 	var texture := get_theme_icon("grabber")

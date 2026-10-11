@@ -41,7 +41,7 @@ func install(shell) -> void:
 		var pin: Button = shell.edge_reveal.pins[side]
 		pin.theme = theme; pin.theme_type_variation = "PinAction"
 		shell.edge_reveal.update_pin(side)
-	# The readiness overlay retains its accepted blue/teal meaning and geometry.
+	# The readiness overlay retains its scene-ready teal meaning and native track geometry.
 	# Only the native playhead is violet; scientific legends retain the old theme.
 	shell.viewer.timeline.theme = theme
 	# PreparedTimeline installed transparent native-track overrides in _ready.

@@ -103,10 +103,13 @@ func update_budget(time: float, budget: int) -> Dictionary:
 		if int(worker.status().pressure_failures) > 0:request_signature = ""
 		budget_checked = now;budget_signature = signature
 	return plan
-func _jobs(time: float, budget: int) -> Dictionary:
+func readiness_signature(budget: int) -> String:
 	var signature := str(layers.reader.generation)+JSON.stringify(layers.reader.source_stamp)+str(budget)
 	for id in layers.states:
 		if layers.views[id] is MeshView:signature += id+JSON.stringify(layers.states[id])
+	return signature
+func _jobs(time: float, budget: int) -> Dictionary:
+	var signature := readiness_signature(budget)
 	var targets: Array = [];var future: Array = []
 	var direction := -1 if viewer.physical_rate < 0 else 1
 	for id in layers.states:

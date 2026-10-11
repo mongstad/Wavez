@@ -88,6 +88,7 @@ func _button(type: StringName, height: int = TOKENS.control_height) -> void:
 	set_color("icon_disabled_color", type, c(&"text.disabled"))
 
 func _init() -> void:
+	set_color("prepared_scene", "HSlider", c(&"identity.teal"))
 	default_font = ThemeDB.fallback_font
 	default_font_size = TOKENS.body_size
 	default_base_scale = 1.0

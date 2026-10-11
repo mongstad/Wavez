@@ -1,5 +1,11 @@
 # Rolling playback cache and prepared timeline — #106
 
+Current timeline publication/display is specified in [Prepared timeline](PREPARED_TIMELINE.md).
+Issue #378 supersedes the blue/teal drawing and throttled publication described
+in this historical #106 report. The report's measurements, review-time wording
+and original checks remain preserved below; cache scheduling policy is unchanged.
+
+
 Implementation is **pending owner review**. #106, PERF-PLAYBACK-001, was the only
 Ready item in SimScope Development when selected. The existing linked branch is
 `106-perf-playback-001-visualize-prepared-timeline-ranges-and-extend-playback-with-rolling-cache-reuse`.

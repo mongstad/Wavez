@@ -1,0 +1,10 @@
+{
+	"checks": 53,
+	"failures": [
+		"top pin retains tooltip",
+		"right pin retains tooltip",
+		"bottom pin retains tooltip",
+		"Single accepted Play handler"
+	],
+	"renderer": "forward_plus"
+}
