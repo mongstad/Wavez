@@ -76,7 +76,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--godot', required=True)
     parser.add_argument('--output-dir', type=Path, required=True)
-    parser.add_argument('--renderer', choices=['forward_plus', 'gl_compatibility'], required=True)
+    parser.add_argument('--renderer', choices=['forward_plus'], required=True)
     parser.add_argument('--real-capture', type=Path, help='Optional external density/psi_real/psi_imag capture; read only')
     args = parser.parse_args()
     out = args.output_dir.resolve()

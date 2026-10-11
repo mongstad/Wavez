@@ -72,7 +72,7 @@ def main():
         package = [str(out / "wavez.x86_64")]
     results = {}
     for name, command, packaged in [("source", source, False)] + ([ ("package", package, True) ] if package else []):
-        for renderer in ["forward_plus", "gl_compatibility"]:
+        for renderer in ["forward_plus"]:
             label = f"{name}-{renderer}"
             directory = out / label
             directory.mkdir()

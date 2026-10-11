@@ -33,7 +33,7 @@ def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--godot', required=True)
     p.add_argument('--output-dir', type=Path, required=True)
-    p.add_argument('--renderer', choices=['forward_plus', 'gl_compatibility'], required=True)
+    p.add_argument('--renderer', choices=['forward_plus'], required=True)
     a = p.parse_args()
     out = a.output_dir.resolve(); out.mkdir(parents=True, exist_ok=False)
     env = dict(os.environ, XDG_DATA_HOME=str(out/'data'), XDG_CONFIG_HOME=str(out/'config'))

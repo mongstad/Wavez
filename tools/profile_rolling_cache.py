@@ -31,7 +31,7 @@ def main():
     parser.add_argument('--godot', required=True)
     parser.add_argument('--capture', required=True, type=Path)
     parser.add_argument('--output-dir', required=True, type=Path)
-    parser.add_argument('--renderer', choices=['headless', 'forward_plus', 'gl_compatibility'], default='forward_plus')
+    parser.add_argument('--renderer', choices=['headless', 'forward_plus'], default='forward_plus')
     parser.add_argument('--cache-mib', type=int, default=0, help='Optional test ceiling; zero uses adaptive system capacity')
     args = parser.parse_args()
     source = args.capture.resolve(); out = args.output_dir.resolve()

@@ -192,8 +192,6 @@ Use fresh output directories and externally installed Godot/FFmpeg:
 ```sh
 python tools/validate_volume_color.py --godot /path/to/godot \
   --renderer forward_plus --output-dir results/color-forward
-python tools/validate_volume_color.py --godot /path/to/godot \
-  --renderer gl_compatibility --output-dir results/color-compatibility
 # Add --real-capture /external/path/free_collapse_simscope.ssc for the real review.
 python tools/validate_recipe_state.py --godot /path/to/godot \
   --renderer headless --output-dir results/color-recipes

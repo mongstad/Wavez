@@ -8,7 +8,10 @@ Inspect `git diff --cached`, staged names and sizes before each commit.
 
 Keep canonical documentation synchronized. G4 is accepted; post-G4 maintenance is authorized.
 G5/G6 and web/dashboard work require separate authorization. Preserve accepted G0–G4
-behavior and run focused relevant validation. New work targets `.wvz` / WVZ1 under
+behavior and run focused relevant validation. GPU validation and supported launches
+use Forward+ Vulkan only; see [renderer requirements](docs/RENDERER_REQUIREMENTS.md).
+Historical Compatibility reports remain provenance, and headless checks validate
+CPU contracts only. New work targets `.wvz` / WVZ1 under
 the [capture format policy](docs/CAPTURE_FORMAT_POLICY.md).
 
 Application identity follows [the version/build policy](docs/VERSIONING.md):

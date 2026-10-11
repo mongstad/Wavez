@@ -27,6 +27,7 @@ func start(owner) -> void:
 	if file == null: return
 	_prune(directory)
 	record("APP", "WAVEZ %s started" % str(ProjectSettings.get_setting("application/config/version", "unknown")), true)
+	record("RENDERER",JSON.stringify(preload("res://renderer_policy.gd").runtime()),true)
 	get_tree().node_added.connect(_observe)
 	_observe_tree(viewer)
 	set_process(false)

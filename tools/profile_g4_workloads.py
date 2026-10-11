@@ -8,7 +8,7 @@ def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--godot',required=True);p.add_argument('--output-dir',type=Path,required=True)
     p.add_argument('--capture',type=Path,required=True);p.add_argument('--demo',type=Path,required=True)
-    p.add_argument('--renderer',choices=['gl_compatibility','forward_plus'],required=True)
+    p.add_argument('--renderer',choices=['forward_plus'],required=True)
     p.add_argument('--roi-only',action='store_true',help='Supplement an already measured matrix with a paused large ROI scan')
     a=p.parse_args();out=a.output_dir.resolve();out.mkdir(parents=True,exist_ok=False)
     sources=[a.capture.resolve(),a.demo.resolve()];hashes={str(s):hashlib.sha256(s.read_bytes()).hexdigest() for s in sources}

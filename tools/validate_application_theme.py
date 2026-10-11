@@ -66,7 +66,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--godot', required=True)
     parser.add_argument('--package', action='store_true')
-    parser.add_argument('--renderer', choices=['forward_plus', 'gl_compatibility'], default='forward_plus')
+    parser.add_argument('--renderer', choices=['forward_plus'], default='forward_plus')
     parser.add_argument('--output-dir', required=True, type=Path)
     args = parser.parse_args()
     out = args.output_dir.resolve()

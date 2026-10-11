@@ -39,7 +39,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--godot', required=True)
     parser.add_argument('--output-dir', type=Path, required=True)
-    parser.add_argument('--renderer', choices=['forward_plus', 'gl_compatibility'], default='forward_plus')
+    parser.add_argument('--renderer', choices=['forward_plus'], default='forward_plus')
     parser.add_argument('--display-driver', choices=['x11', 'wayland'], default='x11')
     parser.add_argument('--export', action='store_true')
     args = parser.parse_args()

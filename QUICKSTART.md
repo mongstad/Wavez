@@ -37,8 +37,7 @@ python tools/validate_temporal.py --godot /path/to/godot --output-dir results/ch
 python tools/validate_maintenance_ui.py --godot /path/to/godot --output-dir results/check-ui
 ```
 
-Choose fresh validation output directories. Use `--renderer gl_compatibility` or
-`--renderer forward_plus` for actual maintenance UI images; `--resolution 3840x2160`
+Choose fresh validation output directories. Use `--renderer forward_plus` for actual maintenance UI images; `--resolution 3840x2160`
 uses an exact GPU SubViewport with the existing export canvas scaling. Headless
 checks establish behavior, not rendered appearance. Capture and regression
 fixtures use WVZ1. Current storage, viewer, analysis and deterministic-export
@@ -46,3 +45,7 @@ validation are recorded in the maintained reports under `docs/`.
 
 Generated `results/`, local environments, caches and captures are ignored by Git.
 Historical comparison tools requiring archived baselines need those supplied explicitly.
+
+Source and standalone GPU operation require **Forward+ Vulkan**. See
+[requirements and troubleshooting](docs/RENDERER_REQUIREMENTS.md); headless
+checks exercise CPU contracts only.

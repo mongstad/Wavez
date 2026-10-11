@@ -74,7 +74,8 @@ python tools/investigate_window_signals.py --godot /absolute/path/to/godot \
   --mode workflow --runtime release --output-dir /tmp/signals-workflow-release
 ```
 
-Use `--renderer gl_compatibility` to compare renderers. `--source-root` accepts
+Historical `--renderer gl_compatibility` comparisons require an archived pre-#371
+source root; current Wavez refuses that backend. `--source-root` accepts
 an external read-only repository archive for matched baseline runs.
 `--mode baseline-smoke` uses four real exports, Jobs and one File Popup, without
 Close File or Seek. Workflow mode keeps the production Main scene and exits via

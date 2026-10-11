@@ -69,7 +69,7 @@ def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--godot', required=True)
     p.add_argument('--output-dir', type=Path, required=True)
-    p.add_argument('--renderer', default='headless', choices=['headless', 'forward_plus', 'gl_compatibility'])
+    p.add_argument('--renderer', default='headless', choices=['headless', 'forward_plus'])
     a = p.parse_args(); out = a.output_dir.resolve(); out.mkdir(parents=True, exist_ok=False)
     prepare(out)
     hashes = {str(f): hashlib.sha256(f.read_bytes()).hexdigest() for f in out.glob('*.wvz')}

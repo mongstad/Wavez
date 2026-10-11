@@ -82,7 +82,7 @@ def export_comparison(godot, accepted, fixtures_dir, output):
             assert result.returncode == 0 and 'ERROR:' not in log.read_text(), log
         binary = output/'WAVEZ.x86_64'
         build(godot,projects['candidate'],binary,output/'build-logs')
-        for renderer in ['forward_plus','gl_compatibility']:
+        for renderer in ['forward_plus']:
             for preset in ['Cinematic','Scientific']:
                 chosen = json.loads((fixtures_dir/(preset+'-video-state.json')).read_text())
                 for label in ['accepted','candidate','package']:
@@ -110,7 +110,7 @@ def export_comparison(godot, accepted, fixtures_dir, output):
                     assert len(set(hashes)) > 1, 'Moving source samples must reach the video'
                     results.append(dict(name=name,pixel_hashes=hashes,ffprobe=metadata,
                                         progress=progress,metrics=json.loads((directory/'metrics.json').read_text())))
-        for renderer in ['forward_plus','gl_compatibility']:
+        for renderer in ['forward_plus']:
             for preset in ['Cinematic','Scientific']:
                 compared = [r['pixel_hashes'] for r in results if r['name'].endswith(renderer+'-'+preset)]
                 assert len(compared) == 3 and compared[0] == compared[1] == compared[2], (renderer,preset)
@@ -127,7 +127,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--godot', required=True)
     parser.add_argument('--output-dir', type=Path, required=True)
-    parser.add_argument('--renderer', choices=['forward_plus', 'gl_compatibility'])
+    parser.add_argument('--renderer', choices=['forward_plus'])
     parser.add_argument('--project-root', type=Path, default=ROOT)
     parser.add_argument('--baseline', action='store_true')
     parser.add_argument('--package', action='store_true')

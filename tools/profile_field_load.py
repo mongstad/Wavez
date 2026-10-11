@@ -18,7 +18,7 @@ def main():
     parser.add_argument('--godot', required=True)
     parser.add_argument('--capture', type=Path, required=True)
     parser.add_argument('--output-dir', type=Path, required=True)
-    parser.add_argument('--renderer', choices=['forward_plus', 'gl_compatibility'], required=True)
+    parser.add_argument('--renderer', choices=['forward_plus'], required=True)
     parser.add_argument('--viewer', type=Path, default=ROOT / 'viewer')
     parser.add_argument('--exercise', action='store_true')
     args = parser.parse_args()

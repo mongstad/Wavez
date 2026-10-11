@@ -16,7 +16,7 @@ def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--godot', required=True)
     p.add_argument('--output-dir', required=True, type=Path)
-    p.add_argument('--renderer', required=True, choices=['forward_plus', 'gl_compatibility'])
+    p.add_argument('--renderer', required=True, choices=['forward_plus'])
     p.add_argument('--packaged', action='store_true', help='Run the temporary exit-test executable with its baked entry scene')
     a = p.parse_args(); out = a.output_dir.resolve(); out.mkdir(parents=True, exist_ok=False)
     source = out/'scene.wvz'; scene(source); before = hashlib.sha256(source.read_bytes()).hexdigest()

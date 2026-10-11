@@ -11,7 +11,7 @@ from wavez_export import SceneCapture
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--godot',required=True);p.add_argument('--output-dir',type=Path,required=True)
-    p.add_argument('--renderer',default='forward_plus',choices=['forward_plus','gl_compatibility','headless'])
+    p.add_argument('--renderer',default='forward_plus',choices=['forward_plus','headless'])
     p.add_argument('--production',type=Path)
     a=p.parse_args();out=a.output_dir.resolve();out.mkdir(parents=True,exist_ok=False)
     scene(out/'scene.wvz')

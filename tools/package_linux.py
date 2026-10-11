@@ -76,8 +76,9 @@ def main():
     (output / 'build.json').write_text(json.dumps(dict(
         version=json.loads(subprocess.check_output([sys.executable, str(ROOT / 'tools/application_version.py'), '--json'])),
         godot=subprocess.check_output([args.godot, '--version'], text=True).strip(),
+        renderer={'method': 'forward_plus', 'driver': 'vulkan', 'fallback_to_opengl3': False},
         first_party_python=inventory,
-        external_dependencies=['Python 3.10+ and NumPy for independent Selection/Analysis and Matched Views', 'FFmpeg for MP4 encoding'],
+        external_dependencies=['Vulkan-capable GPU/driver and graphical Linux desktop', 'Python 3.10+ and NumPy for independent Selection/Analysis and Matched Views', 'FFmpeg for MP4 encoding'],
         artifacts={p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in [binary, binary.with_suffix('.pck')]}
     ), indent=2) + '\n')
     print(binary)

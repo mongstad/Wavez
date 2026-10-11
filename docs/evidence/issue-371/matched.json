@@ -1,0 +1,265 @@
+{
+  "status": "PASS",
+  "renderer": "forward_plus",
+  "runs": [
+    {
+      "command": [
+        "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+        "--headless",
+        "--path",
+        "/home/Nozba/Codex/Wavez/Wavez/viewer",
+        "--log-file",
+        "/home/Nozba/Codex/Wavez/renderer-371/matched/left-input/godot.log",
+        "--script",
+        "analysis/test_render_state.gd",
+        "--",
+        "--g4-render-fixture=/home/Nozba/Codex/Wavez/renderer-371/matched/left-input",
+        "--g4-render-visible"
+      ],
+      "exit_code": 0,
+      "seconds": 1.562255255998025
+    },
+    {
+      "command": [
+        "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+        "--headless",
+        "--path",
+        "/home/Nozba/Codex/Wavez/Wavez/viewer",
+        "--log-file",
+        "/home/Nozba/Codex/Wavez/renderer-371/matched/right-input/godot.log",
+        "--script",
+        "analysis/test_render_state.gd",
+        "--",
+        "--g4-render-fixture=/home/Nozba/Codex/Wavez/renderer-371/matched/right-input",
+        "--g4-render-visible"
+      ],
+      "exit_code": 0,
+      "seconds": 1.7320176550019823
+    },
+    {
+      "command": [
+        "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+        "--path",
+        "/home/Nozba/Codex/Wavez/Wavez/viewer",
+        "--rendering-method",
+        "forward_plus",
+        "--resolution",
+        "640x360",
+        "--audio-driver",
+        "Dummy",
+        "--log-file",
+        "/home/Nozba/Codex/Wavez/renderer-371/matched/native.log",
+        "--script",
+        "analysis/test_matched_render.gd",
+        "--",
+        "--matched-fixture=/home/Nozba/Codex/Wavez/renderer-371/matched",
+        "--render-pair"
+      ],
+      "exit_code": 0,
+      "seconds": 9.185922214997845
+    }
+  ],
+  "checks": [
+    {
+      "label": "native UI prepared three frames per input",
+      "pass_": true
+    },
+    {
+      "label": "comparison retains both independent source identities",
+      "pass_": true
+    },
+    {
+      "label": "equal decimal IDs retain distinct source namespaces",
+      "pass_": true
+    },
+    {
+      "label": "left renderer completed",
+      "pass_": true
+    },
+    {
+      "label": "left full timing rows",
+      "pass_": true
+    },
+    {
+      "label": "left encoded dimensions/FPS/frame count",
+      "pass_": true
+    },
+    {
+      "label": "left frame 0 raw and aligned times",
+      "pass_": true
+    },
+    {
+      "label": "left frame 0 timing log retains matched provenance",
+      "pass_": true
+    },
+    {
+      "label": "left frame 0 both source provenances",
+      "pass_": true
+    },
+    {
+      "label": "left frame 0 explicit membership",
+      "pass_": true
+    },
+    {
+      "label": "left frame 0 independent physical position oracle",
+      "pass_": true
+    },
+    {
+      "label": "left frame 0 image checksum",
+      "pass_": true
+    },
+    {
+      "label": "left frame 1 raw and aligned times",
+      "pass_": true
+    },
+    {
+      "label": "left frame 1 timing log retains matched provenance",
+      "pass_": true
+    },
+    {
+      "label": "left frame 1 both source provenances",
+      "pass_": true
+    },
+    {
+      "label": "left frame 1 explicit membership",
+      "pass_": true
+    },
+    {
+      "label": "left frame 1 independent physical position oracle",
+      "pass_": true
+    },
+    {
+      "label": "left frame 1 image checksum",
+      "pass_": true
+    },
+    {
+      "label": "left frame 2 raw and aligned times",
+      "pass_": true
+    },
+    {
+      "label": "left frame 2 timing log retains matched provenance",
+      "pass_": true
+    },
+    {
+      "label": "left frame 2 both source provenances",
+      "pass_": true
+    },
+    {
+      "label": "left frame 2 explicit membership",
+      "pass_": true
+    },
+    {
+      "label": "left frame 2 independent physical position oracle",
+      "pass_": true
+    },
+    {
+      "label": "left frame 2 image checksum",
+      "pass_": true
+    },
+    {
+      "label": "right renderer completed",
+      "pass_": true
+    },
+    {
+      "label": "right full timing rows",
+      "pass_": true
+    },
+    {
+      "label": "right encoded dimensions/FPS/frame count",
+      "pass_": true
+    },
+    {
+      "label": "right frame 0 raw and aligned times",
+      "pass_": true
+    },
+    {
+      "label": "right frame 0 timing log retains matched provenance",
+      "pass_": true
+    },
+    {
+      "label": "right frame 0 both source provenances",
+      "pass_": true
+    },
+    {
+      "label": "right frame 0 explicit membership",
+      "pass_": true
+    },
+    {
+      "label": "right frame 0 independent physical position oracle",
+      "pass_": true
+    },
+    {
+      "label": "right frame 0 image checksum",
+      "pass_": true
+    },
+    {
+      "label": "right frame 1 raw and aligned times",
+      "pass_": true
+    },
+    {
+      "label": "right frame 1 timing log retains matched provenance",
+      "pass_": true
+    },
+    {
+      "label": "right frame 1 both source provenances",
+      "pass_": true
+    },
+    {
+      "label": "right frame 1 explicit membership",
+      "pass_": true
+    },
+    {
+      "label": "right frame 1 independent physical position oracle",
+      "pass_": true
+    },
+    {
+      "label": "right frame 1 image checksum",
+      "pass_": true
+    },
+    {
+      "label": "right frame 2 raw and aligned times",
+      "pass_": true
+    },
+    {
+      "label": "right frame 2 timing log retains matched provenance",
+      "pass_": true
+    },
+    {
+      "label": "right frame 2 both source provenances",
+      "pass_": true
+    },
+    {
+      "label": "right frame 2 explicit membership",
+      "pass_": true
+    },
+    {
+      "label": "right frame 2 independent physical position oracle",
+      "pass_": true
+    },
+    {
+      "label": "right frame 2 image checksum",
+      "pass_": true
+    },
+    {
+      "label": "right rendering follows left completion",
+      "pass_": true
+    },
+    {
+      "label": "separate sequential scene renderers",
+      "pass_": true
+    },
+    {
+      "label": "matched physical geometry reproduces identical PNG pixels across raw clocks",
+      "pass_": true
+    },
+    {
+      "label": "left-input source unchanged",
+      "pass_": true
+    },
+    {
+      "label": "right-input source unchanged",
+      "pass_": true
+    }
+  ],
+  "image_inspection_required": true
+}

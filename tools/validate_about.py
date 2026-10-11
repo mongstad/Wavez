@@ -19,7 +19,7 @@ def main():
     parser.add_argument("--godot", required=True)
     parser.add_argument("--export", action="store_true", help="Build a temporary Linux release with a validation-only autoload; test its normal Main scene")
     parser.add_argument("--output-dir", type=Path, required=True)
-    parser.add_argument("--renderer", choices=["forward_plus", "gl_compatibility", "headless"], default="forward_plus")
+    parser.add_argument("--renderer", choices=["forward_plus", "headless"], default="forward_plus")
     parser.add_argument("--open-browser", action="store_true")
     parser.add_argument("--expected-theme", choices=["Dark", "Light"], help="Check the preference restored by this fresh process")
     args = parser.parse_args()

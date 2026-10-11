@@ -1,0 +1,64 @@
+--warning
+--width
+500
+--title
+Unable to initialize Vulkan video driver
+--text
+Your video card drivers seem not to support the required Vulkan version.
+
+If possible, consider updating your video card drivers or using the OpenGL 3 driver.
+
+You can enable the OpenGL 3 driver by starting the engine from the
+command line with the command:
+
+    "Godot_v4.7.2-stable_linux.x86_64" --rendering-driver opengl3
+
+If you recently updated your video card drivers, try rebooting.
+--warning
+--width
+500
+--title
+Unable to initialize Vulkan video driver
+--text
+Your video card drivers seem not to support the required Vulkan version.
+
+If possible, consider updating your video card drivers or using the OpenGL 3 driver.
+
+You can enable the OpenGL 3 driver by starting the engine from the
+command line with the command:
+
+    "Godot_v4.7.2-stable_linux.x86_64" --rendering-driver opengl3
+
+If you recently updated your video card drivers, try rebooting.
+--warning
+--width
+500
+--title
+Unable to initialize Vulkan video driver
+--text
+Your video card drivers seem not to support the required Vulkan version.
+
+If possible, consider updating your video card drivers or using the OpenGL 3 driver.
+
+You can enable the OpenGL 3 driver by starting the engine from the
+command line with the command:
+
+    "WAVEZ.x86_64" --rendering-driver opengl3
+
+If you recently updated your video card drivers, try rebooting.
+--warning
+--width
+500
+--title
+Unable to initialize Vulkan video driver
+--text
+Your video card drivers seem not to support the required Vulkan version.
+
+If possible, consider updating your video card drivers or using the OpenGL 3 driver.
+
+You can enable the OpenGL 3 driver by starting the engine from the
+command line with the command:
+
+    "WAVEZ.x86_64" --rendering-driver opengl3
+
+If you recently updated your video card drivers, try rebooting.

@@ -147,11 +147,11 @@ settings and partial-field behavior. It also verifies unchanged capture bytes.
 ```sh
 python -m unittest discover -s tests -v
 python tools/validate_maintenance_ui.py --godot /path/to/godot --output-dir results/check-inspection
-python tools/validate_video.py --godot /path/to/godot --output-dir results/check-video --renderer gl_compatibility
+python tools/validate_video.py --godot /path/to/godot --output-dir results/check-video --renderer forward_plus
 python tools/validate_recipe_state.py --godot /path/to/godot --output-dir /tmp/check-recipes --renderer headless
 ```
 
-Run the recipe check with `--renderer forward_plus` or `gl_compatibility` in a
+Run the recipe check with `--renderer forward_plus` in a
 graphics session for native GPU coverage. Use a fresh output directory per run;
 `recipe-state-report.json` records every compared visual field and any mismatch.
 

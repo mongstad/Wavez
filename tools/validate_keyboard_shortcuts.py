@@ -38,7 +38,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--godot", required=True)
     parser.add_argument("--output-dir", required=True, type=Path)
-    parser.add_argument("--renderer", choices=["forward_plus", "gl_compatibility", "headless"], default="forward_plus")
+    parser.add_argument("--renderer", choices=["forward_plus", "headless"], default="forward_plus")
     parser.add_argument("--export", action="store_true")
     focused = parser.add_mutually_exclusive_group()
     focused.add_argument("--speed-only", action="store_true", help="Validate only the movement-speed shortcut paths")

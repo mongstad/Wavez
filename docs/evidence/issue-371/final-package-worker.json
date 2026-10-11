@@ -1,0 +1,35 @@
+{
+  "checks": [
+    {
+      "case": "particles-legends",
+      "label": "exact frame PNG bytes",
+      "ok": true
+    },
+    {
+      "case": "particles-legends",
+      "label": "exact source timing records",
+      "ok": true
+    },
+    {
+      "case": "particles-legends",
+      "label": "actual release Forward+ Vulkan",
+      "ok": true
+    },
+    {
+      "case": "mixed-on",
+      "label": "exact frame PNG bytes",
+      "ok": true
+    },
+    {
+      "case": "mixed-on",
+      "label": "exact source timing records",
+      "ok": true
+    },
+    {
+      "case": "mixed-on",
+      "label": "actual release Forward+ Vulkan",
+      "ok": true
+    }
+  ],
+  "failures": 0
+}

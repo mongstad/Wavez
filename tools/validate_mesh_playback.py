@@ -36,7 +36,7 @@ def fixtures(out):
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--godot',required=True);p.add_argument('--output-dir',required=True,type=Path)
-    p.add_argument('--renderer',choices=['headless','gl_compatibility','forward_plus'],default='headless')
+    p.add_argument('--renderer',choices=['headless','forward_plus'],default='headless')
     p.add_argument('--capture',type=Path,help='Optional accepted benchmark 04B capture; read only')
     a=p.parse_args();out=a.output_dir.resolve();out.mkdir(parents=True,exist_ok=False)
     fixture=fixtures(out/'fixtures');job=dict(fixtures=str(fixture),output=str(out/'checks.json'))

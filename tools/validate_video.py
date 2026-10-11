@@ -22,7 +22,7 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--godot',required=True)
     parser.add_argument('--output-dir',type=Path)
-    parser.add_argument('--renderer',choices=['gl_compatibility','forward_plus'],default='gl_compatibility')
+    parser.add_argument('--renderer',choices=['forward_plus'],default='forward_plus')
     parser.add_argument('--continuation', action='store_true', help='Run focused additional coverage without repeating the full 4K suite.')
     parser.add_argument('--overlay-ui', action='store_true', help='Focused production overlay, resolution and deterministic repeat coverage.')
     args=parser.parse_args()

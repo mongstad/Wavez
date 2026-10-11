@@ -253,7 +253,7 @@ func _sample_profiled(time: float, asynchronous: bool, force_particles: bool) ->
 					_note_channels(id,a)
 					view.apply(states[id],lut(states[id].colormap));info.display_lod = "float32 / stride %d" % view.lod
 					info.channel = states[id].channel;info.geometry = a.geometry
-					info.color_compositing = "Compatibility sRGB framebuffer" if RenderingServer.get_current_rendering_method() == "gl_compatibility" else "Forward+ linear framebuffer"
+					info.color_compositing = "Forward+ linear framebuffer"
 					info.effective_ray_step = "max(requested step, ray length / 1024); early alpha stop .995"
 					info.opacity_mapping = Opacity.resolve(states[id]).duplicate()
 					info.color_mapping = ColorMapping.resolve(states[id]).duplicate()

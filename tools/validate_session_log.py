@@ -31,7 +31,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--godot", required=True, type=Path)
     parser.add_argument("--output-dir", required=True, type=Path)
-    parser.add_argument("--renderer", choices=("headless", "gl_compatibility", "forward_plus"), default="headless")
+    parser.add_argument("--renderer", choices=("headless", "forward_plus"), default="headless")
     args = parser.parse_args()
     output = args.output_dir.resolve()
     output.mkdir(parents=True, exist_ok=False)

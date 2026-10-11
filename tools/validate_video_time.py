@@ -44,7 +44,7 @@ def main():
     p.add_argument('--baseline', type=Path, required=True, help='Accepted repository archive')
     p.add_argument('--output', type=Path, required=True)
     p.add_argument('--package', action='store_true')
-    p.add_argument('--renderer', default='forward_plus', choices=['forward_plus','gl_compatibility'])
+    p.add_argument('--renderer', default='forward_plus', choices=['forward_plus'])
     a = p.parse_args(); out = a.output.resolve();out.mkdir(parents=True, exist_ok=False)
     inputs = out / 'inputs';inputs.mkdir()
     sources = {}

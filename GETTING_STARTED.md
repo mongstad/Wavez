@@ -22,8 +22,8 @@ terminal launch instructions below provide a reliable alternative.
 
 The packaged executable contains the Godot runtime. You do **not** need a
 separately installed Godot editor/engine, Python, NumPy or the source checkout
-to open an existing capture. You do need a graphical Linux desktop and working
-graphics drivers.
+to open an existing capture. You do need a graphical Linux desktop, a
+Vulkan-capable GPU and working Vulkan graphics drivers.
 
 Use **File → Open** to select a `.wvz` file. It opens at the first usable sample,
 paused, while preparation continues. Press **Play** to advance recorded time.
@@ -31,7 +31,9 @@ The Simulation panel exposes **Particles**, **Fields** and **Meshes** according
 to the objects in the file.
 
 These instructions cover the current Linux x86_64 package. Minimum hardware
-requirements have not been established by this guide's validation.
+capacity requirements for arbitrary captures have not been established by this
+guide's validation.
+Forward+ Vulkan is required; see [renderer requirements and troubleshooting](docs/RENDERER_REQUIREMENTS.md).
 
 ### Terminal launch (alternative)
 
@@ -44,24 +46,23 @@ chmod +x WAVEZ.x86_64
 ./WAVEZ.x86_64
 ```
 
-The normal renderer is Forward+; if your graphics hardware cannot run it,
-try Compatibility from a terminal:
-
-```sh
-./WAVEZ.x86_64 --rendering-method gl_compatibility
-```
+Forward+ Vulkan is the sole supported renderer. Machines without suitable
+Vulkan support are excluded. If startup fails, retain the terminal error, check
+the GPU/driver and follow [startup troubleshooting](docs/RENDERER_REQUIREMENTS.md#launch-and-failure-reporting).
+Godot may fail before Wavez can provide its own message; its OpenGL suggestion
+does not describe a supported Wavez launch.
 
 ### Choose dependencies for the work you want to do
 
 | Work | Requirements |
 | --- | --- |
-| Open and play existing captures in the Linux package | Executable + PCK, graphical desktop and graphics drivers |
+| Open and play existing captures in the Linux package | Executable + PCK, graphical desktop, Vulkan-capable GPU and working Vulkan drivers |
 | Generate captures with Python | Python **3.10+**, `wavez-export` from this repository, **NumPy >=1.23** |
 | Write/read Zstandard-compressed captures in Python | Python 3.14's standard-library Zstandard, or the optional `zstd` extra on older Python |
 | Scientific Selection/Analysis and explicit Matched Views | External `python3` on PATH with NumPy; first-party analysis code is in the package |
 | Extract an isosurface | The optional `analysis` extra: scikit-image **>=0.26,<0.27**, declared for Python **3.11+** |
 | Encode MP4 video, with or without existing selections | External **FFmpeg**, on PATH or configured in File Locations; no Python/NumPy requirement |
-| Run the viewer from source | External **Godot 4.7.2** (the tested engine), source checkout and graphics drivers |
+| Run the viewer from source | External **Godot 4.7.2** (the tested engine), source checkout and Vulkan GPU/drivers |
 | Build the Linux package | Python, Godot and matching Linux export templates; see [packaging](docs/PACKAGED_VIDEO_EXPORT.md#build-and-run) |
 
 Video export excludes all Selection highlights and Analysis overlays. Existing

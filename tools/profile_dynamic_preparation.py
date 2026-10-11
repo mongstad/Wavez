@@ -19,7 +19,7 @@ def main():
     p.add_argument('--actions', action='store_true', help='Exercise seeks, channels, pressure, reverse, loop and reopen')
     p.add_argument('--speed', type=int, choices=[1, 2, 4], default=1)
     p.add_argument('--seconds', type=float, default=0, help='Zero plays the full capture')
-    p.add_argument('--renderer', choices=['forward_plus', 'gl_compatibility', 'headless'], default='forward_plus')
+    p.add_argument('--renderer', choices=['forward_plus', 'headless'], default='forward_plus')
     a = p.parse_args();out = a.output_dir.resolve();out.mkdir(parents=True, exist_ok=False)
     source = a.capture.resolve();before = identity(source)
     cmd = [a.godot, '--path', str(a.viewer_dir.resolve()), '--audio-driver', 'Dummy']

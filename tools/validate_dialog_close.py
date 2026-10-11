@@ -40,7 +40,7 @@ def main():
     parser.add_argument('--godot', required=True)
     parser.add_argument('--output-dir', type=Path, required=True)
     parser.add_argument('--source', type=Path, default=ROOT)
-    parser.add_argument('--renderer', choices=['forward_plus', 'gl_compatibility'], default='forward_plus')
+    parser.add_argument('--renderer', choices=['forward_plus'], default='forward_plus')
     parser.add_argument('--headless', action='store_true')
     parser.add_argument('--baseline', action='store_true')
     parser.add_argument('--package', action='store_true')

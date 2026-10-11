@@ -15,7 +15,7 @@ def main():
     parser.add_argument('--godot', required=True)
     parser.add_argument('--fixture-dir', type=Path, required=True, help='Completed validate_video.py output containing fixture.wvz and state.json')
     parser.add_argument('--output-dir', type=Path, required=True)
-    parser.add_argument('--renderer', choices=['forward_plus', 'gl_compatibility'], default='forward_plus')
+    parser.add_argument('--renderer', choices=['forward_plus'], default='forward_plus')
     parser.add_argument('--baseline-project', type=Path, help='Optional unmodified main viewer checkout for output comparison')
     args = parser.parse_args()
     out = args.output_dir.resolve(); out.mkdir(parents=True, exist_ok=False)

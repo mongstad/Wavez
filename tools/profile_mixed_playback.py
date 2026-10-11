@@ -50,7 +50,7 @@ def main():
     parser.add_argument('--capture', type=Path, required=True)
     parser.add_argument('--output-dir', type=Path, required=True)
     parser.add_argument('--viewer', type=Path, default=ROOT/'viewer')
-    parser.add_argument('--renderer', choices=['forward_plus', 'gl_compatibility'], default='forward_plus')
+    parser.add_argument('--renderer', choices=['forward_plus'], default='forward_plus')
     parser.add_argument('--speed', type=float, default=2.)
     parser.add_argument('--wall-limit', type=float, default=240.)
     args = parser.parse_args()

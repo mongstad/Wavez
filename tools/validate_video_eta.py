@@ -92,7 +92,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--godot', required=True)
     parser.add_argument('--output-dir', type=Path, required=True)
-    parser.add_argument('--renderer', choices=['forward_plus', 'gl_compatibility'], required=True)
+    parser.add_argument('--renderer', choices=['forward_plus'], required=True)
     parser.add_argument('--export', action='store_true')
     parser.add_argument('--short-only', action='store_true')
     args = parser.parse_args()

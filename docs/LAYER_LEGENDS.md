@@ -83,7 +83,7 @@ Reproduce:
 
 ```sh
 python tools/validate_layer_legends.py --godot /path/to/godot --output-dir /tmp/legends-forward
-python tools/validate_layer_legends.py --godot /path/to/godot --output-dir /tmp/legends-gl --renderer gl_compatibility --export
+python tools/validate_layer_legends.py --godot /path/to/godot --output-dir /tmp/legends-package --renderer forward_plus --export
 python tools/validate_recipe_state.py --godot /path/to/godot --output-dir /tmp/legends-recipes
 python tools/validate_video.py --godot /path/to/godot --output-dir /tmp/legends-video --renderer forward_plus --overlay-ui
 ```

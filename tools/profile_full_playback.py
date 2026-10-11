@@ -21,7 +21,7 @@ def main():
     p.add_argument('--output-dir', type=Path, required=True)
     p.add_argument('--viewer', type=Path, default=ROOT / 'viewer')
     p.add_argument('--script', type=Path, default=ROOT / 'viewer/layers/profile_full_playback.gd')
-    p.add_argument('--renderer', default='forward_plus', choices=['forward_plus', 'gl_compatibility'])
+    p.add_argument('--renderer', default='forward_plus', choices=['forward_plus'])
     p.add_argument('--runs', type=int, default=2)
     p.add_argument('--wall-limit', type=float, default=1200)
     p.add_argument('--interval', type=float, nargs=2, metavar=('START', 'END'))

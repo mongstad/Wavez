@@ -25,7 +25,7 @@ def main():
     p.add_argument('--godot',required=True);p.add_argument('--capture',required=True,type=Path)
     p.add_argument('--output-dir',required=True,type=Path);p.add_argument('--baseline',action='store_true');p.add_argument('--baseline-viewer',type=Path)
     p.add_argument('--stress',action='store_true',help='Longer replenishment, 2x physical speed, and loop controls')
-    p.add_argument('--renderer',choices=['gl_compatibility','forward_plus'],default='gl_compatibility')
+    p.add_argument('--renderer',choices=['forward_plus'],default='forward_plus')
     a=p.parse_args();out=a.output_dir.resolve();out.mkdir(parents=True,exist_ok=False)
     source=a.capture.resolve();before=source.stat()
     viewer=ROOT/'viewer'

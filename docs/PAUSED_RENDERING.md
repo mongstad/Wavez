@@ -184,12 +184,10 @@ python tools/profile_paused_rendering.py --godot /absolute/path/godot \
   --capture /absolute/path/capture.ssc --output-dir /fresh/paused-forward \
   --resolution 2546x1386 --orbit --owner-settings --zoom .15 \
   --seconds 60 --actions --full-playback --hash-source
-# Repeat with --renderer gl_compatibility; full playback/hash scans are optional.
 # --viewer-dir accepts an imported snapshot of the accepted baseline.
 # --disable-vsync is an explicit uncapped diagnostic, not the production default.
 python tools/validate_render_pacing.py --godot /absolute/path/godot \
   --output-dir /fresh/pacing-forward
-# Repeat the regression with --renderer gl_compatibility.
 ```
 
 Run one production viewer at a time. Use fresh output directories. The profile

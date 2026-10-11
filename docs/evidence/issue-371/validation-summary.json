@@ -1,0 +1,126 @@
+{
+  "baseline": "eacdae866b017700e0919b263fdfd04c0f65bc27",
+  "candidate": "v0.1.0.97",
+  "validation": [
+    {
+      "scope": "Python WVZ1/channel/field/version contracts",
+      "checks": 21,
+      "result": "PASS"
+    },
+    {
+      "scope": "Final source/release startup + GPU policy + simulated missing Vulkan",
+      "checks": 68,
+      "result": "PASS"
+    },
+    {
+      "scope": "Source video / real children / Jobs / cancellation",
+      "checks": 634,
+      "result": "PASS"
+    },
+    {
+      "scope": "Release video / source pixel and timing equivalence",
+      "checks": 702,
+      "result": "PASS"
+    },
+    {
+      "scope": "Asynchronous playback",
+      "checks": 2457,
+      "result": "PASS"
+    },
+    {
+      "scope": "Transport",
+      "checks": 260,
+      "result": "PASS"
+    },
+    {
+      "scope": "Mesh preparation/source/render fidelity",
+      "checks": 3001,
+      "result": "PASS"
+    },
+    {
+      "scope": "Field color/export",
+      "checks": 138,
+      "result": "PASS"
+    },
+    {
+      "scope": "Field opacity/export",
+      "checks": 98,
+      "result": "PASS"
+    },
+    {
+      "scope": "Save Image (four capture kinds)",
+      "checks": 64,
+      "result": "PASS"
+    },
+    {
+      "scope": "Navigation/tumble/source invariance",
+      "checks": 13062,
+      "result": "PASS"
+    },
+    {
+      "scope": "Native payload integrity",
+      "checks": 480,
+      "result": "PASS"
+    },
+    {
+      "scope": "Explicit Matched Views",
+      "checks": 50,
+      "result": "PASS"
+    },
+    {
+      "scope": "Portable preset quality restoration",
+      "checks": 815,
+      "result": "PASS"
+    },
+    {
+      "scope": "Headless CPU recipe restoration",
+      "checks": 2663,
+      "result": "PASS"
+    },
+    {
+      "scope": "Three repeated baseline comparisons for two scenes",
+      "checks": 12,
+      "result": "PASS"
+    },
+    {
+      "scope": "Final standalone GPU worker pixel/timing/runtime smoke",
+      "checks": 6,
+      "result": "PASS"
+    }
+  ],
+  "retained_local_reports": [
+    {
+      "path": "/home/Nozba/Codex/Wavez/renderer-371/payload/summary.json",
+      "sha256": "cc24d33cc540528cd4be2c4549abbaba76c45d888b35e56f1217d21b2c40433f",
+      "bytes": 150
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/renderer-371/preset/report.json",
+      "sha256": "3c71710768250a16e9a4522f502cd0fdcdf46728e5d568b692a330176b3b5b4d",
+      "bytes": 5955
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/renderer-371/recipe-cpu/recipe-state-report.json",
+      "sha256": "96b90b6a736402da20cae175fe972d0be5484ae2c59c54e7ccb1951a0a990895",
+      "bytes": 44626
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/renderer-371/regressions.json",
+      "sha256": "f47eefa5ed68cb002b7c8f063e8291b03c03e6dfdbea73d6ddbf75fc04556250",
+      "bytes": 4569
+    }
+  ],
+  "failed_attempts": [
+    "Initial compileall found a malformed default argument introduced while editing a maintenance harness; corrected and all tools compiled cleanly.",
+    "Initial source import under the sandbox could not bind the editor socket or save home-directory settings; final isolated native import completed cleanly.",
+    "Initial instrumented release build hid external export templates via XDG_DATA_HOME; fresh retry with installed template access passed 702 checks.",
+    "Initial local-link checker did not strip Markdown angle delimiters; corrected checker verified 255 existing targets."
+  ],
+  "limits": [
+    "Linux x86_64, RTX 3070 Ti, NVIDIA 615.71.09, official Godot 4.7.2 only.",
+    "Unsupported hardware simulated using a missing Vulkan ICD; no physical non-Vulkan machine.",
+    "No Windows/macOS/other GPU, physical keyboard/mouse or 4K/mixed-DPI, long-session, large production capture or GPU contention testing.",
+    "Engine startup alerts occur before Wavez scripts and retain Godot wording.",
+    "Forward+ numerical rendering issues including #360 are not resolved by the backend policy."
+  ]
+}

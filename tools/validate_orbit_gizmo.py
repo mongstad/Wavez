@@ -58,7 +58,7 @@ def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--godot',required=True)
     p.add_argument('--output-dir',type=Path,required=True)
-    p.add_argument('--renderer',choices=['headless','forward_plus','gl_compatibility'],default='headless')
+    p.add_argument('--renderer',choices=['headless','forward_plus'],default='headless')
     p.add_argument('--project',type=Path,default=ROOT/'viewer')
     p.add_argument('--packaged',action='store_true',help='Run an existing validation-entry package')
     p.add_argument('--export',action='store_true',help='Build a release-template validation-entry package')
