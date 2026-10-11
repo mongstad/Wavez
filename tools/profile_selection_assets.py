@@ -17,7 +17,7 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--godot",required=True);parser.add_argument("--output-dir",type=Path,required=True)
     parser.add_argument("--count",type=int,default=100000)
-    parser.add_argument("--renderer",choices=["headless","gl_compatibility","forward_plus"],default="headless")
+    parser.add_argument("--renderer",choices=["headless","forward_plus"],default="headless")
     args=parser.parse_args()
     if not 65<=args.count<=1000000:parser.error("Count must be 65..1000000")
     out=args.output_dir.resolve();out.mkdir(parents=True,exist_ok=False)

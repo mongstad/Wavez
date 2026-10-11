@@ -133,3 +133,12 @@ performance claim.
 A08 remains a G4 requirement for exploratory peak-interval/autocorrelation estimates
 with declared windows and sampling checks (F08). Automatic event detection and
 event-generated bookmarks remain G6; this clarification does not remove A08.
+
+## Supported rendering backend
+
+Current GPU acceptance exercises **Forward+ Vulkan only** in source and Linux
+release/worker paths. CPU source fidelity remains independent of renderer choice.
+[Renderer requirements and scientific limits](RENDERER_REQUIREMENTS.md) document
+the Vulkan prerequisite, unsupported-hardware boundary and outstanding #360
+precision work. Historical Compatibility results retain their original meaning
+and are not current platform certification.

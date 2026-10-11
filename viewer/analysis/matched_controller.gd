@@ -125,7 +125,7 @@ func launch_next() -> void:
 	if FileAccess.get_sha256(active_path) != entry.sha256:status.text = "Prepared job changed; render refused.";job_failed.emit(status.text);return
 	var job = JSON.parse_string(FileAccess.get_file_as_string(active_path))
 	if not job is Dictionary:status.text = "Invalid prepared job.";job_failed.emit(status.text);return
-	var args := Job.launch_arguments(active_path,int(job.fps));args.insert(0,RenderingServer.get_current_rendering_method());args.insert(0,"--rendering-method")
+	var args := Job.launch_arguments(active_path,int(job.fps))
 	pid = OS.create_process(OS.get_executable_path(),args)
 	if pid <= 0:status.text = "Could not launch matched renderer.";job_failed.emit(status.text);return
 	if viewer.session_log != null: viewer.session_log.record("JOB", "Matched views started: %s path=%s" % ["left" if index == 0 else "right", active_path], true)

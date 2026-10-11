@@ -21,7 +21,7 @@ def main():
     p.add_argument('--godot', required=True)
     p.add_argument('--output-dir', type=Path, required=True)
     p.add_argument('--packaged', action='store_true', help='Run a standalone executable with its adjacent PCK')
-    p.add_argument('--renderer', choices=['forward_plus', 'gl_compatibility'], default='forward_plus')
+    p.add_argument('--renderer', choices=['forward_plus'], default='forward_plus')
     a = p.parse_args()
     out = a.output_dir.resolve(); out.mkdir(parents=True, exist_ok=False)
     source = scene(out / 'scene.wvz')

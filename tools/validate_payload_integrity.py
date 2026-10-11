@@ -108,7 +108,7 @@ def fixtures(out):
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--godot', required=True);p.add_argument('--output-dir', type=Path, required=True)
-    p.add_argument('--renderer', choices=['headless', 'forward_plus', 'gl_compatibility'], default='headless')
+    p.add_argument('--renderer', choices=['headless', 'forward_plus'], default='headless')
     a = p.parse_args();out = a.output_dir.resolve();out.mkdir(parents=True, exist_ok=False)
     report = fixtures(out)
     hashes = {str(f):hashlib.sha256(f.read_bytes()).hexdigest() for f in out.rglob('*.wvz') if f.name != 'working.wvz'}

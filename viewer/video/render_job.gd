@@ -2,6 +2,7 @@ extends RefCounted
 # JSON-only render jobs. File/Export/Video always uses version 1.
 # Version 2 is retained for deliberately requested scientific Matched Views.
 const VERSION := 1
+const Renderer = preload("res://renderer_policy.gd")
 const State = preload("res://scene/visual_state.gd")
 const ExactState = preload("res://analysis/inspection_v3.gd")
 static func vec(v: Vector3) -> Array: return State.vec(v)
@@ -17,6 +18,8 @@ static func sample_time(job: Dictionary, n: int) -> float:
 	return float(job.start_time) + float(n) / float(job.fps) * float(job.playback_rate)
 
 static func validate(job: Dictionary) -> String:
+	if job.get("rendering_method",Renderer.METHOD) != Renderer.METHOD:
+		return Renderer.REQUIREMENT + " Render jobs must use forward_plus."
 	if job.has("presentation"):
 		var presentation = job.presentation
 		if not presentation is Dictionary: return "Invalid export presentation."
@@ -152,7 +155,7 @@ static func ffmpeg_problem(path: String) -> String:
 	return ""
 
 static func launch_arguments(job_path: String, fps: int) -> PackedStringArray:
-	var args := PackedStringArray()
+	var args := PackedStringArray(["--rendering-method",Renderer.METHOD,"--rendering-driver",Renderer.DRIVER])
 	# Official export templates reject path overrides. The standalone executable
 	# opens its own PCK; only the development engine needs a project directory.
 	if OS.has_feature("editor"):

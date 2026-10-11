@@ -12,7 +12,7 @@ def main():
     def check(ok,name):
         checks.append(dict(name=name,ok=bool(ok)))
         if not ok:raise AssertionError(name)
-    for renderer in ['gl_compatibility','forward_plus']:
+    for renderer in ['forward_plus']:
         for mode in ['baseline','optimized']:
             folder=out/(renderer+'-'+mode);folder.mkdir()
             job=copy.deepcopy(template);job['output_path']=str(folder/'result.mp4')

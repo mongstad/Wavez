@@ -1,0 +1,708 @@
+{
+  "maintenance_selectors": [
+    {
+      "tool": "tools/profile_g4_workloads.py",
+      "choices": [
+        "forward_plus"
+      ]
+    },
+    {
+      "tool": "tools/profile_mesh_playback.py",
+      "default": "forward_plus",
+      "choices": [
+        "forward_plus"
+      ]
+    },
+    {
+      "tool": "tools/profile_full_playback.py",
+      "default": "forward_plus",
+      "choices": [
+        "forward_plus"
+      ]
+    },
+    {
+      "tool": "tools/validate_adaptive_cache.py",
+      "choices": [
+        "headless",
+        "forward_plus"
+      ],
+      "default": "headless"
+    },
+    {
+      "tool": "tools/validate_field_parallel.py",
+      "default": "headless",
+      "choices": [
+        "headless",
+        "forward_plus"
+      ]
+    },
+    {
+      "tool": "tools/profile_paused_rendering.py",
+      "choices": [
+        "forward_plus"
+      ],
+      "default": "forward_plus"
+    },
+    {
+      "tool": "tools/monitor_native_resize.py",
+      "choices": [
+        "forward_plus"
+      ],
+      "default": "forward_plus"
+    },
+    {
+      "tool": "tools/profile_adaptive_cache.py",
+      "choices": [
+        "headless",
+        "forward_plus"
+      ],
+      "default": "forward_plus"
+    },
+    {
+      "tool": "tools/profile_dynamic_preparation.py",
+      "choices": [
+        "forward_plus",
+        "headless"
+      ],
+      "default": "forward_plus"
+    },
+    {
+      "tool": "tools/profile_field_load.py",
+      "choices": [
+        "forward_plus"
+      ]
+    },
+    {
+      "tool": "tools/profile_g4.py",
+      "choices": [
+        "forward_plus"
+      ]
+    },
+    {
+      "tool": "tools/profile_mixed_playback.py",
+      "choices": [
+        "forward_plus"
+      ],
+      "default": "forward_plus"
+    },
+    {
+      "tool": "tools/profile_native_resize.py",
+      "choices": [
+        "forward_plus"
+      ],
+      "default": "forward_plus"
+    },
+    {
+      "tool": "tools/profile_parallel_preparation.py",
+      "choices": [
+        "headless",
+        "forward_plus"
+      ],
+      "default": "forward_plus"
+    },
+    {
+      "tool": "tools/profile_payload_integrity.py",
+      "choices": [
+        "headless",
+        "forward_plus"
+      ],
+      "default": "forward_plus"
+    },
+    {
+      "tool": "tools/profile_rolling_cache.py",
+      "choices": [
+        "headless",
+        "forward_plus"
+      ],
+      "default": "forward_plus"
+    },
+    {
+      "tool": "tools/profile_scene_playback.py",
+      "choices": [
+        "forward_plus"
+      ],
+      "default": "forward_plus"
+    },
+    {
+      "tool": "tools/profile_scene_stalls.py",
+      "choices": [
+        "forward_plus"
+      ],
+      "default": "forward_plus"
+    },
+    {
+      "tool": "tools/profile_selection_assets.py",
+      "choices": [
+        "headless",
+        "forward_plus"
+      ],
+      "default": "headless"
+    },
+    {
+      "tool": "tools/validate_about.py",
+      "choices": [
+        "forward_plus",
+        "headless"
+      ],
+      "default": "forward_plus"
+    },
+    {
+      "tool": "tools/validate_application_theme.py",
+      "choices": [
+        "forward_plus"
+      ],
+      "default": "forward_plus"
+    },
+    {
+      "tool": "tools/validate_background_export.py",
+      "choices": [
+        "forward_plus"
+      ],
+      "default": "forward_plus"
+    },
+    {
+      "tool": "tools/validate_branding.py",
+      "choices": [
+        "forward_plus"
+      ]
+    },
+    {
+      "tool": "tools/validate_camera_reset.py",
+      "choices": [
+        "headless",
+        "forward_plus"
+      ],
+      "default": "headless"
+    },
+    {
+      "tool": "tools/validate_camera_tumble.py",
+      "choices": [
+        "headless",
+        "forward_plus"
+      ],
+      "default": "headless"
+    },
+    {
+      "tool": "tools/validate_diagnostics.py",
+      "choices": [
+        "headless",
+        "forward_plus"
+      ],
+      "default": "headless"
+    },
+    {
+      "tool": "tools/validate_dialog_actions.py",
+      "choices": [
+        "forward_plus"
+      ]
+    },
+    {
+      "tool": "tools/validate_dialog_close.py",
+      "choices": [
+        "forward_plus"
+      ],
+      "default": "forward_plus"
+    },
+    {
+      "tool": "tools/validate_dialog_coherence.py",
+      "choices": [
+        "forward_plus"
+      ]
+    },
+    {
+      "tool": "tools/validate_edge_reveal.py",
+      "choices": [
+        "forward_plus"
+      ],
+      "default": "forward_plus"
+    },
+    {
+      "tool": "tools/validate_empty_background.py",
+      "choices": [
+        "forward_plus"
+      ]
+    },
+    {
+      "tool": "tools/validate_exit_confirmation.py",
+      "choices": [
+        "forward_plus"
+      ],
+      "default": "forward_plus"
+    },
+    {
+      "tool": "tools/validate_exit_menu.py",
+      "choices": [
+        "forward_plus"
+      ]
+    },
+    {
+      "tool": "tools/validate_field_budget.py",
+      "choices": [
+        "forward_plus"
+      ]
+    },
+    {
+      "tool": "tools/validate_field_session.py",
+      "default": "headless",
+      "choices": [
+        "headless",
+        "forward_plus"
+      ]
+    },
+    {
+      "tool": "tools/validate_file_dialogs.py",
+      "choices": [
+        "forward_plus"
+      ],
+      "default": "forward_plus"
+    },
+    {
+      "tool": "tools/validate_file_locations.py",
+      "choices": [
+        "headless",
+        "forward_plus"
+      ],
+      "default": "headless"
+    },
+    {
+      "tool": "tools/validate_focus_navigation.py",
+      "choices": [
+        "forward_plus"
+      ],
+      "default": "forward_plus"
+    },
+    {
+      "tool": "tools/validate_focused_tools.py",
+      "choices": [
+        "forward_plus"
+      ],
+      "default": "forward_plus"
+    },
+    {
+      "tool": "tools/validate_g4_matched.py",
+      "choices": [
+        "forward_plus"
+      ]
+    },
+    {
+      "tool": "tools/validate_g4_render.py",
+      "choices": [
+        "forward_plus"
+      ]
+    },
+    {
+      "tool": "tools/validate_g4_render_failures.py",
+      "choices": [
+        "forward_plus"
+      ]
+    },
+    {
+      "tool": "tools/validate_getting_started.py",
+      "choices": [
+        "forward_plus"
+      ],
+      "default": "forward_plus"
+    },
+    {
+      "tool": "tools/validate_global_bloom.py",
+      "choices": [
+        "forward_plus"
+      ]
+    },
+    {
+      "tool": "tools/validate_immersive_desktop.py",
+      "choices": [
+        "forward_plus"
+      ],
+      "default": "forward_plus"
+    },
+    {
+      "tool": "tools/validate_invert_y_axis.py",
+      "choices": [
+        "headless",
+        "forward_plus"
+      ],
+      "default": "headless"
+    },
+    {
+      "tool": "tools/validate_keyboard_shortcuts.py",
+      "choices": [
+        "forward_plus",
+        "headless"
+      ],
+      "default": "forward_plus"
+    },
+    {
+      "tool": "tools/validate_layer_legends.py",
+      "choices": [
+        "forward_plus"
+      ],
+      "default": "forward_plus"
+    },
+    {
+      "tool": "tools/validate_lazy_loading.py",
+      "default": "headless",
+      "choices": [
+        "headless",
+        "forward_plus"
+      ]
+    },
+    {
+      "tool": "tools/validate_load_error_recovery.py",
+      "choices": [
+        "forward_plus"
+      ],
+      "default": "forward_plus"
+    },
+    {
+      "tool": "tools/validate_maintenance_ui.py",
+      "choices": [
+        "headless",
+        "forward_plus"
+      ],
+      "default": "headless"
+    },
+    {
+      "tool": "tools/validate_mesh_budget.py",
+      "choices": [
+        "headless",
+        "forward_plus"
+      ],
+      "default": "headless"
+    },
+    {
+      "tool": "tools/validate_mesh_playback.py",
+      "choices": [
+        "headless",
+        "forward_plus"
+      ],
+      "default": "headless"
+    },
+    {
+      "tool": "tools/validate_orbit_center.py",
+      "choices": [
+        "forward_plus"
+      ]
+    },
+    {
+      "tool": "tools/validate_orbit_gizmo.py",
+      "choices": [
+        "headless",
+        "forward_plus"
+      ],
+      "default": "headless"
+    },
+    {
+      "tool": "tools/validate_particle_cache.py",
+      "choices": [
+        "headless",
+        "forward_plus"
+      ],
+      "default": "headless"
+    },
+    {
+      "tool": "tools/validate_paused_preparation.py",
+      "choices": [
+        "forward_plus"
+      ]
+    },
+    {
+      "tool": "tools/validate_payload_integrity.py",
+      "choices": [
+        "headless",
+        "forward_plus"
+      ],
+      "default": "headless"
+    },
+    {
+      "tool": "tools/validate_performance_maintenance.py",
+      "default": "headless",
+      "choices": [
+        "headless",
+        "forward_plus"
+      ]
+    },
+    {
+      "tool": "tools/validate_probe_marker.py",
+      "choices": [
+        "forward_plus"
+      ],
+      "default": "forward_plus"
+    },
+    {
+      "tool": "tools/validate_probe_visibility.py",
+      "choices": [
+        "forward_plus"
+      ],
+      "default": "forward_plus"
+    },
+    {
+      "tool": "tools/validate_recipe_state.py",
+      "choices": [
+        "headless",
+        "forward_plus"
+      ],
+      "default": "headless"
+    },
+    {
+      "tool": "tools/validate_render_pacing.py",
+      "choices": [
+        "forward_plus"
+      ],
+      "default": "forward_plus"
+    },
+    {
+      "tool": "tools/validate_rolling_cache.py",
+      "choices": [
+        "headless",
+        "forward_plus"
+      ],
+      "default": "headless"
+    },
+    {
+      "tool": "tools/validate_rounded_surfaces.py",
+      "choices": [
+        "forward_plus"
+      ],
+      "default": "forward_plus"
+    },
+    {
+      "tool": "tools/validate_save_image.py",
+      "choices": [
+        "forward_plus"
+      ]
+    },
+    {
+      "tool": "tools/validate_scene_playback.py",
+      "choices": [
+        "headless",
+        "forward_plus"
+      ],
+      "default": "headless"
+    },
+    {
+      "tool": "tools/validate_scene_timeline.py",
+      "default": "forward_plus",
+      "choices": [
+        "forward_plus"
+      ]
+    },
+    {
+      "tool": "tools/validate_screen_fixed_background.py",
+      "choices": [
+        "forward_plus"
+      ]
+    },
+    {
+      "tool": "tools/validate_selections.py",
+      "choices": [
+        "headless",
+        "forward_plus"
+      ],
+      "default": "headless"
+    },
+    {
+      "tool": "tools/validate_session_log.py",
+      "choices": [
+        "headless",
+        "forward_plus"
+      ],
+      "default": "headless"
+    },
+    {
+      "tool": "tools/validate_simulation_panel.py",
+      "choices": [
+        "forward_plus"
+      ],
+      "default": "forward_plus"
+    },
+    {
+      "tool": "tools/validate_space_time.py",
+      "choices": [
+        "headless",
+        "forward_plus"
+      ],
+      "default": "headless"
+    },
+    {
+      "tool": "tools/validate_temporal.py",
+      "choices": [
+        "headless",
+        "forward_plus"
+      ],
+      "default": "headless"
+    },
+    {
+      "tool": "tools/validate_timeline_geometry.py",
+      "choices": [
+        "forward_plus"
+      ],
+      "default": "forward_plus"
+    },
+    {
+      "tool": "tools/validate_ux2.py",
+      "choices": [
+        "forward_plus"
+      ],
+      "default": "forward_plus"
+    },
+    {
+      "tool": "tools/validate_ux3_integration.py",
+      "choices": [
+        "forward_plus"
+      ],
+      "default": "forward_plus"
+    },
+    {
+      "tool": "tools/validate_video.py",
+      "choices": [
+        "forward_plus"
+      ],
+      "default": "forward_plus"
+    },
+    {
+      "tool": "tools/validate_video_current.py",
+      "choices": [
+        "forward_plus"
+      ]
+    },
+    {
+      "tool": "tools/validate_video_eta.py",
+      "choices": [
+        "forward_plus"
+      ]
+    },
+    {
+      "tool": "tools/validate_video_time.py",
+      "default": "forward_plus",
+      "choices": [
+        "forward_plus"
+      ]
+    },
+    {
+      "tool": "tools/validate_view_preset.py",
+      "default": "forward_plus",
+      "choices": [
+        "forward_plus",
+        "headless"
+      ]
+    },
+    {
+      "tool": "tools/validate_viewer_shell.py",
+      "choices": [
+        "forward_plus"
+      ],
+      "default": "forward_plus"
+    },
+    {
+      "tool": "tools/validate_viewer_status.py",
+      "choices": [
+        "forward_plus"
+      ],
+      "default": "forward_plus"
+    },
+    {
+      "tool": "tools/validate_viewer_transport.py",
+      "choices": [
+        "forward_plus"
+      ],
+      "default": "forward_plus"
+    },
+    {
+      "tool": "tools/validate_violet_cleanup.py",
+      "choices": [
+        "forward_plus"
+      ],
+      "default": "forward_plus"
+    },
+    {
+      "tool": "tools/validate_violet_dropdowns.py",
+      "choices": [
+        "forward_plus"
+      ],
+      "default": "forward_plus"
+    },
+    {
+      "tool": "tools/validate_violet_review_corrections.py",
+      "choices": [
+        "forward_plus"
+      ],
+      "default": "forward_plus"
+    },
+    {
+      "tool": "tools/validate_violet_round2.py",
+      "choices": [
+        "forward_plus"
+      ],
+      "default": "forward_plus"
+    },
+    {
+      "tool": "tools/validate_violet_style_slice.py",
+      "choices": [
+        "forward_plus"
+      ],
+      "default": "forward_plus"
+    },
+    {
+      "tool": "tools/validate_volume_color.py",
+      "choices": [
+        "forward_plus"
+      ]
+    },
+    {
+      "tool": "tools/validate_volume_defaults.py",
+      "choices": [
+        "forward_plus"
+      ],
+      "default": "forward_plus"
+    },
+    {
+      "tool": "tools/validate_volume_opacity.py",
+      "choices": [
+        "forward_plus"
+      ]
+    },
+    {
+      "tool": "tools/validate_volume_presets.py",
+      "choices": [
+        "forward_plus"
+      ]
+    },
+    {
+      "tool": "tools/validate_wheel_zoom.py",
+      "choices": [
+        "forward_plus"
+      ]
+    },
+    {
+      "tool": "tools/validate_window_chrome.py",
+      "choices": [
+        "forward_plus"
+      ],
+      "default": "forward_plus"
+    },
+    {
+      "tool": "tools/validate_close_file.py",
+      "choices": [
+        "headless",
+        "forward_plus"
+      ],
+      "default": "headless"
+    },
+    {
+      "tool": "tools/validate_packaged_video.py",
+      "choices": [
+        "forward_plus"
+      ]
+    },
+    {
+      "tool": "tools/validate_camera_roll.py",
+      "choices": [
+        "headless",
+        "forward_plus"
+      ],
+      "default": "headless"
+    }
+  ],
+  "historical_investigation": "tools/investigate_window_signals.py retains cross-renderer diagnostics for archived sources"
+}

@@ -22,7 +22,7 @@ def main():
     parser.add_argument('--example-python', default=sys.executable,
                         help='Python with installed wavez-export; scripts run outside checkout')
     parser.add_argument('--godot', help='Omit for Python-only verification')
-    parser.add_argument('--renderer', choices=['forward_plus', 'gl_compatibility'], default='forward_plus')
+    parser.add_argument('--renderer', choices=['forward_plus'], default='forward_plus')
     parser.add_argument('--package', action='store_true')
     args = parser.parse_args()
     if args.package and not args.godot: parser.error('--package requires --godot')

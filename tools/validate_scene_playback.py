@@ -45,7 +45,7 @@ def prepare(out):
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--godot',required=True);p.add_argument('--output-dir',type=Path,required=True)
-    p.add_argument('--renderer',choices=['headless','gl_compatibility','forward_plus'],default='headless')
+    p.add_argument('--renderer',choices=['headless','forward_plus'],default='headless')
     a=p.parse_args();out=a.output_dir.resolve();prepare(out)
     cmd=[a.godot,'--path',str(ROOT/'viewer'),'--audio-driver','Dummy','--log-file',str(out/'godot.log')]
     cmd+=['--headless'] if a.renderer=='headless' else ['--rendering-method',a.renderer,'--resolution','960x640']

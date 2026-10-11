@@ -26,7 +26,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--godot', required=True)
     parser.add_argument('--output-dir', required=True, type=Path)
-    parser.add_argument('--renderer', choices=['forward_plus', 'gl_compatibility'], default='forward_plus')
+    parser.add_argument('--renderer', choices=['forward_plus'], default='forward_plus')
     parser.add_argument('--display-driver', choices=['wayland', 'x11'], default='wayland')
     parser.add_argument('--steps', type=int, default=32)
     parser.add_argument('--pointer', action='store_true', help='Use a temporary virtual mouse to drag the native right edge')

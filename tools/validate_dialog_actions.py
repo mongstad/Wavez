@@ -49,7 +49,7 @@ def main():
     parser.add_argument('--godot', required=True)
     parser.add_argument('--baseline', required=True, type=Path)
     parser.add_argument('--output', required=True, type=Path)
-    parser.add_argument('--renderer', choices=['forward_plus','gl_compatibility'], required=True)
+    parser.add_argument('--renderer', choices=['forward_plus'], required=True)
     parser.add_argument('--package', action='store_true')
     args = parser.parse_args(); output = args.output.resolve(); output.mkdir(parents=True, exist_ok=False)
     capture = output / 'mixed.wvz'; fixture(capture, ['particles','volume','mesh'])

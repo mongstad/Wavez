@@ -35,7 +35,7 @@ def main():
     p.add_argument('--capture', type=Path, required=True)
     p.add_argument('--output-dir', type=Path, required=True)
     p.add_argument('--viewer-dir', type=Path, default=ROOT/'viewer', help='Optional immutable baseline source snapshot')
-    p.add_argument('--renderer', choices=['headless', 'forward_plus', 'gl_compatibility'], default='forward_plus')
+    p.add_argument('--renderer', choices=['headless', 'forward_plus'], default='forward_plus')
     p.add_argument('--samples', type=int, default=128)
     p.add_argument('--workers', type=int, choices=[1,2,3,4], default=2)
     p.add_argument('--first', type=int, default=100)

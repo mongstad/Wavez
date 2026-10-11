@@ -148,8 +148,6 @@ static func apply(viewer, recipe) -> Dictionary:
 		var v = s.environment[key];viewer.environment.set(key,Color(v[0],v[1],v[2],v[3]) if key == "background_color" else v)
 	for key in s.get("camera",{}):viewer.camera.set(key,s.camera[key])
 	for key in s.get("quality",{}):
-		if RenderingServer.get_current_rendering_method() == "gl_compatibility" and key in ["use_taa","use_debanding"]:
-			plan.skipped.append("quality."+key+" (renderer unsupported)");continue
 		viewer.get_viewport().set(key,s.quality[key])
 	var layers = viewer.scene_layers
 	for kind in ["volume","mesh"]:

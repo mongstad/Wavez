@@ -21,7 +21,7 @@ def main():
     parser.add_argument('--godot', required=True)
     parser.add_argument('--capture', required=True, type=Path)
     parser.add_argument('--output-dir', required=True, type=Path)
-    parser.add_argument('--renderer', choices=['forward_plus', 'gl_compatibility'], default='forward_plus')
+    parser.add_argument('--renderer', choices=['forward_plus'], default='forward_plus')
     parser.add_argument('--window-restore', action='store_true', help='Check fullscreen mode/geometry restoration and unpinned visibility.')
     parser.add_argument('--legend-visibility', action='store_true', help='Also check independent legend/panel visibility and recipe restore at each window stage.')
     parser.add_argument('--display-driver', choices=['wayland', 'x11'], default='wayland')

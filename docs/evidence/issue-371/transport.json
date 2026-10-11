@@ -1,0 +1,24 @@
+{
+  "checks": 260,
+  "failures": [],
+  "layouts": [
+    {
+      "transport": "[P: (0.0, 796.0), S: (1440.0, 64.0)]",
+      "window": "(1440, 900)"
+    },
+    {
+      "transport": "[P: (0.0, 496.0), S: (1024.0, 104.0)]",
+      "window": "(1024, 640)"
+    }
+  ],
+  "refresh_activity": {
+    "counters": {},
+    "stages": {}
+  },
+  "request_delay_observed_ms": 459,
+  "source_hashes_unchanged": {
+    "/home/Nozba/Codex/Wavez/renderer-371/transport/scene.wvz": "7249f9a68af8464c95c6b2353393432a509da2cb03cfc3babf77a9fcd5348d8a",
+    "/home/Nozba/Codex/Wavez/renderer-371/transport/offset.wvz": "7903da4469889655e2a297d42dd2d963099ddad3e0b06fe58e46366b2e234d2a",
+    "/home/Nozba/Codex/Wavez/renderer-371/transport/single.wvz": "0fef0ef07105c4a87736921e6b04d5a0149b1b09f2a62d06800836719a2cebce"
+  }
+}

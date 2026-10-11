@@ -42,7 +42,7 @@ def validate_profiles(runs):
 
 def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--godot',required=True);p.add_argument('--output-dir',type=Path,required=True)
-    p.add_argument('--renderer',default='headless',choices=['headless','gl_compatibility','forward_plus']);p.add_argument('--baseline-viewer',type=Path)
+    p.add_argument('--renderer',default='headless',choices=['headless','forward_plus']);p.add_argument('--baseline-viewer',type=Path)
     p.add_argument('--particle-scene',type=Path);p.add_argument('--field-scene',type=Path)
     a=p.parse_args();out=a.output_dir.resolve();out.mkdir(parents=True,exist_ok=True)
     if a.particle_scene or a.field_scene:

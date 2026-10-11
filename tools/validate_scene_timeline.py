@@ -50,7 +50,7 @@ def prepare(out, source=None):
 def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--godot',required=True);p.add_argument('--source',type=Path)
-    p.add_argument('--label',default='after');p.add_argument('--renderer',default='gl_compatibility')
+    p.add_argument('--label',default='after');p.add_argument('--renderer',default='forward_plus',choices=['forward_plus'])
     a=p.parse_args();out=(ROOT/'results/g3-timeline'/a.label).resolve();out.mkdir(parents=True,exist_ok=True)
     prepare(out,a.source)
     cmd=[a.godot,'--path',str(ROOT/'viewer'),'--resolution','1440x900','--audio-driver','Dummy',

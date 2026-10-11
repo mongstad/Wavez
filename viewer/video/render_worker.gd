@@ -30,6 +30,7 @@ var encoding_began := 0
 func _ready() -> void:
 	began = Time.get_ticks_msec()
 	metrics.runtime = {"executable":OS.get_executable_path(), "packaged":not OS.has_feature("editor"), "release":OS.has_feature("release"), "rendering_method":RenderingServer.get_current_rendering_method(), "arguments":Array(OS.get_cmdline_user_args())}
+	metrics.runtime.merge(Job.Renderer.runtime(),true)
 	Profile.enabled = OS.get_environment("WAVEZ_VIDEO_PROFILE") == "1"
 	get_tree().auto_accept_quit = false
 	RenderingServer.render_loop_enabled = false # Offline frames own their draw calls.
@@ -77,6 +78,10 @@ func _run() -> void:
 		finish("failed", "Invalid render-job JSON.", 1)
 		return
 	job = parsed
+	var renderer_problem := Job.Renderer.problem()
+	if not renderer_problem.is_empty():
+		finish("failed",renderer_problem,1)
+		return
 	if job.get("version") == 2:
 		if job.has("exact_state"):job.state = preload("res://analysis/inspection_v3.gd").unpack(job.exact_state)
 		var exact = preload("res://analysis/inspection_v3.gd").unpack(job.get("exact_timing",{}))

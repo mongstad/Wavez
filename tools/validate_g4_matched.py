@@ -9,7 +9,7 @@ from wavez_export.analysis.recipes import unpack
 
 
 def main():
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--godot',required=True);p.add_argument('--output-dir',type=Path,required=True);p.add_argument('--renderer',choices=['gl_compatibility','forward_plus'],required=True);args=p.parse_args()
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--godot',required=True);p.add_argument('--output-dir',type=Path,required=True);p.add_argument('--renderer',choices=['forward_plus'],required=True);args=p.parse_args()
     root=args.output_dir.resolve();root.mkdir(parents=True,exist_ok=False);runs=[];checks=[];report=dict(status='in_progress',renderer=args.renderer,runs=runs,checks=checks)
     def run(command,log):
         start=time.monotonic();r=subprocess.run(command,cwd=ROOT,text=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,timeout=180);log.write_text(r.stdout);runs.append(dict(command=command,exit_code=r.returncode,seconds=time.monotonic()-start))

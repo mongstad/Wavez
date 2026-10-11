@@ -14,6 +14,11 @@ See [current status](docs/CURRENT_STATUS.md) for the accepted baseline, supporte
 contracts and scope boundaries. The [format policy](docs/CAPTURE_FORMAT_POLICY.md)
 defines the WVZ1-only workflow.
 
+**Forward+ Vulkan is the sole supported renderer.** Source and Linux standalone
+viewing and GPU exports require a Vulkan-capable GPU and working Vulkan drivers.
+Machines without suitable Vulkan support are excluded; there is no supported
+OpenGL/Compatibility fallback. See [requirements and startup troubleshooting](docs/RENDERER_REQUIREMENTS.md).
+
 Start with:
 
 - [Getting Started: installation, Python examples and technical reference](GETTING_STARTED.md)

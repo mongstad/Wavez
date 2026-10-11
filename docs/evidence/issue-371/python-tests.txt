@@ -1,0 +1,26 @@
+test_descriptor_ceiling_refuses_before_reading_payload (tests.test_scene_contract.SceneContractTests.test_descriptor_ceiling_refuses_before_reading_payload) ... ok
+test_exact_wvz1_wire_envelope_and_record_tags (tests.test_scene_contract.SceneContractTests.test_exact_wvz1_wire_envelope_and_record_tags) ... ok
+test_failed_refresh_drops_previous_metadata_and_can_reopen (tests.test_scene_contract.SceneContractTests.test_failed_refresh_drops_previous_metadata_and_can_reopen) ... ok
+test_late_admission_failure_and_shared_analysis_budget_release (tests.test_scene_contract.SceneContractTests.test_late_admission_failure_and_shared_analysis_budget_release) ... ok
+test_metadata_capacity_is_separate_from_corruption (tests.test_scene_contract.SceneContractTests.test_metadata_capacity_is_separate_from_corruption) ... ok
+test_retired_magic_is_refused_even_with_current_suffix (tests.test_scene_contract.SceneContractTests.test_retired_magic_is_refused_even_with_current_suffix) ... ok
+test_suffix_and_version_are_both_required (tests.test_scene_contract.SceneContractTests.test_suffix_and_version_are_both_required) ... ok
+test_writer_keeps_individual_descriptor_limit_and_committed_prefix (tests.test_scene_contract.SceneContractTests.test_writer_keeps_individual_descriptor_limit_and_committed_prefix) ... ok
+test_vector_arrays_keep_full_backing_buffer_across_chunk_boundaries (tests.test_scene_chunks.SceneChunkTests.test_vector_arrays_keep_full_backing_buffer_across_chunk_boundaries) ... ok
+test_volume_chunks_cross_planes_and_preserve_float_bits (tests.test_scene_chunks.SceneChunkTests.test_volume_chunks_cross_planes_and_preserve_float_bits) ... ok
+test_density_integral_needs_matching_explicit_units_and_scale (tests.test_channel_semantics.ChannelSemanticsTests.test_density_integral_needs_matching_explicit_units_and_scale) ... ok
+test_phase_and_categories_cannot_be_relabeled_for_linear_arithmetic (tests.test_channel_semantics.ChannelSemanticsTests.test_phase_and_categories_cannot_be_relabeled_for_linear_arithmetic) ... ok
+test_plain_mass_name_does_not_establish_physical_mass (tests.test_channel_semantics.ChannelSemanticsTests.test_plain_mass_name_does_not_establish_physical_mass) ... ok
+test_position_transform_policy_does_not_transform_velocity_basis (tests.test_channel_semantics.ChannelSemanticsTests.test_position_transform_policy_does_not_transform_velocity_basis) ... ok
+test_volume_value_units_do_not_become_coordinate_units (tests.test_channel_semantics.ChannelSemanticsTests.test_volume_value_units_do_not_become_coordinate_units) ... ok
+test_extrema_counts_precision_and_nonfinite (tests.test_field_statistics.FieldStatisticsTests.test_extrema_counts_precision_and_nonfinite) ... ok
+test_invalid_summaries_and_false_values (tests.test_field_statistics.FieldStatisticsTests.test_invalid_summaries_and_false_values) ... ok
+test_mandatory_summary_and_exact_bits (tests.test_field_statistics.FieldStatisticsTests.test_mandatory_summary_and_exact_bits) ... ok
+test_writer_and_verifier_reject_forged_summary (tests.test_field_statistics.FieldStatisticsTests.test_writer_and_verifier_reject_forged_summary) ... ok
+test_authoritative_source_and_cli (tests.test_application_version.ApplicationVersionTests.test_authoritative_source_and_cli) ... ok
+test_metadata_contract (tests.test_application_version.ApplicationVersionTests.test_metadata_contract) ... ok
+
+----------------------------------------------------------------------
+Ran 21 tests in 0.867s
+
+OK

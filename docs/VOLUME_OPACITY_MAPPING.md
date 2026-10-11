@@ -151,9 +151,6 @@ Godot executable. Native GPU runs also require external FFmpeg.
 python tools/validate_volume_opacity.py --godot /path/to/godot \
   --renderer forward_plus --output-dir results/opacity-forward \
   --real-capture /external/path/free_collapse_simscope.ssc
-python tools/validate_volume_opacity.py --godot /path/to/godot \
-  --renderer gl_compatibility --output-dir results/opacity-compatibility \
-  --real-capture /external/path/free_collapse_simscope.ssc
 python tools/validate_recipe_state.py --godot /path/to/godot \
   --renderer headless --output-dir results/opacity-recipes
 ```

@@ -7,7 +7,7 @@ from tests.g4.fixtures import traveling_pulse
 
 
 def main():
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--godot',required=True);p.add_argument('--output-dir',type=Path,required=True);p.add_argument('--renderer',choices=['headless','gl_compatibility','forward_plus'],default='headless');args=p.parse_args()
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--godot',required=True);p.add_argument('--output-dir',type=Path,required=True);p.add_argument('--renderer',choices=['headless','forward_plus'],default='headless');args=p.parse_args()
     out=args.output_dir.resolve();out.mkdir(parents=True,exist_ok=False)
     path=traveling_pulse(out/'pulse.wvz');before=hashlib.sha256(path.read_bytes()).hexdigest()
     command=[args.godot,'--path',str(ROOT/'viewer'),'--audio-driver','Dummy','--log-file',str(out/'godot.log')]

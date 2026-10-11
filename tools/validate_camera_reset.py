@@ -40,7 +40,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--godot", required=True)
     parser.add_argument("--output-dir", required=True, type=Path)
-    parser.add_argument("--renderer", choices=["headless", "forward_plus", "gl_compatibility"], default="headless")
+    parser.add_argument("--renderer", choices=["headless", "forward_plus"], default="headless")
     parser.add_argument("--capture", type=Path)
     parser.add_argument("--export", action="store_true")
     args = parser.parse_args()

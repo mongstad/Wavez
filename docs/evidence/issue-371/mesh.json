@@ -1,0 +1,48 @@
+{
+	"checks": 3001,
+	"failures": [],
+	"render_comparisons": [
+		{
+			"different_components": 0,
+			"max_component_error": 0,
+			"name": "synthetic-false-0.0",
+			"total_components": 3072000,
+			"visible_pixels": 245939
+		},
+		{
+			"different_components": 0,
+			"max_component_error": 0,
+			"name": "synthetic-false-1.113",
+			"total_components": 3072000,
+			"visible_pixels": 250667
+		},
+		{
+			"different_components": 0,
+			"max_component_error": 0,
+			"name": "synthetic-false-3.0",
+			"total_components": 3072000,
+			"visible_pixels": 260143
+		},
+		{
+			"different_components": 0,
+			"max_component_error": 0,
+			"name": "synthetic-true-0.0",
+			"total_components": 3072000,
+			"visible_pixels": 234043
+		},
+		{
+			"different_components": 0,
+			"max_component_error": 0,
+			"name": "synthetic-true-1.113",
+			"total_components": 3072000,
+			"visible_pixels": 234188
+		},
+		{
+			"different_components": 0,
+			"max_component_error": 0,
+			"name": "synthetic-true-3.0",
+			"total_components": 3072000,
+			"visible_pixels": 234611
+		}
+	]
+}

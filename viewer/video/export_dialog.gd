@@ -468,9 +468,7 @@ func start_export() -> void:
 		publish_job("failed", message.text)
 		return
 	var args := Job.launch_arguments(active_job_path, job.fps)
-	# Rendering backend must match the interactive appearance.
-	args.insert(0, str(job.rendering_method)); args.insert(0, "--rendering-method")
-	if Job.write_json(active_directory.path_join("launch.json"), {"executable":OS.get_executable_path(), "arguments":Array(args), "packaged":not OS.has_feature("editor"), "rendering_method":job.rendering_method}) != OK:
+	if Job.write_json(active_directory.path_join("launch.json"), {"executable":OS.get_executable_path(), "arguments":Array(args), "packaged":not OS.has_feature("editor"), "rendering_method":Job.Renderer.METHOD, "rendering_driver":Job.Renderer.DRIVER}) != OK:
 		message.text = "Cannot write render-launch diagnostics. Job retained: " + active_job_path
 		publish_job("failed", message.text)
 		return

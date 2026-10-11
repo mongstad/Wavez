@@ -22,7 +22,7 @@ def summarize(case):
 
 
 def main():
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--godot',required=True);p.add_argument('--output-dir',type=Path,required=True);p.add_argument('--renderer',choices=['gl_compatibility','forward_plus'],required=True);p.add_argument('--capture',type=Path);p.add_argument('--repeats',type=int,default=3);p.add_argument('--resume-active',action='store_true',help='Preserve complete idle repetitions and rerun only interrupted/failed active cases');args=p.parse_args()
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--godot',required=True);p.add_argument('--output-dir',type=Path,required=True);p.add_argument('--renderer',choices=['forward_plus'],required=True);p.add_argument('--capture',type=Path);p.add_argument('--repeats',type=int,default=3);p.add_argument('--resume-active',action='store_true',help='Preserve complete idle repetitions and rerun only interrupted/failed active cases');args=p.parse_args()
     if not 1<=args.repeats<=5:p.error('Use 1–5 repetitions')
     out=args.output_dir.resolve()
     if args.resume_active:

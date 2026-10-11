@@ -11,7 +11,7 @@ def main():
         if r.returncode or 'ERROR:' in r.stdout:raise RuntimeError(name+' failed')
     for script in ['main.gd','layers/test_scene_validation.gd']:
         run('parse-'+Path(script).stem,[a.godot,'--headless','--path','viewer','--log-file','/tmp/wavez-g3-parse.log','--script',script,'--check-only'])
-    for renderer in ['forward_plus','gl_compatibility']:
+    for renderer in ['forward_plus']:
         run('gpu-'+renderer,[a.godot,'--path','viewer','--rendering-method',renderer,'--audio-driver','Dummy','--log-file','/tmp/wavez-g3-'+renderer+'.log','--script','layers/test_scene_validation.gd','--','--scene-fixture='+str(out)])
     job=json.loads((out/'video-check/job.json').read_text());directory=Path(tempfile.mkdtemp(prefix='video-final-',dir=out));job['output_path']=str(directory/'scene.mp4');(directory/'job.json').write_text(json.dumps(job))
     run('video-final',[a.godot,'--path','viewer','--resolution','640x640','--audio-driver','Dummy','--log-file','/tmp/wavez-g3-video-final.log','--','--wavez-render-job='+str(directory/'job.json')])

@@ -1,0 +1,277 @@
+{
+  "checks": [
+    {
+      "ok": true,
+      "label": "cpu: no script errors"
+    },
+    {
+      "ok": true,
+      "label": "cpu: policy assertions pass"
+    },
+    {
+      "label": "Supported GPU runtime or explicit headless CPU test",
+      "ok": true
+    },
+    {
+      "label": "Headless rendering cannot certify the runtime",
+      "ok": true
+    },
+    {
+      "label": "Fallback disabled: rendering/rendering_device/fallback_to_opengl3",
+      "ok": true
+    },
+    {
+      "label": "Fallback disabled: rendering/rendering_device/fallback_to_d3d12",
+      "ok": true
+    },
+    {
+      "label": "Project pins Forward+",
+      "ok": true
+    },
+    {
+      "label": "Linux pins Vulkan",
+      "ok": true
+    },
+    {
+      "label": "Exactly one pinned child method",
+      "ok": true
+    },
+    {
+      "label": "Exactly one pinned child driver",
+      "ok": true
+    },
+    {
+      "label": "Driver precedes user arguments",
+      "ok": true
+    },
+    {
+      "label": "Only development engine receives --path",
+      "ok": true
+    },
+    {
+      "label": "Reject unsupported job renderer: gl_compatibility",
+      "ok": true
+    },
+    {
+      "label": "Reject unsupported job renderer: mobile",
+      "ok": true
+    },
+    {
+      "label": "Reject unsupported job renderer: invalid",
+      "ok": true
+    },
+    {
+      "ok": true,
+      "label": "gpu: no script errors"
+    },
+    {
+      "ok": true,
+      "label": "gpu: policy assertions pass"
+    },
+    {
+      "label": "Supported GPU runtime or explicit headless CPU test",
+      "ok": true
+    },
+    {
+      "label": "Headless rendering cannot certify the runtime",
+      "ok": true
+    },
+    {
+      "label": "Fallback disabled: rendering/rendering_device/fallback_to_opengl3",
+      "ok": true
+    },
+    {
+      "label": "Fallback disabled: rendering/rendering_device/fallback_to_d3d12",
+      "ok": true
+    },
+    {
+      "label": "Project pins Forward+",
+      "ok": true
+    },
+    {
+      "label": "Linux pins Vulkan",
+      "ok": true
+    },
+    {
+      "label": "Exactly one pinned child method",
+      "ok": true
+    },
+    {
+      "label": "Exactly one pinned child driver",
+      "ok": true
+    },
+    {
+      "label": "Driver precedes user arguments",
+      "ok": true
+    },
+    {
+      "label": "Only development engine receives --path",
+      "ok": true
+    },
+    {
+      "label": "Reject unsupported job renderer: gl_compatibility",
+      "ok": true
+    },
+    {
+      "label": "Reject unsupported job renderer: mobile",
+      "ok": true
+    },
+    {
+      "label": "Reject unsupported job renderer: invalid",
+      "ok": true
+    },
+    {
+      "ok": true,
+      "label": "source-default: no script errors"
+    },
+    {
+      "ok": true,
+      "label": "source: default starts Forward+ Vulkan"
+    },
+    {
+      "ok": true,
+      "label": "source-missing-vulkan: no script errors"
+    },
+    {
+      "ok": true,
+      "label": "source: unavailable Vulkan exits without OpenGL fallback"
+    },
+    {
+      "ok": true,
+      "label": "source-compatibility: no script errors"
+    },
+    {
+      "ok": true,
+      "label": "source: unsupported compatibility exits with explanation"
+    },
+    {
+      "ok": true,
+      "label": "source-worker-compatibility: no script errors"
+    },
+    {
+      "ok": true,
+      "label": "source: worker compatibility records refusal"
+    },
+    {
+      "ok": true,
+      "label": "source: rejected worker makes no rendered frames"
+    },
+    {
+      "ok": true,
+      "label": "source-mobile: no script errors"
+    },
+    {
+      "ok": true,
+      "label": "source: unsupported mobile exits with explanation"
+    },
+    {
+      "ok": true,
+      "label": "source-worker-mobile: no script errors"
+    },
+    {
+      "ok": true,
+      "label": "source: worker mobile records refusal"
+    },
+    {
+      "ok": true,
+      "label": "source: rejected worker makes no rendered frames"
+    },
+    {
+      "ok": true,
+      "label": "source-headless: no script errors"
+    },
+    {
+      "ok": true,
+      "label": "source: unsupported headless exits with explanation"
+    },
+    {
+      "ok": true,
+      "label": "source-worker-headless: no script errors"
+    },
+    {
+      "ok": true,
+      "label": "source: worker headless records refusal"
+    },
+    {
+      "ok": true,
+      "label": "source: rejected worker makes no rendered frames"
+    },
+    {
+      "ok": true,
+      "label": "release-default: no script errors"
+    },
+    {
+      "ok": true,
+      "label": "release: default starts Forward+ Vulkan"
+    },
+    {
+      "ok": true,
+      "label": "release-missing-vulkan: no script errors"
+    },
+    {
+      "ok": true,
+      "label": "release: unavailable Vulkan exits without OpenGL fallback"
+    },
+    {
+      "ok": true,
+      "label": "release-compatibility: no script errors"
+    },
+    {
+      "ok": true,
+      "label": "release: unsupported compatibility exits with explanation"
+    },
+    {
+      "ok": true,
+      "label": "release-worker-compatibility: no script errors"
+    },
+    {
+      "ok": true,
+      "label": "release: worker compatibility records refusal"
+    },
+    {
+      "ok": true,
+      "label": "release: rejected worker makes no rendered frames"
+    },
+    {
+      "ok": true,
+      "label": "release-mobile: no script errors"
+    },
+    {
+      "ok": true,
+      "label": "release: unsupported mobile exits with explanation"
+    },
+    {
+      "ok": true,
+      "label": "release-worker-mobile: no script errors"
+    },
+    {
+      "ok": true,
+      "label": "release: worker mobile records refusal"
+    },
+    {
+      "ok": true,
+      "label": "release: rejected worker makes no rendered frames"
+    },
+    {
+      "ok": true,
+      "label": "release-headless: no script errors"
+    },
+    {
+      "ok": true,
+      "label": "release: unsupported headless exits with explanation"
+    },
+    {
+      "ok": true,
+      "label": "release-worker-headless: no script errors"
+    },
+    {
+      "ok": true,
+      "label": "release: worker headless records refusal"
+    },
+    {
+      "ok": true,
+      "label": "release: rejected worker makes no rendered frames"
+    }
+  ],
+  "failures": 0
+}

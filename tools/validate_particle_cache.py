@@ -36,7 +36,7 @@ def main():
     parser.add_argument('--godot', required=True)
     parser.add_argument('--capture', type=Path)
     parser.add_argument('--output-dir', type=Path, required=True)
-    parser.add_argument('--renderer', choices=['headless', 'forward_plus', 'gl_compatibility'], default='headless')
+    parser.add_argument('--renderer', choices=['headless', 'forward_plus'], default='headless')
     parser.add_argument('--packaged', action='store_true')
     args = parser.parse_args()
     out = args.output_dir.resolve(); out.mkdir(parents=True, exist_ok=False)

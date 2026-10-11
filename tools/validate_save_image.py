@@ -14,7 +14,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--godot', required=True)
     parser.add_argument('--output-dir', required=True, type=Path)
-    parser.add_argument('--renderer', choices=['gl_compatibility', 'forward_plus'], required=True)
+    parser.add_argument('--renderer', choices=['forward_plus'], required=True)
     parser.add_argument('--display-driver', choices=['wayland', 'x11'])
     parser.add_argument('--idle-fullscreen', action='store_true',
                         help='Require live low-processor zero-draw idle before fullscreen captures')

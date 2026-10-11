@@ -24,7 +24,7 @@ def main():
     parser.add_argument('--reference-root', required=True, type=Path,
                         help='Fresh source snapshot of accepted main (no checkout/branch changes).')
     parser.add_argument('--output-dir', required=True, type=Path)
-    parser.add_argument('--renderer', required=True, choices=['forward_plus', 'gl_compatibility'])
+    parser.add_argument('--renderer', required=True, choices=['forward_plus'])
     args = parser.parse_args()
     out = args.output_dir.resolve(); out.mkdir(parents=True, exist_ok=False)
     # Copy only these test drivers into the reference snapshot; production code stays untouched.

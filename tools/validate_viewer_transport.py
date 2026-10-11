@@ -15,7 +15,7 @@ def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--godot', required=True)
     p.add_argument('--output-dir', type=Path, required=True)
-    p.add_argument('--renderer', choices=['forward_plus', 'gl_compatibility'], default='forward_plus')
+    p.add_argument('--renderer', choices=['forward_plus'], default='forward_plus')
     p.add_argument('--real-capture', type=Path)
     a = p.parse_args()
     out = a.output_dir.resolve(); out.mkdir(parents=True, exist_ok=False)

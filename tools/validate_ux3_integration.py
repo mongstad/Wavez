@@ -25,7 +25,7 @@ def main():
     parser.add_argument("--godot", required=True)
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--capture", type=Path)
-    parser.add_argument("--renderer", choices=["forward_plus", "gl_compatibility"], default="forward_plus")
+    parser.add_argument("--renderer", choices=["forward_plus"], default="forward_plus")
     args = parser.parse_args()
     out = args.output_dir.resolve(); out.mkdir(parents=True, exist_ok=False)
     source = args.capture.resolve() if args.capture else scene(out / "scene.wvz")

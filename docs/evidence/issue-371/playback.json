@@ -1,0 +1,5 @@
+{
+	"checks": 2457,
+	"failures": [],
+	"scope": "CPU worker versus synchronous semantic and buffer equivalence; headless is not image acceptance."
+}

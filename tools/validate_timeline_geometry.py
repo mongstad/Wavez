@@ -10,7 +10,7 @@ def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--godot', required=True)
     p.add_argument('--output-dir', type=Path, required=True)
-    p.add_argument('--renderer', choices=['forward_plus', 'gl_compatibility'], default='forward_plus')
+    p.add_argument('--renderer', choices=['forward_plus'], default='forward_plus')
     p.add_argument('--baseline', action='store_true', help='Measure old endpoint error without requiring zero error')
     a = p.parse_args(); out = a.output_dir.resolve(); out.mkdir(parents=True, exist_ok=False)
     cmd = [a.godot, '--path', str(ROOT/'viewer'), '--audio-driver', 'Dummy', '--rendering-method', a.renderer, '--resolution', '1440x900', '--script', 'res://ui/shell/test_timeline_geometry.gd', '--', str(out)]

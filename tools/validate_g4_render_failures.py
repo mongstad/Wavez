@@ -8,7 +8,7 @@ from wavez_export.analysis.recipes import unpack,pack
 
 
 def main():
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--godot',required=True);p.add_argument('--output-dir',type=Path,required=True);p.add_argument('--renderer',choices=['gl_compatibility','forward_plus'],required=True);args=p.parse_args()
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--godot',required=True);p.add_argument('--output-dir',type=Path,required=True);p.add_argument('--renderer',choices=['forward_plus'],required=True);args=p.parse_args()
     root=args.output_dir.resolve();root.mkdir(parents=True,exist_ok=False);checks=[];runs=[];report=dict(status='in_progress',checks=checks,runs=runs,renderer=args.renderer)
     def check(value,label):
         checks.append(dict(label=label,pass_=bool(value)))

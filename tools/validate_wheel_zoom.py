@@ -23,7 +23,7 @@ def main():
     p.add_argument('--godot', required=True)
     p.add_argument('--output-dir', type=Path, required=True)
     p.add_argument('--capture', type=Path)
-    p.add_argument('--renderer', choices=['forward_plus','gl_compatibility'], required=True)
+    p.add_argument('--renderer', choices=['forward_plus'], required=True)
     p.add_argument('--export', action='store_true')
     a = p.parse_args(); out = a.output_dir.resolve(); out.mkdir(parents=True, exist_ok=False)
     fixtures(out)

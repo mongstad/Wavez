@@ -6,9 +6,14 @@ job schema and dependencies are identical with zero, one or many selections.
 Camera/orbit, timing, render appearance, legends, Jobs/background, cancellation
 and PNG retention keep their existing contracts. Issue #340 removes automatic
 scientific recipe processing and Selection/Analysis overlays from this visual
-workflow; owner review is pending.
+workflow (accepted in PR #344).
 
 ## Build and run
+
+**Forward+ Vulkan is required** for the interactive package and every GPU worker.
+Use a Vulkan-capable GPU and working Vulkan drivers on a graphical Linux desktop.
+There is no supported Compatibility fallback. See [requirements and startup
+troubleshooting](RENDERER_REQUIREMENTS.md).
 
 From the repository root, with externally installed Godot 4.7.x export templates:
 
@@ -54,7 +59,7 @@ build or a specially compiled template in its
 
 `render_job.gd` now adds the project path only when the running executable has
 the `editor` feature. Export templates start `OS.get_executable_path()` directly,
-with their existing renderer, fixed FPS, absolute job path and diagnostics path.
+with explicitly pinned Forward+ Vulkan, fixed FPS, absolute job path and diagnostics path.
 `main.gd` dispatches the user argument to the existing minimized GPU worker.
 The release tests exercise compiled scripts and loaded `res://` resources.
 
@@ -84,7 +89,7 @@ python tools/validate_packaged_video.py --godot /absolute/path/to/Godot \
   --compare-source /tmp/video-source
 ```
 
-Repeat using `gl_compatibility` and new output directories. The fixture generator
+Use fresh output directories for each Forward+ run. The fixture generator
 uses Python/NumPy; export processes are run with a blocking `python3` executable
 on PATH so any unintended video analysis dependency fails visibly. Tests also
 require visible/hidden particle, mesh, field and combined selections, and a
@@ -97,7 +102,7 @@ Independent scientific workflows:
 python tools/validate_selections.py --godot /absolute/path/to/Godot \
   --output-dir /tmp/independent-selections --renderer headless
 python tools/validate_g4_matched.py --godot /absolute/path/to/Godot \
-  --output-dir /tmp/explicit-matched --renderer gl_compatibility
+  --output-dir /tmp/explicit-matched --renderer forward_plus
 python -m unittest tests.test_analysis_recipes tests.test_analysis_matched_render
 ```
 

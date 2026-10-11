@@ -65,7 +65,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--godot', required=True)
     parser.add_argument('--output-dir', required=True, type=Path)
-    parser.add_argument('--renderer', required=True, choices=['forward_plus', 'gl_compatibility'])
+    parser.add_argument('--renderer', required=True, choices=['forward_plus'])
     parser.add_argument('--production', type=Path)
     parser.add_argument('--viewport-composition', action='store_true', help='Focused particle, field, mesh and mixed viewport export matrix')
     parser.add_argument('--packaged-binary', type=Path, help='Run matching viewport jobs through this standalone Linux executable')

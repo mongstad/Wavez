@@ -151,7 +151,6 @@ Reproduction:
 ```sh
 python tools/validate_volume_presets.py --godot /absolute/path/to/godot \
   --renderer forward_plus --output-dir /new/output/directory
-# Repeat with --renderer gl_compatibility.
 # Optional read-only integration: --real-capture /absolute/path/to/capture.ssc
 ```
 

@@ -154,7 +154,7 @@ var tail_poll := 0.0
 
 var offline_instance := false
 var offline_cancel: Callable # Export-only cooperative source-read cancellation.
-# Rendering policy belongs to the interactive viewer, never an offline worker.
+# Idle frame throttling belongs to the interactive viewer, never an offline worker.
 var _previous_low_processor_mode: Variant = null
 var _previous_max_fps := 0
 var video_dialog
@@ -177,6 +177,14 @@ func _ready() -> void:
 				guide_mesh.free() # This bootstrap instance never builds its world.
 				queue_free()
 				return
+	var renderer_problem := preload("res://renderer_policy.gd").problem(true)
+	if not renderer_problem.is_empty():
+		printerr(renderer_problem)
+		set_process(false)
+		set_process_unhandled_input(false)
+		guide_mesh.free()
+		get_tree().quit(1)
+		return
 	if not offline_instance:
 		file_locations = preload("res://ui/file_locations_preferences.gd").new()
 		add_child(file_locations)

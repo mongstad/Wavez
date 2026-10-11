@@ -39,7 +39,7 @@ def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--godot', required=True)
     p.add_argument('--output-dir', required=True, type=Path)
-    p.add_argument('--renderer', choices=['gl_compatibility','forward_plus'], default='gl_compatibility')
+    p.add_argument('--renderer', choices=['forward_plus'], default='forward_plus')
     p.add_argument('--startup-capture', action='store_true', help='Launch directly into a capture to check fresh-session disclosure defaults.')
     args = p.parse_args()
     out = args.output_dir.resolve(); out.mkdir(parents=True, exist_ok=False)

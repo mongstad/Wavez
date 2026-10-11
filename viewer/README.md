@@ -53,9 +53,10 @@ stays hidden through playback/seeks and recipe loads. Screenshots reflect the
 switch; recipes and deterministic video exclude this session-only marker.
 See [marker styling and owner checks](../docs/PROBE_MARKER_VISIBILITY.md).
 
-Core rendering runs in Godot. G4 numerical analysis requires Python and NumPy;
+Core rendering runs in Godot with **Forward+ Vulkan only**; see
+[requirements and troubleshooting](../docs/RENDERER_REQUIREMENTS.md). G4 numerical analysis requires Python and NumPy;
 optional isosurface extraction additionally requires scikit-image. Forward+
-supports cinematic bloom; Compatibility also runs.
+supports cinematic bloom; unsupported renderer overrides are refused.
 
 Interactive WVZ1 playback selects safe particle full preload automatically and
 prepares temporal fields and meshes on bounded CPU workers, with GPU/main-thread

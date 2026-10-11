@@ -1,14 +1,22 @@
 # Current status
 
-Accepted baseline: **v0.1.0.93**, `ccf90e47d4a1908ab67b6d1b30f9196508445b0e`,
-owner-merged PR #344. The repository's application identity is
+Accepted baseline for this renderer-policy change: **v0.1.0.96**,
+`eacdae866b017700e0919b263fdfd04c0f65bc27`, owner-merged PR #370. The repository's application identity is
 `viewer/project.godot` → `application/config/version`; see [version policy](VERSIONING.md).
 
-Issue #343 proposes candidate **v0.1.0.94**: existing camera roll keys work
+Issue #371 proposes candidate **v0.1.0.97**: **Forward+ Vulkan only**, including
+source, standalone Linux and background video workers. Unsupported renderer
+overrides are refused, automatic OpenGL fallback is disabled, and Vulkan GPU/driver
+requirements are explicit. Owner review is pending. See [renderer policy,
+scientific limits and troubleshooting](RENDERER_REQUIREMENTS.md). Historical
+Compatibility evidence is preserved; #94 must consume this policy and #362 needs
+owner reassessment before any Compatibility-only engine work.
+
+Accepted issue #343 / PR #350 provides concurrent camera roll: existing keys work
 concurrently with RMB free-look steering, in either press/release order. Focus,
 modal, inspection and LMB guards remain. Bindings, sensitivity and roll/translation
 speeds retain their contracts. See [navigation](MANUAL_CAMERA_ORBIT.md) and
-[review evidence](evidence/issue-343/README.md). Owner review is pending.
+[historical review evidence](evidence/issue-343/README.md).
 
 Accepted issue #340 / PR #344 provides independent ordinary Video Export.
 File → Export → Video always uses visual version-1 jobs, external FFmpeg and explicitly optional visual records.
@@ -99,6 +107,7 @@ scientific Matched Views.
 | Playback preparation and memory | [Rolling cache](ROLLING_PLAYBACK_CACHE.md), [dynamic fields](DYNAMIC_FIELD_PREPARATION.md), [particles](PARTICLE_CACHE_CAPACITY.md), [meshes](MESH_PREPARATION_BUDGET.md), [metadata](WAVEZ_METADATA_BUDGET.md) | `viewer/layers/`, `wavez_export/metadata_budget.py` |
 | Shell, UX and tools | [Handbook](WAVEZ_HANDBOOK.md), [UX workflow](UX_WORKFLOW.md), [Tools audit](TOOLS_FUNCTIONAL_AUDIT.md) | `viewer/ui/`, `viewer/ui/shell/` |
 | Navigation and preferences | [Camera](MANUAL_CAMERA_ORBIT.md), [LMB inversion](LMB_Y_INVERSION.md), [shortcuts](KEYBOARD_SHORTCUTS.md), [File Locations](FILE_LOCATIONS.md) | `viewer/main.gd`, `viewer/ui/` |
+| Supported renderer and startup | [Vulkan requirements](RENDERER_REQUIREMENTS.md) | `viewer/project.godot`, `viewer/renderer_policy.gd`, `viewer/video/render_job.gd` |
 | Developer validation and packaging | [Contributing](../CONTRIBUTING.md), [version policy](VERSIONING.md), [scientific criteria](SCIENTIFIC_ACCEPTANCE.md), [evidence index](EVIDENCE_INDEX.md) | `tests/`, `tools/`, native test scripts in `viewer/` |
 
 ## Scientific and resource boundaries

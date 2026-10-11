@@ -78,7 +78,7 @@ def main():
     parser.add_argument('--output-dir',type=Path)
     parser.add_argument('--seconds',type=float,default=8)
     parser.add_argument('--start-time',type=float,default=16)
-    parser.add_argument('--renderer',choices=['gl_compatibility','forward_plus'],default='gl_compatibility')
+    parser.add_argument('--renderer',choices=['forward_plus'],default='forward_plus')
     parser.add_argument('--no-trace',action='store_true')
     parser.add_argument('--threshold-ms',type=float,default=50)
     args=parser.parse_args()

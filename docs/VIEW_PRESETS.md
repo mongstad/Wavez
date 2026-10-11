@@ -156,8 +156,6 @@ unchanged; passing checks are not owner acceptance.
 ## Reproduction and owner review
 
 ```sh
-python tools/validate_view_preset.py --godot /path/to/godot --output-dir /tmp/preset-forward
-python tools/validate_view_preset.py --godot /path/to/godot --output-dir /tmp/preset-compat --renderer gl_compatibility
 python tools/validate_view_preset.py --godot /path/to/godot --output-dir /tmp/preset-production --production /path/to/production.ssc
 python tools/validate_recipe_state.py --godot /path/to/godot --output-dir /tmp/inspection-retained
 ```

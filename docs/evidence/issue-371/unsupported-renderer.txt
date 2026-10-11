@@ -1,0 +1,4 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 615.71.09 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 3070 Ti
+
+Wavez requires Forward+ Vulkan and a Vulkan-capable GPU with working drivers. OpenGL/Compatibility and Mobile rendering are unsupported. Detected gl_compatibility / opengl3 (X11). Update the GPU driver and run on a graphical desktop with Vulkan support.

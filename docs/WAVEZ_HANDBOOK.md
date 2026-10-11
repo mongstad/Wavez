@@ -456,7 +456,7 @@ GPU grids are float32 previews, potentially reduced by endpoint-aligned power-of
 
 Meshes contain real indexed triangles and optional vertex/face channels. Surface and wireframe views are supported. Source CCW winding and normals are transformed explicitly, including reflection and inverse-transpose handling. Face colors may require expanded display geometry; display memory can exceed serialized array size.
 
-Scientific rendering disables decorative effects. Forward+ and Compatibility can differ in blending/color behavior; neither output is calibrated radiance, and cross-renderer identical pixels are not promised.
+Scientific rendering disables decorative effects. Forward+ Vulkan is the sole supported backend; its output is not calibrated radiance or universally precise. See [renderer requirements and scientific limits](RENDERER_REQUIREMENTS.md), including the separate Forward+ sampling issue #360. Historical cross-renderer measurements remain evidence.
 
 ## Recipes, PNG and deterministic video
 

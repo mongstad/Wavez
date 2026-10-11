@@ -17,7 +17,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--godot', required=True)
     parser.add_argument('--output-dir', required=True, type=Path)
-    parser.add_argument('--renderer', choices=['headless', 'forward_plus', 'gl_compatibility'], default='headless')
+    parser.add_argument('--renderer', choices=['headless', 'forward_plus'], default='headless')
     parser.add_argument('--suite', choices=['tumble', 'auto-orbit', 'speed', 'navigation'], default='tumble')
     parser.add_argument('--capture', type=Path, help='Optional real WVZ1 smoke scene for the Auto Orbit suite')
     args = parser.parse_args()
