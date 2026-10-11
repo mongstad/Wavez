@@ -1,0 +1,3704 @@
+{
+  "accepted_main": "9ddab596e19b93f1598e8314427b03114741f4fc",
+  "reviewed_pr381_head": "065ea5253d98a8426017d2fdbbb6598e8153affa",
+  "candidate_version": "v0.1.0.102",
+  "measurements": {
+    "baseline-heavy": {
+      "source_identity": [
+        47,
+        21327020,
+        54283866848,
+        1791072133360725266,
+        1791072133360725266
+      ],
+      "source_metadata_unchanged": true,
+      "settings": {
+        "event": "settings",
+        "fields": {
+          "gpu_budget_mib": 256,
+          "layers": {
+            "field": {
+              "channel": "density",
+              "clip": false,
+              "clip_distance": 0.0,
+              "clip_normal": [
+                1.0,
+                0.0,
+                0.0
+              ],
+              "color_mapping": {
+                "normalization": "linear",
+                "percentile_high": 99.0,
+                "percentile_low": 1.0,
+                "policy": "manual",
+                "source_channel": "",
+                "source_time": 0.0
+              },
+              "colormap": "viridis",
+              "isosurface": false,
+              "lower": 0.0,
+              "opacity": 0.25,
+              "opacity_mapping": {
+                "lower": 0.0,
+                "mode": "linear",
+                "upper": 1.0
+              },
+              "slice": false,
+              "slice_distance": 0.0,
+              "slice_normal": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "step": 0.25,
+              "threshold": 0.5,
+              "upper": 1.0,
+              "visible": true,
+              "volume": true
+            }
+          },
+          "legend_visibility": {}
+        },
+        "renderer": "forward_plus",
+        "source": "/home/Nozba/Downloads/VB_FreeCollapse_v0_2/runs_free_collapse_v0_2/S0_20261004_013659_785112/free_collapse.wvz",
+        "version": "v0.1.0.101",
+        "viewport": "(1920, 1080)",
+        "vsync": 1
+      },
+      "playback_wall_seconds": 74.76400000000001,
+      "sampled_playback_waits": [],
+      "end_sampled_duration": 119.91300000000001,
+      "end_sampled_draws": 17249,
+      "same_end_manual_pause_buffer_hash": true,
+      "before_manual_pause": {
+        "buffer_bytes": 32580148,
+        "callbacks": 30813,
+        "camera": "[X: (0.788011, 0.0, -0.615662), Y: (-0.250412, 0.913545, -0.320513), Z: (0.562435, 0.406737, 0.719884), O: (130.9278, 94.68325, 167.58)]",
+        "committed": 74.5,
+        "coverage": {
+          "end_ready": true,
+          "fields": [
+            [
+              65.9,
+              74.5
+            ]
+          ],
+          "scene": [
+            [
+              65.9,
+              74.5
+            ]
+          ]
+        },
+        "cpu_render": {
+          "count": 12,
+          "max_ms": 0.146999999880791,
+          "mean_ms": 0.101916668315729,
+          "p95_ms": 0.146999999880791
+        },
+        "draw_fps": 133.333333333333,
+        "draws": 26514,
+        "error": "",
+        "event": "before_manual_pause",
+        "field": {
+          "active_jobs": 0,
+          "bytes": 9858121728,
+          "completed": 746,
+          "limit": 10204101142,
+          "session": {
+            "automatic": true,
+            "failed": 0,
+            "next": 0,
+            "ready": 1,
+            "required_bytes": 10204101142,
+            "started_us": 228787203,
+            "state": "ready",
+            "total": 1
+          },
+          "staged": 0,
+          "uploads": 745
+        },
+        "gpu_render": {
+          "count": 12,
+          "max_ms": 2.45000004768372,
+          "mean_ms": 2.27224999666214,
+          "p95_ms": 2.45000004768372
+        },
+        "low_processor": false,
+        "max_fps": 0,
+        "memory": {
+          "available_physical": 5446402048,
+          "physical": 50404548608,
+          "process_peak_rss": 35160014848,
+          "process_rss": 34799108096,
+          "process_swap": 0,
+          "renderer_reserve": 268435456,
+          "reserve": 1780571914,
+          "safe_cache_bytes": 3665830134,
+          "system_reserve": 1512136458
+        },
+        "orbit": false,
+        "particle": {
+          "active": false,
+          "completed": 167,
+          "decoded_bytes": 697279232,
+          "decoded_limit": 825968391,
+          "desired": 25,
+          "evictions": 142,
+          "failures": {},
+          "misses": 1,
+          "prepared_bytes": 752256384,
+          "prepared_limit": 825968391,
+          "resident": 25
+        },
+        "particle_mm_bytes_sha256": "814d52aba2b42182106f6ef50202722a76d52e39e86441cbdb0fd7e9b7969740",
+        "phase": "natural_end",
+        "playing": true,
+        "reason": "",
+        "texture_bytes": 176552960,
+        "time": 74.5,
+        "wall": 229.759
+      },
+      "after_manual_pause": {
+        "buffer_bytes": 32584876,
+        "callbacks": 32988,
+        "camera": "[X: (0.788011, 0.0, -0.615662), Y: (-0.250412, 0.913545, -0.320513), Z: (0.562435, 0.406737, 0.719884), O: (130.9278, 94.68325, 167.58)]",
+        "committed": 74.5,
+        "coverage": {
+          "end_ready": true,
+          "fields": [
+            [
+              65.9,
+              74.5
+            ]
+          ],
+          "scene": [
+            [
+              65.9,
+              74.5
+            ]
+          ]
+        },
+        "cpu_render": {},
+        "draw_fps": 0.0,
+        "draws": 26515,
+        "error": "",
+        "event": "after_manual_pause",
+        "field": {
+          "active_jobs": 0,
+          "bytes": 9858121728,
+          "completed": 746,
+          "limit": 10193806158,
+          "session": {
+            "automatic": true,
+            "failed": 0,
+            "next": 0,
+            "ready": 1,
+            "required_bytes": 10193806158,
+            "started_us": 243987127,
+            "state": "ready",
+            "total": 1
+          },
+          "staged": 0,
+          "uploads": 745
+        },
+        "gpu_render": {},
+        "low_processor": true,
+        "max_fps": 0,
+        "memory": {
+          "available_physical": 5436674048,
+          "physical": 50404548608,
+          "process_peak_rss": 35160014848,
+          "process_rss": 34799108096,
+          "process_swap": 0,
+          "renderer_reserve": 268435456,
+          "reserve": 1780571914,
+          "safe_cache_bytes": 3656102134,
+          "system_reserve": 1512136458
+        },
+        "orbit": false,
+        "particle": {
+          "active": false,
+          "completed": 167,
+          "decoded_bytes": 697279232,
+          "decoded_limit": 820302258,
+          "desired": 25,
+          "evictions": 142,
+          "failures": {},
+          "misses": 1,
+          "prepared_bytes": 752256384,
+          "prepared_limit": 820302258,
+          "resident": 25
+        },
+        "particle_mm_bytes_sha256": "814d52aba2b42182106f6ef50202722a76d52e39e86441cbdb0fd7e9b7969740",
+        "phase": "manual_pause_same_end",
+        "playing": false,
+        "reason": "",
+        "texture_bytes": 176552960,
+        "time": 74.5,
+        "wall": 244.775
+      },
+      "final": {
+        "capture_closed": true,
+        "error": "",
+        "event": "final",
+        "reached_end": true
+      },
+      "phases": {
+        "capture_closed": {
+          "telemetry_samples": 35,
+          "gpu_mean": 21.34285714285714,
+          "gpu_min": 8.0,
+          "gpu_max": 60.0,
+          "power_w_mean": 19.09057142857143,
+          "peak_rss": 29194391552,
+          "swap": 0,
+          "draw_fps_mean": 0.0,
+          "first": {
+            "buffer_bytes": 32708372,
+            "callbacks": 37645,
+            "camera": "[X: (0.486983, 0.0, -0.873412), Y: (-0.355248, 0.913545, -0.198074), Z: (0.797901, 0.406737, 0.444881), O: (185.7415, 94.68325, 103.5628)]",
+            "committed": null,
+            "cpu_render": {
+              "count": 1,
+              "max_ms": 0.0890000015497208,
+              "mean_ms": 0.0890000015497208,
+              "p95_ms": 0.0890000015497208
+            },
+            "draw_fps": 0.50251256281407,
+            "draws": 27351,
+            "event": "sample",
+            "gpu_render": {
+              "count": 1,
+              "max_ms": 4.4980001449585,
+              "mean_ms": 4.4980001449585,
+              "p95_ms": 4.4980001449585
+            },
+            "low_processor": true,
+            "max_fps": 0,
+            "memory": {
+              "available_physical": 36441284608,
+              "physical": 50404548608,
+              "process_peak_rss": 35160014848,
+              "process_rss": 3764948992,
+              "process_swap": 0,
+              "renderer_reserve": 268435456,
+              "reserve": 1780571914,
+              "safe_cache_bytes": 20161819443,
+              "system_reserve": 1512136458
+            },
+            "orbit": false,
+            "phase": "capture_closed",
+            "playing": false,
+            "texture_bytes": 204864512,
+            "time": 0.0,
+            "wall": 283.102
+          },
+          "last": {
+            "buffer_bytes": 32708372,
+            "callbacks": 40256,
+            "camera": "[X: (0.486983, 0.0, -0.873412), Y: (-0.355248, 0.913545, -0.198074), Z: (0.797901, 0.406737, 0.444881), O: (185.7415, 94.68325, 103.5628)]",
+            "committed": null,
+            "cpu_render": {},
+            "draw_fps": 0.0,
+            "draws": 27351,
+            "event": "sample",
+            "gpu_render": {},
+            "low_processor": true,
+            "max_fps": 0,
+            "memory": {
+              "available_physical": 36444045312,
+              "physical": 50404548608,
+              "process_peak_rss": 35160014848,
+              "process_rss": 3764948992,
+              "process_swap": 0,
+              "renderer_reserve": 268435456,
+              "reserve": 1780571914,
+              "safe_cache_bytes": 20161819443,
+              "system_reserve": 1512136458
+            },
+            "orbit": false,
+            "phase": "capture_closed",
+            "playing": false,
+            "texture_bytes": 204864512,
+            "time": 0.0,
+            "wall": 301.111
+          }
+        },
+        "manual_pause_same_end": {
+          "telemetry_samples": 24,
+          "gpu_mean": 18.166666666666668,
+          "gpu_min": 3.0,
+          "gpu_max": 51.0,
+          "power_w_mean": 21.252083333333335,
+          "peak_rss": 34799108096,
+          "swap": 0,
+          "draw_fps_mean": 0.0,
+          "first": {
+            "buffer_bytes": 32584876,
+            "callbacks": 30814,
+            "camera": "[X: (0.788011, 0.0, -0.615662), Y: (-0.250412, 0.913545, -0.320513), Z: (0.562435, 0.406737, 0.719884), O: (130.9278, 94.68325, 167.58)]",
+            "committed": 74.5,
+            "coverage": {
+              "end_ready": true,
+              "fields": [
+                [
+                  65.9,
+                  74.5
+                ]
+              ],
+              "scene": [
+                [
+                  65.9,
+                  74.5
+                ]
+              ]
+            },
+            "cpu_render": {
+              "count": 1,
+              "max_ms": 0.0879999995231628,
+              "mean_ms": 0.0879999995231628,
+              "p95_ms": 0.0879999995231628
+            },
+            "draw_fps": 333.333333333333,
+            "draws": 26515,
+            "error": "",
+            "event": "sample",
+            "field": {
+              "active_jobs": 0,
+              "bytes": 9858121728,
+              "completed": 746,
+              "limit": 10204101142,
+              "session": {
+                "automatic": true,
+                "failed": 0,
+                "next": 0,
+                "ready": 1,
+                "required_bytes": 10204101142,
+                "started_us": 228787203,
+                "state": "ready",
+                "total": 1
+              },
+              "staged": 0,
+              "uploads": 745
+            },
+            "gpu_render": {
+              "count": 1,
+              "max_ms": 2.25300002098083,
+              "mean_ms": 2.25300002098083,
+              "p95_ms": 2.25300002098083
+            },
+            "low_processor": true,
+            "max_fps": 0,
+            "memory": {
+              "available_physical": 5446402048,
+              "physical": 50404548608,
+              "process_peak_rss": 35160014848,
+              "process_rss": 34799108096,
+              "process_swap": 0,
+              "renderer_reserve": 268435456,
+              "reserve": 1780571914,
+              "safe_cache_bytes": 3665830134,
+              "system_reserve": 1512136458
+            },
+            "orbit": false,
+            "particle": {
+              "active": false,
+              "completed": 167,
+              "decoded_bytes": 697279232,
+              "decoded_limit": 825968391,
+              "desired": 25,
+              "evictions": 142,
+              "failures": {},
+              "misses": 1,
+              "prepared_bytes": 752256384,
+              "prepared_limit": 825968391,
+              "resident": 25
+            },
+            "particle_mm_bytes_sha256": "814d52aba2b42182106f6ef50202722a76d52e39e86441cbdb0fd7e9b7969740",
+            "phase": "manual_pause_same_end",
+            "playing": false,
+            "reason": "",
+            "texture_bytes": 176552960,
+            "time": 74.5,
+            "wall": 229.774
+          },
+          "last": {
+            "buffer_bytes": 32584876,
+            "callbacks": 32872,
+            "camera": "[X: (0.788011, 0.0, -0.615662), Y: (-0.250412, 0.913545, -0.320513), Z: (0.562435, 0.406737, 0.719884), O: (130.9278, 94.68325, 167.58)]",
+            "committed": 74.5,
+            "coverage": {
+              "end_ready": true,
+              "fields": [
+                [
+                  65.9,
+                  74.5
+                ]
+              ],
+              "scene": [
+                [
+                  65.9,
+                  74.5
+                ]
+              ]
+            },
+            "cpu_render": {},
+            "draw_fps": 0.0,
+            "draws": 26515,
+            "error": "",
+            "event": "sample",
+            "field": {
+              "active_jobs": 0,
+              "bytes": 9858121728,
+              "completed": 746,
+              "limit": 10193625414,
+              "session": {
+                "automatic": true,
+                "failed": 0,
+                "next": 0,
+                "ready": 1,
+                "required_bytes": 10193625414,
+                "started_us": 242973619,
+                "state": "ready",
+                "total": 1
+              },
+              "staged": 0,
+              "uploads": 745
+            },
+            "gpu_render": {},
+            "low_processor": true,
+            "max_fps": 0,
+            "memory": {
+              "available_physical": 5433827328,
+              "physical": 50404548608,
+              "process_peak_rss": 35160014848,
+              "process_rss": 34799108096,
+              "process_swap": 0,
+              "renderer_reserve": 268435456,
+              "reserve": 1780571914,
+              "safe_cache_bytes": 3653255414,
+              "system_reserve": 1512136458
+            },
+            "orbit": false,
+            "particle": {
+              "active": false,
+              "completed": 167,
+              "decoded_bytes": 697279232,
+              "decoded_limit": 818404444,
+              "desired": 25,
+              "evictions": 142,
+              "failures": {},
+              "misses": 1,
+              "prepared_bytes": 752256384,
+              "prepared_limit": 818404445,
+              "resident": 25
+            },
+            "particle_mm_bytes_sha256": "814d52aba2b42182106f6ef50202722a76d52e39e86441cbdb0fd7e9b7969740",
+            "phase": "manual_pause_same_end",
+            "playing": false,
+            "reason": "",
+            "texture_bytes": 176552960,
+            "time": 74.5,
+            "wall": 243.974
+          }
+        },
+        "natural_end": {
+          "telemetry_samples": 224,
+          "gpu_mean": 38.361607142857146,
+          "gpu_min": 29.0,
+          "gpu_max": 48.0,
+          "power_w_mean": 107.04785714285714,
+          "peak_rss": 34799116288,
+          "swap": 0,
+          "draw_fps_mean": 143.84534997925812,
+          "first": {
+            "buffer_bytes": 32580148,
+            "callbacks": 13552,
+            "camera": "[X: (0.788011, 0.0, -0.615662), Y: (-0.250412, 0.913545, -0.320513), Z: (0.562435, 0.406737, 0.719884), O: (130.9278, 94.68325, 167.58)]",
+            "committed": 74.5,
+            "coverage": {
+              "end_ready": true,
+              "fields": [
+                [
+                  65.9,
+                  74.5
+                ]
+              ],
+              "scene": [
+                [
+                  65.9,
+                  74.5
+                ]
+              ]
+            },
+            "cpu_render": {
+              "count": 1,
+              "max_ms": 0.0829999968409538,
+              "mean_ms": 0.0829999968409538,
+              "p95_ms": 0.0829999968409538
+            },
+            "draw_fps": 500.0,
+            "draws": 9253,
+            "error": "",
+            "event": "sample",
+            "field": {
+              "active_jobs": 0,
+              "bytes": 9858121728,
+              "completed": 746,
+              "limit": 10190366447,
+              "session": {
+                "automatic": true,
+                "failed": 0,
+                "next": 0,
+                "ready": 1,
+                "required_bytes": 10190366447,
+                "started_us": 109579381,
+                "state": "ready",
+                "total": 1
+              },
+              "staged": 0,
+              "uploads": 745
+            },
+            "gpu_render": {
+              "count": 1,
+              "max_ms": 2.18300008773804,
+              "mean_ms": 2.18300008773804,
+              "p95_ms": 2.18300008773804
+            },
+            "low_processor": false,
+            "max_fps": 0,
+            "memory": {
+              "available_physical": 5358149632,
+              "physical": 50404548608,
+              "process_peak_rss": 35160014848,
+              "process_rss": 34799108096,
+              "process_swap": 0,
+              "renderer_reserve": 268435456,
+              "reserve": 1780571914,
+              "safe_cache_bytes": 3577577718,
+              "system_reserve": 1512136458
+            },
+            "orbit": false,
+            "particle": {
+              "active": false,
+              "completed": 167,
+              "decoded_bytes": 697279232,
+              "decoded_limit": 784185290,
+              "desired": 24,
+              "evictions": 142,
+              "failures": {},
+              "misses": 1,
+              "prepared_bytes": 752256384,
+              "prepared_limit": 784185290,
+              "resident": 25
+            },
+            "particle_mm_bytes_sha256": "814d52aba2b42182106f6ef50202722a76d52e39e86441cbdb0fd7e9b7969740",
+            "phase": "natural_end",
+            "playing": true,
+            "reason": "",
+            "texture_bytes": 176552960,
+            "time": 74.5,
+            "wall": 109.756
+          },
+          "last": {
+            "buffer_bytes": 32580148,
+            "callbacks": 30801,
+            "camera": "[X: (0.788011, 0.0, -0.615662), Y: (-0.250412, 0.913545, -0.320513), Z: (0.562435, 0.406737, 0.719884), O: (130.9278, 94.68325, 167.58)]",
+            "committed": 74.5,
+            "coverage": {
+              "end_ready": true,
+              "fields": [
+                [
+                  65.9,
+                  74.5
+                ]
+              ],
+              "scene": [
+                [
+                  65.9,
+                  74.5
+                ]
+              ]
+            },
+            "cpu_render": {
+              "count": 146,
+              "max_ms": 0.175999999046326,
+              "mean_ms": 0.101623287960275,
+              "p95_ms": 0.144999995827675
+            },
+            "draw_fps": 143.984220907298,
+            "draws": 26502,
+            "error": "",
+            "event": "sample",
+            "field": {
+              "active_jobs": 0,
+              "bytes": 9858121728,
+              "completed": 746,
+              "limit": 10204101142,
+              "session": {
+                "automatic": true,
+                "failed": 0,
+                "next": 0,
+                "ready": 1,
+                "required_bytes": 10204101142,
+                "started_us": 228787203,
+                "state": "ready",
+                "total": 1
+              },
+              "staged": 0,
+              "uploads": 745
+            },
+            "gpu_render": {
+              "count": 146,
+              "max_ms": 2.84599995613098,
+              "mean_ms": 2.29256849582881,
+              "p95_ms": 2.52800011634827
+            },
+            "low_processor": false,
+            "max_fps": 0,
+            "memory": {
+              "available_physical": 5446660096,
+              "physical": 50404548608,
+              "process_peak_rss": 35160014848,
+              "process_rss": 34799108096,
+              "process_swap": 0,
+              "renderer_reserve": 268435456,
+              "reserve": 1780571914,
+              "safe_cache_bytes": 3666088182,
+              "system_reserve": 1512136458
+            },
+            "orbit": false,
+            "particle": {
+              "active": false,
+              "completed": 167,
+              "decoded_bytes": 697279232,
+              "decoded_limit": 825968391,
+              "desired": 25,
+              "evictions": 142,
+              "failures": {},
+              "misses": 1,
+              "prepared_bytes": 752256384,
+              "prepared_limit": 825968391,
+              "resident": 25
+            },
+            "particle_mm_bytes_sha256": "814d52aba2b42182106f6ef50202722a76d52e39e86441cbdb0fd7e9b7969740",
+            "phase": "natural_end",
+            "playing": true,
+            "reason": "",
+            "texture_bytes": 176552960,
+            "time": 74.5,
+            "wall": 229.669
+          }
+        },
+        "open": {
+          "telemetry_samples": 2,
+          "gpu_mean": 3.0,
+          "gpu_min": 2.0,
+          "gpu_max": 4.0,
+          "power_w_mean": 78.975,
+          "peak_rss": 822370304,
+          "swap": 0,
+          "draw_fps_mean": null,
+          "first": null,
+          "last": null
+        },
+        "paused_orbit": {
+          "telemetry_samples": 6,
+          "gpu_mean": 31.166666666666668,
+          "gpu_min": 17.0,
+          "gpu_max": 36.0,
+          "power_w_mean": 59.75666666666667,
+          "peak_rss": 34831409152,
+          "swap": 0,
+          "draw_fps_mean": 60.00001290399173,
+          "first": {
+            "buffer_bytes": 32580148,
+            "callbacks": 37349,
+            "camera": "[X: (0.787671, 0.0, -0.616096), Y: (-0.250589, 0.913545, -0.320375), Z: (0.562832, 0.406737, 0.719573), O: (131.0203, 94.68325, 167.5077)]",
+            "committed": 37.25,
+            "coverage": {
+              "end_ready": false,
+              "fields": [
+                [
+                  37.2,
+                  53.5
+                ]
+              ],
+              "scene": [
+                [
+                  37.2,
+                  37.5
+                ]
+              ]
+            },
+            "cpu_render": {
+              "count": 1,
+              "max_ms": 0.197999998927116,
+              "mean_ms": 0.197999998927116,
+              "p95_ms": 0.197999998927116
+            },
+            "draw_fps": 58.8235294117647,
+            "draws": 27055,
+            "error": "",
+            "event": "sample",
+            "field": {
+              "active_jobs": 0,
+              "bytes": 18469814272,
+              "completed": 938,
+              "limit": 18568690776,
+              "session": {
+                "automatic": true,
+                "failed": 0,
+                "next": 0,
+                "ready": 162,
+                "required_bytes": 18568690776,
+                "started_us": 275060755,
+                "state": "ready",
+                "total": 162
+              },
+              "staged": 1,
+              "uploads": 779
+            },
+            "gpu_render": {
+              "count": 1,
+              "max_ms": 16.9489994049072,
+              "mean_ms": 16.9489994049072,
+              "p95_ms": 16.9489994049072
+            },
+            "low_processor": false,
+            "max_fps": 60,
+            "memory": {
+              "available_physical": 5377081344,
+              "physical": 50404548608,
+              "process_peak_rss": 35160014848,
+              "process_rss": 34831409152,
+              "process_swap": 0,
+              "renderer_reserve": 268435456,
+              "reserve": 1780571914,
+              "safe_cache_bytes": 3596509430,
+              "system_reserve": 1512136458
+            },
+            "orbit": true,
+            "particle": {
+              "active": false,
+              "completed": 206,
+              "decoded_bytes": 764325312,
+              "decoded_limit": 786388414,
+              "desired": 23,
+              "evictions": 181,
+              "failures": {},
+              "misses": 1,
+              "prepared_bytes": 765665600,
+              "prepared_limit": 786388414,
+              "resident": 25
+            },
+            "particle_mm_bytes_sha256": "bb714bd7f39228ca9299866c2876e5717b4dbb44059d30fb687283c9cf33cb90",
+            "phase": "paused_orbit",
+            "playing": false,
+            "reason": "",
+            "texture_bytes": 204864512,
+            "time": 37.25,
+            "wall": 275.881
+          },
+          "last": {
+            "buffer_bytes": 32580148,
+            "callbacks": 37589,
+            "camera": "[X: (0.549667, 0.0, -0.835384), Y: (-0.339781, 0.913545, -0.22357), Z: (0.763161, 0.406737, 0.502146), O: (177.6545, 94.68325, 116.8933)]",
+            "committed": 37.25,
+            "coverage": {
+              "end_ready": false,
+              "fields": [
+                [
+                  37.2,
+                  53.4
+                ]
+              ],
+              "scene": [
+                [
+                  37.2,
+                  37.5
+                ]
+              ]
+            },
+            "cpu_render": {
+              "count": 61,
+              "max_ms": 0.200000002980232,
+              "mean_ms": 0.116704918322016,
+              "p95_ms": 0.151999995112419
+            },
+            "draw_fps": 59.9803343166175,
+            "draws": 27295,
+            "error": "",
+            "event": "sample",
+            "field": {
+              "active_jobs": 0,
+              "bytes": 18356502528,
+              "completed": 938,
+              "limit": 18454626058,
+              "session": {
+                "automatic": true,
+                "failed": 0,
+                "next": 0,
+                "ready": 161,
+                "required_bytes": 18454626058,
+                "started_us": 279087625,
+                "state": "ready",
+                "total": 161
+              },
+              "staged": 1,
+              "uploads": 779
+            },
+            "gpu_render": {
+              "count": 61,
+              "max_ms": 5.6710000038147,
+              "mean_ms": 4.49939343968376,
+              "p95_ms": 4.86399984359741
+            },
+            "low_processor": false,
+            "max_fps": 60,
+            "memory": {
+              "available_physical": 5370912768,
+              "physical": 50404548608,
+              "process_peak_rss": 35160014848,
+              "process_rss": 34793504768,
+              "process_swap": 0,
+              "renderer_reserve": 268435456,
+              "reserve": 1780571914,
+              "safe_cache_bytes": 3590340854,
+              "system_reserve": 1512136458
+            },
+            "orbit": true,
+            "particle": {
+              "active": false,
+              "completed": 207,
+              "decoded_bytes": 750916096,
+              "decoded_limit": 776716002,
+              "desired": 23,
+              "evictions": 182,
+              "failures": {},
+              "misses": 1,
+              "prepared_bytes": 765665600,
+              "prepared_limit": 776716003,
+              "resident": 25
+            },
+            "particle_mm_bytes_sha256": "bb714bd7f39228ca9299866c2876e5717b4dbb44059d30fb687283c9cf33cb90",
+            "phase": "paused_orbit",
+            "playing": false,
+            "reason": "",
+            "texture_bytes": 204864512,
+            "time": 37.25,
+            "wall": 279.951
+          }
+        },
+        "paused_preparation": {
+          "telemetry_samples": 47,
+          "gpu_mean": 18.4468085106383,
+          "gpu_min": 1.0,
+          "gpu_max": 100.0,
+          "power_w_mean": 37.76276595744681,
+          "peak_rss": 33271934976,
+          "swap": 0,
+          "draw_fps_mean": 8.672073018771371,
+          "first": {
+            "buffer_bytes": 0,
+            "callbacks": 0,
+            "camera": "[X: (0.788011, 0.0, -0.615662), Y: (-0.250412, 0.913545, -0.320513), Z: (0.562435, 0.406737, 0.719884), O: (130.9278, 94.68325, 167.58)]",
+            "committed": 0.0,
+            "coverage": {
+              "end_ready": false,
+              "fields": [
+                [
+                  0.0,
+                  0.2
+                ]
+              ],
+              "scene": [
+                [
+                  0.0,
+                  0.2
+                ]
+              ]
+            },
+            "cpu_render": {},
+            "draw_fps": 0.0,
+            "draws": 0,
+            "error": "",
+            "event": "sample",
+            "field": {
+              "active_jobs": 2,
+              "bytes": 226623488,
+              "completed": 2,
+              "limit": 32833873057,
+              "session": {
+                "automatic": true,
+                "failed": 0,
+                "next": 4,
+                "ready": 2,
+                "required_bytes": 32833873057,
+                "started_us": 2892580,
+                "state": "preparing",
+                "total": 193
+              },
+              "staged": 0,
+              "uploads": 0
+            },
+            "gpu_render": {},
+            "low_processor": false,
+            "max_fps": 0,
+            "memory": {
+              "available_physical": 38397628416,
+              "physical": 50404548608,
+              "process_peak_rss": 1546440704,
+              "process_rss": 1546440704,
+              "process_swap": 0,
+              "renderer_reserve": 268435456,
+              "reserve": 1780571914,
+              "safe_cache_bytes": 20161819443,
+              "system_reserve": 1512136458
+            },
+            "orbit": false,
+            "particle": {
+              "active": true,
+              "completed": 3,
+              "decoded_bytes": 53636864,
+              "decoded_limit": 1073741824,
+              "desired": 8,
+              "evictions": 0,
+              "failures": {},
+              "misses": 1,
+              "prepared_bytes": 91879872,
+              "prepared_limit": 1073741824,
+              "resident": 3
+            },
+            "particle_mm_bytes_sha256": "9dedb594e70e8d014c80032c314c4a5cc4b61e9cf19811d48410f6866beae9d6",
+            "phase": "paused_preparation",
+            "playing": false,
+            "reason": "",
+            "texture_bytes": 0,
+            "time": 0.0,
+            "wall": 3.131
+          },
+          "last": {
+            "buffer_bytes": 32565916,
+            "callbacks": 3753,
+            "camera": "[X: (0.788011, 0.0, -0.615662), Y: (-0.250412, 0.913545, -0.320513), Z: (0.562435, 0.406737, 0.719884), O: (130.9278, 94.68325, 167.58)]",
+            "committed": 0.0,
+            "coverage": {
+              "end_ready": false,
+              "fields": [
+                [
+                  0.0,
+                  27.9
+                ]
+              ],
+              "scene": [
+                [
+                  0.0,
+                  16.5
+                ]
+              ]
+            },
+            "cpu_render": {},
+            "draw_fps": 0.0,
+            "draws": 231,
+            "error": "",
+            "event": "sample",
+            "field": {
+              "active_jobs": 0,
+              "bytes": 31613976576,
+              "completed": 279,
+              "limit": 31721474611,
+              "session": {
+                "automatic": true,
+                "failed": 0,
+                "next": 0,
+                "ready": 279,
+                "required_bytes": 31721474611,
+                "started_us": 28969798,
+                "state": "ready",
+                "total": 279
+              },
+              "staged": 1,
+              "uploads": 1
+            },
+            "gpu_render": {},
+            "low_processor": true,
+            "max_fps": 0,
+            "memory": {
+              "available_physical": 6757826560,
+              "physical": 50404548608,
+              "process_peak_rss": 33271934976,
+              "process_rss": 33271934976,
+              "process_swap": 0,
+              "renderer_reserve": 268435456,
+              "reserve": 1780571914,
+              "safe_cache_bytes": 4977254646,
+              "system_reserve": 1512136458
+            },
+            "orbit": false,
+            "particle": {
+              "active": false,
+              "completed": 33,
+              "decoded_bytes": 455913344,
+              "decoded_limit": 1073741824,
+              "desired": 33,
+              "evictions": 0,
+              "failures": {},
+              "misses": 1,
+              "prepared_bytes": 1010678592,
+              "prepared_limit": 1073741824,
+              "resident": 33
+            },
+            "particle_mm_bytes_sha256": "9dedb594e70e8d014c80032c314c4a5cc4b61e9cf19811d48410f6866beae9d6",
+            "phase": "paused_preparation",
+            "playing": false,
+            "reason": "",
+            "texture_bytes": 204864512,
+            "time": 0.0,
+            "wall": 29.622
+          }
+        },
+        "paused_start": {
+          "telemetry_samples": 5,
+          "gpu_mean": 22.2,
+          "gpu_min": 7.0,
+          "gpu_max": 66.0,
+          "power_w_mean": 18.99,
+          "peak_rss": 33271934976,
+          "swap": 0,
+          "draw_fps_mean": 0.0,
+          "first": {
+            "buffer_bytes": 32565916,
+            "callbacks": 3806,
+            "camera": "[X: (0.788011, 0.0, -0.615662), Y: (-0.250412, 0.913545, -0.320513), Z: (0.562435, 0.406737, 0.719884), O: (130.9278, 94.68325, 167.58)]",
+            "committed": 0.0,
+            "coverage": {
+              "end_ready": false,
+              "fields": [
+                [
+                  0.0,
+                  27.9
+                ]
+              ],
+              "scene": [
+                [
+                  0.0,
+                  16.5
+                ]
+              ]
+            },
+            "cpu_render": {},
+            "draw_fps": 0.0,
+            "draws": 231,
+            "error": "",
+            "event": "sample",
+            "field": {
+              "active_jobs": 0,
+              "bytes": 31613976576,
+              "completed": 279,
+              "limit": 31674553956,
+              "session": {
+                "automatic": true,
+                "failed": 0,
+                "next": 0,
+                "ready": 279,
+                "required_bytes": 31674553956,
+                "started_us": 29972644,
+                "state": "ready",
+                "total": 279
+              },
+              "staged": 1,
+              "uploads": 1
+            },
+            "gpu_render": {},
+            "low_processor": true,
+            "max_fps": 0,
+            "memory": {
+              "available_physical": 6734966784,
+              "physical": 50404548608,
+              "process_peak_rss": 33271934976,
+              "process_rss": 33271934976,
+              "process_swap": 0,
+              "renderer_reserve": 268435456,
+              "reserve": 1780571914,
+              "safe_cache_bytes": 4954394870,
+              "system_reserve": 1512136458
+            },
+            "orbit": false,
+            "particle": {
+              "active": false,
+              "completed": 33,
+              "decoded_bytes": 455913344,
+              "decoded_limit": 1073741824,
+              "desired": 33,
+              "evictions": 0,
+              "failures": {},
+              "misses": 1,
+              "prepared_bytes": 1010678592,
+              "prepared_limit": 1073741824,
+              "resident": 33
+            },
+            "particle_mm_bytes_sha256": "9dedb594e70e8d014c80032c314c4a5cc4b61e9cf19811d48410f6866beae9d6",
+            "phase": "paused_start",
+            "playing": false,
+            "reason": "",
+            "texture_bytes": 204864512,
+            "time": 0.0,
+            "wall": 29.99
+          },
+          "last": {
+            "buffer_bytes": 32565916,
+            "callbacks": 4394,
+            "camera": "[X: (0.788011, 0.0, -0.615662), Y: (-0.250412, 0.913545, -0.320513), Z: (0.562435, 0.406737, 0.719884), O: (130.9278, 94.68325, 167.58)]",
+            "committed": 0.0,
+            "coverage": {
+              "end_ready": false,
+              "fields": [
+                [
+                  0.0,
+                  27.9
+                ]
+              ],
+              "scene": [
+                [
+                  0.0,
+                  16.5
+                ]
+              ]
+            },
+            "cpu_render": {},
+            "draw_fps": 0.0,
+            "draws": 231,
+            "error": "",
+            "event": "sample",
+            "field": {
+              "active_jobs": 0,
+              "bytes": 31613976576,
+              "completed": 279,
+              "limit": 31762036714,
+              "session": {
+                "automatic": true,
+                "failed": 0,
+                "next": 0,
+                "ready": 279,
+                "required_bytes": 31762036714,
+                "started_us": 33977265,
+                "state": "ready",
+                "total": 279
+              },
+              "staged": 1,
+              "uploads": 1
+            },
+            "gpu_render": {},
+            "low_processor": true,
+            "max_fps": 0,
+            "memory": {
+              "available_physical": 6826659840,
+              "physical": 50404548608,
+              "process_peak_rss": 33271934976,
+              "process_rss": 33271934976,
+              "process_swap": 0,
+              "renderer_reserve": 268435456,
+              "reserve": 1780571914,
+              "safe_cache_bytes": 5046087926,
+              "system_reserve": 1512136458
+            },
+            "orbit": false,
+            "particle": {
+              "active": false,
+              "completed": 33,
+              "decoded_bytes": 455913344,
+              "decoded_limit": 1073741824,
+              "desired": 33,
+              "evictions": 0,
+              "failures": {},
+              "misses": 1,
+              "prepared_bytes": 1010678592,
+              "prepared_limit": 1073741824,
+              "resident": 33
+            },
+            "particle_mm_bytes_sha256": "9dedb594e70e8d014c80032c314c4a5cc4b61e9cf19811d48410f6866beae9d6",
+            "phase": "paused_start",
+            "playing": false,
+            "reason": "",
+            "texture_bytes": 204864512,
+            "time": 0.0,
+            "wall": 34.05
+          }
+        },
+        "playback": {
+          "telemetry_samples": 136,
+          "gpu_mean": 35.25,
+          "gpu_min": 14.0,
+          "gpu_max": 56.0,
+          "power_w_mean": 96.55213235294117,
+          "peak_rss": 35159457792,
+          "swap": 0,
+          "draw_fps_mean": 120.72503340500398,
+          "first": {
+            "buffer_bytes": 32570644,
+            "callbacks": 4531,
+            "camera": "[X: (0.788011, 0.0, -0.615662), Y: (-0.250412, 0.913545, -0.320513), Z: (0.562435, 0.406737, 0.719884), O: (130.9278, 94.68325, 167.58)]",
+            "committed": 0.0,
+            "coverage": {
+              "end_ready": false,
+              "fields": [
+                [
+                  0.0,
+                  27.9
+                ]
+              ],
+              "scene": [
+                [
+                  0.0,
+                  16.5
+                ]
+              ]
+            },
+            "cpu_render": {
+              "count": 1,
+              "max_ms": 0.197999998927116,
+              "mean_ms": 0.197999998927116,
+              "p95_ms": 0.197999998927116
+            },
+            "draw_fps": 200.0,
+            "draws": 232,
+            "error": "",
+            "event": "sample",
+            "field": {
+              "active_jobs": 0,
+              "bytes": 31613976576,
+              "completed": 279,
+              "limit": 31725098596,
+              "session": {
+                "automatic": true,
+                "failed": 0,
+                "next": 0,
+                "ready": 279,
+                "required_bytes": 31725098596,
+                "started_us": 34978205,
+                "state": "ready",
+                "total": 279
+              },
+              "staged": 1,
+              "uploads": 1
+            },
+            "gpu_render": {
+              "count": 1,
+              "max_ms": 10.710000038147,
+              "mean_ms": 10.710000038147,
+              "p95_ms": 10.710000038147
+            },
+            "low_processor": false,
+            "max_fps": 0,
+            "memory": {
+              "available_physical": 6789922816,
+              "physical": 50404548608,
+              "process_peak_rss": 33271934976,
+              "process_rss": 33271934976,
+              "process_swap": 0,
+              "renderer_reserve": 268435456,
+              "reserve": 1780571914,
+              "safe_cache_bytes": 5009350902,
+              "system_reserve": 1512136458
+            },
+            "orbit": false,
+            "particle": {
+              "active": false,
+              "completed": 33,
+              "decoded_bytes": 455913344,
+              "decoded_limit": 1073741824,
+              "desired": 33,
+              "evictions": 0,
+              "failures": {},
+              "misses": 1,
+              "prepared_bytes": 1010678592,
+              "prepared_limit": 1073741824,
+              "resident": 33
+            },
+            "particle_mm_bytes_sha256": "9dedb594e70e8d014c80032c314c4a5cc4b61e9cf19811d48410f6866beae9d6",
+            "phase": "playback",
+            "playing": true,
+            "reason": "",
+            "texture_bytes": 204864512,
+            "time": 0.006896,
+            "wall": 34.995
+          },
+          "last": {
+            "buffer_bytes": 32608612,
+            "callbacks": 13527,
+            "camera": "[X: (0.788011, 0.0, -0.615662), Y: (-0.250412, 0.913545, -0.320513), Z: (0.562435, 0.406737, 0.719884), O: (130.9278, 94.68325, 167.58)]",
+            "committed": 74.5,
+            "coverage": {
+              "end_ready": true,
+              "fields": [
+                [
+                  65.9,
+                  74.5
+                ]
+              ],
+              "scene": [
+                [
+                  65.9,
+                  74.5
+                ]
+              ]
+            },
+            "cpu_render": {
+              "count": 145,
+              "max_ms": 0.212999999523163,
+              "mean_ms": 0.115496551682209,
+              "p95_ms": 0.180999994277954
+            },
+            "draw_fps": 141.739980449658,
+            "draws": 9228,
+            "error": "",
+            "event": "sample",
+            "field": {
+              "active_jobs": 0,
+              "bytes": 9858121728,
+              "completed": 746,
+              "limit": 10190366447,
+              "session": {
+                "automatic": true,
+                "failed": 0,
+                "next": 0,
+                "ready": 1,
+                "required_bytes": 10190366447,
+                "started_us": 109579381,
+                "state": "ready",
+                "total": 1
+              },
+              "staged": 0,
+              "uploads": 745
+            },
+            "gpu_render": {
+              "count": 145,
+              "max_ms": 2.66199994087219,
+              "mean_ms": 2.2403655101513,
+              "p95_ms": 2.52099990844727
+            },
+            "low_processor": false,
+            "max_fps": 0,
+            "memory": {
+              "available_physical": 5358407680,
+              "physical": 50404548608,
+              "process_peak_rss": 35160014848,
+              "process_rss": 34799108096,
+              "process_swap": 0,
+              "renderer_reserve": 268435456,
+              "reserve": 1780571914,
+              "safe_cache_bytes": 3577835766,
+              "system_reserve": 1512136458
+            },
+            "orbit": false,
+            "particle": {
+              "active": false,
+              "completed": 167,
+              "decoded_bytes": 697279232,
+              "decoded_limit": 784185290,
+              "desired": 24,
+              "evictions": 142,
+              "failures": {},
+              "misses": 1,
+              "prepared_bytes": 752256384,
+              "prepared_limit": 784185290,
+              "resident": 25
+            },
+            "particle_mm_bytes_sha256": "814d52aba2b42182106f6ef50202722a76d52e39e86441cbdb0fd7e9b7969740",
+            "phase": "playback",
+            "playing": true,
+            "reason": "",
+            "texture_bytes": 204864512,
+            "time": 74.5,
+            "wall": 109.589
+          }
+        },
+        "reverse_from_end": {
+          "telemetry_samples": 2,
+          "gpu_mean": 33.5,
+          "gpu_min": 31.0,
+          "gpu_max": 36.0,
+          "power_w_mean": 112.45,
+          "peak_rss": 34799108096,
+          "swap": 0,
+          "draw_fps_mean": 112.950340798442,
+          "first": {
+            "buffer_bytes": 32589604,
+            "callbacks": 32989,
+            "camera": "[X: (0.788011, 0.0, -0.615662), Y: (-0.250412, 0.913545, -0.320513), Z: (0.562435, 0.406737, 0.719884), O: (130.9278, 94.68325, 167.58)]",
+            "committed": 74.5,
+            "coverage": {
+              "end_ready": true,
+              "fields": [
+                [
+                  65.9,
+                  74.5
+                ]
+              ],
+              "scene": [
+                [
+                  65.9,
+                  74.5
+                ]
+              ]
+            },
+            "cpu_render": {
+              "count": 1,
+              "max_ms": 0.136000007390976,
+              "mean_ms": 0.136000007390976,
+              "p95_ms": 0.136000007390976
+            },
+            "draw_fps": 250.0,
+            "draws": 26516,
+            "error": "",
+            "event": "sample",
+            "field": {
+              "active_jobs": 1,
+              "bytes": 9858121728,
+              "completed": 746,
+              "limit": 10196111620,
+              "session": {
+                "automatic": true,
+                "failed": 0,
+                "next": 88,
+                "ready": 87,
+                "required_bytes": 10196111620,
+                "started_us": 244787697,
+                "state": "preparing",
+                "total": 88
+              },
+              "staged": 1,
+              "uploads": 746
+            },
+            "gpu_render": {
+              "count": 1,
+              "max_ms": 2.47900009155273,
+              "mean_ms": 2.47900009155273,
+              "p95_ms": 2.47900009155273
+            },
+            "low_processor": false,
+            "max_fps": 0,
+            "memory": {
+              "available_physical": 5436051456,
+              "physical": 50404548608,
+              "process_peak_rss": 35160014848,
+              "process_rss": 34799108096,
+              "process_swap": 0,
+              "renderer_reserve": 268435456,
+              "reserve": 1780571914,
+              "safe_cache_bytes": 3655479542,
+              "system_reserve": 1512136458
+            },
+            "orbit": false,
+            "particle": {
+              "active": false,
+              "completed": 167,
+              "decoded_bytes": 697279232,
+              "decoded_limit": 820302258,
+              "desired": 25,
+              "evictions": 142,
+              "failures": {},
+              "misses": 1,
+              "prepared_bytes": 752256384,
+              "prepared_limit": 820302258,
+              "resident": 25
+            },
+            "particle_mm_bytes_sha256": "814d52aba2b42182106f6ef50202722a76d52e39e86441cbdb0fd7e9b7969740",
+            "phase": "reverse_from_end",
+            "playing": true,
+            "reason": "",
+            "texture_bytes": 204864512,
+            "time": 74.493104,
+            "wall": 244.798
+          },
+          "last": {
+            "buffer_bytes": 32580148,
+            "callbacks": 33211,
+            "camera": "[X: (0.788011, 0.0, -0.615662), Y: (-0.250412, 0.913545, -0.320513), Z: (0.562435, 0.406737, 0.719884), O: (130.9278, 94.68325, 167.58)]",
+            "committed": 72.3642561111112,
+            "coverage": {
+              "end_ready": false,
+              "fields": [
+                [
+                  64.1,
+                  73.9
+                ]
+              ],
+              "scene": [
+                [
+                  64.1,
+                  73.5
+                ]
+              ]
+            },
+            "cpu_render": {
+              "count": 116,
+              "max_ms": 1.02400004863739,
+              "mean_ms": 0.262724138989017,
+              "p95_ms": 0.584999978542328
+            },
+            "draw_fps": 112.950340798442,
+            "draws": 26738,
+            "error": "",
+            "event": "sample",
+            "field": {
+              "active_jobs": 2,
+              "bytes": 11104550912,
+              "completed": 764,
+              "limit": 11441972355,
+              "session": {
+                "automatic": true,
+                "failed": 0,
+                "next": 0,
+                "ready": 83,
+                "required_bytes": 11441972355,
+                "started_us": 246848922,
+                "state": "preparing",
+                "total": 88
+              },
+              "staged": 1,
+              "uploads": 768
+            },
+            "gpu_render": {
+              "count": 116,
+              "max_ms": 2.56399989128113,
+              "mean_ms": 2.15863793471764,
+              "p95_ms": 2.43099999427795
+            },
+            "low_processor": false,
+            "max_fps": 0,
+            "memory": {
+              "available_physical": 5462581248,
+              "physical": 50404548608,
+              "process_peak_rss": 35160014848,
+              "process_rss": 34799108096,
+              "process_swap": 0,
+              "renderer_reserve": 268435456,
+              "reserve": 1780571914,
+              "safe_cache_bytes": 3682009334,
+              "system_reserve": 1512136458
+            },
+            "orbit": false,
+            "particle": {
+              "active": false,
+              "completed": 171,
+              "decoded_bytes": 697279232,
+              "decoded_limit": 822967644,
+              "desired": 24,
+              "evictions": 145,
+              "failures": {},
+              "misses": 1,
+              "prepared_bytes": 796292224,
+              "prepared_limit": 822967645,
+              "resident": 26
+            },
+            "particle_mm_bytes_sha256": "d082c571b0b6ada08faa3931642fdbff7cce62275982111224f09eeedbde15f5",
+            "phase": "reverse_from_end",
+            "playing": true,
+            "reason": "",
+            "texture_bytes": 204864512,
+            "time": 72.3642561111112,
+            "wall": 246.895
+          }
+        },
+        "scrub_away": {
+          "telemetry_samples": 48,
+          "gpu_mean": 19.333333333333332,
+          "gpu_min": 3.0,
+          "gpu_max": 60.0,
+          "power_w_mean": 21.60375,
+          "peak_rss": 34831409152,
+          "swap": 0,
+          "draw_fps_mean": 7.193240986123588,
+          "first": {
+            "buffer_bytes": 32594332,
+            "callbacks": 33317,
+            "camera": "[X: (0.788011, 0.0, -0.615662), Y: (-0.250412, 0.913545, -0.320513), Z: (0.562435, 0.406737, 0.719884), O: (130.9278, 94.68325, 167.58)]",
+            "committed": 71.4680920000002,
+            "coverage": {
+              "end_ready": false,
+              "fields": [
+                [
+                  63.0,
+                  72.9
+                ]
+              ],
+              "scene": [
+                [
+                  63.0,
+                  72.9
+                ]
+              ]
+            },
+            "cpu_render": {
+              "count": 1,
+              "max_ms": 0.53600001335144,
+              "mean_ms": 0.53600001335144,
+              "p95_ms": 0.53600001335144
+            },
+            "draw_fps": 200.0,
+            "draws": 26844,
+            "error": "",
+            "event": "sample",
+            "field": {
+              "active_jobs": 2,
+              "bytes": 11217862656,
+              "completed": 775,
+              "limit": 11449124286,
+              "session": {
+                "automatic": true,
+                "failed": 0,
+                "next": 87,
+                "ready": 85,
+                "required_bytes": 11449124286,
+                "started_us": 247749329,
+                "state": "preparing",
+                "total": 87
+              },
+              "staged": 1,
+              "uploads": 777
+            },
+            "gpu_render": {
+              "count": 1,
+              "max_ms": 2.52500009536743,
+              "mean_ms": 2.52500009536743,
+              "p95_ms": 2.52500009536743
+            },
+            "low_processor": true,
+            "max_fps": 0,
+            "memory": {
+              "available_physical": 5482221568,
+              "physical": 50404548608,
+              "process_peak_rss": 35160014848,
+              "process_rss": 34799108096,
+              "process_swap": 0,
+              "renderer_reserve": 268435456,
+              "reserve": 1780571914,
+              "safe_cache_bytes": 3701649654,
+              "system_reserve": 1512136458
+            },
+            "orbit": false,
+            "particle": {
+              "active": true,
+              "completed": 173,
+              "decoded_bytes": 697279232,
+              "decoded_limit": 830804658,
+              "desired": 25,
+              "evictions": 146,
+              "failures": {},
+              "misses": 1,
+              "prepared_bytes": 826918848,
+              "prepared_limit": 830804658,
+              "resident": 27
+            },
+            "particle_mm_bytes_sha256": "5fe955384f5931dc189f8c4f68e178c2358bc08f1bc2e192e03fa5090aaad4ee",
+            "phase": "scrub_away",
+            "playing": false,
+            "reason": "Required particle content",
+            "texture_bytes": 204864512,
+            "time": 71.4680920000002,
+            "wall": 247.818
+          },
+          "last": {
+            "buffer_bytes": 32580148,
+            "callbacks": 37258,
+            "camera": "[X: (0.788011, 0.0, -0.615662), Y: (-0.250412, 0.913545, -0.320513), Z: (0.562435, 0.406737, 0.719884), O: (130.9278, 94.68325, 167.58)]",
+            "committed": 37.25,
+            "coverage": {
+              "end_ready": false,
+              "fields": [
+                [
+                  37.2,
+                  53.5
+                ]
+              ],
+              "scene": [
+                [
+                  37.2,
+                  37.5
+                ]
+              ]
+            },
+            "cpu_render": {
+              "count": 1,
+              "max_ms": 0.204999998211861,
+              "mean_ms": 0.204999998211861,
+              "p95_ms": 0.204999998211861
+            },
+            "draw_fps": 0.986193293885602,
+            "draws": 27054,
+            "error": "",
+            "event": "sample",
+            "field": {
+              "active_jobs": 0,
+              "bytes": 18469814272,
+              "completed": 938,
+              "limit": 18568690776,
+              "session": {
+                "automatic": true,
+                "failed": 0,
+                "next": 0,
+                "ready": 162,
+                "required_bytes": 18568690776,
+                "started_us": 275060755,
+                "state": "ready",
+                "total": 162
+              },
+              "staged": 1,
+              "uploads": 779
+            },
+            "gpu_render": {
+              "count": 1,
+              "max_ms": 26.8530006408691,
+              "mean_ms": 26.8530006408691,
+              "p95_ms": 26.8530006408691
+            },
+            "low_processor": true,
+            "max_fps": 0,
+            "memory": {
+              "available_physical": 5390110720,
+              "physical": 50404548608,
+              "process_peak_rss": 35160014848,
+              "process_rss": 34831409152,
+              "process_swap": 0,
+              "renderer_reserve": 268435456,
+              "reserve": 1780571914,
+              "safe_cache_bytes": 3609538806,
+              "system_reserve": 1512136458
+            },
+            "orbit": false,
+            "particle": {
+              "active": false,
+              "completed": 206,
+              "decoded_bytes": 764325312,
+              "decoded_limit": 789261465,
+              "desired": 23,
+              "evictions": 181,
+              "failures": {},
+              "misses": 1,
+              "prepared_bytes": 765665600,
+              "prepared_limit": 789261466,
+              "resident": 25
+            },
+            "particle_mm_bytes_sha256": "bb714bd7f39228ca9299866c2876e5717b4dbb44059d30fb687283c9cf33cb90",
+            "phase": "scrub_away",
+            "playing": false,
+            "reason": "",
+            "texture_bytes": 204864512,
+            "time": 37.25,
+            "wall": 275.243
+          }
+        }
+      }
+    },
+    "candidate-heavy": {
+      "source_identity": [
+        47,
+        21327020,
+        54283866848,
+        1791072133360725266,
+        1791072133360725266
+      ],
+      "source_metadata_unchanged": true,
+      "settings": {
+        "event": "settings",
+        "fields": {
+          "gpu_budget_mib": 256,
+          "layers": {
+            "field": {
+              "channel": "density",
+              "clip": false,
+              "clip_distance": 0.0,
+              "clip_normal": [
+                1.0,
+                0.0,
+                0.0
+              ],
+              "color_mapping": {
+                "normalization": "linear",
+                "percentile_high": 99.0,
+                "percentile_low": 1.0,
+                "policy": "manual",
+                "source_channel": "",
+                "source_time": 0.0
+              },
+              "colormap": "viridis",
+              "isosurface": false,
+              "lower": 0.0,
+              "opacity": 0.25,
+              "opacity_mapping": {
+                "lower": 0.0,
+                "mode": "linear",
+                "upper": 1.0
+              },
+              "slice": false,
+              "slice_distance": 0.0,
+              "slice_normal": [
+                0.0,
+                0.0,
+                1.0
+              ],
+              "step": 0.25,
+              "threshold": 0.5,
+              "upper": 1.0,
+              "visible": true,
+              "volume": true
+            }
+          },
+          "legend_visibility": {}
+        },
+        "renderer": "forward_plus",
+        "source": "/home/Nozba/Downloads/VB_FreeCollapse_v0_2/runs_free_collapse_v0_2/S0_20261004_013659_785112/free_collapse.wvz",
+        "version": "v0.1.0.102",
+        "viewport": "(1920, 1080)",
+        "vsync": 1
+      },
+      "playback_wall_seconds": 86.822,
+      "sampled_playback_waits": [
+        {
+          "wall": 92.33,
+          "time": 54.7855504242424,
+          "reason": "Required field content or startup coverage"
+        },
+        {
+          "wall": 93.343,
+          "time": 54.7855504242424,
+          "reason": "Required field content or startup coverage"
+        },
+        {
+          "wall": 94.359,
+          "time": 54.7855504242424,
+          "reason": "Required field content or startup coverage"
+        },
+        {
+          "wall": 95.38,
+          "time": 54.7855504242424,
+          "reason": "Required field content or startup coverage"
+        },
+        {
+          "wall": 96.393,
+          "time": 54.7855504242424,
+          "reason": "Required field content or startup coverage"
+        },
+        {
+          "wall": 97.408,
+          "time": 54.7855504242424,
+          "reason": "Required field content or startup coverage"
+        },
+        {
+          "wall": 98.422,
+          "time": 54.7855504242424,
+          "reason": "Required field content or startup coverage"
+        },
+        {
+          "wall": 99.435,
+          "time": 54.7855504242424,
+          "reason": "Required field content or startup coverage"
+        },
+        {
+          "wall": 100.449,
+          "time": 54.7855504242424,
+          "reason": "Required field content or startup coverage"
+        },
+        {
+          "wall": 101.474,
+          "time": 54.7855504242424,
+          "reason": "Required field content or startup coverage"
+        },
+        {
+          "wall": 102.501,
+          "time": 54.7855504242424,
+          "reason": "Required field content or startup coverage"
+        },
+        {
+          "wall": 103.516,
+          "time": 54.7855504242424,
+          "reason": "Required field content or startup coverage"
+        }
+      ],
+      "end_sampled_duration": 119.87599999999999,
+      "end_sampled_draws": 0,
+      "same_end_manual_pause_buffer_hash": true,
+      "before_manual_pause": {
+        "buffer_bytes": 32580148,
+        "callbacks": 30277,
+        "camera": "[X: (0.788011, 0.0, -0.615662), Y: (-0.250412, 0.913545, -0.320513), Z: (0.562435, 0.406737, 0.719884), O: (130.9278, 94.68325, 167.58)]",
+        "committed": 74.5,
+        "coverage": {
+          "end_ready": true,
+          "fields": [
+            [
+              52.5,
+              74.5
+            ]
+          ],
+          "scene": [
+            [
+              57.5,
+              74.5
+            ]
+          ]
+        },
+        "cpu_render": {},
+        "draw_fps": 0.0,
+        "draws": 8271,
+        "error": "",
+        "event": "before_manual_pause",
+        "field": {
+          "active_jobs": 0,
+          "bytes": 25041895424,
+          "completed": 750,
+          "limit": 25346578702,
+          "session": {
+            "automatic": true,
+            "failed": 0,
+            "next": 0,
+            "ready": 1,
+            "required_bytes": 25346578702,
+            "started_us": 243541399,
+            "state": "ready",
+            "total": 1
+          },
+          "staged": 0,
+          "uploads": 745
+        },
+        "gpu_render": {},
+        "low_processor": true,
+        "max_fps": 0,
+        "memory": {
+          "available_physical": 6141779968,
+          "physical": 50404548608,
+          "process_peak_rss": 35187216384,
+          "process_rss": 33795702784,
+          "process_swap": 0,
+          "renderer_reserve": 268435456,
+          "reserve": 1780571914,
+          "safe_cache_bytes": 4361208054,
+          "system_reserve": 1512136458
+        },
+        "orbit": false,
+        "particle": {
+          "active": false,
+          "completed": 164,
+          "decoded_bytes": 925235904,
+          "decoded_limit": 1073741824,
+          "desired": 33,
+          "evictions": 129,
+          "failures": {},
+          "misses": 1,
+          "prepared_bytes": 1058522624,
+          "prepared_limit": 1073741824,
+          "resident": 35
+        },
+        "particle_mm_bytes_sha256": "814d52aba2b42182106f6ef50202722a76d52e39e86441cbdb0fd7e9b7969740",
+        "phase": "natural_end",
+        "playing": true,
+        "reason": "",
+        "texture_bytes": 176551936,
+        "time": 74.5,
+        "wall": 243.646
+      },
+      "after_manual_pause": {
+        "buffer_bytes": 32584876,
+        "callbacks": 32448,
+        "camera": "[X: (0.788011, 0.0, -0.615662), Y: (-0.250412, 0.913545, -0.320513), Z: (0.562435, 0.406737, 0.719884), O: (130.9278, 94.68325, 167.58)]",
+        "committed": 74.5,
+        "coverage": {
+          "end_ready": true,
+          "fields": [
+            [
+              52.5,
+              74.5
+            ]
+          ],
+          "scene": [
+            [
+              57.5,
+              74.5
+            ]
+          ]
+        },
+        "cpu_render": {},
+        "draw_fps": 0.0,
+        "draws": 8272,
+        "error": "",
+        "event": "after_manual_pause",
+        "field": {
+          "active_jobs": 0,
+          "bytes": 25041895424,
+          "completed": 750,
+          "limit": 25362459480,
+          "session": {
+            "automatic": true,
+            "failed": 0,
+            "next": 0,
+            "ready": 1,
+            "required_bytes": 25362459480,
+            "started_us": 258561663,
+            "state": "ready",
+            "total": 1
+          },
+          "staged": 0,
+          "uploads": 745
+        },
+        "gpu_render": {},
+        "low_processor": true,
+        "max_fps": 0,
+        "memory": {
+          "available_physical": 6158225408,
+          "physical": 50404548608,
+          "process_peak_rss": 35187216384,
+          "process_rss": 33795702784,
+          "process_swap": 0,
+          "renderer_reserve": 268435456,
+          "reserve": 1780571914,
+          "safe_cache_bytes": 4377653494,
+          "system_reserve": 1512136458
+        },
+        "orbit": false,
+        "particle": {
+          "active": false,
+          "completed": 164,
+          "decoded_bytes": 925235904,
+          "decoded_limit": 1073741824,
+          "desired": 33,
+          "evictions": 129,
+          "failures": {},
+          "misses": 1,
+          "prepared_bytes": 1058522624,
+          "prepared_limit": 1073741824,
+          "resident": 35
+        },
+        "particle_mm_bytes_sha256": "814d52aba2b42182106f6ef50202722a76d52e39e86441cbdb0fd7e9b7969740",
+        "phase": "manual_pause_same_end",
+        "playing": false,
+        "reason": "",
+        "texture_bytes": 176551936,
+        "time": 74.5,
+        "wall": 258.662
+      },
+      "final": {
+        "capture_closed": true,
+        "error": "",
+        "event": "final",
+        "reached_end": true
+      },
+      "phases": {
+        "capture_closed": {
+          "telemetry_samples": 35,
+          "gpu_mean": 32.94285714285714,
+          "gpu_min": 24.0,
+          "gpu_max": 44.0,
+          "power_w_mean": 20.347142857142856,
+          "peak_rss": 26234245120,
+          "swap": 68603904,
+          "draw_fps_mean": 0.0,
+          "first": {
+            "buffer_bytes": 32708372,
+            "callbacks": 37758,
+            "camera": "[X: (0.486983, 0.0, -0.873412), Y: (-0.355248, 0.913545, -0.198074), Z: (0.797901, 0.406737, 0.444881), O: (185.7415, 94.68325, 103.5628)]",
+            "committed": null,
+            "cpu_render": {
+              "count": 1,
+              "max_ms": 0.218999996781349,
+              "mean_ms": 0.218999996781349,
+              "p95_ms": 0.218999996781349
+            },
+            "draw_fps": 0.611620795107034,
+            "draws": 9068,
+            "event": "sample",
+            "gpu_render": {
+              "count": 1,
+              "max_ms": 4.00600004196167,
+              "mean_ms": 4.00600004196167,
+              "p95_ms": 4.00600004196167
+            },
+            "low_processor": true,
+            "max_fps": 0,
+            "memory": {
+              "available_physical": 35407278080,
+              "physical": 50404548608,
+              "process_peak_rss": 35187216384,
+              "process_rss": 4905222144,
+              "process_swap": 64438272,
+              "renderer_reserve": 268435456,
+              "reserve": 1780571914,
+              "safe_cache_bytes": 20161819443,
+              "system_reserve": 1512136458
+            },
+            "orbit": false,
+            "phase": "capture_closed",
+            "playing": false,
+            "texture_bytes": 204863488,
+            "time": 0.0,
+            "wall": 302.032
+          },
+          "last": {
+            "buffer_bytes": 32708372,
+            "callbacks": 40370,
+            "camera": "[X: (0.486983, 0.0, -0.873412), Y: (-0.355248, 0.913545, -0.198074), Z: (0.797901, 0.406737, 0.444881), O: (185.7415, 94.68325, 103.5628)]",
+            "committed": null,
+            "cpu_render": {},
+            "draw_fps": 0.0,
+            "draws": 9068,
+            "event": "sample",
+            "gpu_render": {},
+            "low_processor": true,
+            "max_fps": 0,
+            "memory": {
+              "available_physical": 35485560832,
+              "physical": 50404548608,
+              "process_peak_rss": 35187216384,
+              "process_rss": 4905222144,
+              "process_swap": 64438272,
+              "renderer_reserve": 268435456,
+              "reserve": 1780571914,
+              "safe_cache_bytes": 20161819443,
+              "system_reserve": 1512136458
+            },
+            "orbit": false,
+            "phase": "capture_closed",
+            "playing": false,
+            "texture_bytes": 204863488,
+            "time": 0.0,
+            "wall": 320.048
+          }
+        },
+        "manual_pause_same_end": {
+          "telemetry_samples": 24,
+          "gpu_mean": 31.708333333333332,
+          "gpu_min": 25.0,
+          "gpu_max": 43.0,
+          "power_w_mean": 20.355833333333333,
+          "peak_rss": 33795702784,
+          "swap": 0,
+          "draw_fps_mean": 0.0,
+          "first": {
+            "buffer_bytes": 32584876,
+            "callbacks": 30278,
+            "camera": "[X: (0.788011, 0.0, -0.615662), Y: (-0.250412, 0.913545, -0.320513), Z: (0.562435, 0.406737, 0.719884), O: (130.9278, 94.68325, 167.58)]",
+            "committed": 74.5,
+            "coverage": {
+              "end_ready": true,
+              "fields": [
+                [
+                  52.5,
+                  74.5
+                ]
+              ],
+              "scene": [
+                [
+                  57.5,
+                  74.5
+                ]
+              ]
+            },
+            "cpu_render": {
+              "count": 1,
+              "max_ms": 0.203999996185303,
+              "mean_ms": 0.203999996185303,
+              "p95_ms": 0.203999996185303
+            },
+            "draw_fps": 142.857142857143,
+            "draws": 8272,
+            "error": "",
+            "event": "sample",
+            "field": {
+              "active_jobs": 0,
+              "bytes": 25041895424,
+              "completed": 750,
+              "limit": 25346578702,
+              "session": {
+                "automatic": true,
+                "failed": 0,
+                "next": 0,
+                "ready": 1,
+                "required_bytes": 25346578702,
+                "started_us": 243541399,
+                "state": "ready",
+                "total": 1
+              },
+              "staged": 0,
+              "uploads": 745
+            },
+            "gpu_render": {
+              "count": 1,
+              "max_ms": 2.24300003051758,
+              "mean_ms": 2.24300003051758,
+              "p95_ms": 2.24300003051758
+            },
+            "low_processor": true,
+            "max_fps": 0,
+            "memory": {
+              "available_physical": 6121648128,
+              "physical": 50404548608,
+              "process_peak_rss": 35187216384,
+              "process_rss": 33795702784,
+              "process_swap": 0,
+              "renderer_reserve": 268435456,
+              "reserve": 1780571914,
+              "safe_cache_bytes": 4341076214,
+              "system_reserve": 1512136458
+            },
+            "orbit": false,
+            "particle": {
+              "active": false,
+              "completed": 164,
+              "decoded_bytes": 925235904,
+              "decoded_limit": 1073741824,
+              "desired": 33,
+              "evictions": 129,
+              "failures": {},
+              "misses": 1,
+              "prepared_bytes": 1058522624,
+              "prepared_limit": 1073741824,
+              "resident": 35
+            },
+            "particle_mm_bytes_sha256": "814d52aba2b42182106f6ef50202722a76d52e39e86441cbdb0fd7e9b7969740",
+            "phase": "manual_pause_same_end",
+            "playing": false,
+            "reason": "",
+            "texture_bytes": 176551936,
+            "time": 74.5,
+            "wall": 243.664
+          },
+          "last": {
+            "buffer_bytes": 32584876,
+            "callbacks": 32336,
+            "camera": "[X: (0.788011, 0.0, -0.615662), Y: (-0.250412, 0.913545, -0.320513), Z: (0.562435, 0.406737, 0.719884), O: (130.9278, 94.68325, 167.58)]",
+            "committed": 74.5,
+            "coverage": {
+              "end_ready": true,
+              "fields": [
+                [
+                  52.5,
+                  74.5
+                ]
+              ],
+              "scene": [
+                [
+                  57.5,
+                  74.5
+                ]
+              ]
+            },
+            "cpu_render": {},
+            "draw_fps": 0.0,
+            "draws": 8272,
+            "error": "",
+            "event": "sample",
+            "field": {
+              "active_jobs": 0,
+              "bytes": 25041895424,
+              "completed": 750,
+              "limit": 25381172348,
+              "session": {
+                "automatic": true,
+                "failed": 0,
+                "next": 0,
+                "ready": 1,
+                "required_bytes": 25381172348,
+                "started_us": 257560666,
+                "state": "ready",
+                "total": 1
+              },
+              "staged": 0,
+              "uploads": 745
+            },
+            "gpu_render": {},
+            "low_processor": true,
+            "max_fps": 0,
+            "memory": {
+              "available_physical": 6146158592,
+              "physical": 50404548608,
+              "process_peak_rss": 35187216384,
+              "process_rss": 33795702784,
+              "process_swap": 0,
+              "renderer_reserve": 268435456,
+              "reserve": 1780571914,
+              "safe_cache_bytes": 4365586678,
+              "system_reserve": 1512136458
+            },
+            "orbit": false,
+            "particle": {
+              "active": false,
+              "completed": 164,
+              "decoded_bytes": 925235904,
+              "decoded_limit": 1073741824,
+              "desired": 33,
+              "evictions": 129,
+              "failures": {},
+              "misses": 1,
+              "prepared_bytes": 1058522624,
+              "prepared_limit": 1073741824,
+              "resident": 35
+            },
+            "particle_mm_bytes_sha256": "814d52aba2b42182106f6ef50202722a76d52e39e86441cbdb0fd7e9b7969740",
+            "phase": "manual_pause_same_end",
+            "playing": false,
+            "reason": "",
+            "texture_bytes": 176551936,
+            "time": 74.5,
+            "wall": 257.889
+          }
+        },
+        "natural_end": {
+          "telemetry_samples": 221,
+          "gpu_mean": 32.262443438914026,
+          "gpu_min": 15.0,
+          "gpu_max": 65.0,
+          "power_w_mean": 21.408325791855205,
+          "peak_rss": 33795702784,
+          "swap": 0,
+          "draw_fps_mean": 0.0,
+          "first": {
+            "buffer_bytes": 32580148,
+            "callbacks": 12918,
+            "camera": "[X: (0.788011, 0.0, -0.615662), Y: (-0.250412, 0.913545, -0.320513), Z: (0.562435, 0.406737, 0.719884), O: (130.9278, 94.68325, 167.58)]",
+            "committed": 74.5,
+            "coverage": {
+              "end_ready": true,
+              "fields": [
+                [
+                  52.5,
+                  74.5
+                ]
+              ],
+              "scene": [
+                [
+                  57.5,
+                  74.5
+                ]
+              ]
+            },
+            "cpu_render": {},
+            "draw_fps": 0.0,
+            "draws": 8271,
+            "error": "",
+            "event": "sample",
+            "field": {
+              "active_jobs": 0,
+              "bytes": 25041895424,
+              "completed": 750,
+              "limit": 25404211373,
+              "session": {
+                "automatic": true,
+                "failed": 0,
+                "next": 0,
+                "ready": 1,
+                "required_bytes": 25404211373,
+                "started_us": 123459744,
+                "state": "ready",
+                "total": 1
+              },
+              "staged": 0,
+              "uploads": 745
+            },
+            "gpu_render": {},
+            "low_processor": true,
+            "max_fps": 0,
+            "memory": {
+              "available_physical": 6201630720,
+              "physical": 50404548608,
+              "process_peak_rss": 35187216384,
+              "process_rss": 33795702784,
+              "process_swap": 0,
+              "renderer_reserve": 268435456,
+              "reserve": 1780571914,
+              "safe_cache_bytes": 4421058806,
+              "system_reserve": 1512136458
+            },
+            "orbit": false,
+            "particle": {
+              "active": false,
+              "completed": 164,
+              "decoded_bytes": 925235904,
+              "decoded_limit": 1073741824,
+              "desired": 33,
+              "evictions": 129,
+              "failures": {},
+              "misses": 1,
+              "prepared_bytes": 1058522624,
+              "prepared_limit": 1073741824,
+              "resident": 35
+            },
+            "particle_mm_bytes_sha256": "814d52aba2b42182106f6ef50202722a76d52e39e86441cbdb0fd7e9b7969740",
+            "phase": "natural_end",
+            "playing": true,
+            "reason": "",
+            "texture_bytes": 176551936,
+            "time": 74.5,
+            "wall": 123.651
+          },
+          "last": {
+            "buffer_bytes": 32580148,
+            "callbacks": 30260,
+            "camera": "[X: (0.788011, 0.0, -0.615662), Y: (-0.250412, 0.913545, -0.320513), Z: (0.562435, 0.406737, 0.719884), O: (130.9278, 94.68325, 167.58)]",
+            "committed": 74.5,
+            "coverage": {
+              "end_ready": true,
+              "fields": [
+                [
+                  52.5,
+                  74.5
+                ]
+              ],
+              "scene": [
+                [
+                  57.5,
+                  74.5
+                ]
+              ]
+            },
+            "cpu_render": {},
+            "draw_fps": 0.0,
+            "draws": 8271,
+            "error": "",
+            "event": "sample",
+            "field": {
+              "active_jobs": 0,
+              "bytes": 25041895424,
+              "completed": 750,
+              "limit": 25336760005,
+              "session": {
+                "automatic": true,
+                "failed": 0,
+                "next": 0,
+                "ready": 1,
+                "required_bytes": 25336760005,
+                "started_us": 242525162,
+                "state": "ready",
+                "total": 1
+              },
+              "staged": 0,
+              "uploads": 745
+            },
+            "gpu_render": {},
+            "low_processor": true,
+            "max_fps": 0,
+            "memory": {
+              "available_physical": 6141779968,
+              "physical": 50404548608,
+              "process_peak_rss": 35187216384,
+              "process_rss": 33795702784,
+              "process_swap": 0,
+              "renderer_reserve": 268435456,
+              "reserve": 1780571914,
+              "safe_cache_bytes": 4361208054,
+              "system_reserve": 1512136458
+            },
+            "orbit": false,
+            "particle": {
+              "active": false,
+              "completed": 164,
+              "decoded_bytes": 925235904,
+              "decoded_limit": 1073741824,
+              "desired": 33,
+              "evictions": 129,
+              "failures": {},
+              "misses": 1,
+              "prepared_bytes": 1058522624,
+              "prepared_limit": 1073741824,
+              "resident": 35
+            },
+            "particle_mm_bytes_sha256": "814d52aba2b42182106f6ef50202722a76d52e39e86441cbdb0fd7e9b7969740",
+            "phase": "natural_end",
+            "playing": true,
+            "reason": "",
+            "texture_bytes": 176551936,
+            "time": 74.5,
+            "wall": 243.527
+          }
+        },
+        "open": {
+          "telemetry_samples": 2,
+          "gpu_mean": 8.5,
+          "gpu_min": 8.0,
+          "gpu_max": 9.0,
+          "power_w_mean": 79.805,
+          "peak_rss": 927645696,
+          "swap": 0,
+          "draw_fps_mean": null,
+          "first": null,
+          "last": null
+        },
+        "paused_orbit": {
+          "telemetry_samples": 6,
+          "gpu_mean": 31.5,
+          "gpu_min": 15.0,
+          "gpu_max": 39.0,
+          "power_w_mean": 64.95833333333333,
+          "peak_rss": 34979405824,
+          "swap": 70094848,
+          "draw_fps_mean": 60.00001290399173,
+          "first": {
+            "buffer_bytes": 32580148,
+            "callbacks": 37458,
+            "camera": "[X: (0.787671, 0.0, -0.616096), Y: (-0.250589, 0.913545, -0.320375), Z: (0.562832, 0.406737, 0.719573), O: (131.0203, 94.68325, 167.5077)]",
+            "committed": 37.25,
+            "coverage": {
+              "end_ready": false,
+              "fields": [
+                [
+                  37.2,
+                  52.2
+                ]
+              ],
+              "scene": [
+                [
+                  37.2,
+                  37.5
+                ]
+              ]
+            },
+            "cpu_render": {
+              "count": 1,
+              "max_ms": 0.197999998927116,
+              "mean_ms": 0.197999998927116,
+              "p95_ms": 0.197999998927116
+            },
+            "draw_fps": 58.8235294117647,
+            "draws": 8768,
+            "error": "",
+            "event": "sample",
+            "field": {
+              "active_jobs": 0,
+              "bytes": 16996761600,
+              "completed": 903,
+              "limit": 17082253734,
+              "session": {
+                "automatic": true,
+                "failed": 0,
+                "next": 0,
+                "ready": 149,
+                "required_bytes": 17082253734,
+                "started_us": 293936091,
+                "state": "ready",
+                "total": 149
+              },
+              "staged": 1,
+              "uploads": 779
+            },
+            "gpu_render": {
+              "count": 1,
+              "max_ms": 10.2919998168945,
+              "mean_ms": 10.2919998168945,
+              "p95_ms": 10.2919998168945
+            },
+            "low_processor": false,
+            "max_fps": 60,
+            "memory": {
+              "available_physical": 5322498048,
+              "physical": 50404548608,
+              "process_peak_rss": 35187216384,
+              "process_rss": 34953396224,
+              "process_swap": 70094848,
+              "renderer_reserve": 268435456,
+              "reserve": 1780571914,
+              "safe_cache_bytes": 3541926134,
+              "system_reserve": 1512136458
+            },
+            "orbit": true,
+            "particle": {
+              "active": false,
+              "completed": 199,
+              "decoded_bytes": 750916096,
+              "decoded_limit": 753240071,
+              "desired": 22,
+              "evictions": 175,
+              "failures": {},
+              "misses": 1,
+              "prepared_bytes": 735038976,
+              "prepared_limit": 753240071,
+              "resident": 24
+            },
+            "particle_mm_bytes_sha256": "bb714bd7f39228ca9299866c2876e5717b4dbb44059d30fb687283c9cf33cb90",
+            "phase": "paused_orbit",
+            "playing": false,
+            "reason": "",
+            "texture_bytes": 204863488,
+            "time": 37.25,
+            "wall": 294.805
+          },
+          "last": {
+            "buffer_bytes": 32580148,
+            "callbacks": 37702,
+            "camera": "[X: (0.549667, 0.0, -0.835384), Y: (-0.339781, 0.913545, -0.22357), Z: (0.763161, 0.406737, 0.502146), O: (177.6545, 94.68325, 116.8933)]",
+            "committed": 37.25,
+            "coverage": {
+              "end_ready": false,
+              "fields": [
+                [
+                  37.2,
+                  51.9
+                ]
+              ],
+              "scene": [
+                [
+                  37.2,
+                  37.5
+                ]
+              ]
+            },
+            "cpu_render": {
+              "count": 61,
+              "max_ms": 0.232999995350838,
+              "mean_ms": 0.182344261984356,
+              "p95_ms": 0.218999996781349
+            },
+            "draw_fps": 60.0393700787402,
+            "draws": 9012,
+            "error": "",
+            "event": "sample",
+            "field": {
+              "active_jobs": 0,
+              "bytes": 16656826368,
+              "completed": 903,
+              "limit": 16742561959,
+              "session": {
+                "automatic": true,
+                "failed": 0,
+                "next": 0,
+                "ready": 146,
+                "required_bytes": 16742561959,
+                "started_us": 297942123,
+                "state": "ready",
+                "total": 146
+              },
+              "staged": 1,
+              "uploads": 779
+            },
+            "gpu_render": {
+              "count": 61,
+              "max_ms": 4.09100008010864,
+              "mean_ms": 3.45262294909993,
+              "p95_ms": 3.72900009155273
+            },
+            "low_processor": false,
+            "max_fps": 60,
+            "memory": {
+              "available_physical": 5320757248,
+              "physical": 50404548608,
+              "process_peak_rss": 35187216384,
+              "process_rss": 34979397632,
+              "process_swap": 69734400,
+              "renderer_reserve": 268435456,
+              "reserve": 1780571914,
+              "safe_cache_bytes": 3540185334,
+              "system_reserve": 1512136458
+            },
+            "orbit": true,
+            "particle": {
+              "active": false,
+              "completed": 199,
+              "decoded_bytes": 750916096,
+              "decoded_limit": 755112528,
+              "desired": 22,
+              "evictions": 175,
+              "failures": {},
+              "misses": 1,
+              "prepared_bytes": 735038976,
+              "prepared_limit": 755112529,
+              "resident": 24
+            },
+            "particle_mm_bytes_sha256": "bb714bd7f39228ca9299866c2876e5717b4dbb44059d30fb687283c9cf33cb90",
+            "phase": "paused_orbit",
+            "playing": false,
+            "reason": "",
+            "texture_bytes": 204863488,
+            "time": 37.25,
+            "wall": 298.871
+          }
+        },
+        "paused_preparation": {
+          "telemetry_samples": 50,
+          "gpu_mean": 26.88,
+          "gpu_min": 15.0,
+          "gpu_max": 52.0,
+          "power_w_mean": 34.2156,
+          "peak_rss": 33201496064,
+          "swap": 0,
+          "draw_fps_mean": 7.398222952226606,
+          "first": {
+            "buffer_bytes": 0,
+            "callbacks": 0,
+            "camera": "[X: (0.788011, 0.0, -0.615662), Y: (-0.250412, 0.913545, -0.320513), Z: (0.562435, 0.406737, 0.719884), O: (130.9278, 94.68325, 167.58)]",
+            "committed": 0.0,
+            "coverage": {
+              "end_ready": false,
+              "fields": [
+                [
+                  0.0,
+                  0.2
+                ]
+              ],
+              "scene": [
+                [
+                  0.0,
+                  0.2
+                ]
+              ]
+            },
+            "cpu_render": {},
+            "draw_fps": 0.0,
+            "draws": 0,
+            "error": "",
+            "event": "sample",
+            "field": {
+              "active_jobs": 2,
+              "bytes": 226623488,
+              "completed": 2,
+              "limit": 32889293887,
+              "session": {
+                "automatic": true,
+                "failed": 0,
+                "next": 4,
+                "ready": 2,
+                "required_bytes": 32889293887,
+                "started_us": 2719804,
+                "state": "preparing",
+                "total": 193
+              },
+              "staged": 0,
+              "uploads": 0
+            },
+            "gpu_render": {},
+            "low_processor": false,
+            "max_fps": 0,
+            "memory": {
+              "available_physical": 38449065984,
+              "physical": 50404548608,
+              "process_peak_rss": 1531854848,
+              "process_rss": 1531854848,
+              "process_swap": 0,
+              "renderer_reserve": 268435456,
+              "reserve": 1780571914,
+              "safe_cache_bytes": 20161819443,
+              "system_reserve": 1512136458
+            },
+            "orbit": false,
+            "particle": {
+              "active": true,
+              "completed": 3,
+              "decoded_bytes": 53636864,
+              "decoded_limit": 1073741824,
+              "desired": 8,
+              "evictions": 0,
+              "failures": {},
+              "misses": 1,
+              "prepared_bytes": 91879872,
+              "prepared_limit": 1073741824,
+              "resident": 3
+            },
+            "particle_mm_bytes_sha256": "9dedb594e70e8d014c80032c314c4a5cc4b61e9cf19811d48410f6866beae9d6",
+            "phase": "paused_preparation",
+            "playing": false,
+            "reason": "",
+            "texture_bytes": 0,
+            "time": 0.0,
+            "wall": 2.996
+          },
+          "last": {
+            "buffer_bytes": 32565916,
+            "callbacks": 4059,
+            "camera": "[X: (0.788011, 0.0, -0.615662), Y: (-0.250412, 0.913545, -0.320513), Z: (0.562435, 0.406737, 0.719884), O: (130.9278, 94.68325, 167.58)]",
+            "committed": 0.0,
+            "coverage": {
+              "end_ready": false,
+              "fields": [
+                [
+                  0.0,
+                  27.9
+                ]
+              ],
+              "scene": [
+                [
+                  0.0,
+                  16.5
+                ]
+              ]
+            },
+            "cpu_render": {},
+            "draw_fps": 0.0,
+            "draws": 213,
+            "error": "",
+            "event": "sample",
+            "field": {
+              "active_jobs": 0,
+              "bytes": 31613976576,
+              "completed": 279,
+              "limit": 31734445278,
+              "session": {
+                "automatic": true,
+                "failed": 0,
+                "next": 0,
+                "ready": 279,
+                "required_bytes": 31734445278,
+                "started_us": 30794282,
+                "state": "ready",
+                "total": 279
+              },
+              "staged": 1,
+              "uploads": 1
+            },
+            "gpu_render": {},
+            "low_processor": true,
+            "max_fps": 0,
+            "memory": {
+              "available_physical": 6785462272,
+              "physical": 50404548608,
+              "process_peak_rss": 33201496064,
+              "process_rss": 33201496064,
+              "process_swap": 0,
+              "renderer_reserve": 268435456,
+              "reserve": 1780571914,
+              "safe_cache_bytes": 5004890358,
+              "system_reserve": 1512136458
+            },
+            "orbit": false,
+            "particle": {
+              "active": false,
+              "completed": 33,
+              "decoded_bytes": 455913344,
+              "decoded_limit": 1073741824,
+              "desired": 33,
+              "evictions": 0,
+              "failures": {},
+              "misses": 1,
+              "prepared_bytes": 1010678592,
+              "prepared_limit": 1073741824,
+              "resident": 33
+            },
+            "particle_mm_bytes_sha256": "9dedb594e70e8d014c80032c314c4a5cc4b61e9cf19811d48410f6866beae9d6",
+            "phase": "paused_preparation",
+            "playing": false,
+            "reason": "",
+            "texture_bytes": 204863488,
+            "time": 0.0,
+            "wall": 31.459
+          }
+        },
+        "paused_start": {
+          "telemetry_samples": 5,
+          "gpu_mean": 30.6,
+          "gpu_min": 26.0,
+          "gpu_max": 39.0,
+          "power_w_mean": 20.956,
+          "peak_rss": 33201496064,
+          "swap": 0,
+          "draw_fps_mean": 0.0,
+          "first": {
+            "buffer_bytes": 32565916,
+            "callbacks": 4112,
+            "camera": "[X: (0.788011, 0.0, -0.615662), Y: (-0.250412, 0.913545, -0.320513), Z: (0.562435, 0.406737, 0.719884), O: (130.9278, 94.68325, 167.58)]",
+            "committed": 0.0,
+            "coverage": {
+              "end_ready": false,
+              "fields": [
+                [
+                  0.0,
+                  27.9
+                ]
+              ],
+              "scene": [
+                [
+                  0.0,
+                  16.5
+                ]
+              ]
+            },
+            "cpu_render": {},
+            "draw_fps": 0.0,
+            "draws": 213,
+            "error": "",
+            "event": "sample",
+            "field": {
+              "active_jobs": 0,
+              "bytes": 31613976576,
+              "completed": 279,
+              "limit": 31712065514,
+              "session": {
+                "automatic": true,
+                "failed": 0,
+                "next": 0,
+                "ready": 279,
+                "required_bytes": 31712065514,
+                "started_us": 31797474,
+                "state": "ready",
+                "total": 279
+              },
+              "staged": 1,
+              "uploads": 1
+            },
+            "gpu_render": {},
+            "low_processor": true,
+            "max_fps": 0,
+            "memory": {
+              "available_physical": 6774190080,
+              "physical": 50404548608,
+              "process_peak_rss": 33201496064,
+              "process_rss": 33201496064,
+              "process_swap": 0,
+              "renderer_reserve": 268435456,
+              "reserve": 1780571914,
+              "safe_cache_bytes": 4993618166,
+              "system_reserve": 1512136458
+            },
+            "orbit": false,
+            "particle": {
+              "active": false,
+              "completed": 33,
+              "decoded_bytes": 455913344,
+              "decoded_limit": 1073741824,
+              "desired": 33,
+              "evictions": 0,
+              "failures": {},
+              "misses": 1,
+              "prepared_bytes": 1010678592,
+              "prepared_limit": 1073741824,
+              "resident": 33
+            },
+            "particle_mm_bytes_sha256": "9dedb594e70e8d014c80032c314c4a5cc4b61e9cf19811d48410f6866beae9d6",
+            "phase": "paused_start",
+            "playing": false,
+            "reason": "",
+            "texture_bytes": 204863488,
+            "time": 0.0,
+            "wall": 31.826
+          },
+          "last": {
+            "buffer_bytes": 32565916,
+            "callbacks": 4700,
+            "camera": "[X: (0.788011, 0.0, -0.615662), Y: (-0.250412, 0.913545, -0.320513), Z: (0.562435, 0.406737, 0.719884), O: (130.9278, 94.68325, 167.58)]",
+            "committed": 0.0,
+            "coverage": {
+              "end_ready": false,
+              "fields": [
+                [
+                  0.0,
+                  27.9
+                ]
+              ],
+              "scene": [
+                [
+                  0.0,
+                  16.5
+                ]
+              ]
+            },
+            "cpu_render": {},
+            "draw_fps": 0.0,
+            "draws": 213,
+            "error": "",
+            "event": "sample",
+            "field": {
+              "active_jobs": 0,
+              "bytes": 31613976576,
+              "completed": 279,
+              "limit": 31694499525,
+              "session": {
+                "automatic": true,
+                "failed": 0,
+                "next": 0,
+                "ready": 279,
+                "required_bytes": 31694499525,
+                "started_us": 35802150,
+                "state": "ready",
+                "total": 279
+              },
+              "staged": 1,
+              "uploads": 1
+            },
+            "gpu_render": {},
+            "low_processor": true,
+            "max_fps": 0,
+            "memory": {
+              "available_physical": 6755745792,
+              "physical": 50404548608,
+              "process_peak_rss": 33201496064,
+              "process_rss": 33201496064,
+              "process_swap": 0,
+              "renderer_reserve": 268435456,
+              "reserve": 1780571914,
+              "safe_cache_bytes": 4975173878,
+              "system_reserve": 1512136458
+            },
+            "orbit": false,
+            "particle": {
+              "active": false,
+              "completed": 33,
+              "decoded_bytes": 455913344,
+              "decoded_limit": 1073741824,
+              "desired": 33,
+              "evictions": 0,
+              "failures": {},
+              "misses": 1,
+              "prepared_bytes": 1010678592,
+              "prepared_limit": 1073741824,
+              "resident": 33
+            },
+            "particle_mm_bytes_sha256": "9dedb594e70e8d014c80032c314c4a5cc4b61e9cf19811d48410f6866beae9d6",
+            "phase": "paused_start",
+            "playing": false,
+            "reason": "",
+            "texture_bytes": 204863488,
+            "time": 0.0,
+            "wall": 35.887
+          }
+        },
+        "playback": {
+          "telemetry_samples": 158,
+          "gpu_mean": 34.78481012658228,
+          "gpu_min": 14.0,
+          "gpu_max": 57.0,
+          "power_w_mean": 97.3282911392405,
+          "peak_rss": 35188596736,
+          "swap": 0,
+          "draw_fps_mean": 92.7495065715865,
+          "first": {
+            "buffer_bytes": 32570644,
+            "callbacks": 4836,
+            "camera": "[X: (0.788011, 0.0, -0.615662), Y: (-0.250412, 0.913545, -0.320513), Z: (0.562435, 0.406737, 0.719884), O: (130.9278, 94.68325, 167.58)]",
+            "committed": 0.0,
+            "coverage": {
+              "end_ready": false,
+              "fields": [
+                [
+                  0.0,
+                  27.9
+                ]
+              ],
+              "scene": [
+                [
+                  0.0,
+                  16.5
+                ]
+              ]
+            },
+            "cpu_render": {
+              "count": 1,
+              "max_ms": 0.36599999666214,
+              "mean_ms": 0.36599999666214,
+              "p95_ms": 0.36599999666214
+            },
+            "draw_fps": 166.666666666667,
+            "draws": 214,
+            "error": "",
+            "event": "sample",
+            "field": {
+              "active_jobs": 0,
+              "bytes": 31613976576,
+              "completed": 279,
+              "limit": 31695334329,
+              "session": {
+                "automatic": true,
+                "failed": 0,
+                "next": 0,
+                "ready": 279,
+                "required_bytes": 31695334329,
+                "started_us": 36805269,
+                "state": "ready",
+                "total": 279
+              },
+              "staged": 1,
+              "uploads": 1
+            },
+            "gpu_render": {
+              "count": 1,
+              "max_ms": 13.0329999923706,
+              "mean_ms": 13.0329999923706,
+              "p95_ms": 13.0329999923706
+            },
+            "low_processor": false,
+            "max_fps": 0,
+            "memory": {
+              "available_physical": 6756630528,
+              "physical": 50404548608,
+              "process_peak_rss": 33201496064,
+              "process_rss": 33201496064,
+              "process_swap": 0,
+              "renderer_reserve": 268435456,
+              "reserve": 1780571914,
+              "safe_cache_bytes": 4976058614,
+              "system_reserve": 1512136458
+            },
+            "orbit": false,
+            "particle": {
+              "active": false,
+              "completed": 33,
+              "decoded_bytes": 455913344,
+              "decoded_limit": 1073741824,
+              "desired": 33,
+              "evictions": 0,
+              "failures": {},
+              "misses": 1,
+              "prepared_bytes": 1010678592,
+              "prepared_limit": 1073741824,
+              "resident": 33
+            },
+            "particle_mm_bytes_sha256": "9dedb594e70e8d014c80032c314c4a5cc4b61e9cf19811d48410f6866beae9d6",
+            "phase": "playback",
+            "playing": true,
+            "reason": "",
+            "texture_bytes": 204863488,
+            "time": 0.006896,
+            "wall": 36.828
+          },
+          "last": {
+            "buffer_bytes": 32580148,
+            "callbacks": 12822,
+            "camera": "[X: (0.788011, 0.0, -0.615662), Y: (-0.250412, 0.913545, -0.320513), Z: (0.562435, 0.406737, 0.719884), O: (130.9278, 94.68325, 167.58)]",
+            "committed": 73.9876941438191,
+            "coverage": {
+              "end_ready": true,
+              "fields": [
+                [
+                  52.5,
+                  74.5
+                ]
+              ],
+              "scene": [
+                [
+                  57.5,
+                  74.5
+                ]
+              ]
+            },
+            "cpu_render": {
+              "count": 134,
+              "max_ms": 0.407999992370605,
+              "mean_ms": 0.149597014731436,
+              "p95_ms": 0.252999991178513
+            },
+            "draw_fps": 132.280355380059,
+            "draws": 8200,
+            "error": "",
+            "event": "sample",
+            "field": {
+              "active_jobs": 0,
+              "bytes": 25041895424,
+              "completed": 750,
+              "limit": 25401156927,
+              "session": {
+                "automatic": true,
+                "failed": 0,
+                "next": 0,
+                "ready": 7,
+                "required_bytes": 25401156927,
+                "started_us": 122859968,
+                "state": "ready",
+                "total": 7
+              },
+              "staged": 1,
+              "uploads": 740
+            },
+            "gpu_render": {
+              "count": 134,
+              "max_ms": 3.08599996566772,
+              "mean_ms": 2.14828358390438,
+              "p95_ms": 2.53200006484985
+            },
+            "low_processor": false,
+            "max_fps": 0,
+            "memory": {
+              "available_physical": 6198611968,
+              "physical": 50404548608,
+              "process_peak_rss": 35187216384,
+              "process_rss": 33795702784,
+              "process_swap": 0,
+              "renderer_reserve": 268435456,
+              "reserve": 1780571914,
+              "safe_cache_bytes": 4418040054,
+              "system_reserve": 1512136458
+            },
+            "orbit": false,
+            "particle": {
+              "active": false,
+              "completed": 164,
+              "decoded_bytes": 925235904,
+              "decoded_limit": 1073741824,
+              "desired": 33,
+              "evictions": 129,
+              "failures": {},
+              "misses": 1,
+              "prepared_bytes": 1058522624,
+              "prepared_limit": 1073741824,
+              "resident": 35
+            },
+            "particle_mm_bytes_sha256": "c0c8cfefe16fcebe4214489d2e49c3d87ed556ad6ea91200aaa20f2fdcbdfb4f",
+            "phase": "playback",
+            "playing": true,
+            "reason": "",
+            "texture_bytes": 204863488,
+            "time": 73.9951015512265,
+            "wall": 122.948
+          }
+        },
+        "reverse_from_end": {
+          "telemetry_samples": 1,
+          "gpu_mean": 29.0,
+          "gpu_min": 29.0,
+          "gpu_max": 29.0,
+          "power_w_mean": 106.95,
+          "peak_rss": 34362007552,
+          "swap": 0,
+          "draw_fps_mean": 98.7292277614858,
+          "first": {
+            "buffer_bytes": 32589604,
+            "callbacks": 32449,
+            "camera": "[X: (0.788011, 0.0, -0.615662), Y: (-0.250412, 0.913545, -0.320513), Z: (0.562435, 0.406737, 0.719884), O: (130.9278, 94.68325, 167.58)]",
+            "committed": 74.5,
+            "coverage": {
+              "end_ready": true,
+              "fields": [
+                [
+                  52.5,
+                  74.5
+                ]
+              ],
+              "scene": [
+                [
+                  57.5,
+                  74.5
+                ]
+              ]
+            },
+            "cpu_render": {
+              "count": 1,
+              "max_ms": 0.133000001311302,
+              "mean_ms": 0.133000001311302,
+              "p95_ms": 0.133000001311302
+            },
+            "draw_fps": 125.0,
+            "draws": 8273,
+            "error": "",
+            "event": "sample",
+            "field": {
+              "active_jobs": 1,
+              "bytes": 25041895424,
+              "completed": 750,
+              "limit": 25362241026,
+              "session": {
+                "automatic": true,
+                "failed": 0,
+                "next": 222,
+                "ready": 221,
+                "required_bytes": 25362241026,
+                "started_us": 258677602,
+                "state": "preparing",
+                "total": 222
+              },
+              "staged": 1,
+              "uploads": 746
+            },
+            "gpu_render": {
+              "count": 1,
+              "max_ms": 1.94799995422363,
+              "mean_ms": 1.94799995422363,
+              "p95_ms": 1.94799995422363
+            },
+            "low_processor": false,
+            "max_fps": 0,
+            "memory": {
+              "available_physical": 6139891712,
+              "physical": 50404548608,
+              "process_peak_rss": 35187216384,
+              "process_rss": 33795702784,
+              "process_swap": 0,
+              "renderer_reserve": 268435456,
+              "reserve": 1780571914,
+              "safe_cache_bytes": 4359319798,
+              "system_reserve": 1512136458
+            },
+            "orbit": false,
+            "particle": {
+              "active": false,
+              "completed": 164,
+              "decoded_bytes": 925235904,
+              "decoded_limit": 1073741824,
+              "desired": 33,
+              "evictions": 129,
+              "failures": {},
+              "misses": 1,
+              "prepared_bytes": 1058522624,
+              "prepared_limit": 1073741824,
+              "resident": 35
+            },
+            "particle_mm_bytes_sha256": "814d52aba2b42182106f6ef50202722a76d52e39e86441cbdb0fd7e9b7969740",
+            "phase": "reverse_from_end",
+            "playing": true,
+            "reason": "",
+            "texture_bytes": 204863488,
+            "time": 74.4930555555556,
+            "wall": 258.694
+          },
+          "last": {
+            "buffer_bytes": 32580148,
+            "callbacks": 32634,
+            "camera": "[X: (0.788011, 0.0, -0.615662), Y: (-0.250412, 0.913545, -0.320513), Z: (0.562435, 0.406737, 0.719884), O: (130.9278, 94.68325, 167.58)]",
+            "committed": 72.4315563333331,
+            "coverage": {
+              "end_ready": false,
+              "fields": [
+                [
+                  51.9,
+                  73.7
+                ]
+              ],
+              "scene": [
+                [
+                  58.0,
+                  73.5
+                ]
+              ]
+            },
+            "cpu_render": {
+              "count": 101,
+              "max_ms": 0.423000007867813,
+              "mean_ms": 0.215643564958384,
+              "p95_ms": 0.381000012159348
+            },
+            "draw_fps": 98.7292277614858,
+            "draws": 8458,
+            "error": "",
+            "event": "sample",
+            "field": {
+              "active_jobs": 1,
+              "bytes": 24701960192,
+              "completed": 756,
+              "limit": 24873793358,
+              "session": {
+                "automatic": true,
+                "failed": 0,
+                "next": 207,
+                "ready": 206,
+                "required_bytes": 24873793358,
+                "started_us": 260675995,
+                "state": "preparing",
+                "total": 207
+              },
+              "staged": 1,
+              "uploads": 767
+            },
+            "gpu_render": {
+              "count": 101,
+              "max_ms": 3.13499999046326,
+              "mean_ms": 2.20659406586449,
+              "p95_ms": 2.74200010299683
+            },
+            "low_processor": false,
+            "max_fps": 0,
+            "memory": {
+              "available_physical": 5722558464,
+              "physical": 50404548608,
+              "process_peak_rss": 35187216384,
+              "process_rss": 34257133568,
+              "process_swap": 0,
+              "renderer_reserve": 268435456,
+              "reserve": 1780571914,
+              "safe_cache_bytes": 3941986550,
+              "system_reserve": 1512136458
+            },
+            "orbit": false,
+            "particle": {
+              "active": false,
+              "completed": 165,
+              "decoded_bytes": 925235904,
+              "decoded_limit": 950325938,
+              "desired": 29,
+              "evictions": 134,
+              "failures": {},
+              "misses": 1,
+              "prepared_bytes": 949425344,
+              "prepared_limit": 950325938,
+              "resident": 31
+            },
+            "particle_mm_bytes_sha256": "2ced2b67705555867d3f928f8c1d72462586eff987206a226ca1e9a71b7fed86",
+            "phase": "reverse_from_end",
+            "playing": true,
+            "reason": "",
+            "texture_bytes": 204863488,
+            "time": 72.4315563333331,
+            "wall": 260.75
+          }
+        },
+        "scrub_away": {
+          "telemetry_samples": 58,
+          "gpu_mean": 30.603448275862068,
+          "gpu_min": 14.0,
+          "gpu_max": 63.0,
+          "power_w_mean": 30.084655172413793,
+          "peak_rss": 34953396224,
+          "swap": 107552768,
+          "draw_fps_mean": 6.05832763722328,
+          "first": {
+            "buffer_bytes": 32594332,
+            "callbacks": 32739,
+            "camera": "[X: (0.788011, 0.0, -0.615662), Y: (-0.250412, 0.913545, -0.320513), Z: (0.562435, 0.406737, 0.719884), O: (130.9278, 94.68325, 167.58)]",
+            "committed": 71.4936405925924,
+            "coverage": {
+              "end_ready": false,
+              "fields": [
+                [
+                  51.8,
+                  72.6
+                ]
+              ],
+              "scene": [
+                [
+                  59.0,
+                  72.6
+                ]
+              ]
+            },
+            "cpu_render": {
+              "count": 1,
+              "max_ms": 0.090999998152256,
+              "mean_ms": 0.090999998152256,
+              "p95_ms": 0.090999998152256
+            },
+            "draw_fps": 250.0,
+            "draws": 8563,
+            "error": "",
+            "event": "sample",
+            "field": {
+              "active_jobs": 0,
+              "bytes": 23568842752,
+              "completed": 757,
+              "limit": 23663679837,
+              "session": {
+                "automatic": true,
+                "failed": 0,
+                "next": 0,
+                "ready": 197,
+                "required_bytes": 23663679837,
+                "started_us": 261669667,
+                "state": "ready",
+                "total": 197
+              },
+              "staged": 1,
+              "uploads": 777
+            },
+            "gpu_render": {
+              "count": 1,
+              "max_ms": 2.24600005149841,
+              "mean_ms": 2.24600005149841,
+              "p95_ms": 2.24600005149841
+            },
+            "low_processor": true,
+            "max_fps": 0,
+            "memory": {
+              "available_physical": 5608353792,
+              "physical": 50404548608,
+              "process_peak_rss": 35187216384,
+              "process_rss": 34362007552,
+              "process_swap": 0,
+              "renderer_reserve": 268435456,
+              "reserve": 1780571914,
+              "safe_cache_bytes": 3827781878,
+              "system_reserve": 1512136458
+            },
+            "orbit": false,
+            "particle": {
+              "active": true,
+              "completed": 165,
+              "decoded_bytes": 885008256,
+              "decoded_limit": 890239568,
+              "desired": 27,
+              "evictions": 137,
+              "failures": {},
+              "misses": 1,
+              "prepared_bytes": 857545472,
+              "prepared_limit": 890239569,
+              "resident": 28
+            },
+            "particle_mm_bytes_sha256": "21f6fa4ff4565c2a37b85772414607b3600c6d4fa493a24e61f7844a44e067e8",
+            "phase": "scrub_away",
+            "playing": false,
+            "reason": "Required particle content",
+            "texture_bytes": 204863488,
+            "time": 71.4936405925924,
+            "wall": 261.702
+          },
+          "last": {
+            "buffer_bytes": 32580148,
+            "callbacks": 37373,
+            "camera": "[X: (0.788011, 0.0, -0.615662), Y: (-0.250412, 0.913545, -0.320513), Z: (0.562435, 0.406737, 0.719884), O: (130.9278, 94.68325, 167.58)]",
+            "committed": 37.25,
+            "coverage": {
+              "end_ready": false,
+              "fields": [
+                [
+                  37.2,
+                  52.2
+                ]
+              ],
+              "scene": [
+                [
+                  37.2,
+                  37.5
+                ]
+              ]
+            },
+            "cpu_render": {
+              "count": 1,
+              "max_ms": 0.194999992847443,
+              "mean_ms": 0.194999992847443,
+              "p95_ms": 0.194999992847443
+            },
+            "draw_fps": 0.985221674876847,
+            "draws": 8767,
+            "error": "",
+            "event": "sample",
+            "field": {
+              "active_jobs": 0,
+              "bytes": 16996761600,
+              "completed": 903,
+              "limit": 17082253734,
+              "session": {
+                "automatic": true,
+                "failed": 0,
+                "next": 0,
+                "ready": 149,
+                "required_bytes": 17082253734,
+                "started_us": 293936091,
+                "state": "ready",
+                "total": 149
+              },
+              "staged": 1,
+              "uploads": 779
+            },
+            "gpu_render": {
+              "count": 1,
+              "max_ms": 8.37199974060059,
+              "mean_ms": 8.37199974060059,
+              "p95_ms": 8.37199974060059
+            },
+            "low_processor": true,
+            "max_fps": 0,
+            "memory": {
+              "available_physical": 5304758272,
+              "physical": 50404548608,
+              "process_peak_rss": 35187216384,
+              "process_rss": 34953396224,
+              "process_swap": 70094848,
+              "renderer_reserve": 268435456,
+              "reserve": 1780571914,
+              "safe_cache_bytes": 3524186358,
+              "system_reserve": 1512136458
+            },
+            "orbit": false,
+            "particle": {
+              "active": false,
+              "completed": 199,
+              "decoded_bytes": 750916096,
+              "decoded_limit": 757201488,
+              "desired": 22,
+              "evictions": 175,
+              "failures": {},
+              "misses": 1,
+              "prepared_bytes": 735038976,
+              "prepared_limit": 757201489,
+              "resident": 24
+            },
+            "particle_mm_bytes_sha256": "bb714bd7f39228ca9299866c2876e5717b4dbb44059d30fb687283c9cf33cb90",
+            "phase": "scrub_away",
+            "playing": false,
+            "reason": "",
+            "texture_bytes": 204863488,
+            "time": 37.25,
+            "wall": 294.208
+          }
+        }
+      }
+    }
+  },
+  "validation": {
+    "end-headless-3": {
+      "checks": 124,
+      "failures": [],
+      "exit_code": 0,
+      "renderer": "headless",
+      "packaged": false,
+      "source_hashes": {
+        "particles.wvz": "d7836a41cdf19f89817b4d2130bdd70d39dca7bdcee86e5e38e639f3ef402bc1",
+        "field.wvz": "c249f485d527c8ff1537036e57d44eaa964e5a0d49cc88a47358b1da5da3d6bd",
+        "mesh.wvz": "dc38efc69f49fd4e7695f1c72a01f79db039fa8a4aed579d07588f6b870f0230",
+        "mixed.wvz": "a855bc79c3eb6dd3fa2917e4f5cc62ea6b934fa122c2739be1a3c3d53e0316d0"
+      },
+      "sources_unchanged": true
+    },
+    "end-vulkan": {
+      "checks": 199,
+      "failures": [],
+      "exit_code": 0,
+      "renderer": "forward_plus",
+      "packaged": false,
+      "source_hashes": {
+        "particles.wvz": "f5a9c3ffb162cdee682f89a2c6bf6ac3b5177bc4f1b0951e384bc7fa618a959f",
+        "field.wvz": "7aa75ad73c1808b8c425447971b9fbdfdddd66482d8541c70e4f72cfde545768",
+        "mesh.wvz": "8ef6954650791a9b3772b0f1f72070d110f31f0639cc7fccc2bd58ea2934fea5",
+        "mixed.wvz": "c4676434b8c6debc91134dda50763967e5f55996fe8270e5a2abeb22c8032bd4"
+      },
+      "sources_unchanged": true
+    },
+    "end-release": {
+      "checks": 199,
+      "failures": [],
+      "exit_code": 0,
+      "renderer": "forward_plus",
+      "packaged": true,
+      "source_hashes": {
+        "particles.wvz": "55c1fa6a476c1065ee2f27809599cae457bb2760467455cc2f6f0fd0ae042bd9",
+        "field.wvz": "c5d11800ae7cd201990e8f8b1054d6803b93f860a961965665a788ace0c991ab",
+        "mesh.wvz": "8c301db122e53b8924cfd46d7a981e09b3994838f2d35d2b6a49e6fa54fd0e04",
+        "mixed.wvz": "7b1003b74088239a29e65ad70f82121c836e01e87b26eab0d21d5d5f0b4f6df3"
+      },
+      "sources_unchanged": true
+    },
+    "render-pacing-final": {
+      "checks": 290,
+      "failures": [],
+      "source_hashes_unchanged": {
+        "particles.wvz": "fd2a8167d837f42db3c236135022610dc5d6089b9d884b741782873af2bc7430",
+        "field.wvz": "f19c0ab5766434f3820e5c181d1ddd88b4e5a5412e1326777d6f5f6102edf909",
+        "mesh.wvz": "f7ff951c347f6360c3fdf2d745d7d76625ea505b61ecc591a788de1e6ded5cfc",
+        "mixed.wvz": "9076492fe3ddb7b839accc4ccd261f2da374be5c813a5eda5f982973756b477c"
+      }
+    },
+    "scientific-playback": {
+      "checks": 2457,
+      "failures": [],
+      "exit_code": 0
+    },
+    "particle-runway": {
+      "checks": 44,
+      "failures": [],
+      "exit_code": 0,
+      "renderer": "headless",
+      "packaged": false,
+      "source_sha256": "a69ef330f77c9473fa6e3189fb7f92df40033382b1c7ac193692c687ec84b510",
+      "source_unchanged": true
+    },
+    "version": {
+      "checks": 2,
+      "failures": [],
+      "exit_code": 0
+    },
+    "old_empty_cap_assumption": {
+      "original_suite_checks": 290,
+      "original_failures": [
+        "Playback restores supplied cap 120"
+      ],
+      "accepted_main_probe": "Empty capture with playing=true and orbit on retains cap=60; test corrected to open a real particle source before asserting active-playback cap restoration."
+    }
+  },
+  "limits": [
+    "Exact owner 94-100 percent gradual rise and camera trajectory were not reproduced.",
+    "GPU percentages are whole-device; candidate ambient load persists with no viewport draws after close.",
+    "Single uncontrolled runs: candidate field refill near 54.79, later swap; playback-throughput equivalence not established.",
+    "No whole production hash, other platforms or multi-hour soak."
+  ]
+}

@@ -1,5 +1,10 @@
 # Paused rendering — issue #118
 
+Current boundary behavior: #382 extends the same redraw-on-change policy to a
+committed non-looping recorded endpoint while preserving held Play/live-follow.
+See [current contract](RECORDED_END_IDLE.md). The #118 review-time report below
+is preserved as written.
+
 Implementation and validation are **pending owner review**. #118 was the only
 Ready item when selected. The existing owner-linked branch starts at `0b3d3b4`,
 the accepted PR #113 merge. Historical preparation reports retain their original

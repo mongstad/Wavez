@@ -357,6 +357,11 @@ func _tick_profiled(delta: float) -> void:
 	if mesh_playback != null and not mesh_playback.pump():transport_wait_reason = "Required mesh content";_poll_iso();return
 	if viewer.frame_a == null:return
 	if viewer.playing and reader.frames.size()>1:
+		# Keep following a live source at its recorded edge, but do not resubmit
+		# the identical committed endpoint on every display tick. Polling,
+		# preparation and camera input above remain active while it is held.
+		if holding_recorded_boundary():
+			viewer.display_accum = 0;_poll_iso();return
 		var committed_index: int = viewer.current_index;var committed_phase: float = viewer.phase
 		var next_time: float = viewer.requested_time+delta*viewer.physical_rate
 		var interval: Array = field_playback.playback_range() if field_playback != null else [reader.frames[0].time,reader.frames[-1].time]
@@ -376,6 +381,13 @@ func _tick_profiled(delta: float) -> void:
 			Profile.count("g3_display_samples")
 			if outside and not viewer.scene_loop_playback and not result.has("pending") and field_playback != null and field_playback.limited_playback():viewer._toggle_playback()
 	_poll_iso()
+func holding_recorded_boundary() -> bool:
+	if viewer.offline_instance or not viewer.playing or viewer.scene_loop_playback or reader.frames.is_empty() or is_buffering():return false
+	# Advanced intervals retain their existing automatic Pause transition.
+	if field_playback != null and field_playback.limited_playback():return false
+	var time: float = viewer.committed_sample.get("requested_time",NAN)
+	if time != viewer.requested_time:return false
+	return (viewer.physical_rate >= 0 and time >= reader.frames[-1].time) or (viewer.physical_rate <= 0 and time <= reader.frames[0].time)
 func use_async() -> bool:
 	return ((playback != null and playback.enabled) or (field_playback != null and field_playback.enabled) or (mesh_playback != null and mesh_playback.enabled)) and not viewer.offline_instance and not viewer.inspection_busy
 func transport_stalled() -> bool:

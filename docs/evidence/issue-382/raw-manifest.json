@@ -1,0 +1,427 @@
+{
+  "external_root": "/home/Nozba/Codex/Wavez/end-gpu-382",
+  "accepted_archive": "/home/Nozba/Codex/Wavez/end-gpu-382/accepted",
+  "accepted_main": "9ddab596e19b93f1598e8314427b03114741f4fc",
+  "files": [
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/baseline-heavy/command.json",
+      "bytes": 525,
+      "sha256": "2e3597d68092a66c363c2e7c7c06e251868102dfe6a66b7bbcab4af4653631ec"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/baseline-heavy/data/godot/app_userdata/WAVEZ/logs/godot.log",
+      "bytes": 21841,
+      "sha256": "e84ff3a48eaa7894c0fc520bbdf26eea1cb78286964fc653c64f003f7b557146"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/baseline-heavy/data/godot/app_userdata/WAVEZ/logs/wavez-2026-10-12_00-11-25-1791756685767-633690-0000000001924365.log",
+      "bytes": 866,
+      "sha256": "afece6b743224c9ce0dc183c134422a98f7eb3c07e758316d3bed7d79c4559f2"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/baseline-heavy/native.log",
+      "bytes": 21841,
+      "sha256": "e84ff3a48eaa7894c0fc520bbdf26eea1cb78286964fc653c64f003f7b557146"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/baseline-heavy/summary.json",
+      "bytes": 56693,
+      "sha256": "6ff69d79c171f666f5aad102812f1754e13ae223ac599e0b9422e54f74d7bf14"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/baseline-heavy/telemetry.json",
+      "bytes": 165183,
+      "sha256": "7be88b932bdc1bf4c0efedf1ead0298a210ac467bde3c69ceb1c9900f105d444"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/baseline-heavy/trace.jsonl",
+      "bytes": 442376,
+      "sha256": "4864d8a684d9804112e3edbffd7953174fce9afb4d0ae02f811e123bff7688b5"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/candidate-heavy/command.json",
+      "bytes": 511,
+      "sha256": "05cd20b5c9f1f00ab743879bc635c96c285c1c635ede300ed1b1e91169f4dbbb"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/candidate-heavy/data/godot/app_userdata/WAVEZ/logs/godot.log",
+      "bytes": 21693,
+      "sha256": "6fdc0e8263c3a1084709d69b3049e8606a62d759329751dd2747bb0e1d39e6e3"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/candidate-heavy/data/godot/app_userdata/WAVEZ/logs/wavez-2026-10-12_00-22-25-1791757345507-659447-0000000001664354.log",
+      "bytes": 866,
+      "sha256": "bc3e9a7c7675b00a10203dff2d852c381db0e9af045534d864b1c9e73ba74f32"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/candidate-heavy/native.log",
+      "bytes": 21693,
+      "sha256": "6fdc0e8263c3a1084709d69b3049e8606a62d759329751dd2747bb0e1d39e6e3"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/candidate-heavy/summary.json",
+      "bytes": 56185,
+      "sha256": "48192870d4b06960d910a0c04fca3efc50d692af8072e6f8931df557d6c56265"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/candidate-heavy/telemetry.json",
+      "bytes": 174219,
+      "sha256": "29e32bba2866666bb30405a5f06bac292c23f072110d54ed4ea92851b21705b6"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/candidate-heavy/trace.jsonl",
+      "bytes": 447542,
+      "sha256": "eb4eeb2102afd5b69001109ef5871776024e2ec182b6db097da1a3ee7fa37d27"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/end-headless/data/godot/app_userdata/WAVEZ/logs/godot.log",
+      "bytes": 770,
+      "sha256": "1adb94dcfc40bbc52704ea34b154daa34f1190c6ccef0982fe2372b5c87b773f"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/end-headless/live.json",
+      "bytes": 21,
+      "sha256": "56b3c90da0293d7e40d9c5a8eb28b3aae7d2aafe69db5e23376ac095d5e49c19"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/end-headless/native.log",
+      "bytes": 805,
+      "sha256": "2b3c1b489cbb11f6846d74c6a4a5fab9ea1b5cc6269da0eb55882d1db86885ba"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/end-headless-final/data/godot/app_userdata/WAVEZ/logs/godot.log",
+      "bytes": 6535,
+      "sha256": "0934f7aa32c60c3dbd22e4f9e7182eefded078bb89d5b2e8b1e1774ef2999983"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/end-headless-final/data/godot/app_userdata/WAVEZ/logs/wavez-2026-10-12_00-17-40-1791757060828-654990-0000000000832668.log",
+      "bytes": 685,
+      "sha256": "daab8204b7bcf5b1ad6bb6cd6fb56883352a6216468659feba72f339c346f293"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/end-headless-final/data/godot/app_userdata/WAVEZ/logs/wavez-2026-10-12_00-18-05-1791757085633-654990-0000000025637759.log",
+      "bytes": 800,
+      "sha256": "ba482245b4574b0e399040580ad6bba46baa4aa472f741dc793db9ec15ee0e4f"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/end-headless-final/data/godot/app_userdata/WAVEZ/logs/wavez-2026-10-12_00-18-30-1791757110748-654990-0000000050752382.log",
+      "bytes": 796,
+      "sha256": "07bdb08530cabf3c2d19e0fe48fc0b6f9a8688d313fbec49473e98f1a9cf901a"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/end-headless-final/data/godot/app_userdata/WAVEZ/logs/wavez-2026-10-12_00-18-55-1791757135843-654990-0000000075846958.log",
+      "bytes": 481,
+      "sha256": "a91fdb7878ea74036a3751094864e126d2a1b15485c5636781f24dbf74185d2b"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/end-headless-final/live.json",
+      "bytes": 21,
+      "sha256": "56b3c90da0293d7e40d9c5a8eb28b3aae7d2aafe69db5e23376ac095d5e49c19"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/end-headless-final/native.log",
+      "bytes": 6535,
+      "sha256": "0934f7aa32c60c3dbd22e4f9e7182eefded078bb89d5b2e8b1e1774ef2999983"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/end-headless-3/data/godot/app_userdata/WAVEZ/logs/godot.log",
+      "bytes": 115,
+      "sha256": "2269fa61719f158344644e99ba7673e62cb195c83e13c67b05075e33afa5c147"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/end-headless-3/data/godot/app_userdata/WAVEZ/logs/wavez-2026-10-12_00-19-14-1791757154219-656864-0000000000819672.log",
+      "bytes": 757,
+      "sha256": "c7ee1c28fe969f0919033adbf4017df9d20460efcae7f8622994e8bdd8f043df"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/end-headless-3/data/godot/app_userdata/WAVEZ/logs/wavez-2026-10-12_00-19-24-1791757164883-656864-0000000011483518.log",
+      "bytes": 872,
+      "sha256": "ea24ddd303c6a6cd82a5932579659adafb087b13c30b0dad38045923d9bce835"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/end-headless-3/data/godot/app_userdata/WAVEZ/logs/wavez-2026-10-12_00-19-35-1791757175861-656864-0000000022460924.log",
+      "bytes": 868,
+      "sha256": "7cad16710c65fe026dc85d4f53a20363291d5d64c68238e45d5802260ca2a3a5"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/end-headless-3/data/godot/app_userdata/WAVEZ/logs/wavez-2026-10-12_00-19-46-1791757186837-656864-0000000033437063.log",
+      "bytes": 741,
+      "sha256": "86ebef33bd433c041283c000569e441463b089075af1dd4a39802a8bec229bbb"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/end-headless-3/data/godot/app_userdata/WAVEZ/logs/wavez-2026-10-12_00-19-57-1791757197713-656864-0000000044313002.log",
+      "bytes": 535,
+      "sha256": "99ce41f839512f0bf89d0f758ff7fe019ac039d170eece8fb9da46736b2b8394"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/end-headless-3/data/godot/app_userdata/WAVEZ/logs/wavez-2026-10-12_00-20-01-1791757201436-656864-0000000048035576.log",
+      "bytes": 644,
+      "sha256": "e48d440666a5529fae14c7d022854b84ddde5cea789360f48cb38c9dbebbbe58"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/end-headless-3/data/godot/app_userdata/WAVEZ/logs/wavez-2026-10-12_00-20-02-1791757202373-656864-0000000048973005.log",
+      "bytes": 624,
+      "sha256": "1e88d894f83241dd3a4fd88d0be3848090110cdff6d38949c2c97225940cb4eb"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/end-headless-3/end-idle.json",
+      "bytes": 2021,
+      "sha256": "748d22cd34981a21ef6474091fdb564617f55cf48879ae49b650c2ed48b7f51f"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/end-headless-3/live.json",
+      "bytes": 21,
+      "sha256": "56b3c90da0293d7e40d9c5a8eb28b3aae7d2aafe69db5e23376ac095d5e49c19"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/end-headless-3/native.log",
+      "bytes": 115,
+      "sha256": "2269fa61719f158344644e99ba7673e62cb195c83e13c67b05075e33afa5c147"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/end-headless-3/summary.json",
+      "bytes": 500,
+      "sha256": "bb74d0fff66c00632eb126a718f74a747f199bff00592b9b983ddc18d51b85f8"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/end-vulkan/data/godot/app_userdata/WAVEZ/logs/godot.log",
+      "bytes": 196,
+      "sha256": "58ac38195ddbb1c58aa345ca5e28a2fcb3a9d9e0d7ab07afa070196de9c71179"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/end-vulkan/data/godot/app_userdata/WAVEZ/logs/wavez-2026-10-12_00-29-37-1791757777337-673245-0000000001630949.log",
+      "bytes": 775,
+      "sha256": "e9f07e95a241a565e2ecc7e537444766e0ca65a70a80d1ca34d06612100b3aae"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/end-vulkan/data/godot/app_userdata/WAVEZ/logs/wavez-2026-10-12_00-29-50-1791757790126-673245-0000000014419414.log",
+      "bytes": 890,
+      "sha256": "ab0018512f45e723fac4c55b267dfad9c489da860ce26f031691316480354604"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/end-vulkan/data/godot/app_userdata/WAVEZ/logs/wavez-2026-10-12_00-30-03-1791757803110-673245-0000000027402895.log",
+      "bytes": 886,
+      "sha256": "2861d210a16e6f77df35e80af87ad2715ae07355c803f7612ddc40afc9b41027"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/end-vulkan/data/godot/app_userdata/WAVEZ/logs/wavez-2026-10-12_00-30-16-1791757816081-673245-0000000040373419.log",
+      "bytes": 759,
+      "sha256": "bf27de41cbddbd5195bfef4dc0f395bdeb757c277b83f581693a63b7f859fbb2"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/end-vulkan/data/godot/app_userdata/WAVEZ/logs/wavez-2026-10-12_00-30-28-1791757828918-673245-0000000053210529.log",
+      "bytes": 553,
+      "sha256": "807ef657b81aa8cb5e8f29385e7698abaa329be194a6c4b9463d9ef7f9a76fa9"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/end-vulkan/data/godot/app_userdata/WAVEZ/logs/wavez-2026-10-12_00-30-32-1791757832743-673245-0000000057035392.log",
+      "bytes": 662,
+      "sha256": "b621fe698b0d40b54a0155c29f0dc61a54dfd4f2a872cba6e463c8a7f243f617"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/end-vulkan/data/godot/app_userdata/WAVEZ/logs/wavez-2026-10-12_00-30-33-1791757833780-673245-0000000058072643.log",
+      "bytes": 642,
+      "sha256": "9c78e7dba1aa44bfa6c7cd467bfa3d5dd2a6fc3056908f6e054bb2f5ec6d1dab"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/end-vulkan/end-idle.json",
+      "bytes": 2644,
+      "sha256": "dd806bd500fbe5ad2a06e156deba867c0d1177269e4934bdb0201064efdac2dd"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/end-vulkan/live.json",
+      "bytes": 21,
+      "sha256": "56b3c90da0293d7e40d9c5a8eb28b3aae7d2aafe69db5e23376ac095d5e49c19"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/end-vulkan/native.log",
+      "bytes": 196,
+      "sha256": "58ac38195ddbb1c58aa345ca5e28a2fcb3a9d9e0d7ab07afa070196de9c71179"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/end-vulkan/summary.json",
+      "bytes": 504,
+      "sha256": "5d780027ceb29b5f02e3037356c774fd49b2e97c97b598d23d842892ea6afb83"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/end-release/WAVEZ-review.pck",
+      "bytes": 9955248,
+      "sha256": "ea1c24536a67e754d261d9e0dcbdcec042dce1d2f3d23cb9000ef468ac506d01"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/end-release/WAVEZ-review.x86_64",
+      "bytes": 73519416,
+      "sha256": "d9f79ab89b5ae369aeed11c6052d402e8218cd503bf85b4a235f9c30c46a7c63"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/end-release/build-logs/export.log",
+      "bytes": 65002,
+      "sha256": "7e93c8fcfc4e485671f2e3c825248969e82c34853965b7662950748e284adb79"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/end-release/build-logs/import.log",
+      "bytes": 25340,
+      "sha256": "845de8ffdf25d570ed6b076ccd835142004969b66322012c5acbc2094c689e94"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/end-release/data/godot/app_userdata/WAVEZ/logs/godot.log",
+      "bytes": 196,
+      "sha256": "58ac38195ddbb1c58aa345ca5e28a2fcb3a9d9e0d7ab07afa070196de9c71179"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/end-release/data/godot/app_userdata/WAVEZ/logs/wavez-2026-10-12_00-30-43-1791757843814-675412-0000000001513976.log",
+      "bytes": 777,
+      "sha256": "72ff791d2a887673f5f7fc8cd8d198d4b65adf4bf85ab714f6ad3ef23897c732"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/end-release/data/godot/app_userdata/WAVEZ/logs/wavez-2026-10-12_00-30-56-1791757856502-675412-0000000014202597.log",
+      "bytes": 892,
+      "sha256": "a39283e08aed6900368ec583110c765be6258f0d41dee49b69e438299268085c"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/end-release/data/godot/app_userdata/WAVEZ/logs/wavez-2026-10-12_00-31-09-1791757869367-675412-0000000027067278.log",
+      "bytes": 888,
+      "sha256": "dfc90c9d6fd1b4eb5a61df2a121d7b798ff5d5f85b629b6abd46f8fe3a355328"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/end-release/data/godot/app_userdata/WAVEZ/logs/wavez-2026-10-12_00-31-22-1791757882256-675412-0000000039955942.log",
+      "bytes": 761,
+      "sha256": "838157cfe48337a8ffddac7dc4a8572b59cb43eb03c3ded00afc85d896d20a63"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/end-release/data/godot/app_userdata/WAVEZ/logs/wavez-2026-10-12_00-31-35-1791757895005-675412-0000000052704424.log",
+      "bytes": 555,
+      "sha256": "844835433e6d6b773bbbd569b9d2c342e34c2302692b57a88a65375b2bf3159f"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/end-release/data/godot/app_userdata/WAVEZ/logs/wavez-2026-10-12_00-31-38-1791757898770-675412-0000000056469227.log",
+      "bytes": 664,
+      "sha256": "3ee49a25b2cc5fd55e10b2975c27dbf3f7432d07db35f32400a919f7feac3223"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/end-release/data/godot/app_userdata/WAVEZ/logs/wavez-2026-10-12_00-31-39-1791757899770-675412-0000000057469861.log",
+      "bytes": 644,
+      "sha256": "c079758ceb144cca1638bfecf9cf2859832fc679300bffb789ff00e0f4d89b09"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/end-release/end-idle.json",
+      "bytes": 2643,
+      "sha256": "25dce669f992d0d1a7440b8b4ff4c3825345b36e5d95811c40257b499ffe174c"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/end-release/live.json",
+      "bytes": 21,
+      "sha256": "56b3c90da0293d7e40d9c5a8eb28b3aae7d2aafe69db5e23376ac095d5e49c19"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/end-release/native.log",
+      "bytes": 196,
+      "sha256": "58ac38195ddbb1c58aa345ca5e28a2fcb3a9d9e0d7ab07afa070196de9c71179"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/end-release/summary.json",
+      "bytes": 503,
+      "sha256": "34f2df23cc6df163cb848642d262e67717ac6daf378d928290b9da685dc0555a"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/render-pacing/live.log",
+      "bytes": 508,
+      "sha256": "99fe23cbc9185634c5f2aec86bdc99b04c889da68010a00abd55b31a701dfaab"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/render-pacing/native.log",
+      "bytes": 508,
+      "sha256": "7d9b1990dbda19c128dc216230245469233ae3492d32a7bf08d7e89d6febfef7"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/render-pacing/report.json",
+      "bytes": 3134,
+      "sha256": "4d22b96851b3419055935015cb23ba157c8875e46451f7263510bb0d8a58cb65"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/render-pacing-final/live.log",
+      "bytes": 192,
+      "sha256": "6b9fe134a020ee11eb589be0591ebe3abc85702ae192a0f0f26b5e9c762fa775"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/render-pacing-final/native.log",
+      "bytes": 192,
+      "sha256": "6b9fe134a020ee11eb589be0591ebe3abc85702ae192a0f0f26b5e9c762fa775"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/render-pacing-final/report.json",
+      "bytes": 3918,
+      "sha256": "b590a882eb3f4fe245fa239b596ea8a825619e77b7cec60dcf69187d11b12956"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/scientific-playback/config.json",
+      "bytes": 166,
+      "sha256": "e1d45f20328e6d219dc5fafd72a4ef29b6345872b7e5690bbcdf6dfcc165a74e"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/scientific-playback/godot.log",
+      "bytes": 110,
+      "sha256": "bc5f8e01ff6a253a19a0ec7e8c7befc010017a797855821bab2f3ab0fe8895cb"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/scientific-playback/live-config.json",
+      "bytes": 47,
+      "sha256": "96677f743f0fb626ae635aba5f102c00a958f0587ded14baf0598c0d4d3d46c0"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/scientific-playback/results.json",
+      "bytes": 146,
+      "sha256": "944f9718c032a5e8c574d1e0a3aa151421c3c0f55710d4283c2dc80deb53e193"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/scientific-playback/test.log",
+      "bytes": 110,
+      "sha256": "bc5f8e01ff6a253a19a0ec7e8c7befc010017a797855821bab2f3ab0fe8895cb"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/particle-runway/data/godot/app_userdata/WAVEZ/logs/godot.log",
+      "bytes": 112,
+      "sha256": "8da88004ca24b0de847c3bf9decd0f8eab64113352174bde6779c468c05e706a"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/particle-runway/data/godot/app_userdata/WAVEZ/logs/wavez-2026-10-12_00-35-51-1791758151199-683015-0000000000887449.log",
+      "bytes": 928,
+      "sha256": "1c03116244580e1b99aa09bf0e90c208511ed843b63a5d5e71c0a2f974bf0bfc"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/particle-runway/native.log",
+      "bytes": 112,
+      "sha256": "8da88004ca24b0de847c3bf9decd0f8eab64113352174bde6779c468c05e706a"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/particle-runway/particle-runway.json",
+      "bytes": 12741,
+      "sha256": "cbccaeeb2132853a3ab591d9dc4834bb2859af1aa17bf51c0ddcff4cf8ffa2c2"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/particle-runway/summary.json",
+      "bytes": 217,
+      "sha256": "0cd976cb279081d7ab8447a739bb4849b806d2329b14d2e53c5ce1be6aafc6fb"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/cap-main.log",
+      "bytes": 213,
+      "sha256": "783baa9037ca1568b1237fa3bcf01e0a86507e4689037cbd1ef8061ebe904844"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/candidate-import.log",
+      "bytes": 3163,
+      "sha256": "77c6387118fd653a9856315f2fffb85b96451aa89d356ef294cbf092842f61c9"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/validation-results.json",
+      "bytes": 169,
+      "sha256": "17920eb4581b752733acda90522f8aa523c0cfa08e2bcaf40a75b8f900f6c8b4"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/end-gpu-382/validation-final-results.json",
+      "bytes": 188,
+      "sha256": "0179c1f89fc717c5c0fa40d712dda855dc5a0cfea340f178e2f89ca7755658fc"
+    }
+  ]
+}

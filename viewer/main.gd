@@ -478,8 +478,9 @@ func _update_render_pacing() -> void:
 	# demand. Neither policy changes the recorded clock or camera speed.
 	var rolling := free_camera and (camera_roll_keys.has("roll_camera_left") != camera_roll_keys.has("roll_camera_right"))
 	var camera_animating := rolling or (orbit_enabled and not _camera_dragging() and orbit_speed != 0.0)
-	# Only an opened, explicitly playing source needs continuous render pacing.
-	var active_playback := playing and generic_reader != null
+	# A held recorded endpoint keeps Play/live polling active, but its unchanged
+	# presentation can use the same redraw-on-change policy as a manual pause.
+	var active_playback: bool = playing and generic_reader != null and not (scene_layers != null and scene_layers.holding_recorded_boundary())
 	OS.low_processor_usage_mode = bool(_previous_low_processor_mode) or (not active_playback and not camera_animating)
 	var frame_cap := _previous_max_fps
 	if not active_playback and camera_animating:

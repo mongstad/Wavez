@@ -42,6 +42,7 @@ Start with:
 - [Current status](docs/CURRENT_STATUS.md)
 - [Prepared timeline and short ready windows](docs/PREPARED_TIMELINE.md)
 - [Paused opening and automatic preparation](docs/PAUSED_PREPARATION.md)
+- [Held recorded endpoints and idle rendering](docs/RECORDED_END_IDLE.md)
 - [Dialog title and section hierarchy](docs/DIALOG_HIERARCHY.md)
 - [Shared dialog close controls](docs/DIALOG_CLOSE_CONTROLS.md)
 - [File and Tools dialog layout](docs/DIALOG_COHERENCE.md)
