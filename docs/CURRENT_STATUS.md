@@ -1,5 +1,15 @@
 # Current status
 
+Issue #374 proposes candidate **v0.1.0.99**, based on accepted **v0.1.0.98** /
+owner-merged PR #376 (`4737019f4ff4050774a8397a450d1ea2e79d2f15`). Forward+ field
+slices use explicit eight-texel interpolation for finite neighborhoods. Any
+nonfinite corner retains hardware sampling and the existing discard rule;
+source probes retain their conservative unavailable-value semantics. Volume
+sampling, RF preview geometry/LOD, WVZ1 arrays and scientific measurements remain
+unchanged. Owner review is pending. See [accuracy, nonfinite policy, Vulkan
+costs and owner checks](FIELD_SLICE_INTERPOLATION.md). Historical review-time
+records below and the #360 report are preserved as written.
+
 Issue #367 proposes candidate **v0.1.0.98**, based on accepted **v0.1.0.97** /
 owner-merged PR #373 (`c3475573878e7535174b1229b24d35eb6ae82e79`): Particle size
 now permits **0.01–8**, retains default **1.8**, and provides logarithmic travel,
