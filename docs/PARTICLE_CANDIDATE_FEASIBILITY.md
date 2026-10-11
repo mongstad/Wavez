@@ -1,19 +1,25 @@
-# Particle contract candidate: feasibility failure and owner decision
+# Particle rendering investigation and feasibility report
 
 Issue [#369](https://github.com/mongstad/Wavez/issues/369), 2026-10-11.
-**FAIL: the tested material-only candidate does not establish the proposed
-cross-renderer linear-light contract. Do not promote it as a rendering fix.**
-Issue #369's implementation/acceptance is incomplete; this review records its
-explicit requirement-10 decision gate:
+**Owner decision: finalize #369 as an investigation and feasibility report.
+The experimental shader was not accepted or incorporated into Wavez.** The
+existing production particle renderer is retained unchanged. The proposed common
+linear-compositing implementation is **deferred, not completed**, and no further
+particle-rendering changes will be pursued under this issue.
 
-> If a consistent contract cannot be achieved safely in Wavez alone, stop with options and request direction.
+Wavez's scientific visualization standard is **faithful representation of source
+data according to a documented rendering model**, not pixel-perfect conformity
+with VTK. Independent visualizer comparisons are diagnostic evidence; VTK's pixel
+output is not the definition of scientific correctness. Source values, units,
+identities, coordinates, clocks, interpolation and representation limits remain
+the basis for assessing fidelity within the tested scope.
 
-The result rules out this local material approach, not every possible Wavez
-architecture. A separate linear accumulation/compositing design may be possible,
-but its depth, other-layer, export and performance implications are untested.
-No such redesign, Godot patch/fork, preset/Bloom change or particle-size UX work
-is included. Accepted rendering remains active; rollback from the experiment is
-simply an ordinary launch without the external harness.
+**FAIL remains FAIL:** the material-only candidate did not establish its proposed
+common linear-light contract. Its original numerical results and failed gates are
+preserved below; the owner's scope decision does not reclassify them as passing.
+No new rendering experiment, compositing architecture, Godot modification or
+engine adoption is part of this finalization. The report is ready for owner review;
+that does not constitute merge or release approval.
 
 ## Candidate and provenance
 
@@ -43,7 +49,7 @@ Its explicit experimental decisions are:
 - Bound source coverage to [0,1]. Normalize the cinematic kernel by its analytic
   center **2.03**, and retain **2.03** as a separate artistic intensity gain. This
   preserves the unclamped kernel's energy law rather than silently clipping its
-  center; the choice itself requires owner review. Gaussian gain is one.
+  center. This experimental choice was not accepted. Gaussian gain is one.
 - Multiply coverage and intensity before transfer. Write the linear contribution
   in Forward+, its exact sRGB encoding in Compatibility, and `ALPHA = 1` with
   additive blending. This prevents backend-dependent alpha above one, but does
@@ -184,7 +190,36 @@ the actual GPU and exit 0. Historical reports, captures, gates and evidence are
 unchanged. All experiment code/data/images, engine source excerpts and dependency
 inventories remain external; no third-party payload enters Git or a package.
 
-## Stopped scope and requested direction
+## Retained production model and presentation limitations
+
+The existing production model continues to use additive, camera-facing particle
+quads without particle depth writes. Source sampling and ID-linear position
+interpolation remain unchanged; scalar/category values hold their declared source
+sample. The [#363 report](PARTICLE_PRESENTATION_CONTRACT.md) documents the measured
+production paths separately from the unaccepted candidate above:
+
+- Compatibility applies approximate color transfer and display-space addition,
+  with half-precision per-instance display attributes. Low-value colors can lose
+  contrast, and steep LUT/category boundaries can amplify display quantization.
+- Forward+ uses float32 display attributes and linear accumulation followed by
+  output encoding. Identical settings can produce different encoded colors,
+  contrast and apparent widths. Float32 still cannot preserve every exact source
+  boundary; numerical source/category decisions must use source data.
+- The production cinematic kernel can exceed alpha one. The tested Compatibility
+  path matches alpha clamping, while Forward+ matches unclamped behavior. The
+  experimental coverage/gain separation was not incorporated.
+- Additive overlap is not opaque particle-surface occlusion. Contributions can
+  saturate and disappear against white backgrounds. Nominal world quad extent is
+  distinct from image FWHM and is not a physical particle radius or fluid surface.
+
+These renderer-specific limitations remain documented constraints of the retained
+model. A pixel difference alone does not establish corrupted scientific data;
+conversely, correct coordinates alone do not establish adequate visibility or
+faithful category interpretation in every view. Original local color, contrast
+and width failures remain available to assess those limitations. No universal
+scientific-visualization certification is claimed.
+
+## Final scope and deferred implementation
 
 The material-only feasibility gate failed before proceeding to the acceptance
 benchmark. **NOT RUN for this candidate:** original REBOUND/PySPH vs VTK replay,
@@ -196,24 +231,21 @@ suite-wide acceptance claim follows from the small matrix. Candidate shader
 overrides are not serialized into generated video jobs; those jobs must not be
 used to claim candidate raw-video parity.
 
-Choose a direction before further implementation:
-
-1. **Recommended: authorize a separately scoped Wavez linear accumulation and
-   composition feasibility design.** Specify opaque depth/other-layer integration,
-   HDR storage, clipping, trails, exports and memory/GPU budgets first. It may
-   avoid an engine fork, but feasibility/performance are not established here.
-2. **Explicitly narrow the contract to renderer-specific presentation.** Consider
-   common source color/coverage semantics with documented blending differences,
-   or a Forward+-only linear scientific presentation mode. This changes #369's
-   goal and still needs the deferred benchmark; it is not silently selected.
-3. **Defer the correction and retain accepted rendering.** Preserve the known
-   discrepancies while separately evaluating engine capabilities. This is the
-   current product state, not completion of #369.
+The owner chose to retain production rendering and end this issue at the
+investigation boundary. Common linear accumulation/compositing remains deferred;
+no implementation, renderer-specific replacement mode or additional benchmark is
+scheduled or authorized by this report. The result rules out the tested local
+material approach, not every possible architecture, but broader feasibility and
+performance remain unestablished. Any future work would require separate owner
+authorization.
 
 Only this report and the required **v0.1.0.96** candidate build increment enter
-the PR. Rendering sources and current behavior guides remain unchanged. Review
-the failed gates and side-by-side images, then choose or amend the implementation
-scope. The PR is a draft decision record, not a merge-ready correction.
+the PR. Build 96 is accepted main's build 95 plus one and remains unchanged through
+these review revisions. Rendering sources, current behavior guides and historical
+evidence remain unchanged. Owner review should confirm the recorded decision,
+preserved numerical results, explicit production limitations and two-file diff.
+Acceptance of this investigation does not mean that the experimental shader or
+common linear-compositing implementation was accepted or completed.
 
 Both Python version-contract tests pass. The required isolated editor import
 exits 0 with no errors and four known missing resize-script UID warnings. Generated
