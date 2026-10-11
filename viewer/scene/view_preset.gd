@@ -6,7 +6,7 @@ const MAX_BYTES := 65536
 const Visual = preload("res://scene/visual_state.gd")
 # bool, finite numeric interval, enum, or fixed-size vector/transform.
 const VIEW := {
-	"point_scale":[0.1,8.0], "exposure":[0.05,3.0], "clean_view":true,
+	"point_scale":[0.01,8.0], "exposure":[0.05,3.0], "clean_view":true,
 	"brightness_scale":[0.0,5.0], "gamma":[0.2,3.0],
 	"orbit_enabled":true, "orbit_speed":[-0.5,0.5], "free_camera":true,
 	"yaw":[-1e9,1e9], "pitch":[-1e9,1e9], "camera_distance":[0.000001,1e15],
@@ -166,6 +166,7 @@ static func apply(viewer, recipe) -> Dictionary:
 	var sliders := {"Exposure":"exposure","Particle size":"point_scale","Brightness":"brightness_scale","Gamma":"gamma","Orbit speed • radians / second":"orbit_speed"}
 	for title in sliders:
 		if viewer.visual_sliders.has(title):viewer.visual_sliders[title].set_value_no_signal(viewer.get(sliders[title]))
+	viewer._sync_particle_size_control()
 	viewer.glow_slider.set_value_no_signal(viewer.environment.glow_intensity)
 	for i in viewer.colormap_option.item_count:
 		if viewer.colormap_option.get_item_text(i) == viewer.colormap_name:viewer.colormap_option.select(i)

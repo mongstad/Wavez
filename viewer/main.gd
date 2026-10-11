@@ -1040,6 +1040,7 @@ func _sync_visuals() -> void:
 	Profile.end("shader_uniforms_cpu",started)
 
 func _sync_visuals_profiled() -> void:
+	_sync_particle_size_control()
 	for mat in particle_materials:
 		mat.set_shader_parameter("brightness_gain", brightness_scale)
 		mat.set_shader_parameter("gamma_value", gamma)
@@ -1050,6 +1051,9 @@ func _sync_visuals_profiled() -> void:
 		mat.set_shader_parameter("clean_view", clean_view)
 		mat.set_shader_parameter("slice_enabled", slice_enabled)
 		mat.set_shader_parameter("slice_x", slice_x * half_extent)
+
+func _sync_particle_size_control() -> void:
+	if visual_sliders.has("Particle size"): visual_sliders["Particle size"].sync_model(point_scale)
 
 func _set_point_rendering(value: bool) -> void:
 	clean_view = value
@@ -1331,7 +1335,11 @@ func _build_inspector_controls() -> void:
 			generic_reader.configure_cache(decoded_cache_mib*1048576,false)
 		_update_hud())
 	var rendering := _section("Rendering")
-	_visual_slider(rendering, "Particle size", 0.1, 8, point_scale, func(v: float): point_scale = v; _sync_visuals())
+	var particle_size := preload("res://ui/components/particle_size_slider.gd").new()
+	particle_size.install(rendering, point_scale)
+	particle_size.value_changed.connect(func(v: float): point_scale = v; _sync_visuals())
+	particle_size.edit_started.connect(_clear_manual_navigation)
+	visual_sliders["Particle size"] = particle_size
 	_visual_slider(rendering, "Brightness", 0.0, 5, brightness_scale, func(v: float): brightness_scale = v; _restyle())
 	_check(rendering, "Point rendering", clean_view, func(v: bool): _set_point_rendering(v))
 	filter_box = _section("Particle Filters")
