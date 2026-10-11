@@ -408,6 +408,14 @@ Particles support declared scalar semantics and categories, explicit marker chan
 
 Volumes use declared uniform-grid geometry, selected channels, transfer ranges/colormaps, opacity and world-distance ray steps. Ray integration clips to the grid and opaque geometry. Axis-aligned and oblique slices, world-coordinate probes and clipping support inspection of the field without inferring it from particles. The initial implementation allows one translucent volume and one derived isosurface; arbitrary overlapping transparent volumes are not composited. Additive particles do not supply opaque depth.
 
+Forward+ slices explicitly interpolate eight float32 preview texels when all
+corners are finite. Any NaN/Inf corner, including a zero-weight neighbor, uses
+the existing hardware sampler and discards a nonfinite result. This preserves
+the tested presentation footprint without filling missing data. It does not
+change the source probe's conservative invalid-neighborhood rule or volume
+sampling. Preview reduction and float32/rasterization limits still apply; see
+[slice accuracy, nonfinite policy and measured costs](FIELD_SLICE_INTERPOLATION.md).
+
 Volume color range and extinction now have independent mappings. **Linear scalar**
 maps the selected source scalar between explicit zero/full-opacity thresholds;
 **Magnitude • absolute scalar** uses its absolute value for extinction while
