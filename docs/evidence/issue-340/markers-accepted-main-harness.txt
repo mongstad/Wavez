@@ -1,0 +1,8 @@
+extends SceneTree
+func _initialize(): run.call_deferred()
+func run():
+ var viewer = load("res://main.gd").new(); viewer.offline_instance = true; viewer.scene_prebuffer_enabled = false
+ root.add_child(viewer);viewer._open_capture("/tmp/wavez-340-markers/fixture.wvz");viewer.playing = false
+ for time in [0.5,1.0,3.0,4.0,0.0]:viewer.scene_layers.sample(time)
+ viewer.scene_layers.states.field.visible = false;viewer.scene_layers.states.mesh.visible = false;viewer.scene_layers.sample(0.5)
+ viewer.queue_free();await process_frame;await process_frame;RenderingServer.force_draw(false);await create_timer(.1).timeout;quit()

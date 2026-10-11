@@ -112,7 +112,7 @@ func integration(config: Dictionary) -> void:
 	var dialog := DelayedExport.new();dialog.viewer = view;dialog.delay_ms = int(config.get("delay_ms",0))
 	view.video_dialog = dialog;view.add_child(dialog);dialog.job_changed.connect(ui.video_changed)
 	# High-call-rate actual UI: no text replacement when formatted content is equal.
-	dialog.active_job_path = "first";dialog.preparing = true
+	dialog.active_job_path = "first";dialog.pid = preload("res://video/test_worker_process.gd").start()
 	dialog.job_status = snapshot(3000,100,Time.get_ticks_msec()+10000)
 	ui.open_job_details("Video export");await process_frame
 	var text: TextEdit = view.shell.detail_text
@@ -121,7 +121,7 @@ func integration(config: Dictionary) -> void:
 	for i in 1000:ui.refresh();dialog._update_status_summary()
 	check(text.get_version() == version and text.text == current_text,"1,000 duplicate refreshes do not replace Details text")
 	check(eta(dialog.message.text) == eta(text.text),"Dialog and actual Details show the same estimate")
-	view.shell.details.hide();dialog.preparing = false;dialog.job_status = {};dialog.active_job_path = ""
+	view.shell.details.hide();preload("res://video/test_worker_process.gd").stop(dialog);dialog.job_status = {};dialog.active_job_path = ""
 	var menu: Dictionary = view.shell.commands.video;menu.popup.id_pressed.emit(menu.index)
 	dialog.range_choice.select(2);dialog.update_range();dialog.set_range_times(0,2)
 	dialog.width.value = 320;dialog.height.value = 180;dialog.fps.value = 60 if config.get("long",false) or config.get("cancel","") == "rendering" else 4;dialog.rate.value = 1

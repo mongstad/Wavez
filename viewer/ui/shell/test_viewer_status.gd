@@ -54,7 +54,7 @@ func check_active_export(video, label: String):
 	check(locked_fields(video.fields),label+": every setting, including Browse, is locked")
 	check(not video.close_button.visible and video.background_button.visible and not video.background_button.disabled,label+": only background dismiss action is visible")
 func check_idle_export(video, label: String):
-	check(video.output.editable and video.rate.editable and not video.range_choice.disabled and not video.quality.disabled and not video.inspection_sidecars.disabled and video.g4_quota.editable,label+": settings editable again")
+	check(video.output.editable and video.rate.editable and not video.range_choice.disabled and not video.quality.disabled and not video.inspection_sidecars.disabled,label+": settings editable again")
 	check(video.start.editable and video.end.editable and not video.width.editable and not video.height.editable and not video.fps.editable,label+": custom range and preset dimension/FPS policies restored")
 	check(video.close_button.visible and not video.background_button.visible,label+": dismiss restored, background hidden")
 func wait_video(video):
@@ -288,26 +288,22 @@ func run():
 	check(not video.visible and video.pid <= 0,"Idle Cancel closes without launching work")
 	video.open()
 	check_idle_export(video,"Before export")
-	# Presentation-state injection: selection-recipe preparation has no worker yet.
-	video.preparing = true; video._sync_action_buttons()
-	check_active_export(video,"Preparation")
-	var preparing_timeline = video.timeline
+	# A launched worker keeps its draft when the dialog is reopened.
+	video.pid = preload("res://video/test_worker_process.gd").start(); video._sync_action_buttons()
+	check_active_export(video,"Launched worker")
+	var active_timeline = video.timeline
 	video.open()
-	check(video.timeline == preparing_timeline and video.start_button.text == "Cancel export" and not video.start_button.disabled and not video.background_button.disabled,"Preparation preserves draft and exposes background and cooperative cancellation")
-	video.start_button.pressed.emit()
-	check(video.cancel_confirmation.visible and not video.preparation_cancelled,"Preparation action confirms before background cancellation")
-	video.cancel_confirmation.confirmed.emit()
-	check(video.preparation_cancelled and video.job_status.stage == "cancelling","Confirmed preparation requests background cancellation")
-	video.preparing = false; video._sync_action_buttons()
-	check_idle_export(video,"Cancelled preparation")
+	check(video.timeline == active_timeline and not video.background_button.disabled,"Active worker preserves draft and exposes background action")
+	preload("res://video/test_worker_process.gd").stop(video); video._sync_action_buttons()
+	check_idle_export(video,"Worker finished")
 	var resolution := setting_choice(video,"Resolution")
 	var frame_rate := setting_choice(video,"Frame rate")
 	resolution.select(3);resolution.item_selected.emit(3)
 	frame_rate.select(3);frame_rate.item_selected.emit(3)
 	video.range_choice.select(0);video.update_range()
-	video.preparing = true;video._sync_action_buttons()
+	video.pid = preload("res://video/test_worker_process.gd").start();video._sync_action_buttons()
 	check_active_export(video,"Custom resolution/FPS preparation")
-	video.preparing = false;video._sync_action_buttons()
+	preload("res://video/test_worker_process.gd").stop(video);video._sync_action_buttons()
 	check(video.width.editable and video.height.editable and video.fps.editable and not video.start.editable and not video.end.editable,"Custom dimensions/FPS and non-custom range restore their distinct idle policies")
 	resolution.select(0);resolution.item_selected.emit(0)
 	frame_rate.select(1);frame_rate.item_selected.emit(1)
@@ -425,12 +421,12 @@ func run():
 		video.job_status.stage = terminal_stage;video.request_cancel_export()
 		check(not video.cancel_confirmation.visible,"Terminal job never prompts: "+terminal_stage)
 	# Simulate completion publication while the prompt is open, before process cleanup.
-	video.preparing = true;video.job_status.stage = "preparing";video.request_cancel_export()
-	check(video.cancel_confirmation.visible,"Prompt opens for active preparation")
+	video.pid = preload("res://video/test_worker_process.gd").start();video.job_status.stage = "starting";video.request_cancel_export()
+	check(video.cancel_confirmation.visible,"Prompt opens for active worker")
 	video.publish_job("complete","Finished while confirmation was open")
 	video.cancel_confirmation.confirmed.emit()
 	check(not video.cancel_confirmation.visible and video.job_status.stage == "complete","Completion dismisses stale confirmation and Yes is inert")
-	video.preparing = false
+	preload("res://video/test_worker_process.gd").stop(video)
 	# Parent close requests cancellation through the same existing _exit_tree path.
 	video = configure_video(viewer,"parent-close",config.ffmpeg,6); video.start_export()
 	var parent_directory: String = video.active_directory

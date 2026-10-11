@@ -109,18 +109,18 @@ func run() -> void:
 		view.scene_layers.error = "Independent earlier scene diagnostic"; ui.refresh()
 		var video = view.video_dialog
 		var old_job: Dictionary = video.job_status.duplicate(true)
-		video.job_status = {"stage":"preparing","detail":"Unrelated video preparation"}
-		video.preparing = true; ui.refresh()
+		video.job_status = {"stage":"starting","detail":"Unrelated video launch"}
+		video.pid = preload("res://video/test_worker_process.gd").start(); ui.refresh()
 		var active_count: int = ui.active_count
 		var job: Dictionary = video.job_status.duplicate(true)
 		view._open_capture(output.path_join("replacement.wvz")); await settle(); ui.refresh()
 		check(not ui.failures.has("Open file") and shell.error_details.is_empty(), prefix + "only superseded open notice clears")
 		check(ui.failures == {"Analysis":problem,"Video export":"Retained export failure","Scene":"Independent earlier scene diagnostic"}, prefix + "other owners retain diagnostics, including identical error text")
 		check(ui.badge.label.text == "Ready   •   Failed — details" and icon_matches(ui, "error"), prefix + "unrelated failure still owns current error badge")
-		check(video.preparing and video.job_status == job and ui.active_count == active_count and ui.job_rows["Video export"].active, prefix + "published active job and Jobs count remain intact")
+		check((video.pid > 0) and video.job_status == job and ui.active_count == active_count and ui.job_rows["Video export"].active, prefix + "published active job and Jobs count remain intact")
 		ui.show_status()
 		check(not shell.detail_text.text.contains("Open file — Failed") and shell.detail_text.text.contains("Independent earlier scene diagnostic") and shell.detail_failure_action.visible, prefix + "details retain only other owners")
-		shell.details.hide(); video.preparing = false; video.job_status = old_job
+		shell.details.hide(); preload("res://video/test_worker_process.gd").stop(video); video.job_status = old_job
 		ui.acknowledge(); ui.refresh()
 		check(ui.failures.is_empty() and icon_matches(ui, "success"), prefix + "existing acknowledgement still works")
 		view.scene_layers.error = problem; ui.refresh()

@@ -2,7 +2,9 @@
 
 These private file/message formats implement selections, source-native numerical
 jobs, diagnostics/comparisons, space-time plots, durable numerical export,
-inspection v3 and selection-aware PNG/video, including matched rendering.
+inspection v3, scientific PNG bundles and explicitly requested Matched Views.
+File → Export → Video uses the independent visual version-1 job schema, even
+when selections exist; see [video export](VIDEO_EXPORT.md).
 They carry no executable expressions or service endpoint. Governing behavioral
 semantics are in [the scientific contract](SCIENTIFIC_ANALYSIS.md).
 The current implementation lives in `wavez_export/analysis/`, `viewer/analysis/`

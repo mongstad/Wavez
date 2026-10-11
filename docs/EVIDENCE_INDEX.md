@@ -1,5 +1,10 @@
 # Retained evidence
 
+Issue #340's [video/scientific workflow separation review](evidence/issue-340/README.md)
+records source/release MP4 matrices on both renderers with Python blocked during
+video, native visual markers, explicit optional records, independent scientific
+workflows, Close File comparisons, and reproduced accepted-main limitations.
+
 Issue #95's [Getting Started review](evidence/issue-95/README.md) records four
 runnable examples, strict source/identity/integrity checks, both source/release
 renderers and standalone launch with the checkout, external engine and Python

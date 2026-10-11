@@ -59,10 +59,6 @@ var active_job_path := ""
 var poll := 0.0
 var opened_current := 0.0
 var ffmpeg := ""
-var g4_quota: SpinBox
-var preparing := false
-var active_selection_aware := false
-var preparation_cancelled := false
 var last_progress: Dictionary = {}
 var launch_ticks := 0
 var progress_ticks := 0
@@ -142,8 +138,6 @@ func _ready() -> void:
 	trails = check("Trails", "Include recorded history", presentation_fields)
 	trails.tooltip_text = "Scientific rendering suppresses trails, matching the interactive viewer."
 	quality = choice("H.264 quality", ["High • CRF 18", "Balanced • CRF 21", "Compact • CRF 25"], output_fields)
-	g4_quota = number("G4 output quota • MiB",1024,1,65536,1, output_fields)
-	g4_quota.tooltip_text = "Selection-aware jobs reserve a finite total output ceiling, including PNGs, sidecars, recipe assets and encoding."
 	var label := Label.new(); label.text = "Output MP4"; output_fields.add_child(label)
 	var row := HBoxContainer.new(); output_fields.add_child(row)
 	output = LineEdit.new(); output.placeholder_text = "Choose output .mp4 path"; output.size_flags_horizontal = Control.SIZE_EXPAND_FILL; row.add_child(output)
@@ -155,7 +149,6 @@ func _ready() -> void:
 	inspection_advanced.configure(&"video.inspection", "Advanced", advanced_rows)
 	inspection_advanced.set_expanded(false)
 	inspection_sidecars = check("Inspection records", "Save per-frame inspection JSON", advanced_rows)
-	inspection_sidecars.tooltip_text = "Optional for ordinary exports. Selection-aware exports always save per-frame inspection records as provenance."
 	save_dialog = FileDialog.new()
 	save_dialog.file_mode = FileDialog.FILE_MODE_SAVE_FILE
 	save_dialog.access = FileDialog.ACCESS_FILESYSTEM
@@ -185,11 +178,11 @@ func _ready() -> void:
 	var buttons := HBoxContainer.new(); buttons.alignment = BoxContainer.ALIGNMENT_END; box.add_child(buttons)
 	start_button = Button.new(); start_button.theme_type_variation = "PrimaryButton"; buttons.add_child(start_button)
 	start_button.pressed.connect(func():
-		if pid > 0 or preparing: request_cancel_export()
+		if pid > 0: request_cancel_export()
 		else: start_export())
 	background_button = Button.new(); background_button.text = "Run in background"; background_button.theme_type_variation = "SecondaryButton"; buttons.add_child(background_button)
 	background_button.pressed.connect(func():
-		if pid > 0 or preparing: hide())
+		if pid > 0: hide())
 	close_button = Button.new(); close_button.text = "Cancel"; close_button.theme_type_variation = "SecondaryButton"; buttons.add_child(close_button)
 	close_button.pressed.connect(hide)
 	# The mutually exclusive secondary actions share the same width/position.
@@ -227,7 +220,7 @@ func _ready() -> void:
 	for spin in [width, height, fps, rate]: spin.value_changed.connect(func(_v: float): update_estimate())
 
 func browse_output() -> void:
-	if pid > 0 or preparing or native_save_pending: return
+	if pid > 0 or native_save_pending: return
 	var directory: String = output.text.get_base_dir() if output.text.is_absolute_path() else viewer.file_locations.settings.video_dir
 	if not directory.is_empty() and DirAccess.dir_exists_absolute(directory): save_dialog.current_dir = directory
 	var filename := output.text.get_file()
@@ -259,7 +252,7 @@ func _native_output_selected(selected: bool, paths: PackedStringArray, _filter: 
 		save_dialog.canceled.emit()
 
 func _accept_output_path(path: String) -> void:
-	if pid > 0 or preparing: return
+	if pid > 0: return
 	# Native backends may return the typed name without its filtered extension.
 	# Never turn a directory (including a trailing slash) into an output file.
 	if not path.is_absolute_path() or path.get_file().is_empty() or DirAccess.dir_exists_absolute(path): return
@@ -327,10 +320,9 @@ func open() -> void:
 		surface.add_theme_stylebox_override("panel",viewer.shell.style_slice.theme.flat_box(&"surface.1",0,0,0))
 		header_close.icon = viewer.shell.style_slice.theme.chrome_icon("close")
 		cancel_confirmation.theme = theme
-	_sync_inspection_advanced()
 	var available: Vector2 = viewer.get_viewport().get_visible_rect().size - Vector2(32,32)
 	popup_centered(Vector2i(Vector2(700,650).min(available)))
-	if pid > 0 or preparing:
+	if pid > 0:
 		_sync_action_buttons(); return
 	timeline = Timeline.new()
 	if not timeline.build(viewer):
@@ -414,6 +406,7 @@ func configured_job() -> Dictionary:
 		job.state.environment.background_mode = Environment.BG_COLOR if clean else Environment.BG_SKY
 	job.state.overlay_visible = overlays.button_pressed
 	job.state.trails_enabled = trails.button_pressed
+	job.presentation_markers = preload("res://video/presentation_markers.gd").snapshot(viewer)
 	return job
 
 func update_estimate() -> void:
@@ -426,7 +419,7 @@ func update_estimate() -> void:
 	update_time_readout(start_clock, start, start_time)
 	update_time_readout(end_clock, end, end_time)
 	precise_range.text = "Exact range: %s → %s" % [Clock.format_time(start_time - start.origin, true), Clock.format_time(end_time - end.origin, true)]
-	precise_range.visible = job_status.is_empty() and pid <= 0 and not preparing and (start.projection(start_time) != start_time - start.origin or end.projection(end_time) != end_time - end.origin)
+	precise_range.visible = job_status.is_empty() and pid <= 0 and (start.projection(start_time) != start_time - start.origin or end.projection(end_time) != end_time - end.origin)
 	if end_time < start_time:
 		estimate.text = "End time must be at or after start time."
 		return
@@ -436,7 +429,7 @@ func update_estimate() -> void:
 	estimate.tooltip_text = "Video duration: %s seconds at %s×. Export processing time is reported separately in job status." % [FloatText.format_value(count/fps.value), FloatText.format_value(rate.value)]
 
 func start_export() -> void:
-	if pid > 0 or preparing or timeline == null: return
+	if pid > 0 or timeline == null: return
 	start.commit_edit(); end.commit_edit()
 	var availability: Dictionary = viewer.file_locations.ffmpeg_status()
 	ffmpeg = str(availability.path)
@@ -449,19 +442,12 @@ func start_export() -> void:
 		if not directory_error.is_empty():
 			message.text = "Video export destination is unavailable. Choose another location: " + directory_error
 			return
-	var with_selections := _selection_aware()
-	active_selection_aware = with_selections
-	if with_selections:
-		var recipe := preload("res://analysis/inspection_v3.gd").scene_snapshot(viewer.selection_controller.temporal)
-		if recipe.is_empty():message.text = "Bind the selection source before export.";return
-		job.source = preload("res://analysis/inspection_v3.gd").unpack(recipe.payload).base.source
-	else:
-		var identity_began := Time.get_ticks_usec()
-		job.source = preload("res://video/source_identity.gd").capture(viewer.generic_reader)
-		job.source_identity_ms = (Time.get_ticks_usec()-identity_began)/1000.0
-		if job.source.is_empty():
-			message.text = "Cannot bind export to an unchanged local source. Reopen the capture; reliable high-resolution source stamps are required."
-			return
+	var identity_began := Time.get_ticks_usec()
+	job.source = preload("res://video/source_identity.gd").capture(viewer.generic_reader)
+	job.source_identity_ms = (Time.get_ticks_usec()-identity_began)/1000.0
+	if job.source.is_empty():
+		message.text = "Cannot bind export to an unchanged local source. Reopen the capture; reliable high-resolution source stamps are required."
+		return
 	var invalid := Job.validate(job)
 	if invalid.is_empty() and (job.start_time < timeline.times[0] or job.end_time > timeline.times[-1]): invalid = "Range must be within the capture's timestamps."
 	if not invalid.is_empty():
@@ -478,26 +464,6 @@ func start_export() -> void:
 		message.text = "Cannot create temporary export directory."
 		publish_job("failed", message.text)
 		return
-	if with_selections:
-		preparing = true
-		preparation_cancelled = false
-		publish_job("preparing", "Verifying the pinned selection recipe")
-		var durable = viewer.selection_controller.temporal.durable
-		durable.save_to(active_directory.path_join("recipe.inspection"),true,int(g4_quota.value)*1048576)
-		message.text = "Verifying the pinned selection recipe before launching the renderer…"
-		var began := Time.get_ticks_msec()
-		while viewer.selection_controller.jobs.busy() and not preparation_cancelled and Time.get_ticks_msec()-began < 150000:await get_tree().create_timer(.02).timeout
-		if viewer.selection_controller.jobs.busy():viewer.selection_controller.jobs.cancel_background()
-		preparing = false
-		if preparation_cancelled:publish_job("cancelled","Selection recipe preparation cancelled.");return
-		if not durable.last_recipe.has("path"):
-			message.text = "Selection recipe preparation failed: "+durable.status.text
-			publish_job("failed", message.text);return
-		job.version = 2;job.inspection_sidecars = true;job.inspection_path = durable.last_recipe.path;job.inspection_sha256 = durable.last_recipe.sha256;job.opened_paths = durable.opened_paths.duplicate();job.output_quota_bytes = str(int(g4_quota.value)*1048576)
-		job.exact_state = preload("res://analysis/inspection_v3.gd").pack(job.state)
-		job.exact_timing = preload("res://analysis/inspection_v3.gd").pack({"start_time":job.start_time,"end_time":job.end_time,"fps":job.fps,"playback_rate":job.playback_rate})
-		invalid = Job.validate(job)
-		if not invalid.is_empty():message.text = invalid;publish_job("failed", message.text);return
 	if Job.write_json(active_job_path, job) != OK:
 		message.text = "Cannot write render job."
 		publish_job("failed", message.text)
@@ -522,7 +488,7 @@ func start_export() -> void:
 	publish_job("starting", message.text)
 
 func _sync_action_buttons() -> void:
-	var active := pid > 0 or preparing
+	var active := pid > 0
 	start_button.text = "Cancel export" if active else "Start Export"
 	start_button.theme_type_variation = "DestructiveButton" if active else "PrimaryButton"
 	start_button.disabled = not can_cancel_export() if active else not can_start
@@ -598,17 +564,10 @@ func _update_status_summary() -> void:
 	var text := status_summary()
 	if message.text != text: message.text = text
 
-func _selection_aware() -> bool:
-	return viewer.selection_controller != null and not viewer.selection_controller.state.definitions.is_empty()
-
-func _sync_inspection_advanced() -> void:
-	if inspection_advanced != null:
-		inspection_advanced.visible = not (active_selection_aware if pid > 0 or preparing else _selection_aware())
-
 # User actions share this gate. Shutdown keeps using the cooperative request below.
 func can_cancel_export() -> bool:
 	if job_status.get("stage","") in ProgressDetails.TERMINAL or job_status.get("stage") == "cancelling":return false
-	return preparing or (pid > 0 and OS.is_process_running(pid))
+	return pid > 0 and OS.is_process_running(pid)
 
 func request_cancel_export() -> void:
 	if not can_cancel_export() or cancel_confirmation.visible:return
@@ -624,11 +583,6 @@ func _confirm_cancel_export() -> void:
 	if matches and can_cancel_export():cancel_export()
 
 func cancel_export() -> void:
-	if preparing:
-		preparation_cancelled = true
-		viewer.selection_controller.jobs.cancel_background()
-		publish_job("cancelling","Cancelling selection recipe preparation…")
-		return
 	if pid <= 0: return
 	var f := FileAccess.open(active_directory.path_join("cancel"), FileAccess.WRITE)
 	if f != null:
@@ -640,7 +594,6 @@ func cancel_export() -> void:
 		publish_job("failed", message.text)
 
 func _process(delta: float) -> void:
-	if visible: _sync_inspection_advanced()
 	if pid <= 0: return
 	poll += delta
 	if poll < .2: return
@@ -665,4 +618,4 @@ func _process(delta: float) -> void:
 
 func _exit_tree() -> void:
 	# Closing the parent viewer requests a graceful worker/encoder shutdown.
-	if pid > 0 or preparing: cancel_export()
+	if pid > 0: cancel_export()

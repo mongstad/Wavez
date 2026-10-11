@@ -65,7 +65,6 @@ func run():
 		check(dialog.output.text==expected,"Directory, filename and extension round trip "+str(i))
 		dialog.start_button.pressed.emit()
 		var deadline:=Time.get_ticks_msec()+60000
-		while dialog.preparing and Time.get_ticks_msec()<deadline:await create_timer(.01).timeout
 		check(dialog.pid>0,"Start Export launches immediately "+str(i))
 		while dialog.pid>0 and Time.get_ticks_msec()<deadline:await create_timer(.01).timeout
 		check(dialog.job_status.stage=="complete" and FileAccess.file_exists(expected),"Real short export completes "+str(i))

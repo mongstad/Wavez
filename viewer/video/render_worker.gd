@@ -21,6 +21,7 @@ var encoder_log: FileAccess
 var encoder_error := ""
 var inspection_source: Dictionary = {}
 var selection_recipe: Dictionary = {}
+var presentation_markers
 var committed_output_bytes := 0
 var initial_output_files := 0
 var source_binding: Dictionary = {}
@@ -171,7 +172,13 @@ func _run() -> void:
 	if job.version == 2:
 		if not await load_selections():finish("failed","Selection recipe could not be verified/restored: "+viewer.selection_controller.temporal.durable.status.text,1);return
 		Job.apply(viewer,merged)
-	elif job.get("inspection_sidecars",false): inspection_source = source_binding.duplicate(true)
+	else:
+		# File/Export/Video never restores selection definitions or analysis state.
+		viewer.selection_controller.set_process(false)
+		presentation_markers = preload("res://video/presentation_markers.gd").new()
+		viewer.add_child(presentation_markers)
+		presentation_markers.setup(job.get("presentation_markers",[]))
+		if job.get("inspection_sidecars",false): inspection_source = source_binding.duplicate(true)
 	# Rendering state is frozen; only deterministic sample and camera functions advance.
 	viewer.playing = false
 	viewer.orbit_enabled = false
@@ -212,6 +219,7 @@ func _run() -> void:
 		viewer.camera.transform = Timeline.camera_at(job.state, float(n)/job.fps, job.get("camera_mode", "locked") == "orbit", float(job.get("orbit_speed", 0.08)))
 		if job.version == 2 and not await viewer.selection_controller.await_committed_overlay(150000,cancelled):
 			finish("cancelled" if cancelled() else "failed","Frame selection resolution cancelled or unavailable; no stale overlay frame was published.",2 if cancelled() else 1);return
+		if presentation_markers != null: presentation_markers.update(viewer)
 		viewer.shell.refresh_export()
 		# Yield for layout, process events and cancellation without depending on a
 		# visible OS window. Minimized/hidden windows may suppress the normal loop.
@@ -253,6 +261,8 @@ func _run() -> void:
 			if job.version == 2:committed_output_bytes += FileAccess.open(directory.path_join("inspection-%08d.json" % n),FileAccess.READ).get_length()
 		var timing_record := {"n":n, "capture_time":time, "video_time":float(n)/job.fps, "a":point.a, "b":point.b, "alpha":point.alpha, "width":img.get_width(), "height":img.get_height(), "camera_origin":Job.vec(viewer.camera.position), "color_channel":viewer.color_channel, "colormap":viewer.colormap_name, "clean_view":viewer.clean_view, "trails":viewer.trails_enabled, "trail_instances":viewer.trail_mms[0].instance_count, "overlays":viewer.overlay_visible, "sample":viewer.committed_sample, "normalization":{"mode":viewer._effective_normalization(),"bounds":[viewer.range_min,viewer.range_max] if is_finite(viewer.range_min) and is_finite(viewer.range_max) else null}, "guides":viewer.guide_visibility}
 		if job.has("comparison"):timing_record.comparison = comparison_frame(n,time)
+		if presentation_markers != null:
+			timing_record.presentation_markers = presentation_markers.positions.map(func(v): return Job.vec(v) if v is Vector3 else null)
 		trace.store_line(JSON.stringify(timing_record))
 		trace.flush()
 		completed = n + 1

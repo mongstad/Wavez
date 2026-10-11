@@ -1,0 +1,16 @@
+{
+	"activity": {
+		"counters": {},
+		"stages": {}
+	},
+	"checks": 322,
+	"failures": [
+		"Opening Jobs focuses the first available action",
+		"Opening Jobs focuses the first available action"
+	],
+	"parent_directory": "/tmp/wavez-340-final-status/.wavez-export-1791704001-33554573",
+	"standalone": false,
+	"timings": {
+		"refresh_1000_ms": 68.053
+	}
+}

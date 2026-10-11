@@ -372,8 +372,6 @@ func _capture_close_problem() -> String:
 	# completion callbacks and pinned assets no longer depend on that session.
 	if inspection_busy or screenshot_pending or screenshot_saving:
 		return "An image capture is using this scene. Wait for it to finish, then choose Close File again."
-	if video_dialog != null and video_dialog.preparing:
-		return "Video export is preparing its selection recipe. Wait for preparation to finish, then choose Close File again."
 	if selection_controller != null:
 		var jobs = selection_controller.jobs
 		if jobs.busy() or not jobs.foreground_cancel_id.is_empty():

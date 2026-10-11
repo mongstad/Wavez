@@ -608,8 +608,9 @@ during a request fails; appends never extend a pinned job's interval.
 **Inspection version 3** stores selection/analysis-capable saved state independently
 of the WVZ1 capture version. Existing v1 particle and v2 scene inspections retain
 their supported field semantics, subject to the current WVZ1 source boundary.
-Selection-aware render jobs use version 2; ordinary version-1 jobs retain their
-current defaults and timing. Current source-kind identifiers and validation live
+Explicit Matched Views scientific render jobs use version 2. File → Export →
+Video always uses visual version-1 jobs, regardless of existing selections; it
+does not run scientific selection queries or require Python/NumPy. Current source-kind identifiers and validation live
 in [the inspection contract](../INSPECTION_STATE.md) and [schemas](ANALYSIS_SCHEMAS.md).
 
 The v3 envelope stores existing visual/sample/source state plus selection schema,
@@ -629,14 +630,16 @@ when incompatible; it may never be silently rebound to an appended bracket.
 Explicitly rebinding to a newer extent creates a new revision. Sources must have
 been explicitly opened/selected; recipe paths grant no read or execution permission.
 
-For PNG/video, pin definitions/revisions, time policy, source extent, overlay
+For scientific PNG bundles and explicitly requested Matched Views, pin definitions/revisions, time policy, source extent, overlay
 quality and complete result references. At each frame resolve the selection from
 that frame's source brackets, await its overlay data and any requested surface,
 then use the existing render completion barrier. Serialize the exact committed
 selection and source statuses with the frame. Never use whichever analysis reply
 arrives first. Hidden selections can have scientific results without forcing
 interactive hidden-particle display preparation. Plot panels are exported
-explicitly; ordinary scene video does not automatically start a full-run analysis.
+explicitly. Ordinary scene video carries only an already displayed bounded marker
+subset following native source display elements; it never evaluates membership,
+creates a portable recipe or starts Analysis. See [video](VIDEO_EXPORT.md).
 
 ## 9. Scientific acceptance and fixtures
 

@@ -1,9 +1,9 @@
-"""#93: production video dialog and real children in development and Linux release.
+"""#340 / #93: production video dialog and real children in development and Linux release.
 
 The instrumented release changes only the parent entry scene. Worker invocations
 use the unchanged Main.tscn. Staging is removed before running, cwd is unrelated,
 PYTHONPATH is empty, and PATH has no Godot editor. External dependencies remain
-Python/NumPy and FFmpeg. Generated WVZ1 inputs are hashed before and after.
+FFmpeg for video; Python/NumPy is used only to set up independent selections. Generated WVZ1 inputs are hashed before and after.
 """
 import argparse
 import hashlib
@@ -117,7 +117,13 @@ def main():
     cases = [
         ('particles-off', 'particles', {}), ('particles-on', 'particles', dict(overlays=True, orbit=True)),
         ('mixed-off', 'mixed', {}), ('mixed-on', 'mixed', dict(overlays=True)),
-        ('selection', 'particles', dict(selection=True, overlays=True)),
+        ('selection-particle', 'particles', dict(selection='particle', overlays=True)),
+        ('selection-hidden', 'particles', dict(selection='particle', overlays=True, hidden=True)),
+        ('selection-mesh', 'mixed', dict(selection='mesh', overlays=True)),
+        ('selection-field', 'mixed', dict(selection='field', overlays=True)),
+        ('selection-all', 'mixed', dict(selection='all', overlays=True)),
+        ('selection-optional', 'particles', dict(selection='particle', overlays=True, sidecars=True)),
+        ('ordinary-optional', 'particles', dict(overlays=True, sidecars=True)),
         ('cancel-rendering', 'particles', dict(cancel='rendering', expected='cancelled')),
         ('cancel-encoding', 'particles', dict(cancel='encoding', expected='cancelled', ffmpeg=str(slow))),
         ('failed-encoder', 'particles', dict(expected='failed', ffmpeg=str(bad))),
@@ -132,7 +138,12 @@ def main():
     for name, kind, changes in cases:
         if args.cases and name not in args.cases: continue
         folder = output / name; folder.mkdir()
-        config = dict(source=str(inputs / (kind + '.wvz')), packaged=args.export, ffmpeg=ffmpeg, **{})
+        blockers = folder / 'blocked-runtime'; blockers.mkdir()
+        python_calls = folder / 'unexpected-python.txt'
+        blocker = blockers / 'python3'
+        blocker.write_text('#!/bin/sh\necho attempted >> "' + str(python_calls) + '"\nexit 87\n'); blocker.chmod(0o755)
+        config = dict(source=str(inputs / (kind + '.wvz')), packaged=args.export, ffmpeg=ffmpeg,
+                      video_path=str(blockers)+':/usr/bin:/bin')
         config.update(changes); (folder / 'config.json').write_text(json.dumps(config))
         command = [executable] + ([] if args.export else ['--path', str(ROOT / 'viewer'), '--script', 'video/test_packaged_export.gd'])
         command += ['--rendering-method', args.renderer, '--audio-driver', 'Dummy', '--resolution', '960x640', '--', str(folder)]
@@ -178,16 +189,30 @@ def main():
             probe = json.loads(subprocess.check_output(['ffprobe', '-v', 'error', '-select_streams', 'v:0', '-show_entries', 'stream=codec_name,width,height,nb_frames,avg_frame_rate', '-of', 'json', str(folder / 'result.mp4')]))['streams'][0]
             check((probe['codec_name'], probe['width'], probe['height'], int(probe['nb_frames']), probe['avg_frame_rate']) == ('h264', 320, 180, 2, '4/1'), name + ': ffprobe verifies H.264, resolution, FPS and two frames')
             sidecars = sorted(Path(report['directory']).glob('inspection-*.json'))
-            check(len(sidecars) == 2, name + ': required inspection sidecars retained')
-            if name == 'selection':
-                records = [json.loads(p.read_text()) for p in sidecars]
-                check(all(r.get('kind') == 'wavez-inspection' and r.get('version') == 3 for r in records), name + ': portable version-3 inspection records')
+            check(len(sidecars) == (2 if changes.get('sidecars',False) else 0), name + ': inspection records only when explicitly requested')
+            check(all(json.loads(p.read_text()).get('version') == 2 and not json.loads(p.read_text()).get('selections') for p in sidecars), name + ': optional visual records contain no scientific selection results')
+            timing = [json.loads(line) for line in (Path(report['directory'])/'timing.jsonl').read_text().splitlines()]
+            markers = [row['presentation_markers'] for row in timing]
+            if changes.get('selection') in ('particle','all') and not changes.get('hidden'):
+                check(all(any(p is not None and abs(p[0]-(-1+row['capture_time']))<1e-6 and p[1:]==[0,0] for p in row['presentation_markers']) for row in timing), name + ': particle marker follows displayed ID across sample brackets')
+            if changes.get('selection') in ('mesh','all'):
+                check(all(any(p is not None and abs(p[2]-row['capture_time']/4)<1e-6 and p[:2]==[1,-1] for p in row['presentation_markers']) for row in timing), name + ': mesh marker follows displayed source vertex')
+            if changes.get('selection') in ('field','all'):
+                check(any(p is not None for p in markers[0]) and (markers[1][-1] is None), name + ': native grid address expires outside its source sample')
+        check(not python_calls.exists(), name + ': unusable Python is never invoked by video')
         print(name + ': ' + ('PASS' if all(c['ok'] for c in checks) else 'see failures'), flush=True)
     check(hashes == {p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in inputs.glob('*.wvz')}, 'All synthetic source bytes unchanged')
     for kind in ['particles', 'mixed']:
         off, on = output / (kind + '-off/result.mp4'), output / (kind + '-on/result.mp4')
         if off.exists() and on.exists():
             check(decoded(off) != decoded(on), kind + ': enabled overlays/orbit affect exported pixels')
+    ordinary = output / 'ordinary-optional/result.mp4'
+    selected = output / 'selection-optional/result.mp4'
+    hidden = output / 'selection-hidden/result.mp4'
+    if ordinary.exists() and selected.exists():
+        check(decoded(ordinary) != decoded(selected), 'Visible carried markers change exported pixels')
+    if ordinary.exists() and hidden.exists():
+        check(decoded(ordinary) == decoded(hidden), 'Invisible selection definitions do not change video pixels')
     if args.compare_source:
         for report in reports:
             name = report['name']; movie = output / name / 'result.mp4'

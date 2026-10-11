@@ -102,7 +102,9 @@ func analysis_export() -> void:
 func video_export(label: String, selected: bool, close: bool) -> void:
 	view._open_capture(output.path_join("mixed.wvz")); await settle()
 	view._reset_camera(); view.orbit_enabled = false; view.playing = false
-	if selected and not await selection(): return
+	if selected:
+		if not await selection(): return
+		check(await view.selection_controller.await_committed_overlay(), label+": highlights are visibly committed before the snapshot")
 	var video = view.video_dialog
 	video.open(); video.range_choice.select(2); video.update_range()
 	video.set_range_times(0,1); video.rate.value = 1; video.fps.value = 6
@@ -111,9 +113,7 @@ func video_export(label: String, selected: bool, close: bool) -> void:
 	video.inspection_sidecars.button_pressed = true
 	video.output.text = output.path_join(label+".mp4")
 	video.start_export()
-	if video.preparing: refusal(label+": video recipe preparation")
 	var deadline := Time.get_ticks_msec()+30000
-	while video.preparing and Time.get_ticks_msec() < deadline: await get_tree().create_timer(.02).timeout
 	check(video.pid > 0, label+": independent renderer launched")
 	if video.pid <= 0: return
 	video.hide()
@@ -166,7 +166,6 @@ func run() -> void:
 	view._open_capture(output.path_join("mixed.wvz")); await settle()
 	view.inspection_busy = true; refusal("Image inspection"); view.inspection_busy = false
 	view.screenshot_pending = true; refusal("Pending screenshot"); view.screenshot_pending = false
-	view.video_dialog.preparing = true; refusal("Video recipe preparation"); view.video_dialog.preparing = false
 	view.selection_controller.jobs.foreground_cancel_id = "pending-ack"; refusal("Selection cancellation acknowledgement"); view.selection_controller.jobs.foreground_cancel_id = ""
 	view.selection_controller.temporal.matched.preparing = true; refusal("Matched preparation"); view.selection_controller.temporal.matched.preparing = false
 	view.selection_controller.temporal.matched.pid = 123; refusal("Matched render"); view.selection_controller.temporal.matched.pid = -1

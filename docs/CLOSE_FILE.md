@@ -17,15 +17,15 @@ These allocations become available for reuse/reclamation. The operating system
 and graphics driver may retain memory; no immediate RSS or VRAM reduction is
 guaranteed. Capture and exported scientific bytes are unchanged.
 
-A launched ordinary or selection-aware video export continues through Close File,
+A launched video export continues through Close File,
 including when backgrounded. It owns its serialized camera/scene snapshot, pinned
-recipe/assets and independent capture reader. Use **Jobs → Video export → Open…**
+presentation markers and independent capture reader. Use **Jobs → Video export → Open…**
 or **Details…** to follow it after closing or opening another capture. Its own
 Cancel export action remains available. Closing does not send cancellation,
 replace job files or run application shutdown. An old idle video draft cannot
 start against an unloaded capture.
 
-Image capture, video selection-recipe preparation, active selection/analysis
+Image capture and active selection/analysis
 jobs (including numerical exports and pending cancellation acknowledgements),
 and matched-view preparation/rendering retain their capture session. Close File
 refuses the close and explains the dependency in **Close File unavailable**.
@@ -51,7 +51,7 @@ behavior. Close File never exits the application.
 4. Start a numerical export or a selection/analysis job, then choose Close File
    immediately. Confirm the dependency explanation and unchanged scene/job.
    Let it finish, verify output, and retry Close File successfully. Repeat during
-   selection-aware video recipe preparation and matched-view work.
+   matched-view work.
 5. Watch resource monitoring across repeated open/close cycles. Confirm capture
    allocations become reclaimable; do not require an exact immediate RSS drop.
 6. Start a video after reopening, choose Exit, and cancel the exit confirmation.

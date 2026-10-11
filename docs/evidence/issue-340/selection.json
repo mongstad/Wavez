@@ -1,0 +1,30 @@
+{
+  "command": [
+    "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+    "--path",
+    "/home/Nozba/Codex/Wavez/Wavez/viewer",
+    "--audio-driver",
+    "Dummy",
+    "--log-file",
+    "/tmp/wavez-340-selection/godot.log",
+    "--headless",
+    "--script",
+    "selection/test_selection.gd",
+    "--",
+    "--selection-fixture=/tmp/wavez-340-selection"
+  ],
+  "exit_code": 0,
+  "timed_out": false,
+  "seconds": 2.3901141950000238,
+  "source_unchanged": true,
+  "source_sha256": "3f836b84e9d4e3a3b99af23dc0c23cba7f1a900da24cf467cfbe01a77fe8b835",
+  "category": "headless integration",
+  "result": {
+    "backend": "forward_plus",
+    "checks": 31,
+    "drawn": 5,
+    "failures": [],
+    "gpu_bytes": 12928,
+    "status": "Scene or camera changed during the gesture; repeat the pick on the current view."
+  }
+}

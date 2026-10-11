@@ -1,5 +1,6 @@
 extends RefCounted
-# Versioned, JSON-only render jobs. Shared by UI, worker and regression tests.
+# JSON-only render jobs. File/Export/Video always uses version 1.
+# Version 2 is retained for deliberately requested scientific Matched Views.
 const VERSION := 1
 const State = preload("res://scene/visual_state.gd")
 const ExactState = preload("res://analysis/inspection_v3.gd")
@@ -16,6 +17,9 @@ static func sample_time(job: Dictionary, n: int) -> float:
 	return float(job.start_time) + float(n) / float(job.fps) * float(job.playback_rate)
 
 static func validate(job: Dictionary) -> String:
+	if job.has("presentation_markers"):
+		var problem := preload("res://video/presentation_markers.gd").validate(job.presentation_markers)
+		if not problem.is_empty(): return problem
 	if job.has("presentation"):
 		var presentation = job.presentation
 		if not presentation is Dictionary: return "Invalid export presentation."

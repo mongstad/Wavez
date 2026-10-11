@@ -58,11 +58,17 @@ try Compatibility from a terminal:
 | Open and play existing captures in the Linux package | Executable + PCK, graphical desktop and graphics drivers |
 | Generate captures with Python | Python **3.10+**, `wavez-export` from this repository, **NumPy >=1.23** |
 | Write/read Zstandard-compressed captures in Python | Python 3.14's standard-library Zstandard, or the optional `zstd` extra on older Python |
-| Python analysis/source-selection workers in the viewer | External Python + NumPy, configured in **Edit → Preferences → File Locations** |
+| Scientific Selection/Analysis and explicit Matched Views | External `python3` on PATH with NumPy; first-party analysis code is in the package |
 | Extract an isosurface | The optional `analysis` extra: scikit-image **>=0.26,<0.27**, declared for Python **3.11+** |
-| Encode MP4 video | External **FFmpeg**, on PATH or configured in File Locations |
+| Encode MP4 video, with or without existing selections | External **FFmpeg**, on PATH or configured in File Locations; no Python/NumPy requirement |
 | Run the viewer from source | External **Godot 4.7.2** (the tested engine), source checkout and graphics drivers |
 | Build the Linux package | Python, Godot and matching Linux export templates; see [packaging](docs/PACKAGED_VIDEO_EXPORT.md#build-and-run) |
+
+Video export carries already visible selection markers as visual presentation;
+it does not run scientific membership queries. Optional per-frame visual inspection
+JSON is controlled only by **Output → Advanced**. Selection/Analysis, durable
+scientific inspection/results and explicitly requested Matched Views remain
+independent workflows requiring Python/NumPy. See [video export](docs/VIDEO_EXPORT.md).
 
 The four examples below use only the base Python package and NumPy. They use
 uncompressed, lossless output. No simulation framework, GPU Python library,

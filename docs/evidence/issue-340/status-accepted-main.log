@@ -1,0 +1,54 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 615.71.09 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 3070 Ti
+
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 615.71.09 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 3070 Ti
+
+WAVEZ export: Saved /tmp/wavez-340-status-baseline-imported/complete.mp4
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 615.71.09 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 3070 Ti
+
+WAVEZ export: Export cancelled before loading.
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 615.71.09 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 3070 Ti
+
+WAVEZ export: Saved /tmp/wavez-340-status-baseline-imported/second-success.mp4
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 615.71.09 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 3070 Ti
+
+WAVEZ export: Export cancelled. Completed PNG frames retained in /tmp/wavez-340-status-baseline-imported/.wavez-export-1791703886-22818915/frames
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 615.71.09 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 3070 Ti
+
+WAVEZ export: FFmpeg failed (exit 1), or produced no valid output. 
+PNGs and any partial MP4 retained in /tmp/wavez-340-status-baseline-imported/.wavez-export-1791703889-25487375
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+OpenGL API 3.3.0 NVIDIA 615.71.09 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 3070 Ti
+
+WAVEZ export: Encoding cancelled. PNGs and partial MP4 retained in /tmp/wavez-340-status-baseline-imported/.wavez-export-1791703891-28100849
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+STATUS: 324 checks, 2 failures
+OpenGL API 3.3.0 NVIDIA 615.71.09 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 3070 Ti
+
+WAVEZ export: Export cancelled before loading.
+ERROR: Opening Jobs focuses the first available action
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://ui/shell/test_viewer_status.gd:13)
+       [1] run (res://ui/shell/test_viewer_status.gd:253)
+       [2] settle (res://ui/shell/test_viewer_status.gd:16)
+ERROR: Opening Jobs focuses the first available action
+   at: push_error (core/variant/variant_utility.cpp:1023)
+   GDScript backtrace (most recent call first):
+       [0] check (res://ui/shell/test_viewer_status.gd:13)
+       [1] run (res://ui/shell/test_viewer_status.gd:253)
+       [2] settle (res://ui/shell/test_viewer_status.gd:16)
+ERROR: The process 151077 does not exist or is not a child of the calling process.
+   at: _check_pid_is_running (drivers/unix/os_unix.cpp:863)
+   GDScript backtrace (most recent call first):
+       [0] finish (res://video/render_worker.gd:65)
+       [1] encode (res://video/render_worker.gd:341)
+ERROR: The process 151077 does not exist or is not a child of the calling process.
+   at: _check_pid_is_running (drivers/unix/os_unix.cpp:863)
+   GDScript backtrace (most recent call first):
+       [0] _exit_tree (res://video/render_worker.gd:51)
