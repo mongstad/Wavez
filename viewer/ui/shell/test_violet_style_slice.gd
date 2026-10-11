@@ -44,7 +44,7 @@ func run() -> void:
 	viewer.tools_ui.close()
 	check(shell.transport.seek_dialog.theme == theme and shell.details.theme == theme and shell.about.theme == theme, "Representative popover and informational dialogs share the slice theme")
 	check(viewer.legend.theme == shell.theme, "Scientific legend retains accepted theme")
-	check(viewer.timeline.field_color == legacy.c(&"accent.primary") and viewer.timeline.scene_color == legacy.c(&"identity.teal"), "Readiness overlay keeps accepted blue/teal meaning")
+	check(viewer.timeline.scene_color == legacy.c(&"identity.teal"), "Readiness overlay keeps scene-ready teal")
 	for severity in ["success", "warning", "error", "info"]:
 		check(theme.c(StringName("state." + severity)) == legacy.c(StringName("state." + severity)), "Semantic " + severity + " unchanged")
 	for surface in [&"surface.1", &"surface.2", &"surface.3", &"surface.hover", &"selection.fill"]:

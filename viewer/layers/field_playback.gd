@@ -186,13 +186,20 @@ func _job(id: String, index: int, budget: int) -> Dictionary:
 	for array in entry.descriptor.get("arrays",[]):
 		if array.name == state.channel:size = int(array.shape[0])*int(array.shape[1])*int(array.shape[2])*4
 	return {"key":Grid.sample_key(obj,entry.sequence,state.channel,budget),"source_key":Grid.sample_key(obj,entry.sequence,"",budget),"scope":cache_scope,"id":id,"entry":entry.duplicate(true),"object":obj,"channel":state.channel,"budget":budget,"decoded_charge":int(entry.decoded),"preview_charge":mini(size,budget),"charge":int(entry.decoded)+mini(size,budget)+65536,"path":layers.reader.source_path,"stamp":layers.reader.source_stamp}
-func request(time: float, budget: int) -> Array:
+func readiness_scope(budget: int) -> String:
 	var scope := str(layers.reader.generation)+JSON.stringify(layers.reader.source_stamp)+str(budget)
-	var channels: Array = []
 	for id in layers.states:
 		if layers.views[id] is Grid:
-			scope += id+str(layers.states[id].visible);channels.append([id,layers.states[id].channel])
-	var signature := scope+JSON.stringify(channels)+str(scope_choice.selected)+JSON.stringify(prepared_range if scope_choice.selected != 0 else [])+":"+str(invalidation_serial)
+			scope += id+str(layers.states[id].visible)
+	return scope
+func readiness_signature(budget: int) -> String:
+	var channels: Array = []
+	for id in layers.states:
+		if layers.views[id] is Grid:channels.append([id,layers.states[id].channel])
+	return readiness_scope(budget)+JSON.stringify(channels)+str(scope_choice.selected)+JSON.stringify(prepared_range if scope_choice.selected != 0 else [])+":"+str(invalidation_serial)
+func request(time: float, budget: int) -> Array:
+	var scope := readiness_scope(budget)
+	var signature := readiness_signature(budget)
 	if token != signature:
 		# Retain a bounded full-session allocation only for channel changes in the
 		# same source/visibility/texture-budget scope. Acquisition still requires

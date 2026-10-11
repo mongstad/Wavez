@@ -1,0 +1,22 @@
+{
+  "version": {
+    "full": "v0.1.0.100",
+    "release": "v0.1.0",
+    "build": "100"
+  },
+  "godot": "4.7.2.stable.official.ed1daf0bf",
+  "renderer": {
+    "method": "forward_plus",
+    "driver": "vulkan",
+    "fallback_to_opengl3": false
+  },
+  "artifacts": {
+    "WAVEZ.x86_64": "d9f79ab89b5ae369aeed11c6052d402e8218cd503bf85b4a235f9c30c46a7c63",
+    "WAVEZ.pck": "a58a6b967a4c17076e3cfa0a887105411ae5287f19a6223b5c0d9aa7f20caab2"
+  },
+  "external_dependencies": [
+    "Vulkan-capable GPU/driver and graphical Linux desktop",
+    "Python 3.10+ and NumPy for independent Selection/Analysis and Matched Views",
+    "FFmpeg for MP4 encoding"
+  ]
+}

@@ -1,5 +1,13 @@
 # Current status
 
+Issue #378 proposes candidate **v0.1.0.100**, based on accepted **v0.1.0.99** /
+owner-merged PR #379 (`b0c0aed6099e091012fcf141846cf2e07f93a274`). The prepared
+timeline paints only full required scene readiness, validates current resident
+keys and marks very short intervals with a detached presence diamond. Preparation,
+RAM budgets, workers and transport gates remain unchanged. Owner review is pending.
+See [timeline contract](PREPARED_TIMELINE.md) and [review evidence](evidence/issue-378/README.md).
+Earlier review-time descriptions and evidence below are preserved as written.
+
 Issue #374 proposes candidate **v0.1.0.99**, based on accepted **v0.1.0.98** /
 owner-merged PR #376 (`4737019f4ff4050774a8397a450d1ea2e79d2f15`). Forward+ field
 slices use explicit eight-texel interpolation for finite neighborhoods. Any

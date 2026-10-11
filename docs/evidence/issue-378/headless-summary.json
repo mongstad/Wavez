@@ -1,0 +1,15 @@
+{
+  "checks": 77,
+  "failures": [],
+  "exit_code": 0,
+  "renderer": "headless",
+  "packaged": false,
+  "source_hashes": {
+    "particles.wvz": "a8153b37ba7cc17d401170413c120e7ac1fd10be058217cdb4c6d128efe6ad2b",
+    "fields.wvz": "196e279a2609773dc8b2f9b956fc6a36e2df91da3639fcba5b3ae7e137dcf745",
+    "meshes.wvz": "2ba30086640dfce38a76bf85bd0213181be195870c511ed449f09873d4dfdd7a",
+    "mixed.wvz": "2fbeef912f254682498950cb8ac10b8bbcdbc687259692aade701efaf0e803d5",
+    "static.wvz": "e730b5fc005013a903621c72b5a528f2c15b880cc1fd82795f4a5f7617220b96"
+  },
+  "sources_unchanged": true
+}

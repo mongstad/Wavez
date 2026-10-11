@@ -221,7 +221,7 @@ func refresh_requested(pending, clock, now_ms: int) -> void:
 func update_index_hint() -> void:
 	var index := int(viewer.timeline.value) if dragging_index else int(viewer.current_index)
 	var text := "Sample index %d / %d" % [index+1,viewer.frame_count] if viewer.frame_count > 0 else "Sample index — / —"
-	viewer.timeline.tooltip_text = "Drag to scrub · Double-click to seek\n"+text+"\nBuffered overlay: blue = selected fields prepared; teal = all visible layers prepared.\nRanges follow recorded source times on this sample-index axis. GPU staging may still briefly wait."
+	viewer.timeline.tooltip_text = "Drag to scrub · Double-click to seek\n"+text+"\nPrepared: teal = all required visible layers resident. A diamond above the track marks a very short interval; its width is not duration.\nRanges follow recorded source times on this sample-index axis. GPU staging may still briefly wait."
 	index_hint.text = text
 	index_hint.visible = dragging_index
 	if dragging_index:
