@@ -126,9 +126,8 @@ func refresh_job_details() -> void:
 
 func reopen_video() -> void:
 	var video = viewer.video_dialog
-	# Preserve preparation ownership; otherwise use the canonical open path so an
-	# idle draft follows the current capture. Retain terminal diagnostics separately.
-	if video.preparing: video.popup_centered(); return
+	# The canonical open path retains a launched job and follows the current
+	# capture for an idle draft. Retain terminal diagnostics separately.
 	video.open()
 	if video.pid <= 0 and not video.start_button.disabled and not video.job_status.is_empty(): video.message.text = video.status_summary()
 
@@ -263,7 +262,7 @@ func update_jobs() -> void:
 	var video = viewer.video_dialog
 	var state: Dictionary = video.job_status
 	var text: String = video.progress_details()
-	update_row("Video export",text,video.pid > 0 or video.preparing,video.can_cancel_export(), not state.is_empty() or viewer.generic_reader != null,video.active_job_path)
+	update_row("Video export",text,video.pid > 0,video.can_cancel_export(), not state.is_empty() or viewer.generic_reader != null,video.active_job_path)
 	if state.get("stage") in ["complete","frames_ready","failed","cancelled"]: job_rows["Video export"].active = false
 	var selections = viewer.selection_controller
 	var jobs = selections.jobs
@@ -272,7 +271,7 @@ func update_jobs() -> void:
 	update_row("Selections", "Resolving source data…" if jobs.pending else ("Cancelling…" if not jobs.foreground_cancel_id.is_empty() else selection_result), jobs.pending or not jobs.foreground_cancel_id.is_empty(),jobs.pending,true,jobs.current_id if jobs.pending else jobs.foreground_cancel_id)
 	var analysis_active: bool = jobs.background_pending or not jobs.background_cancel_id.is_empty()
 	var analysis_text: String = jobs.background_operation.replace("_"," ").capitalize()+"\n"+analysis_progress if jobs.background_pending else ("Cancelling…" if analysis_active else analysis_result)
-	update_row("Analysis",analysis_text+"\n"+jobs.directory,analysis_active and not video.preparing,jobs.background_pending,true,jobs.background_id if jobs.background_pending else jobs.background_cancel_id)
+	update_row("Analysis",analysis_text+"\n"+jobs.directory,analysis_active,jobs.background_pending,true,jobs.background_id if jobs.background_pending else jobs.background_cancel_id)
 	var matched = selections.temporal.matched
 	update_row("Matched views",matched.status.text,matched.pid > 0,matched.pid > 0 or matched.preparing,true,str(matched.prepared.get("path","")))
 	var layers = viewer.scene_layers
@@ -284,7 +283,7 @@ func update_jobs() -> void:
 	var caption := "Jobs (%d)" % active_count
 	if not failures.is_empty(): caption += " !"
 	if jobs_button.text != caption: jobs_button.text = caption
-	jobs_button.tooltip_text = "Reopen jobs, progress, cancellation and retained output details" + ("\nVideo export: "+str(state.get("stage","Preparing")) if video.pid > 0 or video.preparing else "")
+	jobs_button.tooltip_text = "Reopen jobs, progress, cancellation and retained output details" + ("\nVideo export: "+str(state.get("stage","Preparing")) if video.pid > 0 else "")
 
 func has_active_jobs() -> bool:
 	# Read the same live owners and active rows as Jobs, including cancellation ack.

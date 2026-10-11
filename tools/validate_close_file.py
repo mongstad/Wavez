@@ -80,24 +80,10 @@ def main():
             assert len(sidecars[0]) == len(sidecars[1]) and sidecars[0], sidecars
             for first, second in zip(*sidecars):
                 values = [json.loads(path.read_text()) for path in [first, second]]
-                if prefix == 'selected':
-                    # Each independently recreated cohort gets a fresh session
-                    # key. Compare all selectors, source clocks and render data
-                    # after replacing only those generated identity strings.
-                    def canonical(value):
-                        keys = {entry['key']:f'cohort-{i}' for i, entry in enumerate(value['payload']['selections']['definitions'])}
-                        def replace(item):
-                            if isinstance(item, dict):
-                                return {keys.get(k, k):replace(v) for k, v in item.items()}
-                            if isinstance(item, list):
-                                return [replace(v) for v in item]
-                            return keys.get(item, item) if isinstance(item, str) else item
-                        return replace(value)
-                    values = [canonical(value) for value in values]
                 assert values[0] == values[1], first.name
             assert (Path(entries[0]['directory']) / 'timing.jsonl').read_bytes() == (Path(entries[1]['directory']) / 'timing.jsonl').read_bytes()
             video[prefix]['identical_inspection_sidecars'] = len(sidecars[0])
-            video[prefix]['regenerated_cohort_keys_normalized'] = prefix == 'selected'
+            video[prefix]['ordinary_visual_records'] = True
             video[prefix]['timing_trace_byte_identical'] = True
     summary = dict(checks=report['checks'], renderer=args.renderer, packaged=args.package,
                    source_sha256_unchanged=hashes, numerical_outputs_identical=numerical,

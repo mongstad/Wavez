@@ -28,6 +28,7 @@ class FakeViewer:
 	var trails_enabled := false
 	var physical_rate := 1.0
 	var capture_path := "/tmp/export-dialog-test.wvz"
+	func _clear_manual_navigation() -> void: pass
 	var selection_controller = null
 
 var checks := 0
@@ -69,16 +70,11 @@ func run() -> void:
 	for title in ["Range", "Video", "Camera", "Presentation", "Output", "Export summary"]:
 		check(dialog.groups[title].title_label.text == title and dialog.groups[title].theme_type_variation == "TitledGroup", title + " uses the reusable titled group")
 	check(dialog.range_fields.get_child_count() == 6 and dialog.range_fields.get_child(0).text == "Mode" and dialog.range_fields.get_child(2).text == "Start" and dialog.range_fields.get_child(4).text == "End", "Mode, Start and End share the titled Range group")
-	check(dialog.video_fields.get_child_count() == 12 and dialog.camera_fields.get_child_count() == 4 and dialog.presentation_fields.get_child_count() == 6 and dialog.output_fields.get_child_count() == 6, "Controls remain inside their five functional groups")
+	check(dialog.video_fields.get_child_count() == 12 and dialog.camera_fields.get_child_count() == 4 and dialog.presentation_fields.get_child_count() == 6 and dialog.output_fields.get_child_count() == 4, "Controls remain inside their five functional groups")
 	check(not dialog.inspection_advanced.expanded and dialog.inspection_advanced.visible and dialog.inspection_sidecars.get_parent() == dialog.inspection_advanced.body, "Optional ordinary inspection records start inside collapsed Advanced")
 	viewer.selection_controller = {"state":{"definitions":[{"key":"test"}]}}
-	dialog._sync_inspection_advanced()
-	check(not dialog.inspection_advanced.visible, "Mandatory selection-aware inspection records have no optional toggle")
-	viewer.selection_controller = null; dialog._sync_inspection_advanced()
-	check(dialog.inspection_advanced.visible, "Optional ordinary inspection control returns without selections")
-	dialog.active_selection_aware = true; dialog.preparing = true; dialog._sync_inspection_advanced()
-	check(not dialog.inspection_advanced.visible, "Active selection-aware job keeps mandatory provenance control hidden even if live selections change")
-	dialog.preparing = false; dialog.active_selection_aware = false; dialog._sync_inspection_advanced()
+	check(dialog.inspection_advanced.visible and not dialog.inspection_sidecars.button_pressed, "Selections do not hide or enable optional inspection records")
+	viewer.selection_controller = null
 	check(dialog.rate.get_parent().get_child(dialog.rate.get_index() - 1).text == "Playback rate" and dialog.rate.tooltip_text.contains("Simulation-time units") and dialog.rate.tooltip_text.contains("Lower") and dialog.rate.tooltip_text.contains("higher"), "Playback rate label explains the unchanged time-unit semantics")
 	check(dialog.estimate.get_parent() == dialog.summary_group.body and dialog.message.get_parent() == dialog.summary_group.body and dialog.progress.get_parent() == dialog.summary_group.body, "Estimate, status and progress share the lower summary")
 	check(dialog.range_choice.get_item_text(0) == "Full" and dialog.range_choice.get_item_text(1) == "Current position to end" and dialog.range_choice.get_item_text(2) == "Custom", "Range labels retain their option indices")
@@ -133,7 +129,7 @@ func run() -> void:
 	dialog.set_range_times(2.25,2.25)
 	check(dialog.start.editable and dialog.end.editable and Job.frame_total(dialog.settings()) == 1, "Custom still exports one frame")
 	dialog.set_range_times(2.25,2.0)
-	check(dialog.estimate.text == "End time must be at or after start time.", "Invalid range keeps its validation message")
+	check(dialog.settings().end_time == dialog.settings().start_time, "Restored inverted range clamps End to Start before export")
 	dialog.set_range_times(2.25,3.0)
 	var resolution := option_for(dialog.video_fields, "Resolution")
 	var frame_rate := option_for(dialog.video_fields, "Frame rate")
@@ -148,7 +144,7 @@ func run() -> void:
 	dialog.output.text = "/tmp/example.mp4"
 	var chosen: Dictionary = dialog.settings()
 	check(chosen.camera_mode == "orbit" and is_equal_approx(chosen.orbit_speed, 0.2) and chosen.quality == "compact" and not chosen.keep_frames and chosen.inspection_sidecars and chosen.output_path == "/tmp/example.mp4", "Camera, output and ordinary optional inspection choices retain their job settings; successful PNG cleanup is automatic")
-	dialog.preparing = true; dialog._sync_action_buttons()
+	dialog.pid = preload("res://video/test_worker_process.gd").start(); dialog._sync_action_buttons()
 	check(dialog.range_choice.disabled and not dialog.start.editable and not dialog.end.editable, "Active export locks grouped range controls")
 	check(dialog.quality.disabled and dialog.inspection_sidecars.disabled and not dialog.output.editable and dialog.groups["Export summary"].title_label.text == "Export status" and not dialog.estimate.visible and dialog.progress.visible, "Active export locks output and shows status area")
 	dialog.launch_ticks = Time.get_ticks_msec() - 5000
@@ -168,7 +164,7 @@ func run() -> void:
 	check(dialog.cancel_confirmation.get_ok_button().size.x >= 96 and dialog.cancel_confirmation.get_cancel_button().size.x >= 96, "Both cancellation actions render at comfortable width")
 	picture(dialog.cancel_confirmation, "video-cancel-confirmation")
 	dialog.cancel_confirmation.hide()
-	dialog.preparing = false; dialog._sync_action_buttons()
+	preload("res://video/test_worker_process.gd").stop(dialog); dialog._sync_action_buttons()
 	check(not dialog.range_choice.disabled and dialog.start.editable and dialog.end.editable, "Idle export restores grouped range controls")
 	dialog.start_export()
 	check(dialog.pid <= 0 and dialog.message.text.contains("FFmpeg is required"), "Missing FFmpeg blocks export with an actionable error")

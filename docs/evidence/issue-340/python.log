@@ -1,0 +1,22 @@
+test_authoritative_source_and_cli (tests.test_application_version.ApplicationVersionTests.test_authoritative_source_and_cli) ... ok
+test_metadata_contract (tests.test_application_version.ApplicationVersionTests.test_metadata_contract) ... ok
+test_cancelled_preparation_never_publishes (tests.test_analysis_matched_render.MatchedRenderTests.test_cancelled_preparation_never_publishes) ... ok
+test_changed_recipe_and_no_replace_publication (tests.test_analysis_matched_render.MatchedRenderTests.test_changed_recipe_and_no_replace_publication) ... ok
+test_explicit_correspondence_source_permissions_units_and_ranges (tests.test_analysis_matched_render.MatchedRenderTests.test_explicit_correspondence_source_permissions_units_and_ranges) ... ok
+test_independent_exact_clocks_values_identity_and_portable_jobs (tests.test_analysis_matched_render.MatchedRenderTests.test_independent_exact_clocks_values_identity_and_portable_jobs) ... ok
+test_recipe_race_after_initial_hash_refuses (tests.test_analysis_matched_render.MatchedRenderTests.test_recipe_race_after_initial_hash_refuses) ... ok
+test_asset_backed_members_round_trip_and_missing_refusal (tests.test_analysis_recipes.RecipeTests.test_asset_backed_members_round_trip_and_missing_refusal) ... ok
+test_exact_float_bits_are_authoritative_and_mismatch_refuses (tests.test_analysis_recipes.RecipeTests.test_exact_float_bits_are_authoritative_and_mismatch_refuses) ... ok
+test_frame_sidecar_uses_one_explicit_child_asset_bundle (tests.test_analysis_recipes.RecipeTests.test_frame_sidecar_uses_one_explicit_child_asset_bundle) ... ok
+test_linked_plot_labels_bindings_and_current_series_round_trip (tests.test_analysis_recipes.RecipeTests.test_linked_plot_labels_bindings_and_current_series_round_trip) ... ok
+test_optional_results_require_explicit_existing_verified_references (tests.test_analysis_recipes.RecipeTests.test_optional_results_require_explicit_existing_verified_references) ... ok
+test_png_and_state_bundle_hash_and_changed_image_refusal (tests.test_analysis_recipes.RecipeTests.test_png_and_state_bundle_hash_and_changed_image_refusal) ... ok
+test_portable_fresh_cache_full_results_exact_times_ids_groups (tests.test_analysis_recipes.RecipeTests.test_portable_fresh_cache_full_results_exact_times_ids_groups) ... ok
+test_result_hash_corruption_and_symlink_escape_refuse (tests.test_analysis_recipes.RecipeTests.test_result_hash_corruption_and_symlink_escape_refuse) ... ok
+test_unknown_fields_stale_group_and_source_refuse (tests.test_analysis_recipes.RecipeTests.test_unknown_fields_stale_group_and_source_refuse) ... ok
+test_unopened_bookmark_source_refuses_without_read (tests.test_analysis_recipes.RecipeTests.test_unopened_bookmark_source_refuses_without_read) ... ok
+
+----------------------------------------------------------------------
+Ran 17 tests in 0.474s
+
+OK

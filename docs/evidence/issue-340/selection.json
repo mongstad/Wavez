@@ -1,0 +1,30 @@
+{
+  "command": [
+    "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+    "--path",
+    "/home/Nozba/Codex/Wavez/Wavez/viewer",
+    "--audio-driver",
+    "Dummy",
+    "--log-file",
+    "/tmp/wavez-340-revised-selection/godot.log",
+    "--headless",
+    "--script",
+    "selection/test_selection.gd",
+    "--",
+    "--selection-fixture=/tmp/wavez-340-revised-selection"
+  ],
+  "exit_code": 0,
+  "timed_out": false,
+  "seconds": 2.3866719779998675,
+  "source_unchanged": true,
+  "source_sha256": "68106e7f5a24f6e4d3b37538de7a3d6fc34612bf8923394c39779e15cabd704b",
+  "category": "headless integration",
+  "result": {
+    "backend": "forward_plus",
+    "checks": 31,
+    "drawn": 5,
+    "failures": [],
+    "gpu_bytes": 12928,
+    "status": "3 selections \u2022 6 selected members\n5 present \u2022 5 highlights\nCounts include overlaps; highlights may show a subset."
+  }
+}

@@ -69,12 +69,12 @@ func run() -> void:
 		ui.jobs_dialog.hide()
 	root.size = Vector2i(1024,640); await settle(); viewer.shell.layout(); await settle()
 	var video = viewer.video_dialog
-	video.preparing = true; video.job_status = {"stage":"preparing", "detail":"Preparing export"}
+	video.pid = preload("res://video/test_worker_process.gd").start(); video.job_status = {"stage":"starting", "detail":"Preparing export"}
 	ui.open_jobs(); await settle()
 	check(not ui.job_rows["Video export"].open.disabled and not ui.job_rows["Video export"].cancel.disabled and ui.job_rows["Video export"].open.has_focus(), "Preparing video keeps Open, Cancel and first-action focus")
 	check_layout(ui, "Preparing video", true)
 	picture("jobs-preparing-video")
-	ui.jobs_dialog.hide(); video.preparing = false; video.job_status.clear(); ui.refresh()
+	ui.jobs_dialog.hide(); preload("res://video/test_worker_process.gd").stop(video); video.job_status.clear(); ui.refresh()
 	var scroll: ScrollContainer = ui.jobs_dialog.find_children("*", "ScrollContainer", true, false)[0]
 	scroll.custom_minimum_size.y = 100
 	ui.jobs_dialog.popup_centered(Vector2i(500,240)); await settle()

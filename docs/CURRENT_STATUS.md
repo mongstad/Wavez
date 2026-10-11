@@ -1,8 +1,17 @@
 # Current status
 
-Accepted baseline: **v0.1.0.91**, `3014e8a65e6eadd0ed0a0e509265fb97f8ecf1fb`,
-owner-merged PR #337. The repository's application identity is
+Accepted baseline: **v0.1.0.92**, `0843a778af37b30091b75d7a17840b024c9fc6e8`,
+owner-merged PR #339. The repository's application identity is
 `viewer/project.godot` → `application/config/version`; see [version policy](VERSIONING.md).
+
+Issue #340 proposes candidate **v0.1.0.93**: File → Export → Video always uses
+visual version-1 jobs, external FFmpeg and explicitly optional visual records.
+Existing selections never trigger scientific recipe processing or Python/NumPy.
+Selection highlights and Analysis overlays are excluded from exported frames;
+Selection/Analysis, scientific persistence and explicit Matched Views remain
+independent. See [video](VIDEO_EXPORT.md), [packaging](PACKAGED_VIDEO_EXPORT.md)
+and [review evidence](evidence/issue-340/README.md). Owner review is pending.
+
 Issue #331 provides independently configurable,
 initially Unbound Roll Camera Left/Right actions bank Free Camera around its
 local view axis while retaining scientific/world state. A shared, persistent
@@ -35,11 +44,11 @@ precise visible ranges and exact endpoint calculations remain unchanged. The
 existing AGENTS rule prohibits adding tooltips without an explicit instruction
 for the specific element. See [review evidence](evidence/issue-326/README.md).
 
-Issue #95 proposes candidate **v0.1.0.92**: a three-part
+Accepted issue #95 / PR #339 provides a three-part
 [Getting Started guide](../GETTING_STARTED.md), four small standalone Python
 examples and focused source/value/viewer verification. Installation requirements
 distinguish Linux standalone viewing from Python generation and source development.
-See [review evidence](evidence/issue-95/README.md). Owner review is pending.
+See the original [review evidence](evidence/issue-95/README.md), preserved as written.
 
 The GitHub Issues and Wavez Development Project are the operational queue. Work
 requires a Ready issue (or explicit owner authorization), the correct branch/base
@@ -68,7 +77,8 @@ missing support and provenance remain explicit. Portable view presets are
 presentation state; inspection bundles include scientific requests/assets.
 Image, video and numerical exports have distinct composition, timing and source
 binding contracts. Deterministic video uses a separate real-GPU worker and
-explicit sample/selection/surface/render barriers.
+explicit sample/surface/render barriers; selection barriers apply only to explicit
+scientific Matched Views.
 
 ## Current sources of truth
 

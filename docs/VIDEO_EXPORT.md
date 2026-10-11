@@ -2,20 +2,31 @@
 
 ## Source, inspection and selection ownership
 
-Current video jobs require WVZ1 `.wvz` sources and `wavez-export-source`
-identities. Ordinary jobs use version 1; selection-aware jobs use version 2 and
-inspection recipe v3. Current code is in `viewer/video/` and `viewer/analysis/`;
-see [analysis schemas](ANALYSIS_SCHEMAS.md) and
-[the analysis guide](ANALYSIS_GUIDE.md#save-restore-and-export).
+File → Export → Video always uses a version-1 visual job and the same dependencies,
+with zero, one or many Selection definitions. It does not create a portable recipe,
+start a scientific worker, evaluate membership, force inspection JSON, or impose a
+selection-specific output quota. MP4 encoding needs external FFmpeg; Python/NumPy
+is required separately for scientific Selection/Analysis, not ordinary video.
 
-Selection-aware jobs pin the committed source prefix, exact selection members, sampling state
-and highlight settings, then await sample/selection/surface barriers before each
-frame. Later appends stay outside that prefix; mutation, replacement and truncation
-refuse. PNG/state bundles and per-frame sidecars retain source IDs, units, native
-clocks, held/interpolated support and image hashes. Matched runs prepare two
-portable jobs with explicit time/value mappings and a comparison manifest; they
-render sequentially and do not register or rescale geometry. Render and numerical
-export quotas are finite. Export never measures values from GPU colors.
+Selection and Analysis state, markers, highlights and plot overlays are excluded
+from File → Export → Video. Visible or hidden scientific selections and populated
+analysis results must produce the same frames as the equivalent ordinary view.
+No fixed-marker snapshot or marker-following logic is used. This boundary applies
+even when **Include enabled viewport legends** is checked; ordinary particle,
+field and mesh legends keep their existing visibility and channel settings.
+Selection and Analysis remain available in the interactive application, including
+independent numerical results and saved scientific inspections. Their end-to-end
+scientific validation is incomplete; MP4 output does not present their overlays
+as verified scientific information.
+
+Tools → Matched Views remains a deliberate scientific workflow. Its version-2
+jobs pin portable inspection v3 recipes and await scientific selection barriers;
+Python/NumPy, explicit source mappings, mandatory scientific records and finite
+quotas still apply there. Independent inspection saving/restoring, numerical
+exports and scientific image bundles are preserved. Shared version-2 validation,
+worker support and packaged first-party Python remain for these explicit tools.
+See [analysis schemas](ANALYSIS_SCHEMAS.md) and
+[the analysis guide](ANALYSIS_GUIDE.md#save-restore-and-export).
 
 Historical measurements are linked as review records; they do not establish a
 new renderer/platform guarantee. Network/control services remain outside scope.
@@ -121,10 +132,11 @@ error when Start Export is pressed.
 
 Successful dialog exports remove temporary PNG frames after publishing the MP4.
 Failure, cancellation and FFmpeg-unavailable states retain frames and other
-intermediates for recovery. Ordinary exports can optionally save per-frame
-inspection JSON from the collapsed **Advanced** section in Output. Selection-aware
-version-2 exports always write these per-frame inspection records as provenance;
-the optional control is hidden when selections are present. Those JSON records
+intermediates for recovery. Exports can optionally save per-frame
+inspection JSON from the collapsed **Advanced** section in Output. The unchecked
+checkbox is always available, regardless of selections. These visual-state records
+contain sampling, camera, layer settings and PNG hashes, without scientific
+selection or Analysis results. Those JSON records
 remain in the job directory after successful PNG cleanup and retain the PNG
 identity with `retained_after_encode:false`.
 Click **Start Export**. A second Godot process renders and encodes the video.
@@ -138,9 +150,9 @@ focus. Only **Yes** requests cancellation after the current frame, or stops
 FFmpeg during encoding. **No**, Escape or closing the confirmation leaves the
 export running. Jobs cancellation uses the same confirmation. Repeated clicks
 do not send duplicate requests; completed jobs do not prompt. **Run in background** hides
-the dialog and is visible only while an export is preparing or running. All
+the dialog and is visible only while an export is running. All
 configuration controls remain visible but read-only during that time, including
-output Browse and selection quotas. Reopening through File → Export → Video or
+output Browse. Reopening through File → Export → Video or
 Jobs preserves the locked configuration. A late file-picker result cannot change
 an active job's output path.
 
@@ -152,11 +164,9 @@ remain read-only until their corresponding Custom mode is selected. The two
 secondary actions occupy the same position/width to limit layout movement.
 **Cancel** dismisses the idle/terminal dialog only; it never cancels the job.
 
-During selection-recipe preparation, confirmed **Cancel export** requests cancellation of
-the existing background analysis job before any renderer is launched. Controls
-remain locked until preparation ends or the worker exits; a terminal-looking
-progress message alone does not release an active worker's configuration. Closing
-the parent viewer still requests cancellation through the existing protocol.
+Controls remain locked until the render worker exits; a terminal-looking progress
+message alone does not release an active worker's configuration. Closing the
+parent viewer still requests cancellation through the existing protocol.
 See [the #125 validation and owner checks](VIDEO_EXPORT_LOCKS.md) and
 [confirmation validation](VIDEO_CANCEL_CONFIRMATION.md).
 The job directory retains `progress.json`,
@@ -192,7 +202,8 @@ suppresses trails even if their checkbox is enabled, as in the normal viewer.
 
 ## Architecture and installed Godot capabilities
 
-The worker uses the same scene reader and scientific state with offline timing.
+The ordinary video worker uses the same scene reader and ordinary visualization
+settings with offline timing. Selection/Analysis state is excluded.
 Interactive playback/preparation and realtime camera motion are disabled in the
 render instance. The output SubViewport owns the requested image dimensions.
 
@@ -214,7 +225,7 @@ and [SubViewport reference](https://docs.godotengine.org/en/stable/classes/class
 
 Modules under `viewer/video/`:
 
-- `render_job.gd`: version-1 and G4 version-2 JSON schemas, state snapshot/restore, validation,
+- `render_job.gd`: ordinary version-1 and explicit Matched Views version-2 JSON schemas, state snapshot/restore, validation,
   deterministic frame count and process arguments.
 - `offline_timeline.gd`: timestamp-only index, binary-search sampling, bounded
   recorded history and a pure camera-path function ready for future keyframes.
@@ -231,9 +242,9 @@ No physics runs; capture access is read-only. Indexing freezes the available
 complete frames for that job instead of live-tailing the capture.
 
 For standalone Linux release builds, use the [packaged video guide](PACKAGED_VIDEO_EXPORT.md).
-The parent starts its own executable without a project-path override. Selection-aware
-exports use Wavez-owned Python resources packaged by `tools/package_linux.py`;
-Python/NumPy and FFmpeg remain external. Each UI launch retains `launch.json`,
+The parent starts its own executable without a project-path override. Ordinary
+video needs external FFmpeg. Independent scientific tools use the Wavez-owned
+Python resources packaged by `tools/package_linux.py` with external Python/NumPy. Each UI launch retains `launch.json`,
 and worker metrics record the actual executable, renderer and user arguments.
 
 ## Offline sampling and validation
@@ -318,8 +329,8 @@ The offline SubViewport now contains scientific scene content and eligible
 viewport legends only. **Include enabled viewport legends** gates particle,
 field and mesh legends according to their saved visibility and channel state;
 turning it off hides those legends even if the interactive viewer shows them.
-Independent scene guides, probe markers and selection annotations retain their
-own settings. The exported legends use the existing viewport text and color
+Ordinary scene guides retain their own settings. Selection highlights and
+Analysis overlays are excluded regardless of the legends option. The exported legends use the existing viewport text and color
 mapping, positioned against the full output frame. See [Layer legends](LAYER_LEGENDS.md).
 
 Menus, navigation controls, the right workspace dock, transport, timeline,
@@ -410,8 +421,7 @@ godot --path /absolute/path/Wavez/viewer --resolution 640x360 \
 ```
 
 A retained job can be copied into a new directory and edited for automation; use
-a fresh output filename and empty frame directory. Preserve its recorded job version and source identity fields; selection-aware
-jobs require their version-2 fields. Do not add `--write-movie` to this worker command: it would record the small process
+a fresh output filename and empty frame directory. Preserve its recorded job version and source identity fields. Explicit Matched Views jobs require their version-2 fields. Do not add `--write-movie` to this worker command: it would record the small process
 window and setup iterations, not the export SubViewport.
 
 For comparison, the installed Movie Maker PNG probe used:

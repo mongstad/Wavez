@@ -1,0 +1,174 @@
+{
+  "checks": [
+    {
+      "label": "Native presentation starts no scientific worker",
+      "ok": true
+    },
+    {
+      "label": "Valid bounded display address: particles",
+      "ok": true
+    },
+    {
+      "label": "Valid bounded display address: mesh",
+      "ok": true
+    },
+    {
+      "label": "Valid bounded display address: volume",
+      "ok": true
+    },
+    {
+      "label": "Valid bounded display address: face",
+      "ok": true
+    },
+    {
+      "label": "Valid bounded display address: particles",
+      "ok": true
+    },
+    {
+      "label": "Rounded/float IDs are refused",
+      "ok": true
+    },
+    {
+      "label": "Fractional grid address is refused",
+      "ok": true
+    },
+    {
+      "label": "Nonfinite color is refused",
+      "ok": true
+    },
+    {
+      "label": "Marker count has a finite shared preview ceiling",
+      "ok": true
+    },
+    {
+      "label": "Grid address uses source geometry and affine world transform",
+      "ok": true
+    },
+    {
+      "label": "Mesh vertex resolves exact int64 source ID",
+      "ok": true
+    },
+    {
+      "label": "Mesh point follows source face barycentric weights",
+      "ok": true
+    },
+    {
+      "label": "Snapshot carries only drawn addresses, no selection definitions",
+      "ok": true
+    },
+    {
+      "label": "Hidden highlight is not silently activated by export",
+      "ok": true
+    },
+    {
+      "label": "Native display sample commits at 0.5",
+      "ok": true
+    },
+    {
+      "label": "Marker follows reordered exact ID/held or interpolated display at 0.5",
+      "ok": true
+    },
+    {
+      "label": "Anonymous row never acquires temporal identity",
+      "ok": true
+    },
+    {
+      "label": "Native display sample commits at 1.0",
+      "ok": true
+    },
+    {
+      "label": "Marker follows reordered exact ID/held or interpolated display at 1.0",
+      "ok": true
+    },
+    {
+      "label": "Grid native address expires without acquiring new membership",
+      "ok": true
+    },
+    {
+      "label": "Anonymous row never acquires temporal identity",
+      "ok": true
+    },
+    {
+      "label": "Native display sample commits at 3.0",
+      "ok": true
+    },
+    {
+      "label": "Absent persistent ID suppresses marker at 3.0",
+      "ok": true
+    },
+    {
+      "label": "Grid native address expires without acquiring new membership",
+      "ok": true
+    },
+    {
+      "label": "Anonymous row never acquires temporal identity",
+      "ok": true
+    },
+    {
+      "label": "Face/sample address never resurrects after topology changes",
+      "ok": true
+    },
+    {
+      "label": "Native display sample commits at 4.0",
+      "ok": true
+    },
+    {
+      "label": "Absent persistent ID suppresses marker at 4.0",
+      "ok": true
+    },
+    {
+      "label": "Grid native address expires without acquiring new membership",
+      "ok": true
+    },
+    {
+      "label": "Anonymous row never acquires temporal identity",
+      "ok": true
+    },
+    {
+      "label": "Face/sample address never resurrects after topology changes",
+      "ok": true
+    },
+    {
+      "label": "Source clipping suppresses visual marker",
+      "ok": true
+    },
+    {
+      "label": "Show hidden retains marker display policy",
+      "ok": true
+    },
+    {
+      "label": "Show hidden grid highlights use admitted native geometry without Analysis",
+      "ok": true
+    },
+    {
+      "label": "Show hidden mesh highlights use native source display interpolation",
+      "ok": true
+    },
+    {
+      "label": "Hidden particle layer suppresses ordinary highlights",
+      "ok": true
+    },
+    {
+      "label": "All marker updates leave scientific worker/source untouched",
+      "ok": true
+    }
+  ],
+  "command": [
+    "/home/Nozba/Desktop/Godot_v4.7.2-stable_linux.x86_64",
+    "--path",
+    "/home/Nozba/Codex/Wavez/Wavez/viewer",
+    "--audio-driver",
+    "Dummy",
+    "--rendering-method",
+    "gl_compatibility",
+    "--script",
+    "video/test_presentation_markers.gd",
+    "--",
+    "/tmp/wavez-340-final-markers-compat"
+  ],
+  "renderer": "gl_compatibility",
+  "exit_code": 0,
+  "source_sha256": "21d5a3f923fbd35922c1d201cb9df9bc2f205f107132f9109db8299bd1ceef1a",
+  "source_unchanged": true,
+  "passed": false
+}

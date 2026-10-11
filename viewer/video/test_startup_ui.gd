@@ -47,7 +47,7 @@ func run() -> void:
 	dialog.start_button.pressed.emit()
 	launch_return_ms = Time.get_ticks_msec()-began
 	Job.write_json(out.path_join("launched.json"),{"milliseconds":launch_return_ms,"directory":dialog.active_directory,"pid":dialog.pid})
-	while dialog.pid > 0 or dialog.preparing:
+	while dialog.pid > 0:
 		var progress: Dictionary = dialog.last_progress
 		if progress.get("stage","") in ["ready","rendering","encoding","complete"] and worker_ready_ms < 0:worker_ready_ms = Time.get_ticks_msec()-began
 		if progress.get("current_frame",0) > 0 and first_frame_ms < 0:first_frame_ms = Time.get_ticks_msec()-began

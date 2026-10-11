@@ -171,7 +171,13 @@ func _run() -> void:
 	if job.version == 2:
 		if not await load_selections():finish("failed","Selection recipe could not be verified/restored: "+viewer.selection_controller.temporal.durable.status.text,1);return
 		Job.apply(viewer,merged)
-	elif job.get("inspection_sidecars",false): inspection_source = source_binding.duplicate(true)
+	else:
+		# Ordinary video restores only source visualization. Selection/Analysis
+		# state and visual overlays are excluded, regardless of the parent session.
+		viewer.selection_controller.set_process(false)
+		viewer.selection_controller.overlay.clear()
+		viewer.selection_controller.overlay.hide()
+		if job.get("inspection_sidecars",false): inspection_source = source_binding.duplicate(true)
 	# Rendering state is frozen; only deterministic sample and camera functions advance.
 	viewer.playing = false
 	viewer.orbit_enabled = false

@@ -1,5 +1,6 @@
 extends RefCounted
-# Versioned, JSON-only render jobs. Shared by UI, worker and regression tests.
+# JSON-only render jobs. File/Export/Video always uses version 1.
+# Version 2 is retained for deliberately requested scientific Matched Views.
 const VERSION := 1
 const State = preload("res://scene/visual_state.gd")
 const ExactState = preload("res://analysis/inspection_v3.gd")

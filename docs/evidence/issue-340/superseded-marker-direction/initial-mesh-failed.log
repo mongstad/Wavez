@@ -1,0 +1,19 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.351 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3070 Ti
+
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.351 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3070 Ti
+
+SCRIPT ERROR: Invalid access to property or key 'transform' on a base object of type 'Dictionary'.
+          at: locate (res://video/presentation_markers.gd:151)
+          GDScript backtrace (most recent call first):
+              [0] locate (res://video/presentation_markers.gd:151)
+              [1] update (res://video/presentation_markers.gd:89)
+              [2] _run (res://video/render_worker.gd:222)
+SCRIPT ERROR: Invalid access to property or key 'transform' on a base object of type 'Dictionary'.
+          at: locate (res://video/presentation_markers.gd:151)
+          GDScript backtrace (most recent call first):
+              [0] locate (res://video/presentation_markers.gd:151)
+              [1] update (res://video/presentation_markers.gd:89)
+              [2] _run (res://video/render_worker.gd:222)
+WAVEZ export: Saved /tmp/wavez-340-source-forward/selection-mesh/result.mp4

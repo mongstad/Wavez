@@ -84,7 +84,7 @@ func video_states(video, name: String) -> void:
 	check(button.get_draw_mode() == BaseButton.DRAW_PRESSED, "Actual pressed state " + name); picture(video,name + "-pressed"); target_picture(video,button,name + "-pressed")
 	var status: Dictionary = video.job_status.duplicate(true)
 	click(video,button.get_global_rect().get_center(),false); await settle()
-	check(not video.visible and video.preparing and video.job_status == status, "Background dismiss preserves active job " + name)
+	check(not video.visible and (video.pid > 0) and video.job_status == status, "Background dismiss preserves active job " + name)
 	video.popup_centered(); button.disabled = true; motion(video,Vector2(1,1)); await settle()
 	check(button.get_draw_mode() == BaseButton.DRAW_DISABLED, "Disabled state " + name); picture(video,name + "-disabled"); target_picture(video,button,name + "-disabled")
 	button.disabled = false
@@ -93,7 +93,7 @@ func video_states(video, name: String) -> void:
 	key(video,KEY_TAB,true); await settle()
 	check(video.start_button.has_focus(), "Shift-Tab returns to cancellation action " + name)
 	key(video,KEY_TAB); key(video,KEY_ENTER); await settle()
-	check(not video.visible and video.preparing and video.job_status == status,"Keyboard activation backgrounds same job " + name)
+	check(not video.visible and (video.pid > 0) and video.job_status == status,"Keyboard activation backgrounds same job " + name)
 	video.popup_centered(); await settle()
 
 func run() -> void:
@@ -135,14 +135,14 @@ func run() -> void:
 			check(shell.shortcuts.active == bindings and not shell.shortcuts_editor.visible,"Shortcut Cancel discards draft")
 			video.open(); await settle(); audit(video,context + "-video-idle")
 			var settings: Dictionary = video.settings(); video.close_button.pressed.emit(); check(not video.visible and video.settings() == settings,"Idle Video Cancel preserves range")
-			video.open(); video.preparing = true; video.publish_job("preparing","Verifying the pinned selection recipe"); await settle()
+			video.open(); video.pid = preload("res://video/test_worker_process.gd").start(); video.publish_job("starting","Starting renderer"); await settle()
 			video.size = Vector2i(700,650) if dimensions.x == 1440 else Vector2i(560,360); video.popup_centered(video.size); await settle()
 			audit(video,context + "-video-active"); await video_states(video,context + "-video")
 			video.cancel_confirmation.popup_centered(); await settle(); audit(video.cancel_confirmation,context + "-cancel-export"); picture(video.cancel_confirmation,context + "-cancel-export")
-			key(video.cancel_confirmation,KEY_ESCAPE); await settle(); check(not video.cancel_confirmation.visible and video.preparing,"Cancellation Escape leaves job running")
+			key(video.cancel_confirmation,KEY_ESCAPE); await settle(); check(not video.cancel_confirmation.visible and (video.pid > 0),"Cancellation Escape leaves job running")
 			var exit_dialog = preload("res://ui/shell/exit_confirmation.gd").new(); shell.add_child(exit_dialog); exit_dialog.setup(shell); exit_dialog.open(); await settle()
-			audit(exit_dialog,context + "-exit"); picture(exit_dialog,context + "-exit"); exit_dialog.cancel_button.pressed.emit(); check(not exit_dialog.visible and video.preparing,"Exit Cancel leaves job running"); exit_dialog.queue_free()
-			video.preparing = false; video.job_status = {}; video._sync_action_buttons(); video.hide(); await settle()
+			audit(exit_dialog,context + "-exit"); picture(exit_dialog,context + "-exit"); exit_dialog.cancel_button.pressed.emit(); check(not exit_dialog.visible and (video.pid > 0),"Exit Cancel leaves job running"); exit_dialog.queue_free()
+			preload("res://video/test_worker_process.gd").stop(video); video.job_status = {}; video._sync_action_buttons(); video.hide(); await settle()
 	# Theme round-trip must continue to resolve the resting surface on old dialogs.
 	shell.appearance.light = false; shell.appearance.apply(); video.open(); await settle()
 	check(video.background_button.get_theme_stylebox("normal").bg_color == shell.style_slice.theme.c(&"surface.1" if baseline else &"surface.2"),"Light-to-Dark dialog role round trip")

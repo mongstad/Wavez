@@ -35,7 +35,7 @@ func run() -> void:
 	video.job_status.clear()
 	var original := science(); var sample: Dictionary = viewer.committed_sample.duplicate(true); var camera: Transform3D = viewer.camera.transform
 	for kind in ["video","selections","analysis","selection-cancelling","analysis-cancelling","matched-preparing","isosurface","multiple"]:
-		video.preparing = kind in ["video","multiple"]
+		video.pid = preload("res://video/test_worker_process.gd").start() if kind in ["video","multiple"] else -1
 		jobs.pending = kind in ["selections","multiple"]; jobs.background_pending = kind == "analysis"
 		jobs.foreground_cancel_id = "pending-ack" if kind == "selection-cancelling" else ""
 		jobs.background_cancel_id = "pending-ack" if kind == "analysis-cancelling" else ""
@@ -55,13 +55,13 @@ func run() -> void:
 			if kind in ["video","multiple"]: root.get_texture().get_image().save_png(output.path_join(kind+"-"+str(dimensions.x)+".png"))
 			key(KEY_ENTER,dialog); await settle()
 			check(not dialog.visible and shell.transport.rate.has_focus(), "Enter on default Cancel dismisses and restores initiator")
-			check(status.has_active_jobs() and not video.preparation_cancelled, "Cancel leaves all active owners running")
+			check(status.has_active_jobs(), "Cancel leaves all active owners running")
 			chrome.request_close(); await settle(); key(KEY_ESCAPE,dialog); await settle()
 			check(not dialog.visible and status.has_active_jobs(), "Escape dismisses without cancelling work")
 			chrome.request_close(); await settle(); dialog.close_requested.emit(); await settle()
 			check(not dialog.visible and status.has_active_jobs(), "Window dismissal is Cancel")
 			check(science() == original and viewer.committed_sample == sample and viewer.camera.transform == camera and not viewer.playing, "Prompt/cancellation leaves science, playback and camera unchanged")
-		video.preparing = false; video.job_status.clear(); jobs.pending = false; jobs.background_pending = false
+		preload("res://video/test_worker_process.gd").stop(video); video.job_status.clear(); jobs.pending = false; jobs.background_pending = false
 		jobs.foreground_cancel_id = ""; jobs.background_cancel_id = ""; matched.preparing = false; viewer.scene_layers.iso_pid = -1
 		check(not status.has_active_jobs(), "Terminal/idle owners no longer prompt")
 	var file := FileAccess.open(output.path_join("report.json"),FileAccess.WRITE)

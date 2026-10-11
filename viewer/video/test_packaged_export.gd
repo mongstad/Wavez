@@ -32,18 +32,44 @@ func run() -> void:
 			view.scene_layers.states[id].channel = "psi_imag"
 			view.scene_layers.legend_visibility[id] = true
 	view.scene_layers.resample()
-	if config.get("selection",false):
-		var control = view.selection_controller
-		control.bind_source();check(await wait_analysis(control),"Analysis binds without repository files")
-		control._request("define_selection",{"key":"one","object":"p","kind":"particle_ids","selector":{"ids":["10"]}})
-		check(await wait_analysis(control) and control.state.definitions.size() == 1,"Exact persistent-ID selection is available")
-		check(not config.packaged or control.jobs.directory.begins_with(ProjectSettings.globalize_path("user://")),"Packaged analysis cache uses writable user data")
+	var control = view.selection_controller
+	var selected: String = config.get("selection","")
+	if not selected.is_empty():
+		control.bind_source();check(await wait_analysis(control),"Independent Analysis binds without repository files")
+		var definitions: Array = []
+		if selected in ["particle","all"]: definitions.append({"key":"particle","object":"p","kind":"particle_ids","selector":{"ids":["10"]}})
+		if selected in ["mesh","all"]: definitions.append({"key":"mesh","object":"mesh","kind":"mesh_vertices","selector":{"ids":["1"]}})
+		if selected in ["field","all"]: definitions.append({"key":"field","object":"field","kind":"grid_samples","selector":{"index":1,"xyz":[[1,1,1]]}})
+		for definition in definitions:
+			control._request("define_selection",definition)
+			check(await wait_analysis(control),"Independent Selection defines "+definition.key)
+		check(await control.await_committed_overlay(),"Interactive Selection highlights resolve before video")
+		check(control.state.definitions.size() == definitions.size(),"Particle/mesh/field definitions remain independent")
+	if not selected.is_empty():check(control.overlay.drawn > 0,"Interactive Selection still draws its highlights")
+	if config.get("analysis",false):
+		var temporal = control.temporal
+		temporal.mode.select(2);temporal.start_time.text = "0";temporal.end_time.text = "2"
+		temporal.run_analysis()
+		var analysis_deadline := Time.get_ticks_msec()+30000
+		while (control.jobs.background_pending or control.jobs.busy()) and Time.get_ticks_msec()<analysis_deadline:await create_timer(.01).timeout
+		check(not temporal.summaries.is_empty() and not temporal.current_result.is_empty(),"Independent Analysis produces a real result before video")
+		check(not temporal.plot.data.is_empty(),"Independent Analysis retains a populated plot")
+		view.tools_ui.open("Temporal")
+	if config.get("hidden",false):
+		control.state.overlay.visible = false;control.overlay.visible = false
+	# Make Python unusable after independent setup. Video must not request it.
+	control.set_process(false);control.jobs.shutdown()
+	OS.set_environment("PATH",config.video_path)
+	var selection_before: Dictionary = control.state.snapshot()
+	var analysis_before: Array = control.temporal.summaries.duplicate(true)
+	var overlay_before: bool = control.overlay.visible
 	var menu: Dictionary = view.shell.commands.video;menu.popup.id_pressed.emit(menu.index)
 	var dialog = view.video_dialog
 	check(dialog.visible,"File / Export / Video opens production dialog")
+	check(dialog.inspection_advanced.visible and not dialog.inspection_sidecars.button_pressed,"Advanced remains optional with zero/one/many selections")
 	dialog.range_choice.select(2);dialog.update_range();dialog.set_range_times(.75,1.25)
 	dialog.width.value = 320;dialog.height.value = 180;dialog.fps.value = 4;dialog.rate.value = 1
-	dialog.overlays.button_pressed = config.get("overlays",false);dialog.inspection_sidecars.button_pressed = true
+	dialog.overlays.button_pressed = config.get("overlays",false);dialog.inspection_sidecars.button_pressed = config.get("sidecars",false)
 	dialog.camera_mode.select(1 if config.get("orbit",false) else 0);dialog.orbit.value = .2
 	dialog.output.text = out.path_join("result.mp4")
 	view.file_locations.settings.ffmpeg_mode = "custom"
@@ -56,9 +82,15 @@ func run() -> void:
 	if config.get("startup_failure",false):
 		Job.write_json(out.path_join("ready-to-launch.json"),{"executable":OS.get_executable_path()})
 		while not FileAccess.file_exists(out.path_join("continue")):await create_timer(.01).timeout
+	if selected == "all":
+		dialog.inspection_advanced.set_expanded(true)
+		await process_frame;await process_frame
+		var scroll: ScrollContainer = dialog.fields.get_parent()
+		scroll.scroll_vertical = int(scroll.get_v_scroll_bar().max_value)
+		await process_frame;RenderingServer.force_draw(false)
+		dialog.get_texture().get_image().save_png(out.path_join("advanced-with-selections.png"))
 	dialog.start_button.pressed.emit()
 	var deadline := Time.get_ticks_msec()+30000
-	while dialog.preparing and Time.get_ticks_msec()<deadline:await create_timer(.01).timeout
 	if config.get("missing",false):
 		check(dialog.pid <= 0 and dialog.active_directory.is_empty() and dialog.message.text.contains("FFmpeg"),"Missing FFmpeg refuses before worker launch")
 		finish(dialog);return
@@ -72,7 +104,8 @@ func run() -> void:
 	check(launch.arguments.has("--path") != config.packaged and launch.rendering_method == RenderingServer.get_current_rendering_method(),"Correct launch arguments and renderer are retained")
 	var job: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(dialog.active_job_path))
 	check(job.capture_path == config.source and job.capture_path.is_absolute_path() and job.output_path.is_absolute_path(),"Absolute source/job/output paths survive launch")
-	check(job.version == (2 if config.get("selection",false) else 1),"Requested selection-aware job schema survives launch")
+	check(job.inspection_sidecars == config.get("sidecars",false),"Only the explicit checkbox controls inspection records")
+	check(job.version == 1 and not job.has("inspection_path") and not job.has("output_quota_bytes") and not job.has("presentation_markers"),"Video uses the ordinary schema without scientific recipes, markers or quota")
 	dialog.background_button.pressed.emit()
 	check(not dialog.visible and dialog.pid == pid and not FileAccess.file_exists(directory.path_join("cancel")),"Run in background retains the original worker")
 	view.shell.status_ui.open_jobs();view.shell.status_ui.job_rows["Video export"].open.pressed.emit()
@@ -113,6 +146,9 @@ func run() -> void:
 	check(metrics.runtime.executable == OS.get_executable_path() and metrics.runtime.packaged == config.packaged,"Child uses the same packaged or development executable")
 	check(metrics.runtime.rendering_method == RenderingServer.get_current_rendering_method(),"Child renderer matches parent")
 	check(not config.packaged or metrics.runtime.release,"Child uses release resources")
+	check(control.jobs.worker_pid < 0 and control.state.snapshot() == selection_before,"Video starts no parent scientific worker and preserves selections")
+	check(control.overlay.visible == overlay_before and control.temporal.summaries == analysis_before,"Video preserves interactive highlights and Analysis results")
+	check(not DirAccess.dir_exists_absolute(directory.path_join("recipe.inspection")),"No portable recipe assets are created")
 	Job.write_json(out.path_join("observed.json"),{"stages":observed,"worker_pid":pid})
 	finish(dialog)
 func finish(dialog) -> void:

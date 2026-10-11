@@ -1,0 +1,66 @@
+{
+  "README.md": {
+    "bytes": 13110,
+    "sha256": "b6f87540fb6350c5f43ef222362e1038073c5b0440ba29c90e3d9a266f327b4c"
+  },
+  "advanced-with-selections.png": {
+    "bytes": 59613,
+    "sha256": "95065c8cbfd64f4fefa6c4acb37facac6b88225a819777d2c425fcc9887ee0a5"
+  },
+  "close-file.json": {
+    "bytes": 34148,
+    "sha256": "9bacbb68c0bd93d77a9bf72aa7520427ec5b7042153c77fad24264ad87961d22"
+  },
+  "dialog-compact.png": {
+    "bytes": 26091,
+    "sha256": "697d167bec15e01df2c6ccdad8ce43475ca8cef11d97e2b3c23055980354be96"
+  },
+  "dialog.log": {
+    "bytes": 3104,
+    "sha256": "58f355a4f8febc4c5ab47468e538656091632abb082e7237e8ea28fa40787bf2"
+  },
+  "focused-compatibility.json": {
+    "bytes": 58233,
+    "sha256": "674dd02e864aa0fa0ecabacfd2889d27cf2e04f615b559d4a9f504bec5d08450"
+  },
+  "import.log": {
+    "bytes": 1347,
+    "sha256": "0e9619b3491283555b643b1bdec015bda2ac1c8f308977064c61eb06e57c665d"
+  },
+  "initial-import-sandbox.log": {
+    "bytes": 3292,
+    "sha256": "b077ca26be54e6bda01682950781630f7567b59b955a447f7b7a9823e28040c1"
+  },
+  "matched.json": {
+    "bytes": 6269,
+    "sha256": "20b894f117cbdf1e2d886ab588b4659cbd32fad3217625627b5c3c71b537b755"
+  },
+  "python.log": {
+    "bytes": 2830,
+    "sha256": "d7789b5afdc5a8bb2b60bdb244e6e926d2b9749a6c680309874d09238ec76adb"
+  },
+  "release-compatibility.json": {
+    "bytes": 146189,
+    "sha256": "0a11c594ac67e2bb43a02d09f7fc9fdc4ac9d19ceaee81f8984070ac7267a509"
+  },
+  "release-forward.json": {
+    "bytes": 146138,
+    "sha256": "2de4b568ffd67eff42df2bcb96ea4d93b28cbe4f8641751f07efb47db1ec9e76"
+  },
+  "review-package-build.json": {
+    "bytes": 4891,
+    "sha256": "bc19e2950b71b7dad7d3d54709758603c0574d0b55ee2b4977621387132f33c2"
+  },
+  "selection.json": {
+    "bytes": 877,
+    "sha256": "ff92f497f76779ff12f6fb7af5c1f80540cf2535aa698901c6551327e83fd78a"
+  },
+  "source-compatibility.json": {
+    "bytes": 134590,
+    "sha256": "b8919279d831cf26193f9bc67677366cfa20c998a25f5dc74f9ab0feee0ef928"
+  },
+  "source-forward.json": {
+    "bytes": 134537,
+    "sha256": "636dd52422b48de94b7a6fb8b3c3314dd788349450d1cd0529baeae32bfaa16d"
+  }
+}

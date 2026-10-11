@@ -1,0 +1,4258 @@
+{
+  "renderer": "gl_compatibility",
+  "packaged": true,
+  "checks": [
+    {
+      "ok": true,
+      "label": "particles-off: parent exits with only expected diagnostics"
+    },
+    {
+      "ok": true,
+      "label": "particles-off: Production viewer opens WVZ1"
+    },
+    {
+      "ok": true,
+      "label": "particles-off: Expected source or template executable"
+    },
+    {
+      "ok": true,
+      "label": "particles-off: Release template, with path overrides disabled"
+    },
+    {
+      "ok": true,
+      "label": "particles-off: File / Export / Video opens production dialog"
+    },
+    {
+      "ok": true,
+      "label": "particles-off: Advanced remains optional with zero/one/many selections"
+    },
+    {
+      "ok": true,
+      "label": "particles-off: Only development passes a project path override"
+    },
+    {
+      "ok": true,
+      "label": "particles-off: Start Export launches secondary process"
+    },
+    {
+      "ok": true,
+      "label": "particles-off: Launch diagnostics identify the current executable"
+    },
+    {
+      "ok": true,
+      "label": "particles-off: Correct launch arguments and renderer are retained"
+    },
+    {
+      "ok": true,
+      "label": "particles-off: Absolute source/job/output paths survive launch"
+    },
+    {
+      "ok": true,
+      "label": "particles-off: Only the explicit checkbox controls inspection records"
+    },
+    {
+      "ok": true,
+      "label": "particles-off: Video uses the ordinary schema without scientific recipes or quota"
+    },
+    {
+      "ok": true,
+      "label": "particles-off: Run in background retains the original worker"
+    },
+    {
+      "ok": true,
+      "label": "particles-off: Jobs reopens the same export"
+    },
+    {
+      "ok": true,
+      "label": "particles-off: Worker terminates within timeout"
+    },
+    {
+      "ok": true,
+      "label": "particles-off: Parent observes worker progress"
+    },
+    {
+      "ok": true,
+      "label": "particles-off: Expected terminal state"
+    },
+    {
+      "ok": true,
+      "label": "particles-off: Requested cancellation stage was observed"
+    },
+    {
+      "ok": true,
+      "label": "particles-off: MP4 is published"
+    },
+    {
+      "ok": true,
+      "label": "particles-off: Successful export cleans staged PNGs"
+    },
+    {
+      "ok": true,
+      "label": "particles-off: Worker diagnostics are retained"
+    },
+    {
+      "ok": true,
+      "label": "particles-off: Child uses the same packaged or development executable"
+    },
+    {
+      "ok": true,
+      "label": "particles-off: Child renderer matches parent"
+    },
+    {
+      "ok": true,
+      "label": "particles-off: Child uses release resources"
+    },
+    {
+      "ok": true,
+      "label": "particles-off: Video starts no parent scientific worker and preserves selections"
+    },
+    {
+      "ok": true,
+      "label": "particles-off: No portable recipe assets are created"
+    },
+    {
+      "ok": true,
+      "label": "particles-off: clean worker log apart from retained known encoder cleanup diagnostic"
+    },
+    {
+      "ok": true,
+      "label": "particles-off: ffprobe verifies H.264, resolution, FPS and two frames"
+    },
+    {
+      "ok": true,
+      "label": "particles-off: inspection records only when explicitly requested"
+    },
+    {
+      "ok": true,
+      "label": "particles-off: optional visual records contain no scientific selection results"
+    },
+    {
+      "ok": true,
+      "label": "particles-off: unusable Python is never invoked by video"
+    },
+    {
+      "ok": true,
+      "label": "particles-on: parent exits with only expected diagnostics"
+    },
+    {
+      "ok": true,
+      "label": "particles-on: Production viewer opens WVZ1"
+    },
+    {
+      "ok": true,
+      "label": "particles-on: Expected source or template executable"
+    },
+    {
+      "ok": true,
+      "label": "particles-on: Release template, with path overrides disabled"
+    },
+    {
+      "ok": true,
+      "label": "particles-on: File / Export / Video opens production dialog"
+    },
+    {
+      "ok": true,
+      "label": "particles-on: Advanced remains optional with zero/one/many selections"
+    },
+    {
+      "ok": true,
+      "label": "particles-on: Only development passes a project path override"
+    },
+    {
+      "ok": true,
+      "label": "particles-on: Start Export launches secondary process"
+    },
+    {
+      "ok": true,
+      "label": "particles-on: Launch diagnostics identify the current executable"
+    },
+    {
+      "ok": true,
+      "label": "particles-on: Correct launch arguments and renderer are retained"
+    },
+    {
+      "ok": true,
+      "label": "particles-on: Absolute source/job/output paths survive launch"
+    },
+    {
+      "ok": true,
+      "label": "particles-on: Only the explicit checkbox controls inspection records"
+    },
+    {
+      "ok": true,
+      "label": "particles-on: Video uses the ordinary schema without scientific recipes or quota"
+    },
+    {
+      "ok": true,
+      "label": "particles-on: Run in background retains the original worker"
+    },
+    {
+      "ok": true,
+      "label": "particles-on: Jobs reopens the same export"
+    },
+    {
+      "ok": true,
+      "label": "particles-on: Worker terminates within timeout"
+    },
+    {
+      "ok": true,
+      "label": "particles-on: Parent observes worker progress"
+    },
+    {
+      "ok": true,
+      "label": "particles-on: Expected terminal state"
+    },
+    {
+      "ok": true,
+      "label": "particles-on: Requested cancellation stage was observed"
+    },
+    {
+      "ok": true,
+      "label": "particles-on: MP4 is published"
+    },
+    {
+      "ok": true,
+      "label": "particles-on: Successful export cleans staged PNGs"
+    },
+    {
+      "ok": true,
+      "label": "particles-on: Worker diagnostics are retained"
+    },
+    {
+      "ok": true,
+      "label": "particles-on: Child uses the same packaged or development executable"
+    },
+    {
+      "ok": true,
+      "label": "particles-on: Child renderer matches parent"
+    },
+    {
+      "ok": true,
+      "label": "particles-on: Child uses release resources"
+    },
+    {
+      "ok": true,
+      "label": "particles-on: Video starts no parent scientific worker and preserves selections"
+    },
+    {
+      "ok": true,
+      "label": "particles-on: No portable recipe assets are created"
+    },
+    {
+      "ok": true,
+      "label": "particles-on: clean worker log apart from retained known encoder cleanup diagnostic"
+    },
+    {
+      "ok": true,
+      "label": "particles-on: ffprobe verifies H.264, resolution, FPS and two frames"
+    },
+    {
+      "ok": true,
+      "label": "particles-on: inspection records only when explicitly requested"
+    },
+    {
+      "ok": true,
+      "label": "particles-on: optional visual records contain no scientific selection results"
+    },
+    {
+      "ok": true,
+      "label": "particles-on: unusable Python is never invoked by video"
+    },
+    {
+      "ok": true,
+      "label": "mixed-off: parent exits with only expected diagnostics"
+    },
+    {
+      "ok": true,
+      "label": "mixed-off: Production viewer opens WVZ1"
+    },
+    {
+      "ok": true,
+      "label": "mixed-off: Expected source or template executable"
+    },
+    {
+      "ok": true,
+      "label": "mixed-off: Release template, with path overrides disabled"
+    },
+    {
+      "ok": true,
+      "label": "mixed-off: File / Export / Video opens production dialog"
+    },
+    {
+      "ok": true,
+      "label": "mixed-off: Advanced remains optional with zero/one/many selections"
+    },
+    {
+      "ok": true,
+      "label": "mixed-off: Only development passes a project path override"
+    },
+    {
+      "ok": true,
+      "label": "mixed-off: Start Export launches secondary process"
+    },
+    {
+      "ok": true,
+      "label": "mixed-off: Launch diagnostics identify the current executable"
+    },
+    {
+      "ok": true,
+      "label": "mixed-off: Correct launch arguments and renderer are retained"
+    },
+    {
+      "ok": true,
+      "label": "mixed-off: Absolute source/job/output paths survive launch"
+    },
+    {
+      "ok": true,
+      "label": "mixed-off: Only the explicit checkbox controls inspection records"
+    },
+    {
+      "ok": true,
+      "label": "mixed-off: Video uses the ordinary schema without scientific recipes or quota"
+    },
+    {
+      "ok": true,
+      "label": "mixed-off: Run in background retains the original worker"
+    },
+    {
+      "ok": true,
+      "label": "mixed-off: Jobs reopens the same export"
+    },
+    {
+      "ok": true,
+      "label": "mixed-off: Worker terminates within timeout"
+    },
+    {
+      "ok": true,
+      "label": "mixed-off: Parent observes worker progress"
+    },
+    {
+      "ok": true,
+      "label": "mixed-off: Expected terminal state"
+    },
+    {
+      "ok": true,
+      "label": "mixed-off: Requested cancellation stage was observed"
+    },
+    {
+      "ok": true,
+      "label": "mixed-off: MP4 is published"
+    },
+    {
+      "ok": true,
+      "label": "mixed-off: Successful export cleans staged PNGs"
+    },
+    {
+      "ok": true,
+      "label": "mixed-off: Worker diagnostics are retained"
+    },
+    {
+      "ok": true,
+      "label": "mixed-off: Child uses the same packaged or development executable"
+    },
+    {
+      "ok": true,
+      "label": "mixed-off: Child renderer matches parent"
+    },
+    {
+      "ok": true,
+      "label": "mixed-off: Child uses release resources"
+    },
+    {
+      "ok": true,
+      "label": "mixed-off: Video starts no parent scientific worker and preserves selections"
+    },
+    {
+      "ok": true,
+      "label": "mixed-off: No portable recipe assets are created"
+    },
+    {
+      "ok": true,
+      "label": "mixed-off: clean worker log apart from retained known encoder cleanup diagnostic"
+    },
+    {
+      "ok": true,
+      "label": "mixed-off: ffprobe verifies H.264, resolution, FPS and two frames"
+    },
+    {
+      "ok": true,
+      "label": "mixed-off: inspection records only when explicitly requested"
+    },
+    {
+      "ok": true,
+      "label": "mixed-off: optional visual records contain no scientific selection results"
+    },
+    {
+      "ok": true,
+      "label": "mixed-off: unusable Python is never invoked by video"
+    },
+    {
+      "ok": true,
+      "label": "mixed-on: parent exits with only expected diagnostics"
+    },
+    {
+      "ok": true,
+      "label": "mixed-on: Production viewer opens WVZ1"
+    },
+    {
+      "ok": true,
+      "label": "mixed-on: Expected source or template executable"
+    },
+    {
+      "ok": true,
+      "label": "mixed-on: Release template, with path overrides disabled"
+    },
+    {
+      "ok": true,
+      "label": "mixed-on: File / Export / Video opens production dialog"
+    },
+    {
+      "ok": true,
+      "label": "mixed-on: Advanced remains optional with zero/one/many selections"
+    },
+    {
+      "ok": true,
+      "label": "mixed-on: Only development passes a project path override"
+    },
+    {
+      "ok": true,
+      "label": "mixed-on: Start Export launches secondary process"
+    },
+    {
+      "ok": true,
+      "label": "mixed-on: Launch diagnostics identify the current executable"
+    },
+    {
+      "ok": true,
+      "label": "mixed-on: Correct launch arguments and renderer are retained"
+    },
+    {
+      "ok": true,
+      "label": "mixed-on: Absolute source/job/output paths survive launch"
+    },
+    {
+      "ok": true,
+      "label": "mixed-on: Only the explicit checkbox controls inspection records"
+    },
+    {
+      "ok": true,
+      "label": "mixed-on: Video uses the ordinary schema without scientific recipes or quota"
+    },
+    {
+      "ok": true,
+      "label": "mixed-on: Run in background retains the original worker"
+    },
+    {
+      "ok": true,
+      "label": "mixed-on: Jobs reopens the same export"
+    },
+    {
+      "ok": true,
+      "label": "mixed-on: Worker terminates within timeout"
+    },
+    {
+      "ok": true,
+      "label": "mixed-on: Parent observes worker progress"
+    },
+    {
+      "ok": true,
+      "label": "mixed-on: Expected terminal state"
+    },
+    {
+      "ok": true,
+      "label": "mixed-on: Requested cancellation stage was observed"
+    },
+    {
+      "ok": true,
+      "label": "mixed-on: MP4 is published"
+    },
+    {
+      "ok": true,
+      "label": "mixed-on: Successful export cleans staged PNGs"
+    },
+    {
+      "ok": true,
+      "label": "mixed-on: Worker diagnostics are retained"
+    },
+    {
+      "ok": true,
+      "label": "mixed-on: Child uses the same packaged or development executable"
+    },
+    {
+      "ok": true,
+      "label": "mixed-on: Child renderer matches parent"
+    },
+    {
+      "ok": true,
+      "label": "mixed-on: Child uses release resources"
+    },
+    {
+      "ok": true,
+      "label": "mixed-on: Video starts no parent scientific worker and preserves selections"
+    },
+    {
+      "ok": true,
+      "label": "mixed-on: No portable recipe assets are created"
+    },
+    {
+      "ok": true,
+      "label": "mixed-on: clean worker log apart from retained known encoder cleanup diagnostic"
+    },
+    {
+      "ok": true,
+      "label": "mixed-on: ffprobe verifies H.264, resolution, FPS and two frames"
+    },
+    {
+      "ok": true,
+      "label": "mixed-on: inspection records only when explicitly requested"
+    },
+    {
+      "ok": true,
+      "label": "mixed-on: optional visual records contain no scientific selection results"
+    },
+    {
+      "ok": true,
+      "label": "mixed-on: unusable Python is never invoked by video"
+    },
+    {
+      "ok": true,
+      "label": "selection-particle: parent exits with only expected diagnostics"
+    },
+    {
+      "ok": true,
+      "label": "selection-particle: Production viewer opens WVZ1"
+    },
+    {
+      "ok": true,
+      "label": "selection-particle: Expected source or template executable"
+    },
+    {
+      "ok": true,
+      "label": "selection-particle: Release template, with path overrides disabled"
+    },
+    {
+      "ok": true,
+      "label": "selection-particle: Independent Analysis binds without repository files"
+    },
+    {
+      "ok": true,
+      "label": "selection-particle: Independent Selection defines particle"
+    },
+    {
+      "ok": true,
+      "label": "selection-particle: Existing visible markers resolve before video"
+    },
+    {
+      "ok": true,
+      "label": "selection-particle: Particle/mesh/field definitions remain independent"
+    },
+    {
+      "ok": true,
+      "label": "selection-particle: File / Export / Video opens production dialog"
+    },
+    {
+      "ok": true,
+      "label": "selection-particle: Advanced remains optional with zero/one/many selections"
+    },
+    {
+      "ok": true,
+      "label": "selection-particle: Only development passes a project path override"
+    },
+    {
+      "ok": true,
+      "label": "selection-particle: Start Export launches secondary process"
+    },
+    {
+      "ok": true,
+      "label": "selection-particle: Launch diagnostics identify the current executable"
+    },
+    {
+      "ok": true,
+      "label": "selection-particle: Correct launch arguments and renderer are retained"
+    },
+    {
+      "ok": true,
+      "label": "selection-particle: Absolute source/job/output paths survive launch"
+    },
+    {
+      "ok": true,
+      "label": "selection-particle: Only the explicit checkbox controls inspection records"
+    },
+    {
+      "ok": true,
+      "label": "selection-particle: Video uses the ordinary schema without scientific recipes or quota"
+    },
+    {
+      "ok": true,
+      "label": "selection-particle: Run in background retains the original worker"
+    },
+    {
+      "ok": true,
+      "label": "selection-particle: Jobs reopens the same export"
+    },
+    {
+      "ok": true,
+      "label": "selection-particle: Worker terminates within timeout"
+    },
+    {
+      "ok": true,
+      "label": "selection-particle: Parent observes worker progress"
+    },
+    {
+      "ok": true,
+      "label": "selection-particle: Expected terminal state"
+    },
+    {
+      "ok": true,
+      "label": "selection-particle: Requested cancellation stage was observed"
+    },
+    {
+      "ok": true,
+      "label": "selection-particle: MP4 is published"
+    },
+    {
+      "ok": true,
+      "label": "selection-particle: Successful export cleans staged PNGs"
+    },
+    {
+      "ok": true,
+      "label": "selection-particle: Worker diagnostics are retained"
+    },
+    {
+      "ok": true,
+      "label": "selection-particle: Child uses the same packaged or development executable"
+    },
+    {
+      "ok": true,
+      "label": "selection-particle: Child renderer matches parent"
+    },
+    {
+      "ok": true,
+      "label": "selection-particle: Child uses release resources"
+    },
+    {
+      "ok": true,
+      "label": "selection-particle: Video starts no parent scientific worker and preserves selections"
+    },
+    {
+      "ok": true,
+      "label": "selection-particle: No portable recipe assets are created"
+    },
+    {
+      "ok": true,
+      "label": "selection-particle: clean worker log apart from retained known encoder cleanup diagnostic"
+    },
+    {
+      "ok": true,
+      "label": "selection-particle: ffprobe verifies H.264, resolution, FPS and two frames"
+    },
+    {
+      "ok": true,
+      "label": "selection-particle: inspection records only when explicitly requested"
+    },
+    {
+      "ok": true,
+      "label": "selection-particle: optional visual records contain no scientific selection results"
+    },
+    {
+      "ok": true,
+      "label": "selection-particle: particle marker follows displayed ID across sample brackets"
+    },
+    {
+      "ok": true,
+      "label": "selection-particle: unusable Python is never invoked by video"
+    },
+    {
+      "ok": true,
+      "label": "selection-hidden: parent exits with only expected diagnostics"
+    },
+    {
+      "ok": true,
+      "label": "selection-hidden: Production viewer opens WVZ1"
+    },
+    {
+      "ok": true,
+      "label": "selection-hidden: Expected source or template executable"
+    },
+    {
+      "ok": true,
+      "label": "selection-hidden: Release template, with path overrides disabled"
+    },
+    {
+      "ok": true,
+      "label": "selection-hidden: Independent Analysis binds without repository files"
+    },
+    {
+      "ok": true,
+      "label": "selection-hidden: Independent Selection defines particle"
+    },
+    {
+      "ok": true,
+      "label": "selection-hidden: Existing visible markers resolve before video"
+    },
+    {
+      "ok": true,
+      "label": "selection-hidden: Particle/mesh/field definitions remain independent"
+    },
+    {
+      "ok": true,
+      "label": "selection-hidden: File / Export / Video opens production dialog"
+    },
+    {
+      "ok": true,
+      "label": "selection-hidden: Advanced remains optional with zero/one/many selections"
+    },
+    {
+      "ok": true,
+      "label": "selection-hidden: Only development passes a project path override"
+    },
+    {
+      "ok": true,
+      "label": "selection-hidden: Start Export launches secondary process"
+    },
+    {
+      "ok": true,
+      "label": "selection-hidden: Launch diagnostics identify the current executable"
+    },
+    {
+      "ok": true,
+      "label": "selection-hidden: Correct launch arguments and renderer are retained"
+    },
+    {
+      "ok": true,
+      "label": "selection-hidden: Absolute source/job/output paths survive launch"
+    },
+    {
+      "ok": true,
+      "label": "selection-hidden: Only the explicit checkbox controls inspection records"
+    },
+    {
+      "ok": true,
+      "label": "selection-hidden: Video uses the ordinary schema without scientific recipes or quota"
+    },
+    {
+      "ok": true,
+      "label": "selection-hidden: Run in background retains the original worker"
+    },
+    {
+      "ok": true,
+      "label": "selection-hidden: Jobs reopens the same export"
+    },
+    {
+      "ok": true,
+      "label": "selection-hidden: Worker terminates within timeout"
+    },
+    {
+      "ok": true,
+      "label": "selection-hidden: Parent observes worker progress"
+    },
+    {
+      "ok": true,
+      "label": "selection-hidden: Expected terminal state"
+    },
+    {
+      "ok": true,
+      "label": "selection-hidden: Requested cancellation stage was observed"
+    },
+    {
+      "ok": true,
+      "label": "selection-hidden: MP4 is published"
+    },
+    {
+      "ok": true,
+      "label": "selection-hidden: Successful export cleans staged PNGs"
+    },
+    {
+      "ok": true,
+      "label": "selection-hidden: Worker diagnostics are retained"
+    },
+    {
+      "ok": true,
+      "label": "selection-hidden: Child uses the same packaged or development executable"
+    },
+    {
+      "ok": true,
+      "label": "selection-hidden: Child renderer matches parent"
+    },
+    {
+      "ok": true,
+      "label": "selection-hidden: Child uses release resources"
+    },
+    {
+      "ok": true,
+      "label": "selection-hidden: Video starts no parent scientific worker and preserves selections"
+    },
+    {
+      "ok": true,
+      "label": "selection-hidden: No portable recipe assets are created"
+    },
+    {
+      "ok": true,
+      "label": "selection-hidden: clean worker log apart from retained known encoder cleanup diagnostic"
+    },
+    {
+      "ok": true,
+      "label": "selection-hidden: ffprobe verifies H.264, resolution, FPS and two frames"
+    },
+    {
+      "ok": true,
+      "label": "selection-hidden: inspection records only when explicitly requested"
+    },
+    {
+      "ok": true,
+      "label": "selection-hidden: optional visual records contain no scientific selection results"
+    },
+    {
+      "ok": true,
+      "label": "selection-hidden: unusable Python is never invoked by video"
+    },
+    {
+      "ok": true,
+      "label": "selection-mesh: parent exits with only expected diagnostics"
+    },
+    {
+      "ok": true,
+      "label": "selection-mesh: Production viewer opens WVZ1"
+    },
+    {
+      "ok": true,
+      "label": "selection-mesh: Expected source or template executable"
+    },
+    {
+      "ok": true,
+      "label": "selection-mesh: Release template, with path overrides disabled"
+    },
+    {
+      "ok": true,
+      "label": "selection-mesh: Independent Analysis binds without repository files"
+    },
+    {
+      "ok": true,
+      "label": "selection-mesh: Independent Selection defines mesh"
+    },
+    {
+      "ok": true,
+      "label": "selection-mesh: Existing visible markers resolve before video"
+    },
+    {
+      "ok": true,
+      "label": "selection-mesh: Particle/mesh/field definitions remain independent"
+    },
+    {
+      "ok": true,
+      "label": "selection-mesh: File / Export / Video opens production dialog"
+    },
+    {
+      "ok": true,
+      "label": "selection-mesh: Advanced remains optional with zero/one/many selections"
+    },
+    {
+      "ok": true,
+      "label": "selection-mesh: Only development passes a project path override"
+    },
+    {
+      "ok": true,
+      "label": "selection-mesh: Start Export launches secondary process"
+    },
+    {
+      "ok": true,
+      "label": "selection-mesh: Launch diagnostics identify the current executable"
+    },
+    {
+      "ok": true,
+      "label": "selection-mesh: Correct launch arguments and renderer are retained"
+    },
+    {
+      "ok": true,
+      "label": "selection-mesh: Absolute source/job/output paths survive launch"
+    },
+    {
+      "ok": true,
+      "label": "selection-mesh: Only the explicit checkbox controls inspection records"
+    },
+    {
+      "ok": true,
+      "label": "selection-mesh: Video uses the ordinary schema without scientific recipes or quota"
+    },
+    {
+      "ok": true,
+      "label": "selection-mesh: Run in background retains the original worker"
+    },
+    {
+      "ok": true,
+      "label": "selection-mesh: Jobs reopens the same export"
+    },
+    {
+      "ok": true,
+      "label": "selection-mesh: Worker terminates within timeout"
+    },
+    {
+      "ok": true,
+      "label": "selection-mesh: Parent observes worker progress"
+    },
+    {
+      "ok": true,
+      "label": "selection-mesh: Expected terminal state"
+    },
+    {
+      "ok": true,
+      "label": "selection-mesh: Requested cancellation stage was observed"
+    },
+    {
+      "ok": true,
+      "label": "selection-mesh: MP4 is published"
+    },
+    {
+      "ok": true,
+      "label": "selection-mesh: Successful export cleans staged PNGs"
+    },
+    {
+      "ok": true,
+      "label": "selection-mesh: Worker diagnostics are retained"
+    },
+    {
+      "ok": true,
+      "label": "selection-mesh: Child uses the same packaged or development executable"
+    },
+    {
+      "ok": true,
+      "label": "selection-mesh: Child renderer matches parent"
+    },
+    {
+      "ok": true,
+      "label": "selection-mesh: Child uses release resources"
+    },
+    {
+      "ok": true,
+      "label": "selection-mesh: Video starts no parent scientific worker and preserves selections"
+    },
+    {
+      "ok": true,
+      "label": "selection-mesh: No portable recipe assets are created"
+    },
+    {
+      "ok": true,
+      "label": "selection-mesh: clean worker log apart from retained known encoder cleanup diagnostic"
+    },
+    {
+      "ok": true,
+      "label": "selection-mesh: ffprobe verifies H.264, resolution, FPS and two frames"
+    },
+    {
+      "ok": true,
+      "label": "selection-mesh: inspection records only when explicitly requested"
+    },
+    {
+      "ok": true,
+      "label": "selection-mesh: optional visual records contain no scientific selection results"
+    },
+    {
+      "ok": true,
+      "label": "selection-mesh: mesh marker follows displayed source vertex"
+    },
+    {
+      "ok": true,
+      "label": "selection-mesh: unusable Python is never invoked by video"
+    },
+    {
+      "ok": true,
+      "label": "selection-field: parent exits with only expected diagnostics"
+    },
+    {
+      "ok": true,
+      "label": "selection-field: Production viewer opens WVZ1"
+    },
+    {
+      "ok": true,
+      "label": "selection-field: Expected source or template executable"
+    },
+    {
+      "ok": true,
+      "label": "selection-field: Release template, with path overrides disabled"
+    },
+    {
+      "ok": true,
+      "label": "selection-field: Independent Analysis binds without repository files"
+    },
+    {
+      "ok": true,
+      "label": "selection-field: Independent Selection defines field"
+    },
+    {
+      "ok": true,
+      "label": "selection-field: Existing visible markers resolve before video"
+    },
+    {
+      "ok": true,
+      "label": "selection-field: Particle/mesh/field definitions remain independent"
+    },
+    {
+      "ok": true,
+      "label": "selection-field: File / Export / Video opens production dialog"
+    },
+    {
+      "ok": true,
+      "label": "selection-field: Advanced remains optional with zero/one/many selections"
+    },
+    {
+      "ok": true,
+      "label": "selection-field: Only development passes a project path override"
+    },
+    {
+      "ok": true,
+      "label": "selection-field: Start Export launches secondary process"
+    },
+    {
+      "ok": true,
+      "label": "selection-field: Launch diagnostics identify the current executable"
+    },
+    {
+      "ok": true,
+      "label": "selection-field: Correct launch arguments and renderer are retained"
+    },
+    {
+      "ok": true,
+      "label": "selection-field: Absolute source/job/output paths survive launch"
+    },
+    {
+      "ok": true,
+      "label": "selection-field: Only the explicit checkbox controls inspection records"
+    },
+    {
+      "ok": true,
+      "label": "selection-field: Video uses the ordinary schema without scientific recipes or quota"
+    },
+    {
+      "ok": true,
+      "label": "selection-field: Run in background retains the original worker"
+    },
+    {
+      "ok": true,
+      "label": "selection-field: Jobs reopens the same export"
+    },
+    {
+      "ok": true,
+      "label": "selection-field: Worker terminates within timeout"
+    },
+    {
+      "ok": true,
+      "label": "selection-field: Parent observes worker progress"
+    },
+    {
+      "ok": true,
+      "label": "selection-field: Expected terminal state"
+    },
+    {
+      "ok": true,
+      "label": "selection-field: Requested cancellation stage was observed"
+    },
+    {
+      "ok": true,
+      "label": "selection-field: MP4 is published"
+    },
+    {
+      "ok": true,
+      "label": "selection-field: Successful export cleans staged PNGs"
+    },
+    {
+      "ok": true,
+      "label": "selection-field: Worker diagnostics are retained"
+    },
+    {
+      "ok": true,
+      "label": "selection-field: Child uses the same packaged or development executable"
+    },
+    {
+      "ok": true,
+      "label": "selection-field: Child renderer matches parent"
+    },
+    {
+      "ok": true,
+      "label": "selection-field: Child uses release resources"
+    },
+    {
+      "ok": true,
+      "label": "selection-field: Video starts no parent scientific worker and preserves selections"
+    },
+    {
+      "ok": true,
+      "label": "selection-field: No portable recipe assets are created"
+    },
+    {
+      "ok": true,
+      "label": "selection-field: clean worker log apart from retained known encoder cleanup diagnostic"
+    },
+    {
+      "ok": true,
+      "label": "selection-field: ffprobe verifies H.264, resolution, FPS and two frames"
+    },
+    {
+      "ok": true,
+      "label": "selection-field: inspection records only when explicitly requested"
+    },
+    {
+      "ok": true,
+      "label": "selection-field: optional visual records contain no scientific selection results"
+    },
+    {
+      "ok": true,
+      "label": "selection-field: native grid address expires outside its source sample"
+    },
+    {
+      "ok": true,
+      "label": "selection-field: unusable Python is never invoked by video"
+    },
+    {
+      "ok": true,
+      "label": "selection-all: parent exits with only expected diagnostics"
+    },
+    {
+      "ok": true,
+      "label": "selection-all: Production viewer opens WVZ1"
+    },
+    {
+      "ok": true,
+      "label": "selection-all: Expected source or template executable"
+    },
+    {
+      "ok": true,
+      "label": "selection-all: Release template, with path overrides disabled"
+    },
+    {
+      "ok": true,
+      "label": "selection-all: Independent Analysis binds without repository files"
+    },
+    {
+      "ok": true,
+      "label": "selection-all: Independent Selection defines particle"
+    },
+    {
+      "ok": true,
+      "label": "selection-all: Independent Selection defines mesh"
+    },
+    {
+      "ok": true,
+      "label": "selection-all: Independent Selection defines field"
+    },
+    {
+      "ok": true,
+      "label": "selection-all: Existing visible markers resolve before video"
+    },
+    {
+      "ok": true,
+      "label": "selection-all: Particle/mesh/field definitions remain independent"
+    },
+    {
+      "ok": true,
+      "label": "selection-all: File / Export / Video opens production dialog"
+    },
+    {
+      "ok": true,
+      "label": "selection-all: Advanced remains optional with zero/one/many selections"
+    },
+    {
+      "ok": true,
+      "label": "selection-all: Only development passes a project path override"
+    },
+    {
+      "ok": true,
+      "label": "selection-all: Start Export launches secondary process"
+    },
+    {
+      "ok": true,
+      "label": "selection-all: Launch diagnostics identify the current executable"
+    },
+    {
+      "ok": true,
+      "label": "selection-all: Correct launch arguments and renderer are retained"
+    },
+    {
+      "ok": true,
+      "label": "selection-all: Absolute source/job/output paths survive launch"
+    },
+    {
+      "ok": true,
+      "label": "selection-all: Only the explicit checkbox controls inspection records"
+    },
+    {
+      "ok": true,
+      "label": "selection-all: Video uses the ordinary schema without scientific recipes or quota"
+    },
+    {
+      "ok": true,
+      "label": "selection-all: Run in background retains the original worker"
+    },
+    {
+      "ok": true,
+      "label": "selection-all: Jobs reopens the same export"
+    },
+    {
+      "ok": true,
+      "label": "selection-all: Worker terminates within timeout"
+    },
+    {
+      "ok": true,
+      "label": "selection-all: Parent observes worker progress"
+    },
+    {
+      "ok": true,
+      "label": "selection-all: Expected terminal state"
+    },
+    {
+      "ok": true,
+      "label": "selection-all: Requested cancellation stage was observed"
+    },
+    {
+      "ok": true,
+      "label": "selection-all: MP4 is published"
+    },
+    {
+      "ok": true,
+      "label": "selection-all: Successful export cleans staged PNGs"
+    },
+    {
+      "ok": true,
+      "label": "selection-all: Worker diagnostics are retained"
+    },
+    {
+      "ok": true,
+      "label": "selection-all: Child uses the same packaged or development executable"
+    },
+    {
+      "ok": true,
+      "label": "selection-all: Child renderer matches parent"
+    },
+    {
+      "ok": true,
+      "label": "selection-all: Child uses release resources"
+    },
+    {
+      "ok": true,
+      "label": "selection-all: Video starts no parent scientific worker and preserves selections"
+    },
+    {
+      "ok": true,
+      "label": "selection-all: No portable recipe assets are created"
+    },
+    {
+      "ok": true,
+      "label": "selection-all: clean worker log apart from retained known encoder cleanup diagnostic"
+    },
+    {
+      "ok": true,
+      "label": "selection-all: ffprobe verifies H.264, resolution, FPS and two frames"
+    },
+    {
+      "ok": true,
+      "label": "selection-all: inspection records only when explicitly requested"
+    },
+    {
+      "ok": true,
+      "label": "selection-all: optional visual records contain no scientific selection results"
+    },
+    {
+      "ok": true,
+      "label": "selection-all: particle marker follows displayed ID across sample brackets"
+    },
+    {
+      "ok": true,
+      "label": "selection-all: mesh marker follows displayed source vertex"
+    },
+    {
+      "ok": true,
+      "label": "selection-all: native grid address expires outside its source sample"
+    },
+    {
+      "ok": true,
+      "label": "selection-all: unusable Python is never invoked by video"
+    },
+    {
+      "ok": true,
+      "label": "selection-optional: parent exits with only expected diagnostics"
+    },
+    {
+      "ok": true,
+      "label": "selection-optional: Production viewer opens WVZ1"
+    },
+    {
+      "ok": true,
+      "label": "selection-optional: Expected source or template executable"
+    },
+    {
+      "ok": true,
+      "label": "selection-optional: Release template, with path overrides disabled"
+    },
+    {
+      "ok": true,
+      "label": "selection-optional: Independent Analysis binds without repository files"
+    },
+    {
+      "ok": true,
+      "label": "selection-optional: Independent Selection defines particle"
+    },
+    {
+      "ok": true,
+      "label": "selection-optional: Existing visible markers resolve before video"
+    },
+    {
+      "ok": true,
+      "label": "selection-optional: Particle/mesh/field definitions remain independent"
+    },
+    {
+      "ok": true,
+      "label": "selection-optional: File / Export / Video opens production dialog"
+    },
+    {
+      "ok": true,
+      "label": "selection-optional: Advanced remains optional with zero/one/many selections"
+    },
+    {
+      "ok": true,
+      "label": "selection-optional: Only development passes a project path override"
+    },
+    {
+      "ok": true,
+      "label": "selection-optional: Start Export launches secondary process"
+    },
+    {
+      "ok": true,
+      "label": "selection-optional: Launch diagnostics identify the current executable"
+    },
+    {
+      "ok": true,
+      "label": "selection-optional: Correct launch arguments and renderer are retained"
+    },
+    {
+      "ok": true,
+      "label": "selection-optional: Absolute source/job/output paths survive launch"
+    },
+    {
+      "ok": true,
+      "label": "selection-optional: Only the explicit checkbox controls inspection records"
+    },
+    {
+      "ok": true,
+      "label": "selection-optional: Video uses the ordinary schema without scientific recipes or quota"
+    },
+    {
+      "ok": true,
+      "label": "selection-optional: Run in background retains the original worker"
+    },
+    {
+      "ok": true,
+      "label": "selection-optional: Jobs reopens the same export"
+    },
+    {
+      "ok": true,
+      "label": "selection-optional: Worker terminates within timeout"
+    },
+    {
+      "ok": true,
+      "label": "selection-optional: Parent observes worker progress"
+    },
+    {
+      "ok": true,
+      "label": "selection-optional: Expected terminal state"
+    },
+    {
+      "ok": true,
+      "label": "selection-optional: Requested cancellation stage was observed"
+    },
+    {
+      "ok": true,
+      "label": "selection-optional: MP4 is published"
+    },
+    {
+      "ok": true,
+      "label": "selection-optional: Successful export cleans staged PNGs"
+    },
+    {
+      "ok": true,
+      "label": "selection-optional: Worker diagnostics are retained"
+    },
+    {
+      "ok": true,
+      "label": "selection-optional: Child uses the same packaged or development executable"
+    },
+    {
+      "ok": true,
+      "label": "selection-optional: Child renderer matches parent"
+    },
+    {
+      "ok": true,
+      "label": "selection-optional: Child uses release resources"
+    },
+    {
+      "ok": true,
+      "label": "selection-optional: Video starts no parent scientific worker and preserves selections"
+    },
+    {
+      "ok": true,
+      "label": "selection-optional: No portable recipe assets are created"
+    },
+    {
+      "ok": true,
+      "label": "selection-optional: clean worker log apart from retained known encoder cleanup diagnostic"
+    },
+    {
+      "ok": true,
+      "label": "selection-optional: ffprobe verifies H.264, resolution, FPS and two frames"
+    },
+    {
+      "ok": true,
+      "label": "selection-optional: inspection records only when explicitly requested"
+    },
+    {
+      "ok": true,
+      "label": "selection-optional: optional visual records contain no scientific selection results"
+    },
+    {
+      "ok": true,
+      "label": "selection-optional: particle marker follows displayed ID across sample brackets"
+    },
+    {
+      "ok": true,
+      "label": "selection-optional: unusable Python is never invoked by video"
+    },
+    {
+      "ok": true,
+      "label": "ordinary-optional: parent exits with only expected diagnostics"
+    },
+    {
+      "ok": true,
+      "label": "ordinary-optional: Production viewer opens WVZ1"
+    },
+    {
+      "ok": true,
+      "label": "ordinary-optional: Expected source or template executable"
+    },
+    {
+      "ok": true,
+      "label": "ordinary-optional: Release template, with path overrides disabled"
+    },
+    {
+      "ok": true,
+      "label": "ordinary-optional: File / Export / Video opens production dialog"
+    },
+    {
+      "ok": true,
+      "label": "ordinary-optional: Advanced remains optional with zero/one/many selections"
+    },
+    {
+      "ok": true,
+      "label": "ordinary-optional: Only development passes a project path override"
+    },
+    {
+      "ok": true,
+      "label": "ordinary-optional: Start Export launches secondary process"
+    },
+    {
+      "ok": true,
+      "label": "ordinary-optional: Launch diagnostics identify the current executable"
+    },
+    {
+      "ok": true,
+      "label": "ordinary-optional: Correct launch arguments and renderer are retained"
+    },
+    {
+      "ok": true,
+      "label": "ordinary-optional: Absolute source/job/output paths survive launch"
+    },
+    {
+      "ok": true,
+      "label": "ordinary-optional: Only the explicit checkbox controls inspection records"
+    },
+    {
+      "ok": true,
+      "label": "ordinary-optional: Video uses the ordinary schema without scientific recipes or quota"
+    },
+    {
+      "ok": true,
+      "label": "ordinary-optional: Run in background retains the original worker"
+    },
+    {
+      "ok": true,
+      "label": "ordinary-optional: Jobs reopens the same export"
+    },
+    {
+      "ok": true,
+      "label": "ordinary-optional: Worker terminates within timeout"
+    },
+    {
+      "ok": true,
+      "label": "ordinary-optional: Parent observes worker progress"
+    },
+    {
+      "ok": true,
+      "label": "ordinary-optional: Expected terminal state"
+    },
+    {
+      "ok": true,
+      "label": "ordinary-optional: Requested cancellation stage was observed"
+    },
+    {
+      "ok": true,
+      "label": "ordinary-optional: MP4 is published"
+    },
+    {
+      "ok": true,
+      "label": "ordinary-optional: Successful export cleans staged PNGs"
+    },
+    {
+      "ok": true,
+      "label": "ordinary-optional: Worker diagnostics are retained"
+    },
+    {
+      "ok": true,
+      "label": "ordinary-optional: Child uses the same packaged or development executable"
+    },
+    {
+      "ok": true,
+      "label": "ordinary-optional: Child renderer matches parent"
+    },
+    {
+      "ok": true,
+      "label": "ordinary-optional: Child uses release resources"
+    },
+    {
+      "ok": true,
+      "label": "ordinary-optional: Video starts no parent scientific worker and preserves selections"
+    },
+    {
+      "ok": true,
+      "label": "ordinary-optional: No portable recipe assets are created"
+    },
+    {
+      "ok": true,
+      "label": "ordinary-optional: clean worker log apart from retained known encoder cleanup diagnostic"
+    },
+    {
+      "ok": true,
+      "label": "ordinary-optional: ffprobe verifies H.264, resolution, FPS and two frames"
+    },
+    {
+      "ok": true,
+      "label": "ordinary-optional: inspection records only when explicitly requested"
+    },
+    {
+      "ok": true,
+      "label": "ordinary-optional: optional visual records contain no scientific selection results"
+    },
+    {
+      "ok": true,
+      "label": "ordinary-optional: unusable Python is never invoked by video"
+    },
+    {
+      "ok": true,
+      "label": "cancel-rendering: parent exits with only expected diagnostics"
+    },
+    {
+      "ok": true,
+      "label": "cancel-rendering: Production viewer opens WVZ1"
+    },
+    {
+      "ok": true,
+      "label": "cancel-rendering: Expected source or template executable"
+    },
+    {
+      "ok": true,
+      "label": "cancel-rendering: Release template, with path overrides disabled"
+    },
+    {
+      "ok": true,
+      "label": "cancel-rendering: File / Export / Video opens production dialog"
+    },
+    {
+      "ok": true,
+      "label": "cancel-rendering: Advanced remains optional with zero/one/many selections"
+    },
+    {
+      "ok": true,
+      "label": "cancel-rendering: Only development passes a project path override"
+    },
+    {
+      "ok": true,
+      "label": "cancel-rendering: Start Export launches secondary process"
+    },
+    {
+      "ok": true,
+      "label": "cancel-rendering: Launch diagnostics identify the current executable"
+    },
+    {
+      "ok": true,
+      "label": "cancel-rendering: Correct launch arguments and renderer are retained"
+    },
+    {
+      "ok": true,
+      "label": "cancel-rendering: Absolute source/job/output paths survive launch"
+    },
+    {
+      "ok": true,
+      "label": "cancel-rendering: Only the explicit checkbox controls inspection records"
+    },
+    {
+      "ok": true,
+      "label": "cancel-rendering: Video uses the ordinary schema without scientific recipes or quota"
+    },
+    {
+      "ok": true,
+      "label": "cancel-rendering: Run in background retains the original worker"
+    },
+    {
+      "ok": true,
+      "label": "cancel-rendering: Jobs reopens the same export"
+    },
+    {
+      "ok": true,
+      "label": "cancel-rendering: Jobs cancellation uses the accepted confirmation"
+    },
+    {
+      "ok": true,
+      "label": "cancel-rendering: Worker terminates within timeout"
+    },
+    {
+      "ok": true,
+      "label": "cancel-rendering: Parent observes worker progress"
+    },
+    {
+      "ok": true,
+      "label": "cancel-rendering: Expected terminal state"
+    },
+    {
+      "ok": true,
+      "label": "cancel-rendering: Requested cancellation stage was observed"
+    },
+    {
+      "ok": true,
+      "label": "cancel-rendering: Failed/cancelled export publishes no MP4"
+    },
+    {
+      "ok": true,
+      "label": "cancel-rendering: Failed/cancelled export retains completed frames"
+    },
+    {
+      "ok": true,
+      "label": "cancel-rendering: Worker diagnostics are retained"
+    },
+    {
+      "ok": true,
+      "label": "cancel-rendering: Child uses the same packaged or development executable"
+    },
+    {
+      "ok": true,
+      "label": "cancel-rendering: Child renderer matches parent"
+    },
+    {
+      "ok": true,
+      "label": "cancel-rendering: Child uses release resources"
+    },
+    {
+      "ok": true,
+      "label": "cancel-rendering: Video starts no parent scientific worker and preserves selections"
+    },
+    {
+      "ok": true,
+      "label": "cancel-rendering: No portable recipe assets are created"
+    },
+    {
+      "ok": true,
+      "label": "cancel-rendering: clean worker log apart from retained known encoder cleanup diagnostic"
+    },
+    {
+      "ok": true,
+      "label": "cancel-rendering: unusable Python is never invoked by video"
+    },
+    {
+      "ok": true,
+      "label": "cancel-encoding: parent exits with only expected diagnostics"
+    },
+    {
+      "ok": true,
+      "label": "cancel-encoding: Production viewer opens WVZ1"
+    },
+    {
+      "ok": true,
+      "label": "cancel-encoding: Expected source or template executable"
+    },
+    {
+      "ok": true,
+      "label": "cancel-encoding: Release template, with path overrides disabled"
+    },
+    {
+      "ok": true,
+      "label": "cancel-encoding: File / Export / Video opens production dialog"
+    },
+    {
+      "ok": true,
+      "label": "cancel-encoding: Advanced remains optional with zero/one/many selections"
+    },
+    {
+      "ok": true,
+      "label": "cancel-encoding: Only development passes a project path override"
+    },
+    {
+      "ok": true,
+      "label": "cancel-encoding: Start Export launches secondary process"
+    },
+    {
+      "ok": true,
+      "label": "cancel-encoding: Launch diagnostics identify the current executable"
+    },
+    {
+      "ok": true,
+      "label": "cancel-encoding: Correct launch arguments and renderer are retained"
+    },
+    {
+      "ok": true,
+      "label": "cancel-encoding: Absolute source/job/output paths survive launch"
+    },
+    {
+      "ok": true,
+      "label": "cancel-encoding: Only the explicit checkbox controls inspection records"
+    },
+    {
+      "ok": true,
+      "label": "cancel-encoding: Video uses the ordinary schema without scientific recipes or quota"
+    },
+    {
+      "ok": true,
+      "label": "cancel-encoding: Run in background retains the original worker"
+    },
+    {
+      "ok": true,
+      "label": "cancel-encoding: Jobs reopens the same export"
+    },
+    {
+      "ok": true,
+      "label": "cancel-encoding: Jobs cancellation uses the accepted confirmation"
+    },
+    {
+      "ok": true,
+      "label": "cancel-encoding: Worker terminates within timeout"
+    },
+    {
+      "ok": true,
+      "label": "cancel-encoding: Parent observes worker progress"
+    },
+    {
+      "ok": true,
+      "label": "cancel-encoding: Expected terminal state"
+    },
+    {
+      "ok": true,
+      "label": "cancel-encoding: Requested cancellation stage was observed"
+    },
+    {
+      "ok": true,
+      "label": "cancel-encoding: Failed/cancelled export publishes no MP4"
+    },
+    {
+      "ok": true,
+      "label": "cancel-encoding: Failed/cancelled export retains completed frames"
+    },
+    {
+      "ok": true,
+      "label": "cancel-encoding: Worker diagnostics are retained"
+    },
+    {
+      "ok": true,
+      "label": "cancel-encoding: Child uses the same packaged or development executable"
+    },
+    {
+      "ok": true,
+      "label": "cancel-encoding: Child renderer matches parent"
+    },
+    {
+      "ok": true,
+      "label": "cancel-encoding: Child uses release resources"
+    },
+    {
+      "ok": true,
+      "label": "cancel-encoding: Video starts no parent scientific worker and preserves selections"
+    },
+    {
+      "ok": true,
+      "label": "cancel-encoding: No portable recipe assets are created"
+    },
+    {
+      "ok": true,
+      "label": "cancel-encoding: clean worker log apart from retained known encoder cleanup diagnostic"
+    },
+    {
+      "ok": true,
+      "label": "cancel-encoding: unusable Python is never invoked by video"
+    },
+    {
+      "ok": true,
+      "label": "failed-encoder: parent exits with only expected diagnostics"
+    },
+    {
+      "ok": true,
+      "label": "failed-encoder: Production viewer opens WVZ1"
+    },
+    {
+      "ok": true,
+      "label": "failed-encoder: Expected source or template executable"
+    },
+    {
+      "ok": true,
+      "label": "failed-encoder: Release template, with path overrides disabled"
+    },
+    {
+      "ok": true,
+      "label": "failed-encoder: File / Export / Video opens production dialog"
+    },
+    {
+      "ok": true,
+      "label": "failed-encoder: Advanced remains optional with zero/one/many selections"
+    },
+    {
+      "ok": true,
+      "label": "failed-encoder: Only development passes a project path override"
+    },
+    {
+      "ok": true,
+      "label": "failed-encoder: Start Export launches secondary process"
+    },
+    {
+      "ok": true,
+      "label": "failed-encoder: Launch diagnostics identify the current executable"
+    },
+    {
+      "ok": true,
+      "label": "failed-encoder: Correct launch arguments and renderer are retained"
+    },
+    {
+      "ok": true,
+      "label": "failed-encoder: Absolute source/job/output paths survive launch"
+    },
+    {
+      "ok": true,
+      "label": "failed-encoder: Only the explicit checkbox controls inspection records"
+    },
+    {
+      "ok": true,
+      "label": "failed-encoder: Video uses the ordinary schema without scientific recipes or quota"
+    },
+    {
+      "ok": true,
+      "label": "failed-encoder: Run in background retains the original worker"
+    },
+    {
+      "ok": true,
+      "label": "failed-encoder: Jobs reopens the same export"
+    },
+    {
+      "ok": true,
+      "label": "failed-encoder: Worker terminates within timeout"
+    },
+    {
+      "ok": true,
+      "label": "failed-encoder: Parent observes worker progress"
+    },
+    {
+      "ok": true,
+      "label": "failed-encoder: Expected terminal state"
+    },
+    {
+      "ok": true,
+      "label": "failed-encoder: Requested cancellation stage was observed"
+    },
+    {
+      "ok": true,
+      "label": "failed-encoder: Failed/cancelled export publishes no MP4"
+    },
+    {
+      "ok": true,
+      "label": "failed-encoder: Failed/cancelled export retains completed frames"
+    },
+    {
+      "ok": true,
+      "label": "failed-encoder: Worker diagnostics are retained"
+    },
+    {
+      "ok": true,
+      "label": "failed-encoder: Child uses the same packaged or development executable"
+    },
+    {
+      "ok": true,
+      "label": "failed-encoder: Child renderer matches parent"
+    },
+    {
+      "ok": true,
+      "label": "failed-encoder: Child uses release resources"
+    },
+    {
+      "ok": true,
+      "label": "failed-encoder: Video starts no parent scientific worker and preserves selections"
+    },
+    {
+      "ok": true,
+      "label": "failed-encoder: No portable recipe assets are created"
+    },
+    {
+      "ok": true,
+      "label": "failed-encoder: clean worker log apart from retained known encoder cleanup diagnostic"
+    },
+    {
+      "ok": true,
+      "label": "failed-encoder: unusable Python is never invoked by video"
+    },
+    {
+      "ok": true,
+      "label": "missing-encoder: parent exits with only expected diagnostics"
+    },
+    {
+      "ok": true,
+      "label": "missing-encoder: Production viewer opens WVZ1"
+    },
+    {
+      "ok": true,
+      "label": "missing-encoder: Expected source or template executable"
+    },
+    {
+      "ok": true,
+      "label": "missing-encoder: Release template, with path overrides disabled"
+    },
+    {
+      "ok": true,
+      "label": "missing-encoder: File / Export / Video opens production dialog"
+    },
+    {
+      "ok": true,
+      "label": "missing-encoder: Advanced remains optional with zero/one/many selections"
+    },
+    {
+      "ok": true,
+      "label": "missing-encoder: Only development passes a project path override"
+    },
+    {
+      "ok": true,
+      "label": "missing-encoder: Missing FFmpeg refuses before worker launch"
+    },
+    {
+      "ok": true,
+      "label": "missing-encoder: unusable Python is never invoked by video"
+    },
+    {
+      "ok": true,
+      "label": "parent-shutdown: parent exits with only expected diagnostics"
+    },
+    {
+      "ok": true,
+      "label": "parent-shutdown: Production viewer opens WVZ1"
+    },
+    {
+      "ok": true,
+      "label": "parent-shutdown: Expected source or template executable"
+    },
+    {
+      "ok": true,
+      "label": "parent-shutdown: Release template, with path overrides disabled"
+    },
+    {
+      "ok": true,
+      "label": "parent-shutdown: File / Export / Video opens production dialog"
+    },
+    {
+      "ok": true,
+      "label": "parent-shutdown: Advanced remains optional with zero/one/many selections"
+    },
+    {
+      "ok": true,
+      "label": "parent-shutdown: Only development passes a project path override"
+    },
+    {
+      "ok": true,
+      "label": "parent-shutdown: Start Export launches secondary process"
+    },
+    {
+      "ok": true,
+      "label": "parent-shutdown: Launch diagnostics identify the current executable"
+    },
+    {
+      "ok": true,
+      "label": "parent-shutdown: Correct launch arguments and renderer are retained"
+    },
+    {
+      "ok": true,
+      "label": "parent-shutdown: Absolute source/job/output paths survive launch"
+    },
+    {
+      "ok": true,
+      "label": "parent-shutdown: Only the explicit checkbox controls inspection records"
+    },
+    {
+      "ok": true,
+      "label": "parent-shutdown: Video uses the ordinary schema without scientific recipes or quota"
+    },
+    {
+      "ok": true,
+      "label": "parent-shutdown: Run in background retains the original worker"
+    },
+    {
+      "ok": true,
+      "label": "parent-shutdown: Jobs reopens the same export"
+    },
+    {
+      "ok": true,
+      "label": "parent-shutdown: parent teardown requests and worker acknowledges cancellation"
+    },
+    {
+      "ok": true,
+      "label": "parent-shutdown: no MP4 is published"
+    },
+    {
+      "ok": true,
+      "label": "parent-shutdown: clean worker log apart from retained known encoder cleanup diagnostic"
+    },
+    {
+      "ok": true,
+      "label": "parent-shutdown: unusable Python is never invoked by video"
+    },
+    {
+      "ok": true,
+      "label": "startup-failure: missing-PCK startup diagnostic is preserved"
+    },
+    {
+      "ok": true,
+      "label": "startup-failure: parent exits with only expected diagnostics"
+    },
+    {
+      "ok": true,
+      "label": "startup-failure: Production viewer opens WVZ1"
+    },
+    {
+      "ok": true,
+      "label": "startup-failure: Expected source or template executable"
+    },
+    {
+      "ok": true,
+      "label": "startup-failure: Release template, with path overrides disabled"
+    },
+    {
+      "ok": true,
+      "label": "startup-failure: File / Export / Video opens production dialog"
+    },
+    {
+      "ok": true,
+      "label": "startup-failure: Advanced remains optional with zero/one/many selections"
+    },
+    {
+      "ok": true,
+      "label": "startup-failure: Only development passes a project path override"
+    },
+    {
+      "ok": true,
+      "label": "startup-failure: Start Export launches secondary process"
+    },
+    {
+      "ok": true,
+      "label": "startup-failure: Launch diagnostics identify the current executable"
+    },
+    {
+      "ok": true,
+      "label": "startup-failure: Correct launch arguments and renderer are retained"
+    },
+    {
+      "ok": true,
+      "label": "startup-failure: Absolute source/job/output paths survive launch"
+    },
+    {
+      "ok": true,
+      "label": "startup-failure: Only the explicit checkbox controls inspection records"
+    },
+    {
+      "ok": true,
+      "label": "startup-failure: Video uses the ordinary schema without scientific recipes or quota"
+    },
+    {
+      "ok": true,
+      "label": "startup-failure: Run in background retains the original worker"
+    },
+    {
+      "ok": true,
+      "label": "startup-failure: Jobs reopens the same export"
+    },
+    {
+      "ok": true,
+      "label": "startup-failure: Worker terminates within timeout"
+    },
+    {
+      "ok": true,
+      "label": "startup-failure: Expected terminal state"
+    },
+    {
+      "ok": true,
+      "label": "startup-failure: Requested cancellation stage was observed"
+    },
+    {
+      "ok": true,
+      "label": "startup-failure: Early worker failure exposes exit status and retained diagnostics path"
+    },
+    {
+      "ok": true,
+      "label": "startup-failure: Early failure retains exact job and launch command"
+    },
+    {
+      "ok": true,
+      "label": "startup-failure: unusable Python is never invoked by video"
+    },
+    {
+      "ok": true,
+      "label": "All synthetic source bytes unchanged"
+    },
+    {
+      "ok": true,
+      "label": "particles: enabled overlays/orbit affect exported pixels"
+    },
+    {
+      "ok": true,
+      "label": "mixed: enabled overlays/orbit affect exported pixels"
+    },
+    {
+      "ok": true,
+      "label": "Visible carried markers change exported pixels"
+    },
+    {
+      "ok": true,
+      "label": "Invisible selection definitions do not change video pixels"
+    },
+    {
+      "ok": true,
+      "label": "particles-off: release pixels match development"
+    },
+    {
+      "ok": true,
+      "label": "particles-off: release source-time/sample/camera trace matches development"
+    },
+    {
+      "ok": true,
+      "label": "particles-on: release pixels match development"
+    },
+    {
+      "ok": true,
+      "label": "particles-on: release source-time/sample/camera trace matches development"
+    },
+    {
+      "ok": true,
+      "label": "mixed-off: release pixels match development"
+    },
+    {
+      "ok": true,
+      "label": "mixed-off: release source-time/sample/camera trace matches development"
+    },
+    {
+      "ok": true,
+      "label": "mixed-on: release pixels match development"
+    },
+    {
+      "ok": true,
+      "label": "mixed-on: release source-time/sample/camera trace matches development"
+    },
+    {
+      "ok": true,
+      "label": "selection-particle: release pixels match development"
+    },
+    {
+      "ok": true,
+      "label": "selection-particle: release source-time/sample/camera trace matches development"
+    },
+    {
+      "ok": true,
+      "label": "selection-hidden: release pixels match development"
+    },
+    {
+      "ok": true,
+      "label": "selection-hidden: release source-time/sample/camera trace matches development"
+    },
+    {
+      "ok": true,
+      "label": "selection-mesh: release pixels match development"
+    },
+    {
+      "ok": true,
+      "label": "selection-mesh: release source-time/sample/camera trace matches development"
+    },
+    {
+      "ok": true,
+      "label": "selection-field: release pixels match development"
+    },
+    {
+      "ok": true,
+      "label": "selection-field: release source-time/sample/camera trace matches development"
+    },
+    {
+      "ok": true,
+      "label": "selection-all: release pixels match development"
+    },
+    {
+      "ok": true,
+      "label": "selection-all: release source-time/sample/camera trace matches development"
+    },
+    {
+      "ok": true,
+      "label": "selection-optional: release pixels match development"
+    },
+    {
+      "ok": true,
+      "label": "selection-optional: release source-time/sample/camera trace matches development"
+    },
+    {
+      "ok": true,
+      "label": "ordinary-optional: release pixels match development"
+    },
+    {
+      "ok": true,
+      "label": "ordinary-optional: release source-time/sample/camera trace matches development"
+    },
+    {
+      "ok": true,
+      "label": "Materialized first-party Python files are removed at shutdown"
+    }
+  ],
+  "runs": [
+    {
+      "checks": [
+        {
+          "label": "Production viewer opens WVZ1",
+          "ok": true
+        },
+        {
+          "label": "Expected source or template executable",
+          "ok": true
+        },
+        {
+          "label": "Release template, with path overrides disabled",
+          "ok": true
+        },
+        {
+          "label": "File / Export / Video opens production dialog",
+          "ok": true
+        },
+        {
+          "label": "Advanced remains optional with zero/one/many selections",
+          "ok": true
+        },
+        {
+          "label": "Only development passes a project path override",
+          "ok": true
+        },
+        {
+          "label": "Start Export launches secondary process",
+          "ok": true
+        },
+        {
+          "label": "Launch diagnostics identify the current executable",
+          "ok": true
+        },
+        {
+          "label": "Correct launch arguments and renderer are retained",
+          "ok": true
+        },
+        {
+          "label": "Absolute source/job/output paths survive launch",
+          "ok": true
+        },
+        {
+          "label": "Only the explicit checkbox controls inspection records",
+          "ok": true
+        },
+        {
+          "label": "Video uses the ordinary schema without scientific recipes or quota",
+          "ok": true
+        },
+        {
+          "label": "Run in background retains the original worker",
+          "ok": true
+        },
+        {
+          "label": "Jobs reopens the same export",
+          "ok": true
+        },
+        {
+          "label": "Worker terminates within timeout",
+          "ok": true
+        },
+        {
+          "label": "Parent observes worker progress",
+          "ok": true
+        },
+        {
+          "label": "Expected terminal state",
+          "ok": true
+        },
+        {
+          "label": "Requested cancellation stage was observed",
+          "ok": true
+        },
+        {
+          "label": "MP4 is published",
+          "ok": true
+        },
+        {
+          "label": "Successful export cleans staged PNGs",
+          "ok": true
+        },
+        {
+          "label": "Worker diagnostics are retained",
+          "ok": true
+        },
+        {
+          "label": "Child uses the same packaged or development executable",
+          "ok": true
+        },
+        {
+          "label": "Child renderer matches parent",
+          "ok": true
+        },
+        {
+          "label": "Child uses release resources",
+          "ok": true
+        },
+        {
+          "label": "Video starts no parent scientific worker and preserves selections",
+          "ok": true
+        },
+        {
+          "label": "No portable recipe assets are created",
+          "ok": true
+        }
+      ],
+      "directory": "/tmp/wavez-340-final-release-compat/particles-off/.wavez-export-1791704133-2011500",
+      "message": "Complete \u2014 2 / 2 frames rendered (100%)\nElapsed: 00:00:00\nEstimated remaining: 00:00:00",
+      "progress": {
+        "current_frame": 2.0,
+        "elapsed_seconds": 0.445,
+        "encoder_pid": -1.0,
+        "intermediate_directory": "/tmp/wavez-340-final-release-compat/particles-off/.wavez-export-1791704133-2011500",
+        "message": "Saved /tmp/wavez-340-final-release-compat/particles-off/result.mp4",
+        "output_path": "/tmp/wavez-340-final-release-compat/particles-off/result.mp4",
+        "renderer_pid": 178283.0,
+        "stage": "complete",
+        "total_frames": 2.0
+      },
+      "name": "particles-off",
+      "known_encoder_cleanup_diagnostics": []
+    },
+    {
+      "checks": [
+        {
+          "label": "Production viewer opens WVZ1",
+          "ok": true
+        },
+        {
+          "label": "Expected source or template executable",
+          "ok": true
+        },
+        {
+          "label": "Release template, with path overrides disabled",
+          "ok": true
+        },
+        {
+          "label": "File / Export / Video opens production dialog",
+          "ok": true
+        },
+        {
+          "label": "Advanced remains optional with zero/one/many selections",
+          "ok": true
+        },
+        {
+          "label": "Only development passes a project path override",
+          "ok": true
+        },
+        {
+          "label": "Start Export launches secondary process",
+          "ok": true
+        },
+        {
+          "label": "Launch diagnostics identify the current executable",
+          "ok": true
+        },
+        {
+          "label": "Correct launch arguments and renderer are retained",
+          "ok": true
+        },
+        {
+          "label": "Absolute source/job/output paths survive launch",
+          "ok": true
+        },
+        {
+          "label": "Only the explicit checkbox controls inspection records",
+          "ok": true
+        },
+        {
+          "label": "Video uses the ordinary schema without scientific recipes or quota",
+          "ok": true
+        },
+        {
+          "label": "Run in background retains the original worker",
+          "ok": true
+        },
+        {
+          "label": "Jobs reopens the same export",
+          "ok": true
+        },
+        {
+          "label": "Worker terminates within timeout",
+          "ok": true
+        },
+        {
+          "label": "Parent observes worker progress",
+          "ok": true
+        },
+        {
+          "label": "Expected terminal state",
+          "ok": true
+        },
+        {
+          "label": "Requested cancellation stage was observed",
+          "ok": true
+        },
+        {
+          "label": "MP4 is published",
+          "ok": true
+        },
+        {
+          "label": "Successful export cleans staged PNGs",
+          "ok": true
+        },
+        {
+          "label": "Worker diagnostics are retained",
+          "ok": true
+        },
+        {
+          "label": "Child uses the same packaged or development executable",
+          "ok": true
+        },
+        {
+          "label": "Child renderer matches parent",
+          "ok": true
+        },
+        {
+          "label": "Child uses release resources",
+          "ok": true
+        },
+        {
+          "label": "Video starts no parent scientific worker and preserves selections",
+          "ok": true
+        },
+        {
+          "label": "No portable recipe assets are created",
+          "ok": true
+        }
+      ],
+      "directory": "/tmp/wavez-340-final-release-compat/particles-on/.wavez-export-1791704137-1915930",
+      "message": "Complete \u2014 2 / 2 frames rendered (100%)\nElapsed: 00:00:00\nEstimated remaining: 00:00:00",
+      "progress": {
+        "current_frame": 2.0,
+        "elapsed_seconds": 0.482,
+        "encoder_pid": -1.0,
+        "intermediate_directory": "/tmp/wavez-340-final-release-compat/particles-on/.wavez-export-1791704137-1915930",
+        "message": "Saved /tmp/wavez-340-final-release-compat/particles-on/result.mp4",
+        "output_path": "/tmp/wavez-340-final-release-compat/particles-on/result.mp4",
+        "renderer_pid": 178778.0,
+        "stage": "complete",
+        "total_frames": 2.0
+      },
+      "name": "particles-on",
+      "known_encoder_cleanup_diagnostics": []
+    },
+    {
+      "checks": [
+        {
+          "label": "Production viewer opens WVZ1",
+          "ok": true
+        },
+        {
+          "label": "Expected source or template executable",
+          "ok": true
+        },
+        {
+          "label": "Release template, with path overrides disabled",
+          "ok": true
+        },
+        {
+          "label": "File / Export / Video opens production dialog",
+          "ok": true
+        },
+        {
+          "label": "Advanced remains optional with zero/one/many selections",
+          "ok": true
+        },
+        {
+          "label": "Only development passes a project path override",
+          "ok": true
+        },
+        {
+          "label": "Start Export launches secondary process",
+          "ok": true
+        },
+        {
+          "label": "Launch diagnostics identify the current executable",
+          "ok": true
+        },
+        {
+          "label": "Correct launch arguments and renderer are retained",
+          "ok": true
+        },
+        {
+          "label": "Absolute source/job/output paths survive launch",
+          "ok": true
+        },
+        {
+          "label": "Only the explicit checkbox controls inspection records",
+          "ok": true
+        },
+        {
+          "label": "Video uses the ordinary schema without scientific recipes or quota",
+          "ok": true
+        },
+        {
+          "label": "Run in background retains the original worker",
+          "ok": true
+        },
+        {
+          "label": "Jobs reopens the same export",
+          "ok": true
+        },
+        {
+          "label": "Worker terminates within timeout",
+          "ok": true
+        },
+        {
+          "label": "Parent observes worker progress",
+          "ok": true
+        },
+        {
+          "label": "Expected terminal state",
+          "ok": true
+        },
+        {
+          "label": "Requested cancellation stage was observed",
+          "ok": true
+        },
+        {
+          "label": "MP4 is published",
+          "ok": true
+        },
+        {
+          "label": "Successful export cleans staged PNGs",
+          "ok": true
+        },
+        {
+          "label": "Worker diagnostics are retained",
+          "ok": true
+        },
+        {
+          "label": "Child uses the same packaged or development executable",
+          "ok": true
+        },
+        {
+          "label": "Child renderer matches parent",
+          "ok": true
+        },
+        {
+          "label": "Child uses release resources",
+          "ok": true
+        },
+        {
+          "label": "Video starts no parent scientific worker and preserves selections",
+          "ok": true
+        },
+        {
+          "label": "No portable recipe assets are created",
+          "ok": true
+        }
+      ],
+      "directory": "/tmp/wavez-340-final-release-compat/mixed-off/.wavez-export-1791704142-2203257",
+      "message": "Complete \u2014 2 / 2 frames rendered (100%)\nElapsed: 00:00:00\nEstimated remaining: 00:00:00",
+      "progress": {
+        "current_frame": 2.0,
+        "elapsed_seconds": 0.586,
+        "encoder_pid": -1.0,
+        "intermediate_directory": "/tmp/wavez-340-final-release-compat/mixed-off/.wavez-export-1791704142-2203257",
+        "message": "Saved /tmp/wavez-340-final-release-compat/mixed-off/result.mp4",
+        "output_path": "/tmp/wavez-340-final-release-compat/mixed-off/result.mp4",
+        "renderer_pid": 179525.0,
+        "stage": "complete",
+        "total_frames": 2.0
+      },
+      "name": "mixed-off",
+      "known_encoder_cleanup_diagnostics": []
+    },
+    {
+      "checks": [
+        {
+          "label": "Production viewer opens WVZ1",
+          "ok": true
+        },
+        {
+          "label": "Expected source or template executable",
+          "ok": true
+        },
+        {
+          "label": "Release template, with path overrides disabled",
+          "ok": true
+        },
+        {
+          "label": "File / Export / Video opens production dialog",
+          "ok": true
+        },
+        {
+          "label": "Advanced remains optional with zero/one/many selections",
+          "ok": true
+        },
+        {
+          "label": "Only development passes a project path override",
+          "ok": true
+        },
+        {
+          "label": "Start Export launches secondary process",
+          "ok": true
+        },
+        {
+          "label": "Launch diagnostics identify the current executable",
+          "ok": true
+        },
+        {
+          "label": "Correct launch arguments and renderer are retained",
+          "ok": true
+        },
+        {
+          "label": "Absolute source/job/output paths survive launch",
+          "ok": true
+        },
+        {
+          "label": "Only the explicit checkbox controls inspection records",
+          "ok": true
+        },
+        {
+          "label": "Video uses the ordinary schema without scientific recipes or quota",
+          "ok": true
+        },
+        {
+          "label": "Run in background retains the original worker",
+          "ok": true
+        },
+        {
+          "label": "Jobs reopens the same export",
+          "ok": true
+        },
+        {
+          "label": "Worker terminates within timeout",
+          "ok": true
+        },
+        {
+          "label": "Parent observes worker progress",
+          "ok": true
+        },
+        {
+          "label": "Expected terminal state",
+          "ok": true
+        },
+        {
+          "label": "Requested cancellation stage was observed",
+          "ok": true
+        },
+        {
+          "label": "MP4 is published",
+          "ok": true
+        },
+        {
+          "label": "Successful export cleans staged PNGs",
+          "ok": true
+        },
+        {
+          "label": "Worker diagnostics are retained",
+          "ok": true
+        },
+        {
+          "label": "Child uses the same packaged or development executable",
+          "ok": true
+        },
+        {
+          "label": "Child renderer matches parent",
+          "ok": true
+        },
+        {
+          "label": "Child uses release resources",
+          "ok": true
+        },
+        {
+          "label": "Video starts no parent scientific worker and preserves selections",
+          "ok": true
+        },
+        {
+          "label": "No portable recipe assets are created",
+          "ok": true
+        }
+      ],
+      "directory": "/tmp/wavez-340-final-release-compat/mixed-on/.wavez-export-1791704146-2052351",
+      "message": "Complete \u2014 2 / 2 frames rendered (100%)\nElapsed: 00:00:00\nEstimated remaining: 00:00:00",
+      "progress": {
+        "current_frame": 2.0,
+        "elapsed_seconds": 0.602,
+        "encoder_pid": -1.0,
+        "intermediate_directory": "/tmp/wavez-340-final-release-compat/mixed-on/.wavez-export-1791704146-2052351",
+        "message": "Saved /tmp/wavez-340-final-release-compat/mixed-on/result.mp4",
+        "output_path": "/tmp/wavez-340-final-release-compat/mixed-on/result.mp4",
+        "renderer_pid": 181990.0,
+        "stage": "complete",
+        "total_frames": 2.0
+      },
+      "name": "mixed-on",
+      "known_encoder_cleanup_diagnostics": []
+    },
+    {
+      "checks": [
+        {
+          "label": "Production viewer opens WVZ1",
+          "ok": true
+        },
+        {
+          "label": "Expected source or template executable",
+          "ok": true
+        },
+        {
+          "label": "Release template, with path overrides disabled",
+          "ok": true
+        },
+        {
+          "label": "Independent Analysis binds without repository files",
+          "ok": true
+        },
+        {
+          "label": "Independent Selection defines particle",
+          "ok": true
+        },
+        {
+          "label": "Existing visible markers resolve before video",
+          "ok": true
+        },
+        {
+          "label": "Particle/mesh/field definitions remain independent",
+          "ok": true
+        },
+        {
+          "label": "File / Export / Video opens production dialog",
+          "ok": true
+        },
+        {
+          "label": "Advanced remains optional with zero/one/many selections",
+          "ok": true
+        },
+        {
+          "label": "Only development passes a project path override",
+          "ok": true
+        },
+        {
+          "label": "Start Export launches secondary process",
+          "ok": true
+        },
+        {
+          "label": "Launch diagnostics identify the current executable",
+          "ok": true
+        },
+        {
+          "label": "Correct launch arguments and renderer are retained",
+          "ok": true
+        },
+        {
+          "label": "Absolute source/job/output paths survive launch",
+          "ok": true
+        },
+        {
+          "label": "Only the explicit checkbox controls inspection records",
+          "ok": true
+        },
+        {
+          "label": "Video uses the ordinary schema without scientific recipes or quota",
+          "ok": true
+        },
+        {
+          "label": "Run in background retains the original worker",
+          "ok": true
+        },
+        {
+          "label": "Jobs reopens the same export",
+          "ok": true
+        },
+        {
+          "label": "Worker terminates within timeout",
+          "ok": true
+        },
+        {
+          "label": "Parent observes worker progress",
+          "ok": true
+        },
+        {
+          "label": "Expected terminal state",
+          "ok": true
+        },
+        {
+          "label": "Requested cancellation stage was observed",
+          "ok": true
+        },
+        {
+          "label": "MP4 is published",
+          "ok": true
+        },
+        {
+          "label": "Successful export cleans staged PNGs",
+          "ok": true
+        },
+        {
+          "label": "Worker diagnostics are retained",
+          "ok": true
+        },
+        {
+          "label": "Child uses the same packaged or development executable",
+          "ok": true
+        },
+        {
+          "label": "Child renderer matches parent",
+          "ok": true
+        },
+        {
+          "label": "Child uses release resources",
+          "ok": true
+        },
+        {
+          "label": "Video starts no parent scientific worker and preserves selections",
+          "ok": true
+        },
+        {
+          "label": "No portable recipe assets are created",
+          "ok": true
+        }
+      ],
+      "directory": "/tmp/wavez-340-final-release-compat/selection-particle/.wavez-export-1791704150-2300421",
+      "message": "Complete \u2014 2 / 2 frames rendered (100%)\nElapsed: 00:00:00\nEstimated remaining: 00:00:00",
+      "progress": {
+        "current_frame": 2.0,
+        "elapsed_seconds": 0.437,
+        "encoder_pid": -1.0,
+        "intermediate_directory": "/tmp/wavez-340-final-release-compat/selection-particle/.wavez-export-1791704150-2300421",
+        "message": "Saved /tmp/wavez-340-final-release-compat/selection-particle/result.mp4",
+        "output_path": "/tmp/wavez-340-final-release-compat/selection-particle/result.mp4",
+        "renderer_pid": 182422.0,
+        "stage": "complete",
+        "total_frames": 2.0
+      },
+      "name": "selection-particle",
+      "known_encoder_cleanup_diagnostics": []
+    },
+    {
+      "checks": [
+        {
+          "label": "Production viewer opens WVZ1",
+          "ok": true
+        },
+        {
+          "label": "Expected source or template executable",
+          "ok": true
+        },
+        {
+          "label": "Release template, with path overrides disabled",
+          "ok": true
+        },
+        {
+          "label": "Independent Analysis binds without repository files",
+          "ok": true
+        },
+        {
+          "label": "Independent Selection defines particle",
+          "ok": true
+        },
+        {
+          "label": "Existing visible markers resolve before video",
+          "ok": true
+        },
+        {
+          "label": "Particle/mesh/field definitions remain independent",
+          "ok": true
+        },
+        {
+          "label": "File / Export / Video opens production dialog",
+          "ok": true
+        },
+        {
+          "label": "Advanced remains optional with zero/one/many selections",
+          "ok": true
+        },
+        {
+          "label": "Only development passes a project path override",
+          "ok": true
+        },
+        {
+          "label": "Start Export launches secondary process",
+          "ok": true
+        },
+        {
+          "label": "Launch diagnostics identify the current executable",
+          "ok": true
+        },
+        {
+          "label": "Correct launch arguments and renderer are retained",
+          "ok": true
+        },
+        {
+          "label": "Absolute source/job/output paths survive launch",
+          "ok": true
+        },
+        {
+          "label": "Only the explicit checkbox controls inspection records",
+          "ok": true
+        },
+        {
+          "label": "Video uses the ordinary schema without scientific recipes or quota",
+          "ok": true
+        },
+        {
+          "label": "Run in background retains the original worker",
+          "ok": true
+        },
+        {
+          "label": "Jobs reopens the same export",
+          "ok": true
+        },
+        {
+          "label": "Worker terminates within timeout",
+          "ok": true
+        },
+        {
+          "label": "Parent observes worker progress",
+          "ok": true
+        },
+        {
+          "label": "Expected terminal state",
+          "ok": true
+        },
+        {
+          "label": "Requested cancellation stage was observed",
+          "ok": true
+        },
+        {
+          "label": "MP4 is published",
+          "ok": true
+        },
+        {
+          "label": "Successful export cleans staged PNGs",
+          "ok": true
+        },
+        {
+          "label": "Worker diagnostics are retained",
+          "ok": true
+        },
+        {
+          "label": "Child uses the same packaged or development executable",
+          "ok": true
+        },
+        {
+          "label": "Child renderer matches parent",
+          "ok": true
+        },
+        {
+          "label": "Child uses release resources",
+          "ok": true
+        },
+        {
+          "label": "Video starts no parent scientific worker and preserves selections",
+          "ok": true
+        },
+        {
+          "label": "No portable recipe assets are created",
+          "ok": true
+        }
+      ],
+      "directory": "/tmp/wavez-340-final-release-compat/selection-hidden/.wavez-export-1791704155-2486055",
+      "message": "Complete \u2014 2 / 2 frames rendered (100%)\nElapsed: 00:00:00\nEstimated remaining: 00:00:00",
+      "progress": {
+        "current_frame": 2.0,
+        "elapsed_seconds": 0.436,
+        "encoder_pid": -1.0,
+        "intermediate_directory": "/tmp/wavez-340-final-release-compat/selection-hidden/.wavez-export-1791704155-2486055",
+        "message": "Saved /tmp/wavez-340-final-release-compat/selection-hidden/result.mp4",
+        "output_path": "/tmp/wavez-340-final-release-compat/selection-hidden/result.mp4",
+        "renderer_pid": 182761.0,
+        "stage": "complete",
+        "total_frames": 2.0
+      },
+      "name": "selection-hidden",
+      "known_encoder_cleanup_diagnostics": []
+    },
+    {
+      "checks": [
+        {
+          "label": "Production viewer opens WVZ1",
+          "ok": true
+        },
+        {
+          "label": "Expected source or template executable",
+          "ok": true
+        },
+        {
+          "label": "Release template, with path overrides disabled",
+          "ok": true
+        },
+        {
+          "label": "Independent Analysis binds without repository files",
+          "ok": true
+        },
+        {
+          "label": "Independent Selection defines mesh",
+          "ok": true
+        },
+        {
+          "label": "Existing visible markers resolve before video",
+          "ok": true
+        },
+        {
+          "label": "Particle/mesh/field definitions remain independent",
+          "ok": true
+        },
+        {
+          "label": "File / Export / Video opens production dialog",
+          "ok": true
+        },
+        {
+          "label": "Advanced remains optional with zero/one/many selections",
+          "ok": true
+        },
+        {
+          "label": "Only development passes a project path override",
+          "ok": true
+        },
+        {
+          "label": "Start Export launches secondary process",
+          "ok": true
+        },
+        {
+          "label": "Launch diagnostics identify the current executable",
+          "ok": true
+        },
+        {
+          "label": "Correct launch arguments and renderer are retained",
+          "ok": true
+        },
+        {
+          "label": "Absolute source/job/output paths survive launch",
+          "ok": true
+        },
+        {
+          "label": "Only the explicit checkbox controls inspection records",
+          "ok": true
+        },
+        {
+          "label": "Video uses the ordinary schema without scientific recipes or quota",
+          "ok": true
+        },
+        {
+          "label": "Run in background retains the original worker",
+          "ok": true
+        },
+        {
+          "label": "Jobs reopens the same export",
+          "ok": true
+        },
+        {
+          "label": "Worker terminates within timeout",
+          "ok": true
+        },
+        {
+          "label": "Parent observes worker progress",
+          "ok": true
+        },
+        {
+          "label": "Expected terminal state",
+          "ok": true
+        },
+        {
+          "label": "Requested cancellation stage was observed",
+          "ok": true
+        },
+        {
+          "label": "MP4 is published",
+          "ok": true
+        },
+        {
+          "label": "Successful export cleans staged PNGs",
+          "ok": true
+        },
+        {
+          "label": "Worker diagnostics are retained",
+          "ok": true
+        },
+        {
+          "label": "Child uses the same packaged or development executable",
+          "ok": true
+        },
+        {
+          "label": "Child renderer matches parent",
+          "ok": true
+        },
+        {
+          "label": "Child uses release resources",
+          "ok": true
+        },
+        {
+          "label": "Video starts no parent scientific worker and preserves selections",
+          "ok": true
+        },
+        {
+          "label": "No portable recipe assets are created",
+          "ok": true
+        }
+      ],
+      "directory": "/tmp/wavez-340-final-release-compat/selection-mesh/.wavez-export-1791704159-2434534",
+      "message": "Complete \u2014 2 / 2 frames rendered (100%)\nElapsed: 00:00:00\nEstimated remaining: 00:00:00",
+      "progress": {
+        "current_frame": 2.0,
+        "elapsed_seconds": 0.587,
+        "encoder_pid": -1.0,
+        "intermediate_directory": "/tmp/wavez-340-final-release-compat/selection-mesh/.wavez-export-1791704159-2434534",
+        "message": "Saved /tmp/wavez-340-final-release-compat/selection-mesh/result.mp4",
+        "output_path": "/tmp/wavez-340-final-release-compat/selection-mesh/result.mp4",
+        "renderer_pid": 183135.0,
+        "stage": "complete",
+        "total_frames": 2.0
+      },
+      "name": "selection-mesh",
+      "known_encoder_cleanup_diagnostics": []
+    },
+    {
+      "checks": [
+        {
+          "label": "Production viewer opens WVZ1",
+          "ok": true
+        },
+        {
+          "label": "Expected source or template executable",
+          "ok": true
+        },
+        {
+          "label": "Release template, with path overrides disabled",
+          "ok": true
+        },
+        {
+          "label": "Independent Analysis binds without repository files",
+          "ok": true
+        },
+        {
+          "label": "Independent Selection defines field",
+          "ok": true
+        },
+        {
+          "label": "Existing visible markers resolve before video",
+          "ok": true
+        },
+        {
+          "label": "Particle/mesh/field definitions remain independent",
+          "ok": true
+        },
+        {
+          "label": "File / Export / Video opens production dialog",
+          "ok": true
+        },
+        {
+          "label": "Advanced remains optional with zero/one/many selections",
+          "ok": true
+        },
+        {
+          "label": "Only development passes a project path override",
+          "ok": true
+        },
+        {
+          "label": "Start Export launches secondary process",
+          "ok": true
+        },
+        {
+          "label": "Launch diagnostics identify the current executable",
+          "ok": true
+        },
+        {
+          "label": "Correct launch arguments and renderer are retained",
+          "ok": true
+        },
+        {
+          "label": "Absolute source/job/output paths survive launch",
+          "ok": true
+        },
+        {
+          "label": "Only the explicit checkbox controls inspection records",
+          "ok": true
+        },
+        {
+          "label": "Video uses the ordinary schema without scientific recipes or quota",
+          "ok": true
+        },
+        {
+          "label": "Run in background retains the original worker",
+          "ok": true
+        },
+        {
+          "label": "Jobs reopens the same export",
+          "ok": true
+        },
+        {
+          "label": "Worker terminates within timeout",
+          "ok": true
+        },
+        {
+          "label": "Parent observes worker progress",
+          "ok": true
+        },
+        {
+          "label": "Expected terminal state",
+          "ok": true
+        },
+        {
+          "label": "Requested cancellation stage was observed",
+          "ok": true
+        },
+        {
+          "label": "MP4 is published",
+          "ok": true
+        },
+        {
+          "label": "Successful export cleans staged PNGs",
+          "ok": true
+        },
+        {
+          "label": "Worker diagnostics are retained",
+          "ok": true
+        },
+        {
+          "label": "Child uses the same packaged or development executable",
+          "ok": true
+        },
+        {
+          "label": "Child renderer matches parent",
+          "ok": true
+        },
+        {
+          "label": "Child uses release resources",
+          "ok": true
+        },
+        {
+          "label": "Video starts no parent scientific worker and preserves selections",
+          "ok": true
+        },
+        {
+          "label": "No portable recipe assets are created",
+          "ok": true
+        }
+      ],
+      "directory": "/tmp/wavez-340-final-release-compat/selection-field/.wavez-export-1791704164-2414554",
+      "message": "Complete \u2014 2 / 2 frames rendered (100%)\nElapsed: 00:00:00\nEstimated remaining: 00:00:00",
+      "progress": {
+        "current_frame": 2.0,
+        "elapsed_seconds": 0.576,
+        "encoder_pid": -1.0,
+        "intermediate_directory": "/tmp/wavez-340-final-release-compat/selection-field/.wavez-export-1791704164-2414554",
+        "message": "Saved /tmp/wavez-340-final-release-compat/selection-field/result.mp4",
+        "output_path": "/tmp/wavez-340-final-release-compat/selection-field/result.mp4",
+        "renderer_pid": 183561.0,
+        "stage": "complete",
+        "total_frames": 2.0
+      },
+      "name": "selection-field",
+      "known_encoder_cleanup_diagnostics": []
+    },
+    {
+      "checks": [
+        {
+          "label": "Production viewer opens WVZ1",
+          "ok": true
+        },
+        {
+          "label": "Expected source or template executable",
+          "ok": true
+        },
+        {
+          "label": "Release template, with path overrides disabled",
+          "ok": true
+        },
+        {
+          "label": "Independent Analysis binds without repository files",
+          "ok": true
+        },
+        {
+          "label": "Independent Selection defines particle",
+          "ok": true
+        },
+        {
+          "label": "Independent Selection defines mesh",
+          "ok": true
+        },
+        {
+          "label": "Independent Selection defines field",
+          "ok": true
+        },
+        {
+          "label": "Existing visible markers resolve before video",
+          "ok": true
+        },
+        {
+          "label": "Particle/mesh/field definitions remain independent",
+          "ok": true
+        },
+        {
+          "label": "File / Export / Video opens production dialog",
+          "ok": true
+        },
+        {
+          "label": "Advanced remains optional with zero/one/many selections",
+          "ok": true
+        },
+        {
+          "label": "Only development passes a project path override",
+          "ok": true
+        },
+        {
+          "label": "Start Export launches secondary process",
+          "ok": true
+        },
+        {
+          "label": "Launch diagnostics identify the current executable",
+          "ok": true
+        },
+        {
+          "label": "Correct launch arguments and renderer are retained",
+          "ok": true
+        },
+        {
+          "label": "Absolute source/job/output paths survive launch",
+          "ok": true
+        },
+        {
+          "label": "Only the explicit checkbox controls inspection records",
+          "ok": true
+        },
+        {
+          "label": "Video uses the ordinary schema without scientific recipes or quota",
+          "ok": true
+        },
+        {
+          "label": "Run in background retains the original worker",
+          "ok": true
+        },
+        {
+          "label": "Jobs reopens the same export",
+          "ok": true
+        },
+        {
+          "label": "Worker terminates within timeout",
+          "ok": true
+        },
+        {
+          "label": "Parent observes worker progress",
+          "ok": true
+        },
+        {
+          "label": "Expected terminal state",
+          "ok": true
+        },
+        {
+          "label": "Requested cancellation stage was observed",
+          "ok": true
+        },
+        {
+          "label": "MP4 is published",
+          "ok": true
+        },
+        {
+          "label": "Successful export cleans staged PNGs",
+          "ok": true
+        },
+        {
+          "label": "Worker diagnostics are retained",
+          "ok": true
+        },
+        {
+          "label": "Child uses the same packaged or development executable",
+          "ok": true
+        },
+        {
+          "label": "Child renderer matches parent",
+          "ok": true
+        },
+        {
+          "label": "Child uses release resources",
+          "ok": true
+        },
+        {
+          "label": "Video starts no parent scientific worker and preserves selections",
+          "ok": true
+        },
+        {
+          "label": "No portable recipe assets are created",
+          "ok": true
+        }
+      ],
+      "directory": "/tmp/wavez-340-final-release-compat/selection-all/.wavez-export-1791704169-2785801",
+      "message": "Complete \u2014 2 / 2 frames rendered (100%)\nElapsed: 00:00:00\nEstimated remaining: 00:00:00",
+      "progress": {
+        "current_frame": 2.0,
+        "elapsed_seconds": 0.598,
+        "encoder_pid": -1.0,
+        "intermediate_directory": "/tmp/wavez-340-final-release-compat/selection-all/.wavez-export-1791704169-2785801",
+        "message": "Saved /tmp/wavez-340-final-release-compat/selection-all/result.mp4",
+        "output_path": "/tmp/wavez-340-final-release-compat/selection-all/result.mp4",
+        "renderer_pid": 183980.0,
+        "stage": "complete",
+        "total_frames": 2.0
+      },
+      "name": "selection-all",
+      "known_encoder_cleanup_diagnostics": []
+    },
+    {
+      "checks": [
+        {
+          "label": "Production viewer opens WVZ1",
+          "ok": true
+        },
+        {
+          "label": "Expected source or template executable",
+          "ok": true
+        },
+        {
+          "label": "Release template, with path overrides disabled",
+          "ok": true
+        },
+        {
+          "label": "Independent Analysis binds without repository files",
+          "ok": true
+        },
+        {
+          "label": "Independent Selection defines particle",
+          "ok": true
+        },
+        {
+          "label": "Existing visible markers resolve before video",
+          "ok": true
+        },
+        {
+          "label": "Particle/mesh/field definitions remain independent",
+          "ok": true
+        },
+        {
+          "label": "File / Export / Video opens production dialog",
+          "ok": true
+        },
+        {
+          "label": "Advanced remains optional with zero/one/many selections",
+          "ok": true
+        },
+        {
+          "label": "Only development passes a project path override",
+          "ok": true
+        },
+        {
+          "label": "Start Export launches secondary process",
+          "ok": true
+        },
+        {
+          "label": "Launch diagnostics identify the current executable",
+          "ok": true
+        },
+        {
+          "label": "Correct launch arguments and renderer are retained",
+          "ok": true
+        },
+        {
+          "label": "Absolute source/job/output paths survive launch",
+          "ok": true
+        },
+        {
+          "label": "Only the explicit checkbox controls inspection records",
+          "ok": true
+        },
+        {
+          "label": "Video uses the ordinary schema without scientific recipes or quota",
+          "ok": true
+        },
+        {
+          "label": "Run in background retains the original worker",
+          "ok": true
+        },
+        {
+          "label": "Jobs reopens the same export",
+          "ok": true
+        },
+        {
+          "label": "Worker terminates within timeout",
+          "ok": true
+        },
+        {
+          "label": "Parent observes worker progress",
+          "ok": true
+        },
+        {
+          "label": "Expected terminal state",
+          "ok": true
+        },
+        {
+          "label": "Requested cancellation stage was observed",
+          "ok": true
+        },
+        {
+          "label": "MP4 is published",
+          "ok": true
+        },
+        {
+          "label": "Successful export cleans staged PNGs",
+          "ok": true
+        },
+        {
+          "label": "Worker diagnostics are retained",
+          "ok": true
+        },
+        {
+          "label": "Child uses the same packaged or development executable",
+          "ok": true
+        },
+        {
+          "label": "Child renderer matches parent",
+          "ok": true
+        },
+        {
+          "label": "Child uses release resources",
+          "ok": true
+        },
+        {
+          "label": "Video starts no parent scientific worker and preserves selections",
+          "ok": true
+        },
+        {
+          "label": "No portable recipe assets are created",
+          "ok": true
+        }
+      ],
+      "directory": "/tmp/wavez-340-final-release-compat/selection-optional/.wavez-export-1791704174-2303369",
+      "message": "Complete \u2014 2 / 2 frames rendered (100%)\nElapsed: 00:00:00\nEstimated remaining: 00:00:00",
+      "progress": {
+        "current_frame": 2.0,
+        "elapsed_seconds": 0.447,
+        "encoder_pid": -1.0,
+        "intermediate_directory": "/tmp/wavez-340-final-release-compat/selection-optional/.wavez-export-1791704174-2303369",
+        "message": "Saved /tmp/wavez-340-final-release-compat/selection-optional/result.mp4",
+        "output_path": "/tmp/wavez-340-final-release-compat/selection-optional/result.mp4",
+        "renderer_pid": 184425.0,
+        "stage": "complete",
+        "total_frames": 2.0
+      },
+      "name": "selection-optional",
+      "known_encoder_cleanup_diagnostics": []
+    },
+    {
+      "checks": [
+        {
+          "label": "Production viewer opens WVZ1",
+          "ok": true
+        },
+        {
+          "label": "Expected source or template executable",
+          "ok": true
+        },
+        {
+          "label": "Release template, with path overrides disabled",
+          "ok": true
+        },
+        {
+          "label": "File / Export / Video opens production dialog",
+          "ok": true
+        },
+        {
+          "label": "Advanced remains optional with zero/one/many selections",
+          "ok": true
+        },
+        {
+          "label": "Only development passes a project path override",
+          "ok": true
+        },
+        {
+          "label": "Start Export launches secondary process",
+          "ok": true
+        },
+        {
+          "label": "Launch diagnostics identify the current executable",
+          "ok": true
+        },
+        {
+          "label": "Correct launch arguments and renderer are retained",
+          "ok": true
+        },
+        {
+          "label": "Absolute source/job/output paths survive launch",
+          "ok": true
+        },
+        {
+          "label": "Only the explicit checkbox controls inspection records",
+          "ok": true
+        },
+        {
+          "label": "Video uses the ordinary schema without scientific recipes or quota",
+          "ok": true
+        },
+        {
+          "label": "Run in background retains the original worker",
+          "ok": true
+        },
+        {
+          "label": "Jobs reopens the same export",
+          "ok": true
+        },
+        {
+          "label": "Worker terminates within timeout",
+          "ok": true
+        },
+        {
+          "label": "Parent observes worker progress",
+          "ok": true
+        },
+        {
+          "label": "Expected terminal state",
+          "ok": true
+        },
+        {
+          "label": "Requested cancellation stage was observed",
+          "ok": true
+        },
+        {
+          "label": "MP4 is published",
+          "ok": true
+        },
+        {
+          "label": "Successful export cleans staged PNGs",
+          "ok": true
+        },
+        {
+          "label": "Worker diagnostics are retained",
+          "ok": true
+        },
+        {
+          "label": "Child uses the same packaged or development executable",
+          "ok": true
+        },
+        {
+          "label": "Child renderer matches parent",
+          "ok": true
+        },
+        {
+          "label": "Child uses release resources",
+          "ok": true
+        },
+        {
+          "label": "Video starts no parent scientific worker and preserves selections",
+          "ok": true
+        },
+        {
+          "label": "No portable recipe assets are created",
+          "ok": true
+        }
+      ],
+      "directory": "/tmp/wavez-340-final-release-compat/ordinary-optional/.wavez-export-1791704178-1824127",
+      "message": "Complete \u2014 2 / 2 frames rendered (100%)\nElapsed: 00:00:00\nEstimated remaining: 00:00:00",
+      "progress": {
+        "current_frame": 2.0,
+        "elapsed_seconds": 0.451,
+        "encoder_pid": -1.0,
+        "intermediate_directory": "/tmp/wavez-340-final-release-compat/ordinary-optional/.wavez-export-1791704178-1824127",
+        "message": "Saved /tmp/wavez-340-final-release-compat/ordinary-optional/result.mp4",
+        "output_path": "/tmp/wavez-340-final-release-compat/ordinary-optional/result.mp4",
+        "renderer_pid": 184770.0,
+        "stage": "complete",
+        "total_frames": 2.0
+      },
+      "name": "ordinary-optional",
+      "known_encoder_cleanup_diagnostics": []
+    },
+    {
+      "checks": [
+        {
+          "label": "Production viewer opens WVZ1",
+          "ok": true
+        },
+        {
+          "label": "Expected source or template executable",
+          "ok": true
+        },
+        {
+          "label": "Release template, with path overrides disabled",
+          "ok": true
+        },
+        {
+          "label": "File / Export / Video opens production dialog",
+          "ok": true
+        },
+        {
+          "label": "Advanced remains optional with zero/one/many selections",
+          "ok": true
+        },
+        {
+          "label": "Only development passes a project path override",
+          "ok": true
+        },
+        {
+          "label": "Start Export launches secondary process",
+          "ok": true
+        },
+        {
+          "label": "Launch diagnostics identify the current executable",
+          "ok": true
+        },
+        {
+          "label": "Correct launch arguments and renderer are retained",
+          "ok": true
+        },
+        {
+          "label": "Absolute source/job/output paths survive launch",
+          "ok": true
+        },
+        {
+          "label": "Only the explicit checkbox controls inspection records",
+          "ok": true
+        },
+        {
+          "label": "Video uses the ordinary schema without scientific recipes or quota",
+          "ok": true
+        },
+        {
+          "label": "Run in background retains the original worker",
+          "ok": true
+        },
+        {
+          "label": "Jobs reopens the same export",
+          "ok": true
+        },
+        {
+          "label": "Jobs cancellation uses the accepted confirmation",
+          "ok": true
+        },
+        {
+          "label": "Worker terminates within timeout",
+          "ok": true
+        },
+        {
+          "label": "Parent observes worker progress",
+          "ok": true
+        },
+        {
+          "label": "Expected terminal state",
+          "ok": true
+        },
+        {
+          "label": "Requested cancellation stage was observed",
+          "ok": true
+        },
+        {
+          "label": "Failed/cancelled export publishes no MP4",
+          "ok": true
+        },
+        {
+          "label": "Failed/cancelled export retains completed frames",
+          "ok": true
+        },
+        {
+          "label": "Worker diagnostics are retained",
+          "ok": true
+        },
+        {
+          "label": "Child uses the same packaged or development executable",
+          "ok": true
+        },
+        {
+          "label": "Child renderer matches parent",
+          "ok": true
+        },
+        {
+          "label": "Child uses release resources",
+          "ok": true
+        },
+        {
+          "label": "Video starts no parent scientific worker and preserves selections",
+          "ok": true
+        },
+        {
+          "label": "No portable recipe assets are created",
+          "ok": true
+        }
+      ],
+      "directory": "/tmp/wavez-340-final-release-compat/cancel-rendering/.wavez-export-1791704182-1823568",
+      "message": "Cancelled \u2014 5 / 75 frames rendered (6%)\nElapsed: 00:00:00\nEstimated remaining: Unavailable\nExport cancelled during source preparation.\nTemporary files: /tmp/wavez-340-final-release-compat/cancel-rendering/.wavez-export-1791704182-1823568",
+      "progress": {
+        "current_frame": 5.0,
+        "elapsed_seconds": 0.458,
+        "encoder_pid": -1.0,
+        "intermediate_directory": "/tmp/wavez-340-final-release-compat/cancel-rendering/.wavez-export-1791704182-1823568",
+        "message": "Export cancelled during source preparation.",
+        "output_path": "/tmp/wavez-340-final-release-compat/cancel-rendering/result.mp4",
+        "renderer_pid": 185114.0,
+        "stage": "cancelled",
+        "total_frames": 75.0
+      },
+      "name": "cancel-rendering",
+      "known_encoder_cleanup_diagnostics": []
+    },
+    {
+      "checks": [
+        {
+          "label": "Production viewer opens WVZ1",
+          "ok": true
+        },
+        {
+          "label": "Expected source or template executable",
+          "ok": true
+        },
+        {
+          "label": "Release template, with path overrides disabled",
+          "ok": true
+        },
+        {
+          "label": "File / Export / Video opens production dialog",
+          "ok": true
+        },
+        {
+          "label": "Advanced remains optional with zero/one/many selections",
+          "ok": true
+        },
+        {
+          "label": "Only development passes a project path override",
+          "ok": true
+        },
+        {
+          "label": "Start Export launches secondary process",
+          "ok": true
+        },
+        {
+          "label": "Launch diagnostics identify the current executable",
+          "ok": true
+        },
+        {
+          "label": "Correct launch arguments and renderer are retained",
+          "ok": true
+        },
+        {
+          "label": "Absolute source/job/output paths survive launch",
+          "ok": true
+        },
+        {
+          "label": "Only the explicit checkbox controls inspection records",
+          "ok": true
+        },
+        {
+          "label": "Video uses the ordinary schema without scientific recipes or quota",
+          "ok": true
+        },
+        {
+          "label": "Run in background retains the original worker",
+          "ok": true
+        },
+        {
+          "label": "Jobs reopens the same export",
+          "ok": true
+        },
+        {
+          "label": "Jobs cancellation uses the accepted confirmation",
+          "ok": true
+        },
+        {
+          "label": "Worker terminates within timeout",
+          "ok": true
+        },
+        {
+          "label": "Parent observes worker progress",
+          "ok": true
+        },
+        {
+          "label": "Expected terminal state",
+          "ok": true
+        },
+        {
+          "label": "Requested cancellation stage was observed",
+          "ok": true
+        },
+        {
+          "label": "Failed/cancelled export publishes no MP4",
+          "ok": true
+        },
+        {
+          "label": "Failed/cancelled export retains completed frames",
+          "ok": true
+        },
+        {
+          "label": "Worker diagnostics are retained",
+          "ok": true
+        },
+        {
+          "label": "Child uses the same packaged or development executable",
+          "ok": true
+        },
+        {
+          "label": "Child renderer matches parent",
+          "ok": true
+        },
+        {
+          "label": "Child uses release resources",
+          "ok": true
+        },
+        {
+          "label": "Video starts no parent scientific worker and preserves selections",
+          "ok": true
+        },
+        {
+          "label": "No portable recipe assets are created",
+          "ok": true
+        }
+      ],
+      "directory": "/tmp/wavez-340-final-release-compat/cancel-encoding/.wavez-export-1791704186-1855087",
+      "message": "Cancelled \u2014 30 / 30 frames rendered (100%)\nElapsed: 00:00:00\nEstimated remaining: Unavailable\nEncoding cancelled. PNGs and partial MP4 retained in [Temporary files]\nTemporary files: /tmp/wavez-340-final-release-compat/cancel-encoding/.wavez-export-1791704186-1855087",
+      "progress": {
+        "current_frame": 30.0,
+        "elapsed_seconds": 0.857,
+        "encoder_pid": 185793.0,
+        "intermediate_directory": "/tmp/wavez-340-final-release-compat/cancel-encoding/.wavez-export-1791704186-1855087",
+        "message": "Encoding cancelled. PNGs and partial MP4 retained in /tmp/wavez-340-final-release-compat/cancel-encoding/.wavez-export-1791704186-1855087",
+        "output_path": "/tmp/wavez-340-final-release-compat/cancel-encoding/result.mp4",
+        "renderer_pid": 185347.0,
+        "stage": "cancelled",
+        "total_frames": 30.0
+      },
+      "name": "cancel-encoding",
+      "known_encoder_cleanup_diagnostics": [
+        "ERROR: The process 185793 does not exist or is not a child of the calling process.\n   at: _check_pid_is_running (drivers/unix/os_unix.cpp:863)\n",
+        "ERROR: The process 185793 does not exist or is not a child of the calling process.\n   at: _check_pid_is_running (drivers/unix/os_unix.cpp:863)\n",
+        "ERROR: The process 185793 does not exist or is not a child of the calling process.\n   at: _check_pid_is_running (drivers/unix/os_unix.cpp:863)\n",
+        "ERROR: The process 185793 does not exist or is not a child of the calling process.\n   at: _check_pid_is_running (drivers/unix/os_unix.cpp:863)\n"
+      ]
+    },
+    {
+      "checks": [
+        {
+          "label": "Production viewer opens WVZ1",
+          "ok": true
+        },
+        {
+          "label": "Expected source or template executable",
+          "ok": true
+        },
+        {
+          "label": "Release template, with path overrides disabled",
+          "ok": true
+        },
+        {
+          "label": "File / Export / Video opens production dialog",
+          "ok": true
+        },
+        {
+          "label": "Advanced remains optional with zero/one/many selections",
+          "ok": true
+        },
+        {
+          "label": "Only development passes a project path override",
+          "ok": true
+        },
+        {
+          "label": "Start Export launches secondary process",
+          "ok": true
+        },
+        {
+          "label": "Launch diagnostics identify the current executable",
+          "ok": true
+        },
+        {
+          "label": "Correct launch arguments and renderer are retained",
+          "ok": true
+        },
+        {
+          "label": "Absolute source/job/output paths survive launch",
+          "ok": true
+        },
+        {
+          "label": "Only the explicit checkbox controls inspection records",
+          "ok": true
+        },
+        {
+          "label": "Video uses the ordinary schema without scientific recipes or quota",
+          "ok": true
+        },
+        {
+          "label": "Run in background retains the original worker",
+          "ok": true
+        },
+        {
+          "label": "Jobs reopens the same export",
+          "ok": true
+        },
+        {
+          "label": "Worker terminates within timeout",
+          "ok": true
+        },
+        {
+          "label": "Parent observes worker progress",
+          "ok": true
+        },
+        {
+          "label": "Expected terminal state",
+          "ok": true
+        },
+        {
+          "label": "Requested cancellation stage was observed",
+          "ok": true
+        },
+        {
+          "label": "Failed/cancelled export publishes no MP4",
+          "ok": true
+        },
+        {
+          "label": "Failed/cancelled export retains completed frames",
+          "ok": true
+        },
+        {
+          "label": "Worker diagnostics are retained",
+          "ok": true
+        },
+        {
+          "label": "Child uses the same packaged or development executable",
+          "ok": true
+        },
+        {
+          "label": "Child renderer matches parent",
+          "ok": true
+        },
+        {
+          "label": "Child uses release resources",
+          "ok": true
+        },
+        {
+          "label": "Video starts no parent scientific worker and preserves selections",
+          "ok": true
+        },
+        {
+          "label": "No portable recipe assets are created",
+          "ok": true
+        }
+      ],
+      "directory": "/tmp/wavez-340-final-release-compat/failed-encoder/.wavez-export-1791704190-1858573",
+      "message": "Failed \u2014 2 / 2 frames rendered (100%)\nElapsed: 00:00:00\nEstimated remaining: Unavailable\nFFmpeg failed (exit 1), or produced no valid output. \nPNGs and any partial MP4 retained in [Temporary files]\nTemporary files: /tmp/wavez-340-final-release-compat/failed-encoder/.wavez-export-1791704190-1858573",
+      "progress": {
+        "current_frame": 2.0,
+        "elapsed_seconds": 0.326,
+        "encoder_pid": -1.0,
+        "intermediate_directory": "/tmp/wavez-340-final-release-compat/failed-encoder/.wavez-export-1791704190-1858573",
+        "message": "FFmpeg failed (exit 1), or produced no valid output. \nPNGs and any partial MP4 retained in /tmp/wavez-340-final-release-compat/failed-encoder/.wavez-export-1791704190-1858573",
+        "output_path": "/tmp/wavez-340-final-release-compat/failed-encoder/result.mp4",
+        "renderer_pid": 185907.0,
+        "stage": "failed",
+        "total_frames": 2.0
+      },
+      "name": "failed-encoder",
+      "known_encoder_cleanup_diagnostics": []
+    },
+    {
+      "checks": [
+        {
+          "label": "Production viewer opens WVZ1",
+          "ok": true
+        },
+        {
+          "label": "Expected source or template executable",
+          "ok": true
+        },
+        {
+          "label": "Release template, with path overrides disabled",
+          "ok": true
+        },
+        {
+          "label": "File / Export / Video opens production dialog",
+          "ok": true
+        },
+        {
+          "label": "Advanced remains optional with zero/one/many selections",
+          "ok": true
+        },
+        {
+          "label": "Only development passes a project path override",
+          "ok": true
+        },
+        {
+          "label": "Missing FFmpeg refuses before worker launch",
+          "ok": true
+        }
+      ],
+      "directory": "",
+      "message": "FFmpeg is required to encode MP4. Open Edit \u2192 Preferences \u2192 File Locations and choose a usable FFmpeg executable. FFmpeg executable is unavailable: /missing/ffmpeg",
+      "progress": {},
+      "name": "missing-encoder",
+      "known_encoder_cleanup_diagnostics": []
+    },
+    {
+      "checks": [
+        {
+          "label": "Production viewer opens WVZ1",
+          "ok": true
+        },
+        {
+          "label": "Expected source or template executable",
+          "ok": true
+        },
+        {
+          "label": "Release template, with path overrides disabled",
+          "ok": true
+        },
+        {
+          "label": "File / Export / Video opens production dialog",
+          "ok": true
+        },
+        {
+          "label": "Advanced remains optional with zero/one/many selections",
+          "ok": true
+        },
+        {
+          "label": "Only development passes a project path override",
+          "ok": true
+        },
+        {
+          "label": "Start Export launches secondary process",
+          "ok": true
+        },
+        {
+          "label": "Launch diagnostics identify the current executable",
+          "ok": true
+        },
+        {
+          "label": "Correct launch arguments and renderer are retained",
+          "ok": true
+        },
+        {
+          "label": "Absolute source/job/output paths survive launch",
+          "ok": true
+        },
+        {
+          "label": "Only the explicit checkbox controls inspection records",
+          "ok": true
+        },
+        {
+          "label": "Video uses the ordinary schema without scientific recipes or quota",
+          "ok": true
+        },
+        {
+          "label": "Run in background retains the original worker",
+          "ok": true
+        },
+        {
+          "label": "Jobs reopens the same export",
+          "ok": true
+        }
+      ],
+      "directory": "/tmp/wavez-340-final-release-compat/parent-shutdown/.wavez-export-1791704196-1819586",
+      "observed": [
+        "loading",
+        "rendering"
+      ],
+      "parent_shutdown": true,
+      "pid": 186177,
+      "name": "parent-shutdown",
+      "known_encoder_cleanup_diagnostics": []
+    },
+    {
+      "checks": [
+        {
+          "label": "Production viewer opens WVZ1",
+          "ok": true
+        },
+        {
+          "label": "Expected source or template executable",
+          "ok": true
+        },
+        {
+          "label": "Release template, with path overrides disabled",
+          "ok": true
+        },
+        {
+          "label": "File / Export / Video opens production dialog",
+          "ok": true
+        },
+        {
+          "label": "Advanced remains optional with zero/one/many selections",
+          "ok": true
+        },
+        {
+          "label": "Only development passes a project path override",
+          "ok": true
+        },
+        {
+          "label": "Start Export launches secondary process",
+          "ok": true
+        },
+        {
+          "label": "Launch diagnostics identify the current executable",
+          "ok": true
+        },
+        {
+          "label": "Correct launch arguments and renderer are retained",
+          "ok": true
+        },
+        {
+          "label": "Absolute source/job/output paths survive launch",
+          "ok": true
+        },
+        {
+          "label": "Only the explicit checkbox controls inspection records",
+          "ok": true
+        },
+        {
+          "label": "Video uses the ordinary schema without scientific recipes or quota",
+          "ok": true
+        },
+        {
+          "label": "Run in background retains the original worker",
+          "ok": true
+        },
+        {
+          "label": "Jobs reopens the same export",
+          "ok": true
+        },
+        {
+          "label": "Worker terminates within timeout",
+          "ok": true
+        },
+        {
+          "label": "Expected terminal state",
+          "ok": true
+        },
+        {
+          "label": "Requested cancellation stage was observed",
+          "ok": true
+        },
+        {
+          "label": "Early worker failure exposes exit status and retained diagnostics path",
+          "ok": true
+        },
+        {
+          "label": "Early failure retains exact job and launch command",
+          "ok": true
+        }
+      ],
+      "directory": "/tmp/wavez-340-final-release-compat/startup-failure/.wavez-export-1791704199-1887359",
+      "message": "Failed\nElapsed: 00:00:00\nEstimated remaining: Unavailable\nRender process stopped unexpectedly (exit 1). Intermediates retained: [Temporary files]\nTemporary files: /tmp/wavez-340-final-release-compat/startup-failure/.wavez-export-1791704199-1887359",
+      "progress": {},
+      "name": "startup-failure",
+      "known_encoder_cleanup_diagnostics": []
+    }
+  ],
+  "source_hashes": {
+    "corrupt.wvz": "61842855b19010fe323f7e975d413aa2b777434ebd4bbe6774bf299e6040a255",
+    "budget.wvz": "71c567ae15d02ce94ab9e396eb4c499f14621825b5da5fb5f6077f59c3b9f94f",
+    "overflow.wvz": "91326f6b6e723cd7b069ad9d6e7fb165a83e0b282a3889854ba24a5fb4a08f48",
+    "late.wvz": "cf4bc7bfbd4861ccf77a12819f87a44332f9e165762d9910c4f50ea513d7e5c0",
+    "mixed.wvz": "1c5291bdd6e1e98bd5a050398f84a61e756697b2e9d34cca35ce77dd70de966f",
+    "mesh.wvz": "c5872e604d8b4c25c78f311254371f4560fb4bd41120dd9da75ec2ff03a3b1f9",
+    "field.wvz": "a56d7e58b4d0475035e11a1f0ac6bf209e0f906d9f69a3593b495ca1ea0b147d",
+    "late-particles.wvz": "07f032eadf7ec3143b35b46639abc78a5c873f64410ccf7a301c18f465130a5f",
+    "particles.wvz": "791b15ed9930c05631d4d80a2325589c579179142bd0e6e81ee77744c7ad54dc"
+  },
+  "failures": 0
+}
