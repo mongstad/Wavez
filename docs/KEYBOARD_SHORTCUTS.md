@@ -11,7 +11,11 @@ Apply saves/activates speed without changing key assignments or closing the
 editor; Cancel, Escape and X discard unapplied edits. Reset Defaults stages
 18°/second. Reopening or restarting restores the applied value from the
 application shortcut preferences, separate from captures, presets and exports.
-See [camera navigation](MANUAL_CAMERA_ORBIT.md) for focus guards and owner checks.
+With #343, either bound roll key works while RMB free-look steering is held, in
+either input order. Key release stops roll; RMB release leaves an independently
+held roll active. Focus/modal guards and LMB priority remain unchanged. No new
+default keys are assigned. See [camera navigation](MANUAL_CAMERA_ORBIT.md) for
+focus guards and owner checks.
 
 The #331 review also adds **Move Camera Up** (default **E**) and **Move Camera
 Down** (default **Q**) under Navigation. These replace the fixed vertical key

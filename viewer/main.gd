@@ -657,7 +657,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		elif mouse_button.button_index == MOUSE_BUTTON_RIGHT and mouse_button.pressed and shell.edge_reveal.is_viewport_point(mouse_button.position) and not dragging:
 			var focused := get_viewport().gui_get_focus_owner()
 			if focused != null: focused.release_focus()
-			_clear_manual_navigation(false)
+			# RMB steering coexists with held roll and vertical translation.
+			_clear_manual_navigation(false, false)
 			_take_manual_camera_control()
 			_set_free_look_dragging(true)
 			free_look_last_mouse = mouse_button.position
@@ -699,11 +700,11 @@ func _steer_camera(movement: Vector2) -> void:
 	camera_target = camera.position - camera.basis.z * camera_distance
 	_adopt_camera_basis()
 
-func _clear_manual_navigation(clear_vertical: bool = true) -> void:
+func _clear_manual_navigation(clear_vertical: bool = true, clear_roll: bool = true) -> void:
 	_set_free_look_dragging(false)
 	manual_orbit_keys.clear()
 	manual_orbit_direction = 0.0
-	camera_roll_keys.clear()
+	if clear_roll: camera_roll_keys.clear()
 	# Viewport mouse gestures retain held translation, like physical W/A/S/D.
 	# Focus loss, modal/recovery actions and capture replacement discard it.
 	if clear_vertical: camera_vertical_keys.clear()
@@ -731,7 +732,7 @@ func _update_camera_vertical_keys() -> void:
 		if shell.shortcuts.active[action] != shell.shortcuts.binding(camera_vertical_keys[action]): camera_vertical_keys.erase(action)
 
 func _start_camera_roll(action: String, event: InputEventKey) -> void:
-	if offline_instance or inspection_busy or inspection_paused or _camera_dragging() or shell.editing_shortcuts() or get_viewport().gui_get_focus_owner() != null: return
+	if offline_instance or inspection_busy or inspection_paused or dragging or shell.editing_shortcuts() or get_viewport().gui_get_focus_owner() != null: return
 	if shell.orbit_editor != null and shell.orbit_editor.visible: return
 	# Match manual steering's Auto Orbit takeover, preserving Free Camera when
 	# Auto Orbit is already off. A disabled Free Camera does not accept roll.
@@ -750,7 +751,7 @@ func _release_camera_roll_key(event: InputEventKey) -> void:
 
 func _update_camera_roll(delta: float) -> void:
 	if camera_roll_keys.is_empty(): return
-	if offline_instance or inspection_busy or inspection_paused or not free_camera or _camera_dragging() or shell.editing_shortcuts() or get_viewport().gui_get_focus_owner() != null or (shell.orbit_editor != null and shell.orbit_editor.visible):
+	if offline_instance or inspection_busy or inspection_paused or not free_camera or dragging or shell.editing_shortcuts() or get_viewport().gui_get_focus_owner() != null or (shell.orbit_editor != null and shell.orbit_editor.visible):
 		camera_roll_keys.clear(); return
 	for action in camera_roll_keys.keys():
 		if shell.shortcuts.active[action] != shell.shortcuts.binding(camera_roll_keys[action]): camera_roll_keys.erase(action)

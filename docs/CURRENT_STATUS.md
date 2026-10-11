@@ -1,16 +1,22 @@
 # Current status
 
-Accepted baseline: **v0.1.0.92**, `0843a778af37b30091b75d7a17840b024c9fc6e8`,
-owner-merged PR #339. The repository's application identity is
+Accepted baseline: **v0.1.0.93**, `ccf90e47d4a1908ab67b6d1b30f9196508445b0e`,
+owner-merged PR #344. The repository's application identity is
 `viewer/project.godot` → `application/config/version`; see [version policy](VERSIONING.md).
 
-Issue #340 proposes candidate **v0.1.0.93**: File → Export → Video always uses
-visual version-1 jobs, external FFmpeg and explicitly optional visual records.
+Issue #343 proposes candidate **v0.1.0.94**: existing camera roll keys work
+concurrently with RMB free-look steering, in either press/release order. Focus,
+modal, inspection and LMB guards remain. Bindings, sensitivity and roll/translation
+speeds retain their contracts. See [navigation](MANUAL_CAMERA_ORBIT.md) and
+[review evidence](evidence/issue-343/README.md). Owner review is pending.
+
+Accepted issue #340 / PR #344 provides independent ordinary Video Export.
+File → Export → Video always uses visual version-1 jobs, external FFmpeg and explicitly optional visual records.
 Existing selections never trigger scientific recipe processing or Python/NumPy.
 Selection highlights and Analysis overlays are excluded from exported frames;
 Selection/Analysis, scientific persistence and explicit Matched Views remain
 independent. See [video](VIDEO_EXPORT.md), [packaging](PACKAGED_VIDEO_EXPORT.md)
-and [review evidence](evidence/issue-340/README.md). Owner review is pending.
+and [historical review evidence](evidence/issue-340/README.md).
 
 Issue #331 provides independently configurable,
 initially Unbound Roll Camera Left/Right actions bank Free Camera around its

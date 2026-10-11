@@ -1,4 +1,4 @@
-# Free-look steering, manual orbit and camera roll (#258, #331)
+# Free-look steering, manual orbit and camera roll (#258, #331, #343)
 
 Free Camera starts enabled. Physical W/S translate forward/backward and A/D strafe.
 **Move Camera Up** / **Move Camera Down** translate vertically in the camera's
@@ -53,7 +53,7 @@ reverses only LMB vertical drag when enabled, with an On/Off toggle and hotkey
 in Keyboard Shortcuts. RMB steering remains unchanged. Wheel zoom and the `+`/`-`
 translation-speed controls keep their accepted behavior.
 
-## Camera roll (#331 candidate)
+## Camera roll (#331, #343)
 
 **Roll Camera Left** and **Roll Camera Right** are separately editable Navigation
 actions in Keyboard Shortcuts. Both start Unbound, preserving current shortcuts.
@@ -72,9 +72,20 @@ saved value. Speed changes do not reassign keys or enter saved views/export stat
 Roll takes manual control from Auto Orbit using the existing steering transition
 and leaves Auto Orbit off after release. With Auto Orbit already off, roll does
 not enable a disabled Free Camera. Release, changed modifiers, window focus loss,
-focused controls, menus/dialogs, mouse dragging, inspection work, changed bindings
-and capture replacement stop a held roll. Mouse gestures retain their existing
-priority. After banking, W/A/S/D/Q/E translation and RMB steering use the rolled
+focused controls, menus/dialogs, LMB dragging, inspection work, changed bindings
+and capture replacement stop a held roll. LMB tumble retains its priority.
+
+With #343, held RMB steering and roll work together. Press either roll key before
+or after RMB; both local steering axes and camera-local banking remain active.
+Releasing the roll key stops banking while RMB can continue steering. Releasing
+RMB restores the cursor and leaves an independently held roll key active. Repeated
+RMB press/release retains the held roll without a jump; opposite roll keys cancel
+and releasing one resumes the other. RMB still cancels/blocks held orbit, and
+LMB takeover still ends free-look and roll. No new default bindings or sensitivity
+changes are introduced; the invert-Y preference still applies only to LMB.
+See [the focused #343 review](evidence/issue-343/README.md).
+
+After banking, W/A/S/D/Q/E translation and RMB steering use the rolled
 local axes. Simultaneously held manual orbit carries the new bank into its next
 step while retaining its captured orbit axis.
 Rolling after an orbit-center Apply also retains that Apply-time observer plane,

@@ -1,0 +1,44 @@
+{
+  "checks": 230,
+  "renderer": "gl_compatibility",
+  "packaged": true,
+  "fresh_process_restart": true,
+  "source_sha256_unchanged": {
+    "mixed.wvz": "cd1d6b1fc5fd05af511a818eeb2548e7b326d47b0514a3d32e18991b18add4b8",
+    "meshes.wvz": "e5f1bb09cffb9f76c93c58c380033828d983a5880b68dd41d8bc229f91d65444",
+    "fields.wvz": "9160b9921184fae4f39900c8b0008d01b4a15cc9e0ea4565880b612991c014fd",
+    "particles.wvz": "eac722f8042f6e365f8a3a08fa992c023b36be7cd5318a35dc7227cfd432917d"
+  },
+  "reports": [
+    {
+      "checks": 221,
+      "display": "X11",
+      "failures": [],
+      "layouts": [],
+      "measurements": [],
+      "packaged": true,
+      "renderer": "gl_compatibility",
+      "restart": false
+    },
+    {
+      "checks": 9,
+      "display": "X11",
+      "failures": [],
+      "layouts": [],
+      "measurements": [],
+      "packaged": true,
+      "renderer": "gl_compatibility",
+      "restart": true
+    }
+  ],
+  "rmb_only": true,
+  "staging_removed": true,
+  "known_engine_cleanup_diagnostics": {
+    "roll": [],
+    "restart": []
+  },
+  "artifacts": {
+    "WAVEZ.x86_64": "d9f79ab89b5ae369aeed11c6052d402e8218cd503bf85b4a235f9c30c46a7c63",
+    "WAVEZ.pck": "c99dc9ac46ecf4510812e093a7404e248a74d68a14ac69ad9ff170b6663a057b"
+  }
+}
