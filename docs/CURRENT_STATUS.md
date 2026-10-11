@@ -1,5 +1,15 @@
 # Current status
 
+Issue #382 proposes candidate **v0.1.0.102**, based on accepted **v0.1.0.101** /
+owner-merged PR #381 (`9ddab596e19b93f1598e8314427b03114741f4fc`). A committed,
+non-looping recorded endpoint now uses redraw-on-change and avoids duplicate
+display submissions while keeping Play/live-follow, source polling, preparation
+and camera input active. Reverse, looping, UI seek/Pause, advanced interval
+auto-Pause and offline rendering retain their existing semantics. Owner review
+is pending. See [held-end behavior and limits](RECORDED_END_IDLE.md) and
+[measured GPU comparison](evidence/issue-382/README.md). Historical records below
+remain as written.
+
 Issue #377 proposes candidate **v0.1.0.101**, based on accepted **v0.1.0.100** /
 owner-merged PR #380 (`096670dfa8869642d69ccc9f2d05ac6c5aea81e9`). Mixed-scene
 Automatic particle preparation now sizes validated descriptors after startup and

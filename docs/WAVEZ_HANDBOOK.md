@@ -498,6 +498,8 @@ PNG sequences can be encoded with FFmpeg/H.264. Missing FFmpeg leaves useful PNG
 
 ## Storage and performance
 
+At a committed, non-looping recorded boundary, the unchanged held presentation also redraws only when needed. Play remains active so newly committed live-source records can resume progression; source polling and preparation continue. Reverse or Loop resumes progression, and UI scrubbing retains its existing Pause behavior. Camera navigation continues to redraw the view and can increase GPU use; releasing input returns a stationary view to idle. Advanced field intervals still pause automatically at their selected boundary. See [recorded-end rendering](RECORDED_END_IDLE.md).
+
 While playback is paused, an unchanged view redraws only when needed. Input,
 preparation and status updates remain active. Paused Auto orbit renders at up to
 60 FPS (or a lower existing frame cap); its angular speed still follows elapsed

@@ -105,7 +105,7 @@ func run() -> void:
 		check(OS.low_processor_usage_mode == mode,"Offline teardown preserves existing redraw policy "+str(mode))
 	for limit in [24,120]:
 		Engine.max_fps = limit;OS.low_processor_usage_mode = false
-		var limited = Viewer.new();limited.playing = false;limited.orbit_enabled = true;root.add_child(limited);await settle()
+		var limited = Viewer.new();limited.capture_path = output.path_join("particles.wvz");limited.playing = false;limited.orbit_enabled = true;root.add_child(limited);await settle()
 		check(Engine.max_fps == mini(limit,60),"Paused orbit honors a lower existing cap "+str(limit))
 		limited.playing = true;await settle()
 		check(Engine.max_fps == limit,"Playback restores supplied cap "+str(limit))
