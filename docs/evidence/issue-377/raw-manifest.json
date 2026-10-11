@@ -1,0 +1,492 @@
+{
+  "external_root": "/home/Nozba/Codex/Wavez/runway-377",
+  "accepted_source_archive": "/home/Nozba/Codex/Wavez/runway-377/accepted",
+  "accepted_commit": "096670dfa8869642d69ccc9f2d05ac6c5aea81e9",
+  "files": [
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/baseline-heavy/data/godot/app_userdata/WAVEZ/logs/godot.log",
+      "bytes": 8962,
+      "sha256": "a40aad9af570f884c875778ff4f195cedae1347d359e6bfe3e17c1a6341776e9"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/baseline-heavy/data/godot/app_userdata/WAVEZ/logs/wavez-2026-10-11_23-30-52-1791754252924-500522-0000000001980823.log",
+      "bytes": 931,
+      "sha256": "bbb981be47295e6d275ef257be504086dab9e197f324e1a02b95c434bd719389"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/baseline-heavy/native.log",
+      "bytes": 8962,
+      "sha256": "a40aad9af570f884c875778ff4f195cedae1347d359e6bfe3e17c1a6341776e9"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/baseline-heavy/summary.json",
+      "bytes": 277054,
+      "sha256": "87aece6607094948ae2c093fd3f29b7c358efef9503d96e71cf147a41edafcfe"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/baseline-heavy/trace.jsonl",
+      "bytes": 505968,
+      "sha256": "f9041a33180b7e88b77aaea83284a0e5e657cb886b8e300c95c3d8d908ce52e8"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/candidate-heavy/data/godot/app_userdata/WAVEZ/logs/godot.log",
+      "bytes": 8505,
+      "sha256": "f185dcc42993f6eac0a0c0052bb548c9528f9efd7bd5fc59d1f176ba9f077815"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/candidate-heavy/data/godot/app_userdata/WAVEZ/logs/wavez-2026-10-11_23-36-00-1791754560414-539573-0000000001742949.log",
+      "bytes": 931,
+      "sha256": "0db5965070784c80ff34857e7aca6c52037651c7ca55521ece93eabbb6afb3bb"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/candidate-heavy/native.log",
+      "bytes": 8505,
+      "sha256": "f185dcc42993f6eac0a0c0052bb548c9528f9efd7bd5fc59d1f176ba9f077815"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/candidate-heavy/summary.json",
+      "bytes": 354759,
+      "sha256": "694f8ce9503286114e0d930dbf781670038a4b3973603e2dbea7ad24e7c79386"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/candidate-heavy/trace.jsonl",
+      "bytes": 572992,
+      "sha256": "d044c4ebfcd1c516586ee6ec6362e37453a0e20a36579de529095f029424187a"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/baseline-field/data/godot/app_userdata/WAVEZ/logs/godot.log",
+      "bytes": 4839,
+      "sha256": "75683c7076afc6a32b4c0bbf7f2ec90dd0e8a4759f889b00a17c4ec8ae88e6de"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/baseline-field/data/godot/app_userdata/WAVEZ/logs/wavez-2026-10-11_23-38-43-1791754723865-551958-0000000001830629.log",
+      "bytes": 933,
+      "sha256": "3a0535853eae658ed229320753eded61a3fc1302c2f0db5fd848612b400952d4"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/baseline-field/native.log",
+      "bytes": 4839,
+      "sha256": "75683c7076afc6a32b4c0bbf7f2ec90dd0e8a4759f889b00a17c4ec8ae88e6de"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/baseline-field/summary.json",
+      "bytes": 45242,
+      "sha256": "bbe9327f2dbd39d617b97278d9d438195e6fe38132aa6c61b7431732f6ea867f"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/baseline-field/trace.jsonl",
+      "bytes": 241370,
+      "sha256": "9706eb6ac2c6990889028008cd42e369d3de38a9a0da5a83fc08c00dae45800e"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/candidate-field/data/godot/app_userdata/WAVEZ/logs/godot.log",
+      "bytes": 4487,
+      "sha256": "6a76f4c62ab64102276f559b5403fa530b6ec941738872fe19bdc81423fe8e63"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/candidate-field/data/godot/app_userdata/WAVEZ/logs/wavez-2026-10-11_23-40-39-1791754839087-555201-0000000001676256.log",
+      "bytes": 933,
+      "sha256": "a35c185c96cd7c697474e4a69255af2a492da1d7a86c790f5e31683467fc6b83"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/candidate-field/native.log",
+      "bytes": 4487,
+      "sha256": "6a76f4c62ab64102276f559b5403fa530b6ec941738872fe19bdc81423fe8e63"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/candidate-field/summary.json",
+      "bytes": 44649,
+      "sha256": "cd885fc45d2a97b55de76361ddc4b8705a2c7b44b833476598f9c637e9417d0d"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/candidate-field/trace.jsonl",
+      "bytes": 219308,
+      "sha256": "c017c6b10fb2f8b3633f14e725e11bb3737256b98c4521c7c2857230ef1c3840"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/baseline-particles/data/godot/app_userdata/WAVEZ/logs/godot.log",
+      "bytes": 3643,
+      "sha256": "da68a9b97fc82ce50ae7298f9115141722f3d70353ad1ceb73c82452ea9d917a"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/baseline-particles/data/godot/app_userdata/WAVEZ/logs/wavez-2026-10-11_23-42-41-1791754961699-558336-0000000001995232.log",
+      "bytes": 883,
+      "sha256": "f2c9d78641c86bbbfcf9716d8774665bf73b0f4b25b6b3c2f8d851b9529359b1"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/baseline-particles/native.log",
+      "bytes": 3643,
+      "sha256": "da68a9b97fc82ce50ae7298f9115141722f3d70353ad1ceb73c82452ea9d917a"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/baseline-particles/summary.json",
+      "bytes": 823469,
+      "sha256": "9b17ef7311990594240de4302bd016b35651cb2a9db30109f547fdaf4ac7e44c"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/baseline-particles/trace.jsonl",
+      "bytes": 771457,
+      "sha256": "8ad817260bbf83890ac68737c8b021e841e04587448ba6d42d5f5c5379d6e87f"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/candidate-particles/data/godot/app_userdata/WAVEZ/logs/godot.log",
+      "bytes": 3648,
+      "sha256": "db2f140d3d40f5ca86b65a2ebc3e6f0bde3f81c2ce0f23453a43e8ecad682443"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/candidate-particles/data/godot/app_userdata/WAVEZ/logs/wavez-2026-10-11_23-43-26-1791755006944-562169-0000000001472845.log",
+      "bytes": 883,
+      "sha256": "485143d9107d213a6eb03f720b0e9fd9b6cb40064a628245d4a4bba976defea9"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/candidate-particles/native.log",
+      "bytes": 3648,
+      "sha256": "db2f140d3d40f5ca86b65a2ebc3e6f0bde3f81c2ce0f23453a43e8ecad682443"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/candidate-particles/summary.json",
+      "bytes": 823506,
+      "sha256": "07b0ab03d833dd3ab34294f2726d9b7f856fbd32c260b3676bee5b64be597538"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/candidate-particles/trace.jsonl",
+      "bytes": 771804,
+      "sha256": "758e695f166d7cea628f3ab742a51f6fc1a1e33eab8b8c3daf2aa35bb1dd83d1"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/runway-headless-final/data/godot/app_userdata/WAVEZ/logs/godot.log",
+      "bytes": 112,
+      "sha256": "8da88004ca24b0de847c3bf9decd0f8eab64113352174bde6779c468c05e706a"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/runway-headless-final/data/godot/app_userdata/WAVEZ/logs/wavez-2026-10-11_23-35-38-1791754538127-538382-0000000000907596.log",
+      "bytes": 938,
+      "sha256": "540faf59c164bf7db1f251b32500a7de14f294c89a1d87b76192095637b454a3"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/runway-headless-final/native.log",
+      "bytes": 112,
+      "sha256": "8da88004ca24b0de847c3bf9decd0f8eab64113352174bde6779c468c05e706a"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/runway-headless-final/particle-runway.json",
+      "bytes": 12741,
+      "sha256": "d25396b91b1018f377116bc2255314637d3b29dd4bdd0ad8a1105083fed0ff14"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/runway-headless-final/summary.json",
+      "bytes": 217,
+      "sha256": "1fb093258fa9a0ea342fabca20d8e89e94c9df8b448d8d11d01863d48ab5cc9c"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/runway-vulkan/data/godot/app_userdata/WAVEZ/logs/godot.log",
+      "bytes": 193,
+      "sha256": "227a749587c09b3a86d26fc0521178a8332d4c47b0fe876a357f3799ac49f0e7"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/runway-vulkan/data/godot/app_userdata/WAVEZ/logs/wavez-2026-10-11_23-38-26-1791754706866-550787-0000000001687478.log",
+      "bytes": 948,
+      "sha256": "cf82165406de5cdfdea9ae683ecb8b8e5e2fa08b7df6963d630b25a95730c05d"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/runway-vulkan/native.log",
+      "bytes": 193,
+      "sha256": "227a749587c09b3a86d26fc0521178a8332d4c47b0fe876a357f3799ac49f0e7"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/runway-vulkan/particle-runway.json",
+      "bytes": 12741,
+      "sha256": "6a884410ab8ba6f93a727818771a1e90ac6ef101f18ae5c5ef2d6a7d28423e41"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/runway-vulkan/summary.json",
+      "bytes": 221,
+      "sha256": "8f7a0bd3cad62156e1577c20ac1a1d3d68a3e8ef910af0c1ab976f3eff532e5e"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/runway-release/WAVEZ-review.pck",
+      "bytes": 9943096,
+      "sha256": "33cf2e9e91f4089cc66c427c4272cc213e2517d11a14266b869ca8f8bd9300c2"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/runway-release/WAVEZ-review.x86_64",
+      "bytes": 73519416,
+      "sha256": "d9f79ab89b5ae369aeed11c6052d402e8218cd503bf85b4a235f9c30c46a7c63"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/runway-release/build-logs/export.log",
+      "bytes": 64807,
+      "sha256": "520569b0b9fc0ef91064acd1a6f30d7153d3958ba5c96b93f16129e75a7ae1c4"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/runway-release/build-logs/import.log",
+      "bytes": 25282,
+      "sha256": "66fcb0b96c8c688a966eff9ecd6efe94a7712282a6939686a8287b60f1583d30"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/runway-release/data/godot/app_userdata/WAVEZ/logs/godot.log",
+      "bytes": 193,
+      "sha256": "227a749587c09b3a86d26fc0521178a8332d4c47b0fe876a357f3799ac49f0e7"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/runway-release/data/godot/app_userdata/WAVEZ/logs/wavez-2026-10-11_23-44-18-1791755058505-566085-0000000001528172.log",
+      "bytes": 950,
+      "sha256": "c4c93fda05b03d0879266174b8d7c8b8be71bb46836c3b69ebd7f2b84d59d143"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/runway-release/native.log",
+      "bytes": 193,
+      "sha256": "227a749587c09b3a86d26fc0521178a8332d4c47b0fe876a357f3799ac49f0e7"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/runway-release/particle-runway.json",
+      "bytes": 12740,
+      "sha256": "82fed3be199aeb914dc70ecf5cbb06078e504909844995196ca778cc7e53adf0"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/runway-release/summary.json",
+      "bytes": 220,
+      "sha256": "d558447f9c9580c9b0238ad332632e6b202791d3554a22c6428378ca50b1f4e9"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/scene-headless/config.json",
+      "bytes": 154,
+      "sha256": "ffbe6b6be34e38bc4f8ae568517fc535fb4353b689281d68c04938a5ab94335b"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/scene-headless/godot.log",
+      "bytes": 110,
+      "sha256": "bc5f8e01ff6a253a19a0ec7e8c7befc010017a797855821bab2f3ab0fe8895cb"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/scene-headless/live-config.json",
+      "bytes": 47,
+      "sha256": "96677f743f0fb626ae635aba5f102c00a958f0587ded14baf0598c0d4d3d46c0"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/scene-headless/results.json",
+      "bytes": 146,
+      "sha256": "944f9718c032a5e8c574d1e0a3aa151421c3c0f55710d4283c2dc80deb53e193"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/scene-headless/test.log",
+      "bytes": 110,
+      "sha256": "bc5f8e01ff6a253a19a0ec7e8c7befc010017a797855821bab2f3ab0fe8895cb"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/particles-vulkan/data/godot/app_userdata/WAVEZ/logs/godot.log",
+      "bytes": 192,
+      "sha256": "e39e33090d59a660deb3706cbb4bb37131747019c3c8a50cc22ef4b72cc1f989"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/particles-vulkan/data/godot/app_userdata/WAVEZ/logs/wavez-2026-10-11_23-44-49-1791755089213-570930-0000000001535584.log",
+      "bytes": 929,
+      "sha256": "77b145831448191c5adf681da755e03e7f16f0742e62ea8663ced885bd832ae2"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/particles-vulkan/native.log",
+      "bytes": 192,
+      "sha256": "e39e33090d59a660deb3706cbb4bb37131747019c3c8a50cc22ef4b72cc1f989"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/particles-vulkan/report.json",
+      "bytes": 18256,
+      "sha256": "b04a0fd7721c4580989407ad697d7dc7e47eaf0b4e2efe0d69d2f24f2b8cd2c1"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/particles-vulkan/summary.json",
+      "bytes": 221,
+      "sha256": "04d979c0724eabf21d2f52b5de7170dd81156bb63af1e4aa207befe8142d8cca"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/rolling-headless/checks.json",
+      "bytes": 10256,
+      "sha256": "9c7f1ea0060b795b8075ce8f50a3055af49143bee7efcf13775fe94021fe7b6a"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/rolling-headless/gpu-oracle.json",
+      "bytes": 4720,
+      "sha256": "d2e195d7439567e0e1ef73e01f731ed6796c7f6cd766fbc456643fc9910fc607"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/rolling-headless/native.log",
+      "bytes": 110,
+      "sha256": "610c08950e46b4d938fbb62033ead8707c86f43511d4cfc3ebd728052cea75c8"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/rolling-headless/oracle.json",
+      "bytes": 4720,
+      "sha256": "a9a627751b4525380d9f76b474bfd06da9d76f7ae4c8cc491cb59b92d332778a"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/timeline-headless/data/godot/app_userdata/WAVEZ/logs/godot.log",
+      "bytes": 114,
+      "sha256": "24520a58c06e1f5492a41f646db76a55d22b97c1d5895fad1ff03ee7aa8f408f"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/timeline-headless/data/godot/app_userdata/WAVEZ/logs/wavez-2026-10-11_23-45-07-1791755107863-572144-0000000000874746.log",
+      "bytes": 537,
+      "sha256": "7a4af5a48ad15bc3b6e3916aaa5ece49d7ede97b8061b31054ddd73ac612f9d2"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/timeline-headless/data/godot/app_userdata/WAVEZ/logs/wavez-2026-10-11_23-45-09-1791755109684-572144-0000000002696139.log",
+      "bytes": 589,
+      "sha256": "d95b03807e529faafbd19ee7ae93db3d88e106bf799bd62d70039ae294c2544f"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/timeline-headless/data/godot/app_userdata/WAVEZ/logs/wavez-2026-10-11_23-45-11-1791755111625-572144-0000000004636936.log",
+      "bytes": 589,
+      "sha256": "d53c2fc1cdab288259bb3bd2b8c3b3be7c1efe7eab9354aca29d85af509a955b"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/timeline-headless/data/godot/app_userdata/WAVEZ/logs/wavez-2026-10-11_23-45-13-1791755113141-572144-0000000006152997.log",
+      "bytes": 589,
+      "sha256": "1250bb080960372a50e817678e8ec57a318424989d364ec99f5bdc1a441cea0d"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/timeline-headless/data/godot/app_userdata/WAVEZ/logs/wavez-2026-10-11_23-45-15-1791755115116-572144-0000000008127415.log",
+      "bytes": 521,
+      "sha256": "d24905029109eaaa16eec4c865227ff6caa651ce0cc7789657f57f84fe808ef5"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/timeline-headless/fixtures/prepared-timeline.json",
+      "bytes": 10488,
+      "sha256": "4038f1c0b3c6d5be4d015b1d7a0616ae9e8a0c039e256d62aeae57688e939ace"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/timeline-headless/native.log",
+      "bytes": 114,
+      "sha256": "24520a58c06e1f5492a41f646db76a55d22b97c1d5895fad1ff03ee7aa8f408f"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/timeline-headless/summary.json",
+      "bytes": 588,
+      "sha256": "ad8d46a3393e8217ab33a71ef9f20cc203a02be574d1890c4388cd6db3959a6e"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/maintenance-headless/fixtures/config.json",
+      "bytes": 184,
+      "sha256": "05de266b376c19f4c35135bf0f0164490455fe69238690a6a5ecc9b803739728"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/maintenance-headless/fixtures/lifecycle-results.json",
+      "bytes": 92,
+      "sha256": "a589049c03fb59aa3469e3c513cbb81db9f1a258c471a6ef997f4e94a90ee307"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/maintenance-headless/fixtures/live-config.json",
+      "bytes": 47,
+      "sha256": "96677f743f0fb626ae635aba5f102c00a958f0587ded14baf0598c0d4d3d46c0"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/maintenance-headless/fixtures/maintenance-results.json",
+      "bytes": 34,
+      "sha256": "d63f7332e9585ecb6e8e5e0f9f692b35ff57f1f414a1ddc95814b43e5778d8d8"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/maintenance-headless/test_performance_maintenance.godot.log",
+      "bytes": 120,
+      "sha256": "a82bf57290f47254235d13143b3309ffdf6f604dcc8e01a9d2b62f9d295e008b"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/maintenance-headless/test_performance_maintenance.log",
+      "bytes": 120,
+      "sha256": "a82bf57290f47254235d13143b3309ffdf6f604dcc8e01a9d2b62f9d295e008b"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/maintenance-headless/test_scene_playback_lifecycle.godot.log",
+      "bytes": 1165,
+      "sha256": "6ddc4e0c6758e970514a8721a1c7fce10dfdd065f5f5d46d1681c6801ce18d09"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/maintenance-headless/test_scene_playback_lifecycle.log",
+      "bytes": 1165,
+      "sha256": "6ddc4e0c6758e970514a8721a1c7fce10dfdd065f5f5d46d1681c6801ce18d09"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/runway-headless-2/data/godot/app_userdata/WAVEZ/logs/godot.log",
+      "bytes": 410,
+      "sha256": "c8346f98aeeeeffd4d76c18f88d5f5e4a27887910cf28503e43306fdabfed652"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/runway-headless-2/native.log",
+      "bytes": 417,
+      "sha256": "e278ac1ba11420244d949d4ffc34b94437016ea332d819df8ebd9c006f6dee37"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/runway-headless-3/data/godot/app_userdata/WAVEZ/logs/godot.log",
+      "bytes": 423,
+      "sha256": "98a1d671940698496cca4b149602e7c67a37370ab46db0e3768855c12820978b"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/runway-headless-3/data/godot/app_userdata/WAVEZ/logs/wavez-2026-10-11_23-34-16-1791754456878-511830-0000000000863613.log",
+      "bytes": 930,
+      "sha256": "11790fcca2cccad8313bfbc445a44b14251eea53ca8b1323c237b6a50fea1366"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/runway-headless-3/native.log",
+      "bytes": 423,
+      "sha256": "98a1d671940698496cca4b149602e7c67a37370ab46db0e3768855c12820978b"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/runway-headless-3/particle-runway.json",
+      "bytes": 12785,
+      "sha256": "8bbb96da916d84950028f4453fc92d4a3b120887321f2d4bcde5667bc57e7728"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/runway-headless-3/summary.json",
+      "bytes": 251,
+      "sha256": "dbd2ce45730bc068aa17e64211a82fd301143e65d6637536662df4327e793656"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/runway-headless-4/data/godot/app_userdata/WAVEZ/logs/godot.log",
+      "bytes": 1026,
+      "sha256": "60a0630ece807582dbd24df69444d9008153a4e2623937395475a9dd509da780"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/runway-headless-4/data/godot/app_userdata/WAVEZ/logs/wavez-2026-10-11_23-34-48-1791754488760-525074-0000000000895221.log",
+      "bytes": 930,
+      "sha256": "ff03692aed2a279accea4cf27781294412e957ef3cefd51a4f2e7e71b7ddfe89"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/runway-headless-4/native.log",
+      "bytes": 1026,
+      "sha256": "60a0630ece807582dbd24df69444d9008153a4e2623937395475a9dd509da780"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/runway-headless-4/particle-runway.json",
+      "bytes": 12785,
+      "sha256": "2854b4e8e3425025c6e08786559ca91897495b79a89e180df47c3aa59b753237"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/runway-headless-4/summary.json",
+      "bytes": 251,
+      "sha256": "dceb9f5e83a7faf12d875fd3c5d624a5c85b727c30ebfe99b876e7995d396db3"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/lifecycle-main.log",
+      "bytes": 467,
+      "sha256": "4dd9dc11e9a4ef4aca69b6488088f331143a6457a88006dc4072b0edeb47589e"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/lifecycle-main-results.json",
+      "bytes": 92,
+      "sha256": "a589049c03fb59aa3469e3c513cbb81db9f1a258c471a6ef997f4e94a90ee307"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/lifecycle-final.log",
+      "bytes": 467,
+      "sha256": "4dd9dc11e9a4ef4aca69b6488088f331143a6457a88006dc4072b0edeb47589e"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/lifecycle-final-results.json",
+      "bytes": 92,
+      "sha256": "a589049c03fb59aa3469e3c513cbb81db9f1a258c471a6ef997f4e94a90ee307"
+    },
+    {
+      "path": "/home/Nozba/Codex/Wavez/runway-377/sequential-results.json",
+      "bytes": 489,
+      "sha256": "1e2e598e12df68b7e9e1cc18d49375b4a42f11caaabfe08a74f04432b8d9d0c0"
+    }
+  ]
+}

@@ -152,6 +152,8 @@ func run() -> void:
 	var worker = control.worker;view.free();await process_frame
 	check(worker.status().bytes == 0 and worker.status().in_flight_bytes == 0,"Teardown releases prepared and active ownership")
 	var mixed = make_view(directory.path_join("mixed.wvz"),true)
+	# Automatic can now fit this tiny capture; test intersection with a manual window.
+	mixed.scene_layers.playback.set_policy("512")
 	check(await sample(mixed,0,true) and await settle(mixed,0),"Mixed independent clocks become ready")
 	mixed.timeline.refresh(mixed,true)
 	check(mixed.timeline.coverage.fields == [[0.0,2.0]],"Small field timeline is fully prepared")

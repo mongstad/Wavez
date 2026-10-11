@@ -35,6 +35,8 @@ func run() -> void:
 	for case in ["particles","fields","meshes","static","mixed"]:
 		var view = make_view(out.path_join(case+".wvz"),true)
 		view.set_process_input(false);view.set_process_unhandled_input(false)
+		# Explicit manual window keeps this tiny fixture particle-limited.
+		if case == "mixed":view.scene_layers.playback.set_policy("512")
 		check(await sample(view,0,true) and await settled(view),case+" paused prebuffer settles")
 		view.timeline.refresh(view)
 		check(contains(view.timeline.coverage.scene,.1),case+" initial required scene window ready")
