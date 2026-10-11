@@ -1,3 +1,26 @@
+# Particle cache capacity
+
+## Current mixed-scene policy — issue #377
+
+Candidate **v0.1.0.101** is pending owner review, based on accepted build 100.
+Automatic scenes containing fields now validate particle descriptor costs after
+the short startup request settles, then request a contiguous directional runway
+within the existing particle reservation. They retain the **at-most-2-GiB**,
+**50/50 decoded/prepared** allocation and field priority. Each requested pair is
+charged separately, including variable particle counts and enabled trails, with
+two largest-pair charges left for rolling transitions. This uses available particle
+cache space beyond eight requested pairs without changing global memory policy,
+field concurrency, physical-headroom guards or scientific data. Manual choices
+still request at most eight pairs. Full-file residency is not required for mixed
+opening or playback; small captures can naturally fit inside the reservation.
+
+The timeline continues to publish the actual required visible scene intersection.
+Sizing and queued work do not make an interval ready. See [matched 1x measurements
+and review limitations](evidence/issue-377/README.md).
+
+The issue #229 review-time report below is preserved as written. Its eight-pair
+automatic mixed-scene scheduling description is superseded by the policy above.
+
 # Particle cache capacity — issue #229
 
 Candidate **v0.1.0.36** is pending owner review. Automatic particle preparation

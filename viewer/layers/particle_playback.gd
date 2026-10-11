@@ -115,7 +115,7 @@ func _context(time: float) -> bool:
 	var requested_cost: int = estimates.pair_estimates[point.a] if sized else estimates.largest_pair
 	source_generation = layers.reader.generation;config_signature = signature;budget_target = point.a;last_target = -1
 	var source_token := str(source_generation)+JSON.stringify(layers.reader.source_stamp,"",true,true)
-	context = {"source_token":source_token,"token":source_token+signature,"path":layers.reader.source_path,"stamp":layers.reader.source_stamp.duplicate(),"entries":entries,"object":layers.reader.objects[layers.particle_id].duplicate(true),"config":config,"decoded_limit":decoded_limit,"prepared_limit":prepared_limit,"full_preload":full_preload,"transient_estimate":requested_cost*2,"sizing_key":"" if field_priority else sizing_key,"admitted":requested_cost <= prepared_limit}
+	context = {"source_token":source_token,"token":source_token+signature,"path":layers.reader.source_path,"stamp":layers.reader.source_stamp.duplicate(),"entries":entries,"object":layers.reader.objects[layers.particle_id].duplicate(true),"config":config,"decoded_limit":decoded_limit,"prepared_limit":prepared_limit,"full_preload":full_preload,"transient_estimate":requested_cost*2,"sizing_key":sizing_key,"admitted":requested_cost <= prepared_limit}
 	if not context.admitted:
 		# Apply lower limits even when no new pair can be admitted. The worker
 		# can reclaim unpinned history without touching the displayed pair.
@@ -130,7 +130,7 @@ func _request(time: float, force := false) -> bool:
 	var target: int = bracket.a
 	if not force and last_target == target:return true
 	var indices: Array[int] = []
-	if sized and not field_priority and policy in ["adaptive","full"]:
+	if sized and policy in ["adaptive","full"]:
 		# Contiguous forward/reverse runway first, then retained history. Budget
 		# each actual pair, rather than multiplying a fixed sample ceiling.
 		var candidates: Array[int] = []
@@ -142,11 +142,17 @@ func _request(time: float, force := false) -> bool:
 			for offset in range(1,context.entries.size()):
 				var index := target-offset*direction
 				if index >= 0 and index < context.entries.size():candidates.append(index)
-		var used: int = 0 if full_preload else int(estimates.pair_estimates[target])*2
+		# Mixed rolling caches can still pin larger previous pairs after a seek
+		# or loop. Reserve both before filling the remaining directional budget.
+		var transition_cost: int = estimates.largest_pair if field_priority else estimates.pair_estimates[target]
+		var used: int = 0 if full_preload else transition_cost*2
 		for index in candidates:
 			var bytes: int = estimates.pair_estimates[index]
 			if used+bytes > prepared_limit and not indices.is_empty():break
 			indices.append(index);used += bytes
+		# Mixed scenes keep their existing RAM reservation and rolling eviction,
+		# but use that reservation rather than stopping at eight requested pairs.
+		if field_priority:window_pairs = indices.size()
 	else:
 		for offset in range(window_pairs):
 			var index := target+offset*direction

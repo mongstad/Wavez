@@ -1,5 +1,14 @@
 # Current status
 
+Issue #377 proposes candidate **v0.1.0.101**, based on accepted **v0.1.0.100** /
+owner-merged PR #380 (`096670dfa8869642d69ccc9f2d05ac6c5aea81e9`). Mixed-scene
+Automatic particle preparation now sizes validated descriptors after startup and
+uses the existing byte reservation for directional runway beyond eight pairs.
+The 2 GiB mixed allocation, 50/50 split, field priority, physical RAM guards and
+scene-ready timeline contract remain. Owner review is pending. See [particle
+cache policy](PARTICLE_CACHE_CAPACITY.md) and [real-capture comparison and owner
+checks](evidence/issue-377/README.md). Historical reports below remain as written.
+
 Issue #378 proposes candidate **v0.1.0.100**, based on accepted **v0.1.0.99** /
 owner-merged PR #379 (`b0c0aed6099e091012fcf141846cf2e07f93a274`). The prepared
 timeline paints only full required scene readiness, validates current resident

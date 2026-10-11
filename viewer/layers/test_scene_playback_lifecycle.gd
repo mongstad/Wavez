@@ -21,7 +21,7 @@ func run() -> void:
 	check(view.play_button.disabled,"style change waits only for its newly requested pair")
 	check(await await_ready(view),"automatic startup completes safe preparation")
 	check(not view.play_button.disabled and view.requested_time==0,"startup enables Play with unchanged source time")
-	check(view.scene_layers.playback.worker.status().desired.size()<=8,"bounded startup lookahead")
+	check(request_fits(view),"startup lookahead stays inside its admitted byte budget")
 	# Pre-retirement native v2 recipes serialized this hidden visual value.
 	var native_recipe := preload("res://scene/inspection_state.gd").snapshot(view)
 	native_recipe.visual.intensity_floor = .125
@@ -31,7 +31,7 @@ func run() -> void:
 	check(await await_ready(view),"legacy full setting requires only current pair")
 	var start := Time.get_ticks_msec()
 	while view.scene_layers.playback.worker.status().prepared_pairs<control_window(view) and Time.get_ticks_msec()-start<10000:await process_frame
-	check(view.scene_layers.playback.worker.status().prepared_pairs<=8 and not view.scene_layers.playback.full_preload,"legacy full policy uses bounded rolling preparation")
+	check(request_fits(view) and not view.scene_layers.playback.full_preload,"legacy full policy uses byte-bounded mixed rolling preparation")
 	check(view.current_mm.instance_count==3,"rolling cache does not create extra GPU particle instances")
 	var control = view.scene_layers.playback
 	var entry: Dictionary = control.context.entries[0].duplicate(true)
@@ -130,3 +130,10 @@ func run() -> void:
 	quit(0 if failures.is_empty() else 1)
 
 func control_window(view) -> int:return view.scene_layers.playback.window_pairs
+
+func request_fits(view) -> bool:
+	var p = view.scene_layers.playback;var state: Dictionary = p.worker.status()
+	if not p.sized:return state.desired.size() <= 8
+	var used: int = int(p.estimates.largest_pair)*2
+	for index in state.desired:used += int(p.estimates.pair_estimates[index])
+	return used <= p.prepared_limit and state.prepared_bytes <= p.prepared_limit and state.decoded_bytes <= p.decoded_limit
