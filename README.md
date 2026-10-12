@@ -1,104 +1,93 @@
-# WAVEZ
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="viewer/ui/about/Wavez_Banner_No_Slogan_No_Border_Dark.png">
+  <source media="(prefers-color-scheme: light)" srcset="viewer/ui/about/Wavez_Banner_No_Slogan_No_Border_White.png">
+  <img alt="Wavez" src="viewer/ui/about/Wavez_Banner_No_Slogan_No_Border_White.png" width="640">
+</picture>
 
-![WAVEZ](viewer/ui/about/Wavez_Banner_No_Slogan_No_Border_Dark.png)
+**[Screenshot pending — Wavez viewer showcase]**
 
-Wavez is a NumPy-first scientific capture and Godot visualization platform for
-particles, meshes and uniform-grid scalar fields. New integrations use
-`SceneCapture` / `SceneReader` and WAVEZ Scene Format (`.wvz`, WVZ1).
+Wavez is a real-time 3D scientific simulation and data visualization application.
+Simulations export particles, uniform-grid scalar fields and triangle meshes to
+Wavez's **WVZ1 `.wvz` capture format**. The interactive viewer lets you explore
+those recorded layers together, navigate their sample times and export images
+or video.
 
-The current viewer provides deterministic video export, scientific
-inspection/analysis, bounded playback preparation and particle/mesh/volume
-rendering. The production shell includes recorded-time playback, status/Jobs,
-Fullscreen, command menus, a category Simulation panel and focused Tools.
-See [current status](docs/CURRENT_STATUS.md) for the accepted baseline, supported
-contracts and scope boundaries. The [format policy](docs/CAPTURE_FORMAT_POLICY.md)
-defines the WVZ1-only workflow.
+**[Comparison pending — same simulation in Python and Wavez]**
 
-**Forward+ Vulkan is the sole supported renderer.** Source and Linux standalone
-viewing and GPU exports require a Vulkan-capable GPU and working Vulkan drivers.
-Machines without suitable Vulkan support are excluded; there is no supported
-OpenGL/Compatibility fallback. See [requirements and startup troubleshooting](docs/RENDERER_REQUIREMENTS.md).
+## Development status
 
-Start with:
+Wavez is in pre-1.0 development. **Scientific Selection and Analysis tools are
+experimental and have not yet been fully implemented or comprehensively
+validated.** Independently verify results before relying on them for scientific
+conclusions.
 
-- [Getting Started: installation, Python examples and technical reference](GETTING_STARTED.md)
-- [Quickstart](QUICKSTART.md)
-- [Dark and Light themes](docs/APPLICATION_THEMES.md)
-- [Editable Keyboard Shortcuts](docs/KEYBOARD_SHORTCUTS.md)
-- [LMB vertical-axis preference](docs/LMB_Y_INVERSION.md)
-- [Visibility-aware keyboard focus](docs/FOCUS_NAVIGATION.md)
-- [Editable value focus and replacement](docs/EDITABLE_VALUE_FOCUS.md)
-- [Fine particle size and exact numeric entry](docs/PARTICLE_SIZE.md)
-- [Accurate field slice interpolation and measured limits](docs/FIELD_SLICE_INTERPOLATION.md)
-- [Exiting with active jobs](docs/EXIT_WITH_ACTIVE_JOBS.md)
-- [Close File without interrupting exports](docs/CLOSE_FILE.md)
-- [Linux release Window signal diagnostics](docs/ROOT_WINDOW_SIGNALS.md)
-- [Free-look steering and manual camera orbit](docs/MANUAL_CAMERA_ORBIT.md)
-- [Viewport cursor visibility](docs/VIEWPORT_CURSOR.md)
-- [Screen-fixed cinematic background](docs/CINEMATIC_BACKGROUND.md)
-- [Auto Orbit](docs/AUTO_ORBIT.md)
-- [Free Camera speed](docs/FREE_CAMERA_SPEED.md)
-- [Edit orbit center and radius](docs/ORBIT_GIZMO.md)
-- [Current status](docs/CURRENT_STATUS.md)
-- [Prepared timeline and short ready windows](docs/PREPARED_TIMELINE.md)
-- [Paused opening and automatic preparation](docs/PAUSED_PREPARATION.md)
-- [Held recorded endpoints and idle rendering](docs/RECORDED_END_IDLE.md)
-- [Dialog title and section hierarchy](docs/DIALOG_HIERARCHY.md)
-- [Shared dialog close controls](docs/DIALOG_CLOSE_CONTROLS.md)
-- [File and Tools dialog layout](docs/DIALOG_COHERENCE.md)
-- [Dialog action button appearance](docs/DIALOG_ACTIONS.md)
-- [Performance dialog](docs/PERFORMANCE_DIALOG.md)
-- [Current Tools functional audit](docs/TOOLS_FUNCTIONAL_AUDIT.md)
-- [Scientific data integrity and inspection-path audit](docs/SCIENTIFIC_INTEGRITY_AUDIT.md)
-- [Successful-open error recovery](docs/LOAD_ERROR_STATUS_RECOVERY.md)
-- [Session action and error logs](docs/SESSION_LOGGING.md)
-- [File Locations preferences](docs/FILE_LOCATIONS.md)
-- [Video export from Linux release builds](docs/PACKAGED_VIDEO_EXPORT.md)
-- [Volume opacity in legend overlays](docs/VOLUME_LEGEND_OPACITY.md)
-- [Source-probe marker visibility and styling](docs/PROBE_MARKER_VISIBILITY.md)
-- [Viewport-only video export](docs/VIDEO_VIEWPORT_EXPORT.md)
-- [Violet UI cleanup and owner checks](docs/UX5_CLEANUP.md)
-- [Application version and build policy](docs/VERSIONING.md) — view the identity in Help → About
-- [Pinned edge reveal and Fullscreen](docs/WINDOW_EDGE_REVEAL.md)
-- [Portable view presets](docs/WAVEZ_VIEW_PRESETS.md)
-- [Wavez handbook](docs/WAVEZ_HANDBOOK.md)
-- [Python API](WAVEZ_API.md)
-- [Capture format](docs/WVZ1_FORMAT.md)
-- [Simulation integration guide](docs/SIMULATION_INTEGRATION_GUIDE.md)
-- [WVZ1 implementation validation and owner checks](docs/WVZ1_IMPLEMENTATION_VALIDATION.md)
+## Explore recorded scenes
 
-The [UX workflow](docs/UX_WORKFLOW.md) defines presentation/review boundaries.
-[Retained evidence](docs/EVIDENCE_INDEX.md) describes original development
-checkpoints; their old capture names and commands remain historical. Use the
-current guides above for supported workflows.
+- View particles, volumetric fields and meshes together through the
+  **Particles / Fields / Meshes** interface.
+- Inspect scalar patterns with scientific colormaps and legends, field ranges,
+  opacity controls and slices.
+- Play and seek recorded time; move freely through the scene or use camera orbit.
+- Export viewport images and deterministic video of a chosen time range and view.
 
-The [documentation audit](docs/documentation-audit/README.md) records the cleanup
-and stable contract locations ahead of the separate public README and onboarding work.
+Source-based probing is available with documented precision and verification
+limits. Stored samples, derived measurements and rendered colors have different
+meanings. The [Technical Documentation](docs/TECHNICAL_DOCUMENTATION.md) collects
+their contracts and limitations.
+For everyday controls, see the [user handbook](docs/WAVEZ_HANDBOOK.md).
 
-Repository layout:
+## Get started
 
-- `wavez_export/` — installable capture/analysis library
-- `viewer/` — Godot viewer and native regression tests
-- `examples/` — small repository-owned examples
-- `tests/` — Python regression tests
-- `tools/` — validation, profiling and external-input adapters
-- `docs/` — current specifications/guides and retained review evidence
+1. Run a provided Linux x86_64 package, keeping `WAVEZ.x86_64` and `WAVEZ.pck`
+   together, or follow the source-build instructions.
+2. Export your simulation's arrays with Python's `SceneCapture` to a new `.wvz`
+   file. Small particle, field, mesh and combined examples are included.
+3. Choose **File → Open**. The capture opens paused while preparation continues.
+4. Explore the scene, adjust its presentation, then export an image or video.
 
-Scientific simulations, generated captures, benchmark payloads and research data
-are intentionally outside this repository. See
-[repository boundaries](docs/REPOSITORY_BOUNDARY.md).
+[Getting Started](GETTING_STARTED.md) covers installation, complete Python examples
+and simulation integration.
 
-## Licensing
+### Dependencies
 
-Original Wavez material in this repository is offered under the
-[PolyForm Noncommercial License 1.0.0](LICENSE). Wavez is source-available,
-not OSI-approved open-source software. Commercial use is not granted by that
-license and requires a separate written agreement with the rights holder.
+| Workflow | Requirements |
+|---|---|
+| Packaged viewer | Graphical Linux x86_64 desktop and working Vulkan GPU/drivers. The Godot runtime is included; Python and a separate Godot installation are unnecessary for viewing. |
+| Python export/integration | Python **3.10+**, **NumPy ≥1.23** and this repository's exporter. Zstandard compression is optional. |
+| Optional tools | MP4 needs external **FFmpeg with `libx264`**. Experimental Selection/Analysis needs external `python3` and NumPy; isosurface extraction additionally needs **scikit-image 0.26.x**, on Python **3.11+**. |
+| Source development/build | Tested with **Godot 4.7.2**; Linux packaging also needs Python and matching export templates. |
 
-Separately licensed bundled material retains its own terms. See
-[THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md). Branding is handled separately
-in [TRADEMARKS.md](TRADEMARKS.md).
+Use the [installation guide](GETTING_STARTED.md#choose-dependencies-for-the-work-you-want-to-do)
+for dependency setup. **Forward+ Vulkan is the sole supported renderer.**
 
-This repository begins from a fresh audited source snapshot rather than importing
-prior development Git history. See [PROVENANCE.md](PROVENANCE.md) for the scope of
-that reset.
+## System requirements
+
+Linux x86_64 is the currently validated platform. Plan for a modern multi-core
+64-bit CPU, a Vulkan-capable GPU with working drivers, and enough free storage
+for captures and exports. The tiers below are **provisional planning guidance,
+not certified minimums or performance guarantees**.
+
+| Tier / intended workload | System RAM | GPU memory | Storage |
+|---|---|---|---|
+| Minimum estimate — modest captures and light workloads | 16 GB | About 6–8 GB | SSD |
+| Recommended — substantial particle/mesh data and moderate fields | 32–64 GB | 8+ GB | Fast SSD / NVMe |
+| High-end — 192³+ fields, multiple channels and longer prepared coverage | 64–128+ GB | 16+ GB where practical | Fast NVMe, substantial free capacity |
+
+Development and validation have used **Fedora 44 / KDE, Ryzen 7 5800X, 48 GiB RAM,
+RTX 3070 Ti 8 GB and Godot 4.7.2 / Forward+ Vulkan**. That workstation is evidence
+of tested use, not certification of the other tiers or every capture.
+
+More RAM can extend prepared playback coverage and reduce re-preparation. CPU
+throughput and memory bandwidth help field preparation; bounded workers adapt to
+available headroom. GPU speed and VRAM affect rendering capacity, while faster
+storage helps uncached reads. VRAM does not replace the system-RAM capture cache.
+Costs vary with resolution, channel/particle count, recording cadence, playback
+speed and cache settings; preparation can still limit playback on a fast GPU.
+
+## License
+
+Original Wavez material is source-available under the
+[PolyForm Noncommercial License 1.0.0](LICENSE), not an OSI-approved open-source
+license. Commercial use requires a separate agreement. Separately licensed
+components retain their [third-party terms](THIRD_PARTY_LICENSES.md), and the
+name and artwork follow the [branding policy](TRADEMARKS.md).
