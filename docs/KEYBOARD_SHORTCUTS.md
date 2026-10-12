@@ -63,13 +63,12 @@ based on accepted `main` `0496d12` (owner-merged PR #174).
 ## Editing and persistence
 
 Open **Edit → Preferences → Keyboard Shortcuts**, with or without a capture.
-Help contains About; its old static Shortcuts list is removed.
-The editor is a custom in-canvas Control with the accepted violet theme, a
-640 × 560 logical-pixel maximum panel, a scrolling list and fixed footer.
-The title leads directly into the list, with no permanent instructions above the
-rows or footer; only a failed save displays an error. It fits smaller windows by
-reducing its bounds; the production window minimum
-remains 970 × 600. It creates no native or Godot Window/AcceptDialog chrome.
+
+<img width="636" height="555" alt="image" src="https://github.com/user-attachments/assets/65e9050a-91b8-48fe-9a48-fd03b2b02118" />
+
+<br>
+
+<br>
 
 Activate a binding button with the mouse or keyboard, then press a key with
 optional Ctrl, Shift, Alt or Meta/Super. The highlighted field says **Press a key…**.
@@ -143,6 +142,8 @@ movement keys, focus navigation, and Escape recovery retain their existing roles
 | Fullscreen Alternate | Shift+F11 | Same fullscreen command; preserves the documented alternate |
 | Pin Top Bar / Pin Right Panel / Pin Bottom Bar | Unbound | Existing edge-reveal pin states |
 | Next Simulation Category / Previous Simulation Category | Unbound | Existing Particles, Fields, Meshes selection in that order, wrapping |
+
+
 
 Actions without an accepted shortcut start Unbound to avoid inventing defaults.
 Modifiers match exactly, so assigning Ctrl+R is independent of assigning R.
