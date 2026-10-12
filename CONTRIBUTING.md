@@ -1,8 +1,7 @@
 # Contributing to Wavez
 
-Wavez is an owner-maintained application for exploring recorded particles,
-scalar fields and meshes in 3D. This repository is currently **private**; the
-options below are for people who have repository access.
+Wavez is an owner-maintained scientific visualization application for exploring recorded particles, scalar fields and meshes in 3D.
+This guide explains how to report bugs, suggest improvements and discuss potential contributions.
 
 Start with the [README](README.md), [Getting Started](GETTING_STARTED.md) and
 [user handbook](docs/WAVEZ_HANDBOOK.md) for the supported workflows.
