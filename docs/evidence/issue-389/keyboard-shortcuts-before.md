@@ -1,0 +1,228 @@
+# Keyboard Shortcuts
+
+Issue #331 adds **Roll Camera Left** and **Roll Camera Right** under Navigation
+in candidate build 88. Both default to Unbound and use the existing independent
+rebind, Clear, conflict transfer, Apply/Cancel and restart persistence path.
+Hold a bound key to bank Free Camera at **18°/second by default** around its current
+view axis. The shared **Camera Roll Speed** slider immediately below the two
+assignments selects **5–90°/second in 1° increments** and displays, for example,
+`18°/s`. It controls both directions equally and affects only manual banking.
+Apply saves/activates speed without changing key assignments or closing the
+editor; Cancel, Escape and X discard unapplied edits. Reset Defaults stages
+18°/second. Reopening or restarting restores the applied value from the
+application shortcut preferences, separate from captures, presets and exports.
+With #343, either bound roll key works while RMB free-look steering is held, in
+either input order. Key release stops roll; RMB release leaves an independently
+held roll active. Focus/modal guards and LMB priority remain unchanged. No new
+default keys are assigned. See [camera navigation](MANUAL_CAMERA_ORBIT.md) for
+focus guards and owner checks.
+
+The #331 review also adds **Move Camera Up** (default **E**) and **Move Camera
+Down** (default **Q**) under Navigation. These replace the fixed vertical key
+checks with held, camera-local movement through the configured logical bindings.
+Rebind, Clear, conflict transfer, Apply/Cancel/Escape/X, Reset Defaults and restart
+use the same preference workflow. Assigning Q/E to roll unbinds the conflicting
+vertical actions, so Q/E bank without translating. Rebind the vertical actions
+to other keys to fly while banking. W/A/S/D remain fixed physical movement keys.
+Assigning another action to W/A/S/D does not disable their physical translation;
+those four keys are outside this refinement's configurable movement scope.
+
+Issue #214 adds **Toggle Invert Y Axis** under Navigation in candidate build 76.
+Its row includes an On/Off toggle beside the editable hotkey; Apply saves both,
+Cancel/X/Escape discard drafts, and Reset Defaults stages Off plus Unbound.
+The assigned key toggles the saved LMB-only preference directly. See
+[LMB vertical-axis preference](LMB_Y_INVERSION.md) for behavior and owner checks.
+
+Issue #146 applies [visible-order focus traversal](FOCUS_NAVIGATION.md) inside
+this in-canvas editor in candidate build 65. Tab/Shift+Tab remain contained in
+the visible editor and skip disabled Apply. During binding capture the existing
+reserved Tab/Escape rules take precedence. Dismissal restores an eligible
+initiator or advances beyond its hidden region; Apply/Cancel persistence remains
+unchanged.
+
+Issue #259 groups the scrolling shortcut rows into Navigation, Playback, File,
+Tools and Interface sections in candidate build `v0.1.0.59`. Each section uses
+the shared titled-group surface also used by Video Export. The catalog's category
+field decides placement, so a new action using an existing category joins that
+section without a dialog-specific mapping. Rows stay in catalog order within
+each group; the footer remains fixed below the scrolling sections.
+See the [focused #259 validation and owner checks](evidence/issue-259/README.md).
+
+Owner-merged issue #255 (build 57, PR #268) keeps the entire Keyboard Shortcuts
+window tooltip-free. Visible row names, key names and focus styling remain.
+Shortcut editing, persistence and explanatory tooltips elsewhere in Wavez are
+unchanged. See the [historical #255 evidence](evidence/issue-255/README.md).
+
+## Original #175 implementation record
+
+Candidate build 17, pending owner review. Selected from the sole Ready item on
+the Wavez Development board on 2026-10-02. The existing owner-linked branch is
+`175-ux-prefs-add-editable-keyboard-shortcuts-preferences-and-remove-help-shortcut-list`,
+based on accepted `main` `0496d12` (owner-merged PR #174).
+
+## Editing and persistence
+
+Open **Edit → Preferences → Keyboard Shortcuts**, with or without a capture.
+
+<img width="636" height="555" alt="image" src="https://github.com/user-attachments/assets/65e9050a-91b8-48fe-9a48-fd03b2b02118" />
+
+<br>
+
+<br>
+
+Activate a binding button with the mouse or keyboard, then press a key with
+optional Ctrl, Shift, Alt or Meta/Super. The highlighted field says **Press a key…**.
+Modifier keys alone are ignored. Escape cancels that capture operation; another
+Escape closes the editor and discards the draft. Tab/Shift+Tab stay reserved for
+focus traversal. Keyboard focus remains inside the editor, and following a row
+scrolls it into view. Clear unbinds a row; Reset Defaults stages the accepted map.
+Unavailable source actions remain editable and visually muted, without
+shortcut-window tooltips. Window-manager-reserved combinations may be
+intercepted before Wavez receives them.
+
+Assigning a duplicate immediately unbinds the previous row in the **draft**.
+There is no warning or confirmation. **Apply** is disabled until the draft differs
+from the active map, and disables again if all edits are reverted. Starting capture,
+recapturing the current binding, or resetting an already-default map does not enable
+it. Disabled Apply is skipped during keyboard navigation. **Apply** validates,
+saves and activates the map and updates shortcut hints **without closing the
+editor**. The applied map becomes the new clean draft and Apply disables until
+another edit. The top-right **X** uses the main shell's close icon and control
+styling. **Cancel**, X or dismissal silently discards only edits made since the
+last successful Apply; already applied bindings stay active and saved. A save
+failure keeps the editor open and the active map intact.
+Viewport actions and free-camera movement cannot run through this modal editor.
+Right-drag steers the camera heading in place on both mouse axes. The separate
+Orbit Camera Left/Right shortcuts perform held horizontal orbit around the
+current target, relative to the view's screen-up axis. Both start Unbound under
+Navigation. RMB or either orbit key immediately disables Auto Orbit. The
+Navigate hint points to these roles; see [camera navigation](MANUAL_CAMERA_ORBIT.md).
+Existing text-entry, selection and busy-inspection guards remain authoritative.
+
+The separate ConfigFile at `user://keyboard_shortcuts.cfg`, section `shortcuts`,
+stores integer logical keycodes and modifier bits, including explicit `0` for
+Unbound. Saving uses a temporary file and rename before activating the map.
+There is no InputMap override or shutdown save of a cancelled draft. Invalid
+individual stored values fall back to the action's default. A missing/invalid
+action's default yields to a valid saved assignment using the same key; adding
+vertical actions therefore preserves earlier saved Q/E assignments. Explicit
+manually edited duplicates resolve in catalog order, with the last row winning.
+An unreadable configuration retains defaults and reports the engine error.
+
+Preferences are interactive-only. Offline rendering does not load this file.
+Shortcut maps never enter SSC, capture metadata, inspection bundles, scientific
+recipes, portable view presets or video jobs. Mouse navigation, free-camera
+movement keys, focus navigation, and Escape recovery retain their existing roles.
+
+## Defaults and action ownership
+
+| Action | First-launch binding | Existing owner |
+|---|---|---|
+| Reset Camera | R | Viewer camera reset |
+| Auto Orbit | O | Viewer orbit toggle shared with Navigate |
+| Free Camera | Unbound | Navigate camera-mode toggle |
+| Toggle Invert Y Axis | Unbound; preference Off | Persistent LMB-only vertical inversion |
+| Increase Camera Movement Speed | + | Free-camera translation rate, 10% per step |
+| Decrease Camera Movement Speed | - | Free-camera translation rate, 10% per step |
+| Move Camera Up | E | Held camera-local upward translation |
+| Move Camera Down | Q | Held camera-local downward translation |
+| Orbit Camera Left / Orbit Camera Right | Unbound | Held view-relative horizontal orbit around the current navigation target |
+| Roll Camera Left / Roll Camera Right | Unbound | Held camera-local banking in Free Camera |
+| Frame Scene | F | Viewer scene framing |
+| Navigate | Alt+N | Existing Navigate menu |
+| Play Pause | Space | Viewer transport toggle |
+| Previous Sample / Next Sample | Left / Right | Viewer frame stepping |
+| Loop Playback | Unbound | Transport's existing loop callback |
+| Open File | Unbound | File's scene picker |
+| Export Video | Unbound | File's existing export dialog |
+| Save Image | P | Saves directly to the configured Image Exports directory; otherwise uses the native picker and current-session folder |
+| Derive Range / Mapping | Unbound | Existing Tools commands and source eligibility |
+| Recorded History / Point Rendering | T / V | Existing viewer toggles |
+| Fullscreen | F11 | Existing shell fullscreen command |
+| Fullscreen Alternate | Shift+F11 | Same fullscreen command; preserves the documented alternate |
+| Pin Top Bar / Pin Right Panel / Pin Bottom Bar | Unbound | Existing edge-reveal pin states |
+| Next Simulation Category / Previous Simulation Category | Unbound | Existing Particles, Fields, Meshes selection in that order, wrapping |
+
+
+
+Actions without an accepted shortcut start Unbound to avoid inventing defaults.
+Modifiers match exactly, so assigning Ctrl+R is independent of assigning R.
+For unmodified printable `+` and `-`, binding uses the produced character:
+Shift+= on a US layout and a dedicated `+` on a Nordic layout resolve to the
+same default action. The editor captures and displays that logical `+` binding.
+Both speed actions can be rebound, cleared, applied, cancelled and reset like
+the other rows. Holding either key repeats 10% adjustments at a controlled
+200 ms interval; OS key echo does not add steps.
+Both fullscreen defaults are explicit rows and can independently be reassigned
+or cleared; there is no hidden hardcoded fullscreen alias. Escape remains recovery.
+Menu shortcut columns are display-only: the viewer owns one dispatch path with
+the existing input guards. Camera/transport callbacks are shared with their
+buttons or Navigate controls; menu and tool shortcuts invoke the existing command
+with its existing availability checks. Pins and category cycling add no new
+scientific or playback implementation.
+
+## Validation
+
+Run the focused source-viewer checks on either renderer:
+
+```sh
+python tools/validate_keyboard_shortcuts.py --godot /path/to/godot \
+  --renderer forward_plus --output-dir /tmp/shortcuts-forward
+python tools/validate_keyboard_shortcuts.py --godot /path/to/godot \
+  --renderer gl_compatibility --output-dir /tmp/shortcuts-compat
+```
+
+Add `--export` to import/export a temporary Linux release using the externally
+installed export template, and run the same checks through its normal Main scene
+with a validation-only autoload. Both source and packaged runs use an isolated
+profile and a second application process to verify persisted preferences. The
+test changes no owner preferences. No engine binaries/templates or generated
+packages are committed. Results and limitations are recorded in
+[issue evidence](evidence/issue-175/README.md). The subsequent Apply-state review
+change has its own [validation evidence](evidence/issue-175/apply-review/README.md).
+The later X/keep-open review change is recorded
+[separately](evidence/issue-175/dialog-review/README.md).
+
+## Owner verification for issue #255
+
+1. Hover every visible binding button, Clear button, row label, category
+   heading, Reset Defaults, Cancel, Apply and X. Scroll to later rows and
+   repeat: no tooltip should appear anywhere in this window.
+2. Rebind, clear, resolve a duplicate, Apply, Cancel and Reset Defaults. Restart
+   Wavez and confirm saved bindings load correctly.
+3. Hover Frame Scene or Reset Camera in the main shell. Their explanatory
+   tooltips should still appear outside the Keyboard Shortcuts window.
+
+## Original #175 owner verification record
+
+1. Launch build 17 on the normal owner profile. Check Help has only About WAVEZ,
+   and Edit → Preferences → Keyboard Shortcuts opens the custom editor. Review
+   labels, grouped rows, violet surfaces, focus ring, fixed Cancel/Apply footer
+   and scroll feel at normal KDE scaling, physical 4K and a 970 × 600 window.
+   Apply must start disabled, enable after an actual binding change, and disable
+   again when all changes are reverted. Tab/Shift+Tab must skip disabled Apply.
+2. With Reset Camera bound to R, assign R to Frame Scene. Verify Reset Camera
+   immediately says Unbound without a warning. Capture Ctrl+Shift+R for Reset
+   Camera, then Cancel. Confirm the previously active bindings still work.
+3. Repeat the two edits and Apply. Verify the dialog stays open with Apply disabled;
+   edit/apply a different action, then make an unapplied change and close with X.
+   There must be no warning, and the last applied map must remain intact. With a
+   capture open, verify R frames the scene and Ctrl+Shift+R resets it. Restart Wavez with the same profile and verify both
+   bindings and the unbound row persist. Clear a binding, Apply and restart again.
+4. During capture, press Escape once: keep the editor open and retain the draft.
+   Press Escape again: close and discard the draft. Use Tab/Shift+Tab and Enter
+   to edit rows and reach Apply/Cancel, including the last row. Check Meta/Super
+   combinations that KDE delivers to the application.
+5. Bind and exercise Open File, Export Video, Free Camera, Auto Orbit,
+   Play Pause, Frame Scene, Derive Range and Mapping. Confirm the existing picker,
+   export, camera, transport and Tools behavior, including ineligible source
+   actions and text/numeric input protection. Bind Loop Playback and compare it
+   with the existing Loop switch while playing through the interval endpoint.
+6. Bind the three pin actions and both category actions. Verify the existing
+   pins toggle and categories wrap Particles → Fields → Meshes and back. Enter
+   Fullscreen, reveal Edit, and open the editor; capture Escape must keep
+   fullscreen active, while Escape after closing the editor restores the original
+   fullscreen pin/visibility snapshot. Check both fullscreen binding rows.
+7. Verify ordinary capture opening, seeking, preparation, playback and video
+   export on both renderers and the Linux package. Reset Defaults stages a reset;
+   Cancel leaves the saved profile unchanged. Owner acceptance remains pending.
