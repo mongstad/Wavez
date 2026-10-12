@@ -1,0 +1,85 @@
+{
+  "issue": 375,
+  "date": "2026-10-12",
+  "baseline": "68f01ccb45dc3e67b5bfad0a36674a2a512e042b",
+  "candidate": "v0.1.0.103",
+  "scope": "Scientific integrity contract and source audit; three new assertions in existing worker test; no algorithm, shader or format changes",
+  "python": "3.14.8",
+  "numpy": "2.4.3",
+  "godot": "4.7.2.stable.official.ed1daf0bf",
+  "checks": {
+    "python_scientific_tests": 84,
+    "python_version_tests": 2,
+    "payload": {
+      "native": {
+        "checks": 480,
+        "failures": []
+      },
+      "strict_cases": 63,
+      "expected_native_decode_errors": [],
+      "unchanged_sources": true
+    },
+    "foundation": {
+      "checks": 163,
+      "failures": [],
+      "exit_code": 0,
+      "timed_out": false,
+      "source_unchanged": true,
+      "source_sha256": "ab1d382a4204ea9f9df1726dc508da3c61e97aba720ec8bfb5c45a9bfb1189f8",
+      "request_callback_ms": 0.195
+    },
+    "editor_import": {
+      "exit_code": 0,
+      "clean_log": true,
+      "requires_local_socket_access": true
+    }
+  },
+  "initial_unsuccessful_runs": [
+    {
+      "run": "payload",
+      "result": "Wrapper failed: default user log writes denied, plus file-dialog preference warnings; clean rerun with isolated writable XDG directories"
+    },
+    {
+      "run": "editor_import",
+      "result": "Sandbox socket-creation errors and four pre-existing missing UID cache warnings; authorized import rerun exited cleanly"
+    }
+  ],
+  "not_run": [
+    "Solver reruns",
+    "GPU model/driver benchmarks or visual comparisons",
+    "Compatibility/OpenGL",
+    "Native pointer/Selection/Analysis UI campaign",
+    "Standalone/package export",
+    "Other operating systems",
+    "Long-session lifecycle",
+    "Full unrelated regression suite"
+  ],
+  "raw_output_directory": "/home/Nozba/Codex/Wavez/scientific-contract-375",
+  "audited_runtime_sha256": {
+    "wavez_export/scene.py": "76afd84abee68cc8f1a343f8a065f6c974087f9373a3bf025dea06bcd7b3a83b",
+    "wavez_export/analysis/source.py": "acf75fd779510f46bfe750974277d9663736f36eaacfeb3a8fe1193f21cefe3f",
+    "wavez_export/analysis/sampling.py": "9b67046adac5ee2854fc87f4fc84f6ed4a4d2f785532d99db3b056508ca564b1",
+    "wavez_export/analysis/jobs.py": "160671152a97e4368868b51b4c72f9df8cfcc05d3c2c25be5cb719eb1b0ecc23",
+    "wavez_export/analysis/selectors.py": "e362c19e6407a64be93abc76a929148fbdd98bf31933abfdd265f6b08f40b2b1",
+    "wavez_export/analysis/native_analysis.py": "6f291ff0e91795591454cee968a2f669b974cc3f012170b5d9d9bb21ed3f5e90",
+    "wavez_export/analysis/reductions.py": "c1002f3cc017978b69c8f5f8bb79fa9775cb778d2a1c213c17bc2086179b5956",
+    "wavez_export/analysis/quadrature.py": "b95363483f3a801756a8ece9911fff02c1e3eb1554d03b239d0a3f4683f2a025",
+    "wavez_export/analysis/export_results.py": "dd838587f2992adde5876e8799daef5aac5449ff27dcbec847cc9e500c6eaa75",
+    "wavez_export/analysis/result_store.py": "fdca2a0a7698fd9999726542a2ae002e0cc6c56c1e18ee2c4ec51122063a852a",
+    "wavez_export/analysis/picking.py": "e6d0b2f640f67a5fe372925f06af5a112449567c2b219df948e7ac065325e167",
+    "wavez_export/analysis/derived.py": "f2cc8f194fb3bb77ab66af53d2899c2884536d1f923dfbc847e60409059c0ac4",
+    "viewer/layers/scene_reader.gd": "d466e9dc10ba477ea0bd06c6fcda00a9d745847c2eefa34999eae85ed0052301",
+    "viewer/layers/scene_channels.gd": "0a33141ff1983807728e9387a145036a175a8e16539377fe5847bc43c137bf05",
+    "viewer/layers/grid_view.gd": "8b85205d3f777c326b7bf245bf4194871c91c60e9449a8323c1ba7aae64b1bbd",
+    "viewer/layers/scene_layers.gd": "e37fe59d773f74aa76496118fa4465a8a856fd0b0f1a012e53027cb89dd07e2b",
+    "viewer/layers/field_prepare.gd": "ae7ce68556f8414ac656224ee97c8dc2f5de6238b6986b81eac4bafd1855782e",
+    "viewer/analysis/native_plot.gd": "078da56439c881b253caf3573866ce12c3225e09ac5897dab5bcaae0b18617b7"
+  },
+  "test_file_sha256": "acaa587d916cd68e097295a12f648180160cfc64ef1d60bdf4cc5c03f4396665",
+  "retained_log_sha256": {
+    "foundation.txt": "722571f1b551934e4cb839e8748df428078c915fe337b7d0571ef1cf37d635c9",
+    "payload.txt": "23554ad382bcd81fab28a97eef9db596f24947d8814e1a1155f8ec9c951f472c",
+    "python.txt": "9feb76a2b7c2fe7c2ad61534f098e53c49453591408373c6a5a3990bf4d03961"
+  },
+  "retained_log_format": "Text transcripts; trailing blank lines removed, raw external logs unchanged"
+}

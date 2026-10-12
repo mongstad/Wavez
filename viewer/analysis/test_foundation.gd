@@ -61,6 +61,14 @@ func run() -> void:
 	check(old != newer,"requests have distinct revisions")
 	check(await wait_result(jobs),"latest request completes")
 	check(jobs.last_result.get("id")==newer and jobs.last_result.get("scene_revision")==2 and jobs.last_result.get("selection_revision")==3,"old result cannot replace latest state")
+	# Independent F05 affine-field oracle: .25 + 2*1 + 3*1.5 + 7.
+	# Check the actual worker readout, not only successful request publication.
+	var probe: Dictionary = jobs.last_result.get("data",{})
+	var value: Dictionary = probe.get("value",{})
+	var sampling: Dictionary = probe.get("sampling",{})
+	check(value.get("value") == 13.75 and Sampling.exact_float(value.get("exact")).get("value") == 13.75,"worker probe returns exact float64 oracle and token")
+	check(value.get("source_dtype") == "f8" and value.get("status") == "spatially_interpolated","worker probe labels source precision and spatial derivation")
+	check(sampling.get("a") == 0 and sampling.get("time") == 0.0 and sampling.get("status") == "held","worker probe uses held native field sample, not scene cursor time")
 	jobs.request(source,"describe",{},3,3);jobs.cancel()
 	check(not jobs.pending and jobs.current_id.is_empty(),"cancel clears active publication target")
 	var pid: int = jobs.worker_pid

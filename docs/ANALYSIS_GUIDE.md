@@ -1,5 +1,11 @@
 # Selections and temporal analysis
 
+Selection/Analysis is experimental beyond its declared validation fixtures.
+Use the [scientific integrity boundary](SCIENTIFIC_ANALYSIS.md#21-hardware-independent-scientific-integrity-boundary)
+and [current path audit](SCIENTIFIC_INTEGRITY_AUDIT.md) to distinguish stored
+samples, derived measurements and visual previews. Passing source transport or
+solver benchmarks does not validate every Selection/Analysis operation.
+
 Scientific analysis operates on immutable source values and explicit capture identities. Open a
 capture, then choose **Tools → Selection**, then **Use current capture**. The worker pins its
 committed bytes and checksum. New appended samples require a deliberate new

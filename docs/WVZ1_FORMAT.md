@@ -5,6 +5,10 @@ This is the canonical supported wire and sampling contract. `SceneCapture` /
 [format policy](CAPTURE_FORMAT_POLICY.md), [Python API](../WAVEZ_API.md), and
 [WVZ1 validation record](WVZ1_IMPLEMENTATION_VALIDATION.md).
 
+The [scientific integrity boundary](SCIENTIFIC_ANALYSIS.md#21-hardware-independent-scientific-integrity-boundary)
+distinguishes authoritative stored data, derived measurements and GPU presentation;
+the [inspection-path audit](SCIENTIFIC_INTEGRITY_AUDIT.md) states what is verified.
+
 ## Wire and scientific data
 
 All numbers on disk are little-endian. Prefix `<8sII>` is magic `WVZ1\0\0\0\0`,
@@ -133,11 +137,14 @@ source samples on an endpoint-aligned grid, then shader trilinear sampling. Nume
 probes and extraction use full source resolution. Float64 conversion uses bounded
 arrays; unrepresentable display coordinates/values are reported as unavailable.
 
-Forward+ uses a linear framebuffer; Compatibility uses sRGB output. Volume color
-blending therefore differs even with identical integrated opacity. Recipes/sidecars
-record the renderer and compositing convention. These are visualization colors,
-not a calibrated measurement of radiance. Godot documents the output-space distinction
-in its [spatial shader reference](https://docs.godotengine.org/en/stable/tutorials/shaders/shader_reference/spatial_shader.html).
+Forward+ Vulkan is the sole supported renderer. Recipes/sidecars record the renderer
+and compositing convention. These are visualization colors, not a calibrated
+measurement of radiance. Historical cross-renderer reports retain their original
+linear versus sRGB blending findings; they do not establish current fallback support.
+See [renderer requirements](RENDERER_REQUIREMENTS.md). GPU/driver filtering and
+presentation may vary without changing decoded source values. The accepted
+[slice interpolation change](FIELD_SLICE_INTERPOLATION.md) improves finite slice
+sampling; volume sampling and its documented precision limits remain separate.
 Texture and depth implementation follows the native [3D texture API](https://docs.godotengine.org/en/4.7/classes/class_imagetexture3d.html)
 and [depth reconstruction](https://docs.godotengine.org/en/4.7/tutorials/shaders/advanced_postprocessing.html).
 
