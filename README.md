@@ -37,7 +37,8 @@ scientific conclusions.
 
 Source-based probing is available with documented precision and verification
 limits. Stored samples, derived measurements and rendered colors have different
-meanings; see the [scientific integrity contract](docs/SCIENTIFIC_ANALYSIS.md#21-hardware-independent-scientific-integrity-boundary).
+meanings. The [Technical Documentation](docs/TECHNICAL_DOCUMENTATION.md) collects
+their contracts and limitations.
 For everyday controls, see the [user handbook](docs/WAVEZ_HANDBOOK.md).
 
 ## Get started

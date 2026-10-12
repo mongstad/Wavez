@@ -8,21 +8,20 @@ review-time evidence remain historical and unchanged.
 
 ## Controls and semantics
 
-Open **Scene layers → Settings: <volume>**. The selected scalar still controls
+Select the volume in **Fields**, then open **Color Mapping** and **Opacity**.
+The selected scalar controls
 color using **Color range minimum/maximum** and the selected colormap. Extinction
 now has its own explicit mapping:
 
 | Control | Meaning |
 |---|---|
 | Linear scalar | Use the signed scalar itself for the opacity ramp |
-| Magnitude • absolute scalar | Use the absolute scalar for the opacity ramp; color still uses the original signed scalar |
+| Magnitude | Use the absolute scalar for the opacity ramp; color still uses the original signed scalar |
 | Zero-opacity threshold | Values at or below this threshold contribute no extinction |
 | Full-opacity threshold | Values at or above this threshold reach the selected extinction strength |
-| Opacity / world unit | Maximum extinction strength, scaled by the ramp's weight |
-| Reset opacity mapping • linear 0–1 | Reset mapping mode and thresholds only; preserve color, strength, ray step and source state |
-| Ray step • world units | Ray-integration sampling distance; quality/performance, not an opacity or brightness mapping |
-
-![Current layer controls](evidence/issue-11/controls.png)
+| Opacity strength | Maximum extinction strength per world unit, scaled by the ramp's weight |
+| Tools → Derive range → Reset opacity | Reset mapping mode and thresholds only; preserve color, strength, ray step and source state |
+| Rendering → Ray step | Ray-integration sampling distance in world units; quality/performance, not an opacity or brightness mapping |
 
 For sampled scalar `s`, zero threshold `a`, full threshold `b`, strength `k` and
 world-distance integration step `dt`:

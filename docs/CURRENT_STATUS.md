@@ -6,8 +6,12 @@ Issue #94 proposes editorial draft **v0.1.0.104**, based on accepted
 selective product introduction, an early experimental Selection/Analysis caveat,
 verified dependency distinctions and provisional hardware guidance. Existing
 wordmark assets are unchanged; showcase/comparison locations are explicitly
-pending screenshots for owner selection. This is the first editorial round,
-not publication or release approval. See the [review record](evidence/issue-94/README.md).
+pending screenshots for owner selection. Owner-requested revisions make the
+handbook task-oriented, introduce a curated Technical Documentation index and
+remove the obsolete controls screenshot from the active opacity instructions
+while preserving its historical asset. Editorial review is ongoing; this is not
+publication or release approval. See the [first-draft record](evidence/issue-94/README.md)
+and [revision record](evidence/issue-94/iteration-2.md).
 Historical reports and review-time wording below remain as written.
 
 Issue #375 proposes candidate **v0.1.0.103**, based on accepted **v0.1.0.102** /
