@@ -15,7 +15,7 @@ Read README.md, docs/CURRENT_STATUS.md and CONTRIBUTING.md before making changes
 - Never change repository visibility. Do not make the repository public, private, or otherwise alter visibility under any circumstance. Do not rename, transfer, archive, delete, or change the default branch of the repository, and do not modify repository administration, access, security, branch-protection or ruleset settings unless the owner gives an explicit instruction for that exact administrative change.
 - Git is authoritative history. Commit meaningful completed checkpoints on the active issue branch and push reviewable work to the private origin. Synchronize canonical docs; use semantic versions and tags, never versioned folders.
 - Follow `docs/VERSIONING.md`: the sole application identity is `application/config/version` in `viewer/project.godot`. After #131 establishes the starting build, each future implementation PR proposes exactly the accepted `main` BUILD plus one, once per PR rather than per review commit. Reconcile against current main before owner merge; BUILD never resets. Change MAJOR/MINOR/PATCH only on explicit owner release instruction. Do not create tags or Releases without authorization.
-- Inspect staged content, sizes and secrets before committing. Never commit credentials, environments, caches, captures or large scientific results. Preserve useful history.
+- Inspect staged content, sizes and secrets before committing. Never commit credentials, environments, caches, captures or large scientific results. Preserve useful history. Do not force-push or rewrite history without a documented need and explicit owner authorization.
 - Keep external simulations and research projects outside this repository. Use synthetic fixtures or explicit external paths for optional integration tests. Do not duplicate exporters.
 - Validate relevant changes with small generated fixtures; avoid production scientific reruns for housekeeping.
 - Never add tooltips to panels, controls, buttons, labels, or other UI elements unless the owner explicitly instructs you to add a tooltip for that specific element. Tooltips are opt-in; do not introduce unsolicited hints or explanations.
@@ -44,6 +44,26 @@ Examples:
 - At the end of an authorized issue, report the branch, commit(s), files changed, validation performed, failures/skips, known limitations and pull-request state, then STOP and await owner review unless explicitly instructed otherwise.
 - Preserve third-party licensing boundaries. Do not vendor, copy, commit, or redistribute third-party tools, executables, runtimes, libraries, fonts, datasets, or other assets unless the repository explicitly documents them as bundled and their license obligations have been reviewed. In particular, dependencies listed in THIRD_PARTY_LICENSES.md as external/not vendored — including Godot Engine and FFmpeg — must remain externally installed and must not be added to the repository. If implementation appears to require bundling a new third-party component, STOP and request owner review before adding it.
 
+
+## Source resources and internal development references
+
+- GPU validation and supported launches use **Forward+ Vulkan only**; follow
+  [renderer requirements](docs/RENDERER_REQUIREMENTS.md). Historical Compatibility
+  reports remain provenance. Headless checks validate CPU contracts only.
+- Commit Godot `.gd.uid` and `.gdshader.uid` sidecars with their source files.
+  Preserve existing tracked UIDs; include the sidecar when moving or deleting its
+  script/shader. Godot's `.godot/` import cache remains ignored. For source/resource
+  changes, import the viewer and inspect `git status` for generated sidecars before
+  opening a PR. Documentation-only changes use the risk-based checks above.
+- About packages canonical notices as a preloaded resource. After editing a
+  notice source listed in `tools/sync_about_notices.py`, regenerate with
+  `python tools/sync_about_notices.py` and verify with `--check`. Do not edit the
+  generated notice text independently. See [About resources](viewer/ui/about/README.md).
+- The [capture format policy](docs/CAPTURE_FORMAT_POLICY.md) governs the Python
+  exporter identity separately from application builds. The [version policy](docs/VERSIONING.md)
+  governs release identities/tags; neither an implementation nor a documentation
+  PR authorizes a release. Keep externally installed runtimes outside the source
+  repository and use the reviewed [packaging workflow](docs/PACKAGED_VIDEO_EXPORT.md).
 
 ## Blender / 3D asset preservation
 

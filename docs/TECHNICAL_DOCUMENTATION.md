@@ -73,8 +73,10 @@ derived computation and visual presentation have different guarantees.
 
 ## Development and validation
 
-- [Contributing](../CONTRIBUTING.md) and [version policy](VERSIONING.md) — development,
-  focused checks, packaging identities and owner review.
+- [Contributor guide](../CONTRIBUTING.md) — bug reports, questions, ideas and
+  contributions by prior arrangement.
+- [Agent/developer guidance](../AGENTS.md) and [version policy](VERSIONING.md) —
+  development safeguards, focused checks, packaging identities and owner review.
 - [Current status](CURRENT_STATUS.md) — supported scope and current source-of-truth map.
 - [Scientific acceptance criteria](SCIENTIFIC_ACCEPTANCE.md) — declared independent
   oracles and fixture coverage, not universal workflow certification.
