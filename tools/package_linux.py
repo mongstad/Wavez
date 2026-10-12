@@ -14,6 +14,11 @@ import sys
 import tempfile
 import zipfile
 
+if __package__:
+    from .distribution_licenses import assemble, source_notices, verify_exported_notices
+else:
+    from distribution_licenses import assemble, source_notices, verify_exported_notices
+
 ROOT = Path(__file__).resolve().parents[1]
 PRESET = '''[preset.0]
 name="Wavez Linux"
@@ -66,6 +71,10 @@ def main():
     parser.add_argument('--godot', required=True)
     parser.add_argument('--output-dir', type=Path, required=True)
     args = parser.parse_args()
+    notices = source_notices()
+    engine_version = subprocess.check_output([args.godot, "--version"], text=True).strip()
+    if engine_version != notices["godot"]:
+        raise RuntimeError("Godot version has not been audited in licenses/sources.json")
     output = args.output_dir.resolve()
     output.mkdir(parents=True, exist_ok=False)
     binary = output / 'WAVEZ.x86_64'
@@ -73,15 +82,22 @@ def main():
         project = Path(temporary) / 'viewer'
         inventory = stage(project)
         build(args.godot, project, binary, output / 'build-logs')
-    (output / 'build.json').write_text(json.dumps(dict(
+    notice_report = verify_exported_notices(args.godot, binary.with_suffix('.pck'), output / 'notice-check')
+    info = dict(
         version=json.loads(subprocess.check_output([sys.executable, str(ROOT / 'tools/application_version.py'), '--json'])),
-        godot=subprocess.check_output([args.godot, '--version'], text=True).strip(),
+        godot=engine_version,
+        exported_notice_verification=notice_report,
+        source_commit=subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip(),
+        source_tree_clean=not subprocess.check_output(['git', 'status', '--porcelain'], cwd=ROOT),
         renderer={'method': 'forward_plus', 'driver': 'vulkan', 'fallback_to_opengl3': False},
         first_party_python=inventory,
         external_dependencies=['Vulkan-capable GPU/driver and graphical Linux desktop', 'Python 3.10+ and NumPy for independent Selection/Analysis and Matched Views', 'FFmpeg for MP4 encoding'],
         artifacts={p.name: hashlib.sha256(p.read_bytes()).hexdigest() for p in [binary, binary.with_suffix('.pck')]}
-    ), indent=2) + '\n')
+    )
+    (output / 'build.json').write_text(json.dumps(info, indent=2) + '\n')
+    archive = assemble(output, info)
     print(binary)
+    print(archive)
 
 
 if __name__ == '__main__':

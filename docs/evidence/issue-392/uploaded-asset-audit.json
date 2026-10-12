@@ -1,0 +1,81 @@
+{
+  "release": "v0.1.0.105",
+  "asset_id": 634911246,
+  "source_commit": "1feb37aacbe5ba206be0c7a353fec623a4e1a655",
+  "archive_sha256": "3584c15fe4f88b5a0881e2e4bc5f611e6b27b8d7f199009d133b22ebec9f094f",
+  "archive_bytes": 40497654,
+  "files": [
+    {
+      "path": "LICENSE",
+      "bytes": 4623,
+      "sha256": "5860dd2f08b9377907a33ef714527a9a74b6e12b688bd3f87797b57754d45981",
+      "readable": true
+    },
+    {
+      "path": "TRADEMARKS.md",
+      "bytes": 297,
+      "sha256": "31ad6692481b54941fbf1bf2a1696a04bb82754eb376050709222d9a3604afe1",
+      "readable": true
+    },
+    {
+      "path": "THIRD_PARTY_LICENSES.md",
+      "bytes": 3543,
+      "sha256": "e52e765e8989c50daa008786e10afa9df34b5bb2758f1a16c26dcb1c89164325",
+      "readable": true
+    },
+    {
+      "path": "GODOT_LICENSE.txt",
+      "bytes": 1149,
+      "sha256": "b0435e3b3e4e55238f05f4b306f30524a1b2e20147810d436eaa554fa6855c80",
+      "readable": true
+    },
+    {
+      "path": "GODOT_COPYRIGHT.txt",
+      "bytes": 100108,
+      "sha256": "cb1980c88089573bcacd7221d777c689bb8bbd778799f24c27fca0fe5f774d6d",
+      "readable": true
+    },
+    {
+      "path": "GODOT_THIRD_PARTY_NOTICES.txt",
+      "bytes": 109789,
+      "sha256": "ef081311975c72bb969c0aeaca92c15adb00f4a082f6867fbc6fbd675715b0b2",
+      "readable": true
+    },
+    {
+      "path": "DISTRIBUTION_NOTICES.md",
+      "bytes": 1530,
+      "sha256": "bafee7db00242643c1eb776db93b5da7956bf362bc332b5ba58b068e95cc6ad3",
+      "readable": true
+    },
+    {
+      "path": "viewer/COLORMAPS_LICENSE.txt",
+      "bytes": 40129,
+      "sha256": "dbb9ad7495a83b0f2f48c94b06e23020587d82f8d1492dcb717fb1ebc2f86c18",
+      "readable": true
+    },
+    {
+      "path": "viewer/ui/fonts/LICENSE-DejaVu.txt",
+      "bytes": 8816,
+      "sha256": "7a083b136e64d064794c3419751e5c7dd10d2f64c108fe5ba161eae5e5958a93",
+      "readable": true
+    }
+  ],
+  "inventory_links": {
+    "LICENSE": true,
+    "viewer/COLORMAPS_LICENSE.txt": true,
+    "viewer/ui/fonts/LICENSE-DejaVu.txt": true,
+    "viewer/ui/fonts/README.md": false,
+    "viewer/ui/about/README.md": false,
+    "TRADEMARKS.md": true
+  },
+  "upstream_verbatim": {
+    "Godot MIT": true,
+    "Godot components": true,
+    "DejaVu": true,
+    "Matplotlib": true
+  },
+  "offline_about_canonical_texts_match": true,
+  "offline_about_text_count": 5,
+  "pck_members_md5_verified": 652,
+  "viewer_or_gpu_started": false
+}
