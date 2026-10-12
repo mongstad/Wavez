@@ -1,42 +1,49 @@
-# Development checkpoints
+# Contributing to Wavez
 
-WAVEZ is the application brand; use Wavez in ordinary prose. Keep the project root unversioned. Git is the authoritative
-history; preserve existing commits and use meaningful completed checkpoints, not trivial
-per-edit commits. Push accepted checkpoints to the private origin. Never commit secrets,
-local environments, raw scientific datasets, generated captures or profiling output.
-Inspect `git diff --cached`, staged names and sizes before each commit.
+Wavez is an owner-maintained application for exploring recorded particles,
+scalar fields and meshes in 3D. This repository is currently **private**; the
+options below are for people who have repository access.
 
-Keep canonical documentation synchronized. G4 is accepted; post-G4 maintenance is authorized.
-G5/G6 and web/dashboard work require separate authorization. Preserve accepted G0–G4
-behavior and run focused relevant validation. GPU validation and supported launches
-use Forward+ Vulkan only; see [renderer requirements](docs/RENDERER_REQUIREMENTS.md).
-Historical Compatibility reports remain provenance, and headless checks validate
-CPU contracts only. New work targets `.wvz` / WVZ1 under
-the [capture format policy](docs/CAPTURE_FORMAT_POLICY.md).
+Start with the [README](README.md), [Getting Started](GETTING_STARTED.md) and
+[user handbook](docs/WAVEZ_HANDBOOK.md) for the supported workflows.
 
-Application identity follows [the version/build policy](docs/VERSIONING.md):
-`viewer/project.godot` → `application/config/version` is the sole source, displayed
-as `vMAJOR.MINOR.PATCH.BUILD`. Every future accepted implementation PR must carry
-exactly `main.BUILD + 1`; keep that candidate unchanged through review commits,
-and reconcile with current accepted main before merge. BUILD never resets.
-Only the owner declares MAJOR/MINOR/PATCH changes. No release automation is added.
+## Report a bug
 
-The Python exporter package has its own compatibility version: WVZ1 advances it
-to `4.0.0` for the clean format break. Application release tags normally use
-`vMAJOR.MINOR.PATCH`; implementation alone does not create a release tag or GitHub
-Release. Historical viewer directory
-`v1.0.3` was not a package release. The descriptive `pre-g4-consolidation` tag
-records a historical checkpoint without claiming a new release.
-No force pushes or history rewrites without a documented need and authorization.
+Check [existing issues](https://github.com/mongstad/Wavez/issues) first. If the
+problem has not been reported, open an issue with:
 
-Commit Godot `.gd.uid` and `.gdshader.uid` sidecars with their source files.
-They preserve resource identity across fresh imports and file moves; do not ignore
-or regenerate existing tracked UIDs. Include the sidecar when moving or deleting
-its script/shader. Godot's `.godot/` import cache remains ignored. Before opening a
-PR, import the viewer and check `git status` for newly generated sidecars.
+- Your Wavez version and relevant operating-system, GPU and driver details.
+- Steps to reproduce the problem, what you expected and what happened.
+- Relevant error messages or logs, and a small reproducible example if available.
 
-About packages canonical licensing notices as a preloaded resource. After editing
-LICENSE, THIRD_PARTY_LICENSES.md, TRADEMARKS.md or the bundled font/colormap notices,
-run `python tools/sync_about_notices.py`, then verify with `--check`. See
-[About resources](viewer/ui/about/README.md). Do not independently edit generated
-notice text or copy externally installed runtimes into the repository.
+Share only material you are permitted to share. Remove secrets and sensitive
+information from logs, screenshots and example captures.
+
+## Ask a question or suggest an idea
+
+Use [GitHub Issues](https://github.com/mongstad/Wavez/issues) for questions and
+ideas. Explain the workflow you want to improve and the result you need; a
+concrete example helps the maintainer understand the proposal.
+
+## Discuss code contributions first
+
+Discuss the scope with the maintainer in an issue **before starting substantial
+code work**. Outside pull requests are considered only by prior arrangement.
+Review, acceptance and merging are not guaranteed.
+
+For an approved contribution, keep one focused branch and pull request, describe
+what changed and why, include relevant checks and their results, and follow
+existing Wavez coding and capture-format conventions. Leave secrets, caches,
+large captures and unrelated generated artifacts out of the change.
+
+## License
+
+Original Wavez material uses the [PolyForm Noncommercial License 1.0.0](LICENSE).
+It is **source-available**, not OSI-approved open source. Commercial use requires
+a separate agreement. Third-party components retain their
+[own licensing terms](THIRD_PARTY_LICENSES.md), and the name and artwork follow
+the [branding policy](TRADEMARKS.md).
+
+This guide creates no contributor license agreement, copyright assignment,
+royalty promise or additional legal permission. Discuss any contribution terms
+with the maintainer before submitting work.
