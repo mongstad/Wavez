@@ -4,7 +4,15 @@
   <img alt="Wavez" src="viewer/ui/about/Wavez_Banner_No_Slogan_No_Border_White.png" width="640">
 </picture>
 
-**[Screenshot pending — Wavez viewer showcase]**
+<br>
+<br>
+
+**Wavez viewer showcase**
+
+
+<img width="2554" height="1391" alt="image" src="https://github.com/user-attachments/assets/baa4089b-27f1-4c63-9ab0-aa34a801fd6d" />
+
+<br>
 
 Wavez is a real-time 3D scientific simulation and data visualization application.
 Simulations export particles, uniform-grid scalar fields and triangle meshes to
@@ -12,7 +20,14 @@ Wavez's **WVZ1 `.wvz` capture format**. The interactive viewer lets you explore
 those recorded layers together, navigate their sample times and export images
 or video.
 
-**[Comparison pending — same simulation in Python and Wavez]**
+<br>
+
+**Comparison  — same simulation in Python**
+
+
+<img width="1920" height="1280" alt="python_sample_010" src="https://github.com/user-attachments/assets/af03a146-07f1-4b7c-8022-f8120d5cf34c" />
+
+
 
 ## Development status
 
