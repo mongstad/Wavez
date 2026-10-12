@@ -25,12 +25,41 @@ cd /tmp/wavez-linux-review
 ```
 
 Keep `WAVEZ.x86_64` and `WAVEZ.pck` together and name them consistently. The build
-also writes the application identity, engine version, artifact hashes and bundled
-first-party Python inventory to `build.json`. It builds a **release** template in
-an isolated staging project and removes that project before returning. Output
-must be a new directory; no binary or encoder is vendored into the source tree.
-This is review packaging, not a public release or completed distribution-license
-audit. Existing [third-party licensing](../THIRD_PARTY_LICENSES.md) rules apply.
+also writes the application identity, source commit/clean-state flag, engine
+version, artifact hashes and bundled first-party Python inventory to `build.json`.
+It builds a **release** template in an isolated staging project and removes that
+project before returning. Output must be a new directory; no binary or encoder is
+vendored into the source tree.
+
+The same command now assembles `Wavez-vMAJOR.MINOR.PATCH.BUILD-linux-x86_64.zip`
+and `SHA256SUMS.txt`. The ZIP includes the executable/PCK, README and current
+guides, unchanged Wavez LICENSE/TRADEMARKS, the linked third-party inventory,
+complete original Godot MIT/component texts, Matplotlib palette notices and
+DejaVu notices. `BUILD_MANIFEST.json` records every included file's size/hash.
+Build logs and historical evidence are not included in the standalone ZIP.
+
+Notice digests and the audited official engine/template are pinned in
+[`licenses/sources.json`](../licenses/sources.json). Missing/altered upstream
+texts, stale About resources, unresolved local inventory links and unreadable
+archive members fail packaging. Notice texts are copied as bytes, not shortened
+or reformatted. Updating an engine/template requires reviewing that new
+artifact's notices and pins. See [third-party licensing](../THIRD_PARTY_LICENSES.md).
+
+Verify the actual archive from outside the repository before uploading it:
+
+```sh
+python tools/distribution_licenses.py /absolute/path/to/Wavez-v0.1.0.106-linux-x86_64.zip
+cd /absolute/path/to/package-output
+sha256sum -c SHA256SUMS.txt
+```
+
+Use a clean, committed source checkout for a release; a dirty review build is
+explicitly marked `source_tree_clean: false` and must not be represented as a
+release from its recorded base commit. Build the reviewed source commit and tag
+that same commit only after owner authorization. Do not replace an already
+published ZIP, checksum or tag silently. The [license audit and correction
+proposal](evidence/issue-392/README.md) preserves the original v0.1.0.105 identity
+and proposes a separately reviewed corrective release.
 
 The running application and render child use their PCK without an editor, a
 source checkout or an imported development project. FFmpeg remains an external
