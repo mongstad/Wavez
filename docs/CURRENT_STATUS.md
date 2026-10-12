@@ -1,5 +1,15 @@
 # Current status
 
+Issue #94 proposes editorial draft **v0.1.0.104**, based on accepted
+**v0.1.0.103** / owner-merged PR #384
+(`0156fea1928758ce1969698ba1befad693f60e61`). The root README now provides a
+selective product introduction, an early experimental Selection/Analysis caveat,
+verified dependency distinctions and provisional hardware guidance. Existing
+wordmark assets are unchanged; showcase/comparison locations are explicitly
+pending screenshots for owner selection. This is the first editorial round,
+not publication or release approval. See the [review record](evidence/issue-94/README.md).
+Historical reports and review-time wording below remain as written.
+
 Issue #375 proposes candidate **v0.1.0.103**, based on accepted **v0.1.0.102** /
 owner-merged PR #383 (`68f01ccb45dc3e67b5bfad0a36674a2a512e042b`). The
 [scientific contract](SCIENTIFIC_ANALYSIS.md#21-hardware-independent-scientific-integrity-boundary)

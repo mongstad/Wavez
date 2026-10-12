@@ -1,0 +1,65 @@
+{
+  "relative_links_and_anchors": [
+    "docs/SCIENTIFIC_ANALYSIS.md#21-hardware-independent-scientific-integrity-boundary",
+    "docs/WAVEZ_HANDBOOK.md",
+    "GETTING_STARTED.md",
+    "GETTING_STARTED.md#choose-dependencies-for-the-work-you-want-to-do",
+    "LICENSE",
+    "THIRD_PARTY_LICENSES.md",
+    "TRADEMARKS.md"
+  ],
+  "branding_references": [
+    "viewer/ui/about/Wavez_Banner_No_Slogan_No_Border_Dark.png",
+    "viewer/ui/about/Wavez_Banner_No_Slogan_No_Border_White.png",
+    "viewer/ui/about/Wavez_Banner_No_Slogan_No_Border_White.png"
+  ],
+  "brand_artwork_matches_main": true,
+  "visible_screenshot_placeholders": 2,
+  "visible_word_count": 689,
+  "supported_capture_format": "WVZ1 / .wvz",
+  "errors": [],
+  "issue": 94,
+  "date": "2026-10-12",
+  "baseline": "0156fea1928758ce1969698ba1befad693f60e61",
+  "candidate": "v0.1.0.104",
+  "status": "First editorial draft; owner review and final screenshot selection pending",
+  "github_gfm_render": {
+    "picture_and_placeholders_retained": true,
+    "tables": 2,
+    "sha256": "7a8e8fd4b962bf4ec3250cd90ef796891d7ff92921b26a571b6ac5acb63a4bd2",
+    "visual_browser_review": "Pending"
+  },
+  "version_tests": {
+    "tests": 2,
+    "result": "PASS"
+  },
+  "editor_import": {
+    "exit_code": 0,
+    "script_errors": false,
+    "warnings": "Four previously absent unrelated UID sidecars recreated from cache; removed from working tree, tracked UIDs unchanged"
+  },
+  "hardware": {
+    "os": "Fedora Linux 44 (KDE Plasma Desktop Edition)",
+    "cpu": "AMD Ryzen 7 5800X 8-Core Processor",
+    "gpu": "NVIDIA GeForce RTX 3070 Ti",
+    "vram_mib": 8192,
+    "driver": "615.71.09",
+    "installed_ram_gib": 48,
+    "kernel_memtotal_kib": 49223192,
+    "godot": "4.7.2.stable.official.ed1daf0bf",
+    "scope": "Host inventory plus retained accepted source/Linux Vulkan evidence; not new performance certification"
+  },
+  "not_run": [
+    "New showcase or matched comparison screenshots",
+    "GPU hardware-tier benchmarking",
+    "Native viewer/render/video/Analysis regressions",
+    "Standalone package rebuilding or public release",
+    "Other platform validation"
+  ],
+  "external_logs": "/home/Nozba/Codex/Wavez/readme-94",
+  "public_web_sources": [
+    "https://docs.godotengine.org/en/4.7/about/system_requirements.html",
+    "https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/quickstart-for-writing-on-github"
+  ],
+  "readme_sha256": "abc90dc0b5adaf665b274d0891e8e7eda2fa7a0c1be9265666bb3dc1325a439e"
+}
