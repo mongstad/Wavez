@@ -123,7 +123,16 @@ and manifest omissions. Positive extraction checks compare every required file
 verbatim and follow local inventory links outside the repository. Source notice
 synchronization and diff whitespace checks pass.
 
-The production packaging build and actual exported-resource/archive results are
-recorded separately when completed. No GPU, playback, scientific, GUI, extended
+The complete production packaging command passed from clean checkpoint
+`5a961e7331b8e1afaf3e00a0cdd667821402afa3`. The automatically checked PCK contains
+seven canonical notice texts, all equal to source; no Main scene or GPU started.
+The resulting review ZIP has **176 files / 40,505,638 bytes**, SHA-256
+`de5924ff0a3fadff51f67732015d8fc25e05d1a9f9511621380006f07c8c1ee7`.
+Archive integrity, all notice digests, complete manifest coverage, readable
+members and local inventory links pass. Independent extraction outside the
+repository reproduces all required source files verbatim; `sha256sum -c
+SHA256SUMS.txt` passes. See [candidate packaging results](candidate-packaging.json).
+This review archive remains external and unpublished; the later evidence-only
+commit does not change the validated application/PCK or packager. No GPU, playback, scientific, GUI, extended
 regression, platform matrix or performance testing is part of this issue. No
 publication or owner acceptance is inferred from these checks.

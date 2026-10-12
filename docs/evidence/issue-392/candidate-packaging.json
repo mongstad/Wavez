@@ -1,0 +1,38 @@
+{
+  "archive": "Wavez-v0.1.0.106-linux-x86_64.zip",
+  "sha256": "de5924ff0a3fadff51f67732015d8fc25e05d1a9f9511621380006f07c8c1ee7",
+  "bytes": 40505638,
+  "files": 176,
+  "required_files": 11,
+  "canonical_notice_digests": "PASS",
+  "local_license_links": "PASS",
+  "archive_integrity": "PASS",
+  "readable_members": "PASS",
+  "source_commit": "5a961e7331b8e1afaf3e00a0cdd667821402afa3",
+  "source_tree_clean": true,
+  "version": {
+    "full": "v0.1.0.106",
+    "release": "v0.1.0",
+    "build": "106"
+  },
+  "notice_verification": {
+    "texts": 7,
+    "sha256": {
+      "Branding": "31ad6692481b54941fbf1bf2a1696a04bb82754eb376050709222d9a3604afe1",
+      "Colormap notices": "dbb9ad7495a83b0f2f48c94b06e23020587d82f8d1492dcb717fb1ebc2f86c18",
+      "DejaVu font notices": "7a083b136e64d064794c3419751e5c7dd10d2f64c108fe5ba161eae5e5958a93",
+      "Godot component notices (canonical)": "cb1980c88089573bcacd7221d777c689bb8bbd778799f24c27fca0fe5f774d6d",
+      "Godot runtime \u2014 MIT License (canonical)": "b0435e3b3e4e55238f05f4b306f30524a1b2e20147810d436eaa554fa6855c80",
+      "Third-party inventory": "edbb4a00e400a107b9f76d33155edb28bc0c01a5fcbac8bf968a4b0c777106f7",
+      "WAVEZ \u2014 PolyForm Noncommercial 1.0.0": "5860dd2f08b9377907a33ef714527a9a74b6e12b688bd3f87797b57754d45981"
+    },
+    "exported_resource_identity": "PASS",
+    "viewer_or_gpu_started": false
+  },
+  "outside_repository_extraction": "PASS",
+  "required_extracted_bytes_match_sources": "PASS",
+  "all_local_inventory_links_resolve": "PASS",
+  "focused_tests": 9,
+  "application_started": false,
+  "viewer_or_gpu_started": false
+}
