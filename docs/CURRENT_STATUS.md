@@ -12,6 +12,9 @@ remove the obsolete controls screenshot from the active opacity instructions
 while preserving its historical asset. Editorial review is ongoing; this is not
 publication or release approval. See the [first-draft record](evidence/issue-94/README.md)
 and [revision record](evidence/issue-94/iteration-2.md).
+The [next focused pass](evidence/issue-94/iteration-3.md) shortens the Analysis
+status note, trims routine desktop guidance, simplifies legend interpretation
+and removes the handbook's roadmap section.
 Historical reports and review-time wording below remain as written.
 
 Issue #375 proposes candidate **v0.1.0.103**, based on accepted **v0.1.0.102** /

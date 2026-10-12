@@ -6,14 +6,13 @@ For formats, algorithms, resource policies and validation, use
 [Technical Documentation](TECHNICAL_DOCUMENTATION.md).
 
 **Selection and Analysis and related scientific state workflows are experimental.**
-They have known usability gaps and have not been comprehensively owner-tested
-end to end. Independently verify results before using them for scientific conclusions.
+Independently verify results before using them for scientific conclusions.
 A convincing image is not a substitute for source values or a physical check.
 
 ## In this guide
 
 - [Open a capture and find the controls](#viewer-shell)
-- [Show color legends](#color-legends)
+- [Read color legends](#color-legends)
 - [Play, pause and seek](#playback-transport)
 - [Understand status and manage jobs](#status-and-jobs)
 - [Navigate and choose an orbit center](#camera-inspection)
@@ -43,11 +42,6 @@ if the viewer will not start.
    present in the capture are available. Expand the relevant control group to
    change visibility or appearance.
 
-Drag the panel's left edge to resize it. The top bar, Simulation panel and bottom
-playback/status area each have a pin: unpin to let that area hide, hover its window
-edge to reveal it, and pin it again to keep it visible. Menus and text editing keep
-revealed controls accessible. On a narrow window, the panel may cover part of the scene.
-
 Use **View → Window → Fullscreen**, **F11**, or double-click an unobstructed
 viewport to enter fullscreen. Hover the window edges to reach hidden controls.
 **Esc**, the fullscreen binding or another viewport double-click returns to the
@@ -56,8 +50,7 @@ previous window layout. Selection tools take priority over viewport clicks.
 **File → Close File** returns to the empty viewer while launched video exports
 continue. If another operation still needs the capture, finish or cancel it and
 retry. **File → Exit** or the window close button asks for confirmation while
-jobs are active; confirming exit cancels active work. Closing a Jobs or export
-panel alone does not cancel its operation.
+jobs are active; confirming exit cancels active work.
 
 **Edit → Preferences → Keyboard Shortcuts** lets you change bindings and the
 LMB vertical-axis preference. Changes are staged until **Apply**. Reusing a key
@@ -71,15 +64,12 @@ repository guidance; **Licenses and notices** works offline.
 
 ## Color legends
 
-Legends start hidden. Enable **Show legend** for each layer you want to explain.
-A legend identifies its object, channel, colormap and effective color range;
-particle legends also identify the range policy. Saved views can restore legend visibility.
-
-Volume legends describe opacity strength, mapping and thresholds. A slice-only
-legend says **opaque slice**: slice visibility does not use volume extinction.
+Color legends identify the selected object/channel, colormap and effective numeric
+range. Particle legends also identify the range policy. Volumetric field legends
+include opacity strength, mapping and thresholds; a slice-only legend says
+**opaque slice** because slice visibility does not use volume extinction.
 Opacity strength is a display setting per world unit, not a uniform pixel alpha
-or a measured physical quantity. Legends can remain visible when controls hide.
-Choose whether eligible legends appear in video using its overlay settings.
+or a measured physical quantity.
 
 ## Playback transport
 
@@ -126,8 +116,8 @@ sample preparation for that interval, not elapsed time or whole-capture progress
 Open **Jobs (N)** to see active work. **Open** returns to its controls;
 **Details** shows progress, output locations and diagnostics. **Cancel** requests
 cancellation; video asks for confirmation, and cancellation may take time.
-Closing the overview or details leaves the job running. Minimizing the viewer
-does not stop a video export. Job history is limited to the current session.
+Closing the overview or details leaves the job running; video exports continue
+in the background. Job history is limited to the current session.
 
 A **Failed — details** notice is separate from playback status. Use
 **File → Details…** to read/copy it. **Acknowledge failures** dismisses reviewed
@@ -147,10 +137,10 @@ previous scene was fully restored: reopen it if needed. See
 | Zoom / movement speed | Use the mouse wheel to zoom and **+ / −** to adjust Free Camera movement speed. |
 | Auto orbit | Toggle **O** or **Navigate → Auto orbit**. Movement keys or RMB steering take over manual navigation. |
 
-Bindings are editable. Free camera starts on and Auto orbit off. Opening a
-capture or resetting the camera preserves those modes. A saved view can restore
-its navigation choices. Optional held orbit and roll actions start Unbound;
-assign them in Keyboard Shortcuts. **Camera Roll Speed** changes how quickly
+Bindings are editable. Opening a capture or resetting the camera preserves
+current navigation modes. A saved view can restore
+its navigation choices. Assign optional held orbit and roll actions in Keyboard
+Shortcuts. **Camera Roll Speed** changes how quickly
 roll keys bank the view. Frame Scene keeps a banked orientation; Reset Camera clears it.
 Camera controls change the view, not the scientific objects or source coordinates.
 
@@ -318,11 +308,3 @@ Resource limits may refuse a view/export or reduce its preview quality; source
 arrays stay unchanged. Cache budgets are not whole-process RAM/VRAM guarantees.
 Use the [technical resource references](TECHNICAL_DOCUMENTATION.md#playback-and-resource-policies)
 for exact budgets, preparation rules and measured limits.
-
-## Roadmap boundary
-
-Only the documented current workflows are available. Selection/Analysis remains
-experimental; no automated physical-event detection, web dashboard or remote
-control is provided. Future plans do not authorize or imply implemented features.
-Consult [Technical Documentation](TECHNICAL_DOCUMENTATION.md) for supported scope,
-contracts and the limits of existing validation.

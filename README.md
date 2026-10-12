@@ -16,15 +16,10 @@ or video.
 
 ## Development status
 
-Wavez is in pre-1.0 development. **Scientific Selection and Analysis, including
-related scene/analysis state workflows, are experimental and incomplete—a current
-weak point.** Their end-to-end scientific workflows and UX have not been
-comprehensively owner-tested. Known gaps include cumbersome cross-dialog workflows,
-[analysis-dialog usability](https://github.com/mongstad/Wavez/issues/341) and a
-[Selection list interaction bug](https://github.com/mongstad/Wavez/issues/342).
-Automated tests do not constitute comprehensive scientific or user-workflow
-validation. Independently verify analysis results before relying on them for
-scientific conclusions.
+Wavez is in pre-1.0 development. **Scientific Selection and Analysis tools are
+experimental and have not yet been fully implemented or comprehensively
+validated.** Independently verify results before relying on them for scientific
+conclusions.
 
 ## Explore recorded scenes
 
