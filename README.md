@@ -84,6 +84,11 @@ storage helps uncached reads. VRAM does not replace the system-RAM capture cache
 Costs vary with resolution, channel/particle count, recording cadence, playback
 speed and cache settings; preparation can still limit playback on a fast GPU.
 
+## Roadmap
+
+<img width="2172" height="724" alt="WAVEZ Roadmap_ Neon Future Panels" src="https://github.com/user-attachments/assets/7b4b503e-464f-4c43-afaf-6f12afcfa086" />
+
+
 ## License
 
 Original Wavez material is source-available under the
