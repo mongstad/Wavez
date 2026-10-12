@@ -1,5 +1,16 @@
 # Current status
 
+Issue #375 proposes candidate **v0.1.0.103**, based on accepted **v0.1.0.102** /
+owner-merged PR #383 (`68f01ccb45dc3e67b5bfad0a36674a2a512e042b`). The
+[scientific contract](SCIENTIFIC_ANALYSIS.md#21-hardware-independent-scientific-integrity-boundary)
+now separates stored data, declared derived measurements and GPU presentation.
+The [source-path audit](SCIENTIFIC_INTEGRITY_AUDIT.md) distinguishes focused PASS,
+known limits and NOT VERIFIED behavior; Selection/Analysis remains experimental
+beyond declared fixtures. Three new assertions in the existing worker test check the
+actual float64 probe value, derivation label and held native time. Scientific
+algorithms, rendering and WVZ1 semantics are unchanged. Owner review is pending.
+Historical reports and acceptance ledgers below remain as written.
+
 Issue #382 proposes candidate **v0.1.0.102**, based on accepted **v0.1.0.101** /
 owner-merged PR #381 (`9ddab596e19b93f1598e8314427b03114741f4fc`). A committed,
 non-looping recorded endpoint now uses redraw-on-change and avoids duplicate

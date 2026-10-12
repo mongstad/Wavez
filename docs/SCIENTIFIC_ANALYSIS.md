@@ -44,6 +44,52 @@ original typed arrays, with declared spatial interpolation and precision.
 Selections have their own worker, revisions and quotas; display filters,
 visibility and playback preparation remain independent.
 
+### 2.1 Hardware-independent scientific integrity boundary
+
+Keep these three layers distinct when interpreting or reporting a value:
+
+| Layer | Authority and limits |
+|---|---|
+| Stored source data | WVZ1 decoded arrays, particle/vertex IDs, coordinates, field samples, mesh topology, units, native sample times and metadata are authoritative for the capture, subject to the declared storage precision. Lossless compression preserves those bytes. An f4 export has already limited source precision; decoding it into f8 cannot recover discarded precision. Capture fidelity does not certify the solver, physical model or supplied metadata. |
+| Derived measurement | Identify the source extent/hash, object/channel/association, native sample or endpoints, algorithm, spatial/temporal interpolation, calculation precision, units, missing support and limitations. Source-array statistics, trilinear/barycentric probes, integrals and interval velocity are computations with declared policies. An interpolated value is derived, never an additional stored observation. |
+| Visual presentation | GPU float32 conversion, preview LOD, texture filtering, colormaps, blending, rasterization and image encoding produce presentation. Pixels may vary with GPU/driver; pixel identity and universal GPU equivalence are not required or promised. Screenshot colors and filtered GPU texels must not supply stored-sample readouts or numerical Analysis values. |
+
+Stored sample readouts must address the decoded authoritative array directly.
+For example, a `grid_samples` trace reads the selected zyx array element; an
+arbitrary `probe` computes source trilinear interpolation and reports
+`spatially_interpolated`. Both bind the object's native field sample, which can
+be held at a scene cursor time. GPU sample-center appearance is not a substitute
+for either operation. See §6 for measurement policies and §8 for export provenance.
+
+The intended source/measurement boundary is independent of display hardware.
+This is not a promise of last-bit agreement between every CPU/library/build:
+Python calculations use float64, while this Godot build's native probe locations,
+transforms and screen-pick camera/ray inputs can use float32. A native **Source
+probe** computes from its prepared full-resolution source arrays, not its RF
+texture, but its displayed number is a spatial estimate with coordinate precision
+limits. Its UI currently shows the value and source time without an explicit
+`spatially_interpolated` badge; do not interpret the name as an exact stored-sample
+or payload-verification claim.
+
+Normal interactive playback uses structural reads and skips stored/raw payload
+SHA comparisons. Native Source probes inherit that limitation. Python
+`SceneReader`, selected `SourceSnapshot` reads and offline readers check payload
+hashes; a selected read does not verify unrelated unread channels or a complete
+identity lifetime. Use `tools/verify_wvz.py` for whole-capture integrity and the
+separate identity audit where continuity matters. Internal hashes detect
+inconsistency, not physical truth, author authenticity or a coordinated rewrite.
+See [wire/storage precision](WVZ1_FORMAT.md) and
+[playback integrity policy](PLAYBACK_INTEGRITY.md).
+
+The [#375 inspection-path audit](SCIENTIFIC_INTEGRITY_AUDIT.md) identifies tested
+source access, documented derivations, display-only paths, known limits and
+**NOT VERIFIED** behavior. Selection/Analysis remains experimental for scientific
+interpretation beyond those declared fixtures. Historical G4 PASS results retain
+their fixture-specific meaning; they do not validate every function, scientific
+application or GPU/driver combination. Report materially misleading imagery as
+a scoped presentation defect with source-value evidence, rather than treating
+all visual differences as source corruption.
+
 ## 3. Selection model and scientific meaning
 
 ### 3.1 Common descriptor

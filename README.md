@@ -49,6 +49,7 @@ Start with:
 - [Dialog action button appearance](docs/DIALOG_ACTIONS.md)
 - [Performance dialog](docs/PERFORMANCE_DIALOG.md)
 - [Current Tools functional audit](docs/TOOLS_FUNCTIONAL_AUDIT.md)
+- [Scientific data integrity and inspection-path audit](docs/SCIENTIFIC_INTEGRITY_AUDIT.md)
 - [Successful-open error recovery](docs/LOAD_ERROR_STATUS_RECOVERY.md)
 - [Session action and error logs](docs/SESSION_LOGGING.md)
 - [File Locations preferences](docs/FILE_LOCATIONS.md)
