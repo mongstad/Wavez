@@ -183,7 +183,7 @@ scientific Matched Views.
 | Shell, UX and tools | [Handbook](WAVEZ_HANDBOOK.md), [UX workflow](UX_WORKFLOW.md), [Tools audit](TOOLS_FUNCTIONAL_AUDIT.md) | `viewer/ui/`, `viewer/ui/shell/` |
 | Navigation and preferences | [Camera](MANUAL_CAMERA_ORBIT.md), [LMB inversion](LMB_Y_INVERSION.md), [shortcuts](KEYBOARD_SHORTCUTS.md), [File Locations](FILE_LOCATIONS.md) | `viewer/main.gd`, `viewer/ui/` |
 | Supported renderer and startup | [Vulkan requirements](RENDERER_REQUIREMENTS.md) | `viewer/project.godot`, `viewer/renderer_policy.gd`, `viewer/video/render_job.gd` |
-| Developer validation and packaging | [Contributing](../CONTRIBUTING.md), [version policy](VERSIONING.md), [scientific criteria](SCIENTIFIC_ACCEPTANCE.md), [evidence index](EVIDENCE_INDEX.md) | `tests/`, `tools/`, native test scripts in `viewer/` |
+| Developer validation and packaging | [Development and Maintenance Policy](../CONTRIBUTING.md), [version policy](VERSIONING.md), [scientific criteria](SCIENTIFIC_ACCEPTANCE.md), [evidence index](EVIDENCE_INDEX.md) | `tests/`, `tools/`, native test scripts in `viewer/` |
 
 ## Scientific and resource boundaries
 

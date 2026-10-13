@@ -104,6 +104,12 @@ speed and cache settings; preparation can still limit playback on a fast GPU.
 <img width="2172" height="724" alt="WAVEZ Roadmap_ Neon Future Panels" src="https://github.com/user-attachments/assets/7b4b503e-464f-4c43-afaf-6f12afcfa086" />
 
 
+## Development access
+
+The repository is private. Access and development work require explicit owner
+authorization or invitation; no public contribution intake is currently offered.
+See the [Development and Maintenance Policy](CONTRIBUTING.md).
+
 ## License
 
 Original Wavez material is source-available under the
