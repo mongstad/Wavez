@@ -13,15 +13,13 @@ import zipfile
 
 if __package__:
     from .sync_about_notices import SOURCES, resource_text
+    from .distribution_files import SOURCE_FILES, PACKAGE_FILES, verify_document_links
 else:
     from sync_about_notices import SOURCES, resource_text
+    from distribution_files import SOURCE_FILES, PACKAGE_FILES, verify_document_links
 
 ROOT = Path(__file__).resolve().parents[1]
-REQUIRED = ['LICENSE', 'THIRD_PARTY_LICENSES.md', 'TRADEMARKS.md', 'README.md',
-            'CONTRIBUTING.md', 'AGENTS.md',
-            'licenses/GODOT_LICENSE.txt', 'licenses/GODOT_COPYRIGHT.txt', 'licenses/sources.json',
-            'licenses/COLORMAPS_LICENSE.txt', 'licenses/LICENSE-DejaVu.txt',
-            'licenses/README.md']
+REQUIRED = list(SOURCE_FILES)
 
 
 def digest(data):
@@ -37,7 +35,7 @@ def source_notices(source=ROOT):
     if (source / 'viewer/ui/about/notices.tres').read_text() != resource_text(source):
         raise ValueError('About notices are stale; run tools/sync_about_notices.py')
     for name in REQUIRED:
-        if not (source / name).is_file() or not (source / name).stat().st_size:
+        if not (source / SOURCE_FILES[name]).is_file() or not (source / SOURCE_FILES[name]).stat().st_size:
             raise ValueError(f'Missing distribution file: {name}')
     return inventory
 
@@ -90,15 +88,11 @@ def assemble(output, build_info, source=ROOT):
     for name, expected in build_info['artifacts'].items():
         if digest((output / name).read_bytes()) != expected:
             raise ValueError(f'Build artifact changed before packaging: {name}')
-    files = set(REQUIRED + ['WAVEZ.x86_64', 'WAVEZ.pck', 'GETTING_STARTED.md'])
-    files.update(str(p.relative_to(source)) for p in (source / 'docs').rglob('*.md')
-                 if not {'evidence', 'documentation-audit'}.intersection(p.relative_to(source).parts))
-    files.update(['viewer/ui/about/Wavez_Banner_No_Slogan_No_Border_Dark.png',
-                  'viewer/ui/about/Wavez_Banner_No_Slogan_No_Border_White.png'])
+    files = set(REQUIRED) | {'WAVEZ.x86_64', 'WAVEZ.pck'}
     for name in sorted(files - {'WAVEZ.x86_64', 'WAVEZ.pck'}):
         destination = output / name
         destination.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(source / name, destination)
+        shutil.copy2(source / SOURCE_FILES[name], destination)
         destination.chmod(0o644)
     (output / 'WAVEZ.x86_64').chmod(0o755)
     (output / 'WAVEZ.pck').chmod(0o644)
@@ -116,7 +110,7 @@ licenses/ directly with a text editor if your Markdown reader blocks local links
 Wavez LICENSE and TRADEMARKS.md remain in the package root.
 Help → About → Licenses and notices also provides offline notices. Full source,
 examples and historical evidence belong to the corresponding tagged GitHub source
-archives. GitHub-hosted README images need access to their original URLs.
+archives. Online source/documentation links require network access and repository permission.
 ''')
     files.add('INSTALL.txt')
     manifest = dict(build_info, files={})
@@ -163,7 +157,7 @@ def verify_archive(archive, source=ROOT):
             if stat.S_ISLNK(mode) or not mode & stat.S_IROTH or not z.read(name):
                 raise ValueError(f'Unreadable, empty or symlinked member: {name}')
         for name in REQUIRED:
-            if name not in members or z.read(members[name]) != (source / name).read_bytes():
+            if name not in members or z.read(members[name]) != (source / SOURCE_FILES[name]).read_bytes():
                 raise ValueError(f'Missing or altered canonical distribution file: {name}')
         for target in inventory_links(z.read(members['THIRD_PARTY_LICENSES.md']).decode()):
             if target and target not in members:
@@ -179,6 +173,16 @@ def verify_archive(archive, source=ROOT):
             data = z.read(members[name])
             if len(data) != expected['bytes'] or digest(data) != expected['sha256']:
                 raise ValueError(f'Manifest/content mismatch: {name}')
+        if set(members) != PACKAGE_FILES:
+            raise ValueError('Archive members differ from standalone file allowlist')
+        for name, expected in manifest['artifacts'].items():
+            if name not in {'WAVEZ.x86_64', 'WAVEZ.pck'} or digest(z.read(members[name])) != expected:
+                raise ValueError(f'Build artifact/content mismatch: {name}')
+        if set(manifest['artifacts']) != {'WAVEZ.x86_64', 'WAVEZ.pck'}:
+            raise ValueError('Executable/PCK artifact identities are missing')
+        with tempfile.TemporaryDirectory(prefix='wavez-extracted-links-') as temporary:
+            z.extractall(temporary)
+            link_report = verify_document_links(Path(temporary) / prefix.rstrip('/'))
         if digest(z.read(members['WAVEZ.x86_64'])) != inventory['linux_release_x86_64_sha256']:
             raise ValueError('Archive executable differs from audited template')
         if not (z.getinfo(members['WAVEZ.x86_64']).external_attr >> 16) & 0o111:
@@ -186,7 +190,8 @@ def verify_archive(archive, source=ROOT):
     return dict(archive=archive.name, sha256=digest(archive.read_bytes()),
                 bytes=archive.stat().st_size, files=len(names), required_files=len(REQUIRED),
                 canonical_notice_digests='PASS', local_license_links='PASS',
-                archive_integrity='PASS', readable_members='PASS')
+                archive_integrity='PASS', readable_members='PASS',
+                standalone_file_allowlist='PASS', **link_report)
 
 
 if __name__ == '__main__':

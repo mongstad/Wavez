@@ -31,12 +31,73 @@ It builds a **release** template in an isolated staging project and removes that
 project before returning. Output must be a new directory; no binary or encoder is
 vendored into the source tree.
 
-The same command now assembles `Wavez-vMAJOR.MINOR.PATCH.BUILD-linux-x86_64.zip`
-and `SHA256SUMS.txt`. The ZIP includes the executable/PCK, README and current
-guides, unchanged Wavez LICENSE/TRADEMARKS, the linked third-party inventory,
-complete original Godot MIT/component texts, Matplotlib palette notices and
-DejaVu notices. `BUILD_MANIFEST.json` records every included file's size/hash.
-Build logs and historical evidence are not included in the standalone ZIP.
+The same command assembles `Wavez-vMAJOR.MINOR.PATCH.BUILD-linux-x86_64.zip`
+and a separate `SHA256SUMS.txt`. The ZIP file set is explicitly defined in
+[`tools/distribution_files.py`](../tools/distribution_files.py), shared by assembly
+and verification. No directory glob selects documentation.
+
+## Standalone file inclusion policy
+
+The standalone ZIP serves end users viewing existing captures. The corresponding
+GitHub source archive serves development, Python integration and historical
+review; private repository access still requires owner invitation/authorization.
+
+| ZIP path | Source or purpose |
+|---|---|
+| `WAVEZ.x86_64`, `WAVEZ.pck` | Exported executable and runtime resources, including owned analysis sources, fonts, colormaps and offline About notices |
+| `README.md` | Package overview from `docs/standalone/README.md` |
+| `GETTING_STARTED.md` | Offline installation, navigation and export guidance from `docs/standalone/GETTING_STARTED.md` |
+| `INSTALL.txt` | Generated launch/dependency/notice guidance |
+| `LICENSE`, `TRADEMARKS.md`, `THIRD_PARTY_LICENSES.md` | Canonical Wavez terms, branding and component inventory |
+| `licenses/GODOT_LICENSE.txt`, `licenses/GODOT_COPYRIGHT.txt` | Full original engine/component notices |
+| `licenses/COLORMAPS_LICENSE.txt`, `licenses/LICENSE-DejaVu.txt` | Full original palette/font notices |
+| `licenses/sources.json`, `licenses/README.md` | Required audited versions, digests, sources and obligation provenance |
+| `BUILD_MANIFEST.json` | Every other ZIP member's size/hash plus source, version, runtime and artifact identities |
+
+`SHA256SUMS.txt` accompanies the ZIP rather than being a self-referential member.
+Build logs and validation reports remain outside the ZIP.
+
+`SOURCE_FILES` maps ZIP-relative destinations to committed source paths;
+`GENERATED_FILES` names the four generated/exported members. Together they form
+`PACKAGE_FILES`, the exact archive allowlist. The two standalone Markdown sources
+are package-context documents: their relative links resolve at the mapped ZIP
+root, not in their source-template directory. They link detailed source guidance
+through explicit web URLs labeled as requiring network/repository access.
+
+Include only documents needed offline for installation, everyday viewer use,
+troubleshooting or legal/attribution compliance. Required notices/provenance must
+remain even when they discuss maintenance. `AGENTS.md`, `CONTRIBUTING.md`, current
+status/process maps, architecture reports, tests, source-only API contracts and
+historical evidence remain in the repository/source archive. Do not import those
+trees just to satisfy internal links. Adding a Markdown file to `docs/` does not
+add it to a package.
+
+To add a document, explain its offline end-user need, add its destination/source
+mapping to `SOURCE_FILES`, ensure its relative files/images and heading fragments
+are also explicitly included, and run the focused checks below. Prefer an
+explicit source web URL for development-only material. Review changes to canonical
+notice sources separately; never shorten or reformat original legal texts.
+
+Verification rejects missing required files, unexpected members (even if their
+manifest hashes match), altered notices, changed build artifacts and unresolved
+offline links. `verify_document_links` checks all Markdown files actually
+extracted, including image paths, reference links, HTML links and Markdown
+heading fragments. External web/source URLs are counted separately, not fetched;
+private access and browser navigation are owner checks. The archive validator
+extracts into a fresh temporary directory after its path/member integrity gates.
+
+```sh
+python -m unittest tests.test_distribution_licenses tests.test_application_version
+python tools/sync_about_notices.py --check
+python tools/distribution_licenses.py /absolute/path/to/Wavez-vMAJOR.MINOR.PATCH.BUILD-linux-x86_64.zip
+```
+
+For manual verification, extract the entire ZIP outside the repository and follow
+every local link in README, Getting Started, the inventory, branding and notice
+provenance. Open `.txt` notices directly if your Markdown reader blocks links.
+See the [#401 audit](evidence/issue-401/README.md) for the previous 21-link
+classification, inclusion rationale and candidate-package evidence. Package checks
+do not authorize publication or certify interactive/GPU/scientific functionality.
 
 Notice digests and the audited official engine/template are pinned in
 [`licenses/sources.json`](../licenses/sources.json). Missing/altered upstream

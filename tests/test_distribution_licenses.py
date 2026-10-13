@@ -21,9 +21,7 @@ class DistributionLicensesTest(unittest.TestCase):
         self.source = self.folder / 'source'
         self.output = self.folder / 'package'
         self.output.mkdir()
-        for name in distribution.REQUIRED + ['GETTING_STARTED.md', 'viewer/ui/about/notices.tres',
-                                             'viewer/ui/about/Wavez_Banner_No_Slogan_No_Border_Dark.png',
-                                             'viewer/ui/about/Wavez_Banner_No_Slogan_No_Border_White.png']:
+        for name in list(distribution.SOURCE_FILES.values()) + ['viewer/ui/about/notices.tres']:
             target = self.source / name
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(ROOT / name, target)
@@ -56,7 +54,7 @@ class DistributionLicensesTest(unittest.TestCase):
             z.extractall(self.folder / 'outside-repository')
         root = self.folder / 'outside-repository' / archive.stem
         for name in distribution.REQUIRED:
-            self.assertEqual((root / name).read_bytes(), (self.source / name).read_bytes())
+            self.assertEqual((root / name).read_bytes(), (self.source / distribution.SOURCE_FILES[name]).read_bytes())
         for link in distribution.inventory_links((root / 'THIRD_PARTY_LICENSES.md').read_text()):
             self.assertTrue((root / link).is_file(), link)
         report = distribution.verify_archive(archive, self.source)
@@ -76,6 +74,54 @@ class DistributionLicensesTest(unittest.TestCase):
         self.assertIn('TRADEMARKS.md', members)
         self.assertNotIn('GODOT_LICENSE.txt', members)
         self.assertNotIn('viewer/ui/fonts/LICENSE-DejaVu.txt', members)
+
+    def test_only_allowlisted_files_and_resolvable_extracted_docs(self):
+        for name in ['AGENTS.md', 'CONTRIBUTING.md', 'docs/CURRENT_STATUS.md',
+                     'docs/new-guide.md', 'docs/evidence/README.md']:
+            target = self.source / name
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_text('[Source only](missing.md)')
+        archive = self.archive()
+        with zipfile.ZipFile(archive) as z:
+            members = {n.split('/', 1)[1] for n in z.namelist()}
+            self.assertEqual(members, distribution.PACKAGE_FILES)
+            z.extractall(self.folder / 'outside-repository')
+        report = distribution.verify_document_links(self.folder / 'outside-repository' / archive.stem)
+        self.assertGreater(report['offline_document_links'], 0)
+        self.assertGreater(report['external_document_links'], 0)
+        self.assertEqual(report['offline_document_links_status'], 'PASS')
+
+    def test_broken_usage_links_and_fragments_fail_packaging(self):
+        doc = self.source / distribution.SOURCE_FILES['GETTING_STARTED.md']
+        original = doc.read_text()
+        for link in ['[Missing](missing.md)', '[Heading](README.md#missing)',
+                     '![Image](missing.png)', '[Reference][ref]\n\n[ref]: missing.md',
+                     '<img src="missing.png">', '[Outside](../outside.md)']:
+            with self.subTest(link=link):
+                doc.write_text(original + '\n' + link + '\n')
+                with self.assertRaisesRegex(ValueError, 'Unresolved offline document'):
+                    self.archive()
+                self.assertFalse(list(self.output.glob('*.zip')))
+        doc.write_text(original + '\n[Local heading](#install-and-launch)\n')
+        self.archive()
+
+    def test_manifest_consistent_internal_file_is_still_excluded(self):
+        archive = self.archive()
+        name = 'AGENTS.md'
+        data = b'internal developer instructions'
+        def add_to_manifest(member, contents):
+            if member.filename.endswith('/BUILD_MANIFEST.json'):
+                manifest = json.loads(contents)
+                manifest['files'][name] = dict(bytes=len(data), sha256=distribution.digest(data))
+                return json.dumps(manifest).encode()
+            return contents
+        altered = self.rewrite(archive, add_to_manifest)
+        with zipfile.ZipFile(altered, 'a') as z:
+            entry = zipfile.ZipInfo(archive.stem + '/' + name)
+            entry.external_attr = 0o100644 << 16
+            z.writestr(entry, data)
+        with self.assertRaisesRegex(ValueError, 'standalone file allowlist'):
+            distribution.verify_archive(altered, self.source)
 
     def test_missing_and_truncated_upstream_text_stop_before_zip(self):
         notice = self.source / 'licenses/GODOT_COPYRIGHT.txt'
