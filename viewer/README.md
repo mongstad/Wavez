@@ -44,7 +44,7 @@ unchanged, and assigning an existing key transfers it to one action.
 Auto orbit remains a separate world-Y
 rotation and pauses while dragging. Open… opens
 files. Show panels and Exit fullscreen provide mouse recovery. Scalar colormaps use the bundled lookup data described in
-[COLORMAPS_LICENSE.txt](COLORMAPS_LICENSE.txt).
+[COLORMAPS_LICENSE.txt](../licenses/COLORMAPS_LICENSE.txt).
 
 The volume source-probe cross uses an orchid stroke with a dark navy outline,
 independent of scientific colormaps. **View → Probe marker** hides/restores the
