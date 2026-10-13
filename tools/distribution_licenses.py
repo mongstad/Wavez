@@ -18,6 +18,7 @@ else:
 
 ROOT = Path(__file__).resolve().parents[1]
 REQUIRED = ['LICENSE', 'THIRD_PARTY_LICENSES.md', 'TRADEMARKS.md', 'README.md',
+            'CONTRIBUTING.md', 'AGENTS.md',
             'licenses/GODOT_LICENSE.txt', 'licenses/GODOT_COPYRIGHT.txt', 'licenses/sources.json',
             'licenses/COLORMAPS_LICENSE.txt', 'licenses/LICENSE-DejaVu.txt',
             'licenses/README.md']
