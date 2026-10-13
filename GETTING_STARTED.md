@@ -287,16 +287,15 @@ guide's [adapter acceptance checks](docs/SIMULATION_INTEGRATION_GUIDE.md#accepta
 ### A prompt for an AI coding assistant
 
 The canonical repository is [mongstad/Wavez](https://github.com/mongstad/Wavez).
-It is currently private: the URL alone does not give an external agent access.
-You may need to provide authorized repository access or the relevant documents
+Public source and documentation can be read or cloned without an invitation.
+If the files are unavailable in your environment, provide the relevant documents
 and exporter source. Copy this prompt along with your simulation source:
 
 > Integrate my simulation with Wavez (https://github.com/mongstad/Wavez).
 > First check your workspace for the Wavez repository/docs and wavez_export
-> source. If absent, retrieve the relevant files through authorized repository
-> access. If inaccessible, ask me to supply the necessary docs and exporter
-> source rather than guessing; the repository is private and its URL alone
-> does not grant access.
+> source. If absent, retrieve the relevant public files from the repository.
+> If inaccessible, ask me to supply the necessary docs and exporter source
+> rather than guessing.
 >
 > Read GETTING_STARTED.md Part III, WAVEZ_API.md, docs/WVZ1_FORMAT.md,
 > docs/SIMULATION_INTEGRATION_GUIDE.md and docs/CAPTURE_FORMAT_POLICY.md; verify

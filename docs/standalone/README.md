@@ -15,14 +15,15 @@ relying on them for scientific conclusions.
 
 ## Source and development access
 
-The repository is private and owner-directed. Access and external contributions
-require explicit owner authorization or invitation; no public contribution intake
-is offered. Authorized readers can find the
+Public source and documentation can be read or cloned without an invitation.
+Development remains owner-directed: only authorized collaborators may push,
+administer or merge changes; external contributions require explicit owner
+arrangement. No public contribution intake is offered. Readers can find the
 [Development and Maintenance Policy](https://github.com/mongstad/Wavez/blob/main/CONTRIBUTING.md),
 [developer guidance](https://github.com/mongstad/Wavez/blob/main/AGENTS.md) and
 [detailed documentation](https://github.com/mongstad/Wavez/blob/main/docs/TECHNICAL_DOCUMENTATION.md)
-in the source repository. These links require network access and repository
-permission. Developer reports, tests and historical evidence belong in the
+in the source repository. These links require network access. Developer reports,
+tests and historical evidence belong in the
 corresponding source archive and are not included here.
 
 ## License

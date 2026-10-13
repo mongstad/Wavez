@@ -110,7 +110,8 @@ licenses/ directly with a text editor if your Markdown reader blocks local links
 Wavez LICENSE and TRADEMARKS.md remain in the package root.
 Help → About → Licenses and notices also provides offline notices. Full source,
 examples and historical evidence belong to the corresponding tagged GitHub source
-archives. Online source/documentation links require network access and repository permission.
+archives. Online source/documentation links require network access. Public read/clone access
+needs no invitation; repository development and write access remain owner-controlled.
 ''')
     files.add('INSTALL.txt')
     manifest = dict(build_info, files={})

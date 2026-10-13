@@ -40,7 +40,8 @@ and verification. No directory glob selects documentation.
 
 The standalone ZIP serves end users viewing existing captures. The corresponding
 GitHub source archive serves development, Python integration and historical
-review; private repository access still requires owner invitation/authorization.
+review. Public read/clone access needs no invitation; repository development
+and write access remain owner-controlled.
 
 | ZIP path | Source or purpose |
 |---|---|
@@ -62,7 +63,7 @@ Build logs and validation reports remain outside the ZIP.
 `PACKAGE_FILES`, the exact archive allowlist. The two standalone Markdown sources
 are package-context documents: their relative links resolve at the mapped ZIP
 root, not in their source-template directory. They link detailed source guidance
-through explicit web URLs labeled as requiring network/repository access.
+through explicit web URLs labeled as requiring network access.
 
 Include only documents needed offline for installation, everyday viewer use,
 troubleshooting or legal/attribution compliance. Required notices/provenance must
@@ -83,7 +84,7 @@ manifest hashes match), altered notices, changed build artifacts and unresolved
 offline links. `verify_document_links` checks all Markdown files actually
 extracted, including image paths, reference links, HTML links and Markdown
 heading fragments. External web/source URLs are counted separately, not fetched;
-private access and browser navigation are owner checks. The archive validator
+online availability and browser navigation are owner checks. The archive validator
 extracts into a fresh temporary directory after its path/member integrity gates.
 
 ```sh
