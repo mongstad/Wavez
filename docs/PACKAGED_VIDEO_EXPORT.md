@@ -48,7 +48,7 @@ artifact's notices and pins. See [third-party licensing](../THIRD_PARTY_LICENSES
 Verify the actual archive from outside the repository before uploading it:
 
 ```sh
-python tools/distribution_licenses.py /absolute/path/to/Wavez-v0.1.0.106-linux-x86_64.zip
+python tools/distribution_licenses.py /absolute/path/to/Wavez-vMAJOR.MINOR.PATCH.BUILD-linux-x86_64.zip
 cd /absolute/path/to/package-output
 sha256sum -c SHA256SUMS.txt
 ```
@@ -57,9 +57,16 @@ Use a clean, committed source checkout for a release; a dirty review build is
 explicitly marked `source_tree_clean: false` and must not be represented as a
 release from its recorded base commit. Build the reviewed source commit and tag
 that same commit only after owner authorization. Do not replace an already
-published ZIP, checksum or tag silently. The [license audit and correction
-proposal](evidence/issue-392/README.md) preserves the original v0.1.0.105 identity
-and proposes a separately reviewed corrective release.
+published ZIP, checksum or tag silently. The current v0.1.0.107 tag, assets and checksums remain unchanged. Accepted
+source/packaging changes require a new package and separately authorized versioned
+release; #397 does not authorize publication. The owner deleted the historical
+v0.1.0.105 release/tag. Historical audit records remain provenance.
+
+Third-party original full texts and provenance now share `licenses/` in source
+and ZIP; Wavez `LICENSE` and `TRADEMARKS.md` remain at the root. See the
+[obligation audit and maintenance details](../licenses/README.md). The short
+inventory includes literal filenames so readers that block local Markdown links
+can still open every notice offline.
 
 The running application and render child use their PCK without an editor, a
 source checkout or an imported development project. FFmpeg remains an external

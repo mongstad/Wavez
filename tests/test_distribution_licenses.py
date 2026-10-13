@@ -64,8 +64,21 @@ class DistributionLicensesTest(unittest.TestCase):
         expected = distribution.digest(archive.read_bytes())
         self.assertTrue((self.output / 'SHA256SUMS.txt').read_text().startswith(expected))
 
+    def test_central_notice_paths_and_literal_navigation(self):
+        archive = self.archive()
+        with zipfile.ZipFile(archive) as z:
+            members = {n.split('/', 1)[1] for n in z.namelist()}
+        for name in distribution.source_notices(self.source)['notices']:
+            self.assertTrue(name.startswith('licenses/'), name)
+            self.assertIn(name, members)
+            self.assertIn('`' + name + '`', (self.source / 'THIRD_PARTY_LICENSES.md').read_text())
+        self.assertIn('LICENSE', members)
+        self.assertIn('TRADEMARKS.md', members)
+        self.assertNotIn('GODOT_LICENSE.txt', members)
+        self.assertNotIn('viewer/ui/fonts/LICENSE-DejaVu.txt', members)
+
     def test_missing_and_truncated_upstream_text_stop_before_zip(self):
-        notice = self.source / 'GODOT_COPYRIGHT.txt'
+        notice = self.source / 'licenses/GODOT_COPYRIGHT.txt'
         original = notice.read_bytes()
         notice.unlink()
         with self.assertRaises(FileNotFoundError): self.archive()
@@ -94,18 +107,18 @@ class DistributionLicensesTest(unittest.TestCase):
     def test_missing_or_modified_zip_license_is_rejected(self):
         archive = self.archive()
         missing = self.rewrite(archive, lambda member, data:
-                               None if member.filename.endswith('/GODOT_LICENSE.txt') else data)
+                               None if member.filename.endswith('/licenses/GODOT_LICENSE.txt') else data)
         with self.assertRaisesRegex(ValueError, 'canonical distribution file'):
             distribution.verify_archive(missing, self.source)
         altered = self.rewrite(archive, lambda member, data:
-                               b'shortened text' if member.filename.endswith('/GODOT_LICENSE.txt') else data)
+                               b'shortened text' if member.filename.endswith('/licenses/GODOT_LICENSE.txt') else data)
         with self.assertRaisesRegex(ValueError, 'canonical distribution file'):
             distribution.verify_archive(altered, self.source)
 
     def test_unreadable_license_and_untracked_member_are_rejected(self):
         archive = self.archive()
         def unreadable(member, data):
-            if member.filename.endswith('/GODOT_LICENSE.txt'):
+            if member.filename.endswith('/licenses/GODOT_LICENSE.txt'):
                 member.external_attr = 0o100000 << 16
             return data
         with self.assertRaisesRegex(ValueError, 'Unreadable'):

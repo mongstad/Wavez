@@ -9,10 +9,10 @@ SOURCES = {
     "WAVEZ — PolyForm Noncommercial 1.0.0": "LICENSE",
     "Third-party inventory": "THIRD_PARTY_LICENSES.md",
     "Branding": "TRADEMARKS.md",
-    "Godot runtime — MIT License (canonical)": "GODOT_LICENSE.txt",
-    "Godot component notices (canonical)": "GODOT_COPYRIGHT.txt",
-    "Colormap notices": "viewer/COLORMAPS_LICENSE.txt",
-    "DejaVu font notices": "viewer/ui/fonts/LICENSE-DejaVu.txt",
+    "Godot runtime — MIT License (canonical)": "licenses/GODOT_LICENSE.txt",
+    "Godot component notices (canonical)": "licenses/GODOT_COPYRIGHT.txt",
+    "Colormap notices": "licenses/COLORMAPS_LICENSE.txt",
+    "DejaVu font notices": "licenses/LICENSE-DejaVu.txt",
 }
 
 

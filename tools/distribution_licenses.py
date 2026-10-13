@@ -18,9 +18,9 @@ else:
 
 ROOT = Path(__file__).resolve().parents[1]
 REQUIRED = ['LICENSE', 'THIRD_PARTY_LICENSES.md', 'TRADEMARKS.md', 'README.md',
-            'GODOT_LICENSE.txt', 'GODOT_COPYRIGHT.txt', 'licenses/sources.json',
-            'viewer/COLORMAPS_LICENSE.txt', 'viewer/ui/fonts/LICENSE-DejaVu.txt',
-            'viewer/ui/fonts/README.md', 'viewer/ui/about/README.md']
+            'licenses/GODOT_LICENSE.txt', 'licenses/GODOT_COPYRIGHT.txt', 'licenses/sources.json',
+            'licenses/COLORMAPS_LICENSE.txt', 'licenses/LICENSE-DejaVu.txt',
+            'licenses/README.md']
 
 
 def digest(data):
@@ -110,7 +110,9 @@ utilities remain required. MP4 needs external FFmpeg with libx264. Independent
 experimental Selection/Analysis needs external Python/NumPy and, for isosurfaces,
 scikit-image. See README.md and GETTING_STARTED.md for dependency details.
 
-Open THIRD_PARTY_LICENSES.md for local links to all applicable license texts.
+Open THIRD_PARTY_LICENSES.md for the inventory. Open the plain-text files in
+licenses/ directly with a text editor if your Markdown reader blocks local links.
+Wavez LICENSE and TRADEMARKS.md remain in the package root.
 Help → About → Licenses and notices also provides offline notices. Full source,
 examples and historical evidence belong to the corresponding tagged GitHub source
 archives. GitHub-hosted README images need access to their original URLs.

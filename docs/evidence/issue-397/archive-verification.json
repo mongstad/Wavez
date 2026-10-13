@@ -1,0 +1,11 @@
+{
+  "archive": "Wavez-v0.1.0.108-linux-x86_64.zip",
+  "sha256": "777a863ab3232f73a52c9d9d64fbcd2999a9422d9b39c68411e5082bdc246cc4",
+  "bytes": 40501982,
+  "files": 175,
+  "required_files": 10,
+  "canonical_notice_digests": "PASS",
+  "local_license_links": "PASS",
+  "archive_integrity": "PASS",
+  "readable_members": "PASS"
+}

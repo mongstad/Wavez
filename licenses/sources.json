@@ -2,22 +2,22 @@
   "godot": "4.7.2.stable.official.ed1daf0bf",
   "linux_release_x86_64_sha256": "d9f79ab89b5ae369aeed11c6052d402e8218cd503bf85b4a235f9c30c46a7c63",
   "notices": {
-    "GODOT_LICENSE.txt": {
+    "licenses/GODOT_LICENSE.txt": {
       "upstream": "https://github.com/godotengine/godot/blob/ed1daf0bf/LICENSE.txt",
       "version": "4.7.2.stable.official.ed1daf0bf",
       "sha256": "b0435e3b3e4e55238f05f4b306f30524a1b2e20147810d436eaa554fa6855c80"
     },
-    "GODOT_COPYRIGHT.txt": {
+    "licenses/GODOT_COPYRIGHT.txt": {
       "upstream": "https://github.com/godotengine/godot/blob/ed1daf0bf/COPYRIGHT.txt",
       "version": "4.7.2.stable.official.ed1daf0bf",
       "sha256": "cb1980c88089573bcacd7221d777c689bb8bbd778799f24c27fca0fe5f774d6d"
     },
-    "viewer/COLORMAPS_LICENSE.txt": {
+    "licenses/COLORMAPS_LICENSE.txt": {
       "upstream": "https://github.com/matplotlib/matplotlib/tree/v3.10.8/LICENSE",
       "version": "Matches full Matplotlib 3.10.8 wheel notices; original table-generation version was not recorded",
       "sha256": "dbb9ad7495a83b0f2f48c94b06e23020587d82f8d1492dcb717fb1ebc2f86c18"
     },
-    "viewer/ui/fonts/LICENSE-DejaVu.txt": {
+    "licenses/LICENSE-DejaVu.txt": {
       "upstream": "https://github.com/dejavu-fonts/dejavu-fonts/blob/version_2_37/LICENSE",
       "version": "DejaVu 2.37",
       "sha256": "7a083b136e64d064794c3419751e5c7dd10d2f64c108fe5ba161eae5e5958a93"
