@@ -54,12 +54,13 @@ precision/meaning; independently verify scientific conclusions.
 
 ## Captures and detailed help
 
-Creating captures requires the separately obtained Python exporter. Authorized
-repository readers can use the [full Getting Started guide](https://github.com/mongstad/Wavez/blob/main/GETTING_STARTED.md)
+Creating captures requires the separately obtained Python exporter. Readers can
+use the [full Getting Started guide](https://github.com/mongstad/Wavez/blob/main/GETTING_STARTED.md)
 for dependency versions, executable examples and simulation integration, and the
 [user handbook](https://github.com/mongstad/Wavez/blob/main/docs/WAVEZ_HANDBOOK.md)
 for detailed controls and caveats. These are online/source references requiring
-repository access. No exporter source, simulation data or evidence tree is
+network access; public read/clone access does not require an invitation. No
+exporter source, simulation data or evidence tree is
 included in this standalone package.
 
 ## Notices offline

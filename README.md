@@ -106,8 +106,10 @@ speed and cache settings; preparation can still limit playback on a fast GPU.
 
 ## Development access
 
-The repository is private. Access and development work require explicit owner
-authorization or invitation; no public contribution intake is currently offered.
+Public read/clone access to the source and documentation does not require an
+invitation. Project development remains owner-directed: only authorized
+collaborators may push, administer or merge changes, and external contributions
+require explicit owner arrangement. No public contribution intake is offered.
 See the [Development and Maintenance Policy](CONTRIBUTING.md).
 
 ## License
