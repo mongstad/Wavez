@@ -1,5 +1,14 @@
 # Current status
 
+Issue #338 proposes candidate **v0.1.0.112**, based on accepted
+**v0.1.0.111** / owner-merged PR #407
+(`8b0ffa83bcea1b7fa9b6827db4bc8c6c5065d547`). The Video Export dialog
+removes its remaining hover hints, including the close icon, playback rate,
+Overlays, Trails and dynamically refreshed summary. Permanent labels, exact
+ranges, settings, export calculations and worker/job behavior remain unchanged.
+Owner review is pending. See [focused review evidence and owner checks](evidence/issue-338/README.md).
+Historical reports and review-time wording below remain as written.
+
 Issue #94 proposes editorial draft **v0.1.0.104**, based on accepted
 **v0.1.0.103** / owner-merged PR #384
 (`0156fea1928758ce1969698ba1befad693f60e61`). The root README now provides a

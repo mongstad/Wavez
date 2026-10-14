@@ -1,0 +1,56 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+PASS: Titled groups have a subtle themed border
+PASS: Five setting groups and one separate summary group
+PASS: Range uses the reusable titled group
+PASS: Video uses the reusable titled group
+PASS: Camera uses the reusable titled group
+PASS: Presentation uses the reusable titled group
+PASS: Output uses the reusable titled group
+PASS: Export summary uses the reusable titled group
+PASS: Mode, Start and End share the titled Range group
+PASS: Controls remain inside their five functional groups
+PASS: Optional ordinary inspection records start inside collapsed Advanced
+PASS: Selections do not hide or enable optional inspection records
+PASS: Playback rate label and multiplier remain visible without a tooltip
+PASS: Estimate, status and progress share the lower summary
+PASS: Range labels retain their option indices
+PASS: Start/End controls have no unsolicited tooltips
+PASS: Estimate shows compact output and storage values
+PASS: Clock estimate retains frame count and uncompressed storage calculation
+PASS: Idle summary shows estimate without inactive progress
+PASS: Available-state notice does not announce FFmpeg success
+PASS: Idle Cancel has no redundant tooltip
+PASS: Range group stays inside scroll area at (700, 650)
+PASS: Range group clears title bar at (700, 650)
+PASS: Summary stays above actions at (700, 650)
+PASS: Range group stays inside scroll area at (560, 360)
+PASS: Range group clears title bar at (560, 360)
+PASS: Summary stays above actions at (560, 360)
+PASS: Output group can be reached at minimum dialog size
+PASS: Expanded Advanced reveals optional inspection records below its header
+PASS: Tab moves keyboard focus from the first setting
+PASS: Full range keeps exact source endpoints
+PASS: Current-position preset keeps its endpoints
+PASS: Custom still exports one frame
+PASS: Restored inverted range clamps End to Start before export
+PASS: Resolution and frame-rate presets still update their dependent values
+PASS: Custom dimensions and FPS remain editable
+PASS: Camera, output and ordinary optional inspection choices retain their job settings; successful PNG cleanup is automatic
+PASS: Active export locks grouped range controls
+PASS: Active export locks output and shows status area
+PASS: Active progress omits duplicate and non-actionable paths
+PASS: Minimum-size active dialog retains settings access and readable status
+PASS: Active status/action has no tooltip
+PASS: Active status/action has no tooltip
+PASS: Active status/action has no tooltip
+PASS: Active status/action has no tooltip
+PASS: Active status/action has no tooltip
+PASS: Cancel confirmation uses concise question and Yes/No actions
+PASS: No is default focus
+PASS: Both cancellation actions render at comfortable width
+PASS: Cancellation action has no tooltip
+PASS: Cancellation action has no tooltip
+PASS: Idle export restores grouped range controls
+PASS: Missing FFmpeg blocks export with an actionable error
+Video Export range group: 53 checks, 0 failures

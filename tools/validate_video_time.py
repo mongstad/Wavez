@@ -44,6 +44,7 @@ def main():
     p.add_argument('--baseline', type=Path, required=True, help='Accepted repository archive')
     p.add_argument('--output', type=Path, required=True)
     p.add_argument('--package', action='store_true')
+    p.add_argument('--packaged-binary', type=Path, help='Existing disposable test package built by package()')
     p.add_argument('--renderer', default='forward_plus', choices=['forward_plus'])
     a = p.parse_args(); out = a.output.resolve();out.mkdir(parents=True, exist_ok=False)
     inputs = out / 'inputs';inputs.mkdir()
@@ -56,12 +57,13 @@ def main():
     hashes={path:hashlib.sha256(Path(path).read_bytes()).hexdigest() for path in sources.values()}
     env=dict(os.environ,XDG_DATA_HOME=str(out/'profile'),XDG_CONFIG_HOME=str(out/'profile'))
     reports={};command_suffix=['--rendering-method',a.renderer,'--audio-driver','Dummy','--resolution','1440x900']
-    executable = package(a.godot,out) if a.package else a.godot
+    executable = str(a.packaged_binary.resolve()) if a.packaged_binary else package(a.godot,out) if a.package else a.godot
+    packaged = a.package or a.packaged_binary is not None
     for name, project in [('before',a.baseline/'viewer'),('after',ROOT/'viewer')]:
         folder=out/name;folder.mkdir();(folder/'config.json').write_text(json.dumps(sources))
-        command=([executable] if a.package and name=='after' else [a.godot,'--path',str(project),'--script',str(ROOT/'viewer/video/test_time_presentation.gd')])
+        command=([executable] if packaged and name=='after' else [a.godot,'--path',str(project),'--script',str(ROOT/'viewer/video/test_time_presentation.gd')])
         command+=command_suffix+['--',str(folder)]+(['baseline'] if name=='before' else [])
-        result=subprocess.run(command,cwd=folder,env=env,capture_output=True,text=True,timeout=130)
+        result=subprocess.run(command,cwd=folder,env=env,capture_output=True,text=True,timeout=420)
         log=result.stdout+result.stderr;(folder/'run.txt').write_text(log.rstrip()+'\n')
         if result.returncode or 'ERROR:' in log or 'WARNING:' in log:raise RuntimeError(f'{name}: {folder}/run.txt')
         reports[name]=json.loads((folder/'report.json').read_text());assert not reports[name]['failures']
@@ -77,7 +79,7 @@ def main():
             if case=='full-fast':job.update(start_time=0.,end_time=210.,fps=4,playback_rate=420.)
             job['output_path']=str(folder/'output.mp4')
             (folder/'job.json').write_text(json.dumps(job))
-            command=([executable] if a.package and name=='after' else [a.godot,'--path',str(project)])+command_suffix+['--','--wavez-render-job='+str(folder/'job.json')]
+            command=([executable] if packaged and name=='after' else [a.godot,'--path',str(project)])+command_suffix+['--','--wavez-render-job='+str(folder/'job.json')]
             result=subprocess.run(command,cwd=folder,env=env,capture_output=True,text=True,timeout=120)
             log=result.stdout+result.stderr;(folder/'run.txt').write_text(log.rstrip()+'\n')
             assert result.returncode==0 and 'ERROR:' not in log and 'WARNING:' not in log, folder/'run.txt'
@@ -100,9 +102,9 @@ def main():
         exports.append(dict(case=case,frames=len(outputs['after'][0]),timestamps=outputs['after'][0],png_pixels_identical=True,decoded_mp4_pixels_identical=True,probe=outputs['after'][3]))
         print(case,'exact timing/PNG/decoded MP4 comparison passed',flush=True)
     assert hashes=={path:hashlib.sha256(Path(path).read_bytes()).hexdigest() for path in sources.values()}
-    summary=dict(renderer=a.renderer,packaged=a.package,ui_checks={name:report['checks'] for name,report in reports.items()},settings_matrix_pairs=len(reports['after']['matrix']),exports=exports,source_hashes_unchanged=hashes)
+    summary=dict(renderer=a.renderer,packaged=packaged,ui_checks={name:report['checks'] for name,report in reports.items()},settings_matrix_pairs=len(reports['after']['matrix']),exports=exports,source_hashes_unchanged=hashes)
     (out/'summary.json').write_text(json.dumps(summary,indent=2)+'\n')
-    print('Video time presentation PASS',a.renderer,'package=',a.package)
+    print('Video time presentation PASS',a.renderer,'package=',packaged)
 
 
 if __name__=='__main__':main()

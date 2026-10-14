@@ -1,0 +1,9 @@
+{
+  "kind": "Disposable release-template harness executable/PCK; not a release ZIP",
+  "source_baseline": "8b0ffa83bcea1b7fa9b6827db4bc8c6c5065d547",
+  "candidate_version": "v0.1.0.112",
+  "artifacts": {
+    "WAVEZ.x86_64": "d9f79ab89b5ae369aeed11c6052d402e8218cd503bf85b4a235f9c30c46a7c63",
+    "WAVEZ.pck": "f4da9a57d5c5ab2b1d9db837822952b7d4d21f36d0fad0ebcf36be69f1bd429f"
+  }
+}
