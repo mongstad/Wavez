@@ -1547,15 +1547,20 @@ func _apply_preset(name: String) -> void:
 	environment.glow_intensity = bloom.intensity
 	_sync_bloom_control()
 	_remember_view_preferences()
-	if name in ["Temperature", "Density", "Velocity"]:
-		var requested := name.to_lower() if name != "Velocity" else "velocity_magnitude"
-		if _scalar_channels(frame_a,requested == "velocity_magnitude").has(requested):
-			color_channel = requested
-			channel_signature = ""
-			_refresh_mapping_options()
-		else: status_label.text = "Capture has no " + requested + " channel."
+	_apply_preset_channel(name)
 	if name == "Minimal / Presentation" and overlay_visible: _toggle_overlay()
 	_restyle()
+
+func _apply_preset_channel(name: String) -> bool:
+	if name not in ["Temperature", "Density", "Velocity"]: return false
+	var requested := name.to_lower() if name != "Velocity" else "velocity_magnitude"
+	if not _scalar_channels(frame_a,requested == "velocity_magnitude").has(requested):
+		status_label.text = "Capture has no " + requested + " channel."
+		return false
+	color_channel = requested
+	channel_signature = ""
+	_refresh_mapping_options()
+	return true
 
 func _open_scene(path: String) -> void:
 	camera_roll_keys.clear()
@@ -1589,6 +1594,9 @@ func _open_scene(path: String) -> void:
 		_shell_open_error = scene_layers.error;status_label.text = _shell_open_error;return
 	scene_layers.frame_scene()
 	_build_guides();_apply_geometry();_update_camera();_sync_visuals();_sync_inspection_controls()
+	# Restore the selected channel preset against this capture's available data,
+	# without reapplying environment/Bloom defaults or changing user preferences.
+	if _apply_preset_channel(selected_preset): _restyle()
 	shell.select_initial_scene_category()
 	status_label.text = "Loaded %s • WAVEZ Scene Format (WVZ1) • %d layer samples" % [path.get_file(),reader.records.size()]
 	# The synchronous initial sample is already usable; its rolling request was

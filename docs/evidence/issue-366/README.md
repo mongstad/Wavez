@@ -37,6 +37,10 @@ recipes with only `clean_view` use its Scientific/Cinematic representation.
 Native snapshots' environment values take precedence over stale Bloom slider
 records, without an additional slider-tick rounding of the live Environment.
 
+Named Temperature/Density/Velocity selection consumes the existing channel mapping
+action when the opened capture has that channel; this preserves the selected
+preset meaning without reapplying environment defaults or changing Bloom pairs.
+
 No shaders, per-layer Bloom, additional rendering passes, WVZ1, cache algorithms,
 camera semantics, renderer policy or release packaging policy change.
 Interactive initialization consumes the preferences after building controls;
@@ -50,15 +54,16 @@ Godot **4.7.2**, Linux x86_64, **Forward+ Vulkan**, NVIDIA RTX 3070 Ti.
 | Focused check | Result |
 |---|---|
 | Application version | 2 Python tests PASS |
-| Native preference processes | 74 fresh + 2 restart + 2 corrupt + 1 missing = **79 PASS** |
-| Linux release-template preference processes | Same **79 PASS** |
+| Native preference processes | 77 fresh + 2 restart + 5 named + 2 corrupt + 1 missing = **87 PASS** |
+| Linux release-template preference processes | Same **87 PASS** |
 | Source global Bloom / recipes / GPU | **310 PASS** |
 | Linux release-template global Bloom / recipes / GPU | **310 PASS** |
 | Portable view restoration | **827 PASS** |
 | Production MP4 comparison | **6 jobs PASS**, accepted/candidate/package frame pixels identical |
 
 Preference tests cover all six preset defaults/manual overrides, persistence
-through four capture types and Close File, new-process restoration of independent
+through four capture types and Close File, named-channel restoration on open/restart,
+new-process restoration of independent
 Scientific/Cinematic pairs, malformed/incomplete/nonfinite/out-of-range preferences,
 bounded reads, failed writes, transactional disk/memory behavior, rejected recipes,
 explicit session precedence, stale native slider records, themes, slider keyboard

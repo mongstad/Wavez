@@ -13,7 +13,10 @@ Selecting another preset recalls that preset's saved pair; it does not copy or
 reset the pair you changed. These are preset preferences for the same global
 Environment effect, not particle/field/mesh Bloom controls. Enabling Bloom does
 not change the viewing-preset name, Point rendering, mappings, backdrop or fog.
-Other preset actions retain their existing meanings.
+Other preset actions retain their existing meanings. Temperature, Density and
+Velocity select their corresponding channel when available in an opened capture,
+without reapplying Bloom or environment defaults; unavailable channels retain
+the normal capture mapping fallback.
 
 The selected preset and all six Bloom pairs persist across restarts, File →
 Close File and opening other WVZ captures. Application preferences live in

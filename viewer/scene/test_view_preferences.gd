@@ -51,6 +51,15 @@ func run():
 		check(equal_bloom(["Scientific",true,.74]),"New process restores selected preset and manual Scientific Bloom")
 		viewer._apply_preset("Cinematic")
 		check(equal_bloom(["Cinematic",false,.52]),"New process restores Cinematic override")
+		viewer._apply_preset("Temperature")
+	elif phase=="named":
+		check(equal_bloom(["Temperature",false,.64]),"New process restores named preset and its Bloom pair")
+		check(viewer.generic_reader!=null and viewer.color_channel=="temperature","Startup capture restores the named channel mapping")
+		viewer._close_capture();viewer._open_capture(output.path_join("named.wvz"));await settle()
+		check(viewer.color_channel=="temperature" and equal_bloom(["Temperature",false,.64]),"Reopening restores named mapping without changing Bloom")
+		for pair in [["Density","density"],["Velocity","velocity_magnitude"]]:
+			viewer._apply_preset(pair[0]);viewer._close_capture();viewer._open_capture(output.path_join("named.wvz"));await settle()
+			check(viewer.color_channel==pair[1] and equal_bloom([pair[0],false,.64]),"Restarted process can reopen named channel preset: "+pair[0])
 		viewer._apply_preset("Scientific")
 	elif phase=="corrupt":
 		check(equal_bloom(["Scientific",false,.30]),"Corrupt startup restores complete fresh defaults")
@@ -79,7 +88,10 @@ func run():
 			viewer._open_capture(output.path_join(source+".wvz"));viewer.playing=false;await settle()
 			check(viewer.generic_reader!=null and equal_bloom(expected),"Opening "+source+" preserves preferences")
 			check(viewer._close_capture() and equal_bloom(expected),"Close File preserves preferences: "+source)
-		viewer._open_capture(output.path_join("mixed.wvz"));await settle()
+		for pair in [["Temperature","temperature"],["Density","density"],["Velocity","velocity_magnitude"]]:
+			viewer._apply_preset(pair[0]);viewer._open_capture(output.path_join("named.wvz"));await settle()
+			check(viewer.color_channel==pair[1] and equal_bloom([pair[0],false,.64]),"Named channel preset survives opening matching data: "+pair[0])
+		viewer._apply_preset("Scientific");viewer._open_capture(output.path_join("mixed.wvz"));await settle()
 		var disk := FileAccess.get_file_as_bytes(Preferences.STORAGE_PATH)
 		var saved := Visual.snapshot(viewer);saved.environment.glow_enabled=false;saved.environment.glow_intensity=.31;saved.sliders.Bloom=1.8
 		Visual.apply(viewer,saved)
