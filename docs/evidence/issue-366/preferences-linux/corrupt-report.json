@@ -1,0 +1,10 @@
+{
+  "checks": 2,
+  "failures": [],
+  "phase": "corrupt",
+  "state": [
+    "Scientific",
+    false,
+    0.300000011920929
+  ]
+}

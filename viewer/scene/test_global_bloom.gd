@@ -73,8 +73,8 @@ func restoration(scene: String) -> void:
 	saved.environment.glow_enabled = false
 	# Reproduce the reported label/control mismatch without assuming its provenance.
 	Visual.apply(viewer,saved)
-	check(not viewer.environment.glow_enabled and not viewer.glow_slider.editable,scene+" explicit off pixels retained")
-	check(viewer.selected_preset == ("Cinematic" if baseline else "Scientific"),scene+" VisualState off label reconciled")
+	check(not viewer.environment.glow_enabled and viewer.glow_slider.editable == not baseline,scene+" explicit off pixels retained")
+	check(viewer.selected_preset == "Cinematic",scene+" VisualState off retains named preset")
 	check(Visual.snapshot(viewer).environment == saved.environment,scene+" VisualState environment unchanged")
 	check(viewer.camera.transform == Transform3D(Basis(Visual.vector(saved.camera_transform[0]),Visual.vector(saved.camera_transform[1]),Visual.vector(saved.camera_transform[2])),Visual.vector(saved.camera_transform[3])),scene+" VisualState camera unchanged")
 	restored.append({"case":scene+" VisualState off","state":state()})
@@ -86,9 +86,9 @@ func restoration(scene: String) -> void:
 	var path := output.path_join(scene+"-inspection.json")
 	check(Job.write_json(path,native) == OK,scene+" write inspection recipe")
 	viewer._load_scientific_inspection(path)
-	check(viewer.selected_preset == ("Cinematic" if baseline else "Scientific"),scene+" inspection recipe off label reconciled")
-	check(not viewer.environment.glow_enabled and not viewer.glow_slider.editable,scene+" inspection preserves explicit off")
-	# Portable presets have no preset name: their explicit environment is authoritative.
+	check(viewer.selected_preset == "Cinematic",scene+" inspection recipe off retains named preset")
+	check(not viewer.environment.glow_enabled and viewer.glow_slider.editable == not baseline,scene+" inspection preserves explicit off")
+	# Portable presets retain their explicit name and independent environment.
 	viewer._apply_preset("Scientific")
 	var portable := Preset.snapshot(viewer)
 	path = output.path_join(scene+"-scientific.json")
@@ -96,7 +96,7 @@ func restoration(scene: String) -> void:
 	viewer._apply_preset("Cinematic")
 	check(viewer._load_inspection(path).is_empty(),scene+" load Scientific portable preset")
 	check(viewer.selected_preset == ("Cinematic" if baseline else "Scientific"),scene+" portable off label reconciled")
-	check(not viewer.environment.glow_enabled and not viewer.glow_slider.editable,scene+" portable Scientific remains no Bloom")
+	check(not viewer.environment.glow_enabled and viewer.glow_slider.editable == not baseline,scene+" portable Scientific remains no Bloom")
 	restored.append({"case":scene+" portable off","state":state()})
 	await screen(scene+"-portable-off")
 	viewer._apply_preset("Cinematic")
@@ -140,7 +140,7 @@ func run() -> void:
 	viewer.playing = false;viewer.orbit_enabled = false
 	viewer.shell.set_process(false);viewer.shell.transport.set_process(false);viewer.shell.status_ui.set_process(false)
 	RenderingServer.viewport_set_measure_render_time(root.get_viewport_rid(),true)
-	check(is_equal_approx(viewer.environment.glow_intensity,1.35),"accepted default 1.35")
+	check(is_equal_approx(viewer.environment.glow_intensity,1.35 if baseline else .30),"fresh Bloom intensity default")
 	check(viewer.glow_slider.get_parent() == viewer.tools_ui.form("Global effects"),"one Global effects Bloom control")
 	check(viewer.visual_sliders.keys().filter(func(k):return k.contains("Bloom")).size() == 1,"no category Bloom controls")
 	for scene in ["particles","fields","meshes","mixed"]:
@@ -156,9 +156,9 @@ func run() -> void:
 			var theme: String = "light" if light else "dark"
 			for preset in ["Cinematic","Scientific","Cinematic"]:
 				viewer._apply_preset(preset);viewer.glow_slider.value = 1.34
-				check(viewer.glow_slider.editable == (preset == "Cinematic"),scene+" "+theme+" "+preset+" availability")
+				check(viewer.glow_slider.editable == (preset == "Cinematic" or not baseline),scene+" "+theme+" "+preset+" availability")
 				check(viewer.environment.glow_enabled == (preset == "Cinematic"),scene+" "+preset+" glow state")
-				await input_probe(scene+" "+theme+" "+preset,preset == "Cinematic")
+				await input_probe(scene+" "+theme+" "+preset,preset == "Cinematic" or not baseline)
 			viewer.glow_slider.value = 1.35
 			viewer.shell.show();viewer.shell.layout();viewer.tools_ui.open("Global effects")
 			await screen(scene+"-"+theme+"-control")
@@ -183,13 +183,20 @@ func run() -> void:
 			check(await viewer._capture_inspection_png(output.path_join(scene+"-"+preset+"-export.png"),false) == OK,scene+" "+preset+" native PNG export")
 			if scene == "mixed":
 				Job.write_json(output.path_join(preset+"-video-state.json"),Visual.snapshot(viewer))
+		if not baseline:
+			viewer._apply_preset("Scientific");viewer._set_bloom_enabled(false);viewer.glow_slider.value=2
+			await screen(scene+"-Scientific-manual-off")
+			viewer._set_bloom_enabled(true)
+			await screen(scene+"-Scientific-manual-on")
+			check(viewer.selected_preset=="Scientific" and viewer.clean_view,"Manual Bloom leaves Scientific representation and label intact")
+			viewer._set_bloom_enabled(false)
 		await restoration(scene)
 		viewer._apply_preset("Cinematic");viewer.glow_slider.value = 1.35
 		await measure(scene)
 		viewer._apply_preset("Scientific")
 	# Finish with Scientific and switch again: no particles required and no implicit enable.
 	viewer._open_capture(output.path_join("fields.wvz"))
-	check(viewer.selected_preset == "Scientific" and not viewer.glow_slider.editable and not viewer.environment.glow_enabled,"Scientific capture switch")
+	check(viewer.selected_preset == "Scientific" and viewer.glow_slider.editable == not baseline and not viewer.environment.glow_enabled,"Scientific capture switch")
 	Job.write_json(output.path_join("report.json"),{"checks":checks,"failures":failures,"controls":controls,
 		"restored":restored,"timings":timings,"render_cases":render_cases,"baseline":baseline,"renderer":RenderingServer.get_current_rendering_method(),
 		"device":RenderingServer.get_video_adapter_name(),"resolution":[root.size.x,root.size.y]})

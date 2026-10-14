@@ -202,6 +202,14 @@ inherently a mass element or a volume integral.
 
 ## Inspection and rendering
 
+A fresh profile starts in **Scientific** view with Bloom off. Choose a mode in
+**View → Viewing preset**, then use **View → Global effects → Enable Bloom** and
+**Bloom** for the one scene-wide effect. Every preset permits manual Bloom;
+Cinematic initially enables it at 0.30 on the 0–2 scale. Each mode remembers its
+own Bloom setting, and your selection survives capture changes and restarts.
+Loading a saved view deliberately applies its session settings without replacing
+these application preferences. See [Bloom and preference precedence](GLOBAL_BLOOM.md).
+
 Choose the layer's channel and colormap, then set a range appropriate to its units.
 For comparisons, use fixed ranges across views. Automatic per-sample ranges can
 change as time advances. A range frozen from one sample stays fixed but may clip

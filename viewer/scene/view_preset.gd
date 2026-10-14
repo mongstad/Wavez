@@ -6,7 +6,7 @@ const MAX_BYTES := 65536
 const Visual = preload("res://scene/visual_state.gd")
 # bool, finite numeric interval, enum, or fixed-size vector/transform.
 const VIEW := {
-	"point_scale":[0.01,8.0], "exposure":[0.05,3.0], "clean_view":true,
+	"preset":preload("res://scene/view_preferences.gd").PRESETS, "point_scale":[0.01,8.0], "exposure":[0.05,3.0], "clean_view":true,
 	"brightness_scale":[0.0,5.0], "gamma":[0.2,3.0],
 	"orbit_enabled":true, "orbit_speed":[-0.5,0.5], "free_camera":true,
 	"yaw":[-1e9,1e9], "pitch":[-1e9,1e9], "camera_distance":[0.000001,1e15],
@@ -41,6 +41,7 @@ static func snapshot(viewer) -> Dictionary:
 	var groups := {"view":{},"particles":{},"environment":{},"camera":{},"quality":{}}
 	for key in VIEW:
 		match key:
+			"preset":groups.view[key] = viewer.selected_preset
 			"camera_target":groups.view[key] = Visual.vec(viewer.camera_target)
 			"camera_transform":
 				var t: Transform3D = viewer.camera.transform
@@ -136,9 +137,12 @@ static func apply(viewer, recipe) -> Dictionary:
 	for key in s.get("view",{}):
 		var value = s.view[key]
 		match key:
+			"preset":viewer.selected_preset = value
 			"camera_target":viewer.camera_target = Visual.vector(value)
 			"camera_transform":viewer.camera.transform = Transform3D(Basis(Visual.vector(value[0]),Visual.vector(value[1]),Visual.vector(value[2])),Visual.vector(value[3]))
 			_:viewer.set(key,value)
+	if not s.get("view",{}).has("preset") and s.get("view",{}).has("clean_view"):
+		viewer.selected_preset = "Scientific" if s.view.clean_view else "Cinematic"
 	if s.get("view",{}).has("camera_transform"): viewer._adopt_camera_basis()
 	for key in s.get("particles",{}):viewer.set(key,s.particles[key])
 	if s.has("particles"):
@@ -167,7 +171,7 @@ static func apply(viewer, recipe) -> Dictionary:
 	for title in sliders:
 		if viewer.visual_sliders.has(title):viewer.visual_sliders[title].set_value_no_signal(viewer.get(sliders[title]))
 	viewer._sync_particle_size_control()
-	viewer.glow_slider.set_value_no_signal(viewer.environment.glow_intensity)
+	viewer._sync_bloom_control()
 	for i in viewer.colormap_option.item_count:
 		if viewer.colormap_option.get_item_text(i) == viewer.colormap_name:viewer.colormap_option.select(i)
 	for i in viewer.manual_spins.size():viewer.manual_spins[i].set_value_no_signal(viewer.manual_min if i == 0 else viewer.manual_max)

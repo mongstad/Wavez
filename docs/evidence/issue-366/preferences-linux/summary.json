@@ -1,0 +1,51 @@
+{
+  "packaged": true,
+  "reports": {
+    "fresh": {
+      "checks": 74,
+      "failures": [],
+      "phase": "fresh",
+      "state": [
+        "Scientific",
+        true,
+        0.740000009536743
+      ]
+    },
+    "restart": {
+      "checks": 2,
+      "failures": [],
+      "phase": "restart",
+      "state": [
+        "Scientific",
+        true,
+        0.740000009536743
+      ]
+    },
+    "corrupt": {
+      "checks": 2,
+      "failures": [],
+      "phase": "corrupt",
+      "state": [
+        "Scientific",
+        false,
+        0.300000011920929
+      ]
+    },
+    "missing": {
+      "checks": 1,
+      "failures": [],
+      "phase": "missing",
+      "state": [
+        "Scientific",
+        false,
+        0.300000011920929
+      ]
+    }
+  },
+  "source_hashes_unchanged": {
+    "particles.wvz": "2ba6729ab88ec08b7af0c97c7b020740bfdca852ea82aaa77c14b9a27da98daa",
+    "fields.wvz": "2f3a3600cc28c82d87a56beda7b583b4b3b5452503a97741915592ad0c24a996",
+    "meshes.wvz": "e9e7a463e75f9e4d3755f4e2c16dcf75f23d2aa224babf301c24fe3bbf0d9fbe",
+    "mixed.wvz": "4fb84f03787ff71e1c97b34eea2c7c548030866ea0fcfa61d52052b9c68c5c79"
+  }
+}

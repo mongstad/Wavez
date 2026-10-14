@@ -148,6 +148,12 @@ var intensity_floor := 0.08
 var clean_view := false
 var slice_enabled := false
 var slice_x := 0.0
+const ViewPreferences = preload("res://scene/view_preferences.gd")
+var view_preferences := ViewPreferences.new()
+var view_choices: Dictionary = ViewPreferences.defaults().bloom
+var loading_view_preferences := false
+var bloom_enabled: CheckButton
+var bloom_notice: Label
 var glow_slider: HSlider
 var legend: Label
 var tail_poll := 0.0
@@ -197,6 +203,14 @@ func _ready() -> void:
 	_build_particles()
 	_build_ui()
 	_build_visual_ui()
+	if not offline_instance:
+		var preference_error := view_preferences.reload()
+		view_choices = view_preferences.settings.bloom.duplicate(true)
+		loading_view_preferences = true
+		_apply_preset(view_preferences.settings.preset)
+		loading_view_preferences = false
+		bloom_notice.text = preference_error
+		bloom_notice.visible = not preference_error.is_empty()
 	if not offline_instance and OS.has_environment("WAVEZ_RESIZE_PROFILE_OUTPUT"):
 		var monitor = preload("res://ui/shell/native_resize_monitor.gd").new()
 		monitor.viewer = self
@@ -1069,14 +1083,33 @@ func _set_clean(value: bool) -> void:
 	environment.glow_enabled = not value
 	environment.fog_enabled = not value
 	_sync_bloom_control()
-	status_label.text = "Scientific view — decorative backdrop and bloom disabled." if value else "Cinematic view — artistic backdrop, halos and bloom enabled."
+	status_label.text = "Scientific view — decorative backdrop disabled." if value else "Cinematic view — artistic backdrop and halos enabled."
 
 func _sync_bloom_control() -> void:
-	# Saved presentation settings own the pixels. Reconcile the preset label with
-	# their effective Bloom state without reapplying a preset's other effects.
-	if environment.glow_enabled: selected_preset = "Cinematic"
-	elif selected_preset == "Cinematic": selected_preset = "Scientific"
-	glow_slider.editable = environment.glow_enabled
+	# Bloom is independent of preset identity and point-rendering semantics.
+	bloom_enabled.set_pressed_no_signal(environment.glow_enabled)
+	glow_slider.editable = true
+	# Restore the live Environment value without quantizing it to slider ticks.
+	var step := glow_slider.step
+	glow_slider.step = 0
+	glow_slider.set_value_no_signal(environment.glow_intensity)
+	glow_slider.step = step
+
+func _remember_view_preferences() -> void:
+	if offline_instance or loading_view_preferences: return
+	view_choices[selected_preset] = {"enabled":environment.glow_enabled, "intensity":environment.glow_intensity}
+	var error := view_preferences.save({"preset":selected_preset, "bloom":view_choices.duplicate(true)})
+	bloom_notice.text = error
+	bloom_notice.visible = not error.is_empty()
+
+func _set_bloom_enabled(value: bool) -> void:
+	environment.glow_enabled = value
+	_sync_bloom_control()
+	_remember_view_preferences()
+
+func _set_bloom_intensity(value: float) -> void:
+	environment.glow_intensity = value
+	_remember_view_preferences()
 
 func _build_guides() -> void:
 	if guide_mesh.get_parent() == null:
@@ -1238,7 +1271,7 @@ var resize_handle: Control
 var control_checks: Dictionary = {}
 var manual_spins: Array[SpinBox] = []
 var selected_preset := "Cinematic"
-const VIEWING_PRESETS := ["Cinematic", "Scientific", "Temperature", "Density", "Velocity", "Minimal / Presentation"]
+const VIEWING_PRESETS := ViewPreferences.PRESETS
 var preset_available := {}
 var tools_ui
 var legacy_sections := {}
@@ -1413,8 +1446,10 @@ func _build_inspector_controls() -> void:
 	var post := mappings
 	_visual_slider(post, "Exposure", .05, 3, exposure, func(v: float): exposure = v; _sync_visuals())
 	_visual_slider(post, "Gamma", .2, 3, gamma, func(v: float): gamma = v; _sync_visuals())
-	glow_slider = _visual_slider(tools_ui.form("Global effects"), "Bloom", 0, 2, environment.glow_intensity, func(v: float): environment.glow_intensity = v)
-	glow_slider.tooltip_text = "Scene-wide Bloom. Cinematic enables this control; Scientific disables decorative Bloom. Visible glow depends on scene brightness."
+	bloom_enabled = _check(tools_ui.form("Global effects"), "Enable Bloom", environment.glow_enabled, _set_bloom_enabled)
+	glow_slider = _visual_slider(tools_ui.form("Global effects"), "Bloom", 0, ViewPreferences.BLOOM_MAX, environment.glow_intensity, _set_bloom_intensity)
+	bloom_notice = Label.new(); bloom_notice.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	bloom_notice.hide(); tools_ui.form("Global effects").add_child(bloom_notice)
 	_check(tools_ui.form("Slice"), "X slice • ±3 simulation units", false, func(v: bool): slice_enabled = v; _sync_visuals())
 	_visual_slider(tools_ui.form("Slice"), "Slice position • box fraction", -1, 1, 0, func(v: float): slice_x = v; _sync_visuals())
 	_build_geometry_ui()
@@ -1504,8 +1539,14 @@ func _update_camera_speed_repeat(now_msec: int) -> void:
 	camera_speed_next_repeat_msec = now_msec + CAMERA_SPEED_REPEAT_MSEC
 
 func _apply_preset(name: String) -> void:
+	if name not in VIEWING_PRESETS: return
 	selected_preset = name
 	_set_clean(name != "Cinematic")
+	var bloom: Dictionary = view_choices[name]
+	environment.glow_enabled = bloom.enabled
+	environment.glow_intensity = bloom.intensity
+	_sync_bloom_control()
+	_remember_view_preferences()
 	if name in ["Temperature", "Density", "Velocity"]:
 		var requested := name.to_lower() if name != "Velocity" else "velocity_magnitude"
 		if _scalar_channels(frame_a,requested == "velocity_magnitude").has(requested):

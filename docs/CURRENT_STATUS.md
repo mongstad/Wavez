@@ -1,5 +1,15 @@
 # Current status
 
+Issue #366 proposes candidate **v0.1.0.113**, based on accepted **v0.1.0.112** /
+owner-merged PR #408 (`bbd7eda678d9b04d784428747b61517aa2817499`). Fresh profiles
+start Scientific with Bloom off. Cinematic starts with global Bloom on at 0.30
+of the 0–2 range. Every preset permits independent manual on/off/intensity and
+remembers its pair; selection and pairs persist across captures and restarts.
+Explicit loaded views override the session without overwriting application
+preferences. Owner review is pending. See [preference behavior](GLOBAL_BLOOM.md)
+and [focused evidence](evidence/issue-366/README.md). Historical records below
+remain as written.
+
 Issue #338 proposes candidate **v0.1.0.112**, based on accepted
 **v0.1.0.111** / owner-merged PR #407
 (`8b0ffa83bcea1b7fa9b6827db4bc8c6c5065d547`). The Video Export dialog

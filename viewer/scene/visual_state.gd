@@ -67,7 +67,7 @@ static func apply(viewer, state: Dictionary) -> void:
 	if state.get("preset", "") in viewer.VIEWING_PRESETS: viewer.selected_preset = state.preset
 	viewer._sync_bloom_control()
 	for name in state.get("sliders", {}):
-		if viewer.visual_sliders.has(name): viewer.visual_sliders[name].set_value_no_signal(state.sliders[name])
+		if name != "Bloom" and viewer.visual_sliders.has(name): viewer.visual_sliders[name].set_value_no_signal(state.sliders[name])
 	viewer._sync_particle_size_control()
 	for i in range(viewer.manual_spins.size()): viewer.manual_spins[i].set_value_no_signal(viewer.manual_min if i == 0 else viewer.manual_max)
 	viewer.shell.layout()
