@@ -100,6 +100,7 @@ def export_comparison(godot, accepted, fixtures_dir, output):
                     log = (directory/'native.log').read_text()
                     progress = json.loads((directory/'progress.json').read_text())
                     assert result.returncode == 0 and 'ERROR:' not in log and 'WARNING:' not in log and progress['stage'] == 'complete', directory
+                    assert not list((directory/'profile').rglob('view_preferences.json')), 'Offline worker wrote application preferences'
                     frames = sorted((directory/'frames').glob('*.png'));assert len(frames) == 3
                     timing = [json.loads(row) for row in (directory/'timing.jsonl').read_text().splitlines()]
                     assert len(timing) == 3 and all(abs(row['capture_time']-n/4) < 1e-12 for n,row in enumerate(timing))
@@ -120,7 +121,7 @@ def export_comparison(godot, accepted, fixtures_dir, output):
                   worker_sha256=hashlib.sha256((ROOT/'viewer/video/render_worker.gd').read_bytes()).hexdigest(),
                   limitations=['640x360; 3 frames per job; v1 jobs; no long/4K or selection-aware v2 video matrix'])
     (output/'report.json').write_text(json.dumps(report,indent=2)+'\n')
-    print('Global Bloom exports: 12 native MP4 jobs PASS; accepted/candidate/package pixels identical')
+    print(f'Global Bloom exports: {len(results)} native MP4 jobs PASS; accepted/candidate/package pixels identical')
 
 
 def main():
@@ -178,6 +179,14 @@ def main():
             assert (regions[kind]['changed_pixels'] > 0) == (preset == 'Cinematic'), (case,kind)
         comparisons.append(dict(scene=name,preset=preset,changed_pixels=changed,
                                 mean_delta=float(delta.mean()),max_delta=int(delta.max()),regions=regions))
+    manual = []
+    if not args.baseline:
+        for scene in ['particles', 'fields', 'meshes', 'mixed']:
+            delta = np.abs(pixels(output/f'{scene}-Scientific-manual-on.png') - pixels(output/f'{scene}-Scientific-manual-off.png'))
+            changed = int(np.any(delta != 0, axis=2).sum())
+            assert changed > 0, (scene, 'manual Scientific Bloom has no measured effect')
+            manual.append(dict(scene=scene, changed_pixels=changed, max_delta=int(delta.max())))
+    report['manual_scientific_bloom'] = manual
     report.update(source_hashes_unchanged=hashes, packaged=args.package, comparisons=comparisons,
                   godot=subprocess.check_output([args.godot, '--version'], text=True).strip())
     if args.compare_with:

@@ -1,0 +1,10 @@
+{
+  "checks": 5,
+  "failures": [],
+  "phase": "named",
+  "state": [
+    "Scientific",
+    true,
+    0.740000009536743
+  ]
+}

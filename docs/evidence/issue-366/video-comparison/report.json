@@ -1,0 +1,323 @@
+{
+  "runs": [
+    {
+      "name": "accepted-forward_plus-Cinematic",
+      "pixel_hashes": [
+        "fb6c383778e5e62f69b7c481c300a43996a41aa720c0f7e4d25b6a3ae89d6639",
+        "627ac6a2c8bcdceba435453a5754e8c1fa3c45207830ab6d9c55ca1049d85b95",
+        "a7eee41619a33a6304a872f690b2853d03120abce53edef689d628ed35ec5879"
+      ],
+      "ffprobe": {
+        "width": 640,
+        "height": 360,
+        "avg_frame_rate": "4/1",
+        "nb_frames": "3"
+      },
+      "progress": {
+        "current_frame": 3,
+        "elapsed_seconds": 0.932,
+        "encoder_pid": -1,
+        "intermediate_directory": "/home/Nozba/Codex/Wavez/bloom-366/exports-final/accepted-forward_plus-Cinematic",
+        "message": "Saved /home/Nozba/Codex/Wavez/bloom-366/exports-final/accepted-forward_plus-Cinematic/result.mp4",
+        "output_path": "/home/Nozba/Codex/Wavez/bloom-366/exports-final/accepted-forward_plus-Cinematic/result.mp4",
+        "renderer_pid": 72185,
+        "stage": "complete",
+        "total_frames": 3
+      },
+      "metrics": {
+        "elapsed_ms": 932,
+        "encoding_ms": 143,
+        "first_frame_ms": 680,
+        "open_ms": 417.235,
+        "png_ms": 64.976,
+        "profile": {
+          "counters": {},
+          "stages": {}
+        },
+        "ready_ms": 504,
+        "render_readback_ms": 92.985,
+        "runtime": {
+          "arguments": [
+            "--wavez-render-job=/home/Nozba/Codex/Wavez/bloom-366/exports-final/accepted-forward_plus-Cinematic/job.json"
+          ],
+          "executable": "/home/Nozba/Codex/Wavez/.tools/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+          "gpu": "NVIDIA GeForce RTX 3070 Ti",
+          "packaged": false,
+          "release": false,
+          "rendering_driver": "vulkan",
+          "rendering_method": "forward_plus"
+        },
+        "sample_ms": 62.117999999999995,
+        "snapshot_identity_ms": 0,
+        "worker_identity_ms": 4.338
+      }
+    },
+    {
+      "name": "candidate-forward_plus-Cinematic",
+      "pixel_hashes": [
+        "fb6c383778e5e62f69b7c481c300a43996a41aa720c0f7e4d25b6a3ae89d6639",
+        "627ac6a2c8bcdceba435453a5754e8c1fa3c45207830ab6d9c55ca1049d85b95",
+        "a7eee41619a33a6304a872f690b2853d03120abce53edef689d628ed35ec5879"
+      ],
+      "ffprobe": {
+        "width": 640,
+        "height": 360,
+        "avg_frame_rate": "4/1",
+        "nb_frames": "3"
+      },
+      "progress": {
+        "current_frame": 3,
+        "elapsed_seconds": 0.9,
+        "encoder_pid": -1,
+        "intermediate_directory": "/home/Nozba/Codex/Wavez/bloom-366/exports-final/candidate-forward_plus-Cinematic",
+        "message": "Saved /home/Nozba/Codex/Wavez/bloom-366/exports-final/candidate-forward_plus-Cinematic/result.mp4",
+        "output_path": "/home/Nozba/Codex/Wavez/bloom-366/exports-final/candidate-forward_plus-Cinematic/result.mp4",
+        "renderer_pid": 72626,
+        "stage": "complete",
+        "total_frames": 3
+      },
+      "metrics": {
+        "elapsed_ms": 900,
+        "encoding_ms": 136,
+        "first_frame_ms": 658,
+        "open_ms": 401.925,
+        "png_ms": 63.035000000000004,
+        "profile": {
+          "counters": {},
+          "stages": {}
+        },
+        "ready_ms": 486,
+        "render_readback_ms": 90.72200000000001,
+        "runtime": {
+          "arguments": [
+            "--wavez-render-job=/home/Nozba/Codex/Wavez/bloom-366/exports-final/candidate-forward_plus-Cinematic/job.json"
+          ],
+          "executable": "/home/Nozba/Codex/Wavez/.tools/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+          "gpu": "NVIDIA GeForce RTX 3070 Ti",
+          "packaged": false,
+          "release": false,
+          "rendering_driver": "vulkan",
+          "rendering_method": "forward_plus"
+        },
+        "sample_ms": 62.134,
+        "snapshot_identity_ms": 0,
+        "worker_identity_ms": 5.561
+      }
+    },
+    {
+      "name": "package-forward_plus-Cinematic",
+      "pixel_hashes": [
+        "fb6c383778e5e62f69b7c481c300a43996a41aa720c0f7e4d25b6a3ae89d6639",
+        "627ac6a2c8bcdceba435453a5754e8c1fa3c45207830ab6d9c55ca1049d85b95",
+        "a7eee41619a33a6304a872f690b2853d03120abce53edef689d628ed35ec5879"
+      ],
+      "ffprobe": {
+        "width": 640,
+        "height": 360,
+        "avg_frame_rate": "4/1",
+        "nb_frames": "3"
+      },
+      "progress": {
+        "current_frame": 3,
+        "elapsed_seconds": 0.845,
+        "encoder_pid": -1,
+        "intermediate_directory": "/home/Nozba/Codex/Wavez/bloom-366/exports-final/package-forward_plus-Cinematic",
+        "message": "Saved /home/Nozba/Codex/Wavez/bloom-366/exports-final/package-forward_plus-Cinematic/result.mp4",
+        "output_path": "/home/Nozba/Codex/Wavez/bloom-366/exports-final/package-forward_plus-Cinematic/result.mp4",
+        "renderer_pid": 72987,
+        "stage": "complete",
+        "total_frames": 3
+      },
+      "metrics": {
+        "elapsed_ms": 845,
+        "encoding_ms": 137,
+        "first_frame_ms": 607,
+        "open_ms": 368.794,
+        "png_ms": 61.244,
+        "profile": {
+          "counters": {},
+          "stages": {}
+        },
+        "ready_ms": 443,
+        "render_readback_ms": 84.33300000000001,
+        "runtime": {
+          "arguments": [
+            "--wavez-render-job=/home/Nozba/Codex/Wavez/bloom-366/exports-final/package-forward_plus-Cinematic/job.json"
+          ],
+          "executable": "/home/Nozba/Codex/Wavez/bloom-366/exports-final/WAVEZ.x86_64",
+          "gpu": "NVIDIA GeForce RTX 3070 Ti",
+          "packaged": true,
+          "release": true,
+          "rendering_driver": "vulkan",
+          "rendering_method": "forward_plus"
+        },
+        "sample_ms": 58.304,
+        "snapshot_identity_ms": 0,
+        "worker_identity_ms": 4.519
+      }
+    },
+    {
+      "name": "accepted-forward_plus-Scientific",
+      "pixel_hashes": [
+        "c28698a216866473d28a41dd7f5c20c19421ea9797ae590d3d1010ca54791c7c",
+        "27fb71756ab1eccb9d11a112550230e1ef08e2d71349a66f31f3f0698ed05473",
+        "15f79d7e19c3b1435064f7c2b7cb5dd3546330e1e154dff10022729c5479d98b"
+      ],
+      "ffprobe": {
+        "width": 640,
+        "height": 360,
+        "avg_frame_rate": "4/1",
+        "nb_frames": "3"
+      },
+      "progress": {
+        "current_frame": 3,
+        "elapsed_seconds": 0.825,
+        "encoder_pid": -1,
+        "intermediate_directory": "/home/Nozba/Codex/Wavez/bloom-366/exports-final/accepted-forward_plus-Scientific",
+        "message": "Saved /home/Nozba/Codex/Wavez/bloom-366/exports-final/accepted-forward_plus-Scientific/result.mp4",
+        "output_path": "/home/Nozba/Codex/Wavez/bloom-366/exports-final/accepted-forward_plus-Scientific/result.mp4",
+        "renderer_pid": 73307,
+        "stage": "complete",
+        "total_frames": 3
+      },
+      "metrics": {
+        "elapsed_ms": 825,
+        "encoding_ms": 126,
+        "first_frame_ms": 623,
+        "open_ms": 388.96,
+        "png_ms": 20.561,
+        "profile": {
+          "counters": {},
+          "stages": {}
+        },
+        "ready_ms": 470,
+        "render_readback_ms": 87.706,
+        "runtime": {
+          "arguments": [
+            "--wavez-render-job=/home/Nozba/Codex/Wavez/bloom-366/exports-final/accepted-forward_plus-Scientific/job.json"
+          ],
+          "executable": "/home/Nozba/Codex/Wavez/.tools/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+          "gpu": "NVIDIA GeForce RTX 3070 Ti",
+          "packaged": false,
+          "release": false,
+          "rendering_driver": "vulkan",
+          "rendering_method": "forward_plus"
+        },
+        "sample_ms": 60.871,
+        "snapshot_identity_ms": 0,
+        "worker_identity_ms": 4.15
+      }
+    },
+    {
+      "name": "candidate-forward_plus-Scientific",
+      "pixel_hashes": [
+        "c28698a216866473d28a41dd7f5c20c19421ea9797ae590d3d1010ca54791c7c",
+        "27fb71756ab1eccb9d11a112550230e1ef08e2d71349a66f31f3f0698ed05473",
+        "15f79d7e19c3b1435064f7c2b7cb5dd3546330e1e154dff10022729c5479d98b"
+      ],
+      "ffprobe": {
+        "width": 640,
+        "height": 360,
+        "avg_frame_rate": "4/1",
+        "nb_frames": "3"
+      },
+      "progress": {
+        "current_frame": 3,
+        "elapsed_seconds": 0.838,
+        "encoder_pid": -1,
+        "intermediate_directory": "/home/Nozba/Codex/Wavez/bloom-366/exports-final/candidate-forward_plus-Scientific",
+        "message": "Saved /home/Nozba/Codex/Wavez/bloom-366/exports-final/candidate-forward_plus-Scientific/result.mp4",
+        "output_path": "/home/Nozba/Codex/Wavez/bloom-366/exports-final/candidate-forward_plus-Scientific/result.mp4",
+        "renderer_pid": 73615,
+        "stage": "complete",
+        "total_frames": 3
+      },
+      "metrics": {
+        "elapsed_ms": 837,
+        "encoding_ms": 128,
+        "first_frame_ms": 633,
+        "open_ms": 405.137,
+        "png_ms": 19.689,
+        "profile": {
+          "counters": {},
+          "stages": {}
+        },
+        "ready_ms": 484,
+        "render_readback_ms": 82.154,
+        "runtime": {
+          "arguments": [
+            "--wavez-render-job=/home/Nozba/Codex/Wavez/bloom-366/exports-final/candidate-forward_plus-Scientific/job.json"
+          ],
+          "executable": "/home/Nozba/Codex/Wavez/.tools/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64",
+          "gpu": "NVIDIA GeForce RTX 3070 Ti",
+          "packaged": false,
+          "release": false,
+          "rendering_driver": "vulkan",
+          "rendering_method": "forward_plus"
+        },
+        "sample_ms": 59.409,
+        "snapshot_identity_ms": 0,
+        "worker_identity_ms": 4.082
+      }
+    },
+    {
+      "name": "package-forward_plus-Scientific",
+      "pixel_hashes": [
+        "c28698a216866473d28a41dd7f5c20c19421ea9797ae590d3d1010ca54791c7c",
+        "27fb71756ab1eccb9d11a112550230e1ef08e2d71349a66f31f3f0698ed05473",
+        "15f79d7e19c3b1435064f7c2b7cb5dd3546330e1e154dff10022729c5479d98b"
+      ],
+      "ffprobe": {
+        "width": 640,
+        "height": 360,
+        "avg_frame_rate": "4/1",
+        "nb_frames": "3"
+      },
+      "progress": {
+        "current_frame": 3,
+        "elapsed_seconds": 0.784,
+        "encoder_pid": -1,
+        "intermediate_directory": "/home/Nozba/Codex/Wavez/bloom-366/exports-final/package-forward_plus-Scientific",
+        "message": "Saved /home/Nozba/Codex/Wavez/bloom-366/exports-final/package-forward_plus-Scientific/result.mp4",
+        "output_path": "/home/Nozba/Codex/Wavez/bloom-366/exports-final/package-forward_plus-Scientific/result.mp4",
+        "renderer_pid": 73925,
+        "stage": "complete",
+        "total_frames": 3
+      },
+      "metrics": {
+        "elapsed_ms": 784,
+        "encoding_ms": 126,
+        "first_frame_ms": 587,
+        "open_ms": 361.688,
+        "png_ms": 17.97,
+        "profile": {
+          "counters": {},
+          "stages": {}
+        },
+        "ready_ms": 437,
+        "render_readback_ms": 83.02099999999999,
+        "runtime": {
+          "arguments": [
+            "--wavez-render-job=/home/Nozba/Codex/Wavez/bloom-366/exports-final/package-forward_plus-Scientific/job.json"
+          ],
+          "executable": "/home/Nozba/Codex/Wavez/bloom-366/exports-final/WAVEZ.x86_64",
+          "gpu": "NVIDIA GeForce RTX 3070 Ti",
+          "packaged": true,
+          "release": true,
+          "rendering_driver": "vulkan",
+          "rendering_method": "forward_plus"
+        },
+        "sample_ms": 57.849,
+        "snapshot_identity_ms": 0,
+        "worker_identity_ms": 6.13
+      }
+    }
+  ],
+  "source_sha256_unchanged": "ea2712ae9c4664e72f59521be6caf902f51f2793f9ca5adf172f8fe8929980e5",
+  "strict_verified_records": 9,
+  "all_accepted_candidate_package_pixels_identical": true,
+  "worker_sha256": "2a31f59b206859adf2a1f73c717a2bab037602ef4ce7b12b268817116f4fcc46",
+  "limitations": [
+    "640x360; 3 frames per job; v1 jobs; no long/4K or selection-aware v2 video matrix"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "checks": 2,
+  "failures": [],
+  "phase": "restart",
+  "state": [
+    "Temperature",
+    false,
+    0.639999985694885
+  ]
+}

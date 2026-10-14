@@ -1,4 +1,62 @@
-# Scene-wide Bloom — issue #306
+# Scene-wide Bloom and viewing preferences
+
+On a fresh profile, Wavez starts with **Scientific** selected and Bloom **off**.
+Use **View → Global effects → Enable Bloom** to enable or disable the one
+scene-wide effect, and **Bloom** to adjust its intensity in any viewing preset.
+The slider remains editable while Bloom is off. It covers **0–2**, in **0.02**
+steps. Cinematic's fresh default is **on at 0.30**, exactly 15% of the maximum;
+Scientific, Temperature, Density, Velocity and Minimal / Presentation start off,
+with 0.30 ready if enabled. Visible glow depends on scene brightness/materials.
+
+Each viewing preset remembers its own manual Bloom on/off and intensity.
+Selecting another preset recalls that preset's saved pair; it does not copy or
+reset the pair you changed. These are preset preferences for the same global
+Environment effect, not particle/field/mesh Bloom controls. Enabling Bloom does
+not change the viewing-preset name, Point rendering, mappings, backdrop or fog.
+Other preset actions retain their existing meanings. Temperature, Density and
+Velocity select their corresponding channel when available in an opened capture,
+without reapplying Bloom or environment defaults; unavailable channels retain
+the normal capture mapping fallback.
+
+The selected preset and all six Bloom pairs persist across restarts, File →
+Close File and opening other WVZ captures. Application preferences live in
+`user://view_preferences.json`, separately from captures and view recipes.
+The complete bounded file is validated before use; writes replace it atomically.
+Missing preferences use fresh defaults. Invalid data leaves a loaded profile
+unchanged, or uses defaults on startup, with an explanation in Global effects.
+A failed save keeps the current session's choices and reports that they were
+not saved. To deliberately reset these choices, close Wavez and remove only
+that file; the next launch uses the defaults above. Reset Camera does not reset
+viewing preferences.
+
+An explicitly loaded view preset or scientific inspection applies its rendering
+settings to the current session. It can keep Scientific with Bloom on, or
+Cinematic with Bloom off. It does not rewrite application preferences merely
+because it was loaded or restored. Closing/opening a capture preserves that
+session override. A later manual preset selection recalls application preferences;
+a manual Bloom edit saves the current preset's resulting pair. Restart recalls
+the last manual selection. Ordinary capture opening never loads a presentation
+recipe implicitly. Video/image snapshot restoration and offline workers do not
+write application preferences.
+
+New portable view presets include the viewing-preset name. For a partial recipe
+that supplies only Point rendering (`clean_view`), the name follows that explicit
+representation (Scientific/Cinematic), without inferring it from Bloom. Other
+omitted settings remain unchanged. Saved environments remain authoritative for
+actual pixels; stale native slider values cannot override their Bloom intensity.
+
+Forward+ Vulkan is the sole supported backend. Unsupported renderer launches
+are refused before preferences are used; Compatibility is not a supported Bloom
+fallback. No per-category passes, shaders or scientific payload changes are
+introduced. See [renderer requirements](RENDERER_REQUIREMENTS.md),
+[portable view presets](WAVEZ_VIEW_PRESETS.md) and
+[issue #366 review evidence](evidence/issue-366/README.md).
+
+## Historical issue #306 record
+
+The following report retains its original defaults, policy, validation and
+review-time wording. The current preference behavior above supersedes its
+coupling between Bloom and preset identity; historical evidence is unchanged.
 
 Wavez retains one **View → Global effects → Bloom** slider. It changes the
 existing native Environment glow intensity for the complete scene. Cinematic
