@@ -75,7 +75,7 @@ func run() -> void:
 	viewer.selection_controller = {"state":{"definitions":[{"key":"test"}]}}
 	check(dialog.inspection_advanced.visible and not dialog.inspection_sidecars.button_pressed, "Selections do not hide or enable optional inspection records")
 	viewer.selection_controller = null
-	check(dialog.rate.get_parent().get_child(dialog.rate.get_index() - 1).text == "Playback rate" and dialog.rate.tooltip_text.contains("Simulation-time units") and dialog.rate.tooltip_text.contains("Lower") and dialog.rate.tooltip_text.contains("higher"), "Playback rate label explains the unchanged time-unit semantics")
+	check(dialog.rate.get_parent().get_child(dialog.rate.get_index() - 1).text == "Playback rate" and dialog.rate.tooltip_text.is_empty() and dialog.rate.suffix == "×", "Playback rate label and multiplier remain visible without a tooltip")
 	check(dialog.estimate.get_parent() == dialog.summary_group.body and dialog.message.get_parent() == dialog.summary_group.body and dialog.progress.get_parent() == dialog.summary_group.body, "Estimate, status and progress share the lower summary")
 	check(dialog.range_choice.get_item_text(0) == "Full" and dialog.range_choice.get_item_text(1) == "Current position to end" and dialog.range_choice.get_item_text(2) == "Custom", "Range labels retain their option indices")
 	check(dialog.start.tooltip_text.is_empty() and dialog.end.tooltip_text.is_empty(), "Start/End controls have no unsolicited tooltips")
@@ -157,11 +157,15 @@ func run() -> void:
 	check(dialog.message.get_parent() == dialog.status_scroll and dialog.message.text.contains("Rendering frame 5 / 30") and not dialog.message.text.contains("Output:") and not dialog.message.text.contains("Temporary files:") and dialog.summary_group.get_global_rect().end.y <= dialog.start_button.get_global_rect().position.y, "Active progress omits duplicate and non-actionable paths")
 	check(scroll.size.y >= 72 and (dialog.message.get_global_rect().end.y <= dialog.status_scroll.get_global_rect().end.y or dialog.status_scroll.get_v_scroll_bar().visible), "Minimum-size active dialog retains settings access and readable status")
 	picture(dialog, "video-groups-active")
+	for control in [dialog.message, dialog.progress, dialog.status_scroll, dialog.background_button, dialog.start_button]:
+		check(control.get_tooltip().is_empty(), "Active status/action has no tooltip")
 	dialog.request_cancel_export()
 	for i in 4: await process_frame
 	check(dialog.cancel_confirmation.dialog_text == "Cancel video export?" and dialog.cancel_confirmation.get_ok_button().text == "Yes" and dialog.cancel_confirmation.get_cancel_button().text == "No", "Cancel confirmation uses concise question and Yes/No actions")
 	check(dialog.cancel_confirmation.get_cancel_button().has_focus(), "No is default focus")
 	check(dialog.cancel_confirmation.get_ok_button().size.x >= 96 and dialog.cancel_confirmation.get_cancel_button().size.x >= 96, "Both cancellation actions render at comfortable width")
+	for control in [dialog.cancel_confirmation.get_ok_button(), dialog.cancel_confirmation.get_cancel_button()]:
+		check(control.get_tooltip().is_empty(), "Cancellation action has no tooltip")
 	picture(dialog.cancel_confirmation, "video-cancel-confirmation")
 	dialog.cancel_confirmation.hide()
 	preload("res://video/test_worker_process.gd").stop(dialog); dialog._sync_action_buttons()

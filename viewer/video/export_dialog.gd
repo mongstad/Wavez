@@ -11,7 +11,6 @@ var progress_presentation := ProgressDetails.new()
 const TitledGroup = preload("res://ui/shell/titled_group.gd")
 const Disclosure = preload("res://ui/components/disclosure.gd")
 const Clock = preload("res://ui/shell/time_seek_popover.gd")
-const FloatText = preload("res://ui/components/float64_text.gd")
 const TimeSpin = preload("res://video/export_time_spin.gd")
 var viewer
 var timeline
@@ -85,7 +84,7 @@ func _ready() -> void:
 	var header := HBoxContainer.new(); box.add_child(header)
 	var heading := Label.new(); heading.text = "Export Video"; heading.theme_type_variation = "PanelTitle"
 	heading.size_flags_horizontal = Control.SIZE_EXPAND_FILL; heading.mouse_filter = Control.MOUSE_FILTER_IGNORE; header.add_child(heading)
-	header_close = Button.new(); header_close.theme_type_variation = "IconAction"; header_close.tooltip_text = "Close video export"
+	header_close = Button.new(); header_close.theme_type_variation = "IconAction"
 	header_close.set_meta("shell_close", true)
 	header_close.custom_minimum_size = Vector2(32,32); header_close.pressed.connect(hide); header.add_child(header_close)
 	header.gui_input.connect(func(event: InputEvent):
@@ -129,14 +128,11 @@ func _ready() -> void:
 	)
 	rate = number("Playback rate", 1, .000001, 1e12, .000001, video_fields)
 	rate.suffix = "×"
-	rate.tooltip_text = "Simulation-time units per exported video second. Lower values play slower and sample time more closely; higher values play faster."
 	camera_mode = choice("Camera", ["Current camera locked", "Current camera + orbit"], camera_fields)
 	orbit = number("Orbit • radians / video second", .08, -10, 10, .001, camera_fields)
 	rendering = choice("Rendering", ["Current state", "Cinematic preset", "Scientific preset"], presentation_fields)
 	overlays = check("Overlays", "Include enabled viewport legends", presentation_fields)
-	overlays.tooltip_text = "Include enabled particle, field and mesh viewport legends. Application controls and Selection/Analysis overlays are never exported."
 	trails = check("Trails", "Include recorded history", presentation_fields)
-	trails.tooltip_text = "Scientific rendering suppresses trails, matching the interactive viewer."
 	quality = choice("H.264 quality", ["High • CRF 18", "Balanced • CRF 21", "Compact • CRF 25"], output_fields)
 	var label := Label.new(); label.text = "Output MP4"; output_fields.add_child(label)
 	var row := HBoxContainer.new(); output_fields.add_child(row)
@@ -425,7 +421,6 @@ func update_estimate() -> void:
 	var count := Job.frame_total({"start_time":start_time, "end_time":end_time, "fps":fps.value, "playback_rate":rate.value})
 	var gib := float(count) * width.value * height.value * 4 / pow(1024, 3)
 	estimate.text = "Duration: %s · %s frames\nTemporary storage: %.2f GiB" % [Clock.format_time(count/fps.value, true, 3), frame_count_text(count), gib]
-	estimate.tooltip_text = "Video duration: %s seconds at %s×. Export processing time is reported separately in job status." % [FloatText.format_value(count/fps.value), FloatText.format_value(rate.value)]
 
 func start_export() -> void:
 	if pid > 0 or timeline == null: return

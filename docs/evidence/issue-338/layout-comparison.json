@@ -1,0 +1,11 @@
+{
+  "baseline": "8b0ffa83bcea1b7fa9b6827db4bc8c6c5065d547",
+  "candidate_version": "v0.1.0.112",
+  "source_ui_pixel_identity": {
+    "dark-700.png": true,
+    "light-700.png": true,
+    "dark-560.png": true,
+    "light-560.png": true
+  },
+  "meaning": "Unhovered root-viewport captures have identical decoded pixels at both dialog sizes and themes."
+}

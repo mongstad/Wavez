@@ -48,7 +48,7 @@ timestamps when opened, refreshed, focused, or accepted with unchanged Enter/Tab
 Fractional elapsed endpoints display the nearest whole second (ties toward the later
 second), capped at the last whole second within the simulation duration. **≈**
 marks an approximate display, and a visible **Exact range** line shows the interval that
-will actually be exported. Tooltips also give the precise seconds. In a zero-origin
+will actually be exported. In a zero-origin
 capture, a range such as `[30.0003, 60.0003)` still exports that exact interval; the controls show
 **30 s** / **60 s**, clocks **≈00:30** / **≈01:00**, and the exact range is disclosed.
 
@@ -81,7 +81,8 @@ Equal exact endpoints still export one frame.
 The exact model and `set_range_times(first, last)` API retain **recorded source
 timestamps**, with valid restored fractions preserved and invalid ranges clamped
 to source extent/order. The controls/clocks and **Exact range** line use elapsed
-seconds. Start/End editors, step arrows and clock readouts have no tooltips;
+seconds. The Video Export dialog has no hover tooltips, including nested numeric
+editors, step arrows, dropdowns, summary/status surfaces and action buttons;
 precise fractional endpoints remain visible in the **Exact range** line.
 A capture spanning recorded times -1.125 to 3601.125 therefore displays elapsed
 0 to 3602.25, without changing export timestamps. Typing elapsed 30 selects
@@ -96,9 +97,8 @@ multiplier. The numeric timing is unchanged.
 The summary shows video duration and frame count, for example **Duration: 03:30 ·
 6,300 frames** for 210 seconds at 30 FPS and 1×. Duration comes from the existing
 frame count divided by FPS, including its final-frame convention. Fractional
-durations display up to milliseconds; **≈** marks rounding, and the tooltip gives
-the precise duration in seconds. Export processing time remains separate in job
-status. Summary/frame calculations always use the exact endpoint model.
+durations display up to milliseconds; **≈** marks rounding. Export processing
+time remains separate in job status. Summary/frame calculations always use the exact endpoint model.
 See [issue #323 range validation](evidence/issue-323/range-validation/README.md) for focused
 source/package comparisons and owner-review limits.
 

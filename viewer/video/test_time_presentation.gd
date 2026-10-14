@@ -74,6 +74,36 @@ func hover_time(control: Control, point: Vector2, expected: Control, label: Stri
 	check(not hints.is_empty() if should_show else hints.is_empty(), label + ": editor/control/ancestor tooltip contract")
 	check(not popups.is_empty() if should_show else popups.is_empty(), label + ": visible delayed popup contract")
 	hover_records.append({"target":label,"hovered":hovered.get_class() if hovered != null else "none","ancestors":chain,"popups":popups})
+func dialog_controls(node: Node) -> Array[Control]:
+	var result: Array[Control] = []
+	if node is Control: result.append(node)
+	for child in node.get_children(): result.append_array(dialog_controls(child))
+	return result
+
+func review_dialog_hover(dialog, label: String):
+	var saved: Dictionary = dialog.settings()
+	var scroll: ScrollContainer = dialog.fields.get_parent()
+	var controls := dialog_controls(dialog.surface)
+	for control in controls:
+		check(control.get_tooltip().is_empty(), label+": empty tooltip on "+str(control.get_path()))
+		if control is OptionButton:
+			for index in control.item_count:
+				check(control.get_popup().get_item_tooltip(index).is_empty(), label+": empty dropdown item hint")
+		if not control.is_visible_in_tree(): continue
+		# Sweep every leaf plus numeric arrows; parents are audited above and by
+		# hover_time's inherited-hint chain. Keep native pointer routing intact.
+		if control.get_child_count() > 0 and not control is SpinBox and not control is OptionButton: continue
+		if dialog.fields.is_ancestor_of(control):
+			scroll.ensure_control_visible(control); await settle()
+			if not scroll.get_global_rect().encloses(control.get_global_rect()): continue
+		await hover_time(control, control.get_global_rect().get_center(), null, label+"-"+str(control.get_path()))
+		if control is SpinBox:
+			var rect := control.get_global_rect()
+			await hover_time(control, Vector2(rect.end.x-8,rect.position.y+rect.size.y*.25), control, label+"-up")
+			await hover_time(control, Vector2(rect.end.x-8,rect.position.y+rect.size.y*.75), control, label+"-down")
+	check(dialog.settings()==saved, label+": complete hover sweep preserves settings")
+	picture("dialog-hover-"+label)
+
 func review_time_hover(dialog, label: String):
 	var saved: Dictionary = dialog.settings()
 	var scroll: ScrollContainer = dialog.fields.get_parent()
@@ -93,7 +123,7 @@ func review_time_hover(dialog, label: String):
 	scroll.ensure_control_visible(dialog.range_choice); await settle()
 	await hover_time(dialog.range_choice,dialog.range_choice.get_global_rect().get_center(),dialog.range_choice,label+"-Mode")
 	check(dialog.settings() == saved, label + ": hover preserves exact range and job settings")
-	check(not dialog.rate.tooltip_text.is_empty() and not dialog.estimate.tooltip_text.is_empty(),label+": existing speed/summary tooltips retained")
+	check(dialog.rate.tooltip_text.is_empty() and dialog.estimate.tooltip_text.is_empty(),label+": speed/summary tooltips removed")
 	scroll.ensure_control_visible(dialog.end); await settle()
 	picture("tooltip-free-"+label)
 func review_controls(dialog, source: String):
@@ -109,8 +139,16 @@ func review_controls(dialog, source: String):
 	check(dialog.start.value==30 and dialog.end.value==60,"Fractional endpoints project to whole seconds")
 	check(dialog.start_clock.text=="≈00:30" and dialog.end_clock.text=="≈01:00" and dialog.precise_range.visible and dialog.precise_range.text.contains("00:30.0003") and dialog.precise_range.text.contains("01:00.0003"),"Exact fractional interval is visibly disclosed")
 	check(not dialog.start.get_line_edit().text.contains(".") and not dialog.end.get_line_edit().text.contains("."),"Time controls have no decimal places")
-	if source=="scene":picture("fractional-preserved")
-	if source=="scene" and baseline:
+	if source=="scene":
+		picture("fractional-preserved")
+		if baseline:
+			var scroll: ScrollContainer = dialog.fields.get_parent()
+			scroll.ensure_control_visible(dialog.rate); await settle()
+			await hover_time(dialog.rate,dialog.rate.get_global_rect().get_center(),null,"before-playback-rate",true)
+			picture("before-playback-rate-tooltip")
+			hover_records.append({"target":"before-summary", "hint":dialog.estimate.get_tooltip()})
+			picture("before-summary-tooltip")
+	if source=="scene" and baseline and not dialog.start.get_tooltip().is_empty():
 		await hover_time(dialog.start.get_line_edit(),dialog.start.get_line_edit().get_global_rect().get_center(),dialog.start.get_line_edit(),"accepted-Start-editor",true)
 		picture("accepted-time-tooltip")
 		var rect: Rect2 = dialog.start.get_global_rect()
@@ -123,7 +161,11 @@ func review_controls(dialog, source: String):
 				check(dialog.precise_range.get_global_rect().end.y<=dialog.start_button.get_global_rect().position.y,"Exact fractional interval clears actions at "+str(dimensions))
 				check(dialog.precise_range.get_global_rect().end.x<=dialog.summary_group.get_global_rect().end.x,"Exact fractional interval wraps within summary")
 				picture("fractional-"+("light" if light else "dark")+"-"+str(dimensions.x))
-				if not baseline: await review_time_hover(dialog,("light" if light else "dark")+"-"+str(dimensions.x))
+				if not baseline:
+					await review_time_hover(dialog,("light" if light else "dark")+"-"+str(dimensions.x))
+					dialog.inspection_advanced.set_expanded(true); await settle()
+					await review_dialog_hover(dialog,("light" if light else "dark")+"-"+str(dimensions.x))
+					dialog.inspection_advanced.set_expanded(false)
 		dialog.size=Vector2i(700,650);await settle()
 	dialog.hide();dialog.open();await settle()
 	check(dialog.settings()==saved,"Opening Custom preserves exact selection and output settings")
@@ -208,7 +250,7 @@ func record(name: String, dialog):
 	records[name]=data
 func run():
 	output=OS.get_cmdline_user_args()[0];baseline=OS.get_cmdline_user_args().size()>1
-	create_timer(100).timeout.connect(func():push_error("Time presentation audit timed out");quit(1))
+	create_timer(390).timeout.connect(func():push_error("Time presentation audit timed out");quit(1))
 	var config: Dictionary=JSON.parse_string(FileAccess.get_file_as_string(output.path_join("config.json")))
 	viewer=Viewer.new();viewer.scene_prebuffer_enabled=false;root.add_child(viewer);viewer.set_process(false)
 	viewer.shell.edge_reveal.set_process(false);await settle()
@@ -297,6 +339,15 @@ func run():
 		else: check(dialog.settings().end_time==dialog.settings().start_time,"Invalid restored End is constrained before export")
 		exact_range(dialog,dialog.settings().start_time,dialog.settings().start_time+.75);dialog.pid=preload("res://video/test_worker_process.gd").start();dialog._sync_action_buttons()
 		check(not dialog.start.editable and not dialog.end.editable and dialog.range_choice.disabled,"Active export locks nested seconds editors")
+		if source=="scene" and not baseline:
+			for light in [false,true]:
+				viewer.shell.appearance.light=light;viewer.shell.appearance.apply()
+				for dimensions in [Vector2i(700,650),Vector2i(560,360)]:
+					dialog.size=dimensions;await settle()
+					await hover_time(dialog.start_button,dialog.start_button.get_global_rect().get_center(),dialog.start_button,"active-cancel")
+					await hover_time(dialog.background_button,dialog.background_button.get_global_rect().get_center(),dialog.background_button,"active-background")
+					for control in dialog_controls(dialog.surface): check(control.get_tooltip().is_empty(),"Active dialog control hint empty")
+					picture("active-"+("light" if light else "dark")+"-"+str(dimensions.x))
 		preload("res://video/test_worker_process.gd").stop(dialog);dialog._sync_action_buttons()
 		check(dialog.start.editable and dialog.end.editable and not dialog.range_choice.disabled,"Idle custom range restores editor states")
 		dialog.range_choice.select(0);dialog.update_range();dialog.pid=preload("res://video/test_worker_process.gd").start();dialog._sync_action_buttons();preload("res://video/test_worker_process.gd").stop(dialog);dialog._sync_action_buttons()
