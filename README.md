@@ -42,8 +42,6 @@ conclusions.
   **Particles / Fields / Meshes** interface.
 - Inspect scalar patterns with scientific colormaps and legends, field ranges,
   opacity controls and slices.
-- Inspect experimental [regional spectra](docs/SPATIAL_SPECTRUM.md) and
-  [spectral band maps](docs/SPATIAL_BAND_MAP.md) from verified source samples.
 - Play and seek recorded time; move freely through the scene or use camera orbit.
 - Export viewport images and deterministic video of a chosen time range and view.
 
@@ -102,6 +100,10 @@ Costs vary with resolution, channel/particle count, recording cadence, playback
 speed and cache settings; preparation can still limit playback on a fast GPU.
 
 ## Roadmap
+
+Spectral Mode is experimental and continues on the dedicated
+[`spectral` branch](https://github.com/mongstad/Wavez/tree/spectral).
+Production integration requires a separate owner decision.
 
 <img width="2172" height="724" alt="WAVEZ Roadmap_ Neon Future Panels" src="https://github.com/user-attachments/assets/4be3db3d-cfdb-481f-be08-c17a428bd213" />
 

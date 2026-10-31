@@ -1,61 +1,15 @@
 # Current status
 
-Issue #417 proposes candidate **v0.1.0.117**, based on accepted
-**v0.1.0.116** / owner-merged PR #416
-(`1afe36a3c31de5b5ba991e676e7a9ad856b36381`). **Tools → Spectral band map**
-adds explicit selected-native-record preparation and an owned, verified cache
-using the existing transactional analysis result store. At most eight maps are
-published atomically. Replay shows a map only at its exact prepared native time
-after the ordinary scene commits; missing or intermediate times hide the plane
-with an unavailable label. Spectral readiness neither gates playback nor extends
-the teal prepared timeline. The accepted single-time pinned map remains available.
-WVZ1/SWSS, scientific normalization and ordinary export contracts are unchanged.
-Owner review is pending. See [the workflow and limits](SPATIAL_BAND_MAP.md) and
-[focused evidence and owner checks](evidence/issue-417/README.md).
-Historical #135/#413/#415 review records below remain as written.
+Issue #421 proposes v0.1.0.118, restoring application behavior from PR #409
+(`681a46f8f8473ee6b5323ec4af71ada883183077`). Owner review is pending.
+Spectral functionality and its historical evidence remain on the protected
+`spectral` branch. The unrelated PR #420 README roadmap update is retained.
+See [rollback evidence](evidence/issue-421/README.md).
 
-Issue #415 proposes candidate **v0.1.0.116**, based on accepted
-**v0.1.0.115** / owner-merged PR #414
-(`40b00adb745e3a813069e148f6ccd8dd6e1fd147`). **Tools → Spectral band map**
-places a bounded plane of regional 3D-window band-power measurements in the
-viewport at one verified native sample. The original scalar remains independently
-viewable. Measured centers, unavailable supports, numerical units and unresolved
-low-frequency support are explicit; colors are display values only. One source
-verification/decode serves each batch through the existing analysis worker.
-No WVZ1/SWSS, exporter or playback-cache contract changes are proposed. Ordinary
-image/video exports exclude this transient map. Owner review is pending. See
-[the workflow and limits](SPATIAL_BAND_MAP.md) and
-[focused validation and owner checks](evidence/issue-415/README.md).
-The owner's first visual review confirmed the map, navigation, pinned time,
-image exclusion and numerical/support readouts. The same PR's
-[dialog follow-up](evidence/issue-415/owner-review-follow-up.md) addresses menu
-access and verifies active cancellation and intentional input retention.
-Historical research and review-time records below remain as written.
+After acceptance, new Spectral feature branches originate from and target
+`spectral`; integration into `main` requires a separate owner decision.
+Experimental branch versioning is unchanged and requires separate policy.
 
-Issue #413 proposes candidate **v0.1.0.115**, based on accepted
-**v0.1.0.114** / owner-merged PR #412
-(`6867d21746190537ed67379c1a44c87b1708f4e1`). **Tools → Spatial spectrum**
-uses the existing owned analysis worker for a verified native scalar channel and
-complete source-grid region. Periodic Hann, weighted mean removal and a bounded
-radial power plot expose support, normalization and native-time provenance beside
-the ordinary viewport. Short-window leakage and unknown units remain explicit;
-there is no optical emission or physical energy interpretation. WVZ1/SWSS,
-Scientific/Cinematic rendering and playback preparation are unchanged. Owner
-review is pending. See [the numerical workflow](SPATIAL_SPECTRUM.md) and
-[focused implementation evidence](evidence/issue-413/README.md). Historical
-research and review-time records below remain as written.
-
-Issue #135 proposes research-only candidate **v0.1.0.114**, based on accepted
-**v0.1.0.113** / owner-merged PR #409
-(`681a46f8f8473ee6b5323ec4af71ada883183077`). The
-[Spectral Mode investigation](research/spectral-135/README.md) audits actual
-Model A captures, validates bounded offline Fourier experiments, and proposes
-a source-verified regional spectrum before any spectral renderer or observer
-implementation. The signed N192 reference is suitable; the newer energy-only
-capture cannot supply signed-field spectra. No production analysis/rendering,
-WVZ1/SWSS format or UI change is implemented. The usual BUILD increment is
-explicitly authorized for this research PR. Owner review is pending; historical
-reports and review-time wording below remain as written.
 
 Issue #366 proposes candidate **v0.1.0.113**, based on accepted **v0.1.0.112** /
 owner-merged PR #408 (`bbd7eda678d9b04d784428747b61517aa2817499`). Fresh profiles

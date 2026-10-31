@@ -25,13 +25,6 @@ viewer is rendering only on change; it does not wait for another input,
 compositor event or fullscreen exit. Both ordinary and selection-aware captures
 release the capture lock on completion or a reported failure.
 
-The transient **Spectral band map** plane and its pinned legend are also excluded
-from ordinary and selection-aware images. The source field uses its current
-visibility, including any explicit change through the map's **Show source field**
-control. Save Image does not enable a hidden reference field. Map visibility is
-restored after capture; the map is not included in image inspection state or
-offline video. See [the map contract](SPATIAL_BAND_MAP.md).
-
 The File Locations preference still writes directly to a configured Image
 Exports folder. Without one, Save Image uses the native folder picker and reuses
 that folder for the current session. An unavailable configured folder reports an

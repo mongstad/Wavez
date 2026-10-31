@@ -1,0 +1,119 @@
+[
+  {
+    "name": "import",
+    "command": [
+      "/home/Nozba/Codex/Wavez/Godot_v4.7.2-stable_linux.x86_64",
+      "--headless",
+      "--editor",
+      "--path",
+      "viewer",
+      "--import"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "preferences",
+    "command": [
+      "python",
+      "tools/validate_view_preferences.py",
+      "--godot",
+      "/home/Nozba/Codex/Wavez/Godot_v4.7.2-stable_linux.x86_64",
+      "--output",
+      "/tmp/wavez-421/preferences"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "shell",
+    "command": [
+      "python",
+      "tools/validate_viewer_shell.py",
+      "--godot",
+      "/home/Nozba/Codex/Wavez/Godot_v4.7.2-stable_linux.x86_64",
+      "--output-dir",
+      "/tmp/wavez-421/shell"
+    ],
+    "exit_code": 1
+  },
+  {
+    "name": "bloom",
+    "command": [
+      "python",
+      "tools/validate_global_bloom.py",
+      "--godot",
+      "/home/Nozba/Codex/Wavez/Godot_v4.7.2-stable_linux.x86_64",
+      "--output-dir",
+      "/tmp/wavez-421/bloom",
+      "--renderer",
+      "forward_plus"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "preset",
+    "command": [
+      "python",
+      "tools/validate_view_preset.py",
+      "--godot",
+      "/home/Nozba/Codex/Wavez/Godot_v4.7.2-stable_linux.x86_64",
+      "--output-dir",
+      "/tmp/wavez-421/preset"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "playback",
+    "command": [
+      "python",
+      "tools/validate_scene_playback.py",
+      "--godot",
+      "/home/Nozba/Codex/Wavez/Godot_v4.7.2-stable_linux.x86_64",
+      "--output-dir",
+      "/tmp/wavez-421/playback",
+      "--renderer",
+      "forward_plus"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "camera",
+    "command": [
+      "python",
+      "tools/validate_camera_tumble.py",
+      "--godot",
+      "/home/Nozba/Codex/Wavez/Godot_v4.7.2-stable_linux.x86_64",
+      "--output-dir",
+      "/tmp/wavez-421/camera",
+      "--renderer",
+      "forward_plus",
+      "--suite",
+      "navigation"
+    ],
+    "exit_code": 0
+  },
+  {
+    "name": "video",
+    "command": [
+      "python",
+      "tools/validate_video.py",
+      "--godot",
+      "/home/Nozba/Codex/Wavez/Godot_v4.7.2-stable_linux.x86_64",
+      "--output-dir",
+      "/tmp/wavez-421/video",
+      "--overlay-ui"
+    ],
+    "exit_code": 1
+  },
+  {
+    "name": "package",
+    "command": [
+      "python",
+      "tools/package_linux.py",
+      "--godot",
+      "/home/Nozba/Codex/Wavez/Godot_v4.7.2-stable_linux.x86_64",
+      "--output-dir",
+      "/tmp/wavez-421/package"
+    ],
+    "exit_code": 1
+  }
+]

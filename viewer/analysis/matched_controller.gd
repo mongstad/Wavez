@@ -78,7 +78,6 @@ func choose_prepare() -> void:
 
 func prepare_to(destination: String) -> void:
 	if preparing or pid > 0:status.text = "Finish or cancel current matched work first.";return
-	if temporal.jobs.is_spectral_operation(temporal.jobs.background_operation) and (temporal.jobs.background_pending or not temporal.jobs.background_cancel_id.is_empty()):status.text = "Finish or cancel the active spectral tool before preparing matched views.";return
 	var arguments := {"destination":destination,"opened_paths":temporal.durable.opened_paths.duplicate()}
 	for n in range(2):
 		var side: Dictionary = sides[n]
@@ -135,9 +134,7 @@ func launch_next() -> void:
 func cancel() -> void:
 	if (preparing or pid > 0) and viewer.session_log != null: viewer.session_log.record("JOB", "Matched views cancellation requested", true)
 	stopping = true
-	if preparing:
-		if temporal.jobs.background_operation == "prepare_matched_render":temporal.jobs.cancel_background()
-		preparing = false
+	if preparing:temporal.jobs.cancel_background();preparing = false
 	if pid > 0:
 		var file := FileAccess.open(active_path.get_base_dir().path_join("cancel"),FileAccess.WRITE)
 		if file != null:file.store_string("cancel");file.close()

@@ -19,7 +19,6 @@ from wavez_export.analysis.jobs import execute, validate_request, BACKGROUND_OPE
 from wavez_export.analysis.memo import VerificationMemo
 from wavez_export.analysis.member_assets import MemberAssets
 from wavez_export.analysis.result_store import ResultCache,references_in as result_references
-from wavez_export.analysis.spatial_band_sequence import SpectralCache
 from wavez_export.analysis import native_analysis
 from wavez_export.analysis import diagnostics,period_jobs,plot_preview,picking,derived,selection_jobs,comparisons,scheduled_series,linked_plots,space_time,heatmap_preview,input_provenance,atomic_output,export_results,recipes
 
@@ -80,7 +79,6 @@ class Worker:
         self.assets = MemberAssets(assets_root or directory/"members",registry_root=directory.parent)
         self.assets.set_owner(owner)
         self.results = ResultCache(self.assets.root.parent/"results",registry_root=directory.parent)
-        self.spectral_cache = None # A malformed spectral collection cannot block unrelated analysis.
         self.background_id=None;self.background_request=None;self.background_context=None
         self.background_checked=0.;self.background_superseded=False;self.background_progress_time=0.
         self.interactive_checked=0.;self.pool=None;self.recent_result=None
@@ -189,8 +187,6 @@ class Worker:
         context=None;created=None
         try:
             validate_request(request)
-            if request["operation"] == "spectral_band_sequence" and self.spectral_cache is None:
-                self.spectral_cache = SpectralCache(self.directory.parent)
             if (request["operation"] in BACKGROUND_OPERATIONS)!=background:
                 raise AnalysisError("invalid_lane","Fixed analysis uses the background lane; cursor/page work uses the interactive lane")
             if self.background_context is None:self.pool=SharedBudget(request.get("budget",{}).get("memory_bytes",512*MIB))
@@ -210,7 +206,7 @@ class Worker:
             retained=[self.background_request.get("arguments",{})] if self.background_context is not None and self.background_request else []
             if self.background_context is not None:retained.extend(self.background_context.retained_members)
             retained.extend(self.results.member_references(pins,context))
-            result=execute(request,context=context,memo=self.memo,assets=self.assets,results=self.results,spectral_cache=self.spectral_cache,provenance=self.provenance,retained_members=retained,defer_publication=True)
+            result=execute(request,context=context,memo=self.memo,assets=self.assets,results=self.results,provenance=self.provenance,retained_members=retained,defer_publication=True)
             if request["operation"] in SOURCE_RESULT_OPERATIONS:created=result["data"]["result"]
             if background:self.background_checked=0.
             else:self.checked=0.

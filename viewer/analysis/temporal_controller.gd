@@ -104,8 +104,6 @@ func setup(controller) -> void:
 	set_process(false)
 
 func cancel_analysis() -> void:
-	if jobs.is_spectral_operation(jobs.background_operation):
-		status.text = "Use Cancel in the active spectral tool or Jobs to cancel that request.";return
 	jobs.cancel_background();revision += 1;status.text = "Cancellation requested; completed named results remain available."
 
 func _text(label: String, initial: String) -> LineEdit:
@@ -232,8 +230,7 @@ func forget_result() -> void:
 	var index := result_list.selected
 	if index < 0 or index >= summaries.size():return
 	if diagnostics.references_result(summaries[index].result):status.text = "Clear this result's linked plot/comparison binding before forgetting it.";return
-	if not jobs.is_spectral_operation(jobs.background_operation):jobs.cancel_background()
-	revision += 1;summary_charge -= int(summaries[index].charged_bytes);summaries.remove_at(index);result_list.remove_item(index)
+	jobs.cancel_background();revision += 1;summary_charge -= int(summaries[index].charged_bytes);summaries.remove_at(index);result_list.remove_item(index)
 	current_result = {};series_list.clear();plot.clear();table.text = "";jobs.result_pins = []
 	for result in summaries:jobs.result_pins.append(result.result)
 	status.text = "Result removed. Unused cached files can now be cleared."
