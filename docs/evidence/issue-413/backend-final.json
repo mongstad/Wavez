@@ -1,0 +1,54 @@
+{
+  "scope": "issue413 focused numerical/source/owned-worker validation",
+  "python": "3.14.8 (main, Oct  1 2026, 00:00:00) [GCC 16.2.1 20260819 (Red Hat 16.2.1-2)]",
+  "numpy": "2.4.3",
+  "validator_sha256": "8db3eb2ec9fdfb05c5ace5594742fa7c3d35a0ba051566e05ad5948f1cbd4c09",
+  "tests_sha256": "f90b9319251e55995ec31a9dd2b47b1412d200428c31b33072da35123f7608be",
+  "synthetic": {
+    "passed": true,
+    "tests_run": 17,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "seconds": 0.8594954259997394,
+    "output": "test_coarsened_radial_bins_preserve_full_power (tests.test_spatial_spectrum.SpatialSpectrumTests.test_coarsened_radial_bins_preserve_full_power) ... ok\ntest_complete_edge_roi_uses_only_selected_samples_and_never_wraps (tests.test_spatial_spectrum.SpatialSpectrumTests.test_complete_edge_roi_uses_only_selected_samples_and_never_wraps) ... ok\ntest_direct_cancellation_unwinds_and_does_not_modify_source (tests.test_spatial_spectrum.SpatialSpectrumTests.test_direct_cancellation_unwinds_and_does_not_modify_source) ... ok\ntest_full_direct_dft_oracle_odd_even_and_anisotropic_axes (tests.test_spatial_spectrum.SpatialSpectrumTests.test_full_direct_dft_oracle_odd_even_and_anisotropic_axes) ... ok\ntest_held_native_time_and_exact_tokens_do_not_follow_cursor (tests.test_spatial_spectrum.SpatialSpectrumTests.test_held_native_time_and_exact_tokens_do_not_follow_cursor) ... ok\ntest_invalid_source_geometry_units_semantics_and_request_fields (tests.test_spatial_spectrum.SpatialSpectrumTests.test_invalid_source_geometry_units_semantics_and_request_fields) ... ok\ntest_low_memory_refusal_precedes_fft_and_releases_leases (tests.test_spatial_spectrum.SpatialSpectrumTests.test_low_memory_refusal_precedes_fft_and_releases_leases) ... ok\ntest_missing_amplitude_never_substitutes_energy_density (tests.test_spatial_spectrum.SpatialSpectrumTests.test_missing_amplitude_never_substitutes_energy_density) ... ok\ntest_nonfinite_roi_refused_without_zero_fill_and_outside_roi_ignored (tests.test_spatial_spectrum.SpatialSpectrumTests.test_nonfinite_roi_refused_without_zero_fill_and_outside_roi_ignored) ... ok\ntest_out_of_band_target_and_numerical_range_fail_explicitly (tests.test_spatial_spectrum.SpatialSpectrumTests.test_out_of_band_target_and_numerical_range_fail_explicitly) ... ok\ntest_owned_worker_close_while_paused_exits_without_complete_result (tests.test_spatial_spectrum.SpatialSpectrumTests.test_owned_worker_close_while_paused_exits_without_complete_result) ... ok\ntest_real_worker_revision_roundtrip_cancel_supersession_and_reuse (tests.test_spatial_spectrum.SpatialSpectrumTests.test_real_worker_revision_roundtrip_cancel_supersession_and_reuse) ... ok\ntest_single_mixed_modes_and_phase_interference_have_known_power (tests.test_spatial_spectrum.SpatialSpectrumTests.test_single_mixed_modes_and_phase_interference_have_known_power) ... ok\ntest_source_change_after_decode_prevents_publication (tests.test_spatial_spectrum.SpatialSpectrumTests.test_source_change_after_decode_prevents_publication) ... ok\ntest_source_mutation_truncation_and_payload_corruption_are_refused (tests.test_spatial_spectrum.SpatialSpectrumTests.test_source_mutation_truncation_and_payload_corruption_are_refused) ... ok\ntest_support_sizes_change_resolution_without_inventing_wavelength (tests.test_spatial_spectrum.SpatialSpectrumTests.test_support_sizes_change_resolution_without_inventing_wavelength) ... ok\ntest_transform_and_unit_policies_are_explicit (tests.test_spatial_spectrum.SpatialSpectrumTests.test_transform_and_unit_policies_are_explicit) ... ok\n\n----------------------------------------------------------------------\nRan 17 tests in 0.859s\n\nOK\n",
+    "worker_observations": [
+      {
+        "scope": "owned worker close during playback-pressure pause",
+        "close_seconds": 0.031505143999766005,
+        "complete_result_published": false
+      },
+      {
+        "scope": "unmodified worker cancellation while paused for playback pressure; not cancellation inside FFT",
+        "cancellation_seconds": 0.021381374999691616,
+        "reply_bytes": 5156,
+        "worker_memory": {
+          "VmPeak": 386465792,
+          "VmSize": 385413120,
+          "VmHWM": 40075264,
+          "VmRSS": 40075264
+        },
+        "logical": {
+          "charged_bytes": 0,
+          "peak_charged_bytes": 19249929,
+          "decoded_bytes": 32768,
+          "read_bytes": 67528,
+          "seconds": 0.003239121000206069,
+          "cpu_seconds": 0.003220830000000008
+        },
+        "request_revisions": [
+          8,
+          9,
+          10
+        ],
+        "stale_id_cannot_impersonate_new_reply": true
+      }
+    ]
+  },
+  "status": "PASS",
+  "limitations": [
+    "No native UI/plot-display measurement",
+    "No GPU or packaged measurement",
+    "No solver, all-frame analysis or alternate Model A capture"
+  ]
+}

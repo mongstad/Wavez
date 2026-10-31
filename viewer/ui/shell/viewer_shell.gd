@@ -623,6 +623,7 @@ func build_menus(row: HBoxContainer) -> void:
 	for title in viewer.VIEWING_PRESETS: command(presets,"Minimal" if title == "Minimal / Presentation" else title,viewer._apply_preset.bind(title),"preset:"+title,true)
 	var tools: PopupMenu = menus.Tools.get_popup()
 	command(tools,"Selection",viewer.tools_ui.open.bind("Selection"),"tool:Selection")
+	command(tools,"Spatial spectrum",viewer.spatial_spectrum.open,"tool:Spatial spectrum")
 	var analysis := submenu(tools,"Analysis")
 	for title in ["Temporal","Space time","Diagnostics","Compare","Matched runs","Period","Bookmarks","Results"]: command(analysis,title,viewer.tools_ui.open.bind(title),"tool:"+title)
 	for title in ["Mapping","Derive range","Slice","Clipping","Isosurface","Source probe","Performance","Geometry"]: command(tools,title,viewer.tools_ui.open.bind(title),"tool:"+title)
@@ -658,7 +659,7 @@ func refresh_commands() -> void:
 	for key in commands:
 		var entry: Dictionary = commands[key]
 		var enabled: bool = loaded or key in ["open","details","fullscreen","file_locations","keyboard_shortcuts","theme_dark","theme_light","about","exit"]
-		if key in ["probe","tool:Clipping","tool:Isosurface","tool:Source probe"]: enabled = fields
+		if key in ["probe","tool:Clipping","tool:Isosurface","tool:Source probe","tool:Spatial spectrum"]: enabled = fields
 		if key == "tool:Mapping": enabled = particles
 		if key in ["tool:Slice","tool:Derive range"]: enabled = fields or particles
 		if key == "resolve":
@@ -667,7 +668,7 @@ func refresh_commands() -> void:
 		if key.begins_with("preset:"): enabled = loaded and viewer.preset_available.get(key.trim_prefix("preset:"),true)
 		entry.popup.set_item_disabled(entry.index,not enabled)
 		entry.popup.set_item_tooltip(entry.index,"" if enabled else ("Open a compatible capture first" if not loaded else "Unavailable for the current source or state"))
-		if key == "close_file": entry.popup.set_item_tooltip(entry.index, "")
+		if key in ["close_file","tool:Spatial spectrum"]: entry.popup.set_item_tooltip(entry.index, "")
 		var checked := false
 		if key == "theme_dark": checked = appearance == null or not appearance.light
 		elif key == "theme_light": checked = appearance != null and appearance.light
