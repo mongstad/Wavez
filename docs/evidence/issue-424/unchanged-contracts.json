@@ -1,0 +1,125 @@
+{
+  "accepted_spectral": "4b9a1aeaa8658cd4ff65ebbcff06ac52b3667a09",
+  "files": [
+    {
+      "path": "viewer/analysis/spectral_band_plane.gdshader",
+      "sha256": "d5af955af209c817325a757c53d52d6413dcd9d93d8be926d3e23b50cbe22ad3",
+      "bytes": 1961,
+      "unchanged": true
+    },
+    {
+      "path": "viewer/data/capture_index.gd",
+      "sha256": "711a2640e8011fbe9c303d953231691301e5c368bc420ab6da1c47b3183afed5",
+      "bytes": 1420,
+      "unchanged": true
+    },
+    {
+      "path": "viewer/layers/field_prepare.gd",
+      "sha256": "ae7ce68556f8414ac656224ee97c8dc2f5de6238b6986b81eac4bafd1855782e",
+      "bytes": 4505,
+      "unchanged": true
+    },
+    {
+      "path": "viewer/layers/grid_view.gd",
+      "sha256": "8b85205d3f777c326b7bf245bf4194871c91c60e9449a8323c1ba7aae64b1bbd",
+      "bytes": 6388,
+      "unchanged": true
+    },
+    {
+      "path": "viewer/layers/scene_reader.gd",
+      "sha256": "d466e9dc10ba477ea0bd06c6fcda00a9d745847c2eefa34999eae85ed0052301",
+      "bytes": 21539,
+      "unchanged": true
+    },
+    {
+      "path": "viewer/layers/slice.gdshader",
+      "sha256": "597277eb8ec4e88d1edada0d319faa5cf8238c857931488e77790911bda96ae6",
+      "bytes": 2201,
+      "unchanged": true
+    },
+    {
+      "path": "viewer/layers/volume.gdshader",
+      "sha256": "6c8cd7eda06149a39862da7bb572d6044a3a4ba211aa57224ecbcabf400696be",
+      "bytes": 3379,
+      "unchanged": true
+    },
+    {
+      "path": "wavez_export/__init__.py",
+      "sha256": "fcfe9ceca522916033b399d119ea64ccf3a1ea8dfbf8984906e4527dbd94b017",
+      "bytes": 231,
+      "unchanged": true
+    },
+    {
+      "path": "wavez_export/analysis/contracts.py",
+      "sha256": "0457373829d20d7d8bfa920bc9db170a0ef473fffc56a5374ddf09093ef3fbbb",
+      "bytes": 8112,
+      "unchanged": true
+    },
+    {
+      "path": "wavez_export/analysis/disk_quota.py",
+      "sha256": "3f53ef1e2f456d86b27b4c91d38db1f4dbb1dc5b6c1d86f043bda70bf47fd143",
+      "bytes": 4387,
+      "unchanged": true
+    },
+    {
+      "path": "wavez_export/analysis/result_store.py",
+      "sha256": "fdca2a0a7698fd9999726542a2ae002e0cc6c56c1e18ee2c4ec51122063a852a",
+      "bytes": 19365,
+      "unchanged": true
+    },
+    {
+      "path": "wavez_export/analysis/source.py",
+      "sha256": "acf75fd779510f46bfe750974277d9663736f36eaacfeb3a8fe1193f21cefe3f",
+      "bytes": 16193,
+      "unchanged": true
+    },
+    {
+      "path": "wavez_export/analysis/spatial_band_map.py",
+      "sha256": "5af605a2996fb9910441fe247b75095e7645e0e5ea9f7e521d59cc7f11a7684b",
+      "bytes": 12168,
+      "unchanged": true
+    },
+    {
+      "path": "wavez_export/analysis/spatial_band_sequence.py",
+      "sha256": "5bf2298891001dc54a85a2bea7322697a6bb432c3d360d85b9624408ddaf0f64",
+      "bytes": 26620,
+      "unchanged": true
+    },
+    {
+      "path": "wavez_export/analysis/spatial_spectrum.py",
+      "sha256": "a237c6a3a0cc1d918260676f17e783cf7e0ac143538dc193f87e9771b120f5ed",
+      "bytes": 21007,
+      "unchanged": true
+    },
+    {
+      "path": "wavez_export/codec.py",
+      "sha256": "0603df703602d57f7f184a5b8dcfda6d1ad43c6fac60f95525a1604671f25d11",
+      "bytes": 3393,
+      "unchanged": true
+    },
+    {
+      "path": "wavez_export/field_statistics.py",
+      "sha256": "b9b1d6535e84ca1b5dd15ede82a9c36f73d840ccc00adaa40c80d3492a8c79c2",
+      "bytes": 2495,
+      "unchanged": true
+    },
+    {
+      "path": "wavez_export/metadata_budget.py",
+      "sha256": "b0699482bcb1aee497c236b0de98e47e5c8f754dd56e9a5e33798a3a23fd971c",
+      "bytes": 2521,
+      "unchanged": true
+    },
+    {
+      "path": "wavez_export/scene.py",
+      "sha256": "76afd84abee68cc8f1a343f8a065f6c974087f9373a3bf025dea06bcd7b3a83b",
+      "bytes": 21143,
+      "unchanged": true
+    },
+    {
+      "path": "wavez_export/storage.py",
+      "sha256": "17fae943f6f4368b17bbdcab0d49cd84e74c046eea262441456eb03025f14efb",
+      "bytes": 1837,
+      "unchanged": true
+    }
+  ]
+}

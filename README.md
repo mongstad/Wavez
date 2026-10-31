@@ -44,6 +44,8 @@ conclusions.
   opacity controls and slices.
 - Inspect experimental [regional spectra](docs/SPATIAL_SPECTRUM.md) and
   [spectral band maps](docs/SPATIAL_BAND_MAP.md) from verified source samples.
+- On the experimental `spectral` branch, explore phase-preserving
+  [reconstructed 3D bands](docs/SPECTRAL_RECONSTRUCTION.md) at one pinned native time.
 - Play and seek recorded time; move freely through the scene or use camera orbit.
 - Export viewport images and deterministic video of a chosen time range and view.
 

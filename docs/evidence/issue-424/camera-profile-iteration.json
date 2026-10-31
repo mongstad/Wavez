@@ -1,0 +1,17 @@
+{
+  "exit_code": 1,
+  "elapsed_seconds": 34.42305947200293,
+  "errors": [
+    "ERROR: Actual comparison shares camera, range, color and opacity: low",
+    "ERROR: Actual comparison shares camera, range, color and opacity: intermediate",
+    "ERROR: Actual comparison shares camera, range, color and opacity: high"
+  ],
+  "sources_unchanged": true,
+  "validation_exit_code": 1,
+  "checks": 83,
+  "failures": [
+    "Actual comparison shares camera, range, color and opacity: low",
+    "Actual comparison shares camera, range, color and opacity: intermediate",
+    "Actual comparison shares camera, range, color and opacity: high"
+  ]
+}

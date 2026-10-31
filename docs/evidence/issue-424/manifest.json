@@ -1,0 +1,174 @@
+{
+  "candidate": "v0.1.0.119",
+  "accepted_spectral": "4b9a1aeaa8658cd4ff65ebbcff06ac52b3667a09",
+  "files": {
+    "README.md": {
+      "bytes": 16790,
+      "sha256": "a2ed28b4d857f1b5d9e6219315a4d0e78fca6ad4e274de2c6c9dd25e774a1205"
+    },
+    "camera-profile-iteration.json": {
+      "bytes": 634,
+      "sha256": "697e49bbb3b2fb839507aa2db3c43fba7c72afc2d6fc9798cc224609ecf86c21"
+    },
+    "camera-profile-iteration.txt": {
+      "bytes": 1579,
+      "sha256": "1e13ec66959305090410d24ece2b62476a1afb34ec06e6a3ac509e622f0ead7a"
+    },
+    "edge-regression.json": {
+      "bytes": 483,
+      "sha256": "1956ba0087c2429a6a54224377cddbeea2a63404e2920e657baae0700aab1253"
+    },
+    "edge-regression.txt": {
+      "bytes": 183,
+      "sha256": "317f5f0b2d590745450eb963479298cca357e6c555a0e075fab5dff56520a6bd"
+    },
+    "first-iteration.json": {
+      "bytes": 462,
+      "sha256": "ee432ea3097664a0ca86139280ec07ddec38871bc1ee7589c8ed9b08516a342c"
+    },
+    "first-iteration.txt": {
+      "bytes": 1122,
+      "sha256": "c24d73f25f94a3e78ae10aee71106f3c4dc63152b06f22d3d9e3477900e84430"
+    },
+    "keyboard-iteration.json": {
+      "bytes": 310,
+      "sha256": "6bbbfa501d11f9185570d6f1be3074b9c8aeaa5846de5c395a097b42e4253c2b"
+    },
+    "keyboard-iteration.txt": {
+      "bytes": 579,
+      "sha256": "525544bf3321347fe2832989386a248cd5696ba1d38fdfdba437b7b415be26f7"
+    },
+    "model-a-reference.json": {
+      "bytes": 45528,
+      "sha256": "287749006ed34fd70f5f7a0959b864c8c72a506a52cb999f516f35566960e568"
+    },
+    "model-t40-controls-before-range-readability-dialog.png": {
+      "bytes": 101560,
+      "sha256": "bf2ece8559f646888b4913b1b163ac3b0ee8dd4f0f06acfe170cf6d1a929b82c"
+    },
+    "model-t40-controls-before-range-readability.png": {
+      "bytes": 308675,
+      "sha256": "84ffb9f18789e3097b8bbcd1a8e054c2a796a5326afaaee5a35ab9f2f0aa94e8"
+    },
+    "model-t40-high-common-scale.png": {
+      "bytes": 229348,
+      "sha256": "f83bbb66673633f1bcb949bfd5c357e008221ef62acb722ff63417c00b50e1f4"
+    },
+    "model-t40-high-manual-detail-scale.png": {
+      "bytes": 295888,
+      "sha256": "ce9df1d1e0729bbc0eefa1368f2e0dad47c78f98a5e9626ea2ad180b73c0f7b0"
+    },
+    "model-t40-intermediate-alternate-angle-common-scale.png": {
+      "bytes": 244832,
+      "sha256": "9453d2303f0f8d1b16557c889474b2a78c6e9c139504d4c5ef6c49443097e497"
+    },
+    "model-t40-intermediate-common-scale.png": {
+      "bytes": 248333,
+      "sha256": "83f0047b28e9d01bf2b65fa3d1d45fb56cb63c1799ab259cf01be6e22cc5d3fb"
+    },
+    "model-t40-intermediate-manual-detail-scale.png": {
+      "bytes": 259826,
+      "sha256": "871e41bc55ce1971c23aabceed963138d4966510b5d5dfb1051f87d05e844dc1"
+    },
+    "model-t40-intermediate-slice-0-common-scale.png": {
+      "bytes": 109454,
+      "sha256": "e19082defcf895370d32f6ec09367e1ed96bc378c133545ab1420234aa99aaa9"
+    },
+    "model-t40-intermediate-slice-1-common-scale.png": {
+      "bytes": 100632,
+      "sha256": "ac5c4e4f062d8d6b9d1433798d2e628dd03d5f453a94e6543b502d393d351d53"
+    },
+    "model-t40-intermediate-slice-2-common-scale.png": {
+      "bytes": 124103,
+      "sha256": "056c44011eeecb581ead0edfd7e4d8459e11cc2546911b7d5d071eee35f2185e"
+    },
+    "model-t40-low-common-scale.png": {
+      "bytes": 211300,
+      "sha256": "ffd51e6ed52cc7264265833993e9b43862d7dfd642aa992535bd841ec58ea8cb"
+    },
+    "model-t40-original-common-scale.png": {
+      "bytes": 232611,
+      "sha256": "bc848fd4d385e0b9bcde2090d11b919e03c22112e9e92ea28acf8122d04c74cc"
+    },
+    "package-export.txt": {
+      "bytes": 67987,
+      "sha256": "fb7e45820ed06dc17275bcc7b98fc35f3e02f8680673129d483ecbf3f1365b39"
+    },
+    "package-gpu.csv": {
+      "bytes": 11817,
+      "sha256": "803b9b47a9174f13b9d72c0cd6876412983049ad57d2f55511edacc57d92a5ce"
+    },
+    "package-import.txt": {
+      "bytes": 26152,
+      "sha256": "cc8c3b99b4192c988ede19f6c1564884c2a8c289f15fa1feeee9d2126ebcde13"
+    },
+    "package-native.json": {
+      "bytes": 152429,
+      "sha256": "29da871144fdb986cf43dc4faef413d2e6b8acf48c012a6da708f7dd5ec4a860"
+    },
+    "package-native.txt": {
+      "bytes": 3767,
+      "sha256": "0e5786f6ebc30b10005a4b46dd57898073db13fae21df8411828b0f0dd570fbe"
+    },
+    "package-summary.json": {
+      "bytes": 238829,
+      "sha256": "38fddd0a4d5db03b62c1a3e3ab03f206c01a4cc28bbe2c6db5dbdd18f91a6753"
+    },
+    "packaged-sources.json": {
+      "bytes": 4778,
+      "sha256": "ab7b78cb22071be6f783024952671d3c4a3ad5e6755dc4922931fe69321f9a31"
+    },
+    "python-connected-tests.txt": {
+      "bytes": 18831,
+      "sha256": "53d8bd9a68023d71f0cc5fdbebe620a761b534de2a729034513a295778a1aad9"
+    },
+    "python-worker-final-tests.txt": {
+      "bytes": 4911,
+      "sha256": "c9fa4d12552ceee2c8deb05a6742a70a0f2613f4aaf581b18ec3e1ffa336fbab"
+    },
+    "range-input-final.png": {
+      "bytes": 2838,
+      "sha256": "4fc90c52d9dcba707b339f65d4a000e0c54a4e01a9df96acc0427d0344669d2b"
+    },
+    "range-input-final.txt": {
+      "bytes": 209,
+      "sha256": "3beb1aaa7a8965e6cb8acbf161a4aa6a3407f603579789ce6d8c56e363b78837"
+    },
+    "source-gpu.csv": {
+      "bytes": 12250,
+      "sha256": "62fc7d980cba2ac8bdb105b0bfa93d6f63ff32d96bc85843671d0b0617a2db20"
+    },
+    "source-import-complete.txt": {
+      "bytes": 1914,
+      "sha256": "3446996dce32408c43ddb466e9095e3e6110c3c3eb4045e7b7fa95ca0998ac11"
+    },
+    "source-import-final.txt": {
+      "bytes": 1347,
+      "sha256": "0e9619b3491283555b643b1bdec015bda2ac1c8f308977064c61eb06e57c665d"
+    },
+    "source-import.txt": {
+      "bytes": 3880,
+      "sha256": "4e8d91f7f0619fe111fcc90ed054e124cd991cd1d8b340fe0b165b7c0e0f39ed"
+    },
+    "source-native.json": {
+      "bytes": 152347,
+      "sha256": "33580c36fb7d35b3a124c4c777e326d3d9e8e14d170e2bde63ef67f6ed9b0a3b"
+    },
+    "source-native.txt": {
+      "bytes": 201,
+      "sha256": "67662682c0f9864f0e56087ab984a244eac174ae8d8e482dd0d87f432ff0039f"
+    },
+    "source-summary.json": {
+      "bytes": 237812,
+      "sha256": "c311b6c65298d0a407f0045aab1fa07126508a87a9f132939cb88b9bbb6dc3b8"
+    },
+    "unchanged-contracts.json": {
+      "bytes": 3924,
+      "sha256": "9bdc5be5f20dd67b33b2dde81d82c410d668ace599e644a207d378e17b0d5e83"
+    },
+    "version-tests.txt": {
+      "bytes": 100,
+      "sha256": "508b29aa999a2238a822bac7c3790e84eeb6c56f1f7ccdad1097d1533298ff2c"
+    }
+  }
+}

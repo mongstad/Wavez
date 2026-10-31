@@ -30,6 +30,9 @@ derived computation and visual presentation have different guarantees.
   Hann normalization, bounded radial diagnostics and interpretation limits.
 - [Spectral band map](SPATIAL_BAND_MAP.md) — pinned or selected-time cached
   3D-window measurements, exact-time replay, unavailable masks and display limits.
+- [Reconstructed spectral volumes](SPECTRAL_RECONSTRUCTION.md) — full-domain,
+  phase-preserving signed 3D bands, periodic-boundary assumptions, independent
+  numerical authority and pinned full-resolution display.
 
 ## Capture format and Python integration
 

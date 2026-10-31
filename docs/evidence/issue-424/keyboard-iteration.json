@@ -1,0 +1,13 @@
+{
+  "exit_code": 1,
+  "elapsed_seconds": 35.44169777700154,
+  "errors": [
+    "ERROR: Typing in a reconstruction input does not move the camera"
+  ],
+  "sources_unchanged": true,
+  "validation_exit_code": 1,
+  "checks": 85,
+  "failures": [
+    "Typing in a reconstruction input does not move the camera"
+  ]
+}

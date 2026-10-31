@@ -1,0 +1,1190 @@
+{
+  "source": "/home/Nozba/Documents/Dev/Sims/Model-A/outputs/run_20261030T193414164759Z_b3a4a787cae945b0909004cac75740ca/model_a_20261030T193414164759Z_b3a4a787cae945b0909004cac75740ca.wvz",
+  "bytes": 6965545431,
+  "final_sha256": "1af76f2e5e0642808f33119168d8f5e0c7cc847599e414790923c2c3585e3d7d",
+  "source_unchanged": true,
+  "native_reports": [
+    {
+      "data": {
+        "kind": "spectral_reconstruction",
+        "version": 1,
+        "algorithm": "spectral-reconstruction-periodic-v1",
+        "source": {
+          "path": "/home/Nozba/Documents/Dev/Sims/Model-A/outputs/run_20261030T193414164759Z_b3a4a787cae945b0909004cac75740ca/model_a_20261030T193414164759Z_b3a4a787cae945b0909004cac75740ca.wvz",
+          "format": "WVZ1",
+          "uuid": "5848557b4ddd4d56b48e62f9f5700b23",
+          "committed_bytes": "6965545431",
+          "sha256": "1af76f2e5e0642808f33119168d8f5e0c7cc847599e414790923c2c3585e3d7d",
+          "complete_records": 82
+        },
+        "source_stamp": {
+          "device": "47",
+          "inode": "26410348",
+          "size": "6965545431",
+          "mtime_ns": "1793389496997707349",
+          "ctime_ns": "1793389496997707349"
+        },
+        "object": "field",
+        "channel": "amplitude",
+        "record": {
+          "index": 0,
+          "sequence": 0,
+          "native_time": {
+            "text": "0",
+            "f64_le_hex": "0000000000000000"
+          }
+        },
+        "geometry": {
+          "shape": [
+            192,
+            192,
+            192
+          ],
+          "origin": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "spacing": [
+            0.16666666666666666,
+            0.16666666666666666,
+            0.16666666666666666
+          ],
+          "centering": "node",
+          "data_to_world": [
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ]
+        },
+        "boundary": "periodic",
+        "edges": [
+          0.125,
+          0.375
+        ],
+        "units": {
+          "position": "unknown",
+          "value": "unknown",
+          "frequency": "cycles/source-coordinate unit"
+        },
+        "common_range": [
+          -1.2372876324144628,
+          1.2372876324144628
+        ],
+        "artifacts": {
+          "original": {
+            "path": "/tmp/wavez-424/reference-final/native-0/worker/results/d-81e3ad78430244b5a837abe66beee3a3/original.f4",
+            "sha256": "5d126d53c4dec4edde843a2658849af69e1ed1b059fc0e41d6fdf2d70e642206",
+            "bytes": 28311552,
+            "dtype": "f4",
+            "shape_zyx": [
+              192,
+              192,
+              192
+            ],
+            "minimum": 1.1672078291039423,
+            "maximum": 1.2372876324144628,
+            "scientific": {
+              "path": "/tmp/wavez-424/reference-final/native-0/worker/results/d-81e3ad78430244b5a837abe66beee3a3/original.f8",
+              "sha256": "4e64c2e4b62e931605d35d594e233f746d69fad9f85c8e6baaafa84696f71c92",
+              "bytes": 56623104,
+              "dtype": "f8"
+            }
+          },
+          "low": {
+            "path": "/tmp/wavez-424/reference-final/native-0/worker/results/d-81e3ad78430244b5a837abe66beee3a3/low.f4",
+            "sha256": "655d36a69317468e593592e24fec86ea049e8c1089466df491a4a2b03eaaa549",
+            "bytes": 28311552,
+            "dtype": "f4",
+            "shape_zyx": [
+              192,
+              192,
+              192
+            ],
+            "minimum": 1.1671524297690408,
+            "maximum": 1.2356014441781025,
+            "scientific": {
+              "path": "/tmp/wavez-424/reference-final/native-0/worker/results/d-81e3ad78430244b5a837abe66beee3a3/low.f8",
+              "sha256": "e46b1d628dede0e2ddd1831daf77fedd6c2bfd122aad5690b5baf8f33268e963",
+              "bytes": 56623104,
+              "dtype": "f8"
+            }
+          },
+          "intermediate": {
+            "path": "/tmp/wavez-424/reference-final/native-0/worker/results/d-81e3ad78430244b5a837abe66beee3a3/intermediate.f4",
+            "sha256": "735d547fc62a33c70cfb09795fdc5d61459e81ab8da893fd729d57b7804bded2",
+            "bytes": 28311552,
+            "dtype": "f4",
+            "shape_zyx": [
+              192,
+              192,
+              192
+            ],
+            "minimum": -0.007174722219034116,
+            "maximum": 0.008576759575203385,
+            "scientific": {
+              "path": "/tmp/wavez-424/reference-final/native-0/worker/results/d-81e3ad78430244b5a837abe66beee3a3/intermediate.f8",
+              "sha256": "f0ee68bdba65c9d0a8112bc0ef9f4d1ba28c9135d201a346520cf1e0c369ea7c",
+              "bytes": 56623104,
+              "dtype": "f8"
+            }
+          },
+          "high": {
+            "path": "/tmp/wavez-424/reference-final/native-0/worker/results/d-81e3ad78430244b5a837abe66beee3a3/high.f4",
+            "sha256": "e4d407f8388ed69d8a5232fee7e7f1264a15d6b9ee836957ebf5d3ae4e6956a9",
+            "bytes": 28311552,
+            "dtype": "f4",
+            "shape_zyx": [
+              192,
+              192,
+              192
+            ],
+            "minimum": -1.070488423196602e-15,
+            "maximum": 1.1748433095903327e-15,
+            "scientific": {
+              "path": "/tmp/wavez-424/reference-final/native-0/worker/results/d-81e3ad78430244b5a837abe66beee3a3/high.f8",
+              "sha256": "4f5b972200b7b2f14980c058c18944b9ef8f0e1a613a05b00ee7bd173c1f745b",
+              "bytes": 56623104,
+              "dtype": "f8"
+            }
+          }
+        },
+        "metrics": {
+          "source_mean": 1.2,
+          "mean_square": 1.4400999999999984,
+          "ac_mean_square": 9.999999999999995e-05,
+          "bands": {
+            "low": {
+              "mean_square": 1.440095848380092,
+              "spectral_mean_square": 1.4400958483800923,
+              "fraction": 0.9999971171308198,
+              "full_dft_cells": 251,
+              "parseval_relative_error": 1.5418693488301615e-16,
+              "ac_mean_square": 9.584838009184914e-05,
+              "ac_fraction": 0.958483800918492
+            },
+            "intermediate": {
+              "mean_square": 4.151619908150778e-06,
+              "spectral_mean_square": 4.151619908150783e-06,
+              "fraction": 2.8828691814115567e-06,
+              "full_dft_cells": 6872,
+              "parseval_relative_error": 3.5290588733600496e-21,
+              "ac_mean_square": 4.151619908150778e-06,
+              "ac_fraction": 0.0415161990815078
+            },
+            "high": {
+              "mean_square": 4.750332562589286e-32,
+              "spectral_mean_square": 4.7503842468212006e-32,
+              "fraction": 3.298612987007355e-32,
+              "full_dft_cells": 7070765,
+              "parseval_relative_error": 3.588933540342911e-37,
+              "ac_mean_square": 4.750332562589286e-32,
+              "ac_fraction": 4.750332562589288e-28
+            }
+          },
+          "residual_rms": 3.04722678162764e-16,
+          "residual_max": 1.5543122344752192e-15,
+          "residual_relative_rms": 2.53926748387717e-16,
+          "parseval_relative_error": 1.3876824139471453e-15,
+          "transfer_bytes": 113246208,
+          "scientific_bytes": 226492416,
+          "workspace_bytes": 828637184
+        },
+        "support": {
+          "length_xyz": [
+            32.0,
+            32.0,
+            32.0
+          ],
+          "fundamental_xyz": [
+            0.03125,
+            0.03125,
+            0.03125
+          ],
+          "nyquist_xyz": [
+            3.0,
+            3.0,
+            3.0
+          ],
+          "low_edge_cycles_xyz": [
+            4.0,
+            4.0,
+            4.0
+          ],
+          "dc_band": "low",
+          "intervals": [
+            "[0, low)",
+            "[low, high)",
+            "[high, sampled corner]"
+          ],
+          "assumption": "Explicit periodic full domain; no boundary declaration is inferred from the capture"
+        },
+        "timings": {
+          "decode_seconds": 0.0982523000020592,
+          "fft_seconds": 0.05925039000067045,
+          "reconstruction_and_write_seconds": 0.613241047001793,
+          "total_seconds": 0.8668327500017767
+        },
+        "provenance": {
+          "source_dtype": "f8",
+          "scientific_dtype": "f8",
+          "display_dtype": "f4",
+          "lod": 1,
+          "transform": "identity",
+          "normalization": "NumPy backward DFT; disjoint real radial masks; inverse keeps complex phase",
+          "lifetime": "One worker-owned result; next reconstruction or worker shutdown clears it"
+        },
+        "manifest": {
+          "path": "/tmp/wavez-424/reference-final/native-0/worker/results/d-81e3ad78430244b5a837abe66beee3a3/manifest.json",
+          "sha256": "36ed4627a922ba6c34acd6aa84f203f8ce5e06c4e67145555d2c997ccfdfcba9"
+        }
+      },
+      "identity": {
+        "path": "/home/Nozba/Documents/Dev/Sims/Model-A/outputs/run_20261030T193414164759Z_b3a4a787cae945b0909004cac75740ca/model_a_20261030T193414164759Z_b3a4a787cae945b0909004cac75740ca.wvz",
+        "format": "WVZ1",
+        "uuid": "5848557b4ddd4d56b48e62f9f5700b23",
+        "committed_bytes": "6965545431",
+        "sha256": "1af76f2e5e0642808f33119168d8f5e0c7cc847599e414790923c2c3585e3d7d",
+        "complete_records": 82
+      },
+      "source_verify_seconds": 3.4170451019999746,
+      "reconstruction_seconds": 0.8723102820003987,
+      "total_seconds": 4.289435406000848,
+      "context_metrics": {
+        "charged_bytes": 2974093,
+        "peak_charged_bytes": 1010917773,
+        "decoded_bytes": 56623104,
+        "read_bytes": 7022668214,
+        "seconds": 4.289547307998873,
+        "cpu_seconds": 4.256833972
+      },
+      "process_peak_rss_bytes": 389885952,
+      "initial_process_memory": {
+        "VmHWM_bytes": 37851136,
+        "VmRSS_bytes": 37851136,
+        "ru_maxrss_bytes": 37572608
+      },
+      "completed_process_memory": {
+        "VmHWM_bytes": 389885952,
+        "VmRSS_bytes": 48332800,
+        "ru_maxrss_bytes": 389885952
+      },
+      "cold_definition": "Fresh process, fresh verification memo and complete committed-prefix SHA-256; operating-system caches were not flushed.",
+      "context_after_source_close": {
+        "charged_bytes": 0,
+        "peak_charged_bytes": 1010917773,
+        "decoded_bytes": 56623104,
+        "read_bytes": 7022668214,
+        "seconds": 4.290102267001203,
+        "cpu_seconds": 4.2573835220000005
+      },
+      "independent": {
+        "source_amplitude_sha256": "4e64c2e4b62e931605d35d594e233f746d69fad9f85c8e6baaafa84696f71c92",
+        "source_dtype": "float64",
+        "shape": [
+          192,
+          192,
+          192
+        ],
+        "source_mean": 1.2,
+        "source_mean_square": 1.4401,
+        "source_ac_variance": 9.999999999999992e-05,
+        "reconstruction_max_abs": 1.5543122344752192e-15,
+        "reconstruction_rms": 3.04722678162764e-16,
+        "parseval_relative_residual": 1.5418693488301598e-16,
+        "bands": {
+          "original": {
+            "scientific_sha256": "4e64c2e4b62e931605d35d594e233f746d69fad9f85c8e6baaafa84696f71c92",
+            "display_sha256": "5d126d53c4dec4edde843a2658849af69e1ed1b059fc0e41d6fdf2d70e642206",
+            "dtype": "float64",
+            "shape": [
+              192,
+              192,
+              192
+            ],
+            "minimum": 1.1672078291039423,
+            "maximum": 1.2372876324144628,
+            "mean": 1.2,
+            "rms": 1.2000416659433122,
+            "mean_square": 1.4401,
+            "total_mean_square_fraction": 1.0,
+            "ac_variance_fraction": 1.0,
+            "independent_oracle_max_abs": 0.0,
+            "independent_oracle_rms": 0.0,
+            "oracle_imaginary_max_abs": 0.0,
+            "display_cast_max_abs": 5.960462412524237e-08,
+            "float32_cast_exact": true
+          },
+          "low": {
+            "scientific_sha256": "e46b1d628dede0e2ddd1831daf77fedd6c2bfd122aad5690b5baf8f33268e963",
+            "display_sha256": "655d36a69317468e593592e24fec86ea049e8c1089466df491a4a2b03eaaa549",
+            "dtype": "float64",
+            "shape": [
+              192,
+              192,
+              192
+            ],
+            "minimum": 1.1671524297690408,
+            "maximum": 1.2356014441781025,
+            "mean": 1.2000000000000002,
+            "rms": 1.200039936160498,
+            "mean_square": 1.440095848380092,
+            "total_mean_square_fraction": 0.9999971171308188,
+            "ac_variance_fraction": 0.958483800918492,
+            "independent_oracle_max_abs": 1.3322676295501878e-15,
+            "independent_oracle_rms": 2.7634468030454317e-16,
+            "oracle_imaginary_max_abs": 1.2678814564940152e-17,
+            "display_cast_max_abs": 5.960463878018629e-08,
+            "float32_cast_exact": true
+          },
+          "intermediate": {
+            "scientific_sha256": "f0ee68bdba65c9d0a8112bc0ef9f4d1ba28c9135d201a346520cf1e0c369ea7c",
+            "display_sha256": "735d547fc62a33c70cfb09795fdc5d61459e81ab8da893fd729d57b7804bded2",
+            "dtype": "float64",
+            "shape": [
+              192,
+              192,
+              192
+            ],
+            "minimum": -0.007174722219034116,
+            "maximum": 0.008576759575203385,
+            "mean": -1.6062254407192657e-20,
+            "rms": 0.0020375524307734466,
+            "mean_square": 4.15161990815078e-06,
+            "total_mean_square_fraction": 2.882869181411555e-06,
+            "ac_variance_fraction": 0.04151619908150783,
+            "independent_oracle_max_abs": 1.1731067506293158e-16,
+            "independent_oracle_rms": 2.948929324887178e-17,
+            "oracle_imaginary_max_abs": 2.8347856227974202e-18,
+            "display_cast_max_abs": 4.648209074586962e-10,
+            "float32_cast_exact": true
+          },
+          "high": {
+            "scientific_sha256": "4f5b972200b7b2f14980c058c18944b9ef8f0e1a613a05b00ee7bd173c1f745b",
+            "display_sha256": "e4d407f8388ed69d8a5232fee7e7f1264a15d6b9ee836957ebf5d3ae4e6956a9",
+            "dtype": "float64",
+            "shape": [
+              192,
+              192,
+              192
+            ],
+            "minimum": -1.070488423196602e-15,
+            "maximum": 1.1748433095903327e-15,
+            "mean": -2.5108420015715073e-33,
+            "rms": 2.179525765525445e-16,
+            "mean_square": 4.750332562589277e-32,
+            "total_mean_square_fraction": 3.2986129870073445e-32,
+            "ac_variance_fraction": 4.75033256258928e-28,
+            "independent_oracle_max_abs": 1.804342502231103e-15,
+            "independent_oracle_rms": 2.6848965942253904e-16,
+            "oracle_imaginary_max_abs": 1.1819245179380613e-17,
+            "display_cast_max_abs": 5.293845637584827e-23,
+            "float32_cast_exact": true
+          }
+        },
+        "oracle": "Separate full complex fftn/ifftn, full frequency lattice and direct real-space mean squares; no production reconstruction functions or rFFT multiplicity.",
+        "failures": [],
+        "scene_reader_decode_oracle_seconds": 2.0690549349965295,
+        "native_geometry_matches": true
+      }
+    },
+    {
+      "data": {
+        "kind": "spectral_reconstruction",
+        "version": 1,
+        "algorithm": "spectral-reconstruction-periodic-v1",
+        "source": {
+          "path": "/home/Nozba/Documents/Dev/Sims/Model-A/outputs/run_20261030T193414164759Z_b3a4a787cae945b0909004cac75740ca/model_a_20261030T193414164759Z_b3a4a787cae945b0909004cac75740ca.wvz",
+          "format": "WVZ1",
+          "uuid": "5848557b4ddd4d56b48e62f9f5700b23",
+          "committed_bytes": "6965545431",
+          "sha256": "1af76f2e5e0642808f33119168d8f5e0c7cc847599e414790923c2c3585e3d7d",
+          "complete_records": 82
+        },
+        "source_stamp": {
+          "device": "47",
+          "inode": "26410348",
+          "size": "6965545431",
+          "mtime_ns": "1793389496997707349",
+          "ctime_ns": "1793389496997707349"
+        },
+        "object": "field",
+        "channel": "amplitude",
+        "record": {
+          "index": 20,
+          "sequence": 40,
+          "native_time": {
+            "text": "20",
+            "f64_le_hex": "0000000000003440"
+          }
+        },
+        "geometry": {
+          "shape": [
+            192,
+            192,
+            192
+          ],
+          "origin": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "spacing": [
+            0.16666666666666666,
+            0.16666666666666666,
+            0.16666666666666666
+          ],
+          "centering": "node",
+          "data_to_world": [
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ]
+        },
+        "boundary": "periodic",
+        "edges": [
+          0.125,
+          0.375
+        ],
+        "units": {
+          "position": "unknown",
+          "value": "unknown",
+          "frequency": "cycles/source-coordinate unit"
+        },
+        "common_range": [
+          -0.9682381567664624,
+          0.9682381567664624
+        ],
+        "artifacts": {
+          "original": {
+            "path": "/tmp/wavez-424/reference-final/native-20/worker/results/d-21c5ee7a61a44e9f8d34e4e363d99b3e/original.f4",
+            "sha256": "96454633ee9b03bb259173ce749b849f2bcf98051983441d8c03c992be0111d2",
+            "bytes": 28311552,
+            "dtype": "f4",
+            "shape_zyx": [
+              192,
+              192,
+              192
+            ],
+            "minimum": -0.9682381567664624,
+            "maximum": 0.6959933384069554,
+            "scientific": {
+              "path": "/tmp/wavez-424/reference-final/native-20/worker/results/d-21c5ee7a61a44e9f8d34e4e363d99b3e/original.f8",
+              "sha256": "4b4514937240265f47cb6e59ca2f7ee0af4eb54b7d144a5f8f84f0d54f330a4b",
+              "bytes": 56623104,
+              "dtype": "f8"
+            }
+          },
+          "low": {
+            "path": "/tmp/wavez-424/reference-final/native-20/worker/results/d-21c5ee7a61a44e9f8d34e4e363d99b3e/low.f4",
+            "sha256": "63495f945a4f832c340058fa4e4b821dbedda83dc2e830baec002fe1bbd230e4",
+            "bytes": 28311552,
+            "dtype": "f4",
+            "shape_zyx": [
+              192,
+              192,
+              192
+            ],
+            "minimum": -1.0483604240793603,
+            "maximum": 0.6123989053708437,
+            "scientific": {
+              "path": "/tmp/wavez-424/reference-final/native-20/worker/results/d-21c5ee7a61a44e9f8d34e4e363d99b3e/low.f8",
+              "sha256": "4564f566da4c4ac39ca0fb73809c9f1fc7d720e1d67ab21f3a9daa682f0a2a99",
+              "bytes": 56623104,
+              "dtype": "f8"
+            }
+          },
+          "intermediate": {
+            "path": "/tmp/wavez-424/reference-final/native-20/worker/results/d-21c5ee7a61a44e9f8d34e4e363d99b3e/intermediate.f4",
+            "sha256": "6079b05232295e7e542dd6f10b4eb6658cfb00f33ba6ddef730c26a609aade5c",
+            "bytes": 28311552,
+            "dtype": "f4",
+            "shape_zyx": [
+              192,
+              192,
+              192
+            ],
+            "minimum": -0.3104771614625392,
+            "maximum": 0.32712834925765155,
+            "scientific": {
+              "path": "/tmp/wavez-424/reference-final/native-20/worker/results/d-21c5ee7a61a44e9f8d34e4e363d99b3e/intermediate.f8",
+              "sha256": "869169b569e9bc85da7b33ccfd064f54597f5e4ca36c34bea302d6661045eccc",
+              "bytes": 56623104,
+              "dtype": "f8"
+            }
+          },
+          "high": {
+            "path": "/tmp/wavez-424/reference-final/native-20/worker/results/d-21c5ee7a61a44e9f8d34e4e363d99b3e/high.f4",
+            "sha256": "537073d6aab4f1085d17676e062fb91b21816b8610911db87c7d5d9225b17415",
+            "bytes": 28311552,
+            "dtype": "f4",
+            "shape_zyx": [
+              192,
+              192,
+              192
+            ],
+            "minimum": -0.016531685672320322,
+            "maximum": 0.017173329126193286,
+            "scientific": {
+              "path": "/tmp/wavez-424/reference-final/native-20/worker/results/d-21c5ee7a61a44e9f8d34e4e363d99b3e/high.f8",
+              "sha256": "2f3307ab6e23013a16a6f70a690de4e16c46174394a82c415e3a427b6a1a7083",
+              "bytes": 56623104,
+              "dtype": "f8"
+            }
+          }
+        },
+        "metrics": {
+          "source_mean": -0.1080487747717098,
+          "mean_square": 0.13979881655990123,
+          "ac_mean_square": 0.1281242788302336,
+          "bands": {
+            "low": {
+              "mean_square": 0.13183809022400905,
+              "spectral_mean_square": 0.13183809022400925,
+              "fraction": 0.943055838870559,
+              "full_dft_cells": 251,
+              "parseval_relative_error": 1.3897759229324599e-15,
+              "ac_mean_square": 0.12016355249434152,
+              "ac_fraction": 0.9378671520450845
+            },
+            "intermediate": {
+              "mean_square": 0.007950782486245513,
+              "spectral_mean_square": 0.00795078248624551,
+              "fraction": 0.05687303141681996,
+              "full_dft_cells": 6872,
+              "parseval_relative_error": 1.2408713597611249e-17,
+              "ac_mean_square": 0.007950782486245513,
+              "ac_fraction": 0.062055236984244075
+            },
+            "high": {
+              "mean_square": 9.943849646623368e-06,
+              "spectral_mean_square": 9.943849646623361e-06,
+              "fraction": 7.112971262072602e-05,
+              "full_dft_cells": 7070765,
+              "parseval_relative_error": 4.847153749066894e-20,
+              "ac_mean_square": 9.943849646623368e-06,
+              "ac_fraction": 7.761097067167966e-05
+            }
+          },
+          "residual_rms": 1.7706742083148378e-16,
+          "residual_max": 9.992007221626409e-16,
+          "residual_relative_rms": 4.735729782710423e-16,
+          "parseval_relative_error": 9.926970878089e-16,
+          "transfer_bytes": 113246208,
+          "scientific_bytes": 226492416,
+          "workspace_bytes": 828637184
+        },
+        "support": {
+          "length_xyz": [
+            32.0,
+            32.0,
+            32.0
+          ],
+          "fundamental_xyz": [
+            0.03125,
+            0.03125,
+            0.03125
+          ],
+          "nyquist_xyz": [
+            3.0,
+            3.0,
+            3.0
+          ],
+          "low_edge_cycles_xyz": [
+            4.0,
+            4.0,
+            4.0
+          ],
+          "dc_band": "low",
+          "intervals": [
+            "[0, low)",
+            "[low, high)",
+            "[high, sampled corner]"
+          ],
+          "assumption": "Explicit periodic full domain; no boundary declaration is inferred from the capture"
+        },
+        "timings": {
+          "decode_seconds": 0.09692866699697333,
+          "fft_seconds": 0.07321274599962635,
+          "reconstruction_and_write_seconds": 0.6176783320006507,
+          "total_seconds": 0.8945233680024103
+        },
+        "provenance": {
+          "source_dtype": "f8",
+          "scientific_dtype": "f8",
+          "display_dtype": "f4",
+          "lod": 1,
+          "transform": "identity",
+          "normalization": "NumPy backward DFT; disjoint real radial masks; inverse keeps complex phase",
+          "lifetime": "One worker-owned result; next reconstruction or worker shutdown clears it"
+        },
+        "manifest": {
+          "path": "/tmp/wavez-424/reference-final/native-20/worker/results/d-21c5ee7a61a44e9f8d34e4e363d99b3e/manifest.json",
+          "sha256": "b6623e5717f8d42cd9cc36f91782c4e369720f1454cb9322249bc46ba9d0b129"
+        }
+      },
+      "identity": {
+        "path": "/home/Nozba/Documents/Dev/Sims/Model-A/outputs/run_20261030T193414164759Z_b3a4a787cae945b0909004cac75740ca/model_a_20261030T193414164759Z_b3a4a787cae945b0909004cac75740ca.wvz",
+        "format": "WVZ1",
+        "uuid": "5848557b4ddd4d56b48e62f9f5700b23",
+        "committed_bytes": "6965545431",
+        "sha256": "1af76f2e5e0642808f33119168d8f5e0c7cc847599e414790923c2c3585e3d7d",
+        "complete_records": 82
+      },
+      "source_verify_seconds": 3.3568524949987477,
+      "reconstruction_seconds": 0.8991916170016339,
+      "total_seconds": 4.256116202999692,
+      "context_metrics": {
+        "charged_bytes": 2974093,
+        "peak_charged_bytes": 1010917773,
+        "decoded_bytes": 56623104,
+        "read_bytes": 7022668214,
+        "seconds": 4.256269274999795,
+        "cpu_seconds": 4.335892372
+      },
+      "process_peak_rss_bytes": 389427200,
+      "initial_process_memory": {
+        "VmHWM_bytes": 37769216,
+        "VmRSS_bytes": 37769216,
+        "ru_maxrss_bytes": 37490688
+      },
+      "completed_process_memory": {
+        "VmHWM_bytes": 389427200,
+        "VmRSS_bytes": 48373760,
+        "ru_maxrss_bytes": 389427200
+      },
+      "cold_definition": "Fresh process, fresh verification memo and complete committed-prefix SHA-256; operating-system caches were not flushed.",
+      "context_after_source_close": {
+        "charged_bytes": 0,
+        "peak_charged_bytes": 1010917773,
+        "decoded_bytes": 56623104,
+        "read_bytes": 7022668214,
+        "seconds": 4.256924945999344,
+        "cpu_seconds": 4.336541152000001
+      },
+      "independent": {
+        "source_amplitude_sha256": "4b4514937240265f47cb6e59ca2f7ee0af4eb54b7d144a5f8f84f0d54f330a4b",
+        "source_dtype": "float64",
+        "shape": [
+          192,
+          192,
+          192
+        ],
+        "source_mean": -0.1080487747717098,
+        "source_mean_square": 0.13979881655990137,
+        "source_ac_variance": 0.1281242788302337,
+        "reconstruction_max_abs": 9.992007221626409e-16,
+        "reconstruction_rms": 1.7706742083148383e-16,
+        "parseval_relative_residual": 5.956182526853393e-16,
+        "bands": {
+          "original": {
+            "scientific_sha256": "4b4514937240265f47cb6e59ca2f7ee0af4eb54b7d144a5f8f84f0d54f330a4b",
+            "display_sha256": "96454633ee9b03bb259173ce749b849f2bcf98051983441d8c03c992be0111d2",
+            "dtype": "float64",
+            "shape": [
+              192,
+              192,
+              192
+            ],
+            "minimum": -0.9682381567664624,
+            "maximum": 0.6959933384069554,
+            "mean": -0.1080487747717098,
+            "rms": 0.37389679934428616,
+            "mean_square": 0.13979881655990137,
+            "total_mean_square_fraction": 1.0,
+            "ac_variance_fraction": 1.0,
+            "independent_oracle_max_abs": 0.0,
+            "independent_oracle_rms": 0.0,
+            "oracle_imaginary_max_abs": 0.0,
+            "display_cast_max_abs": 2.980231095239816e-08,
+            "float32_cast_exact": true
+          },
+          "low": {
+            "scientific_sha256": "4564f566da4c4ac39ca0fb73809c9f1fc7d720e1d67ab21f3a9daa682f0a2a99",
+            "display_sha256": "63495f945a4f832c340058fa4e4b821dbedda83dc2e830baec002fe1bbd230e4",
+            "dtype": "float64",
+            "shape": [
+              192,
+              192,
+              192
+            ],
+            "minimum": -1.0483604240793603,
+            "maximum": 0.6123989053708437,
+            "mean": -0.10804877477170978,
+            "rms": 0.36309515312657253,
+            "mean_square": 0.13183809022400916,
+            "total_mean_square_fraction": 0.9430558388705589,
+            "ac_variance_fraction": 0.9378671520450839,
+            "independent_oracle_max_abs": 7.771561172376096e-16,
+            "independent_oracle_rms": 1.0786333072708742e-16,
+            "oracle_imaginary_max_abs": 3.6176282331682693e-16,
+            "display_cast_max_abs": 5.957177795501423e-08,
+            "float32_cast_exact": true
+          },
+          "intermediate": {
+            "scientific_sha256": "869169b569e9bc85da7b33ccfd064f54597f5e4ca36c34bea302d6661045eccc",
+            "display_sha256": "6079b05232295e7e542dd6f10b4eb6658cfb00f33ba6ddef730c26a609aade5c",
+            "dtype": "float64",
+            "shape": [
+              192,
+              192,
+              192
+            ],
+            "minimum": -0.3104771614625392,
+            "maximum": 0.32712834925765155,
+            "mean": 1.6062254407192657e-19,
+            "rms": 0.08916716035764236,
+            "mean_square": 0.007950782486245506,
+            "total_mean_square_fraction": 0.056873031416819854,
+            "ac_variance_fraction": 0.06205523698424398,
+            "independent_oracle_max_abs": 2.220446049250313e-16,
+            "independent_oracle_rms": 3.86630057912568e-17,
+            "oracle_imaginary_max_abs": 1.1188338268927136e-16,
+            "display_cast_max_abs": 1.4900810529905328e-08,
+            "float32_cast_exact": true
+          },
+          "high": {
+            "scientific_sha256": "2f3307ab6e23013a16a6f70a690de4e16c46174394a82c415e3a427b6a1a7083",
+            "display_sha256": "537073d6aab4f1085d17676e062fb91b21816b8610911db87c7d5d9225b17415",
+            "dtype": "float64",
+            "shape": [
+              192,
+              192,
+              192
+            ],
+            "minimum": -0.016531685672320322,
+            "maximum": 0.017173329126193286,
+            "mean": 5.019454502247705e-22,
+            "rms": 0.0031533870118688823,
+            "mean_square": 9.943849646623358e-06,
+            "total_mean_square_fraction": 7.112971262072587e-05,
+            "ac_variance_fraction": 7.761097067167953e-05,
+            "independent_oracle_max_abs": 7.700003828992052e-16,
+            "independent_oracle_rms": 1.1621044277274741e-16,
+            "oracle_imaginary_max_abs": 4.191067849762966e-16,
+            "display_cast_max_abs": 9.276065124352861e-10,
+            "float32_cast_exact": true
+          }
+        },
+        "oracle": "Separate full complex fftn/ifftn, full frequency lattice and direct real-space mean squares; no production reconstruction functions or rFFT multiplicity.",
+        "failures": [],
+        "scene_reader_decode_oracle_seconds": 2.0870011480001267,
+        "native_geometry_matches": true
+      }
+    },
+    {
+      "data": {
+        "kind": "spectral_reconstruction",
+        "version": 1,
+        "algorithm": "spectral-reconstruction-periodic-v1",
+        "source": {
+          "path": "/home/Nozba/Documents/Dev/Sims/Model-A/outputs/run_20261030T193414164759Z_b3a4a787cae945b0909004cac75740ca/model_a_20261030T193414164759Z_b3a4a787cae945b0909004cac75740ca.wvz",
+          "format": "WVZ1",
+          "uuid": "5848557b4ddd4d56b48e62f9f5700b23",
+          "committed_bytes": "6965545431",
+          "sha256": "1af76f2e5e0642808f33119168d8f5e0c7cc847599e414790923c2c3585e3d7d",
+          "complete_records": 82
+        },
+        "source_stamp": {
+          "device": "47",
+          "inode": "26410348",
+          "size": "6965545431",
+          "mtime_ns": "1793389496997707349",
+          "ctime_ns": "1793389496997707349"
+        },
+        "object": "field",
+        "channel": "amplitude",
+        "record": {
+          "index": 40,
+          "sequence": 80,
+          "native_time": {
+            "text": "40",
+            "f64_le_hex": "0000000000004440"
+          }
+        },
+        "geometry": {
+          "shape": [
+            192,
+            192,
+            192
+          ],
+          "origin": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "spacing": [
+            0.16666666666666666,
+            0.16666666666666666,
+            0.16666666666666666
+          ],
+          "centering": "node",
+          "data_to_world": [
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ]
+        },
+        "boundary": "periodic",
+        "edges": [
+          0.125,
+          0.375
+        ],
+        "units": {
+          "position": "unknown",
+          "value": "unknown",
+          "frequency": "cycles/source-coordinate unit"
+        },
+        "common_range": [
+          -2.0287075740689637,
+          2.0287075740689637
+        ],
+        "artifacts": {
+          "original": {
+            "path": "/tmp/wavez-424/reference-final/native-40/worker/results/d-5b912132a10547e5895df080dc065cfd/original.f4",
+            "sha256": "cbb35001db27a5c16531f8e9e6756f6e9ed2c7608ed3568a3a44a8fb8605b346",
+            "bytes": 28311552,
+            "dtype": "f4",
+            "shape_zyx": [
+              192,
+              192,
+              192
+            ],
+            "minimum": -1.2275794172214576,
+            "maximum": 2.0287075740689637,
+            "scientific": {
+              "path": "/tmp/wavez-424/reference-final/native-40/worker/results/d-5b912132a10547e5895df080dc065cfd/original.f8",
+              "sha256": "721b14353b1329606c1b7e598e7e99a9e544b7ec1b9988807697393a73aa794c",
+              "bytes": 56623104,
+              "dtype": "f8"
+            }
+          },
+          "low": {
+            "path": "/tmp/wavez-424/reference-final/native-40/worker/results/d-5b912132a10547e5895df080dc065cfd/low.f4",
+            "sha256": "3de9f5695758e9fa6e9399d77f8aa188d8d59272d27f5ae607d33d3d31c76877",
+            "bytes": 28311552,
+            "dtype": "f4",
+            "shape_zyx": [
+              192,
+              192,
+              192
+            ],
+            "minimum": -0.7921544414856305,
+            "maximum": 1.6529147341860075,
+            "scientific": {
+              "path": "/tmp/wavez-424/reference-final/native-40/worker/results/d-5b912132a10547e5895df080dc065cfd/low.f8",
+              "sha256": "8e00a6094deaa10e5e204b8e0c069c606417c6836051d09fcd1cc2c298d67d58",
+              "bytes": 56623104,
+              "dtype": "f8"
+            }
+          },
+          "intermediate": {
+            "path": "/tmp/wavez-424/reference-final/native-40/worker/results/d-5b912132a10547e5895df080dc065cfd/intermediate.f4",
+            "sha256": "2f79a7e3a0c43e8143d3a370a82165cb6196ee9a442731b89ccf0dd8e08532f7",
+            "bytes": 28311552,
+            "dtype": "f4",
+            "shape_zyx": [
+              192,
+              192,
+              192
+            ],
+            "minimum": -1.057112677570183,
+            "maximum": 0.8568485430141651,
+            "scientific": {
+              "path": "/tmp/wavez-424/reference-final/native-40/worker/results/d-5b912132a10547e5895df080dc065cfd/intermediate.f8",
+              "sha256": "6bff553b3b8e9b9ce0d5e753e8f269929a5b13ed3e5ad92aa5940ca49aecbcf0",
+              "bytes": 56623104,
+              "dtype": "f8"
+            }
+          },
+          "high": {
+            "path": "/tmp/wavez-424/reference-final/native-40/worker/results/d-5b912132a10547e5895df080dc065cfd/high.f4",
+            "sha256": "3a1c9df11ef2f25afaffc661f270db8f2370e13c48d37f5628d9e4ed7ca4bfe8",
+            "bytes": 28311552,
+            "dtype": "f4",
+            "shape_zyx": [
+              192,
+              192,
+              192
+            ],
+            "minimum": -0.1882315103728065,
+            "maximum": 0.16283650284614867,
+            "scientific": {
+              "path": "/tmp/wavez-424/reference-final/native-40/worker/results/d-5b912132a10547e5895df080dc065cfd/high.f8",
+              "sha256": "62f8b68c7c89cd085cf8a2d2ea2cb3eb72fce581cfd1d6f0fce38e1c6ad72226",
+              "bytes": 56623104,
+              "dtype": "f8"
+            }
+          }
+        },
+        "metrics": {
+          "source_mean": 0.3270990756995065,
+          "mean_square": 0.2745530493298298,
+          "ac_mean_square": 0.16755924400635894,
+          "bands": {
+            "low": {
+              "mean_square": 0.24065348568864492,
+              "spectral_mean_square": 0.24065348568864484,
+              "fraction": 0.8765281838102617,
+              "full_dft_cells": 251,
+              "parseval_relative_error": 3.0328101272281123e-16,
+              "ac_mean_square": 0.1336596803651731,
+              "ac_fraction": 0.7976861029529392
+            },
+            "intermediate": {
+              "mean_square": 0.033471034001706194,
+              "spectral_mean_square": 0.0334710340017062,
+              "fraction": 0.12191098981929832,
+              "full_dft_cells": 6872,
+              "parseval_relative_error": 2.5273417726900937e-17,
+              "ac_mean_square": 0.033471034001706194,
+              "ac_fraction": 0.19975641570951438
+            },
+            "high": {
+              "mean_square": 0.00042852963947931225,
+              "spectral_mean_square": 0.00042852963947931247,
+              "fraction": 0.0015608263704421843,
+              "full_dft_cells": 7070765,
+              "parseval_relative_error": 7.897943039656543e-19,
+              "ac_mean_square": 0.00042852963947931225,
+              "ac_fraction": 0.0025574813375444055
+            }
+          },
+          "residual_rms": 2.361964061345618e-16,
+          "residual_max": 1.7763568394002505e-15,
+          "residual_relative_rms": 4.507753398719525e-16,
+          "parseval_relative_error": 1.8196860763368673e-15,
+          "transfer_bytes": 113246208,
+          "scientific_bytes": 226492416,
+          "workspace_bytes": 828637184
+        },
+        "support": {
+          "length_xyz": [
+            32.0,
+            32.0,
+            32.0
+          ],
+          "fundamental_xyz": [
+            0.03125,
+            0.03125,
+            0.03125
+          ],
+          "nyquist_xyz": [
+            3.0,
+            3.0,
+            3.0
+          ],
+          "low_edge_cycles_xyz": [
+            4.0,
+            4.0,
+            4.0
+          ],
+          "dc_band": "low",
+          "intervals": [
+            "[0, low)",
+            "[low, high)",
+            "[high, sampled corner]"
+          ],
+          "assumption": "Explicit periodic full domain; no boundary declaration is inferred from the capture"
+        },
+        "timings": {
+          "decode_seconds": 0.0951847579999594,
+          "fft_seconds": 0.06341199000235065,
+          "reconstruction_and_write_seconds": 0.620292657000391,
+          "total_seconds": 0.8759697049972601
+        },
+        "provenance": {
+          "source_dtype": "f8",
+          "scientific_dtype": "f8",
+          "display_dtype": "f4",
+          "lod": 1,
+          "transform": "identity",
+          "normalization": "NumPy backward DFT; disjoint real radial masks; inverse keeps complex phase",
+          "lifetime": "One worker-owned result; next reconstruction or worker shutdown clears it"
+        },
+        "manifest": {
+          "path": "/tmp/wavez-424/reference-final/native-40/worker/results/d-5b912132a10547e5895df080dc065cfd/manifest.json",
+          "sha256": "060e0a2ac9c6ab428f43e66ba344ed01342ebf38ca5804957f91a87194a6b9a0"
+        }
+      },
+      "identity": {
+        "path": "/home/Nozba/Documents/Dev/Sims/Model-A/outputs/run_20261030T193414164759Z_b3a4a787cae945b0909004cac75740ca/model_a_20261030T193414164759Z_b3a4a787cae945b0909004cac75740ca.wvz",
+        "format": "WVZ1",
+        "uuid": "5848557b4ddd4d56b48e62f9f5700b23",
+        "committed_bytes": "6965545431",
+        "sha256": "1af76f2e5e0642808f33119168d8f5e0c7cc847599e414790923c2c3585e3d7d",
+        "complete_records": 82
+      },
+      "source_verify_seconds": 3.364020786000765,
+      "reconstruction_seconds": 0.880641193001793,
+      "total_seconds": 4.244725340002333,
+      "context_metrics": {
+        "charged_bytes": 2974093,
+        "peak_charged_bytes": 1010917773,
+        "decoded_bytes": 56623104,
+        "read_bytes": 7022668214,
+        "seconds": 4.244851923001988,
+        "cpu_seconds": 4.334363551
+      },
+      "process_peak_rss_bytes": 390164480,
+      "initial_process_memory": {
+        "VmHWM_bytes": 37748736,
+        "VmRSS_bytes": 37748736,
+        "ru_maxrss_bytes": 37548032
+      },
+      "completed_process_memory": {
+        "VmHWM_bytes": 390164480,
+        "VmRSS_bytes": 48295936,
+        "ru_maxrss_bytes": 390164480
+      },
+      "cold_definition": "Fresh process, fresh verification memo and complete committed-prefix SHA-256; operating-system caches were not flushed.",
+      "context_after_source_close": {
+        "charged_bytes": 0,
+        "peak_charged_bytes": 1010917773,
+        "decoded_bytes": 56623104,
+        "read_bytes": 7022668214,
+        "seconds": 4.245354951999616,
+        "cpu_seconds": 4.334866471
+      },
+      "independent": {
+        "source_amplitude_sha256": "721b14353b1329606c1b7e598e7e99a9e544b7ec1b9988807697393a73aa794c",
+        "source_dtype": "float64",
+        "shape": [
+          192,
+          192,
+          192
+        ],
+        "source_mean": 0.3270990756995065,
+        "source_mean_square": 0.2745530493298303,
+        "source_ac_variance": 0.16755924400635885,
+        "reconstruction_max_abs": 1.7763568394002505e-15,
+        "reconstruction_rms": 2.361964061345619e-16,
+        "parseval_relative_residual": 4.0437468363041425e-16,
+        "bands": {
+          "original": {
+            "scientific_sha256": "721b14353b1329606c1b7e598e7e99a9e544b7ec1b9988807697393a73aa794c",
+            "display_sha256": "cbb35001db27a5c16531f8e9e6756f6e9ed2c7608ed3568a3a44a8fb8605b346",
+            "dtype": "float64",
+            "shape": [
+              192,
+              192,
+              192
+            ],
+            "minimum": -1.2275794172214576,
+            "maximum": 2.0287075740689637,
+            "mean": 0.3270990756995065,
+            "rms": 0.5239781000479221,
+            "mean_square": 0.2745530493298303,
+            "total_mean_square_fraction": 1.0,
+            "ac_variance_fraction": 1.0,
+            "independent_oracle_max_abs": 0.0,
+            "independent_oracle_rms": 0.0,
+            "oracle_imaginary_max_abs": 0.0,
+            "display_cast_max_abs": 1.1919781695013398e-07,
+            "float32_cast_exact": true
+          },
+          "low": {
+            "scientific_sha256": "8e00a6094deaa10e5e204b8e0c069c606417c6836051d09fcd1cc2c298d67d58",
+            "display_sha256": "3de9f5695758e9fa6e9399d77f8aa188d8d59272d27f5ae607d33d3d31c76877",
+            "dtype": "float64",
+            "shape": [
+              192,
+              192,
+              192
+            ],
+            "minimum": -0.7921544414856305,
+            "maximum": 1.6529147341860075,
+            "mean": 0.32709907569950647,
+            "rms": 0.4905644562018785,
+            "mean_square": 0.24065348568864475,
+            "total_mean_square_fraction": 0.8765281838102594,
+            "ac_variance_fraction": 0.7976861029529405,
+            "independent_oracle_max_abs": 8.881784197001252e-16,
+            "independent_oracle_rms": 1.3512833135855258e-16,
+            "oracle_imaginary_max_abs": 3.6133647514420606e-16,
+            "display_cast_max_abs": 5.9604492008702437e-08,
+            "float32_cast_exact": true
+          },
+          "intermediate": {
+            "scientific_sha256": "6bff553b3b8e9b9ce0d5e753e8f269929a5b13ed3e5ad92aa5940ca49aecbcf0",
+            "display_sha256": "2f79a7e3a0c43e8143d3a370a82165cb6196ee9a442731b89ccf0dd8e08532f7",
+            "dtype": "float64",
+            "shape": [
+              192,
+              192,
+              192
+            ],
+            "minimum": -1.057112677570183,
+            "maximum": 0.8568485430141651,
+            "mean": 0.0,
+            "rms": 0.18295090598766153,
+            "mean_square": 0.033471034001706174,
+            "total_mean_square_fraction": 0.12191098981929803,
+            "ac_variance_fraction": 0.19975641570951438,
+            "independent_oracle_max_abs": 5.551115123125783e-16,
+            "independent_oracle_rms": 7.209991750726516e-17,
+            "oracle_imaginary_max_abs": 2.5339728966406125e-16,
+            "display_cast_max_abs": 5.914440959209344e-08,
+            "float32_cast_exact": true
+          },
+          "high": {
+            "scientific_sha256": "62f8b68c7c89cd085cf8a2d2ea2cb3eb72fce581cfd1d6f0fce38e1c6ad72226",
+            "display_sha256": "3a1c9df11ef2f25afaffc661f270db8f2370e13c48d37f5628d9e4ed7ca4bfe8",
+            "dtype": "float64",
+            "shape": [
+              192,
+              192,
+              192
+            ],
+            "minimum": -0.1882315103728065,
+            "maximum": 0.16283650284614867,
+            "mean": -8.031127203596329e-21,
+            "rms": 0.020700957453202794,
+            "mean_square": 0.00042852963947931236,
+            "total_mean_square_fraction": 0.0015608263704421819,
+            "ac_variance_fraction": 0.0025574813375444073,
+            "independent_oracle_max_abs": 1.1709383462843448e-15,
+            "independent_oracle_rms": 1.5810001114596009e-16,
+            "oracle_imaginary_max_abs": 4.702099627287405e-16,
+            "display_cast_max_abs": 7.445454308641075e-09,
+            "float32_cast_exact": true
+          }
+        },
+        "oracle": "Separate full complex fftn/ifftn, full frequency lattice and direct real-space mean squares; no production reconstruction functions or rFFT multiplicity.",
+        "failures": [],
+        "scene_reader_decode_oracle_seconds": 2.268047485002171,
+        "native_geometry_matches": true
+      }
+    }
+  ],
+  "failures": [],
+  "validation_exit_code": 0,
+  "limits": "Three recorded Model A native samples and deterministic full-grid known values. No optical-energy interpretation, universal performance claim, or proof about filament connectivity."
+}

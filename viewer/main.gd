@@ -70,6 +70,7 @@ var scene_layers
 var selection_controller
 var spatial_spectrum
 var spectral_band_map
+var spectral_reconstruction
 # WVZ1-only controls; retained synchronous mode supports export and comparisons.
 var scene_prebuffer_enabled := true
 var scene_hidden_fast_path := true
@@ -664,6 +665,7 @@ func _input(event: InputEvent) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if shell != null and shell.editing_shortcuts(): return
 	if inspection_busy: return
+	if event is InputEventKey and spectral_reconstruction != null and spectral_reconstruction.owns_keyboard_input(): return
 	var editor := get_viewport().gui_get_focus_owner()
 	if event is InputEventKey and (editor is LineEdit or editor is TextEdit or editor is SpinBox): return
 	if selection_controller != null and selection_controller.handle_input(event):get_viewport().set_input_as_handled();return
@@ -674,12 +676,14 @@ func _unhandled_input(event: InputEvent) -> void:
 			_toggle_fullscreen(); get_viewport().set_input_as_handled(); return
 		if mouse_button.button_index == MOUSE_BUTTON_LEFT:
 			if mouse_button.pressed:
+				if spectral_reconstruction != null: spectral_reconstruction.release_keyboard_focus()
 				var focused := get_viewport().gui_get_focus_owner()
 				if focused != null: focused.release_focus()
 				_clear_manual_navigation(false)
 			dragging = mouse_button.pressed
 			last_mouse = mouse_button.position
 		elif mouse_button.button_index == MOUSE_BUTTON_RIGHT and mouse_button.pressed and shell.edge_reveal.is_viewport_point(mouse_button.position) and not dragging:
+			if spectral_reconstruction != null: spectral_reconstruction.release_keyboard_focus()
 			var focused := get_viewport().gui_get_focus_owner()
 			if focused != null: focused.release_focus()
 			# RMB steering coexists with held roll and vertical translation.
@@ -734,8 +738,11 @@ func _clear_manual_navigation(clear_vertical: bool = true, clear_roll: bool = tr
 	# Focus loss, modal/recovery actions and capture replacement discard it.
 	if clear_vertical: camera_vertical_keys.clear()
 
+func _camera_input_has_focus_owner() -> bool:
+	return get_viewport().gui_get_focus_owner() != null or (spectral_reconstruction != null and spectral_reconstruction.owns_keyboard_input())
+
 func _camera_vertical_input_allowed() -> bool:
-	return not (offline_instance or inspection_busy or inspection_paused or shell.editing_shortcuts() or get_viewport().gui_get_focus_owner() != null or (shell.orbit_editor != null and shell.orbit_editor.visible)) and (free_camera or orbit_enabled)
+	return not (offline_instance or inspection_busy or inspection_paused or shell.editing_shortcuts() or _camera_input_has_focus_owner() or (shell.orbit_editor != null and shell.orbit_editor.visible)) and (free_camera or orbit_enabled)
 
 func _start_camera_vertical_move(action: String, event: InputEventKey) -> void:
 	if _camera_vertical_input_allowed(): camera_vertical_keys[action] = event.duplicate()
@@ -757,7 +764,7 @@ func _update_camera_vertical_keys() -> void:
 		if shell.shortcuts.active[action] != shell.shortcuts.binding(camera_vertical_keys[action]): camera_vertical_keys.erase(action)
 
 func _start_camera_roll(action: String, event: InputEventKey) -> void:
-	if offline_instance or inspection_busy or inspection_paused or dragging or shell.editing_shortcuts() or get_viewport().gui_get_focus_owner() != null: return
+	if offline_instance or inspection_busy or inspection_paused or dragging or shell.editing_shortcuts() or _camera_input_has_focus_owner(): return
 	if shell.orbit_editor != null and shell.orbit_editor.visible: return
 	# Match manual steering's Auto Orbit takeover, preserving Free Camera when
 	# Auto Orbit is already off. A disabled Free Camera does not accept roll.
@@ -776,7 +783,7 @@ func _release_camera_roll_key(event: InputEventKey) -> void:
 
 func _update_camera_roll(delta: float) -> void:
 	if camera_roll_keys.is_empty(): return
-	if offline_instance or inspection_busy or inspection_paused or not free_camera or dragging or shell.editing_shortcuts() or get_viewport().gui_get_focus_owner() != null or (shell.orbit_editor != null and shell.orbit_editor.visible):
+	if offline_instance or inspection_busy or inspection_paused or not free_camera or dragging or shell.editing_shortcuts() or _camera_input_has_focus_owner() or (shell.orbit_editor != null and shell.orbit_editor.visible):
 		camera_roll_keys.clear(); return
 	for action in camera_roll_keys.keys():
 		if shell.shortcuts.active[action] != shell.shortcuts.binding(camera_roll_keys[action]): camera_roll_keys.erase(action)
@@ -830,7 +837,7 @@ func _cursor_idle_tick(now_msec: int, eligible: bool) -> void:
 		_sync_cursor_mode()
 
 func _start_manual_orbit(action: String, event: InputEventKey) -> void:
-	if _camera_dragging() or get_viewport().gui_get_focus_owner() != null: return
+	if _camera_dragging() or _camera_input_has_focus_owner(): return
 	_take_manual_camera_control()
 	manual_orbit_keys[action] = event.duplicate()
 
@@ -846,7 +853,7 @@ func _release_manual_orbit_key(event: InputEventKey) -> void:
 
 func _update_manual_orbit(delta: float) -> void:
 	if manual_orbit_keys.is_empty(): return
-	if offline_instance or inspection_busy or inspection_paused or _camera_dragging() or shell.editing_shortcuts() or get_viewport().gui_get_focus_owner() != null:
+	if offline_instance or inspection_busy or inspection_paused or _camera_dragging() or shell.editing_shortcuts() or _camera_input_has_focus_owner():
 		_clear_manual_navigation(); return
 	for action in manual_orbit_keys.keys():
 		if shell.shortcuts.active[action] != shell.shortcuts.binding(manual_orbit_keys[action]): manual_orbit_keys.erase(action)
@@ -1461,6 +1468,8 @@ func _build_inspector_controls() -> void:
 	add_child(spatial_spectrum);spatial_spectrum.setup(self)
 	spectral_band_map = preload("res://analysis/spectral_band_map_controller.gd").new()
 	add_child(spectral_band_map);spectral_band_map.setup(self)
+	spectral_reconstruction = preload("res://analysis/spectral_reconstruction_controller.gd").new()
+	add_child(spectral_reconstruction);spectral_reconstruction.setup(self)
 	var export_box := _section("Capture / Export")
 	_button(export_box, "Save image…", _save_image)
 	_check(export_box,"PNG inspection JSON sidecar",false,func(v: bool): screenshot_sidecar = v).text = "Inspection sidecar"
@@ -1498,7 +1507,7 @@ func _step_frame(direction: int) -> void:
 func _move_free_camera(delta: float) -> void:
 	_update_camera_vertical_keys()
 	if shell != null and shell.editing_shortcuts(): return
-	if get_viewport().gui_get_focus_owner() != null: return
+	if _camera_input_has_focus_owner(): return
 	var vertical := float(camera_vertical_keys.has("move_camera_up")) - float(camera_vertical_keys.has("move_camera_down"))
 	var move := Vector3(float(Input.is_physical_key_pressed(KEY_D)) - float(Input.is_physical_key_pressed(KEY_A)), vertical, float(Input.is_physical_key_pressed(KEY_S)) - float(Input.is_physical_key_pressed(KEY_W)))
 	if move == Vector3.ZERO:return
@@ -1537,7 +1546,7 @@ func _release_camera_speed_key(event: InputEventKey) -> void:
 
 func _update_camera_speed_repeat(now_msec: int) -> void:
 	if camera_speed_hold_action.is_empty(): return
-	if offline_instance or inspection_busy or inspection_paused or (shell != null and shell.editing_shortcuts()) or get_viewport().gui_get_focus_owner() != null:
+	if offline_instance or inspection_busy or inspection_paused or (shell != null and shell.editing_shortcuts()) or _camera_input_has_focus_owner():
 		_clear_camera_speed_hold()
 		return
 	if now_msec < camera_speed_next_repeat_msec: return
@@ -1919,6 +1928,7 @@ func _sync_control_state_profiled() -> void:
 func _reset_inspection_source() -> void:
 	if spatial_spectrum != null: spatial_spectrum.reset_source()
 	if spectral_band_map != null: spectral_band_map.reset_source()
+	if spectral_reconstruction != null: spectral_reconstruction.reset_source()
 	if selection_controller != null:selection_controller.reset_source()
 	if scene_layers != null:
 		scene_layers.close();remove_child(scene_layers);scene_layers.queue_free();scene_layers = null
@@ -2310,6 +2320,7 @@ func _save_image_viewport() -> Image:
 	for window in windows: window.hide()
 	var chrome := [shell.empty,shell.open_error,shell.immersive_hint,overlay_panel,screenshot_notice,orbit_panel,orbit_guide,shell.shortcuts_editor]
 	if spatial_spectrum != null: chrome.append(spatial_spectrum.region_overlay)
+	var reconstruction_suspended: bool = spectral_reconstruction.suspend_presentation() if spectral_reconstruction != null else false
 	if spectral_band_map != null: spectral_band_map.suspend_presentation()
 	var legend_available: Vector2 = shell.legend_available
 	if shell.immersive:
@@ -2324,6 +2335,7 @@ func _save_image_viewport() -> Image:
 	var image := get_viewport().get_texture().get_image()
 	for item in hidden: item.show()
 	if spectral_band_map != null: spectral_band_map.restore_presentation()
+	if spectral_reconstruction != null: spectral_reconstruction.restore_presentation(reconstruction_suspended)
 	if shell.immersive: shell.layout_legend(legend_available)
 	for window in windows: window.show()
 	for control in focused:

@@ -112,6 +112,26 @@ published. Hash/schema validation and independent source verification precede
 reuse; complete cached bytes alone are historical evidence, not current source
 verification. No new WVZ1, SWSS, export or inspection format is introduced.
 
+## Reconstructed spectral volumes
+
+`spectral_reconstruct` accepts `object: "field"`, `channel: "amplitude"`, a native
+`index`, explicit `boundary: "periodic"` and optional two increasing radial
+`edges` (default `[0.125, 0.375]`). The bounded reply has
+`kind: "spectral_reconstruction"`, `version: 1`, source identity and file stamp,
+native record/time, geometry, units, common symmetric display range, numerical
+metrics, timings and provenance. `artifacts` names `original`, `low`,
+`intermediate` and `high`; each descriptor binds a full-grid little-endian f4
+display file and f8 scientific file by owned absolute path, byte count and
+SHA-256. The manifest is also hashed. Dense arrays never enter control JSON.
+
+These temporary files belong to the worker's sibling `-reconstruction` owner,
+inside the existing shared disk quota and outside generic `ResultCache`
+collection. Publication is atomic and source-verified. One result is retained;
+replacement, close and recognized dead-owner recovery reclaim it. This internal
+handoff is not a durable inspection or capture schema. Existing request/revision,
+cancellation and owner-lease checks still apply. See the
+[numerical and display contract](SPECTRAL_RECONSTRUCTION.md).
+
 ## Selection definition version 1
 
 The v3 recipe selection block contains `version: 1`, `revision`, `active`,

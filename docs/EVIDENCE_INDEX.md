@@ -1,5 +1,10 @@
 # Retained evidence
 
+Issue #424's [reconstructed-volume review](evidence/issue-424/README.md) records
+independent full-grid numerical comparisons, actual Wavez 3D views, bounded
+worker/artifact ownership, native/package behavior and performance limits. It
+belongs to the experimental `spectral` branch; main's rollback stays separate.
+
 Issue #417's [selected-time spectral replay review](evidence/issue-417/README.md)
 records exact native cache/direct comparisons, transactional cache invalidation,
 source/restart costs, source/package replay checks and remaining limitations.

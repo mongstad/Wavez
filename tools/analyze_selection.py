@@ -20,6 +20,7 @@ from wavez_export.analysis.memo import VerificationMemo
 from wavez_export.analysis.member_assets import MemberAssets
 from wavez_export.analysis.result_store import ResultCache,references_in as result_references
 from wavez_export.analysis.spatial_band_sequence import SpectralCache
+from wavez_export.analysis.spectral_reconstruction import DenseReconstructionStore
 from wavez_export.analysis import native_analysis
 from wavez_export.analysis import diagnostics,period_jobs,plot_preview,picking,derived,selection_jobs,comparisons,scheduled_series,linked_plots,space_time,heatmap_preview,input_provenance,atomic_output,export_results,recipes
 
@@ -77,10 +78,13 @@ class Worker:
         self.progress_time = 0.
         self.memo = VerificationMemo()
         MemberAssets.reap_abandoned(directory.parent,Context(wall_seconds=10))
+        DenseReconstructionStore.reap_abandoned(directory.parent,Context(wall_seconds=10))
         self.assets = MemberAssets(assets_root or directory/"members",registry_root=directory.parent)
         self.assets.set_owner(owner)
         self.results = ResultCache(self.assets.root.parent/"results",registry_root=directory.parent)
         self.spectral_cache = None # A malformed spectral collection cannot block unrelated analysis.
+        self.reconstruction_store = None
+        self.reconstruction_result_id = None
         self.background_id=None;self.background_request=None;self.background_context=None
         self.background_checked=0.;self.background_superseded=False;self.background_progress_time=0.
         self.interactive_checked=0.;self.pool=None;self.recent_result=None
@@ -191,6 +195,12 @@ class Worker:
             validate_request(request)
             if request["operation"] == "spectral_band_sequence" and self.spectral_cache is None:
                 self.spectral_cache = SpectralCache(self.directory.parent)
+            if request["operation"] == "spectral_reconstruct" and self.reconstruction_store is None:
+                self.reconstruction_store = DenseReconstructionStore(
+                    self.directory.with_name(self.directory.name+"-reconstruction"), registry_root=self.directory.parent)
+            if request["operation"] == "spectral_reconstruct":
+                self.reconstruction_store.clear()
+                self.reconstruction_result_id = None
             if (request["operation"] in BACKGROUND_OPERATIONS)!=background:
                 raise AnalysisError("invalid_lane","Fixed analysis uses the background lane; cursor/page work uses the interactive lane")
             if self.background_context is None:self.pool=SharedBudget(request.get("budget",{}).get("memory_bytes",512*MIB))
@@ -210,7 +220,7 @@ class Worker:
             retained=[self.background_request.get("arguments",{})] if self.background_context is not None and self.background_request else []
             if self.background_context is not None:retained.extend(self.background_context.retained_members)
             retained.extend(self.results.member_references(pins,context))
-            result=execute(request,context=context,memo=self.memo,assets=self.assets,results=self.results,spectral_cache=self.spectral_cache,provenance=self.provenance,retained_members=retained,defer_publication=True)
+            result=execute(request,context=context,memo=self.memo,assets=self.assets,results=self.results,spectral_cache=self.spectral_cache,reconstruction_store=self.reconstruction_store,provenance=self.provenance,retained_members=retained,defer_publication=True)
             if request["operation"] in SOURCE_RESULT_OPERATIONS:created=result["data"]["result"]
             if background:self.background_checked=0.
             else:self.checked=0.
@@ -219,10 +229,16 @@ class Worker:
             if context is not None:result["metrics"]=context.metrics()
             context.verify_publication()
             context.commit_publications()
+            if request["operation"] == "spectral_reconstruct":self.reconstruction_result_id=request["id"]
             if not self.exiting:write_json(self.directory/("background_result.json" if background else "result.json"),result)
             if created:self.recent_result=created
         except Exception as exc:
             if context is not None:context.abort_publications(exc)
+            if request.get("operation") == "spectral_reconstruct" and self.reconstruction_store is not None:
+                try:
+                    self.reconstruction_store.clear()
+                    self.reconstruction_result_id=None
+                except Exception:pass # Unknown entries remain quarantined.
             if created:
                 try:self.results.discard(created)
                 except Exception:pass # Unknown files remain quarantined, never announced.
@@ -235,14 +251,35 @@ class Worker:
 
     def run(self):
         write_json(self.directory/"ready.json", dict(version=1, pid=os.getpid(), guard=self.guard, memory=memory()))
-        while self.owner_alive() and not self.exiting:
-            if (self.directory/"close").exists():
-                break
-            request=self.next_request("request.json",self.current)
-            if request is not None:self.perform(request,False);continue
-            request=self.next_request("background_request.json",self.background_id)
-            if request is not None:self.perform(request,True);continue
-            time.sleep(.02)
+        try:
+            while self.owner_alive() and not self.exiting:
+                if (self.directory/"close").exists():
+                    break
+                release=self.directory/"reconstruction_release.json"
+                if release.exists():
+                    try:
+                        value=read_json(release)
+                        if self.reconstruction_store is not None and isinstance(value,dict):
+                            self.reconstruction_store.release(value.get("manifest"))
+                        release.unlink()
+                    except (OSError,ValueError):pass
+                # Cancellation can arrive after atomic publication but before
+                # the viewer accepts the reply and learns its manifest path.
+                # Retire only that completed request, never a newer result.
+                if self.reconstruction_result_id is not None:
+                    try:
+                        cancel=read_json(self.directory/"background_cancel.json")
+                        if isinstance(cancel,dict) and cancel.get("id")==self.reconstruction_result_id:
+                            self.reconstruction_store.clear()
+                            self.reconstruction_result_id=None
+                    except (OSError,ValueError):pass
+                request=self.next_request("request.json",self.current)
+                if request is not None:self.perform(request,False);continue
+                request=self.next_request("background_request.json",self.background_id)
+                if request is not None:self.perform(request,True);continue
+                time.sleep(.02)
+        finally:
+            if self.reconstruction_store is not None:self.reconstruction_store.close()
         write_json(self.directory/"stopped.json", dict(pid=os.getpid(),memory=memory()))
 
 

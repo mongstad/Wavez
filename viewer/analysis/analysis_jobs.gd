@@ -11,6 +11,9 @@ signal spatial_spectrum_progress(value: Dictionary)
 signal spectral_band_map_completed(result: Dictionary)
 signal spectral_band_map_failed(message: String)
 signal spectral_band_map_progress(value: Dictionary)
+signal spectral_reconstruction_completed(result: Dictionary)
+signal spectral_reconstruction_failed(message: String)
+signal spectral_reconstruction_progress(value: Dictionary)
 const MAX_CONTROL := 1048576
 const Buffer = preload("res://layers/playback_buffer.gd")
 const Profile = preload("res://scene/playback_profile.gd")
@@ -77,12 +80,13 @@ func start(cache_root := "", operation := "") -> bool:
 func _start_failed(message: String, operation: String) -> bool:
 	error = message
 	if operation == "spatial_spectrum": spatial_spectrum_failed.emit(message)
+	elif operation == "spectral_reconstruct": spectral_reconstruction_failed.emit(message)
 	elif operation in ["spectral_band_map","spectral_band_sequence"]: spectral_band_map_failed.emit(message)
 	else: failed.emit(message)
 	return false
 
 static func is_spectral_operation(operation: String) -> bool:
-	return operation in ["spatial_spectrum","spectral_band_map","spectral_band_sequence"]
+	return operation in ["spatial_spectrum","spectral_band_map","spectral_band_sequence","spectral_reconstruct"]
 
 func request(source: Dictionary, operation: String, arguments: Dictionary, source_revision: int, selection_version: int, analysis_version := 0) -> String:
 	if worker_pid <= 0 or not OS.is_process_running(worker_pid):
@@ -142,7 +146,7 @@ func shutdown() -> void:
 	if not directory.is_empty():
 		preload("res://analysis/packaged_runtime.gd").cleanup(packaged_runtime_files,directory)
 		packaged_runtime_files.clear()
-		for name in ["lease.json","request.json","cancel.json","close","ready.json","result.json","progress.json","stopped.json","background_request.json","background_cancel.json","background_result.json","background_progress.json","playback_pressure.json"]:
+		for name in ["lease.json","request.json","cancel.json","close","ready.json","result.json","progress.json","stopped.json","background_request.json","background_cancel.json","background_result.json","background_progress.json","playback_pressure.json","reconstruction_release.json"]:
 			for suffix in ["", ".tmp"]:
 				var path: String = directory.path_join(name+suffix)
 				if FileAccess.file_exists(path): DirAccess.remove_absolute(path)
@@ -202,6 +206,7 @@ func _poll() -> void:
 			background_pending = false
 			if result.get("ok",false):
 				if background_operation == "spatial_spectrum": spatial_spectrum_completed.emit(result)
+				elif background_operation == "spectral_reconstruct": spectral_reconstruction_completed.emit(result)
 				elif background_operation in ["spectral_band_map","spectral_band_sequence"]: spectral_band_map_completed.emit(result)
 				else: background_completed.emit(result)
 			else:
@@ -211,11 +216,13 @@ func _poll() -> void:
 			var progress := _read("background_progress.json")
 			if progress.get("id") == background_id:
 				if background_operation == "spatial_spectrum": spatial_spectrum_progress.emit(progress)
+				elif background_operation == "spectral_reconstruct": spectral_reconstruction_progress.emit(progress)
 				elif background_operation in ["spectral_band_map","spectral_band_sequence"]: spectral_band_map_progress.emit(progress)
 				else: background_progress.emit(progress)
 
 func _background_failed(message: String) -> void:
 	if background_operation == "spatial_spectrum": spatial_spectrum_failed.emit(message)
+	elif background_operation == "spectral_reconstruct": spectral_reconstruction_failed.emit(message)
 	elif background_operation in ["spectral_band_map","spectral_band_sequence"]: spectral_band_map_failed.emit(message)
 	else: background_failed.emit(message)
 
