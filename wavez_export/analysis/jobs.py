@@ -14,7 +14,7 @@ from .source import SourceSnapshot
 SELECTION_OPERATIONS = {"define_selection", "resolve_selection", "resolve_selections", "freeze_selection", "combine_selections", "edit_selection"}
 SOURCE_RESULT_OPERATIONS={"analyze","import_csv","estimate_period","compare_series","space_time"}
 SOURCE_OUTPUT_OPERATIONS={"export_analysis","save_recipe","load_recipe","prepare_matched_render"}
-BACKGROUND_OPERATIONS=SOURCE_RESULT_OPERATIONS|SOURCE_OUTPUT_OPERATIONS|{"result_series","result_plot","result_overlay","result_heatmap","spatial_spectrum","spectral_band_map"}
+BACKGROUND_OPERATIONS=SOURCE_RESULT_OPERATIONS|SOURCE_OUTPUT_OPERATIONS|{"result_series","result_plot","result_overlay","result_heatmap","spatial_spectrum","spectral_band_map","spectral_band_sequence"}
 OPERATIONS = {"describe", "records", "sample", "probe", "identity_audit", "epoch", "pick", "inspect_derived", "result_page", "result_manifest"} | SELECTION_OPERATIONS | BACKGROUND_OPERATIONS
 
 
@@ -72,7 +72,7 @@ def _object(source, arguments):
     return obj
 
 
-def execute(request, *, context=None, memo=None, assets=None, results=None, provenance=None, retained_members=(),defer_publication=False):
+def execute(request, *, context=None, memo=None, assets=None, results=None, spectral_cache=None, provenance=None, retained_members=(),defer_publication=False):
     request = validate_request(request)
     context = context or Context(**request.get("budget", {}))
     ref = request["source"]
@@ -111,7 +111,10 @@ def execute(request, *, context=None, memo=None, assets=None, results=None, prov
             from .member_assets import references_in
             for reference in request["member_pins"]:assets.path(reference)
             assets.collect(references_in([request["member_pins"],request.get("arguments",{}),list(retained_members)]),context)
-        if request["operation"] in SOURCE_RESULT_OPERATIONS|SOURCE_OUTPUT_OPERATIONS:
+        if request["operation"] == "spectral_band_sequence":
+            from .spatial_band_sequence import run
+            data=run(source,request.get("arguments",{}),spectral_cache)
+        elif request["operation"] in SOURCE_RESULT_OPERATIONS|SOURCE_OUTPUT_OPERATIONS:
             if results is None:raise AnalysisError("invalid_result","Result store unavailable")
             if request["operation"]=="analyze":from .native_analysis import run
             elif request["operation"]=="import_csv":from .diagnostics import run
@@ -124,7 +127,7 @@ def execute(request, *, context=None, memo=None, assets=None, results=None, prov
             else:from .comparisons import run
             data=run(source,request.get("arguments",{}),results,provenance=provenance)
         else:data = dispatch(source, request["operation"], request.get("arguments", {}))
-        if request["operation"] in ("spatial_spectrum", "spectral_band_map"):
+        if request["operation"] in ("spatial_spectrum", "spectral_band_map", "spectral_band_sequence"):
             data["timings"]["verification_open_seconds"] = source_open_seconds
             if provenance is not None:data["provenance"]["worker"] = provenance
         try:

@@ -1,13 +1,14 @@
 # Spectral band map
 
 **Tools → Spectral band map** computes a bounded plane of regional measurements
-from one verified native scalar sample. Each center uses a complete **3D**
+from verified native scalar samples. **Compute** pins one sample; **Prepare
+selected** prepares a small explicit sequence for exact-time replay. Each center uses a complete **3D**
 window and real 3D FFT. The plane is an optional derived presentation beside the
 ordinary source field. It is not a 2D FFT, a dense spectral volume, a local
 wavelength reconstruction, physical model energy or optical light.
 
 This experimental phase follows [regional spatial spectrum](SPATIAL_SPECTRUM.md)
-and the [phase-2 proposal](research/spectral-135/ARCHITECTURE.md). Source arrays,
+and the [phase-2/3 proposal](research/spectral-135/ARCHITECTURE.md). Source arrays,
 WVZ1/SWSS, Scientific/Cinematic settings and conventional field rendering retain
 their existing contracts.
 
@@ -61,6 +62,83 @@ The default band is `[0.05, 0.15)`. At Model A spacing 1/6, a 128³ window has
 It is an exploratory band-power measurement, not a resolved initial wavelength.
 Reduce center count or increase hop for a smaller workload; reducing support
 changes the scientific measurement and its resolving limits.
+
+## Prepare and replay selected native records
+
+For `field / amplitude`, enter **First**, **Last** and **Stride** under
+**Selected native indices**. The endpoints are inclusive indices into that
+field's records, not viewer frames or a resampled clock. At most eight records
+and 64 centers per record are admitted. Review the listed native times, number
+of windows, estimated worker RAM and disk reservation before choosing
+**Prepare selected**. The worker independently checks source descriptors,
+memory, reply size and disk quotas; an estimate is not a promise of process RSS.
+Missing signed amplitude is refused rather than replaced by energy density.
+
+One source verification serves the sequence, and each native channel is decoded
+once. All selected maps must finish before the sequence is published. Cancel,
+failure or changed inputs publish no partial sequence. The accepted Hann kernel,
+normalization, exact band edges and unavailable-support rules are unchanged.
+
+With **Replay prepared maps at exact native times** enabled, the plane appears
+only when the playback time exactly equals a selected native time and the
+ordinary scene has committed that same time. At intermediate times, unselected
+native records or while the ordinary scene is preparing, the plane hides and
+the legend reports unavailable. There is no temporal interpolation, tolerance
+window or silently held spectral map. Continuous playback may pass between all
+selected times; seek to an exact record to inspect it. Reverse and looping use
+the same rule. Disabling replay hides the sequence; **Compute** remains the
+separate single-sample pinned workflow.
+
+Replay reads bounded prepared results in viewer memory. It performs no source
+hashing, decoding, FFT or disk-cache lookup on a playhead update. It never gates
+ordinary playback or extends the teal scene-ready band. Preparation still yields
+to ordinary playback underflow through the existing worker pressure handling.
+
+Each map retains its own numerical color range. A color in one native map must
+not be compared quantitatively with the same color in another; use the range
+and center values. The legend distinguishes map time, playback time, coverage,
+cache/preparation state, source provenance and unresolved support. Show map,
+Show source field, palette, opacity, presets and navigation remain independent
+presentation controls.
+
+## Owned cache and restart behavior
+
+Prepared sequences use the existing transactional analysis result store under
+the private analysis-worker registry's `spectral-cache/results` namespace.
+Source development uses `.wavez-cache/analysis-workers`; packaged viewing uses
+the application's user-data `analysis-workers` directory. This cache is derived,
+disposable application data, never part of a WVZ1 capture or scientific export.
+
+Reuse requires the exact selected set and parameters. Overlapping selections
+are not assembled from separately cached subsets. The binding includes verified
+committed extent/prefix hash, native record/sequence/exact time, object/channel,
+dtype and full geometry, grid/support, exact band, units, Hann/normalization and
+algorithm/implementation versions. A matching path or UUID alone cannot hit.
+The result container and every artifact must pass hash and spectral-schema
+validation. Display choices are not scientific cache parameters.
+
+The cache is limited to eight complete sequences and 64 MiB, within the existing
+shared 2 GiB / 8192-file analysis quota and free-disk reserve. Each new sequence
+reserves 2 MiB. Eviction affects owned derived entries only; unknown files and
+links are preserved with refusal. Partial transactions and corrupt known cache
+entries cannot become prepared maps. Atomic publication means a cancelled
+sequence cannot appear complete after restarting.
+
+Closing and reopening the form retains the session's completed sequence.
+Closing or switching the capture, source append/replacement/truncation, changed
+parameters or selection revision clears its publication target. Existing Close
+File behavior requires cancelling active analysis and waiting for acknowledgement.
+Sequence preparation/publication also compares the reader's source stamp with a
+fresh file identity before the normal polling interval elapses. A source without
+a usable high-resolution file stamp is refused for sequence replay; this path
+is validated on the documented Linux local filesystem environment.
+After reopening a capture or restarting the app, enter the same parameters and
+choose **Prepare selected** to request verified reuse. A new worker independently
+verifies the source again before loading durable results; a warm worker may use
+its existing identity-checked verification memo. Cached values do not authorize
+automatic whole-capture preprocessing or restoration of a stale overlay.
+Per-map timings retained in a cache hit describe its original calculation;
+current verification/lookup/round-trip costs are reported separately.
 
 ## Numerical meaning and unavailable data
 
@@ -156,9 +234,10 @@ have their usual playback/preparation consequences.
 
 At most 64 requested centers are admitted. Each support axis requires 4–256
 samples, with no more than 192³ samples per window. Windows are processed
-sequentially, sharing one verified source and one selected-channel decode; there
-is no per-center source verification/decode, simultaneous FFT stack, persistent
-map cache or all-time preprocessing. The existing worker memory budget and
+sequentially, sharing one verified source and one selected-channel decode per
+native record; there is no per-center source verification/decode or simultaneous
+FFT stack. Selected-time preparation uses the bounded owned cache above, never
+automatic all-time preprocessing. The existing worker memory budget and
 physical-memory headroom remain authoritative. Source-channel decode can exceed
 the budget even when individual windows are small. The viewer does not silently
 reduce scientific support after admission failure.
@@ -173,7 +252,8 @@ terminate an unresponsive worker.
 
 Source replacement/append detection, source or parameter edits, selection
 revision, supersession and source close invalidate publication and remove the
-old map. A completed map stays visibly pinned while playback advances. Closing
+old map. A completed **Compute** map stays visibly pinned while playback advances;
+prepared-sequence replay follows the exact-time rule above. Closing
 the form cancels pending work; a completed map remains visible with its pinned
 legend until **Show map** is disabled, its inputs change or the source closes.
 Existing **Close File** refusal while analysis is active remains: cancel, wait

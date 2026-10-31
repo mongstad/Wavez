@@ -1,0 +1,22 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+Vulkan 1.4.351 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3070 Ti
+
+WINDOW SIGNALS: {"connections":{"focus_entered":1,"tree_exited":1},"embedded":true,"phase":"standalone seek equivalent shown 0","popup_class":"PopupPanel","popup_id":39476790737,"visible":true}
+WINDOW SIGNALS: {"connections":{"focus_entered":0,"tree_exited":0},"embedded":true,"phase":"standalone seek equivalent hidden 0","popup_class":"PopupPanel","popup_id":39476790737,"visible":false}
+WINDOW SIGNALS: {"connections":{"focus_entered":1,"tree_exited":1},"embedded":true,"phase":"standalone seek equivalent shown 1","popup_class":"PopupPanel","popup_id":39476790737,"visible":true}
+WINDOW SIGNALS: {"connections":{"focus_entered":0,"tree_exited":0},"embedded":true,"phase":"standalone seek equivalent hidden 1","popup_class":"PopupPanel","popup_id":39476790737,"visible":false}
+WINDOW SIGNALS: {"connections":{"focus_entered":1,"tree_exited":1},"embedded":true,"phase":"standalone seek equivalent shown 2","popup_class":"PopupPanel","popup_id":39476790737,"visible":true}
+WINDOW SIGNALS: {"connections":{"focus_entered":0,"tree_exited":0},"embedded":true,"phase":"standalone seek equivalent hidden 2","popup_class":"PopupPanel","popup_id":39476790737,"visible":false}
+WINDOW SIGNALS: {"connections":{"focus_entered":1,"tree_exited":1},"embedded":true,"phase":"standalone seek equivalent shown 3","popup_class":"PopupPanel","popup_id":39476790737,"visible":true}
+WINDOW SIGNALS: {"connections":{"focus_entered":0,"tree_exited":0},"embedded":true,"phase":"standalone seek equivalent hidden 3","popup_class":"PopupPanel","popup_id":39476790737,"visible":false}
+WINDOW SIGNALS: {"connections":{"focus_entered":1,"tree_exited":1},"embedded":true,"phase":"standalone seek equivalent shown 4","popup_class":"PopupPanel","popup_id":39476790737,"visible":true}
+WINDOW SIGNALS: {"connections":{"focus_entered":0,"tree_exited":0},"embedded":true,"phase":"standalone seek equivalent hidden 4","popup_class":"PopupPanel","popup_id":39476790737,"visible":false}
+WINDOW SIGNALS: {"connections":{"focus_entered":1,"tree_exited":1},"embedded":true,"phase":"standalone seek equivalent shown 5","popup_class":"PopupPanel","popup_id":39476790737,"visible":true}
+WINDOW SIGNALS: {"connections":{"focus_entered":0,"tree_exited":0},"embedded":true,"phase":"standalone seek equivalent hidden 5","popup_class":"PopupPanel","popup_id":39476790737,"visible":false}
+WINDOW SIGNALS: {"connections":{"focus_entered":1,"tree_exited":1},"embedded":true,"phase":"standalone seek equivalent shown 6","popup_class":"PopupPanel","popup_id":39476790737,"visible":true}
+WINDOW SIGNALS: {"connections":{"focus_entered":0,"tree_exited":0},"embedded":true,"phase":"standalone seek equivalent hidden 6","popup_class":"PopupPanel","popup_id":39476790737,"visible":false}
+WINDOW SIGNALS: {"connections":{"focus_entered":1,"tree_exited":1},"embedded":true,"phase":"standalone seek equivalent shown 7","popup_class":"PopupPanel","popup_id":39476790737,"visible":true}
+WINDOW SIGNALS: {"connections":{"focus_entered":0,"tree_exited":0},"embedded":true,"phase":"standalone seek equivalent hidden 7","popup_class":"PopupPanel","popup_id":39476790737,"visible":false}
+WINDOW SIGNALS: {"connections":{"focus_entered":1,"tree_exited":1},"embedded":true,"phase":"standalone File equivalent shown 0","popup_class":"PopupMenu","popup_id":40953185756,"visible":true}
+WINDOW SIGNALS: {"connections":{"focus_entered":0,"tree_exited":0},"embedded":true,"phase":"standalone File equivalent hidden 0","popup_class":"PopupMenu","popup_id":40953185756,"visible":false}
+WINDOW SIGNALS: 18 functional checks, 0 failures; ordinary SceneTree exit follows
