@@ -146,6 +146,8 @@ func _input_changed(_unused = null) -> void:
 	_invalidate("Map inputs changed. Compute to verify."); refresh_context()
 
 func open() -> void:
+	if viewer.spectral_reconstruction != null:
+		viewer.spectral_reconstruction.presentation_enabled.button_pressed = false
 	viewer._clear_manual_navigation()
 	var focus: Control = viewer.get_viewport().gui_get_focus_owner()
 	if focus != null: previous_focus = weakref(focus)

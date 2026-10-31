@@ -647,6 +647,9 @@ func set_probe_marker_enabled(enabled: bool) -> void:
 	probe_marker_enabled = enabled
 	if is_instance_valid(probe_marker):probe_marker.visible = enabled and probe_marker_valid
 func probe_selected_volume() -> void:
+	if viewer.spectral_reconstruction != null and viewer.spectral_reconstruction.active():
+		probe_label.text = "Source probe unavailable while the pinned reconstructed view is shown. Turn off Show pinned volume or close Spectral reconstruction to probe the ordinary source."
+		return
 	if selected_volume.is_empty() or not views.has(selected_volume):return
 	var position := Vector3(probe_spins[0].value,probe_spins[1].value,probe_spins[2].value)
 	var view = views[selected_volume]

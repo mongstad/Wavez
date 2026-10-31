@@ -97,11 +97,17 @@ func setup(owner_shell) -> void:
 		analysis_result = "Spectral band map complete. Open its pinned source, support and band details."
 		if viewer.session_log != null: viewer.session_log.record("JOB","Spectral band map completed: "+jobs.background_id,true))
 	jobs.spectral_band_map_progress.connect(func(value): analysis_progress = "%s: %s / %s" % [str(value.get("stage","Working")).replace("_"," "),value.get("completed",0),value.get("total",0)])
+	jobs.spectral_reconstruction_failed.connect(func(message): analysis_result = message; remember("Analysis",message))
+	jobs.spectral_reconstruction_completed.connect(func(_result):
+		analysis_result = "Spectral reconstruction complete. Open its pinned native volume and numerical checks."
+		if viewer.session_log != null: viewer.session_log.record("JOB","Spectral reconstruction completed: "+jobs.background_id,true))
+	jobs.spectral_reconstruction_progress.connect(func(value): analysis_progress = "%s: %s / %s" % [str(value.get("stage","Working")).replace("_"," "),value.get("completed",0),value.get("total",0)])
 	refresh()
 
 func cancel_analysis() -> void:
 	if viewer.selection_controller.jobs.background_operation == "spatial_spectrum": viewer.spatial_spectrum.cancel()
 	elif viewer.selection_controller.jobs.background_operation == "spectral_band_map": viewer.spectral_band_map.cancel()
+	elif viewer.selection_controller.jobs.background_operation == "spectral_reconstruct": viewer.spectral_reconstruction.cancel()
 	else: viewer.selection_controller.temporal.cancel_analysis()
 	analysis_result = "Cancellation requested. Completed named results remain available."
 
@@ -151,6 +157,7 @@ func reopen_analysis() -> void:
 	var operation: String = viewer.selection_controller.jobs.background_operation
 	if operation == "spatial_spectrum": viewer.spatial_spectrum.open(); return
 	if operation == "spectral_band_map": viewer.spectral_band_map.open(); return
+	if operation == "spectral_reconstruct": viewer.spectral_reconstruction.open(); return
 	var task := "Temporal"
 	if operation == "save_recipe": task = "Save analysis"
 	elif operation == "load_recipe": task = "Load analysis"

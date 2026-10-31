@@ -1,0 +1,14 @@
+{
+  "exit_code": 1,
+  "elapsed_seconds": 33.67255806700268,
+  "errors": [
+    "SCRIPT ERROR: Invalid access to property or key 'selection' on a base object of type 'Dictionary'.",
+    "ERROR: Native viewport mouse navigation works while reconstruction controls remain open"
+  ],
+  "sources_unchanged": true,
+  "validation_exit_code": 1,
+  "checks": 75,
+  "failures": [
+    "Native viewport mouse navigation works while reconstruction controls remain open"
+  ]
+}

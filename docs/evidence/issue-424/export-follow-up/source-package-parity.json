@@ -1,0 +1,511 @@
+{
+  "all_files_identical": false,
+  "all_pixels_identical": false,
+  "pairs": [
+    {
+      "case": "original-image.png",
+      "source_sha256": "85feb855518582aa47f5bfb4eca0d3c0eed2aade2c0229c93b86451ec5d4979b",
+      "package_sha256": "e31a9f5ad4d252982f388ee4770845f15c2f9cadc3634f6304a64e32b8dcf64e",
+      "file_identical": false,
+      "pixels_identical": false,
+      "source_shape": [
+        748,
+        1072,
+        3
+      ],
+      "package_shape": [
+        748,
+        1072,
+        3
+      ],
+      "changed_pixels": 1768,
+      "difference_bbox_xyxy": [
+        28,
+        98,
+        335,
+        133
+      ],
+      "outside_legend_identical": true,
+      "observation": "Only frequency-label line wrapping differs between source/editor and release template. Legend text and all scene pixels outside the legend agree; each run exports its own viewport exactly."
+    },
+    {
+      "case": "low-image.png",
+      "source_sha256": "6865b8170bbf7ef9f4aa303e688f65bc94a3f6a218ad7dce373bdac42050ea21",
+      "package_sha256": "869bd87373eaedabbcdc677718316f66b7d0b5bbe3d235d0816ac5684aa3221f",
+      "file_identical": false,
+      "pixels_identical": false,
+      "source_shape": [
+        748,
+        1072,
+        3
+      ],
+      "package_shape": [
+        748,
+        1072,
+        3
+      ],
+      "changed_pixels": 1780,
+      "difference_bbox_xyxy": [
+        28,
+        98,
+        303,
+        133
+      ],
+      "outside_legend_identical": true,
+      "observation": "Only frequency-label line wrapping differs between source/editor and release template. Legend text and all scene pixels outside the legend agree; each run exports its own viewport exactly."
+    },
+    {
+      "case": "intermediate-image.png",
+      "source_sha256": "02986abc5fa184974124a538b7a6f35333ecd19b26a61de103713ae212abecc4",
+      "package_sha256": "02986abc5fa184974124a538b7a6f35333ecd19b26a61de103713ae212abecc4",
+      "file_identical": true,
+      "pixels_identical": true,
+      "source_shape": [
+        748,
+        1072,
+        3
+      ],
+      "package_shape": [
+        748,
+        1072,
+        3
+      ]
+    },
+    {
+      "case": "high-image.png",
+      "source_sha256": "88b88b2883473e895692c9d408b8c158074cc844ed0828eab48f48827df7646d",
+      "package_sha256": "88b88b2883473e895692c9d408b8c158074cc844ed0828eab48f48827df7646d",
+      "file_identical": true,
+      "pixels_identical": true,
+      "source_shape": [
+        748,
+        1072,
+        3
+      ],
+      "package_shape": [
+        748,
+        1072,
+        3
+      ]
+    },
+    {
+      "case": "custom-image.png",
+      "source_sha256": "837a0e9d5ba8f8bf5a174d617e32d540090289af6dbb67574b1339c229da5322",
+      "package_sha256": "837a0e9d5ba8f8bf5a174d617e32d540090289af6dbb67574b1339c229da5322",
+      "file_identical": true,
+      "pixels_identical": true,
+      "source_shape": [
+        748,
+        1072,
+        3
+      ],
+      "package_shape": [
+        748,
+        1072,
+        3
+      ]
+    },
+    {
+      "case": "ordinary-image.png",
+      "source_sha256": "008cbb8aa77a192106b3dfda2575de531ef9f2c0cd309f7fa7cd892890e845b7",
+      "package_sha256": "008cbb8aa77a192106b3dfda2575de531ef9f2c0cd309f7fa7cd892890e845b7",
+      "file_identical": true,
+      "pixels_identical": true,
+      "source_shape": [
+        748,
+        1072,
+        3
+      ],
+      "package_shape": [
+        748,
+        1072,
+        3
+      ]
+    },
+    {
+      "case": "video-original/frames/frame00000000.png",
+      "source_sha256": "660c9476ad1121f5b0330fa53645b6b20ff16bcaf716caf752d37a7352196961",
+      "package_sha256": "660c9476ad1121f5b0330fa53645b6b20ff16bcaf716caf752d37a7352196961",
+      "file_identical": true,
+      "pixels_identical": true,
+      "source_shape": [
+        900,
+        1440,
+        3
+      ],
+      "package_shape": [
+        900,
+        1440,
+        3
+      ]
+    },
+    {
+      "case": "video-original/frames/frame00000001.png",
+      "source_sha256": "660c9476ad1121f5b0330fa53645b6b20ff16bcaf716caf752d37a7352196961",
+      "package_sha256": "660c9476ad1121f5b0330fa53645b6b20ff16bcaf716caf752d37a7352196961",
+      "file_identical": true,
+      "pixels_identical": true,
+      "source_shape": [
+        900,
+        1440,
+        3
+      ],
+      "package_shape": [
+        900,
+        1440,
+        3
+      ]
+    },
+    {
+      "case": "video-original/frames/frame00000002.png",
+      "source_sha256": "660c9476ad1121f5b0330fa53645b6b20ff16bcaf716caf752d37a7352196961",
+      "package_sha256": "660c9476ad1121f5b0330fa53645b6b20ff16bcaf716caf752d37a7352196961",
+      "file_identical": true,
+      "pixels_identical": true,
+      "source_shape": [
+        900,
+        1440,
+        3
+      ],
+      "package_shape": [
+        900,
+        1440,
+        3
+      ]
+    },
+    {
+      "case": "video-low/frames/frame00000000.png",
+      "source_sha256": "5366dd1d55c01fd0a2cb604f7346da1ba597a0b469863579908469b403e71d77",
+      "package_sha256": "5366dd1d55c01fd0a2cb604f7346da1ba597a0b469863579908469b403e71d77",
+      "file_identical": true,
+      "pixels_identical": true,
+      "source_shape": [
+        900,
+        1440,
+        3
+      ],
+      "package_shape": [
+        900,
+        1440,
+        3
+      ]
+    },
+    {
+      "case": "video-low/frames/frame00000001.png",
+      "source_sha256": "5366dd1d55c01fd0a2cb604f7346da1ba597a0b469863579908469b403e71d77",
+      "package_sha256": "5366dd1d55c01fd0a2cb604f7346da1ba597a0b469863579908469b403e71d77",
+      "file_identical": true,
+      "pixels_identical": true,
+      "source_shape": [
+        900,
+        1440,
+        3
+      ],
+      "package_shape": [
+        900,
+        1440,
+        3
+      ]
+    },
+    {
+      "case": "video-low/frames/frame00000002.png",
+      "source_sha256": "5366dd1d55c01fd0a2cb604f7346da1ba597a0b469863579908469b403e71d77",
+      "package_sha256": "5366dd1d55c01fd0a2cb604f7346da1ba597a0b469863579908469b403e71d77",
+      "file_identical": true,
+      "pixels_identical": true,
+      "source_shape": [
+        900,
+        1440,
+        3
+      ],
+      "package_shape": [
+        900,
+        1440,
+        3
+      ]
+    },
+    {
+      "case": "video-intermediate/frames/frame00000000.png",
+      "source_sha256": "f3bd2ccfc510e560f14166d96d5e178297e983b7eede5e5007b53341a3c6659f",
+      "package_sha256": "f3bd2ccfc510e560f14166d96d5e178297e983b7eede5e5007b53341a3c6659f",
+      "file_identical": true,
+      "pixels_identical": true,
+      "source_shape": [
+        900,
+        1440,
+        3
+      ],
+      "package_shape": [
+        900,
+        1440,
+        3
+      ]
+    },
+    {
+      "case": "video-intermediate/frames/frame00000001.png",
+      "source_sha256": "f3bd2ccfc510e560f14166d96d5e178297e983b7eede5e5007b53341a3c6659f",
+      "package_sha256": "f3bd2ccfc510e560f14166d96d5e178297e983b7eede5e5007b53341a3c6659f",
+      "file_identical": true,
+      "pixels_identical": true,
+      "source_shape": [
+        900,
+        1440,
+        3
+      ],
+      "package_shape": [
+        900,
+        1440,
+        3
+      ]
+    },
+    {
+      "case": "video-intermediate/frames/frame00000002.png",
+      "source_sha256": "f3bd2ccfc510e560f14166d96d5e178297e983b7eede5e5007b53341a3c6659f",
+      "package_sha256": "f3bd2ccfc510e560f14166d96d5e178297e983b7eede5e5007b53341a3c6659f",
+      "file_identical": true,
+      "pixels_identical": true,
+      "source_shape": [
+        900,
+        1440,
+        3
+      ],
+      "package_shape": [
+        900,
+        1440,
+        3
+      ]
+    },
+    {
+      "case": "video-high/frames/frame00000000.png",
+      "source_sha256": "6ebf9bbfe6892f099c153b7196845337e4446abd5d9b6dae540e824df8eaa34a",
+      "package_sha256": "6ebf9bbfe6892f099c153b7196845337e4446abd5d9b6dae540e824df8eaa34a",
+      "file_identical": true,
+      "pixels_identical": true,
+      "source_shape": [
+        900,
+        1440,
+        3
+      ],
+      "package_shape": [
+        900,
+        1440,
+        3
+      ]
+    },
+    {
+      "case": "video-high/frames/frame00000001.png",
+      "source_sha256": "6ebf9bbfe6892f099c153b7196845337e4446abd5d9b6dae540e824df8eaa34a",
+      "package_sha256": "6ebf9bbfe6892f099c153b7196845337e4446abd5d9b6dae540e824df8eaa34a",
+      "file_identical": true,
+      "pixels_identical": true,
+      "source_shape": [
+        900,
+        1440,
+        3
+      ],
+      "package_shape": [
+        900,
+        1440,
+        3
+      ]
+    },
+    {
+      "case": "video-high/frames/frame00000002.png",
+      "source_sha256": "6ebf9bbfe6892f099c153b7196845337e4446abd5d9b6dae540e824df8eaa34a",
+      "package_sha256": "6ebf9bbfe6892f099c153b7196845337e4446abd5d9b6dae540e824df8eaa34a",
+      "file_identical": true,
+      "pixels_identical": true,
+      "source_shape": [
+        900,
+        1440,
+        3
+      ],
+      "package_shape": [
+        900,
+        1440,
+        3
+      ]
+    },
+    {
+      "case": "video-custom/frames/frame00000000.png",
+      "source_sha256": "875cb388abcf8d78ef0612ed55b76266cd618036d0a6e3b998056e3e8cf4e339",
+      "package_sha256": "875cb388abcf8d78ef0612ed55b76266cd618036d0a6e3b998056e3e8cf4e339",
+      "file_identical": true,
+      "pixels_identical": true,
+      "source_shape": [
+        900,
+        1440,
+        3
+      ],
+      "package_shape": [
+        900,
+        1440,
+        3
+      ]
+    },
+    {
+      "case": "video-custom/frames/frame00000001.png",
+      "source_sha256": "875cb388abcf8d78ef0612ed55b76266cd618036d0a6e3b998056e3e8cf4e339",
+      "package_sha256": "875cb388abcf8d78ef0612ed55b76266cd618036d0a6e3b998056e3e8cf4e339",
+      "file_identical": true,
+      "pixels_identical": true,
+      "source_shape": [
+        900,
+        1440,
+        3
+      ],
+      "package_shape": [
+        900,
+        1440,
+        3
+      ]
+    },
+    {
+      "case": "video-custom/frames/frame00000002.png",
+      "source_sha256": "875cb388abcf8d78ef0612ed55b76266cd618036d0a6e3b998056e3e8cf4e339",
+      "package_sha256": "875cb388abcf8d78ef0612ed55b76266cd618036d0a6e3b998056e3e8cf4e339",
+      "file_identical": true,
+      "pixels_identical": true,
+      "source_shape": [
+        900,
+        1440,
+        3
+      ],
+      "package_shape": [
+        900,
+        1440,
+        3
+      ]
+    },
+    {
+      "case": "video-legend/frames/frame00000000.png",
+      "source_sha256": "ac949df74d93f561dc326626ed131bd9c72ead1668e2119aa8f58339123b8caf",
+      "package_sha256": "8da26883fc2de43a828a649ff336c419cb503282eef33debd0244108ca1aa80d",
+      "file_identical": false,
+      "pixels_identical": false,
+      "source_shape": [
+        900,
+        1440,
+        3
+      ],
+      "package_shape": [
+        900,
+        1440,
+        3
+      ],
+      "changed_pixels": 1780,
+      "difference_bbox_xyxy": [
+        28,
+        146,
+        303,
+        181
+      ],
+      "outside_legend_identical": true,
+      "observation": "Only frequency-label line wrapping differs between source/editor and release template. Legend text and all scene pixels outside the legend agree; each run exports its own viewport exactly."
+    },
+    {
+      "case": "video-legend/frames/frame00000001.png",
+      "source_sha256": "724fa7cfa3a5a94b15023d126910f489c0d18de29a603fb1098fd344ab17feac",
+      "package_sha256": "fe97921aa694cd147502b576a0af4261899fbc4343b34bb8b506cb6c1522dd79",
+      "file_identical": false,
+      "pixels_identical": false,
+      "source_shape": [
+        900,
+        1440,
+        3
+      ],
+      "package_shape": [
+        900,
+        1440,
+        3
+      ],
+      "changed_pixels": 1780,
+      "difference_bbox_xyxy": [
+        28,
+        146,
+        303,
+        181
+      ],
+      "outside_legend_identical": true,
+      "observation": "Only frequency-label line wrapping differs between source/editor and release template. Legend text and all scene pixels outside the legend agree; each run exports its own viewport exactly."
+    },
+    {
+      "case": "video-legend/frames/frame00000002.png",
+      "source_sha256": "4cc43bafbd9f064982656a8b5a46144feaa01ebb6ee13cb31240219ce74688bc",
+      "package_sha256": "b6a91c1a8d8c373ac6347c417180b73f295df909ffd0c5b9a7654270190b60da",
+      "file_identical": false,
+      "pixels_identical": false,
+      "source_shape": [
+        900,
+        1440,
+        3
+      ],
+      "package_shape": [
+        900,
+        1440,
+        3
+      ],
+      "changed_pixels": 1780,
+      "difference_bbox_xyxy": [
+        28,
+        146,
+        303,
+        181
+      ],
+      "outside_legend_identical": true,
+      "observation": "Only frequency-label line wrapping differs between source/editor and release template. Legend text and all scene pixels outside the legend agree; each run exports its own viewport exactly."
+    },
+    {
+      "case": "video-ordinary/frames/frame00000000.png",
+      "source_sha256": "67e40f57d2c6584c2ca345489825a2297672e6b284557b925eab698f64bcf32c",
+      "package_sha256": "67e40f57d2c6584c2ca345489825a2297672e6b284557b925eab698f64bcf32c",
+      "file_identical": true,
+      "pixels_identical": true,
+      "source_shape": [
+        900,
+        1440,
+        3
+      ],
+      "package_shape": [
+        900,
+        1440,
+        3
+      ]
+    },
+    {
+      "case": "video-ordinary/frames/frame00000001.png",
+      "source_sha256": "67e40f57d2c6584c2ca345489825a2297672e6b284557b925eab698f64bcf32c",
+      "package_sha256": "67e40f57d2c6584c2ca345489825a2297672e6b284557b925eab698f64bcf32c",
+      "file_identical": true,
+      "pixels_identical": true,
+      "source_shape": [
+        900,
+        1440,
+        3
+      ],
+      "package_shape": [
+        900,
+        1440,
+        3
+      ]
+    },
+    {
+      "case": "video-ordinary/frames/frame00000002.png",
+      "source_sha256": "4a56e74096eff95b8054eb7010cc8bfde74b8da85381885f0cd1aa7d822226aa",
+      "package_sha256": "4a56e74096eff95b8054eb7010cc8bfde74b8da85381885f0cd1aa7d822226aa",
+      "file_identical": true,
+      "pixels_identical": true,
+      "source_shape": [
+        900,
+        1440,
+        3
+      ],
+      "package_shape": [
+        900,
+        1440,
+        3
+      ]
+    }
+  ],
+  "interpretation": "22 of 27 files match across source and package; five differ only in frequency-label word wrapping. This cross-build distinction does not affect exact live/export comparisons within either build."
+}

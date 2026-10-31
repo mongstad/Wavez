@@ -5,6 +5,7 @@ var job_status := {}
 var active_output := ""
 
 const Job = preload("res://video/render_job.gd")
+const Spectral = preload("res://video/spectral_presentation.gd")
 const Timeline = preload("res://video/offline_timeline.gd")
 const ProgressDetails = preload("res://video/progress_details.gd")
 var progress_presentation := ProgressDetails.new()
@@ -402,6 +403,10 @@ func configured_job() -> Dictionary:
 		job.state.environment.background_mode = Environment.BG_COLOR if clean else Environment.BG_SKY
 	job.state.overlay_visible = overlays.button_pressed
 	job.state.trails_enabled = trails.button_pressed
+	if viewer.spectral_reconstruction != null:
+		var spectral: Dictionary = viewer.spectral_reconstruction.export_snapshot()
+		if not spectral.ok: job.spectral_error = spectral.error
+		elif spectral.active: job.spectral_presentation = spectral.snapshot
 	return job
 
 func update_estimate() -> void:
@@ -421,6 +426,9 @@ func update_estimate() -> void:
 	var count := Job.frame_total({"start_time":start_time, "end_time":end_time, "fps":fps.value, "playback_rate":rate.value})
 	var gib := float(count) * width.value * height.value * 4 / pow(1024, 3)
 	estimate.text = "Duration: %s · %s frames\nTemporary storage: %.2f GiB" % [Clock.format_time(count/fps.value, true, 3), frame_count_text(count), gib]
+	if viewer.spectral_reconstruction != null and viewer.spectral_reconstruction.active():
+		var spectral = viewer.spectral_reconstruction
+		estimate.text += "\nPinned %s reconstruction at native %s; video time does not recompute the field." % [spectral.loaded_band.capitalize(),str(spectral.result_data.record.native_time.text)]
 
 func start_export() -> void:
 	if pid > 0 or timeline == null: return
@@ -443,6 +451,7 @@ func start_export() -> void:
 		message.text = "Cannot bind export to an unchanged local source. Reopen the capture; reliable high-resolution source stamps are required."
 		return
 	var invalid := Job.validate(job)
+	if invalid.is_empty() and job.has("spectral_presentation"): invalid = Spectral.binding_problem(job.spectral_presentation,job.capture_path,job.source)
 	if invalid.is_empty() and (job.start_time < timeline.times[0] or job.end_time > timeline.times[-1]): invalid = "Range must be within the capture's timestamps."
 	if not invalid.is_empty():
 		message.text = invalid
@@ -458,17 +467,27 @@ func start_export() -> void:
 		message.text = "Cannot create temporary export directory."
 		publish_job("failed", message.text)
 		return
+	if job.has("spectral_presentation"):
+		# Freeze only the selected bounded display field, before launching. Parent
+		# file switches, worker shutdown and later settings edits cannot alter it.
+		var staged := Spectral.stage(job.spectral_presentation,active_directory)
+		if not staged.ok:
+			message.text = staged.error; publish_job("failed",message.text); return
+		job.spectral_presentation = staged.snapshot
 	if Job.write_json(active_job_path, job) != OK:
+		Spectral.cleanup(active_directory)
 		message.text = "Cannot write render job."
 		publish_job("failed", message.text)
 		return
 	var args := Job.launch_arguments(active_job_path, job.fps)
 	if Job.write_json(active_directory.path_join("launch.json"), {"executable":OS.get_executable_path(), "arguments":Array(args), "packaged":not OS.has_feature("editor"), "rendering_method":Job.Renderer.METHOD, "rendering_driver":Job.Renderer.DRIVER}) != OK:
+		Spectral.cleanup(active_directory)
 		message.text = "Cannot write render-launch diagnostics. Job retained: " + active_job_path
 		publish_job("failed", message.text)
 		return
 	pid = OS.create_process(OS.get_executable_path(), args)
 	if pid <= 0:
+		Spectral.cleanup(active_directory)
 		message.text = "Could not start Godot render process. Job retained: " + active_job_path
 		publish_job("failed", message.text)
 		return

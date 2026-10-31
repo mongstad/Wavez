@@ -1,0 +1,14 @@
+{
+  "checks": 210,
+  "dwell_seconds": 0.5,
+  "failures": [],
+  "hide_grace_seconds": 0.35,
+  "renderer": "forward_plus",
+  "right_zone_pixels": 10.0,
+  "top_bottom_zone_pixels": 10.0,
+  "source_hashes_unchanged": {
+    "invalid.wvz": "e3cf75369dee49d3dab18b121e18827380b1620f57be32d3e6c336b9e18aecbd",
+    "replacement.wvz": "5ded30424cb059db5da924988a4ece8fc1418bb4ee8d997c7dd0a44350460505",
+    "scene.wvz": "4c99328f3fd8b88a922772328c7dac9313a575865179ecba517e54a77e2227d4"
+  }
+}

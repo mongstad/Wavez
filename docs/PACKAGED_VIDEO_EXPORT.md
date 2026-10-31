@@ -8,6 +8,15 @@ and PNG retention keep their existing contracts. Issue #340 removes automatic
 scientific recipe processing and Selection/Analysis overlays from this visual
 workflow (accepted in PR #344).
 
+On the experimental `spectral` branch, an active 3D reconstruction is exported
+as scientific scene content. The parent stages the selected verified display
+field and exact visual settings; the packaged worker verifies and renders that
+fixed native sample without Python or time-dependent reconstruction. Missing or
+stale data fails explicitly instead of substituting an original field. Mandatory
+visual provenance distinguishes derived content from WVZ1 channels. See
+[pinned reconstructed volumes](VIDEO_EXPORT.md#pinned-reconstructed-volumes) and
+[follow-up validation](evidence/issue-424/export-follow-up/README.md).
+
 ## Build and run
 
 **Forward+ Vulkan is required** for the interactive package and every GPU worker.

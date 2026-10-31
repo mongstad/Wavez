@@ -94,3 +94,12 @@ Owner verification: open Help → About before and after opening a capture;
 check the full four-component identity against the project setting.
 Check ordinary startup, capture opening and playback. Review the initial numbering
 and future merge/release convention before accepting this issue.
+
+## Issue #424 experimental candidate
+
+The owner explicitly approved applying the existing accepted-main BUILD +1 rule
+to #424 while its PR targets `spectral`: accepted main v0.1.0.118 yields candidate
+v0.1.0.119. This candidate does not change the main application, declare a release,
+or establish an independent experimental BUILD sequence. Keep branch and commit
+identity beside the candidate version. Reconcile against current main before
+owner review; any different experimental version policy needs owner authorization.

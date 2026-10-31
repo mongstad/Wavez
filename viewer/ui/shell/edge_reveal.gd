@@ -105,7 +105,7 @@ func tick(delta: float, point: Vector2, inside: bool, busy: bool) -> void:
 	if changed: shell.layout()
 
 func is_viewport_point(point: Vector2) -> bool:
-	if popup_active(shell.viewer): return false
+	if _popup_blocks_viewport_point(shell.viewer,point): return false
 	for side in states:
 		if contains(side,point): return false
 	# Scientific legends pass camera input through, but must not toggle fullscreen.
@@ -115,3 +115,15 @@ func is_viewport_point(point: Vector2) -> bool:
 			for child in control.get_children():
 				if child is Control and child.is_visible_in_tree() and child.get_global_rect().has_point(point): return false
 	return true
+
+func _popup_blocks_viewport_point(node: Node, point: Vector2) -> bool:
+	# Only explicitly opted-in modeless inspection windows allow navigation
+	# outside their rectangle. Menus/popups and all existing dialogs keep their
+	# established input ownership, including a menu opened inside such a window.
+	for child in node.get_children(true):
+		if child is Window and child.visible:
+			if child.exclusive or child is Popup or not child.get_meta("viewport_navigation_passthrough",false): return true
+			var position: Vector2 = Vector2(child.position) if child.is_embedded() else Vector2(child.position-shell.viewer.get_window().position)
+			if Rect2(position,Vector2(child.size)).has_point(point): return true
+		if _popup_blocks_viewport_point(child,point): return true
+	return false

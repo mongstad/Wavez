@@ -625,6 +625,7 @@ func build_menus(row: HBoxContainer) -> void:
 	command(tools,"Selection",viewer.tools_ui.open.bind("Selection"),"tool:Selection")
 	command(tools,"Spatial spectrum",viewer.spatial_spectrum.open,"tool:Spatial spectrum")
 	command(tools,"Spectral band map",viewer.spectral_band_map.open,"tool:Spectral band map")
+	command(tools,"Spectral reconstruction",viewer.spectral_reconstruction.open,"tool:Spectral reconstruction")
 	var analysis := submenu(tools,"Analysis")
 	for title in ["Temporal","Space time","Diagnostics","Compare","Matched runs","Period","Bookmarks","Results"]: command(analysis,title,viewer.tools_ui.open.bind(title),"tool:"+title)
 	for title in ["Mapping","Derive range","Slice","Clipping","Isosurface","Source probe","Performance","Geometry"]: command(tools,title,viewer.tools_ui.open.bind(title),"tool:"+title)
@@ -660,7 +661,7 @@ func refresh_commands() -> void:
 	for key in commands:
 		var entry: Dictionary = commands[key]
 		var enabled: bool = loaded or key in ["open","details","fullscreen","file_locations","keyboard_shortcuts","theme_dark","theme_light","about","exit"]
-		if key in ["probe","tool:Clipping","tool:Isosurface","tool:Source probe","tool:Spatial spectrum","tool:Spectral band map"]: enabled = fields
+		if key in ["probe","tool:Clipping","tool:Isosurface","tool:Source probe","tool:Spatial spectrum","tool:Spectral band map","tool:Spectral reconstruction"]: enabled = fields
 		if key == "tool:Mapping": enabled = particles
 		if key in ["tool:Slice","tool:Derive range"]: enabled = fields or particles
 		if key == "resolve":
@@ -669,7 +670,7 @@ func refresh_commands() -> void:
 		if key.begins_with("preset:"): enabled = loaded and viewer.preset_available.get(key.trim_prefix("preset:"),true)
 		entry.popup.set_item_disabled(entry.index,not enabled)
 		entry.popup.set_item_tooltip(entry.index,"" if enabled else ("Open a compatible capture first" if not loaded else "Unavailable for the current source or state"))
-		if key in ["close_file","tool:Spatial spectrum","tool:Spectral band map"]: entry.popup.set_item_tooltip(entry.index, "")
+		if key in ["close_file","tool:Spatial spectrum","tool:Spectral band map","tool:Spectral reconstruction"]: entry.popup.set_item_tooltip(entry.index, "")
 		var checked := false
 		if key == "theme_dark": checked = appearance == null or not appearance.light
 		elif key == "theme_light": checked = appearance != null and appearance.light

@@ -51,6 +51,15 @@ selected** verifies and caches up to eight explicit native records of
 `field / amplitude` for exact-time replay. Missing or intermediate times hide
 the replay plane. See [the workflow, cache and scientific limits](SPATIAL_BAND_MAP.md).
 
+On the experimental `spectral` branch, **Tools → Spectral reconstruction**
+splits one verified signed float64 `field / amplitude` native record into
+phase-preserving full-volume Low/Intermediate/High fields. A periodic boundary
+assumption must be acknowledged explicitly. Original and all three bands remain
+pinned to the same record while ordinary playback moves. Use a shared signed
+range, the existing camera and the panel's volume/slice/clipping controls.
+Closing clears the derived result. See [the workflow, budgets and scientific
+limits](SPECTRAL_RECONSTRUCTION.md).
+
 In **Temporal analysis**, select the population/group, operation, source channel,
 component and inclusive native range. Choose value traces, statistics, population
 counts, discrete field integrals, interval velocity, centroids or mesh area.

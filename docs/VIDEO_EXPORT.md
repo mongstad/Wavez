@@ -8,9 +8,12 @@ start a scientific worker, evaluate membership, force inspection JSON, or impose
 selection-specific output quota. MP4 encoding needs external FFmpeg; Python/NumPy
 is required separately for scientific Selection/Analysis, not ordinary video.
 
-Selection and Analysis state, markers, highlights and plot overlays are excluded
+Selection state, markers, highlights and Analysis plot overlays are excluded
 from File → Export → Video. Visible or hidden scientific selections and populated
 analysis results must produce the same frames as the equivalent ordinary view.
+An actively displayed **3D spectral reconstruction** is scene content and is
+exported as described below; its analytical origin does not authorize replacing
+it with an ordinary source volume.
 No fixed-marker snapshot or marker-following logic is used. This boundary applies
 even when **Include enabled viewport legends** is checked; ordinary particle,
 field and mesh legends keep their existing visibility and channel settings.
@@ -30,6 +33,43 @@ See [analysis schemas](ANALYSIS_SCHEMAS.md) and
 
 Historical measurements are linked as review records; they do not establish a
 new renderer/platform guarantee. Network/control services remain outside scope.
+
+## Pinned reconstructed volumes
+
+On the experimental `spectral` branch, File → Export → Video snapshots the active
+Original, Low, Intermediate or High reconstruction when Start Export is pressed.
+It preserves its exact colormap pixels, opacity, shared display bounds, clipping
+and slice settings, alongside the normal camera/environment snapshot and explicit
+video options. The dialog states the selected band and pinned native time.
+The reconstruction stays at that native sample while the video clock advances;
+camera orbits and other visible particle/mesh layers retain their normal timing.
+There is no automatic spectral recomputation for later video times.
+
+Before launching, the parent copies the selected full-resolution float32 display
+field (at most 27 MiB) and its hashed manifest into the private job directory.
+The worker verifies the source prefix, native record/geometry, manifest and field
+hash, then installs that frozen field using the same volume renderer. Replaced
+ordinary volume layers are hidden only in the worker's scene state. A missing,
+changed or invalid snapshot fails explicitly; it never selects the original field
+as a fallback. Closing the analysis panel, switching captures or editing settings
+after staging cannot change the owned video snapshot. Mutation of the bound
+source still fails the job under the existing source checks.
+
+Every reconstructed job retains `spectral-presentation.json`: source identity,
+native record, selected band, radial edges, units, float64 scientific and float32
+display hashes, exact LUT and display/camera settings. Each `timing.jsonl` row
+links that pinned record separately from capture/video time. The MP4 comment
+contains the compact pin/source association. Optional per-frame JSON is explicitly
+visual provenance rather than a restorable source-channel inspection recipe.
+The scientific legend follows **Include enabled viewport legends**. App chrome,
+selection handles and analysis plots remain excluded. Private field/manifest
+copies are reclaimed on worker completion, cancellation or failure; provenance
+and normal diagnostic/frame-retention records remain.
+
+This path adds no Python/NumPy dependency to the video worker and changes neither
+WVZ1 bytes nor the scientific reconstruction algorithm. See the
+[reconstruction contract](SPECTRAL_RECONSTRUCTION.md) and
+[owner follow-up evidence](evidence/issue-424/export-follow-up/README.md).
 
 ## Using Export Video
 
@@ -136,7 +176,8 @@ intermediates for recovery. Exports can optionally save per-frame
 inspection JSON from the collapsed **Advanced** section in Output. The unchecked
 checkbox is always available, regardless of selections. These visual-state records
 contain sampling, camera, layer settings and PNG hashes, without scientific
-selection or Analysis results. Those JSON records
+selection or Analysis plot results. Active reconstruction exports use the distinct
+visual-provenance records described above. Those JSON records
 remain in the job directory after successful PNG cleanup and retain the PNG
 identity with `retained_after_encode:false`.
 Click **Start Export**. A second Godot process renders and encodes the video.
@@ -203,7 +244,8 @@ suppresses trails even if their checkbox is enabled, as in the normal viewer.
 ## Architecture and installed Godot capabilities
 
 The ordinary video worker uses the same scene reader and ordinary visualization
-settings with offline timing. Selection/Analysis state is excluded.
+settings with offline timing. Selection/Analysis plots are excluded; an active
+reconstructed volume uses a verified job-owned display snapshot.
 Interactive playback/preparation and realtime camera motion are disabled in the
 render instance. The output SubViewport owns the requested image dimensions.
 
@@ -330,7 +372,8 @@ viewport legends only. **Include enabled viewport legends** gates particle,
 field and mesh legends according to their saved visibility and channel state;
 turning it off hides those legends even if the interactive viewer shows them.
 Ordinary scene guides retain their own settings. Selection highlights and
-Analysis overlays are excluded regardless of the legends option. The exported legends use the existing viewport text and color
+Analysis plots are excluded regardless of the legends option. An active
+reconstruction's scientific legend follows that option. The exported legends use the existing viewport text and color
 mapping, positioned against the full output frame. See [Layer legends](LAYER_LEGENDS.md).
 
 Menus, navigation controls, the right workspace dock, transport, timeline,

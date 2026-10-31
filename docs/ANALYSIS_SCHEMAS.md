@@ -4,7 +4,8 @@ These private file/message formats implement selections, source-native numerical
 jobs, diagnostics/comparisons, space-time plots, durable numerical export,
 inspection v3, scientific PNG bundles and explicitly requested Matched Views.
 File → Export → Video uses the independent visual version-1 job schema, even
-when selections exist; Selection/Analysis state and overlays are excluded. See
+when selections exist; Selection markers and Analysis plot overlays are excluded.
+An active reconstructed volume is retained as derived scene content. See
 [video export](VIDEO_EXPORT.md).
 They carry no executable expressions or service endpoint. Governing behavioral
 semantics are in [the scientific contract](SCIENTIFIC_ANALYSIS.md).
@@ -111,6 +112,41 @@ collection's lookup/publication/eviction. Only a complete selected sequence is
 published. Hash/schema validation and independent source verification precede
 reuse; complete cached bytes alone are historical evidence, not current source
 verification. No new WVZ1, SWSS, export or inspection format is introduced.
+
+## Reconstructed spectral volumes
+
+`spectral_reconstruct` accepts `object: "field"`, `channel: "amplitude"`, a native
+`index`, explicit `boundary: "periodic"` and optional two increasing radial
+`edges` (default `[0.125, 0.375]`). The bounded reply has
+`kind: "spectral_reconstruction"`, `version: 1`, source identity and file stamp,
+native record/time, geometry, units, common symmetric display range, numerical
+metrics, timings and provenance. `artifacts` names `original`, `low`,
+`intermediate` and `high`; each descriptor binds a full-grid little-endian f4
+display file and f8 scientific file by owned absolute path, byte count and
+SHA-256. The manifest is also hashed. Dense arrays never enter control JSON.
+
+These temporary files belong to the worker's sibling `-reconstruction` owner,
+inside the existing shared disk quota and outside generic `ResultCache`
+collection. Publication is atomic and source-verified. One result is retained;
+replacement, close and recognized dead-owner recovery reclaim it. This internal
+handoff is not a durable inspection or capture schema. Existing request/revision,
+cancellation and owner-lease checks still apply. See the
+[numerical and display contract](SPECTRAL_RECONSTRUCTION.md).
+
+Ordinary visual exports preserve an active reconstructed volume. Image JSON uses
+`kind: "wavez-visual-export"`, version 1, with source identity, reconstruction
+provenance, visual/sample state and PNG identity. It is not a restorable scientific
+inspection. Version-1 video jobs may carry `spectral_presentation`, binding the
+selected band, native result, display settings and exact RGB8 LUT to a verified
+private copy of the selected f4 field and manifest. The worker records mandatory
+`spectral-presentation.json` plus a pinned association in each timing row and the
+MP4 comment. These records describe derived visual content; they do not add a
+source channel, modify WVZ1/SWSS or request time-dependent reconstruction.
+Persisted jobs mark `spectral_presentation.numeric_encoding: "f64-le"`; their
+`data` and `display` fields use the existing exact-float codec. The worker decodes
+before strict manifest comparison, avoiding repeated JSON decimal conversion of
+scientific values. Ordinary jobs retain their existing representation.
+See [video snapshot ownership](VIDEO_EXPORT.md#pinned-reconstructed-volumes).
 
 ## Selection definition version 1
 
@@ -368,7 +404,7 @@ timing is authoritative when parsing JSON. Source extents are pinned before
 building the export timeline; the recipe is validated once, then each frame
 forces its exact source-selection resolution before drawing. This version-2
 path is used by explicit scientific Matched Views. File → Export → Video uses
-version-1 jobs, excludes Selection/Analysis overlays and never requests recipes
+version-1 jobs, excludes Selection markers/Analysis plots and never requests recipes
 or scientific membership.
 
 Per-frame v3 sidecars may specify `asset_directory:"recipe.inspection"`, a

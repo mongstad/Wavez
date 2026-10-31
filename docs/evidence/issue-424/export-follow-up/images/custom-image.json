@@ -1,0 +1,391 @@
+{
+	"image": {
+		"file": "custom-image.png",
+		"height": 748,
+		"sha256": "837a0e9d5ba8f8bf5a174d617e32d540090289af6dbb67574b1339c229da5322",
+		"width": 1072
+	},
+	"kind": "wavez-visual-export",
+	"purpose": "Visual provenance only; not a restorable source-channel inspection recipe",
+	"reconstruction": {
+		"algorithm": "spectral-reconstruction-periodic-v1",
+		"boundary": "periodic",
+		"channel": "amplitude",
+		"display": {
+			"clip": true,
+			"clip_distance": 7.800048828125,
+			"clip_normal": [
+				0.0,
+				1.0,
+				0.0
+			],
+			"color_mapping": {
+				"normalization": "linear",
+				"percentile_high": 99.0,
+				"percentile_low": 1.0,
+				"policy": "symmetric",
+				"source_channel": "",
+				"source_time": 0.0
+			},
+			"colormap": "export-fixture",
+			"lower": -0.45,
+			"opacity": 0.13,
+			"opacity_mapping": {
+				"lower": 0.0,
+				"mode": "magnitude",
+				"upper": 0.45
+			},
+			"slice": true,
+			"slice_distance": 7.800048828125,
+			"slice_normal": [
+				0.0,
+				1.0,
+				0.0
+			],
+			"step": 0.25,
+			"upper": 0.45,
+			"visible": true,
+			"volume": true
+		},
+		"display_artifact": {
+			"bytes": 131072.0,
+			"dtype": "f4",
+			"sha256": "eef52a88f944a24f45824ff1bcada0137f484ac4094f6f19d0dba3e71be89b76",
+			"shape_zyx": [
+				32.0,
+				32.0,
+				32.0
+			]
+		},
+		"edges": [
+			0.125,
+			0.375
+		],
+		"geometry": {
+			"centering": "node",
+			"data_to_world": [
+				1.0,
+				0.0,
+				0.0,
+				0.0,
+				0.0,
+				1.0,
+				0.0,
+				0.0,
+				0.0,
+				0.0,
+				1.0,
+				0.0
+			],
+			"origin": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"shape": [
+				32.0,
+				32.0,
+				32.0
+			],
+			"spacing": [
+				0.5,
+				0.5,
+				0.5
+			]
+		},
+		"kind": "spectral_reconstruction",
+		"legend": {
+			"text": "PINNED • Intermediate • field / amplitude\nNative 1.0; playhead 0.0\n0.125 ≤ f < 0.375 [cycles/source-coordinate unit]\nPeriodic whole volume; hard radial bands.\nSigned range -0.45 … 0.45 [dimensionless] • manual shared\nColormap export-fixture • lower → upper; magnitude opacity.\nDerived analysis, not optical light or energy.\nFull-resolution float32 display; float64 calculations.",
+			"visible": true
+		},
+		"lut": {
+			"format": "rgb8",
+			"height": 1,
+			"name": "export-fixture",
+			"pixels_hex": "00d83301d83302d73303d63304d53305d53306d43307d33408d33409d2340ad1350bd1350cd0360dcf360ece370fce3810cd3811cc3912cc3a13cb3b14ca3c15ca3d16c93d17c83e18c73f19c7411ac6421bc5431cc5441dc4451ec3461fc34820c24921c14a22c04c23c04d24bf4f25be5026be5227bd5328bc5529bc562abb582bba5a2cb95b2db95d2eb85f2fb76030b76231b66432b56633b56734b46935b36b36b26d37b26f38b17039b0723ab0743baf763cae783dae7a3ead7c3fac7e40ab7f41ab8142aa8343a98544a98745a88946a78b47a78d48a68e49a5904aa4924ba4944ca3964da2984ea2994fa19b50a09d51a09f529fa0539ea2549da4559da5569ca7579ba8589baa599aac5a99ad5b99af5c98b05d97b15e96b35f96b46095b66194b76294b86393b96492bb6592bc6691bd6790be688fbf698fc06a8ec16b8dc26c8dc36d8cc46e8bc46f8bc5708ac67189c77288c77388c87487c87586c97686c97785ca7884ca7984cb7a83cb7b82cb7c81cb7d81cb7e80cb7f7fcb807fcb817ecb827dcb837dcb847ccb857bcb867acb877aca8879ca8978c98a78c98b77c88c76c88d76c78e75c78f74c69073c59173c49272c49371c39471c29570c1966fc0976fbf986ebe996dbd9a6cbc9b6cbb9c6bb99d6ab89e6ab79f69b6a068b4a168b3a267b1a366b0a465afa565ada664aca763aaa863a8a962a7aa61a5ab61a4ac60a2ad5fa0ae5e9faf5e9db05d9bb15c99b25c98b35b96b45a94b55a92b65990b7588eb8578db9578bba5689bb5587bc5585bd5483be5381bf537fc0527ec1517cc2507ac35078c44f76c54e74c64e72c74d70c84c6fc94c6dca4b6bcb4a69cc4967cd4966ce4864cf4762d04760d1465fd2455dd3455bd4445ad54358d64256d74255d84153d94052da4050db3f4fdc3e4ddd3e4cde3d4adf3c49e03b48e13b46e23a45e33944e43943e53842e63741e7373fe8363ee9353dea343deb343cec333bed323aee3239ef3138f03038f13037f22f36f32e36f42d35f52d35f62c34f72b34f82b34f92a33fa2933fb2933fc2833fd2733fe2633ff2633",
+			"width": 256
+		},
+		"object": "field",
+		"record": {
+			"index": 1.0,
+			"native_time": {
+				"f64_le_hex": "000000000000f03f",
+				"text": "1"
+			},
+			"sequence": 1.0
+		},
+		"role": "derived analytical visualization; original WVZ1 channels remain unchanged",
+		"scientific_artifact": {
+			"bytes": 262144.0,
+			"dtype": "f8",
+			"sha256": "f3b071605b3810358b44f25ee1e3731162d8d8f2c65ee68ce4389db174c70c6e"
+		},
+		"selected_band": "intermediate",
+		"source": {
+			"committed_bytes": "1576530",
+			"complete_records": 3.0,
+			"format": "WVZ1",
+			"path": "/tmp/wavez-424-export/source-5/field.wvz",
+			"sha256": "c0b3efe4274fa6234eea3f0fce9560fbfe815c474bc7a7e01d70e040d9d2be3c",
+			"uuid": "1de507d3f02742e195683157c0a18a65"
+		},
+		"time_policy": "pinned_native_sample; not time-evolving reconstruction",
+		"units": {
+			"frequency": "cycles/source-coordinate unit",
+			"position": "dimensionless",
+			"value": "dimensionless"
+		},
+		"version": 1
+	},
+	"render": {
+		"backend": "forward_plus",
+		"dimensions": [
+			1072,
+			748
+		]
+	},
+	"sample": {
+		"layers": [
+			{
+				"channel": "amplitude",
+				"color_bounds": [
+					0.0,
+					1.0
+				],
+				"color_compositing": "Forward+ linear framebuffer",
+				"color_mapping": {
+					"normalization": "linear",
+					"percentile_high": 99.0,
+					"percentile_low": 1.0,
+					"policy": "manual",
+					"source_channel": "",
+					"source_time": 0.0
+				},
+				"color_source_statistics": {
+					"finite": 32768.0,
+					"maximum": 1.194768661373909,
+					"minimum": -0.7947686613739091,
+					"nonfinite": 0.0,
+					"nonpositive": 12424.0
+				},
+				"display_lod": "float32 / stride 1",
+				"effective_ray_step": "max(requested step, ray length / 1024); early alpha stop .995",
+				"geometry": {
+					"centering": "node",
+					"origin": [
+						0.0,
+						0.0,
+						0.0
+					],
+					"shape": [
+						32.0,
+						32.0,
+						32.0
+					],
+					"spacing": [
+						0.5,
+						0.5,
+						0.5
+					]
+				},
+				"id": "field",
+				"kind": "volume",
+				"numeric_precision": "float64 source",
+				"opacity_mapping": {
+					"lower": 0.0,
+					"mode": "linear",
+					"upper": 1.0
+				},
+				"source_indices": [
+					0
+				],
+				"source_time": 0.0,
+				"status": "exact",
+				"units": "dimensionless",
+				"visible": true
+			}
+		],
+		"requested_time": 0.0
+	},
+	"source": {
+		"committed_bytes": "1576530",
+		"complete_records": 3.0,
+		"format": "WVZ1",
+		"path": "/tmp/wavez-424-export/source-5/field.wvz",
+		"sha256": "c0b3efe4274fa6234eea3f0fce9560fbfe815c474bc7a7e01d70e040d9d2be3c",
+		"uuid": "1de507d3f02742e195683157c0a18a65"
+	},
+	"version": 1,
+	"visual": {
+		"auto_range": true,
+		"brightness_channel": "fixed",
+		"brightness_scale": 1.0,
+		"camera": {
+			"far": 1000.0,
+			"fov": 55.0,
+			"keep_aspect": 1,
+			"near": 0.05000000074505806
+		},
+		"camera_distance": 37.585503768920894,
+		"camera_target": [
+			7.75,
+			7.75,
+			7.75
+		],
+		"camera_transform": [
+			[
+				0.7880107760429382,
+				0.0,
+				-0.6156615018844604
+			],
+			[
+				-0.25041210651397705,
+				0.9135454297065735,
+				-0.3205128610134125
+			],
+			[
+				0.562434732913971,
+				0.4067366421222687,
+				0.7198836207389832
+			],
+			[
+				29.283397674560547,
+				23.03740119934082,
+				34.499359130859375
+			]
+		],
+		"channel_preferences": {},
+		"clamp_map": true,
+		"clean_view": true,
+		"color_channel": "fixed",
+		"colormap_name": "viridis",
+		"cyclic": false,
+		"environment": {
+			"background_mode": 1,
+			"fog_density": 0.0008999999845400453,
+			"fog_enabled": false,
+			"glow_bloom": 0.23999999463558197,
+			"glow_enabled": false,
+			"glow_intensity": 0.30000001192092896,
+			"glow_strength": 1.5499999523162842,
+			"tonemap_exposure": 1.0,
+			"tonemap_mode": 3,
+			"tonemap_white": 1.0
+		},
+		"exposure": 0.65,
+		"gamma": 1.0,
+		"geometry_override": {},
+		"guide_visibility": {
+			"absorber": false,
+			"data": false,
+			"domain": false,
+			"imposed": false
+		},
+		"guide_visible": false,
+		"hidden_types": [],
+		"intensity_floor": 0.08,
+		"invert_map": false,
+		"logarithmic": false,
+		"manual_max": 1.0,
+		"manual_min": 0.0,
+		"mode": 0,
+		"normalization_mode": "frame",
+		"observer_scale": 1e+28,
+		"orbit_enabled": false,
+		"orbit_speed": 0.08,
+		"overlay_visible": true,
+		"panel_width": 360.0,
+		"particle_layer_visible": true,
+		"physical_rate": 1.0,
+		"pitch": 0.4188790204786391,
+		"point_scale": 1.8,
+		"preset": "Scientific",
+		"range_interval": {},
+		"scene": {
+			"gpu_budget_mib": 256,
+			"layers": {
+				"field": {
+					"channel": "amplitude",
+					"clip": false,
+					"clip_distance": 0.0,
+					"clip_normal": [
+						1.0,
+						0.0,
+						0.0
+					],
+					"color_mapping": {
+						"normalization": "linear",
+						"percentile_high": 99.0,
+						"percentile_low": 1.0,
+						"policy": "manual",
+						"source_channel": "",
+						"source_time": 0.0
+					},
+					"colormap": "viridis",
+					"isosurface": false,
+					"lower": 0.0,
+					"opacity": 0.25,
+					"opacity_mapping": {
+						"lower": 0.0,
+						"mode": "linear",
+						"upper": 1.0
+					},
+					"slice": false,
+					"slice_distance": 0.0,
+					"slice_normal": [
+						0.0,
+						0.0,
+						1.0
+					],
+					"step": 0.5,
+					"threshold": 0.5,
+					"upper": 1.0,
+					"visible": true,
+					"volume": true
+				}
+			},
+			"legend_visibility": {}
+		},
+		"sections": {
+			"Advanced • Post-processing": false,
+			"Advanced • Size / Brightness": false,
+			"Analysis export and state": false,
+			"Camera": false,
+			"Capture / Export": false,
+			"Color Mapping": false,
+			"Data cache": false,
+			"Diagnostics and comparisons": false,
+			"Geometry / Guides": false,
+			"Matched runs": false,
+			"Particle Filters": false,
+			"Rendering": false,
+			"Selections": false,
+			"Space-time analysis": false,
+			"Temporal analysis": false,
+			"Trails": false
+		},
+		"show_legend": false,
+		"size_channel": "fixed",
+		"slice_enabled": false,
+		"slice_x": 0.0,
+		"sliders": {
+			"Bloom": 0.30000001192092896,
+			"Brightness": 1.0,
+			"Exposure": 0.64,
+			"Gamma": 1.012,
+			"Intensity cutoff": 0.08,
+			"Orbit speed • radians / second": 0.07999999999999996,
+			"Particle size": 1.8,
+			"Slice position • box fraction": 0.0
+		},
+		"trails_enabled": false,
+		"viewport": {
+			"msaa_3d": 0,
+			"scaling_3d_scale": 1.0,
+			"screen_space_aa": 0,
+			"use_debanding": false,
+			"use_taa": false
+		},
+		"yaw": 0.6632251157578453
+	}
+}

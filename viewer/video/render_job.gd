@@ -5,6 +5,7 @@ const VERSION := 1
 const Renderer = preload("res://renderer_policy.gd")
 const State = preload("res://scene/visual_state.gd")
 const ExactState = preload("res://analysis/inspection_v3.gd")
+const Spectral = preload("res://video/spectral_presentation.gd")
 static func vec(v: Vector3) -> Array: return State.vec(v)
 static func vector(a: Array) -> Vector3: return State.vector(a)
 static func snapshot(viewer) -> Dictionary: return State.snapshot(viewer)
@@ -18,6 +19,12 @@ static func sample_time(job: Dictionary, n: int) -> float:
 	return float(job.start_time) + float(n) / float(job.fps) * float(job.playback_rate)
 
 static func validate(job: Dictionary) -> String:
+	if job.has("spectral_error"): return str(job.spectral_error)
+	if job.has("spectral_presentation"):
+		if job.get("version") != 1: return "Pinned spectral presentation is supported only by ordinary visual video export."
+		if not job.spectral_presentation is Dictionary: return "Invalid pinned spectral presentation."
+		var spectral_problem := Spectral.validate(Spectral.decode(job.spectral_presentation))
+		if not spectral_problem.is_empty(): return spectral_problem
 	if job.get("rendering_method",Renderer.METHOD) != Renderer.METHOD:
 		return Renderer.REQUIREMENT + " Render jobs must use forward_plus."
 	if job.has("presentation"):
@@ -131,6 +138,11 @@ static func publish(staging: String, destination: String) -> Error:
 	return DirAccess.rename_absolute(staging, destination)
 
 static func write_json(path: String, data: Dictionary) -> Error:
+	if data.has("capture_path") and data.get("spectral_presentation") is Dictionary and data.spectral_presentation.get("kind") == "spectral_reconstruction" and data.spectral_presentation.has_all(["data","display"]):
+		# Repeated JSON decimal conversion can move scientific metadata by ULPs.
+		# Reuse the existing lossless float codec; ordinary jobs are unchanged.
+		data = data.duplicate(true)
+		data.spectral_presentation = Spectral.encode(data.spectral_presentation)
 	var f := FileAccess.open(path + ".tmp", FileAccess.WRITE)
 	if f == null: return FileAccess.get_open_error()
 	f.store_string(JSON.stringify(data, "\t", true, true))

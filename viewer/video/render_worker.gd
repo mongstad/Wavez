@@ -2,6 +2,7 @@ extends Node
 const GridView = preload("res://layers/grid_view.gd")
 const Job = preload("res://video/render_job.gd")
 const SourceIdentity = preload("res://video/source_identity.gd")
+const Spectral = preload("res://video/spectral_presentation.gd")
 const Profile = preload("res://scene/playback_profile.gd")
 const Timeline = preload("res://video/offline_timeline.gd")
 var job_path := ""
@@ -24,6 +25,7 @@ var selection_recipe: Dictionary = {}
 var committed_output_bytes := 0
 var initial_output_files := 0
 var source_binding: Dictionary = {}
+var spectral_provenance: Dictionary = {}
 var metrics := {"sample_ms":0.0,"render_readback_ms":0.0,"png_ms":0.0}
 var encoding_began := 0
 
@@ -66,6 +68,9 @@ func finish(stage: String, message: String, code: int) -> void:
 	if encoder_pid > 0 and OS.is_process_running(encoder_pid): OS.kill(encoder_pid)
 	if trace != null: trace.close()
 	if encoder_log != null: encoder_log.close()
+	# Only this job's fixed private display files are disposable. Provenance,
+	# timing, diagnostics and any already rendered frames remain available.
+	if job.has("spectral_presentation"): Spectral.cleanup(directory)
 	status(stage, message)
 	print("WAVEZ export: " + message)
 	get_tree().quit(code)
@@ -78,6 +83,8 @@ func _run() -> void:
 		finish("failed", "Invalid render-job JSON.", 1)
 		return
 	job = parsed
+	if job.get("spectral_presentation") is Dictionary:
+		job.spectral_presentation = Spectral.decode(job.spectral_presentation)
 	var renderer_problem := Job.Renderer.problem()
 	if not renderer_problem.is_empty():
 		finish("failed",renderer_problem,1)
@@ -147,6 +154,31 @@ func _run() -> void:
 		if viewer.scene_layers != null and not viewer.generic_reader.pin_extent(int(identity.committed_bytes)):finish("failed","Invalid scene committed extent.",1);return
 	source_binding = SourceIdentity.capture(viewer.generic_reader)
 	if source_binding.is_empty():finish("failed","Cannot bind export to a reliable unchanged local source stamp.",1);return
+	var spectral_prepared: Dictionary = {}
+	if job.has("spectral_presentation"):
+		var frozen: Dictionary = job.spectral_presentation
+		var spectral_problem := Spectral.binding_problem(frozen,job.capture_path,source_binding)
+		if not spectral_problem.is_empty():finish("failed",spectral_problem,1);return
+		# A pinned derived field is authorized by its verified committed prefix,
+		# not by whichever ordinary sample the moving video timeline selects.
+		if not await verify_prefix(frozen.source):
+			finish("cancelled" if cancelled() else "failed","Pinned reconstruction source verification cancelled." if cancelled() else "Pinned reconstruction source hash verification failed; no original-field fallback.",2 if cancelled() else 1);return
+		if not source_unchanged():return
+		spectral_problem = Spectral.native_problem(frozen,viewer.generic_reader)
+		if not spectral_problem.is_empty():finish("failed",spectral_problem,1);return
+		status("verifying","Verifying the pinned reconstructed display; cancellation is available…")
+		spectral_prepared = await Spectral.prepare(frozen,directory,get_tree(),cancelled)
+		if spectral_prepared.has("error"):finish("cancelled" if cancelled() else "failed",str(spectral_prepared.error),2 if cancelled() else 1);return
+		if not source_unchanged():return
+		spectral_provenance = Spectral.provenance(frozen)
+		spectral_provenance.visual_state = job.state.duplicate(true)
+		spectral_provenance.video = {"start_time":job.start_time,"end_time":job.end_time,"fps":job.fps,"playback_rate":job.playback_rate,"camera_mode":job.get("camera_mode","locked"),"orbit_speed":job.get("orbit_speed",0.08),"width":job.width,"height":job.height}
+		if Job.write_json(directory.path_join("spectral-presentation.json"),spectral_provenance) != OK:finish("failed","Cannot record pinned reconstruction provenance.",1);return
+		# These ordinary volumes are replaced in the live presentation too. Do
+		# not request their moving samples or retain their unused GPU textures.
+		hide_replaced_volumes(viewer.scene_layers.states)
+		for view in viewer.scene_layers.views.values():
+			if view is GridView: view.clear()
 	metrics.worker_identity_ms = (Time.get_ticks_usec()-identity_began)/1000.0
 	metrics.snapshot_identity_ms = job.get("source_identity_ms",0)
 	timeline = Timeline.new()
@@ -170,6 +202,7 @@ func _run() -> void:
 	# Version-1 jobs made before G1 inherit defaults only for newly added fields.
 	var merged: Dictionary = Job.snapshot(viewer)
 	merged.merge(job.state,true)
+	if job.has("spectral_presentation"): hide_replaced_volumes(merged.scene.layers)
 	var invalid_state: String = preload("res://scene/inspection_state.gd").validate_visual(viewer,merged)
 	if not invalid_state.is_empty(): finish("failed",invalid_state,1); return
 	Job.apply(viewer, merged)
@@ -183,6 +216,10 @@ func _run() -> void:
 		viewer.selection_controller.overlay.clear()
 		viewer.selection_controller.overlay.hide()
 		if job.get("inspection_sidecars",false): inspection_source = source_binding.duplicate(true)
+	if job.has("spectral_presentation"):
+		var install_problem: String = viewer.spectral_reconstruction.install_export_snapshot(job.spectral_presentation,spectral_prepared)
+		if not install_problem.is_empty():finish("failed",install_problem,1);return
+		spectral_prepared.clear()
 	# Rendering state is frozen; only deterministic sample and camera functions advance.
 	viewer.playing = false
 	viewer.orbit_enabled = false
@@ -223,6 +260,11 @@ func _run() -> void:
 		viewer.camera.transform = Timeline.camera_at(job.state, float(n)/job.fps, job.get("camera_mode", "locked") == "orbit", float(job.get("orbit_speed", 0.08)))
 		if job.version == 2 and not await viewer.selection_controller.await_committed_overlay(150000,cancelled):
 			finish("cancelled" if cancelled() else "failed","Frame selection resolution cancelled or unavailable; no stale overlay frame was published.",2 if cancelled() else 1);return
+		if job.has("spectral_presentation"):
+			# Set text before the layout yield so this frame's legend does not
+			# show the preceding frame's playhead after a forced draw.
+			var presentation_problem: String = viewer.spectral_reconstruction.apply_export_frame(time,bool(job.state.get("overlay_visible",true)) and bool(job.spectral_presentation.legend.visible))
+			if not presentation_problem.is_empty():finish("failed",presentation_problem,1);return
 		viewer.shell.refresh_export()
 		# Yield for layout, process events and cancellation without depending on a
 		# visible OS window. Minimized/hidden windows may suppress the normal loop.
@@ -258,12 +300,17 @@ func _run() -> void:
 				record.payload = preload("res://analysis/inspection_v3.gd").pack(payload)
 			else:record = preload("res://scene/inspection_state.gd").snapshot(viewer,inspection_source)
 			if record.is_empty(): finish("failed","Source changed while recording inspection state; PNGs retained.",1); return
+			if not spectral_provenance.is_empty():
+				# This describes a derived visual, not a portable original-channel
+				# inspection recipe that might silently restore the wrong field.
+				record = {"kind":"wavez-visual-export","version":1,"purpose":"Visual provenance only; not a restorable source-channel inspection","source":spectral_provenance.source,"visual":Job.snapshot(viewer),"sample":viewer.committed_sample.duplicate(true),"spectral_presentation":spectral_provenance}
 			if job.version == 1:record.image = {"file":"frames/"+path.get_file(),"retained_after_encode":job.get("keep_frames",false),"width":img.get_width(),"height":img.get_height(),"sha256":FileAccess.get_sha256(path)}
 			if Job.write_json(directory.path_join("inspection-%08d.json" % n),record) != OK:
 				finish("failed","Could not write inspection sidecar; PNGs retained.",1); return
 			if job.version == 2:committed_output_bytes += FileAccess.open(directory.path_join("inspection-%08d.json" % n),FileAccess.READ).get_length()
 		var timing_record := {"n":n, "capture_time":time, "video_time":float(n)/job.fps, "a":point.a, "b":point.b, "alpha":point.alpha, "width":img.get_width(), "height":img.get_height(), "camera_origin":Job.vec(viewer.camera.position), "color_channel":viewer.color_channel, "colormap":viewer.colormap_name, "clean_view":viewer.clean_view, "trails":viewer.trails_enabled, "trail_instances":viewer.trail_mms[0].instance_count, "overlays":viewer.overlay_visible, "sample":viewer.committed_sample, "normalization":{"mode":viewer._effective_normalization(),"bounds":[viewer.range_min,viewer.range_max] if is_finite(viewer.range_min) and is_finite(viewer.range_max) else null}, "guides":viewer.guide_visibility}
 		if job.has("comparison"):timing_record.comparison = comparison_frame(n,time)
+		if not spectral_provenance.is_empty():timing_record.spectral_presentation = spectral_frame()
 		trace.store_line(JSON.stringify(timing_record))
 		trace.flush()
 		completed = n + 1
@@ -276,6 +323,14 @@ func _run() -> void:
 		finish("cancelled", "Export cancelled. PNG sequence retained in " + frames_dir, 2)
 		return
 	await encode(frames_dir)
+
+func hide_replaced_volumes(layers: Dictionary) -> void:
+	for id in layers:
+		if viewer.generic_reader.objects.has(id) and viewer.generic_reader.objects[id].kind == "volume":
+			layers[id].visible = false; layers[id].isosurface = false
+
+func spectral_frame() -> Dictionary:
+	return {"selected_band":spectral_provenance.selected_band,"native_record":spectral_provenance.native_record,"frequency_edges":spectral_provenance.frequency_edges,"source_sha256":spectral_provenance.source.sha256,"display_sha256":spectral_provenance.display_sha256,"time_policy":spectral_provenance.time_policy,"provenance_file":"spectral-presentation.json"}
 
 func output_usage() -> int:
 	var pending: Array[String] = [directory];var bytes := 0;var files := 0;var directories := 0
@@ -332,6 +387,11 @@ func encode(frames_dir: String) -> void:
 	var staging := directory.path_join("encoded.partial.mp4")
 	var crf: int = {"high":18, "balanced":21, "compact":25}[job.get("quality", "high")]
 	var args := PackedStringArray(["-nostdin", "-n", "-hide_banner", "-loglevel", "error", "-framerate", str(int(job.fps)), "-start_number", "0", "-i", frames_dir.path_join("frame%08d.png"), "-frames:v", str(total), "-an", "-c:v", "libx264", "-preset", "slow", "-crf", str(crf), "-pix_fmt", "yuv420p", "-movflags", "+faststart", "-progress", directory.path_join("encoding-progress.txt"), staging])
+	if not spectral_provenance.is_empty():
+		# Carry the scientific distinction with the movie even when its detailed
+		# job directory is not copied alongside it. Arguments never use a shell.
+		args.insert(args.size()-1,"-metadata")
+		args.insert(args.size()-1,"comment="+JSON.stringify(spectral_frame()))
 	Job.write_json(directory.path_join("encoding.json"), {"executable":executable, "arguments":Array(args), "final_output":job.output_path})
 	if executable.is_empty() or not FileAccess.file_exists(executable):
 		finish("frames_ready", "FFmpeg is unavailable. All PNG frames and encoding instructions are retained in " + directory, 0)
@@ -408,7 +468,7 @@ func verify_prefix(identity: Dictionary) -> bool:
 	if file == null or extent < 16 or extent > file.get_length():return false
 	var hash := HashingContext.new();hash.start(HashingContext.HASH_SHA256)
 	var remaining := extent;var chunks := 0
-	status("verifying","Verifying explicit portable recipe source; cancellation is available…")
+	status("verifying","Verifying the pinned source prefix; cancellation is available…")
 	while remaining > 0:
 		if cancelled():return false
 		var count := mini(1048576,remaining);var data := file.get_buffer(count)

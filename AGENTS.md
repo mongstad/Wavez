@@ -75,3 +75,14 @@ Examples:
 - Save useful current Blender work before ending a Blender/MCP task, even when final runtime integration is not yet complete.
 - When a final 3D asset is accepted, retain both the authoritative editable `.blend` source and the runtime asset(s) used by WAVEZ.
 - Do not commit Blender autosaves, caches, temporary renders, Python virtual environments, MCP tooling, Blender installations, or clearly disposable generated working files. Blender/MCP/Codex tooling remains external unless the owner explicitly authorizes vendoring after license review.
+
+## Spectral experimental development
+
+Spectral Mode issue branches originate from `spectral` and their pull requests
+target `spectral`. Never commit, push or merge directly to either integration
+branch. Preserve accepted spectral history; the main-only rollback #421/#422
+must not be merged into spectral. Production integration requires a separate
+owner decision. For #424 the owner explicitly approved candidate v0.1.0.119,
+applying accepted main BUILD 118 + 1 while targeting spectral. Reconcile against
+current main before owner review under VERSIONING.md. This authorizes no new
+independent experimental version counter or release.

@@ -1,5 +1,23 @@
 # Current status
 
+Issue #424 proposes experimental candidate **v0.1.0.119** on the assigned issue
+branch, with its PR targeting **`spectral`**. The owner explicitly approved the
+existing accepted-main BUILD rule: main v0.1.0.118 plus one. The accepted
+spectral baseline is `4b9a1aeaa8658cd4ff65ebbcff06ac52b3667a09`; the main-only
+rollback #421/#422 remains separate. One verified native signed float64 field
+is split into phase-preserving Low/Intermediate/High full-grid volumes and
+displayed through the existing scalar renderer, with a pinned-time legend and
+fixed comparable range. Original source arrays, WVZ1/SWSS and ordinary playback
+remain independent. Owner review is pending. See the
+[scientific/display contract](SPECTRAL_RECONSTRUCTION.md) and
+[validation evidence and owner checks](evidence/issue-424/README.md).
+The owner follow-up on PR #425 makes the active reconstructed volume authoritative
+for image and video export. Video snapshots retain one explicitly pinned native
+sample; derived provenance describes the displayed view without replacing it
+with the original field. BUILD remains v0.1.0.119. See
+[follow-up evidence and checks](evidence/issue-424/export-follow-up/README.md).
+Historical review-time records below remain as written.
+
 Issue #417 proposes candidate **v0.1.0.117**, based on accepted
 **v0.1.0.116** / owner-merged PR #416
 (`1afe36a3c31de5b5ba991e676e7a9ad856b36381`). **Tools → Spectral band map**

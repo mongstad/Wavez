@@ -1,0 +1,5104 @@
+{
+	"checks": 88,
+	"device": "NVIDIA GeForce RTX 3070 Ti",
+	"display": "X11",
+	"failures": [],
+	"gpu_memory_note": "NVIDIA checkpoints and CSV measure the whole device including desktop; differences are incremental observations, not isolated process VRAM. Engine counters cover the viewer but may omit driver allocations.",
+	"observations": {
+		"cancel": {
+			"ack_ms": 233.056,
+			"callback_ms": 0.323,
+			"observed_progress": {
+				"completed": 8.0,
+				"id": "178908-b8",
+				"stage": "source_index",
+				"total": 56627218.0
+			}
+		},
+		"model_detail_high": {
+			"note": "Explicit manual shared range for detail inspection; not amplitude-comparable with the common-scale views.",
+			"opacity": 0.25,
+			"range": [
+				-0.15,
+				0.15
+			]
+		},
+		"model_detail_intermediate": {
+			"note": "Explicit manual shared range for detail inspection; not amplitude-comparable with the common-scale views.",
+			"opacity": 0.25,
+			"range": [
+				-0.8,
+				0.8
+			]
+		},
+		"model_layers": {
+			"comparison_particle_visibility": false,
+			"particle_object": "derived_markers",
+			"particle_visibility_before": true
+		},
+		"model_ordinary_memory": {
+			"derived_texture_bytes": 0,
+			"device_query_exit": 0,
+			"engine_buffer_bytes": 29297308.0,
+			"engine_static_bytes": 301131678,
+			"engine_texture_bytes": 147166720.0,
+			"engine_video_bytes": 233485392.0,
+			"whole_device_used_mib": "2503"
+		},
+		"model_ordinary_profile": {
+			"frames": 90,
+			"max_fps": 60,
+			"mean_fps": 59.97549001641328,
+			"memory": {
+				"derived_texture_bytes": 0,
+				"device_query_exit": 0,
+				"engine_buffer_bytes": 29297308.0,
+				"engine_static_bytes": 301146526,
+				"engine_texture_bytes": 147166720.0,
+				"engine_video_bytes": 233485392.0,
+				"whole_device_used_mib": "2491"
+			},
+			"render_cpu_ms": {
+				"max": 0.4410000145435333,
+				"mean": 0.23435555497805277,
+				"median": 0.22699999809265137,
+				"min": 0.12999999523162842,
+				"p95": 0.3709999918937683
+			},
+			"render_gpu_ms": {
+				"max": 4.781000137329102,
+				"mean": 2.2725444383091395,
+				"median": 2.4719998836517334,
+				"min": 0.6299999952316284,
+				"p95": 4.019999980926514
+			},
+			"resolution": [
+				1440,
+				900
+			],
+			"vsync": 1,
+			"wall_ms": {
+				"max": 19.751,
+				"mean": 16.67347777777778,
+				"median": 16.675,
+				"min": 13.833,
+				"p95": 17.28
+			}
+		},
+		"model_t40_cold": {
+			"callback_ms": 5.582,
+			"data": {
+				"algorithm": "spectral-reconstruction-periodic-v1",
+				"artifacts": {
+					"high": {
+						"bytes": 28311552.0,
+						"dtype": "f4",
+						"maximum": 0.16283650284614867,
+						"minimum": -0.1882315103728065,
+						"path": "/tmp/wavez-424/source-final/analysis-workers/178908-17891630-reconstruction/results/d-0cca37de1c0d4d3fa191a833ab3405e3/high.f4",
+						"scientific": {
+							"bytes": 56623104.0,
+							"dtype": "f8",
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-17891630-reconstruction/results/d-0cca37de1c0d4d3fa191a833ab3405e3/high.f8",
+							"sha256": "62f8b68c7c89cd085cf8a2d2ea2cb3eb72fce581cfd1d6f0fce38e1c6ad72226"
+						},
+						"sha256": "3a1c9df11ef2f25afaffc661f270db8f2370e13c48d37f5628d9e4ed7ca4bfe8",
+						"shape_zyx": [
+							192.0,
+							192.0,
+							192.0
+						]
+					},
+					"intermediate": {
+						"bytes": 28311552.0,
+						"dtype": "f4",
+						"maximum": 0.8568485430141651,
+						"minimum": -1.057112677570183,
+						"path": "/tmp/wavez-424/source-final/analysis-workers/178908-17891630-reconstruction/results/d-0cca37de1c0d4d3fa191a833ab3405e3/intermediate.f4",
+						"scientific": {
+							"bytes": 56623104.0,
+							"dtype": "f8",
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-17891630-reconstruction/results/d-0cca37de1c0d4d3fa191a833ab3405e3/intermediate.f8",
+							"sha256": "6bff553b3b8e9b9ce0d5e753e8f269929a5b13ed3e5ad92aa5940ca49aecbcf0"
+						},
+						"sha256": "2f79a7e3a0c43e8143d3a370a82165cb6196ee9a442731b89ccf0dd8e08532f7",
+						"shape_zyx": [
+							192.0,
+							192.0,
+							192.0
+						]
+					},
+					"low": {
+						"bytes": 28311552.0,
+						"dtype": "f4",
+						"maximum": 1.6529147341860075,
+						"minimum": -0.7921544414856305,
+						"path": "/tmp/wavez-424/source-final/analysis-workers/178908-17891630-reconstruction/results/d-0cca37de1c0d4d3fa191a833ab3405e3/low.f4",
+						"scientific": {
+							"bytes": 56623104.0,
+							"dtype": "f8",
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-17891630-reconstruction/results/d-0cca37de1c0d4d3fa191a833ab3405e3/low.f8",
+							"sha256": "8e00a6094deaa10e5e204b8e0c069c606417c6836051d09fcd1cc2c298d67d58"
+						},
+						"sha256": "3de9f5695758e9fa6e9399d77f8aa188d8d59272d27f5ae607d33d3d31c76877",
+						"shape_zyx": [
+							192.0,
+							192.0,
+							192.0
+						]
+					},
+					"original": {
+						"bytes": 28311552.0,
+						"dtype": "f4",
+						"maximum": 2.0287075740689637,
+						"minimum": -1.2275794172214576,
+						"path": "/tmp/wavez-424/source-final/analysis-workers/178908-17891630-reconstruction/results/d-0cca37de1c0d4d3fa191a833ab3405e3/original.f4",
+						"scientific": {
+							"bytes": 56623104.0,
+							"dtype": "f8",
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-17891630-reconstruction/results/d-0cca37de1c0d4d3fa191a833ab3405e3/original.f8",
+							"sha256": "721b14353b1329606c1b7e598e7e99a9e544b7ec1b9988807697393a73aa794c"
+						},
+						"sha256": "cbb35001db27a5c16531f8e9e6756f6e9ed2c7608ed3568a3a44a8fb8605b346",
+						"shape_zyx": [
+							192.0,
+							192.0,
+							192.0
+						]
+					}
+				},
+				"boundary": "periodic",
+				"channel": "amplitude",
+				"common_range": [
+					-2.0287075740689637,
+					2.0287075740689637
+				],
+				"edges": [
+					0.125,
+					0.375
+				],
+				"geometry": {
+					"centering": "node",
+					"data_to_world": [
+						1.0,
+						0.0,
+						0.0,
+						0.0,
+						0.0,
+						1.0,
+						0.0,
+						0.0,
+						0.0,
+						0.0,
+						1.0,
+						0.0
+					],
+					"origin": [
+						0.0,
+						0.0,
+						0.0
+					],
+					"shape": [
+						192.0,
+						192.0,
+						192.0
+					],
+					"spacing": [
+						0.16666666666666666,
+						0.16666666666666666,
+						0.16666666666666666
+					]
+				},
+				"kind": "spectral_reconstruction",
+				"manifest": {
+					"path": "/tmp/wavez-424/source-final/analysis-workers/178908-17891630-reconstruction/results/d-0cca37de1c0d4d3fa191a833ab3405e3/manifest.json",
+					"sha256": "768178bdbd48ece1b867f6c0896ca9de3019e4e10e10cacfc6acea73c1f08a0a"
+				},
+				"metrics": {
+					"ac_mean_square": 0.16755924400635894,
+					"bands": {
+						"high": {
+							"ac_fraction": 0.0025574813375444,
+							"ac_mean_square": 0.00042852963947931,
+							"fraction": 0.00156082637044218,
+							"full_dft_cells": 7070765.0,
+							"mean_square": 0.00042852963947931,
+							"parseval_relative_error": 7.897943039656543e-19,
+							"spectral_mean_square": 0.00042852963947931
+						},
+						"intermediate": {
+							"ac_fraction": 0.1997564157095144,
+							"ac_mean_square": 0.03347103400170619,
+							"fraction": 0.12191098981929832,
+							"full_dft_cells": 6872.0,
+							"mean_square": 0.03347103400170619,
+							"parseval_relative_error": 2.5273417726900934e-17,
+							"spectral_mean_square": 0.0334710340017062
+						},
+						"low": {
+							"ac_fraction": 0.7976861029529392,
+							"ac_mean_square": 0.1336596803651731,
+							"fraction": 0.8765281838102617,
+							"full_dft_cells": 251.0,
+							"mean_square": 0.24065348568864492,
+							"parseval_relative_error": 3.0328101272281123e-16,
+							"spectral_mean_square": 0.24065348568864484
+						}
+					},
+					"mean_square": 0.2745530493298298,
+					"parseval_relative_error": 1.8196860763368673e-15,
+					"residual_max": 1.7763568394002505e-15,
+					"residual_relative_rms": 4.507753398719525e-16,
+					"residual_rms": 2.361964061345618e-16,
+					"scientific_bytes": 226492416.0,
+					"source_mean": 0.3270990756995065,
+					"transfer_bytes": 113246208.0,
+					"workspace_bytes": 828637184.0
+				},
+				"object": "field",
+				"provenance": {
+					"display_dtype": "f4",
+					"lifetime": "One worker-owned result; next reconstruction or worker shutdown clears it",
+					"lod": 1.0,
+					"normalization": "NumPy backward DFT; disjoint real radial masks; inverse keeps complex phase",
+					"scientific_dtype": "f8",
+					"source_dtype": "f8",
+					"transform": "identity",
+					"worker": {
+						"analysis_code_sha256": "d511367c02a156e6045cf43ff3f715e5cabba51d885acb8d8a8b8b240de1444d",
+						"policy": "private file transport; one computation at a time",
+						"worker": "tools/analyze_selection.py"
+					}
+				},
+				"record": {
+					"index": 40.0,
+					"native_time": {
+						"f64_le_hex": "0000000000004440",
+						"text": "40"
+					},
+					"sequence": 80.0
+				},
+				"source": {
+					"committed_bytes": "6965545431",
+					"complete_records": 82.0,
+					"format": "WVZ1",
+					"path": "/home/Nozba/Documents/Dev/Sims/Model-A/outputs/run_20261030T193414164759Z_b3a4a787cae945b0909004cac75740ca/model_a_20261030T193414164759Z_b3a4a787cae945b0909004cac75740ca.wvz",
+					"sha256": "1af76f2e5e0642808f33119168d8f5e0c7cc847599e414790923c2c3585e3d7d",
+					"uuid": "5848557b4ddd4d56b48e62f9f5700b23"
+				},
+				"source_stamp": {
+					"ctime_ns": "1793389496997707349",
+					"device": "47",
+					"inode": "26410348",
+					"mtime_ns": "1793389496997707349",
+					"size": "6965545431"
+				},
+				"support": {
+					"assumption": "Explicit periodic full domain; no boundary declaration is inferred from the capture",
+					"dc_band": "low",
+					"fundamental_xyz": [
+						0.03125,
+						0.03125,
+						0.03125
+					],
+					"intervals": [
+						"[0, low)",
+						"[low, high)",
+						"[high, sampled corner]"
+					],
+					"length_xyz": [
+						32.0,
+						32.0,
+						32.0
+					],
+					"low_edge_cycles_xyz": [
+						4.0,
+						4.0,
+						4.0
+					],
+					"nyquist_xyz": [
+						3.0,
+						3.0,
+						3.0
+					]
+				},
+				"timings": {
+					"decode_seconds": 0.10007162100009737,
+					"fft_seconds": 0.06656359400221845,
+					"reconstruction_and_write_seconds": 0.7372664020003867,
+					"total_seconds": 1.0040729680004006,
+					"verification_open_seconds": 3.4284842450033466
+				},
+				"units": {
+					"frequency": "cycles/source-coordinate unit",
+					"position": "unknown",
+					"value": "unknown"
+				},
+				"version": 1.0
+			},
+			"roundtrip_ms": 5077.901,
+			"source": {
+				"committed_bytes": "6965545431",
+				"complete_records": 82.0,
+				"format": "WVZ1",
+				"path": "/home/Nozba/Documents/Dev/Sims/Model-A/outputs/run_20261030T193414164759Z_b3a4a787cae945b0909004cac75740ca/model_a_20261030T193414164759Z_b3a4a787cae945b0909004cac75740ca.wvz",
+				"sha256": "1af76f2e5e0642808f33119168d8f5e0c7cc847599e414790923c2c3585e3d7d",
+				"uuid": "5848557b4ddd4d56b48e62f9f5700b23"
+			},
+			"status": "Pinned High ready at full resolution. Playback changes the playhead, not this volume.",
+			"transfer": {
+				"gpu_bytes": 28311552,
+				"gpu_upload_ms": 11.81,
+				"ordinary_gpu_bytes_reserved": 28311552,
+				"transfer_hash_validate_ms": 434.552
+			},
+			"worker_reply": {
+				"analysis_revision": 75.0,
+				"data": {
+					"algorithm": "spectral-reconstruction-periodic-v1",
+					"artifacts": {
+						"high": {
+							"bytes": 28311552.0,
+							"dtype": "f4",
+							"maximum": 0.16283650284614867,
+							"minimum": -0.1882315103728065,
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-17891630-reconstruction/results/d-0cca37de1c0d4d3fa191a833ab3405e3/high.f4",
+							"scientific": {
+								"bytes": 56623104.0,
+								"dtype": "f8",
+								"path": "/tmp/wavez-424/source-final/analysis-workers/178908-17891630-reconstruction/results/d-0cca37de1c0d4d3fa191a833ab3405e3/high.f8",
+								"sha256": "62f8b68c7c89cd085cf8a2d2ea2cb3eb72fce581cfd1d6f0fce38e1c6ad72226"
+							},
+							"sha256": "3a1c9df11ef2f25afaffc661f270db8f2370e13c48d37f5628d9e4ed7ca4bfe8",
+							"shape_zyx": [
+								192.0,
+								192.0,
+								192.0
+							]
+						},
+						"intermediate": {
+							"bytes": 28311552.0,
+							"dtype": "f4",
+							"maximum": 0.8568485430141651,
+							"minimum": -1.057112677570183,
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-17891630-reconstruction/results/d-0cca37de1c0d4d3fa191a833ab3405e3/intermediate.f4",
+							"scientific": {
+								"bytes": 56623104.0,
+								"dtype": "f8",
+								"path": "/tmp/wavez-424/source-final/analysis-workers/178908-17891630-reconstruction/results/d-0cca37de1c0d4d3fa191a833ab3405e3/intermediate.f8",
+								"sha256": "6bff553b3b8e9b9ce0d5e753e8f269929a5b13ed3e5ad92aa5940ca49aecbcf0"
+							},
+							"sha256": "2f79a7e3a0c43e8143d3a370a82165cb6196ee9a442731b89ccf0dd8e08532f7",
+							"shape_zyx": [
+								192.0,
+								192.0,
+								192.0
+							]
+						},
+						"low": {
+							"bytes": 28311552.0,
+							"dtype": "f4",
+							"maximum": 1.6529147341860075,
+							"minimum": -0.7921544414856305,
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-17891630-reconstruction/results/d-0cca37de1c0d4d3fa191a833ab3405e3/low.f4",
+							"scientific": {
+								"bytes": 56623104.0,
+								"dtype": "f8",
+								"path": "/tmp/wavez-424/source-final/analysis-workers/178908-17891630-reconstruction/results/d-0cca37de1c0d4d3fa191a833ab3405e3/low.f8",
+								"sha256": "8e00a6094deaa10e5e204b8e0c069c606417c6836051d09fcd1cc2c298d67d58"
+							},
+							"sha256": "3de9f5695758e9fa6e9399d77f8aa188d8d59272d27f5ae607d33d3d31c76877",
+							"shape_zyx": [
+								192.0,
+								192.0,
+								192.0
+							]
+						},
+						"original": {
+							"bytes": 28311552.0,
+							"dtype": "f4",
+							"maximum": 2.0287075740689637,
+							"minimum": -1.2275794172214576,
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-17891630-reconstruction/results/d-0cca37de1c0d4d3fa191a833ab3405e3/original.f4",
+							"scientific": {
+								"bytes": 56623104.0,
+								"dtype": "f8",
+								"path": "/tmp/wavez-424/source-final/analysis-workers/178908-17891630-reconstruction/results/d-0cca37de1c0d4d3fa191a833ab3405e3/original.f8",
+								"sha256": "721b14353b1329606c1b7e598e7e99a9e544b7ec1b9988807697393a73aa794c"
+							},
+							"sha256": "cbb35001db27a5c16531f8e9e6756f6e9ed2c7608ed3568a3a44a8fb8605b346",
+							"shape_zyx": [
+								192.0,
+								192.0,
+								192.0
+							]
+						}
+					},
+					"boundary": "periodic",
+					"channel": "amplitude",
+					"common_range": [
+						-2.0287075740689637,
+						2.0287075740689637
+					],
+					"edges": [
+						0.125,
+						0.375
+					],
+					"geometry": {
+						"centering": "node",
+						"data_to_world": [
+							1.0,
+							0.0,
+							0.0,
+							0.0,
+							0.0,
+							1.0,
+							0.0,
+							0.0,
+							0.0,
+							0.0,
+							1.0,
+							0.0
+						],
+						"origin": [
+							0.0,
+							0.0,
+							0.0
+						],
+						"shape": [
+							192.0,
+							192.0,
+							192.0
+						],
+						"spacing": [
+							0.16666666666666666,
+							0.16666666666666666,
+							0.16666666666666666
+						]
+					},
+					"kind": "spectral_reconstruction",
+					"manifest": {
+						"path": "/tmp/wavez-424/source-final/analysis-workers/178908-17891630-reconstruction/results/d-0cca37de1c0d4d3fa191a833ab3405e3/manifest.json",
+						"sha256": "768178bdbd48ece1b867f6c0896ca9de3019e4e10e10cacfc6acea73c1f08a0a"
+					},
+					"metrics": {
+						"ac_mean_square": 0.16755924400635894,
+						"bands": {
+							"high": {
+								"ac_fraction": 0.0025574813375444,
+								"ac_mean_square": 0.00042852963947931,
+								"fraction": 0.00156082637044218,
+								"full_dft_cells": 7070765.0,
+								"mean_square": 0.00042852963947931,
+								"parseval_relative_error": 7.897943039656543e-19,
+								"spectral_mean_square": 0.00042852963947931
+							},
+							"intermediate": {
+								"ac_fraction": 0.1997564157095144,
+								"ac_mean_square": 0.03347103400170619,
+								"fraction": 0.12191098981929832,
+								"full_dft_cells": 6872.0,
+								"mean_square": 0.03347103400170619,
+								"parseval_relative_error": 2.5273417726900934e-17,
+								"spectral_mean_square": 0.0334710340017062
+							},
+							"low": {
+								"ac_fraction": 0.7976861029529392,
+								"ac_mean_square": 0.1336596803651731,
+								"fraction": 0.8765281838102617,
+								"full_dft_cells": 251.0,
+								"mean_square": 0.24065348568864492,
+								"parseval_relative_error": 3.0328101272281123e-16,
+								"spectral_mean_square": 0.24065348568864484
+							}
+						},
+						"mean_square": 0.2745530493298298,
+						"parseval_relative_error": 1.8196860763368673e-15,
+						"residual_max": 1.7763568394002505e-15,
+						"residual_relative_rms": 4.507753398719525e-16,
+						"residual_rms": 2.361964061345618e-16,
+						"scientific_bytes": 226492416.0,
+						"source_mean": 0.3270990756995065,
+						"transfer_bytes": 113246208.0,
+						"workspace_bytes": 828637184.0
+					},
+					"object": "field",
+					"provenance": {
+						"display_dtype": "f4",
+						"lifetime": "One worker-owned result; next reconstruction or worker shutdown clears it",
+						"lod": 1.0,
+						"normalization": "NumPy backward DFT; disjoint real radial masks; inverse keeps complex phase",
+						"scientific_dtype": "f8",
+						"source_dtype": "f8",
+						"transform": "identity",
+						"worker": {
+							"analysis_code_sha256": "d511367c02a156e6045cf43ff3f715e5cabba51d885acb8d8a8b8b240de1444d",
+							"policy": "private file transport; one computation at a time",
+							"worker": "tools/analyze_selection.py"
+						}
+					},
+					"record": {
+						"index": 40.0,
+						"native_time": {
+							"f64_le_hex": "0000000000004440",
+							"text": "40"
+						},
+						"sequence": 80.0
+					},
+					"source": {
+						"committed_bytes": "6965545431",
+						"complete_records": 82.0,
+						"format": "WVZ1",
+						"path": "/home/Nozba/Documents/Dev/Sims/Model-A/outputs/run_20261030T193414164759Z_b3a4a787cae945b0909004cac75740ca/model_a_20261030T193414164759Z_b3a4a787cae945b0909004cac75740ca.wvz",
+						"sha256": "1af76f2e5e0642808f33119168d8f5e0c7cc847599e414790923c2c3585e3d7d",
+						"uuid": "5848557b4ddd4d56b48e62f9f5700b23"
+					},
+					"source_stamp": {
+						"ctime_ns": "1793389496997707349",
+						"device": "47",
+						"inode": "26410348",
+						"mtime_ns": "1793389496997707349",
+						"size": "6965545431"
+					},
+					"support": {
+						"assumption": "Explicit periodic full domain; no boundary declaration is inferred from the capture",
+						"dc_band": "low",
+						"fundamental_xyz": [
+							0.03125,
+							0.03125,
+							0.03125
+						],
+						"intervals": [
+							"[0, low)",
+							"[low, high)",
+							"[high, sampled corner]"
+						],
+						"length_xyz": [
+							32.0,
+							32.0,
+							32.0
+						],
+						"low_edge_cycles_xyz": [
+							4.0,
+							4.0,
+							4.0
+						],
+						"nyquist_xyz": [
+							3.0,
+							3.0,
+							3.0
+						]
+					},
+					"timings": {
+						"decode_seconds": 0.10007162100009737,
+						"fft_seconds": 0.06656359400221845,
+						"reconstruction_and_write_seconds": 0.7372664020003867,
+						"total_seconds": 1.0040729680004006,
+						"verification_open_seconds": 3.4284842450033466
+					},
+					"units": {
+						"frequency": "cycles/source-coordinate unit",
+						"position": "unknown",
+						"value": "unknown"
+					},
+					"version": 1.0
+				},
+				"guard": {
+					"baseline": {
+						"VmHWM": 39030784.0,
+						"VmPeak": 384995328.0,
+						"VmRSS": 39030784.0,
+						"VmSize": 384995328.0
+					},
+					"ceiling_bytes": 2147483648.0,
+					"enabled": true,
+					"reason": "runtime plus 1 GiB workspace and 256 MiB overhead fit"
+				},
+				"id": "178908-b23",
+				"member_assets": {
+					"bytes": 0.0,
+					"files": 0.0,
+					"limit_bytes": 67108864.0
+				},
+				"memory": {
+					"VmHWM": 391081984.0,
+					"VmPeak": 736346112.0,
+					"VmRSS": 49577984.0,
+					"VmSize": 394223616.0
+				},
+				"metrics": {
+					"charged_bytes": 0.0,
+					"cpu_seconds": 4.390144952,
+					"decoded_bytes": 56623104.0,
+					"peak_charged_bytes": 1015112077.0,
+					"read_bytes": 7022668214.0,
+					"seconds": 4.4399001370002225
+				},
+				"ok": true,
+				"playback_pressure": {
+					"pauses": 0.0,
+					"seconds": 0.0
+				},
+				"scene_revision": 11.0,
+				"selection_revision": 0.0,
+				"shared_memory": {
+					"limit": 1073741824.0,
+					"peak": 1015112077.0,
+					"used": 0.0
+				},
+				"source": {
+					"committed_bytes": "6965545431",
+					"complete_records": 82.0,
+					"format": "WVZ1",
+					"path": "/home/Nozba/Documents/Dev/Sims/Model-A/outputs/run_20261030T193414164759Z_b3a4a787cae945b0909004cac75740ca/model_a_20261030T193414164759Z_b3a4a787cae945b0909004cac75740ca.wvz",
+					"sha256": "1af76f2e5e0642808f33119168d8f5e0c7cc847599e414790923c2c3585e3d7d",
+					"uuid": "5848557b4ddd4d56b48e62f9f5700b23"
+				},
+				"verification_memo": {
+					"charged_bytes": 2960.0,
+					"entries": 1.0,
+					"evictions": 0.0,
+					"hits": 0.0,
+					"limit_bytes": 4194304.0,
+					"peak_bytes": 2960.0
+				},
+				"version": 1.0
+			}
+		},
+		"model_views": {
+			"high": {
+				"memory": {
+					"derived_texture_bytes": 28311552,
+					"device_query_exit": 0,
+					"engine_buffer_bytes": 29297636.0,
+					"engine_static_bytes": 329610682,
+					"engine_texture_bytes": 175478272.0,
+					"engine_video_bytes": 261797280.0,
+					"whole_device_used_mib": "2491"
+				},
+				"profile": {
+					"frames": 90,
+					"max_fps": 60,
+					"mean_fps": 59.97149355006587,
+					"memory": {
+						"derived_texture_bytes": 28311552,
+						"device_query_exit": 0,
+						"engine_buffer_bytes": 29297636.0,
+						"engine_static_bytes": 329623142,
+						"engine_texture_bytes": 175478272.0,
+						"engine_video_bytes": 261797280.0,
+						"whole_device_used_mib": "2492"
+					},
+					"render_cpu_ms": {
+						"max": 0.9539999961853027,
+						"mean": 0.23491111016935773,
+						"median": 0.21899999678134918,
+						"min": 0.13600000739097595,
+						"p95": 0.32600000500679016
+					},
+					"render_gpu_ms": {
+						"max": 4.0929999351501465,
+						"mean": 2.4703666819466483,
+						"median": 2.8350000381469727,
+						"min": 1.6410000324249268,
+						"p95": 3.499000072479248
+					},
+					"resolution": [
+						1440,
+						900
+					],
+					"vsync": 1,
+					"wall_ms": {
+						"max": 20.425,
+						"mean": 16.674588888888888,
+						"median": 16.581,
+						"min": 12.808,
+						"p95": 17.616
+					}
+				},
+				"state": {
+					"clip": false,
+					"clip_distance": 15.9000244140625,
+					"clip_normal": [
+						0.0,
+						0.0,
+						1.0
+					],
+					"color_mapping": {
+						"normalization": "linear",
+						"percentile_high": 99.0,
+						"percentile_low": 1.0,
+						"policy": "symmetric",
+						"source_channel": "",
+						"source_time": 0.0
+					},
+					"lower": -2.0287075740689637,
+					"opacity": 0.25,
+					"opacity_mapping": {
+						"lower": 0.0,
+						"mode": "magnitude",
+						"upper": 2.0287075740689637
+					},
+					"slice": false,
+					"slice_distance": 15.9000244140625,
+					"slice_normal": [
+						0.0,
+						0.0,
+						1.0
+					],
+					"step": 0.08333333333333333,
+					"upper": 2.0287075740689637,
+					"visible": true,
+					"volume": true
+				},
+				"transfer": {
+					"gpu_bytes": 28311552,
+					"gpu_upload_ms": 6.74,
+					"ordinary_gpu_bytes_reserved": 28311552,
+					"transfer_hash_validate_ms": 450.99
+				}
+			},
+			"intermediate": {
+				"memory": {
+					"derived_texture_bytes": 28311552,
+					"device_query_exit": 0,
+					"engine_buffer_bytes": 29297636.0,
+					"engine_static_bytes": 329604914,
+					"engine_texture_bytes": 175478272.0,
+					"engine_video_bytes": 261797280.0,
+					"whole_device_used_mib": "2472"
+				},
+				"profile": {
+					"frames": 90,
+					"max_fps": 60,
+					"mean_fps": 59.965020404763884,
+					"memory": {
+						"derived_texture_bytes": 28311552,
+						"device_query_exit": 0,
+						"engine_buffer_bytes": 29297636.0,
+						"engine_static_bytes": 329617274,
+						"engine_texture_bytes": 175478272.0,
+						"engine_video_bytes": 261797280.0,
+						"whole_device_used_mib": "2490"
+					},
+					"render_cpu_ms": {
+						"max": 0.6069999933242798,
+						"mean": 0.22717777705854839,
+						"median": 0.22300000488758087,
+						"min": 0.13099999725818634,
+						"p95": 0.3400000035762787
+					},
+					"render_gpu_ms": {
+						"max": 6.86299991607666,
+						"mean": 2.7177555587556625,
+						"median": 2.2179999351501465,
+						"min": 1.6649999618530273,
+						"p95": 6.091000080108643
+					},
+					"resolution": [
+						1440,
+						900
+					],
+					"vsync": 1,
+					"wall_ms": {
+						"max": 19.4,
+						"mean": 16.67638888888889,
+						"median": 16.633,
+						"min": 13.574,
+						"p95": 17.651
+					}
+				},
+				"state": {
+					"clip": false,
+					"clip_distance": 15.9000244140625,
+					"clip_normal": [
+						0.0,
+						0.0,
+						1.0
+					],
+					"color_mapping": {
+						"normalization": "linear",
+						"percentile_high": 99.0,
+						"percentile_low": 1.0,
+						"policy": "symmetric",
+						"source_channel": "",
+						"source_time": 0.0
+					},
+					"lower": -2.0287075740689637,
+					"opacity": 0.25,
+					"opacity_mapping": {
+						"lower": 0.0,
+						"mode": "magnitude",
+						"upper": 2.0287075740689637
+					},
+					"slice": false,
+					"slice_distance": 15.9000244140625,
+					"slice_normal": [
+						0.0,
+						0.0,
+						1.0
+					],
+					"step": 0.08333333333333333,
+					"upper": 2.0287075740689637,
+					"visible": true,
+					"volume": true
+				},
+				"transfer": {
+					"gpu_bytes": 28311552,
+					"gpu_upload_ms": 6.4,
+					"ordinary_gpu_bytes_reserved": 28311552,
+					"transfer_hash_validate_ms": 434.301
+				}
+			},
+			"low": {
+				"memory": {
+					"derived_texture_bytes": 28311552,
+					"device_query_exit": 0,
+					"engine_buffer_bytes": 29297636.0,
+					"engine_static_bytes": 329597516,
+					"engine_texture_bytes": 175478272.0,
+					"engine_video_bytes": 261797280.0,
+					"whole_device_used_mib": "2490"
+				},
+				"profile": {
+					"frames": 90,
+					"max_fps": 60,
+					"mean_fps": 59.97716869111823,
+					"memory": {
+						"derived_texture_bytes": 28311552,
+						"device_query_exit": 0,
+						"engine_buffer_bytes": 29297636.0,
+						"engine_static_bytes": 329609984,
+						"engine_texture_bytes": 175478272.0,
+						"engine_video_bytes": 261797280.0,
+						"whole_device_used_mib": "2473"
+					},
+					"render_cpu_ms": {
+						"max": 0.4790000021457672,
+						"mean": 0.22217777801884545,
+						"median": 0.2199999988079071,
+						"min": 0.14399999380111694,
+						"p95": 0.30000001192092896
+					},
+					"render_gpu_ms": {
+						"max": 7.236999988555908,
+						"mean": 4.295499997668796,
+						"median": 4.074999809265137,
+						"min": 2.0799999237060547,
+						"p95": 6.625999927520752
+					},
+					"resolution": [
+						1440,
+						900
+					],
+					"vsync": 1,
+					"wall_ms": {
+						"max": 19.185,
+						"mean": 16.673011111111116,
+						"median": 16.65,
+						"min": 14.093,
+						"p95": 17.562
+					}
+				},
+				"state": {
+					"clip": false,
+					"clip_distance": 15.9000244140625,
+					"clip_normal": [
+						0.0,
+						0.0,
+						1.0
+					],
+					"color_mapping": {
+						"normalization": "linear",
+						"percentile_high": 99.0,
+						"percentile_low": 1.0,
+						"policy": "symmetric",
+						"source_channel": "",
+						"source_time": 0.0
+					},
+					"lower": -2.0287075740689637,
+					"opacity": 0.25,
+					"opacity_mapping": {
+						"lower": 0.0,
+						"mode": "magnitude",
+						"upper": 2.0287075740689637
+					},
+					"slice": false,
+					"slice_distance": 15.9000244140625,
+					"slice_normal": [
+						0.0,
+						0.0,
+						1.0
+					],
+					"step": 0.08333333333333333,
+					"upper": 2.0287075740689637,
+					"visible": true,
+					"volume": true
+				},
+				"transfer": {
+					"gpu_bytes": 28311552,
+					"gpu_upload_ms": 8.251,
+					"ordinary_gpu_bytes_reserved": 28311552,
+					"transfer_hash_validate_ms": 435.408
+				}
+			},
+			"original": {
+				"memory": {
+					"derived_texture_bytes": 28311552,
+					"device_query_exit": 0,
+					"engine_buffer_bytes": 29297636.0,
+					"engine_static_bytes": 329588348,
+					"engine_texture_bytes": 175478272.0,
+					"engine_video_bytes": 261797280.0,
+					"whole_device_used_mib": "2491"
+				},
+				"profile": {
+					"frames": 90,
+					"max_fps": 60,
+					"mean_fps": 59.977648329722484,
+					"memory": {
+						"derived_texture_bytes": 28311552,
+						"device_query_exit": 0,
+						"engine_buffer_bytes": 29297636.0,
+						"engine_static_bytes": 329600804,
+						"engine_texture_bytes": 175478272.0,
+						"engine_video_bytes": 261797280.0,
+						"whole_device_used_mib": "2491"
+					},
+					"render_cpu_ms": {
+						"max": 0.3499999940395355,
+						"mean": 0.20970000045167075,
+						"median": 0.2070000022649765,
+						"min": 0.12999999523162842,
+						"p95": 0.2669999897480011
+					},
+					"render_gpu_ms": {
+						"max": 7.793000221252441,
+						"mean": 3.359822212325202,
+						"median": 2.763000011444092,
+						"min": 2.36899995803833,
+						"p95": 7.423999786376953
+					},
+					"resolution": [
+						1440,
+						900
+					],
+					"vsync": 1,
+					"wall_ms": {
+						"max": 19.86,
+						"mean": 16.67287777777777,
+						"median": 16.663,
+						"min": 13.583,
+						"p95": 17.264
+					}
+				},
+				"state": {
+					"clip": false,
+					"clip_distance": 15.9000244140625,
+					"clip_normal": [
+						0.0,
+						0.0,
+						1.0
+					],
+					"color_mapping": {
+						"normalization": "linear",
+						"percentile_high": 99.0,
+						"percentile_low": 1.0,
+						"policy": "symmetric",
+						"source_channel": "",
+						"source_time": 0.0
+					},
+					"lower": -2.0287075740689637,
+					"opacity": 0.25,
+					"opacity_mapping": {
+						"lower": 0.0,
+						"mode": "magnitude",
+						"upper": 2.0287075740689637
+					},
+					"slice": false,
+					"slice_distance": 15.9000244140625,
+					"slice_normal": [
+						0.0,
+						0.0,
+						1.0
+					],
+					"step": 0.08333333333333333,
+					"upper": 2.0287075740689637,
+					"visible": true,
+					"volume": true
+				},
+				"transfer": {
+					"gpu_bytes": 28311552,
+					"gpu_upload_ms": 6.521,
+					"ordinary_gpu_bytes_reserved": 28311552,
+					"transfer_hash_validate_ms": 421.216
+				}
+			}
+		},
+		"regional_coexistence": {
+			"callback_ms": 3.36,
+			"data": {
+				"algorithm": "spectral-reconstruction-periodic-v1",
+				"artifacts": {
+					"high": {
+						"bytes": 131072.0,
+						"dtype": "f4",
+						"maximum": 0.1998323219036729,
+						"minimum": -0.19983232190367345,
+						"path": "/tmp/wavez-424/source-final/analysis-workers/178908-9748128-reconstruction/results/d-92e68ea70a4841e8ad296daa318a9463/high.f4",
+						"scientific": {
+							"bytes": 262144.0,
+							"dtype": "f8",
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-9748128-reconstruction/results/d-92e68ea70a4841e8ad296daa318a9463/high.f8",
+							"sha256": "b272181ff9915da7bea487e720d7806c283e302eb1852f820250a745f2187697"
+						},
+						"sha256": "636559167d4639769757f7fe3a15eab301ae20576f3f7ec588c7f1f084797492",
+						"shape_zyx": [
+							32.0,
+							32.0,
+							32.0
+						]
+					},
+					"intermediate": {
+						"bytes": 131072.0,
+						"dtype": "f4",
+						"maximum": 0.5999441003575068,
+						"minimum": -0.5999441003575069,
+						"path": "/tmp/wavez-424/source-final/analysis-workers/178908-9748128-reconstruction/results/d-92e68ea70a4841e8ad296daa318a9463/intermediate.f4",
+						"scientific": {
+							"bytes": 262144.0,
+							"dtype": "f8",
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-9748128-reconstruction/results/d-92e68ea70a4841e8ad296daa318a9463/intermediate.f8",
+							"sha256": "0396d55968688d75253b02a204e693804fe1e4ae1d042e382550b2664174297e"
+						},
+						"sha256": "5e8133b1b2dbc35e89dbb262a35a1f6cb8dfdeedbbe06718f3a0819a2a980962",
+						"shape_zyx": [
+							32.0,
+							32.0,
+							32.0
+						]
+					},
+					"low": {
+						"bytes": 131072.0,
+						"dtype": "f4",
+						"maximum": 1.5996908642878342,
+						"minimum": -0.7996908642878342,
+						"path": "/tmp/wavez-424/source-final/analysis-workers/178908-9748128-reconstruction/results/d-92e68ea70a4841e8ad296daa318a9463/low.f4",
+						"scientific": {
+							"bytes": 262144.0,
+							"dtype": "f8",
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-9748128-reconstruction/results/d-92e68ea70a4841e8ad296daa318a9463/low.f8",
+							"sha256": "af10ff850e60cfb788694498f8dee6933f23c1f92493bc6532dfd6984ce6a496"
+						},
+						"sha256": "82c24b4cd1f411b6cc365a21ac223b0fd4319999fc3ec9b798539c1d6eea37e6",
+						"shape_zyx": [
+							32.0,
+							32.0,
+							32.0
+						]
+					},
+					"original": {
+						"bytes": 131072.0,
+						"dtype": "f4",
+						"maximum": 2.389537322747818,
+						"minimum": -1.5895373227478182,
+						"path": "/tmp/wavez-424/source-final/analysis-workers/178908-9748128-reconstruction/results/d-92e68ea70a4841e8ad296daa318a9463/original.f4",
+						"scientific": {
+							"bytes": 262144.0,
+							"dtype": "f8",
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-9748128-reconstruction/results/d-92e68ea70a4841e8ad296daa318a9463/original.f8",
+							"sha256": "0726481bb3922e216505989b7cbd9ebf6928576cc98751352cfad9f1fe986e49"
+						},
+						"sha256": "732fac688b0afae1b8647acbdeefaae8e7d1a9a4db1aaebea00843419b618826",
+						"shape_zyx": [
+							32.0,
+							32.0,
+							32.0
+						]
+					}
+				},
+				"boundary": "periodic",
+				"channel": "amplitude",
+				"common_range": [
+					-2.389537322747818,
+					2.389537322747818
+				],
+				"edges": [
+					0.125,
+					0.375
+				],
+				"geometry": {
+					"centering": "node",
+					"data_to_world": [
+						1.0,
+						0.0,
+						0.0,
+						0.0,
+						0.0,
+						1.0,
+						0.0,
+						0.0,
+						0.0,
+						0.0,
+						1.0,
+						0.0
+					],
+					"origin": [
+						0.0,
+						0.0,
+						0.0
+					],
+					"shape": [
+						32.0,
+						32.0,
+						32.0
+					],
+					"spacing": [
+						0.5,
+						0.5,
+						0.5
+					]
+				},
+				"kind": "spectral_reconstruction",
+				"manifest": {
+					"path": "/tmp/wavez-424/source-final/analysis-workers/178908-9748128-reconstruction/results/d-92e68ea70a4841e8ad296daa318a9463/manifest.json",
+					"sha256": "a6ec53ececc00d7731443fa5bc1593d61bf5e42733e6300b9a1c681c529e407c"
+				},
+				"metrics": {
+					"ac_mean_square": 0.92,
+					"bands": {
+						"high": {
+							"ac_fraction": 0.02173913043478344,
+							"ac_mean_square": 0.02000000000000076,
+							"fraction": 0.01851851851851923,
+							"full_dft_cells": 31873.0,
+							"mean_square": 0.02000000000000076,
+							"parseval_relative_error": 7.099516447979159e-16,
+							"spectral_mean_square": 0.02
+						},
+						"intermediate": {
+							"ac_fraction": 0.19565217391304657,
+							"ac_mean_square": 0.18000000000000282,
+							"fraction": 0.16666666666666935,
+							"full_dft_cells": 868.0,
+							"mean_square": 0.18000000000000282,
+							"parseval_relative_error": 2.6213599192538426e-15,
+							"spectral_mean_square": 0.18
+						},
+						"low": {
+							"ac_fraction": 0.7826086956521727,
+							"ac_mean_square": 0.719999999999999,
+							"fraction": 0.8148148148148002,
+							"full_dft_cells": 27.0,
+							"mean_square": 0.8799999999999839,
+							"parseval_relative_error": 1.490577208987479e-14,
+							"spectral_mean_square": 0.88
+						}
+					},
+					"mean_square": 1.0799999999999996,
+					"parseval_relative_error": 4.111937128241322e-16,
+					"residual_max": 8.881784197001252e-16,
+					"residual_relative_rms": 2.291960577136391e-16,
+					"residual_rms": 2.3818753011270696e-16,
+					"scientific_bytes": 1048576.0,
+					"source_mean": 0.4,
+					"transfer_bytes": 524288.0,
+					"workspace_bytes": 37289984.0
+				},
+				"object": "field",
+				"provenance": {
+					"display_dtype": "f4",
+					"lifetime": "One worker-owned result; next reconstruction or worker shutdown clears it",
+					"lod": 1.0,
+					"normalization": "NumPy backward DFT; disjoint real radial masks; inverse keeps complex phase",
+					"scientific_dtype": "f8",
+					"source_dtype": "f8",
+					"transform": "identity",
+					"worker": {
+						"analysis_code_sha256": "d511367c02a156e6045cf43ff3f715e5cabba51d885acb8d8a8b8b240de1444d",
+						"policy": "private file transport; one computation at a time",
+						"worker": "tools/analyze_selection.py"
+					}
+				},
+				"record": {
+					"index": 0.0,
+					"native_time": {
+						"f64_le_hex": "0000000000000000",
+						"text": "0"
+					},
+					"sequence": 0.0
+				},
+				"source": {
+					"committed_bytes": "1576530",
+					"complete_records": 3.0,
+					"format": "WVZ1",
+					"path": "/tmp/wavez-424/source-final/replacement.wvz",
+					"sha256": "93a32ba58715a688e4c5d724eba37cc558c4b5c55c27c3e3e64b13d7b68037d3",
+					"uuid": "b600a57da79b4001bcbda8161d5dd94e"
+				},
+				"source_stamp": {
+					"ctime_ns": "1793481824478145970",
+					"device": "37",
+					"inode": "93158",
+					"mtime_ns": "1793481824478145970",
+					"size": "1576530"
+				},
+				"support": {
+					"assumption": "Explicit periodic full domain; no boundary declaration is inferred from the capture",
+					"dc_band": "low",
+					"fundamental_xyz": [
+						0.0625,
+						0.0625,
+						0.0625
+					],
+					"intervals": [
+						"[0, low)",
+						"[low, high)",
+						"[high, sampled corner]"
+					],
+					"length_xyz": [
+						16.0,
+						16.0,
+						16.0
+					],
+					"low_edge_cycles_xyz": [
+						2.0,
+						2.0,
+						2.0
+					],
+					"nyquist_xyz": [
+						1.0,
+						1.0,
+						1.0
+					]
+				},
+				"timings": {
+					"decode_seconds": 0.00039536600161227,
+					"fft_seconds": 0.00033015599910868,
+					"reconstruction_and_write_seconds": 0.0061945539964654,
+					"total_seconds": 0.00842961200032732,
+					"verification_open_seconds": 0.00113035899994429
+				},
+				"units": {
+					"frequency": "cycles/source-coordinate unit",
+					"position": "dimensionless",
+					"value": "dimensionless"
+				},
+				"version": 1.0
+			},
+			"roundtrip_ms": 321.607,
+			"source": {
+				"committed_bytes": "1576530",
+				"complete_records": 3.0,
+				"format": "WVZ1",
+				"path": "/tmp/wavez-424/source-final/replacement.wvz",
+				"sha256": "93a32ba58715a688e4c5d724eba37cc558c4b5c55c27c3e3e64b13d7b68037d3",
+				"uuid": "b600a57da79b4001bcbda8161d5dd94e"
+			},
+			"status": "Pinned High ready at full resolution. Playback changes the playhead, not this volume.",
+			"transfer": {
+				"gpu_bytes": 131072,
+				"gpu_upload_ms": 0.155,
+				"ordinary_gpu_bytes_reserved": 131072,
+				"transfer_hash_validate_ms": 3.256
+			},
+			"worker_reply": {
+				"analysis_revision": 43.0,
+				"data": {
+					"algorithm": "spectral-reconstruction-periodic-v1",
+					"artifacts": {
+						"high": {
+							"bytes": 131072.0,
+							"dtype": "f4",
+							"maximum": 0.1998323219036729,
+							"minimum": -0.19983232190367345,
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-9748128-reconstruction/results/d-92e68ea70a4841e8ad296daa318a9463/high.f4",
+							"scientific": {
+								"bytes": 262144.0,
+								"dtype": "f8",
+								"path": "/tmp/wavez-424/source-final/analysis-workers/178908-9748128-reconstruction/results/d-92e68ea70a4841e8ad296daa318a9463/high.f8",
+								"sha256": "b272181ff9915da7bea487e720d7806c283e302eb1852f820250a745f2187697"
+							},
+							"sha256": "636559167d4639769757f7fe3a15eab301ae20576f3f7ec588c7f1f084797492",
+							"shape_zyx": [
+								32.0,
+								32.0,
+								32.0
+							]
+						},
+						"intermediate": {
+							"bytes": 131072.0,
+							"dtype": "f4",
+							"maximum": 0.5999441003575068,
+							"minimum": -0.5999441003575069,
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-9748128-reconstruction/results/d-92e68ea70a4841e8ad296daa318a9463/intermediate.f4",
+							"scientific": {
+								"bytes": 262144.0,
+								"dtype": "f8",
+								"path": "/tmp/wavez-424/source-final/analysis-workers/178908-9748128-reconstruction/results/d-92e68ea70a4841e8ad296daa318a9463/intermediate.f8",
+								"sha256": "0396d55968688d75253b02a204e693804fe1e4ae1d042e382550b2664174297e"
+							},
+							"sha256": "5e8133b1b2dbc35e89dbb262a35a1f6cb8dfdeedbbe06718f3a0819a2a980962",
+							"shape_zyx": [
+								32.0,
+								32.0,
+								32.0
+							]
+						},
+						"low": {
+							"bytes": 131072.0,
+							"dtype": "f4",
+							"maximum": 1.5996908642878342,
+							"minimum": -0.7996908642878342,
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-9748128-reconstruction/results/d-92e68ea70a4841e8ad296daa318a9463/low.f4",
+							"scientific": {
+								"bytes": 262144.0,
+								"dtype": "f8",
+								"path": "/tmp/wavez-424/source-final/analysis-workers/178908-9748128-reconstruction/results/d-92e68ea70a4841e8ad296daa318a9463/low.f8",
+								"sha256": "af10ff850e60cfb788694498f8dee6933f23c1f92493bc6532dfd6984ce6a496"
+							},
+							"sha256": "82c24b4cd1f411b6cc365a21ac223b0fd4319999fc3ec9b798539c1d6eea37e6",
+							"shape_zyx": [
+								32.0,
+								32.0,
+								32.0
+							]
+						},
+						"original": {
+							"bytes": 131072.0,
+							"dtype": "f4",
+							"maximum": 2.389537322747818,
+							"minimum": -1.5895373227478182,
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-9748128-reconstruction/results/d-92e68ea70a4841e8ad296daa318a9463/original.f4",
+							"scientific": {
+								"bytes": 262144.0,
+								"dtype": "f8",
+								"path": "/tmp/wavez-424/source-final/analysis-workers/178908-9748128-reconstruction/results/d-92e68ea70a4841e8ad296daa318a9463/original.f8",
+								"sha256": "0726481bb3922e216505989b7cbd9ebf6928576cc98751352cfad9f1fe986e49"
+							},
+							"sha256": "732fac688b0afae1b8647acbdeefaae8e7d1a9a4db1aaebea00843419b618826",
+							"shape_zyx": [
+								32.0,
+								32.0,
+								32.0
+							]
+						}
+					},
+					"boundary": "periodic",
+					"channel": "amplitude",
+					"common_range": [
+						-2.389537322747818,
+						2.389537322747818
+					],
+					"edges": [
+						0.125,
+						0.375
+					],
+					"geometry": {
+						"centering": "node",
+						"data_to_world": [
+							1.0,
+							0.0,
+							0.0,
+							0.0,
+							0.0,
+							1.0,
+							0.0,
+							0.0,
+							0.0,
+							0.0,
+							1.0,
+							0.0
+						],
+						"origin": [
+							0.0,
+							0.0,
+							0.0
+						],
+						"shape": [
+							32.0,
+							32.0,
+							32.0
+						],
+						"spacing": [
+							0.5,
+							0.5,
+							0.5
+						]
+					},
+					"kind": "spectral_reconstruction",
+					"manifest": {
+						"path": "/tmp/wavez-424/source-final/analysis-workers/178908-9748128-reconstruction/results/d-92e68ea70a4841e8ad296daa318a9463/manifest.json",
+						"sha256": "a6ec53ececc00d7731443fa5bc1593d61bf5e42733e6300b9a1c681c529e407c"
+					},
+					"metrics": {
+						"ac_mean_square": 0.92,
+						"bands": {
+							"high": {
+								"ac_fraction": 0.02173913043478344,
+								"ac_mean_square": 0.02000000000000076,
+								"fraction": 0.01851851851851923,
+								"full_dft_cells": 31873.0,
+								"mean_square": 0.02000000000000076,
+								"parseval_relative_error": 7.099516447979159e-16,
+								"spectral_mean_square": 0.02
+							},
+							"intermediate": {
+								"ac_fraction": 0.19565217391304657,
+								"ac_mean_square": 0.18000000000000282,
+								"fraction": 0.16666666666666935,
+								"full_dft_cells": 868.0,
+								"mean_square": 0.18000000000000282,
+								"parseval_relative_error": 2.6213599192538426e-15,
+								"spectral_mean_square": 0.18
+							},
+							"low": {
+								"ac_fraction": 0.7826086956521727,
+								"ac_mean_square": 0.719999999999999,
+								"fraction": 0.8148148148148002,
+								"full_dft_cells": 27.0,
+								"mean_square": 0.8799999999999839,
+								"parseval_relative_error": 1.490577208987479e-14,
+								"spectral_mean_square": 0.88
+							}
+						},
+						"mean_square": 1.0799999999999996,
+						"parseval_relative_error": 4.111937128241322e-16,
+						"residual_max": 8.881784197001252e-16,
+						"residual_relative_rms": 2.291960577136391e-16,
+						"residual_rms": 2.3818753011270696e-16,
+						"scientific_bytes": 1048576.0,
+						"source_mean": 0.4,
+						"transfer_bytes": 524288.0,
+						"workspace_bytes": 37289984.0
+					},
+					"object": "field",
+					"provenance": {
+						"display_dtype": "f4",
+						"lifetime": "One worker-owned result; next reconstruction or worker shutdown clears it",
+						"lod": 1.0,
+						"normalization": "NumPy backward DFT; disjoint real radial masks; inverse keeps complex phase",
+						"scientific_dtype": "f8",
+						"source_dtype": "f8",
+						"transform": "identity",
+						"worker": {
+							"analysis_code_sha256": "d511367c02a156e6045cf43ff3f715e5cabba51d885acb8d8a8b8b240de1444d",
+							"policy": "private file transport; one computation at a time",
+							"worker": "tools/analyze_selection.py"
+						}
+					},
+					"record": {
+						"index": 0.0,
+						"native_time": {
+							"f64_le_hex": "0000000000000000",
+							"text": "0"
+						},
+						"sequence": 0.0
+					},
+					"source": {
+						"committed_bytes": "1576530",
+						"complete_records": 3.0,
+						"format": "WVZ1",
+						"path": "/tmp/wavez-424/source-final/replacement.wvz",
+						"sha256": "93a32ba58715a688e4c5d724eba37cc558c4b5c55c27c3e3e64b13d7b68037d3",
+						"uuid": "b600a57da79b4001bcbda8161d5dd94e"
+					},
+					"source_stamp": {
+						"ctime_ns": "1793481824478145970",
+						"device": "37",
+						"inode": "93158",
+						"mtime_ns": "1793481824478145970",
+						"size": "1576530"
+					},
+					"support": {
+						"assumption": "Explicit periodic full domain; no boundary declaration is inferred from the capture",
+						"dc_band": "low",
+						"fundamental_xyz": [
+							0.0625,
+							0.0625,
+							0.0625
+						],
+						"intervals": [
+							"[0, low)",
+							"[low, high)",
+							"[high, sampled corner]"
+						],
+						"length_xyz": [
+							16.0,
+							16.0,
+							16.0
+						],
+						"low_edge_cycles_xyz": [
+							2.0,
+							2.0,
+							2.0
+						],
+						"nyquist_xyz": [
+							1.0,
+							1.0,
+							1.0
+						]
+					},
+					"timings": {
+						"decode_seconds": 0.00039536600161227,
+						"fft_seconds": 0.00033015599910868,
+						"reconstruction_and_write_seconds": 0.0061945539964654,
+						"total_seconds": 0.00842961200032732,
+						"verification_open_seconds": 0.00113035899994429
+					},
+					"units": {
+						"frequency": "cycles/source-coordinate unit",
+						"position": "dimensionless",
+						"value": "dimensionless"
+					},
+					"version": 1.0
+				},
+				"guard": {
+					"baseline": {
+						"VmHWM": 38957056.0,
+						"VmPeak": 384995328.0,
+						"VmRSS": 38957056.0,
+						"VmSize": 384995328.0
+					},
+					"ceiling_bytes": 2147483648.0,
+					"enabled": true,
+					"reason": "runtime plus 1 GiB workspace and 256 MiB overhead fit"
+				},
+				"id": "178908-b14",
+				"member_assets": {
+					"bytes": 0.0,
+					"files": 0.0,
+					"limit_bytes": 67108864.0
+				},
+				"memory": {
+					"VmHWM": 42192896.0,
+					"VmPeak": 387293184.0,
+					"VmRSS": 42192896.0,
+					"VmSize": 387293184.0
+				},
+				"metrics": {
+					"charged_bytes": 0.0,
+					"cpu_seconds": 0.01009519999999999,
+					"decoded_bytes": 262144.0,
+					"peak_charged_bytes": 52793042.0,
+					"read_bytes": 265818.0,
+					"seconds": 0.0101737420009158
+				},
+				"ok": true,
+				"playback_pressure": {
+					"pauses": 0.0,
+					"seconds": 0.0
+				},
+				"scene_revision": 5.0,
+				"selection_revision": 0.0,
+				"shared_memory": {
+					"limit": 1073741824.0,
+					"peak": 52793042.0,
+					"used": 0.0
+				},
+				"source": {
+					"committed_bytes": "1576530",
+					"complete_records": 3.0,
+					"format": "WVZ1",
+					"path": "/tmp/wavez-424/source-final/replacement.wvz",
+					"sha256": "93a32ba58715a688e4c5d724eba37cc558c4b5c55c27c3e3e64b13d7b68037d3",
+					"uuid": "b600a57da79b4001bcbda8161d5dd94e"
+				},
+				"verification_memo": {
+					"charged_bytes": 2896.0,
+					"entries": 2.0,
+					"evictions": 0.0,
+					"hits": 2.0,
+					"limit_bytes": 4194304.0,
+					"peak_bytes": 2896.0
+				},
+				"version": 1.0
+			}
+		},
+		"replacement": {
+			"callback_ms": 4.558,
+			"data": {
+				"algorithm": "spectral-reconstruction-periodic-v1",
+				"artifacts": {
+					"high": {
+						"bytes": 131072.0,
+						"dtype": "f4",
+						"maximum": 0.1998323219036729,
+						"minimum": -0.19983232190367345,
+						"path": "/tmp/wavez-424/source-final/analysis-workers/178908-9748128-reconstruction/results/d-05d863545afe40d09c4ad6808a1e4e71/high.f4",
+						"scientific": {
+							"bytes": 262144.0,
+							"dtype": "f8",
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-9748128-reconstruction/results/d-05d863545afe40d09c4ad6808a1e4e71/high.f8",
+							"sha256": "b272181ff9915da7bea487e720d7806c283e302eb1852f820250a745f2187697"
+						},
+						"sha256": "636559167d4639769757f7fe3a15eab301ae20576f3f7ec588c7f1f084797492",
+						"shape_zyx": [
+							32.0,
+							32.0,
+							32.0
+						]
+					},
+					"intermediate": {
+						"bytes": 131072.0,
+						"dtype": "f4",
+						"maximum": 0.5999441003575068,
+						"minimum": -0.5999441003575069,
+						"path": "/tmp/wavez-424/source-final/analysis-workers/178908-9748128-reconstruction/results/d-05d863545afe40d09c4ad6808a1e4e71/intermediate.f4",
+						"scientific": {
+							"bytes": 262144.0,
+							"dtype": "f8",
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-9748128-reconstruction/results/d-05d863545afe40d09c4ad6808a1e4e71/intermediate.f8",
+							"sha256": "0396d55968688d75253b02a204e693804fe1e4ae1d042e382550b2664174297e"
+						},
+						"sha256": "5e8133b1b2dbc35e89dbb262a35a1f6cb8dfdeedbbe06718f3a0819a2a980962",
+						"shape_zyx": [
+							32.0,
+							32.0,
+							32.0
+						]
+					},
+					"low": {
+						"bytes": 131072.0,
+						"dtype": "f4",
+						"maximum": 1.5996908642878342,
+						"minimum": -0.7996908642878342,
+						"path": "/tmp/wavez-424/source-final/analysis-workers/178908-9748128-reconstruction/results/d-05d863545afe40d09c4ad6808a1e4e71/low.f4",
+						"scientific": {
+							"bytes": 262144.0,
+							"dtype": "f8",
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-9748128-reconstruction/results/d-05d863545afe40d09c4ad6808a1e4e71/low.f8",
+							"sha256": "af10ff850e60cfb788694498f8dee6933f23c1f92493bc6532dfd6984ce6a496"
+						},
+						"sha256": "82c24b4cd1f411b6cc365a21ac223b0fd4319999fc3ec9b798539c1d6eea37e6",
+						"shape_zyx": [
+							32.0,
+							32.0,
+							32.0
+						]
+					},
+					"original": {
+						"bytes": 131072.0,
+						"dtype": "f4",
+						"maximum": 2.389537322747818,
+						"minimum": -1.5895373227478182,
+						"path": "/tmp/wavez-424/source-final/analysis-workers/178908-9748128-reconstruction/results/d-05d863545afe40d09c4ad6808a1e4e71/original.f4",
+						"scientific": {
+							"bytes": 262144.0,
+							"dtype": "f8",
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-9748128-reconstruction/results/d-05d863545afe40d09c4ad6808a1e4e71/original.f8",
+							"sha256": "0726481bb3922e216505989b7cbd9ebf6928576cc98751352cfad9f1fe986e49"
+						},
+						"sha256": "732fac688b0afae1b8647acbdeefaae8e7d1a9a4db1aaebea00843419b618826",
+						"shape_zyx": [
+							32.0,
+							32.0,
+							32.0
+						]
+					}
+				},
+				"boundary": "periodic",
+				"channel": "amplitude",
+				"common_range": [
+					-2.389537322747818,
+					2.389537322747818
+				],
+				"edges": [
+					0.125,
+					0.375
+				],
+				"geometry": {
+					"centering": "node",
+					"data_to_world": [
+						1.0,
+						0.0,
+						0.0,
+						0.0,
+						0.0,
+						1.0,
+						0.0,
+						0.0,
+						0.0,
+						0.0,
+						1.0,
+						0.0
+					],
+					"origin": [
+						0.0,
+						0.0,
+						0.0
+					],
+					"shape": [
+						32.0,
+						32.0,
+						32.0
+					],
+					"spacing": [
+						0.5,
+						0.5,
+						0.5
+					]
+				},
+				"kind": "spectral_reconstruction",
+				"manifest": {
+					"path": "/tmp/wavez-424/source-final/analysis-workers/178908-9748128-reconstruction/results/d-05d863545afe40d09c4ad6808a1e4e71/manifest.json",
+					"sha256": "fe78380f9c1f1e54a72062729e19cf2b57e89fbe6e2e4d279f0418acde1d41b4"
+				},
+				"metrics": {
+					"ac_mean_square": 0.92,
+					"bands": {
+						"high": {
+							"ac_fraction": 0.02173913043478344,
+							"ac_mean_square": 0.02000000000000076,
+							"fraction": 0.01851851851851923,
+							"full_dft_cells": 31873.0,
+							"mean_square": 0.02000000000000076,
+							"parseval_relative_error": 7.099516447979159e-16,
+							"spectral_mean_square": 0.02
+						},
+						"intermediate": {
+							"ac_fraction": 0.19565217391304657,
+							"ac_mean_square": 0.18000000000000282,
+							"fraction": 0.16666666666666935,
+							"full_dft_cells": 868.0,
+							"mean_square": 0.18000000000000282,
+							"parseval_relative_error": 2.6213599192538426e-15,
+							"spectral_mean_square": 0.18
+						},
+						"low": {
+							"ac_fraction": 0.7826086956521727,
+							"ac_mean_square": 0.719999999999999,
+							"fraction": 0.8148148148148002,
+							"full_dft_cells": 27.0,
+							"mean_square": 0.8799999999999839,
+							"parseval_relative_error": 1.490577208987479e-14,
+							"spectral_mean_square": 0.88
+						}
+					},
+					"mean_square": 1.0799999999999996,
+					"parseval_relative_error": 4.111937128241322e-16,
+					"residual_max": 8.881784197001252e-16,
+					"residual_relative_rms": 2.291960577136391e-16,
+					"residual_rms": 2.3818753011270696e-16,
+					"scientific_bytes": 1048576.0,
+					"source_mean": 0.4,
+					"transfer_bytes": 524288.0,
+					"workspace_bytes": 37289984.0
+				},
+				"object": "field",
+				"provenance": {
+					"display_dtype": "f4",
+					"lifetime": "One worker-owned result; next reconstruction or worker shutdown clears it",
+					"lod": 1.0,
+					"normalization": "NumPy backward DFT; disjoint real radial masks; inverse keeps complex phase",
+					"scientific_dtype": "f8",
+					"source_dtype": "f8",
+					"transform": "identity",
+					"worker": {
+						"analysis_code_sha256": "d511367c02a156e6045cf43ff3f715e5cabba51d885acb8d8a8b8b240de1444d",
+						"policy": "private file transport; one computation at a time",
+						"worker": "tools/analyze_selection.py"
+					}
+				},
+				"record": {
+					"index": 0.0,
+					"native_time": {
+						"f64_le_hex": "0000000000000000",
+						"text": "0"
+					},
+					"sequence": 0.0
+				},
+				"source": {
+					"committed_bytes": "1576530",
+					"complete_records": 3.0,
+					"format": "WVZ1",
+					"path": "/tmp/wavez-424/source-final/replacement.wvz",
+					"sha256": "93a32ba58715a688e4c5d724eba37cc558c4b5c55c27c3e3e64b13d7b68037d3",
+					"uuid": "b600a57da79b4001bcbda8161d5dd94e"
+				},
+				"source_stamp": {
+					"ctime_ns": "1793481824478145970",
+					"device": "37",
+					"inode": "93158",
+					"mtime_ns": "1793481824478145970",
+					"size": "1576530"
+				},
+				"support": {
+					"assumption": "Explicit periodic full domain; no boundary declaration is inferred from the capture",
+					"dc_band": "low",
+					"fundamental_xyz": [
+						0.0625,
+						0.0625,
+						0.0625
+					],
+					"intervals": [
+						"[0, low)",
+						"[low, high)",
+						"[high, sampled corner]"
+					],
+					"length_xyz": [
+						16.0,
+						16.0,
+						16.0
+					],
+					"low_edge_cycles_xyz": [
+						2.0,
+						2.0,
+						2.0
+					],
+					"nyquist_xyz": [
+						1.0,
+						1.0,
+						1.0
+					]
+				},
+				"timings": {
+					"decode_seconds": 0.00033554499896126,
+					"fft_seconds": 0.00108633899799315,
+					"reconstruction_and_write_seconds": 0.00542812200001208,
+					"total_seconds": 0.00829394000174943,
+					"verification_open_seconds": 0.002672196002095
+				},
+				"units": {
+					"frequency": "cycles/source-coordinate unit",
+					"position": "dimensionless",
+					"value": "dimensionless"
+				},
+				"version": 1.0
+			},
+			"roundtrip_ms": 229.344,
+			"source": {
+				"committed_bytes": "1576530",
+				"complete_records": 3.0,
+				"format": "WVZ1",
+				"path": "/tmp/wavez-424/source-final/replacement.wvz",
+				"sha256": "93a32ba58715a688e4c5d724eba37cc558c4b5c55c27c3e3e64b13d7b68037d3",
+				"uuid": "b600a57da79b4001bcbda8161d5dd94e"
+			},
+			"status": "Pinned High ready at full resolution. Playback changes the playhead, not this volume.",
+			"transfer": {
+				"gpu_bytes": 131072,
+				"gpu_upload_ms": 0.187,
+				"ordinary_gpu_bytes_reserved": 131072,
+				"transfer_hash_validate_ms": 2.969
+			},
+			"worker_reply": {
+				"analysis_revision": 40.0,
+				"data": {
+					"algorithm": "spectral-reconstruction-periodic-v1",
+					"artifacts": {
+						"high": {
+							"bytes": 131072.0,
+							"dtype": "f4",
+							"maximum": 0.1998323219036729,
+							"minimum": -0.19983232190367345,
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-9748128-reconstruction/results/d-05d863545afe40d09c4ad6808a1e4e71/high.f4",
+							"scientific": {
+								"bytes": 262144.0,
+								"dtype": "f8",
+								"path": "/tmp/wavez-424/source-final/analysis-workers/178908-9748128-reconstruction/results/d-05d863545afe40d09c4ad6808a1e4e71/high.f8",
+								"sha256": "b272181ff9915da7bea487e720d7806c283e302eb1852f820250a745f2187697"
+							},
+							"sha256": "636559167d4639769757f7fe3a15eab301ae20576f3f7ec588c7f1f084797492",
+							"shape_zyx": [
+								32.0,
+								32.0,
+								32.0
+							]
+						},
+						"intermediate": {
+							"bytes": 131072.0,
+							"dtype": "f4",
+							"maximum": 0.5999441003575068,
+							"minimum": -0.5999441003575069,
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-9748128-reconstruction/results/d-05d863545afe40d09c4ad6808a1e4e71/intermediate.f4",
+							"scientific": {
+								"bytes": 262144.0,
+								"dtype": "f8",
+								"path": "/tmp/wavez-424/source-final/analysis-workers/178908-9748128-reconstruction/results/d-05d863545afe40d09c4ad6808a1e4e71/intermediate.f8",
+								"sha256": "0396d55968688d75253b02a204e693804fe1e4ae1d042e382550b2664174297e"
+							},
+							"sha256": "5e8133b1b2dbc35e89dbb262a35a1f6cb8dfdeedbbe06718f3a0819a2a980962",
+							"shape_zyx": [
+								32.0,
+								32.0,
+								32.0
+							]
+						},
+						"low": {
+							"bytes": 131072.0,
+							"dtype": "f4",
+							"maximum": 1.5996908642878342,
+							"minimum": -0.7996908642878342,
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-9748128-reconstruction/results/d-05d863545afe40d09c4ad6808a1e4e71/low.f4",
+							"scientific": {
+								"bytes": 262144.0,
+								"dtype": "f8",
+								"path": "/tmp/wavez-424/source-final/analysis-workers/178908-9748128-reconstruction/results/d-05d863545afe40d09c4ad6808a1e4e71/low.f8",
+								"sha256": "af10ff850e60cfb788694498f8dee6933f23c1f92493bc6532dfd6984ce6a496"
+							},
+							"sha256": "82c24b4cd1f411b6cc365a21ac223b0fd4319999fc3ec9b798539c1d6eea37e6",
+							"shape_zyx": [
+								32.0,
+								32.0,
+								32.0
+							]
+						},
+						"original": {
+							"bytes": 131072.0,
+							"dtype": "f4",
+							"maximum": 2.389537322747818,
+							"minimum": -1.5895373227478182,
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-9748128-reconstruction/results/d-05d863545afe40d09c4ad6808a1e4e71/original.f4",
+							"scientific": {
+								"bytes": 262144.0,
+								"dtype": "f8",
+								"path": "/tmp/wavez-424/source-final/analysis-workers/178908-9748128-reconstruction/results/d-05d863545afe40d09c4ad6808a1e4e71/original.f8",
+								"sha256": "0726481bb3922e216505989b7cbd9ebf6928576cc98751352cfad9f1fe986e49"
+							},
+							"sha256": "732fac688b0afae1b8647acbdeefaae8e7d1a9a4db1aaebea00843419b618826",
+							"shape_zyx": [
+								32.0,
+								32.0,
+								32.0
+							]
+						}
+					},
+					"boundary": "periodic",
+					"channel": "amplitude",
+					"common_range": [
+						-2.389537322747818,
+						2.389537322747818
+					],
+					"edges": [
+						0.125,
+						0.375
+					],
+					"geometry": {
+						"centering": "node",
+						"data_to_world": [
+							1.0,
+							0.0,
+							0.0,
+							0.0,
+							0.0,
+							1.0,
+							0.0,
+							0.0,
+							0.0,
+							0.0,
+							1.0,
+							0.0
+						],
+						"origin": [
+							0.0,
+							0.0,
+							0.0
+						],
+						"shape": [
+							32.0,
+							32.0,
+							32.0
+						],
+						"spacing": [
+							0.5,
+							0.5,
+							0.5
+						]
+					},
+					"kind": "spectral_reconstruction",
+					"manifest": {
+						"path": "/tmp/wavez-424/source-final/analysis-workers/178908-9748128-reconstruction/results/d-05d863545afe40d09c4ad6808a1e4e71/manifest.json",
+						"sha256": "fe78380f9c1f1e54a72062729e19cf2b57e89fbe6e2e4d279f0418acde1d41b4"
+					},
+					"metrics": {
+						"ac_mean_square": 0.92,
+						"bands": {
+							"high": {
+								"ac_fraction": 0.02173913043478344,
+								"ac_mean_square": 0.02000000000000076,
+								"fraction": 0.01851851851851923,
+								"full_dft_cells": 31873.0,
+								"mean_square": 0.02000000000000076,
+								"parseval_relative_error": 7.099516447979159e-16,
+								"spectral_mean_square": 0.02
+							},
+							"intermediate": {
+								"ac_fraction": 0.19565217391304657,
+								"ac_mean_square": 0.18000000000000282,
+								"fraction": 0.16666666666666935,
+								"full_dft_cells": 868.0,
+								"mean_square": 0.18000000000000282,
+								"parseval_relative_error": 2.6213599192538426e-15,
+								"spectral_mean_square": 0.18
+							},
+							"low": {
+								"ac_fraction": 0.7826086956521727,
+								"ac_mean_square": 0.719999999999999,
+								"fraction": 0.8148148148148002,
+								"full_dft_cells": 27.0,
+								"mean_square": 0.8799999999999839,
+								"parseval_relative_error": 1.490577208987479e-14,
+								"spectral_mean_square": 0.88
+							}
+						},
+						"mean_square": 1.0799999999999996,
+						"parseval_relative_error": 4.111937128241322e-16,
+						"residual_max": 8.881784197001252e-16,
+						"residual_relative_rms": 2.291960577136391e-16,
+						"residual_rms": 2.3818753011270696e-16,
+						"scientific_bytes": 1048576.0,
+						"source_mean": 0.4,
+						"transfer_bytes": 524288.0,
+						"workspace_bytes": 37289984.0
+					},
+					"object": "field",
+					"provenance": {
+						"display_dtype": "f4",
+						"lifetime": "One worker-owned result; next reconstruction or worker shutdown clears it",
+						"lod": 1.0,
+						"normalization": "NumPy backward DFT; disjoint real radial masks; inverse keeps complex phase",
+						"scientific_dtype": "f8",
+						"source_dtype": "f8",
+						"transform": "identity",
+						"worker": {
+							"analysis_code_sha256": "d511367c02a156e6045cf43ff3f715e5cabba51d885acb8d8a8b8b240de1444d",
+							"policy": "private file transport; one computation at a time",
+							"worker": "tools/analyze_selection.py"
+						}
+					},
+					"record": {
+						"index": 0.0,
+						"native_time": {
+							"f64_le_hex": "0000000000000000",
+							"text": "0"
+						},
+						"sequence": 0.0
+					},
+					"source": {
+						"committed_bytes": "1576530",
+						"complete_records": 3.0,
+						"format": "WVZ1",
+						"path": "/tmp/wavez-424/source-final/replacement.wvz",
+						"sha256": "93a32ba58715a688e4c5d724eba37cc558c4b5c55c27c3e3e64b13d7b68037d3",
+						"uuid": "b600a57da79b4001bcbda8161d5dd94e"
+					},
+					"source_stamp": {
+						"ctime_ns": "1793481824478145970",
+						"device": "37",
+						"inode": "93158",
+						"mtime_ns": "1793481824478145970",
+						"size": "1576530"
+					},
+					"support": {
+						"assumption": "Explicit periodic full domain; no boundary declaration is inferred from the capture",
+						"dc_band": "low",
+						"fundamental_xyz": [
+							0.0625,
+							0.0625,
+							0.0625
+						],
+						"intervals": [
+							"[0, low)",
+							"[low, high)",
+							"[high, sampled corner]"
+						],
+						"length_xyz": [
+							16.0,
+							16.0,
+							16.0
+						],
+						"low_edge_cycles_xyz": [
+							2.0,
+							2.0,
+							2.0
+						],
+						"nyquist_xyz": [
+							1.0,
+							1.0,
+							1.0
+						]
+					},
+					"timings": {
+						"decode_seconds": 0.00033554499896126,
+						"fft_seconds": 0.00108633899799315,
+						"reconstruction_and_write_seconds": 0.00542812200001208,
+						"total_seconds": 0.00829394000174943,
+						"verification_open_seconds": 0.002672196002095
+					},
+					"units": {
+						"frequency": "cycles/source-coordinate unit",
+						"position": "dimensionless",
+						"value": "dimensionless"
+					},
+					"version": 1.0
+				},
+				"guard": {
+					"baseline": {
+						"VmHWM": 38957056.0,
+						"VmPeak": 384995328.0,
+						"VmRSS": 38957056.0,
+						"VmSize": 384995328.0
+					},
+					"ceiling_bytes": 2147483648.0,
+					"enabled": true,
+					"reason": "runtime plus 1 GiB workspace and 256 MiB overhead fit"
+				},
+				"id": "178908-b12",
+				"member_assets": {
+					"bytes": 0.0,
+					"files": 0.0,
+					"limit_bytes": 67108864.0
+				},
+				"memory": {
+					"VmHWM": 41906176.0,
+					"VmPeak": 387149824.0,
+					"VmRSS": 41906176.0,
+					"VmSize": 387149824.0
+				},
+				"metrics": {
+					"charged_bytes": 0.0,
+					"cpu_seconds": 0.01161659000000001,
+					"decoded_bytes": 262144.0,
+					"peak_charged_bytes": 52793042.0,
+					"read_bytes": 1842348.0,
+					"seconds": 0.01174994900065939
+				},
+				"ok": true,
+				"playback_pressure": {
+					"pauses": 0.0,
+					"seconds": 0.0
+				},
+				"scene_revision": 5.0,
+				"selection_revision": 0.0,
+				"shared_memory": {
+					"limit": 1073741824.0,
+					"peak": 52793042.0,
+					"used": 0.0
+				},
+				"source": {
+					"committed_bytes": "1576530",
+					"complete_records": 3.0,
+					"format": "WVZ1",
+					"path": "/tmp/wavez-424/source-final/replacement.wvz",
+					"sha256": "93a32ba58715a688e4c5d724eba37cc558c4b5c55c27c3e3e64b13d7b68037d3",
+					"uuid": "b600a57da79b4001bcbda8161d5dd94e"
+				},
+				"verification_memo": {
+					"charged_bytes": 1840.0,
+					"entries": 1.0,
+					"evictions": 0.0,
+					"hits": 0.0,
+					"limit_bytes": 4194304.0,
+					"peak_bytes": 1840.0
+				},
+				"version": 1.0
+			}
+		},
+		"source_mutation": {
+			"boundary": "worker finished; source changed before GUI result acceptance",
+			"status": "Invalid reconstructed result refused."
+		},
+		"synthetic_close": {
+			"callback_ms": 3.497,
+			"data": {
+				"algorithm": "spectral-reconstruction-periodic-v1",
+				"artifacts": {
+					"high": {
+						"bytes": 131072.0,
+						"dtype": "f4",
+						"maximum": 0.09991616095183645,
+						"minimum": -0.09991616095183672,
+						"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-df5b25eca6e340d497dd0bbcdb9d24e5/high.f4",
+						"scientific": {
+							"bytes": 262144.0,
+							"dtype": "f8",
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-df5b25eca6e340d497dd0bbcdb9d24e5/high.f8",
+							"sha256": "689f0745b017e17e1b0317223b7fb1bdf8d039a517ab946631d1ea87482beaa5"
+						},
+						"sha256": "b4f3b9e158dda4b78cefa376f5521726bbf77363cd21bfbc4e7aa311f15ec25d",
+						"shape_zyx": [
+							32.0,
+							32.0,
+							32.0
+						]
+					},
+					"intermediate": {
+						"bytes": 131072.0,
+						"dtype": "f4",
+						"maximum": 0.2999720501787534,
+						"minimum": -0.29997205017875345,
+						"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-df5b25eca6e340d497dd0bbcdb9d24e5/intermediate.f4",
+						"scientific": {
+							"bytes": 262144.0,
+							"dtype": "f8",
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-df5b25eca6e340d497dd0bbcdb9d24e5/intermediate.f8",
+							"sha256": "5405a5f4f4938e577122c9ea5d35f33a10cf9f875501367d4e395333304b5c4e"
+						},
+						"sha256": "cf0cafc886f79c82c69e12bd5c7a6bef2a05da549b20efdd006e72914a25fdde",
+						"shape_zyx": [
+							32.0,
+							32.0,
+							32.0
+						]
+					},
+					"low": {
+						"bytes": 131072.0,
+						"dtype": "f4",
+						"maximum": 0.7998454321439171,
+						"minimum": -0.3998454321439171,
+						"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-df5b25eca6e340d497dd0bbcdb9d24e5/low.f4",
+						"scientific": {
+							"bytes": 262144.0,
+							"dtype": "f8",
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-df5b25eca6e340d497dd0bbcdb9d24e5/low.f8",
+							"sha256": "fe0d805d1013422be78287f93d5d8dcfbf73d34007cb36abc239063d2dd1563a"
+						},
+						"sha256": "0c77ea5c3b6e77e54e6752c5306266772249c953cd758261b4bd12270b61a477",
+						"shape_zyx": [
+							32.0,
+							32.0,
+							32.0
+						]
+					},
+					"original": {
+						"bytes": 131072.0,
+						"dtype": "f4",
+						"maximum": 1.194768661373909,
+						"minimum": -0.7947686613739091,
+						"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-df5b25eca6e340d497dd0bbcdb9d24e5/original.f4",
+						"scientific": {
+							"bytes": 262144.0,
+							"dtype": "f8",
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-df5b25eca6e340d497dd0bbcdb9d24e5/original.f8",
+							"sha256": "42a41487ad3ecd2c06852f950e001eabe6096d0cf19b62a4f123648591a7101f"
+						},
+						"sha256": "363bd6298f5044e8640745649198ba7f04f1cd27c4bd5da4298c21cf4c3a0e59",
+						"shape_zyx": [
+							32.0,
+							32.0,
+							32.0
+						]
+					}
+				},
+				"boundary": "periodic",
+				"channel": "amplitude",
+				"common_range": [
+					-1.194768661373909,
+					1.194768661373909
+				],
+				"edges": [
+					0.125,
+					0.375
+				],
+				"geometry": {
+					"centering": "node",
+					"data_to_world": [
+						1.0,
+						0.0,
+						0.0,
+						0.0,
+						0.0,
+						1.0,
+						0.0,
+						0.0,
+						0.0,
+						0.0,
+						1.0,
+						0.0
+					],
+					"origin": [
+						0.0,
+						0.0,
+						0.0
+					],
+					"shape": [
+						32.0,
+						32.0,
+						32.0
+					],
+					"spacing": [
+						0.5,
+						0.5,
+						0.5
+					]
+				},
+				"kind": "spectral_reconstruction",
+				"manifest": {
+					"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-df5b25eca6e340d497dd0bbcdb9d24e5/manifest.json",
+					"sha256": "f6ed6d6a13c71aaaffe6627e28532cc436c98b4583521e289f8627e59842c6a3"
+				},
+				"metrics": {
+					"ac_mean_square": 0.23,
+					"bands": {
+						"high": {
+							"ac_fraction": 0.02173913043478344,
+							"ac_mean_square": 0.00500000000000019,
+							"fraction": 0.01851851851851923,
+							"full_dft_cells": 31873.0,
+							"mean_square": 0.00500000000000019,
+							"parseval_relative_error": 7.099516447979159e-16,
+							"spectral_mean_square": 0.005
+						},
+						"intermediate": {
+							"ac_fraction": 0.19565217391304657,
+							"ac_mean_square": 0.0450000000000007,
+							"fraction": 0.16666666666666935,
+							"full_dft_cells": 868.0,
+							"mean_square": 0.0450000000000007,
+							"parseval_relative_error": 2.6213599192538426e-15,
+							"spectral_mean_square": 0.045
+						},
+						"low": {
+							"ac_fraction": 0.7826086956521727,
+							"ac_mean_square": 0.17999999999999974,
+							"fraction": 0.8148148148148002,
+							"full_dft_cells": 27.0,
+							"mean_square": 0.219999999999996,
+							"parseval_relative_error": 1.490577208987479e-14,
+							"spectral_mean_square": 0.22
+						}
+					},
+					"mean_square": 0.2699999999999999,
+					"parseval_relative_error": 4.111937128241322e-16,
+					"residual_max": 4.440892098500626e-16,
+					"residual_relative_rms": 2.291960577136391e-16,
+					"residual_rms": 1.1909376505635348e-16,
+					"scientific_bytes": 1048576.0,
+					"source_mean": 0.2,
+					"transfer_bytes": 524288.0,
+					"workspace_bytes": 37289984.0
+				},
+				"object": "field",
+				"provenance": {
+					"display_dtype": "f4",
+					"lifetime": "One worker-owned result; next reconstruction or worker shutdown clears it",
+					"lod": 1.0,
+					"normalization": "NumPy backward DFT; disjoint real radial masks; inverse keeps complex phase",
+					"scientific_dtype": "f8",
+					"source_dtype": "f8",
+					"transform": "identity",
+					"worker": {
+						"analysis_code_sha256": "d511367c02a156e6045cf43ff3f715e5cabba51d885acb8d8a8b8b240de1444d",
+						"policy": "private file transport; one computation at a time",
+						"worker": "tools/analyze_selection.py"
+					}
+				},
+				"record": {
+					"index": 0.0,
+					"native_time": {
+						"f64_le_hex": "0000000000000000",
+						"text": "0"
+					},
+					"sequence": 0.0
+				},
+				"source": {
+					"committed_bytes": "1576530",
+					"complete_records": 3.0,
+					"format": "WVZ1",
+					"path": "/tmp/wavez-424/source-final/reconstruction.wvz",
+					"sha256": "4e1e61a03296fa0ec6c6f09d09c5c67492d55c3cff99470f752c5cc245c9b308",
+					"uuid": "c15e8c25f1924254a40bf5ca599fadf3"
+				},
+				"source_stamp": {
+					"ctime_ns": "1793481824474260464",
+					"device": "37",
+					"inode": "93153",
+					"mtime_ns": "1793481824474260464",
+					"size": "1576530"
+				},
+				"support": {
+					"assumption": "Explicit periodic full domain; no boundary declaration is inferred from the capture",
+					"dc_band": "low",
+					"fundamental_xyz": [
+						0.0625,
+						0.0625,
+						0.0625
+					],
+					"intervals": [
+						"[0, low)",
+						"[low, high)",
+						"[high, sampled corner]"
+					],
+					"length_xyz": [
+						16.0,
+						16.0,
+						16.0
+					],
+					"low_edge_cycles_xyz": [
+						2.0,
+						2.0,
+						2.0
+					],
+					"nyquist_xyz": [
+						1.0,
+						1.0,
+						1.0
+					]
+				},
+				"timings": {
+					"decode_seconds": 0.00030808500014245,
+					"fft_seconds": 0.00021405300140031,
+					"reconstruction_and_write_seconds": 0.00452432599922758,
+					"total_seconds": 0.00617282399980467,
+					"verification_open_seconds": 0.00087694499961799
+				},
+				"units": {
+					"frequency": "cycles/source-coordinate unit",
+					"position": "dimensionless",
+					"value": "dimensionless"
+				},
+				"version": 1.0
+			},
+			"roundtrip_ms": 88.941,
+			"source": {
+				"committed_bytes": "1576530",
+				"complete_records": 3.0,
+				"format": "WVZ1",
+				"path": "/tmp/wavez-424/source-final/reconstruction.wvz",
+				"sha256": "4e1e61a03296fa0ec6c6f09d09c5c67492d55c3cff99470f752c5cc245c9b308",
+				"uuid": "c15e8c25f1924254a40bf5ca599fadf3"
+			},
+			"status": "Pinned High ready at full resolution. Playback changes the playhead, not this volume.",
+			"transfer": {
+				"gpu_bytes": 131072,
+				"gpu_upload_ms": 0.133,
+				"ordinary_gpu_bytes_reserved": 131072,
+				"transfer_hash_validate_ms": 2.699
+			},
+			"worker_reply": {
+				"analysis_revision": 16.0,
+				"data": {
+					"algorithm": "spectral-reconstruction-periodic-v1",
+					"artifacts": {
+						"high": {
+							"bytes": 131072.0,
+							"dtype": "f4",
+							"maximum": 0.09991616095183645,
+							"minimum": -0.09991616095183672,
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-df5b25eca6e340d497dd0bbcdb9d24e5/high.f4",
+							"scientific": {
+								"bytes": 262144.0,
+								"dtype": "f8",
+								"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-df5b25eca6e340d497dd0bbcdb9d24e5/high.f8",
+								"sha256": "689f0745b017e17e1b0317223b7fb1bdf8d039a517ab946631d1ea87482beaa5"
+							},
+							"sha256": "b4f3b9e158dda4b78cefa376f5521726bbf77363cd21bfbc4e7aa311f15ec25d",
+							"shape_zyx": [
+								32.0,
+								32.0,
+								32.0
+							]
+						},
+						"intermediate": {
+							"bytes": 131072.0,
+							"dtype": "f4",
+							"maximum": 0.2999720501787534,
+							"minimum": -0.29997205017875345,
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-df5b25eca6e340d497dd0bbcdb9d24e5/intermediate.f4",
+							"scientific": {
+								"bytes": 262144.0,
+								"dtype": "f8",
+								"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-df5b25eca6e340d497dd0bbcdb9d24e5/intermediate.f8",
+								"sha256": "5405a5f4f4938e577122c9ea5d35f33a10cf9f875501367d4e395333304b5c4e"
+							},
+							"sha256": "cf0cafc886f79c82c69e12bd5c7a6bef2a05da549b20efdd006e72914a25fdde",
+							"shape_zyx": [
+								32.0,
+								32.0,
+								32.0
+							]
+						},
+						"low": {
+							"bytes": 131072.0,
+							"dtype": "f4",
+							"maximum": 0.7998454321439171,
+							"minimum": -0.3998454321439171,
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-df5b25eca6e340d497dd0bbcdb9d24e5/low.f4",
+							"scientific": {
+								"bytes": 262144.0,
+								"dtype": "f8",
+								"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-df5b25eca6e340d497dd0bbcdb9d24e5/low.f8",
+								"sha256": "fe0d805d1013422be78287f93d5d8dcfbf73d34007cb36abc239063d2dd1563a"
+							},
+							"sha256": "0c77ea5c3b6e77e54e6752c5306266772249c953cd758261b4bd12270b61a477",
+							"shape_zyx": [
+								32.0,
+								32.0,
+								32.0
+							]
+						},
+						"original": {
+							"bytes": 131072.0,
+							"dtype": "f4",
+							"maximum": 1.194768661373909,
+							"minimum": -0.7947686613739091,
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-df5b25eca6e340d497dd0bbcdb9d24e5/original.f4",
+							"scientific": {
+								"bytes": 262144.0,
+								"dtype": "f8",
+								"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-df5b25eca6e340d497dd0bbcdb9d24e5/original.f8",
+								"sha256": "42a41487ad3ecd2c06852f950e001eabe6096d0cf19b62a4f123648591a7101f"
+							},
+							"sha256": "363bd6298f5044e8640745649198ba7f04f1cd27c4bd5da4298c21cf4c3a0e59",
+							"shape_zyx": [
+								32.0,
+								32.0,
+								32.0
+							]
+						}
+					},
+					"boundary": "periodic",
+					"channel": "amplitude",
+					"common_range": [
+						-1.194768661373909,
+						1.194768661373909
+					],
+					"edges": [
+						0.125,
+						0.375
+					],
+					"geometry": {
+						"centering": "node",
+						"data_to_world": [
+							1.0,
+							0.0,
+							0.0,
+							0.0,
+							0.0,
+							1.0,
+							0.0,
+							0.0,
+							0.0,
+							0.0,
+							1.0,
+							0.0
+						],
+						"origin": [
+							0.0,
+							0.0,
+							0.0
+						],
+						"shape": [
+							32.0,
+							32.0,
+							32.0
+						],
+						"spacing": [
+							0.5,
+							0.5,
+							0.5
+						]
+					},
+					"kind": "spectral_reconstruction",
+					"manifest": {
+						"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-df5b25eca6e340d497dd0bbcdb9d24e5/manifest.json",
+						"sha256": "f6ed6d6a13c71aaaffe6627e28532cc436c98b4583521e289f8627e59842c6a3"
+					},
+					"metrics": {
+						"ac_mean_square": 0.23,
+						"bands": {
+							"high": {
+								"ac_fraction": 0.02173913043478344,
+								"ac_mean_square": 0.00500000000000019,
+								"fraction": 0.01851851851851923,
+								"full_dft_cells": 31873.0,
+								"mean_square": 0.00500000000000019,
+								"parseval_relative_error": 7.099516447979159e-16,
+								"spectral_mean_square": 0.005
+							},
+							"intermediate": {
+								"ac_fraction": 0.19565217391304657,
+								"ac_mean_square": 0.0450000000000007,
+								"fraction": 0.16666666666666935,
+								"full_dft_cells": 868.0,
+								"mean_square": 0.0450000000000007,
+								"parseval_relative_error": 2.6213599192538426e-15,
+								"spectral_mean_square": 0.045
+							},
+							"low": {
+								"ac_fraction": 0.7826086956521727,
+								"ac_mean_square": 0.17999999999999974,
+								"fraction": 0.8148148148148002,
+								"full_dft_cells": 27.0,
+								"mean_square": 0.219999999999996,
+								"parseval_relative_error": 1.490577208987479e-14,
+								"spectral_mean_square": 0.22
+							}
+						},
+						"mean_square": 0.2699999999999999,
+						"parseval_relative_error": 4.111937128241322e-16,
+						"residual_max": 4.440892098500626e-16,
+						"residual_relative_rms": 2.291960577136391e-16,
+						"residual_rms": 1.1909376505635348e-16,
+						"scientific_bytes": 1048576.0,
+						"source_mean": 0.2,
+						"transfer_bytes": 524288.0,
+						"workspace_bytes": 37289984.0
+					},
+					"object": "field",
+					"provenance": {
+						"display_dtype": "f4",
+						"lifetime": "One worker-owned result; next reconstruction or worker shutdown clears it",
+						"lod": 1.0,
+						"normalization": "NumPy backward DFT; disjoint real radial masks; inverse keeps complex phase",
+						"scientific_dtype": "f8",
+						"source_dtype": "f8",
+						"transform": "identity",
+						"worker": {
+							"analysis_code_sha256": "d511367c02a156e6045cf43ff3f715e5cabba51d885acb8d8a8b8b240de1444d",
+							"policy": "private file transport; one computation at a time",
+							"worker": "tools/analyze_selection.py"
+						}
+					},
+					"record": {
+						"index": 0.0,
+						"native_time": {
+							"f64_le_hex": "0000000000000000",
+							"text": "0"
+						},
+						"sequence": 0.0
+					},
+					"source": {
+						"committed_bytes": "1576530",
+						"complete_records": 3.0,
+						"format": "WVZ1",
+						"path": "/tmp/wavez-424/source-final/reconstruction.wvz",
+						"sha256": "4e1e61a03296fa0ec6c6f09d09c5c67492d55c3cff99470f752c5cc245c9b308",
+						"uuid": "c15e8c25f1924254a40bf5ca599fadf3"
+					},
+					"source_stamp": {
+						"ctime_ns": "1793481824474260464",
+						"device": "37",
+						"inode": "93153",
+						"mtime_ns": "1793481824474260464",
+						"size": "1576530"
+					},
+					"support": {
+						"assumption": "Explicit periodic full domain; no boundary declaration is inferred from the capture",
+						"dc_band": "low",
+						"fundamental_xyz": [
+							0.0625,
+							0.0625,
+							0.0625
+						],
+						"intervals": [
+							"[0, low)",
+							"[low, high)",
+							"[high, sampled corner]"
+						],
+						"length_xyz": [
+							16.0,
+							16.0,
+							16.0
+						],
+						"low_edge_cycles_xyz": [
+							2.0,
+							2.0,
+							2.0
+						],
+						"nyquist_xyz": [
+							1.0,
+							1.0,
+							1.0
+						]
+					},
+					"timings": {
+						"decode_seconds": 0.00030808500014245,
+						"fft_seconds": 0.00021405300140031,
+						"reconstruction_and_write_seconds": 0.00452432599922758,
+						"total_seconds": 0.00617282399980467,
+						"verification_open_seconds": 0.00087694499961799
+					},
+					"units": {
+						"frequency": "cycles/source-coordinate unit",
+						"position": "dimensionless",
+						"value": "dimensionless"
+					},
+					"version": 1.0
+				},
+				"guard": {
+					"baseline": {
+						"VmHWM": 39038976.0,
+						"VmPeak": 384995328.0,
+						"VmRSS": 39038976.0,
+						"VmSize": 384995328.0
+					},
+					"ceiling_bytes": 2147483648.0,
+					"enabled": true,
+					"reason": "runtime plus 1 GiB workspace and 256 MiB overhead fit"
+				},
+				"id": "178908-b4",
+				"member_assets": {
+					"bytes": 0.0,
+					"files": 0.0,
+					"limit_bytes": 67108864.0
+				},
+				"memory": {
+					"VmHWM": 42139648.0,
+					"VmPeak": 387289088.0,
+					"VmRSS": 42139648.0,
+					"VmSize": 387289088.0
+				},
+				"metrics": {
+					"charged_bytes": 0.0,
+					"cpu_seconds": 0.00746672000000001,
+					"decoded_bytes": 262144.0,
+					"peak_charged_bytes": 52793042.0,
+					"read_bytes": 265818.0,
+					"seconds": 0.00751580699943588
+				},
+				"ok": true,
+				"playback_pressure": {
+					"pauses": 0.0,
+					"seconds": 0.0
+				},
+				"scene_revision": 1.0,
+				"selection_revision": 0.0,
+				"shared_memory": {
+					"limit": 1073741824.0,
+					"peak": 52793042.0,
+					"used": 0.0
+				},
+				"source": {
+					"committed_bytes": "1576530",
+					"complete_records": 3.0,
+					"format": "WVZ1",
+					"path": "/tmp/wavez-424/source-final/reconstruction.wvz",
+					"sha256": "4e1e61a03296fa0ec6c6f09d09c5c67492d55c3cff99470f752c5cc245c9b308",
+					"uuid": "c15e8c25f1924254a40bf5ca599fadf3"
+				},
+				"verification_memo": {
+					"charged_bytes": 1864.0,
+					"entries": 1.0,
+					"evictions": 0.0,
+					"hits": 2.0,
+					"limit_bytes": 4194304.0,
+					"peak_bytes": 1864.0
+				},
+				"version": 1.0
+			}
+		},
+		"synthetic_close_after_target": {
+			"callback_ms": 3.278,
+			"data": {
+				"algorithm": "spectral-reconstruction-periodic-v1",
+				"artifacts": {
+					"high": {
+						"bytes": 131072.0,
+						"dtype": "f4",
+						"maximum": 0.09991616095183645,
+						"minimum": -0.09991616095183672,
+						"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-14533d8923254d2486afc614ae8db03a/high.f4",
+						"scientific": {
+							"bytes": 262144.0,
+							"dtype": "f8",
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-14533d8923254d2486afc614ae8db03a/high.f8",
+							"sha256": "689f0745b017e17e1b0317223b7fb1bdf8d039a517ab946631d1ea87482beaa5"
+						},
+						"sha256": "b4f3b9e158dda4b78cefa376f5521726bbf77363cd21bfbc4e7aa311f15ec25d",
+						"shape_zyx": [
+							32.0,
+							32.0,
+							32.0
+						]
+					},
+					"intermediate": {
+						"bytes": 131072.0,
+						"dtype": "f4",
+						"maximum": 0.2999720501787534,
+						"minimum": -0.29997205017875345,
+						"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-14533d8923254d2486afc614ae8db03a/intermediate.f4",
+						"scientific": {
+							"bytes": 262144.0,
+							"dtype": "f8",
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-14533d8923254d2486afc614ae8db03a/intermediate.f8",
+							"sha256": "5405a5f4f4938e577122c9ea5d35f33a10cf9f875501367d4e395333304b5c4e"
+						},
+						"sha256": "cf0cafc886f79c82c69e12bd5c7a6bef2a05da549b20efdd006e72914a25fdde",
+						"shape_zyx": [
+							32.0,
+							32.0,
+							32.0
+						]
+					},
+					"low": {
+						"bytes": 131072.0,
+						"dtype": "f4",
+						"maximum": 0.7998454321439171,
+						"minimum": -0.3998454321439171,
+						"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-14533d8923254d2486afc614ae8db03a/low.f4",
+						"scientific": {
+							"bytes": 262144.0,
+							"dtype": "f8",
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-14533d8923254d2486afc614ae8db03a/low.f8",
+							"sha256": "fe0d805d1013422be78287f93d5d8dcfbf73d34007cb36abc239063d2dd1563a"
+						},
+						"sha256": "0c77ea5c3b6e77e54e6752c5306266772249c953cd758261b4bd12270b61a477",
+						"shape_zyx": [
+							32.0,
+							32.0,
+							32.0
+						]
+					},
+					"original": {
+						"bytes": 131072.0,
+						"dtype": "f4",
+						"maximum": 1.194768661373909,
+						"minimum": -0.7947686613739091,
+						"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-14533d8923254d2486afc614ae8db03a/original.f4",
+						"scientific": {
+							"bytes": 262144.0,
+							"dtype": "f8",
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-14533d8923254d2486afc614ae8db03a/original.f8",
+							"sha256": "42a41487ad3ecd2c06852f950e001eabe6096d0cf19b62a4f123648591a7101f"
+						},
+						"sha256": "363bd6298f5044e8640745649198ba7f04f1cd27c4bd5da4298c21cf4c3a0e59",
+						"shape_zyx": [
+							32.0,
+							32.0,
+							32.0
+						]
+					}
+				},
+				"boundary": "periodic",
+				"channel": "amplitude",
+				"common_range": [
+					-1.194768661373909,
+					1.194768661373909
+				],
+				"edges": [
+					0.125,
+					0.375
+				],
+				"geometry": {
+					"centering": "node",
+					"data_to_world": [
+						1.0,
+						0.0,
+						0.0,
+						0.0,
+						0.0,
+						1.0,
+						0.0,
+						0.0,
+						0.0,
+						0.0,
+						1.0,
+						0.0
+					],
+					"origin": [
+						0.0,
+						0.0,
+						0.0
+					],
+					"shape": [
+						32.0,
+						32.0,
+						32.0
+					],
+					"spacing": [
+						0.5,
+						0.5,
+						0.5
+					]
+				},
+				"kind": "spectral_reconstruction",
+				"manifest": {
+					"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-14533d8923254d2486afc614ae8db03a/manifest.json",
+					"sha256": "691391901317837cfabb44004d936cbd1d7648b4c94ee8f6ea538fa9ee5390d7"
+				},
+				"metrics": {
+					"ac_mean_square": 0.23,
+					"bands": {
+						"high": {
+							"ac_fraction": 0.02173913043478344,
+							"ac_mean_square": 0.00500000000000019,
+							"fraction": 0.01851851851851923,
+							"full_dft_cells": 31873.0,
+							"mean_square": 0.00500000000000019,
+							"parseval_relative_error": 7.099516447979159e-16,
+							"spectral_mean_square": 0.005
+						},
+						"intermediate": {
+							"ac_fraction": 0.19565217391304657,
+							"ac_mean_square": 0.0450000000000007,
+							"fraction": 0.16666666666666935,
+							"full_dft_cells": 868.0,
+							"mean_square": 0.0450000000000007,
+							"parseval_relative_error": 2.6213599192538426e-15,
+							"spectral_mean_square": 0.045
+						},
+						"low": {
+							"ac_fraction": 0.7826086956521727,
+							"ac_mean_square": 0.17999999999999974,
+							"fraction": 0.8148148148148002,
+							"full_dft_cells": 27.0,
+							"mean_square": 0.219999999999996,
+							"parseval_relative_error": 1.490577208987479e-14,
+							"spectral_mean_square": 0.22
+						}
+					},
+					"mean_square": 0.2699999999999999,
+					"parseval_relative_error": 4.111937128241322e-16,
+					"residual_max": 4.440892098500626e-16,
+					"residual_relative_rms": 2.291960577136391e-16,
+					"residual_rms": 1.1909376505635348e-16,
+					"scientific_bytes": 1048576.0,
+					"source_mean": 0.2,
+					"transfer_bytes": 524288.0,
+					"workspace_bytes": 37289984.0
+				},
+				"object": "field",
+				"provenance": {
+					"display_dtype": "f4",
+					"lifetime": "One worker-owned result; next reconstruction or worker shutdown clears it",
+					"lod": 1.0,
+					"normalization": "NumPy backward DFT; disjoint real radial masks; inverse keeps complex phase",
+					"scientific_dtype": "f8",
+					"source_dtype": "f8",
+					"transform": "identity",
+					"worker": {
+						"analysis_code_sha256": "d511367c02a156e6045cf43ff3f715e5cabba51d885acb8d8a8b8b240de1444d",
+						"policy": "private file transport; one computation at a time",
+						"worker": "tools/analyze_selection.py"
+					}
+				},
+				"record": {
+					"index": 0.0,
+					"native_time": {
+						"f64_le_hex": "0000000000000000",
+						"text": "0"
+					},
+					"sequence": 0.0
+				},
+				"source": {
+					"committed_bytes": "1576530",
+					"complete_records": 3.0,
+					"format": "WVZ1",
+					"path": "/tmp/wavez-424/source-final/reconstruction.wvz",
+					"sha256": "4e1e61a03296fa0ec6c6f09d09c5c67492d55c3cff99470f752c5cc245c9b308",
+					"uuid": "c15e8c25f1924254a40bf5ca599fadf3"
+				},
+				"source_stamp": {
+					"ctime_ns": "1793481824474260464",
+					"device": "37",
+					"inode": "93153",
+					"mtime_ns": "1793481824474260464",
+					"size": "1576530"
+				},
+				"support": {
+					"assumption": "Explicit periodic full domain; no boundary declaration is inferred from the capture",
+					"dc_band": "low",
+					"fundamental_xyz": [
+						0.0625,
+						0.0625,
+						0.0625
+					],
+					"intervals": [
+						"[0, low)",
+						"[low, high)",
+						"[high, sampled corner]"
+					],
+					"length_xyz": [
+						16.0,
+						16.0,
+						16.0
+					],
+					"low_edge_cycles_xyz": [
+						2.0,
+						2.0,
+						2.0
+					],
+					"nyquist_xyz": [
+						1.0,
+						1.0,
+						1.0
+					]
+				},
+				"timings": {
+					"decode_seconds": 0.00034365499959676,
+					"fft_seconds": 0.00024006400053622,
+					"reconstruction_and_write_seconds": 0.0053461999996216,
+					"total_seconds": 0.00723218200073461,
+					"verification_open_seconds": 0.00082260399722144
+				},
+				"units": {
+					"frequency": "cycles/source-coordinate unit",
+					"position": "dimensionless",
+					"value": "dimensionless"
+				},
+				"version": 1.0
+			},
+			"roundtrip_ms": 68.533,
+			"source": {
+				"committed_bytes": "1576530",
+				"complete_records": 3.0,
+				"format": "WVZ1",
+				"path": "/tmp/wavez-424/source-final/reconstruction.wvz",
+				"sha256": "4e1e61a03296fa0ec6c6f09d09c5c67492d55c3cff99470f752c5cc245c9b308",
+				"uuid": "c15e8c25f1924254a40bf5ca599fadf3"
+			},
+			"status": "Pinned High ready at full resolution. Playback changes the playhead, not this volume.",
+			"transfer": {
+				"gpu_bytes": 131072,
+				"gpu_upload_ms": 0.103,
+				"ordinary_gpu_bytes_reserved": 131072,
+				"transfer_hash_validate_ms": 2.906
+			},
+			"worker_reply": {
+				"analysis_revision": 18.0,
+				"data": {
+					"algorithm": "spectral-reconstruction-periodic-v1",
+					"artifacts": {
+						"high": {
+							"bytes": 131072.0,
+							"dtype": "f4",
+							"maximum": 0.09991616095183645,
+							"minimum": -0.09991616095183672,
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-14533d8923254d2486afc614ae8db03a/high.f4",
+							"scientific": {
+								"bytes": 262144.0,
+								"dtype": "f8",
+								"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-14533d8923254d2486afc614ae8db03a/high.f8",
+								"sha256": "689f0745b017e17e1b0317223b7fb1bdf8d039a517ab946631d1ea87482beaa5"
+							},
+							"sha256": "b4f3b9e158dda4b78cefa376f5521726bbf77363cd21bfbc4e7aa311f15ec25d",
+							"shape_zyx": [
+								32.0,
+								32.0,
+								32.0
+							]
+						},
+						"intermediate": {
+							"bytes": 131072.0,
+							"dtype": "f4",
+							"maximum": 0.2999720501787534,
+							"minimum": -0.29997205017875345,
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-14533d8923254d2486afc614ae8db03a/intermediate.f4",
+							"scientific": {
+								"bytes": 262144.0,
+								"dtype": "f8",
+								"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-14533d8923254d2486afc614ae8db03a/intermediate.f8",
+								"sha256": "5405a5f4f4938e577122c9ea5d35f33a10cf9f875501367d4e395333304b5c4e"
+							},
+							"sha256": "cf0cafc886f79c82c69e12bd5c7a6bef2a05da549b20efdd006e72914a25fdde",
+							"shape_zyx": [
+								32.0,
+								32.0,
+								32.0
+							]
+						},
+						"low": {
+							"bytes": 131072.0,
+							"dtype": "f4",
+							"maximum": 0.7998454321439171,
+							"minimum": -0.3998454321439171,
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-14533d8923254d2486afc614ae8db03a/low.f4",
+							"scientific": {
+								"bytes": 262144.0,
+								"dtype": "f8",
+								"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-14533d8923254d2486afc614ae8db03a/low.f8",
+								"sha256": "fe0d805d1013422be78287f93d5d8dcfbf73d34007cb36abc239063d2dd1563a"
+							},
+							"sha256": "0c77ea5c3b6e77e54e6752c5306266772249c953cd758261b4bd12270b61a477",
+							"shape_zyx": [
+								32.0,
+								32.0,
+								32.0
+							]
+						},
+						"original": {
+							"bytes": 131072.0,
+							"dtype": "f4",
+							"maximum": 1.194768661373909,
+							"minimum": -0.7947686613739091,
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-14533d8923254d2486afc614ae8db03a/original.f4",
+							"scientific": {
+								"bytes": 262144.0,
+								"dtype": "f8",
+								"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-14533d8923254d2486afc614ae8db03a/original.f8",
+								"sha256": "42a41487ad3ecd2c06852f950e001eabe6096d0cf19b62a4f123648591a7101f"
+							},
+							"sha256": "363bd6298f5044e8640745649198ba7f04f1cd27c4bd5da4298c21cf4c3a0e59",
+							"shape_zyx": [
+								32.0,
+								32.0,
+								32.0
+							]
+						}
+					},
+					"boundary": "periodic",
+					"channel": "amplitude",
+					"common_range": [
+						-1.194768661373909,
+						1.194768661373909
+					],
+					"edges": [
+						0.125,
+						0.375
+					],
+					"geometry": {
+						"centering": "node",
+						"data_to_world": [
+							1.0,
+							0.0,
+							0.0,
+							0.0,
+							0.0,
+							1.0,
+							0.0,
+							0.0,
+							0.0,
+							0.0,
+							1.0,
+							0.0
+						],
+						"origin": [
+							0.0,
+							0.0,
+							0.0
+						],
+						"shape": [
+							32.0,
+							32.0,
+							32.0
+						],
+						"spacing": [
+							0.5,
+							0.5,
+							0.5
+						]
+					},
+					"kind": "spectral_reconstruction",
+					"manifest": {
+						"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-14533d8923254d2486afc614ae8db03a/manifest.json",
+						"sha256": "691391901317837cfabb44004d936cbd1d7648b4c94ee8f6ea538fa9ee5390d7"
+					},
+					"metrics": {
+						"ac_mean_square": 0.23,
+						"bands": {
+							"high": {
+								"ac_fraction": 0.02173913043478344,
+								"ac_mean_square": 0.00500000000000019,
+								"fraction": 0.01851851851851923,
+								"full_dft_cells": 31873.0,
+								"mean_square": 0.00500000000000019,
+								"parseval_relative_error": 7.099516447979159e-16,
+								"spectral_mean_square": 0.005
+							},
+							"intermediate": {
+								"ac_fraction": 0.19565217391304657,
+								"ac_mean_square": 0.0450000000000007,
+								"fraction": 0.16666666666666935,
+								"full_dft_cells": 868.0,
+								"mean_square": 0.0450000000000007,
+								"parseval_relative_error": 2.6213599192538426e-15,
+								"spectral_mean_square": 0.045
+							},
+							"low": {
+								"ac_fraction": 0.7826086956521727,
+								"ac_mean_square": 0.17999999999999974,
+								"fraction": 0.8148148148148002,
+								"full_dft_cells": 27.0,
+								"mean_square": 0.219999999999996,
+								"parseval_relative_error": 1.490577208987479e-14,
+								"spectral_mean_square": 0.22
+							}
+						},
+						"mean_square": 0.2699999999999999,
+						"parseval_relative_error": 4.111937128241322e-16,
+						"residual_max": 4.440892098500626e-16,
+						"residual_relative_rms": 2.291960577136391e-16,
+						"residual_rms": 1.1909376505635348e-16,
+						"scientific_bytes": 1048576.0,
+						"source_mean": 0.2,
+						"transfer_bytes": 524288.0,
+						"workspace_bytes": 37289984.0
+					},
+					"object": "field",
+					"provenance": {
+						"display_dtype": "f4",
+						"lifetime": "One worker-owned result; next reconstruction or worker shutdown clears it",
+						"lod": 1.0,
+						"normalization": "NumPy backward DFT; disjoint real radial masks; inverse keeps complex phase",
+						"scientific_dtype": "f8",
+						"source_dtype": "f8",
+						"transform": "identity",
+						"worker": {
+							"analysis_code_sha256": "d511367c02a156e6045cf43ff3f715e5cabba51d885acb8d8a8b8b240de1444d",
+							"policy": "private file transport; one computation at a time",
+							"worker": "tools/analyze_selection.py"
+						}
+					},
+					"record": {
+						"index": 0.0,
+						"native_time": {
+							"f64_le_hex": "0000000000000000",
+							"text": "0"
+						},
+						"sequence": 0.0
+					},
+					"source": {
+						"committed_bytes": "1576530",
+						"complete_records": 3.0,
+						"format": "WVZ1",
+						"path": "/tmp/wavez-424/source-final/reconstruction.wvz",
+						"sha256": "4e1e61a03296fa0ec6c6f09d09c5c67492d55c3cff99470f752c5cc245c9b308",
+						"uuid": "c15e8c25f1924254a40bf5ca599fadf3"
+					},
+					"source_stamp": {
+						"ctime_ns": "1793481824474260464",
+						"device": "37",
+						"inode": "93153",
+						"mtime_ns": "1793481824474260464",
+						"size": "1576530"
+					},
+					"support": {
+						"assumption": "Explicit periodic full domain; no boundary declaration is inferred from the capture",
+						"dc_band": "low",
+						"fundamental_xyz": [
+							0.0625,
+							0.0625,
+							0.0625
+						],
+						"intervals": [
+							"[0, low)",
+							"[low, high)",
+							"[high, sampled corner]"
+						],
+						"length_xyz": [
+							16.0,
+							16.0,
+							16.0
+						],
+						"low_edge_cycles_xyz": [
+							2.0,
+							2.0,
+							2.0
+						],
+						"nyquist_xyz": [
+							1.0,
+							1.0,
+							1.0
+						]
+					},
+					"timings": {
+						"decode_seconds": 0.00034365499959676,
+						"fft_seconds": 0.00024006400053622,
+						"reconstruction_and_write_seconds": 0.0053461999996216,
+						"total_seconds": 0.00723218200073461,
+						"verification_open_seconds": 0.00082260399722144
+					},
+					"units": {
+						"frequency": "cycles/source-coordinate unit",
+						"position": "dimensionless",
+						"value": "dimensionless"
+					},
+					"version": 1.0
+				},
+				"guard": {
+					"baseline": {
+						"VmHWM": 39038976.0,
+						"VmPeak": 384995328.0,
+						"VmRSS": 39038976.0,
+						"VmSize": 384995328.0
+					},
+					"ceiling_bytes": 2147483648.0,
+					"enabled": true,
+					"reason": "runtime plus 1 GiB workspace and 256 MiB overhead fit"
+				},
+				"id": "178908-b5",
+				"member_assets": {
+					"bytes": 0.0,
+					"files": 0.0,
+					"limit_bytes": 67108864.0
+				},
+				"memory": {
+					"VmHWM": 42147840.0,
+					"VmPeak": 387289088.0,
+					"VmRSS": 42147840.0,
+					"VmSize": 387289088.0
+				},
+				"metrics": {
+					"charged_bytes": 0.0,
+					"cpu_seconds": 0.00873340999999999,
+					"decoded_bytes": 262144.0,
+					"peak_charged_bytes": 52793042.0,
+					"read_bytes": 265818.0,
+					"seconds": 0.00882125900170649
+				},
+				"ok": true,
+				"playback_pressure": {
+					"pauses": 0.0,
+					"seconds": 0.0
+				},
+				"scene_revision": 1.0,
+				"selection_revision": 0.0,
+				"shared_memory": {
+					"limit": 1073741824.0,
+					"peak": 52793042.0,
+					"used": 0.0
+				},
+				"source": {
+					"committed_bytes": "1576530",
+					"complete_records": 3.0,
+					"format": "WVZ1",
+					"path": "/tmp/wavez-424/source-final/reconstruction.wvz",
+					"sha256": "4e1e61a03296fa0ec6c6f09d09c5c67492d55c3cff99470f752c5cc245c9b308",
+					"uuid": "c15e8c25f1924254a40bf5ca599fadf3"
+				},
+				"verification_memo": {
+					"charged_bytes": 1864.0,
+					"entries": 1.0,
+					"evictions": 0.0,
+					"hits": 3.0,
+					"limit_bytes": 4194304.0,
+					"peak_bytes": 1864.0
+				},
+				"version": 1.0
+			}
+		},
+		"synthetic_cold": {
+			"callback_ms": 4.186,
+			"data": {
+				"algorithm": "spectral-reconstruction-periodic-v1",
+				"artifacts": {
+					"high": {
+						"bytes": 131072.0,
+						"dtype": "f4",
+						"maximum": 0.09991616095183645,
+						"minimum": -0.09991616095183672,
+						"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-631e462e09d642fbb9a5d99da5a5e8ee/high.f4",
+						"scientific": {
+							"bytes": 262144.0,
+							"dtype": "f8",
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-631e462e09d642fbb9a5d99da5a5e8ee/high.f8",
+							"sha256": "689f0745b017e17e1b0317223b7fb1bdf8d039a517ab946631d1ea87482beaa5"
+						},
+						"sha256": "b4f3b9e158dda4b78cefa376f5521726bbf77363cd21bfbc4e7aa311f15ec25d",
+						"shape_zyx": [
+							32.0,
+							32.0,
+							32.0
+						]
+					},
+					"intermediate": {
+						"bytes": 131072.0,
+						"dtype": "f4",
+						"maximum": 0.2999720501787534,
+						"minimum": -0.29997205017875345,
+						"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-631e462e09d642fbb9a5d99da5a5e8ee/intermediate.f4",
+						"scientific": {
+							"bytes": 262144.0,
+							"dtype": "f8",
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-631e462e09d642fbb9a5d99da5a5e8ee/intermediate.f8",
+							"sha256": "5405a5f4f4938e577122c9ea5d35f33a10cf9f875501367d4e395333304b5c4e"
+						},
+						"sha256": "cf0cafc886f79c82c69e12bd5c7a6bef2a05da549b20efdd006e72914a25fdde",
+						"shape_zyx": [
+							32.0,
+							32.0,
+							32.0
+						]
+					},
+					"low": {
+						"bytes": 131072.0,
+						"dtype": "f4",
+						"maximum": 0.7998454321439171,
+						"minimum": -0.3998454321439171,
+						"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-631e462e09d642fbb9a5d99da5a5e8ee/low.f4",
+						"scientific": {
+							"bytes": 262144.0,
+							"dtype": "f8",
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-631e462e09d642fbb9a5d99da5a5e8ee/low.f8",
+							"sha256": "fe0d805d1013422be78287f93d5d8dcfbf73d34007cb36abc239063d2dd1563a"
+						},
+						"sha256": "0c77ea5c3b6e77e54e6752c5306266772249c953cd758261b4bd12270b61a477",
+						"shape_zyx": [
+							32.0,
+							32.0,
+							32.0
+						]
+					},
+					"original": {
+						"bytes": 131072.0,
+						"dtype": "f4",
+						"maximum": 1.194768661373909,
+						"minimum": -0.7947686613739091,
+						"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-631e462e09d642fbb9a5d99da5a5e8ee/original.f4",
+						"scientific": {
+							"bytes": 262144.0,
+							"dtype": "f8",
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-631e462e09d642fbb9a5d99da5a5e8ee/original.f8",
+							"sha256": "42a41487ad3ecd2c06852f950e001eabe6096d0cf19b62a4f123648591a7101f"
+						},
+						"sha256": "363bd6298f5044e8640745649198ba7f04f1cd27c4bd5da4298c21cf4c3a0e59",
+						"shape_zyx": [
+							32.0,
+							32.0,
+							32.0
+						]
+					}
+				},
+				"boundary": "periodic",
+				"channel": "amplitude",
+				"common_range": [
+					-1.194768661373909,
+					1.194768661373909
+				],
+				"edges": [
+					0.125,
+					0.375
+				],
+				"geometry": {
+					"centering": "node",
+					"data_to_world": [
+						1.0,
+						0.0,
+						0.0,
+						0.0,
+						0.0,
+						1.0,
+						0.0,
+						0.0,
+						0.0,
+						0.0,
+						1.0,
+						0.0
+					],
+					"origin": [
+						0.0,
+						0.0,
+						0.0
+					],
+					"shape": [
+						32.0,
+						32.0,
+						32.0
+					],
+					"spacing": [
+						0.5,
+						0.5,
+						0.5
+					]
+				},
+				"kind": "spectral_reconstruction",
+				"manifest": {
+					"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-631e462e09d642fbb9a5d99da5a5e8ee/manifest.json",
+					"sha256": "b8bd368e83c365c5bcbb7b5fa817acb948e4afec38e49e76482aa5e54533e15f"
+				},
+				"metrics": {
+					"ac_mean_square": 0.23,
+					"bands": {
+						"high": {
+							"ac_fraction": 0.02173913043478344,
+							"ac_mean_square": 0.00500000000000019,
+							"fraction": 0.01851851851851923,
+							"full_dft_cells": 31873.0,
+							"mean_square": 0.00500000000000019,
+							"parseval_relative_error": 7.099516447979159e-16,
+							"spectral_mean_square": 0.005
+						},
+						"intermediate": {
+							"ac_fraction": 0.19565217391304657,
+							"ac_mean_square": 0.0450000000000007,
+							"fraction": 0.16666666666666935,
+							"full_dft_cells": 868.0,
+							"mean_square": 0.0450000000000007,
+							"parseval_relative_error": 2.6213599192538426e-15,
+							"spectral_mean_square": 0.045
+						},
+						"low": {
+							"ac_fraction": 0.7826086956521727,
+							"ac_mean_square": 0.17999999999999974,
+							"fraction": 0.8148148148148002,
+							"full_dft_cells": 27.0,
+							"mean_square": 0.219999999999996,
+							"parseval_relative_error": 1.490577208987479e-14,
+							"spectral_mean_square": 0.22
+						}
+					},
+					"mean_square": 0.2699999999999999,
+					"parseval_relative_error": 4.111937128241322e-16,
+					"residual_max": 4.440892098500626e-16,
+					"residual_relative_rms": 2.291960577136391e-16,
+					"residual_rms": 1.1909376505635348e-16,
+					"scientific_bytes": 1048576.0,
+					"source_mean": 0.2,
+					"transfer_bytes": 524288.0,
+					"workspace_bytes": 37289984.0
+				},
+				"object": "field",
+				"provenance": {
+					"display_dtype": "f4",
+					"lifetime": "One worker-owned result; next reconstruction or worker shutdown clears it",
+					"lod": 1.0,
+					"normalization": "NumPy backward DFT; disjoint real radial masks; inverse keeps complex phase",
+					"scientific_dtype": "f8",
+					"source_dtype": "f8",
+					"transform": "identity",
+					"worker": {
+						"analysis_code_sha256": "d511367c02a156e6045cf43ff3f715e5cabba51d885acb8d8a8b8b240de1444d",
+						"policy": "private file transport; one computation at a time",
+						"worker": "tools/analyze_selection.py"
+					}
+				},
+				"record": {
+					"index": 0.0,
+					"native_time": {
+						"f64_le_hex": "0000000000000000",
+						"text": "0"
+					},
+					"sequence": 0.0
+				},
+				"source": {
+					"committed_bytes": "1576530",
+					"complete_records": 3.0,
+					"format": "WVZ1",
+					"path": "/tmp/wavez-424/source-final/reconstruction.wvz",
+					"sha256": "4e1e61a03296fa0ec6c6f09d09c5c67492d55c3cff99470f752c5cc245c9b308",
+					"uuid": "c15e8c25f1924254a40bf5ca599fadf3"
+				},
+				"source_stamp": {
+					"ctime_ns": "1793481824474260464",
+					"device": "37",
+					"inode": "93153",
+					"mtime_ns": "1793481824474260464",
+					"size": "1576530"
+				},
+				"support": {
+					"assumption": "Explicit periodic full domain; no boundary declaration is inferred from the capture",
+					"dc_band": "low",
+					"fundamental_xyz": [
+						0.0625,
+						0.0625,
+						0.0625
+					],
+					"intervals": [
+						"[0, low)",
+						"[low, high)",
+						"[high, sampled corner]"
+					],
+					"length_xyz": [
+						16.0,
+						16.0,
+						16.0
+					],
+					"low_edge_cycles_xyz": [
+						2.0,
+						2.0,
+						2.0
+					],
+					"nyquist_xyz": [
+						1.0,
+						1.0,
+						1.0
+					]
+				},
+				"timings": {
+					"decode_seconds": 0.00029661499866051,
+					"fft_seconds": 0.00100569700225605,
+					"reconstruction_and_write_seconds": 0.00488409299941849,
+					"total_seconds": 0.00770365999778732,
+					"verification_open_seconds": 0.00252766299672657
+				},
+				"units": {
+					"frequency": "cycles/source-coordinate unit",
+					"position": "dimensionless",
+					"value": "dimensionless"
+				},
+				"version": 1.0
+			},
+			"roundtrip_ms": 167.398,
+			"source": {
+				"committed_bytes": "1576530",
+				"complete_records": 3.0,
+				"format": "WVZ1",
+				"path": "/tmp/wavez-424/source-final/reconstruction.wvz",
+				"sha256": "4e1e61a03296fa0ec6c6f09d09c5c67492d55c3cff99470f752c5cc245c9b308",
+				"uuid": "c15e8c25f1924254a40bf5ca599fadf3"
+			},
+			"status": "Pinned Original ready at full resolution. Playback changes the playhead, not this volume.",
+			"transfer": {
+				"gpu_bytes": 131072,
+				"gpu_upload_ms": 0.147,
+				"ordinary_gpu_bytes_reserved": 131072,
+				"transfer_hash_validate_ms": 3.098
+			},
+			"worker_reply": {
+				"analysis_revision": 11.0,
+				"data": {
+					"algorithm": "spectral-reconstruction-periodic-v1",
+					"artifacts": {
+						"high": {
+							"bytes": 131072.0,
+							"dtype": "f4",
+							"maximum": 0.09991616095183645,
+							"minimum": -0.09991616095183672,
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-631e462e09d642fbb9a5d99da5a5e8ee/high.f4",
+							"scientific": {
+								"bytes": 262144.0,
+								"dtype": "f8",
+								"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-631e462e09d642fbb9a5d99da5a5e8ee/high.f8",
+								"sha256": "689f0745b017e17e1b0317223b7fb1bdf8d039a517ab946631d1ea87482beaa5"
+							},
+							"sha256": "b4f3b9e158dda4b78cefa376f5521726bbf77363cd21bfbc4e7aa311f15ec25d",
+							"shape_zyx": [
+								32.0,
+								32.0,
+								32.0
+							]
+						},
+						"intermediate": {
+							"bytes": 131072.0,
+							"dtype": "f4",
+							"maximum": 0.2999720501787534,
+							"minimum": -0.29997205017875345,
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-631e462e09d642fbb9a5d99da5a5e8ee/intermediate.f4",
+							"scientific": {
+								"bytes": 262144.0,
+								"dtype": "f8",
+								"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-631e462e09d642fbb9a5d99da5a5e8ee/intermediate.f8",
+								"sha256": "5405a5f4f4938e577122c9ea5d35f33a10cf9f875501367d4e395333304b5c4e"
+							},
+							"sha256": "cf0cafc886f79c82c69e12bd5c7a6bef2a05da549b20efdd006e72914a25fdde",
+							"shape_zyx": [
+								32.0,
+								32.0,
+								32.0
+							]
+						},
+						"low": {
+							"bytes": 131072.0,
+							"dtype": "f4",
+							"maximum": 0.7998454321439171,
+							"minimum": -0.3998454321439171,
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-631e462e09d642fbb9a5d99da5a5e8ee/low.f4",
+							"scientific": {
+								"bytes": 262144.0,
+								"dtype": "f8",
+								"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-631e462e09d642fbb9a5d99da5a5e8ee/low.f8",
+								"sha256": "fe0d805d1013422be78287f93d5d8dcfbf73d34007cb36abc239063d2dd1563a"
+							},
+							"sha256": "0c77ea5c3b6e77e54e6752c5306266772249c953cd758261b4bd12270b61a477",
+							"shape_zyx": [
+								32.0,
+								32.0,
+								32.0
+							]
+						},
+						"original": {
+							"bytes": 131072.0,
+							"dtype": "f4",
+							"maximum": 1.194768661373909,
+							"minimum": -0.7947686613739091,
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-631e462e09d642fbb9a5d99da5a5e8ee/original.f4",
+							"scientific": {
+								"bytes": 262144.0,
+								"dtype": "f8",
+								"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-631e462e09d642fbb9a5d99da5a5e8ee/original.f8",
+								"sha256": "42a41487ad3ecd2c06852f950e001eabe6096d0cf19b62a4f123648591a7101f"
+							},
+							"sha256": "363bd6298f5044e8640745649198ba7f04f1cd27c4bd5da4298c21cf4c3a0e59",
+							"shape_zyx": [
+								32.0,
+								32.0,
+								32.0
+							]
+						}
+					},
+					"boundary": "periodic",
+					"channel": "amplitude",
+					"common_range": [
+						-1.194768661373909,
+						1.194768661373909
+					],
+					"edges": [
+						0.125,
+						0.375
+					],
+					"geometry": {
+						"centering": "node",
+						"data_to_world": [
+							1.0,
+							0.0,
+							0.0,
+							0.0,
+							0.0,
+							1.0,
+							0.0,
+							0.0,
+							0.0,
+							0.0,
+							1.0,
+							0.0
+						],
+						"origin": [
+							0.0,
+							0.0,
+							0.0
+						],
+						"shape": [
+							32.0,
+							32.0,
+							32.0
+						],
+						"spacing": [
+							0.5,
+							0.5,
+							0.5
+						]
+					},
+					"kind": "spectral_reconstruction",
+					"manifest": {
+						"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-631e462e09d642fbb9a5d99da5a5e8ee/manifest.json",
+						"sha256": "b8bd368e83c365c5bcbb7b5fa817acb948e4afec38e49e76482aa5e54533e15f"
+					},
+					"metrics": {
+						"ac_mean_square": 0.23,
+						"bands": {
+							"high": {
+								"ac_fraction": 0.02173913043478344,
+								"ac_mean_square": 0.00500000000000019,
+								"fraction": 0.01851851851851923,
+								"full_dft_cells": 31873.0,
+								"mean_square": 0.00500000000000019,
+								"parseval_relative_error": 7.099516447979159e-16,
+								"spectral_mean_square": 0.005
+							},
+							"intermediate": {
+								"ac_fraction": 0.19565217391304657,
+								"ac_mean_square": 0.0450000000000007,
+								"fraction": 0.16666666666666935,
+								"full_dft_cells": 868.0,
+								"mean_square": 0.0450000000000007,
+								"parseval_relative_error": 2.6213599192538426e-15,
+								"spectral_mean_square": 0.045
+							},
+							"low": {
+								"ac_fraction": 0.7826086956521727,
+								"ac_mean_square": 0.17999999999999974,
+								"fraction": 0.8148148148148002,
+								"full_dft_cells": 27.0,
+								"mean_square": 0.219999999999996,
+								"parseval_relative_error": 1.490577208987479e-14,
+								"spectral_mean_square": 0.22
+							}
+						},
+						"mean_square": 0.2699999999999999,
+						"parseval_relative_error": 4.111937128241322e-16,
+						"residual_max": 4.440892098500626e-16,
+						"residual_relative_rms": 2.291960577136391e-16,
+						"residual_rms": 1.1909376505635348e-16,
+						"scientific_bytes": 1048576.0,
+						"source_mean": 0.2,
+						"transfer_bytes": 524288.0,
+						"workspace_bytes": 37289984.0
+					},
+					"object": "field",
+					"provenance": {
+						"display_dtype": "f4",
+						"lifetime": "One worker-owned result; next reconstruction or worker shutdown clears it",
+						"lod": 1.0,
+						"normalization": "NumPy backward DFT; disjoint real radial masks; inverse keeps complex phase",
+						"scientific_dtype": "f8",
+						"source_dtype": "f8",
+						"transform": "identity",
+						"worker": {
+							"analysis_code_sha256": "d511367c02a156e6045cf43ff3f715e5cabba51d885acb8d8a8b8b240de1444d",
+							"policy": "private file transport; one computation at a time",
+							"worker": "tools/analyze_selection.py"
+						}
+					},
+					"record": {
+						"index": 0.0,
+						"native_time": {
+							"f64_le_hex": "0000000000000000",
+							"text": "0"
+						},
+						"sequence": 0.0
+					},
+					"source": {
+						"committed_bytes": "1576530",
+						"complete_records": 3.0,
+						"format": "WVZ1",
+						"path": "/tmp/wavez-424/source-final/reconstruction.wvz",
+						"sha256": "4e1e61a03296fa0ec6c6f09d09c5c67492d55c3cff99470f752c5cc245c9b308",
+						"uuid": "c15e8c25f1924254a40bf5ca599fadf3"
+					},
+					"source_stamp": {
+						"ctime_ns": "1793481824474260464",
+						"device": "37",
+						"inode": "93153",
+						"mtime_ns": "1793481824474260464",
+						"size": "1576530"
+					},
+					"support": {
+						"assumption": "Explicit periodic full domain; no boundary declaration is inferred from the capture",
+						"dc_band": "low",
+						"fundamental_xyz": [
+							0.0625,
+							0.0625,
+							0.0625
+						],
+						"intervals": [
+							"[0, low)",
+							"[low, high)",
+							"[high, sampled corner]"
+						],
+						"length_xyz": [
+							16.0,
+							16.0,
+							16.0
+						],
+						"low_edge_cycles_xyz": [
+							2.0,
+							2.0,
+							2.0
+						],
+						"nyquist_xyz": [
+							1.0,
+							1.0,
+							1.0
+						]
+					},
+					"timings": {
+						"decode_seconds": 0.00029661499866051,
+						"fft_seconds": 0.00100569700225605,
+						"reconstruction_and_write_seconds": 0.00488409299941849,
+						"total_seconds": 0.00770365999778732,
+						"verification_open_seconds": 0.00252766299672657
+					},
+					"units": {
+						"frequency": "cycles/source-coordinate unit",
+						"position": "dimensionless",
+						"value": "dimensionless"
+					},
+					"version": 1.0
+				},
+				"guard": {
+					"baseline": {
+						"VmHWM": 39038976.0,
+						"VmPeak": 384995328.0,
+						"VmRSS": 39038976.0,
+						"VmSize": 384995328.0
+					},
+					"ceiling_bytes": 2147483648.0,
+					"enabled": true,
+					"reason": "runtime plus 1 GiB workspace and 256 MiB overhead fit"
+				},
+				"id": "178908-b2",
+				"member_assets": {
+					"bytes": 0.0,
+					"files": 0.0,
+					"limit_bytes": 67108864.0
+				},
+				"memory": {
+					"VmHWM": 41988096.0,
+					"VmPeak": 387149824.0,
+					"VmRSS": 41988096.0,
+					"VmSize": 387149824.0
+				},
+				"metrics": {
+					"charged_bytes": 0.0,
+					"cpu_seconds": 0.01047016,
+					"decoded_bytes": 262144.0,
+					"peak_charged_bytes": 52793042.0,
+					"read_bytes": 1842348.0,
+					"seconds": 0.01079841200044029
+				},
+				"ok": true,
+				"playback_pressure": {
+					"pauses": 0.0,
+					"seconds": 0.0
+				},
+				"scene_revision": 1.0,
+				"selection_revision": 0.0,
+				"shared_memory": {
+					"limit": 1073741824.0,
+					"peak": 52793042.0,
+					"used": 0.0
+				},
+				"source": {
+					"committed_bytes": "1576530",
+					"complete_records": 3.0,
+					"format": "WVZ1",
+					"path": "/tmp/wavez-424/source-final/reconstruction.wvz",
+					"sha256": "4e1e61a03296fa0ec6c6f09d09c5c67492d55c3cff99470f752c5cc245c9b308",
+					"uuid": "c15e8c25f1924254a40bf5ca599fadf3"
+				},
+				"verification_memo": {
+					"charged_bytes": 1864.0,
+					"entries": 1.0,
+					"evictions": 0.0,
+					"hits": 0.0,
+					"limit_bytes": 4194304.0,
+					"peak_bytes": 1864.0
+				},
+				"version": 1.0
+			}
+		},
+		"synthetic_recompute": {
+			"callback_ms": 4.242,
+			"data": {
+				"algorithm": "spectral-reconstruction-periodic-v1",
+				"artifacts": {
+					"high": {
+						"bytes": 131072.0,
+						"dtype": "f4",
+						"maximum": 0.09991616095183645,
+						"minimum": -0.09991616095183672,
+						"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-890093726a7649078aeb20ffd5584702/high.f4",
+						"scientific": {
+							"bytes": 262144.0,
+							"dtype": "f8",
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-890093726a7649078aeb20ffd5584702/high.f8",
+							"sha256": "689f0745b017e17e1b0317223b7fb1bdf8d039a517ab946631d1ea87482beaa5"
+						},
+						"sha256": "b4f3b9e158dda4b78cefa376f5521726bbf77363cd21bfbc4e7aa311f15ec25d",
+						"shape_zyx": [
+							32.0,
+							32.0,
+							32.0
+						]
+					},
+					"intermediate": {
+						"bytes": 131072.0,
+						"dtype": "f4",
+						"maximum": 0.2999720501787534,
+						"minimum": -0.29997205017875345,
+						"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-890093726a7649078aeb20ffd5584702/intermediate.f4",
+						"scientific": {
+							"bytes": 262144.0,
+							"dtype": "f8",
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-890093726a7649078aeb20ffd5584702/intermediate.f8",
+							"sha256": "5405a5f4f4938e577122c9ea5d35f33a10cf9f875501367d4e395333304b5c4e"
+						},
+						"sha256": "cf0cafc886f79c82c69e12bd5c7a6bef2a05da549b20efdd006e72914a25fdde",
+						"shape_zyx": [
+							32.0,
+							32.0,
+							32.0
+						]
+					},
+					"low": {
+						"bytes": 131072.0,
+						"dtype": "f4",
+						"maximum": 0.7998454321439171,
+						"minimum": -0.3998454321439171,
+						"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-890093726a7649078aeb20ffd5584702/low.f4",
+						"scientific": {
+							"bytes": 262144.0,
+							"dtype": "f8",
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-890093726a7649078aeb20ffd5584702/low.f8",
+							"sha256": "fe0d805d1013422be78287f93d5d8dcfbf73d34007cb36abc239063d2dd1563a"
+						},
+						"sha256": "0c77ea5c3b6e77e54e6752c5306266772249c953cd758261b4bd12270b61a477",
+						"shape_zyx": [
+							32.0,
+							32.0,
+							32.0
+						]
+					},
+					"original": {
+						"bytes": 131072.0,
+						"dtype": "f4",
+						"maximum": 1.194768661373909,
+						"minimum": -0.7947686613739091,
+						"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-890093726a7649078aeb20ffd5584702/original.f4",
+						"scientific": {
+							"bytes": 262144.0,
+							"dtype": "f8",
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-890093726a7649078aeb20ffd5584702/original.f8",
+							"sha256": "42a41487ad3ecd2c06852f950e001eabe6096d0cf19b62a4f123648591a7101f"
+						},
+						"sha256": "363bd6298f5044e8640745649198ba7f04f1cd27c4bd5da4298c21cf4c3a0e59",
+						"shape_zyx": [
+							32.0,
+							32.0,
+							32.0
+						]
+					}
+				},
+				"boundary": "periodic",
+				"channel": "amplitude",
+				"common_range": [
+					-1.194768661373909,
+					1.194768661373909
+				],
+				"edges": [
+					0.125,
+					0.375
+				],
+				"geometry": {
+					"centering": "node",
+					"data_to_world": [
+						1.0,
+						0.0,
+						0.0,
+						0.0,
+						0.0,
+						1.0,
+						0.0,
+						0.0,
+						0.0,
+						0.0,
+						1.0,
+						0.0
+					],
+					"origin": [
+						0.0,
+						0.0,
+						0.0
+					],
+					"shape": [
+						32.0,
+						32.0,
+						32.0
+					],
+					"spacing": [
+						0.5,
+						0.5,
+						0.5
+					]
+				},
+				"kind": "spectral_reconstruction",
+				"manifest": {
+					"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-890093726a7649078aeb20ffd5584702/manifest.json",
+					"sha256": "8b26afe763654534f05371e3d15b46937dc2cd79a1b476989e4fd5b5887f69c9"
+				},
+				"metrics": {
+					"ac_mean_square": 0.23,
+					"bands": {
+						"high": {
+							"ac_fraction": 0.02173913043478344,
+							"ac_mean_square": 0.00500000000000019,
+							"fraction": 0.01851851851851923,
+							"full_dft_cells": 31873.0,
+							"mean_square": 0.00500000000000019,
+							"parseval_relative_error": 7.099516447979159e-16,
+							"spectral_mean_square": 0.005
+						},
+						"intermediate": {
+							"ac_fraction": 0.19565217391304657,
+							"ac_mean_square": 0.0450000000000007,
+							"fraction": 0.16666666666666935,
+							"full_dft_cells": 868.0,
+							"mean_square": 0.0450000000000007,
+							"parseval_relative_error": 2.6213599192538426e-15,
+							"spectral_mean_square": 0.045
+						},
+						"low": {
+							"ac_fraction": 0.7826086956521727,
+							"ac_mean_square": 0.17999999999999974,
+							"fraction": 0.8148148148148002,
+							"full_dft_cells": 27.0,
+							"mean_square": 0.219999999999996,
+							"parseval_relative_error": 1.490577208987479e-14,
+							"spectral_mean_square": 0.22
+						}
+					},
+					"mean_square": 0.2699999999999999,
+					"parseval_relative_error": 4.111937128241322e-16,
+					"residual_max": 4.440892098500626e-16,
+					"residual_relative_rms": 2.291960577136391e-16,
+					"residual_rms": 1.1909376505635348e-16,
+					"scientific_bytes": 1048576.0,
+					"source_mean": 0.2,
+					"transfer_bytes": 524288.0,
+					"workspace_bytes": 37289984.0
+				},
+				"object": "field",
+				"provenance": {
+					"display_dtype": "f4",
+					"lifetime": "One worker-owned result; next reconstruction or worker shutdown clears it",
+					"lod": 1.0,
+					"normalization": "NumPy backward DFT; disjoint real radial masks; inverse keeps complex phase",
+					"scientific_dtype": "f8",
+					"source_dtype": "f8",
+					"transform": "identity",
+					"worker": {
+						"analysis_code_sha256": "d511367c02a156e6045cf43ff3f715e5cabba51d885acb8d8a8b8b240de1444d",
+						"policy": "private file transport; one computation at a time",
+						"worker": "tools/analyze_selection.py"
+					}
+				},
+				"record": {
+					"index": 0.0,
+					"native_time": {
+						"f64_le_hex": "0000000000000000",
+						"text": "0"
+					},
+					"sequence": 0.0
+				},
+				"source": {
+					"committed_bytes": "1576530",
+					"complete_records": 3.0,
+					"format": "WVZ1",
+					"path": "/tmp/wavez-424/source-final/reconstruction.wvz",
+					"sha256": "4e1e61a03296fa0ec6c6f09d09c5c67492d55c3cff99470f752c5cc245c9b308",
+					"uuid": "c15e8c25f1924254a40bf5ca599fadf3"
+				},
+				"source_stamp": {
+					"ctime_ns": "1793481824474260464",
+					"device": "37",
+					"inode": "93153",
+					"mtime_ns": "1793481824474260464",
+					"size": "1576530"
+				},
+				"support": {
+					"assumption": "Explicit periodic full domain; no boundary declaration is inferred from the capture",
+					"dc_band": "low",
+					"fundamental_xyz": [
+						0.0625,
+						0.0625,
+						0.0625
+					],
+					"intervals": [
+						"[0, low)",
+						"[low, high)",
+						"[high, sampled corner]"
+					],
+					"length_xyz": [
+						16.0,
+						16.0,
+						16.0
+					],
+					"low_edge_cycles_xyz": [
+						2.0,
+						2.0,
+						2.0
+					],
+					"nyquist_xyz": [
+						1.0,
+						1.0,
+						1.0
+					]
+				},
+				"timings": {
+					"decode_seconds": 0.00045273800060385,
+					"fft_seconds": 0.00026026400155387,
+					"reconstruction_and_write_seconds": 0.00503100499918218,
+					"total_seconds": 0.00762897899767267,
+					"verification_open_seconds": 0.00101405700115719
+				},
+				"units": {
+					"frequency": "cycles/source-coordinate unit",
+					"position": "dimensionless",
+					"value": "dimensionless"
+				},
+				"version": 1.0
+			},
+			"roundtrip_ms": 275.634,
+			"source": {
+				"committed_bytes": "1576530",
+				"complete_records": 3.0,
+				"format": "WVZ1",
+				"path": "/tmp/wavez-424/source-final/reconstruction.wvz",
+				"sha256": "4e1e61a03296fa0ec6c6f09d09c5c67492d55c3cff99470f752c5cc245c9b308",
+				"uuid": "c15e8c25f1924254a40bf5ca599fadf3"
+			},
+			"status": "Pinned High ready at full resolution. Playback changes the playhead, not this volume.",
+			"transfer": {
+				"gpu_bytes": 131072,
+				"gpu_upload_ms": 0.135,
+				"ordinary_gpu_bytes_reserved": 131072,
+				"transfer_hash_validate_ms": 3.15
+			},
+			"worker_reply": {
+				"analysis_revision": 14.0,
+				"data": {
+					"algorithm": "spectral-reconstruction-periodic-v1",
+					"artifacts": {
+						"high": {
+							"bytes": 131072.0,
+							"dtype": "f4",
+							"maximum": 0.09991616095183645,
+							"minimum": -0.09991616095183672,
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-890093726a7649078aeb20ffd5584702/high.f4",
+							"scientific": {
+								"bytes": 262144.0,
+								"dtype": "f8",
+								"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-890093726a7649078aeb20ffd5584702/high.f8",
+								"sha256": "689f0745b017e17e1b0317223b7fb1bdf8d039a517ab946631d1ea87482beaa5"
+							},
+							"sha256": "b4f3b9e158dda4b78cefa376f5521726bbf77363cd21bfbc4e7aa311f15ec25d",
+							"shape_zyx": [
+								32.0,
+								32.0,
+								32.0
+							]
+						},
+						"intermediate": {
+							"bytes": 131072.0,
+							"dtype": "f4",
+							"maximum": 0.2999720501787534,
+							"minimum": -0.29997205017875345,
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-890093726a7649078aeb20ffd5584702/intermediate.f4",
+							"scientific": {
+								"bytes": 262144.0,
+								"dtype": "f8",
+								"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-890093726a7649078aeb20ffd5584702/intermediate.f8",
+								"sha256": "5405a5f4f4938e577122c9ea5d35f33a10cf9f875501367d4e395333304b5c4e"
+							},
+							"sha256": "cf0cafc886f79c82c69e12bd5c7a6bef2a05da549b20efdd006e72914a25fdde",
+							"shape_zyx": [
+								32.0,
+								32.0,
+								32.0
+							]
+						},
+						"low": {
+							"bytes": 131072.0,
+							"dtype": "f4",
+							"maximum": 0.7998454321439171,
+							"minimum": -0.3998454321439171,
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-890093726a7649078aeb20ffd5584702/low.f4",
+							"scientific": {
+								"bytes": 262144.0,
+								"dtype": "f8",
+								"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-890093726a7649078aeb20ffd5584702/low.f8",
+								"sha256": "fe0d805d1013422be78287f93d5d8dcfbf73d34007cb36abc239063d2dd1563a"
+							},
+							"sha256": "0c77ea5c3b6e77e54e6752c5306266772249c953cd758261b4bd12270b61a477",
+							"shape_zyx": [
+								32.0,
+								32.0,
+								32.0
+							]
+						},
+						"original": {
+							"bytes": 131072.0,
+							"dtype": "f4",
+							"maximum": 1.194768661373909,
+							"minimum": -0.7947686613739091,
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-890093726a7649078aeb20ffd5584702/original.f4",
+							"scientific": {
+								"bytes": 262144.0,
+								"dtype": "f8",
+								"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-890093726a7649078aeb20ffd5584702/original.f8",
+								"sha256": "42a41487ad3ecd2c06852f950e001eabe6096d0cf19b62a4f123648591a7101f"
+							},
+							"sha256": "363bd6298f5044e8640745649198ba7f04f1cd27c4bd5da4298c21cf4c3a0e59",
+							"shape_zyx": [
+								32.0,
+								32.0,
+								32.0
+							]
+						}
+					},
+					"boundary": "periodic",
+					"channel": "amplitude",
+					"common_range": [
+						-1.194768661373909,
+						1.194768661373909
+					],
+					"edges": [
+						0.125,
+						0.375
+					],
+					"geometry": {
+						"centering": "node",
+						"data_to_world": [
+							1.0,
+							0.0,
+							0.0,
+							0.0,
+							0.0,
+							1.0,
+							0.0,
+							0.0,
+							0.0,
+							0.0,
+							1.0,
+							0.0
+						],
+						"origin": [
+							0.0,
+							0.0,
+							0.0
+						],
+						"shape": [
+							32.0,
+							32.0,
+							32.0
+						],
+						"spacing": [
+							0.5,
+							0.5,
+							0.5
+						]
+					},
+					"kind": "spectral_reconstruction",
+					"manifest": {
+						"path": "/tmp/wavez-424/source-final/analysis-workers/178908-4042658-reconstruction/results/d-890093726a7649078aeb20ffd5584702/manifest.json",
+						"sha256": "8b26afe763654534f05371e3d15b46937dc2cd79a1b476989e4fd5b5887f69c9"
+					},
+					"metrics": {
+						"ac_mean_square": 0.23,
+						"bands": {
+							"high": {
+								"ac_fraction": 0.02173913043478344,
+								"ac_mean_square": 0.00500000000000019,
+								"fraction": 0.01851851851851923,
+								"full_dft_cells": 31873.0,
+								"mean_square": 0.00500000000000019,
+								"parseval_relative_error": 7.099516447979159e-16,
+								"spectral_mean_square": 0.005
+							},
+							"intermediate": {
+								"ac_fraction": 0.19565217391304657,
+								"ac_mean_square": 0.0450000000000007,
+								"fraction": 0.16666666666666935,
+								"full_dft_cells": 868.0,
+								"mean_square": 0.0450000000000007,
+								"parseval_relative_error": 2.6213599192538426e-15,
+								"spectral_mean_square": 0.045
+							},
+							"low": {
+								"ac_fraction": 0.7826086956521727,
+								"ac_mean_square": 0.17999999999999974,
+								"fraction": 0.8148148148148002,
+								"full_dft_cells": 27.0,
+								"mean_square": 0.219999999999996,
+								"parseval_relative_error": 1.490577208987479e-14,
+								"spectral_mean_square": 0.22
+							}
+						},
+						"mean_square": 0.2699999999999999,
+						"parseval_relative_error": 4.111937128241322e-16,
+						"residual_max": 4.440892098500626e-16,
+						"residual_relative_rms": 2.291960577136391e-16,
+						"residual_rms": 1.1909376505635348e-16,
+						"scientific_bytes": 1048576.0,
+						"source_mean": 0.2,
+						"transfer_bytes": 524288.0,
+						"workspace_bytes": 37289984.0
+					},
+					"object": "field",
+					"provenance": {
+						"display_dtype": "f4",
+						"lifetime": "One worker-owned result; next reconstruction or worker shutdown clears it",
+						"lod": 1.0,
+						"normalization": "NumPy backward DFT; disjoint real radial masks; inverse keeps complex phase",
+						"scientific_dtype": "f8",
+						"source_dtype": "f8",
+						"transform": "identity",
+						"worker": {
+							"analysis_code_sha256": "d511367c02a156e6045cf43ff3f715e5cabba51d885acb8d8a8b8b240de1444d",
+							"policy": "private file transport; one computation at a time",
+							"worker": "tools/analyze_selection.py"
+						}
+					},
+					"record": {
+						"index": 0.0,
+						"native_time": {
+							"f64_le_hex": "0000000000000000",
+							"text": "0"
+						},
+						"sequence": 0.0
+					},
+					"source": {
+						"committed_bytes": "1576530",
+						"complete_records": 3.0,
+						"format": "WVZ1",
+						"path": "/tmp/wavez-424/source-final/reconstruction.wvz",
+						"sha256": "4e1e61a03296fa0ec6c6f09d09c5c67492d55c3cff99470f752c5cc245c9b308",
+						"uuid": "c15e8c25f1924254a40bf5ca599fadf3"
+					},
+					"source_stamp": {
+						"ctime_ns": "1793481824474260464",
+						"device": "37",
+						"inode": "93153",
+						"mtime_ns": "1793481824474260464",
+						"size": "1576530"
+					},
+					"support": {
+						"assumption": "Explicit periodic full domain; no boundary declaration is inferred from the capture",
+						"dc_band": "low",
+						"fundamental_xyz": [
+							0.0625,
+							0.0625,
+							0.0625
+						],
+						"intervals": [
+							"[0, low)",
+							"[low, high)",
+							"[high, sampled corner]"
+						],
+						"length_xyz": [
+							16.0,
+							16.0,
+							16.0
+						],
+						"low_edge_cycles_xyz": [
+							2.0,
+							2.0,
+							2.0
+						],
+						"nyquist_xyz": [
+							1.0,
+							1.0,
+							1.0
+						]
+					},
+					"timings": {
+						"decode_seconds": 0.00045273800060385,
+						"fft_seconds": 0.00026026400155387,
+						"reconstruction_and_write_seconds": 0.00503100499918218,
+						"total_seconds": 0.00762897899767267,
+						"verification_open_seconds": 0.00101405700115719
+					},
+					"units": {
+						"frequency": "cycles/source-coordinate unit",
+						"position": "dimensionless",
+						"value": "dimensionless"
+					},
+					"version": 1.0
+				},
+				"guard": {
+					"baseline": {
+						"VmHWM": 39038976.0,
+						"VmPeak": 384995328.0,
+						"VmRSS": 39038976.0,
+						"VmSize": 384995328.0
+					},
+					"ceiling_bytes": 2147483648.0,
+					"enabled": true,
+					"reason": "runtime plus 1 GiB workspace and 256 MiB overhead fit"
+				},
+				"id": "178908-b3",
+				"member_assets": {
+					"bytes": 0.0,
+					"files": 0.0,
+					"limit_bytes": 67108864.0
+				},
+				"memory": {
+					"VmHWM": 42131456.0,
+					"VmPeak": 387289088.0,
+					"VmRSS": 42131456.0,
+					"VmSize": 387289088.0
+				},
+				"metrics": {
+					"charged_bytes": 0.0,
+					"cpu_seconds": 0.00860252999999999,
+					"decoded_bytes": 262144.0,
+					"peak_charged_bytes": 52793042.0,
+					"read_bytes": 265818.0,
+					"seconds": 0.00921397600177442
+				},
+				"ok": true,
+				"playback_pressure": {
+					"pauses": 0.0,
+					"seconds": 0.0
+				},
+				"scene_revision": 1.0,
+				"selection_revision": 0.0,
+				"shared_memory": {
+					"limit": 1073741824.0,
+					"peak": 52793042.0,
+					"used": 0.0
+				},
+				"source": {
+					"committed_bytes": "1576530",
+					"complete_records": 3.0,
+					"format": "WVZ1",
+					"path": "/tmp/wavez-424/source-final/reconstruction.wvz",
+					"sha256": "4e1e61a03296fa0ec6c6f09d09c5c67492d55c3cff99470f752c5cc245c9b308",
+					"uuid": "c15e8c25f1924254a40bf5ca599fadf3"
+				},
+				"verification_memo": {
+					"charged_bytes": 1864.0,
+					"entries": 1.0,
+					"evictions": 0.0,
+					"hits": 1.0,
+					"limit_bytes": 4194304.0,
+					"peak_bytes": 1864.0
+				},
+				"version": 1.0
+			}
+		},
+		"zero_source": {
+			"callback_ms": 4.968,
+			"data": {
+				"algorithm": "spectral-reconstruction-periodic-v1",
+				"artifacts": {
+					"high": {
+						"bytes": 131072.0,
+						"dtype": "f4",
+						"maximum": 0.0,
+						"minimum": 0.0,
+						"path": "/tmp/wavez-424/source-final/analysis-workers/178908-11493062-reconstruction/results/d-93e3e68715f64ff490cdc64e7331dee2/high.f4",
+						"scientific": {
+							"bytes": 262144.0,
+							"dtype": "f8",
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-11493062-reconstruction/results/d-93e3e68715f64ff490cdc64e7331dee2/high.f8",
+							"sha256": "8a39d2abd3999ab73c34db2476849cddf303ce389b35826850f9a700589b4a90"
+						},
+						"sha256": "fa43239bcee7b97ca62f007cc68487560a39e19f74f3dde7486db3f98df8e471",
+						"shape_zyx": [
+							32.0,
+							32.0,
+							32.0
+						]
+					},
+					"intermediate": {
+						"bytes": 131072.0,
+						"dtype": "f4",
+						"maximum": 0.0,
+						"minimum": 0.0,
+						"path": "/tmp/wavez-424/source-final/analysis-workers/178908-11493062-reconstruction/results/d-93e3e68715f64ff490cdc64e7331dee2/intermediate.f4",
+						"scientific": {
+							"bytes": 262144.0,
+							"dtype": "f8",
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-11493062-reconstruction/results/d-93e3e68715f64ff490cdc64e7331dee2/intermediate.f8",
+							"sha256": "8a39d2abd3999ab73c34db2476849cddf303ce389b35826850f9a700589b4a90"
+						},
+						"sha256": "fa43239bcee7b97ca62f007cc68487560a39e19f74f3dde7486db3f98df8e471",
+						"shape_zyx": [
+							32.0,
+							32.0,
+							32.0
+						]
+					},
+					"low": {
+						"bytes": 131072.0,
+						"dtype": "f4",
+						"maximum": 0.0,
+						"minimum": 0.0,
+						"path": "/tmp/wavez-424/source-final/analysis-workers/178908-11493062-reconstruction/results/d-93e3e68715f64ff490cdc64e7331dee2/low.f4",
+						"scientific": {
+							"bytes": 262144.0,
+							"dtype": "f8",
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-11493062-reconstruction/results/d-93e3e68715f64ff490cdc64e7331dee2/low.f8",
+							"sha256": "8a39d2abd3999ab73c34db2476849cddf303ce389b35826850f9a700589b4a90"
+						},
+						"sha256": "fa43239bcee7b97ca62f007cc68487560a39e19f74f3dde7486db3f98df8e471",
+						"shape_zyx": [
+							32.0,
+							32.0,
+							32.0
+						]
+					},
+					"original": {
+						"bytes": 131072.0,
+						"dtype": "f4",
+						"maximum": 0.0,
+						"minimum": 0.0,
+						"path": "/tmp/wavez-424/source-final/analysis-workers/178908-11493062-reconstruction/results/d-93e3e68715f64ff490cdc64e7331dee2/original.f4",
+						"scientific": {
+							"bytes": 262144.0,
+							"dtype": "f8",
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-11493062-reconstruction/results/d-93e3e68715f64ff490cdc64e7331dee2/original.f8",
+							"sha256": "8a39d2abd3999ab73c34db2476849cddf303ce389b35826850f9a700589b4a90"
+						},
+						"sha256": "fa43239bcee7b97ca62f007cc68487560a39e19f74f3dde7486db3f98df8e471",
+						"shape_zyx": [
+							32.0,
+							32.0,
+							32.0
+						]
+					}
+				},
+				"boundary": "periodic",
+				"channel": "amplitude",
+				"common_range": [
+					0.0,
+					0.0
+				],
+				"edges": [
+					0.125,
+					0.375
+				],
+				"geometry": {
+					"centering": "node",
+					"data_to_world": [
+						1.0,
+						0.0,
+						0.0,
+						0.0,
+						0.0,
+						1.0,
+						0.0,
+						0.0,
+						0.0,
+						0.0,
+						1.0,
+						0.0
+					],
+					"origin": [
+						0.0,
+						0.0,
+						0.0
+					],
+					"shape": [
+						32.0,
+						32.0,
+						32.0
+					],
+					"spacing": [
+						0.5,
+						0.5,
+						0.5
+					]
+				},
+				"kind": "spectral_reconstruction",
+				"manifest": {
+					"path": "/tmp/wavez-424/source-final/analysis-workers/178908-11493062-reconstruction/results/d-93e3e68715f64ff490cdc64e7331dee2/manifest.json",
+					"sha256": "3067ee62469aa3bcae433b7f08f9936747feb39820a0a9b7f32fd9ab3fdbc443"
+				},
+				"metrics": {
+					"ac_mean_square": 0.0,
+					"bands": {
+						"high": {
+							"ac_fraction": 0.0,
+							"ac_mean_square": 0.0,
+							"fraction": 0.0,
+							"full_dft_cells": 31873.0,
+							"mean_square": 0.0,
+							"parseval_relative_error": 0.0,
+							"spectral_mean_square": 0.0
+						},
+						"intermediate": {
+							"ac_fraction": 0.0,
+							"ac_mean_square": 0.0,
+							"fraction": 0.0,
+							"full_dft_cells": 868.0,
+							"mean_square": 0.0,
+							"parseval_relative_error": 0.0,
+							"spectral_mean_square": 0.0
+						},
+						"low": {
+							"ac_fraction": 0.0,
+							"ac_mean_square": 0.0,
+							"fraction": 0.0,
+							"full_dft_cells": 27.0,
+							"mean_square": 0.0,
+							"parseval_relative_error": 0.0,
+							"spectral_mean_square": 0.0
+						}
+					},
+					"mean_square": 0.0,
+					"parseval_relative_error": 0.0,
+					"residual_max": 0.0,
+					"residual_relative_rms": 0.0,
+					"residual_rms": 0.0,
+					"scientific_bytes": 1048576.0,
+					"source_mean": 0.0,
+					"transfer_bytes": 524288.0,
+					"workspace_bytes": 37289984.0
+				},
+				"object": "field",
+				"provenance": {
+					"display_dtype": "f4",
+					"lifetime": "One worker-owned result; next reconstruction or worker shutdown clears it",
+					"lod": 1.0,
+					"normalization": "NumPy backward DFT; disjoint real radial masks; inverse keeps complex phase",
+					"scientific_dtype": "f8",
+					"source_dtype": "f8",
+					"transform": "identity",
+					"worker": {
+						"analysis_code_sha256": "d511367c02a156e6045cf43ff3f715e5cabba51d885acb8d8a8b8b240de1444d",
+						"policy": "private file transport; one computation at a time",
+						"worker": "tools/analyze_selection.py"
+					}
+				},
+				"record": {
+					"index": 0.0,
+					"native_time": {
+						"f64_le_hex": "0000000000000000",
+						"text": "0"
+					},
+					"sequence": 0.0
+				},
+				"source": {
+					"committed_bytes": "263158",
+					"complete_records": 1.0,
+					"format": "WVZ1",
+					"path": "/tmp/wavez-424/source-final/zero.wvz",
+					"sha256": "c3ac2b566fbcc6ffc0277446c731f1a0c036c3da6026b000c5e028fb4f3fdb4c",
+					"uuid": "3ea83cbf1db4407d9355ff67a361adbe"
+				},
+				"source_stamp": {
+					"ctime_ns": "1793481824483919557",
+					"device": "37",
+					"inode": "93164",
+					"mtime_ns": "1793481824483919557",
+					"size": "263158"
+				},
+				"support": {
+					"assumption": "Explicit periodic full domain; no boundary declaration is inferred from the capture",
+					"dc_band": "low",
+					"fundamental_xyz": [
+						0.0625,
+						0.0625,
+						0.0625
+					],
+					"intervals": [
+						"[0, low)",
+						"[low, high)",
+						"[high, sampled corner]"
+					],
+					"length_xyz": [
+						16.0,
+						16.0,
+						16.0
+					],
+					"low_edge_cycles_xyz": [
+						2.0,
+						2.0,
+						2.0
+					],
+					"nyquist_xyz": [
+						1.0,
+						1.0,
+						1.0
+					]
+				},
+				"timings": {
+					"decode_seconds": 0.00038815700099803,
+					"fft_seconds": 0.00113420799971208,
+					"reconstruction_and_write_seconds": 0.00536345999717013,
+					"total_seconds": 0.00828014000217081,
+					"verification_open_seconds": 0.00112318900210084
+				},
+				"units": {
+					"frequency": "cycles/source-coordinate unit",
+					"position": "dimensionless",
+					"value": "dimensionless"
+				},
+				"version": 1.0
+			},
+			"roundtrip_ms": 229.916,
+			"source": {
+				"committed_bytes": "263158",
+				"complete_records": 1.0,
+				"format": "WVZ1",
+				"path": "/tmp/wavez-424/source-final/zero.wvz",
+				"sha256": "c3ac2b566fbcc6ffc0277446c731f1a0c036c3da6026b000c5e028fb4f3fdb4c",
+				"uuid": "3ea83cbf1db4407d9355ff67a361adbe"
+			},
+			"status": "Pinned High ready at full resolution. Playback changes the playhead, not this volume.",
+			"transfer": {
+				"gpu_bytes": 131072,
+				"gpu_upload_ms": 0.208,
+				"ordinary_gpu_bytes_reserved": 131072,
+				"transfer_hash_validate_ms": 3.12
+			},
+			"worker_reply": {
+				"analysis_revision": 53.0,
+				"data": {
+					"algorithm": "spectral-reconstruction-periodic-v1",
+					"artifacts": {
+						"high": {
+							"bytes": 131072.0,
+							"dtype": "f4",
+							"maximum": 0.0,
+							"minimum": 0.0,
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-11493062-reconstruction/results/d-93e3e68715f64ff490cdc64e7331dee2/high.f4",
+							"scientific": {
+								"bytes": 262144.0,
+								"dtype": "f8",
+								"path": "/tmp/wavez-424/source-final/analysis-workers/178908-11493062-reconstruction/results/d-93e3e68715f64ff490cdc64e7331dee2/high.f8",
+								"sha256": "8a39d2abd3999ab73c34db2476849cddf303ce389b35826850f9a700589b4a90"
+							},
+							"sha256": "fa43239bcee7b97ca62f007cc68487560a39e19f74f3dde7486db3f98df8e471",
+							"shape_zyx": [
+								32.0,
+								32.0,
+								32.0
+							]
+						},
+						"intermediate": {
+							"bytes": 131072.0,
+							"dtype": "f4",
+							"maximum": 0.0,
+							"minimum": 0.0,
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-11493062-reconstruction/results/d-93e3e68715f64ff490cdc64e7331dee2/intermediate.f4",
+							"scientific": {
+								"bytes": 262144.0,
+								"dtype": "f8",
+								"path": "/tmp/wavez-424/source-final/analysis-workers/178908-11493062-reconstruction/results/d-93e3e68715f64ff490cdc64e7331dee2/intermediate.f8",
+								"sha256": "8a39d2abd3999ab73c34db2476849cddf303ce389b35826850f9a700589b4a90"
+							},
+							"sha256": "fa43239bcee7b97ca62f007cc68487560a39e19f74f3dde7486db3f98df8e471",
+							"shape_zyx": [
+								32.0,
+								32.0,
+								32.0
+							]
+						},
+						"low": {
+							"bytes": 131072.0,
+							"dtype": "f4",
+							"maximum": 0.0,
+							"minimum": 0.0,
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-11493062-reconstruction/results/d-93e3e68715f64ff490cdc64e7331dee2/low.f4",
+							"scientific": {
+								"bytes": 262144.0,
+								"dtype": "f8",
+								"path": "/tmp/wavez-424/source-final/analysis-workers/178908-11493062-reconstruction/results/d-93e3e68715f64ff490cdc64e7331dee2/low.f8",
+								"sha256": "8a39d2abd3999ab73c34db2476849cddf303ce389b35826850f9a700589b4a90"
+							},
+							"sha256": "fa43239bcee7b97ca62f007cc68487560a39e19f74f3dde7486db3f98df8e471",
+							"shape_zyx": [
+								32.0,
+								32.0,
+								32.0
+							]
+						},
+						"original": {
+							"bytes": 131072.0,
+							"dtype": "f4",
+							"maximum": 0.0,
+							"minimum": 0.0,
+							"path": "/tmp/wavez-424/source-final/analysis-workers/178908-11493062-reconstruction/results/d-93e3e68715f64ff490cdc64e7331dee2/original.f4",
+							"scientific": {
+								"bytes": 262144.0,
+								"dtype": "f8",
+								"path": "/tmp/wavez-424/source-final/analysis-workers/178908-11493062-reconstruction/results/d-93e3e68715f64ff490cdc64e7331dee2/original.f8",
+								"sha256": "8a39d2abd3999ab73c34db2476849cddf303ce389b35826850f9a700589b4a90"
+							},
+							"sha256": "fa43239bcee7b97ca62f007cc68487560a39e19f74f3dde7486db3f98df8e471",
+							"shape_zyx": [
+								32.0,
+								32.0,
+								32.0
+							]
+						}
+					},
+					"boundary": "periodic",
+					"channel": "amplitude",
+					"common_range": [
+						0.0,
+						0.0
+					],
+					"edges": [
+						0.125,
+						0.375
+					],
+					"geometry": {
+						"centering": "node",
+						"data_to_world": [
+							1.0,
+							0.0,
+							0.0,
+							0.0,
+							0.0,
+							1.0,
+							0.0,
+							0.0,
+							0.0,
+							0.0,
+							1.0,
+							0.0
+						],
+						"origin": [
+							0.0,
+							0.0,
+							0.0
+						],
+						"shape": [
+							32.0,
+							32.0,
+							32.0
+						],
+						"spacing": [
+							0.5,
+							0.5,
+							0.5
+						]
+					},
+					"kind": "spectral_reconstruction",
+					"manifest": {
+						"path": "/tmp/wavez-424/source-final/analysis-workers/178908-11493062-reconstruction/results/d-93e3e68715f64ff490cdc64e7331dee2/manifest.json",
+						"sha256": "3067ee62469aa3bcae433b7f08f9936747feb39820a0a9b7f32fd9ab3fdbc443"
+					},
+					"metrics": {
+						"ac_mean_square": 0.0,
+						"bands": {
+							"high": {
+								"ac_fraction": 0.0,
+								"ac_mean_square": 0.0,
+								"fraction": 0.0,
+								"full_dft_cells": 31873.0,
+								"mean_square": 0.0,
+								"parseval_relative_error": 0.0,
+								"spectral_mean_square": 0.0
+							},
+							"intermediate": {
+								"ac_fraction": 0.0,
+								"ac_mean_square": 0.0,
+								"fraction": 0.0,
+								"full_dft_cells": 868.0,
+								"mean_square": 0.0,
+								"parseval_relative_error": 0.0,
+								"spectral_mean_square": 0.0
+							},
+							"low": {
+								"ac_fraction": 0.0,
+								"ac_mean_square": 0.0,
+								"fraction": 0.0,
+								"full_dft_cells": 27.0,
+								"mean_square": 0.0,
+								"parseval_relative_error": 0.0,
+								"spectral_mean_square": 0.0
+							}
+						},
+						"mean_square": 0.0,
+						"parseval_relative_error": 0.0,
+						"residual_max": 0.0,
+						"residual_relative_rms": 0.0,
+						"residual_rms": 0.0,
+						"scientific_bytes": 1048576.0,
+						"source_mean": 0.0,
+						"transfer_bytes": 524288.0,
+						"workspace_bytes": 37289984.0
+					},
+					"object": "field",
+					"provenance": {
+						"display_dtype": "f4",
+						"lifetime": "One worker-owned result; next reconstruction or worker shutdown clears it",
+						"lod": 1.0,
+						"normalization": "NumPy backward DFT; disjoint real radial masks; inverse keeps complex phase",
+						"scientific_dtype": "f8",
+						"source_dtype": "f8",
+						"transform": "identity",
+						"worker": {
+							"analysis_code_sha256": "d511367c02a156e6045cf43ff3f715e5cabba51d885acb8d8a8b8b240de1444d",
+							"policy": "private file transport; one computation at a time",
+							"worker": "tools/analyze_selection.py"
+						}
+					},
+					"record": {
+						"index": 0.0,
+						"native_time": {
+							"f64_le_hex": "0000000000000000",
+							"text": "0"
+						},
+						"sequence": 0.0
+					},
+					"source": {
+						"committed_bytes": "263158",
+						"complete_records": 1.0,
+						"format": "WVZ1",
+						"path": "/tmp/wavez-424/source-final/zero.wvz",
+						"sha256": "c3ac2b566fbcc6ffc0277446c731f1a0c036c3da6026b000c5e028fb4f3fdb4c",
+						"uuid": "3ea83cbf1db4407d9355ff67a361adbe"
+					},
+					"source_stamp": {
+						"ctime_ns": "1793481824483919557",
+						"device": "37",
+						"inode": "93164",
+						"mtime_ns": "1793481824483919557",
+						"size": "263158"
+					},
+					"support": {
+						"assumption": "Explicit periodic full domain; no boundary declaration is inferred from the capture",
+						"dc_band": "low",
+						"fundamental_xyz": [
+							0.0625,
+							0.0625,
+							0.0625
+						],
+						"intervals": [
+							"[0, low)",
+							"[low, high)",
+							"[high, sampled corner]"
+						],
+						"length_xyz": [
+							16.0,
+							16.0,
+							16.0
+						],
+						"low_edge_cycles_xyz": [
+							2.0,
+							2.0,
+							2.0
+						],
+						"nyquist_xyz": [
+							1.0,
+							1.0,
+							1.0
+						]
+					},
+					"timings": {
+						"decode_seconds": 0.00038815700099803,
+						"fft_seconds": 0.00113420799971208,
+						"reconstruction_and_write_seconds": 0.00536345999717013,
+						"total_seconds": 0.00828014000217081,
+						"verification_open_seconds": 0.00112318900210084
+					},
+					"units": {
+						"frequency": "cycles/source-coordinate unit",
+						"position": "dimensionless",
+						"value": "dimensionless"
+					},
+					"version": 1.0
+				},
+				"guard": {
+					"baseline": {
+						"VmHWM": 39055360.0,
+						"VmPeak": 384995328.0,
+						"VmRSS": 39055360.0,
+						"VmSize": 384995328.0
+					},
+					"ceiling_bytes": 2147483648.0,
+					"enabled": true,
+					"reason": "runtime plus 1 GiB workspace and 256 MiB overhead fit"
+				},
+				"id": "178908-b17",
+				"member_assets": {
+					"bytes": 0.0,
+					"files": 0.0,
+					"limit_bytes": 67108864.0
+				},
+				"memory": {
+					"VmHWM": 41451520.0,
+					"VmPeak": 387149824.0,
+					"VmRSS": 40734720.0,
+					"VmSize": 385773568.0
+				},
+				"metrics": {
+					"charged_bytes": 0.0,
+					"cpu_seconds": 0.00994337,
+					"decoded_bytes": 262144.0,
+					"peak_charged_bytes": 52771493.0,
+					"read_bytes": 526324.0,
+					"seconds": 0.01000361900150892
+				},
+				"ok": true,
+				"playback_pressure": {
+					"pauses": 0.0,
+					"seconds": 0.0
+				},
+				"scene_revision": 7.0,
+				"selection_revision": 0.0,
+				"shared_memory": {
+					"limit": 1073741824.0,
+					"peak": 52771493.0,
+					"used": 0.0
+				},
+				"source": {
+					"committed_bytes": "263158",
+					"complete_records": 1.0,
+					"format": "WVZ1",
+					"path": "/tmp/wavez-424/source-final/zero.wvz",
+					"sha256": "c3ac2b566fbcc6ffc0277446c731f1a0c036c3da6026b000c5e028fb4f3fdb4c",
+					"uuid": "3ea83cbf1db4407d9355ff67a361adbe"
+				},
+				"verification_memo": {
+					"charged_bytes": 1768.0,
+					"entries": 1.0,
+					"evictions": 0.0,
+					"hits": 0.0,
+					"limit_bytes": 4194304.0,
+					"peak_bytes": 1768.0
+				},
+				"version": 1.0
+			}
+		}
+	},
+	"renderer": "forward_plus"
+}

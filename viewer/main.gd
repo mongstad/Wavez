@@ -70,6 +70,7 @@ var scene_layers
 var selection_controller
 var spatial_spectrum
 var spectral_band_map
+var spectral_reconstruction
 # WVZ1-only controls; retained synchronous mode supports export and comparisons.
 var scene_prebuffer_enabled := true
 var scene_hidden_fast_path := true
@@ -664,6 +665,7 @@ func _input(event: InputEvent) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if shell != null and shell.editing_shortcuts(): return
 	if inspection_busy: return
+	if event is InputEventKey and spectral_reconstruction != null and spectral_reconstruction.owns_keyboard_input(): return
 	var editor := get_viewport().gui_get_focus_owner()
 	if event is InputEventKey and (editor is LineEdit or editor is TextEdit or editor is SpinBox): return
 	if selection_controller != null and selection_controller.handle_input(event):get_viewport().set_input_as_handled();return
@@ -674,12 +676,14 @@ func _unhandled_input(event: InputEvent) -> void:
 			_toggle_fullscreen(); get_viewport().set_input_as_handled(); return
 		if mouse_button.button_index == MOUSE_BUTTON_LEFT:
 			if mouse_button.pressed:
+				if spectral_reconstruction != null: spectral_reconstruction.release_keyboard_focus()
 				var focused := get_viewport().gui_get_focus_owner()
 				if focused != null: focused.release_focus()
 				_clear_manual_navigation(false)
 			dragging = mouse_button.pressed
 			last_mouse = mouse_button.position
 		elif mouse_button.button_index == MOUSE_BUTTON_RIGHT and mouse_button.pressed and shell.edge_reveal.is_viewport_point(mouse_button.position) and not dragging:
+			if spectral_reconstruction != null: spectral_reconstruction.release_keyboard_focus()
 			var focused := get_viewport().gui_get_focus_owner()
 			if focused != null: focused.release_focus()
 			# RMB steering coexists with held roll and vertical translation.
@@ -734,8 +738,11 @@ func _clear_manual_navigation(clear_vertical: bool = true, clear_roll: bool = tr
 	# Focus loss, modal/recovery actions and capture replacement discard it.
 	if clear_vertical: camera_vertical_keys.clear()
 
+func _camera_input_has_focus_owner() -> bool:
+	return get_viewport().gui_get_focus_owner() != null or (spectral_reconstruction != null and spectral_reconstruction.owns_keyboard_input())
+
 func _camera_vertical_input_allowed() -> bool:
-	return not (offline_instance or inspection_busy or inspection_paused or shell.editing_shortcuts() or get_viewport().gui_get_focus_owner() != null or (shell.orbit_editor != null and shell.orbit_editor.visible)) and (free_camera or orbit_enabled)
+	return not (offline_instance or inspection_busy or inspection_paused or shell.editing_shortcuts() or _camera_input_has_focus_owner() or (shell.orbit_editor != null and shell.orbit_editor.visible)) and (free_camera or orbit_enabled)
 
 func _start_camera_vertical_move(action: String, event: InputEventKey) -> void:
 	if _camera_vertical_input_allowed(): camera_vertical_keys[action] = event.duplicate()
@@ -757,7 +764,7 @@ func _update_camera_vertical_keys() -> void:
 		if shell.shortcuts.active[action] != shell.shortcuts.binding(camera_vertical_keys[action]): camera_vertical_keys.erase(action)
 
 func _start_camera_roll(action: String, event: InputEventKey) -> void:
-	if offline_instance or inspection_busy or inspection_paused or dragging or shell.editing_shortcuts() or get_viewport().gui_get_focus_owner() != null: return
+	if offline_instance or inspection_busy or inspection_paused or dragging or shell.editing_shortcuts() or _camera_input_has_focus_owner(): return
 	if shell.orbit_editor != null and shell.orbit_editor.visible: return
 	# Match manual steering's Auto Orbit takeover, preserving Free Camera when
 	# Auto Orbit is already off. A disabled Free Camera does not accept roll.
@@ -776,7 +783,7 @@ func _release_camera_roll_key(event: InputEventKey) -> void:
 
 func _update_camera_roll(delta: float) -> void:
 	if camera_roll_keys.is_empty(): return
-	if offline_instance or inspection_busy or inspection_paused or not free_camera or dragging or shell.editing_shortcuts() or get_viewport().gui_get_focus_owner() != null or (shell.orbit_editor != null and shell.orbit_editor.visible):
+	if offline_instance or inspection_busy or inspection_paused or not free_camera or dragging or shell.editing_shortcuts() or _camera_input_has_focus_owner() or (shell.orbit_editor != null and shell.orbit_editor.visible):
 		camera_roll_keys.clear(); return
 	for action in camera_roll_keys.keys():
 		if shell.shortcuts.active[action] != shell.shortcuts.binding(camera_roll_keys[action]): camera_roll_keys.erase(action)
@@ -830,7 +837,7 @@ func _cursor_idle_tick(now_msec: int, eligible: bool) -> void:
 		_sync_cursor_mode()
 
 func _start_manual_orbit(action: String, event: InputEventKey) -> void:
-	if _camera_dragging() or get_viewport().gui_get_focus_owner() != null: return
+	if _camera_dragging() or _camera_input_has_focus_owner(): return
 	_take_manual_camera_control()
 	manual_orbit_keys[action] = event.duplicate()
 
@@ -846,7 +853,7 @@ func _release_manual_orbit_key(event: InputEventKey) -> void:
 
 func _update_manual_orbit(delta: float) -> void:
 	if manual_orbit_keys.is_empty(): return
-	if offline_instance or inspection_busy or inspection_paused or _camera_dragging() or shell.editing_shortcuts() or get_viewport().gui_get_focus_owner() != null:
+	if offline_instance or inspection_busy or inspection_paused or _camera_dragging() or shell.editing_shortcuts() or _camera_input_has_focus_owner():
 		_clear_manual_navigation(); return
 	for action in manual_orbit_keys.keys():
 		if shell.shortcuts.active[action] != shell.shortcuts.binding(manual_orbit_keys[action]): manual_orbit_keys.erase(action)
@@ -1207,8 +1214,13 @@ func _write_screenshot(preferred: String = "") -> void:
 	var path := directory.path_join("wavez-%s-%d-%04d.png" % [stamp, Time.get_ticks_usec(), screenshot_count])
 	while FileAccess.file_exists(path): path = path.get_basename() + "-1.png"
 	var result: Error = await _capture_inspection_png(path,screenshot_sidecar,true)
+	var capture_notice := status_label.text
 	screenshot_saving = false
-	_notify_screenshot("Saved " + path if result == OK else "Could not save PNG: " + path)
+	if result == OK and capture_notice.begins_with("Saved current reconstructed view"):
+		_notify_screenshot("Saved "+path+" with derived visual provenance JSON (not an inspection bundle).")
+	elif result != OK and (capture_notice.begins_with("Image export refused:") or capture_notice.begins_with("Reconstructed image export")):
+		_notify_screenshot(capture_notice)
+	else: _notify_screenshot("Saved " + path if result == OK else "Could not save PNG: " + path)
 
 func _notify_screenshot(message: String) -> void:
 	status_label.text = message
@@ -1461,6 +1473,8 @@ func _build_inspector_controls() -> void:
 	add_child(spatial_spectrum);spatial_spectrum.setup(self)
 	spectral_band_map = preload("res://analysis/spectral_band_map_controller.gd").new()
 	add_child(spectral_band_map);spectral_band_map.setup(self)
+	spectral_reconstruction = preload("res://analysis/spectral_reconstruction_controller.gd").new()
+	add_child(spectral_reconstruction);spectral_reconstruction.setup(self)
 	var export_box := _section("Capture / Export")
 	_button(export_box, "Save image…", _save_image)
 	_check(export_box,"PNG inspection JSON sidecar",false,func(v: bool): screenshot_sidecar = v).text = "Inspection sidecar"
@@ -1498,7 +1512,7 @@ func _step_frame(direction: int) -> void:
 func _move_free_camera(delta: float) -> void:
 	_update_camera_vertical_keys()
 	if shell != null and shell.editing_shortcuts(): return
-	if get_viewport().gui_get_focus_owner() != null: return
+	if _camera_input_has_focus_owner(): return
 	var vertical := float(camera_vertical_keys.has("move_camera_up")) - float(camera_vertical_keys.has("move_camera_down"))
 	var move := Vector3(float(Input.is_physical_key_pressed(KEY_D)) - float(Input.is_physical_key_pressed(KEY_A)), vertical, float(Input.is_physical_key_pressed(KEY_S)) - float(Input.is_physical_key_pressed(KEY_W)))
 	if move == Vector3.ZERO:return
@@ -1537,7 +1551,7 @@ func _release_camera_speed_key(event: InputEventKey) -> void:
 
 func _update_camera_speed_repeat(now_msec: int) -> void:
 	if camera_speed_hold_action.is_empty(): return
-	if offline_instance or inspection_busy or inspection_paused or (shell != null and shell.editing_shortcuts()) or get_viewport().gui_get_focus_owner() != null:
+	if offline_instance or inspection_busy or inspection_paused or (shell != null and shell.editing_shortcuts()) or _camera_input_has_focus_owner():
 		_clear_camera_speed_hold()
 		return
 	if now_msec < camera_speed_next_repeat_msec: return
@@ -1919,6 +1933,7 @@ func _sync_control_state_profiled() -> void:
 func _reset_inspection_source() -> void:
 	if spatial_spectrum != null: spatial_spectrum.reset_source()
 	if spectral_band_map != null: spectral_band_map.reset_source()
+	if spectral_reconstruction != null: spectral_reconstruction.reset_source()
 	if selection_controller != null:selection_controller.reset_source()
 	if scene_layers != null:
 		scene_layers.close();remove_child(scene_layers);scene_layers.queue_free();scene_layers = null
@@ -2243,6 +2258,10 @@ func _load_scientific_inspection(path: String) -> void:
 func _capture_inspection_png(path: String, with_state: bool, viewport_only: bool = false) -> Error:
 	_clear_manual_navigation()
 	if not viewport_only: shell.dismiss_orbit_editor()
+	if spectral_reconstruction != null:
+		var spectral: Dictionary = spectral_reconstruction.export_snapshot()
+		if not spectral.ok: status_label.text = "Image export refused: "+str(spectral.error); return ERR_BUSY
+		if spectral.active: return await _capture_spectral_image_png(path,spectral.snapshot)
 	if with_state and selection_controller != null and not selection_controller.state.definitions.is_empty():return await selection_controller.temporal.durable.capture_to(path,viewport_only)
 	if inspection_busy: return ERR_BUSY
 	if with_state and frame_a == null: return ERR_UNAVAILABLE
@@ -2278,9 +2297,57 @@ func _capture_inspection_png(path: String, with_state: bool, viewport_only: bool
 	inspection_busy = false
 	return result
 
+func _capture_spectral_image_png(path: String, snapshot: Dictionary) -> Error:
+	# A visual sidecar describes the derived scene; it is deliberately not a
+	# source-channel inspection recipe that would restore a different picture.
+	if inspection_busy: return ERR_BUSY
+	var metadata_path := path.get_basename()+".json"
+	if FileAccess.file_exists(path) or DirAccess.dir_exists_absolute(path) or FileAccess.file_exists(metadata_path) or DirAccess.dir_exists_absolute(metadata_path): return ERR_ALREADY_EXISTS
+	var staging := path+".partial-%d-%d.png" % [OS.get_process_id(),Time.get_ticks_usec()]
+	var metadata_staging := metadata_path+".partial-%d-%d" % [OS.get_process_id(),Time.get_ticks_usec()]
+	inspection_busy = true; spectral_reconstruction.begin_image_export()
+	var result := ERR_BUSY
+	var stable := false
+	for attempt in range(8):
+		_update_hud()
+		var before := _inspection_frame_fingerprint()
+		await get_tree().process_frame
+		RenderingServer.force_draw(false)
+		if before == _inspection_frame_fingerprint(): stable = true; break
+	var current: Dictionary = spectral_reconstruction.export_snapshot()
+	if stable and current.ok and current.active and current.snapshot == snapshot:
+		var image := _save_image_viewport()
+		current = spectral_reconstruction.export_snapshot()
+		if image != null and not image.is_empty() and current.ok and current.active and current.snapshot == snapshot:
+			var provenance: Dictionary = spectral_reconstruction.export_provenance(snapshot)
+			var metadata := {"kind":"wavez-visual-export","version":1,"source":snapshot.source.duplicate(true),"reconstruction":provenance,"visual":VisualState.snapshot(self),"sample":committed_sample.duplicate(true),"render":{"backend":RenderingServer.get_current_rendering_method(),"dimensions":[image.get_width(),image.get_height()]},"purpose":"Visual provenance only; not a restorable source-channel inspection recipe"}
+			result = image.save_png(staging)
+			if result == OK:
+				metadata.image = {"file":path.get_file(),"width":image.get_width(),"height":image.get_height(),"sha256":FileAccess.get_sha256(staging)}
+				result = preload("res://video/render_job.gd").write_json(metadata_staging,metadata)
+			if result == OK:
+				# Check the binding once more before either file is published.
+				current = spectral_reconstruction.export_snapshot()
+				if not current.ok or not current.active or current.snapshot != snapshot: result = ERR_BUSY
+			if result == OK:
+				result = preload("res://video/render_job.gd").publish(metadata_staging,metadata_path)
+				if result == OK:
+					result = preload("res://video/render_job.gd").publish(staging,path)
+					if result != OK: DirAccess.remove_absolute(metadata_path)
+	if FileAccess.file_exists(staging): DirAccess.remove_absolute(staging)
+	if FileAccess.file_exists(metadata_staging): DirAccess.remove_absolute(metadata_staging)
+	if FileAccess.file_exists(metadata_staging+".tmp"): DirAccess.remove_absolute(metadata_staging+".tmp")
+	inspection_busy = false; spectral_reconstruction.end_image_export()
+	status_label.text = "Saved current reconstructed view and visual provenance JSON; no scientific inspection bundle was created." if result == OK else "Reconstructed image export failed or its source/presentation changed; no substitute image was published."
+	return result
+
 # Read the current renderer and camera, excluding only application chrome. The
 # scientific legends live beside the shell and stay in the captured viewport.
 func _save_image_viewport() -> Image:
+	var spectral := {"ok":true,"active":false}
+	if spectral_reconstruction != null:
+		spectral = spectral_reconstruction.export_snapshot()
+		if not spectral.ok: status_label.text = "Image export refused: "+str(spectral.error); return null
 	var extent := get_viewport().get_visible_rect().size
 	# Fullscreen composition is independent of the controls used to invoke Save
 	# Image. Only windowed mode reserves crop space for visible chrome.
@@ -2310,7 +2377,10 @@ func _save_image_viewport() -> Image:
 	for window in windows: window.hide()
 	var chrome := [shell.empty,shell.open_error,shell.immersive_hint,overlay_panel,screenshot_notice,orbit_panel,orbit_guide,shell.shortcuts_editor]
 	if spatial_spectrum != null: chrome.append(spatial_spectrum.region_overlay)
+	var map_was_suspended: bool = spectral_band_map.presentation_suspended if spectral_band_map != null else false
 	if spectral_band_map != null: spectral_band_map.suspend_presentation()
+	var selection_overlay_visible: bool = spectral.active and selection_controller != null and selection_controller.overlay.visible
+	if selection_overlay_visible: selection_controller.overlay.hide()
 	var legend_available: Vector2 = shell.legend_available
 	if shell.immersive:
 		chrome.append_array([shell.bar,shell.dock,resize_handle,shell.bottom_strip])
@@ -2323,12 +2393,18 @@ func _save_image_viewport() -> Image:
 	RenderingServer.force_draw(false)
 	var image := get_viewport().get_texture().get_image()
 	for item in hidden: item.show()
-	if spectral_band_map != null: spectral_band_map.restore_presentation()
+	if spectral_band_map != null and not map_was_suspended: spectral_band_map.restore_presentation()
+	if selection_overlay_visible: selection_controller.overlay.show()
 	if shell.immersive: shell.layout_legend(legend_available)
 	for window in windows: window.show()
 	for control in focused:
 		if control.is_visible_in_tree(): control.grab_focus()
 	if image == null or image.is_empty(): return null
+	if spectral.active:
+		var after: Dictionary = spectral_reconstruction.export_snapshot()
+		if not after.ok or not after.active or after.snapshot != spectral.snapshot:
+			status_label.text = "Image export refused: the reconstructed source or presentation changed during capture."
+			return null
 	var scale := Vector2(image.get_size()) / extent
 	var crop := Rect2i(Vector2i(visible_area.position*scale),Vector2i(visible_area.size*scale))
 	return image.get_region(crop)
@@ -2346,7 +2422,7 @@ func _collect_embedded_windows(parent: Node, found: Array[Window]) -> void:
 		_collect_embedded_windows(child,found)
 
 func _inspection_frame_fingerprint() -> String:
-	return JSON.stringify([VisualState.snapshot(self),committed_sample,selection_controller.state.snapshot() if selection_controller != null and not selection_controller.state.definitions.is_empty() else {}],"",true,true)
+	return JSON.stringify([VisualState.snapshot(self),committed_sample,selection_controller.state.snapshot() if selection_controller != null and not selection_controller.state.definitions.is_empty() else {},spectral_reconstruction.presentation_fingerprint() if spectral_reconstruction != null else ""],"",true,true)
 
 func _set_timeline_extent() -> void:
 	var was_guarded := _timeline_guard
