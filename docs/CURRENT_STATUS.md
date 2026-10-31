@@ -1,5 +1,19 @@
 # Current status
 
+Issue #417 proposes candidate **v0.1.0.117**, based on accepted
+**v0.1.0.116** / owner-merged PR #416
+(`1afe36a3c31de5b5ba991e676e7a9ad856b36381`). **Tools → Spectral band map**
+adds explicit selected-native-record preparation and an owned, verified cache
+using the existing transactional analysis result store. At most eight maps are
+published atomically. Replay shows a map only at its exact prepared native time
+after the ordinary scene commits; missing or intermediate times hide the plane
+with an unavailable label. Spectral readiness neither gates playback nor extends
+the teal prepared timeline. The accepted single-time pinned map remains available.
+WVZ1/SWSS, scientific normalization and ordinary export contracts are unchanged.
+Owner review is pending. See [the workflow and limits](SPATIAL_BAND_MAP.md) and
+[focused evidence and owner checks](evidence/issue-417/README.md).
+Historical #135/#413/#415 review records below remain as written.
+
 Issue #415 proposes candidate **v0.1.0.116**, based on accepted
 **v0.1.0.115** / owner-merged PR #414
 (`40b00adb745e3a813069e148f6ccd8dd6e1fd147`). **Tools → Spectral band map**

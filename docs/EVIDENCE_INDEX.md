@@ -1,5 +1,10 @@
 # Retained evidence
 
+Issue #417's [selected-time spectral replay review](evidence/issue-417/README.md)
+records exact native cache/direct comparisons, transactional cache invalidation,
+source/restart costs, source/package replay checks and remaining limitations.
+The #135/#413/#415 records remain unchanged.
+
 Issue #415's [viewport spectral band-map review](evidence/issue-415/README.md)
 records independent center-value oracles, actual Model A comparisons, bounded
 batch costs, source/package Forward+ checks and exact owner inputs. Low-frequency

@@ -1,0 +1,3790 @@
+{
+  "exit_code": 0,
+  "seconds": 38.66465519899975,
+  "packaged": true,
+  "headless": false,
+  "source_hashes": {
+    "active-sequence.wvz": "cc04d49127e264d00b33a76a5b390b1e21c55f2ede352f40d608022da1693d82",
+    "other.wvz": "d4d720ca708c1bf1d4c5ffc5f707fb593fdbd0d4627308831184a00acf2e43dd",
+    "sequence.wvz": "14937dab8b8aed343c71a87d366c080620635371e91b889fe0b0ee4d3d1ea607"
+  },
+  "sources_unchanged": true,
+  "result": {
+    "checks": 82,
+    "device": "NVIDIA GeForce RTX 3070 Ti",
+    "display": "X11",
+    "failures": [],
+    "renderer": "forward_plus",
+    "observations": {
+      "append_boundary": {
+        "maps": 0,
+        "pending_id": "",
+        "status": "Source bytes changed before preparation. Let the capture refresh, then reopen Spectral band map.",
+        "worker_pid": -1
+      },
+      "cancel_ack_ms": 61.331,
+      "cancel_callback_ms": 1.019,
+      "cancel_progress": {
+        "completed": 1.0,
+        "id": "107114-b9",
+        "stage": "band_map_centers",
+        "total": 64.0
+      },
+      "different_source": {
+        "callback_ms": 5.769,
+        "roundtrip_ms": 238.521,
+        "source": {
+          "committed_bytes": "3542015",
+          "complete_records": 4.0,
+          "format": "WVZ1",
+          "path": "/tmp/wavez-417-sequence-package/other.wvz",
+          "sha256": "d4d720ca708c1bf1d4c5ffc5f707fb593fdbd0d4627308831184a00acf2e43dd",
+          "uuid": "78bce385f2f24c56960d19f104b893eb"
+        },
+        "status": "Verified 3-map sequence prepared and cached. Exact native times only; missing times hide the map.",
+        "sequence": {
+          "admission": {
+            "centers_per_time": 25.0,
+            "reply_limit_bytes": 1048576.0,
+            "result_reservation_bytes": 2097152.0,
+            "selected_times": 3.0,
+            "total_centers": 75.0,
+            "workspace_bytes": 80780790.0
+          },
+          "cache": {
+            "entry_count": 2.0,
+            "hit": false,
+            "limit_bytes": 67108864.0,
+            "policy": "exact selected sequence",
+            "stored_bytes": 55927.0
+          },
+          "indices": [
+            0.0,
+            1.0,
+            2.0
+          ],
+          "kind": "spectral_band_sequence",
+          "provenance": {
+            "implementation_sha256": "d80d30f2e998adedc21a3866dc99515a740e453982be9b2d9a27dc53976ca55a",
+            "numpy": "2.4.3",
+            "source_policy": "verified committed prefix; appended extents miss; no path/UUID-only reuse",
+            "storage": "existing ResultCache manifest and support artifacts; atomic complete selection",
+            "worker": {
+              "analysis_code_sha256": "d508da76d9c7e2ba7e4ae34d7c77a98f7462f15fd0345d588e4dcea7fcd43eeb",
+              "policy": "private file transport; one computation at a time",
+              "worker": "tools/analyze_selection.py"
+            }
+          },
+          "request_key": "39c0035db64cae3ef8e5db0ed850778f0d8e30325bebc10ae34037683e73130a",
+          "schema": 1.0,
+          "timings": {
+            "lookup_seconds": 0.00058026000078825,
+            "prepare_seconds": 0.01749217200085695,
+            "verification_open_seconds": 0.00378893099878041
+          }
+        },
+        "maps": [
+          {
+            "record": {
+              "index": 0.0,
+              "native_time": {
+                "f64_le_hex": "0000000000000000",
+                "text": "0"
+              },
+              "requested_time": {
+                "f64_le_hex": "0000000000000000",
+                "text": "0"
+              },
+              "sampling": "exact",
+              "sequence": 0.0
+            },
+            "request_key": "8068d75bfa44e0a8124f7da4db5aafe6d448d263306d9faba7551a994fa535ba",
+            "coverage": {
+              "mask": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                true,
+                true,
+                true,
+                false,
+                false,
+                true,
+                true,
+                true,
+                false,
+                false,
+                true,
+                true,
+                true,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+              ],
+              "measured": 9.0,
+              "total": 25.0,
+              "unavailable": 16.0
+            },
+            "support": {
+              "axis_order": "zyx",
+              "bounds": "complete finite source samples only; no padding or wrap",
+              "center_span_xyz": [
+                3.75,
+                5.625,
+                7.5
+              ],
+              "criterion": "at least two cycles of the low band edge on every axis; heuristic, not a resolution guarantee",
+              "cycles_xyz": [
+                1.6,
+                2.4000000000000004,
+                3.2
+              ],
+              "df_xyz": [
+                0.25,
+                0.16666666666666666,
+                0.125
+              ],
+              "extent_xyz": [
+                4.0,
+                6.0,
+                8.0
+              ],
+              "minimum_frequency": 0.4,
+              "shape": [
+                16.0,
+                16.0,
+                16.0
+              ],
+              "status": "insufficient_support"
+            },
+            "grid": {
+              "centers": "integer window starts + (support - 1)/2; no half-cell offset",
+              "column_axis": "x",
+              "coordinate_space": "data_local",
+              "count": [
+                5.0,
+                5.0
+              ],
+              "fixed_start": 16.0,
+              "hop": [
+                12.0,
+                12.0
+              ],
+              "order": "row-major; remaining source z,y,x axes",
+              "plane_axis": "z",
+              "row_axis": "y",
+              "shape": [
+                5.0,
+                5.0
+              ],
+              "start": [
+                -8.0,
+                -8.0
+              ]
+            },
+            "units": {
+              "frequency": "cycles / (dimensionless)",
+              "position": "dimensionless",
+              "power": "(dimensionless)^2",
+              "value": "dimensionless"
+            },
+            "timings": {
+              "batch_seconds": 0.00430858000072476,
+              "calculation_seconds": 0.00210808400333917,
+              "decode_seconds": 0.00091278500076441,
+              "decoded_samples": 1.0,
+              "fft_seconds": 0.00113795799552463,
+              "reduction_seconds": 0.00203749300089839
+            },
+            "workspace_bytes": 4456448.0,
+            "power_min": 0.7037884533007612,
+            "power_max": 5.511927981605451,
+            "numerical_sha256": "1cfbd95f46b63bd8aba575bacf9d77fbe611e398309a0cf0ea165f160e2a74e7"
+          },
+          {
+            "record": {
+              "index": 1.0,
+              "native_time": {
+                "f64_le_hex": "0000000000000040",
+                "text": "2"
+              },
+              "requested_time": {
+                "f64_le_hex": "0000000000000040",
+                "text": "2"
+              },
+              "sampling": "exact",
+              "sequence": 1.0
+            },
+            "request_key": "61a6ffbbd22118caf1fca2e466d339e7d619ec2e1d43d5155e38de47c1404ec9",
+            "coverage": {
+              "mask": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                true,
+                true,
+                true,
+                false,
+                false,
+                true,
+                true,
+                true,
+                false,
+                false,
+                true,
+                true,
+                true,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+              ],
+              "measured": 9.0,
+              "total": 25.0,
+              "unavailable": 16.0
+            },
+            "support": {
+              "axis_order": "zyx",
+              "bounds": "complete finite source samples only; no padding or wrap",
+              "center_span_xyz": [
+                3.75,
+                5.625,
+                7.5
+              ],
+              "criterion": "at least two cycles of the low band edge on every axis; heuristic, not a resolution guarantee",
+              "cycles_xyz": [
+                1.6,
+                2.4000000000000004,
+                3.2
+              ],
+              "df_xyz": [
+                0.25,
+                0.16666666666666666,
+                0.125
+              ],
+              "extent_xyz": [
+                4.0,
+                6.0,
+                8.0
+              ],
+              "minimum_frequency": 0.4,
+              "shape": [
+                16.0,
+                16.0,
+                16.0
+              ],
+              "status": "insufficient_support"
+            },
+            "grid": {
+              "centers": "integer window starts + (support - 1)/2; no half-cell offset",
+              "column_axis": "x",
+              "coordinate_space": "data_local",
+              "count": [
+                5.0,
+                5.0
+              ],
+              "fixed_start": 16.0,
+              "hop": [
+                12.0,
+                12.0
+              ],
+              "order": "row-major; remaining source z,y,x axes",
+              "plane_axis": "z",
+              "row_axis": "y",
+              "shape": [
+                5.0,
+                5.0
+              ],
+              "start": [
+                -8.0,
+                -8.0
+              ]
+            },
+            "units": {
+              "frequency": "cycles / (dimensionless)",
+              "position": "dimensionless",
+              "power": "(dimensionless)^2",
+              "value": "dimensionless"
+            },
+            "timings": {
+              "batch_seconds": 0.00279536500056565,
+              "calculation_seconds": 0.0013309020014276,
+              "decode_seconds": 0.00121960999967996,
+              "decoded_samples": 1.0,
+              "fft_seconds": 0.00039074600135791,
+              "reduction_seconds": 0.00131782000244129
+            },
+            "workspace_bytes": 4456448.0,
+            "power_min": 2.815153813203045,
+            "power_max": 22.047711926421805,
+            "numerical_sha256": "2c8e22aef0781d7a1f6bbde205c8118cdc1c33c168aeb294686cca5a805f0734"
+          },
+          {
+            "record": {
+              "index": 2.0,
+              "native_time": {
+                "f64_le_hex": "0000000000001040",
+                "text": "4"
+              },
+              "requested_time": {
+                "f64_le_hex": "0000000000001040",
+                "text": "4"
+              },
+              "sampling": "exact",
+              "sequence": 2.0
+            },
+            "request_key": "aa41e6d6b71326d5fc10607d4039a4f098fee4baf2e0ecb2447490d11264898c",
+            "coverage": {
+              "mask": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                true,
+                true,
+                true,
+                false,
+                false,
+                true,
+                true,
+                true,
+                false,
+                false,
+                true,
+                true,
+                true,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+              ],
+              "measured": 9.0,
+              "total": 25.0,
+              "unavailable": 16.0
+            },
+            "support": {
+              "axis_order": "zyx",
+              "bounds": "complete finite source samples only; no padding or wrap",
+              "center_span_xyz": [
+                3.75,
+                5.625,
+                7.5
+              ],
+              "criterion": "at least two cycles of the low band edge on every axis; heuristic, not a resolution guarantee",
+              "cycles_xyz": [
+                1.6,
+                2.4000000000000004,
+                3.2
+              ],
+              "df_xyz": [
+                0.25,
+                0.16666666666666666,
+                0.125
+              ],
+              "extent_xyz": [
+                4.0,
+                6.0,
+                8.0
+              ],
+              "minimum_frequency": 0.4,
+              "shape": [
+                16.0,
+                16.0,
+                16.0
+              ],
+              "status": "insufficient_support"
+            },
+            "grid": {
+              "centers": "integer window starts + (support - 1)/2; no half-cell offset",
+              "column_axis": "x",
+              "coordinate_space": "data_local",
+              "count": [
+                5.0,
+                5.0
+              ],
+              "fixed_start": 16.0,
+              "hop": [
+                12.0,
+                12.0
+              ],
+              "order": "row-major; remaining source z,y,x axes",
+              "plane_axis": "z",
+              "row_axis": "y",
+              "shape": [
+                5.0,
+                5.0
+              ],
+              "start": [
+                -8.0,
+                -8.0
+              ]
+            },
+            "units": {
+              "frequency": "cycles / (dimensionless)",
+              "position": "dimensionless",
+              "power": "(dimensionless)^2",
+              "value": "dimensionless"
+            },
+            "timings": {
+              "batch_seconds": 0.00309143000049516,
+              "calculation_seconds": 0.00125062900406192,
+              "decode_seconds": 0.00095975499971245,
+              "decoded_samples": 1.0,
+              "fft_seconds": 0.00038165499609021,
+              "reduction_seconds": 0.0016879289978533
+            },
+            "workspace_bytes": 4456448.0,
+            "power_min": 0.10538787818897186,
+            "power_max": 1.0670424476336495,
+            "numerical_sha256": "1b649f6151c865bde43738b8e610158285182f0cae1c1e46b1868b96f7e7bee8"
+          }
+        ],
+        "worker": {
+          "ok": true,
+          "metrics": {
+            "charged_bytes": 2129920.0,
+            "cpu_seconds": 0.02263771,
+            "decoded_bytes": 2654208.0,
+            "peak_charged_bytes": 32349686.0,
+            "read_bytes": 6199302.0,
+            "seconds": 0.02435564299958059
+          },
+          "memory": {
+            "VmHWM": 43343872.0,
+            "VmPeak": 389189632.0,
+            "VmRSS": 43343872.0,
+            "VmSize": 389189632.0
+          },
+          "guard": {
+            "baseline": {
+              "VmHWM": 41320448.0,
+              "VmPeak": 386727936.0,
+              "VmRSS": 41320448.0,
+              "VmSize": 386727936.0
+            },
+            "ceiling_bytes": 2147483648.0,
+            "enabled": true,
+            "reason": "runtime plus 1 GiB workspace and 256 MiB overhead fit"
+          },
+          "shared_memory": {
+            "limit": 536870912.0,
+            "peak": 32349686.0,
+            "used": 2129920.0
+          },
+          "verification_memo": {
+            "charged_bytes": 2880.0,
+            "entries": 2.0,
+            "evictions": 0.0,
+            "hits": 5.0,
+            "limit_bytes": 4194304.0,
+            "peak_bytes": 2880.0
+          },
+          "playback_pressure": {
+            "pauses": 0.0,
+            "seconds": 0.0
+          }
+        }
+      },
+      "forward": {
+        "finish": 1.0972222222222205,
+        "frames": 68,
+        "loop": false,
+        "reverse": false,
+        "safe": true,
+        "start": 0.2
+      },
+      "loop": {
+        "finish": 0.7198461904761917,
+        "frames": 69,
+        "loop": true,
+        "reverse": false,
+        "safe": true,
+        "start": 5.8
+      },
+      "model_baseline": {
+        "engine_buffer_bytes": 27200900.0,
+        "engine_static_bytes": 0,
+        "engine_texture_bytes": 147011584.0,
+        "engine_video_bytes": 235424000.0,
+        "frames": 90,
+        "max_fps": 60,
+        "mean_fps": 59.94668741266099,
+        "plane_payload_bytes": 124,
+        "render_cpu_ms": {
+          "max": 0.6990000009536743,
+          "mean": 0.135644445154402,
+          "median": 0.12700000405311584,
+          "min": 0.10199999809265137,
+          "p95": 0.1770000010728836
+        },
+        "render_gpu_ms": {
+          "max": 0.42500001192092896,
+          "mean": 0.4011888904703988,
+          "median": 0.4009999930858612,
+          "min": 0.382999986410141,
+          "p95": 0.41600000858306885
+        },
+        "resolution": [
+          1440,
+          900
+        ],
+        "vsync": 1,
+        "wall_ms": {
+          "max": 19.557,
+          "mean": 16.681488888888893,
+          "median": 16.694,
+          "min": 13.73,
+          "p95": 17.277
+        }
+      },
+      "model_first": {
+        "callback_ms": 5.36,
+        "roundtrip_ms": 4117.163,
+        "source": {
+          "committed_bytes": "6965545431",
+          "complete_records": 82.0,
+          "format": "WVZ1",
+          "path": "/home/Nozba/Documents/Dev/Sims/Model-A/outputs/run_20261030T193414164759Z_b3a4a787cae945b0909004cac75740ca/model_a_20261030T193414164759Z_b3a4a787cae945b0909004cac75740ca.wvz",
+          "sha256": "1af76f2e5e0642808f33119168d8f5e0c7cc847599e414790923c2c3585e3d7d",
+          "uuid": "5848557b4ddd4d56b48e62f9f5700b23"
+        },
+        "status": "Verified 3-map sequence prepared and cached. Exact native times only; missing times hide the map.",
+        "sequence": {
+          "admission": {
+            "centers_per_time": 1.0,
+            "reply_limit_bytes": 1048576.0,
+            "result_reservation_bytes": 2097152.0,
+            "selected_times": 3.0,
+            "total_centers": 3.0,
+            "workspace_bytes": 336421261.0
+          },
+          "cache": {
+            "entry_count": 4.0,
+            "hit": false,
+            "limit_bytes": 67108864.0,
+            "policy": "exact selected sequence",
+            "stored_bytes": 17407.0
+          },
+          "indices": [
+            20.0,
+            21.0,
+            22.0
+          ],
+          "kind": "spectral_band_sequence",
+          "provenance": {
+            "implementation_sha256": "d80d30f2e998adedc21a3866dc99515a740e453982be9b2d9a27dc53976ca55a",
+            "numpy": "2.4.3",
+            "source_policy": "verified committed prefix; appended extents miss; no path/UUID-only reuse",
+            "storage": "existing ResultCache manifest and support artifacts; atomic complete selection",
+            "worker": {
+              "analysis_code_sha256": "d508da76d9c7e2ba7e4ae34d7c77a98f7462f15fd0345d588e4dcea7fcd43eeb",
+              "policy": "private file transport; one computation at a time",
+              "worker": "tools/analyze_selection.py"
+            }
+          },
+          "request_key": "c090aecf529b03ee33093f67496b9b0d3d2a88ec47aefc094bacee3e41a30aa4",
+          "schema": 1.0,
+          "timings": {
+            "lookup_seconds": 0.00134917200011841,
+            "prepare_seconds": 0.43316915099967446,
+            "verification_open_seconds": 3.427150548001009
+          }
+        },
+        "maps": [
+          {
+            "record": {
+              "index": 20.0,
+              "native_time": {
+                "f64_le_hex": "0000000000003440",
+                "text": "20"
+              },
+              "requested_time": {
+                "f64_le_hex": "0000000000003440",
+                "text": "20"
+              },
+              "sampling": "exact",
+              "sequence": 40.0
+            },
+            "request_key": "8450d9be6b2469ece165d81f892e2a5c3153dabb6ecaaf52c86626cc917a309d",
+            "coverage": {
+              "mask": [
+                true
+              ],
+              "measured": 1.0,
+              "total": 1.0,
+              "unavailable": 0.0
+            },
+            "support": {
+              "axis_order": "zyx",
+              "bounds": "complete finite source samples only; no padding or wrap",
+              "center_span_xyz": [
+                21.166666666666664,
+                21.166666666666664,
+                21.166666666666664
+              ],
+              "criterion": "at least two cycles of the low band edge on every axis; heuristic, not a resolution guarantee",
+              "cycles_xyz": [
+                1.0666666666666669,
+                1.0666666666666669,
+                1.0666666666666669
+              ],
+              "df_xyz": [
+                0.046875,
+                0.046875,
+                0.046875
+              ],
+              "extent_xyz": [
+                21.333333333333332,
+                21.333333333333332,
+                21.333333333333332
+              ],
+              "minimum_frequency": 0.05,
+              "shape": [
+                128.0,
+                128.0,
+                128.0
+              ],
+              "status": "insufficient_support"
+            },
+            "grid": {
+              "centers": "integer window starts + (support - 1)/2; no half-cell offset",
+              "column_axis": "x",
+              "coordinate_space": "data_local",
+              "count": [
+                1.0,
+                1.0
+              ],
+              "fixed_start": 32.0,
+              "hop": [
+                32.0,
+                32.0
+              ],
+              "order": "row-major; remaining source z,y,x axes",
+              "plane_axis": "z",
+              "row_axis": "y",
+              "shape": [
+                1.0,
+                1.0
+              ],
+              "start": [
+                32.0,
+                32.0
+              ]
+            },
+            "units": {
+              "frequency": "cycles / source-coordinate unit (unknown)",
+              "position": "unknown",
+              "power": "squared channel units (unknown)",
+              "value": "unknown"
+            },
+            "timings": {
+              "batch_seconds": 0.05015903800085652,
+              "calculation_seconds": 0.04227708100006566,
+              "decode_seconds": 0.09982742899956064,
+              "decoded_samples": 1.0,
+              "fft_seconds": 0.01819055299893079,
+              "reduction_seconds": 0.00785023699972953
+            },
+            "workspace_bytes": 138412032.0,
+            "power_min": 0.11167508427802404,
+            "power_max": 0.11167508427802404,
+            "numerical_sha256": "774b9918bd30cd826ba732cad1a66aa26f71b957555bd01444a5fde0b87a209f"
+          },
+          {
+            "record": {
+              "index": 21.0,
+              "native_time": {
+                "f64_le_hex": "0000000000003540",
+                "text": "21"
+              },
+              "requested_time": {
+                "f64_le_hex": "0000000000003540",
+                "text": "21"
+              },
+              "sampling": "exact",
+              "sequence": 42.0
+            },
+            "request_key": "d83be8c2ff0da7cd2c690af5e9c3fcf0e5f535b1b18d7479648f44cfa7a9454a",
+            "coverage": {
+              "mask": [
+                true
+              ],
+              "measured": 1.0,
+              "total": 1.0,
+              "unavailable": 0.0
+            },
+            "support": {
+              "axis_order": "zyx",
+              "bounds": "complete finite source samples only; no padding or wrap",
+              "center_span_xyz": [
+                21.166666666666664,
+                21.166666666666664,
+                21.166666666666664
+              ],
+              "criterion": "at least two cycles of the low band edge on every axis; heuristic, not a resolution guarantee",
+              "cycles_xyz": [
+                1.0666666666666669,
+                1.0666666666666669,
+                1.0666666666666669
+              ],
+              "df_xyz": [
+                0.046875,
+                0.046875,
+                0.046875
+              ],
+              "extent_xyz": [
+                21.333333333333332,
+                21.333333333333332,
+                21.333333333333332
+              ],
+              "minimum_frequency": 0.05,
+              "shape": [
+                128.0,
+                128.0,
+                128.0
+              ],
+              "status": "insufficient_support"
+            },
+            "grid": {
+              "centers": "integer window starts + (support - 1)/2; no half-cell offset",
+              "column_axis": "x",
+              "coordinate_space": "data_local",
+              "count": [
+                1.0,
+                1.0
+              ],
+              "fixed_start": 32.0,
+              "hop": [
+                32.0,
+                32.0
+              ],
+              "order": "row-major; remaining source z,y,x axes",
+              "plane_axis": "z",
+              "row_axis": "y",
+              "shape": [
+                1.0,
+                1.0
+              ],
+              "start": [
+                32.0,
+                32.0
+              ]
+            },
+            "units": {
+              "frequency": "cycles / source-coordinate unit (unknown)",
+              "position": "unknown",
+              "power": "squared channel units (unknown)",
+              "value": "unknown"
+            },
+            "timings": {
+              "batch_seconds": 0.04130050599997048,
+              "calculation_seconds": 0.03277395800068916,
+              "decode_seconds": 0.0891986269998597,
+              "decoded_samples": 1.0,
+              "fft_seconds": 0.01388051399953838,
+              "reduction_seconds": 0.00776783499895827
+            },
+            "workspace_bytes": 138412032.0,
+            "power_min": 0.04726356609573469,
+            "power_max": 0.04726356609573469,
+            "numerical_sha256": "b1e6736f1b9502a8a412e6f1c1146977377464ac0ded0d91be89f658163032f5"
+          },
+          {
+            "record": {
+              "index": 22.0,
+              "native_time": {
+                "f64_le_hex": "0000000000003640",
+                "text": "22"
+              },
+              "requested_time": {
+                "f64_le_hex": "0000000000003640",
+                "text": "22"
+              },
+              "sampling": "exact",
+              "sequence": 44.0
+            },
+            "request_key": "44831aada9bc8f724aea896ee3fe0a22e3ca480491dacf497303afb21af42c70",
+            "coverage": {
+              "mask": [
+                true
+              ],
+              "measured": 1.0,
+              "total": 1.0,
+              "unavailable": 0.0
+            },
+            "support": {
+              "axis_order": "zyx",
+              "bounds": "complete finite source samples only; no padding or wrap",
+              "center_span_xyz": [
+                21.166666666666664,
+                21.166666666666664,
+                21.166666666666664
+              ],
+              "criterion": "at least two cycles of the low band edge on every axis; heuristic, not a resolution guarantee",
+              "cycles_xyz": [
+                1.0666666666666669,
+                1.0666666666666669,
+                1.0666666666666669
+              ],
+              "df_xyz": [
+                0.046875,
+                0.046875,
+                0.046875
+              ],
+              "extent_xyz": [
+                21.333333333333332,
+                21.333333333333332,
+                21.333333333333332
+              ],
+              "minimum_frequency": 0.05,
+              "shape": [
+                128.0,
+                128.0,
+                128.0
+              ],
+              "status": "insufficient_support"
+            },
+            "grid": {
+              "centers": "integer window starts + (support - 1)/2; no half-cell offset",
+              "column_axis": "x",
+              "coordinate_space": "data_local",
+              "count": [
+                1.0,
+                1.0
+              ],
+              "fixed_start": 32.0,
+              "hop": [
+                32.0,
+                32.0
+              ],
+              "order": "row-major; remaining source z,y,x axes",
+              "plane_axis": "z",
+              "row_axis": "y",
+              "shape": [
+                1.0,
+                1.0
+              ],
+              "start": [
+                32.0,
+                32.0
+              ]
+            },
+            "units": {
+              "frequency": "cycles / source-coordinate unit (unknown)",
+              "position": "unknown",
+              "power": "squared channel units (unknown)",
+              "value": "unknown"
+            },
+            "timings": {
+              "batch_seconds": 0.04229429099905246,
+              "calculation_seconds": 0.03259583500039298,
+              "decode_seconds": 0.09758365199922991,
+              "decoded_samples": 1.0,
+              "fft_seconds": 0.01399187500101106,
+              "reduction_seconds": 0.00828890400043747
+            },
+            "workspace_bytes": 138412032.0,
+            "power_min": 0.18092946046468952,
+            "power_max": 0.18092946046468952,
+            "numerical_sha256": "f0ee7e85be627f04c4d4c61312002b7f179560f3c103fa5a91be05c30d53777f"
+          }
+        ],
+        "worker": {
+          "ok": true,
+          "metrics": {
+            "charged_bytes": 2129920.0,
+            "cpu_seconds": 3.757386242,
+            "decoded_bytes": 169869312.0,
+            "peak_charged_bytes": 335405453.0,
+            "read_bytes": 7135914422.0,
+            "seconds": 3.8641405700000178
+          },
+          "memory": {
+            "VmHWM": 167137280.0,
+            "VmPeak": 512327680.0,
+            "VmRSS": 43896832.0,
+            "VmSize": 389234688.0
+          },
+          "guard": {
+            "baseline": {
+              "VmHWM": 41271296.0,
+              "VmPeak": 386727936.0,
+              "VmRSS": 41271296.0,
+              "VmSize": 386727936.0
+            },
+            "ceiling_bytes": 2147483648.0,
+            "enabled": true,
+            "reason": "runtime plus 1 GiB workspace and 256 MiB overhead fit"
+          },
+          "shared_memory": {
+            "limit": 536870912.0,
+            "peak": 335405453.0,
+            "used": 2129920.0
+          },
+          "verification_memo": {
+            "charged_bytes": 4016.0,
+            "entries": 2.0,
+            "evictions": 0.0,
+            "hits": 5.0,
+            "limit_bytes": 4194304.0,
+            "peak_bytes": 4016.0
+          },
+          "playback_pressure": {
+            "pauses": 0.0,
+            "seconds": 0.0
+          }
+        }
+      },
+      "model_prepared": {
+        "engine_buffer_bytes": 27200900.0,
+        "engine_static_bytes": 0,
+        "engine_texture_bytes": 147011584.0,
+        "engine_video_bytes": 235424000.0,
+        "frames": 90,
+        "max_fps": 60,
+        "mean_fps": 59.87255129580833,
+        "plane_payload_bytes": 124,
+        "render_cpu_ms": {
+          "max": 0.22599999606609344,
+          "mean": 0.15056666706999142,
+          "median": 0.1459999978542328,
+          "min": 0.09200000017881393,
+          "p95": 0.20399999618530273
+        },
+        "render_gpu_ms": {
+          "max": 2.1730000972747803,
+          "mean": 1.0185222225056754,
+          "median": 1.0379999876022339,
+          "min": 0.40400001406669617,
+          "p95": 1.5800000429153442
+        },
+        "resolution": [
+          1440,
+          900
+        ],
+        "vsync": 1,
+        "wall_ms": {
+          "max": 19.905,
+          "mean": 16.702144444444443,
+          "median": 16.64,
+          "min": 12.975,
+          "p95": 17.469
+        }
+      },
+      "model_reopened": {
+        "callback_ms": 6.697,
+        "roundtrip_ms": 3648.144,
+        "source": {
+          "committed_bytes": "6965545431",
+          "complete_records": 82.0,
+          "format": "WVZ1",
+          "path": "/home/Nozba/Documents/Dev/Sims/Model-A/outputs/run_20261030T193414164759Z_b3a4a787cae945b0909004cac75740ca/model_a_20261030T193414164759Z_b3a4a787cae945b0909004cac75740ca.wvz",
+          "sha256": "1af76f2e5e0642808f33119168d8f5e0c7cc847599e414790923c2c3585e3d7d",
+          "uuid": "5848557b4ddd4d56b48e62f9f5700b23"
+        },
+        "status": "Verified 3-map sequence reused from cache. Exact native times only; missing times hide the map.",
+        "sequence": {
+          "admission": {
+            "centers_per_time": 1.0,
+            "reply_limit_bytes": 1048576.0,
+            "result_reservation_bytes": 2097152.0,
+            "selected_times": 3.0,
+            "total_centers": 3.0,
+            "workspace_bytes": 336421261.0
+          },
+          "cache": {
+            "entry_count": 4.0,
+            "hit": true,
+            "limit_bytes": 67108864.0,
+            "policy": "exact selected sequence",
+            "stored_bytes": 17407.0
+          },
+          "indices": [
+            20.0,
+            21.0,
+            22.0
+          ],
+          "kind": "spectral_band_sequence",
+          "provenance": {
+            "implementation_sha256": "d80d30f2e998adedc21a3866dc99515a740e453982be9b2d9a27dc53976ca55a",
+            "numpy": "2.4.3",
+            "source_policy": "verified committed prefix; appended extents miss; no path/UUID-only reuse",
+            "storage": "existing ResultCache manifest and support artifacts; atomic complete selection",
+            "worker": {
+              "analysis_code_sha256": "d508da76d9c7e2ba7e4ae34d7c77a98f7462f15fd0345d588e4dcea7fcd43eeb",
+              "policy": "private file transport; one computation at a time",
+              "worker": "tools/analyze_selection.py"
+            }
+          },
+          "request_key": "c090aecf529b03ee33093f67496b9b0d3d2a88ec47aefc094bacee3e41a30aa4",
+          "schema": 1.0,
+          "timings": {
+            "lookup_seconds": 0.00222054599908005,
+            "prepare_seconds": 2.7039999622502364e-05,
+            "verification_open_seconds": 3.4315390400006436
+          }
+        },
+        "maps": [
+          {
+            "record": {
+              "index": 20.0,
+              "native_time": {
+                "f64_le_hex": "0000000000003440",
+                "text": "20"
+              },
+              "requested_time": {
+                "f64_le_hex": "0000000000003440",
+                "text": "20"
+              },
+              "sampling": "exact",
+              "sequence": 40.0
+            },
+            "request_key": "8450d9be6b2469ece165d81f892e2a5c3153dabb6ecaaf52c86626cc917a309d",
+            "coverage": {
+              "mask": [
+                true
+              ],
+              "measured": 1.0,
+              "total": 1.0,
+              "unavailable": 0.0
+            },
+            "support": {
+              "axis_order": "zyx",
+              "bounds": "complete finite source samples only; no padding or wrap",
+              "center_span_xyz": [
+                21.166666666666664,
+                21.166666666666664,
+                21.166666666666664
+              ],
+              "criterion": "at least two cycles of the low band edge on every axis; heuristic, not a resolution guarantee",
+              "cycles_xyz": [
+                1.0666666666666669,
+                1.0666666666666669,
+                1.0666666666666669
+              ],
+              "df_xyz": [
+                0.046875,
+                0.046875,
+                0.046875
+              ],
+              "extent_xyz": [
+                21.333333333333332,
+                21.333333333333332,
+                21.333333333333332
+              ],
+              "minimum_frequency": 0.05,
+              "shape": [
+                128.0,
+                128.0,
+                128.0
+              ],
+              "status": "insufficient_support"
+            },
+            "grid": {
+              "centers": "integer window starts + (support - 1)/2; no half-cell offset",
+              "column_axis": "x",
+              "coordinate_space": "data_local",
+              "count": [
+                1.0,
+                1.0
+              ],
+              "fixed_start": 32.0,
+              "hop": [
+                32.0,
+                32.0
+              ],
+              "order": "row-major; remaining source z,y,x axes",
+              "plane_axis": "z",
+              "row_axis": "y",
+              "shape": [
+                1.0,
+                1.0
+              ],
+              "start": [
+                32.0,
+                32.0
+              ]
+            },
+            "units": {
+              "frequency": "cycles / source-coordinate unit (unknown)",
+              "position": "unknown",
+              "power": "squared channel units (unknown)",
+              "value": "unknown"
+            },
+            "timings": {
+              "batch_seconds": 0.05015903800085652,
+              "calculation_seconds": 0.04227708100006566,
+              "decode_seconds": 0.09982742899956064,
+              "decoded_samples": 1.0,
+              "fft_seconds": 0.01819055299893079,
+              "reduction_seconds": 0.00785023699972953
+            },
+            "workspace_bytes": 138412032.0,
+            "power_min": 0.11167508427802404,
+            "power_max": 0.11167508427802404,
+            "numerical_sha256": "774b9918bd30cd826ba732cad1a66aa26f71b957555bd01444a5fde0b87a209f"
+          },
+          {
+            "record": {
+              "index": 21.0,
+              "native_time": {
+                "f64_le_hex": "0000000000003540",
+                "text": "21"
+              },
+              "requested_time": {
+                "f64_le_hex": "0000000000003540",
+                "text": "21"
+              },
+              "sampling": "exact",
+              "sequence": 42.0
+            },
+            "request_key": "d83be8c2ff0da7cd2c690af5e9c3fcf0e5f535b1b18d7479648f44cfa7a9454a",
+            "coverage": {
+              "mask": [
+                true
+              ],
+              "measured": 1.0,
+              "total": 1.0,
+              "unavailable": 0.0
+            },
+            "support": {
+              "axis_order": "zyx",
+              "bounds": "complete finite source samples only; no padding or wrap",
+              "center_span_xyz": [
+                21.166666666666664,
+                21.166666666666664,
+                21.166666666666664
+              ],
+              "criterion": "at least two cycles of the low band edge on every axis; heuristic, not a resolution guarantee",
+              "cycles_xyz": [
+                1.0666666666666669,
+                1.0666666666666669,
+                1.0666666666666669
+              ],
+              "df_xyz": [
+                0.046875,
+                0.046875,
+                0.046875
+              ],
+              "extent_xyz": [
+                21.333333333333332,
+                21.333333333333332,
+                21.333333333333332
+              ],
+              "minimum_frequency": 0.05,
+              "shape": [
+                128.0,
+                128.0,
+                128.0
+              ],
+              "status": "insufficient_support"
+            },
+            "grid": {
+              "centers": "integer window starts + (support - 1)/2; no half-cell offset",
+              "column_axis": "x",
+              "coordinate_space": "data_local",
+              "count": [
+                1.0,
+                1.0
+              ],
+              "fixed_start": 32.0,
+              "hop": [
+                32.0,
+                32.0
+              ],
+              "order": "row-major; remaining source z,y,x axes",
+              "plane_axis": "z",
+              "row_axis": "y",
+              "shape": [
+                1.0,
+                1.0
+              ],
+              "start": [
+                32.0,
+                32.0
+              ]
+            },
+            "units": {
+              "frequency": "cycles / source-coordinate unit (unknown)",
+              "position": "unknown",
+              "power": "squared channel units (unknown)",
+              "value": "unknown"
+            },
+            "timings": {
+              "batch_seconds": 0.04130050599997048,
+              "calculation_seconds": 0.03277395800068916,
+              "decode_seconds": 0.0891986269998597,
+              "decoded_samples": 1.0,
+              "fft_seconds": 0.01388051399953838,
+              "reduction_seconds": 0.00776783499895827
+            },
+            "workspace_bytes": 138412032.0,
+            "power_min": 0.04726356609573469,
+            "power_max": 0.04726356609573469,
+            "numerical_sha256": "b1e6736f1b9502a8a412e6f1c1146977377464ac0ded0d91be89f658163032f5"
+          },
+          {
+            "record": {
+              "index": 22.0,
+              "native_time": {
+                "f64_le_hex": "0000000000003640",
+                "text": "22"
+              },
+              "requested_time": {
+                "f64_le_hex": "0000000000003640",
+                "text": "22"
+              },
+              "sampling": "exact",
+              "sequence": 44.0
+            },
+            "request_key": "44831aada9bc8f724aea896ee3fe0a22e3ca480491dacf497303afb21af42c70",
+            "coverage": {
+              "mask": [
+                true
+              ],
+              "measured": 1.0,
+              "total": 1.0,
+              "unavailable": 0.0
+            },
+            "support": {
+              "axis_order": "zyx",
+              "bounds": "complete finite source samples only; no padding or wrap",
+              "center_span_xyz": [
+                21.166666666666664,
+                21.166666666666664,
+                21.166666666666664
+              ],
+              "criterion": "at least two cycles of the low band edge on every axis; heuristic, not a resolution guarantee",
+              "cycles_xyz": [
+                1.0666666666666669,
+                1.0666666666666669,
+                1.0666666666666669
+              ],
+              "df_xyz": [
+                0.046875,
+                0.046875,
+                0.046875
+              ],
+              "extent_xyz": [
+                21.333333333333332,
+                21.333333333333332,
+                21.333333333333332
+              ],
+              "minimum_frequency": 0.05,
+              "shape": [
+                128.0,
+                128.0,
+                128.0
+              ],
+              "status": "insufficient_support"
+            },
+            "grid": {
+              "centers": "integer window starts + (support - 1)/2; no half-cell offset",
+              "column_axis": "x",
+              "coordinate_space": "data_local",
+              "count": [
+                1.0,
+                1.0
+              ],
+              "fixed_start": 32.0,
+              "hop": [
+                32.0,
+                32.0
+              ],
+              "order": "row-major; remaining source z,y,x axes",
+              "plane_axis": "z",
+              "row_axis": "y",
+              "shape": [
+                1.0,
+                1.0
+              ],
+              "start": [
+                32.0,
+                32.0
+              ]
+            },
+            "units": {
+              "frequency": "cycles / source-coordinate unit (unknown)",
+              "position": "unknown",
+              "power": "squared channel units (unknown)",
+              "value": "unknown"
+            },
+            "timings": {
+              "batch_seconds": 0.04229429099905246,
+              "calculation_seconds": 0.03259583500039298,
+              "decode_seconds": 0.09758365199922991,
+              "decoded_samples": 1.0,
+              "fft_seconds": 0.01399187500101106,
+              "reduction_seconds": 0.00828890400043747
+            },
+            "workspace_bytes": 138412032.0,
+            "power_min": 0.18092946046468952,
+            "power_max": 0.18092946046468952,
+            "numerical_sha256": "f0ee7e85be627f04c4d4c61312002b7f179560f3c103fa5a91be05c30d53777f"
+          }
+        ],
+        "worker": {
+          "ok": true,
+          "metrics": {
+            "charged_bytes": 0.0,
+            "cpu_seconds": 3.349157361,
+            "decoded_bytes": 0.0,
+            "peak_charged_bytes": 82665869.0,
+            "read_bytes": 6966045110.0,
+            "seconds": 3.435993700999461
+          },
+          "memory": {
+            "VmHWM": 44089344.0,
+            "VmPeak": 392912896.0,
+            "VmRSS": 44089344.0,
+            "VmSize": 388714496.0
+          },
+          "guard": {
+            "baseline": {
+              "VmHWM": 41304064.0,
+              "VmPeak": 386727936.0,
+              "VmRSS": 41304064.0,
+              "VmSize": 386727936.0
+            },
+            "ceiling_bytes": 2147483648.0,
+            "enabled": true,
+            "reason": "runtime plus 1 GiB workspace and 256 MiB overhead fit"
+          },
+          "shared_memory": {
+            "limit": 536870912.0,
+            "peak": 82665869.0,
+            "used": 0.0
+          },
+          "verification_memo": {
+            "charged_bytes": 4016.0,
+            "entries": 2.0,
+            "evictions": 0.0,
+            "hits": 2.0,
+            "limit_bytes": 4194304.0,
+            "peak_bytes": 4016.0
+          },
+          "playback_pressure": {
+            "pauses": 0.0,
+            "seconds": 0.0
+          }
+        }
+      },
+      "model_warm": {
+        "callback_ms": 3.498,
+        "roundtrip_ms": 218.136,
+        "source": {
+          "committed_bytes": "6965545431",
+          "complete_records": 82.0,
+          "format": "WVZ1",
+          "path": "/home/Nozba/Documents/Dev/Sims/Model-A/outputs/run_20261030T193414164759Z_b3a4a787cae945b0909004cac75740ca/model_a_20261030T193414164759Z_b3a4a787cae945b0909004cac75740ca.wvz",
+          "sha256": "1af76f2e5e0642808f33119168d8f5e0c7cc847599e414790923c2c3585e3d7d",
+          "uuid": "5848557b4ddd4d56b48e62f9f5700b23"
+        },
+        "status": "Verified 3-map sequence reused from cache. Exact native times only; missing times hide the map.",
+        "sequence": {
+          "admission": {
+            "centers_per_time": 1.0,
+            "reply_limit_bytes": 1048576.0,
+            "result_reservation_bytes": 2097152.0,
+            "selected_times": 3.0,
+            "total_centers": 3.0,
+            "workspace_bytes": 336421261.0
+          },
+          "cache": {
+            "entry_count": 4.0,
+            "hit": true,
+            "limit_bytes": 67108864.0,
+            "policy": "exact selected sequence",
+            "stored_bytes": 17407.0
+          },
+          "indices": [
+            20.0,
+            21.0,
+            22.0
+          ],
+          "kind": "spectral_band_sequence",
+          "provenance": {
+            "implementation_sha256": "d80d30f2e998adedc21a3866dc99515a740e453982be9b2d9a27dc53976ca55a",
+            "numpy": "2.4.3",
+            "source_policy": "verified committed prefix; appended extents miss; no path/UUID-only reuse",
+            "storage": "existing ResultCache manifest and support artifacts; atomic complete selection",
+            "worker": {
+              "analysis_code_sha256": "d508da76d9c7e2ba7e4ae34d7c77a98f7462f15fd0345d588e4dcea7fcd43eeb",
+              "policy": "private file transport; one computation at a time",
+              "worker": "tools/analyze_selection.py"
+            }
+          },
+          "request_key": "c090aecf529b03ee33093f67496b9b0d3d2a88ec47aefc094bacee3e41a30aa4",
+          "schema": 1.0,
+          "timings": {
+            "lookup_seconds": 0.00203869300094083,
+            "prepare_seconds": 2.818000029947143e-05,
+            "verification_open_seconds": 0.0249076909985888
+          }
+        },
+        "maps": [
+          {
+            "record": {
+              "index": 20.0,
+              "native_time": {
+                "f64_le_hex": "0000000000003440",
+                "text": "20"
+              },
+              "requested_time": {
+                "f64_le_hex": "0000000000003440",
+                "text": "20"
+              },
+              "sampling": "exact",
+              "sequence": 40.0
+            },
+            "request_key": "8450d9be6b2469ece165d81f892e2a5c3153dabb6ecaaf52c86626cc917a309d",
+            "coverage": {
+              "mask": [
+                true
+              ],
+              "measured": 1.0,
+              "total": 1.0,
+              "unavailable": 0.0
+            },
+            "support": {
+              "axis_order": "zyx",
+              "bounds": "complete finite source samples only; no padding or wrap",
+              "center_span_xyz": [
+                21.166666666666664,
+                21.166666666666664,
+                21.166666666666664
+              ],
+              "criterion": "at least two cycles of the low band edge on every axis; heuristic, not a resolution guarantee",
+              "cycles_xyz": [
+                1.0666666666666669,
+                1.0666666666666669,
+                1.0666666666666669
+              ],
+              "df_xyz": [
+                0.046875,
+                0.046875,
+                0.046875
+              ],
+              "extent_xyz": [
+                21.333333333333332,
+                21.333333333333332,
+                21.333333333333332
+              ],
+              "minimum_frequency": 0.05,
+              "shape": [
+                128.0,
+                128.0,
+                128.0
+              ],
+              "status": "insufficient_support"
+            },
+            "grid": {
+              "centers": "integer window starts + (support - 1)/2; no half-cell offset",
+              "column_axis": "x",
+              "coordinate_space": "data_local",
+              "count": [
+                1.0,
+                1.0
+              ],
+              "fixed_start": 32.0,
+              "hop": [
+                32.0,
+                32.0
+              ],
+              "order": "row-major; remaining source z,y,x axes",
+              "plane_axis": "z",
+              "row_axis": "y",
+              "shape": [
+                1.0,
+                1.0
+              ],
+              "start": [
+                32.0,
+                32.0
+              ]
+            },
+            "units": {
+              "frequency": "cycles / source-coordinate unit (unknown)",
+              "position": "unknown",
+              "power": "squared channel units (unknown)",
+              "value": "unknown"
+            },
+            "timings": {
+              "batch_seconds": 0.05015903800085652,
+              "calculation_seconds": 0.04227708100006566,
+              "decode_seconds": 0.09982742899956064,
+              "decoded_samples": 1.0,
+              "fft_seconds": 0.01819055299893079,
+              "reduction_seconds": 0.00785023699972953
+            },
+            "workspace_bytes": 138412032.0,
+            "power_min": 0.11167508427802404,
+            "power_max": 0.11167508427802404,
+            "numerical_sha256": "774b9918bd30cd826ba732cad1a66aa26f71b957555bd01444a5fde0b87a209f"
+          },
+          {
+            "record": {
+              "index": 21.0,
+              "native_time": {
+                "f64_le_hex": "0000000000003540",
+                "text": "21"
+              },
+              "requested_time": {
+                "f64_le_hex": "0000000000003540",
+                "text": "21"
+              },
+              "sampling": "exact",
+              "sequence": 42.0
+            },
+            "request_key": "d83be8c2ff0da7cd2c690af5e9c3fcf0e5f535b1b18d7479648f44cfa7a9454a",
+            "coverage": {
+              "mask": [
+                true
+              ],
+              "measured": 1.0,
+              "total": 1.0,
+              "unavailable": 0.0
+            },
+            "support": {
+              "axis_order": "zyx",
+              "bounds": "complete finite source samples only; no padding or wrap",
+              "center_span_xyz": [
+                21.166666666666664,
+                21.166666666666664,
+                21.166666666666664
+              ],
+              "criterion": "at least two cycles of the low band edge on every axis; heuristic, not a resolution guarantee",
+              "cycles_xyz": [
+                1.0666666666666669,
+                1.0666666666666669,
+                1.0666666666666669
+              ],
+              "df_xyz": [
+                0.046875,
+                0.046875,
+                0.046875
+              ],
+              "extent_xyz": [
+                21.333333333333332,
+                21.333333333333332,
+                21.333333333333332
+              ],
+              "minimum_frequency": 0.05,
+              "shape": [
+                128.0,
+                128.0,
+                128.0
+              ],
+              "status": "insufficient_support"
+            },
+            "grid": {
+              "centers": "integer window starts + (support - 1)/2; no half-cell offset",
+              "column_axis": "x",
+              "coordinate_space": "data_local",
+              "count": [
+                1.0,
+                1.0
+              ],
+              "fixed_start": 32.0,
+              "hop": [
+                32.0,
+                32.0
+              ],
+              "order": "row-major; remaining source z,y,x axes",
+              "plane_axis": "z",
+              "row_axis": "y",
+              "shape": [
+                1.0,
+                1.0
+              ],
+              "start": [
+                32.0,
+                32.0
+              ]
+            },
+            "units": {
+              "frequency": "cycles / source-coordinate unit (unknown)",
+              "position": "unknown",
+              "power": "squared channel units (unknown)",
+              "value": "unknown"
+            },
+            "timings": {
+              "batch_seconds": 0.04130050599997048,
+              "calculation_seconds": 0.03277395800068916,
+              "decode_seconds": 0.0891986269998597,
+              "decoded_samples": 1.0,
+              "fft_seconds": 0.01388051399953838,
+              "reduction_seconds": 0.00776783499895827
+            },
+            "workspace_bytes": 138412032.0,
+            "power_min": 0.04726356609573469,
+            "power_max": 0.04726356609573469,
+            "numerical_sha256": "b1e6736f1b9502a8a412e6f1c1146977377464ac0ded0d91be89f658163032f5"
+          },
+          {
+            "record": {
+              "index": 22.0,
+              "native_time": {
+                "f64_le_hex": "0000000000003640",
+                "text": "22"
+              },
+              "requested_time": {
+                "f64_le_hex": "0000000000003640",
+                "text": "22"
+              },
+              "sampling": "exact",
+              "sequence": 44.0
+            },
+            "request_key": "44831aada9bc8f724aea896ee3fe0a22e3ca480491dacf497303afb21af42c70",
+            "coverage": {
+              "mask": [
+                true
+              ],
+              "measured": 1.0,
+              "total": 1.0,
+              "unavailable": 0.0
+            },
+            "support": {
+              "axis_order": "zyx",
+              "bounds": "complete finite source samples only; no padding or wrap",
+              "center_span_xyz": [
+                21.166666666666664,
+                21.166666666666664,
+                21.166666666666664
+              ],
+              "criterion": "at least two cycles of the low band edge on every axis; heuristic, not a resolution guarantee",
+              "cycles_xyz": [
+                1.0666666666666669,
+                1.0666666666666669,
+                1.0666666666666669
+              ],
+              "df_xyz": [
+                0.046875,
+                0.046875,
+                0.046875
+              ],
+              "extent_xyz": [
+                21.333333333333332,
+                21.333333333333332,
+                21.333333333333332
+              ],
+              "minimum_frequency": 0.05,
+              "shape": [
+                128.0,
+                128.0,
+                128.0
+              ],
+              "status": "insufficient_support"
+            },
+            "grid": {
+              "centers": "integer window starts + (support - 1)/2; no half-cell offset",
+              "column_axis": "x",
+              "coordinate_space": "data_local",
+              "count": [
+                1.0,
+                1.0
+              ],
+              "fixed_start": 32.0,
+              "hop": [
+                32.0,
+                32.0
+              ],
+              "order": "row-major; remaining source z,y,x axes",
+              "plane_axis": "z",
+              "row_axis": "y",
+              "shape": [
+                1.0,
+                1.0
+              ],
+              "start": [
+                32.0,
+                32.0
+              ]
+            },
+            "units": {
+              "frequency": "cycles / source-coordinate unit (unknown)",
+              "position": "unknown",
+              "power": "squared channel units (unknown)",
+              "value": "unknown"
+            },
+            "timings": {
+              "batch_seconds": 0.04229429099905246,
+              "calculation_seconds": 0.03259583500039298,
+              "decode_seconds": 0.09758365199922991,
+              "decoded_samples": 1.0,
+              "fft_seconds": 0.01399187500101106,
+              "reduction_seconds": 0.00828890400043747
+            },
+            "workspace_bytes": 138412032.0,
+            "power_min": 0.18092946046468952,
+            "power_max": 0.18092946046468952,
+            "numerical_sha256": "f0ee7e85be627f04c4d4c61312002b7f179560f3c103fa5a91be05c30d53777f"
+          }
+        ],
+        "worker": {
+          "ok": true,
+          "metrics": {
+            "charged_bytes": 0.0,
+            "cpu_seconds": 0.02862179999999981,
+            "decoded_bytes": 0.0,
+            "peak_charged_bytes": 82665869.0,
+            "read_bytes": 499679.0,
+            "seconds": 0.02889110499927483
+          },
+          "memory": {
+            "VmHWM": 167137280.0,
+            "VmPeak": 512327680.0,
+            "VmRSS": 43991040.0,
+            "VmSize": 392380416.0
+          },
+          "guard": {
+            "baseline": {
+              "VmHWM": 41271296.0,
+              "VmPeak": 386727936.0,
+              "VmRSS": 41271296.0,
+              "VmSize": 386727936.0
+            },
+            "ceiling_bytes": 2147483648.0,
+            "enabled": true,
+            "reason": "runtime plus 1 GiB workspace and 256 MiB overhead fit"
+          },
+          "shared_memory": {
+            "limit": 536870912.0,
+            "peak": 82665869.0,
+            "used": 0.0
+          },
+          "verification_memo": {
+            "charged_bytes": 4016.0,
+            "entries": 2.0,
+            "evictions": 0.0,
+            "hits": 9.0,
+            "limit_bytes": 4194304.0,
+            "peak_bytes": 4016.0
+          },
+          "playback_pressure": {
+            "pauses": 0.0,
+            "seconds": 0.0
+          }
+        }
+      },
+      "mutation_boundary": {
+        "maps": 0,
+        "pending_id": "",
+        "plane_visible": false,
+        "status": "Source bytes changed before publication. Let the capture refresh, then reopen Spectral band map."
+      },
+      "preflight": "3 times: 0.0, 2.0, 4.0 \u2022 75 windows\nEstimate: 80.0 MiB worker RAM / 512 MiB budget; 2 MiB disk reservation. Cache: at most 8 sequences / 64 MiB. Source verification may take longer than FFTs.",
+      "reverse": {
+        "finish": 1.5721966666666698,
+        "frames": 69,
+        "loop": false,
+        "reverse": true,
+        "safe": true,
+        "start": 2.5
+      },
+      "synthetic_baseline": {
+        "engine_buffer_bytes": 27214268.0,
+        "engine_static_bytes": 0,
+        "engine_texture_bytes": 119148544.0,
+        "engine_video_bytes": 182408512.0,
+        "frames": 90,
+        "max_fps": 60,
+        "mean_fps": 59.94337349317343,
+        "plane_payload_bytes": 220,
+        "render_cpu_ms": {
+          "max": 0.593999981880188,
+          "mean": 0.1337777781817648,
+          "median": 0.12800000607967377,
+          "min": 0.08900000154972076,
+          "p95": 0.1770000010728836
+        },
+        "render_gpu_ms": {
+          "max": 2.739000082015991,
+          "mean": 1.0714111089706422,
+          "median": 0.7549999952316284,
+          "min": 0.6119999885559082,
+          "p95": 2.36299991607666
+        },
+        "resolution": [
+          1440,
+          900
+        ],
+        "vsync": 1,
+        "wall_ms": {
+          "max": 19.069,
+          "mean": 16.682411111111115,
+          "median": 16.645,
+          "min": 14.188,
+          "p95": 17.3
+        }
+      },
+      "synthetic_first": {
+        "callback_ms": 3.695,
+        "roundtrip_ms": 284.533,
+        "source": {
+          "committed_bytes": "3542015",
+          "complete_records": 4.0,
+          "format": "WVZ1",
+          "path": "/tmp/wavez-417-sequence-package/sequence.wvz",
+          "sha256": "14937dab8b8aed343c71a87d366c080620635371e91b889fe0b0ee4d3d1ea607",
+          "uuid": "929e5111bc254c4d881e39e509bdc19d"
+        },
+        "status": "Verified 3-map sequence prepared and cached. Exact native times only; missing times hide the map.",
+        "sequence": {
+          "admission": {
+            "centers_per_time": 25.0,
+            "reply_limit_bytes": 1048576.0,
+            "result_reservation_bytes": 2097152.0,
+            "selected_times": 3.0,
+            "total_centers": 75.0,
+            "workspace_bytes": 80780790.0
+          },
+          "cache": {
+            "entry_count": 1.0,
+            "hit": false,
+            "limit_bytes": 67108864.0,
+            "policy": "exact selected sequence",
+            "stored_bytes": 55961.0
+          },
+          "indices": [
+            0.0,
+            1.0,
+            2.0
+          ],
+          "kind": "spectral_band_sequence",
+          "provenance": {
+            "implementation_sha256": "d80d30f2e998adedc21a3866dc99515a740e453982be9b2d9a27dc53976ca55a",
+            "numpy": "2.4.3",
+            "source_policy": "verified committed prefix; appended extents miss; no path/UUID-only reuse",
+            "storage": "existing ResultCache manifest and support artifacts; atomic complete selection",
+            "worker": {
+              "analysis_code_sha256": "d508da76d9c7e2ba7e4ae34d7c77a98f7462f15fd0345d588e4dcea7fcd43eeb",
+              "policy": "private file transport; one computation at a time",
+              "worker": "tools/analyze_selection.py"
+            }
+          },
+          "request_key": "eb68e181f6c4b34096d7ad9f14dbfc86cb7d2b7e39c0fb3548093def229ce8b8",
+          "schema": 1.0,
+          "timings": {
+            "lookup_seconds": 1.7581000065547414e-05,
+            "prepare_seconds": 0.01623420100077055,
+            "verification_open_seconds": 0.00375356000040483
+          }
+        },
+        "maps": [
+          {
+            "record": {
+              "index": 0.0,
+              "native_time": {
+                "f64_le_hex": "0000000000000000",
+                "text": "0"
+              },
+              "requested_time": {
+                "f64_le_hex": "0000000000000000",
+                "text": "0"
+              },
+              "sampling": "exact",
+              "sequence": 0.0
+            },
+            "request_key": "f5c9de05d7d194ffa419864cbcb15e53e877ad867de2ed90d18a30ba5b6ba043",
+            "coverage": {
+              "mask": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                true,
+                true,
+                true,
+                false,
+                false,
+                true,
+                true,
+                true,
+                false,
+                false,
+                true,
+                true,
+                true,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+              ],
+              "measured": 9.0,
+              "total": 25.0,
+              "unavailable": 16.0
+            },
+            "support": {
+              "axis_order": "zyx",
+              "bounds": "complete finite source samples only; no padding or wrap",
+              "center_span_xyz": [
+                3.75,
+                5.625,
+                7.5
+              ],
+              "criterion": "at least two cycles of the low band edge on every axis; heuristic, not a resolution guarantee",
+              "cycles_xyz": [
+                1.6,
+                2.4000000000000004,
+                3.2
+              ],
+              "df_xyz": [
+                0.25,
+                0.16666666666666666,
+                0.125
+              ],
+              "extent_xyz": [
+                4.0,
+                6.0,
+                8.0
+              ],
+              "minimum_frequency": 0.4,
+              "shape": [
+                16.0,
+                16.0,
+                16.0
+              ],
+              "status": "insufficient_support"
+            },
+            "grid": {
+              "centers": "integer window starts + (support - 1)/2; no half-cell offset",
+              "column_axis": "x",
+              "coordinate_space": "data_local",
+              "count": [
+                5.0,
+                5.0
+              ],
+              "fixed_start": 16.0,
+              "hop": [
+                12.0,
+                12.0
+              ],
+              "order": "row-major; remaining source z,y,x axes",
+              "plane_axis": "z",
+              "row_axis": "y",
+              "shape": [
+                5.0,
+                5.0
+              ],
+              "start": [
+                -8.0,
+                -8.0
+              ]
+            },
+            "units": {
+              "frequency": "cycles / (dimensionless)",
+              "position": "dimensionless",
+              "power": "(dimensionless)^2",
+              "value": "dimensionless"
+            },
+            "timings": {
+              "batch_seconds": 0.00357936799991875,
+              "calculation_seconds": 0.00211405699701572,
+              "decode_seconds": 0.0009171450001304,
+              "decoded_samples": 1.0,
+              "fft_seconds": 0.00112314999933005,
+              "reduction_seconds": 0.00131060900093871
+            },
+            "workspace_bytes": 4456448.0,
+            "power_min": 0.1759471133251903,
+            "power_max": 1.3779819954013628,
+            "numerical_sha256": "eb06fcb6ce463029d71f7004902944fd46655451190e3665b160e9a172a6ad71"
+          },
+          {
+            "record": {
+              "index": 1.0,
+              "native_time": {
+                "f64_le_hex": "0000000000000040",
+                "text": "2"
+              },
+              "requested_time": {
+                "f64_le_hex": "0000000000000040",
+                "text": "2"
+              },
+              "sampling": "exact",
+              "sequence": 1.0
+            },
+            "request_key": "99ae8d7f24db4718dbee68399bb79f34d93bd517522b1cc10fbaab2ea04bc19f",
+            "coverage": {
+              "mask": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                true,
+                true,
+                true,
+                false,
+                false,
+                true,
+                true,
+                true,
+                false,
+                false,
+                true,
+                true,
+                true,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+              ],
+              "measured": 9.0,
+              "total": 25.0,
+              "unavailable": 16.0
+            },
+            "support": {
+              "axis_order": "zyx",
+              "bounds": "complete finite source samples only; no padding or wrap",
+              "center_span_xyz": [
+                3.75,
+                5.625,
+                7.5
+              ],
+              "criterion": "at least two cycles of the low band edge on every axis; heuristic, not a resolution guarantee",
+              "cycles_xyz": [
+                1.6,
+                2.4000000000000004,
+                3.2
+              ],
+              "df_xyz": [
+                0.25,
+                0.16666666666666666,
+                0.125
+              ],
+              "extent_xyz": [
+                4.0,
+                6.0,
+                8.0
+              ],
+              "minimum_frequency": 0.4,
+              "shape": [
+                16.0,
+                16.0,
+                16.0
+              ],
+              "status": "insufficient_support"
+            },
+            "grid": {
+              "centers": "integer window starts + (support - 1)/2; no half-cell offset",
+              "column_axis": "x",
+              "coordinate_space": "data_local",
+              "count": [
+                5.0,
+                5.0
+              ],
+              "fixed_start": 16.0,
+              "hop": [
+                12.0,
+                12.0
+              ],
+              "order": "row-major; remaining source z,y,x axes",
+              "plane_axis": "z",
+              "row_axis": "y",
+              "shape": [
+                5.0,
+                5.0
+              ],
+              "start": [
+                -8.0,
+                -8.0
+              ]
+            },
+            "units": {
+              "frequency": "cycles / (dimensionless)",
+              "position": "dimensionless",
+              "power": "(dimensionless)^2",
+              "value": "dimensionless"
+            },
+            "timings": {
+              "batch_seconds": 0.00261877199955051,
+              "calculation_seconds": 0.00121974899957422,
+              "decode_seconds": 0.00091445500038389,
+              "decoded_samples": 1.0,
+              "fft_seconds": 0.0003740860029211,
+              "reduction_seconds": 0.00125891099742148
+            },
+            "workspace_bytes": 4456448.0,
+            "power_min": 0.7037884533007612,
+            "power_max": 5.511927981605451,
+            "numerical_sha256": "1cfbd95f46b63bd8aba575bacf9d77fbe611e398309a0cf0ea165f160e2a74e7"
+          },
+          {
+            "record": {
+              "index": 2.0,
+              "native_time": {
+                "f64_le_hex": "0000000000001040",
+                "text": "4"
+              },
+              "requested_time": {
+                "f64_le_hex": "0000000000001040",
+                "text": "4"
+              },
+              "sampling": "exact",
+              "sequence": 2.0
+            },
+            "request_key": "5eef93293de2de72b61341909a5946a5b56da3cfda451753869a6a82269eec95",
+            "coverage": {
+              "mask": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                true,
+                true,
+                true,
+                false,
+                false,
+                true,
+                true,
+                true,
+                false,
+                false,
+                true,
+                true,
+                true,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+              ],
+              "measured": 9.0,
+              "total": 25.0,
+              "unavailable": 16.0
+            },
+            "support": {
+              "axis_order": "zyx",
+              "bounds": "complete finite source samples only; no padding or wrap",
+              "center_span_xyz": [
+                3.75,
+                5.625,
+                7.5
+              ],
+              "criterion": "at least two cycles of the low band edge on every axis; heuristic, not a resolution guarantee",
+              "cycles_xyz": [
+                1.6,
+                2.4000000000000004,
+                3.2
+              ],
+              "df_xyz": [
+                0.25,
+                0.16666666666666666,
+                0.125
+              ],
+              "extent_xyz": [
+                4.0,
+                6.0,
+                8.0
+              ],
+              "minimum_frequency": 0.4,
+              "shape": [
+                16.0,
+                16.0,
+                16.0
+              ],
+              "status": "insufficient_support"
+            },
+            "grid": {
+              "centers": "integer window starts + (support - 1)/2; no half-cell offset",
+              "column_axis": "x",
+              "coordinate_space": "data_local",
+              "count": [
+                5.0,
+                5.0
+              ],
+              "fixed_start": 16.0,
+              "hop": [
+                12.0,
+                12.0
+              ],
+              "order": "row-major; remaining source z,y,x axes",
+              "plane_axis": "z",
+              "row_axis": "y",
+              "shape": [
+                5.0,
+                5.0
+              ],
+              "start": [
+                -8.0,
+                -8.0
+              ]
+            },
+            "units": {
+              "frequency": "cycles / (dimensionless)",
+              "position": "dimensionless",
+              "power": "(dimensionless)^2",
+              "value": "dimensionless"
+            },
+            "timings": {
+              "batch_seconds": 0.0036079180008528,
+              "calculation_seconds": 0.00184788900332932,
+              "decode_seconds": 0.00090310500127088,
+              "decoded_samples": 1.0,
+              "fft_seconds": 0.00047138799891399,
+              "reduction_seconds": 0.00158305799959634
+            },
+            "workspace_bytes": 4456448.0,
+            "power_min": 0.02634696954724296,
+            "power_max": 0.26676061190841244,
+            "numerical_sha256": "c0edc7fea89ecd4e175dc89f43b1429a367ef66536405d1bdfafba936e52cae2"
+          }
+        ],
+        "worker": {
+          "ok": true,
+          "metrics": {
+            "charged_bytes": 2129920.0,
+            "cpu_seconds": 0.02240614000000002,
+            "decoded_bytes": 2654208.0,
+            "peak_charged_bytes": 32349686.0,
+            "read_bytes": 6199302.0,
+            "seconds": 0.02255116300148074
+          },
+          "memory": {
+            "VmHWM": 43372544.0,
+            "VmPeak": 389189632.0,
+            "VmRSS": 43372544.0,
+            "VmSize": 389189632.0
+          },
+          "guard": {
+            "baseline": {
+              "VmHWM": 41295872.0,
+              "VmPeak": 386727936.0,
+              "VmRSS": 41295872.0,
+              "VmSize": 386727936.0
+            },
+            "ceiling_bytes": 2147483648.0,
+            "enabled": true,
+            "reason": "runtime plus 1 GiB workspace and 256 MiB overhead fit"
+          },
+          "shared_memory": {
+            "limit": 536870912.0,
+            "peak": 32349686.0,
+            "used": 2129920.0
+          },
+          "verification_memo": {
+            "charged_bytes": 2904.0,
+            "entries": 2.0,
+            "evictions": 0.0,
+            "hits": 5.0,
+            "limit_bytes": 4194304.0,
+            "peak_bytes": 2904.0
+          },
+          "playback_pressure": {
+            "pauses": 0.0,
+            "seconds": 0.0
+          }
+        }
+      },
+      "synthetic_prepared": {
+        "engine_buffer_bytes": 27214268.0,
+        "engine_static_bytes": 0,
+        "engine_texture_bytes": 119148544.0,
+        "engine_video_bytes": 182408512.0,
+        "frames": 90,
+        "max_fps": 60,
+        "mean_fps": 59.93754507802871,
+        "plane_payload_bytes": 220,
+        "render_cpu_ms": {
+          "max": 0.24500000476837158,
+          "mean": 0.1612777780327532,
+          "median": 0.1550000011920929,
+          "min": 0.11999999731779099,
+          "p95": 0.20399999618530273
+        },
+        "render_gpu_ms": {
+          "max": 2.7179999351501465,
+          "mean": 1.727000007364485,
+          "median": 1.5429999828338623,
+          "min": 1.3910000324249268,
+          "p95": 2.440000057220459
+        },
+        "resolution": [
+          1440,
+          900
+        ],
+        "vsync": 1,
+        "wall_ms": {
+          "max": 19.234,
+          "mean": 16.68403333333333,
+          "median": 16.694,
+          "min": 13.454,
+          "p95": 17.305
+        }
+      },
+      "synthetic_recover": {
+        "callback_ms": 3.059,
+        "roundtrip_ms": 46.338,
+        "source": {
+          "committed_bytes": "3542015",
+          "complete_records": 4.0,
+          "format": "WVZ1",
+          "path": "/tmp/wavez-417-sequence-package/sequence.wvz",
+          "sha256": "14937dab8b8aed343c71a87d366c080620635371e91b889fe0b0ee4d3d1ea607",
+          "uuid": "929e5111bc254c4d881e39e509bdc19d"
+        },
+        "status": "Verified 3-map sequence reused from cache. Exact native times only; missing times hide the map.",
+        "sequence": {
+          "admission": {
+            "centers_per_time": 25.0,
+            "reply_limit_bytes": 1048576.0,
+            "result_reservation_bytes": 2097152.0,
+            "selected_times": 3.0,
+            "total_centers": 75.0,
+            "workspace_bytes": 80780790.0
+          },
+          "cache": {
+            "entry_count": 1.0,
+            "hit": true,
+            "limit_bytes": 67108864.0,
+            "policy": "exact selected sequence",
+            "stored_bytes": 55961.0
+          },
+          "indices": [
+            0.0,
+            1.0,
+            2.0
+          ],
+          "kind": "spectral_band_sequence",
+          "provenance": {
+            "implementation_sha256": "d80d30f2e998adedc21a3866dc99515a740e453982be9b2d9a27dc53976ca55a",
+            "numpy": "2.4.3",
+            "source_policy": "verified committed prefix; appended extents miss; no path/UUID-only reuse",
+            "storage": "existing ResultCache manifest and support artifacts; atomic complete selection",
+            "worker": {
+              "analysis_code_sha256": "d508da76d9c7e2ba7e4ae34d7c77a98f7462f15fd0345d588e4dcea7fcd43eeb",
+              "policy": "private file transport; one computation at a time",
+              "worker": "tools/analyze_selection.py"
+            }
+          },
+          "request_key": "eb68e181f6c4b34096d7ad9f14dbfc86cb7d2b7e39c0fb3548093def229ce8b8",
+          "schema": 1.0,
+          "timings": {
+            "lookup_seconds": 0.00357479800004512,
+            "prepare_seconds": 3.040100091311615e-05,
+            "verification_open_seconds": 0.00112758800059964
+          }
+        },
+        "maps": [
+          {
+            "record": {
+              "index": 0.0,
+              "native_time": {
+                "f64_le_hex": "0000000000000000",
+                "text": "0"
+              },
+              "requested_time": {
+                "f64_le_hex": "0000000000000000",
+                "text": "0"
+              },
+              "sampling": "exact",
+              "sequence": 0.0
+            },
+            "request_key": "f5c9de05d7d194ffa419864cbcb15e53e877ad867de2ed90d18a30ba5b6ba043",
+            "coverage": {
+              "mask": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                true,
+                true,
+                true,
+                false,
+                false,
+                true,
+                true,
+                true,
+                false,
+                false,
+                true,
+                true,
+                true,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+              ],
+              "measured": 9.0,
+              "total": 25.0,
+              "unavailable": 16.0
+            },
+            "support": {
+              "axis_order": "zyx",
+              "bounds": "complete finite source samples only; no padding or wrap",
+              "center_span_xyz": [
+                3.75,
+                5.625,
+                7.5
+              ],
+              "criterion": "at least two cycles of the low band edge on every axis; heuristic, not a resolution guarantee",
+              "cycles_xyz": [
+                1.6,
+                2.4000000000000004,
+                3.2
+              ],
+              "df_xyz": [
+                0.25,
+                0.16666666666666666,
+                0.125
+              ],
+              "extent_xyz": [
+                4.0,
+                6.0,
+                8.0
+              ],
+              "minimum_frequency": 0.4,
+              "shape": [
+                16.0,
+                16.0,
+                16.0
+              ],
+              "status": "insufficient_support"
+            },
+            "grid": {
+              "centers": "integer window starts + (support - 1)/2; no half-cell offset",
+              "column_axis": "x",
+              "coordinate_space": "data_local",
+              "count": [
+                5.0,
+                5.0
+              ],
+              "fixed_start": 16.0,
+              "hop": [
+                12.0,
+                12.0
+              ],
+              "order": "row-major; remaining source z,y,x axes",
+              "plane_axis": "z",
+              "row_axis": "y",
+              "shape": [
+                5.0,
+                5.0
+              ],
+              "start": [
+                -8.0,
+                -8.0
+              ]
+            },
+            "units": {
+              "frequency": "cycles / (dimensionless)",
+              "position": "dimensionless",
+              "power": "(dimensionless)^2",
+              "value": "dimensionless"
+            },
+            "timings": {
+              "batch_seconds": 0.00357936799991875,
+              "calculation_seconds": 0.00211405699701572,
+              "decode_seconds": 0.0009171450001304,
+              "decoded_samples": 1.0,
+              "fft_seconds": 0.00112314999933005,
+              "reduction_seconds": 0.00131060900093871
+            },
+            "workspace_bytes": 4456448.0,
+            "power_min": 0.1759471133251903,
+            "power_max": 1.3779819954013628,
+            "numerical_sha256": "eb06fcb6ce463029d71f7004902944fd46655451190e3665b160e9a172a6ad71"
+          },
+          {
+            "record": {
+              "index": 1.0,
+              "native_time": {
+                "f64_le_hex": "0000000000000040",
+                "text": "2"
+              },
+              "requested_time": {
+                "f64_le_hex": "0000000000000040",
+                "text": "2"
+              },
+              "sampling": "exact",
+              "sequence": 1.0
+            },
+            "request_key": "99ae8d7f24db4718dbee68399bb79f34d93bd517522b1cc10fbaab2ea04bc19f",
+            "coverage": {
+              "mask": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                true,
+                true,
+                true,
+                false,
+                false,
+                true,
+                true,
+                true,
+                false,
+                false,
+                true,
+                true,
+                true,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+              ],
+              "measured": 9.0,
+              "total": 25.0,
+              "unavailable": 16.0
+            },
+            "support": {
+              "axis_order": "zyx",
+              "bounds": "complete finite source samples only; no padding or wrap",
+              "center_span_xyz": [
+                3.75,
+                5.625,
+                7.5
+              ],
+              "criterion": "at least two cycles of the low band edge on every axis; heuristic, not a resolution guarantee",
+              "cycles_xyz": [
+                1.6,
+                2.4000000000000004,
+                3.2
+              ],
+              "df_xyz": [
+                0.25,
+                0.16666666666666666,
+                0.125
+              ],
+              "extent_xyz": [
+                4.0,
+                6.0,
+                8.0
+              ],
+              "minimum_frequency": 0.4,
+              "shape": [
+                16.0,
+                16.0,
+                16.0
+              ],
+              "status": "insufficient_support"
+            },
+            "grid": {
+              "centers": "integer window starts + (support - 1)/2; no half-cell offset",
+              "column_axis": "x",
+              "coordinate_space": "data_local",
+              "count": [
+                5.0,
+                5.0
+              ],
+              "fixed_start": 16.0,
+              "hop": [
+                12.0,
+                12.0
+              ],
+              "order": "row-major; remaining source z,y,x axes",
+              "plane_axis": "z",
+              "row_axis": "y",
+              "shape": [
+                5.0,
+                5.0
+              ],
+              "start": [
+                -8.0,
+                -8.0
+              ]
+            },
+            "units": {
+              "frequency": "cycles / (dimensionless)",
+              "position": "dimensionless",
+              "power": "(dimensionless)^2",
+              "value": "dimensionless"
+            },
+            "timings": {
+              "batch_seconds": 0.00261877199955051,
+              "calculation_seconds": 0.00121974899957422,
+              "decode_seconds": 0.00091445500038389,
+              "decoded_samples": 1.0,
+              "fft_seconds": 0.0003740860029211,
+              "reduction_seconds": 0.00125891099742148
+            },
+            "workspace_bytes": 4456448.0,
+            "power_min": 0.7037884533007612,
+            "power_max": 5.511927981605451,
+            "numerical_sha256": "1cfbd95f46b63bd8aba575bacf9d77fbe611e398309a0cf0ea165f160e2a74e7"
+          },
+          {
+            "record": {
+              "index": 2.0,
+              "native_time": {
+                "f64_le_hex": "0000000000001040",
+                "text": "4"
+              },
+              "requested_time": {
+                "f64_le_hex": "0000000000001040",
+                "text": "4"
+              },
+              "sampling": "exact",
+              "sequence": 2.0
+            },
+            "request_key": "5eef93293de2de72b61341909a5946a5b56da3cfda451753869a6a82269eec95",
+            "coverage": {
+              "mask": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                true,
+                true,
+                true,
+                false,
+                false,
+                true,
+                true,
+                true,
+                false,
+                false,
+                true,
+                true,
+                true,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+              ],
+              "measured": 9.0,
+              "total": 25.0,
+              "unavailable": 16.0
+            },
+            "support": {
+              "axis_order": "zyx",
+              "bounds": "complete finite source samples only; no padding or wrap",
+              "center_span_xyz": [
+                3.75,
+                5.625,
+                7.5
+              ],
+              "criterion": "at least two cycles of the low band edge on every axis; heuristic, not a resolution guarantee",
+              "cycles_xyz": [
+                1.6,
+                2.4000000000000004,
+                3.2
+              ],
+              "df_xyz": [
+                0.25,
+                0.16666666666666666,
+                0.125
+              ],
+              "extent_xyz": [
+                4.0,
+                6.0,
+                8.0
+              ],
+              "minimum_frequency": 0.4,
+              "shape": [
+                16.0,
+                16.0,
+                16.0
+              ],
+              "status": "insufficient_support"
+            },
+            "grid": {
+              "centers": "integer window starts + (support - 1)/2; no half-cell offset",
+              "column_axis": "x",
+              "coordinate_space": "data_local",
+              "count": [
+                5.0,
+                5.0
+              ],
+              "fixed_start": 16.0,
+              "hop": [
+                12.0,
+                12.0
+              ],
+              "order": "row-major; remaining source z,y,x axes",
+              "plane_axis": "z",
+              "row_axis": "y",
+              "shape": [
+                5.0,
+                5.0
+              ],
+              "start": [
+                -8.0,
+                -8.0
+              ]
+            },
+            "units": {
+              "frequency": "cycles / (dimensionless)",
+              "position": "dimensionless",
+              "power": "(dimensionless)^2",
+              "value": "dimensionless"
+            },
+            "timings": {
+              "batch_seconds": 0.0036079180008528,
+              "calculation_seconds": 0.00184788900332932,
+              "decode_seconds": 0.00090310500127088,
+              "decoded_samples": 1.0,
+              "fft_seconds": 0.00047138799891399,
+              "reduction_seconds": 0.00158305799959634
+            },
+            "workspace_bytes": 4456448.0,
+            "power_min": 0.02634696954724296,
+            "power_max": 0.26676061190841244,
+            "numerical_sha256": "c0edc7fea89ecd4e175dc89f43b1429a367ef66536405d1bdfafba936e52cae2"
+          }
+        ],
+        "worker": {
+          "ok": true,
+          "metrics": {
+            "charged_bytes": 0.0,
+            "cpu_seconds": 0.00752832,
+            "decoded_bytes": 0.0,
+            "peak_charged_bytes": 80780790.0,
+            "read_bytes": 3079.0,
+            "seconds": 0.0075794920012413
+          },
+          "memory": {
+            "VmHWM": 42766336.0,
+            "VmPeak": 391872512.0,
+            "VmRSS": 42766336.0,
+            "VmSize": 387674112.0
+          },
+          "guard": {
+            "baseline": {
+              "VmHWM": 41320448.0,
+              "VmPeak": 386727936.0,
+              "VmRSS": 41320448.0,
+              "VmSize": 386727936.0
+            },
+            "ceiling_bytes": 2147483648.0,
+            "enabled": true,
+            "reason": "runtime plus 1 GiB workspace and 256 MiB overhead fit"
+          },
+          "shared_memory": {
+            "limit": 536870912.0,
+            "peak": 80780790.0,
+            "used": 0.0
+          },
+          "verification_memo": {
+            "charged_bytes": 2904.0,
+            "entries": 2.0,
+            "evictions": 0.0,
+            "hits": 6.0,
+            "limit_bytes": 4194304.0,
+            "peak_bytes": 2904.0
+          },
+          "playback_pressure": {
+            "pauses": 0.0,
+            "seconds": 0.0
+          }
+        }
+      },
+      "synthetic_reopened": {
+        "callback_ms": 5.611,
+        "roundtrip_ms": 192.652,
+        "source": {
+          "committed_bytes": "3542015",
+          "complete_records": 4.0,
+          "format": "WVZ1",
+          "path": "/tmp/wavez-417-sequence-package/sequence.wvz",
+          "sha256": "14937dab8b8aed343c71a87d366c080620635371e91b889fe0b0ee4d3d1ea607",
+          "uuid": "929e5111bc254c4d881e39e509bdc19d"
+        },
+        "status": "Verified 3-map sequence reused from cache. Exact native times only; missing times hide the map.",
+        "sequence": {
+          "admission": {
+            "centers_per_time": 25.0,
+            "reply_limit_bytes": 1048576.0,
+            "result_reservation_bytes": 2097152.0,
+            "selected_times": 3.0,
+            "total_centers": 75.0,
+            "workspace_bytes": 80780790.0
+          },
+          "cache": {
+            "entry_count": 1.0,
+            "hit": true,
+            "limit_bytes": 67108864.0,
+            "policy": "exact selected sequence",
+            "stored_bytes": 55961.0
+          },
+          "indices": [
+            0.0,
+            1.0,
+            2.0
+          ],
+          "kind": "spectral_band_sequence",
+          "provenance": {
+            "implementation_sha256": "d80d30f2e998adedc21a3866dc99515a740e453982be9b2d9a27dc53976ca55a",
+            "numpy": "2.4.3",
+            "source_policy": "verified committed prefix; appended extents miss; no path/UUID-only reuse",
+            "storage": "existing ResultCache manifest and support artifacts; atomic complete selection",
+            "worker": {
+              "analysis_code_sha256": "d508da76d9c7e2ba7e4ae34d7c77a98f7462f15fd0345d588e4dcea7fcd43eeb",
+              "policy": "private file transport; one computation at a time",
+              "worker": "tools/analyze_selection.py"
+            }
+          },
+          "request_key": "eb68e181f6c4b34096d7ad9f14dbfc86cb7d2b7e39c0fb3548093def229ce8b8",
+          "schema": 1.0,
+          "timings": {
+            "lookup_seconds": 0.00327933200060215,
+            "prepare_seconds": 2.928100002463907e-05,
+            "verification_open_seconds": 0.00382486199850973
+          }
+        },
+        "maps": [
+          {
+            "record": {
+              "index": 0.0,
+              "native_time": {
+                "f64_le_hex": "0000000000000000",
+                "text": "0"
+              },
+              "requested_time": {
+                "f64_le_hex": "0000000000000000",
+                "text": "0"
+              },
+              "sampling": "exact",
+              "sequence": 0.0
+            },
+            "request_key": "f5c9de05d7d194ffa419864cbcb15e53e877ad867de2ed90d18a30ba5b6ba043",
+            "coverage": {
+              "mask": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                true,
+                true,
+                true,
+                false,
+                false,
+                true,
+                true,
+                true,
+                false,
+                false,
+                true,
+                true,
+                true,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+              ],
+              "measured": 9.0,
+              "total": 25.0,
+              "unavailable": 16.0
+            },
+            "support": {
+              "axis_order": "zyx",
+              "bounds": "complete finite source samples only; no padding or wrap",
+              "center_span_xyz": [
+                3.75,
+                5.625,
+                7.5
+              ],
+              "criterion": "at least two cycles of the low band edge on every axis; heuristic, not a resolution guarantee",
+              "cycles_xyz": [
+                1.6,
+                2.4000000000000004,
+                3.2
+              ],
+              "df_xyz": [
+                0.25,
+                0.16666666666666666,
+                0.125
+              ],
+              "extent_xyz": [
+                4.0,
+                6.0,
+                8.0
+              ],
+              "minimum_frequency": 0.4,
+              "shape": [
+                16.0,
+                16.0,
+                16.0
+              ],
+              "status": "insufficient_support"
+            },
+            "grid": {
+              "centers": "integer window starts + (support - 1)/2; no half-cell offset",
+              "column_axis": "x",
+              "coordinate_space": "data_local",
+              "count": [
+                5.0,
+                5.0
+              ],
+              "fixed_start": 16.0,
+              "hop": [
+                12.0,
+                12.0
+              ],
+              "order": "row-major; remaining source z,y,x axes",
+              "plane_axis": "z",
+              "row_axis": "y",
+              "shape": [
+                5.0,
+                5.0
+              ],
+              "start": [
+                -8.0,
+                -8.0
+              ]
+            },
+            "units": {
+              "frequency": "cycles / (dimensionless)",
+              "position": "dimensionless",
+              "power": "(dimensionless)^2",
+              "value": "dimensionless"
+            },
+            "timings": {
+              "batch_seconds": 0.00357936799991875,
+              "calculation_seconds": 0.00211405699701572,
+              "decode_seconds": 0.0009171450001304,
+              "decoded_samples": 1.0,
+              "fft_seconds": 0.00112314999933005,
+              "reduction_seconds": 0.00131060900093871
+            },
+            "workspace_bytes": 4456448.0,
+            "power_min": 0.1759471133251903,
+            "power_max": 1.3779819954013628,
+            "numerical_sha256": "eb06fcb6ce463029d71f7004902944fd46655451190e3665b160e9a172a6ad71"
+          },
+          {
+            "record": {
+              "index": 1.0,
+              "native_time": {
+                "f64_le_hex": "0000000000000040",
+                "text": "2"
+              },
+              "requested_time": {
+                "f64_le_hex": "0000000000000040",
+                "text": "2"
+              },
+              "sampling": "exact",
+              "sequence": 1.0
+            },
+            "request_key": "99ae8d7f24db4718dbee68399bb79f34d93bd517522b1cc10fbaab2ea04bc19f",
+            "coverage": {
+              "mask": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                true,
+                true,
+                true,
+                false,
+                false,
+                true,
+                true,
+                true,
+                false,
+                false,
+                true,
+                true,
+                true,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+              ],
+              "measured": 9.0,
+              "total": 25.0,
+              "unavailable": 16.0
+            },
+            "support": {
+              "axis_order": "zyx",
+              "bounds": "complete finite source samples only; no padding or wrap",
+              "center_span_xyz": [
+                3.75,
+                5.625,
+                7.5
+              ],
+              "criterion": "at least two cycles of the low band edge on every axis; heuristic, not a resolution guarantee",
+              "cycles_xyz": [
+                1.6,
+                2.4000000000000004,
+                3.2
+              ],
+              "df_xyz": [
+                0.25,
+                0.16666666666666666,
+                0.125
+              ],
+              "extent_xyz": [
+                4.0,
+                6.0,
+                8.0
+              ],
+              "minimum_frequency": 0.4,
+              "shape": [
+                16.0,
+                16.0,
+                16.0
+              ],
+              "status": "insufficient_support"
+            },
+            "grid": {
+              "centers": "integer window starts + (support - 1)/2; no half-cell offset",
+              "column_axis": "x",
+              "coordinate_space": "data_local",
+              "count": [
+                5.0,
+                5.0
+              ],
+              "fixed_start": 16.0,
+              "hop": [
+                12.0,
+                12.0
+              ],
+              "order": "row-major; remaining source z,y,x axes",
+              "plane_axis": "z",
+              "row_axis": "y",
+              "shape": [
+                5.0,
+                5.0
+              ],
+              "start": [
+                -8.0,
+                -8.0
+              ]
+            },
+            "units": {
+              "frequency": "cycles / (dimensionless)",
+              "position": "dimensionless",
+              "power": "(dimensionless)^2",
+              "value": "dimensionless"
+            },
+            "timings": {
+              "batch_seconds": 0.00261877199955051,
+              "calculation_seconds": 0.00121974899957422,
+              "decode_seconds": 0.00091445500038389,
+              "decoded_samples": 1.0,
+              "fft_seconds": 0.0003740860029211,
+              "reduction_seconds": 0.00125891099742148
+            },
+            "workspace_bytes": 4456448.0,
+            "power_min": 0.7037884533007612,
+            "power_max": 5.511927981605451,
+            "numerical_sha256": "1cfbd95f46b63bd8aba575bacf9d77fbe611e398309a0cf0ea165f160e2a74e7"
+          },
+          {
+            "record": {
+              "index": 2.0,
+              "native_time": {
+                "f64_le_hex": "0000000000001040",
+                "text": "4"
+              },
+              "requested_time": {
+                "f64_le_hex": "0000000000001040",
+                "text": "4"
+              },
+              "sampling": "exact",
+              "sequence": 2.0
+            },
+            "request_key": "5eef93293de2de72b61341909a5946a5b56da3cfda451753869a6a82269eec95",
+            "coverage": {
+              "mask": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                true,
+                true,
+                true,
+                false,
+                false,
+                true,
+                true,
+                true,
+                false,
+                false,
+                true,
+                true,
+                true,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+              ],
+              "measured": 9.0,
+              "total": 25.0,
+              "unavailable": 16.0
+            },
+            "support": {
+              "axis_order": "zyx",
+              "bounds": "complete finite source samples only; no padding or wrap",
+              "center_span_xyz": [
+                3.75,
+                5.625,
+                7.5
+              ],
+              "criterion": "at least two cycles of the low band edge on every axis; heuristic, not a resolution guarantee",
+              "cycles_xyz": [
+                1.6,
+                2.4000000000000004,
+                3.2
+              ],
+              "df_xyz": [
+                0.25,
+                0.16666666666666666,
+                0.125
+              ],
+              "extent_xyz": [
+                4.0,
+                6.0,
+                8.0
+              ],
+              "minimum_frequency": 0.4,
+              "shape": [
+                16.0,
+                16.0,
+                16.0
+              ],
+              "status": "insufficient_support"
+            },
+            "grid": {
+              "centers": "integer window starts + (support - 1)/2; no half-cell offset",
+              "column_axis": "x",
+              "coordinate_space": "data_local",
+              "count": [
+                5.0,
+                5.0
+              ],
+              "fixed_start": 16.0,
+              "hop": [
+                12.0,
+                12.0
+              ],
+              "order": "row-major; remaining source z,y,x axes",
+              "plane_axis": "z",
+              "row_axis": "y",
+              "shape": [
+                5.0,
+                5.0
+              ],
+              "start": [
+                -8.0,
+                -8.0
+              ]
+            },
+            "units": {
+              "frequency": "cycles / (dimensionless)",
+              "position": "dimensionless",
+              "power": "(dimensionless)^2",
+              "value": "dimensionless"
+            },
+            "timings": {
+              "batch_seconds": 0.0036079180008528,
+              "calculation_seconds": 0.00184788900332932,
+              "decode_seconds": 0.00090310500127088,
+              "decoded_samples": 1.0,
+              "fft_seconds": 0.00047138799891399,
+              "reduction_seconds": 0.00158305799959634
+            },
+            "workspace_bytes": 4456448.0,
+            "power_min": 0.02634696954724296,
+            "power_max": 0.26676061190841244,
+            "numerical_sha256": "c0edc7fea89ecd4e175dc89f43b1429a367ef66536405d1bdfafba936e52cae2"
+          }
+        ],
+        "worker": {
+          "ok": true,
+          "metrics": {
+            "charged_bytes": 0.0,
+            "cpu_seconds": 0.00993215,
+            "decoded_bytes": 0.0,
+            "peak_charged_bytes": 80780790.0,
+            "read_bytes": 3545094.0,
+            "seconds": 0.00998906099994201
+          },
+          "memory": {
+            "VmHWM": 42758144.0,
+            "VmPeak": 391872512.0,
+            "VmRSS": 42758144.0,
+            "VmSize": 387674112.0
+          },
+          "guard": {
+            "baseline": {
+              "VmHWM": 41320448.0,
+              "VmPeak": 386727936.0,
+              "VmRSS": 41320448.0,
+              "VmSize": 386727936.0
+            },
+            "ceiling_bytes": 2147483648.0,
+            "enabled": true,
+            "reason": "runtime plus 1 GiB workspace and 256 MiB overhead fit"
+          },
+          "shared_memory": {
+            "limit": 536870912.0,
+            "peak": 80780790.0,
+            "used": 0.0
+          },
+          "verification_memo": {
+            "charged_bytes": 2904.0,
+            "entries": 2.0,
+            "evictions": 0.0,
+            "hits": 2.0,
+            "limit_bytes": 4194304.0,
+            "peak_bytes": 2904.0
+          },
+          "playback_pressure": {
+            "pauses": 0.0,
+            "seconds": 0.0
+          }
+        }
+      },
+      "synthetic_warm": {
+        "callback_ms": 3.529,
+        "roundtrip_ms": 211.314,
+        "source": {
+          "committed_bytes": "3542015",
+          "complete_records": 4.0,
+          "format": "WVZ1",
+          "path": "/tmp/wavez-417-sequence-package/sequence.wvz",
+          "sha256": "14937dab8b8aed343c71a87d366c080620635371e91b889fe0b0ee4d3d1ea607",
+          "uuid": "929e5111bc254c4d881e39e509bdc19d"
+        },
+        "status": "Verified 3-map sequence reused from cache. Exact native times only; missing times hide the map.",
+        "sequence": {
+          "admission": {
+            "centers_per_time": 25.0,
+            "reply_limit_bytes": 1048576.0,
+            "result_reservation_bytes": 2097152.0,
+            "selected_times": 3.0,
+            "total_centers": 75.0,
+            "workspace_bytes": 80780790.0
+          },
+          "cache": {
+            "entry_count": 1.0,
+            "hit": true,
+            "limit_bytes": 67108864.0,
+            "policy": "exact selected sequence",
+            "stored_bytes": 55961.0
+          },
+          "indices": [
+            0.0,
+            1.0,
+            2.0
+          ],
+          "kind": "spectral_band_sequence",
+          "provenance": {
+            "implementation_sha256": "d80d30f2e998adedc21a3866dc99515a740e453982be9b2d9a27dc53976ca55a",
+            "numpy": "2.4.3",
+            "source_policy": "verified committed prefix; appended extents miss; no path/UUID-only reuse",
+            "storage": "existing ResultCache manifest and support artifacts; atomic complete selection",
+            "worker": {
+              "analysis_code_sha256": "d508da76d9c7e2ba7e4ae34d7c77a98f7462f15fd0345d588e4dcea7fcd43eeb",
+              "policy": "private file transport; one computation at a time",
+              "worker": "tools/analyze_selection.py"
+            }
+          },
+          "request_key": "eb68e181f6c4b34096d7ad9f14dbfc86cb7d2b7e39c0fb3548093def229ce8b8",
+          "schema": 1.0,
+          "timings": {
+            "lookup_seconds": 0.00440671100113831,
+            "prepare_seconds": 2.990000029967632e-05,
+            "verification_open_seconds": 0.00106791799953498
+          }
+        },
+        "maps": [
+          {
+            "record": {
+              "index": 0.0,
+              "native_time": {
+                "f64_le_hex": "0000000000000000",
+                "text": "0"
+              },
+              "requested_time": {
+                "f64_le_hex": "0000000000000000",
+                "text": "0"
+              },
+              "sampling": "exact",
+              "sequence": 0.0
+            },
+            "request_key": "f5c9de05d7d194ffa419864cbcb15e53e877ad867de2ed90d18a30ba5b6ba043",
+            "coverage": {
+              "mask": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                true,
+                true,
+                true,
+                false,
+                false,
+                true,
+                true,
+                true,
+                false,
+                false,
+                true,
+                true,
+                true,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+              ],
+              "measured": 9.0,
+              "total": 25.0,
+              "unavailable": 16.0
+            },
+            "support": {
+              "axis_order": "zyx",
+              "bounds": "complete finite source samples only; no padding or wrap",
+              "center_span_xyz": [
+                3.75,
+                5.625,
+                7.5
+              ],
+              "criterion": "at least two cycles of the low band edge on every axis; heuristic, not a resolution guarantee",
+              "cycles_xyz": [
+                1.6,
+                2.4000000000000004,
+                3.2
+              ],
+              "df_xyz": [
+                0.25,
+                0.16666666666666666,
+                0.125
+              ],
+              "extent_xyz": [
+                4.0,
+                6.0,
+                8.0
+              ],
+              "minimum_frequency": 0.4,
+              "shape": [
+                16.0,
+                16.0,
+                16.0
+              ],
+              "status": "insufficient_support"
+            },
+            "grid": {
+              "centers": "integer window starts + (support - 1)/2; no half-cell offset",
+              "column_axis": "x",
+              "coordinate_space": "data_local",
+              "count": [
+                5.0,
+                5.0
+              ],
+              "fixed_start": 16.0,
+              "hop": [
+                12.0,
+                12.0
+              ],
+              "order": "row-major; remaining source z,y,x axes",
+              "plane_axis": "z",
+              "row_axis": "y",
+              "shape": [
+                5.0,
+                5.0
+              ],
+              "start": [
+                -8.0,
+                -8.0
+              ]
+            },
+            "units": {
+              "frequency": "cycles / (dimensionless)",
+              "position": "dimensionless",
+              "power": "(dimensionless)^2",
+              "value": "dimensionless"
+            },
+            "timings": {
+              "batch_seconds": 0.00357936799991875,
+              "calculation_seconds": 0.00211405699701572,
+              "decode_seconds": 0.0009171450001304,
+              "decoded_samples": 1.0,
+              "fft_seconds": 0.00112314999933005,
+              "reduction_seconds": 0.00131060900093871
+            },
+            "workspace_bytes": 4456448.0,
+            "power_min": 0.1759471133251903,
+            "power_max": 1.3779819954013628,
+            "numerical_sha256": "eb06fcb6ce463029d71f7004902944fd46655451190e3665b160e9a172a6ad71"
+          },
+          {
+            "record": {
+              "index": 1.0,
+              "native_time": {
+                "f64_le_hex": "0000000000000040",
+                "text": "2"
+              },
+              "requested_time": {
+                "f64_le_hex": "0000000000000040",
+                "text": "2"
+              },
+              "sampling": "exact",
+              "sequence": 1.0
+            },
+            "request_key": "99ae8d7f24db4718dbee68399bb79f34d93bd517522b1cc10fbaab2ea04bc19f",
+            "coverage": {
+              "mask": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                true,
+                true,
+                true,
+                false,
+                false,
+                true,
+                true,
+                true,
+                false,
+                false,
+                true,
+                true,
+                true,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+              ],
+              "measured": 9.0,
+              "total": 25.0,
+              "unavailable": 16.0
+            },
+            "support": {
+              "axis_order": "zyx",
+              "bounds": "complete finite source samples only; no padding or wrap",
+              "center_span_xyz": [
+                3.75,
+                5.625,
+                7.5
+              ],
+              "criterion": "at least two cycles of the low band edge on every axis; heuristic, not a resolution guarantee",
+              "cycles_xyz": [
+                1.6,
+                2.4000000000000004,
+                3.2
+              ],
+              "df_xyz": [
+                0.25,
+                0.16666666666666666,
+                0.125
+              ],
+              "extent_xyz": [
+                4.0,
+                6.0,
+                8.0
+              ],
+              "minimum_frequency": 0.4,
+              "shape": [
+                16.0,
+                16.0,
+                16.0
+              ],
+              "status": "insufficient_support"
+            },
+            "grid": {
+              "centers": "integer window starts + (support - 1)/2; no half-cell offset",
+              "column_axis": "x",
+              "coordinate_space": "data_local",
+              "count": [
+                5.0,
+                5.0
+              ],
+              "fixed_start": 16.0,
+              "hop": [
+                12.0,
+                12.0
+              ],
+              "order": "row-major; remaining source z,y,x axes",
+              "plane_axis": "z",
+              "row_axis": "y",
+              "shape": [
+                5.0,
+                5.0
+              ],
+              "start": [
+                -8.0,
+                -8.0
+              ]
+            },
+            "units": {
+              "frequency": "cycles / (dimensionless)",
+              "position": "dimensionless",
+              "power": "(dimensionless)^2",
+              "value": "dimensionless"
+            },
+            "timings": {
+              "batch_seconds": 0.00261877199955051,
+              "calculation_seconds": 0.00121974899957422,
+              "decode_seconds": 0.00091445500038389,
+              "decoded_samples": 1.0,
+              "fft_seconds": 0.0003740860029211,
+              "reduction_seconds": 0.00125891099742148
+            },
+            "workspace_bytes": 4456448.0,
+            "power_min": 0.7037884533007612,
+            "power_max": 5.511927981605451,
+            "numerical_sha256": "1cfbd95f46b63bd8aba575bacf9d77fbe611e398309a0cf0ea165f160e2a74e7"
+          },
+          {
+            "record": {
+              "index": 2.0,
+              "native_time": {
+                "f64_le_hex": "0000000000001040",
+                "text": "4"
+              },
+              "requested_time": {
+                "f64_le_hex": "0000000000001040",
+                "text": "4"
+              },
+              "sampling": "exact",
+              "sequence": 2.0
+            },
+            "request_key": "5eef93293de2de72b61341909a5946a5b56da3cfda451753869a6a82269eec95",
+            "coverage": {
+              "mask": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false,
+                true,
+                true,
+                true,
+                false,
+                false,
+                true,
+                true,
+                true,
+                false,
+                false,
+                true,
+                true,
+                true,
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+              ],
+              "measured": 9.0,
+              "total": 25.0,
+              "unavailable": 16.0
+            },
+            "support": {
+              "axis_order": "zyx",
+              "bounds": "complete finite source samples only; no padding or wrap",
+              "center_span_xyz": [
+                3.75,
+                5.625,
+                7.5
+              ],
+              "criterion": "at least two cycles of the low band edge on every axis; heuristic, not a resolution guarantee",
+              "cycles_xyz": [
+                1.6,
+                2.4000000000000004,
+                3.2
+              ],
+              "df_xyz": [
+                0.25,
+                0.16666666666666666,
+                0.125
+              ],
+              "extent_xyz": [
+                4.0,
+                6.0,
+                8.0
+              ],
+              "minimum_frequency": 0.4,
+              "shape": [
+                16.0,
+                16.0,
+                16.0
+              ],
+              "status": "insufficient_support"
+            },
+            "grid": {
+              "centers": "integer window starts + (support - 1)/2; no half-cell offset",
+              "column_axis": "x",
+              "coordinate_space": "data_local",
+              "count": [
+                5.0,
+                5.0
+              ],
+              "fixed_start": 16.0,
+              "hop": [
+                12.0,
+                12.0
+              ],
+              "order": "row-major; remaining source z,y,x axes",
+              "plane_axis": "z",
+              "row_axis": "y",
+              "shape": [
+                5.0,
+                5.0
+              ],
+              "start": [
+                -8.0,
+                -8.0
+              ]
+            },
+            "units": {
+              "frequency": "cycles / (dimensionless)",
+              "position": "dimensionless",
+              "power": "(dimensionless)^2",
+              "value": "dimensionless"
+            },
+            "timings": {
+              "batch_seconds": 0.0036079180008528,
+              "calculation_seconds": 0.00184788900332932,
+              "decode_seconds": 0.00090310500127088,
+              "decoded_samples": 1.0,
+              "fft_seconds": 0.00047138799891399,
+              "reduction_seconds": 0.00158305799959634
+            },
+            "workspace_bytes": 4456448.0,
+            "power_min": 0.02634696954724296,
+            "power_max": 0.26676061190841244,
+            "numerical_sha256": "c0edc7fea89ecd4e175dc89f43b1429a367ef66536405d1bdfafba936e52cae2"
+          }
+        ],
+        "worker": {
+          "ok": true,
+          "metrics": {
+            "charged_bytes": 0.0,
+            "cpu_seconds": 0.00769013999999998,
+            "decoded_bytes": 0.0,
+            "peak_charged_bytes": 80780790.0,
+            "read_bytes": 3079.0,
+            "seconds": 0.00800046900076267
+          },
+          "memory": {
+            "VmHWM": 43458560.0,
+            "VmPeak": 393388032.0,
+            "VmRSS": 43458560.0,
+            "VmSize": 389189632.0
+          },
+          "guard": {
+            "baseline": {
+              "VmHWM": 41295872.0,
+              "VmPeak": 386727936.0,
+              "VmRSS": 41295872.0,
+              "VmSize": 386727936.0
+            },
+            "ceiling_bytes": 2147483648.0,
+            "enabled": true,
+            "reason": "runtime plus 1 GiB workspace and 256 MiB overhead fit"
+          },
+          "shared_memory": {
+            "limit": 536870912.0,
+            "peak": 80780790.0,
+            "used": 0.0
+          },
+          "verification_memo": {
+            "charged_bytes": 2904.0,
+            "entries": 2.0,
+            "evictions": 0.0,
+            "hits": 9.0,
+            "limit_bytes": 4194304.0,
+            "peak_bytes": 2904.0
+          },
+          "playback_pressure": {
+            "pauses": 0.0,
+            "seconds": 0.0
+          }
+        }
+      }
+    }
+  },
+  "errors": [
+    "ERROR: Attempt to disconnect a nonexistent connection from 'root:<Window#36507223388>'. Signal: 'focus_entered', callable: ''.",
+    "ERROR: Attempt to disconnect a nonexistent connection from 'root:<Window#36507223388>'. Signal: 'tree_exited', callable: ''.",
+    "ERROR: Attempt to disconnect a nonexistent connection from '@PopupMenu@1747:<PopupMenu#221559921644>'. Signal: 'focus_entered', callable: ''.",
+    "ERROR: Attempt to disconnect a nonexistent connection from '@PopupMenu@1747:<PopupMenu#221559921644>'. Signal: 'tree_exited', callable: ''.",
+    "ERROR: Attempt to disconnect a nonexistent connection from 'root:<Window#36507223388>'. Signal: 'focus_entered', callable: ''.",
+    "ERROR: Attempt to disconnect a nonexistent connection from 'root:<Window#36507223388>'. Signal: 'tree_exited', callable: ''.",
+    "ERROR: Signal 'focus_entered' is already connected to given callable '' in that object.",
+    "ERROR: Signal 'tree_exited' is already connected to given callable '' in that object.",
+    "ERROR: Signal 'focus_entered' is already connected to given callable '' in that object.",
+    "ERROR: Signal 'tree_exited' is already connected to given callable '' in that object.",
+    "ERROR: Signal 'focus_entered' is already connected to given callable '' in that object.",
+    "ERROR: Signal 'tree_exited' is already connected to given callable '' in that object.",
+    "ERROR: Attempt to disconnect a nonexistent connection from 'root:<Window#36507223388>'. Signal: 'focus_entered', callable: ''.",
+    "ERROR: Attempt to disconnect a nonexistent connection from 'root:<Window#36507223388>'. Signal: 'tree_exited', callable: ''.",
+    "ERROR: Attempt to disconnect a nonexistent connection from '@PopupMenu@1747:<PopupMenu#221559921644>'. Signal: 'focus_entered', callable: ''.",
+    "ERROR: Attempt to disconnect a nonexistent connection from '@PopupMenu@1747:<PopupMenu#221559921644>'. Signal: 'tree_exited', callable: ''.",
+    "ERROR: Attempt to disconnect a nonexistent connection from 'root:<Window#36507223388>'. Signal: 'focus_entered', callable: ''.",
+    "ERROR: Attempt to disconnect a nonexistent connection from 'root:<Window#36507223388>'. Signal: 'tree_exited', callable: ''."
+  ],
+  "viewer_measurement_note": "Process CPU/RSS includes import/startup and all test interactions; NVIDIA samples are whole-device including desktop. Per-phase render CPU/GPU/frame timings are native observations.",
+  "validation_exit_code": 1,
+  "viewer_process_summary": {
+    "samples": 192,
+    "wall_seconds": 38.25172652400033,
+    "cpu_seconds": 35.69,
+    "mean_cpu_cores": 0.9330297804363673,
+    "peak_sampled_rss": 1506258944,
+    "peak_sampled_hwm": 1513877504
+  },
+  "retention": {
+    "raw_local_directory": "/tmp/wavez-417-sequence-package",
+    "raw_summary_sha256": "465f3f98c8233716b87012e46bcc0786b3e02b28e8ddd1eeefacf95fe54fb655",
+    "raw_native_sha256": "6e0d60a7cdb2f79cf1ec21f843370e0dee1a96dd5fb7d1b567f15052c7d950f7",
+    "note": "Repeated full maps/worker replies compacted to exact request keys, numerical hashes and ranges; raw local reports remain. Every failure and native error is retained."
+  }
+}

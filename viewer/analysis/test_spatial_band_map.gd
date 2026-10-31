@@ -135,7 +135,7 @@ func run() -> void:
 	check(map.result_data == result,"Palette and opacity never modify measured data")
 	map.palette.select(0); map.opacity.value = .8; map._presentation_changed()
 	viewer.requested_time = 3.; map.refresh_context()
-	check(map.result_data == result and map.requested_time == 1. and map.legend.text.contains("current playhead 3"),"Playback cursor leaves map pinned and explicitly labeled")
+	check(map.result_data == result and map.requested_time == 1. and map.legend.text.contains("playhead 3"),"Playback cursor leaves map pinned and explicitly labeled")
 	viewer.timeline.refresh(viewer); check(viewer.timeline.coverage == coverage_before,"Map creates no prepared timeline coverage")
 	map.close(); await settle()
 	check(map.plane.visible and map.legend_panel.visible,"Closing completed form keeps the viewport map and legend")

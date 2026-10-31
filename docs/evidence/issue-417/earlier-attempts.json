@@ -1,0 +1,69 @@
+[
+  {
+    "name": "sequence-source-1",
+    "raw_local_path": "/tmp/wavez-417-sequence-source-1/summary.json",
+    "raw_sha256": "966f4f459a51abe5332651ae5bacc09e1ce97981bf7e490b519c319602c4dae6",
+    "exit_code": 1,
+    "strict_exit_code": 1,
+    "checks": 74,
+    "failures": [
+      "Selected three-record set is a cold cache preparation",
+      "Actual signed N192 sequence retains 128\u00b3 support at three explicit native records",
+      "New worker independently verifies and reuses the actual prepared sequence"
+    ],
+    "errors": [
+      "ERROR: Selected three-record set is a cold cache preparation",
+      "ERROR: Actual signed N192 sequence retains 128\u00b3 support at three explicit native records",
+      "ERROR: New worker independently verifies and reuses the actual prepared sequence"
+    ]
+  },
+  {
+    "name": "sequence-source-2",
+    "raw_local_path": "/tmp/wavez-417-sequence-source-2/summary.json",
+    "raw_sha256": "34a0fa128c1e2f985149f90f28ba0fcc8bba5e10a2b58658a38de06bf9e7cb82",
+    "exit_code": 0,
+    "strict_exit_code": 0,
+    "checks": 76,
+    "failures": [],
+    "errors": []
+  },
+  {
+    "name": "sequence-source-3",
+    "raw_local_path": "/tmp/wavez-417-sequence-source-3/summary.json",
+    "raw_sha256": "6f7da8d24bcd74a03948e27528163cb5134c4ad266b7abe700db7fc334af8719",
+    "exit_code": 1,
+    "strict_exit_code": 1,
+    "checks": 82,
+    "failures": [
+      "Source append between ordinary polls is refused before sequence enqueue",
+      "Equal-size source mutation after worker completion prevents stale publication before the next ordinary poll"
+    ],
+    "errors": [
+      "ERROR: Source append between ordinary polls is refused before sequence enqueue",
+      "ERROR: Equal-size source mutation after worker completion prevents stale publication before the next ordinary poll"
+    ]
+  },
+  {
+    "name": "pinned-regression",
+    "raw_local_path": "/tmp/wavez-417-pinned-regression/summary.json",
+    "raw_sha256": "4673c2997e2553f0921319b7348b257c35e3eb57a6aa5355733bbc9eba9778a6",
+    "exit_code": 1,
+    "strict_exit_code": 1,
+    "checks": 63,
+    "failures": [
+      "Playback cursor leaves map pinned and explicitly labeled"
+    ],
+    "errors": [
+      "ERROR: Playback cursor leaves map pinned and explicitly labeled"
+    ]
+  },
+  {
+    "name": "initial CPU validator assumption",
+    "raw_local_path": "/tmp/wavez-417-model-sequence/failure.json",
+    "raw_sha256": "0aba5d2b7a737ebcf548f81edcf9733c17cd0ef550cf9062498bdc1a11c0ca18",
+    "failure": {
+      "status": "FAIL",
+      "error": "AssertionError('Request retained logical allocations')"
+    }
+  }
+]

@@ -28,8 +28,8 @@ derived computation and visual presentation have different guarantees.
 - [Analysis schemas](ANALYSIS_SCHEMAS.md) — request/result/state structures and quotas.
 - [Regional spatial spectrum](SPATIAL_SPECTRUM.md) — verified source support,
   Hann normalization, bounded radial diagnostics and interpretation limits.
-- [Spectral band map](SPATIAL_BAND_MAP.md) — a pinned source-aligned viewport
-  plane of bounded 3D-window measurements, unavailable masks and display limits.
+- [Spectral band map](SPATIAL_BAND_MAP.md) — pinned or selected-time cached
+  3D-window measurements, exact-time replay, unavailable masks and display limits.
 
 ## Capture format and Python integration
 

@@ -77,12 +77,12 @@ func start(cache_root := "", operation := "") -> bool:
 func _start_failed(message: String, operation: String) -> bool:
 	error = message
 	if operation == "spatial_spectrum": spatial_spectrum_failed.emit(message)
-	elif operation == "spectral_band_map": spectral_band_map_failed.emit(message)
+	elif operation in ["spectral_band_map","spectral_band_sequence"]: spectral_band_map_failed.emit(message)
 	else: failed.emit(message)
 	return false
 
 static func is_spectral_operation(operation: String) -> bool:
-	return operation in ["spatial_spectrum","spectral_band_map"]
+	return operation in ["spatial_spectrum","spectral_band_map","spectral_band_sequence"]
 
 func request(source: Dictionary, operation: String, arguments: Dictionary, source_revision: int, selection_version: int, analysis_version := 0) -> String:
 	if worker_pid <= 0 or not OS.is_process_running(worker_pid):
@@ -202,7 +202,7 @@ func _poll() -> void:
 			background_pending = false
 			if result.get("ok",false):
 				if background_operation == "spatial_spectrum": spatial_spectrum_completed.emit(result)
-				elif background_operation == "spectral_band_map": spectral_band_map_completed.emit(result)
+				elif background_operation in ["spectral_band_map","spectral_band_sequence"]: spectral_band_map_completed.emit(result)
 				else: background_completed.emit(result)
 			else:
 				background_error_code = result.get("code","")
@@ -211,12 +211,12 @@ func _poll() -> void:
 			var progress := _read("background_progress.json")
 			if progress.get("id") == background_id:
 				if background_operation == "spatial_spectrum": spatial_spectrum_progress.emit(progress)
-				elif background_operation == "spectral_band_map": spectral_band_map_progress.emit(progress)
+				elif background_operation in ["spectral_band_map","spectral_band_sequence"]: spectral_band_map_progress.emit(progress)
 				else: background_progress.emit(progress)
 
 func _background_failed(message: String) -> void:
 	if background_operation == "spatial_spectrum": spatial_spectrum_failed.emit(message)
-	elif background_operation == "spectral_band_map": spectral_band_map_failed.emit(message)
+	elif background_operation in ["spectral_band_map","spectral_band_sequence"]: spectral_band_map_failed.emit(message)
 	else: background_failed.emit(message)
 
 func _write(name: String, value: Dictionary) -> bool:
