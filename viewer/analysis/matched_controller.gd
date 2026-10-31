@@ -78,7 +78,7 @@ func choose_prepare() -> void:
 
 func prepare_to(destination: String) -> void:
 	if preparing or pid > 0:status.text = "Finish or cancel current matched work first.";return
-	if temporal.jobs.background_operation == "spatial_spectrum" and (temporal.jobs.background_pending or not temporal.jobs.background_cancel_id.is_empty()):status.text = "Finish or cancel Spatial spectrum before preparing matched views.";return
+	if temporal.jobs.is_spectral_operation(temporal.jobs.background_operation) and (temporal.jobs.background_pending or not temporal.jobs.background_cancel_id.is_empty()):status.text = "Finish or cancel the active spectral tool before preparing matched views.";return
 	var arguments := {"destination":destination,"opened_paths":temporal.durable.opened_paths.duplicate()}
 	for n in range(2):
 		var side: Dictionary = sides[n]

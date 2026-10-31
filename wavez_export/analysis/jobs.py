@@ -14,7 +14,7 @@ from .source import SourceSnapshot
 SELECTION_OPERATIONS = {"define_selection", "resolve_selection", "resolve_selections", "freeze_selection", "combine_selections", "edit_selection"}
 SOURCE_RESULT_OPERATIONS={"analyze","import_csv","estimate_period","compare_series","space_time"}
 SOURCE_OUTPUT_OPERATIONS={"export_analysis","save_recipe","load_recipe","prepare_matched_render"}
-BACKGROUND_OPERATIONS=SOURCE_RESULT_OPERATIONS|SOURCE_OUTPUT_OPERATIONS|{"result_series","result_plot","result_overlay","result_heatmap","spatial_spectrum"}
+BACKGROUND_OPERATIONS=SOURCE_RESULT_OPERATIONS|SOURCE_OUTPUT_OPERATIONS|{"result_series","result_plot","result_overlay","result_heatmap","spatial_spectrum","spectral_band_map"}
 OPERATIONS = {"describe", "records", "sample", "probe", "identity_audit", "epoch", "pick", "inspect_derived", "result_page", "result_manifest"} | SELECTION_OPERATIONS | BACKGROUND_OPERATIONS
 
 
@@ -124,7 +124,7 @@ def execute(request, *, context=None, memo=None, assets=None, results=None, prov
             else:from .comparisons import run
             data=run(source,request.get("arguments",{}),results,provenance=provenance)
         else:data = dispatch(source, request["operation"], request.get("arguments", {}))
-        if request["operation"] == "spatial_spectrum":
+        if request["operation"] in ("spatial_spectrum", "spectral_band_map"):
             data["timings"]["verification_open_seconds"] = source_open_seconds
             if provenance is not None:data["provenance"]["worker"] = provenance
         try:
@@ -143,6 +143,9 @@ def execute(request, *, context=None, memo=None, assets=None, results=None, prov
 
 
 def dispatch(source, operation, arguments):
+    if operation == "spectral_band_map":
+        from .spatial_band_map import run
+        return run(source, arguments)
     if operation == "spatial_spectrum":
         from .spatial_spectrum import run
         return run(source, arguments)

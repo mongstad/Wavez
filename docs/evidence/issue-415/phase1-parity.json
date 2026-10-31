@@ -1,0 +1,95 @@
+{
+  "issue": 415,
+  "baseline_commit": "40b00adb745e3a813069e148f6ccd8dd6e1fd147",
+  "baseline_expected_prefix": "40b00ad",
+  "baseline_spatial_spectrum_sha256": "876747056c790b6f7111052dd68668b302c0c7fee3cd3a9e6172a086ac8eae74",
+  "implementation_source_sha256": {
+    "wavez_export/analysis/spatial_spectrum.py": "a237c6a3a0cc1d918260676f17e783cf7e0ac143538dc193f87e9771b120f5ed",
+    "wavez_export/analysis/spatial_band_map.py": "5af605a2996fb9910441fe247b75095e7645e0e5ea9f7e521d59cc7f11a7684b",
+    "wavez_export/analysis/jobs.py": "53580c4708a025fa67ac1adac8037487b4a95099be15d4e0af87461b5db90a8c"
+  },
+  "comparison": {
+    "status": "PASS",
+    "method": "Load accepted HEAD spatial_spectrum.py into a separate Python module; execute old and new run() over independently opened SourceSnapshot instances of each same synthetic capture; compare full result dictionaries with Python equality after removing timings and request_key.",
+    "excluded_fields": [
+      "timings",
+      "request_key"
+    ],
+    "exclusion_reason": "Wall-clock timings, including isolated fft_seconds, are not numerical output; request_key now explicitly binds selected object/channel and optional band.",
+    "fixture_definition": "tests.test_spatial_spectrum.field_capture(path, wave(shape, (1,-2,2)) + .17, spacing=(.25,.5,1.5)); arguments=request(path,shape)[arguments]",
+    "fixtures": [
+      {
+        "shape_zyx": [
+          5,
+          6,
+          7
+        ],
+        "spacing_xyz": [
+          0.25,
+          0.5,
+          1.5
+        ],
+        "comparison": "exact dictionary equality PASS after additive FFT timing instrumentation",
+        "synthetic_capture_sha256": "bff80e879bbfe9a1feaf740b1aa44e66741aa7d93b1f8777a2d400ad7ff7ac9a"
+      },
+      {
+        "shape_zyx": [
+          8,
+          9,
+          10
+        ],
+        "spacing_xyz": [
+          0.25,
+          0.5,
+          1.5
+        ],
+        "comparison": "exact dictionary equality PASS after additive FFT timing instrumentation",
+        "synthetic_capture_sha256": "a4cdc89792bc8704b5a6ed97cff6e9bbbdf219f5c333ccdd42ff4b84f9320229"
+      },
+      {
+        "shape_zyx": [
+          12,
+          12,
+          12
+        ],
+        "spacing_xyz": [
+          0.25,
+          0.5,
+          1.5
+        ],
+        "comparison": "exact dictionary equality PASS after additive FFT timing instrumentation",
+        "synthetic_capture_sha256": "815652625d569bd4b4eb0ea3cf6b877b4d2385816197aabe4196f5552b5d13f4"
+      }
+    ],
+    "capture_retention": "Disposable temporary synthetic captures were removed after comparison; their payload SHA values are recorded for this timing-refresh parity run. No external scientific capture was read or modified."
+  },
+  "connected_regression": {
+    "command": "python -m unittest tests.test_analysis_source tests.test_analysis_worker -q",
+    "tests": 33,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0,
+    "result": "OK",
+    "reported_seconds": 3.537
+  },
+  "phase1_regression": {
+    "command": "python -m unittest tests.test_spatial_spectrum -q",
+    "tests": 17,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0,
+    "result": "OK",
+    "reported_seconds": 0.919
+  },
+  "evidence_note": "The three exact parity fixtures were repeated after additive FFT timer instrumentation. Existing source/worker regression records describe the earlier completed 33-test run; no source/worker lifecycle code changed afterward.",
+  "post_instrumentation_focused_regression": {
+    "command": "python -m unittest tests.test_spatial_spectrum tests.test_spatial_band_map -q",
+    "tests": 32,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0,
+    "result": "OK",
+    "reported_seconds": 1.978
+  },
+  "timing_contract": "fft_seconds measures only np.fft.rfftn wall time, is included within calculation_seconds, and is summed across successfully measured map centers. batch_seconds also includes invalid centers and checkpoint/service time."
+}

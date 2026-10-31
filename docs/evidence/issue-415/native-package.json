@@ -1,0 +1,2777 @@
+{
+  "exit_code": 0,
+  "seconds": 26.091057475000525,
+  "headless": false,
+  "packaged": true,
+  "source_hashes": {
+    "energy-only.wvz": "72e97f63aa4bc72f1d8ebbe5279f8965cac70afae8db527b2081db4c8d7b4028",
+    "scaled.wvz": "f7da00d386394b8d38d8483cc7abb026a02859fa6bfa8e5a98df254c01a27c02",
+    "translated.wvz": "c3725d8c53436f5a2803660c19efbf62e108003d4b79427710a29ab321495bff",
+    "nonfinite.wvz": "223b2570dbe1e1ff98340dc08eb69ec04935540476af6aa29a1c70f5ce0327ba",
+    "other.wvz": "e89e456dfbda0a94b8b22bec75feec306bbadbfec0a3690e15df6ddfc74fd8d2",
+    "field.wvz": "2aed2e0f730ca9e1a83ad1a39ddf132a4bdc66e650ac1faa6241b2b30b0c3f74"
+  },
+  "sources_unchanged": true,
+  "result": {
+    "checks": 68,
+    "device": "NVIDIA GeForce RTX 3070 Ti",
+    "display": "X11",
+    "failures": [],
+    "observations": {
+      "cancel_ack_ms": 194.514,
+      "cancel_callback_ms": 0.183,
+      "first": {
+        "data": {
+          "algorithm": "spectral-band-map-hann-v1",
+          "band": {
+            "convention": "low <= exact DFT radial frequency < high",
+            "frequency_measure": "cycles per source-coordinate unit",
+            "high": 0.8,
+            "high_exact": {
+              "f64_le_hex": "9a9999999999e93f",
+              "text": "0.80000000000000004"
+            },
+            "low": 0.4,
+            "low_exact": {
+              "f64_le_hex": "9a9999999999d93f",
+              "text": "0.40000000000000002"
+            }
+          },
+          "channel": "amplitude",
+          "coverage": {
+            "mask": [
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              true,
+              true,
+              true,
+              false,
+              false,
+              true,
+              true,
+              true,
+              false,
+              false,
+              true,
+              true,
+              true,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false
+            ],
+            "measured": 9.0,
+            "total": 25.0,
+            "unavailable": 16.0
+          },
+          "df_xyz": [
+            0.25,
+            0.16666666666666666,
+            0.125
+          ],
+          "geometry": {
+            "centering": "node",
+            "data_to_world": [
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            "origin": [
+              -6.0,
+              -9.0,
+              -12.0
+            ],
+            "shape": [
+              48.0,
+              48.0,
+              48.0
+            ],
+            "spacing": [
+              0.25,
+              0.375,
+              0.5
+            ]
+          },
+          "grid": {
+            "centers": "integer window starts + (support - 1)/2; no half-cell offset",
+            "column_axis": "x",
+            "coordinate_space": "data_local",
+            "count": [
+              5.0,
+              5.0
+            ],
+            "fixed_start": 16.0,
+            "hop": [
+              12.0,
+              12.0
+            ],
+            "order": "row-major; remaining source z,y,x axes",
+            "plane_axis": "z",
+            "row_axis": "y",
+            "shape": [
+              5.0,
+              5.0
+            ],
+            "start": [
+              -8.0,
+              -8.0
+            ]
+          },
+          "inscribed_nyquist": 1.0,
+          "kind": "spectral_band_map",
+          "measurements": [
+            {
+              "center_index_xyz": [
+                -0.5,
+                -0.5,
+                23.5
+              ],
+              "center_world_xyz": [
+                -6.125,
+                -9.1875,
+                -0.25
+              ],
+              "center_xyz": [
+                -6.125,
+                -9.1875,
+                -0.25
+              ],
+              "column": 0.0,
+              "coordinate_space": "data_local",
+              "end": [
+                32.0,
+                8.0,
+                8.0
+              ],
+              "mean": null,
+              "mean_exact": null,
+              "parseval_relative_error": null,
+              "power": null,
+              "power_exact": null,
+              "reason": "The complete 3D support extends outside the source; no padding, wrap or zero power was substituted",
+              "row": 0.0,
+              "start": [
+                16.0,
+                -8.0,
+                -8.0
+              ],
+              "status": "outside_support",
+              "total_power": null,
+              "total_power_exact": null
+            },
+            {
+              "center_index_xyz": [
+                11.5,
+                -0.5,
+                23.5
+              ],
+              "center_world_xyz": [
+                -3.125,
+                -9.1875,
+                -0.25
+              ],
+              "center_xyz": [
+                -3.125,
+                -9.1875,
+                -0.25
+              ],
+              "column": 1.0,
+              "coordinate_space": "data_local",
+              "end": [
+                32.0,
+                8.0,
+                20.0
+              ],
+              "mean": null,
+              "mean_exact": null,
+              "parseval_relative_error": null,
+              "power": null,
+              "power_exact": null,
+              "reason": "The complete 3D support extends outside the source; no padding, wrap or zero power was substituted",
+              "row": 0.0,
+              "start": [
+                16.0,
+                -8.0,
+                4.0
+              ],
+              "status": "outside_support",
+              "total_power": null,
+              "total_power_exact": null
+            },
+            {
+              "center_index_xyz": [
+                23.5,
+                -0.5,
+                23.5
+              ],
+              "center_world_xyz": [
+                -0.125,
+                -9.1875,
+                -0.25
+              ],
+              "center_xyz": [
+                -0.125,
+                -9.1875,
+                -0.25
+              ],
+              "column": 2.0,
+              "coordinate_space": "data_local",
+              "end": [
+                32.0,
+                8.0,
+                32.0
+              ],
+              "mean": null,
+              "mean_exact": null,
+              "parseval_relative_error": null,
+              "power": null,
+              "power_exact": null,
+              "reason": "The complete 3D support extends outside the source; no padding, wrap or zero power was substituted",
+              "row": 0.0,
+              "start": [
+                16.0,
+                -8.0,
+                16.0
+              ],
+              "status": "outside_support",
+              "total_power": null,
+              "total_power_exact": null
+            },
+            {
+              "center_index_xyz": [
+                35.5,
+                -0.5,
+                23.5
+              ],
+              "center_world_xyz": [
+                2.875,
+                -9.1875,
+                -0.25
+              ],
+              "center_xyz": [
+                2.875,
+                -9.1875,
+                -0.25
+              ],
+              "column": 3.0,
+              "coordinate_space": "data_local",
+              "end": [
+                32.0,
+                8.0,
+                44.0
+              ],
+              "mean": null,
+              "mean_exact": null,
+              "parseval_relative_error": null,
+              "power": null,
+              "power_exact": null,
+              "reason": "The complete 3D support extends outside the source; no padding, wrap or zero power was substituted",
+              "row": 0.0,
+              "start": [
+                16.0,
+                -8.0,
+                28.0
+              ],
+              "status": "outside_support",
+              "total_power": null,
+              "total_power_exact": null
+            },
+            {
+              "center_index_xyz": [
+                47.5,
+                -0.5,
+                23.5
+              ],
+              "center_world_xyz": [
+                5.875,
+                -9.1875,
+                -0.25
+              ],
+              "center_xyz": [
+                5.875,
+                -9.1875,
+                -0.25
+              ],
+              "column": 4.0,
+              "coordinate_space": "data_local",
+              "end": [
+                32.0,
+                8.0,
+                56.0
+              ],
+              "mean": null,
+              "mean_exact": null,
+              "parseval_relative_error": null,
+              "power": null,
+              "power_exact": null,
+              "reason": "The complete 3D support extends outside the source; no padding, wrap or zero power was substituted",
+              "row": 0.0,
+              "start": [
+                16.0,
+                -8.0,
+                40.0
+              ],
+              "status": "outside_support",
+              "total_power": null,
+              "total_power_exact": null
+            },
+            {
+              "center_index_xyz": [
+                -0.5,
+                11.5,
+                23.5
+              ],
+              "center_world_xyz": [
+                -6.125,
+                -4.6875,
+                -0.25
+              ],
+              "center_xyz": [
+                -6.125,
+                -4.6875,
+                -0.25
+              ],
+              "column": 0.0,
+              "coordinate_space": "data_local",
+              "end": [
+                32.0,
+                20.0,
+                8.0
+              ],
+              "mean": null,
+              "mean_exact": null,
+              "parseval_relative_error": null,
+              "power": null,
+              "power_exact": null,
+              "reason": "The complete 3D support extends outside the source; no padding, wrap or zero power was substituted",
+              "row": 1.0,
+              "start": [
+                16.0,
+                4.0,
+                -8.0
+              ],
+              "status": "outside_support",
+              "total_power": null,
+              "total_power_exact": null
+            },
+            {
+              "center_index_xyz": [
+                11.5,
+                11.5,
+                23.5
+              ],
+              "center_world_xyz": [
+                -3.125,
+                -4.6875,
+                -0.25
+              ],
+              "center_xyz": [
+                -3.125,
+                -4.6875,
+                -0.25
+              ],
+              "column": 1.0,
+              "coordinate_space": "data_local",
+              "end": [
+                32.0,
+                20.0,
+                20.0
+              ],
+              "mean": 8.503188521143308e-05,
+              "mean_exact": {
+                "f64_le_hex": "883416aa644a163f",
+                "text": "8.5031885211433078e-05"
+              },
+              "parseval_relative_error": 3.29506418209038e-16,
+              "power": 1.129872527500928,
+              "power_exact": {
+                "f64_le_hex": "dc3e2437f513f23f",
+                "text": "1.129872527500928"
+              },
+              "row": 1.0,
+              "selected_half_complex_bins": 206.0,
+              "start": [
+                16.0,
+                4.0,
+                4.0
+              ],
+              "status": "measured",
+              "total_power": 1.3477406973248505,
+              "total_power_exact": {
+                "f64_le_hex": "b9f9a78c5890f53f",
+                "text": "1.3477406973248505"
+              }
+            },
+            {
+              "center_index_xyz": [
+                23.5,
+                11.5,
+                23.5
+              ],
+              "center_world_xyz": [
+                -0.125,
+                -4.6875,
+                -0.25
+              ],
+              "center_xyz": [
+                -0.125,
+                -4.6875,
+                -0.25
+              ],
+              "column": 2.0,
+              "coordinate_space": "data_local",
+              "end": [
+                32.0,
+                20.0,
+                32.0
+              ],
+              "mean": 8.503188521069994e-05,
+              "mean_exact": {
+                "f64_le_hex": "386115aa644a163f",
+                "text": "8.5031885210699941e-05"
+              },
+              "parseval_relative_error": 0.0,
+              "power": 1.25077048701415,
+              "power_exact": {
+                "f64_le_hex": "bc7108ea2703f43f",
+                "text": "1.2507704870141501"
+              },
+              "row": 1.0,
+              "selected_half_complex_bins": 206.0,
+              "start": [
+                16.0,
+                4.0,
+                16.0
+              ],
+              "status": "measured",
+              "total_power": 1.4928793277186665,
+              "total_power_exact": {
+                "f64_le_hex": "76d1166fd5e2f73f",
+                "text": "1.4928793277186663"
+              }
+            },
+            {
+              "center_index_xyz": [
+                35.5,
+                11.5,
+                23.5
+              ],
+              "center_world_xyz": [
+                2.875,
+                -4.6875,
+                -0.25
+              ],
+              "center_xyz": [
+                2.875,
+                -4.6875,
+                -0.25
+              ],
+              "column": 3.0,
+              "coordinate_space": "data_local",
+              "end": [
+                32.0,
+                20.0,
+                44.0
+              ],
+              "mean": 8.503188521066487e-05,
+              "mean_exact": {
+                "f64_le_hex": "1c5715aa644a163f",
+                "text": "8.5031885210664867e-05"
+              },
+              "parseval_relative_error": 1.349430707041261e-16,
+              "power": 1.3779819954013628,
+              "power_exact": {
+                "f64_le_hex": "5e9c4bd9360cf63f",
+                "text": "1.3779819954013628"
+              },
+              "row": 1.0,
+              "selected_half_complex_bins": 206.0,
+              "start": [
+                16.0,
+                4.0,
+                28.0
+              ],
+              "status": "measured",
+              "total_power": 1.645468742977419,
+              "total_power_exact": {
+                "f64_le_hex": "17da5a08d753fa3f",
+                "text": "1.6454687429774191"
+              }
+            },
+            {
+              "center_index_xyz": [
+                47.5,
+                11.5,
+                23.5
+              ],
+              "center_world_xyz": [
+                5.875,
+                -4.6875,
+                -0.25
+              ],
+              "center_xyz": [
+                5.875,
+                -4.6875,
+                -0.25
+              ],
+              "column": 4.0,
+              "coordinate_space": "data_local",
+              "end": [
+                32.0,
+                20.0,
+                56.0
+              ],
+              "mean": null,
+              "mean_exact": null,
+              "parseval_relative_error": null,
+              "power": null,
+              "power_exact": null,
+              "reason": "The complete 3D support extends outside the source; no padding, wrap or zero power was substituted",
+              "row": 1.0,
+              "start": [
+                16.0,
+                4.0,
+                40.0
+              ],
+              "status": "outside_support",
+              "total_power": null,
+              "total_power_exact": null
+            },
+            {
+              "center_index_xyz": [
+                -0.5,
+                23.5,
+                23.5
+              ],
+              "center_world_xyz": [
+                -6.125,
+                -0.1875,
+                -0.25
+              ],
+              "center_xyz": [
+                -6.125,
+                -0.1875,
+                -0.25
+              ],
+              "column": 0.0,
+              "coordinate_space": "data_local",
+              "end": [
+                32.0,
+                32.0,
+                8.0
+              ],
+              "mean": null,
+              "mean_exact": null,
+              "parseval_relative_error": null,
+              "power": null,
+              "power_exact": null,
+              "reason": "The complete 3D support extends outside the source; no padding, wrap or zero power was substituted",
+              "row": 2.0,
+              "start": [
+                16.0,
+                16.0,
+                -8.0
+              ],
+              "status": "outside_support",
+              "total_power": null,
+              "total_power_exact": null
+            },
+            {
+              "center_index_xyz": [
+                11.5,
+                23.5,
+                23.5
+              ],
+              "center_world_xyz": [
+                -3.125,
+                -0.1875,
+                -0.25
+              ],
+              "center_xyz": [
+                -3.125,
+                -0.1875,
+                -0.25
+              ],
+              "column": 1.0,
+              "coordinate_space": "data_local",
+              "end": [
+                32.0,
+                32.0,
+                20.0
+              ],
+              "mean": 8.503188521110858e-05,
+              "mean_exact": {
+                "f64_le_hex": "00d715aa644a163f",
+                "text": "8.5031885211108577e-05"
+              },
+              "parseval_relative_error": 1.7113307965114021e-16,
+              "power": 0.5473676259893079,
+              "power_exact": {
+                "f64_le_hex": "706c901c0984e13f",
+                "text": "0.54736762598930788"
+              },
+              "row": 2.0,
+              "selected_half_complex_bins": 206.0,
+              "start": [
+                16.0,
+                16.0,
+                4.0
+              ],
+              "status": "measured",
+              "total_power": 0.6487483465431573,
+              "total_power_exact": {
+                "f64_le_hex": "f99477e48bc2e43f",
+                "text": "0.64874834654315727"
+              }
+            },
+            {
+              "center_index_xyz": [
+                23.5,
+                23.5,
+                23.5
+              ],
+              "center_world_xyz": [
+                -0.125,
+                -0.1875,
+                -0.25
+              ],
+              "center_xyz": [
+                -0.125,
+                -0.1875,
+                -0.25
+              ],
+              "column": 2.0,
+              "coordinate_space": "data_local",
+              "end": [
+                32.0,
+                32.0,
+                32.0
+              ],
+              "mean": 8.50318852106261e-05,
+              "mean_exact": {
+                "f64_le_hex": "f04b15aa644a163f",
+                "text": "8.5031885210626107e-05"
+              },
+              "parseval_relative_error": 0.0,
+              "power": 0.6298546051559746,
+              "power_exact": {
+                "f64_le_hex": "2c284cd8c427e43f",
+                "text": "0.62985460515597458"
+              },
+              "row": 2.0,
+              "selected_half_complex_bins": 206.0,
+              "start": [
+                16.0,
+                16.0,
+                16.0
+              ],
+              "status": "measured",
+              "total_power": 0.7477755904616923,
+              "total_power_exact": {
+                "f64_le_hex": "3cf63813c7ede73f",
+                "text": "0.74777559046169229"
+              }
+            },
+            {
+              "center_index_xyz": [
+                35.5,
+                23.5,
+                23.5
+              ],
+              "center_world_xyz": [
+                2.875,
+                -0.1875,
+                -0.25
+              ],
+              "center_xyz": [
+                2.875,
+                -0.1875,
+                -0.25
+              ],
+              "column": 3.0,
+              "coordinate_space": "data_local",
+              "end": [
+                32.0,
+                32.0,
+                44.0
+              ],
+              "mean": 8.503188521059857e-05,
+              "mean_exact": {
+                "f64_le_hex": "004415aa644a163f",
+                "text": "8.5031885210598568e-05"
+              },
+              "parseval_relative_error": 2.598927829188425e-16,
+              "power": 0.7187217926559739,
+              "power_exact": {
+                "f64_le_hex": "26284cd8c4ffe63f",
+                "text": "0.71872179265597391"
+              },
+              "row": 2.0,
+              "selected_half_complex_bins": 206.0,
+              "start": [
+                16.0,
+                16.0,
+                28.0
+              ],
+              "status": "measured",
+              "total_power": 0.8543700307152037,
+              "total_power_exact": {
+                "f64_le_hex": "8d5693d1ff56eb3f",
+                "text": "0.85437003071520368"
+              }
+            },
+            {
+              "center_index_xyz": [
+                47.5,
+                23.5,
+                23.5
+              ],
+              "center_world_xyz": [
+                5.875,
+                -0.1875,
+                -0.25
+              ],
+              "center_xyz": [
+                5.875,
+                -0.1875,
+                -0.25
+              ],
+              "column": 4.0,
+              "coordinate_space": "data_local",
+              "end": [
+                32.0,
+                32.0,
+                56.0
+              ],
+              "mean": null,
+              "mean_exact": null,
+              "parseval_relative_error": null,
+              "power": null,
+              "power_exact": null,
+              "reason": "The complete 3D support extends outside the source; no padding, wrap or zero power was substituted",
+              "row": 2.0,
+              "start": [
+                16.0,
+                16.0,
+                40.0
+              ],
+              "status": "outside_support",
+              "total_power": null,
+              "total_power_exact": null
+            },
+            {
+              "center_index_xyz": [
+                -0.5,
+                35.5,
+                23.5
+              ],
+              "center_world_xyz": [
+                -6.125,
+                4.3125,
+                -0.25
+              ],
+              "center_xyz": [
+                -6.125,
+                4.3125,
+                -0.25
+              ],
+              "column": 0.0,
+              "coordinate_space": "data_local",
+              "end": [
+                32.0,
+                44.0,
+                8.0
+              ],
+              "mean": null,
+              "mean_exact": null,
+              "parseval_relative_error": null,
+              "power": null,
+              "power_exact": null,
+              "reason": "The complete 3D support extends outside the source; no padding, wrap or zero power was substituted",
+              "row": 3.0,
+              "start": [
+                16.0,
+                28.0,
+                -8.0
+              ],
+              "status": "outside_support",
+              "total_power": null,
+              "total_power_exact": null
+            },
+            {
+              "center_index_xyz": [
+                11.5,
+                35.5,
+                23.5
+              ],
+              "center_world_xyz": [
+                -3.125,
+                4.3125,
+                -0.25
+              ],
+              "center_xyz": [
+                -3.125,
+                4.3125,
+                -0.25
+              ],
+              "column": 1.0,
+              "coordinate_space": "data_local",
+              "end": [
+                32.0,
+                44.0,
+                20.0
+              ],
+              "mean": 8.503188521124752e-05,
+              "mean_exact": {
+                "f64_le_hex": "0cff15aa644a163f",
+                "text": "8.5031885211247517e-05"
+              },
+              "parseval_relative_error": 4.1008312595882757e-16,
+              "power": 0.1759471133251903,
+              "power_exact": {
+                "f64_le_hex": "8c55c75c6f85c63f",
+                "text": "0.17594711332519031"
+              },
+              "row": 3.0,
+              "selected_half_complex_bins": 206.0,
+              "start": [
+                16.0,
+                28.0,
+                4.0
+              ],
+              "status": "measured",
+              "total_power": 0.2030484103733805,
+              "total_power_exact": {
+                "f64_le_hex": "807b07857dfdc93f",
+                "text": "0.20304841037338051"
+              }
+            },
+            {
+              "center_index_xyz": [
+                23.5,
+                35.5,
+                23.5
+              ],
+              "center_world_xyz": [
+                -0.125,
+                4.3125,
+                -0.25
+              ],
+              "center_xyz": [
+                -0.125,
+                4.3125,
+                -0.25
+              ],
+              "column": 2.0,
+              "coordinate_space": "data_local",
+              "end": [
+                32.0,
+                44.0,
+                32.0
+              ],
+              "mean": 8.503188521094551e-05,
+              "mean_exact": {
+                "f64_le_hex": "00a815aa644a163f",
+                "text": "8.5031885210945513e-05"
+              },
+              "parseval_relative_error": 0.0,
+              "power": 0.22002311214530215,
+              "power_exact": {
+                "f64_le_hex": "7d9c83a3b729cc3f",
+                "text": "0.22002311214530215"
+              },
+              "row": 3.0,
+              "selected_half_complex_bins": 206.0,
+              "start": [
+                16.0,
+                28.0,
+                16.0
+              ],
+              "status": "measured",
+              "total_power": 0.25596426781663456,
+              "total_power_exact": {
+                "f64_le_hex": "d5e3cdf3b761d03f",
+                "text": "0.25596426781663456"
+              }
+            },
+            {
+              "center_index_xyz": [
+                35.5,
+                35.5,
+                23.5
+              ],
+              "center_world_xyz": [
+                2.875,
+                4.3125,
+                -0.25
+              ],
+              "center_xyz": [
+                2.875,
+                4.3125,
+                -0.25
+              ],
+              "column": 3.0,
+              "coordinate_space": "data_local",
+              "end": [
+                32.0,
+                44.0,
+                44.0
+              ],
+              "mean": 8.503188521094074e-05,
+              "mean_exact": {
+                "f64_le_hex": "a0a615aa644a163f",
+                "text": "8.5031885210940742e-05"
+              },
+              "parseval_relative_error": 0.0,
+              "power": 0.2705459787580883,
+              "power_exact": {
+                "f64_le_hex": "a223b514a050d13f",
+                "text": "0.27054597875808828"
+              },
+              "row": 3.0,
+              "selected_half_complex_bins": 206.0,
+              "start": [
+                16.0,
+                28.0,
+                28.0
+              ],
+              "status": "measured",
+              "total_power": 0.31656373306490515,
+              "total_power_exact": {
+                "f64_le_hex": "a04227889442d43f",
+                "text": "0.31656373306490515"
+              }
+            },
+            {
+              "center_index_xyz": [
+                47.5,
+                35.5,
+                23.5
+              ],
+              "center_world_xyz": [
+                5.875,
+                4.3125,
+                -0.25
+              ],
+              "center_xyz": [
+                5.875,
+                4.3125,
+                -0.25
+              ],
+              "column": 4.0,
+              "coordinate_space": "data_local",
+              "end": [
+                32.0,
+                44.0,
+                56.0
+              ],
+              "mean": null,
+              "mean_exact": null,
+              "parseval_relative_error": null,
+              "power": null,
+              "power_exact": null,
+              "reason": "The complete 3D support extends outside the source; no padding, wrap or zero power was substituted",
+              "row": 3.0,
+              "start": [
+                16.0,
+                28.0,
+                40.0
+              ],
+              "status": "outside_support",
+              "total_power": null,
+              "total_power_exact": null
+            },
+            {
+              "center_index_xyz": [
+                -0.5,
+                47.5,
+                23.5
+              ],
+              "center_world_xyz": [
+                -6.125,
+                8.8125,
+                -0.25
+              ],
+              "center_xyz": [
+                -6.125,
+                8.8125,
+                -0.25
+              ],
+              "column": 0.0,
+              "coordinate_space": "data_local",
+              "end": [
+                32.0,
+                56.0,
+                8.0
+              ],
+              "mean": null,
+              "mean_exact": null,
+              "parseval_relative_error": null,
+              "power": null,
+              "power_exact": null,
+              "reason": "The complete 3D support extends outside the source; no padding, wrap or zero power was substituted",
+              "row": 4.0,
+              "start": [
+                16.0,
+                40.0,
+                -8.0
+              ],
+              "status": "outside_support",
+              "total_power": null,
+              "total_power_exact": null
+            },
+            {
+              "center_index_xyz": [
+                11.5,
+                47.5,
+                23.5
+              ],
+              "center_world_xyz": [
+                -3.125,
+                8.8125,
+                -0.25
+              ],
+              "center_xyz": [
+                -3.125,
+                8.8125,
+                -0.25
+              ],
+              "column": 1.0,
+              "coordinate_space": "data_local",
+              "end": [
+                32.0,
+                56.0,
+                20.0
+              ],
+              "mean": null,
+              "mean_exact": null,
+              "parseval_relative_error": null,
+              "power": null,
+              "power_exact": null,
+              "reason": "The complete 3D support extends outside the source; no padding, wrap or zero power was substituted",
+              "row": 4.0,
+              "start": [
+                16.0,
+                40.0,
+                4.0
+              ],
+              "status": "outside_support",
+              "total_power": null,
+              "total_power_exact": null
+            },
+            {
+              "center_index_xyz": [
+                23.5,
+                47.5,
+                23.5
+              ],
+              "center_world_xyz": [
+                -0.125,
+                8.8125,
+                -0.25
+              ],
+              "center_xyz": [
+                -0.125,
+                8.8125,
+                -0.25
+              ],
+              "column": 2.0,
+              "coordinate_space": "data_local",
+              "end": [
+                32.0,
+                56.0,
+                32.0
+              ],
+              "mean": null,
+              "mean_exact": null,
+              "parseval_relative_error": null,
+              "power": null,
+              "power_exact": null,
+              "reason": "The complete 3D support extends outside the source; no padding, wrap or zero power was substituted",
+              "row": 4.0,
+              "start": [
+                16.0,
+                40.0,
+                16.0
+              ],
+              "status": "outside_support",
+              "total_power": null,
+              "total_power_exact": null
+            },
+            {
+              "center_index_xyz": [
+                35.5,
+                47.5,
+                23.5
+              ],
+              "center_world_xyz": [
+                2.875,
+                8.8125,
+                -0.25
+              ],
+              "center_xyz": [
+                2.875,
+                8.8125,
+                -0.25
+              ],
+              "column": 3.0,
+              "coordinate_space": "data_local",
+              "end": [
+                32.0,
+                56.0,
+                44.0
+              ],
+              "mean": null,
+              "mean_exact": null,
+              "parseval_relative_error": null,
+              "power": null,
+              "power_exact": null,
+              "reason": "The complete 3D support extends outside the source; no padding, wrap or zero power was substituted",
+              "row": 4.0,
+              "start": [
+                16.0,
+                40.0,
+                28.0
+              ],
+              "status": "outside_support",
+              "total_power": null,
+              "total_power_exact": null
+            },
+            {
+              "center_index_xyz": [
+                47.5,
+                47.5,
+                23.5
+              ],
+              "center_world_xyz": [
+                5.875,
+                8.8125,
+                -0.25
+              ],
+              "center_xyz": [
+                5.875,
+                8.8125,
+                -0.25
+              ],
+              "column": 4.0,
+              "coordinate_space": "data_local",
+              "end": [
+                32.0,
+                56.0,
+                56.0
+              ],
+              "mean": null,
+              "mean_exact": null,
+              "parseval_relative_error": null,
+              "power": null,
+              "power_exact": null,
+              "reason": "The complete 3D support extends outside the source; no padding, wrap or zero power was substituted",
+              "row": 4.0,
+              "start": [
+                16.0,
+                40.0,
+                40.0
+              ],
+              "status": "outside_support",
+              "total_power": null,
+              "total_power_exact": null
+            }
+          ],
+          "nyquist_xyz": [
+            2.0,
+            1.3333333333333333,
+            1.0
+          ],
+          "object": "field",
+          "provenance": {
+            "algorithm": "spectral-band-map-hann-v1",
+            "batching": "one native selected-channel decode; one sequential FFT workspace; no display-preview input",
+            "calculation_dtype": "float64",
+            "descriptor_sha256": "09847ed23723d90f5b8859dbce7577758b2b41ea03bd0e642b84bc3acbfe0eb8",
+            "detrending": "mu=sum(w*q)/sum(w); DFT input=w*(q-mu)",
+            "geometry_policy": "data_local; identity linear data_to_world; translation changes world centers only",
+            "kernel_algorithm": "spatial-spectrum-hann-v1",
+            "normalization": "m*abs(DFT(w*(q-sum(w*q)/sum(w))))^2/(N*sum(w^2))",
+            "numpy": "2.4.3",
+            "position_units_source": "capture position_unit or unknown",
+            "power_meaning": "sum of exact-band window-weighted mean-square residual powers; not Hamiltonian energy",
+            "source_dtype": "f8",
+            "unit_policy": "canonical position_unit and channel_metadata only; no automatic conversion",
+            "value_units_source": "capture channel_metadata or unknown",
+            "window": "periodic Hann, separable in z,y,x",
+            "worker": {
+              "analysis_code_sha256": "34465376967a4ff85698e1aa6ad113bf5b0b5ed3c0dbbf41fb288fe1e387ffca",
+              "policy": "private file transport; one computation at a time",
+              "worker": "tools/analyze_selection.py"
+            }
+          },
+          "record": {
+            "index": 0.0,
+            "native_time": {
+              "f64_le_hex": "0000000000000000",
+              "text": "0"
+            },
+            "requested_time": {
+              "f64_le_hex": "000000000000f03f",
+              "text": "1"
+            },
+            "sampling": "held",
+            "sequence": 0.0
+          },
+          "request_key": "fb286747cf9ac308fb5ec9f06442ce7a538acd1b4fbb9b62c089475e122aa376",
+          "support": {
+            "axis_order": "zyx",
+            "bounds": "complete finite source samples only; no padding or wrap",
+            "center_span_xyz": [
+              3.75,
+              5.625,
+              7.5
+            ],
+            "criterion": "at least two cycles of the low band edge on every axis; heuristic, not a resolution guarantee",
+            "cycles_xyz": [
+              1.6,
+              2.4000000000000004,
+              3.2
+            ],
+            "df_xyz": [
+              0.25,
+              0.16666666666666666,
+              0.125
+            ],
+            "extent_xyz": [
+              4.0,
+              6.0,
+              8.0
+            ],
+            "minimum_frequency": 0.4,
+            "shape": [
+              16.0,
+              16.0,
+              16.0
+            ],
+            "status": "insufficient_support"
+          },
+          "timings": {
+            "batch_seconds": 0.00430022999989887,
+            "calculation_seconds": 0.00258068000130151,
+            "decode_seconds": 0.00118790900069143,
+            "decoded_samples": 1.0,
+            "fft_seconds": 0.0013576710016423,
+            "reduction_seconds": 0.00153784499980247,
+            "verification_open_seconds": 0.00506895199941936
+          },
+          "units": {
+            "frequency": "cycles / (dimensionless)",
+            "position": "dimensionless",
+            "power": "(dimensionless)^2",
+            "value": "dimensionless"
+          },
+          "warnings": [
+            "Regional band power is not a unique local wavelength, propagation direction, phase, Hamiltonian energy or optical light.",
+            "Finite 3D support and Hann broadening cause leakage; band edges select exact discrete Fourier radii, not ideal physical passbands.",
+            "Overlapping windows are correlated. Only listed centers are measured; palette, opacity and display interpolation are presentation.",
+            "Unavailable centers have null power, not zero. No periodic boundary wrapping or partial window is used.",
+            "Unresolved band: fewer than two cycles of its low edge fit on at least one axis. Preserve needed support and reduce center count for a smaller batch; this heuristic is not a resolution guarantee.",
+            "16 of 25 centers are unavailable; inspect their explicit status and coverage mask."
+          ],
+          "workspace_bytes": 4456448.0
+        },
+        "publication_ms": 245.614,
+        "source": {
+          "committed_bytes": "5312203",
+          "complete_records": 3.0,
+          "format": "WVZ1",
+          "path": "/tmp/wavez-415-ui-package-reviewed/field.wvz",
+          "sha256": "2aed2e0f730ca9e1a83ad1a39ddf132a4bdc66e650ac1faa6241b2b30b0c3f74",
+          "uuid": "32cd0e5df9eb4a7c8d92dd535f54b1d5"
+        }
+      },
+      "model": {
+        "data": {
+          "algorithm": "spectral-band-map-hann-v1",
+          "band": {
+            "convention": "low <= exact DFT radial frequency < high",
+            "frequency_measure": "cycles per source-coordinate unit",
+            "high": 0.15,
+            "high_exact": {
+              "f64_le_hex": "333333333333c33f",
+              "text": "0.14999999999999999"
+            },
+            "low": 0.05,
+            "low_exact": {
+              "f64_le_hex": "9a9999999999a93f",
+              "text": "0.050000000000000003"
+            }
+          },
+          "channel": "amplitude",
+          "coverage": {
+            "mask": [
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              true,
+              true,
+              true,
+              false,
+              false,
+              true,
+              true,
+              true,
+              false,
+              false,
+              true,
+              true,
+              true,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false
+            ],
+            "measured": 9.0,
+            "total": 25.0,
+            "unavailable": 16.0
+          },
+          "df_xyz": [
+            0.046875,
+            0.046875,
+            0.046875
+          ],
+          "geometry": {
+            "centering": "node",
+            "data_to_world": [
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            "origin": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "shape": [
+              192.0,
+              192.0,
+              192.0
+            ],
+            "spacing": [
+              0.16666666666666666,
+              0.16666666666666666,
+              0.16666666666666666
+            ]
+          },
+          "grid": {
+            "centers": "integer window starts + (support - 1)/2; no half-cell offset",
+            "column_axis": "x",
+            "coordinate_space": "data_local",
+            "count": [
+              5.0,
+              5.0
+            ],
+            "fixed_start": 32.0,
+            "hop": [
+              32.0,
+              32.0
+            ],
+            "order": "row-major; remaining source z,y,x axes",
+            "plane_axis": "z",
+            "row_axis": "y",
+            "shape": [
+              5.0,
+              5.0
+            ],
+            "start": [
+              -32.0,
+              -32.0
+            ]
+          },
+          "inscribed_nyquist": 3.0,
+          "kind": "spectral_band_map",
+          "measurements": [
+            {
+              "center_index_xyz": [
+                31.5,
+                31.5,
+                95.5
+              ],
+              "center_world_xyz": [
+                5.25,
+                5.25,
+                15.916666666666666
+              ],
+              "center_xyz": [
+                5.25,
+                5.25,
+                15.916666666666666
+              ],
+              "column": 0.0,
+              "coordinate_space": "data_local",
+              "end": [
+                160.0,
+                96.0,
+                96.0
+              ],
+              "mean": null,
+              "mean_exact": null,
+              "parseval_relative_error": null,
+              "power": null,
+              "power_exact": null,
+              "reason": "The complete 3D support extends outside the source; no padding, wrap or zero power was substituted",
+              "row": 0.0,
+              "start": [
+                32.0,
+                -32.0,
+                -32.0
+              ],
+              "status": "outside_support",
+              "total_power": null,
+              "total_power_exact": null
+            },
+            {
+              "center_index_xyz": [
+                63.5,
+                31.5,
+                95.5
+              ],
+              "center_world_xyz": [
+                10.583333333333332,
+                5.25,
+                15.916666666666666
+              ],
+              "center_xyz": [
+                10.583333333333332,
+                5.25,
+                15.916666666666666
+              ],
+              "column": 1.0,
+              "coordinate_space": "data_local",
+              "end": [
+                160.0,
+                96.0,
+                128.0
+              ],
+              "mean": null,
+              "mean_exact": null,
+              "parseval_relative_error": null,
+              "power": null,
+              "power_exact": null,
+              "reason": "The complete 3D support extends outside the source; no padding, wrap or zero power was substituted",
+              "row": 0.0,
+              "start": [
+                32.0,
+                -32.0,
+                0.0
+              ],
+              "status": "outside_support",
+              "total_power": null,
+              "total_power_exact": null
+            },
+            {
+              "center_index_xyz": [
+                95.5,
+                31.5,
+                95.5
+              ],
+              "center_world_xyz": [
+                15.916666666666666,
+                5.25,
+                15.916666666666666
+              ],
+              "center_xyz": [
+                15.916666666666666,
+                5.25,
+                15.916666666666666
+              ],
+              "column": 2.0,
+              "coordinate_space": "data_local",
+              "end": [
+                160.0,
+                96.0,
+                160.0
+              ],
+              "mean": null,
+              "mean_exact": null,
+              "parseval_relative_error": null,
+              "power": null,
+              "power_exact": null,
+              "reason": "The complete 3D support extends outside the source; no padding, wrap or zero power was substituted",
+              "row": 0.0,
+              "start": [
+                32.0,
+                -32.0,
+                32.0
+              ],
+              "status": "outside_support",
+              "total_power": null,
+              "total_power_exact": null
+            },
+            {
+              "center_index_xyz": [
+                127.5,
+                31.5,
+                95.5
+              ],
+              "center_world_xyz": [
+                21.25,
+                5.25,
+                15.916666666666666
+              ],
+              "center_xyz": [
+                21.25,
+                5.25,
+                15.916666666666666
+              ],
+              "column": 3.0,
+              "coordinate_space": "data_local",
+              "end": [
+                160.0,
+                96.0,
+                192.0
+              ],
+              "mean": null,
+              "mean_exact": null,
+              "parseval_relative_error": null,
+              "power": null,
+              "power_exact": null,
+              "reason": "The complete 3D support extends outside the source; no padding, wrap or zero power was substituted",
+              "row": 0.0,
+              "start": [
+                32.0,
+                -32.0,
+                64.0
+              ],
+              "status": "outside_support",
+              "total_power": null,
+              "total_power_exact": null
+            },
+            {
+              "center_index_xyz": [
+                159.5,
+                31.5,
+                95.5
+              ],
+              "center_world_xyz": [
+                26.583333333333332,
+                5.25,
+                15.916666666666666
+              ],
+              "center_xyz": [
+                26.583333333333332,
+                5.25,
+                15.916666666666666
+              ],
+              "column": 4.0,
+              "coordinate_space": "data_local",
+              "end": [
+                160.0,
+                96.0,
+                224.0
+              ],
+              "mean": null,
+              "mean_exact": null,
+              "parseval_relative_error": null,
+              "power": null,
+              "power_exact": null,
+              "reason": "The complete 3D support extends outside the source; no padding, wrap or zero power was substituted",
+              "row": 0.0,
+              "start": [
+                32.0,
+                -32.0,
+                96.0
+              ],
+              "status": "outside_support",
+              "total_power": null,
+              "total_power_exact": null
+            },
+            {
+              "center_index_xyz": [
+                31.5,
+                63.5,
+                95.5
+              ],
+              "center_world_xyz": [
+                5.25,
+                10.583333333333332,
+                15.916666666666666
+              ],
+              "center_xyz": [
+                5.25,
+                10.583333333333332,
+                15.916666666666666
+              ],
+              "column": 0.0,
+              "coordinate_space": "data_local",
+              "end": [
+                160.0,
+                128.0,
+                96.0
+              ],
+              "mean": null,
+              "mean_exact": null,
+              "parseval_relative_error": null,
+              "power": null,
+              "power_exact": null,
+              "reason": "The complete 3D support extends outside the source; no padding, wrap or zero power was substituted",
+              "row": 1.0,
+              "start": [
+                32.0,
+                0.0,
+                -32.0
+              ],
+              "status": "outside_support",
+              "total_power": null,
+              "total_power_exact": null
+            },
+            {
+              "center_index_xyz": [
+                63.5,
+                63.5,
+                95.5
+              ],
+              "center_world_xyz": [
+                10.583333333333332,
+                10.583333333333332,
+                15.916666666666666
+              ],
+              "center_xyz": [
+                10.583333333333332,
+                10.583333333333332,
+                15.916666666666666
+              ],
+              "column": 1.0,
+              "coordinate_space": "data_local",
+              "end": [
+                160.0,
+                128.0,
+                128.0
+              ],
+              "mean": 0.05172144601992459,
+              "mean_exact": {
+                "f64_le_hex": "739750be3b7baa3f",
+                "text": "0.051721446019924587"
+              },
+              "parseval_relative_error": 2.146216943724322e-16,
+              "power": 0.05474195024474842,
+              "power_exact": {
+                "f64_le_hex": "e7780a0c2307ac3f",
+                "text": "0.05474195024474842"
+              },
+              "row": 1.0,
+              "selected_half_complex_bins": 86.0,
+              "start": [
+                32.0,
+                0.0,
+                0.0
+              ],
+              "status": "measured",
+              "total_power": 0.06466162634860383,
+              "total_power_exact": {
+                "f64_le_hex": "67327912aa8db03f",
+                "text": "0.064661626348603826"
+              }
+            },
+            {
+              "center_index_xyz": [
+                95.5,
+                63.5,
+                95.5
+              ],
+              "center_world_xyz": [
+                15.916666666666666,
+                10.583333333333332,
+                15.916666666666666
+              ],
+              "center_xyz": [
+                15.916666666666666,
+                10.583333333333332,
+                15.916666666666666
+              ],
+              "column": 2.0,
+              "coordinate_space": "data_local",
+              "end": [
+                160.0,
+                128.0,
+                160.0
+              ],
+              "mean": 0.04602694409255457,
+              "mean_exact": {
+                "f64_le_hex": "ed8439f7d790a73f",
+                "text": "0.046026944092554568"
+              },
+              "parseval_relative_error": 1.6245663821157795e-16,
+              "power": 0.06926387815394022,
+              "power_exact": {
+                "f64_le_hex": "0a1e770b47bbb13f",
+                "text": "0.069263878153940223"
+              },
+              "row": 1.0,
+              "selected_half_complex_bins": 86.0,
+              "start": [
+                32.0,
+                0.0,
+                32.0
+              ],
+              "status": "measured",
+              "total_power": 0.08542456596781538,
+              "total_power_exact": {
+                "f64_le_hex": "bb541b6562deb53f",
+                "text": "0.085424565967815377"
+              }
+            },
+            {
+              "center_index_xyz": [
+                127.5,
+                63.5,
+                95.5
+              ],
+              "center_world_xyz": [
+                21.25,
+                10.583333333333332,
+                15.916666666666666
+              ],
+              "center_xyz": [
+                21.25,
+                10.583333333333332,
+                15.916666666666666
+              ],
+              "column": 3.0,
+              "coordinate_space": "data_local",
+              "end": [
+                160.0,
+                128.0,
+                192.0
+              ],
+              "mean": 0.05609368929141446,
+              "mean_exact": {
+                "f64_le_hex": "518709e24fb8ac3f",
+                "text": "0.056093689291414457"
+              },
+              "parseval_relative_error": 0.0,
+              "power": 0.05633439324537693,
+              "power_exact": {
+                "f64_le_hex": "d1fe4191dcd7ac3f",
+                "text": "0.056334393245376931"
+              },
+              "row": 1.0,
+              "selected_half_complex_bins": 86.0,
+              "start": [
+                32.0,
+                0.0,
+                64.0
+              ],
+              "status": "measured",
+              "total_power": 0.06638499400301195,
+              "total_power_exact": {
+                "f64_le_hex": "d42630629bfeb03f",
+                "text": "0.066384994003011955"
+              }
+            },
+            {
+              "center_index_xyz": [
+                159.5,
+                63.5,
+                95.5
+              ],
+              "center_world_xyz": [
+                26.583333333333332,
+                10.583333333333332,
+                15.916666666666666
+              ],
+              "center_xyz": [
+                26.583333333333332,
+                10.583333333333332,
+                15.916666666666666
+              ],
+              "column": 4.0,
+              "coordinate_space": "data_local",
+              "end": [
+                160.0,
+                128.0,
+                224.0
+              ],
+              "mean": null,
+              "mean_exact": null,
+              "parseval_relative_error": null,
+              "power": null,
+              "power_exact": null,
+              "reason": "The complete 3D support extends outside the source; no padding, wrap or zero power was substituted",
+              "row": 1.0,
+              "start": [
+                32.0,
+                0.0,
+                96.0
+              ],
+              "status": "outside_support",
+              "total_power": null,
+              "total_power_exact": null
+            },
+            {
+              "center_index_xyz": [
+                31.5,
+                95.5,
+                95.5
+              ],
+              "center_world_xyz": [
+                5.25,
+                15.916666666666666,
+                15.916666666666666
+              ],
+              "center_xyz": [
+                5.25,
+                15.916666666666666,
+                15.916666666666666
+              ],
+              "column": 0.0,
+              "coordinate_space": "data_local",
+              "end": [
+                160.0,
+                160.0,
+                96.0
+              ],
+              "mean": null,
+              "mean_exact": null,
+              "parseval_relative_error": null,
+              "power": null,
+              "power_exact": null,
+              "reason": "The complete 3D support extends outside the source; no padding, wrap or zero power was substituted",
+              "row": 2.0,
+              "start": [
+                32.0,
+                32.0,
+                -32.0
+              ],
+              "status": "outside_support",
+              "total_power": null,
+              "total_power_exact": null
+            },
+            {
+              "center_index_xyz": [
+                63.5,
+                95.5,
+                95.5
+              ],
+              "center_world_xyz": [
+                10.583333333333332,
+                15.916666666666666,
+                15.916666666666666
+              ],
+              "center_xyz": [
+                10.583333333333332,
+                15.916666666666666,
+                15.916666666666666
+              ],
+              "column": 1.0,
+              "coordinate_space": "data_local",
+              "end": [
+                160.0,
+                160.0,
+                128.0
+              ],
+              "mean": -0.044828682657459,
+              "mean_exact": {
+                "f64_le_hex": "5383dffbc8f3a6bf",
+                "text": "-0.044828682657459006"
+              },
+              "parseval_relative_error": 1.1747895732922052e-16,
+              "power": 0.0917619293722666,
+              "power_exact": {
+                "f64_le_hex": "9af7abb5b57db73f",
+                "text": "0.091761929372266599"
+              },
+              "row": 2.0,
+              "selected_half_complex_bins": 86.0,
+              "start": [
+                32.0,
+                32.0,
+                0.0
+              ],
+              "status": "measured",
+              "total_power": 0.1181299879000768,
+              "total_power_exact": {
+                "f64_le_hex": "322cb552c43dbe3f",
+                "text": "0.11812998790007681"
+              }
+            },
+            {
+              "center_index_xyz": [
+                95.5,
+                95.5,
+                95.5
+              ],
+              "center_world_xyz": [
+                15.916666666666666,
+                15.916666666666666,
+                15.916666666666666
+              ],
+              "center_xyz": [
+                15.916666666666666,
+                15.916666666666666,
+                15.916666666666666
+              ],
+              "column": 2.0,
+              "coordinate_space": "data_local",
+              "end": [
+                160.0,
+                160.0,
+                160.0
+              ],
+              "mean": -0.16494540490646284,
+              "mean_exact": {
+                "f64_le_hex": "2d70d957ee1cc5bf",
+                "text": "-0.16494540490646284"
+              },
+              "parseval_relative_error": 2.0455956456614082e-16,
+              "power": 0.11167508427802404,
+              "power_exact": {
+                "f64_le_hex": "5c8dc002bd96bc3f",
+                "text": "0.11167508427802403"
+              },
+              "row": 2.0,
+              "selected_half_complex_bins": 86.0,
+              "start": [
+                32.0,
+                32.0,
+                32.0
+              ],
+              "status": "measured",
+              "total_power": 0.1356845653953992,
+              "total_power_exact": {
+                "f64_le_hex": "bcfc78a11c5ec13f",
+                "text": "0.13568456539539919"
+              }
+            },
+            {
+              "center_index_xyz": [
+                127.5,
+                95.5,
+                95.5
+              ],
+              "center_world_xyz": [
+                21.25,
+                15.916666666666666,
+                15.916666666666666
+              ],
+              "center_xyz": [
+                21.25,
+                15.916666666666666,
+                15.916666666666666
+              ],
+              "column": 3.0,
+              "coordinate_space": "data_local",
+              "end": [
+                160.0,
+                160.0,
+                192.0
+              ],
+              "mean": -0.11381082791479244,
+              "mean_exact": {
+                "f64_le_hex": "af20d3d7b422bdbf",
+                "text": "-0.11381082791479245"
+              },
+              "parseval_relative_error": 2.7206258665086717e-16,
+              "power": 0.08670781517665525,
+              "power_exact": {
+                "f64_le_hex": "e7c87dbe7b32b63f",
+                "text": "0.086707815176655254"
+              },
+              "row": 2.0,
+              "selected_half_complex_bins": 86.0,
+              "start": [
+                32.0,
+                32.0,
+                64.0
+              ],
+              "status": "measured",
+              "total_power": 0.10201908302535964,
+              "total_power_exact": {
+                "f64_le_hex": "966d2931ec1dba3f",
+                "text": "0.10201908302535964"
+              }
+            },
+            {
+              "center_index_xyz": [
+                159.5,
+                95.5,
+                95.5
+              ],
+              "center_world_xyz": [
+                26.583333333333332,
+                15.916666666666666,
+                15.916666666666666
+              ],
+              "center_xyz": [
+                26.583333333333332,
+                15.916666666666666,
+                15.916666666666666
+              ],
+              "column": 4.0,
+              "coordinate_space": "data_local",
+              "end": [
+                160.0,
+                160.0,
+                224.0
+              ],
+              "mean": null,
+              "mean_exact": null,
+              "parseval_relative_error": null,
+              "power": null,
+              "power_exact": null,
+              "reason": "The complete 3D support extends outside the source; no padding, wrap or zero power was substituted",
+              "row": 2.0,
+              "start": [
+                32.0,
+                32.0,
+                96.0
+              ],
+              "status": "outside_support",
+              "total_power": null,
+              "total_power_exact": null
+            },
+            {
+              "center_index_xyz": [
+                31.5,
+                127.5,
+                95.5
+              ],
+              "center_world_xyz": [
+                5.25,
+                21.25,
+                15.916666666666666
+              ],
+              "center_xyz": [
+                5.25,
+                21.25,
+                15.916666666666666
+              ],
+              "column": 0.0,
+              "coordinate_space": "data_local",
+              "end": [
+                160.0,
+                192.0,
+                96.0
+              ],
+              "mean": null,
+              "mean_exact": null,
+              "parseval_relative_error": null,
+              "power": null,
+              "power_exact": null,
+              "reason": "The complete 3D support extends outside the source; no padding, wrap or zero power was substituted",
+              "row": 3.0,
+              "start": [
+                32.0,
+                64.0,
+                -32.0
+              ],
+              "status": "outside_support",
+              "total_power": null,
+              "total_power_exact": null
+            },
+            {
+              "center_index_xyz": [
+                63.5,
+                127.5,
+                95.5
+              ],
+              "center_world_xyz": [
+                10.583333333333332,
+                21.25,
+                15.916666666666666
+              ],
+              "center_xyz": [
+                10.583333333333332,
+                21.25,
+                15.916666666666666
+              ],
+              "column": 1.0,
+              "coordinate_space": "data_local",
+              "end": [
+                160.0,
+                192.0,
+                128.0
+              ],
+              "mean": -0.23524410738159784,
+              "mean_exact": {
+                "f64_le_hex": "28ede3997a1ccebf",
+                "text": "-0.23524410738159784"
+              },
+              "parseval_relative_error": 1.841842930733944e-16,
+              "power": 0.11935399648672285,
+              "power_exact": {
+                "f64_le_hex": "08b08ec7fb8dbe3f",
+                "text": "0.11935399648672285"
+              },
+              "row": 3.0,
+              "selected_half_complex_bins": 86.0,
+              "start": [
+                32.0,
+                64.0,
+                0.0
+              ],
+              "status": "measured",
+              "total_power": 0.15069458504026056,
+              "total_power_exact": {
+                "f64_le_hex": "a85237cdf549c33f",
+                "text": "0.15069458504026056"
+              }
+            },
+            {
+              "center_index_xyz": [
+                95.5,
+                127.5,
+                95.5
+              ],
+              "center_world_xyz": [
+                15.916666666666666,
+                21.25,
+                15.916666666666666
+              ],
+              "center_xyz": [
+                15.916666666666666,
+                21.25,
+                15.916666666666666
+              ],
+              "column": 2.0,
+              "coordinate_space": "data_local",
+              "end": [
+                160.0,
+                192.0,
+                160.0
+              ],
+              "mean": -0.39307976339944767,
+              "mean_exact": {
+                "f64_le_hex": "6d4821063828d9bf",
+                "text": "-0.39307976339944767"
+              },
+              "parseval_relative_error": 2.1009700446739568e-16,
+              "power": 0.10585684947501084,
+              "power_exact": {
+                "f64_le_hex": "19828d3a6f19bb3f",
+                "text": "0.10585684947501085"
+              },
+              "row": 3.0,
+              "selected_half_complex_bins": 86.0,
+              "start": [
+                32.0,
+                64.0,
+                32.0
+              ],
+              "status": "measured",
+              "total_power": 0.1321083833917119,
+              "total_power_exact": {
+                "f64_le_hex": "43f01871ede8c03f",
+                "text": "0.13210838339171191"
+              }
+            },
+            {
+              "center_index_xyz": [
+                127.5,
+                127.5,
+                95.5
+              ],
+              "center_world_xyz": [
+                21.25,
+                21.25,
+                15.916666666666666
+              ],
+              "center_xyz": [
+                21.25,
+                21.25,
+                15.916666666666666
+              ],
+              "column": 3.0,
+              "coordinate_space": "data_local",
+              "end": [
+                160.0,
+                192.0,
+                192.0
+              ],
+              "mean": -0.3595435485269112,
+              "mean_exact": {
+                "f64_le_hex": "bd4b9af1c202d7bf",
+                "text": "-0.35954354852691123"
+              },
+              "parseval_relative_error": 0.0,
+              "power": 0.09483086624729,
+              "power_exact": {
+                "f64_le_hex": "4af72eedd546b83f",
+                "text": "0.094830866247290008"
+              },
+              "row": 3.0,
+              "selected_half_complex_bins": 86.0,
+              "start": [
+                32.0,
+                64.0,
+                64.0
+              ],
+              "status": "measured",
+              "total_power": 0.11489982730034944,
+              "total_power_exact": {
+                "f64_le_hex": "42309238136abd3f",
+                "text": "0.11489982730034945"
+              }
+            },
+            {
+              "center_index_xyz": [
+                159.5,
+                127.5,
+                95.5
+              ],
+              "center_world_xyz": [
+                26.583333333333332,
+                21.25,
+                15.916666666666666
+              ],
+              "center_xyz": [
+                26.583333333333332,
+                21.25,
+                15.916666666666666
+              ],
+              "column": 4.0,
+              "coordinate_space": "data_local",
+              "end": [
+                160.0,
+                192.0,
+                224.0
+              ],
+              "mean": null,
+              "mean_exact": null,
+              "parseval_relative_error": null,
+              "power": null,
+              "power_exact": null,
+              "reason": "The complete 3D support extends outside the source; no padding, wrap or zero power was substituted",
+              "row": 3.0,
+              "start": [
+                32.0,
+                64.0,
+                96.0
+              ],
+              "status": "outside_support",
+              "total_power": null,
+              "total_power_exact": null
+            },
+            {
+              "center_index_xyz": [
+                31.5,
+                159.5,
+                95.5
+              ],
+              "center_world_xyz": [
+                5.25,
+                26.583333333333332,
+                15.916666666666666
+              ],
+              "center_xyz": [
+                5.25,
+                26.583333333333332,
+                15.916666666666666
+              ],
+              "column": 0.0,
+              "coordinate_space": "data_local",
+              "end": [
+                160.0,
+                224.0,
+                96.0
+              ],
+              "mean": null,
+              "mean_exact": null,
+              "parseval_relative_error": null,
+              "power": null,
+              "power_exact": null,
+              "reason": "The complete 3D support extends outside the source; no padding, wrap or zero power was substituted",
+              "row": 4.0,
+              "start": [
+                32.0,
+                96.0,
+                -32.0
+              ],
+              "status": "outside_support",
+              "total_power": null,
+              "total_power_exact": null
+            },
+            {
+              "center_index_xyz": [
+                63.5,
+                159.5,
+                95.5
+              ],
+              "center_world_xyz": [
+                10.583333333333332,
+                26.583333333333332,
+                15.916666666666666
+              ],
+              "center_xyz": [
+                10.583333333333332,
+                26.583333333333332,
+                15.916666666666666
+              ],
+              "column": 1.0,
+              "coordinate_space": "data_local",
+              "end": [
+                160.0,
+                224.0,
+                128.0
+              ],
+              "mean": null,
+              "mean_exact": null,
+              "parseval_relative_error": null,
+              "power": null,
+              "power_exact": null,
+              "reason": "The complete 3D support extends outside the source; no padding, wrap or zero power was substituted",
+              "row": 4.0,
+              "start": [
+                32.0,
+                96.0,
+                0.0
+              ],
+              "status": "outside_support",
+              "total_power": null,
+              "total_power_exact": null
+            },
+            {
+              "center_index_xyz": [
+                95.5,
+                159.5,
+                95.5
+              ],
+              "center_world_xyz": [
+                15.916666666666666,
+                26.583333333333332,
+                15.916666666666666
+              ],
+              "center_xyz": [
+                15.916666666666666,
+                26.583333333333332,
+                15.916666666666666
+              ],
+              "column": 2.0,
+              "coordinate_space": "data_local",
+              "end": [
+                160.0,
+                224.0,
+                160.0
+              ],
+              "mean": null,
+              "mean_exact": null,
+              "parseval_relative_error": null,
+              "power": null,
+              "power_exact": null,
+              "reason": "The complete 3D support extends outside the source; no padding, wrap or zero power was substituted",
+              "row": 4.0,
+              "start": [
+                32.0,
+                96.0,
+                32.0
+              ],
+              "status": "outside_support",
+              "total_power": null,
+              "total_power_exact": null
+            },
+            {
+              "center_index_xyz": [
+                127.5,
+                159.5,
+                95.5
+              ],
+              "center_world_xyz": [
+                21.25,
+                26.583333333333332,
+                15.916666666666666
+              ],
+              "center_xyz": [
+                21.25,
+                26.583333333333332,
+                15.916666666666666
+              ],
+              "column": 3.0,
+              "coordinate_space": "data_local",
+              "end": [
+                160.0,
+                224.0,
+                192.0
+              ],
+              "mean": null,
+              "mean_exact": null,
+              "parseval_relative_error": null,
+              "power": null,
+              "power_exact": null,
+              "reason": "The complete 3D support extends outside the source; no padding, wrap or zero power was substituted",
+              "row": 4.0,
+              "start": [
+                32.0,
+                96.0,
+                64.0
+              ],
+              "status": "outside_support",
+              "total_power": null,
+              "total_power_exact": null
+            },
+            {
+              "center_index_xyz": [
+                159.5,
+                159.5,
+                95.5
+              ],
+              "center_world_xyz": [
+                26.583333333333332,
+                26.583333333333332,
+                15.916666666666666
+              ],
+              "center_xyz": [
+                26.583333333333332,
+                26.583333333333332,
+                15.916666666666666
+              ],
+              "column": 4.0,
+              "coordinate_space": "data_local",
+              "end": [
+                160.0,
+                224.0,
+                224.0
+              ],
+              "mean": null,
+              "mean_exact": null,
+              "parseval_relative_error": null,
+              "power": null,
+              "power_exact": null,
+              "reason": "The complete 3D support extends outside the source; no padding, wrap or zero power was substituted",
+              "row": 4.0,
+              "start": [
+                32.0,
+                96.0,
+                96.0
+              ],
+              "status": "outside_support",
+              "total_power": null,
+              "total_power_exact": null
+            }
+          ],
+          "nyquist_xyz": [
+            3.0,
+            3.0,
+            3.0
+          ],
+          "object": "field",
+          "provenance": {
+            "algorithm": "spectral-band-map-hann-v1",
+            "batching": "one native selected-channel decode; one sequential FFT workspace; no display-preview input",
+            "calculation_dtype": "float64",
+            "descriptor_sha256": "490b27f705d45db6e1d150b0fcf1ab3e4c89e83e4ef394ee2f3b034aaf84cbf7",
+            "detrending": "mu=sum(w*q)/sum(w); DFT input=w*(q-mu)",
+            "geometry_policy": "data_local; identity linear data_to_world; translation changes world centers only",
+            "kernel_algorithm": "spatial-spectrum-hann-v1",
+            "normalization": "m*abs(DFT(w*(q-sum(w*q)/sum(w))))^2/(N*sum(w^2))",
+            "numpy": "2.4.3",
+            "position_units_source": "capture position_unit or unknown",
+            "power_meaning": "sum of exact-band window-weighted mean-square residual powers; not Hamiltonian energy",
+            "source_dtype": "f8",
+            "unit_policy": "canonical position_unit and channel_metadata only; no automatic conversion",
+            "value_units_source": "capture channel_metadata or unknown",
+            "window": "periodic Hann, separable in z,y,x",
+            "worker": {
+              "analysis_code_sha256": "34465376967a4ff85698e1aa6ad113bf5b0b5ed3c0dbbf41fb288fe1e387ffca",
+              "policy": "private file transport; one computation at a time",
+              "worker": "tools/analyze_selection.py"
+            }
+          },
+          "record": {
+            "index": 20.0,
+            "native_time": {
+              "f64_le_hex": "0000000000003440",
+              "text": "20"
+            },
+            "requested_time": {
+              "f64_le_hex": "0000000000003440",
+              "text": "20"
+            },
+            "sampling": "exact",
+            "sequence": 40.0
+          },
+          "request_key": "d49ae77a62925ce2281f80b0c11c014db5111cfd7fe2ee00b7c6d90fcbbd9cee",
+          "support": {
+            "axis_order": "zyx",
+            "bounds": "complete finite source samples only; no padding or wrap",
+            "center_span_xyz": [
+              21.166666666666664,
+              21.166666666666664,
+              21.166666666666664
+            ],
+            "criterion": "at least two cycles of the low band edge on every axis; heuristic, not a resolution guarantee",
+            "cycles_xyz": [
+              1.0666666666666669,
+              1.0666666666666669,
+              1.0666666666666669
+            ],
+            "df_xyz": [
+              0.046875,
+              0.046875,
+              0.046875
+            ],
+            "extent_xyz": [
+              21.333333333333332,
+              21.333333333333332,
+              21.333333333333332
+            ],
+            "minimum_frequency": 0.05,
+            "shape": [
+              128.0,
+              128.0,
+              128.0
+            ],
+            "status": "insufficient_support"
+          },
+          "timings": {
+            "batch_seconds": 0.4101611489995776,
+            "calculation_seconds": 0.33056804700026987,
+            "decode_seconds": 0.09698908299924368,
+            "decoded_samples": 1.0,
+            "fft_seconds": 0.1362034150006366,
+            "reduction_seconds": 0.07253769099952478,
+            "verification_open_seconds": 3.513718422999773
+          },
+          "units": {
+            "frequency": "cycles / source-coordinate unit (unknown)",
+            "position": "unknown",
+            "power": "squared channel units (unknown)",
+            "value": "unknown"
+          },
+          "warnings": [
+            "Regional band power is not a unique local wavelength, propagation direction, phase, Hamiltonian energy or optical light.",
+            "Finite 3D support and Hann broadening cause leakage; band edges select exact discrete Fourier radii, not ideal physical passbands.",
+            "Overlapping windows are correlated. Only listed centers are measured; palette, opacity and display interpolation are presentation.",
+            "Unavailable centers have null power, not zero. No periodic boundary wrapping or partial window is used.",
+            "Unresolved band: fewer than two cycles of its low edge fit on at least one axis. Preserve needed support and reduce center count for a smaller batch; this heuristic is not a resolution guarantee.",
+            "Coordinate or channel units are unknown; no physical calibration is inferred.",
+            "16 of 25 centers are unavailable; inspect their explicit status and coverage mask."
+          ],
+          "workspace_bytes": 138412032.0
+        },
+        "publication_ms": 4246.478,
+        "source": {
+          "committed_bytes": "6965545431",
+          "complete_records": 82.0,
+          "format": "WVZ1",
+          "path": "/home/Nozba/Documents/Dev/Sims/Model-A/outputs/run_20261030T193414164759Z_b3a4a787cae945b0909004cac75740ca/model_a_20261030T193414164759Z_b3a4a787cae945b0909004cac75740ca.wvz",
+          "sha256": "1af76f2e5e0642808f33119168d8f5e0c7cc847599e414790923c2c3585e3d7d",
+          "uuid": "5848557b4ddd4d56b48e62f9f5700b23"
+        }
+      },
+      "model_baseline": {
+        "engine_buffer_bytes": 27177644.0,
+        "engine_static_bytes": 0,
+        "engine_texture_bytes": 151293952.0,
+        "engine_video_bytes": 236275232.0,
+        "frames": 60,
+        "max_fps": 60,
+        "mean_fps": 59.971093932724436,
+        "plane_allocations": {
+          "excludes": "driver overhead and separate UI legend",
+          "mesh_positions": 72,
+          "mesh_uv": 48,
+          "normalized_texture_and_embedded_mask": 100,
+          "palette": "analytic shader; no palette texture"
+        },
+        "plane_payload_bytes": 220,
+        "render_cpu_ms": {
+          "max": 0.29600000381469727,
+          "mean": 0.20239999952415624,
+          "median": 0.2070000022649765,
+          "min": 0.10100000351667404,
+          "p95": 0.27399998903274536
+        },
+        "render_gpu_ms": {
+          "max": 4.563000202178955,
+          "mean": 1.3268666664759319,
+          "median": 0.5199999809265137,
+          "min": 0.4950000047683716,
+          "p95": 3.9670000076293945
+        },
+        "resolution": [
+          1440,
+          900
+        ],
+        "vsync": 1,
+        "wall_ms": {
+          "max": 17.442,
+          "mean": 16.674699999999998,
+          "median": 16.603,
+          "min": 16.156,
+          "p95": 17.136
+        }
+      },
+      "model_callback_ms": 26.207,
+      "model_map": {
+        "engine_buffer_bytes": 27177644.0,
+        "engine_static_bytes": 0,
+        "engine_texture_bytes": 151293952.0,
+        "engine_video_bytes": 236275232.0,
+        "frames": 60,
+        "max_fps": 60,
+        "mean_fps": 59.96198410207927,
+        "plane_allocations": {
+          "excludes": "driver overhead and separate UI legend",
+          "mesh_positions": 72,
+          "mesh_uv": 48,
+          "normalized_texture_and_embedded_mask": 100,
+          "palette": "analytic shader; no palette texture"
+        },
+        "plane_payload_bytes": 220,
+        "render_cpu_ms": {
+          "max": 0.375,
+          "mean": 0.22611666669448216,
+          "median": 0.22200000286102295,
+          "min": 0.13600000739097595,
+          "p95": 0.3269999921321869
+        },
+        "render_gpu_ms": {
+          "max": 0.5730000138282776,
+          "mean": 0.5315500030914942,
+          "median": 0.5249999761581421,
+          "min": 0.5120000243186951,
+          "p95": 0.5600000023841858
+        },
+        "resolution": [
+          1440,
+          900
+        ],
+        "vsync": 1,
+        "wall_ms": {
+          "max": 19.692,
+          "mean": 16.677233333333337,
+          "median": 16.631,
+          "min": 13.663,
+          "p95": 17.394
+        }
+      },
+      "model_warm": {
+        "publication_ms": 601.185,
+        "timings": {
+          "batch_seconds": 0.4023228329997437,
+          "calculation_seconds": 0.3257987810002305,
+          "decode_seconds": 0.10058046100039064,
+          "decoded_samples": 1.0,
+          "fft_seconds": 0.14523290899887795,
+          "reduction_seconds": 0.0758713949999219,
+          "verification_open_seconds": 0.02568493399940052
+        }
+      },
+      "request_callback_ms": 23.68,
+      "responsive_frames": 34,
+      "synthetic_baseline": {
+        "engine_buffer_bytes": 27204764.0,
+        "engine_static_bytes": 0,
+        "engine_texture_bytes": 99462144.0,
+        "engine_video_bytes": 159304736.0,
+        "frames": 60,
+        "max_fps": 60,
+        "mean_fps": 59.78167731444766,
+        "plane_allocations": {
+          "excludes": "driver overhead and separate UI legend",
+          "mesh_positions": 72,
+          "mesh_uv": 48,
+          "normalized_texture_and_embedded_mask": 100,
+          "palette": "analytic shader; no palette texture"
+        },
+        "plane_payload_bytes": 220,
+        "render_cpu_ms": {
+          "max": 0.43799999356269836,
+          "mean": 0.22418333391348522,
+          "median": 0.21299999952316284,
+          "min": 0.12399999797344208,
+          "p95": 0.3840000033378601
+        },
+        "render_gpu_ms": {
+          "max": 0.5839999914169312,
+          "mean": 0.32216666638851166,
+          "median": 0.2540000081062317,
+          "min": 0.24899999797344208,
+          "p95": 0.550000011920929
+        },
+        "resolution": [
+          1440,
+          900
+        ],
+        "vsync": 1,
+        "wall_ms": {
+          "max": 19.872,
+          "mean": 16.727533333333326,
+          "median": 16.634,
+          "min": 15.558,
+          "p95": 17.612
+        }
+      },
+      "synthetic_map": {
+        "engine_buffer_bytes": 27204764.0,
+        "engine_static_bytes": 0,
+        "engine_texture_bytes": 99462144.0,
+        "engine_video_bytes": 159304736.0,
+        "frames": 60,
+        "max_fps": 60,
+        "mean_fps": 59.94634801852342,
+        "plane_allocations": {
+          "excludes": "driver overhead and separate UI legend",
+          "mesh_positions": 72,
+          "mesh_uv": 48,
+          "normalized_texture_and_embedded_mask": 100,
+          "palette": "analytic shader; no palette texture"
+        },
+        "plane_payload_bytes": 220,
+        "render_cpu_ms": {
+          "max": 0.33000001311302185,
+          "mean": 0.21853333401183286,
+          "median": 0.22300000488758087,
+          "min": 0.09799999743700027,
+          "p95": 0.3140000104904175
+        },
+        "render_gpu_ms": {
+          "max": 0.9860000014305115,
+          "mean": 0.6585666706164678,
+          "median": 0.6589999794960022,
+          "min": 0.5839999914169312,
+          "p95": 0.7020000219345093
+        },
+        "resolution": [
+          1440,
+          900
+        ],
+        "vsync": 1,
+        "wall_ms": {
+          "max": 19.723,
+          "mean": 16.681583333333332,
+          "median": 16.685,
+          "min": 13.619,
+          "p95": 17.172
+        }
+      }
+    },
+    "renderer": "forward_plus"
+  },
+  "errors": []
+}
