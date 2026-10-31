@@ -60,7 +60,7 @@ func setup(owner_shell) -> void:
 	content.add_theme_constant_override("separation",8); inset.add_child(content)
 	add_job(content,"Video export", reopen_video, func(): viewer.video_dialog.request_cancel_export())
 	add_job(content,"Selections", func(): shell.show_section("Selections"), func(): viewer.selection_controller.cancel_query(); selection_result = "Cancelled. Completed selections remain available.")
-	add_job(content,"Analysis", reopen_analysis, func(): viewer.selection_controller.temporal.cancel_analysis(); analysis_result = "Cancellation requested. Completed named results remain available.")
+	add_job(content,"Analysis", reopen_analysis, cancel_analysis)
 	add_job(content,"Matched views", func(): shell.show_section("Matched runs"), func(): viewer.selection_controller.temporal.matched.cancel())
 	add_job(content,"Isosurface", func(): viewer.tools_ui.open("Isosurface"), func():
 		if viewer.scene_layers != null: viewer.scene_layers.cancel_iso())
@@ -87,7 +87,17 @@ func setup(owner_shell) -> void:
 		analysis_result = "Complete. Open the owning form for results and output details."
 		if viewer.session_log != null: viewer.session_log.record("JOB", "Analysis completed: " + jobs.background_operation, true))
 	jobs.background_progress.connect(func(value): analysis_progress = "%s: %s / %s" % [str(value.get("stage","Working")).replace("_"," "),value.get("completed",0),value.get("total",0)])
+	jobs.spatial_spectrum_failed.connect(func(message): analysis_result = message; remember("Analysis",message))
+	jobs.spatial_spectrum_completed.connect(func(_result):
+		analysis_result = "Spatial spectrum complete. Open Spatial spectrum for its pinned source, region and numerical bins."
+		if viewer.session_log != null: viewer.session_log.record("JOB","Spatial spectrum completed: "+jobs.background_id,true))
+	jobs.spatial_spectrum_progress.connect(func(value): analysis_progress = "%s: %s / %s" % [str(value.get("stage","Working")).replace("_"," "),value.get("completed",0),value.get("total",0)])
 	refresh()
+
+func cancel_analysis() -> void:
+	if viewer.selection_controller.jobs.background_operation == "spatial_spectrum": viewer.spatial_spectrum.cancel()
+	else: viewer.selection_controller.temporal.cancel_analysis()
+	analysis_result = "Cancellation requested. Completed named results remain available."
 
 func add_job(parent: Node, title: String, reopen: Callable, cancel: Callable) -> void:
 	var row := HBoxContainer.new(); row.add_theme_constant_override("separation",8); parent.add_child(row)
@@ -133,6 +143,7 @@ func reopen_video() -> void:
 
 func reopen_analysis() -> void:
 	var operation: String = viewer.selection_controller.jobs.background_operation
+	if operation == "spatial_spectrum": viewer.spatial_spectrum.open(); return
 	var task := "Temporal"
 	if operation == "save_recipe": task = "Save analysis"
 	elif operation == "load_recipe": task = "Load analysis"

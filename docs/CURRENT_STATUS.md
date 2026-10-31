@@ -1,5 +1,18 @@
 # Current status
 
+Issue #413 proposes candidate **v0.1.0.115**, based on accepted
+**v0.1.0.114** / owner-merged PR #412
+(`6867d21746190537ed67379c1a44c87b1708f4e1`). **Tools → Spatial spectrum**
+uses the existing owned analysis worker for a verified native scalar channel and
+complete source-grid region. Periodic Hann, weighted mean removal and a bounded
+radial power plot expose support, normalization and native-time provenance beside
+the ordinary viewport. Short-window leakage and unknown units remain explicit;
+there is no optical emission or physical energy interpretation. WVZ1/SWSS,
+Scientific/Cinematic rendering and playback preparation are unchanged. Owner
+review is pending. See [the numerical workflow](SPATIAL_SPECTRUM.md) and
+[focused implementation evidence](evidence/issue-413/README.md). Historical
+research and review-time records below remain as written.
+
 Issue #135 proposes research-only candidate **v0.1.0.114**, based on accepted
 **v0.1.0.113** / owner-merged PR #409
 (`681a46f8f8473ee6b5323ec4af71ada883183077`). The

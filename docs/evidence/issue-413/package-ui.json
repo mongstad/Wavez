@@ -1,0 +1,616 @@
+{
+  "exit_code": 0,
+  "headless": false,
+  "packaged": true,
+  "source_hashes": {
+    "nonfinite.wvz": "c702553295fd5026665aa0bbc87aa5c159c5ff5bba46c19fe136096bcf6c3655",
+    "other.wvz": "b54f3639c744ca316d47be7abbff132ab3ed405be8b68939143d4b8bc1d43d76",
+    "field.wvz": "506a697eade8af4b5dc9a7b5e3eeeea1d88a9347ee7d0fbfea48a793f42cc44a"
+  },
+  "sources_unchanged": true,
+  "result": {
+    "checks": 48,
+    "display": "X11",
+    "failures": [],
+    "observations": {
+      "cancel_ack_ms": 52.563,
+      "cancel_callback_ms": 0.231,
+      "first": {
+        "bins": 57,
+        "parseval_relative_error": 0.0,
+        "power": 0.579914398408023,
+        "publication_ms": 241.325,
+        "record": {
+          "index": 0.0,
+          "native_time": {
+            "f64_le_hex": "0000000000000000",
+            "text": "0"
+          },
+          "requested_time": {
+            "f64_le_hex": "000000000000f03f",
+            "text": "1"
+          },
+          "sampling": "held",
+          "sequence": 0.0
+        },
+        "roi": {
+          "axis_order": "zyx",
+          "bounds": "inclusive start, exclusive end; complete source samples; no padding or wrap",
+          "center_span_xyz": [
+            7.75,
+            15.5,
+            23.25
+          ],
+          "coordinate_space": "data_local",
+          "end": [
+            32.0,
+            36.0,
+            40.0
+          ],
+          "extent_xyz": [
+            8.0,
+            16.0,
+            24.0
+          ],
+          "origin_xyz": [
+            -4.0,
+            -8.0,
+            -12.0
+          ],
+          "shape": [
+            32.0,
+            32.0,
+            32.0
+          ],
+          "start": [
+            0.0,
+            4.0,
+            8.0
+          ]
+        },
+        "source": {
+          "committed_bytes": "2952877",
+          "complete_records": 3.0,
+          "format": "WVZ1",
+          "path": "/tmp/wavez-413-package-final/field.wvz",
+          "sha256": "506a697eade8af4b5dc9a7b5e3eeeea1d88a9347ee7d0fbfea48a793f42cc44a",
+          "uuid": "e098e0dbbe2c4804b92076e190ac01bd"
+        },
+        "timings": {
+          "calculation_seconds": 0.00152932299988606,
+          "decode_seconds": 0.00059344900000724,
+          "reduction_seconds": 0.00057127900026898,
+          "verification_open_seconds": 0.00347613299982185
+        }
+      },
+      "first_request": {
+        "arguments": {
+          "bins": 256,
+          "channel": "amplitude",
+          "object": "field",
+          "roi": {
+            "end": [
+              32,
+              36,
+              40
+            ],
+            "start": [
+              0,
+              4,
+              8
+            ]
+          },
+          "time": 1.0
+        },
+        "fingerprint": "[1,\"/tmp/wavez-413-package-final/field.wvz\",1,2952877,{\"ctime\":\"1793463225.420457939\",\"device\":\"37\",\"inode\":\"22051\",\"mtime\":\"1793463225.420457939\",\"size\":\"2952877\"}]",
+        "geometry": {
+          "centering": "node",
+          "data_to_world": [
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          "origin": [
+            -6.0,
+            -10.0,
+            -12.0
+          ],
+          "shape": [
+            32.0,
+            40.0,
+            48.0
+          ],
+          "spacing": [
+            0.25,
+            0.5,
+            0.75
+          ]
+        },
+        "index": 0,
+        "revision": 11,
+        "selection": 0,
+        "source": {
+          "committed_bytes": "2952877",
+          "path": "/tmp/wavez-413-package-final/field.wvz"
+        }
+      },
+      "last_reply": {
+        "analysis_revision": 28.0,
+        "data": {
+          "algorithm": "spatial-spectrum-hann-v1",
+          "channel": "amplitude",
+          "df_xyz": [
+            0.125,
+            0.0625,
+            0.04166666666666666
+          ],
+          "geometry": {
+            "centering": "node",
+            "data_to_world": [
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              1.0,
+              0.0
+            ],
+            "origin": [
+              -6.0,
+              -10.0,
+              -12.0
+            ],
+            "shape": [
+              32.0,
+              40.0,
+              48.0
+            ],
+            "spacing": [
+              0.25,
+              0.5,
+              0.75
+            ]
+          },
+          "kind": "spatial_spectrum",
+          "mean": 0.5007493490485757,
+          "mean_exact": {
+            "f64_le_hex": "8005b57f2306e03f",
+            "text": "0.50074934904857571"
+          },
+          "nyquist_xyz": [
+            2.0,
+            1.0,
+            0.6666666666666666
+          ],
+          "object": "field",
+          "parseval_relative_error": 1.914460181835342e-16,
+          "provenance": {
+            "algorithm": "spatial-spectrum-hann-v1",
+            "calculation_dtype": "float64",
+            "descriptor_sha256": "53b091e30c41ad65d5905a39cf16dbdf14ada54f93b3d4133995b50cd3f4f37e",
+            "detrending": "mu=sum(w*q)/sum(w); DFT input=w*(q-mu)",
+            "geometry_policy": "data_local; identity linear data_to_world; translation does not change frequencies",
+            "normalization": "m*abs(DFT(w*(q-sum(w*q)/sum(w))))^2/(N*sum(w^2))",
+            "numpy": "2.4.3",
+            "position_units_source": "capture position_unit or unknown",
+            "power_meaning": "window-weighted mean-square residual; not Hamiltonian energy",
+            "source_dtype": "f8",
+            "unit_policy": "canonical position_unit and channel_metadata only; no automatic conversion",
+            "value_units_source": "capture channel_metadata or unknown",
+            "window": "periodic Hann, separable in z,y,x",
+            "worker": {
+              "analysis_code_sha256": "f18abd69a0861997cee68609077357b5f8baff67acffa7fffad658476bed82ba",
+              "policy": "private file transport; one computation at a time",
+              "worker": "tools/analyze_selection.py"
+            }
+          },
+          "radial": {
+            "bin_edges_lower": [
+              0.0,
+              0.02083333333333333,
+              0.0625,
+              0.10416666666666666,
+              0.14583333333333331,
+              0.1875,
+              0.22916666666666663,
+              0.2708333333333333,
+              0.3125,
+              0.35416666666666663,
+              0.3958333333333333,
+              0.4375,
+              0.47916666666666663,
+              0.5208333333333333,
+              0.5625,
+              0.6041666666666666,
+              0.6458333333333333,
+              0.6875,
+              0.7291666666666666,
+              0.7708333333333333,
+              0.8125,
+              0.8541666666666666,
+              0.8958333333333333,
+              0.9375,
+              0.9791666666666666,
+              1.0208333333333333,
+              1.0625,
+              1.1041666666666663,
+              1.1458333333333333,
+              1.1875,
+              1.2291666666666663,
+              1.2708333333333333,
+              1.3125,
+              1.3541666666666663,
+              1.3958333333333333,
+              1.4375,
+              1.4791666666666663,
+              1.5208333333333333,
+              1.5625,
+              1.6041666666666663,
+              1.6458333333333333,
+              1.6875,
+              1.7291666666666663,
+              1.7708333333333333,
+              1.8125,
+              1.8541666666666663,
+              1.8958333333333333,
+              1.9375,
+              1.9791666666666663,
+              2.020833333333333,
+              2.0625,
+              2.1041666666666665,
+              2.145833333333333,
+              2.1875,
+              2.2291666666666665,
+              2.270833333333333,
+              2.3125
+            ],
+            "bin_edges_upper": [
+              0.02083333333333333,
+              0.0625,
+              0.10416666666666666,
+              0.14583333333333331,
+              0.1875,
+              0.22916666666666663,
+              0.2708333333333333,
+              0.3125,
+              0.35416666666666663,
+              0.3958333333333333,
+              0.4375,
+              0.47916666666666663,
+              0.5208333333333333,
+              0.5625,
+              0.6041666666666666,
+              0.6458333333333333,
+              0.6875,
+              0.7291666666666666,
+              0.7708333333333333,
+              0.8125,
+              0.8541666666666666,
+              0.8958333333333333,
+              0.9375,
+              0.9791666666666666,
+              1.0208333333333333,
+              1.0625,
+              1.1041666666666663,
+              1.1458333333333333,
+              1.1875,
+              1.2291666666666663,
+              1.2708333333333333,
+              1.3125,
+              1.3541666666666663,
+              1.3958333333333333,
+              1.4375,
+              1.4791666666666663,
+              1.5208333333333333,
+              1.5625,
+              1.6041666666666663,
+              1.6458333333333333,
+              1.6875,
+              1.7291666666666663,
+              1.7708333333333333,
+              1.8125,
+              1.8541666666666663,
+              1.8958333333333333,
+              1.9375,
+              1.9791666666666663,
+              2.020833333333333,
+              2.0625,
+              2.1041666666666665,
+              2.145833333333333,
+              2.1875,
+              2.2291666666666665,
+              2.270833333333333,
+              2.3125,
+              2.3541666666666665
+            ],
+            "bin_width": 0.04166666666666666,
+            "convention": "nearest-shell-sum",
+            "frequency": [
+              0.0,
+              0.04166666666666666,
+              0.08333333333333333,
+              0.125,
+              0.16666666666666666,
+              0.20833333333333331,
+              0.25,
+              0.29166666666666663,
+              0.3333333333333333,
+              0.375,
+              0.41666666666666663,
+              0.4583333333333333,
+              0.5,
+              0.5416666666666666,
+              0.5833333333333333,
+              0.625,
+              0.6666666666666666,
+              0.7083333333333333,
+              0.75,
+              0.7916666666666666,
+              0.8333333333333333,
+              0.875,
+              0.9166666666666666,
+              0.9583333333333331,
+              1.0,
+              1.0416666666666663,
+              1.0833333333333333,
+              1.125,
+              1.1666666666666663,
+              1.2083333333333333,
+              1.25,
+              1.2916666666666663,
+              1.3333333333333333,
+              1.375,
+              1.4166666666666663,
+              1.4583333333333333,
+              1.5,
+              1.5416666666666663,
+              1.5833333333333333,
+              1.625,
+              1.6666666666666663,
+              1.7083333333333333,
+              1.75,
+              1.7916666666666663,
+              1.8333333333333333,
+              1.875,
+              1.9166666666666663,
+              1.9583333333333333,
+              2.0,
+              2.0416666666666665,
+              2.083333333333333,
+              2.125,
+              2.1666666666666665,
+              2.208333333333333,
+              2.25,
+              2.2916666666666665,
+              2.333333333333333
+            ],
+            "inscribed_nyquist": 0.6666666666666666,
+            "power": [
+              2.8555294104622773e-34,
+              7.435441261574879e-09,
+              5.678776467572101e-07,
+              1.304408138793861e-05,
+              0.00038972339027826,
+              0.00136249000991587,
+              0.00230227024835394,
+              0.10519218550136009,
+              0.07651427810681444,
+              0.01019648643716162,
+              0.25745452507752803,
+              0.02276097315892373,
+              0.00660213263092429,
+              0.02042960428580575,
+              0.00020130747432664,
+              0.04632250696100878,
+              0.00012158699620837,
+              1.5196503421377956e-07,
+              0.02955568372624912,
+              9.532047922943975e-06,
+              2.9083229025099293e-08,
+              0.00046378262392494,
+              1.8299666781253633e-06,
+              8.002781148636771e-09,
+              1.595818192202034e-05,
+              4.212691335909275e-07,
+              1.3097282726320756e-09,
+              2.3073544005934392e-06,
+              3.250335987396599e-08,
+              1.478018091491724e-11,
+              5.915295287163977e-07,
+              1.6730868024799134e-09,
+              1.634370383691458e-12,
+              2.0461223032143746e-07,
+              7.447476959370055e-10,
+              6.981036642993024e-13,
+              8.592454823469394e-08,
+              3.5347183470035276e-10,
+              3.3829990186039253e-13,
+              4.1503164440211166e-08,
+              1.4624483994740135e-10,
+              7.198376946149001e-14,
+              2.286633872694305e-08,
+              1.7090877905192166e-11,
+              2.6348995701312734e-14,
+              1.494685338346828e-08,
+              1.538514840990115e-12,
+              1.5725245646806665e-14,
+              6.363563031628876e-09,
+              5.947469351076972e-13,
+              5.574150664770241e-15,
+              4.2947022005006384e-16,
+              9.915481338170275e-17,
+              1.799412211381824e-17,
+              6.7865684239595585e-18,
+              3.1136982071355273e-34,
+              7.671404645660173e-36
+            ]
+          },
+          "record": {
+            "index": 0.0,
+            "native_time": {
+              "f64_le_hex": "0000000000000000",
+              "text": "0"
+            },
+            "requested_time": {
+              "f64_le_hex": "0000000000000000",
+              "text": "0"
+            },
+            "sampling": "exact",
+            "sequence": 0.0
+          },
+          "request_key": "51d757ba774b5b187ea08ca1ff40b18ef50fd988ab3ad28ff0eaceb405b9f4c1",
+          "roi": {
+            "axis_order": "zyx",
+            "bounds": "inclusive start, exclusive end; complete source samples; no padding or wrap",
+            "center_span_xyz": [
+              7.75,
+              15.5,
+              23.25
+            ],
+            "coordinate_space": "data_local",
+            "end": [
+              32.0,
+              36.0,
+              40.0
+            ],
+            "extent_xyz": [
+              8.0,
+              16.0,
+              24.0
+            ],
+            "origin_xyz": [
+              -4.0,
+              -8.0,
+              -12.0
+            ],
+            "shape": [
+              32.0,
+              32.0,
+              32.0
+            ],
+            "start": [
+              0.0,
+              4.0,
+              8.0
+            ]
+          },
+          "support": {
+            "criterion": "at least two cycles on every axis; heuristic, not a resolution guarantee",
+            "cycles_xyz": [
+              0.8,
+              1.6,
+              2.4000000000000004
+            ],
+            "minimum_frequency": 0.1,
+            "status": "insufficient_support"
+          },
+          "timings": {
+            "calculation_seconds": 0.00139373199999681,
+            "decode_seconds": 0.00056101900008798,
+            "reduction_seconds": 0.00048047700011011,
+            "verification_open_seconds": 0.00345218299980842
+          },
+          "total_power": 0.5799143984080231,
+          "total_power_exact": {
+            "f64_le_hex": "0c8bf4a3a88ee23f",
+            "text": "0.57991439840802306"
+          },
+          "units": {
+            "frequency": "cycles / (dimensionless)",
+            "position": "dimensionless",
+            "power": "(dimensionless)^2",
+            "value": "dimensionless"
+          },
+          "warnings": [
+            "Derived spatial spectrum, not optical emission or physical model energy.",
+            "Radial shell sums discard direction and phase; bin centers are not precise wavelengths.",
+            "Finite support and Hann broadening limit resolution; small-window leakage can populate unresolved bands.",
+            "Radial shells above the inscribed Nyquist sphere have incomplete directional coverage.",
+            "Insufficient support for the requested lowest frequency: fewer than two cycles on at least one axis. Increase region support; do not interpret a peak as its wavelength."
+          ],
+          "workspace_bytes": 6291456.0
+        },
+        "guard": {
+          "baseline": {
+            "VmHWM": 40882176.0,
+            "VmPeak": 386650112.0,
+            "VmRSS": 40882176.0,
+            "VmSize": 386285568.0
+          },
+          "ceiling_bytes": 2147483648.0,
+          "enabled": true,
+          "reason": "runtime plus 1 GiB workspace and 256 MiB overhead fit"
+        },
+        "id": "39585-b9",
+        "member_assets": {
+          "bytes": 0.0,
+          "files": 0.0,
+          "limit_bytes": 67108864.0
+        },
+        "memory": {
+          "VmHWM": 43278336.0,
+          "VmPeak": 388079616.0,
+          "VmRSS": 43278336.0,
+          "VmSize": 388079616.0
+        },
+        "metrics": {
+          "charged_bytes": 0.0,
+          "cpu_seconds": 0.00899074999999999,
+          "decoded_bytes": 491520.0,
+          "peak_charged_bytes": 22483130.0,
+          "read_bytes": 3448162.0,
+          "seconds": 0.00937670399980561
+        },
+        "ok": true,
+        "playback_pressure": {
+          "pauses": 0.0,
+          "seconds": 0.0
+        },
+        "scene_revision": 3.0,
+        "selection_revision": 0.0,
+        "shared_memory": {
+          "limit": 536870912.0,
+          "peak": 22483130.0,
+          "used": 0.0
+        },
+        "source": {
+          "committed_bytes": "2952877",
+          "complete_records": 3.0,
+          "format": "WVZ1",
+          "path": "/tmp/wavez-413-package-final/other.wvz",
+          "sha256": "b54f3639c744ca316d47be7abbff132ab3ed405be8b68939143d4b8bc1d43d76",
+          "uuid": "12eb04d548834c9ea07d1c4050fa93ce"
+        },
+        "verification_memo": {
+          "charged_bytes": 2856.0,
+          "entries": 2.0,
+          "evictions": 0.0,
+          "hits": 0.0,
+          "limit_bytes": 4194304.0,
+          "peak_bytes": 2856.0
+        },
+        "version": 1.0
+      },
+      "plot_update_microseconds": 182,
+      "request_callback_ms": 20.582,
+      "responsive_frames": 34,
+      "warm_publication_ms": 215.696
+    },
+    "renderer": "forward_plus"
+  },
+  "errors": []
+}

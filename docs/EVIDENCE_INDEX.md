@@ -1,5 +1,10 @@
 # Retained evidence
 
+Issue #413's [regional spectrum review](evidence/issue-413/README.md) records
+independent numerical oracles, actual signed Model A comparisons, source/worker
+limits, native UI checks and owner verification. Its conclusions are bounded to
+one source-verified regional diagnostic; the #135 research remains unchanged.
+
 Issue #135's [Spectral Mode research](research/spectral-135/README.md) records
 the Model A data-readiness audit, known-answer and sampled-capture Fourier
 checks, window-resolution/leakage limits, source verification/CPU costs,

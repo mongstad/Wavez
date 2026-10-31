@@ -62,6 +62,26 @@ Transport JSON files are bounded to 1 MiB and atomically replaced; only one
 worker is owned by a viewer. Cancellation, close, owner death or lease expiry
 terminate stale work. This is not a public command API.
 
+## Regional spatial spectrum on the background lane
+
+`spatial_spectrum` accepts `object`, `channel`, requested `time` and `roi` with
+inclusive `start` and exclusive `end` integer arrays in **zyx** source order.
+Optional `bins` (8–512), positive `minimum_frequency`, `position_units` and
+`value_units` are explicit request properties. Unit overrides carry provenance;
+the interactive form uses canonical capture declarations or unknown units.
+The held native sample is selected before computing on complete source cells.
+
+The inline reply carries the verified enclosing `source` plus `data` containing
+`record`, `geometry`, `roi`, `units`, `mean`, `total_power`,
+`parseval_relative_error`, `df_xyz`, `nyquist_xyz`, bounded `radial` shell arrays,
+`support`, `warnings`, `provenance`, `workspace_bytes`, `timings` and
+`request_key`. Exact time, mean and total-power tokens accompany their display
+numbers. The key binds source identity, record, geometry, ROI, units, algorithm,
+bin policy and optional support test. This is a transient derived diagnostic,
+not a full-result artifact or durable inspection schema. Existing request IDs,
+scene/selection/analysis revisions, quotas, cancellation, verification and
+publication checks apply. See [the numerical contract](SPATIAL_SPECTRUM.md).
+
 ## Selection definition version 1
 
 The v3 recipe selection block contains `version: 1`, `revision`, `active`,

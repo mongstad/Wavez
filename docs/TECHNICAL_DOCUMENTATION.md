@@ -26,6 +26,8 @@ derived computation and visual presentation have different guarantees.
 - [Scientific analysis contract](SCIENTIFIC_ANALYSIS.md) — identities, membership,
   native clocks, numerical policies, missing support and provenance.
 - [Analysis schemas](ANALYSIS_SCHEMAS.md) — request/result/state structures and quotas.
+- [Regional spatial spectrum](SPATIAL_SPECTRUM.md) — verified source support,
+  Hann normalization, bounded radial diagnostics and interpretation limits.
 
 ## Capture format and Python integration
 

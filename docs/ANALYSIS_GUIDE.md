@@ -40,6 +40,11 @@ changes overlay eligibility. Original source arrays remain unchanged.
 
 ## Analyze native samples
 
+For one field at one native sample, **Tools → Spatial spectrum** computes a
+source-verified regional spatial spectrum independently of temporal selections.
+See [support, normalization, limits and workflow](SPATIAL_SPECTRUM.md). This
+derived diagnostic does not alter the scalar viewport or imply optical emission.
+
 In **Temporal analysis**, select the population/group, operation, source channel,
 component and inclusive native range. Choose value traces, statistics, population
 counts, discrete field integrals, interval velocity, centroids or mesh area.
