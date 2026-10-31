@@ -1,5 +1,11 @@
 # Retained evidence
 
+Issue #135's [Spectral Mode research](research/spectral-135/README.md) records
+the Model A data-readiness audit, known-answer and sampled-capture Fourier
+checks, window-resolution/leakage limits, source verification/CPU costs,
+architecture and Human Vision proposals. It implements no production spectral
+feature and makes no GPU, optical-calibration or continuum-convergence claim.
+
 Issue #343's [RMB/roll coexistence review](evidence/issue-343/README.md) records
 accepted-main reproduction, focused source/release input composition on both
 renderers, shortcut restart, and connected roll/navigation regressions.

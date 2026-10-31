@@ -1,0 +1,92 @@
+{
+  "script_sha256": "3706e94b73ea3e1332a75b6bec35b14e0fbc91a494995622d44668a2233bb532",
+  "runs": [
+    {
+      "label": "first_verification",
+      "open_seconds": 3.3295282139999927,
+      "initial_read_bytes": 6966045110,
+      "selected_read_seconds": 0.0958966609999834,
+      "selected_decode_bytes": 56623104,
+      "roi128_window_fft_power_seconds": 0.04366363299993736,
+      "numpy_fft_only_seconds": [
+        0.016334258000028967,
+        0.015336395999952401,
+        0.012899589999960881,
+        0.01574594499993509,
+        0.013321669999982078
+      ],
+      "numpy_scipy_max_relative_difference": 1.8825616388200697e-16,
+      "source_identity": {
+        "path": "/home/Nozba/Documents/Dev/Sims/Model-A/outputs/run_20261030T193414164759Z_b3a4a787cae945b0909004cac75740ca/model_a_20261030T193414164759Z_b3a4a787cae945b0909004cac75740ca.wvz",
+        "format": "WVZ1",
+        "uuid": "5848557b4ddd4d56b48e62f9f5700b23",
+        "committed_bytes": "6965545431",
+        "sha256": "1af76f2e5e0642808f33119168d8f5e0c7cc847599e414790923c2c3585e3d7d",
+        "complete_records": 82
+      },
+      "context": {
+        "charged_bytes": 320692621,
+        "peak_charged_bytes": 320692621,
+        "decoded_bytes": 56623104,
+        "read_bytes": 7022668214,
+        "seconds": 3.5495302609999726,
+        "cpu_seconds": 4.060381262
+      },
+      "memo": {
+        "limit_bytes": 4194304,
+        "charged_bytes": 2960,
+        "peak_bytes": 2960,
+        "entries": 1,
+        "hits": 0,
+        "evictions": 0
+      },
+      "note": "128MiB extra logical reservation; not an OS RSS limit or production operation"
+    },
+    {
+      "label": "memo_reopen",
+      "open_seconds": 0.019715573999974367,
+      "initial_read_bytes": 499679,
+      "selected_read_seconds": 0.08358667300001343,
+      "selected_decode_bytes": 56623104,
+      "roi128_window_fft_power_seconds": 0.04235182299998996,
+      "numpy_fft_only_seconds": [
+        0.013835111999924266,
+        0.01330887000005987,
+        0.013537724999991951,
+        0.013390051999977004,
+        0.01342535300000236
+      ],
+      "numpy_scipy_max_relative_difference": 1.8825616388200697e-16,
+      "source_identity": {
+        "path": "/home/Nozba/Documents/Dev/Sims/Model-A/outputs/run_20261030T193414164759Z_b3a4a787cae945b0909004cac75740ca/model_a_20261030T193414164759Z_b3a4a787cae945b0909004cac75740ca.wvz",
+        "format": "WVZ1",
+        "uuid": "5848557b4ddd4d56b48e62f9f5700b23",
+        "committed_bytes": "6965545431",
+        "sha256": "1af76f2e5e0642808f33119168d8f5e0c7cc847599e414790923c2c3585e3d7d",
+        "complete_records": 82
+      },
+      "context": {
+        "charged_bytes": 320692621,
+        "peak_charged_bytes": 320692621,
+        "decoded_bytes": 56623104,
+        "read_bytes": 57122783,
+        "seconds": 0.22067458100002568,
+        "cpu_seconds": 0.21970089000000037
+      },
+      "memo": {
+        "limit_bytes": 4194304,
+        "charged_bytes": 2960,
+        "peak_bytes": 2960,
+        "entries": 1,
+        "hits": 1,
+        "evictions": 0
+      },
+      "note": "128MiB extra logical reservation; not an OS RSS limit or production operation"
+    }
+  ],
+  "process_high_water_rss_kib": 300696,
+  "source_stat_unchanged": true,
+  "status": "PASS",
+  "disk_cache_state": "uncontrolled, not a cold-disk benchmark",
+  "scope": "Existing SourceSnapshot with real prefix hash and selected payload verification; no UI/GPU/IPC/cancellation test"
+}

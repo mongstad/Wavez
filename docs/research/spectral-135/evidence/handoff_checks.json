@@ -1,0 +1,98 @@
+{
+  "issue": 135,
+  "review_state": "pending owner review",
+  "accepted_base": "681a46f8f8473ee6b5323ec4af71ada883183077",
+  "candidate": "v0.1.0.114",
+  "scope": "research reports/prototypes/evidence, two documentation entry points, BUILD only",
+  "synthetic_cases": {
+    "passed": 24,
+    "total": 24
+  },
+  "model_transform_checks": {
+    "passed": 84,
+    "total": 84
+  },
+  "data_audit": {
+    "original_captures": 4,
+    "structural_records": 2235,
+    "field_samples_payload_verified": 5,
+    "checkpoint_comparisons": 2,
+    "result": "PASS",
+    "bitwise_comparison": "canonical little-endian float64 bytes after xyz-to-zyx transpose; signed zero distinguished"
+  },
+  "version_tests": {
+    "command": "python -m unittest tests.test_application_version -v",
+    "passed": 2,
+    "result": "PASS"
+  },
+  "source_path": {
+    "result": "PASS",
+    "note": "real SourceSnapshot prefix hash/memo/selected read; NumPy/SciPy parity; not UI/cancel/GPU"
+  },
+  "import_checks": {
+    "godot": "4.7.2.stable.official.ed1daf0bf",
+    "first": "exit0 with sandbox socket errors and four generated UID warnings; not clean PASS",
+    "repeat": "exit0, no errors/warnings, authorized local sockets",
+    "first_transcript": "editor_import_first.txt",
+    "repeat_transcript": "editor_import_retry.txt",
+    "generated_unrelated_uids_archived_to": "/tmp/wavez-135-import-uids-a04t755t",
+    "render_validation": false,
+    "transcript_format": "ANSI escapes and trailing whitespace removed; original logs retained in /tmp/wavez-135-import/"
+  },
+  "local_docs": {
+    "research_local_targets_checked": 51,
+    "missing": 0,
+    "index_status_targets_checked": 2,
+    "result": "PASS"
+  },
+  "scripts_compile": {
+    "files": 3,
+    "result": "PASS"
+  },
+  "evidence_cross_checks": {
+    "script_sha_matches": true,
+    "six_selected_array_sha_match_independent_audit": true,
+    "source_extent_and_hash_pinned": true,
+    "source_stats_unchanged": true,
+    "numeric_array_format": "experiment JSON scalar arrays compacted for review; parsed values unchanged"
+  },
+  "figure_review": {
+    "files": [
+      "model_a_spectra.png",
+      "synthetic_and_cost.png"
+    ],
+    "result": "labels/layout visually inspected"
+  },
+  "failures_or_limits": [
+    "Initial sandbox editor import had socket errors; clean authorized repeat passed",
+    "No production renderer/worker/UI/GPU/package/video or full-suite regression",
+    "No continuum/solver convergence, optical calibration or observer implementation",
+    "No all-frame decoded payload audit; only N192 gets subsequent complete-file hash",
+    "Performance is machine-specific with uncontrolled disk-cache state"
+  ],
+  "artifact_sha256": {
+    "ARCHITECTURE.md": "24edc6caf7e7ffc214cdc20260bc2f1e0f99d8a102031849239666c4ef84fe6a",
+    "DATA_READINESS.md": "bd14d014554f045212a1e9610d438b4e6ae11cb4196549d88dd5ea76b683f0fb",
+    "OBSERVERS_AND_METHODS.md": "d1f976aebf32225dcae39cf132bc8fb96a25756fef006a30de0dfe610108e4b5",
+    "README.md": "b5bd78bf8389fd7f2d09ead99a5cd9c1aa19391f25a66ac066ff75a7c2167f52",
+    "audit_model_a.py": "292210ace3ea2f4216c2d6c5f69ace550a8ae0980641fd5554e53c7dd9e603e5",
+    "evidence/data_readiness.json": "0237836599a6fe20cb8356304f7d064fa4ec85aa9864a73030446012af458888",
+    "evidence/editor_import_first.txt": "8c7c05e6a8c9f12dfaf8caaaf5f7ef2db8e31171d2cfa1bf160ec76cdd4aa42d",
+    "evidence/editor_import_retry.txt": "df9a603d0cb9b22f0237a67328f9a1dff0a86eea64a02c1beb092530c50ced71",
+    "evidence/experiment.json": "1cb9cc5dac0a6c54420b785ec2de77e04fef4ecf1d2eeb0d535cb92f99d5054e",
+    "evidence/model_a_spectra.png": "677c1a362fd231935e571713fb217fc9e047705d1fb8e82c419eb24d2d3e69f4",
+    "evidence/source_path.json": "e387489bf6b4082d273dbce28b26505c45cf723ee7f58a64290a65399b4ee11b",
+    "evidence/synthetic_and_cost.png": "52d1585c4b695710e268f3bbb7756fdbaa117950c983f9851db5f12b4655df4b",
+    "experiment.py": "0db93ddc22e33be6b5b882dcedf6cbb317f6dcd95b5911c535efd132f442d7f8",
+    "probe_source_path.py": "3706e94b73ea3e1332a75b6bec35b14e0fbc91a494995622d44668a2233bb532"
+  },
+  "staged_review": {
+    "expected_files": 18,
+    "individual_files_below_bytes": 1000000,
+    "scope": "PASS",
+    "credential_pattern_matches": 0,
+    "historical_evidence_changed": false,
+    "only_runtime_change": "BUILD113 to114",
+    "whitespace": "transcript formatting corrected before final staged check"
+  }
+}

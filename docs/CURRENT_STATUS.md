@@ -1,5 +1,17 @@
 # Current status
 
+Issue #135 proposes research-only candidate **v0.1.0.114**, based on accepted
+**v0.1.0.113** / owner-merged PR #409
+(`681a46f8f8473ee6b5323ec4af71ada883183077`). The
+[Spectral Mode investigation](research/spectral-135/README.md) audits actual
+Model A captures, validates bounded offline Fourier experiments, and proposes
+a source-verified regional spectrum before any spectral renderer or observer
+implementation. The signed N192 reference is suitable; the newer energy-only
+capture cannot supply signed-field spectra. No production analysis/rendering,
+WVZ1/SWSS format or UI change is implemented. The usual BUILD increment is
+explicitly authorized for this research PR. Owner review is pending; historical
+reports and review-time wording below remain as written.
+
 Issue #366 proposes candidate **v0.1.0.113**, based on accepted **v0.1.0.112** /
 owner-merged PR #408 (`bbd7eda678d9b04d784428747b61517aa2817499`). Fresh profiles
 start Scientific with Bloom off. Cinematic starts with global Bloom on at 0.30
