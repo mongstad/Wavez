@@ -32,6 +32,22 @@ control. Save Image does not enable a hidden reference field. Map visibility is
 restored after capture; the map is not included in image inspection state or
 offline video. See [the map contract](SPATIAL_BAND_MAP.md).
 
+An active **Spectral reconstruction** is part of the displayed scientific scene.
+Image export preserves its Original/Low/Intermediate/High selection, exact
+colormap, range, opacity, camera, clipping and slices. It does not restore the
+ordinary source during capture. Its scientific legend remains eligible scene
+content; application controls and selection handles remain excluded.
+
+Reconstructed images always save a visual-provenance JSON record beside the PNG,
+even when optional ordinary inspection records are off. The record distinguishes
+the derived field from original WVZ1 channels and binds source identity, native
+time, band edges, display-artifact identity, exact palette/settings and image
+hash/dimensions. It is not an inspection recipe and does not claim to restore a
+transient reconstruction. The ordinary non-spectral inspection/bundle path keeps
+its existing behavior. An invalid or changing reconstruction refuses the save;
+export never silently substitutes another field. See
+[the reconstruction workflow](SPECTRAL_RECONSTRUCTION.md#export-the-displayed-reconstruction).
+
 The File Locations preference still writes directly to a configured Image
 Exports folder. Without one, Save Image uses the native folder picker and reuses
 that folder for the current session. An unavailable configured folder reports an

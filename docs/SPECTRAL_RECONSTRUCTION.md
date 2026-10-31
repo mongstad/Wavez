@@ -19,7 +19,9 @@ energy, material identity or proof of persistent structures.
 4. Move the camera or switch Scientific/Cinematic using the existing controls.
    Drag the panel by its header to make space. **Volume opacity**, **Volume**,
    **Slice**, **Clip volume**, axis and world position control the derived view.
-   Blue is negative, white is zero and red is positive; opacity follows magnitude.
+   The default signed palette uses blue for negative, white for zero and red for
+   positive values. Other selected colormaps are display choices; opacity follows
+   magnitude independently of the palette.
 5. Use **Symmetric signed range • shared by all views** for an explicit contrast change;
    editing either bound keeps the pair symmetric about zero. Choose
    **Use original symmetric range** to reset. The legend identifies a manual
@@ -34,11 +36,35 @@ energy, material identity or proof of persistent structures.
 
 Source probes are unavailable while the reconstructed view is shown; they must
 not silently report original values as reconstructed values. The older regional
-band-map plane is suspended during this presentation. Ordinary image export
-temporarily restores the ordinary source and excludes the derived volume and
-legend. Ordinary video workers do not receive this transient result. Capturing
-the reconstructed view for review therefore uses an explicitly identified
-application screenshot, not ordinary scientific/image export.
+band-map plane is suspended during this presentation.
+
+## Export the displayed reconstruction
+
+**File → Export → Image** captures the active Original, Low, Intermediate or High
+view, including the selected colormap, shared range, opacity, camera, clipping
+and slices. It excludes the established application chrome and non-scene
+selection handles; it does not replace the reconstruction with the ordinary
+source. The active viewport and settings are restored unchanged after capture.
+A derived image always carries visual provenance identifying the selected
+reconstruction, frequency edges, verified source, pinned native time and exact
+display settings. This describes a visual export; it is not a restorable
+scientific inspection recipe or a new source channel.
+
+**File → Export → Video** freezes the selected reconstructed display when export
+starts. Its worker owns a verified copy of that one display volume and colormap,
+independent of the live analysis worker. The usual video range, resolution,
+camera/orbit and explicit presentation options still apply. The reconstruction
+stays at its declared native sample throughout the video, while the ordinary
+timeline and other visible layers can advance. Export provenance distinguishes
+video/capture time from pinned reconstruction time; it never claims an animated
+or recomputed spectrum.
+
+Incomplete, invalid, changed or unavailable reconstruction snapshots refuse
+export with a message. They never silently export the original source instead.
+Image/export metadata and private video-job snapshots do not modify the WVZ1
+capture or the float64 scientific results. See the
+[image](IMAGE_EXPORT.md) and [video](VIDEO_EXPORT.md) contracts and the
+[owner follow-up evidence](evidence/issue-424/export-follow-up/README.md).
 
 ## Numerical definition
 
@@ -98,8 +124,9 @@ invalidates the result; a changed external file requires fresh verification.
 
 The result owns four float64 arrays and four float32 display copies in private,
 hashed files. Float64 files are numerical authority; the single float32 cast is
-display only. The handoff is a bounded internal artifact, not a WVZ1, SWSS,
-inspection-state or export format. The viewer validates path ownership, shape,
+display only. The handoff is a bounded internal artifact, not a WVZ1, SWSS or
+inspection-state format. Video export may retain a verified copy of one display
+artifact inside its owned job, described by visual provenance. The viewer validates path ownership, shape,
 byte count, finiteness and content hash before uploading one full-resolution RF
 texture. The ordinary source arrays remain unchanged.
 

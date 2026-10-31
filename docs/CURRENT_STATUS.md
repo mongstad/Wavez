@@ -11,6 +11,11 @@ fixed comparable range. Original source arrays, WVZ1/SWSS and ordinary playback
 remain independent. Owner review is pending. See the
 [scientific/display contract](SPECTRAL_RECONSTRUCTION.md) and
 [validation evidence and owner checks](evidence/issue-424/README.md).
+The owner follow-up on PR #425 makes the active reconstructed volume authoritative
+for image and video export. Video snapshots retain one explicitly pinned native
+sample; derived provenance describes the displayed view without replacing it
+with the original field. BUILD remains v0.1.0.119. See
+[follow-up evidence and checks](evidence/issue-424/export-follow-up/README.md).
 Historical review-time records below remain as written.
 
 Issue #417 proposes candidate **v0.1.0.117**, based on accepted

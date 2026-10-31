@@ -10,6 +10,9 @@ var edge_high: SpinBox
 var boundary_ack: CheckBox
 var presentation_enabled: CheckBox
 var band_choice: OptionButton
+var colormap_choice: OptionButton
+var colormap_name := "signed"
+var legend_gradient: TextureRect
 var lower_range: SpinBox
 var upper_range: SpinBox
 var opacity: SpinBox
@@ -38,6 +41,12 @@ var window_placed := false
 var observed_source_channel := ""
 var observed_source_target := ""
 var result_worker_directory := ""
+var image_export_depth := 0
+var export_mode := false
+var export_display := {}
+var export_lut: Texture2D
+var export_legend_enabled := true
+var export_playhead := 0.0
 
 func setup(scene) -> void:
 	viewer = scene; jobs = viewer.selection_controller.jobs
@@ -86,6 +95,12 @@ func setup(scene) -> void:
 	band_choice = _choice(display_row,"View")
 	for band in BANDS: band_choice.add_item(band.capitalize())
 	band_choice.item_selected.connect(func(i): select_band(BANDS[i]))
+	var color_row := HBoxContainer.new(); content.add_child(color_row)
+	colormap_choice = _choice(color_row,"Colormap")
+	colormap_choice.add_item("Signed blue / white / red"); colormap_choice.set_item_metadata(0,"signed")
+	for name in viewer.colormaps:
+		colormap_choice.add_item(str(name)); colormap_choice.set_item_metadata(colormap_choice.item_count-1,str(name))
+	colormap_choice.item_selected.connect(func(i): select_colormap(str(colormap_choice.get_item_metadata(i))))
 	var range_row := HBoxContainer.new(); content.add_child(range_row); _label(range_row,"Symmetric signed range • shared by all views")
 	lower_range = _decimal(range_row,-3.4028234663852886e38,3.4028234663852886e38,-1,0.); upper_range = _decimal(range_row,-3.4028234663852886e38,3.4028234663852886e38,1,0.)
 	for spin in [lower_range,upper_range]:
@@ -104,7 +119,7 @@ func setup(scene) -> void:
 	for axis in ["X","Y","Z"]: plane_axis.add_item(axis)
 	plane_axis.select(2); plane_axis.item_selected.connect(func(_i): _center_plane())
 	plane_position = _decimal(plane_row,-1e12,1e12,0,.1)
-	_label(content,"Slice and clipping share the selected world-coordinate plane. Opacity uses magnitude; blue = negative, white = zero, red = positive. Source probes are unavailable while this view is shown. Camera and Scientific/Cinematic controls remain available.")
+	_label(content,"Slice and clipping share the selected world-coordinate plane. Opacity uses magnitude; the selected colormap spans the signed range. Source probes are unavailable while this view is shown. Image and video exports preserve this pinned visualization and record its derived provenance.")
 	var details_toggle := CheckButton.new(); details_toggle.text = "Source, numerical checks and transfer timings"; content.add_child(details_toggle)
 	geometry_detail = _label(content,""); geometry_detail.hide(); details_toggle.toggled.connect(func(v): geometry_detail.visible = v)
 	status = _label(body,"Choose a native field sample and acknowledge the periodic boundary assumption.")
@@ -123,7 +138,7 @@ func setup(scene) -> void:
 		var value := i/255.0
 		image.set_pixel(i,0,Color(.12,.25,.8).lerp(Color(.94,.94,.94),value*2.) if value < .5 else Color(.94,.94,.94).lerp(Color(.8,.12,.08),(value-.5)*2.))
 	signed_lut = ImageTexture.create_from_image(image)
-	var gradient := TextureRect.new(); gradient.texture = signed_lut; gradient.custom_minimum_size.y = 10; gradient.expand_mode = TextureRect.EXPAND_IGNORE_SIZE; gradient.mouse_filter = Control.MOUSE_FILTER_IGNORE; legend_body.add_child(gradient); legend_panel.hide()
+	legend_gradient = TextureRect.new(); legend_gradient.texture = signed_lut; legend_gradient.custom_minimum_size.y = 10; legend_gradient.expand_mode = TextureRect.EXPAND_IGNORE_SIZE; legend_gradient.mouse_filter = Control.MOUSE_FILTER_IGNORE; legend_body.add_child(legend_gradient); legend_panel.hide()
 	jobs.spectral_reconstruction_completed.connect(_completed); jobs.spectral_reconstruction_failed.connect(_failed); jobs.spectral_reconstruction_progress.connect(_progress)
 	RenderingServer.frame_pre_draw.connect(sync_visibility); set_process(not viewer.offline_instance)
 
@@ -251,6 +266,7 @@ func _invalidate(message: String) -> void:
 	if status != null and not message.is_empty(): status.text = message
 
 func _release_artifacts(data) -> void:
+	if export_mode: return # Offline artifacts belong to the render job, not this viewer worker.
 	if data is Dictionary and data.get("manifest") is Dictionary:
 		jobs._write("reconstruction_release.json",{"manifest":str(data.manifest.get("path",""))})
 
@@ -360,12 +376,34 @@ func _center_plane() -> void:
 	plane_position.set_value_no_signal(center[axis])
 
 func display_state() -> Dictionary:
+	if export_mode: return export_display.duplicate(true)
 	var normal := [0.,0.,0.]; normal[plane_axis.selected] = 1.
 	var color_mapping: Dictionary = preload("res://layers/volume_color.gd").DEFAULT.duplicate(); color_mapping.policy = "symmetric"
-	return {"visible":true,"volume":volume_enabled.button_pressed,"slice":slice_enabled.button_pressed,"lower":lower_range.value,"upper":upper_range.value,"opacity":opacity.value,"step":float(geometry.spacing.min())*.5,"clip":clip_enabled.button_pressed,"clip_normal":normal,"clip_distance":plane_position.value,"slice_normal":normal,"slice_distance":plane_position.value,"color_mapping":color_mapping,"opacity_mapping":{"mode":"magnitude","lower":0.,"upper":maxf(absf(lower_range.value),absf(upper_range.value))}}
+	return {"visible":true,"volume":volume_enabled.button_pressed,"slice":slice_enabled.button_pressed,"lower":lower_range.value,"upper":upper_range.value,"opacity":opacity.value,"step":float(geometry.spacing.min())*.5,"clip":clip_enabled.button_pressed,"clip_normal":normal,"clip_distance":plane_position.value,"slice_normal":normal,"slice_distance":plane_position.value,"colormap":colormap_name,"color_mapping":color_mapping,"opacity_mapping":{"mode":"magnitude","lower":0.,"upper":maxf(absf(lower_range.value),absf(upper_range.value))}}
+
+func select_colormap(name: String) -> void:
+	if name != "signed" and not viewer.colormaps.has(name): return
+	colormap_name = name
+	if colormap_choice != null:
+		var found := false
+		for i in colormap_choice.item_count:
+			if str(colormap_choice.get_item_metadata(i)) == name: colormap_choice.select(i); found = true; break
+		if not found:
+			colormap_choice.add_item(name); colormap_choice.set_item_metadata(colormap_choice.item_count-1,name); colormap_choice.select(colormap_choice.item_count-1)
+	sync_visibility()
+
+func display_lut() -> Texture2D:
+	if export_mode: return export_lut
+	return signed_lut if colormap_name == "signed" else viewer.scene_layers.lut(colormap_name)
+
+func _display_problem(state: Dictionary) -> String:
+	var span := PackedFloat32Array([state.upper-state.lower])
+	if not preload("res://layers/volume_color.gd").validate(state).is_empty() or not preload("res://layers/volume_opacity.gd").validate(state.opacity_mapping).is_empty() or not is_finite(span[0]) or span[0] < 1e-38:
+		return "Choose finite symmetric signed bounds with a float32 span and magnitude threshold at least 1e-38; this range cannot be rendered accurately."
+	return ""
 
 func active() -> bool:
-	return not result_data.is_empty() and not loaded_band.is_empty() and reconstructed_view.texture != null and presentation_enabled.button_pressed and not presentation_suspended and not viewer.offline_instance and not viewer.inspection_busy
+	return not result_data.is_empty() and not loaded_band.is_empty() and reconstructed_view.texture != null and presentation_enabled.button_pressed and not presentation_suspended and (not viewer.offline_instance or export_mode) and (not viewer.inspection_busy or image_export_depth > 0 or export_mode)
 
 func sync_visibility() -> void:
 	if reconstructed_view == null: return
@@ -374,24 +412,25 @@ func sync_visibility() -> void:
 	# rendering uses the reader's ordinary source poll; never launch a blocking
 	# stat subprocess for every playback frame. External mutation is therefore
 	# detected at the normal source refresh boundary (nominally once per second).
-	if jobs.worker_pid <= 0 or jobs.directory != result_worker_directory or _fingerprint() != source_fingerprint or _source_channel() != observed_source_channel or _source_target() != observed_source_target or viewer.selection_controller.state.revision != request_selection_revision:
+	if not export_mode and (jobs.worker_pid <= 0 or jobs.directory != result_worker_directory or _fingerprint() != source_fingerprint or _source_channel() != observed_source_channel or _source_target() != observed_source_target or viewer.selection_controller.state.revision != request_selection_revision):
 		_invalidate("Source identity or field/channel target changed. Pinned reconstruction released."); refresh_context(); return
 	var state := display_state()
-	var span := PackedFloat32Array([state.upper-state.lower])
-	if not preload("res://layers/volume_color.gd").validate(state).is_empty() or not preload("res://layers/volume_opacity.gd").validate(state.opacity_mapping).is_empty() or not is_finite(span[0]) or span[0] < 1e-38:
-		_release_presentation(); status.text = "Choose finite symmetric signed bounds with a float32 span and magnitude threshold at least 1e-38; this range cannot be rendered accurately."; return
+	var problem := _display_problem(state)
+	if not problem.is_empty():
+		_release_presentation(); status.text = problem; return
 	if not presenting:
 		presenting = true
 		if viewer.spectral_band_map != null:
 			old_map_suspended = viewer.spectral_band_map.presentation_suspended; viewer.spectral_band_map.suspend_presentation()
-	reconstructed_view.apply(state,signed_lut)
+	reconstructed_view.apply(state,display_lut())
 	for view in viewer.scene_layers.views.values():
 		if view is Grid: view.quad.hide(); view.slice.hide()
 	if is_instance_valid(viewer.scene_layers.iso_node): viewer.scene_layers.iso_node.hide()
 	if is_instance_valid(viewer.scene_layers.probe_marker): viewer.scene_layers.probe_marker.hide()
 	# Ordinary source legend cards must not label the derived field.
 	viewer.shell.layer_legends.hide()
-	legend_panel.show(); _update_legend()
+	legend_gradient.texture = display_lut()
+	legend_panel.visible = not export_mode or export_legend_enabled; _update_legend()
 
 func _release_presentation() -> void:
 	if reconstructed_view != null: reconstructed_view.quad.hide(); reconstructed_view.slice.hide()
@@ -414,14 +453,91 @@ func suspend_presentation() -> bool:
 func restore_presentation(previous := false) -> void:
 	presentation_suspended = previous; sync_visibility()
 
+func presentation_fingerprint() -> String:
+	if result_data.is_empty(): return JSON.stringify([revision,selected_band,pending_id,transfer.is_started(),presentation_enabled.button_pressed])
+	var texture := display_lut()
+	return JSON.stringify([revision,selected_band,loaded_band,pending_id,transfer.is_started(),presentation_enabled.button_pressed,presentation_suspended,result_source,result_data.manifest,display_state(),texture.get_image().get_data().hex_encode() if texture != null else ""],"",true,true)
+
+func export_snapshot() -> Dictionary:
+	var inactive := {"ok":true,"error":"","active":false,"snapshot":{}}
+	if export_mode: return {"ok":false,"error":"An offline reconstruction cannot start another export.","active":true,"snapshot":{}}
+	if not presentation_enabled.button_pressed or presentation_suspended: return inactive
+	if result_data.is_empty() and pending_id.is_empty() and not transfer.is_started(): return inactive
+	var problem := ""
+	if not pending_id.is_empty() or transfer.is_started() or loaded_band != selected_band: problem = "Wait for the selected reconstruction to finish loading, or turn off Show pinned volume before exporting."
+	elif not active() or not presenting: problem = "The requested reconstructed presentation is unavailable; no original-field substitute was exported."
+	elif jobs.worker_pid <= 0 or not OS.is_process_running(jobs.worker_pid) or jobs.directory != result_worker_directory: problem = "The reconstruction owner is unavailable. Compute again before exporting."
+	elif _fingerprint() != source_fingerprint or _source_channel() != observed_source_channel or _source_target() != observed_source_target or viewer.selection_controller.state.revision != request_selection_revision or not _source_stamp_matches(result_data): problem = "The reconstruction source changed. Recompute before exporting."
+	if problem.is_empty(): problem = _display_problem(display_state())
+	if not problem.is_empty(): return {"ok":false,"error":problem,"active":true,"snapshot":{}}
+	var texture := display_lut()
+	if texture == null: return {"ok":false,"error":"The reconstructed colormap is unavailable.","active":true,"snapshot":{}}
+	var image := texture.get_image()
+	if image == null or image.get_width() != 256 or image.get_height() != 1 or image.get_format() != Image.FORMAT_RGB8: return {"ok":false,"error":"The reconstructed colormap has an unsupported display format.","active":true,"snapshot":{}}
+	return {"ok":true,"error":"","active":true,"snapshot":{"version":1,"kind":"spectral_reconstruction","selected_band":loaded_band,"data":result_data.duplicate(true),"source":result_source.duplicate(true),"display":display_state(),"lut":{"width":256,"height":1,"format":"rgb8","pixels_hex":image.get_data().hex_encode(),"name":colormap_name},"legend":{"text":legend.text,"visible":legend_panel.visible},"worker_directory":result_worker_directory}}
+
+static func export_provenance(snapshot: Dictionary) -> Dictionary:
+	var data: Dictionary = snapshot.data
+	var artifact: Dictionary = data.artifacts[snapshot.selected_band]
+	return {"kind":"spectral_reconstruction","version":1,"selected_band":snapshot.selected_band,"source":snapshot.source.duplicate(true),"object":data.object,"channel":data.channel,"record":data.record.duplicate(true),"geometry":data.geometry.duplicate(true),"edges":data.edges.duplicate(),"boundary":data.boundary,"units":data.units.duplicate(true),"algorithm":data.algorithm,"time_policy":"pinned_native_sample; not time-evolving reconstruction","display":snapshot.display.duplicate(true),"lut":snapshot.lut.duplicate(true),"legend":snapshot.legend.duplicate(true),"display_artifact":{"sha256":artifact.sha256,"bytes":artifact.bytes,"dtype":artifact.dtype,"shape_zyx":artifact.shape_zyx.duplicate()},"scientific_artifact":{"sha256":artifact.scientific.sha256,"bytes":artifact.scientific.bytes,"dtype":artifact.scientific.dtype},"role":"derived analytical visualization; original WVZ1 channels remain unchanged"}
+
+func begin_image_export() -> void:
+	image_export_depth += 1; sync_visibility()
+
+func end_image_export() -> void:
+	image_export_depth = maxi(0,image_export_depth-1)
+	# The caller releases inspection_busy before restoring ordinary interaction.
+	sync_visibility()
+
+func install_export_snapshot(snapshot: Dictionary, prepared: Dictionary) -> String:
+	if not viewer.offline_instance: return "Pinned export installation is restricted to the offline render worker."
+	if snapshot.get("kind") != "spectral_reconstruction" or snapshot.get("version") != 1 or snapshot.get("selected_band") not in BANDS or not snapshot.get("data") is Dictionary or not snapshot.get("display") is Dictionary or not snapshot.get("lut") is Dictionary: return "Invalid pinned reconstruction snapshot."
+	var palette: Dictionary = snapshot.lut
+	if palette.get("width") != 256 or palette.get("height") != 1 or palette.get("format") != "rgb8" or not Index.valid_hex(palette.get("pixels_hex"),1536): return "Invalid pinned reconstruction colormap."
+	if prepared.has("error") or not prepared.has_all(["planes","dims","reduced","lod","gpu_bytes","grid_to_world","color_stats"]): return str(prepared.get("error","Missing pinned reconstructed field planes."))
+	if int(prepared.gpu_bytes) <= 0 or int(prepared.gpu_bytes) > Adapter.MAX_CELLS*4 or _ordinary_gpu_bytes()+int(prepared.gpu_bytes) > int(viewer.scene_layers.gpu_budget_mib)*1048576: return "Pinned reconstruction exceeds the full-resolution video texture budget; no substitute was loaded."
+	var problem := _display_problem(snapshot.display)
+	if not problem.is_empty(): return problem
+	var ready := Grid.upload(prepared)
+	if ready.has("error"): return str(ready.error)
+	var data: Dictionary = snapshot.data
+	var obj := {"id":"derived:video:"+snapshot.selected_band,"data_to_world":data.geometry.data_to_world}
+	var native := Exact.exact_float(data.record.native_time)
+	if native.is_empty(): return "Invalid pinned native time."
+	var sample := {"sequence":int(data.record.sequence),"geometry":data.geometry,"channels":{},"time":native.value}
+	if not reconstructed_view.load_sample(obj,sample,str(data.channel),int(prepared.gpu_bytes),ready): return reconstructed_view.error
+	export_mode = true; export_display = snapshot.display.duplicate(true); export_playhead = viewer.requested_time
+	export_lut = ImageTexture.create_from_image(Image.create_from_data(256,1,false,Image.FORMAT_RGB8,str(palette.pixels_hex).hex_decode()))
+	result_data = data.duplicate(true); result_source = snapshot.source.duplicate(true); geometry = data.geometry.duplicate(true)
+	current_object = str(data.object); current_channel = str(data.channel); selected_band = str(snapshot.selected_band); loaded_band = selected_band
+	colormap_name = str(palette.get("name","custom")); presentation_suspended = false; presentation_enabled.set_pressed_no_signal(true)
+	# Offline rendering never opens the dialog, where the interactive legend is
+	# normally styled. Apply the same scientific annotation appearance directly.
+	legend_panel.theme = viewer.shell.style_slice.theme
+	legend_panel.add_theme_stylebox_override("panel",viewer.shell.style_slice.theme.flat_box(&"surface.1",0,0,0))
+	export_legend_enabled = bool(snapshot.get("legend",{}).get("visible",true)); sync_visibility()
+	return ""
+
+func apply_export_frame(playhead: float, show_legend: bool) -> String:
+	if not export_mode or result_data.is_empty() or reconstructed_view.texture == null: return "Pinned reconstruction is unavailable; video frame refused."
+	if _ordinary_gpu_bytes()+reconstructed_view.gpu_bytes > int(viewer.scene_layers.gpu_budget_mib)*1048576: return "Scene texture use exceeds the pinned reconstruction export budget; video frame refused."
+	# Offline sampling does not advance the interactive requested_time. Keep the
+	# frame clock through every pre-draw refresh while the native field stays pinned.
+	export_playhead = playhead; export_legend_enabled = show_legend
+	sync_visibility()
+	if not presenting: return "Pinned reconstruction could not be displayed; video frame refused."
+	return ""
+
 func _update_legend() -> void:
 	if result_data.is_empty(): return
 	var native := Exact.exact_float(result_data.record.native_time)
 	var low := str(result_data.edges[0]); var high := str(result_data.edges[1])
 	var band_text := "All frequencies, same verified original" if loaded_band == "original" else "0 ≤ f < "+low+" (includes DC / mean)" if loaded_band == "low" else low+" ≤ f < "+high if loaded_band == "intermediate" else "f ≥ "+high
-	var range_kind := "original symmetric" if lower_range.value == result_data.common_range[0] and upper_range.value == result_data.common_range[1] else "manual shared"
-	if result_data.common_range[0] == 0 and result_data.common_range[1] == 0 and lower_range.value == -1 and upper_range.value == 1: range_kind = "zero-field display fallback; true range [0, 0]"
-	legend.text = "PINNED • %s • %s / %s\nNative %s; playhead %s\n%s [%s]\nPeriodic whole volume; hard radial bands.\nSigned range %s … %s [%s] • %s\nBlue − / white 0 / red +; magnitude opacity.\nDerived analysis, not optical light or energy.\nFull-resolution float32 display; float64 calculations." % [loaded_band.capitalize(),current_object,current_channel,str(native.value),str(viewer.requested_time),band_text,str(result_data.units.get("frequency","cycles / source length")),str(lower_range.value),str(upper_range.value),str(result_data.units.get("value","unknown")),range_kind]
+	var state := display_state()
+	var range_kind := "original symmetric" if state.lower == result_data.common_range[0] and state.upper == result_data.common_range[1] else "manual shared"
+	if result_data.common_range[0] == 0 and result_data.common_range[1] == 0 and state.lower == -1 and state.upper == 1: range_kind = "zero-field display fallback; true range [0, 0]"
+	var palette_text := "Blue − / white 0 / red +" if colormap_name == "signed" else "Colormap "+colormap_name+" • lower → upper"
+	legend.text = "PINNED • %s • %s / %s\nNative %s; playhead %s\n%s [%s]\nPeriodic whole volume; hard radial bands.\nSigned range %s … %s [%s] • %s\n%s; magnitude opacity.\nDerived analysis, not optical light or energy.\nFull-resolution float32 display; float64 calculations." % [loaded_band.capitalize(),current_object,current_channel,str(native.value),str(export_playhead if export_mode else viewer.requested_time),band_text,str(result_data.units.get("frequency","cycles / source length")),str(state.lower),str(state.upper),str(result_data.units.get("value","unknown")),range_kind,palette_text]
 
 func refresh_context() -> void:
 	if compute_button == null: return
