@@ -1,5 +1,0 @@
-env: ‘python3’: No such file or directory
-Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
-Vulkan 1.4.351 - Forward+ - Using Device #0: NVIDIA - NVIDIA GeForce RTX 3070 Ti
-
-SPATIAL SPECTRUM: 48 checks, 0 failures

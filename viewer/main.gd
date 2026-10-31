@@ -68,8 +68,6 @@ var held_positions_ready := false
 var generic_reader # Native SceneReader; name retained for current scene tools.
 var scene_layers
 var selection_controller
-var spatial_spectrum
-var spectral_band_map
 # WVZ1-only controls; retained synchronous mode supports export and comparisons.
 var scene_prebuffer_enabled := true
 var scene_hidden_fast_path := true
@@ -1457,10 +1455,6 @@ func _build_inspector_controls() -> void:
 	_build_geometry_ui()
 	selection_controller = preload("res://selection/selection_controller.gd").new()
 	add_child(selection_controller);selection_controller.setup(self)
-	spatial_spectrum = preload("res://analysis/spatial_spectrum_controller.gd").new()
-	add_child(spatial_spectrum);spatial_spectrum.setup(self)
-	spectral_band_map = preload("res://analysis/spectral_band_map_controller.gd").new()
-	add_child(spectral_band_map);spectral_band_map.setup(self)
 	var export_box := _section("Capture / Export")
 	_button(export_box, "Save image…", _save_image)
 	_check(export_box,"PNG inspection JSON sidecar",false,func(v: bool): screenshot_sidecar = v).text = "Inspection sidecar"
@@ -1917,8 +1911,6 @@ func _sync_control_state_profiled() -> void:
 
 # G1 command methods: shared by controls, recipes and deterministic export.
 func _reset_inspection_source() -> void:
-	if spatial_spectrum != null: spatial_spectrum.reset_source()
-	if spectral_band_map != null: spectral_band_map.reset_source()
 	if selection_controller != null:selection_controller.reset_source()
 	if scene_layers != null:
 		scene_layers.close();remove_child(scene_layers);scene_layers.queue_free();scene_layers = null
@@ -2309,8 +2301,6 @@ func _save_image_viewport() -> Image:
 		if control != null: focused.append(control)
 	for window in windows: window.hide()
 	var chrome := [shell.empty,shell.open_error,shell.immersive_hint,overlay_panel,screenshot_notice,orbit_panel,orbit_guide,shell.shortcuts_editor]
-	if spatial_spectrum != null: chrome.append(spatial_spectrum.region_overlay)
-	if spectral_band_map != null: spectral_band_map.suspend_presentation()
 	var legend_available: Vector2 = shell.legend_available
 	if shell.immersive:
 		chrome.append_array([shell.bar,shell.dock,resize_handle,shell.bottom_strip])
@@ -2323,7 +2313,6 @@ func _save_image_viewport() -> Image:
 	RenderingServer.force_draw(false)
 	var image := get_viewport().get_texture().get_image()
 	for item in hidden: item.show()
-	if spectral_band_map != null: spectral_band_map.restore_presentation()
 	if shell.immersive: shell.layout_legend(legend_available)
 	for window in windows: window.show()
 	for control in focused:

@@ -62,56 +62,6 @@ Transport JSON files are bounded to 1 MiB and atomically replaced; only one
 worker is owned by a viewer. Cancellation, close, owner death or lease expiry
 terminate stale work. This is not a public command API.
 
-## Regional spatial spectrum on the background lane
-
-`spatial_spectrum` accepts `object`, `channel`, requested `time` and `roi` with
-inclusive `start` and exclusive `end` integer arrays in **zyx** source order.
-Optional `bins` (8–512), positive `minimum_frequency`, `position_units` and
-`value_units` are explicit request properties. Unit overrides carry provenance;
-the interactive form uses canonical capture declarations or unknown units.
-The held native sample is selected before computing on complete source cells.
-
-The inline reply carries the verified enclosing `source` plus `data` containing
-`record`, `geometry`, `roi`, `units`, `mean`, `total_power`,
-`parseval_relative_error`, `df_xyz`, `nyquist_xyz`, bounded `radial` shell arrays,
-`support`, `warnings`, `provenance`, `workspace_bytes`, `timings` and
-`request_key`. Exact time, mean and total-power tokens accompany their display
-numbers. The key binds source identity, record, geometry, ROI, units, algorithm,
-bin policy and optional support test. This is a transient derived diagnostic,
-not a full-result artifact or durable inspection schema. Existing request IDs,
-scene/selection/analysis revisions, quotas, cancellation, verification and
-publication checks apply. See [the numerical contract](SPATIAL_SPECTRUM.md).
-
-## Spectral band maps and selected-time sequences
-
-`spectral_band_map` accepts `object`, `channel`, `time`, `support` (three ZYX
-counts), `band` (`low`, `high`) and `grid` (`plane_axis`, `fixed_start`, row/column
-`start`, `hop`, `count`). Optional explicit unit overrides retain provenance.
-The result contains at most 64 center measurements with exact numerical tokens,
-coverage masks, full geometry, native record, normalization, source/calculation
-dtypes, warnings and a request key. It uses the same verified source/kernel as
-the regional spectrum. See [the band-map contract](SPATIAL_BAND_MAP.md).
-
-`spectral_band_sequence` uses the same parameters without `time`, adding
-`indices`: one to eight unique increasing native record indices. Initially it
-requires `field / amplitude`. A successful reply has `kind`, `schema: 1`,
-`indices`, an ordered `maps` array of complete band-map results, `request_key`,
-`admission`, `cache` and `timings`. `admission` states selected times, center
-counts, estimated workspace, 2 MiB result reservation and the 1 MiB reply ceiling.
-`cache.hit` distinguishes verified reuse from computation. Each map retains
-its own record, coverage, units and timings; the sequence reports source-open,
-lookup and preparation costs separately. Existing request/revision and worker
-ownership gates apply to both operations.
-
-Persistent sequences reuse result manifest version 1 and hashed support JSONL,
-with a spectral schema and complete scientific binding. They live in the
-registry's stable `spectral-cache/results` namespace, outside transient viewer
-result pins but inside the same `DiskQuota`. A process lock serializes this
-collection's lookup/publication/eviction. Only a complete selected sequence is
-published. Hash/schema validation and independent source verification precede
-reuse; complete cached bytes alone are historical evidence, not current source
-verification. No new WVZ1, SWSS, export or inspection format is introduced.
-
 ## Selection definition version 1
 
 The v3 recipe selection block contains `version: 1`, `revision`, `active`,

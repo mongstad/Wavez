@@ -1,0 +1,62 @@
+{
+  "packaged": false,
+  "reports": {
+    "fresh": {
+      "checks": 77,
+      "failures": [],
+      "phase": "fresh",
+      "state": [
+        "Scientific",
+        true,
+        0.740000009536743
+      ]
+    },
+    "restart": {
+      "checks": 2,
+      "failures": [],
+      "phase": "restart",
+      "state": [
+        "Temperature",
+        false,
+        0.639999985694885
+      ]
+    },
+    "named": {
+      "checks": 5,
+      "failures": [],
+      "phase": "named",
+      "state": [
+        "Scientific",
+        true,
+        0.740000009536743
+      ]
+    },
+    "corrupt": {
+      "checks": 2,
+      "failures": [],
+      "phase": "corrupt",
+      "state": [
+        "Scientific",
+        false,
+        0.300000011920929
+      ]
+    },
+    "missing": {
+      "checks": 1,
+      "failures": [],
+      "phase": "missing",
+      "state": [
+        "Scientific",
+        false,
+        0.300000011920929
+      ]
+    }
+  },
+  "source_hashes_unchanged": {
+    "named.wvz": "efa9c961a31f1696956637cc0c62491804b06db2d839268cf45856d94ce1b847",
+    "mixed.wvz": "c42d3426c7bd204d04d4a6ed0f361837702a17189f8b54802b323ab7f809b13b",
+    "meshes.wvz": "e69755feb2d4d4d7bed733f24883b644d64248c98877639fa5df631498877327",
+    "fields.wvz": "218b2cb67e6208fb4378936f6fb88bbb0df2f3d7945b363545c039b10013b0be",
+    "particles.wvz": "d44321d3109f18e997aadbd67c75d101310783fa430348feaa024c89ee58d6e9"
+  }
+}

@@ -5,12 +5,6 @@ signal failed(message: String)
 signal background_completed(result: Dictionary)
 signal background_failed(message: String)
 signal background_progress(value: Dictionary)
-signal spatial_spectrum_completed(result: Dictionary)
-signal spatial_spectrum_failed(message: String)
-signal spatial_spectrum_progress(value: Dictionary)
-signal spectral_band_map_completed(result: Dictionary)
-signal spectral_band_map_failed(message: String)
-signal spectral_band_map_progress(value: Dictionary)
 const MAX_CONTROL := 1048576
 const Buffer = preload("res://layers/playback_buffer.gd")
 const Profile = preload("res://scene/playback_profile.gd")
@@ -48,41 +42,31 @@ var foreground_cancel_time := 0.0
 func _ready() -> void:
 	set_process(false)
 
-func start(cache_root := "", operation := "") -> bool:
+func start(cache_root := "") -> bool:
 	if worker_pid > 0 and OS.is_process_running(worker_pid): return true
 	if not directory.is_empty():shutdown()
 	var headroom := Buffer.memory_headroom()
 	if headroom.available_physical < headroom.reserve+memory_bytes+256*1048576:
-		return _start_failed("Analysis paused to preserve physical RAM headroom.",operation)
+		error = "Analysis paused to preserve physical RAM headroom.";failed.emit(error);return false
 	var default_root := "res://../.wavez-cache/analysis-workers" if OS.has_feature("editor") else "user://analysis-workers"
 	var base: String = cache_root if not cache_root.is_empty() else ProjectSettings.globalize_path(default_root)
 	directory = base.path_join("%d-%d" % [OS.get_process_id(),Time.get_ticks_usec()])
 	if DirAccess.make_dir_recursive_absolute(directory) != OK:
-		return _start_failed("Cannot create private analysis job directory.",operation)
+		error = "Cannot create private analysis job directory.";failed.emit(error);return false
 	_write("lease.json",{"owner":OS.get_process_id()})
 	if member_directory.is_empty():member_directory = directory.path_join("members")
 	var runtime := preload("res://analysis/packaged_runtime.gd").prepare(directory)
 	if not runtime.error.is_empty():
-		return _start_failed(runtime.error,operation)
+		error = runtime.error;failed.emit(error);return false
 	var script: String = runtime.script
 	packaged_runtime_files.assign(runtime.get("files",[]))
 	worker_pid = OS.create_process("/usr/bin/env",PackedStringArray(["python3","-B",script,"--directory",directory,"--owner-pid",str(OS.get_process_id()),"--assets-root",member_directory]),false)
 	worker_ready = false;error = "";last_result = {}
 	playback_pressure = false;foreground_cancel_id = ""
 	if worker_pid <= 0:
-		return _start_failed("Cannot start Python/NumPy analysis worker.",operation)
+		error = "Cannot start Python/NumPy analysis worker.";failed.emit(error);return false
 	set_process(true)
 	return true
-
-func _start_failed(message: String, operation: String) -> bool:
-	error = message
-	if operation == "spatial_spectrum": spatial_spectrum_failed.emit(message)
-	elif operation in ["spectral_band_map","spectral_band_sequence"]: spectral_band_map_failed.emit(message)
-	else: failed.emit(message)
-	return false
-
-static func is_spectral_operation(operation: String) -> bool:
-	return operation in ["spatial_spectrum","spectral_band_map","spectral_band_sequence"]
 
 func request(source: Dictionary, operation: String, arguments: Dictionary, source_revision: int, selection_version: int, analysis_version := 0) -> String:
 	if worker_pid <= 0 or not OS.is_process_running(worker_pid):
@@ -98,19 +82,15 @@ func request(source: Dictionary, operation: String, arguments: Dictionary, sourc
 	return current_id
 
 func request_background(source: Dictionary, operation: String, arguments: Dictionary, source_revision: int, selection_version: int, analysis_version: int, budget_override: Dictionary = {}) -> String:
-	# A regional spectrum has its own result surface but shares this owned
-	# process. Never replace an active spectrum or steal another owner's job.
-	if (is_spectral_operation(operation) and (busy() or not foreground_cancel_id.is_empty())) or (is_spectral_operation(background_operation) and (background_pending or not background_cancel_id.is_empty())):
-		error = "The analysis worker is busy. Wait for completion or cancel its current job."; return ""
 	if worker_pid <= 0 or not OS.is_process_running(worker_pid):
-		if not start("",operation):return ""
+		if not start():return ""
 	background_error_code = ""
 	serial += 1;background_id = "%d-b%d" % [OS.get_process_id(),serial]
 	background_scene = source_revision;background_selection = selection_version;analysis_revision = analysis_version;background_operation = operation
 	var job := {"version":1,"id":background_id,"scene_revision":source_revision,"selection_revision":selection_version,"analysis_revision":analysis_version,"source":source.duplicate(true),"operation":operation,"arguments":arguments.duplicate(true),"budget":{"memory_bytes":memory_bytes},"member_pins":member_pins,"result_pins":result_pins}
 	job.budget.merge(budget_override,true)
 	if not _write("background_request.json",job):
-		error = "Invalid or oversized interval request.";background_pending = false;_background_failed(error);return ""
+		error = "Invalid or oversized interval request.";background_pending = false;background_failed.emit(error);return ""
 	background_pending = true;background_cancel_id = "";error = ""
 	_log("JOB", "Analysis started: operation=%s id=%s budget_mib=%d" % [operation, background_id, memory_bytes / 1048576])
 	return background_id
@@ -166,12 +146,9 @@ func _poll() -> void:
 	last_poll = now
 	if worker_pid <= 0: return
 	if not OS.is_process_running(worker_pid):
-		var startup_failed := not worker_ready
 		worker_pid = -1;worker_ready = false
 		if pending: error = "Analysis worker stopped before completing the request.";pending = false;failed.emit(error)
-		if background_pending:
-			error = "Analysis worker could not start. Check that Python 3 and NumPy are available." if startup_failed and is_spectral_operation(background_operation) else "Analysis worker stopped before completing the request."
-			background_pending = false;_background_failed(error)
+		if background_pending:error = "Interval worker stopped before completing the request.";background_pending = false;background_failed.emit(error)
 		background_cancel_id = "";foreground_cancel_id = ""
 		return
 	var underflow := false
@@ -195,29 +172,18 @@ func _poll() -> void:
 	if not background_cancel_id.is_empty():
 		if _read("background_result.json").get("id") == background_cancel_id:background_cancel_id = ""
 		elif now-background_cancel_time > 2.0:
-			shutdown();_background_failed("Worker terminated after cancellation grace period.");return
+			shutdown();background_failed.emit("Worker terminated after cancellation grace period.");return
 	if background_pending:
 		var result := _read("background_result.json")
 		if result.get("id") == background_id and result.get("scene_revision") == background_scene and result.get("selection_revision") == background_selection and result.get("analysis_revision") == analysis_revision:
 			background_pending = false
-			if result.get("ok",false):
-				if background_operation == "spatial_spectrum": spatial_spectrum_completed.emit(result)
-				elif background_operation in ["spectral_band_map","spectral_band_sequence"]: spectral_band_map_completed.emit(result)
-				else: background_completed.emit(result)
+			if result.get("ok",false):background_completed.emit(result)
 			else:
 				background_error_code = result.get("code","")
-				error = result.get("error","Interval analysis failed.");_background_failed(error)
+				error = result.get("error","Interval analysis failed.");background_failed.emit(error)
 		else:
 			var progress := _read("background_progress.json")
-			if progress.get("id") == background_id:
-				if background_operation == "spatial_spectrum": spatial_spectrum_progress.emit(progress)
-				elif background_operation in ["spectral_band_map","spectral_band_sequence"]: spectral_band_map_progress.emit(progress)
-				else: background_progress.emit(progress)
-
-func _background_failed(message: String) -> void:
-	if background_operation == "spatial_spectrum": spatial_spectrum_failed.emit(message)
-	elif background_operation in ["spectral_band_map","spectral_band_sequence"]: spectral_band_map_failed.emit(message)
-	else: background_failed.emit(message)
+			if progress.get("id") == background_id:background_progress.emit(progress)
 
 func _write(name: String, value: Dictionary) -> bool:
 	if directory.is_empty(): return false

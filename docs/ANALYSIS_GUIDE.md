@@ -40,17 +40,6 @@ changes overlay eligibility. Original source arrays remain unchanged.
 
 ## Analyze native samples
 
-For one field at one native sample, **Tools → Spatial spectrum** computes a
-source-verified regional spatial spectrum independently of temporal selections.
-See [support, normalization, limits and workflow](SPATIAL_SPECTRUM.md). This
-derived diagnostic does not alter the scalar viewport or imply optical emission.
-
-**Tools → Spectral band map** places bounded regional band-power measurements
-on an optional viewport plane. **Compute** pins one native sample; **Prepare
-selected** verifies and caches up to eight explicit native records of
-`field / amplitude` for exact-time replay. Missing or intermediate times hide
-the replay plane. See [the workflow, cache and scientific limits](SPATIAL_BAND_MAP.md).
-
 In **Temporal analysis**, select the population/group, operation, source channel,
 component and inclusive native range. Choose value traces, statistics, population
 counts, discrete field integrals, interval velocity, centroids or mesh area.
