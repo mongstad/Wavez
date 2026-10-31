@@ -35,6 +35,18 @@ their existing contracts.
    windows sequentially. Source hashing and center progress remain visible.
    **Cancel** clears the publication target immediately; no partial map appears.
 
+The form is nonmodal. Drag its header to reposition it while using the viewport
+and application controls. Embedded placement stays below the menu bar and inside
+the available viewport; resizing refits the form. Native windows use the desktop
+window manager's drag behavior. Its moved position is retained during the session.
+
+**Cancel** is enabled while this form owns an active request and disabled when
+idle or after completion. A completed result has nothing left to cancel; use
+**Show map** to hide its presentation. Closing and reopening on the same source
+retains the inputs, presentation choices and completed pinned result without
+starting another calculation. This matches Wavez's retained tool forms. Changing
+source still invalidates the result under the source-binding rules below.
+
 Support is never automatically shortened to fit a small capture or reduce cost.
 The initial support is 128³. The default hop is 32 samples, with a bounded grid
 including an unavailable edge ring. On the signed 192³ Model A reference, the

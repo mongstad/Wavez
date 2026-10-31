@@ -1,0 +1,93 @@
+{
+  "exit_code": 0,
+  "seconds": 9.121786936999342,
+  "headless": false,
+  "packaged": true,
+  "dialog_review": true,
+  "source_hashes": {
+    "active-batch.wvz": "977ca20e871821bf9076e59f23f721e3f6e5f49f3e5f2f646e6414821e2c2de5",
+    "energy-only.wvz": "0328385663a89515e0ee312fb6e2355432dfd187e24ee91b0f9d67d6fffc0416",
+    "scaled.wvz": "53d4e6efd0bddb5327888d9057ca4856988af375a5e23e16f175329c9f661834",
+    "translated.wvz": "062e86986798c4cbca753851759f9d02d7012478d1b4a15c8a79d45d95e4383f",
+    "nonfinite.wvz": "4b3e90d97accf894670884b65c1c32f0246477815a745b853fd5290e2caca35d",
+    "other.wvz": "37d475071f34cacc5863d2eaca5cf0d01ffba74b8487a0572f104e1109e223f2",
+    "field.wvz": "a8af4ef173a6b1ac71b874e4802f2df3369ef8e2e4a618381ebad92e204fb2e4"
+  },
+  "sources_unchanged": true,
+  "result": {
+    "checks": 28,
+    "display": "X11",
+    "failures": [],
+    "observations": {
+      "cancel_ack_ms": 60.081,
+      "cancel_callback_ms": 0.72,
+      "cancel_progress": {
+        "completed": 2.0,
+        "id": "89214-b5",
+        "stage": "band_map_centers",
+        "total": 64.0
+      },
+      "dragged_position": [
+        164,
+        80
+      ],
+      "first_measured_progress": {
+        "completed": 2.0,
+        "id": "89214-b5",
+        "stage": "band_map_centers",
+        "total": 64.0
+      },
+      "initial_position": [
+        804,
+        56
+      ],
+      "preset_routes": [
+        {
+          "after": "Cinematic",
+          "before": "Scientific",
+          "dialog_open": true,
+          "item_disabled": false,
+          "key_route": "Input.parse_input_event with popup window_id",
+          "preset_menu_after": false,
+          "preset_menu_open": true,
+          "requested": "Cinematic",
+          "view_menu_after": false,
+          "view_menu_open": true
+        },
+        {
+          "after": "Scientific",
+          "before": "Cinematic",
+          "dialog_open": true,
+          "item_disabled": false,
+          "key_route": "Input.parse_input_event with popup window_id",
+          "preset_menu_after": false,
+          "preset_menu_open": true,
+          "requested": "Scientific",
+          "view_menu_after": false,
+          "view_menu_open": true
+        }
+      ]
+    },
+    "renderer": "forward_plus"
+  },
+  "errors": [
+    "ERROR: Attempt to disconnect a nonexistent connection from 'root:<Window#36507223388>'. Signal: 'focus_entered', callable: ''.",
+    "ERROR: Attempt to disconnect a nonexistent connection from 'root:<Window#36507223388>'. Signal: 'tree_exited', callable: ''.",
+    "ERROR: Attempt to disconnect a nonexistent connection from '@PopupMenu@1730:<PopupMenu#220754615243>'. Signal: 'focus_entered', callable: ''.",
+    "ERROR: Attempt to disconnect a nonexistent connection from '@PopupMenu@1730:<PopupMenu#220754615243>'. Signal: 'tree_exited', callable: ''.",
+    "ERROR: Attempt to disconnect a nonexistent connection from 'root:<Window#36507223388>'. Signal: 'focus_entered', callable: ''.",
+    "ERROR: Attempt to disconnect a nonexistent connection from 'root:<Window#36507223388>'. Signal: 'tree_exited', callable: ''.",
+    "ERROR: Signal 'focus_entered' is already connected to given callable '' in that object.",
+    "ERROR: Signal 'tree_exited' is already connected to given callable '' in that object.",
+    "ERROR: Signal 'focus_entered' is already connected to given callable '' in that object.",
+    "ERROR: Signal 'tree_exited' is already connected to given callable '' in that object.",
+    "ERROR: Signal 'focus_entered' is already connected to given callable '' in that object.",
+    "ERROR: Signal 'tree_exited' is already connected to given callable '' in that object.",
+    "ERROR: Attempt to disconnect a nonexistent connection from 'root:<Window#36507223388>'. Signal: 'focus_entered', callable: ''.",
+    "ERROR: Attempt to disconnect a nonexistent connection from 'root:<Window#36507223388>'. Signal: 'tree_exited', callable: ''.",
+    "ERROR: Attempt to disconnect a nonexistent connection from '@PopupMenu@1730:<PopupMenu#220754615243>'. Signal: 'focus_entered', callable: ''.",
+    "ERROR: Attempt to disconnect a nonexistent connection from '@PopupMenu@1730:<PopupMenu#220754615243>'. Signal: 'tree_exited', callable: ''.",
+    "ERROR: Attempt to disconnect a nonexistent connection from 'root:<Window#36507223388>'. Signal: 'focus_entered', callable: ''.",
+    "ERROR: Attempt to disconnect a nonexistent connection from 'root:<Window#36507223388>'. Signal: 'tree_exited', callable: ''."
+  ]
+}

@@ -12,6 +12,10 @@ No WVZ1/SWSS, exporter or playback-cache contract changes are proposed. Ordinary
 image/video exports exclude this transient map. Owner review is pending. See
 [the workflow and limits](SPATIAL_BAND_MAP.md) and
 [focused validation and owner checks](evidence/issue-415/README.md).
+The owner's first visual review confirmed the map, navigation, pinned time,
+image exclusion and numerical/support readouts. The same PR's
+[dialog follow-up](evidence/issue-415/owner-review-follow-up.md) addresses menu
+access and verifies active cancellation and intentional input retention.
 Historical research and review-time records below remain as written.
 
 Issue #413 proposes candidate **v0.1.0.115**, based on accepted

@@ -20,6 +20,9 @@ var row_column_label: Label
 var details_toggle: CheckButton
 var presentation_suspended := false
 var input_signature := ""
+var header: HBoxContainer
+var header_dragging := false
+var window_placed := false
 
 func setup(scene) -> void:
 	viewer = scene; jobs = viewer.selection_controller.jobs
@@ -27,16 +30,19 @@ func setup(scene) -> void:
 	window.exclusive = false; window.borderless = true; window.hide(); window.min_size = Vector2i(560,380); window.size = Vector2i(620,740); add_child(window)
 	window.close_requested.connect(close)
 	window.window_input.connect(func(event: InputEvent):
-		if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE: close())
+		if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE: close()
+		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and not event.pressed: header_dragging = false)
+	window.focus_exited.connect(func(): header_dragging = false)
+	viewer.get_viewport().size_changed.connect(_fit_window)
 	surface = PanelContainer.new(); window.add_child(surface); surface.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	var margin := MarginContainer.new(); surface.add_child(margin)
 	for side in ["left","right","top","bottom"]: margin.add_theme_constant_override("margin_"+side,14)
 	var body := VBoxContainer.new(); body.add_theme_constant_override("separation",7); margin.add_child(body)
-	var header := HBoxContainer.new(); body.add_child(header)
+	header = HBoxContainer.new(); body.add_child(header)
 	var title := Label.new(); title.text = "Spectral band map"; title.theme_type_variation = "PanelTitle"; title.mouse_filter = Control.MOUSE_FILTER_IGNORE; title.size_flags_horizontal = Control.SIZE_EXPAND_FILL; header.add_child(title)
 	var close_button := Button.new(); close_button.text = "Close"; close_button.pressed.connect(close); header.add_child(close_button)
-	header.gui_input.connect(func(event: InputEvent):
-		if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT and not window.is_embedded() and DisplayServer.has_feature(DisplayServer.FEATURE_WINDOW_DRAG): DisplayServer.window_start_drag(window.get_window_id()))
+	header.mouse_filter = Control.MOUSE_FILTER_STOP; header.mouse_default_cursor_shape = Control.CURSOR_MOVE
+	header.gui_input.connect(_header_input)
 	scroller = ScrollContainer.new(); scroller.size_flags_vertical = Control.SIZE_EXPAND_FILL; scroller.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED; scroller.follow_focus = true; body.add_child(scroller)
 	var content := VBoxContainer.new(); content.size_flags_horizontal = Control.SIZE_EXPAND_FILL; content.add_theme_constant_override("separation",5); scroller.add_child(content)
 	_label(content,"Derived 3D-window band power, not optical light or physical energy.")
@@ -124,14 +130,40 @@ func open() -> void:
 	var panel_style = viewer.shell.style_slice.theme.flat_box(&"surface.1",0,0,0)
 	surface.add_theme_stylebox_override("panel",panel_style); legend_panel.add_theme_stylebox_override("panel",panel_style)
 	legend_panel.theme = window.theme
-	var extent := Vector2i(viewer.get_viewport().get_visible_rect().size)
-	window.size = Vector2i(mini(620,maxi(560,extent.x-32)),mini(740,maxi(380,extent.y-40)))
-	var offset := Vector2i(maxi(12,extent.x-window.size.x-16),20)
-	window.position = offset if window.is_embedded() else viewer.get_window().position+offset
-	window.show(); refresh_context()
+	if not window_placed:
+		var extent := Vector2i(viewer.get_viewport().get_visible_rect().size)
+		var offset := Vector2i(maxi(12,extent.x-window.size.x-16),_menu_bottom())
+		window.position = offset if window.is_embedded() else viewer.get_window().position+offset
+		window_placed = true
+	window.show(); _fit_window(); refresh_context()
 	if viewer.session_log != null: viewer.session_log.record("UI","Tools → Spectral band map opened")
 
+func _menu_bottom() -> int:
+	# Reserve the shell bar even when immersive edge reveal temporarily hides it.
+	return int(ceil(viewer.shell.bar.get_global_rect().end.y))+8
+
+func _fit_window() -> void:
+	if window == null or not window.visible: return
+	var extent := Vector2i(viewer.get_viewport().get_visible_rect().size)
+	window.size = Vector2i(mini(620,maxi(560,extent.x-32)),mini(740,maxi(380,extent.y-_menu_bottom()-16)))
+	if window.is_embedded(): _clamp_window()
+
+func _clamp_window() -> void:
+	var extent := Vector2i(viewer.get_viewport().get_visible_rect().size)
+	window.position = Vector2i(clampi(window.position.x,8,maxi(8,extent.x-window.size.x-8)),clampi(window.position.y,_menu_bottom(),maxi(_menu_bottom(),extent.y-window.size.y-8)))
+
+func _header_input(event: InputEvent) -> void:
+	# Same embedded/native split as About; native movement stays compositor-owned.
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		header_dragging = event.pressed
+		if event.pressed and not window.is_embedded() and DisplayServer.has_feature(DisplayServer.FEATURE_WINDOW_DRAG):
+			DisplayServer.window_start_drag(window.get_window_id())
+	elif event is InputEventMouseMotion and header_dragging and window.is_embedded():
+		if (event.button_mask & MOUSE_BUTTON_MASK_LEFT) == 0: header_dragging = false; return
+		window.position += Vector2i(event.relative); _clamp_window()
+
 func close() -> void:
+	header_dragging = false
 	if not pending_id.is_empty(): cancel()
 	window.hide()
 	if previous_focus != null:

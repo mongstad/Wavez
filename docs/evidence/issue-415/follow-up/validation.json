@@ -1,0 +1,112 @@
+{
+  "baseline": "65c31ccb60b362692bea2d55db03d1dda15db627",
+  "build": "v0.1.0.116",
+  "build_changed": false,
+  "branch": "415-feat-spectral-visualize-regional-spectral-band-power-on-a-3d-viewport-plane",
+  "scope": "PR416 owner dialog review only; source/form state, synthetic active batch, no Model A or scientific solver rerun",
+  "unit_tests": {
+    "command": "python -m unittest tests.test_application_version",
+    "passed": 2,
+    "failures": 0,
+    "skipped": 0
+  },
+  "validation": {
+    "source": {
+      "checks": 28,
+      "functional_failures": 0,
+      "native_errors": 0,
+      "strict_exit": 0
+    },
+    "package": {
+      "checks": 28,
+      "functional_failures": 0,
+      "native_errors": 18,
+      "strict_exit": 1
+    },
+    "minimal_source": {
+      "checks": 18,
+      "functional_failures": 0,
+      "native_errors": 0,
+      "strict_exit": 0
+    },
+    "minimal_release": {
+      "checks": 18,
+      "functional_failures": 0,
+      "native_errors": 32,
+      "strict_exit": 1
+    }
+  },
+  "package_diagnostic_scope": {
+    "root_disconnect": 8,
+    "duplicate_connect": 6,
+    "parent_popup_disconnect": 4,
+    "signals": [
+      "focus_entered",
+      "tree_exited"
+    ],
+    "classification": "Same signal pair as independently reproduced Godot release-template defect; parent PopupMenu errors retained separately from root-only classifier."
+  },
+  "unchanged_source_sha256": {
+    "viewer/project.godot": "775440c9abb0c58e26b94ab3802c4020c78e087ad9138da8e4de6bcb878eb8a4",
+    "viewer/main.gd": "e35a12da2f160fd33b11c97aa542387c8667dfc8fb20a241c641a706c1f0f291",
+    "viewer/analysis/analysis_jobs.gd": "86557ca70eb3fa64593097f9ed072852afc663ff6fd650ce07279fb37026b66e",
+    "viewer/analysis/spatial_spectrum_controller.gd": "daf3e7fadbaeb083a228a25da0c781bb5c8f0019a7141e5c5c66ae9c1ac44637",
+    "viewer/analysis/spectral_band_plane.gd": "6922b6e929a30749abebb70ed6faf1123c3d6934ef431766a55030e5c70ca009",
+    "viewer/analysis/spectral_band_plane.gdshader": "d5af955af209c817325a757c53d52d6413dcd9d93d8be926d3e23b50cbe22ad3",
+    "wavez_export/analysis/spatial_spectrum.py": "a237c6a3a0cc1d918260676f17e783cf7e0ac143538dc193f87e9771b120f5ed",
+    "wavez_export/analysis/spatial_band_map.py": "5af605a2996fb9910441fe247b75095e7645e0e5ea9f7e521d59cc7f11a7684b",
+    "wavez_export/analysis/jobs.py": "53580c4708a025fa67ac1adac8037487b4a95099be15d4e0af87461b5db90a8c"
+  },
+  "implementation_sha256": {
+    "viewer/analysis/spectral_band_map_controller.gd": "f934499f884ba0374471a555b7ceed0b65d934dbcaa9d7c432eb3695948b3a43",
+    "viewer/analysis/test_spectral_dialog_review.gd": "9d469e7c245b445bfe6371d8b942d0dc6f91599bee96848c5f838ff28e175ea2",
+    "viewer/analysis/test_spectral_dialog_review.gd.uid": "d607942a3c6e6134c0243dd8cc588d6e555a91a11eb71c969ef04ffc0ee3cb08",
+    "tools/validate_spatial_band_map_ui.py": "b55d2e1674dadd2964d8804faf2c51bbdaf751ecb8b65a1883438e10e48091fd"
+  },
+  "artifacts": {
+    "source.json": {
+      "bytes": 2272,
+      "sha256": "cb801937c60d6afaf1750b5bc9d3e268a0dad4ac852be511e2859aa00a639472"
+    },
+    "package.json": {
+      "bytes": 4494,
+      "sha256": "5aea1193ce1d2d7aafdf351e5e07151a9f31eddffae2a4e3abc12bd558952bb2"
+    },
+    "source-native.txt": {
+      "bytes": 200,
+      "sha256": "fe847fc22a86928439c05b3ca5be29de87c76b54ef72917b04dbceb2debbe6f5"
+    },
+    "package-native.txt": {
+      "bytes": 3152,
+      "sha256": "24bc09617f9a74993481a61af4319672944a0aef9d4d79121da1d4791b66d45a"
+    },
+    "popup-minimal-source.json": {
+      "bytes": 6797,
+      "sha256": "1dbd88220ecaf8f1b34c861907781cffa3b760046d16fbddfe30d47dac257b18"
+    },
+    "popup-minimal-release.json": {
+      "bytes": 6910,
+      "sha256": "62d2746150f73f68ac2839a2fff0b8e8f301431e70b2618f358fa2bd4b5467c4"
+    },
+    "popup-release-native.txt": {
+      "bytes": 8742,
+      "sha256": "46f3ae9ddfc2c958fb28cc9fddd7c14f926e31a431aef325ed8af09ace0c70e8"
+    },
+    "source-import.txt": {
+      "bytes": 1962,
+      "sha256": "8fc2b3c4e83ebc2c5e94618ef211d710c9482d055c49d88bc5cb064960656807"
+    },
+    "cinematic-open.png": {
+      "bytes": 257237,
+      "sha256": "dc714dc9b43f6d2373bc8f0571b5e7c8ca51a9739d1af86b114fd6e968cca057"
+    },
+    "compact-refit.png": {
+      "bytes": 129592,
+      "sha256": "81fef3bb881f0d705683834f07f6a559fa3e393fd82136a981f1ef5294023e05"
+    },
+    "active-cancel.png": {
+      "bytes": 89514,
+      "sha256": "2637a73ac5c225db6ed692351accf7afd758cc1038ed706aa8b4eca001d048b0"
+    }
+  }
+}

@@ -71,16 +71,27 @@ def fixtures(out):
         band=dict(low=.4,high=.8),measurements=expected),indent=2)+"\n")
 
 
-def package(godot, out):
+def dialog_fixture(out):
+    """A bounded synthetic workload long enough to cancel after center progress."""
+    z, y, x = np.ogrid[:128, :160, :160]
+    q = (np.sin(2*np.pi*x/16)+.3*np.cos(2*np.pi*(y+z)/24)).astype(np.float32)
+    with SceneCapture(out/"active-batch.wvz",
+            objects=[dict(id="field",kind="volume",units="dimensionless")],
+            metadata={"position_unit":"dimensionless","channel_metadata":{
+                "field":{"amplitude":{"units":"dimensionless","semantic":"signed"}}}}) as writer:
+        writer.add_volume("field",0.,{"amplitude":q},origin=(0.,0.,0.),spacing=(1.,1.,1.),centering="node")
+
+
+def package(godot, out, script_name="test_spatial_band_map.gd"):
     with tempfile.TemporaryDirectory(prefix="wavez-band-plane-review-") as temporary:
         project = Path(temporary)/"viewer"
         inventory = stage(project)
         assert "wavez_export/analysis/spatial_band_map.py" in inventory
         (out/"packaged-sources.json").write_text(json.dumps(inventory,indent=2)+"\n")
-        source = project/"analysis/test_spatial_band_map.gd"
+        source = project/"analysis"/script_name
         script = source.read_text().replace("extends SceneTree", "extends Node\nvar root: Window:\n\tget: return get_tree().root\nvar process_frame: Signal:\n\tget: return get_tree().process_frame\nfunc create_timer(seconds: float) -> SceneTreeTimer:return get_tree().create_timer(seconds)")
         source.write_text(script.replace("func _initialize()", "func _ready()").replace("quit(","get_tree().quit("))
-        (project/"BandPlaneReview.tscn").write_text('[gd_scene load_steps=2 format=3]\n[ext_resource type="Script" path="res://analysis/test_spatial_band_map.gd" id="1"]\n[node name="Review" type="Node"]\nscript = ExtResource("1")\n')
+        (project/"BandPlaneReview.tscn").write_text('[gd_scene load_steps=2 format=3]\n[ext_resource type="Script" path="res://analysis/'+script_name+'" id="1"]\n[node name="Review" type="Node"]\nscript = ExtResource("1")\n')
         config = project/"project.godot"
         config.write_text(config.read_text().replace("res://Main.tscn","res://BandPlaneReview.tscn"))
         binary = out/"WAVEZ-review.x86_64"
@@ -94,15 +105,18 @@ def main():
     parser.add_argument("--output-dir",type=Path,required=True)
     parser.add_argument("--headless",action="store_true")
     parser.add_argument("--package",action="store_true")
+    parser.add_argument("--dialog-review",action="store_true",help="Focused owner follow-up: dragging, menu access, retention and active Cancel")
     parser.add_argument("--capture",type=Path)
     args = parser.parse_args()
     if args.headless and args.package: parser.error("packaged visual checks require Forward+")
     out = args.output_dir.resolve();out.mkdir(parents=True,exist_ok=False)
     fixtures(out)
+    if args.dialog_review: dialog_fixture(out)
     hashes = {p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in out.glob("*.wvz")}
     capture_before = args.capture.stat() if args.capture else None
-    command = [package(args.godot,out) if args.package else args.godot,"--audio-driver","Dummy"]
-    if not args.package: command += ["--path",str(ROOT/"viewer"),"--script","res://analysis/test_spatial_band_map.gd"]
+    script_name = "test_spectral_dialog_review.gd" if args.dialog_review else "test_spatial_band_map.gd"
+    command = [package(args.godot,out,script_name) if args.package else args.godot,"--audio-driver","Dummy"]
+    if not args.package: command += ["--path",str(ROOT/"viewer"),"--script","res://analysis/"+script_name]
     command += ["--headless"] if args.headless else ["--rendering-method","forward_plus","--rendering-driver","vulkan","--resolution","1440x900"]
     command += ["--","--band-map-output="+str(out)]
     if args.capture: command.append("--band-map-capture="+str(args.capture.resolve()))
@@ -122,13 +136,15 @@ def main():
         after = args.capture.stat()
         unchanged &= (capture_before.st_size,capture_before.st_mtime_ns,capture_before.st_ctime_ns)==(after.st_size,after.st_mtime_ns,after.st_ctime_ns)
     log = (out/"native.log").read_text()
-    report = dict(exit_code=completed.returncode,seconds=time.monotonic()-began,headless=args.headless,packaged=args.package,
+    report = dict(exit_code=completed.returncode,seconds=time.monotonic()-began,headless=args.headless,packaged=args.package,dialog_review=args.dialog_review,
         source_hashes=hashes,sources_unchanged=unchanged,result=native,
         errors=[line for line in log.splitlines() if "ERROR:" in line or "SCRIPT ERROR:" in line])
+    report["validation_exit_code"] = int(bool(completed.returncode or report["errors"] or not unchanged or not native or native["failures"]))
     (out/"summary.json").write_text(json.dumps(report,indent=2)+"\n")
     print(json.dumps(dict(exit_code=completed.returncode,checks=native.get("checks") if native else None,
-        failures=native.get("failures") if native else None,sources_unchanged=unchanged,output=str(out))))
-    if completed.returncode or report["errors"] or not unchanged or not native or native["failures"]:raise SystemExit(1)
+        failures=native.get("failures") if native else None,errors=len(report["errors"]),
+        validation_exit_code=report["validation_exit_code"],sources_unchanged=unchanged,output=str(out))))
+    if report["validation_exit_code"]: raise SystemExit(report["validation_exit_code"])
 
 
 if __name__ == "__main__": main()
