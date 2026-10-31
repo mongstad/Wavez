@@ -1,0 +1,66 @@
+{
+  "scope": "issue415 focused band-power/source/batch/owned-worker validation",
+  "python": "3.14.8 (main, Oct  1 2026, 00:00:00) [GCC 16.2.1 20260819 (Red Hat 16.2.1-2)]",
+  "numpy": "2.4.3",
+  "validator_sha256": "700a5aadfa77ccbcbe83838374fc3781be3e08bf9ef67f95a0a3e240d708625c",
+  "tests_sha256": "d649c4083ca2b9849cc5fe2cdbbce4a1e77b4e9d1a79140cff74de5244e3904e",
+  "synthetic": {
+    "passed": true,
+    "tests_run": 15,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "seconds": 1.0586583010008326,
+    "output": "test_anisotropic_plane_axes_and_cell_centers_use_data_local_coordinates (tests.test_spatial_band_map.SpatialBandMapTests.test_anisotropic_plane_axes_and_cell_centers_use_data_local_coordinates) ... ok\ntest_batch_decodes_once_hashes_once_and_workspace_does_not_scale_with_centers (tests.test_spatial_band_map.SpatialBandMapTests.test_batch_decodes_once_hashes_once_and_workspace_does_not_scale_with_centers) ... ok\ntest_complete_edge_mask_has_no_zero_fill_wrapping_or_invented_measurement (tests.test_spatial_band_map.SpatialBandMapTests.test_complete_edge_mask_has_no_zero_fill_wrapping_or_invented_measurement) ... ok\ntest_exact_half_open_edges_use_fft_cells_not_radial_bin_centers (tests.test_spatial_band_map.SpatialBandMapTests.test_exact_half_open_edges_use_fft_cells_not_radial_bin_centers) ... ok\ntest_full_complex_dft_oracle_single_mixed_oblique_and_parity (tests.test_spatial_band_map.SpatialBandMapTests.test_full_complex_dft_oracle_single_mixed_oblique_and_parity) ... ok\ntest_individual_spectrum_band_agrees_without_changing_radial_diagnostic (tests.test_spatial_band_map.SpatialBandMapTests.test_individual_spectrum_band_agrees_without_changing_radial_diagnostic) ... ok\ntest_invalid_band_grid_geometry_units_and_missing_signed_channel_are_refused (tests.test_spatial_band_map.SpatialBandMapTests.test_invalid_band_grid_geometry_units_and_missing_signed_channel_are_refused) ... ok\ntest_memory_admission_and_midbatch_cancel_release_allocations (tests.test_spatial_band_map.SpatialBandMapTests.test_memory_admission_and_midbatch_cancel_release_allocations) ... ok\ntest_native_held_time_exact_tokens_and_source_pin_are_preserved (tests.test_spatial_band_map.SpatialBandMapTests.test_native_held_time_exact_tokens_and_source_pin_are_preserved) ... ok\ntest_nonfinite_and_numerical_range_mask_only_affected_centers (tests.test_spatial_band_map.SpatialBandMapTests.test_nonfinite_and_numerical_range_mask_only_affected_centers) ... ok\ntest_owned_worker_close_midbatch_exits_without_complete_map (tests.test_spatial_band_map.SpatialBandMapTests.test_owned_worker_close_midbatch_exits_without_complete_map) ... ok\ntest_real_worker_midbatch_cancel_supersession_and_revision_reuse (tests.test_spatial_band_map.SpatialBandMapTests.test_real_worker_midbatch_cancel_supersession_and_revision_reuse) ... ok\ntest_regionally_varying_amplitude_preserves_squared_power_and_order (tests.test_spatial_band_map.SpatialBandMapTests.test_regionally_varying_amplitude_preserves_squared_power_and_order) ... ok\ntest_request_keys_bind_channel_band_geometry_and_grid_parameters (tests.test_spatial_band_map.SpatialBandMapTests.test_request_keys_bind_channel_band_geometry_and_grid_parameters) ... ok\ntest_source_mutation_truncation_checksum_and_midbatch_change_are_refused (tests.test_spatial_band_map.SpatialBandMapTests.test_source_mutation_truncation_checksum_and_midbatch_change_are_refused) ... ok\n\n----------------------------------------------------------------------\nRan 15 tests in 1.059s\n\nOK\n",
+    "worker_observations": [
+      {
+        "scope": "owned worker close after a measured center",
+        "close_seconds": 0.03158712899949023,
+        "observed_progress": {
+          "id": "close-map",
+          "stage": "band_map_centers",
+          "completed": 2,
+          "total": 64
+        },
+        "complete_map_published": false
+      },
+      {
+        "scope": "real unmodified worker; cancellation after a measured center, no pressure pause",
+        "cancellation_seconds": 0.016584547000093153,
+        "observed_progress": {
+          "id": "cancel-map",
+          "stage": "band_map_centers",
+          "completed": 2,
+          "total": 64
+        },
+        "reply_bytes": 5788,
+        "worker_memory": {
+          "VmPeak": 466288640,
+          "VmSize": 432209920,
+          "VmHWM": 120545280,
+          "VmRSS": 87052288
+        },
+        "logical": {
+          "charged_bytes": 0,
+          "peak_charged_bytes": 192430718,
+          "decoded_bytes": 13107200,
+          "read_bytes": 13108914,
+          "seconds": 0.06524761099990428,
+          "cpu_seconds": 0.06482960999999998
+        },
+        "revisions": [
+          8,
+          9,
+          10
+        ],
+        "superseded_map_not_published_as_current": true
+      }
+    ]
+  },
+  "status": "PASS",
+  "limitations": [
+    "No native UI, viewport FPS, GPU memory or packaged measurement",
+    "No solver, all-frame map, scientific source copy or alternate Model A capture",
+    "CPU FFT cancellation occurs at bounded checkpoints; an individual NumPy FFT call is not interruptible"
+  ]
+}

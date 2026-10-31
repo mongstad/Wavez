@@ -8,6 +8,9 @@ signal background_progress(value: Dictionary)
 signal spatial_spectrum_completed(result: Dictionary)
 signal spatial_spectrum_failed(message: String)
 signal spatial_spectrum_progress(value: Dictionary)
+signal spectral_band_map_completed(result: Dictionary)
+signal spectral_band_map_failed(message: String)
+signal spectral_band_map_progress(value: Dictionary)
 const MAX_CONTROL := 1048576
 const Buffer = preload("res://layers/playback_buffer.gd")
 const Profile = preload("res://scene/playback_profile.gd")
@@ -74,8 +77,12 @@ func start(cache_root := "", operation := "") -> bool:
 func _start_failed(message: String, operation: String) -> bool:
 	error = message
 	if operation == "spatial_spectrum": spatial_spectrum_failed.emit(message)
+	elif operation == "spectral_band_map": spectral_band_map_failed.emit(message)
 	else: failed.emit(message)
 	return false
+
+static func is_spectral_operation(operation: String) -> bool:
+	return operation in ["spatial_spectrum","spectral_band_map"]
 
 func request(source: Dictionary, operation: String, arguments: Dictionary, source_revision: int, selection_version: int, analysis_version := 0) -> String:
 	if worker_pid <= 0 or not OS.is_process_running(worker_pid):
@@ -93,7 +100,7 @@ func request(source: Dictionary, operation: String, arguments: Dictionary, sourc
 func request_background(source: Dictionary, operation: String, arguments: Dictionary, source_revision: int, selection_version: int, analysis_version: int, budget_override: Dictionary = {}) -> String:
 	# A regional spectrum has its own result surface but shares this owned
 	# process. Never replace an active spectrum or steal another owner's job.
-	if (operation == "spatial_spectrum" and (busy() or not foreground_cancel_id.is_empty())) or (background_operation == "spatial_spectrum" and (background_pending or not background_cancel_id.is_empty())):
+	if (is_spectral_operation(operation) and (busy() or not foreground_cancel_id.is_empty())) or (is_spectral_operation(background_operation) and (background_pending or not background_cancel_id.is_empty())):
 		error = "The analysis worker is busy. Wait for completion or cancel its current job."; return ""
 	if worker_pid <= 0 or not OS.is_process_running(worker_pid):
 		if not start("",operation):return ""
@@ -163,7 +170,7 @@ func _poll() -> void:
 		worker_pid = -1;worker_ready = false
 		if pending: error = "Analysis worker stopped before completing the request.";pending = false;failed.emit(error)
 		if background_pending:
-			error = "Analysis worker could not start. Check that Python 3 and NumPy are available." if startup_failed and background_operation == "spatial_spectrum" else "Analysis worker stopped before completing the request."
+			error = "Analysis worker could not start. Check that Python 3 and NumPy are available." if startup_failed and is_spectral_operation(background_operation) else "Analysis worker stopped before completing the request."
 			background_pending = false;_background_failed(error)
 		background_cancel_id = "";foreground_cancel_id = ""
 		return
@@ -195,6 +202,7 @@ func _poll() -> void:
 			background_pending = false
 			if result.get("ok",false):
 				if background_operation == "spatial_spectrum": spatial_spectrum_completed.emit(result)
+				elif background_operation == "spectral_band_map": spectral_band_map_completed.emit(result)
 				else: background_completed.emit(result)
 			else:
 				background_error_code = result.get("code","")
@@ -203,10 +211,12 @@ func _poll() -> void:
 			var progress := _read("background_progress.json")
 			if progress.get("id") == background_id:
 				if background_operation == "spatial_spectrum": spatial_spectrum_progress.emit(progress)
+				elif background_operation == "spectral_band_map": spectral_band_map_progress.emit(progress)
 				else: background_progress.emit(progress)
 
 func _background_failed(message: String) -> void:
 	if background_operation == "spatial_spectrum": spatial_spectrum_failed.emit(message)
+	elif background_operation == "spectral_band_map": spectral_band_map_failed.emit(message)
 	else: background_failed.emit(message)
 
 func _write(name: String, value: Dictionary) -> bool:

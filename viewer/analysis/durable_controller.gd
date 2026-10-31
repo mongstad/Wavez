@@ -131,7 +131,7 @@ func recompute() -> void:
 func capture_to(path: String, viewport_only: bool = false) -> Error:
 	if not viewport_only: viewer.shell.dismiss_orbit_editor()
 	if viewer.inspection_busy:return ERR_BUSY
-	if temporal.jobs.background_operation == "spatial_spectrum" and (temporal.jobs.background_pending or not temporal.jobs.background_cancel_id.is_empty()):status.text = "Finish or cancel Spatial spectrum before capturing analysis state.";return ERR_BUSY
+	if temporal.jobs.is_spectral_operation(temporal.jobs.background_operation) and (temporal.jobs.background_pending or not temporal.jobs.background_cancel_id.is_empty()):status.text = "Finish or cancel the active spectral tool before capturing analysis state.";return ERR_BUSY
 	if FileAccess.file_exists(path) or DirAccess.dir_exists_absolute(path):status.text = "Choose a new PNG filename.";return ERR_ALREADY_EXISTS
 	var destination := path.get_basename()+".inspection"
 	if DirAccess.dir_exists_absolute(destination) or FileAccess.file_exists(destination):status.text = "Choose a new PNG/bundle name.";return ERR_ALREADY_EXISTS

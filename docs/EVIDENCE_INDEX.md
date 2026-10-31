@@ -1,5 +1,10 @@
 # Retained evidence
 
+Issue #415's [viewport spectral band-map review](evidence/issue-415/README.md)
+records independent center-value oracles, actual Model A comparisons, bounded
+batch costs, source/package Forward+ checks and exact owner inputs. Low-frequency
+support remains unresolved; display colors do not add scientific measurements.
+
 Issue #413's [regional spectrum review](evidence/issue-413/README.md) records
 independent numerical oracles, actual signed Model A comparisons, source/worker
 limits, native UI checks and owner verification. Its conclusions are bounded to

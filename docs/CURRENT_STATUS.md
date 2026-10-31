@@ -1,5 +1,19 @@
 # Current status
 
+Issue #415 proposes candidate **v0.1.0.116**, based on accepted
+**v0.1.0.115** / owner-merged PR #414
+(`40b00adb745e3a813069e148f6ccd8dd6e1fd147`). **Tools → Spectral band map**
+places a bounded plane of regional 3D-window band-power measurements in the
+viewport at one verified native sample. The original scalar remains independently
+viewable. Measured centers, unavailable supports, numerical units and unresolved
+low-frequency support are explicit; colors are display values only. One source
+verification/decode serves each batch through the existing analysis worker.
+No WVZ1/SWSS, exporter or playback-cache contract changes are proposed. Ordinary
+image/video exports exclude this transient map. Owner review is pending. See
+[the workflow and limits](SPATIAL_BAND_MAP.md) and
+[focused validation and owner checks](evidence/issue-415/README.md).
+Historical research and review-time records below remain as written.
+
 Issue #413 proposes candidate **v0.1.0.115**, based on accepted
 **v0.1.0.114** / owner-merged PR #412
 (`6867d21746190537ed67379c1a44c87b1708f4e1`). **Tools → Spatial spectrum**
