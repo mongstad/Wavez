@@ -1,0 +1,1093 @@
+{
+  "scope": "Issue 135 bounded read-only metadata, sampled payload and checkpoint audit",
+  "python": "3.14.8",
+  "numpy": "2.4.3",
+  "scipy": "1.17.1",
+  "full_capture_hashes": "NOT COMPUTED: originals total over 300 GB; selected payload checksums and complete structural indexes retained",
+  "finalization_boundary": "WVZ1 commits samples, not a final-run marker; completion requires matching external run summary and configured final sample",
+  "runs": [
+    {
+      "run_id": "20261030T193414164759Z_b3a4a787cae945b0909004cac75740ca",
+      "path": "/home/Nozba/Documents/Dev/Sims/Model-A/outputs/run_20261030T193414164759Z_b3a4a787cae945b0909004cac75740ca/model_a_20261030T193414164759Z_b3a4a787cae945b0909004cac75740ca.wvz",
+      "stat": {
+        "bytes": 6965545431,
+        "mtime_ns": 1793389496997707349,
+        "ctime_ns": 1793389496997707349,
+        "device": 47,
+        "inode": 26410348
+      },
+      "metadata": {
+        "title": "Cosmos Model A: scalar amplitude and derived field-visualization markers",
+        "channel_units": {
+          "amplitude": "dimensionless",
+          "energy_density": "dimensionless",
+          "gradient_magnitude": "dimensionless"
+        },
+        "coordinate_convention": "solver xyz transposed to WVZ zyx; positions xyz; periodic nodes [0,L)",
+        "marker_semantics": "anonymous energy maxima, not physical particles; no trajectories",
+        "precision": "float64 lossless; no normalization or clipping",
+        "version": 1,
+        "uuid": "5848557b4ddd4d56b48e62f9f5700b23",
+        "objects": [
+          {
+            "space": "viewer_world",
+            "static": false,
+            "data_to_world": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0
+            ],
+            "id": "field",
+            "kind": "volume",
+            "units": "dimensionless"
+          },
+          {
+            "space": "viewer_world",
+            "static": false,
+            "data_to_world": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0
+            ],
+            "id": "derived_markers",
+            "kind": "particles",
+            "identity": "anonymous",
+            "units": "dimensionless"
+          }
+        ]
+      },
+      "configuration": {
+        "N": 192,
+        "L": 32.0,
+        "T": 40.0,
+        "dt": 0.02,
+        "background": 1.2,
+        "amplitude": 0.01,
+        "mode_x": 1,
+        "mode_y": 1,
+        "mode_z": 0,
+        "seed": 3003,
+        "workers": 2,
+        "diagnostic_interval": 0.5,
+        "checkpoint_interval": 8.0,
+        "volume_interval": 1.0,
+        "marker_interval": 1.0,
+        "max_markers": 1000,
+        "marker_threshold": 0.0,
+        "quantities": [
+          "amplitude",
+          "energy_density",
+          "gradient_magnitude"
+        ],
+        "output_parent": "outputs",
+        "ic": "noise",
+        "volume": true,
+        "markers": true,
+        "steps": 2000,
+        "dt_requested": 0.02,
+        "diagnostic_steps": 25,
+        "checkpoint_steps": 400,
+        "volume_steps": 50,
+        "marker_steps": 50,
+        "model": "A",
+        "mode": [
+          1,
+          1,
+          0
+        ],
+        "noise_kmax": 0.9,
+        "max_energy_error": 0.02,
+        "estimated_capture_payload_bytes": 6966609792,
+        "estimated_state_payload_bytes": 679477248
+      },
+      "summary_status": "complete",
+      "final_t": 40.0,
+      "summary_export_validation": "not verified in this run; separate readback required",
+      "records": 82,
+      "field_samples": 41,
+      "sample_first": 0.0,
+      "sample_last": 40.0,
+      "time_delta_min": 1.0,
+      "time_delta_max": 1.0,
+      "channels": [
+        "amplitude",
+        "energy_density",
+        "gradient_magnitude"
+      ],
+      "geometry": {
+        "shape": [
+          192,
+          192,
+          192
+        ],
+        "origin": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "spacing": [
+          0.16666666666666666,
+          0.16666666666666666,
+          0.16666666666666666
+        ],
+        "centering": "node"
+      },
+      "field_decoded_bytes": 169869312,
+      "all_field_schemas_equal": true,
+      "all_records_structural_checks_pass": true,
+      "committed_end": 6965545431,
+      "eof_fully_committed": true,
+      "index_sha256": "5d4053d306a65c3b8fc480bec7a7af3a4e792d08698c769b1993e01cb4921286",
+      "provenance_sha256": "5eb6058cff2fa8aca238c0f2a0f87c8fc575c7f36a4f910a257e9106a18fd524",
+      "summary_sha256": "15acd0b4d94e7ba680417c0a660cb29860b6b9bdd26a099a56b7ed69232a8298",
+      "configuration_sha256": "b71fc67500bb516e7bd5bea0ae8f1d3c18c5377a2d4b67abdc8562d2d3e5fa00",
+      "diagnostics_sha256": "c89a67afe1768006c4f1afa582042075e1332615ddff382a7a21cf2f535c8f99",
+      "provenance_boundary": "periodic",
+      "units": "dimensionless",
+      "swss": "3.0",
+      "simulation_version": "0.1.5",
+      "source_hashes": {
+        "Model_A.py": {
+          "sha256": "748342560fcc53613ba53a3b07d5c894ac17764f6849ed43afa3ab13034ac2df",
+          "matches_provenance": true
+        },
+        "kernel.py": {
+          "sha256": "b716f13151b8d3e16920a270ed209e0b9024ef4aae733f529bc14f22693b9e2a",
+          "matches_provenance": true
+        },
+        "exports.py": {
+          "sha256": "14390e8c02335e9b6087a8a0aa8b00c850dbc8e1132e966a1c8c108ebb62dd24",
+          "matches_provenance": true
+        },
+        "runio.py": {
+          "sha256": "8a4389c1ffb213cd8b110840b6ea1a01062bc586156c11eaf76225a01af3efac",
+          "matches_provenance": true
+        },
+        "swss.toml": {
+          "sha256": "cd7ed9d85ebf812855a5a75858c42249616d642d1380d04daae07b43e8288a3a",
+          "matches_provenance": true
+        },
+        "requirements.txt": {
+          "sha256": "5abf445134a09ecc45706ac5078dfaa1b05c854a67a5af69c4fce9a08fcb5b0d",
+          "matches_provenance": true
+        },
+        "README.md": {
+          "sha256": "25ec9f880fd6b04d6b352507ca4eaecce749d37b9b427144ddd47c28f63bf194",
+          "matches_provenance": true
+        }
+      },
+      "exporter_hashes": {
+        "__init__.py": {
+          "current_sha256": "fcfe9ceca522916033b399d119ea64ccf3a1ea8dfbf8984906e4527dbd94b017",
+          "matches_recorded_exporter": true
+        },
+        "scene.py": {
+          "current_sha256": "76afd84abee68cc8f1a343f8a065f6c974087f9373a3bf025dea06bcd7b3a83b",
+          "matches_recorded_exporter": true
+        },
+        "storage.py": {
+          "current_sha256": "17fae943f6f4368b17bbdcab0d49cd84e74c046eea262441456eb03025f14efb",
+          "matches_recorded_exporter": true
+        },
+        "codec.py": {
+          "current_sha256": "0603df703602d57f7f184a5b8dcfda6d1ad43c6fac60f95525a1604671f25d11",
+          "matches_recorded_exporter": true
+        },
+        "field_statistics.py": {
+          "current_sha256": "b9b1d6535e84ca1b5dd15ede82a9c36f73d840ccc00adaa40c80d3492a8c79c2",
+          "matches_recorded_exporter": true
+        },
+        "metadata_budget.py": {
+          "current_sha256": "b0699482bcb1aee497c236b0de98e47e5c8f754dd56e9a5e33798a3a23fd971c",
+          "matches_recorded_exporter": true
+        }
+      },
+      "sampled_payloads": [
+        {
+          "index": 0,
+          "time": 0.0,
+          "sequence": 0,
+          "read_seconds": 0.29245093800000177,
+          "stored_and_raw_chunk_checksums_verified": true,
+          "arrays": {
+            "amplitude": {
+              "shape": [
+                192,
+                192,
+                192
+              ],
+              "dtype": "float64",
+              "bytes": 56623104,
+              "sha256": "4e64c2e4b62e931605d35d594e233f746d69fad9f85c8e6baaafa84696f71c92",
+              "finite": 7077888,
+              "negative": 0,
+              "minimum": 1.1672078291039423,
+              "maximum": 1.2372876324144628,
+              "mean": 1.2,
+              "rms": 1.2000416659433122
+            },
+            "energy_density": {
+              "shape": [
+                192,
+                192,
+                192
+              ],
+              "dtype": "float64",
+              "bytes": 56623104,
+              "sha256": "6450894b91a921630f7d2b5c5db8d613dae521724c11fded573f1e1de23c80b1",
+              "finite": 7077888,
+              "negative": 0,
+              "minimum": 0.3436038820361684,
+              "maximum": 0.3589297066452346,
+              "mean": 0.3509022755437105,
+              "rms": 0.3509090884532046
+            },
+            "gradient_magnitude": {
+              "shape": [
+                192,
+                192,
+                192
+              ],
+              "dtype": "float64",
+              "bytes": 56623104,
+              "sha256": "9e1eaea2674ba9cb24345d4bd8c3a2b026b4f03562138bb3861dedca52f7629b",
+              "finite": 7077888,
+              "negative": 0,
+              "minimum": 1.8297925108363112e-05,
+              "maximum": 0.014206381272160121,
+              "mean": 0.0047665916124013386,
+              "rms": 0.0052037204398958535
+            }
+          },
+          "checkpoint_comparison": {
+            "path": "/home/Nozba/Documents/Dev/Sims/Model-A/outputs/run_20261030T193414164759Z_b3a4a787cae945b0909004cac75740ca/state_000000000.npz",
+            "sha256": "bec128480b387b0e9ab8c99ea52d505e11f4dc56d4e7e351c4d676e4549c8280",
+            "time": 0.0,
+            "source_axes": "xyz",
+            "capture_axes": "zyx",
+            "q_bitwise_equal": true,
+            "max_abs_errors": {
+              "amplitude": 0.0,
+              "energy_density": 0.0,
+              "gradient_magnitude": 0.0
+            },
+            "unchanged_stat": true
+          }
+        },
+        {
+          "index": 20,
+          "time": 20.0,
+          "sequence": 40,
+          "read_seconds": 0.29521893100002217,
+          "stored_and_raw_chunk_checksums_verified": true,
+          "arrays": {
+            "amplitude": {
+              "shape": [
+                192,
+                192,
+                192
+              ],
+              "dtype": "float64",
+              "bytes": 56623104,
+              "sha256": "4b4514937240265f47cb6e59ca2f7ee0af4eb54b7d144a5f8f84f0d54f330a4b",
+              "finite": 7077888,
+              "negative": 3752678,
+              "minimum": -0.9682381567664624,
+              "maximum": 0.6959933384069554,
+              "mean": -0.1080487747717098,
+              "rms": 0.37389679934428616
+            },
+            "energy_density": {
+              "shape": [
+                192,
+                192,
+                192
+              ],
+              "dtype": "float64",
+              "bytes": 56623104,
+              "sha256": "1548515da0ba4ceefbde4854cf512ac92e4922dd11fe8dae668e496a90be63a3",
+              "finite": 7077888,
+              "negative": 0,
+              "minimum": 0.002323427542447428,
+              "maximum": 0.9039342159663609,
+              "mean": 0.3509311141107274,
+              "rms": 0.41936164187023217
+            },
+            "gradient_magnitude": {
+              "shape": [
+                192,
+                192,
+                192
+              ],
+              "dtype": "float64",
+              "bytes": 56623104,
+              "sha256": "902e94ef0dfaa5dff9b85e6a6866df726f4306633eb93296bd7f3dfe7abd289b",
+              "finite": 7077888,
+              "negative": 0,
+              "minimum": 0.00030204880996959765,
+              "maximum": 0.4373026815203664,
+              "mean": 0.1436895316854141,
+              "rms": 0.172161023255603
+            }
+          },
+          "checkpoint_comparison": null
+        },
+        {
+          "index": 40,
+          "time": 40.0,
+          "sequence": 80,
+          "read_seconds": 0.29279399600000033,
+          "stored_and_raw_chunk_checksums_verified": true,
+          "arrays": {
+            "amplitude": {
+              "shape": [
+                192,
+                192,
+                192
+              ],
+              "dtype": "float64",
+              "bytes": 56623104,
+              "sha256": "721b14353b1329606c1b7e598e7e99a9e544b7ec1b9988807697393a73aa794c",
+              "finite": 7077888,
+              "negative": 1436901,
+              "minimum": -1.2275794172214576,
+              "maximum": 2.0287075740689637,
+              "mean": 0.3270990756995065,
+              "rms": 0.5239781000479221
+            },
+            "energy_density": {
+              "shape": [
+                192,
+                192,
+                192
+              ],
+              "dtype": "float64",
+              "bytes": 56623104,
+              "sha256": "4ecb8b10640760af0de82452501f11389667ae344a6bf43adbeef121b98a69be",
+              "finite": 7077888,
+              "negative": 0,
+              "minimum": 4.286354978111549e-05,
+              "maximum": 3.647958999795934,
+              "mean": 0.35092805950557077,
+              "rms": 0.48645882190370693
+            },
+            "gradient_magnitude": {
+              "shape": [
+                192,
+                192,
+                192
+              ],
+              "dtype": "float64",
+              "bytes": 56623104,
+              "sha256": "31507aa01f8d7bdf8bec988f031d712850465bd1bf7da56b72b3b1c592b99499",
+              "finite": 7077888,
+              "negative": 0,
+              "minimum": 0.0006093908374543177,
+              "maximum": 1.3512870368875707,
+              "mean": 0.24403991585243018,
+              "rms": 0.2785375079640997
+            }
+          },
+          "checkpoint_comparison": {
+            "path": "/home/Nozba/Documents/Dev/Sims/Model-A/outputs/run_20261030T193414164759Z_b3a4a787cae945b0909004cac75740ca/state_000002000.npz",
+            "sha256": "ccc43a8a51a1b3d270a0ffee749f892556535ce0e2c9d3b0abe6300b69259d9a",
+            "time": 40.0,
+            "source_axes": "xyz",
+            "capture_axes": "zyx",
+            "q_bitwise_equal": true,
+            "max_abs_errors": {
+              "amplitude": 0.0,
+              "energy_density": 0.0,
+              "gradient_magnitude": 0.0
+            },
+            "unchanged_stat": true
+          }
+        }
+      ],
+      "swss_schema": 3,
+      "swss_declared_sources_match": true,
+      "marker_samples": 41,
+      "marker_payloads_verified": 0,
+      "marker_count_range": [
+        14,
+        671
+      ],
+      "capture_unchanged_stat": true
+    },
+    {
+      "run_id": "20261030T205345553035Z_678c9919a7b949bb91fb364e0c22c83c",
+      "path": "/home/Nozba/Documents/Dev/Sims/Model-A/outputs/run_20261030T205345553035Z_678c9919a7b949bb91fb364e0c22c83c/model_a_20261030T205345553035Z_678c9919a7b949bb91fb364e0c22c83c.wvz",
+      "stat": {
+        "bytes": 134359908291,
+        "mtime_ns": 1793400290891755008,
+        "ctime_ns": 1793400290891755008,
+        "device": 47,
+        "inode": 26476858
+      },
+      "metadata": {
+        "title": "Cosmos Model A: scalar amplitude and derived field-visualization markers",
+        "channel_units": {
+          "amplitude": "dimensionless",
+          "energy_density": "dimensionless",
+          "gradient_magnitude": "dimensionless"
+        },
+        "coordinate_convention": "solver xyz transposed to WVZ zyx; positions xyz; periodic nodes [0,L)",
+        "marker_semantics": "anonymous energy maxima, not physical particles; no trajectories",
+        "precision": "float64 lossless; no normalization or clipping",
+        "version": 1,
+        "uuid": "0c31ba5379bb4523b1cf3f13607c55f3",
+        "objects": [
+          {
+            "space": "viewer_world",
+            "static": false,
+            "data_to_world": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0
+            ],
+            "id": "field",
+            "kind": "volume",
+            "units": "dimensionless"
+          }
+        ]
+      },
+      "configuration": {
+        "N": 256,
+        "L": 32.0,
+        "T": 100.0,
+        "dt": 0.02,
+        "background": 1.2,
+        "amplitude": 0.01,
+        "mode_x": 1,
+        "mode_y": 1,
+        "mode_z": 0,
+        "seed": 2854,
+        "workers": 2,
+        "diagnostic_interval": 0.5,
+        "checkpoint_interval": 8.0,
+        "volume_interval": 0.1,
+        "marker_interval": 1.0,
+        "max_markers": 1000,
+        "marker_threshold": 0.0,
+        "quantities": [
+          "amplitude"
+        ],
+        "output_parent": "outputs",
+        "ic": "noise",
+        "volume": true,
+        "markers": false,
+        "steps": 5000,
+        "dt_requested": 0.02,
+        "diagnostic_steps": 25,
+        "checkpoint_steps": 400,
+        "volume_steps": 5,
+        "marker_steps": 50,
+        "model": "A",
+        "mode": [
+          1,
+          1,
+          0
+        ],
+        "noise_kmax": 0.9,
+        "max_energy_error": 0.02,
+        "estimated_capture_payload_bytes": 134351945728,
+        "estimated_state_payload_bytes": 3758096384
+      },
+      "summary_status": "complete",
+      "final_t": 100.0,
+      "summary_export_validation": "not verified in this run; separate readback required",
+      "records": 1001,
+      "field_samples": 1001,
+      "sample_first": 0.0,
+      "sample_last": 100.0,
+      "time_delta_min": 0.09999999999999432,
+      "time_delta_max": 0.10000000000000853,
+      "channels": [
+        "amplitude"
+      ],
+      "geometry": {
+        "shape": [
+          256,
+          256,
+          256
+        ],
+        "origin": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "spacing": [
+          0.125,
+          0.125,
+          0.125
+        ],
+        "centering": "node"
+      },
+      "field_decoded_bytes": 134217728,
+      "all_field_schemas_equal": true,
+      "all_records_structural_checks_pass": true,
+      "committed_end": 134359908291,
+      "eof_fully_committed": true,
+      "index_sha256": "7d7a733afb22de311e3f8983e856cdc0953d0c09796d7189fa5aa195210b090c",
+      "provenance_sha256": "8c76aebd98213356ef8d044d70bb080432ff65ff6f048d2b17c4cb7a4e19b0f2",
+      "summary_sha256": "7d04560eb796840aa48d6b36a26ff7be39c1fb006163f8fa30ff8a99b3e704d7",
+      "configuration_sha256": "60b465c412c80ebaa68b7df43eed022001df1a1543e00ce6aab196fbcb5c97b6",
+      "diagnostics_sha256": "0f5d44ad2d4a13472a4f9f5e931353817f1b8f36cd2767349157494d76ae107e",
+      "provenance_boundary": "periodic",
+      "units": "dimensionless",
+      "swss": "3.0",
+      "simulation_version": "0.1.5",
+      "source_hashes": {
+        "Model_A.py": {
+          "sha256": "748342560fcc53613ba53a3b07d5c894ac17764f6849ed43afa3ab13034ac2df",
+          "matches_provenance": true
+        },
+        "kernel.py": {
+          "sha256": "b716f13151b8d3e16920a270ed209e0b9024ef4aae733f529bc14f22693b9e2a",
+          "matches_provenance": true
+        },
+        "exports.py": {
+          "sha256": "14390e8c02335e9b6087a8a0aa8b00c850dbc8e1132e966a1c8c108ebb62dd24",
+          "matches_provenance": true
+        },
+        "runio.py": {
+          "sha256": "8a4389c1ffb213cd8b110840b6ea1a01062bc586156c11eaf76225a01af3efac",
+          "matches_provenance": true
+        },
+        "swss.toml": {
+          "sha256": "cd7ed9d85ebf812855a5a75858c42249616d642d1380d04daae07b43e8288a3a",
+          "matches_provenance": true
+        },
+        "requirements.txt": {
+          "sha256": "5abf445134a09ecc45706ac5078dfaa1b05c854a67a5af69c4fce9a08fcb5b0d",
+          "matches_provenance": true
+        },
+        "README.md": {
+          "sha256": "25ec9f880fd6b04d6b352507ca4eaecce749d37b9b427144ddd47c28f63bf194",
+          "matches_provenance": true
+        }
+      },
+      "exporter_hashes": {
+        "__init__.py": {
+          "current_sha256": "fcfe9ceca522916033b399d119ea64ccf3a1ea8dfbf8984906e4527dbd94b017",
+          "matches_recorded_exporter": true
+        },
+        "scene.py": {
+          "current_sha256": "76afd84abee68cc8f1a343f8a065f6c974087f9373a3bf025dea06bcd7b3a83b",
+          "matches_recorded_exporter": true
+        },
+        "storage.py": {
+          "current_sha256": "17fae943f6f4368b17bbdcab0d49cd84e74c046eea262441456eb03025f14efb",
+          "matches_recorded_exporter": true
+        },
+        "codec.py": {
+          "current_sha256": "0603df703602d57f7f184a5b8dcfda6d1ad43c6fac60f95525a1604671f25d11",
+          "matches_recorded_exporter": true
+        },
+        "field_statistics.py": {
+          "current_sha256": "b9b1d6535e84ca1b5dd15ede82a9c36f73d840ccc00adaa40c80d3492a8c79c2",
+          "matches_recorded_exporter": true
+        },
+        "metadata_budget.py": {
+          "current_sha256": "b0699482bcb1aee497c236b0de98e47e5c8f754dd56e9a5e33798a3a23fd971c",
+          "matches_recorded_exporter": true
+        }
+      },
+      "sampled_payloads": [],
+      "swss_schema": 3,
+      "swss_declared_sources_match": true,
+      "marker_samples": 0,
+      "marker_payloads_verified": 0,
+      "capture_unchanged_stat": true
+    },
+    {
+      "run_id": "20261030T232217150259Z_4662e0aede704d96b2dd4edfaa85a2d4",
+      "path": "/home/Nozba/Documents/Dev/Sims/Model-A/outputs/run_20261030T232217150259Z_4662e0aede704d96b2dd4edfaa85a2d4/model_a_20261030T232217150259Z_4662e0aede704d96b2dd4edfaa85a2d4.wvz",
+      "stat": {
+        "bytes": 100803490095,
+        "mtime_ns": 1793411631175340687,
+        "ctime_ns": 1793411631175340687,
+        "device": 47,
+        "inode": 26587549
+      },
+      "metadata": {
+        "title": "Cosmos Model A: scalar amplitude and derived field-visualization markers",
+        "channel_units": {
+          "amplitude": "dimensionless",
+          "energy_density": "dimensionless",
+          "gradient_magnitude": "dimensionless"
+        },
+        "coordinate_convention": "solver xyz transposed to WVZ zyx; positions xyz; periodic nodes [0,L)",
+        "marker_semantics": "anonymous energy maxima, not physical particles; no trajectories",
+        "precision": "float64 lossless; no normalization or clipping",
+        "version": 1,
+        "uuid": "456ab0fac0a543159e64da913e1aec95",
+        "objects": [
+          {
+            "space": "viewer_world",
+            "static": false,
+            "data_to_world": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0
+            ],
+            "id": "field",
+            "kind": "volume",
+            "units": "dimensionless"
+          }
+        ]
+      },
+      "configuration": {
+        "N": 256,
+        "L": 32.0,
+        "T": 150.0,
+        "dt": 0.02,
+        "background": 1.2,
+        "amplitude": 0.01,
+        "mode_x": 1,
+        "mode_y": 1,
+        "mode_z": 0,
+        "seed": 2854,
+        "workers": 2,
+        "diagnostic_interval": 0.5,
+        "checkpoint_interval": 8.0,
+        "volume_interval": 0.2,
+        "marker_interval": 1.0,
+        "max_markers": 1000,
+        "marker_threshold": 0.0,
+        "quantities": [
+          "gradient_magnitude"
+        ],
+        "output_parent": "outputs",
+        "ic": "noise",
+        "volume": true,
+        "markers": false,
+        "steps": 7500,
+        "dt_requested": 0.02,
+        "diagnostic_steps": 25,
+        "checkpoint_steps": 400,
+        "volume_steps": 10,
+        "marker_steps": 50,
+        "model": "A",
+        "mode": [
+          1,
+          1,
+          0
+        ],
+        "noise_kmax": 0.9,
+        "max_energy_error": 0.02,
+        "estimated_capture_payload_bytes": 100797513728,
+        "estimated_state_payload_bytes": 5368709120
+      },
+      "summary_status": "complete",
+      "final_t": 150.0,
+      "summary_export_validation": "not verified in this run; separate readback required",
+      "records": 751,
+      "field_samples": 751,
+      "sample_first": 0.0,
+      "sample_last": 150.0,
+      "time_delta_min": 0.19999999999998863,
+      "time_delta_max": 0.20000000000001705,
+      "channels": [
+        "gradient_magnitude"
+      ],
+      "geometry": {
+        "shape": [
+          256,
+          256,
+          256
+        ],
+        "origin": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "spacing": [
+          0.125,
+          0.125,
+          0.125
+        ],
+        "centering": "node"
+      },
+      "field_decoded_bytes": 134217728,
+      "all_field_schemas_equal": true,
+      "all_records_structural_checks_pass": true,
+      "committed_end": 100803490095,
+      "eof_fully_committed": true,
+      "index_sha256": "268d7c8d7cec93eae7210a8d0327f2e50d104f7dcd720857edddd6f31ffee2d5",
+      "provenance_sha256": "4977255ceffb4709dba687c455ec7cdce64860277158e6c8da7538c008685be5",
+      "summary_sha256": "6b062f153ee042ffe4ed04e17549ba6cda6ae18425f0c422dc37748ff1854ada",
+      "configuration_sha256": "d7ea495109e43ba08bbc5922bda1a00f69e879a096613e785e67cff1ec0f2418",
+      "diagnostics_sha256": "6ac72592f527f6808251c1226e74acffa383f64b0c80321298665ca8cae4c303",
+      "provenance_boundary": "periodic",
+      "units": "dimensionless",
+      "swss": "3.0",
+      "simulation_version": "0.1.5",
+      "source_hashes": {
+        "Model_A.py": {
+          "sha256": "748342560fcc53613ba53a3b07d5c894ac17764f6849ed43afa3ab13034ac2df",
+          "matches_provenance": true
+        },
+        "kernel.py": {
+          "sha256": "b716f13151b8d3e16920a270ed209e0b9024ef4aae733f529bc14f22693b9e2a",
+          "matches_provenance": true
+        },
+        "exports.py": {
+          "sha256": "14390e8c02335e9b6087a8a0aa8b00c850dbc8e1132e966a1c8c108ebb62dd24",
+          "matches_provenance": true
+        },
+        "runio.py": {
+          "sha256": "8a4389c1ffb213cd8b110840b6ea1a01062bc586156c11eaf76225a01af3efac",
+          "matches_provenance": true
+        },
+        "swss.toml": {
+          "sha256": "cd7ed9d85ebf812855a5a75858c42249616d642d1380d04daae07b43e8288a3a",
+          "matches_provenance": true
+        },
+        "requirements.txt": {
+          "sha256": "5abf445134a09ecc45706ac5078dfaa1b05c854a67a5af69c4fce9a08fcb5b0d",
+          "matches_provenance": true
+        },
+        "README.md": {
+          "sha256": "25ec9f880fd6b04d6b352507ca4eaecce749d37b9b427144ddd47c28f63bf194",
+          "matches_provenance": true
+        }
+      },
+      "exporter_hashes": {
+        "__init__.py": {
+          "current_sha256": "fcfe9ceca522916033b399d119ea64ccf3a1ea8dfbf8984906e4527dbd94b017",
+          "matches_recorded_exporter": true
+        },
+        "scene.py": {
+          "current_sha256": "76afd84abee68cc8f1a343f8a065f6c974087f9373a3bf025dea06bcd7b3a83b",
+          "matches_recorded_exporter": true
+        },
+        "storage.py": {
+          "current_sha256": "17fae943f6f4368b17bbdcab0d49cd84e74c046eea262441456eb03025f14efb",
+          "matches_recorded_exporter": true
+        },
+        "codec.py": {
+          "current_sha256": "0603df703602d57f7f184a5b8dcfda6d1ad43c6fac60f95525a1604671f25d11",
+          "matches_recorded_exporter": true
+        },
+        "field_statistics.py": {
+          "current_sha256": "b9b1d6535e84ca1b5dd15ede82a9c36f73d840ccc00adaa40c80d3492a8c79c2",
+          "matches_recorded_exporter": true
+        },
+        "metadata_budget.py": {
+          "current_sha256": "b0699482bcb1aee497c236b0de98e47e5c8f754dd56e9a5e33798a3a23fd971c",
+          "matches_recorded_exporter": true
+        }
+      },
+      "sampled_payloads": [],
+      "swss_schema": 3,
+      "swss_declared_sources_match": true,
+      "marker_samples": 0,
+      "marker_payloads_verified": 0,
+      "capture_unchanged_stat": true
+    },
+    {
+      "run_id": "20261031T083021711514Z_f253e398edcf46669fa53f8fe0e4dbe1",
+      "path": "/home/Nozba/Documents/Dev/Sims/Model-A/outputs/run_20261031T083021711514Z_f253e398edcf46669fa53f8fe0e4dbe1/model_a_20261031T083021711514Z_f253e398edcf46669fa53f8fe0e4dbe1.wvz",
+      "stat": {
+        "bytes": 105125852692,
+        "mtime_ns": 1793455714862844348,
+        "ctime_ns": 1793455714862844348,
+        "device": 47,
+        "inode": 26868546
+      },
+      "metadata": {
+        "title": "Cosmos Model A: scalar amplitude and derived field-visualization markers",
+        "channel_units": {
+          "amplitude": "dimensionless",
+          "energy_density": "dimensionless",
+          "gradient_magnitude": "dimensionless"
+        },
+        "coordinate_convention": "solver xyz transposed to WVZ zyx; positions xyz; periodic nodes [0,L)",
+        "marker_semantics": "anonymous energy maxima, not physical particles; no trajectories",
+        "precision": "float64 lossless; no normalization or clipping",
+        "version": 1,
+        "uuid": "0c60c73848544d7db336fff4cb1e65cf",
+        "objects": [
+          {
+            "space": "viewer_world",
+            "static": false,
+            "data_to_world": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0
+            ],
+            "id": "field",
+            "kind": "volume",
+            "units": "dimensionless"
+          }
+        ]
+      },
+      "configuration": {
+        "N": 320,
+        "L": 32.0,
+        "T": 200.0,
+        "dt": 0.02,
+        "background": 1.2,
+        "amplitude": 0.01,
+        "mode_x": 1,
+        "mode_y": 1,
+        "mode_z": 0,
+        "seed": 5452,
+        "workers": 4,
+        "diagnostic_interval": 0.5,
+        "checkpoint_interval": 8.0,
+        "volume_interval": 0.5,
+        "marker_interval": 1.0,
+        "max_markers": 1000,
+        "marker_threshold": 0.0,
+        "quantities": [
+          "energy_density"
+        ],
+        "output_parent": "outputs",
+        "ic": "noise",
+        "volume": true,
+        "markers": false,
+        "steps": 10000,
+        "dt_requested": 0.02,
+        "diagnostic_steps": 25,
+        "checkpoint_steps": 400,
+        "volume_steps": 25,
+        "marker_steps": 50,
+        "model": "A",
+        "mode": [
+          1,
+          1,
+          0
+        ],
+        "noise_kmax": 0.9,
+        "max_energy_error": 0.02,
+        "estimated_capture_payload_bytes": 105119744000,
+        "estimated_state_payload_bytes": 13631488000
+      },
+      "summary_status": "complete",
+      "final_t": 200.0,
+      "summary_export_validation": "not verified in this run; separate readback required",
+      "records": 401,
+      "field_samples": 401,
+      "sample_first": 0.0,
+      "sample_last": 200.0,
+      "time_delta_min": 0.5,
+      "time_delta_max": 0.5,
+      "channels": [
+        "energy_density"
+      ],
+      "geometry": {
+        "shape": [
+          320,
+          320,
+          320
+        ],
+        "origin": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "spacing": [
+          0.1,
+          0.1,
+          0.1
+        ],
+        "centering": "node"
+      },
+      "field_decoded_bytes": 262144000,
+      "all_field_schemas_equal": true,
+      "all_records_structural_checks_pass": true,
+      "committed_end": 105125852692,
+      "eof_fully_committed": true,
+      "index_sha256": "7f8f516e8d1e31f413d952b8c035340e80ea15145b2d56a54815ec0a6e8e3cd8",
+      "provenance_sha256": "6441ae19674b6fe7284e832c62145f4461f5ee54be547ab61ed837392f9111ec",
+      "summary_sha256": "c4c7759e4d776da2ca4c758d6c64defd4b7caf8fe44bd82dc38d1b9338fbf029",
+      "configuration_sha256": "e7947b4ac3a15a3eac3278580302f2a210d6ddc1886cdc45897aa975fe306983",
+      "diagnostics_sha256": "916596ca1c77e99b015026fdf843744fdb2cd2189a0a0a5294e45a013189e0ab",
+      "provenance_boundary": "periodic",
+      "units": "dimensionless",
+      "swss": "3.0",
+      "simulation_version": "0.1.5",
+      "source_hashes": {
+        "Model_A.py": {
+          "sha256": "748342560fcc53613ba53a3b07d5c894ac17764f6849ed43afa3ab13034ac2df",
+          "matches_provenance": true
+        },
+        "kernel.py": {
+          "sha256": "b716f13151b8d3e16920a270ed209e0b9024ef4aae733f529bc14f22693b9e2a",
+          "matches_provenance": true
+        },
+        "exports.py": {
+          "sha256": "14390e8c02335e9b6087a8a0aa8b00c850dbc8e1132e966a1c8c108ebb62dd24",
+          "matches_provenance": true
+        },
+        "runio.py": {
+          "sha256": "8a4389c1ffb213cd8b110840b6ea1a01062bc586156c11eaf76225a01af3efac",
+          "matches_provenance": true
+        },
+        "swss.toml": {
+          "sha256": "cd7ed9d85ebf812855a5a75858c42249616d642d1380d04daae07b43e8288a3a",
+          "matches_provenance": true
+        },
+        "requirements.txt": {
+          "sha256": "5abf445134a09ecc45706ac5078dfaa1b05c854a67a5af69c4fce9a08fcb5b0d",
+          "matches_provenance": true
+        },
+        "README.md": {
+          "sha256": "25ec9f880fd6b04d6b352507ca4eaecce749d37b9b427144ddd47c28f63bf194",
+          "matches_provenance": true
+        }
+      },
+      "exporter_hashes": {
+        "__init__.py": {
+          "current_sha256": "fcfe9ceca522916033b399d119ea64ccf3a1ea8dfbf8984906e4527dbd94b017",
+          "matches_recorded_exporter": true
+        },
+        "scene.py": {
+          "current_sha256": "76afd84abee68cc8f1a343f8a065f6c974087f9373a3bf025dea06bcd7b3a83b",
+          "matches_recorded_exporter": true
+        },
+        "storage.py": {
+          "current_sha256": "17fae943f6f4368b17bbdcab0d49cd84e74c046eea262441456eb03025f14efb",
+          "matches_recorded_exporter": true
+        },
+        "codec.py": {
+          "current_sha256": "0603df703602d57f7f184a5b8dcfda6d1ad43c6fac60f95525a1604671f25d11",
+          "matches_recorded_exporter": true
+        },
+        "field_statistics.py": {
+          "current_sha256": "b9b1d6535e84ca1b5dd15ede82a9c36f73d840ccc00adaa40c80d3492a8c79c2",
+          "matches_recorded_exporter": true
+        },
+        "metadata_budget.py": {
+          "current_sha256": "b0699482bcb1aee497c236b0de98e47e5c8f754dd56e9a5e33798a3a23fd971c",
+          "matches_recorded_exporter": true
+        }
+      },
+      "sampled_payloads": [
+        {
+          "index": 0,
+          "time": 0.0,
+          "sequence": 0,
+          "read_seconds": 0.4578495150000208,
+          "stored_and_raw_chunk_checksums_verified": true,
+          "arrays": {
+            "energy_density": {
+              "shape": [
+                320,
+                320,
+                320
+              ],
+              "dtype": "float64",
+              "bytes": 262144000,
+              "sha256": "7749f97e626f4695661542a2dcad6f469788c09ba5287450d42749366ff5ae72",
+              "finite": 32768000,
+              "negative": 0,
+              "minimum": 0.3412942666626027,
+              "maximum": 0.35862530961482514,
+              "mean": 0.35090263703094754,
+              "rms": 0.3509094490664049
+            }
+          }
+        },
+        {
+          "index": 400,
+          "time": 200.0,
+          "sequence": 400,
+          "read_seconds": 0.45051305999993474,
+          "stored_and_raw_chunk_checksums_verified": true,
+          "arrays": {
+            "energy_density": {
+              "shape": [
+                320,
+                320,
+                320
+              ],
+              "dtype": "float64",
+              "bytes": 262144000,
+              "sha256": "c934780e578253d679374f864e75d6e9430c3231754d7158aadbdf428ab53a32",
+              "finite": 32768000,
+              "negative": 0,
+              "minimum": 0.00010513816860422583,
+              "maximum": 5.966137183734991,
+              "mean": 0.35092589668500285,
+              "rms": 0.47389109064324164
+            }
+          }
+        }
+      ],
+      "swss_schema": 3,
+      "swss_declared_sources_match": true,
+      "marker_samples": 0,
+      "marker_payloads_verified": 0,
+      "capture_unchanged_stat": true
+    }
+  ],
+  "partial_copy": {
+    "path": "/home/Nozba/Downloads/model_a_20261031T083021711514Z_f253e398edcf46669fa53f8fe0e4dbe1.wvz",
+    "stat": {
+      "bytes": 38013089300,
+      "mtime_ns": 1793442564621431000,
+      "ctime_ns": 1793442626132491390,
+      "device": 47,
+      "inode": 27005817
+    },
+    "uuid": "0c60c73848544d7db336fff4cb1e65cf",
+    "records": 145,
+    "last_time": 72.0,
+    "strict_structural_scan_pass": true,
+    "committed_end": 38013089300,
+    "matches_original_metadata_and_prefix_descriptors": true,
+    "full_original_last_time": 200.0,
+    "payload_prefix_byte_equality": "NOT VERIFIED",
+    "payload_checksums_verified": 0,
+    "suitable_for_final_run_claim": false,
+    "unchanged_stat": true
+  }
+}
