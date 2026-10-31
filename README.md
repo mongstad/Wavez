@@ -103,7 +103,8 @@ speed and cache settings; preparation can still limit playback on a fast GPU.
 
 ## Roadmap
 
-<img width="2172" height="724" alt="WAVEZ Roadmap_ Neon Future Panels" src="https://github.com/user-attachments/assets/7b4b503e-464f-4c43-afaf-6f12afcfa086" />
+<img width="2172" height="724" alt="WAVEZ Roadmap_ Neon Future Panels" src="https://github.com/user-attachments/assets/4be3db3d-cfdb-481f-be08-c17a428bd213" />
+
 
 
 ## Development access
